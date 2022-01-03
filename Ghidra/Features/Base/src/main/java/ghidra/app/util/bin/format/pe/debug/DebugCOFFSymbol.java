@@ -48,7 +48,7 @@ public class DebugCOFFSymbol implements StructConverter {
 	private static final int NAME_LENGTH = 8;
 
 	/**
-	 * The size of the <code>IMAGE_SYMBOL</code> structure.
+	 * The size of the {@code IMAGE_SYMBOL} structure.
 	 */
     public final static int IMAGE_SIZEOF_SYMBOL = 18;
 

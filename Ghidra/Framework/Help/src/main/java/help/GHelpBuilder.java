@@ -38,7 +38,7 @@ import help.validator.location.HelpModuleCollection;
  * module paths and build the help for each module.  To build single modules, call this class
  * with only one module path.
  * <p>
- * Note: Help links must not be absolute.  They can be relative, including <code>. and ..</code>
+ * Note: Help links must not be absolute.  They can be relative, including {@code . and ..}
  * syntax.  Further, they can use the special help system syntax, which is:
  * <ul>
  * 	<li><code><b>help/topics/</b>topicName/Filename.html</code> for referencing help topic files

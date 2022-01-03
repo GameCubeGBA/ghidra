@@ -19,7 +19,7 @@ package ghidra.framework.data;
 import ghidra.util.exception.CancelledException;
 
 /**
- * <code>CheckinHandler</code> facilitates application callbacks during
+ * {@code CheckinHandler} facilitates application callbacks during
  * the check-in of a DomainFile.
  */
 public interface CheckinHandler {

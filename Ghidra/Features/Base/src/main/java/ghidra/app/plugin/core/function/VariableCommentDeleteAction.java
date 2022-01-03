@@ -27,7 +27,7 @@ import ghidra.program.model.listing.Variable;
 import ghidra.program.util.*;
 
 /**
- * <CODE>VariableCommentDeleteAction</CODE> allows the user to delete a function variable comment.
+ * {@code VariableCommentDeleteAction} allows the user to delete a function variable comment.
  */
 class VariableCommentDeleteAction extends ListingContextAction {
 

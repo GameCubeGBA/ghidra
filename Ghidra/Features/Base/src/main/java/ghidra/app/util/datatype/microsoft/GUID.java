@@ -30,7 +30,7 @@ import ghidra.util.*;
  * digits each, followed by one group of 12 hexadecimal digits. The 
  * following example shows the groupings of hexadecimal digits in a GUID.
  * <br>
- * <code>6B29FC40-CA47-1067-B31D-00DD010662DA</code>
+ * {@code 6B29FC40-CA47-1067-B31D-00DD010662DA}
  * <br>
  * <pre>
  * typedef struct _GUID {

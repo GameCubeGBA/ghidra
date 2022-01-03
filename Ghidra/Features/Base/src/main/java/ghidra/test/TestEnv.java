@@ -68,7 +68,7 @@ public class TestEnv {
 
 	/**
 	 * Used to perform emergency cleanup.  Tests are expected to call {@link #dispose()} in
-	 * their <code>tearDown</code> method.  This is here to catch the case where the is some fatal
+	 * their {@code tearDown} method.  This is here to catch the case where the is some fatal
 	 * error that prevents that from taking place.
 	 */
 	private static Set<TestEnv> instances = new HashSet<>();
@@ -464,7 +464,7 @@ public class TestEnv {
 
 	/**
 	 * This method differs from {@link #launchDefaultTool()} in that this method does not set the
-	 * <code>tool</code> variable in of this <code>TestEnv</code> instance.
+	 * {@code tool} variable in of this <code>TestEnv</code> instance.
 	 * @return the tool
 	 */
 	public PluginTool createDefaultTool() {

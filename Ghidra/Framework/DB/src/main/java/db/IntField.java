@@ -20,7 +20,7 @@ import java.io.IOException;
 import db.buffers.DataBuffer;
 
 /**
- * <code>IntField</code> provides a wrapper for 4-byte signed integer data 
+ * {@code IntField} provides a wrapper for 4-byte signed integer data
  * which is read or written to a Record. 
  */
 public final class IntField extends PrimitiveField {

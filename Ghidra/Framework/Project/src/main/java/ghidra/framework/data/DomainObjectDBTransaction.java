@@ -31,7 +31,7 @@ import ghidra.util.datastruct.WeakDataStructureFactory;
 import ghidra.util.datastruct.WeakSet;
 
 /**
- * <code>DomainObjectDBTransaction</code> represents an atomic undoable operation performed
+ * {@code DomainObjectDBTransaction} represents an atomic undoable operation performed
  * on a single domain object.
  */
 class DomainObjectDBTransaction implements Transaction {

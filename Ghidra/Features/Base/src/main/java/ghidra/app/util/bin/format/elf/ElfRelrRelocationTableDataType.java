@@ -21,7 +21,7 @@ import ghidra.program.model.mem.MemoryAccessException;
 import ghidra.util.exception.DuplicateNameException;
 
 /**
- * <code>ElfRelrRelocationTableDataType</code> is a Factory datatype which defines a markup
+ * {@code ElfRelrRelocationTableDataType} is a Factory datatype which defines a markup
  * structure corresponding to a specified ELF REL relocation table.  The REL entry size and
  * total length in bytes is required when interpreting a RELR table.
  */

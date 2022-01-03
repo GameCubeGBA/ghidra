@@ -29,7 +29,7 @@ import ghidra.util.InvalidNameException;
 import ghidra.util.exception.UserAccessException;
 
 /**
- * <code>RepositoryFile</code> provides a persistent wrapper for a FolderItem
+ * {@code RepositoryFile} provides a persistent wrapper for a FolderItem
  * stored within a Repository.  This file is associated with a parent RepositoryFolder
  * and facilitates caching of the underlying FolderItem.
  */

@@ -42,7 +42,7 @@ import ghidra.util.task.TaskMonitor;
 import ghidra.util.task.TaskMonitorAdapter;
 
 /**
- * <CODE>ProgramMerge2Test</CODE> tests the <CODE>ProgramMerge</CODE> class
+ * {@code ProgramMerge2Test} tests the <CODE>ProgramMerge</CODE> class
  * to verify it correctly merges various types of program differences.
  * The tests modify copies of the same program to cause differences
  * between these two programs, which can then be merged.

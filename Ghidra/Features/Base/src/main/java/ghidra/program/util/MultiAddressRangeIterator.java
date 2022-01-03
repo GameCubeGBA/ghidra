@@ -19,7 +19,7 @@ package ghidra.program.util;
 import ghidra.program.model.address.*;
 
 /**
- * <CODE>MultiAddressRangeIterator</CODE> is a class for iterating through multiple
+ * {@code MultiAddressRangeIterator} is a class for iterating through multiple
  * address range iterators simultaneously. The next() method returns the next address range
  * as determined from all the iterators.
  */

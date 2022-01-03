@@ -211,7 +211,7 @@ public class HTMLUtilities {
 	}
 
 	/**
-	 * Creates a string with the indicated number of HTML space characters (<code>&#x26;nbsp;</code>).
+	 * Creates a string with the indicated number of HTML space characters ({@code &#x26;nbsp;}).
 	 * @param num the number of HTML spaces
 	 * @return the string o HTML spaces
 	 */
@@ -351,14 +351,14 @@ public class HTMLUtilities {
 
 	/**
 	 * Returns the given text wrapped in {@link #LINK_PLACEHOLDER_OPEN} and close tags.
-	 * If <code>foo</code> is passed for the HTML text, with a content value of <code>123456</code>, then
+	 * If {@code foo} is passed for the HTML text, with a content value of <code>123456</code>, then
 	 * the output will look like:
 	 * <pre>
 	 * 	&lt;!-- LINK CONTENT="123456" --&gt;foo&lt;!-- /LINK --&gt;
 	 * </pre>
 	 *
 	 * @param htmlText the HTML text to wrap
-	 * @param content the value that will be put into the <code>CONTENT</code> section of the
+	 * @param content the value that will be put into the {@code CONTENT} section of the
 	 * 		  generated HTML.  This can later be retrieved by clients transforming this text.
 	 * @return the wrapped text
 	 */
@@ -371,8 +371,8 @@ public class HTMLUtilities {
 
 	/**
 	 * Takes HTML text wrapped by {@link #wrapWithLinkPlaceholder(String, String)} and replaces
-	 * the custom link comment tags with HTML anchor (<code>A</code>) tags, where the <code>HREF</code>
-	 * value is the value that was in the <code>CONTENT</code> attribute.
+	 * the custom link comment tags with HTML anchor ({@code A}) tags, where the <code>HREF</code>
+	 * value is the value that was in the {@code CONTENT} attribute.
 	 *
 	 * @param text the text for which to replace the markup
 	 * @return the updated text
@@ -422,9 +422,9 @@ public class HTMLUtilities {
 	/**
 	 * Similar to {@link #toHTML(String)} in that it will wrap the given text in
 	 * HTML tags and split the content into multiple lines.  The difference is that this method
-	 * will split lines that pass the given maximum length <b>and</b> on <code>'\n'</code>
+	 * will split lines that pass the given maximum length <b>and</b> on {@code '\n'}
 	 * characters.  Alternatively, {@link #toHTML(String)} will only split the given
-	 * text on <code>'\n'</code> characters.
+	 * text on {@code '\n'} characters.
 	 *
 	 * @param text The text to convert
 	 * @param maxLineLength The maximum number of characters that should appear in a line;
@@ -596,7 +596,7 @@ public class HTMLUtilities {
 	 * <p>
 	 * Calling this twice will result in text being double-escaped, which will not display correctly.
 	 * <p>
-	 * See also <code>StringEscapeUtils#escapeHtml3(String)</code> if you need quote-safe html encoding.
+	 * See also {@code StringEscapeUtils#escapeHtml3(String)} if you need quote-safe html encoding.
 	 * <p>
 	 *  
 	 * @param text plain-text that might have some characters that should NOT be interpreted as HTML

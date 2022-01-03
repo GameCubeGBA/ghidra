@@ -111,7 +111,7 @@ public class NumberRangeInputDialog extends DialogComponentProvider {
 	}
 
 	/**
-		 * <code>show</code> displays the dialog, gets the user input
+		 * {@code show} displays the dialog, gets the user input
 		 *
 		 * @return false if the user cancelled the operation
 		 */

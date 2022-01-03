@@ -25,8 +25,8 @@ import ghidra.util.Conv;
 import ghidra.util.exception.DuplicateNameException;
 
 /**
- * A class to represent the <code>IMAGE_LOAD_CONFIG_DIRECTORY</code>
- * data structure which is defined in <b><code>winnt.h</code></b>.
+ * A class to represent the {@code IMAGE_LOAD_CONFIG_DIRECTORY}
+ * data structure which is defined in <b>{@code winnt.h}</b>.
  */
 public class LoadConfigDirectory implements StructConverter {
 	public final static String NAME32 = "IMAGE_LOAD_CONFIG_DIRECTORY32";

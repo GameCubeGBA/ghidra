@@ -19,7 +19,7 @@ package ghidra.util.task;
 *
 * Runnable that has a method that may need to be run in the Swing AWT thread. 
 * Pass a SwingRunnable to the RunManager if follow on work needs to be done
-* after the <code>run()</code> method completes.
+* after the {@code run()} method completes.
 * 
 * @see RunManager#runNext(MonitoredRunnable, String)
 * @see RunManager#runNext(MonitoredRunnable, String, int)

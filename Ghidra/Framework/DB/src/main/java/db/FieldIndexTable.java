@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 /**
- * <code>FieldIndexTable</code> provides a simplified index table whose key is
+ * {@code FieldIndexTable} provides a simplified index table whose key is
  * a fixed or variable length {@link IndexField} which consists of a concatenation of
  * the index field value and associated primary table key.
  */

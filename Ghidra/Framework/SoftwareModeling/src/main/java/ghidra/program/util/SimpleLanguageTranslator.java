@@ -54,7 +54,7 @@ import ghidra.util.task.TaskMonitor;
 import ghidra.util.xml.XmlUtilities;
 
 /**
- * <code>SimpleLanguageTranslator</code> provides a simple translator which
+ * {@code SimpleLanguageTranslator} provides a simple translator which
  * derives its mappings from an XML translation specification file.
  */
 class SimpleLanguageTranslator extends LanguageTranslatorAdapter {

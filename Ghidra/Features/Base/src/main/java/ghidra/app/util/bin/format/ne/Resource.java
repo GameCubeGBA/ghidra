@@ -127,7 +127,7 @@ public class Resource {
 
 	/**
 	 * Returns the shifted file offset of this resource.
-	 * <code>this.getFileOffset() &lt;&lt; ResourceTable.getAlignmentShiftCount()</code>
+	 * {@code this.getFileOffset() << ResourceTable.getAlignmentShiftCount()}
 	 * @return the shifted file offset of this resource
 	 */
 	public int getFileOffsetShifted() {
@@ -138,7 +138,7 @@ public class Resource {
 
 	/**
 	 * Returns the shifted file length of this resource.
-	 * <code>this.getFileLength() &lt;&lt; ResourceTable.getAlignmentShiftCount()</code>
+	 * {@code this.getFileLength() << ResourceTable.getAlignmentShiftCount()}
 	 * @return the shifted file length of this resource
 	 */
 	public int getFileLengthShifted() {

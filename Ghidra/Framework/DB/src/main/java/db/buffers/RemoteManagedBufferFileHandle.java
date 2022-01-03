@@ -21,7 +21,7 @@ import java.rmi.server.RemoteObjectInvocationHandler;
 import java.util.NoSuchElementException;
 
 /**
- * <code>RemoteManagedBufferFileHandle</code> facilitates access to a ManagedBufferFile
+ * {@code RemoteManagedBufferFileHandle} facilitates access to a ManagedBufferFile
  * via RMI.
  * <p>
  * Methods from {@link BufferFileHandle} and {@link ManagedBufferFile} <b>must</b> 

@@ -43,7 +43,7 @@ public class LSDAActionTable {
 
 	/**
 	 * Constructor for an action table.
-	 * <br>Note: The <code>create(Address)</code> method must be called after constructing an 
+	 * <br>Note: The {@code create(Address)} method must be called after constructing an
 	 * LSDAActionTable to associate it with an address before any of its "get..." methods are called.
 	 * @param monitor task monitor to see if the user has cancelled analysis.
 	 * @param program the program containing the action table.
@@ -56,7 +56,7 @@ public class LSDAActionTable {
 	}
 
 	/**
-	 * Create an LSDA Action Table from the bytes at <code>address</code>.
+	 * Create an LSDA Action Table from the bytes at {@code address}.
 	 * <br>Note: This method must get called before any of the "get..." methods.
 	 * @param address the start (minimum address) of this action table.
 	 * @param maxddress the end (maximum address) of this action table.

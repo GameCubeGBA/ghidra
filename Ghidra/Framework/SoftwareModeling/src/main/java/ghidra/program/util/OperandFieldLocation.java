@@ -23,7 +23,7 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.listing.VariableOffset;
 
 /**
- * The <CODE>OperandFieldLocation</CODE> class contains specific location information
+ * The {@code OperandFieldLocation} class contains specific location information
  * within the OPERAND field of a CodeUnitLocation object.
  */
 public class OperandFieldLocation extends CodeUnitLocation {

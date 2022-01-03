@@ -35,7 +35,7 @@ public class TaskMonitorAdapter implements TaskMonitor {
 	private volatile boolean cancelled;
 
 	/**
-	 * Provides a static instance of <code>TaskMonitorAdapter</code>
+	 * Provides a static instance of {@code TaskMonitorAdapter}
 	 * which is a non-cancellable task monitor with no visual components.
 	 * @deprecated use {@link TaskMonitor#DUMMY} instead
 	 */

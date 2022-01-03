@@ -37,7 +37,7 @@ import ghidra.util.task.TaskMonitor;
 import utilities.util.FileUtilities;
 
 /**
- * <code>LocalFolderItem</code> provides an abstract implementation of a folder
+ * {@code LocalFolderItem} provides an abstract implementation of a folder
  * item which resides on a local file-system.  An item is defined by a property file
  * and generally has a hidden data directory which contains the actual data file(s).
  *<p>

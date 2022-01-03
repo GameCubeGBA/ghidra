@@ -27,7 +27,7 @@ import ghidra.util.InvalidNameException;
 import ghidra.util.exception.NotFoundException;
 
 /**
- * <code>GhidraURLWrappedContent</code> provides controlled access to a Ghidra folder/file
+ * {@code GhidraURLWrappedContent} provides controlled access to a Ghidra folder/file
  * associated with a Ghidra URL.  It is important to note the issuance of this object does
  * not guarantee existence of the requested resource.  Any object obtained via the getContent
  * method must be released via the release method.  The following rules should be followed

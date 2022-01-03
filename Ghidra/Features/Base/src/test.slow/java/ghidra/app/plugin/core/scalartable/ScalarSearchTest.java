@@ -252,7 +252,7 @@ public class ScalarSearchTest extends AbstractGhidraHeadedIntegrationTest {
 	 * value. 
 	 * <p>
 	 * The instruction being targeted is at <b>00401090</b>:
-	 *    <code>SUB ESP,-0x34</code>
+	 *    {@code SUB ESP,-0x34}
 	 * 
 	 * @throws Exception
 	 */
@@ -269,7 +269,7 @@ public class ScalarSearchTest extends AbstractGhidraHeadedIntegrationTest {
 	 * value. 
 	 * <p>
 	 * The instruction being targeted is at <b>00401090</b>:
-	 *    <code>SUB ESP,-0x34</code>
+	 *    {@code SUB ESP,-0x34}
 	 * 
 	 * @throws Exception
 	 */
@@ -286,7 +286,7 @@ public class ScalarSearchTest extends AbstractGhidraHeadedIntegrationTest {
 	 * value. 
 	 * <p>
 	 * The instruction being targeted is at <b>004010a0</b>:
-	 *    <code>MOV EAX,0xcc</code>
+	 *    {@code MOV EAX,0xcc}
 	 * 
 	 * @throws Exception
 	 */
@@ -303,7 +303,7 @@ public class ScalarSearchTest extends AbstractGhidraHeadedIntegrationTest {
 	 * value. 
 	 * <p>
 	 * The instruction being targeted is at <b>004010a0</b>:
-	 *    <code>MOV EAX,0xcc</code>
+	 *    {@code MOV EAX,0xcc}
 	 * 
 	 * @throws Exception
 	 */

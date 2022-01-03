@@ -32,11 +32,11 @@ import ghidra.util.timer.GTimer;
 import ghidra.util.timer.GTimerMonitor;
 
 /**
- * <code>BlockStreamServer</code> provides a block stream server implementation intended for 
+ * {@code BlockStreamServer} provides a block stream server implementation intended for
  * integration with the RMI GhidraServer implementation.  The default instance will obtain its 
  * port from the {@link ServerPortFactory} while all instances will bind to the default 
  * {@link InetAddress#getLocalHost()} or the host address specified via the RMI property
- * <code>java.rmi.server.hostname</code> which is set via the GhidraServer -ip command
+ * {@code java.rmi.server.hostname} which is set via the GhidraServer -ip command
  * line option.
  * <p>
  * The server will run in its own thread with each accepted connection running in another thread.
@@ -263,7 +263,7 @@ public class BlockStreamServer extends Thread {
 	}
 
 	/**
-	 * <code>BlockStreamHandler</code> services a block stream request in a dedicated 
+	 * {@code BlockStreamHandler} services a block stream request in a dedicated
 	 * thread.  When first started the stream request header will be read from the socket
 	 * and the associated registered block stream identified.
 	 */

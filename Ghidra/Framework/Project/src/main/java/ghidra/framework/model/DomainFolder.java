@@ -26,9 +26,9 @@ import ghidra.util.exception.FileInUseException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>DomainFolder</code> provides a storage interface for project folders.  A 
- * <code>DomainFolder</code> is an immutable reference to a folder contained within a project.  The 
- * state of a <code>DomainFolder</code> object does not track name/parent changes made to the 
+ * {@code DomainFolder} provides a storage interface for project folders.  A
+ * {@code DomainFolder} is an immutable reference to a folder contained within a project.  The
+ * state of a {@code DomainFolder} object does not track name/parent changes made to the
  * referenced project folder.
  */
 public interface DomainFolder extends Comparable<DomainFolder> {

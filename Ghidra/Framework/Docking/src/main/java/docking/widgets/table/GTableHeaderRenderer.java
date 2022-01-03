@@ -55,7 +55,7 @@ import resources.icons.TranslateIcon;
 
 /**
  * The header renderer for GhidraTable.
- * If the table model implements <code>SortedTableModel</code>, then
+ * If the table model implements {@code SortedTableModel}, then
  * an icon will be displayed in the header of the currently sorted
  * column representing ascending and descending order.
  */

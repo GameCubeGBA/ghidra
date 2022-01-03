@@ -232,7 +232,7 @@ public interface DBTraceDefinedDataAdapter extends DBTraceDataAdapter {
 	 * {@inheritDoc}
 	 * 
 	 * This implementation differs in that the path is relative to this unit, even if it is not the
-	 * root. In {@link DataDB}, it appears the behavior is undefined if you call this on a non-root
+	 * root. It appears the behavior is undefined if you call this on a non-root
 	 * component.
 	 */
 	@Override

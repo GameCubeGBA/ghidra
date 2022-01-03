@@ -42,7 +42,7 @@ public class LSDACallSiteTable extends GccAnalysisClass {
 
 	/**
 	 * Constructor for a call site table.
-	 * <br>Note: The <code>create(Address)</code> method must be called after constructing an 
+	 * <br>Note: The {@code create(Address)} method must be called after constructing an
 	 * LSDACallSiteTable to associate it with an address before any of its "get..." methods are called.
 	 * @param monitor task monitor to see if the user has cancelled analysis.
 	 * @param program the program containing the call site table.
@@ -54,7 +54,7 @@ public class LSDACallSiteTable extends GccAnalysisClass {
 	}
 
 	/**
-	 * Create a LSDA Call Site Table from the bytes at <code>addr</code>.
+	 * Create a LSDA Call Site Table from the bytes at {@code addr}.
 	 * <br>Note: This method must get called before any of the "get..." methods.
 	 * @param addr the start (minimum address) of this call site table.
 	 * @throws MemoryAccessException if memory couldn't be accessed for the call site table

@@ -41,7 +41,7 @@ import ghidra.util.task.TaskMonitor;
 import resources.ResourceManager;
 
 /**
- * <code>ProgramContentHandler</code> converts between Program instantiations
+ * {@code ProgramContentHandler} converts between Program instantiations
  * and FolderItem storage.  This class also produces the appropriate Icon for 
  * Program files.
  */

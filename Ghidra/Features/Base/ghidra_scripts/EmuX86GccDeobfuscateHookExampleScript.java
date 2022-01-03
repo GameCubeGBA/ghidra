@@ -238,7 +238,7 @@ public class EmuX86GccDeobfuscateHookExampleScript extends GhidraScript {
 	}
 
 	/**
-	 * <code>SimpleMallocMgr</code> provides a simple malloc memory manager to be used by the
+	 * {@code SimpleMallocMgr} provides a simple malloc memory manager to be used by the
 	 * malloc/free hooked implementations.
 	 */
 	private class SimpleMallocMgr {
@@ -247,7 +247,7 @@ public class EmuX86GccDeobfuscateHookExampleScript extends GhidraScript {
 		private Map<Address, AddressRange> mallocMap = new HashMap<>();
 
 		/**
-		 * <code>SimpleMallocMgr</code> constructor.
+		 * {@code SimpleMallocMgr} constructor.
 		 * @param rangeStart start of the free malloc region (i.e., Heap) which has been
 		 * deemed a safe
 		 * @param byteSize

@@ -61,10 +61,10 @@ public interface XmlDataReader {
 
     /**
      * Returns a string summarizing the results of the XML data read
-     * or <code>null</code> if there was nothing to report.
+     * or {@code null} if there was nothing to report.
      * 
      * @return a string summarizing the results of the xml data read
-     *         or <code>null</code> if there was nothing to report
+     *         or {@code null} if there was nothing to report
      */
     String getSummary();
 }

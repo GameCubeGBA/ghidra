@@ -18,7 +18,7 @@ package ghidra.app.util.bin.format.pdb;
 import ghidra.program.model.data.BitFieldDataType;
 
 /**
- * <code>CompositeMember</code> provides a composite construction member interface for use
+ * {@code CompositeMember} provides a composite construction member interface for use
  * by the PDB parser.
  */
 abstract class CompositeMember {

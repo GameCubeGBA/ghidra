@@ -86,7 +86,7 @@ public class ProjectTestUtils {
 	}
 
 	/**
-	 * Remove entire project.  Note: this will not remove the parent <code>directory</code> of
+	 * Remove entire project.  Note: this will not remove the parent {@code directory} of
 	 * the project.
 	 * 
 	 * @param directory directory of the project.

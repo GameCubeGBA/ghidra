@@ -24,7 +24,7 @@ import ghidra.framework.plugintool.util.OptionsService;
 import ghidra.program.model.listing.CodeUnitFormat;
 
 /**
- * <code>BrowserCodeUnitFormat</code> provides a code unit format based upon
+ * {@code BrowserCodeUnitFormat} provides a code unit format based upon
  * a common set of viewer Options for specific Tool.  The associated options correspond to
  * the Browser Operand Fields category.
  */

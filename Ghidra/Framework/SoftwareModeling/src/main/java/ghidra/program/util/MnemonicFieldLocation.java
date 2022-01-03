@@ -24,7 +24,7 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
 
 /**
- * The <CODE>MnemonicFieldLocation</CODE> class contains specific location
+ * The {@code MnemonicFieldLocation} class contains specific location
  * information within the MNEMONIC field of a CodeUnitLocation object.
  */
 public class MnemonicFieldLocation extends CodeUnitLocation {

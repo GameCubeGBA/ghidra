@@ -19,7 +19,7 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
 
 /**
- * The <CODE>FunctionInlineFieldLocation</CODE> class provides specific information
+ * The {@code FunctionInlineFieldLocation} class provides specific information
  * about the Function Inline field within a program location.
  */
 public class FunctionInlineFieldLocation extends FunctionSignatureFieldLocation {

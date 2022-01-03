@@ -37,7 +37,7 @@ import ghidra.util.MessageType;
 import ghidra.util.layout.PairLayout;
 
 /**
- * <code>PasswordDialog</code> is a modal dialog which 
+ * {@code PasswordDialog} is a modal dialog which
  * prompts a user for a password. 
  */
 public class PasswordDialog extends DialogComponentProvider {

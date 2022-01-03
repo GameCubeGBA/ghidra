@@ -26,8 +26,8 @@ import ghidra.util.DataConverter;
 import ghidra.util.exception.DuplicateNameException;
 
 /**
- * A class to represent the <code>IMAGE_BASE_RELOCATION</code>
- * data structure defined in <b><code>winnt.h</code></b>.
+ * A class to represent the {@code IMAGE_BASE_RELOCATION}
+ * data structure defined in <b>{@code winnt.h}</b>.
  * <pre>
  * typedef struct _IMAGE_BASE_RELOCATION {
  *     DWORD   VirtualAddress;
@@ -45,7 +45,7 @@ public class BaseRelocation implements StructConverter, ByteArrayConverter {
 	 */
     public final static String NAME = "IMAGE_BASE_RELOCATION";
     /**
-     * The size of the <code>IMAGE_BASE_RELOCATION</code> in bytes.
+     * The size of the {@code IMAGE_BASE_RELOCATION} in bytes.
      */
     public final static int IMAGE_SIZEOF_BASE_RELOCATION = 8;
 

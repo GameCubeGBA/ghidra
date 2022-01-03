@@ -38,7 +38,7 @@ import ghidra.test.TestEnv;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <CODE>ProgramDiffTest</CODE> tests the <CODE>ProgramDiff</CODE> class
+ * {@code ProgramDiffTest} tests the <CODE>ProgramDiff</CODE> class
  * to verify it correctly determines various types of program differences.
  * The setup for this test class loads two programs that were saved to the
  * testdata directory as XML. The tests will determine the differences between

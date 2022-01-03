@@ -28,7 +28,7 @@ import ghidra.program.model.symbol.SourceType;
 import ghidra.program.model.symbol.Symbol;
 
 /**
- * <CODE>RemoveLabelAction</CODE> allows the user to remove a label.
+ * {@code RemoveLabelAction} allows the user to remove a label.
  */
 class RemoveLabelAction extends ListingContextAction {
 	private LabelMgrPlugin plugin;

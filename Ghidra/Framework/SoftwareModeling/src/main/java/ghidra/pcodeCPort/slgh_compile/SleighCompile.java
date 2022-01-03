@@ -113,7 +113,7 @@ import utilities.util.FileResolutionResult;
 import utilities.util.FileUtilities;
 
 /**
- * <code>SleighCompile</code> provides the ability to compile Sleigh language module (e.g., *.slaspec)
+ * {@code SleighCompile} provides the ability to compile Sleigh language module (e.g., *.slaspec)
  * files.
  */
 public class SleighCompile extends SleighBase {

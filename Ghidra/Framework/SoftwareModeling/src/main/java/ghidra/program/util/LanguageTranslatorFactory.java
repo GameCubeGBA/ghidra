@@ -41,7 +41,7 @@ import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>LanguageTranslatorFactory</code> manages all language translators within Ghidra.  
+ * {@code LanguageTranslatorFactory} manages all language translators within Ghidra.
  * Language translators support either a version translation for a single language, or a 
  * language transition from one language to another.  The following types of translators 
  * are supported:
@@ -66,12 +66,12 @@ public class LanguageTranslatorFactory {
 		(o1, o2) -> ((LanguageTranslator) o1).getOldVersion() - ((Integer) o2).intValue();
 
 	/**
-	 * <code>translatorMap</code> provides pre-defined translators between different languages.
+	 * {@code translatorMap} provides pre-defined translators between different languages.
 	 */
 	private HashMap<LanguageID, List<LanguageTranslator>> translatorMap = new HashMap<>();
 
 	/**
-	 * <code>translatorVersionMap</code> provides pre-defined translators between consecutive versions 
+	 * {@code translatorVersionMap} provides pre-defined translators between consecutive versions
 	 * of the same language.  Lists are in sorted order based upon translator fromVersion.
 	 */
 	private HashMap<LanguageID, List<LanguageTranslator>> translatorVersionMap = new HashMap<>();

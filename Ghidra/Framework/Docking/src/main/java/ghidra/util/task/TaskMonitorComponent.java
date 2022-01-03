@@ -194,13 +194,13 @@ public class TaskMonitorComponent extends JPanel implements TaskMonitor {
 	}
 
 	/**
-	 * Sets the <code>indeterminate</code> property of the progress bar,
+	 * Sets the {@code indeterminate} property of the progress bar,
 	 * which determines whether the progress bar is in determinate
 	 * or indeterminate mode.
 	 * <p>
 	 * An indeterminate progress bar continuously displays animation
 	 * indicating that an operation of unknown length is occurring.
-	 * By default, this property is <code>false</code>.
+	 * By default, this property is {@code false}.
 	 * Some look and feels might not support indeterminate progress bars;
 	 * they will ignore this property.
 	 *
@@ -276,10 +276,10 @@ public class TaskMonitorComponent extends JPanel implements TaskMonitor {
 	}
 
 	/**
-	 * Returns true if {@link #setIndeterminate(boolean)} with a value of <code>true</code> has
+	 * Returns true if {@link #setIndeterminate(boolean)} with a value of {@code true} has
 	 * been called.
 	 *
-	 * @return true if {@link #setIndeterminate(boolean)} with a value of <code>true</code> has
+	 * @return true if {@link #setIndeterminate(boolean)} with a value of {@code true} has
 	 * been called.
 	 */
 	@Override

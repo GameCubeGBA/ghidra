@@ -22,7 +22,7 @@ import ghidra.program.model.listing.Program;
 import ghidra.util.StringUtilities;
 
 /**
- * <code>StoredAnalyzerTimes</code> provides a custom option container for 
+ * {@code StoredAnalyzerTimes} provides a custom option container for
  * accumulated analysis times for named tasks.
  */
 public class StoredAnalyzerTimes implements CustomOption {

@@ -18,7 +18,7 @@ package db;
 import java.io.IOException;
 
 /**
- * <code>DBLongIterator</code> provides the ability to iterate over
+ * {@code DBLongIterator} provides the ability to iterate over
  * long values within a table.
  */
 public interface DBLongIterator {

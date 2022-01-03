@@ -56,7 +56,7 @@ public class MultiLineMessageDialog extends DialogComponentProvider {
 	 * If the text is too long to fit, a scroll bar will be used.
 	 * <p>
 	 * The text string can be plain text (with \n line breaks) or HTML (if the first
-	 * 6 characters of the string are <code>&lt;html&gt;</code>).
+	 * 6 characters of the string are {@code <html>}).
 	 * <p>
 	 * This method will not return until the user presses the OK button.
 	 * <p>

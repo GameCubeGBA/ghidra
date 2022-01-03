@@ -19,7 +19,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
- * <code>DefaultGhidraProtocolHandler</code> provides the default protocol 
+ * {@code DefaultGhidraProtocolHandler} provides the default protocol
  * handler which corresponds to the original RMI-based Ghidra Server
  * and local file-based Ghidra projects.
  * {@literal ghidra://host/repo/... or ghidra:/path/projectName}

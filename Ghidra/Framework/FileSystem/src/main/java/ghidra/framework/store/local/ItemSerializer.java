@@ -34,7 +34,7 @@ import ghidra.util.exception.IOCancelledException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>ItemSerializer</code> facilitates the compressing and writing of a data stream
+ * {@code ItemSerializer} facilitates the compressing and writing of a data stream
  * to a "packed" file.  The resulting "packed" file will contain the following meta-data
  * which is available after construction:
  * <ul>

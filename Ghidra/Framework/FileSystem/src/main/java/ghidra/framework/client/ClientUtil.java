@@ -53,7 +53,7 @@ import ghidra.util.exception.UserAccessException;
 import ghidra.util.task.TaskLauncher;
 
 /**
- * <code>ClientUtil</code> allows a user to connect to a Repository Server and obtain its handle.
+ * {@code ClientUtil} allows a user to connect to a Repository Server and obtain its handle.
  */
 public class ClientUtil {
 

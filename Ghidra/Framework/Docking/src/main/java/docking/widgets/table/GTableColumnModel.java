@@ -456,7 +456,7 @@ public class GTableColumnModel
 
 	/**
 	 * Recalculates the total combined width of all columns.  Updates the
-	 * <code>totalColumnWidth</code> property.
+	 * {@code totalColumnWidth} property.
 	 */
 	private void recalcWidthCache() {
 		totalColumnWidth = 0;

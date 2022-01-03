@@ -26,7 +26,7 @@ import ghidra.program.model.symbol.SymbolType;
 import ghidra.util.HelpLocation;
 
 /**
- * <CODE>EditThunkFunctionAction</CODE> allows the user to modify the function
+ * {@code EditThunkFunctionAction} allows the user to modify the function
  * referenced by this function
  */
 class EditThunkFunctionAction extends ProgramContextAction {

@@ -96,11 +96,11 @@ public class MultipleKeyAction extends DockingKeyBindingAction {
 	}
 
 	/**
-	 * Returns the enabled state of the <code>Action</code>. When enabled,
+	 * Returns the enabled state of the {@code Action}. When enabled,
 	 * any component associated with this object is active and
-	 * able to fire this object's <code>actionPerformed</code> method.
+	 * able to fire this object's {@code actionPerformed} method.
 	 *
-	 * @return true if this <code>Action</code> is enabled
+	 * @return true if this {@code Action} is enabled
 	 */
 	@Override
 	public boolean isEnabled() {

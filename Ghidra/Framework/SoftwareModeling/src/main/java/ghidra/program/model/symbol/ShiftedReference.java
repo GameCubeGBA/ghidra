@@ -16,7 +16,7 @@
 package ghidra.program.model.symbol;
 
 /**
- * <code>ShiftedReference</code> is a memory reference whose "to" address is
+ * {@code ShiftedReference} is a memory reference whose "to" address is
  * computed from a base value left shifted by a shift amount.
  */
 public interface ShiftedReference extends Reference {

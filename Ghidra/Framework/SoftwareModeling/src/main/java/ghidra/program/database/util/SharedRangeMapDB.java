@@ -33,7 +33,7 @@ import ghidra.util.datastruct.IndexRangeIterator;
 import ghidra.util.exception.NotYetImplementedException;
 
 /**
- * <code>SharedRangeMapDB</code> provides a long value range map backed by a database table.
+ * {@code SharedRangeMapDB} provides a long value range map backed by a database table.
  * This map allows values to share a given range with other values.
  * @deprecated This map class should not be used except by the OldFunctionMapDB class
  */

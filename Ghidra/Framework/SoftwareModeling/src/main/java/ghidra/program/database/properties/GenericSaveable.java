@@ -24,7 +24,7 @@ import ghidra.util.ObjectStorage;
 import ghidra.util.Saveable;
 
 /**
- * <code>GenericSaveable</code> is used by the <code>DBPropertyMapManager</code>
+ * {@code GenericSaveable} is used by the <code>DBPropertyMapManager</code>
  * when the class can not be found and loaded for the class path name of a 
  * property in the database. This allows the properties for that class to be 
  * accessed in a generic way so that the manager can copy or remove the property 

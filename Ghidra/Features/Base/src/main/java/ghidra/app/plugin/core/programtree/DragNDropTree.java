@@ -296,7 +296,7 @@ public abstract class DragNDropTree extends JTree implements Draggable, Droppabl
 	// Autoscroll Interface methods
 	///////////////////////////////////////////////////////////
 	/**
-	 * This method returns the <code>Insets</code> describing
+	 * This method returns the {@code Insets} describing
 	 * the autoscrolling region or border relative
 	 * to the geometry of the implementing Component; called
 	 * repeatedly while dragging.
@@ -308,10 +308,10 @@ public abstract class DragNDropTree extends JTree implements Draggable, Droppabl
 	}
 
 	/**
-	 * Notify the <code>Component</code> to autoscroll; called repeatedly
+	 * Notify the {@code Component} to autoscroll; called repeatedly
 	 * while dragging.
 	 * <P>
-	 * @param p A <code>Point</code> indicating the
+	 * @param p A {@code Point} indicating the
 	 * location of the cursor that triggered this operation.
 	 */
 

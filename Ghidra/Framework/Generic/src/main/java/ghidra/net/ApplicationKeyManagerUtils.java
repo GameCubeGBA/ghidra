@@ -72,7 +72,7 @@ import ghidra.util.Msg;
 import ghidra.util.exception.AssertException;
 
 /**
- * <code>ApplicationKeyManagerUtils</code> provides public methods for utilizing
+ * {@code ApplicationKeyManagerUtils} provides public methods for utilizing
  * the application PKI key management, including access to trusted issuers
  * (i.e., CA certificates), token signing and validation, and the ability to
  * generate keystores for testing or when a self-signed certificate will

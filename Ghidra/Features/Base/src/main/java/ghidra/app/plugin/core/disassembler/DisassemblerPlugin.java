@@ -34,7 +34,7 @@ import ghidra.program.util.ProgramLocation;
 import ghidra.program.util.ProgramSelection;
 
 /**
- * <CODE>DisassemblerPlugin</CODE> provides functionality for dynamic disassembly, static
+ * {@code DisassemblerPlugin} provides functionality for dynamic disassembly, static
  * disassembly.<BR>
  * In dynamic disassembly disassembling begins from the selected addresses or if there is no
  * selection then at the address of the current cursor location and attempts to continue
@@ -45,7 +45,7 @@ import ghidra.program.util.ProgramSelection;
  * In static disassembly a range or set of ranges is given and disassembly is attempted on each
  * range. Any defined code in the ranges before the static disassembly are first removed.<BR>
  * <P>
- * <CODE>DisassemblerPlugin</CODE> provides access to its functions as a service that another plugin
+ * {@code DisassemblerPlugin} provides access to its functions as a service that another plugin
  * may use and through the popup menu to the user.
  */
 //@formatter:off

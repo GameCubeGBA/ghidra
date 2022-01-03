@@ -18,7 +18,7 @@ package ghidra.app.util;
 import ghidra.program.model.address.AddressSetView;
 
 /**
- * <code>RepeatInstructionByteTracker</code> provides pseudo-disassemblers the ability to track
+ * {@code RepeatInstructionByteTracker} provides pseudo-disassemblers the ability to track
  * repeated bytes during disassembly of a block of instructions.
  */
 public class RepeatInstructionByteTracker {

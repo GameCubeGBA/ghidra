@@ -1036,7 +1036,7 @@ public class StringDataInstance {
 	 * <p>
 	 * 
 	 * @param byteOffset number of bytes from start of data instance to start new instance.
-	 * @return new StringDataInstance, or <code>this</code> if offset not valid.
+	 * @return new StringDataInstance, or {@code this} if offset not valid.
 	 */
 	public StringDataInstance getByteOffcut(int byteOffset) {
 		if (isBadCharSize() || isProbe() || !isValidOffcutOffset(byteOffset)) {
@@ -1055,7 +1055,7 @@ public class StringDataInstance {
 	 * @param offsetChars number of characters from the beginning of the string to start the new
 	 *            StringDataInstance.
 	 * @return new {@link StringDataInstance} pointing to a subset of characters, or the
-	 *         <code>this</code> instance if there was an error.
+	 *         {@code this} instance if there was an error.
 	 */
 	public StringDataInstance getCharOffcut(int offsetChars) {
 		return getByteOffcut(getCharOffset(offsetChars));

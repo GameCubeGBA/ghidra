@@ -36,7 +36,7 @@ public interface SwingAnimationCallback {
 	void done();
 
 	/**
-	 * Returns the duration of this callback.  The default is <code>1000 ms</code>.  Subclasses
+	 * Returns the duration of this callback.  The default is {@code 1000 ms}.  Subclasses
 	 * can override this as needed.
 	 * 
 	 * @return the duration

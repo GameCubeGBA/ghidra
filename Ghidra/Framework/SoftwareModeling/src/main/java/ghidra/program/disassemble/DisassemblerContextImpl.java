@@ -664,8 +664,8 @@ public class DisassemblerContextImpl implements DisassemblerContext {
 
 	/**
 	 * Stores register value in map.
-	 * If <code>newValuePrecedence</code> is true, then the given <code>newValue</code>
-	 * overrides the <code>currentValue</code>.
+	 * If {@code newValuePrecedence} is true, then the given <code>newValue</code>
+	 * overrides the {@code currentValue}.
 	 * 
 	 * @param fromAddr the address from which the Register value flows.
 	 * @param destAddr the address to store the new value

@@ -20,7 +20,7 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.util.CodeUnitLocation;
 
 /**
- * The <CODE>EntropyFieldLocation</CODE> class contains specific location information
+ * The {@code EntropyFieldLocation} class contains specific location information
  * within the OPERAND field of a CodeUnitLocation object.
  */
 public class EntropyFieldLocation extends CodeUnitLocation {

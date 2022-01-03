@@ -28,7 +28,7 @@ import ghidra.program.model.mem.WrappedMemBuffer;
 import ghidra.util.Msg;
 
 /**
- * <code>AndroidElfRelocationTableDataType</code> provides an implementation of 
+ * {@code AndroidElfRelocationTableDataType} provides an implementation of
  * an Android APS2 packed ELF relocation table.
  */
 public class AndroidElfRelocationTableDataType extends DynamicDataType {

@@ -440,7 +440,7 @@ public interface SymbolTable {
 
 	/**
 	 * Get iterator over all symbols starting at
-	 * the specified <code>startAddr</code>
+	 * the specified {@code startAddr}
 	 * @param startAddr the address at which to begin the iteration.
 	 * @param forward true means the iterator is in the forward direction
 	 * @return symbol iterator
@@ -456,7 +456,7 @@ public interface SymbolTable {
 
 	/**
 	 * Get iterator over only primary symbols starting at
-	 * the specified <code>startAddr</code>
+	 * the specified {@code startAddr}
 	 * @param startAddr the address at which to begin the iteration.
 	 * @param forward true means the iterator is in the forward direction
 	 * @return symbol iterator

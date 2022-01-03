@@ -19,7 +19,7 @@ package ghidra.program.model.listing;
 import ghidra.util.exception.UsrException;
 
 /**
- * <code>ContextChangeException</code> indicates that an illegal change to
+ * {@code ContextChangeException} indicates that an illegal change to
  * program context has been attempted.
  */
 public class ContextChangeException extends UsrException {

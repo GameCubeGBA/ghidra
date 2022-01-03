@@ -38,8 +38,8 @@ import ghidra.graph.GEdge;
  * drawing of the edge cleaner.
  *
  * <P><U>equals() and hashCode()</U> - The graph API allows for cloning of layouts.  For this 
- * to correctly copy layout locations, each edge must override <code>equals</code> and
- * <code>hashCode</code> in order to properly find edges across graphs.
+ * to correctly copy layout locations, each edge must override {@code equals} and
+ * {@code hashCode} in order to properly find edges across graphs.
  *
  * @param <V> the vertex type
  */

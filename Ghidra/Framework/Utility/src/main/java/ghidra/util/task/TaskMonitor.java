@@ -18,15 +18,15 @@ package ghidra.util.task;
 import ghidra.util.exception.CancelledException;
 
 /**
- * <CODE>TaskMonitor</CODE> provides an interface by means of which a
+ * {@code TaskMonitor} provides an interface by means of which a
  * potentially long running task can show its progress and also check if the user
  * has cancelled the operation. 
  * <p>
  * Operations that support a task monitor should periodically
  * check to see if the operation has been cancelled and abort. If possible, the 
  * operation should also provide periodic progress information. If it can estimate a 
- * percentage done, then it should use the <code>setProgress(int)</code> method, 
- * otherwise it should just call the <code>setMessage(String)</code> method. 
+ * percentage done, then it should use the {@code setProgress(int)} method,
+ * otherwise it should just call the {@code setMessage(String)} method.
  */
 public interface TaskMonitor {
 

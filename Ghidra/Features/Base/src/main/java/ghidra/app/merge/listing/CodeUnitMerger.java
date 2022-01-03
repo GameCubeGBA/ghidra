@@ -841,7 +841,7 @@ class CodeUnitMerger extends AbstractListingMerger {
 	}
 
 	/**
-	 * <CODE>performMergeInstruction</CODE> merges the indicated instruction
+	 * {@code performMergeInstruction} merges the indicated instruction
 	 * into the result program. The bytes are also moved from the program
 	 * if they differ. The flow override and fallthrough override will be set
 	 * the same in the result program's instruction as they are in the instruction
@@ -885,7 +885,7 @@ class CodeUnitMerger extends AbstractListingMerger {
 	}
 
 	/**
-	 * <CODE>performMergeData</CODE> merges the indicated defined data
+	 * {@code performMergeData} merges the indicated defined data
 	 * into the merge program. The bytes in the merge program are not affected
 	 * by this method.
 	 *

@@ -22,7 +22,7 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.listing.Variable;
 
 /**
- * The <CODE>VariableXRefFieldLocation</CODE> class provides specific information
+ * The {@code VariableXRefFieldLocation} class provides specific information
  * about the variable's cross reference field within a program location.
  */
 

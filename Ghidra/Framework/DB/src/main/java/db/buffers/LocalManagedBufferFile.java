@@ -26,8 +26,8 @@ import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>LocalManagedBufferFile</code> implements a BufferFile as block-oriented
- * random-access file which utilizes a <code>BufferFileManager</code> to 
+ * {@code LocalManagedBufferFile} implements a BufferFile as block-oriented
+ * random-access file which utilizes a {@code BufferFileManager} to
  * identify and facilitate versioning of buffer files.  This type of
  * buffer file supports both save-as and save operations.  The file
  * format used is identical to a LocalBufferFile, although additional
@@ -37,30 +37,30 @@ import ghidra.util.task.TaskMonitor;
 public class LocalManagedBufferFile extends LocalBufferFile implements ManagedBufferFile {
 
 	/**
-	 * <code>versionFileHandler</code> provides original buffer file data for 
+	 * {@code versionFileHandler} provides original buffer file data for
 	 * older non-updatable versions.
 	 */
 	private VersionFileHandler versionFileHandler;
 
 	/**
-	 * <code>versionOutFile</code> tracks changes made to a pre-save file for 
+	 * {@code versionOutFile} tracks changes made to a pre-save file for
 	 * reverse reconstruction.
 	 */
 	private VersionFile versionOutFile;
 
 	/**
-	 * <code>changeMap</code> tracks buffers which have been set.
+	 * {@code changeMap} tracks buffers which have been set.
 	 */
 	private ChangeMapFile changeMap;
 
 	/**
-	 * <code>version</code> indicates the version of this buffer file.  A value
+	 * {@code version} indicates the version of this buffer file.  A value
 	 * of 0 indicates that no version has been assigned.
 	 */
 	private int version = 0;
 
 	/**
-	 * <code>minChangeDataVer</code> indicates the minimum change-data version 
+	 * {@code minChangeDataVer} indicates the minimum change-data version
 	 * which should be associated with this buffer file.  A value of -1 indicates
 	 * that no change-data is associated with this file.  If set, the maximum 
 	 * change-data version always equals this buffer file's version minus one.
@@ -68,14 +68,14 @@ public class LocalManagedBufferFile extends LocalBufferFile implements ManagedBu
 	private int minChangeDataVer = -1;
 
 	/**
-	 * <code>nextChangeDataVer</code> is utilized by the getNextChangeDataFile 
+	 * {@code nextChangeDataVer} is utilized by the getNextChangeDataFile
 	 * method in iterating through the various change-data files.
 	 * @see #getNextChangeDataFile
 	 */
 	private int nextChangeDataVer = -1;
 
 	/**
-	 * <code>comment</code> stores the comment which will be passed to bfMgr when
+	 * {@code comment} stores the comment which will be passed to bfMgr when
 	 * this new file version is stored.  This applies to writable (!readOnly) files
 	 * which have bfMgr set.
 	 */
@@ -94,24 +94,24 @@ public class LocalManagedBufferFile extends LocalBufferFile implements ManagedBu
 	//
 
 	/**
-	 * <code>bfMgr</code> manages the various files associated with this buffer 
+	 * {@code bfMgr} manages the various files associated with this buffer
 	 * file.  When working with versioned files or when Save support is 
-	 * required <code>bfMgr</code> must be set.  The bufMgr will be null for
+	 * required {@code bfMgr} must be set.  The bufMgr will be null for
 	 * a read-only non-updateable file.
 	 */
 	private BufferFileManager bfMgr;
 
 	/**
-	 * <code>checkinId</code> is the checkin ID needed by bfMgr when a new
+	 * {@code checkinId} is the checkin ID needed by bfMgr when a new
 	 * version is created.
 	 */
 	private long checkinId = -1;
 
 	/**
-	 * <code>preSaveFile</code> is a buffer file which contains a copy of
-	 * this buffer file.  The <code>preSaveFile</code> object is intantiated at
+	 * {@code preSaveFile} is a buffer file which contains a copy of
+	 * this buffer file.  The {@code preSaveFile} object is intantiated at
 	 * the start of the pre-save task (see startPreSave()).  If this object is
-	 * not null and the preSaveThread is not running, the <code>preSaveFile</code>
+	 * not null and the preSaveThread is not running, the {@code preSaveFile}
 	 * can be used as the basis of a Save operation.
 	 * @see #startPreSave
 	 * @see #getSaveFile
@@ -119,7 +119,7 @@ public class LocalManagedBufferFile extends LocalBufferFile implements ManagedBu
 	private LocalManagedBufferFile preSaveFile;
 
 	/**
-	 * <code>saveFile</code> is the <code>preSaveFile</code> which is handed-out
+	 * {@code saveFile} is the <code>preSaveFile</code> which is handed-out
 	 * by the getSaveFile method.  While not null, a Save is in-progress.
 	 * The saveCompleted method must be invoked to terminate a Save operation on
 	 * the saveFile.
@@ -129,34 +129,34 @@ public class LocalManagedBufferFile extends LocalBufferFile implements ManagedBu
 	private LocalManagedBufferFile saveFile;
 
 	/**
-	 * <code>saveChangeFile</code> is a buffer file which contains application
+	 * {@code saveChangeFile} is a buffer file which contains application
 	 * specific change-data associated with a new version of this file.
-	 * <code>saveChangeFile</code> is instantiated when the getSaveFile method
+	 * {@code saveChangeFile} is instantiated when the getSaveFile method
 	 * is successfully invoked.  This file is committed when the saveCompleted
 	 * method is invoked.
 	 */
 	private LocalBufferFile saveChangeFile;
 
 	/**
-	 * <code>preSaveFailed</code> is set true when the pre-save is successfully
+	 * {@code preSaveFailed} is set true when the pre-save is successfully
 	 * terminated before completion.
 	 */
 	private boolean preSaveFailed = false;
 
 	/**
-	 * <code>preSaveBackoff</code> is set true whenever an application read I/O
+	 * {@code preSaveBackoff} is set true whenever an application read I/O
 	 * operation is performed on this file.  If the pre-save process is running,
 	 * setting true will cause the pre-save to backoff for a short period.
 	 */
 	private boolean preSaveBackoff = false;
 
 	/**
-	 * <code>preSaveLock</code> is used to arbitrate access to the preSaveBackoff flag.
+	 * {@code preSaveLock} is used to arbitrate access to the preSaveBackoff flag.
 	 */
 	private Object preSaveLock = new Object();
 
 	/**
-	 * <code>preSaveThread</code> corresponds to the PreSaveTask which creates the 
+	 * {@code preSaveThread} corresponds to the PreSaveTask which creates the
 	 * preSaveFile when this buffer file is updateable.
 	 */
 	//private Thread preSaveThread;
@@ -807,7 +807,7 @@ public class LocalManagedBufferFile extends LocalBufferFile implements ManagedBu
 	}
 
 	/**
-	 * <code>PreSaveTask</code> facilitates the pre-saving a copy of this buffer 
+	 * {@code PreSaveTask} facilitates the pre-saving a copy of this buffer
 	 * file for update use by a BufferMgr.
 	 */
 	private class PreSaveTask implements Runnable {
@@ -954,7 +954,7 @@ public class LocalManagedBufferFile extends LocalBufferFile implements ManagedBu
 	}
 
 	/**
-	 * <code>LocalManagedOutputBlockStream</code> extends <code>LocalOutputBlockStream</code>
+	 * {@code LocalManagedOutputBlockStream} extends <code>LocalOutputBlockStream</code>
 	 * for use when updating versioned buffer file.  This implementation causes change
 	 * map data to be updated.  It is important that the free list is updated after 
 	 * streaming is complete.

@@ -171,9 +171,9 @@ public class DexHeader implements StructConverter {
 	 * <br>
 	 * https://android.googlesource.com/platform/art/+/refs/heads/master/libdexfile/dex/dex_file.h
 	 * <br>
-	 * <code>
+	 * {@code
 	 * uint32_t map_off_ = 0;  // map list offset from data_off_
-	 * </code>
+	 * }
 	 * but it appears to only be true when dealing with compact dex files!
 	 * @return true if offsets in this DEX file are relative
 	 */

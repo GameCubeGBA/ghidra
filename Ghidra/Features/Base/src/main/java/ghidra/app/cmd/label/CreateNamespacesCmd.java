@@ -79,7 +79,7 @@ public class CreateNamespacesCmd implements Command {
 	 * @param parentNamespace The namespace to be used as the starting parent
 	 *        of the namespaces that will be created.
 	 * @param source the source of the namespace
-	 * @throws NullPointerException if <code>namespaceString</code> is <code>null</code>.
+	 * @throws NullPointerException if {@code namespaceString} is <code>null</code>.
 	 * @see   <a href="#examples">example format</a>
 	 * @see   <a href="#assumptions">assumptions</a>
 	 */

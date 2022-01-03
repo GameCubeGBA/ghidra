@@ -242,7 +242,7 @@ public interface CodeUnit extends MemBuffer {
 	String[] getCommentAsArray(int commentType);
 
 	/**
-	 * Set the comment for the given comment type.  Passing <code>null</code> clears the comment
+	 * Set the comment for the given comment type.  Passing {@code null} clears the comment
 	 *
 	 * @param commentType either EOL_COMMENT, PRE_COMMENT, 
 	 * POST_COMMENT, or REPEATABLE_COMMENT
@@ -398,7 +398,7 @@ public interface CodeUnit extends MemBuffer {
 	void setPrimaryMemoryReference(Reference ref);
 
 	/**
-	 * Sets a stack reference at the <code>offset</code> on the
+	 * Sets a stack reference at the {@code offset} on the
 	 * specified operand index, which effectively substitutes the previous
 	 * operation interpretation
 	 * <br>
@@ -414,7 +414,7 @@ public interface CodeUnit extends MemBuffer {
 	void setStackReference(int opIndex, int offset, SourceType sourceType, RefType refType);
 
 	/**
-	 * Sets a register reference at the <code>offset</code> on the
+	 * Sets a register reference at the {@code offset} on the
 	 * specified operand index, which effectively substitutes the previous
 	 * operation interpretation
 	 * <br>

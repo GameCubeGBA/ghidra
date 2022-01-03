@@ -32,8 +32,8 @@ import ghidra.util.exception.DuplicateNameException;
 
 
 /**
- * This class represents the <code>IMAGE_DOS_HEADER</code> struct
- * as defined in <b><code>winnt.h</code></b>.
+ * This class represents the {@code IMAGE_DOS_HEADER} struct
+ * as defined in <b>{@code winnt.h}</b>.
  * <br>
  * <pre>
  * typedef struct _IMAGE_DOS_HEADER {      // DOS .EXE header
@@ -378,7 +378,7 @@ public class DOSHeader implements StructConverter, Writeable {
      * program.
      * <p>
      * In other words:
-     * <code>e_lfanew() - SIZEOF_DOS_HEADER</code>
+     * {@code e_lfanew() - SIZEOF_DOS_HEADER}
      * 
      * @return  the length (in bytes)
      */

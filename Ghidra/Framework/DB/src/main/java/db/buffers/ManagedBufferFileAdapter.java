@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.rmi.Remote;
 
 /**
- * <code>ManagedBufferFileAdapter</code> provides a ManagedBufferFile implementation which
+ * {@code ManagedBufferFileAdapter} provides a ManagedBufferFile implementation which
  * wraps a ManagedBufferFileHandle.
  */
 public class ManagedBufferFileAdapter extends BufferFileAdapter implements ManagedBufferFile {

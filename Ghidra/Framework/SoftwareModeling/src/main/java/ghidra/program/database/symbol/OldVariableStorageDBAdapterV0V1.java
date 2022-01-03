@@ -26,7 +26,7 @@ import db.Schema;
 import db.Table;
 
 /**
- * <code>OldVariableStorageDBAdapterV0V1</code> provide legacy variable storage 
+ * {@code OldVariableStorageDBAdapterV0V1} provide legacy variable storage
  * table support where each variable storage record was namespace-specific and
  * provided storage address only.  In a later revision this was deemed inadequate 
  * since size information and support for storage binding was needed.

@@ -375,10 +375,10 @@ public abstract class PluginTool extends AbstractDockingTool {
 	}
 
 	/**
-	 * Returns true if the specified <code>serviceInterface</code>
+	 * Returns true if the specified {@code serviceInterface}
 	 * is a valid service that exists in this tool.
 	 * @param serviceInterface the service interface
-	 * @return true if the specified <code>serviceInterface</code>
+	 * @return true if the specified {@code serviceInterface}
 	 */
 	public boolean isService(Class<?> serviceInterface) {
 		return serviceMgr.isService(serviceInterface);

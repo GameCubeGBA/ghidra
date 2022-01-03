@@ -43,7 +43,7 @@ import ghidra.util.xml.GenericXMLOutputter;
 import ghidra.util.xml.XmlUtilities;
 
 /**
- * <code>CheckoutManager</code> manages checkout data for a versioned
+ * {@code CheckoutManager} manages checkout data for a versioned
  * LocalFolderItem. Checkout data is maintained within the file 'checkout.dat'
  * located within the items data directory.
  */

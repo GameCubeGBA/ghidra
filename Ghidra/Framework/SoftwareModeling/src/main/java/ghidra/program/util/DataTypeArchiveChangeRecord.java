@@ -31,8 +31,8 @@ public class DataTypeArchiveChangeRecord extends DomainObjectChangeRecord {
 
     /**
      * Construct a new DataTypeArchiveChangeRecord; 
-     * the <code>affectedObj</code> parameter may be null, 
-     * depending on what the <code>type</code> parameter is.
+     * the {@code affectedObj} parameter may be null,
+     * depending on what the {@code type} parameter is.
      * @param type event type
      * @param affectedObj the object affected by the change
      * @param oldValue original value

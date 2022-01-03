@@ -35,7 +35,7 @@ import ghidra.server.RepositoryManager;
 import ghidra.server.UserManager;
 
 /**
- * <code>PKIAuthenticationModule</code> performs client authentication through the 
+ * {@code PKIAuthenticationModule} performs client authentication through the
  * use of a dual-signed token.  
  */
 public class PKIAuthenticationModule implements AuthenticationModule {

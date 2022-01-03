@@ -40,7 +40,7 @@ import ghidra.util.exception.ClosedException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>BufferMgr</code> provides low-level buffer management and caching.
+ * {@code BufferMgr} provides low-level buffer management and caching.
  * Checkpointing and buffer versioning is supported along with an undo/redo
  * capability.
  */

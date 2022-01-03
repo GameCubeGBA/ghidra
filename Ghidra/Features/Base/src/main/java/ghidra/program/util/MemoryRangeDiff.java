@@ -20,7 +20,7 @@ import ghidra.program.model.address.AddressRange;
 import ghidra.program.model.mem.Memory;
 
 /**
- * <CODE>MemoryBlockDiff</CODE> determines the types of differences between two memory blocks.
+ * {@code MemoryBlockDiff} determines the types of differences between two memory blocks.
  */
 public class MemoryRangeDiff extends MemoryBlockDiff {
 	
@@ -29,7 +29,7 @@ public class MemoryRangeDiff extends MemoryBlockDiff {
 	AddressRange range;
 	
 	/**
-	 * Constructor. <CODE>MemoryRangeDiff</CODE> determines the types of differences 
+	 * Constructor. {@code MemoryRangeDiff} determines the types of differences
 	 * between two memory blocks.
 	 * @param memory1 the first program's memory
 	 * @param memory2 the second program's memory

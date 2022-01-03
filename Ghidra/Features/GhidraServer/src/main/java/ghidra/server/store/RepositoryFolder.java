@@ -32,7 +32,7 @@ import ghidra.util.exception.DuplicateFileException;
 import ghidra.util.exception.FileInUseException;
 
 /**
- * <code>RepositoryFolder</code> provides a persistent wrapper for a folder path
+ * {@code RepositoryFolder} provides a persistent wrapper for a folder path
  * which may contain other sub-folders or FolderItem's stored within a Repository.  
  * This folder is associated with a parent RepositoryFolder
  * and facilitates caching of the underlying FolderItem.

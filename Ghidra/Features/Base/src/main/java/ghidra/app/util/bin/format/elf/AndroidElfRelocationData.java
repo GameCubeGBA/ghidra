@@ -25,7 +25,7 @@ import ghidra.program.model.data.DataType;
 import ghidra.program.model.data.DataTypeManager;
 
 /**
- * <code>AndroidElfRelocationData</code> provides a dynamic LEB128 data 
+ * {@code AndroidElfRelocationData} provides a dynamic LEB128 data
  * component for packed Android ELF Relocation Table.
  * See {@link AndroidElfRelocationTableDataType}.
  * <br>

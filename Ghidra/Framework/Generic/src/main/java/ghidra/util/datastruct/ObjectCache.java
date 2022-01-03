@@ -22,7 +22,7 @@ import java.util.LinkedList;
 import java.util.Map;
 
 /**
- * <code>ObjectClass</code> provides a fixed-size long-key-based object cache.
+ * {@code ObjectClass} provides a fixed-size long-key-based object cache.
  * Both a hard and weak cache are maintained, where the weak cache is only
  * limited by available memory.  This cache mechanism is useful in ensuring that
  * only a single object instance for a given key exists.

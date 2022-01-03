@@ -27,7 +27,7 @@ import ghidra.program.util.ProgramLocation;
 import ghidra.program.util.VariableLocation;
 
 /**
- * <CODE>CreateFunctionAction</CODE> allows the user to create a function from
+ * {@code CreateFunctionAction} allows the user to create a function from
  * a selection in the browser. The AddressSet indicates the function body and
  * the minimum address is used as the entry point to the function.<BR>
  * Action in FunctionPlugin.

@@ -27,7 +27,7 @@ import docking.ActionContext;
 import docking.action.*;
 
 /**
- * <CODE>AddBookmarkAction</CODE> allows the user to add a Note bookmark at the current location.
+ * {@code AddBookmarkAction} allows the user to add a Note bookmark at the current location.
  */
 class AddBookmarkAction extends DockingAction {
 	/** the plugin associated with this action. */

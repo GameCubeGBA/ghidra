@@ -43,7 +43,7 @@ import ghidra.util.layout.HorizontalLayout;
 import ghidra.util.layout.PairLayout;
 
 /**
- * <CODE>AddBlockDialog</CODE> manages the dialog for adding and
+ * {@code AddBlockDialog} manages the dialog for adding and
  * editing MemoryBlocks.
  */
 

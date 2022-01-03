@@ -35,14 +35,14 @@ import docking.widgets.shapes.PopupWindowPlacer.ThrowsAssertExceptionPlacer;
  * The <B>edge</B> placers are the leftEdge, rightEdge, topEdge, and bottomEdge methods that take
  * Location arguments that one can think of as "cells" for optimal placement, but which have some
  * flexibility in making the placement.  One such cell is the TOP Location of the rightEdge,
- * specified by <code>rightEdge(Location.TOP)</code>.  If the placement does not quite fit this
+ * specified by {@code rightEdge(Location.TOP)}.  If the placement does not quite fit this
  * cell because the optimal placement extend above the top of the screen, the placement may be
  * shifted down by a  allowed amount so that it still fits.  If more than the allowed amount is
  * needed, the placement fails.
  * <p>
  * Each edge placer takes a variable number of Location arguments.  These arguments work in the
  * same way for each method, though some arguments are not valid for some edges; for instance,
- * <code>Location.TOP</code> is only valid for left and right edges.
+ * {@code Location.TOP} is only valid for left and right edges.
  * <p>
  * 
  * <H2>Two or More Location Arguments</H2>
@@ -53,7 +53,7 @@ import docking.widgets.shapes.PopupWindowPlacer.ThrowsAssertExceptionPlacer;
  * not found and if there are more than two arguments, another placement attempt is made where
  * the second argument specifies the nominal placement cell and the third argument specifies how
  * far the solution is allowed to shift. To specify a "no-shift" solution, one specifies the same
- * placement cell twice (e.g., <code>rightEdge(Location.TOP, Location.TOP)</code>).
+ * placement cell twice (e.g., {@code rightEdge(Location.TOP, Location.TOP)}).
  * <p>
  * 
  * <H2>One Location Argument</H2>
@@ -61,9 +61,9 @@ import docking.widgets.shapes.PopupWindowPlacer.ThrowsAssertExceptionPlacer;
  * <p>
  * When one argument is used, the solution is the same as when two arguments are specified except
  * that the second argument is automatically set to the nearest neighboring cell.  Thus,
- * <code>rightEdge(Location.TOP)</code> is the same as
- * <code>rightEdge(Location.TOP, Location.CENTER)</code>.  When the single argument is
- * <code>Location.CENTER</code>, two attempts are built, the first being the BOTTOM or RIGHT cell
+ * {@code rightEdge(Location.TOP)} is the same as
+ * {@code rightEdge(Location.TOP, Location.CENTER)}.  When the single argument is
+ * {@code Location.CENTER}, two attempts are built, the first being the BOTTOM or RIGHT cell
  * and the second being the TOP or LEFT cell.
  * <p>
  * 
@@ -109,12 +109,12 @@ import docking.widgets.shapes.PopupWindowPlacer.ThrowsAssertExceptionPlacer;
  *    thenRotateClockwise()
  *    thenRotateCounterClockwise()</pre>
  * The first two of these take two Location arguments the specify the starting cell.  For instance,
- * <code>rotateClockwise(Location.BOTTOM, Location.RIGHT)</code>.  This specifies a set of edge
+ * {@code rotateClockwise(Location.BOTTOM, Location.RIGHT)}.  This specifies a set of edge
  * placers that attempt placement starting from the specified cell, and making attempt in a
  * clockwise fashion until the starting cell is revisited, at which time the attempt fails if a
- * viable placement has not been found.  The <code>rotateCounterClockwise</code> placer works the
- * same, but in a counter-clockwise fashion.  The <code>thenRotateClockwise</code> and
- * <code>thenRotateCounterClockwise</code> placers are the same as the previous two placers
+ * viable placement has not been found.  The {@code rotateCounterClockwise} placer works the
+ * same, but in a counter-clockwise fashion.  The {@code thenRotateClockwise} and
+ * {@code thenRotateCounterClockwise} placers are the same as the previous two placers
  * except that they start at the "beginning" cell where the most previous placer had left off.  If
  * there was not a previous placer, then the BOTTOM RIGHT cell is chosen as the starting cell.
  * <p>
@@ -124,7 +124,7 @@ import docking.widgets.shapes.PopupWindowPlacer.ThrowsAssertExceptionPlacer;
  * <H1>Overlapping Corner Placer</H1>
  * 
  * <p>
- * There is one corner placer, <code>leastOverlapCorner()</code>.  This placer tries to make a
+ * There is one corner placer, {@code leastOverlapCorner()}.  This placer tries to make a
  * placement at each of the corners of the context area and shifts into the context region as much
  * as necessary to fit the screen bounds.  The corner that overlaps the context area the least is
  * chosen as the solution placement corner.  In case of a tie (e.g., no overlap on some corners),
@@ -138,11 +138,11 @@ import docking.widgets.shapes.PopupWindowPlacer.ThrowsAssertExceptionPlacer;
  * <H1>Assert Placer</H1>
  * 
  * <p>
- * The <code>throwsAssertException()</code> placer is available, which automatically throws an
+ * The {@code throwsAssertException()} placer is available, which automatically throws an
  * AssertException.  This placer is only intended to be used by the client in such as case when
  * it is believed that a placement should have already been found, such as after the
- * <code>leastOverlapCorner()</code> placer.  This just throws an exception instead of returning
- * the <code>null</code> return value that would be returned from previous placement attempts.
+ * {@code leastOverlapCorner()} placer.  This just throws an exception instead of returning
+ * the {@code null} return value that would be returned from previous placement attempts.
  * <p>
  * <BR>
  * <BR>

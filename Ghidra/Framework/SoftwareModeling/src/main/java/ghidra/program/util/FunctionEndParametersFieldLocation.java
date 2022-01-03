@@ -19,7 +19,7 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
 
 /**
- * The <CODE>FunctionEndParametersFieldLocation</CODE> class provides a field 
+ * The {@code FunctionEndParametersFieldLocation} class provides a field
  * for the close parenthesis of a function within a program location.
  */
 public class FunctionEndParametersFieldLocation extends FunctionSignatureFieldLocation {

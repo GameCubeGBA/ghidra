@@ -83,12 +83,6 @@ public class BinaryCodedField extends BinaryField {
 	private static final String STRING_ENCODING = "UTF-8";
 
 	/**
-	 * Default constructor
-	 */
-	BinaryCodedField() {
-	}
-
-	/**
 	 * Construct a coded field from an existing binary field.
 	 * @param binField the binary field
 	 */

@@ -28,9 +28,9 @@ import java.io.IOException;
 
 /**
  * A class to represent the 
- * <b><code>IMAGE_THUNK_DATA32 struct</code></b>
+ * <b>{@code IMAGE_THUNK_DATA32 struct}</b>
  * as defined in 
- * <b><code>winnt.h</code></b>.
+ * <b>{@code winnt.h}</b>.
  * 
  * <pre>
  * typedef struct _IMAGE_THUNK_DATA32 {

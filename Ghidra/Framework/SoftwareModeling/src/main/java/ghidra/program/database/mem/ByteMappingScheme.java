@@ -22,7 +22,7 @@ import ghidra.program.model.mem.MemoryAccessException;
 import ghidra.program.model.mem.MemoryBlock;
 
 /**
- * <code>ByteMappingScheme</code> facilitate byte mapping/decimation scheme for a mapped sub-block to
+ * {@code ByteMappingScheme} facilitate byte mapping/decimation scheme for a mapped sub-block to
  * an underlying source memory region.
  */
 public class ByteMappingScheme {
