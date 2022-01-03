@@ -107,7 +107,7 @@ public class DefaultPdbMember extends PdbMember {
 				DataType baseDataType =
 					wrappedDt.getDataType().clone(dataTypeParser.getProgramDataTypeManager());
 				bitFieldDt = new PdbBitField(baseDataType, bitFieldSize,
-					bitFieldOffset >= 0 ? bitFieldOffset : 0);
+                        Math.max(bitFieldOffset, 0));
 			}
 			catch (InvalidDataTypeException e) {
 				Msg.error(this, "PDB parse error: " + e.getMessage());

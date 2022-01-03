@@ -262,7 +262,7 @@ public class LSHCosineVector implements LSHVector {
 				if (hash1 == hash2) {
 					int t1 = hash[iter].getTF();
 					int t2 = op.hash[iter2].getTF();
-					intersectcount += (t1 < t2) ? t1 : t2;
+					intersectcount += Math.min(t1, t2);
 					++iter;
 					++iter2;
 					if ((iter == enditer) || (iter2 == enditer2)) {

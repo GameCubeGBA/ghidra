@@ -190,7 +190,7 @@ public class PatternBlock {
 
 	public PatternBlock andBlock(PatternBlock b) {
 		PatternBlock res = new PatternBlock(true);
-		int maxlength = (getLength() > b.getLength()) ? getLength() : b.getLength();
+		int maxlength = Math.max(getLength(), b.getLength());
 
 		int asize = maxlength / 4;
 		if (maxlength % 4 != 0)

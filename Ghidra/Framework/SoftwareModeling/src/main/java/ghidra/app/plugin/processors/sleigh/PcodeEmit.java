@@ -458,7 +458,7 @@ public abstract class PcodeEmit {
 		vn.size = (int) vntpl.getSize().fix(walker);
 		if (vn.space == const_space) {
 			vn.offset =
-				vntpl.getOffset().fix(walker) & ConstTpl.calc_mask[vn.size > 8 ? 8 : vn.size];
+				vntpl.getOffset().fix(walker) & ConstTpl.calc_mask[Math.min(vn.size, 8)];
 		}
 		else if (vn.space == uniq_space) {
 			vn.offset = vntpl.getOffset().fix(walker) | uniqueoffset;

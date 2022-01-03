@@ -29,7 +29,7 @@ public class Utils {
 	};
 
 	public static long calc_mask( int size ) {
-		return uintbmasks[(size < 8) ? size : 8];
+		return uintbmasks[Math.min(size, 8)];
 	}
 
 	public static long pcode_right( long val, int sa ) {

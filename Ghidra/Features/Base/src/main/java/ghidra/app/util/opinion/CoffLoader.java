@@ -431,11 +431,8 @@ public class CoffLoader extends AbstractLibrarySupportLoader {
 		if (pointerSizeUnaligned <= 32) {
 			return 32;
 		}
-		if (pointerSizeUnaligned <= 64) {
-			return 64;
-		}
-		return pointerSizeUnaligned;
-	}
+        return Math.max(pointerSizeUnaligned, 64);
+    }
 
 	private void processSectionHeaders(ByteProvider provider, CoffFileHeader header,
 			Program program, FileBytes fileBytes, TaskMonitor monitor, MessageLog log,

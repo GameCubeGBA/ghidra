@@ -245,13 +245,8 @@ class AlignedComponentPacker {
 		// Determine component offset of zero-length bitfield and the component
 		// which immediately follows it.
 
-		if (minOffset >= zeroAlignmentOffset) {
-			// natural offset satisfies :0 alignment
-			groupOffset = minOffset;
-		}
-		else {
-			groupOffset = zeroAlignmentOffset;
-		}
+        // natural offset satisfies :0 alignment
+        groupOffset = Math.max(minOffset, zeroAlignmentOffset);
 
 		updateComponent(lastComponent, ordinal, groupOffset, 0, minimumAlignment);
 	}

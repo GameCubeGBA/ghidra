@@ -48,7 +48,7 @@ public class RegisterManager {
 
 		public RegisterSizeKey(Address addr, int size) {
 			address = getGlobalAddress(addr);
-			this.size = size < 0 ? 0 : size;
+			this.size = Math.max(size, 0);
 		}
 
 		@Override

@@ -1219,7 +1219,7 @@ public class AnimationUtils {
 			int gw = ghidraImage.getWidth(null);
 			int gh = ghidraImage.getHeight(null);
 			double smallest =
-				fullBounds.width > fullBounds.height ? fullBounds.height : fullBounds.width;
+                    Math.min(fullBounds.width, fullBounds.height);
 			smallest -= 10; // padding
 
 			double scale = smallest / gw;

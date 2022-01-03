@@ -77,7 +77,6 @@ public class CyclomaticComplexity {
 				}
 			}
 		}
-		int complexity = edges - nodes + exits;
-		return complexity < 0 ? 0 : complexity;
+		return Math.max(edges - nodes + exits, 0);
 	}
 }

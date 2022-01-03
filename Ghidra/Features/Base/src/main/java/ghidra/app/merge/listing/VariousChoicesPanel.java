@@ -101,9 +101,9 @@ public class VariousChoicesPanel extends ConflictPanel {
 		int radioButtonOffset = (rb.getPreferredSize().height - lbl.getPreferredSize().height) / 2;
 		int checkBoxOffset = (cb.getPreferredSize().height - lbl.getPreferredSize().height) / 2;
 		radioButtonBorder = BorderFactory.createEmptyBorder(
-			(radioButtonOffset > 0 ? radioButtonOffset : 0), 0, 0, 0);
+			(Math.max(radioButtonOffset, 0)), 0, 0, 0);
 		checkBoxBorder =
-			BorderFactory.createEmptyBorder((checkBoxOffset > 0 ? checkBoxOffset : 0), 0, 0, 0);
+			BorderFactory.createEmptyBorder((Math.max(checkBoxOffset, 0)), 0, 0, 0);
 
 		add(createUseForAllCheckBox(), BorderLayout.SOUTH);
 		adjustUseForAllEnablement();

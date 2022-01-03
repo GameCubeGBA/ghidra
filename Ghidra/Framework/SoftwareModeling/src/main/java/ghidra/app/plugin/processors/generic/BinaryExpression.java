@@ -77,7 +77,7 @@ public class BinaryExpression implements OperandValue, ExpressionValue {
 		int leftLen = left.length(buf,off);
 		int rightLen = right.length(buf, off);
 		
-		return (leftLen > rightLen ? leftLen : rightLen);
+		return (Math.max(leftLen, rightLen));
 	}
 
 	@Override

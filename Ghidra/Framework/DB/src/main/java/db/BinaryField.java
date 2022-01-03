@@ -117,8 +117,7 @@ public class BinaryField extends Field {
 
 	@Override
 	int readLength(Buffer buf, int offset) throws IOException {
-		int len = buf.getInt(offset);
-		return (len < 0 ? 0 : len) + 4;
+		return (Math.max(buf.getInt(offset), 0)) + 4;
 	}
 
 	@Override

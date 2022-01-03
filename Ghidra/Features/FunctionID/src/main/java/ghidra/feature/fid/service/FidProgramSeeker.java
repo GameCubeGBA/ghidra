@@ -73,8 +73,8 @@ public class FidProgramSeeker {
 		this.mediumHashCodeUnitLengthLimit = mediumHashCodeUnitLengthLimit;
 		FidHasherFactory factory = new FidHasherFactory(hasher);
 		int cacheSize = program.getFunctionManager().getFunctionCount();
-		cacheSize = (cacheSize < 100) ? 100 : cacheSize;
-		cacheSize = (cacheSize > MAX_CACHE_SIZE) ? MAX_CACHE_SIZE : cacheSize;
+		cacheSize = Math.max(cacheSize, 100);
+		cacheSize = Math.min(cacheSize, MAX_CACHE_SIZE);
 		this.cacheFactory = new FIDFixedSizeMRUCachingFactory(factory, cacheSize);
 	}
 

@@ -962,7 +962,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 		}
 		if (node.isConstant()) {
 			int bitsize = node.getSize() * 8;
-			bitsize = bitsize > 64 ? 64 : bitsize;
+			bitsize = Math.min(bitsize, 64);
 			boolean signed = node.getOffset() < 0;
 			return new Scalar(bitsize, node.getOffset(), signed);
 		}

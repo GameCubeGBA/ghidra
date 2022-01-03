@@ -904,7 +904,7 @@ public class ChainedBuffer implements Buffer {
 	private int getBytes(int offset, int index, int bufferDataOffset, byte[] data, int dataOffset,
 			int length) throws IOException {
 		int availableData = dataSpace - bufferDataOffset;
-		int len = availableData < length ? availableData : length;
+		int len = Math.min(availableData, length);
 		int id = dataBufferIdTable[index];
 		if (id < 0) {
 			if (uninitializedDataSource != null) {
@@ -1167,7 +1167,7 @@ public class ChainedBuffer implements Buffer {
 	private int putBytes(int index, int bufferDataOffset, byte[] data, int dataOffset, int length)
 			throws IOException {
 		int availableSpace = dataSpace - bufferDataOffset;
-		int len = availableSpace < length ? availableSpace : length;
+		int len = Math.min(availableSpace, length);
 		if (xorData != null) {
 			int offset = bufferDataOffset;
 			int dataIndex = dataOffset;

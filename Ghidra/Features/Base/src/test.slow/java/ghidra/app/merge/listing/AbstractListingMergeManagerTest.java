@@ -516,7 +516,7 @@ public abstract class AbstractListingMergeManagerTest extends AbstractMergeTest
 				if (!text.startsWith(startOfExpectedText)) {
 					Assert.fail("ReadTextDialog doesn't start with string '" + startOfExpectedText +
 						"'. Instead has '" +
-						text.substring(0, ((text.length() <= 80) ? text.length() : 80)) + "'.");
+						text.substring(0, (Math.min(text.length(), 80))) + "'.");
 				}
 				if (pressOK) {
 					pressButtonByText(dialog, "OK");

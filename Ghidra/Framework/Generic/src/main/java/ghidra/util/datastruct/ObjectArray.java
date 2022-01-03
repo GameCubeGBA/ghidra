@@ -38,7 +38,7 @@ public class ObjectArray implements Array, Serializable {
      * @param size the initial size of the Object array.
      */
     public ObjectArray(int size) {
-        objs = new Object[size < MIN_SIZE ? MIN_SIZE : size];
+        objs = new Object[Math.max(size, MIN_SIZE)];
     }
     
     /** Puts the given Object in the Object array at

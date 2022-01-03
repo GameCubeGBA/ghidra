@@ -82,8 +82,8 @@ public class InfiniteProgressPanel extends JComponent implements MouseListener {
     
     public InfiniteProgressPanel( String text, int barsCount, float shield, int fps, int rampDelay ) {
         setText( text );
-        this.fadeDelay = rampDelay >= 0 ? rampDelay : 0;
-        this.shield = shield >= 0.0f ? shield : 0.0f;
+        this.fadeDelay = Math.max(rampDelay, 0);
+        this.shield = Math.max(shield, 0.0f);
         this.fps = fps > 0 ? fps : 15;
         this.barsCount = barsCount > 0 ? barsCount : 14;
         
@@ -208,7 +208,7 @@ for ( Area element : ticker ) {
             
             
             channel = 264 - 128 / (i + 1);               
-            blue = channel+126 > 255 ? 255 : channel+126;
+            blue = Math.min(channel + 126, 255);
             Color color = new Color( channel, channel, blue, (int) (alphaLevel * shield) );
 
             if ( i == 0 ) {

@@ -576,7 +576,7 @@ public class PdbByteReader {
 	 */
 	public String dump(int first, int last) {
 		StringBuilder builder = new StringBuilder();
-		last = last > limit ? limit : last;
+		last = Math.min(last, limit);
 		builder.append("limit: ");
 		builder.append(limit);
 		builder.append("\nindex: ");
@@ -621,7 +621,7 @@ public class PdbByteReader {
 			return "";
 		}
 		StringBuilder builder = new StringBuilder();
-		last = last > limit ? limit : last;
+		last = Math.min(last, limit);
 		for (int i = first; i < last;) {
 			builder.append(String.format("\n%06x", i));
 			for (int j = 0; (j < 16) && (i < last); j++, i++) {

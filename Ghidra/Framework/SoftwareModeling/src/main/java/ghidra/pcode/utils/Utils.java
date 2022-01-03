@@ -45,7 +45,7 @@ public class Utils {
 	}
 
 	public static long calc_mask(int size) {
-		return uintbmasks[(size < 8) ? size : 8];
+		return uintbmasks[Math.min(size, 8)];
 	}
 
 	public static BigInteger calc_bigmask(int size) {

@@ -89,7 +89,7 @@ public class TokenPattern {
 		setRightEllipsis(false);
 		int ressa = 0;
 		int minsize =
-			tok1.toklist.size() < tok2.toklist.size() ? tok1.toklist.size() : tok2.toklist.size();
+                Math.min(tok1.toklist.size(), tok2.toklist.size());
 		if (minsize == 0) {
 			// Check if pattern doesn't care about tokens
 			if ((tok1.toklist.size() == 0) && !tok1.getLeftEllipsis() &&

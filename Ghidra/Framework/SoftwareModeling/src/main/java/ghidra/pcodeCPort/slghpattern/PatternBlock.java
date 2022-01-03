@@ -193,7 +193,7 @@ public class PatternBlock {
 	// values agree
 	public PatternBlock commonSubPattern(PatternBlock b) {
 		PatternBlock res = new PatternBlock(true);
-		int maxlength = (getLength() > b.getLength()) ? getLength() : b.getLength();
+		int maxlength = Math.max(getLength(), b.getLength());
 
 		res.offset = 0;
 		int offset1 = 0;
@@ -219,7 +219,7 @@ public class PatternBlock {
 			return new PatternBlock(false);
 		}
 		PatternBlock res = new PatternBlock(true);
-		int maxlength = (getLength() > b.getLength()) ? getLength() : b.getLength();
+		int maxlength = Math.max(getLength(), b.getLength());
 
 		res.offset = 0;
 		int offset1 = 0;
