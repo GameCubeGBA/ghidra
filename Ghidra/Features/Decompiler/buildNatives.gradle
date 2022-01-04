@@ -191,6 +191,7 @@ model {
 				b.cppCompiler.args "-std=c++11"
 				b.cppCompiler.args "-Wall"
 				b.cppCompiler.args "-O2"			// for DEBUG, comment this line out
+				b.cppCompiler.args "-flto"
 				// b.cppCompiler.args "-g"			// for DEBUG, uncomment	this line
 				b.cppCompiler.args "-Wno-sign-compare"
 				if (b.targetPlatform.operatingSystem.linux) {
@@ -221,6 +222,7 @@ model {
 				b.cppCompiler.args "-std=c++11"
 				b.cppCompiler.args "-Wall"
 				b.cppCompiler.args "-O2"			// for DEBUG, comment this line out
+				b.cppCompiler.args "-flto"
 				// b.cppCompiler.args "-g"			// for DEBUG, uncomment	this line
 				b.cppCompiler.args "-Wno-sign-compare"
 				b.cppCompiler.args "-w"
