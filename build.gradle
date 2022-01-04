@@ -43,7 +43,7 @@ else {
 /***************************************************************************************
  * Make sure Gradle wasn't launched with a 32-bit Java...it can cause confusing errors
  ***************************************************************************************/
-if ("32".equals(System.getProperty("sun.arch.data.model"))) {
+if ("32" == System.getProperty("sun.arch.data.model")) {
 	throw new GradleException("\n\n\t32-bit Java detected!  Please use 64-bit Java.\n\n");
 }
 
@@ -289,4 +289,8 @@ String generateLibraryDependencyMapping() {
 }
 
 task allSleighCompile {
+}
+
+repositories {
+	mavenCentral()
 }

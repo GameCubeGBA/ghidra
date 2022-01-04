@@ -188,11 +188,6 @@ public class HDMAUtil {
 		return processes.getChild(getManager(), string2variant(id));
 	}
 
-	public ModelObject getThread(ModelObject process, String id) {
-		ModelObject threads = process.getKeyValue("Threads");
-		return threads.getChild(getManager(), string2variant(id));
-	}
-
 	public ModelObject getSettings() {
 		return getRootNamespace().getKeyValue("Debugger").getKeyValue("Settings");
 	}

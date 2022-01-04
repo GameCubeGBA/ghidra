@@ -33,11 +33,11 @@ configurations {
 def platform = getCurrentPlatformName()
 
 dependencies {
-	allProtocArtifacts 'com.google.protobuf:protoc:3.17.3:windows-x86_64@exe'
-	allProtocArtifacts 'com.google.protobuf:protoc:3.17.3:linux-x86_64@exe'
-	allProtocArtifacts 'com.google.protobuf:protoc:3.17.3:linux-aarch_64@exe'
-	allProtocArtifacts 'com.google.protobuf:protoc:3.17.3:osx-x86_64@exe'
-	allProtocArtifacts 'com.google.protobuf:protoc:3.17.3:osx-aarch_64@exe'
+	allProtocArtifacts 'com.google.protobuf:protoc:3.19.1:windows-x86_64@exe'
+	allProtocArtifacts 'com.google.protobuf:protoc:3.19.1:linux-x86_64@exe'
+	allProtocArtifacts 'com.google.protobuf:protoc:3.19.1:linux-aarch_64@exe'
+	allProtocArtifacts 'com.google.protobuf:protoc:3.19.1:osx-x86_64@exe'
+	allProtocArtifacts 'com.google.protobuf:protoc:3.19.1:osx-aarch_64@exe'
 
 	if (isCurrentWindows()) {
 		protocArtifact 'com.google.protobuf:protoc:3.17.3:windows-x86_64@exe'
@@ -59,7 +59,7 @@ dependencies {
 		}
 	}
 
-	api 'com.google.protobuf:protobuf-java:3.17.3'
+	api 'com.google.protobuf:protobuf-java:3.19.1'
 	api project(':Framework-AsyncComm')
 	api project(':Framework-Debugging')
 	api project(':ProposedUtils')

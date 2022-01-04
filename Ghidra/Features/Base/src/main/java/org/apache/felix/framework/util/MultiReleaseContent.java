@@ -98,6 +98,11 @@ public class MultiReleaseContent implements Content
     }
 
     @Override
+    public boolean isDirectory(String name) {
+        return false;
+    }
+
+    @Override
     public Enumeration<String> getEntries()
     {
         Enumeration<String> entries = m_content.getEntries();
@@ -166,6 +171,11 @@ public class MultiReleaseContent implements Content
     public URL getEntryAsURL(String name)
     {
         return m_content.getEntryAsURL(findPath(name));
+    }
+
+    @Override
+    public long getContentTime(String urlPath) {
+        return 0;
     }
 
     private String findPath(String path)
