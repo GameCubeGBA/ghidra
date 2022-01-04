@@ -404,13 +404,13 @@ void RangeList::removeRange(AddrSpace *spc, uintb first, uintb last)
   // Set iter2 to first range with range.first > last
   iter2 = tree.upper_bound(Range(spc, last, last));
 
-  while (iter1 != iter2)
+  for (; iter1 != iter2; iter1++)
   {
     uintb a, b;
 
     a = (*iter1).first;
     b = (*iter1).last;
-    tree.erase(iter1++);
+    tree.erase(iter1);
     if (a < first)
       tree.insert(Range(spc, a, first - 1));
     if (b > last)
@@ -421,12 +421,11 @@ void RangeList::removeRange(AddrSpace *spc, uintb first, uintb last)
 void RangeList::merge(const RangeList &op2)
 
 { // Merge -op2- into this rangelist
-  set<Range>::const_iterator iter1, iter2;
-  iter1 = op2.tree.begin();
-  iter2 = op2.tree.end();
-  while (iter1 != iter2)
+  set<Range>::const_iterator iter, end;
+  end = op2.tree.end();
+  for (iter = op2.tree.begin(); iter != end; iter++)
   {
-    const Range &range(*iter1++);
+    const Range &range(*iter);
     insertRange(range.spc, range.first, range.last);
   }
 }
@@ -516,8 +515,7 @@ uintb RangeList::longestFit(const Address &addr, uintb maxsize) const
     offset = (*iter).last + 1;              // Try to chain on the next range
     if (sizeres >= maxsize)
       break; // Don't bother if past maxsize
-    ++iter;  // Next range in the chain
-  } while (iter != tree.end());
+  } while (++iter != tree.end());
   return sizeres;
 }
 
