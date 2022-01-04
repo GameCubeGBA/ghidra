@@ -331,9 +331,8 @@ void RangeList::insertRange(AddrSpace *spc,uintb first,uintb last)
   // Set iter1 to first range with range.last >=first
   // It is either current iter1 or the one before
   if (iter1 != tree.begin()) {
-    --iter1;
-    if (((*iter1).spc!=spc)||((*iter1).last < first))
-      ++iter1;
+    if (((*iter1).spc==spc)&&((*iter1).last >= first))
+      --iter1;
   }
 
   // Set iter2 to first range with range.first > last
@@ -367,9 +366,8 @@ void RangeList::removeRange(AddrSpace *spc,uintb first,uintb last)
   // Set iter1 to first range with range.last >=first
   // It is either current iter1 or the one before
   if (iter1 != tree.begin()) {
-    --iter1;
-    if (((*iter1).spc!=spc)||((*iter1).last < first))
-      ++iter1;
+    if (((*iter1).spc==spc)&&((*iter1).last >= first))
+      --iter1;
   }
 
   // Set iter2 to first range with range.first > last
@@ -395,8 +393,7 @@ void RangeList::merge(const RangeList &op2)
   iter1 = op2.tree.begin();
   iter2 = op2.tree.end();
   while(iter1 != iter2) {
-    const Range &range( *iter1 );
-    ++iter1;
+    const Range &range( *iter1++ );
     insertRange(range.spc, range.first, range.last);
   }
 }
