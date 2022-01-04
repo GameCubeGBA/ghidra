@@ -230,7 +230,6 @@ public class DBBuffer {
 		synchronized (dbh) {
 			buf.get(offset, data);
 		}
-
 	}
 
 	/**
