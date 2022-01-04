@@ -898,13 +898,11 @@ int4 power2Divide(int4 n,uint8 divisor,uint8 &q,uint8 &r)
     max = power / y + 1;
   uint8 min = power / (y+1);
   if (min != 0)
-    min -= 1;
+    min--;
   uint8 fullpower[2];
   fullpower[1] = ((uint8)1)<<(n-64);
   fullpower[0] = 0;
-  uint8 mult[2];
-  mult[0] = 0;
-  mult[1] = 0;
+  uint8 mult[2] = {0};
   uint8 tmpq = 0;
   while(max > min+1) {
     tmpq = max + min;
