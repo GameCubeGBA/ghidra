@@ -830,10 +830,10 @@ class FGActionManager {
 		HelpLocation layoutHelpLocation =
 			new HelpLocation("FunctionGraphPlugin", "Function_Graph_Action_Layout");
 
-		layoutAction = new MultiStateDockingAction<>("Relayout Graph", plugin.getName(), true) {
+		layoutAction = new MultiStateDockingAction<>("Relayout Graph", plugin.getName()) {
 
 			@Override
-			protected void doActionPerformed(ActionContext context) {
+			public void actionPerformed(ActionContext context) {
 				// this callback is when the user clicks the button
 				FGLayoutProvider currentUserData = getCurrentUserData();
 				changeLayout(currentUserData);
@@ -965,7 +965,6 @@ class FGActionManager {
 			};
 		vertexHoverModeAction.setGroup(group);
 		vertexHoverModeAction.setHelpLocation(pathHelpLocation);
-		vertexHoverModeAction.setPerformActionOnPrimaryButtonClick(false);
 
 		vertexHoverModeAction.addActionState(offState);
 		vertexHoverModeAction.addActionState(pathsForwardScopedFlow);
@@ -1034,7 +1033,6 @@ class FGActionManager {
 			};
 		vertexFocusModeAction.setGroup(group);
 		vertexFocusModeAction.setHelpLocation(pathHelpLocation);
-		vertexFocusModeAction.setPerformActionOnPrimaryButtonClick(false);
 
 		vertexFocusModeAction.addActionState(offState);
 		vertexFocusModeAction.addActionState(pathsForwardScopedFlow);

@@ -15,11 +15,11 @@
  */
 package ghidra.app.plugin.core.navigation;
 
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import java.util.Iterator;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.KeyStroke;
 
 import docking.ActionContext;
 import docking.action.*;
@@ -101,7 +101,7 @@ public class NextPreviousBookmarkAction extends MultiStateDockingAction<String> 
 	}
 
 	@Override
-	protected void doActionPerformed(ActionContext context) {
+	public void actionPerformed(ActionContext context) {
 		if (context instanceof NavigatableActionContext) {
 			gotoNextPrevious((NavigatableActionContext) context, this.getCurrentUserData());
 		}
