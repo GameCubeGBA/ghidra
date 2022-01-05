@@ -259,7 +259,7 @@ public class SymbolTreePlugin3Test extends AbstractGhidraHeadedIntegrationTest {
 	public void testSortNamespaces() throws Exception {
 		SymbolTable symTable = program.getSymbolTable();
 		String[] names =
-			new String[] { "aNamespace", "MYnamespace", "Bnamespace", "AaNamespace", "Cnamespace" };
+                { "aNamespace", "MYnamespace", "Bnamespace", "AaNamespace", "Cnamespace" };
 		List<Symbol> list = new ArrayList<>();
 		int transactionID = program.startTransaction("test");
 
@@ -319,7 +319,7 @@ public class SymbolTreePlugin3Test extends AbstractGhidraHeadedIntegrationTest {
 	public void testSortClasses() throws Exception {
 		SymbolTable symTable = program.getSymbolTable();
 		String[] names =
-			new String[] { "BClass", "MYclass", "bBClass", "Aaclass", "Cclass", "_anotherClass" };
+                { "BClass", "MYclass", "bBClass", "Aaclass", "Cclass", "_anotherClass" };
 		List<Symbol> list = new ArrayList<>();
 		int transactionID = program.startTransaction("test");
 

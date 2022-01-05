@@ -324,7 +324,7 @@ public class VersionedLocalBufferFileTest extends AbstractGenericTest {
 			saveFile.put(buf, 4);
 
 			// Set free ID list for output file
-			int[] newFreeList = new int[] { 2, 3 };
+			int[] newFreeList = { 2, 3 };
 			saveFile.setFreeIndexes(newFreeList);
 
 			// Copy/Set file parameters
@@ -558,7 +558,7 @@ public class VersionedLocalBufferFileTest extends AbstractGenericTest {
 			saveFile.put(buf, 9);
 
 			// Set free ID list for output file
-			int[] newFreeList = new int[] { 0, 4, 6 };
+			int[] newFreeList = { 0, 4, 6 };
 			saveFile.setFreeIndexes(newFreeList);
 
 			// Copy/Set file parameters
@@ -664,7 +664,7 @@ public class VersionedLocalBufferFileTest extends AbstractGenericTest {
 			saveFile.put(buf, 4);
 
 			// Set free ID list for output file
-			int[] newFreeList = new int[] { 2, 4 };
+			int[] newFreeList = { 2, 4 };
 			saveFile.setFreeIndexes(newFreeList);
 
 			// Copy/Set file parameters
@@ -806,7 +806,7 @@ public class VersionedLocalBufferFileTest extends AbstractGenericTest {
 			saveFile.put(buf, 5);
 
 			// Set free ID list for output file
-			int[] newFreeList = new int[] { 0, 4, 6 };
+			int[] newFreeList = { 0, 4, 6 };
 			saveFile.setFreeIndexes(newFreeList);
 
 			// Copy/Set file parameters
@@ -941,7 +941,7 @@ public class VersionedLocalBufferFileTest extends AbstractGenericTest {
 			saveFile.put(buf, 2);
 
 			// Set free ID list for output file
-			int[] newFreeList = new int[] { 0 };
+			int[] newFreeList = { 0 };
 			saveFile.setFreeIndexes(newFreeList);
 
 			// Copy/Set file parameters
@@ -1074,7 +1074,7 @@ public class VersionedLocalBufferFileTest extends AbstractGenericTest {
 			saveFile.put(buf, 2);
 
 			// Set free ID list for output file
-			int[] newFreeList = new int[] { 0 };
+			int[] newFreeList = { 0 };
 			saveFile.setFreeIndexes(newFreeList);
 
 			// Copy/Set file parameters

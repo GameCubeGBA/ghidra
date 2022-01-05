@@ -62,7 +62,7 @@ public final class ArtConstants {
 	/**
 	 * NOTE: only going to support RELEASE versions
 	 */
-	public final static String[] SUPPORTED_VERSIONS = new String[] {
+	public final static String[] SUPPORTED_VERSIONS = {
 		//@formatter:off
 		VERSION_KITKAT_RELEASE,
 		VERSION_LOLLIPOP_RELEASE, 

@@ -110,7 +110,7 @@ public class ListingCodeComparisonPanel
 	private FieldNavigator[] fieldNavigators = new FieldNavigator[2];
 	private AddressIndexMap[] indexMaps = new AddressIndexMap[2];
 	private AddressSetView[] addressSets =
-		new AddressSetView[] { EMPTY_ADDRESS_SET, EMPTY_ADDRESS_SET };
+            { EMPTY_ADDRESS_SET, EMPTY_ADDRESS_SET };
 	private MarkerManager[] markerManagers = new MarkerManager[2];
 	private MarkerSet[] unmatchedCodeMarkers = new MarkerSet[2];
 	private MarkerSet[] diffMarkers = new MarkerSet[2];
@@ -459,7 +459,7 @@ public class ListingCodeComparisonPanel
 	@Override
 	public DockingAction[] getActions() {
 		DockingAction[] codeCompActions = super.getActions();
-		DockingAction[] otherActions = new DockingAction[] { toggleHeaderAction,
+		DockingAction[] otherActions = { toggleHeaderAction,
 			toggleOrientationAction, toggleHoverAction, applyFunctionSignatureAction,
 			nextPreviousAreaMarkerAction, nextDiffAction, previousDiffAction, optionsAction };
 		int compCount = codeCompActions.length;

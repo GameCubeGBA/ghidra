@@ -51,7 +51,7 @@ public class NGramUtils {
 	 *  there is no way they will be greater than 10!
 	 */
 	//@formatter:off
-	private static final Double[] NG_THRESHOLDS = new Double[] { 
+	private static final Double[] NG_THRESHOLDS = {
 		10.0, 10.0, 10.0, 10.0, -2.71, -3.26, -3.52, -3.84, -4.23, -4.49,        	// 0 - 9
 		-4.55, -4.74, -4.88, -5.03, -5.06, -5.2, -5.24, -5.29, -5.29, -5.42, 		// 10 - 19
 		-5.51, -5.52, -5.53, -5.6, -5.6, -5.62, -5.7, -5.7, -5.78, -5.79, 			// 20 - 29

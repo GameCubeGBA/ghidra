@@ -1182,12 +1182,12 @@ public class ClipboardPluginTest extends AbstractGhidraHeadedIntegrationTest {
 		//
 
 		final char[] droppedChars =
-			new char[] { (char) 0x30, (char) 0x31, (char) 0xa0, (char) 0xc2, (char) 0x01,
-				(char) 0x63, (char) 0x30, (char) 0xa0, (char) 0x35, (char) 0x65, (char) 0x20 };
+                { (char) 0x30, (char) 0x31, (char) 0xa0, (char) 0xc2, (char) 0x01,
+                    (char) 0x63, (char) 0x30, (char) 0xa0, (char) 0x35, (char) 0x65, (char) 0x20 };
 //		final byte[] pastedBytes =
 //			new byte[] { (byte) 0x30, (byte) 0x31, (byte) 0x63, (byte) 0x30, (byte) 0x35,
 //				(byte) 0x65 };
-		final byte[] resultBytes = new byte[] { (byte) 0x01, (byte) 0xc0, (byte) 0x5e };
+		final byte[] resultBytes = { (byte) 0x01, (byte) 0xc0, (byte) 0x5e };
 
 		Clipboard systemClipboard = GClipboard.getSystemClipboard();
 		Transferable transferable = new Transferable() {
@@ -1264,12 +1264,12 @@ public class ClipboardPluginTest extends AbstractGhidraHeadedIntegrationTest {
 		//
 
 		final char[] droppedChars =
-			new char[] { (char) 0x30, (char) 0x31, (char) 0xa0, (char) 0xc2, (char) 0x01,
-				(char) 0x63, (char) 0x30, (char) 0xa0, (char) 0x35, (char) 0x65, (char) 0x20 };
+                { (char) 0x30, (char) 0x31, (char) 0xa0, (char) 0xc2, (char) 0x01,
+                    (char) 0x63, (char) 0x30, (char) 0xa0, (char) 0x35, (char) 0x65, (char) 0x20 };
 //		final byte[] pastedBytes =
 //			new byte[] { (byte) 0x30, (byte) 0x31, (byte) 0x63, (byte) 0x30, (byte) 0x35,
 //				(byte) 0x65 };
-		final byte[] resultBytes = new byte[] { (byte) 0x01, (byte) 0xc0, (byte) 0x5e };
+		final byte[] resultBytes = { (byte) 0x01, (byte) 0xc0, (byte) 0x5e };
 
 		Clipboard systemClipboard = GClipboard.getSystemClipboard();
 		Transferable transferable = new Transferable() {

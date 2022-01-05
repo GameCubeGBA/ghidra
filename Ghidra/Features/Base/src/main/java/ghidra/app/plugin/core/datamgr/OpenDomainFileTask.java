@@ -193,7 +193,7 @@ class OpenDomainFileTask extends Task {
 
 	private boolean isRecoveryOK(final DomainFile dfile)
 			throws InterruptedException, InvocationTargetException {
-		final boolean[] recoverFile = new boolean[] { false };
+		final boolean[] recoverFile = { false };
 		if (dfile.isInWritableProject() && dfile.canRecover()) {
 			Runnable r = () -> {
 				int option = OptionDialog.showYesNoDialog(null, "Crash Recovery Data Found",

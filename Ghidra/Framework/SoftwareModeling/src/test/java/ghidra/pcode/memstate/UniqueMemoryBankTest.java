@@ -32,9 +32,9 @@ public class UniqueMemoryBankTest extends AbstractGenericTest {
 
 	private AddressSpace uniqueSpace;
 	private UniqueMemoryBank uniqueBank;
-	private byte[] eightTestBytes = new byte[] { 0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7 };
+	private byte[] eightTestBytes = { 0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7 };
 	private byte[] eightZeroBytes = new byte[8];
-	private byte[] sixteenTestBytes = new byte[] { 0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x8, 0x9,
+	private byte[] sixteenTestBytes = { 0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x8, 0x9,
 		0xa, 0xb, 0xc, 0xd, 0xe, 0xf };
 
 	@Before
@@ -128,7 +128,7 @@ public class UniqueMemoryBankTest extends AbstractGenericTest {
 
 	@Test
 	public void testReadAcrossUndefined() {
-		byte[] fourBytes = new byte[] { 0x11, 0x22, 0x33, 0x44 };
+		byte[] fourBytes = { 0x11, 0x22, 0x33, 0x44 };
 		uniqueBank.setChunk(0x1007, 4, fourBytes);
 		uniqueBank.setChunk(0x100c, 4, fourBytes);
 		byte[] dest = new byte[9];
@@ -142,7 +142,7 @@ public class UniqueMemoryBankTest extends AbstractGenericTest {
 
 	@Test
 	public void testNonAlignedReadWrite() {
-		byte[] fourBytes = new byte[] { 0x11, 0x22, 0x33, 0x44 };
+		byte[] fourBytes = { 0x11, 0x22, 0x33, 0x44 };
 		uniqueBank.setChunk(0x1004, 4, fourBytes);
 		byte[] dest = new byte[4];
 		int numBytes = uniqueBank.getChunk(0x1004, 4, dest, true);
@@ -169,7 +169,7 @@ public class UniqueMemoryBankTest extends AbstractGenericTest {
 
 	@Test
 	public void testOneByteRead() {
-		byte[] one = new byte[] { (byte) 0x7f };
+		byte[] one = { (byte) 0x7f };
 		uniqueBank.setChunk(0x1000, 1, one);
 		byte[] dest = new byte[16];
 		int numBytes = uniqueBank.getChunk(0x1000, 1, dest, false);

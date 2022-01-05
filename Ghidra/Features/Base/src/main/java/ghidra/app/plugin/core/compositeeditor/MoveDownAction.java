@@ -36,7 +36,7 @@ public class MoveDownAction extends CompositeEditorTableAction {
 	public final static String ACTION_NAME = "Move Components Down";
 	private final static String GROUP_NAME = COMPONENT_ACTION_GROUP;
 	private final static String DESCRIPTION = "Move the selected components down";
-	private final static String[] POPUP_PATH = new String[] { ACTION_NAME };
+	private final static String[] POPUP_PATH = { ACTION_NAME };
 
 	private final static KeyStroke KEY_STROKE =
 		KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, InputEvent.ALT_DOWN_MASK);

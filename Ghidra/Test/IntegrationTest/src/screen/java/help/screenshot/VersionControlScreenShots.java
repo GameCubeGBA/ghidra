@@ -89,7 +89,7 @@ public class VersionControlScreenShots extends GhidraScreenShotGenerator {
 		runSwing(() -> {
 
 			Class<?>[] paramTypes = new Class<?>[] { List.class, List.class };
-			Object[] paramValues = new Object[] { Collections.emptyList(), modifiedList };
+			Object[] paramValues = { Collections.emptyList(), modifiedList };
 			TestUtils.invokeInstanceMethod("undoCheckOuts", action, paramTypes, paramValues);
 
 		}, false);
@@ -117,7 +117,7 @@ public class VersionControlScreenShots extends GhidraScreenShotGenerator {
 		DomainFile df = createDomainFile();
 
 		//@formatter:off
-		ItemCheckoutStatus[] checkouts = new ItemCheckoutStatus[] { 
+		ItemCheckoutStatus[] checkouts = {
 			new ItemCheckoutStatus(1, CheckoutType.NORMAL, "User-1", 1, System.currentTimeMillis(), 
 							       "host1::/path1/TestRepo"),
 			new ItemCheckoutStatus(1, CheckoutType.EXCLUSIVE, "User-1", 1, System.currentTimeMillis(), 

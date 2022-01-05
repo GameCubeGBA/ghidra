@@ -122,7 +122,7 @@ public class BookmarkPluginTest extends AbstractGhidraHeadedIntegrationTest {
 			fd.okCallback();
 		});
 
-		Bookmark[] bms = new Bookmark[] { bookmarks[6], bookmarks[7], bookmarks[8] };
+		Bookmark[] bms = { bookmarks[6], bookmarks[7], bookmarks[8] };
 		checkBookmarkTable(bms);
 	}
 
@@ -140,7 +140,7 @@ public class BookmarkPluginTest extends AbstractGhidraHeadedIntegrationTest {
 
 		runSwing(() -> model.setTableFilter(factory.getTableFilter("help", transformer)));
 
-		Bookmark[] bms = new Bookmark[] {};
+		Bookmark[] bms = {};
 		checkBookmarkTable(bms);
 
 		runSwing(() -> model.setTableFilter(factory.getTableFilter("Test20", transformer)));
@@ -330,7 +330,7 @@ public class BookmarkPluginTest extends AbstractGhidraHeadedIntegrationTest {
 		DockingActionIf deleteAction = getAction(plugin, "Delete Bookmarks");
 		performAction(deleteAction, true);
 
-		Bookmark[] bms = new Bookmark[] { bookmarks[0], bookmarks[1], bookmarks[3], bookmarks[4],
+		Bookmark[] bms = { bookmarks[0], bookmarks[1], bookmarks[3], bookmarks[4],
 			bookmarks[5], bookmarks[6], bookmarks[7], bookmarks[8] };
 		checkBookmarkTable(bms);
 

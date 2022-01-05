@@ -136,7 +136,7 @@ public class FixLangId extends GhidraScript {
 	}
 
 	public DomainFile askProgramFile(String title) {
-		final DomainFile[] domainFile = new DomainFile[] { null };
+		final DomainFile[] domainFile = { null };
 		final DataTreeDialog dtd = new DataTreeDialog(null, title, DataTreeDialog.OPEN);
 		dtd.addOkActionListener(e -> {
 			dtd.close();

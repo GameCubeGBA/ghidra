@@ -86,7 +86,7 @@ public class MultiAddressRangeIteratorTest extends AbstractGenericTest {
 		as2.addRange(addr("0x1001650"), addr("0x1001670"));
 		as2.addRange(addr("0x1001690"), addr("0x1001713"));
 
-		AddressRange[] addressRanges = new AddressRange[] { addrRange("0x1001000", "0x1001045"),
+		AddressRange[] addressRanges = { addrRange("0x1001000", "0x1001045"),
 			addrRange("0x1001080", "0x1001120"), addrRange("0x1001121", "0x1001130"),
 			addrRange("0x1001140", "0x1001153"), addrRange("0x1001154", "0x1001170"),
 			addrRange("0x1001200", "0x100120f"), addrRange("0x1001210", "0x1001225"),
@@ -99,7 +99,7 @@ public class MultiAddressRangeIteratorTest extends AbstractGenericTest {
 			addrRange("0x1001690", "0x1001713"), addrRange("0x1001720", "0x1001790") };
 
 		boolean forward = true;
-		AddressRangeIterator[] iters = new AddressRangeIterator[] { as1.getAddressRanges(forward),
+		AddressRangeIterator[] iters = { as1.getAddressRanges(forward),
 			as2.getAddressRanges(forward) };
 		MultiAddressRangeIterator multiIter = new MultiAddressRangeIterator(iters, true);
 		for (int i = 0; i < addressRanges.length; i++) {
@@ -135,7 +135,7 @@ public class MultiAddressRangeIteratorTest extends AbstractGenericTest {
 		as2.addRange(addr("0x1001650"), addr("0x1001670"));
 		as2.addRange(addr("0x1001690"), addr("0x1001713"));
 
-		AddressRange[] addressRanges = new AddressRange[] { addrRange("0x1001720", "0x1001790"),
+		AddressRange[] addressRanges = { addrRange("0x1001720", "0x1001790"),
 			addrRange("0x1001690", "0x1001713"), addrRange("0x1001650", "0x1001670"),
 			addrRange("0x1001620", "0x1001634"), addrRange("0x1001549", "0x1001567"),
 			addrRange("0x1001530", "0x1001548"), addrRange("0x1001500", "0x100152f"),
@@ -148,7 +148,7 @@ public class MultiAddressRangeIteratorTest extends AbstractGenericTest {
 			addrRange("0x1001080", "0x1001120"), addrRange("0x1001000", "0x1001045") };
 
 		boolean forward = false;
-		AddressRangeIterator[] iters = new AddressRangeIterator[] { as1.getAddressRanges(forward),
+		AddressRangeIterator[] iters = { as1.getAddressRanges(forward),
 			as2.getAddressRanges(forward) };
 		MultiAddressRangeIterator multiIter = new MultiAddressRangeIterator(iters, false);
 		for (int i = 0; i < addressRanges.length; i++) {
@@ -191,7 +191,7 @@ public class MultiAddressRangeIteratorTest extends AbstractGenericTest {
 		as3.addRange(addr("0x1001450"), addr("0x1001510"));
 		as3.addRange(addr("0x1001675"), addr("0x1001680"));
 
-		AddressRange[] addressRanges = new AddressRange[] { addrRange("0x1001000", "0x1001045"),
+		AddressRange[] addressRanges = { addrRange("0x1001000", "0x1001045"),
 			addrRange("0x1001080", "0x1001120"), addrRange("0x1001121", "0x1001130"),
 			addrRange("0x1001140", "0x1001153"), addrRange("0x1001154", "0x1001170"),
 			addrRange("0x1001200", "0x100120f"), addrRange("0x1001210", "0x1001217"),
@@ -208,7 +208,7 @@ public class MultiAddressRangeIteratorTest extends AbstractGenericTest {
 			addrRange("0x1001690", "0x1001713"), addrRange("0x1001720", "0x1001790") };
 
 		boolean forward = true;
-		AddressRangeIterator[] iters = new AddressRangeIterator[] { as1.getAddressRanges(forward),
+		AddressRangeIterator[] iters = { as1.getAddressRanges(forward),
 			as2.getAddressRanges(forward), as3.getAddressRanges(forward) };
 		MultiAddressRangeIterator multiIter = new MultiAddressRangeIterator(iters, true);
 		for (int i = 0; i < addressRanges.length; i++) {
@@ -251,7 +251,7 @@ public class MultiAddressRangeIteratorTest extends AbstractGenericTest {
 		as3.addRange(addr("0x1001450"), addr("0x1001510"));
 		as3.addRange(addr("0x1001675"), addr("0x1001680"));
 
-		AddressRange[] addressRanges = new AddressRange[] { addrRange("0x1001720", "0x1001790"),
+		AddressRange[] addressRanges = { addrRange("0x1001720", "0x1001790"),
 			addrRange("0x1001690", "0x1001713"), addrRange("0x1001675", "0x1001680"),
 			addrRange("0x1001650", "0x1001670"), addrRange("0x1001620", "0x1001634"),
 			addrRange("0x1001549", "0x1001567"), addrRange("0x1001530", "0x1001548"),
@@ -268,7 +268,7 @@ public class MultiAddressRangeIteratorTest extends AbstractGenericTest {
 			addrRange("0x1001080", "0x1001120"), addrRange("0x1001000", "0x1001045") };
 
 		boolean forward = false;
-		AddressRangeIterator[] iters = new AddressRangeIterator[] { as1.getAddressRanges(forward),
+		AddressRangeIterator[] iters = { as1.getAddressRanges(forward),
 			as2.getAddressRanges(forward), as3.getAddressRanges(forward) };
 		MultiAddressRangeIterator multiIter = new MultiAddressRangeIterator(iters, false);
 		for (int i = 0; i < addressRanges.length; i++) {

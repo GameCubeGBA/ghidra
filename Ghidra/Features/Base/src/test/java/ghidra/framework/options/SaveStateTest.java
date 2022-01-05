@@ -183,9 +183,9 @@ public class SaveStateTest extends AbstractGenericTest {
 	@Test
 	public void testStringArray() throws Exception {
 		String[] array1 =
-			new String[] { "Dennis", "Bill", "Brian", "Mike", null, "Ellen", "Steve" };
+                { "Dennis", "Bill", "Brian", "Mike", null, "Ellen", "Steve" };
 		String[] after =
-			new String[] { "Dennis", "Bill", "Brian", "Mike", "Ellen", "Steve" };
+                { "Dennis", "Bill", "Brian", "Mike", "Ellen", "Steve" };
 
 		ss.putStrings("ARRAY", array1);
 		String[] array2 = ss.getStrings("ARRAY", null);
@@ -211,7 +211,7 @@ public class SaveStateTest extends AbstractGenericTest {
 
 	@Test
 	public void testByteArray() throws Exception {
-		byte[] array1 = new byte[] { (byte) 0, (byte) 5, (byte) 9, (byte) 42, (byte) 77 };
+		byte[] array1 = { (byte) 0, (byte) 5, (byte) 9, (byte) 42, (byte) 77 };
 		ss.putBytes("ARRAY", array1);
 		byte[] array2 = ss.getBytes("ARRAY", null);
 		assertArrayEquals(array1, array2);
@@ -247,7 +247,7 @@ public class SaveStateTest extends AbstractGenericTest {
 
 	@Test
 	public void testIntArray() throws Exception {
-		int[] array1 = new int[] { 0, 5, 9, 42, 77 };
+		int[] array1 = { 0, 5, 9, 42, 77 };
 		ss.putInts("ARRAY", array1);
 		int[] array2 = ss.getInts("ARRAY", null);
 		Arrays.equals(array1, array2);
@@ -521,8 +521,8 @@ public class SaveStateTest extends AbstractGenericTest {
 
 	@Test
 	public void testJsonStringArrayRoundTrip() {
-		String[] strings = new String[] { "aaa", "bbb", null, "ccc" };
-		String[] after = new String[] { "aaa", "bbb", "ccc" };
+		String[] strings = { "aaa", "bbb", null, "ccc" };
+		String[] after = { "aaa", "bbb", "ccc" };
 		ss.putStrings("foo", strings);
 		SaveState restored = jsonRoundTrip(ss);
 		assertArrayEquals(after, restored.getStrings("foo", null));
@@ -530,7 +530,7 @@ public class SaveStateTest extends AbstractGenericTest {
 
 	@Test
 	public void testJsonByteArrayRoundTrip() {
-		byte[] bytes = new byte[] { (byte) 1, (byte) 2, (byte) 3 };
+		byte[] bytes = { (byte) 1, (byte) 2, (byte) 3 };
 		ss.putBytes("foo", bytes);
 		SaveState restored = jsonRoundTrip(ss);
 		assertArrayEquals(bytes, restored.getBytes("foo", null));
@@ -538,7 +538,7 @@ public class SaveStateTest extends AbstractGenericTest {
 
 	@Test
 	public void testJsonShortArrayRoundTrip() {
-		short[] shorts = new short[] { (short) 1, (short) 2, (short) 3 };
+		short[] shorts = { (short) 1, (short) 2, (short) 3 };
 		ss.putShorts("foo", shorts);
 		SaveState restored = jsonRoundTrip(ss);
 		assertArrayEquals(shorts, restored.getShorts("foo", null));
@@ -546,7 +546,7 @@ public class SaveStateTest extends AbstractGenericTest {
 
 	@Test
 	public void testJsonIntArrayRoundTrip() {
-		int[] ints = new int[] { 1, 2, 3, 4, 5 };
+		int[] ints = { 1, 2, 3, 4, 5 };
 		ss.putInts("foo", ints);
 		SaveState restored = jsonRoundTrip(ss);
 		assertArrayEquals(ints, restored.getInts("foo", null));
@@ -554,7 +554,7 @@ public class SaveStateTest extends AbstractGenericTest {
 
 	@Test
 	public void testJsonLongArrayRoundTrip() {
-		long[] longs = new long[] { 1, 2, 3, 4, 5 };
+		long[] longs = { 1, 2, 3, 4, 5 };
 		ss.putLongs("foo", longs);
 		SaveState restored = jsonRoundTrip(ss);
 		assertArrayEquals(longs, restored.getLongs("foo", null));
@@ -562,7 +562,7 @@ public class SaveStateTest extends AbstractGenericTest {
 
 	@Test
 	public void testJsonFloatArrayRoundTrip() {
-		float[] floats = new float[] { 1.1f, 2.2f, 3.3f, 4.4f, 5.5f };
+		float[] floats = { 1.1f, 2.2f, 3.3f, 4.4f, 5.5f };
 		ss.putFloats("foo", floats);
 		SaveState restored = jsonRoundTrip(ss);
 		assertArrayEquals(floats, restored.getFloats("foo", null), .1f);
@@ -570,7 +570,7 @@ public class SaveStateTest extends AbstractGenericTest {
 
 	@Test
 	public void testJsonDoubleArrayRoundTrip() {
-		double[] doubles = new double[] { 1.1, 2.2, 3.3, 4.4, 5.5 };
+		double[] doubles = { 1.1, 2.2, 3.3, 4.4, 5.5 };
 		ss.putDoubles("foo", doubles);
 		SaveState restored = jsonRoundTrip(ss);
 		assertArrayEquals(doubles, restored.getDoubles("foo", null), .1);
@@ -578,7 +578,7 @@ public class SaveStateTest extends AbstractGenericTest {
 
 	@Test
 	public void testJsonBooleanArrayRoundTrip() {
-		boolean[] booleans = new boolean[] { true, false, true, true, false };
+		boolean[] booleans = { true, false, true, true, false };
 		ss.putBooleans("foo", booleans);
 		SaveState restored = jsonRoundTrip(ss);
 		assertArrayEquals(booleans, restored.getBooleans("foo", null));
@@ -622,7 +622,7 @@ public class SaveStateTest extends AbstractGenericTest {
 		ss.putBoolean("Retired", true);
 		ss.putInt("Age", 65);
 		ss.putEnum("Endian", Endian.BIG);
-		int[] ints = new int[] { 90, 95, 82, 93 };
+		int[] ints = { 90, 95, 82, 93 };
 		ss.putInts("grades", ints);
 
 		File file = createTempFile("SaveStateTest", "json");

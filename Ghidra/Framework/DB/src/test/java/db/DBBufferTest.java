@@ -67,7 +67,7 @@ public class DBBufferTest extends AbstractGenericTest {
 
 		int bufId = buf.getId();
 
-		byte[] bytes = new byte[] { 1, 2, 3, 4, 5 };
+		byte[] bytes = { 1, 2, 3, 4, 5 };
 		byte[] data = new byte[bytes.length];
 
 		buf.get(0, data);

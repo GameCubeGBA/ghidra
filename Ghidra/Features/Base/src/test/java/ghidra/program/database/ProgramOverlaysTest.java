@@ -35,8 +35,8 @@ public class ProgramOverlaysTest extends AbstractGenericTest {
 	private Memory memory;
 	private AddressSpace defaultSpace;
 
-	byte[] fillB = new byte[] { 6, 7, 8, 9 };
-	byte[] fillA = new byte[] { 1, 2, 3, 4 };
+	byte[] fillB = { 6, 7, 8, 9 };
+	byte[] fillA = { 1, 2, 3, 4 };
 
 	public ProgramOverlaysTest() {
 		super();

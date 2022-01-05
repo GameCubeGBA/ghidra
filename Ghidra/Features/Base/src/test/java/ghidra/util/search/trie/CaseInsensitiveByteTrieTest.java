@@ -97,7 +97,7 @@ public class CaseInsensitiveByteTrieTest {
 
 	@Test
 	public void testIterator() throws Exception {
-		String[] values = new String[] { "baAa", "AabA", "aBaA", "aAab", "AaAA", "Bbaa", "aBBa" };
+		String[] values = { "baAa", "AabA", "aBaA", "aAab", "AaAA", "Bbaa", "aBBa" };
 		TreeSet<String> expected = new TreeSet<String>(new CaseInsensitiveStringComparator());
 		for (String value : values) {
 			add(trie, value, true);
@@ -119,7 +119,7 @@ public class CaseInsensitiveByteTrieTest {
 	@Test
 	public void testIterator2() throws Exception {
 		String[] values =
-			new String[] { "baaAA", "aAaBa", "ABaa", "AaaaaAb", "", "aaAA", "BBAA", "AbbA", "a" };
+                { "baaAA", "aAaBa", "ABaa", "AaaaaAb", "", "aaAA", "BBAA", "AbbA", "a" };
 		TreeSet<String> expected = new TreeSet<String>(new CaseInsensitiveStringComparator());
 		for (String value : values) {
 			add(trie, value, true);
@@ -140,7 +140,7 @@ public class CaseInsensitiveByteTrieTest {
 
 	@Test
 	public void testIterator3() throws Exception {
-		String[] values = new String[] { "baAa", "AabA", "aBaA", "aAab", "AaAA", "Bbaa", "aBBa" };
+		String[] values = { "baAa", "AabA", "aBaA", "aAab", "AaAA", "Bbaa", "aBBa" };
 		TreeSet<String> expected = new TreeSet<String>(new CaseInsensitiveStringComparator());
 		for (String value : values) {
 			add(trie, value, true);
@@ -162,7 +162,7 @@ public class CaseInsensitiveByteTrieTest {
 	@Test
 	public void testIterator4() throws Exception {
 		String[] values =
-			new String[] { "baaAA", "aAaBa", "ABaa", "AaaaaAb", "", "aaAA", "BBAA", "AbbA", "a" };
+                { "baaAA", "aAaBa", "ABaa", "AaaaaAb", "", "aaAA", "BBAA", "AbbA", "a" };
 		TreeSet<String> expected = new TreeSet<String>(new CaseInsensitiveStringComparator());
 		for (String value : values) {
 			add(trie, value, true);

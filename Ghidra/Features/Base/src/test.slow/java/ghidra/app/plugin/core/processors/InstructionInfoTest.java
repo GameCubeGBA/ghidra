@@ -35,7 +35,7 @@ public class InstructionInfoTest extends AbstractGhidraHeadedIntegrationTest {
 
 	private static final String startAddressString = "1000000";
 	private static final byte[] BYTES =
-		new byte[] { (byte) 0xff, 0x15, 0x10, 0x32, 0x00, 0x01, (byte) 0xff, 0x75, 0x14 };
+            { (byte) 0xff, 0x15, 0x10, 0x32, 0x00, 0x01, (byte) 0xff, 0x75, 0x14 };
 	private TestEnv env;
 	private PluginTool tool;
 	private ProgramBuilder builder;

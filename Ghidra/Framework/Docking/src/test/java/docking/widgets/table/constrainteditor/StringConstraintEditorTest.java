@@ -35,7 +35,7 @@ public class StringConstraintEditorTest extends AbstractDockingTest {
 	private StringStartsWithColumnConstraint constraint;
 	private ColumnConstraintEditor<String> editor;
 	private DropDownTextField<String> textField;
-	String[] columnData = new String[] { "foo", "foot", "football", "base", "basement" };
+	String[] columnData = { "foo", "foot", "football", "base", "basement" };
 
 	@SuppressWarnings("unchecked")
 	@Before

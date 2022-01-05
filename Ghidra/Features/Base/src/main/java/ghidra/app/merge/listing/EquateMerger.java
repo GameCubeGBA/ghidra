@@ -444,7 +444,7 @@ class EquateMerger extends AbstractListingMerger {
 	 * @return the array of column strings.
 	 */
 	private String[] getEquateInfo(int version, Equate equate) {
-		String[] info = new String[] { "", "", "" };
+		String[] info = { "", "", "" };
 		if (version == LATEST) {
 			info[0] = getChoice(LATEST_TITLE, equate);
 		}

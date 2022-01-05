@@ -38,10 +38,10 @@ public class ResultsState {
 
 	private static boolean DEBUG = true;
 
-	private static final long[] VALUE_MASK = new long[] { 0x0, 0x0ff, 0x0ffff, 0x0ffffff,
+	private static final long[] VALUE_MASK = { 0x0, 0x0ff, 0x0ffff, 0x0ffffff,
 		0x0ffffffffL, 0x0ffffffffffL, 0x0ffffffffffffL, 0x0ffffffffffffffL, -1 };
 
-	private static final long[] SIGN_BIT = new long[] { 0x0, 0x080, 0x08000, 0x0800000,
+	private static final long[] SIGN_BIT = { 0x0, 0x080, 0x08000, 0x0800000,
 		0x080000000L, 0x08000000000L, 0x0800000000000L, 0x080000000000000L };
 
 	private static final Iterator<ContextState> emptyContextStateIterator =
@@ -2359,11 +2359,11 @@ public class ResultsState {
 					return opValues[0];
 				}
 				Varnode[] simplifiedInputValues =
-					new Varnode[] {
-						opValues[0],
-						new Varnode(addrFactory.getConstantAddress(newOffset &
-							VALUE_MASK[op.getSize()]), op.getSize())	// new constant
-					};
+                        {
+                            opValues[0],
+                            new Varnode(addrFactory.getConstantAddress(newOffset &
+                                VALUE_MASK[op.getSize()]), op.getSize())	// new constant
+                        };
 				return new VarnodeOperation(pcodeOp, simplifiedInputValues);
 			}
 			else if (opValues[0] instanceof VarnodeOperation) {
@@ -2371,7 +2371,7 @@ public class ResultsState {
 					pushDownIntAddOffset((VarnodeOperation) opValues[0], offset, addrFactory,
 						monitor);
 				if (newOpValue0 != null) {
-					Varnode[] simplifiedInputValues = new Varnode[] { newOpValue0, opValues[1] };
+					Varnode[] simplifiedInputValues = { newOpValue0, opValues[1] };
 					return new VarnodeOperation(pcodeOp, simplifiedInputValues);
 				}
 			}

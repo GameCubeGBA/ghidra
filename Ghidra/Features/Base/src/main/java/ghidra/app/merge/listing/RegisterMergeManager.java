@@ -397,7 +397,7 @@ class RegisterMergeManager implements ListingMergeConstants {
 	}
 
 	private String[] getRegisterInfo(int version, BigInteger value) {
-		String[] info = new String[] { "", "" };
+		String[] info = { "", "" };
 		if (version == MergeConstants.LATEST) {
 			info[0] = " '" + MergeConstants.LATEST_TITLE + "' version";
 		}

@@ -39,21 +39,21 @@ public abstract class AbstractScalarOperandHover extends AbstractConfigurableHov
 	private static final FormatSettingsDefinition FORMAT = FormatSettingsDefinition.DEF;
 
 	//@formatter:off
-	private static final Settings[] INTEGER_SETTINGS = new Settings[] { 
+	private static final Settings[] INTEGER_SETTINGS = {
 		getSettingsForRadix("hex"),
 		getSettingsForRadix("decimal") 
 	};
 
 	private static final AbstractIntegerDataType[] INTEGER_DISPLAY_TYPES =
-		new AbstractIntegerDataType[] { 
-			new ByteDataType(),
-			new WordDataType(), 
-			new SignedWordDataType(),
-			new DWordDataType(), 
-			new SignedDWordDataType(),
-			new QWordDataType(), 
-			new SignedQWordDataType()
-		};
+            {
+                new ByteDataType(),
+                new WordDataType(),
+                new SignedWordDataType(),
+                new DWordDataType(),
+                new SignedDWordDataType(),
+                new QWordDataType(),
+                new SignedQWordDataType()
+            };
 	//@formatter:on
 
 	private static Settings getSettingsForRadix(String radix) {

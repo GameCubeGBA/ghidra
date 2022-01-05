@@ -28,7 +28,7 @@ import ghidra.util.task.TaskMonitor;
 
 public class ISO9660FileSystemFactory
 		implements GFileSystemFactoryByteProvider<ISO9660FileSystem>, GFileSystemProbeByteProvider {
-	private static final long[] SIGNATURE_PROBE_OFFSETS = new long[] { 0x8000L, 0x8800L, 0x9000L };
+	private static final long[] SIGNATURE_PROBE_OFFSETS = { 0x8000L, 0x8800L, 0x9000L };
 
 	@Override
 	public boolean probe(ByteProvider byteProvider, FileSystemService fsService,

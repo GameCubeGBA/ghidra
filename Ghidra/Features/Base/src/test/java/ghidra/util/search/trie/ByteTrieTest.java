@@ -81,7 +81,7 @@ public class ByteTrieTest {
 
 	@Test
     public void testIterator() throws Exception {
-		String[] values = new String[] { "1000", "0010", "0100", "0001", "0000", "1100", "0110" };
+		String[] values = { "1000", "0010", "0100", "0001", "0000", "1100", "0110" };
 		TreeSet<String> expected = new TreeSet<String>();
 		for (String value : values) {
 			add(trie, value, true);
@@ -103,7 +103,7 @@ public class ByteTrieTest {
 	@Test
     public void testIterator2() throws Exception {
 		String[] values =
-			new String[] { "10000", "00010", "0100", "0000001", "", "0000", "1100", "0110", "0" };
+                { "10000", "00010", "0100", "0000001", "", "0000", "1100", "0110", "0" };
 		TreeSet<String> expected = new TreeSet<String>();
 		for (String value : values) {
 			add(trie, value, true);
@@ -124,7 +124,7 @@ public class ByteTrieTest {
 
 	@Test
     public void testIterator3() throws Exception {
-		String[] values = new String[] { "1000", "0010", "0100", "0001", "0000", "1100", "0110" };
+		String[] values = { "1000", "0010", "0100", "0001", "0000", "1100", "0110" };
 		TreeSet<String> expected = new TreeSet<String>();
 		for (String value : values) {
 			add(trie, value, true);
@@ -146,7 +146,7 @@ public class ByteTrieTest {
 	@Test
     public void testIterator4() throws Exception {
 		String[] values =
-			new String[] { "10000", "00010", "0100", "0000001", "", "0000", "1100", "0110", "0" };
+                { "10000", "00010", "0100", "0000001", "", "0000", "1100", "0110", "0" };
 		TreeSet<String> expected = new TreeSet<String>();
 		for (String value : values) {
 			add(trie, value, true);

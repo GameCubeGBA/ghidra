@@ -105,7 +105,7 @@ class ProgramTextOptions {
 	}
 
 	List<Option> getOptions() {//TODO add right into list
-		Option[] options = new Option[] {
+		Option[] options = {
 			new Option(OPTION_WIDTH, OPTION_WIDTH_LABEL, Integer.valueOf(labelWidth)),
 			new Option(OPTION_WIDTH, OPTION_WIDTH_ADDR, Integer.valueOf(addrWidth)),
 			new Option(OPTION_WIDTH, OPTION_WIDTH_BYTES, Integer.valueOf(bytesWidth)),

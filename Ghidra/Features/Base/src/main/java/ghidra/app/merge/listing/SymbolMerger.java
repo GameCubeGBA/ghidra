@@ -2795,7 +2795,7 @@ class SymbolMerger extends AbstractListingMerger {
 			return new String[] { "Option", "Symbol", "Scope", "Address", "Type", "Primary",
 				"Source" };
 		}
-		String[] info = new String[] { "", "", "", "", "", "", "" };
+		String[] info = { "", "", "", "", "", "", "" };
 		String version = "";
 		if (pgm == originalPgm) {
 			version = ORIGINAL_TITLE;
@@ -2881,7 +2881,7 @@ class SymbolMerger extends AbstractListingMerger {
 		if (pgm == null) { // Header info
 			return new String[] { "Option", "Symbol", "Scope", "Address", "Type", "Source" };
 		}
-		String[] info = new String[] { "", "", "", "", "", "" };
+		String[] info = { "", "", "", "", "", "" };
 		String version = "";
 		if (pgm == originalPgm) {
 			version = ORIGINAL_TITLE;

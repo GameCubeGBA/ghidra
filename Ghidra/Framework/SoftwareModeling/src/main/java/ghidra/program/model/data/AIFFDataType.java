@@ -32,11 +32,11 @@ public class AIFFDataType extends BuiltIn implements Dynamic {
 
 	//first four bytes must = FORM then skip four then next four must = AIFF
 	public static byte[] MAGIC =
-		new byte[] { (byte) 'F', (byte) 'O', (byte) 'R', (byte) 'M', (byte) 0x00, (byte) 0x00,
-			(byte) 0x00, (byte) 0x00, (byte) 'A', (byte) 'I', (byte) 'F', (byte) 'F' };
+            { (byte) 'F', (byte) 'O', (byte) 'R', (byte) 'M', (byte) 0x00, (byte) 0x00,
+                (byte) 0x00, (byte) 0x00, (byte) 'A', (byte) 'I', (byte) 'F', (byte) 'F' };
 	public static byte[] MAGIC_MASK =
-		new byte[] { (byte) 0xff, (byte) 0xff, (byte) 0xff, (byte) 0xff, (byte) 0x00, (byte) 0x00,
-			(byte) 0x00, (byte) 0x00, (byte) 0xff, (byte) 0xff, (byte) 0xff, (byte) 0xff };
+            { (byte) 0xff, (byte) 0xff, (byte) 0xff, (byte) 0xff, (byte) 0x00, (byte) 0x00,
+                (byte) 0x00, (byte) 0x00, (byte) 0xff, (byte) 0xff, (byte) 0xff, (byte) 0xff };
 
 	public AIFFDataType() {
 		this(null);

@@ -1555,7 +1555,7 @@ public class ExternalFunctionMerger extends AbstractFunctionMerger implements Li
 					ExternalLocation resultExternalLocation =
 						addExternal(myExternalLocation, monitor);
 
-					ExternalLocation[] externalLocations = new ExternalLocation[] {
+					ExternalLocation[] externalLocations = {
 						resultExternalLocation, latestExternalLocation, myExternalLocation, null };
 					adjustIDMapsForAdd(externalLocations, resultExternalLocation, MY);
 				}
@@ -1678,7 +1678,7 @@ public class ExternalFunctionMerger extends AbstractFunctionMerger implements Li
 				externalManagers[RESULT].getExternalLocation(resultSymbol);
 
 			ExternalLocation originalLocation = null; // no original location. This is an add.
-			ExternalLocation[] locations = new ExternalLocation[] { resultExternalLocation,
+			ExternalLocation[] locations = { resultExternalLocation,
 				latestExternalLocation, myExternalLocation, originalLocation };
 			updateAddressTranslators(locations);
 
@@ -4181,7 +4181,7 @@ public class ExternalFunctionMerger extends AbstractFunctionMerger implements Li
 				? externalLocations[ORIGINAL].getExternalSpaceAddress()
 				: null;
 
-		String[] info = new String[] { "", "", "", "", "", "", "" };
+		String[] info = { "", "", "", "", "", "", "" };
 
 		String versionName = RESULT_TITLE;
 		String externalName = "";

@@ -94,7 +94,7 @@ class BufferNode {
 	 * The <code>snapshotTaken</code> flags are used by the RecoveryMgr to track if a 
 	 * modified node has been written to the recovery file.
 	 */
-	boolean[] snapshotTaken = new boolean[] {false, false};
+	boolean[] snapshotTaken = {false, false};
 	
 	/**
 	 * Construct a buffer node.

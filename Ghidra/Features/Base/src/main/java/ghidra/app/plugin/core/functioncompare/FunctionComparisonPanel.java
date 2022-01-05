@@ -173,7 +173,7 @@ public class FunctionComparisonPanel extends JPanel implements ChangeListener {
 	 * @return an array containing the actions
 	 */
 	public DockingAction[] getActions() {
-		DockingAction[] actions = new DockingAction[] { toggleScrollLockAction };
+		DockingAction[] actions = { toggleScrollLockAction };
 		return actions;
 	}
 

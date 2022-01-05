@@ -585,7 +585,7 @@ public class DefaultGraphDisplay implements GraphDisplay {
 			HelpLocation help = new HelpLocation("GraphServices", "Graph Type Display Options");
 			graphDisplayOptions.registerOptions(transientOptions, help);
 			transientOptions.addOptionsChangeListener(graphDisplayOptions);
-			Options[] optionsArray = new Options[] { transientOptions };
+			Options[] optionsArray = { transientOptions };
 			String dialogTitle = "Graph Instance Settings (Not Saved in Tool Options)";
 			OptionsDialog dialog = new OptionsDialog(dialogTitle, "Graph", optionsArray, null);
 			// we have one less level for these transient tool options, so no need to prepend "graph."

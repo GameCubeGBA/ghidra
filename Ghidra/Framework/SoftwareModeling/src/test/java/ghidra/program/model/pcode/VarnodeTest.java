@@ -33,7 +33,7 @@ public class VarnodeTest extends AbstractGenericTest {
 
 	// @formatter:off
 	
-	private static Varnode[] STACK_NODES = new Varnode[] {
+	private static Varnode[] STACK_NODES = {
 		stackNode(0, 4),
 		stackNode(0, 4),
 		stackNode(0, 4),
@@ -45,7 +45,7 @@ public class VarnodeTest extends AbstractGenericTest {
 		stackNode(4, 4)
 	};
 	
-	private static Varnode[] INTERSECTING_STACK_NODES = new Varnode[] {
+	private static Varnode[] INTERSECTING_STACK_NODES = {
 		stackNode(0, 4),
 		stackNode(-2, 4),
 		stackNode(2, 4),
@@ -57,7 +57,7 @@ public class VarnodeTest extends AbstractGenericTest {
 		stackNode(6, 4)
 	};
 	
-	private static Varnode[] NON_INTERSECTING_STACK_NODES = new Varnode[] {
+	private static Varnode[] NON_INTERSECTING_STACK_NODES = {
 		stackNode(-4, 4),
 		stackNode(4, 4),
 		stackNode(10, 4),
@@ -69,7 +69,7 @@ public class VarnodeTest extends AbstractGenericTest {
 		stackNode(8, 4)
 	};
 	
-	private static Varnode[] RAM_NODES = new Varnode[] { 
+	private static Varnode[] RAM_NODES = {
 		ramNode(0, 10), 
 		ramNode(0, 10),
 		ramNode(0, 10), 
@@ -90,7 +90,7 @@ public class VarnodeTest extends AbstractGenericTest {
 	};
 
 	// Intersecting cases
-	private static Varnode[] INTERSECTING_RAM_NODES = new Varnode[] { 
+	private static Varnode[] INTERSECTING_RAM_NODES = {
 		ramNode(-5L, 10), 
 		ramNode(5, 10),
 		ramNode(-5L, 20), 
@@ -111,7 +111,7 @@ public class VarnodeTest extends AbstractGenericTest {
 	};
 
 	// Non-Intersecting cases
-	private static Varnode[] NON_INTERSECTING_RAM_NODES = new Varnode[] { 
+	private static Varnode[] NON_INTERSECTING_RAM_NODES = {
 		ramNode(-20L, 10),
 		ramNode(-5L, 5), 
 		ramNode(Long.MAX_VALUE - 5, 10), 

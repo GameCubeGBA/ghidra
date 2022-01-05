@@ -188,7 +188,7 @@ class AddBlockDialog extends DialogComponentProvider implements ChangeListener {
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.setBorder(BorderFactory.createTitledBorder("Block Types"));
 
-		MemoryBlockType[] items = new MemoryBlockType[] { MemoryBlockType.DEFAULT,
+		MemoryBlockType[] items = { MemoryBlockType.DEFAULT,
 			MemoryBlockType.BIT_MAPPED, MemoryBlockType.BYTE_MAPPED };
 
 		comboBox = new GhidraComboBox<>(items);

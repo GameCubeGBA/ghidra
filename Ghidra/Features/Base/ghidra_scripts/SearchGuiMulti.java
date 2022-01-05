@@ -42,7 +42,7 @@ public class SearchGuiMulti extends SearchBaseExtended {
 
 	private int num_columns = 4;
 	private Object[] columnIdentifiers =
-		new Object[] { "Mnemonic", "Operand 1", "Operand 2", "Operand 3" };
+            { "Mnemonic", "Operand 1", "Operand 2", "Operand 3" };
 
 	@Override
 	public void run() {

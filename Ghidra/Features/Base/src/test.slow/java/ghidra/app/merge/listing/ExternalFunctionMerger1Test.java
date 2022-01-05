@@ -369,8 +369,8 @@ public class ExternalFunctionMerger1Test extends AbstractExternalMergerTest {
 
 	@Test
 	public void testExternalFunctionChangeVsRemoveConflict() throws Exception {
-		final String[] applesPath = new String[] { "user32.dll", "Class1", "apples" };
-		final String[] orangesPath = new String[] { "user32.dll", "NamespaceA", "oranges" };
+		final String[] applesPath = { "user32.dll", "Class1", "apples" };
+		final String[] orangesPath = { "user32.dll", "NamespaceA", "oranges" };
 
 		mtf.initialize("NotepadMergeListingTest", new OriginalProgramModifierListener() {
 
@@ -508,7 +508,7 @@ public class ExternalFunctionMerger1Test extends AbstractExternalMergerTest {
 
 	@Test
 	public void testExternalFunctionChangeParameterDetailsConflictPickLatest() throws Exception {
-		final String[] applesPath = new String[] { "user32.dll", "Class1", "apples" };
+		final String[] applesPath = { "user32.dll", "Class1", "apples" };
 
 		mtf.initialize("NotepadMergeListingTest", new OriginalProgramModifierListener() {
 
@@ -628,7 +628,7 @@ public class ExternalFunctionMerger1Test extends AbstractExternalMergerTest {
 
 	@Test
 	public void testExternalFunctionChangeParameterDetailsConflictPickMy() throws Exception {
-		final String[] applesPath = new String[] { "user32.dll", "Class1", "apples" };
+		final String[] applesPath = { "user32.dll", "Class1", "apples" };
 
 		mtf.initialize("NotepadMergeListingTest", new OriginalProgramModifierListener() {
 
@@ -748,7 +748,7 @@ public class ExternalFunctionMerger1Test extends AbstractExternalMergerTest {
 
 	@Test
 	public void testExternalFunctionAddDiffParameterConflictPickLatest() throws Exception {
-		final String[] orangesPath = new String[] { "user32.dll", "NamespaceA", "oranges" };
+		final String[] orangesPath = { "user32.dll", "NamespaceA", "oranges" };
 
 		mtf.initialize("NotepadMergeListingTest", new OriginalProgramModifierListener() {
 
@@ -859,7 +859,7 @@ public class ExternalFunctionMerger1Test extends AbstractExternalMergerTest {
 
 	@Test
 	public void testExternalFunctionAddDiffParameterConflictPickMy() throws Exception {
-		final String[] orangesPath = new String[] { "user32.dll", "NamespaceA", "oranges" };
+		final String[] orangesPath = { "user32.dll", "NamespaceA", "oranges" };
 
 		mtf.initialize("NotepadMergeListingTest", new OriginalProgramModifierListener() {
 
@@ -970,7 +970,7 @@ public class ExternalFunctionMerger1Test extends AbstractExternalMergerTest {
 
 	@Test
 	public void testExternalFunctionAddDiffParameterDetailsConflictPickMy() throws Exception {
-		final String[] orangesPath = new String[] { "user32.dll", "NamespaceA", "oranges" };
+		final String[] orangesPath = { "user32.dll", "NamespaceA", "oranges" };
 
 		mtf.initialize("NotepadMergeListingTest", new OriginalProgramModifierListener() {
 
@@ -1081,7 +1081,7 @@ public class ExternalFunctionMerger1Test extends AbstractExternalMergerTest {
 
 	@Test
 	public void testExternalFunctionAddDiffRegParameterSigConflictPickLatest() throws Exception {
-		final String[] orangesPath = new String[] { "user32.dll", "NamespaceA", "oranges" };
+		final String[] orangesPath = { "user32.dll", "NamespaceA", "oranges" };
 
 		mtf.initialize("NotepadMergeListingTest", new OriginalProgramModifierListener() {
 
@@ -1201,7 +1201,7 @@ public class ExternalFunctionMerger1Test extends AbstractExternalMergerTest {
 
 	@Test
 	public void testExternalFunctionAddDiffRegParameterSigConflictPickMy() throws Exception {
-		final String[] orangesPath = new String[] { "user32.dll", "NamespaceA", "oranges" };
+		final String[] orangesPath = { "user32.dll", "NamespaceA", "oranges" };
 
 		mtf.initialize("NotepadMergeListingTest", new OriginalProgramModifierListener() {
 
@@ -1321,7 +1321,7 @@ public class ExternalFunctionMerger1Test extends AbstractExternalMergerTest {
 
 	@Test
 	public void testExternalFunctionChangeNonVsCustomStorageConflictPickLatest() throws Exception {
-		final String[] orangesPath = new String[] { "user32.dll", "NamespaceA", "oranges" };
+		final String[] orangesPath = { "user32.dll", "NamespaceA", "oranges" };
 
 		mtf.initialize("NotepadMergeListingTest", new OriginalProgramModifierListener() {
 
@@ -1440,7 +1440,7 @@ public class ExternalFunctionMerger1Test extends AbstractExternalMergerTest {
 
 	@Test
 	public void testExternalFunctionChangeNonVsCustomStorageConflictPickMy() throws Exception {
-		final String[] orangesPath = new String[] { "user32.dll", "NamespaceA", "oranges" };
+		final String[] orangesPath = { "user32.dll", "NamespaceA", "oranges" };
 
 		mtf.initialize("NotepadMergeListingTest", new OriginalProgramModifierListener() {
 
@@ -1557,7 +1557,7 @@ public class ExternalFunctionMerger1Test extends AbstractExternalMergerTest {
 
 	@Test
 	public void testExternalFunctionAddSameStackParamsNoConflict() throws Exception {
-		final String[] orangesPath = new String[] { "user32.dll", "NamespaceA", "oranges" };
+		final String[] orangesPath = { "user32.dll", "NamespaceA", "oranges" };
 
 		mtf.initialize("NotepadMergeListingTest", new OriginalProgramModifierListener() {
 
@@ -1672,7 +1672,7 @@ public class ExternalFunctionMerger1Test extends AbstractExternalMergerTest {
 
 	@Test
 	public void testExternalFunctionAddNonVsCustomStoragePickLatest() throws Exception {
-		final String[] orangesPath = new String[] { "user32.dll", "NamespaceA", "oranges" };
+		final String[] orangesPath = { "user32.dll", "NamespaceA", "oranges" };
 
 		mtf.initialize("NotepadMergeListingTest", new OriginalProgramModifierListener() {
 
@@ -1790,7 +1790,7 @@ public class ExternalFunctionMerger1Test extends AbstractExternalMergerTest {
 
 	@Test
 	public void testExternalFunctionAddNonVsCustomStoragePickMy() throws Exception {
-		final String[] orangesPath = new String[] { "user32.dll", "NamespaceA", "oranges" };
+		final String[] orangesPath = { "user32.dll", "NamespaceA", "oranges" };
 
 		mtf.initialize("NotepadMergeListingTest", new OriginalProgramModifierListener() {
 
@@ -1911,7 +1911,7 @@ public class ExternalFunctionMerger1Test extends AbstractExternalMergerTest {
 
 	@Test
 	public void testExternalFunctionAddNonVsCustomStorage() throws Exception {
-		final String[] orangesPath = new String[] { "user32.dll", "NamespaceA", "oranges" };
+		final String[] orangesPath = { "user32.dll", "NamespaceA", "oranges" };
 
 		mtf.initialize("NotepadMergeListingTest_X86", new OriginalProgramModifierListener() {
 
@@ -2035,7 +2035,7 @@ public class ExternalFunctionMerger1Test extends AbstractExternalMergerTest {
 
 	@Test
 	public void testExternalFunctionAddSameCustomParamsNoConflict() throws Exception {
-		final String[] orangesPath = new String[] { "user32.dll", "NamespaceA", "oranges" };
+		final String[] orangesPath = { "user32.dll", "NamespaceA", "oranges" };
 
 		mtf.initialize("NotepadMergeListingTest", new OriginalProgramModifierListener() {
 
@@ -2154,7 +2154,7 @@ public class ExternalFunctionMerger1Test extends AbstractExternalMergerTest {
 
 	@Test
 	public void testExternalFunctionDynamicVsCustomStorageChangePickLatest() throws Exception {
-		final String[] orangesPath = new String[] { "user32.dll", "NamespaceA", "oranges" };
+		final String[] orangesPath = { "user32.dll", "NamespaceA", "oranges" };
 
 		mtf.initialize("NotepadMergeListingTest_X86", new OriginalProgramModifierListener() {
 
@@ -2260,7 +2260,7 @@ public class ExternalFunctionMerger1Test extends AbstractExternalMergerTest {
 
 	@Test
 	public void testExternalFunctionDynamicVsCustomStorageChangePickMy() throws Exception {
-		final String[] orangesPath = new String[] { "user32.dll", "NamespaceA", "oranges" };
+		final String[] orangesPath = { "user32.dll", "NamespaceA", "oranges" };
 
 		mtf.initialize("NotepadMergeListingTest_X86", new OriginalProgramModifierListener() {
 

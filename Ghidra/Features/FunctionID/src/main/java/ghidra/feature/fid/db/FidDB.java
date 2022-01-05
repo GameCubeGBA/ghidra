@@ -37,7 +37,7 @@ public class FidDB implements Closeable {
 	private static final String FID_CONTENT_TYPE = "Function ID Database";
 
 	private static final String[] OLD_V1_FID_TABLES =
-		new String[] { "Relations Table", "Functions Table", "Strings Table", "Libraries Table" };
+            { "Relations Table", "Functions Table", "Strings Table", "Libraries Table" };
 
 	private final FidFile fidFile;
 	private final DBHandle handle;

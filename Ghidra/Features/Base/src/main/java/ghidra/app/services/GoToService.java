@@ -36,7 +36,7 @@ public interface GoToService {
 	 * Characters that are allowed in words that the GoToService can use. These
 	 * typically represent library name delimiters.
 	 */
-	public static final char[] VALID_GOTO_CHARS = new char[] { '.', ':', '*' };
+	public static final char[] VALID_GOTO_CHARS = { '.', ':', '*' };
 
 	/**
 	 * Generates a GoTo event and handles any history state that needs to be saved.  This method

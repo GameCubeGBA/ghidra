@@ -39,7 +39,7 @@ public class CreateInternalStructureAction extends CompositeEditorTableAction {
 	private final static String GROUP_NAME = COMPONENT_ACTION_GROUP;
 	private final static String DESCRIPTION =
 		"Create a new structure from the selected components and replace them with it.";
-	private static String[] POPUP_PATH = new String[] { ACTION_NAME };
+	private static String[] POPUP_PATH = { ACTION_NAME };
 
 	public CreateInternalStructureAction(StructureEditorProvider provider) {
 		super(provider, EDIT_ACTION_PREFIX + ACTION_NAME, GROUP_NAME, POPUP_PATH, null, ICON);

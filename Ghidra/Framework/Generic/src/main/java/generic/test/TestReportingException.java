@@ -33,7 +33,7 @@ import utilities.util.reflection.ReflectionUtilities;
 public class TestReportingException extends RuntimeException {
 
 	private static final String[] GENERAL_USELESS_STACK_ELEMET_PATTERNS =
-		new String[] { "java.awt.WaitDispatchSupport" };
+            { "java.awt.WaitDispatchSupport" };
 
 	//@formatter:off
 	private static final String[] SWING_STACK_ELEMENT_PATTERNS = 

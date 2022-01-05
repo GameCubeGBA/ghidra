@@ -52,7 +52,7 @@ public class SharedRangeMapDB {
 	static final int MAP_VALUE_COL = 0;       // is indexed
 	static final int MAP_RANGE_KEY_COL = 1;   // is indexed
 
-	private static final int[] MAP_INDEXED_COLS = new int[] { MAP_VALUE_COL, MAP_RANGE_KEY_COL };
+	private static final int[] MAP_INDEXED_COLS = { MAP_VALUE_COL, MAP_RANGE_KEY_COL };
 
 	private static Schema createRangesSchema() {
 		return new Schema(0, "From", new Field[] { LongField.INSTANCE }, new String[] { "To" });

@@ -31,7 +31,7 @@ import ghidra.util.UniversalID;
 public class EnumDataType extends GenericDataType implements Enum {
 
 	private static final SettingsDefinition[] ENUM_SETTINGS_DEFINITIONS =
-		new SettingsDefinition[] { MutabilitySettingsDefinition.DEF };
+            { MutabilitySettingsDefinition.DEF };
 
 	private Map<String, Long> nameMap; // name to value
 	private TreeMap<Long, List<String>> valueMap; // value to names

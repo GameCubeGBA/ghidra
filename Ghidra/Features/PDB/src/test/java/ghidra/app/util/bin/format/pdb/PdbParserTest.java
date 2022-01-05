@@ -50,7 +50,7 @@ public class PdbParserTest extends AbstractGhidraHeadlessIntegrationTest {
 	private String pdbFilename, pdbXmlFilename;
 
 	TestFunction[] programFunctions =
-		new TestFunction[] { new TestFunction("function1", "0x110", "0x35") };
+            { new TestFunction("function1", "0x110", "0x35") };
 
 	@Before
 	public void setUp() throws Exception {

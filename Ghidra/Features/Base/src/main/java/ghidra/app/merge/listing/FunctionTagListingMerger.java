@@ -446,7 +446,7 @@ public class FunctionTagListingMerger extends AbstractListingMerger {
 	 * @return
 	 */
 	private String[] getFunctionTagInfo(int version, String tag) {
-		String[] info = new String[] { "Keep", "", tag };
+		String[] info = { "Keep", "", tag };
 
 		if (version == LATEST) {
 			info[1] = LATEST_TITLE;

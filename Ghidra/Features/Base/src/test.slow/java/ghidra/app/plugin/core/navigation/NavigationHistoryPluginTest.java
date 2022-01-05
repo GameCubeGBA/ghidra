@@ -167,7 +167,7 @@ public class NavigationHistoryPluginTest extends AbstractGhidraHeadedIntegration
 			(VariableOffset) null, getAddr(0x010041a1), "LAB_010041a1", 0, 0, 0);
 		goToService.goTo(opLoc2);
 
-		ProgramLocation[] locations = new ProgramLocation[] { loc, xrefLoc, opLoc, opLoc2 };
+		ProgramLocation[] locations = { loc, xrefLoc, opLoc, opLoc2 };
 
 		assertTrue(plugin.hasPrevious(navigatable));
 		assertEquals(opLoc2, cb.getCurrentLocation());
@@ -335,7 +335,7 @@ public class NavigationHistoryPluginTest extends AbstractGhidraHeadedIntegration
 			(int[]) null, getAddr(0x010041a1), "LAB_010041a1", 0, 0, 0);
 		goToService.goTo(opLoc2);
 
-		ProgramLocation[] locations = new ProgramLocation[] { initialLoc, loc, xrefLoc, opLoc };
+		ProgramLocation[] locations = { initialLoc, loc, xrefLoc, opLoc };
 
 		SaveState ss = new SaveState("test");
 		plugin.writeDataState(ss);

@@ -57,7 +57,7 @@ public class FunctionsTable {
 		});
 	// @formatter:on
 
-	static int[] INDEXED_COLUMNS = new int[] { FULL_HASH_COL, NAME_ID_COL };
+	static int[] INDEXED_COLUMNS = { FULL_HASH_COL, NAME_ID_COL };
 
 	Table table;
 	FidDB fidDb;

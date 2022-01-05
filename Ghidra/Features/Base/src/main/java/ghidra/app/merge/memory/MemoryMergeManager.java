@@ -39,7 +39,7 @@ import ghidra.util.task.TaskMonitor;
  */
 public class MemoryMergeManager implements MergeResolver {
 
-	private static String[] MEMORY_PHASE = new String[] { "Memory" };
+	private static String[] MEMORY_PHASE = { "Memory" };
 	private static final int RESULT = MergeConstants.RESULT;
 	private static final int ORIGINAL = MergeConstants.ORIGINAL;
 	private static final int LATEST = MergeConstants.LATEST;

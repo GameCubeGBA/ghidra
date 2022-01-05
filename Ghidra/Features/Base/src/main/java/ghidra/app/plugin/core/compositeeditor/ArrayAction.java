@@ -36,7 +36,7 @@ public class ArrayAction extends CompositeEditorTableAction {
 	private final static String GROUP_NAME = COMPONENT_ACTION_GROUP;
 	private final static String DESCRIPTION = "Create an array";
 	private final static KeyStroke KEY_STROKE = KeyStroke.getKeyStroke(KeyEvent.VK_OPEN_BRACKET, 0);
-	private static String[] POPUP_PATH = new String[] { ACTION_NAME };
+	private static String[] POPUP_PATH = { ACTION_NAME };
 
 	public ArrayAction(CompositeEditorProvider provider) {
 		super(provider, EDIT_ACTION_PREFIX + ACTION_NAME, GROUP_NAME, POPUP_PATH, null, ICON);

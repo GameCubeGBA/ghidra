@@ -46,7 +46,7 @@ public class MultiByteCharMatcherTest extends AbstractGenericTest {
 		// Size:   2
 		//
 
-		byte[] byteStream = new byte[] {
+		byte[] byteStream = {
 					0, 'a',
 					0, 'b',
 					0, 'c',
@@ -74,7 +74,7 @@ public class MultiByteCharMatcherTest extends AbstractGenericTest {
 		// Size:   2
 		//
 
-		byte[] byteStream = new byte[] {
+		byte[] byteStream = {
 					0,
 					0, 'a',
 					0, 'b',
@@ -104,7 +104,7 @@ public class MultiByteCharMatcherTest extends AbstractGenericTest {
 		// Size:   2
 		//
 
-		byte[] byteStream = new byte[] {
+		byte[] byteStream = {
 				'a', 0,
 				'b', 0,
 				'c', 0,
@@ -132,7 +132,7 @@ public class MultiByteCharMatcherTest extends AbstractGenericTest {
 		// Size:   2
 		//
 
-		byte[] byteStream = new byte[] {
+		byte[] byteStream = {
 				0,
 				'a', 0,
 				'b', 0,
@@ -161,7 +161,7 @@ public class MultiByteCharMatcherTest extends AbstractGenericTest {
 		// Size:   4
 		//
 
-		byte[] byteStream = new byte[] {
+		byte[] byteStream = {
 				0, 0, 0, 'a', 		// string starts at offset 0; 4 bytes; big endian
 				0, 0, 0, 'b',
 				0, 0, 0, 'c',
@@ -199,7 +199,7 @@ public class MultiByteCharMatcherTest extends AbstractGenericTest {
 		// Offset: 1
 		// Size:   4
 		//
-		byte[] byteStream = new byte[] {
+		byte[] byteStream = {
 				0,   			// padding to make string start on alignment/offset of 1
 				0, 0, 0, 'a',   // string starts at offset 1; 4 bytes; big endian
 				0, 0, 0, 'b',
@@ -237,7 +237,7 @@ public class MultiByteCharMatcherTest extends AbstractGenericTest {
 		// Offset: 2
 		// Size:   4
 		//
-		byte[] byteStream = new byte[] {
+		byte[] byteStream = {
 				0, 0,  			// padding to make string start on alignment/offset of 2
 				0, 0, 0, 'a',   // string starts at offset 2; 4 bytes; big endian
 				0, 0, 0, 'b',
@@ -275,7 +275,7 @@ public class MultiByteCharMatcherTest extends AbstractGenericTest {
 		// Offset: 3
 		// Size:   4
 		//
-		byte[] byteStream = new byte[] {
+		byte[] byteStream = {
 				0, 0, 0,  		// padding to make string start on alignment/offset of 3
 				0, 0, 0, 'a',   // string starts at offset 3; 4 bytes; big endian
 				0, 0, 0, 'b',
@@ -313,7 +313,7 @@ public class MultiByteCharMatcherTest extends AbstractGenericTest {
 		// Offset: 0
 		// Size:   4
 		//
-		byte[] byteStream = new byte[] {
+		byte[] byteStream = {
 				'a', 0, 0, 0,   // string starts at offset 0; 4 bytes; big endian
 				'b', 0, 0, 0,
 				'c', 0, 0, 0,
@@ -350,7 +350,7 @@ public class MultiByteCharMatcherTest extends AbstractGenericTest {
 		// Offset: 1
 		// Size:   4
 		//
-		byte[] byteStream = new byte[] {
+		byte[] byteStream = {
 				0,				// padding to make string start on alignment/offset of 1
 				'a', 0, 0, 0,   // string starts at offset 1; 4 bytes; big endian
 				'b', 0, 0, 0,
@@ -389,7 +389,7 @@ public class MultiByteCharMatcherTest extends AbstractGenericTest {
 		// Offset: 2
 		// Size:   4
 		//
-		byte[] byteStream = new byte[] {
+		byte[] byteStream = {
 				0, 0,			// padding to make string start on alignment/offset of 2
 				'a', 0, 0, 0,   // string starts at offset 2; 4 bytes; big endian
 				'b', 0, 0, 0,
@@ -427,7 +427,7 @@ public class MultiByteCharMatcherTest extends AbstractGenericTest {
 		// Offset: 3
 		// Size:   4
 		//
-		byte[] byteStream = new byte[] {
+		byte[] byteStream = {
 				0,	 0, 0,		// padding to make string start on alignment/offset of 3
 				'a', 0, 0, 0,   // string starts at offset 3; 4 bytes; big endian
 				'b', 0, 0, 0,
@@ -459,7 +459,7 @@ public class MultiByteCharMatcherTest extends AbstractGenericTest {
 
 	@Test
 	public void testAlignmentUTF8() {
-		byte[] byteStream = new byte[] { 0, 'a', 'b', 'c', 'd', 'e', 'f', 0 };
+		byte[] byteStream = { 0, 'a', 'b', 'c', 'd', 'e', 'f', 0 };
 
 		List<Sequence> sequenceList = new ArrayList<>();
 		ByteStreamCharMatcher matcher;
@@ -480,7 +480,7 @@ public class MultiByteCharMatcherTest extends AbstractGenericTest {
 	@Test
 	public void testAlignmentUTF16() {
 		byte[] byteStream =
-			new byte[] { 0, 0, 0, 'a', 0, 'b', 0, 'c', 0, 'd', 0, 'e', 0, 'f', 0, 0, 0 };
+                { 0, 0, 0, 'a', 0, 'b', 0, 'c', 0, 'd', 0, 'e', 0, 'f', 0, 0, 0 };
 
 		List<Sequence> sequenceList = new ArrayList<>();
 		ByteStreamCharMatcher matcher;
@@ -501,7 +501,7 @@ public class MultiByteCharMatcherTest extends AbstractGenericTest {
 
 	@Test
 	public void testAlignmentUTF32() {
-		byte[] byteStream = new byte[] { 0, 0, 0, 0, 0, 0, 0, 'a', 0, 0, 0, 'b', 0, 0, 0, 'c', 0, 0,
+		byte[] byteStream = { 0, 0, 0, 0, 0, 0, 0, 'a', 0, 0, 0, 'b', 0, 0, 0, 'c', 0, 0,
 			0, 'd', 0, 0, 0, 'e', 0, 0, 0, 'f', 0, 0, 0, 0, 0, 0, 0 };
 
 		List<Sequence> sequenceList = new ArrayList<>();

@@ -31,7 +31,7 @@ public class HexNumbersAction extends CompositeEditorTableAction implements Togg
 	public final static String ACTION_NAME = "Show Numbers In Hex";
 	private final static String GROUP_NAME = DATA_ACTION_GROUP;
 	private final static String DESCRIPTION = "Show Numbers in Hexadecimal";
-	private static String[] PATH = new String[] { DESCRIPTION };
+	private static String[] PATH = { DESCRIPTION };
 	private boolean isSelected;
 
 	public HexNumbersAction(CompositeEditorProvider provider) {

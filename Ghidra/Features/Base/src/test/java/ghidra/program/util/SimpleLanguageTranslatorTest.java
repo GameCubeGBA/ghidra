@@ -299,7 +299,7 @@ public class SimpleLanguageTranslatorTest extends AbstractGenericTest {
 		assertTrue(newReg.isProcessorContext());
 
 		// field a grows from 1-bit to 4-bits, field c is truncated from 2-bit to 1-bit
-		byte[] expectedBytes = new byte[] { (byte) 0xf4, 0, 0, 0, (byte) 0x14, 0, 0, 0 };
+		byte[] expectedBytes = { (byte) 0xf4, 0, 0, 0, (byte) 0x14, 0, 0, 0 };
 		assertTrue("context value/mask translation failed",
 			Arrays.equals(expectedBytes, newValue.toBytes()));
 	}

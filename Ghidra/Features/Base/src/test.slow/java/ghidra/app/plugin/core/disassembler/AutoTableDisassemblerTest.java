@@ -463,10 +463,10 @@ public class AutoTableDisassemblerTest extends AbstractGhidraHeadedIntegrationTe
 	@Test
 	public void testOffsetFieldsEnabled() {
 
-		Component[] offsetButtons = new Component[] { disassemble, makeTable };
-		Component[] infoFields = new Component[] { autoLabel, offset };
+		Component[] offsetButtons = { disassemble, makeTable };
+		Component[] infoFields = { autoLabel, offset };
 		Component[] offsetPanelFields =
-			new Component[] { disassemble, makeTable, autoLabel, offset };
+                { disassemble, makeTable, autoLabel, offset };
 
 		checkOffsetFieldsEnabledState(offsetPanelFields, false);
 

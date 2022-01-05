@@ -23,7 +23,7 @@ public class MIPSR6_O3_EmulatorTest extends ProcessorEmulatorTestAdapter {
 	private static final String LANGUAGE_ID = "MIPS:BE:32:R6";
 	private static final String COMPILER_SPEC_ID = "default";
 
-	private static final String[] REG_DUMP_SET = new String[] {};
+	private static final String[] REG_DUMP_SET = {};
 
 	public MIPSR6_O3_EmulatorTest(String name) throws Exception {
 		super(name, LANGUAGE_ID, COMPILER_SPEC_ID, REG_DUMP_SET);

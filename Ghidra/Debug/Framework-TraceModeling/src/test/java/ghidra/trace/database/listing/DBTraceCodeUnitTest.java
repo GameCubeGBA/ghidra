@@ -67,7 +67,7 @@ import ghidra.util.prop.PropertyVisitor;
 
 public class DBTraceCodeUnitTest extends AbstractGhidraHeadlessIntegrationTest
 		implements Unfinished {
-	protected static final String[] EMPTY_STRING_ARRAY = new String[] {};
+	protected static final String[] EMPTY_STRING_ARRAY = {};
 
 	protected static class TestSaveable implements Saveable {
 		protected static Class<?>[] FIELDS = new Class<?>[] { IntField.class, StringField.class };

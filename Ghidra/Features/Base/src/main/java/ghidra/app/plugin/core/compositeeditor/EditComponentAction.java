@@ -30,8 +30,8 @@ public class EditComponentAction extends CompositeEditorTableAction {
 	public final static String ACTION_NAME = "Edit Component";
 	private final static String GROUP_NAME = BASIC_ACTION_GROUP;
 	private final static String DESCRIPTION = "Edit the selected component";
-	private static String[] POPUP_PATH = new String[] { ACTION_NAME };
-	private static String[] MENU_PATH = new String[] { ACTION_NAME };
+	private static String[] POPUP_PATH = { ACTION_NAME };
+	private static String[] MENU_PATH = { ACTION_NAME };
 	private DataTypeManagerService dtmService;
 
 	public EditComponentAction(CompositeEditorProvider provider) {

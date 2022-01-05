@@ -39,7 +39,7 @@ public class RepositoryChangeEvent implements Serializable {
 
 	private static final int LAST_TYPE = REP_OPEN_HANDLE_COUNT;
 
-	private static final String[] TYPES = new String[] { "Folder Created", "Item Created",
+	private static final String[] TYPES = { "Folder Created", "Item Created",
 		"Folder Deleted", "Folder Moved", "Folder Renamed", "Item Deleted", "Item Renamed",
 		"Item Moved", "Item Changed", "Open Handle Cnt" };
 

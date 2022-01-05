@@ -88,92 +88,92 @@ public abstract class AbstractFollowFlowTest extends AbstractGhidraHeadedIntegra
 	}
 
 	FlowType[] followAllFlows() {
-		FlowType[] flowsNotToFollow = new FlowType[] {};
+		FlowType[] flowsNotToFollow = {};
 		return flowsNotToFollow;
 	}
 
 	FlowType[] followOnlyComputedCalls() {
 		FlowType[] flowsNotToFollow =
-			new FlowType[] { RefType.CONDITIONAL_CALL, RefType.UNCONDITIONAL_CALL,
-				RefType.COMPUTED_JUMP, RefType.CONDITIONAL_JUMP, RefType.UNCONDITIONAL_JUMP,
-				RefType.INDIRECTION };
+                { RefType.CONDITIONAL_CALL, RefType.UNCONDITIONAL_CALL,
+                    RefType.COMPUTED_JUMP, RefType.CONDITIONAL_JUMP, RefType.UNCONDITIONAL_JUMP,
+                    RefType.INDIRECTION };
 		return flowsNotToFollow;
 	}
 
 	FlowType[] followOnlyConditionalCalls() {
 		FlowType[] flowsNotToFollow =
-			new FlowType[] { RefType.COMPUTED_CALL, RefType.UNCONDITIONAL_CALL,
-				RefType.COMPUTED_JUMP, RefType.CONDITIONAL_JUMP, RefType.UNCONDITIONAL_JUMP,
-				RefType.INDIRECTION };
+                { RefType.COMPUTED_CALL, RefType.UNCONDITIONAL_CALL,
+                    RefType.COMPUTED_JUMP, RefType.CONDITIONAL_JUMP, RefType.UNCONDITIONAL_JUMP,
+                    RefType.INDIRECTION };
 		return flowsNotToFollow;
 	}
 
 	FlowType[] followOnlyUnconditionalCalls() {
 		FlowType[] flowsNotToFollow =
-			new FlowType[] { RefType.COMPUTED_CALL, RefType.CONDITIONAL_CALL,
-				RefType.COMPUTED_JUMP, RefType.CONDITIONAL_JUMP, RefType.UNCONDITIONAL_JUMP,
-				RefType.INDIRECTION };
+                { RefType.COMPUTED_CALL, RefType.CONDITIONAL_CALL,
+                    RefType.COMPUTED_JUMP, RefType.CONDITIONAL_JUMP, RefType.UNCONDITIONAL_JUMP,
+                    RefType.INDIRECTION };
 		return flowsNotToFollow;
 	}
 
 	FlowType[] followOnlyComputedJumps() {
 		FlowType[] flowsNotToFollow =
-			new FlowType[] { RefType.COMPUTED_CALL, RefType.CONDITIONAL_CALL,
-				RefType.UNCONDITIONAL_CALL, RefType.CONDITIONAL_JUMP, RefType.UNCONDITIONAL_JUMP,
-				RefType.INDIRECTION };
+                { RefType.COMPUTED_CALL, RefType.CONDITIONAL_CALL,
+                    RefType.UNCONDITIONAL_CALL, RefType.CONDITIONAL_JUMP, RefType.UNCONDITIONAL_JUMP,
+                    RefType.INDIRECTION };
 		return flowsNotToFollow;
 	}
 
 	FlowType[] followOnlyConditionalJumps() {
 		FlowType[] flowsNotToFollow =
-			new FlowType[] { RefType.COMPUTED_CALL, RefType.CONDITIONAL_CALL,
-				RefType.UNCONDITIONAL_CALL, RefType.COMPUTED_JUMP, RefType.UNCONDITIONAL_JUMP,
-				RefType.INDIRECTION };
+                { RefType.COMPUTED_CALL, RefType.CONDITIONAL_CALL,
+                    RefType.UNCONDITIONAL_CALL, RefType.COMPUTED_JUMP, RefType.UNCONDITIONAL_JUMP,
+                    RefType.INDIRECTION };
 		return flowsNotToFollow;
 	}
 
 	FlowType[] followOnlyUnconditionalJumps() {
 		FlowType[] flowsNotToFollow =
-			new FlowType[] { RefType.COMPUTED_CALL, RefType.CONDITIONAL_CALL,
-				RefType.UNCONDITIONAL_CALL, RefType.COMPUTED_JUMP, RefType.CONDITIONAL_JUMP,
-				RefType.INDIRECTION };
+                { RefType.COMPUTED_CALL, RefType.CONDITIONAL_CALL,
+                    RefType.UNCONDITIONAL_CALL, RefType.COMPUTED_JUMP, RefType.CONDITIONAL_JUMP,
+                    RefType.INDIRECTION };
 		return flowsNotToFollow;
 	}
 
 	FlowType[] followOnlyPointers() {
 		FlowType[] flowsNotToFollow =
-			new FlowType[] { RefType.COMPUTED_CALL, RefType.CONDITIONAL_CALL,
-				RefType.UNCONDITIONAL_CALL, RefType.COMPUTED_JUMP, RefType.CONDITIONAL_JUMP,
-				RefType.UNCONDITIONAL_JUMP };
+                { RefType.COMPUTED_CALL, RefType.CONDITIONAL_CALL,
+                    RefType.UNCONDITIONAL_CALL, RefType.COMPUTED_JUMP, RefType.CONDITIONAL_JUMP,
+                    RefType.UNCONDITIONAL_JUMP };
 		return flowsNotToFollow;
 	}
 
 	FlowType[] followNoFlows() {
 		FlowType[] flowsNotToFollow =
-			new FlowType[] { RefType.COMPUTED_CALL, RefType.CONDITIONAL_CALL,
-				RefType.UNCONDITIONAL_CALL, RefType.COMPUTED_JUMP, RefType.CONDITIONAL_JUMP,
-				RefType.UNCONDITIONAL_JUMP, RefType.INDIRECTION };
+                { RefType.COMPUTED_CALL, RefType.CONDITIONAL_CALL,
+                    RefType.UNCONDITIONAL_CALL, RefType.COMPUTED_JUMP, RefType.CONDITIONAL_JUMP,
+                    RefType.UNCONDITIONAL_JUMP, RefType.INDIRECTION };
 		return flowsNotToFollow;
 	}
 
 	FlowType[] followConditionalAndUnconditionalJumps() {
 		FlowType[] flowsNotToFollow =
-			new FlowType[] { RefType.COMPUTED_CALL, RefType.CONDITIONAL_CALL,
-				RefType.UNCONDITIONAL_CALL, RefType.COMPUTED_JUMP, RefType.INDIRECTION };
+                { RefType.COMPUTED_CALL, RefType.CONDITIONAL_CALL,
+                    RefType.UNCONDITIONAL_CALL, RefType.COMPUTED_JUMP, RefType.INDIRECTION };
 		return flowsNotToFollow;
 	}
 
 	FlowType[] followAllJumps() {
 		FlowType[] flowsNotToFollow =
-			new FlowType[] { RefType.COMPUTED_CALL, RefType.CONDITIONAL_CALL,
-				RefType.UNCONDITIONAL_CALL, RefType.INDIRECTION };
+                { RefType.COMPUTED_CALL, RefType.CONDITIONAL_CALL,
+                    RefType.UNCONDITIONAL_CALL, RefType.INDIRECTION };
 		return flowsNotToFollow;
 	}
 
 	FlowType[] followAllCalls() {
 		FlowType[] flowsNotToFollow =
-			new FlowType[] { RefType.COMPUTED_JUMP, RefType.CONDITIONAL_JUMP,
-				RefType.UNCONDITIONAL_JUMP, RefType.INDIRECTION };
+                { RefType.COMPUTED_JUMP, RefType.CONDITIONAL_JUMP,
+                    RefType.UNCONDITIONAL_JUMP, RefType.INDIRECTION };
 		return flowsNotToFollow;
 	}
 

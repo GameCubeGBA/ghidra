@@ -55,7 +55,7 @@ import ghidra.util.exception.*;
 import ghidra.util.task.TaskMonitor;
 
 public abstract class AbstractDBTraceProgramViewListing implements TraceProgramViewListing {
-	public static final String[] EMPTY_STRING_ARRAY = new String[] {};
+	public static final String[] EMPTY_STRING_ARRAY = {};
 	public static final String TREE_NAME = "Trace Tree";
 
 	protected class DBTraceProgramViewUndefinedData extends UndefinedDBTraceData {

@@ -98,7 +98,7 @@ public class CodeUnitTableCellDataTest extends AbstractProgramBasedTest {
 		Address address = addr(TEST_ADDRESS);
 		int[] componentPath = null;
 		String commentText = "Repeatable Comment";
-		String[] comment = new String[] { commentText };
+		String[] comment = { commentText };
 		int row = 0;
 		int charOffset = 0;
 		int commentRow = 0;
@@ -193,7 +193,7 @@ public class CodeUnitTableCellDataTest extends AbstractProgramBasedTest {
 		assertTrue(applyCmd(program, cmd));
 
 		Address address = addr("f0001307");
-		int[] componentPath = new int[] { 2 }; // second field
+		int[] componentPath = { 2 }; // second field
 		Address refAddr = null;
 		String rep = "\"\",00";
 		int opIndex = 0;

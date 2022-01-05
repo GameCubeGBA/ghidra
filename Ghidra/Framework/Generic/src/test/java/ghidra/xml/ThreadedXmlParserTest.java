@@ -186,7 +186,7 @@ public class ThreadedXmlParserTest extends AbstractGenericTest {
 		// Empty the queue and make sure that we don't deadlock
 		//
 		final CyclicBarrier startBarrier = new CyclicBarrier(1);
-		final boolean[] container = new boolean[] { false };
+		final boolean[] container = { false };
 		new Thread(() -> {
 			try {
 				startBarrier.await();

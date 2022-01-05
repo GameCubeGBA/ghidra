@@ -38,7 +38,7 @@ public class InsertUndefinedAction extends CompositeEditorTableAction {
 	public final static String ACTION_NAME = "Insert Undefined Byte";
 	private final static String GROUP_NAME = COMPONENT_ACTION_GROUP;
 	private final static String DESCRIPTION = "Insert an undefined byte before the selection";
-	private static String[] POPUP_PATH = new String[] { ACTION_NAME };
+	private static String[] POPUP_PATH = { ACTION_NAME };
 
 	private final static KeyStroke KEY_STROKE =
 		KeyStroke.getKeyStroke(KeyEvent.VK_U, InputEvent.ALT_DOWN_MASK);

@@ -88,7 +88,7 @@ class MemSearchDialog extends DialogComponentProvider {
 	private ChangeListener changeListener = e -> updateDisplay();
 
 	private SearchData searchData = DEFAULT_SEARCH_DATA;
-	private SearchFormat[] allFormats = new SearchFormat[] { new HexSearchFormat(changeListener),
+	private SearchFormat[] allFormats = { new HexSearchFormat(changeListener),
 		new AsciiSearchFormat(changeListener), new DecimalSearchFormat(changeListener),
 		new BinarySearchFormat(changeListener), new RegExSearchFormat(changeListener) };
 	private SearchFormat currentFormat = allFormats[0];

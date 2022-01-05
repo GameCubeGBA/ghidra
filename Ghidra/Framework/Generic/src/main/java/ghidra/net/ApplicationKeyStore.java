@@ -35,7 +35,7 @@ import ghidra.util.Msg;
  */
 class ApplicationKeyStore {
 
-	static final String[] PKCS_FILE_EXTENSIONS = new String[] { "p12", "pks", "pfx" };
+	static final String[] PKCS_FILE_EXTENSIONS = { "p12", "pks", "pfx" };
 
 	private static final FileNameExtensionFilter PKCS_FILENAME_FILTER =
 		new FileNameExtensionFilter("PKCS Key File", PKCS_FILE_EXTENSIONS);

@@ -44,15 +44,15 @@ public class AttributedStringTest extends AbstractGenericTest {
 	@Test
 	public void testSubstring() {
 		FieldElement[] strings =
-			new FieldElement[] {
-				new TextFieldElement(new AttributedString("This is string", Color.BLACK, fm), 0, 0), // 14 chars
-				new TextFieldElement(new AttributedString("to test", Color.RED, fm), 0, 0), //  7 chars
-				new TextFieldElement(new AttributedString("the substring of ", Color.BLACK, fm), 0,
-					0), // 17 chars
-				new TextFieldElement(new AttributedString(" ....   ", Color.BLACK, fm), 0, 0), //  8 chars
-				new TextFieldElement(
-					new AttributedString("the CompositeAttributedString", Color.BLUE, fm), 0, 0), // 29 chars
-				new TextFieldElement(new AttributedString("class.", Color.BLACK, fm), 0, 0) };
+                {
+                    new TextFieldElement(new AttributedString("This is string", Color.BLACK, fm), 0, 0), // 14 chars
+                    new TextFieldElement(new AttributedString("to test", Color.RED, fm), 0, 0), //  7 chars
+                    new TextFieldElement(new AttributedString("the substring of ", Color.BLACK, fm), 0,
+                        0), // 17 chars
+                    new TextFieldElement(new AttributedString(" ....   ", Color.BLACK, fm), 0, 0), //  8 chars
+                    new TextFieldElement(
+                        new AttributedString("the CompositeAttributedString", Color.BLUE, fm), 0, 0), // 29 chars
+                    new TextFieldElement(new AttributedString("class.", Color.BLACK, fm), 0, 0) };
 		FieldElement compositeString = new CompositeFieldElement(strings);
 
 		FieldElement substring = compositeString.substring(0);

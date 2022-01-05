@@ -44,7 +44,7 @@ public final class DyldArchitecture {
 	public final static DyldArchitecture ARMV8Ae = new DyldArchitecture(CpuTypes.CPU_TYPE_ARM_64,   CpuSubTypes.CPU_SUBTYPE_MULTIPLE, "dyld_v1  arm64e", "AARCH64", Endian.LITTLE);
 
 	
-	public final static DyldArchitecture [] ARCHITECTURES = new DyldArchitecture [] { X86, X86_64, X86_64h, POWERPC, ARMV6, ARMV7, ARMV7F, ARMV7S, ARMV7K, ARMV8A, ARMV8Ae };
+	public final static DyldArchitecture [] ARCHITECTURES = { X86, X86_64, X86_64h, POWERPC, ARMV6, ARMV7, ARMV7F, ARMV7S, ARMV7K, ARMV8A, ARMV8Ae };
 	// @formatter:on
 	
 	/**

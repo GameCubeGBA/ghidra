@@ -49,7 +49,7 @@ public class ReloadDialog extends JDialog {
 
 		this.eventListener = eventListener;
 
-		Object[] options = new Object[] { createContent() };
+		Object[] options = { createContent() };
 		JOptionPane optionPane = new JOptionPane("File has changed. Reload?",
 			JOptionPane.WARNING_MESSAGE, JOptionPane.YES_NO_OPTION, null, options);
 

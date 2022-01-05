@@ -3073,7 +3073,7 @@ public class ExternalMergerAddTest extends AbstractExternalMergerTest {
 		final String libname = "MyLibrary";
 		final String label = "blue";
 		final String address = null;
-		final String[] BLUE_PATH = new String[] { libname, label };
+		final String[] BLUE_PATH = { libname, label };
 		final CategoryPath catPath = new CategoryPath("/cat1");
 		final Structure myStruct = new StructureDataType(catPath, "MyStruct", 0);
 		myStruct.add(new WordDataType());
@@ -3154,7 +3154,7 @@ public class ExternalMergerAddTest extends AbstractExternalMergerTest {
 		final String libname = "MyLibrary";
 		final String label = "blue";
 		final String address = "0x100";
-		final String[] BLUE_PATH = new String[] { libname, label };
+		final String[] BLUE_PATH = { libname, label };
 		final CategoryPath catPath = new CategoryPath("/cat1");
 		final Structure myStruct = new StructureDataType(catPath, "MyStruct", 0);
 		myStruct.add(new WordDataType());
@@ -3236,7 +3236,7 @@ public class ExternalMergerAddTest extends AbstractExternalMergerTest {
 		final String libname = "MyLibrary";
 		final String label = "blue";
 		final String address = "0x100";
-		final String[] BLUE_PATH = new String[] { libname, label };
+		final String[] BLUE_PATH = { libname, label };
 		final CategoryPath catPath = new CategoryPath("/cat1");
 		final Structure myStruct = new StructureDataType(catPath, "MyStruct", 0);
 		myStruct.add(new WordDataType());
@@ -3334,7 +3334,7 @@ public class ExternalMergerAddTest extends AbstractExternalMergerTest {
 		final String address2 = "0x110";
 		final String libnameA = "MyLibrary";
 		final String labelA = "blue";
-		final String[] BLUE_PATH = new String[] { libnameA, labelA };
+		final String[] BLUE_PATH = { libnameA, labelA };
 		final CategoryPath catPath = new CategoryPath("/cat1");
 		final Structure myStruct = new StructureDataType(catPath, "MyStruct", 0);
 		myStruct.add(new WordDataType());
@@ -3417,7 +3417,7 @@ public class ExternalMergerAddTest extends AbstractExternalMergerTest {
 		final String address2 = "0x110";
 		final String libnameA = "MyLibrary";
 		final String labelA = "blue";
-		final String[] BLUE_PATH = new String[] { libnameA, labelA };
+		final String[] BLUE_PATH = { libnameA, labelA };
 		final CategoryPath catPath = new CategoryPath("/cat1");
 		final Structure myStruct = new StructureDataType(catPath, "MyStruct", 0);
 		myStruct.add(new WordDataType());

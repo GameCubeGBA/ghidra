@@ -85,7 +85,7 @@ public class CParserTest extends AbstractGenericTest {
 
 		DataTypeManager primary = new StandAloneDataTypeManager("primary");
 
-		DataTypeManager[] subs = new DataTypeManager[] {};
+		DataTypeManager[] subs = {};
 
 		CParser parser = new CParser(primary, false, subs);
 		try {
@@ -102,7 +102,7 @@ public class CParserTest extends AbstractGenericTest {
 
 		DataTypeManager primary = new StandAloneDataTypeManager("primary");
 
-		DataTypeManager[] subs = new DataTypeManager[] { createDataTypeManagerWithABar() };
+		DataTypeManager[] subs = { createDataTypeManagerWithABar() };
 
 		CParser parser = new CParser(primary, false, subs);
 		DataType result = parser.parse("void foo(bar *);");

@@ -26,7 +26,7 @@ public interface DebuggerTargetsProviderFriend {
 	static void selectNodeForObject(DebuggerTargetsProvider provider, Object target) {
 		AbstractDockingTest.waitForTree(provider.tree);
 		GTreeNode node = provider.rootNode.findNodeForObject(target);
-		TreePath[] paths = new TreePath[] { node.getTreePath() };
+		TreePath[] paths = { node.getTreePath() };
 		provider.tree.setSelectionPaths(paths, EventOrigin.USER_GENERATED);
 		AbstractGTest.waitForCondition(() -> {
 			TreePath path = provider.tree.getSelectionPath();

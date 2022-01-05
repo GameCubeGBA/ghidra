@@ -129,7 +129,7 @@ public class OptionsTest extends AbstractGenericTest {
 
 	@Test
 	public void testSaveByteArray() {
-		byte[] bytes = new byte[] { (byte) 1, (byte) 2, (byte) 3 };
+		byte[] bytes = { (byte) 1, (byte) 2, (byte) 3 };
 		options.setByteArray("BYTES", bytes);
 		saveAndRestoreOptions();
 		assertTrue(Arrays.equals(bytes, options.getByteArray("BYTES", null)));

@@ -120,7 +120,7 @@ public class StringUtilitiesTest {
 		String sentenceWithInvalidChars = "This string has *word1!word2 with invalid chars";
 		assertEquals(embeddedFoundWord, findWord(sentenceWithInvalidChars, 18));
 
-		char[] allowedChars = new char[] { '!' };
+		char[] allowedChars = { '!' };
 		String foundWordWithAllowedChars = "word1!word2";
 		assertEquals(foundWordWithAllowedChars,
 			findWord(sentenceWithInvalidChars, 18, allowedChars));

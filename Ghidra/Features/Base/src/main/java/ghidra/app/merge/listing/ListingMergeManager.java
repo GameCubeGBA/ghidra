@@ -49,15 +49,15 @@ import ghidra.util.task.TaskMonitor;
  */
 public class ListingMergeManager implements MergeResolver, ListingMergeConstants {
 
-	private static String[] LISTING_PHASE = new String[] { "Listing" };
+	private static String[] LISTING_PHASE = { "Listing" };
 	private static String[] CODE_UNITS_PHASE =
-		new String[] { "Listing", CodeUnitMerger.CODE_UNITS_PHASE };
+            { "Listing", CodeUnitMerger.CODE_UNITS_PHASE };
 	private static String[] EXTERNALS_PHASE =
-		new String[] { "Listing", ExternalFunctionMerger.EXTERNALS_PHASE };
+            { "Listing", ExternalFunctionMerger.EXTERNALS_PHASE };
 	private static String[] FUNCTIONS_PHASE =
-		new String[] { "Listing", FunctionMerger.FUNCTIONS_PHASE };
-	private static String[] SYMBOLS_PHASE = new String[] { "Listing", SymbolMerger.SYMBOLS_PHASE };
-	private static String[] ADDRESS_BASED_PHASE = new String[] { "Listing",
+            { "Listing", FunctionMerger.FUNCTIONS_PHASE };
+	private static String[] SYMBOLS_PHASE = { "Listing", SymbolMerger.SYMBOLS_PHASE };
+	private static String[] ADDRESS_BASED_PHASE = { "Listing",
 		EquateMerger.EQUATES_PHASE + ", " + UserDefinedPropertyMerger.USER_DEFINED_PHASE + ", " +
 			ReferenceMerger.REFERENCES_PHASE + ", " + BookmarkMerger.BOOKMARKS_PHASE + " & " +
 			CommentMerger.COMMENTS_PHASE };
@@ -344,7 +344,7 @@ public class ListingMergeManager implements MergeResolver, ListingMergeConstants
 
 		displayInitialPhaseMessage(CODE_UNITS_PHASE, "Merge of Byte & Code Unit changes");
 
-		AbstractListingMerger[] mergers = new AbstractListingMerger[] { cuMerge };
+		AbstractListingMerger[] mergers = { cuMerge };
 		autoMerge(mergers, monitor);
 
 		currentMerger = cuMerge;
@@ -369,7 +369,7 @@ public class ListingMergeManager implements MergeResolver, ListingMergeConstants
 
 		displayInitialPhaseMessage(FUNCTIONS_PHASE, "Merge of Function changes");
 
-		ListingMerger[] mergers = new ListingMerger[] { functionMerger };
+		ListingMerger[] mergers = { functionMerger };
 		autoMerge(mergers, monitor);
 
 		mergeManager.showProgressIcon(false);
@@ -422,7 +422,7 @@ public class ListingMergeManager implements MergeResolver, ListingMergeConstants
 		displayInitialPhaseMessage(ADDRESS_BASED_PHASE,
 			"Merge of Equate, User Defined Property, Reference,Function Tags, Bookmark & Comment changes");
 
-		AbstractListingMerger[] mergers = new AbstractListingMerger[] { equateMerger,
+		AbstractListingMerger[] mergers = { equateMerger,
 			userPropertyMerger, referenceMerger, bookmarkMerger, commentMerger, functionTagMerger };
 		autoMerge(mergers, monitor);
 

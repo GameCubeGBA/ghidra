@@ -71,7 +71,7 @@ public class DBTraceSymbolManagerTest extends AbstractGhidraHeadlessIntegrationT
 		void run() throws Exception;
 	}
 
-	static final String[] INVALID_NAMES = new String[] { null, "", "I have spaces!",
+	static final String[] INVALID_NAMES = { null, "", "I have spaces!",
 		"I\thave\ttabs!", "I\nhave\nlines!", "I\rhave\rreturns!" };
 
 	protected void assertRejectsInvalid(NamedCreator creator) throws Exception {

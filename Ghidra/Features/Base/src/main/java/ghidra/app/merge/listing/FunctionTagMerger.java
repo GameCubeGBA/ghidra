@@ -63,7 +63,7 @@ import ghidra.util.task.TaskMonitor;
  */
 public class FunctionTagMerger implements MergeResolver, ListingMergeConstants {
 
-	private static String[] FUNCTION_TAG_PHASE = new String[] { "Function Tags" };
+	private static String[] FUNCTION_TAG_PHASE = { "Function Tags" };
 
 	protected static final int RESULT = MergeConstants.RESULT;
 	protected static final int LATEST = MergeConstants.LATEST;
@@ -743,7 +743,7 @@ public class FunctionTagMerger implements MergeResolver, ListingMergeConstants {
 	 * @return
 	 */
 	private String[] getFunctionTagInfo(int version, String name, String comment) {
-		String[] info = new String[] { "Keep", "", name, comment };
+		String[] info = { "Keep", "", name, comment };
 
 		if (version == LATEST) {
 			info[1] = LATEST_TITLE;

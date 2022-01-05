@@ -383,8 +383,8 @@ public class ImageUtils {
 		graphics.drawImage(image, 0, 0, null);
 		graphics.dispose();
 
-		int[] oldRgb = new int[] { oldColor.getRed(), oldColor.getGreen(), oldColor.getBlue() };
-		int[] newRgb = new int[] { newColor.getRed(), newColor.getGreen(), newColor.getBlue() };
+		int[] oldRgb = { oldColor.getRed(), oldColor.getGreen(), oldColor.getBlue() };
+		int[] newRgb = { newColor.getRed(), newColor.getGreen(), newColor.getBlue() };
 
 		BufferedImage destImage = new BufferedImage(image.getWidth(null), image.getHeight(null),
 			BufferedImage.TYPE_INT_ARGB);

@@ -49,7 +49,7 @@ import ghidra.util.database.annot.*;
 @DBAnnotatedObjectInfo(version = 0)
 public class DBTraceInstruction extends AbstractDBTraceCodeUnit<DBTraceInstruction> implements
 		TraceInstruction, InstructionAdapterFromPrototype, InstructionContext {
-	private static final Address[] EMPTY_ADDRESS_ARRAY = new Address[] {};
+	private static final Address[] EMPTY_ADDRESS_ARRAY = {};
 	private static final String TABLE_NAME = "Instructions";
 
 	private static final byte FALLTHROUGH_SET_MASK = 0x01;

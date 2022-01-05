@@ -39,7 +39,7 @@ import ghidra.util.task.TaskMonitor;
  */
 public class ProgramContextMergeManager implements MergeResolver, ListingMergeConstants {
 
-	private static String[] PROGRAM_CONTEXT_PHASE = new String[] { "Program Context" };
+	private static String[] PROGRAM_CONTEXT_PHASE = { "Program Context" };
 	private ProgramMultiUserMergeManager mergeManager;
 	private ListingMergePanel mergePanel;
 	private ConflictInfoPanel conflictInfoPanel; // This goes above the listing merge panels

@@ -131,7 +131,7 @@ public class LabelMarkupItemTest extends AbstractVTMarkupItemTest {
 		Address someOtherAddress = labelAddress.subtract(1);
 		addLabel(sourceSymbol3.getName(), someOtherAddress, destinationProgram);
 		Symbol destinationSymbol1 = addLabel(labelAddress, destinationProgram);
-		Symbol[] destinationSymbols = new Symbol[] { destinationSymbol1 };
+		Symbol[] destinationSymbols = { destinationSymbol1 };
 
 		Symbol[] expectedSymbols = sourceSymbols;
 
@@ -159,7 +159,7 @@ public class LabelMarkupItemTest extends AbstractVTMarkupItemTest {
 		Address someOtherAddress = labelAddress.subtract(1);
 		addLabel(sourceSymbol3.getName(), someOtherAddress, destinationProgram);
 		Symbol destinationSymbol1 = addLabel(labelAddress, destinationProgram);
-		Symbol[] destinationSymbols = new Symbol[] { destinationSymbol1 };
+		Symbol[] destinationSymbols = { destinationSymbol1 };
 
 		Symbol[] expectedSymbols = sourceSymbols;
 
@@ -471,7 +471,7 @@ public class LabelMarkupItemTest extends AbstractVTMarkupItemTest {
 		Symbol[] sourceSymbols = new Symbol[1];
 		sourceSymbols[0] = sourceSymbol1;
 
-		Symbol[] destinationSymbols = new Symbol[] { destinationSymbol1 };
+		Symbol[] destinationSymbols = { destinationSymbol1 };
 
 		Symbol[] expectedSymbols = new Symbol[1];
 		expectedSymbols[0] = sourceSymbol1;
@@ -567,7 +567,7 @@ public class LabelMarkupItemTest extends AbstractVTMarkupItemTest {
 		Address someOtherAddress = labelAddress.subtract(1);
 		addLabel(sourceSymbol1.getName(), someOtherAddress, destinationProgram);
 		Symbol destinationSymbol1 = addLabel(labelAddress, destinationProgram);
-		Symbol[] destinationSymbols = new Symbol[] { destinationSymbol1 };
+		Symbol[] destinationSymbols = { destinationSymbol1 };
 
 		Symbol[] expectedSymbols = null;
 
@@ -591,7 +591,7 @@ public class LabelMarkupItemTest extends AbstractVTMarkupItemTest {
 		Address someOtherAddress = labelAddress.subtract(1);
 		addLabel(sourceSymbol1.getName(), someOtherAddress, destinationProgram);
 		Symbol destinationSymbol1 = addLabel(labelAddress, destinationProgram);
-		Symbol[] destinationSymbols = new Symbol[] { destinationSymbol1 };
+		Symbol[] destinationSymbols = { destinationSymbol1 };
 
 		Symbol[] expectedSymbols = null;
 

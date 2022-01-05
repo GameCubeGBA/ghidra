@@ -54,9 +54,9 @@ public class AddressSpaceTest extends AbstractGenericTest {
 	@Test
 	public void testCompareTo() {
 		AddressSpace[] spaces =
-			new AddressSpace[] { space1, space2, space1overlay1, space2overlay1, space1overlay2,
-				space2overlay2, space1overlay3, space2overlay3, space1, space2, space1overlay1,
-				space2overlay1, space1overlay2, space2overlay2, space1overlay3, space2overlay3, };
+                { space1, space2, space1overlay1, space2overlay1, space1overlay2,
+                    space2overlay2, space1overlay3, space2overlay3, space1, space2, space1overlay1,
+                    space2overlay1, space1overlay2, space2overlay2, space1overlay3, space2overlay3, };
 		Arrays.sort(spaces);
 		Assert.assertEquals(space1, spaces[0]);
 		Assert.assertEquals(space1, spaces[1]);

@@ -25,7 +25,7 @@ import org.junit.Test;
 public class NumericUtilitiesTest {
 
 	private static final byte[] BYTES_012380ff00 =
-		new byte[] { (byte) 0x1, (byte) 0x23, (byte) 0x80, (byte) 0xff, (byte) 0 };
+            { (byte) 0x1, (byte) 0x23, (byte) 0x80, (byte) 0xff, (byte) 0 };
 
 	@Test
 	public void testConvertStringToBytes() {
@@ -90,21 +90,21 @@ public class NumericUtilitiesTest {
 
 	@Test
 	public void testConvertBytesToString() {
-		byte[] bytes = new byte[] { (byte) 0x1, (byte) 0x23, (byte) 0x80, (byte) 0xff, (byte) 0 };
+		byte[] bytes = { (byte) 0x1, (byte) 0x23, (byte) 0x80, (byte) 0xff, (byte) 0 };
 		String str = NumericUtilities.convertBytesToString(bytes);
 		assertEquals("012380ff00", str);
 	}
 
 	@Test
 	public void testConvertBytesToStringWithOffsetAndLength() {
-		byte[] bytes = new byte[] { (byte) 0x1, (byte) 0x23, (byte) 0x80, (byte) 0xff, (byte) 0 };
+		byte[] bytes = { (byte) 0x1, (byte) 0x23, (byte) 0x80, (byte) 0xff, (byte) 0 };
 		String str = NumericUtilities.convertBytesToString(bytes, 2, 2, " ");
 		assertEquals("80 ff", str);
 	}
 
 	@Test
 	public void testConvertBytesToStringWithDelimiter() {
-		byte[] bytes = new byte[] { (byte) 0x1, (byte) 0x23, (byte) 0x80, (byte) 0xff, (byte) 0 };
+		byte[] bytes = { (byte) 0x1, (byte) 0x23, (byte) 0x80, (byte) 0xff, (byte) 0 };
 		String str = NumericUtilities.convertBytesToString(bytes, " ");
 		assertEquals("01 23 80 ff 00", str);
 	}
@@ -170,7 +170,7 @@ public class NumericUtilitiesTest {
 	 */
 	private static List<FormatNumberResult> formatNumberAsSignedAndUnsignedInRadixes(long number) {
 		List<FormatNumberResult> results = new ArrayList<>();
-		int[] radixes = new int[] { 2, 8, 10, 16 };
+		int[] radixes = { 2, 8, 10, 16 };
 		for (int radix : radixes) {
 			results.addAll(formatNumberSignedAndUnsigned(number, radix));
 		}
@@ -225,8 +225,8 @@ public class NumericUtilitiesTest {
 
 	@Test
 	public void testFormatNumber_100() {
-		String[] expectedSignedResults = new String[] { "1100100b", "144o", "100", "64h" };
-		String[] expectedUnsignedResults = new String[] { "1100100b", "144o", "100", "64h" };
+		String[] expectedSignedResults = { "1100100b", "144o", "100", "64h" };
+		String[] expectedUnsignedResults = { "1100100b", "144o", "100", "64h" };
 
 		long number = 100;
 
@@ -235,10 +235,10 @@ public class NumericUtilitiesTest {
 
 	@Test
 	public void testFormatNumber_neg100() {
-		String[] expectedSignedResults = new String[] { "-1100100b", "-144o", "-100", "-64h" };
+		String[] expectedSignedResults = { "-1100100b", "-144o", "-100", "-64h" };
 		String[] expectedUnsignedResults =
-			new String[] { "1111111111111111111111111111111111111111111111111111111110011100b",
-				"1777777777777777777634o", "18446744073709551516", "ffffffffffffff9ch" };
+                { "1111111111111111111111111111111111111111111111111111111110011100b",
+                    "1777777777777777777634o", "18446744073709551516", "ffffffffffffff9ch" };
 
 		long number = -100;
 
@@ -248,11 +248,11 @@ public class NumericUtilitiesTest {
 	@Test
 	public void testFormatNumber_MinLong() {
 		String[] expectedSignedResults =
-			new String[] { "-1000000000000000000000000000000000000000000000000000000000000000b",
-				"-1000000000000000000000o", "-9223372036854775808", "-8000000000000000h" };
+                { "-1000000000000000000000000000000000000000000000000000000000000000b",
+                    "-1000000000000000000000o", "-9223372036854775808", "-8000000000000000h" };
 		String[] expectedUnsignedResults =
-			new String[] { "1000000000000000000000000000000000000000000000000000000000000000b",
-				"1000000000000000000000o", "9223372036854775808", "8000000000000000h" };
+                { "1000000000000000000000000000000000000000000000000000000000000000b",
+                    "1000000000000000000000o", "9223372036854775808", "8000000000000000h" };
 
 		long number = Long.MIN_VALUE;
 
@@ -262,11 +262,11 @@ public class NumericUtilitiesTest {
 	@Test
 	public void testFormatNumber_MaxLong() {
 		String[] expectedSignedResults =
-			new String[] { "111111111111111111111111111111111111111111111111111111111111111b",
-				"777777777777777777777o", "9223372036854775807", "7fffffffffffffffh" };
+                { "111111111111111111111111111111111111111111111111111111111111111b",
+                    "777777777777777777777o", "9223372036854775807", "7fffffffffffffffh" };
 		String[] expectedUnsignedResults =
-			new String[] { "111111111111111111111111111111111111111111111111111111111111111b",
-				"777777777777777777777o", "9223372036854775807", "7fffffffffffffffh" };
+                { "111111111111111111111111111111111111111111111111111111111111111b",
+                    "777777777777777777777o", "9223372036854775807", "7fffffffffffffffh" };
 
 		long number = Long.MAX_VALUE;
 
@@ -277,7 +277,7 @@ public class NumericUtilitiesTest {
 	public void testConvertStringToBytes_WithSpaces_WithSingleByteChars() {
 
 		String string = "01 1 ff f";
-		byte[] expected = new byte[] { (byte) 0x1, (byte) 0x1, (byte) 0xff, (byte) 0x0f };
+		byte[] expected = { (byte) 0x1, (byte) 0x1, (byte) 0xff, (byte) 0x0f };
 		byte[] actual = NumericUtilities.convertStringToBytes(string);
 		asssertBytesEquals(expected, actual);
 	}

@@ -683,7 +683,7 @@ public class CodeBrowserScreenMovementTest extends AbstractProgramBasedTest {
 	private void setFieldSelection(FieldPanel fp, FieldSelection sel) {
 		fp.setSelection(sel);
 		Class<?>[] argClasses = new Class<?>[] { EventTrigger.class };
-		Object[] args = new Object[] { EventTrigger.GUI_ACTION };
+		Object[] args = { EventTrigger.GUI_ACTION };
 		invokeInstanceMethod("notifySelectionChanged", fp, argClasses, args);
 	}
 

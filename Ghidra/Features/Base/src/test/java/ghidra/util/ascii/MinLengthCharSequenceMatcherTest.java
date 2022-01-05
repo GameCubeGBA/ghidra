@@ -33,7 +33,7 @@ public class MinLengthCharSequenceMatcherTest extends AbstractGenericTest {
 		MinLengthCharSequenceMatcher matcher =
 			new MinLengthCharSequenceMatcher(3, new AsciiCharSetRecognizer(), 1);
 
-		int[] values = new int[] { 0, 1, 2, 'a', 'b', 'c', 'd', 3, 4, 5 };
+		int[] values = { 0, 1, 2, 'a', 'b', 'c', 'd', 3, 4, 5 };
 		List<Sequence> matches = new ArrayList<>();
 		for (int value : values) {
 			if (matcher.addChar(value)) {
@@ -50,7 +50,7 @@ public class MinLengthCharSequenceMatcherTest extends AbstractGenericTest {
 		MinLengthCharSequenceMatcher matcher =
 			new MinLengthCharSequenceMatcher(3, new AsciiCharSetRecognizer(), 1);
 
-		int[] values = new int[] { 0, 1, 2, 'a', 'b', 'c', 'd', 3, 4, 5, 'e', 'f', 'g', 0, 1 };
+		int[] values = { 0, 1, 2, 'a', 'b', 'c', 'd', 3, 4, 5, 'e', 'f', 'g', 0, 1 };
 		List<Sequence> matches = new ArrayList<>();
 		for (int value : values) {
 			if (matcher.addChar(value)) {
@@ -68,7 +68,7 @@ public class MinLengthCharSequenceMatcherTest extends AbstractGenericTest {
 		MinLengthCharSequenceMatcher matcher =
 			new MinLengthCharSequenceMatcher(3, new AsciiCharSetRecognizer(), 1);
 
-		int[] values = new int[] { 'a', 'b', 'c', 'd', 0, 1 };
+		int[] values = { 'a', 'b', 'c', 'd', 0, 1 };
 		List<Sequence> matches = new ArrayList<>();
 		for (int value : values) {
 			if (matcher.addChar(value)) {
@@ -85,7 +85,7 @@ public class MinLengthCharSequenceMatcherTest extends AbstractGenericTest {
 		MinLengthCharSequenceMatcher matcher =
 			new MinLengthCharSequenceMatcher(3, new AsciiCharSetRecognizer(), 1);
 
-		int[] values = new int[] { 0, 'a', 'b', 'c', 'd' };
+		int[] values = { 0, 'a', 'b', 'c', 'd' };
 		List<Sequence> matches = new ArrayList<>();
 		for (int value : values) {
 			if (matcher.addChar(value)) {
@@ -102,7 +102,7 @@ public class MinLengthCharSequenceMatcherTest extends AbstractGenericTest {
 		MinLengthCharSequenceMatcher matcher =
 			new MinLengthCharSequenceMatcher(3, new AsciiCharSetRecognizer(), 2);
 
-		int[] values = new int[] { 0, 'a', 'b', 'c', 'd', 0, 0 };
+		int[] values = { 0, 'a', 'b', 'c', 'd', 0, 0 };
 		List<Sequence> matches = new ArrayList<>();
 		for (int value : values) {
 			if (matcher.addChar(value)) {

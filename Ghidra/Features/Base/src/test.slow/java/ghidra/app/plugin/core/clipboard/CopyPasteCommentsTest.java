@@ -700,7 +700,7 @@ public class CopyPasteCommentsTest extends AbstractProgramBasedTest {
 
 		pasteToolOne();
 
-		String[] comments = new String[] { "Set the SP to RAM:ESAV", "RESTORE register 'DE'",
+		String[] comments = { "Set the SP to RAM:ESAV", "RESTORE register 'DE'",
 			"RESTORE register 'BC'", "RESTORE register 'A' and FLAGS", "RESTORE register 'SP'" };
 
 		Listing listing = programOne.getListing();

@@ -100,7 +100,7 @@ class OldJad {
 
 		String[] commands = commandsList.toArray(new String[commandsList.size()]);
 
-		String[] environment = new String[] {};
+		String[] environment = {};
 
 		File workingDirectory = classFile.getParentFile();
 

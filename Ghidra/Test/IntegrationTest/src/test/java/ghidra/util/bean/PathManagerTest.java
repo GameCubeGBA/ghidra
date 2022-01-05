@@ -262,7 +262,7 @@ public class PathManagerTest extends AbstractDockingTest {
 		Preferences.setProperty("ENABLED_PATHS", null);
 		Preferences.setProperty("DISABLED_PATHS", null);
 
-		Path[] defaultPaths = new Path[] {
+		Path[] defaultPaths = {
 			new Path("/foo"), new Path("/bar")
 		};
 
@@ -270,7 +270,7 @@ public class PathManagerTest extends AbstractDockingTest {
 			PathManager.getPathsFromPreferences("ENABLED_PATHS", defaultPaths, "DISABLED_PATHS");
 		assertArrayEquals(defaultPaths, restoredPaths);
 
-		Path[] paths = new Path[] {
+		Path[] paths = {
 			new Path("/jim", false), new Path("/joe", false), new Path("/bob", true),
 			new Path("/sam", false), new Path("/tom", true), new Path("/tim", false)
 		};

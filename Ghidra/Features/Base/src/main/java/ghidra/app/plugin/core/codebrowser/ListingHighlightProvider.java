@@ -64,8 +64,8 @@ public class ListingHighlightProvider
 	private static final String SCOPE_REGISTER_OPERAND =
 		CURSOR_HIGHLIGHT_GROUP + DELIMITER + "Scope Register Operand";
 
-	private static char[] UNDERSCORE_AND_PERIOD_OK = new char[] { '.', '_' };
-	private static char[] UNDERSCORE_OK = new char[] { '_' };
+	private static char[] UNDERSCORE_AND_PERIOD_OK = { '.', '_' };
+	private static char[] UNDERSCORE_OK = { '_' };
 
 	private final static Highlight[] NO_HIGHLIGHTS = new Highlight[0];
 

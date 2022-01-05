@@ -351,7 +351,7 @@ public class MemSearchPlugin extends Plugin implements OptionsChangeListener,
 			}
 		};
 		searchAction.setHelpLocation(new HelpLocation(HelpTopics.SEARCH, searchAction.getName()));
-		String[] menuPath = new String[] { "&Search", "&Memory..." };
+		String[] menuPath = { "&Search", "&Memory..." };
 		searchAction.setMenuBarData(new MenuData(menuPath, "search"));
 		searchAction.setKeyBindingData(new KeyBindingData('S', 0));
 		searchAction.setDescription("Search Memory for byte sequence");

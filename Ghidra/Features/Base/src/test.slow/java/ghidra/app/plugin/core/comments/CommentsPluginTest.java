@@ -61,7 +61,7 @@ import ghidra.util.task.TaskMonitorAdapter;
 
 public class CommentsPluginTest extends AbstractGhidraHeadedIntegrationTest {
 
-	private final static int[] TYPES = new int[] { CodeUnit.EOL_COMMENT, CodeUnit.PRE_COMMENT,
+	private final static int[] TYPES = { CodeUnit.EOL_COMMENT, CodeUnit.PRE_COMMENT,
 		CodeUnit.POST_COMMENT, CodeUnit.PLATE_COMMENT, CodeUnit.REPEATABLE_COMMENT, };
 
 	private final static String PRE = "This is a PRE comment.";
