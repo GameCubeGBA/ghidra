@@ -108,27 +108,23 @@ public class XmlTestHelper {
 	public void compareXml(File file) throws Exception {
 		Msg.debug(this, "reading test file from: " + file);
 		Iterator<String> it = xmlList.iterator();
-		BufferedReader reader = new BufferedReader(new FileReader(file));
-		try {
-			String line;
-			int linenum = 0;
-			while ((line = reader.readLine()) != null && it.hasNext()) {
-				++linenum;
-				String compareLine = it.next();
-				if (!compareLine.equals(line)) {
-					System.out.println("XML not Equal (line:" + linenum + ")");
-					System.out.println("   " + compareLine);
-					System.out.println("   " + line);
-				}
-				Assert.assertEquals("Line " + linenum + " not equal: ", compareLine, line);
-			}
-			if (line != null) {
-				Assert.fail("XML File contains unexpected line: " + line);
-			}
-		}
-		finally {
-			reader.close();
-		}
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            int linenum = 0;
+            while ((line = reader.readLine()) != null && it.hasNext()) {
+                ++linenum;
+                String compareLine = it.next();
+                if (!compareLine.equals(line)) {
+                    System.out.println("XML not Equal (line:" + linenum + ")");
+                    System.out.println("   " + compareLine);
+                    System.out.println("   " + line);
+                }
+                Assert.assertEquals("Line " + linenum + " not equal: ", compareLine, line);
+            }
+            if (line != null) {
+                Assert.fail("XML File contains unexpected line: " + line);
+            }
+        }
 		if (it.hasNext()) {
 			Assert.fail("XML contains unexpected line: " + it.next());
 		}

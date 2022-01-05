@@ -91,29 +91,16 @@ public class FileLocker {
 
 		Properties properties = new Properties();
 
-		InputStream is = null;
-		try {
-			is = new FileInputStream(lockFile);
-			properties.load(is);
-			return properties;
-		}
-		catch (FileNotFoundException e) {
-			// should never happen
-		}
-		catch (IOException e) {
-			// ignore
-		}
-		finally {
-			if (is != null) {
-				try {
-					is.close();
-				}
-				catch (IOException e) {
-					// we tried!
-				}
-			}
-		}
-		return null;
+        try (InputStream is = new FileInputStream(lockFile)) {
+            properties.load(is);
+            return properties;
+        } catch (FileNotFoundException e) {
+            // should never happen
+        } catch (IOException e) {
+            // ignore
+        }
+        // we tried!
+        return null;
 	}
 
 	public String getExistingLockFileInformation() {
@@ -178,26 +165,14 @@ public class FileLocker {
 
 	private boolean storeProperties(Properties properties) {
 
-		OutputStream os = null;
-		try {
-			os = new FileOutputStream(lockFile);
-			properties.store(os, "Ghidra Lock File");
-			return true;
-		}
-		catch (IOException e) {
-			return false;
-		}
-		finally {
-			if (os != null) {
-				try {
-					os.close();
-				}
-				catch (IOException e) {
-					// don't care; we tried
-				}
-			}
-		}
-	}
+        try (OutputStream os = new FileOutputStream(lockFile)) {
+            properties.store(os, "Ghidra Lock File");
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
+        // don't care; we tried
+    }
 
 	private boolean isLockOwner() {
 		if (createdLockProperties == null) {

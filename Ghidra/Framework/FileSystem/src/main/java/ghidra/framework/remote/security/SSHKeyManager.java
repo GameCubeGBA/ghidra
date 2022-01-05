@@ -90,17 +90,9 @@ public class SSHKeyManager {
 			throw new FileNotFoundException("SSH private key file not found: " + sshPrivateKeyFile);
 		}
 
-		InputStream keyIn = new FileInputStream(sshPrivateKeyFile);
-		try {
-			return getSSHPrivateKey(keyIn, sshPrivateKeyFile.getAbsolutePath());
-		}
-		finally {
-			try {
-				keyIn.close();
-			}
-			catch (IOException e) {
-			}
-		}
+        try (InputStream keyIn = new FileInputStream(sshPrivateKeyFile)) {
+            return getSSHPrivateKey(keyIn, sshPrivateKeyFile.getAbsolutePath());
+        }
 	}
 
 	/**

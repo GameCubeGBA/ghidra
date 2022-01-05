@@ -163,13 +163,9 @@ public class TextEditorComponentProvider extends ComponentProviderAdapter {
 	}
 
 	private String loadTextFile(InputStream inputStream) throws IOException {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-		try {
-			return loadTextFile(reader);
-		}
-		finally {
-			reader.close();
-		}
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+            return loadTextFile(reader);
+        }
 	}
 
 	private String loadTextFile(BufferedReader reader) throws IOException {

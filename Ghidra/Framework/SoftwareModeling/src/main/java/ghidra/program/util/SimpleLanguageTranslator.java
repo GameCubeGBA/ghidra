@@ -246,23 +246,15 @@ class SimpleLanguageTranslator extends LanguageTranslatorAdapter {
 	static SimpleLanguageTranslator getSimpleLanguageTranslator(ResourceFile translatorSpecFile)
 			throws SAXException, JDOMException, IOException {
 
-		InputStream is = new BufferedInputStream(translatorSpecFile.getInputStream());
-		try {
-			SAXBuilder sax = XmlUtilities.createSecureSAXBuilder(false, false);
-			Document document = sax.build(is);
-			Element root = document.getRootElement();
-			return getSimpleLanguageTranslator(translatorSpecFile.getAbsolutePath(), root);
+        try (InputStream is = new BufferedInputStream(translatorSpecFile.getInputStream())) {
+            SAXBuilder sax = XmlUtilities.createSecureSAXBuilder(false, false);
+            Document document = sax.build(is);
+            Element root = document.getRootElement();
+            return getSimpleLanguageTranslator(translatorSpecFile.getAbsolutePath(), root);
 
-		}
-		finally {
-			try {
-				is.close();
-			}
-			catch (IOException e1) {
-				// ignore
-			}
-		}
-	}
+        }
+        // ignore
+    }
 
 	/**
 	 * Generate a simple language translator from XML source

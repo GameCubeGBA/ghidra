@@ -120,73 +120,65 @@ public class JavaHelpPlugin extends Plugin implements FrontEndable {
 			file.delete();
 		}
 
-		PrintWriter out = null;
-		try {
-			out = new PrintWriter(new FileOutputStream(file));
-			Map<Object, HelpLocation> map = hm.getInvalidHelpLocations(monitor);
+        try (PrintWriter out = new PrintWriter(new FileOutputStream(file))) {
+            Map<Object, HelpLocation> map = hm.getInvalidHelpLocations(monitor);
 
-			// Filter
-			monitor.initialize(map.size());
-			monitor.setMessage("Filtering help items...");
-			Iterator<Object> iter = map.keySet().iterator();
-			while (iter.hasNext()) {
-				monitor.checkCanceled();
-				Object helpObj = iter.next();
-				if (helpObj instanceof DockingAction) {
-					DockingAction action = (DockingAction) helpObj;
-					if (shouldSkipHelpCheck(action)) {
-						iter.remove();
-					}
-				}
-				monitor.initialize(1);
-			}
+            // Filter
+            monitor.initialize(map.size());
+            monitor.setMessage("Filtering help items...");
+            Iterator<Object> iter = map.keySet().iterator();
+            while (iter.hasNext()) {
+                monitor.checkCanceled();
+                Object helpObj = iter.next();
+                if (helpObj instanceof DockingAction) {
+                    DockingAction action = (DockingAction) helpObj;
+                    if (shouldSkipHelpCheck(action)) {
+                        iter.remove();
+                    }
+                }
+                monitor.initialize(1);
+            }
 
-			out.println("Unresolved Help Locations: " + map.size());
-			List<HelpInfoObject> helpInfos = new ArrayList<>(map.size());
+            out.println("Unresolved Help Locations: " + map.size());
+            List<HelpInfoObject> helpInfos = new ArrayList<>(map.size());
 
-			monitor.initialize(map.size());
-			monitor.setMessage("Procesing actions...");
-			iter = map.keySet().iterator();
-			int i = 1;
-			while (iter.hasNext()) {
-				monitor.checkCanceled();
-				Object helpObj = iter.next();
-				HelpLocation helpLoc = map.get(helpObj);
-				HelpInfoObject helpInfoObject = new HelpInfoObject(helpObj, helpLoc);
-				if (!helpInfos.contains(helpInfoObject)) {
-					helpInfos.add(helpInfoObject);
-				}
-				monitor.initialize(1);
-			}
+            monitor.initialize(map.size());
+            monitor.setMessage("Procesing actions...");
+            iter = map.keySet().iterator();
+            int i = 1;
+            while (iter.hasNext()) {
+                monitor.checkCanceled();
+                Object helpObj = iter.next();
+                HelpLocation helpLoc = map.get(helpObj);
+                HelpInfoObject helpInfoObject = new HelpInfoObject(helpObj, helpLoc);
+                if (!helpInfos.contains(helpInfoObject)) {
+                    helpInfos.add(helpInfoObject);
+                }
+                monitor.initialize(1);
+            }
 
-			if (helpInfos.size() == 0) {
-				Msg.showInfo(this, tool.getToolFrame(), "Help Validation Complete",
-					"No items missing help were found");
-				return;
-			}
+            if (helpInfos.size() == 0) {
+                Msg.showInfo(this, tool.getToolFrame(), "Help Validation Complete",
+                        "No items missing help were found");
+                return;
+            }
 
-			Collections.sort(helpInfos);
+            Collections.sort(helpInfos);
 
-			monitor.setMessage("Writing items missing help...");
-			for (HelpInfoObject helpInfo : helpInfos) {
-				monitor.checkCanceled();
-				writeHelpInfo(out, helpInfo, i++);
-				monitor.initialize(1);
-			}
+            monitor.setMessage("Writing items missing help...");
+            for (HelpInfoObject helpInfo : helpInfos) {
+                monitor.checkCanceled();
+                writeHelpInfo(out, helpInfo, i++);
+                monitor.initialize(1);
+            }
 
-			out.flush();
-			Msg.showInfo(this, tool.getToolFrame(), "Help Info File Write Completed",
-				"Unresolved Help Locations: " + map.size() + "\nHelp info file written to\n" +
-					filename);
-		}
-		catch (Exception e) {
-			Msg.showError(this, null, "Error", "Error writing JavaHelp info", e);
-		}
-		finally {
-			if (out != null) {
-				out.close();
-			}
-		}
+            out.flush();
+            Msg.showInfo(this, tool.getToolFrame(), "Help Info File Write Completed",
+                    "Unresolved Help Locations: " + map.size() + "\nHelp info file written to\n" +
+                            filename);
+        } catch (Exception e) {
+            Msg.showError(this, null, "Error", "Error writing JavaHelp info", e);
+        }
 	}
 
 	private boolean shouldSkipHelpCheck(DockingAction action) {

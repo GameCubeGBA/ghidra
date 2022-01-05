@@ -193,34 +193,20 @@ class OldLanguage implements Language {
 
 	private void readOldLanguage(boolean descriptionOnly) throws IOException {
 
-		InputStream is = null;
-		try {
-			is = new BufferedInputStream(oldLangFile.getInputStream());
-			SAXBuilder sax = XmlUtilities.createSecureSAXBuilder(false, false);
-			Document document = sax.build(is);
-			Element root = document.getRootElement();
+        try (InputStream is = new BufferedInputStream(oldLangFile.getInputStream())) {
+            SAXBuilder sax = XmlUtilities.createSecureSAXBuilder(false, false);
+            Document document = sax.build(is);
+            Element root = document.getRootElement();
 
-			parseOldLanguage(root, descriptionOnly);
+            parseOldLanguage(root, descriptionOnly);
 
-		}
-		catch (SAXNotRecognizedException e) {
-			throw new IOException("Failed to parse old language: " + oldLangFile, e);
-		}
-		catch (JDOMException e) {
-			throw new IOException("Failed to parse old language: " + oldLangFile, e);
-		}
-		catch (SAXException e) {
-			throw new IOException("Failed to parse old language: " + oldLangFile, e);
-		}
-		finally {
-			if (is != null) {
-				try {
-					is.close();
-				}
-				catch (IOException e1) {
-				}
-			}
-		}
+        } catch (SAXNotRecognizedException e) {
+            throw new IOException("Failed to parse old language: " + oldLangFile, e);
+        } catch (JDOMException e) {
+            throw new IOException("Failed to parse old language: " + oldLangFile, e);
+        } catch (SAXException e) {
+            throw new IOException("Failed to parse old language: " + oldLangFile, e);
+        }
 	}
 
 	void parseOldLanguage(Element root, boolean descriptionOnly)

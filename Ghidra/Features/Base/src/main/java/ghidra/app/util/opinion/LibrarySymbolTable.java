@@ -505,16 +505,12 @@ class LibrarySymbolTable {
 			root.addContent(export);
 		}
 
-		FileOutputStream fos = new FileOutputStream(output);
-		try {
-			Document doc = new Document(root);
+        try (FileOutputStream fos = new FileOutputStream(output)) {
+            Document doc = new Document(root);
 
-			XMLOutputter xmlout = new GenericXMLOutputter();
-			xmlout.output(doc, fos);
-		}
-		finally {
-			fos.close();
-		}
+            XMLOutputter xmlout = new GenericXMLOutputter();
+            xmlout.output(doc, fos);
+        }
 
 		//StringBuffer buffer = new StringBuffer();
 		//Iterator iter = exportList.iterator();

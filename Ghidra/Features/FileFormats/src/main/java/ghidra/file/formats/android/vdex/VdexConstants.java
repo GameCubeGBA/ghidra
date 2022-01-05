@@ -121,21 +121,15 @@ public final class VdexConstants {
 		try {
 			if (program != null) {
 				for (MemoryBlock block : program.getMemory().getBlocks()) {
-					ByteProvider provider =
-						new MemoryByteProvider(program.getMemory(), block.getStart());
-					try {
-						String magic =
-							new String(provider.readBytes(0, VdexConstants.MAGIC.length()));
-						if (VdexConstants.MAGIC.equals(magic)) {
-							return block.getStart();
-						}
-					}
-					catch (Exception e) {
-						//ignore
-					}
-					finally {
-						provider.close();
-					}
+                    try (ByteProvider provider = new MemoryByteProvider(program.getMemory(), block.getStart())) {
+                        String magic =
+                                new String(provider.readBytes(0, VdexConstants.MAGIC.length()));
+                        if (VdexConstants.MAGIC.equals(magic)) {
+                            return block.getStart();
+                        }
+                    } catch (Exception e) {
+                        //ignore
+                    }
 				}
 			}
 		}

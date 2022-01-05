@@ -244,33 +244,28 @@ class CheckoutManager {
 		}
 
 		FileInputStream istream = new FileInputStream(checkoutsFile);
-		BufferedInputStream bis = new BufferedInputStream(istream);
-		try {
-			SAXBuilder sax = XmlUtilities.createSecureSAXBuilder(false, false);
-			Document doc = sax.build(bis);
-			Element root = doc.getRootElement();
+        try (istream) {
+            BufferedInputStream bis = new BufferedInputStream(istream);
+            SAXBuilder sax = XmlUtilities.createSecureSAXBuilder(false, false);
+            Document doc = sax.build(bis);
+            Element root = doc.getRootElement();
 
-			String nextId = root.getAttributeValue("NEXT_ID");
-			try {
-				nextCheckoutId = Long.parseLong(nextId);
-			}
-			catch (NumberFormatException e) {
-				throw new IOException("Invalid checkouts file: " + checkoutsFile);
-			}
+            String nextId = root.getAttributeValue("NEXT_ID");
+            try {
+                nextCheckoutId = Long.parseLong(nextId);
+            } catch (NumberFormatException e) {
+                throw new IOException("Invalid checkouts file: " + checkoutsFile);
+            }
 
-			List<Element> elementList = root.getChildren("CHECKOUT");
-			Iterator<Element> iter = elementList.iterator();
-			while (iter.hasNext()) {
-				ItemCheckoutStatus coStatus = parseCheckoutElement(iter.next());
-				checkouts.put(coStatus.getCheckoutId(), coStatus);
-			}
-		}
-		catch (org.jdom.JDOMException je) {
-			throw new InvalidObjectException("Invalid checkouts file: " + checkoutsFile);
-		}
-		finally {
-			istream.close();
-		}
+            List<Element> elementList = root.getChildren("CHECKOUT");
+            Iterator<Element> iter = elementList.iterator();
+            while (iter.hasNext()) {
+                ItemCheckoutStatus coStatus = parseCheckoutElement(iter.next());
+                checkouts.put(coStatus.getCheckoutId(), coStatus);
+            }
+        } catch (JDOMException je) {
+            throw new InvalidObjectException("Invalid checkouts file: " + checkoutsFile);
+        }
 	}
 
 	/**
@@ -324,16 +319,12 @@ class CheckoutManager {
 		File tmpFile = new File(checkoutsFile.getParentFile(), checkoutsFile.getName() + ".new");
 		tmpFile.delete();
 		FileOutputStream ostream = new FileOutputStream(tmpFile);
-		BufferedOutputStream bos = new BufferedOutputStream(ostream);
 
-		try {
-			Document doc = new Document(root);
-			XMLOutputter xmlout = new GenericXMLOutputter();
-			xmlout.output(doc, bos);
-		}
-		finally {
-			bos.close();
-		}
+        try (BufferedOutputStream bos = new BufferedOutputStream(ostream)) {
+            Document doc = new Document(root);
+            XMLOutputter xmlout = new GenericXMLOutputter();
+            xmlout.output(doc, bos);
+        }
 
 		// Rename files
 		File oldFile = null;

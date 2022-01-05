@@ -684,38 +684,30 @@ public class GadpClientServerTest implements AsyncTestUtils {
 
 	@Test
 	public void testConnectDisconnect() throws Throwable {
-		AsynchronousSocketChannel socket = socketChannel();
-		try (ServerRunner runner = new ServerRunner()) {
-			GadpClient client = new GadpClient("Test", socket);
+        try (AsynchronousSocketChannel socket = socketChannel(); ServerRunner runner = new ServerRunner()) {
+            GadpClient client = new GadpClient("Test", socket);
 
-			waitOn(AsyncUtils.completable(TypeSpec.VOID, socket::connect,
-				runner.server.getLocalAddress()));
-			waitOn(client.connect());
-			waitOn(client.close());
-		}
-		finally {
-			socket.close();
-		}
+            waitOn(AsyncUtils.completable(TypeSpec.VOID, socket::connect,
+                    runner.server.getLocalAddress()));
+            waitOn(client.connect());
+            waitOn(client.close());
+        }
 	}
 
 	@Test
 	public void testFetchModelValue() throws Throwable {
-		AsynchronousSocketChannel socket = socketChannel();
-		try (ServerRunner runner = new ServerRunner()) {
-			GadpClient client = new GadpClient("Test", socket);
-			waitOn(AsyncUtils.completable(TypeSpec.VOID, socket::connect,
-				runner.server.getLocalAddress()));
-			waitOn(client.connect());
-			Object rootVal = waitOn(client.fetchModelValue(List.of()));
-			TargetObject root = (TargetObject) rootVal;
-			assertEquals(List.of(), root.getPath());
-			Object cmd = waitOn(client.fetchModelValue(PathUtils.parse("Available[1].cmd")));
-			assertEquals("echo", cmd);
-			waitOn(client.close());
-		}
-		finally {
-			socket.close();
-		}
+        try (AsynchronousSocketChannel socket = socketChannel(); ServerRunner runner = new ServerRunner()) {
+            GadpClient client = new GadpClient("Test", socket);
+            waitOn(AsyncUtils.completable(TypeSpec.VOID, socket::connect,
+                    runner.server.getLocalAddress()));
+            waitOn(client.connect());
+            Object rootVal = waitOn(client.fetchModelValue(List.of()));
+            TargetObject root = (TargetObject) rootVal;
+            assertEquals(List.of(), root.getPath());
+            Object cmd = waitOn(client.fetchModelValue(PathUtils.parse("Available[1].cmd")));
+            assertEquals("echo", cmd);
+            waitOn(client.close());
+        }
 	}
 
 	@Test
@@ -750,61 +742,54 @@ public class GadpClientServerTest implements AsyncTestUtils {
 	@Test
 	public void testFetchModelValueCached() throws Throwable {
 		AsynchronousSocketChannel socket = socketChannel();
-		MonitoredAsyncByteChannel monitored = new MonitoredAsyncByteChannel(socket);
-		try (ServerRunner runner = new ServerRunner()) {
-			GadpClient client = new GadpClient("Test", monitored);
-			waitOn(AsyncUtils.completable(TypeSpec.VOID, socket::connect,
-				runner.server.getLocalAddress()));
-			waitOn(client.connect());
-			Object rootVal = waitOn(client.fetchModelValue(List.of()));
-			TargetObject root = (TargetObject) rootVal;
-			assertEquals(List.of(), root.getPath());
-			// Do fetchAll to create objects and populate their caches
-			Map<String, ? extends TargetObject> available =
-				waitOn(client.fetchObjectElements(PathUtils.parse("Available")));
-			assertEquals(2, available.size());
-			monitored.reset();
-			Object cmd = waitOn(client.fetchModelValue(PathUtils.parse("Available[1].cmd")));
-			assertEquals("echo", cmd);
-			// Just 1 to request .cmd, since the above will only have covered Available[]
-			assertEquals(1, monitored.writeCount);
-			waitOn(client.close());
-		}
-		finally {
-			socket.close();
-		}
+        try (socket; ServerRunner runner = new ServerRunner()) {
+            MonitoredAsyncByteChannel monitored = new MonitoredAsyncByteChannel(socket);
+            GadpClient client = new GadpClient("Test", monitored);
+            waitOn(AsyncUtils.completable(TypeSpec.VOID, socket::connect,
+                    runner.server.getLocalAddress()));
+            waitOn(client.connect());
+            Object rootVal = waitOn(client.fetchModelValue(List.of()));
+            TargetObject root = (TargetObject) rootVal;
+            assertEquals(List.of(), root.getPath());
+            // Do fetchAll to create objects and populate their caches
+            Map<String, ? extends TargetObject> available =
+                    waitOn(client.fetchObjectElements(PathUtils.parse("Available")));
+            assertEquals(2, available.size());
+            monitored.reset();
+            Object cmd = waitOn(client.fetchModelValue(PathUtils.parse("Available[1].cmd")));
+            assertEquals("echo", cmd);
+            // Just 1 to request .cmd, since the above will only have covered Available[]
+            assertEquals(1, monitored.writeCount);
+            waitOn(client.close());
+        }
 	}
 
 	@Test
 	public void testInvoke() throws Throwable {
-		AsynchronousSocketChannel socket = socketChannel();
-		try (ServerRunner runner = new ServerRunner()) {
-			GadpClient client = new GadpClient("Test", socket);
-			waitOn(AsyncUtils.completable(TypeSpec.VOID, socket::connect,
-				runner.server.getLocalAddress()));
-			waitOn(client.connect());
-			TargetObject greet =
-				waitOn(client.fetchModelObject(PathUtils.parse("Available.greet")));
-			assertTrue(greet.getInterfaceNames().contains("Method"));
-			TargetMethod method = greet.as(TargetMethod.class);
+        try (AsynchronousSocketChannel socket = socketChannel(); ServerRunner runner = new ServerRunner()) {
+            GadpClient client = new GadpClient("Test", socket);
+            waitOn(AsyncUtils.completable(TypeSpec.VOID, socket::connect,
+                    runner.server.getLocalAddress()));
+            waitOn(client.connect());
+            TargetObject greet =
+                    waitOn(client.fetchModelObject(PathUtils.parse("Available.greet")));
+            assertTrue(greet.getInterfaceNames().contains("Method"));
+            TargetMethod method = greet.as(TargetMethod.class);
 
-			assertEquals(PARAMS, method.getParameters());
-			assertEquals(Integer.class, method.getReturnType());
+            assertEquals(PARAMS, method.getParameters());
+            assertEquals(Integer.class, method.getReturnType());
 
-			CompletableFuture<Object> future = method
-					.invoke(Map.of("whom", "GADP", "others", TargetStringList.of("Alice", "Bob")));
-			waitOn(invocations.count.waitValue(1));
-			TestMethodInvocation invocation = invocations.poll();
-			assertEquals(Map.of("whom", "GADP", "others", TargetStringList.of("Alice", "Bob")),
-				invocation.args);
-			invocation.complete(42);
-			int result = (Integer) waitOn(future);
-			assertEquals(42, result);
-			waitOn(client.close());
-		}
-		finally {
-			socket.close();
-		}
+            CompletableFuture<Object> future = method
+                    .invoke(Map.of("whom", "GADP", "others", TargetStringList.of("Alice", "Bob")));
+            waitOn(invocations.count.waitValue(1));
+            TestMethodInvocation invocation = invocations.poll();
+            assertEquals(Map.of("whom", "GADP", "others", TargetStringList.of("Alice", "Bob")),
+                    invocation.args);
+            invocation.complete(42);
+            int result = (Integer) waitOn(future);
+            assertEquals(42, result);
+            waitOn(client.close());
+        }
 	}
 
 	@Test
@@ -852,72 +837,60 @@ public class GadpClientServerTest implements AsyncTestUtils {
 
 	@Test
 	public void testMethodParametersOrderPreserved() throws Throwable {
-		AsynchronousSocketChannel socket = socketChannel();
-		try (ServerRunner runner = new ServerRunner()) {
-			GadpClient client = new GadpClient("Test", socket);
-			waitOn(AsyncUtils.completable(TypeSpec.VOID, socket::connect,
-				runner.server.getLocalAddress()));
-			waitOn(client.connect());
-			TargetObject greet =
-				waitOn(client.fetchModelObject(PathUtils.parse("Available.bigGreet")));
-			assertTrue(greet.getInterfaceNames().contains("Method"));
-			TargetMethod method = greet.as(TargetMethod.class);
+        try (AsynchronousSocketChannel socket = socketChannel(); ServerRunner runner = new ServerRunner()) {
+            GadpClient client = new GadpClient("Test", socket);
+            waitOn(AsyncUtils.completable(TypeSpec.VOID, socket::connect,
+                    runner.server.getLocalAddress()));
+            waitOn(client.connect());
+            TargetObject greet =
+                    waitOn(client.fetchModelObject(PathUtils.parse("Available.bigGreet")));
+            assertTrue(greet.getInterfaceNames().contains("Method"));
+            TargetMethod method = greet.as(TargetMethod.class);
 
-			TargetParameterMap params = method.getParameters();
-			assertEquals(ORDERED_PARAMS, params);
+            TargetParameterMap params = method.getParameters();
+            assertEquals(ORDERED_PARAMS, params);
 
-			assertEquals("HelmoWprnd",
-				params.values().stream().map(p -> p.name).collect(Collectors.joining()));
+            assertEquals("HelmoWprnd",
+                    params.values().stream().map(p -> p.name).collect(Collectors.joining()));
 
-			waitOn(client.close());
-		}
-		finally {
-			socket.close();
-		}
+            waitOn(client.close());
+        }
 	}
 
 	@Test
 	public void testListRoot() throws Throwable {
-		AsynchronousSocketChannel socket = socketChannel();
-		try (ServerRunner runner = new ServerRunner()) {
-			GadpClient client = new GadpClient("Test", socket);
-			waitOn(AsyncUtils.completable(TypeSpec.VOID, socket::connect,
-				runner.server.getLocalAddress()));
-			waitOn(client.connect());
-			Map<String, ? extends TargetObject> elements =
-				waitOn(client.fetchObjectElements(List.of()));
-			assertEquals(0, elements.size());
-			Map<String, ?> attributes = waitOn(client.fetchObjectAttributes(List.of()));
-			assertEquals(Set.of("Processes", "Available", TargetObject.DISPLAY_ATTRIBUTE_NAME,
-				TargetFocusScope.FOCUS_ATTRIBUTE_NAME), attributes.keySet());
-			Object procContAttr = attributes.get("Processes");
-			TargetObject procCont = (TargetObject) procContAttr;
-			assertEquals(List.of("Processes"), procCont.getPath());
-			waitOn(client.close());
-		}
-		finally {
-			socket.close();
-		}
+        try (AsynchronousSocketChannel socket = socketChannel(); ServerRunner runner = new ServerRunner()) {
+            GadpClient client = new GadpClient("Test", socket);
+            waitOn(AsyncUtils.completable(TypeSpec.VOID, socket::connect,
+                    runner.server.getLocalAddress()));
+            waitOn(client.connect());
+            Map<String, ? extends TargetObject> elements =
+                    waitOn(client.fetchObjectElements(List.of()));
+            assertEquals(0, elements.size());
+            Map<String, ?> attributes = waitOn(client.fetchObjectAttributes(List.of()));
+            assertEquals(Set.of("Processes", "Available", TargetObject.DISPLAY_ATTRIBUTE_NAME,
+                    TargetFocusScope.FOCUS_ATTRIBUTE_NAME), attributes.keySet());
+            Object procContAttr = attributes.get("Processes");
+            TargetObject procCont = (TargetObject) procContAttr;
+            assertEquals(List.of("Processes"), procCont.getPath());
+            waitOn(client.close());
+        }
 	}
 
 	@Test
 	public void testLaunch() throws Throwable {
-		AsynchronousSocketChannel socket = socketChannel();
-		try (ServerRunner runner = new ServerRunner()) {
-			GadpClient client = new GadpClient("Test", socket);
-			waitOn(AsyncUtils.completable(TypeSpec.VOID, socket::connect,
-				runner.server.getLocalAddress()));
-			waitOn(client.connect());
-			TargetObject procCont = waitOn(client.fetchModelObject(List.of("Processes")));
-			assertTrue(procCont.getInterfaceNames().contains("Launcher"));
-			TargetLauncher launcher = procCont.as(TargetLauncher.class);
-			waitOn(launcher.launch(
-				Map.of(TargetCmdLineLauncher.CMDLINE_ARGS_NAME, "/bin/echo Hello, World!")));
-			waitOn(client.close());
-		}
-		finally {
-			socket.close();
-		}
+        try (AsynchronousSocketChannel socket = socketChannel(); ServerRunner runner = new ServerRunner()) {
+            GadpClient client = new GadpClient("Test", socket);
+            waitOn(AsyncUtils.completable(TypeSpec.VOID, socket::connect,
+                    runner.server.getLocalAddress()));
+            waitOn(client.connect());
+            TargetObject procCont = waitOn(client.fetchModelObject(List.of("Processes")));
+            assertTrue(procCont.getInterfaceNames().contains("Launcher"));
+            TargetLauncher launcher = procCont.as(TargetLauncher.class);
+            waitOn(launcher.launch(
+                    Map.of(TargetCmdLineLauncher.CMDLINE_ARGS_NAME, "/bin/echo Hello, World!")));
+            waitOn(client.close());
+        }
 
 		assertEquals(Map.of(TargetCmdLineLauncher.CMDLINE_ARGS_NAME, "/bin/echo Hello, World!"),
 			launches.poll());
@@ -936,21 +909,17 @@ public class GadpClientServerTest implements AsyncTestUtils {
 				invocations.add(new ElementsChangedInvocation(parent, removed, added));
 			}
 		};
-		AsynchronousSocketChannel socket = socketChannel();
-		try (ServerRunner runner = new ServerRunner()) {
-			GadpClient client = new GadpClient("Test", socket);
-			waitOn(AsyncUtils.completable(TypeSpec.VOID, socket::connect,
-				runner.server.getLocalAddress()));
-			waitOn(client.connect());
-			TargetObject avail = waitOn(client.fetchModelObject(List.of("Available")));
-			avail.addListener(listener);
-			Map<String, ? extends TargetObject> elements = waitOn(avail.fetchElements());
-			Msg.debug(this, "Elements: " + elements);
-			waitOn(client.close());
-		}
-		finally {
-			socket.close();
-		}
+        try (AsynchronousSocketChannel socket = socketChannel(); ServerRunner runner = new ServerRunner()) {
+            GadpClient client = new GadpClient("Test", socket);
+            waitOn(AsyncUtils.completable(TypeSpec.VOID, socket::connect,
+                    runner.server.getLocalAddress()));
+            waitOn(client.connect());
+            TargetObject avail = waitOn(client.fetchModelObject(List.of("Available")));
+            avail.addListener(listener);
+            Map<String, ? extends TargetObject> elements = waitOn(avail.fetchElements());
+            Msg.debug(this, "Elements: " + elements);
+            waitOn(client.close());
+        }
 	}
 
 	@Test
@@ -970,84 +939,72 @@ public class GadpClientServerTest implements AsyncTestUtils {
 					}
 				}
 			};
-		AsynchronousSocketChannel socket = socketChannel();
-		try (ServerRunner runner = new ServerRunner()) {
-			GadpClient client = new GadpClient("Test", socket);
-			waitOn(AsyncUtils.completable(TypeSpec.VOID, socket::connect,
-				runner.server.getLocalAddress()));
-			waitOn(client.connect());
-			TargetObject session = waitOn(client.fetchModelObject(List.of()));
-			session.addListener(focusListener);
-			TargetObject procCont = waitOn(client.fetchModelObject(List.of("Processes")));
-			assertTrue(procCont.getInterfaceNames().contains("Launcher"));
-			TargetLauncher launcher = procCont.as(TargetLauncher.class);
-			waitOn(launcher.launch(
-				Map.of(TargetCmdLineLauncher.CMDLINE_ARGS_NAME, "/bin/echo Hello, World!")));
-			launches.clear(); // Don't care. Just free it up.
-			Map<String, ?> attrs = waitOn(client.fetchObjectAttributes(List.of()));
-			assertTrue(attrs.containsKey(TargetFocusScope.FOCUS_ATTRIBUTE_NAME));
-			TargetObject focus = (TargetObject) attrs.get(TargetFocusScope.FOCUS_ATTRIBUTE_NAME);
-			// NOTE: Could be actual object, but need not be
-			assertEquals(List.of("Processes", "[0]"), focus.getPath());
-			waitOn(focusPath);
-			waitOn(client.close());
+        try (AsynchronousSocketChannel socket = socketChannel(); ServerRunner runner = new ServerRunner()) {
+            GadpClient client = new GadpClient("Test", socket);
+            waitOn(AsyncUtils.completable(TypeSpec.VOID, socket::connect,
+                    runner.server.getLocalAddress()));
+            waitOn(client.connect());
+            TargetObject session = waitOn(client.fetchModelObject(List.of()));
+            session.addListener(focusListener);
+            TargetObject procCont = waitOn(client.fetchModelObject(List.of("Processes")));
+            assertTrue(procCont.getInterfaceNames().contains("Launcher"));
+            TargetLauncher launcher = procCont.as(TargetLauncher.class);
+            waitOn(launcher.launch(
+                    Map.of(TargetCmdLineLauncher.CMDLINE_ARGS_NAME, "/bin/echo Hello, World!")));
+            launches.clear(); // Don't care. Just free it up.
+            Map<String, ?> attrs = waitOn(client.fetchObjectAttributes(List.of()));
+            assertTrue(attrs.containsKey(TargetFocusScope.FOCUS_ATTRIBUTE_NAME));
+            TargetObject focus = (TargetObject) attrs.get(TargetFocusScope.FOCUS_ATTRIBUTE_NAME);
+            // NOTE: Could be actual object, but need not be
+            assertEquals(List.of("Processes", "[0]"), focus.getPath());
+            waitOn(focusPath);
+            waitOn(client.close());
 
-			assertFalse(failed.get());
-		}
-		finally {
-			socket.close();
-		}
+            assertFalse(failed.get());
+        }
 		assertEquals(List.of("Processes", "[0]"), focusPath.getNow(null));
 	}
 
 	@Test
 	public void testSubscribeNoSuchPath() throws Throwable {
-		AsynchronousSocketChannel socket = socketChannel();
-		try (ServerRunner runner = new ServerRunner()) {
-			GadpClient client = new GadpClient("Test", socket);
-			waitOn(AsyncUtils.completable(TypeSpec.VOID, socket::connect,
-				runner.server.getLocalAddress()));
-			waitOn(client.connect());
-			assertNull(waitOn(client.fetchModelObject(List.of("NotHere"))));
-		}
-		finally {
-			socket.close();
-		}
+        try (AsynchronousSocketChannel socket = socketChannel(); ServerRunner runner = new ServerRunner()) {
+            GadpClient client = new GadpClient("Test", socket);
+            waitOn(AsyncUtils.completable(TypeSpec.VOID, socket::connect,
+                    runner.server.getLocalAddress()));
+            waitOn(client.connect());
+            assertNull(waitOn(client.fetchModelObject(List.of("NotHere"))));
+        }
 	}
 
 	@Test
 	public void testSubscribeLaunchForChildrenChanged() throws Throwable {
 		ElementsChangedListener elemL = new ElementsChangedListener();
 
-		AsynchronousSocketChannel socket = socketChannel();
-		try (ServerRunner runner = new ServerRunner()) {
-			GadpClient client = new GadpClient("Test", socket);
+        try (AsynchronousSocketChannel socket = socketChannel(); ServerRunner runner = new ServerRunner()) {
+            GadpClient client = new GadpClient("Test", socket);
 
-			waitOn(AsyncUtils.completable(TypeSpec.VOID, socket::connect,
-				runner.server.getLocalAddress()));
-			waitOn(client.connect());
-			TargetObject procContainer = waitOn(client.fetchModelObject(List.of("Processes")));
-			assertTrue(procContainer.getInterfaceNames().contains("Launcher"));
-			procContainer.addListener(elemL);
-			TargetLauncher launcher = procContainer.as(TargetLauncher.class);
-			waitOn(launcher.launch(
-				Map.of(TargetCmdLineLauncher.CMDLINE_ARGS_NAME, "/bin/echo Hello, World!")));
-			waitOn(elemL.count.waitValue(1));
+            waitOn(AsyncUtils.completable(TypeSpec.VOID, socket::connect,
+                    runner.server.getLocalAddress()));
+            waitOn(client.connect());
+            TargetObject procContainer = waitOn(client.fetchModelObject(List.of("Processes")));
+            assertTrue(procContainer.getInterfaceNames().contains("Launcher"));
+            procContainer.addListener(elemL);
+            TargetLauncher launcher = procContainer.as(TargetLauncher.class);
+            waitOn(launcher.launch(
+                    Map.of(TargetCmdLineLauncher.CMDLINE_ARGS_NAME, "/bin/echo Hello, World!")));
+            waitOn(elemL.count.waitValue(1));
 
-			waitOn(client.close());
+            waitOn(client.close());
 
-			assertEquals(1, elemL.invocations.size());
-			ElementsChangedInvocation eci = elemL.invocations.get(0);
-			assertEquals(procContainer, eci.parent);
-			assertEquals(List.of(), List.copyOf(eci.removed));
-			assertEquals(1, eci.added.size());
-			Entry<String, ? extends TargetObject> ent = eci.added.entrySet().iterator().next();
-			assertEquals("0", ent.getKey());
-			assertEquals(List.of("Processes", "[0]"), ent.getValue().getPath());
-		}
-		finally {
-			socket.close();
-		}
+            assertEquals(1, elemL.invocations.size());
+            ElementsChangedInvocation eci = elemL.invocations.get(0);
+            assertEquals(procContainer, eci.parent);
+            assertEquals(List.of(), List.copyOf(eci.removed));
+            assertEquals(1, eci.added.size());
+            Entry<String, ? extends TargetObject> ent = eci.added.entrySet().iterator().next();
+            assertEquals("0", ent.getKey());
+            assertEquals(List.of("Processes", "[0]"), ent.getValue().getPath());
+        }
 	}
 
 	@Test
@@ -1272,45 +1229,37 @@ public class GadpClientServerTest implements AsyncTestUtils {
 
 	@Test
 	public void testProxyWithLinkedElements() throws Throwable {
-		AsynchronousSocketChannel socket = socketChannel();
-		try (ServerRunner runner = new ServerRunner()) {
-			GadpClient client = new GadpClient("Test", socket);
-			waitOn(AsyncUtils.completable(TypeSpec.VOID, socket::connect,
-				runner.server.getLocalAddress()));
-			waitOn(client.connect());
-			TargetObjectAddedWaiter waiter = new TargetObjectAddedWaiter(client);
-			runner.server.model.session.addLinks();
-			TargetObject canonical =
-				(TargetObject) waitOn(waiter.wait(PathUtils.parse("Available[2]")));
-			TargetObject link = (TargetObject) waitOn(waiter.wait(PathUtils.parse("Links[1]")));
-			assertSame(canonical, link);
-			assertEquals(PathUtils.parse("Available[2]"), link.getPath());
-			waitOn(client.close());
-			waiter.close();
-		}
-		finally {
-			socket.close();
-		}
+        try (AsynchronousSocketChannel socket = socketChannel(); ServerRunner runner = new ServerRunner()) {
+            GadpClient client = new GadpClient("Test", socket);
+            waitOn(AsyncUtils.completable(TypeSpec.VOID, socket::connect,
+                    runner.server.getLocalAddress()));
+            waitOn(client.connect());
+            TargetObjectAddedWaiter waiter = new TargetObjectAddedWaiter(client);
+            runner.server.model.session.addLinks();
+            TargetObject canonical =
+                    (TargetObject) waitOn(waiter.wait(PathUtils.parse("Available[2]")));
+            TargetObject link = (TargetObject) waitOn(waiter.wait(PathUtils.parse("Links[1]")));
+            assertSame(canonical, link);
+            assertEquals(PathUtils.parse("Available[2]"), link.getPath());
+            waitOn(client.close());
+            waiter.close();
+        }
 	}
 
 	@Test
 	public void testFetchModelValueFollowsLink() throws Throwable {
-		AsynchronousSocketChannel socket = socketChannel();
-		try (ServerRunner runner = new ServerRunner()) {
-			GadpClient client = new GadpClient("Test", socket);
-			waitOn(AsyncUtils.completable(TypeSpec.VOID, socket::connect,
-				runner.server.getLocalAddress()));
-			waitOn(client.connect());
-			TargetObjectAddedWaiter waiter = new TargetObjectAddedWaiter(client);
-			runner.server.model.session.addLinks();
-			waitOn(waiter.wait(PathUtils.parse("Links[2]")));
-			assertEquals("echo", waitOn(client.fetchModelValue(PathUtils.parse("Links[2].cmd"))));
-			waitOn(client.close());
-			waiter.close();
-		}
-		finally {
-			socket.close();
-		}
+        try (AsynchronousSocketChannel socket = socketChannel(); ServerRunner runner = new ServerRunner()) {
+            GadpClient client = new GadpClient("Test", socket);
+            waitOn(AsyncUtils.completable(TypeSpec.VOID, socket::connect,
+                    runner.server.getLocalAddress()));
+            waitOn(client.connect());
+            TargetObjectAddedWaiter waiter = new TargetObjectAddedWaiter(client);
+            runner.server.model.session.addLinks();
+            waitOn(waiter.wait(PathUtils.parse("Links[2]")));
+            assertEquals("echo", waitOn(client.fetchModelValue(PathUtils.parse("Links[2].cmd"))));
+            waitOn(client.close());
+            waiter.close();
+        }
 	}
 
 	public static class EventListener implements DebuggerModelListener {

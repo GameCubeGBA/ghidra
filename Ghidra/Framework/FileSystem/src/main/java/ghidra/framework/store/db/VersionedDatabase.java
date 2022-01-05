@@ -396,23 +396,16 @@ public class VersionedDatabase extends Database {
 			}
 			if (version == LATEST_VERSION || version == currentVersion) {
 				File file = bfMgr.getBufferFile(currentVersion);
-				InputStream itemIn = new BufferedInputStream(new FileInputStream(file));
-				boolean success = false;
-				try {
-					ItemSerializer.outputItem(name, contentType, filetype, file.length(), itemIn,
-						outputFile, monitor);
-					success = true;
-				}
-				finally {
-					try {
-						itemIn.close();
-					}
-					catch (IOException e) {
-					}
-					if (!success) {
-						outputFile.delete();
-					}
-				}
+                try (InputStream itemIn = new BufferedInputStream(new FileInputStream(file))) {
+                    boolean success = false;
+                    ItemSerializer.outputItem(name, contentType, filetype, file.length(), itemIn,
+                            outputFile, monitor);
+                    success = true;
+                } finally {
+                    if (!success) {
+                        outputFile.delete();
+                    }
+                }
 			}
 			else {
 				BufferFile bf = openBufferFile(version, -1);
@@ -425,18 +418,10 @@ public class VersionedDatabase extends Database {
 						LocalBufferFile.copyFile(bf, tmpBf, null, monitor);
 						tmpBf.close();
 
-						InputStream itemIn = new FileInputStream(tmpFile);
-						try {
-							ItemSerializer.outputItem(name, contentType, filetype, tmpFile.length(),
-								itemIn, outputFile, monitor);
-						}
-						finally {
-							try {
-								itemIn.close();
-							}
-							catch (IOException e) {
-							}
-						}
+                        try (InputStream itemIn = new FileInputStream(tmpFile)) {
+                            ItemSerializer.outputItem(name, contentType, filetype, tmpFile.length(),
+                                    itemIn, outputFile, monitor);
+                        }
 						success = true;
 					}
 					finally {

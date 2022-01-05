@@ -199,21 +199,16 @@ public class GhidraScriptEditorComponentProvider extends ComponentProvider {
 
 	private String loadSciptFile() throws IOException {
 		StringBuffer buffer = new StringBuffer();
-		BufferedReader reader =
-			new BufferedReader(new InputStreamReader(scriptSourceFile.getInputStream()));
-		try {
-			while (true) {
-				String line = reader.readLine();
-				if (line == null) {
-					break;
-				}
-				buffer.append(line);
-				buffer.append('\n');
-			}
-		}
-		finally {
-			reader.close();
-		}
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(scriptSourceFile.getInputStream()))) {
+            while (true) {
+                String line = reader.readLine();
+                if (line == null) {
+                    break;
+                }
+                buffer.append(line);
+                buffer.append('\n');
+            }
+        }
 		return buffer.toString();
 	}
 

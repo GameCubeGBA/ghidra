@@ -83,13 +83,9 @@ public class SplitExtensibleFirmwareInterfaceScript extends GhidraScript {
 
 				byte[] targetBytes = reader.readByteArray(offset, size);
 
-				OutputStream targetOut = new FileOutputStream(new File(directory, targetName));
-				try {
-					targetOut.write(targetBytes);
-				}
-				finally {
-					targetOut.close();
-				}
+                try (OutputStream targetOut = new FileOutputStream(new File(directory, targetName))) {
+                    targetOut.write(targetBytes);
+                }
 			}
 
 			popup(messages.toString());

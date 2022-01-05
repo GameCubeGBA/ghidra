@@ -438,19 +438,15 @@ public class SpecExtensionPanel extends JPanel {
 
 	private static String fileToString(File file) throws IOException {
 		FileReader inputReader = new FileReader(file);
-		BufferedReader reader = new BufferedReader(inputReader);
-		try {
-			StringBuffer buffer = new StringBuffer();
-			String line = null;
-			while ((line = reader.readLine()) != null) {
-				buffer.append(line);
-				buffer.append('\n');
-			}
-			return buffer.toString();
-		}
-		finally {
-			reader.close();
-		}
+        try (BufferedReader reader = new BufferedReader(inputReader)) {
+            StringBuffer buffer = new StringBuffer();
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                buffer.append(line);
+                buffer.append('\n');
+            }
+            return buffer.toString();
+        }
 	}
 
 	private int findMatch(SpecExtension.Type type, String name) {

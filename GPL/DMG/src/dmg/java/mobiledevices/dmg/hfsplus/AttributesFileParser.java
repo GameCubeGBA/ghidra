@@ -80,14 +80,11 @@ public class AttributesFileParser {
 
 		File file = File.createTempFile( "Ghidra_" + volumeHeaderFileName + "_", ".tmp" );
 		file.deleteOnExit();
-		OutputStream out = new FileOutputStream( file );
-		try {
-			CommonHFSForkData fork = CommonHFSForkData.create( volumeHeaderFile );
-			hfsxFileSystemView.extractForkToStream( fork, fork.getBasicExtents(), out, new NullProgressMonitor() {} );
-		}
-		finally {
-			out.close();
-		}
+        try (OutputStream out = new FileOutputStream(file)) {
+            CommonHFSForkData fork = CommonHFSForkData.create(volumeHeaderFile);
+            hfsxFileSystemView.extractForkToStream(fork, fork.getBasicExtents(), out, new NullProgressMonitor() {
+            });
+        }
 		return file;
 	}
 	

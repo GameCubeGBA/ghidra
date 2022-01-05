@@ -194,17 +194,12 @@ public abstract class AbstractGhidraScriptMgrPluginTest
 	protected void assertScriptCategory(ResourceFile newScript, String category) throws Exception {
 
 		try {
-			BufferedReader reader =
-				new BufferedReader(new InputStreamReader(newScript.getInputStream()));
-			try {
-				reader.readLine(); // header comment
-				reader.readLine(); //@author
-				String line = reader.readLine(); //@category
-				assertEquals("//@category " + category, line);
-			}
-			finally {
-				reader.close();
-			}
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(newScript.getInputStream()))) {
+                reader.readLine(); // header comment
+                reader.readLine(); //@author
+                String line = reader.readLine(); //@category
+                assertEquals("//@category " + category, line);
+            }
 		}
 		finally {
 			newScript.delete();

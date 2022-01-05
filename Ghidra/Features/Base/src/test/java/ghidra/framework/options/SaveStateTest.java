@@ -172,19 +172,12 @@ public class SaveStateTest extends AbstractGenericTest {
 	}
 
 	private void saveElement(Element element, File saveFile) throws Exception {
-		OutputStream os = null;
-		try {
-			os = new FileOutputStream(saveFile);
-			Document doc = new Document(element);
-			XMLOutputter xmlout = new GenericXMLOutputter();
-			xmlout.output(doc, os);
-			os.close();
-		}
-		finally {
-			if (os != null) {
-				os.close();
-			}
-		}
+        try (OutputStream os = new FileOutputStream(saveFile)) {
+            Document doc = new Document(element);
+            XMLOutputter xmlout = new GenericXMLOutputter();
+            xmlout.output(doc, os);
+            os.close();
+        }
 	}
 
 	@Test

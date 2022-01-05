@@ -88,26 +88,19 @@ public class DbgLoader extends AbstractPeDebugLoader {
 		String parentPath = prog.getExecutablePath();
 		File parentFile = new File(parentPath);
 
-		RandomAccessByteProvider provider2 = null;
-		try {
-			provider2 = new RandomAccessByteProvider(parentFile);
-			PortableExecutable parentPE =
-				PortableExecutable.createPortableExecutable(factory, provider2, SectionLayout.FILE);
-			Address imageBase = prog.getImageBase();
-			Map<SectionHeader, Address> sectionToAddress = new HashMap<>();
-			FileHeader fileHeader = parentPE.getNTHeader().getFileHeader();
-			SectionHeader[] sectionHeaders = fileHeader.getSectionHeaders();
-			for (SectionHeader sectionHeader : sectionHeaders) {
-				sectionToAddress.put(sectionHeader,
-					imageBase.add(sectionHeader.getVirtualAddress()));
-			}
-			processDebug(debug.getParser(), fileHeader, sectionToAddress, prog, monitor);
-		}
-		finally {
-			if (provider2 != null) {
-				provider2.close();
-			}
-		}
+        try (RandomAccessByteProvider provider2 = new RandomAccessByteProvider(parentFile)) {
+            PortableExecutable parentPE =
+                    PortableExecutable.createPortableExecutable(factory, provider2, SectionLayout.FILE);
+            Address imageBase = prog.getImageBase();
+            Map<SectionHeader, Address> sectionToAddress = new HashMap<>();
+            FileHeader fileHeader = parentPE.getNTHeader().getFileHeader();
+            SectionHeader[] sectionHeaders = fileHeader.getSectionHeaders();
+            for (SectionHeader sectionHeader : sectionHeaders) {
+                sectionToAddress.put(sectionHeader,
+                        imageBase.add(sectionHeader.getVirtualAddress()));
+            }
+            processDebug(debug.getParser(), fileHeader, sectionToAddress, prog, monitor);
+        }
 	}
 
 	@Override

@@ -39,23 +39,11 @@ public class DocumentStorage {
 
 	// Open and parse an XML file, return Document object
 	public Document openDocument(String filename) throws XmlError {
-		InputStream is = null;
-		try {
-			is = new FileInputStream(filename);
-			return parseDocument(is);
-		}
-		catch (Exception e) {
-			throw new XmlError("Unable to open xml document " + filename);
-		}
-		finally {
-			try {
-				if (is != null) {
-					is.close();
-				}
-			}
-			catch (IOException e) {
-			}
-		}
+        try (InputStream is = new FileInputStream(filename)) {
+            return parseDocument(is);
+        } catch (Exception e) {
+            throw new XmlError("Unable to open xml document " + filename);
+        }
 	}
 
 	// Register a tag under its name

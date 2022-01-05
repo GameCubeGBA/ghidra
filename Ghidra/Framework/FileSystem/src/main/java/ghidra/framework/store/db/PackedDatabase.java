@@ -514,28 +514,20 @@ public class PackedDatabase extends Database {
 		}
 		int version = bfMgr.getCurrentVersion() + 1; // should be 1 in most situations
 		File file = bfMgr.getBufferFile(version);
-		OutputStream out = new BufferedOutputStream(new FileOutputStream(file));
-		ItemDeserializer itemDeserializer = null;
-		try {
-			Msg.debug(PackedDatabase.class, "Unpacking database " + packedFile + " -> " + file);
-			itemDeserializer = new ItemDeserializer(packedFile);
-			itemDeserializer.saveItem(out, monitor);
-			bfMgr.versionCreated(version, "Unpacked " + packedFile, checkinId);
-		}
-		catch (IOCancelledException e) {
-			throw new CancelledException();
-		}
-		finally {
-			if (itemDeserializer != null) {
-				itemDeserializer.dispose();
-			}
-			try {
-				out.close();
-			}
-			catch (IOException e) {
-				// ignore
-			}
-		}
+        try (OutputStream out = new BufferedOutputStream(new FileOutputStream(file))) {
+            ItemDeserializer itemDeserializer = null;
+            Msg.debug(PackedDatabase.class, "Unpacking database " + packedFile + " -> " + file);
+            itemDeserializer = new ItemDeserializer(packedFile);
+            itemDeserializer.saveItem(out, monitor);
+            bfMgr.versionCreated(version, "Unpacked " + packedFile, checkinId);
+        } catch (IOCancelledException e) {
+            throw new CancelledException();
+        } finally {
+            if (itemDeserializer != null) {
+                itemDeserializer.dispose();
+            }
+            // ignore
+        }
 	}
 
 	/**
@@ -672,21 +664,12 @@ public class PackedDatabase extends Database {
 		}
 		monitor.setMessage("Packing file...");
 
-		InputStream itemIn = new FileInputStream(dbFile);
-		try {
-			ItemSerializer.outputItem(name, contentType, FolderItem.DATABASE_FILE_TYPE,
-				dbFile.length(), itemIn, outputFile, monitor);
-		}
-		catch (IOCancelledException e) {
-			throw new CancelledException();
-		}
-		finally {
-			try {
-				itemIn.close();
-			}
-			catch (IOException e) {
-			}
-		}
+        try (InputStream itemIn = new FileInputStream(dbFile)) {
+            ItemSerializer.outputItem(name, contentType, FolderItem.DATABASE_FILE_TYPE,
+                    dbFile.length(), itemIn, outputFile, monitor);
+        } catch (IOCancelledException e) {
+            throw new CancelledException();
+        }
 	}
 
 	/**

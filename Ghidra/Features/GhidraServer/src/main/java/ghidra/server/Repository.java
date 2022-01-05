@@ -487,27 +487,23 @@ public class Repository implements FileSystemListener, RepositoryLogger {
 		File temp = new File(userAccessFile.getParentFile(), "tempAccess.tmp");
 		temp.delete();
 
-		PrintWriter out = new PrintWriter(new FileOutputStream(temp));
-		try {
-			out.println(";");
-			out.println("; User Access List for " + name + ": Auto-generated on " + new Date());
-			out.println(";");
+        try (PrintWriter out = new PrintWriter(new FileOutputStream(temp))) {
+            out.println(";");
+            out.println("; User Access List for " + name + ": Auto-generated on " + new Date());
+            out.println(";");
 
-			if (allowAnonymous) {
-				out.println(ANONYMOUS_STR);
-			}
+            if (allowAnonymous) {
+                out.println(ANONYMOUS_STR);
+            }
 
-			Iterator<User> iter = newUserMap.values().iterator();
-			while (iter.hasNext()) {
-				User user = iter.next();
-				String line = user.getName() + "=" + TYPE_NAMES[user.getPermissionType()];
-				out.println(line);
-			}
-			out.flush();
-		}
-		finally {
-			out.close();
-		}
+            Iterator<User> iter = newUserMap.values().iterator();
+            while (iter.hasNext()) {
+                User user = iter.next();
+                String line = user.getName() + "=" + TYPE_NAMES[user.getPermissionType()];
+                out.println(line);
+            }
+            out.flush();
+        }
 
 		userAccessFile.delete();
 		temp.renameTo(userAccessFile);

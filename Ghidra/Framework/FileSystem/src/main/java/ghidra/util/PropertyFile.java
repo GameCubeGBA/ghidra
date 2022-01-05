@@ -290,29 +290,25 @@ public class PropertyFile {
 	 * @throws IOException thrown if there was a problem writing the file
 	 */
 	public void writeState() throws IOException {
-		PrintWriter writer = new PrintWriter(propertyFile);
-		try {
-			writer.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-			writer.println("<FILE_INFO>");
-			writer.println("    <BASIC_INFO>");
-			for (Entry<String, Pair<PropertyEntryType, String>> entry : map.entrySet()) {
-				String propertyName = entry.getKey();
-				String propertyType = entry.getValue().first.rep;
-				String propertyValue = entry.getValue().second;
-				writer.print("        <STATE NAME=\"");
-				writer.print(XmlUtilities.escapeElementEntities(propertyName));
-				writer.print("\" TYPE=\"");
-				writer.print(XmlUtilities.escapeElementEntities(propertyType));
-				writer.print("\" VALUE=\"");
-				writer.print(XmlUtilities.escapeElementEntities(propertyValue));
-				writer.println("\" />");
-			}
-			writer.println("    </BASIC_INFO>");
-			writer.println("</FILE_INFO>");
-		}
-		finally {
-			writer.close();
-		}
+        try (PrintWriter writer = new PrintWriter(propertyFile)) {
+            writer.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+            writer.println("<FILE_INFO>");
+            writer.println("    <BASIC_INFO>");
+            for (Entry<String, Pair<PropertyEntryType, String>> entry : map.entrySet()) {
+                String propertyName = entry.getKey();
+                String propertyType = entry.getValue().first.rep;
+                String propertyValue = entry.getValue().second;
+                writer.print("        <STATE NAME=\"");
+                writer.print(XmlUtilities.escapeElementEntities(propertyName));
+                writer.print("\" TYPE=\"");
+                writer.print(XmlUtilities.escapeElementEntities(propertyType));
+                writer.print("\" VALUE=\"");
+                writer.print(XmlUtilities.escapeElementEntities(propertyValue));
+                writer.println("\" />");
+            }
+            writer.println("    </BASIC_INFO>");
+            writer.println("</FILE_INFO>");
+        }
 	}
 
 	private static final ErrorHandler HANDLER = new ErrorHandler() {

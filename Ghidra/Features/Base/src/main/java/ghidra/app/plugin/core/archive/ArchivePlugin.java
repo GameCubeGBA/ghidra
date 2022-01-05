@@ -329,47 +329,26 @@ public class ArchivePlugin extends Plugin implements FrontEndOnly, ProjectListen
 			return null;
 		}
 		File archiveFile = new File(archivePathName);
-		FileInputStream fileIn = null;
-		JarInputStream jarIn = null;
-		try {
-			fileIn = new FileInputStream(archiveFile);
-			jarIn = new JarInputStream(fileIn);
-			while (true) {
-				ZipEntry zipEntry = jarIn.getNextEntry();
-				if (zipEntry == null) {
-					break;
-				}
-				String name = zipEntry.getName();
-				jarIn.closeEntry();
-				if (name.endsWith(ProjectLocator.getProjectExtension())) {
-					int endIndex = name.length() - ProjectLocator.getProjectExtension().length();
-					String projectName = name.substring(0, endIndex);
-					return projectName;
-				}
-			}
-		}
-		catch (IOException e) {
-			// just return null below
-		}
-		finally {
-			if (jarIn != null) {
-				try {
-					jarIn.close();
-				}
-				catch (IOException e) {
-					// we tried
-				}
-			}
-			if (fileIn != null) {
-				try {
-					fileIn.close();
-				}
-				catch (IOException e) {
-					// we tried
-				}
-			}
-		}
-		return null;
+        try (FileInputStream fileIn = new FileInputStream(archiveFile); JarInputStream jarIn = new JarInputStream(fileIn)) {
+            while (true) {
+                ZipEntry zipEntry = jarIn.getNextEntry();
+                if (zipEntry == null) {
+                    break;
+                }
+                String name = zipEntry.getName();
+                jarIn.closeEntry();
+                if (name.endsWith(ProjectLocator.getProjectExtension())) {
+                    int endIndex = name.length() - ProjectLocator.getProjectExtension().length();
+                    String projectName = name.substring(0, endIndex);
+                    return projectName;
+                }
+            }
+        } catch (IOException e) {
+            // just return null below
+        }
+        // we tried
+        // we tried
+        return null;
 	}
 
 	void cleanupRestoredProject(ProjectLocator projectLocator) {

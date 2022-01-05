@@ -64,14 +64,10 @@ public class GImage {
 		OutputStream out = new ByteArrayOutputStream();
 		ImageOutputStream imageOut = new MemoryCacheImageOutputStream(out);
 
-		imageWriter.setOutput(imageOut);
-
-		try {
-			imageWriter.write(bufferedImage);
-		}
-		finally {
-			imageOut.close();
-		}
+        try (imageOut) {
+            imageWriter.setOutput(imageOut);
+            imageWriter.write(bufferedImage);
+        }
 
 		Icon icon = new ImageIcon(bufferedImage);
 		return icon;

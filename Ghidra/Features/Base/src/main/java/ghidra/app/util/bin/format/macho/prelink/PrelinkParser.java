@@ -302,13 +302,9 @@ public class PrelinkParser {
 		try {
 			if (SystemUtilities.isInDevelopmentMode()) {
 				File file = File.createTempFile("__PRELINK_INFO", ".xml");
-				OutputStream out = new FileOutputStream(file);
-				try {
-					out.write(bytes);
-				}
-				finally {
-					out.close();
-				}
+                try (OutputStream out = new FileOutputStream(file)) {
+                    out.write(bytes);
+                }
 			}
 		}
 		catch (Exception e) {

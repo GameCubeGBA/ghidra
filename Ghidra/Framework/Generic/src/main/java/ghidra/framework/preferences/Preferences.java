@@ -325,27 +325,15 @@ public class Preferences {
 		}
 
 		// Save properties to file
-		BufferedOutputStream os = null;
-		try {
-			os = new BufferedOutputStream(new FileOutputStream(filename));
-			properties.store(os, "User Preferences");
-			os.close();
-			return true;
-		}
-		catch (IOException e) {
-			Msg.error(Preferences.class, "Failed to store user preferences: " + filename);
-		}
-		finally {
-			if (os != null) {
-				try {
-					os.close();
-				}
-				catch (IOException e) {
-					// we tried
-				}
-			}
-		}
-		return false;
+        try (BufferedOutputStream os = new BufferedOutputStream(new FileOutputStream(filename))) {
+            properties.store(os, "User Preferences");
+            os.close();
+            return true;
+        } catch (IOException e) {
+            Msg.error(Preferences.class, "Failed to store user preferences: " + filename);
+        }
+        // we tried
+        return false;
 	}
 
 	/**

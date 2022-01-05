@@ -63,46 +63,38 @@ public class ObjectiveC2_ClassAnalyzer extends AbstractAnalyzer {
 		ByteProvider provider =
 			new MemoryByteProvider(program.getMemory(),
 				program.getAddressFactory().getDefaultAddressSpace());
-		BinaryReader reader = new BinaryReader(provider, !program.getLanguage().isBigEndian());
 
-		ObjectiveC2_State state =
-			new ObjectiveC2_State(program, monitor, ObjectiveC2_Constants.CATEGORY_PATH);
+        try (provider) {
+            BinaryReader reader = new BinaryReader(provider, !program.getLanguage().isBigEndian());
+            ObjectiveC2_State state =
+                    new ObjectiveC2_State(program, monitor, ObjectiveC2_Constants.CATEGORY_PATH);
+            processImageInfo(state, reader);
 
-		try {
-			processImageInfo(state, reader);
+            processClassList(state, reader);
+            processCategoryList(state, reader);
+            processProtocolList(state, reader);
 
-			processClassList(state, reader);
-			processCategoryList(state, reader);
-			processProtocolList(state, reader);
+            processClassReferences(state);
+            processSuperReferences(state);
+            processProtocolReferences(state);
+            processNonLazyClassReferences(state);
+            processSelectorReferences(state);
+            processMessageReferences(state, reader);
 
-			processClassReferences(state);
-			processSuperReferences(state);
-			processProtocolReferences(state);
-			processNonLazyClassReferences(state);
-			processSelectorReferences(state);
-			processMessageReferences(state, reader);
+            ObjectiveC1_Utilities.createMethods(state);
+            ObjectiveC1_Utilities.createInstanceVariablesC2_OBJC2(state);
+            ObjectiveC1_Utilities.fixupReferences(state);
 
-			ObjectiveC1_Utilities.createMethods(state);
-			ObjectiveC1_Utilities.createInstanceVariablesC2_OBJC2(state);
-			ObjectiveC1_Utilities.fixupReferences(state);
+            setDataAndRefBlocksReadOnly(state);
+        } catch (Exception e) {
+            String message = e.getMessage();
+            log.appendMsg(getName(), message);
+            log.setStatus(message);
+            return false;
+        } finally {
+            state.dispose();
 
-			setDataAndRefBlocksReadOnly(state);
-		}
-		catch (Exception e) {
-			String message = e.getMessage();
-			log.appendMsg(getName(), message);
-			log.setStatus(message);
-			return false;
-		}
-		finally {
-			state.dispose();
-
-			try {
-				provider.close();
-			}
-			catch (IOException e) {
-			}
-		}
+        }
 		return true;
 	}
 

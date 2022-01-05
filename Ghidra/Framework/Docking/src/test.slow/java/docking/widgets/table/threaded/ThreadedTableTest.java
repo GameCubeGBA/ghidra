@@ -622,19 +622,15 @@ public class ThreadedTableTest extends AbstractThreadedTableTest {
 			throws FileNotFoundException, IOException {
 
 		int expectedIndex = 0;
-		BufferedReader actualReader = new BufferedReader(new FileReader(actualFile));
-		try {
-			while (true) {
-				String line = actualReader.readLine();
-				if (line == null) {
-					break;
-				}
-				assertEquals(expectedList.get(expectedIndex++), line);
-			}
-		}
-		finally {
-			actualReader.close();
-		}
+        try (BufferedReader actualReader = new BufferedReader(new FileReader(actualFile))) {
+            while (true) {
+                String line = actualReader.readLine();
+                if (line == null) {
+                    break;
+                }
+                assertEquals(expectedList.get(expectedIndex++), line);
+            }
+        }
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })

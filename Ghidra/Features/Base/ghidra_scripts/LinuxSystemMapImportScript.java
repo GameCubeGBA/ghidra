@@ -42,13 +42,9 @@ public class LinuxSystemMapImportScript extends GhidraScript {
 	@Override
 	public void run() throws Exception {
 		File file = askFile("Please specify the System.Map to apply", "Apply");
-		BufferedReader reader = new BufferedReader(new FileReader(file));
-		try {
-			readSystemMap(reader);
-		}
-		finally {
-			reader.close();
-		}
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            readSystemMap(reader);
+        }
 	}
 
 	private void readSystemMap(BufferedReader reader) throws IOException {

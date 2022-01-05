@@ -842,76 +842,67 @@ public class GhidraSourceBundle extends GhidraBundle {
 			throws OSGiException, IOException {
 		// no manifest, so create one with bndtools
 		Analyzer analyzer = new Analyzer();
-		analyzer.setJar(new Jar(binaryDir.toFile())); // give bnd the contents
-		analyzer.setProperty("Bundle-SymbolicName",
-			GhidraSourceBundle.sourceDirHash(getSourceDirectory()));
-		analyzer.setProperty("Bundle-Version", GENERATED_VERSION);
 
-		if (!importPackageValues.isEmpty()) {
-			// constrain analyzed imports according to what's declared in @importpackage tags
-			analyzer.setProperty("Import-Package",
-				importPackageValues.stream().collect(Collectors.joining(",")) + ",*");
-		}
-		else {
-			analyzer.setProperty("Import-Package", "*");
-		}
+        try (analyzer) {
+            analyzer.setJar(new Jar(binaryDir.toFile())); // give bnd the contents
+            analyzer.setProperty("Bundle-SymbolicName",
+                    GhidraSourceBundle.sourceDirHash(getSourceDirectory()));
+            analyzer.setProperty("Bundle-Version", GENERATED_VERSION);
+            if (!importPackageValues.isEmpty()) {
+                // constrain analyzed imports according to what's declared in @importpackage tags
+                analyzer.setProperty("Import-Package",
+                        importPackageValues.stream().collect(Collectors.joining(",")) + ",*");
+            } else {
+                analyzer.setProperty("Import-Package", "*");
+            }
+            analyzer.setProperty("Export-Package", "!*.private.*,!*.internal.*,*");
+            Manifest manifest;
+            try {
+                manifest = analyzer.calcManifest();
+            } catch (Exception e) {
+                summary.print("bad manifest");
+                throw new OSGiException("failed to calculate manifest by analyzing code", e);
+            }
 
-		analyzer.setProperty("Export-Package", "!*.private.*,!*.internal.*,*");
+            String activatorClassName = null;
+            try {
+                for (Clazz clazz : analyzer.getClassspace().values()) {
+                    if (clazz.is(QUERY.IMPLEMENTS,
+                            new Instruction("org.osgi.framework.BundleActivator"), analyzer)) {
+                        System.err.printf("found BundleActivator class %s\n", clazz);
+                        activatorClassName = clazz.toString();
+                    }
+                }
+            } catch (Exception e) {
+                summary.print("failed bnd analysis");
+                throw new OSGiException("failed to query classes while searching for activator", e);
+            }
 
-		try {
-			Manifest manifest;
-			try {
-				manifest = analyzer.calcManifest();
-			}
-			catch (Exception e) {
-				summary.print("bad manifest");
-				throw new OSGiException("failed to calculate manifest by analyzing code", e);
-			}
+            Attributes manifestAttributes = manifest.getMainAttributes();
+            if (activatorClassName == null) {
+                activatorClassName = GENERATED_ACTIVATOR_CLASSNAME;
+                if (!buildDefaultActivator(binaryDir, activatorClassName, writer)) {
+                    summary.print("failed to build generated activator");
+                    return summary.getValue();
+                }
+                // since we add the activator after bndtools built the imports, we should add its imports too
+                String imps = manifestAttributes.getValue(Constants.IMPORT_PACKAGE);
+                if (imps == null) {
+                    manifestAttributes.putValue(Constants.IMPORT_PACKAGE,
+                            GhidraBundleActivator.class.getPackageName());
+                } else {
+                    manifestAttributes.putValue(Constants.IMPORT_PACKAGE,
+                            imps + "," + GhidraBundleActivator.class.getPackageName());
+                }
+            }
+            manifestAttributes.putValue(Constants.BUNDLE_ACTIVATOR, activatorClassName);
 
-			String activatorClassName = null;
-			try {
-				for (Clazz clazz : analyzer.getClassspace().values()) {
-					if (clazz.is(QUERY.IMPLEMENTS,
-						new Instruction("org.osgi.framework.BundleActivator"), analyzer)) {
-						System.err.printf("found BundleActivator class %s\n", clazz);
-						activatorClassName = clazz.toString();
-					}
-				}
-			}
-			catch (Exception e) {
-				summary.print("failed bnd analysis");
-				throw new OSGiException("failed to query classes while searching for activator", e);
-			}
-
-			Attributes manifestAttributes = manifest.getMainAttributes();
-			if (activatorClassName == null) {
-				activatorClassName = GENERATED_ACTIVATOR_CLASSNAME;
-				if (!buildDefaultActivator(binaryDir, activatorClassName, writer)) {
-					summary.print("failed to build generated activator");
-					return summary.getValue();
-				}
-				// since we add the activator after bndtools built the imports, we should add its imports too
-				String imps = manifestAttributes.getValue(Constants.IMPORT_PACKAGE);
-				if (imps == null) {
-					manifestAttributes.putValue(Constants.IMPORT_PACKAGE,
-						GhidraBundleActivator.class.getPackageName());
-				}
-				else {
-					manifestAttributes.putValue(Constants.IMPORT_PACKAGE,
-						imps + "," + GhidraBundleActivator.class.getPackageName());
-				}
-			}
-			manifestAttributes.putValue(Constants.BUNDLE_ACTIVATOR, activatorClassName);
-
-			// write the manifest
-			Files.createDirectories(binaryManifest.getParent());
-			try (OutputStream out = Files.newOutputStream(binaryManifest)) {
-				manifest.write(out);
-			}
-		}
-		finally {
-			analyzer.close();
-		}
+            // write the manifest
+            Files.createDirectories(binaryManifest.getParent());
+            try (OutputStream out = Files.newOutputStream(binaryManifest)) {
+                manifest.write(out);
+            }
+        }
 		return summary.getValue();
 	}
 

@@ -118,41 +118,32 @@ public class DataTypeIDConverter implements GhidraLaunchable {
 		// followed by a space and then a new ID in Hex.
 		idMap = new LongLongHashtable();
 		FileReader reader = new FileReader(idMapFile);
-		BufferedReader bufferedReader = null;
-		try {
-			bufferedReader = new BufferedReader(reader);
-			String line;
-			while ((line = bufferedReader.readLine()) != null) {
-				// Parse the two hex Data Type Universal IDs from the line.
-				String[] tokens = line.split(" ");
-				if (tokens.length != 2) {
-					throw new InvalidInputException("Invalid line: " + line);
-				}
-				String oldIDString = tokens[0];
-				String newIDString = tokens[1];
-				long oldID = NumericUtilities.parseHexLong(oldIDString);
-				long newID = NumericUtilities.parseHexLong(newIDString);
-				if (idMap.contains(oldID)) {
-					System.out.println("Duplicate oldID ID encountered: " + oldIDString);
+        try (BufferedReader bufferedReader = new BufferedReader(reader)) {
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                // Parse the two hex Data Type Universal IDs from the line.
+                String[] tokens = line.split(" ");
+                if (tokens.length != 2) {
+                    throw new InvalidInputException("Invalid line: " + line);
+                }
+                String oldIDString = tokens[0];
+                String newIDString = tokens[1];
+                long oldID = NumericUtilities.parseHexLong(oldIDString);
+                long newID = NumericUtilities.parseHexLong(newIDString);
+                if (idMap.contains(oldID)) {
+                    System.out.println("Duplicate oldID ID encountered: " + oldIDString);
 //					throw new InvalidInputException("Duplicate oldID ID encountered: " +
 //						oldIDString);
-				}
-				idMap.put(oldID, newID);
+                }
+                idMap.put(oldID, newID);
 //				System.out.println(oldID + " 0x" + Long.toHexString(oldID) + "   " + newID + " 0x" +
 //					Long.toHexString(newID));
-			}
-		}
-		catch (NumberFormatException e) {
-			e.printStackTrace();
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-		finally {
-			if (bufferedReader != null) {
-				bufferedReader.close();
-			}
-		}
+            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 	}
 
 	private void transformDataTypes(FileDataTypeManager oldFileArchive) {

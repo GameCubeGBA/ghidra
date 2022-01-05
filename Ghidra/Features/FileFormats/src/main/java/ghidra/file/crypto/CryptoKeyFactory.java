@@ -62,47 +62,42 @@ public final class CryptoKeyFactory {
 			}
 			fileDatesMap.put(file.getName(), file.lastModified());
 			try {
-				InputStream is = file.getInputStream();
-				try {
-					SAXBuilder sax = XmlUtilities.createSecureSAXBuilder(false, false);
-					Document doc = sax.build(is);
-					Element root = doc.getRootElement();
-					String firmwareName = root.getAttributeValue("NAME");
-					if (!cryptoMap.containsKey(firmwareName)) {
-						cryptoMap.put(firmwareName, new HashMap<String, CryptoKey>());
-					}
-					List<Element> firmwareFileList =
-						CollectionUtils.asList(root.getChildren(), Element.class);
-					Iterator<Element> firmwareFileIter = firmwareFileList.iterator();
-					while (firmwareFileIter.hasNext()) {
-						Element firmwareFileElement = firmwareFileIter.next();
-						String path = firmwareFileElement.getAttributeValue("PATH");
-						if (firmwareFileElement.getAttribute("not_encrypted") != null) {
-							cryptoMap.get(firmwareName).put(path, CryptoKey.NOT_ENCRYPTED_KEY);
-						}
-						else {
-							Element keyElement = firmwareFileElement.getChild("KEY");
-							String keyString = keyElement.getText().trim();
-							if ((keyString.length() % 2) != 0) {
-								throw new CryptoException("Invalid key length in [" + firmwareName +
-									".xml] for [" + path + "]");
-							}
-							byte[] key = NumericUtilities.convertStringToBytes(keyString);
-							Element ivElement = firmwareFileElement.getChild("IV");
-							String ivString = ivElement.getText().trim();
-							if ((ivString.length() % 2) != 0) {
-								throw new CryptoException("Invalid iv length in [" + firmwareName +
-									".xml] for [" + path + "]");
-							}
-							byte[] iv = NumericUtilities.convertStringToBytes(ivString);
-							CryptoKey cryptoKey = new CryptoKey(key, iv);
-							cryptoMap.get(firmwareName).put(path, cryptoKey);
-						}
-					}
-				}
-				finally {
-					is.close();
-				}
+                try (InputStream is = file.getInputStream()) {
+                    SAXBuilder sax = XmlUtilities.createSecureSAXBuilder(false, false);
+                    Document doc = sax.build(is);
+                    Element root = doc.getRootElement();
+                    String firmwareName = root.getAttributeValue("NAME");
+                    if (!cryptoMap.containsKey(firmwareName)) {
+                        cryptoMap.put(firmwareName, new HashMap<String, CryptoKey>());
+                    }
+                    List<Element> firmwareFileList =
+                            CollectionUtils.asList(root.getChildren(), Element.class);
+                    Iterator<Element> firmwareFileIter = firmwareFileList.iterator();
+                    while (firmwareFileIter.hasNext()) {
+                        Element firmwareFileElement = firmwareFileIter.next();
+                        String path = firmwareFileElement.getAttributeValue("PATH");
+                        if (firmwareFileElement.getAttribute("not_encrypted") != null) {
+                            cryptoMap.get(firmwareName).put(path, CryptoKey.NOT_ENCRYPTED_KEY);
+                        } else {
+                            Element keyElement = firmwareFileElement.getChild("KEY");
+                            String keyString = keyElement.getText().trim();
+                            if ((keyString.length() % 2) != 0) {
+                                throw new CryptoException("Invalid key length in [" + firmwareName +
+                                        ".xml] for [" + path + "]");
+                            }
+                            byte[] key = NumericUtilities.convertStringToBytes(keyString);
+                            Element ivElement = firmwareFileElement.getChild("IV");
+                            String ivString = ivElement.getText().trim();
+                            if ((ivString.length() % 2) != 0) {
+                                throw new CryptoException("Invalid iv length in [" + firmwareName +
+                                        ".xml] for [" + path + "]");
+                            }
+                            byte[] iv = NumericUtilities.convertStringToBytes(ivString);
+                            CryptoKey cryptoKey = new CryptoKey(key, iv);
+                            cryptoMap.get(firmwareName).put(path, cryptoKey);
+                        }
+                    }
+                }
 			}
 			catch (Exception e) {
 				Msg.showError(CryptoKeyFactory.class, null, "Error Parsing Crypto Keys File",

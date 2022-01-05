@@ -64,13 +64,9 @@ public class RangeDisassemblerScript extends GhidraScript {
 
 		Msg.info(this, "Disassmbly Output File: " + outFile.getAbsolutePath());
 
-		PrintWriter out = new PrintWriter(outFile);
-		try {
-			disassembleRegion(out);
-		}
-		finally {
-			out.close();
-		}
+        try (PrintWriter out = new PrintWriter(outFile)) {
+            disassembleRegion(out);
+        }
 
 	}
 

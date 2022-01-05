@@ -63,33 +63,28 @@ class ApplicationKeyStore {
 		store.load(null);
 
 		InputStream fis = new FileInputStream(cacertsPath);
-		BufferedInputStream bis = new BufferedInputStream(fis);
 
-		try {
-			CertificateFactory cf = CertificateFactory.getInstance("X.509");
-			while (bis.available() > 0) {
-				try {
-					Certificate cert = cf.generateCertificate(bis);
-					if (cert instanceof X509Certificate) {
-						X509Certificate x509Cert = (X509Certificate) cert;
-						String name = getCommonName(x509Cert.getSubjectDN());
-						store.setCertificateEntry(name, cert);
-						++certCount;
-					}
-				}
-				catch (CertificateException e) {
-					// Must handle blank lines at bottom of file
-					Throwable cause = e.getCause();
-					if (cause != null && "Empty input".equals(cause.getMessage())) {
-						break; // end of file
-					}
-					throw e;
-				}
-			}
-		}
-		finally {
-			bis.close();
-		}
+        try (BufferedInputStream bis = new BufferedInputStream(fis)) {
+            CertificateFactory cf = CertificateFactory.getInstance("X.509");
+            while (bis.available() > 0) {
+                try {
+                    Certificate cert = cf.generateCertificate(bis);
+                    if (cert instanceof X509Certificate) {
+                        X509Certificate x509Cert = (X509Certificate) cert;
+                        String name = getCommonName(x509Cert.getSubjectDN());
+                        store.setCertificateEntry(name, cert);
+                        ++certCount;
+                    }
+                } catch (CertificateException e) {
+                    // Must handle blank lines at bottom of file
+                    Throwable cause = e.getCause();
+                    if (cause != null && "Empty input".equals(cause.getMessage())) {
+                        break; // end of file
+                    }
+                    throw e;
+                }
+            }
+        }
 		if (certCount == 0) {
 			// Processing JKS files above produce "Empty input", if no certs read
 			// try reading as keystore without password 
@@ -118,13 +113,9 @@ class ApplicationKeyStore {
 		KeyStore ks = KeyStore.getInstance(type);
 
 		InputStream fis = new FileInputStream(keystorePath);
-		BufferedInputStream bis = new BufferedInputStream(fis);
-		try {
-			ks.load(bis, pwd);
-		}
-		finally {
-			bis.close();
-		}
+        try (BufferedInputStream bis = new BufferedInputStream(fis)) {
+            ks.load(bis, pwd);
+        }
 		return ks;
 	}
 

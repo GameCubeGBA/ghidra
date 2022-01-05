@@ -102,22 +102,17 @@ public class SplitMultiplePefContainersScript extends GhidraScript {
 
 	private void writeFile(CFragResourceMember member, File memberFile, ByteProvider provider)
 			throws IOException {
-		OutputStream out = new FileOutputStream(memberFile);
-		int offset = member.getOffset();
-		int length = member.getLength();
-		try {
-			for (int i = offset; i < offset + length; i += BUFFER) {
-				if (i + BUFFER < offset + length) {
-					out.write(provider.readBytes(i, BUFFER));
-				}
-				else {
-					out.write(provider.readBytes(i, offset + length - i));
-				}
-			}
-		}
-		finally {
-			out.close();
-		}
+        try (OutputStream out = new FileOutputStream(memberFile)) {
+            int offset = member.getOffset();
+            int length = member.getLength();
+            for (int i = offset; i < offset + length; i += BUFFER) {
+                if (i + BUFFER < offset + length) {
+                    out.write(provider.readBytes(i, BUFFER));
+                } else {
+                    out.write(provider.readBytes(i, offset + length - i));
+                }
+            }
+        }
 	}
 
 	private CFragResource findCodeFragmentManager(ResourceHeader header) {

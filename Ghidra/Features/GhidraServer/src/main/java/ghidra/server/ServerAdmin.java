@@ -444,26 +444,14 @@ public class ServerAdmin implements GhidraLaunchable {
 		System.out.println("Using config file: " + configFilePath);
 
 		Properties config = new Properties();
-		InputStream in = null;
-		try {
-			in = new FileInputStream(configFile);
-			config.load(in);
-		}
-		catch (IOException e) {
-			System.out.println("Failed to read " + configFile.getName() + ": " + e.getMessage());
-		}
-		finally {
-			if (in != null) {
-				try {
-					in.close();
-				}
-				catch (IOException e) {
-					// ignore
-				}
-			}
-		}
+        try (InputStream in = new FileInputStream(configFile)) {
+            config.load(in);
+        } catch (IOException e) {
+            System.out.println("Failed to read " + configFile.getName() + ": " + e.getMessage());
+        }
+        // ignore
 
-		String p = config.getProperty(SERVER_DIR_CONFIG_PROPERTY);
+        String p = config.getProperty(SERVER_DIR_CONFIG_PROPERTY);
 		if (p == null) {
 			System.out.println("Failed to find property: " + SERVER_DIR_CONFIG_PROPERTY);
 			return null;

@@ -246,33 +246,21 @@ public class LockFile {
 
 	private String getLockOwner(boolean includeId) {
 		String owner = null;
-		FileInputStream fin = null;
-		try {
-			fin = new FileInputStream(lockFile);
-			byte[] bytes = new byte[32];
-			int cnt = fin.read(bytes);
-			owner = new String(bytes, 0, cnt);
-			if (!includeId) {
-				int spaceIndex = owner.indexOf(' ');
-				if (spaceIndex > 0) {
-					owner = owner.substring(0, spaceIndex);
-				}
-			}
-		}
-		catch (Exception e) {
-			owner = "<Unknown>";
-		}
-		finally {
-			if (fin != null) {
-				try {
-					fin.close();
-				}
-				catch (IOException e1) {
-					// we tried
-				}
-			}
-		}
-		return owner;
+        try (FileInputStream fin = new FileInputStream(lockFile)) {
+            byte[] bytes = new byte[32];
+            int cnt = fin.read(bytes);
+            owner = new String(bytes, 0, cnt);
+            if (!includeId) {
+                int spaceIndex = owner.indexOf(' ');
+                if (spaceIndex > 0) {
+                    owner = owner.substring(0, spaceIndex);
+                }
+            }
+        } catch (Exception e) {
+            owner = "<Unknown>";
+        }
+        // we tried
+        return owner;
 	}
 
 	private boolean setLockOwner() {

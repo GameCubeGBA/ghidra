@@ -64,14 +64,11 @@ public final class GTableToCSV {
 		}
 
 		TableModel model = table.getModel();
-		try {
-			writeColumnNames(writer, tableColumns, model, monitor);
-			writeNewLine(writer);
-			writeModel(writer, table, tableColumns, model, monitor);
-		}
-		finally {
-			writer.close();
-		}
+        try (writer) {
+            writeColumnNames(writer, tableColumns, model, monitor);
+            writeNewLine(writer);
+            writeModel(writer, table, tableColumns, model, monitor);
+        }
 	}
 
 	private static List<TableColumn> getVisibleColumnsInOrder(JTable table, TaskMonitor monitor) {

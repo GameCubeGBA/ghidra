@@ -110,38 +110,33 @@ public class PackedDatabaseCache {
 		}
 		boolean modified = false;
 		long now = (new Date()).getTime();
-		BufferedReader r = new BufferedReader(new FileReader(mapFile));
-		try {
-			String line;
-			while ((line = r.readLine()) != null) {
-				line = line.trim();
-				if (line.length() == 0) {
-					continue;
-				}
-				CachedDB entry = new CachedDB(line);
-				if (isBadDBDir(entry)) {
-					Msg.warn(this,
-						"Forcing removal of bad cached DB: " + entry.itemName + ", " + entry.dbDir);
-					entry.lastAccessTime = 0; // force cleanup
-				}
-				long timeSinceLastAccess = now - entry.lastAccessTime;
-				if (timeSinceLastAccess > SHELF_LIFE || !entry.dbDir.exists() ||
-					(entry.refreshRequired() && !entry.originalPackedDBExists())) {
-					if (doCleanup) {
-						FileUtilities.deleteDir(entry.dbDir);
-						modified = true;
-					}
-					continue;
-				}
-				list.add(entry);
-			}
-		}
-		catch (IllegalArgumentException e) {
-			Msg.error(this, "Corrupt cache - exit and try removing it: " + cacheDir);
-		}
-		finally {
-			r.close();
-		}
+        try (BufferedReader r = new BufferedReader(new FileReader(mapFile))) {
+            String line;
+            while ((line = r.readLine()) != null) {
+                line = line.trim();
+                if (line.length() == 0) {
+                    continue;
+                }
+                CachedDB entry = new CachedDB(line);
+                if (isBadDBDir(entry)) {
+                    Msg.warn(this,
+                            "Forcing removal of bad cached DB: " + entry.itemName + ", " + entry.dbDir);
+                    entry.lastAccessTime = 0; // force cleanup
+                }
+                long timeSinceLastAccess = now - entry.lastAccessTime;
+                if (timeSinceLastAccess > SHELF_LIFE || !entry.dbDir.exists() ||
+                        (entry.refreshRequired() && !entry.originalPackedDBExists())) {
+                    if (doCleanup) {
+                        FileUtilities.deleteDir(entry.dbDir);
+                        modified = true;
+                    }
+                    continue;
+                }
+                list.add(entry);
+            }
+        } catch (IllegalArgumentException e) {
+            Msg.error(this, "Corrupt cache - exit and try removing it: " + cacheDir);
+        }
 		doCleanup = false;
 		if (modified) {
 			writeCacheList(list);
