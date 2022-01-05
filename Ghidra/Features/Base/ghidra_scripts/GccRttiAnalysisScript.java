@@ -728,7 +728,7 @@ public class GccRttiAnalysisScript extends GhidraScript {
 		Address typeinfoAddress = findNextTypeinfoRef(vtableAddress);
 		if (typeinfoAddress == null) {
 			println(vtableNamespace.getName() + " vtable has no typeinfo ref after vtable at " +
-				vtableAddress.toString());
+                    vtableAddress);
 			return;
 		}
 

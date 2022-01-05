@@ -77,7 +77,7 @@ public class AssemblyParseToken extends AssemblyParseTreeNode {
 
 	@Override
 	protected void print(PrintStream out, String indent) {
-		out.println(indent + term + " := " + toString());
+		out.println(indent + term + " := " + this);
 	}
 
 	@Override

@@ -2219,7 +2219,7 @@ public class ProgramDiffDetails {
 						// handle any unrecognized property below after checking all types.
 					}
 					if (objProp != null) {
-						buf.append(indent2 + propertyName + ": " + objProp.toString() + newLine);
+						buf.append(indent2 + propertyName + ": " + objProp + newLine);
 						continue;
 					}
 					// Void property

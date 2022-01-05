@@ -1035,7 +1035,6 @@ public class RStarTreeMapTest {
 		assertEquals(72, expected.size()); // Sanity check on expected
 		obj.map.reduce(IntRectQuery.enclosed(rect(1, 6, 1, 12)))
 				.entries()
-				.stream()
 				.forEach(
 					e -> actual.put(e.getKey(), e.getValue()));
 		assertEquals(expected, actual);
@@ -1119,7 +1118,7 @@ public class RStarTreeMapTest {
 					.filter(e -> e.getKey().enclosedBy(rect(7, 12, 1, 12)))
 					.forEach(
 						e -> expected.put(e.getKey(), e.getValue()));
-			obj.map.entries().stream().forEach(e -> actual.put(e.getKey(), e.getValue()));
+			obj.map.entries().forEach(e -> actual.put(e.getKey(), e.getValue()));
 			assertEquals(expected, actual);
 
 			obj.map.clear();

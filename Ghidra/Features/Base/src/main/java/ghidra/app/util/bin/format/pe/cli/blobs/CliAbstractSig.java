@@ -679,7 +679,7 @@ public abstract class CliAbstractSig extends CliBlob implements CliRepresentable
 		@Override
 		public DataType getDefinitionDataType() {
 			StructureDataType struct = new StructureDataType(new CategoryPath(PATH),
-				CliElementType.ELEMENT_TYPE_PTR.toString() + "_" + dataOffset, 0);
+				CliElementType.ELEMENT_TYPE_PTR + "_" + dataOffset, 0);
 			struct.add(CliTypeCodeDataType.dataType, CliElementType.ELEMENT_TYPE_PTR.toString(),
 				"");
 

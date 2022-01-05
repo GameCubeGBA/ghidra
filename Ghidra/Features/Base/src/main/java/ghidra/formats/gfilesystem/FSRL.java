@@ -277,7 +277,7 @@ public class FSRL {
 			if (parentContainer == null) {
 				throw new IOException(
 					"Unknown requested FSRL parent, requested depth " + nestedDepth + ", only " +
-						getNestingDepth() + " available in " + this.toString());
+						getNestingDepth() + " available in " + this);
 			}
 			current = parentContainer;
 		}

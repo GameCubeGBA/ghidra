@@ -126,7 +126,7 @@ public class ExportToHeaderAction extends DockingAction {
 			}
 			catch (Exception e) {
 				Msg.showError(this, plugin.getTool().getToolFrame(), "Export Data Types",
-					"Error creating " + clazz.getName() + "\n" + e.toString(), e);
+					"Error creating " + clazz.getName() + "\n" + e, e);
 			}
 		}
 

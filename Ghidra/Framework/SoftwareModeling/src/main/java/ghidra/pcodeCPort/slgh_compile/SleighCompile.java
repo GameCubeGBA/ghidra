@@ -671,7 +671,7 @@ public class SleighCompile extends SleighBase {
 					String.format("Label <%s> was referenced but never placed", sym.getName())));
 			}
 		}
-		return symbolErrors.stream().collect(Collectors.joining("  "));
+		return String.join("  ", symbolErrors);
 	}
 
 	// Make sure symbol table errors are caught

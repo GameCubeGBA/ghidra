@@ -119,7 +119,7 @@ public class GNUExternalDisassembler implements ExternalDisassembler {
 			}
 			Msg.warn(GNUExternalDisassembler.class,
 				"Language " + currentLanguageID + " illegally maps to multiple (" +
-					externalNames.size() + ") external gnu names: " + sb.toString() +
+					externalNames.size() + ") external gnu names: " + sb +
 					".  The first external name will be used.");
 		}
 	}
@@ -561,7 +561,7 @@ public class GNUExternalDisassembler implements ExternalDisassembler {
 			}
 			buf.append(' ');
 		}
-		Msg.debug(this, "Starting gdis: " + buf.toString());
+		Msg.debug(this, "Starting gdis: " + buf);
 
 		try {
 			Runtime rt = Runtime.getRuntime();

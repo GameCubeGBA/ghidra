@@ -517,7 +517,7 @@ public class AddressCorrelationTest extends AbstractGhidraHeadedIntegrationTest 
 					vtMarkupItem.getSourceAddress().toString() + ".", isNoAddress);
 				return;
 			}
-			assertTrue("Unexpected destination address of " + markupDestAddress.toString() +
+			assertTrue("Unexpected destination address of " + markupDestAddress +
 				" when expecting " + destAddress.toString() + " for " +
 				vtMarkupItem.getMarkupType().getDisplayName() + " markup @ " +
 				vtMarkupItem.getSourceAddress().toString() + ".",

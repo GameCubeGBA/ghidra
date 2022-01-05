@@ -17,6 +17,7 @@ package ghidra.app.script;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 import generic.jar.ResourceFile;
@@ -69,7 +70,7 @@ public class GhidraScriptProperties {
 		}
 		else {
 			Msg.warn(this,
-				"The path '" + scriptLocation.toString() + "' is not a valid directory.");
+				"The path '" + scriptLocation + "' is not a valid directory.");
 		}
 	}
 
@@ -109,11 +110,11 @@ public class GhidraScriptProperties {
 
 		Msg.info(this, "Reading script properties file: " + file.getAbsolutePath());
 		if (!file.isFile()) {
-			Msg.warn(this, ".properties file '" + file.toString() + "' is not a valid file.");
+			Msg.warn(this, ".properties file '" + file + "' is not a valid file.");
 			return;
 		}
 
-		try (Scanner scanner = new Scanner(file.getInputStream(), "ASCII")) {
+		try (Scanner scanner = new Scanner(file.getInputStream(), StandardCharsets.US_ASCII)) {
 
 			while (scanner.hasNextLine()) {
 				String line = scanner.nextLine().trim();
@@ -133,7 +134,7 @@ public class GhidraScriptProperties {
 			}
 		}
 		catch (FileNotFoundException fnfe) {
-			throw new IOException("Could not find .properties file '" + file.toString() + "'");
+			throw new IOException("Could not find .properties file '" + file + "'");
 		}
 	}
 

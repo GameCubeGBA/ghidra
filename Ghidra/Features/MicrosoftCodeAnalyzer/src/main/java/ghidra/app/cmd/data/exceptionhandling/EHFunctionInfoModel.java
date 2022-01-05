@@ -740,7 +740,7 @@ public class EHFunctionInfoModel extends AbstractCreateDataTypeModel {
 		buffer.append(INDENT + "bbtFlags: " + "0x" + Long.toHexString(bbtFlags) + NEW_LINE);
 		DataType dt = getDataType();
 		if (dt != null) {
-			buffer.append(NEW_LINE + dt.toString() + NEW_LINE);
+			buffer.append(NEW_LINE + dt + NEW_LINE);
 			if (dt instanceof TypeDef) {
 				DataType baseDataType = ((TypeDef) dt).getBaseDataType();
 				buffer.append(NEW_LINE + baseDataType.toString() + NEW_LINE);

@@ -410,7 +410,7 @@ public class SelectLanguagePanel extends JPanel {
 			String langDisplayName = id.toString();
 			if (showVersion) {
 				langDisplayName =
-					id.toString() + " (" + ld.getVersion() + "." + ld.getMinorVersion() + ")";
+					id + " (" + ld.getVersion() + "." + ld.getMinorVersion() + ")";
 			}
 			return langDisplayName;
 		}

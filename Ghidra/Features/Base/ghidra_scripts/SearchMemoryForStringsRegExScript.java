@@ -20,6 +20,7 @@
 import ghidra.app.script.GhidraScript;
 import ghidra.program.model.address.*;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -48,7 +49,7 @@ public class SearchMemoryForStringsRegExScript extends GhidraScript {
 			byte[] bytes = new byte[(int) range.getLength()];
 			currentProgram.getMemory().getBytes(range.getMinAddress(), bytes);
 
-			String data = new String(bytes, "ISO-8859-1");
+			String data = new String(bytes, StandardCharsets.ISO_8859_1);
 			Matcher matcher = pattern.matcher(data);
 
 			while (!monitor.isCancelled() && matcher.find()) {

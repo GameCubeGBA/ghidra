@@ -257,7 +257,7 @@ public class XmlTestHelper {
 					testAttrs.remove(expectedAttr.getKey());
 				}
 				if (!testAttrs.isEmpty()) {
-					failWithInfo("Unexpected attributes found: " + testAttrs.keySet().toString(),
+					failWithInfo("Unexpected attributes found: " + testAttrs.keySet(),
 						expectedXMLParser, testXMLParser, expectedElement, testElement,
 						currentPath);
 				}

@@ -66,10 +66,10 @@ public class HTMLElement extends ArrayList<Object> {
 				sb.append("(null)");
 			}
 			else if (obj instanceof HTMLElement) {
-				sb.append(obj.toString());
+				sb.append(obj);
 			}
 			else if (obj instanceof HTMLContent) {
-				sb.append(obj.toString());
+				sb.append(obj);
 			}
 			else {
 				sb.append(HTMLUtilities.friendlyEncodeHTML(obj.toString()));

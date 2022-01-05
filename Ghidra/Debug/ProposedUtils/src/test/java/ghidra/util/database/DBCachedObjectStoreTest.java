@@ -921,16 +921,14 @@ public class DBCachedObjectStoreTest {
 		populateStore(-3, -1, 1, 3);
 
 		List<Long> list = new ArrayList<>(map.subMap(-2L, true, 2L, true)
-				.entrySet()
+				.keySet()
 				.stream()
-				.map(Entry::getKey)
 				.collect(Collectors.toList()));
 		assertEquals(List.of(-1L, 1L), list);
 
 		List<Long> rList = new ArrayList<>(rMap.subMap(2L, true, -2L, true)
-				.entrySet()
+				.keySet()
 				.stream()
-				.map(Entry::getKey)
 				.collect(Collectors.toList()));
 		assertEquals(List.of(1L, -1L), rList);
 	}
@@ -1575,34 +1573,28 @@ public class DBCachedObjectStoreTest {
 	public void testAsValuesToTypedArray() {
 		populateStore(-3, 3, 1, -1);
 
-		List<Long> list = Arrays.asList(values.toArray(new MyObject[0]))
-				.stream()
+		List<Long> list = Arrays.stream(values.toArray(new MyObject[0]))
 				.map(MyObject::getKey)
 				.collect(Collectors.toList());
 		assertEquals(List.of(-3L, -1L, 1L, 3L), list);
-		list = Arrays.asList(values.toArray(new MyObject[4]))
-				.stream()
+		list = Arrays.stream(values.toArray(new MyObject[4]))
 				.map(MyObject::getKey)
 				.collect(Collectors.toList());
 		assertEquals(List.of(-3L, -1L, 1L, 3L), list);
-		list = Arrays.asList(values.toArray(new MyObject[5]))
-				.stream()
+		list = Arrays.stream(values.toArray(new MyObject[5]))
 				.map(nullable(MyObject::getKey))
 				.collect(Collectors.toList());
 		assertEquals(Arrays.asList(new Long[] { -3L, -1L, 1L, 3L, null }), list);
 
-		List<Long> rList = Arrays.asList(rValues.toArray(new MyObject[0]))
-				.stream()
+		List<Long> rList = Arrays.stream(rValues.toArray(new MyObject[0]))
 				.map(MyObject::getKey)
 				.collect(Collectors.toList());
 		assertEquals(List.of(3L, 1L, -1L, -3L), rList);
-		rList = Arrays.asList(rValues.toArray(new MyObject[4]))
-				.stream()
+		rList = Arrays.stream(rValues.toArray(new MyObject[4]))
 				.map(MyObject::getKey)
 				.collect(Collectors.toList());
 		assertEquals(List.of(3L, 1L, -1L, -3L), rList);
-		rList = Arrays.asList(rValues.toArray(new MyObject[5]))
-				.stream()
+		rList = Arrays.stream(rValues.toArray(new MyObject[5]))
 				.map(nullable(MyObject::getKey))
 				.collect(Collectors.toList());
 		assertEquals(Arrays.asList(new Long[] { 3L, 1L, -1L, -3L, null }), rList);
@@ -1762,14 +1754,12 @@ public class DBCachedObjectStoreTest {
 
 		assertEquals(0, map.subMap(0L, true, 0L, false).values().toArray(new MyObject[0]).length);
 
-		List<Long> list = Arrays.asList(map.tailMap(0L, true).values().toArray(new MyObject[0]))
-				.stream()
+		List<Long> list = Arrays.stream(map.tailMap(0L, true).values().toArray(new MyObject[0]))
 				.map(MyObject::getKey)
 				.collect(Collectors.toList());
 		assertEquals(List.of(1L, 3L), list);
 
-		List<Long> rList = Arrays.asList(rMap.tailMap(0L, true).values().toArray(new MyObject[0]))
-				.stream()
+		List<Long> rList = Arrays.stream(rMap.tailMap(0L, true).values().toArray(new MyObject[0]))
 				.map(MyObject::getKey)
 				.collect(Collectors.toList());
 		assertEquals(List.of(-1L, -3L), rList);

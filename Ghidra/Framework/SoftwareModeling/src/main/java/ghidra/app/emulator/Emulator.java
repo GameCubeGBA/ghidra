@@ -408,7 +408,7 @@ public class Emulator {
 			Iterator<Instruction> iterator = block.iterator();
 			while (iterator.hasNext() && count != 0) {
 				Instruction instr = iterator.next();
-				disassembly.add(instr.getAddressString(false, true) + " " + instr.toString());
+				disassembly.add(instr.getAddressString(false, true) + " " + instr);
 				lastInstr = instr;
 				--count;
 			}

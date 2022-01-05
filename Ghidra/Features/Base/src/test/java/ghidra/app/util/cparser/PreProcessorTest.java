@@ -19,6 +19,7 @@ import static org.junit.Assert.*;
 
 import java.io.ByteArrayOutputStream;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 import org.junit.Test;
 
@@ -59,9 +60,9 @@ public class PreProcessorTest extends AbstractGenericTest {
 		parser.parse(url.getFile());
 
 		// Uncomment to print out parse results
-		System.err.println(baos.toString());
+		System.err.println(baos);
 
-		String results = baos.toString("ASCII");
+		String results = baos.toString(StandardCharsets.US_ASCII);
 		int end = results.lastIndexOf(";") + 1;
 		String endStr = results.substring(end - 9, end);
 		assertEquals("theEnd();", endStr);

@@ -362,7 +362,7 @@ public class MultipleKeyAction extends DockingKeyBindingAction {
 
 		@Override
 		public String toString() {
-			String providerString = provider == null ? "" : provider.toString() + " - ";
+			String providerString = provider == null ? "" : provider + " - ";
 			return providerString + action;
 		}
 

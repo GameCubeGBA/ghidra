@@ -19,6 +19,7 @@ import generic.jar.ResourceFile;
 import ghidra.framework.Application;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class NGramUtils {
@@ -265,7 +266,7 @@ public class NGramUtils {
 	 */
 	private static void ingestModel(InputStream modelStream, String modelName) throws IOException {
 
-		Scanner scanner1 = new Scanner(modelStream, "UTF-8");
+		Scanner scanner1 = new Scanner(modelStream, StandardCharsets.UTF_8);
 		String currString = "";
 		String[] charInfo;
 		int currCount;

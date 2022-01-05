@@ -982,7 +982,7 @@ public class RTTIWindowsClassRecoverer extends RTTIClassRecoverer {
 
 				if (colAddress == null) {
 					Msg.debug(this, recoveredClass.getName() +
-						" couldn't get referenced col from " + ptrToColAddress.toString());
+						" couldn't get referenced col from " + ptrToColAddress);
 					continue;
 				}
 

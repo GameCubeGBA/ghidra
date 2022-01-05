@@ -18,6 +18,7 @@ package ghidra.util.datastruct;
 import ghidra.util.Msg;
 
 import java.util.*;
+import java.util.stream.IntStream;
 
 
 /**
@@ -32,26 +33,6 @@ public class LongArrayList implements List<Long> {
     /** Creates a new LongArrayList */
     public LongArrayList() {
         longs = new long[MIN_SIZE];
-    }
-
-	/**
-	 * Creates a new Long ArrayList using the values in the given array
-	 * @param arr array of longs to initialize to.
-	 */
-    public LongArrayList(long [] arr) {
-    	longs = arr;
-    	size = arr.length;
-    }
-    
-    /**
-     * Creates a new LongArrayList that is equivalent to the specified LongArrayList.
-     * It creates a copy of the specified list.
-     * @param list the list to be copied.
-     */
-    public LongArrayList(LongArrayList list) {
-		size = list.size;
-    	longs = new long[Math.max(size, MIN_SIZE)];
-    	System.arraycopy(list.longs, 0, longs, 0, size);
     }
 
 	public void add(long value) {
@@ -168,8 +149,7 @@ public class LongArrayList implements List<Long> {
 
     /**
      * Doubles the size of the array.
-     * @param size The new capacity of the array.
-     */
+	 */
     private void growArray() {
     	int len = longs.length;
     	if (len == 0) {
@@ -239,10 +219,9 @@ public class LongArrayList implements List<Long> {
 		int newSize = size + c.size();
 		long[] newValues = new long[newSize];
 		System.arraycopy(longs, 0, newValues, 0, index);
-		Iterator<? extends Long> it = c.iterator();
 		int nextIndex = index;
-		while (it.hasNext()) {
-			newValues[nextIndex++] = it.next();
+		for (Long aLong : c) {
+			newValues[nextIndex++] = aLong;
 		}
 		System.arraycopy(longs, index, newValues, nextIndex, size-index);
 		longs = newValues;
@@ -255,13 +234,7 @@ public class LongArrayList implements List<Long> {
 	}
 
 	public boolean containsAll(Collection<?> c) {
-		Iterator<?> it = c.iterator();
-		while(it.hasNext()) {
-			if (!contains(it.next())) {
-				return false;
-			}
-		}
-		return true;
+		return c.stream().allMatch(this::contains);
 	}
 
 	public boolean isEmpty() {
@@ -295,9 +268,8 @@ public class LongArrayList implements List<Long> {
 
 	public boolean removeAll(Collection<?> c) {
 		boolean changed = false;
-		Iterator<?> it = c.iterator();
-		while(it.hasNext()) {
-			if (remove(it.next())) {
+		for (Object o : c) {
+			if (remove(o)) {
 				changed = true;
 			}
 		}
@@ -376,8 +348,8 @@ public class LongArrayList implements List<Long> {
 		}
 
 		public void clear() {
-			for(int i=startIndex;i<endIndex;i++) {
-				backingList.remove(startIndex);
+			if (endIndex > startIndex) {
+				backingList.subList(startIndex, endIndex).clear();
 			}
 			endIndex = startIndex;
 		}
@@ -411,12 +383,7 @@ public class LongArrayList implements List<Long> {
 		}
 
 		public int getIndex(long value) {
-			for(int i=0;i<size();i++) {
-				if (get(i) == value) {
-					return i;
-				}
-			}		
-			return -1;		
+			return IntStream.range(0, size()).filter(i -> get(i) == value).findFirst().orElse(-1);
 		}
 
 		public boolean addAll(Collection<? extends Long> c) {
@@ -436,13 +403,7 @@ public class LongArrayList implements List<Long> {
 		}
 
 		public boolean containsAll(Collection<?> c) {
-			Iterator<?> it = c.iterator();
-			while(it.hasNext()) {
-				if (!contains(it.next())) {
-					return false;
-				}
-			}
-			return true;
+			return c.stream().allMatch(this::contains);
 		}
 
 		public int indexOf(Object value) {
@@ -450,12 +411,7 @@ public class LongArrayList implements List<Long> {
 				return -1;
 			}
 			long longValue = ((Long)value).longValue();
-			for(int i=0;i<size();i++) {
-				if (backingList.longs[startIndex+i] == longValue) {
-					return i;
-				}
-			}		
-			return -1;
+			return IntStream.range(0, size()).filter(i -> backingList.longs[startIndex + i] == longValue).findFirst().orElse(-1);
 		}
 
 		public boolean isEmpty() {
@@ -471,12 +427,7 @@ public class LongArrayList implements List<Long> {
 				return -1;
 			}
 			long longValue = ((Long)value).longValue();
-			for(int i=size()-1;i>=0;i--) {
-				if (backingList.longs[startIndex+i] == longValue) {
-					return i;
-				}
-			}		
-			return -1;
+			return IntStream.iterate(size() - 1, i -> i >= 0, i -> i - 1).filter(i -> backingList.longs[startIndex + i] == longValue).findFirst().orElse(-1);
 		}
 
 		public ListIterator<Long> listIterator() {
@@ -489,9 +440,8 @@ public class LongArrayList implements List<Long> {
 
 		public boolean removeAll(Collection<?> c) {
 			boolean changed = false;
-			Iterator<?> it = c.iterator();
-			while(it.hasNext()) {
-				if (remove(it.next())) {
+			for (Object o : c) {
+				if (remove(o)) {
 					changed = true;
 				}
 			}

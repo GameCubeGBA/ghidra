@@ -60,6 +60,6 @@ public enum DWARFAccessibility
 		DWARFAccessibility access = valueMap.get(key.intValue());
 		if(access != null)
 			return access;
-		throw new IllegalArgumentException("Invalid Integer value: " + key.toString());
+		throw new IllegalArgumentException("Invalid Integer value: " + key);
 	}
 }

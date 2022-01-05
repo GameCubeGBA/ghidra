@@ -60,7 +60,7 @@ public class LocalDeferredProcedureCallGroupSharedMsSymbol extends AbstractMsSym
 		myBuilder.append(typeRecordNumber.getNumber());
 		flags.emit(myBuilder);
 		builder.append(String.format("%s: %s base data: slot = %d offset = %d, %s",
-			getSymbolTypeName(), myBuilder.toString(), dataSlot, dataOffset, name));
+			getSymbolTypeName(), myBuilder, dataSlot, dataOffset, name));
 	}
 
 	@Override

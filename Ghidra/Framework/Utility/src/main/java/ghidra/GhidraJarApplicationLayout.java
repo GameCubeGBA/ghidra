@@ -18,6 +18,7 @@ package ghidra;
 import java.io.*;
 import java.net.URL;
 import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 import generic.jar.ResourceFile;
@@ -92,16 +93,10 @@ public class GhidraJarApplicationLayout extends GhidraApplicationLayout {
 	 */
 	private ResourceFile fromUrl(URL url) {
 		String urlString = url.toExternalForm();
-		try {
-			// Decode the URL to replace things like %20 with real spaces.
-			// Note: can't use URLDecoder.decode(String, Charset) because Utility must be 
-			// Java 1.8 compatible.
-			urlString = URLDecoder.decode(urlString, "UTF-8");
-		}
-		catch (UnsupportedEncodingException e) {
-			// Shouldn't happen, but failed to find UTF-8 encoding.
-			// Proceed without decoding, and hope for the best.
-		}
-		return new ResourceFile(urlString);
+        // Decode the URL to replace things like %20 with real spaces.
+        // Note: can't use URLDecoder.decode(String, Charset) because Utility must be
+        // Java 1.8 compatible.
+        urlString = URLDecoder.decode(urlString, StandardCharsets.UTF_8);
+        return new ResourceFile(urlString);
 	}
 }

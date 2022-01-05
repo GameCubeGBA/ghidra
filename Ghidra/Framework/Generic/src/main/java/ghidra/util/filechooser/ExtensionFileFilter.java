@@ -71,8 +71,7 @@ public class ExtensionFileFilter implements GhidraFileFilter {
 	 * @param description descriptive string of the filter
 	 */
 	public ExtensionFileFilter(String[] filters, String description) {
-		this.extensions = Arrays.asList(filters)
-				.stream()
+		this.extensions = Arrays.stream(filters)
 				.map(String::toLowerCase)
 				.collect(Collectors.toList());
 		this.description = description;

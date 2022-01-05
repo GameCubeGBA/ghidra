@@ -20,7 +20,7 @@ import static java.util.stream.Collectors.*;
 import java.io.*;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.util.*;
 import java.util.Map.Entry;
@@ -82,14 +82,13 @@ public class GhidraSourceBundle extends GhidraBundle {
 		void found(ResourceFile sourceFile, Collection<Path> classFiles) throws Throwable;
 	}
 
-	private final String symbolicName;
 	private final Path binaryDir;
 	private final String bundleLoc;
 
 	private final List<ResourceFile> newSources = new ArrayList<>();
 	private final List<Path> oldBinaries = new ArrayList<>();
 
-	private JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+	private final JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
 
 	//// information indexed by source file
 	private final Map<ResourceFile, BuildError> buildErrors = new HashMap<>();
@@ -115,10 +114,10 @@ public class GhidraSourceBundle extends GhidraBundle {
 			boolean systemBundle) {
 		super(bundleHost, sourceDirectory, enabled, systemBundle);
 
-		this.symbolicName = GhidraSourceBundle.sourceDirHash(getSourceDirectory());
+		String symbolicName = GhidraSourceBundle.sourceDirHash(getSourceDirectory());
 		this.binaryDir = GhidraSourceBundle.getCompiledBundlesDir().resolve(symbolicName);
 
-		this.bundleLoc = "reference:file://" + binaryDir.toAbsolutePath().normalize().toString();
+		this.bundleLoc = "reference:file://" + binaryDir.toAbsolutePath().normalize();
 	}
 
 	/**
@@ -323,12 +322,10 @@ public class GhidraSourceBundle extends GhidraBundle {
 		for (ResourceFile file : directory
 				.listFiles(f -> f.isDirectory() || f.getName().endsWith(".java"))) {
 			if (!file.getName().matches("internal|private")) {
-				boolean added = false;
 				if (file.isDirectory()) {
 					findPackageDirs(packages, file);
 				}
-				else if (!added) {
-					added = true;
+				else {
 					packages.add(directory.getAbsolutePath());
 				}
 			}
@@ -371,12 +368,9 @@ public class GhidraSourceBundle extends GhidraBundle {
 	 * look for new sources, metadata, manifest file.
 	 * 
 	 * <p>if files had errors last time, haven't changed, and no new requirements are available, remove them.
-	 * 
-	 * @param writer for reporting status to user
-	 * @throws IOException while accessing manifest file
-	 * @throws OSGiException while parsing imports
+	 *
 	 */
-	void updateFromFilesystem(PrintWriter writer) throws IOException, OSGiException {
+	void updateFromFilesystem() {
 		// look for new source files
 		newSources.clear();
 		oldBinaries.clear();
@@ -447,10 +441,6 @@ public class GhidraSourceBundle extends GhidraBundle {
 
 	void compileAttempted() {
 		lastCompileAttempt = System.currentTimeMillis();
-	}
-
-	long getLastCompileAttempt() {
-		return lastCompileAttempt;
 	}
 
 	@Override
@@ -560,10 +550,10 @@ public class GhidraSourceBundle extends GhidraBundle {
 				wipeBinDir();
 				buildErrors.clear();
 			}
-			updateFromFilesystem(writer);
+			updateFromFilesystem();
 		}
 		else {
-			updateFromFilesystem(writer);
+			updateFromFilesystem();
 
 			updateRequirementsFromMetadata();
 			addSourcesIfResolutionWillPass();
@@ -614,7 +604,7 @@ public class GhidraSourceBundle extends GhidraBundle {
 		boolean anythingChanged = false;
 		if (!buildErrors.isEmpty()) {
 			buildErrors.clear();
-			anythingChanged |= true;
+			anythingChanged = true;
 		}
 
 		try {
@@ -764,7 +754,7 @@ public class GhidraSourceBundle extends GhidraBundle {
 				List<ResourceFile> requiringFiles =
 					requirementToSourceFileMap.get(requirement.toString());
 				if (requiringFiles != null && requiringFiles.size() > 0) {
-					writer.printf("  %s, from %s\n", requirement.toString(),
+					writer.printf("  %s, from %s\n", requirement,
 						requiringFiles.stream()
 								.map(generic.util.Path::toPathString)
 								.collect(Collectors.joining(",")));
@@ -776,7 +766,7 @@ public class GhidraSourceBundle extends GhidraBundle {
 					}
 				}
 				else {
-					writer.printf("  %s\n", requirement.toString());
+					writer.printf("  %s\n", requirement);
 				}
 			}
 
@@ -851,7 +841,7 @@ public class GhidraSourceBundle extends GhidraBundle {
             if (!importPackageValues.isEmpty()) {
                 // constrain analyzed imports according to what's declared in @importpackage tags
                 analyzer.setProperty("Import-Package",
-                        importPackageValues.stream().collect(Collectors.joining(",")) + ",*");
+                        String.join(",", importPackageValues) + ",*");
             } else {
                 analyzer.setProperty("Import-Package", "*");
             }
@@ -920,7 +910,7 @@ public class GhidraSourceBundle extends GhidraBundle {
 		Path activatorSourceFileName = bindir.resolve(activatorClassName + ".java");
 
 		try (PrintWriter activatorWriter = new PrintWriter(
-			Files.newBufferedWriter(activatorSourceFileName, Charset.forName("UTF-8")))) {
+			Files.newBufferedWriter(activatorSourceFileName, StandardCharsets.UTF_8))) {
 			activatorWriter.println("import " + GhidraBundleActivator.class.getName() + ";");
 			activatorWriter.println("import org.osgi.framework.BundleActivator;");
 			activatorWriter.println("import org.osgi.framework.BundleContext;");
@@ -949,7 +939,7 @@ public class GhidraSourceBundle extends GhidraBundle {
 		try (StandardJavaFileManager javaFileManager =
 			compiler.getStandardFileManager(null, null, null);
 				BundleJavaManager bundleJavaManager = new MyBundleJavaManager(
-					bundleHost.getHostFramework(), javaFileManager, options);) {
+					bundleHost.getHostFramework(), javaFileManager, options)) {
 			Iterable<? extends JavaFileObject> sourceFiles =
 				javaFileManager.getJavaFileObjectsFromPaths(List.of(activatorSourceFileName));
 			DiagnosticCollector<JavaFileObject> diagnostics =
@@ -990,7 +980,7 @@ public class GhidraSourceBundle extends GhidraBundle {
 		options.add(getSourceDirectory().toString());
 		options.add("-classpath");
 		options.add(
-			System.getProperty("java.class.path") + File.pathSeparator + binaryDir.toString());
+			System.getProperty("java.class.path") + File.pathSeparator + binaryDir);
 		options.add("-proc:none");
 
 		// clear build errors
@@ -1105,7 +1095,7 @@ public class GhidraSourceBundle extends GhidraBundle {
 			}
 
 			try (Stream<Path> paths = Files.list(directory)) {
-				classToClassFilesMap = paths.filter(p -> Files.isRegularFile(p))
+				classToClassFilesMap = paths.filter(Files::isRegularFile)
 						.filter(p -> p.getFileName().toString().endsWith(".class"))
 						.collect(groupingBy(this::getClassName));
 			}
@@ -1154,7 +1144,7 @@ public class GhidraSourceBundle extends GhidraBundle {
 		public Collection<Path> extraClassFiles() {
 			return classToClassFilesMap.values()
 					.stream()
-					.flatMap(l -> l.stream())
+					.flatMap(Collection::stream)
 					.collect(Collectors.toList());
 		}
 

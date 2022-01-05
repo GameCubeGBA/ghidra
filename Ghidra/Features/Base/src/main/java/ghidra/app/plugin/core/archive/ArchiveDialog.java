@@ -319,7 +319,7 @@ public class ArchiveDialog extends DialogComponentProvider {
 			jarFile = new File(archivePathName);
 		}
 		else if (projectLocator != null) {
-			jarFile = new File(projectLocator.toString() + ArchivePlugin.ARCHIVE_EXTENSION);
+			jarFile = new File(projectLocator + ArchivePlugin.ARCHIVE_EXTENSION);
 		}
 		jarFileChooser.setSelectedFile(jarFile);
 		jarFileChooser.setApproveButtonText(approveButtonText);

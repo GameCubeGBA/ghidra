@@ -16,6 +16,7 @@
 package ghidra.sleigh.grammar;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -102,7 +103,7 @@ public class SleighPreprocessor implements ExpressionEnvironment {
 		ifstack.add(new ConditionalHelper(false, false, false, true));
 
 		FileInputStream fis = new FileInputStream(file);
-		InputStreamReader isr = new InputStreamReader(fis, "ISO-8859-1");
+		InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.ISO_8859_1);
 
 		try (BufferedReader in = new BufferedReader(isr)) {
 
@@ -111,7 +112,7 @@ public class SleighPreprocessor implements ExpressionEnvironment {
 			log.trace("enter SleighPreprocessor");
 
 			while ((line = in.readLine()) != null) {
-				log.trace("top of while, state: " + this.toString());
+				log.trace("top of while, state: " + this);
 				log.trace("got line: " + line);
 
 				String origLine = line;

@@ -78,7 +78,7 @@ public class ApplyDataArchiveAnalyzer extends AbstractAnalyzer {
 				Throwable cause = e.getCause();
 				if (cause instanceof VersionException) {
 					log.appendMsg("Apply Data Archives",
-						"Unable to open archive " + archiveName + ": " + cause.toString());
+						"Unable to open archive " + archiveName + ": " + cause);
 				}
 				else {
 					String msg = e.getMessage();

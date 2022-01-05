@@ -16,6 +16,7 @@
 package ghidra.dbg.target;
 
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.CompletableFuture;
 
 import ghidra.dbg.DebuggerTargetObjectIface;
@@ -38,7 +39,7 @@ import ghidra.lifecycle.Experimental;
 @Experimental
 @DebuggerTargetObjectIface("Console")
 public interface TargetConsole extends TargetObject {
-	Charset CHARSET = Charset.forName("utf-8");
+	Charset CHARSET = StandardCharsets.UTF_8;
 
 	/**
 	 * For console output notifications, indicates whether it is normal or error output

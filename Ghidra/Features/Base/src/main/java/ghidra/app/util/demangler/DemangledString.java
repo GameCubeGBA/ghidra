@@ -117,7 +117,7 @@ public class DemangledString extends DemangledObject {
 			}
 		}
 		String prefix = isUnicode() ? "u_" : "s_";
-		return prefix + buf.toString();
+		return prefix + buf;
 	}
 
 	/**

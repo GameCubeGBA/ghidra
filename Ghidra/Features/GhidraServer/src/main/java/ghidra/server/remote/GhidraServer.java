@@ -421,7 +421,7 @@ public class GhidraServer extends UnicastRemoteObject implements GhidraServerHan
 
 		try (InputStream in = GhidraServer.class.getResourceAsStream(HELP_FILE)) {
 			List<String> lines = FileUtilities.getLines(in);
-			lines.stream().forEach(s -> System.out.println(s));
+			lines.forEach(s -> System.out.println(s));
 		}
 		catch (IOException e) {
 			// don't care

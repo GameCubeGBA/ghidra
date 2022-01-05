@@ -772,7 +772,7 @@ class SymbolMerger extends AbstractListingMerger {
 						updateResolveIDs(originalPgm, id, -1);
 						deferredRemoveIDs.remove(id);
 						list.remove(i--);
-						removedSome |= true;
+						removedSome = true;
 						incrementProgress(1);
 					}
 				}
@@ -2378,7 +2378,7 @@ class SymbolMerger extends AbstractListingMerger {
 		else if (chosenConflictOption == RENAME_MY) {
 			try {
 				myHash.get(myID);
-				Msg.error(this, "Error: My symbol '" + originalOrMySymbol.toString() +
+				Msg.error(this, "Error: My symbol '" + originalOrMySymbol +
 					"' has already been merged.");
 				return; // Already been merged.
 			}

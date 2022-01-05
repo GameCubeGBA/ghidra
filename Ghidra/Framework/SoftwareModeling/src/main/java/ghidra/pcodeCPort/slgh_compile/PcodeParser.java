@@ -189,7 +189,7 @@ public class PcodeParser extends PcodeCompile {
 						String.format("Label <%s> was referenced but never placed",  sym.getName())));
 			}
 		}
-		return errors.stream().collect(Collectors.joining("  "));
+		return String.join("  ", errors);
 
 	}
 

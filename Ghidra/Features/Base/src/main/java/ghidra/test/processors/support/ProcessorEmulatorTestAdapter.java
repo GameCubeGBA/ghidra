@@ -647,7 +647,7 @@ public abstract class ProcessorEmulatorTestAdapter extends TestCase implements E
 					}
 				}
 
-				buf.append(instr.toString());
+				buf.append(instr);
 
 				if (instr.getDelaySlotDepth() != 0) {
 					buf.append(" (delay-slots not shown)");
@@ -1058,7 +1058,7 @@ public abstract class ProcessorEmulatorTestAdapter extends TestCase implements E
 			data.traceLog = new PrintWriter(new BufferedWriter(
 				new OutputStreamWriter(new FileOutputStream(data.traceFile, true))));
 
-			data.traceLog.println((new Date()).toString());
+			data.traceLog.println((new Date()));
 
 			return data;
 		}

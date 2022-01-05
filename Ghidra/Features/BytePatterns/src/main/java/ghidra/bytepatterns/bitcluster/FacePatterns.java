@@ -131,7 +131,7 @@ public class FacePatterns {
 	//Sends a list of faces to a file (as a list of ditted bit sequences).
 	public void outputTopPatterns(Writer writer) throws IOException {
 		for (Face f : patterns) {
-			writer.write(f.strID + '\t' + f.getWeight() + '\t' + ((Double) f.ratioFilled()).toString() + "\n");
+			writer.write(f.strID + '\t' + f.getWeight() + '\t' + ((Double) f.ratioFilled()) + "\n");
 		}
 	}
 

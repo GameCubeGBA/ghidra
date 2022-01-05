@@ -1288,7 +1288,7 @@ public class PdbApplicator {
 		}
 		catch (PdbException e) {
 			// skipping symbol
-			Msg.info(this, "Error applying symbol to program: " + e.toString());
+			Msg.info(this, "Error applying symbol to program: " + e);
 		}
 	}
 
@@ -1365,7 +1365,7 @@ public class PdbApplicator {
 		}
 		catch (InvalidInputException | DuplicateNameException e) {
 			log.appendMsg(
-				"PDB Warning: Unable to create class namespace due to exception: " + e.toString() +
+				"PDB Warning: Unable to create class namespace due to exception: " + e +
 					"; Namespace: " + parentNamespace.getName(true) + Namespace.DELIMITER + name);
 		}
 	}
@@ -1591,7 +1591,7 @@ public class PdbApplicator {
 		}
 		catch (InvalidInputException e) {
 			log.appendMsg("PDB Warning: Unable to create symbol at " + address +
-				" due to exception: " + e.toString() + "; symbolPathName: " + symbolPathString);
+				" due to exception: " + e + "; symbolPathName: " + symbolPathString);
 		}
 		return symbol;
 	}

@@ -16,6 +16,7 @@
 package ghidra.framework.store.local;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
@@ -274,7 +275,7 @@ public class IndexedLocalFileSystem extends LocalFileSystem {
 
 		File tempIndexFile = new File(root, TMP_INDEX_FILE);
 		tempIndexFile.delete();
-		PrintWriter indexWriter = new PrintWriter(tempIndexFile, "UTF8");
+		PrintWriter indexWriter = new PrintWriter(tempIndexFile, StandardCharsets.UTF_8);
 		try {
 			int version = getIndexImplementationVersion();
 			if (version != 0) {
@@ -423,7 +424,7 @@ public class IndexedLocalFileSystem extends LocalFileSystem {
 	public static int readIndexVersion(String rootPath) throws IOException {
 		File indexFile = new File(rootPath, INDEX_FILE);
         try (BufferedReader indexReader = new BufferedReader(new InputStreamReader(
-                new BufferedInputStream(new FileInputStream(indexFile)), "UTF8"))) {
+                new BufferedInputStream(new FileInputStream(indexFile)), StandardCharsets.UTF_8))) {
             return getIndexVersion(indexReader.readLine());
         }
         // ignore
@@ -451,7 +452,7 @@ public class IndexedLocalFileSystem extends LocalFileSystem {
 		String md5Str = null;
 		String idLine = null;
         try (BufferedReader indexReader = new BufferedReader(new InputStreamReader(
-                new BufferedInputStream(new FileInputStream(indexFile)), "UTF8"))) {
+                new BufferedInputStream(new FileInputStream(indexFile)), StandardCharsets.UTF_8))) {
             String line = indexReader.readLine();
             if (checkIndexVersion(line)) {
                 // version line consumed - read next line
@@ -1378,7 +1379,7 @@ public class IndexedLocalFileSystem extends LocalFileSystem {
 				throw new ReadOnlyException();
 			}
 			journalWriter = new PrintWriter(new BufferedWriter(
-				new OutputStreamWriter(new FileOutputStream(journalFile, true), "UTF8")));
+				new OutputStreamWriter(new FileOutputStream(journalFile, true), StandardCharsets.UTF_8)));
 		}
 
 		private void replayJournal() throws IndexReadException {
@@ -1387,7 +1388,7 @@ public class IndexedLocalFileSystem extends LocalFileSystem {
 			BufferedReader journalReader = null;
 			try {
 				journalReader = new BufferedReader(new InputStreamReader(
-					new BufferedInputStream(new FileInputStream(journalFile)), "UTF8"));
+					new BufferedInputStream(new FileInputStream(journalFile)), StandardCharsets.UTF_8));
 				String line;
 				while ((line = journalReader.readLine()) != null) {
 					++lineNum;

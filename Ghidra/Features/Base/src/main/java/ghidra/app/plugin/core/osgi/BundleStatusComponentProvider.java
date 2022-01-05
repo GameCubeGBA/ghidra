@@ -229,7 +229,7 @@ public class BundleStatusComponentProvider extends ComponentProviderAdapter {
 			anythingCleaned |= bundleHost.getExistingGhidraBundle(status.getFile()).clean();
 			if (!status.getSummary().isEmpty()) {
 				status.setSummary("");
-				anythingCleaned |= true;
+				anythingCleaned = true;
 			}
 		}
 		if (anythingCleaned) {
@@ -390,7 +390,7 @@ public class BundleStatusComponentProvider extends ComponentProviderAdapter {
 					buff.append(Path.toPathString(bundle.getFile()) + "\n");
 				}
 				Msg.showWarn(this, BundleStatusComponentProvider.this.getComponent(),
-					"Unabled to remove", "System bundles cannot be removed:\n" + buff.toString());
+					"Unabled to remove", "System bundles cannot be removed:\n" + buff);
 			}
 			bundleHost.remove(bundles.get(false));
 		}

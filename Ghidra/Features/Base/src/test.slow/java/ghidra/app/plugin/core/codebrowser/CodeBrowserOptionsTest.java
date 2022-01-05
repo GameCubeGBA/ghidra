@@ -1007,7 +1007,7 @@ public class CodeBrowserOptionsTest extends AbstractGhidraHeadedIntegrationTest 
 				List<HelpLocation> nestedHelp = getParentHelpLocations(options, name);
 				for (HelpLocation help : nestedHelp) {
 					if (help != null && !isValidHelpLocation(help)) {
-						missing.add("Bad help location: " + help.toString());
+						missing.add("Bad help location: " + help);
 					}
 				}
 
@@ -1020,7 +1020,7 @@ public class CodeBrowserOptionsTest extends AbstractGhidraHeadedIntegrationTest 
 
 		if (!missing.isEmpty()) {
 			fail(missing.size() + " Tool Options is missing/invalid help\n" +
-				missing.stream().collect(Collectors.joining("\n")));
+                    String.join("\n", missing));
 		}
 	}
 

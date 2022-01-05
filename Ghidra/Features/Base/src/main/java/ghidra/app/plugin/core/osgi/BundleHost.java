@@ -261,7 +261,7 @@ public class BundleHost {
 	}
 
 	Bundle installFromPath(Path p) throws GhidraBundleException {
-		return installFromLoc("file://" + p.toAbsolutePath().normalize().toString());
+		return installFromLoc("file://" + p.toAbsolutePath().normalize());
 	}
 
 	/**
@@ -372,7 +372,7 @@ public class BundleHost {
 	protected String buildExtraSystemPackages() {
 		Set<String> packages = new HashSet<>();
 		OSGiUtils.getPackagesFromClasspath(packages);
-		return packages.stream().collect(Collectors.joining(","));
+		return String.join(",", packages);
 	}
 
 	/**

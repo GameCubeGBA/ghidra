@@ -163,7 +163,7 @@ public class JavaHelpSetBuilder {
 		writer.newLine();
 		writer.newLine();
 
-		writer.write("<!-- HelpSet auto-generated on " + (new Date()).toString() + " -->");
+		writer.write("<!-- HelpSet auto-generated on " + (new Date()) + " -->");
 		writer.newLine();
 
 		writer.write("<helpset version=\"2.0\">");

@@ -1105,7 +1105,7 @@ public class VTAutoVersionTrackingTest extends AbstractGhidraHeadedIntegrationTe
 			return false;
 		}
 		FunctionManager functionManager = program.getFunctionManager();
-		Function createFunction = functionManager.createFunction("FUN_" + address.toString(),
+		Function createFunction = functionManager.createFunction("FUN_" + address,
 			address, addressSet, SourceType.DEFAULT);
 		if (createFunction == null) {
 			return false;

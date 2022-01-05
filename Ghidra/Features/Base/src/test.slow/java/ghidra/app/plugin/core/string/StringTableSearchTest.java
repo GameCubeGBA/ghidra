@@ -1432,7 +1432,7 @@ public class StringTableSearchTest extends AbstractGhidraHeadedIntegrationTest {
 			buffy.append('\n');
 		}
 		System.out.println("model contents = ");
-		System.out.println(buffy.toString());
+		System.out.println(buffy);
 	}
 
 	private void setAutoLabelCheckbox(final StringTableProvider provider, final boolean b) {

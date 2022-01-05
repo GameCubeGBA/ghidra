@@ -140,7 +140,7 @@ public abstract class Task implements MonitoredRunnable {
 		}
 		catch (Throwable t) {
 			Msg.showError(this, null, "Task Error",
-				getTaskTitle() + " - Uncaught Exception: " + t.toString(), t);
+				getTaskTitle() + " - Uncaught Exception: " + t, t);
 		}
 		finally {
 			TaskUtilities.removeTrackedTask(this);

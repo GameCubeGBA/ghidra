@@ -207,7 +207,7 @@ public class RecoveredClass {
 		Address address = classOffsetToVftableMap.get(offset);
 		if (!address.equals(vftableAddress)) {
 			throw new Exception(name + " trying to add different vftable address (old: " +
-				vftableAddress.toString() + " new: " + address.toString() + ")  to same offset " +
+				vftableAddress.toString() + " new: " + address + ")  to same offset " +
 				offset);
 		}
 

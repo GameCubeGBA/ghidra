@@ -825,7 +825,7 @@ public class GTree extends JPanel implements BusyListener {
 			}
 			buf.append("]");
 		}
-		out.println(buf.toString());
+		out.println(buf);
 	}
 
 //==================================================================================================

@@ -17,6 +17,7 @@ package ghidra.app.util.bin.format.pe.cli;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 import ghidra.app.util.bin.BinaryReader;
@@ -85,7 +86,7 @@ public class CliMetadataRoot implements StructConverter, PeMarkupable {
 		this.versionLength = reader.readNextInt();
 		if (versionLength > 0 && versionLength < NTHeader.MAX_SANE_COUNT) {
 			this.version =
-				new String(reader.readNextByteArray(this.versionLength), Charset.forName("UTF-8"));
+				new String(reader.readNextByteArray(this.versionLength), StandardCharsets.UTF_8);
 		}
 		this.flags = reader.readNextShort();
 		this.streamsCount = reader.readNextShort();

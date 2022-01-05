@@ -305,7 +305,7 @@ public class DbgModelTest extends AbstractGhidraHeadlessIntegrationTest {
 			ModelObject env = currentProcess.getKeyValue("Environment");
 			ModelObject eb = env.getKeyValue("EnvironmentBlock");
 			System.out.println(eb.getKind());
-			System.out.println(eb.toString());
+			System.out.println(eb);
 
 			DebugHostType1 targetInfo = eb.getTargetInfo();
 			//DebugHostContext context = targetInfo.getContext();

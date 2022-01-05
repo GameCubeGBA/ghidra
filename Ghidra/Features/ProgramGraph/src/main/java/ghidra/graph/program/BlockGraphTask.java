@@ -189,7 +189,7 @@ public class BlockGraphTask extends Task {
 			Address start = graphBlock(graph, curBB, entryPoints);
 
 			if (start != null && (++blockCount % 50) == 0) {
-				taskMonitor.setMessage("Process Block: " + start.toString());
+				taskMonitor.setMessage("Process Block: " + start);
 			}
 		}
 

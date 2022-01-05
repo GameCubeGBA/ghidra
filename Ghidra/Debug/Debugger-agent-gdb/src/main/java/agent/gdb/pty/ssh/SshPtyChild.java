@@ -16,6 +16,7 @@
 package agent.gdb.pty.ssh;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -77,11 +78,11 @@ public class SshPtyChild extends SshPtyEndpoint implements PtyChild {
 		for (int i = 0; i < 1024; i++) {
 			int chr = inputStream.read();
 			if (chr == '\n' || chr == -1) {
-				return new String(buf, 0, i + 1, "UTF-8").trim();
+				return new String(buf, 0, i + 1, StandardCharsets.UTF_8).trim();
 			}
 			buf[i] = (byte) chr;
 		}
-		throw new IOException("Expected pty name. Got " + new String(buf, 0, 1024, "UTF-8"));
+		throw new IOException("Expected pty name. Got " + new String(buf, 0, 1024, StandardCharsets.UTF_8));
 	}
 
 	@Override

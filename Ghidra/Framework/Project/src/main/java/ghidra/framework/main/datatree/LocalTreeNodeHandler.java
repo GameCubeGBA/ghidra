@@ -182,7 +182,7 @@ public final class LocalTreeNodeHandler
 		catch (FileInUseException fiue) {
 			String message = fiue.getMessage();
 			if (message == null || message.length() == 0) {
-				message = "Cannot move folder '" + sourceFolder.toString() + "' to '" +
+				message = "Cannot move folder '" + sourceFolder + "' to '" +
 					destFolder.toString() +
 					"'\nsince it contains a file that is checked out or in use.";
 			}

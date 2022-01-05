@@ -18,6 +18,7 @@ package ghidra.dbg.jdi.manager.breakpoint;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * The type of JDI breakpoint
@@ -30,7 +31,7 @@ public enum JdiBreakpointType {
 	OTHER("<OTHER>", false);
 
 	public static final Map<String, JdiBreakpointType> BY_NAME =
-		List.of(values()).stream().collect(Collectors.toMap(v -> v.getName(), v -> v));
+		Stream.of(values()).collect(Collectors.toMap(v -> v.getName(), v -> v));
 
 	/**
 	 * Parse a type from a JDI breakpoint information block

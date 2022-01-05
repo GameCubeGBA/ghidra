@@ -122,7 +122,7 @@ public class DemanglerCmd extends BackgroundCommand {
 		String message = e.getMessage();
 		if (message == null) {
 			setStatusMsg("Unable to demangle symbol at " + addr.toString() + "; name: " + mangled +
-				".  Message: " + e.toString());
+				".  Message: " + e);
 		}
 		else {
 			setStatusMsg("Unable to demangle symbol at " + addr.toString() + "; name: " + mangled +

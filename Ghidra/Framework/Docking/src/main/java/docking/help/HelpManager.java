@@ -463,7 +463,7 @@ public class HelpManager implements HelpService {
 			buffy.append("                ").append(loc.getInceptionInformation()).append('\n');
 		}
 
-		new Throwable("Bad Help Locations Found!\n" + buffy.toString()).printStackTrace();
+		new Throwable("Bad Help Locations Found!\n" + buffy).printStackTrace();
 	}
 
 	public Map<Object, HelpLocation> getInvalidHelpLocations(TaskMonitor monitor)
@@ -690,7 +690,7 @@ public class HelpManager implements HelpService {
 		}
 		buffy.append("\nHELP-LOCATION-> ");
 		if (helpLoc != null) {
-			buffy.append(helpLoc.toString());
+			buffy.append(helpLoc);
 			String str = helpLoc.getTopic();
 			if (str != null) {
 				buffy.append("\n   TOPIC:       ");

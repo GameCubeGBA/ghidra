@@ -19,6 +19,7 @@ import java.awt.Font;
 import java.io.*;
 import java.net.URL;
 import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.StringTokenizer;
 import java.util.function.Supplier;
@@ -346,14 +347,9 @@ public class SystemUtilities {
 		URL url = classObject.getClassLoader().getResource(name);
 
 		String urlFile = url.getFile();
-		try {
-			urlFile = URLDecoder.decode(urlFile, "UTF-8");
-		}
-		catch (UnsupportedEncodingException e) {
-			// can't happen, since we know the encoding is correct
-		}
+        urlFile = URLDecoder.decode(urlFile, StandardCharsets.UTF_8);
 
-		if ("file".equals(url.getProtocol())) {
+        if ("file".equals(url.getProtocol())) {
 			int packageLevel = getPackageLevel(classObject);
 			File file = new File(urlFile);
 			for (int i = 0; i < packageLevel + 1; i++) {

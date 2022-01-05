@@ -122,7 +122,7 @@ public class PrettyPrinter {
 		for (int i = 0 ; i < nChildren ; ++i) {
 			ClangNode node = tokgroup.Child(i);
 			if (node instanceof ClangFuncProto) {
-				return node.toString()+";";
+				return node +";";
 			}
 		}
 		return null;

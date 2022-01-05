@@ -322,7 +322,7 @@ public class DWARFUtil {
 			sb.append(childName);
 		}
 
-		return "anon_" + getContainerTypeName(diea) + "_for_" + sb.toString();
+		return "anon_" + getContainerTypeName(diea) + "_for_" + sb;
 	}
 
 	/**

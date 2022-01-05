@@ -299,9 +299,7 @@ public class FormatStringParser {
 				convertToFormatArguments(formatStrArgument, formatArgumentList, isOutputType);
 			if (!status) {
 				if (formatStrArgumentList.stream()
-						.filter(str -> str.contains("$"))
-						.findAny()
-						.isPresent()) {
+						.anyMatch(str -> str.contains("$"))) {
 					return analyzeFormatStringWithParameters(formatString);
 				}
 				return null;
@@ -593,7 +591,7 @@ public class FormatStringParser {
 				dataTypesList.add(dt);
 			}
 		}
-		return dataTypesList.stream().toArray(size -> new DataType[size]);
+		return dataTypesList.toArray(size -> new DataType[size]);
 	}
 
 	private boolean verifyConversionPair(String lengthModifier, String conversionSpecifier) {

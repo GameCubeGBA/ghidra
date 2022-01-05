@@ -210,14 +210,14 @@ class ReferenceLineDispenser extends AbstractLineDispenser {
 			refsInCurrLine++;
 
 			if (refsInCurrLine == refsPerLine) {
-				lines.add((displayRefHeader ? prefix : "") + buf.toString());
+				lines.add((displayRefHeader ? prefix : "") + buf);
 				buf.delete(0, buf.length());
 				refsInCurrLine = 0;
 			}
 		}
 
 		if (refsInCurrLine > 0) {
-			lines.add((displayRefHeader ? prefix : "") + buf.toString());
+			lines.add((displayRefHeader ? prefix : "") + buf);
 			buf.delete(0, buf.length());
 		}
 	}

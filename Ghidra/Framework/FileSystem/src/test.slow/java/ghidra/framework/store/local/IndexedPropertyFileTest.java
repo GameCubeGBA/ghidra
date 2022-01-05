@@ -21,6 +21,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 import org.junit.Test;
 
@@ -59,7 +60,7 @@ public class IndexedPropertyFileTest extends AbstractGenericTest {
 		}
 		String str = sb.toString();
 
-		pf.putString("TestString", URLEncoder.encode(str, "UTF-8"));
+		pf.putString("TestString", URLEncoder.encode(str, StandardCharsets.UTF_8));
 
 		pf.writeState();
 
@@ -71,7 +72,7 @@ public class IndexedPropertyFileTest extends AbstractGenericTest {
 		assertTrue(pf2.getBoolean("TestBooleanBad", true));
 		assertEquals(1234, pf2.getInt("TestInt", -1));
 		assertEquals(0x12345678, pf2.getLong("TestLong", -1));
-		assertEquals(str, URLDecoder.decode(pf2.getString("TestString", null), "UTF-8"));
+		assertEquals(str, URLDecoder.decode(pf2.getString("TestString", null), StandardCharsets.UTF_8));
 
 		PropertyFile pf3 =
 			new IndexedPropertyFile(new File(parent, storageName + PropertyFile.PROPERTY_EXT));
@@ -85,7 +86,7 @@ public class IndexedPropertyFileTest extends AbstractGenericTest {
 		assertTrue(pf3.getBoolean("TestBooleanBad", true));
 		assertEquals(1234, pf3.getInt("TestInt", -1));
 		assertEquals(0x12345678, pf3.getLong("TestLong", -1));
-		assertEquals(str, URLDecoder.decode(pf3.getString("TestString", null), "UTF-8"));
+		assertEquals(str, URLDecoder.decode(pf3.getString("TestString", null), StandardCharsets.UTF_8));
 
 	}
 

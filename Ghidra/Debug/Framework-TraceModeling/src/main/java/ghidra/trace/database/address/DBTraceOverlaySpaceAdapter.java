@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.concurrent.locks.ReadWriteLock;
 
@@ -61,7 +62,7 @@ public class DBTraceOverlaySpaceAdapter implements DBTraceManager {
 	 */
 	public static class AddressDBFieldCodec<OT extends DBAnnotatedObject & DecodesAddresses>
 			extends AbstractDBFieldCodec<Address, OT, BinaryField> {
-		static final Charset UTF8 = Charset.forName("UTF-8");
+		static final Charset UTF8 = StandardCharsets.UTF_8;
 
 		public AddressDBFieldCodec(Class<OT> objectType, Field field, int column) {
 			super(Address.class, objectType, BinaryField.class, field, column);

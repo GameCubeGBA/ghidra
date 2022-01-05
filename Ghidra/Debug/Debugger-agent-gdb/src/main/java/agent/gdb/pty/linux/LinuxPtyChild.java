@@ -18,6 +18,7 @@ package agent.gdb.pty.linux;
 import java.io.*;
 import java.net.URL;
 import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.*;
 
@@ -116,15 +117,9 @@ public class LinuxPtyChild extends LinuxPtyEndpoint implements PtyChild {
 		// TODO: Refactor this with SystemUtilities.getSourceLocationForClass()
 		URL url = LinuxPtyChild.class.getClassLoader().getResource(name);
 		String urlFile = url.getFile();
-		try {
-			urlFile = URLDecoder.decode(urlFile, "UTF-8");
-		}
-		catch (UnsupportedEncodingException e) {
-			// can't happen, since we know the encoding is correct
-			throw new AssertionError(e);
-		}
+        urlFile = URLDecoder.decode(urlFile, StandardCharsets.UTF_8);
 
-		if ("file".equals(url.getProtocol())) {
+        if ("file".equals(url.getProtocol())) {
 			int packageLevel = Paths.get(name).getNameCount();
 			File file = new File(urlFile);
 			for (int i = 0; i < packageLevel; i++) {

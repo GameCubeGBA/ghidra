@@ -137,7 +137,7 @@ public class InstructionSearchData extends Observable {
 						new SleighDebugLogger(program, cu.getAddress(), SleighDebugMode.VERBOSE);
 					if (logger.parseFailed()) {
 						Msg.showError(this, null, "Parsing error",
-							"Error parsing instruction: " + cu.toString());
+							"Error parsing instruction: " + cu);
 						return;
 					}
 
@@ -157,7 +157,7 @@ public class InstructionSearchData extends Observable {
 					}
 					catch (InvalidInputException e) {
 						Msg.showError(this, null, "Parsing error",
-							"Error parsing data: " + cu.toString());
+							"Error parsing data: " + cu);
 						return;
 					}
 				}

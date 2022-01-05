@@ -16,6 +16,7 @@
 package ghidra.app.plugin.core.string;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class StringModel {
@@ -145,7 +146,7 @@ public class StringModel {
 
 		try (BufferedWriter out =
 				new BufferedWriter(
-					new OutputStreamWriter(new FileOutputStream(outputFile), "ASCII"))) {
+					new OutputStreamWriter(new FileOutputStream(outputFile), StandardCharsets.US_ASCII))) {
 
 			out.write("# Model Type: " + modelType);
 			out.newLine();
@@ -200,11 +201,11 @@ public class StringModel {
 			}
 		}
 		catch (UnsupportedEncodingException e) {
-			System.err.println("Error creating String Model file: " + e.toString());
+			System.err.println("Error creating String Model file: " + e);
 			System.exit(0);
 		}
 		catch (FileNotFoundException e) {
-			System.err.println("Error creating String Model file: " + e.toString());
+			System.err.println("Error creating String Model file: " + e);
 			System.exit(0);
 		}
 	}

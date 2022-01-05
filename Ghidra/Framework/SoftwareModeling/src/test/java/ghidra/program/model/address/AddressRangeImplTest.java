@@ -260,7 +260,7 @@ public class AddressRangeImplTest extends AbstractGenericTest {
 
 		assertTrue(
 			"Address Iterator does not properly enumerate address range: " +
-					String.format("%s (%d long) -- found %d", r1.toString(), r1.getLength(), addrCount),
+					String.format("%s (%d long) -- found %d", r1, r1.getLength(), addrCount),
 					addrCount == (size + 1));
 	}
 

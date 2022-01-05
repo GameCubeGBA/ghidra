@@ -789,7 +789,7 @@ public abstract class AbstractOptions implements Options {
 		for (String string : optionNames) {
 			sortedOptionsMap.put(string, getObject(string, null));
 		}
-		return "Options: " + sortedOptionsMap.toString();
+		return "Options: " + sortedOptionsMap;
 	}
 
 	@Override

@@ -64,7 +64,7 @@ public class TextLine implements ValidatableLine {
 	}
 
 	private String colorStrig() {
-		return textColor == null ? "" : " " + textColor.toString();
+		return textColor == null ? "" : " " + textColor;
 	}
 
 	@Override

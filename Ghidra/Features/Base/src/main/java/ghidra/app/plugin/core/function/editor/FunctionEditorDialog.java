@@ -108,7 +108,7 @@ public class FunctionEditorDialog extends DialogComponentProvider implements Mod
 			Address addr = extLoc.getAddress();
 			if (addr != null) {
 				strBuilder.append(" at ");
-				strBuilder.append(addr.toString());
+				strBuilder.append(addr);
 			}
 		}
 		else {

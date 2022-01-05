@@ -43,7 +43,7 @@ public class LazyGraphGroupSaveableXML extends LazySaveableXML {
 	public boolean isEmpty() {
 		Graph<FGVertex, FGEdge> graph = functionGraph;
 		Collection<FGVertex> vertices = graph.getVertices();
-		return !vertices.stream().anyMatch(v -> v instanceof GroupedFunctionGraphVertex);
+		return vertices.stream().noneMatch(v -> v instanceof GroupedFunctionGraphVertex);
 	}
 
 	@Override

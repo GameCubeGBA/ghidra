@@ -95,7 +95,7 @@ public class Location {
 		sb.append(functionName);
 		if (entryPoint != null) {
 			sb.append(" (");
-			sb.append(entryPoint.toString());
+			sb.append(entryPoint);
 			sb.append(")");
 		}
 		return sb.toString();

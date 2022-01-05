@@ -157,14 +157,14 @@ class DataTypePanel extends JPanel {
 		StringBuffer alignmentBuffer = new StringBuffer();
 		alignmentBuffer.append("Alignment: ");
 		alignmentBuffer.append(Integer.toString(composite.getAlignment()));
-		insertString(alignmentBuffer.toString() + "\n", sourceAttrSet);
+		insertString(alignmentBuffer + "\n", sourceAttrSet);
 	}
 
 	private void insertLength(Composite composite) {
 		StringBuffer lengthBuffer = new StringBuffer();
 		lengthBuffer.append("Length: ");
 		lengthBuffer.append(Integer.toString(composite.getLength()));
-		insertString(lengthBuffer.toString() + "\n", sourceAttrSet);
+		insertString(lengthBuffer + "\n", sourceAttrSet);
 	}
 
 	private int max(String str, int length) {

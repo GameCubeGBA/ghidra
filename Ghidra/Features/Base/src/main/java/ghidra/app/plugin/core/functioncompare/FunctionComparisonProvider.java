@@ -189,7 +189,7 @@ public class FunctionComparisonProvider extends ComponentProviderAdapter
 	 * @param functions the functions to remove
 	 */
 	public void removeFunctions(Set<Function> functions) {
-		functions.stream().forEach(f -> model.removeFunction(f));
+		functions.forEach(f -> model.removeFunction(f));
 		closeIfEmpty();
 	}
 
