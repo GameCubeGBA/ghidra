@@ -96,8 +96,7 @@ public class TestFGLayoutProvider extends FGLayoutProvider {
 				nodesByVertices.put(v, node);
 				rows.add(node);
 			}
-			Collections.sort(rows,
-				(n1, n2) -> n1.v.getVertexAddress().compareTo(n2.v.getVertexAddress()));
+			rows.sort((n1, n2) -> n1.v.getVertexAddress().compareTo(n2.v.getVertexAddress()));
 
 			for (int i = 0; i < rows.size(); i++) {
 				Node node = rows.get(i);

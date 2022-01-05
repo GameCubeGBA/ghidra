@@ -67,7 +67,7 @@ public class FileSystemFactoryMgr {
 		for (Class<? extends GFileSystem> fsClass : ClassSearcher.getClasses(GFileSystem.class)) {
 			addFactory(fsClass);
 		}
-		Collections.sort(sortedFactories, FileSystemInfoRec.BY_PRIORITY);
+		sortedFactories.sort(FileSystemInfoRec.BY_PRIORITY);
 	}
 
 	private void addFactory(Class<? extends GFileSystem> fsClass) {

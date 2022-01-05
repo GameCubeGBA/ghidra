@@ -88,24 +88,24 @@ public class ClassFinder {
 
 		List<Class<?>> classList = new ArrayList<>(classSet);
 
-		Collections.sort(classList, (c1, c2) -> {
-			// Sort classes primarily by priority and secondarily by name
-			int p1 = ExtensionPointProperties.Util.getPriority(c1);
-			int p2 = ExtensionPointProperties.Util.getPriority(c2);
-			if (p1 > p2) {
-				return -1;
-			}
-			if (p1 < p2) {
-				return 1;
-			}
-			String n1 = c1.getName();
-			String n2 = c2.getName();
-			if (n1.equals(n2)) {
-				// Same priority and same package/class name....just arbitrarily choose one 
-				return Integer.compare(c1.hashCode(), c2.hashCode());
-			}
-			return n1.compareTo(n2);
-		});
+		classList.sort((c1, c2) -> {
+            // Sort classes primarily by priority and secondarily by name
+            int p1 = ExtensionPointProperties.Util.getPriority(c1);
+            int p2 = ExtensionPointProperties.Util.getPriority(c2);
+            if (p1 > p2) {
+                return -1;
+            }
+            if (p1 < p2) {
+                return 1;
+            }
+            String n1 = c1.getName();
+            String n2 = c2.getName();
+            if (n1.equals(n2)) {
+                // Same priority and same package/class name....just arbitrarily choose one
+                return Integer.compare(c1.hashCode(), c2.hashCode());
+            }
+            return n1.compareTo(n2);
+        });
 
 		return classList;
 	}

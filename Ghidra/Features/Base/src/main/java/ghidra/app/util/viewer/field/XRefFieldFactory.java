@@ -401,8 +401,7 @@ public class XRefFieldFactory extends FieldFactory {
 			createWrappingXrefRow(program, dataRow, noFunction, currentFunction, isOffcut,
 				availableLines, hlFactory);
 
-		List<TextField> allFields = new ArrayList<>();
-		allFields.addAll(functionRows);
+        List<TextField> allFields = new ArrayList<>(functionRows);
 		if (noFunctionXrefsField != null) {
 			allFields.add(noFunctionXrefsField);
 		}

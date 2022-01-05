@@ -166,7 +166,7 @@ public class HDMAUtil {
 					}
 				}
 			}
-			if (found == false) {
+			if (!found) {
 				return null;
 			}
 		}

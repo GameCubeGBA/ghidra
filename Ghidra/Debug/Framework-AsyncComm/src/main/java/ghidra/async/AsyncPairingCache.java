@@ -178,9 +178,9 @@ public abstract class AsyncPairingCache<K, V> {
 	 * @param exc the exception for completing the requests
 	 */
 	public void flush(Throwable exc) {
-		Set<CompletableFuture<V>> copy = new HashSet<>();
+		Set<CompletableFuture<V>> copy;
 		synchronized (this) {
-			copy.addAll(promises.values());
+			copy = new HashSet<>(promises.values());
 			promises.clear();
 			results.clear();
 		}

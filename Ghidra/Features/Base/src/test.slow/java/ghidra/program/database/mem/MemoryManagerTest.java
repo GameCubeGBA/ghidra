@@ -388,7 +388,7 @@ public class MemoryManagerTest extends AbstractGhidraHeadedIntegrationTest {
 
 		block.setExecute(true);
 		executeSet = mem.getExecuteSet();
-		assertTrue(executeSet.isEmpty() != true);
+		assertTrue(!executeSet.isEmpty());
 		Address start = block.getStart();
 		Address end = block.getEnd();
 		assertTrue(executeSet.contains(start,end));
@@ -411,7 +411,7 @@ public class MemoryManagerTest extends AbstractGhidraHeadedIntegrationTest {
 		assertTrue(executeSet.contains(start,end));
 		block.setExecute(false);
 		executeSet = mem.getExecuteSet();
-		assertTrue(executeSet.contains(start,end) == false);
+		assertTrue(!executeSet.contains(start, end));
 		
 		block2.setExecute(true);
 		Address start2 = block2.getStart();
@@ -426,7 +426,7 @@ public class MemoryManagerTest extends AbstractGhidraHeadedIntegrationTest {
 
 		// should be execute set on block2, deleted, then undone
 		executeSet = mem.getExecuteSet();
-		assertTrue(executeSet.contains(start2,end2) == false);
+		assertTrue(!executeSet.contains(start2, end2));
 	
 		// undid set execute block should now be contained
 		block = mem.getBlock("Test1");
@@ -438,7 +438,7 @@ public class MemoryManagerTest extends AbstractGhidraHeadedIntegrationTest {
 		mem.split(block, addr(150));
 		block = mem.getBlock("Test1");
 		executeSet = mem.getExecuteSet();
-		assertTrue(executeSet.isEmpty() != true);
+		assertTrue(!executeSet.isEmpty());
 		assertTrue(executeSet.contains(block.getStart(), block.getEnd()));
 		
 		// remove block that was split, should still be executable memory
@@ -446,8 +446,8 @@ public class MemoryManagerTest extends AbstractGhidraHeadedIntegrationTest {
 		end = block.getEnd();
 		mem.removeBlock(block, new TaskMonitorAdapter());
 		executeSet = mem.getExecuteSet();
-		assertTrue(executeSet.isEmpty() != true);
-		assertTrue(executeSet.contains(start, end) == false);
+		assertTrue(!executeSet.isEmpty());
+		assertTrue(!executeSet.contains(start, end));
 	}
 	
 	@Test

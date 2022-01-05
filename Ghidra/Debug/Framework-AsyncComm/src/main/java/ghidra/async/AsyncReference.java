@@ -362,10 +362,10 @@ public class AsyncReference<T, C> {
 	 * @param reason the reason for disposal
 	 */
 	public void dispose(Throwable reason) {
-		List<CompletableFuture<?>> toExcept = new ArrayList<>();
+		List<CompletableFuture<?>> toExcept;
 		synchronized (this) {
 			disposalReason = reason;
-			toExcept.addAll(waitsFor.values());
+			toExcept = new ArrayList<>(waitsFor.values());
 			waitsFor.clear();
 			toExcept.addAll(waitsUntil);
 			waitsUntil.clear();

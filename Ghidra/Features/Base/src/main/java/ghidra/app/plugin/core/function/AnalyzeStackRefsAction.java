@@ -64,7 +64,7 @@ class AnalyzeStackRefsAction extends ListingContextAction {
 	protected void actionPerformed(ListingActionContext context) {
 		// get the entry points for all the functions in the current selection/location
 		Iterator<Function> iter = funcPlugin.getFunctions(context);
-		if (iter.hasNext() == false) {
+		if (!iter.hasNext()) {
 			String message = "No function at current location";
 			ProgramSelection selection = context.getSelection();
 			if (selection != null) {

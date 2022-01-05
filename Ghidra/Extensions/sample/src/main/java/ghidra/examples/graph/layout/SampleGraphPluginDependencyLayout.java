@@ -103,7 +103,7 @@ public class SampleGraphPluginDependencyLayout
 			Integer row = rowValues.get(i);
 			List<SampleVertex> rowVertices = verticesByRow.get(row);
 
-			Collections.sort(rowVertices, comparator);
+			rowVertices.sort(comparator);
 
 			int columnCount = rowVertices.size();
 			int col = ((longestRow - columnCount) / 2); // center column
@@ -122,7 +122,7 @@ public class SampleGraphPluginDependencyLayout
 		int indent = 8; // arbitrary; trial-and-error
 		int limit = longestRow - indent;
 		List<SampleVertex> lastRow = verticesByRow.get(0); // 0 since they have no edges
-		Collections.sort(lastRow, comparator);
+		lastRow.sort(comparator);
 		int start = indent / 2;
 		int col = start;
 		int currentRow = rows + 4; // +4 to create space between these and those above

@@ -77,7 +77,7 @@ class StructureDB extends CompositeDB implements StructureInternal {
 				components.add(component);
 			}
 
-			Collections.sort(components, ComponentComparator.INSTANCE);
+			components.sort(ComponentComparator.INSTANCE);
 
 			structLength = record.getIntValue(CompositeDBAdapter.COMPOSITE_LENGTH_COL);
 			structAlignment = record.getIntValue(CompositeDBAdapter.COMPOSITE_ALIGNMENT_COL);

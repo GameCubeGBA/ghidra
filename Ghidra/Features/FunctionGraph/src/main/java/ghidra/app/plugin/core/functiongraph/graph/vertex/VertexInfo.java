@@ -98,8 +98,7 @@ class VertexInfo {
 
 	Set<FGEdge> getInEdges(FGController controller, FGVertex vertex) {
 
-		Set<FGEdge> edges = new HashSet<>();
-		FGData functionGraphData = controller.getFunctionGraphData();
+        FGData functionGraphData = controller.getFunctionGraphData();
 		FunctionGraph functionGraph = functionGraphData.getFunctionGraph();
 		Graph<FGVertex, FGEdge> graph = functionGraph;
 		Collection<FGEdge> inEdges = graph.getInEdges(vertex);
@@ -107,14 +106,13 @@ class VertexInfo {
 			return null;
 		}
 
-		edges.addAll(inEdges);
+        Set<FGEdge> edges = new HashSet<>(inEdges);
 		return edges;
 	}
 
 	Set<FGEdge> getOutEdges(FGController controller, FGVertex vertex) {
 
-		Set<FGEdge> edges = new HashSet<>();
-		FGData functionGraphData = controller.getFunctionGraphData();
+        FGData functionGraphData = controller.getFunctionGraphData();
 		FunctionGraph functionGraph = functionGraphData.getFunctionGraph();
 		Graph<FGVertex, FGEdge> graph = functionGraph;
 		Collection<FGEdge> outEdges = graph.getOutEdges(vertex);
@@ -122,7 +120,7 @@ class VertexInfo {
 			return null;
 		}
 
-		edges.addAll(outEdges);
+        Set<FGEdge> edges = new HashSet<>(outEdges);
 		return edges;
 	}
 

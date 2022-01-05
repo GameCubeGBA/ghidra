@@ -170,7 +170,7 @@ class AnalysisPanel extends JPanel implements PropertyChangeListener {
 		AutoAnalysisManager manager = AutoAnalysisManager.getAnalysisManager(program);
 
 		List<String> propertyNames = analysisOptions.getOptionNames();
-		Collections.sort(propertyNames, (o1, o2) -> o1.compareToIgnoreCase(o2));
+		propertyNames.sort((o1, o2) -> o1.compareToIgnoreCase(o2));
 		for (String analyzerName : propertyNames) {
 			if (analyzerName.indexOf('.') == -1) {
 				if (analysisOptions.getType(analyzerName) != OptionType.BOOLEAN_TYPE) {

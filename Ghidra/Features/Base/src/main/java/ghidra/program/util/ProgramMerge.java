@@ -243,7 +243,7 @@ public class ProgramMerge implements PropertyVisitor {
 		// Sort the registers by size so that largest come first.
 		// This prevents the remove call below from incorrectly clearing
 		// smaller registers that are part of a larger register.
-		Collections.sort(originRegs, (r1, r2) -> r2.getBitLength() - r1.getBitLength());
+		originRegs.sort((r1, r2) -> r2.getBitLength() - r1.getBitLength());
 		AddressRangeIterator originRangeIter = originAddressSet.getAddressRanges();
 		while (originRangeIter.hasNext() && !monitor.isCancelled()) {
 			AddressRange originRange = originRangeIter.next();

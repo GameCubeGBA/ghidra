@@ -874,7 +874,7 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 	 */
 	public Address getMaximumAddressOnList(List<Address> list) {
 
-		Collections.sort(list, Collections.reverseOrder());
+		list.sort(Collections.reverseOrder());
 		return list.get(0);
 	}
 

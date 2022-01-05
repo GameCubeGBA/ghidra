@@ -15,8 +15,13 @@
  */
 package ghidra.app.plugin.core.debug.gui.objects;
 
-import java.util.*;
-import java.util.Map.Entry;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.concurrent.CompletableFuture;
 
 import org.jdom.Element;
@@ -177,10 +182,7 @@ public class ObjectContainer implements Comparable<ObjectContainer> {
 	public void augmentElements(Collection<String> elementsRemoved,
 			Map<String, ? extends TargetObject> elementsAdded) {
 		Set<ObjectContainer> result = new TreeSet<ObjectContainer>();
-		Map<String, Object> newAdds = new HashMap<>();
-		for (Entry<String, ? extends TargetObject> entry : elementsAdded.entrySet()) {
-			newAdds.put(entry.getKey(), entry.getValue());
-		}
+		Map<String, Object> newAdds = new HashMap<>(elementsAdded);
 		boolean structureChanged = false;
 		synchronized (elementMap) {
 			for (ObjectContainer child : currentChildren) {
@@ -224,10 +226,7 @@ public class ObjectContainer implements Comparable<ObjectContainer> {
 	public void augmentAttributes(Collection<String> attributesRemoved,
 			Map<String, ?> attributesAdded) {
 		Set<ObjectContainer> result = new TreeSet<ObjectContainer>();
-		Map<String, Object> newAdds = new HashMap<>();
-		for (Entry<String, ?> entry : attributesAdded.entrySet()) {
-			newAdds.put(entry.getKey(), entry.getValue());
-		}
+		Map<String, Object> newAdds = new HashMap<>(attributesAdded);
 		boolean structureChanged = false;
 		synchronized (attributeMap) {
 			for (ObjectContainer child : currentChildren) {
@@ -282,10 +281,9 @@ public class ObjectContainer implements Comparable<ObjectContainer> {
 			}
 		}
 
-		Set<ObjectContainer> result = new TreeSet<ObjectContainer>();
 		List<ObjectContainer> nodeFromElements =
 			DebuggerObjectsProvider.getContainersFromObjects(elementMap, targetObject, false);
-		result.addAll(nodeFromElements);
+		Set<ObjectContainer> result = new TreeSet<ObjectContainer>(nodeFromElements);
 
 		List<ObjectContainer> nodeFromAttributes =
 			DebuggerObjectsProvider.getContainersFromObjects(attributeMap, targetObject, true);

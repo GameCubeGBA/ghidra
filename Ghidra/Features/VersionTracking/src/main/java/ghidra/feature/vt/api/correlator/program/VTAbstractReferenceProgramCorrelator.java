@@ -243,7 +243,7 @@ public abstract class VTAbstractReferenceProgramCorrelator extends VTAbstractPro
 
 	private List<VTMatchInfo> refine(List<VTMatchInfo> list) {
 
-		Collections.sort(list, SCORE_COMPARATOR);
+		list.sort(SCORE_COMPARATOR);
 
 		// take the top N + 1 (to catch duplicates across the N boundary)
 		int topN = Math.min(TOP_N + 1, list.size());

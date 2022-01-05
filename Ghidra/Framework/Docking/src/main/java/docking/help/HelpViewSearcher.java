@@ -309,7 +309,7 @@ class HelpViewSearcher {
 			int position = cursorPosition.getPosition(); // move to the next item
 
 			if (searchForward) {
-				Collections.sort(searchResults, searchResultComparator);
+				searchResults.sort(searchResultComparator);
 				for (SearchHit searchHit : searchResults) {
 					int begin = searchHit.getBegin();
 					if (begin <= position) {
@@ -319,7 +319,7 @@ class HelpViewSearcher {
 				}
 			}
 			else {
-				Collections.sort(searchResults, searchResultReverseComparator);
+				searchResults.sort(searchResultReverseComparator);
 				for (SearchHit searchHit : searchResults) {
 					int begin = searchHit.getBegin();
 					if (begin >= position) {

@@ -116,7 +116,7 @@ public class MipsSymbolAnalyzer extends AbstractAnalyzer {
 					}
 
 					// Check if entry point.
-					if (symbolTable.isExternalEntryPoint(memAddr) == true) {
+					if (symbolTable.isExternalEntryPoint(memAddr)) {
 						// Remove old entry point and add new one
 						symbolTable.removeExternalEntryPoint(memAddr);
 						symbolTable.addExternalEntryPoint(newAddr);

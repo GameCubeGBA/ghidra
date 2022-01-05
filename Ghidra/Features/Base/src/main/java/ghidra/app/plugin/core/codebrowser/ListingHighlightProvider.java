@@ -223,9 +223,9 @@ public class ListingHighlightProvider
 
 		// Prioritize exact register matches by ensuring that the longest register name gets
 		// matched first
-		Collections.sort(registerNames, (a, b) -> {
-			return Integer.valueOf(b.length()).compareTo(Integer.valueOf(a.length()));
-		});
+		registerNames.sort((a, b) -> {
+            return Integer.valueOf(b.length()).compareTo(Integer.valueOf(a.length()));
+        });
 
 		StringBuilder buffy = new StringBuilder();
 		for (String name : registerNames) {

@@ -296,11 +296,11 @@ public class TestGraphAlgorithmSteppingViewerPanel<V, E extends GEdge<V>> extend
 
 			// sort by name; assume name is just a number
 			List<AlgorithmTestSteppingVertex<V>> sorted = new ArrayList<>(g.getVertices());
-			Collections.sort(sorted, (v1, v2) -> {
-				Integer i1 = Integer.parseInt(v1.getName());
-				Integer i2 = Integer.parseInt(v2.getName());
-				return i1.compareTo(i2);
-			});
+			sorted.sort((v1, v2) -> {
+                Integer i1 = Integer.parseInt(v1.getName());
+                Integer i2 = Integer.parseInt(v2.getName());
+                return i1.compareTo(i2);
+            });
 
 			AlgorithmTestSteppingVertex<V> first = sorted.get(0);
 			assignRows(first, g, grid, 1, 1);

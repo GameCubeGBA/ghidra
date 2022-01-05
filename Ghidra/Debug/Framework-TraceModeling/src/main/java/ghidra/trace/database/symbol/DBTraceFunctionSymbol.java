@@ -207,14 +207,10 @@ public class DBTraceFunctionSymbol extends DBTraceNamespaceSymbol
 		}
 		locals = new ArrayList<>();
 		params = new ArrayList<>();
-		for (DBTraceLocalVariableSymbol lVar : manager.localVars.getChildren(this)) {
-			// TODO: Check for bad variables / bad storage
-			locals.add(lVar);
-		}
-		for (DBTraceParameterSymbol pVar : manager.parameters.getChildren(this)) {
-			// TODO: Bad?
-			params.add(pVar);
-		}
+        // TODO: Check for bad variables / bad storage
+        locals.addAll(manager.localVars.getChildren(this));
+        // TODO: Bad?
+        params.addAll(manager.parameters.getChildren(this));
 		// TODO: What is a bad variable?
 		locals.sort(VariableUtilities::compare);
 		params.sort(Comparator.comparing(DBTraceParameterSymbol::getOrdinal));
@@ -234,9 +230,8 @@ public class DBTraceFunctionSymbol extends DBTraceNamespaceSymbol
 		if (!foundBadVariables) {
 			return;
 		}
-		List<AbstractDBTraceVariableSymbol> badns = new ArrayList<>();
-		badns.addAll(Collections2.filter(manager.allLocals.getChildren(this),
-			DBTraceFunctionSymbol::isBadVariable));
+        List<AbstractDBTraceVariableSymbol> badns = new ArrayList<>(Collections2.filter(manager.allLocals.getChildren(this),
+                DBTraceFunctionSymbol::isBadVariable));
 		if (badns.isEmpty()) {
 			return;
 		}

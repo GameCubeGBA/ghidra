@@ -48,7 +48,7 @@ public class DataTypeUtilsTest {
 		}
 
 		// sort them how our data will be sorted
-		Collections.sort(data, new DataTypeComparator());
+		data.sort(new DataTypeComparator());
 		List<DataType> finalData = Collections.unmodifiableList(data);
 
 		// a

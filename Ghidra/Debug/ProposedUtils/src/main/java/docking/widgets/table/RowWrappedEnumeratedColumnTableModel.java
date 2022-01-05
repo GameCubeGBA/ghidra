@@ -128,7 +128,7 @@ public class RowWrappedEnumeratedColumnTableModel<C extends Enum<C> & Enumerated
 
 	public synchronized void deleteAllItems(Collection<T> c) {
 		deleteWith(getRows(c)::contains);
-		map.keySet().removeAll(c.stream().map(keyFunc).collect(Collectors.toList()));
+		c.stream().map(keyFunc).collect(Collectors.toList()).forEach(map.keySet()::remove);
 	}
 
 	public synchronized Map<K, R> getMap() {

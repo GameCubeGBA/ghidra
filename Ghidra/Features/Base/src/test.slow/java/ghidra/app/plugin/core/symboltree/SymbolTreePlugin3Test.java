@@ -193,10 +193,7 @@ public class SymbolTreePlugin3Test extends AbstractGhidraHeadedIntegrationTest {
 	private void doDrag(final GTreeNode destinationNode, final int dragAction,
 			GTreeNode... dragNode) {
 		final GTreeDragNDropHandler dragNDropHandler = util.getTree().getDragNDropHandler();
-		List<GTreeNode> dropList = new ArrayList<>();
-		for (GTreeNode gTreeNode : dragNode) {
-			dropList.add(gTreeNode);
-		}
+		List<GTreeNode> dropList = new ArrayList<>(Arrays.asList(dragNode));
 
 		final Transferable transferable = new GTreeNodeTransferable(dragNDropHandler, dropList);
 
@@ -277,7 +274,7 @@ public class SymbolTreePlugin3Test extends AbstractGhidraHeadedIntegrationTest {
 			program.endTransaction(transactionID, true);
 		}
 
-		Collections.sort(list, util.getSymbolComparator());
+		list.sort(util.getSymbolComparator());
 
 		program.flushEvents();
 		waitForPostedSwingRunnables();

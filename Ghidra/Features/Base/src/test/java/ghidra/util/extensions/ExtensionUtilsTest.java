@@ -230,7 +230,7 @@ public class ExtensionUtilsTest extends AbstractDockingTest {
 			foundError = true;
 		}
 
-		assertTrue(foundError == false);
+		assertTrue(!foundError);
 	}
 
 //==================================================================================================

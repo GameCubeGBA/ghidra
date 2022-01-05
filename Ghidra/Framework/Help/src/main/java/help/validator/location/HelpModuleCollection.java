@@ -247,9 +247,8 @@ public class HelpModuleCollection implements TOCItemProvider {
 
 	@Override
 	public Map<String, TOCItemDefinition> getTocDefinitionsByID() {
-		Map<String, TOCItemDefinition> map = new HashMap<>();
-		GhidraTOCFile TOC = inputHelp.getSourceTOCFile();
-		map.putAll(TOC.getTOCDefinitionByIDMapping());
+        GhidraTOCFile TOC = inputHelp.getSourceTOCFile();
+        Map<String, TOCItemDefinition> map = new HashMap<>(TOC.getTOCDefinitionByIDMapping());
 		return map;
 	}
 
@@ -314,16 +313,14 @@ public class HelpModuleCollection implements TOCItemProvider {
 	 * @return the items
 	 */
 	public Collection<TOCItem> getInputTOCItems() {
-		Collection<TOCItem> items = new ArrayList<>();
-		GhidraTOCFile TOC = inputHelp.getSourceTOCFile();
-		items.addAll(TOC.getAllTOCItems());
+        GhidraTOCFile TOC = inputHelp.getSourceTOCFile();
+        Collection<TOCItem> items = new ArrayList<>(TOC.getAllTOCItems());
 		return items;
 	}
 
 	public Collection<HREF> getTOC_HREFs() {
-		Collection<HREF> definitions = new ArrayList<>();
-		GhidraTOCFile TOC = inputHelp.getSourceTOCFile();
-		definitions.addAll(getTOC_HREFs(TOC));
+        GhidraTOCFile TOC = inputHelp.getSourceTOCFile();
+        Collection<HREF> definitions = new ArrayList<>(getTOC_HREFs(TOC));
 		return definitions;
 	}
 

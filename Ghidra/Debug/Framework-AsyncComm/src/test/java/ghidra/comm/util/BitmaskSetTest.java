@@ -327,8 +327,7 @@ public class BitmaskSetTest {
 		assertEquals(setOf0, test);
 
 		test = new BitmaskSet<>(setOf2);
-		Set<Object> temp = new HashSet<>();
-		temp.addAll(setOf2a);
+        Set<Object> temp = new HashSet<>(setOf2a);
 		temp.add("Some string");
 		assertTrue(test.retainAll(temp));
 		assertEquals(setOf1, test);
@@ -357,8 +356,7 @@ public class BitmaskSetTest {
 		assertEquals(setOf2, test);
 
 		test = new BitmaskSet<>(setOf2);
-		Set<Object> temp = new HashSet<>();
-		temp.addAll(setOf2a);
+        Set<Object> temp = new HashSet<>(setOf2a);
 		temp.add("Some string");
 		assertTrue(test.removeAll(temp));
 		assertEquals(exp, test);

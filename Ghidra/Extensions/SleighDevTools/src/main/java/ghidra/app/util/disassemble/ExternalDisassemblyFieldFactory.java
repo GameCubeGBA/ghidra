@@ -47,9 +47,7 @@ public class ExternalDisassemblyFieldFactory extends FieldFactory {
 		List<ExternalDisassembler> extDisassemblers =
 			ClassSearcher.getInstances(ExternalDisassembler.class);
 
-		for (ExternalDisassembler disassember : extDisassemblers) {
-			availableDisassemblers.add(disassember);
-		}
+        availableDisassemblers.addAll(extDisassemblers);
 		return availableDisassemblers;
 	}
 

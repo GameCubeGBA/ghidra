@@ -282,8 +282,7 @@ public class ProjectDataDeleteTask extends Task {
 			monitor.initialize(foldersToDelete.size());
 			monitor.setMessage("Deleting directories...");
 			List<DomainFolder> sortedFolders = new ArrayList<>(foldersToDelete.keySet());
-			Collections.sort(sortedFolders,
-				(o1, o2) -> o2.getPathname().compareTo(o1.getPathname()));
+			sortedFolders.sort((o1, o2) -> o2.getPathname().compareTo(o1.getPathname()));
 			for (DomainFolder folder : sortedFolders) {
 				monitor.checkCanceled();
 				try {

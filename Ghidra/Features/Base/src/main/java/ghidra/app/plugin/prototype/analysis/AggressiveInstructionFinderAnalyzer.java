@@ -185,12 +185,11 @@ public class AggressiveInstructionFinderAnalyzer extends AbstractAnalyzer {
 		monitor.initialize(startAddressCount);
 
 		Collection<RegisterValue> contextStarts = funcStartContext.values();
-		HashSet<RegisterValue> contextSet = new HashSet<>();
-		contextSet.addAll(contextStarts);
+        HashSet<RegisterValue> contextSet = new HashSet<>(contextStarts);
 
 		// get an instruction iterator
 		long count = 0;
-		while (set.isEmpty() == false) {
+		while (!set.isEmpty()) {
 			long currentAddressCount = set.getNumAddresses();
 			monitor.setProgress(startAddressCount - currentAddressCount);
 
@@ -299,7 +298,7 @@ public class AggressiveInstructionFinderAnalyzer extends AbstractAnalyzer {
 							break;
 						}
 					}
-					if (isvalid == false) {
+					if (!isvalid) {
 						continue;
 					}
 

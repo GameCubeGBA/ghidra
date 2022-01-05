@@ -495,11 +495,11 @@ public class CodeViewerProvider extends NavigatableComponentProviderAdapter
 			return;
 		}
 		list.add(dndProvider);
-		Collections.sort(list, (pdp1, pdp2) -> {
-			int p1 = pdp1.getPriority();
-			int p2 = pdp2.getPriority();
-			return p2 - p1;
-		});
+		list.sort((pdp1, pdp2) -> {
+            int p1 = pdp1.getPriority();
+            int p2 = pdp2.getPriority();
+            return p2 - p1;
+        });
 		dropProviders = list.toArray(new ProgramDropProvider[list.size()]);
 		if (dropTargetAdapter == null) {
 			setUpDragDrop();
@@ -677,9 +677,7 @@ public class CodeViewerProvider extends NavigatableComponentProviderAdapter
 		Set<DataFlavor> flavors = new HashSet<>();
 		for (ProgramDropProvider dropProvider : dropProviders) {
 			DataFlavor[] dfs = dropProvider.getDataFlavors();
-			for (DataFlavor df : dfs) {
-				flavors.add(df);
-			}
+            flavors.addAll(Arrays.asList(dfs));
 		}
 		acceptableFlavors = new DataFlavor[flavors.size()];
 		flavors.toArray(acceptableFlavors);
@@ -1058,18 +1056,14 @@ public class CodeViewerProvider extends NavigatableComponentProviderAdapter
 			if (currentExternalHighligter != null) {
 				Highlight[] highlights = currentExternalHighligter.getHighlights(text, obj,
 					fieldFactoryClass, cursorTextOffset);
-				for (Highlight highlight : highlights) {
-					list.add(highlight);
-				}
+                list.addAll(Arrays.asList(highlights));
 			}
 
 			// always call the listing highlighter last so the middle-mouse highlight will always
 			// be on top of other highlights
 			Highlight[] highlights =
 				listingHighlighter.getHighlights(text, obj, fieldFactoryClass, cursorTextOffset);
-			for (Highlight highlight : highlights) {
-				list.add(highlight);
-			}
+            list.addAll(Arrays.asList(highlights));
 
 			return list.toArray(new Highlight[list.size()]);
 		}

@@ -161,9 +161,7 @@ public class ToolManagerImpl implements ToolManager, PropertyChangeListener {
 		ArrayList<PluginTool> runningTools = new ArrayList<>(TYPICAL_NUM_TOOLS);
 		for (Workspace element : wsList) {
 			PluginTool[] tools = element.getTools();
-			for (PluginTool tool : tools) {
-				runningTools.add(tool);
-			}
+            runningTools.addAll(Arrays.asList(tools));
 		}
 
 		PluginTool[] tools = new PluginTool[runningTools.size()];

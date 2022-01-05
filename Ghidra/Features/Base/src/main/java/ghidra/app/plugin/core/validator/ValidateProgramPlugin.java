@@ -107,7 +107,7 @@ public class ValidateProgramPlugin extends Plugin {
 
 	private void validate(Program program) {
 		List<ConditionTester> list = getConditionTests(program);
-		Collections.sort(list, new ConditionsComparator());
+		list.sort(new ConditionsComparator());
 		ValidateProgramDialog dialog = new ValidateProgramDialog(program, list);
 		tool.showDialog(dialog);
 	}

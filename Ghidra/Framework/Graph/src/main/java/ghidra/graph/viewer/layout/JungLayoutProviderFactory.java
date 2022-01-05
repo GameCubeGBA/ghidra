@@ -42,17 +42,14 @@ public class JungLayoutProviderFactory {
 		Set<JungLayoutProvider<V, E, G>> createLayouts() {
 	//@formatter:on
 
-		Set<JungLayoutProvider<V, E, G>> providers = new HashSet<>();
-
-		//@formatter:off
-		providers.addAll(
-			CollectionUtils.asSet(
-				// create("DAG Layout", DAGLayout.class),
-				create("Circle Layout", CircleLayout.class),
-				create("Spring Layout", SpringLayout.class),
-				create("KK Layout", KKLayout.class),
-				create("ISOM Layout", ISOMLayout.class)		
-		));
+        //@formatter:off
+        Set<JungLayoutProvider<V, E, G>> providers = new HashSet<>(CollectionUtils.asSet(
+                // create("DAG Layout", DAGLayout.class),
+                create("Circle Layout", CircleLayout.class),
+                create("Spring Layout", SpringLayout.class),
+                create("KK Layout", KKLayout.class),
+                create("ISOM Layout", ISOMLayout.class)
+        ));
 		//@formatter:on
 
 		return providers;

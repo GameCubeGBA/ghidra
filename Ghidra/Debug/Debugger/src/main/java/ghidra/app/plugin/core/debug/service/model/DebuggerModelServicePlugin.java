@@ -436,9 +436,8 @@ public class DebuggerModelServicePlugin extends Plugin
 	@Internal
 	@Override
 	public synchronized void setModelFactories(Collection<DebuggerModelFactory> newFactories) {
-		Set<DebuggerModelFactory> diff = new HashSet<>();
 
-		diff.addAll(factories);
+        Set<DebuggerModelFactory> diff = new HashSet<>(factories);
 		diff.removeAll(newFactories);
 		for (DebuggerModelFactory factory : diff) {
 			factories.remove(factory);

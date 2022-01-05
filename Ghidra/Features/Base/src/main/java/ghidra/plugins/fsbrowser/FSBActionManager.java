@@ -1063,9 +1063,8 @@ class FSBActionManager {
 				sb.append("<tr><td colspan=2><hr></td></tr>");
 			}
 			List<FileAttribute<?>> sortedAttribs = fattrs.getAttributes();
-			Collections.sort(sortedAttribs,
-				(o1, o2) -> Integer.compare(o1.getAttributeType().ordinal(),
-					o2.getAttributeType().ordinal()));
+			sortedAttribs.sort((o1, o2) -> Integer.compare(o1.getAttributeType().ordinal(),
+                    o2.getAttributeType().ordinal()));
 
 			FileAttributeTypeGroup group = null;
 			for (FileAttribute<?> attr : sortedAttribs) {

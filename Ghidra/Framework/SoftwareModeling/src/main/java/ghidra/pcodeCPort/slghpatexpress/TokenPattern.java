@@ -89,15 +89,15 @@ public class TokenPattern {
 			tok1.toklist.size() < tok2.toklist.size() ? tok1.toklist.size() : tok2.toklist.size();
 		if (minsize == 0) {
 			// Check if pattern doesn't care about tokens
-			if ((tok1.toklist.size() == 0) && (tok1.getLeftEllipsis() == false) &&
-				(tok1.getRightEllipsis() == false)) {
+			if ((tok1.toklist.size() == 0) && (!tok1.getLeftEllipsis()) &&
+				(!tok1.getRightEllipsis())) {
 				toklist = tok2.toklist.copy();
 				setLeftEllipsis(tok2.getLeftEllipsis());
 				setRightEllipsis(tok2.getRightEllipsis());
 				return 0;
 			}
-			else if ((tok2.toklist.size() == 0) && (tok2.getLeftEllipsis() == false) &&
-				(tok2.getRightEllipsis() == false)) {
+			else if ((tok2.toklist.size() == 0) && (!tok2.getLeftEllipsis()) &&
+				(!tok2.getRightEllipsis())) {
 				toklist = tok1.toklist.copy();
 				setLeftEllipsis(tok1.getLeftEllipsis());
 				setRightEllipsis(tok1.getRightEllipsis());

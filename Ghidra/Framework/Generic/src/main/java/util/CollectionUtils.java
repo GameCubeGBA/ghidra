@@ -65,9 +65,7 @@ public class CollectionUtils {
 			return set;
 		}
 
-		for (T e : items) {
-			set.add(e);
-		}
+        set.addAll(Arrays.asList(items));
 		return set;
 	}
 
@@ -146,9 +144,7 @@ public class CollectionUtils {
 			return list;
 		}
 
-		for (T arrayElement : items) {
-			list.add(arrayElement);
-		}
+        list.addAll(Arrays.asList(items));
 
 		return list;
 	}

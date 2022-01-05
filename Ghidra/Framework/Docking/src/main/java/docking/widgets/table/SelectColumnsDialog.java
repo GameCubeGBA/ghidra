@@ -85,7 +85,7 @@ public class SelectColumnsDialog extends DialogComponentProvider {
 			columnList.add(new TableColumnWrapper(sourceTablemodel, column));
 		}
 
-		Collections.sort(columnList, new ColumnComparator());
+		columnList.sort(new ColumnComparator());
 	}
 
 	private class ColumnComparator implements Comparator<TableColumnWrapper> {

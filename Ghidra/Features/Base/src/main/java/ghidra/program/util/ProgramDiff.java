@@ -1342,10 +1342,7 @@ public class ProgramDiff {
 		BookmarkType[] types2 = bookmarkMgr2.getBookmarkTypes();
 		Arrays.sort(types1, BOOKMARK_TYPE_COMPARATOR);
 		Arrays.sort(types2, BOOKMARK_TYPE_COMPARATOR);
-		ArrayList<BookmarkType> list = new ArrayList<>();
-		for (BookmarkType element : types1) {
-			list.add(element);
-		}
+        ArrayList<BookmarkType> list = new ArrayList<>(Arrays.asList(types1));
 
 		for (BookmarkType element : types2) {
 			boolean found = false;

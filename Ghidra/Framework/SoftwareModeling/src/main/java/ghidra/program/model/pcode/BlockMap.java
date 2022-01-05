@@ -65,7 +65,7 @@ public class BlockMap {
 				return o1.index - o2.index;
 			}
 		};
-		Collections.sort(list, comp);
+		list.sort(comp);
 	}
 
 	private static PcodeBlock resolveBlock(int btype) {

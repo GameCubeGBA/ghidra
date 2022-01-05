@@ -69,10 +69,9 @@ public class DWARFParser {
 		// Sort by category to reduce the amount of thrashing the DTM does reloading
 		// categories.
 		List<DataTypePath> importedTypes = dwarfDTM.getImportedTypes();
-		Collections.sort(importedTypes,
-			(dtp1, dtp2) -> dtp1.getCategoryPath()
-					.getPath()
-					.compareTo(dtp2.getCategoryPath().getPath()));
+		importedTypes.sort((dtp1, dtp2) -> dtp1.getCategoryPath()
+                .getPath()
+                .compareTo(dtp2.getCategoryPath().getPath()));
 
 		monitor.setIndeterminate(false);
 		monitor.setShowProgressValue(true);

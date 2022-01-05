@@ -121,9 +121,8 @@ public abstract class AbstractGraphVisibilityTransitionJob<V extends VisualVerte
 	}
 
 	protected Collection<E> getEdges(V vertex) {
-		List<E> edges = new LinkedList<>();
-		Collection<E> inEdges = nonNull(graph.getInEdges(vertex));
-		edges.addAll(inEdges);
+        Collection<E> inEdges = nonNull(graph.getInEdges(vertex));
+        List<E> edges = new LinkedList<>(inEdges);
 
 		Collection<E> outEdges = nonNull(graph.getOutEdges(vertex));
 		edges.addAll(outEdges);

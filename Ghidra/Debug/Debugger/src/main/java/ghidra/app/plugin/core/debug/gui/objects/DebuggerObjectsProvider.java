@@ -804,10 +804,7 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 
 	public ObjectContainer getParent(ObjectContainer container) {
 		List<String> path = container.getTargetObject().getPath();
-		List<String> ppath = new ArrayList<String>();
-		for (String link : path) {
-			ppath.add(link);
-		}
+        List<String> ppath = new ArrayList<String>(path);
 		if (path.size() == 0) {
 			return null;
 		}

@@ -1948,7 +1948,7 @@ public class RTTIWindowsClassRecoverer extends RTTIClassRecoverer {
 				Collections.sort(parentReferences);
 			}
 			else {
-				Collections.sort(parentReferences, Collections.reverseOrder());
+				parentReferences.sort(Collections.reverseOrder());
 			}
 
 			// iterate over the ordered parents and add to the order to parent map

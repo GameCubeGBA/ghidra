@@ -85,9 +85,9 @@ public class SequenceSearchState implements Comparable<SequenceSearchState> {
 				return o1.getIndex() - o2.getIndex();
 			}
 		};
-		Collections.sort(possible, comp);
+		possible.sort(comp);
 		if (success != null) {
-			Collections.sort(success, comp);
+			success.sort(comp);
 		}
 	}
 

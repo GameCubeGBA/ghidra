@@ -19,6 +19,7 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -79,11 +80,8 @@ public class ImportFromXMLAction extends ImportExportAsAction {
 					SAXBuilder sax = XmlUtilities.createSecureSAXBuilder(false, false);
 					Element root = sax.build(is).getRootElement();
 
-					List<String> path = new ArrayList<>();
-					Attribute pathStr = root.getAttribute("Path");
-					for (String s : pathStr.getValue().split("\\.")) {
-						path.add(s);
-					}
+                    Attribute pathStr = root.getAttribute("Path");
+                    List<String> path = new ArrayList<>(Arrays.asList(pathStr.getValue().split("\\.")));
 					DummyTargetObject to = xmlToObject(p, root, path);
 					ObjectContainer c = p.getRoot();
 					c.setTargetObject(to);
@@ -112,8 +110,7 @@ public class ImportFromXMLAction extends ImportExportAsAction {
 		for (Object c : e.getChildren()) {
 			if (c instanceof Element) {
 				Element ce = (Element) c;
-				List<String> npath = new ArrayList<>();
-				npath.addAll(path);
+                List<String> npath = new ArrayList<>(path);
 				npath.add(convertName(ce.getName()));
 				TargetObject to = xmlToObject(p, ce, npath);
 				objects.add(to);

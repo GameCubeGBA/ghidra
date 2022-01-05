@@ -499,18 +499,13 @@ public class FunctionComparisonPanel extends JPanel implements ChangeListener {
 	 * @return the code comparison actions
 	 */
 	public DockingAction[] getCodeComparisonActions() {
-		ArrayList<DockingAction> dockingActionList = new ArrayList<>();
-		// Get actions for this functionComparisonPanel
+        // Get actions for this functionComparisonPanel
 		DockingAction[] functionComparisonActions = getActions();
-		for (DockingAction dockingAction : functionComparisonActions) {
-			dockingActionList.add(dockingAction);
-		}
+        ArrayList<DockingAction> dockingActionList = new ArrayList<>(Arrays.asList(functionComparisonActions));
 		// Get actions for each CodeComparisonPanel
 		for (CodeComparisonPanel<? extends FieldPanelCoordinator> codeComparisonPanel : codeComparisonPanels) {
 			DockingAction[] actions = codeComparisonPanel.getActions();
-			for (DockingAction dockingAction : actions) {
-				dockingActionList.add(dockingAction);
-			}
+            dockingActionList.addAll(Arrays.asList(actions));
 		}
 		return dockingActionList.toArray(new DockingAction[dockingActionList.size()]);
 	}

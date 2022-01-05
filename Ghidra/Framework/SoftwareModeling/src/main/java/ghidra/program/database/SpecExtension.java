@@ -16,6 +16,7 @@
 package ghidra.program.database;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.xml.sax.*;
@@ -421,9 +422,7 @@ public class SpecExtension {
 				PrototypeModelMerged mergemodel = new PrototypeModelMerged();
 				ArrayList<PrototypeModel> curModels =
 					new ArrayList<>(cspec.getCallingConventions().length);
-				for (PrototypeModel curModel : cspec.getCallingConventions()) {
-					curModels.add(curModel);
-				}
+                curModels.addAll(Arrays.asList(cspec.getCallingConventions()));
 				try {
 					mergemodel.restoreXml(parser, curModels);
 					model = mergemodel;

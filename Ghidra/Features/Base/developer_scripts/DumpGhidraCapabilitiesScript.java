@@ -80,8 +80,7 @@ public class DumpGhidraCapabilitiesScript extends GhidraScript {
 			List<Analyzer> analyzers = analyzerMap.get(module);
 			if (analyzers != null && !analyzers.isEmpty()) {
 				System.out.println("\t\tAnalyzers: ");
-				Collections.sort(analyzers,
-					(arg0, arg1) -> arg0.getName().compareTo(arg1.getName()));
+				analyzers.sort((arg0, arg1) -> arg0.getName().compareTo(arg1.getName()));
 				for (Analyzer analyzer : analyzers) {
 					System.out.println("\t\t\t" + analyzer.getName());
 					System.out.println("\t\t\t\t" + analyzer.getDescription());

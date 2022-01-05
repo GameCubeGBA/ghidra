@@ -97,7 +97,7 @@ public abstract class OutgoingCallNode extends CallNode {
 					.stream()
 					.flatMap(list -> list.stream())
 					.collect(Collectors.toList());
-		Collections.sort(children, new CallNodeComparator());
+		children.sort(new CallNodeComparator());
 
 		return children;
 	}

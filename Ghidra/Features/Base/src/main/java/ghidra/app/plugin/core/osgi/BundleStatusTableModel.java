@@ -266,7 +266,7 @@ public class BundleStatusTableModel
 				return result;
 			}
 		};
-		Collections.sort(data, wrapper);
+		data.sort(wrapper);
 		sortCompleted(sortingContext);
 		if (changed.get()) {
 			notifyModelSorted(false);

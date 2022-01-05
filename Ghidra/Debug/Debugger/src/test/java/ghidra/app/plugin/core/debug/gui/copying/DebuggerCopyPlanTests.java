@@ -587,7 +587,7 @@ public class DebuggerCopyPlanTests extends AbstractGhidraHeadedDebuggerGUITest {
 		program.getBookmarkManager().getBookmarksIterator().forEachRemaining(bookmarks::add);
 
 		assertEquals(2, bookmarks.size());
-		Collections.sort(bookmarks, Comparator.comparing(Bookmark::getAddress));
+		bookmarks.sort(Comparator.comparing(Bookmark::getAddress));
 		Bookmark bm;
 
 		bm = bookmarks.get(0);

@@ -25,6 +25,7 @@ import ghidra.program.model.symbol.ReferenceManager;
 import ghidra.program.model.util.CodeUnitInsertionException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Command to create a structure.
@@ -131,9 +132,7 @@ public class CreateStructureCmd extends AbstractCreateStructureCmd{
         while(it.hasNext()) {
             Address addr = it.next();
             Reference[] refs = refMgr.getReferencesFrom(addr);
-            for(int i=0;i<refs.length;i++) {
-                list.add(refs[i]);
-            }
+            list.addAll(Arrays.asList(refs));
         }
         Reference[] refList = new Reference[list.size()];
         return list.toArray(refList);      

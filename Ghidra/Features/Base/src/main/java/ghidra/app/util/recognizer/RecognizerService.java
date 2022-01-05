@@ -28,12 +28,9 @@ public class RecognizerService {
 	};
 
 	public static List<Recognizer> getAllRecognizers() {
-		List<Recognizer> results = new ArrayList<Recognizer>();
 		List<Recognizer> allRecognizers = getAllRecognizersHelper();
-		for (Recognizer Recognizer : allRecognizers) {
-			results.add(Recognizer);
-		}
-		Collections.sort(results, DESCENDING);
+		List<Recognizer> results = new ArrayList<Recognizer>(allRecognizers);
+		results.sort(DESCENDING);
 		return results;
 	}
 

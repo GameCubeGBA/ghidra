@@ -65,7 +65,7 @@ class MemoryMapManager {
 	 */
 	void mergeBlocks(List<MemoryBlock> blocks) {
 		// need to order by start address
-		Collections.sort(blocks, (b1, b2) -> b1.getStart().compareTo(b2.getStart()));
+		blocks.sort((b1, b2) -> b1.getStart().compareTo(b2.getStart()));
 		if (!goodBlocks(blocks)) {
 			return;
 		}

@@ -18,6 +18,7 @@ package ghidra.util;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import ghidra.framework.options.OptionsChangeListener;
@@ -154,9 +155,7 @@ public class BrowserLoader {
 		argumentList.add(option.getCommandString());
 
 		String[] commandArguments = option.getCommandArguments();
-		for (String string : commandArguments) {
-			argumentList.add(string);
-		}
+        argumentList.addAll(Arrays.asList(commandArguments));
 
 		String urlString = option.getUrlReplacementString();
 		if (urlString.equals(ManualViewerCommandWrappedOption.HTTP_URL_REPLACEMENT_STRING) ||

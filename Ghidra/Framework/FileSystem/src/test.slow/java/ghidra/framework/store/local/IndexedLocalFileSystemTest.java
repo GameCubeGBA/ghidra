@@ -20,6 +20,7 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
@@ -37,10 +38,7 @@ public class IndexedLocalFileSystemTest extends AbstractLocalFileSystemTest {
 
 		testFilePaths();
 
-		List<String> names = new ArrayList<>();
-		for (String itemName : fs.getItemNames("/a/x/bbb")) {
-			names.add(itemName);
-		}
+        List<String> names = new ArrayList<>(Arrays.asList(fs.getItemNames("/a/x/bbb")));
 
 		// re-instantiate file-system (index will not have been rewritten)
 		// journal will be replayed to build memory-based index
@@ -70,10 +68,7 @@ public class IndexedLocalFileSystemTest extends AbstractLocalFileSystemTest {
 
 		testFilePaths();
 
-		List<String> names = new ArrayList<>();
-		for (String itemName : fs.getItemNames("/a/x/bbb")) {
-			names.add(itemName);
-		}
+        List<String> names = new ArrayList<>(Arrays.asList(fs.getItemNames("/a/x/bbb")));
 
 		fs.dispose();
 

@@ -300,7 +300,7 @@ public class GhidraLauncher {
 		};
 
 		List<GModule> moduleList = new ArrayList<>(layout.getModules().values());
-		Collections.sort(moduleList, comparator);
+		moduleList.sort(comparator);
 		Map<String, GModule> moduleMap = new LinkedHashMap<>();
 		for (GModule module : moduleList) {
 			moduleMap.put(module.getName(), module);

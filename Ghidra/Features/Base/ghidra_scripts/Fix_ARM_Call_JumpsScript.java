@@ -244,7 +244,7 @@ public class Fix_ARM_Call_JumpsScript extends GhidraScript {
 		Reference[] referencesFrom = instr.getReferencesFrom();
 		for (Reference reference : referencesFrom) {
 			RefType referenceType = reference.getReferenceType();
-			if (hadCall == false && referenceType.isCall()) {
+			if (!hadCall && referenceType.isCall()) {
 				hadCall = true;
 				continue;
 			}

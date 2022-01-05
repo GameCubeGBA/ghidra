@@ -126,11 +126,8 @@ public class LayoutLocationMap<V, E> {
 	 * @return the columns in this location map, sorted from lowest index to highest
 	 */
 	public Collection<Column> columns() {
-		List<Column> result = new ArrayList<>();
-		Collection<Column> values = columnsByIndex.values();
-		for (Column column : values) {
-			result.add(column);
-		}
+        Collection<Column> values = columnsByIndex.values();
+        List<Column> result = new ArrayList<>(values);
 		return result;
 	}
 
@@ -140,11 +137,8 @@ public class LayoutLocationMap<V, E> {
 	 * @return the rows in this location map, sorted from lowest index to highest
 	 */
 	public Collection<Row<V>> rows() {
-		List<Row<V>> results = new ArrayList<>();
-		Collection<Row<V>> values = rowsByIndex.values();
-		for (Row<V> row : values) {
-			results.add(row);
-		}
+        Collection<Row<V>> values = rowsByIndex.values();
+        List<Row<V>> results = new ArrayList<>(values);
 		return results;
 	}
 

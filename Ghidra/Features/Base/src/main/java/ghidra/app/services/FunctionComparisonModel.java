@@ -63,8 +63,7 @@ public class FunctionComparisonModel {
 	 * @return a list of all comparisons in the model
 	 */
 	public List<FunctionComparison> getComparisons() {
-		List<FunctionComparison> toReturn = new ArrayList<>();
-		toReturn.addAll(comparisons);
+        List<FunctionComparison> toReturn = new ArrayList<>(comparisons);
 		Collections.sort(toReturn);
 		return toReturn;
 	}

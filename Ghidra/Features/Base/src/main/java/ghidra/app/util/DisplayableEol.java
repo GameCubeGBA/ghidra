@@ -110,9 +110,7 @@ public class DisplayableEol {
 		while (iter.hasNext() && list.size() < maxReferences) {
 			Address fromAddress = iter.next();
 			Reference[] refs = referenceManager.getReferencesFrom(fromAddress);
-			for (Reference element : refs) {
-				list.add(element);
-			}
+            list.addAll(Arrays.asList(refs));
 		}
 		return list.toArray(new Reference[list.size()]);
 	}
@@ -550,12 +548,11 @@ public class DisplayableEol {
 	 * @return the comments
 	 */
 	public String[] getComments() {
-		ArrayList<String> list = new ArrayList<>();
-		boolean hasEol = hasEOL();
+        boolean hasEol = hasEOL();
 		boolean hasRepeatable = hasRepeatable();
 		boolean hasRefRepeats = hasReferencedRepeatable();
 
-		list.addAll(Arrays.asList((String[]) displayCommentArrays[MY_EOLS]));
+        ArrayList<String> list = new ArrayList<>(Arrays.asList((String[]) displayCommentArrays[MY_EOLS]));
 		if (alwaysShowRepeatable || !hasEol) {
 			list.addAll(Arrays.asList((String[]) displayCommentArrays[MY_REPEATABLES]));
 		}

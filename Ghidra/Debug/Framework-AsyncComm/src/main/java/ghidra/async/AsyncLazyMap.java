@@ -20,6 +20,7 @@ import java.util.Map.Entry;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
@@ -181,18 +182,6 @@ public class AsyncLazyMap<K, V> {
 	}
 
 	/**
-	 * Sets a predicate to determine which values to remember
-	 * 
-	 * @see #forgetValues(BiPredicate)
-	 * @param predicate
-	 * @return this lazy map
-	 */
-	public synchronized AsyncLazyMap<K, V> rememberValues(
-			BiPredicate<? super K, ? super V> predicate) {
-		return forgetValues((k, v) -> !predicate.test(k, v));
-	}
-
-	/**
 	 * Request the value for a given key, using an alternative computation
 	 * 
 	 * <p>
@@ -350,33 +339,15 @@ public class AsyncLazyMap<K, V> {
 	}
 
 	/**
-	 * Get a copy of the keys which are requested but not completed
-	 * 
-	 * <p>
-	 * This should only be used for diagnostics.
-	 * 
-	 * @return a copy of the pending key set
-	 */
-	public synchronized Set<K> getPendingKeySet() {
-		Set<K> result = new LinkedHashSet<>();
-		for (KeyedFuture<K, V> f : futures.values()) {
-			if (!f.isDone()) {
-				result.add(f.key);
-			}
-		}
-		return result;
-	}
-
-	/**
 	 * Clear the lazy map, including pending requests
 	 * 
 	 * <p>
 	 * Pending requests will be cancelled
 	 */
 	public void clear() {
-		Set<KeyedFuture<K, V>> copy = new LinkedHashSet<>();
+		Set<KeyedFuture<K, V>> copy;
 		synchronized (this) {
-			copy.addAll(futures.values());
+			copy = new LinkedHashSet<>(futures.values());
 			futures.clear();
 			map.clear();
 		}
