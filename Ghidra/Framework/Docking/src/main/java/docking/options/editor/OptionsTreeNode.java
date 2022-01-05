@@ -144,6 +144,10 @@ class OptionsTreeNode extends GTreeLazyNode {
 		if (obj.getClass() != getClass()) {
 			return false;
 		}
-		return name.equals(((OptionsTreeNode) obj).name);
+		OptionsTreeNode other = (OptionsTreeNode) obj;
+		if (!getName().equals(other.getName())) {
+			return false;
+		}
+		return Objects.equals(options, other.options);
 	}
 }
