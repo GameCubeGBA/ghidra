@@ -389,14 +389,10 @@ public class CompareAnalysisScript extends GhidraScript {
 
 	boolean isString(String mnemonic) {
 
-		if (mnemonic.equals(new String("ds")) || mnemonic.equals(new String("unicode")) ||
-			mnemonic.equals(new String("p_unicode")) || mnemonic.equals(new String("p_string")) ||
-			mnemonic.equals(new String("p_string255")) || mnemonic.equals(new String("mbcs"))) {
-
-			return true;
-		}
-		return false;
-	}
+        return mnemonic.equals(new String("ds")) || mnemonic.equals(new String("unicode")) ||
+                mnemonic.equals(new String("p_unicode")) || mnemonic.equals(new String("p_string")) ||
+                mnemonic.equals(new String("p_string255")) || mnemonic.equals(new String("mbcs"));
+    }
 
 	boolean isSwitch(Symbol[] syms, String name) {
 		for (Symbol sym : syms) {

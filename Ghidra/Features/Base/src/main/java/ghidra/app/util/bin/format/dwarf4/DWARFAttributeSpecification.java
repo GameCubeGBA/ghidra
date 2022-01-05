@@ -91,8 +91,6 @@ public class DWARFAttributeSpecification {
 		DWARFAttributeSpecification other = (DWARFAttributeSpecification) obj;
 		if (attribute != other.attribute)
 			return false;
-		if (attributeForm != other.attributeForm)
-			return false;
-		return true;
-	}
+        return attributeForm == other.attributeForm;
+    }
 }

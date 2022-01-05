@@ -309,11 +309,8 @@ public class ElfSymbol implements ByteArrayConverter {
 		if (st_value != other.st_value) {
 			return false;
 		}
-		if (symbolTableIndex != other.symbolTableIndex) {
-			return false;
-		}
-		return true;
-	}
+        return symbolTableIndex == other.symbolTableIndex;
+    }
 
 	/**
 	 * Returns true if this symbol is local.

@@ -1094,9 +1094,7 @@ public class DataTypeManagerHandler {
 			Category category = dtMgr.getCategory(path);
 			if (category != null) {
 				DataType dt = category.getDataType(dataTypeName);
-				if (dt != null) {
-					return dt;
-				}
+                return dt;
 			}
 			return null;
 		}

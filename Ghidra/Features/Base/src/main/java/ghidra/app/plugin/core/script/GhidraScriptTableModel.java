@@ -145,11 +145,8 @@ class GhidraScriptTableModel extends GDynamicColumnTableModel<ResourceFile, Obje
 
 		DynamicTableColumn<ResourceFile, ?, ?> column = getColumn(col);
 		String columnName = column.getColumnName();
-		if (SCRIPT_ACTION_COLUMN_NAME.equals(columnName)) {
-			return true;
-		}
-		return false;
-	}
+        return SCRIPT_ACTION_COLUMN_NAME.equals(columnName);
+    }
 
 	@Override
 	public void setValueAt(Object value, int row, int col) {

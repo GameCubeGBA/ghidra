@@ -99,13 +99,10 @@ public class VariableTypeFieldLocation extends VariableLocation {
 			return false;
 		VariableTypeFieldLocation other = (VariableTypeFieldLocation) obj;
 		if (typeStr == null) {
-			if (other.typeStr != null)
-				return false;
+            return other.typeStr == null;
 		}
-		else if (!typeStr.equals(other.typeStr))
-			return false;
-		return true;
-	}
+		else return typeStr.equals(other.typeStr);
+    }
 
 	@Override
 	public void restoreState(Program p, SaveState obj) {

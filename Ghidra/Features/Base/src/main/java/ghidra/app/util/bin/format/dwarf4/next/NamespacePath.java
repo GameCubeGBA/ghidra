@@ -268,15 +268,10 @@ public class NamespacePath implements Comparable<NamespacePath> {
 			return false;
 		}
 		if (type == null) {
-			if (other.type != null) {
-				return false;
-			}
+            return other.type == null;
 		}
-		else if (!type.equals(other.type)) {
-			return false;
-		}
-		return true;
-	}
+		else return type.equals(other.type);
+    }
 
 	@Override
 	public int compareTo(NamespacePath otherPath) {

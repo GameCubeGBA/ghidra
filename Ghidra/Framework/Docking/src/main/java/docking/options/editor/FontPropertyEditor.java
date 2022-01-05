@@ -277,7 +277,7 @@ public class FontPropertyEditor extends PropertyEditorSupport {
 			}
 
 			FontWrapper otherWrapper = (FontWrapper) obj;
-			return fontName.toLowerCase().equals(otherWrapper.fontName.toLowerCase());
+			return fontName.equalsIgnoreCase(otherWrapper.fontName);
 		}
 
 		@Override

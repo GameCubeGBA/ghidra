@@ -482,9 +482,7 @@ class Mark implements Serializable {
             return true;
         }
         if (obj instanceof Object[]) {
-            if (((Object[])obj).length == 0) {
-                return true;
-            }
+            return ((Object[]) obj).length == 0;
         }
         return false;
     }

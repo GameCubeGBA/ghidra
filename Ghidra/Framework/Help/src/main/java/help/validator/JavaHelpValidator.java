@@ -230,12 +230,8 @@ public class JavaHelpValidator {
 		Path imagePath = img.getImageFile();
 		String imageFilename = imagePath.getFileName().toString();
 
-		if (realFilename.equals(imageFilename)) {
-			return true;
-		}
-
-		return false;
-	}
+        return realFilename.equals(imageFilename);
+    }
 
 	private Path removeRedundantHelp(Path root, Path p) {
 		if (p.startsWith("help")) {
@@ -275,7 +271,7 @@ public class JavaHelpValidator {
 	}
 
 	private boolean isExcludedPath(String path) {
-		if (path.indexOf("/docs/api/") != -1) {
+		if (path.contains("/docs/api/")) {
 			// exclude all api files
 			return true;
 		}

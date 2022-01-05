@@ -192,9 +192,7 @@ public class ManagedProcedureSymbolApplier extends MsSymbolApplier {
 		}
 
 		boolean functionSuccess = applyFunction(monitor);
-		if (functionSuccess == false) {
-			return false;
-		}
+        return functionSuccess != false;
 //		registerChangeCalculator = new RegisterChangeCalculator(procedureSymbol, function, monitor);
 //
 //		baseParamOffset = VariableUtilities.getBaseStackParamOffset(function);
@@ -211,9 +209,7 @@ public class ManagedProcedureSymbolApplier extends MsSymbolApplier {
 		// TODO: not done yet
 //	ApplyLineNumbers applyLineNumbers = new ApplyLineNumbers(pdbParser, xmlParser, program);
 //	applyLineNumbers.applyTo(monitor, log);
-
-		return true;
-	}
+    }
 
 	Integer getRegisterPrologChange(Register register) {
 		return registerChangeCalculator.getRegChange(applicator, register);

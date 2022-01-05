@@ -574,11 +574,8 @@ class EnumDB extends DataTypeDB implements Enum {
 			return false;
 		}
 
-		if (!isEachValueEquivalent(enumm)) {
-			return false;
-		}
-		return true;
-	}
+        return isEachValueEquivalent(enumm);
+    }
 
 	private boolean isEachValueEquivalent(Enum enumm) {
 		String[] names = getNames();

@@ -165,7 +165,7 @@ public class MSLibBatchImportGenerator extends GhidraScript {
 		// MS windows filesystems are case-insensitive.
 		Map<File, File> normalizedLibs = new HashMap<>();
 		for (File file : files) {
-			if (file.isFile() && getFileExt(file).toLowerCase().equals("lib")) {
+			if (file.isFile() && getFileExt(file).equalsIgnoreCase("lib")) {
 				File normalizedFile = new File(directory, file.getName().toLowerCase());
 				normalizedLibs.put(normalizedFile, file);
 			}

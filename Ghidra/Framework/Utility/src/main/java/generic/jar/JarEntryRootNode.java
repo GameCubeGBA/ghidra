@@ -88,11 +88,8 @@ public class JarEntryRootNode extends JarEntryNode {
 			if (name.endsWith(".png")) {
 				return false;
 			}
-			if (name.endsWith(".gif")) {
-				return false;
-			}
-			return true;
-		}
+            return !name.endsWith(".gif");
+        }
 
 	}
 }

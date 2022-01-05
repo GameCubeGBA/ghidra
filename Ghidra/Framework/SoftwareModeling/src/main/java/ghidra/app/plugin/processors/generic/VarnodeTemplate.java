@@ -133,9 +133,8 @@ public class VarnodeTemplate implements Serializable {
 		if (vt.hashCode() != hashCode) return false;
 		if (!vt.space().equals(this.space)) return false;
 		if (!vt.offset().equals(this.offset)) return false;
-		if (!vt.size().equals(this.size)) return false;
-		return true;
-	}
+        return vt.size().equals(this.size);
+    }
 
 
 }

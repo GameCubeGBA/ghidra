@@ -534,9 +534,7 @@ public class AutoVersionTrackingTask extends Task {
 						new ApplyMarkupItemTask(controller.getSession(), markupItems, applyOptions);
 					markupTask.run(monitor);
 					boolean currentMatchHasErrors = markupTask.hasErrors();
-					if (currentMatchHasErrors) {
-						return true;
-					}
+                    return currentMatchHasErrors;
 				}
 			}
 		}

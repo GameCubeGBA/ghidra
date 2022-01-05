@@ -300,12 +300,7 @@ public class SearchGuiMulti extends SearchBaseExtended {
 		for (int row = 0; row < mnemonics.size(); row++) {
 			SLMaskControl temp = new SLMaskControl();
 
-			if (tableContentsDO[row][0].getBackgroundColor().equals(Color.green)) {
-				temp.useMnemonic = true;
-			}
-			else {
-				temp.useMnemonic = false;
-			}
+            temp.useMnemonic = tableContentsDO[row][0].getBackgroundColor().equals(Color.green);
 
 			if (tableContentsDO[row][1].getBackgroundColor().equals(Color.green)) {
 				temp.useOp1 = true;

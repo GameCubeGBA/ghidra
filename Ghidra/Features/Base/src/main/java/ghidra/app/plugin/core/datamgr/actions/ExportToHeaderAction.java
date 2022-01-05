@@ -79,11 +79,8 @@ public class ExportToHeaderAction extends DockingAction {
 			CategoryNode categoryNode = (CategoryNode) node;
 			return categoryNode.isEnabled();
 		}
-		else if (node instanceof DataTypeNode) {
-			return true;
-		}
-		return false;
-	}
+		else return node instanceof DataTypeNode;
+    }
 
 	@Override
 	public void actionPerformed(ActionContext context) {

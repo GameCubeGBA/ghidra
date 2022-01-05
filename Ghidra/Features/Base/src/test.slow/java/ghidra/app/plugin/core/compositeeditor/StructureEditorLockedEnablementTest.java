@@ -195,20 +195,15 @@ public class StructureEditorLockedEnablementTest extends AbstractStructureEditor
 				int numBytes = getModel().getMaxReplaceLength(0);
 				checkEnablement(action, len <= numBytes);
 			}
-			else if ((action instanceof CycleGroupAction) ||
-				(action instanceof InsertUndefinedAction) || (action instanceof EditFieldAction) ||
-				(action instanceof AddBitFieldAction) ||
-				(action instanceof ShowComponentPathAction) || (action instanceof MoveDownAction) ||
-				(action instanceof DuplicateAction) ||
-				(action instanceof DuplicateMultipleAction) || (action instanceof ClearAction) ||
-				(action instanceof DeleteAction) || (action instanceof ArrayAction) ||
-				(action instanceof PointerAction) || (action instanceof HexNumbersAction) ||
-				(action instanceof CreateInternalStructureAction)) {
-				checkEnablement(action, true);
-			}
-			else {
-				checkEnablement(action, false);
-			}
+			else checkEnablement(action, (action instanceof CycleGroupAction) ||
+                    (action instanceof InsertUndefinedAction) || (action instanceof EditFieldAction) ||
+                    (action instanceof AddBitFieldAction) ||
+                    (action instanceof ShowComponentPathAction) || (action instanceof MoveDownAction) ||
+                    (action instanceof DuplicateAction) ||
+                    (action instanceof DuplicateMultipleAction) || (action instanceof ClearAction) ||
+                    (action instanceof DeleteAction) || (action instanceof ArrayAction) ||
+                    (action instanceof PointerAction) || (action instanceof HexNumbersAction) ||
+                    (action instanceof CreateInternalStructureAction));
 		}
 	}
 
@@ -225,19 +220,14 @@ public class StructureEditorLockedEnablementTest extends AbstractStructureEditor
 				int numBytes = getModel().getMaxReplaceLength(3);
 				checkEnablement(action, len <= numBytes);
 			}
-			else if ((action instanceof CycleGroupAction) ||
-				(action instanceof InsertUndefinedAction) || (action instanceof EditFieldAction) ||
-				(action instanceof AddBitFieldAction) ||
-				(action instanceof ShowComponentPathAction) || (action instanceof MoveUpAction) ||
-				(action instanceof MoveDownAction) || (action instanceof ClearAction) ||
-				(action instanceof DeleteAction) || (action instanceof ArrayAction) ||
-				(action instanceof PointerAction) || (action instanceof HexNumbersAction) ||
-				(action instanceof CreateInternalStructureAction)) {
-				checkEnablement(action, true);
-			}
-			else {
-				checkEnablement(action, false);
-			}
+			else checkEnablement(action, (action instanceof CycleGroupAction) ||
+                    (action instanceof InsertUndefinedAction) || (action instanceof EditFieldAction) ||
+                    (action instanceof AddBitFieldAction) ||
+                    (action instanceof ShowComponentPathAction) || (action instanceof MoveUpAction) ||
+                    (action instanceof MoveDownAction) || (action instanceof ClearAction) ||
+                    (action instanceof DeleteAction) || (action instanceof ArrayAction) ||
+                    (action instanceof PointerAction) || (action instanceof HexNumbersAction) ||
+                    (action instanceof CreateInternalStructureAction));
 		}
 	}
 
@@ -253,20 +243,15 @@ public class StructureEditorLockedEnablementTest extends AbstractStructureEditor
 			if (action instanceof FavoritesAction) {
 				checkEnablement(action, true);
 			}
-			else if ((action instanceof CycleGroupAction) ||
-				(action instanceof InsertUndefinedAction) || (action instanceof EditFieldAction) ||
-				(action instanceof AddBitFieldAction) ||
-				(action instanceof ShowComponentPathAction) || (action instanceof MoveUpAction) ||
-				(action instanceof ClearAction) || (action instanceof DeleteAction) ||
-				(action instanceof DuplicateAction) ||
-				(action instanceof DuplicateMultipleAction) || (action instanceof ArrayAction) ||
-				(action instanceof PointerAction) || (action instanceof HexNumbersAction) ||
-				(action instanceof CreateInternalStructureAction)) {
-				checkEnablement(action, true);
-			}
-			else {
-				checkEnablement(action, false);
-			}
+			else checkEnablement(action, (action instanceof CycleGroupAction) ||
+                    (action instanceof InsertUndefinedAction) || (action instanceof EditFieldAction) ||
+                    (action instanceof AddBitFieldAction) ||
+                    (action instanceof ShowComponentPathAction) || (action instanceof MoveUpAction) ||
+                    (action instanceof ClearAction) || (action instanceof DeleteAction) ||
+                    (action instanceof DuplicateAction) ||
+                    (action instanceof DuplicateMultipleAction) || (action instanceof ArrayAction) ||
+                    (action instanceof PointerAction) || (action instanceof HexNumbersAction) ||
+                    (action instanceof CreateInternalStructureAction));
 		}
 	}
 
@@ -284,17 +269,12 @@ public class StructureEditorLockedEnablementTest extends AbstractStructureEditor
 					getModel().getNumBytesInRange(getModel().getSelectedRangeContaining(2));
 				checkEnablement(action, len <= numBytes);
 			}
-			else if ((action instanceof CycleGroupAction) ||
-				(action instanceof InsertUndefinedAction) || (action instanceof MoveUpAction) ||
-				(action instanceof MoveDownAction) || (action instanceof ClearAction) ||
-				(action instanceof DeleteAction) || (action instanceof ArrayAction) ||
-				(action instanceof PointerAction) || (action instanceof HexNumbersAction) ||
-				(action instanceof CreateInternalStructureAction)) {
-				checkEnablement(action, true);
-			}
-			else {
-				checkEnablement(action, false);
-			}
+			else checkEnablement(action, (action instanceof CycleGroupAction) ||
+                    (action instanceof InsertUndefinedAction) || (action instanceof MoveUpAction) ||
+                    (action instanceof MoveDownAction) || (action instanceof ClearAction) ||
+                    (action instanceof DeleteAction) || (action instanceof ArrayAction) ||
+                    (action instanceof PointerAction) || (action instanceof HexNumbersAction) ||
+                    (action instanceof CreateInternalStructureAction));
 		}
 	}
 
@@ -312,13 +292,8 @@ public class StructureEditorLockedEnablementTest extends AbstractStructureEditor
 					getModel().getNumBytesInRange(getModel().getSelectedRangeContaining(2));
 				checkEnablement(action, len <= numBytes);
 			}
-			else if ((action instanceof CycleGroupAction) || (action instanceof ClearAction) ||
-				(action instanceof DeleteAction) || (action instanceof HexNumbersAction)) {
-				checkEnablement(action, true);
-			}
-			else {
-				checkEnablement(action, false);
-			}
+			else checkEnablement(action, (action instanceof CycleGroupAction) || (action instanceof ClearAction) ||
+                    (action instanceof DeleteAction) || (action instanceof HexNumbersAction));
 		}
 	}
 

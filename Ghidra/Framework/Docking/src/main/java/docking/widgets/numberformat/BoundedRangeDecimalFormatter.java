@@ -129,14 +129,10 @@ class BoundedRangeDecimalFormatter extends NumberFormatter {
 				}
 				Number number = (Number) parseObject;
 				Double doubleValue = number.doubleValue();
-				if (doubleValue.compareTo(upperRangeValue) > 0 ||
-					doubleValue.compareTo(lowerRangeValue) < 0) {
-					// no negatives or values over 1
-					return false;
-				}
-
-				return true;
-			}
+                // no negatives or values over 1
+                return doubleValue.compareTo(upperRangeValue) <= 0 &&
+                        doubleValue.compareTo(lowerRangeValue) >= 0;
+            }
 			catch (ParseException e) {
 				return false;
 			}

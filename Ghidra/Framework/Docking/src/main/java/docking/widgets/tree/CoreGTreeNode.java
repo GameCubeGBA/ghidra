@@ -335,12 +335,9 @@ abstract class CoreGTreeNode implements Cloneable {
 	 * @return true if the node is in the progress of loading its children.
 	 */
 	private boolean isInProgress(List<GTreeNode> childList) {
-		if (childList != null && childList.size() == 1 &&
-			childList.get(0) instanceof InProgressGTreeNode) {
-			return true;
-		}
-		return false;
-	}
+        return childList != null && childList.size() == 1 &&
+                childList.get(0) instanceof InProgressGTreeNode;
+    }
 
 	protected void doFireNodeAdded(GTreeNode newNode) {
 		assertSwing();

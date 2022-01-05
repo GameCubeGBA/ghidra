@@ -96,12 +96,8 @@ class InMemoryFunctionTag implements FunctionTag {
 			return false;
 		}
 
-		if (!Objects.equals(name, other.getName())) {
-			return false;
-		}
-
-		return true;
-	}
+        return Objects.equals(name, other.getName());
+    }
 
 	@Override
 	public void delete() {

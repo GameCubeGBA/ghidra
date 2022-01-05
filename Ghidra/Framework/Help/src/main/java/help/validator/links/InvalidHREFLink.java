@@ -124,14 +124,9 @@ public abstract class InvalidHREFLink implements InvalidLink {
 			return false;
 		}
 		if (message == null) {
-			if (other.message != null) {
-				return false;
-			}
+            return other.message == null;
 		}
-		else if (!message.equals(other.message)) {
-			return false;
-		}
-		return true;
-	}
+		else return message.equals(other.message);
+    }
 
 }

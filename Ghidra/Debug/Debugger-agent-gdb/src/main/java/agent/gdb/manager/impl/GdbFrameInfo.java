@@ -91,11 +91,8 @@ public class GdbFrameInfo {
 		if (this.getLevel() != that.getLevel()) {
 			return false;
 		}
-		if (this.getAddr() != that.getAddr()) {
-			return false;
-		}
-		return true;
-	}
+        return this.getAddr() == that.getAddr();
+    }
 
 	public String getLevel() {
 		return level;

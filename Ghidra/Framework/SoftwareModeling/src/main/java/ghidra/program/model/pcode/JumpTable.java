@@ -152,11 +152,8 @@ public class JumpTable {
 		if (addressTable == null) {
 			return true;
 		}
-		if (addressTable.length == 0) {
-			return true;
-		}
-		return false;
-	}
+        return addressTable.length == 0;
+    }
 
 	/**
 	 * Create a JumpTable object by parsing the XML elements

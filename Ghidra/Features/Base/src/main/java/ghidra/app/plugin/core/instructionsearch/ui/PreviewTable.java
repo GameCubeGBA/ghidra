@@ -429,7 +429,7 @@ public class PreviewTable extends AbstractInstructionTable {
 				case HEX:
 					// For hex, we have to convert the binary string to hex, so use
 					// our utility...
-					previewString = InstructionSearchUtils.toHex(instr, true).toString();
+					previewString = InstructionSearchUtils.toHex(instr, true);
 					break;
 			}
 

@@ -106,11 +106,8 @@ public class NewSymbolFilter implements SymbolFilter {
 		if (!isAcceptableType(program, symbol)) {
 			return false;
 		}
-		if (!passesAdvancedFilters(program, symbol)) {
-			return false;
-		}
-		return true;
-	}
+        return passesAdvancedFilters(program, symbol);
+    }
 
 	private boolean isAcceptableOrigin(Program program, Symbol symbol) {
 		if (acceptsAllSources) {
@@ -146,11 +143,9 @@ public class NewSymbolFilter implements SymbolFilter {
 				}
 			}
 		}
-		if (!applicable) { // if none of the filters were applicable, then the symbol passes.
-			return true;
-		}
-		return false;
-	}
+        // if none of the filters were applicable, then the symbol passes.
+        return !applicable;
+    }
 
 	@Override
 	public boolean acceptsOnlyCodeSymbols() {

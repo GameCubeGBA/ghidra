@@ -129,11 +129,8 @@ public class CommentFieldLocation extends CodeUnitLocation {
 		if (!Arrays.equals(comment, other.comment)) {
 			return false;
 		}
-		if (type != other.type) {
-			return false;
-		}
-		return true;
-	}
+        return type == other.type;
+    }
 
 	@Override
 	public void saveState(SaveState obj) {

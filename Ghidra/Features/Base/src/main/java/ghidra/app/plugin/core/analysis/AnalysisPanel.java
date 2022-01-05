@@ -799,14 +799,11 @@ class AnalysisPanel extends JPanel implements PropertyChangeListener {
 	}
 
 	private boolean isUserConfiguration(Options options) {
-		if (options == STANDARD_DEFAULT_OPTIONS ||
-			options == currentProgramOptions) {
-			// these two are not user configurations.
-			return false;
-		}
-		return true;
+        // these two are not user configurations.
+        return options != STANDARD_DEFAULT_OPTIONS &&
+                options != currentProgramOptions;
 
-	}
+    }
 
 	private void optionsComboBoxChanged(ItemEvent e) {
 		if (e.getStateChange() == ItemEvent.SELECTED) {

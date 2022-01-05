@@ -428,13 +428,8 @@ public class PropertyFile {
 		}
 		PropertyFile other = (PropertyFile) obj;
 		if (propertyFile == null) {
-			if (other.propertyFile != null) {
-				return false;
-			}
+            return other.propertyFile == null;
 		}
-		else if (!propertyFile.equals(other.propertyFile)) {
-			return false;
-		}
-		return true;
-	}
+		else return propertyFile.equals(other.propertyFile);
+    }
 }

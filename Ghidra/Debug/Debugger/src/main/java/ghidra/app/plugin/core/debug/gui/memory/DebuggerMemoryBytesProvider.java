@@ -67,11 +67,8 @@ public class DebuggerMemoryBytesProvider extends ProgramByteViewerComponentProvi
 		if (!Objects.equals(a.getThread(), b.getThread())) {
 			return false; // for reg/pc tracking
 		}
-		if (!Objects.equals(a.getFrame(), b.getFrame())) {
-			return false; // for reg/pc tracking
-		}
-		return true;
-	}
+        return Objects.equals(a.getFrame(), b.getFrame()); // for reg/pc tracking
+    }
 
 	protected class FollowsCurrentThreadAction extends AbstractFollowsCurrentThreadAction {
 		public FollowsCurrentThreadAction() {

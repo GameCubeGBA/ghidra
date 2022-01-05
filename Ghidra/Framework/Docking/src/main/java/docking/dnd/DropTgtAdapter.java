@@ -177,11 +177,8 @@ public class DropTgtAdapter implements DropTargetListener {
 			return false;
 		}
 		// Does the target component allow the drop.
-		if (!dropComponent.isDropOk(e)) {
-			return false;
-		}
-		return true;
-	}
+        return dropComponent.isDropOk(e);
+    }
 
 	/**
 	 * Returns true if the drop target can accept the data flavor that is to be dropped

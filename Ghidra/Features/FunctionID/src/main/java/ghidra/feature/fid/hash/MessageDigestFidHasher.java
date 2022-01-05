@@ -72,9 +72,7 @@ public class MessageDigestFidHasher implements FidHasher {
 		if (minAddress.compareTo(maxAddress) <= 0) {
 			AddressSet range = new AddressSet(minAddress, maxAddress);
 			Iterator<Relocation> relocations = relocationTable.getRelocations(range);
-			if (relocations.hasNext()) {
-				return true;
-			}
+            return relocations.hasNext();
 		}
 		return false;
 	}

@@ -680,9 +680,7 @@ public class OperandReferenceAnalyzer extends AbstractAnalyzer {
 			if (dataType3 instanceof Pointer) {
 				Pointer pointer = (Pointer) dataType3;
 				DataType pointerDataType = pointer.getDataType();
-				if (pointerDataType instanceof FunctionDefinition) {
-					return true;
-				}
+                return pointerDataType instanceof FunctionDefinition;
 			}
 		}
 		return false;
@@ -830,11 +828,8 @@ public class OperandReferenceAnalyzer extends AbstractAnalyzer {
 		int asciiLen = checkAnsiString(program.getMemory(), target);
 		if (asciiLen > 0) {
 			if (desiredDataMemoryContainsReference(program, target, asciiLen)) {
-				if (asciiLen > 4) {
-					return true; // didn't create a string, but act like we did!
-				}
-				return false;
-			}
+                return asciiLen > 4; // didn't create a string, but act like we did!
+            }
 			// check if it could be code
 			if (!isValidInstruction(pdis, target)) {
 				if (clearAllUndefined(program, target, asciiLen)) {
@@ -1039,9 +1034,7 @@ public class OperandReferenceAnalyzer extends AbstractAnalyzer {
 		RelocationTable relocationTable = program.getRelocationTable();
 		if (relocationTable.isRelocatable()) {
 			// if it is relocatable, then there should be no pointers in memory, other than relacatable ones
-			if (relocationTable.getSize() > 0 && relocationTable.getRelocation(target) == null) {
-				return false;
-			}
+            return relocationTable.getSize() <= 0 || relocationTable.getRelocation(target) != null;
 		}
 		return true;
 	}
@@ -1198,11 +1191,8 @@ public class OperandReferenceAnalyzer extends AbstractAnalyzer {
 		if (b >= 0x7f) {
 			return false;
 		}
-		if ((b < 0x20) && b != TAB && b != CARRIAGE_RETURN && b != LINE_FEED) {
-			return false;
-		}
-		return true;
-	}
+        return (b >= 0x20) || b == TAB || b == CARRIAGE_RETURN || b == LINE_FEED;
+    }
 
 	/**
 	 * getWStrLen

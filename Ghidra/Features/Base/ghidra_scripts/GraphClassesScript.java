@@ -48,7 +48,7 @@ public class GraphClassesScript extends GhidraScript {
 
 		DataTypeManager dataTypeManager = currentProgram.getDataTypeManager();
 
-		String path = new String("ClassDataTypes");
+		String path = "ClassDataTypes";
 		CategoryPath dataTypePath = new CategoryPath(CategoryPath.ROOT, path);
 
 		Category category = dataTypeManager.getCategory(dataTypePath);
@@ -156,10 +156,7 @@ public class GraphClassesScript extends GhidraScript {
 
 				String parentName = getClassName(description);
 
-				boolean isVirtualParent = false;
-				if (parentName.contains("virtual")) {
-					isVirtualParent = true;
-				}
+				boolean isVirtualParent = parentName.contains("virtual");
 
 				parentName = parentName.replace("virtual", "");
 				parentName = parentName.replace(" ", "");
@@ -250,10 +247,10 @@ public class GraphClassesScript extends GhidraScript {
 	private int getIndexOfFirstSingleColon(String string) {
 
 		// replace all :: with something else so can isolate :'s 
-		String testString = new String(string);
+		String testString = string;
 		testString = testString.replace("::", "xx");
 
-		return testString.indexOf(":", 0);
+		return testString.indexOf(":");
 
 	}
 

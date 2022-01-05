@@ -902,11 +902,8 @@ public class PdbParser {
 
 		// All forms of Undefined data are replaceable
 		// TODO: maybe it should check the length of the data type before putting it down.
-		if (Undefined.isUndefined(dataType)) {
-			return true;
-		}
-		return false;
-	}
+        return Undefined.isUndefined(dataType);
+    }
 
 	private boolean isEquivalent(Data existingData, int existingDataTypeLength,
 			DataType newDataType) {
@@ -915,9 +912,7 @@ public class PdbParser {
 				Array array = (Array) newDataType;
 				DataType arrayDataType = array.getDataType();
 				if (arrayDataType instanceof ArrayStringable) {
-					if (array.getLength() == existingDataTypeLength) {
-						return true;
-					}
+                    return array.getLength() == existingDataTypeLength;
 				}
 			}
 		}

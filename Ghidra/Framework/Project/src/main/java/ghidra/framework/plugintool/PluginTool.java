@@ -1159,11 +1159,8 @@ public abstract class PluginTool extends AbstractDockingTool {
 				return false;
 			}
 		}
-		if (!pluginMgr.canClose()) {
-			return false;
-		}
-		return true;
-	}
+        return pluginMgr.canClose();
+    }
 
 	/**
 	 * Can the domain object be closed?

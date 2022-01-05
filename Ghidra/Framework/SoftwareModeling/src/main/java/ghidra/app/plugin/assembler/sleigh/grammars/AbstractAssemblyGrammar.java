@@ -122,11 +122,8 @@ public abstract class AbstractAssemblyGrammar<NT extends AssemblyNonTerminal, P 
 		if (prod.size() != 1) {
 			return false;
 		}
-		if (!prod.getLHS().equals(prod.getRHS().get(0))) {
-			return false;
-		}
-		return true;
-	}
+        return prod.getLHS().equals(prod.getRHS().get(0));
+    }
 
 	/**
 	 * Change the start symbol for the grammar

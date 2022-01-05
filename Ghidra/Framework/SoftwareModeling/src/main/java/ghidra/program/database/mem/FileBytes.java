@@ -378,10 +378,7 @@ public class FileBytes {
 		if (id != other.id) {
 			return false;
 		}
-		if (invalid != other.invalid) {
-			return false;
-		}
-		return true;
-	}
+        return invalid == other.invalid;
+    }
 
 }

@@ -98,11 +98,8 @@ public class ProgramNode extends DefaultMutableTreeNode {
 	 */
 	@Override
 	public boolean getAllowsChildren() {
-		if (module != null) {
-			return true;
-		}
-		return false;
-	}
+        return module != null;
+    }
 
 	/**
 	 * Returns whether some other object is "equal to" this one.

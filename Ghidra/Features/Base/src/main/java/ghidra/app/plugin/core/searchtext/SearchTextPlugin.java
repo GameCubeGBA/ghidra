@@ -482,12 +482,7 @@ public class SearchTextPlugin extends ProgramPlugin implements OptionsChangeList
 		boolean isInstruction = false;
 		if (textSelection != null) {
 			if (codeUnit != null) {
-				if (codeUnit instanceof Instruction) {
-					isInstruction = true;
-				}
-				else {
-					isInstruction = false;
-				}
+                isInstruction = codeUnit instanceof Instruction;
 				searchDialog.setCurrentField(location, isInstruction);
 			}
 			searchDialog.setValueFieldText(textSelection);
@@ -753,9 +748,7 @@ public class SearchTextPlugin extends ProgramPlugin implements OptionsChangeList
 				}
 			}
 			if (searchOptions.searchLabels()) {
-				if (factoryClass == LabelFieldFactory.class) {
-					return true;
-				}
+                return factoryClass == LabelFieldFactory.class;
 			}
 
 			return false;

@@ -79,13 +79,10 @@ public class FieldNameFieldLocation extends CodeUnitLocation {
 			return false;
 		FieldNameFieldLocation other = (FieldNameFieldLocation) obj;
 		if (fieldName == null) {
-			if (other.fieldName != null)
-				return false;
+            return other.fieldName == null;
 		}
-		else if (!fieldName.equals(other.fieldName))
-			return false;
-		return true;
-	}
+		else return fieldName.equals(other.fieldName);
+    }
 
 	@Override
 	public void saveState(SaveState obj) {

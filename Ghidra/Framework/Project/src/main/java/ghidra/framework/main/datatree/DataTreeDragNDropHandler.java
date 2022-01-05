@@ -114,12 +114,8 @@ public class DataTreeDragNDropHandler implements GTreeDragNDropHandler {
 		if (!isActiveProject) {
 			return false;
 		}
-		if (ToolConstants.NO_ACTIVE_PROJECT.equals(destUserData.getName())) {
-			return false;
-		}
-
-		return true;
-	}
+        return !ToolConstants.NO_ACTIVE_PROJECT.equals(destUserData.getName());
+    }
 
 	@Override
 	public boolean isStartDragOk(List<GTreeNode> dragUserData, int dragAction) {

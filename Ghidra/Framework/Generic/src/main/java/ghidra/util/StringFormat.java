@@ -65,7 +65,7 @@ public class StringFormat {
 			int len = str.length();
 
 			if (len < padlen) {
-				buffer.append(pad.substring(0,padlen-len)); 
+				buffer.append(pad, 0, padlen-len);
 			}
 		}
 		// add the number

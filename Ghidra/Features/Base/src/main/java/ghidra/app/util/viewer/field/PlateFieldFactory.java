@@ -197,9 +197,7 @@ public class PlateFieldFactory extends FieldFactory {
 			Data data = dp.getObject();
 			int[] cpath = data.getComponentPath();
 			if (cpath.length > 0) {
-				if (cpath[cpath.length - 1] == 0) {
-					return true;
-				}
+                return cpath[cpath.length - 1] == 0;
 			}
 		}
 		return false;

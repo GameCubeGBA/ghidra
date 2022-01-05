@@ -142,10 +142,7 @@ public class RegisterField extends JTextField {
     	if (l1 != null) {
     		return l1.equals(l2);
     	}
-    	else if (l2 != null) {
-    		return false;
-    	}
-    	return true;
+    	else return l2 == null;
     }
 	private void setTextField(String text) {
         if ( doc == null ) {

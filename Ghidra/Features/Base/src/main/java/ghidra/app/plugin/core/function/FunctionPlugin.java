@@ -355,19 +355,14 @@ public class FunctionPlugin extends Plugin implements DataService {
 			return false;
 		}
 
-		if (location instanceof FunctionThunkFieldLocation ||
-			location instanceof FunctionCallingConventionFieldLocation ||
-			location instanceof FunctionInlineFieldLocation ||
-			location instanceof FunctionNameFieldLocation ||
-			location instanceof FunctionNoReturnFieldLocation ||
-			location instanceof FunctionInlineFieldLocation) {
-
-			// these locations don't have types
-			return false;
-		}
-
-		return true;
-	}
+        // these locations don't have types
+        return !(location instanceof FunctionThunkFieldLocation) &&
+                !(location instanceof FunctionCallingConventionFieldLocation) &&
+                !(location instanceof FunctionInlineFieldLocation) &&
+                !(location instanceof FunctionNameFieldLocation) &&
+                !(location instanceof FunctionNoReturnFieldLocation) &&
+                !(location instanceof FunctionInlineFieldLocation);
+    }
 
 	String getDataActionMenuName(ProgramLocation location) {
 		if (location instanceof FunctionParameterFieldLocation) {
@@ -469,9 +464,7 @@ public class FunctionPlugin extends Plugin implements DataService {
 			if (cursorIsInSelection) {
 				return true;
 			}
-			else if (program.getListing().getInstructionContaining(addr) != null) {
-				return true;
-			}
+			else return program.getListing().getInstructionContaining(addr) != null;
 		}
 		return false;
 	}

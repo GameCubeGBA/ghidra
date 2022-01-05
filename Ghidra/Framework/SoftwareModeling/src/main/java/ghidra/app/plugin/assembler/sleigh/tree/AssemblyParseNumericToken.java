@@ -64,11 +64,8 @@ public class AssemblyParseNumericToken extends AssemblyParseToken {
 		if (!this.str.equals(that.str)) {
 			return false;
 		}
-		if (this.val != that.val) {
-			return false;
-		}
-		return true;
-	}
+        return this.val == that.val;
+    }
 
 	@Override
 	public String toString() {

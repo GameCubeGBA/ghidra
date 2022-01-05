@@ -181,9 +181,7 @@ public class InstructionSequence {
 			if (other.getCommaSeparatedOperands() != null) {
 				return false;
 			}
-			if (other.getCommaSeparatedOperands() == null) {
-				return false;
-			}
+            return other.getCommaSeparatedOperands() != null;
 		}
 		return true;
 	}

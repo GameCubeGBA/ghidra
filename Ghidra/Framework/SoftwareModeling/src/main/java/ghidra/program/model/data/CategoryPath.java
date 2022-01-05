@@ -135,7 +135,7 @@ public class CategoryPath implements Comparable<CategoryPath> {
 		else if (endsWithNonEscapedDelimiter(path)) {
 			throw new IllegalArgumentException("Paths must not end with " + DELIMITER_STRING);
 		}
-		else if (path.indexOf(ILLEGAL_STRING) >= 0) {
+		else if (path.contains(ILLEGAL_STRING)) {
 			throw new IllegalArgumentException("Paths must have non-empty elements");
 		}
 
@@ -225,15 +225,10 @@ public class CategoryPath implements Comparable<CategoryPath> {
 			return false;
 		}
 		if (parent == null) {
-			if (other.parent != null) {
-				return false;
-			}
+            return other.parent == null;
 		}
-		else if (!parent.equals(other.parent)) {
-			return false;
-		}
-		return true;
-	}
+		else return parent.equals(other.parent);
+    }
 
 	@Override
 	public int hashCode() {

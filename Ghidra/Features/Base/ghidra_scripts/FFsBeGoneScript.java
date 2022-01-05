@@ -98,10 +98,7 @@ public class FFsBeGoneScript extends GhidraScript {
 		if (currentProgram.getListing().getInstructionContaining(address) != null) {
 			return false;
 		}
-		if (currentProgram.getListing().getDefinedDataContaining(address) != null) {
-			return false;
-		}
-		return true;
-	}
+        return currentProgram.getListing().getDefinedDataContaining(address) == null;
+    }
 
 }

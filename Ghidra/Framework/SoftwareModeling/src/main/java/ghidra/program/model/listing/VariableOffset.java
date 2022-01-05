@@ -292,10 +292,6 @@ public class VariableOffset {
 			return false;
 		}
 
-		if (!SystemUtilities.isEqual(variable, other.variable)) {
-			return false;
-		}
-
-		return true;
-	}
+        return SystemUtilities.isEqual(variable, other.variable);
+    }
 }

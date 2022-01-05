@@ -108,7 +108,7 @@ public class KeyBindingsTest extends AbstractGhidraHeadedIntegrationTest {
 		assertTrue(
 			"Description is not updated for action '" + action1.getName() + "'; instead the " +
 				"description is '" + actualText + "'\n\tDescrption: " + escaped,
-			actualText.indexOf(escaped) != -1);
+                actualText.contains(escaped));
 	}
 
 	@Test
@@ -157,7 +157,7 @@ public class KeyBindingsTest extends AbstractGhidraHeadedIntegrationTest {
 		}
 
 		triggerText(keyField, "z");
-		assertTrue(statusPane.getText().indexOf("No action is selected.") != -1);
+		assertTrue(statusPane.getText().contains("No action is selected."));
 	}
 
 	@Test

@@ -86,11 +86,8 @@ public class Face extends DittedBitSequence implements Comparable<Face> {
 		else if (!patterns.contains(this.joinOf.second)) {
 			return false;
 		}
-		else if (faceByName.containsKey(this.strID)) {
-			return false;
-		}
-		return true;
-	}
+		else return !faceByName.containsKey(this.strID);
+    }
 
 	//A measurement of "how full" the face is with weight as compared to the number of vertices it would be as a cube.
 	public double ratioFilled() {

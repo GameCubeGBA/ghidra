@@ -94,11 +94,8 @@ public abstract class AbstractAssemblyProduction<NT extends AssemblyNonTerminal>
 		if (!this.lhs.equals(aap.lhs)) {
 			return false;
 		}
-		if (!this.rhs.equals(aap.rhs)) {
-			return false;
-		}
-		return true;
-	}
+        return this.rhs.equals(aap.rhs);
+    }
 
 	@Override
 	public int compareTo(AbstractAssemblyProduction<NT> that) {
@@ -108,11 +105,8 @@ public abstract class AbstractAssemblyProduction<NT extends AssemblyNonTerminal>
 			return result;
 		}
 		result = this.rhs.compareTo(that.rhs);
-		if (result != 0) {
-			return result;
-		}
-		return 0;
-	}
+        return result;
+    }
 
 	@Override
 	public int hashCode() {

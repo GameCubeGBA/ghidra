@@ -110,13 +110,10 @@ public class FunctionReturnTypeFieldLocation extends FunctionSignatureFieldLocat
 			return false;
 		FunctionReturnTypeFieldLocation other = (FunctionReturnTypeFieldLocation) obj;
 		if (returnTypeStr == null) {
-			if (other.returnTypeStr != null)
-				return false;
+            return other.returnTypeStr == null;
 		}
-		else if (!returnTypeStr.equals(other.returnTypeStr))
-			return false;
-		return true;
-	}
+		else return returnTypeStr.equals(other.returnTypeStr);
+    }
 
 	@Override
 	public void saveState(SaveState obj) {

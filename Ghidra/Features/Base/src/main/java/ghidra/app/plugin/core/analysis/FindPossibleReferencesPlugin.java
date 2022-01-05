@@ -114,12 +114,9 @@ public class FindPossibleReferencesPlugin extends Plugin {
 	private boolean hasCorrectAddressSize(NavigatableActionContext context) {
 		int size =
 			context.getProgram().getAddressFactory().getDefaultAddressSpace().getSize();
-		if ((size == 64) || (size == 32) || (size == 24) || (size == 16) || (size == 20) ||
-			(size == 21)) {
-			return true;
-		}
-		return false;
-	}
+        return (size == 64) || (size == 32) || (size == 24) || (size == 16) || (size == 20) ||
+                (size == 21);
+    }
 
 	private void createLocalActions(NavigatableActionContext context, ComponentProvider p,
 			FindReferencesTableModel model) {

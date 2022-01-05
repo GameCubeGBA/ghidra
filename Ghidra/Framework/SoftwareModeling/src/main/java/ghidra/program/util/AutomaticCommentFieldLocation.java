@@ -74,10 +74,8 @@ public class AutomaticCommentFieldLocation extends CommentFieldLocation {
 		if (getClass() != obj.getClass())
 			return false;
 		AutomaticCommentFieldLocation other = (AutomaticCommentFieldLocation) obj;
-		if (currentCommentRow != other.currentCommentRow)
-			return false;
-		return true;
-	}
+        return currentCommentRow == other.currentCommentRow;
+    }
 
 	@Override
 	public void saveState(SaveState obj) {

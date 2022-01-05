@@ -953,10 +953,7 @@ public class DIEAggregate {
 			return false;
 		}
 		DIEAggregate other = (DIEAggregate) obj;
-		if (!Arrays.equals(fragments, other.fragments)) {
-			return false;
-		}
-		return true;
-	}
+        return Arrays.equals(fragments, other.fragments);
+    }
 
 }

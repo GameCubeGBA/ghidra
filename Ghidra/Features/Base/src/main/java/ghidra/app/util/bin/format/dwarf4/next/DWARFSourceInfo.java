@@ -139,11 +139,8 @@ public class DWARFSourceInfo {
 		else if (!filename.equals(other.filename)) {
 			return false;
 		}
-		if (lineNum != other.lineNum) {
-			return false;
-		}
-		return true;
-	}
+        return lineNum == other.lineNum;
+    }
 
 	@Override
 	public String toString() {

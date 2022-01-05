@@ -1664,9 +1664,7 @@ public class TreeValueSortedMap<K, V> extends AbstractMap<K, V> implements Value
 			}
 		}
 		if (n.next != null) {
-			if (comparator.compare(n.next.val, n.val) < 0) {
-				return false;
-			}
+            return comparator.compare(n.next.val, n.val) >= 0;
 		}
 		return true;
 	}

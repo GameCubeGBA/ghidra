@@ -69,11 +69,8 @@ public class RefRepeatComment {
 		else if (!address.equals(other.address)) {
 			return false;
 		}
-		if (!Arrays.equals(commentLines, other.commentLines)) {
-			return false;
-		}
-		return true;
-	}
+        return Arrays.equals(commentLines, other.commentLines);
+    }
 
 	@Override
 	public String toString() {

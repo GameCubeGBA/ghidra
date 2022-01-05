@@ -173,12 +173,8 @@ public class DecompInterface {
 		}
 
 		// do not count warning messages as error messages
-		if (decompileMessage.toLowerCase().indexOf("warning") != -1) {
-			return false;
-		}
-
-		return true;
-	}
+        return decompileMessage.toLowerCase().indexOf("warning") == -1;
+    }
 
 	private static String fileToString(ResourceFile file) throws IOException {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream()));

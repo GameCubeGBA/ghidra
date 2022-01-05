@@ -506,9 +506,7 @@ class ListingDisplaySearcher implements Searcher {
 			}
 		}
 		if (options.searchLabels()) {
-			if (fieldName.equals(LabelFieldFactory.FIELD_NAME)) {
-				return true;
-			}
+            return fieldName.equals(LabelFieldFactory.FIELD_NAME);
 		}
 
 		return false;

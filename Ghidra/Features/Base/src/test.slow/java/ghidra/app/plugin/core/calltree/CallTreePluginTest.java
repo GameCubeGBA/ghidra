@@ -952,7 +952,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		List<NodeDepthInfo> nodes = getNodesByDepth(false, filtered);
 		for (NodeDepthInfo info : nodes) {
 			String nodeName = info.node.getName();
-			if (nodeName.indexOf(name) != -1) {
+			if (nodeName.contains(name)) {
 				Assert.fail("Found node that should have been filtered out - depth: " + depth +
 					"; node: " + info);
 			}
@@ -964,7 +964,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		List<NodeDepthInfo> matches = new ArrayList<>();
 		for (NodeDepthInfo info : nodes) {
 			String nodeName = info.node.getName();
-			if (nodeName.indexOf(name) != -1) {
+			if (nodeName.contains(name)) {
 				matches.add(info);
 			}
 		}
@@ -1025,7 +1025,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 
 	private GTreeNode findNode(GTreeNode node, String text) {
 		String name = node.getName();
-		if (name.indexOf(text) != -1) {
+		if (name.contains(text)) {
 			return node;
 		}
 
@@ -1086,7 +1086,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		List<NodeDepthInfo> matches = new ArrayList<>();
 		for (NodeDepthInfo info : nodes) {
 			String nodeName = info.node.getName();
-			if (nodeName.indexOf(name) != -1) {
+			if (nodeName.contains(name)) {
 				matches.add(info);
 			}
 		}
@@ -1105,7 +1105,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		List<NodeDepthInfo> nodes = getNodesByDepth(true, filtered);
 		for (NodeDepthInfo info : nodes) {
 			String nodeName = info.node.getName();
-			if (nodeName.indexOf(name) != -1) {
+			if (nodeName.contains(name)) {
 				Assert.fail("Found node that should have been filtered out - depth: " + depth +
 					"; node: " + info);
 			}
@@ -1304,15 +1304,10 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 				return false;
 			}
 			if (node == null) {
-				if (other.node != null) {
-					return false;
-				}
+                return other.node == null;
 			}
-			else if (!node.equals(other.node)) {
-				return false;
-			}
-			return true;
-		}
+			else return node.equals(other.node);
+        }
 
 		private CallTreePluginTest getOuterType() {
 			return CallTreePluginTest.this;

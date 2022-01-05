@@ -416,12 +416,9 @@ public class InjectPayloadSleigh implements InjectPayload {
 		if (paramShift != op2.paramShift) {
 			return false;
 		}
-		if (type != op2.type || subType != op2.subType) {
-			return false;
-		}
+        return type == op2.type && subType == op2.subType;
 		// We are NOT checking parseString and pcodeTemplate
-		return true;
-	}
+    }
 
 	@Override
 	public int hashCode() {

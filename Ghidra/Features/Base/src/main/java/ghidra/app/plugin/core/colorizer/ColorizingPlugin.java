@@ -208,11 +208,8 @@ public class ColorizingPlugin extends ProgramPlugin implements DomainObjectListe
 
 			@Override
 			public boolean isEnabledForContext(ActionContext context) {
-				if (!(context instanceof ListingActionContext)) {
-					return false;
-				}
-				return true;
-			}
+                return context instanceof ListingActionContext;
+            }
 		};
 		setColorAction.setPopupMenuData(new MenuData(new String[] { MENU_PULLRIGHT, "Set Color" },
 			null, group, MenuData.NO_MNEMONIC, Integer.toString(subgroup++)));

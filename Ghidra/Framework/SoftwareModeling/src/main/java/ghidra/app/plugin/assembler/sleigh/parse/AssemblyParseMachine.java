@@ -140,11 +140,8 @@ public class AssemblyParseMachine implements Comparable<AssemblyParseMachine> {
 		if (this.accepted != apm.accepted) {
 			return false;
 		}
-		if (this.error != apm.error) {
-			return false;
-		}
-		return true;
-	}
+        return this.error == apm.error;
+    }
 
 	@Override
 	public int compareTo(AssemblyParseMachine that) {
@@ -171,11 +168,8 @@ public class AssemblyParseMachine implements Comparable<AssemblyParseMachine> {
 			return -1;
 		}
 		result = (this.error - that.error);
-		if (result != 0) {
-			return result;
-		}
-		return 0;
-	}
+        return result;
+    }
 
 	/* *******************************************************************************************/
 

@@ -1909,11 +1909,8 @@ class FunctionMerger extends AbstractFunctionMerger implements ListingMerger {
 			function2.getParameters())) {
 			return false;
 		}
-		if (!VariableUtilities.equivalentVariableArrays(function1.getLocalVariables(),
-			function2.getLocalVariables())) {
-			return false;
-		}
-		return true;
+        return VariableUtilities.equivalentVariableArrays(function1.getLocalVariables(),
+                function2.getLocalVariables());
 
-	}
+    }
 }

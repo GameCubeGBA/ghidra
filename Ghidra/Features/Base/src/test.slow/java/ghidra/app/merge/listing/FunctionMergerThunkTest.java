@@ -1138,12 +1138,8 @@ public class FunctionMergerThunkTest extends AbstractExternalMergerTest {
 			return true;
 		}
 
-		if (t1.equals(v2) && t2.equals(v1)) {
-			return true;
-		}
-
-		return false;
-	}
+        return t1.equals(v2) && t2.equals(v1);
+    }
 
 	@Test
 	public void testAddThunksToExternalsDiffMemAddressesMergeBothKeepLatest() throws Exception {

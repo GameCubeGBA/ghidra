@@ -81,11 +81,8 @@ public class ChooseDataTypeAction extends DockingAction {
 		if (plugin.isValidDataLocation(location)) {
 			return true;
 		}
-		if (location instanceof VariableLocation) {
-			return true;
-		}
-		return false;
-	}
+        return location instanceof VariableLocation;
+    }
 
 	private void createDataType(ListingActionContext context) {
 		int maxSize = getSelectedVariableStorageSize(context);

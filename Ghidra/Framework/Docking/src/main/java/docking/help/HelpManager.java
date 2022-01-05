@@ -168,12 +168,8 @@ public class HelpManager implements HelpService {
 	}
 
 	private boolean isExcluded(Object helpee) {
-		if (excludedFromHelp.contains(helpee)) {
-			return true;
-		}
-
-		return false;
-	}
+        return excludedFromHelp.contains(helpee);
+    }
 
 	/**
 	 * Returns the Help location associated with the specified object
@@ -517,11 +513,8 @@ public class HelpManager implements HelpService {
 		if (action.getMenuBarData() != null) {
 			return false;
 		}
-		if (action.getPopupMenuData() != null) {
-			return false;
-		}
-		return true;
-	}
+        return action.getPopupMenuData() == null;
+    }
 
 	private void displayHelpUrl(Object help, URL helpUrl) {
 		if (helpUrl == null) {
@@ -646,12 +639,8 @@ public class HelpManager implements HelpService {
 
 		URL URL = helpSet.getHelpSetURL();
 		String URLString = URL.toString();
-		if (URLString.endsWith(DUMMY_HELP_SET_NAME)) {
-			return true;
-		}
-
-		return false;
-	}
+        return URLString.endsWith(DUMMY_HELP_SET_NAME);
+    }
 
 	/**
 	 * Create a new help set for the given url, if one does

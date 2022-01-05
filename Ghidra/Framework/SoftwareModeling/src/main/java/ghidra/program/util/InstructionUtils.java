@@ -220,7 +220,7 @@ public class InstructionUtils {
 			if (outStr.length() != 0) {
 				outStr.append(", ");
 			}
-			outStr.append(str.toString());
+			outStr.append(str);
 		}
 		return outStr.toString();
 	}

@@ -127,11 +127,8 @@ public class ColumnSortState {
 			return false;
 		}
 
-		if (sortOrder_OneBased != other.sortOrder_OneBased) {
-			return false;
-		}
-		return true;
-	}
+        return sortOrder_OneBased == other.sortOrder_OneBased;
+    }
 
 	@Override
 	public String toString() {

@@ -181,11 +181,9 @@ public class FunctionReachabilityTableModel
 		BlockModelService blockModelService = serviceProvider.getService(BlockModelService.class);
 		CodeBlockModel codeBlockModel = blockModelService.getActiveSubroutineModel();
 		CodeBlock targetBlock = codeBlockModel.getFirstCodeBlockContaining(targetAddress, monitor);
-		if (targetBlock == null) {
-			return null; // no code found for call; external?
-		}
+        // no code found for call; external?
 
-		return targetBlock;
+        return targetBlock;
 	}
 
 	void setFunctions(Function from, Function to) {

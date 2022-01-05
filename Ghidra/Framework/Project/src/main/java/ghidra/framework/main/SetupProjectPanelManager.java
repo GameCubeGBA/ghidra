@@ -93,11 +93,8 @@ class SetupProjectPanelManager implements PanelManager {
 			return true;
 		}
 
-		if (currentWizardPanel == repositoryPanel && repositoryPanel.createRepository()) {
-			return true;
-		}
-		return false;
-	}
+        return currentWizardPanel == repositoryPanel && repositoryPanel.createRepository();
+    }
 
 	@Override
 	public boolean hasPreviousPanel() {

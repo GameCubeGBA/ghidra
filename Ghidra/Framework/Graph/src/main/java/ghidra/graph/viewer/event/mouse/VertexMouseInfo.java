@@ -90,11 +90,8 @@ public class VertexMouseInfo<V extends VisualVertex, E extends VisualEdge<V>> {
 
 	public boolean isButtonClick() {
 		Component clickedComponent = getClickedComponent();
-		if (clickedComponent instanceof JButton) {
-			return true;
-		}
-		return false;
-	}
+        return clickedComponent instanceof JButton;
+    }
 
 	public boolean isVertexSelected() {
 		PickedState<V> pickedVertexState = viewer.getPickedVertexState();

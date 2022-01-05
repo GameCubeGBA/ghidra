@@ -486,11 +486,8 @@ public class GoToQuery {
 		}
 		SymbolTable symTable = program.getSymbolTable();
 		Namespace namespace = symTable.getNamespace(scopeName, parent);
-		if (namespace != null) {
-			return namespace;
-		}
-		return null;
-	}
+        return namespace;
+    }
 
 	private boolean processSymbolInCurrentProgram() {
 		Program program = navigatable.getProgram();
@@ -521,11 +518,8 @@ public class GoToQuery {
 			return false;
 		}
 
-		if (goToService.goTo(navigatable, loc, program)) {
-			return true;
-		}
-		return false;
-	}
+        return goToService.goTo(navigatable, loc, program);
+    }
 
 	private boolean goTo(Program program, ProgramLocation loc) {
 		if (loc == null) {

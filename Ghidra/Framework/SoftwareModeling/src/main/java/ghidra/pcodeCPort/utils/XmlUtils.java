@@ -52,9 +52,8 @@ public class XmlUtils {
 		char firstc = boolString.charAt(0);
 		if (firstc == 't') return true;
 		if (firstc == '1') return true;
-		if (firstc == 'y') return true;
-		return false;
-	}
+        return firstc == 'y';
+    }
 
 	public static int decodeUnknownInt( String intString ) {
 	    if (intString == null) {

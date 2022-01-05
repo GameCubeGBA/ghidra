@@ -1653,11 +1653,8 @@ public class DockingWindowManager implements PropertyChangeListener, Placeholder
 		}
 
 		// see if the given window is a child of the root node's frame
-		if (SwingUtilities.isDescendingFrom(win, rootFrame)) {
-			return true;
-		}
-		return false;
-	}
+        return SwingUtilities.isDescendingFrom(win, rootFrame);
+    }
 
 	/**
 	 * Shows the dialog using the tool's currently active window as a parent

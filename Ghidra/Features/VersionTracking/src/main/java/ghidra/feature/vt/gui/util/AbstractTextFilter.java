@@ -164,17 +164,14 @@ public abstract class AbstractTextFilter<T> extends Filter<T> {
 		//
 		Address address = association.getSourceAddress();
 		String symbolText = getSymbolText(address);
-		if (symbolText.toLowerCase().indexOf(filterText.toLowerCase()) != -1) {
+		if (symbolText.toLowerCase().contains(filterText.toLowerCase())) {
 			return true;
 		}
 
 		address = association.getDestinationAddress();
 		symbolText = getSymbolText(address);
-		if (symbolText.toLowerCase().indexOf(filterText.toLowerCase()) != -1) {
-			return true;
-		}
-		return false;
-	}
+        return symbolText.toLowerCase().indexOf(filterText.toLowerCase()) != -1;
+    }
 
 	protected String getSymbolText(Address address) {
 		VTSession session = controller.getSession();

@@ -290,11 +290,8 @@ public class ArmAggressiveInstructionFinderAnalyzer extends AbstractAnalyzer {
 					numInstr++;
 					FlowType ftype = instr.getFlowType();
 					if (ftype.isTerminal()) {
-						if (!validTerminator(instr)) {
-							return false;
-						}
-						return true;
-					}
+                        return validTerminator(instr);
+                    }
 					// can't follow computed jumps
 					if (ftype.isComputed() && ftype.isJump()) {
 						return true;
@@ -322,11 +319,8 @@ public class ArmAggressiveInstructionFinderAnalyzer extends AbstractAnalyzer {
 							Function func = curProgram.getFunctionManager().getFunctionAt(flows[0]);
 							if (func != null) {
 								addsInfo = true;
-								if (func.hasNoReturn()) {
-									return false;
-								}
-								return true;
-							}
+                                return !func.hasNoReturn();
+                            }
 							if (curProgram.getListing().getInstructionAt(flows[0]) == null) {
 								addsInfo = true;
 								return true;

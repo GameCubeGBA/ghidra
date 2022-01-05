@@ -444,11 +444,8 @@ public class Constructor implements Comparable<Constructor> {
 			return result;
 		}
 		result = this.parent.getId() - that.parent.getId();
-		if (result != 0) {
-			return result;
-		}
-		return 0;
-	}
+        return result;
+    }
 
 	@Override
 	public int hashCode() {
@@ -464,11 +461,8 @@ public class Constructor implements Comparable<Constructor> {
 		if (this.id != that.id) {
 			return false;
 		}
-		if (this.parent.getId() != that.parent.getId()) {
-			return false;
-		}
-		return true;
-	}
+        return this.parent.getId() == that.parent.getId();
+    }
 
 	/**
 	 * Returns the source file

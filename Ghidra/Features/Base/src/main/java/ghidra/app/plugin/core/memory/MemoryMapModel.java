@@ -114,12 +114,9 @@ class MemoryMapModel extends AbstractSortedTableModel<MemoryBlock> {
 
 	@Override
 	public boolean isSortable(int columnIndex) {
-		if (columnIndex == READ || columnIndex == WRITE || columnIndex == EXECUTE ||
-			columnIndex == VOLATILE || columnIndex == OVERLAY || columnIndex == INIT) {
-			return false;
-		}
-		return true;
-	}
+        return columnIndex != READ && columnIndex != WRITE && columnIndex != EXECUTE &&
+                columnIndex != VOLATILE && columnIndex != OVERLAY && columnIndex != INIT;
+    }
 
 	@Override
 	public String getName() {

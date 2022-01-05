@@ -327,12 +327,9 @@ public class DataUtilitiesTest extends AbstractGTest {
 				(addrOffset >= 0x100 && addrOffset <= 0x1ff)) {
 				return true;
 			}
-			else if ((addressOffset >= 0x300 && addressOffset <= 0x3ff) &&
-				(addrOffset >= 0x300 && addrOffset <= 0x3ff)) {
-				return true;
-			}
-			return false;
-		}
+			else return (addressOffset >= 0x300 && addressOffset <= 0x3ff) &&
+                        (addrOffset >= 0x300 && addrOffset <= 0x3ff);
+        }
 	}
 
 	private class MyListing extends ListingStub {

@@ -123,12 +123,8 @@ public class ConstantPropagationAnalyzer extends AbstractAnalyzer {
 			!(program.getAddressFactory().getDefaultAddressSpace() instanceof SegmentedAddressSpace);
 
 		if (processorName.equals("Basic")) {
-			if (handledProcessors.contains(program.getLanguage().getProcessor().toString())) {
-				return false;
-			}
-
-			return true;
-		}
+            return !handledProcessors.contains(program.getLanguage().getProcessor().toString());
+        }
 		return program.getLanguage().getProcessor().equals(
 			Processor.findOrPossiblyCreateProcessor(processorName));
 	}

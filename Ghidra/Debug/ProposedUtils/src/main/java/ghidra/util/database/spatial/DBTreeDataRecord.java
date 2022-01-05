@@ -36,11 +36,8 @@ public abstract class DBTreeDataRecord<DS extends BoundedShape<NS>, NS extends B
 			if (!Objects.equals(this.getKey(), that.getKey())) {
 				return false;
 			}
-			if (!Objects.equals(this.getValue(), that.getValue())) {
-				return false;
-			}
-			return true;
-		}
+            return Objects.equals(this.getValue(), that.getValue());
+        }
 
 		default int doHashCode() {
 			return Objects.hashCode(this.getKey()) ^ Objects.hashCode(this.getValue());

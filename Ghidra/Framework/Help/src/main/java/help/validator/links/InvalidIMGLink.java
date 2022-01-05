@@ -111,11 +111,8 @@ public class InvalidIMGLink implements InvalidLink {
 		else if (!img.equals(other.img))
 			return false;
 		if (message == null) {
-			if (other.message != null)
-				return false;
+            return other.message == null;
 		}
-		else if (!message.equals(other.message))
-			return false;
-		return true;
-	}
+		else return message.equals(other.message);
+    }
 }

@@ -78,11 +78,8 @@ public class FrequentSequenceItem implements Comparable<FrequentSequenceItem> {
 		if (!other.getItem().equals(frequentItem)) {
 			return false;
 		}
-		if (!(other.getSupport() == support)) {
-			return false;
-		}
-		return true;
-	}
+        return other.getSupport() == support;
+    }
 
 	@Override
 	public String toString() {

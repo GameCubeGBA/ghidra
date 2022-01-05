@@ -123,11 +123,8 @@ public class XmlLoader extends AbstractProgramLoader {
 				getLanguageService().getLanguageCompilerSpecPairs(broadQuery);
 
 			if (!pairs.isEmpty()) {
-				boolean preferred = false;
-				if (pairs.size() == 1) {
-					preferred = true;
-				}
-				for (LanguageCompilerSpecPair pair : pairs) {
+				boolean preferred = pairs.size() == 1;
+                for (LanguageCompilerSpecPair pair : pairs) {
 					loadSpecs.add(new LoadSpec(this, 0, pair, preferred));
 				}
 			}

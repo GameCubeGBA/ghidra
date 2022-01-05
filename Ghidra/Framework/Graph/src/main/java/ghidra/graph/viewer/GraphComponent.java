@@ -1199,12 +1199,8 @@ public class GraphComponent<V extends VisualVertex, E extends VisualEdge<V>, G e
 			// p is the screen point for the mouse event
 			Point2D p = e.getPoint();
 			selectedVertex = pickSupport.getVertex(layout, p.getX(), p.getY());
-			if (selectedVertex == null) {
-				return false;
-			}
-
-			return true;
-		}
+            return selectedVertex != null;
+        }
 
 		@Override
 		public void mouseClicked(MouseEvent e) {

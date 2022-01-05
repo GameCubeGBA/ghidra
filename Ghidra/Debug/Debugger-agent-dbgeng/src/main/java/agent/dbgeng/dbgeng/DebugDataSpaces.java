@@ -181,11 +181,8 @@ public interface DebugDataSpaces {
 			if (!this.protect.equals(that.protect)) {
 				return false;
 			}
-			if (this.type != that.type) {
-				return false;
-			}
-			return true;
-		}
+            return this.type == that.type;
+        }
 	}
 
 	int readVirtual(long offset, ByteBuffer into, int len);

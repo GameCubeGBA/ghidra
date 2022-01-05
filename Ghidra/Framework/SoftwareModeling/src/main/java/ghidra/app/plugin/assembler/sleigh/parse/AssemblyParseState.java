@@ -94,11 +94,8 @@ public class AssemblyParseState extends AbstractSetDecorator<AssemblyParseStateI
 		}
 		// This only works because TreeSet presents the items in order
 		result = SleighUtil.compareInOrder(this.kernel, that.kernel);
-		if (result != 0) {
-			return result;
-		}
-		return 0;
-	}
+        return result;
+    }
 
 	@Override
 	public String toString() {

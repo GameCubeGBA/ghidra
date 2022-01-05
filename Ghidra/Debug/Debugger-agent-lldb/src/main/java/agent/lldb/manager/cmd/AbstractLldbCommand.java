@@ -46,9 +46,7 @@ public abstract class AbstractLldbCommand<T> implements LldbCommand<T> {
 	@Override
 	public boolean handle(LldbEvent<?> evt, LldbPendingCommand<?> pending) {
 		if (evt instanceof LldbCommandDoneEvent) {
-			if (pending.getCommand().equals(((LldbCommandDoneEvent) evt).getCmd())) {
-				return true;
-			}
+            return pending.getCommand().equals(((LldbCommandDoneEvent) evt).getCmd());
 		}
 		return false;
 	}

@@ -75,11 +75,8 @@ public class SequenceItem implements Comparable<SequenceItem> {
 		if (!other.getSymbol().equals(symbol)) {
 			return false;
 		}
-		if (!(other.getIndex() == index)) {
-			return false;
-		}
-		return true;
-	}
+        return other.getIndex() == index;
+    }
 
 	/**
 	 * Generates a String from a list of {@link SequenceItem}s with each missing {@link SequenceItem} replaces by a "."

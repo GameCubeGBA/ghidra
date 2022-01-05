@@ -106,13 +106,10 @@ public class SubDataFieldLocation extends CodeUnitLocation {
 		else if (!fieldName.equals(other.fieldName))
 			return false;
 		if (rep == null) {
-			if (other.rep != null)
-				return false;
+            return other.rep == null;
 		}
-		else if (!rep.equals(other.rep))
-			return false;
-		return true;
-	}
+		else return rep.equals(other.rep);
+    }
 
 	@Override
 	public void restoreState(Program p, SaveState obj) {

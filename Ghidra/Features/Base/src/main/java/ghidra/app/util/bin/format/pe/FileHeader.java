@@ -483,12 +483,9 @@ public class FileHeader implements StructConverter {
 	}
 
 	public boolean isLordPE() {
-		if (getPointerToSymbolTable() == LORDPE_SYMBOL_TABLE &&
-			getNumberOfSymbols() == LORDPE_NUMBER_OF_SYMBOLS) {
-			return true;
-		}
-		return false;
-	}
+        return getPointerToSymbolTable() == LORDPE_SYMBOL_TABLE &&
+                getNumberOfSymbols() == LORDPE_NUMBER_OF_SYMBOLS;
+    }
 
 	private void parse() throws IOException {
 		reader.setPointerIndex(startIndex);

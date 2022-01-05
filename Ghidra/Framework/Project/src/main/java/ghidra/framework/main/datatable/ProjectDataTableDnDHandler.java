@@ -345,12 +345,8 @@ public class ProjectDataTableDnDHandler implements DragSourceListener, DragGestu
 				return false;
 			}
 
-			if (e.isControlDown() || e.isAltDown() || e.isShiftDown() || e.isMetaDown()) {
-				return false;
-			}
-
-			return true;
-		}
+            return !e.isControlDown() && !e.isAltDown() && !e.isShiftDown() && !e.isMetaDown();
+        }
 	}
 
 }

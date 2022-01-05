@@ -84,11 +84,8 @@ public class DebuggerLocationLabel extends JLabel {
 		if (!Objects.equals(a.getView(), b.getView())) {
 			return false; // Subsumes trace
 		}
-		if (!Objects.equals(a.getTime(), b.getTime())) {
-			return false;
-		}
-		return true;
-	}
+        return Objects.equals(a.getTime(), b.getTime());
+    }
 
 	protected void addNewListeners() {
 		Trace trace = current.getTrace();

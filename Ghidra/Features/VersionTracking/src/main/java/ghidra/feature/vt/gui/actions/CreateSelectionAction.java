@@ -54,11 +54,8 @@ public class CreateSelectionAction extends DockingAction {
 		}
 		VTMatchContext matchContext = (VTMatchContext) context;
 		List<VTMatch> matches = matchContext.getSelectedMatches();
-		if (matches.size() == 0) {
-			return false;
-		}
-		return true;
-	}
+        return matches.size() != 0;
+    }
 
 	@Override
 	public void actionPerformed(ActionContext context) {

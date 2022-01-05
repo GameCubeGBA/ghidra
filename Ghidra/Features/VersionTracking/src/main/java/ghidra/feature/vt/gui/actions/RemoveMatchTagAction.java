@@ -86,11 +86,8 @@ public class RemoveMatchTagAction extends DockingAction {
 		}
 		VTMatchContext matchContext = (VTMatchContext) context;
 		List<VTMatch> matches = matchContext.getSelectedMatches();
-		if (matches.size() == 0) {
-			return false;
-		}
-		return true;
-	}
+        return matches.size() != 0;
+    }
 
 	private int calculateTagCount(List<VTMatch> matches) {
 		int count = 0;

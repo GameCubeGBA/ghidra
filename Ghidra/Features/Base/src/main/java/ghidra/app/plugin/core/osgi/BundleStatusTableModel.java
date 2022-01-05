@@ -308,12 +308,7 @@ public class BundleStatusTableModel
 				BundleStatus status = getStatus(bundle);
 				int rowIndex = getRowIndex(status);
 				status.setBusy(false);
-				if (newActivation) {
-					status.setActive(true);
-				}
-				else {
-					status.setActive(false);
-				}
+                status.setActive(newActivation);
 				fireTableRowsUpdated(rowIndex, rowIndex);
 			});
 		}

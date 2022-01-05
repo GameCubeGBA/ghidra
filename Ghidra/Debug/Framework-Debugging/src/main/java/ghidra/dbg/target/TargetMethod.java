@@ -132,11 +132,8 @@ public interface TargetMethod extends TargetObject {
 			if (!Objects.equals(this.description, that.description)) {
 				return false;
 			}
-			if (!Objects.equals(this.choices, that.choices)) {
-				return false;
-			}
-			return true;
-		}
+            return Objects.equals(this.choices, that.choices);
+        }
 
 		/**
 		 * Extract the argument for this parameter

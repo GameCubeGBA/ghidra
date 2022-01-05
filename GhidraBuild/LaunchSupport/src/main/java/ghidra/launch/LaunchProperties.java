@@ -128,7 +128,7 @@ public class LaunchProperties {
 							"Error parsing line " + i + " of " + launchPropertiesFile, i);
 					}
 					String key = line.substring(0, equalsIndex).trim();
-					String value = line.substring(equalsIndex + 1, line.length()).trim();
+					String value = line.substring(equalsIndex + 1).trim();
 					List<String> valueList = map.get(key);
 					if (valueList == null) {
 						valueList = new ArrayList<>();

@@ -67,11 +67,8 @@ public class DijkstraShortestPathsAlgorithmTest {
 			if (!this.start.equals(that.start)) {
 				return false;
 			}
-			if (!this.end.equals(that.end)) {
-				return false;
-			}
-			return true;
-		}
+            return this.end.equals(that.end);
+        }
 
 		@Override
 		public String toString() {

@@ -176,11 +176,8 @@ public class CppCompositeType {
 		// If final, can have an empty name.  I believe this means "name" can be empty, but
 		//  can still have parent namespace.  TODO: check this if we change to something more
 		//  than String.
-		if (StringUtils.isEmpty(className) && !isFinal) {
-			return false;
-		}
-		return true;
-	}
+        return !StringUtils.isEmpty(className) || isFinal;
+    }
 
 	private List<LayoutBaseClass> getLayoutBaseClasses() {
 		return layoutBaseClasses;

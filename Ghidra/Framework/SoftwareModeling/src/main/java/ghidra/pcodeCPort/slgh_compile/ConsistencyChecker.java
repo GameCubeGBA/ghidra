@@ -946,11 +946,8 @@ class ConsistencyChecker {
 		if (off + vn2.getSize().getReal() - 1 < offset) {
 			return false;
 		}
-		if (off > (offset + size - 1)) {
-			return false;
-		}
-		return true;
-	}
+        return off <= (offset + size - 1);
+    }
 
 	// Does op potentially read vn
 	// This is extremely conservative. Basically any op where
@@ -989,9 +986,7 @@ class ConsistencyChecker {
 		// We always check for writes to -vn-
 		VarnodeTpl vn2 = op.getOut();
 		if (vn2 != null) {
-			if (possibleIntersection(vn, vn2)) {
-				return true;
-			}
+            return possibleIntersection(vn, vn2);
 		}
 		return false;
 	}

@@ -401,19 +401,13 @@ public class FormatStringParser {
 			// At this point c is either a number, '*', or '.'
 			if (!data.isPrecisionComplete() && !data.isFieldWidthComplete() && c != '.') {
 				i = handleOutputConversionForParameters(formatString, i, data, formatArgumentMap);
-				if (i == -1) {
-					return -1;
-				}
-			}
+            }
 			else if (data.isFieldWidthComplete() && c != '.') {
 				return -1;
 			}
 			else if (!data.isPrecisionComplete() && c == '.') {
 				i = handlePrecisionForParameters(formatString, i, data, formatArgumentMap);
-				if (i == -1) {
-					return -1;
-				}
-			}
+            }
 			else {
 				return -1;
 			}
@@ -552,12 +546,9 @@ public class FormatStringParser {
 
 	// If there are two consecutive '%' signs, do not evaluate the data types
 	private boolean emitPercent(String formatString, int i) {
-		if (formatString.charAt(i) == '%' && i + 1 < formatString.length() &&
-			formatString.charAt(i + 1) == '%') {
-			return true;
-		}
-		return false;
-	}
+        return formatString.charAt(i) == '%' && i + 1 < formatString.length() &&
+                formatString.charAt(i + 1) == '%';
+    }
 
 	public DataType[] convertToOutputDataTypes(List<FormatArgument> formatArguments) {
 		if (formatArguments == null) {
@@ -609,13 +600,10 @@ public class FormatStringParser {
 		if (lengthModifier == null || lengthModifier.equals("l")) {
 			return true;
 		}
-		if ((lengthModifier.equals("L") && isDouble(conversionSpecifier)) ||
-			(!lengthModifier.equals("L") &&
-				(isInteger(conversionSpecifier) || isIntegerPointer(conversionSpecifier)))) {
-			return true;
-		}
-		return false;
-	}
+        return (lengthModifier.equals("L") && isDouble(conversionSpecifier)) ||
+                (!lengthModifier.equals("L") &&
+                        (isInteger(conversionSpecifier) || isIntegerPointer(conversionSpecifier)));
+    }
 
 	private DataType convertPairToDataType(String lengthModifier, String conversionSpecifier) {
 

@@ -170,11 +170,8 @@ public class FindUndefinedFunctionsFollowUpScript extends GhidraScript {
 			println("unknown context at " + Long.toHexString(a.getOffset()));
 		}
 
-		if (pi == null)
-			return (false);
-
-		return (true);
-	}
+        return pi != null;
+    }
 
 	private Address findHead(Address a) throws Exception {
 		// looking for something like this:

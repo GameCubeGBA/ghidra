@@ -197,11 +197,8 @@ public class JavaHelpPlugin extends Plugin implements FrontEndable {
 		if (noHelpActions.contains(actionName)) {
 			return true;
 		}
-		if (isKeybindingOnly(action)) {
-			return true;
-		}
-		return false;
-	}
+        return isKeybindingOnly(action);
+    }
 
 	private boolean isKeybindingOnly(DockingAction action) {
 		if (action.getToolBarData() != null) {
@@ -210,11 +207,8 @@ public class JavaHelpPlugin extends Plugin implements FrontEndable {
 		if (action.getMenuBarData() != null) {
 			return false;
 		}
-		if (action.getPopupMenuData() != null) {
-			return false;
-		}
-		return true;
-	}
+        return action.getPopupMenuData() == null;
+    }
 
 	private void writeHelpInfo(PrintWriter out, HelpInfoObject helpInfo, int num) {
 
@@ -317,15 +311,10 @@ public class JavaHelpPlugin extends Plugin implements FrontEndable {
 				return false;
 			}
 			if (location == null) {
-				if (other.location != null) {
-					return false;
-				}
+                return other.location == null;
 			}
-			else if (!location.equals(other.location)) {
-				return false;
-			}
-			return true;
-		}
+			else return location.equals(other.location);
+        }
 	}
 
 }

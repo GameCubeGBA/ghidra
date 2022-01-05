@@ -92,12 +92,9 @@ public abstract class RenameTask {
         if (renameVarDialog.isCanceled()) {
         	return false;
         }
-		if (oldNameIsCancel && newName.equals(oldName)) {
-			return false;
-		}
-        return true;		
-		
-	}
+        return !oldNameIsCancel || !newName.equals(oldName);
+
+    }
 
 	/**
 	 * Perform the task of selecting a new name and committing it to the database

@@ -32,22 +32,22 @@ public class DatabaseBenchMarks {
 		testOrderedIntInsertions(timer, 100000);
 		testOrderedIntInsertions(timer, 1000000);
 
-		System.out.println("");
+		System.out.println();
 		testOrderedStringInsertions(timer, 1000);
 		testOrderedStringInsertions(timer, 10000);
 		testOrderedStringInsertions(timer, 100000);
 		testOrderedStringInsertions(timer, 1000000);
 
-		System.out.println("");
+		System.out.println();
 		testRandomIntInsertions(timer, 1000);
 		testRandomIntInsertions(timer, 10000);
 		testRandomIntInsertions(timer, 100000);
 		testRandomIntInsertions(timer, 1000000);
 
-		System.out.println("");
+		System.out.println();
 		testIteration(timer);
 
-		System.out.println("");
+		System.out.println();
 		testRandomAccess(timer);
 
 	}

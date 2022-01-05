@@ -208,8 +208,8 @@ public class DefaultDebuggerObjectModelTest implements AsyncTestUtils {
 		AttributesChangedListener attrL = new AttributesChangedListener();
 		model.addModelListener(attrL);
 
-		String str1 = new String("EqualStrings");
-		String str2 = new String("EqualStrings");
+		String str1 = "EqualStrings";
+		String str2 = "EqualStrings";
 		model.root.setAttributes(Map.of("a", str1), "Init");
 		waitOn(model.flushEvents());
 

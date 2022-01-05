@@ -42,12 +42,8 @@ public class HCS12ConstantAnalyzer extends ConstantPropagationAnalyzer {
 		boolean canAnalyze = program.getLanguage().getProcessor()
 				.equals(Processor.findOrPossiblyCreateProcessor(PROCESSOR_NAME));
 
-		if (!canAnalyze) {
-			return false;
-		}
-
-		return true;
-	}
+        return canAnalyze;
+    }
 	
 	private long hcs12TranslatePagedAddress(long addrWordOffset) {
 		

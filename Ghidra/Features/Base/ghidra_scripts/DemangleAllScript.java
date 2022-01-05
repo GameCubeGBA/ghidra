@@ -41,14 +41,15 @@ public class DemangleAllScript extends GhidraScript {
 			if (name.startsWith("s_") || name.startsWith("u_") || name.startsWith("AddrTable")) {
 				continue;
 			}
-
-			if (name.indexOf("::case_0x") > 0) {
-				int pos = name.indexOf("::case_0x");
+			int pos = name.indexOf("::case_0x");
+			if (pos > 0) {
 				name = name.substring(0, pos);
 			}
-			else if (name.indexOf("::switchTable") > 0) {
-				int pos = name.indexOf("::switchTable");
-				name = name.substring(0, pos);
+			else {
+				pos = name.indexOf("::switchTable");
+				if (pos > 0) {
+					name = name.substring(0, pos);
+				}
 			}
 
 			DemanglerCmd cmd = new DemanglerCmd(addr, name);

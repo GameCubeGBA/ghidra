@@ -121,12 +121,8 @@ abstract class FlowArrow {
 		double y = p.y - half;
 
 		Rectangle2D pickArea = new Rectangle2D.Double(x, y, size, size);
-		if (intersectsAnyPartOfArrow(pickArea)) {
-			return true;
-		}
-
-		return false;
-	}
+        return intersectsAnyPartOfArrow(pickArea);
+    }
 
 	private boolean intersectsAnyPartOfArrow(Rectangle2D area) {
 
@@ -144,13 +140,9 @@ abstract class FlowArrow {
 			}
 		}
 
-		if (arrowHead.intersects(area)) {
-			// we know the arrow head has size
-			return true;
-		}
-
-		return false;
-	}
+        // we know the arrow head has size
+        return arrowHead.intersects(area);
+    }
 
 	private void createClickableShapes() {
 		List<Shape> shapes = new ArrayList<>();
@@ -310,15 +302,10 @@ abstract class FlowArrow {
 			return false;
 		}
 		if (start == null) {
-			if (other.start != null) {
-				return false;
-			}
+            return other.start == null;
 		}
-		else if (!start.equals(other.start)) {
-			return false;
-		}
-		return true;
-	}
+		else return start.equals(other.start);
+    }
 
 	public String getDisplayString() {
 		return "<html><table><tr><td>start</td><td>" + HTMLUtilities.escapeHTML(start.toString()) +

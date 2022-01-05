@@ -180,9 +180,7 @@ public abstract class GDynamicColumnTableModel<ROW_TYPE, DATA_SOURCE>
 		if (column instanceof MappedTableColumn) {
 			MappedTableColumn<?, ?, ?, ?> mappedColumn = (MappedTableColumn<?, ?, ?, ?>) column;
 			Class<?> columnClass = mappedColumn.getMappedColumnClass();
-			if (clazz.equals(columnClass)) {
-				return true;
-			}
+            return clazz.equals(columnClass);
 		}
 
 		return false;

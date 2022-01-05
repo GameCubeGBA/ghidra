@@ -59,11 +59,8 @@ public class AssemblyParseToken extends AssemblyParseTreeNode {
 		if (!this.term.equals(that.term)) {
 			return false;
 		}
-		if (!this.str.equals(that.str)) {
-			return false;
-		}
-		return true;
-	}
+        return this.str.equals(that.str);
+    }
 
 	/**
 	 * Get the portion of the input comprising the token

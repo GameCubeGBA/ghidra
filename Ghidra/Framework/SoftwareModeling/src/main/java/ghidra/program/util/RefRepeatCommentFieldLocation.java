@@ -87,13 +87,10 @@ public class RefRepeatCommentFieldLocation extends CommentFieldLocation {
 		if (currentCommentRow != other.currentCommentRow)
 			return false;
 		if (refRepeatAddress == null) {
-			if (other.refRepeatAddress != null)
-				return false;
+            return other.refRepeatAddress == null;
 		}
-		else if (!refRepeatAddress.equals(other.refRepeatAddress))
-			return false;
-		return true;
-	}
+		else return refRepeatAddress.equals(other.refRepeatAddress);
+    }
 
 	@Override
 	public void restoreState(Program p, SaveState obj) {

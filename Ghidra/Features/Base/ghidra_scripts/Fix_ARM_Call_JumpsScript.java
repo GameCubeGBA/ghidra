@@ -225,9 +225,7 @@ public class Fix_ARM_Call_JumpsScript extends GhidraScript {
 
 		if (bbRef.getFlowType().hasFallthrough()) {
 			Function functionAt = currentProgram.getFunctionManager().getFunctionAt(targetAddr);
-			if (functionAt != null) {
-				return true;
-			}
+            return functionAt != null;
 		}
 
 		return false;

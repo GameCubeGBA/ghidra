@@ -146,11 +146,8 @@ public class StringChoices {
 		if (selected != other.selected) {
 			return false;
 		}
-		if (!Arrays.equals(values, other.values)) {
-			return false;
-		}
-		return true;
-	}
+        return Arrays.equals(values, other.values);
+    }
 
 	/**
 	 * @see java.lang.Object#toString()

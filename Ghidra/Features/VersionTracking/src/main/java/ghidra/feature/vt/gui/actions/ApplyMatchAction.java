@@ -66,12 +66,8 @@ public class ApplyMatchAction extends DockingAction {
 		}
 		VTMatchContext matchContext = (VTMatchContext) context;
 		List<VTMatch> matches = matchContext.getSelectedMatches();
-		if (matches.size() == 0) {
-			return false;
-		}
-
-		return true;
-	}
+        return matches.size() != 0;
+    }
 
 	@Override
 	public boolean isAddToPopup(ActionContext context) {

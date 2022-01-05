@@ -40,11 +40,8 @@ public class NameVersions {
 		catch (Exception e) {
 			// log.appendMsg("Unable to demangle: "+info.getName());
 		}
-		if (demangledObj != null) {
-			return demangledObj;
-		}
-		return null;
-	}
+        return demangledObj;
+    }
 
 	private static String getBaseClass(Demangled namespace) {
 		String name = namespace.getNamespaceName();		// First level of namespace

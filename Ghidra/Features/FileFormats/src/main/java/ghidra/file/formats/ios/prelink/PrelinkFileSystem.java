@@ -396,7 +396,7 @@ public class PrelinkFileSystem extends GFileSystemBase implements GFileSystemPro
 		if (parent.equals(child)) {
 			return false;
 		}
-		return child.getPath().indexOf(parent.getPath()) != -1;
+		return child.getPath().contains(parent.getPath());
 	}
 
 	//--------------------------- Legacy code ----------------------------------------------------

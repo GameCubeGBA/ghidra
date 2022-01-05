@@ -319,12 +319,9 @@ public class CompositeVerticalLayoutTextField implements TextField {
 
 	@Override
 	public boolean contains(int x, int y) {
-		if ((x >= startX) && (x < startX + width) && (y >= -heightAbove) &&
-			(y < height - heightAbove)) {
-			return true;
-		}
-		return false;
-	}
+        return (x >= startX) && (x < startX + width) && (y >= -heightAbove) &&
+                (y < height - heightAbove);
+    }
 
 	public String getRowSeparator() {
 		return rowSeparator;

@@ -1062,9 +1062,7 @@ public class ElfHeader implements StructConverter, Writeable {
 			return true;
 		}
 		if (dynamicTable != null) {
-			if (dynamicTable.containsDynamicValue(ElfDynamicType.DT_GNU_PRELINKED)) {
-				return true;
-			}
+            return dynamicTable.containsDynamicValue(ElfDynamicType.DT_GNU_PRELINKED);
 		}
 		return false;
 	}

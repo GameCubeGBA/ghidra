@@ -138,11 +138,8 @@ public class PatternInfoRowObject {
 		if (!Objects.equals(otherRow.cRegFilter, cRegFilter)) {
 			return false;
 		}
-		if (!Objects.equals(alignment, otherRow.alignment)) {
-			return false;
-		}
-		return true;
-	}
+        return Objects.equals(alignment, otherRow.alignment);
+    }
 
 	/**
 	 * Export the patterns to an XML file

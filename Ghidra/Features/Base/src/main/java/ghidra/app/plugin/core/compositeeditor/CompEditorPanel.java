@@ -1181,11 +1181,8 @@ public class CompEditorPanel extends CompositeEditorPanel {
 			if (table.isEditing()) {
 				table.editingCanceled(null);
 			}
-			boolean inserting = false;
-			if (dropAction == DnDConstants.ACTION_COPY) {
-				inserting = true;
-			}
-			dndTableCellRenderer.selectRange(inserting);
+			boolean inserting = dropAction == DnDConstants.ACTION_COPY;
+            dndTableCellRenderer.selectRange(inserting);
 			dndDtiCellRenderer.selectRange(inserting);
 			Point p = e.getLocation();
 			int row = table.rowAtPoint(p);

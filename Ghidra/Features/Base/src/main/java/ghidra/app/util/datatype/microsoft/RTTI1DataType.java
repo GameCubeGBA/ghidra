@@ -301,12 +301,9 @@ public class RTTI1DataType extends RTTIDataType {
 		// Make sure we don't follow flow or validation will get stuck in infinite loop.
 		DataValidationOptions dontFollowOptions = new DataValidationOptions(validationOptions);
 		dontFollowOptions.setValidateReferredToData(false);
-		if (rtti3Address == null ||
-			(validateReferredToData && !rtti3.isValid(program, rtti3Address, dontFollowOptions))) {
-			return false;
-		}
-		return true;
-	}
+        return rtti3Address != null &&
+                (!validateReferredToData || rtti3.isValid(program, rtti3Address, dontFollowOptions));
+    }
 
 	@Override
 	public String getDefaultLabelPrefix() {

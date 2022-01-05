@@ -259,11 +259,8 @@ public class GdbBreakpointInfo {
 		if (this.times != that.times) {
 			return false;
 		}
-		if (!Objects.equals(this.locations, that.locations)) {
-			return false;
-		}
-		return true;
-	}
+        return Objects.equals(this.locations, that.locations);
+    }
 
 	/**
 	 * Get the GDB-assigned breakpoint number

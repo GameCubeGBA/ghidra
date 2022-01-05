@@ -211,11 +211,8 @@ public class Address implements Comparable<Address>{
 		if (op2.offset != offset) {
 			return false; // Not little endian aligned
 		}
-		if (sz2 > sz) {
-			return false; // Not fully contained
-		}
-		return true;
-	}
+        return sz2 <= sz; // Not fully contained
+    }
 
 	public int overlap( int skip, Address op, int size ) {// Where does this+skip fall in op to op+size
 

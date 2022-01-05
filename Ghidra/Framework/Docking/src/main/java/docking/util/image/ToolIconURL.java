@@ -116,15 +116,10 @@ public class ToolIconURL implements Comparable<ToolIconURL> {
 		}
 		ToolIconURL other = (ToolIconURL) obj;
 		if (location == null) {
-			if (other.location != null) {
-				return false;
-			}
+            return other.location == null;
 		}
-		else if (!location.equals(other.location)) {
-			return false;
-		}
-		return true;
-	}
+		else return location.equals(other.location);
+    }
 
 	@Override
 	public String toString() {
@@ -192,11 +187,8 @@ public class ToolIconURL implements Comparable<ToolIconURL> {
 		}
 
 		ImageIcon image = getImageIcon(name);
-		if (image != null) {
-			return image;
-		}
-		return null;
-	}
+        return image;
+    }
 
 	private String stripSizeOffName(String name) {
 		// try the last character...

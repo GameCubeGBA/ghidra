@@ -1511,9 +1511,7 @@ public class LocalBufferFile implements BufferFile {
 			if (file.isFile()) {
 				String name = file.getName();
 				if (prefix == null || name.indexOf(prefix) == 0) {
-					if (ext == null || name.endsWith(ext)) {
-						return true;
-					}
+                    return ext == null || name.endsWith(ext);
 				}
 			}
 			return false;

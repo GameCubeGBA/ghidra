@@ -305,7 +305,7 @@ public class RecoveredClassHelper {
 			// can't just get all that contain vftable because that would get some strings
 			else {
 				String name = vftableSymbol.getName();
-				name = name.substring(1, name.length());
+				name = name.substring(1);
 				if (name.startsWith("vftable")) {
 					vftableSymbolList.add(vftableSymbol);
 				}
@@ -545,11 +545,8 @@ public class RecoveredClassHelper {
 				classes.add(recoveredClass);
 			}
 		}
-		if (classes.size() > 1) {
-			return false;
-		}
-		return true;
-	}
+        return classes.size() <= 1;
+    }
 
 	/**
 	 * Method to return the first reference to the class vftable in the given function
@@ -1300,11 +1297,8 @@ public class RecoveredClassHelper {
 		//remove self
 		classHierarchy.remove(recoveredClass);
 
-		if (classHierarchy.contains(possibleAncestorClass)) {
-			return true;
-		}
-		return false;
-	}
+        return classHierarchy.contains(possibleAncestorClass);
+    }
 
 	/**
 	 * Method to return subList of offset/pcodeOp pairs from the given list that are contained in the current function
@@ -1342,11 +1336,8 @@ public class RecoveredClassHelper {
 
 		Function calledFunction =
 			api.getFunctionAt(calledPcodeOp.getInput(0).getAddress());
-		if (calledFunction == null) {
-			return null;
-		}
 
-		return calledFunction;
+        return calledFunction;
 	}
 
 	/**
@@ -2594,11 +2585,8 @@ public class RecoveredClassHelper {
 			return false;
 		}
 
-		if (!recoveredClass.hasChildClass() || hasChildWithVBaseAndDestructor(recoveredClass)) {
-			return true;
-		}
-		return false;
-	}
+        return !recoveredClass.hasChildClass() || hasChildWithVBaseAndDestructor(recoveredClass);
+    }
 
 	/**
 	 * Method to determine if the given class has a child class with both a vbase destructor and a 
@@ -3616,12 +3604,9 @@ public class RecoveredClassHelper {
 			return true;
 		}
 
-		if (program.getBookmarkManager().getBookmark(address, BookmarkType.ANALYSIS,
-			"Function ID Analyzer") != null) {
-			return true;
-		}
-		return false;
-	}
+        return program.getBookmarkManager().getBookmark(address, BookmarkType.ANALYSIS,
+                "Function ID Analyzer") != null;
+    }
 
 	/**
 	 * Method to remove existing class structures from the data type manager that were replaced by 
@@ -4279,12 +4264,8 @@ public class RecoveredClassHelper {
 			secondFunction = secondFunction.getThunkedFunction(true);
 		}
 
-		if (!constructorList.contains(secondFunction)) {
-			return false;
-		}
-
-		return true;
-	}
+        return constructorList.contains(secondFunction);
+    }
 
 	/**
 	 * Method to identify the operator_new function using found clone functions
@@ -4955,11 +4936,8 @@ public class RecoveredClassHelper {
 		}
 
 		List<RecoveredClass> classHierarchy = childClass.getClassHierarchy();
-		if (classHierarchy.contains(possibleParentClass)) {
-			return true;
-		}
-		return false;
-	}
+        return classHierarchy.contains(possibleParentClass);
+    }
 
 	// may skip a parent so continue through all parents
 	// for multi-inheritance, get the correct parent class for the given vftable
@@ -5740,14 +5718,11 @@ public class RecoveredClassHelper {
 	 */
 	public boolean isClassOffsetToVftableMapComplete(RecoveredClass recoveredClass) {
 
-		if (recoveredClass.getClassOffsetToVftableMap()
-				.values()
-				.containsAll(
-					recoveredClass.getVftableAddresses())) {
-			return true;
-		}
-		return false;
-	}
+        return recoveredClass.getClassOffsetToVftableMap()
+                .values()
+                .containsAll(
+                        recoveredClass.getVftableAddresses());
+    }
 
 	/**
 	 * Method to find deleting destructors that call a destructor but have no reference to a vftable
@@ -6340,11 +6315,8 @@ public class RecoveredClassHelper {
 
 		Bookmark bookmark = bm.getBookmark(address, BookmarkType.ANALYSIS, "Function ID Analyzer");
 
-		if (bookmark == null) {
-			return false;
-		}
-		return true;
-	}
+        return bookmark != null;
+    }
 
 	/**
 	 * Method to identify missing functions using param to _atexit function
@@ -6977,7 +6949,7 @@ public class RecoveredClassHelper {
 				dataType = new Undefined1DataType();
 			}
 
-			String fieldName = new String();
+			String fieldName = "";
 			String comment = null;
 
 			// if the computed class struct has field name (ie from pdb) use it otherwise create one 
@@ -7729,11 +7701,11 @@ public class RecoveredClassHelper {
 		while (description.contains(":")) {
 			monitor.checkCanceled();
 
-			int indexOfColon = description.indexOf(":", 0);
+			int indexOfColon = description.indexOf(":");
 
 			description = description.substring(indexOfColon + 1);
 
-			int endOfBlock = description.indexOf(":", 0);
+			int endOfBlock = description.indexOf(":");
 			if (endOfBlock == -1) {
 				endOfBlock = description.length();
 			}

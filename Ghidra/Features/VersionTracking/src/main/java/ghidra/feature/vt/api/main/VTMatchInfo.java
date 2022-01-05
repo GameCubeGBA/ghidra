@@ -142,12 +142,8 @@ public class VTMatchInfo {
 			return false;
 		}
 
-		if (tag != other.getTag()) {
-			return false;
-		}
-
-		return true;
-	}
+        return tag == other.getTag();
+    }
 
 	@Override
 	public String toString() {

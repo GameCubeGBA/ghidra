@@ -158,12 +158,9 @@ class RestoreTask extends AbstractFileExtractorTask {
 			return true;
 		}
 		String ext = "." + FilenameUtils.getExtension(file.getName());
-		if (GhidraURL.MARKER_FILE_EXTENSION.equalsIgnoreCase(ext)) {
-			// ignore .gpr marker files, any file name
-			return true;
-		}
-		return false;
-	}
+        // ignore .gpr marker files, any file name
+        return GhidraURL.MARKER_FILE_EXTENSION.equalsIgnoreCase(ext);
+    }
 
 	private void openRestoredProject() {
 		try {

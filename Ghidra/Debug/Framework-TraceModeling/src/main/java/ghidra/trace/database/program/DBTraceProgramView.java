@@ -1792,11 +1792,8 @@ public class DBTraceProgramView implements TraceProgramView {
 			TraceFunctionSymbol func = (TraceFunctionSymbol) symbol;
 			return isFunctionVisible(func, lifespan);
 		}
-		if (!viewport.containsAnyUpper(lifespan)) {
-			return false;
-		}
-		return true;
-	}
+        return viewport.containsAnyUpper(lifespan);
+    }
 
 	protected DomainObjectEventQueues isSymbolVisible(TraceAddressSpace space,
 			TraceSymbol symbol) {

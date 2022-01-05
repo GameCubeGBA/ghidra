@@ -300,9 +300,7 @@ public class SortedRangeList implements Iterable<Range> {
 		SortedSet<Range> tail = set.tailSet(key);
 		if (!tail.isEmpty()) {
 			Range next = tail.first();
-			if (next.min <= max) {
-				return true;
-			}
+            return next.min <= max;
 		}
 		return false;
 	}

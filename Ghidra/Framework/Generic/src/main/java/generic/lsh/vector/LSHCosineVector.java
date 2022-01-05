@@ -77,11 +77,8 @@ public class LSHCosineVector implements LSHVector {
 			return false;
 		}
 		LSHCosineVector other = (LSHCosineVector) obj;
-		if (!Arrays.equals(hash, other.hash)) {
-			return false;
-		}
-		return true;
-	}
+        return Arrays.equals(hash, other.hash);
+    }
 
 	/**
 	 * Install hashes and weights directly.  Length is automatically calculated.

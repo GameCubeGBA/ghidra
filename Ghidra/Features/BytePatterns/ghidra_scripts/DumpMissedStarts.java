@@ -38,18 +38,14 @@ public class DumpMissedStarts extends GhidraScript implements PatternFactory {
 	private boolean functionMatchesPattern(byte[] buff, int numbytes) {
 		matchlist.clear();
 		root.sequenceMatch(buff, numbytes, matchlist);
-		if (matchlist.size() > 0)
-			return true;
-		return false;
-	}
+        return matchlist.size() > 0;
+    }
 
 	private boolean detectThunk(Function func, CodeUnit cu) {
 		if (cu == null)
 			return true;
-		if (cu instanceof Data)
-			return true;
-		return false;
-	}
+        return cu instanceof Data;
+    }
 
 	private void writeBytes(Writer w, byte[] buffer, int numbytes) throws IOException {
 		StringBuffer buf = new StringBuffer();

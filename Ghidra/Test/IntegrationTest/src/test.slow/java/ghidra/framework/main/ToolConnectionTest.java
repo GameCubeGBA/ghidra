@@ -219,7 +219,7 @@ public class ToolConnectionTest extends AbstractGhidraHeadedIntegrationTest {
 		for (DockingActionIf a : actions) {
 			String[] menuPath = a.getMenuBarData().getMenuPath();
 			if (menuPath.length > 2) {
-				if (menuPath[1].indexOf(action) >= 0) {
+				if (menuPath[1].contains(action)) {
 					return a;
 				}
 			}

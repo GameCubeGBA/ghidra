@@ -201,11 +201,8 @@ public class DyldCacheUtils {
 					if (f.getName().equals(baseName)) {
 						return false;
 					}
-					if (f.getName().toLowerCase().endsWith(".map")) {
-						return false;
-					}
-					return true;
-				});
+                    return !f.getName().toLowerCase().endsWith(".map");
+                });
 				if (splitFiles != null) {
 					List<File> list = Arrays.asList(splitFiles);
 					Collections.sort(list);

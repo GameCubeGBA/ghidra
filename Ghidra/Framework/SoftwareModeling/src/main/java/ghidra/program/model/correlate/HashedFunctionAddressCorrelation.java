@@ -292,9 +292,8 @@ public class HashedFunctionAddressCorrelation implements FunctionAddressCorrelat
 		count = disambiguateNgramsWithStrategy(new DisambiguateByBytes(),srcEntry,destEntry);
 		if (count != 0) return true;
 		count= disambiguateNgramsWithStrategy(new DisambiguateByParentWithOrder(),srcEntry,destEntry);
-		if (count != 0) return true;
-		return false;
-	}
+        return count != 0;
+    }
 
 	/**
 	 * Check for matches through one set of n-grams.  If non-unique matches exist, attempt to disambiguate.

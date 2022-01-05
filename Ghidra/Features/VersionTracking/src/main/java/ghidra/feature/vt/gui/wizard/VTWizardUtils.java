@@ -38,21 +38,15 @@ public class VTWizardUtils {
 	public static final DomainFileFilter VT_SESSION_FILTER = new DomainFileFilter() {
 		@Override
 		public boolean accept(DomainFile df) {
-			if (VTSessionContentHandler.CONTENT_TYPE.equals(df.getContentType())) {
-				return true;
-			}
-			return false;
-		}
+            return VTSessionContentHandler.CONTENT_TYPE.equals(df.getContentType());
+        }
 	};
 
 	public static final DomainFileFilter PROGRAM_FILTER = new DomainFileFilter() {
 		@Override
 		public boolean accept(DomainFile df) {
-			if (ProgramDB.CONTENT_TYPE.equals(df.getContentType())) {
-				return true;
-			}
-			return false;
-		}
+            return ProgramDB.CONTENT_TYPE.equals(df.getContentType());
+        }
 	};
 
 	static DomainFile chooseDomainFile(Component parent, String domainIdentifier,

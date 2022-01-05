@@ -237,11 +237,8 @@ public class FixedField10 extends FixedField {
 		if (hi8 != other.hi8) {
 			return false;
 		}
-		if (lo2 != other.lo2) {
-			return false;
-		}
-		return true;
-	}
+        return lo2 == other.lo2;
+    }
 
 	@Override
 	public String getValueAsString() {

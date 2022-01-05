@@ -240,11 +240,8 @@ public class CreateFunctionCmd extends BackgroundCommand {
 			}
 		}
 
-		if (functionsCreated == origEntries.getNumAddresses()) {
-			return true;
-		}
-		return false;
-	}
+        return functionsCreated == origEntries.getNumAddresses();
+    }
 
 	/**
 	 * Returns function if create command was successful
@@ -487,11 +484,8 @@ public class CreateFunctionCmd extends BackgroundCommand {
 		}
 		// function already exists, or size is one, must want to fixup the body.
 		//    if re-creating the body, always return true even if the function body didn't change.
-		if (fixupFunctionBody(program, existingFunction, monitor) || recreateFunction) {
-			return true;
-		}
-		return false;
-	}
+        return fixupFunctionBody(program, existingFunction, monitor) || recreateFunction;
+    }
 
 	/**
 	 * resolve thunks by checking for a thunk and creating the thunk if it is one
@@ -753,9 +747,6 @@ public class CreateFunctionCmd extends BackgroundCommand {
 
 		// don't know the body of the thunk.
 		CreateThunkFunctionCmd cmd = new CreateThunkFunctionCmd(entry, body, thunkedAddr);
-		if (cmd.applyTo(program, monitor)) {
-			return true;
-		}
-		return false;
-	}
+        return cmd.applyTo(program, monitor);
+    }
 }

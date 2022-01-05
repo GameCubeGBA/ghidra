@@ -161,11 +161,8 @@ class OldFunctionDataDB {
 	 * @see ghidra.program.model.listing.Function#isStackDepthValid()
 	 */
 	public boolean isStackDepthValid() {
-		if (getStackDepthChange() > 0xffffff) {
-			return false;
-		}
-		return true;
-	}
+        return getStackDepthChange() <= 0xffffff;
+    }
 
 	/**
 	 * Get the first parameter offset for the function stack frame.

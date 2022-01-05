@@ -51,12 +51,8 @@ public interface NumberRangeSubFilterChecker {
 
 		Number upperA = a.getUpperNumber();
 		Number upperB = b.getUpperNumber();
-		if (!isLessThanOrEqual(upperA, upperB)) {
-			return false;
-		}
-
-		return true;
-	}
+        return isLessThanOrEqual(upperA, upperB);
+    }
 
 	private boolean isGreaterThanOrEqual(Number a, Number b) {
 
@@ -71,12 +67,8 @@ public interface NumberRangeSubFilterChecker {
 		Double doubleA = a.doubleValue();
 		Double doubleB = b.doubleValue();
 		int result = doubleA.compareTo(doubleB);
-		if (result > 0) {
-			return true; // a is larger than b
-		}
-
-		return false;
-	}
+        return result > 0; // a is larger than b
+    }
 
 	private boolean isLessThanOrEqual(Number a, Number b) {
 
@@ -91,10 +83,6 @@ public interface NumberRangeSubFilterChecker {
 		Double doubleA = a.doubleValue();
 		Double doubleB = b.doubleValue();
 		int result = doubleA.compareTo(doubleB);
-		if (result < 0) {
-			return true; // a is less than b
-		}
-
-		return false;
-	}
+        return result < 0; // a is less than b
+    }
 }

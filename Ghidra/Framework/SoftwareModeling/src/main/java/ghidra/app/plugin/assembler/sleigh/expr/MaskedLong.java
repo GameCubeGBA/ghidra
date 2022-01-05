@@ -933,11 +933,8 @@ public class MaskedLong implements Comparable<MaskedLong> {
 	 */
 	public boolean agrees(MaskedLong that) {
 		long bothmsk = this.msk & that.msk;
-		if ((this.val & bothmsk) != (that.val & bothmsk)) {
-			return false;
-		}
-		return true;
-	}
+        return (this.val & bothmsk) == (that.val & bothmsk);
+    }
 
 	/**
 	 * Checks if this and a long agree

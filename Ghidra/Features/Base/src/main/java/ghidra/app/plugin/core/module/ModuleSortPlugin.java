@@ -273,10 +273,8 @@ public class ModuleSortPlugin extends ProgramPlugin {
 			if (activeObj != null && activeObj instanceof ProgramNode) {
 				ProgramNode node = (ProgramNode) activeObj;
 
-				if (node.getProgram() != null && node.isModule() &&
-					node.getTree().getSelectionCount() == 1) {
-					return true;
-				}
+                return node.getProgram() != null && node.isModule() &&
+                        node.getTree().getSelectionCount() == 1;
 			}
 			return false;
 		}

@@ -385,11 +385,9 @@ class EditExternalLocationPanel extends JPanel {
 		if (!validLocationName()) { // Empty is considered valid.
 			return false;
 		}
-		if (!validLocationAddress()) { // Empty is considered valid.
-			return false;
-		}
-		return true;
-	}
+        // Empty is considered valid.
+        return validLocationAddress();
+    }
 
 	private boolean validLocationName() {
 		// Will this generate a duplicate name conflict?

@@ -334,13 +334,9 @@ public class RTTI0DataType extends RTTIDataType {
 			return false;
 		}
 
-		if (!validationOptions.shouldIgnoreDefinedData() &&
-			containsDefinedData(listing, startAddress, endAddress)) {
-			return false;
-		}
-
-		return true;
-	}
+        return validationOptions.shouldIgnoreDefinedData() ||
+                !containsDefinedData(listing, startAddress, endAddress);
+    }
 
 	/**
 	 * Gets the total length of the data created when this data type is placed at the indicated

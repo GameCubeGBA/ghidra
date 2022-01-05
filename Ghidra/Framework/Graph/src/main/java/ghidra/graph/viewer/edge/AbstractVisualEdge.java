@@ -151,14 +151,9 @@ public abstract class AbstractVisualEdge<V extends VisualVertex> implements Visu
 			return false;
 		}
 		if (start == null) {
-			if (other.start != null) {
-				return false;
-			}
+            return other.start == null;
 		}
-		else if (!start.equals(other.start)) {
-			return false;
-		}
-		return true;
-	}
+		else return start.equals(other.start);
+    }
 
 }

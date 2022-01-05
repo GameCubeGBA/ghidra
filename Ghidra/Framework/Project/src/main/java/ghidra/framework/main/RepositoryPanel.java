@@ -93,11 +93,8 @@ public class RepositoryPanel extends AbstractWizardJPanel {
 			//
 			return !listModel.contains(name);
 		}
-		if (nameList.getSelectedValue() != null) {
-			return true;
-		}
-		return false;
-	}
+        return nameList.getSelectedValue() != null;
+    }
 
 	/* (non-Javadoc)
 	 * @see ghidra.util.bean.wizard.WizardPanel#getHelpLocation()

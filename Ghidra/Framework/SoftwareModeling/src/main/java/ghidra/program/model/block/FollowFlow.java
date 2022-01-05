@@ -651,18 +651,13 @@ public class FollowFlow {
 	private boolean shouldFollowFlow(FlowType currentFlowType) {
 		boolean shouldFollowFlow = true;
 		// Determine whether or not to follow this particular flow.
-		if ((!followAllFlow) &&
-			((currentFlowType.equals(RefType.COMPUTED_CALL) && !followComputedCall) ||
-				(currentFlowType.equals(RefType.COMPUTED_JUMP) && !followComputedJump) ||
-				(currentFlowType.equals(RefType.CONDITIONAL_JUMP) && !followConditionalJump) ||
-				(currentFlowType.equals(RefType.UNCONDITIONAL_JUMP) && !followUnconditionalJump) ||
-				(currentFlowType.equals(RefType.CONDITIONAL_CALL) && !followConditionalCall) ||
-				(currentFlowType.equals(RefType.UNCONDITIONAL_CALL) && !followUnconditionalCall) || (currentFlowType.equals(RefType.INDIRECTION) && !followPointers))) {
-			shouldFollowFlow = false;
-		}
-		else {
-			shouldFollowFlow = true;
-		}
+        shouldFollowFlow = (followAllFlow) ||
+                ((!currentFlowType.equals(RefType.COMPUTED_CALL) || followComputedCall) &&
+                        (!currentFlowType.equals(RefType.COMPUTED_JUMP) || followComputedJump) &&
+                        (!currentFlowType.equals(RefType.CONDITIONAL_JUMP) || followConditionalJump) &&
+                        (!currentFlowType.equals(RefType.UNCONDITIONAL_JUMP) || followUnconditionalJump) &&
+                        (!currentFlowType.equals(RefType.CONDITIONAL_CALL) || followConditionalCall) &&
+                        (!currentFlowType.equals(RefType.UNCONDITIONAL_CALL) || followUnconditionalCall) && (!currentFlowType.equals(RefType.INDIRECTION) || followPointers));
 		return shouldFollowFlow;
 	}
 

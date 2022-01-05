@@ -49,13 +49,9 @@ public class JavaLoader extends AbstractLibrarySupportLoader {
 	@Override
 	public Collection<LoadSpec> findSupportedLoadSpecs(ByteProvider provider) throws IOException {
 		List<LoadSpec> loadSpecs = new ArrayList<>();
-		boolean validClass = false;
+		boolean validClass = checkClass(provider);
 
-		if (checkClass(provider)) {
-			validClass = true;
-		}
-
-		if (validClass) {
+        if (validClass) {
 			loadSpecs.add(new LoadSpec(this, 0,
 				new LanguageCompilerSpecPair("JVM:BE:32:default", "default"), true));
 		}

@@ -121,9 +121,7 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 		// check for or create function pointer if valid function pointed to
 		Data data = currentProgram.getListing().getDefinedDataAt(address);
 		if (data != null) {
-			if (data.isPointer() && getPointedToFunction(address) != null) {
-				return true;
-			}
+            return data.isPointer() && getPointedToFunction(address) != null;
 		}
 		else {
 
@@ -144,9 +142,8 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 				return false;
 			}
 		}
-		return false;
 
-	}
+    }
 
 	/**
 	 * Method to determine if the given address is a null pointer. If it isn't but is valid length
@@ -175,13 +172,9 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 		}
 
 		PointerDataType pointerDataType = new PointerDataType();
-		if (d.getDataType().isEquivalent(pointerDataType)) {
-			return true;
-		}
+        return d.getDataType().isEquivalent(pointerDataType);
 
-		return false;
-
-	}
+    }
 
 	/**
 	 * Method to check for num zeros at the given address
@@ -297,9 +290,7 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 			if (functionContaining.isThunk() && flowType.isJump()) {
 				return true;
 			}
-			if (flowType.isJump()) {
-				return true;
-			}
+            return flowType.isJump();
 		}
 		return false;
 	}
@@ -500,12 +491,8 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 
 			CreateFunctionCmd cmd = new CreateFunctionCmd(null, subroutineAddresses.getMinAddress(),
 				null, SourceType.DEFAULT);
-			if (cmd.applyTo(prog, monitor)) {
-				return true;
-			}
-
-			return false;
-		}
+            return cmd.applyTo(prog, monitor);
+        }
 		catch (CancelledException e) {
 			// FIXME: this should not be caught by this method and should propogate 
 			return false;
@@ -843,9 +830,7 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 		if (dataType instanceof Pointer) {
 			Pointer ptr = (Pointer) dataType;
 			DataType baseDataType = ptr.getDataType();
-			if (baseDataType instanceof Structure && baseDataType.isNotYetDefined()) {
-				return true;
-			}
+            return baseDataType instanceof Structure && baseDataType.isNotYetDefined();
 		}
 		return false;
 	}
@@ -983,12 +968,8 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 	 */
 	public boolean isEmptyStructure(DataType dataType) {
 
-		if (dataType instanceof Structure && dataType.isNotYetDefined()) {
-			return true;
-		}
-
-		return false;
-	}
+        return dataType instanceof Structure && dataType.isNotYetDefined();
+    }
 
 	/**
 	 * Method to remove all symbols at the given address
@@ -1036,12 +1017,9 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 		// FIXME: if you are going to use a Namespace arg you should its program not currentProgram
 		SymbolIterator namespaceSymbols = currentProgram.getSymbolTable().getSymbols(namespace);
 
-		if (namespaceSymbols.hasNext()) {
-			return true;
-		}
-		return false;
+        return namespaceSymbols.hasNext();
 
-	}
+    }
 
 	/**
 	 * Create data type manager path that will be used when data types are created to place them in the correct folder
@@ -1072,7 +1050,7 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 			boolean insideBrackets = false;
 			int numOpenedBrackets = 0;
 			int index = 0;
-			String newCategoryName = new String();
+			String newCategoryName = "";
 			while (index < categoryName.length()) {
 				monitor.checkCanceled();
 
@@ -1102,7 +1080,7 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 		}
 
 		String path;
-		if (parent.getName().equals("")) {
+		if (parent.getName().isEmpty()) {
 			path = "/" + categoryName;
 		}
 		else {
@@ -1128,20 +1106,14 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 		int numOpenLips = getNumSubstrings(name, "<");
 		int numClosedLips = getNumSubstrings(name, ">");
 
-		if (numOpenLips > 0 && numClosedLips > 0 && numOpenLips == numClosedLips) {
-			return true;
-		}
-		return false;
-	}
+        return numOpenLips > 0 && numClosedLips > 0 && numOpenLips == numClosedLips;
+    }
 
 	private boolean containsSimpleTemplate(String name) {
 
 		int indexOf = name.indexOf(",");
-		if (indexOf == -1) {
-			return true;
-		}
-		return false;
-	}
+        return indexOf == -1;
+    }
 
 	/**
 	 * Method to return the number of the given substrings contained in the given string
@@ -1227,7 +1199,7 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 				// check for a simple internal to the template (ie just one item in it
 				// if that is the case then just keep the original name 
 				if (containsSimpleTemplate(classWithSameShortName.getName())) {
-					classWithSameShortName.addShortenedTemplatedName(new String());
+					classWithSameShortName.addShortenedTemplatedName("");
 					classesWithSameShortnameIterator.remove();
 					classesToProcess.remove(classWithSameShortName);
 				}

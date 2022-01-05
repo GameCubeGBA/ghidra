@@ -424,11 +424,8 @@ public class DefaultThreadRecorder implements ManagedThreadRecorder {
 		if (ent == null) {
 			return true;
 		}
-		if (ent.getValue() == TraceMemoryState.KNOWN) {
-			return false;
-		}
-		return true;
-	}
+        return ent.getValue() != TraceMemoryState.KNOWN;
+    }
 
 	@Override
 	public TargetThread getTargetThread() {

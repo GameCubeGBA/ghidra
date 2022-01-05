@@ -608,9 +608,7 @@ abstract class OperandFieldHelper extends FieldFactory {
 				return false;
 			}
 			Equate equate = program.getEquateTable().getEquate(address, 0, scalar.getValue());
-			if (equate != null && !equate.isValidUUID()) {
-				return true;
-			}
+            return equate != null && !equate.isValidUUID();
 		}
 		return false;
 	}

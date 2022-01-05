@@ -204,9 +204,7 @@ public class RowObjectSelectionManager<T> extends DefaultListSelectionModel
 		// changes
 		if (!isAdjusting) {
 			ignoreSelectionChange = false;
-			if (table.getSelectedRow() != -1) {
-				return true; // the adjustments are done and there is a valid selection
-			}
+            return table.getSelectedRow() != -1; // the adjustments are done and there is a valid selection
 		}
 		return false;
 	}

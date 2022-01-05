@@ -90,10 +90,8 @@ public class FunctionRepeatableCommentFieldLocation extends FunctionLocation {
 		if (getClass() != obj.getClass())
 			return false;
 		FunctionRepeatableCommentFieldLocation other = (FunctionRepeatableCommentFieldLocation) obj;
-		if (!Arrays.equals(commentArray, other.commentArray))
-			return false;
-		return true;
-	}
+        return Arrays.equals(commentArray, other.commentArray);
+    }
 
 	@Override
 	public void saveState(SaveState obj) {

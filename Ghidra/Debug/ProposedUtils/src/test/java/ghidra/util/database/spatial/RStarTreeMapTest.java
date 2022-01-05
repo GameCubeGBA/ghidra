@@ -439,11 +439,8 @@ public class RStarTreeMapTest {
 			if (!r1.contains(shape.getX1(), shape.getY1())) {
 				return false;
 			}
-			if (!r2.contains(shape.getX2(), shape.getY2())) {
-				return false;
-			}
-			return true;
-		}
+            return r2.contains(shape.getX2(), shape.getY2());
+        }
 
 		@Override
 		protected IntRectQuery create(IntRect ir1, IntRect ir2, Rectangle2DDirection newDirection) {

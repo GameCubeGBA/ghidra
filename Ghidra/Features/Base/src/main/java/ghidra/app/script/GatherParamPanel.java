@@ -112,7 +112,7 @@ public class GatherParamPanel extends JPanel {
 
 	public void setParamsInState() {
 		for (String string2 : parameters.keySet()) {
-			String key = string2.toString();
+			String key = string2;
 			ParamComponent pc = parameters.get(key);
 			switch (pc.getType()) {
 				case ADDRESS:
@@ -122,7 +122,7 @@ public class GatherParamPanel extends JPanel {
 					}
 					else {
 						AddressInput addressInput = (AddressInput) pc.getDisplayComponent();
-						state.addEnvironmentVar(key, addressInput.getValue().toString());
+						state.addEnvironmentVar(key, addressInput.getValue());
 					}
 					break;
 				case FILE:
@@ -145,7 +145,7 @@ public class GatherParamPanel extends JPanel {
 
 	public void currentProgramChanged() {
 		for (String string2 : parameters.keySet()) {//OMG!!
-			String key = string2.toString();
+			String key = string2;
 			ParamComponent pc = parameters.get(key);
 			switch (pc.getType()) {
 				case ADDRESS:

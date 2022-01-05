@@ -898,9 +898,7 @@ class ReferenceMerger extends AbstractListingMerger {
 				DiffUtility.getReference(latestPgm, latestPrimary, resultPgm);
 			if (resultForLatest != null) {
 				Reference resultForMy = DiffUtility.getReference(myPgm, myPrimary, resultPgm);
-				if (resultForMy != null && resultForLatest != resultForMy) {
-					return true;
-				}
+                return resultForMy != null && resultForLatest != resultForMy;
 			}
 		}
 		return false;

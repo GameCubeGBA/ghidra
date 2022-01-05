@@ -1228,11 +1228,8 @@ public class BasicCompilerSpec implements CompilerSpec {
 		if (stackGrowsNegative != op2.stackGrowsNegative) {
 			return false;
 		}
-		if (!SystemUtilities.isEqual(stackPointer, op2.stackPointer)) {
-			return false;
-		}
-		return true;
-	}
+        return SystemUtilities.isEqual(stackPointer, op2.stackPointer);
+    }
 
 	@Override
 	public int hashCode() {

@@ -91,13 +91,10 @@ public class VariableLocFieldLocation extends VariableLocation {
 			return false;
 		VariableLocFieldLocation other = (VariableLocFieldLocation) obj;
 		if (loc == null) {
-			if (other.loc != null)
-				return false;
+            return other.loc == null;
 		}
-		else if (!loc.equals(other.loc))
-			return false;
-		return true;
-	}
+		else return loc.equals(other.loc);
+    }
 
 	@Override
 	public void restoreState(Program program1, SaveState obj) {

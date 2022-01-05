@@ -82,11 +82,8 @@ public interface LocationTrackingSpec extends ExtensionPoint {
 		if (space.getFrameLevel() != current.getFrame()) {
 			return false;
 		}
-		if (!range.getLifespan().contains(current.getSnap())) {
-			return false;
-		}
-		return true;
-	}
+        return range.getLifespan().contains(current.getSnap());
+    }
 
 	static LocationTrackingSpec fromConfigName(String name) {
 		synchronized (PRIVATE) {

@@ -884,11 +884,8 @@ public abstract class PcodeCompile {
 			}
 			zerovec = zerovec2;
 		}
-		if (lastsize != 0) {
-			return false;
-		}
-		return true;
-	}
+        return lastsize == 0;
+    }
 
 	public static void entry(String name, Object... args) {
 		StringBuilder sb = new StringBuilder();
@@ -1074,10 +1071,6 @@ public abstract class PcodeCompile {
 		if ("newobject".equals(name)) {
 			return true;
 		}
-		if ("popcount".equals(name)) {
-			return true;
-		}
-
-		return false;
-	}
+        return "popcount".equals(name);
+    }
 }

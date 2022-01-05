@@ -249,11 +249,8 @@ public class AddressSetEditorPanel extends JPanel {
 		if (!minAddress.getAddressSpace().equals(maxAddress.getAddressSpace())) {
 			return false;
 		}
-		if (minAddress.compareTo(maxAddress) > 0) {
-			return false;
-		}
-		return true;
-	}
+        return minAddress.compareTo(maxAddress) <= 0;
+    }
 
 	static class AddressSetListModel extends AbstractListModel<AddressRange> {
 		private List<AddressRange> addressList;

@@ -210,15 +210,10 @@ public final class LanguageCompilerSpecPair implements Comparable<LanguageCompil
 			return false;
 		}
 		if (languageID == null) {
-			if (other.languageID != null) {
-				return false;
-			}
+            return other.languageID == null;
 		}
-		else if (!languageID.equals(other.languageID)) {
-			return false;
-		}
-		return true;
-	}
+		else return languageID.equals(other.languageID);
+    }
 
 	@Override
 	public String toString() {

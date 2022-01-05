@@ -311,11 +311,8 @@ public class ExternalReferencesProvider extends ComponentProviderAdapter {
 			if (!Objects.equals(name, other.name)) {
 				return false;
 			}
-			if (!Objects.equals(path, other.path)) {
-				return false;
-			}
-			return true;
-		}
+            return Objects.equals(path, other.path);
+        }
 
 	}
 
@@ -393,11 +390,8 @@ public class ExternalReferencesProvider extends ComponentProviderAdapter {
 
 		@Override
 		public boolean isCellEditable(int rowIndex, int columnIndex) {
-			if (columnIndex == NAME_COL) {
-				return true;
-			}
-			return false;
-		}
+            return columnIndex == NAME_COL;
+        }
 
 		@Override
 		public List<ExternalNamesRow> getModelData() {

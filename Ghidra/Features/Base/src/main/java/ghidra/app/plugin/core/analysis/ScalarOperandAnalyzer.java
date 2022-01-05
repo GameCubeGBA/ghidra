@@ -196,9 +196,7 @@ public class ScalarOperandAnalyzer extends AbstractAnalyzer {
 		RelocationTable relocationTable = program.getRelocationTable();
 		if (relocationTable.isRelocatable()) {
 			// if it is relocatable, then there should be no pointers in memory, other than relacatable ones
-			if (relocationTable.getSize() > 0 && relocationTable.getRelocation(target) == null) {
-				return false;
-			}
+            return relocationTable.getSize() <= 0 || relocationTable.getRelocation(target) != null;
 		}
 		return true;
 	}
@@ -356,9 +354,7 @@ public class ScalarOperandAnalyzer extends AbstractAnalyzer {
 		// in the middle of a function body, offcut
 		Function func = program.getFunctionManager().getFunctionContaining(addr);
 		if (func != null) {
-			if (!func.getEntryPoint().equals(addr)) {
-				return true;
-			}
+            return !func.getEntryPoint().equals(addr);
 		}
 		return false;
 	}

@@ -741,11 +741,8 @@ public class WindowsResourceReference extends GhidraScript {
 		if ("abcdef".indexOf(charAt) >= 0) {
 			return true;
 		}
-		if ("ABCDEF".indexOf(charAt) >= 0) {
-			return true;
-		}
-		return false;
-	}
+        return "ABCDEF".indexOf(charAt) >= 0;
+    }
 
 	// Decompiler stuff
 

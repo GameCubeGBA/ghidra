@@ -66,10 +66,7 @@ public class GlobalPointerDataDirectory extends DataDirectory {
 	@Override
 	public boolean parse() {
 		int ptr = getPointer();
-		if (ptr < 0) {
-			return false;
-		}
-		return true;
+        return ptr >= 0;
     }
 
     /**

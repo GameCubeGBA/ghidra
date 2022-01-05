@@ -160,11 +160,8 @@ public class JgtTranslatingPlugin<V, E>
 	}
 
 	private boolean checkModifiersForCursor(MouseEvent e) {
-		if (e.getModifiersEx() == 0) {
-			return true;
-		}
-		return false;
-	}
+        return e.getModifiersEx() == 0;
+    }
 
 //==================================================================================================
 // Private methods

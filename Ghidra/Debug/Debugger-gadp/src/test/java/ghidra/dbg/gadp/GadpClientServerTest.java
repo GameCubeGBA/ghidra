@@ -1345,11 +1345,8 @@ public class GadpClientServerTest implements AsyncTestUtils {
 				if (!Objects.equals(this.methodName, that.methodName)) {
 					return false;
 				}
-				if (!Objects.equals(this.args, that.args)) {
-					return false;
-				}
-				return true;
-			}
+                return Objects.equals(this.args, that.args);
+            }
 		}
 
 		public final List<CallEntry> record = new ArrayList<>();

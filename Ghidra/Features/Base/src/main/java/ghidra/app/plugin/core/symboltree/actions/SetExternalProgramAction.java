@@ -60,9 +60,7 @@ public class SetExternalProgramAction extends SymbolTreeContextAction {
 		TreePath[] selectionPaths = context.getSelectedSymbolTreePaths();
 		if (selectionPaths.length == 1) {
 			Object object = selectionPaths[0].getLastPathComponent();
-			if (object instanceof LibrarySymbolNode) {
-				return true;
-			}
+            return object instanceof LibrarySymbolNode;
 		}
 		return false;
 	}

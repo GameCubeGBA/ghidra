@@ -174,13 +174,10 @@ public class OperandFieldLocation extends CodeUnitLocation {
 		if (subOpIndex != other.subOpIndex)
 			return false;
 		if (variableOffset == null) {
-			if (other.variableOffset != null)
-				return false;
+            return other.variableOffset == null;
 		}
-		else if (!variableOffset.equals(other.variableOffset))
-			return false;
-		return true;
-	}
+		else return variableOffset.equals(other.variableOffset);
+    }
 
 	@Override
 	public void restoreState(Program p, SaveState obj) {

@@ -80,9 +80,7 @@ class DnDMoveManager {
             if (destModule.contains(dropNode.getModule())) {
                 return false;
             }
-            if (dropModule.isDescendant(destModule)) {
-                return false;
-            }
+            return !dropModule.isDescendant(destModule);
         }
         return true;
     }
@@ -152,11 +150,8 @@ class DnDMoveManager {
             return true;   // Fragment -> Fragment means Merge Fragments
         }
         ProgramModule dropModule = dropNode.getModule();
-        if (dropModule.isDescendant(destNode.getFragment())) {
-            return false;
-        }
-        return true; // Module -> Fragment means flatten Module, i.e.,
-                     // move all code units from descendant fragments to
+        return !dropModule.isDescendant(destNode.getFragment());// Module -> Fragment means flatten Module, i.e.,
+// move all code units from descendant fragments to
                     // destination fragment...
 	}
 	

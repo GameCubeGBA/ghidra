@@ -162,11 +162,8 @@ public class VisualGraphTranslatingGraphMousePlugin<V extends VisualVertex, E ex
 	}
 
 	private boolean checkModifiersForCursor(MouseEvent e) {
-		if (e.getModifiersEx() == 0) {
-			return true;
-		}
-		return false;
-	}
+        return e.getModifiersEx() == 0;
+    }
 
 //==================================================================================================
 // Private methods
@@ -181,12 +178,8 @@ public class VisualGraphTranslatingGraphMousePlugin<V extends VisualVertex, E ex
 			return false;
 		}
 
-		if (GraphViewerUtils.getEdgeFromPointInViewSpace(viewer, p) != null) {
-			return false;
-		}
-
-		return true;
-	}
+        return GraphViewerUtils.getEdgeFromPointInViewSpace(viewer, p) == null;
+    }
 
 	private void installCursor(Cursor newCursor, MouseEvent e) {
 		VisualizationViewer<V, E> viewer = getViewer(e);

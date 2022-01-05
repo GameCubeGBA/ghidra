@@ -155,10 +155,7 @@ public class ShowCCallsScript extends GhidraScript {
         hfunction = decompRes.getHighFunction();
         docroot = decompRes.getCCodeMarkup();
 
-        if (hfunction == null)
-        	return false;
-
-        return true;
+        return hfunction != null;
     }
 
     /**

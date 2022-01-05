@@ -294,11 +294,8 @@ public class GTaskManager {
 			if (!priorityQ.isEmpty()) {
 				return true;
 			}
-			if (!taskGroupList.isEmpty()) {
-				return true;
-			}
-			return false;
-		}
+            return !taskGroupList.isEmpty();
+        }
 		finally {
 			lock.unlock();
 		}

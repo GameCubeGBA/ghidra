@@ -158,11 +158,8 @@ public interface LogicalBreakpointInternal extends LogicalBreakpoint {
 			if (length != lengthFromBookmark(candBookmark)) {
 				return false;
 			}
-			if (!Objects.equals(kinds, kindsFromBookmark(candBookmark))) {
-				return false;
-			}
-			return true;
-		}
+            return Objects.equals(kinds, kindsFromBookmark(candBookmark));
+        }
 
 		public Program getProgram() {
 			return program;
@@ -312,11 +309,8 @@ public interface LogicalBreakpointInternal extends LogicalBreakpoint {
 			if (trace != bpt.getTrace()) {
 				return false;
 			}
-			if (!address.equals(bpt.getMinAddress())) {
-				return false;
-			}
-			return true;
-		}
+            return address.equals(bpt.getMinAddress());
+        }
 
 		public boolean remove(TraceBreakpoint bpt) {
 			return breakpoints.remove(new IDHashed<>(bpt));

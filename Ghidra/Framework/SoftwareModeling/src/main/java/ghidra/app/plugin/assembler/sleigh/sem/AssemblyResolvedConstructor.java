@@ -84,11 +84,8 @@ public class AssemblyResolvedConstructor extends AssemblyResolution {
 		if (!this.backfills.equals(that.backfills)) {
 			return false;
 		}
-		if (!this.forbids.equals(that.forbids)) {
-			return false;
-		}
-		return true;
-	}
+        return this.forbids.equals(that.forbids);
+    }
 
 	/**
 	 * @see AssemblyResolution#resolved(AssemblyPatternBlock, AssemblyPatternBlock, String, List)

@@ -78,11 +78,8 @@ public class ConvertCharAction extends ConvertConstantAction {
 		int characterClass = Character.getType(codepoint);
 		switch (characterClass) {
 			case Character.SPACE_SEPARATOR:
-				if (codepoint == 0x20) {
-					return false;		// Only the ASCII space is not escaped
-				}
-				return true;
-			case Character.COMBINING_SPACING_MARK:
+                return codepoint != 0x20;		// Only the ASCII space is not escaped
+            case Character.COMBINING_SPACING_MARK:
 			case Character.CONTROL:
 			case Character.ENCLOSING_MARK:
 			case Character.FORMAT:

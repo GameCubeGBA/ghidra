@@ -382,14 +382,10 @@ public class CreateStructureDialog extends DialogComponentProvider {
 
 		// be sure to do the easiest comparisons first, those based on
 		// equality and then do the possibly recursive calls last
-		if ((dtcA.getLength() == dtcB.getLength()) && (dtcA.getOffset() == dtcB.getOffset()) &&
-			(dtcA.getOrdinal() == dtcB.getOrdinal()) &&
-			compareDataTypes(dtcA.getDataType(), dtcB.getDataType())) {
-			return true;
-		}
-
-		return false;
-	}
+        return (dtcA.getLength() == dtcB.getLength()) && (dtcA.getOffset() == dtcB.getOffset()) &&
+                (dtcA.getOrdinal() == dtcB.getOrdinal()) &&
+                compareDataTypes(dtcA.getDataType(), dtcB.getDataType());
+    }
 
 	// called by compareDataTypeComponents() in order to compare the data
 	// types of the components
@@ -404,13 +400,9 @@ public class CreateStructureDialog extends DialogComponentProvider {
 
 			return false;
 		}
-		else if (typeA.getName().equals(typeB.getName()) &&
-			typeA.getLength() == typeB.getLength()) {
-			return true;
-		}
-
-		return false;
-	}
+		else return typeA.getName().equals(typeB.getName()) &&
+                typeA.getLength() == typeB.getLength();
+    }
 
 	/**
 	 * Shows a dialog that allows the user to create a new structure.

@@ -83,12 +83,7 @@ public class AddVarArgsAction extends ListingContextAction {
 			return false;
 		}
 
-		if (loc instanceof FunctionSignatureFieldLocation) {
-			updatePopupMenu(true);
-		}
-		else {
-			updatePopupMenu(false);
-		}
+        updatePopupMenu(loc instanceof FunctionSignatureFieldLocation);
 
 		Function function = functionPlugin.getFunction(context);
 		return ((function != null) && (!function.hasVarArgs()));

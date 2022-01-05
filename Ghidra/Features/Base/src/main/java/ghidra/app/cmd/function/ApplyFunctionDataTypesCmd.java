@@ -130,7 +130,7 @@ public class ApplyFunctionDataTypesCmd extends BackgroundCommand {
 		while (pos >= 0 && Character.isJavaIdentifierPart(name.charAt(pos))) {
 			pos--;
 		}
-		String val = name.substring(pos + 1, name.length());
+		String val = name.substring(pos + 1);
 
 		return val;
 	}

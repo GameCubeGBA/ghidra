@@ -56,7 +56,7 @@ public class CondenseFillerBytes extends GhidraScript {
 			filler = "0x" + determineFillerValue();
 		}
 		else {
-			filler = "0x" + new String(fillValue);
+			filler = "0x" + fillValue;
 		}
 		println("filler byte chosen: " + filler);
 

@@ -192,11 +192,8 @@ public class VersionHistoryPanel extends JPanel implements Draggable {
 	@Override
 	public boolean isStartDragOk(DragGestureEvent e) {
 		int row = table.rowAtPoint(e.getDragOrigin());
-		if (row >= 0) {
-			return true;
-		}
-		return false;
-	}
+        return row >= 0;
+    }
 
 	@Override
 	public void move() {

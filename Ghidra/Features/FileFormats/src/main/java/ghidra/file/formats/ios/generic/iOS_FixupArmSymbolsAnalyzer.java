@@ -106,7 +106,7 @@ public class iOS_FixupArmSymbolsAnalyzer extends AbstractAnalyzer {
 
 		String string = new String(bytes).trim();
 
-		if (string.indexOf("Apple") != -1) {
+		if (string.contains("Apple")) {
 			if (string.startsWith("SecureROM")) {
 				return true;
 			}
@@ -119,9 +119,7 @@ public class iOS_FixupArmSymbolsAnalyzer extends AbstractAnalyzer {
 			if (string.startsWith("iBEC")) {
 				return true;
 			}
-			if (string.startsWith("iBSS")) {
-				return true;
-			}
+            return string.startsWith("iBSS");
 		}
 
 		return false;

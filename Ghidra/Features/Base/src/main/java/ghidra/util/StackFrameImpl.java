@@ -367,10 +367,7 @@ class StackFrameImpl implements StackFrame {
 				break;
 			}
 		}
-		if (index == 0) {
-			return 0;
-		}
-		return index;
+        return index;
 	}
 
 	/**

@@ -151,11 +151,8 @@ public class RegisterBuilder {
 		if (parent.getLeastSignificantBit() != 0) {
 			return false;
 		}
-		if (parent.getBitLength() != parent.getMinimumByteSize() * 8) {
-			return false;
-		}
-		return true;
-	}
+        return parent.getBitLength() == parent.getMinimumByteSize() * 8;
+    }
 
 	/**
 	 * Returns the register with the given name;

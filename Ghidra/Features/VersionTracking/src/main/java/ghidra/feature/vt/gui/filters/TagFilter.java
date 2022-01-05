@@ -297,12 +297,8 @@ public class TagFilter extends AncillaryFilter<VTMatch> {
 		// consists of: 'cat', 'dog', 'mouse'.  We would then be a sub-filter if the other 
 		// filter's set consists of: 'cat', 'dog'.
 		//
-		if (names.containsAll(otherNames)) {
-			return true;
-		}
-
-		return false;
-	}
+        return names.containsAll(otherNames);
+    }
 
 	@Override
 	public String toString() {

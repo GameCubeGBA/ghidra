@@ -328,7 +328,7 @@ public abstract class DemangledObject implements Demangled {
 
 		String comment = program.getListing().getComment(CodeUnit.PLATE_COMMENT, address);
 		String newComment = generatePlateComment();
-		if (comment == null || comment.indexOf(newComment) < 0) {
+		if (comment == null || !comment.contains(newComment)) {
 			if (comment == null) {
 				comment = newComment;
 			}
@@ -526,7 +526,7 @@ public abstract class DemangledObject implements Demangled {
 		// leaves us with some of the template arguments.  Also, throw on some of the
 		// trailing data, in case that is helpful.
 		StringBuilder buffy = new StringBuilder();
-		buffy.append(name.substring(0, SymbolUtilities.MAX_SYMBOL_NAME_LENGTH / 2));
+		buffy.append(name, 0, SymbolUtilities.MAX_SYMBOL_NAME_LENGTH / 2);
 		buffy.append("...");
 		buffy.append(name.substring(length - 100)); // trailing data
 		return buffy.toString();

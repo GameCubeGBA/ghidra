@@ -60,11 +60,8 @@ public class FunctionSignatureTableColumn
 	@Override
 	public Function getValue(Function rowObject, Settings settings, Program program,
 			ServiceProvider serviceProvider) throws IllegalArgumentException {
-		if (rowObject == null) {
-			return null;
-		}
 
-		return rowObject;
+        return rowObject;
 	}
 
 	@Override

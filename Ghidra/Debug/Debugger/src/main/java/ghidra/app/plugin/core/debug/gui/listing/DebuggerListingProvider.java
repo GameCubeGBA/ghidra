@@ -100,11 +100,8 @@ public class DebuggerListingProvider extends CodeViewerProvider {
 		if (!Objects.equals(a.getThread(), b.getThread())) {
 			return false; // for reg/pc tracking
 		}
-		if (!Objects.equals(a.getFrame(), b.getFrame())) {
-			return false; // for reg/pc tracking
-		}
-		return true;
-	}
+        return Objects.equals(a.getFrame(), b.getFrame()); // for reg/pc tracking
+    }
 
 	protected class SyncToStaticListingAction extends AbstractSyncToStaticListingAction {
 		public SyncToStaticListingAction() {
@@ -673,11 +670,8 @@ public class DebuggerListingProvider extends CodeViewerProvider {
 		if (curView.getTrace() != destView.getTrace()) {
 			return true;
 		}
-		if (!Objects.equals(cur.getAddress(), dest.getAddress())) {
-			return true;
-		}
-		return false;
-	}
+        return !Objects.equals(cur.getAddress(), dest.getAddress());
+    }
 
 	/**
 	 * {@inheritDoc}
@@ -717,13 +711,10 @@ public class DebuggerListingProvider extends CodeViewerProvider {
 				if (!gotoProgram.getMemory().contains(location.getAddress())) {
 					return false;
 				}
-				if (super.goTo(gotoProgram, location)) {
-					//doSyncToStatic(location);
-					//doAutoImportCurrentModule();
-					return true;
-				}
-				return false;
-			}
+                //doSyncToStatic(location);
+                //doAutoImportCurrentModule();
+                return super.goTo(gotoProgram, location);
+            }
 		});
 	}
 

@@ -136,10 +136,8 @@ public class User implements Comparable<User>, Serializable {
 		}
 		else if (!name.equals(other.name))
 			return false;
-		if (permission != other.permission)
-			return false;
-		return true;
-	}
+        return permission == other.permission;
+    }
 
 	@Override
 	public int compareTo(User other) {

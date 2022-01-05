@@ -193,13 +193,9 @@ public abstract class AutoLookup {
 			return true;
 		}
 
-		if (event.isActionKey() || event.getKeyChar() == KeyEvent.CHAR_UNDEFINED ||
-			Character.isISOControl(event.getKeyChar())) {
-			return true;
-		}
-
-		return false;
-	}
+        return event.isActionKey() || event.getKeyChar() == KeyEvent.CHAR_UNDEFINED ||
+                Character.isISOControl(event.getKeyChar());
+    }
 
 	private boolean isUnmodifiedOrShift(int modifiers) {
 		if (modifiers == 0) {

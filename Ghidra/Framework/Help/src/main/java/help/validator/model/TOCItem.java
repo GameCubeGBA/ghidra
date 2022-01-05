@@ -201,15 +201,10 @@ public abstract class TOCItem {
 			return false;
 		}
 		if (textAttribute == null) {
-			if (other.textAttribute != null) {
-				return false;
-			}
+            return other.textAttribute == null;
 		}
-		else if (!textAttribute.equals(other.textAttribute)) {
-			return false;
-		}
-		return true;
-	}
+		else return textAttribute.equals(other.textAttribute);
+    }
 
 	/**
 	 * True if the two items are the same, except that they come from a different source file.
@@ -253,15 +248,10 @@ public abstract class TOCItem {
 			return false;
 		}
 		if (textAttribute == null) {
-			if (other.textAttribute != null) {
-				return false;
-			}
+            return other.textAttribute == null;
 		}
-		else if (!textAttribute.equals(other.textAttribute)) {
-			return false;
-		}
-		return true;
-	}
+		else return textAttribute.equals(other.textAttribute);
+    }
 
 	public void writeContents(LinkDatabase linkDatabase, PrintWriter writer, int indentLevel) {
 		// if I have no children, then just write out a simple tag

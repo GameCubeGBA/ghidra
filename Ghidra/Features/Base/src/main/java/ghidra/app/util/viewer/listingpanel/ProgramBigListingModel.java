@@ -343,9 +343,7 @@ public class ProgramBigListingModel implements ListingModel, FormatModelListener
 		if (cu instanceof Data) {
 			Data data = (Data) cu;
 			if (data.getNumComponents() > 0) {
-				if (openCloseMgr.isOpen(data.getMinAddress())) {
-					return true;
-				}
+                return openCloseMgr.isOpen(data.getMinAddress());
 			}
 		}
 		return false;

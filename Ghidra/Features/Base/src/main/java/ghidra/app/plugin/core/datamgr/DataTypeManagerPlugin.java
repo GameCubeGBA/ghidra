@@ -333,12 +333,9 @@ public class DataTypeManagerPlugin extends ProgramPlugin
 		}
 		editorManager.dismissEditors(null);
 		dataTypeManagerHandler.updateKnownOpenArchives();
-		if (!ArchiveUtils.canClose(dataTypeManagerHandler.getAllModifiedFileArchives(),
-			provider.getComponent())) {
-			return false;
-		}
-		return true;
-	}
+        return ArchiveUtils.canClose(dataTypeManagerHandler.getAllModifiedFileArchives(),
+                provider.getComponent());
+    }
 
 	@Override
 	protected void close() {
@@ -428,7 +425,7 @@ public class DataTypeManagerPlugin extends ProgramPlugin
 				.findFilesByExtensionInApplication(FileDataTypeManager.SUFFIX)) {
 			Path path = new Path(archiveFile);
 			String absoluteFilePath = path.getPathAsString();
-			if (absoluteFilePath.indexOf("data/typeinfo") < 0) {
+			if (!absoluteFilePath.contains("data/typeinfo")) {
 				continue;
 			}
 			RecentlyOpenedArchiveAction action = new RecentlyOpenedArchiveAction(this,
@@ -794,10 +791,7 @@ public class DataTypeManagerPlugin extends ProgramPlugin
 
 	@Override
 	protected boolean saveData() {
-		if (!ArchiveUtils.canClose(dataTypeManagerHandler.getAllFileOrProjectArchives(),
-			provider.getComponent())) {
-			return false;
-		}
-		return true;
-	}
+        return ArchiveUtils.canClose(dataTypeManagerHandler.getAllFileOrProjectArchives(),
+                provider.getComponent());
+    }
 }

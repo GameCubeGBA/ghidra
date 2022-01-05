@@ -60,13 +60,10 @@ public class PcodeFieldLocation extends ProgramLocation {
 			return false;
 		PcodeFieldLocation other = (PcodeFieldLocation) obj;
 		if (pcodeStrings == null) {
-			if (other.pcodeStrings != null)
-				return false;
+            return other.pcodeStrings == null;
 		}
-		else if (!pcodeStrings.equals(other.pcodeStrings))
-			return false;
-		return true;
-	}
+		else return pcodeStrings.equals(other.pcodeStrings);
+    }
 
 	@Override
 	public void saveState(SaveState obj) {

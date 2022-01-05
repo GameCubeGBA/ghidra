@@ -260,11 +260,8 @@ public class TypeDescriptorModel extends AbstractCreateDataTypeModel {
 		catch (CancelledException e) {
 			throw new AssertException(e);
 		}
-		if (typeInfoVftableAddress != null) {
-			return true;
-		}
-		return false;
-	}
+        return typeInfoVftableAddress != null;
+    }
 
 	/**
 	 * Gets the TypeDescriptor structure for this model's program.

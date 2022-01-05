@@ -586,11 +586,8 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 	//   might (?) not return the same thing.  Remedy?
 	public TargetObject getSelectedObject() {
 		TargetObject selectedObject = pane.getSelectedObject();
-		if (selectedObject != null) {
-			return selectedObject;
-		}
-		return null;
-	}
+        return selectedObject;
+    }
 
 	public void addTree(ObjectContainer container) {
 		ObjectTree objTree = new ObjectTree(container);
@@ -1501,7 +1498,7 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 
 	public void performStepLast(ActionContext context) {
 		performAction(context, false, TargetSteppable.class, s -> {
-			if (extendedStep.equals("")) {
+			if (extendedStep.isEmpty()) {
 				return s.step(TargetStepKind.EXTENDED);
 			}
 			else {

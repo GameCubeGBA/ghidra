@@ -197,11 +197,8 @@ public class ProgramExaminer {
 		if (dataType instanceof IconResourceDataType) {
 			return true;
 		}
-		if (dataType instanceof JPEGDataType) {
-			return true;
-		}
-		return false;
-	}
+        return dataType instanceof JPEGDataType;
+    }
 
 //==================================================================================================
 // static methods

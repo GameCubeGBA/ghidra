@@ -102,13 +102,8 @@ public class MissingTOCTargetIDInvalidLink implements InvalidLink {
 			return false;
 		}
 		if (item == null) {
-			if (other.item != null) {
-				return false;
-			}
+            return other.item == null;
 		}
-		else if (!item.equals(other.item)) {
-			return false;
-		}
-		return true;
-	}
+		else return item.equals(other.item);
+    }
 }

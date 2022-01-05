@@ -98,11 +98,8 @@ public class UndefinedFunction implements Function {
 			return false;
 		}
 
-		if (!SystemUtilities.isEqual(getBody(), otherFunc.getBody())) {
-			return false;
-		}
-		return true;
-	}
+        return SystemUtilities.isEqual(getBody(), otherFunc.getBody());
+    }
 
 	@Override
 	public boolean isExternal() {

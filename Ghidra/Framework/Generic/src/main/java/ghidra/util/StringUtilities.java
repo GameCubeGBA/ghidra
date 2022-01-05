@@ -463,9 +463,7 @@ public class StringUtilities {
 		}
 		int endIndex = startIndex + length;
 		if (endIndex < text.length()) {
-			if (Character.isJavaIdentifierPart(text.charAt(endIndex))) {
-				return false;
-			}
+            return !Character.isJavaIdentifierPart(text.charAt(endIndex));
 		}
 
 		return true;
@@ -829,8 +827,8 @@ public class StringUtilities {
 		if (string1 == null && string2 == null) {
 			return null; // Both strings are null;
 		}
-		boolean hasString1 = (string1 != null && !string1.equals(""));
-		boolean hasString2 = (string2 != null && !string2.equals(""));
+		boolean hasString1 = (string1 != null && !string1.isEmpty());
+		boolean hasString2 = (string2 != null && !string2.isEmpty());
 
 		if (hasString1) {
 			if (hasString2) {
@@ -927,9 +925,9 @@ public class StringUtilities {
 		}
 
 		StringBuilder buffy = new StringBuilder();
-		buffy.append(s.substring(0, lhsSize));
+		buffy.append(s, 0, lhsSize);
 		buffy.append(ELLIPSES);
-		buffy.append(s.substring(len - rhsSize, len));
+		buffy.append(s, len - rhsSize, len);
 
 		return buffy.toString();
 	}
@@ -945,7 +943,7 @@ public class StringUtilities {
 	 * @return The updated string.
 	 */
 	public static String fixMultipleAsterisks(String value) {
-		if (value.indexOf("**") < 0) {
+		if (!value.contains("**")) {
 			return value;
 		}
 

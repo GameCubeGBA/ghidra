@@ -375,11 +375,8 @@ public class DataTreeDialogTest extends AbstractGhidraHeadedIntegrationTest {
 		 */
 		@Override
 		public boolean accept(DomainFile df) {
-			if (df.getName().startsWith("tN")) {
-				return true;
-			}
-			return false;
-		}
+            return df.getName().startsWith("tN");
+        }
 	}
 
 }

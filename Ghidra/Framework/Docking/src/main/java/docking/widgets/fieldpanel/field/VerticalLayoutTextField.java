@@ -369,12 +369,9 @@ public class VerticalLayoutTextField implements TextField {
 
 	@Override
 	public boolean contains(int x, int y) {
-		if ((x >= startX) && (x < startX + width) && (y >= -heightAbove) &&
-			(y < height - heightAbove)) {
-			return true;
-		}
-		return false;
-	}
+        return (x >= startX) && (x < startX + width) && (y >= -heightAbove) &&
+                (y < height - heightAbove);
+    }
 
 	@Override
 	public int getScrollableUnitIncrement(int topOfScreen, int direction, int max) {

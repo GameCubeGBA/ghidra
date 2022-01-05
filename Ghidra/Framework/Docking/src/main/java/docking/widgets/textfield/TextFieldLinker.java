@@ -132,11 +132,8 @@ public class TextFieldLinker {
 			if (!this.text.equals(that.text)) {
 				return false;
 			}
-			if (this.caret != that.caret) {
-				return false;
-			}
-			return true;
-		}
+            return this.caret == that.caret;
+        }
 
 		protected FieldState copy() {
 			FieldState cp = new FieldState();
@@ -180,11 +177,8 @@ public class TextFieldLinker {
 			if (this.whichFocus != that.whichFocus) {
 				return false;
 			}
-			if (!this.fieldStates.equals(that.fieldStates)) {
-				return false;
-			}
-			return true;
-		}
+            return this.fieldStates.equals(that.fieldStates);
+        }
 
 		/**
 		 * Copy the state
@@ -303,7 +297,7 @@ public class TextFieldLinker {
 				result.append(linkedFields.get(field - 1).sep);
 			}
 			FieldState fs = fieldStates.get(field);
-			result.append(fs.text.substring(0, Math.min(fs.caret, fs.text.length())));
+			result.append(fs.text, 0, Math.min(fs.caret, fs.text.length()));
 			return result.toString();
 		}
 

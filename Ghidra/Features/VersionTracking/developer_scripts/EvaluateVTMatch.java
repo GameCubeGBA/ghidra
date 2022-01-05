@@ -115,10 +115,8 @@ public class EvaluateVTMatch extends GhidraScript {
 				Function next = functions.next();
 				if (next.isThunk()) continue;
 				CodeUnit cu = listing.getCodeUnitAt(next.getEntryPoint());
-				boolean hasbody = false;
-				if ((cu != null) && (cu instanceof Instruction))
-					hasbody = true;
-				String funcName = getName(next);
+				boolean hasbody = (cu != null) && (cu instanceof Instruction);
+                String funcName = getName(next);
 				MyFunction myRec = mymap.get(funcName);
 				if (myRec == null) {
 					myRec = new MyFunction(funcName);

@@ -435,11 +435,8 @@ public class WindowLocationPlugin extends Plugin {
 			}
 
 			WindowInfo other = (WindowInfo) obj;
-			if (!Objects.equals(window, other.window)) {
-				return false;
-			}
-			return true;
-		}
+            return Objects.equals(window, other.window);
+        }
 
 		@Override
 		public String toString() {

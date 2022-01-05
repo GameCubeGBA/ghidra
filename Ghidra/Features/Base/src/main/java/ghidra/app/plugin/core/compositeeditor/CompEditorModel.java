@@ -1069,12 +1069,9 @@ public abstract class CompEditorModel extends CompositeEditorModel {
 		if (rowIndex >= numRowComponents) {
 			return true; // Beyond last component.
 		}
-		if (rowIndex + 1 == numRowComponents) {
-			// On last displayed component.
-			return true;
-		}
-		return false;
-	}
+        // On last displayed component.
+        return rowIndex + 1 == numRowComponents;
+    }
 
 	/**
 	 * Determine whether or not there are only undefined data types from the indicated rowIndex
@@ -1269,7 +1266,7 @@ public abstract class CompEditorModel extends CompositeEditorModel {
 
 	@Override
 	public void setComponentComment(int rowIndex, String comment) throws InvalidInputException {
-		if (comment.equals("")) {
+		if (comment.isEmpty()) {
 			comment = null;
 		}
 		getComponent(rowIndex).setComment(comment);

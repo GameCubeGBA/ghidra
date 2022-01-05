@@ -280,10 +280,7 @@ public class DebugInfoEntry {
 			return false;
 		}
 		DebugInfoEntry other = (DebugInfoEntry) obj;
-		if (offset != other.offset) {
-			return false;
-		}
-		return true;
-	}
+        return offset == other.offset;
+    }
 
 }

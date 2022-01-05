@@ -126,11 +126,8 @@ public class DbgBreakpointInfo {
 		if (!Objects.equals(this.offset, that.offset)) {
 			return false;
 		}
-		if (this.enabled != that.enabled) {
-			return false;
-		}
-		return true;
-	}
+        return this.enabled == that.enabled;
+    }
 
 	/**
 	 * Get the Dbg-assigned breakpoint number

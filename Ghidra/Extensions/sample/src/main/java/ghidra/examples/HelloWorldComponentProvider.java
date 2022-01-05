@@ -99,11 +99,8 @@ public class HelloWorldComponentProvider extends ComponentProviderAdapter {
 			public boolean isAddToPopup(ActionContext context) {
 				// popup only if menu is over MyButton (to demo context--this is created below
 				// in getActionContext(MouseEvent))
-				if (context.getContextObject() instanceof MyButton) {
-					return true;
-				}
-				return false;
-			}
+                return context.getContextObject() instanceof MyButton;
+            }
 		};
 		popupAction.setEnabled(true);
 		popupAction.setPopupMenuData(new MenuData(new String[] { "Example of Popup" }));

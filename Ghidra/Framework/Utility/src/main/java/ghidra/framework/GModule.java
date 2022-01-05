@@ -179,11 +179,8 @@ public class GModule {
 		if (EXCLUDED_DIRECTORY_NAMES.contains(childName)) {
 			return false;
 		}
-		if (dataSearchIgnoreDirs.contains(childName)) {
-			return false;
-		}
-		return true;
-	}
+        return !dataSearchIgnoreDirs.contains(childName);
+    }
 
 	public String getName() {
 		return moduleRoot.getName();

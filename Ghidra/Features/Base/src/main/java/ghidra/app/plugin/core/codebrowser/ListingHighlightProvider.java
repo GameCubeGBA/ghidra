@@ -169,9 +169,7 @@ public class ListingHighlightProvider
 		}
 		if (end < text.length() - 1) {
 			char c = text.charAt(end + 1);
-			if (Character.isLetterOrDigit(c)) {
-				return false;
-			}
+            return !Character.isLetterOrDigit(c);
 		}
 		return true;
 	}

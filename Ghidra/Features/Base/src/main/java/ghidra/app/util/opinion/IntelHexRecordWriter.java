@@ -53,11 +53,7 @@ public class IntelHexRecordWriter {
         }
 
         if (isSegmented == null) {
-            if (address.getAddressSpace() instanceof SegmentedAddressSpace) {
-                isSegmented = true;
-            } else {
-                isSegmented = false;
-            }
+            isSegmented = address.getAddressSpace() instanceof SegmentedAddressSpace;
         }
 
         long offset;

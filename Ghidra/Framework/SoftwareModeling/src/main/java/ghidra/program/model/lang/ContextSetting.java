@@ -120,11 +120,8 @@ public class ContextSetting {
 		if (!register.equals(op2.register)) {
 			return false;
 		}
-		if (!value.equals(op2.value)) {
-			return false;
-		}
-		return true;
-	}
+        return value.equals(op2.value);
+    }
 
 	@Override
 	public int hashCode() {

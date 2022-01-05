@@ -104,16 +104,13 @@ class MemReferenceDB extends ReferenceDB {
 			if (compatibleFromAddr == null) {
 				compatibleFromAddr = fromAddr;
 			}
-			if (!compatibleFromAddr.equals(memRef.fromAddr) || opIndex != memRef.opIndex ||
-				sourceType != memRef.sourceType || refType != memRef.getReferenceType() ||
-				toAddr.getOffset() != memRef.toAddr.getOffset() ||
-				isPrimary != memRef.isPrimary() ||
-				isShiftedReference() != memRef.isShiftedReference() ||
-				isOffsetReference() != memRef.isOffsetReference()) {
-				return false;
-			}
-			return true;
-		}
+            return compatibleFromAddr.equals(memRef.fromAddr) && opIndex == memRef.opIndex &&
+                    sourceType == memRef.sourceType && refType == memRef.getReferenceType() &&
+                    toAddr.getOffset() == memRef.toAddr.getOffset() &&
+                    isPrimary == memRef.isPrimary() &&
+                    isShiftedReference() == memRef.isShiftedReference() &&
+                    isOffsetReference() == memRef.isOffsetReference();
+        }
 		else if (obj instanceof Reference) {
 			Reference ref = (Reference) obj;
 			return fromAddr.equals(ref.getFromAddress()) && toAddr.equals(ref.getToAddress()) &&

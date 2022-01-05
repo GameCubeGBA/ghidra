@@ -85,11 +85,8 @@ public interface TargetObjectSchema {
 				return false;
 			}
 			SchemaName that = (SchemaName) obj;
-			if (!this.name.equals(that.name)) {
-				return false;
-			}
-			return true;
-		}
+            return this.name.equals(that.name);
+        }
 
 		@Override
 		public int hashCode() {

@@ -242,7 +242,7 @@ class StringDiffUtils {
 		StringBuilder buf = new StringBuilder(s.length());
 		for (StringDiff element : diffs) {
 			if (element.start > pos) {
-				buf.append(s.substring(pos, element.start));
+				buf.append(s, pos, element.start);
 				pos = element.start;
 			}
 
@@ -329,15 +329,10 @@ class StringDiffUtils {
 				return false;
 			}
 			if (text == null) {
-				if (other.text != null) {
-					return false;
-				}
+                return other.text == null;
 			}
-			else if (!text.equals(other.text)) {
-				return false;
-			}
-			return true;
-		}
+			else return text.equals(other.text);
+        }
 	}
 
 	private static class LineLcs extends ReducingListBasedLcs<Line> {

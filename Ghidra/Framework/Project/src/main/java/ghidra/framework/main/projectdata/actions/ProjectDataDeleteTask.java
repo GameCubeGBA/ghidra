@@ -184,13 +184,9 @@ public class ProjectDataDeleteTask extends Task {
 			" versioned and checked-out files in the requested set of files that cannot be deleted.</div>" +
 			"<div style='margin-bottom: 20pt; text-align: center;'>Skip these files and continue or cancel delete operation?</div>";
 
-		if (OptionDialog.showOptionDialog(parentComponent, "Continue and Skip Problem Files?", msg,
-			"Skip and Continue") != OptionDialog.OPTION_ONE) {
-			return false;
-		}
-
-		return true;
-	}
+        return OptionDialog.showOptionDialog(parentComponent, "Continue and Skip Problem Files?", msg,
+                "Skip and Continue") == OptionDialog.OPTION_ONE;
+    }
 
 	private boolean confirmDeleteFiles() {
 

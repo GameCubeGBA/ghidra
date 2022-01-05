@@ -264,7 +264,7 @@ def saveItem(fin, fout, length) {
 
 	ZipInputStream zipIn = new ZipInputStream(fin);
 	ZipEntry entry = zipIn.getNextEntry();
-	if (entry == null || !ZIP_ENTRY_NAME.equals(entry.getName())) {
+	if (entry == null || ZIP_ENTRY_NAME != entry.getName()) {
 		throw new IOException("Data error");
 	}
 
@@ -279,5 +279,4 @@ def saveItem(fin, fout, length) {
 		len -= cnt;
 		cnt = (int) (len < IO_BUFFER_SIZE ? len : IO_BUFFER_SIZE);
 	}
-
 }

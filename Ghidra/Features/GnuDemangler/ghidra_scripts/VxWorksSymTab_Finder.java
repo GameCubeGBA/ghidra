@@ -307,11 +307,8 @@ public class VxWorksSymTab_Finder extends GhidraScript {
 	//------------------------------------------------------------------------
 	private boolean isAddress(long offset, MemoryBlock block) {
 
-		if (block.getStart().getOffset() <= offset && block.getEnd().getOffset() >= offset) {
-			return true;
-		}
-		return false;
-	}
+        return block.getStart().getOffset() <= offset && block.getEnd().getOffset() >= offset;
+    }
 
 	//------------------------------------------------------------------------
 	// isString
@@ -348,11 +345,9 @@ public class VxWorksSymTab_Finder extends GhidraScript {
 			}
 		}
 
-		if (_byte == 0x00) {
-			return true;  // Scan stopped at null.
-		}
-		return false; // Scan stopped at invalid char.
-	}
+        return _byte == 0x00;  // Scan stopped at null.
+// Scan stopped at invalid char.
+    }
 
 	//------------------------------------------------------------------------
 	// clearString

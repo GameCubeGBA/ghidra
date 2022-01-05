@@ -111,7 +111,7 @@ public class FindRunsOfPointersScript extends GhidraScript {
 		println("Table address      Dist bet ptrs     Num ptrs       Ref found");
 		for (int j = 0; j < tableArray.size(); j++) {
 			Table ptrTable = tableArray.get(j);
-			String refString = new String();
+			String refString = "";
 			if (ptrTable.getRef() != null) {
 				refString = " at " + ptrTable.getRef().toString();
 				println("    " + ptrTable.getTopAddr().toString() + "             " +

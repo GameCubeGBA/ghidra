@@ -100,9 +100,7 @@ public class OpenCloseFieldFactory extends FieldFactory {
 		Data parent = data.getParent();
 		if (parent != null) {
 			Data d2 = parent.getComponent(parent.getNumComponents() - 1);
-			if (d2 == data) {
-				return true;
-			}
+            return d2 == data;
 		}
 		return false;
 	}

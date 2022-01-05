@@ -258,10 +258,10 @@ public class ApplyFidEntriesCommand extends BackgroundCommand {
 		else {
 			addFunctionLabelMultipleMatches(function, monitor);
 		}
-		if (plateCommentContents != null && !plateCommentContents.equals("")) {
+		if (plateCommentContents != null && !plateCommentContents.isEmpty()) {
 			function.setComment(plateCommentContents);
 		}
-		if (bookmarkContents != null && !bookmarkContents.equals("")) {
+		if (bookmarkContents != null && !bookmarkContents.isEmpty()) {
 			function.getProgram()
 					.getBookmarkManager()
 					.setBookmark(function.getEntryPoint(),
@@ -473,12 +473,8 @@ public class ApplyFidEntriesCommand extends BackgroundCommand {
 		if (containsPrimarySymbol(symTab, "_" + baseName)) {
 			return true;
 		}
-		if (containsPrimarySymbol(symTab, "__" + baseName)) {
-			return true;
-		}
-
-		return false;
-	}
+        return containsPrimarySymbol(symTab, "__" + baseName);
+    }
 
 	private void addSymbolToFunction(Function function, String name) {
 		SymbolTable symbolTable = function.getProgram().getSymbolTable();

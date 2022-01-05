@@ -102,13 +102,10 @@ public class AddressFieldLocation extends CodeUnitLocation {
 			return false;
 		AddressFieldLocation other = (AddressFieldLocation) obj;
 		if (addrRepresentation == null) {
-			if (other.addrRepresentation != null)
-				return false;
+            return other.addrRepresentation == null;
 		}
-		else if (!addrRepresentation.equals(other.addrRepresentation))
-			return false;
-		return true;
-	}
+		else return addrRepresentation.equals(other.addrRepresentation);
+    }
 
 	@Override
 	public void saveState(SaveState obj) {

@@ -698,12 +698,8 @@ public class MipsAddressAnalyzer extends ConstantPropagationAnalyzer {
 			return true;
 		}
 		Reference[] refs = program.getReferenceManager().getReferencesFrom(addr);
-		if (refs.length == 1 && !refs[0].getReferenceType().isData()) {
-			return true;
-		}
-
-		return false;
-	}
+        return refs.length == 1 && !refs[0].getReferenceType().isData();
+    }
 
 	@Override
 	public void optionsChanged(Options options, Program program) {

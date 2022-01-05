@@ -976,13 +976,9 @@ public class ExternalFunctionMerger extends AbstractFunctionMerger implements Li
 			(dataType2IsDefined && external1IsFunction)) {
 			return true;
 		}
-		if (external1IsFunction && external2IsFunction &&
-			hasExternalFunctionAddConflicts(function1, function2)) {
-			return true;
-		}
-
-		return false;
-	}
+        return external1IsFunction && external2IsFunction &&
+                hasExternalFunctionAddConflicts(function1, function2);
+    }
 
 	private boolean isNameConflict(String name1, String name2, String originalName1,
 			String originalName2) {
@@ -993,25 +989,16 @@ public class ExternalFunctionMerger extends AbstractFunctionMerger implements Li
 			if (!originalName1.equals(originalName2)) {
 				return true;
 			}
-			if (!name1.equals(name2)) {
-				return true;
-			}
+            return !name1.equals(name2);
 		}
 		else if (hasOriginalName1) {
-			if (!name2.equals(name1) && !name2.equals(originalName1)) {
-				return true;
-			}
+            return !name2.equals(name1) && !name2.equals(originalName1);
 		}
 		else if (hasOriginalName2) {
-			if (!name1.equals(name2) && !name1.equals(originalName2)) {
-				return true;
-			}
+            return !name1.equals(name2) && !name1.equals(originalName2);
 		}
-		else if (!name1.equals(name2)) {
-			return true;
-		}
-		return false;
-	}
+		else return !name1.equals(name2);
+    }
 
 	private boolean hasExternalFunctionAddConflicts(Function function1, Function function2) {
 		return !ProgramDiff.equivalentFunctions(function1, function2, true);
@@ -1097,13 +1084,9 @@ public class ExternalFunctionMerger extends AbstractFunctionMerger implements Li
 		if (symbolType1 != symbolType2) {
 			return false;
 		}
-		if ((symbolType1 == SymbolType.FUNCTION) &&
-			!ProgramDiff.equivalentFunctions(function1, function2)) {
-			return false;
-		}
-
-		return true;
-	}
+        return (symbolType1 != SymbolType.FUNCTION) ||
+                ProgramDiff.equivalentFunctions(function1, function2);
+    }
 
 	private void determineExternalRemoveConflicts(TaskMonitor monitor) throws CancelledException {
 		monitor.checkCanceled();

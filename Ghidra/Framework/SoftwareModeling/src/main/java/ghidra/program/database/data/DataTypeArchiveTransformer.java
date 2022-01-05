@@ -639,11 +639,8 @@ public class DataTypeArchiveTransformer implements GhidraLaunchable {
 		if (newDataType instanceof Union && name.startsWith("_union_")) {
 			return true;
 		}
-		if (newDataType instanceof Enum && name.startsWith("enum_")) {
-			return true;
-		}
-		return false;
-	}
+        return newDataType instanceof Enum && name.startsWith("enum_");
+    }
 
 	/**
 	 * Checks to see if the indicated name is an anonymous name with the indicated prefix
@@ -657,11 +654,8 @@ public class DataTypeArchiveTransformer implements GhidraLaunchable {
 			return false; // doesn't have expected prefix.
 		}
 		String suffix = name.substring(prefix.length());
-		if (!StringUtils.isNumeric(suffix)) {
-			return false;
-		}
-		return true;
-	}
+        return StringUtils.isNumeric(suffix);
+    }
 
 	private static SourceArchive getLocalSourceArchive(DataType dataType) {
 		DataTypeManager dataTypeManager = dataType.getDataTypeManager();

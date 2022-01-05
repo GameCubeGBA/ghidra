@@ -343,13 +343,10 @@ class DataTypeArchiveDBChangeSet implements DataTypeArchiveChangeSet, DomainObje
 
 	@Override
 	public boolean hasChanges() {
-		if (changedDataTypeIds.isEmpty() && changedCategoryIds.isEmpty() &&
-			changedSourceArchiveIds.isEmpty() && addedDataTypeIds.isEmpty() &&
-			addedCategoryIds.isEmpty() && addedSourceArchiveIds.isEmpty()) {
-			return false;
-		}
-		return true;
-	}
+        return !changedDataTypeIds.isEmpty() || !changedCategoryIds.isEmpty() ||
+                !changedSourceArchiveIds.isEmpty() || !addedDataTypeIds.isEmpty() ||
+                !addedCategoryIds.isEmpty() || !addedSourceArchiveIds.isEmpty();
+    }
 
 }
 

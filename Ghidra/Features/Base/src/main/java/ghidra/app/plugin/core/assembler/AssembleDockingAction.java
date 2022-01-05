@@ -389,9 +389,6 @@ public class AssembleDockingAction extends DockingAction {
 			return false;
 		}
 		MemoryBlock block = program.getMemory().getBlock(lac.getAddress());
-		if (block == null || !block.isInitialized()) {
-			return false;
-		}
-		return true;
-	}
+        return block != null && block.isInitialized();
+    }
 }

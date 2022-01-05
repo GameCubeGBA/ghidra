@@ -87,14 +87,11 @@ class NewProjectPanelManager implements PanelManager {
 		if (repositoryPanel == null) {
 			return false;
 		}
-		if (repositoryPanel.isValidInformation() &&
-			(projectAccessPanel == null ||
-				projectAccessPanel != null && projectAccessPanel.isValidInformation()) &&
-			selectProjectPanel.isValidInformation()) {
-			return true;
-		}
-		return false;
-	}
+        return repositoryPanel.isValidInformation() &&
+                (projectAccessPanel == null ||
+                        projectAccessPanel != null && projectAccessPanel.isValidInformation()) &&
+                selectProjectPanel.isValidInformation();
+    }
 
 	@Override
 	public boolean hasNextPanel() {

@@ -203,8 +203,8 @@ public class WrapCallbackIDebugEventCallbacks implements CallbackIDebugEventCall
 			long imageFileHandle = ImageFileHandle == null ? -1L : ImageFileHandle.longValue();
 			long baseOffset = BaseOffset == null ? -1L : BaseOffset.longValue();
 			int moduleSize = ModuleSize == null ? -1 : ModuleSize.intValue();
-			String moduleName = ModuleName == null ? "" : ModuleName.toString();
-			String imageName = ImageName == null ? "" : ImageName.toString();
+			String moduleName = ModuleName == null ? "" : ModuleName;
+			String imageName = ImageName == null ? "" : ImageName;
 			int checkSum = CheckSum == null ? -1 : CheckSum.intValue();
 
 			DebugStatus status = cb.loadModule(new DebugModuleInfo(imageFileHandle, baseOffset,

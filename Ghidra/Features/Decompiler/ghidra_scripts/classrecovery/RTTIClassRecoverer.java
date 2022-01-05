@@ -86,11 +86,8 @@ public class RTTIClassRecoverer extends RecoveredClassHelper {
 
 	public boolean isValidProgramSize() {
 
-		if (defaultPointerSize != 4 && defaultPointerSize != 8) {
-			return false;
-		}
-		return true;
-	}
+        return defaultPointerSize == 4 || defaultPointerSize == 8;
+    }
 
 	/**
 	 * Get the version of Ghidra that was used to analyze this program

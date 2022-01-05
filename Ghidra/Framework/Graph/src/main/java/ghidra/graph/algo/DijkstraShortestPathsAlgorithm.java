@@ -262,11 +262,8 @@ public class DijkstraShortestPathsAlgorithm<V, E extends GEdge<V>> {
 				bestIns.get(dest).clear();
 				return true;
 			}
-			else if (newDist == curDist) {
-				return true;
-			}
-			return false;
-		}
+			else return newDist == curDist;
+        }
 
 		/**
 		 * Compute paths, building out the graph until all reachable vertices have been visited

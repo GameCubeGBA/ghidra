@@ -659,11 +659,8 @@ public class PrototypeModel {
 		if (!SystemUtilities.isEqual(paramRange, op2.paramRange)) {
 			return false;
 		}
-		if (!SystemUtilities.isArrayEqual(returnaddress, op2.returnaddress)) {
-			return false;
-		}
-		return true;
-	}
+        return SystemUtilities.isArrayEqual(returnaddress, op2.returnaddress);
+    }
 
 	@Override
 	public int hashCode() {

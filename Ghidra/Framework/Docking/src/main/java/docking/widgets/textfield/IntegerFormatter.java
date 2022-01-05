@@ -134,11 +134,8 @@ public class IntegerFormatter extends NumberFormatter {
 			}
 
 			Long longValue = number.longValue();
-			if (longValue.compareTo(0L) < 0) {
-				return false; // no negatives
-			}
-			return true;
-		}
+            return longValue.compareTo(0L) >= 0; // no negatives
+        }
 
 		private boolean containsNonNumericCharacters(String text) {
 			int length = text.length();

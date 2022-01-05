@@ -150,11 +150,8 @@ final class ParameterDefinitionDB implements ParameterDefinition {
 		if (getOrdinal() != ((Parameter) otherVar).getOrdinal()) {
 			return false;
 		}
-		if (!DataTypeUtilities.isSameOrEquivalentDataType(getDataType(), otherVar.getDataType())) {
-			return false;
-		}
-		return true;
-	}
+        return DataTypeUtilities.isSameOrEquivalentDataType(getDataType(), otherVar.getDataType());
+    }
 
 	@Override
 	public boolean isEquivalent(ParameterDefinition parm) {
@@ -164,11 +161,8 @@ final class ParameterDefinitionDB implements ParameterDefinition {
 		if (getOrdinal() != parm.getOrdinal()) {
 			return false;
 		}
-		if (!DataTypeUtilities.isSameOrEquivalentDataType(getDataType(), parm.getDataType())) {
-			return false;
-		}
-		return true;
-	}
+        return DataTypeUtilities.isSameOrEquivalentDataType(getDataType(), parm.getDataType());
+    }
 
 	@Override
 	public int compareTo(ParameterDefinition p) {

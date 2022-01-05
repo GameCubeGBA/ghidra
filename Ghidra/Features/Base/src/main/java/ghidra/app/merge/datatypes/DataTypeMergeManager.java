@@ -1719,11 +1719,8 @@ public class DataTypeMergeManager implements MergeResolver {
 			if (parent1 != null && parent2 != null) {
 				return !parent1.getCategoryPath().equals(parent2.getCategoryPath());
 			}
-			if (parent1 == null && parent2 == null) {
-				return false;
-			}
-			return true;
-		}
+            return parent1 != null || parent2 != null;
+        }
 
 		return false;
 	}
@@ -1860,12 +1857,9 @@ public class DataTypeMergeManager implements MergeResolver {
 		if (dtm1.getID(dtc1.getDataType()) != dtm2.getID(dtc2.getDataType())) {
 			return true;
 		}
-		if (!Objects.equals(dtc1.getFieldName(), dtc2.getFieldName()) ||
-			!Objects.equals(dtc1.getComment(), dtc2.getComment())) {
-			return true;
-		}
-		return false;
-	}
+        return !Objects.equals(dtc1.getFieldName(), dtc2.getFieldName()) ||
+                !Objects.equals(dtc1.getComment(), dtc2.getComment());
+    }
 
 	private boolean dataTypeSourceWasChanged(long id, DataTypeManager dtm) {
 		return dataTypeSourceWasChanged(id, dtms[ORIGINAL], dtm);
@@ -1895,9 +1889,7 @@ public class DataTypeMergeManager implements MergeResolver {
 					"\n        Source Archive = " + sourceArchive2.getName() + "        ";
 				Msg.error(this, msg);
 			}
-			if (!Objects.equals(universalID1, universalID2)) {
-				return true;
-			}
+            return !Objects.equals(universalID1, universalID2);
 		}
 		return false;
 	}

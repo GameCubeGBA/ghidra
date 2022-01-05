@@ -174,12 +174,8 @@ class EditStructureUtils {
 	 */
 	static boolean isUndefined1(DataType dataType) {
 
-		if (Undefined.isUndefined(dataType) && dataType.getLength() == 1) {
-			return true;
-		}
-
-		return false;
-	}
+        return Undefined.isUndefined(dataType) && dataType.getLength() == 1;
+    }
 
 
 	/**

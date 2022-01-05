@@ -166,9 +166,7 @@ public class HintTextField extends JTextField {
 		}
 
 		if (verifier != null) {
-			if (!verifier.verify(this)) {
-				return false;
-			}
+            return verifier.verify(this);
 		}
 
 		return true;

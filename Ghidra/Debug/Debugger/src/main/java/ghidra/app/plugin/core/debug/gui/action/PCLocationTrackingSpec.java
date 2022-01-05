@@ -101,9 +101,6 @@ public class PCLocationTrackingSpec implements RegisterLocationTrackingSpec {
 		TraceStack curStack = coordinates.getTrace()
 				.getStackManager()
 				.getLatestStack(stack.getThread(), coordinates.getSnap());
-		if (stack != curStack) {
-			return false;
-		}
-		return true;
-	}
+        return stack == curStack;
+    }
 }

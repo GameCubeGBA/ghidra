@@ -698,12 +698,9 @@ class FileActionManager {
 		sb.append(" \nChoose 'Cancel' to cancel Close Project, or \n");
 		sb.append("'Lose Changes' to continue.");
 
-		if (OptionDialog.showOptionDialog(tool.getToolFrame(), "Read-Only Files", sb.toString(),
-			"Lose Changes", OptionDialog.QUESTION_MESSAGE) == OptionDialog.OPTION_ONE) {
-			return true; // Lose changes, so close the project
-		}
-		return false;
-	}
+        return OptionDialog.showOptionDialog(tool.getToolFrame(), "Read-Only Files", sb.toString(),
+                "Lose Changes", OptionDialog.QUESTION_MESSAGE) == OptionDialog.OPTION_ONE; // Lose changes, so close the project
+    }
 
 	/**
 	 * Fire the project opened event

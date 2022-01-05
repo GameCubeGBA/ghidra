@@ -49,10 +49,8 @@ public class LSHCosineVectorAccum extends LSHCosineVector {
 			if (getClass() != obj.getClass())
 				return false;
 			Entry other = (Entry) obj;
-			if (hash != other.hash)
-				return false;
-			return true;
-		}
+            return hash == other.hash;
+        }
 
 		/**
 		 * Comparison must be UNSIGNED!!

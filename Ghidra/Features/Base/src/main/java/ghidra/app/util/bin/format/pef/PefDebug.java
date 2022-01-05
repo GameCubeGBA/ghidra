@@ -78,11 +78,8 @@ public class PefDebug implements StructConverter {
 		if (distance > 0xffff) {
 			return false;
 		}
-		if (nameLength <= 0 || nameLength > 255) {
-			return false;
-		}
-		return true;
-	}
+        return nameLength > 0 && nameLength <= 255;
+    }
 
 	public DataType toDataType() throws DuplicateNameException {
 		String structureName = "PEF_Debug_0x"+Integer.toHexString(nameLength);

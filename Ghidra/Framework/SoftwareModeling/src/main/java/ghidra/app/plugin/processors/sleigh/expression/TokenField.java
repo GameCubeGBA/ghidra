@@ -69,11 +69,8 @@ public class TokenField extends PatternValue {
 		if (this.signbit != that.signbit) {
 			return false;
 		}
-		if (this.bigendian != that.bigendian) {
-			return false;
-		}
-		return true;
-	}
+        return this.bigendian == that.bigendian;
+    }
 
 	/* (non-Javadoc)
 	 * @see ghidra.app.plugin.processors.sleigh.expression.PatternValue#minValue()

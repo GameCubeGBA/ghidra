@@ -190,12 +190,8 @@ public class GHelpSet extends HelpSet {
 			LOG.trace("No URL found in any HelpSet for ID: " + id);
 
 			URL = tryToCreateURLFromID(id.id);
-			if (URL != null) {
-				return URL;
-			}
-
-			return null;
-		}
+            return URL;
+        }
 
 		/**
 		 * This is meant for help files that are not included in the standard help system.  Their
@@ -293,12 +289,8 @@ public class GHelpSet extends HelpSet {
 			// This can happen for help files that are generated during the build, 
 			// such as 'What's New'; return true here so the values will still be loaded into
 			// the help system; handle the error condition later.
-			if (ignoreExternalHelp(id)) {
-				return true;
-			}
-
-			return false;
-		}
+            return ignoreExternalHelp(id);
+        }
 
 		private boolean ignoreExternalHelp(String id) {
 			if (id.startsWith("help/topics")) {
@@ -311,12 +303,8 @@ public class GHelpSet extends HelpSet {
 			}
 
 			// no url for ID
-			if (SystemUtilities.isInDevelopmentMode()) {
-				// ignore external files that do not exist in dev mode
-				return true;
-			}
-
-			return false;
-		}
+            // ignore external files that do not exist in dev mode
+            return SystemUtilities.isInDevelopmentMode();
+        }
 	}
 }

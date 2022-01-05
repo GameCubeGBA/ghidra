@@ -2372,12 +2372,8 @@ public class ProgramDiffDetails {
 			return false;
 		}
 		// Detect that data type name or path differs?
-		if (!dt1.getPathName().equals(dt2.getPathName())) {
-			return false;
-		}
-
-		return true;
-	}
+        return dt1.getPathName().equals(dt2.getPathName());
+    }
 
 	/**
 	 * Creates a formatted difference string for an individual line difference

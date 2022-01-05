@@ -382,11 +382,8 @@ public class ProgramCompilerSpec extends BasicCompilerSpec {
 			return false;
 		}
 		ProgramCompilerSpec op2 = (ProgramCompilerSpec) obj;
-		if (!SystemUtilities.isEqual(usermodels, op2.usermodels)) {
-			return false;
-		}
-		return true;
-	}
+        return SystemUtilities.isEqual(usermodels, op2.usermodels);
+    }
 
 	/**
 	 * Transition specified compiler specification langSpec into a program-specific one which

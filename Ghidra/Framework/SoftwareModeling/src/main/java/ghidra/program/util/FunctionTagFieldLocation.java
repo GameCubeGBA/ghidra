@@ -67,13 +67,10 @@ public class FunctionTagFieldLocation extends FunctionLocation {
 			return false;
 		FunctionTagFieldLocation other = (FunctionTagFieldLocation) obj;
 		if (tags == null) {
-			if (other.tags != null)
-				return false;
+            return other.tags == null;
 		}
-		else if (!tags.equals(other.tags))
-			return false;
-		return true;
-	}
+		else return tags.equals(other.tags);
+    }
 
 	@Override
 	public String toString() {

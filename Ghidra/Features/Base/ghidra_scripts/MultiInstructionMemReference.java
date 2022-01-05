@@ -210,11 +210,8 @@ public class MultiInstructionMemReference extends GhidraScript {
 						return true;
 					}
 				}
-				if (addSymbolicRefs(input, context, instr, list)) {
-					return true;
-				}
-				return false;
-			}
+                return addSymbolicRefs(input, context, instr, list);
+            }
 
 
 			/**

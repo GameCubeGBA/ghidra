@@ -563,11 +563,8 @@ public class FillOutStructureCmd extends BackgroundCommand {
 		if (offset < 0) {
 			return false; // offsets shouldn't be negative
 		}
-		if (offset > 0x1000) {
-			return false; // Arbitrary size cut-off to prevent creating huge structures
-		}
-		return true;
-	}
+        return offset <= 0x1000; // Arbitrary size cut-off to prevent creating huge structures
+    }
 
 	/**
 	 * Get the data-type associated with a Varnode.  If the Varnode is produce by a CAST p-code

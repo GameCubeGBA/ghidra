@@ -92,11 +92,8 @@ public class RowWrappedEnumeratedColumnTableModel<C extends Enum<C> & Enumerated
 	public synchronized void addAllItems(Collection<? extends T> c) {
 		Stream<? extends T> s = c.stream().filter(t -> {
 			K k = keyFunc.apply(t);
-			if (map.containsKey(k)) {
-				return false;
-			}
-			return true;
-		});
+            return !map.containsKey(k);
+        });
 		addAll(addRowsFor(s));
 	}
 

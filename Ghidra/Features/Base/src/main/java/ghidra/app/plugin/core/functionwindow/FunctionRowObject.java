@@ -48,11 +48,8 @@ public class FunctionRowObject implements Comparable<FunctionRowObject> {
 
 		long key = function.getID();
 		FunctionRowObject other = (FunctionRowObject) obj;
-		if (key != other.function.getID()) {
-			return false;
-		}
-		return true;
-	}
+        return key == other.function.getID();
+    }
 
 	public long getKey() {
 		return function.getID();

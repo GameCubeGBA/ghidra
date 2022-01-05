@@ -373,7 +373,7 @@ public class RecoverClassesFromRTTIScript extends GhidraScript {
 		if (defaultPointerSize != 4 && defaultPointerSize != 8) {
 			return ("This script only works on 32 or 64 bit programs");
 		}
-		return new String();
+		return "";
 	}
 
 	private void analyzeProgramChanges(AddressSetView beforeChanges) throws Exception {
@@ -563,11 +563,8 @@ public class RecoverClassesFromRTTIScript extends GhidraScript {
 
 		ghidraVersion = getVersionOfGhidra();
 
-		if (ghidraVersion.compareTo("9.3") <= 0 && !ghidraVersion.equals("9.2.1")) {
-			return true;
-		}
-		return false;
-	}
+        return ghidraVersion.compareTo("9.3") <= 0 && !ghidraVersion.equals("9.2.1");
+    }
 
 	/**
 	 * Method to set the global variable isGcc
@@ -602,12 +599,7 @@ public class RecoverClassesFromRTTIScript extends GhidraScript {
 
 		Address found = currentProgram.getMemory().findBytes(commentBlock.getStart(),
 				commentBlock.getEnd(), gccBytes, maskBytes, true, monitor);
-		if (found == null) {
-			isGcc = false;
-		}
-		else {
-			isGcc = true;
-		}
+        isGcc = found != null;
 
 		return isGcc;
 	}
@@ -646,11 +638,8 @@ public class RecoverClassesFromRTTIScript extends GhidraScript {
 			allClassDestructors.stream().distinct().filter(allClassConstructors::contains).collect(
 				Collectors.toList());
 
-		if (commonFunctions1.isEmpty() && commonFunctions2.isEmpty()) {
-			return false;
-		}
-		return true;
-	}
+        return !commonFunctions1.isEmpty() || !commonFunctions2.isEmpty();
+    }
 
 	/**
 	 * Method to analyze the program changes with the decompiler parameter ID analyzer
@@ -954,7 +943,7 @@ public class RecoverClassesFromRTTIScript extends GhidraScript {
 		while (recoveredClassIterator.hasNext()) {
 			monitor.checkCanceled();
 			RecoveredClass recoveredClass = recoveredClassIterator.next();
-			String printString = new String("\n" + recoveredClass.getName() + "\n");
+			String printString = "\n" + recoveredClass.getName() + "\n";
 			if (recoveredClass.hasParentClass()) {
 				List<RecoveredClass> parentList = recoveredClass.getParentList();
 				Iterator<RecoveredClass> parentIterator = parentList.iterator();
@@ -1424,7 +1413,7 @@ public class RecoverClassesFromRTTIScript extends GhidraScript {
 			decompilerUtils.getFunctionSignatureString(function, includeReturn);
 
 		if (functionSignatureString != null) {
-			stringBuffer = stringBuffer.append(functionSignatureString.toString());
+			stringBuffer = stringBuffer.append(functionSignatureString);
 			return stringBuffer.toString();
 		}
 

@@ -422,11 +422,8 @@ public abstract class AbstractEditFunctionSignatureDialog extends DialogComponen
 		if (current == null) {
 			return true;
 		}
-		if (current.equals(getCallingConvention())) {
-			return false;
-		}
-		return true;
-	}
+        return !current.equals(getCallingConvention());
+    }
 
 	@Override
 	protected void dialogShown() {

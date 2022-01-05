@@ -86,12 +86,8 @@ public class EditMarkupAddressAction extends DockingAction {
 	@Override
 	public boolean isAddToPopup(ActionContext context) {
 		List<VTMarkupItem> markupItems = controller.getMarkupItems(context);
-		if (markupItems.size() != 1) {
-			return false;
-		}
-
-		return true;
-	}
+        return markupItems.size() == 1;
+    }
 
 	private void editDestinationAddress(final VTMarkupItem markupItem, final JComponent component) {
 

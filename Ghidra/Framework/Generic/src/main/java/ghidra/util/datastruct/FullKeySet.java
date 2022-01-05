@@ -46,10 +46,7 @@ public class FullKeySet implements ShortKeySet, Serializable {
 	 * @see ghidra.util.datastruct.ShortKeySet#containsKey(short)
 	 */
     public boolean containsKey(short key) {
-        if ((key >= 0) &&(key < numKeys)) {
-            return true;
-        }
-        return false;
+        return (key >= 0) && (key < numKeys);
     }
 
 	/**

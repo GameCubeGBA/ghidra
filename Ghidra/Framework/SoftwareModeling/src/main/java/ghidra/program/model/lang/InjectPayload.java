@@ -68,11 +68,8 @@ public interface InjectPayload {
 			if (index != op2.index || size != op2.size) {
 				return false;
 			}
-			if (!name.equals(op2.name)) {
-				return false;
-			}
-			return true;
-		}
+            return name.equals(op2.name);
+        }
 
 		@Override
 		public int hashCode() {

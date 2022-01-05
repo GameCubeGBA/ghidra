@@ -193,9 +193,7 @@ public class KeyBindingOverrideKeyEventDispatcher implements KeyEventDispatcher 
 
 		Component glassPane = rootPane.getGlassPane();
 		if (glassPane instanceof GGlassPane) {
-			if (((GGlassPane) glassPane).isBusy()) {
-				return true; // out parent's glass pane is blocking..don't let events through
-			}
+            return ((GGlassPane) glassPane).isBusy(); // out parent's glass pane is blocking..don't let events through
 		}
 //        else {
 //            Msg.debug( KeyBindingOverrideKeyEventDispatcher.this,
@@ -325,12 +323,8 @@ public class KeyBindingOverrideKeyEventDispatcher implements KeyEventDispatcher 
 
 		// O.K., there is an action for the KeyStroke, but before we process it, we have to
 		// check the proper ordering of key events (see method JavaDoc)
-		if (processComponentKeyListeners(e)) {
-			return true;
-		}
-
-		return false;
-	}
+        return processComponentKeyListeners(e);
+    }
 
 	private boolean processComponentActionMapPrecedence(DockingKeyBindingAction action,
 			KeyBindingPrecedence keyBindingPrecedence, KeyEvent event) {
@@ -340,12 +334,8 @@ public class KeyBindingOverrideKeyEventDispatcher implements KeyEventDispatcher 
 		}
 
 		KeyStroke keyStroke = KeyStroke.getKeyStrokeForEvent(event);
-		if (processInputAndActionMaps(event, keyStroke)) {
-			return true;
-		}
-
-		return false;
-	}
+        return processInputAndActionMaps(event, keyStroke);
+    }
 
 	private boolean processActionAtPrecedence(KeyBindingPrecedence precedence,
 			KeyBindingPrecedence keyBindingPrecedence, DockingKeyBindingAction action,

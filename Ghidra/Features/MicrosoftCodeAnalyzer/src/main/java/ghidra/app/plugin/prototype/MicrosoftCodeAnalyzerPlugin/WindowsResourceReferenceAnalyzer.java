@@ -60,11 +60,8 @@ public class WindowsResourceReferenceAnalyzer extends AbstractAnalyzer {
 	@Override
 	public boolean canAnalyze(Program program) {
 		String format = program.getExecutableFormat();
-		if (format.equals(PeLoader.PE_NAME)) {
-			return true;
-		}
-		return false;
-	}
+        return format.equals(PeLoader.PE_NAME);
+    }
 
 	@Override
 	public boolean added(Program program, AddressSetView set, TaskMonitor monitor, MessageLog log)

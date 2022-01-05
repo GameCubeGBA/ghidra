@@ -539,11 +539,8 @@ public class DebuggerBreakpointMarkerPlugin extends Plugin
 
 		@Override
 		public boolean isEnabledForContext(ActionContext context) {
-			if (!contextCanManipulateBreakpoints(context)) {
-				return false;
-			}
-			return true;
-		}
+            return contextCanManipulateBreakpoints(context);
+        }
 	}
 
 	protected class SetBreakpointAction extends AbstractSetBreakpointAction {
@@ -583,11 +580,8 @@ public class DebuggerBreakpointMarkerPlugin extends Plugin
 			if (recorder == null) {
 				return false;
 			}
-			if (!recorder.getSupportedBreakpointKinds().containsAll(kinds)) {
-				return false;
-			}
-			return true;
-		}
+            return recorder.getSupportedBreakpointKinds().containsAll(kinds);
+        }
 	}
 
 	protected class EnableBreakpointAction extends AbstractEnableBreakpointAction {
@@ -620,11 +614,8 @@ public class DebuggerBreakpointMarkerPlugin extends Plugin
 			}
 			ProgramLocation location = getLocationFromContext(context);
 			Enablement en = computeEnablement(location);
-			if (en == Enablement.ENABLED || en == Enablement.NONE) {
-				return false;
-			}
-			return true;
-		}
+            return en != Enablement.ENABLED && en != Enablement.NONE;
+        }
 	}
 
 	protected class DisableBreakpointAction extends AbstractDisableBreakpointAction {
@@ -657,11 +648,8 @@ public class DebuggerBreakpointMarkerPlugin extends Plugin
 			}
 			ProgramLocation location = getLocationFromContext(context);
 			Enablement en = computeEnablement(location);
-			if (en == Enablement.DISABLED || en == Enablement.NONE) {
-				return false;
-			}
-			return true;
-		}
+            return en != Enablement.DISABLED && en != Enablement.NONE;
+        }
 	}
 
 	// TODO: Make sub-menu listing all breakpoints present here?
@@ -696,11 +684,8 @@ public class DebuggerBreakpointMarkerPlugin extends Plugin
 			}
 			ProgramLocation location = getLocationFromContext(context);
 			Enablement en = computeEnablement(location);
-			if (en == Enablement.NONE) {
-				return false;
-			}
-			return true;
-		}
+            return en != Enablement.NONE;
+        }
 	}
 
 	// @AutoServiceConsumed via method
@@ -920,11 +905,8 @@ public class DebuggerBreakpointMarkerPlugin extends Plugin
 			return false;
 		}
 		// Programs, or live traces, but not dead traces
-		if (contextHasTrace(ctx) && !contextHasRecorder(ctx)) {
-			return false;
-		}
-		return true;
-	}
+        return !contextHasTrace(ctx) || contextHasRecorder(ctx);
+    }
 
 	protected Set<TraceBreakpointKind> getSupportedKindsFromContext(ActionContext context) {
 		Set<TraceRecorder> recorders = getRecordersFromContext(context);

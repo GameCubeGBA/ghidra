@@ -98,10 +98,7 @@ public class LongDoubleHashtable implements Serializable {
      * @return true if key is found and removed, false otherwise.
      */
     public boolean remove(long key) {
-        if (indexer.remove(key) < 0) {
-            return false;
-        }
-        return true;
+        return indexer.remove(key) >= 0;
     }
 
     /**

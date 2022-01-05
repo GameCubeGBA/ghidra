@@ -60,9 +60,6 @@ public class SingleLoaderFilter implements Predicate<Loader> {
 
 	@Override
 	public boolean test(Loader loader) {
-		if (loader.getClass().equals(single)) {
-			return true;
-		}
-		return false;
-	}
+        return loader.getClass().equals(single);
+    }
 }

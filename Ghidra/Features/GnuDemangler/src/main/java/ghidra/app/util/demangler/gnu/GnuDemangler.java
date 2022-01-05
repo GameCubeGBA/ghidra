@@ -53,11 +53,8 @@ public class GnuDemangler implements Demangler {
 
 		CompilerSpec spec = program.getCompilerSpec();
 		String specId = spec.getCompilerSpecID().getIdAsString();
-		if (!specId.toLowerCase().contains("windows")) {
-			return true;
-		}
-		return false;
-	}
+        return !specId.toLowerCase().contains("windows");
+    }
 
 	@Override
 	@Deprecated(since = "9.2", forRemoval = true)
@@ -201,12 +198,8 @@ public class GnuDemangler implements Demangler {
 		if (mangled.startsWith("?")) {
 			return false; // not sure about this one
 		}
-		if (isGnu2Or3Pattern(mangled)) {
-			return false;
-		}
-
-		return true;
-	}
+        return !isGnu2Or3Pattern(mangled);
+    }
 
 	private DemangledObject parse(String mangled, GnuDemanglerNativeProcess process,
 			String demangled, boolean demangleOnlyKnownPatterns) {
@@ -229,12 +222,8 @@ public class GnuDemangler implements Demangler {
 		//
 
 		// check for the case where good strings have '__' in them (which is valid GNU2 mangling)
-		if (isInvalidDoubleUnderscoreString(mangled, demangled)) {
-			return false;
-		}
-
-		return true;
-	}
+        return !isInvalidDoubleUnderscoreString(mangled, demangled);
+    }
 
 	private boolean isInvalidDoubleUnderscoreString(String mangled, String demangled) {
 
@@ -263,10 +252,10 @@ public class GnuDemangler implements Demangler {
 	}
 
 	private boolean isELF(String executableFormat) {
-		return executableFormat != null && executableFormat.indexOf(ElfLoader.ELF_NAME) != -1;
+		return executableFormat != null && executableFormat.contains(ElfLoader.ELF_NAME);
 	}
 
 	private boolean isMacho(String executableFormat) {
-		return executableFormat != null && executableFormat.indexOf(MachoLoader.MACH_O_NAME) != -1;
+		return executableFormat != null && executableFormat.contains(MachoLoader.MACH_O_NAME);
 	}
 }

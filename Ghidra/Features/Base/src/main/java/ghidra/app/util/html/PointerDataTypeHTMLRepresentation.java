@@ -94,7 +94,7 @@ public class PointerDataTypeHTMLRepresentation extends HTMLDataTypeRepresentatio
 
 			buffer.append(baseHTML);
 
-			if (baseHTML.indexOf(LENGTH_PREFIX) < 0) {
+			if (!baseHTML.contains(LENGTH_PREFIX)) {
 				addDataTypeLength(baseDataType, buffer);
 			}
 

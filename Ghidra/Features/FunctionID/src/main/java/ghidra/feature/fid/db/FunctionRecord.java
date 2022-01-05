@@ -218,11 +218,8 @@ public class FunctionRecord extends DatabaseObject implements FidHashQuad {
 			return false;
 		}
 		FunctionRecord other = (FunctionRecord) obj;
-		if (getID() != other.getID()) {
-			return false;
-		}
-		return true;
-	}
+        return getID() == other.getID();
+    }
 
 	/**
 	 * Returns the library id for this function.

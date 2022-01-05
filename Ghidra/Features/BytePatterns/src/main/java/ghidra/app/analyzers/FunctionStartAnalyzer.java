@@ -246,9 +246,7 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 					pseudoDisassembler.setMaxInstructions(validcode);
 					isvalid = pseudoDisassembler.checkValidSubroutine(addr, pcont, true, false);
 				}
-				if (!isvalid) {
-					return false;
-				}
+                return isvalid;
 			}
 
 			return true;
@@ -369,39 +367,27 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 					if (funcAbove == null) {
 						return false;
 					}
-					if (checkAlreadyInFunctionAbove(program, addr, funcAbove)) {
-						return false;
-					}
+                    return !checkAlreadyInFunctionAbove(program, addr, funcAbove);
 				}
 				else if (name.startsWith("inst")) {
 					// make sure there is an end of function at location to check
 					Instruction instr = program.getListing().getInstructionContaining(addrToCheck);
-					if (instr == null) {
-						return false;
-					}
+                    return instr != null;
 				}
 				else if (name.startsWith("data")) {
 					// make sure there is defined data at location to check
 					Data data = program.getListing().getDefinedDataContaining(addrToCheck);
-					if (data == null) {
-						return false;
-					}
+                    return data != null;
 				}
 				else if (name.startsWith("def")) {
 					// make sure there is something at location to check
 					Instruction instr = program.getListing().getInstructionContaining(addrToCheck);
 					if (instr != null) {
-						if (checkAlreadyInFunctionAbove(program, addr)) {
-							return false;
-						}
-						return true;
-					}
+                        return !checkAlreadyInFunctionAbove(program, addr);
+                    }
 					Data data = program.getListing().getDefinedDataContaining(addrToCheck);
-					if (data != null) {
-						return true;
-					}
-					return false;
-				}
+                    return data != null;
+                }
 			}
 			return true;
 		}
@@ -430,12 +416,9 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 			if (funcAbove != null) {
 				// check if in function right above
 				Function myfunc = program.getFunctionManager().getFunctionContaining(addr);
-				if (myfunc != null && myfunc.getEntryPoint().equals(funcAbove.getEntryPoint())) {
-					return true;
-				}
+                return myfunc != null && myfunc.getEntryPoint().equals(funcAbove.getEntryPoint());
 				// I could be in a different function, just not one above
-				return false;
-			}
+            }
 
 			// no function above, but check for references, that would make this a function
 			// or references that would imply it is part of another function.

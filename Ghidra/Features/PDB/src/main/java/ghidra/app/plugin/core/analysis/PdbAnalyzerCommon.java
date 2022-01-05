@@ -52,7 +52,7 @@ public class PdbAnalyzerCommon {
 	 */
 	public static boolean canAnalyzeProgram(Program program) {
 		String executableFormat = program.getExecutableFormat();
-		return executableFormat != null && (executableFormat.indexOf(PeLoader.PE_NAME) != -1);
+		return executableFormat != null && (executableFormat.contains(PeLoader.PE_NAME));
 		// TODO: Check for MSCOFF_NAME.  Initial investigation shows that the .debug$T section of
 		//  the MSCOFF (*.obj) file has type records and the .debug$S section has symbol records.
 		//  More than that, in at least one instance, there has been a TypeServer2MsType type

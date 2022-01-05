@@ -293,12 +293,7 @@ public class ProjectAccessPanel extends AbstractWizardJPanel {
 				enabled = false;
 			}
 			else if (selectedUserNames.size() == 1) {
-				if (selectedUserNames.get(0).equals(currentUser)) {
-					enabled = false;
-				}
-				else {
-					enabled = true;
-				}
+                enabled = !selectedUserNames.get(0).equals(currentUser);
 			}
 			else {
 				enabled = true;

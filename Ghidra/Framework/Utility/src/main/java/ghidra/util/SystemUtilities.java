@@ -109,7 +109,7 @@ public class SystemUtilities {
 
 			// remove the spaces since some operating systems allow
 			// spaces and some do not, Java's File class doesn't
-			if (uname.indexOf(" ") >= 0) {
+			if (uname.contains(" ")) {
 				userName = "";
 				StringTokenizer tokens = new StringTokenizer(uname, " ", false);
 				while (tokens.hasMoreTokens()) {

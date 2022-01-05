@@ -877,7 +877,7 @@ public class FlatProgramAPI {
 		while (symiter.hasNext() && !monitor.isCancelled()) {
 			Symbol sym = symiter.next();
 			if (currentProgram.getMemory().contains(sym.getAddress())) {
-				if (sym.getName().indexOf(text) >= 0) {
+				if (sym.getName().contains(text)) {
 					return sym.getAddress();
 				}
 			}
@@ -887,7 +887,7 @@ public class FlatProgramAPI {
 		CodeUnitIterator cuIter = currentProgram.getListing().getCodeUnits(true);
 		while (cuIter.hasNext() && !monitor.isCancelled()) {
 			CodeUnit cu = cuIter.next();
-			if (cu.getMnemonicString().indexOf(text) >= 0) {
+			if (cu.getMnemonicString().contains(text)) {
 				return cu.getMinAddress();
 			}
 			if (cu instanceof Instruction) {
@@ -897,7 +897,7 @@ public class FlatProgramAPI {
 					Object[] objs = instr.getOpObjects(i);
 					for (Object element : objs) {
 						String str = element.toString();
-						if (str != null && str.indexOf(text) >= 0) {
+						if (str != null && str.contains(text)) {
 							return instr.getMinAddress();
 						}
 					}
@@ -908,7 +908,7 @@ public class FlatProgramAPI {
 				Object obj = data.getValue();
 				if (obj != null) {
 					String str = obj.toString();
-					if (str != null && str.indexOf(text) >= 0) {
+					if (str != null && str.contains(text)) {
 						return data.getMinAddress();
 					}
 				}
@@ -929,12 +929,8 @@ public class FlatProgramAPI {
 
 		monitor.setMessage("Searching post comments...");
 		addr = findComment(CodeUnit.POST_COMMENT, text);
-		if (addr != null) {
-			return addr;
-		}
-
-		return null;
-	}
+        return addr;
+    }
 
 	/**
 	 * Search for sequences of Ascii strings in program memory.  See {@link AsciiCharSetRecognizer}
@@ -2544,7 +2540,7 @@ public class FlatProgramAPI {
 		while (iter.hasNext() && !monitor.isCancelled()) {
 			Address addr = iter.next();
 			String plate = listing.getComment(type, addr);
-			if (plate.indexOf(text) >= 0) {
+			if (plate.contains(text)) {
 				return addr;
 			}
 		}

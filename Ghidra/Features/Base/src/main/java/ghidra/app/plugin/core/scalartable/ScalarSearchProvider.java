@@ -319,12 +319,8 @@ public class ScalarSearchProvider extends ComponentProviderAdapter {
 				return false;
 			}
 
-			if (value > maxField.getFilterValue()) {
-				return false;
-			}
-
-			return true;
-		}
+            return value <= maxField.getFilterValue();
+        }
 
 		@Override
 		public boolean isSubFilterOf(TableFilter<?> tableFilter) {

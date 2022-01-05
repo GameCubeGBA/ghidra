@@ -132,14 +132,9 @@ public class FieldLocation implements Comparable<FieldLocation> {
 			return false;
 		}
 		FieldLocation loc = (FieldLocation) obj;
-		if (index.equals(loc.index) && (fieldNum == loc.fieldNum) && (row == loc.row) &&
-			(col == loc.col)) {
-
-			return true;
-		}
-
-		return false;
-	}
+        return index.equals(loc.index) && (fieldNum == loc.fieldNum) && (row == loc.row) &&
+                (col == loc.col);
+    }
 
 	public int compareTo(FieldLocation o) {
 		int compareTo = index.compareTo(o.index);

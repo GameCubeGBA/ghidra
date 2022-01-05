@@ -208,10 +208,7 @@ public abstract class WebColors {
 		}
 		// if the value matches an RGB hex string, turn that into a color
 		color = getHexColor(value);
-		if (color != null) {
-			return color;
-		}
-		return null;
+        return color;
     }
 
 	/**

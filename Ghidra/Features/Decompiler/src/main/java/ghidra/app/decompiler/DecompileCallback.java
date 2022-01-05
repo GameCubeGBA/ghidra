@@ -734,7 +734,7 @@ public class DecompileCallback {
 				res = buildLabel((Symbol) obj, addr);
 			}
 			if (res == null) { // There is a hole, describe the extent of the hole
-				res = buildHole(addr).toString();
+				res = buildHole(addr);
 			}
 
 			return res;

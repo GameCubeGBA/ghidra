@@ -291,11 +291,8 @@ public class ProgramMergeFilter {
 	 * @return true if the type is a valid merge difference type(s).
 	 */
 	private boolean validateType(int type) {
-		if ((type >= 0) && (type < Math.pow(2, (NUM_PRIMARY_TYPES)))) {
-			return true;
-		}
-		return false;
-	}
+        return (type >= 0) && (type < Math.pow(2, (NUM_PRIMARY_TYPES)));
+    }
 
 	/** validateFilter determines whether or not the filter is one of our valid
 	 *  predefiend values.

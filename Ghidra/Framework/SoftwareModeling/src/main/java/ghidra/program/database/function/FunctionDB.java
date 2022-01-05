@@ -676,11 +676,8 @@ public class FunctionDB extends DatabaseObject implements Function {
 			if (thunkedFunction != null) {
 				return thunkedFunction.isStackPurgeSizeValid();
 			}
-			if (getStackPurgeSize() > 0xffffff) {
-				return false;
-			}
-			return true;
-		}
+            return getStackPurgeSize() <= 0xffffff;
+        }
 		finally {
 			manager.lock.release();
 		}

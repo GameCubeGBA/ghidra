@@ -311,11 +311,8 @@ public class HistoryList<T> {
 			return false; // not ignoring null
 		}
 
-		if (t.equals(getCurrentHistoryItem())) {
-			return true;
-		}
-		return false;
-	}
+        return t.equals(getCurrentHistoryItem());
+    }
 
 	private boolean ignoreNull(T t) {
 		if (t != null) {
@@ -331,13 +328,9 @@ public class HistoryList<T> {
 			return true;
 		}
 
-		if (historyStack.peek() == null) {
-			// no repeated nulls
-			return true;
-		}
-
-		return false;
-	}
+        // no repeated nulls
+        return historyStack.peek() == null;
+    }
 
 	private void dropNull() {
 		if (historyStack.peek() == null) {

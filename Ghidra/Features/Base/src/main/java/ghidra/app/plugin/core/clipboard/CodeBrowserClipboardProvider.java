@@ -344,7 +344,7 @@ public class CodeBrowserClipboardProvider extends ByteCopier
 				}
 			}
 
-			return createStringTransferable(g.getBuffer().toString());
+			return createStringTransferable(g.getBuffer());
 		}
 		catch (Exception e) {
 			String message = "Copy failed: " + ExceptionUtils.getMessage(e);
@@ -603,12 +603,8 @@ public class CodeBrowserClipboardProvider extends ByteCopier
 		else if (currentLocation instanceof MnemonicFieldLocation) {
 			return true;
 		}
-		else if (currentLocation instanceof VariableLocation) {
-			return true;
-		}
-
-		return false;
-	}
+		else return currentLocation instanceof VariableLocation;
+    }
 
 	@Override
 	public boolean enablePaste() {

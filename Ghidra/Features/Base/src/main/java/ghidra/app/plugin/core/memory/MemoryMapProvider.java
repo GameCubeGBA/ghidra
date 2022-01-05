@@ -352,19 +352,9 @@ class MemoryMapProvider extends ComponentProviderAdapter {
 				return;
 			}
 
-			if (block.getStart().getOffset() == 0) {
-				expandUpAction.setEnabled(false);
-			}
-			else {
-				expandUpAction.setEnabled(true);
-			}
+            expandUpAction.setEnabled(block.getStart().getOffset() != 0);
 			Address endAddr = block.getEnd();
-			if (endAddr.equals(endAddr.getAddressSpace().getMaxAddress())) {
-				expandDownAction.setEnabled(false);
-			}
-			else {
-				expandDownAction.setEnabled(true);
-			}
+            expandDownAction.setEnabled(!endAddr.equals(endAddr.getAddressSpace().getMaxAddress()));
 		}
 	}
 

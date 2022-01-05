@@ -1263,11 +1263,8 @@ public class GhidraFileChooser extends DialogComponentProvider
 	}
 
 	private boolean isUserEditing() {
-		if (filenameTextField.isMatchingListShowing()) {
-			return true;
-		}
-		return false;
-	}
+        return filenameTextField.isMatchingListShowing();
+    }
 
 	private void goUpOneDirectoryLevel() {
 		cancelEdits();

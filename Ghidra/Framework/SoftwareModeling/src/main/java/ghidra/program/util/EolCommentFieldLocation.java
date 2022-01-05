@@ -75,10 +75,8 @@ public class EolCommentFieldLocation extends CommentFieldLocation {
 		if (getClass() != obj.getClass())
 			return false;
 		EolCommentFieldLocation other = (EolCommentFieldLocation) obj;
-		if (currentCommentRow != other.currentCommentRow)
-			return false;
-		return true;
-	}
+        return currentCommentRow == other.currentCommentRow;
+    }
 
 	@Override
 	public void restoreState(Program p, SaveState obj) {

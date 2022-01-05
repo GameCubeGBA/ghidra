@@ -173,10 +173,7 @@ public class FixUpRttiAnalysisScript extends GhidraScript {
 
 		clearListing(address, address.add(sizeOfDt));
 		Data completeObjectLocator = createData(address, completeObjLocatorDataType);
-		if (completeObjectLocator == null) {
-			return null;
-		}
-		return completeObjectLocator;
+        return completeObjectLocator;
 	}
 
 	/**
@@ -237,10 +234,7 @@ public class FixUpRttiAnalysisScript extends GhidraScript {
 
 		clearListing(baseClassDescriptorAddress, baseClassDescriptorAddress.add(sizeOfDt));
 		Data baseClassDescArray = createData(baseClassDescriptorAddress, baseClassDescriptor);
-		if (baseClassDescArray == null) {
-			return null;
-		}
-		return baseClassDescArray;
+        return baseClassDescArray;
 	}
 
 	/**
@@ -396,10 +390,7 @@ public class FixUpRttiAnalysisScript extends GhidraScript {
 			classHierarchyDescriptorAddress.add(sizeOfDt));
 
 		Data classHierarchyStructure = createData(classHierarchyDescriptorAddress, classHDatatype);
-		if (classHierarchyStructure == null) {
-			return null;
-		}
-		return classHierarchyStructure;
+        return classHierarchyStructure;
 	}
 
 	/**
@@ -497,10 +488,7 @@ public class FixUpRttiAnalysisScript extends GhidraScript {
 		clearListing(baseClassArrayAddress, baseClassArrayAddress.add(numBaseClasses * sizeOfDt));
 		Data baseClassDescArray = createData(baseClassArrayAddress, baseClassDescArrayDT);
 
-		if (baseClassDescArray == null) {
-			return null;
-		}
-		return baseClassDescArray;
+        return baseClassDescArray;
 	}
 
 	/**

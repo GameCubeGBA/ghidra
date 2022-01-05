@@ -169,9 +169,7 @@ public class EnumEditorProvider extends ComponentProviderAdapter
 	public boolean checkForSave(boolean allowCancel) {
 		int result = saveChangesForCloseEvent(allowCancel);
 		if (result == CANCEL || result == ERROR) {
-			if (allowCancel) {
-				return false;
-			}
+            return !allowCancel;
 		}
 		return true;
 	}

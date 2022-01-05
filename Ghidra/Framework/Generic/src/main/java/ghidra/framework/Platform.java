@@ -235,9 +235,7 @@ public enum Platform {
 
 	private static boolean matchesCurrentPlatform(Platform platform) {
 		if (platform.operatingSystem == OperatingSystem.CURRENT_OPERATING_SYSTEM) {
-			if (platform.architecture == Architecture.CURRENT_ARCHITECTURE) {
-				return true;
-			}
+            return platform.architecture == Architecture.CURRENT_ARCHITECTURE;
 		}
 		return false;
 	}

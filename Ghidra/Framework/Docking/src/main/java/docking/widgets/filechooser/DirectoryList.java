@@ -94,11 +94,8 @@ class DirectoryList extends GList<File> implements GhidraFileChooserDirectoryMod
 
 			@Override
 			public boolean shouldConsume(MouseEvent e) {
-				if (e.isPopupTrigger() && isEditing()) {
-					return true;
-				}
-				return false;
-			}
+                return e.isPopupTrigger() && isEditing();
+            }
 
 			@Override
 			public void popupTriggered(MouseEvent e) {

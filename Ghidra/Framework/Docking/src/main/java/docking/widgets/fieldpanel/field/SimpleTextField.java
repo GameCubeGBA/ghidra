@@ -196,11 +196,8 @@ public class SimpleTextField implements Field {
 		if (row != 0) {
 			return false;
 		}
-		if ((col < 0) || (col > numCols - 1)) {
-			return false;
-		}
-		return true;
-	}
+        return (col >= 0) && (col <= numCols - 1);
+    }
 
 	@Override
 	public void paint(JComponent c, Graphics g, PaintContext context,
@@ -290,11 +287,8 @@ public class SimpleTextField implements Field {
 	 */
 	@Override
 	public boolean contains(int x, int y) {
-		if ((x >= startX) && (x < startX + width) && (y >= -heightAbove) && (y < heightBelow)) {
-			return true;
-		}
-		return false;
-	}
+        return (x >= startX) && (x < startX + width) && (y >= -heightAbove) && (y < heightBelow);
+    }
 
 	/**
 	 * Set the foreground color for this field.

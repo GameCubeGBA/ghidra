@@ -1551,11 +1551,8 @@ public class SymbolicPropogator {
 			return false;
 		}
 		int opcode = pcodeOp.getOpcode();
-		if (opcode == PcodeOp.STORE || opcode == PcodeOp.LOAD) {
-			return false;
-		}
-		return true;
-	}
+        return opcode != PcodeOp.STORE && opcode != PcodeOp.LOAD;
+    }
 
 	private Address resolveFunctionReference(Address addr) {
 		Address extAddr = null;
@@ -1908,12 +1905,9 @@ public class SymbolicPropogator {
 	 */
 	private boolean checkPossibleOffsetAddr(long offset) {
 		long maxAddrOffset = this.pointerMask;
-		if ((offset >= 0 && offset < _POINTER_MIN_BOUNDS) ||
-			(Math.abs(maxAddrOffset - offset) < _POINTER_MIN_BOUNDS)) {
-			return false;
-		}
-		return true;
-	}
+        return (offset < 0 || offset >= _POINTER_MIN_BOUNDS) &&
+                (Math.abs(maxAddrOffset - offset) >= _POINTER_MIN_BOUNDS);
+    }
 
 	private void addStoredReferences(VarnodeContext vContext, Instruction instruction,
 			Varnode storageLocation, Varnode valueToStore, TaskMonitor monitor) {
@@ -2391,9 +2385,7 @@ public class SymbolicPropogator {
 
 				// if not at the top of an instruction flow, don't do it
 				Function func = program.getFunctionManager().getFunctionContaining(target);
-				if (func != null && !func.getEntryPoint().equals(target)) {
-					return false;
-				}
+                return func == null || func.getEntryPoint().equals(target);
 			}
 		}
 		return true;

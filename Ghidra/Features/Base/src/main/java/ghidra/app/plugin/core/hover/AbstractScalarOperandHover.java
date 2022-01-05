@@ -259,10 +259,7 @@ public abstract class AbstractScalarOperandHover extends AbstractConfigurableHov
 
 	@Override
 	protected boolean isValidTooltipContent(String content) {
-		if (content == null || content.length() < HTMLUtilities.HTML.length()) {
-			return false;
-		}
-		return true;
-	}
+        return content != null && content.length() >= HTMLUtilities.HTML.length();
+    }
 
 }

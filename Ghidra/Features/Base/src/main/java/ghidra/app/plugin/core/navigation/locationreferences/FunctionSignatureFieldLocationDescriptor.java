@@ -143,7 +143,7 @@ class FunctionSignatureFieldLocationDescriptor extends LocationDescriptor {
 
 	private String getFunctionNameString(String text) {
 		String functionName = function.getName(true);
-		if (text.indexOf(functionName) != -1) {
+		if (text.contains(functionName)) {
 			return functionName;
 		}
 		return function.getName();

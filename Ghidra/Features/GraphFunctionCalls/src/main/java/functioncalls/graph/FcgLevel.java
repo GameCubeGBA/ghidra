@@ -191,11 +191,8 @@ public class FcgLevel implements Comparable<FcgLevel> {
 		if (direction != other.direction) {
 			return false;
 		}
-		if (row != other.row) {
-			return false;
-		}
-		return true;
-	}
+        return row == other.row;
+    }
 
 	/**
 	 * Returns the row of this vertex 

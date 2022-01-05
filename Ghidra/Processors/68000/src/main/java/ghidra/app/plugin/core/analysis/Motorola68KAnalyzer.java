@@ -51,12 +51,8 @@ public class Motorola68KAnalyzer extends ConstantPropagationAnalyzer {
 		boolean canAnalyze = program.getLanguage().getProcessor().equals(
 			Processor.findOrPossiblyCreateProcessor(PROCESSOR_NAME));
 
-		if (!canAnalyze) {
-			return false;
-		}
-
-		return true;
-	}
+        return canAnalyze;
+    }
 
 	@Override
 	public AddressSetView flowConstants(final Program program, Address flowStart,

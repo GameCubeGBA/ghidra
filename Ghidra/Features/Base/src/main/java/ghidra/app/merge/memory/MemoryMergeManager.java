@@ -233,11 +233,8 @@ public class MemoryMergeManager implements MergeResolver {
 		String myName = myBlocks[index].getName();
 		String origName = origBlocks[index].getName();
 
-		if (!myName.equals(origName) && !latestName.equals(origName) && !myName.equals(latestName)) {
-			return true;
-		}
-		return false;
-	}
+        return !myName.equals(origName) && !latestName.equals(origName) && !myName.equals(latestName);
+    }
 
 	/**
 	 * Return whether the permissions on a block are in conflict between 
@@ -249,12 +246,9 @@ public class MemoryMergeManager implements MergeResolver {
 		int myPermissions = myBlocks[index].getPermissions();
 		int origPermissions = origBlocks[index].getPermissions();
 
-		if (myPermissions != origPermissions && latestPermissions != origPermissions &&
-			myPermissions != latestPermissions) {
-			return true;
-		}
-		return false;
-	}
+        return myPermissions != origPermissions && latestPermissions != origPermissions &&
+                myPermissions != latestPermissions;
+    }
 
 	/**
 	 * Return whether the comments on a block are in conflict between 
@@ -271,12 +265,9 @@ public class MemoryMergeManager implements MergeResolver {
 			!latestComments.equals(origComments) && !myComments.equals(latestComments)) {
 			return true;
 		}
-		if (myComments == null && origComments != null && latestComments != null &&
-			!latestComments.equals(origComments)) {
-			return true;
-		}
-		return false;
-	}
+        return myComments == null && origComments != null && latestComments != null &&
+                !latestComments.equals(origComments);
+    }
 
 //	/**
 //	 * Show panel to resolve image base conflict.

@@ -305,11 +305,11 @@ public class ProgramDnDTree extends DragNDropTree {
 
 			// don't allow drop if node is a fragment and the
 			// action is not a move
-			if (node.isFragment() && dropAction != DnDConstants.ACTION_MOVE) {
-				return false;
-			}
+            return !node.isFragment() || dropAction == DnDConstants.ACTION_MOVE;
 		}
-		else if (chosen.equals(SelectionTransferable.localProgramSelectionFlavor)) {
+		else // fromObject is null, so we know this is
+            // from another tree, so don't allow the drop
+            if (chosen.equals(SelectionTransferable.localProgramSelectionFlavor)) {
 			if ((node.isFragment() && dropAction != DnDConstants.ACTION_MOVE) ||
 				(node.isModule() && dropAction != DnDConstants.ACTION_MOVE)) {
 				return false;
@@ -327,13 +327,8 @@ public class ProgramDnDTree extends DragNDropTree {
 				return false;
 			}
 		}
-		else if (chosen.equals(TreeTransferable.localTreeNodeFlavor)) {
-			// fromObject is null, so we know this is
-			// from another tree, so don't allow the drop
-			return false;
-		}
-		return true;
-	}
+		else return !chosen.equals(TreeTransferable.localTreeNodeFlavor);
+    }
 
 	/**
 	 * Get the string to use as the tool tip for the specified node.
@@ -702,17 +697,11 @@ public class ProgramDnDTree extends DragNDropTree {
 			if (selectionCount == 1) {
 				return true;
 			}
-			else if (selectionCount == 0) {
-				return true;
-			}
-			return false;
-		}
+			else return selectionCount == 0;
+        }
 		// allow 1 or many in selection
-		if (selectionCount > 0) {
-			return true;
-		}
-		return false;
-	}
+        return selectionCount > 0;
+    }
 
 	/**
 	 * Generate a unique name to be used as the default when

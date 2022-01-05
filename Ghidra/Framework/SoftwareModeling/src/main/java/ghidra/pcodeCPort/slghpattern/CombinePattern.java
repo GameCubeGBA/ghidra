@@ -68,11 +68,8 @@ public class CombinePattern extends DisjointPattern {
 		if (!instr.isMatch(pos)) {
 			return false;
 		}
-		if (!context.isMatch(pos)) {
-			return false;
-		}
-		return true;
-	}
+        return context.isMatch(pos);
+    }
 
 	@Override
 	public boolean alwaysTrue() {

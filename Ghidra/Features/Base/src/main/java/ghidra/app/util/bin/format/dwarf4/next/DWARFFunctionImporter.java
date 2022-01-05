@@ -181,12 +181,8 @@ public class DWARFFunctionImporter {
 		// any fixups applied by lower level code
 		DWARFNumericAttribute attr =
 			diea.getAttribute(DWARFAttribute.DW_AT_low_pc, DWARFNumericAttribute.class);
-		if (attr != null && attr.getUnsignedValue() == 0) {
-			return true;
-		}
-
-		return false;
-	}
+        return attr != null && attr.getUnsignedValue() == 0;
+    }
 
 	private void markAllChildrenAsProcessed(DebugInfoEntry die) {
 		for (DebugInfoEntry child : die.getChildren()) {
@@ -896,11 +892,8 @@ public class DWARFFunctionImporter {
 			return false;
 		}
 		int dataTypeLen = dataType.getLength();
-		if (dataTypeLen > 0 && dataTypeLen != data.getLength()) {
-			return false;
-		}
-		return true;
-	}
+        return dataTypeLen <= 0 || dataTypeLen == data.getLength();
+    }
 
 	private boolean isEnumDataTypeCompatibleWithExistingData(Enum enumDT, Address address) {
 		Listing listing = currentProgram.getListing();
@@ -916,11 +909,8 @@ public class DWARFFunctionImporter {
 		if (dataDT instanceof BooleanDataType) {
 			return false;
 		}
-		if (dataDT.getLength() != enumDT.getLength()) {
-			return false;
-		}
-		return true;
-	}
+        return dataDT.getLength() == enumDT.getLength();
+    }
 
 	private boolean isDataTypeCompatibleWithExistingData(DataType dataType, Address address) {
 		if (DataUtilities.isUndefinedRange(currentProgram, address,

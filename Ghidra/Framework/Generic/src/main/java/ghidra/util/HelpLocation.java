@@ -115,7 +115,7 @@ public class HelpLocation {
 	}
 
 	private String buildId(String localTopic, String localAnchor) {
-		if (localTopic.indexOf(".htm") >= 0) {
+		if (localTopic.contains(".htm")) {
 			return null;
 		}
 		if (localAnchor == null) {
@@ -147,7 +147,7 @@ public class HelpLocation {
 	}
 
 	private URL findHelpResource(String topicPath) {
-		if (topicPath.indexOf(".htm") >= 0) {
+		if (topicPath.contains(".htm")) {
 			return ResourceManager.getResource("/help/topics/" + topicPath);
 		}
 
@@ -159,11 +159,8 @@ public class HelpLocation {
 
 		filename = topicPath + ".html";
 		fileURL = ResourceManager.getResource("/help/topics/" + filename);
-		if (fileURL != null) {
-			return fileURL;
-		}
-		return null;
-	}
+        return fileURL;
+    }
 
 	/**
 	 * Get the help ID for this help location.
@@ -261,15 +258,10 @@ public class HelpLocation {
 
 		URL helpURL = getURL();
 		if (helpURL == null) {
-			if (other.getURL() != null) {
-				return false;
-			}
+            return other.getURL() == null;
 		}
-		else if (!helpURL.equals(other.getURL())) {
-			return false;
-		}
-		return true;
-	}
+		else return helpURL.equals(other.getURL());
+    }
 
 	/**
 	 * Returns information describing how/where this help location was created.  This value may

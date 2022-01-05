@@ -86,11 +86,8 @@ public class DataTypeEditorManager
 	 * @return true if this service can invoke an editor for changing the data type.
 	 */
 	public boolean isEditable(DataType dt) {
-		if ((dt instanceof Enum) || (dt instanceof Union) || (dt instanceof Structure)) {
-			return true;
-		}
-		return false;
-	}
+        return (dt instanceof Enum) || (dt instanceof Union) || (dt instanceof Structure);
+    }
 
 	/**
 	 * Displays a data type editor for editing the indicated data type. If the data type is
@@ -285,9 +282,7 @@ public class DataTypeEditorManager
 		if (editor != null) {
 			if (editor.needsSave()) {
 				editor.show();
-				if (!editor.checkForSave(allowCancel)) {
-					return false;
-				}
+                return editor.checkForSave(allowCancel);
 			}
 		}
 		return true;

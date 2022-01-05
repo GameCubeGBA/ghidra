@@ -277,13 +277,9 @@ public class HTMLUtilities {
 			return true;
 		}
 
-		if (text.contains(HTML_NEW_LINE)) {
-			// this implies the client has already broken lines in their preferred location
-			return true;
-		}
-
-		return false;
-	}
+        // this implies the client has already broken lines in their preferred location
+        return text.contains(HTML_NEW_LINE);
+    }
 
 	private static void logUnbreakableHTMLWarning() {
 		//
@@ -647,11 +643,8 @@ public class HTMLUtilities {
 	 * @return boolean true if character should be escaped
 	 */
 	public static boolean charNeedsHTMLEscaping(int codePoint) {
-		if (codePoint == '\n' || codePoint == '\t' || (' ' <= codePoint && codePoint < 0x7F)) {
-			return false;
-		}
-		return true;
-	}
+        return codePoint != '\n' && codePoint != '\t' && (' ' > codePoint || codePoint >= 0x7F);
+    }
 
 	/**
 	 * A convenience method to split the given HTML into lines, based on the given length, and

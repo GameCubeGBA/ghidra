@@ -170,11 +170,8 @@ public class ISO9660Directory implements StructConverter {
 	}
 
 	public boolean isDirectoryFlagSet() {
-		if (getFlagBit(fileFlag, ISO9660Constants.DIRECTORY_FLAG) == 1) {
-			return true;
-		}
-		return false;
-	}
+        return getFlagBit(fileFlag, ISO9660Constants.DIRECTORY_FLAG) == 1;
+    }
 
 	ByteProvider getByteProvider(ByteProvider provider, long logicalBlockSize, FSRL fsrl) {
 
@@ -246,12 +243,9 @@ public class ISO9660Directory implements StructConverter {
 		i6 = byteArray[5];        // Second of minute
 
 		// The buffer contains an invalid timezone offset.
-		boolean validBuffer = true;
-		if (timeOffset < -48 || timeOffset > 52) {
-			validBuffer = false;
-		}
+		boolean validBuffer = timeOffset >= -48 && timeOffset <= 52;
 
-		// The buffer contains an invalid date/time.
+        // The buffer contains an invalid date/time.
 		try {
 			LocalDateTime.of(i1, i2, i3, i4, i5, i6);
 		} catch (DateTimeException exception) {

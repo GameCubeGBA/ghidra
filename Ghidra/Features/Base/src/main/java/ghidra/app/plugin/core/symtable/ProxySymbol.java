@@ -45,11 +45,8 @@ class ProxySymbol implements Symbol {
 
 		// this class is only ever equal if the id matches
 		Symbol s = (Symbol) obj;
-		if (getID() == s.getID()) {
-			return true;
-		}
-		return false;
-	}
+        return getID() == s.getID();
+    }
 
 	@Override
 	public int hashCode() {

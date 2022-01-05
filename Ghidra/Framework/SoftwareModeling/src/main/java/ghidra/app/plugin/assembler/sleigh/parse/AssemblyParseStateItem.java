@@ -105,11 +105,8 @@ public class AssemblyParseStateItem implements Comparable<AssemblyParseStateItem
 		if (!(this.prod.getIndex() == apsi.prod.getIndex())) {
 			return false;
 		}
-		if (this.pos != apsi.pos) {
-			return false;
-		}
-		return true;
-	}
+        return this.pos == apsi.pos;
+    }
 
 	@Override
 	public int compareTo(AssemblyParseStateItem that) {
@@ -119,12 +116,8 @@ public class AssemblyParseStateItem implements Comparable<AssemblyParseStateItem
 			return result;
 		}
 		result = this.pos - that.pos;
-		if (result != 0) {
-			return result;
-		}
-
-		return 0;
-	}
+        return result;
+    }
 
 	@Override
 	public int hashCode() {

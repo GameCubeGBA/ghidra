@@ -113,21 +113,15 @@ class UnionEditorModel extends CompEditorModel {
 		// There shouldn't be a selection when this is called.
 		switch (columnIndex) {
 			case DATATYPE:
-				if ((rowIndex >= 0) && (rowIndex <= numComponents)) {
-					return true;
-				}
-				return false;
-			case FIELDNAME:
+                return (rowIndex >= 0) && (rowIndex <= numComponents);
+            case FIELDNAME:
 			case COMMENT:
 				if (rowIndex >= numComponents) {
 					return false;
 				}
 				DataType dt = getComponent(rowIndex).getDataType();
-				if (dt == DataType.DEFAULT) {
-					return false;
-				}
-				return true;
-			default:
+                return dt != DataType.DEFAULT;
+            default:
 				return false; // User can't edit any other fields.
 		}
 	}
@@ -264,9 +258,7 @@ class UnionEditorModel extends CompEditorModel {
 			DataTypeComponent comp = getComponent(rowIndex);
 			if (comp != null) {
 				DataType compDt = comp.getDataType();
-				if (compDt instanceof Array || compDt instanceof Pointer) {
-					return false;
-				}
+                return !(compDt instanceof Array) && !(compDt instanceof Pointer);
 			}
 		}
 

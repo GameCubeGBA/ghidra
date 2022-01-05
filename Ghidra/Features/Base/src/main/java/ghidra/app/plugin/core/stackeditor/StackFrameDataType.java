@@ -482,12 +482,9 @@ public class StackFrameDataType extends BiDirectionDataType {
 				comment = null;
 			}
 		}
-		if (dt.isEquivalent(DataType.DEFAULT) && (newName == null || newName.length() == 0) &&
-			(comment == null)) {
-			return false;
-		}
-		return true;
-	}
+        return !dt.isEquivalent(DataType.DEFAULT) || (newName != null && newName.length() != 0) ||
+                (comment != null);
+    }
 
 	/**
 	 * Currently no validation is done on the name.
@@ -688,11 +685,8 @@ public class StackFrameDataType extends BiDirectionDataType {
 			return false;
 		}
 		int index = Collections.binarySearch(components, Integer.valueOf(ordinal), ordinalComparator);
-		if (index >= 0) {
-			return true;
-		}
-		return false;
-	}
+        return index >= 0;
+    }
 
 //	public static void main(String[] args) {
 //		StackFrameImpl sf = new StackFrameImpl(0x4);

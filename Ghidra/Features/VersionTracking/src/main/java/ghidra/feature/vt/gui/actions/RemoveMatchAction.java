@@ -69,11 +69,8 @@ public class RemoveMatchAction extends DockingAction {
 		if (matches.size() == 0) {
 			return false;
 		}
-		if (!isRemovableMatch(matches.get(0))) {
-			return false; // It must be a single manual match.
-		}
-		return true;
-	}
+        return isRemovableMatch(matches.get(0)); // It must be a single manual match.
+    }
 
 	private boolean isRemovableMatch(VTMatch vtMatch) {
 		return vtMatch.getMatchSet().hasRemovableMatches();

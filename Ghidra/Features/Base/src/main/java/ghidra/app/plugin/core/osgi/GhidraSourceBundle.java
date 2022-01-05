@@ -413,9 +413,7 @@ public class GhidraSourceBundle extends GhidraBundle {
 	private boolean stillHasErrors(ResourceFile newSourceFile) {
 		BuildError error = buildErrors.get(newSourceFile);
 		if (error != null) {
-			if (error.getLastModified() == newSourceFile.lastModified()) {
-				return true;
-			}
+            return error.getLastModified() == newSourceFile.lastModified();
 		}
 		return false;
 	}

@@ -1110,11 +1110,8 @@ public class FunctionSignatureStringable extends Stringable {
 			if (!SystemUtilities.isEqual(comment, other.comment)) {
 				return false;
 			}
-			if (!DataTypeUtilities.isSameOrEquivalentDataType(dataType, other.dataType)) {
-				return false;
-			}
-			return true;
-		}
+            return DataTypeUtilities.isSameOrEquivalentDataType(dataType, other.dataType);
+        }
 
 		@Override
 		public String toString() {

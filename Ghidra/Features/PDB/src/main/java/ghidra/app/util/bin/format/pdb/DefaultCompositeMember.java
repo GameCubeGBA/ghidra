@@ -381,10 +381,8 @@ public class DefaultCompositeMember extends CompositeMember {
 			// both components are bit fields
 			BitFieldDataType bitfieldDt = (BitFieldDataType) dtc.getDataType();
 			BitFieldDataType nonPackedBitfieldDt = (BitFieldDataType) nonPackedDtc.getDataType();
-			if (bitfieldDt.getBitOffset() != nonPackedBitfieldDt.getBitOffset() ||
-				bitfieldDt.getBitSize() != nonPackedBitfieldDt.getBitSize()) {
-				return false;
-			}
+            return bitfieldDt.getBitOffset() == nonPackedBitfieldDt.getBitOffset() &&
+                    bitfieldDt.getBitSize() == nonPackedBitfieldDt.getBitSize();
 		}
 		return true;
 	}
@@ -940,11 +938,8 @@ public class DefaultCompositeMember extends CompositeMember {
 			if (parent != null) {
 				parent.sizeChanged(this);
 			}
-			if (member.memberIsZeroLengthArray && !member.transformIntoStructureContainer()) {
-				return false;
-			}
-			return true;
-		}
+            return !member.memberIsZeroLengthArray || member.transformIntoStructureContainer();
+        }
 
 		// NOTE: It is assumed that offset will always be ascending and not reach back to union
 		// members before the last one

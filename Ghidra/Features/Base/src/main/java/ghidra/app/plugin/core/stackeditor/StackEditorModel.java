@@ -655,11 +655,8 @@ public class StackEditorModel extends CompositeEditorModel {
 //			}
 //		}
 		int maxBytes = ((StackFrameDataType) viewComposite).getMaxLength(offset);
-		if (newLength > maxBytes) {
-			return false;
-		}
-		return true;
-	}
+        return newLength <= maxBytes;
+    }
 
 	@Override
 	public boolean isBitFieldAllowed() {
@@ -705,18 +702,13 @@ public class StackEditorModel extends CompositeEditorModel {
 			int paramOffset = getParameterOffset();
 			if (paramOffset >= 0) {
 				// grows negative
-				if (startOffset < paramOffset && endOffset >= paramOffset) {
-					return false;
-				}
+                return startOffset >= paramOffset || endOffset < paramOffset;
 			}
 			else {
 				// grows positive
-				if (startOffset <= paramOffset && endOffset > paramOffset) {
-					return false;
-				}
+                return startOffset > paramOffset || endOffset <= paramOffset;
 			}
-			return true;
-		}
+        }
 		return false;
 	}
 
@@ -737,11 +729,8 @@ public class StackEditorModel extends CompositeEditorModel {
 		}
 		int offset = getComponent(currentIndex).getOffset();
 		int maxBytes = ((StackFrameDataType) viewComposite).getMaxLength(offset);
-		if (dataType.getLength() > maxBytes) {
-			return false;
-		}
-		return true;
-	}
+        return dataType.getLength() <= maxBytes;
+    }
 
 	private void adjustComponents(DataType dataType) {
 		StackFrameDataType stackDt = (StackFrameDataType) viewComposite;
@@ -1049,12 +1038,8 @@ public class StackEditorModel extends CompositeEditorModel {
 				"Would you like to overwrite the external changes with your changes?",
 			"Overwrite", OptionDialog.WARNING_MESSAGE);
 
-		if (choice == OptionDialog.CANCEL_OPTION) {
-			return true;
-		}
-
-		return false;
-	}
+        return choice == OptionDialog.CANCEL_OPTION;
+    }
 
 	protected int startTransaction(String startMsg) {
 		Program program = ((StackEditorProvider) provider).getProgram();

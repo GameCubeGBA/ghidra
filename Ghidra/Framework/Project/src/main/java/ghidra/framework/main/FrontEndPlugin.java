@@ -764,11 +764,8 @@ public class FrontEndPlugin extends Plugin
 				if (model.isDirectory(pathname)) {
 					return !lowerCaseName.endsWith(ProjectLocator.getProjectDirExtension());
 				}
-				if (lowerCaseName.endsWith(ProjectLocator.getProjectExtension())) {
-					return true;
-				}
-				return false;
-			}
+                return lowerCaseName.endsWith(ProjectLocator.getProjectExtension());
+            }
 		});
 		fileChooser.rescanCurrentDirectory();
 		return fileChooser;

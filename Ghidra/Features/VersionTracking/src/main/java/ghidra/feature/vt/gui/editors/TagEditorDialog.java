@@ -126,12 +126,7 @@ public class TagEditorDialog extends DialogComponentProvider {
 				}
 
 				int[] selectedIndices = list.getSelectedIndices();
-				if (selectedIndices == null || selectedIndices.length == 0) {
-					deleteButton.setEnabled(false);
-				}
-				else {
-					deleteButton.setEnabled(true);
-				}
+                deleteButton.setEnabled(selectedIndices != null && selectedIndices.length != 0);
 			}
 		});
 

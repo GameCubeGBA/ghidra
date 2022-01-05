@@ -454,11 +454,8 @@ public class AssemblyPatternBlock implements Comparable<AssemblyPatternBlock> {
 		}
 
 		result = SleighUtil.compareArrays(this.vals, that.vals);
-		if (result != 0) {
-			return result;
-		}
-		return 0;
-	}
+        return result;
+    }
 
 	/**
 	 * Read an array, returning a default if the index is out of bounds

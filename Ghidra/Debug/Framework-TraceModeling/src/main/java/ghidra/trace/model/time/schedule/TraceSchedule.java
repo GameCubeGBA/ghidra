@@ -164,12 +164,8 @@ public class TraceSchedule implements Comparable<TraceSchedule> {
 		}
 
 		result = this.pSteps.compareSeq(that.pSteps);
-		if (result != CompareResult.EQUALS) {
-			return result;
-		}
-
-		return CompareResult.EQUALS;
-	}
+        return result;
+    }
 
 	@Override
 	public boolean equals(Object obj) {
@@ -186,11 +182,8 @@ public class TraceSchedule implements Comparable<TraceSchedule> {
 		if (!Objects.equals(this.steps, that.steps)) {
 			return false;
 		}
-		if (!Objects.equals(this.pSteps, that.pSteps)) {
-			return false;
-		}
-		return true;
-	}
+        return Objects.equals(this.pSteps, that.pSteps);
+    }
 
 	@Override
 	public int hashCode() {

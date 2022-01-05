@@ -157,7 +157,7 @@ public class FileIconService {
 		}
 
 		for (String substr : fileSubstrToIconName.keySet()) {
-			if (fileName.indexOf(substr) != -1) {
+			if (fileName.contains(substr)) {
 				return getCachedIcon("####" + substr, fileSubstrToIconName.get(substr), overlays);
 			}
 		}

@@ -156,11 +156,8 @@ public class ApplicationVersion implements Comparable<ApplicationVersion> {
 		if (patch != other.patch) {
 			return false;
 		}
-		if (!tag.equals(other.tag)) {
-			return false;
-		}
-		return true;
-	}
+        return tag.equals(other.tag);
+    }
 
 	/**
 	 * Parses the major, minor, patch, and tag components out of the given version string.

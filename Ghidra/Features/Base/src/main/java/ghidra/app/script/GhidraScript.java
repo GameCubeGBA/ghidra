@@ -410,11 +410,9 @@ public abstract class GhidraScript extends FlatProgramAPI {
 					OptionDialog.QUESTION_MESSAGE);
 		//@formatter:on
 
-		if (choice == OptionDialog.OPTION_TWO) { // Yes
-			return true;
-		}
-		return false;
-	}
+        // Yes
+        return choice == OptionDialog.OPTION_TWO;
+    }
 
 	@Override
 	public void analyzeAll(Program program) {
@@ -1829,7 +1827,7 @@ public abstract class GhidraScript extends FlatProgramAPI {
 	private String join(String... input) {
 
 		char separator = ' ';
-		StringBuilder buffy = new StringBuilder("");
+		StringBuilder buffy = new StringBuilder();
 		for (String s : input) {
 			if (s == null) {
 				continue;

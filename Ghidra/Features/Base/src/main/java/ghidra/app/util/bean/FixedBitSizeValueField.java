@@ -123,11 +123,8 @@ public class FixedBitSizeValueField extends JPanel {
 		if (value.compareTo(maxValue) > 0) {
 			return false;
 		}
-		if (value.compareTo(minValue) < 0) {
-			return false;
-		}
-		return true;
-	}
+        return value.compareTo(minValue) >= 0;
+    }
 	public void setMinMax(BigInteger min, BigInteger max) {
 		minValue = min;
 		maxValue = max;

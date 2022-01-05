@@ -128,11 +128,8 @@ public class BitFieldPackingImpl implements BitFieldPacking {
 		if (useMSConvention != op2.useMSConvention) {
 			return false;
 		}
-		if (zeroLengthBoundary != op2.zeroLengthBoundary) {
-			return false;
-		}
-		return true;
-	}
+        return zeroLengthBoundary == op2.zeroLengthBoundary;
+    }
 
 	@Override
 	public int hashCode() {

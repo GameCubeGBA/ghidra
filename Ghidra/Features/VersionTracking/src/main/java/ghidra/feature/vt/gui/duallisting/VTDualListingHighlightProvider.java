@@ -858,21 +858,16 @@ public class VTDualListingHighlightProvider implements HighlightProvider {
 		Program destinationProgram = session.getDestinationProgram();
 		if (program == sourceProgram) {
 			Address markupFunctionAddress = association.getSourceAddress();
-			if (!variableFunctionAddress.equals(markupFunctionAddress)) {
-				return false;
-			}
+            return variableFunctionAddress.equals(markupFunctionAddress);
 		}
 		else if (program == destinationProgram) {
 			Address markupFunctionAddress = association.getDestinationAddress();
-			if (!variableFunctionAddress.equals(markupFunctionAddress)) {
-				return false;
-			}
+            return variableFunctionAddress.equals(markupFunctionAddress);
 		}
 		else {
 			return false;
 		}
-		return true;
-	}
+    }
 
 	private void addParametersHighlight(String text, int cursorTextOffset,
 			VTMarkupItem parameterMarkupItem, ArrayList<Highlight> highlightList) {

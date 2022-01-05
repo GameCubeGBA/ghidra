@@ -59,10 +59,8 @@ public class StackVariableAnalyzer extends AbstractAnalyzer {
 	private boolean useOldStackAnalysisByDefault(Program program) {
 		Language language = program.getLanguage();
 		if (language.getProcessor().equals(Processor.findOrPossiblyCreateProcessor("x86"))) {
-			if (language.getLanguageDescription().getSize() == 16) {
-				// Prefer using old stack analysis for x86 16-bit with segmented addresses
-				return true;
-			}
+            // Prefer using old stack analysis for x86 16-bit with segmented addresses
+            return language.getLanguageDescription().getSize() == 16;
 		}
 		return false;
 	}

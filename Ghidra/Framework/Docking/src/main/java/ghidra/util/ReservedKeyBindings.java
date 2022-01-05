@@ -50,15 +50,11 @@ public class ReservedKeyBindings {
 
 	public static boolean isReservedKeystroke(KeyStroke keyStroke) {
 		int code = keyStroke.getKeyCode();
-		if (code == KeyEvent.VK_SHIFT || code == KeyEvent.VK_ALT || code == KeyEvent.VK_CONTROL ||
-			code == KeyEvent.VK_CAPS_LOCK || code == KeyEvent.VK_TAB ||
-			HELP_KEY1.equals(keyStroke) || HELP_KEY2.equals(keyStroke) ||
-			HELP_INFO_KEY.equals(keyStroke) || UPDATE_KEY_BINDINGS_KEY.equals(keyStroke) ||
-			FOCUS_INFO_KEY.equals(keyStroke) || FOCUS_CYCLE_INFO_KEY.equals(keyStroke) ||
-			CONTEXT_MENU_KEY1.equals(keyStroke) || CONTEXT_MENU_KEY2.equals(keyStroke)) {
-			return true;
-		}
-
-		return false;
-	}
+        return code == KeyEvent.VK_SHIFT || code == KeyEvent.VK_ALT || code == KeyEvent.VK_CONTROL ||
+                code == KeyEvent.VK_CAPS_LOCK || code == KeyEvent.VK_TAB ||
+                HELP_KEY1.equals(keyStroke) || HELP_KEY2.equals(keyStroke) ||
+                HELP_INFO_KEY.equals(keyStroke) || UPDATE_KEY_BINDINGS_KEY.equals(keyStroke) ||
+                FOCUS_INFO_KEY.equals(keyStroke) || FOCUS_CYCLE_INFO_KEY.equals(keyStroke) ||
+                CONTEXT_MENU_KEY1.equals(keyStroke) || CONTEXT_MENU_KEY2.equals(keyStroke);
+    }
 }

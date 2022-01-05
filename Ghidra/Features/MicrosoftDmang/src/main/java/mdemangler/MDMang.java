@@ -355,11 +355,8 @@ public class MDMang {
 	// go away
 	// altogether.
 	public boolean isEffectivelyEmpty(StringBuilder builder) {
-		if (builder.length() == 0) {
-			return true;
-		}
-		return false;
-	}
+        return builder.length() == 0;
+    }
 
 	public void insertString(StringBuilder builder, String string) {
 		if (builder.length() != 0 && string.length() != 0) {

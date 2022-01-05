@@ -369,12 +369,8 @@ public class PowerPCAddressAnalyzer extends ConstantPropagationAnalyzer {
 			return true;
 		}
 		Reference[] refs = program.getReferenceManager().getReferencesFrom(addr);
-		if (refs.length == 1 && !refs[0].getReferenceType().isData()) {
-			return true;
-		}
-
-		return false;
-	}
+        return refs.length == 1 && !refs[0].getReferenceType().isData();
+    }
 
 	private void recoverSwitches(final Program program, SymbolicPropogator symEval,
 			AddressSet destinationSet, TaskMonitor monitor) throws CancelledException {
@@ -710,9 +706,7 @@ public class PowerPCAddressAnalyzer extends ConstantPropagationAnalyzer {
 				}
 				Address fallAddr = instr.getFallFrom();
 				Instruction fallInstr = program.getListing().getInstructionContaining(fallAddr);
-				if (fallInstr != null && fallInstr.getFlowType().isCall()) {
-					return true;
-				}
+                return fallInstr != null && fallInstr.getFlowType().isCall();
 			}
 		}
 		return false;

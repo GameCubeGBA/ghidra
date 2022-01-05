@@ -145,11 +145,8 @@ public class ParamEntry {
 		if (unsignedCompare(end, op2end)) {
 			return false;
 		}
-		if (alignment != op2.alignment) {
-			return false;
-		}
-		return true;
-	}
+        return alignment == op2.alignment;
+    }
 
 	public int justifiedContain(Address addr, int sz) {
 		if (joinrec != null) {
@@ -512,11 +509,8 @@ public class ParamEntry {
 		if (group != op2.group || groupsize != op2.groupsize) {
 			return false;
 		}
-		if (!SystemUtilities.isArrayEqual(joinrec, op2.joinrec)) {
-			return false;
-		}
-		return true;
-	}
+        return SystemUtilities.isArrayEqual(joinrec, op2.joinrec);
+    }
 
 	@Override
 	public int hashCode() {

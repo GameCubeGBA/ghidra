@@ -88,11 +88,8 @@ public class ChooseMatchTagAction extends DockingAction {
 		}
 		VTMatchContext matchContext = (VTMatchContext) context;
 		List<VTMatch> matches = matchContext.getSelectedMatches();
-		if (matches.size() == 0) {
-			return false;
-		}
-		return true;
-	}
+        return matches.size() != 0;
+    }
 
 //==================================================================================================
 // Inner Classes    

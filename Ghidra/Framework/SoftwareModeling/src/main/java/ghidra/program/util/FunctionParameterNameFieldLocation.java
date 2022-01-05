@@ -73,13 +73,10 @@ public class FunctionParameterNameFieldLocation extends FunctionParameterFieldLo
 			return false;
 		FunctionParameterNameFieldLocation other = (FunctionParameterNameFieldLocation) obj;
 		if (parameterName == null) {
-			if (other.parameterName != null)
-				return false;
+            return other.parameterName == null;
 		}
-		else if (!parameterName.equals(other.parameterName))
-			return false;
-		return true;
-	}
+		else return parameterName.equals(other.parameterName);
+    }
 
 	@Override
 	public void saveState(SaveState obj) {

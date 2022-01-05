@@ -90,8 +90,7 @@ public abstract class DisjointPattern extends Pattern {
 		if (b != null) {		// a must match existing block
 			if (a == null)
 				return false;
-			if (!a.specializes(b))
-				return false;
+            return a.specializes(b);
 		}
 		return true;
 	}
@@ -112,8 +111,7 @@ public abstract class DisjointPattern extends Pattern {
 		if (b != null) {		// a must match existing block
 			if (a == null)
 				return false;
-			if (!a.identical(b))
-				return false;
+            return a.identical(b);
 		}
 		return true;
 	}

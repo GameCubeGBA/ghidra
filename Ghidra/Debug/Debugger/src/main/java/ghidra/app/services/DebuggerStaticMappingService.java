@@ -254,11 +254,8 @@ public interface DebuggerStaticMappingService {
 				// TODO: Determine how to handle these.
 				return false;
 			}
-			if (MemoryBlock.EXTERNAL_BLOCK_NAME.equals(block.getName())) {
-				return false;
-			}
-			return true;
-		}
+            return !MemoryBlock.EXTERNAL_BLOCK_NAME.equals(block.getName());
+        }
 
 		/**
 		 * Compute the "size" of an image
@@ -310,15 +307,12 @@ public interface DebuggerStaticMappingService {
 				return false;
 			}
 			ModuleMapEntry that = (ModuleMapEntry) obj;
-			if (this.module != that.module) {
-				return false;
-			}
+            return this.module == that.module;
 			/*if (this.program != that.program) {
 				return false;
 			}*/
 			// imageSize is derived
-			return true;
-		}
+        }
 
 		@Override
 		public int hashCode() {
@@ -408,17 +402,14 @@ public interface DebuggerStaticMappingService {
 				return false;
 			}
 			SectionMapEntry that = (SectionMapEntry) obj;
-			if (this.section != that.section) {
-				return false;
-			}
+            return this.section == that.section;
 			/*if (this.program != that.program) {
 				return false;
 			}
 			if (this.block != that.block) {
 				return false;
 			}*/
-			return true;
-		}
+        }
 
 		@Override
 		public int hashCode() {
@@ -604,11 +595,8 @@ public interface DebuggerStaticMappingService {
 				return c;
 			}
 			c = this.srcRange.compareTo(that.srcRange);
-			if (c != 0) {
-				return c;
-			}
-			return 0;
-		}
+            return c;
+        }
 
 		@Override
 		public boolean equals(Object obj) {
@@ -619,11 +607,8 @@ public interface DebuggerStaticMappingService {
 			if (!this.dstRange.equals(that.dstRange)) {
 				return false;
 			}
-			if (!this.srcRange.equals(that.srcRange)) {
-				return false;
-			}
-			return true;
-		}
+            return this.srcRange.equals(that.srcRange);
+        }
 
 		@Override
 		public int hashCode() {

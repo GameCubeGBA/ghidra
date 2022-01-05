@@ -130,9 +130,7 @@ public class MultipleCauses extends Throwable {
 	public static boolean hasMultiple(Throwable e) {
 		Throwable cause = e.getCause();
 		if (cause != null) {
-			if (cause instanceof MultipleCauses) {
-				return true;
-			}
+            return cause instanceof MultipleCauses;
 		}
 		return false;
 	}

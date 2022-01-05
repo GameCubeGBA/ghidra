@@ -199,11 +199,8 @@ public class DBTraceEquateSpace implements DBTraceSpaceBased, TraceEquateSpace {
 			if (r.type != EquateRefType.OP) {
 				return false;
 			}
-			if (r.opOrHash != operandIndex) {
-				return false;
-			}
-			return true;
-		});
+            return r.opOrHash == operandIndex;
+        });
 		return Collections2.transform(filt, r -> manager.equateStore.getObjectAt(r.equateKey));
 	}
 

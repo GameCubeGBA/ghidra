@@ -210,11 +210,8 @@ public abstract class AnnotatedSaveable implements Saveable {
 				return result;
 			}
 			result = f1.getName().compareTo(f2.getName());
-			if (result != 0) {
-				return result;
-			}
-			return 0;
-		});
+            return result;
+        });
 		this.fields = new FieldAccessor[fields.size()];
 		this.fieldClasses = new Class<?>[fields.size()];
 		for (int i = 0; i < fields.size(); i++) {

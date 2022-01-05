@@ -1194,11 +1194,8 @@ public class ClipboardPluginTest extends AbstractGhidraHeadedIntegrationTest {
 
 			@Override
 			public boolean isDataFlavorSupported(DataFlavor flavor) {
-				if (flavor.equals(DataFlavor.stringFlavor)) {
-					return true;
-				}
-				return false;
-			}
+                return flavor.equals(DataFlavor.stringFlavor);
+            }
 
 			@Override
 			public DataFlavor[] getTransferDataFlavors() {
@@ -1279,11 +1276,8 @@ public class ClipboardPluginTest extends AbstractGhidraHeadedIntegrationTest {
 
 			@Override
 			public boolean isDataFlavorSupported(DataFlavor flavor) {
-				if (flavor.equals(DataFlavor.stringFlavor)) {
-					return true;
-				}
-				return false;
-			}
+                return flavor.equals(DataFlavor.stringFlavor);
+            }
 
 			@Override
 			public DataFlavor[] getTransferDataFlavors() {

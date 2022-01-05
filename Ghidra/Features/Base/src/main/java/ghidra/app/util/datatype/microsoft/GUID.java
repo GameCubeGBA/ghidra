@@ -251,9 +251,6 @@ public class GUID {
 		if (data3 != other.data3) {
 			return false;
 		}
-		if (!Arrays.equals(data4, other.data4)) {
-			return false;
-		}
-		return true;
-	}
+        return Arrays.equals(data4, other.data4);
+    }
 }

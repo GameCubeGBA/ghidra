@@ -519,11 +519,8 @@ public class PcodeInjectLibrary {
 		if (!exePcodeMap.equals(op2.exePcodeMap)) {
 			return false;
 		}
-		if (!SystemUtilities.isArrayEqual(programPayload, op2.programPayload)) {
-			return false;
-		}
-		return true;
-	}
+        return SystemUtilities.isArrayEqual(programPayload, op2.programPayload);
+    }
 
 	@Override
 	public int hashCode() {

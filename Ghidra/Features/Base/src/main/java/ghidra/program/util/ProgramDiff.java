@@ -292,11 +292,8 @@ public class ProgramDiff {
 	 * Return true if the programs to compare have matching memory maps.
 	 */
 	public boolean memoryMatches() {
-		if (pgmMemComp.hasMemoryDifferences()) {
-			return false;
-		}
-		return true;
-	}
+        return !pgmMemComp.hasMemoryDifferences();
+    }
 
 	/** Returns a copy of this ProgramDiff.
 	 *  @return the copy of this ProgramDiff or null if a
@@ -322,7 +319,7 @@ public class ProgramDiff {
 			diff.diffsToReturn = new AddressSet(this.diffsToReturn);
 			diff.filterChanged = this.filterChanged;
 			diff.sameProgramContext = this.sameProgramContext;
-			diff.warnings = (this.warnings == null) ? null : new String(this.warnings);
+			diff.warnings = (this.warnings == null) ? null : this.warnings;
 		}
 		catch (ProgramConflictException exc) {
 			Msg.error(this, "Unexpected Exception: " + exc.getMessage(), exc);
@@ -2316,12 +2313,9 @@ public class ProgramDiff {
 		if (!equivalentVariableArrays(f1.getParameters(), f2.getParameters(), hasCustomStorage)) {
 			return false;
 		}
-		if (!f1IsExternal &&
-			!equivalentVariableArrays(f1.getLocalVariables(), f2.getLocalVariables(), false)) {
-			return false;
-		}
-		return true;
-	}
+        return f1IsExternal ||
+                equivalentVariableArrays(f1.getLocalVariables(), f2.getLocalVariables(), false);
+    }
 
 	/**
 	 * Compares two thunk functions from different programs to determine if they are 
@@ -3155,11 +3149,8 @@ public class ProgramDiff {
 		Address fallThrough1 = i1.getFallThrough();
 		Address fallThrough1As2 =
 			SimpleDiffUtility.getCompatibleAddress(program1, fallThrough1, program2);
-		if (!SystemUtilities.isEqual(i2.getFallThrough(), fallThrough1As2)) {
-			return false;
-		}
-		return true;
-	}
+        return SystemUtilities.isEqual(i2.getFallThrough(), fallThrough1As2);
+    }
 
 	/** Provides comparisons between two defined data code units.
 	 */
@@ -3190,12 +3181,8 @@ public class ProgramDiff {
 				return false;
 			}
 			// Detect that data type name or path differs?
-			if (!dt1.getPathName().equals(dt2.getPathName())) {
-				return false;
-			}
-
-			return true;
-		}
+            return dt1.getPathName().equals(dt2.getPathName());
+        }
 	}
 
 	/** An IteratorWrapper provides a common class for accessing the methods
@@ -3315,11 +3302,8 @@ public class ProgramDiff {
 
 		Symbol p1Parent = p1Symbol.getParentSymbol();
 		Symbol p2Parent = p2Symbol.getParentSymbol();
-		if (!equivalentSymbols(p1, p2, p1Parent, p2Parent)) {
-			return false;
-		}
-		return true;
-	}
+        return equivalentSymbols(p1, p2, p1Parent, p2Parent);
+    }
 
 	static boolean equivalentSymbols(AddressTranslator p2ToP1Translator, Symbol p1Symbol,
 			Symbol p2Symbol) {
@@ -3365,10 +3349,7 @@ public class ProgramDiff {
 
 		Symbol p1Parent = p1Symbol.getParentSymbol();
 		Symbol p2Parent = p2Symbol.getParentSymbol();
-		if (!equivalentSymbols(p2ToP1Translator, p1Parent, p2Parent)) {
-			return false;
-		}
-		return true;
-	}
+        return equivalentSymbols(p2ToP1Translator, p1Parent, p2Parent);
+    }
 
 }

@@ -93,7 +93,7 @@ public class SSHKeyUtil {
 		w.writeMPInt(rsaPublicKey.getModulus());
 
 		byte[] bytesOut = w.getBytes();
-		String publicKeyEncoded = new String(Base64.getEncoder().encodeToString(bytesOut));
+		String publicKeyEncoded = Base64.getEncoder().encodeToString(bytesOut);
 		return keyAlgorithm + " " + publicKeyEncoded + " test\n";
 	}
 

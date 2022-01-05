@@ -628,13 +628,9 @@ class VertexSet implements KeyIndexableSet<Vertex>
 	        {
 	            throw new ConcurrentModificationException("Set Modified");
 	        }
-	
-	        if( nextPosition < capacity() )
-	        {
-	            return true;
-	        }
-	        return false;
-	    }
+
+            return nextPosition < capacity();
+        }
 	
 		/** 
 		 * Return the next Vertex in the iteration

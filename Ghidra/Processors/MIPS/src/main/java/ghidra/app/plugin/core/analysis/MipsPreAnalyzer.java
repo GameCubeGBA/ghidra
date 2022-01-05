@@ -172,15 +172,12 @@ public class MipsPreAnalyzer extends AbstractAnalyzer {
 		
 		// Generally, the load/store left instruction comes before the right,
 		// but here a pair will be found in any order.
-		if (primeOpcode == 34 || primeOpcode == 38 || // lwl lwr
-			primeOpcode == 42 || primeOpcode == 46 || // swl swr
-			primeOpcode == 26 || primeOpcode == 27 || // ldl ldr
-			primeOpcode == 44 || primeOpcode == 45) // sdl sdr
-		{
-			return true;
-		}
-		return false;
-	}
+        // sdl sdr
+        return primeOpcode == 34 || primeOpcode == 38 || // lwl lwr
+                primeOpcode == 42 || primeOpcode == 46 || // swl swr
+                primeOpcode == 26 || primeOpcode == 27 || // ldl ldr
+                primeOpcode == 44 || primeOpcode == 45;
+    }
 
 	// Get rid of uninitialized, no use going through those.
 	private AddressSetView removeUninitializedBlock(Program program, AddressSetView set) {

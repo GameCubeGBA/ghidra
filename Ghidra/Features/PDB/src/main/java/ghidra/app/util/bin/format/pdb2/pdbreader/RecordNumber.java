@@ -141,11 +141,8 @@ abstract public class RecordNumber {
 			return false;
 		}
 		RecordNumber other = (RecordNumber) obj;
-		if (number != other.number || getCategory() != other.getCategory()) {
-			return false;
-		}
-		return true;
-	}
+        return number == other.number && getCategory() == other.getCategory();
+    }
 
 //--------------------------------------------------------------------------------------------------
 

@@ -586,13 +586,8 @@ public class FSRL {
 
 		// MD5
 		if (md5 == null) {
-			if (other.md5 != null) {
-				return false;
-			}
+            return other.md5 == null;
 		}
-		else if (!md5.equals(other.md5)) {
-			return false;
-		}
-		return true;
-	}
+		else return md5.equals(other.md5);
+    }
 }

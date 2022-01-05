@@ -117,11 +117,8 @@ public class InjectPayloadSegment extends InjectPayloadSleigh {
 		if (!space.equals(op2.space)) {
 			return false;
 		}
-		if (supportsFarPointer != op2.supportsFarPointer) {
-			return false;
-		}
-		return true;
-	}
+        return supportsFarPointer == op2.supportsFarPointer;
+    }
 
 	@Override
 	public int hashCode() {

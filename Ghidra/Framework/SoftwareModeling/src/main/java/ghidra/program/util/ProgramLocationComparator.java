@@ -105,10 +105,7 @@ public class ProgramLocationComparator implements Comparator<ProgramLocation> {
 			return -1;
 		}
 		result = Integer.compare(ordinal1.intValue(), ordinal2.intValue());
-		if (result != 0) {
-			return result;
-		}
-		return 0;
-	}
+        return result;
+    }
 
 }

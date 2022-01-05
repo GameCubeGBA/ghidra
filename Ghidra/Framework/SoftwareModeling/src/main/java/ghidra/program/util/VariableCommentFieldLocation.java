@@ -91,13 +91,10 @@ public class VariableCommentFieldLocation extends VariableLocation {
 			return false;
 		VariableCommentFieldLocation other = (VariableCommentFieldLocation) obj;
 		if (comment == null) {
-			if (other.comment != null)
-				return false;
+            return other.comment == null;
 		}
-		else if (!comment.equals(other.comment))
-			return false;
-		return true;
-	}
+		else return comment.equals(other.comment);
+    }
 
 	@Override
 	public void restoreState(Program p, SaveState obj) {

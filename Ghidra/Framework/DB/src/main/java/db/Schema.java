@@ -81,7 +81,7 @@ public class Schema {
 				isVariableLength = true;
 			}
 			fixedLength += field.length();
-			if (fieldNames[colIndex].indexOf(NAME_SEPARATOR) >= 0) {
+			if (fieldNames[colIndex].contains(NAME_SEPARATOR)) {
 				throw new IllegalArgumentException("field names may not contain ';'");
 			}
 		}
@@ -570,11 +570,8 @@ public class Schema {
 				return false;
 			}
 		}
-		if (!Objects.equals(sparseColumnSet, otherSchema.sparseColumnSet)) {
-			return false;
-		}
-		return true;
-	}
+        return Objects.equals(sparseColumnSet, otherSchema.sparseColumnSet);
+    }
 
 	@Override
 	public int hashCode() {

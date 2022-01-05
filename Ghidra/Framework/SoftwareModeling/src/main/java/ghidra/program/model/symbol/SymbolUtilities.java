@@ -322,11 +322,8 @@ public class SymbolUtilities {
 		if (c >= 'a' && c <= 'f') {
 			return true;
 		}
-		if (c >= 'A' && c <= 'F') {
-			return true;
-		}
-		return false;
-	}
+        return c >= 'A' && c <= 'F';
+    }
 
 	/**
 	 * Returns true if the specified char

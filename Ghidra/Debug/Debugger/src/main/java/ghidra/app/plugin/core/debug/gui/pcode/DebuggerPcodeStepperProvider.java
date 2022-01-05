@@ -305,11 +305,8 @@ public class DebuggerPcodeStepperProvider extends ComponentProviderAdapter {
 		if (!Objects.equals(a.getTime(), b.getTime())) {
 			return false;
 		}
-		if (!Objects.equals(a.getThread(), b.getThread())) {
-			return false;
-		}
-		return true;
-	}
+        return Objects.equals(a.getThread(), b.getThread());
+    }
 
 	private final DebuggerPcodeStepperPlugin plugin;
 

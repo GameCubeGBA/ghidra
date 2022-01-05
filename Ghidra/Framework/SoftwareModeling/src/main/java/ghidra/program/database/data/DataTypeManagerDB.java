@@ -2581,11 +2581,8 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 		if (sourceArchive.getSourceArchiveID() == universalID) {
 			return false;
 		}
-		if (sourceArchive.getSourceArchiveID() == BUILT_IN_ARCHIVE_UNIVERSAL_ID) {
-			return false;
-		}
-		return true;
-	}
+        return sourceArchive.getSourceArchiveID() != BUILT_IN_ARCHIVE_UNIVERSAL_ID;
+    }
 
 	public SourceArchive getSourceArchive(String fileID) {
 		for (SourceArchive archive : getSourceArchivesFromCache()) {
@@ -3060,11 +3057,8 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 		if (value instanceof Short) {
 			return true;
 		}
-		if (value instanceof Byte) {
-			return true;
-		}
-		return false;
-	}
+        return value instanceof Byte;
+    }
 
 	/**
 	 * Get the long value for an instance setting.

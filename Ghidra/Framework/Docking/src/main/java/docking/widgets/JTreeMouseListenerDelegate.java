@@ -182,9 +182,7 @@ public class JTreeMouseListenerDelegate extends MouseAdapter {
 
 			// don't let other process the event if we are 'pressing' the mouse button on an 
 			// already selected node (to prevent de-selecting a multi-selection)
-			if (tree.isPathSelected(selectionPath)) {
-				return true;
-			}
+            return tree.isPathSelected(selectionPath);
 		}
 		return false;
 	}

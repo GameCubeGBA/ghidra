@@ -101,11 +101,8 @@ public class GuidUtil {
 		versionedGuidString = versionedGuidString.toUpperCase();
 		Hashtable<String, GuidInfo> table = idTables.get(GuidType.SYNTAX);
 		GuidInfo guidInfo = table.get(versionedGuidString);
-		if (guidInfo != null) {
-			return guidInfo;
-		}
-		return null;
-	}
+        return guidInfo;
+    }
 
 	private static void buildGuidMap() {
 		for (GuidType guidType : guidTypes) {
@@ -181,7 +178,7 @@ public class GuidUtil {
 					version = left.substring(0, sppos);
 				}
 				else {
-					version = left.substring(0);
+					version = left;
 				}
 				left = left.substring(version.length());
 			}

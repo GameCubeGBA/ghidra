@@ -99,12 +99,8 @@ public class CodeUnitInfoPasteCmd implements Command {
 			return false;
 		}
 
-		if (messages.length() != 0) {
-			return false;
-		}
-
-		return true;
-	}
+        return messages.length() == 0;
+    }
 
 	/**
 	 * @see ghidra.framework.cmd.Command#getStatusMsg()

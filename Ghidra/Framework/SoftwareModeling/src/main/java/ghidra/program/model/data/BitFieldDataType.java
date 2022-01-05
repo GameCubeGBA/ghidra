@@ -158,11 +158,8 @@ public class BitFieldDataType extends AbstractDataType {
 		if (baseDataType instanceof Enum) {
 			return true;
 		}
-		if (baseDataType instanceof AbstractIntegerDataType) {
-			return true;
-		}
-		return false;
-	}
+        return baseDataType instanceof AbstractIntegerDataType;
+    }
 
 	@Override
 	public void addParent(DataType dt) {

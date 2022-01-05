@@ -252,13 +252,9 @@ public class RTTI4DataType extends RTTIDataType {
 		// Last component should refer to RTTI3.
 		Address rtti3CompAddress = startAddress.add(RTTI_3_OFFSET);
 		Address rtti3Address = getReferencedAddress(program, rtti3CompAddress);
-		if (rtti3Address == null ||
-			(validateReferredToData && !rtti3.isValid(program, rtti3Address, validationOptions))) {
-			return false;
-		}
-
-		return true;
-	}
+        return rtti3Address != null &&
+                (!validateReferredToData || rtti3.isValid(program, rtti3Address, validationOptions));
+    }
 
 	@Override
 	public String getDefaultLabelPrefix() {

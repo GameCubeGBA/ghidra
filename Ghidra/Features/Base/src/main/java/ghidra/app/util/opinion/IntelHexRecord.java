@@ -250,8 +250,6 @@ public class IntelHexRecord {
 			return false;
 		if (recordLength != other.recordLength)
 			return false;
-		if (recordType != other.recordType)
-			return false;
-		return true;
-	}
+        return recordType == other.recordType;
+    }
 }

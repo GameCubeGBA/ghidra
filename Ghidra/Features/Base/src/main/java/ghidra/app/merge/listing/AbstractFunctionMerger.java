@@ -351,12 +351,9 @@ abstract class AbstractFunctionMerger implements ListingMergeConstants {
 			mergeFunctionDetail(FUNC_NAME, myEntryPoint, getMergeMy(), monitor);
 			return false;
 		}
-		if (myIsDefault) {
-			// Keep LATEST.
-			return false;
-		}
-		return true; // LATEST & MY aren't defaults and were changed, so they conflict.
-	}
+        // Keep LATEST.
+        return !myIsDefault;// LATEST & MY aren't defaults and were changed, so they conflict.
+    }
 
 	private boolean isDefaultName(Function function) {
 		if (function != null) {

@@ -382,12 +382,8 @@ public class CodeUnitFormat {
 		if (reg1MinAddr.compareTo(reg2MaxAddr) > 0) {
 			return false;
 		}
-		if (reg2MaxAddr.compareTo(reg1MinAddr) < 0) {
-			return false;
-		}
-
-		return true;
-	}
+        return reg2MaxAddr.compareTo(reg1MinAddr) >= 0;
+    }
 
 	private boolean hasRegisterWriteReference(Instruction instr, Register reg) {
 		for (Reference ref : instr.getReferencesFrom()) {
@@ -945,9 +941,7 @@ public class CodeUnitFormat {
 	private Register findRegister(Varnode v, Map<Register, Integer> regIndexMap) {
 		if (v.isRegister()) {
 			Register reg = getRegister(v.getAddress(), regIndexMap);
-			if (reg != null) {
-				return reg;
-			}
+            return reg;
 		}
 		return null;
 	}

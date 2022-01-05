@@ -317,13 +317,8 @@ public class DWARFNameInfo {
 			return false;
 		}
 		if (parent == null) {
-			if (other.parent != null) {
-				return false;
-			}
+            return other.parent == null;
 		}
-		else if (!parent.equals(other.parent)) {
-			return false;
-		}
-		return true;
-	}
+		else return parent.equals(other.parent);
+    }
 }

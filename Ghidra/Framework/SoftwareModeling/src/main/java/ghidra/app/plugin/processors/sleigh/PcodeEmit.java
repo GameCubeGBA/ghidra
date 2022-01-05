@@ -876,9 +876,6 @@ public abstract class PcodeEmit {
 		if (!data.space.equals(addr.getAddressSpace())) {
 			return true;
 		}
-		if (data.offset != addr.getOffset()) {
-			return true;
-		}
-		return false;
-	}
+        return data.offset != addr.getOffset();
+    }
 }

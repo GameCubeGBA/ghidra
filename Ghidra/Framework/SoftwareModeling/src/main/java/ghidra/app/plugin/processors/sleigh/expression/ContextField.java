@@ -63,11 +63,8 @@ public class ContextField extends PatternValue {
 		if (this.endbit != that.endbit) {
 			return false;
 		}
-		if (this.signbit != that.signbit) {
-			return false;
-		}
-		return true;
-	}
+        return this.signbit == that.signbit;
+    }
 
 	public int getStartBit() {
 		return startbit;

@@ -2658,9 +2658,7 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 		Data data = getDefinedDataAfter(start);
 		if (data != null) {
 			Address addr = data.getMinAddress();
-			if (range.contains(addr)) {
-				return false;
-			}
+            return !range.contains(addr);
 		}
 		return true;
 

@@ -402,11 +402,8 @@ public class OperandFieldMouseHandler implements FieldMouseHandlerExtension {
 		}
 
 		Address goToAddr = getAddressForOpObject(opObjects.get(subOpIndex), codeUnit);
-		if (goToAddr != null && goToService.goTo(navigatable, goToAddr)) {
-			return true;
-		}
-		return false;
-	}
+        return goToAddr != null && goToService.goTo(navigatable, goToAddr);
+    }
 
 	private boolean handleData(Data data, Navigatable navigatable, GoToService goToService) {
 		Object value = data.getValue();

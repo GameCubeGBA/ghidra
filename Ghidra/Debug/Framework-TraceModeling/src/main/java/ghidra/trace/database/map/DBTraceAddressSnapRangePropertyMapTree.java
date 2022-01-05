@@ -367,11 +367,8 @@ public class DBTraceAddressSnapRangePropertyMapTree<T, DR extends AbstractDBTrac
 			if (thisVal == this || thatVal == that) {
 				return false;
 			}
-			if (!thisVal.equals(thatVal)) {
-				return false;
-			}
-			return true;
-		}
+            return thisVal.equals(thatVal);
+        }
 
 		@Override
 		public int hashCode() {
@@ -401,11 +398,8 @@ public class DBTraceAddressSnapRangePropertyMapTree<T, DR extends AbstractDBTrac
 			if (!r1.contains(shape.getX1(), shape.getY1())) {
 				return false;
 			}
-			if (!r2.contains(shape.getX2(), shape.getY2())) {
-				return false;
-			}
-			return true;
-		}
+            return r2.contains(shape.getX2(), shape.getY2());
+        }
 
 		@Override
 		protected TraceAddressSnapRangeQuery create(TraceAddressSnapRange ir1,

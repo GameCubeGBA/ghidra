@@ -49,11 +49,8 @@ public class AssemblySelector {
 
 		result =
 			SleighUtil.compareArrays(a.getInstruction().getVals(), b.getInstruction().getVals());
-		if (result != 0) {
-			return result;
-		}
-		return 0;
-	};
+        return result;
+    };
 
 	/**
 	 * Filter a collection of parse trees.

@@ -76,13 +76,10 @@ public class FunctionCallFixupFieldLocation extends FunctionLocation {
 			return false;
 		FunctionCallFixupFieldLocation other = (FunctionCallFixupFieldLocation) obj;
 		if (callFixupName == null) {
-			if (other.callFixupName != null)
-				return false;
+            return other.callFixupName == null;
 		}
-		else if (!callFixupName.equals(other.callFixupName))
-			return false;
-		return true;
-	}
+		else return callFixupName.equals(other.callFixupName);
+    }
 
 	@Override
 	public String toString() {

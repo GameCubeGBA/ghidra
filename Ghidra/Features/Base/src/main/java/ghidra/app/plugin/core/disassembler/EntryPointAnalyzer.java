@@ -177,9 +177,7 @@ public class EntryPointAnalyzer extends AbstractAnalyzer {
 			Set<Address> doNowSet) {
 		SymbolTable symbolTable = program.getSymbolTable();
 		if (externalCount == 1 && doNowSet.size() == 1) {
-			if (symbolTable.getPrimarySymbol(doNowSet.iterator().next()).isExternalEntryPoint()) {
-				return true;
-			}
+            return symbolTable.getPrimarySymbol(doNowSet.iterator().next()).isExternalEntryPoint();
 		}
 		return false;
 	}

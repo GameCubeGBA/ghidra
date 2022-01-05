@@ -119,8 +119,6 @@ public class EHCatchHandlerTypeModifier {
 		if (getClass() != obj.getClass())
 			return false;
 		EHCatchHandlerTypeModifier other = (EHCatchHandlerTypeModifier) obj;
-		if (modifiers != other.modifiers)
-			return false;
-		return true;
-	}
+        return modifiers == other.modifiers;
+    }
 }

@@ -338,9 +338,7 @@ public class DefineTable {
 
 		//nextRepl = image.substring(0, currIndex);	// shift to location
 		String replacementString = defs.get(defName).image;		// get replacement text
-		if (replacementString.equals(defName)) {
-			return false; // no need to replace
-		}
+        return !replacementString.equals(defName); // no need to replace
 
 //		// check that macro argv arguments match
 //		Vector<PPToken> argv = getArgs(defName);
@@ -360,9 +358,7 @@ public class DefineTable {
 //				return false;
 //			}
 //		}
-
-		return true;
-	}
+    }
 
 	int replace(StringBuffer buf, String currKey, int fromIndex, ArrayList<String> sublist) {
 		String replacementString = null;
@@ -521,7 +517,7 @@ public class DefineTable {
 			int end = endPos.get(i).intValue();
 			String value = subValue.get(i);
 
-			buf.append(substString.substring(startpos, begin));
+			buf.append(substString, startpos, begin);
 			buf.append(value);
 			startpos = end;
 		}

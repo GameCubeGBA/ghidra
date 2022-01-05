@@ -361,7 +361,7 @@ public class ConstantPoolJava extends ConstantPool {
 
 	private String getClassName(String fullyQualifiedName) {
 		int lastSlash = fullyQualifiedName.lastIndexOf("/");
-		return fullyQualifiedName.substring(lastSlash + 1, fullyQualifiedName.length());
+		return fullyQualifiedName.substring(lastSlash + 1);
 	}
 
 	public AbstractConstantPoolInfoJava[] getConstantPool() {

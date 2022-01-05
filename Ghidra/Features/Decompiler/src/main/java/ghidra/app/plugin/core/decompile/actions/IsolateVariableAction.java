@@ -68,11 +68,8 @@ public class IsolateVariableAction extends AbstractDecompilerAction {
 				break;
 			}
 		}
-		if (!mergeSplit) {
-			return false;
-		}
-		return true;
-	}
+        return mergeSplit;
+    }
 
 	@Override
 	protected void decompilerActionPerformed(DecompilerActionContext context) {

@@ -254,11 +254,8 @@ public class LocalSymbolMap {
 		if (name.startsWith("local_")) {
 			return false;
 		}
-		if (name.startsWith("param_")) {
-			return false;
-		}
-		return true;
-	}
+        return !name.startsWith("param_");
+    }
 
 	/**
 	 * Parse a &lt;mapsym&gt; tag in XML

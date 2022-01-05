@@ -186,11 +186,8 @@ public abstract class HighVariable {
 		if (represent.isUnique()) {
 			return true;		// Temporary Varnodes always need dynamic storage
 		}
-		if (represent.getAddress().isStackAddress() && !represent.isAddrTied()) {
-			return true;
-		}
-		return false;
-	}
+        return represent.getAddress().isStackAddress() && !represent.isAddrTied();
+    }
 
 	/**
 	 * Restore this HighVariable from a {@code <high>} XML tag

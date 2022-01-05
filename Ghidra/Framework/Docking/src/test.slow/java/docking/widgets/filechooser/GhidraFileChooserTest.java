@@ -2768,12 +2768,8 @@ public class GhidraFileChooserTest extends AbstractDockingTest {
 				return false;
 			}
 
-			if (!fileToCheck.getName().startsWith(namePattern)) {
-				return false;
-			}
-
-			return true;
-		});
+            return fileToCheck.getName().startsWith(namePattern);
+        });
 		return ArrayUtils.nullToEmpty(newFolderFiles, File[].class);
 	}
 

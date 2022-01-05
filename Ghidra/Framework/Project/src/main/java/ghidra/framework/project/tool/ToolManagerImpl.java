@@ -788,11 +788,8 @@ public class ToolManagerImpl implements ToolManager, PropertyChangeListener {
 		if (!name.startsWith(DEFAULT_WORKSPACE_NAME)) {
 			return false;
 		}
-		if (name.equals(DEFAULT_WORKSPACE_NAME) || name.startsWith(DEFAULT_WORKSPACE_NAME + " (")) {
-			return true;
-		}
-		return false;
-	}
+        return name.equals(DEFAULT_WORKSPACE_NAME) || name.startsWith(DEFAULT_WORKSPACE_NAME + " (");
+    }
 
 	private String getUniqueWorkspaceName() {
 		String name = DEFAULT_WORKSPACE_NAME;

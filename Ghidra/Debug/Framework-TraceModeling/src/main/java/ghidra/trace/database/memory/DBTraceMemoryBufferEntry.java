@@ -119,11 +119,8 @@ public class DBTraceMemoryBufferEntry extends DBAnnotatedObject {
 		if (blockNum >= DBTraceMemorySpace.BLOCKS_PER_BUFFER) {
 			return false;
 		}
-		if (!isInUse(blockNum)) {
-			return false;
-		}
-		return true;
-	}
+        return isInUse(blockNum);
+    }
 
 	public int setBytes(ByteBuffer buf, int dstOffset, int len, int blockNum) throws IOException {
 		assert isSane(dstOffset, len, blockNum);

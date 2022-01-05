@@ -304,12 +304,8 @@ public class AssociationDatabaseManager implements VTAssociationManager {
 			return true;
 		}
 
-		if (acceptedDestinationAssociations.contains(destinationAddress)) {
-			return true;
-		}
-
-		return false;
-	}
+        return acceptedDestinationAssociations.contains(destinationAddress);
+    }
 
 	@Override
 	public int getAssociationCount() {

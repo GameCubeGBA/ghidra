@@ -433,8 +433,8 @@ public class ToolActionManagerTest extends AbstractGhidraHeadedIntegrationTest {
 		}
 		newList.removeAll(origList);
 		runSwing(() -> {
-			for (int i = 0; i < newList.size(); i++) {
-				tc.remove(newList.get(i));
+			for (String s : newList) {
+				tc.remove(s);
 			}
 		});
 		assertEquals(origList.size(), tc.getToolCount());
@@ -672,7 +672,7 @@ public class ToolActionManagerTest extends AbstractGhidraHeadedIntegrationTest {
 		for (DockingActionIf a : actions) {
 			String[] menuPath = a.getMenuBarData().getMenuPath();
 			if (menuPath.length > 2) {
-				if (menuPath[1].indexOf(action) >= 0) {
+				if (menuPath[1].contains(action)) {
 					return a;
 				}
 			}

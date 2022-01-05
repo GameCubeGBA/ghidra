@@ -145,7 +145,7 @@ public class SubroutineModelCmd extends BackgroundCommand {
 				else {
 					module = (ProgramModule) group;
 					String name = module.getName();
-					if (name.indexOf(NEW_MODULE_SUFFIX) == -1) {
+					if (!name.contains(NEW_MODULE_SUFFIX)) {
 						module.setName(module.getName() + NEW_MODULE_SUFFIX);
 					}
 					cbi = subModel.getCodeBlocksContaining(module.getAddressSet(), monitor);
@@ -215,7 +215,7 @@ public class SubroutineModelCmd extends BackgroundCommand {
 		int index = 0;
 		//String baseName = block.getName();
 		//String name = baseName;
-		String baseName = new String(nodeName);
+		String baseName = nodeName;
 		String name = baseName;
 		while (!done) {
 			try {

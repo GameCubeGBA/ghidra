@@ -174,11 +174,8 @@ public class DBTraceSymbolManager implements TraceSymbolManager, DBTraceManager 
 			if (!Objects.equals(this.getName(), that.getName())) {
 				return false;
 			}
-			if (!Objects.equals(this.getComment(), that.getComment())) {
-				return false;
-			}
-			return true;
-		}
+            return Objects.equals(this.getComment(), that.getComment());
+        }
 
 		@Override
 		public int compareTo(FunctionTag o) {
@@ -188,11 +185,8 @@ public class DBTraceSymbolManager implements TraceSymbolManager, DBTraceManager 
 				return result;
 			}
 			result = this.getComment().compareToIgnoreCase(o.getComment());
-			if (result != 0) {
-				return result;
-			}
-			return 0;
-		}
+            return result;
+        }
 
 		@Override
 		public long getId() {

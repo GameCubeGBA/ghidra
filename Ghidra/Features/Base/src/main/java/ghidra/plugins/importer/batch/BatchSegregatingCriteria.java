@@ -122,13 +122,8 @@ public class BatchSegregatingCriteria {
 			return false;
 		}
 		if (groupLoadSpecs == null) {
-			if (other.groupLoadSpecs != null) {
-				return false;
-			}
+            return other.groupLoadSpecs == null;
 		}
-		else if (!groupLoadSpecs.equals(other.groupLoadSpecs)) {
-			return false;
-		}
-		return true;
-	}
+		else return groupLoadSpecs.equals(other.groupLoadSpecs);
+    }
 }

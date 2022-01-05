@@ -842,9 +842,7 @@ public class PackedDatabase extends Database {
 		File[] tempDbs = tmpDir.listFiles((FileFilter) file -> {
 			String name = file.getName();
 			if (file.isDirectory()) {
-				if (name.indexOf(TEMPDB_DIR_PREFIX) == 0 && name.endsWith(TEMPDB_DIR_EXT)) {
-					return true;
-				}
+                return name.indexOf(TEMPDB_DIR_PREFIX) == 0 && name.endsWith(TEMPDB_DIR_EXT);
 			}
 			return false;
 		});

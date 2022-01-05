@@ -249,13 +249,9 @@ public class RTTI3DataType extends RTTIDataType {
 		// Last component should refer to RTTI2.
 		Address rtti2Address = getRtti2Address(memory, startAddress);
 		RTTI2DataType rtti2 = new RTTI2DataType(rtti1Count, program.getDataTypeManager());
-		if (rtti2Address == null ||
-			(validateReferredToData && !rtti2.isValid(program, rtti2Address, validationOptions))) {
-			return false;
-		}
-
-		return true;
-	}
+        return rtti2Address != null &&
+                (!validateReferredToData || rtti2.isValid(program, rtti2Address, validationOptions));
+    }
 
 	@Override
 	public String getDefaultLabelPrefix() {

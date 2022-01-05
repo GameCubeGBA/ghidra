@@ -846,12 +846,9 @@ public class PdbApplicator {
 			// Symbol OMAP resulted in 0 RVA - Discard silently
 			return true;
 		}
-		if (address == PdbAddressManager.EXTERNAL_ADDRESS) {
-			//Msg.info(this, "External address not known for: " + name);
-			return true;
-		}
-		return false;
-	}
+        //Msg.info(this, "External address not known for: " + name);
+        return address == PdbAddressManager.EXTERNAL_ADDRESS;
+    }
 
 	/**
 	 * Returns the image base Address being used by the applicator.
@@ -1429,9 +1426,7 @@ public class PdbApplicator {
 
 			SourceType primarySymbolSource = primarySymbol.getSource();
 
-			if (!SourceType.ANALYSIS.isHigherPriorityThan(primarySymbolSource)) {
-				return true;
-			}
+            return !SourceType.ANALYSIS.isHigherPriorityThan(primarySymbolSource);
 		}
 		return false;
 	}
@@ -1445,8 +1440,8 @@ public class PdbApplicator {
 		try {
 			Namespace namespace = program.getGlobalNamespace();
 			if (symbolPathString.startsWith(THUNK_NAME_PREFIX)) {
-				symbolPathString = symbolPathString.substring(THUNK_NAME_PREFIX.length(),
-					symbolPathString.length());
+				symbolPathString = symbolPathString.substring(THUNK_NAME_PREFIX.length()
+                );
 			}
 			SymbolPath symbolPath = new SymbolPath(symbolPathString);
 			symbolPath = symbolPath.replaceInvalidChars();
@@ -1579,8 +1574,8 @@ public class PdbApplicator {
 		try {
 			Namespace namespace = program.getGlobalNamespace();
 			if (symbolPathString.startsWith(THUNK_NAME_PREFIX)) {
-				symbolPathString = symbolPathString.substring(THUNK_NAME_PREFIX.length(),
-					symbolPathString.length());
+				symbolPathString = symbolPathString.substring(THUNK_NAME_PREFIX.length()
+                );
 			}
 			SymbolPath symbolPath = new SymbolPath(symbolPathString);
 			symbolPath = symbolPath.replaceInvalidChars();

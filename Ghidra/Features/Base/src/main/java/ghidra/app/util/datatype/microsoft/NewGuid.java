@@ -67,7 +67,7 @@ public class NewGuid {
 		        if (sppos > 0) {
 		        	version = left.substring(0, sppos);
 		        } else {
-		            version = left.substring(0);
+		            version = left;
 		        }
 		        left = left.substring(version.length());
 	        }
@@ -116,8 +116,7 @@ public class NewGuid {
         if (bytes.length < offset+size) return false;
         if ((bytes[offset+7] == (byte)0x0)  && (bytes[offset+8] == (byte)0xC0) && (bytes[offset+15] == (byte)0x46))         		return true;
         if ((bytes[offset+7] >= (byte)0x10) && (bytes[offset+7] <= (byte)0x12) && ((bytes[offset+8] & (byte)0xC0) == (byte)0x80)) 	return true;
-        if (((bytes[offset+7] & (byte)0xF0) == (byte)0x40) && ((bytes[offset+8] & (byte)0xC0) == (byte)0x80))                     	return true;
-        return false;
+        return ((bytes[offset + 7] & (byte) 0xF0) == (byte) 0x40) && ((bytes[offset + 8] & (byte) 0xC0) == (byte) 0x80);
     }
     
     public static boolean isZeroGUID(byte [] bytes, int offset) {

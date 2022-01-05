@@ -1211,7 +1211,7 @@ public class Function1Test extends AbstractGhidraHeadedIntegrationTest {
 		performAction(deleteFunctionVar, cb.getProvider(), true);
 		waitForBusyTool();
 		cb.goToField(addr("0x01006443"), "Operands", 0, 0);
-		assertTrue(cb.getCurrentFieldText().indexOf("local") < 0);
+		assertTrue(!cb.getCurrentFieldText().contains("local"));
 		click(cb, 2);
 		assertEquals("undefined entry()", cb.getCurrentFieldText());
 	}

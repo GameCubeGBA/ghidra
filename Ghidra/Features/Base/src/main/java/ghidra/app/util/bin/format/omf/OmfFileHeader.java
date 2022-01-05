@@ -450,11 +450,8 @@ public class OmfFileHeader extends OmfRecord {
 		}
 		int len = reader.readNextShort() & 0xffff;
 		int stringlen = reader.readNextByte() & 0xff;
-		if (len != stringlen + 2) {
-			return false;
-		}
-		return true;
-	}
+        return len == stringlen + 2;
+    }
 	
 	/**
 	 * Create a reader for a specific OMF file

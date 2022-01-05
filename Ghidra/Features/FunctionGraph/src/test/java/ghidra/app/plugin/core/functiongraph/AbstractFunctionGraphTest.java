@@ -426,12 +426,8 @@ public abstract class AbstractFunctionGraphTest extends AbstractGhidraHeadedInte
 		}
 
 		double yDiff = Math.abs(originalPoint.getY() - reloadedPoint.getY());
-		if (yDiff > 20) {
-			return false;
-		}
-
-		return true;
-	}
+        return !(yDiff > 20);
+    }
 
 	protected Address getAddress(String addressString) {
 		AddressFactory factory = program.getAddressFactory();

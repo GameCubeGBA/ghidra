@@ -620,11 +620,8 @@ public class HighFunction extends PcodeSyntaxTree {
 	 * @return true if equivalent
 	 */
 	static final public boolean collapseToGlobal(Namespace namespace) {
-		if (namespace instanceof Library) {
-			return true;
-		}
-		return false;
-	}
+        return namespace instanceof Library;
+    }
 
 	/**
 	 * Append an XML &lt;parent&gt; tag to the buffer describing the formal path elements

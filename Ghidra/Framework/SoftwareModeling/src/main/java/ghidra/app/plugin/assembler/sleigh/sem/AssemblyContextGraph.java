@@ -184,11 +184,8 @@ public class AssemblyContextGraph implements GImplicitDirectedGraph<Vertex, Edge
 			if (!this.subtable.equals(that.subtable)) {
 				return false;
 			}
-			if (this.context.combine(that.context) == null) {
-				return false;
-			}
-			return true;
-		}
+            return this.context.combine(that.context) != null;
+        }
 
 		@Override
 		public int hashCode() {
@@ -209,11 +206,8 @@ public class AssemblyContextGraph implements GImplicitDirectedGraph<Vertex, Edge
 			if (!this.context.equals(that.context)) {
 				return false;
 			}
-			if (!this.subtable.equals(that.subtable)) {
-				return false;
-			}
-			return true;
-		}
+            return this.subtable.equals(that.subtable);
+        }
 
 		@Override
 		public int compareTo(Vertex that) {
@@ -223,11 +217,8 @@ public class AssemblyContextGraph implements GImplicitDirectedGraph<Vertex, Edge
 				return result;
 			}
 			result = this.subtable.compareTo(that.subtable);
-			if (result != 0) {
-				return result;
-			}
-			return 0;
-		}
+            return result;
+        }
 	}
 
 	/**
@@ -284,11 +275,8 @@ public class AssemblyContextGraph implements GImplicitDirectedGraph<Vertex, Edge
 			if (!this.start.equals(that.start)) {
 				return false;
 			}
-			if (!this.end.equals(that.end)) {
-				return false;
-			}
-			return true;
-		}
+            return this.end.equals(that.end);
+        }
 
 		@Override
 		public int compareTo(Edge that) {
@@ -306,11 +294,8 @@ public class AssemblyContextGraph implements GImplicitDirectedGraph<Vertex, Edge
 				return result;
 			}
 			result = this.end.compareTo(that.end);
-			if (result != 0) {
-				return result;
-			}
-			return 0;
-		}
+            return result;
+        }
 
 		@Override
 		public String toString() {

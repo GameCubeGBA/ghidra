@@ -223,11 +223,8 @@ public class SymbolPath implements Comparable<SymbolPath> {
 		if (!Objects.equals(parentPath, other.parentPath)) {
 			return false;
 		}
-		if (!Objects.equals(symbolName, other.symbolName)) {
-			return false;
-		}
-		return true;
-	}
+        return Objects.equals(symbolName, other.symbolName);
+    }
 
 	/**
 	 * A convenience method to check if the given symbol's symbol path matches this path

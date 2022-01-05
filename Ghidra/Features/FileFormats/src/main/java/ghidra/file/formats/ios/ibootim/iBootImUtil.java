@@ -28,9 +28,7 @@ public class iBootImUtil {
 			Address address = program.getMinAddress();
 			if (address != null) {
 				byte [] bytes = getBytes(program, address);
-				if (Arrays.equals(bytes, iBootImConstants.SIGNATURE_BYTES)) {
-					return true;
-				}
+                return Arrays.equals(bytes, iBootImConstants.SIGNATURE_BYTES);
 			}
 		}
 		return false;

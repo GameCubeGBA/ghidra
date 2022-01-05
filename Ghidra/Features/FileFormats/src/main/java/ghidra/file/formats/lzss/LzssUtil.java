@@ -30,9 +30,7 @@ public class LzssUtil {
 				byte [] compressionBytes = getBytes(program, address);
 				if (Arrays.equals(compressionBytes, LzssConstants.SIGNATURE_COMPRESSION_BYTES)) {
 					byte [] formatBytes = getBytes(program, address.add(compressionBytes.length));
-					if (Arrays.equals(formatBytes, LzssConstants.SIGNATURE_LZSS_BYTES)) {
-						return true;
-					}
+                    return Arrays.equals(formatBytes, LzssConstants.SIGNATURE_LZSS_BYTES);
 				}
 			}
 		}

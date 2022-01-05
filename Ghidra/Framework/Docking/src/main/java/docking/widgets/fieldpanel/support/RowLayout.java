@@ -371,11 +371,8 @@ public class RowLayout implements Layout {
 
 	@Override
 	public boolean contains(int yPos) {
-		if ((yPos >= 0) && (yPos < heightAbove + heightBelow)) {
-			return true;
-		}
-		return false;
-	}
+        return (yPos >= 0) && (yPos < heightAbove + heightBelow);
+    }
 
 	/**
 	 * Finds the most appropriate field to place the cursor for the given horizontal

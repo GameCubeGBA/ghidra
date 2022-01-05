@@ -392,11 +392,8 @@ public class ParamListStandard implements ParamList {
 		if (!SystemUtilities.isEqual(spacebase, op2.spacebase)) {
 			return false;
 		}
-		if (thisbeforeret != op2.thisbeforeret) {
-			return false;
-		}
-		return true;
-	}
+        return thisbeforeret == op2.thisbeforeret;
+    }
 
 	@Override
 	public int hashCode() {

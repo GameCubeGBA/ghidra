@@ -722,11 +722,8 @@ public class AddressTable {
 				disassembleList.add(testAddr);
 			}
 		}
-		if (disassembleList.size() == tableElements.length - offset) {
-			return true;
-		}
-		return false;
-	}
+        return disassembleList.size() == tableElements.length - offset;
+    }
 
 	public ArrayList<Address> getFunctionEntries(Program program, int offset) {
 		PseudoDisassembler pdis = new PseudoDisassembler(program);
@@ -1274,12 +1271,9 @@ public class AddressTable {
 			int numIndexBytes = 0;
 			int numZeroBytes = 0;
 
-			boolean isIndex = true;
-			if (maxIndexSize == 0) {
-				isIndex = false;
-			}
+			boolean isIndex = maxIndexSize != 0;
 
-			while ((isIndex) && (numIndexBytes < maxIndexSize)) {
+            while ((isIndex) && (numIndexBytes < maxIndexSize)) {
 				byte b;
 				try {
 					b = memory.getByte(currentAddr);
@@ -1362,11 +1356,8 @@ public class AddressTable {
 			return false;
 		}
 		// allow 1 byte offcut
-		if (processorUsesLowBitForCode && target.isSuccessor(testAddr)) {
-			return false;
-		}
-		return true;
-	}
+        return !processorUsesLowBitForCode || !target.isSuccessor(testAddr);
+    }
 
 	/**
 	 *
@@ -1417,9 +1408,7 @@ public class AddressTable {
 		RelocationTable relocationTable = program.getRelocationTable();
 		if (relocationTable.isRelocatable()) {
 			// if it is relocatable, then there should be no pointers in memory, other than relacatable ones
-			if (relocationTable.getSize() > 0 && relocationTable.getRelocation(target) == null) {
-				return false;
-			}
+            return relocationTable.getSize() <= 0 || relocationTable.getRelocation(target) != null;
 		}
 		return true;
 	}

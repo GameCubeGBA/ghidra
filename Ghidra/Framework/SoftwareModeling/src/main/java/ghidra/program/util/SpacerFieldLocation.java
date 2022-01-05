@@ -85,13 +85,10 @@ public class SpacerFieldLocation extends CodeUnitLocation {
 			return false;
 		SpacerFieldLocation other = (SpacerFieldLocation) obj;
 		if (text == null) {
-			if (other.text != null)
-				return false;
+            return other.text == null;
 		}
-		else if (!text.equals(other.text))
-			return false;
-		return true;
-	}
+		else return text.equals(other.text);
+    }
 
 	@Override
 	public void restoreState(Program p, SaveState obj) {

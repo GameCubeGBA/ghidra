@@ -648,17 +648,14 @@ class ProgramDBChangeSet implements ProgramChangeSet, DomainObjectDBChangeSet {
 
 	@Override
 	public boolean hasChanges() {
-		if (changedAddrsSinceSave.isEmpty() && changedRegAddrsSinceSave.isEmpty() &&
-			changedDataTypeIds.isEmpty() && changedCategoryIds.isEmpty() &&
-			changedProgramTreeIds.isEmpty() && changedSymbolIds.isEmpty() &&
-			changedSourceArchiveIds.isEmpty() && changedTagIds.isEmpty() &&
-			addedDataTypeIds.isEmpty() && addedCategoryIds.isEmpty() &&
-			addedProgramTreeIds.isEmpty() && addedSymbolIds.isEmpty() &&
-			addedSourceArchiveIds.isEmpty() && addedTagIds.isEmpty()) {
-			return false;
-		}
-		return true;
-	}
+        return !changedAddrsSinceSave.isEmpty() || !changedRegAddrsSinceSave.isEmpty() ||
+                !changedDataTypeIds.isEmpty() || !changedCategoryIds.isEmpty() ||
+                !changedProgramTreeIds.isEmpty() || !changedSymbolIds.isEmpty() ||
+                !changedSourceArchiveIds.isEmpty() || !changedTagIds.isEmpty() ||
+                !addedDataTypeIds.isEmpty() || !addedCategoryIds.isEmpty() ||
+                !addedProgramTreeIds.isEmpty() || !addedSymbolIds.isEmpty() ||
+                !addedSourceArchiveIds.isEmpty() || !addedTagIds.isEmpty();
+    }
 }
 
 class ChangeDiff {

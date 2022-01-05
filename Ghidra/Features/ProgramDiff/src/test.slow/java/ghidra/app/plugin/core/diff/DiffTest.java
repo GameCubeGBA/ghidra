@@ -349,8 +349,8 @@ public class DiffTest extends DiffTestAdapter {
 			DiffDetailsProvider.DIFF_DETAILS_TEXT_AREA);
 		assertNotNull(textArea);
 		String info = textArea.getText();
-		assertTrue(info.indexOf("Byte Diffs") != -1);
-		assertTrue(info.indexOf("Bookmark Diffs") == -1);
+		assertTrue(info.contains("Byte Diffs"));
+		assertTrue(!info.contains("Bookmark Diffs"));
 		assertEquals(addr("100"), getDiffAddress());
 
 		tool.firePluginEvent(new ProgramLocationPluginEvent("test",
@@ -362,7 +362,7 @@ public class DiffTest extends DiffTestAdapter {
 
 		// Check where there are no differences
 		info = textArea.getText();
-		assertTrue(info.indexOf("No differences") != -1);
+		assertTrue(info.contains("No differences"));
 
 		assertEquals(addr("1001014"), getDiffAddress());
 	}
@@ -912,11 +912,8 @@ public class DiffTest extends DiffTestAdapter {
 		if (diffPlugin == null) {
 			return false;
 		}
-		if (diffPlugin.getFirstProgram() == null || diffPlugin.getDiffController() == null) {
-			return false;
-		}
-		return true;
-	}
+        return diffPlugin.getFirstProgram() != null && diffPlugin.getDiffController() != null;
+    }
 
 	private boolean isShowingDiff() {
 		if (diffPlugin == null) {
@@ -924,11 +921,8 @@ public class DiffTest extends DiffTestAdapter {
 		}
 		Program currentProgram = diffPlugin.getCurrentProgram();
 		Program firstProgram = diffPlugin.getFirstProgram();
-		if (currentProgram == null || currentProgram != firstProgram) {
-			return false;
-		}
-		return true;
-	}
+        return currentProgram != null && currentProgram == firstProgram;
+    }
 
 	private void selectTab(final MultiTabPanel panel, final Program pgm) {
 		runSwing(() -> invokeInstanceMethod("setSelectedProgram", panel,

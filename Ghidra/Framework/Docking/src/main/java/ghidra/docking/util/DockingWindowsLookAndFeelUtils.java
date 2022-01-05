@@ -285,7 +285,7 @@ public class DockingWindowsLookAndFeelUtils {
 			Entry<Object, Object> entry = iterator.next();
 			Object key = entry.getKey();
 
-			if (key.toString().toLowerCase().indexOf("font") != -1) {
+			if (key.toString().toLowerCase().contains("font")) {
 				Font currentFont = defaults.getFont(key);
 				if (currentFont != null) {
 					Font newFont = currentFont.deriveFont((float) fontSize);

@@ -407,12 +407,8 @@ public class DataPlugin extends Plugin implements DataService {
 		// If only sized Undefined types are found then overwrite them.
 		Data definedData =
 			DataUtilities.getNextNonUndefinedDataAfter(program, start, blockMaxAddress);
-		if (dataExists(program, dataType, definedData, start, end)) {
-			return false; // status updated in 'dataExists()' call
-		}
-
-		return true;
-	}
+        return !dataExists(program, dataType, definedData, start, end); // status updated in 'dataExists()' call
+    }
 
 	private boolean canConvertPointer(DataType dataType, Data existingData,
 			boolean convertPointers) {
@@ -745,10 +741,7 @@ public class DataPlugin extends Plugin implements DataService {
 			return false;
 		}
 		Data pdata = data.getParent();
-		if (pdata != null && pdata.isArray()) {
-			return false;
-		}
-		return true;
-	}
+        return pdata == null || !pdata.isArray();
+    }
 
 }

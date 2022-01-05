@@ -180,13 +180,10 @@ public class ClassModuleTree {
 			else if (!module.equals(other.module))
 				return false;
 			if (name == null) {
-				if (other.name != null)
-					return false;
+                return other.name == null;
 			}
-			else if (!name.equals(other.name))
-				return false;
-			return true;
-		}
+			else return name.equals(other.name);
+        }
 
 		public void setModule(String moduleName) {
 			this.module = moduleName;

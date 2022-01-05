@@ -82,14 +82,9 @@ public class FilterState {
 			return false;
 		}
 		if (properties == null) {
-			if (other.properties != null) {
-				return false;
-			}
+            return other.properties == null;
 		}
-		else if (!properties.equals(other.properties)) {
-			return false;
-		}
-		return true;
-	}
+		else return properties.equals(other.properties);
+    }
 
 }

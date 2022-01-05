@@ -526,11 +526,8 @@ abstract class VariableImpl implements Variable {
 		if (getFirstUseOffset() != otherVar.getFirstUseOffset()) {
 			return false;
 		}
-		if (!DataTypeUtilities.isSameOrEquivalentDataType(getDataType(), otherVar.getDataType())) {
-			return false;
-		}
-		return true;
-	}
+        return DataTypeUtilities.isSameOrEquivalentDataType(getDataType(), otherVar.getDataType());
+    }
 
 	///// STORAGE RESIZE /////
 

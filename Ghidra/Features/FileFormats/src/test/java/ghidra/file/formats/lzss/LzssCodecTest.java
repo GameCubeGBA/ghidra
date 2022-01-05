@@ -88,7 +88,7 @@ public class LzssCodecTest {
 		ByteArrayOutputStream dst = new ByteArrayOutputStream();
 		InputStream src = new ByteArrayInputStream(TEST_COMPRESSED);
 		LzssCodec.decompress(dst, src);
-		String out = new String(dst.toByteArray());
+		String out = dst.toString();
 
 		assertEquals(TEST_TEXT, out);
 	}

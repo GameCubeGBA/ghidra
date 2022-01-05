@@ -2210,11 +2210,8 @@ public class ProgramMerge implements PropertyVisitor {
 
 	private boolean isThunkFunction(Address originEntryPoint) {
 		Function originFunction = originListing.getFunctionAt(originEntryPoint);
-		if (originFunction != null && originFunction.isThunk()) {
-			return true;
-		}
-		return false;
-	}
+        return originFunction != null && originFunction.isThunk();
+    }
 
 	class FunctionAddressIterator implements AddressIterator {
 		FunctionIterator functionIterator;

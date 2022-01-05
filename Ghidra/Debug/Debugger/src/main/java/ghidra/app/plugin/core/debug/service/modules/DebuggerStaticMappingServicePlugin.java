@@ -1478,11 +1478,8 @@ public class DebuggerStaticMappingServicePlugin extends Plugin
 			}
 		}
 		String fileName = df.getName().toLowerCase();
-		if (fileName.contains(moduleLowerName)) {
-			return true;
-		}
-		return false;
-	}
+        return fileName.contains(moduleLowerName);
+    }
 
 	@Override
 	public Map<TraceModule, SectionMapProposal> proposeSectionMaps(

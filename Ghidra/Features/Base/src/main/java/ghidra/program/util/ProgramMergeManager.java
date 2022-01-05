@@ -476,11 +476,8 @@ public class ProgramMergeManager {
 	}
 
 	private boolean hasMergeAddresses(AddressSetView p1AddressSet) {
-		if (program1.getMemory().contains(p1AddressSet)) {
-			return true;
-		}
-		return false;
-	}
+        return program1.getMemory().contains(p1AddressSet);
+    }
 
 	/**
 	 * <CODE>mergeProgramContext</CODE> merges all program context register values

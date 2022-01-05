@@ -100,13 +100,10 @@ public class FunctionNameFieldLocation extends FunctionSignatureFieldLocation {
 			return false;
 		FunctionNameFieldLocation other = (FunctionNameFieldLocation) obj;
 		if (functionName == null) {
-			if (other.functionName != null)
-				return false;
+            return other.functionName == null;
 		}
-		else if (!functionName.equals(other.functionName))
-			return false;
-		return true;
-	}
+		else return functionName.equals(other.functionName);
+    }
 
 	@Override
 	public void saveState(SaveState obj) {

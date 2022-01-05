@@ -56,11 +56,8 @@ public abstract class Attribute<T extends KeyedObject> {
 	/** Returns true iff the set attributes are defined for has not changed 
 	 * since the set was created. */
 	boolean owningSetIsUnmodified() {
-		if (this.backingSetModificationNumber == this.owningSet.getModificationNumber()) {
-			return true;
-		}
-		return false;
-	}
+        return this.backingSetModificationNumber == this.owningSet.getModificationNumber();
+    }
 
 	/** Return the current value of the modificationNumber which counts
 	 * the number of changes this Attribute has undergone.

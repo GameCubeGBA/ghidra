@@ -233,7 +233,7 @@ public class SelectionModeWidget extends ControlPanelWidget {
 		// Now loop over all the groups, breaking up our source string and adding whitespaces.
 		StringBuilder sb = new StringBuilder();
 		for (Integer group : groups) {
-			sb.append(source.substring(0, group * modeModifier));
+			sb.append(source, 0, group * modeModifier);
 
 			if (whitespaceIndex < whitespace.size()) {
 				sb.append(whitespace.get(whitespaceIndex));

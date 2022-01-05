@@ -56,12 +56,9 @@ public class ISO9660Analyzer extends AbstractAnalyzer {
 	public boolean canAnalyze(Program program) {
 
 		Offset result = checkSignatures(program);
-		if (result.equals(Offset.NotFound)) {
-			return false;
-		}
-		return true;
+        return !result.equals(Offset.NotFound);
 
-	}
+    }
 
 	private Offset checkSignatures(Program program) {
 		int magicLen = ISO9660Constants.MAGIC_BYTES.length;

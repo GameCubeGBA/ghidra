@@ -85,20 +85,13 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 	@Override
 	public boolean containsRTTI() throws CancelledException, InvalidInputException {
 
-		if (!hasSpecialVtable()) {
-			return false;
-		}
-
-		return true;
-	}
+        return hasSpecialVtable();
+    }
 
 	@Override
 	public boolean isValidProgramType() {
-		if (!isGcc()) {
-			return false;
-		}
-		return true;
-	}
+        return isGcc();
+    }
 
 	@Override
 	public List<RecoveredClass> createRecoveredClasses() throws CancelledException, Exception {
@@ -160,12 +153,9 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 		Address found = program.getMemory()
 				.findBytes(commentBlock.getStart(), commentBlock.getEnd(), gccBytes, maskBytes,
 					true, monitor);
-		if (found == null) {
-			return false;
-		}
-		return true;
+        return found != null;
 
-	}
+    }
 
 	/**
 	 * Method to check for at least one special RTTI vtable
@@ -595,11 +585,8 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 		if (typeinfoStructureName.equals(SI_CLASS_TYPE_INFO_STRUCTURE)) {
 			return true;
 		}
-		if (typeinfoStructureName.contains(VMI_CLASS_TYPE_INFO_STRUCTURE)) {
-			return true;
-		}
-		return false;
-	}
+        return typeinfoStructureName.contains(VMI_CLASS_TYPE_INFO_STRUCTURE);
+    }
 
 	private Namespace createConstructionNamespace(Symbol vtableSymbol, Symbol vttSymbol)
 			throws Exception {
@@ -742,12 +729,9 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 		}
 
 		Structure structure = (Structure) baseDataType;
-		if (structure.getName().contains(CLASS_TYPE_INFO_STRUCTURE)) {
-			return true;
-		}
-		return false;
+        return structure.getName().contains(CLASS_TYPE_INFO_STRUCTURE);
 
-	}
+    }
 
 	/**
 	 * Method to create an appropriate type of vtable (primary, internal, or construction) and 
@@ -1102,12 +1086,8 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 		}
 
 		// check that no other data exept possibly longs at correct offsets
-		if (!isNoDataCreatedExceptMaybeLongs(vtableAddress, 2 * defaultPointerSize)) {
-			return false;
-		}
-
-		return true;
-	}
+        return isNoDataCreatedExceptMaybeLongs(vtableAddress, 2 * defaultPointerSize);
+    }
 
 	private boolean areNoReferencesInto(Address topAddress, int length) {
 
@@ -1235,9 +1215,7 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 				return false;
 			}
 			Function functionAt = api.getFunctionAt(referencedAddress);
-			if (functionAt != null) {
-				return true;
-			}
+            return functionAt != null;
 		}
 		else {
 			try {
@@ -1667,11 +1645,8 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 		if (bookmarkComment.contains("si_class_type_info")) {
 			return true;
 		}
-		if (bookmarkComment.contains("vmi_class_type_info")) {
-			return true;
-		}
-		return false;
-	}
+        return bookmarkComment.contains("vmi_class_type_info");
+    }
 
 	/**
 	 * Method to check to see if there are any EXTERNAL block relocations
@@ -2116,10 +2091,7 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 		}
 		RecoveredClass parentClass = getClass(parentNamespace);
 
-		if (parentClass == null) {
-			return null;
-		}
-		return parentClass;
+        return parentClass;
 	}
 
 	/**
@@ -2294,20 +2266,14 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 	 * @return true if it is a special one, false otherwise
 	 */
 	private boolean isSpecialTypeinfo(Address address) {
-		if (address.equals(class_type_info) || address.equals(si_class_type_info) ||
-			address.equals(vmi_class_type_info)) {
-			return true;
-		}
-		return false;
-	}
+        return address.equals(class_type_info) || address.equals(si_class_type_info) ||
+                address.equals(vmi_class_type_info);
+    }
 
 	private boolean isSpecialVtable(Address address) {
-		if (address.equals(class_type_info_vtable) || address.equals(si_class_type_info_vtable) ||
-			address.equals(vmi_class_type_info_vtable)) {
-			return true;
-		}
-		return false;
-	}
+        return address.equals(class_type_info_vtable) || address.equals(si_class_type_info_vtable) ||
+                address.equals(vmi_class_type_info_vtable);
+    }
 
 	private void createClassesFromTypeinfoSymbols(List<Symbol> typeinfoSymbols)
 			throws CancelledException {
@@ -2652,11 +2618,8 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 	 * @return true if the given address could be a valid null pointer, false if not
 	 */
 	private boolean isPossibleNullPointer(Address address) throws CancelledException {
-		if (!extendedFlatAPI.hasNumZeros(address, defaultPointerSize)) {
-			return false;
-		}
-		return true;
-	}
+        return extendedFlatAPI.hasNumZeros(address, defaultPointerSize);
+    }
 
 	/**
 	 * Method to determine if the given address contains a possible function pointer
@@ -2671,11 +2634,8 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 		}
 
 		Function function = api.getFunctionAt(possibleFunctionPointer);
-		if (function != null) {
-			return true;
-		}
-		return false;
-	}
+        return function != null;
+    }
 
 	/**
 	 * Method to call create and apply class structures method starting with top parent classes
@@ -2962,10 +2922,7 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 
 	private boolean hasExternalBlock() {
 		MemoryBlock externalBlock = program.getMemory().getBlock("EXTERNAL");
-		if (externalBlock == null) {
-			return false;
-		}
-		return true;
-	}
+        return externalBlock != null;
+    }
 
 }

@@ -116,9 +116,7 @@ class LibraryHints {
 		list = nameAttributeMap.get(name);
 		if (list != null) {
 			Attribute attr = getAttribute(list, attrName);
-			if (attr != null) {
-				return attr;
-			}
+            return attr;
 		}
 		return null;
 	}

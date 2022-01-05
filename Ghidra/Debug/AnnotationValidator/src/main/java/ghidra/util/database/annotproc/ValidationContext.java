@@ -97,11 +97,8 @@ public class ValidationContext {
 			if (!typeUtils.isSubtype(t1, v2.getUpperBound())) {
 				return false;
 			}
-			if (!typeUtils.isSubtype(v2.getLowerBound(), t1)) {
-				return false;
-			}
-			return true;
-		}
+            return typeUtils.isSubtype(v2.getLowerBound(), t1);
+        }
 		return typeUtils.isSubtype(t1, t2);
 	}
 

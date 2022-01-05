@@ -328,7 +328,7 @@ public class NGramUtils {
 			scanner1.close();
 		}
 
-		if (modelType.equals("")) {
+		if (modelType.isEmpty()) {
 			throw new IOException("Model file: " + modelName + " does not contain the model type.");
 		}
 
@@ -515,12 +515,8 @@ public class NGramUtils {
 	 * @return boolean
 	 */
 	public static boolean isLowerCaseModel() {
-		if (modelType.equalsIgnoreCase("lowercase")) {
-			return true;
-		}
-
-		return false;
-	}
+        return modelType.equalsIgnoreCase("lowercase");
+    }
 
 	public static String getLastLoadedTrigramModel() {
 		return lastLoadedTrigramModel;

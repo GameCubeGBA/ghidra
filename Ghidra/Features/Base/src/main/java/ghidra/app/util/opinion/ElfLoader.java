@@ -111,12 +111,9 @@ public class ElfLoader extends AbstractLibrarySupportLoader {
 			List<QueryResult> results =
 				QueryOpinionService.query(getName(), elf.getMachineName(), elf.getFlags());
 			for (QueryResult result : results) {
-				boolean add = true;
+				boolean add = !elf.is32Bit() || result.pair.getLanguageDescription().getSize() <= 32;
 				// Some languages are defined with sizes smaller than 32
-				if (elf.is32Bit() && result.pair.getLanguageDescription().getSize() > 32) {
-					add = false;
-				}
-				if (elf.is64Bit() && result.pair.getLanguageDescription().getSize() <= 32) {
+                if (elf.is64Bit() && result.pair.getLanguageDescription().getSize() <= 32) {
 					add = false;
 				}
 				if (elf.isLittleEndian() &&

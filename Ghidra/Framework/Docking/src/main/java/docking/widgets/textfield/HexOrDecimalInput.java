@@ -244,11 +244,8 @@ public class HexOrDecimalInput extends JTextField {
 			if (isHexMode && c >= 'a' && c <= 'f') {
 				return true;
 			}
-			if (isHexMode && c >= 'A' && c <= 'F') {
-				return true;
-			}
-			return false;
-		}
+            return isHexMode && c >= 'A' && c <= 'F';
+        }
 	}
 
 //	public static void main(String[] args) throws Exception {

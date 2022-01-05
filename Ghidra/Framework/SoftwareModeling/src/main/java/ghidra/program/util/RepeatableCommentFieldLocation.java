@@ -74,10 +74,8 @@ public class RepeatableCommentFieldLocation extends CommentFieldLocation {
 		if (getClass() != obj.getClass())
 			return false;
 		RepeatableCommentFieldLocation other = (RepeatableCommentFieldLocation) obj;
-		if (currentCommentRow != other.currentCommentRow)
-			return false;
-		return true;
-	}
+        return currentCommentRow == other.currentCommentRow;
+    }
 
 	@Override
 	public void restoreState(Program p, SaveState obj) {

@@ -270,10 +270,7 @@ public class VTImpliedMatchCorrelatorTest extends AbstractVTCorrelatorTest {
 	}
 
 	public boolean isMatchInMatchSet(Address srcAddr, Address destAddr, VTMatchSet matchSet) {
-		if (matchSet.getMatches(srcAddr, destAddr).size() > 0) {
-			return true;
-		}
-		return false;
-	}
+        return matchSet.getMatches(srcAddr, destAddr).size() > 0;
+    }
 
 }

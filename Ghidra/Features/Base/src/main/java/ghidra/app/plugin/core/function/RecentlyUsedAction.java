@@ -74,11 +74,8 @@ public class RecentlyUsedAction extends DataAction {
 		if (location instanceof FunctionSignatureFieldLocation) {
 			return true;
 		}
-		if (location instanceof VariableLocation) {
-			return true;
-		}
-		return false;
-	}
+        return location instanceof VariableLocation;
+    }
 
 	private DataType getRecentDataType() {
 		DataTypeManagerService service = plugin.getTool().getService(DataTypeManagerService.class);

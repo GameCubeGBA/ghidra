@@ -233,15 +233,10 @@ public class PluginDescription implements Comparable<PluginDescription> {
 		}
 		PluginDescription other = (PluginDescription) obj;
 		if (pluginClass == null) {
-			if (other.pluginClass != null) {
-				return false;
-			}
+            return other.pluginClass == null;
 		}
-		else if (!pluginClass.equals(other.pluginClass)) {
-			return false;
-		}
-		return true;
-	}
+		else return pluginClass.equals(other.pluginClass);
+    }
 
 	@Override
 	public String toString() {

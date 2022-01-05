@@ -540,11 +540,8 @@ public abstract class AbstractCreateDataTypeModel {
 			return true;
 		}
 		InstructionIterator instIter = listing.getInstructions(addrSet, true);
-		if (instIter.hasNext()) {
-			return true;
-		}
-		return false;
-	}
+        return instIter.hasNext();
+    }
 
 	/**
 	 * Gets the MemBuffer for the indicated data type in the array when the model has a count
@@ -621,11 +618,8 @@ public abstract class AbstractCreateDataTypeModel {
 			return true;
 		}
 		data = listing.getDefinedDataAfter(startAddress);
-		if (data != null && data.getMinAddress().compareTo(endAddress) <= 0) {
-			return true;
-		}
-		return false;
-	}
+        return data != null && data.getMinAddress().compareTo(endAddress) <= 0;
+    }
 
 	/**
 	 * Determines if an instruction is already defined between the start and end address.
@@ -640,11 +634,8 @@ public abstract class AbstractCreateDataTypeModel {
 			return true;
 		}
 		instruction = listing.getInstructionAfter(startAddress);
-		if (instruction != null && instruction.getMinAddress().compareTo(endAddress) <= 0) {
-			return true;
-		}
-		return false;
-	}
+        return instruction != null && instruction.getMinAddress().compareTo(endAddress) <= 0;
+    }
 
 	/**
 	 * Gets the current validation options that are set for this model.

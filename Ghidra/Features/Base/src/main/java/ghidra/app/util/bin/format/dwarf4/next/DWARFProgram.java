@@ -259,10 +259,8 @@ public class DWARFProgram implements Closeable {
 			MemoryByteProvider mbp = (MemoryByteProvider) bp;
 			Address startAddr = mbp.getAddress(0);
 			Address endAddr = mbp.getAddress(mbp.length() - 1);
-			if (program.getRelocationTable().getRelocations(
-				new AddressSet(startAddr, endAddr)).hasNext()) {
-				return true;
-			}
+            return program.getRelocationTable().getRelocations(
+                    new AddressSet(startAddr, endAddr)).hasNext();
 		}
 		return false;
 	}

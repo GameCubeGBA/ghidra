@@ -625,11 +625,8 @@ class FidServiceLibraryIngest {
 		}
 		Address entryPoint = function.getEntryPoint();
 		MemoryBlock block = function.getProgram().getMemory().getBlock(entryPoint);
-		if (!block.isInitialized()) {
-			return true;
-		}
-		return false;
-	}
+        return !block.isInitialized();
+    }
 
 	private void exclude(DomainFile domainFile, Function function,
 			FidPopulateResult.Disposition reason) {

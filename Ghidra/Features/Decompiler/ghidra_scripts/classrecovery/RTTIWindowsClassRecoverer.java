@@ -82,20 +82,13 @@ public class RTTIWindowsClassRecoverer extends RTTIClassRecoverer {
 	@Override
 	public boolean containsRTTI() throws CancelledException {
 
-		if (!hasTypeInfoVftable()) {
-			return false;
-		}
-
-		return true;
-	}
+        return hasTypeInfoVftable();
+    }
 
 	@Override
 	public boolean isValidProgramType() {
-		if (!isVisualStudioOrClangPe()) {
-			return false;
-		}
-		return true;
-	}
+        return isVisualStudioOrClangPe();
+    }
 
 	@Override
 	public void fixUpProgram() throws CancelledException, Exception {
@@ -354,10 +347,7 @@ public class RTTIWindowsClassRecoverer extends RTTIClassRecoverer {
 		api.clearListing(address, address.add(sizeOfDt));
 		Data completeObjectLocator =
 			extendedFlatAPI.createData(address, completeObjLocatorDataType);
-		if (completeObjectLocator == null) {
-			return null;
-		}
-		return completeObjectLocator;
+        return completeObjectLocator;
 	}
 
 	/**
@@ -419,10 +409,7 @@ public class RTTIWindowsClassRecoverer extends RTTIClassRecoverer {
 		api.clearListing(baseClassDescriptorAddress, baseClassDescriptorAddress.add(sizeOfDt));
 		Data baseClassDescArray =
 			extendedFlatAPI.createData(baseClassDescriptorAddress, baseClassDescriptor);
-		if (baseClassDescArray == null) {
-			return null;
-		}
-		return baseClassDescArray;
+        return baseClassDescArray;
 	}
 
 	/**
@@ -580,10 +567,7 @@ public class RTTIWindowsClassRecoverer extends RTTIClassRecoverer {
 
 		Data classHierarchyStructure =
 			extendedFlatAPI.createData(classHierarchyDescriptorAddress, classHDatatype);
-		if (classHierarchyStructure == null) {
-			return null;
-		}
-		return classHierarchyStructure;
+        return classHierarchyStructure;
 	}
 
 	/**
@@ -684,10 +668,7 @@ public class RTTIWindowsClassRecoverer extends RTTIClassRecoverer {
 		Data baseClassDescArray =
 			extendedFlatAPI.createData(baseClassArrayAddress, baseClassDescArrayDT);
 
-		if (baseClassDescArray == null) {
-			return null;
-		}
-		return baseClassDescArray;
+        return baseClassDescArray;
 	}
 
 	/**
@@ -1247,27 +1228,16 @@ public class RTTIWindowsClassRecoverer extends RTTIClassRecoverer {
 			recoveredClass.setHasSingleInheritance(true);
 			recoveredClass.setHasMultipleInheritance(false);
 
-			if ((inheritanceType & CHD_VIRTINH) == 0) {
-				recoveredClass.setInheritsVirtualAncestor(false);
-			}
-			// Flag indicates single inheritance virtual ancestor for class " +
-			//	recoveredClass.getName());
-			else {
-				recoveredClass.setInheritsVirtualAncestor(true);
-			}
+            // Flag indicates single inheritance virtual ancestor for class " +
+            //	recoveredClass.getName());
+            recoveredClass.setInheritsVirtualAncestor((inheritanceType & CHD_VIRTINH) != 0);
 		}
 		else {
 			recoveredClass.setHasSingleInheritance(false);
 			recoveredClass.setHasMultipleInheritance(true);
-			if ((inheritanceType & CHD_VIRTINH) == 0) {
-				recoveredClass.setHasMultipleVirtualInheritance(false);
-			}
-
-			// Flag indicates multiple inheritance virtual ancestor for class " +
-			// recoveredClass.getName());
-			else {
-				recoveredClass.setHasMultipleVirtualInheritance(true);
-			}
+            // Flag indicates multiple inheritance virtual ancestor for class " +
+            // recoveredClass.getName());
+            recoveredClass.setHasMultipleVirtualInheritance((inheritanceType & CHD_VIRTINH) != 0);
 		}
 
 		//TODO: update class to handle this type 
@@ -1411,7 +1381,7 @@ public class RTTIWindowsClassRecoverer extends RTTIClassRecoverer {
 				int vdisp = api.getInt(baseClassDescriptorAddress.add(16));
 
 				if (vbaseStructure.getComponentAt(vdisp) == null) {
-					String classFieldName = new String();
+					String classFieldName = "";
 					if (USE_SHORT_TEMPLATE_NAMES_IN_STRUCTURE_FIELDS &&
 						!baseClass.getShortenedTemplateName().isEmpty()) {
 						classFieldName = baseClass.getShortenedTemplateName();

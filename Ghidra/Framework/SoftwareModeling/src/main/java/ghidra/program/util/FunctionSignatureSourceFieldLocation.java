@@ -88,13 +88,10 @@ public class FunctionSignatureSourceFieldLocation extends FunctionLocation {
 			return false;
 		FunctionSignatureSourceFieldLocation other = (FunctionSignatureSourceFieldLocation) obj;
 		if (source == null) {
-			if (other.source != null)
-				return false;
+            return other.source == null;
 		}
-		else if (!source.equals(other.source))
-			return false;
-		return true;
-	}
+		else return source.equals(other.source);
+    }
 
 	@Override
 	public void saveState(SaveState obj) {

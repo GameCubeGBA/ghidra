@@ -124,11 +124,8 @@ public class GdbThreadInfo {
 		if (this.getId() != that.getId()) {
 			return false;
 		}
-		if (this.getTargetId() != that.getTargetId()) {
-			return false;
-		}
-		return true;
-	}
+        return this.getTargetId() == that.getTargetId();
+    }
 
 	public String getId() {
 		return id;

@@ -331,7 +331,7 @@ public class SelectLanguagePanel extends JPanel {
 				}
 				else if (f.startsWith("\"")) {
 					filterType = STARTS_WITH_FILTER;
-					filter = f.substring(1, f.length());
+					filter = f.substring(1);
 				}
 				else if (f.endsWith("\"")) {
 					filterType = ENDS_WITH_FILTER;
@@ -355,7 +355,7 @@ public class SelectLanguagePanel extends JPanel {
 				case EQUALS_FILTER:
 					return str.equalsIgnoreCase(filter);
 				case CONTAINS_FILTER:
-					return str.toLowerCase().indexOf(filter) >= 0;
+					return str.toLowerCase().contains(filter);
 			}
 			return true;
 		}

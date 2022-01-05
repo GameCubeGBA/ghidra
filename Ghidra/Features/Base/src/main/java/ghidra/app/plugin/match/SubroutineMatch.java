@@ -117,10 +117,8 @@ public class SubroutineMatch {
 	
 	private boolean isOneToOne()
 	{
-		if(progAAddrs.length == 1 && progBAddrs.length == 1)
-			return true;
-		return false;
-	}
+        return progAAddrs.length == 1 && progBAddrs.length == 1;
+    }
 	
 	@Override
     public String toString(){

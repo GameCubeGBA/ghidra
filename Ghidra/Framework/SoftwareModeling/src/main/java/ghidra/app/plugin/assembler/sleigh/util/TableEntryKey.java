@@ -57,11 +57,8 @@ public class TableEntryKey implements Comparable<TableEntryKey> {
 		if (this.state != ek.state) {
 			return false;
 		}
-		if (!this.sym.equals(ek.sym)) {
-			return false;
-		}
-		return true;
-	}
+        return this.sym.equals(ek.sym);
+    }
 
 	@Override
 	public int compareTo(TableEntryKey that) {
@@ -71,11 +68,8 @@ public class TableEntryKey implements Comparable<TableEntryKey> {
 			return result;
 		}
 		result = this.sym.compareTo(that.sym);
-		if (result != 0) {
-			return result;
-		}
-		return 0;
-	}
+        return result;
+    }
 
 	/**
 	 * Get the state (row) of the key in the table

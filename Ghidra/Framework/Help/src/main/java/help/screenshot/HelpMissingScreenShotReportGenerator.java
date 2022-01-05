@@ -726,7 +726,7 @@ public class HelpMissingScreenShotReportGenerator {
 				return true; // direct match!
 			}
 
-			return imageName.toLowerCase().equals(imgName.toLowerCase());
+			return imageName.equalsIgnoreCase(imgName);
 		}
 
 		String getImageName() {

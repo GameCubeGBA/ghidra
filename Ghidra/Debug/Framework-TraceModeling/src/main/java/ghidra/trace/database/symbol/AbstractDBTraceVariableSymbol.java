@@ -363,11 +363,8 @@ public abstract class AbstractDBTraceVariableSymbol extends AbstractDBTraceSymbo
 		if (eitherCustom && !Objects.equals(v1.getVariableStorage(), v2.getVariableStorage())) {
 			return false;
 		}
-		if (!DataTypeUtilities.isSameOrEquivalentDataType(v1.getDataType(), v2.getDataType())) {
-			return false;
-		}
-		return true;
-	}
+        return DataTypeUtilities.isSameOrEquivalentDataType(v1.getDataType(), v2.getDataType());
+    }
 
 	@Override
 	public boolean isEquivalent(Variable variable) {

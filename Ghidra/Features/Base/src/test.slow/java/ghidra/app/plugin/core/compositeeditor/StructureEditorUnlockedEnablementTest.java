@@ -81,15 +81,10 @@ public class StructureEditorUnlockedEnablementTest extends AbstractStructureEdit
 
 		// Check enablement.
 		for (CompositeEditorTableAction action : actions) {
-			if ((action instanceof FavoritesAction) || (action instanceof CycleGroupAction) ||
-				(action instanceof EditFieldAction) || (action instanceof InsertUndefinedAction) ||
-				(action instanceof AddBitFieldAction) || (action instanceof PointerAction) ||
-				(action instanceof HexNumbersAction) || (action instanceof ApplyAction)) {
-				checkEnablement(action, true);
-			}
-			else {
-				checkEnablement(action, false);
-			}
+            checkEnablement(action, (action instanceof FavoritesAction) || (action instanceof CycleGroupAction) ||
+                    (action instanceof EditFieldAction) || (action instanceof InsertUndefinedAction) ||
+                    (action instanceof AddBitFieldAction) || (action instanceof PointerAction) ||
+                    (action instanceof HexNumbersAction) || (action instanceof ApplyAction));
 		}
 	}
 
@@ -115,15 +110,10 @@ public class StructureEditorUnlockedEnablementTest extends AbstractStructureEdit
 
 		// Check enablement on blank line selected.
 		for (CompositeEditorTableAction action : actions) {
-			if ((action instanceof FavoritesAction) || (action instanceof CycleGroupAction) ||
-				(action instanceof EditFieldAction) || (action instanceof InsertUndefinedAction) ||
-				(action instanceof AddBitFieldAction) || (action instanceof PointerAction) ||
-				(action instanceof HexNumbersAction)) {
-				checkEnablement(action, true);
-			}
-			else {
-				checkEnablement(action, false);
-			}
+            checkEnablement(action, (action instanceof FavoritesAction) || (action instanceof CycleGroupAction) ||
+                    (action instanceof EditFieldAction) || (action instanceof InsertUndefinedAction) ||
+                    (action instanceof AddBitFieldAction) || (action instanceof PointerAction) ||
+                    (action instanceof HexNumbersAction));
 		}
 	}
 
@@ -266,15 +256,10 @@ public class StructureEditorUnlockedEnablementTest extends AbstractStructureEdit
 		// Check enablement on last component selected.
 		setSelection(new int[] { model.getNumComponents() });
 		for (CompositeEditorTableAction action : actions) {
-			if ((action instanceof FavoritesAction) || (action instanceof CycleGroupAction) ||
-				(action instanceof EditFieldAction) || (action instanceof InsertUndefinedAction) ||
-				(action instanceof AddBitFieldAction) || (action instanceof PointerAction) ||
-				(action instanceof HexNumbersAction)) {
-				checkEnablement(action, true);
-			}
-			else {
-				checkEnablement(action, false);
-			}
+            checkEnablement(action, (action instanceof FavoritesAction) || (action instanceof CycleGroupAction) ||
+                    (action instanceof EditFieldAction) || (action instanceof InsertUndefinedAction) ||
+                    (action instanceof AddBitFieldAction) || (action instanceof PointerAction) ||
+                    (action instanceof HexNumbersAction));
 		}
 	}
 
