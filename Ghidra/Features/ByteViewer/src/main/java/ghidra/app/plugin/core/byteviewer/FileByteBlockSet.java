@@ -119,7 +119,7 @@ class FileByteBlockSet implements ByteBlockSet {
 	}
 
 	void save(String pathname) throws IOException {
-		FileOutputStream fos = new FileOutputStream(new File(pathname));
+		FileOutputStream fos = new FileOutputStream(pathname);
 
 		byte[] buf = block.getBytes();
 		try {

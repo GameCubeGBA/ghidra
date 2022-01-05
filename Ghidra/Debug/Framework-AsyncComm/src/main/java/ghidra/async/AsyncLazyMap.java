@@ -15,14 +15,13 @@
  */
 package ghidra.async;
 
+import org.apache.commons.lang3.exception.ExceptionUtils;
+
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
-import java.util.stream.Collectors;
-
-import org.apache.commons.lang3.exception.ExceptionUtils;
 
 /**
  * A map of cached values computed upon the first request, asynchronously
