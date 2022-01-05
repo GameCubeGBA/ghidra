@@ -43,7 +43,7 @@ else {
 /***************************************************************************************
  * Make sure Gradle wasn't launched with a 32-bit Java...it can cause confusing errors
  ***************************************************************************************/
-if ("32".equals(System.getProperty("sun.arch.data.model"))) {
+if ("32" == System.getProperty("sun.arch.data.model")) {
 	throw new GradleException("\n\n\t32-bit Java detected!  Please use 64-bit Java.\n\n");
 }
 
@@ -224,7 +224,6 @@ List<String> getExternalRuntimeDependencies(Project project, Configuration confi
 		if (dep instanceof ExternalDependency) { 	
 			String name = dep.getName()
 			Set<String> classifiers = dep.artifacts.classifier
-			String group = dep.getGroup()
 			String version = dep.getVersion()	
 			String searchString = name
 

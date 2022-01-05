@@ -68,7 +68,7 @@ public class DebuggerModelServiceTest extends AbstractGhidraHeadedDebuggerGUITes
 	/**
 	 * Exists just for mocking, because jmockit does Bad Things (TM) to
 	 * CollectionChangeListener.of() if I try to mock one of those or a subclass directly. I'm
-	 * guessing the version we're using (1.44 as of this writing) is utterly ignorant of static
+	 * guessing the version we're using (1.49 as of this writing) is utterly ignorant of static
 	 * interface methods. What was the latest version of Java at the time?
 	 *
 	 * <p>
