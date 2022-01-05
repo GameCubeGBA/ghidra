@@ -1871,7 +1871,7 @@ class FunctionMerger extends AbstractFunctionMerger implements ListingMerger {
 			return false;
 		}
 
-		// TODO: using isEquivelent seems bad
+		// TODO: using isEquivalent seems bad
 
 		Parameter returnParam1 = function1.getReturn();
 		Parameter returnParam2 = function2.getReturn();
