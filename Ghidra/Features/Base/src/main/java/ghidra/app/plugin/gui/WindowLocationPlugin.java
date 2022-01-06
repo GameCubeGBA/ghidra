@@ -479,7 +479,7 @@ public class WindowLocationPlugin extends Plugin {
 			List<WindowInfo> intersection = visibleWindows.values()
 					.stream()
 					.filter(w -> w.contains(e.getPoint()))
-					.sorted((w1, w2) -> w1.zOrder - w2.zOrder)
+					.sorted(Comparator.comparingInt(w -> w.zOrder))
 					.collect(Collectors.toList());
 
 			if (intersection.isEmpty()) {
@@ -504,7 +504,7 @@ public class WindowLocationPlugin extends Plugin {
 			List<WindowInfo> intersection = visibleWindows.values()
 					.stream()
 					.filter(w -> w.contains(e.getPoint()))
-					.sorted((w1, w2) -> w1.zOrder - w2.zOrder)
+					.sorted(Comparator.comparingInt(w -> w.zOrder))
 					.collect(Collectors.toList());
 
 			clearSelection();

@@ -34,7 +34,7 @@ public class VTProgramTableCorrelatorModel extends AbstractGTableModel<VTProgram
 	static final String SELECT_NAME = "Select";
 
 	private static final Comparator<VTProgramCorrelatorFactory> comparator =
-            (o1, o2) -> o1.getPriority() - o2.getPriority();
+            Comparator.comparingInt(VTProgramCorrelatorFactory::getPriority);
 	private static final Icon ALREADY_RUN_ICON = ResourceManager.loadImage("images/flag-green.png");
 
 	private List<VTProgramCorrelatorFactory> list;

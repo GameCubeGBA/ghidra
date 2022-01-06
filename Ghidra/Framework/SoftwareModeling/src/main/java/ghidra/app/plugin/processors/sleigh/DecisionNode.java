@@ -155,7 +155,7 @@ public class DecisionNode {
 	}
 
 	private static final Comparator<Constructor> debugInstructionComparator =
-            (c1, c2) -> c1.getLineno() - c2.getLineno();
+            Comparator.comparingInt(Constructor::getLineno);
 
 	private void dumpDecendentConstructors(List<Constructor> clist) {
 		if (bitsize == 0) { // The node is terminal

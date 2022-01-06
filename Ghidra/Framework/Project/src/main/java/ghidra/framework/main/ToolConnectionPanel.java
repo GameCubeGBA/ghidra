@@ -19,6 +19,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Arrays;
+import java.util.Comparator;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -284,9 +285,7 @@ class ToolConnectionPanel extends JPanel implements ListSelectionListener {
 		consumerModel.removeAllElements();
 		PluginTool[] tools = toolManager.getConsumerTools();
 
-		Arrays.sort(tools, (t1, t2) -> {
-			return t1.getName().compareTo(t2.getName());
-		});
+		Arrays.sort(tools, Comparator.comparing(PluginTool::getName));
 
 		for (PluginTool tool : tools) {
 			consumerModel.addElement(tool);
@@ -301,9 +300,7 @@ class ToolConnectionPanel extends JPanel implements ListSelectionListener {
 		producerModel.removeAllElements();
 		PluginTool[] tools = toolManager.getProducerTools();
 
-		Arrays.sort(tools, (t1, t2) -> {
-			return t1.getName().compareTo(t2.getName());
-		});
+		Arrays.sort(tools, Comparator.comparing(PluginTool::getName));
 
 		for (PluginTool tool : tools) {
 			producerModel.addElement(tool);

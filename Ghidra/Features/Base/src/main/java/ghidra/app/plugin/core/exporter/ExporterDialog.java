@@ -299,7 +299,7 @@ public class ExporterDialog extends DialogComponentProvider implements AddressFa
 		List<Exporter> list = new ArrayList<>(ClassSearcher.getInstances(Exporter.class));
 		Class<? extends DomainObject> domainObjectClass = domainFile.getDomainObjectClass();
 		list.removeIf(exporter -> !exporter.canExportDomainObject(domainObjectClass));
-		list.sort((o1, o2) -> o1.toString().compareTo(o2.toString()));
+		list.sort(Comparator.comparing(Exporter::toString));
 		return list;
 	}
 

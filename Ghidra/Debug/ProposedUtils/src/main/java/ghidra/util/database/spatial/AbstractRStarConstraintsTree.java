@@ -460,7 +460,7 @@ public abstract class AbstractRStarConstraintsTree< //
 	// NOTE: entry may actually be a node
 	protected void doInsert(DBTreeRecord<?, ? extends NS> entry, LevelInfo levelInfo) {
 		// I1
-		NR node = doChooseSubtree(levelInfo.dstLevel, entry.getBounds());
+		NR node = (NR) doChooseSubtree(levelInfo.dstLevel, entry.getBounds());
 
 		// I2
 		if (node.getType() == NodeType.LEAF) {
@@ -487,7 +487,7 @@ public abstract class AbstractRStarConstraintsTree< //
 		}
 		else {
 			for (NR parent = node; parent != null; parent = getParentOf(parent)) {
-				parent.setShape(parent.getShape().unionBounds(entry.getBounds()));
+				parent.setShape((NS) parent.getShape().unionBounds(entry.getBounds()));
 			}
 		}
 
@@ -560,7 +560,7 @@ public abstract class AbstractRStarConstraintsTree< //
 			farthest.add(new LeastDistanceFromCenterToPoint(next, n.getShape()));
 			LeastDistanceFromCenterToPoint near = farthest.poll();
 			boundsNearest = boundsNearest == null ? near.record.getBounds()
-					: boundsNearest.unionBounds(near.record.getBounds());
+					: (NS) boundsNearest.unionBounds(near.record.getBounds());
 			dataCountNearest += near.record.getDataCount();
 		}
 		assert farthest.size() == reinsertCount;

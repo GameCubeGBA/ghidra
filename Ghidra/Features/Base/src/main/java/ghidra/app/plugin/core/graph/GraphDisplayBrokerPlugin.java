@@ -82,7 +82,7 @@ public class GraphDisplayBrokerPlugin extends Plugin
 		Set<GraphDisplayProvider> instances =
 			new HashSet<>(ClassSearcher.getInstances(GraphDisplayProvider.class));
 		graphDisplayProviders = new ArrayList<>(instances);
-		graphDisplayProviders.sort((s1, s2) -> s1.getName().compareTo(s2.getName()));
+		graphDisplayProviders.sort(Comparator.comparing(GraphDisplayProvider::getName));
 		initializeServices();
 		if (!graphDisplayProviders.isEmpty()) {
 			defaultGraphDisplayProvider = graphDisplayProviders.get(0);

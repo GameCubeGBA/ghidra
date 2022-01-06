@@ -81,7 +81,7 @@ public class DirectoryVisitor implements Iterable<File> {
         private final FileFilter filter;
         private final Comparator<File> comparator;
 
-        private static final Comparator<File> CASE_SENSITIVE = (o1, o2) -> o1.getName().compareTo(o2.getName());
+        private static final Comparator<File> CASE_SENSITIVE = Comparator.comparing(File::getName);
 
         private static final Comparator<File> CASE_INSENSITIVE = (o1, o2) -> o1.getName().compareToIgnoreCase(o2.getName());
 

@@ -152,7 +152,6 @@ public abstract class AbstractConstraintsTree< //
 	 * {@link TreeRecordVisitor}.
 	 * 
 	 * @param parent the parent node
-	 * @param query a query to control the ordering of the children
 	 * @return a collection of the children
 	 */
 	protected Collection<? extends DBTreeRecord<?, ? extends NS>> getChildrenOf(NR parent) {
@@ -680,7 +679,7 @@ public abstract class AbstractConstraintsTree< //
 		for (DBTreeRecord<?, ? extends NS> child : getChildrenOf(node)) {
 			childCount++;
 			dataCount += child.getDataCount();
-			bounds = bounds == null ? child.getBounds() : bounds.unionBounds(child.getBounds());
+			bounds = bounds == null ? child.getBounds() : (NS) bounds.unionBounds(child.getBounds());
 		}
 		node.setChildCount(childCount);
 		node.setDataCount(dataCount);

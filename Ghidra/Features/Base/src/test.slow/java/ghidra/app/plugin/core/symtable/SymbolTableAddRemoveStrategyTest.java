@@ -44,9 +44,7 @@ public class SymbolTableAddRemoveStrategyTest {
 	}
 
 	private SpyTableData createTableData() {
-		Comparator<Symbol> comparator = (s1, s2) -> {
-			return s1.getName().compareTo(s2.getName());
-		};
+		Comparator<Symbol> comparator = Comparator.comparing(Symbol::getName);
 		TableSortState sortState = TableSortState.createDefaultSortState(0);
 		TableSortingContext<Symbol> sortContext =
 			new TableSortingContext<>(sortState, comparator);

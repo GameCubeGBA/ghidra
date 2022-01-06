@@ -15,6 +15,7 @@
  */
 package ghidra.app.plugin.core.memory;
 
+import java.util.Comparator;
 import java.util.List;
 
 import docking.widgets.OptionDialog;
@@ -64,7 +65,7 @@ class MemoryMapManager {
 	 */
 	void mergeBlocks(List<MemoryBlock> blocks) {
 		// need to order by start address
-		blocks.sort((b1, b2) -> b1.getStart().compareTo(b2.getStart()));
+		blocks.sort(Comparator.comparing(MemoryBlock::getStart));
 		if (!goodBlocks(blocks)) {
 			return;
 		}

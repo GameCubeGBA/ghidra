@@ -52,13 +52,13 @@ public class RepositoryFolder {
 	 * RepositoryFile name comparator
 	 */
 	private static Comparator<RepositoryFile> FILE_NAME_COMPARATOR =
-		(f1, f2) -> f1.getName().compareTo(f2.getName());
+            Comparator.comparing(RepositoryFile::getName);
 
 	/**
 	 * RepositoryFolder name comparator
 	 */
 	private static Comparator<RepositoryFolder> FOLDER_NAME_COMPARATOR =
-		(f1, f2) -> f1.name.compareTo(f2.name);
+            Comparator.comparing(f -> f.name);
 
 	/**
 	 * Constructor for non-root folders

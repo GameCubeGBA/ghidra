@@ -16,6 +16,7 @@
 package ghidra.app.util.bin.format.dwarf4.next;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 
 import ghidra.app.plugin.core.datamgr.util.DataTypeUtils;
@@ -68,9 +69,8 @@ public class DWARFParser {
 		// Sort by category to reduce the amount of thrashing the DTM does reloading
 		// categories.
 		List<DataTypePath> importedTypes = dwarfDTM.getImportedTypes();
-		importedTypes.sort((dtp1, dtp2) -> dtp1.getCategoryPath()
-                .getPath()
-                .compareTo(dtp2.getCategoryPath().getPath()));
+		importedTypes.sort(Comparator.comparing(dtp -> dtp.getCategoryPath()
+                .getPath()));
 
 		monitor.setIndeterminate(false);
 		monitor.setShowProgressValue(true);

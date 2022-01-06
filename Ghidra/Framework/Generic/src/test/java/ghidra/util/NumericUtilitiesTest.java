@@ -195,7 +195,7 @@ public class NumericUtilitiesTest {
 			formatNumberAsSignedAndUnsignedInRadixes(number).stream().collect(
 				Collectors.groupingBy(r -> r.mode,
 					Collectors.collectingAndThen(Collectors.toCollection(ArrayList::new), l -> {
-						l.sort((r1, r2) -> r1.radix - r2.radix);
+						l.sort(Comparator.comparingInt(r -> r.radix));
 						return l;
 					})));
 

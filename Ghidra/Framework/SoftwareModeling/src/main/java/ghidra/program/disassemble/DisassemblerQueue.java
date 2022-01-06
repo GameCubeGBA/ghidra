@@ -55,13 +55,7 @@ class DisassemblerQueue {
 	private Address lastFlowFrom;
 
 	private static final Comparator<InstructionBlockFlow> ORDERED_FLOW_COMPARATOR =
-            (o1, o2) -> {
-                int c = o1.getType().ordinal() - o2.getType().ordinal();
-                if (c == 0) {
-                    c = o1.getDestinationAddress().compareTo(o2.getDestinationAddress());
-                }
-                return c;
-            };
+            Comparator.comparingInt((InstructionBlockFlow o) -> o.getType().ordinal()).thenComparing(InstructionBlockFlow::getDestinationAddress);
 
 	/**
 	 * Constructor

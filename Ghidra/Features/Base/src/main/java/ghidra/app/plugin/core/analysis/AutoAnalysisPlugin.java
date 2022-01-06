@@ -99,7 +99,7 @@ public class AutoAnalysisPlugin extends Plugin implements AutoAnalysisManagerLis
 		analyzers.addAll(ClassSearcher.getInstances(Analyzer.class));
 
 		// sort so that the menu items are always in the same order
-		analyzers.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
+		analyzers.sort(Comparator.comparing(Analyzer::getName));
 	}
 
 	/**

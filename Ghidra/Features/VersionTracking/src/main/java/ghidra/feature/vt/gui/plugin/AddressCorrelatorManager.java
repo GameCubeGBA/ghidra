@@ -66,7 +66,7 @@ public class AddressCorrelatorManager {
 			ClassSearcher.getInstances(DiscoverableAddressCorrelator.class);
 		List<AddressCorrelator> addressCorrelatorList = new ArrayList<AddressCorrelator>(instances);
 
-		addressCorrelatorList.sort((o1, o2) -> o1.getClass().getSimpleName().compareTo(o2.getClass().getSimpleName()));
+		addressCorrelatorList.sort(Comparator.comparing(o -> o.getClass().getSimpleName()));
 
 		// Put the LastResortCorrelator in case a better address correlation isn't found.
 		addressCorrelatorList.add(new LastResortAddressCorrelator());

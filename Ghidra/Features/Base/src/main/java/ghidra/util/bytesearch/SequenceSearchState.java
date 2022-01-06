@@ -79,7 +79,7 @@ public class SequenceSearchState implements Comparable<SequenceSearchState> {
 	 * Sort the sequences that have been added 
 	 */
 	public void sortSequences() {
-		Comparator<DittedBitSequence> comp = (o1, o2) -> o1.getIndex() - o2.getIndex();
+		Comparator<DittedBitSequence> comp = Comparator.comparingInt(DittedBitSequence::getIndex);
 		possible.sort(comp);
 		if (success != null) {
 			success.sort(comp);

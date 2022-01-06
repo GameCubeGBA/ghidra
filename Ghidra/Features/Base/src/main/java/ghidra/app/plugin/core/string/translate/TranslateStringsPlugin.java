@@ -84,7 +84,7 @@ public class TranslateStringsPlugin extends Plugin {
 		translationServices.clear();
 
 		translationServices.addAll(Arrays.asList(tool.getServices(StringTranslationService.class)));
-		translationServices.sort((s1, s2) -> s1.getTranslationServiceName().compareTo(s2.getTranslationServiceName()));
+		translationServices.sort(Comparator.comparing(StringTranslationService::getTranslationServiceName));
 
 		for (StringTranslationService service : translationServices) {
 			DockingAction action = new TranslateAction(getName(), service);

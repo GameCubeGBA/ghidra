@@ -18,6 +18,7 @@ package ghidra.feature.vt.api;
 import java.util.*;
 import java.util.Map.Entry;
 
+import ghidra.util.task.TaskMonitor;
 import org.junit.*;
 
 import ghidra.feature.vt.api.correlator.program.ExactMatchBytesProgramCorrelatorFactory;

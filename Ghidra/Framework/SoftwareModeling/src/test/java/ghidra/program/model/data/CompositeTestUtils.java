@@ -82,7 +82,7 @@ public class CompositeTestUtils {
 	}
 
 	private static Comparator<Composite> NAME_COMPARATOR =
-		(o1, o2) -> o1.getPathName().compareTo(o2.getPathName());
+            Comparator.comparing(DataType::getPathName);
 
 	/**
 	 * Dump composite details for examination or test comparison.

@@ -24,10 +24,8 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.text.IsEmptyString.isEmptyOrNullString;
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 import java.util.List;
-import java.util.Queue;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
@@ -1941,7 +1939,7 @@ public class GhidraFileChooserTest extends AbstractDockingTest {
 			files.length >= count);
 
 		// create some consistency between runs
-		Arrays.sort(files, (f1, f2) -> f1.getName().compareTo(f2.getName()));
+		Arrays.sort(files, Comparator.comparing(File::getName));
 
 		List<File> result = new ArrayList<>();
 		result.addAll(Arrays.asList(files).subList(0, count));

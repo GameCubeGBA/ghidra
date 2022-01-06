@@ -51,7 +51,7 @@ class HelpViewSearcher {
 		KeyStroke.getKeyStroke(KeyEvent.VK_F, DockingUtils.CONTROL_KEY_MODIFIER_MASK);
 
 	private Comparator<SearchHit> searchResultComparator =
-		(o1, o2) -> o1.getBegin() - o2.getBegin();
+            Comparator.comparingInt(SearchHit::getBegin);
 
 	private Comparator<? super SearchHit> searchResultReverseComparator =
 		(o1, o2) -> o2.getBegin() - o1.getBegin();

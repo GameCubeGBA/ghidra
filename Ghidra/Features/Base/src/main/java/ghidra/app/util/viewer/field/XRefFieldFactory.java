@@ -351,9 +351,7 @@ public class XRefFieldFactory extends FieldFactory {
 		// Bin all xrefs by containing function, which may be null
 		//
 		List<Reference> noFunction = new ArrayList<>();
-		TreeMap<Function, List<Reference>> xrefsByFunction = new TreeMap<>((f1, f2) -> {
-			return f1.getEntryPoint().compareTo(f2.getEntryPoint());
-		});
+		TreeMap<Function, List<Reference>> xrefsByFunction = new TreeMap<>(Comparator.comparing(Function::getEntryPoint));
 		for (Reference ref : CollectionUtils.asIterable(xrefs, offcuts)) {
 
 			Function function = functionManager.getFunctionContaining(ref.getFromAddress());

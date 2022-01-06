@@ -281,7 +281,7 @@ public class EnumValueConstraintEditorTest extends AbstractDockingTest {
 			}
 		}
 
-		checkboxes.sort((cb1, cb2) -> cb1.getName().compareTo(cb2.getName()));
+		checkboxes.sort(Comparator.comparing(Component::getName));
 
 		return checkboxes;
 	}

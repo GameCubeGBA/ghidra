@@ -238,7 +238,7 @@ public class GhidraLauncher {
 	 * @return A list of discovered jar paths, sorted by jar file name
 	 */
 	public static List<String> findJarsInDir(ResourceFile dir) {
-		Set<ResourceFile> set = new TreeSet<>((a, b) -> a.getName().compareTo(b.getName()));
+		Set<ResourceFile> set = new TreeSet<>(Comparator.comparing(ResourceFile::getName));
 		ResourceFile[] names = dir.listFiles();
 		if (names != null) {
 			for (ResourceFile file : names) {

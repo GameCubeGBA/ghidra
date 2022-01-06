@@ -120,7 +120,7 @@ public class BowTieLayout extends AbstractVisualGraphLayout<FcgVertex, FcgEdge> 
 		List<FcgEdge> inEdges = new ArrayList<>(g.getInEdges(source));
 		List<FcgVertex> inVertices =
 			inEdges.stream().map(e -> e.getStart()).collect(Collectors.toList());
-		inVertices.sort((v1, v2) -> v1.getAddress().compareTo(v2.getAddress()));
+		inVertices.sort(Comparator.comparing(FcgVertex::getAddress));
 		int row = 0; // first row
 		for (int col = 0; col < inVertices.size(); col++) {
 			FcgVertex v = inVertices.get(col);
@@ -143,7 +143,7 @@ public class BowTieLayout extends AbstractVisualGraphLayout<FcgVertex, FcgEdge> 
 		// leave already processed vertices in the top row; this can happen if the in vertex is
 		// also called by the source function, creating a cycle
 		outVertices.removeAll(inVertices);
-		outVertices.sort((v1, v2) -> v1.getAddress().compareTo(v2.getAddress()));
+		outVertices.sort(Comparator.comparing(FcgVertex::getAddress));
 		row = 2; // last
 		for (int col = 0; col < outVertices.size(); col++) {
 			FcgVertex v = outVertices.get(col);
