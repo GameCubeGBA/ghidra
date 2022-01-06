@@ -146,7 +146,7 @@ public class GNUExternalDisassembler implements ExternalDisassembler {
 
 			List<String> architectures = language.getLanguageDescription().getExternalNames("gnu");
 			//get first non-null
-			if (architectures != null && architectures.size() > 0) {
+			if (architectures != null && !architectures.isEmpty()) {
 				architecture = architectures.get(0);
 				if (architectures.size() > 1) {
 					reportMultipleMappings(language);
@@ -472,7 +472,7 @@ public class GNUExternalDisassembler implements ExternalDisassembler {
 		List<GnuDisassembledInstruction> disassembly =
 			runDisassembler(gdisConfig, address, bytes, disOptions);
 
-		if (disassembly == null || disassembly.size() == 0 || disassembly.get(0) == null) {
+		if (disassembly == null || disassembly.isEmpty() || disassembly.get(0) == null) {
 			return "(bad)";
 		}
 		return disassembly.get(0).toString();

@@ -66,7 +66,7 @@ public abstract class WindowNode extends Node {
 			// We must manually hunt for a DockableComponent, as Java could not find a default focus
 			// owner in the given window.
 			List<ComponentPlaceholder> activeComponents = getActiveComponents();
-			if (activeComponents.size() != 0) {
+			if (!activeComponents.isEmpty()) {
 				lastFocusedProviderInWindow = activeComponents.get(0);
 			}
 		}

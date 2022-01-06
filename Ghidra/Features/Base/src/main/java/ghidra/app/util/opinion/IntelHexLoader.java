@@ -204,7 +204,7 @@ public class IntelHexLoader extends AbstractProgramLoader {
 			baseAddr = program.getAddressFactory().getDefaultAddressSpace().getAddress(0);
 		}
 
-		if (blockName == null || blockName.length() == 0) {
+		if (blockName == null || blockName.isEmpty()) {
 			blockName = generateBlockName(program, isOverlay, baseAddr.getAddressSpace());
 		}
 
@@ -233,7 +233,7 @@ public class IntelHexLoader extends AbstractProgramLoader {
 		String msg = memImage.createMemory(INTEL_HEX_NAME, provider.getName(),
 			isOverlay ? blockName : null, isOverlay, program, monitor);
 
-		if (msg.length() > 0) {
+		if (!msg.isEmpty()) {
 			log.appendMsg(msg);
 		}
 

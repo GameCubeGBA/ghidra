@@ -133,7 +133,7 @@ class OldStackFrameDB implements StackFrame {
 				throw new RuntimeException(e); // unexpected
 			}
 		}
-		if (comment != null && comment.length() != 0) {
+		if (comment != null && !comment.isEmpty()) {
 			var.setComment(comment);
 		}
 		return var;

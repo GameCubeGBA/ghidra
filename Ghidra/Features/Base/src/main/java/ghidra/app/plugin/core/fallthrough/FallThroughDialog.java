@@ -134,7 +134,7 @@ class FallThroughDialog extends DialogComponentProvider implements ChangeListene
 
 		Runnable r = () -> {
             Address addr = addrField.getAddress();
-            if (addr != null || addrField.getValue().length() == 0) {
+            if (addr != null || addrField.getValue().isEmpty()) {
                 model.setCurrentFallthrough(addr);
             }
             else {

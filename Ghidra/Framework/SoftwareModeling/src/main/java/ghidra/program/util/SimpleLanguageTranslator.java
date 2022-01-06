@@ -323,10 +323,10 @@ class SimpleLanguageTranslator extends LanguageTranslatorAdapter {
             }
         }
 
-		if (fromLanguageID == null || fromLanguageID.getIdAsString().trim().length() == 0) {
+		if (fromLanguageID == null || fromLanguageID.getIdAsString().trim().isEmpty()) {
 			throw new SAXException("Missing valid 'from_language' element");
 		}
-		if (toLanguageID == null || toLanguageID.getIdAsString().trim().length() == 0) {
+		if (toLanguageID == null || toLanguageID.getIdAsString().trim().isEmpty()) {
 			throw new SAXException("Missing valid 'to_language' element");
 		}
 		if (fromLanguageID.equals(toLanguageID) && fromLanguageVersion >= toLanguageVersion) {

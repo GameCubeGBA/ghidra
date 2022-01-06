@@ -260,7 +260,7 @@ public class FunctionManagerDB implements FunctionManager {
 		PrototypeModel[] models = compilerSpec.getCallingConventions();
 		for (PrototypeModel model : models) {
 			String name = model.getName();
-			if (name != null && name.length() > 0) {
+			if (name != null && !name.isEmpty()) {
 				namedList.add(model);
 			}
 		}
@@ -356,7 +356,7 @@ public class FunctionManagerDB implements FunctionManager {
 				throw new OverlappingFunctionException(entryPoint);
 			}
 
-			if (name == null || name.length() == 0 ||
+			if (name == null || name.isEmpty() ||
 				SymbolUtilities.isReservedDynamicLabelName(name, program.getAddressFactory())) {
 				source = SourceType.DEFAULT;
 				name = "";

@@ -339,7 +339,7 @@ public class NewFunctionStackAnalysisCmd extends BackgroundCommand {
 
 		symEval.flowConstants(func.getEntryPoint(), func.getBody(), eval, true, monitor);
 
-		if (sortedVariables.size() != 0) {
+		if (!sortedVariables.isEmpty()) {
 
 			List<Variable> protectedFuncVars = new ArrayList<>();
 			for (Variable v : func.getAllVariables()) {

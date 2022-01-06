@@ -145,7 +145,7 @@ public class ReferenceTagProcessor extends TagProcessor {
 	public String processText(String text) {
 		if (readingTitle) {
 			text = text.trim();
-			if (text.length() != 0) {
+			if (!text.isEmpty()) {
 				if (title == null) {
 					title = text;
 				}

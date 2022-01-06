@@ -65,7 +65,7 @@ public abstract class RenameTask {
 	private boolean runDialog(boolean oldNameIsCancel) {
 		InputDialogListener listener = dialog -> {
             String name = dialog.getValue();
-            if ((name==null)||(name.length()==0)) {
+            if ((name==null)||(name.isEmpty())) {
                 dialog.setStatusText("Cannot have empty name");
                 return false;
             }

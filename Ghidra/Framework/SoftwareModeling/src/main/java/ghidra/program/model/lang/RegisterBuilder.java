@@ -102,7 +102,7 @@ public class RegisterBuilder {
 		List<Register> unprocessed = new LinkedList<>(registerList);
 
 		int bitSize = 1;
-		while (unprocessed.size() > 0) {
+		while (!unprocessed.isEmpty()) {
 			int nextLargerSize = Integer.MAX_VALUE;
 			Iterator<Register> it = unprocessed.iterator();
 			while (it.hasNext()) {

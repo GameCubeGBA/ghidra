@@ -97,7 +97,7 @@ public class OatClass_Lollipop extends OatClass {
 		if (bitmap_size_ > 0) {
 			className += "_" + bitmap_size_;
 		}
-		if (methods_pointer_.size() > 0) {
+		if (!methods_pointer_.isEmpty()) {
 			className += "_" + methods_pointer_.size();
 		}
 

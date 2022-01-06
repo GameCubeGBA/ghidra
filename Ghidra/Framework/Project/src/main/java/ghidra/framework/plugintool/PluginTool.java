@@ -513,7 +513,7 @@ public abstract class PluginTool extends AbstractDockingTool {
 
 	public void putInstanceName(String newInstanceName) {
 		this.instanceName = newInstanceName;
-		if (instanceName.length() == 0) {
+		if (instanceName.isEmpty()) {
 			fullName = toolName;
 		}
 		else {
@@ -544,7 +544,7 @@ public abstract class PluginTool extends AbstractDockingTool {
 		toolName = root.getAttributeValue(ToolTemplate.TOOL_NAME_XML_NAME);
 		instanceName = root.getAttributeValue(ToolTemplate.TOOL_INSTANCE_NAME_XML_NAME);
 
-		if (instanceName.length() == 0) {
+		if (instanceName.isEmpty()) {
 			fullName = toolName;
 		}
 		else {
@@ -608,7 +608,7 @@ public abstract class PluginTool extends AbstractDockingTool {
 	public void setToolName(String name) {
 		String oldName = toolName;
 		toolName = name;
-		if (instanceName.length() == 0) {
+		if (instanceName.isEmpty()) {
 			fullName = toolName;
 		}
 		else {

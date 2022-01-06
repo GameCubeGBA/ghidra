@@ -297,7 +297,7 @@ public class JumpTable {
 				destlist.add(addr);
 			}
 		}
-		if ((branchind != null) && (destlist.size() > 0)) {
+		if ((branchind != null) && (!destlist.isEmpty())) {
 			return new JumpTable(branchind, destlist, true);
 		}
 		return null;

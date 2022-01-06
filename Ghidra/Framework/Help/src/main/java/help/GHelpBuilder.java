@@ -112,7 +112,7 @@ public class GHelpBuilder {
 		Collection<DuplicateAnchorCollection> duplicateAnchors = linkDatabase.getDuplicateAnchors();
 
 		// report the results
-		if (invalidLinks.size() == 0 && duplicateAnchors.size() == 0) {
+		if (invalidLinks.isEmpty() && duplicateAnchors.isEmpty()) {
 			// everything is valid!
 			return new Results("Finished validating help files--all valid!", false);
 		}
@@ -121,7 +121,7 @@ public class GHelpBuilder {
 		flush();
 
 		StringBuilder buildy = new StringBuilder();
-		if (invalidLinks.size() > 0) {
+		if (!invalidLinks.isEmpty()) {
 			//@formatter:off
 			buildy.append('[').append(JavaHelpValidator.class.getSimpleName()).append(']');
 			buildy.append(" - Found the following ").append(invalidLinks.size()).append(" invalid links:\n");
@@ -132,7 +132,7 @@ public class GHelpBuilder {
 			//@formatter:on
 		}
 
-		if (duplicateAnchors.size() > 0) {
+		if (!duplicateAnchors.isEmpty()) {
 			//@formatter:off
 			buildy.append('[').append(JavaHelpValidator.class.getSimpleName()).append(']');
 			buildy.append(" - Found the following ").append(duplicateAnchors.size()).append(" topic(s) with duplicate anchor definitions:\n");
@@ -284,7 +284,7 @@ public class GHelpBuilder {
 					System.exit(1);
 				}
 				String hp = args[i];
-				if (hp.length() > 0) {
+				if (!hp.isEmpty()) {
 					for (String p : hp.split(File.pathSeparator)) {
 						dependencyHelpPaths.add(new File(p));
 					}
@@ -309,7 +309,7 @@ public class GHelpBuilder {
 
 		HelpBuildUtils.debug = debugEnabled;
 
-		if (helpInputDirectories.size() == 0) {
+		if (helpInputDirectories.isEmpty()) {
 			errorMessage("Must specify at least one input directory");
 			printUsage();
 			System.exit(1);

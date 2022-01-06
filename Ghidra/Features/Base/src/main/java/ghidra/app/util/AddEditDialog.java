@@ -303,7 +303,7 @@ public class AddEditDialog extends DialogComponentProvider {
         for (String recentLabel : recentLabels) {
             labelNameChoices.addItem(recentLabel);
         }
-		if (recentLabels.size() > 0) {
+		if (!recentLabels.isEmpty()) {
 			labelNameChoices.setSelectedIndex(-1);
 		}
 	}

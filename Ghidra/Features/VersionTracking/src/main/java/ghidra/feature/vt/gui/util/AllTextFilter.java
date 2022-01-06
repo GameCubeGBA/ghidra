@@ -39,7 +39,7 @@ public class AllTextFilter<T> extends AbstractTextFilter<T> {
 	@Override
 	public boolean passesFilter(T t) {
 		String filterText = getTextFieldText();
-		if (filterText == null || filterText.trim().length() == 0) {
+		if (filterText == null || filterText.trim().isEmpty()) {
 			return true; // no text for this filter
 		}
 

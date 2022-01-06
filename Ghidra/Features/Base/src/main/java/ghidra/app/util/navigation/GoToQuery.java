@@ -231,7 +231,7 @@ public class GoToQuery {
 	private boolean processInputAsSymbolInAllPrograms() {
 		for (Program program : programs) {
 			List<ProgramLocation> programLocations = getValidSymbolLocationsForProgram(program);
-			if (programLocations.size() > 0) {
+			if (!programLocations.isEmpty()) {
 				goToProgramLocations(program, programLocations);
 				return true;
 			}

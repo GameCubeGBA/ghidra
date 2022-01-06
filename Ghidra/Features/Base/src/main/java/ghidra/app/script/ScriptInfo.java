@@ -436,7 +436,7 @@ public class ScriptInfo {
 		String menuPath = "";
 		String[] menuPathArr = getMenuPath();
 		for (String path : menuPathArr) {
-			if (menuPath.length() > 0) {
+			if (!menuPath.isEmpty()) {
 				menuPath = menuPath + "->";
 			}
 			menuPath = menuPath + path;

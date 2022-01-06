@@ -87,7 +87,7 @@ public class FacePatterns {
 	private void cluster(TreeSet<Face> edgesConsidered) {
 		HashMap<String, Face> added = new HashMap<String, Face>();		//For keeping track of clusters clustered.
 		//Among the edges considered, choose the best one and combine clusters. Or eliminate useless edges.
-		while (edgesConsidered.size() > 0) {
+		while (!edgesConsidered.isEmpty()) {
 			Face bestEdge = edgesConsidered.last();
 			//Check to make sure this is a good edge to add (not already included, etc.).
 			if (bestEdge.meetsCriteria(this.patterns, added)) {

@@ -1008,7 +1008,7 @@ public class DexHeaderFormatMarkup {
 
 	private void createStringSymbol(Address address, String string, String namespace) {
 		SymbolTable symbolTable = program.getSymbolTable();
-		if (string.length() > 0) {
+		if (!string.isEmpty()) {
 			Namespace nameSpace = DexUtil.getOrCreateNameSpace(program, namespace);
 			String symbolName = SymbolUtilities.replaceInvalidChars(string, true);
 			if (symbolName.length() > SymbolUtilities.MAX_SYMBOL_NAME_LENGTH) {

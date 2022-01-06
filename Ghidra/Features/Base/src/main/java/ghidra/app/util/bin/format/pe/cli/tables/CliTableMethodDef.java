@@ -498,7 +498,7 @@ public class CliTableMethodDef extends CliAbstractTable {
 		for (Object item : list) {
 			commaSeparated += item + ", ";
 		}
-		if (list.size() > 0) {
+		if (!list.isEmpty()) {
 			commaSeparated = commaSeparated.substring(0, commaSeparated.length() - 2);
 		}
 		return commaSeparated;

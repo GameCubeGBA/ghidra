@@ -79,7 +79,7 @@ public class LabelHistoryTask extends Task {
 
 		SwingUtilities.invokeLater(() -> {
             if (!monitor.isCancelled()) {
-                if (historyList.size() > 0) {
+                if (!historyList.isEmpty()) {
                     LabelHistoryDialog dialog =
                         new LabelHistoryDialog(tool, program, dialogTitle, historyList);
                     tool.showDialog(dialog);
@@ -89,6 +89,6 @@ public class LabelHistoryTask extends Task {
 	}
 
 	boolean labelsFound() {
-		return historyList.size() > 0;
+		return !historyList.isEmpty();
 	}
 }

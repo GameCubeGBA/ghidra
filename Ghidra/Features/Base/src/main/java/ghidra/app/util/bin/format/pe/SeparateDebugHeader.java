@@ -122,7 +122,7 @@ public class SeparateDebugHeader implements OffsetValidator {
 		List<String> exportedNameslist = new ArrayList<>();
 		while (true) {
 			String str = reader.readAsciiString(tmp);
-			if (str == null || str.length() == 0) {
+			if (str == null || str.isEmpty()) {
 				break;
 			}
 			tmp += str.length() + 1;

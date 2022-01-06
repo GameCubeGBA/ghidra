@@ -70,7 +70,7 @@ public class RejectMatchTask extends VtTask {
 		private List<Exception> exceptions = new ArrayList<>();
 
 		boolean hasErrors() {
-			return exceptions.size() > 0;
+			return !exceptions.isEmpty();
 		}
 	}
 }

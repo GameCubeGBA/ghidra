@@ -54,7 +54,7 @@ public class BookmarkEditCmd implements Command {
 		this.category = category;
 		this.comment = comment;
 		this.set = set;
-		if (set == null || set.isEmpty() || type == null || type.length() == 0)
+		if (set == null || set.isEmpty() || type == null || type.isEmpty())
 			throw new IllegalArgumentException();
 		presentationName = "Add " + type + " Bookmark(s)";
 	}
@@ -72,7 +72,7 @@ public class BookmarkEditCmd implements Command {
 		this.category = category;
 		this.comment = comment;
 		this.addr = addr;
-		if (addr == null || type == null || type.length() == 0)
+		if (addr == null || type == null || type.isEmpty())
 			throw new IllegalArgumentException();
 		presentationName = "Add " + type + " Bookmark";
 	}

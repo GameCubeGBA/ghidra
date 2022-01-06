@@ -358,14 +358,14 @@ public class VTDualListingHighlightProvider implements HighlightProvider {
 		String destinationComment =
 			(destinationValue != null) ? destinationValue.getString() : null;
 
-		if (sourceComment != null && sourceComment.length() > 0) {
+		if (sourceComment != null && !sourceComment.isEmpty()) {
 			Highlight sourceHighlight =
 				getHighlight(text, cursorTextOffset, markupItem, sourceComment);
 			if (sourceHighlight != null) {
 				highlightList.add(sourceHighlight);
 			}
 		}
-		if (destinationComment != null && destinationComment.length() > 0) {
+		if (destinationComment != null && !destinationComment.isEmpty()) {
 			Highlight destinationHighlight =
 				getHighlight(text, cursorTextOffset, markupItem, destinationComment);
 			if (destinationHighlight != null) {

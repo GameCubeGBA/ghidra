@@ -815,7 +815,7 @@ public class RTTIWindowsClassRecoverer extends RTTIClassRecoverer {
 		List<Address> unusedVftableReferences =
 			findVftableReferencesNotInFunction(vftableSymbols);
 
-		if (unusedVftableReferences.size() > 0) {
+		if (!unusedVftableReferences.isEmpty()) {
 			extendedFlatAPI.createUndefinedFunctions(unusedVftableReferences);
 		}
 
@@ -869,7 +869,7 @@ public class RTTIWindowsClassRecoverer extends RTTIClassRecoverer {
 
             //if there are no vftables in this class then create a new class object and make it
             // non-vftable class
-            if (vftableSymbolsInNamespace.size() == 0) {
+            if (vftableSymbolsInNamespace.isEmpty()) {
                 String className = classNamespace.getName();
                 String classNameWithNamespace = classNamespace.getName(true);
 
@@ -895,7 +895,7 @@ public class RTTIWindowsClassRecoverer extends RTTIClassRecoverer {
             else {
                 List<RecoveredClass> classesWithVftablesInNamespace =
                         recoverClassesFromVftables(vftableSymbolsInNamespace, false, false);
-                if (classesWithVftablesInNamespace.size() == 0) {
+                if (classesWithVftablesInNamespace.isEmpty()) {
                     Msg.debug(this, "No class recovered for namespace " + classNamespace.getName());
                     continue;
                 }
@@ -1021,7 +1021,7 @@ public class RTTIWindowsClassRecoverer extends RTTIClassRecoverer {
 
 			List<RecoveredClass> classHierarchyFromRTTI = getClassHierarchyFromRTTI(recoveredClass);
 
-			if (classHierarchyFromRTTI.size() > 0) {
+			if (!classHierarchyFromRTTI.isEmpty()) {
 				recoveredClass.setClassHierarchy(classHierarchyFromRTTI);
 
 				// if single inheritance flag either no parent or one parent
@@ -1146,7 +1146,7 @@ public class RTTIWindowsClassRecoverer extends RTTIClassRecoverer {
 
 				RecoveredClass pointedToClass = getClass(pointedToNamespace);
 
-				if (classHierarchy.size() > 0 &&
+				if (!classHierarchy.isEmpty() &&
 					classHierarchy.get(classHierarchy.size() - 1).equals(pointedToClass)) {
 					continue;
 				}
@@ -1550,13 +1550,13 @@ public class RTTIWindowsClassRecoverer extends RTTIClassRecoverer {
             }
 
             List<Address> vftableAddresses = value.getVftableAddresses();
-            if (vftableAddresses.size() == 0) {
+            if (vftableAddresses.isEmpty()) {
                 continue;
             }
 
             List<RecoveredClass> parentsWithVirtualFunctions =
                     getParentsWithVirtualFunctions(value);
-            if (parentsWithVirtualFunctions.size() == 0) {
+            if (parentsWithVirtualFunctions.isEmpty()) {
                 continue;
             }
 

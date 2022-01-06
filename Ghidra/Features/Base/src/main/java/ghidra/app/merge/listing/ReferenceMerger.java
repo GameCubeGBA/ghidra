@@ -725,7 +725,7 @@ class ReferenceMerger extends AbstractListingMerger {
 			int chosenConflictOption, boolean askUser, TaskMonitor monitor)
 			throws CancelledException {
 		ArrayList<Integer> opIndexList = typeConflicts.get(addr);
-		if (opIndexList == null || opIndexList.size() == 0) {
+		if (opIndexList == null || opIndexList.isEmpty()) {
 			return;
 		}
 		if (opIndexList.contains(Integer.valueOf(opIndex))) {
@@ -754,7 +754,7 @@ class ReferenceMerger extends AbstractListingMerger {
 			int chosenConflictOption, boolean askUser, TaskMonitor monitor)
 			throws CancelledException {
 		ArrayList<Reference> removeList = removeConflicts.get(addr);
-		if (removeList == null || removeList.size() == 0) {
+		if (removeList == null || removeList.isEmpty()) {
 			return;
 		}
 		currentAddress = addr;
@@ -783,7 +783,7 @@ class ReferenceMerger extends AbstractListingMerger {
 			int chosenConflictOption, boolean askUser, TaskMonitor monitor)
 			throws CancelledException {
 		ArrayList<Reference> changeList = changeConflicts.get(addr);
-		if (changeList == null || changeList.size() == 0) {
+		if (changeList == null || changeList.isEmpty()) {
 			return;
 		}
 		currentAddress = addr;
@@ -812,7 +812,7 @@ class ReferenceMerger extends AbstractListingMerger {
 			int chosenConflictOption, boolean askUser, TaskMonitor monitor)
 			throws CancelledException {
 		ArrayList<Reference> addList = addConflicts.get(addr);
-		if (addList == null || addList.size() == 0) {
+		if (addList == null || addList.isEmpty()) {
 			return;
 		}
 		currentAddress = addr;
@@ -844,7 +844,7 @@ class ReferenceMerger extends AbstractListingMerger {
 			int chosenConflictOption, boolean askUser, TaskMonitor monitor)
 			throws CancelledException {
 		ArrayList<Integer> opIndexList = primaryConflicts.get(addr);
-		if (opIndexList == null || opIndexList.size() == 0) {
+		if (opIndexList == null || opIndexList.isEmpty()) {
 			return;
 		}
 		if (opIndexList.contains(Integer.valueOf(opIndex))) {

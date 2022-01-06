@@ -496,7 +496,7 @@ public class FormatStringParser {
 			++i;
 			c = formatString.charAt(i);
 		}
-		return c != '$' || paramIndexString.length() == 0 || Integer.parseInt(paramIndexString) == 0
+		return c != '$' || paramIndexString.isEmpty() || Integer.parseInt(paramIndexString) == 0
 				? 0
 				: Integer.parseInt(paramIndexString);
 	}

@@ -475,7 +475,7 @@ public class BitFieldEditorPanel extends JPanel {
 		String dtName = textField.getText().trim();
 		boolean isValid = true;
 		try {
-			if (dtName.length() == 0 || !dtChoiceEditor.validateUserSelection()) {
+			if (dtName.isEmpty() || !dtChoiceEditor.validateUserSelection()) {
 				setStatus("Valid bitfield base datatype entry required");
 				isValid = false;
 			}

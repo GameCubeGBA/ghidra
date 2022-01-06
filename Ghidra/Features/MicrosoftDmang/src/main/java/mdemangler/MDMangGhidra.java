@@ -304,7 +304,7 @@ public class MDMangGhidra extends MDMang {
                 resultObject = new DemangledString(mangledSource, demangledSource, mstring.getName(),
                     mstring.toString(), mstring.getLength(), mstring.isUnicode());
 			}
-			else if (baseName.length() != 0) {
+			else if (!baseName.isEmpty()) {
 				DemangledVariable variable;
 				variable = new DemangledVariable(mangledSource, demangledSource, baseName);
 				variable.setNamespace(processNamespace(objectCPP.getQualfication()));

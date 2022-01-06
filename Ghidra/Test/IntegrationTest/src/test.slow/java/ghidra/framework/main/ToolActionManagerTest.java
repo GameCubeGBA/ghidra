@@ -197,7 +197,7 @@ public class ToolActionManagerTest extends AbstractGhidraHeadedIntegrationTest {
 				list.add(config.getName());
 			}
 		}
-		assertTrue(list.size() > 0);
+		assertTrue(!list.isEmpty());
 		Collections.sort(list);
 		runSwing(() -> tc.remove(list.get(list.size() - 1)));
 	}

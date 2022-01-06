@@ -40,7 +40,7 @@ class MarkupItemValueTextFilter extends AbstractTextFilter<VTMarkupItem> {
 
 	private boolean passesValueTextFilterImpl(VTMarkupItem adapter) {
 		String filterText = getTextFieldText();
-		if (filterText == null || filterText.trim().length() == 0) {
+		if (filterText == null || filterText.trim().isEmpty()) {
 			return true; // no text for this filter
 		}
 

@@ -233,7 +233,7 @@ public class TextFieldLinker {
 		public String getText(int omitSep) {
 			int lastPopulated;
 			for (lastPopulated = linkedFields.size() - 1; lastPopulated >= 0; lastPopulated--) {
-				if (fieldStates.get(lastPopulated).text.length() != 0) {
+				if (!fieldStates.get(lastPopulated).text.isEmpty()) {
 					break;
 				}
 			}
@@ -383,7 +383,7 @@ public class TextFieldLinker {
 				LinkedField lf = linkedFields.get(i);
 				FieldState fs = fieldStates.get(i);
 
-				if (text.length() == 0) {
+				if (text.isEmpty()) {
 					fs.text = "";
 					continue;
 				}

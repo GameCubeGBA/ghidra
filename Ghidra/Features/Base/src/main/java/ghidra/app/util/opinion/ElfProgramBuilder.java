@@ -1685,7 +1685,7 @@ class ElfProgramBuilder extends MemorySectionResolver implements ElfLoadHelper {
 		// Add versioned symbol as comment only
 		Address address = s.getAddress();
 		String comment = listing.getComment(CodeUnit.PRE_COMMENT, address);
-		if (comment == null || comment.length() == 0) {
+		if (comment == null || comment.isEmpty()) {
 			comment = symName;
 		}
 		else {

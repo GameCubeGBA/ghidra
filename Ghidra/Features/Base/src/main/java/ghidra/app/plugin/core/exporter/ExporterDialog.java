@@ -348,7 +348,7 @@ public class ExporterDialog extends DialogComponentProvider implements AddressFa
 			return;
 		}
 		String fileToExportInto = filePathTextField.getText();
-		if (fileToExportInto.length() == 0) {
+		if (fileToExportInto.isEmpty()) {
 			setStatusText("Please enter a destination file.");
 			return;
 		}

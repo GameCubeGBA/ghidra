@@ -632,7 +632,7 @@ public class DataOrganizationImpl implements DataOrganization {
 			SpecXmlUtils.encodeSignedIntegerAttribute(buffer, "value", longDoubleSize);
 			buffer.append("/>\n");
 		}
-		if (sizeAlignmentMap.size() != 0) {
+		if (!sizeAlignmentMap.isEmpty()) {
 			buffer.append("<size_alignment_map>\n");
 			for (int key : sizeAlignmentMap.keySet()) {
 				buffer.append("<entry");

@@ -141,7 +141,7 @@ public class JadProcessController {
 					Msg.error(this, "Exception while reading JAD process inputstream", e);
 				}
 				String string = buffer.toString().trim();
-				if (string.length() > 0) {
+				if (!string.isEmpty()) {
 					string = string.replace("\n", "\n" + streamName + ": ");
 					Msg.info(JadProcessController.this, "\n" + streamName + ": " + string);
 				}

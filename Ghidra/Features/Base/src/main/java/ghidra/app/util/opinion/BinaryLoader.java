@@ -324,7 +324,7 @@ public class BinaryLoader extends AbstractProgramLoader {
 			if (baseAddr == null) {
 				baseAddr = space.getAddress(0);
 			}
-			if (blockName == null || blockName.length() == 0) {
+			if (blockName == null || blockName.isEmpty()) {
 				blockName = generateBlockName(prog, isOverlay, baseAddr.getAddressSpace());
 			}
 			createBlock(prog, isOverlay, blockName, baseAddr, fileBytes, length, log);

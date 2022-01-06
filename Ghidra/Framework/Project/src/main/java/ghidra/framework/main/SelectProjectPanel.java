@@ -248,7 +248,7 @@ class SelectProjectPanel extends AbstractWizardJPanel {
 		ProjectLocator locator = null;
 		String msg = null;
 		String dir = directoryField.getText().trim();
-		if (dir.length() == 0) {
+		if (dir.isEmpty()) {
 			msg = "Please specify project directory";
 		}
 		else if (!new File(dir).isDirectory()) {

@@ -568,7 +568,7 @@ public class SpecExtensionPanel extends JPanel {
 					break;
 			}
 			resultString = buffer.toString();
-			if (resultString.length() == 0) {
+			if (resultString.isEmpty()) {
 				resultString = null;
 			}
 		}

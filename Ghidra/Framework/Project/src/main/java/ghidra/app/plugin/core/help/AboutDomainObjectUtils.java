@@ -106,7 +106,7 @@ public class AboutDomainObjectUtils {
             addInfo(aboutPanel, key + ":", value);
         }
 
-		if (additionalInfo != null && additionalInfo.length() > 0) {
+		if (additionalInfo != null && !additionalInfo.isEmpty()) {
 			JTextArea auxArea = new JTextArea(additionalInfo);
 			auxArea.setFont(font);
 			DockingUtils.setTransparent(auxArea);

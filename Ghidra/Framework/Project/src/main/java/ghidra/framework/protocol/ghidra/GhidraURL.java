@@ -140,7 +140,7 @@ public class GhidraURL {
 	 */
 	public static boolean isServerRepositoryURL(URL url) {
 		String path = url.getPath();
-		return isServerURL(url) && path != null && path.length() > 0;
+		return isServerURL(url) && path != null && !path.isEmpty();
 	}
 
 	/**

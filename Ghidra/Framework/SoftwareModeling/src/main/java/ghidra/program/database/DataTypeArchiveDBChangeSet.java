@@ -319,7 +319,7 @@ class DataTypeArchiveDBChangeSet implements DataTypeArchiveChangeSet, DomainObje
 	}
 
 	private void writeIdRecords(DBHandle dbh, String tableName, Set<Long> ids) throws IOException {
-		if (ids.size() > 0) {
+		if (!ids.isEmpty()) {
 			Table table = dbh.createTable(tableName, STORED_ID_SCHEMA);
 			DBRecord rec = STORED_ID_SCHEMA.createRecord(0);
 			int key = 1;

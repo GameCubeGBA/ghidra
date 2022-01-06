@@ -103,7 +103,7 @@ public class PdbInfoCodeView implements StructConverter, PdbInfo {
 		struct.add(new DWordDataType(), "offset", null);
 		struct.add(new DWordDataType(), "sig", null);
 		struct.add(new DWordDataType(), "age", null);
-		if (pdbName.length() > 0) {
+		if (!pdbName.isEmpty()) {
 			struct.add(new StringDataType(), pdbName.length(), "pdbname", null);
 		}
 		struct.setCategoryPath(new CategoryPath("/PDB"));

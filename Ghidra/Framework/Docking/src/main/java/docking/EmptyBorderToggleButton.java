@@ -61,7 +61,7 @@ public class EmptyBorderToggleButton extends EmptyBorderButton {
 		Icon icon = toolBarData == null ? null : toolBarData.getIcon();
 		setIcon(icon);
 		String tt = action.getDescription();
-		if (tt == null || tt.length() == 0) {
+		if (tt == null || tt.isEmpty()) {
 			tt = action.getName();
 		}
 		setToolTipText(tt);

@@ -253,7 +253,7 @@ class MemoryMapModel extends AbstractSortedTableModel<MemoryBlock> {
 					if (!verifyRenameAllowed(block, name)) {
 						return;
 					}
-					if (name.length() == 0) {
+					if (name.isEmpty()) {
 						Msg.showError(this, provider.getComponent(), "Enter Block Label",
 							"Please enter a label name.");
 						break;
@@ -360,7 +360,7 @@ class MemoryMapModel extends AbstractSortedTableModel<MemoryBlock> {
 					String cmt = block.getComment();
 					if (cmt == null || !cmt.equals(aValue)) {
 						String value = (String) aValue;
-						if (value.length() == 0) {
+						if (value.isEmpty()) {
 							value = null;
 						}
 						int id = program.startTransaction("Set Comment State");

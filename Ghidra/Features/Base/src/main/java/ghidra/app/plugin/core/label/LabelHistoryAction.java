@@ -62,7 +62,7 @@ public class LabelHistoryAction extends ListingContextAction {
 			}
 		}
 		List<LabelHistory> list = getHistoryList(context.getProgram(), addr);
-		if (list.size() > 0) {
+		if (!list.isEmpty()) {
 			LabelHistoryDialog dialog =
 				new LabelHistoryDialog(tool, context.getProgram(), addr, getHistoryList(
 					context.getProgram(), addr));

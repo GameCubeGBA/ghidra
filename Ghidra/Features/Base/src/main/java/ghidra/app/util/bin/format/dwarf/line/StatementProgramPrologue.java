@@ -56,7 +56,7 @@ public class StatementProgramPrologue {
 
 		while (true) {
 			String dir = reader.readNextAsciiString();
-			if (dir.length() == 0) {
+			if (dir.isEmpty()) {
 				break;
 			}
 			includeDirectories.add(dir);
@@ -64,7 +64,7 @@ public class StatementProgramPrologue {
 
 		while (true) {
 			FileEntry entry = new FileEntry(reader);
-			if (entry.getFileName().length() == 0) {
+			if (entry.getFileName().isEmpty()) {
 				break;
 			}
 			fileNames.add(entry);

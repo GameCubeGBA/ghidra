@@ -797,7 +797,7 @@ public class RecoverClassesFromRTTIScript extends GhidraScript {
 	private void bookmarkFunctionsOnList(List<Function> functions, String comment)
 			throws CancelledException {
 
-		if (functions.size() == 0) {
+		if (functions.isEmpty()) {
 			return;
 		}
 
@@ -1227,7 +1227,7 @@ public class RecoverClassesFromRTTIScript extends GhidraScript {
 
 		// print inlined constructors
 		List<Function> inlinedConstructorList = recoveredClass.getInlinedConstructorList();
-		if (inlinedConstructorList.size() > 0) {
+		if (!inlinedConstructorList.isEmpty()) {
 			stringBuffer.append("inlined constructor(s):\r\n");
             for (Function function : inlinedConstructorList) {
                 monitor.checkCanceled();
@@ -1249,7 +1249,7 @@ public class RecoverClassesFromRTTIScript extends GhidraScript {
 
 		// print inlined destructors
 		List<Function> inlinedDestructorList = recoveredClass.getInlinedDestructorList();
-		if (inlinedDestructorList.size() > 0) {
+		if (!inlinedDestructorList.isEmpty()) {
 			stringBuffer.append("inlined destructor(s):\r\n");
             for (Function function : inlinedDestructorList) {
                 monitor.checkCanceled();
@@ -1260,7 +1260,7 @@ public class RecoverClassesFromRTTIScript extends GhidraScript {
 
 		// print const/dest that couldn't be classified correctly
 		List<Function> indeterminateList = recoveredClass.getIndeterminateList();
-		if (indeterminateList.size() > 0) {
+		if (!indeterminateList.isEmpty()) {
 		stringBuffer.append("\r\nindeterminate constructor(s) or destructor(s):\r\n");
             for (Function function : indeterminateList) {
                 monitor.checkCanceled();
@@ -1414,7 +1414,7 @@ public class RecoverClassesFromRTTIScript extends GhidraScript {
 
 		// print const/dest that couldn't be classified correctly
 		List<Function> indeterminateList = recoveredClass.getIndeterminateList();
-		if (indeterminateList.size() > 0) {
+		if (!indeterminateList.isEmpty()) {
 			stringBuffer.append("\r\nindeterminate constructor or destructor function(s):\r\n");
             for (Function function : indeterminateList) {
                 monitor.checkCanceled();

@@ -65,7 +65,7 @@ public class XRefHeaderFieldFactory extends XRefFieldFactory {
 		}
 		CodeUnit cu = (CodeUnit) obj;
 		String headString = getXRefHeaderString(cu);
-		if (headString == null || headString.length() == 0) {
+		if (headString == null || headString.isEmpty()) {
 			return null;
 		}
 		AttributedString as = new AttributedString(headString, color, getMetrics());

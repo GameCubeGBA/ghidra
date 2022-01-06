@@ -164,10 +164,10 @@ class BookmarksXmlMgr {
                     attrs.addAttribute("TYPE", typeStr);
                     String category = bookmark.getCategory();
                     String comment = bookmark.getComment();
-                    if (category != null && category.length() != 0) {
+                    if (category != null && !category.isEmpty()) {
                         attrs.addAttribute("CATEGORY", category);
                     }
-                    if (comment != null && comment.length() != 0) {
+                    if (comment != null && !comment.isEmpty()) {
                         attrs.addAttribute("DESCRIPTION", comment);
                     }
                     writer.startElement("BOOKMARK", attrs);

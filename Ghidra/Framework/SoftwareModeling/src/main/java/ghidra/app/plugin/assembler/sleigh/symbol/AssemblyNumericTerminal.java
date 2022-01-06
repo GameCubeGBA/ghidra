@@ -166,7 +166,7 @@ public class AssemblyNumericTerminal extends AssemblyTerminal {
 	 */
 	protected Collection<AssemblyParseNumericToken> makeToken(String str, String num, int radix,
 			boolean neg, AssemblyGrammar grammar) {
-		if (num.length() == 0) {
+		if (num.isEmpty()) {
 			return Collections.emptySet();
 		}
 		try {

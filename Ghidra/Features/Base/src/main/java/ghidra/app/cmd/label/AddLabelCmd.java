@@ -91,7 +91,7 @@ public class AddLabelCmd implements Command {
 			return true;
 		}
 		catch (InvalidInputException e) {
-			if ((name == null) || (name.length() == 0)) {
+			if ((name == null) || (name.isEmpty())) {
 				errorMsg = "You must enter a valid label name";
 			}
 			else {

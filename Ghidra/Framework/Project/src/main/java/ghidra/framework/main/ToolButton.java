@@ -219,7 +219,7 @@ class ToolButton extends EmptyBorderButton implements Draggable, Droppable {
 		}
 
 		// if we get here then no invalid items were found, so as long as there is data, it is valid
-		return fileList.size() > 0;
+		return !fileList.isEmpty();
 	}
 
 	/**

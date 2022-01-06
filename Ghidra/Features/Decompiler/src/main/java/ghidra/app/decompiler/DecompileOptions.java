@@ -671,7 +671,7 @@ public class DecompileOptions {
 		buf.append(" <");
 		buf.append(name);
 		buf.append('>');
-		if ((p2.length() == 0) && (p3.length() == 0)) {
+		if ((p2.isEmpty()) && (p3.isEmpty())) {
 			buf.append(p1);
 		}
 		else {
@@ -682,7 +682,7 @@ public class DecompileOptions {
 			buf.append("  <param2>");
 			buf.append(p2); // Print even if empty, as p3 isn't
 			buf.append("</param2>\n");
-			if (p3.length() != 0) {
+			if (!p3.isEmpty()) {
 				buf.append("  <param3>");
 				buf.append(p3);
 				buf.append("</param3>\n");

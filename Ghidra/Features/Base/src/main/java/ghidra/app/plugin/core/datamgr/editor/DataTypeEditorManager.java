@@ -209,7 +209,7 @@ public class DataTypeEditorManager
 	 * @return true if there are any data type editors.
 	 */
 	public boolean isEditInProgress() {
-		return editorList.size() > 0;
+		return !editorList.isEmpty();
 	}
 
 	/**

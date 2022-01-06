@@ -168,7 +168,7 @@ class LibrarySymbolTable {
 				noReturn = true;
 			}
 
-			if (fowardLibrary != null && fowardLibrary.length() > 0) {
+			if (fowardLibrary != null && !fowardLibrary.isEmpty()) {
 				forwards.add(fowardLibrary);
 			}
 
@@ -302,7 +302,7 @@ class LibrarySymbolTable {
 				}
 
 				String nameStr = inString.substring(nameColumnStartIndex).trim();
-				if (nameStr.length() == 0) {
+				if (nameStr.isEmpty()) {
 					break; // unexpected
 				}
 
@@ -316,7 +316,7 @@ class LibrarySymbolTable {
 					nameStr = nameStr.substring(0, index);
 				}
 
-				if (nameStr.length() == 0) {
+				if (nameStr.isEmpty()) {
 					continue; // skip if no name
 				}
 
@@ -423,7 +423,7 @@ class LibrarySymbolTable {
                 String noReturnStr = export.getAttributeValue("NO_RETURN");
                 boolean noReturn = "y".equals(noReturnStr);
 
-                if (fowardLibName != null && fowardLibName.length() > 0 &&
+                if (fowardLibName != null && !fowardLibName.isEmpty() &&
                         !fowardLibName.equals(tableName)) {
                     forwards.add(fowardLibName);
                 }

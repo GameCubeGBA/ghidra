@@ -383,7 +383,7 @@ public class DWARFFunctionImporter {
 				commitLocal(gfunc, dfunc.local.get(i));
 			}
 
-			if (dfunc.retval != null || params.size() > 0) {
+			if (dfunc.retval != null || !params.isEmpty()) {
 				// Add the function signature definition into the data type manager
 // TODO:				createFunctionDefinition(dfunc, infopath);
 

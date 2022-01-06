@@ -354,11 +354,11 @@ public class ParseDialogTest extends AbstractGhidraHeadedIntegrationTest {
 		String line = null;
 		while ((line = br.readLine()) != null) {
 			line = line.trim();
-			if (line.startsWith("-") || (line.length() == 0 && buffy.length() > 0)) {
+			if (line.startsWith("-") || (line.isEmpty() && buffy.length() > 0)) {
 				// this is a compiler directive
 				buffy.append(line + "\n");
 			}
-			else if (line.length() > 0) {
+			else if (!line.isEmpty()) {
 				File f = new File(line);
 				pathList.add(f.getPath());
 			}

@@ -239,7 +239,7 @@ public class ProgramManagerPlugin extends Plugin implements ProgramManager {
 		}
 
 		String trimmedRef = ref.trim();
-		if (trimmedRef.length() == 0) {
+		if (trimmedRef.isEmpty()) {
 			return false;
 		}
 		List<Symbol> symbols = NamespaceUtils.getSymbols(trimmedRef, program);

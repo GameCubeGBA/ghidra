@@ -102,7 +102,7 @@ public class ObjectiveC2_InstanceVariable implements StructConverter {
 		if (offset == 0) {
 			return;
 		}
-		if (name == null && name.length() == 0) {
+		if (name == null && name.isEmpty()) {
 			return;
 		}
 		Address address = _state.program.getAddressFactory().getDefaultAddressSpace().getAddress(offset);

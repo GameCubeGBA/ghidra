@@ -82,7 +82,7 @@ public class RepositoryPanel extends AbstractWizardJPanel {
 	public boolean isValidInformation() {
 		if (createRepButton.isSelected()) {
 			String name = nameField.getText();
-			if (name.length() == 0) {
+			if (name.isEmpty()) {
 				return false;
 			}
 			if (!NamingUtilities.isValidProjectName(name)) {
@@ -212,7 +212,7 @@ public class RepositoryPanel extends AbstractWizardJPanel {
 		String msg = null;
 		if (createRepButton.isSelected()) {
 			String name = nameField.getText();
-			if (name.length() != 0) {
+			if (!name.isEmpty()) {
 				if (!NamingUtilities.isValidProjectName(name)) {
 					msg = "Invalid project repository name";
 				}

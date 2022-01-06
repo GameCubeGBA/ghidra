@@ -112,7 +112,7 @@ public class FieldNameFieldFactory extends FieldFactory {
 		Data data = (Data) obj;
 
 		String fieldName = getFieldName(data);
-		if ((fieldName == null) || (fieldName.length() == 0)) {
+		if ((fieldName == null) || (fieldName.isEmpty())) {
 			return null;
 		}
 		AttributedString as = new AttributedString(fieldName, color, getMetrics());

@@ -133,7 +133,7 @@ public class SaveDataDialog extends DialogComponentProvider {
 				list.add(files.get(i));
 			}
 		}
-		if (list.size() > 0) {
+		if (!list.isEmpty()) {
 			DomainFile[] deleteFiles = new DomainFile[list.size()];
 			SaveTask task = new SaveTask(list.toArray(deleteFiles));
 			new TaskLauncher(task, getComponent());

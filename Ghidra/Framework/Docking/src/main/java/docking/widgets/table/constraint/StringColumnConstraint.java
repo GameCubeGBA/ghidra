@@ -157,6 +157,6 @@ public abstract class StringColumnConstraint implements ColumnConstraint<String>
 	}
 
 	public boolean isValidPatternString(String value) {
-		return value.length() > 0;
+		return !value.isEmpty();
 	}
 }

@@ -1208,7 +1208,7 @@ public class SleighLanguage implements Language {
 	public ManualEntry getManualEntry(String instruction) {
 		initManual();
 
-		if (instruction == null || instruction.length() == 0) {
+		if (instruction == null || instruction.isEmpty()) {
 			return manual.get(null);
 		}
 		instruction = instruction.toUpperCase();

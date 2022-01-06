@@ -467,7 +467,7 @@ class ViewPanel extends JPanel implements ChangeListener {
 		@Override
 		public void editCompleted(String newName) {
 
-			if (newName.length() == 0) {
+			if (newName.isEmpty()) {
 
 				Msg.showError(getClass(), null, "Invalid Name", "Please enter a valid name.");
 

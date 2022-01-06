@@ -64,7 +64,7 @@ public final class NumericUtilities {
 		long value = 0;
 
 		numStr = (numStr == null ? "" : numStr.trim());
-		if (numStr.length() == 0) {
+		if (numStr.isEmpty()) {
 			return value;
 		}
 
@@ -93,7 +93,7 @@ public final class NumericUtilities {
 		long sign = 1;
 
 		numStr = (numStr == null ? "" : numStr.trim());
-		if (numStr.length() == 0) {
+		if (numStr.isEmpty()) {
 			return value;
 		}
 		if (numStr.startsWith("-")) {
@@ -109,7 +109,7 @@ public final class NumericUtilities {
 			numStr = numStr.substring(2);
 			radix = 16;
 		}
-		if (numStr.length() == 0) {
+		if (numStr.isEmpty()) {
 			return 0;
 		}
 		try {
@@ -139,7 +139,7 @@ public final class NumericUtilities {
 		long sign = 1;
 
 		numStr = (numStr == null ? "" : numStr.trim());
-		if (numStr.length() == 0) {
+		if (numStr.isEmpty()) {
 			return value;
 		}
 
@@ -169,7 +169,7 @@ public final class NumericUtilities {
 	public static BigInteger parseHexBigInteger(String numStr) {
 
 		numStr = (numStr == null ? "" : numStr.trim());
-		if (numStr.length() == 0) {
+		if (numStr.isEmpty()) {
 			throw new NumberFormatException(numStr + " no digits.");
 		}
 

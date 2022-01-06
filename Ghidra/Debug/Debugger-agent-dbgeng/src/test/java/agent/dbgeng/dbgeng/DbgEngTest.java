@@ -424,7 +424,7 @@ public class DbgEngTest extends AbstractGhidraHeadlessIntegrationTest {
 				collected2.add(info);
 			}
 
-			assertTrue(collected1.size() > 0);
+			assertTrue(!collected1.isEmpty());
 			assertEquals(collected1, collected2);
 
 			// For comparison

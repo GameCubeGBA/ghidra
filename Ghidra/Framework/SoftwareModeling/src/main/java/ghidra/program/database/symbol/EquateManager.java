@@ -497,7 +497,7 @@ public class EquateManager implements EquateTable, ErrorHandler, ManagerDB {
 			throw new InvalidInputException("Name is null");
 		}
 		name = name.trim();
-		if (name.length() == 0) {
+		if (name.isEmpty()) {
 			throw new InvalidInputException("Name is empty string.");
 		}
 	}

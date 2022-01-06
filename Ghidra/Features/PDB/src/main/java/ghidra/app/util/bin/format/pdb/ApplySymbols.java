@@ -72,7 +72,7 @@ class ApplySymbols {
 
 			tagSet.add(tag);
 
-			if (name.length() == 0 || addr == 0) {
+			if (name.isEmpty() || addr == 0) {
 				continue;
 			}
 
@@ -170,7 +170,7 @@ class ApplySymbols {
 				pdbParser.createData(address, new GuidDataType(), log);
 			}
 			else if (tag.equals("Data")) {
-				if (datatype.length() == 0) {
+				if (datatype.isEmpty()) {
 					continue;
 				}
 				pdbParser.createData(address, datatype, log);

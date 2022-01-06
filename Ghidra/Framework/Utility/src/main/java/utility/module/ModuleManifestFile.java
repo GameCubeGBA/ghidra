@@ -84,7 +84,7 @@ public class ModuleManifestFile {
 	private void processLine(ResourceFile file, String configLine, int lineNumber)
 			throws IOException {
 		String trimmedLine = configLine.trim();
-		if (trimmedLine.length() == 0) {
+		if (trimmedLine.isEmpty()) {
 			return; // ignore empty lines.
 		}
 

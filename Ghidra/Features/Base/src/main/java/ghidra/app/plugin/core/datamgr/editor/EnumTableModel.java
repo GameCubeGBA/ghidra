@@ -323,7 +323,7 @@ class EnumTableModel extends AbstractSortedTableModel<EnumEntry> {
 	}
 
 	private boolean isNameValid(String name) {
-		if (name == null || name.length() == 0) {
+		if (name == null || name.isEmpty()) {
 			editorPanel.setStatusMessage("Please enter a name");
 			return false;
 		}

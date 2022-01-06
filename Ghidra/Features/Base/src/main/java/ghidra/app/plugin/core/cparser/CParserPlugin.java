@@ -456,7 +456,7 @@ public class CParserPlugin extends ProgramPlugin {
 					case '-':
 						if (!parseQuote) {
 							String sarg = arg.toString().trim();
-							if (sarg.length() > 0) {
+							if (!sarg.isEmpty()) {
 								list.add(sarg);
 							}
 						}
@@ -465,7 +465,7 @@ public class CParserPlugin extends ProgramPlugin {
 				}
 			}
 			String sarg = arg.toString().trim();
-			if (sarg.length() > 0) {
+			if (!sarg.isEmpty()) {
 				list.add(sarg);
 			}
 		}

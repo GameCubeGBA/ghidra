@@ -202,7 +202,7 @@ class DomainObjectDBTransaction implements Transaction {
 		String description = "";
 		for (TransactionEntry entry : list) {
 			description = entry.description;
-			if (description != null && description.length() != 0) {
+			if (description != null && !description.isEmpty()) {
 				description = domainObject.getDomainFile().getName() + ": " + description;
 				break;
 			}

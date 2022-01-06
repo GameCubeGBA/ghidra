@@ -288,7 +288,7 @@ public class NGramUtils {
 						modelType = currString.substring(MODEL_TYPE_PREFIX.length() + 2);
 					}
 				}
-				else if (currString.trim().length() > 0) {
+				else if (!currString.trim().isEmpty()) {
 					charInfo = currString.split("\\t");
 
 					if (charInfo.length != 4) {

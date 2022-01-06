@@ -305,7 +305,7 @@ public class InjectPayloadSleigh implements InjectPayload {
 		parser.end(el);
 		if (parseString != null) {
 			parseString = parseString.trim();
-			if (parseString.length() == 0) {
+			if (parseString.isEmpty()) {
 				parseString = null;
 			}
 		}

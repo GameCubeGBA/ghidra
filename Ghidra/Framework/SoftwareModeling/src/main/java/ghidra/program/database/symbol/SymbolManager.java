@@ -469,7 +469,7 @@ public class SymbolManager implements SymbolTable, ManagerDB {
 				"A symbol named " + name + " already exists at this address!");
 		}
 
-		if (name.length() == 0) {
+		if (name.isEmpty()) {
 			return;
 		}
 

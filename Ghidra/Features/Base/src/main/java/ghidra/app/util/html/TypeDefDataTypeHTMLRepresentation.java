@@ -199,7 +199,7 @@ public class TypeDefDataTypeHTMLRepresentation extends HTMLDataTypeRepresentatio
 
 	private static String getDataTypeDescriptionOrName(DataType dataType) {
 		String description = dataType.getDescription();
-		if (description == null || description.length() == 0) {
+		if (description == null || description.isEmpty()) {
 			return dataType.getName();
 		}
 		return description;

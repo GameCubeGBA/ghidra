@@ -120,7 +120,7 @@ public class SleighPreprocessor implements ExpressionEnvironment {
 				// remove confirmed full-line comments
 				line = line.replaceFirst("^\\s*#.*", "");
 
-				if (line.length() > 0 && line.charAt(0) == '@') {
+				if (!line.isEmpty() && line.charAt(0) == '@') {
 
 					// remove any comments in preprocessor
 					line = line.replaceFirst("#.*", "");

@@ -1395,7 +1395,7 @@ public class DataTypeManagerHandler {
 			ActionListener listener = event -> {
 				DomainFolder folder = dataTreeSaveDialog.getDomainFolder();
 				String newName = dataTreeSaveDialog.getNameText();
-				if (newName.length() == 0) {
+				if (newName.isEmpty()) {
 					dataTreeSaveDialog.setStatusText("Please enter a name");
 					return;
 				}
@@ -1429,7 +1429,7 @@ public class DataTypeManagerHandler {
 			ActionListener listener = event -> {
 				DomainFolder folder = dataTreeCreateDialog.getDomainFolder();
 				String newName = dataTreeCreateDialog.getNameText();
-				if (newName.length() == 0) {
+				if (newName.isEmpty()) {
 					dataTreeCreateDialog.setStatusText("Please enter a name");
 					return;
 				}

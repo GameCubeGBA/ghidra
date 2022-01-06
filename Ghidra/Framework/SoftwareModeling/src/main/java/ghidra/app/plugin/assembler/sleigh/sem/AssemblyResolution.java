@@ -251,6 +251,6 @@ public abstract class AssemblyResolution implements Comparable<AssemblyResolutio
 		if (children == null) {
 			return false;
 		}
-        return children.size() != 0;
+        return !children.isEmpty();
     }
 }

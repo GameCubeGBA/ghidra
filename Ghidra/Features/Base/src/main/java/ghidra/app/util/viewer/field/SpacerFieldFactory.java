@@ -80,7 +80,7 @@ public class SpacerFieldFactory extends FieldFactory {
 	 * @param text the text to display in the listing
 	 */
 	public void setText(String text) {
-		if (text != null && text.length() == 0) {
+		if (text != null && text.isEmpty()) {
 			text = null;
 		}
 		this.text = text;

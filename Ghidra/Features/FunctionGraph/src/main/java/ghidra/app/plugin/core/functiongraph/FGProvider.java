@@ -731,7 +731,7 @@ public class FGProvider extends VisualGraphComponentProvider<FGVertex, FGEdge, F
 		// -There must not be any non-dynamic labels on the vertex
 		//
         Collection<FGEdge> inEdgesForDestination = ((Graph<FGVertex, FGEdge>) functionGraph).getInEdges(destinationVertex);
-		if (inEdgesForDestination.size() == 0) {
+		if (inEdgesForDestination.isEmpty()) {
 			// must be in a dirty state with vertices and edges that don't match reality
 			return;
 		}
@@ -837,7 +837,7 @@ public class FGProvider extends VisualGraphComponentProvider<FGVertex, FGEdge, F
 		// -There must not be any non-dynamic labels on the vertex		
 		//
         Collection<FGEdge> inEdgesForDestination = ((Graph<FGVertex, FGEdge>) functionGraph).getInEdges(destinationVertex);
-		if (inEdgesForDestination.size() == 0) {
+		if (inEdgesForDestination.isEmpty()) {
 			// must be in a dirty state with vertices and edges that don't match reality
 			return;
 		}

@@ -753,7 +753,7 @@ public class StackEditorModel extends CompositeEditorModel {
 				}
 			}
 		}
-		if (msg.length() > 0) {
+		if (!msg.isEmpty()) {
 			JOptionPane.showMessageDialog(provider.getComponent(), msg,
 				"Stack Editor Adjustment Warning", JOptionPane.WARNING_MESSAGE);
 		}
@@ -780,7 +780,7 @@ public class StackEditorModel extends CompositeEditorModel {
 				}
 			}
 		}
-		if (msg.length() > 0) {
+		if (!msg.isEmpty()) {
 			JOptionPane.showMessageDialog(provider.getComponent(), msg,
 				"Stack Editor Replacement Warning", JOptionPane.WARNING_MESSAGE);
 		}
@@ -804,7 +804,7 @@ public class StackEditorModel extends CompositeEditorModel {
 	public void setComponentName(int rowIndex, String newName)
 			throws InvalidInputException, InvalidNameException, DuplicateNameException {
 
-		if (newName.trim().length() == 0) {
+		if (newName.trim().isEmpty()) {
 			newName = null;
 		}
 //		if (nameExistsElsewhere(newName, currentIndex)) {

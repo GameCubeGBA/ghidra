@@ -144,7 +144,7 @@ public class VersionControlDataTypeArchiveUndoCheckoutAction extends VersionCont
 		boolean undoWasCancelled = false;
 		List<DomainFileArchive> selectedArchives = modifiedArchivesList;
 		// Now confirm the modified ones and undo checkout for the ones the user indicates.
-		if (modifiedArchivesList.size() > 0) {
+		if (!modifiedArchivesList.isEmpty()) {
 			UndoActionDialog dialog = new UndoActionDialog("Confirm Undo Checkout",
 				resources.ResourceManager.loadImage("images/vcUndoCheckOut.png"), "UndoCheckOut",
 				"checkout", getDomainFileList(modifiedArchivesList));
@@ -158,7 +158,7 @@ public class VersionControlDataTypeArchiveUndoCheckoutAction extends VersionCont
 				throw new CancelledException();
 			}
 		}
-		if ((unmodifiedArchivesList.size() > 0) || (selectedFiles.length > 0)) {
+		if ((!unmodifiedArchivesList.isEmpty()) || (selectedFiles.length > 0)) {
 			tool.execute(new DataTypeArchiveUndoCheckOutTask(unmodifiedArchivesList,
 				selectedArchives, saveCopy));
 		}
@@ -209,7 +209,7 @@ public class VersionControlDataTypeArchiveUndoCheckoutAction extends VersionCont
 	 * @throws CancelledException if cancelled
 	 */
 	protected void saveCheckOutChanges(List<DomainFile> changedList) throws CancelledException {
-		if (changedList.size() > 0) {
+		if (!changedList.isEmpty()) {
 			SaveDataDialog dialog = new SaveDataDialog(tool);
 			boolean cancelled = !dialog.showDialog(changedList);
 			if (cancelled) {

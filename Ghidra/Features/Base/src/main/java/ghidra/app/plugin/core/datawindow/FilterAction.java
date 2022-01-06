@@ -371,7 +371,7 @@ class FilterAction extends ToggleDockingAction {
 		}
 
 		private boolean filteredTextExists() {
-			return (((getFilteredText() != null) && (getFilteredText().length() > 0)) ? true
+			return (((getFilteredText() != null) && (!getFilteredText().isEmpty())) ? true
 					: false);
 		}
 

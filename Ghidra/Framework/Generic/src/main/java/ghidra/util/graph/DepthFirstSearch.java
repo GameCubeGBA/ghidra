@@ -96,7 +96,7 @@ public class DepthFirstSearch
                           while (edgeIter.hasNext()) {
                               pending.push(edgeIter.next());
                           }
-                          if (edges.size() == 0) {
+                          if (edges.isEmpty()) {
                               finished.add(v);
                               finishListInReverseOrder.addFirst(v);
                               pending.pop();
@@ -162,7 +162,7 @@ public class DepthFirstSearch
                           while (edgeIter.hasNext()) {
                               pending.push(edgeIter.next());
                           }
-                          if (edges.size() == 0) {
+                          if (edges.isEmpty()) {
                               finished.add(v);
                               finishListInReverseOrder.addFirst(v);
                               pending.pop();
@@ -230,7 +230,7 @@ public class DepthFirstSearch
                           while (edgeIter.hasNext()) {
                               pending.push(edgeIter.next());
                           }
-                          if (edges.size() == 0) {
+                          if (edges.isEmpty()) {
                               finished.add(v);
                               finishListInReverseOrder.addFirst(v);
                               pending.pop();

@@ -388,7 +388,7 @@ public class ByteViewerPanel extends JPanel
 	ByteViewerComponent addView(String viewName, DataFormatModel model, boolean editMode,
 			boolean updateViewPosition) {
 
-		if (viewList.size() != 0) {
+		if (!viewList.isEmpty()) {
 			addingView = true;
 		}
 		final ViewerPosition vp = getViewerPosition();
@@ -458,7 +458,7 @@ public class ByteViewerPanel extends JPanel
 			currentView = null;
 		}
 
-		if (viewList.size() > 0) {
+		if (!viewList.isEmpty()) {
 			currentView = viewList.get(0);
 		}
 		comp.dispose();

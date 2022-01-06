@@ -194,7 +194,7 @@ class ProgramListPanel extends JPanel {
 		allDataList.addAll(hiddenList);
 		allDataList.addAll(shownList);
 
-		boolean hasFilter = filterText.trim().length() != 0;
+		boolean hasFilter = !filterText.trim().isEmpty();
 		if (hasFilter) {
 			String lowerCaseFilterText = filterText.toLowerCase();
 			for (Iterator<Program> iterator = allDataList.iterator(); iterator.hasNext();) {

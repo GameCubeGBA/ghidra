@@ -455,7 +455,7 @@ public class FilterOptionsEditorDialog extends DialogComponentProvider {
 			@Override
 			protected String getItemText(String value) {
 
-				char char0 = value.length() > 0 ? value.charAt(0) : ' ';
+				char char0 = !value.isEmpty() ? value.charAt(0) : ' ';
 				String delimiterName =
 					FilterOptions.DELIMITER_NAME_MAP.getOrDefault(char0, "<i>Unrecognized</i>");
 				return String.format("<html><font face=monospace>%s</font> &nbsp;&nbsp; <i>%s</i>",

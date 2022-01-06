@@ -340,7 +340,7 @@ abstract class AbstractPeDebugLoader extends AbstractLibrarySupportLoader {
 		}
 
 		String sym = symbol.getName();
-		if (sym == null || sym.length() == 0) {
+		if (sym == null || sym.isEmpty()) {
 			return true;
 		}
 

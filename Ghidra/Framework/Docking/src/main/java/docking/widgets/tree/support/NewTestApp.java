@@ -99,7 +99,7 @@ class FileNode extends GTreeNode implements FileData {
 			return tempName;
 		}
 		String name = file.getName();
-		if (name.length() > 0) {
+		if (!name.isEmpty()) {
 			return name;
 		}
 		return file.getName();

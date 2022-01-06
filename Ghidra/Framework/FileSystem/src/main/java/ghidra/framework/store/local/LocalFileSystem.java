@@ -709,7 +709,7 @@ public abstract class LocalFileSystem implements FileSystem {
 	 * @throws InvalidNameException if name is invalid
 	 */
 	public void testValidName(String name, boolean isPath) throws InvalidNameException {
-		if (name == null || name.length() == 0) {
+		if (name == null || name.isEmpty()) {
 			throw new InvalidNameException("path or name is empty or null");
 		}
 

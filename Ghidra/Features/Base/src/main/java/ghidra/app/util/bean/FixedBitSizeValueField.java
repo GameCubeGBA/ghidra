@@ -105,7 +105,7 @@ public class FixedBitSizeValueField extends JPanel {
 
 	public boolean processText() {
 		String text = valueField.getText().trim();
-		if (text.length() == 0) {
+		if (text.isEmpty()) {
 			return true;
 		}
 		if (signed && text.equals("-")) {
@@ -386,7 +386,7 @@ public class FixedBitSizeValueField extends JPanel {
 	}
 
 	public void valueChanged() {
-		if (listeners.size() == 0) {
+		if (listeners.isEmpty()) {
 			return;
 		}
 		ChangeEvent ev = new ChangeEvent(this);

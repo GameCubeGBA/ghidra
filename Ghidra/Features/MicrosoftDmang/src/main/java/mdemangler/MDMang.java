@@ -338,7 +338,7 @@ public class MDMang {
 	private static final char SPACE = ' ';
 
 	public void insertSpacedString(StringBuilder builder, String string) {
-		if (builder.length() != 0 && string.length() != 0) {
+		if (builder.length() != 0 && !string.isEmpty()) {
 			if (builder.charAt(0) == ' ') {
 				if (string.charAt(string.length() - 1) == ' ') {
 					builder.deleteCharAt(0);
@@ -360,7 +360,7 @@ public class MDMang {
     }
 
 	public void insertString(StringBuilder builder, String string) {
-		if (builder.length() != 0 && string.length() != 0) {
+		if (builder.length() != 0 && !string.isEmpty()) {
 			if (builder.charAt(0) == ' ') {
 				if (string.charAt(string.length() - 1) == ' ') {
 					builder.deleteCharAt(0);
@@ -371,7 +371,7 @@ public class MDMang {
 	}
 
 	public void appendString(StringBuilder builder, String string) {
-		if (builder.length() != 0 && string.length() != 0) {
+		if (builder.length() != 0 && !string.isEmpty()) {
 			if (builder.charAt(builder.length() - 1) == ' ') {
 				if (string.charAt(0) == ' ') {
 					builder.deleteCharAt(builder.length() - 1);

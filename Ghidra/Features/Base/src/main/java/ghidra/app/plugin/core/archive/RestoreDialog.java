@@ -139,8 +139,8 @@ public class RestoreDialog extends DialogComponentProvider {
 		projectNameField.setColumns(RestoreDialog.NUM_TEXT_COLUMNS);
 
 		projectNameField.addActionListener(e -> {
-			if (archiveField.getText().length() > 0 && restoreField.getText().length() > 0 &&
-				projectNameField.getText().length() > 0) {
+			if (!archiveField.getText().isEmpty() && !restoreField.getText().isEmpty() &&
+                    !projectNameField.getText().isEmpty()) {
 				okCallback();
 			}
 		});
@@ -261,13 +261,13 @@ public class RestoreDialog extends DialogComponentProvider {
 	 */
 	public String getArchivePathName() {
 		String archive = archiveField.getText().trim();
-		if (archive.length() == 0) {
+		if (archive.isEmpty()) {
 			return null;
 		}
 
 		File file = new File(archive);
 		String pathName = file.getAbsolutePath();
-		if (pathName == null || pathName.length() == 0) {
+		if (pathName == null || pathName.isEmpty()) {
 			return null;
 		}
 		if (!pathName.endsWith(ArchivePlugin.ARCHIVE_EXTENSION)) {
@@ -345,7 +345,7 @@ public class RestoreDialog extends DialogComponentProvider {
 		GhidraFileChooser fileChooser = new GhidraFileChooser(null);
 		// start the browsing in the user's preferred project directory
 		File file = null;
-		if (filePathName != null && filePathName.length() > 0) {
+		if (filePathName != null && !filePathName.isEmpty()) {
 			file = new File(filePathName);
 			if (file.isDirectory()) {
 				fileChooser.setCurrentDirectory(file);
@@ -402,7 +402,7 @@ public class RestoreDialog extends DialogComponentProvider {
 			}
 		}
 		File jarFile = null;
-		if (archivePathName != null && archivePathName.length() != 0) {
+		if (archivePathName != null && !archivePathName.isEmpty()) {
 			jarFile = new File(archivePathName);
 		}
 		jarFileChooser.setSelectedFile(jarFile);

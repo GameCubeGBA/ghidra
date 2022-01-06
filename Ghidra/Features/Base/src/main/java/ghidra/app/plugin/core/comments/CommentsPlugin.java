@@ -107,11 +107,11 @@ public class CommentsPlugin extends Plugin implements OptionsChangeListener {
 
 	void updateComments(CodeUnit cu, String preComment, String postComment, String eolComment,
 			String plateComment, String repeatableComment) {
-		preComment = (preComment.length() == 0) ? null : preComment;
-		postComment = (postComment.length() == 0) ? null : postComment;
-		eolComment = (eolComment.length() == 0) ? null : eolComment;
-		plateComment = (plateComment.length() == 0) ? null : plateComment;
-		repeatableComment = (repeatableComment.length() == 0) ? null : repeatableComment;
+		preComment = (preComment.isEmpty()) ? null : preComment;
+		postComment = (postComment.isEmpty()) ? null : postComment;
+		eolComment = (eolComment.isEmpty()) ? null : eolComment;
+		plateComment = (plateComment.isEmpty()) ? null : plateComment;
+		repeatableComment = (repeatableComment.isEmpty()) ? null : repeatableComment;
 
 		Command cmd = new SetCommentsCmd(cu.getMinAddress(), preComment, postComment, eolComment,
 			plateComment, repeatableComment);

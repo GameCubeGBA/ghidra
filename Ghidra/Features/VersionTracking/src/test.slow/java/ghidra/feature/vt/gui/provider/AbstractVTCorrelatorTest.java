@@ -232,7 +232,7 @@ public abstract class AbstractVTCorrelatorTest extends AbstractGhidraHeadedInteg
 
 	protected boolean isMatch(Address srcAddr, Address destAddr, VTMatchSet vtMatchSet) {
 
-        return vtMatchSet.getMatches(srcAddr, destAddr).size() > 0;
+        return !vtMatchSet.getMatches(srcAddr, destAddr).isEmpty();
     }
 
 	protected Address addr(Program program, String address) {

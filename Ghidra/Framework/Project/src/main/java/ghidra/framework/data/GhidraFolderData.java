@@ -142,7 +142,7 @@ class GhidraFolderData {
 		else if (folderPath.startsWith(FileSystem.SEPARATOR)) {
 			return fileManager.getRootFolderData().getFolderPathData(folderPath, lazy);
 		}
-		if (folderPath.length() == 0) {
+		if (folderPath.isEmpty()) {
 			return this;
 		}
 		int index = folderPath.indexOf(FileSystem.SEPARATOR);
@@ -159,7 +159,7 @@ class GhidraFolderData {
 		if (folderData == null) {
 			return null;
 		}
-		if (nextPath.length() == 0) {
+		if (nextPath.isEmpty()) {
 			return folderData;
 		}
 		return folderData.getFolderPathData(nextPath, lazy);

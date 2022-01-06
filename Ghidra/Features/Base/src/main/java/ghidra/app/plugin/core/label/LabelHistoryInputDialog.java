@@ -51,7 +51,7 @@ public class LabelHistoryInputDialog extends DialogComponentProvider {
     @Override
 	protected void okCallback() {
 		String text = inputField.getText();
-		if (text.length() == 0) {
+		if (text.isEmpty()) {
 			text = null;
 		}
 		task = new LabelHistoryTask(tool, program, text);
@@ -106,7 +106,7 @@ public class LabelHistoryInputDialog extends DialogComponentProvider {
 	public void taskCompleted(Task t) {
 		if (!task.labelsFound()) {
 			String matchStr = inputField.getText();
-			if (matchStr.length() == 0) {
+			if (matchStr.isEmpty()) {
 				setStatusText("No label history was found");
 			}
 			else {

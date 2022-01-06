@@ -753,7 +753,7 @@ public class GhidraFileChooser extends DialogComponentProvider
 
 	private File currentDirectory() {
 		String path = currentPathTextField.getText();
-		if (path.length() == 0) {
+		if (path.isEmpty()) {
 			return null;
 		}
 
@@ -849,7 +849,7 @@ public class GhidraFileChooser extends DialogComponentProvider
 
 		if (GhidraFileChooser.MY_COMPUTER.equals(getCurrentDirectory())) {
 			String str = fileChooserModel.getDescription(file);
-			if (str == null || str.length() == 0) {
+			if (str == null || str.isEmpty()) {
 				str = file.getAbsolutePath();
 			}
 			return str;
@@ -1732,7 +1732,7 @@ public class GhidraFileChooser extends DialogComponentProvider
 
 		// user entered text takes precedence
 		String filenameFieldText = filenameTextField.getText();
-		if (filenameFieldText != null && filenameFieldText.trim().length() != 0) {
+		if (filenameFieldText != null && !filenameFieldText.trim().isEmpty()) {
 			// begin user text validation...
 			File testFile =
 				new GhidraFile(filenameTextField.getText(), fileChooserModel.getSeparator());

@@ -66,7 +66,7 @@ public class ApplyMatchAction extends DockingAction {
 		}
 		VTMatchContext matchContext = (VTMatchContext) context;
 		List<VTMatch> matches = matchContext.getSelectedMatches();
-        return matches.size() != 0;
+        return !matches.isEmpty();
     }
 
 	@Override

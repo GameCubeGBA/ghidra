@@ -824,7 +824,7 @@ public class FieldPanel extends JPanel
 		cursorHandler.scrollToCursor();
 		int newOffset = getCursorOffset();
 		int scrollAmount = newOffset - offset;
-		if (layouts.size() == 0) {
+		if (layouts.isEmpty()) {
 			return;
 		}
 		scrollView(scrollAmount);
@@ -860,7 +860,7 @@ public class FieldPanel extends JPanel
 	 * that it begins above the displayable part of the screen.
 	 */
 	public ViewerPosition getViewerPosition() {
-		if (layouts.size() > 0) {
+		if (!layouts.isEmpty()) {
 			return new ViewerPosition(layouts.get(0).getIndex(), 0, layouts.get(0).getYPos());
 		}
 		return new ViewerPosition(0, 0, 0);

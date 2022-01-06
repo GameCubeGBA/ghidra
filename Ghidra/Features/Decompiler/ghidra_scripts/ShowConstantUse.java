@@ -614,7 +614,7 @@ public class ShowConstantUse extends GhidraScript {
 
 		// any routines we bumped into, process back up the chain
 		HashSet<Address> doneRoutines = new HashSet<Address>();
-		while (funcList.size() > 0) {
+		while (!funcList.isEmpty()) {
 			// get the next function the variable has been traced back to
 			FunctionParamUse funcVarUse = funcList.remove(0);
 			Address addr = funcVarUse.getAddress();

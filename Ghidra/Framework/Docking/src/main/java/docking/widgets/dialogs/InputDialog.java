@@ -156,7 +156,7 @@ public class InputDialog extends DialogComponentProvider {
 		addCancelButton();
 		buildMainPanel();
 
-		if (initialValues != null && initialValues[0] != null && initialValues[0].length() > 0) {
+		if (initialValues != null && initialValues[0] != null && !initialValues[0].isEmpty()) {
 			// highlight the field if it contains a value
 			textFields[0].selectAll();
 		}

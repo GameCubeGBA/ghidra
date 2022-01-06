@@ -607,7 +607,7 @@ public class CppCompositeType {
 	}
 
 	boolean isZeroSize() {
-		return memberData.size() == 0;
+		return memberData.isEmpty();
 	}
 
 	//----------------------------------------------------------------------------------------------
@@ -1533,7 +1533,7 @@ public class CppCompositeType {
 		public String toString() {
 			StringBuilder builder = new StringBuilder();
 			builder.append(dataType);
-			if (builder.length() > 0 && memberName.length() > 0) {
+			if (builder.length() > 0 && !memberName.isEmpty()) {
 				builder.append(' ');
 			}
 			builder.append(memberName);
@@ -1798,7 +1798,7 @@ public class CppCompositeType {
 
 		@Override
 		public String toString() {
-			if (label.length() != 0) {
+			if (!label.isEmpty()) {
 				return label + " ";
 			}
 			return label;
@@ -1841,7 +1841,7 @@ public class CppCompositeType {
 
 		@Override
 		public String toString() {
-			if (label.length() != 0) {
+			if (!label.isEmpty()) {
 				return label + " ";
 			}
 			return label;
@@ -1885,7 +1885,7 @@ public class CppCompositeType {
 
 		@Override
 		public String toString() {
-			if (label.length() != 0) {
+			if (!label.isEmpty()) {
 				return label + " ";
 			}
 			return label;

@@ -64,7 +64,7 @@ public class OrPattern extends Pattern {
             if (!disjointPattern.alwaysFalse())
                 newlist.add(disjointPattern.simplifyClone());
         }
-		if (newlist.size()==0)
+		if (newlist.isEmpty())
 			return new InstructionPattern(false);
 		else if (newlist.size()==1)
 			return (Pattern)newlist.get(0);

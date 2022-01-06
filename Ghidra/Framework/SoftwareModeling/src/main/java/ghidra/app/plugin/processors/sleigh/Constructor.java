@@ -118,7 +118,7 @@ public class Constructor implements Comparable<Constructor> {
 	public String print(ParserWalker walker) throws MemoryAccessException {
 		String res = "";
 		for (String element : printpiece) {
-			if (element.length() != 0) {
+			if (!element.isEmpty()) {
 				if (element.charAt(0) == '\n') {
 					int index = element.charAt(1) - 'A';
 					res += operands[index].print(walker);
@@ -145,7 +145,7 @@ public class Constructor implements Comparable<Constructor> {
 
 		String cachedSeparator = separators[separatorIndex];
 		if (cachedSeparator != null) {
-			if (cachedSeparator.length() == 0) {
+			if (cachedSeparator.isEmpty()) {
 				return null;
 			}
 			return cachedSeparator;
@@ -154,7 +154,7 @@ public class Constructor implements Comparable<Constructor> {
 		// skip mnemonic and set curPos to first print-piece associated with operand 0
 		int curPos = 0;
 		while (curPos < printpiece.length &&
-			(printpiece[curPos].length() == 0 || printpiece[curPos].charAt(0) != ' ')) {
+			(printpiece[curPos].isEmpty() || printpiece[curPos].charAt(0) != ' ')) {
 			curPos++;
 		}
 		curPos++;
@@ -162,7 +162,7 @@ public class Constructor implements Comparable<Constructor> {
 		int opIndex = 0;
 		StringBuilder buf = new StringBuilder();
 		for (int i = curPos; i < printpiece.length && opIndex <= separatorIndex; i++) {
-			if (printpiece[i].length() != 0) {
+			if (!printpiece[i].isEmpty()) {
 				if (printpiece[i].charAt(0) == '\n') {
 					if (opIndex == separatorIndex) {
 						break;
@@ -177,7 +177,7 @@ public class Constructor implements Comparable<Constructor> {
 		String separator = buf.toString();
 		separator = separator.replaceAll(",\\s+", ",");
 		separators[separatorIndex] = separator;
-		if (separator.length() == 0) {
+		if (separator.isEmpty()) {
 			return null;
 		}
 		return separator;
@@ -192,7 +192,7 @@ public class Constructor implements Comparable<Constructor> {
 
 		for (String element : printpiece) {
 			int prevSize = list.size();
-			if (element.length() != 0) {
+			if (!element.isEmpty()) {
 				if (element.charAt(0) == '\n') {
 					int index = element.charAt(1) - 'A';
 					operands[index].printList(walker, list);
@@ -243,7 +243,7 @@ public class Constructor implements Comparable<Constructor> {
 		}
 		int endind = (firstwhitespace == -1) ? printpiece.length : firstwhitespace;
 		for (int i = 0; i < endind; ++i) {
-			if (printpiece[i].length() != 0) {
+			if (!printpiece[i].isEmpty()) {
 				if (printpiece[i].charAt(0) == '\n') {
 					int index = printpiece[i].charAt(1) - 'A';
 					res += operands[index].print(walker);
@@ -271,7 +271,7 @@ public class Constructor implements Comparable<Constructor> {
 			return res;	// Nothing to print
 		}
 		for (int i = firstwhitespace + 1; i < printpiece.length; ++i) {
-			if (printpiece[i].length() != 0) {
+			if (!printpiece[i].isEmpty()) {
 				if (printpiece[i].charAt(0) == '\n') {
 					int index = printpiece[i].charAt(1) - 'A';
 					res += operands[index].print(walker);
@@ -418,14 +418,14 @@ public class Constructor implements Comparable<Constructor> {
 		}
 		int count = 0;
 		for (int i = firstwhitespace + 1; i < printpiece.length; ++i) {
-			if (printpiece[i].length() != 0 && printpiece[i].charAt(0) == '\n') {
+			if (!printpiece[i].isEmpty() && printpiece[i].charAt(0) == '\n') {
 				count += 1;
 			}
 		}
 		int[] res = new int[count];
 		count = 0;
 		for (int i = firstwhitespace + 1; i < printpiece.length; ++i) {
-			if (printpiece[i].length() != 0 && printpiece[i].charAt(0) == '\n') {
+			if (!printpiece[i].isEmpty() && printpiece[i].charAt(0) == '\n') {
 				res[count++] = printpiece[i].charAt(1) - 'A';
 			}
 		}

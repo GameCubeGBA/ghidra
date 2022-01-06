@@ -232,7 +232,7 @@ class SymbolTableXmlMgr {
 				localNamespace.getName().equalsIgnoreCase(namespace)) {
 				scope = localNamespace;
 			}
-			else if (namespace != null && namespace.length() != 0) {
+			else if (namespace != null && !namespace.isEmpty()) {
 				if (program.getGlobalNamespace().equals(localNamespace)) {
 					scope = NamespaceUtils.createNamespaceHierarchy(namespace,
 						program.getGlobalNamespace(), program, sourceType);

@@ -200,7 +200,7 @@ public class PrototypeModel {
 		arr[0] = clone;
 		ArrayList<VariableStorage> res = new ArrayList<>();
 		outputParams.assignMap(program, arr, res, false);
-		if (res.size() > 0) {
+		if (!res.isEmpty()) {
 			return res.get(0);
 		}
 		return null;

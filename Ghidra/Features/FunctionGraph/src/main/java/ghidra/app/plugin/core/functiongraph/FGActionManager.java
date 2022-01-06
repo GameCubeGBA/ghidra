@@ -510,7 +510,7 @@ class FGActionManager {
 
 					FunctionGraphValidGraphActionContextIf graphContext =
 						(FunctionGraphValidGraphActionContextIf) context;
-					return getGroupVertices(graphContext.getSelectedVertices()).size() > 0;
+					return !getGroupVertices(graphContext.getSelectedVertices()).isEmpty();
 				}
 
 				@Override
@@ -594,7 +594,7 @@ class FGActionManager {
 						return false;
 					}
 
-					return getGroupVertices(getAllVertices()).size() > 0;
+					return !getGroupVertices(getAllVertices()).isEmpty();
 				}
 
 				@Override
@@ -759,7 +759,7 @@ class FGActionManager {
 
 					AddressSet addresses = null;
 					Collection<FGVertex> selectedVertices = controller.getSelectedVertices();
-					if (selectedVertices.size() > 0) {
+					if (!selectedVertices.isEmpty()) {
 						addresses = getAddressesForVertices(selectedVertices);
 					}
 					// if no vertex is selected, then just select all code blocks in the graph

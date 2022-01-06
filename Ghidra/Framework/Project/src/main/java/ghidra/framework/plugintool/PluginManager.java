@@ -109,7 +109,7 @@ class PluginManager {
 		catch (PluginException e) {
 			pe = e.getPluginException(pe);
 		}
-		if (badList.size() > 0) {
+		if (!badList.isEmpty()) {
 			//EventManager eventMgr = tool.getEventManager
 			for (String className : badList) {
 				// remove from event manager
@@ -184,7 +184,7 @@ class PluginManager {
 			}
 		}
 
-		if (badList.size() > 0) {
+		if (!badList.isEmpty()) {
 			Plugin[] badPlugins = new Plugin[badList.size()];
 			try {
 				removePlugins(badList.toArray(badPlugins));
@@ -338,7 +338,7 @@ class PluginManager {
 				}
 			}
 		}
-		if (badMap.size() > 0) {
+		if (!badMap.isEmpty()) {
 			log.error("*** Errors in Plugin Data States  ***");
 			log.error("The data states for following plugins could not be restored:");
 			Set<Entry<String, Exception>> entrySet = badMap.entrySet();
@@ -523,7 +523,7 @@ class PluginManager {
 		List<Plugin> plugins = new ArrayList<>(pluginList.subList(startIndex, pluginList.size()));
 		List<Plugin> orderedList = new ArrayList<>(plugins.size());
 //		showList("Before:", pluginList);
-		while (plugins.size() > 0) {
+		while (!plugins.isEmpty()) {
 			int n = plugins.size();
 			for (Iterator<Plugin> it = plugins.iterator(); it.hasNext();) {
 				Plugin p = it.next();
