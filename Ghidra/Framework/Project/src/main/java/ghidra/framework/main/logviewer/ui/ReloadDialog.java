@@ -16,8 +16,6 @@
 package ghidra.framework.main.logviewer.ui;
 
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.*;
 

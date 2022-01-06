@@ -22,8 +22,6 @@ import java.util.List;
 import ghidra.app.script.GhidraScript;
 import ghidra.app.services.GraphDisplayBroker;
 import ghidra.framework.plugintool.PluginTool;
-import ghidra.program.model.data.*;
-import ghidra.service.graph.*;
 import ghidra.util.WebColors;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;

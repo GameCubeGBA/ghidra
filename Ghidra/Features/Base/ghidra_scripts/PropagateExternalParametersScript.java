@@ -22,11 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ghidra.app.script.GhidraScript;
-import ghidra.program.model.address.*;
 import ghidra.program.model.data.DataType;
 import ghidra.program.model.lang.OperandType;
-import ghidra.program.model.listing.*;
-import ghidra.program.model.symbol.*;
 
 public class PropagateExternalParametersScript extends GhidraScript {
 	private List<PushedParamInfo> results = new ArrayList<>();

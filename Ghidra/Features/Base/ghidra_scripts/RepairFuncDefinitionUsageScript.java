@@ -22,8 +22,6 @@
 //@category Repair
 import ghidra.app.script.GhidraScript;
 import ghidra.program.model.address.Address;
-import ghidra.program.model.data.*;
-import ghidra.program.model.listing.*;
 import ghidra.program.model.symbol.SourceType;
 import ghidra.util.Msg;
 import ghidra.util.exception.InvalidInputException;

@@ -17,7 +17,6 @@ package ghidra.app.plugin.core.debug.gui.console;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.*;
 import org.junit.rules.TestName;
 
 import docking.ActionContext;

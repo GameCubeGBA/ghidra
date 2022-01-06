@@ -18,7 +18,6 @@ package ghidra.program.database.symbol;
 import db.DBRecord;
 import ghidra.program.database.DBObjectCache;
 import ghidra.program.model.address.Address;
-import ghidra.program.model.lang.Register;
 import ghidra.program.model.symbol.Namespace;
 import ghidra.program.model.symbol.SymbolType;
 import ghidra.program.util.ProgramLocation;

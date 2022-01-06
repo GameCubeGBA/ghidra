@@ -26,8 +26,6 @@ import java.awt.event.ComponentListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.ListIterator;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;

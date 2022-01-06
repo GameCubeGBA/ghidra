@@ -30,7 +30,6 @@ import ghidra.util.Lock;
 import ghidra.util.datastruct.ObjectCache;
 import ghidra.util.exception.*;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  * Abstract class which defines a map containing properties over a set of addresses.

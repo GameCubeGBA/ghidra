@@ -56,7 +56,6 @@
 //
 
 import ghidra.app.script.GhidraScript;
-import ghidra.app.util.bin.format.dwarf4.next.*;
 import ghidra.program.model.data.BuiltInDataTypeManager;
 
 public class DWARF_ExtractorScript extends GhidraScript {

@@ -25,7 +25,6 @@ import org.junit.Test;
 import generic.test.AbstractGenericTest;
 import ghidra.util.graph.AbstractDependencyGraph;
 import ghidra.util.graph.DependencyGraph;
-import ghidra.util.task.TaskMonitor;
 
 public class ConcurrentGraphQTest extends AbstractGenericTest {
 

@@ -28,7 +28,6 @@ import ghidra.program.model.mem.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.exception.*;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  * Test for Module.

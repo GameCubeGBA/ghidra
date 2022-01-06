@@ -15,7 +15,6 @@
  */
 package ghidra.framework.main;
 
-import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 import javax.swing.*;

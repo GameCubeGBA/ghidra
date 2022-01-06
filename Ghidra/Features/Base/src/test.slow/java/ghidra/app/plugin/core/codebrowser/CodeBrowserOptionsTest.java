@@ -19,7 +19,6 @@ import static org.junit.Assert.*;
 
 import java.nio.charset.StandardCharsets;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import org.junit.*;
 

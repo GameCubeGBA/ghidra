@@ -32,7 +32,6 @@ import ghidra.program.model.lang.*;
 import ghidra.program.model.listing.*;
 import ghidra.program.model.symbol.SourceType;
 import ghidra.program.util.DefaultLanguageService;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public class FunctionSignatureMarkupOptionsTest extends AbstractFunctionSignatureMarkupTest {
 

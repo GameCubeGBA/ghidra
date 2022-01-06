@@ -33,7 +33,6 @@ import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.Saveable;
 import ghidra.util.exception.NoValueException;
 import ghidra.util.prop.PropertyVisitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  *

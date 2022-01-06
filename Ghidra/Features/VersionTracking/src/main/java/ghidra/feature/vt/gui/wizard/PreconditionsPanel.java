@@ -16,8 +16,6 @@
 package ghidra.feature.vt.gui.wizard;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.lang.reflect.Constructor;
 import java.util.*;
 import java.util.List;

@@ -25,7 +25,6 @@ import ghidra.app.cmd.equate.SetEquateCmd;
 import ghidra.app.script.GhidraScript;
 import ghidra.framework.cmd.Command;
 import ghidra.program.model.lang.OperandType;
-import ghidra.program.model.listing.*;
 
 public class SetEquateScript extends GhidraScript {
 

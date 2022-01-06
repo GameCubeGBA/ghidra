@@ -25,7 +25,6 @@ import ghidra.app.script.GhidraScript;
 import ghidra.framework.client.ClientUtil;
 import ghidra.framework.client.RepositoryAdapter;
 import ghidra.framework.data.CheckinHandler;
-import ghidra.framework.model.*;
 import ghidra.framework.store.ItemCheckoutStatus;
 import ghidra.program.database.ProgramContentHandler;
 import ghidra.program.model.lang.LanguageNotFoundException;

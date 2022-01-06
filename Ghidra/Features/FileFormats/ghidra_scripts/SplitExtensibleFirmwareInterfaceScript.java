@@ -21,7 +21,6 @@
 import java.io.*;
 
 import ghidra.app.script.GhidraScript;
-import ghidra.app.util.bin.*;
 import ghidra.app.util.bin.format.macho.CpuTypes;
 import ghidra.program.model.lang.Processor;
 

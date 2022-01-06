@@ -29,11 +29,9 @@ import docking.options.editor.ButtonPanelFactory;
 import docking.widgets.DropDownSelectionTextField;
 import docking.widgets.tree.GTree;
 import ghidra.app.cmd.data.CreateDataCmd;
-import ghidra.app.plugin.core.compositeeditor.*;
 import ghidra.app.plugin.core.datamgr.editor.EnumEditorProvider;
 import ghidra.app.plugin.core.datamgr.util.DataTypeChooserDialog;
 import ghidra.app.services.DataTypeManagerService;
-import ghidra.program.model.data.*;
 
 public class DataTypeEditorsScreenShots extends GhidraScreenShotGenerator {
 

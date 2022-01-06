@@ -15,8 +15,6 @@
  */
 package ghidra.app.plugin.core.debug.workflow;
 
-import java.util.concurrent.CompletableFuture;
-
 import ghidra.app.plugin.core.debug.service.workflow.DebuggerWorkflowServicePlugin;
 import ghidra.app.services.*;
 import ghidra.dbg.DebugModelConventions;

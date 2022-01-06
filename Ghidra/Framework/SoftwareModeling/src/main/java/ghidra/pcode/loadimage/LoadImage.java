@@ -15,7 +15,6 @@
  */
 package ghidra.pcode.loadimage;
 
-import ghidra.pcode.memstate.MemoryPage;
 import ghidra.program.model.address.Address;
 
 // API for accessing a binary load image

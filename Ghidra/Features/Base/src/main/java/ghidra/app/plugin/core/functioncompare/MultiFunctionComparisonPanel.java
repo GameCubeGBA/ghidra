@@ -18,7 +18,6 @@ package ghidra.app.plugin.core.functioncompare;
 import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.Iterator;
 import java.util.Set;
 
 import javax.swing.*;

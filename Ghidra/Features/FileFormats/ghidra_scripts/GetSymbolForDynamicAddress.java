@@ -21,9 +21,7 @@ import java.util.List;
 import ghidra.app.script.GhidraScript;
 import ghidra.app.util.demangler.DemangledObject;
 import ghidra.app.util.demangler.DemanglerUtil;
-import ghidra.framework.model.*;
 import ghidra.program.model.address.Address;
-import ghidra.program.model.listing.*;
 import ghidra.program.model.mem.Memory;
 import ghidra.util.exception.CancelledException;
 

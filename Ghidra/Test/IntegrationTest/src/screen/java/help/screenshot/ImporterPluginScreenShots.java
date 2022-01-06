@@ -28,7 +28,6 @@ import org.junit.Test;
 
 import docking.widgets.filechooser.GhidraFileChooser;
 import ghidra.app.util.importer.LibrarySearchPathManager;
-import ghidra.app.util.opinion.*;
 import ghidra.plugin.importer.ImporterDialog;
 import ghidra.plugin.importer.ImporterLanguageDialog;
 import ghidra.plugins.importer.batch.BatchImportDialog;
@@ -128,7 +127,7 @@ public class ImporterPluginScreenShots extends GhidraScreenShotGenerator {
 		runSwing(() -> {
 			list.setCellRenderer(new DefaultListCellRenderer() {
 				@Override
-				public Component getListCellRendererComponent(JList<? extends Object> theList,
+				public Component getListCellRendererComponent(JList<?> theList,
 						Object value, int index, boolean isSelected, boolean cellHasFocus) {
 
 					JLabel renderer = (JLabel) super.getListCellRendererComponent(theList, value,

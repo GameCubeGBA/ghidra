@@ -22,10 +22,8 @@ import javax.swing.*;
 import org.junit.Test;
 
 import docking.widgets.combobox.GhidraComboBox;
-import ghidra.app.plugin.core.label.*;
 import ghidra.app.util.AddEditDialog;
 import ghidra.app.util.EditFieldNameDialog;
-import ghidra.program.model.address.*;
 import ghidra.program.model.symbol.LabelHistory;
 
 public class LabelMgrPluginScreenShots extends GhidraScreenShotGenerator {

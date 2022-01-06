@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import ghidra.framework.model.*;

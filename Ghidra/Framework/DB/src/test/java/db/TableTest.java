@@ -25,7 +25,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import generic.test.AbstractGenericTest;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public class TableTest extends AbstractGenericTest {
 

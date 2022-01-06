@@ -17,8 +17,6 @@ package ghidra.app.plugin.core.debug.gui.modules;
 
 import java.util.Set;
 
-import org.junit.*;
-
 import ghidra.app.plugin.core.debug.service.tracemgr.DebuggerTraceManagerServicePlugin;
 import ghidra.app.plugin.core.progmgr.ProgramManagerPlugin;
 import ghidra.app.services.DebuggerTraceManagerService;

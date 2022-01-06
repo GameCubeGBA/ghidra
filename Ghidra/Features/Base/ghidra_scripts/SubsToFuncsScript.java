@@ -21,7 +21,6 @@
 import ghidra.app.script.GhidraScript;
 import ghidra.app.services.BlockModelService;
 import ghidra.program.model.address.AddressSetView;
-import ghidra.program.model.block.*;
 import ghidra.program.model.listing.FunctionIterator;
 import ghidra.program.model.listing.Listing;
 import ghidra.program.model.symbol.SourceType;

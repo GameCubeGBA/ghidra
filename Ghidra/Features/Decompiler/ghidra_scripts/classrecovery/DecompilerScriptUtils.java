@@ -15,7 +15,6 @@
  */
 //DO NOT RUN. THIS IS NOT A SCRIPT! THIS IS A CLASS THAT IS USED BY SCRIPTS. 
 package classrecovery;
-import ghidra.app.decompiler.*;
 import ghidra.framework.options.ToolOptions;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.framework.plugintool.util.OptionsService;
@@ -24,7 +23,6 @@ import ghidra.program.model.data.DataType;
 import ghidra.program.model.data.ParameterDefinition;
 import ghidra.program.model.listing.Function;
 import ghidra.program.model.listing.Program;
-import ghidra.program.model.pcode.*;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 

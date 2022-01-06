@@ -25,11 +25,7 @@
  */
 
 import ghidra.app.script.GhidraScript;
-import ghidra.program.model.address.*;
-import ghidra.program.model.data.*;
-import ghidra.program.model.listing.*;
 
-import ghidra.program.model.symbol.*;
 import ghidra.util.NumericUtilities;
 
 

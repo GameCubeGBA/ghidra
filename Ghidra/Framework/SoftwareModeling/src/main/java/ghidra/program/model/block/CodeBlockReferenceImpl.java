@@ -19,7 +19,6 @@ package ghidra.program.model.block;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.symbol.FlowType;
 import ghidra.util.exception.CancelledException;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  *  CodeBlockReferenceImpl implements a CodeBlockReference.

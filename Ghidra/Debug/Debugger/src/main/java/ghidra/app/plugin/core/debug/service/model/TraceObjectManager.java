@@ -20,7 +20,6 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.*;
-import java.util.stream.Collectors;
 
 import ghidra.app.plugin.core.debug.mapping.*;
 import ghidra.app.plugin.core.debug.service.model.interfaces.*;

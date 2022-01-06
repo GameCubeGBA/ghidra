@@ -20,12 +20,10 @@ import java.util.*;
 
 import ghidra.app.script.GhidraScript;
 import ghidra.feature.fid.db.FidQueryService;
-import ghidra.feature.fid.service.*;
 import ghidra.framework.model.DomainFile;
 import ghidra.framework.model.DomainFolder;
 import ghidra.program.database.ProgramContentHandler;
 import ghidra.program.model.lang.Language;
-import ghidra.program.model.listing.*;
 import ghidra.program.model.mem.MemoryAccessException;
 import ghidra.program.model.symbol.Symbol;
 import ghidra.program.model.symbol.SymbolIterator;

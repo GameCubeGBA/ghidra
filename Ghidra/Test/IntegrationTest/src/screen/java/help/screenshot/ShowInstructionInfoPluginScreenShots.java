@@ -23,7 +23,6 @@ import javax.swing.SwingUtilities;
 
 import org.junit.Test;
 
-import docking.*;
 import docking.widgets.fieldpanel.FieldPanel;
 import docking.widgets.fieldpanel.Layout;
 import docking.widgets.fieldpanel.field.Field;

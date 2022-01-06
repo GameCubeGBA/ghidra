@@ -21,7 +21,6 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressIterator;
 import ghidra.program.model.listing.CodeUnit;
 import ghidra.program.model.listing.Listing;
-import ghidra.program.model.symbol.*;
 
 
 public class RemoveAllOffcutReferencesScript extends GhidraScript {

@@ -20,10 +20,6 @@ import java.util.StringTokenizer;
 
 import org.jdom.Element;
 
-import ghidra.pcodeCPort.error.LowlevelError;
-import ghidra.pcodeCPort.pcoderaw.VarnodeData;
-import ghidra.pcodeCPort.translate.Translate;
-import ghidra.pcodeCPort.utils.*;
 /// \brief A region where processor data is stored
 ///
 /// An AddrSpace (Address Space) is an arbitrary sequence of

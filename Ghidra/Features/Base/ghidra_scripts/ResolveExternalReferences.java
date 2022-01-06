@@ -17,7 +17,6 @@
 import static generic.util.Beanify.beanify;
 import ghidra.app.script.GhidraScript;
 import ghidra.program.model.listing.Program;
-import ghidra.program.model.symbol.*;
 
 public class ResolveExternalReferences extends GhidraScript {
 	@Override

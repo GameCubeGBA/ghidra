@@ -22,7 +22,6 @@ import ghidra.app.plugin.assembler.sleigh.expr.RecursiveDescentSolver;
 import ghidra.app.plugin.assembler.sleigh.grammars.AssemblyProduction;
 import ghidra.app.plugin.assembler.sleigh.util.DbgTimer;
 import ghidra.app.plugin.languages.sleigh.SleighLanguages;
-import ghidra.app.plugin.languages.sleigh.SubtableEntryVisitor;
 import ghidra.app.plugin.languages.sleigh.VisitorResults;
 import ghidra.app.plugin.processors.sleigh.*;
 import ghidra.app.plugin.processors.sleigh.pattern.DisjointPattern;

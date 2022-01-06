@@ -17,7 +17,6 @@ package ghidra.app.analyzers;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import generic.jar.ResourceFile;
 import ghidra.app.cmd.function.CreateFunctionCmd;

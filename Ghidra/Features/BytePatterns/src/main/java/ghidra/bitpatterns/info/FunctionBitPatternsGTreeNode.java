@@ -20,7 +20,6 @@ import java.util.*;
 import javax.swing.Icon;
 
 import docking.widgets.tree.GTreeNode;
-import docking.widgets.tree.GTreeNode;
 import resources.ResourceManager;
 
 /**

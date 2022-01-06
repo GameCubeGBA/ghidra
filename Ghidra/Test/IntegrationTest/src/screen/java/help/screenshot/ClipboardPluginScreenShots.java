@@ -28,7 +28,6 @@ import docking.DialogComponentProvider;
 import docking.action.DockingAction;
 import docking.action.DockingActionIf;
 import docking.widgets.fieldpanel.FieldPanel;
-import ghidra.app.plugin.core.clipboard.*;
 import ghidra.app.plugin.core.codebrowser.CodeBrowserPlugin;
 import ghidra.app.plugin.core.codebrowser.CodeViewerProvider;
 import ghidra.app.services.ClipboardContentProviderService;

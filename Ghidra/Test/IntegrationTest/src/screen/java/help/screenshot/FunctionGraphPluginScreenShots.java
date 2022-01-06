@@ -28,9 +28,6 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import javax.swing.*;
 
-import org.junit.*;
-
-import docking.*;
 import docking.action.DockingAction;
 import docking.menu.ActionState;
 import docking.menu.MultiStateDockingAction;
@@ -45,7 +42,6 @@ import ghidra.app.cmd.function.DeleteFunctionCmd;
 import ghidra.app.cmd.label.AddLabelCmd;
 import ghidra.app.plugin.core.functiongraph.AbstractFunctionGraphTest;
 import ghidra.app.plugin.core.functiongraph.FGProvider;
-import ghidra.app.plugin.core.functiongraph.graph.*;
 import ghidra.app.plugin.core.functiongraph.graph.layout.FGLayoutProvider;
 import ghidra.app.plugin.core.functiongraph.graph.vertex.FGVertex;
 import ghidra.app.plugin.core.functiongraph.graph.vertex.GroupedFunctionGraphVertex;

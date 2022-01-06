@@ -20,9 +20,7 @@ import java.io.*;
 
 import ghidra.app.script.GhidraScript;
 import ghidra.program.model.address.Address;
-import ghidra.program.model.symbol.*;
 import ghidra.util.Msg;
-import mdemangler.*;
 import mdemangler.object.MDObjectCPP;
 
 public class DumpAllSymbolsDemangledScript extends GhidraScript {

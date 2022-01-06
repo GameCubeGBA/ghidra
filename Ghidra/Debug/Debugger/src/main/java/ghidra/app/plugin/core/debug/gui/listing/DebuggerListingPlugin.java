@@ -33,7 +33,6 @@ import ghidra.app.plugin.core.codebrowser.CodeViewerProvider;
 import ghidra.app.plugin.core.debug.DebuggerCoordinates;
 import ghidra.app.plugin.core.debug.DebuggerPluginPackage;
 import ghidra.app.plugin.core.debug.event.*;
-import ghidra.app.plugin.core.debug.gui.DebuggerResources.AbstractNewListingAction;
 import ghidra.app.plugin.core.debug.gui.action.LocationTrackingSpec;
 import ghidra.app.plugin.core.debug.gui.action.NoneLocationTrackingSpec;
 import ghidra.app.services.*;

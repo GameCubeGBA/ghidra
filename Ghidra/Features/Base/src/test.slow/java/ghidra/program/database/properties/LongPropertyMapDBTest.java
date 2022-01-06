@@ -31,7 +31,6 @@ import ghidra.program.database.mem.MemoryMapDB;
 import ghidra.program.model.address.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.exception.NoValueException;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  *

@@ -30,7 +30,6 @@ import ghidra.program.model.scalar.Scalar;
 import ghidra.program.model.symbol.*;
 import ghidra.program.util.ProgramLocation;
 import ghidra.test.*;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public class GhidraScriptRealProgramTest extends AbstractGhidraHeadedIntegrationTest {
 

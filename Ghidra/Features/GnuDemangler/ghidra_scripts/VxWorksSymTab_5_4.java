@@ -56,7 +56,6 @@ import ghidra.app.util.demangler.DemangledException;
 import ghidra.app.util.demangler.gnu.GnuDemangler;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.mem.Memory;
-import ghidra.program.model.symbol.*;
 
 public class VxWorksSymTab_5_4 extends GhidraScript {
 

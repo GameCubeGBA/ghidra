@@ -16,7 +16,6 @@
 package ghidra.app.cmd.data.exceptionhandling;
 
 import ghidra.app.cmd.data.AbstractCreateDataTypeModelTest;
-import ghidra.app.cmd.data.rtti.RttiUtil;
 import ghidra.program.database.ProgramBuilder;
 import ghidra.program.database.ProgramDB;
 import ghidra.program.model.address.Address;

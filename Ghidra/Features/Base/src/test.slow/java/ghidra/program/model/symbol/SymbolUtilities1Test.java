@@ -30,7 +30,6 @@ import ghidra.program.util.DefaultLanguageService;
 import ghidra.test.*;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.exception.InvalidInputException;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public class SymbolUtilities1Test extends AbstractGhidraHeadedIntegrationTest {
 	private ProgramDB program;

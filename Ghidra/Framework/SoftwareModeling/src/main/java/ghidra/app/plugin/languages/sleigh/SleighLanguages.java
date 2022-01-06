@@ -17,12 +17,10 @@ package ghidra.app.plugin.languages.sleigh;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import ghidra.app.plugin.languages.sleigh.SleighPcodeTraversal.OnlyPcodeOpEntryVisitor;
 import ghidra.app.plugin.processors.sleigh.Constructor;
 import ghidra.app.plugin.processors.sleigh.SleighLanguage;
 import ghidra.app.plugin.processors.sleigh.pattern.DisjointPattern;
 import ghidra.app.plugin.processors.sleigh.symbol.SubtableSymbol;
-import ghidra.app.plugin.processors.sleigh.template.OpTpl;
 
 /**
  * A collection of utility functions for traversing constructors and Pcode operations of SLEIGH

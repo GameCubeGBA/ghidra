@@ -18,17 +18,13 @@
 
 import java.util.*;
 
-import ghidra.app.decompiler.*;
 import ghidra.app.plugin.core.graph.AddressBasedGraphDisplayListener;
 import ghidra.app.script.GhidraScript;
 import ghidra.app.services.GraphDisplayBroker;
 import ghidra.framework.plugintool.PluginTool;
-import ghidra.program.model.address.*;
 import ghidra.program.model.lang.Register;
 import ghidra.program.model.listing.Function;
 import ghidra.program.model.listing.Program;
-import ghidra.program.model.pcode.*;
-import ghidra.service.graph.*;
 import ghidra.util.Msg;
 import ghidra.util.WebColors;
 

@@ -19,7 +19,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.io.*;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.*;

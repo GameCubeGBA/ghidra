@@ -34,7 +34,6 @@ import ghidra.program.model.address.*;
 import ghidra.program.model.lang.InsufficientBytesException;
 import ghidra.program.model.listing.Function;
 import ghidra.program.model.listing.Program;
-import ghidra.program.model.symbol.*;
 import ghidra.util.Msg;
 import ghidra.util.exception.NotFoundException;
 

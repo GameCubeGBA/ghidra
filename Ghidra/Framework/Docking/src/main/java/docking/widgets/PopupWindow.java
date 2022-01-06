@@ -23,7 +23,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.*;
-import javax.swing.Timer;
 
 import docking.widgets.shapes.*;
 import generic.util.WindowUtilities;

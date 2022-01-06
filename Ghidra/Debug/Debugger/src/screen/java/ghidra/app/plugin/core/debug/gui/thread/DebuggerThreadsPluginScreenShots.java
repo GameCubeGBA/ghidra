@@ -24,7 +24,6 @@ import ghidra.app.plugin.core.debug.service.model.DebuggerModelServiceProxyPlugi
 import ghidra.app.plugin.core.debug.service.tracemgr.DebuggerTraceManagerServicePlugin;
 import ghidra.app.services.DebuggerTraceManagerService;
 import ghidra.app.services.TraceRecorder;
-import ghidra.dbg.model.*;
 import ghidra.trace.model.Trace;
 import ghidra.trace.model.thread.TraceThread;
 import ghidra.util.database.UndoableTransaction;

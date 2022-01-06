@@ -16,7 +16,6 @@
 package ghidra.pcodeCPort.slghpattern;
 
 import java.io.PrintStream;
-import java.util.Iterator;
 import java.util.List;
 
 import org.jdom.Element;

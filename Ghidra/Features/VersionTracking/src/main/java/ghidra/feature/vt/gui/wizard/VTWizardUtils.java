@@ -16,8 +16,6 @@
 package ghidra.feature.vt.gui.wizard;
 
 import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import docking.widgets.OptionDialog;
 import ghidra.feature.vt.api.impl.VTSessionContentHandler;

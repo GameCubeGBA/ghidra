@@ -26,10 +26,7 @@
 
 import java.util.*;
 
-import ghidra.app.decompiler.*;
-import ghidra.app.decompiler.parallel.*;
 import ghidra.app.script.GhidraScript;
-import ghidra.app.tablechooser.*;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.*;
 import ghidra.program.model.pcode.*;

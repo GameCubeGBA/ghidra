@@ -17,7 +17,6 @@ import java.io.*;
 import java.util.*;
 
 import ghidra.app.script.GhidraScript;
-import ghidra.framework.*;
 
 /**
  *

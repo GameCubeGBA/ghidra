@@ -15,8 +15,6 @@
  */
 package ghidra.feature.vt.gui.provider.markuptable;
 
-import java.awt.event.ActionListener;
-
 import javax.swing.JLabel;
 
 import docking.widgets.label.GDLabel;

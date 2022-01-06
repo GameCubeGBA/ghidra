@@ -23,10 +23,8 @@
 import ghidra.app.script.GhidraScript;
 import ghidra.app.util.bin.ByteProvider;
 import ghidra.app.util.bin.RandomAccessByteProvider;
-import ghidra.app.util.bin.format.macos.asd.*;
 import ghidra.app.util.bin.format.macos.cfm.CFragResource;
 import ghidra.app.util.bin.format.macos.cfm.CFragResourceMember;
-import ghidra.app.util.bin.format.macos.rm.*;
 import ghidra.framework.OperatingSystem;
 import ghidra.framework.Platform;
 import ghidra.util.Msg;

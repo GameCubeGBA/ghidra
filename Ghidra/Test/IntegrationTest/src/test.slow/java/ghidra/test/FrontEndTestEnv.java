@@ -39,7 +39,6 @@ import ghidra.framework.model.*;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.framework.preferences.Preferences;
 import ghidra.program.database.ProgramBuilder;
-import ghidra.program.database.ProgramDB;
 import ghidra.program.model.listing.Program;
 import ghidra.program.model.symbol.SourceType;
 import ghidra.program.model.symbol.SymbolTable;

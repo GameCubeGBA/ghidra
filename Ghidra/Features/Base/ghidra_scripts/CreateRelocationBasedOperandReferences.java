@@ -28,7 +28,6 @@ import ghidra.program.model.listing.Listing;
 import ghidra.program.model.reloc.Relocation;
 import ghidra.program.model.reloc.RelocationTable;
 import ghidra.program.model.scalar.Scalar;
-import ghidra.program.model.symbol.*;
 
 public class CreateRelocationBasedOperandReferences extends GhidraScript {
 	

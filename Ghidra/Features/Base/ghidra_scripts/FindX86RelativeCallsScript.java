@@ -23,7 +23,6 @@
 import ghidra.app.script.GhidraScript;
 import ghidra.app.util.PseudoDisassembler;
 import ghidra.app.util.PseudoInstruction;
-import ghidra.program.model.address.*;
 import ghidra.program.model.listing.CodeUnit;
 import ghidra.program.model.listing.Instruction;
 

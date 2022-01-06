@@ -26,7 +26,6 @@ import org.junit.Test;
 
 import docking.widgets.OptionDialog;
 import docking.widgets.dialogs.InputDialog;
-import ghidra.app.plugin.core.function.tags.*;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Function;
 import ghidra.program.model.listing.FunctionIterator;

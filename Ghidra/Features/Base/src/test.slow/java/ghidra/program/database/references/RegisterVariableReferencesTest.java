@@ -27,7 +27,6 @@ import ghidra.program.model.lang.Register;
 import ghidra.program.model.listing.*;
 import ghidra.program.model.symbol.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public class RegisterVariableReferencesTest extends AbstractGhidraHeadedIntegrationTest {
 

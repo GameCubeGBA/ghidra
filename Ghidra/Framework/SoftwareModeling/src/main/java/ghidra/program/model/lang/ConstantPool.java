@@ -15,7 +15,6 @@
  */
 package ghidra.program.model.lang;
 
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 import ghidra.program.model.data.DataType;

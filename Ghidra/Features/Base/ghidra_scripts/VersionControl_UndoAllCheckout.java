@@ -18,7 +18,6 @@
 //@menupath    Tools.Version Control.Undo All Checkouts
 
 import ghidra.app.script.GhidraScript;
-import ghidra.framework.model.*;
 
 public class VersionControl_UndoAllCheckout extends GhidraScript {
 

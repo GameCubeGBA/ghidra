@@ -20,8 +20,6 @@ import ghidra.framework.task.gui.GTaskResultPanel;
 import ghidra.framework.task.gui.taskview.TaskViewer;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.*;
 import javax.swing.border.Border;

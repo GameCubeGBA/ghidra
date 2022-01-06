@@ -32,7 +32,6 @@ import ghidra.app.plugin.core.byteviewer.*;
 import ghidra.app.plugin.core.debug.DebuggerCoordinates;
 import ghidra.app.plugin.core.debug.DebuggerPluginPackage;
 import ghidra.app.plugin.core.debug.event.*;
-import ghidra.app.plugin.core.debug.gui.DebuggerResources.NewMemoryAction;
 import ghidra.app.plugin.core.debug.gui.action.LocationTrackingSpec;
 import ghidra.app.plugin.core.debug.gui.action.NoneLocationTrackingSpec;
 import ghidra.app.services.*;

@@ -31,7 +31,6 @@ import ghidra.program.model.util.CodeUnitInsertionException;
 import ghidra.program.model.util.PropertyMap;
 import ghidra.util.exception.*;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  * Database implementation of Listing.

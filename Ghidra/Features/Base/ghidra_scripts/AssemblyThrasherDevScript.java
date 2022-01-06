@@ -27,14 +27,10 @@ import javax.swing.ImageIcon;
 
 import org.apache.commons.lang3.StringUtils;
 
-import ghidra.app.plugin.assembler.*;
-import ghidra.app.plugin.assembler.sleigh.sem.*;
 import ghidra.app.plugin.processors.sleigh.SleighDebugLogger;
 import ghidra.app.plugin.processors.sleigh.SleighDebugLogger.SleighDebugMode;
 import ghidra.app.script.GhidraScript;
 import ghidra.app.util.PseudoInstruction;
-import ghidra.program.model.address.*;
-import ghidra.program.model.lang.*;
 import ghidra.program.model.listing.BookmarkManager;
 import ghidra.program.model.listing.Instruction;
 import ghidra.program.model.mem.ByteMemBufferImpl;

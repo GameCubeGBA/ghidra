@@ -16,7 +16,6 @@
 package ghidra.framework.task;
 
 import generic.concurrent.GThreadPool;
-import ghidra.framework.model.DomainObjectClosedListener;
 import ghidra.framework.model.UndoableDomainObject;
 import ghidra.util.Msg;
 import ghidra.util.exception.CancelledException;

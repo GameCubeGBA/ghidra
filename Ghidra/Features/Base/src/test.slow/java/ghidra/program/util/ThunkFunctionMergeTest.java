@@ -25,7 +25,6 @@ import ghidra.program.model.address.*;
 import ghidra.program.model.listing.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public class ThunkFunctionMergeTest extends AbstractGhidraHeadedIntegrationTest {
 

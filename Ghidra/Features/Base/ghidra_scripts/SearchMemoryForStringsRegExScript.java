@@ -18,7 +18,6 @@
 //@category Search
 
 import ghidra.app.script.GhidraScript;
-import ghidra.program.model.address.*;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;

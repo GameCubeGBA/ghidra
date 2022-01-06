@@ -19,10 +19,6 @@ import java.math.BigInteger;
 
 import ghidra.app.script.GhidraScript;
 import ghidra.program.disassemble.Disassembler;
-import ghidra.program.model.address.*;
-import ghidra.program.model.lang.*;
-import ghidra.program.model.listing.*;
-import ghidra.program.model.mem.*;
 import ghidra.util.Msg;
 import ghidra.util.StringUtilities;
 

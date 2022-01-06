@@ -26,7 +26,6 @@ import ghidra.app.plugin.core.codebrowser.CodeBrowserPlugin;
 import ghidra.app.plugin.core.colorizer.ColorizingService;
 import ghidra.app.plugin.core.datamgr.DataTypesProvider;
 import ghidra.app.plugin.core.programtree.ViewManagerComponentProvider;
-import ghidra.app.util.viewer.field.*;
 import ghidra.app.util.viewer.format.FieldFormatModel;
 import ghidra.app.util.viewer.format.FormatManager;
 import ghidra.app.util.viewer.listingpanel.ListingPanel;
@@ -36,7 +35,6 @@ import ghidra.framework.options.ToolOptions;
 import ghidra.framework.plugintool.util.OptionsService;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressSet;
-import ghidra.program.model.block.*;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitorAdapter;
 

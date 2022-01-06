@@ -18,7 +18,6 @@ import java.util.*;
 
 import generic.stl.Pair;
 import ghidra.app.script.GhidraScript;
-import ghidra.feature.fid.db.*;
 
 /**
  * Example script for bulk removal of functions from a FID database.  Hashes can be added to the list

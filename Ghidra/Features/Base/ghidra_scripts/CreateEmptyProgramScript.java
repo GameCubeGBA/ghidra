@@ -24,7 +24,6 @@ import ghidra.app.script.GhidraScript;
 import ghidra.app.services.ProgramManager;
 import ghidra.plugin.importer.NewLanguagePanel;
 import ghidra.program.database.ProgramDB;
-import ghidra.program.model.lang.*;
 import ghidra.program.model.listing.Program;
 import ghidra.util.Msg;
 

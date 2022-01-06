@@ -21,7 +21,6 @@
 //@category Examples.Demangler
 import ghidra.app.script.GhidraScript;
 import ghidra.app.util.demangler.DemangledObject;
-import ghidra.app.util.demangler.gnu.*;
 import ghidra.program.model.symbol.Symbol;
 
 public class DemangleElfWithOptionScript extends GhidraScript {

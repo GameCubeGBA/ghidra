@@ -15,8 +15,6 @@
  */
 package ghidra.dbg.jdi.manager;
 
-import java.util.Collection;
-
 import com.sun.jdi.*;
 import com.sun.jdi.event.*;
 

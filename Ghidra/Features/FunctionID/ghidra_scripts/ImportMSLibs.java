@@ -21,11 +21,8 @@ import java.util.*;
 import java.util.function.Predicate;
 
 import ghidra.app.script.GhidraScript;
-import ghidra.app.util.bin.*;
-import ghidra.app.util.bin.format.coff.*;
 import ghidra.app.util.bin.format.coff.archive.CoffArchiveHeader;
 import ghidra.app.util.bin.format.coff.archive.CoffArchiveMemberHeader;
-import ghidra.app.util.importer.*;
 import ghidra.app.util.opinion.Loader;
 import ghidra.app.util.opinion.MSCoffLoader;
 import ghidra.framework.model.DomainFolder;
@@ -33,7 +30,6 @@ import ghidra.framework.store.local.LocalFileSystem;
 import ghidra.program.model.lang.LanguageDescription;
 import ghidra.program.model.listing.Program;
 import ghidra.util.InvalidNameException;
-import ghidra.util.exception.*;
 import ghidra.util.task.CancelOnlyWrappingTaskMonitor;
 import ghidra.util.task.TaskMonitor;
 

@@ -19,15 +19,12 @@ import java.awt.*;
 
 import javax.swing.SwingUtilities;
 
-import org.junit.*;
-
 import docking.DockableComponent;
 import edu.uci.ics.jung.visualization.picking.PickedState;
 import functioncalls.graph.*;
 import functioncalls.graph.view.FcgView;
 import functioncalls.plugin.*;
 import generic.test.TestUtils;
-import ghidra.graph.viewer.*;
 import ghidra.program.model.address.TestAddress;
 import ghidra.program.model.listing.Function;
 

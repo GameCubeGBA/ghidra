@@ -17,7 +17,6 @@ package ghidra.app.plugin.assembler.sleigh.parse;
 
 import java.io.PrintStream;
 import java.util.*;
-import java.util.function.Consumer;
 
 import org.apache.commons.collections4.map.LazyMap;
 import org.apache.commons.lang3.StringUtils;
@@ -26,7 +25,6 @@ import ghidra.app.plugin.assembler.sleigh.grammars.*;
 import ghidra.app.plugin.assembler.sleigh.symbol.*;
 import ghidra.app.plugin.assembler.sleigh.util.DbgTimer;
 import ghidra.app.plugin.assembler.sleigh.util.DbgTimer.DbgCtx;
-import ghidra.app.plugin.assembler.sleigh.util.TableEntry;
 
 /**
  * A class to encapsulate LALR(1) parsing for a given grammar

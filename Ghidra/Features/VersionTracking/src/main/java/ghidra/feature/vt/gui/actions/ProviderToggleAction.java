@@ -19,7 +19,6 @@ package ghidra.feature.vt.gui.actions;
 import ghidra.framework.plugintool.ComponentProviderAdapter;
 
 import java.awt.event.HierarchyEvent;
-import java.awt.event.HierarchyListener;
 
 import javax.swing.JComponent;
 

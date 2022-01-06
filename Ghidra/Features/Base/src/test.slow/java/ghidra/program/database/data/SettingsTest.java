@@ -32,7 +32,6 @@ import ghidra.program.model.listing.Listing;
 import ghidra.program.model.mem.Memory;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.exception.CancelledException;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  *

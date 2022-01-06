@@ -17,9 +17,7 @@
 //@category Analysis
 
 import ghidra.app.script.GhidraScript;
-import ghidra.program.model.address.*;
 import ghidra.program.model.data.AlignmentDataType;
-import ghidra.program.model.listing.*;
 import ghidra.program.model.mem.Memory;
 import ghidra.program.util.ProgramUtilities;
 

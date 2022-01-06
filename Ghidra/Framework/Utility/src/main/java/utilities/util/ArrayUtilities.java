@@ -55,13 +55,13 @@ public final class ArrayUtilities {
 			return false;
 		}
 
-		Class<? extends Object> class1 = o1.getClass();
+		Class<?> class1 = o1.getClass();
 		if (!class1.isArray()) {
 			throw new IllegalArgumentException(
 				"Object parameters must be an array! Instead found class: " + class1);
 		}
 
-		Class<? extends Object> class2 = o2.getClass();
+		Class<?> class2 = o2.getClass();
 		if (!class2.isArray()) {
 			throw new IllegalArgumentException(
 				"Object parameters must be an array! Instead found class: " + class2);

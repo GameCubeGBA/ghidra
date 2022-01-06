@@ -23,7 +23,6 @@ import java.util.*;
 import org.junit.Test;
 
 import generic.test.AbstractGenericTest;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public class AlgorithmsTest extends AbstractGenericTest {
 	Comparator<Long> comparator;

@@ -21,8 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ghidra.app.script.GhidraScript;
-import ghidra.program.model.address.*;
-import ghidra.program.model.symbol.*;
 
 
 public class RemoveDeletedOverlayReferences extends GhidraScript {

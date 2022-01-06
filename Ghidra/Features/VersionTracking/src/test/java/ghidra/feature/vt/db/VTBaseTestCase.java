@@ -16,7 +16,6 @@
 package ghidra.feature.vt.db;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
 
 import org.junit.After;

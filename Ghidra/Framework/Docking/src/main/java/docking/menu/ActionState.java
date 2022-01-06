@@ -66,7 +66,7 @@ public class ActionState<T> {
 			return false;
 		}
 
-		Class<? extends Object> otherClass = other.getClass();
+		Class<?> otherClass = other.getClass();
 		if (getClass() != otherClass) {
 			return false;
 		}

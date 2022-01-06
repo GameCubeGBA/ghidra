@@ -17,8 +17,6 @@
 package docking.widgets.fieldpanel.internal;
 
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
 

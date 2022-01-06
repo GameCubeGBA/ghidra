@@ -35,7 +35,6 @@ import ghidra.program.util.LabelFieldLocation;
 import ghidra.program.util.ProgramLocation;
 import ghidra.util.SystemUtilities;
 import ghidra.util.exception.*;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public class LabelMarkupType extends VTMarkupType {
 

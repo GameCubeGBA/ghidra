@@ -17,7 +17,6 @@ package ghidra.framework.main.logviewer.ui;
 
 import java.awt.event.*;
 import java.io.IOException;
-import java.util.Iterator;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;

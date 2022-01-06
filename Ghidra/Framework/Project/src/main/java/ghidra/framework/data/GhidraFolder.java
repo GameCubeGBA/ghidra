@@ -25,7 +25,6 @@ import ghidra.util.InvalidNameException;
 import ghidra.util.Msg;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public class GhidraFolder implements DomainFolder {
 

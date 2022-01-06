@@ -17,9 +17,7 @@
 //@category iOS
 
 import ghidra.app.script.GhidraScript;
-import ghidra.app.util.bin.*;
 import ghidra.docking.settings.SettingsDefinition;
-import ghidra.file.formats.ios.btree.*;
 import ghidra.file.formats.ios.decmpfs.DecmpfsHeader;
 import ghidra.file.formats.ios.xattr.XattrConstants;
 import ghidra.program.model.address.Address;

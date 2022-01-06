@@ -16,7 +16,6 @@
 package ghidra.app.plugin.core.symtable;
 
 import java.awt.Component;
-import java.util.Iterator;
 
 import javax.swing.JLabel;
 

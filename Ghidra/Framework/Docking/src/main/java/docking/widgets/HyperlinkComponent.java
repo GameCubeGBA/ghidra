@@ -22,7 +22,6 @@ import java.awt.event.MouseMotionListener;
 import java.util.*;
 
 import javax.swing.*;
-import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 import javax.swing.text.DefaultCaret;
 

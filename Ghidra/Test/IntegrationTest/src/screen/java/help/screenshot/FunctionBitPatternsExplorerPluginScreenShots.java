@@ -17,7 +17,6 @@ package help.screenshot;
 
 import org.junit.Test;
 
-import ghidra.bitpatterns.gui.*;
 import ghidra.framework.plugintool.util.PluginException;
 import ghidra.util.Msg;
 

@@ -16,7 +16,6 @@
 import ghidra.app.script.GhidraScript;
 import ghidra.app.services.GraphDisplayBroker;
 import ghidra.framework.plugintool.PluginTool;
-import ghidra.service.graph.*;
 
 /**
  * Sample script to test graph service

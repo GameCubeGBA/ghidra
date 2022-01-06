@@ -16,7 +16,6 @@
 package ghidra.app.util.bin.format.dwarf4.next;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 
 import ghidra.app.plugin.core.datamgr.util.DataTypeUtils;

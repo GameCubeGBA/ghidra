@@ -20,7 +20,6 @@ import ghidra.util.table.GhidraTable;
 
 import java.awt.*;
 import java.util.HashMap;
-import java.util.Iterator;
 
 import javax.swing.*;
 import javax.swing.event.TableColumnModelListener;

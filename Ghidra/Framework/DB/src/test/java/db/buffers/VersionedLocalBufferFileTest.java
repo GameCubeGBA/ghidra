@@ -23,7 +23,6 @@ import java.util.Arrays;
 import org.junit.*;
 
 import generic.test.AbstractGenericTest;
-import ghidra.util.task.TaskMonitorAdapter;
 import utilities.util.FileUtilities;
 
 public class VersionedLocalBufferFileTest extends AbstractGenericTest {

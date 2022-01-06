@@ -18,7 +18,6 @@
 
 import java.util.*;
 
-import ghidra.program.model.pcode.*;
 import ghidra.service.graph.AttributedEdge;
 import ghidra.service.graph.AttributedVertex;
 

@@ -19,7 +19,6 @@ import ghidra.app.script.GhidraScript;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.block.CodeBlock;
 import ghidra.program.model.block.PartitionCodeSubModel;
-import ghidra.program.model.listing.*;
 import ghidra.program.model.symbol.RefType;
 
 public class CreateFunctionAfterTerminals extends GhidraScript {

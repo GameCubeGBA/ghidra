@@ -29,9 +29,6 @@ import ghidra.app.script.GhidraScript;
 import ghidra.app.util.MemoryBlockUtils;
 import ghidra.app.util.NamespaceUtils;
 import ghidra.app.util.importer.MessageLog;
-import ghidra.program.model.listing.*;
-import ghidra.program.model.mem.*;
-import ghidra.program.model.symbol.*;
 
 
 public class MergeTwoProgramsScript extends GhidraScript {

@@ -31,8 +31,6 @@ import java.awt.event.*;
 import java.util.*;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 import docking.DialogComponentProvider;
 import docking.widgets.OptionDialog;

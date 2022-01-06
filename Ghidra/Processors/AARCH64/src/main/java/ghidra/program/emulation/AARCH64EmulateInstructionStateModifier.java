@@ -221,28 +221,10 @@ public class AARCH64EmulateInstructionStateModifier extends EmulateInstructionSt
 	// value in the init varnode (with sign extension to a
 	// size boundary)
 
-	protected byte[] varnode_to_bytes(Varnode outputVarnode, byte[] initBytes, int esize) {
+	protected byte[] varnode_to_bytes(Varnode outputVarnode) {
 
-		byte[] outBytes = new byte[outputVarnode.getSize()];
-		if (initBytes == null) {
-			return outBytes;
-		}
+		return new byte[outputVarnode.getSize()];
 
-		byte ext = 0;
-
-		for (int i = outBytes.length, j = initBytes.length; i > 0; i--, j--) {
-			if (j > 0) {
-				outBytes[i - 1] = initBytes[j - 1];
-				ext = (byte) ((initBytes[j - 1] >= 0) ? 0 : 0xff);
-			} else {
-				outBytes[i - 1] = ext;
-				if (((i - 1) % esize) == 0) {
-					break;
-				}
-			}
-		}
-
-		return outBytes;
 	}
 
 	// Abstract classes for unary and binary operations
@@ -313,7 +295,7 @@ public class AARCH64EmulateInstructionStateModifier extends EmulateInstructionSt
 			int esize = (int) memoryState.getValue(inputs[2]);
 
 			byte[] simdBytes = memoryState.getBigInteger(simdVarnode, true).toByteArray();
-			byte[] outBytes = varnode_to_bytes(outputVarnode, null, esize);
+			byte[] outBytes = varnode_to_bytes(outputVarnode);
 
 			for (int outLSB = outBytes.length, simdLSB = simdBytes.length;
 				outLSB > 0;
@@ -349,7 +331,7 @@ public class AARCH64EmulateInstructionStateModifier extends EmulateInstructionSt
 			int esize = (int) memoryState.getValue(inputs[2]);
 
 			byte[] simdBytes = memoryState.getBigInteger(simdVarnode, false).toByteArray();
-			byte[] outBytes = varnode_to_bytes(outputVarnode, null, esize);
+			byte[] outBytes = varnode_to_bytes(outputVarnode);
 
 			for (int outLSB = outBytes.length, simdLSB = simdBytes.length;
 				outLSB > 0;
@@ -454,7 +436,7 @@ public class AARCH64EmulateInstructionStateModifier extends EmulateInstructionSt
 			int d_size = (s_size * outputVarnode.getSize()) / simdVarnode.getSize();
 
 			byte[] simdBytes = memoryState.getBigInteger(simdVarnode, true).toByteArray();
-			byte[] outBytes = varnode_to_bytes(outputVarnode, null, d_size);
+			byte[] outBytes = varnode_to_bytes(outputVarnode);
 
 			for (int outLSB = outBytes.length, simdLSB = simdBytes.length;
 				outLSB > 0;
@@ -491,7 +473,7 @@ public class AARCH64EmulateInstructionStateModifier extends EmulateInstructionSt
 			int d_size = (s_size * outputVarnode.getSize()) / simdVarnode.getSize();
 
 			byte[] simdBytes = memoryState.getBigInteger(simdVarnode, false).toByteArray();
-			byte[] outBytes = varnode_to_bytes(outputVarnode, null, d_size);
+			byte[] outBytes = varnode_to_bytes(outputVarnode);
 
 			for (int outLSB = outBytes.length, simdLSB = simdBytes.length;
 				outLSB > 0;
@@ -598,7 +580,7 @@ public class AARCH64EmulateInstructionStateModifier extends EmulateInstructionSt
 
 			byte[] simdBytes = memoryState.getBigInteger(simdVarnode, true).toByteArray();
 			byte[] opBytes = memoryState.getBigInteger(opVarnode, true).toByteArray();
-			byte[] outBytes = varnode_to_bytes(outputVarnode, null, esize);
+			byte[] outBytes = varnode_to_bytes(outputVarnode);
 
 			for (int outLSB = outBytes.length, simdLSB = simdBytes.length, opLSB = opBytes.length;
 				outLSB > 0;
@@ -642,7 +624,7 @@ public class AARCH64EmulateInstructionStateModifier extends EmulateInstructionSt
 
 			byte[] simdBytes = memoryState.getBigInteger(simdVarnode, false).toByteArray();
 			byte[] opBytes = memoryState.getBigInteger(opVarnode, false).toByteArray();
-			byte[] outBytes = varnode_to_bytes(outputVarnode, null, esize);
+			byte[] outBytes = varnode_to_bytes(outputVarnode);
 
 			for (int outLSB = outBytes.length, simdLSB = simdBytes.length, opLSB = opBytes.length;
 				outLSB > 0;
@@ -765,7 +747,7 @@ public class AARCH64EmulateInstructionStateModifier extends EmulateInstructionSt
 				pairBytes[pi - 1] = p1Bytes[i - 1];
 			}
 
-			byte[] outBytes = varnode_to_bytes(outputVarnode, null, osize);
+			byte[] outBytes = varnode_to_bytes(outputVarnode);
 
 			for (int outLSB = outBytes.length, opLSB = pairBytes.length;
 				outLSB > 0 && opLSB > 0;
@@ -834,7 +816,7 @@ public class AARCH64EmulateInstructionStateModifier extends EmulateInstructionSt
 				pairBytes[pi - 1] = p1Bytes[i - 1];
 			}
 
-			byte[] outBytes = varnode_to_bytes(outputVarnode, null, osize);
+			byte[] outBytes = varnode_to_bytes(outputVarnode);
 
 			for (int outLSB = outBytes.length, opLSB = pairBytes.length;
 				outLSB > 0 && opLSB > 0;

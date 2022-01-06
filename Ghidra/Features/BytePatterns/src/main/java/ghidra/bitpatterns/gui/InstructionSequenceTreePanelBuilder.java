@@ -16,8 +16,6 @@
 package ghidra.bitpatterns.gui;
 
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.*;

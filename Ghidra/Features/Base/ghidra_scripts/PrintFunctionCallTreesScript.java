@@ -20,9 +20,6 @@ import java.util.*;
 
 import ghidra.app.plugin.core.navigation.locationreferences.ReferenceUtils;
 import ghidra.app.script.GhidraScript;
-import ghidra.program.model.address.*;
-import ghidra.program.model.listing.*;
-import ghidra.program.model.symbol.*;
 import ghidra.program.util.FunctionSignatureFieldLocation;
 import ghidra.util.exception.CancelledException;
 

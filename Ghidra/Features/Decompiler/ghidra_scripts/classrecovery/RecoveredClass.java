@@ -20,7 +20,6 @@ import java.util.*;
 import java.util.Map.Entry;
 
 import ghidra.program.model.address.Address;
-import ghidra.program.model.data.*;
 import ghidra.program.model.listing.Function;
 import ghidra.program.model.symbol.Namespace;
 import ghidra.util.exception.CancelledException;

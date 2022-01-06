@@ -25,8 +25,6 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Data;
 import ghidra.program.model.listing.Function;
 import ghidra.program.model.symbol.Symbol;
-import ghidra.program.util.*;
-import docking.*;
 
 public class DemangleSymbolScript extends GhidraScript {
 

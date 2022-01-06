@@ -52,15 +52,15 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 	public final static int BRANCH_INDIRECT = 0x04;
 	public final static int CALL = 0x08;
 	public final static int JUMPOUT = 0x10;
-	public final static int NO_FALLTHRU = 0x20;		// op does not fallthru
+	public final static int NO_FALLTHRU = 0x20; // op does not fallthru
 	public final static int BRANCH_TO_END = 0x40;
 	public final static int CROSSBUILD = 0x80;
 	public final static int LABEL = 0x100;
 
 	static public class FlowRecord {
-		public ConstructState addressnode;		// Constructor state containing destination address of flow
-		public OpTpl op;						// The pcode template producing the flow
-		public int flowFlags;					// flags associated with this flow		
+		public ConstructState addressnode; // Constructor state containing destination address of flow
+		public OpTpl op; // The pcode template producing the flow
+		public int flowFlags; // flags associated with this flow
 	}
 
 	static public class FlowSummary {
@@ -93,7 +93,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 	private final static Address[] emptyFlow = new Address[0];
 
 	private ContextCache contextCache;
-//	private InstructionContext instructionContextCache;
+	// private InstructionContext instructionContextCache;
 	private int length;
 	private ConstructState rootState;
 	private ConstructState mnemonicState; // state for print mnemonic
@@ -145,8 +145,8 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 		opRefTypes = new RefType[opresolve.length];
 		Arrays.fill(opRefTypes, null);
 
-//		for(int j=0;j<opstate.length;++j)	// Transform array to states
-//			opstate[j] = getStateOperand(mnemonicstate,opstate[j]);
+		// for(int j=0;j<opstate.length;++j) // Transform array to states
+		// opstate[j] = getStateOperand(mnemonicstate,opstate[j]);
 	}
 
 	@Override
@@ -168,16 +168,16 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 		res.flowFlags = flags;
 		res.op = op;
 		res.addressnode = null;
-		VarnodeTpl dest = op.getInput()[0];		// First varnode input contains the destination address
+		VarnodeTpl dest = op.getInput()[0]; // First varnode input contains the destination address
 		if ((flags & (JUMPOUT | CALL | CROSSBUILD)) == 0)
 			return;
-		// If the flow is out of the instruction, store the ConstructState so we can easily calculate address
+		// If the flow is out of the instruction, store the ConstructState so we can
+		// easily calculate address
 		if (state == null)
 			return;
 		if ((flags & CROSSBUILD) != 0) {
 			res.addressnode = state;
-		}
-		else if (dest.getOffset().getType() == ConstTpl.HANDLE) {
+		} else if (dest.getOffset().getType() == ConstTpl.HANDLE) {
 			int oper = dest.getOffset().getHandleIndex();
 			Constructor ct = state.getConstructor();
 			OperandSymbol sym = ct.getOperand(oper);
@@ -190,6 +190,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 	/**
 	 * Walk the pcode templates in the order they would be emitted.
 	 * Collect flowFlags FlowRecords
+	 * 
 	 * @param walker the pcode template walker
 	 */
 	public static FlowSummary walkTemplates(OpTplWalker walker) {
@@ -202,14 +203,13 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 			if (state == null) {
 				walker.popBuild();
 				continue;
-			}
-			else if (state instanceof Integer) {
+			} else if (state instanceof Integer) {
 				walker.pushBuild(((Integer) state).intValue());
 				continue;
 			}
 			res.lastop = (OpTpl) state;
 			switch (res.lastop.getOpcode()) {
-				case PcodeOp.PTRSUB:			// encoded crossbuild directive
+				case PcodeOp.PTRSUB: // encoded crossbuild directive
 					res.hasCrossBuilds = true;
 					addExplicitFlow(walker.getState(), res.lastop, CROSSBUILD, res);
 					break;
@@ -218,20 +218,20 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 					break;
 				case PcodeOp.BRANCH:
 					destType = res.lastop.getInput()[0].getOffset().getType();
-                    switch (destType) {
-                        case ConstTpl.J_NEXT:
-                            flags = BRANCH_TO_END;
-                            break;
-                        case ConstTpl.J_START:
-                            flags = NO_FALLTHRU;
-                            break;
-                        case ConstTpl.J_RELATIVE:
-                            flags = NO_FALLTHRU;
-                            break;
-                        default:
-                            flags = JUMPOUT | NO_FALLTHRU;
-                            break;
-                    }
+					switch (destType) {
+						case ConstTpl.J_NEXT:
+							flags = BRANCH_TO_END;
+							break;
+						case ConstTpl.J_START:
+							flags = NO_FALLTHRU;
+							break;
+						case ConstTpl.J_RELATIVE:
+							flags = NO_FALLTHRU;
+							break;
+						default:
+							flags = JUMPOUT | NO_FALLTHRU;
+							break;
+					}
 					addExplicitFlow(walker.getState(), res.lastop, flags, res);
 					break;
 				case PcodeOp.CBRANCH:
@@ -253,10 +253,10 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 				case PcodeOp.RETURN:
 					addExplicitFlow(null, res.lastop, RETURN | NO_FALLTHRU, res);
 					break;
-				case PcodeOp.PTRADD:			// Encoded label build directive
+				case PcodeOp.PTRADD: // Encoded label build directive
 					addExplicitFlow(null, res.lastop, LABEL, res);
 					break;
-				case PcodeOp.INDIRECT:			// Encode delayslot
+				case PcodeOp.INDIRECT: // Encode delayslot
 					destType = (int) res.lastop.getInput()[0].getOffset().getReal();
 					if (destType > res.delay)
 						res.delay = destType;
@@ -280,7 +280,8 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 	}
 
 	/**
-	 * Walk the Constructor tree gathering ConstructStates which are flow destinations (flowStateList)
+	 * Walk the Constructor tree gathering ConstructStates which are flow
+	 * destinations (flowStateList)
 	 * flowFlags and delayslot directives
 	 */
 	private void cacheTreeInfo() {
@@ -292,8 +293,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 		if (summary.flowState != null) {
 			flowStateList = summary.flowState;
 			flowType = flowListToFlowType(summary.flowState);
-		}
-		else {
+		} else {
 			flowStateList = new ArrayList<>();
 			flowType = RefType.FALL_THROUGH;
 		}
@@ -358,7 +358,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 			case JUMPOUT | NO_FALLTHRU | RETURN:
 				return RefType.JUMP_TERMINATOR;
 			case JUMPOUT | NO_FALLTHRU | BRANCH_INDIRECT:
-				return RefType.COMPUTED_JUMP; //added for tableswitch in jvm
+				return RefType.COMPUTED_JUMP; // added for tableswitch in jvm
 			case BRANCH_INDIRECT | NO_FALLTHRU | RETURN:
 				return RefType.JUMP_TERMINATOR;
 			case NO_FALLTHRU:
@@ -383,8 +383,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 	}
 
 	private void cacheInstructionMasks(MemBuffer memBuf, ProcessorContextView context) {
-		SleighDebugLogger sdl =
-			new SleighDebugLogger(memBuf, context, language, SleighDebugMode.MASKS_ONLY);
+		SleighDebugLogger sdl = new SleighDebugLogger(memBuf, context, language, SleighDebugMode.MASKS_ONLY);
 		if (!sdl.parseFailed()) {
 			operandMasks = new Mask[getNumOperands()];
 			instrMask = new MaskImpl(sdl.getInstructionMask());
@@ -426,11 +425,9 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 		int flags = 0;
 		try {
 			flags = gatherFlags(0, context, -1);
-		}
-		catch (MemoryAccessException e) {
+		} catch (MemoryAccessException e) {
 			return RefType.INVALID;
-		}
-		catch (UnknownContextException e) {
+		} catch (UnknownContextException e) {
 			return RefType.INVALID;
 		}
 		return convertFlowFlags(flags);
@@ -450,19 +447,17 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 			return 1;
 		}
 		try {
-			ReadOnlyProcessorContext roContext =
-				new ReadOnlyProcessorContext(context.getProcessorContext());
+			ReadOnlyProcessorContext roContext = new ReadOnlyProcessorContext(context.getProcessorContext());
 			while (byteCnt < delaySlotByteCnt) {
 				MemBuffer delaymem = new WrappedMemBuffer(context.getMemBuffer(), offset);
-				SleighInstructionPrototype proto =
-					(SleighInstructionPrototype) language.parse(delaymem, roContext, true);
+				SleighInstructionPrototype proto = (SleighInstructionPrototype) language.parse(delaymem, roContext,
+						true);
 				int len = proto.length;
 				offset += len;
 				byteCnt += len;
 				++delayInstrCnt;
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 		}
 		return delayInstrCnt;
 	}
@@ -485,8 +480,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 		SleighParserContext protoContext;
 		try {
 			protoContext = (SleighParserContext) context.getParserContext();
-		}
-		catch (MemoryAccessException e) {
+		} catch (MemoryAccessException e) {
 			return OperandType.DYNAMIC;
 		}
 		ConstructState opState = mnemonicState.getSubState(opresolve[opIndex]);
@@ -534,8 +528,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 		if (flowType.hasFallthrough()) {
 			try {
 				return context.getAddress().addNoWrap(getFallThroughOffset(context));
-			}
-			catch (AddressOverflowException e) {
+			} catch (AddressOverflowException e) {
 			}
 		}
 		return null;
@@ -550,20 +543,17 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 		try {
 			int offset = length;
 			int bytecount = 0;
-			ReadOnlyProcessorContext roContext =
-				new ReadOnlyProcessorContext(context.getProcessorContext());
+			ReadOnlyProcessorContext roContext = new ReadOnlyProcessorContext(context.getProcessorContext());
 			do {
 				MemBuffer delaymem = new WrappedMemBuffer(context.getMemBuffer(), offset);
-				SleighInstructionPrototype proto =
-					(SleighInstructionPrototype) language.parse(delaymem, roContext, true);
+				SleighInstructionPrototype proto = (SleighInstructionPrototype) language.parse(delaymem, roContext,
+						true);
 				int len = proto.length;
 				offset += len;
 				bytecount += len;
-			}
-			while (bytecount < delaySlotByteCnt);
+			} while (bytecount < delaySlotByteCnt);
 			return offset;
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			return length;
 		}
 	}
@@ -581,21 +571,18 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 
 		for (FlowRecord rec : curlist) {
 			if ((rec.flowFlags & CROSSBUILD) != 0) {
-				ParserWalker walker =
-					new ParserWalker((SleighParserContext) context.getParserContext());
+				ParserWalker walker = new ParserWalker((SleighParserContext) context.getParserContext());
 				walker.subTreeState(rec.addressnode);
 
 				VarnodeTpl vn = rec.op.getInput()[0];
 				AddressSpace spc = vn.getSpace().fixSpace(walker);
 				Address addr = spc.getTruncatedAddress(vn.getOffset().fix(walker), false);
 				addr = handleOverlayAddress(context, addr);
-				SleighParserContext crosscontext =
-					(SleighParserContext) context.getParserContext(addr);
+				SleighParserContext crosscontext = (SleighParserContext) context.getParserContext(addr);
 				int newsecnum = (int) rec.op.getInput()[1].getOffset().getReal();
 				SleighInstructionPrototype crossproto = crosscontext.getPrototype();
 				curflags = crossproto.gatherFlags(curflags, context, newsecnum);
-			}
-			else {
+			} else {
 				curflags &= ~(CROSSBUILD | LABEL | NO_FALLTHRU);
 				curflags |= rec.flowFlags;
 			}
@@ -613,10 +600,13 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 	}
 
 	/**
-	 * Gather all the flow records (perhaps across multiple InstructionPrototypes via crossbuilds) and convert to Addresses
-	 * @param res is the resulting flow Addresses
+	 * Gather all the flow records (perhaps across multiple InstructionPrototypes
+	 * via crossbuilds) and convert to Addresses
+	 * 
+	 * @param res          is the resulting flow Addresses
 	 * @param parsecontext is the parsing context for the current instruction
-	 * @param context is the context for the particular address so crossbuilds can be resolved
+	 * @param context      is the context for the particular address so crossbuilds
+	 *                     can be resolved
 	 * @throws MemoryAccessException
 	 * @throws UnknownContextException
 	 */
@@ -641,13 +631,11 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 				AddressSpace spc = vn.getSpace().fixSpace(walker);
 				Address addr = spc.getTruncatedAddress(vn.getOffset().fix(walker), false);
 				addr = handleOverlayAddress(context, addr);
-				SleighParserContext crosscontext =
-					(SleighParserContext) context.getParserContext(addr);
+				SleighParserContext crosscontext = (SleighParserContext) context.getParserContext(addr);
 				int newsecnum = (int) rec.op.getInput()[1].getOffset().getReal();
 				SleighInstructionPrototype crossproto = crosscontext.getPrototype();
 				crossproto.gatherFlows(res, crosscontext, context, newsecnum);
-			}
-			else if ((rec.flowFlags & (JUMPOUT | CALL)) != 0) {
+			} else if ((rec.flowFlags & (JUMPOUT | CALL)) != 0) {
 				FixedHandle hand = parsecontext.getFixedHandle(rec.addressnode);
 				if (!hand.isInvalid() && hand.offset_space == null) {
 					Address addr = getHandleAddr(hand, parsecontext.getAddr().getAddressSpace());
@@ -666,11 +654,9 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 		ArrayList<Address> addresses = new ArrayList<>();
 		try {
 			gatherFlows(addresses, (SleighParserContext) context.getParserContext(), context, -1);
-		}
-		catch (MemoryAccessException e) {
+		} catch (MemoryAccessException e) {
 			return emptyFlow;
-		}
-		catch (UnknownContextException e) {
+		} catch (UnknownContextException e) {
 			return emptyFlow;
 		}
 
@@ -688,8 +674,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 		try {
 			Constructor ct = mnemonicState.getConstructor();
 			return ct.printSeparator(opIndex);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			return null;
 		}
 	}
@@ -710,8 +695,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 			ParserWalker walker = new ParserWalker(protoContext);
 			walker.subTreeState(mnemonicState);
 			sym.printList(walker, list);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 		}
 
 		AddressSpace curSpace = context.getAddress().getAddressSpace();
@@ -719,8 +703,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 		for (Object obj : list) {
 			if (obj instanceof Character) {
 				objList.add(obj);
-			}
-			else {
+			} else {
 				addHandleObject(curSpace, (FixedHandle) obj, objList);
 			}
 		}
@@ -734,8 +717,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 		try {
 			Constructor ct = mnemonicState.getConstructor();
 			return ct.getOperand(opresolve[opIndex]);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 		}
 		return null;
 	}
@@ -754,8 +736,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 			hand = protoContext.getFixedHandle(opState);
 			if (hand.isInvalid())
 				return null;
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			return null;
 		}
 		if ((hand.offset_space == null) && (hand.space.getType() == AddressSpace.TYPE_RAM)) {
@@ -788,8 +769,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 				boolean signed = hand.offset_offset < 0;
 				return new Scalar(size * 8, hand.offset_offset, signed);
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 		}
 		return null;
 	}
@@ -809,8 +789,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 			if (hand.space.getType() == AddressSpace.TYPE_REGISTER) {
 				return language.getRegister(hand.space, hand.offset_offset, hand.size);
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 		}
 		return null;
 	}
@@ -841,8 +820,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 		PcodeOp[] pcode = null;
 		try {
 			pcode = getPcode(context, null, null);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			return new Object[0];
 		}
 		HashSet<Object> inlist = new HashSet<>();
@@ -864,32 +842,31 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 		if (opID == PcodeOp.CALL || opID == PcodeOp.BRANCH) {
 			return; // flow only
 		}
-        switch (opID) {
-            case PcodeOp.CBRANCH:
-                ++vi; // ignore flow address
+		switch (opID) {
+			case PcodeOp.CBRANCH:
+				++vi; // ignore flow address
 
-                break;
-            case PcodeOp.STORE:
-                ++vi; // ignore space ID
+				break;
+			case PcodeOp.STORE:
+				++vi; // ignore space ID
 
-                break;
-            case PcodeOp.LOAD:
-                if (varNode[1].isConstant()) {
-                    AddressSpace space =
-                            language.getAddressFactory().getAddressSpace((int) varNode[0].getOffset());
-                    if (space != null) {
-                        Address inAddr = space.getAddress(varNode[1].getOffset());
-                        // check that we didn't write to the location
-                        if (!writtenObjects.contains(inAddr)) {
-                            inputObjects.add(inAddr);
-                        }
-                        return;
-                    }
-                }
-                ++vi; // ignore space ID
+				break;
+			case PcodeOp.LOAD:
+				if (varNode[1].isConstant()) {
+					AddressSpace space = language.getAddressFactory().getAddressSpace((int) varNode[0].getOffset());
+					if (space != null) {
+						Address inAddr = space.getAddress(varNode[1].getOffset());
+						// check that we didn't write to the location
+						if (!writtenObjects.contains(inAddr)) {
+							inputObjects.add(inAddr);
+						}
+						return;
+					}
+				}
+				++vi; // ignore space ID
 
-                break;
-        }
+				break;
+		}
 		for (; vi < varNode.length; vi++) {
 			Varnode node = varNode[vi];
 			Object obj = getVarnodeObject(node);
@@ -904,8 +881,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 		PcodeOp[] pcode = null;
 		try {
 			pcode = getPcode(context, null, null);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			return new Object[0];
 		}
 		HashSet<Object> results = new HashSet<>();
@@ -920,14 +896,12 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 		Varnode[] varNode = pcode.getInputs();
 		if (pcode.getOpcode() == PcodeOp.STORE) {
 			if (varNode[1].isConstant()) {
-				AddressSpace space =
-					language.getAddressFactory().getAddressSpace((int) varNode[0].getOffset());
+				AddressSpace space = language.getAddressFactory().getAddressSpace((int) varNode[0].getOffset());
 				if (space != null) {
 					results.add(space.getAddress(varNode[1].getOffset()));
 				}
 			}
-		}
-		else {
+		} else {
 			Object obj = getVarnodeObject(pcode.getOutput());
 			if (obj != null) {
 				results.add(obj);
@@ -943,7 +917,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 			int bitsize = node.getSize() * 8;
 			bitsize = bitsize > 64 ? 64 : bitsize;
 			boolean signed = node.getOffset() < 0;
-            return new Scalar(bitsize, node.getOffset(), signed);
+			return new Scalar(bitsize, node.getOffset(), signed);
 		}
 		if (node.isAddress() || node.isRegister()) {
 			Register reg = language.getRegister(node.getAddress(), node.getSize());
@@ -963,19 +937,16 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 				int bytecount = 0;
 				do {
 					Address addr = context.getAddress().add(fallOffset);
-					SleighParserContext delay =
-						(SleighParserContext) context.getParserContext(addr);
+					SleighParserContext delay = (SleighParserContext) context.getParserContext(addr);
 					int len = delay.getPrototype().length;
 					fallOffset += len;
 					bytecount += len;
-				}
-				while (bytecount < delaySlotByteCnt);
+				} while (bytecount < delaySlotByteCnt);
 				protoContext.setDelaySlotLength(bytecount);
 			}
 			ParserWalker walker = new ParserWalker(protoContext);
 			walker.baseState();
-			PcodeEmitObjects emit =
-				new PcodeEmitObjects(walker, context, fallOffset, override, uniqueFactory);
+			PcodeEmitObjects emit = new PcodeEmitObjects(walker, context, fallOffset, override, uniqueFactory);
 			emit.build(walker.getConstructor().getTempl(), -1);
 			emit.resolveRelatives();
 			if (!isindelayslot) {
@@ -983,11 +954,9 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 			}
 			protoContext.setDelaySlotLength(0);
 			return emit.getPcodeOp();
-		}
-		catch (NotYetImplementedException e) {
+		} catch (NotYetImplementedException e) {
 			// unimpl
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			Msg.error(this, "Pcode error at " + context.getAddress() + ": " + e.getMessage());
 		}
 		PcodeOp[] res = new PcodeOp[1];
@@ -1005,19 +974,16 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 				int bytecount = 0;
 				do {
 					Address addr = context.getAddress().add(fallOffset);
-					SleighParserContext delay =
-						(SleighParserContext) context.getParserContext(addr);
+					SleighParserContext delay = (SleighParserContext) context.getParserContext(addr);
 					int len = delay.getPrototype().length;
 					fallOffset += len;
 					bytecount += len;
-				}
-				while (bytecount < delaySlotByteCnt);
+				} while (bytecount < delaySlotByteCnt);
 				protoContext.setDelaySlotLength(bytecount);
 			}
 			ParserWalker walker = new ParserWalker(protoContext);
 			walker.baseState();
-			PcodeEmitPacked emit =
-				new PcodeEmitPacked(walker, context, fallOffset, override, uniqueFactory);
+			PcodeEmitPacked emit = new PcodeEmitPacked(walker, context, fallOffset, override, uniqueFactory);
 			emit.write(PcodeEmitPacked.inst_tag);
 			emit.dumpOffset(emit.getFallOffset());
 
@@ -1035,11 +1001,9 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 			protoContext.setDelaySlotLength(0);
 			emit.write(PcodeEmitPacked.end_tag); // Terminate the inst_tag
 			return emit.getPackedBytes();
-		}
-		catch (NotYetImplementedException e) {
+		} catch (NotYetImplementedException e) {
 			// unimpl
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			Msg.error(this, "Pcode error at " + context.getAddress() + ": " + e.getMessage());
 		}
 		PcodeEmitPacked emit = new PcodeEmitPacked();
@@ -1069,8 +1033,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 				}
 				return emit.getPcodeOp();
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 		}
 		return emptyPCode;
 	}
@@ -1086,7 +1049,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 		if (override != null) {
 			// TODO: should call override be considered?
 			hasOverride = override.getFlowOverride() != FlowOverride.NONE ||
-				override.getFallThroughOverride() != null;
+					override.getFallThroughOverride() != null;
 		}
 
 		if (!hasOverride) {
@@ -1103,8 +1066,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 		SleighParserContext protoContext;
 		try {
 			protoContext = (SleighParserContext) context.getParserContext();
-		}
-		catch (MemoryAccessException e) {
+		} catch (MemoryAccessException e) {
 			return RefType.DATA;
 		}
 		PcodeOp[] pcode = getPcode(context, override, uniqueFactory);
@@ -1121,8 +1083,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 		RefType refType = RefType.DATA;
 		if (opHandle.isDynamic()) {
 			refType = getDynamicOperandRefType(opHandle, pcode);
-		}
-		else {
+		} else {
 			Varnode var = opHandle.getStaticVarnode();
 			if (var != null) {
 				refType = getStaticOperandRefType(var, pcode);
@@ -1138,8 +1099,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 		SleighParserContext protoContext;
 		try {
 			protoContext = (SleighParserContext) context.getParserContext();
-		}
-		catch (MemoryAccessException e) {
+		} catch (MemoryAccessException e) {
 			throw new RuntimeException(e);
 		}
 		PcodeOp[] pcode = getPcode(context, null, uniqueFactory);
@@ -1153,14 +1113,13 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 		}
 		for (int index = 0; index < opHandles.length; index++) {
 			if (opHandles[index] == null || opHandles[index].isInvalid() ||
-				opRefTypes[index] != null) {
+					opRefTypes[index] != null) {
 				continue;
 			}
 			RefType refType = RefType.DATA;
 			if (opHandles[index].isDynamic()) {
 				refType = getDynamicOperandRefType(opHandles[index], pcode);
-			}
-			else {
+			} else {
 				Varnode var = opHandles[index].getStaticVarnode();
 				if (var != null) {
 					refType = getStaticOperandRefType(var, pcode);
@@ -1309,8 +1268,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 				mnemonic = "_" + mnemonic;
 			}
 			return mnemonic;
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
 		}
 		Msg.error(this, "*****  SLEIGH instruction PROBLEM at " + context.getAddress());
@@ -1322,13 +1280,13 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 
 		if (debug != null && debug.isVerboseEnabled()) {
 			debug.append("resolving constructor for instruction bytes at: " +
-				protoContext.getAddr().toString(true) + "\n");
+					protoContext.getAddr().toString(true) + "\n");
 		}
 
 		ParserWalker walker = new ParserWalker(protoContext);
 		walker.baseState();
 		walker.setOffset(0);
-		Constructor ct = root.resolve(walker, debug);		// Base constructor
+		Constructor ct = root.resolve(walker, debug); // Base constructor
 		walker.setConstructor(ct);
 		ct.applyContext(walker, debug);
 
@@ -1363,8 +1321,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 						debug.endPatternGroup(true);
 						debug.dropIndent();
 					}
-				}
-				else {
+				} else {
 					if (debug != null)
 						debug.dumpPattern(sym, walker);
 				}
@@ -1372,7 +1329,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 				walker.popOperand();
 				oper += 1;
 			}
-			if (oper >= numoper) {			// Finished processing constructor
+			if (oper >= numoper) { // Finished processing constructor
 				walker.calcCurrentLength(ct.getMinimumLength(), numoper);
 				walker.popOperand();
 				if (debug != null) {
@@ -1401,7 +1358,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 			int numoper = ct.getNumOperands();
 			while (oper < numoper) {
 				OperandSymbol sym = ct.getOperand(oper);
-				walker.pushOperand(oper);		// Descend into node
+				walker.pushOperand(oper); // Descend into node
 				TripleSymbol triple = sym.getDefiningSymbol();
 				if (triple != null) {
 					if (triple instanceof SubtableSymbol) {
@@ -1409,8 +1366,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 					}
 					FixedHandle handle = walker.getParentHandle();
 					triple.getFixedHandle(handle, walker);
-				}
-				else { // Must be an expression
+				} else { // Must be an expression
 					PatternExpression patexp = sym.getDefiningExpression();
 					long res = patexp.getValue(walker);
 					FixedHandle hand = walker.getParentHandle();
@@ -1437,9 +1393,12 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 	}
 
 	/**
-	 * Reconstruct the ParserContext's internal packed context array and its list of global ContextSet directives
+	 * Reconstruct the ParserContext's internal packed context array and its list of
+	 * global ContextSet directives
 	 * by walking a previously resolved ConstructState tree
-	 * @param protoContext is the SleighParserContext containing the tree and holding the context results
+	 * 
+	 * @param protoContext is the SleighParserContext containing the tree and
+	 *                     holding the context results
 	 * @param debug
 	 * @throws MemoryAccessException
 	 */
@@ -1452,7 +1411,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 			if (ct != null) {
 				int oper = walker.getOperand();
 				int numoper = ct.getNumOperands();
-				if (oper == 0)		// Upon first entry to this Constructor
+				if (oper == 0) // Upon first entry to this Constructor
 					ct.applyContext(walker, debug); // Apply its context changes
 				if (oper < numoper) {
 					walker.pushOperand(oper);
@@ -1469,61 +1428,60 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 			return false;
 		}
 		int type = handle.space.getType();
-        switch (type) {
-            case AddressSpace.TYPE_REGISTER:
-                Register reg;
-                reg = language.getRegister(handle.space, handle.offset_offset, handle.size);
-                if (reg == null) {
-                    list.add("<BAD_register_" + handle.offset_offset + ":" + handle.size + ">");
-                } else {
-                    list.add(reg);
-                }
-                return true;
-            case AddressSpace.TYPE_CONSTANT:
-                Scalar sc;
-                int size = handle.size;
-                if (size == 0) {
-                    size = handle.offset_size;
-                    if (size == 0) {
-                        size = language.getDefaultSpace().getPointerSize();
-                    }
-                }
-                boolean signed = handle.offset_offset < 0;
-                sc = new Scalar(size * 8, handle.offset_offset, signed);
-                list.add(sc);
-                return true;
-            case AddressSpace.TYPE_RAM:
-                if (handle.offset_space == null) {
-                    Address addr = getHandleAddr(handle, curSpace);
-                    if (addr != null) {
-                        if (addr.getAddressSpace().hasMappedRegisters()) {
-                            Register reg = language.getRegister(addr, handle.size);
-                            if (reg != null) {
-                                list.add(reg);
-                                return true;
-                            }
-                        }
-                        list.add(addr);
-                        return true;
-                    }
-                }
-                // could be simply taking the value of a register as an address
-                else if (handle.offset_space.getType() == AddressSpace.TYPE_REGISTER) {
-                    Register reg = language.getRegister(handle.offset_space, handle.offset_offset,
-                            handle.offset_size);
-                    list.add(reg);
-                    return true;
-                }
+		switch (type) {
+			case AddressSpace.TYPE_REGISTER:
+				Register reg;
+				reg = language.getRegister(handle.space, handle.offset_offset, handle.size);
+				if (reg == null) {
+					list.add("<BAD_register_" + handle.offset_offset + ":" + handle.size + ">");
+				} else {
+					list.add(reg);
+				}
+				return true;
+			case AddressSpace.TYPE_CONSTANT:
+				Scalar sc;
+				int size = handle.size;
+				if (size == 0) {
+					size = handle.offset_size;
+					if (size == 0) {
+						size = language.getDefaultSpace().getPointerSize();
+					}
+				}
+				boolean signed = handle.offset_offset < 0;
+				sc = new Scalar(size * 8, handle.offset_offset, signed);
+				list.add(sc);
+				return true;
+			case AddressSpace.TYPE_RAM:
+				if (handle.offset_space == null) {
+					Address addr = getHandleAddr(handle, curSpace);
+					if (addr != null) {
+						if (addr.getAddressSpace().hasMappedRegisters()) {
+							Register reg2 = language.getRegister(addr, handle.size);
+							if (reg2 != null) {
+								list.add(reg2);
+								return true;
+							}
+						}
+						list.add(addr);
+						return true;
+					}
+				}
+				// could be simply taking the value of a register as an address
+				else if (handle.offset_space.getType() == AddressSpace.TYPE_REGISTER) {
+					list.add(language.getRegister(handle.offset_space, handle.offset_offset,
+							handle.offset_size));
+					return true;
+				}
 
-                break;
-        }
+				break;
+		}
 		return false;
 	}
 
 	private Address getHandleAddr(FixedHandle hand, AddressSpace curSpace) {
 
 		if (hand.isInvalid() || hand.space.getType() == AddressSpace.TYPE_UNIQUE ||
-			hand.offset_space != null) {
+				hand.offset_space != null) {
 			return null;
 		}
 		Address newaddr = hand.space.getTruncatedAddress(hand.offset_offset, false);
@@ -1547,8 +1505,13 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 		return newContext;
 	}
 
-	/* (non-Javadoc)
-	 * @see ghidra.program.model.lang.InstructionPrototype#getPseudoParserContext(ghidra.program.model.address.Address, ghidra.program.model.mem.MemBuffer, ghidra.program.model.lang.ProcessorContextView)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ghidra.program.model.lang.InstructionPrototype#getPseudoParserContext(ghidra.
+	 * program.model.address.Address, ghidra.program.model.mem.MemBuffer,
+	 * ghidra.program.model.lang.ProcessorContextView)
 	 */
 	@Override
 	public ParserContext getPseudoParserContext(Address addr, MemBuffer buffer,
@@ -1557,10 +1520,8 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 		ReadOnlyProcessorContext roContext = new ReadOnlyProcessorContext(processorContext);
 		int offset = (int) addr.subtract(buffer.getAddress());
 		MemBuffer nearbymem = new WrappedMemBuffer(buffer, offset);
-		SleighInstructionPrototype proto =
-			(SleighInstructionPrototype) language.parse(nearbymem, roContext, true);
-		SleighParserContext newContext =
-			new SleighParserContext(nearbymem, proto, processorContext);
+		SleighInstructionPrototype proto = (SleighInstructionPrototype) language.parse(nearbymem, roContext, true);
+		SleighParserContext newContext = new SleighParserContext(nearbymem, proto, processorContext);
 		reconstructContext(newContext, null);
 		resolveHandles(newContext);
 		return newContext;
@@ -1580,10 +1541,12 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 	}
 
 	/**
-	 * Used for testing and diagnostics: list the constructor line numbers used to resolve this
+	 * Used for testing and diagnostics: list the constructor line numbers used to
+	 * resolve this
 	 * encoding
 	 * 
 	 * This includes braces to describe the tree structure
+	 * 
 	 * @see AssemblyResolvedConstructor#dumpConstructorTree()
 	 * @return the constructor tree
 	 */

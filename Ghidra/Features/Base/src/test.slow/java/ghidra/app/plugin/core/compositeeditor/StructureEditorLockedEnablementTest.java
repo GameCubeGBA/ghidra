@@ -23,7 +23,6 @@ import org.junit.Test;
 
 import ghidra.program.model.data.*;
 import ghidra.util.exception.DuplicateNameException;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public class StructureEditorLockedEnablementTest extends AbstractStructureEditorTest {
 

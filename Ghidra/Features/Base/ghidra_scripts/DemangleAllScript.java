@@ -21,7 +21,6 @@
 import ghidra.app.cmd.label.DemanglerCmd;
 import ghidra.app.script.GhidraScript;
 import ghidra.program.model.address.Address;
-import ghidra.program.model.symbol.*;
 
 public class DemangleAllScript extends GhidraScript {
 

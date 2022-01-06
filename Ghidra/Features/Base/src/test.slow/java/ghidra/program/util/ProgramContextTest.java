@@ -30,7 +30,6 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.listing.ProgramContext;
 import ghidra.program.model.mem.Memory;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  * quick and dirty test of the ProgramContextImpl just to see

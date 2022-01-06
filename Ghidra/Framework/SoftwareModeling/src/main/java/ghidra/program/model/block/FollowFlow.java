@@ -22,7 +22,6 @@ import ghidra.program.model.listing.*;
 import ghidra.program.model.mem.Memory;
 import ghidra.program.model.symbol.*;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  * FollowFlow follows the program's code flow either forward or backward from an initial

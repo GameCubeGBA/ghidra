@@ -15,7 +15,6 @@
  */
 package ghidra.app.plugin.core.memory;
 
-import java.util.Collections;
 import java.util.List;
 
 import docking.widgets.OptionDialog;

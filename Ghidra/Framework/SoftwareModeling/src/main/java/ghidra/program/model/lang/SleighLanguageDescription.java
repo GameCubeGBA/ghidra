@@ -121,7 +121,7 @@ public class SleighLanguageDescription extends BasicLanguageDescription {
 	}
 
 	public void setSlaFile(ResourceFile slaFile) {
-		this.sile = slaFile;
+		this.slaFile = slaFile;
 	}
 
 	public ResourceFile getSlaFile() {

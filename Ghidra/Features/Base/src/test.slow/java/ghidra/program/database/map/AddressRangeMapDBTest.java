@@ -33,7 +33,6 @@ import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.Lock;
 import ghidra.util.exception.CancelledException;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public class AddressRangeMapDBTest extends AbstractGhidraHeadedIntegrationTest
 		implements ErrorHandler {

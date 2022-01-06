@@ -32,7 +32,6 @@ import ghidra.pcode.emulate.EmulateExecutionState;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Instruction;
 import ghidra.program.model.listing.Program;
-import ghidra.program.model.symbol.*;
 import ghidra.util.Msg;
 import ghidra.util.exception.NotFoundException;
 

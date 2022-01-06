@@ -23,7 +23,6 @@ import ghidra.app.util.PseudoDisassembler;
 import ghidra.app.util.PseudoInstruction;
 import ghidra.app.util.disassemble.GNUExternalDisassembler;
 import ghidra.program.disassemble.Disassembler;
-import ghidra.program.model.address.*;
 import ghidra.program.model.lang.Register;
 import ghidra.program.model.lang.UnknownInstructionException;
 import ghidra.program.model.listing.BookmarkType;

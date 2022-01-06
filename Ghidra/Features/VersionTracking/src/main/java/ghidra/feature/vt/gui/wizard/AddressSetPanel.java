@@ -24,9 +24,6 @@ import ghidra.util.HelpLocation;
 
 import java.awt.BorderLayout;
 
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
 import docking.wizard.*;
 
 public class AddressSetPanel extends AbstractMageJPanel<VTWizardStateKey> {

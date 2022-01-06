@@ -26,7 +26,6 @@ import generic.test.AbstractGenericTest;
 import ghidra.framework.store.DatabaseItem;
 import ghidra.framework.store.FolderItem;
 import ghidra.framework.store.local.LocalFileSystem;
-import ghidra.util.task.TaskMonitorAdapter;
 import utilities.util.FileUtilities;
 
 public class RecoveryDBTest extends AbstractGenericTest {

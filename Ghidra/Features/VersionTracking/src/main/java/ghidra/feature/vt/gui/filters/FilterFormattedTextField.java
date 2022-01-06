@@ -23,8 +23,6 @@ import ghidra.util.SystemUtilities;
 
 import java.awt.Color;
 import java.awt.event.FocusEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.text.ParseException;
 import java.util.HashSet;
 import java.util.Set;

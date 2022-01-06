@@ -19,7 +19,6 @@
 import java.io.IOException;
 
 import ghidra.app.script.GhidraScript;
-import ghidra.framework.model.*;
 import ghidra.program.database.ProgramContentHandler;
 
 public class VersionControl_ResetAll extends GhidraScript {

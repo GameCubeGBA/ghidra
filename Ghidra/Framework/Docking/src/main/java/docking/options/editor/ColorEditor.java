@@ -21,8 +21,6 @@ import java.awt.event.MouseEvent;
 import java.beans.PropertyEditorSupport;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 import docking.DialogComponentProvider;
 import docking.DockingWindowManager;

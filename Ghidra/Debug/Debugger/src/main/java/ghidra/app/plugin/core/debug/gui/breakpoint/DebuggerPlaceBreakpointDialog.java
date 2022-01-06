@@ -32,7 +32,6 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
 import ghidra.program.util.ProgramLocation;
 import ghidra.trace.model.breakpoint.TraceBreakpointKind;
-import ghidra.trace.model.breakpoint.TraceBreakpointKind.TraceBreakpointKindSet;
 import ghidra.util.MessageType;
 import ghidra.util.layout.PairLayout;
 

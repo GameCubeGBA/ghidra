@@ -27,7 +27,6 @@ import ghidra.util.graph.*;
 import ghidra.util.graph.attributes.AttributeManager;
 import ghidra.util.graph.attributes.IntegerAttribute;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  * <CODE>PartitionCodeSubModel</CODE> (Model-P) defines subroutines which do not share code with

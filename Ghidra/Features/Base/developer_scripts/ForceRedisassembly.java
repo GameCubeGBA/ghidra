@@ -15,7 +15,6 @@
  */
 import ghidra.app.script.GhidraScript;
 import ghidra.program.database.ProgramDB;
-import ghidra.program.model.lang.*;
 import ghidra.program.model.listing.IncompatibleLanguageException;
 import ghidra.program.util.LanguageTranslator;
 import ghidra.program.util.LanguageTranslatorAdapter;

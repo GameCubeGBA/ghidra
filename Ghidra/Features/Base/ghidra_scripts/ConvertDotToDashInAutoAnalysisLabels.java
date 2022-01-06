@@ -19,7 +19,6 @@
 // Need to run the UpdateSymbolSourceScript first if the symbols have not been updated yet
 
 import ghidra.app.script.GhidraScript;
-import ghidra.program.model.symbol.*;
 
 public class ConvertDotToDashInAutoAnalysisLabels extends GhidraScript {
 	@Override
