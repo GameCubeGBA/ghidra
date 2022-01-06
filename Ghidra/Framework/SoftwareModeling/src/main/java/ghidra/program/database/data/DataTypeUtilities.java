@@ -447,7 +447,7 @@ public class DataTypeUtilities {
 	}
 
 	/**
-	 * <code>NamespaceMatcher</code> is used to check data type categoryPath for match against
+	 * {@code NamespaceMatcher} is used to check data type categoryPath for match against
 	 * preferred namespace.
 	 */
 	private static interface NamespaceMatcher {

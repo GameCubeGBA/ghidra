@@ -18,7 +18,7 @@ package db;
 import java.io.IOException;
 
 /**
- * <code>FieldKeyInteriorNode</code> defines a common interface for {@link FieldKeyNode} 
+ * {@code FieldKeyInteriorNode} defines a common interface for {@link FieldKeyNode}
  * implementations which are also an {@link InteriorNode}.
  */
 public interface FieldKeyInteriorNode extends InteriorNode, FieldKeyNode {

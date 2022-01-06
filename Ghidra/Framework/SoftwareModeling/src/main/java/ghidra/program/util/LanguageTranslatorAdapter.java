@@ -28,7 +28,7 @@ import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>LanguageTranslatorAdapter</code> provides a default language translator 
+ * {@code LanguageTranslatorAdapter} provides a default language translator
  * behavior which may be extended to provide customized language translations.
  */
 public abstract class LanguageTranslatorAdapter implements LanguageTranslator {

@@ -36,7 +36,7 @@ import ghidra.util.prop.PropertyVisitor;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <CODE>ProgramMerge</CODE> is a class for merging the differences between two
+ * {@code ProgramMerge} is a class for merging the differences between two
  * programs. The differences are merged from program2 into program1.
  * <P>Program1 is the program being modified by the merge. Program2 is source
  * for obtaining differences to apply to program1.
@@ -76,7 +76,7 @@ public class ProgramMerge implements PropertyVisitor {
 	private HashMap<String, DupEquate> dupEquates; // duplicate equate names
 
 	/**
-	 * <CODE>ProgramMerge</CODE> allows the merging of differences from program2
+	 * {@code ProgramMerge} allows the merging of differences from program2
 	 * into program1 (the result program).
 	 *
 	 * @param resultProgram The result program that will get modified by merge.
@@ -89,7 +89,7 @@ public class ProgramMerge implements PropertyVisitor {
 	}
 
 	/**
-	 * <CODE>ProgramMerge</CODE> allows the merging of differences from program2 (the origin program)
+	 * {@code ProgramMerge} allows the merging of differences from program2 (the origin program)
 	 * into program1 (the result program).
 	 * <br>If the address translator is not a "one for one translator" then certain methods within
 	 * this class will throw an UnsupportedOperationException.
@@ -212,7 +212,7 @@ public class ProgramMerge implements PropertyVisitor {
 	// **** PROGRAM CONTEXT REGISTERS methods ****
 
 	/**
-	 * <CODE>mergeProgramContext</CODE> merges the program context (register values)
+	 * {@code mergeProgramContext} merges the program context (register values)
 	 * into the result program.
 	 *
 	 * @param originAddressSet the addresses to be merged.
@@ -358,7 +358,7 @@ public class ProgramMerge implements PropertyVisitor {
 		}
 	}
 
-	/** <CODE>mergeBytes</CODE> merges byte differences within the specified
+	/** {@code mergeBytes} merges byte differences within the specified
 	 *  address set.
 	 * <br>Note: Any instructions at the equivalent byte addresses in the result program will get cleared and
 	 * re-created resulting in the existing references being dropped.
@@ -489,7 +489,7 @@ public class ProgramMerge implements PropertyVisitor {
 	// **** CODE UNIT methods ****
 
 	/**
-	 * <CODE>mergeCodeUnits</CODE> merges all instructions and/or data
+	 * {@code mergeCodeUnits} merges all instructions and/or data
 	 * (as indicated) in the specified address set from the origin program.
 	 * It merges them into the result program. When merging
 	 * instructions, the bytes are also replaced if they differ.
@@ -650,7 +650,7 @@ public class ProgramMerge implements PropertyVisitor {
 	}
 
 	/**
-	 * <CODE>performMergeInstruction</CODE> merges the indicated instruction
+	 * {@code performMergeInstruction} merges the indicated instruction
 	 * into the merge program. Before the instruction is created the bytes for
 	 * the instruction are copied from program2 to program1.
 	 * Corresponding code unit(s) must already be cleared in result program,
@@ -786,7 +786,7 @@ public class ProgramMerge implements PropertyVisitor {
 	}
 
 	/**
-	 * <CODE>performMergeData</CODE> merges the indicated defined data
+	 * {@code performMergeData} merges the indicated defined data
 	 * into the merge program. The bytes in the merge program are not affected
 	 * by this method.
 	 * Corresponding code unit(s) must already be cleared in result program.
@@ -837,7 +837,7 @@ public class ProgramMerge implements PropertyVisitor {
 	// **** EQUATE methods ****
 
 	/**
-	 * <CODE>mergeEquates</CODE> merges the equate differences in the specified
+	 * {@code mergeEquates} merges the equate differences in the specified
 	 * address set.
 	 *
 	 * @param originAddressSet the addresses to be merged.
@@ -876,7 +876,7 @@ public class ProgramMerge implements PropertyVisitor {
 	}
 
 	/**
-	 * <CODE>mergeEquate</CODE> replaces the current equates in program1 with those in program2.
+	 * {@code mergeEquate} replaces the current equates in program1 with those in program2.
 	 * @param originAddress the address where the equates should be merged.
 	 * This address should be derived from the origin program.
 	 * @param opIndex the operand index where the equates should be merged.
@@ -938,7 +938,7 @@ public class ProgramMerge implements PropertyVisitor {
 	}
 
 	/**
-	 * <CODE>mergeEquates</CODE> merges all equates for the indicated
+	 * {@code mergeEquates} merges all equates for the indicated
 	 * address from the second program. It merges them into the merge program.
 	 *
 	 * @param originAddress the address where the equates are to be merged.
@@ -1044,7 +1044,7 @@ public class ProgramMerge implements PropertyVisitor {
 	// **** REFERENCE methods ****
 
 	/**
-	 * <CODE>replaceReferences</CODE> replaces all references in
+	 * {@code replaceReferences} replaces all references in
 	 * program1 for the specified address set with those in program2.
 	 * If an equivalent reference already exists then it is updated to match the
 	 * new reference.
@@ -1067,7 +1067,7 @@ public class ProgramMerge implements PropertyVisitor {
 	}
 
 	/**
-	 * <CODE>replaceReferences</CODE> replaces all references in
+	 * {@code replaceReferences} replaces all references in
 	 * program1 for the specified address set with the references from program2.
 	 * If an equivalent reference already exists then it is updated to match the
 	 * new reference.
@@ -1163,7 +1163,7 @@ public class ProgramMerge implements PropertyVisitor {
 	}
 
 	/**
-	 * <CODE>mergeReferences</CODE> merges the references in
+	 * {@code mergeReferences} merges the references in
 	 * program1 for the specified address set with the references from program2.
 	 * If an equivalent reference already exists then it is updated to match the
 	 * new reference if possible. A merge of references prevents the loss of any
@@ -1273,7 +1273,7 @@ public class ProgramMerge implements PropertyVisitor {
 	}
 
 	/**
-	 * <CODE>replaceReferences</CODE> replaces all references in
+	 * {@code replaceReferences} replaces all references in
 	 * program1 for the specified address and operand index with those in program2.
 	 * If an equivalent reference already exists then it is updated to match the
 	 * new reference.
@@ -1376,7 +1376,7 @@ public class ProgramMerge implements PropertyVisitor {
 	}
 
 	/**
-	 * <CODE>addReference</CODE> creates a reference in program1 that is equivalent
+	 * {@code addReference} creates a reference in program1 that is equivalent
 	 * to the one specified as a parameter. If a symbol ID is specified, the
 	 * reference will refer to the symbol in program1 with that ID. If the reference
 	 * is an external reference, then the external location associated with it can be replaced
@@ -1451,7 +1451,7 @@ public class ProgramMerge implements PropertyVisitor {
 	}
 
 	/**
-	 * <CODE>replaceFallThroughs</CODE> replaces all fallthroughs in
+	 * {@code replaceFallThroughs} replaces all fallthroughs in
 	 * program1 for the specified address set with those in program2 where they differ.
 	 *
 	 * @param originAddressSet the addresses to be merged.
@@ -1514,7 +1514,7 @@ public class ProgramMerge implements PropertyVisitor {
 
 	// **** COMMENT methods ****
 
-	/** <CODE>mergeComment</CODE> merges/replaces comments of the indicated
+	/** {@code mergeComment} merges/replaces comments of the indicated
 	 * type wherever they occur in the specified address set.
 	 * @param originAddressSet the addresses where comments should be merged/replaced.
 	 * The addresses in this set should be from the origin program.
@@ -1532,7 +1532,7 @@ public class ProgramMerge implements PropertyVisitor {
 	}
 
 	/**
-	 * <CODE>mergeCommentType</CODE> merges/replaces comments of the indicated
+	 * {@code mergeCommentType} merges/replaces comments of the indicated
 	 * type wherever they occur in the specified address set.
 	 * It merges them from program2 into program1.
 	 * This merges eol, pre, post, repeatable, and plate comments.
@@ -1606,7 +1606,7 @@ public class ProgramMerge implements PropertyVisitor {
 	}
 
 	/**
-	 * <CODE>mergeComments</CODE> merges the comment of the indicated
+	 * {@code mergeComments} merges the comment of the indicated
 	 * type in program1 with the comment in program2 at the specified address.
 	 * @param commentType comment type to merge (from CodeUnit class).
 	 * <br>EOL_COMMENT, PRE_COMMENT, POST_COMMENT, REPEATABLE_COMMENT, OR PLATE_COMMENT.
@@ -1622,7 +1622,7 @@ public class ProgramMerge implements PropertyVisitor {
 	}
 
 	/**
-	 * <CODE>replaceComment</CODE> replaces the comment of the indicated
+	 * {@code replaceComment} replaces the comment of the indicated
 	 * type in program1 with the comment in program2 at the specified address.
 	 * @param commentType comment type to replace (from CodeUnit class).
 	 * <br>EOL_COMMENT, PRE_COMMENT, POST_COMMENT, REPEATABLE_COMMENT, OR PLATE_COMMENT.
@@ -1867,7 +1867,7 @@ public class ProgramMerge implements PropertyVisitor {
 	// **** SYMBOL methods ****
 
 	/**
-	 * <CODE>mergeLabels</CODE> merges all symbols and aliases
+	 * {@code mergeLabels} merges all symbols and aliases
 	 * in the specified address set from the second program.
 	 * It merges them into the merge program.
 	 *
@@ -1887,7 +1887,7 @@ public class ProgramMerge implements PropertyVisitor {
 	}
 
 	/**
-	 * <CODE>mergeLabels</CODE> merges all symbols and aliases
+	 * {@code mergeLabels} merges all symbols and aliases
 	 * in the specified address set from the second program.
 	 * It merges them into the merge program.
 	 *
@@ -1904,7 +1904,7 @@ public class ProgramMerge implements PropertyVisitor {
 	}
 
 	/**
-	 * <CODE>replaceLabels</CODE> replaces all symbols and aliases
+	 * {@code replaceLabels} replaces all symbols and aliases
 	 * in the specified address set from the second program.
 	 *
 	 * @param originAddressSet the addresses to be replaced
@@ -2058,7 +2058,7 @@ public class ProgramMerge implements PropertyVisitor {
 		return false;
 	}
 
-	/** <CODE>replaceFunctionNames</CODE> merges function name and namespace differences
+	/** {@code replaceFunctionNames} merges function name and namespace differences
 	 * within the specified address set.
 	 *
 	 * @param originAddressSet the addresses to be merged.
@@ -2077,7 +2077,7 @@ public class ProgramMerge implements PropertyVisitor {
 		functionMerge.replaceFunctionsNames(originAddressSet, monitor);
 	}
 
-	/** <CODE>mergeFunctions</CODE> merges function differences within the specified
+	/** {@code mergeFunctions} merges function differences within the specified
 	 *  address set.
 	 *
 	 * @param addrSet the addresses to be merged.
@@ -2248,7 +2248,7 @@ public class ProgramMerge implements PropertyVisitor {
 	}
 
 	/**
-	 * <CODE>mergeFunction</CODE> completely replaces any function at the
+	 * {@code mergeFunction} completely replaces any function at the
 	 * indicated address in program1 with the function, if any, in program2.
 	 *
 	 * @param entry the entry point address of the function to be merged.
@@ -2263,7 +2263,7 @@ public class ProgramMerge implements PropertyVisitor {
 	}
 
 	/**
-	 * <CODE>mergeFunctionReturn</CODE> replaces the return type/storage of the
+	 * {@code mergeFunctionReturn} replaces the return type/storage of the
 	 * function in program1 with the return type/storage of the function in program2
 	 * at the specified entry point address.
 	 * @param entry2 the entry point address of the function.
@@ -2322,7 +2322,7 @@ public class ProgramMerge implements PropertyVisitor {
 	}
 
 	/**
-	 * <CODE>replaceExternalDataType</CODE> replaces the data type of the
+	 * {@code replaceExternalDataType} replaces the data type of the
 	 * external label in program1 with the data type of the external label in program2
 	 * at the specified external space address.
 	 * @param originAddress external space address the address of the external.
@@ -2352,7 +2352,7 @@ public class ProgramMerge implements PropertyVisitor {
 //	}
 
 	/**
-	 * <CODE>mergeFunctionName</CODE> replaces the name of the
+	 * {@code mergeFunctionName} replaces the name of the
 	 * function in program1 with the name of the function in program2
 	 * at the specified entry point address.
 	 * @param entry2 the entry point address of the function.
@@ -2406,7 +2406,7 @@ public class ProgramMerge implements PropertyVisitor {
 	}
 
 	/**
-	 * <CODE>replaceFunctionSignatureSource</CODE> changes the result function's signature source
+	 * {@code replaceFunctionSignatureSource} changes the result function's signature source
 	 * to match the origin program's signature source.
 	 * @param originEntryPoint the entry point address of the function.
 	 * This address should be derived from the origin program.
@@ -2428,7 +2428,7 @@ public class ProgramMerge implements PropertyVisitor {
 	}
 
 	/**
-	 * <CODE>mergeFunctionReturnAddressOffset</CODE> replaces the return address offset of the
+	 * {@code mergeFunctionReturnAddressOffset} replaces the return address offset of the
 	 * function in program1 with the return address offset of the function in program2
 	 * at the specified entry point address.
 	 * @param entry2 the entry point address of the function.
@@ -2451,7 +2451,7 @@ public class ProgramMerge implements PropertyVisitor {
 	}
 
 	/**
-	 * <CODE>mergeFunctionParameterOffset</CODE> replaces the parameter offset of the
+	 * {@code mergeFunctionParameterOffset} replaces the parameter offset of the
 	 * function in program1 with the parameter offset of the function in program2
 	 * at the specified entry point address.
 	 * @param entry2 the entry point address of the function.
@@ -2481,7 +2481,7 @@ public class ProgramMerge implements PropertyVisitor {
 //	}
 
 	/**
-	 * <CODE>mergeFunctionLocalSize</CODE> replaces the local size of the
+	 * {@code mergeFunctionLocalSize} replaces the local size of the
 	 * function in program1 with the local size of the function in program2
 	 * at the specified entry point address.
 	 * @param entry2 the entry point address of the function.
@@ -2504,7 +2504,7 @@ public class ProgramMerge implements PropertyVisitor {
 	}
 
 	/**
-	 * <CODE>mergeFunctionStackPurgeSize</CODE> replaces the stack purge size of the
+	 * {@code mergeFunctionStackPurgeSize} replaces the stack purge size of the
 	 * function in program1 with the stack purge size of the function in program2
 	 * at the specified entry point address.
 	 * @param entry2 the entry point address of the function.
@@ -2525,7 +2525,7 @@ public class ProgramMerge implements PropertyVisitor {
 	}
 
 	/**
-	 * <CODE>replaceFunctionVarArgs</CODE> changes whether the function has VarArgs
+	 * {@code replaceFunctionVarArgs} changes whether the function has VarArgs
 	 * in program1 if it doesn't match the use of VarArgs in the function in program2
 	 * at the specified entry point address.
 	 * @param entry2 the entry point address of the function.
@@ -2546,7 +2546,7 @@ public class ProgramMerge implements PropertyVisitor {
 	}
 
 	/**
-	 * <CODE>replaceFunctionCallingConvention</CODE> changes the function calling convention
+	 * {@code replaceFunctionCallingConvention} changes the function calling convention
 	 * in program1 if it doesn't match the function calling convention in program2
 	 * at the specified entry point address.
 	 * @param originEntryPoint the entry point address of the function.
@@ -2573,7 +2573,7 @@ public class ProgramMerge implements PropertyVisitor {
 	}
 
 	/**
-	 * <CODE>replaceFunctionInlineFlag</CODE> changes whether the function is inline
+	 * {@code replaceFunctionInlineFlag} changes whether the function is inline
 	 * in program1 if it doesn't match whether the function is inline in program2
 	 * at the specified entry point address.
 	 * @param originEntryPoint the entry point address of the function.
@@ -2594,7 +2594,7 @@ public class ProgramMerge implements PropertyVisitor {
 	}
 
 	/**
-	 * <CODE>replaceFunctionNoReturnFlag</CODE> changes whether the flag is set indicating
+	 * {@code replaceFunctionNoReturnFlag} changes whether the flag is set indicating
 	 * the function does not return
 	 * in program1 if it doesn't match the "does not return" flag in the function in program2
 	 * at the specified entry point address.
@@ -2616,7 +2616,7 @@ public class ProgramMerge implements PropertyVisitor {
 	}
 
 	/**
-	 * <CODE>replaceFunctionCustomStorageFlag</CODE> changes whether the flag is set indicating
+	 * {@code replaceFunctionCustomStorageFlag} changes whether the flag is set indicating
 	 * the function does not return
 	 * in program1 if it doesn't match the "custom storage" flag in the function in program2
 	 * at the specified entry point address.
@@ -2638,7 +2638,7 @@ public class ProgramMerge implements PropertyVisitor {
 	}
 
 	/**
-	 * <CODE>replaceFunctionParameters</CODE> replaces the parameters of the
+	 * {@code replaceFunctionParameters} replaces the parameters of the
 	 * function in program1 with the parameters of the function in program2
 	 * at the specified entry point address.  It also replaces the return
 	 * type/storage as well as custom storage use.
@@ -2655,7 +2655,7 @@ public class ProgramMerge implements PropertyVisitor {
 	}
 
 	/**
-	 * <CODE>replaceFunctionParameters</CODE> replaces the parameters of the
+	 * {@code replaceFunctionParameters} replaces the parameters of the
 	 * function in program1 with the parameters of the function in program2
 	 * at the specified entry point address.  It also replaces the return
 	 * type/storage as well as custom storage use.
@@ -3275,7 +3275,7 @@ public class ProgramMerge implements PropertyVisitor {
 	}
 
 	/**
-	 * <CODE>replaceFunctionParameterName</CODE> replaces the name of the indicated
+	 * {@code replaceFunctionParameterName} replaces the name of the indicated
 	 * function parameter in program1 with the name from the origin program.
 	 * @param originEntryPoint the entry point address of the function to modify.
 	 * This address should be derived from the origin program.
@@ -3324,7 +3324,7 @@ public class ProgramMerge implements PropertyVisitor {
 	}
 
 	/**
-	 * <CODE>replaceFunctionParameterDataType</CODE> replaces the data type of the indicated
+	 * {@code replaceFunctionParameterDataType} replaces the data type of the indicated
 	 * function parameter in program1 with the data type from the origin program.
 	 * @param originEntryPoint the entry point address of the function to modify.
 	 * This address should be derived from the origin program.
@@ -3387,7 +3387,7 @@ public class ProgramMerge implements PropertyVisitor {
 	}
 
 	/**
-	 * <CODE>replaceFunctionParameterComment</CODE> replaces the comment of the indicated
+	 * {@code replaceFunctionParameterComment} replaces the comment of the indicated
 	 * function parameter in program1 with the comment from the origin program.
 	 * @param originEntryPoint the entry point address of the function to modify.
 	 * This address should be derived from the origin program.
@@ -3417,7 +3417,7 @@ public class ProgramMerge implements PropertyVisitor {
 	}
 
 	/**
-	 * <CODE>replaceFunctionVariable</CODE> replaces the name of the indicated
+	 * {@code replaceFunctionVariable} replaces the name of the indicated
 	 * function variable in program1 with that from the origin program.
 	 * @param originEntryPoint the entry point address of the function to modify.
 	 * This address should be derived from program1.
@@ -3464,7 +3464,7 @@ public class ProgramMerge implements PropertyVisitor {
 	}
 
 	/**
-	 * <CODE>replaceFunctionVariables</CODE> replaces the
+	 * {@code replaceFunctionVariables} replaces the
 	 * function variables/parameters in program1 with that from the origin program.
 	 * @param originEntryPoint the entry point address of the function to modify.
 	 * This address should be derived from program1.
@@ -3515,7 +3515,7 @@ public class ProgramMerge implements PropertyVisitor {
 	}
 
 	/**
-	 * <CODE>replaceFunctionVariableName</CODE> replaces the name on the indicated
+	 * {@code replaceFunctionVariableName} replaces the name on the indicated
 	 * function variable in program1 with the name from the equivalent variable in program2.
 	 * @param originEntryPoint the entry point address of the function to modify.
 	 * This address should be derived from the origin program.
@@ -3570,7 +3570,7 @@ public class ProgramMerge implements PropertyVisitor {
 	}
 
 	/**
-	 * <CODE>replaceFunctionVariableDataType</CODE> replaces the data type on the indicated
+	 * {@code replaceFunctionVariableDataType} replaces the data type on the indicated
 	 * function variable in program1 with the data type from the equivalent variable in program2.
 	 * @param originEntryPoint the entry point address of the function to modify.
 	 * This address should be derived from the origin program.
@@ -3603,7 +3603,7 @@ public class ProgramMerge implements PropertyVisitor {
 	}
 
 	/**
-	 * <CODE>replaceFunctionVariableComment</CODE> replaces the comment on the indicated
+	 * {@code replaceFunctionVariableComment} replaces the comment on the indicated
 	 * function variable in program1 with the comment from the equivalent variable in program2.
 	 * @param originEntryPoint entry point address of the function whose variable is getting the comment replaced.
 	 * This address should be derived from the origin program.
@@ -3671,7 +3671,7 @@ public class ProgramMerge implements PropertyVisitor {
 
 	// **** BOOKMARK methods ****
 
-	/** <CODE>mergeBookmarks</CODE> merges bookmark differences from the origin program to the
+	/** {@code mergeBookmarks} merges bookmark differences from the origin program to the
 	 * result program
 	 *  within the specified address set.
 	 *
@@ -3738,7 +3738,7 @@ public class ProgramMerge implements PropertyVisitor {
 	}
 
 	/**
-	 * <CODE>mergeBookmark</CODE> merges the indicated bookmark from the origin program into the
+	 * {@code mergeBookmark} merges the indicated bookmark from the origin program into the
 	 * result program at an address equivalent to the originAddress.
 	 * Merging means replace any existing bookmark of the specified type for NOTEs
 	 * or of the specified type and category for non-NOTE types.
@@ -3786,7 +3786,7 @@ public class ProgramMerge implements PropertyVisitor {
 
 	// **** USER DEFINED PROPERTY methods ****
 
-	/** <CODE>mergeProperties</CODE> merges user defined property differences
+	/** {@code mergeProperties} merges user defined property differences
 	 *  within the specified address set.
 	 *
 	 * @param originAddressSet the addresses to be merged from the origin program.

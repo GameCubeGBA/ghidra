@@ -22,7 +22,7 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
 
 /**
- * The <CODE>SpacerFieldLocation</CODE> class contains specific location information
+ * The {@code SpacerFieldLocation} class contains specific location information
  * within a spacer field of a CodeUnitLocation object.
  */
 public class SpacerFieldLocation extends CodeUnitLocation {

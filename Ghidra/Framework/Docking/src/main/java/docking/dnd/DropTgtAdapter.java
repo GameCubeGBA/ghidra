@@ -24,7 +24,7 @@ import ghidra.util.Msg;
 /**
  * Class to handle notifications of drag and drop operations that occur on the DropTarget 
  * object. The DropTarget is the component that accepts drops during a drag and drop operation. 
- * The <code>drop</code> method actually transfers the data.
+ * The {@code drop} method actually transfers the data.
  */
 public class DropTgtAdapter implements DropTargetListener {
 

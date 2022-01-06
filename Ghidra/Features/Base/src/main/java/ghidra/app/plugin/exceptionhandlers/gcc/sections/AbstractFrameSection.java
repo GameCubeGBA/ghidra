@@ -98,7 +98,7 @@ abstract class AbstractFrameSection implements CieSource {
 	 * comment on it.
 	 * @param curAddress the address with the CIE
 	 * @param isInDebugFrame true indicates the frame containing this CIE is a debug frame.
-	 * @return the <code>Cie</code> that was created
+	 * @return the {@code Cie} that was created
 	 * @throws MemoryAccessException if memory for the CIE couldn't be read
 	 * @throws ExceptionHandlerFrameException if a problem was encountered
 	 */
@@ -120,7 +120,7 @@ abstract class AbstractFrameSection implements CieSource {
 	 * retrieves an existing object (by address), and creates a new CIE if not found.
 	 * @param curAddress the address with the CIE
 	 * @param isInDebugFrame true indicates the frame containing this CIE is a debug frame.
-	 * @return the <code>Cie</code> that was either previously created, or a newly minted object.
+	 * @return the {@code Cie} that was either previously created, or a newly minted object.
 	 * @throws MemoryAccessException if memory for the CIE couldn't be read
 	 * @throws ExceptionHandlerFrameException if a problem was encountered
 	 */

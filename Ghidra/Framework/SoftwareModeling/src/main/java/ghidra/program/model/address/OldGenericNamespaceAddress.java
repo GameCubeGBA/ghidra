@@ -17,7 +17,7 @@ package ghidra.program.model.address;
 
 
 /**
- * <code>OldGenericNamespaceAddress</code> provides a means of instantiating namespace 
+ * {@code OldGenericNamespaceAddress} provides a means of instantiating namespace
  * oriented addresses which were previously used for External, Stack and Register addresses.
  * This class is needed to facilitate an upgrade since this concept is no longer supported by Address.
  */

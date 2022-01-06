@@ -22,7 +22,7 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
 
 /**
- * The <CODE>FieldNameFieldLocation</CODE> class provides specific information
+ * The {@code FieldNameFieldLocation} class provides specific information
  * about the Function Name field within a program location.
  */
 public class FieldNameFieldLocation extends CodeUnitLocation {

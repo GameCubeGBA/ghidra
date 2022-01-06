@@ -77,9 +77,9 @@ public abstract class ThreadedTableModel<ROW_OBJECT, DATA_SOURCE>
 	 * This variable can be in one of three states:
 	 * 	<ul>
 	 * 		<li>null - signals that there is no filter change taking place</li>
-	 * 		<li>An instance of <code>NullTableFilter</code> - the client has removed the current
+	 * 		<li>An instance of {@code NullTableFilter} - the client has removed the current
 	 *          filter by calling {@link #setTableFilter(TableFilter)} with a null value</li>
-	 * 		<li>An instance of a custom <code>TableFilter</code> - the client has changed the
+	 * 		<li>An instance of a custom {@code TableFilter} - the client has changed the
 	 *          filter to a non-null value by calling {@link #setTableFilter(TableFilter)}</li>
 	 *  </ul>
 	 */
@@ -214,7 +214,7 @@ public abstract class ThreadedTableModel<ROW_OBJECT, DATA_SOURCE>
 	 * @param monitor the task monitor to check for cancellations and to update progress
 	 *
 	 * @throws CancelledException if the task monitor has been cancelled and a call is made
-	 *         to <code>monitor.checkCancelled();</code>.
+	 *         to {@code monitor.checkCancelled();}.
 	 */
 	protected abstract void doLoad(Accumulator<ROW_OBJECT> accumulator, TaskMonitor monitor)
 			throws CancelledException;
@@ -413,7 +413,7 @@ public abstract class ThreadedTableModel<ROW_OBJECT, DATA_SOURCE>
 
 	/**
 	 * Override this to change how filtering is performed.  This implementation will do nothing
-	 * if a <code>TableFilter</code> has not been set via a call to {@link #setTableFilter(TableFilter)}.
+	 * if a {@code TableFilter} has not been set via a call to {@link #setTableFilter(TableFilter)}.
 	 * 
 	 *
 	 * @param data The list of data to be filtered.
@@ -469,7 +469,7 @@ public abstract class ThreadedTableModel<ROW_OBJECT, DATA_SOURCE>
 	}
 
 	/**
-	 * Sets the given <code>TableFilter</code> on this model.  This table filter will then be used
+	 * Sets the given {@code TableFilter} on this model.  This table filter will then be used
 	 * by this model in the default {@link #doFilter(List, TableSortingContext, TaskMonitor)}
 	 * method.
 	 * @param tableFilter The filter to use for table filtering.

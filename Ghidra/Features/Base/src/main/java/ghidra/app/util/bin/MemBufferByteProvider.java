@@ -21,7 +21,7 @@ import ghidra.program.model.mem.MemBuffer;
 import ghidra.program.model.mem.MemoryAccessException;
 
 /**
- * <code>MemBufferByteProvider</code> provide a {@link ByteProvider} backed by
+ * {@code MemBufferByteProvider} provide a {@link ByteProvider} backed by
  * a {@link MemBuffer}.
  */
 public class MemBufferByteProvider implements ByteProvider {

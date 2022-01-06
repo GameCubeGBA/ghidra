@@ -18,7 +18,7 @@ package db;
 import java.io.IOException;
 
 /**
- * <code>DBFieldIterator</code> provides the ability to iterate over
+ * {@code DBFieldIterator} provides the ability to iterate over
  * Field values within a table.
  */
 public interface DBFieldIterator {

@@ -105,7 +105,7 @@ public class HistoryList<T> {
 	 * list.
 	 *   
 	 * <p>For correct behavior when not allowing duplicates, ensure you have defined an 
-	 * <code>equals</code> method to work as you expect.  If two different items are considered
+	 * {@code equals} method to work as you expect.  If two different items are considered
 	 * equal, then this class will only remove the duplicate if the equals method returns true.
 	 * 
 	 * <p>The default is false
@@ -128,7 +128,7 @@ public class HistoryList<T> {
 	}
 
 	/**
-	 * Adds an item to this history list.  <code>null</code> values are ignored.
+	 * Adds an item to this history list.  {@code null} values are ignored.
 	 * 
 	 * <p>Calls to this method during selection notification will have no effect.  If you need
 	 * to update the history during a notification, then you must do so at a later time, perhaps

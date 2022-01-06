@@ -24,7 +24,7 @@ import db.buffers.DataBuffer;
 import ghidra.util.exception.AssertException;
 
 /**
- * <code>DBBuffer</code> provides storage for large data objects utilizing a common
+ * {@code DBBuffer} provides storage for large data objects utilizing a common
  * buffer management system.  Smaller data buffers are allocated and chained as needed.
  * All instances of DBBuffer must be immediately discarded following an undo or redo on the 
  * associated DBHandle.
@@ -472,7 +472,7 @@ public class ChainedBuffer implements Buffer {
 
 	/**
 	 * Attempt to shrink this DBBuffer object into a single data buffer.
-	 * The current <code>size</code> field reflects the new small size.
+	 * The current {@code size} field reflects the new small size.
 	 * @param preserveData if true, existing data is preserved at the original offsets.  If false,
 	 * no additional effort will be expended to preserve data.
 	 * @return true if successful, false if too big for single buffer.

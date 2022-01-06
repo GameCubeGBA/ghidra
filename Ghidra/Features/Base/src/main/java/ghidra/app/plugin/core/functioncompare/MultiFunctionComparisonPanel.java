@@ -36,7 +36,7 @@ import ghidra.program.model.listing.Function;
  * boxes above the function display area that allows users to select which 
  * functions are to be compared.
  * <p>
- * Throughout this class the terms <code>source</code> and <code>target</code>
+ * Throughout this class the terms {@code source} and <code>target</code>
  * are used when referencing functions. This is because the model that backs 
  * this panel maintains a relationship between the functions being compared
  * such that each source function can only be compared to a specific set

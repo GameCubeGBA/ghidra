@@ -23,13 +23,13 @@ import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <CODE>ProgramMergeManager</CODE> is a class for merging the differences between two
- * programs as specified by a <CODE>ProgramMergeFilter</CODE> and the address 
+ * {@code ProgramMergeManager} is a class for merging the differences between two
+ * programs as specified by a {@code ProgramMergeFilter} and the address
  * ranges to be merged.
  * <P>Program1 is the program being modified by the merge. Program2 is source
  * for obtaining differences to apply to program1.
  * <P>
- * <CODE>ProgramDiff</CODE> is being used to determine the differences between
+ * {@code ProgramDiff} is being used to determine the differences between
  * the two programs.
  * <P>If name conflicts occur while merging, the item (for example, symbol) will
  * be merged with a new name that consists of the original name followed by "_conflict"
@@ -54,7 +54,7 @@ public class ProgramMergeManager {
 	private ProgramMerge merger;
 
 	/**
-	 * <CODE>ProgramMergeManager</CODE> allows the merging of differences from program1
+	 * {@code ProgramMergeManager} allows the merging of differences from program1
 	 * or program2 into the merged program.
 	 *
 	 * @param program1 the first program (read only) for the merge.
@@ -72,7 +72,7 @@ public class ProgramMergeManager {
 	}
 
 	/**
-	 * <CODE>ProgramMergeManager</CODE> allows the merging of differences from program1
+	 * {@code ProgramMergeManager} allows the merging of differences from program1
 	 * or program2 into the merged program.
 	 *
 	 * @param program1 the first program for the merge. This program will get 
@@ -479,7 +479,7 @@ public class ProgramMergeManager {
     }
 
 	/**
-	 * <CODE>mergeProgramContext</CODE> merges all program context register values
+	 * {@code mergeProgramContext} merges all program context register values
 	 * (as indicated) in the specified address set from the second program. 
 	 * It merges them into the merge program.
 	 *
@@ -511,7 +511,7 @@ public class ProgramMergeManager {
 		merger.mergeProgramContext(diffAddrSet2, monitor);
 	}
 
-	/** <CODE>mergeBytes</CODE> merges byte differences within the specified
+	/** {@code mergeBytes} merges byte differences within the specified
 	 *  address set. The program number indicates whether to get the bytes from
 	 *  program1 or program2 of the merge.
 	 *
@@ -545,7 +545,7 @@ public class ProgramMergeManager {
 	}
 
 	/**
-	 * <CODE>mergeCodeUnits</CODE> merges all instructions and/or data
+	 * {@code mergeCodeUnits} merges all instructions and/or data
 	 * (as indicated) in the specified address set from the second program. 
 	 * It merges them into the merge program. When merging
 	 * instructions, the bytes are also moved if they differ.
@@ -629,7 +629,7 @@ public class ProgramMergeManager {
 	}
 
 	/**
-	 * <CODE>mergeComments</CODE> merges all comments
+	 * {@code mergeComments} merges all comments
 	 * in the specified address set from the second program 
 	 * based on the current merge filter setting.
 	 * It merges them into the merge program.
@@ -689,7 +689,7 @@ public class ProgramMergeManager {
 		merger.mergeCommentType(p2MergeSet, mergeCommentType, applyType, monitor);
 	}
 
-	/** <CODE>replaceFunctionSymbols</CODE> merges function symbol differences within the specified
+	/** {@code replaceFunctionSymbols} merges function symbol differences within the specified
 	 *  address set. The program number indicates whether to get the functions from
 	 *  program1 or program2 of the merge.
 	 *
@@ -710,7 +710,7 @@ public class ProgramMergeManager {
 		merger.replaceFunctionNames(p2MergeSet, monitor);
 	}
 
-	/** <CODE>mergeFunctions</CODE> merges function differences within the specified
+	/** {@code mergeFunctions} merges function differences within the specified
 	 *  address set based on the current merge filter setting.
 	 *
 	 * @param p1MergeSet the addresses to be merged.
@@ -735,7 +735,7 @@ public class ProgramMergeManager {
 	}
 
 	/**
-	 * <CODE>mergeReferences</CODE> merges all references
+	 * {@code mergeReferences} merges all references
 	 * in the specified address set from the second program
 	 * based on the current merge filter setting.
 	 * It merges them into the merge program.
@@ -762,7 +762,7 @@ public class ProgramMergeManager {
 	}
 
 	/**
-	 * <CODE>mergeLabels</CODE> merges all symbols and aliases
+	 * {@code mergeLabels} merges all symbols and aliases
 	 * in the specified address set from the second program 
 	 * based on the current merge filter setting.
 	 * It merges them into the merge program.
@@ -793,7 +793,7 @@ public class ProgramMergeManager {
 		}
 	}
 
-	/** <CODE>mergeBookmarks</CODE> merges bookmark differences 
+	/** {@code mergeBookmarks} merges bookmark differences
 	 *  within the specified address set.
 	 *
 	 * @param p1MergeSet the addresses to be merged.
@@ -817,7 +817,7 @@ public class ProgramMergeManager {
 		merger.mergeBookmarks(diffAddrSet2, monitor);
 	}
 
-	/** <CODE>mergeProperties</CODE> merges user defined property differences 
+	/** {@code mergeProperties} merges user defined property differences
 	 *  within the specified address set based on the current merge filter setting.
 	 *
 	 * @param p1MergeSet the addresses to be merged.

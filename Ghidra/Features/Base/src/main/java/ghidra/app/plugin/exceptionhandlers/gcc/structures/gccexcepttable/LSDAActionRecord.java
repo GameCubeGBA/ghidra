@@ -48,7 +48,7 @@ public class LSDAActionRecord extends GccAnalysisClass {
 
 	/**
 	 * Constructor for an action record.
-	 * <br>Note: The <code>create(Address)</code> method must be called after constructing an 
+	 * <br>Note: The {@code create(Address)} method must be called after constructing an
 	 * LSDAActionRecord to associate it with an address before any of its "get..." methods are called.
 	 * @param monitor task monitor to see if the user has cancelled analysis.
 	 * @param program the program containing the action record.

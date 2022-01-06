@@ -22,8 +22,8 @@ import ghidra.program.model.listing.Function;
 
 /**
  * Defines the structure of a function comparison. The relationship is strictly
- * one-to-many; a single <code>source</code> function may be associated with one 
- * or more <code>target</code> functions. 
+ * one-to-many; a single {@code source} function may be associated with one
+ * or more {@code target} functions.
  * <p>
  * This is the basic unit for the 
  * {@link FunctionComparisonModel function comparison data model}

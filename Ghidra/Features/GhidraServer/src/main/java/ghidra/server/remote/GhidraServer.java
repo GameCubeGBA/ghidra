@@ -59,7 +59,7 @@ import utilities.util.FileUtilities;
 import utility.application.ApplicationLayout;
 
 /**
- * <code>GhidraServer</code> provides the main Ghidra server application and
+ * {@code GhidraServer} provides the main Ghidra server application and
  * implements GhidraServerHandle which facilitates remote access to services
  * provided by a repository manager. The single instance of GhidraServer is set
  * within the RMI Registry which is accessible on a user specified port.

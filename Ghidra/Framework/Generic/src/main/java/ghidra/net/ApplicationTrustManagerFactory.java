@@ -27,7 +27,7 @@ import ghidra.framework.preferences.Preferences;
 import ghidra.util.Msg;
 
 /**
- * <code>ApplicationTrustManagerFactory</code> provides the ability to establish
+ * {@code ApplicationTrustManagerFactory} provides the ability to establish
  * acceptable certificate authorities to be used with SSL connections and PKI 
  * authentication.  
  * <p>
@@ -70,7 +70,7 @@ public class ApplicationTrustManagerFactory {
 	private static Exception caError;
 
 	/**
-	 * <code>ApplicationTrustManagerFactory</code> constructor
+	 * {@code ApplicationTrustManagerFactory} constructor
 	 */
 	private ApplicationTrustManagerFactory() {
 		// no instantiation - static methods only
@@ -207,7 +207,7 @@ public class ApplicationTrustManagerFactory {
 	}
 
 	/**
-	 * <code>OpenTrustManager</code> provides a means of adopting an "open" trust policy
+	 * {@code OpenTrustManager} provides a means of adopting an "open" trust policy
 	 * where any peer certificate will be considered acceptable.
 	 */
 	private static class OpenTrustManager implements X509TrustManager {

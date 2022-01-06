@@ -98,7 +98,7 @@ public class ClassSearcher {
 	 * 
 	 * @param c the filter class
 	 * @param classFilter A Predicate that tests class objects (that are already of type T)
-	 * 			for further filtering, <code>null</code> is equivalent to "return true"
+	 * 			for further filtering, {@code null} is equivalent to "return true"
 	 * @return {@link ExtensionPointProperties#priority() priority-sorted} list of
 	 * 			classes that implement or extend T and pass the filtering test performed by the
 	 * 			predicate
@@ -135,7 +135,7 @@ public class ClassSearcher {
 	 * 
 	 * @param c the filter class
 	 * @param filter A Predicate that tests class objects (that are already of type T)
-	 * 			for further filtering, <code>null</code> is equivalent to "return true"
+	 * 			for further filtering, {@code null} is equivalent to "return true"
 	 * @return {@link ExtensionPointProperties#priority() priority-sorted} list of
 	 * 			classes instances that implement or extend T and pass the filtering test performed by
 	 *          the predicate

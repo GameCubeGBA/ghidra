@@ -25,7 +25,7 @@ import ghidra.util.exception.AssertException;
 import utilities.util.ArrayUtilities;
 
 /**
- * <code>BitFieldDataType</code> provides a means of defining a minimally sized bit-field
+ * {@code BitFieldDataType} provides a means of defining a minimally sized bit-field
  * for use within data structures.  The length (i.e., storage size) of this bitfield datatype is
  * the minimum number of bytes required to contain the bitfield at its specified offset.
  * The effective bit-size of a bitfield will be limited by the size of the base

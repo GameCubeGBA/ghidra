@@ -70,7 +70,7 @@ import util.CollectionUtils;
  * this class and override {@link #createPrimaryGraphViewer(VisualGraphLayout, Dimension)}
  * and {@link #createSatelliteGraphViewer(GraphViewer, Dimension)} as needed.   This allows
  * them to customize renderers and other viewer attributes.  To use the subclass, see the
- * {@link VisualGraphView} and its <code>installGraphViewer()</code> method.
+ * {@link VisualGraphView} and its {@code installGraphViewer()} method.
  * 
  * @param <V> the vertex type
  * @param <E> the edge type

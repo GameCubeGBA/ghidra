@@ -25,7 +25,7 @@ import ghidra.framework.model.ProjectLocator;
 import ghidra.framework.store.FileSystem;
 
 /**
- * <code>DefaultLocalGhidraProtocolConnector</code> provides support for the
+ * {@code DefaultLocalGhidraProtocolConnector} provides support for the
  * Ghidra URL protocol which specifies a local Ghidra project without extension.
  * This connector is responsible for producing a suitable {@link ProjectLocator}
  * for accessing the project files.

@@ -25,7 +25,7 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.symbol.*;
 
 /**
- * The <CODE>LableFieldLocation</CODE> class contains specific location information
+ * The {@code LableFieldLocation} class contains specific location information
  * within the LABEL field of a CodeUnitLocation object.
  */
 public class LabelFieldLocation extends CodeUnitLocation {

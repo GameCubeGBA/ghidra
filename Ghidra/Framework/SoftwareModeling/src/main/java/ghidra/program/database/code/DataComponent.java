@@ -24,7 +24,7 @@ import ghidra.program.model.listing.Data;
 import ghidra.program.model.mem.MemoryAccessException;
 
 /**
- * <code>DataComponent</code> provides Data and CodeUnit access to Struct and Array components.
+ * {@code DataComponent} provides Data and CodeUnit access to Struct and Array components.
  *
  * NOTE!! DataComponents only have a unique key within its parent Struct/Array.  This places a constraint on
  * the use of the key field and getKey() method on the underlying classes CodeUnitDB and DataDB.

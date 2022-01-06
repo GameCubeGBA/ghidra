@@ -34,9 +34,9 @@ public class IMG implements Comparable<IMG> {
 	 * The file on this filesystem; null if the file does not exists or of the image src 
 	 * points to a remote URL or a runtime url.
 	 * <P>
-	 * An example remote URL is one that points to a web server, like <code>http://...</code>
+	 * An example remote URL is one that points to a web server, like {@code http://...}
 	 * <BR>An example runtime URL is one that the help system knows how to resolve at 
-	 * runtime, like <code>&lt;IMG SRC='Icons.REFRESH_ICON /'&gt;</code>
+	 * runtime, like {@code <IMG SRC='Icons.REFRESH_ICON /'>}
 	 */
 	private final Path imgFile;
 	private final ImageLocation imageLocation;

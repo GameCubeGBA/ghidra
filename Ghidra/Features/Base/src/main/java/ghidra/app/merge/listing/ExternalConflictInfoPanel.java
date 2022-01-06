@@ -24,7 +24,7 @@ import docking.widgets.label.GDHtmlLabel;
 import ghidra.app.merge.util.ConflictUtility;
 
 /**
- * <code>ExternalConflictInfoPanel</code> appears above the 4 listings in the ListingMergeWindow.
+ * {@code ExternalConflictInfoPanel} appears above the 4 listings in the ListingMergeWindow.
  * It indicates the Externals phase.
  * It also indicates how many groups of conflicts to resolve,
  * how many individual conflict need resolving for that named external, 
@@ -42,7 +42,7 @@ public class ExternalConflictInfoPanel extends JPanel {
 	private JLabel westLabel;
 
 	/**
-	 * Creates a new <code>ExternalConflictInfoPanel</code> to use above the listings.
+	 * Creates a new {@code ExternalConflictInfoPanel} to use above the listings.
 	 */
 	public ExternalConflictInfoPanel() {
 		super();

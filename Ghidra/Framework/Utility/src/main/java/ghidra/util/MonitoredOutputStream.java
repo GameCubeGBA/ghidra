@@ -40,15 +40,15 @@ public class MonitoredOutputStream extends OutputStream {
 	}
 
 	/**
-	 * Writes the specified <code>byte</code> to this output stream. 
+	 * Writes the specified {@code byte} to this output stream.
 	 * <p>
-	 * The <code>write</code> method of <code>FilterOutputStream</code> 
-	 * calls the <code>write</code> method of its underlying output stream, 
-	 * that is, it performs <code>out.write(b)</code>.
+	 * The {@code write} method of <code>FilterOutputStream</code>
+	 * calls the {@code write} method of its underlying output stream,
+	 * that is, it performs {@code out.write(b)}.
 	 * <p>
-	 * Implements the abstract <code>write</code> method of <code>OutputStream</code>. 
+	 * Implements the abstract {@code write} method of <code>OutputStream</code>.
 	 *
-	 * @param      b   the <code>byte</code>.
+	 * @param      b   the {@code byte}.
 	 * @exception  IOException  if an I/O error occurs.
 	 */
 	@Override
@@ -66,16 +66,16 @@ public class MonitoredOutputStream extends OutputStream {
 	}
 
 	/**
-	 * Writes <code>b.length</code> bytes to this output stream. 
+	 * Writes {@code b.length} bytes to this output stream.
 	 * <p>
-	 * The <code>write</code> method of <code>FilterOutputStream</code> 
-	 * calls its <code>write</code> method of three arguments with the 
-	 * arguments <code>b</code>, <code>0</code>, and 
-	 * <code>b.length</code>. 
+	 * The {@code write} method of <code>FilterOutputStream</code>
+	 * calls its {@code write} method of three arguments with the
+	 * arguments {@code b}, <code>0</code>, and
+	 * {@code b.length}.
 	 * <p>
 	 * Note that this method does not call the one-argument 
-	 * <code>write</code> method of its underlying stream with the single 
-	 * argument <code>b</code>. 
+	 * {@code write} method of its underlying stream with the single
+	 * argument {@code b}.
 	 *
 	 * @param      b   the data to be written.
 	 * @exception  IOException  if an I/O error occurs.
@@ -87,17 +87,17 @@ public class MonitoredOutputStream extends OutputStream {
 	}
 
 	/**
-	 * Writes <code>len</code> bytes from the specified 
-	 * <code>byte</code> array starting at offset <code>off</code> to 
+	 * Writes {@code len} bytes from the specified
+	 * {@code byte} array starting at offset <code>off</code> to
 	 * this output stream. 
 	 * <p>
-	 * The <code>write</code> method of <code>FilterOutputStream</code> 
-	 * calls the <code>write</code> method of one argument on each 
-	 * <code>byte</code> to output. 
+	 * The {@code write} method of <code>FilterOutputStream</code>
+	 * calls the {@code write} method of one argument on each
+	 * {@code byte} to output.
 	 * <p>
-	 * Note that this method does not call the <code>write</code> method 
+	 * Note that this method does not call the {@code write} method
 	 * of its underlying input stream with the same arguments. Subclasses 
-	 * of <code>FilterOutputStream</code> should provide a more efficient 
+	 * of {@code FilterOutputStream} should provide a more efficient
 	 * implementation of this method. 
 	 *
 	 * @param      b     the data.
@@ -125,8 +125,8 @@ public class MonitoredOutputStream extends OutputStream {
 	 * Flushes this output stream and forces any buffered output bytes 
 	 * to be written out to the stream. 
 	 * <p>
-	 * The <code>flush</code> method of <code>FilterOutputStream</code> 
-	 * calls the <code>flush</code> method of its underlying output stream. 
+	 * The {@code flush} method of <code>FilterOutputStream</code>
+	 * calls the {@code flush} method of its underlying output stream.
 	 *
 	 * @exception  IOException  if an I/O error occurs.
 	 */
@@ -139,9 +139,9 @@ public class MonitoredOutputStream extends OutputStream {
 	 * Closes this output stream and releases any system resources 
 	 * associated with the stream. 
 	 * <p>
-	 * The <code>close</code> method of <code>FilterOutputStream</code> 
-	 * calls its <code>flush</code> method, and then calls the 
-	 * <code>close</code> method of its underlying output stream. 
+	 * The {@code close} method of <code>FilterOutputStream</code>
+	 * calls its {@code flush} method, and then calls the
+	 * {@code close} method of its underlying output stream.
 	 *
 	 * @exception  IOException  if an I/O error occurs.
 	 * @see        java.io.FilterOutputStream#flush()

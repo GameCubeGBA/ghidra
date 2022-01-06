@@ -19,7 +19,7 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.*;
 
 /**
- * The <CODE>BytesFieldLocation</CODE> class provides specific information
+ * The {@code BytesFieldLocation} class provides specific information
  *  about the BYTES field within a program location.
 */
 

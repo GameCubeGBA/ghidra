@@ -31,29 +31,29 @@ import java.util.List;
 public class RelocByIndexGroup extends Relocation {
 	/**
 	 * This "RelocSmByImport" (SYMB) instruction adds the address of the imported symbol 
-	 * whose index is held in <code>index</code> to the word pointed to by 
-	 * <code>relocAddress</code>. After the addition, <code>relocAddress</code> 
-	 * points to just past the modified word, and <code>importindex</code> 
-	 * is set to <code>index+1</code>.
+	 * whose index is held in {@code index} to the word pointed to by
+	 * {@code relocAddress}. After the addition, <code>relocAddress</code>
+	 * points to just past the modified word, and {@code importindex}
+	 * is set to {@code index+1}.
 	 */
 	public final static int kPEFRelocSmByImport = 0;
 	/**
-	 * This "RelocSmSetSectC" (CDIS) instruction sets the variable <code>sectionC</code> 
+	 * This "RelocSmSetSectC" (CDIS) instruction sets the variable {@code sectionC}
 	 * to the memory address of the instantiated section 
-	 * specified by <code>index</code>.
+	 * specified by {@code index}.
 	 */
 	public final static int kPEFRelocSmSetSectC = 1;
 	/**
-	 * This "RelocSmSetSectD" (DTIS) instruction sets the variable <code>sectionD</code>
+	 * This "RelocSmSetSectD" (DTIS) instruction sets the variable {@code sectionD}
 	 * to the memory adddress of the instantiated section 
-	 * specified by <code>index</code>.
+	 * specified by {@code index}.
 	 */
 	public final static int kPEFRelocSmSetSectD = 2;
 	/**
 	 * This "RelocSmBySection" (SECN) instruction adds the address of the instantiated 
-	 * section specified by <code>index</code> to the word 
-	 * pointed to by <code>relocAddress</code>. After
-	 * execution, <code>relocAddress</code> points to just 
+	 * section specified by {@code index} to the word
+	 * pointed to by {@code relocAddress}. After
+	 * execution, {@code relocAddress} points to just
 	 * past the modified word.
 	 */
 	public final static int kPEFRelocSmBySection = 3;

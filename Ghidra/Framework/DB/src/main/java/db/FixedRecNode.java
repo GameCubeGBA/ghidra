@@ -21,7 +21,7 @@ import db.buffers.DataBuffer;
 import ghidra.util.exception.AssertException;
 
 /**
- * <code>FixedRecNode</code> is an implementation of a BTree leaf node
+ * {@code FixedRecNode} is an implementation of a BTree leaf node
  * which utilizes long key values and stores fixed-length records.
  * <p>
  * This type of node has the following layout within a single DataBuffer 

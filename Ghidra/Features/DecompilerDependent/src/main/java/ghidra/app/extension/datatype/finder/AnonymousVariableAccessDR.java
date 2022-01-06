@@ -40,9 +40,9 @@ import ghidra.program.model.data.DataType;
  *	return b-><b>foo_array[1].some_field</b>;
  * </pre>
  * 
- * In this case, <code><b>foo_array[1]</b></code> is a <code>Foo</code>, whose 
+ * In this case, <code><b>foo_array[1]</b></code> is a {@code Foo}, whose
  * <code><b>some_field</b></code> is 
- * being accessed anonymously, since there is no variable of <code>Foo</code> declared 
+ * being accessed anonymously, since there is no variable of {@code Foo} declared
  * in the current function. 
  */
 public class AnonymousVariableAccessDR extends VariableAccessDR {

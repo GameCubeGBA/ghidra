@@ -20,7 +20,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * <code>DataDirectoryException</code> is thrown when a folder item can not be 
+ * {@code DataDirectoryException} is thrown when a folder item can not be
  * created because its associated data directory already exists.
  */
 public class DataDirectoryException extends IOException {

@@ -21,7 +21,7 @@ import ghidra.util.Msg;
 import ghidra.util.exception.AssertException;
 
 /**
- * <code>BitFieldDBDataType</code> extends BitFieldDataType for DataTypeManagerDB use.
+ * {@code BitFieldDBDataType} extends BitFieldDataType for DataTypeManagerDB use.
  * This class provides the ability to generate a datatype ID and reconstruct a bit-field
  * datatype from an ID.
  */

@@ -37,8 +37,8 @@ import org.apache.commons.lang3.StringUtils;
  *  <LI>{@link IterableUtils}</LI>
  *  <LI>{@link IteratorUtils}</LI>
  *  <LI>{@link StringUtils#join(Iterable, char)} - for pretty printing collections with newlines</LI>
- *  <LI><code>Apache CollectionUtils.collect(Collection, Transformer)</code> - to turn a 
- *      collection in to collection of strings when the default <code>toString()</code> is lacking</LI>
+ *  <LI>{@code Apache CollectionUtils.collect(Collection, Transformer)} - to turn a
+ *      collection in to collection of strings when the default {@code toString()} is lacking</LI>
  * </OL>
  */
 public class CollectionUtils {
@@ -235,14 +235,14 @@ public class CollectionUtils {
 	}
 
 	/**
-	 * Checks that the elements in the given list are of the type specified by <code>clazz</code>
+	 * Checks that the elements in the given list are of the type specified by {@code clazz}
 	 * and then casts the list to be of the specified type.
 	 *
 	 * @param list  the source list
 	 * @param clazz the class of T
 	 * @return a casted list of type T
 	 * @throws IllegalArgumentException if the given list contains elements that are not of the
-	 *         type specified by <code>clazz</code>.
+	 *         type specified by {@code clazz}.
 	 */
 	@SuppressWarnings("unchecked")
 	// we checked the elements of the list
@@ -264,13 +264,13 @@ public class CollectionUtils {
 
 	/**
 	 * Checks that the elements in the given collection are of the type specified by
-	 * <code>clazz</code> and then casts the collection to be of the specified type.
+	 * {@code clazz} and then casts the collection to be of the specified type.
 	 *
 	 * @param collection  the source collection
 	 * @param clazz the class of T
 	 * @return a casted list of type T
 	 * @throws IllegalArgumentException if the given collection contains elements that are
-	 *         not of the type specified by <code>clazz</code>.
+	 *         not of the type specified by {@code clazz}.
 	 */
 	@SuppressWarnings("unchecked")
 	// we checked the elements of the collection

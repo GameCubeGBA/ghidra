@@ -30,7 +30,7 @@ import ghidra.util.exception.DuplicateFileException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>LocalFileSystem</code> provides access to FolderItem's which
+ * {@code LocalFileSystem} provides access to FolderItem's which
  * exist within a File-based directory structure.  Although FolderItem
  * caching is highly recommended, it is not provided by this implementation
  * and should be provided by an encompassing set of folder/file objects.

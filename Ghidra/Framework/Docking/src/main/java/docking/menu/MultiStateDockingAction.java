@@ -77,7 +77,7 @@ public abstract class MultiStateDockingAction<T> extends DockingAction {
 
 	/**
 	 * Use this constructor explicitly when this action is used in a toolbar, passing true
-	 * for <code>isToolbarAction</code> (see the javadoc header note).
+	 * for {@code isToolbarAction} (see the javadoc header note).
 	 *
 	 * @param name the action name
 	 * @param owner the owner
@@ -102,9 +102,9 @@ public abstract class MultiStateDockingAction<T> extends DockingAction {
 	public abstract void actionStateChanged(ActionState<T> newActionState, EventTrigger trigger);
 
 	/**
-	 * If <code>doPerformAction</code> is <code>true</code>, then, when the user clicks the
+	 * If {@code doPerformAction} is <code>true</code>, then, when the user clicks the
 	 * button and not the drop-down arrow, the {@link #doActionPerformed(ActionContext)}
-	 * method will be called.  If <code>doPerformAction</code> is <code>false</code>, then, when
+	 * method will be called.  If {@code doPerformAction} is <code>false</code>, then, when
 	 * the user clicks the button and not the drop-down arrow, the popup menu will be shown, just
 	 * as if the user had clicked the drop-down arrow.
 	 * <p>

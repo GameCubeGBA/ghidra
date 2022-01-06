@@ -29,7 +29,7 @@ import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>DBContentHandler</code> provides an abstract ContentHandler for 
+ * {@code DBContentHandler} provides an abstract ContentHandler for
  * domain object content which is stored within a database file.
  * This class provides helper methods for working with database files.
  */

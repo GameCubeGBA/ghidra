@@ -33,7 +33,7 @@ import ghidra.app.merge.util.ConflictUtility;
 import ghidra.util.SystemUtilities;
 
 /**
- * <code>ScrollingListChoicesPanel</code> provides a table type of format for resolving
+ * {@code ScrollingListChoicesPanel} provides a table type of format for resolving
  * Each row that has choices represents the choices for a single conflict. Each conflict
  * choice has a corresponding radio button and scrolling table/list of text.
  */

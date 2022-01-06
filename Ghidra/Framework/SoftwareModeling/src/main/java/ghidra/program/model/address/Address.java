@@ -167,9 +167,9 @@ public interface Address extends Comparable<Address> {
 	public int getSize();
 
 	/**
-	 * Calculates the displacement between two addresses (<code>this - addr</code>)
+	 * Calculates the displacement between two addresses ({@code this - addr})
 	 *
-	 * @param addr  the Address to subtract from <code>this</code> address
+	 * @param addr  the Address to subtract from {@code this} address
 	 * @return the difference (thisAddress.offset - thatAddress.offset)
 	 * @throws IllegalArgumentException if the two addresses are not in the same address space
 	 */
@@ -321,21 +321,21 @@ public interface Address extends Comparable<Address> {
 
 	/**
 	 * Compares this Address to the specified object.
-	 * The result is <code>true</code> if and only if the argument is not 
-	 * <code>null</code> and is a <code>Address</code> object that represents 
+	 * The result is {@code true} if and only if the argument is not
+	 * {@code null} and is a <code>Address</code> object that represents
 	 * the same address as this object. 
 	 *
-	 * @param   o   the object to compare this <code>String</code>
+	 * @param   o   the object to compare this {@code String}
 	 *              against.
-	 * @return  <code>true</code> if the <code>Addresses</code>are equal;
-	 *          <code>false</code> otherwise.
+	 * @return  {@code true} if the <code>Addresses</code>are equal;
+	 *          {@code false} otherwise.
 	 */
 	@Override
 	public boolean equals(Object o);
 
 	/**
 	 * Returns a hashcode for this Address. The hashcode for an 
-	 * <code>Address</code> should be a value such that two Address
+	 * {@code Address} should be a value such that two Address
 	 * objects which are equal will return the same hashcode.
 	 * This method should generally return the same value as getLong().
 	 *

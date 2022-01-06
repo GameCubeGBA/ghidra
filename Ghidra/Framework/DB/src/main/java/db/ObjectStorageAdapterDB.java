@@ -21,7 +21,7 @@ import java.util.Arrays;
 import ghidra.util.ObjectStorage;
 
 /**
- * <code>ObjectStorageAdapterDB</code> provides an ObjectStorage 
+ * {@code ObjectStorageAdapterDB} provides an ObjectStorage
  * implementation for use by Saveable objects.  This allows Saveable objects 
  * to save or restore their state using a fixed set of primitives and primitive arrays. 
  * This implementation provides various data access methods for storing/retrieving data.

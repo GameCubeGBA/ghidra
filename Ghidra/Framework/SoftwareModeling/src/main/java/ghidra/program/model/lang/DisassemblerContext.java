@@ -20,13 +20,13 @@ import ghidra.program.model.address.Address;
 public interface DisassemblerContext extends ProcessorContext {
 
 	/**
-	 * Combines <code>value</code> with any previously saved future
-	 * register value at <code>address</code> or any value stored in the program if there is no
+	 * Combines {@code value} with any previously saved future
+	 * register value at {@code address} or any value stored in the program if there is no
 	 * previously saved future value.  Use this method when multiple flows to the same address
 	 * don't matter or the flowing from address is unknown.
 	 * <br>
-	 * When <code>value</code> has conflicting bits with the previously
-	 * saved value, <code>value</code> will take precedence.
+	 * When {@code value} has conflicting bits with the previously
+	 * saved value, {@code value} will take precedence.
 	 * <br> 
 	 * If the register value is the value for the 
 	 * processor context register and a previously saved
@@ -40,12 +40,12 @@ public interface DisassemblerContext extends ProcessorContext {
 	public void setFutureRegisterValue(Address address, RegisterValue value);
 
 	/**
-	 * Combines <code>value</code> with any previously saved future
-	 * register value at <code>fromAddr/toAddr</code> or any value stored in the program if there is no
+	 * Combines {@code value} with any previously saved future
+	 * register value at {@code fromAddr/toAddr} or any value stored in the program if there is no
 	 * previously saved future value.
 	 * <br>
-	 * When <code>value</code> has conflicting bits with the previously
-	 * saved value, <code>value</code> will take precedence.
+	 * When {@code value} has conflicting bits with the previously
+	 * saved value, {@code value} will take precedence.
 	 * <br> 
 	 * If the register value is the value for the 
 	 * processor context register and a previously saved

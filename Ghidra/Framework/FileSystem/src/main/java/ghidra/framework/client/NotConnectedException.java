@@ -19,7 +19,7 @@ package ghidra.framework.client;
 import java.io.IOException;
 
 /**
- * <code>NotConnectedException</code> indicates that the server connection
+ * {@code NotConnectedException} indicates that the server connection
  * is down.  When this exception is thrown, the current operation should be
  * aborted.  At the time this exception is thrown, the user has already been
  * informed of a server error condition.

@@ -26,7 +26,7 @@ import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>RemoteDatabaseItem</code> provides a FolderItem implementation
+ * {@code RemoteDatabaseItem} provides a FolderItem implementation
  * for a remote database.  This item wraps an underlying versioned database
  * which corresponds to a repository item.
  */

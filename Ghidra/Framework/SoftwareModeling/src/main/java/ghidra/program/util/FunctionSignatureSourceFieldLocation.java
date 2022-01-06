@@ -23,7 +23,7 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.symbol.SourceType;
 
 /**
- * The <CODE>FunctionSignatureFieldLocation</CODE> class provides specific information
+ * The {@code FunctionSignatureFieldLocation} class provides specific information
  * about the Function Signature field within a program location.
  */
 

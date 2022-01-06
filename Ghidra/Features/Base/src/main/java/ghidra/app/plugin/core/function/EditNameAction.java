@@ -29,7 +29,7 @@ import ghidra.util.HelpLocation;
 import ghidra.util.Msg;
 
 /**
- * <CODE>EditNameAction</CODE> allows the user to rename a function.
+ * {@code EditNameAction} allows the user to rename a function.
  * Action in FunctionPlugin.
  */
 class EditNameAction extends ListingContextAction {

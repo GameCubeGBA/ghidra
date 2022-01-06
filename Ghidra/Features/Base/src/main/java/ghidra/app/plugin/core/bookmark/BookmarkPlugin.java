@@ -222,7 +222,7 @@ public class BookmarkPlugin extends ProgramPlugin
 	}
 
 	/**
-	 * Acquires <code>GoToService</code> if available.
+	 * Acquires {@code GoToService} if available.
 	 */
 	@Override
 	protected void init() {

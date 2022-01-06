@@ -43,7 +43,7 @@ import ghidra.util.HTMLUtilities;
 import ghidra.util.layout.MaximizeSpecificColumnGridLayout;
 
 /**
- * <code>VariousChoicesPanel</code> provides a table type of format for resolving
+ * {@code VariousChoicesPanel} provides a table type of format for resolving
  * multiple conflicts in one panel. Each row that has choices represents the
  * choices for a single conflict. 
  * So each row can have multiple radio buttons or multiple check boxes.

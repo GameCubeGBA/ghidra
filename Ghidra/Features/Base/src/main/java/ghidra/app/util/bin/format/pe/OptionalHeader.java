@@ -293,9 +293,9 @@ public interface OptionalHeader extends StructConverter {
 
 	/**
 	 * Returns the combined total size of all sections with
-	 * the <code>IMAGE_SCN_CNT_CODE</code> attribute.
+	 * the {@code IMAGE_SCN_CNT_CODE} attribute.
 	 * @return the combined total size of all sections with
-	 * the <code>IMAGE_SCN_CNT_CODE</code> attribute.
+	 * the {@code IMAGE_SCN_CNT_CODE} attribute.
 	 */
 	public long getSizeOfCode();
 

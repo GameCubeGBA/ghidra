@@ -36,7 +36,7 @@ import ghidra.program.model.listing.FunctionSignature;
 import ghidra.util.exception.CancelledException;
 
 /**
- * <code>EditFunctionSignatureDialog</code> provides an abstract implementation 
+ * {@code EditFunctionSignatureDialog} provides an abstract implementation
  * a function signature editor.  Use of this editor requires the presence of the tool-based
  * datatype manager service.
  */

@@ -18,7 +18,7 @@ package ghidra.util.exception;
 
 
 /**
- * <code>CancelledException</code> indicates that the user cancelled
+ * {@code CancelledException} indicates that the user cancelled
  * the current operation.
  */
 public class CancelledException extends UsrException {

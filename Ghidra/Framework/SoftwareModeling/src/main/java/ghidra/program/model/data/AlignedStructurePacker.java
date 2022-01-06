@@ -18,7 +18,7 @@ package ghidra.program.model.data;
 import java.util.List;
 
 /**
- * <code>AlignedStructurePacker</code> provides support for performing aligned packing
+ * {@code AlignedStructurePacker} provides support for performing aligned packing
  * of Structure components.
  * <p>
  * NOTE: We currently have no way of conveying or supporting explicit bitfield component pragmas 
@@ -45,7 +45,7 @@ public class AlignedStructurePacker {
 	}
 
 	/**
-	 * <code>StructurePackResult</code> provides access to aligned
+	 * {@code StructurePackResult} provides access to aligned
 	 * packing results
 	 */
 	public static class StructurePackResult {

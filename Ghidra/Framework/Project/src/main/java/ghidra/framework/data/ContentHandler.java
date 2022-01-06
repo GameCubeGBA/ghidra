@@ -34,7 +34,7 @@ import ghidra.util.task.TaskMonitor;
  * NOTE:  ALL ContentHandler CLASSES MUST END IN "ContentHandler".  If not,
  * the ClassSearcher will not find them.
  * 
- * <code>ContentHandler</code> defines an application interface for converting 
+ * {@code ContentHandler} defines an application interface for converting
  * between a specific domain object implementation and folder item storage. 
  * This interface also defines a method which provides an appropriate icon 
  * corresponding to the content.

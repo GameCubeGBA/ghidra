@@ -1499,26 +1499,8 @@ public class ElfHeader implements StructConverter, Writeable {
 	 */
 	public ElfProgramHeader getProgramHeaderProgramHeader() {
 		ElfProgramHeader[] pharr = getProgramHeaders(ElfProgramHeaderConstants.PT_PHDR);
-		if (pharr.length == 0 || pharr.length > 1) {
-			return null;
-			//throw new RuntimeException("Unable to locate PT_PHDR program header");
-		}
-		return pharr[0];
-	}
-
-	/**
-	 * Returns the program header at the specified address,
-	 * or null if no program header exists at that address.
-	 * @param virtualAddr the address of the requested program header
-	 * @return the program header with the specified address
-	 */
-	public ElfProgramHeader getProgramHeaderAt(long virtualAddr) {
-		for (ElfProgramHeader programHeader : programHeaders) {
-			if (programHeader.getVirtualAddress() == virtualAddr) {
-				return programHeader;
-			}
-		}
-		return null;
+		//throw new RuntimeException("Unable to locate PT_PHDR program header");
+		return pharr.length == 1 ? pharr[0] : null;
 	}
 
 	/**

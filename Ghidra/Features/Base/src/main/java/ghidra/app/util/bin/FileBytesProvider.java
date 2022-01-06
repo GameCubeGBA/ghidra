@@ -20,7 +20,7 @@ import java.io.*;
 import ghidra.program.database.mem.FileBytes;
 
 /**
- * <code>FileBytesProvider</code> provides a {@link ByteProvider} implementation 
+ * {@code FileBytesProvider} provides a {@link ByteProvider} implementation
  * for {@link FileBytes} object.
  */
 public class FileBytesProvider implements ByteProvider {

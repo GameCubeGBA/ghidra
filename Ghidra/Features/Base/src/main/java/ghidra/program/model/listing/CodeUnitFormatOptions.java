@@ -20,7 +20,7 @@ import ghidra.program.model.data.DataTypeDisplayOptions;
 public class CodeUnitFormatOptions {
 
 	/**
-	 * <code>ShowBlockName</code> defines the valid options for
+	 * {@code ShowBlockName} defines the valid options for
 	 * controlling the display of block names on labels.
 	 */
 	public static enum ShowBlockName {
@@ -42,7 +42,7 @@ public class CodeUnitFormatOptions {
 	}
 
 	/**
-	 * <code>ShowNamespace</code> defines the valid options for
+	 * {@code ShowNamespace} defines the valid options for
 	 * controlling the display of name-spaces on labels.
 	 */
 	public static enum ShowNamespace {

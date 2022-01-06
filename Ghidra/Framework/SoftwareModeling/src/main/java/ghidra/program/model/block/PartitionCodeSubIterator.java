@@ -23,8 +23,8 @@ import ghidra.util.task.TaskMonitor;
 import java.util.LinkedList;
 
 /**
- * <CODE>PartitionCodeSubIterator</CODE> is an implementation of
- * <CODE>CodeBlockIterator</CODE> capable of iterating in
+ * {@code PartitionCodeSubIterator} is an implementation of
+ * {@code CodeBlockIterator} capable of iterating in
  * the forward direction over "PartitionCodeSubModel code blocks".
  */
 class PartitionCodeSubIterator implements CodeBlockIterator {

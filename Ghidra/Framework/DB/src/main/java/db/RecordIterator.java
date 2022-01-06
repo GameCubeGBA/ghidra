@@ -18,7 +18,7 @@ package db;
 import java.io.IOException;
 
 /**
- * <code>RecordIterator</code> provides the ability to iterate over
+ * {@code RecordIterator} provides the ability to iterate over
  * data records within a table.
  */
 public interface RecordIterator {

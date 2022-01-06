@@ -25,7 +25,7 @@ import ghidra.util.task.TaskMonitor;
 import java.io.*;
 
 /**
- * <code>LocalDataFile</code> provides a FolderItem implementation
+ * {@code LocalDataFile} provides a FolderItem implementation
  * for a local serialized data file.  This implementation supports 
  * a non-versioned file-system only.
  * <p>

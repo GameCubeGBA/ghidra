@@ -86,7 +86,7 @@ public class BitfieldTypeApplier extends MsTypeApplier {
 	}
 
 	/**
-	 * <code>Pdb2BitField</code> provides ability to hang onto bitfield as a datatype.
+	 * {@code Pdb2BitField} provides ability to hang onto bitfield as a datatype.
 	 * This will be transformed to a normal BitFieldDataType when cloned.
 	 */
 	private class Pdb2BitField extends PdbBitField {

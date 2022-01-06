@@ -68,7 +68,7 @@ public class AttributedString {
 	 * @param text The text that this class describes.
 	 * @param textColor The color to paint the text.
 	 * @param fontMetrics The font metrics used to draw the text.
-	 * @param underline True if <code>text</code> should be underlined.
+	 * @param underline True if {@code text} should be underlined.
 	 * @param underlineColor the color to use for underlining.
 	 */
 	public AttributedString(String text, Color textColor, FontMetrics fontMetrics,
@@ -84,7 +84,7 @@ public class AttributedString {
 	 * @param text The text that this class describes.
 	 * @param textColor The color to paint the text.
 	 * @param fontMetrics The font metrics used to draw the text.
-	 * @param underline True if <code>text</code> should be underlined.
+	 * @param underline True if {@code text} should be underlined.
 	 * @param underlineColor the color to use for underlining.
 	 */
 	public AttributedString(Icon icon, String text, Color textColor, FontMetrics fontMetrics,

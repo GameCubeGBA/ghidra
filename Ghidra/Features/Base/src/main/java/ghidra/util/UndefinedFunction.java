@@ -60,7 +60,7 @@ public class UndefinedFunction implements Function {
 	}
 
 	/**
-	 * Identifies a <code>UndefinedFunction</code> based on the location given based upon the current
+	 * Identifies a {@code UndefinedFunction} based on the location given based upon the current
 	 * listing disassembly at time of construction using a block model.
 	 * @param program program to be searched
 	 * @param address address within body of function

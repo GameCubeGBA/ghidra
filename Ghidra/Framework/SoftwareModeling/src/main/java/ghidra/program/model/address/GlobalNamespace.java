@@ -28,8 +28,8 @@ public class GlobalNamespace implements Namespace {
 
 	/**
 	 * Global namespace name which may (incorrectly) appear as the first 
-	 * element within a namespace path (e.g., <code>Global::Foo::Bar</code>).  It is 
-	 * preferred that the Global namespace be omitted in favor of <code>Foo::Bar</code>.
+	 * element within a namespace path (e.g., {@code Global::Foo::Bar}).  It is
+	 * preferred that the Global namespace be omitted in favor of {@code Foo::Bar}.
 	 */
 	public static final String GLOBAL_NAMESPACE_NAME = "Global";
 

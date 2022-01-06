@@ -90,7 +90,7 @@ class CompositeViewerModel extends AbstractTableModel implements DataTypeManager
 	}
 
 	/**
-	 *  Returns <code>String.class</code> regardless of <code>columnIndex</code>.
+	 *  Returns {@code String.class} regardless of <code>columnIndex</code>.
 	 *
 	 *  @param columnIndex  the column being queried
 	 *  @return the String.class

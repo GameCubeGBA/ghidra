@@ -242,7 +242,7 @@ public interface Tool extends ServiceProvider {
 	 * Signals to the tool that the provider's context has changed.  This lets toolbar and
 	 * menu actions update enablement based on current context.
 	 * 
-	 * <p>Pass <code>null</code> to signal that the entire tool's context has changed
+	 * <p>Pass {@code null} to signal that the entire tool's context has changed
 	 *
 	 * @param provider the provider whose context changed; null to signal the tool's context
 	 */

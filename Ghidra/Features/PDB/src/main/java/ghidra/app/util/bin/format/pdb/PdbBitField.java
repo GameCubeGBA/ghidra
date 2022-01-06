@@ -19,7 +19,7 @@ import ghidra.program.model.data.*;
 import ghidra.util.exception.AssertException;
 
 /**
- * <code>PdbBitField</code> provides ability to hang onto bitfield as a datatype.
+ * {@code PdbBitField} provides ability to hang onto bitfield as a datatype.
  * This will be transformed to a normal BitFieldDataType when cloned.
  */
 public class PdbBitField extends BitFieldDataType {

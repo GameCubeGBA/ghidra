@@ -38,7 +38,7 @@ import ghidra.util.exception.*;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>ProgramUserDataDB</code> stores user data associated with a specific program.
+ * {@code ProgramUserDataDB} stores user data associated with a specific program.
  * A ContentHandler should not be created for this class since it must never be stored
  * within a DomainFolder.
  */

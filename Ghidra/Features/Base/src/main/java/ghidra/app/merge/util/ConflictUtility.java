@@ -21,7 +21,7 @@ import ghidra.program.util.DiffUtility;
 import ghidra.util.HTMLUtilities;
 
 /**
- * <code>ConflictUtility</code> provides some constants and static methods 
+ * {@code ConflictUtility} provides some constants and static methods
  * used by the Listing Merge portion of the multi-user merge.
  * For now, the VariousChoicesPanel and VerticalChoicesPanel use HTML in
  * JLabels to display color etc. This is because they also show radiobuttons

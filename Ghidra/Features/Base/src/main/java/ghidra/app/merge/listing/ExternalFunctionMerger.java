@@ -1388,7 +1388,7 @@ public class ExternalFunctionMerger extends AbstractFunctionMerger implements Li
 	}
 
 	/**
-	 * <CODE>replaceExternalDataType</CODE> replaces the data type of the
+	 * {@code replaceExternalDataType} replaces the data type of the
 	 * external label in program1 with the data type of the external label in program2
 	 * at the specified external space address.
 	 * @param resultExternalLocation

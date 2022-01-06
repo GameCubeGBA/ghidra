@@ -63,7 +63,7 @@ public class FilterTextField extends JPanel {
 	private WeakSet<Callback> enterListeners = WeakDataStructureFactory.createCopyOnWriteWeakSet();
 
 	/**
-	 * Constructs this text field with the given component.  <code>component</code> may be null, but 
+	 * Constructs this text field with the given component.  {@code component} may be null, but
 	 * then this field will be unable to flash in response to focus events (see the header 
 	 * documentation).
 	 * 
@@ -75,7 +75,7 @@ public class FilterTextField extends JPanel {
 
 	/**
 	 * Constructs this text field with the given component and the preferred visible column 
-	 * width.  <code>component</code> may be null, but then this field will be able to flash in
+	 * width.  {@code component} may be null, but then this field will be able to flash in
 	 * response to focus events (see the header documentation).
 	 * @param component The component needed to listen for focus changes, may be null.
 	 * @param columns The number of preferred visible columns (see JTextField)
@@ -164,15 +164,15 @@ public class FilterTextField extends JPanel {
 	 * <p>
 	 * Note: this method will not perform the alert if the minimum time between alerts 
 	 * has not passed.  To force the alter to take place, call {@link #alert(boolean)} with a
-	 * value of <code>true</code>.
+	 * value of {@code true}.
 	 */
 	public void alert() {
 		alert(false);
 	}
 
 	/**
-	 * This is the same as {@link #alert()} with the exception that a <code>true</code> value for
-	 * <code>forceAlter</code> will guarantee that the alert will happen.  A <code>false</code> value
+	 * This is the same as {@link #alert()} with the exception that a {@code true} value for
+	 * {@code forceAlter} will guarantee that the alert will happen.  A <code>false</code> value
 	 * will not perform the alert if the minimum time between alerts has not passed.
 	 * @param forceAlert true signals to force the alter to take place.
 	 * @see #alert()

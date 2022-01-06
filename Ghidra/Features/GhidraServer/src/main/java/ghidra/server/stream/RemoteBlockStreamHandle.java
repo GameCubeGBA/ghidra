@@ -28,7 +28,7 @@ import generic.random.SecureRandomFactory;
 import ghidra.util.StringUtilities;
 
 /**
- * <code>RemoteBlockStreamHandle</code> provides a serializable handle to a
+ * {@code RemoteBlockStreamHandle} provides a serializable handle to a
  * remote block stream. The handle is always instantiated by the server side and
  * passed to the client via remote serialization.
  * <p>
@@ -217,7 +217,7 @@ public abstract class RemoteBlockStreamHandle<T extends BlockStream> implements 
 	}
 
 	/**
-	 * <code>StreamRequest</code> is used to wrap the stream request
+	 * {@code StreamRequest} is used to wrap the stream request
 	 * registration data
 	 */
 	static class StreamRequest {

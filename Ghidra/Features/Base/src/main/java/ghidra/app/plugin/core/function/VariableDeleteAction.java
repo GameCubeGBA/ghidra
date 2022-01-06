@@ -28,7 +28,7 @@ import ghidra.program.util.ProgramLocation;
 import ghidra.program.util.VariableLocation;
 
 /**
- * <CODE>VariableDeleteAction</CODE> allows the user to delete a function 
+ * {@code VariableDeleteAction} allows the user to delete a function
  * variable.
  */
 class VariableDeleteAction extends ListingContextAction {

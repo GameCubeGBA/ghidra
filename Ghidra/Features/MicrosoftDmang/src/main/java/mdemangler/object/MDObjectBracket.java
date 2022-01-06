@@ -20,11 +20,11 @@ import mdemangler.MDMang;
 import mdemangler.naming.MDFragmentName;
 
 /**
- * This class represents a derivative of an <b><code>MDObject</code></b> which is a C++ object
+ * This class represents a derivative of an <b>{@code MDObject}</b> which is a C++ object
  *  and an additional bracketed prefix.  These were seen in a dumpbin of a source program that
  *  I created, but undname does not support the symbol.  I do not know what to call this type
  *  of object, so the name is descriptive for now.  Some bracketed prefix have been
- *  <b><code>[T2M]</code></b> and <b><code>[MEP]</code></b>, which we have gleaned by searching
+ *  <b>{@code [T2M]}</b> and <b><code>[MEP]</code></b>, which we have gleaned by searching
  *  the Internet to possibly mean "Transition to Managed (code)" and "Managed Entry Point." 
  */
 // TODO: Not sure what this is, so:

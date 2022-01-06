@@ -22,21 +22,21 @@ package ghidra.util;
  * <br>
  * <p><b>Important</b>: Any class implementing this interface that
  * may have its class path saved to the data base (i.e. user defined properties)
- * should create a map in the <code>ClassTranslator</code> when it is moved 
- * or renamed between versions of Ghidra. It should also implement <code>ExtensionPoint</code>.
- * <br><p>For example, any class that implements the <code>Saveable</code> interface 
+ * should create a map in the {@code ClassTranslator} when it is moved
+ * or renamed between versions of Ghidra. It should also implement {@code ExtensionPoint}.
+ * <br><p>For example, any class that implements the {@code Saveable} interface
  * can potentially be saved as a property in the program. If used as a program 
  * property the class name gets saved to a database field in the property manager. 
  * If the class gets moved or renamed, the property manager won't be able to 
- * instantiate it. The <code>ClassTranslator</code> allows the saveable class 
+ * instantiate it. The {@code ClassTranslator} allows the saveable class
  * to indicate its old path name (that was stored in the database) and its
  * current path name (the actual location of the class it needs to instantiate 
  * for the property). 
  * <br>The saveable class should call 
- * <br><code>    ClassTranslator.put(oldClassPath, newClassPath);</code>
+ * <br>{@code    ClassTranslator.put(oldClassPath, newClassPath);}
  * <br>in its static initializer.
  * <br>The property manager would then call 
- * <br><code>    String newPathName = ClassTranslator.get(oldPathName);</code> 
+ * <br>{@code    String newPathName = ClassTranslator.get(oldPathName);}
  * <br>when it can't find the class for the old path name. 
  * If the new path name isn't null the property manager can use it to get the class.
  * 
@@ -48,9 +48,9 @@ public interface Saveable {
      * Returns the field classes, in Java types, in the same order as used {@link #save} and
      * {@link #restore}. 
      * <p>
-     * For example, if the save method calls <code>objStorage.putInt()</code> and then
-     * <code>objStorage.putFloat()</code>, then this method must return 
-     * <code>Class[]{ Integer.class, Float.class }</code>. 
+     * For example, if the save method calls {@code objStorage.putInt()} and then
+     * {@code objStorage.putFloat()}, then this method must return
+     * {@code Class[]{ Integer.class, Float.class }}.
      * @return
      */
     Class<?>[] getObjectStorageFields();

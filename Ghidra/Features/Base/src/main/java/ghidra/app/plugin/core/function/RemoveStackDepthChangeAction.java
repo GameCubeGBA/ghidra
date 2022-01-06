@@ -27,7 +27,7 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
 
 /**
- * <CODE>RemoveStackDepthChangeAction</CODE> allows the user to delete a stack depth change value 
+ * {@code RemoveStackDepthChangeAction} allows the user to delete a stack depth change value
  * at the current address.
  */
 class RemoveStackDepthChangeAction extends ListingContextAction {

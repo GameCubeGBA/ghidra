@@ -26,7 +26,7 @@ import ghidra.program.model.symbol.*;
 import ghidra.util.SystemUtilities;
 
 /**
- * <code>VariableOffset</code> can be used as an operand or sub-operand representation
+ * {@code VariableOffset} can be used as an operand or sub-operand representation
  * object.  The toString() method should be used to obtain the displayable representation
  * string.  This object is intended to correspond to a explicit or implicit register/stack 
  * variable reference.  If an offset other than 0 is specified, the original Scalar should

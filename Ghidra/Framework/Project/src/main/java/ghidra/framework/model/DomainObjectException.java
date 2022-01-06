@@ -20,7 +20,7 @@ import java.io.PrintStream;
 import java.io.PrintWriter;
 
 /**
- * <code>DomainObjectException</code> provides a general RuntimeException 
+ * {@code DomainObjectException} provides a general RuntimeException
  * when a catastrophic error occurs which may affect the integrity of a 
  * domain object such as an IOException.
  */

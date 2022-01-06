@@ -48,7 +48,7 @@ import ghidra.util.datastruct.LongArrayList;
 import ghidra.util.layout.MaximizeSpecificColumnGridLayout;
 
 /**
- * <CODE>VerticalChoicesPanel</CODE> is a conflict panel for the Listing Merge.
+ * {@code VerticalChoicesPanel} is a conflict panel for the Listing Merge.
  * It lays out rows of information vertically in a table format. 
  * Each row can be a header row, an information row, a single choice row, 
  * or a multiple choice row.
@@ -87,7 +87,7 @@ public class VerticalChoicesPanel extends ConflictPanel {
 	private Insets textVsCheckBoxInsets;
 
 	/**
-	 * Creates an empty <CODE>VerticalChoicesPanel</CODE>
+	 * Creates an empty {@code VerticalChoicesPanel}
 	 */
 	public VerticalChoicesPanel() {
 		super();

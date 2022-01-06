@@ -99,7 +99,7 @@ public class PluginUtils {
 	/**
 	 * Finds all plugin classes loaded from a particular folder/file.
 	 * <p>
-	 * This uses the {@link ClassSearcher} to find all <code>Plugin.class</code> objects on the
+	 * This uses the {@link ClassSearcher} to find all {@code Plugin.class} objects on the
 	 * classpath. For each class, the original resource file is compared against the
 	 * given folder and if it's contained therein (or if it matches a given jar), it's
 	 * added to the return list.
@@ -314,7 +314,7 @@ public class PluginUtils {
 	 * Returns true if the specified Plugin class is well-formed and meets requirements for
 	 * Ghidra Plugins:
 	 * <ul>
-	 * 	<li>Has a constructor with a signature of <code>ThePlugin(PluginTool tool)</code>
+	 * 	<li>Has a constructor with a signature of {@code ThePlugin(PluginTool tool)}
 	 * 	<li>Has a {@link PluginInfo @PluginInfo} annotation.
 	 * </ul>
 	 * <p>

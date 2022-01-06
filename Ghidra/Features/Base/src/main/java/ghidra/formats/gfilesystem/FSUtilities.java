@@ -501,7 +501,7 @@ public class FSUtilities {
 	 * <UL>
 	 * 	<LI>extLevel 1: ".ext2"</LI>
 	 *  <LI>extLevel 2: ".ext1.ext2"</LI>
-	 *  <LI>extLevel 3: <code>null</code></LI>
+	 *  <LI>extLevel 3: {@code null}</LI>
 	 * </UL>
 	 *
 	 * @param path path/filename.ext string

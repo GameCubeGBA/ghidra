@@ -136,12 +136,12 @@ public class GProgressBar extends JPanel {
 	}
 
 	/**
-	 * Sets the <code>indeterminate</code> property of the progress bar,
+	 * Sets the {@code indeterminate} property of the progress bar,
 	 * which determines whether the progress bar is in determinate
 	 * or indeterminate mode.
 	 * An indeterminate progress bar continuously displays animation
 	 * indicating that an operation of unknown length is occurring.
-	 * By default, this property is <code>false</code>.
+	 * By default, this property is {@code false}.
 	 * Some look and feels might not support indeterminate progress bars;
 	 * they will ignore this property.
 	 *

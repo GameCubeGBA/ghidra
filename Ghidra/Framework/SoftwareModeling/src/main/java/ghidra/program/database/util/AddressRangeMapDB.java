@@ -31,7 +31,7 @@ import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>RangeMapDB</code> provides a generic value range map backed by a database table.
+ * {@code RangeMapDB} provides a generic value range map backed by a database table.
  * A given range may be occupied by at most a single value which is painted over 
  * that range.
  */

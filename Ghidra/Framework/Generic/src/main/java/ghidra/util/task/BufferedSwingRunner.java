@@ -28,7 +28,7 @@ public class BufferedSwingRunner extends AbstractSwingUpdateManager {
 	/**
 	 * Constructs a new SwingUpdateManager
 	 * <p>
-	 * <b>Note: </b>The <code>minDelay</code> will always be at least {@link #MIN_DELAY_FLOOR}, 
+	 * <b>Note: </b>The {@code minDelay} will always be at least {@link #MIN_DELAY_FLOOR},
 	 * regardless of the given value.
 	 *
 	 * @param minDelay the minimum number of milliseconds to wait once the event stream stops
@@ -50,7 +50,7 @@ public class BufferedSwingRunner extends AbstractSwingUpdateManager {
 	}
 
 	/**
-	 * Runs the given runnable.  If this is the first call to <code>run</code>, then do the work
+	 * Runs the given runnable.  If this is the first call to {@code run}, then do the work
 	 * immediately; otherwise, buffer the request until the timeout has expired.
 	 * 
 	 * <p>See the header of {@link AbstractSwingUpdateManager} for details on the update process.

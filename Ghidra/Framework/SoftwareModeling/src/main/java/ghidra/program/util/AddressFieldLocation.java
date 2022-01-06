@@ -20,7 +20,7 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
 
 /**
- * The <CODE>AddressFieldLocation</CODE> class provides specific information
+ * The {@code AddressFieldLocation} class provides specific information
  * about a program location within the ADDRESS field.
  */
 

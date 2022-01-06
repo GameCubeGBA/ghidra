@@ -37,7 +37,7 @@ import ghidra.util.filechooser.ExtensionFileFilter;
 import ghidra.util.filechooser.GhidraFileFilter;
 
 /**
- * <code>ApplicationKeyManagerFactory</code> provides application keystore management
+ * {@code ApplicationKeyManagerFactory} provides application keystore management
  * functionality and the ability to generate X509KeyManager's for use with an SSLContext
  * or other PKI related operations.  Access to keystore data (other than keystore path)
  * is restricted to package access.  Certain public operations are exposed via the
@@ -53,7 +53,7 @@ public class ApplicationKeyManagerFactory {
 
 	/**
 	 * Password system property may be set.  If set, this password will be used
-	 * when accessing the keystore before attempting to use <code>customPasswordProvider</code>
+	 * when accessing the keystore before attempting to use {@code customPasswordProvider}
 	 * if it has been set.
 	 */
 	public static final String KEYSTORE_PASSWORD_PROPERTY = "ghidra.password";
@@ -225,7 +225,7 @@ public class ApplicationKeyManagerFactory {
 	private ApplicationKeyManager keyManagerWrapper = new ApplicationKeyManager();
 
 	/**
-	 * <code>ApplicationKeyManagerFactory</code> constructor
+	 * {@code ApplicationKeyManagerFactory} constructor
 	 */
 	private ApplicationKeyManagerFactory() {
 	}
@@ -239,7 +239,7 @@ public class ApplicationKeyManagerFactory {
 	}
 
 	/**
-	 * <code>ProtectedKeyStoreData</code> provides a container for a keystore
+	 * {@code ProtectedKeyStoreData} provides a container for a keystore
 	 * which has been successfully accessed using the specified password.
 	 */
 	private static class ProtectedKeyStoreData {
@@ -378,7 +378,7 @@ public class ApplicationKeyManagerFactory {
 	}
 
 	/**
-	 * <code>ApplicationKeyManager</code> provides a wrapper for the X509 wrappedKeyManager whose
+	 * {@code ApplicationKeyManager} provides a wrapper for the X509 wrappedKeyManager whose
 	 * instantiation is delayed until needed.  When a wrapper method is first invoked, the
 	 * {@link ApplicationKeyManagerFactory#init()} method is called to open the keystore
 	 * (which may require a password prompt) and establish the underlying X509KeyManager.
@@ -502,10 +502,10 @@ public class ApplicationKeyManagerFactory {
 
 		/**
 		 * Initialize the x509KeyManager associated with the active keystore setting.
-		 * If the <code>x509KeyManager</code> already exists, this method has no affect.  If the
-		 * <code>keystorePath</code> has not already been set, the <code>getPreferredKeyStore()</code>
+		 * If the {@code x509KeyManager} already exists, this method has no affect.  If the
+		 * {@code keystorePath} has not already been set, the <code>getPreferredKeyStore()</code>
 		 * method will be invoked to obtain the keystore which should be used in establishing the
-		 * <code>wrappedKeyManager</code>.  If no keystore has been identified and the Default Identity
+		 * {@code wrappedKeyManager}.  If no keystore has been identified and the Default Identity
 		 * has been set, a self-signed certificate will be generated.  If nothing has been set, the
 		 * wrappedKeyManager will remain null and false will be returned.  If an error occurs it
 		 * will be logged and key managers will remain uninitialized.
@@ -521,7 +521,7 @@ public class ApplicationKeyManagerFactory {
 
 		/**
 		 * Initialize the x509KeyManager.
-		 * If the <code>x509KeyManager</code> already exists for the specified keystore path,
+		 * If the {@code x509KeyManager} already exists for the specified keystore path,
 		 * this method has no affect.  If no keystore has been identified and the Default Identity
 		 * has been set, a self-signed certificate will be generated.  If nothing has been set, the
 		 * wrappedKeyManager will remain null and false will be returned.  If an error occurs it

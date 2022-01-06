@@ -33,7 +33,7 @@ import ghidra.graph.viewer.event.mouse.VertexMouseInfo;
  * A base component provider for displaying {@link VisualGraph}s
  * 
  * <p>This class will provide many optional sub-features, enabled as desired by calling the
- * various <code>addXyzFeature()</code> methods.  
+ * various {@code addXyzFeature()} methods.
  * 
  * <p>Implementation Notes:   to get full functionality, you must:
  * <ul>

@@ -43,7 +43,7 @@ public interface DataLocationListContext {
 	/**
 	 * Returns a list of the locations of the current {@link Data} objects in the current action context that pass the given filter.
 	 * <P>
-	 * @param filter a filter to apply to the current context's Data list, <code>null</code>
+	 * @param filter a filter to apply to the current context's Data list, {@code null}
 	 * implies all elements match.
 	 * @return  a list of the locations of the current {@link Data} objects in the current action context that pass the given filter.
 	 */

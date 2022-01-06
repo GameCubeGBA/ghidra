@@ -692,7 +692,7 @@ public strictfp class FloatFormat {
 
 		/**
 		 * Construct SmallFloat Data.
-		 * If kind is FINITE, the value is <code>sign*unscaled*2^(scale-fracbits)</code>
+		 * If kind is FINITE, the value is {@code sign*unscaled*2^(scale-fracbits)}
 		 * 
 		 * @param fracbits number of fractional bits
 		 * @param expbits maximum number of bits in exponent

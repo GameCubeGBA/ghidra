@@ -22,7 +22,7 @@ import generic.util.UnsignedDataUtils;
 import ghidra.util.BigEndianDataConverter;
 
 /**
- * <code>FixedField10</code> provide an unsigned 10-byte fixed-length field value.
+ * {@code FixedField10} provide an unsigned 10-byte fixed-length field value.
  * The most-significant byte corresponds to index-0 (i.e., data[0]).
  */
 public class FixedField10 extends FixedField {

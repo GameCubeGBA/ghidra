@@ -552,9 +552,9 @@ public class GoToQuery {
 //==================================================================================================
 
 	/**
-	 * A class to maintain our collection of open programs and to provide an <code>Iterator</code>
+	 * A class to maintain our collection of open programs and to provide an {@code Iterator}
 	 * when we need to process the collection.  The {@link #iterator()} method has a side-effect
-	 * of putting the current program at the front of the <code>Iterator</code> so that the current
+	 * of putting the current program at the front of the {@code Iterator} so that the current
 	 * program is always searched first when processing the collection of programs.
 	 */
 	protected class ProgramGroup implements Iterable<Program> {

@@ -103,7 +103,7 @@ public interface PropertyMap {
 	 * Returns an iterator over the indices having a property
 	 * value.
 	 * @exception TypeMismatchException thrown if the property does not
-	 * have values of type <CODE>Object</CODE>.
+	 * have values of type {@code Object}.
 	 */
 	public AddressIterator getPropertyIterator(
 		Address start,
@@ -114,7 +114,7 @@ public interface PropertyMap {
 	 * @param forward if true will iterate in increasing address order, otherwise it will start at
 	 * the end and iterate in decreasing address order
 	 * @exception TypeMismatchException thrown if the property does not
-	 * have values of type <CODE>Object</CODE>.
+	 * have values of type {@code Object}.
 	 */
 	public AddressIterator getPropertyIterator(
 		Address start,
@@ -124,7 +124,7 @@ public interface PropertyMap {
 	 * Returns an iterator over the addresses that a property
 	 * value.
 	 * @exception TypeMismatchException thrown if the property does not
-	 * have values of type <CODE>Object</CODE>.
+	 * have values of type {@code Object}.
 	 */
 	public AddressIterator getPropertyIterator();
 
@@ -150,7 +150,7 @@ public interface PropertyMap {
 	 * @param forward if true will iterate in increasing address order, otherwise it will start at
 	 * the end and iterate in decreasing address order
 	 * @exception TypeMismatchException thrown if the property does not
-	 * have values of type <CODE>Object</CODE>.
+	 * have values of type {@code Object}.
 	 */
 	public AddressIterator getPropertyIterator(Address start, boolean forward);
 	

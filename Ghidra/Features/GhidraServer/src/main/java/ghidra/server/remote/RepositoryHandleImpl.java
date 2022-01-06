@@ -36,7 +36,7 @@ import ghidra.util.exception.AssertException;
 import ghidra.util.exception.FileInUseException;
 
 /**
- * <code>RepositoryHandleImpl</code> provides a Repository handle to a
+ * {@code RepositoryHandleImpl} provides a Repository handle to a
  * remote user.
  */
 public class RepositoryHandleImpl extends UnicastRemoteObject implements RemoteRepositoryHandle,

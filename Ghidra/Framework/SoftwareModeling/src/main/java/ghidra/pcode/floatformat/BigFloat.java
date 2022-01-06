@@ -48,7 +48,7 @@ public strictfp class BigFloat implements Comparable<BigFloat> {
 	int scale;
 
 	/**
-	 * Construct a BigFloat.  If kind is FINITE, the value is <code>sign*unscaled*2^(scale-fracbits)</code>
+	 * Construct a BigFloat.  If kind is FINITE, the value is {@code sign*unscaled*2^(scale-fracbits)}
 	 * 
 	 * @param fracbits number of fractional bits
 	 * @param expbits maximum number of bits in exponent

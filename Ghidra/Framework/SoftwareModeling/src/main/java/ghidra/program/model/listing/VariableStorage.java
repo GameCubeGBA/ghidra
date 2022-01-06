@@ -27,7 +27,7 @@ import ghidra.program.util.LanguageTranslator;
 import ghidra.util.exception.InvalidInputException;
 
 /**
- * <code></code> encapsulates the ordered list of storage varnodes which correspond to a 
+ * {@code} encapsulates the ordered list of storage varnodes which correspond to a
  * function parameter or local variable.  For big-endian the first element corresponds 
  * to the most-significant varnode, while for little-endian the first element 
  * corresponds to the least-significant varnode.
@@ -39,20 +39,20 @@ public class VariableStorage implements Comparable<VariableStorage> {
 	private static final String VOID = "<VOID>";
 
 	/**
-	 * <code>BAD_STORAGE</code> used to identify variable storage which is no longer
+	 * {@code BAD_STORAGE} used to identify variable storage which is no longer
 	 * valid.  This can be caused by various events such as significant language/processor
 	 * changes or software bugs which prevent variable storage to be properly decoded.
 	 */
 	public static final VariableStorage BAD_STORAGE = new VariableStorage();
 
 	/**
-	 * <code>UNASSIGNED_STORAGE</code> used to identify parameter storage which is "unmapped"
+	 * {@code UNASSIGNED_STORAGE} used to identify parameter storage which is "unmapped"
 	 * or could not be determined.
 	 */
 	public static final VariableStorage UNASSIGNED_STORAGE = new VariableStorage();
 
 	/**
-	 * <code>VOID_STORAGE</code> used to identify parameter/return storage which is "mapped"
+	 * {@code VOID_STORAGE} used to identify parameter/return storage which is "mapped"
 	 * with a data-type of void.
 	 */
 	public static final VariableStorage VOID_STORAGE = new VariableStorage();

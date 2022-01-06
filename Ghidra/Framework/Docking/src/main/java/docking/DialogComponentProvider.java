@@ -943,10 +943,10 @@ public class DialogComponentProvider
 	/**
 	 * Sets the horizontal position of the status label.
 	 * @param justification  One of the following constants
-	 *           defined in <code>SwingConstants</code>:
-	 *           <code>LEFT</code>,
-	 *           <code>CENTER</code> (the default for image-only labels),
-	 *           <code>RIGHT</code>,
+	 *           defined in {@code SwingConstants}:
+	 *           {@code LEFT},
+	 *           {@code CENTER} (the default for image-only labels),
+	 *           {@code RIGHT},
 	 */
 	public void setStatusJustification(int justification) {
 		statusLabel.setHorizontalAlignment(justification);
@@ -1018,7 +1018,7 @@ public class DialogComponentProvider
 
 	/**
 	 * Sets the button to make "Default" when the dialog is shown.  If no default button is
-	 * desired, then pass <code>null</code> as the <code>button</code> value.
+	 * desired, then pass {@code null} as the <code>button</code> value.
 	 * @param button the button to make default enabled.
 	 */
 	public void setDefaultButton(JButton button) {

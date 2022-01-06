@@ -18,36 +18,36 @@ package ghidra.util.classfinder;
 import java.util.Hashtable;
 
 /**
- * <code>ClassTranslator</code> provides a way to map an old Ghidra class to
+ * {@code ClassTranslator} provides a way to map an old Ghidra class to
  * a current Ghidra class. It can be used whenever a class is moved or renamed
  * and Ghidra needs to know.
  * <p><strong>Important</strong>: Any class that is indicated by the currentClassPath
- * passed to the <code>put</code> method should implement <code>ExtensionPoint</code>.
+ * passed to the {@code put} method should implement <code>ExtensionPoint</code>.
  * <p>Whenever a class whose name gets stored in the data base is moved to 
  * another package or renamed, the map of the old class path name to the 
  * new one should get put into the ClassTranslator.
- * <br>Example:  The class <code>ghidra.app.plugin.core.MyPlugin.MyInfo</code> is in Ghidra version 1.
- * In Ghidra version 2, it is moved and renamed to <code>ghidra.app.plugin.core.RenamedPlugin.SubPackage.SaveInfo</code>.
+ * <br>Example:  The class {@code ghidra.app.plugin.core.MyPlugin.MyInfo} is in Ghidra version 1.
+ * In Ghidra version 2, it is moved and renamed to {@code ghidra.app.plugin.core.RenamedPlugin.SubPackage.SaveInfo}.
  * Put the following static initializer in the version 2 SaveInfo class.
- * <br><code>
+ * <br>{@code
  *   static {
  *       ClassTranslator.put("ghidra.app.plugin.core.MyPlugin.MyInfo", SaveInfo.class.getName());
  *   }
- * </code>
+ * }
  * <p>Warning: If the class gets moved or renamed again in a subsequent version 
  * of Ghidra, a new translation (put call) should get added to the static initializer block 
  * and any old translations should have their current path name changed to the new
  * class path.
- * <br>Example: The class <code>ghidra.app.plugin.core.MyPlugin.MyInfo</code> is in Ghidra version 1.
- * In Ghidra version 2, it is moved and renamed to <code>ghidra.app.plugin.core.RenamedPlugin.SubPackage.SaveInfo</code>.
- * In Ghidra version 3, it is renamed to <code>ghidra.app.plugin.core.RenamedPlugin.SubPackage.SaveInfo</code>.
+ * <br>Example: The class {@code ghidra.app.plugin.core.MyPlugin.MyInfo} is in Ghidra version 1.
+ * In Ghidra version 2, it is moved and renamed to {@code ghidra.app.plugin.core.RenamedPlugin.SubPackage.SaveInfo}.
+ * In Ghidra version 3, it is renamed to {@code ghidra.app.plugin.core.RenamedPlugin.SubPackage.SaveInfo}.
  * Put the following static initializer in the version 3 SaveInfo class.
- * <code>
+ * {@code
  *   static {
  *       ClassTranslator.put("ghidra.app.plugin.core.MyPlugin.MyInfo", SaveInfo.class.getName());
  *       ClassTranslator.put("ghidra.app.plugin.core.RenamedPlugin.SubPackage.SaveInfo", SaveInfo.class.getName());
  *   }
- * </code>
+ * }
  */
 public class ClassTranslator {
 	private static Hashtable<String, String> classPathMap = new Hashtable<>();
@@ -77,7 +77,7 @@ public class ClassTranslator {
 	 * @param oldClassPath the old class path name of the class.
 	 * @param currentClassPath the current class path name of the class.
 	 * <p><strong>Important</strong>: Any class that is indicated by the currentClassPath
-	 * passed to the <code>put</code> method should implement <code>ExtensionPoint</code>.
+	 * passed to the {@code put} method should implement <code>ExtensionPoint</code>.
 	 */
 	public static void put(String oldClassPath, String currentClassPath) {
 		classPathMap.put(oldClassPath, currentClassPath);

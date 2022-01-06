@@ -37,7 +37,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 /**
- * <code>RegisterMergeManager</code> handles the merge for a single named register.
+ * {@code RegisterMergeManager} handles the merge for a single named register.
  */
 class RegisterMergeManager implements ListingMergeConstants {
 

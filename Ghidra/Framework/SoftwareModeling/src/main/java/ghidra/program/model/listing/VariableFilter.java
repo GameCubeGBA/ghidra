@@ -19,47 +19,47 @@ package ghidra.program.model.listing;
 public interface VariableFilter {
 
 	/**
-	 * <code>PARAMETER_FILTER</code> matches all parameters (includes auto-params).  A variable is
+	 * {@code PARAMETER_FILTER} matches all parameters (includes auto-params).  A variable is
 	 * treated as a parameter by this filter if it implements the Parameter interface.
 	 */
 	public static final VariableFilter PARAMETER_FILTER = new ParameterFilter(true);
 
 	/**
-	 * <code>NONAUTO_PARAMETER_FILTER</code> matches all parameters which are not an auto-param.  A variable is
+	 * {@code NONAUTO_PARAMETER_FILTER} matches all parameters which are not an auto-param.  A variable is
 	 * treated as a parameter by this filter if it implements the Parameter interface.
 	 */
 	public static final VariableFilter NONAUTO_PARAMETER_FILTER = new ParameterFilter(false);
 
 	/**
-	 * <code>LOCAL_VARIABLE_FILTER</code> matches all simple stack variables.  A variable is
+	 * {@code LOCAL_VARIABLE_FILTER} matches all simple stack variables.  A variable is
 	 * treated as local by this filter if it does not implement the Parameter interface.
 	 */
 	public static final VariableFilter LOCAL_VARIABLE_FILTER = new LocalVariableFilter();
 
 	/**
-	 * <code>STACK_VARIABLE_FILTER</code> matches all simple stack variables
+	 * {@code STACK_VARIABLE_FILTER} matches all simple stack variables
 	 */
 	public static final VariableFilter STACK_VARIABLE_FILTER = new StackVariableFilter();
 
 	/**
-	 * <code>COMPOUND_STACK_VARIABLE_FILTER</code> matches all simple or compound variables
+	 * {@code COMPOUND_STACK_VARIABLE_FILTER} matches all simple or compound variables
 	 * which utilize a stack storage element
 	 */
 	public static final VariableFilter COMPOUND_STACK_VARIABLE_FILTER =
 		new CompoundStackVariableFilter();
 
 	/**
-	 * <code>REGISTER_VARIABLE_FILTER</code> matches all simple register variables
+	 * {@code REGISTER_VARIABLE_FILTER} matches all simple register variables
 	 */
 	public static final VariableFilter REGISTER_VARIABLE_FILTER = new RegisterVariableFilter();
 
 	/**
-	 * <code>MEMORY_VARIABLE_FILTER</code> matches all simple memory variables
+	 * {@code MEMORY_VARIABLE_FILTER} matches all simple memory variables
 	 */
 	public static final VariableFilter MEMORY_VARIABLE_FILTER = new MemoryVariableFilter();
 
 	/**
-	 * <code>UNIQUE_VARIABLE_FILTER</code> matches all simple unique variables identified by a hash value
+	 * {@code UNIQUE_VARIABLE_FILTER} matches all simple unique variables identified by a hash value
 	 */
 	public static final VariableFilter UNIQUE_VARIABLE_FILTER = new UniqueVariableFilter();
 

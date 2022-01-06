@@ -20,7 +20,7 @@ import java.util.*;
 import ghidra.util.UniversalIdGenerator;
 
 /**
- * <code>AddressMapImpl</code> provides a stand-alone AddressMap.
+ * {@code AddressMapImpl} provides a stand-alone AddressMap.
  * An AddressMapImpl instance should only be used to decode keys which it has generated.
  * If this map is used for a specific program instance, the map should be discard if any changes 
  * are made to that programs address map (e.g., removing or renaming overlay spaces).

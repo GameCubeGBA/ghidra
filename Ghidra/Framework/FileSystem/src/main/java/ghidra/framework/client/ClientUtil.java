@@ -37,7 +37,7 @@ import ghidra.util.task.TaskLauncher;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>ClientUtil</code> allows a user to connect to a Repository Server and obtain its handle.
+ * {@code ClientUtil} allows a user to connect to a Repository Server and obtain its handle.
  */
 public class ClientUtil {
 

@@ -98,7 +98,7 @@ public abstract class AbstractNumberInputDialog extends DialogComponentProvider 
 	 * Define the Main panel for the dialog here
 	 * @param prompt the prompt label text
 	 * @param showAsHex if true, show the value as hex
-	 * @return JPanel the completed <CODE>Main Panel</CODE>
+	 * @return JPanel the completed {@code Main Panel}
 	 */
 	protected JPanel buildMainPanel(String prompt, boolean showAsHex) {
 		JPanel panel = createPanel(prompt);
@@ -206,7 +206,7 @@ public abstract class AbstractNumberInputDialog extends DialogComponentProvider 
 	}
 
 	/**
-	 * <code>show</code> displays the dialog, gets the user input
+	 * {@code show} displays the dialog, gets the user input
 	 *
 	 * @return false if the user cancelled the operation
 	 */

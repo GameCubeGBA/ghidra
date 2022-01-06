@@ -16,7 +16,7 @@
 package ghidra.program.model.data;
 
 /**
- * <code>DataOrganizationTestUtils</code> provides various methods for modifying
+ * {@code DataOrganizationTestUtils} provides various methods for modifying
  * a DataOrganization to reflect a specific processor/compiler spec.  This can be used 
  * when only the DataOrganization is needed and not the Language/CompilerSpec.
  */

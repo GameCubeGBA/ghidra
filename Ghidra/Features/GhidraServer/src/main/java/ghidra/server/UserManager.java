@@ -31,7 +31,7 @@ import ghidra.util.*;
 import ghidra.util.exception.DuplicateNameException;
 
 /**
- * <code>UserManager</code> manages the set of users associated with a running GhidraServer.
+ * {@code UserManager} manages the set of users associated with a running GhidraServer.
  * Support is also provided for managing and authenticating local user passwords when 
  * needed.
  */
@@ -721,7 +721,7 @@ public class UserManager {
 	}
 
 	/**
-	 * <code>UserEntry</code> class used to hold user data
+	 * {@code UserEntry} class used to hold user data
 	 */
 	private static class UserEntry {
 		private String username;

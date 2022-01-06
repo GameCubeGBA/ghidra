@@ -21,7 +21,7 @@ import java.util.Arrays;
 import ghidra.util.exception.AssertException;
 
 /**
- * <code>Record</code> provides a portable container for data
+ * {@code Record} provides a portable container for data
  * associated with a fixed schema.  
  * A record instance contains both a primary key and zero or more data fields.  
  */
