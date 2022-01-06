@@ -53,19 +53,15 @@ public class CreateSelectionAction extends DockingAction {
 			return false;
 		}
 		VTMatchContext matchContext = (VTMatchContext) context;
-		List<VTMatch> matches = matchContext.getSelectedMatches();
-        return matches.size() != 0;
+        return !matchContext.getSelectedMatches().isEmpty();
     }
 
 	@Override
 	public void actionPerformed(ActionContext context) {
-		Program sourceProgram = controller.getSourceProgram();
-		Program destinationProgram = controller.getDestinationProgram();
 		AddressSet sourceSet = new AddressSet();
 		AddressSet destinationSet = new AddressSet();
 		VTMatchContext matchContext = (VTMatchContext) context;
-		List<VTMatch> matches = matchContext.getSelectedMatches();
-		for (VTMatch vtMatch : matches) {
+		for (VTMatch vtMatch : matchContext.getSelectedMatches()) {
 			VTAssociation association = vtMatch.getAssociation();
 			sourceSet.add(association.getSourceAddress());
 			destinationSet.add(association.getDestinationAddress());
