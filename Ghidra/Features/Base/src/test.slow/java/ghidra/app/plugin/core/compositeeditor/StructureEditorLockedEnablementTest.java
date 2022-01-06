@@ -69,7 +69,7 @@ public class StructureEditorLockedEnablementTest extends AbstractStructureEditor
 		Structure desiredEmptyStructure = emptyStructure;
 		int txID = program.startTransaction("Removing emptyStruct from DTM.");
 		try {
-			programDTM.remove(emptyStructure, TaskMonitorAdapter.DUMMY_MONITOR);
+			programDTM.remove(emptyStructure, TaskMonitor.DUMMY);
 			if (emptyStructure.getDataTypeManager() != catDTM) {
 				desiredEmptyStructure = (Structure) emptyStructure.copy(catDTM);
 				desiredEmptyStructure.setCategoryPath(pgmTestCat.getCategoryPath());

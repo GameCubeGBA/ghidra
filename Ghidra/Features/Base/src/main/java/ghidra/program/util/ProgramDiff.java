@@ -465,7 +465,7 @@ public class ProgramDiff {
 		cancelled = false;
 		if (monitor == null) {
 			// Create a do nothing task monitor that we can pass along.
-			monitor = TaskMonitorAdapter.DUMMY_MONITOR;
+			monitor = TaskMonitor.DUMMY;
 		}
 
 		if (!filterChanged && ((filter != null) && (filter.equals(this.pdf)))) {
@@ -528,7 +528,7 @@ public class ProgramDiff {
 			throws CancelledException {
 		if (monitor == null) {
 			// Create a do nothing task monitor that we can pass along.
-			monitor = TaskMonitorAdapter.DUMMY_MONITOR;
+			monitor = TaskMonitor.DUMMY;
 		}
 		monitor.checkCanceled();
 

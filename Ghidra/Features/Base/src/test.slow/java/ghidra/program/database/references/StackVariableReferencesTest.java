@@ -56,7 +56,7 @@ public class StackVariableReferencesTest extends AbstractGhidraHeadedIntegration
 		functionMgr = program.getFunctionManager();
 		transactionID = program.startTransaction("Test");
 		program.getMemory().createInitializedBlock("code", addr(0), 10000, (byte) 0,
-			TaskMonitorAdapter.DUMMY_MONITOR, false);
+			TaskMonitor.DUMMY, false);
 	}
 
     @After

@@ -378,7 +378,7 @@ public abstract class AbstractVTCorrelatorTest extends AbstractGhidraHeadedInteg
 	 */
 	protected void runTask(Task task) throws Exception {
 
-		task.run(TaskMonitorAdapter.DUMMY_MONITOR);
+		task.run(TaskMonitor.DUMMY);
 		destProg.flushEvents();
 		waitForSwing();
 		waitForTasks();

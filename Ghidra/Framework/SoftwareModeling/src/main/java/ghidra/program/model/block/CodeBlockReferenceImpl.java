@@ -99,7 +99,7 @@ public class CodeBlockReferenceImpl implements CodeBlockReference {
 			CodeBlockModel model = blockHave.getModel();
 			try {
 				blockNeeded =
-					model.getFirstCodeBlockContaining(addrInBlock, TaskMonitorAdapter.DUMMY_MONITOR);
+					model.getFirstCodeBlockContaining(addrInBlock, TaskMonitor.DUMMY);
 			}
 			catch (CancelledException e) {
 				// can't happen, dummy monitor can't be canceled

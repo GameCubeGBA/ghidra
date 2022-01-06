@@ -111,7 +111,7 @@ public class VariableStorageConflictsTest extends AbstractGenericTest {
 			SourceType.DEFAULT);
 
 		FunctionVariableStorageConflicts vsc = new FunctionVariableStorageConflicts(func1, func1,
-			false, TaskMonitorAdapter.DUMMY_MONITOR);
+			false, TaskMonitor.DUMMY);
 		assertTrue("No conflict expected", !vsc.hasOverlapConflict());
 
 	}
@@ -163,7 +163,7 @@ public class VariableStorageConflictsTest extends AbstractGenericTest {
 		// Since these are params all params should be lumped together
 
 		FunctionVariableStorageConflicts vsc = new FunctionVariableStorageConflicts(func1, func2,
-			false, TaskMonitorAdapter.DUMMY_MONITOR);
+			false, TaskMonitor.DUMMY);
 		assertTrue("Parameter conflict expected", vsc.hasOverlapConflict());
 
 		List<Pair<List<Variable>, List<Variable>>> overlappingVariables =
@@ -202,7 +202,7 @@ public class VariableStorageConflictsTest extends AbstractGenericTest {
 			SourceType.DEFAULT);
 
 		FunctionVariableStorageConflicts vsc = new FunctionVariableStorageConflicts(func1, func2,
-			false, TaskMonitorAdapter.DUMMY_MONITOR);
+			false, TaskMonitor.DUMMY);
 		assertTrue("Parameter conflict expected", vsc.hasOverlapConflict());
 
 		List<Pair<List<Variable>, List<Variable>>> overlappingVariables =
@@ -242,7 +242,7 @@ public class VariableStorageConflictsTest extends AbstractGenericTest {
 			bxReg.getParentRegister(), program), SourceType.DEFAULT);
 
 		FunctionVariableStorageConflicts vsc = new FunctionVariableStorageConflicts(func1, func2,
-			false, TaskMonitorAdapter.DUMMY_MONITOR);
+			false, TaskMonitor.DUMMY);
 		assertTrue("Local conflict expected", vsc.hasOverlapConflict());
 
 		List<Pair<List<Variable>, List<Variable>>> overlappingVariables =
@@ -286,7 +286,7 @@ public class VariableStorageConflictsTest extends AbstractGenericTest {
 			bxReg.getParentRegister(), program), SourceType.DEFAULT);
 
 		FunctionVariableStorageConflicts vsc = new FunctionVariableStorageConflicts(func1, func2,
-			false, TaskMonitorAdapter.DUMMY_MONITOR);
+			false, TaskMonitor.DUMMY);
 		assertTrue("Local conflict expected", vsc.hasOverlapConflict());
 
 		List<Pair<List<Variable>, List<Variable>>> overlappingVariables =
@@ -335,7 +335,7 @@ public class VariableStorageConflictsTest extends AbstractGenericTest {
 			SourceType.DEFAULT);
 
 		FunctionVariableStorageConflicts vsc = new FunctionVariableStorageConflicts(func1, func2,
-			false, TaskMonitorAdapter.DUMMY_MONITOR);
+			false, TaskMonitor.DUMMY);
 		assertTrue("Local conflict expected", vsc.hasOverlapConflict());
 
 		List<Pair<List<Variable>, List<Variable>>> overlappingVariables =
@@ -374,7 +374,7 @@ public class VariableStorageConflictsTest extends AbstractGenericTest {
 			SourceType.DEFAULT);
 
 		FunctionVariableStorageConflicts vsc = new FunctionVariableStorageConflicts(func1, func2,
-			false, TaskMonitorAdapter.DUMMY_MONITOR);
+			false, TaskMonitor.DUMMY);
 		assertTrue("Local conflict expected", vsc.hasOverlapConflict());
 
 		List<Pair<List<Variable>, List<Variable>>> overlappingVariables =
@@ -419,7 +419,7 @@ public class VariableStorageConflictsTest extends AbstractGenericTest {
 			SourceType.DEFAULT);
 
 		FunctionVariableStorageConflicts vsc = new FunctionVariableStorageConflicts(func1, func2,
-			false, TaskMonitorAdapter.DUMMY_MONITOR);
+			false, TaskMonitor.DUMMY);
 		assertTrue("Local conflict expected", vsc.hasOverlapConflict());
 
 		List<Pair<List<Variable>, List<Variable>>> overlappingVariables =
@@ -464,7 +464,7 @@ public class VariableStorageConflictsTest extends AbstractGenericTest {
 			SourceType.DEFAULT);
 
 		FunctionVariableStorageConflicts vsc = new FunctionVariableStorageConflicts(func1, func2,
-			false, TaskMonitorAdapter.DUMMY_MONITOR);
+			false, TaskMonitor.DUMMY);
 		assertTrue("Local conflict expected", vsc.hasOverlapConflict());
 
 		List<Pair<List<Variable>, List<Variable>>> overlappingVariables =

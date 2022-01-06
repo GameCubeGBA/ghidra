@@ -510,12 +510,12 @@ public class PackedDatabase extends Database {
 	private static void refreshDatabase(BufferFileManager bfMgr, long checkinId,
 			ResourceFile packedFile, TaskMonitor monitor) throws IOException, CancelledException {
 		if (monitor == null) {
-			monitor = TaskMonitorAdapter.DUMMY_MONITOR;
+			monitor = TaskMonitor.DUMMY;
 		}
 		int version = bfMgr.getCurrentVersion() + 1; // should be 1 in most situations
 		File file = bfMgr.getBufferFile(version);
+		ItemDeserializer itemDeserializer = null;
         try (OutputStream out = new BufferedOutputStream(new FileOutputStream(file))) {
-            ItemDeserializer itemDeserializer = null;
             Msg.debug(PackedDatabase.class, "Unpacking database " + packedFile + " -> " + file);
             itemDeserializer = new ItemDeserializer(packedFile);
             itemDeserializer.saveItem(out, monitor);
@@ -660,7 +660,7 @@ public class PackedDatabase extends Database {
 			TaskMonitor monitor) throws IOException, CancelledException {
 
 		if (monitor == null) {
-			monitor = TaskMonitorAdapter.DUMMY_MONITOR;
+			monitor = TaskMonitor.DUMMY;
 		}
 		monitor.setMessage("Packing file...");
 
@@ -686,7 +686,7 @@ public class PackedDatabase extends Database {
 			throw new IOException("Update not allowed");
 		}
 		if (monitor == null) {
-			monitor = TaskMonitorAdapter.DUMMY_MONITOR;
+			monitor = TaskMonitor.DUMMY;
 		}
 		monitor.setMessage("Waiting...");
 		if (packedDbLock != null) {
@@ -763,7 +763,7 @@ public class PackedDatabase extends Database {
 		}
 
 		if (monitor == null) {
-			monitor = TaskMonitorAdapter.DUMMY_MONITOR;
+			monitor = TaskMonitor.DUMMY;
 		}
 
 		if (!refreshUnpacking(monitor)) {
@@ -789,7 +789,7 @@ public class PackedDatabase extends Database {
 		}
 
 		if (monitor == null) {
-			monitor = TaskMonitorAdapter.DUMMY_MONITOR;
+			monitor = TaskMonitor.DUMMY;
 		}
 
 		lock(updateLock, false, true);

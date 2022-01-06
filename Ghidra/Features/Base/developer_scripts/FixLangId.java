@@ -78,7 +78,7 @@ public class FixLangId extends GhidraScript {
 			return;
 		}
 
-		dbh.save("Set Language", null, TaskMonitorAdapter.DUMMY_MONITOR);
+		dbh.save("Set Language", null, TaskMonitor.DUMMY);
 		dbh.close();
 	}
 

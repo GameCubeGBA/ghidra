@@ -100,7 +100,7 @@ public abstract class AbstractCorrelatorTest extends AbstractGhidraHeadedIntegra
 				options = factory.createDefaultOptions();
 				correlator = factory.createCorrelator(serviceProvider, sourceProgram,
 					sourceAddressSet, destinationProgram, destinationAddressSet, options);
-				correlator.correlate(session, TaskMonitorAdapter.DUMMY_MONITOR);
+				correlator.correlate(session, TaskMonitor.DUMMY);
 
 				FunctionManager functionManager = sourceProgram.getFunctionManager();
 				FunctionIterator functions =
@@ -166,7 +166,7 @@ public abstract class AbstractCorrelatorTest extends AbstractGhidraHeadedIntegra
 				options = factory.createDefaultOptions();
 				correlator = factory.createCorrelator(serviceProvider, sourceProgram,
 					sourceAddressSet, destinationProgram, destinationAddressSet, options);
-				correlator.correlate(session, TaskMonitorAdapter.DUMMY_MONITOR);
+				correlator.correlate(session, TaskMonitor.DUMMY);
 
 				HashMap<Address, Address> mapCopy = new HashMap<>(map);
 

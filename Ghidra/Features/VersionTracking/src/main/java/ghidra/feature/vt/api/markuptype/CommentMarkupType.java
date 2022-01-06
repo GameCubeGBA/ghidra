@@ -206,7 +206,7 @@ public abstract class CommentMarkupType extends VTMarkupType {
 		Stringable appliedMarkupOriginalValue = null;
 		try {
 			appliedMarkupOriginalValue = getOriginalDestinationValueForAppliedMarkupOfThisType(
-				association, destinationAddress, TaskMonitorAdapter.DUMMY_MONITOR);
+				association, destinationAddress, TaskMonitor.DUMMY);
 		}
 		catch (CancelledException e) {
 			// For now this shouldn't get a cancel.

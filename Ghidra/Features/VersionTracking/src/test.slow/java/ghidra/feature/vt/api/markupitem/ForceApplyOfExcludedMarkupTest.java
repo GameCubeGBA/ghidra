@@ -274,7 +274,7 @@ public class ForceApplyOfExcludedMarkupTest extends AbstractFunctionSignatureMar
 	protected VTMarkupItem getFunctionNameMarkup(VTMatch match) {
 		MatchInfo matchInfo = controller.getMatchInfo(match);
 		Collection<VTMarkupItem> appliableMarkupItems =
-			matchInfo.getAppliableMarkupItems(TaskMonitorAdapter.DUMMY_MONITOR);
+			matchInfo.getAppliableMarkupItems(TaskMonitor.DUMMY);
 		for (VTMarkupItem vtMarkupItem : appliableMarkupItems) {
 			if (vtMarkupItem.getMarkupType() instanceof FunctionNameMarkupType) {
 				return vtMarkupItem;
@@ -296,7 +296,7 @@ public class ForceApplyOfExcludedMarkupTest extends AbstractFunctionSignatureMar
 	protected VTMarkupItem getCommentMarkup(VTMatch match, int commentType) {
 		MatchInfo matchInfo = controller.getMatchInfo(match);
 		Collection<VTMarkupItem> appliableMarkupItems =
-			matchInfo.getAppliableMarkupItems(TaskMonitorAdapter.DUMMY_MONITOR);
+			matchInfo.getAppliableMarkupItems(TaskMonitor.DUMMY);
 		for (VTMarkupItem vtMarkupItem : appliableMarkupItems) {
 			switch (commentType) {
 				case CodeUnit.PLATE_COMMENT:

@@ -104,7 +104,7 @@ public class BlockModelScreenShots extends GhidraScreenShotGenerator {
 			CodeBlockIterator iterator;
 			try {
 				iterator = basicBlockModel.getCodeBlocksContaining(addressSet,
-					TaskMonitorAdapter.DUMMY_MONITOR);
+					TaskMonitor.DUMMY);
 
 				while (iterator.hasNext()) {
 					CodeBlock block = iterator.next();

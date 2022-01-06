@@ -1010,7 +1010,7 @@ public class GhidraFileData {
 		}
 		verifyRepoUser("checkin");
 		if (monitor == null) {
-			monitor = TaskMonitorAdapter.DUMMY_MONITOR;
+			monitor = TaskMonitor.DUMMY;
 		}
 		synchronized (fileSystem) {
 			if (busy) {
@@ -1386,7 +1386,7 @@ public class GhidraFileData {
 		}
 		verifyRepoUser("merge");
 		if (monitor == null) {
-			monitor = TaskMonitorAdapter.DUMMY_MONITOR;
+			monitor = TaskMonitor.DUMMY;
 		}
 		synchronized (fileSystem) {
 			if (busy) {

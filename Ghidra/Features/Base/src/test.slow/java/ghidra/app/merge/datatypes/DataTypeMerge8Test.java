@@ -109,7 +109,7 @@ public class DataTypeMerge8Test extends AbstractDataTypeMergeTest {
 				transactionID = program.startTransaction("remove XYZ");
 				try {
 					// Remove the XYZ data type.
-					dtm.remove(xyz, TaskMonitorAdapter.DUMMY_MONITOR);
+					dtm.remove(xyz, TaskMonitor.DUMMY);
 					commit = true;
 				}
 				finally {
