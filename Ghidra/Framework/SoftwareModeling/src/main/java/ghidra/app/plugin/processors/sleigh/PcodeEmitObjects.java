@@ -17,7 +17,8 @@ package ghidra.app.plugin.processors.sleigh;
 
 import java.util.ArrayList;
 
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressSpace;
 import ghidra.program.model.lang.InstructionContext;
 import ghidra.program.model.pcode.*;
 
@@ -32,7 +33,7 @@ public class PcodeEmitObjects extends PcodeEmit {
 	 * @param walk state of the ParserContext from which to generate p-code
 	 */
 	public PcodeEmitObjects(ParserWalker walk) {		// For use with emitting precompiled p-code templates
-		this(walk, null, 0, null, null);
+		this(walk, null, 0, null);
 	}
 
 	/**
@@ -42,7 +43,7 @@ public class PcodeEmitObjects extends PcodeEmit {
 	 * of instruction including delay-sloted instructions)
 	 */
 	public PcodeEmitObjects(ParserWalker walk, int fallOffset) {		// For use with emitting precompiled p-code templates
-		this(walk, null, fallOffset, null, null);
+		this(walk, null, fallOffset, null);
 	}
 
 	/**
@@ -50,12 +51,11 @@ public class PcodeEmitObjects extends PcodeEmit {
 	 * @param ictx is the InstructionContext used to resolve delayslot and crossbuild directives
 	 * @param fallOffset default instruction fall offset (i.e., instruction length including delay slotted instructions)
 	 * @param override required if pcode overrides are to be utilized
-	 * @param uniqueFactory required when override specified or if overlay normalization is required
 	 */
 	public PcodeEmitObjects(ParserWalker walk, InstructionContext ictx, int fallOffset,
-			PcodeOverride override, UniqueAddressFactory uniqueFactory) {
-		super(walk, ictx, fallOffset, override, uniqueFactory);
-		oplist = new ArrayList<PcodeOp>();
+			PcodeOverride override) {
+		super(walk, ictx, fallOffset, override);
+		oplist = new ArrayList<>();
 	}
 
 	public PcodeOp[] getPcodeOp() {
@@ -72,23 +72,23 @@ public class PcodeEmitObjects extends PcodeEmit {
 		if (labelref == null) {
 			return;
 		}
-        for (int opindex : labelref) {
-            PcodeOp op = oplist.get(opindex);
-            Varnode vn = op.getInput(0);
-            int labelid = (int) vn.getOffset();
-            if ((labelid >= labeldef.size()) || (labeldef.get(labelid) == null)) {
-                throw new SleighException("Reference to non-existant sleigh label");
-            }
-            long res = (long) labeldef.get(labelid) - (long) opindex;
-            if (vn.getSize() < 8) {
-                long mask = -1;
-                mask >>>= (8 - vn.getSize()) * 8;
-                res &= mask;
-            }
-            AddressSpace spc = vn.getAddress().getAddressSpace();
-            vn = new Varnode(spc.getAddress(res), vn.getSize());
-            op.setInput(vn, 0);
-        }
+		for (Integer opindex : labelref) {
+			PcodeOp op = oplist.get(opindex);
+			Varnode vn = op.getInput(0);
+			int labelid = (int) vn.getOffset();
+			if ((labelid >= labeldef.size()) || (labeldef.get(labelid) == null)) {
+				throw new SleighException("Reference to non-existant sleigh label");
+			}
+			long res = (long) labeldef.get(labelid) - (long) opindex;
+			if (vn.getSize() < 8) {
+				long mask = -1;
+				mask >>>= (8 - vn.getSize()) * 8;
+				res &= mask;
+			}
+			AddressSpace spc = vn.getAddress().getAddressSpace();
+			vn = new Varnode(spc.getAddress(res), vn.getSize());
+			op.setInput(vn, 0);
+		}
 	}
 
 	/* (non-Javadoc)
@@ -97,7 +97,7 @@ public class PcodeEmitObjects extends PcodeEmit {
 	@Override
 	void addLabelRef() {
 		if (labelref == null) {
-			labelref = new ArrayList<Integer>();
+			labelref = new ArrayList<>();
 		}
 		labelref.add(numOps);
 	}
