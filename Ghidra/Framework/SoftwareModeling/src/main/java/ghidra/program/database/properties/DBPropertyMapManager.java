@@ -64,15 +64,9 @@ public class DBPropertyMapManager implements PropertyMapManager, ManagerDB {
 	static final byte VOID_PROPERTY_TYPE = 3;
 	static final byte OBJECT_PROPERTY_TYPE = 4;
 
-	static final Schema PROPERTIES_SCHEMA;
-
-	static {
-
-		PROPERTIES_SCHEMA = new Schema(CURRENT_PROPERTIES_TABLE_VERSION, StringField.INSTANCE,
-			"Name", new Field[] { ByteField.INSTANCE, StringField.INSTANCE, IntField.INSTANCE },
-			new String[] { "Type", "Object Class", "Version" });
-
-	}
+	static final Schema PROPERTIES_SCHEMA = new Schema(CURRENT_PROPERTIES_TABLE_VERSION, StringField.INSTANCE,
+		"Name", new Field[] { ByteField.INSTANCE, StringField.INSTANCE, IntField.INSTANCE },
+		new String[] { "Type", "Object Class", "Version" });
 
 	/**
 	 * Constructs a new DBPropertyMapManager

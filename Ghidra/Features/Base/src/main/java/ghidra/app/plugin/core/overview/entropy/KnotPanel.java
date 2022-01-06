@@ -38,12 +38,7 @@ public class KnotPanel extends JPanel implements ComponentListener {
 	private Palette palette = null;
 	private FontMetrics metrics;
 
-	private ChangeListener paletteListener = new ChangeListener() {
-		@Override
-		public void stateChanged(ChangeEvent e) {
-			buildLabels();
-		}
-	};
+	private ChangeListener paletteListener = e -> buildLabels();
 
 	public KnotPanel() {
 		super();

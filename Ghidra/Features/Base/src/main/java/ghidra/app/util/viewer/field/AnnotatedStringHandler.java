@@ -36,13 +36,7 @@ import docking.widgets.fieldpanel.field.FieldElement;
  */
 public interface AnnotatedStringHandler extends ExtensionPoint {
 
-	public static final AnnotatedMouseHandler DUMMY_MOUSE_HANDLER = new AnnotatedMouseHandler() {
-		@Override
-		public boolean handleMouseClick(ProgramLocation location, MouseEvent mouseEvent,
-				ServiceProvider serviceProvider) {
-			return false;
-		}
-	};
+	public static final AnnotatedMouseHandler DUMMY_MOUSE_HANDLER = (location, mouseEvent, serviceProvider) -> false;
 
 	/**
 	 * Creates an {@link FieldElement} based upon the give array of Strings.  The first String

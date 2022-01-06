@@ -20,13 +20,10 @@ import java.util.*;
 import ghidra.program.model.address.Address;
 
 public class RegisterTranslator {
-	private static Comparator<Register> registerSizeComparator = new Comparator<Register>() {
-		@Override
-		public int compare(Register r1, Register r2) {
-			// Used for sorting largest to smallest
-			return r2.getBitLength() - r1.getBitLength();
-		}
-	};
+	private static Comparator<Register> registerSizeComparator = (r1, r2) -> {
+        // Used for sorting largest to smallest
+        return r2.getBitLength() - r1.getBitLength();
+    };
 
 	private Language oldLang;
 	private Language newLang;

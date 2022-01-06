@@ -58,17 +58,7 @@ public abstract class Abstract2DRStarTree< //
 		super(storeFactory, tableName, dataType, nodeType, upgradable, maxChildren);
 		this.space = space;
 
-		this.axes = List.of(new Comparator<NS>() {
-			@Override
-			public int compare(NS o1, NS o2) {
-				return space.compareX(o1.getX1(), o2.getX1());
-			}
-		}, new Comparator<NS>() {
-			@Override
-			public int compare(NS o1, NS o2) {
-				return space.compareY(o1.getY1(), o2.getY1());
-			}
-		});
+		this.axes = List.of((o1, o2) -> space.compareX(o1.getX1(), o2.getX1()), (o1, o2) -> space.compareY(o1.getY1(), o2.getY1()));
 	}
 
 	@Override

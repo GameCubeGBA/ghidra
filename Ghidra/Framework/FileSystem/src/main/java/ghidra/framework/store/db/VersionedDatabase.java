@@ -397,14 +397,10 @@ public class VersionedDatabase extends Database {
 			if (version == LATEST_VERSION || version == currentVersion) {
 				File file = bfMgr.getBufferFile(currentVersion);
                 try (InputStream itemIn = new BufferedInputStream(new FileInputStream(file))) {
-                    boolean success = false;
                     ItemSerializer.outputItem(name, contentType, filetype, file.length(), itemIn,
                             outputFile, monitor);
-                    success = true;
-                } finally {
-                    if (!success) {
-                        outputFile.delete();
-                    }
+                } catch (Exception e) {
+                    outputFile.delete();
                 }
 			}
 			else {
@@ -413,7 +409,6 @@ public class VersionedDatabase extends Database {
 					File tmpFile = File.createTempFile("ghidra", LocalBufferFile.TEMP_FILE_EXT);
 					tmpFile.delete();
 					BufferFile tmpBf = new LocalBufferFile(tmpFile, bf.getBufferSize());
-					boolean success = false;
 					try {
 						LocalBufferFile.copyFile(bf, tmpBf, null, monitor);
 						tmpBf.close();
@@ -422,12 +417,12 @@ public class VersionedDatabase extends Database {
                             ItemSerializer.outputItem(name, contentType, filetype, tmpFile.length(),
                                     itemIn, outputFile, monitor);
                         }
-						success = true;
+					}
+					catch (Exception e)
+					{
+						outputFile.delete();
 					}
 					finally {
-						if (!success) {
-							outputFile.delete();
-						}
 						tmpBf.close();
 						tmpFile.delete();
 					}

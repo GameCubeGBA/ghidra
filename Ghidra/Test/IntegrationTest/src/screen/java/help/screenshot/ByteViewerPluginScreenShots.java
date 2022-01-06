@@ -68,14 +68,11 @@ public class ByteViewerPluginScreenShots extends GhidraScreenShotGenerator {
 		goToListing(0x40b003);
 
 		final DialogComponentProvider dialog = getDialog();
-		runSwing(new Runnable() {
-			@Override
-			public void run() {
-				AddressInput addressInput =
-					(AddressInput) getInstanceField("addressInputField", dialog);
-				addressInput.setAddress(addr(0x40b003));
-			}
-		});
+		runSwing((Runnable) () -> {
+            AddressInput addressInput =
+                (AddressInput) getInstanceField("addressInputField", dialog);
+            addressInput.setAddress(addr(0x40b003));
+        });
 
 		pressOkOnDialog();
 		goToListing(0x41cc08);

@@ -135,18 +135,15 @@ public class LockFile {
 	 * @return true if any lock exists within dir for the given entity name.
 	 */
 	private static boolean hasAnyLock(File dir, final String mangledName) {
-		FileFilter filter = new FileFilter() {
-			@Override
-			public boolean accept(File pathname) {
-				String fname = pathname.getName();
-				if (fname.startsWith(mangledName) && fname.endsWith(LOCK)) {
-					String s =
-						fname.substring(mangledName.length(), fname.length() - LOCK.length());
-					return s.indexOf('.') == 0 && s.indexOf('.', 1) < 0;
-				}
-				return false;
-			}
-		};
+		FileFilter filter = pathname -> {
+            String fname = pathname.getName();
+            if (fname.startsWith(mangledName) && fname.endsWith(LOCK)) {
+                String s =
+                    fname.substring(mangledName.length(), fname.length() - LOCK.length());
+                return s.indexOf('.') == 0 && s.indexOf('.', 1) < 0;
+            }
+            return false;
+        };
 		File[] files = dir.listFiles(filter);
 		return files != null && files.length != 0;
 	}

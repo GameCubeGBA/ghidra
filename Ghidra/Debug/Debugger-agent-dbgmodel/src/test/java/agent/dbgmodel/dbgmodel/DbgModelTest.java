@@ -157,15 +157,12 @@ public class DbgModelTest extends AbstractGhidraHeadlessIntegrationTest {
 				return DebugStatus.BREAK;
 			}
 		});
-		client.setOutputCallbacks(new DebugOutputCallbacks() {
-			@Override
-			public void output(int mask, String text) {
-				System.out.print(text);
-				if (outputCapture != null) {
-					outputCapture.append(text);
-				}
-			}
-		});
+		client.setOutputCallbacks((mask, text) -> {
+            System.out.print(text);
+            if (outputCapture != null) {
+                outputCapture.append(text);
+            }
+        });
 
 		client.openDumpFileWide("notepad01.run");
 		control.waitForEvent();

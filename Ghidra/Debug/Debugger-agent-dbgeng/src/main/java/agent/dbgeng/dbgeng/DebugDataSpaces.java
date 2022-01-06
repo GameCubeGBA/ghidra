@@ -232,51 +232,46 @@ public interface DebugDataSpaces {
 	 * @return an iterator over virtual memory regions after the given start
 	 */
 	default Iterable<DebugMemoryBasicInformation> iterateVirtual(long start) {
-		return new Iterable<DebugMemoryBasicInformation>() {
-			@Override
-			public Iterator<DebugMemoryBasicInformation> iterator() {
-				return new Iterator<DebugMemoryBasicInformation>() {
-					private long last = start;
-					private long offset = start;
-					private DebugMemoryBasicInformation next = doGetNext();
+		return () -> new Iterator<DebugMemoryBasicInformation>() {
+            private long last = start;
+            private long offset = start;
+            private DebugMemoryBasicInformation next = doGetNext();
 
-					private DebugMemoryBasicInformation getNext() {
-						if (Long.compareUnsigned(last, offset) < 0) {
-							return doGetNext();
-						}
-						return null;
-					}
+            private DebugMemoryBasicInformation getNext() {
+                if (Long.compareUnsigned(last, offset) < 0) {
+                    return doGetNext();
+                }
+                return null;
+            }
 
-					private DebugMemoryBasicInformation doGetNext() {
-						try {
-							DebugMemoryBasicInformation info = queryVirtual(offset);
-							last = offset;
-							if (info != null) {
-								offset += info.regionSize;
-							}
-							return info;
-						}
-						catch (COMException e) {
-							if (!COMUtilsExtra.isE_NOINTERFACE(e)) {
-								throw e;
-							}
-							return null;
-						}
-					}
+            private DebugMemoryBasicInformation doGetNext() {
+                try {
+                    DebugMemoryBasicInformation info = queryVirtual(offset);
+                    last = offset;
+                    if (info != null) {
+                        offset += info.regionSize;
+                    }
+                    return info;
+                }
+                catch (COMException e) {
+                    if (!COMUtilsExtra.isE_NOINTERFACE(e)) {
+                        throw e;
+                    }
+                    return null;
+                }
+            }
 
-					@Override
-					public boolean hasNext() {
-						return next != null;
-					}
+            @Override
+            public boolean hasNext() {
+                return next != null;
+            }
 
-					@Override
-					public DebugMemoryBasicInformation next() {
-						DebugMemoryBasicInformation ret = next;
-						next = getNext();
-						return ret;
-					}
-				};
-			}
-		};
+            @Override
+            public DebugMemoryBasicInformation next() {
+                DebugMemoryBasicInformation ret = next;
+                next = getNext();
+                return ret;
+            }
+        };
 	}
 }

@@ -253,11 +253,7 @@ class ReorderManager {
 	private void addToSelection(ProgramNode node) {
 		final TreePath p = node.getTreePath();
 		tree.addSelectionPath(p);
-		Runnable r = new Runnable() {
-		    public void run() {
-		        tree.addSelectionPath(p);
-		    }
-		};
+		Runnable r = () -> tree.addSelectionPath(p);
 		SwingUtilities.invokeLater(r);
 	}
     

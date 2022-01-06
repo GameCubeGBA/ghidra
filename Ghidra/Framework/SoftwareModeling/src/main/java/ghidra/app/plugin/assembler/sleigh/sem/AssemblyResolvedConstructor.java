@@ -651,12 +651,7 @@ public class AssemblyResolvedConstructor extends AssemblyResolution {
 			}
 			return true;
 		};
-		return new Iterable<byte[]>() {
-			@Override
-			public Iterator<byte[]> iterator() {
-				return IteratorUtils.filteredIterator(ins.possibleVals().iterator(),
-					removeForbidden);
-			}
-		};
+		return () -> IteratorUtils.filteredIterator(ins.possibleVals().iterator(),
+            removeForbidden);
 	}
 }

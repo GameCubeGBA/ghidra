@@ -17,6 +17,7 @@ package ghidra.app.plugin.assembler.sleigh;
 
 import java.util.*;
 
+import ghidra.app.plugin.languages.sleigh.VisitorResults;
 import org.apache.commons.collections4.MultiValuedMap;
 import org.apache.commons.collections4.multimap.HashSetValuedHashMap;
 
@@ -311,51 +312,48 @@ public class SleighAssemblerBuilder implements AssemblerBuilder {
 	protected AssemblyGrammar buildSubGrammar(SubtableSymbol subtable) {
 		final AssemblyGrammar subgrammar = new AssemblyGrammar();
 		final AssemblyNonTerminal lhs = new AssemblyNonTerminal(subtable.getName());
-		SleighLanguages.traverseConstructors(subtable, new SubtableEntryVisitor() {
-			@Override
-			public int visit(DisjointPattern pattern, Constructor cons) {
-				AssemblySentential<AssemblyNonTerminal> rhs = new AssemblySentential<>();
-				List<Integer> indices = new ArrayList<>();
-				for (String str : cons.getPrintPieces()) {
-					if (str.length() != 0) {
-						if (str.charAt(0) == '\n') {
-							int index = str.charAt(1) - 'A';
-							OperandSymbol opsym = cons.getOperand(index);
-							AssemblySymbol sym = getSymbolFor(cons, opsym);
-							if (sym.takesOperandIndex()) {
-								indices.add(index);
-							}
-							rhs.add(sym);
-						}
-						else {
-							String tstr = str.trim();
-							if (tstr.isEmpty()) {
-								rhs.addWS();
-							}
-							else {
-								char first = tstr.charAt(0);
-								if (!str.startsWith(tstr)) {
-									rhs.addWS();
-								}
-								if (!Character.isLetterOrDigit(first)) {
-									rhs.addWS();
-								}
-								rhs.add(new AssemblyStringTerminal(str.trim()));
-								char last = tstr.charAt(tstr.length() - 1);
-								if (!str.endsWith(tstr)) {
-									rhs.addWS();
-								}
-								if (!Character.isLetterOrDigit(last)) {
-									rhs.addWS();
-								}
-							}
-						}
-					}
-				}
-				subgrammar.addProduction(lhs, rhs, pattern, cons, indices);
-				return CONTINUE;
-			}
-		});
+		SleighLanguages.traverseConstructors(subtable, (pattern, cons) -> {
+            AssemblySentential<AssemblyNonTerminal> rhs = new AssemblySentential<>();
+            List<Integer> indices = new ArrayList<>();
+            for (String str : cons.getPrintPieces()) {
+                if (str.length() != 0) {
+                    if (str.charAt(0) == '\n') {
+                        int index = str.charAt(1) - 'A';
+                        OperandSymbol opsym = cons.getOperand(index);
+                        AssemblySymbol sym = getSymbolFor(cons, opsym);
+                        if (sym.takesOperandIndex()) {
+                            indices.add(index);
+                        }
+                        rhs.add(sym);
+                    }
+                    else {
+                        String tstr = str.trim();
+                        if (tstr.isEmpty()) {
+                            rhs.addWS();
+                        }
+                        else {
+                            char first = tstr.charAt(0);
+                            if (!str.startsWith(tstr)) {
+                                rhs.addWS();
+                            }
+                            if (!Character.isLetterOrDigit(first)) {
+                                rhs.addWS();
+                            }
+                            rhs.add(new AssemblyStringTerminal(str.trim()));
+                            char last = tstr.charAt(tstr.length() - 1);
+                            if (!str.endsWith(tstr)) {
+                                rhs.addWS();
+                            }
+                            if (!Character.isLetterOrDigit(last)) {
+                                rhs.addWS();
+                            }
+                        }
+                    }
+                }
+            }
+            subgrammar.addProduction(lhs, rhs, pattern, cons, indices);
+            return VisitorResults.CONTINUE;
+        });
 		return subgrammar;
 	}
 

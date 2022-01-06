@@ -70,13 +70,10 @@ public class RegisterManager {
 		}
 	}
 
-	private static Comparator<Register> registerSizeComparator = new Comparator<Register>() {
-		@Override
-		public int compare(Register r1, Register r2) {
-			// Used for sorting largest to smallest
-			return r2.getBitLength() - r1.getBitLength();
-		}
-	};
+	private static Comparator<Register> registerSizeComparator = (r1, r2) -> {
+        // Used for sorting largest to smallest
+        return r2.getBitLength() - r1.getBitLength();
+    };
 
 	/**
 	 * Construct RegisterManager

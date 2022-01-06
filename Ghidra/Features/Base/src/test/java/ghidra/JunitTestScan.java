@@ -24,11 +24,7 @@ import java.io.*;
  */
 public class JunitTestScan {
 	
-	private static final FilenameFilter TEST_XML_FILTER = new FilenameFilter() {
-		public boolean accept(File dir, String name) {
-			return (name.startsWith("TEST-") && name.endsWith(".xml"));
-		}
-	};
+	private static final FilenameFilter TEST_XML_FILTER = (dir, name) -> (name.startsWith("TEST-") && name.endsWith(".xml"));
 	
 	private static void writeXmlFile(File xmlFile) throws IOException {
 		

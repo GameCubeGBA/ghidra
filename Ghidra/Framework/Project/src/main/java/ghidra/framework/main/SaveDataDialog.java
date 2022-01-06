@@ -80,21 +80,13 @@ public class SaveDataDialog extends DialogComponentProvider {
 		yesButton = new JButton("Save");
 		yesButton.setMnemonic('S');
 		addButton(yesButton);
-		yesButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent evt) {
-				okCallback();
-			}
-		});
+		yesButton.addActionListener(evt -> okCallback());
 		noButton = new JButton("Don't Save");
 		noButton.setMnemonic('n');
-		noButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent evt) {
-				operationCompleted = true;
-				close();
-			}
-		});
+		noButton.addActionListener(evt -> {
+            operationCompleted = true;
+            close();
+        });
 		addButton(noButton);
 		addCancelButton();
 
@@ -201,19 +193,9 @@ public class SaveDataDialog extends DialogComponentProvider {
 	 * Add listeners to the buttons.
 	 */
 	private void addListeners() {
-		selectAllButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				selectAll();
-			}
-		});
+		selectAllButton.addActionListener(e -> selectAll());
 
-		deselectAllButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				deselectAll();
-			}
-		});
+		deselectAllButton.addActionListener(e -> deselectAll());
 
 	}
 
@@ -378,12 +360,7 @@ public class SaveDataDialog extends DialogComponentProvider {
 			}
 			if (operationCompleted) {
 				try {
-					SwingUtilities.invokeAndWait(new Runnable() {
-						@Override
-						public void run() {
-							close();
-						}
-					});
+					SwingUtilities.invokeAndWait(() -> close());
 				}
 				catch (InterruptedException e) {
 					// don't care?
@@ -401,12 +378,7 @@ public class SaveDataDialog extends DialogComponentProvider {
 		 * Refresh the list of files that need saving.
 		 */
 		private void updateList() {
-			Runnable r = new Runnable() {
-				@Override
-				public void run() {
-					initList();
-				}
-			};
+			Runnable r = () -> initList();
 			try {
 				SwingUtilities.invokeAndWait(r);
 			}

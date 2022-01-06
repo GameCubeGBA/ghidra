@@ -64,16 +64,13 @@ public class JadProcessController {
 		this.wrapper = wrapper;
 		this.desc = desc;
 
-		timeoutRunnable = new Runnable() {
-			@Override
-			public void run() {
-				if (disposeState == DisposeState.ENDED_HAPPY) {
-					return;
-				}
-				dispose();
-				disposeState = DisposeState.DISPOSED_ON_TIMEOUT;
-			}
-		};
+		timeoutRunnable = () -> {
+            if (disposeState == DisposeState.ENDED_HAPPY) {
+                return;
+            }
+            dispose();
+            disposeState = DisposeState.DISPOSED_ON_TIMEOUT;
+        };
 	}
 
 	public void decompile(int timeoutSecs, TaskMonitor monitor) throws IOException {

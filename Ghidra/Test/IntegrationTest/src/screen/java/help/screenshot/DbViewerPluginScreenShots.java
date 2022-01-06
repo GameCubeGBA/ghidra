@@ -34,19 +34,16 @@ public class DbViewerPluginScreenShots extends GhidraScreenShotGenerator {
 		DbViewerProvider provider = showProvider(DbViewerProvider.class);
 		Object comp = getInstanceField("comp", provider);
 		final JComboBox<?> combo = (JComboBox<?>) getInstanceField("combo", comp);
-		runSwing(new Runnable() {
-			@Override
-			public void run() {
-				int count = combo.getItemCount();
-				for (int i = 0; i < count; i++) {
-					Object item = combo.getItemAt(i);
-					if (item.toString().startsWith("Metadata")) {
-						combo.setSelectedIndex(i);
-						break;
-					}
-				}
-			}
-		});
+		runSwing((Runnable) () -> {
+            int count = combo.getItemCount();
+            for (int i = 0; i < count; i++) {
+                Object item = combo.getItemAt(i);
+                if (item.toString().startsWith("Metadata")) {
+                    combo.setSelectedIndex(i);
+                    break;
+                }
+            }
+        });
 		captureIsolatedProvider(provider, 1000, 400);
 	}
 

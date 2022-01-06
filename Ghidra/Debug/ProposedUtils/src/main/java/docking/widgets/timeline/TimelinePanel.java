@@ -511,14 +511,6 @@ public class TimelinePanel<T, N extends Number & Comparable<N>> extends JPanel {
 		recolor(); // TODO: Way too draconian
 	}
 
-	public void addTimelineListener(TimelineListener listener) {
-		timelineListeners.add(listener);
-	}
-
-	public void removeTimelineListener(TimelineListener listener) {
-		timelineListeners.remove(listener);
-	}
-
 	protected Range<Double> computeViewRange() {
 		// TODO: Optimize when adding if performance is an issue
 		Double min = null;
@@ -549,7 +541,7 @@ public class TimelinePanel<T, N extends Number & Comparable<N>> extends JPanel {
 			minIndices.compute(trackMap.get(items.get(i)),
 				(t, j) -> j == null ? fi : Math.min(fi, j));
 		}
-		tracks.sort((t1, t2) -> Integer.compare(minIndices.get(t1), minIndices.get(t2)));
+		tracks.sort(Comparator.comparingInt(minIndices::get));
 		this.removeAll();
 		for (TimelineTrack<T, N> track : tracks) {
 			add(track);

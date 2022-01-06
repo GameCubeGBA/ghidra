@@ -94,24 +94,21 @@ class AddressMapDBAdapterNoTable extends AddressMapDBAdapter {
 		 * Comparator used to identify if an addr occurs before or after the 
 		 * start of a key range.
 		 */
-		private Comparator<Object> addressInsertionKeyRangeComparator = new Comparator<Object>() {
-			@Override
-			public int compare(Object keyRangeObj, Object addrObj) {
-				KeyRange range = (KeyRange) keyRangeObj;
-				Address addr = (Address) addrObj;
+		private Comparator<Object> addressInsertionKeyRangeComparator = (keyRangeObj, addrObj) -> {
+            KeyRange range = (KeyRange) keyRangeObj;
+            Address addr = (Address) addrObj;
 
-				Address min = decodeAddress(range.minKey);
-				if (min.compareTo(addr) > 0) {
-					return 1;
-				}
+            Address min = decodeAddress(range.minKey);
+            if (min.compareTo(addr) > 0) {
+                return 1;
+            }
 
-				Address max = decodeAddress(range.maxKey);
-				if (max.compareTo(addr) < 0) {
-					return -1;
-				}
-				return 0;
-			}
-		};
+            Address max = decodeAddress(range.maxKey);
+            if (max.compareTo(addr) < 0) {
+                return -1;
+            }
+            return 0;
+        };
 
 		@Override
 		public boolean hasSameKeyBase(long addrKey1, long addrKey2) {

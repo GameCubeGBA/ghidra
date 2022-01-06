@@ -104,12 +104,7 @@ public class AddressSetPanel extends AbstractMageJPanel<VTWizardStateKey> {
 		panel =
 			new ChooseAddressSetEditorPanel(tool, name, program, selection, addressSetView,
 				addressSetChoice);
-		panel.addChangeListener(new ChangeListener() {
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				notifyListenersOfValidityChanged();
-			}
-		});
+		panel.addChangeListener(e -> notifyListenersOfValidityChanged());
 		add(panel, BorderLayout.CENTER);
 	}
 

@@ -54,19 +54,16 @@ public class HyperlinkComponent extends JPanel {
 
 		textPane.setCaret(new NonScrollingCaret());
 
-		textPane.addHyperlinkListener(new HyperlinkListener() {
-			@Override
-			public void hyperlinkUpdate(HyperlinkEvent e) {
-				String anchorText = e.getDescription();
-				List<HyperlinkListener> list = hyperlinkListeners.get(anchorText);
-				if (list == null) {
-					return;
-				}
-				for (HyperlinkListener hyperlinkListener : list) {
-					hyperlinkListener.hyperlinkUpdate(e);
-				}
-			}
-		});
+		textPane.addHyperlinkListener(e -> {
+            String anchorText = e.getDescription();
+            List<HyperlinkListener> list = hyperlinkListeners.get(anchorText);
+            if (list == null) {
+                return;
+            }
+            for (HyperlinkListener hyperlinkListener : list) {
+                hyperlinkListener.hyperlinkUpdate(e);
+            }
+        });
 
 		textPane.setBorder(BorderFactory.createEmptyBorder());
 		textPane.putClientProperty(JEditorPane.HONOR_DISPLAY_PROPERTIES, Boolean.TRUE);

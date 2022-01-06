@@ -181,13 +181,10 @@ class LabelHistoryAdapterV0 extends LabelHistoryAdapter {
 	@Override
 	void deleteAddressRange(Address startAddr, Address endAddr, final AddressMap addrMap,
 			final Set<Address> set, TaskMonitor monitor) throws CancelledException, IOException {
-		RecordFilter filter = new RecordFilter() {
-			@Override
-			public boolean matches(DBRecord record) {
-				Address addr = addrMap.decodeAddress(record.getLongValue(HISTORY_ADDR_COL));
-				return set == null || !set.contains(addr);
-			}
-		};
+		RecordFilter filter = record -> {
+            Address addr = addrMap.decodeAddress(record.getLongValue(HISTORY_ADDR_COL));
+            return set == null || !set.contains(addr);
+        };
 		AddressRecordDeleter.deleteRecords(table, HISTORY_ADDR_COL, addrMap, startAddr, endAddr,
 			filter);
 	}

@@ -430,29 +430,21 @@ public class BundleHost {
 	}
 
 	protected void addDebuggingListeners() {
-		frameworkBundleContext.addFrameworkListener(new FrameworkListener() {
-			@Override
-			public void frameworkEvent(FrameworkEvent event) {
-				System.err.printf("%s %s\n", event.getBundle(), event);
-			}
-		});
-		frameworkBundleContext.addServiceListener(new ServiceListener() {
-			@Override
-			public void serviceChanged(ServiceEvent event) {
+		frameworkBundleContext.addFrameworkListener(event -> System.err.printf("%s %s\n", event.getBundle(), event));
+		frameworkBundleContext.addServiceListener(event -> {
 
-				String type = "?";
-				if (event.getType() == ServiceEvent.REGISTERED) {
-					type = "registered";
-				}
-				else if (event.getType() == ServiceEvent.UNREGISTERING) {
-					type = "unregistering";
-				}
+            String type = "?";
+            if (event.getType() == ServiceEvent.REGISTERED) {
+                type = "registered";
+            }
+            else if (event.getType() == ServiceEvent.UNREGISTERING) {
+                type = "unregistering";
+            }
 
-				System.err.printf("%s %s from %s\n", event.getSource(), type,
-					event.getServiceReference().getBundle().getLocation());
+            System.err.printf("%s %s from %s\n", event.getSource(), type,
+                event.getServiceReference().getBundle().getLocation());
 
-			}
-		});
+        });
 	}
 
 	/**
@@ -619,17 +611,14 @@ public class BundleHost {
 	protected void refreshBundlesSynchronously(Collection<Bundle> bundles) {
 		FrameworkWiring frameworkWiring = felixFramework.adapt(FrameworkWiring.class);
 		final CountDownLatch latch = new CountDownLatch(1);
-		frameworkWiring.refreshBundles(bundles, new FrameworkListener() {
-			@Override
-			public void frameworkEvent(FrameworkEvent event) {
-				if (event.getType() == FrameworkEvent.ERROR) {
-					Bundle bundle = event.getBundle();
-					Msg.error(BundleHost.this,
-						String.format("OSGi error refreshing bundle: %s", bundle));
-				}
-				latch.countDown();
-			}
-		});
+		frameworkWiring.refreshBundles(bundles, event -> {
+            if (event.getType() == FrameworkEvent.ERROR) {
+                Bundle bundle = event.getBundle();
+                Msg.error(BundleHost.this,
+                    String.format("OSGi error refreshing bundle: %s", bundle));
+            }
+            latch.countDown();
+        });
 		try {
 			latch.await();
 		}

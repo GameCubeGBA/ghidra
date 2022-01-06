@@ -91,16 +91,13 @@ class RegisterValuesXmlMgr {
 	private List<Register> getUniqueRegisters() {
 	
 		ArrayList<Register> regs = new ArrayList<>(context.getRegisters());
-		regs.sort(new Comparator<Register>() {
-            @Override
-            public int compare(Register r1, Register r2) {
-                int size1 = r1.getMinimumByteSize();
-                int size2 = r2.getMinimumByteSize();
-                if (size1 != size2) {
-                    return size1 - size2;
-                }
-                return r1.getOffset() - r2.getOffset();
+		regs.sort((r1, r2) -> {
+            int size1 = r1.getMinimumByteSize();
+            int size2 = r2.getMinimumByteSize();
+            if (size1 != size2) {
+                return size1 - size2;
             }
+            return r1.getOffset() - r2.getOffset();
         });
 		
 		return regs;

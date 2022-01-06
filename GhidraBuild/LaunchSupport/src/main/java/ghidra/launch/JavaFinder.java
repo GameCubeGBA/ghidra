@@ -117,12 +117,7 @@ public abstract class JavaFinder {
 			}
 		}
 		List<File> javaHomeDirs = new ArrayList<>(javaHomeToVersionMap.keySet());
-		javaHomeDirs.sort(new Comparator<File>() {
-            @Override
-            public int compare(File dir1, File dir2) {
-                return javaHomeToVersionMap.get(dir2).compareTo(javaHomeToVersionMap.get(dir1));
-            }
-        });
+		javaHomeDirs.sort((dir1, dir2) -> javaHomeToVersionMap.get(dir2).compareTo(javaHomeToVersionMap.get(dir1)));
 		return javaHomeDirs;
 	}
 

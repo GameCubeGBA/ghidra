@@ -81,20 +81,17 @@ class DomainObjectDBTransaction implements Transaction {
 		if (toolStates.isEmpty()) {
 			return;
 		}
-		SystemUtilities.runSwingLater(new Runnable() {
-			@Override
-			public void run() {
-				// flush events blocks so that current tool state and domain object are 
-				// consistent prior to restore tool state
-				domainObject.flushEvents();
-				if (beforeState) {
-					restoreToolStatesAfterUndo(domainObject);
-				}
-				else {
-					restoreToolStatesAfterRedo(domainObject);
-				}
-			}
-		});
+		SystemUtilities.runSwingLater(() -> {
+            // flush events blocks so that current tool state and domain object are
+            // consistent prior to restore tool state
+            domainObject.flushEvents();
+            if (beforeState) {
+                restoreToolStatesAfterUndo(domainObject);
+            }
+            else {
+                restoreToolStatesAfterRedo(domainObject);
+            }
+        });
 	}
 
 	static synchronized int getNextBaseId() {

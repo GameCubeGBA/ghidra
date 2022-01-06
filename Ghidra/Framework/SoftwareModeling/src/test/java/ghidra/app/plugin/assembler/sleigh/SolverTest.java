@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.atomic.AtomicReference;
 
+import ghidra.app.plugin.languages.sleigh.VisitorResults;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
@@ -194,18 +195,15 @@ public class SolverTest {
 		SleighLanguageProvider provider = new SleighLanguageProvider();
 		SleighLanguage lang = (SleighLanguage) provider.getLanguage(new LanguageID(langId));
 		AtomicReference<Constructor> consref = new AtomicReference<>();
-		SleighLanguages.traverseConstructors(lang, new ConstructorEntryVisitor() {
-			@Override
-			public int visit(SubtableSymbol subtable, DisjointPattern pattern, Constructor cons) {
-				if (subtableName.equals(subtable.getName())) {
-					if (patternStr.equals(pattern.toString())) {
-						consref.set(cons);
-						return FINISHED;
-					}
-				}
-				return CONTINUE;
-			}
-		});
+		SleighLanguages.traverseConstructors(lang, (subtable, pattern, cons) -> {
+            if (subtableName.equals(subtable.getName())) {
+                if (patternStr.equals(pattern.toString())) {
+                    consref.set(cons);
+                    return VisitorResults.FINISHED;
+                }
+            }
+            return VisitorResults.CONTINUE;
+        });
 		Msg.info(SolverTest.class, "Found constructor: " + consref.get());
 		return consref.get();
 	}
@@ -218,19 +216,16 @@ public class SolverTest {
 		SleighLanguageProvider provider = new SleighLanguageProvider();
 		SleighLanguage lang = (SleighLanguage) provider.getLanguage(new LanguageID(langId));
 		AtomicReference<Constructor> consref = new AtomicReference<>();
-		SleighLanguages.traverseConstructors(lang, new ConstructorEntryVisitor() {
-			@Override
-			public int visit(SubtableSymbol subtable, DisjointPattern pattern, Constructor cons) {
-				if (cons.getLineno() == lineno) {
-					consref.set(cons);
-					Msg.info(SolverTest.class, "Constructor " + cons + " has pattern " + pattern);
-					Msg.info(SolverTest.class,
-						"You should prefer to find it by pattern rather than line number");
-					return FINISHED;
-				}
-				return CONTINUE;
-			}
-		});
+		SleighLanguages.traverseConstructors(lang, (subtable, pattern, cons) -> {
+            if (cons.getLineno() == lineno) {
+                consref.set(cons);
+                Msg.info(SolverTest.class, "Constructor " + cons + " has pattern " + pattern);
+                Msg.info(SolverTest.class,
+                    "You should prefer to find it by pattern rather than line number");
+                return VisitorResults.FINISHED;
+            }
+            return VisitorResults.CONTINUE;
+        });
 		return consref.get();
 	}
 
@@ -268,18 +263,15 @@ public class SolverTest {
 		SleighLanguage lang =
 			(SleighLanguage) provider.getLanguage(new LanguageID("AARCH64:BE:64:v8A"));
 		AtomicReference<Constructor> consref = new AtomicReference<>();
-		SleighLanguages.traverseConstructors(lang, new ConstructorEntryVisitor() {
-			@Override
-			public int visit(SubtableSymbol subtable, DisjointPattern pattern, Constructor cons) {
-				if ("Imm_logical_imm32_operand".equals(subtable.getName())) {
-					if ("ins:SS:C[00xx]:[x0xx]X:XX:XX".equals(pattern.toString())) {
-						consref.set(cons);
-						return FINISHED;
-					}
-				}
-				return CONTINUE;
-			}
-		});
+		SleighLanguages.traverseConstructors(lang, (subtable, pattern, cons) -> {
+            if ("Imm_logical_imm32_operand".equals(subtable.getName())) {
+                if ("ins:SS:C[00xx]:[x0xx]X:XX:XX".equals(pattern.toString())) {
+                    consref.set(cons);
+                    return VisitorResults.FINISHED;
+                }
+            }
+            return VisitorResults.CONTINUE;
+        });
 		Constructor ct = consref.get();
 		ConstructState st = new ConstructState(null) {
 			@Override

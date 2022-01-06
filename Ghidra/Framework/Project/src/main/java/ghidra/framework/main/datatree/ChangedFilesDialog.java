@@ -54,11 +54,7 @@ public class ChangedFilesDialog extends DialogComponentProvider {
 		addWorkPanel(buildMainPanel());
 
 		JButton saveButton = new JButton("Save");
-		saveButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				save();
-			}
-		});
+		saveButton.addActionListener(e -> save());
 		saveButton.setToolTipText("Save files that have selected check boxes"); 
 		addButton(saveButton);				
         addCancelButton();	
@@ -143,11 +139,7 @@ public class ChangedFilesDialog extends DialogComponentProvider {
 			if (monitor.isCancelled()) {
 				saveSelected=false;
 			}
-			SwingUtilities.invokeLater(new Runnable() {
-				public void run() {
-					ChangedFilesDialog.this.close();
-				}
-			});
+			SwingUtilities.invokeLater(() -> ChangedFilesDialog.this.close());
 		}
 	}
 

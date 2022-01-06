@@ -63,12 +63,7 @@ public class PasswordChangeDialog extends DialogComponentProvider {
 		wp.add(new GLabel("Repeat Password:"));
 		passwordField2 = new JPasswordField(16);
 		passwordField2.setName("PASSWORD-ENTRY2-COMPONENT");
-		passwordField2.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				okCallback();
-			}
-		});
+		passwordField2.addActionListener(e -> okCallback());
 		wp.add(passwordField2);
 
 		wp.add(new GLabel());

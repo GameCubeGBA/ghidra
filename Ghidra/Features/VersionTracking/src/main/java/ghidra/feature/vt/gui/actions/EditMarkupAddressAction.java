@@ -111,23 +111,20 @@ public class EditMarkupAddressAction extends DockingAction {
 			new EditableListingAddress(destinationProgram, destinationAddress, markupItem);
 		final DialogProvider dialog = new DialogProvider(editableAddress);
 		dialog.setRememberSize(false);
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				controller.getTool().showDialog(dialog, component);
-				Address newDestinationAddress = dialog.getAddress();
-				if (SystemUtilities.isEqual(destinationAddress, newDestinationAddress)) {
-					return;
-				}
+		SwingUtilities.invokeLater(() -> {
+            controller.getTool().showDialog(dialog, component);
+            Address newDestinationAddress = dialog.getAddress();
+            if (SystemUtilities.isEqual(destinationAddress, newDestinationAddress)) {
+                return;
+            }
 
-				ArrayList<VTMarkupItem> arrayList = new ArrayList<VTMarkupItem>();
-				arrayList.add(markupItem);
-				SetMarkupItemDestinationAddressTask task =
-					new SetMarkupItemDestinationAddressTask(controller.getSession(), arrayList,
-						newDestinationAddress);
-				controller.runVTTask(task);
-			}
-		});
+            ArrayList<VTMarkupItem> arrayList = new ArrayList<VTMarkupItem>();
+            arrayList.add(markupItem);
+            SetMarkupItemDestinationAddressTask task =
+                new SetMarkupItemDestinationAddressTask(controller.getSession(), arrayList,
+                    newDestinationAddress);
+            controller.runVTTask(task);
+        });
 
 	}
 

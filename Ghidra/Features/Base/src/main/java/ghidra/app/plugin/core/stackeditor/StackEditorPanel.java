@@ -104,12 +104,7 @@ public class StackEditorPanel extends CompositeEditorPanel {
 		localSizeField = new JTextField(20);
 		localSizeField.setName("Local Size");
 		localSizeField.setEditable(true);
-		localSizeField.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				updatedLocalSize();
-			}
-		});
+		localSizeField.addActionListener(e -> updatedLocalSize());
 		localSizeField.addFocusListener(new FocusListener() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -152,12 +147,7 @@ public class StackEditorPanel extends CompositeEditorPanel {
 		paramSizeField = new JTextField(20);
 		paramSizeField.setName("Parameter Size");
 		paramSizeField.setEditable(true);
-		paramSizeField.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				updatedParamSize();
-			}
-		});
+		paramSizeField.addActionListener(e -> updatedParamSize());
 		paramSizeField.addFocusListener(new FocusListener() {
 			@Override
 			public void focusGained(FocusEvent e) {

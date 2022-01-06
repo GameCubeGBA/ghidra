@@ -234,55 +234,48 @@ public class MemoryMapPluginScreenShots extends GhidraScreenShotGenerator {
 	private void selectRow(final GhidraTable table, final String text) {
 
 		final TableModel model = table.getModel();
-		runSwing(new Runnable() {
+		runSwing((Runnable) () -> {
+            int columnCount = model.getColumnCount();
+            int columnIndex = -1;
+            int rowIndex = -1;
+            for (int i = 0; i < columnCount; i++) {
+                if (model.getColumnName(i).equals("Name")) {
+                    columnIndex = i;
+                    break;
+                }
+            }
+            if (columnIndex != -1) {
+                int rowCount = model.getRowCount();
+                for (int i = 0; i < rowCount; i++) {
+                    if (model.getValueAt(i, columnIndex).equals(text)) {
+                        rowIndex = i;
+                        break;
+                    }
+                }
+            }
+            if (rowIndex == -1) {
+                throw new AssertException();
+            }
+            table.selectRow(rowIndex);
 
-			@Override
-			public void run() {
-				int columnCount = model.getColumnCount();
-				int columnIndex = -1;
-				int rowIndex = -1;
-				for (int i = 0; i < columnCount; i++) {
-					if (model.getColumnName(i).equals("Name")) {
-						columnIndex = i;
-						break;
-					}
-				}
-				if (columnIndex != -1) {
-					int rowCount = model.getRowCount();
-					for (int i = 0; i < rowCount; i++) {
-						if (model.getValueAt(i, columnIndex).equals(text)) {
-							rowIndex = i;
-							break;
-						}
-					}
-				}
-				if (rowIndex == -1) {
-					throw new AssertException();
-				}
-				table.selectRow(rowIndex);
-
-			}
-		});
+        });
 	}
 
 	private void selectItem(final GhidraComboBox<?> comboBox, final String text) {
-		runSwing(new Runnable() {
-			@Override
-			public void run() {
-				int itemCount = comboBox.getItemCount();
-				Object item = null;
-				for (int i = 0; i < itemCount; i++) {
-					Object itemAt = comboBox.getItemAt(i);
-					if (itemAt.toString().equals(text)) {
-						item = itemAt;
-						break;
-					}
-				}
-				if (item == null) {
-					throw new AssertException();
-				}
-				comboBox.setSelectedItem(item);
-			}
-		});
+		runSwing((Runnable) () -> {
+            int itemCount = comboBox.getItemCount();
+            Object item = null;
+            for (int i = 0; i < itemCount; i++) {
+                Object itemAt = comboBox.getItemAt(i);
+                if (itemAt.toString().equals(text)) {
+                    item = itemAt;
+                    break;
+                }
+            }
+            if (item == null) {
+                throw new AssertException();
+            }
+            comboBox.setSelectedItem(item);
+        });
 	}
 }

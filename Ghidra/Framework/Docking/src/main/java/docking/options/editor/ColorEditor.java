@@ -197,16 +197,13 @@ public class ColorEditor extends PropertyEditorSupport {
 			}
 
 			add(colorChooser, BorderLayout.CENTER);
-			colorChooser.getSelectionModel().addChangeListener(new ChangeListener() {
-				@Override
-				public void stateChanged(ChangeEvent e) {
-					lastUserSelectedColor = colorChooser.getColor();
-					// This could be a ColorUIResource, but Options only support storing Color.
-					lastUserSelectedColor =
-						new Color(lastUserSelectedColor.getRed(), lastUserSelectedColor.getGreen(),
-							lastUserSelectedColor.getBlue(), lastUserSelectedColor.getAlpha());
-				}
-			});
+			colorChooser.getSelectionModel().addChangeListener(e -> {
+                lastUserSelectedColor = colorChooser.getColor();
+                // This could be a ColorUIResource, but Options only support storing Color.
+                lastUserSelectedColor =
+                    new Color(lastUserSelectedColor.getRed(), lastUserSelectedColor.getGreen(),
+                        lastUserSelectedColor.getBlue(), lastUserSelectedColor.getAlpha());
+            });
 			colorChooser.setColor(color);
 		}
 	}

@@ -23,6 +23,7 @@ import ghidra.app.plugin.assembler.sleigh.grammars.AssemblyProduction;
 import ghidra.app.plugin.assembler.sleigh.util.DbgTimer;
 import ghidra.app.plugin.languages.sleigh.SleighLanguages;
 import ghidra.app.plugin.languages.sleigh.SubtableEntryVisitor;
+import ghidra.app.plugin.languages.sleigh.VisitorResults;
 import ghidra.app.plugin.processors.sleigh.*;
 import ghidra.app.plugin.processors.sleigh.pattern.DisjointPattern;
 import ghidra.app.plugin.processors.sleigh.symbol.SubtableSymbol;
@@ -165,60 +166,57 @@ public class AssemblyConstructorSemantic implements Comparable<AssemblyConstruct
 		Set<AssemblyResolvedConstructor> forbids = new HashSet<>();
 		SubtableSymbol parent = cons.getParent();
 
-		SleighLanguages.traverseConstructors(parent, new SubtableEntryVisitor() {
-			@Override
-			public int visit(DisjointPattern sibDP, Constructor sibcons) {
-				// Do not forbid myself.
-				if (sibcons == cons) {
-					return CONTINUE;
-				}
+		SleighLanguages.traverseConstructors(parent, (sibDP, sibcons) -> {
+            // Do not forbid myself.
+            if (sibcons == cons) {
+                return VisitorResults.CONTINUE;
+            }
 
-				/*
-				 * I had misunderstood the precedence rules originally.
-				 * 1. If one pattern defines a subset of the other pattern, then the more-specific
-				 *    one is preferred.
-				 * 2. Otherwise, preference is by line number
-				 * 
-				 * Thus, I need to check if there is any overlap at all. If not, then I don't
-				 * need to worry about forbidding anything.
-				 * Then, I'll check if it defines a strict subset, and forbid it if so.
-				 * Then, I'll check if it defines a strict overset, and skip the line check if so.
-				 * Then, I'll check if its line number *precedes* mine, and forbid it if so.
-				 * 
-				 * (I originally though the pattern with the most bits won, no matter whether or
-				 * not those bits overlapped.)
-				 */
+            /*
+             * I had misunderstood the precedence rules originally.
+             * 1. If one pattern defines a subset of the other pattern, then the more-specific
+             *    one is preferred.
+             * 2. Otherwise, preference is by line number
+             *
+             * Thus, I need to check if there is any overlap at all. If not, then I don't
+             * need to worry about forbidding anything.
+             * Then, I'll check if it defines a strict subset, and forbid it if so.
+             * Then, I'll check if it defines a strict overset, and skip the line check if so.
+             * Then, I'll check if its line number *precedes* mine, and forbid it if so.
+             *
+             * (I originally though the pattern with the most bits won, no matter whether or
+             * not those bits overlapped.)
+             */
 
-				// If the two patterns cannot be combined, then they are disjoint.
-				AssemblyResolvedConstructor sibpat = AssemblyResolution.fromPattern(sibDP,
-					sibcons.getMinimumLength(), "For specialization check");
-				AssemblyResolvedConstructor comb = pat.combine(sibpat);
-				if (null == comb) {
-					return CONTINUE;
-				}
+            // If the two patterns cannot be combined, then they are disjoint.
+            AssemblyResolvedConstructor sibpat = AssemblyResolution.fromPattern(sibDP,
+                sibcons.getMinimumLength(), "For specialization check");
+            AssemblyResolvedConstructor comb = pat.combine(sibpat);
+            if (null == comb) {
+                return VisitorResults.CONTINUE;
+            }
 
-				// OK, they overlap. Let's see if its a strict subset
-				if (comb.bitsEqual(sibpat)) {
-					forbids.add(sibpat.withDescription(
-						sibcons + " forbids " + cons + " by pattern specificity"));
-					return CONTINUE;
-				}
-				else if (comb.bitsEqual(pat)) {
-					// I'm a strict subset, so I will no matter the line number
-					return CONTINUE;
-				}
+            // OK, they overlap. Let's see if its a strict subset
+            if (comb.bitsEqual(sibpat)) {
+                forbids.add(sibpat.withDescription(
+                    sibcons + " forbids " + cons + " by pattern specificity"));
+                return VisitorResults.CONTINUE;
+            }
+            else if (comb.bitsEqual(pat)) {
+                // I'm a strict subset, so I will no matter the line number
+                return VisitorResults.CONTINUE;
+            }
 
-				// Finally, check the line number
-				if (sibcons.getId() < cons.getId()) {
-					forbids.add(
-						sibpat.withDescription(sibcons + " forbids " + cons + " by rule position"));
-					return CONTINUE;
-				}
+            // Finally, check the line number
+            if (sibcons.getId() < cons.getId()) {
+                forbids.add(
+                    sibpat.withDescription(sibcons + " forbids " + cons + " by rule position"));
+                return VisitorResults.CONTINUE;
+            }
 
-				// I guess, I have the more-specific pattern, or I appear higher... 
-				return CONTINUE;
-			}
-		});
+            // I guess, I have the more-specific pattern, or I appear higher...
+            return VisitorResults.CONTINUE;
+        });
 
 		return pat.withForbids(forbids);
 	}

@@ -90,12 +90,7 @@ public class VTMatchApplyFunctionSignatureTest extends AbstractGhidraHeadedInteg
 			VTSessionDB.createVTSession(testName.getMethodName() + " - Test Match Set Manager",
 				sourceProgram, destinationProgram, this);
 
-		runSwing(new Runnable() {
-			@Override
-			public void run() {
-				controller.openVersionTrackingSession(session);
-			}
-		});
+		runSwing(() -> controller.openVersionTrackingSession(session));
 
 		setAllOptionsToDoNothing();
 

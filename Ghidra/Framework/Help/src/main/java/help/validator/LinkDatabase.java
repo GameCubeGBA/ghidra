@@ -32,63 +32,57 @@ public class LinkDatabase {
 
 	/** Sorted for later presentation */
 	private Set<InvalidLink> allUnresolvedLinks = new TreeSet<InvalidLink>(
-		new Comparator<InvalidLink>() {
-			@Override
-			public int compare(InvalidLink o1, InvalidLink o2) {
-				// same module...no subgroup by error type
-				String name1 = o1.getClass().getSimpleName();
-				String name2 = o2.getClass().getSimpleName();
-				if (!name1.equals(name2)) {
-					return name1.compareTo(name2);
-				}
+            (o1, o2) -> {
+                // same module...no subgroup by error type
+                String name1 = o1.getClass().getSimpleName();
+                String name2 = o2.getClass().getSimpleName();
+                if (!name1.equals(name2)) {
+                    return name1.compareTo(name2);
+                }
 
-				// ...also same error type, now subgroup by file
-				Path file1 = o1.getSourceFile();
-				Path file2 = o2.getSourceFile();
-				if (!file1.equals(file2)) {
-					return file1.toUri().compareTo(file2.toUri());
-				}
+                // ...also same error type, now subgroup by file
+                Path file1 = o1.getSourceFile();
+                Path file2 = o2.getSourceFile();
+                if (!file1.equals(file2)) {
+                    return file1.toUri().compareTo(file2.toUri());
+                }
 
-				// ...same file too...compare by line number
-				int lineNumber1 = o1.getLineNumber();
-				int lineNumber2 = o2.getLineNumber();
-				if (lineNumber1 != lineNumber2) {
-					return lineNumber1 - lineNumber2;
-				}
+                // ...same file too...compare by line number
+                int lineNumber1 = o1.getLineNumber();
+                int lineNumber2 = o2.getLineNumber();
+                if (lineNumber1 != lineNumber2) {
+                    return lineNumber1 - lineNumber2;
+                }
 
-				// ...wow...on the same line too?...just use identity, since we 
-				// create as we parse, which is how we read, from left to right
+                // ...wow...on the same line too?...just use identity, since we
+                // create as we parse, which is how we read, from left to right
 
-				return o1.identityHashCode() - o2.identityHashCode();
-			}
-		});
+                return o1.identityHashCode() - o2.identityHashCode();
+            });
 
 	private final Set<DuplicateAnchorCollection> duplicateAnchors =
-		new TreeSet<DuplicateAnchorCollection>(new Comparator<DuplicateAnchorCollection>() {
-			@Override
-			public int compare(DuplicateAnchorCollection o1, DuplicateAnchorCollection o2) {
-				if (o1.getClass() == o2.getClass()) {
-					if (o1 instanceof DuplicateAnchorCollectionByHelpTopic) {
-						DuplicateAnchorCollectionByHelpTopic d1 =
-							(DuplicateAnchorCollectionByHelpTopic) o1;
-						DuplicateAnchorCollectionByHelpTopic d2 =
-							(DuplicateAnchorCollectionByHelpTopic) o2;
-						return d1.compareTo(d2);
-					}
-					else if (o1 instanceof DuplicateAnchorCollectionByHelpFile) {
-						DuplicateAnchorCollectionByHelpFile d1 =
-							(DuplicateAnchorCollectionByHelpFile) o1;
-						DuplicateAnchorCollectionByHelpFile d2 =
-							(DuplicateAnchorCollectionByHelpFile) o2;
-						return d1.compareTo(d2);
-					}
-					throw new RuntimeException(
-						"New type of DuplicateAnchorCollection not handled by this comparator");
-				}
+		new TreeSet<DuplicateAnchorCollection>((o1, o2) -> {
+            if (o1.getClass() == o2.getClass()) {
+                if (o1 instanceof DuplicateAnchorCollectionByHelpTopic) {
+                    DuplicateAnchorCollectionByHelpTopic d1 =
+                        (DuplicateAnchorCollectionByHelpTopic) o1;
+                    DuplicateAnchorCollectionByHelpTopic d2 =
+                        (DuplicateAnchorCollectionByHelpTopic) o2;
+                    return d1.compareTo(d2);
+                }
+                else if (o1 instanceof DuplicateAnchorCollectionByHelpFile) {
+                    DuplicateAnchorCollectionByHelpFile d1 =
+                        (DuplicateAnchorCollectionByHelpFile) o1;
+                    DuplicateAnchorCollectionByHelpFile d2 =
+                        (DuplicateAnchorCollectionByHelpFile) o2;
+                    return d1.compareTo(d2);
+                }
+                throw new RuntimeException(
+                    "New type of DuplicateAnchorCollection not handled by this comparator");
+            }
 
-				return o1.getClass().getSimpleName().compareTo(o2.getClass().getSimpleName());
-			}
-		});
+            return o1.getClass().getSimpleName().compareTo(o2.getClass().getSimpleName());
+        });
 
 	private final HelpModuleCollection helpCollection;
 	private final Map<String, TOCItemDefinition> mapOfIDsToTOCDefinitions =

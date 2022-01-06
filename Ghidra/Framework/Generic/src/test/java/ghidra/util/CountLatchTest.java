@@ -59,23 +59,20 @@ public class CountLatchTest extends AbstractGenericTest {
 		final CountLatch countLatch = new CountLatch();
 		final AtomicBoolean b = new AtomicBoolean(false);
 		countLatch.increment();
-		Thread t = new Thread() {
-			@Override
-			public void run() {
-				try {
-					startLatch.await();
-					if (countLatch.await(1000, TimeUnit.MILLISECONDS)) {
-						b.set(true);
-					}
-				}
-				catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				finally {
-					doneLatch.countDown();
-				}
-			}
-		};
+		Thread t = new Thread(() -> {
+            try {
+                startLatch.await();
+                if (countLatch.await(1000, TimeUnit.MILLISECONDS)) {
+                    b.set(true);
+                }
+            }
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            finally {
+                doneLatch.countDown();
+            }
+        });
 		t.start();
 		startLatch.countDown();
 		assertFalse(b.get());

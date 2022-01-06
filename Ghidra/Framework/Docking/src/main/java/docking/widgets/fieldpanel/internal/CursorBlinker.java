@@ -38,17 +38,15 @@ public class CursorBlinker {
 	public CursorBlinker(FieldPanel panel) {
 		this.fieldPanel = panel;
 
-		timer = new Timer(500, new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (paintBounds != null) {
-					showCursor = !showCursor;
-					fieldPanel.paintImmediately(paintBounds);
-				}
-				else {
-					timer.stop();
-				}
-			}
-		});
+		timer = new Timer(500, e -> {
+            if (paintBounds != null) {
+                showCursor = !showCursor;
+                fieldPanel.paintImmediately(paintBounds);
+            }
+            else {
+                timer.stop();
+            }
+        });
 
 		// the initial painting is laggy for some reason, so shorten the delay
 		timer.setInitialDelay(100);

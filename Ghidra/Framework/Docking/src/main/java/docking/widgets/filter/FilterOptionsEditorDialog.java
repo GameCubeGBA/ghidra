@@ -168,35 +168,23 @@ public class FilterOptionsEditorDialog extends DialogComponentProvider {
 			buttonGroup.add(matchesExactlyButton);
 			buttonGroup.add(regularExpressionButton);
 
-			startsWithButton.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent ev) {
-					filterStrategy = TextFilterStrategy.STARTS_WITH;
-					updatedEnablementForNonRegularExpressionOptions(true);
-				}
-			});
+			startsWithButton.addActionListener(ev -> {
+                filterStrategy = TextFilterStrategy.STARTS_WITH;
+                updatedEnablementForNonRegularExpressionOptions(true);
+            });
 
-			containsButton.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent ev) {
-					filterStrategy = TextFilterStrategy.CONTAINS;
-					updatedEnablementForNonRegularExpressionOptions(true);
-				}
-			});
-			matchesExactlyButton.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent ev) {
-					filterStrategy = TextFilterStrategy.MATCHES_EXACTLY;
-					updatedEnablementForNonRegularExpressionOptions(true);
-				}
-			});
-			regularExpressionButton.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent ev) {
-					filterStrategy = TextFilterStrategy.REGULAR_EXPRESSION;
-					updatedEnablementForNonRegularExpressionOptions(false);
-				}
-			});
+			containsButton.addActionListener(ev -> {
+                filterStrategy = TextFilterStrategy.CONTAINS;
+                updatedEnablementForNonRegularExpressionOptions(true);
+            });
+			matchesExactlyButton.addActionListener(ev -> {
+                filterStrategy = TextFilterStrategy.MATCHES_EXACTLY;
+                updatedEnablementForNonRegularExpressionOptions(true);
+            });
+			regularExpressionButton.addActionListener(ev -> {
+                filterStrategy = TextFilterStrategy.REGULAR_EXPRESSION;
+                updatedEnablementForNonRegularExpressionOptions(false);
+            });
 
 			switch (initialFilterOptions.getTextFilterStrategy()) {
 				case STARTS_WITH:

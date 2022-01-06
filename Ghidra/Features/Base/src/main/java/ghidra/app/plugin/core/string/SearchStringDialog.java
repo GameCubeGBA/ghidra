@@ -231,24 +231,21 @@ public class SearchStringDialog extends DialogComponentProvider {
 
 		// Set up a file chooser that allows the user to select a new *.sng file.
 		JButton browseButton = ButtonPanelFactory.createButton(ButtonPanelFactory.BROWSE_TYPE);
-		browseButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				GhidraFileChooser chooser = new GhidraFileChooser(panel);
-				chooser.setTitle("Select Word Model File");
-				chooser.setMultiSelectionEnabled(false);
-				chooser.setFileFilter(new ExtensionFileFilter("sng", "Word File"));
+		browseButton.addActionListener(e -> {
+            GhidraFileChooser chooser = new GhidraFileChooser(panel);
+            chooser.setTitle("Select Word Model File");
+            chooser.setMultiSelectionEnabled(false);
+            chooser.setFileFilter(new ExtensionFileFilter("sng", "Word File"));
 
-				File selectedFile = chooser.getSelectedFile();
-				if (selectedFile == null) {
-					return;
-				}
+            File selectedFile = chooser.getSelectedFile();
+            if (selectedFile == null) {
+                return;
+            }
 
-				// Important to only save off the name of the file. The NGramUtils call that
-				// loads the file will search for the file given this name.
-				wordModelField.setText(selectedFile.getName());
-			}
-		});
+            // Important to only save off the name of the file. The NGramUtils call that
+            // loads the file will search for the file given this name.
+            wordModelField.setText(selectedFile.getName());
+        });
 
 		modelFieldPanel.add(browseButton);
 

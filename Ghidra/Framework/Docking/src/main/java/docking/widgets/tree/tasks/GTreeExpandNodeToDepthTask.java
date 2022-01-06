@@ -41,25 +41,21 @@ public class GTreeExpandNodeToDepthTask extends GTreeTask {
 
 	@Override
 	public void run(TaskMonitor monitor) {
-		runOnSwingThread(new Runnable() {
-			@Override
-			public void run() {
+		runOnSwingThread(() -> {
 
-				monitor.setMessage("Expanding Paths");
-				monitor.setIndeterminate(true);
+            monitor.setMessage("Expanding Paths");
+            monitor.setIndeterminate(true);
 
-				try {
-					for (TreePath path : paths) {
-						expandPath(jTree, path, depth, monitor);
-					}
-				}
-				catch (CancelledException ce) {
-					// ignored
-				}
-				monitor.setProgress(monitor.getMaximum());
-			}
-
-		});
+            try {
+                for (TreePath path : paths) {
+                    expandPath(jTree, path, depth, monitor);
+                }
+            }
+            catch (CancelledException ce) {
+                // ignored
+            }
+            monitor.setProgress(monitor.getMaximum());
+        });
 	}
 
 	private static void expandPath(JTree tree, TreePath treePath, int currentDepth,

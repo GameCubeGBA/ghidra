@@ -75,21 +75,18 @@ public class TagFilterEditorDialog extends DialogComponentProvider implements Ta
 		mainPanel.add(scrollPane, BorderLayout.CENTER);
 
 		JButton editButton = new JButton("Manage Tags");
-		editButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
+		editButton.addActionListener(e -> {
 
-				// show the editor
-				TagEditorDialog dialog = new TagEditorDialog(controller.getSession());
-				PluginTool tool = controller.getTool();
-				tool.showDialog(dialog);
+            // show the editor
+            TagEditorDialog dialog = new TagEditorDialog(controller.getSession());
+            PluginTool tool = controller.getTool();
+            tool.showDialog(dialog);
 
-				allTags = getAllTags();
+            allTags = getAllTags();
 
-				// update our list of tags
-				rebuild();
-			}
-		});
+            // update our list of tags
+            rebuild();
+        });
 
 		JPanel editPanel = new JPanel();
 		editPanel.add(editButton);

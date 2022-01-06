@@ -449,14 +449,12 @@ public class PropertyListMergeManager implements MergeResolver {
 	private void showMergePanel(final ConflictInfo info, final int conflictIndex,
 			final int totalNumConflicts) {
 		try {
-			SwingUtilities.invokeAndWait(new Runnable() {
-				public void run() {
-					if (mergePanel == null) {
-						mergePanel = new PropertyListMergePanel(mergeManager, totalNumConflicts);
-					}
-					mergePanel.setConflictInfo(conflictIndex, info);
-				}
-			});
+			SwingUtilities.invokeAndWait(() -> {
+                if (mergePanel == null) {
+                    mergePanel = new PropertyListMergePanel(mergeManager, totalNumConflicts);
+                }
+                mergePanel.setConflictInfo(conflictIndex, info);
+            });
 		}
 		catch (InterruptedException e) {
 		}

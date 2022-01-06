@@ -54,11 +54,7 @@ public class ShutdownHookRegistry {
 		if (hookInstalled) {
 			return;
 		}
-		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-			public void run() {
-				notifyHooks();
-			}
-		}, "Shutdown Hook Registry Notifier"));
+		Runtime.getRuntime().addShutdownHook(new Thread(() -> notifyHooks(), "Shutdown Hook Registry Notifier"));
 		hookInstalled = true;
 	}
 

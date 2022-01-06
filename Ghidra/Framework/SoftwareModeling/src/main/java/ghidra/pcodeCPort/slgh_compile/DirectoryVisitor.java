@@ -81,34 +81,18 @@ public class DirectoryVisitor implements Iterable<File> {
         private final FileFilter filter;
         private final Comparator<File> comparator;
 
-        private static final Comparator<File> CASE_SENSITIVE = new Comparator<File>() {
-            public int compare(File o1, File o2) {
-                return o1.getName().compareTo(o2.getName());
-            }
-        };
+        private static final Comparator<File> CASE_SENSITIVE = (o1, o2) -> o1.getName().compareTo(o2.getName());
 
-        private static final Comparator<File> CASE_INSENSITIVE = new Comparator<File>() {
-            public int compare(File o1, File o2) {
-                return o1.getName().compareToIgnoreCase(o2.getName());
-            }
-        };
+        private static final Comparator<File> CASE_INSENSITIVE = (o1, o2) -> o1.getName().compareToIgnoreCase(o2.getName());
 
-        private static final FileFilter DIRECTORIES = new FileFilter() {
-            public boolean accept(File pathname) {
-                return pathname.isDirectory();
-            }
-        };
+        private static final FileFilter DIRECTORIES = pathname -> pathname.isDirectory();
 
         public BreadthFirstDirectoryVisitor(Iterable<File> startingDirectories,
                 final FileFilter directoryFilter, FileFilter filter,
                 boolean compareCase) {
             this.directoryFilter = directoryFilter == null ? DIRECTORIES
-                    : new FileFilter() {
-                        public boolean accept(File pathname) {
-                            return pathname.isDirectory()
-                                    && directoryFilter.accept(pathname);
-                        }
-                    };
+                    : pathname -> pathname.isDirectory()
+                            && directoryFilter.accept(pathname);
             this.filter = filter;
             comparator = compareCase ? CASE_SENSITIVE : CASE_INSENSITIVE;
             for (File directory : startingDirectories) {

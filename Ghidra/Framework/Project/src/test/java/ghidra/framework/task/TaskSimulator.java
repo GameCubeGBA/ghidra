@@ -83,33 +83,18 @@ public class TaskSimulator {
 
 		yieldingCheckbox = new GCheckBox("Yielding");
 
-		addGroupButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				addGroup();
-			}
-		});
-		addTaskButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				addTask();
-			}
-		});
-		showResultsButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (showingResults) {
-					showingResults = false;
-					removeResultsPanel();
-				}
-				else {
-					showingResults = true;
-					addResultsPanel();
-				}
-			}
-		});
+		addGroupButton.addActionListener(e -> addGroup());
+		addTaskButton.addActionListener(e -> addTask());
+		showResultsButton.addActionListener(e -> {
+            if (showingResults) {
+                showingResults = false;
+                removeResultsPanel();
+            }
+            else {
+                showingResults = true;
+                addResultsPanel();
+            }
+        });
 
 		JPanel topPanel = new JPanel(new FlowLayout());
 		JPanel bottomPanel = new JPanel(new FlowLayout());

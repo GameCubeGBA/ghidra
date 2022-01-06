@@ -199,20 +199,17 @@ public class VariousChoicesPanel extends ConflictPanel {
 		MyRadioButton[] rb = new MyRadioButton[choices.length];
 		final int row = rows.size();
 		final ChoiceRow choiceRow = new ChoiceRow(titleComp, rb);
-		ItemListener itemListener = new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				adjustUseForAllEnablement();
-				if (listener != null) {
-					Object source = e.getSource();
-					if (((MyRadioButton) source).isSelected()) {
-						ResolveConflictChangeEvent re =
-							new ResolveConflictChangeEvent(source, row, choiceRow.getChoice());
-						listener.stateChanged(re);
-					}
-				}
-			}
-		};
+		ItemListener itemListener = e -> {
+            adjustUseForAllEnablement();
+            if (listener != null) {
+                Object source = e.getSource();
+                if (((MyRadioButton) source).isSelected()) {
+                    ResolveConflictChangeEvent re =
+                        new ResolveConflictChangeEvent(source, row, choiceRow.getChoice());
+                    listener.stateChanged(re);
+                }
+            }
+        };
 		ButtonGroup group = new ButtonGroup();
 		for (int i = 0; i < choices.length; i++) {
 			rb[i] = new MyRadioButton(choices[i]);
@@ -246,17 +243,14 @@ public class VariousChoicesPanel extends ConflictPanel {
 		MyCheckBox[] cb = new MyCheckBox[choices.length];
 		final int row = rows.size();
 		final ChoiceRow choiceRow = new ChoiceRow(titleComp, cb);
-		ItemListener itemListener = new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				adjustUseForAllEnablement();
-				if (listener != null) {
-					ResolveConflictChangeEvent re =
-						new ResolveConflictChangeEvent(e.getSource(), row, choiceRow.getChoice());
-					listener.stateChanged(re);
-				}
-			}
-		};
+		ItemListener itemListener = e -> {
+            adjustUseForAllEnablement();
+            if (listener != null) {
+                ResolveConflictChangeEvent re =
+                    new ResolveConflictChangeEvent(e.getSource(), row, choiceRow.getChoice());
+                listener.stateChanged(re);
+            }
+        };
 		for (int i = 0; i < choices.length; i++) {
 			cb[i] = new MyCheckBox(choices[i]);
 			cb[i].setName(getComponentName(row, (i + 1)));

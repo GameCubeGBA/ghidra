@@ -255,43 +255,40 @@ public class OverlayHelpTree {
 
 	// TODO LOOKIE
 	private static final Comparator<OverlayNode> CHILD_SORT_COMPARATOR =
-		new Comparator<OverlayNode>() {
-			@Override
-			public int compare(OverlayNode ov1, OverlayNode ov2) {
-				TOCItem o1 = ov1.getTOCItemDefinition();
-				TOCItem o2 = ov2.getTOCItemDefinition();
+            (ov1, ov2) -> {
+                TOCItem o1 = ov1.getTOCItemDefinition();
+                TOCItem o2 = ov2.getTOCItemDefinition();
 
-				if (!o1.getSortPreference().equals(o2.getSortPreference())) {
-					return o1.getSortPreference().compareTo(o2.getSortPreference());
-				}
+                if (!o1.getSortPreference().equals(o2.getSortPreference())) {
+                    return o1.getSortPreference().compareTo(o2.getSortPreference());
+                }
 
-				// if sort preference is the same, then sort alphabetically by display name
-				String text1 = o1.getTextAttribute();
-				String text2 = o2.getTextAttribute();
+                // if sort preference is the same, then sort alphabetically by display name
+                String text1 = o1.getTextAttribute();
+                String text2 = o2.getTextAttribute();
 
-				// null values can happen for reference items
-				if (text1 == null && text2 == null) {
-					return 0;
-				}
+                // null values can happen for reference items
+                if (text1 == null && text2 == null) {
+                    return 0;
+                }
 
-				// push any null values to the bottom
-				if (text1 == null) {
-					return 1;
-				}
-				else if (text2 == null) {
-					return -1;
-				}
+                // push any null values to the bottom
+                if (text1 == null) {
+                    return 1;
+                }
+                else if (text2 == null) {
+                    return -1;
+                }
 
-				int result = text1.compareTo(text2);
-				if (result != 0) {
-					return result;
-				}
+                int result = text1.compareTo(text2);
+                if (result != 0) {
+                    return result;
+                }
 
-				// At this point we have 2 nodes that have the same text attribute as children of
-				// a <TOCDEF> tag.  This is OK, as we use text only for sorting, but not for the
-				// display text.   Use the ID as a tie-breaker for sorting, which should provide
-				// sorting consistency.
-				return o1.getIDAttribute().compareTo(o2.getIDAttribute()); // ID should not be null
-			}
-		};
+                // At this point we have 2 nodes that have the same text attribute as children of
+                // a <TOCDEF> tag.  This is OK, as we use text only for sorting, but not for the
+                // display text.   Use the ID as a tie-breaker for sorting, which should provide
+                // sorting consistency.
+                return o1.getIDAttribute().compareTo(o2.getIDAttribute()); // ID should not be null
+            };
 }

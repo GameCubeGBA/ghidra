@@ -249,19 +249,15 @@ public class RepositoryCustomScreenShots extends GhidraScreenShotGenerator {
 		panel.addInfo(EXTERNAL_PROGRAM);
 		panel.addInfo(PROPERTY_LIST);
 
-		runSwing(new Runnable() {
-
-			@Override
-			public void run() {
-				panel.setCompleted(MEMORY);
-				panel.setCompleted(PROGRAM_TREE);
-				panel.setCompleted(DATA_TYPES);
-				panel.setCompleted(PROGRAM_CONTEXT);
-				panel.setCompleted(LISTING);
-				panel.setCompleted(BYTES);
-				panel.setInProgress(FUNCTIONS);
-			}
-		});
+		runSwing((Runnable) () -> {
+            panel.setCompleted(MEMORY);
+            panel.setCompleted(PROGRAM_TREE);
+            panel.setCompleted(DATA_TYPES);
+            panel.setCompleted(PROGRAM_CONTEXT);
+            panel.setCompleted(LISTING);
+            panel.setCompleted(BYTES);
+            panel.setInProgress(FUNCTIONS);
+        });
 
 		JPanel mainPanel = new JPanel(new VerticalLayout(20));
 		ImageIcon icon = ResourceManager.loadImage("images/Merge.png");

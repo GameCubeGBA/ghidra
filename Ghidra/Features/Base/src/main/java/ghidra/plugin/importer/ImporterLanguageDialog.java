@@ -52,13 +52,10 @@ public class ImporterLanguageDialog extends DialogComponentProvider {
 		}
 		else {
 			try {
-				SwingUtilities.invokeAndWait(new Runnable() {
-					@Override
-					public void run() {
-						build();
-						tool.showDialog(ImporterLanguageDialog.this, parent);
-					}
-				});
+				SwingUtilities.invokeAndWait(() -> {
+                    build();
+                    tool.showDialog(ImporterLanguageDialog.this, parent);
+                });
 			}
 			catch (Exception e) {
 				Msg.error(this, e);
@@ -72,12 +69,7 @@ public class ImporterLanguageDialog extends DialogComponentProvider {
 		languagePanel.setShowAllLcsPairs(false);
 		languagePanel.setBorder(
 			BorderFactory.createTitledBorder(" Select Language and Compiler Specification "));
-		languagePanel.addSelectionListener(new LcsSelectionListener() {
-			@Override
-			public void valueChanged(LcsSelectionEvent e) {
-				validateFormInput();
-			}
-		});
+		languagePanel.addSelectionListener(e -> validateFormInput());
 
 		initialize();
 

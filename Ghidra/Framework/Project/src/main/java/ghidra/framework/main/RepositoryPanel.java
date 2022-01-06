@@ -229,38 +229,32 @@ public class RepositoryPanel extends AbstractWizardJPanel {
 	}
 
 	private void addListeners() {
-		ActionListener listener = new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				boolean existingRepSelected = existingRepButton.isSelected();
-				nameList.setEnabled(existingRepSelected);
-				if (!existingRepSelected) {
-					nameList.clearSelection();
-				}
-				boolean createRepSelected = createRepButton.isSelected();
-				nameField.setEnabled(createRepSelected);
-				nameLabel.setEnabled(createRepSelected);
-				if (!createRepSelected) {
-					nameField.setText("");
-				}
-				validateName();
-			}
-		};
+		ActionListener listener = e -> {
+            boolean existingRepSelected = existingRepButton.isSelected();
+            nameList.setEnabled(existingRepSelected);
+            if (!existingRepSelected) {
+                nameList.clearSelection();
+            }
+            boolean createRepSelected = createRepButton.isSelected();
+            nameField.setEnabled(createRepSelected);
+            nameLabel.setEnabled(createRepSelected);
+            if (!createRepSelected) {
+                nameField.setText("");
+            }
+            validateName();
+        };
 		existingRepButton.addActionListener(listener);
 		createRepButton.addActionListener(listener);
 
 		ListSelectionModel selModel = nameList.getSelectionModel();
-		selModel.addListSelectionListener(new ListSelectionListener() {
-			/* (non Javadoc)
-			 * @see javax.swing.event.ListSelectionListener#valueChanged(javax.swing.event.ListSelectionEvent)
-			 */
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				if (e.getValueIsAdjusting()) {
-					return;
-				}
-				panelManager.getWizardManager().validityChanged();
-			}
-		});
+        /* (non Javadoc)
+         * @see javax.swing.event.ListSelectionListener#valueChanged(javax.swing.event.ListSelectionEvent)
+         */
+        selModel.addListSelectionListener(e -> {
+            if (e.getValueIsAdjusting()) {
+                return;
+            }
+            panelManager.getWizardManager().validityChanged();
+        });
 	}
 }

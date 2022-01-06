@@ -131,21 +131,11 @@ public class ConditionTestModel {
 	}
 
 	private void notifyTestsCompleted() {
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				conditionTestPanel.testsCompleted();
-			}
-		});
+		SwingUtilities.invokeLater(() -> conditionTestPanel.testsCompleted());
 	}
 
 	private void updatePanel() {
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				conditionTestPanel.update();
-			}
-		});
+		SwingUtilities.invokeLater(() -> conditionTestPanel.update());
 	}
 
 	public List<ConditionTester> getTests() {

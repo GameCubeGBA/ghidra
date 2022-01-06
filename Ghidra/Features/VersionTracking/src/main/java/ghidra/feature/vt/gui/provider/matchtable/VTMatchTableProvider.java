@@ -266,35 +266,31 @@ public class VTMatchTableProvider extends ComponentProviderAdapter
 			}
 		});
 
-		matchSelectionListener = new ListSelectionListener() {
-			@Override
-			@SuppressWarnings("unchecked")
-			// it's our model, it must be our type
-			public void valueChanged(ListSelectionEvent e) {
-				if (e.getValueIsAdjusting()) {
-					return;
-				}
+        // it's our model, it must be our type
+        matchSelectionListener = e -> {
+            if (e.getValueIsAdjusting()) {
+                return;
+            }
 
-				// we get out the model here in case it has been wrapped by one of the filters
-				RowObjectTableModel<VTMatch> model =
-					(RowObjectTableModel<VTMatch>) table.getModel();
-				boolean hasSingleSelection = table.getSelectedRowCount() == 1;
-				int selectedRow = table.getSelectedRow();
-				VTMatch match = hasSingleSelection ? model.getRowObject(selectedRow) : null;
-				if (!SystemUtilities.isEqual(latestMatch, match)) {
-					latestMatch = match;
+            // we get out the model here in case it has been wrapped by one of the filters
+            RowObjectTableModel<VTMatch> model =
+                (RowObjectTableModel<VTMatch>) table.getModel();
+            boolean hasSingleSelection = table.getSelectedRowCount() == 1;
+            int selectedRow = table.getSelectedRow();
+            VTMatch match = hasSingleSelection ? model.getRowObject(selectedRow) : null;
+            if (!SystemUtilities.isEqual(latestMatch, match)) {
+                latestMatch = match;
 
-					// call updateLater() instead of update(), as the latter can execute in the
-					// swing thread, causing the display to get sluggish
-					selectMatchUpdateManager.updateLater();
-				}
-				else {
-					// for any selection that is not handled by the match changing we want to
-					// notify that context has changed so that actions properly update
-					notifyContextChanged();
-				}
-			}
-		};
+                // call updateLater() instead of update(), as the latter can execute in the
+                // swing thread, causing the display to get sluggish
+                selectMatchUpdateManager.updateLater();
+            }
+            else {
+                // for any selection that is not handled by the match changing we want to
+                // notify that context has changed so that actions properly update
+                notifyContextChanged();
+            }
+        };
 		ListSelectionModel selectionModel = table.getSelectionModel();
 		selectionModel.addListSelectionListener(matchSelectionListener);
 

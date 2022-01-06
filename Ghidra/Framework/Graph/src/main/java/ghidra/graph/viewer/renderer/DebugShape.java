@@ -88,12 +88,7 @@ public class DebugShape<V, E> implements Paintable {
 	private boolean shapeIsOutdated() {
 		if (drawingIterationID != drawingIterationCounter.get()) {
 			// we are no longer drawing this shape
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					viewer.removePostRenderPaintable(DebugShape.this);
-				}
-			});
+			SwingUtilities.invokeLater(() -> viewer.removePostRenderPaintable(DebugShape.this));
 			return true;
 		}
 		return false;

@@ -75,12 +75,7 @@ public abstract class AbstractNextPreviousAction extends NavigatableContextActio
 				isForward ? getNextAddress(monitor, context.getProgram(), context.getAddress())
 						: getPreviousAddress(monitor, context.getProgram(), context.getAddress());
 
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					gotoAddress(context, address);
-				}
-			});
+			SwingUtilities.invokeLater(() -> gotoAddress(context, address));
 
 		}
 		catch (CancelledException e) {

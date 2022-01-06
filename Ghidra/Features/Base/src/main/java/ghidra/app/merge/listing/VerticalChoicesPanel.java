@@ -277,16 +277,13 @@ public class VerticalChoicesPanel extends ConflictPanel {
 		final MyRadioButton firstComp = new MyRadioButton(items[0], conflictOption);
 		group.add(firstComp);
 		firstComp.setName(name);
-		ItemListener itemListener = new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				if (listener != null && ((JRadioButton) e.getSource()).isSelected()) {
-					ResolveConflictChangeEvent event =
-						new ResolveConflictChangeEvent(firstComp, row, getSelectedOptions());
-					listener.stateChanged(event);
-				}
-			}
-		};
+		ItemListener itemListener = e -> {
+            if (listener != null && ((JRadioButton) e.getSource()).isSelected()) {
+                ResolveConflictChangeEvent event =
+                    new ResolveConflictChangeEvent(firstComp, row, getSelectedOptions());
+                listener.stateChanged(event);
+            }
+        };
 		firstComp.addItemListener(itemListener);
 		setRowComponent(firstComp, row, 0, defaultInsets);
 		for (int i = 1; i < items.length; i++) {
@@ -314,14 +311,11 @@ public class VerticalChoicesPanel extends ConflictPanel {
 		rows.add(items);
 		MyCheckBox firstComp = new MyCheckBox(items[0], conflictOption);
 		firstComp.setName(name);
-		ItemListener itemListener = new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				if (listener != null) {
-					listener.stateChanged(null);
-				}
-			}
-		};
+		ItemListener itemListener = e -> {
+            if (listener != null) {
+                listener.stateChanged(null);
+            }
+        };
 		firstComp.addItemListener(itemListener);
 		setRowComponent(firstComp, row, 0, defaultInsets);
 		for (int i = 1; i < items.length; i++) {

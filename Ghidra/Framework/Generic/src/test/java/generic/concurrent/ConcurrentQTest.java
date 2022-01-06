@@ -520,29 +520,26 @@ public class ConcurrentQTest extends AbstractGenericTest {
 			!checkpointRunner.hasFinished());
 
 		final CountDownLatch testThreadLatch = new CountDownLatch(1);
-		Thread cancelThread = new Thread() {
-			@Override
-			public void run() {
-				// WARNING: this is imprecise, but not sure how guarantee that the test thread
-				//          has reached its blocking code
-				try {
-					testThreadLatch.await();
-					sleep(300);// timing sensitivity
-				}
-				catch (InterruptedException e) {
-					// shouldn't happen
-				}
+		Thread cancelThread = new Thread(() -> {
+            // WARNING: this is imprecise, but not sure how guarantee that the test thread
+            //          has reached its blocking code
+            try {
+                testThreadLatch.await();
+                Thread.sleep(300);// timing sensitivity
+            }
+            catch (InterruptedException e) {
+                // shouldn't happen
+            }
 
-				// signal the queued items to proceed
-				for (int i = 0; i < MAX_THREADS; i++) {
-					waitLatch.countDown();
-				}
+            // signal the queued items to proceed
+            for (int i = 0; i < MAX_THREADS; i++) {
+                waitLatch.countDown();
+            }
 
 //				Msg.debug(this, "cancelled -  before ");
-				monitor.cancel();
+            monitor.cancel();
 //				Msg.debug(this, "cancelled -  after ");
-			}
-		};
+        });
 
 		cancelThread.start();
 

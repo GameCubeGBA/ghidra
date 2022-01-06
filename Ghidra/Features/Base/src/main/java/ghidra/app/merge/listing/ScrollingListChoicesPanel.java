@@ -315,12 +315,7 @@ class ListChoice extends JPanel {
 		this.headings = headings;
 		this.data = data;
 
-		SystemUtilities.runIfSwingOrPostSwingLater(new Runnable() {
-			@Override
-			public void run() {
-				model.fireTableStructureChanged();
-			}
-		});
+		SystemUtilities.runIfSwingOrPostSwingLater(() -> model.fireTableStructureChanged());
 	}
 
 	public boolean isSelected() {

@@ -89,12 +89,7 @@ public class DecompInterface {
 	protected DecompileProcess decompProcess;
 	protected DecompileCallback decompCallback;
 	private DecompileDebug debug;
-	protected CancelledListener monitorListener = new CancelledListener() {
-		@Override
-		public void cancelled() {
-			stopProcess();
-		}
-	};
+	protected CancelledListener monitorListener = () -> stopProcess();
 
 	// Initialization state
 	private String actionname; // Name of simplification action

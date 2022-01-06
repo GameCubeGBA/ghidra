@@ -84,19 +84,16 @@ public abstract class DisplayFilteredAction extends DockingAction {
 	}
 
 	protected void finishGetOffspring(ObjectContainer container, final List<String> path) {
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					DebuggerObjectsProvider p = new DebuggerObjectsProvider(provider.getPlugin(),
-						provider.getModel(), container, isTree);
-					container.propagateProvider(p);
-					p.update(container);
-				}
-				catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		SwingUtilities.invokeLater(() -> {
+            try {
+                DebuggerObjectsProvider p = new DebuggerObjectsProvider(provider.getPlugin(),
+                    provider.getModel(), container, isTree);
+                container.propagateProvider(p);
+                p.update(container);
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
 	}
 }

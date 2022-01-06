@@ -1286,13 +1286,10 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 	public static void executeOnSwingWithoutBlocking(Runnable runnable) {
 
 		AtomicBoolean didRun = new AtomicBoolean();
-		(new Thread() {
-			@Override
-			public void run() {
-				didRun.set(true);
-				runSwing(runnable);
-			}
-		}).start();
+		(new Thread(() -> {
+			didRun.set(true);
+			runSwing(runnable);
+		})).start();
 
 		// we can make this call, since any potential modal dialogs are not blocking in the Swing
 		// thread, but in the new event queue created by the modal dialog (this is how repainting

@@ -491,28 +491,22 @@ class BookmarkMerger extends AbstractListingMerger {
 		this.currentMonitor = monitor;
 		try {
 			final ChangeListener changeListener = new BookmarkMergeChangeListener();
-			SwingUtilities.invokeAndWait(new Runnable() {
-				@Override
-				public void run() {
-					VerticalChoicesPanel panel =
-						getConflictsPanel(BookmarkMerger.this.currentAddress,
-							BookmarkMerger.this.type, BookmarkMerger.this.category, changeListener);
+			SwingUtilities.invokeAndWait(() -> {
+                VerticalChoicesPanel panel =
+                    getConflictsPanel(BookmarkMerger.this.currentAddress,
+                        BookmarkMerger.this.type, BookmarkMerger.this.category, changeListener);
 
-					boolean useForAll = (bookmarkChoice != ASK_USER);
-					conflictPanel.setUseForAll(useForAll);
-					conflictPanel.setConflictType("Bookmark");
+                boolean useForAll = (bookmarkChoice != ASK_USER);
+                conflictPanel.setUseForAll(useForAll);
+                conflictPanel.setConflictType("Bookmark");
 
-					listingPanel.setBottomComponent(panel);
-				}
-			});
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					Address addressToPaint = BookmarkMerger.this.currentAddress;
-					listingPanel.clearAllBackgrounds();
-					listingPanel.paintAllBackgrounds(new AddressSet(addressToPaint, addressToPaint));
-				}
-			});
+                listingPanel.setBottomComponent(panel);
+            });
+			SwingUtilities.invokeLater(() -> {
+                Address addressToPaint = BookmarkMerger.this.currentAddress;
+                listingPanel.clearAllBackgrounds();
+                listingPanel.paintAllBackgrounds(new AddressSet(addressToPaint, addressToPaint));
+            });
 		}
 		catch (InterruptedException e) {
 		}

@@ -93,13 +93,10 @@ public class GTaskManager {
 		this.domainObject = undoableDomainObject;
 		this.threadPool = threadPool;
 
-		domainObject.addCloseListener(new DomainObjectClosedListener() {
-			@Override
-			public void domainObjectClosed() {
-				GTaskManagerFactory.domainObjectClosed(domainObject);
-				domainObject = null;
-			}
-		});
+		domainObject.addCloseListener(() -> {
+            GTaskManagerFactory.domainObjectClosed(domainObject);
+            domainObject = null;
+        });
 	}
 
 	/**

@@ -312,11 +312,6 @@ class ProgramTreePanel extends JPanel implements ChangeListener {
 				checkMouseEvent(e);
 			}
 		});
-		tree.addTreeSelectionListener(new TreeSelectionListener() {
-			@Override
-			public void valueChanged(TreeSelectionEvent e) {
-				fireSelectionEvent();
-			}
-		});
+		tree.addTreeSelectionListener(e -> fireSelectionEvent());
 	}
 }

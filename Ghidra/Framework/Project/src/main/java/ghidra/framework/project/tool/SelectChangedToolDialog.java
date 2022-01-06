@@ -77,24 +77,14 @@ public class SelectChangedToolDialog extends DialogComponentProvider {
 		ButtonGroup buttonGroup = new ButtonGroup();
 
 		GRadioButton noneButton = new GRadioButton("None");
-		ItemListener listener = new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				selectedTool = null;
-			}
-		};
+		ItemListener listener = e -> selectedTool = null;
 		noneButton.addItemListener(listener);
 		buttonGroup.add(noneButton);
 		panel.add(noneButton);
 
 		for (final PluginTool tool : toolList) {
 			GRadioButton radioButton = new GRadioButton(tool.getName());
-			radioButton.addItemListener(new ItemListener() {
-				@Override
-				public void itemStateChanged(ItemEvent e) {
-					selectedTool = tool;
-				}
-			});
+			radioButton.addItemListener(e -> selectedTool = tool);
 			buttonGroup.add(radioButton);
 			panel.add(radioButton);
 		}

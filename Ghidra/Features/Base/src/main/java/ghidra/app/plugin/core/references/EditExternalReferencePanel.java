@@ -87,13 +87,10 @@ class EditExternalReferencePanel extends EditReferencePanel {
 				extProgNameChanged();
 			}
 		});
-		extLibName.addItemListener(new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				extProgNameChanged();
-				updateExtLibPath();
-			}
-		});
+		extLibName.addItemListener(e -> {
+            extProgNameChanged();
+            updateExtLibPath();
+        });
 		topPanel.add(extLibName);
 
 		extLibPath = new JTextField();
@@ -103,21 +100,11 @@ class EditExternalReferencePanel extends EditReferencePanel {
 
 		clearButton = new JButton("Clear");
 		clearButton.setToolTipText("Remove Link to External Program");
-		clearButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				extLibPath.setText(null);
-			}
-		});
+		clearButton.addActionListener(e -> extLibPath.setText(null));
 
 		editButton = new JButton("Edit");
 		editButton.setToolTipText("Edit Link to External Program");
-		editButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				popupProgramChooser();
-			}
-		});
+		editButton.addActionListener(e -> popupProgramChooser());
 
 		JPanel pathPanel = new JPanel(new BorderLayout());
 		pathPanel.add(extLibPath, BorderLayout.CENTER);
@@ -185,22 +172,19 @@ class EditExternalReferencePanel extends EditReferencePanel {
 		DataTreeDialog d =
 			new DataTreeDialog(this.getParent(), "Choose External Program", DataTreeDialog.OPEN);
 		final DataTreeDialog dialog = d;
-		d.addOkActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				DomainFile df = dialog.getDomainFile();
-				if (df == null) {
-					return;
-				}
-				String pathName = df.getPathname();
-				if (pathName.equals(fromCodeUnit.getProgram().getDomainFile().getPathname())) {
-					dialog.setStatusText("Selected program is the same as current program");
-					return;
-				}
-				dialog.close();
-				extLibPath.setText(df.getPathname());
-			}
-		});
+		d.addOkActionListener(e -> {
+            DomainFile df = dialog.getDomainFile();
+            if (df == null) {
+                return;
+            }
+            String pathName = df.getPathname();
+            if (pathName.equals(fromCodeUnit.getProgram().getDomainFile().getPathname())) {
+                dialog.setStatusText("Selected program is the same as current program");
+                return;
+            }
+            dialog.close();
+            extLibPath.setText(df.getPathname());
+        });
 		plugin.getTool().showDialog(d);
 	}
 

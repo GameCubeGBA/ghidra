@@ -152,16 +152,14 @@ public class EditWindow extends JWindow {
                 }
 			}
 		});
-		textField.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (listener != null) {
-					String text = textField.getText();
-					EditListener l = listener;
-					close();
-					l.editCompleted(text);
-				}
-			}
-		});
+		textField.addActionListener(e -> {
+            if (listener != null) {
+                String text = textField.getText();
+                EditListener l = listener;
+                close();
+                l.editCompleted(text);
+            }
+        });
 
 		getContentPane().add(panel, BorderLayout.CENTER);
 	}

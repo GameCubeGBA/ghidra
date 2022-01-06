@@ -164,14 +164,11 @@ class ConflictPanel extends JPanel {
 		panel.add(rbPanel, BorderLayout.CENTER);
 		panel.add(createUseForAllCheckBox(), BorderLayout.SOUTH);
 
-		ItemListener itemListener = new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				if (listener != null) {
-					listener.stateChanged(null);
-				}
-			}
-		};
+		ItemListener itemListener = e -> {
+            if (listener != null) {
+                listener.stateChanged(null);
+            }
+        };
 		latestRB.addItemListener(itemListener);
 		myRB.addItemListener(itemListener);
 		originalRB.addItemListener(itemListener);

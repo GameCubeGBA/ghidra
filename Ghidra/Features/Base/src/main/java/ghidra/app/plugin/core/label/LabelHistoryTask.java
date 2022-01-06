@@ -77,18 +77,15 @@ public class LabelHistoryTask extends Task {
 
 		super.notifyTaskListeners(monitor.isCancelled());
 
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				if (!monitor.isCancelled()) {
-					if (historyList.size() > 0) {
-						LabelHistoryDialog dialog =
-							new LabelHistoryDialog(tool, program, dialogTitle, historyList);
-						tool.showDialog(dialog);
-					}
-				}
-			}
-		});
+		SwingUtilities.invokeLater(() -> {
+            if (!monitor.isCancelled()) {
+                if (historyList.size() > 0) {
+                    LabelHistoryDialog dialog =
+                        new LabelHistoryDialog(tool, program, dialogTitle, historyList);
+                    tool.showDialog(dialog);
+                }
+            }
+        });
 	}
 
 	boolean labelsFound() {
