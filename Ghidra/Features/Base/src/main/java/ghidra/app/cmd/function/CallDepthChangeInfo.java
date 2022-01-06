@@ -57,10 +57,6 @@ public class CallDepthChangeInfo {
 
 	Program program;
 
-	ArrayList<CodeBlock> codeBlocks = new ArrayList<CodeBlock>();
-
-	ArrayList<Address> callLocs = new ArrayList<Address>();
-
 	IntPropertyMap changeMap;
 
 	IntPropertyMap depthMap;
@@ -69,10 +65,10 @@ public class CallDepthChangeInfo {
 
 	private VarnodeTranslator trans;
 
-	private Register stackReg = null;
-	private Register frameReg = null;
+	private Register stackReg;
+	private Register frameReg;
 
-	SymbolicPropogator symEval = null;
+	SymbolicPropogator symEval;
 
 	private int stackPurge = Function.UNKNOWN_STACK_DEPTH_CHANGE;
 
@@ -85,7 +81,7 @@ public class CallDepthChangeInfo {
 	 * @param func function to examine
 	 */
 	public CallDepthChangeInfo(Function func) {
-		this.program = func.getProgram();
+		program = func.getProgram();
 		frameReg = program.getCompilerSpec().getStackPointer();
 		try {
 			initialize(func, func.getBody(), frameReg, TaskMonitor.DUMMY);
@@ -121,7 +117,7 @@ public class CallDepthChangeInfo {
 	 */
 	public CallDepthChangeInfo(Function function, AddressSetView restrictSet, Register frameReg,
 			TaskMonitor monitor) throws CancelledException {
-		this.program = function.getProgram();
+		program = function.getProgram();
 		if (frameReg == null) {
 			frameReg = program.getCompilerSpec().getStackPointer();
 		}
@@ -134,13 +130,12 @@ public class CallDepthChangeInfo {
 	 * @param program  program containing the function to examime
 	 * @param addr     address within the function to examine
 	 * @param restrictSet set of addresses to restrict flow flowing to.
-	 * @param frameReg register that is to have it's depth(value) change tracked
 	 * @param monitor  monitor used to cancel the operation
 	 * @throws CancelledException
 	 *             if the operation was canceled
 	 */
 	public CallDepthChangeInfo(Program program, Address addr, AddressSetView restrictSet,
-			Register frameReg, TaskMonitor monitor) throws CancelledException {
+							   TaskMonitor monitor) throws CancelledException {
 		Function func = program.getFunctionManager().getFunctionContaining(addr);
 		Register stackReg = program.getCompilerSpec().getStackPointer();
 		initialize(func, restrictSet, stackReg, monitor);
@@ -508,9 +503,9 @@ public class CallDepthChangeInfo {
 	 * @param func -
 	 *            function to analyze stack pointer references
 	 */
-	public int smoothDepth(Program program1, Function func, TaskMonitor monitor) {
+	public int smoothDepth(Program program1, Function func) {
 		if (trans.supportsPcode()) {
-			return smoothPcodeDepth(program1, func, monitor);
+			return smoothPcodeDepth(program1, func);
 		}
 
 		int returnStackDepth = Function.INVALID_STACK_DEPTH_CHANGE;
@@ -822,14 +817,6 @@ public class CallDepthChangeInfo {
 	}
 
 	/**
-	 * @param addr the address to get the stack pointer depth at.
-	 * @return the stack pointer depth at the address.
-	 */
-	public int getSPDepth(Address addr) {
-		return getRegDepth(addr, stackReg);
-	}
-
-	/**
 	 * @param addr the address to get the register depth at.
 	 * @param reg the register to get the depth of.
 	 * @return the depth of the register at the address.
@@ -865,15 +852,6 @@ public class CallDepthChangeInfo {
 	}
 
 	/**
-	 * @param addr the address of the register value to get the representation of.
-	 * @param reg the register to get the representation of.
-	 * @return the string representation of the register value.
-	 */
-	public String getRegValueRepresentation(Address addr, Register reg) {
-		return symEval.getRegisterValueRepresentation(addr, reg);
-	}
-
-	/**
 	 * Create locals and parameters based on references involving purely the
 	 * stack pointer. Pushes, Pops, and arithmetic manipulation of the stack
 	 * pointer must be tracked.
@@ -883,7 +861,7 @@ public class CallDepthChangeInfo {
 	 * @param func -
 	 *            function to analyze stack pointer references
 	 */
-	private int smoothPcodeDepth(Program program1, Function func, TaskMonitor monitor) {
+	private int smoothPcodeDepth(Program program1, Function func) {
 
 		int returnStackDepth = Function.INVALID_STACK_DEPTH_CHANGE;
 
@@ -915,7 +893,7 @@ public class CallDepthChangeInfo {
 			}
 
 			if (stackOK == Boolean.TRUE) {
-				this.setDepth(instr, stackPointerDepth);
+				setDepth(instr, stackPointerDepth);
 			}
 
 			// check for a frame setup
@@ -925,12 +903,11 @@ public class CallDepthChangeInfo {
 
 			// process any stack pointer manipulations
 			int instrChangeDepth =
-				this.getInstructionStackDepthChange(instr, procContext, stackPointerDepth);
-			if (instrChangeDepth != Function.UNKNOWN_STACK_DEPTH_CHANGE) {
-				stackPointerDepth += instrChangeDepth;
-			}
-			else {
+				getInstructionStackDepthChange(instr, procContext, stackPointerDepth);
+			if (instrChangeDepth == Function.UNKNOWN_STACK_DEPTH_CHANGE) {
 				stackOK = Boolean.FALSE;
+			} else {
+				stackPointerDepth += instrChangeDepth;
 			}
 
 			// if stack is OK at this instruction, remove from the bad stack set
@@ -1034,8 +1011,6 @@ public class CallDepthChangeInfo {
 				}
 			}
 		}
-
 		return getDefaultStackDepthChange(Function.UNKNOWN_STACK_DEPTH_CHANGE);
 	}
-
 }
