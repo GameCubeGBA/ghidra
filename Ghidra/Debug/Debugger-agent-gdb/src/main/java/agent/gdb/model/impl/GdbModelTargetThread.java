@@ -71,7 +71,7 @@ public class GdbModelTargetThread
 	protected String display;
 	protected String shortDisplay;
 	protected GdbThreadInfo info;
-	protected TargetExecutionState state = TargetExecutionState.INACTIVE;
+	protected TargetExecutionState state;
 	private Integer base = 10;
 
 	protected final GdbModelTargetStack stack;

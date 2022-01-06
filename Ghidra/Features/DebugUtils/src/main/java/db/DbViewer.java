@@ -39,6 +39,7 @@ import ghidra.framework.store.db.PackedDatabase;
 import ghidra.util.Msg;
 import ghidra.util.filechooser.ExtensionFileFilter;
 import ghidra.util.layout.PairLayout;
+import ghidra.util.task.TaskMonitor;
 import utility.application.ApplicationLayout;
 
 /**

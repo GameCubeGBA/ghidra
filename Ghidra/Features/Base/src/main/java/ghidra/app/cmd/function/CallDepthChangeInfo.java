@@ -149,7 +149,7 @@ public class CallDepthChangeInfo {
 	/**
 	 * initialize codeblocks and call locations.
 	 * 
-	 * @param addressSetView
+	 * @param restrictSet
 	 * @param monitor
 	 * @throws CancelledException
 	 */
@@ -365,8 +365,7 @@ public class CallDepthChangeInfo {
 					Varnode input = op.getInput(0);
 					// if we know the processor context, find the value
 					if (procContext != null && input.isRegister()) {
-						Register reg = null;
-						reg = trans.getRegister(input);
+						Register reg = trans.getRegister(input);
 						if (procContext.hasValue(reg)) {
 							long value = procContext.getValue(reg, true).longValue();
 							depthChange = (int) (value - currentStackDepth);
@@ -402,11 +401,8 @@ public class CallDepthChangeInfo {
 			return false;
 		}
 
-		Register reg = null;
-		reg = trans.getRegister(output);
-
 		// is this register the stack pointer
-        return reg == stackReg;
+        return trans.getRegister(output) == stackReg;
     }
 
 	/**
@@ -682,11 +678,9 @@ public class CallDepthChangeInfo {
 				FlowType ftype = instr.getFlowType();
 				if (possiblePurge && ftype.isTerminal()) {
 					if (instr.getMnemonicString().compareToIgnoreCase("ret") == 0) {
-						int tempPurge = 0;
 						Scalar scalar = instr.getScalar(0);
 						if (scalar != null) {
-							tempPurge = (int) scalar.getSignedValue();
-							stackPurge = tempPurge;
+							stackPurge = (int) scalar.getSignedValue();
 						}
 						else {
 							stackPurge = 0;

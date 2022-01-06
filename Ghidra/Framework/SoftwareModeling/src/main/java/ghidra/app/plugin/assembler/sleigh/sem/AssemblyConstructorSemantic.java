@@ -122,7 +122,7 @@ public class AssemblyConstructorSemantic implements Comparable<AssemblyConstruct
 	 * @return the iterator
 	 */
 	public Iterator<Integer> getOperandIndexIterator() {
-		return Collections.unmodifiableList(indices).iterator();
+		return indices.iterator();
 	}
 
 	/**

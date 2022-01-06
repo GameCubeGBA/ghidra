@@ -507,16 +507,13 @@ public class GBinaryReader {
      */
     public String readUnicodeString(long index) throws IOException {
         StringBuffer buffer = new StringBuffer();
-		char c = 0;
-		int i = 0;
-        while (i < length()) {
-            c  = (char)((provider.readByte(index++) & 0xff));
+        for (int i = 0; i < length(); i += 2) {
+            char c  = (char)((provider.readByte(index++) & 0xff));
             c += (char)((provider.readByte(index++) & 0xff) << 8);
             if (c == 0x0000) {
                 break;
             }
-            buffer.append(c); 
-            i += 2;
+            buffer.append(c);
         }
         return buffer.toString().trim();
     }
@@ -532,9 +529,8 @@ public class GBinaryReader {
      */
     public String readUnicodeString(long index, int length) throws IOException {
         StringBuffer buffer = new StringBuffer();
-        char c = 0;
         for (int i = 0 ; i < length*2 ; i+=2) {
-            c  = (char)((provider.readByte(index++) & 0xff));
+            char c  = (char)((provider.readByte(index++) & 0xff));
             c += (char)((provider.readByte(index++) & 0xff) << 8);
             buffer.append(c);
         }

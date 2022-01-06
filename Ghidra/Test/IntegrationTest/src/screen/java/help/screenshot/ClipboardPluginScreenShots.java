@@ -47,8 +47,6 @@ public class ClipboardPluginScreenShots extends GhidraScreenShotGenerator {
 
 		makeSelection(0x401000, 0x401000);
 
-		sel = cb.getCurrentSelection();
-
 		CopyPasteSpecialDialog dialog = showCopySpecialDialog();
 		Window window = SwingUtilities.windowForComponent(dialog.getComponent());
 

@@ -43,7 +43,6 @@ import utilities.util.FileUtilities;
  * An abstract {@link Loader} that provides a framework to conveniently load {@link Program}s with
  * support for linking against libraries contained in other {@link Program}s.
  * Subclasses are responsible for the actual load.
- * <p>
  */
 public abstract class AbstractLibrarySupportLoader extends AbstractProgramLoader {
 
@@ -299,7 +298,7 @@ public abstract class AbstractLibrarySupportLoader extends AbstractProgramLoader
 		LibraryLookupTable.cleanup();
 	}
 
-	private boolean isCreateExportSymbolFiles(List<Option> options) {
+	private static boolean isCreateExportSymbolFiles(List<Option> options) {
 		boolean isCreateExportSymbolFiles = IS_CREATE_EXPORT_SYMBOL_FILES_DEFAULT;
 		if (options != null) {
 			for (Option option : options) {
@@ -312,7 +311,7 @@ public abstract class AbstractLibrarySupportLoader extends AbstractProgramLoader
 		return isCreateExportSymbolFiles;
 	}
 
-	private boolean isLoadLibraries(List<Option> options) {
+	private static boolean isLoadLibraries(List<Option> options) {
 		boolean isLoadLibraries = IS_LOAD_LIBRARIES_DEFAULT;
 		if (options != null) {
 			for (Option option : options) {
@@ -368,7 +367,6 @@ public abstract class AbstractLibrarySupportLoader extends AbstractProgramLoader
 			program.endTransaction(transactionID, success);
 			if (!success) {
 				program.release(consumer);
-				program = null;
 			}
 		}
 	}
@@ -657,8 +655,6 @@ public abstract class AbstractLibrarySupportLoader extends AbstractProgramLoader
 			ByteProvider provider, LoadSpec loadSpec, List<Option> options, MessageLog log,
 			Object consumer, Set<String> unprocessedLibs, List<Program> programList,
 			TaskMonitor monitor) throws CancelledException, IOException {
-
-		Program lib = null;
 		int size = loadSpec.getLanguageCompilerSpec().getLanguageDescription().getSize();
 
 		LoadSpec libLoadSpec = getLoadSpec(loadSpec, provider);
@@ -679,7 +675,7 @@ public abstract class AbstractLibrarySupportLoader extends AbstractProgramLoader
 			}
 		}
 
-		lib = doLoad(provider, libName, libFolder, libLoadSpec, options, log, consumer, monitor,
+		Program lib = doLoad(provider, libName, libFolder, libLoadSpec, options, log, consumer, monitor,
 			unprocessedLibs);
 
 		if (lib == null) {
@@ -958,12 +954,12 @@ public abstract class AbstractLibrarySupportLoader extends AbstractProgramLoader
 		ArrayList<ExternalReference> list = new ArrayList<>();
 		ReferenceIterator iter = rm.getExternalReferences();
 		while (iter.hasNext()) {
-			ExternalReference ref = (ExternalReference) iter.next();
+			final ExternalReference ref = (ExternalReference) iter.next();
 			if (ref.getLibraryName().equals(externalName)) {
 				list.add(ref);
 			}
 		}
-		ExternalReference[] arr = new ExternalReference[list.size()];
+		final ExternalReference[] arr = new ExternalReference[list.size()];
 		list.toArray(arr);
 		return arr;
 	}
@@ -983,8 +979,8 @@ public abstract class AbstractLibrarySupportLoader extends AbstractProgramLoader
 	 * @return Matched File (which may or may not exist on the filesystem) or
 	 * null if the file name case is mis-matched or bad.
 	 */
-	private File resolveLibraryFile(File libFile) {
-		if (isCaseInsensitiveLibraryFilenames()) {
+	private File resolveLibraryFile(final File libFile) {
+		if (this.isCaseInsensitiveLibraryFilenames()) {
 			return FileUtilities.resolveFileCaseInsensitive(libFile);
 		}
 

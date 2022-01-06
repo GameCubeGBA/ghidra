@@ -414,12 +414,12 @@ public class FunctionGraphPluginScreenShots extends AbstractFunctionGraphTest {
 
 			Window window = windowForComponent(header);
 			Rectangle headerBounds = header.getBounds();
-			Rectangle bounds = new Rectangle(headerBounds);
+			Rectangle bounds = SwingUtilities.convertRectangle(header.getParent(), headerBounds, window);
 
 			// ugh--apparently the toolbar does not correctly calculate its minimum size
 			int padding = 30;
 
-			bounds = SwingUtilities.convertRectangle(header.getParent(), headerBounds, window);
+
 			bounds.x = bounds.x + bounds.width - (actionsWidth + padding);
 
 			padding = 8;// now some vertical padding

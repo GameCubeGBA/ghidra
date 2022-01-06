@@ -1022,14 +1022,14 @@ public abstract class CliAbstractSig extends CliBlob implements CliRepresentable
 
 		private CliSigType type;
 
-		private long dataOffset = 0;
-		private boolean isVoidAllowed = false;
+		private long dataOffset;
+		private boolean isVoidAllowed;
 
 		public CliTypeBase(BinaryReader reader, boolean isRetType)
 				throws IOException, InvalidInputException {
 			dataOffset = reader.getPointerIndex();
 
-			this.isVoidAllowed = isRetType;
+			isVoidAllowed = isRetType;
 
 			// Check for any of the modifiers, which can repeat out of order
 			// before encountering the base type

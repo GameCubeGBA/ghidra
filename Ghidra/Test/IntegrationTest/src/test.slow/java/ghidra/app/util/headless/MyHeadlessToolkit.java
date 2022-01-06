@@ -22,6 +22,7 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.font.TextAttribute;
 import java.awt.im.InputMethodHighlight;
 import java.awt.image.*;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.Map;
 import java.util.Properties;
@@ -29,24 +30,23 @@ import java.util.Properties;
 import sun.awt.HeadlessToolkit;
 
 public class MyHeadlessToolkit extends Toolkit {
-	
+
 	static volatile boolean swingErrorRegistered = false;
 	private static String preferredToolkit;
-	
+
 	private Toolkit localToolKit;
-	
+
 	static void setup() {
 		//System.setProperty("java.awt.headless", "true");
 		preferredToolkit = System.getProperty("awt.toolkit", "sun.awt.X11.XToolkit");
 		System.setProperty("awt.toolkit", MyHeadlessToolkit.class.getName());
 	}
-	
+
 	public MyHeadlessToolkit() {
 		swingErrorRegistered = true;
 		try {
 			throw new Exception("Swing invocation detected for Headless Mode");
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		getRealToolkit();
@@ -59,7 +59,7 @@ public class MyHeadlessToolkit extends Toolkit {
 
 	@Override
 	public int checkImage(Image image, int width, int height,
-			ImageObserver observer) {
+						  ImageObserver observer) {
 		return localToolKit.checkImage(image, width, height, observer);
 	}
 
@@ -152,7 +152,7 @@ public class MyHeadlessToolkit extends Toolkit {
 
 	@Override
 	public boolean prepareImage(Image image, int width, int height,
-			ImageObserver observer) {
+								ImageObserver observer) {
 		return localToolKit.prepareImage(image, width, height, observer);
 	}
 
@@ -163,33 +163,26 @@ public class MyHeadlessToolkit extends Toolkit {
 
 	private void getRealToolkit() {
 		try {
-            // We disable the JIT during toolkit initialization.  This
-            // tends to touch lots of classes that aren't needed again
-            // later and therefore JITing is counter-productiive.
-            java.lang.Compiler.disable();
-            
-			Class<?> cls = null;
-            try {
-            	try {
-                	cls = Class.forName(preferredToolkit);
-                } catch (ClassNotFoundException ee) {
-                    throw new AWTError("Toolkit not found: " + preferredToolkit);
-                }
-                if (cls != null) {
-                    localToolKit = (Toolkit)cls.newInstance();
-                    if (GraphicsEnvironment.isHeadless()) {
-                    	localToolKit = new HeadlessToolkit(localToolKit);
-                    }
-                }
-            } catch (InstantiationException e) {
-                throw new AWTError("Could not instantiate Toolkit: " + preferredToolkit);
-            } catch (IllegalAccessException e) {
-                throw new AWTError("Could not access Toolkit: " + preferredToolkit);
-            }
-            
-        } finally {
-            // Make sure to always re-enable the JIT.
-            java.lang.Compiler.enable();
-        }
+			Class<?> cls;
+			try {
+				cls = Class.forName(preferredToolkit);
+			} catch (ClassNotFoundException ee) {
+				throw new AWTError("Toolkit not found: " + preferredToolkit);
+			}
+			if (cls != null) {
+				localToolKit = (Toolkit) cls.getConstructor().newInstance();
+				if (GraphicsEnvironment.isHeadless()) {
+					localToolKit = new HeadlessToolkit(localToolKit);
+				}
+			}
+		} catch (InstantiationException e) {
+			throw new AWTError("Could not instantiate Toolkit: " + preferredToolkit);
+		} catch (IllegalAccessException e) {
+			throw new AWTError("Could not access Toolkit: " + preferredToolkit);
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		}
 	}
 }

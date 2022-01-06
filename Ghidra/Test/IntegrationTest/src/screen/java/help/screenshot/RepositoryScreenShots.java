@@ -2622,7 +2622,6 @@ public class RepositoryScreenShots extends AbstractListingMergeManagerTest {
 		waitForMergeCompletion();
 
 		myTestArchive.release(this);
-		myTestArchiveDF = null;
 	}
 
 //==================================================================================================
@@ -2644,8 +2643,8 @@ public class RepositoryScreenShots extends AbstractListingMergeManagerTest {
 			int numWaits = 0;
 			int waitTime = 250;
 			while (window.isVisible() && (numWaits * waitTime) < MAX_MERGE_TIMEOUT) {
-				numWaits++;
 				Thread.sleep(waitTime);
+				numWaits++;
 			}
 		}
 	}

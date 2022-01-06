@@ -210,7 +210,7 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 	protected Runnable repeatLastSet = () -> {
 	};
 
-	private boolean asTree = true;
+	private boolean asTree;
 	private MyObjectListener listener = new MyObjectListener();
 
 	public DebuggerMethodInvocationDialog configDialog;
@@ -755,8 +755,7 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 			TargetObject to = (TargetObject) val;
 			List<String> path = to.getPath();
 			boolean isLink = PathUtils.isLink(parent.getPath(), xkey, path);
-			boolean isMethod = false;
-			isMethod = to instanceof TargetMethod;
+			boolean isMethod = to instanceof TargetMethod;
 			if (!(val instanceof DummyTargetObject) && !isMethod) {
 				return new ObjectContainer(to, isLink ? xkey : null);
 			}
@@ -1242,8 +1241,6 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 			.onAction(ctx -> performConfigure(ctx))
 			.enabled(false)
 			.buildAndInstallLocal(this);
-		
-		groupTargetIndex++;
 	
 		displayAsTreeAction = new DisplayAsTreeAction(tool, plugin.getName(), this);
 		displayAsTableAction = new DisplayAsTableAction(tool, plugin.getName(), this);

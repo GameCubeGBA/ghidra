@@ -141,7 +141,6 @@ public class GRandomAccessFile {
 			if (pos < bufferFileStartIndex || pos >= bufferFileStartIndex + BUFFER_SIZE) {
 				// not in either, gotta get a new one
 				buffer = EMPTY;
-				bufferOffset = 0;
 				bufferFileStartIndex = pos;
 			}
 		}
