@@ -39,7 +39,6 @@ import ghidra.program.model.listing.Program;
 import ghidra.test.*;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public class AutoAnalysisWorkerTest extends AbstractGhidraHeadedIntegrationTest {
 

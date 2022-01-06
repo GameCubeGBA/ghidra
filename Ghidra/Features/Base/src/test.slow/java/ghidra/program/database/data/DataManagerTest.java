@@ -28,7 +28,6 @@ import ghidra.program.model.data.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.InvalidNameException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public class DataManagerTest extends AbstractGhidraHeadedIntegrationTest {
 	private ProgramDB program;

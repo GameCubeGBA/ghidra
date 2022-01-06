@@ -30,7 +30,6 @@ import ghidra.program.model.data.DataTypeManager;
 import ghidra.program.model.listing.ProgramChangeSet;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  * Adapter for data type merge tests.

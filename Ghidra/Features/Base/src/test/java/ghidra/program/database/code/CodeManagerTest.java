@@ -40,7 +40,6 @@ import ghidra.util.Lock;
 import ghidra.util.SaveableColor;
 import ghidra.util.exception.NoValueException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  * Test the code manager portion of listing.

@@ -22,7 +22,6 @@ import ghidra.program.util.ProgramLocation;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.exception.InvalidInputException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  * Interface for a symbol, which associates a string value with

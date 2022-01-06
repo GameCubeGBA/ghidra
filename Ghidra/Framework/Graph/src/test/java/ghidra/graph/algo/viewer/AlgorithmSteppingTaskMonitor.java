@@ -20,7 +20,7 @@ import java.util.Set;
 
 import ghidra.util.Msg;
 import ghidra.util.exception.CancelledException;
-import ghidra.util.task.TaskMonitorAdapter;
+import ghidra.util.task.TaskMonitor;
 import utility.function.Callback;
 
 /**

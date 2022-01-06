@@ -30,7 +30,7 @@ import ghidra.framework.plugintool.PluginTool;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
 import ghidra.test.*;
-import ghidra.util.task.TaskMonitorAdapter;
+import ghidra.util.task.TaskMonitor;
 
 public class DataWindowPluginTest extends AbstractGhidraHeadedIntegrationTest {
 	private TestEnv env;

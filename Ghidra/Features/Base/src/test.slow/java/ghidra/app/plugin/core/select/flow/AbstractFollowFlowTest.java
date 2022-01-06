@@ -30,7 +30,7 @@ import ghidra.program.util.ProgramSelection;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.DataConverter;
-import ghidra.util.task.TaskMonitorAdapter;
+import ghidra.util.task.TaskMonitor;
 
 public abstract class AbstractFollowFlowTest extends AbstractGhidraHeadedIntegrationTest {
 

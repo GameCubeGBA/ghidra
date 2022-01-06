@@ -28,7 +28,6 @@ import ghidra.util.Msg;
 import ghidra.util.Swing;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public class ClearCmd extends BackgroundCommand {
 	private static final int EVENT_LIMIT = 1000;

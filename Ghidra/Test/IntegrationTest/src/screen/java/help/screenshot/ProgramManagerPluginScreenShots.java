@@ -47,7 +47,7 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.symbol.SourceType;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskLauncher;
-import ghidra.util.task.TaskMonitorAdapter;
+import ghidra.util.task.TaskMonitor;
 
 public class ProgramManagerPluginScreenShots extends GhidraScreenShotGenerator
 		implements CheckinHandler {

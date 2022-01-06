@@ -21,7 +21,6 @@ import ghidra.program.model.mem.MemoryAccessException;
 import ghidra.util.Msg;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  * <CODE>ProgramMergeManager</CODE> is a class for merging the differences between two

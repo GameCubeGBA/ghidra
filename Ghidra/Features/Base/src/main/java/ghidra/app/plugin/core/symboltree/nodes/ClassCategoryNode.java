@@ -27,7 +27,6 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.symbol.*;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 import resources.ResourceManager;
 
 public class ClassCategoryNode extends SymbolCategoryNode {

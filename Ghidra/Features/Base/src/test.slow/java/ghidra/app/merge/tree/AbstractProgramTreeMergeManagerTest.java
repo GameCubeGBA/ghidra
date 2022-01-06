@@ -26,7 +26,6 @@ import ghidra.app.merge.*;
 import ghidra.program.model.listing.ProgramChangeSet;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public abstract class AbstractProgramTreeMergeManagerTest extends AbstractMergeTest {
 

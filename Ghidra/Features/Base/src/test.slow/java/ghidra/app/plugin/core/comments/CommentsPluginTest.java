@@ -57,7 +57,6 @@ import ghidra.test.TestEnv;
 import ghidra.util.SystemUtilities;
 import ghidra.util.table.GhidraProgramTableModel;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public class CommentsPluginTest extends AbstractGhidraHeadedIntegrationTest {
 

@@ -45,7 +45,6 @@ import ghidra.program.model.util.PropertyMapManager;
 import ghidra.test.TestEnv;
 import ghidra.util.InvalidNameException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public class RepositoryScreenShots extends AbstractListingMergeManagerTest {
 

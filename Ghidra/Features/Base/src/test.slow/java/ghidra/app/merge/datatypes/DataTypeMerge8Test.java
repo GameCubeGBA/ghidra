@@ -26,7 +26,7 @@ import ghidra.framework.main.*;
 import ghidra.program.database.OriginalProgramModifierListener;
 import ghidra.program.database.ProgramDB;
 import ghidra.program.model.data.*;
-import ghidra.util.task.TaskMonitorAdapter;
+import ghidra.util.task.TaskMonitor;
 
 /**
  * More data type merge tests.

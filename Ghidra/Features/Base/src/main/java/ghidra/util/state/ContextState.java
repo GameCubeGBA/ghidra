@@ -29,7 +29,6 @@ import ghidra.util.NumericUtilities;
 import ghidra.util.exception.AssertException;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public class ContextState {
 

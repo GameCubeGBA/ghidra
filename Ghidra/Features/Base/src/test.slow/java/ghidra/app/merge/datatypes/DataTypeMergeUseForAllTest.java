@@ -22,7 +22,7 @@ import org.junit.Test;
 import ghidra.program.database.ProgramDB;
 import ghidra.program.database.ProgramModifierListener;
 import ghidra.program.model.data.*;
-import ghidra.util.task.TaskMonitorAdapter;
+import ghidra.util.task.TaskMonitor;
 
 /**
  * Tests for merging data types.

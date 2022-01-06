@@ -38,7 +38,7 @@ import ghidra.program.database.ProgramDB;
 import ghidra.util.*;
 import ghidra.util.exception.UsrException;
 import ghidra.util.task.TaskLauncher;
-import ghidra.util.task.TaskMonitorAdapter;
+import ghidra.util.task.TaskMonitor;
 
 /**
  * Main Ghidra application class. Creates

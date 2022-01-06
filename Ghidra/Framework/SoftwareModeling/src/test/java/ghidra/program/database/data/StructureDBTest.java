@@ -27,7 +27,6 @@ import generic.test.AbstractGTest;
 import ghidra.program.model.data.*;
 import ghidra.util.InvalidNameException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public class StructureDBTest extends AbstractGTest {
 

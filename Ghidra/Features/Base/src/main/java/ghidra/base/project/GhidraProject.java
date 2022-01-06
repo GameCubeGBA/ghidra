@@ -40,7 +40,6 @@ import ghidra.test.ProjectTestUtils;
 import ghidra.util.*;
 import ghidra.util.exception.*;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  * Helper class for using Ghidra in a "batch" mode. This class provides methods
