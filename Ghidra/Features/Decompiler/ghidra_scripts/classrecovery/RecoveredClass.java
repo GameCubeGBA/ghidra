@@ -155,7 +155,7 @@ public class RecoveredClass {
 
 	public void addVftableAddress(Address address) {
 		vftableAddresses.add(address);
-		setHasVftable(true);
+		hasVftable = true;
 	}
 
 	public List<Address> getVftableAddresses() {

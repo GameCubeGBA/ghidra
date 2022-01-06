@@ -66,9 +66,9 @@ public abstract class AbstractCreateStructureCmd implements Command {
         try {            
             Program program = (Program) domainObject;
             Structure structure = createStructure( structureAddress, program );            
-            setNewDataType( initializeStructureData( program, structure ) );            
+            newDataType = initializeStructureData(program, structure);
         } catch (IllegalArgumentException iae) {
-            setStatusMsg( iae.getMessage() );
+            statusMessage = iae.getMessage();
             return false;
         }
        

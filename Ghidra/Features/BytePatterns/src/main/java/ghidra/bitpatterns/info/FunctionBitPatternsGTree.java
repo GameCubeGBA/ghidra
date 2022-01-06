@@ -123,7 +123,7 @@ public class FunctionBitPatternsGTree extends GTree {
 			}
 		}
 		FunctionBitPatternsGTree tree = new FunctionBitPatternsGTree(root, patternType);
-		tree.setTotalNum(instSeqs.size());
+		tree.totalNum = instSeqs.size();
 		root.sort();
 		root.filterByPercentage(percentageFilter);
 		return tree;

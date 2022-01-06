@@ -130,7 +130,7 @@ public abstract class AbstractAssemblyGrammar<NT extends AssemblyNonTerminal, P 
 	 * @param nt the new start symbol
 	 */
 	public void setStart(AssemblyNonTerminal nt) {
-		setStartName(nt == null ? null : nt.getName());
+		startName = nt == null ? null : nt.getName();
 	}
 
 	/**

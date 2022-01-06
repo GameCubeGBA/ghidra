@@ -820,7 +820,7 @@ public abstract class GhidraScript extends FlatProgramAPI {
 			script.setScriptArgs(scriptArguments);
 
 			if (potentialPropertiesFileLocs.size() > 0) {
-				script.setPotentialPropertiesFileLocations(potentialPropertiesFileLocs);
+				script.potentialPropertiesFileLocs = potentialPropertiesFileLocs;
 			}
 
 			if (scriptState == state) {

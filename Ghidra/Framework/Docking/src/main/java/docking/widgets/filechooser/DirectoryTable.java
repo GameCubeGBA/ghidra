@@ -209,7 +209,7 @@ class DirectoryTable extends GTable implements GhidraFileChooserDirectoryModelIf
 	@Override
 	public void edit() {
 		int row = getSelectedRow();
-		setRowToEdit(row);
+		rowToEdit = row;
 		editCellAt(row, DirectoryTableModel.FILE_COL);
 	}
 

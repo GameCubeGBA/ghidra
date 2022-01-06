@@ -358,9 +358,9 @@ public class InstructionSequence {
 		}
 
 		InstructionSequence result = new InstructionSequence();
-		result.setInstructions(instructionsList.toArray(new String[instructionsList.size()]));
-		result.setCommaSeparatedOperands(csoList.toArray(new String[csoList.size()]));
-		result.setSizes(sizesList.toArray(new Integer[sizesList.size()]));
+		result.instructions = instructionsList.toArray(new String[instructionsList.size()]);
+		result.commaSeparatedOperands = csoList.toArray(new String[csoList.size()]);
+		result.sizes = sizesList.toArray(new Integer[sizesList.size()]);
 
 		return result;
 	}

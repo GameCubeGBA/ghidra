@@ -166,8 +166,8 @@ public abstract class AbstractDebuggerWrappedConsoleConnection<T extends TargetO
 		InterpreterComponentProvider provider = (InterpreterComponentProvider) guiConsole;
 		provider.setSubTitle(targetConsole.getDisplay());
 
-		setStdErr(guiConsole.getStdErr());
-		setStdOut(guiConsole.getStdOut());
+		stdErr = guiConsole.getStdErr();
+		stdOut = guiConsole.getStdOut();
 		setStdIn(guiConsole.getStdin());
 
 		createActions();
