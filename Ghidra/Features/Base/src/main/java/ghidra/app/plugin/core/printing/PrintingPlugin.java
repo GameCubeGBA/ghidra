@@ -435,20 +435,17 @@ public class PrintingPlugin extends ProgramPlugin {
 
 		@Override
 		public void actionPerformed(ActionContext context) {
-			new Thread() {
-				@Override
-				public void run() {
-					PrinterJob job = PrinterJob.getPrinterJob();
+			new Thread(() -> {
+				PrinterJob job = PrinterJob.getPrinterJob();
 
-					if (format == null) {
-						format = job.defaultPage();
-					}
-
-					//Delay to avoid silly focus problems
-					//try { Thread.sleep(500); } catch (InterruptedException ie) {}
-					format = job.pageDialog(format);
+				if (format == null) {
+					format = job.defaultPage();
 				}
-			}.start();
+
+				//Delay to avoid silly focus problems
+				//try { Thread.sleep(500); } catch (InterruptedException ie) {}
+				format = job.pageDialog(format);
+			}).start();
 		}
 	}
 
