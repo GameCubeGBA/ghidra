@@ -31,7 +31,7 @@ import ghidra.util.exception.DuplicateNameException;
 public interface DataType {
 
 	/**
-	 * WARNING: do not add <code>default</code> method implementations to this interface. Doing so
+	 * WARNING: do not add {@code default} method implementations to this interface. Doing so
 	 * interferes with correct initialization of the static instance variables {@link #DEFAULT} and
 	 * {@link #VOID} below.
 	 */
