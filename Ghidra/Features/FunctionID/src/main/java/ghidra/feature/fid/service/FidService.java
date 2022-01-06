@@ -124,7 +124,7 @@ public class FidService {
 
 	public FidHashQuad hashFunction(Function function) throws MemoryAccessException {
 		List<CodeUnit> codeUnits = generator.calculateExtent(function);
-		if (codeUnits.size() < getShortHashCodeUnitLength()) {
+		if (codeUnits.size() < SHORT_HASH_CODE_UNIT_LENGTH) {
 			return null;
 		}
 

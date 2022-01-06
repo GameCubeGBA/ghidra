@@ -69,7 +69,7 @@ public class ProjectArchive implements DomainFileArchive {
 
 	@Override
 	public boolean isModifiable() {
-		DomainFile domainFile = getDomainObject().getDomainFile();
+		DomainFile domainFile = dataTypeArchive.getDomainFile();
 		return domainFile.canSave();
 	}
 
@@ -97,7 +97,7 @@ public class ProjectArchive implements DomainFileArchive {
 
 	@Override
 	public void save() throws IOException {
-		archiveManager.save(getDomainObject());
+		archiveManager.save(dataTypeArchive);
 	}
 
 	@Override

@@ -84,7 +84,7 @@ public enum SectionFlags {
 	public static Set<SectionFlags> resolveFlags(int value) {
 		Set<SectionFlags> applied = EnumSet.noneOf(SectionFlags.class);
 		for (SectionFlags ch : values()) {
-			if ((ch.getMask() & value) == ch.getMask()) {
+			if ((ch.mask & value) == ch.mask) {
 				applied.add(ch);
 			}
 		}

@@ -272,7 +272,7 @@ public class GenericAddress implements Address {
 			return false;
 		}
 		GenericAddress addr = (GenericAddress) o;
-		return addrSpace.equals(addr.getAddressSpace()) && offset == addr.offset;
+		return addrSpace.equals(addr.addrSpace) && offset == addr.offset;
 	}
 
 	/**

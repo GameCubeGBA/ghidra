@@ -107,7 +107,7 @@ public class MapLoader extends AbstractLibrarySupportLoader {
 
 		if (provider.getName() != null && provider.getName().toLowerCase().endsWith(".map") &&
 			!parseExports(provider, null).isEmpty()) {
-			List<QueryResult> results = QueryOpinionService.query(getName(), NO_MAGIC, null);
+			List<QueryResult> results = QueryOpinionService.query(MAP_NAME, NO_MAGIC, null);
 			for (QueryResult result : results) {
 				loadSpecs.add(new LoadSpec(this, 0, result));
 			}

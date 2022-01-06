@@ -233,11 +233,11 @@ public class DefaultCompositeMember extends CompositeMember {
 		if (m.memberIsZeroLengthArray) {
 			// transform last member into flexible array
 			Structure struct = (Structure) memberDataType;
-			Array array = (Array) m.getDataType();
+			Array array = (Array) m.memberDataType;
 			// TODO: there may be a more direct approach since we now handle zero-length array instantiation
 			struct.delete(struct.getNumComponents() - 1); // delete placeholder component
 			struct.insertAtOffset(m.memberOffset,
-				new ArrayDataType(array.getDataType(), 0, 1, dataTypeManager), 0, m.getName(),
+				new ArrayDataType(array.getDataType(), 0, 1, dataTypeManager), 0, m.memberName,
 				m.memberComment); // use unmodified comment
 		}
 	}
@@ -276,7 +276,7 @@ public class DefaultCompositeMember extends CompositeMember {
 		if (!isStructureContainer()) {
 			return;
 		}
-		Structure struct = (Structure) getDataType();
+		Structure struct = (Structure) memberDataType;
 
 		if (struct.isNotYetDefined() && preferredSize > 0) {
 			// handle special case of empty structure
@@ -546,7 +546,7 @@ public class DefaultCompositeMember extends CompositeMember {
 		DefaultCompositeMember memberCopy = new DefaultCompositeMember(this);
 		memberCopy.memberOffset = 0;
 
-		CategoryPath tempCategoryPath = parent.getDataType().getCategoryPath();
+		CategoryPath tempCategoryPath = parent.memberDataType.getCategoryPath();
 		String tempName = allocateTemporaryContainerName("union");
 
 		Union nestedUnion = new UnionDataType(tempCategoryPath, tempName, dataTypeManager);
@@ -602,7 +602,7 @@ public class DefaultCompositeMember extends CompositeMember {
 		DefaultCompositeMember memberCopy = new DefaultCompositeMember(this);
 		memberCopy.memberOffset = 0;
 
-		CategoryPath tempCategoryPath = parent.getDataType().getCategoryPath();
+		CategoryPath tempCategoryPath = parent.memberDataType.getCategoryPath();
 		String tempName = allocateTemporaryContainerName("struct");
 
 		Structure nestedStructure =
@@ -649,7 +649,7 @@ public class DefaultCompositeMember extends CompositeMember {
 		structureMemberRangeMap.paintRange(0, memberCopy.getLength() - 1, 0);
 		structureMemberOffsetMap.put(0, memberCopy);
 
-		memberCopy.setParent(this);
+		memberCopy.parent = this;
 
 		if (parent != null) {
 			parent.memberChanged(oldName, this);
@@ -726,11 +726,11 @@ public class DefaultCompositeMember extends CompositeMember {
 
 		if (isUnionContainer() && existingMember.isStructureContainer()) {
 			DefaultCompositeMember structureMember = (DefaultCompositeMember) existingMember;
-			return structureMember.isRelatedBitField(newMember.getOffset(), newMember);
+			return structureMember.isRelatedBitField(newMember.memberOffset, newMember);
 		}
 
 		if (!existingMember.isBitFieldMember() ||
-			existingMember.getOffset() != newMember.getOffset() ||
+			existingMember.getOffset() != newMember.memberOffset ||
 			existingMember.getLength() != newMember.getLength()) {
 			return false;
 		}
@@ -750,7 +750,7 @@ public class DefaultCompositeMember extends CompositeMember {
 			return false;
 		}
 
-		PdbBitField newBitField = (PdbBitField) newMember.getDataType();
+		PdbBitField newBitField = (PdbBitField) newMember.memberDataType;
 
 		// NOTE: assumes little-endian bitfield packing
 		// TODO: Add support for big-endian
@@ -794,7 +794,7 @@ public class DefaultCompositeMember extends CompositeMember {
 			nextBitOffset = bfGroup.getConsumedBits();
 		}
 
-		PdbBitField nextBitfieldDt = (PdbBitField) nextBitFieldMember.getDataType();
+		PdbBitField nextBitfieldDt = (PdbBitField) nextBitFieldMember.memberDataType;
 
 		int bitOffsetWithinBase = nextBitfieldDt.getBitOffsetWithinBase();
 		if (bitOffsetWithinBase > nextBitOffset) {
@@ -834,7 +834,7 @@ public class DefaultCompositeMember extends CompositeMember {
 						bitOffset = 0;
 					}
 					insertMinimalStructureBitfield((Structure) memberDataType, member.memberOffset,
-						member.getName(), bitfieldDt, member.getMemberComment());
+                            member.memberName, bitfieldDt, member.getMemberComment());
 				}
 				else {
 					((Structure) memberDataType).insertAtOffset(member.memberOffset,
@@ -894,7 +894,7 @@ public class DefaultCompositeMember extends CompositeMember {
 				bfGroup.addToGroup(member);
 
 				insertMinimalStructureBitfield((Structure) memberDataType, member.memberOffset,
-					member.getName(), bitfieldDt, member.getMemberComment());
+                        member.memberName, bitfieldDt, member.getMemberComment());
 
 				member.parent = this;
 
@@ -906,7 +906,7 @@ public class DefaultCompositeMember extends CompositeMember {
 			}
 
 			// adjust this member's offset for addition to container
-			member.setOffset(member.getOffset() - conflictMember.getOffset());
+			member.memberOffset = member.memberOffset - conflictMember.getOffset();
 
 			return conflictMember.addMember(member);
 		}
@@ -1000,7 +1000,7 @@ public class DefaultCompositeMember extends CompositeMember {
 				DataTypeComponent component = union.getComponent(i);
 				if (fieldName.equals(component.getFieldName())) {
 					union.delete(i);
-					union.insert(i, newContainerMember.getDataType(),
+					union.insert(i, newContainerMember.memberDataType,
 						newContainerMember.getLength(), newContainerMember.memberName, null);
 					break;
 				}
@@ -1009,10 +1009,10 @@ public class DefaultCompositeMember extends CompositeMember {
 		else if (isStructureContainer()) {
 			Structure struct = (Structure) memberDataType;
 			// TODO: complicated by bitfields where multiple components may occupy same byte
-			struct.deleteAtOffset(newContainerMember.getOffset());
-			struct.insertAtOffset(newContainerMember.getOffset(), newContainerMember.getDataType(),
+			struct.deleteAtOffset(newContainerMember.memberOffset);
+			struct.insertAtOffset(newContainerMember.memberOffset, newContainerMember.memberDataType,
 				newContainerMember.getLength());
-			structureMemberOffsetMap.put(newContainerMember.getOffset(), newContainerMember);
+			structureMemberOffsetMap.put(newContainerMember.memberOffset, newContainerMember);
 		}
 	}
 

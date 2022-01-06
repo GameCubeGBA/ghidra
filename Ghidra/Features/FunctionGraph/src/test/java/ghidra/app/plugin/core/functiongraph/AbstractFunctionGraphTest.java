@@ -138,7 +138,7 @@ public abstract class AbstractFunctionGraphTest extends AbstractGhidraHeadedInte
 
 		showFunctionGraphProvider();
 
-		goToAddress(getStartingAddress());
+		goToAddress(startAddressString);
 
 		// make sure the default case is always set in the testing environment
 		FGController controller = getFunctionGraphController();

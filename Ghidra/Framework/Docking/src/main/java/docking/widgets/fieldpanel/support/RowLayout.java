@@ -168,7 +168,7 @@ public class RowLayout implements Layout {
 			return;
 		}
 		g.setColor(fieldBackgroundColor);
-		g.fillRect(fields[fieldNum].getStartX(), -getHeightAbove(), fields[fieldNum].getWidth(),
+		g.fillRect(fields[fieldNum].getStartX(), -heightAbove, fields[fieldNum].getWidth(),
 			getHeight());
 	}
 

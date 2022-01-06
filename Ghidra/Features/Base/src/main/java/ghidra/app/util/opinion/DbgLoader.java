@@ -61,7 +61,7 @@ public class DbgLoader extends AbstractPeDebugLoader {
 		if (debug.getSignature() == SeparateDebugHeader.IMAGE_SEPARATE_DEBUG_SIGNATURE) {
 			long imageBase = Conv.intToLong(debug.getImageBase());
 			String machineName = debug.getMachineName();
-			for (QueryResult result : QueryOpinionService.query(getName(), machineName, null)) {
+			for (QueryResult result : QueryOpinionService.query(DBG_NAME, machineName, null)) {
 				loadSpecs.add(new LoadSpec(this, imageBase, result));
 			}
 			if (loadSpecs.isEmpty()) {

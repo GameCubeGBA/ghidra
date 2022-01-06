@@ -171,7 +171,7 @@ public abstract class AbstractIntegerDataType extends BuiltIn implements ArraySt
 		}
 
 		if (size > 8) {
-			if (!isSigned()) {
+			if (!signed) {
 				// ensure that bytes are treated as unsigned
 				byte[] unsignedBytes = new byte[bytes.length + 1];
 				System.arraycopy(bytes, 0, unsignedBytes, 1, bytes.length);
@@ -185,7 +185,7 @@ public abstract class AbstractIntegerDataType extends BuiltIn implements ArraySt
 		for (byte b : bytes) {
 			val = (val << 8) + (b & 0x0ffL);
 		}
-		return new Scalar(size * 8, val, isSigned());
+		return new Scalar(size * 8, val, signed);
 	}
 
 	protected BigInteger castValueToEncode(Object value) throws DataTypeEncodeException {
@@ -217,7 +217,7 @@ public abstract class AbstractIntegerDataType extends BuiltIn implements ArraySt
 			throw new DataTypeEncodeException("Length mismatch", value, this);
 		}
 		BigInteger bigValue = castValueToEncode(value);
-		byte[] encoding = Utils.bigIntegerToBytes(bigValue, length, isSigned());
+		byte[] encoding = Utils.bigIntegerToBytes(bigValue, length, signed);
 		if (!ENDIAN.isBigEndian(settings, buf)) {
 			ArrayUtilities.reverse(encoding);
 		}

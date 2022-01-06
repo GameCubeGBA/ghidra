@@ -404,7 +404,7 @@ public class GHelpBuilder {
 
 		@Override
 		public String toString() {
-			return getMessage();
+			return message;
 		}
 
 		boolean failed() {

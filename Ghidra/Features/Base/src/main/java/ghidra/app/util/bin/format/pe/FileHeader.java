@@ -430,7 +430,7 @@ public class FileHeader implements StructConverter {
 
 		long oldIndex = reader.getPointerIndex();
 
-		int tmpIndex = getPointerToSymbolTable();
+		int tmpIndex = pointerToSymbolTable;
 		if (!ntHeader.checkRVA(tmpIndex)) {
 			Msg.error(this, "Invalid file index " + Integer.toHexString(tmpIndex));
 			return;
@@ -483,8 +483,8 @@ public class FileHeader implements StructConverter {
 	}
 
 	public boolean isLordPE() {
-        return getPointerToSymbolTable() == LORDPE_SYMBOL_TABLE &&
-                getNumberOfSymbols() == LORDPE_NUMBER_OF_SYMBOLS;
+        return pointerToSymbolTable == LORDPE_SYMBOL_TABLE &&
+                numberOfSymbols == LORDPE_NUMBER_OF_SYMBOLS;
     }
 
 	private void parse() throws IOException {

@@ -89,7 +89,7 @@ public class DbgStepCommand extends AbstractDbgCommand<Void> {
                 //control.setExecutionStatus(DebugStatus.STEP_BRANCH);
                 break;
             case EXTENDED:
-                cmd = getLastCommand();
+                cmd = lastCommand;
                 break;
         }
 		DbgThreadImpl eventThread = manager.getEventThread();

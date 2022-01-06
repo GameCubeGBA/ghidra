@@ -204,13 +204,13 @@ public class ISO9660VolumeDescriptor extends ISO9660BaseVolume {
 		buff.append("System Identifier: " + new String(systemIdentifier).trim() + "\n");
 		buff.append("Volume Identifier: " + new String(volumeIdentifier).trim() + "\n");
 		buff.append("Unused Field: 0x" + Long.toHexString(unused2) + "\n");
-		buff.append("Volume Space Size: 0x" + Integer.toHexString(getVolumeSpaceSizeLE()) + "\n");
+		buff.append("Volume Space Size: 0x" + Integer.toHexString(volumeSpaceSizeLE) + "\n");
 		buff.append("Unused: " + new String(unused3).trim() + "\n");
-		buff.append("Volume Set Size: 0x" + Integer.toHexString(getVolumeSetSizeLE()) + "\n");
-		buff.append("Volume Sequence Number: 0x" + Integer.toHexString(getVolumeSeqNumberLE()) +
+		buff.append("Volume Set Size: 0x" + Integer.toHexString(volumeSetSizeLE) + "\n");
+		buff.append("Volume Sequence Number: 0x" + Integer.toHexString(volumeSeqNumberLE) +
 			"\n");
-		buff.append("Logical Block Size: 0x" + Integer.toHexString(getLogicalBlockSizeLE()) + "\n");
-		buff.append("Path Table Size: 0x" + Integer.toHexString(getPathTableSizeLE()) + "\n");
+		buff.append("Logical Block Size: 0x" + Integer.toHexString(logicalBlockSizeLE) + "\n");
+		buff.append("Path Table Size: 0x" + Integer.toHexString(pathTableSizeLE) + "\n");
 		buff.append("LBA Location of Type-L Path Table: 0x" +
 			Integer.toHexString(typeLPathTableLocation) + "\n");
 		buff.append("LBA Location of Optional Type-L Path Table: 0x" +
@@ -220,9 +220,9 @@ public class ISO9660VolumeDescriptor extends ISO9660BaseVolume {
 		buff.append("LBA Location of Optional Type-M Path Table: 0x" +
 			Integer.toHexString(optionalTypeMPathTableLocation) + "\n");
 		buff.append("Calculated Location of Type-L Path Table: 0x" +
-			Integer.toHexString(typeLPathTableLocation * getLogicalBlockSizeLE()) + "\n");
+			Integer.toHexString(typeLPathTableLocation * logicalBlockSizeLE) + "\n");
 		buff.append("Calculated Location of Type-M Path Table: 0x" +
-			Integer.toHexString(typeMPathTableLocation * getLogicalBlockSizeBE()) + "\n");
+			Integer.toHexString(typeMPathTableLocation * logicalBlockSizeBE) + "\n");
 		buff.append("Directory Entry for Root Directory: \n" + directoryEntry.toString() + "\n");
 		buff.append("Volume Set Identifier: " + new String(volumeSetIdentifier).trim() + "\n");
 		buff.append("Publisher Identifier: " + new String(publisherIdentifier).trim() + "\n");

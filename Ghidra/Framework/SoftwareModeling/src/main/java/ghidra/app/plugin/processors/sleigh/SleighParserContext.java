@@ -315,14 +315,14 @@ public class SleighParserContext implements ParserContext {
 
 	public Address getFlowRefAddr() {
 		if (refAddr == null) {
-			throw new SleighException("Flow reference (inst_ref) is undefined at " + getAddr());
+			throw new SleighException("Flow reference (inst_ref) is undefined at " + addr);
 		}
 		return refAddr;
 	}
 
 	public Address getFlowDestAddr() {
 		if (destAddr == null) {
-			throw new SleighException("Flow destination (inst_dest) is undefined at " + getAddr());
+			throw new SleighException("Flow destination (inst_dest) is undefined at " + addr);
 		}
 		return destAddr;
 	}

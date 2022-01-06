@@ -155,7 +155,7 @@ public class EnumDataType extends GenericDataType implements Enum {
 			return; // all long values permitted
 		}
 		// compute maximum enum value as a positive value: (2^length)-1
-		long max = (1L << (getLength() * 8)) - 1;
+		long max = (1L << (length * 8)) - 1;
 		if (value > max) {
 			throw new IllegalArgumentException(
 				getName() + " enum value 0x" + Long.toHexString(value) +
@@ -200,8 +200,8 @@ public class EnumDataType extends GenericDataType implements Enum {
 	@Override
 	public DataType copy(DataTypeManager dtm) {
 		EnumDataType enumDataType =
-			new EnumDataType(getCategoryPath(), getName(), getLength(), dtm);
-		enumDataType.setDescription(getDescription());
+			new EnumDataType(getCategoryPath(), getName(), length, dtm);
+		enumDataType.description = getDescription();
 		enumDataType.replaceWith(this);
 		return enumDataType;
 	}
@@ -212,9 +212,9 @@ public class EnumDataType extends GenericDataType implements Enum {
 			return this;
 		}
 		EnumDataType enumDataType =
-			new EnumDataType(getCategoryPath(), getName(), getLength(), getUniversalID(),
+			new EnumDataType(getCategoryPath(), getName(), length, getUniversalID(),
 				getSourceArchive(), getLastChangeTime(), getLastChangeTimeInSourceArchive(), dtm);
-		enumDataType.setDescription(description);
+		enumDataType.description = description;
 		enumDataType.replaceWith(this);
 		return enumDataType;
 	}
@@ -345,7 +345,7 @@ public class EnumDataType extends GenericDataType implements Enum {
 
 	private List<BitGroup> getBitGroups() {
 		if (bitGroups == null) {
-			bitGroups = EnumValuePartitioner.partition(getValues(), getLength());
+			bitGroups = EnumValuePartitioner.partition(getValues(), length);
 		}
 		return bitGroups;
 	}

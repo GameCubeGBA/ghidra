@@ -376,7 +376,7 @@ public class ByteSequenceRowObject {
 
 		List<DittedBitSequence> dittedSeqs = new ArrayList<>();
 		for (ByteSequenceRowObject currentRow : rowObjects) {
-			DittedBitSequence currentSeq = new DittedBitSequence(currentRow.getSequence(), true);
+			DittedBitSequence currentSeq = new DittedBitSequence(currentRow.byteSequence, true);
 			dittedSeqs.add(currentSeq);
 		}
 		DittedBitSequence currentMerge = dittedSeqs.get(0);

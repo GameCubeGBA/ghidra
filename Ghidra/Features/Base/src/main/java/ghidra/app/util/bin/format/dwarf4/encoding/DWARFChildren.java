@@ -35,7 +35,7 @@ public enum DWARFChildren
 	static {
 		valueMap = new HashMap<Integer, DWARFChildren>();
 		for(DWARFChildren access : DWARFChildren.values()) {
-			valueMap.put(access.getValue(), access);
+			valueMap.put(access.value, access);
 		}
 	}
 	

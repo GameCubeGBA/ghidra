@@ -127,7 +127,7 @@ public class FakeSharedProject {
 	 * @throws Exception if there are any issues finding or adding the file to the project
 	 */
 	public DomainFile addDomainFile(String filename) throws Exception {
-		Project project = getGhidraProject().getProject();
+		Project project = gProject.getProject();
         return programManager.addProgramToProject(project, filename);
 	}
 
@@ -160,7 +160,7 @@ public class FakeSharedProject {
 	 * @return the file
 	 */
 	public DomainFile getDomainFile(String filepath) {
-		Project project = getGhidraProject().getProject();
+		Project project = gProject.getProject();
 		ProjectData projectData = project.getProjectData();
 		DomainFile df;
 		if (filepath.startsWith("/")) {
@@ -404,7 +404,7 @@ public class FakeSharedProject {
 	}
 
 	private DomainFolder getFolder(String path) throws Exception {
-		Project project = getGhidraProject().getProject();
+		Project project = gProject.getProject();
 		ProjectData data = project.getProjectData();
 		DomainFolder folder = data.getFolder(path);
 		if (folder == null) {

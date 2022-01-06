@@ -178,7 +178,7 @@ public class CompositeVerticalLayoutTextField implements TextField {
 
 	@Override
 	public String toString() {
-		return getText();
+		return fullText;
 	}
 
 	@Override
@@ -433,7 +433,7 @@ public class CompositeVerticalLayoutTextField implements TextField {
 			}
 			ySoFar += fieldHeight;
 		}
-		return getNumRows() - 1;
+		return numRows - 1;
 	}
 
 	@Override
@@ -447,7 +447,7 @@ public class CompositeVerticalLayoutTextField implements TextField {
 	@Override
 	public boolean isValid(int row, int col) {
 
-		if ((row < 0) || (row >= getNumRows())) {
+		if ((row < 0) || (row >= numRows)) {
 			return false;
 		}
 
@@ -459,7 +459,7 @@ public class CompositeVerticalLayoutTextField implements TextField {
 	@Override
 	public Rectangle getCursorBounds(int row, int col) {
 
-		if ((row < 0) || (row >= getNumRows())) {
+		if ((row < 0) || (row >= numRows)) {
 			return null;
 		}
 
@@ -525,7 +525,7 @@ public class CompositeVerticalLayoutTextField implements TextField {
 	public int screenLocationToTextOffset(int row, int col) {
 
 		if (row >= numRows) {
-			return getText().length();
+			return fullText.length();
 		}
 
 		int extraSpace = rowSeparator.length();

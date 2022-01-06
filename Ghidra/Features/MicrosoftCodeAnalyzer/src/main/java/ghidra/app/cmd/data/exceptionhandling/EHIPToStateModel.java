@@ -77,7 +77,7 @@ public class EHIPToStateModel extends AbstractCreateDataTypeModel {
 			if (ip instanceof Address) {
 				Address ipAddress = (Address) ip;
 				if (!EHDataTypeUtilities.isValidAddress(program, ipAddress)) {
-					throw new InvalidDataTypeException(getName() + " data type at " + getAddress() +
+					throw new InvalidDataTypeException(DATA_TYPE_NAME + " data type at " + getAddress() +
 						" doesn't refer to a valid location for the IP.");
 				}
 			}

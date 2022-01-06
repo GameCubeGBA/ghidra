@@ -157,7 +157,7 @@ public class DebugInfoEntry {
 	 * @param parent the parent DIE
 	 */
 	public void setParent(DebugInfoEntry parent) {
-		parentOffset = (parent != null) ? parent.getOffset() : -1;
+		parentOffset = (parent != null) ? parent.offset : -1;
 	}
 
 	/**

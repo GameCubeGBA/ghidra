@@ -67,7 +67,7 @@ public class DefLoader extends AbstractLibrarySupportLoader {
 		String name = provider.getName();
 		if (name != null && name.toLowerCase().endsWith(".def") &&
 			!parseExports(provider).isEmpty()) {
-			List<QueryResult> results = QueryOpinionService.query(getName(), NO_MAGIC, null);
+			List<QueryResult> results = QueryOpinionService.query(DEF_NAME, NO_MAGIC, null);
 			for (QueryResult result : results) {
 				loadSpecs.add(new LoadSpec(this, 0, result));
 			}

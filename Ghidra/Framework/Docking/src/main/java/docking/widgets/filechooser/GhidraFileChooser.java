@@ -848,7 +848,7 @@ public class GhidraFileChooser extends DialogComponentProvider
 		}
 
 		if (GhidraFileChooser.MY_COMPUTER.equals(getCurrentDirectory())) {
-			String str = getModel().getDescription(file);
+			String str = fileChooserModel.getDescription(file);
 			if (str == null || str.length() == 0) {
 				str = file.getAbsolutePath();
 			}
@@ -1438,7 +1438,7 @@ public class GhidraFileChooser extends DialogComponentProvider
 	}
 
 	private void updateDirectoryPresentationMode() {
-		if (isTableShowing()) {
+		if (showDetails) {
 			directoryModel = directoryTable;
 			card.show(cardPanel, CARD_TABLE);
 			int[] rows = directoryTable.getSelectedRows();
@@ -1570,7 +1570,7 @@ public class GhidraFileChooser extends DialogComponentProvider
 
 	@Override
 	protected void okCallback() {
-		if (isMultiSelectionEnabled()) {
+		if (multiSelectionEnabled) {
 			okCallbackForMultipleSelectionMode();
 		}
 		else {
@@ -1703,7 +1703,7 @@ public class GhidraFileChooser extends DialogComponentProvider
 		selectedFiles.setFiles(files);
 
 		// Update the display to...
-		if (isMultiSelectionEnabled() && selectedFiles.size() > 1) {
+		if (multiSelectionEnabled && selectedFiles.size() > 1) {
 			// clear the filename text field when multiple files are selected
 			filenameTextField.setText("");
 		}

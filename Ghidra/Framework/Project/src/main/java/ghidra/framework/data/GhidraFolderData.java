@@ -74,10 +74,10 @@ class GhidraFolderData {
 		this.parent = parent;
 		this.name = name;
 
-		this.fileManager = parent.getProjectFileManager();
-		this.fileSystem = parent.getLocalFileSystem();
-		this.versionedFileSystem = parent.getVersionedFileSystem();
-		this.listener = parent.getChangeListener();
+		this.fileManager = parent.fileManager;
+		this.fileSystem = parent.fileSystem;
+		this.versionedFileSystem = parent.versionedFileSystem;
+		this.listener = parent.listener;
 
 		try {
 			updateExistenceState();
@@ -1010,7 +1010,7 @@ class GhidraFolderData {
 
 	GhidraFolder moveTo(GhidraFolderData newParent) throws IOException {
 		synchronized (fileSystem) {
-			if (newParent.getLocalFileSystem() != fileSystem || fileSystem.isReadOnly()) {
+			if (newParent.fileSystem != fileSystem || fileSystem.isReadOnly()) {
 				throw new AssertException("moveTo permitted within writeable project only");
 			}
 			if (getPathname().equals(newParent.getPathname())) {
@@ -1023,7 +1023,7 @@ class GhidraFolderData {
 			try {
 				if (newParent.containsFolder(name)) {
 					throw new DuplicateFileException(
-						"Folder named " + getName() + " already exists in " + newParent);
+						"Folder named " + name + " already exists in " + newParent);
 				}
 
 				if (folderExists) {
@@ -1090,7 +1090,7 @@ class GhidraFolderData {
 			if (checkParent.equals(this)) {
 				return true;
 			}
-			checkParent = checkParent.getParentData();
+			checkParent = checkParent.parent;
 		}
 		return false;
 	}

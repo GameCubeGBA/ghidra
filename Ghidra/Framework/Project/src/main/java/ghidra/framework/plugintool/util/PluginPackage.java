@@ -56,7 +56,7 @@ public abstract class PluginPackage implements ExtensionPoint, Comparable<Plugin
 			try {
 				pluginPackage = class1.newInstance();
 
-				String name = pluginPackage.getName().toLowerCase();
+				String name = pluginPackage.name.toLowerCase();
 				if (map.containsKey(name)) {
 					Msg.error(PluginPackage.class, "PluginPackage already exist for name: " + name);
 				}

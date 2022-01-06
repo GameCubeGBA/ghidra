@@ -262,7 +262,7 @@ public class SystemUtilities {
 	 * @return true if the application is a release and not in development or testing
 	 */
 	public static boolean isInReleaseMode() {
-		return !isInDevelopmentMode() && !isInTestingMode() && !isInTestingBatchMode();
+		return !IS_IN_DEVELOPMENT_MODE && !isInTestingMode() && !IS_IN_TESTING_BATCH_MODE;
 	}
 
 	/**
@@ -306,7 +306,7 @@ public class SystemUtilities {
 	}
 
 	public static void assertTrue(boolean booleanValue, String string) {
-		boolean isProductionMode = !isInTestingMode() && !isInDevelopmentMode();
+		boolean isProductionMode = !isInTestingMode() && !IS_IN_DEVELOPMENT_MODE;
 		if (isProductionMode) {
 			return; // squash during production mode
 		}
@@ -322,7 +322,7 @@ public class SystemUtilities {
 	 * @param errorMessage The message to display when the assert fails
 	 */
 	public static void assertThisIsTheSwingThread(String errorMessage) {
-		boolean isProductionMode = !isInTestingMode() && !isInDevelopmentMode();
+		boolean isProductionMode = !isInTestingMode() && !IS_IN_DEVELOPMENT_MODE;
 		if (isProductionMode) {
 			return; // squash during production mode
 		}

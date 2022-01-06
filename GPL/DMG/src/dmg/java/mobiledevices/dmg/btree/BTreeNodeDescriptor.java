@@ -49,9 +49,9 @@ public class BTreeNodeDescriptor /*implements StructConverter*/ {
 	}
 
 	protected void readRecords(GBinaryReader reader, long nodeStartIndex) throws IOException {
-		for (int i = 0; i < getNumRecords(); ++i) {
+		for (int i = 0; i < numRecords; ++i) {
 
-			short offset = getRecordOffsets().get(i);
+			short offset = _recordOffsets.get(i);
 
 			long recordIndex = (offset & 0xffff) + nodeStartIndex;
 			reader.setPointerIndex(recordIndex);

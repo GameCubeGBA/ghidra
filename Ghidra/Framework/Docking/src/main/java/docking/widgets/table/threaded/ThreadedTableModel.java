@@ -185,7 +185,7 @@ public abstract class ThreadedTableModel<ROW_OBJECT, DATA_SOURCE>
 
 	private void initializeWorker() {
 		if (worker == null) {
-			worker = new Worker("GTable Worker: " + getName(), incrementalMonitor);
+			worker = new Worker("GTable Worker: " + modelName, incrementalMonitor);
 		}
 
 		cancelCurrentWorkerJob();

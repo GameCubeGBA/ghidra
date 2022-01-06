@@ -313,7 +313,7 @@ public class WeakHashMap2<K, V> extends AbstractMap<K, V> {
 		public int hashCode() {
 			Object v;
 			return (((key == null) ? 0 : key.hashCode()) ^
-				(((v = getValue()) == null) ? 0 : v.hashCode()));
+				(((v = value) == null) ? 0 : v.hashCode()));
 		}
 
 	}

@@ -278,7 +278,7 @@ public class BinaryLoader extends AbstractProgramLoader {
 
 		Address baseAddr =
 			importerLanguage.getAddressFactory().getDefaultAddressSpace().getAddress(0);
-		Program prog = createProgram(provider, programName, baseAddr, getName(), importerLanguage,
+		Program prog = createProgram(provider, programName, baseAddr, BINARY_NAME, importerLanguage,
 			importerCompilerSpec, consumer);
 		boolean success = false;
 		try {

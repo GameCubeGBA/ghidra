@@ -731,7 +731,7 @@ public abstract class SymbolDB extends DatabaseObject implements Symbol {
 	}
 
 	private boolean hasSameId(Symbol s) {
-		if (getID() == s.getID()) {
+		if (key == s.getID()) {
 			return getProgram() == s.getProgram();
 		}
 		return false;

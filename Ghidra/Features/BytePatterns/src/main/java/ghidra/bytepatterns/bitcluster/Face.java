@@ -52,12 +52,12 @@ public class Face extends DittedBitSequence implements Comparable<Face> {
 				DittedBitSequence temp = new DittedBitSequence(this, kid);
 				if (temp.getNumUncertainBits() == this.getNumUncertainBits()) {				//Check to see if kid is a subface of this.
 					this.children.add(kid);
-					this.weight += kid.getWeight();
+					this.weight += kid.weight;
 				}
 			}
 			if (addf1) {											//Used when f1 isn't already a pattern.
 				this.children.add(f1);
-				this.weight += f1.getWeight();
+				this.weight += f1.weight;
 			}
 		}
 		dit_ratio = 1.0 / Math.pow(2.0, getNumUncertainBits());

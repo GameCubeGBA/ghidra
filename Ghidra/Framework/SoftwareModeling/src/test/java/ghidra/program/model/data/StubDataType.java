@@ -96,7 +96,7 @@ public class StubDataType implements DataType {
 
 	@Override
 	public String getDisplayName() {
-		return "Test double data type '" + getName() + "'";
+		return "Test double data type '" + name + "'";
 	}
 
 	@Override

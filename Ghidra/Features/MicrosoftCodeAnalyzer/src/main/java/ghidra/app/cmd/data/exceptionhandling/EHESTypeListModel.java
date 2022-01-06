@@ -70,11 +70,11 @@ public class EHESTypeListModel extends AbstractCreateDataTypeModel {
 		// Does the handler type map have a count and address.
 		if (handlerTypeCount == 0 || handlerTypeMapAddress == null ||
 			(isRelative() && imageBaseAddress.equals(handlerTypeMapAddress))) {
-			throw new InvalidDataTypeException(getName() + " data type doesn't have any map data.");
+			throw new InvalidDataTypeException(DATA_TYPE_NAME + " data type doesn't have any map data.");
 		}
 		// Are the pointers or displacements to valid addresses.
 		if (!isValidMap(getHandlerTypeCount(), getHandlerTypeMapAddress())) {
-			throw new InvalidDataTypeException(getName() + " data type at " + getAddress() +
+			throw new InvalidDataTypeException(DATA_TYPE_NAME + " data type at " + getAddress() +
 				" doesn't have a valid handler type map.");
 		}
 	}

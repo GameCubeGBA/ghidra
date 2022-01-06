@@ -398,8 +398,8 @@ public abstract class LanguageTranslatorAdapter implements LanguageTranslator {
 
 	@Override
 	public String toString() {
-		return "[" + getOldLanguageID() + " (Version " + getOldVersion() + ")] -> [" +
-			getNewLanguageID() + " (Version " + getNewVersion() + " )] {" + getClass().getName() +
+		return "[" + oldLanguageID + " (Version " + oldLanguageVersion + ")] -> [" +
+                newLanguageID + " (Version " + newLanguageVersion + " )] {" + getClass().getName() +
 			"}";
 	}
 

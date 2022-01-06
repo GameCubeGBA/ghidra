@@ -391,7 +391,7 @@ public class GdbBreakpointInfo {
 	}
 
 	public GdbBreakpointInfo withEnabled(@SuppressWarnings("hiding") boolean enabled) {
-		if (isEnabled() == enabled) {
+		if (this.enabled == enabled) {
 			return this;
 		}
 		return new GdbBreakpointInfo(number, type, typeName, disp, addr, what, catchType,

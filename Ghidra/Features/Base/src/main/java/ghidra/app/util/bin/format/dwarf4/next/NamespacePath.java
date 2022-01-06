@@ -217,7 +217,7 @@ public class NamespacePath implements Comparable<NamespacePath> {
 		doInOrderTraversal(
 			nsp -> sb.append(sb.length() != 0 ? Namespace.DELIMITER : "").append(
 				nsp.isRoot() ? "ROOT" : nsp.name).append(
-					"(" + (nsp.getType() != null ? nsp.getType() : "unknown type") + ")"));
+					"(" + (nsp.type != null ? nsp.type : "unknown type") + ")"));
 		return sb.toString();
 
 	}

@@ -52,7 +52,7 @@ public class PefLoader extends AbstractLibrarySupportLoader {
 		try {
 			ContainerHeader header = new ContainerHeader(provider);
 			List<QueryResult> results =
-				QueryOpinionService.query(getName(), header.getArchitecture(), null);
+				QueryOpinionService.query(PEF_NAME, header.getArchitecture(), null);
 			for (QueryResult result : results) {
 				loadSpecs.add(new LoadSpec(this, header.getImageBase(), result));
 			}
@@ -84,7 +84,7 @@ public class PefLoader extends AbstractLibrarySupportLoader {
 
 			importState = new ImportStateCache(program, header);
 
-			program.setExecutableFormat(getName());
+			program.setExecutableFormat(PEF_NAME);
 
 			processSections(header, program, fileBytes, importState, log, monitor);
 			processExports(header, program, importState, log, monitor);

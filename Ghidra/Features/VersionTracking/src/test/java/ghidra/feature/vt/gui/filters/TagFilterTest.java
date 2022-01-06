@@ -410,7 +410,7 @@ public class TagFilterTest extends VTBaseTestCase {
 
 		@Override
 		public int compareTo(VTMatchTag o) {
-			return getName().compareTo(o.getName());
+			return name.compareTo(o.getName());
 		}
 	}
 

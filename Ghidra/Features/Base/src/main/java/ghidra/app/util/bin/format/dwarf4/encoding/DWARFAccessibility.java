@@ -34,7 +34,7 @@ public enum DWARFAccessibility
 	static {
 		valueMap = new HashMap<Integer, DWARFAccessibility>();
 		for(DWARFAccessibility access : DWARFAccessibility.values()) {
-			valueMap.put(access.getValue(), access);
+			valueMap.put(access.value, access);
 		}
 	}
 	

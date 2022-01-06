@@ -211,17 +211,17 @@ public class VarnodeAST extends Varnode {
 		if (getOffset() != vn.getOffset() || getSize() != vn.getSize() ||
 			getSpace() != vn.getSpace())
 			return false;
-		if (isFree()) {
-			if (vn.isFree())
+		if (bFree) {
+			if (vn.bFree)
 				return (uniqId == vn.uniqId);
 			return false;
 		}
-		else if (vn.isFree())
+		else if (vn.bFree)
 			return false;
-		if (isInput() != vn.isInput())
+		if (bInput != vn.bInput)
 			return false;
 		if (def != null) {
-			PcodeOp vnDef = vn.getDef();
+			PcodeOp vnDef = vn.def;
 			if (vnDef == null)
 				return false;
 			return (def.getSeqnum().equals(vnDef.getSeqnum()));

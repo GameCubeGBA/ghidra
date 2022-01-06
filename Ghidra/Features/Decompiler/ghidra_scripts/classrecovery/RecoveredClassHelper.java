@@ -2163,8 +2163,8 @@ public class RecoveredClassHelper {
                 calledFunction = calledFunction.getThunkedFunction(true);
             }
 
-            if (getAllConstructors().contains(calledFunction) ||
-                    getAllInlinedConstructors().contains(calledFunction)) {
+            if (allConstructors.contains(calledFunction) ||
+                    allInlinedConstructors.contains(calledFunction)) {
                 return true;
             }
         }
@@ -2193,8 +2193,8 @@ public class RecoveredClassHelper {
                 calledFunction = calledFunction.getThunkedFunction(true);
             }
 
-            if (getAllDestructors().contains(calledFunction) ||
-                    getAllInlinedDestructors().contains(calledFunction)) {
+            if (allDestructors.contains(calledFunction) ||
+                    allInlinedDestructors.contains(calledFunction)) {
                 return true;
             }
         }
@@ -4004,7 +4004,7 @@ public class RecoveredClassHelper {
                 continue;
             }
 
-            if (!getAllConstructors().contains(calledFunction)) {
+            if (!allConstructors.contains(calledFunction)) {
                 return true;
             }
 
@@ -4028,7 +4028,7 @@ public class RecoveredClassHelper {
             monitor.checkCanceled();
 
             List<Function> allOtherConstructors =
-                    new ArrayList<Function>(getAllConstructors());
+                    new ArrayList<Function>(allConstructors);
             allOtherConstructors.removeAll(aClass.getConstructorList());
 
             // iterate through the vtable functions
@@ -4126,7 +4126,7 @@ public class RecoveredClassHelper {
                 continue;
             }
             // skip any constructor or destructors that are called first
-            if (getAllConstructorsAndDestructors().contains(firstCalledFunction)) {
+            if (allConstructorsAndDestructors.contains(firstCalledFunction)) {
                 continue;
             }
 
@@ -5551,7 +5551,7 @@ public class RecoveredClassHelper {
                                 .contains(
                                         firstCalledFunction) &&
                         secondCalledFunction.equals(operator_delete) &&
-                        !getAllConstructorsAndDestructors().contains(virtualFunction)) {
+                        !allConstructorsAndDestructors.contains(virtualFunction)) {
                     aClass.addDeletingDestructor(virtualFunction);
                     aClass.setVBaseDestructor(firstCalledFunction);
                 }
@@ -5831,14 +5831,14 @@ public class RecoveredClassHelper {
                             continue;
                         }
 
-                        if (getAllConstructors().contains(function) ||
-                                getAllInlinedConstructors().contains(function)) {
+                        if (allConstructors.contains(function) ||
+                                allInlinedConstructors.contains(function)) {
                             isConstructor = true;
                             continue;
                         }
 
-                        if (getAllDestructors().contains(function) ||
-                                getAllInlinedDestructors().contains(function)) {
+                        if (allDestructors.contains(function) ||
+                                allInlinedDestructors.contains(function)) {
                             isDestructor = true;
                             continue;
                         }
@@ -6281,7 +6281,7 @@ public class RecoveredClassHelper {
 		// if the first function on the vftable IS ALSO on the class constructor/destructor list
 		// then it is a deleting destructor with and inline destructor and we need to 
 		// determine if the inline is the class or parent/grandparent class destructor
-		if (getAllConstructorsAndDestructors().contains(firstVftableFunction)) {
+		if (allConstructorsAndDestructors.contains(firstVftableFunction)) {
 
 			recoveredClass.addDeletingDestructor(firstVftableFunction);
 			recoveredClass.removeFromConstructorDestructorList(firstVftableFunction);

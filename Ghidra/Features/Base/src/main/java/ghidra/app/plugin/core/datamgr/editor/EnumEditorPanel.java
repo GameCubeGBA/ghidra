@@ -227,7 +227,7 @@ class EnumEditorPanel extends JPanel {
 	}
 
 	void deleteSelectedEntries() {
-		EnumDataType enuum = getEnum();
+		EnumDataType enuum = editedEnumDT;
 		int[] rows = getSelectedRows();
 		for (int row : rows) {
 			String name = tableModel.getNameAt(row);

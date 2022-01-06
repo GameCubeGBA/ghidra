@@ -220,7 +220,7 @@ public class RegisterValue {
 		checkBaseRegister(otherValue.register);
 		Register baseRegister = register.getBaseRegister();
 		Register resultRegister = register;
-		if (register != otherValue.getRegister()) {
+		if (register != otherValue.register) {
 			resultRegister = baseRegister;
 		}
 

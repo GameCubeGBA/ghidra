@@ -146,7 +146,7 @@ public class MultipleCauses extends Throwable {
 		if (hasMultiple(e)) {
 			if (e.getCause() != null) {
 				MultipleCauses report = (MultipleCauses) e.getCause();
-				for (Throwable t : report.getCauses()) {
+				for (Throwable t : report.causes) {
 					printTree(out, prefix + ">", t);
 				}
 			}

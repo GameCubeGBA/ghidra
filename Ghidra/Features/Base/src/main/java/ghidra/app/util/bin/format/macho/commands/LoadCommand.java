@@ -93,8 +93,8 @@ public abstract class LoadCommand implements StructConverter {
 
 	protected final ProgramFragment createFragment(FlatProgramAPI api, Address baseAddress,
 			ProgramModule module) throws Exception {
-		Address start = baseAddress.getNewAddress(getStartIndex());
-		return api.createFragment(module, getCommandName(), start, getCommandSize());
+		Address start = baseAddress.getNewAddress(startIndex);
+		return api.createFragment(module, getCommandName(), start, cmdsize);
 	}
 
 	protected final void updateMonitor(TaskMonitor monitor) {

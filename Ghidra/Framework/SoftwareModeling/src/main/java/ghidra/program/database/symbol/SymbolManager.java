@@ -609,7 +609,7 @@ public class SymbolManager implements SymbolTable, ManagerDB {
 						return false; // Can't remove default function symbol.
 					}
 					name = SymbolUtilities.getDefaultFunctionName(addr);
-					parentNamespace = getProgram().getGlobalNamespace();
+					parentNamespace = program.getGlobalNamespace();
 					source = SourceType.DEFAULT;
 				}
 				else {

@@ -193,7 +193,7 @@ public class XmlLoader extends AbstractProgramLoader {
 		if (result.lastInfo.imageBase != null) {
 			imageBase = importerLanguage.getAddressFactory().getAddress(result.lastInfo.imageBase);
 		}
-		Program prog = createProgram(provider, programName, imageBase, getName(), importerLanguage,
+		Program prog = createProgram(provider, programName, imageBase, XML_SRC_NAME, importerLanguage,
 			importerCompilerSpec, consumer);
 		boolean success = false;
 		try {

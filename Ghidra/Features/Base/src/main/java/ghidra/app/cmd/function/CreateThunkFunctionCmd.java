@@ -310,7 +310,7 @@ public class CreateThunkFunctionCmd extends BackgroundCommand {
 				CreateThunkFunctionCmd extThunkCmd =
 					new CreateThunkFunctionCmd(referencedFunctionAddr, false);
 				if (extThunkCmd.applyTo(program)) {
-					f = extThunkCmd.getThunkFunction();
+					f = extThunkCmd.thunkFunction;
 				}
 			}
 		}

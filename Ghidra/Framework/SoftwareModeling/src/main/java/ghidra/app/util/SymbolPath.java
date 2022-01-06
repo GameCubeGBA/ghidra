@@ -284,7 +284,7 @@ public class SymbolPath implements Comparable<SymbolPath> {
 			return null;
 		}
 		if (path.parentPath == null &&
-			path.getName().equalsIgnoreCase(GlobalNamespace.GLOBAL_NAMESPACE_NAME)) {
+			path.symbolName.equalsIgnoreCase(GlobalNamespace.GLOBAL_NAMESPACE_NAME)) {
 			return null;
 		}
 		return path;
@@ -292,7 +292,7 @@ public class SymbolPath implements Comparable<SymbolPath> {
 
 	@Override
 	public int compareTo(SymbolPath o) {
-		SymbolPath otherParentPath = o.getParent();
+		SymbolPath otherParentPath = o.parentPath;
 		int result = 0;
 		if (parentPath == null) {
 			if (otherParentPath != null) {
@@ -306,7 +306,7 @@ public class SymbolPath implements Comparable<SymbolPath> {
 			result = parentPath.compareTo(otherParentPath);
 		}
 		if (result == 0) {
-			result = symbolName.compareTo(o.getName());
+			result = symbolName.compareTo(o.symbolName);
 		}
 		return result;
 	}

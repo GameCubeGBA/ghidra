@@ -124,7 +124,7 @@ public class AlgorithmTestSteppingVertex<V> extends AbstractTestVertex
 
 	@Override
 	public JComponent getComponent() {
-		ShapeImage si = getShapeImage();
+		ShapeImage si = currentShape;
 		ImageIcon icon = new ImageIcon(si.getImage());
 		tempLabel.setIcon(icon);
 		return tempLabel;
@@ -136,7 +136,7 @@ public class AlgorithmTestSteppingVertex<V> extends AbstractTestVertex
 
 	@Override
 	public Shape getCompactShape() {
-		return getShapeImage().getShape();
+		return currentShape.getShape();
 	}
 
 	@Override
@@ -177,7 +177,7 @@ public class AlgorithmTestSteppingVertex<V> extends AbstractTestVertex
 
 		@Override
 		public String toString() {
-			return getName();
+			return shapeName;
 		}
 	}
 }

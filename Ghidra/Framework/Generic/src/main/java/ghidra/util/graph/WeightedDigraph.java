@@ -192,7 +192,7 @@ public class WeightedDigraph extends DirectedGraph {
 	@Override
     public DirectedGraph copy()
 	{
-		WeightedDigraph copy = new WeightedDigraph(this.numVertices(), this.numEdges(), this.getDefaultEdgeWeight());
+		WeightedDigraph copy = new WeightedDigraph(this.numVertices(), this.numEdges(), this.defaultValue);
 		copyAll( copy );
 		return copy;
 	}

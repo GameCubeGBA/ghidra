@@ -137,15 +137,15 @@ public class ISO9660Directory implements StructConverter {
 			"\n");
 		buff.append("Extended Attribute Record Length: 0x" +
 			Integer.toHexString(extendedAttributeRecordLen) + "\n");
-		buff.append("Extent Location: 0x" + Integer.toHexString(getLocationOfExtentLE()) + "\n");
-		buff.append("Data Length: 0x" + Integer.toHexString(getDataLengthLE()) + "\n");
+		buff.append("Extent Location: 0x" + Integer.toHexString(locationOfExtentLE) + "\n");
+		buff.append("Data Length: 0x" + Integer.toHexString(dataLengthLE) + "\n");
 		buff.append("Recording Date/Time: " + createDateTimeString(recordingDateTime) + "\n");
 		buff.append(getFileFlagString() + "\n");
 		buff.append("File Unit Size Interleaved Mode: 0x" + Integer.toHexString(fileUnitSize) +
 			"\n");
 		buff.append("Interleave Gap Size: 0x" + Integer.toHexString(interleaveGapSize) + "\n");
 		buff.append("Volume Sequence Number: 0x" +
-			Integer.toHexString(getVolumeSequenceNumberLE()) + "\n");
+			Integer.toHexString(volumeSequenceNumberLE) + "\n");
 		buff.append("Length of File Identifier: 0x" + Integer.toHexString(fileIdentLength) + "\n");
 		buff.append("File Identifier: " + new String(fileIdentifier).trim() + "\n");
 		if (paddingFieldPresent) {

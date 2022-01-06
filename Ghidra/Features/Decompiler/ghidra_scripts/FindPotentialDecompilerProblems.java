@@ -422,8 +422,8 @@ public class FindPotentialDecompilerProblems extends GhidraScript {
 
 		@Override
 		public String toString() {
-			return "Issue at:" + getAddress() + "  found: " + getVarName() + "  " +
-				getExplanation() + " at " + getWhyAddr();
+			return "Issue at:" + getAddress() + "  found: " + varName + "  " +
+                    explanation + " at " + getWhyAddr();
 		}
 	}
 

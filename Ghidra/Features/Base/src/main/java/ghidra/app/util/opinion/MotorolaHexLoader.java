@@ -169,7 +169,7 @@ public class MotorolaHexLoader extends AbstractProgramLoader {
 		CompilerSpec importerCompilerSpec =
 			importerLanguage.getCompilerSpecByID(pair.compilerSpecID);
 
-		Program prog = createProgram(provider, programName, null, getName(), importerLanguage,
+		Program prog = createProgram(provider, programName, null, MOTOROLA_HEX_NAME, importerLanguage,
 			importerCompilerSpec, consumer);
 		boolean success = false;
 		try {

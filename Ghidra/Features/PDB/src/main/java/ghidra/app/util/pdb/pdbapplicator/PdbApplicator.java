@@ -330,7 +330,7 @@ public class PdbApplicator {
 			registerNameToRegisterMapper = new PdbRegisterNameToProgramRegisterMapper(program);
 		}
 		else {
-			vbtManager = new VbtManager(getDataTypeManager());
+			vbtManager = new VbtManager(dataTypeManager);
 		}
 
 		symbolApplierParser = new SymbolApplierFactory(this);
@@ -799,7 +799,7 @@ public class PdbApplicator {
 	//==============================================================================================
 	//==============================================================================================
 	DataType resolve(DataType dataType) {
-		DataType resolved = getDataTypeManager().resolve(dataType,
+		DataType resolved = dataTypeManager.resolve(dataType,
 			DataTypeConflictHandler.REPLACE_EMPTY_STRUCTS_OR_RENAME_AND_ADD_HANDLER);
 		resolveCount++;
 		return resolved;
@@ -1486,7 +1486,7 @@ public class PdbApplicator {
 			if (isMangled() && !PdbApplicator.isMangled(newName)) {
 				return true;
 			}
-			if (isNewSymbol()) {
+			if (isNewSymbol) {
 				return false;
 			}
 			return false;

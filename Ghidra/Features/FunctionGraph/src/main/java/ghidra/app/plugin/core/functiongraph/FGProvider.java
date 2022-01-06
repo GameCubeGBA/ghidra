@@ -101,7 +101,7 @@ public class FGProvider extends VisualGraphComponentProvider<FGVertex, FGEdge, F
 		this.plugin = plugin;
 		controller = new FGController(this, plugin);
 
-		setConnected(isConnected);
+		this.isConnected = isConnected;
 		setIcon(FunctionGraphPlugin.ICON);
 		if (!isConnected) {
 			setTransient();
@@ -136,7 +136,7 @@ public class FGProvider extends VisualGraphComponentProvider<FGVertex, FGEdge, F
 	@Override
 	public boolean isSnapshot() {
 		// we are a snapshot when we are 'disconnected' 
-		return !isConnected();
+		return !isConnected;
 	}
 
 	public void setClipboardService(ClipboardService service) {
@@ -361,7 +361,7 @@ public class FGProvider extends VisualGraphComponentProvider<FGVertex, FGEdge, F
 		String title = result.first;
 		String subTitle = result.second;
 
-		if (!isConnected()) {
+		if (!isConnected) {
 			title = "[" + title + "]";
 		}
 
@@ -1028,7 +1028,7 @@ public class FGProvider extends VisualGraphComponentProvider<FGVertex, FGEdge, F
 
 	@Override
 	public String getWindowGroup() {
-		if (isConnected()) {
+		if (isConnected) {
 			return FunctionGraphPlugin.FUNCTION_GRAPH_NAME;
 		}
 		return "disconnected";
@@ -1244,7 +1244,7 @@ public class FGProvider extends VisualGraphComponentProvider<FGVertex, FGEdge, F
 	@Override
 	public boolean goTo(Program gotoProgram, ProgramLocation location) {
 		if (gotoProgram != currentProgram) {
-			if (!isConnected()) {
+			if (!isConnected) {
 				tool.setStatusInfo("Program location not applicable for this provider!");
 				return false;
 			}
@@ -1290,7 +1290,7 @@ public class FGProvider extends VisualGraphComponentProvider<FGVertex, FGEdge, F
 
 	@Override
 	public Icon getIcon() {
-		if (isConnected()) {
+		if (isConnected) {
 			return super.getIcon();
 		}
 

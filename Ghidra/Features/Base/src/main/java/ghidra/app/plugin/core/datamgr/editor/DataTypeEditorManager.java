@@ -569,12 +569,12 @@ public class DataTypeEditorManager
 
 		@Override
 		protected String getPrototypeString() {
-			return getFunctionSignature().getPrototypeString();
+			return oldSignature.getPrototypeString();
 		}
 
 		@Override
 		protected String getCallingConventionName() {
-			return getFunctionSignature().getGenericCallingConvention().toString();
+			return oldSignature.getGenericCallingConvention().toString();
 		}
 
 		@Override

@@ -266,7 +266,7 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 
 		targetMap = new LinkedMap<String, ObjectContainer>();
 		refSet = new HashSet<>();
-		getRoot().propagateProvider(this);
+		root.propagateProvider(this);
 
 		this.autoServiceWiring = AutoService.wireServicesConsumed(plugin, this);
 		this.autoOptionsWiring = AutoOptions.wireOptions(plugin, this);
@@ -327,10 +327,10 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 	private void buildMainPanel() throws Exception {
 		mainPanel = new JPanel(new BorderLayout());
 		if (asTree) {
-			addTree(getRoot());
+			addTree(root);
 		}
 		else {
-			addTable(getRoot());
+			addTable(root);
 		}
 
 		launchDialog = new DebuggerMethodInvocationDialog(tool, "Launch", "Launch",
@@ -474,9 +474,9 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 	public void refresh(TargetObject targetObject) {
 		if (pane != null) {
 			Swing.runIfSwingOrRunLater(() -> {
-				pane.setRoot(getRoot(), targetObject);
-				getRoot().propagateProvider(getRoot().getProvider());
-				pane.signalUpdate(getRoot());
+				pane.setRoot(root, targetObject);
+				root.propagateProvider(root.getProvider());
+				pane.signalUpdate(root);
 			});
 		}
 	}
@@ -690,7 +690,7 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 			}
 			if (targetObject instanceof TargetInterpreter) {
 				TargetInterpreter interpreter = (TargetInterpreter) targetObject;
-				getPlugin().showConsole(interpreter);
+				plugin.showConsole(interpreter);
 				DebugModelConventions.findSuitable(TargetFocusScope.class, targetObject)
 						.thenAccept(f -> {
 							setFocus(f, targetObject);
@@ -771,7 +771,7 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 
 	@Override
 	public void closeComponent() {
-		TargetObject targetObject = getRoot().getTargetObject();
+		TargetObject targetObject = root.getTargetObject();
 		if (targetObject != null) {
 			targetObject.removeListener(getListener());
 		}
@@ -837,7 +837,7 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 		if (object == null) {
 			return false;
 		}
-		if (isLocalOnly()) {
+		if (selectionOnly) {
 			return clazz.isInstance(object);
 		}
 		TargetObject result = null;
@@ -1348,7 +1348,7 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 		if (obj == null && fallbackRoot) {
 			obj = root.getTargetObject();
 		}
-		if (!isLocalOnly()) {
+		if (!selectionOnly) {
 			DebugModelConventions.findSuitable(cls, obj).thenCompose(t -> {
 				return func.apply(t);
 			}).exceptionally(DebuggerResources.showError(getComponent(), errorMsg));
@@ -1539,7 +1539,7 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 
 	public void initiateConsole(ActionContext context) {
 		performAction(context, false, TargetInterpreter.class, interpreter -> {
-			getPlugin().showConsole(interpreter);
+			plugin.showConsole(interpreter);
 			return AsyncUtils.NIL;
 		}, "Couldn't show interpreter");
 	}
@@ -1552,7 +1552,7 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 		if (ignoreState) {
 			return true;
 		}
-		if (isLocalOnly()) {
+		if (selectionOnly) {
 			if (object instanceof TargetExecutionStateful) {
 				TargetExecutionStateful stateful = (TargetExecutionStateful) object;
 				TargetExecutionState executionState = stateful.getExecutionState();

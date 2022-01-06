@@ -197,7 +197,7 @@ public class FindSharedReturnFunctionsScript extends GhidraScript {
 
 		@Override
 		public Address getAddress() {
-			return getSharedReturnAddr();
+			return addr;
 		}
 
 		public Address getSharedReturnAddr() {

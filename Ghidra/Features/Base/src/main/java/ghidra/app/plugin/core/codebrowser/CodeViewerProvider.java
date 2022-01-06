@@ -788,18 +788,18 @@ public class CodeViewerProvider extends NavigatableComponentProviderAdapter
 	}
 
 	void saveState(SaveState saveState) {
-		saveState.putInt(DIVIDER_LOCATION, getListingPanel().getDividerLocation());
+		saveState.putInt(DIVIDER_LOCATION, listingPanel.getDividerLocation());
 		saveState.putBoolean(HOVER_MODE, toggleHoverAction.isSelected());
 	}
 
 	void readState(SaveState saveState) {
-		getListingPanel().setDividerLocation(
+		listingPanel.setDividerLocation(
 			saveState.getInt(DIVIDER_LOCATION, ListingPanel.DEFAULT_DIVIDER_LOCATION));
 		toggleHoverAction.setSelected(saveState.getBoolean(HOVER_MODE, true));
 	}
 
 	private void setHoverEnabled(boolean enabled) {
-		getListingPanel().setHoverMode(enabled);
+		listingPanel.setHoverMode(enabled);
 		if (otherPanel != null) {
 			otherPanel.setHoverMode(enabled);
 		}

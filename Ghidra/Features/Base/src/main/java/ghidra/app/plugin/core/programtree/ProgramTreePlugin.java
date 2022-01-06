@@ -422,7 +422,7 @@ public class ProgramTreePlugin extends ProgramPlugin
 			goTo(node.getModule().getAddressSet().getMinAddress());
 		}
 		else if (node.isRoot()) {
-			goTo(this.getCurrentProvider().getView().getMinAddress());
+			goTo(this.currentProvider.getView().getMinAddress());
 		}
 	}
 

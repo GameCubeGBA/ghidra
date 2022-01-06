@@ -55,7 +55,7 @@ public final class DyldArchitecture {
 	 */
 	public final static DyldArchitecture getArchitecture(String signature) {
 		for (DyldArchitecture architecture : ARCHITECTURES) {
-			if (architecture.getSignature().equals(signature)) {
+			if (architecture.signature.equals(signature)) {
 				return architecture;
 			}
 		}

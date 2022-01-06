@@ -118,7 +118,7 @@ public class DebuggerMethodInvocationDialog extends DialogComponentProvider
 		setParameters(parameterMap);
 		tool.showDialog(this);
 
-		return getArguments();
+		return arguments;
 	}
 
 	public void setParameters(Map<String, ParameterDescription<?>> parameterMap) {

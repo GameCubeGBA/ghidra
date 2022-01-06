@@ -135,12 +135,12 @@ public abstract class Task implements MonitoredRunnable {
 			isCancelled = monitor.isCancelled();
 		}
 		catch (CancelledException e) {
-			Msg.debug(this, "Task cancelled: " + getTaskTitle());
+			Msg.debug(this, "Task cancelled: " + title);
 			isCancelled = true;
 		}
 		catch (Throwable t) {
 			Msg.showError(this, null, "Task Error",
-				getTaskTitle() + " - Uncaught Exception: " + t, t);
+				title + " - Uncaught Exception: " + t, t);
 		}
 		finally {
 			TaskUtilities.removeTrackedTask(this);

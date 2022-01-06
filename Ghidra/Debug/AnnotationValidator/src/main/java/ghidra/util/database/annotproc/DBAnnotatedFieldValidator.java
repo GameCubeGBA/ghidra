@@ -21,11 +21,7 @@ import javax.lang.model.element.*;
 import javax.lang.model.type.*;
 import javax.tools.Diagnostic.Kind;
 
-import db.DBHandle;
-import ghidra.util.database.DBCachedDomainObjectAdapter;
-import ghidra.util.database.DBOpenMode;
 import ghidra.util.database.annot.DBAnnotatedField;
-import ghidra.util.task.TaskMonitor;
 
 public class DBAnnotatedFieldValidator extends AbstractDBAnnotationValidator {
 	final VariableElement field;
@@ -53,7 +49,7 @@ public class DBAnnotatedFieldValidator extends AbstractDBAnnotationValidator {
 		putPrimitiveTypeCodec(typeMap, TypeKind.SHORT, SHORT_CODEC_NAME);
 		putPrimitiveTypeCodec(typeMap, TypeKind.INT, INT_CODEC_NAME);
 		putPrimitiveTypeCodec(typeMap, TypeKind.LONG, LONG_CODEC_NAME);
-		putTypeCodec(typeMap, String.class, STRING_CODEC_NAME);
+		putTypeCodec(typeMap);
 		putPrimitiveArrayTypeCodec(typeMap, TypeKind.BYTE, BYTE_ARRAY_CODEC_NAME);
 		putPrimitiveArrayTypeCodec(typeMap, TypeKind.LONG, LONG_ARRAY_CODEC_NAME);
 		// NOTE: Enum requires subtype check
@@ -72,9 +68,9 @@ public class DBAnnotatedFieldValidator extends AbstractDBAnnotationValidator {
 		map.put(boxed, codec);
 	}
 
-	protected void putTypeCodec(Map<TypeMirror, TypeElement> map, Class<?> cls, String codecName) {
-		TypeMirror type = ctx.elementUtils.getTypeElement(cls.getCanonicalName()).asType();
-		TypeElement codec = ctx.elementUtils.getTypeElement(codecName);
+	protected void putTypeCodec(Map<TypeMirror, TypeElement> map) {
+		TypeMirror type = ctx.elementUtils.getTypeElement(String.class.getCanonicalName()).asType();
+		TypeElement codec = ctx.elementUtils.getTypeElement(DBAnnotatedFieldValidator.STRING_CODEC_NAME);
 		map.put(type, codec);
 	}
 
@@ -127,27 +123,6 @@ public class DBAnnotatedFieldValidator extends AbstractDBAnnotationValidator {
 		return codecElem;
 	}
 
-	class A extends DBCachedDomainObjectAdapter {
-
-		protected A(DBHandle dbh, DBOpenMode openMode, TaskMonitor monitor, String name,
-				int timeInterval, int bufSize, Object consumer) {
-			super(dbh, openMode, monitor, name, timeInterval, bufSize, consumer);
-			// TODO Auto-generated constructor stub
-		}
-
-		@Override
-		public boolean isChangeable() {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-		@Override
-		public String getDescription() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-	}
-
 	protected void checkCodecTypes(TypeElement objectType) {
 
 		//experiment(new Blargh(null, null));
@@ -159,22 +134,6 @@ public class DBAnnotatedFieldValidator extends AbstractDBAnnotationValidator {
 					field.asType(), DBAnnotatedField.class.getSimpleName()),
 				field);
 			return;
-		}
-
-		// REQUIREMENTS:
-		//   1) ValueType matches the field's type exactly
-		//      Cannot be super or extends because it's read/write
-		//   2) ObjectType is super of the containing object
-		//      Need to ensure extra interfaces (intersection) are considered
-		//   3) FieldType is non-abstract
-		//   4) The codec has an appropriate constructor
-
-		for (Element enc : codecType.getEnclosedElements()) {
-			if (enc.getKind() == ElementKind.CONSTRUCTOR) {
-				ExecutableElement exe = (ExecutableElement) enc;
-				ExecutableType exeType = (ExecutableType) exe.asType();
-				//throw new RuntimeException();
-			}
 		}
 
 		Map<String, TypeMirror> args = ctx.getArguments(codecType, ctx.DB_FIELD_CODEC_ELEM);

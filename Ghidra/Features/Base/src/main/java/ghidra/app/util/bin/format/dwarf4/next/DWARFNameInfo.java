@@ -85,8 +85,8 @@ public class DWARFNameInfo {
 
 	private DWARFNameInfo(DWARFNameInfo parent, String originalName, String name, SymbolType type) {
 		this.parent = parent;
-		this.organizationalCategoryPath = parent.getOrganizationalCategoryPath();
-		this.namespacePath = NamespacePath.create(parent.getNamespacePath(), name, type);
+		this.organizationalCategoryPath = parent.organizationalCategoryPath;
+		this.namespacePath = NamespacePath.create(parent.namespacePath, name, type);
 		this.originalName = originalName;
 	}
 
@@ -132,7 +132,7 @@ public class DWARFNameInfo {
 	 * @return parent name's CategoryPath
 	 */
 	public CategoryPath getParentCP() {
-		return getParent().asCategoryPath();
+		return parent.asCategoryPath();
 	}
 
 	/**
@@ -154,7 +154,7 @@ public class DWARFNameInfo {
 	 * @return new instance with new name
 	 */
 	public DWARFNameInfo replaceName(String newName, String newOriginalName) {
-		return new DWARFNameInfo(getParent(), newOriginalName, newName, getType());
+		return new DWARFNameInfo(parent, newOriginalName, newName, getType());
 	}
 
 	/**
@@ -205,7 +205,7 @@ public class DWARFNameInfo {
 	 * @return {@link Namespace} representing this entry's parent
 	 */
 	public Namespace getParentNamespace(Program program) {
-		return getParent().asNamespace(program);
+		return parent.asNamespace(program);
 	}
 
 	/**

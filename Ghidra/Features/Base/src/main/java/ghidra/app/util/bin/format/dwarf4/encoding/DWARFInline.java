@@ -35,7 +35,7 @@ public enum DWARFInline
 	static {
 		valueMap = new HashMap<Integer, DWARFInline>();
 		for(DWARFInline access : DWARFInline.values()) {
-			valueMap.put(access.getValue(), access);
+			valueMap.put(access.value, access);
 		}
 	}
 	

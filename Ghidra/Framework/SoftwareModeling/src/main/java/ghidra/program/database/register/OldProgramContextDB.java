@@ -429,7 +429,7 @@ public class OldProgramContextDB implements ProgramContext, DefaultProgramContex
 
 	@Override
 	public RegisterValue getDisassemblyContext(Address address) {
-		return getDefaultDisassemblyContext();
+		return defaultDisassemblyContext;
 	}
 
 	@Override

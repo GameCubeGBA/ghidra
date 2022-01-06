@@ -107,8 +107,8 @@ public class CliMetadataRoot implements StructConverter, PeMarkupable {
 		// #GUID
 		CliStreamHeader header = streamHeaderMap.get(CliStreamGuid.getName());
 		if (header != null) {
-			guidStream = new CliStreamGuid(header, getFileOffset() + header.getOffset(),
-				getRva() + header.getOffset(), reader);
+			guidStream = new CliStreamGuid(header, fileOffset + header.getOffset(),
+				rva + header.getOffset(), reader);
 			header.setStream(guidStream);
 			success &= guidStream.parse();
 		}
@@ -117,7 +117,7 @@ public class CliMetadataRoot implements StructConverter, PeMarkupable {
 		header = streamHeaderMap.get(CliStreamUserStrings.getName());
 		if (header != null) {
 			userStringsStream = new CliStreamUserStrings(header,
-				getFileOffset() + header.getOffset(), getRva() + header.getOffset(), reader);
+				fileOffset + header.getOffset(), rva + header.getOffset(), reader);
 			header.setStream(userStringsStream);
 			success &= userStringsStream.parse();
 		}
@@ -125,8 +125,8 @@ public class CliMetadataRoot implements StructConverter, PeMarkupable {
 		// #Strings
 		header = streamHeaderMap.get(CliStreamStrings.getName());
 		if (header != null) {
-			stringsStream = new CliStreamStrings(header, getFileOffset() + header.getOffset(),
-				getRva() + header.getOffset(), reader);
+			stringsStream = new CliStreamStrings(header, fileOffset + header.getOffset(),
+				rva + header.getOffset(), reader);
 			header.setStream(stringsStream);
 			success &= stringsStream.parse();
 		}
@@ -135,7 +135,7 @@ public class CliMetadataRoot implements StructConverter, PeMarkupable {
 		header = streamHeaderMap.get(CliStreamBlob.getName());
 		if (header != null) {
 			blobStream = new CliStreamBlob(header,
-				getFileOffset() + header.getOffset(), getRva() + header.getOffset(), reader);
+				fileOffset + header.getOffset(), rva + header.getOffset(), reader);
 			header.setStream(blobStream);
 			success &= blobStream.parse();
 		}
@@ -144,8 +144,8 @@ public class CliMetadataRoot implements StructConverter, PeMarkupable {
 		header = streamHeaderMap.get(CliStreamMetadata.getName());
 		if (header != null) {
 			metadataStream = new CliStreamMetadata(header, guidStream, userStringsStream,
-				stringsStream, blobStream, getFileOffset() + header.getOffset(),
-				getRva() + header.getOffset(), reader);
+				stringsStream, blobStream, fileOffset + header.getOffset(),
+				rva + header.getOffset(), reader);
 			header.setStream(metadataStream);
 			success &= metadataStream.parse();
 		}
@@ -157,7 +157,7 @@ public class CliMetadataRoot implements StructConverter, PeMarkupable {
 	public void markup(Program program, boolean isBinary, TaskMonitor monitor, MessageLog log,
 			NTHeader ntHeader) throws DuplicateNameException, CodeUnitInsertionException,
 			IOException, MemoryAccessException {
-		Address start = program.getImageBase().add(getRva());
+		Address start = program.getImageBase().add(rva);
 		try {
 			program.getSymbolTable().createLabel(start, NAME, SourceType.ANALYSIS);
 		}

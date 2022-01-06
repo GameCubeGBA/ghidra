@@ -82,8 +82,8 @@ public class DataOrganizationImpl implements DataOrganization {
 		dataOrganization.setSizeAlignment(4, 4);
 		dataOrganization.setSizeAlignment(8, 4);
 		if (language != null) {
-			dataOrganization.setPointerSize(language.getDefaultSpace().getPointerSize());
-			dataOrganization.setBigEndian(language.isBigEndian());
+			dataOrganization.pointerSize = language.getDefaultSpace().getPointerSize();
+			dataOrganization.bigEndian = language.isBigEndian();
 		}
 		return dataOrganization;
 	}
@@ -454,13 +454,13 @@ public class DataOrganizationImpl implements DataOrganization {
 		if (size <= 1) {
 			ctype = "char";
 		}
-		else if (size <= getShortSize() && (getShortSize() != getIntegerSize())) {
+		else if (size <= shortSize && (shortSize != integerSize)) {
 			ctype = "short";
 		}
-		else if (size <= getIntegerSize()) {
+		else if (size <= integerSize) {
 			ctype = "int";
 		}
-		else if (size <= getLongSize()) {
+		else if (size <= longSize) {
 			ctype = "long";
 		}
 		if (!signed) {
@@ -504,10 +504,10 @@ public class DataOrganizationImpl implements DataOrganization {
 					: absoluteMaxAlignment;
 		}
 		if (dataType instanceof Pointer) {
-			return getDefaultPointerAlignment();
+			return defaultPointerAlignment;
 		}
 		// Otherwise just assume the default alignment.
-		return getDefaultAlignment();
+		return defaultAlignment;
 	}
 	
 	/**

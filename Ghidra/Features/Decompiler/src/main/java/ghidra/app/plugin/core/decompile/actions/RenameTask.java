@@ -117,7 +117,7 @@ public abstract class RenameTask {
 			}
 			finally {
 				program.endTransaction(transaction, commit);
-				decompilerPanel.tokenRenamed(tokenAtCursor, getNewName());
+				decompilerPanel.tokenRenamed(tokenAtCursor, newName);
 			}
 		}
 

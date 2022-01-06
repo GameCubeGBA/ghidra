@@ -89,7 +89,7 @@ public class OmfLoader extends AbstractLibrarySupportLoader {
 			catch (OmfException e) {
 				throw new IOException("Bad header format: " + e.getMessage());
 			}
-			List<QueryResult> results = QueryOpinionService.query(getName(), scan.getMachineName(),
+			List<QueryResult> results = QueryOpinionService.query(OMF_NAME, scan.getMachineName(),
 				mapTranslator(scan.getTranslator()));
 			for (QueryResult result : results) {
 				loadSpecs.add(new LoadSpec(this, IMAGE_BASE, result));

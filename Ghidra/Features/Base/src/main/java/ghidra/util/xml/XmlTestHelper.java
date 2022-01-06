@@ -189,7 +189,7 @@ public class XmlTestHelper {
 		if (!file.exists()) {
 			throw new FileNotFoundException("Can not find test program: " + programName);
 		}
-		return getProject().importProgramFast(file);
+		return gp.importProgramFast(file);
 	}
 
 	public static void assertXMLFilesEquals(File expectedXMLFile, File testXMLFile)

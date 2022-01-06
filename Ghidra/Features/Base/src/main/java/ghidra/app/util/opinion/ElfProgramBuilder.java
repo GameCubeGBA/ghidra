@@ -2915,7 +2915,7 @@ class ElfProgramBuilder extends MemorySectionResolver implements ElfLoadHelper {
 
 	@Override
 	public Long getGOTValue() {
-		ElfHeader header = getElfHeader();
+		ElfHeader header = elf;
 		ElfDynamicTable dynamic = header.getDynamicTable();
 		if (dynamic != null && dynamic.containsDynamicValue(ElfDynamicType.DT_PLTGOT)) {
 			try {

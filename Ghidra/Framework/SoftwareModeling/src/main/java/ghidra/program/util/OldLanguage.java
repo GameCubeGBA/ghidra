@@ -74,7 +74,7 @@ class OldLanguage implements Language {
 
 	@Override
 	public String toString() {
-		return getDescription() + "(Version " + getVersion() + ")";
+		return langDescription + "(Version " + getVersion() + ")";
 	}
 
 	/**

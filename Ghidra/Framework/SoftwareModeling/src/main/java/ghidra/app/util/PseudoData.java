@@ -492,7 +492,7 @@ public class PseudoData extends PseudoCodeUnit implements Data {
 
 	@Override
 	public Class<?> getValueClass() {
-		DataType dt = getBaseDataType();
+		DataType dt = baseDataType;
 		if (dt != null) {
 			return dt.getValueClass(this);
 		}

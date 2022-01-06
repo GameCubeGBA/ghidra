@@ -187,7 +187,7 @@ public class DoubleRangeConstraintEditor extends AbstractColumnConstraintEditor<
 			infoLabel.setText(formatStatus(message, false));
 		}
 		else {
-			infoLabel.setText(formatStatus(getErrorMessage(), true));
+			infoLabel.setText(formatStatus(errorMessage, true));
 		}
 	}
 

@@ -65,7 +65,7 @@ abstract class PrimitiveField extends Field {
 	@Override
 	public String toString() {
 		String nullState = "";
-		if (isNull()) {
+		if (isNull) {
 			nullState = "(NULL)";
 		}
 		return getClass().getSimpleName() + nullState + ": " + getValueAsString();

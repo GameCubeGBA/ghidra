@@ -246,7 +246,7 @@ public class OpenFileRunnable implements Runnable {
 
 		@Override
 		public String toString() {
-			return getDisplayString();
+			return displayString;
 		}
 	}
 }

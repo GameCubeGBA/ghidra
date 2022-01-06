@@ -306,7 +306,7 @@ public abstract class Plugin implements ExtensionPoint, PluginEventListener, Ser
 			legacyRequiredServices.clear();
 			unregisterServices();
 			unregisterEvents();
-			tool.removeAll(getName());
+			tool.removeAll(name);
 			tool = null;
 			if (thr != null) {
 				throw new RuntimeException(thr);
@@ -325,7 +325,7 @@ public abstract class Plugin implements ExtensionPoint, PluginEventListener, Ser
 
 	@Override
 	public final void eventSent(PluginEvent event) {
-		if (!SystemUtilities.isEqual(event.getSourceName(), getName())) {
+		if (!SystemUtilities.isEqual(event.getSourceName(), name)) {
 			processEvent(event);
 		}
 	}
@@ -399,7 +399,7 @@ public abstract class Plugin implements ExtensionPoint, PluginEventListener, Ser
 			publishedServices.remove(siip.interfaceClass);
 		}
 		for (Class<?> c : publishedServices) {
-			Msg.warn(this, "Plugin " + getName() + " did not register a service handler for: " + c);
+			Msg.warn(this, "Plugin " + name + " did not register a service handler for: " + c);
 		}
 	}
 
@@ -477,7 +477,7 @@ public abstract class Plugin implements ExtensionPoint, PluginEventListener, Ser
 	 */
 	public void firePluginEvent(PluginEvent event) {
 		if (tool != null) {
-			event.setSourceName(getName());
+			event.setSourceName(name);
 			tool.firePluginEvent(event);
 		}
 	}
@@ -656,7 +656,7 @@ public abstract class Plugin implements ExtensionPoint, PluginEventListener, Ser
 //					getName());
 //		#else
 			Msg.warn(this, "Services must be advertised in @PluginInfo annotation - service " +
-				interfaceClass + "; from plugin " + getName());
+				interfaceClass + "; from plugin " + name);
 //		#endif
 		}
 		services.add(new ServiceInterfaceImplementationPair(interfaceClass, service));

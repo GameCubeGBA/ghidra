@@ -58,7 +58,7 @@ public class RepositoryFolder {
 	 * RepositoryFolder name comparator
 	 */
 	private static Comparator<RepositoryFolder> FOLDER_NAME_COMPARATOR =
-		(f1, f2) -> f1.getName().compareTo(f2.getName());
+		(f1, f2) -> f1.name.compareTo(f2.name);
 
 	/**
 	 * Constructor for non-root folders

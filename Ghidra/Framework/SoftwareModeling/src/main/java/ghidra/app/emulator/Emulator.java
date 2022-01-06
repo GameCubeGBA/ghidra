@@ -343,7 +343,7 @@ public class Emulator {
 	 * @return true if halted at a breakpoint
 	 */
 	public boolean isAtBreakpoint() {
-		return getHalt() && emulator.getExecutionState() == EmulateExecutionState.BREAKPOINT;
+		return emuHalt && emulator.getExecutionState() == EmulateExecutionState.BREAKPOINT;
 	}
 
 	/**

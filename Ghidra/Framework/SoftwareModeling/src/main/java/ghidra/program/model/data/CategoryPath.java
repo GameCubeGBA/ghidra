@@ -265,7 +265,7 @@ public class CategoryPath implements Comparable<CategoryPath> {
 			if (candidateAncestorPath.equals(path)) {
 				return true;
 			}
-			path = path.getParent();
+			path = path.parent;
 		}
 		return false;
 	}
@@ -291,10 +291,10 @@ public class CategoryPath implements Comparable<CategoryPath> {
 			return isRoot() ? -1 : 1;
 		}
 
-		int result = parent.compareTo(other.getParent());
+		int result = parent.compareTo(other.parent);
 
 		if (result == 0) {
-			result = name.compareTo(other.getName());
+			result = name.compareTo(other.name);
 		}
 		return result;
 	}

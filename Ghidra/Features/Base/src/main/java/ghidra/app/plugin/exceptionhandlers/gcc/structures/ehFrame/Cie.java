@@ -709,7 +709,7 @@ public class Cie extends GccAnalysisClass {
 	 * @return the decoder for the FDE
 	 */
 	public DwarfEHDecoder getFDEDecoder() {
-		return DwarfDecoderFactory.getDecoder(getFDEEncoding());
+		return DwarfDecoderFactory.getDecoder(fdeEncoding);
 	}
 
 	/**
@@ -727,7 +727,7 @@ public class Cie extends GccAnalysisClass {
 	 * @return the decoder for the LSDA
 	 */
 	public DwarfEHDecoder getLSDADecoder() {
-		return DwarfDecoderFactory.getDecoder(getLSDAEncoding());
+		return DwarfDecoderFactory.getDecoder(lsdaEncoding);
 	}
 
 	/**

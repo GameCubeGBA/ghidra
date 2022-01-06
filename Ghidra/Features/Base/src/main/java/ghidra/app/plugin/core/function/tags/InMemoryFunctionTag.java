@@ -63,11 +63,11 @@ class InMemoryFunctionTag implements FunctionTag {
 
 	@Override
 	public int compareTo(FunctionTag otherTag) {
-		int rc = getName().compareToIgnoreCase(otherTag.getName());
+		int rc = name.compareToIgnoreCase(otherTag.getName());
 		if (rc != 0) {
 			return rc;
 		}
-		return getComment().compareToIgnoreCase(otherTag.getComment());
+		return comment.compareToIgnoreCase(otherTag.getComment());
 	}
 
 	@Override

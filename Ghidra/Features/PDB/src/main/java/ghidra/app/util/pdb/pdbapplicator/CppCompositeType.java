@@ -63,7 +63,7 @@ public class CppCompositeType {
 
 	static CategoryPath createDirectCategoryPath(CppCompositeType cppType) {
 		return cppType.getBaseCategoryName(
-			CppCompositeType.createDirectClassName(cppType.getComposite()));
+			CppCompositeType.createDirectClassName(cppType.composite));
 	}
 
 	/*
@@ -729,7 +729,7 @@ public class CppCompositeType {
 	private List<ClassPdbMember> getDirectBaseClassMembers(TaskMonitor monitor)
 			throws CancelledException {
 		List<ClassPdbMember> myDirectClassPdbMembers = new ArrayList<>();
-		for (LayoutBaseClass base : getLayoutBaseClasses()) {
+		for (LayoutBaseClass base : layoutBaseClasses) {
 			monitor.checkCanceled();
 			CppCompositeType baseComposite = base.getBaseClassType();
 			if (base instanceof DirectLayoutBaseClass) {
@@ -737,7 +737,7 @@ public class CppCompositeType {
 					Composite baseDataType = base.getDirectDataType();
 					int offset = ((DirectLayoutBaseClass) base).getOffset();
 					CategoryPath cn =
-						getBaseCategoryName("BaseClass_" + base.getBaseClassType().getName());
+						getBaseCategoryName("BaseClass_" + base.getBaseClassType().className);
 					Member baseMember =
 						new Member("", baseDataType, false, null, offset, cn.toString());
 					addPdbMember(myDirectClassPdbMembers, baseMember);
@@ -752,7 +752,7 @@ public class CppCompositeType {
 	private List<VirtualLayoutBaseClass> preprocessVirtualBases(TaskMonitor monitor)
 			throws CancelledException, PdbException {
 		List<VirtualLayoutBaseClass> myVirtualLayoutBases = new ArrayList<>();
-		for (LayoutBaseClass base : getLayoutBaseClasses()) {
+		for (LayoutBaseClass base : layoutBaseClasses) {
 			monitor.checkCanceled();
 			if (base instanceof VirtualLayoutBaseClass) {
 				addPlaceholderVirtualBaseTableEntry(((VirtualLayoutBaseClass) base));
@@ -867,20 +867,20 @@ public class CppCompositeType {
 			List<VirtualLayoutBaseClass> myAccumulatedVirtualBases, int depth, TaskMonitor monitor)
 			throws PdbException, CancelledException {
 		depth++;
-		for (LayoutBaseClass base : cppType.getLayoutBaseClasses()) {
+		for (LayoutBaseClass base : cppType.layoutBaseClasses) {
 			monitor.checkCanceled();
 			CppCompositeType baseComposite = base.getBaseClassType();
 			if (base instanceof DirectLayoutBaseClass) {
 				if (isDirect) {
 					if (alreadyAccumulatedByName(myAccumulatedDirectBases, base)) {
 						throw new PdbException(
-							"Direct base already seen: " + base.getBaseClassType().getName());
+							"Direct base already seen: " + base.getBaseClassType().className);
 					}
 					if (!baseComposite.isZeroSize()) {
 						Composite baseDataType = base.getDirectDataType();
 						int offset = ((DirectLayoutBaseClass) base).getOffset();
 						CategoryPath cn =
-							getBaseCategoryName("BaseClass_" + base.getBaseClassType().getName());
+							getBaseCategoryName("BaseClass_" + base.getBaseClassType().className);
 						Member baseMember =
 							new Member("", baseDataType, false, null, offset, cn.toString());
 						addPdbMember(myPdbMembers, baseMember);
@@ -951,7 +951,7 @@ public class CppCompositeType {
 			}
 			DataType vbptr = getVbptrDataType(dtm, vbtManager, table);
 			allVbtFound &=
-				addOrUpdateVbtAndVbtptrMember(vbtManager, table, vbptr, vbtptrOffset, getName());
+				addOrUpdateVbtAndVbtptrMember(vbtManager, table, vbptr, vbtptrOffset, className);
 		}
 		return allVbtFound;
 	}
@@ -1008,7 +1008,7 @@ public class CppCompositeType {
 		}
 		else {
 			CppCompositeType compositeThatContainsMember = cAndM.getComposite();
-			String mangled = compositeThatContainsMember.getMangledName();
+			String mangled = compositeThatContainsMember.mangledName;
 			subMangled.add(mangled);
 		}
 		if (!(vbtManager instanceof PdbVbtManager)) {
@@ -1020,7 +1020,7 @@ public class CppCompositeType {
 		}
 
 		return findVbtBySymbolConstruction(table, (PdbVbtManager) vbtManager, entrySize,
-			getMangledName(), type, subMangled);
+                mangledName, type, subMangled);
 	}
 
 	private boolean findVbtBySymbolConstruction(PlaceholderVirtualBaseTable table,
@@ -1299,7 +1299,7 @@ public class CppCompositeType {
 	}
 
 	CategoryPath getBaseCategoryName(String baseName) {
-		CategoryPath cn = getCategoryPath();
+		CategoryPath cn = categoryPath;
 		return new CategoryPath(cn, baseName);
 	}
 
@@ -1359,7 +1359,7 @@ public class CppCompositeType {
 		}
 
 		Composite getDirectDataType() {
-			Composite c = getBaseClassType().getComposite();
+			Composite c = baseClassType.getComposite();
 			if (c.getNumComponents() == 0) {
 				return c;
 			}

@@ -352,7 +352,7 @@ public class FileBytes {
 
 	@Override
 	public String toString() {
-		return getFilename();
+		return filename;
 	}
 
 	@Override

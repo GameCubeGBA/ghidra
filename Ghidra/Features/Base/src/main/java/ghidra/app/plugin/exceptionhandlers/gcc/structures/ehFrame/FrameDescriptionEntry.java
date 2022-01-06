@@ -747,7 +747,7 @@ public class FrameDescriptionEntry extends GccAnalysisClass {
 	private void updateAugmentationDataEx() throws MemoryAccessException {
 		augmentationDataEx = new byte[intAugmentationDataExLength];
 
-		program.getMemory().getBytes(getAugmentationExDataAddress(), augmentationDataEx);
+		program.getMemory().getBytes(augmentationDataExAddr, augmentationDataEx);
 	}
 
 	/**

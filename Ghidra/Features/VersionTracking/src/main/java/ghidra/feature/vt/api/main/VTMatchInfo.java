@@ -155,8 +155,8 @@ public class VTMatchInfo {
 		buffer.append("\n  Type               = " + getAssociationType());
 		buffer.append("\n  Similarity Score   = " + simScoreValue);
 		buffer.append("\n  Confidence Score   = " + confScoreValue);
-		buffer.append("\n  SourceAddress      = " + getSourceAddress());
-		buffer.append("\n  DestinationAddress = " + getDestinationAddress());
+		buffer.append("\n  SourceAddress      = " + sourceAddress);
+		buffer.append("\n  DestinationAddress = " + destinationAddress);
 		buffer.append("\n  SourceLength       = " + getSourceLength());
 		buffer.append("\n  DestinationLength  = " + getDestinationLength());
 		buffer.append("\n  Tagged             = " + getTag());

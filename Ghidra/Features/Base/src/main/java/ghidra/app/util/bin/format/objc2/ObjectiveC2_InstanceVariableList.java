@@ -88,7 +88,7 @@ public class ObjectiveC2_InstanceVariableList implements StructConverter {
 	}
 
 	public void applyTo(Namespace namespace) throws Exception {
-		Address address = ObjectiveC1_Utilities.toAddress(_state.program, getIndex());
+		Address address = ObjectiveC1_Utilities.toAddress(_state.program, _index);
 		try {
 			ObjectiveC1_Utilities.applyData(_state.program, toDataType(), address);
 		}
@@ -100,7 +100,7 @@ public class ObjectiveC2_InstanceVariableList implements StructConverter {
 		}
 		catch (Exception e) {}
 
-		for (ObjectiveC2_InstanceVariable ivar : getIvars()) {
+		for (ObjectiveC2_InstanceVariable ivar : ivars) {
 			ivar.applyTo(namespace);
 		}
 	}

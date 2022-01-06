@@ -98,17 +98,17 @@ public class ContextRegisterInfo {
 			return false;
 		}
 		ContextRegisterInfo other = (ContextRegisterInfo) obj;
-		if (!contextRegister.equals(other.getContextRegister())) {
+		if (!contextRegister.equals(other.contextRegister)) {
 			return false;
 		}
 		if (value == null) {
-			return (other.getValue() == null);
+			return (other.value == null);
 		}
-		if (other.getValue() == null) {
+		if (other.value == null) {
 			//in this case we know that value != null
 			return false;
 		}
-		return value.equals(other.getValue());
+		return value.equals(other.value);
 	}
 
 	@Override
@@ -131,8 +131,8 @@ public class ContextRegisterInfo {
 		String value = ele.getAttributeValue("value");
 
 		ContextRegisterInfo result = new ContextRegisterInfo();
-		result.setContextRegister(contextRegister);
-		result.setValue(value != null ? new BigInteger(value) : null);
+		result.contextRegister = contextRegister;
+		result.value = value != null ? new BigInteger(value) : null;
 
 		return result;
 	}

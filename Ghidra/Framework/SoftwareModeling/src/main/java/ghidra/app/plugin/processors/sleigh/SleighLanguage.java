@@ -992,7 +992,7 @@ public class SleighLanguage implements Language {
 			}
 
 			AddressSpace spc;
-			if (getSegmentedSpace().equals(name)) {
+			if (segmentedspace.equals(name)) {
 				if (truncateSpace && type != AddressSpace.TYPE_RAM) {
 					throw new SleighException(
 						"Segmented space does not support truncation: " + name);
