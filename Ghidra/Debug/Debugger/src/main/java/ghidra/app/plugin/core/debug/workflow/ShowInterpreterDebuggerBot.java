@@ -75,8 +75,4 @@ public class ShowInterpreterDebuggerBot implements DebuggerBot {
 		});
 	}
 
-	@Override
-	public void modelRemoved(DebuggerObjectModel model) {
-		// Destruction of interpreter should cause console to become inactive
-	}
 }

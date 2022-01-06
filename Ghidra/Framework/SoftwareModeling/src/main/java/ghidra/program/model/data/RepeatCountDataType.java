@@ -93,11 +93,4 @@ public abstract class RepeatCountDataType extends DynamicDataType {
 		return "";
 	}
 
-	/* (non-Javadoc)
-	 * @see ghidra.program.model.data.DataType#getMnemonic(ghidra.program.model.data.Settings)
-	 */
-	public String getMnemonic(Settings settings) {
-		return name;
-	}
-
 }

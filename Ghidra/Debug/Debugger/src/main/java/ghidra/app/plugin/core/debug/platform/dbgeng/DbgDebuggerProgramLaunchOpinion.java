@@ -40,12 +40,7 @@ public class DbgDebuggerProgramLaunchOpinion implements DebuggerProgramLaunchOpi
 			return "Debug " + program.getName();
 		}
 
-		@Override
-		protected List<String> getLauncherPath() {
-			return PathUtils.parse("");
-		}
-
-		@Override
+        @Override
 		protected Map<String, ?> generateDefaultLauncherArgs(
 				Map<String, ParameterDescription<?>> params) {
 			return Map.of(TargetCmdLineLauncher.CMDLINE_ARGS_NAME, program.getExecutablePath());

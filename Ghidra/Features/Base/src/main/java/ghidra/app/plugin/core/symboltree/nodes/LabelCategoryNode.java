@@ -61,13 +61,7 @@ public class LabelCategoryNode extends SymbolCategoryNode {
 		return false;
 	}
 
-	@Override
-	protected List<GTreeNode> getSymbols(SymbolType type, TaskMonitor monitor)
-			throws CancelledException {
-		return getSymbols(type, true, monitor);
-	}
-
-	@Override
+    @Override
 	public boolean canPaste(List<GTreeNode> pastedNodes) {
 		for (GTreeNode treeNode : pastedNodes) {
 			if (!(treeNode instanceof LabelCategoryNode)) {

@@ -48,12 +48,7 @@ public class LabelHistoryInputDialog extends DialogComponentProvider {
 		setHelpLocation(new HelpLocation(HelpTopics.LABEL, "Show_All_History"));
 	}
 
-	@Override
-	protected void cancelCallback() {
-		close();
-	}
-
-	@Override
+    @Override
 	protected void okCallback() {
 		String text = inputField.getText();
 		if (text.length() == 0) {

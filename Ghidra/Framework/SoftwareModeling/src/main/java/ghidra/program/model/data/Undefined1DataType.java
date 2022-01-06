@@ -65,15 +65,7 @@ public class Undefined1DataType extends Undefined {
 		return "Undefined Byte";
 	}
 
-	/**
-	 * 
-	 * @see ghidra.program.model.data.DataType#getMnemonic(Settings)
-	 */
-	public String getMnemonic(Settings settings) {
-		return name;
-	}
-
-	private long getValue(MemBuffer buf) throws MemoryAccessException {
+    private long getValue(MemBuffer buf) throws MemoryAccessException {
 		long val = buf.getByte(0);
 		return val & 0xffl;
 	}

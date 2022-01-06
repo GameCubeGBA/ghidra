@@ -192,12 +192,6 @@ public class DbgModelSetContextMWETest extends AbstractGhidraHeadlessIntegration
 			}
 
 			@Override
-			public DebugStatus exception(DebugExceptionRecord64 exception, boolean firstChance) {
-                //dumpAllThreads();
-				return super.exception(exception, firstChance);
-			}
-
-			@Override
 			public DebugStatus changeEngineState(BitmaskSet<ChangeEngineState> flags,
 					long argument) {
 				DebugStatus status = super.changeEngineState(flags, argument);
@@ -213,12 +207,6 @@ public class DbgModelSetContextMWETest extends AbstractGhidraHeadlessIntegration
                 //dumpAllThreads(this::dumpRegsViaDX, false, false);
 				//dumpAllThreads(this::dumpFrame0ViaDX, false, false);
 				return status;
-			}
-
-			@Override
-			public DebugStatus changeDebuggeeState(BitmaskSet<ChangeDebuggeeState> flags,
-					long argument) {
-                return super.changeDebuggeeState(flags, argument);
 			}
 
 			Map<Integer, ModelObject> frame0sByT = new HashMap<>();
@@ -262,10 +250,6 @@ public class DbgModelSetContextMWETest extends AbstractGhidraHeadlessIntegration
 					pid, tid);
 			}
 
-			@Override
-			public DebugStatus exitThread(int exitCode) {
-                return super.exitThread(exitCode);
-			}
 		};
 
 		try (ProcMaker maker = new ProcMaker(client, "C:\\Software\\Winmine__XP.exe")) {

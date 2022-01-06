@@ -25,12 +25,7 @@ public class InVmModelForDbgmodelFactoryTest extends AbstractModelForDbgengFacto
 		return new InVmDbgmodelModelHost();
 	}
 
-	@Override
-	public void validateCompletionThread() {
-		super.validateCompletionThread();
-	}
-
-	/**
+    /**
 	 * The externally-accessible fetchX methods are being invoked internally. Unfortunately, this
 	 * demarcation was not made clear at the beginning, so now, adding a gate kicks internal object
 	 * retrieval off the DebugClient thread, which spells disaster for synchronization. The "real

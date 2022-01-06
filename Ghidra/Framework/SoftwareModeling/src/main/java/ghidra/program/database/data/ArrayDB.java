@@ -191,12 +191,7 @@ class ArrayDB extends DataTypeDB implements Array {
 			dtm);
 	}
 
-	@Override
-	public DataTypeManager getDataTypeManager() {
-		return dataMgr;
-	}
-
-	@Override
+    @Override
 	public boolean isEquivalent(DataType dt) {
 		if (dt == this) {
 			return true;

@@ -1194,20 +1194,7 @@ public class CompEditorPanel extends CompositeEditorPanel {
 		}
 	}
 
-	/**
-	 * Called from the DropTgtAdapter to revert any feedback changes back to
-	 * normal.
-	 */
-	@Override
-	public void undoDragUnderFeedback() {
-		synchronized (table) {
-			dndTableCellRenderer.setRowForFeedback(-1);
-			dndDtiCellRenderer.setRowForFeedback(-1);
-			table.repaint();
-		}
-	}
-
-	@Override
+    @Override
 	public void showUndefinedStateChanged(boolean showUndefinedBytes) {
 		// TODO Auto-generated method stub
 

@@ -361,12 +361,7 @@ public class OpenCloseManager {
 			this.realMonitor = realMonitor;
 		}
 
-		@Override
-		public void incrementProgress(long incrementAmount) {
-			// no!
-		}
-
-		@Override
+        @Override
 		public void cancel() {
 			super.cancel();
 			realMonitor.cancel();

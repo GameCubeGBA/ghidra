@@ -192,12 +192,7 @@ public class GhidraTOCFile {
 			}
 		}
 
-		@Override
-		protected void addChild(TOCItem child) {
-			super.addChild(child);
-		}
-
-		@Override
+        @Override
 		public boolean validate(LinkDatabase linkDatabase) {
 			return true;
 		}

@@ -588,12 +588,7 @@ public class DBTraceAddressSnapRangePropertyMapTree<T, DR extends AbstractDBTrac
 		return dataByParent.get(parentKey);
 	}
 
-	@Override
-	protected void doUnparentEntry(DR data) {
-		super.doUnparentEntry(data);
-	}
-
-	@Override
+    @Override
 	protected void doDeleteEntry(DR data) {
 		super.doDeleteEntry(data);
 	}

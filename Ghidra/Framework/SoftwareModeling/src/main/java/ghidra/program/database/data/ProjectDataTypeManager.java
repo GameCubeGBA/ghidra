@@ -162,12 +162,7 @@ public class ProjectDataTypeManager extends DataTypeManagerDB
 			DataTypeArchiveChangeManager.DOCR_CATEGORY_MOVED, oldPath.getParent(), category);
 	}
 
-	@Override
-	protected void favoritesChanged(DataType dataType, boolean isFavorite) {
-		super.favoritesChanged(dataType, isFavorite);
-	}
-
-	///////////////////
+    ///////////////////
 	@Override
 	protected void replaceDataTypeIDs(long oldDataTypeID, long newDataTypeID) {
 //		dataTypeArchive.getCodeManager().replace(oldID, newID, monitor);

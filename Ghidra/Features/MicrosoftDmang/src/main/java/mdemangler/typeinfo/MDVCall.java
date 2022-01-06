@@ -56,14 +56,7 @@ public class MDVCall extends MDMemberFunctionInfo {
 		callIndex = new MDEncodedNumber(dmang);
 	}
 
-	@Override
-	public void insert(StringBuilder builder) {
-		// TODO: Future specialization on 16-bit or 32plus
-		// dmang.appendString(builder, getNameModifier_32PlusBitModel());
-		super.insert(builder);
-	}
-
-	public String getNameModifier_16BitModel() {
+    public String getNameModifier_16BitModel() {
 		String modifier = "{" + callIndex + ",";
 		if (myThisModel == ThisModel.NEAR) {
 			modifier += NEAR_STRING;

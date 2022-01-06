@@ -287,12 +287,7 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 		repeatLastSet.run();
 	}
 
-	@Override
-	public void addLocalAction(DockingActionIf action) {
-		super.addLocalAction(action);
-	}
-
-	@Override
+    @Override
 	public ObjectActionContext getActionContext(MouseEvent event) {
 		return new ObjectActionContext(this);
 	}
@@ -1624,12 +1619,7 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 			plugin.getTool().contextChanged(DebuggerObjectsProvider.this);
 		}
 
-		@Override
-		public void memoryUpdated(TargetObject memory, Address address, byte[] data) {
-			//System.err.println("memoryUpdated");
-		}
-
-		@Override
+        @Override
 		public void memoryReadError(TargetObject memory, AddressRange range,
 				DebuggerMemoryAccessException e) {
 			System.err.println("memoryReadError");

@@ -70,9 +70,5 @@ class ReverseListIterator<T> extends ListIterator<T> {
 		ReverseListIterator<?> other = (ReverseListIterator)obj;
 		return list == other.list && node == other.node;
 	}
-	@Override
-	public int hashCode() {
-		return list.hashCode();
-	}
 
 }

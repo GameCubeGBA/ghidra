@@ -35,15 +35,7 @@ public abstract class PatternlessSymbol extends SpecificSymbol {
 		return patexp;
 	}
 
-	@Override
-    public void saveXml( PrintStream s ) {
-	}
-
-	@Override
-    public void restoreXml( Element el, SleighBase trans ) {
-	}
-
-	// The void constructor must explicitly build
+    // The void constructor must explicitly build
 	// the ConstantValue because it is not stored
 	// or restored via xml
 	public PatternlessSymbol(Location location) {

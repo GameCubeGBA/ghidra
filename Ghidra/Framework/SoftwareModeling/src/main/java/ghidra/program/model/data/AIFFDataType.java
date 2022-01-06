@@ -76,12 +76,7 @@ public class AIFFDataType extends BuiltIn implements Dynamic {
 		return true;
 	}
 
-	@Override
-	public boolean canSpecifyLength() {
-		return false;
-	}
-
-	@Override
+    @Override
 	public DataType clone(DataTypeManager dtm) {
 		if (dtm == getDataTypeManager()) {
 			return this;

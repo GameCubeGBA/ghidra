@@ -91,16 +91,7 @@ public class SettableColorSwatchChooserPanel extends AbstractColorChooserPanel {
 		return null;
 	}
 
-	/**
-	 * The background color, foreground color, and font are already set to the
-	 * defaults from the defaults table before this method is called.
-	 */
-	@Override
-	public void installChooserPanel(JColorChooser enclosingChooser) {
-		super.installChooserPanel(enclosingChooser);
-	}
-
-	@Override
+    @Override
 	protected void buildChooser() {
 
 		GridBagLayout gb = new GridBagLayout();

@@ -130,12 +130,7 @@ public class DbgModel2Impl extends AbstractDbgModel
 		return root.getSchema();
 	}
 
-	@Override
-	public CompletableFuture<? extends TargetObject> fetchModelRoot() {
-		return completedRoot;
-	}
-
-	@Override
+    @Override
 	public DbgManagerImpl getManager() {
 		return dbg;
 	}

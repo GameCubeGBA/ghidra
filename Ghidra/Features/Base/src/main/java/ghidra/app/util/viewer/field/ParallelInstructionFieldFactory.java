@@ -59,13 +59,7 @@ public class ParallelInstructionFieldFactory extends FieldFactory {
 		super(FIELD_NAME, model, hsProvider, displayOptions, fieldOptions);
 	}
 
-	@Override
-	public void fieldOptionsChanged(Options options, String name, Object oldValue,
-			Object newValue) {
-		// don't care
-	}
-
-	/**
+    /**
 	 * Returns the FactoryField for the given object at index index.
 	 * @param varWidth the amount of variable width spacing for any fields
 	 * before this one.

@@ -214,13 +214,7 @@ public class CondenseFillerBytesAnalyzer extends AbstractAnalyzer {
 		}
     }
 
-	@Override
-	public boolean removed(Program program, AddressSetView set, TaskMonitor monitor, MessageLog log)
-			throws CancelledException {
-		return false;
-	}
-
-	@Override
+    @Override
 	public void registerOptions(Options options, Program program) {
 		options.registerOption("Minimum number of sequential bytes", minBytes, null,
 			"Enter the minimum number of sequential bytes to collapse");

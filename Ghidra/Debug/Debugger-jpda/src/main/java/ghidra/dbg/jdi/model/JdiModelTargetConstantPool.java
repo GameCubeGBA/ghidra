@@ -69,12 +69,7 @@ public class JdiModelTargetConstantPool extends JdiModelTargetObjectImpl impleme
 		return CompletableFuture.completedFuture(null);
 	}
 
-	@Override
-	public CompletableFuture<Void> init() {
-		return CompletableFuture.completedFuture(null);
-	}
-
-	@Override
+    @Override
 	public String getDisplay() {
 		JdiModelTargetReferenceType classType = getClassType();
 		return classType.getName() + ": ConstPool" + range;

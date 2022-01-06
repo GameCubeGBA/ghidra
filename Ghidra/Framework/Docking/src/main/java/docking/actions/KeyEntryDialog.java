@@ -142,12 +142,7 @@ public class KeyEntryDialog extends DialogComponentProvider {
 		keyEntryField.setKeyStroke(ks);
 	}
 
-	@Override
-	protected void cancelCallback() {
-		close();
-	}
-
-	@Override
+    @Override
 	protected void okCallback() {
 		KeyStroke newKeyStroke = keyEntryField.getKeyStroke();
 		if (newKeyStroke != null && ReservedKeyBindings.isReservedKeystroke(newKeyStroke)) {

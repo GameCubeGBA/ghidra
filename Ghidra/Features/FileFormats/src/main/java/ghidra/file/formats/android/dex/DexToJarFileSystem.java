@@ -162,8 +162,4 @@ public class DexToJarFileSystem extends GFileSystemBase {
 			jarBP.length(), jarFSRL);
 	}
 
-	@Override
-	public void close() throws IOException {
-		super.close();
-	}
 }

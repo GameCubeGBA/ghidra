@@ -111,21 +111,7 @@ public class SparcAnalyzer extends ConstantPropagationAnalyzer {
 				return false;
 			}
 
-			@Override
-			public boolean evaluateDestination(VarnodeContext context, Instruction instruction) {
-				FlowType flowType = instruction.getFlowType();
-				if (!flowType.isJump()) {
-					return false;
-				}
-				// TODO: if this is a switch stmt, add to destSet
-				Reference[] refs = instruction.getReferencesFrom();
-				if (refs.length <= 0 ||
-					(refs.length == 1 && refs[0].getReferenceType().isData())) {
-					destSet.addRange(instruction.getMinAddress(), instruction.getMinAddress());
-				}
-				return false;
-			}
-		};
+        };
 
         return symEval.flowConstants(flowStart, flowSet, eval, true, monitor);
 	}

@@ -23,16 +23,5 @@ public class LldbProcessReplacedEvent extends AbstractLldbEvent<DebugProcessInfo
 	public LldbProcessReplacedEvent(DebugProcessInfo info) {
 		super(info);
 	}
-	
-	@Override
-	public StateType newState() {
-		// NB: it's very tempting to relay the info we have, but
-		//   doing so fouls up a lot of the tests because the stopped
-		//   message arrives ahead of breakpointHit
-		
-		//DebugProcessInfo pinfo = (DebugProcessInfo) getInfo();
-		//return pinfo.process.GetState();
-		return null;
-	}
 
 }

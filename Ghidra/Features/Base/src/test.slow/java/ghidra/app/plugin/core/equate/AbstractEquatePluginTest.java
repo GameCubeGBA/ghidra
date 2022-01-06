@@ -196,13 +196,7 @@ public abstract class AbstractEquatePluginTest extends AbstractProgramBasedTest 
 		return builder.getProgram();
 	}
 
-	@Override
-	@After
-	public void tearDown() throws Exception {
-		env.dispose();
-	}
-
-//=================================================================================================
+    //=================================================================================================
 // Private Methods
 //=================================================================================================
 

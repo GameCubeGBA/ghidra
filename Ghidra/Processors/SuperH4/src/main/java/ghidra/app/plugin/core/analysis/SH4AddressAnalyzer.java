@@ -63,13 +63,7 @@ public class SH4AddressAnalyzer extends ConstantPropagationAnalyzer {
 		return true;
 	}
 
-	@Override
-	public boolean added(Program program, AddressSetView set, TaskMonitor monitor, MessageLog log)
-			throws CancelledException {
-		return super.added(program, set, monitor, log);
-	}
-
-	@Override
+    @Override
 	public AddressSetView flowConstants(final Program program, Address flowStart,
 			AddressSetView flowSet, final SymbolicPropogator symEval, final TaskMonitor monitor)
 			throws CancelledException {

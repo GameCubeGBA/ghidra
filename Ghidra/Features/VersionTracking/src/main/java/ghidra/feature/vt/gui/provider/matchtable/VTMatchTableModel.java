@@ -74,14 +74,7 @@ public class VTMatchTableModel extends AbstractVTMatchTableModel {
 		return super.isCellEditable(rowIndex, columnIndex);
 	}
 
-	@Override
-	public Address getAddress(int row) {
-		VTMatch match = getRowObject(row);
-		VTAssociation association = match.getAssociation();
-		return association.getSourceAddress();
-	}
-
-	@Override
+    @Override
 	protected void doLoad(Accumulator<VTMatch> accumulator, TaskMonitor monitor)
 			throws CancelledException {
 		monitor.initialize(getMatchCount());

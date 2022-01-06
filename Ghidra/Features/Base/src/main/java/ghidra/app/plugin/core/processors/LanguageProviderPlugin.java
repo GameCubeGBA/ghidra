@@ -98,12 +98,7 @@ public final class LanguageProviderPlugin extends Plugin implements FrontEndable
 				return null;
 			}
 
-			@Override
-			public void dispose() {
-				super.dispose();
-			}
-
-		};
+        };
 		setLanguageAction.setPopupMenuData(
 			new MenuData(new String[] { "Set Language..." }, "Language"));
 

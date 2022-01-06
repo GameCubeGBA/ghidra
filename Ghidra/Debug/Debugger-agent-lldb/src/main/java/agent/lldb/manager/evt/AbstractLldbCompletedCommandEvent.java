@@ -27,8 +27,4 @@ public class AbstractLldbCompletedCommandEvent extends AbstractLldbEvent<String>
 		super(null);
 	}
 
-	public StateType newState() {
-		return null;
-	}
-
 }

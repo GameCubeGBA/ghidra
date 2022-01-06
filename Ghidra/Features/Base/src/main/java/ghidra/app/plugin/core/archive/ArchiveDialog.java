@@ -167,15 +167,7 @@ public class ArchiveDialog extends DialogComponentProvider {
 		}
 	}
 
-	/**
-	 * Gets called when the user clicks on the Cancel Action for the dialog.
-	 */
-	@Override
-	protected void cancelCallback() {
-		close();
-	}
-
-	/**
+    /**
 	 * Display this dialog.
 	 * @param pProjectLocator the project URL to display when the dialog pops up.
 	 * @param pArchivePathName the archive file name to display when the dialog pops up.

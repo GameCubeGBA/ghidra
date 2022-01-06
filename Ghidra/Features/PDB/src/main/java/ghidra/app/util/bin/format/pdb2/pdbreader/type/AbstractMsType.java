@@ -82,17 +82,7 @@ public abstract class AbstractMsType extends AbstractParsableItem implements MsT
 		this.recordNumber = recordNumber;
 	}
 
-	/**
-	 * If the type has a name element, returns this name; else returns an empty String.
-	 *  Meant to be overloaded by derived types that have a name element.
-	 * @return Name.
-	 */
-	@Override
-	public String getName() {
-		return "";
-	}
-
-	/**
+    /**
 	 * Returns the unique ID (PdbId) for this data type.
 	 * @return Identifier for this data type.
 	 */

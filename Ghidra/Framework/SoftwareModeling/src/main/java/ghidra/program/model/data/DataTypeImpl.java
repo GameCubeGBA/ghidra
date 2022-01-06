@@ -84,12 +84,7 @@ public abstract class DataTypeImpl extends AbstractDataType {
 		defaultSettings = settings;
 	}
 
-	@Override
-	public String getPathName() {
-		return getDataTypePath().getPath();
-	}
-
-	@Override
+    @Override
 	public int getAlignment() {
 		int length = getLength();
 		if (length < 0) {

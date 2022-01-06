@@ -57,8 +57,4 @@ public class ConvertToFloatAction extends AbstractConvertAction {
 		return value != null ? value.toString() : null;
 	}
 
-	@Override
-	protected int getFormatChoice() {
-		return -1; // unsupported for data
-	}
 }

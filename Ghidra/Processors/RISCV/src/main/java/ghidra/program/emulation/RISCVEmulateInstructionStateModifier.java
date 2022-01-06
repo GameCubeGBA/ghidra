@@ -28,34 +28,4 @@ public class RISCVEmulateInstructionStateModifier extends EmulateInstructionStat
 		super(emu);
 	}
 
-	/**
-	 * Emulation callback immediately before the first instruction is executed.
-	 * This callback permits any language specific initializations to be performed.
-	 * @param emulate
-	 * @param current_address intial execute address
-	 * @param contextRegisterValue initial context value or null if not applicable or unknown
-	 * @throws LowlevelError
-	 */
-	@Override
-	public void initialExecuteCallback(Emulate emulate, Address current_address, RegisterValue contextRegisterValue) throws LowlevelError {
-		// no default implementation
-	}
-
-	/**
-	 * Emulation callback immediately following execution of the lastExecuteAddress.
-	 * One use of this callback is to modify the flowing/future context state.
-	 * @param emulate
-	 * @param lastExecuteAddress
-	 * @param lastExecutePcode
-	 * @param lastPcodeIndex pcode index of last op or -1 if no pcode or fall-through occurred.
-	 * @param currentAddress
-	 * @throws LowlevelError
-	 */
-	@Override
-	public void postExecuteCallback(Emulate emulate, Address lastExecuteAddress,
-			PcodeOp[] lastExecutePcode, int lastPcodeIndex, Address currentAddress)
-			throws LowlevelError {
-		// no default implementation
-	}
-
 }

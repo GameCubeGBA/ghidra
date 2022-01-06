@@ -324,13 +324,10 @@ public class ScalarSearchProvider extends ComponentProviderAdapter {
 
 		@Override
 		public boolean isSubFilterOf(TableFilter<?> tableFilter) {
-			if (!(tableFilter instanceof ScalarTableSecondaryFilter)) {
-				return false;
-			}
+			return tableFilter instanceof ScalarTableSecondaryFilter;
 
 			// for this to work we would have to have this filter keep state to
 			// know what values were used at the time of the filter
-			return true;
 		}
 	}
 }

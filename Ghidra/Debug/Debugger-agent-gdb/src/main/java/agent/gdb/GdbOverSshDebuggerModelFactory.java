@@ -90,12 +90,7 @@ public class GdbOverSshDebuggerModelFactory implements DebuggerModelFactory {
 		});
 	}
 
-	@Override
-	public boolean isCompatible() {
-		return true;
-	}
-
-	public String getGdbCommand() {
+    public String getGdbCommand() {
 		return gdbCmd;
 	}
 

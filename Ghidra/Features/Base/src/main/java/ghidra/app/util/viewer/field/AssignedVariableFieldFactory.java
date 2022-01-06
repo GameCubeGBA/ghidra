@@ -56,13 +56,7 @@ public class AssignedVariableFieldFactory extends FieldFactory {
 		super(FIELD_NAME, model, hsProvider, displayOptions, fieldOptions);
 	}
 
-	@Override
-	public void fieldOptionsChanged(Options options, String optionName, Object oldValue,
-			Object newValue) {
-
-	}
-
-//	private static String getOffsetString(int offset) {
+    //	private static String getOffsetString(int offset) {
 //		String offString =
 //			(offset >= 0 ? Integer.toHexString(offset) : "-" + Integer.toHexString(-offset));
 //		return offString;

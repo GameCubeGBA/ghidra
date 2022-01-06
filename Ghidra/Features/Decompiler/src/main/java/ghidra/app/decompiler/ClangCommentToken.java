@@ -42,12 +42,7 @@ public class ClangCommentToken extends ClangToken {
 		srcaddr = null;
 	}
 
-	@Override
-	public boolean isVariableRef() {
-		return false;
-	}
-
-	@Override
+    @Override
 	public Address getMinAddress() {
 		return srcaddr;
 	}

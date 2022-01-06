@@ -27,9 +27,4 @@ public class DebugClientImpl6 extends DebugClientImpl5 {
 		this.jnaClient = jnaClient;
 	}
 
-	@Override
-	public void setEventCallbacks(DebugEventCallbacks cb) {
-		// TODO: Use Context variant. Will require expanding the generic interface.
-		super.setEventCallbacks(cb);
-	}
 }

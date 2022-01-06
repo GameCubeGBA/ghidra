@@ -52,13 +52,7 @@ public abstract class AbstractDemanglerAnalyzer extends AbstractAnalyzer {
 		setSupportsOneTimeAnalysis();
 	}
 
-	@Override
-	public boolean canAnalyze(Program program) {
-		// override this to control program-specific enablement
-		return true;
-	}
-
-	@Override
+    @Override
 	public boolean added(Program program, AddressSetView set, TaskMonitor monitor, MessageLog log)
 			throws CancelledException {
 

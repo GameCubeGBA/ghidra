@@ -108,12 +108,7 @@ class SearchTextDialog extends DialogComponentProvider {
 		addDismissButton();
 	}
 
-	@Override
-	public void close() {
-		super.close();
-	}
-
-	public void show(ComponentProvider componentProvider) {
+    public void show(ComponentProvider componentProvider) {
 		clearStatusText();
 		valueField.requestFocus();
 		valueField.selectAll();

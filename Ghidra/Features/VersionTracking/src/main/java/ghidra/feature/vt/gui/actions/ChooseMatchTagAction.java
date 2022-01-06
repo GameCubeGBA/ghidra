@@ -129,12 +129,7 @@ public class ChooseMatchTagAction extends DockingAction {
 			return panel;
 		}
 
-		@Override
-		protected void cancelCallback() {
-			super.cancelCallback();
-		}
-
-		@Override
+        @Override
 		protected void okCallback() {
 			selectedTag = (VTMatchTag) tagComboBox.getSelectedItem();
 

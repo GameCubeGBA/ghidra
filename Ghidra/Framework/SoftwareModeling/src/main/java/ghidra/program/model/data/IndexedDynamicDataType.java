@@ -225,15 +225,7 @@ public abstract class IndexedDynamicDataType extends DynamicDataType {
 		return "";
 	}
 
-	/* (non-Javadoc)
-	 * @see ghidra.program.model.data.DataType#getMnemonic(ghidra.program.model.data.Settings)
-	 */
-	@Override
-	public String getMnemonic(Settings settings) {
-		return name;
-	}
-
-	private long getIndex(Memory memory, Address loc) {
+    private long getIndex(Memory memory, Address loc) {
 		long test = 0;
 		try {
 			switch (indexSize) {

@@ -87,19 +87,7 @@ public class GdbConsoleExecCommand extends AbstractGdbCommandWithThreadAndFrameI
 		this.cwr = cwr;
 	}
 
-	/**
-	 * TODO: I think there should be a separate command for arbitrary CLI input. I'm not sure yet
-	 * whether it should wait in the queue or just be sent immediately.
-	 */
-	@Override
-	public Interpreter getInterpreter() {
-		/*if (to == Output.CONSOLE && manager.hasCli() && threadId == null && frameId == null) {
-			return Interpreter.CLI;
-		}*/
-		return Interpreter.MI2;
-	}
-
-	@Override
+    @Override
 	public String encode(String threadPart, String framePart) {
 		switch (getInterpreter()) {
 			case CLI:

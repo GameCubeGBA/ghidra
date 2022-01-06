@@ -47,23 +47,7 @@ class MSRichProductBuildNumberDataType extends DataTypeImpl {
 		return clone(dtm);
 	}
 
-	@Override
-	public void setCategoryPath(CategoryPath path) throws DuplicateNameException {
-		// ignored
-	}
-
-	@Override
-	public void setName(String name) throws InvalidNameException {
-		// ignored
-	}
-
-	@Override
-	public void setNameAndCategory(CategoryPath path, String name)
-			throws InvalidNameException, DuplicateNameException {
-		// ignored
-	}
-
-	@Override
+    @Override
 	public String getMnemonic(Settings settings) {
 		return "xordw";
 	}
@@ -101,28 +85,4 @@ class MSRichProductBuildNumberDataType extends DataTypeImpl {
 		return getClass() == dt.getClass();
 	}
 
-	@Override
-	public void dataTypeSizeChanged(DataType dt) {
-		// ignored
-	}
-
-	@Override
-	public void dataTypeDeleted(DataType dt) {
-		// ignored			
-	}
-
-	@Override
-	public void dataTypeReplaced(DataType oldDt, DataType newDt) {
-		// ignored
-	}
-
-	@Override
-	public void dataTypeNameChanged(DataType dt, String oldName) {
-		// ignored
-	}
-
-	@Override
-	public boolean dependsOn(DataType dt) {
-		return false;
-	}
 }

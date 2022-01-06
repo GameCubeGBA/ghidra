@@ -35,10 +35,5 @@ public class DummyPluginTool extends PluginTool {
 
 	private static class DummyToolServices extends ToolServicesAdapter {
 
-		@Override
-		public void closeTool(PluginTool t) {
-			// If we call this, then the entire test VM will exit, which is bad
-			// System.exit(0);
-		}
-	}
+    }
 }

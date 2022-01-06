@@ -113,12 +113,7 @@ class EditMemoryReferencePanel extends EditReferencePanel {
 				}
 			}
 
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				super.mouseReleased(e);
-			}
-		});
+        });
 		addrHistoryButton.setText(null);
 		addrHistoryButton.setMargin(new Insets(0, 0, 0, 0));
 		addrHistoryButton.setFocusable(false);

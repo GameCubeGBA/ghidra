@@ -389,19 +389,7 @@ public class ApplicationKeyManagerFactory {
 		private String keystorePath;
 		private boolean isSelfSigned = false;
 
-		@Override
-		public String chooseEngineServerAlias(String keyType, Principal[] issuers,
-				SSLEngine engine) {
-			return super.chooseEngineServerAlias(keyType, issuers, engine);
-		}
-
-		@Override
-		public String chooseEngineClientAlias(String[] keyType, Principal[] issuers,
-				SSLEngine engine) {
-			return super.chooseEngineClientAlias(keyType, issuers, engine);
-		}
-
-		@Override
+        @Override
 		public synchronized String chooseClientAlias(String[] keyType, Principal[] issuers,
 				Socket socket) {
 			try {

@@ -117,14 +117,7 @@ public class HCS12ConstantAnalyzer extends ConstantPropagationAnalyzer {
 				return super.evaluateReference(context, instr, pcodeop, address, size, refType);
 			}
 
-			@Override
-			public Address evaluateConstant(VarnodeContext context, Instruction instr, int pcodeop, Address constant,
-					int size, RefType refType) {
-				// TODO Auto-generated method stub
-				return super.evaluateConstant(context, instr, pcodeop, constant, size, refType);
-			}
-
-			private boolean adjustPagedAddress(Instruction instr, Address address, RefType refType) {
+            private boolean adjustPagedAddress(Instruction instr, Address address, RefType refType) {
 				PcodeOp[] pcode = instr.getPcode();
 				for (PcodeOp op : pcode) {
 					int numin = op.getNumInputs();

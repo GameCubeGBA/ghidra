@@ -149,12 +149,7 @@ public class EditMarkupAddressAction extends DockingAction {
 			addCancelButton();
 		}
 
-		@Override
-		protected void cancelCallback() {
-			super.cancelCallback();
-		}
-
-		@Override
+        @Override
 		protected void okCallback() {
 			Address newAddress;
 			try {

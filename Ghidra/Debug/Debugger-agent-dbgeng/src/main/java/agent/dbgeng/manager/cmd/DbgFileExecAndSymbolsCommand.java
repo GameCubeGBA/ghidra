@@ -30,8 +30,4 @@ public class DbgFileExecAndSymbolsCommand extends AbstractDbgCommand<Void> {
 		this.file = file;
 	}
 
-	@Override
-	public void invoke() {
-		// TODO Auto-generated method stub
-	}
 }

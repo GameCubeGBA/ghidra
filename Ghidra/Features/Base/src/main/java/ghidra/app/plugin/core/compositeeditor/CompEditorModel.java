@@ -1564,16 +1564,7 @@ public abstract class CompEditorModel extends CompositeEditorModel {
 		return 0;
 	}
 
-	/**
-	 * Return the last number of duplicates the user entered when prompted for 
-	 * creating duplicates of a component.
-	 */
-	@Override
-	public int getLastNumDuplicates() {
-		return lastNumDuplicates;
-	}
-
-	/**
+    /**
 	 * Called whenever the data structure's modification state changes.
 	 */
 	void componentEdited() {

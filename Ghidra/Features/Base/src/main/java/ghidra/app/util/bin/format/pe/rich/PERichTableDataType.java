@@ -127,12 +127,7 @@ public class PERichTableDataType extends DynamicDataType {
 			this.mask = mask;
 		}
 
-		@Override
-		public boolean hasLanguageDependantLength() {
-			return false;
-		}
-
-		@Override
+        @Override
 		public DataType clone(DataTypeManager dtm) {
 			if (dtm == getDataTypeManager()) {
 				return this;
@@ -192,12 +187,7 @@ public class PERichTableDataType extends DynamicDataType {
 
 		}
 
-		@Override
-		public boolean hasLanguageDependantLength() {
-			return false;
-		}
-
-		@Override
+        @Override
 		public DataType clone(DataTypeManager dtm) {
 			if (dtm == getDataTypeManager()) {
 				return this;
@@ -258,12 +248,7 @@ public class PERichTableDataType extends DynamicDataType {
 			this.mask = mask;
 		}
 
-		@Override
-		public boolean hasLanguageDependantLength() {
-			return false;
-		}
-
-		@Override
+        @Override
 		public DataType clone(DataTypeManager dtm) {
 			if (dtm == getDataTypeManager()) {
 				return this;

@@ -541,15 +541,7 @@ public class SetEquateDialog extends DialogComponentProvider {
 		return (Enum) dataTypeManager.findDataTypeForID(id);
 	}
 
-	/**
-	 * Called when user selects Cancel Button.
-	 */
-	@Override
-	protected void cancelCallback() {
-		close();
-	}
-
-	public void dispose() {
+    public void dispose() {
 		suggestedEquatesTable.dispose();
 		filterPanel.dispose();
 	}

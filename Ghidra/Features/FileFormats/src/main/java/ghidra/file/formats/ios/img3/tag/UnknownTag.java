@@ -28,8 +28,4 @@ final class UnknownTag extends AbstractImg3Tag {
 		super(reader);
 	}
 
-	@Override
-	public DataType toDataType() throws DuplicateNameException, IOException {
-		return super.toDataType();
-	}
 }

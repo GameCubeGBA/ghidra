@@ -64,17 +64,7 @@ public class DBTraceProgramViewMemorySpaceBlock extends AbstractDBTraceProgramVi
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
-	public String getComment() {
-		return null;
-	}
-
-	@Override
-	public void setComment(String comment) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
+    @Override
 	public boolean isRead() {
 		return true;
 	}
@@ -119,13 +109,4 @@ public class DBTraceProgramViewMemorySpaceBlock extends AbstractDBTraceProgramVi
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
-	public String getSourceName() {
-		return "Trace"; // TODO: What does this method actually do?
-	}
-
-	@Override
-	public void setSourceName(String sourceName) {
-		throw new UnsupportedOperationException();
-	}
 }

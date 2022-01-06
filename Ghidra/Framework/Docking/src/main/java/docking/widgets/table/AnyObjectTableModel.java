@@ -83,12 +83,7 @@ public class AnyObjectTableModel<T> extends GDynamicColumnTableModel<T, Object> 
 		return name;
 	}
 
-	@Override
-	public boolean isSortable(int columnIndex) {
-		return true;
-	}
-
-	@Override
+    @Override
 	public List<T> getModelData() {
 		return data;
 	}

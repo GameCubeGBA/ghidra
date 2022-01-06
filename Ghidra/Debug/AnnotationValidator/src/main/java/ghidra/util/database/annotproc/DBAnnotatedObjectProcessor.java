@@ -76,14 +76,7 @@ public class DBAnnotatedObjectProcessor extends AbstractProcessor {
 		return true;
 	}
 
-	@Override
-	public Iterable<? extends Completion> getCompletions(Element element,
-			AnnotationMirror annotation, ExecutableElement member, String userText) {
-		// TODO Auto-generated method stub
-		return super.getCompletions(element, annotation, member, userText);
-	}
-
-	@Override
+    @Override
 	public SourceVersion getSupportedSourceVersion() {
 		return SourceVersion.latestSupported();
 	}

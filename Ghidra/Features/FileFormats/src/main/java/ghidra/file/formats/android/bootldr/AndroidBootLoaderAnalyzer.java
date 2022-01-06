@@ -47,11 +47,7 @@ public class AndroidBootLoaderAnalyzer extends AbstractAnalyzer {
 		return AndroidBootLoaderConstants.isBootLoader(program);
 	}
 
-	@Override
-	public void registerOptions(Options options, Program program) {
-	}
-
-	@Override
+    @Override
 	public boolean added(Program program, AddressSetView set, TaskMonitor monitor, MessageLog log)
 			throws CancelledException {
 

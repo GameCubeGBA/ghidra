@@ -54,8 +54,4 @@ public class DbgRunCommand extends AbstractDbgCommand<DbgThread> {
 		return manager.getThread(tid);
 	}
 
-	@Override
-	public void invoke() {
-		// TODO Auto-generated method stub
-	}
 }

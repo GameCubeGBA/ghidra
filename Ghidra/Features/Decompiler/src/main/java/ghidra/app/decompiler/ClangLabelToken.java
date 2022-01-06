@@ -28,11 +28,8 @@ public class ClangLabelToken extends ClangToken {
 		super(par);
 		blockaddr = null;
 	}
-	
-	@Override
-    public boolean isVariableRef() { return false; }
-	
-	@Override
+
+    @Override
     public Address getMinAddress() { return blockaddr; }
 	
 	@Override

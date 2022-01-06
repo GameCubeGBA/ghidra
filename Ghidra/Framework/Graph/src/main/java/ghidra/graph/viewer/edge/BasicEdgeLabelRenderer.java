@@ -35,25 +35,7 @@ import ghidra.graph.viewer.layout.VisualGraphLayout;
 public class BasicEdgeLabelRenderer<V extends VisualVertex, E extends VisualEdge<V>>
 		extends edu.uci.ics.jung.visualization.renderers.BasicEdgeLabelRenderer<V, E> {
 
-	@Override
-	public void labelEdge(RenderContext<V, E> rc, Layout<V, E> layout, E e, String label) {
-
-		// TODO delete this class
-
-//		FGLayout functionGraphLayout = getFunctionGraphLayout(layout);
-//		if (functionGraphLayout != null) {
-//			EdgeLabel<FunctionGraphVertex, FunctionGraphEdge> overridingRenderer =
-//				functionGraphLayout.getEdgeLabelRenderer();
-//			if (overridingRenderer != null) {
-//				overridingRenderer.labelEdge(rc, layout, e, label);
-//				return;
-//			}
-//		}
-
-		super.labelEdge(rc, layout, e, label);
-	}
-
-	private VisualGraphLayout<V, E> getFunctionGraphLayout(Layout<V, E> layout) {
+    private VisualGraphLayout<V, E> getFunctionGraphLayout(Layout<V, E> layout) {
 		if (layout instanceof LayoutDecorator) {
 			LayoutDecorator<V, E> layoutDecorator = (LayoutDecorator<V, E>) layout;
 			layout = layoutDecorator.getDelegate();

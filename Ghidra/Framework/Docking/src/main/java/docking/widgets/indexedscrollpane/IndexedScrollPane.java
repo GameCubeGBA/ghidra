@@ -201,12 +201,7 @@ public class IndexedScrollPane extends JPanel implements IndexScrollListener {
 			return false;
 		}
 
-		@Override
-		public void setSize(Dimension d) {
-			super.setSize(d);
-		}
-
-		@Override
+        @Override
 		protected void paintComponent(Graphics g) {
 		}
 

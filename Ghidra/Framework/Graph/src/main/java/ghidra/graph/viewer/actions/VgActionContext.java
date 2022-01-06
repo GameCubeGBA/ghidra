@@ -32,13 +32,4 @@ public class VgActionContext extends ActionContext implements VisualGraphActionC
 		super(provider, null);
 	}
 
-	/**
-	 * Returns true actions that manipulate the satellite viewer should be enabled for this context
-	 * @return true actions that manipulate the satellite viewer should be enabled for this context
-	 */
-	@Override
-	public boolean shouldShowSatelliteActions() {
-		// these actions should be available generically; subclasses may override to return false
-		return true;
-	}
 }

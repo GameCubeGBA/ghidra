@@ -41,12 +41,7 @@ public class ConfigPdbDialog extends DialogComponentProvider {
 		build();
 	}
 
-	@Override
-	protected void cancelCallback() {
-		close();
-	}
-
-	@Override
+    @Override
 	protected void okCallback() {
 		if (symbolServerConfigPanel.isConfigChanged()) {
 			symbolServerConfigPanel.saveConfig();

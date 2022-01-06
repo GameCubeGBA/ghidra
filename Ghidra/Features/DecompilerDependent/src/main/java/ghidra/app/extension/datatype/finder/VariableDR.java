@@ -46,12 +46,7 @@ public abstract class VariableDR extends DecompilerReference {
 		return declaration;
 	}
 
-	@Override
-	public DecompilerVariable getVariable() {
-		return variable;
-	}
-
-	@Override
+    @Override
 	public void accumulateMatches(DataType dt, String fieldName, List<DataTypeReference> results) {
 
 		if (variable == null) {

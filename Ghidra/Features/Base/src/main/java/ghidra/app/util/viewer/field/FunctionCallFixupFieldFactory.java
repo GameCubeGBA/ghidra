@@ -146,9 +146,4 @@ public class FunctionCallFixupFieldFactory extends FieldFactory {
 		return OptionsGui.FUN_CALL_FIXUP.getDefaultColor();
 	}
 
-	@Override
-	public void fieldOptionsChanged(Options options, String optionName, Object oldValue,
-			Object newValue) {
-		// don't care
-	}
 }

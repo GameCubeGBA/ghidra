@@ -80,17 +80,7 @@ class StructureEditorModel extends CompEditorModel {
 		return COMMENT;
 	}
 
-	@Override
-	public void load(Composite dataType, boolean useOffLineCategory) {
-		super.load(dataType, useOffLineCategory);
-	}
-
-	@Override
-	public void load(Composite dataType) {
-		super.load(dataType);
-	}
-
-	/**
+    /**
 	 * Returns the number of component rows in the viewer. There may be a
 	 * blank row at the end for selecting. Therefore this number can be
 	 * different than the actual number of components currently in the

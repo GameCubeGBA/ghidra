@@ -182,12 +182,7 @@ public class DebuggerStaticMappingProvider extends ComponentProviderAdapter
 		addMappingDialog.setMappingService(mappingService);
 	}
 
-	@Override
-	public void addLocalAction(DockingActionIf action) {
-		super.addLocalAction(action);
-	}
-
-	@Override
+    @Override
 	public JComponent getComponent() {
 		return mainPanel;
 	}

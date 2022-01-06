@@ -172,9 +172,4 @@ public class ThunkedFunctionFieldFactory extends FieldFactory {
 			fieldOptions);
 	}
 
-	@Override
-	public void fieldOptionsChanged(Options options, String optionName, Object oldValue,
-			Object newValue) {
-		// don't care
-	}
 }

@@ -87,12 +87,7 @@ public abstract class AbstractGhidraHeadedDebuggerGUITest
 			super(target, new LanguageID(LANGID_TOYBE64), new CompilerSpecID("default"), Set.of());
 		}
 
-		@Override
-		protected DebuggerMemoryMapper createMemoryMapper(TargetMemory memory) {
-			return new DefaultDebuggerMemoryMapper(language, memory.getModel());
-		}
-
-		@Override
+        @Override
 		protected DebuggerRegisterMapper createRegisterMapper(
 				TargetRegisterContainer registers) {
 			return new DefaultDebuggerRegisterMapper(cSpec, registers, true);

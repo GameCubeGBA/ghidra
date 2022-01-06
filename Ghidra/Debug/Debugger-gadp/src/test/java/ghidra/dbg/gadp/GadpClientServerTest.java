@@ -289,12 +289,7 @@ public class GadpClientServerTest implements AsyncTestUtils {
 				"Initialized");
 		}
 
-		@Override
-		public AbstractDebuggerObjectModel getModel() {
-			return super.getModel();
-		}
-
-		@TargetAttributeType(name = "Available", required = true, fixed = true)
+        @TargetAttributeType(name = "Available", required = true, fixed = true)
 		public TestGadpTargetAvailableContainer getAvailable() {
 			return available;
 		}
@@ -330,12 +325,7 @@ public class GadpClientServerTest implements AsyncTestUtils {
 			super(model, parent, key, typeHint);
 		}
 
-		@Override
-		public AbstractDebuggerObjectModel getModel() {
-			return super.getModel();
-		}
-
-		@Override
+        @Override
 		protected CompletableFuture<Void> requestAttributes(boolean refresh) {
 			if (refresh) {
 				List<String> toRemove = new ArrayList<>();

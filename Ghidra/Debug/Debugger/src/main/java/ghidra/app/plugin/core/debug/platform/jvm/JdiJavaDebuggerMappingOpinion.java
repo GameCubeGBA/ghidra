@@ -36,16 +36,7 @@ public class JdiJavaDebuggerMappingOpinion implements DebuggerMappingOpinion {
 			super(target, langID, csId, extraRegNames);
 		}
 
-		@Override
-		protected DebuggerMemoryMapper createMemoryMapper(TargetMemory memory) {
-			return new DefaultDebuggerMemoryMapper(language, memory.getModel());
-		}
-
-		@Override
-		protected DebuggerRegisterMapper createRegisterMapper(TargetRegisterContainer registers) {
-			return new DefaultDebuggerRegisterMapper(cSpec, registers, false);
-		}
-	}
+    }
 
 	protected static class JavaDebuggerMappingOffer extends DefaultDebuggerMappingOffer {
 		public JavaDebuggerMappingOffer(TargetProcess process) {

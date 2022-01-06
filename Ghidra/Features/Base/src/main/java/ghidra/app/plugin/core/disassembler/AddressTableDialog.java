@@ -505,12 +505,7 @@ public class AddressTableDialog extends DialogComponentProvider {
 		searchComplete();
 	}
 
-	@Override
-	protected void cancelCurrentTask() {
-		super.cancelCurrentTask();
-	}
-
-	private void createAction() {
+    private void createAction() {
 
 		DockingAction selectAction = new MakeProgramSelectionAction(plugin, resultsTable) {
 			@Override

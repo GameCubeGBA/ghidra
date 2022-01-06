@@ -56,12 +56,7 @@ public class DebuggerConnectDialog extends DialogComponentProvider
 			addFactory(element);
 		}
 
-		@Override
-		public void elementModified(DebuggerModelFactory element) {
-			// Don't care
-		}
-
-		@Override
+        @Override
 		public void elementRemoved(DebuggerModelFactory element) {
 			removeFactory(element);
 		}

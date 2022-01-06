@@ -30,13 +30,7 @@ public class GdbInterruptCommand extends AbstractGdbCommand<Void> {
 		super(manager);
 	}
 
-	@Override
-	public boolean validInState(GdbState state) {
-		//return state == GdbState.RUNNING;
-		return true;
-	}
-
-	@Override
+    @Override
 	public String encode() {
 		Interpreter i = getInterpreter();
 		if (i == manager.getRunningInterpreter()) {

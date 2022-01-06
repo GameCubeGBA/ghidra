@@ -202,14 +202,7 @@ public class FunctionDB extends DatabaseObject implements Function {
 		return null;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		// there can only be one functionDB object per unique function entry point
-		//   just use the built-in equals method.
-		return super.equals(obj);
-	}
-
-	@Override
+    @Override
 	public int hashCode() {
 		// there can only be one functionDB object per unique function entry point
 		//    just use normal hashcode()

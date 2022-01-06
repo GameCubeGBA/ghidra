@@ -174,14 +174,7 @@ public class SymbolMergeManager3Test extends AbstractListingMergeManagerTest {
 		assertNotNull(function);
 	}
 
-	@Override
-	protected void disassemble(Program program, AddressSet addrSet, boolean followFlow) {
-		DisassembleCommand disCmd =
-			new DisassembleCommand(addrSet.getMinAddress(), addrSet, followFlow);
-		disCmd.applyTo(program);
-	}
-
-	@Override
+    @Override
 	protected void createAnalyzedFunction(ProgramDB program, String entryPoint, String name) {
 		Address addr = addr(program, entryPoint);
 		try {

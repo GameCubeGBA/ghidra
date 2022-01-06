@@ -66,15 +66,7 @@ public class ClearFlowDialog extends DialogComponentProvider {
 			repairCb.isSelected());
 	}
 
-	/**
-	 * Gets called when the user clicks on the Cancel Action for the dialog.
-	 */
-	@Override
-	protected void cancelCallback() {
-		close();
-	}
-
-	/**
+    /**
 	 * Create the main panel.
 	 */
 	private void create() {

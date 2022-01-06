@@ -61,9 +61,4 @@ public class DbgListMappingsCommand extends AbstractDbgCommand<Map<Long, DbgSect
 		return process.getKnownMappings();
 	}
 
-	@Override
-	public void invoke() {
-		//TODO
-	}
-
 }

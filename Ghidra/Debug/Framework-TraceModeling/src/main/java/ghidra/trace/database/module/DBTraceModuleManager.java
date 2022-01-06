@@ -151,12 +151,7 @@ public class DBTraceModuleManager
 			m -> m.getModulesIntersecting(lifespan, range), Set.of());
 	}
 
-	@Override
-	public ReadWriteLock getLock() {
-		return lock;
-	}
-
-	@Override
+    @Override
 	public Collection<? extends DBTraceSection> getSectionsAt(long snap, Address address) {
 		return delegateRead(address.getAddressSpace(),
 			m -> m.getSectionsAt(snap, address), Set.of());

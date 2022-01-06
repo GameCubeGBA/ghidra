@@ -41,12 +41,7 @@ public abstract class AbstractModelForLldbBreakpointsTest
 		return this;
 	}
 
-	@Override
-	protected List<String> seedPath() {
-		return List.of();
-	}
-
-	@Override
+    @Override
 	public DebuggerTestSpecimen getLaunchSpecimen() {
 		return MacOSSpecimen.PRINT;
 	}

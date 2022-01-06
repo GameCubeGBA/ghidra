@@ -202,12 +202,7 @@ public class ArrayDataType extends DataTypeImpl implements Array {
 		return getArrayValueClass(settings);
 	}
 
-	@Override
-	public void setName(String name) throws InvalidNameException {
-		// unsupported - ignore
-	}
-
-	@Override
+    @Override
 	public int getElementLength() {
 		return (dataType instanceof Dynamic) ? elementLength : dataType.getLength();
 	}
@@ -251,18 +246,7 @@ public class ArrayDataType extends DataTypeImpl implements Array {
 		}
 	}
 
-	@Override
-	public void setCategoryPath(CategoryPath path) throws DuplicateNameException {
-		// unsupported - ignore
-	}
-
-	@Override
-	public void setNameAndCategory(CategoryPath path, String name)
-			throws InvalidNameException, DuplicateNameException {
-		// unsupported - ignore
-	}
-
-	@Override
+    @Override
 	public CategoryPath getCategoryPath() {
 		DataType dt = dataType;
 		return dt.getCategoryPath();

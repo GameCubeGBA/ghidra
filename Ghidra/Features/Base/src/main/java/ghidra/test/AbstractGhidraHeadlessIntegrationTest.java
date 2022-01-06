@@ -75,17 +75,7 @@ public abstract class AbstractGhidraHeadlessIntegrationTest extends AbstractDock
 		setErrorGUIEnabled(false);
 	}
 
-	@Override
-	protected ApplicationLayout createApplicationLayout() {
-		try {
-			return new GhidraTestApplicationLayout(new File(getTestDirectoryPath()));
-		}
-		catch (IOException e) {
-			throw new AssertException(e);
-		}
-	}
-
-	@Override
+    @Override
 	protected ApplicationConfiguration createApplicationConfiguration() {
 		return new HeadlessGhidraApplicationConfiguration();
 	}

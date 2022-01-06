@@ -64,12 +64,7 @@ public class SourceCodeLookupPlugin extends ProgramPlugin {
 		super(tool, false, false);
 	}
 
-	@Override
-	protected void dispose() {
-		super.dispose();
-	}
-
-	@Override
+    @Override
 	public void init() {
 		super.init();
 

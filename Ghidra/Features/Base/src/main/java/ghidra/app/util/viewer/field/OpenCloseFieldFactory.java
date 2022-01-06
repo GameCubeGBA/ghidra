@@ -86,14 +86,7 @@ public class OpenCloseFieldFactory extends FieldFactory {
 		return null;
 	}
 
-	/**
-	 * @see ghidra.app.util.viewer.field.FieldFactory#servicesChanged()
-	 */
-	@Override
-	public void servicesChanged() {
-	}
-
-	/**
+    /**
 	 * Computes if the given data is the last component at its level.
 	 */
 	private boolean computeIsLast(Data data) {

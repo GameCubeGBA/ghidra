@@ -29,12 +29,7 @@ public class ReducingListBasedLcs<T> extends ReducingLcs<List<T>, T> {
 		super(x, y);
 	}
 
-	@Override
-	protected boolean matches(T x, T y) {
-		return x.equals(y);
-	}
-
-	@Override
+    @Override
 	protected List<T> reduce(List<T> i, int start, int end) {
 		return i.subList(start, end);
 	}

@@ -360,12 +360,7 @@ public class FieldHeaderComp extends JPanel {
 		return new Dimension(formatManager.getMaxWidth(), height);
 	}
 
-	@Override
-	public void setBounds(int x, int y, int width, int height) {
-		super.setBounds(x, y, width, height);
-	}
-
-	/**
+    /**
 	 * Returns a FieldHeaderLocation for the given point
 	 * @param p the point to get a location for.
 	 */

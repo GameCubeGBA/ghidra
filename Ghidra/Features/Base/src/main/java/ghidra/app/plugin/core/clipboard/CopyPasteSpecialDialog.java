@@ -92,12 +92,7 @@ public class CopyPasteSpecialDialog extends DialogComponentProvider {
 		selectedType = listPanel.getSelectedValue();
 	}
 
-	@Override
-    protected void cancelCallback() {
-		close();
-	}
-
-	public ClipboardType getSelectedType() {
+    public ClipboardType getSelectedType() {
 	    return (ClipboardType) selectedType;
 	}
 

@@ -41,8 +41,4 @@ public class GdbCommandRunningEvent extends AbstractGdbCompletedCommandEvent {
 		super(GdbMiFieldList.builder().build());
 	}
 
-	@Override
-	public GdbState newState() {
-		return null; // Let *running cause change, as it has more info.
-	}
 }

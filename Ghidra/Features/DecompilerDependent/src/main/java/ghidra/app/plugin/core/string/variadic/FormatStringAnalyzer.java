@@ -68,12 +68,7 @@ public class FormatStringAnalyzer extends AbstractAnalyzer {
 		setPrototype();
 	}
 
-	@Override
-	public boolean canAnalyze(Program program) {
-		return true;
-	}
-
-	private synchronized FormatStringParser getParser() {
+    private synchronized FormatStringParser getParser() {
 		if (parser == null) {
 			parser = new FormatStringParser(currentProgram);
 		}
@@ -370,13 +365,7 @@ public class FormatStringAnalyzer extends AbstractAnalyzer {
 		}
 	}
 
-	@Override
-	public boolean removed(Program program, AddressSetView set, TaskMonitor monitor, MessageLog log)
-			throws CancelledException {
-		return false;
-	}
-
-	@Override
+    @Override
 	public void registerOptions(Options options, Program program) {
 		options.registerOption(OPTION_NAME_CREATE_BOOKMARKS, createBookmarksEnabled, null,
 			OPTION_DESCRIPTION_CREATE_BOOKMARKS);

@@ -164,12 +164,7 @@ public class BundleStatusTableModel
 		}
 	}
 
-	@Override
-	public boolean isSortable(int columnIndex) {
-		return true;
-	}
-
-	@Override
+    @Override
 	public String getName() {
 		return BundleStatusTableModel.class.getSimpleName();
 	}

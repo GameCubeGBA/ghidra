@@ -378,12 +378,7 @@ public class FunctionDefinitionDataType extends GenericDataType implements Funct
 		params[ordinal] = new ParameterDefinitionImpl(newName, dt, newComment, ordinal);
 	}
 
-	@Override
-	public void dataTypeSizeChanged(DataType dt) {
-		// ignore - no affect
-	}
-
-	@Override
+    @Override
 	public void dataTypeDeleted(DataType dt) {
 		if (returnType == dt) {
 			returnType = DataType.DEFAULT;
@@ -395,17 +390,7 @@ public class FunctionDefinitionDataType extends GenericDataType implements Funct
 		}
 	}
 
-	@Override
-	public void dataTypeNameChanged(DataType dt, String oldName) {
-		// ignore - no affect
-	}
-
-	@Override
-	public boolean dependsOn(DataType dt) {
-		return false;
-	}
-
-	@Override
+    @Override
 	public String toString() {
 		return getPrototypeString(true);
 	}

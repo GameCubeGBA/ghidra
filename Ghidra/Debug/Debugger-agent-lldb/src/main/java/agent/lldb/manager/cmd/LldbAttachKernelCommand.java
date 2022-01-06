@@ -46,20 +46,7 @@ public class LldbAttachKernelCommand extends AbstractLldbCommand<SBThread> {
 		return completed && (created != null);
 	}
 
-	@Override
-	public SBThread complete(LldbPendingCommand<?> pending) {
-		//TODO
-		/*
-		DebugProcessInfo info = created.getInfo();
-		DebugThreadInfo tinfo = info.initialThreadInfo;
-		DebugSystemObjects so = manager.getSystemObjects();
-		DebugThreadId tid = so.getThreadIdByHandle(tinfo.handle);
-		return manager.getThread(tid);
-		*/
-		return null;
-	}
-
-	@Override
+    @Override
 	public void invoke() {
 		//TODO
 		/*

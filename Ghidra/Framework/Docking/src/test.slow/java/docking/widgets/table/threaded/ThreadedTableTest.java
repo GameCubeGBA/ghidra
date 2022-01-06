@@ -783,19 +783,7 @@ public class ThreadedTableTest extends AbstractThreadedTableTest {
 		assertTrue("The table did not filter data when it should have", spyFilter.hasFiltered());
 	}
 
-	@Override
-	protected void doTestSorting(int columnIndex) throws Exception {
-
-		sortByNormalClicking(columnIndex);
-
-		SortedTableModel sortedModel = (SortedTableModel) table.getModel();
-		verifySortDirection(columnIndex, sortedModel);
-
-		sortByNormalClicking(columnIndex);
-		verifySortDirection(columnIndex, sortedModel);
-	}
-
-	private void reloadModel() {
+    private void reloadModel() {
 		model.reload();
 		waitForTableModel(model);
 	}

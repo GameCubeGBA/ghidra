@@ -141,17 +141,7 @@ public class DBCachedObjectStoreSubMap<T extends DBAnnotatedObject>
 		return store.safe(lock.readLock(), () -> store.keys.higher(direction, key, keyRange));
 	}
 
-	@Override
-	public Entry<Long, T> pollFirstEntry() {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public Entry<Long, T> pollLastEntry() {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
+    @Override
 	public DBCachedObjectStoreKeySubSet keySet() {
 		return navigableKeySet();
 	}

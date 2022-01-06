@@ -85,12 +85,7 @@ public class OdexHeaderFormatAnalyzer extends FileFormatAnalyzer {
 		return OdexConstants.isOdexFile(provider);
 	}
 
-	@Override
-	public AnalyzerType getAnalysisType() {
-		return AnalyzerType.BYTE_ANALYZER;
-	}
-
-	@Override
+    @Override
 	public boolean getDefaultEnablement(Program program) {
 		return true;
 	}

@@ -42,12 +42,7 @@ public class AssemblyExtendedProduction
 		this.ancestor = ancestor;
 	}
 
-	@Override
-	public AssemblyExtendedNonTerminal getLHS() {
-		return super.getLHS();
-	}
-
-	/**
+    /**
 	 * Get the final state of this production
 	 * @return the end state of the last symbol of the RHS
 	 */
