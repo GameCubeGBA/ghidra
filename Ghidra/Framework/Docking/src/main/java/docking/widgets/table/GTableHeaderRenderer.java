@@ -402,15 +402,14 @@ public class GTableHeaderRenderer extends JPanel implements TableCellRenderer {
 			int startX = x + (iconWidth - numberWidth) - insetPadding;
 
 			// ...and in the upper portion
-			int textBaseline = numberHeight;
 
-			AttributedString as = new AttributedString(numberText);
+            AttributedString as = new AttributedString(numberText);
 			as.addAttribute(TextAttribute.FOREGROUND, Color.BLACK);
 			as.addAttribute(TextAttribute.WEIGHT, TextAttribute.WEIGHT_BOLD);
 			as.addAttribute(TextAttribute.FAMILY, fontFamily);
 			as.addAttribute(TextAttribute.SIZE, (float) fontSize);
 
-			g.drawString(as.getIterator(), startX, textBaseline);
+			g.drawString(as.getIterator(), startX, numberHeight);
 		}
 
 	}

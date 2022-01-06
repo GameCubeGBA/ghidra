@@ -78,8 +78,7 @@ public class WEVTResourceDataType extends DynamicDataType {
 	@Override
 	protected DataTypeComponent[] getAllComponents(MemBuffer mbIn) {
 		List<DataTypeComponent> comps = new ArrayList<>();
-		MemBuffer memBuffer = mbIn;
-		int tempOffset = 0;
+        int tempOffset = 0;
 		ArrayList<Integer> eventOffsets = new ArrayList<Integer>();
 		int numEventProviders;
 
@@ -88,18 +87,18 @@ public class WEVTResourceDataType extends DynamicDataType {
 		int currentProviderElement = 0;
 
 		//check first signature "CRIM" and if valid attempt to add all of the components to the WEVT structure
-		if (checkMagic(crimSig, memBuffer, tempOffset)) {
+		if (checkMagic(crimSig, mbIn, tempOffset)) {
 
 			try {
 				//first get the number of event providers from the main header and add the main WEVT header
-				numEventProviders = memBuffer.getInt(tempOffset + 12);
+				numEventProviders = mbIn.getInt(tempOffset + 12);
 				tempOffset =
 					addComp(createWEVTStructureHeader(), 16, "WEVT_Template Header",
-						memBuffer.getAddress(), comps, tempOffset);
+						mbIn.getAddress(), comps, tempOffset);
 
 				//add array of event provider descriptors - the number of them and the offsets to them are in the main WEVT header we just got
 				StructureDataType epd =
-					createEventProviderDescriptor(memBuffer, tempOffset, eventOffsets);
+					createEventProviderDescriptor(mbIn, tempOffset, eventOffsets);
 				if (epd == null) {
 					Msg.debug(this,
 						"Error applying Windows Event template (WEVT) resource data type.");
@@ -110,15 +109,15 @@ public class WEVTResourceDataType extends DynamicDataType {
 				tempOffset =
 					addComp(EPDArray, 20 * numEventProviders,
 						"Array of Event Provider Descriptors",
-						memBuffer.getAddress().add(tempOffset), comps, tempOffset);
+						mbIn.getAddress().add(tempOffset), comps, tempOffset);
 
 				StructureDataType eventProvider =
-					createEventProviderStructure(memBuffer, tempOffset, providerElementDescriptors,
+					createEventProviderStructure(mbIn, tempOffset, providerElementDescriptors,
 						providerElementOffsets);
 
 				tempOffset =
 					addComp(eventProvider, eventProvider.getLength(), "Event Provider Structure",
-						memBuffer.getAddress().add(tempOffset), comps, tempOffset);
+						mbIn.getAddress().add(tempOffset), comps, tempOffset);
 
 				//Loop over all the Event Provider Descriptors
                 for (Integer providerElementDescriptor : providerElementDescriptors) {
@@ -135,15 +134,15 @@ public class WEVTResourceDataType extends DynamicDataType {
                                     new ArrayDataType(ByteDataType.dataType, diff, 1);
                             tempOffset =
                                     addComp(padding, diff, "padding",
-                                            memBuffer.getAddress().add(lastUsedOffset), comps,
+                                            mbIn.getAddress().add(lastUsedOffset), comps,
                                             lastUsedOffset);
                         }
 
                         //check to make sure there is a valid signature there
                         byte[] bytes = new byte[4];
-                        memBuffer.getBytes(bytes, tempOffset);
+                        mbIn.getBytes(bytes, tempOffset);
 
-                        tempOffset = processProviderElement(bytes, memBuffer, tempOffset, comps);
+                        tempOffset = processProviderElement(bytes, mbIn, tempOffset, comps);
                         if (tempOffset < 0) {
                             Msg.debug(this, "Error processing Provider Element.");
                             return null;
@@ -162,8 +161,7 @@ public class WEVTResourceDataType extends DynamicDataType {
 			Msg.debug(this, "Not a valid Windows Event template (WEVT) resource data type");
 			return null;
 		}
-		DataTypeComponent[] result = comps.toArray(new DataTypeComponent[comps.size()]);
-		return result;
+        return comps.toArray(new DataTypeComponent[comps.size()]);
 	}
 
 	//This is the first thing in a WEVT_TEMPLATE Resource

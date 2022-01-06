@@ -772,8 +772,7 @@ public class ConcurrentQTest extends AbstractGenericTest {
 			catch (InterruptedException e) {
 				return null;
 			}
-			TestResult result = new TestResult(item.name, Thread.currentThread().getName());
-			return result;
+            return new TestResult(item.name, Thread.currentThread().getName());
 		}
 	}
 

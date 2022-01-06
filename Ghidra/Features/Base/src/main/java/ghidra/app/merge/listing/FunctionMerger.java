@@ -596,10 +596,9 @@ class FunctionMerger extends AbstractFunctionMerger implements ListingMerger {
 		boolean changedLatest =
 			!ProgramDiff.sameFunctionNames(functions[ORIGINAL], functions[LATEST]);
 		boolean changedMy = !ProgramDiff.sameFunctionNames(functions[ORIGINAL], functions[MY]);
-		int latestMyChanges = FUNC_NAME;
-		int originalLatestChanges = changedLatest ? FUNC_NAME : 0;
+        int originalLatestChanges = changedLatest ? FUNC_NAME : 0;
 		int originalMyChanges = changedMy ? FUNC_NAME : 0;
-		int functionConflictFlags = determineFunctionConflict(functions, FUNC_NAME, latestMyChanges,
+		int functionConflictFlags = determineFunctionConflict(functions, FUNC_NAME, FUNC_NAME,
 			originalLatestChanges, originalMyChanges, monitor);
 		if (functionConflictFlags != 0) {
 			saveFunctionDetailConflict(functions, functionConflictFlags);
@@ -1067,18 +1066,17 @@ class FunctionMerger extends AbstractFunctionMerger implements ListingMerger {
 			else if (askUser && mergeManager != null) {
                 for (ParamInfoConflict paramInfoConflict : paramInfoConflicts) {
                     monitor.checkCanceled();
-                    ParamInfoConflict pc = paramInfoConflict;
                     boolean useForAll = (parameterInfoChoice != ASK_USER);
                     if (useForAll) {
-                        mergeParamInfo(addr, pc, parameterInfoChoice, monitor);
+                        mergeParamInfo(addr, paramInfoConflict, parameterInfoChoice, monitor);
                         continue;
                     }
-                    VariousChoicesPanel choicesPanel = createParamInfoConflictPanel(pc, monitor);
+                    VariousChoicesPanel choicesPanel = createParamInfoConflictPanel(paramInfoConflict, monitor);
 
                     choicesPanel.setUseForAll(useForAll);
                     choicesPanel.setConflictType("Function Parameter Info");
 
-                    setupConflictPanel(listingPanel, choicesPanel, pc.entry, monitor);
+                    setupConflictPanel(listingPanel, choicesPanel, paramInfoConflict.entry, monitor);
                     monitor.checkCanceled();
                 }
 

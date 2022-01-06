@@ -899,8 +899,7 @@ public class GhidraFileChooser extends DialogComponentProvider
 			return Collections.emptyList();
 		}
 
-		List<File> filteredList = filterFilesForSelectionMode(validatedFiles);
-		return filteredList;
+        return filterFilesForSelectionMode(validatedFiles);
 	}
 
 	private String getSelectionRequiredMessage() {

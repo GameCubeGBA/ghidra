@@ -260,8 +260,7 @@ public class Ext4Analyzer extends FileFormatAnalyzer {
 	private int calculateGroupSize(Ext4SuperBlock superBlock) {
 		int logBlockSize = superBlock.getS_log_block_size();
 		blockSize = (int) Math.pow(2, 10 + logBlockSize);
-		int groupSize = blockSize * superBlock.getS_blocks_per_group();
-		return groupSize;
+        return blockSize * superBlock.getS_blocks_per_group();
 	}
 
 	private int getSuperBlockStart(BinaryReader reader) {

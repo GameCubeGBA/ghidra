@@ -423,9 +423,8 @@ public class CollectionUtils {
 	 */
 	@SafeVarargs
 	public static <T> Stream<T> asStream(Iterable<T>... iterables) {
-		Stream<T> s = Stream.of(iterables)
-				.flatMap(e -> StreamSupport.stream(e.spliterator(), false));
-		return s;
+        return Stream.of(iterables)
+                .flatMap(e -> StreamSupport.stream(e.spliterator(), false));
 	}
 
 	/**

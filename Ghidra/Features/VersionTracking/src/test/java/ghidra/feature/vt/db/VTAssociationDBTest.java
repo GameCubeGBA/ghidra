@@ -72,11 +72,10 @@ public class VTAssociationDBTest extends VTBaseTestCase {
 
 		Address destinationAddress = addr();
 
-		VTMarkupItem unappliedMarkupItem = markupItem;
-		unappliedMarkupItem.setDestinationAddress(destinationAddress);
+        markupItem.setDestinationAddress(destinationAddress);
 		try {
 
-			unappliedMarkupItem.apply(applyAction, null);
+			markupItem.apply(applyAction, null);
 		}
 		catch (VersionTrackingApplyException e) {
 			Assert.fail("Unexpected exception applying markup item");
@@ -214,10 +213,9 @@ public class VTAssociationDBTest extends VTBaseTestCase {
 		// 
 		// verify we cannot commit from a competing association (others are locked-out)
 		// 
-		VTMarkupItem unappliedConflictItem = conflict1MarkupItem;
-		try {
-			unappliedConflictItem.setDestinationAddress(destinationAddress);
-			unappliedConflictItem.apply(VTMarkupItemApplyActionType.REPLACE, null);
+        try {
+			conflict1MarkupItem.setDestinationAddress(destinationAddress);
+			conflict1MarkupItem.apply(VTMarkupItemApplyActionType.REPLACE, null);
 			Assert.fail("A competing association was not locked-out as expected");
 		}
 		catch (Exception e) {
@@ -259,10 +257,9 @@ public class VTAssociationDBTest extends VTBaseTestCase {
 
 		Address destinationAddress = addr();
 
-		VTMarkupItem unappliedMarkupItem = mainMarkupItem;
-		unappliedMarkupItem.setDestinationAddress(destinationAddress);
+        mainMarkupItem.setDestinationAddress(destinationAddress);
 		try {
-			unappliedMarkupItem.apply(VTMarkupItemApplyActionType.REPLACE, null);
+			mainMarkupItem.apply(VTMarkupItemApplyActionType.REPLACE, null);
 		}
 		catch (VersionTrackingApplyException e) {
 			Assert.fail("Unexpected exception applying markup item");// shouldn't happen
@@ -297,10 +294,9 @@ public class VTAssociationDBTest extends VTBaseTestCase {
 		VTAssociation mainAssociation = mainMatch.getAssociation();
 		Address destinationAddress = addr();
 
-		VTMarkupItem unappliedMarkupItem = mainMarkupItem;
-		unappliedMarkupItem.setDestinationAddress(destinationAddress);
+        mainMarkupItem.setDestinationAddress(destinationAddress);
 		try {
-			unappliedMarkupItem.apply(VTMarkupItemApplyActionType.REPLACE, null);
+			mainMarkupItem.apply(VTMarkupItemApplyActionType.REPLACE, null);
 		}
 		catch (VersionTrackingApplyException e) {
 			Assert.fail("Unexpected exception applying markup item");// shouldn't happen
@@ -394,10 +390,9 @@ public class VTAssociationDBTest extends VTBaseTestCase {
 		VTAssociation mainAssociation = mainMatch.getAssociation();
 		Address destinationAddress = addr();
 
-		VTMarkupItem unappliedMarkupItem = mainMarkupItem;
-		unappliedMarkupItem.setDestinationAddress(destinationAddress);
+        mainMarkupItem.setDestinationAddress(destinationAddress);
 		try {
-			unappliedMarkupItem.apply(VTMarkupItemApplyActionType.REPLACE, null);
+			mainMarkupItem.apply(VTMarkupItemApplyActionType.REPLACE, null);
 		}
 		catch (VersionTrackingApplyException e) {
 			Assert.fail("Unexpected exception applying markup item");// shouldn't happen
@@ -604,11 +599,10 @@ public class VTAssociationDBTest extends VTBaseTestCase {
 
 		// ...now apply one item
 		Address destinationAddress = addr();
-		VTMarkupItem unappliedMarkupItem = markupItem;
-		unappliedMarkupItem.setDestinationAddress(destinationAddress);
+        markupItem.setDestinationAddress(destinationAddress);
 		try {
 
-			unappliedMarkupItem.apply(applyAction, null);
+			markupItem.apply(applyAction, null);
 		}
 		catch (VersionTrackingApplyException e) {
 			Assert.fail("Unexpected exception applying markup item");

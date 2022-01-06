@@ -208,23 +208,22 @@ public class BasicCompilerSpec implements CompilerSpec {
 	 * @return the error handler object
 	 */
 	protected static ErrorHandler getErrorHandler(String docTitle) {
-		ErrorHandler errHandler = new ErrorHandler() {
-			@Override
-			public void error(SAXParseException exception) throws SAXException {
-				throw exception;
-			}
+        return new ErrorHandler() {
+            @Override
+            public void error(SAXParseException exception) throws SAXException {
+                throw exception;
+            }
 
-			@Override
-			public void fatalError(SAXParseException exception) throws SAXException {
-				throw exception;
-			}
+            @Override
+            public void fatalError(SAXParseException exception) throws SAXException {
+                throw exception;
+            }
 
-			@Override
-			public void warning(SAXParseException exception) throws SAXException {
-				Msg.warn(this, "Warning parsing '" + docTitle + "'", exception);
-			}
-		};
-		return errHandler;
+            @Override
+            public void warning(SAXParseException exception) throws SAXException {
+                Msg.warn(this, "Warning parsing '" + docTitle + "'", exception);
+            }
+        };
 	}
 
 	private void initialize(String srcName, XmlPullParser parser) throws XmlParseException {

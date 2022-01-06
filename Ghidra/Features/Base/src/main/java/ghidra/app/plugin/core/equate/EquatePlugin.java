@@ -588,15 +588,13 @@ public class EquatePlugin extends Plugin {
 
 	Scalar getScalar(ListingActionContext context) {
 		CodeUnit cu = getCodeUnit(context);
-		Scalar scalar = getScalar(cu, context);
-		return scalar;
+        return getScalar(cu, context);
 	}
 
 	private Scalar getScalar(CodeUnit cu, ListingActionContext context) {
 		int opIndex = getOperandIndex(context);
 		int subOpIndex = getSubOperandIndex(context);
-		Scalar scalar = getScalar(cu, opIndex, subOpIndex);
-		return scalar;
+        return getScalar(cu, opIndex, subOpIndex);
 	}
 
 	/**

@@ -174,10 +174,9 @@ public class DomainFileNode extends GTreeNode implements Cuttable {
 
 		//DomainFolderNode parent = (DomainFolderNode) getParent();
 
-		String name = domainFile.getName();
-		//domainFile = parent.getDomainFolder().getFile(name);
+        //domainFile = parent.getDomainFolder().getFile(name);
 
-		String newDisplayName = name;
+		String newDisplayName = domainFile.getName();
 
 		if (domainFile.isHijacked()) {
 			newDisplayName += " (hijacked)";

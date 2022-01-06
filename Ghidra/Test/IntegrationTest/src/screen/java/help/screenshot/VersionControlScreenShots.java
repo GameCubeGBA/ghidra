@@ -150,32 +150,30 @@ public class VersionControlScreenShots extends GhidraScreenShotGenerator {
 
 	private DomainFile createDomainFile() {
 		TestDummyDomainFolder root = new TestDummyDomainFolder(null, "Project");
-		DomainFile df = new TestDummyDomainFile(root, "Program_A") {
-			@Override
-			public DomainFile setName(String newName) throws InvalidNameException, IOException {
-				// stubbed to prevent exception from dummy
-				return this;
-			}
+        return (DomainFile) new TestDummyDomainFile(root, "Program_A") {
+            @Override
+            public DomainFile setName(String newName) throws InvalidNameException, IOException {
+                // stubbed to prevent exception from dummy
+                return this;
+            }
 
-			@Override
-			public Version[] getVersionHistory() throws IOException {
-				long time = System.currentTimeMillis();
-				String user = "User-1";
-				//@formatter:off
-				return new Version[] {
-					new Version(1, time - 200000, user, "Comment 1"),
-					new Version(2, time - 100000, user, "Comment 2"),
-					new Version(3, time, user, "Comment 3"),
-				};
-				//@formatter:on
-			}
-		};
-		return df;
+            @Override
+            public Version[] getVersionHistory() throws IOException {
+                long time = System.currentTimeMillis();
+                String user = "User-1";
+                //@formatter:off
+                return new Version[] {
+                    new Version(1, time - 200000, user, "Comment 1"),
+                    new Version(2, time - 100000, user, "Comment 2"),
+                    new Version(3, time, user, "Comment 3"),
+                };
+                //@formatter:on
+            }
+        };
 	}
 
 	private Plugin getFrontEndPlugin() {
 		FrontEndTool feTool = env.showFrontEndTool();
-		Plugin plugin = (Plugin) getInstanceField("plugin", feTool);
-		return plugin;
+        return (Plugin) getInstanceField("plugin", feTool);
 	}
 }

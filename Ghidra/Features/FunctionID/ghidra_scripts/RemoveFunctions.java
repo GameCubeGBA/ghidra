@@ -426,8 +426,7 @@ public class RemoveFunctions extends GhidraScript {
 	}
 
 	private static Pair<Short, Long> fh(int codeUnits, long digest) {
-		Pair<Short, Long> result = new Pair<>((short) codeUnits, digest);
-		return result;
+        return new Pair<>((short) codeUnits, digest);
 	}
 
 	@Override

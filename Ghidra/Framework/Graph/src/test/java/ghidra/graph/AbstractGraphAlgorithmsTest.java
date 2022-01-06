@@ -184,24 +184,21 @@ public abstract class AbstractGraphAlgorithmsTest extends AbstractGenericTest {
 	}
 
 	protected Set<TestV> set(TestV... vertices) {
-        HashSet<TestV> set = new HashSet<>(Arrays.asList(vertices));
-		return set;
+        return new HashSet<>(Arrays.asList(vertices));
 	}
 
 	// returns those nodes dominated by 'from'
 	protected Collection<TestE> findDominance(TestV from,
 			ChkDominanceAlgorithm<TestV, TestE> algo) {
 		Set<TestV> dominated = algo.getDominated(from);
-		Set<TestE> filtered = GraphAlgorithms.retainEdges(g, dominated);
-		return filtered;
+        return GraphAlgorithms.retainEdges(g, dominated);
 	}
 
 	// returns those nodes dominated by 'from'
 	protected Collection<TestE> findPostDominance(TestV from,
 			ChkPostDominanceAlgorithm<TestV, TestE> algo) {
 		Set<TestV> dominated = algo.getDominated(from);
-		Set<TestE> filtered = GraphAlgorithms.retainEdges(g, dominated);
-		return filtered;
+        return GraphAlgorithms.retainEdges(g, dominated);
 	}
 
 	// returns those nodes post-dominated by 'from'
@@ -210,8 +207,7 @@ public abstract class AbstractGraphAlgorithmsTest extends AbstractGenericTest {
 		try {
 			Set<TestV> postDominated =
 				GraphAlgorithms.findPostDominance(g, from, TaskMonitor.DUMMY);
-			Set<TestE> filtered = GraphAlgorithms.retainEdges(g, postDominated);
-			return filtered;
+            return GraphAlgorithms.retainEdges(g, postDominated);
 		}
 		catch (CancelledException e) {
 			// can't happen; dummy monitor

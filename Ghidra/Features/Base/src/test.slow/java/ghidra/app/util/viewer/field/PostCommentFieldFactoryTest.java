@@ -1095,8 +1095,7 @@ public class PostCommentFieldFactoryTest extends AbstractGhidraHeadedIntegration
 	private ListingTextField getFieldText(Function function) {
 		assertTrue(
 			cb.goToField(function.getEntryPoint(), PostCommentFieldFactory.FIELD_NAME, 1, 1));
-		ListingTextField tf = (ListingTextField) cb.getCurrentField();
-		return tf;
+        return (ListingTextField) cb.getCurrentField();
 	}
 
 	private void setFieldWidth(final FieldFactory fieldFactory, final int width) throws Exception {

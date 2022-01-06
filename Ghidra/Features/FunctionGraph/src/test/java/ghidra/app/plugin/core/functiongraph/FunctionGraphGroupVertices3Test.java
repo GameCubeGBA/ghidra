@@ -265,19 +265,18 @@ public class FunctionGraphGroupVertices3Test extends AbstractFunctionGraphTest {
 	protected void doTestAddingToGroup() {
 		FGData graphData = graphFunction("01002cf5");
 		FunctionGraph functionGraph = graphData.getFunctionGraph();
-		Graph<FGVertex, FGEdge> graph = functionGraph;
-	
-		Collection<FGEdge> originalEdges = graph.getEdges();
+
+        Collection<FGEdge> originalEdges = ((Graph<FGVertex, FGEdge>) functionGraph).getEdges();
 	
 		Set<FGVertex> ungroupedVertices =
 			selectVertices(functionGraph, "01002d2b" /* Another Local*/, "01002d1f" /* MyLocal */);
-		Set<FGEdge> ungroupedEdges = getEdges(graph, ungroupedVertices);
+		Set<FGEdge> ungroupedEdges = getEdges(functionGraph, ungroupedVertices);
 		assertEquals("Did not grab all known edges for vertices", 4, ungroupedEdges.size());
 	
 		group(ungroupedVertices);
 	
-		assertVerticesRemoved(graph, ungroupedVertices);
-		assertEdgesRemoved(graph, ungroupedEdges);
+		assertVerticesRemoved(functionGraph, ungroupedVertices);
+		assertEdgesRemoved(functionGraph, ungroupedEdges);
 	
 		// -1 because one of the edges was between two of the vertices being grouped
 		int expectedGroupedEdgeCount = ungroupedEdges.size() - 1;
@@ -289,12 +288,12 @@ public class FunctionGraphGroupVertices3Test extends AbstractFunctionGraphTest {
 		//
 		Set<FGVertex> newUngroupedVertices =
 			selectVertices(functionGraph, "01002d66" /* LAB_01002d66 */);
-		Set<FGEdge> newUngroupedEdges = getEdges(graph, newUngroupedVertices);
+		Set<FGEdge> newUngroupedEdges = getEdges(functionGraph, newUngroupedVertices);
 	
 		addToGroup(groupedVertex, newUngroupedVertices);
 	
-		assertVerticesRemoved(graph, newUngroupedVertices);
-		assertEdgesRemoved(graph, newUngroupedEdges);
+		assertVerticesRemoved(functionGraph, newUngroupedVertices);
+		assertEdgesRemoved(functionGraph, newUngroupedEdges);
 	
 		expectedGroupedEdgeCount = 3;
 		GroupedFunctionGraphVertex updatedGroupedVertex = validateNewGroupedVertexFromVertices(
@@ -310,9 +309,9 @@ public class FunctionGraphGroupVertices3Test extends AbstractFunctionGraphTest {
 	
 		ungroup(updatedGroupedVertex);
 	
-		assertVertexRemoved(graph, updatedGroupedVertex);
+		assertVertexRemoved(functionGraph, updatedGroupedVertex);
 	
-		assertVerticesAdded(graph, ungroupedVertices);
+		assertVerticesAdded(functionGraph, ungroupedVertices);
 		assertEdgesAdded(functionGraph, originalEdges);
 	
 		ungroupedVertices.addAll(newUngroupedVertices);

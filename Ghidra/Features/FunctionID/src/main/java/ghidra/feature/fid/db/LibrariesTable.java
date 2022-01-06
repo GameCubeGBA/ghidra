@@ -188,7 +188,6 @@ public class LibrariesTable {
 	 * @throws IOException if database seek encounters an error
 	 */
 	public DBRecord getLibraryByID(long id) throws IOException {
-		DBRecord record = table.getRecord(id);
-		return record;
+        return table.getRecord(id);
 	}
 }

@@ -3027,8 +3027,7 @@ public class ProgramDiff {
 
 				// String property.
 				try {
-					String stringProp = cu.getStringProperty(localPropertyName);
-					return stringProp;
+                    return cu.getStringProperty(localPropertyName);
 				}
 				catch (TypeMismatchException e) {
 					// Do nothing. Instead fall-through to next property type.
@@ -3036,8 +3035,7 @@ public class ProgramDiff {
 
 				// Object (Saveable) property.
 				try {
-					Saveable objProp = cu.getObjectProperty(localPropertyName);
-					return objProp;
+                    return cu.getObjectProperty(localPropertyName);
 				}
 				catch (TypeMismatchException e) {
 					// Do nothing. Instead fall-through to next property type.
@@ -3249,8 +3247,7 @@ public class ProgramDiff {
 
 		@Override
 		public int compare(Symbol s1, Symbol s2) {
-			int comparison = s1.getName().compareTo(s2.getName());
-			return comparison;
+            return s1.getName().compareTo(s2.getName());
 		}
 	}
 

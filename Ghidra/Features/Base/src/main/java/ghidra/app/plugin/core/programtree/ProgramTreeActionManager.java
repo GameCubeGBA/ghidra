@@ -554,9 +554,7 @@ class ProgramTreeActionManager implements ClipboardOwner {
 		if (!t.isDataFlavorSupported(TreeTransferable.localTreeNodeFlavor)) {
 			return nodeList;
 		}
-		List<ProgramNode> list =
-			(List<ProgramNode>) t.getTransferData(TreeTransferable.localTreeNodeFlavor);
-		return list;
+        return (List<ProgramNode>) t.getTransferData(TreeTransferable.localTreeNodeFlavor);
 	}
 
 	/**

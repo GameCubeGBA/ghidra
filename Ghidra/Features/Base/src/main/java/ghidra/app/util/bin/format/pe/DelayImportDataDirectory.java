@@ -206,13 +206,12 @@ public class DelayImportDataDirectory extends DataDirectory {
             if (monitor.isCancelled()) {
                 return;
             }
-            ThunkData thunk = thunkData;
-            long thunkPtr = va(thunk.getAddressOfData(), isBinary);
+            long thunkPtr = va(thunkData.getAddressOfData(), isBinary);
             if (!descriptor.isUsingRVA()) {
                 thunkPtr -= ntHeader.getOptionalHeader().getImageBase();
             }
             Address thunkAddress = space.getAddress(thunkPtr);
-            ImportByName ibn = map.get(thunk);
+            ImportByName ibn = map.get(thunkData);
             PeUtils.createData(program, thunkAddress, ibn.toDataType(), log);
         }
 	}

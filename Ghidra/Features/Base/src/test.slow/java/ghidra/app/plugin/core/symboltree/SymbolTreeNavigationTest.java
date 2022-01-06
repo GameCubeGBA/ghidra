@@ -363,8 +363,7 @@ public class SymbolTreeNavigationTest extends AbstractProgramBasedTest {
 		Parameter p = new ParameterImpl("testParam", dt, program);
 		AddParameterCommand cmd = new AddParameterCommand(f, p, 0, SourceType.USER_DEFINED);
 		applyCmd(cmd);
-		Parameter newParameter = f.getParameter(0);
-		return newParameter;
+        return f.getParameter(0);
 	}
 
 	private void create10000Labels(String labelsPrefix) {
@@ -487,8 +486,7 @@ public class SymbolTreeNavigationTest extends AbstractProgramBasedTest {
 
 		GhidraClass newClass = createInProgram(p -> {
 			SymbolTable symbolTable = p.getSymbolTable();
-			GhidraClass clazz = symbolTable.createClass(null, "TestClass", SourceType.USER_DEFINED);
-			return clazz;
+            return symbolTable.createClass(null, "TestClass", SourceType.USER_DEFINED);
 		});
 
 		AddLabelCmd lableCmd =
@@ -526,8 +524,7 @@ public class SymbolTreeNavigationTest extends AbstractProgramBasedTest {
 
 		GhidraClass newClass = createInProgram(p -> {
 			SymbolTable symbolTable = p.getSymbolTable();
-			GhidraClass clazz = symbolTable.createClass(null, "TestClass", SourceType.USER_DEFINED);
-			return clazz;
+            return symbolTable.createClass(null, "TestClass", SourceType.USER_DEFINED);
 		});
 
 		modifyProgram(p -> {

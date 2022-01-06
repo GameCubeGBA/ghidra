@@ -154,15 +154,13 @@ public class DexHeaderFormatMarkup {
         for (EncodedMethod method : methods) {
             monitor.checkCanceled();
 
-            EncodedMethod encodedMethod = method;
-
-            MethodIDItem methodID = header.getMethods().get(encodedMethod.getMethodIndex());
+            MethodIDItem methodID = header.getMethods().get(method.getMethodIndex());
             String methodName = DexUtil.convertToString(header, methodID.getNameIndex());
 
-            if ((AccessFlags.ACC_CONSTRUCTOR & encodedMethod.getAccessFlags()) != 0) {
+            if ((AccessFlags.ACC_CONSTRUCTOR & method.getAccessFlags()) != 0) {
                 methodName = classNameSpace.getName();
             }
-            CodeItem codeItem = encodedMethod.getCodeItem();
+            CodeItem codeItem = method.getCodeItem();
 
             if (codeItem == null) {//external
 //				Address externalAddress = baseAddress.add( DexUtil.EXTERNAL_ADDRESS + ( 4 * methodIndex ) );
@@ -177,11 +175,11 @@ public class DexHeaderFormatMarkup {
 //				program.getReferenceManager().addExternalReference( methodIndexAddress, (Namespace) null, primarySymbol.getName( ), null, SourceType.ANALYSIS, 0, RefType.EXTERNAL_REF );
             } else {
                 Address methodAddress =
-                        baseAddress.add(DexUtil.METHOD_ADDRESS + encodedMethod.getCodeOffset());
+                        baseAddress.add(DexUtil.METHOD_ADDRESS + method.getCodeOffset());
                 createMethodSymbol(methodAddress, methodName, classNameSpace, log);
-                createMethodComment(methodAddress, header, item, methodID, encodedMethod, codeItem,
+                createMethodComment(methodAddress, header, item, methodID, method, codeItem,
                         monitor);
-                disassembleMethod(header, className, encodedMethod.isStatic(), methodAddress,
+                disassembleMethod(header, className, method.isStatic(), methodAddress,
                         methodID, codeItem, monitor, log);
             }
         }
@@ -523,27 +521,25 @@ public class DexHeaderFormatMarkup {
         for (EncodedMethod encodedMethod : methods) {
             monitor.checkCanceled();
 
-            EncodedMethod method = encodedMethod;
-
-            MethodIDItem methodID = header.getMethods().get(method.getMethodIndex());
+            MethodIDItem methodID = header.getMethods().get(encodedMethod.getMethodIndex());
 
             StringBuilder builder = new StringBuilder();
             builder.append(
                     "Method Name: " + DexUtil.convertToString(header, methodID.getNameIndex()) + "\n");
             builder.append("Method Offset: 0x" + Long.toHexString(methodID.getFileOffset()) + "\n");
             builder.append("Method Flags:\n");
-            builder.append(AccessFlags.toString(method.getAccessFlags()) + "\n");
-            builder.append("Code Offset: 0x" + Integer.toHexString(method.getCodeOffset()) + "\n");
+            builder.append(AccessFlags.toString(encodedMethod.getAccessFlags()) + "\n");
+            builder.append("Code Offset: 0x" + Integer.toHexString(encodedMethod.getCodeOffset()) + "\n");
             builder.append("\n");
 
-            Address address = baseAddress.add(method.getFileOffset());
-            DataType dataType = method.toDataType();
+            Address address = baseAddress.add(encodedMethod.getFileOffset());
+            DataType dataType = encodedMethod.toDataType();
             api.createData(address, dataType);
             api.setPlateComment(address, builder.toString());
             fragmentManager.encodedMethodsAddressSet.add(address,
                     address.add(dataType.getLength() - 1));
 
-            processCodeItem(header, item, method, methodID);
+            processCodeItem(header, item, encodedMethod, methodID);
         }
 	}
 

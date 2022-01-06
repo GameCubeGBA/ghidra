@@ -67,10 +67,9 @@ public class PrintStructureScript extends GhidraScript {
 			else {
 				tabs(buffer, level);
 
-				DataType childType = componentDataType;
-				buffer.append(childType.getName());
+                buffer.append(componentDataType.getName());
 				buffer.append('\t');
-				buffer.append(childType.getLength()).append('\n');
+				buffer.append(componentDataType.getLength()).append('\n');
 			}
 		}
 

@@ -272,11 +272,10 @@ public class DWARFDataTypeManager {
 	 */
 	public Iterable<DataType> forAllConflicts(DataTypePath dtp) {
 		Category cat = dataTypeManager.getCategory(dtp.getCategoryPath());
-		List<DataType> list = (cat != null)
-				? cat.getDataTypesByBaseName(dtp.getDataTypeName())
-				: List.of();
 
-		return list;
+        return (cat != null)
+                ? cat.getDataTypesByBaseName(dtp.getDataTypeName())
+                : List.of();
 	}
 
 	private DataType findGhidraType(String name) {
@@ -335,8 +334,7 @@ public class DWARFDataTypeManager {
 	 * @return {@link DataType} or null if base type does not exist
 	 */
 	public DataType getBaseType(String name) {
-		DataType dt = baseDataTypes.get(name);
-		return dt;
+        return baseDataTypes.get(name);
 	}
 
 	private boolean isEncodingCompatible(int requestedDwarfEncoding, DataType dt) {

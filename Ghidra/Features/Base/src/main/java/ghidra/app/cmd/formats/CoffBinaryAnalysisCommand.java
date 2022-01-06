@@ -177,18 +177,17 @@ public class CoffBinaryAnalysisCommand extends FlatProgramAPI
             if (monitor.isCancelled()) {
                 break;
             }
-            CoffSymbol symbol = coffSymbol;
 
-            DataType dt = symbol.toDataType();
+            DataType dt = coffSymbol.toDataType();
             createData(address, dt);
-            setPlateComment(address, symbol.getName());
+            setPlateComment(address, coffSymbol.getName());
             address = address.add(dt.getLength());
 
-            List<CoffSymbolAux> auxiliarySymbols = symbol.getAuxiliarySymbols();
+            List<CoffSymbolAux> auxiliarySymbols = coffSymbol.getAuxiliarySymbols();
             for (CoffSymbolAux auxSymbol : auxiliarySymbols) {
                 DataType auxDT = auxSymbol.toDataType();
                 createData(address, auxDT);
-                setPlateComment(address, "Auxiliary for " + symbol.getName());
+                setPlateComment(address, "Auxiliary for " + coffSymbol.getName());
                 address = address.add(auxDT.getLength());
             }
         }

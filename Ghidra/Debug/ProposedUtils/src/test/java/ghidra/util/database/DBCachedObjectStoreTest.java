@@ -2622,8 +2622,7 @@ public class DBCachedObjectStoreTest {
 			obj2.setF2(5);
 			obj2.updated();
 		}
-		DBCachedObjectIndex<Integer, MyObject> index = store.getIndex(int.class, COL2_NAME);
-		return index;
+        return store.getIndex(int.class, COL2_NAME);
 	}
 
 	@Test

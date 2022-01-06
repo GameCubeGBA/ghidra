@@ -545,9 +545,8 @@ public class SymbolTreePlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 		renameSelectedNode();
 
 		TreePath path = newNsNode.getTreePath();
-		GTreeNode nsNode = newNsNode;
-		String newName = "MyNamespace";
-		setEditorText(path, nsNode, newName);
+        String newName = "MyNamespace";
+		setEditorText(path, newNsNode, newName);
 
 		namespacesNode = rootNode.getChild("Namespaces");
 		GTreeNode renamedNode = namespacesNode.getChild(newName);
@@ -582,8 +581,7 @@ public class SymbolTreePlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 			DefaultTreeCellEditor cellEditor = (DefaultTreeCellEditor) tree.getCellEditor();
 			Container container = (Container) cellEditor.getTreeCellEditorComponent(jTree, newNode,
 				true, true, true, row);
-			JTextField textField = (JTextField) container.getComponent(0);
-			return textField;
+            return (JTextField) container.getComponent(0);
 		});
 
 		assertEquals("NewClass", tf.getText());
@@ -715,11 +713,10 @@ public class SymbolTreePlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 		renameSelectedNode();
 
 		TreePath path = newNsNode.getTreePath();
-		GTreeNode nsNode = newNsNode;
-		String newNamespace = "OuterNamespace";
+        String newNamespace = "OuterNamespace";
 		String newName = "MyNamespace";
 		String newFullName = newNamespace + Namespace.DELIMITER + newName;
-		setEditorText(path, nsNode, newFullName);
+		setEditorText(path, newNsNode, newFullName);
 
 		namespacesNode = rootNode.getChild("Namespaces");
 		GTreeNode newNamespaceNode = namespacesNode.getChild(newNamespace);

@@ -292,9 +292,8 @@ public class PseudoDisassembler {
 		if (!(objVal instanceof Address)) {
 			return null;
 		}
-		Address ptrAddr = (Address) objVal;
 
-		return ptrAddr;
+        return (Address) objVal;
 	}
 
 	/**
@@ -360,8 +359,7 @@ public class PseudoDisassembler {
 	 * @return true if the entry point leads to valid code
 	 */
 	public boolean isValidCode(Address entryPoint) {
-		boolean valid = checkValidSubroutine(entryPoint, true, false);
-		return valid;
+        return checkValidSubroutine(entryPoint, true, false);
 	}
 
 	/**
@@ -379,8 +377,7 @@ public class PseudoDisassembler {
 	 * @return true if the entry point leads to valid code
 	 */
 	public boolean isValidCode(Address entryPoint, PseudoDisassemblerContext context) {
-		boolean valid = checkValidSubroutine(entryPoint, context, true, false);
-		return valid;
+        return checkValidSubroutine(entryPoint, context, true, false);
 	}
 
 	/**

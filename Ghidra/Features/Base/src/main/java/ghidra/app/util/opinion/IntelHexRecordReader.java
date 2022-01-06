@@ -65,15 +65,14 @@ public class IntelHexRecordReader {
                     + e.getMessage());
         }
         final int data_end = DATA_START + recordLength * 2;
-        final int checksum_start = data_end;
-        final int checksum_end = checksum_start + CHECKSUM_LENGTH;
+        final int checksum_end = data_end + CHECKSUM_LENGTH;
         if (line.length() != checksum_end) {
             throw new IllegalArgumentException("line invalid length to contain record with record length "
                     + recordLength);
         }
         String dataString = line.substring(DATA_START, data_end);
         byte[] data = convertData(dataString);
-        String checksumString = line.substring(checksum_start, checksum_end);
+        String checksumString = line.substring(data_end, checksum_end);
         int checksum;
         try {
             checksum = Integer.parseInt(checksumString, 16);

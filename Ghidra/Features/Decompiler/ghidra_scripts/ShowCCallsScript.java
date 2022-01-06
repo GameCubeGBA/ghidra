@@ -165,8 +165,7 @@ public class ShowCCallsScript extends GhidraScript {
         if (hfunction == null) {
             return null;
         }
-        Iterator<PcodeOpAST> piter = hfunction.getPcodeOps(refAddr.getPhysicalAddress());
-        return piter;
+        return hfunction.getPcodeOps(refAddr.getPhysicalAddress());
     }
 
     public String printCall(Function f, Address refAddr) {

@@ -180,8 +180,7 @@ public abstract class IndexedDynamicDataType extends DynamicDataType {
 		if (comps.length > 1) {
 			try {
 				int countSize = len;
-				int offset = countSize;
-				newBuf = new MemoryBufferImpl(memory, buf.getAddress());
+                newBuf = new MemoryBufferImpl(memory, buf.getAddress());
 				newBuf.advance(countSize);
 				dti = DataTypeInstance.getDataTypeInstance(data, newBuf);
 				if (dti == null) {
@@ -190,7 +189,7 @@ public abstract class IndexedDynamicDataType extends DynamicDataType {
 				}
 				len = dti.getLength();
 				comps[1] =
-					new ReadOnlyDataTypeComponent(dti.getDataType(), this, len, 1, offset,
+					new ReadOnlyDataTypeComponent(dti.getDataType(), this, len, 1, countSize,
 						dti.getDataType().getName() + "_" + newBuf.getAddress(), "");
 				//name = dti.getDataType().getName();
 			}

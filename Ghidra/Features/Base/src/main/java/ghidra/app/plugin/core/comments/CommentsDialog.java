@@ -282,8 +282,7 @@ public class CommentsDialog extends DialogComponentProvider implements KeyListen
 		preField = new JTextArea(5, 80) {
 			@Override
 			public boolean getScrollableTracksViewportWidth() {
-				boolean b = super.getScrollableTracksViewportWidth();
-				return b;
+                return super.getScrollableTracksViewportWidth();
 			}
 		};
 		postField = new JTextArea(5, 80);

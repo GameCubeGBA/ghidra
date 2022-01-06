@@ -52,8 +52,7 @@ public class DeprecatedAttribute extends AbstractAttributeInfo {
 
 	@Override
 	public DataType toDataType() throws DuplicateNameException, IOException {
-		StructureDataType structure = getBaseStructure( "Deprecated_attribute" );
-		return structure;
+        return getBaseStructure( "Deprecated_attribute" );
 	}
 
 }

@@ -823,7 +823,6 @@ public class ByteViewerPluginFormatsTest extends AbstractGhidraHeadedIntegration
 
 		runSwing(() -> action.actionPerformed(new ActionContext()), false);
 		waitForSwing();
-		ByteViewerOptionsDialog d = waitForDialogComponent(ByteViewerOptionsDialog.class);
-		return d;
+        return waitForDialogComponent(ByteViewerOptionsDialog.class);
 	}
 }

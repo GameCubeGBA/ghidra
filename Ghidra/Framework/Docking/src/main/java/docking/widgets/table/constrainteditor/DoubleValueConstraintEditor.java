@@ -168,8 +168,7 @@ public class DoubleValueConstraintEditor extends AbstractColumnConstraintEditor<
 
 	@Override
 	protected boolean checkEditorValueValidity() {
-		boolean valid = checkEditorValue();
-		return valid;
+        return checkEditorValue();
 	}
 
 	@Override

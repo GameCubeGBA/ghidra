@@ -180,10 +180,9 @@ public class FunctionReachabilityTableModel
 		Address targetAddress = destination.getDestinationAddress();
 		BlockModelService blockModelService = serviceProvider.getService(BlockModelService.class);
 		CodeBlockModel codeBlockModel = blockModelService.getActiveSubroutineModel();
-		CodeBlock targetBlock = codeBlockModel.getFirstCodeBlockContaining(targetAddress, monitor);
         // no code found for call; external?
 
-        return targetBlock;
+        return codeBlockModel.getFirstCodeBlockContaining(targetAddress, monitor);
 	}
 
 	void setFunctions(Function from, Function to) {

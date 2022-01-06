@@ -286,8 +286,7 @@ public class DebuggerEmulationServicePlugin extends Plugin implements DebuggerEm
 			traceManager.activateThread(thread);
 		}
 		else {
-			Program program = programOrView;
-			Address programPc = ctx.getAddress();
+            Address programPc = ctx.getAddress();
 
 			DebuggerCoordinates current = traceManager.getCurrent();
 			long snap = current.getSnap();
@@ -303,7 +302,7 @@ public class DebuggerEmulationServicePlugin extends Plugin implements DebuggerEm
 			if (region == null || !region.isExecute()) {
 				return;
 			}*/
-			TraceThread thread = ProgramEmulationUtils.launchEmulationThread(trace, snap, program,
+			TraceThread thread = ProgramEmulationUtils.launchEmulationThread(trace, snap, programOrView,
 				tracePc, programPc);
 			traceManager.activateThread(thread);
 		}

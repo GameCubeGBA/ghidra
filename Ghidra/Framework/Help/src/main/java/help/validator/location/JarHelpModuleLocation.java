@@ -118,8 +118,7 @@ public class JarHelpModuleLocation extends HelpModuleLocation {
 		int moduleNameStart = fullPath.indexOf(moduleName);
 		int end = moduleNameStart + moduleName.length();
 		String moduleString = fullPath.substring(0, end);
-		Path modulePath = Paths.get(moduleString);
-		return modulePath;
+        return Paths.get(moduleString);
 	}
 
 	@Override

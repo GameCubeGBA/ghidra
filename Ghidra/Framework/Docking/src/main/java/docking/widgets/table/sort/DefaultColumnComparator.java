@@ -43,8 +43,7 @@ public class DefaultColumnComparator implements Comparator<Object> {
 		if (Comparable.class.isAssignableFrom(c1) && c1 == c2) {
 			@SuppressWarnings("rawtypes")
 			Comparable comparable = (Comparable) o1;
-			int result = comparable.compareTo(o2);
-			return result;
+            return comparable.compareTo(o2);
 		}
 
 		// At this point we do not know how to compare these items well.  Return 0, which 

@@ -174,8 +174,7 @@ public class PopupRegulator<V, E> {
 			nextPopupTarget = vertex;
 		}
 		else {
-			E edge = popupSource.getEdge(event);
-			nextPopupTarget = edge;
+            nextPopupTarget = popupSource.getEdge(event);
 		}
 
 		if (nextPopupTarget == null) {

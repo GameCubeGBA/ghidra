@@ -1015,9 +1015,7 @@ public class MemBlockDBTest extends AbstractGenericTest {
 		for (int i = 0; i < 256; i++) {
 			bytes[i] = (byte) i;
 		}
-		FileBytes fileBytes =
-			mem.createFileBytes("test", 0, 100, new ByteArrayInputStream(bytes), TaskMonitor.DUMMY);
-		return fileBytes;
+        return mem.createFileBytes("test", 0, 100, new ByteArrayInputStream(bytes), TaskMonitor.DUMMY);
 	}
 
 	private Address addr(long offset) {
@@ -1029,8 +1027,7 @@ public class MemBlockDBTest extends AbstractGenericTest {
 		ResourceFile ldefFile = Application.getModuleDataFile("Toy", "languages/toy.ldefs");
 		if (ldefFile != null) {
 			LanguageService languageService = DefaultLanguageService.getLanguageService(ldefFile);
-			Language language = languageService.getLanguage(new LanguageID(languageName));
-			return language;
+            return languageService.getLanguage(new LanguageID(languageName));
 		}
 		throw new LanguageNotFoundException("Unsupported test language: " + languageName);
 	}

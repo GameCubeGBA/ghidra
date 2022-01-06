@@ -199,9 +199,7 @@ public class DyldChainedPtr {
 				break;
 		}
 
-		boolean isAuthenticated = ((chainValue >>> 63) & 1) != 0;
-
-		return isAuthenticated;
+        return ((chainValue >>> 63) & 1) != 0;
 	}
 
 	public static long getDiversity(DyldChainType ptrFormat, long chainValue) {
@@ -209,9 +207,7 @@ public class DyldChainedPtr {
 			return 0;
 		}
 
-		long diversityData = (chainValue >>> 32) & 0xFFFF;
-
-		return diversityData;
+        return (chainValue >>> 32) & 0xFFFF;
 	}
 
 	public static boolean hasAddrDiversity(DyldChainType ptrFormat, long chainValue) {

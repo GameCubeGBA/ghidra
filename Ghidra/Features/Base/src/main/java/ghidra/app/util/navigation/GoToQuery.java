@@ -485,8 +485,7 @@ public class GoToQuery {
 			}
 		}
 		SymbolTable symTable = program.getSymbolTable();
-		Namespace namespace = symTable.getNamespace(scopeName, parent);
-        return namespace;
+        return symTable.getNamespace(scopeName, parent);
     }
 
 	private boolean processSymbolInCurrentProgram() {

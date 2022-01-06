@@ -176,9 +176,7 @@ public class RTTI3DataType extends RTTIDataType {
 	public long getRtti1Count(Memory memory, Address rtti3Address) {
 		Address rtti1CountAddress = rtti3Address.add(RTTI_1_COUNT_OFFSET);
 		try {
-			long rtti1Count =
-				new Scalar(32, memory.getInt(rtti1CountAddress, memory.isBigEndian())).getValue();
-			return rtti1Count;
+            return new Scalar(32, memory.getInt(rtti1CountAddress, memory.isBigEndian())).getValue();
 		}
 		catch (MemoryAccessException e) {
 			Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);

@@ -35,9 +35,7 @@ public class StartsWithTextFilter extends MatchesPatternTextFilter {
 			options |= Pattern.CASE_INSENSITIVE;
 		}
 
-		Pattern pattern =
-			UserSearchUtils.createStartsWithPattern(filterText, allowGlobbing, options);
-		return pattern;
+        return UserSearchUtils.createStartsWithPattern(filterText, allowGlobbing, options);
 	}
 
 	@Override
@@ -51,7 +49,6 @@ public class StartsWithTextFilter extends MatchesPatternTextFilter {
 			return false;
 		}
 
-		boolean isSubFilter = filterText.startsWith(parent.filterText);
-		return isSubFilter;
+        return filterText.startsWith(parent.filterText);
 	}
 }

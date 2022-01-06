@@ -80,74 +80,72 @@ public class DexToJarFileSystem extends GFileSystemBase {
 		FSRLRoot targetFSRL = getFSRL();
 		FSRL containerFSRL = targetFSRL.getContainer();
 
-		ByteProvider jarBP = fsService.getDerivedByteProviderPush(containerFSRL, jarFSRL,
-			"dex2jar", -1, (os) -> {
-				try (ZipOutputStream outputStream = new ZipOutputStream(os)) {
+        return fsService.getDerivedByteProviderPush(containerFSRL, jarFSRL,
+            "dex2jar", -1, (os) -> {
+                try (ZipOutputStream outputStream = new ZipOutputStream(os)) {
 
-					DexToJarExceptionHandler exceptionHandler = new DexToJarExceptionHandler();
+                    DexToJarExceptionHandler exceptionHandler = new DexToJarExceptionHandler();
 
-					byte[] containerFileBytes = provider.readBytes(0, provider.length());
-					DexFileReader reader = new DexFileReader(containerFileBytes);
+                    byte[] containerFileBytes = provider.readBytes(0, provider.length());
+                    DexFileReader reader = new DexFileReader(containerFileBytes);
 
-					DexFileNode fileNode = new DexFileNode();
-					try {
-						reader.accept(fileNode, DexFileReader.IGNORE_READ_EXCEPTION);
-					}
-					catch (Exception ex) {
-						exceptionHandler.handleFileException(ex);
-					}
+                    DexFileNode fileNode = new DexFileNode();
+                    try {
+                        reader.accept(fileNode, DexFileReader.IGNORE_READ_EXCEPTION);
+                    }
+                    catch (Exception ex) {
+                        exceptionHandler.handleFileException(ex);
+                    }
 
-					DexFileVisitor visitor = new DexFileVisitor();
-					reader.accept(visitor);
+                    DexFileVisitor visitor = new DexFileVisitor();
+                    reader.accept(visitor);
 
-					ClassVisitorFactory classVisitorFactory = name -> new ClassVisitor(Opcodes.ASM4,
-						new ClassWriter(ClassWriter.COMPUTE_MAXS)) {
-						//NOTE: EXTRACTED FROM Dex2jar.java
-						@Override
-						public void visitEnd() {
-							super.visitEnd();
-							ClassWriter cw = (ClassWriter) super.cv;
+                    ClassVisitorFactory classVisitorFactory = name -> new ClassVisitor(Opcodes.ASM4,
+                        new ClassWriter(ClassWriter.COMPUTE_MAXS)) {
+                        //NOTE: EXTRACTED FROM Dex2jar.java
+                        @Override
+                        public void visitEnd() {
+                            super.visitEnd();
+                            ClassWriter cw = (ClassWriter) super.cv;
 
-							byte[] data;
-							try {
-								// FIXME handle 'java.lang.RuntimeException: Method code too large!'
-								data = cw.toByteArray();
-							}
-							catch (Exception ex) {
-								//System.err.println(String.format("ASM fail to generate .class file: %s", name));
-								Msg.warn(this,
-									String.format("ASM fail to generate .class file: %s", name));
-								exceptionHandler.handleFileException(ex);
-								return;
-							}
-							try {
-								ZipEntry entry = new ZipEntry(name + ".class");
-								outputStream.putNextEntry(entry);
-								outputStream.write(data);
-								outputStream.closeEntry();
-								upwtm.incrementProgress(1);
+                            byte[] data;
+                            try {
+                                // FIXME handle 'java.lang.RuntimeException: Method code too large!'
+                                data = cw.toByteArray();
+                            }
+                            catch (Exception ex) {
+                                //System.err.println(String.format("ASM fail to generate .class file: %s", name));
+                                Msg.warn(this,
+                                    String.format("ASM fail to generate .class file: %s", name));
+                                exceptionHandler.handleFileException(ex);
+                                return;
+                            }
+                            try {
+                                ZipEntry entry = new ZipEntry(name + ".class");
+                                outputStream.putNextEntry(entry);
+                                outputStream.write(data);
+                                outputStream.closeEntry();
+                                upwtm.incrementProgress(1);
 
-							}
-							catch (IOException e) {
-								//e.printStackTrace(System.err);
-								Msg.warn(this, e);
-							}
-						}
-					};
+                            }
+                            catch (IOException e) {
+                                //e.printStackTrace(System.err);
+                                Msg.warn(this, e);
+                            }
+                        }
+                    };
 
-					ExDex2Asm exDex2Asm = new ExDex2Asm(exceptionHandler);
-					exDex2Asm.convertDex(fileNode, classVisitorFactory);
+                    ExDex2Asm exDex2Asm = new ExDex2Asm(exceptionHandler);
+                    exDex2Asm.convertDex(fileNode, classVisitorFactory);
 
-					if (exceptionHandler.getFileException() != null) {
-						throw new IOException(exceptionHandler.getFileException());
-					}
+                    if (exceptionHandler.getFileException() != null) {
+                        throw new IOException(exceptionHandler.getFileException());
+                    }
 
-					outputStream.finish();
-				}
+                    outputStream.finish();
+                }
 
-			}, monitor);
-
-		return jarBP;
+            }, monitor);
 	}
 
 	@Override

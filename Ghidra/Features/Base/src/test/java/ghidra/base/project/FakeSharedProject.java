@@ -128,8 +128,7 @@ public class FakeSharedProject {
 	 */
 	public DomainFile addDomainFile(String filename) throws Exception {
 		Project project = getGhidraProject().getProject();
-		DomainFile df = programManager.addProgramToProject(project, filename);
-		return df;
+        return programManager.addProgramToProject(project, filename);
 	}
 
 	/**
@@ -147,8 +146,7 @@ public class FakeSharedProject {
 	 */
 	public DomainFile addDomainFile(String parentPath, String filename) throws Exception {
 		DomainFolder parent = getFolder(parentPath);
-		DomainFile df = programManager.addProgramToProject(parent, filename);
-		return df;
+        return programManager.addProgramToProject(parent, filename);
 	}
 
 	/**
@@ -188,8 +186,7 @@ public class FakeSharedProject {
 	 */
 	public DomainFile getDomainFile(String parentPath, String filename) throws Exception {
 		DomainFolder folder = getFolder(parentPath);
-		DomainFile df = folder.getFile(filename);
-		return df;
+        return folder.getFile(filename);
 	}
 
 	/**
@@ -202,8 +199,7 @@ public class FakeSharedProject {
 	 * @throws Exception if there are any exceptions creating the folder
 	 */
 	public DomainFolder createFolder(String path) throws Exception {
-		DomainFolder folder = getFolder(path);
-		return folder;
+        return getFolder(path);
 	}
 
 	/**
@@ -222,8 +218,7 @@ public class FakeSharedProject {
 			throw new IllegalArgumentException(
 				"DomainFile not in project.  You must first call addDomainFile(name)");
 		}
-		Program p = openProgram(df);
-		return p;
+        return openProgram(df);
 	}
 
 	/**
@@ -449,9 +444,7 @@ public class FakeSharedProject {
 
 	LocalFileSystem getVersionedFileSystem() {
 		ProjectFileManager fileManager = getProjectFileManager();
-		LocalFileSystem fs =
-			(LocalFileSystem) TestUtils.invokeInstanceMethod("getVersionedFileSystem", fileManager);
-		return fs;
+        return (LocalFileSystem) TestUtils.invokeInstanceMethod("getVersionedFileSystem", fileManager);
 	}
 
 	void refresh() {

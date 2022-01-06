@@ -499,8 +499,7 @@ public class FunctionGraphPlugin2Test extends AbstractFunctionGraphTest {
 		ProgramLocation location = getLocationForAddressString(vertexAddressString);
 		assertTrue(graphData.containsLocation(location));
 		FunctionGraph functionGraph = graphData.getFunctionGraph();
-		Graph<FGVertex, FGEdge> graph = functionGraph;
-		FGVertex initialVertex = functionGraph.getVertexForAddress(vertexAddress);
+        FGVertex initialVertex = functionGraph.getVertexForAddress(vertexAddress);
 
 		// Find a location within that node to which we will add a label
 		String referenceFromAddress = "01002d3d";
@@ -526,14 +525,14 @@ public class FunctionGraphPlugin2Test extends AbstractFunctionGraphTest {
 		waitForAnimation();
 
 		// Verify the edited node has been split--the old vertex is gone; two new vertices exist
-		assertTrue(!graph.containsVertex(initialVertex));
+		assertTrue(!((Graph<FGVertex, FGEdge>) functionGraph).containsVertex(initialVertex));
 		FGVertex newParentVertex = functionGraph.getVertexForAddress(fromAddress);
 		assertNotNull(newParentVertex);
 
 		FGVertex newChildVertex = functionGraph.getVertexForAddress(toAddress);
 		assertNotNull(newChildVertex);
 
-		Collection<FGEdge> parentOutEdges = graph.getOutEdges(newParentVertex);
+		Collection<FGEdge> parentOutEdges = ((Graph<FGVertex, FGEdge>) functionGraph).getOutEdges(newParentVertex);
 		assertTrue(parentOutEdges.size() == 1);
 		assertEquals(newChildVertex, parentOutEdges.iterator().next().getEnd());
 
@@ -551,8 +550,8 @@ public class FunctionGraphPlugin2Test extends AbstractFunctionGraphTest {
 		waitForAnimation();
 
 		// Verify the new nodes have been merged
-		assertTrue(!graph.containsVertex(newParentVertex));
-		assertTrue(!graph.containsVertex(newChildVertex));
+		assertTrue(!((Graph<FGVertex, FGEdge>) functionGraph).containsVertex(newParentVertex));
+		assertTrue(!((Graph<FGVertex, FGEdge>) functionGraph).containsVertex(newChildVertex));
 
 		FGVertex newOldVertex = functionGraph.getVertexForAddress(vertexAddress);
 		assertNotNull(newParentVertex);
@@ -575,7 +574,7 @@ public class FunctionGraphPlugin2Test extends AbstractFunctionGraphTest {
 		fromAddress = getAddress(referenceFromAddress);
 		toAddress = getAddress(referenceToAddress);
 		FGVertex fromVertex = functionGraph.getVertexForAddress(vertexAddress);
-		assertTrue(graph.containsVertex(fromVertex));
+		assertTrue(((Graph<FGVertex, FGEdge>) functionGraph).containsVertex(fromVertex));
 
 		// Add a reference to the entry point of the node
 		addCmd =
@@ -586,7 +585,7 @@ public class FunctionGraphPlugin2Test extends AbstractFunctionGraphTest {
 		waitForAnimation();
 
 		// Verify the node was not split
-		assertTrue(graph.containsVertex(fromVertex));
+		assertTrue(((Graph<FGVertex, FGEdge>) functionGraph).containsVertex(fromVertex));
 
 		// Now remove the reference we added 
 		reference = referenceManager.getReference(fromAddress, toAddress, -1);
@@ -598,7 +597,7 @@ public class FunctionGraphPlugin2Test extends AbstractFunctionGraphTest {
 		waitForAnimation();
 
 		// Verify the node was not merged
-		assertTrue(graph.containsVertex(fromVertex));
+		assertTrue(((Graph<FGVertex, FGEdge>) functionGraph).containsVertex(fromVertex));
 	}
 
 	protected void doTestRestoringWhenCodeBlocksHaveChanged_DoesntRegroup() {
@@ -685,8 +684,7 @@ public class FunctionGraphPlugin2Test extends AbstractFunctionGraphTest {
 		ProgramLocation location = getLocationForAddressString(vertexAddressString);
 		assertTrue(graphData.containsLocation(location));
 		FunctionGraph functionGraph = graphData.getFunctionGraph();
-		Graph<FGVertex, FGEdge> graph = functionGraph;
-		FGVertex initialVertex = functionGraph.getVertexForAddress(vertexAddress);
+        FGVertex initialVertex = functionGraph.getVertexForAddress(vertexAddress);
 
 		// Find a location within that node to which we will add a label
 		String labelAddressString = "01002d47";
@@ -709,14 +707,14 @@ public class FunctionGraphPlugin2Test extends AbstractFunctionGraphTest {
 		waitForAnimation();
 
 		// Verify the edited node has been split--the old vertex is gone; two new vertices exist
-		assertTrue(!graph.containsVertex(initialVertex));
+		assertTrue(!((Graph<FGVertex, FGEdge>) functionGraph).containsVertex(initialVertex));
 		FGVertex newParentVertex = functionGraph.getVertexForAddress(vertexAddress);
 		assertNotNull(newParentVertex);
 
 		FGVertex newChildVertex = functionGraph.getVertexForAddress(labelAddress);
 		assertNotNull(newChildVertex);
 
-		Collection<FGEdge> parentOutEdges = graph.getOutEdges(newParentVertex);
+		Collection<FGEdge> parentOutEdges = ((Graph<FGVertex, FGEdge>) functionGraph).getOutEdges(newParentVertex);
 		assertTrue(parentOutEdges.size() == 1);
 		assertEquals(newChildVertex, parentOutEdges.iterator().next().getEnd());
 
@@ -731,8 +729,8 @@ public class FunctionGraphPlugin2Test extends AbstractFunctionGraphTest {
 		waitForAnimation();
 
 		// Verify the new nodes have been merged
-		assertTrue(!graph.containsVertex(newParentVertex));
-		assertTrue(!graph.containsVertex(newChildVertex));
+		assertTrue(!((Graph<FGVertex, FGEdge>) functionGraph).containsVertex(newParentVertex));
+		assertTrue(!((Graph<FGVertex, FGEdge>) functionGraph).containsVertex(newChildVertex));
 
 		FGVertex newOldVertex = functionGraph.getVertexForAddress(vertexAddress);
 		assertNotNull(newParentVertex);
@@ -764,7 +762,7 @@ public class FunctionGraphPlugin2Test extends AbstractFunctionGraphTest {
 		waitForAnimation();
 
 		// Verify the node was not split
-		assertTrue(graph.containsVertex(vertexWithLabel));
+		assertTrue(((Graph<FGVertex, FGEdge>) functionGraph).containsVertex(vertexWithLabel));
 
 		// Verify the graph is stale
 		assertTrue(view.isGraphViewStale());
@@ -777,7 +775,7 @@ public class FunctionGraphPlugin2Test extends AbstractFunctionGraphTest {
 		waitForAnimation();
 
 		// Verify the node was not merged
-		assertTrue(graph.containsVertex(vertexWithLabel));
+		assertTrue(((Graph<FGVertex, FGEdge>) functionGraph).containsVertex(vertexWithLabel));
 	}
 
 	// note: unreliable--garbage collection works differently across platforms (sad face)	

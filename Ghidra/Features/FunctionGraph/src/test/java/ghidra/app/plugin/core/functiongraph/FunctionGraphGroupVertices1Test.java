@@ -193,11 +193,10 @@ public class FunctionGraphGroupVertices1Test extends AbstractFunctionGraphTest {
 
 		FGData graphData = graphFunction("01002cf5");
 		FunctionGraph functionGraph = graphData.getFunctionGraph();
-		Graph<FGVertex, FGEdge> graph = functionGraph;
 
-		Set<FGVertex> ungroupedVertices =
+        Set<FGVertex> ungroupedVertices =
 			selectVertices(functionGraph, "01002d2b" /* Another Local*/, "01002d1f" /* MyLocal */);
-		Set<FGEdge> ungroupedEdges = getEdges(graph, ungroupedVertices);
+		Set<FGEdge> ungroupedEdges = getEdges(functionGraph, ungroupedVertices);
 
 		group(ungroupedVertices);
 
@@ -205,15 +204,15 @@ public class FunctionGraphGroupVertices1Test extends AbstractFunctionGraphTest {
 		int expectedGroupedEdgeCount = ungroupedEdges.size() - 1;
 		GroupedFunctionGraphVertex groupedVertex = validateNewGroupedVertexFromVertices(
 			functionGraph, ungroupedVertices, expectedGroupedEdgeCount);
-		assertVerticesRemoved(graph, ungroupedVertices);
-		assertEdgesRemoved(graph, ungroupedEdges);
+		assertVerticesRemoved(functionGraph, ungroupedVertices);
+		assertEdgesRemoved(functionGraph, ungroupedEdges);
 
 		//
 		// Now group the group vertex with another vertex
 		//
 		Set<FGVertex> secondUngroupedVertices = selectVertices(functionGraph,
 			"01002d0f" /* LAB_01002d0f */, "01002d1f" /* Grouped Vertex */);
-		Set<FGEdge> secondUngroupedEdges = getEdges(graph, secondUngroupedVertices);
+		Set<FGEdge> secondUngroupedEdges = getEdges(functionGraph, secondUngroupedVertices);
 
 		group(secondUngroupedVertices);
 
@@ -223,8 +222,8 @@ public class FunctionGraphGroupVertices1Test extends AbstractFunctionGraphTest {
 		expectedGroupedEdgeCount = 5;
 		GroupedFunctionGraphVertex secondGroupedVertex = validateNewGroupedVertexFromVertices(
 			functionGraph, secondUngroupedVertices, expectedGroupedEdgeCount);
-		assertVerticesRemoved(graph, secondUngroupedVertices);
-		assertEdgesRemoved(graph, secondUngroupedEdges);
+		assertVerticesRemoved(functionGraph, secondUngroupedVertices);
+		assertEdgesRemoved(functionGraph, secondUngroupedEdges);
 
 		//
 		// Ungrouping the first time should restore the previous grouped vertices, including the
@@ -233,15 +232,15 @@ public class FunctionGraphGroupVertices1Test extends AbstractFunctionGraphTest {
 
 		ungroup(secondGroupedVertex);
 
-		assertVertexRemoved(graph, secondGroupedVertex);
-		assertVerticesAdded(graph, secondUngroupedVertices);
+		assertVertexRemoved(functionGraph, secondGroupedVertex);
+		assertVerticesAdded(functionGraph, secondUngroupedVertices);
 		assertEdgesAdded(functionGraph, secondUngroupedEdges);
 		assertSelected(secondUngroupedVertices);
 
 		ungroup(groupedVertex);
 
-		assertVertexRemoved(graph, groupedVertex);
-		assertVerticesAdded(graph, ungroupedVertices);
+		assertVertexRemoved(functionGraph, groupedVertex);
+		assertVerticesAdded(functionGraph, ungroupedVertices);
 		assertEdgesAdded(functionGraph, ungroupedEdges);
 		assertSelected(ungroupedVertices);
 	}
@@ -361,8 +360,7 @@ public class FunctionGraphGroupVertices1Test extends AbstractFunctionGraphTest {
 
 		FGData graphData = graphFunction("01002cf5");
 		FunctionGraph functionGraph = graphData.getFunctionGraph();
-		Graph<FGVertex, FGEdge> graph = functionGraph;
-		Set<FGVertex> originalVertices = new HashSet<>(graph.getVertices());
+        Set<FGVertex> originalVertices = new HashSet<>(((Graph<FGVertex, FGEdge>) functionGraph).getVertices());
 
 		Set<FGVertex> ungroupedVertices =
 			selectVertices(functionGraph, "01002d2b" /* Another Local*/, "01002d1f" /* MyLocal */);
@@ -376,13 +374,13 @@ public class FunctionGraphGroupVertices1Test extends AbstractFunctionGraphTest {
 			selectVertices(functionGraph, "01002d11" /* LAB_01002d11*/, "01002d06" /* 01002d06 */);
 		group(secondUngroupedVertices);
 
-		Assert.assertNotEquals(originalVertices.size(), graph.getVertices().size());
+		Assert.assertNotEquals(originalVertices.size(), ((Graph<FGVertex, FGEdge>) functionGraph).getVertices().size());
 
 		ungroupAll();
 
 		// don't use assertEQuals() with the different sets, as the sets may be of differing types
 		// that do not correctly compare as equal
-		Collection<FGVertex> vertices = graph.getVertices();
+		Collection<FGVertex> vertices = ((Graph<FGVertex, FGEdge>) functionGraph).getVertices();
 		assertEquals(originalVertices.size(), vertices.size());
 		for (FGVertex originalVertex : originalVertices) {
 			assertTrue("Original vertex not in ungrouped group: " + originalVertex,
@@ -847,18 +845,17 @@ public class FunctionGraphGroupVertices1Test extends AbstractFunctionGraphTest {
 	protected void doTestGroupAndUngroupVertices() {
 		FGData graphData = graphFunction("01002cf5");
 		FunctionGraph functionGraph = graphData.getFunctionGraph();
-		Graph<FGVertex, FGEdge> graph = functionGraph;
 
-		Set<FGVertex> ungroupedVertices = selectVertices( functionGraph,
+        Set<FGVertex> ungroupedVertices = selectVertices( functionGraph,
 																	"01002d2b" /* Another Local*/,
 																	"01002d1f" /* MyLocal */);
-		Set<FGEdge> ungroupedEdges = getEdges(graph, ungroupedVertices);
+		Set<FGEdge> ungroupedEdges = getEdges(functionGraph, ungroupedVertices);
 		assertEquals("Did not grab all known edges for vertices", 4, ungroupedEdges.size());
 
 		group(ungroupedVertices);
 
-		assertVerticesRemoved(graph, ungroupedVertices);
-		assertEdgesRemoved(graph, ungroupedEdges);
+		assertVerticesRemoved(functionGraph, ungroupedVertices);
+		assertEdgesRemoved(functionGraph, ungroupedEdges);
 
 		// -1 because one one of the edges was between two of the vertices being grouped
 		int expectedGroupedEdgeCount = ungroupedEdges.size() - 1;
@@ -868,8 +865,8 @@ public class FunctionGraphGroupVertices1Test extends AbstractFunctionGraphTest {
 
 		ungroup(groupedVertex);
 
-		assertVertexRemoved(graph, groupedVertex);
-		assertVerticesAdded(graph, ungroupedVertices);
+		assertVertexRemoved(functionGraph, groupedVertex);
+		assertVerticesAdded(functionGraph, ungroupedVertices);
 		assertEdgesAdded(functionGraph, ungroupedEdges);
 		assertSelected(ungroupedVertices);
 

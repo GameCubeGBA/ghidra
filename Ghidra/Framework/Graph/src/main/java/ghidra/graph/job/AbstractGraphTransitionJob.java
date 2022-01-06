@@ -162,8 +162,7 @@ public abstract class AbstractGraphTransitionJob<V extends VisualVertex, E exten
 	}
 
 	protected LayoutPositions<V, E> calculateDefaultLayoutLocations() {
-		LayoutPositions<V, E> positions = calculateDefaultLayoutLocations(Collections.emptySet());
-		return positions;
+        return calculateDefaultLayoutLocations(Collections.emptySet());
 	}
 
 	protected LayoutPositions<V, E> getCurrentLayoutLocations() {

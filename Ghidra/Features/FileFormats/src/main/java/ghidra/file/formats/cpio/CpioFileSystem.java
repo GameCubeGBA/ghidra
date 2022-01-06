@@ -160,10 +160,8 @@ public class CpioFileSystem implements GFileSystem {
 			CpioArchiveEntry currentEntry;
 			while ((currentEntry = cpioInputStream.getNextCPIOEntry()) != null) {
 				if (currentEntry.equals(targetEntry)) {
-					ByteProvider bp =
-						fsService.getDerivedByteProvider(provider.getFSRL(), file.getFSRL(),
-							file.getPath(), currentEntry.getSize(), () -> cpioInputStream, monitor);
-					return bp;
+                    return fsService.getDerivedByteProvider(provider.getFSRL(), file.getFSRL(),
+                        file.getPath(), currentEntry.getSize(), () -> cpioInputStream, monitor);
 				}
 				FSUtilities.streamCopy(cpioInputStream, OutputStream.nullOutputStream(), monitor);
 			}

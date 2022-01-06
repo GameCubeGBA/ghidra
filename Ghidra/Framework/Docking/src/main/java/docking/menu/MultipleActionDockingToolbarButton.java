@@ -149,8 +149,7 @@ public class MultipleActionDockingToolbarButton extends EmptyBorderButton {
 	private ActionContext getActionContext() {
 		ComponentProvider provider = getComponentProvider();
 		ActionContext context = provider == null ? null : provider.getActionContext(null);
-		final ActionContext actionContext = context == null ? new ActionContext() : context;
-		return actionContext;
+        return context == null ? new ActionContext() : context;
 	}
 
 	private ComponentProvider getComponentProvider() {
@@ -266,16 +265,13 @@ public class MultipleActionDockingToolbarButton extends EmptyBorderButton {
 			int paintArrowXOffset = x + iconWidth + insetsPadding + leftSidePadding;
 			int paintArrowYOffset = y + (iconHeight / 2) - ARROW_HEIGHT;
 
-			int arrowStartX = paintArrowXOffset;
-			int arrowEndX = paintArrowXOffset + ARROW_WIDTH;
+            int arrowEndX = paintArrowXOffset + ARROW_WIDTH;
 			int arrowMiddleX = paintArrowXOffset + (ARROW_WIDTH / 2);
 
-			int arrowStartY = paintArrowYOffset;
-			int arrowEndY = arrowStartY;
-			int arrowMiddleY = arrowStartY + ARROW_HEIGHT;
+            int arrowMiddleY = paintArrowYOffset + ARROW_HEIGHT;
 
-			int[] xPoints = { arrowStartX, arrowEndX, arrowMiddleX };
-			int[] yPoints = { arrowStartY, arrowEndY, arrowMiddleY };
+			int[] xPoints = {paintArrowXOffset, arrowEndX, arrowMiddleX };
+			int[] yPoints = {paintArrowYOffset, paintArrowYOffset, arrowMiddleY };
 
 			Graphics2D graphics2D = (Graphics2D) g;
 			graphics2D.drawPolygon(xPoints, yPoints, 3);
@@ -450,14 +446,13 @@ public class MultipleActionDockingToolbarButton extends EmptyBorderButton {
 			int pad = 10;
 			int center = separatorHeight >> 1;
 			int x = 0 + pad;
-			int y = center;
-			int w = d.width - pad;
+            int w = d.width - pad;
 			g.setColor(getForeground());
-			g.drawLine(x, y, w, y);
+			g.drawLine(x, center, w, center);
 
 			// drop-shadow
 			g.setColor(getBackground());
-			g.drawLine(x, (y + 1), w, (y + 1));
+			g.drawLine(x, (center + 1), w, (center + 1));
 
 			// now add our custom text
 			renderer.setSize(getSize());

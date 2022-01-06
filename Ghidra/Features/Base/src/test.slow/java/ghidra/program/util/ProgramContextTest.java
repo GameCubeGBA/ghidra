@@ -90,63 +90,61 @@ public class ProgramContextTest extends AbstractGhidraHeadedIntegrationTest {
 			ProgramContext programContext = program.getProgramContext();
 			boolean didSomething = false;
 
-			Address startAddress = start;
-			Address endAddress = getAddress(0x30);
+            Address endAddress = getAddress(0x30);
 
 			// stick a value into each one!
 			BigInteger value = BigInteger.valueOf(255);
 
 			for (Register register : programContext.getRegisters()) {
-				Register reg = register;
-				if (!reg.isBaseRegister() && reg.isProcessorContext()) {
+                if (!register.isBaseRegister() && register.isProcessorContext()) {
 					continue;
 				}
 				try {
-					programContext.setValue(reg, startAddress, endAddress, value);
+					programContext.setValue(register, start, endAddress, value);
 				}
 				catch (Exception e) {
 					Assert.fail(e.getMessage());
 				}
-				assertNotNull(programContext.getValue(reg, startAddress, false));
-				assertNotNull(programContext.getValue(reg, endAddress, false));
-				Address insideAddr1 = startAddress.add(10);
-				BigInteger val = programContext.getValue(reg, insideAddr1, false);
-				assertTrue("unexpected context value for " + reg + ": " + val, value.equals(val));
+				assertNotNull(programContext.getValue(register, start, false));
+				assertNotNull(programContext.getValue(register, endAddress, false));
+				Address insideAddr1 = start.add(10);
+				BigInteger val = programContext.getValue(register, insideAddr1, false);
+				assertTrue("unexpected context value for " + register + ": " + val, value.equals(val));
 
-				Address insideAddr2 = startAddress.add(29);
-				assertEquals(value, programContext.getValue(reg, insideAddr2, false));
+				Address insideAddr2 = start.add(29);
+				assertEquals(value, programContext.getValue(register, insideAddr2, false));
 
 				Address badAddress = endAddress.add(10);
-				assertNull(programContext.getValue(reg, badAddress, false));
+				assertNull(programContext.getValue(register, badAddress, false));
 
 				AddressRangeIterator registerValueAddressRanges =
-					programContext.getRegisterValueAddressRanges(reg);
+					programContext.getRegisterValueAddressRanges(register);
 				assertTrue(registerValueAddressRanges.hasNext());
 				AddressRange range = registerValueAddressRanges.next();
-				assertEquals(startAddress, range.getMinAddress());
+				assertEquals(start, range.getMinAddress());
 				assertEquals(endAddress, range.getMaxAddress());
 				assertTrue(!registerValueAddressRanges.hasNext());
 
 				registerValueAddressRanges =
-					programContext.getRegisterValueAddressRanges(reg, insideAddr1, insideAddr1);
+					programContext.getRegisterValueAddressRanges(register, insideAddr1, insideAddr1);
 				assertTrue(registerValueAddressRanges.hasNext());
 				range = registerValueAddressRanges.next();
 				assertEquals(insideAddr1, range.getMinAddress());
 				assertEquals(insideAddr1, range.getMaxAddress());
 				assertTrue(!registerValueAddressRanges.hasNext());
 
-				range = new AddressRangeImpl(startAddress, endAddress);
+				range = new AddressRangeImpl(start, endAddress);
 				assertEquals(range,
-					programContext.getRegisterValueRangeContaining(reg, startAddress));
+					programContext.getRegisterValueRangeContaining(register, start));
 				assertEquals(range,
-					programContext.getRegisterValueRangeContaining(reg, endAddress));
+					programContext.getRegisterValueRangeContaining(register, endAddress));
 				assertEquals(range,
-					programContext.getRegisterValueRangeContaining(reg, insideAddr1));
+					programContext.getRegisterValueRangeContaining(register, insideAddr1));
 
 				assertEquals(
 					new AddressRangeImpl(endAddress.next(),
 						endAddress.getAddressSpace().getMaxAddress()),
-					programContext.getRegisterValueRangeContaining(reg, badAddress));
+					programContext.getRegisterValueRangeContaining(register, badAddress));
 
 				didSomething = true;
 			}

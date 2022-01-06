@@ -305,8 +305,7 @@ public class GraphExportTest extends AbstractGhidraHeadedIntegrationTest {
 		runSwing(() -> dialog.setOutputFile(filePath));
 		dialog.setExporter(exporter);
 		pressButtonByText(dialog, "OK");
-		List<String> lines = FileUtilities.getLines(new File(filePath));
-		return lines;
+        return FileUtilities.getLines(new File(filePath));
 
 	}
 

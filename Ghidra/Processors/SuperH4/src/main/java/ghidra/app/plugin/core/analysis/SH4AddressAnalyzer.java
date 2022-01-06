@@ -106,9 +106,7 @@ public class SH4AddressAnalyzer extends ConstantPropagationAnalyzer {
 			}
 		};
 
-		AddressSet resultSet = symEval.flowConstants(flowStart, null, eval, true, monitor);
-
-		return resultSet;
+        return symEval.flowConstants(flowStart, null, eval, true, monitor);
 	}
 
 	/**

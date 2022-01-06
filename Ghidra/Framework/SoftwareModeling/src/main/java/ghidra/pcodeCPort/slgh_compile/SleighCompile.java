@@ -328,8 +328,7 @@ public class SleighCompile extends SleighBase {
 	protected SectionVector standaloneSection(ConstructTpl main) {
 		entry("standaloneSection", main);
 		// Create SectionVector for just the main rtl section with no named sections
-		SectionVector res = new SectionVector(main, symtab.getCurrentScope());
-		return res;
+        return new SectionVector(main, symtab.getCurrentScope());
 	}
 
 	protected SectionVector firstNamedSection(ConstructTpl main, SectionSymbol sym) {
@@ -1018,14 +1017,13 @@ public class SleighCompile extends SleighBase {
 	public void defineBitrange(Location location, String name, VarnodeSymbol sym, int bitoffset,
 			int numb) {
 		entry("defineBitrange", location, name, sym, bitoffset, numb);
-		String namecopy = name;
-		int size = 8 * sym.getSize(); // Number of bits
+        int size = 8 * sym.getSize(); // Number of bits
 		if (numb == 0) {
-			reportError(location, "Size of bitrange is zero for '" + namecopy + "'");
+			reportError(location, "Size of bitrange is zero for '" + name + "'");
 			return;
 		}
 		if ((bitoffset >= size) || ((bitoffset + numb) > size)) {
-			reportError(location, "Bad bitrange for '" + namecopy + "'");
+			reportError(location, "Bad bitrange for '" + name + "'");
 			return;
 		}
 		if ((bitoffset % 8 == 0) && (numb % 8 == 0)) {
@@ -1039,7 +1037,7 @@ public class SleighCompile extends SleighBase {
 			else {
 				newoffset += bitoffset / 8;
 			}
-			addSymbol(new VarnodeSymbol(location, namecopy, newspace, newoffset, newsize));
+			addSymbol(new VarnodeSymbol(location, name, newspace, newoffset, newsize));
 		}
 		else {
 			if (size > 64) {
@@ -1047,7 +1045,7 @@ public class SleighCompile extends SleighBase {
 					"Illegal bitrange on varnode larger than 64 bits");
 			}
 			// Otherwise define the special symbol
-			addSymbol(new BitrangeSymbol(location, namecopy, sym, bitoffset, numb));
+			addSymbol(new BitrangeSymbol(location, name, sym, bitoffset, numb));
 		}
 	}
 

@@ -294,10 +294,9 @@ public class FieldSelection implements Iterable<FieldRange> {
 		// C = A - B
 		// return A - C
 		FieldSelection A = this;
-		FieldSelection B = selection;
-		FieldSelection C = new FieldSelection(this);
+        FieldSelection C = new FieldSelection(this);
 
-		C.delete(B);
+		C.delete(selection);
 		A.delete(C);
 	}
 
@@ -313,10 +312,9 @@ public class FieldSelection implements Iterable<FieldRange> {
 		// C = A - B
 		// return A - C
 		FieldSelection A = new FieldSelection(this);
-		FieldSelection B = selection;
-		FieldSelection C = new FieldSelection(this);
+        FieldSelection C = new FieldSelection(this);
 
-		C.delete(B);
+		C.delete(selection);
 		A.delete(C);
 		return A;
 	}

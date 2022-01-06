@@ -912,8 +912,7 @@ class CodeUnitMerger extends AbstractListingMerger {
 			ProgramMemoryUtil.copyBytesInRanges(resultPgm, fromPgm, minAddress, maxAddress);
 		}
 		if (!(dt.equals(DataType.DEFAULT))) {
-			DataType tmpDt = dt;
-			resultListing.createData(minAddress, tmpDt, data.getLength());
+            resultListing.createData(minAddress, dt, data.getLength());
 			hasNewData = true;
 		}
 		if (hasNewData) {

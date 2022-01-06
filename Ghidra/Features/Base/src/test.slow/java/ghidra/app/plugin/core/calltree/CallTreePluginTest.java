@@ -1221,8 +1221,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 	}
 
 	private DockingActionIf getAction(String actionName) {
-		DockingActionIf action = getLocalAction(provider, actionName);
-		return action;
+        return getLocalAction(provider, actionName);
 	}
 
 	/**

@@ -62,15 +62,14 @@ public class CustomTOCView extends TOCView {
 	@Override
 	// overrode this method to install our custom UI, which lets us use our custom renderer
 	public Component createNavigator(HelpModel model) {
-		JHelpTOCNavigator helpTOCNavigator = new JHelpTOCNavigator(this, model) {
-			@Override
-			public void setUI(HelpNavigatorUI newUI) {
-				CustomTOCView.this.ui = new CustomTOCNavigatorUI(this);
-				super.setUI(CustomTOCView.this.ui);
-			}
-		};
 
-		return helpTOCNavigator;
+        return new JHelpTOCNavigator(CustomTOCView.this, model) {
+            @Override
+            public void setUI(HelpNavigatorUI newUI) {
+                CustomTOCView.this.ui = new CustomTOCNavigatorUI(this);
+                super.setUI(CustomTOCView.this.ui);
+            }
+        };
 	}
 
 	public HelpModel getHelpModel() {

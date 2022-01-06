@@ -160,10 +160,9 @@ public class CondenseFillerBytes extends GhidraScript {
 
 		println("Possible filler values (and their counts): " + fillValuesHash);
 
-		// Decide that filler value is the one with the greatest count				
-		String filler = getValueWithHighestCount(fillValuesHash);
+		// Decide that filler value is the one with the greatest count
 
-		return filler;
+        return getValueWithHighestCount(fillValuesHash);
 	}
 
 	private String getValueWithHighestCount(HashMap<String, Integer> fillValuesHash) {

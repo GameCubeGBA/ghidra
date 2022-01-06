@@ -177,18 +177,16 @@ public abstract class AbstractGhidraHeadedIntegrationTest
 	 */
 	public static PluginTool saveTool(final Project project, final PluginTool tool) {
 
-		PluginTool newTool = runSwing(() -> {
-			ToolChest toolChest = project.getLocalToolChest();
-			ToolTemplate toolTemplate = tool.saveToolToToolTemplate();
-			toolChest.replaceToolTemplate(toolTemplate);
+        return runSwing(() -> {
+            ToolChest toolChest = project.getLocalToolChest();
+            ToolTemplate toolTemplate = tool.saveToolToToolTemplate();
+            toolChest.replaceToolTemplate(toolTemplate);
 
-			ToolManager toolManager = project.getToolManager();
-			Workspace workspace = toolManager.getActiveWorkspace();
-			tool.close();
-			return workspace.runTool(toolTemplate);
-		});
-
-		return newTool;
+            ToolManager toolManager = project.getToolManager();
+            Workspace workspace = toolManager.getActiveWorkspace();
+            tool.close();
+            return workspace.runTool(toolTemplate);
+        });
 	}
 
 	/**

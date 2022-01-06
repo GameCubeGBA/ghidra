@@ -262,14 +262,13 @@ public class PatternStats extends GhidraScript implements PatternFactory {
         }
 		MemoryBlock[] blocks = currentProgram.getMemory().getBlocks();
 		for (MemoryBlock block2 : blocks) {
-			MemoryBlock block = block2;
-			if (!block.isInitialized()) {
+            if (!block2.isInitialized()) {
 				continue;
 			}
-			if (!searchNonExecutableBlocks && !block.isExecute()) {
+			if (!searchNonExecutableBlocks && !block2.isExecute()) {
 				continue;
 			}
-			searchBlock(currentProgram, block, monitor);
+			searchBlock(currentProgram, block2, monitor);
 		}
 		FileWriter out = new FileWriter(resFile);
 		out.write("<accumlist>\n");

@@ -207,9 +207,7 @@ public class GraphViewerUtils {
 
 		Point2D vertexUpperLeftRelativePoint =
 			translatePointFromViewSpaceToVertexRelativeSpace(viewer, mouseEvent.getPoint());
-		VertexMouseInfo<V, E> info =
-			viewer.createVertexMouseInfo(mouseEvent, vertex, vertexUpperLeftRelativePoint);
-		return info;
+        return viewer.createVertexMouseInfo(mouseEvent, vertex, vertexUpperLeftRelativePoint);
 	}
 
 	public static <V, E> Point getVertexUpperLeftCornerInGraphSpace(
@@ -747,9 +745,7 @@ public class GraphViewerUtils {
 			V v) {
 		Layout<V, E> layout = viewer.getGraphLayout();
 		Point2D centerInLayoutSpace = layout.apply(v);
-		Point viewSpacePoint =
-			translatePointFromLayoutSpaceToViewSpace(centerInLayoutSpace, viewer);
-		return viewSpacePoint;
+        return translatePointFromLayoutSpaceToViewSpace(centerInLayoutSpace, viewer);
 	}
 
 	public static <V, E> Point2D.Double getVertexOffsetFromLayoutCenter(
@@ -845,8 +841,7 @@ public class GraphViewerUtils {
 		Function<V, Rectangle> vertexToBounds = createVertexToBoundsTransformer(viewer);
 
 		if (!layoutUsesEdgeArticulations(layout)) {
-			Rectangle bounds = getBoundsForVerticesInLayoutSpace(vertices, vertexToBounds);
-			return bounds;
+            return getBoundsForVerticesInLayoutSpace(vertices, vertexToBounds);
 		}
 
 		Function<E, List<Point2D>> edgeToArticulations = e -> e.getArticulationPoints();
@@ -861,17 +856,16 @@ public class GraphViewerUtils {
 		RenderContext<V, E> context = viewer.getRenderContext();
 		Function<? super V, Shape> shapeTransformer = context.getVertexShapeTransformer();
 		Layout<V, E> layout = viewer.getGraphLayout();
-		Function<V, Rectangle> transformer = v -> {
+        return v -> {
 
-			Shape s = shapeTransformer.apply(v);
-			Rectangle bounds = s.getBounds();
-			Point2D p = layout.apply(v);
+            Shape s = shapeTransformer.apply(v);
+            Rectangle bounds = s.getBounds();
+            Point2D p = layout.apply(v);
 
-			// Note: we use the raw x/y of the layout; the view code will center the vertices
-			bounds.setLocation(new Point((int) p.getX(), (int) p.getY()));
-			return bounds;
-		};
-		return transformer;
+            // Note: we use the raw x/y of the layout; the view code will center the vertices
+            bounds.setLocation(new Point((int) p.getX(), (int) p.getY()));
+            return bounds;
+        };
 	}
 
 	//@formatter:off
@@ -1066,8 +1060,7 @@ public class GraphViewerUtils {
 		}
 
 		Collection<V> vertices = GraphAlgorithms.toVertices(filteredEdges);
-        List<V> result = new LinkedList<>(vertices);
-		return result;
+        return new LinkedList<>(vertices);
 	}
 
 }

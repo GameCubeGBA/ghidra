@@ -111,8 +111,7 @@ public class LazyBindProcessor extends AbstractDyldInfoProcessor {
 						bind.libraryOrdinal = 0;
 					}
 					else {
-						byte signExtended = (byte) ( DyldInfoCommandConstants.BIND_OPCODE_MASK | immediate );
-						bind.libraryOrdinal = signExtended;
+                        bind.libraryOrdinal = (byte) ( DyldInfoCommandConstants.BIND_OPCODE_MASK | immediate );
 					}
 					break;
 				}

@@ -462,8 +462,7 @@ public class VariousChoicesPanel extends ConflictPanel {
 		}
 
 		int getHeight() {
-			int height = titleLabel.getHeight();
-			return height;
+            return titleLabel.getHeight();
 		}
 
 		int getChoice() {

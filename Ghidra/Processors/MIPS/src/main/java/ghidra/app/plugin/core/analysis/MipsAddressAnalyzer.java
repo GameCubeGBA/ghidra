@@ -202,9 +202,7 @@ public class MipsAddressAnalyzer extends ConstantPropagationAnalyzer {
 					}
 					continue;  // can't use this one, look for the next free gp_<x> symbol
 				}
-				Symbol createSymbol =
-					program.getSymbolTable().createLabel(toAddr, symname, SourceType.ANALYSIS);
-				return createSymbol;
+                return program.getSymbolTable().createLabel(toAddr, symname, SourceType.ANALYSIS);
 			}
 			catch (InvalidInputException e) {
 				break;

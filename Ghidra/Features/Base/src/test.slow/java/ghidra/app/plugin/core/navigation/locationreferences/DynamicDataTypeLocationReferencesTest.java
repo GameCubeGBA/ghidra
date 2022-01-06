@@ -37,15 +37,14 @@ public class DynamicDataTypeLocationReferencesTest extends AbstractLocationRefer
 		//
 		// References: one to each member; no offcut
 		//		
-		Address field0 = rttiAddr;
-		Address from1 = addr(0x01005300);
-		createReference(from1, field0);
+        Address from1 = addr(0x01005300);
+		createReference(from1, rttiAddr);
 
-		Address field1 = field0.add(4);
+		Address field1 = rttiAddr.add(4);
 		Address from2 = addr(0x01005301);
 		createReference(from2, field1);
 
-		Address field2 = field0.add(8);
+		Address field2 = rttiAddr.add(8);
 		Address from3 = addr(0x01005302);
 		createReference(from3, field2);
 
@@ -67,15 +66,14 @@ public class DynamicDataTypeLocationReferencesTest extends AbstractLocationRefer
 		//
 		// References: one regular; 2 offcut
 		//		
-		Address field0 = rttiAddr;
-		Address from1 = addr(0x01005300);
-		createReference(from1, field0);
+        Address from1 = addr(0x01005300);
+		createReference(from1, rttiAddr);
 
-		Address offcut1 = field0.add(1);
+		Address offcut1 = rttiAddr.add(1);
 		Address from2 = addr(0x01005301);
 		createReference(from2, offcut1);
 
-		Address offcut2 = field0.add(5);
+		Address offcut2 = rttiAddr.add(5);
 		Address from3 = addr(0x01005302);
 		createReference(from3, offcut2);
 
@@ -97,15 +95,14 @@ public class DynamicDataTypeLocationReferencesTest extends AbstractLocationRefer
 		//	
 		createRTTI0DataType(rttiAddr);
 
-		Address field0 = rttiAddr;
-		Address from1 = addr(0x01005300);
-		createReference(from1, field0);
+        Address from1 = addr(0x01005300);
+		createReference(from1, rttiAddr);
 
-		Address field1 = field0.add(4);
+		Address field1 = rttiAddr.add(4);
 		Address from2 = addr(0x01005301);
 		createReference(from2, field1);
 
-		Address field2 = field0.add(8);
+		Address field2 = rttiAddr.add(8);
 		Address from3 = addr(0x01005302);
 		createReference(from3, field2);
 
@@ -127,19 +124,18 @@ public class DynamicDataTypeLocationReferencesTest extends AbstractLocationRefer
 		//
 		// References: one regular; 2 offcut
 		//		
-		Address field0 = rttiAddr;
-		Address from1 = addr(0x01005300);
-		createReference(from1, field0);
+        Address from1 = addr(0x01005300);
+		createReference(from1, rttiAddr);
 
-		Address offcut1 = field0.add(1);
+		Address offcut1 = rttiAddr.add(1);
 		Address from2 = addr(0x01005301);
 		createReference(from2, offcut1);
 
-		Address offcut2 = field0.add(5);
+		Address offcut2 = rttiAddr.add(5);
 		Address from3 = addr(0x01005302);
 		createReference(from3, offcut2);
 
-		Address field1 = field0.add(4);
+		Address field1 = rttiAddr.add(4);
 		goToDataAddressField(field1);
 		search();
 
@@ -158,15 +154,14 @@ public class DynamicDataTypeLocationReferencesTest extends AbstractLocationRefer
 		//	
 		createRTTI0DataType(rttiAddr);
 
-		Address field0 = rttiAddr;
-		Address from1 = addr(0x01005300);
-		createReference(from1, field0);
+        Address from1 = addr(0x01005300);
+		createReference(from1, rttiAddr);
 
-		Address field1 = field0.add(4);
+		Address field1 = rttiAddr.add(4);
 		Address from2 = addr(0x01005301);
 		createReference(from2, field1);
 
-		Address field2 = field0.add(8);
+		Address field2 = rttiAddr.add(8);
 		Address from3 = addr(0x01005302);
 		createReference(from3, field2);
 
@@ -188,15 +183,14 @@ public class DynamicDataTypeLocationReferencesTest extends AbstractLocationRefer
 		//	
 		createRTTI0DataType(rttiAddr);
 
-		Address field0 = rttiAddr;
-		Address from1 = addr(0x01005300);
-		createReference(from1, field0);
+        Address from1 = addr(0x01005300);
+		createReference(from1, rttiAddr);
 
-		Address field1 = field0.add(4);
+		Address field1 = rttiAddr.add(4);
 		Address from2 = addr(0x01005301);
 		createReference(from2, field1);
 
-		Address offcut1 = field0.add(1);
+		Address offcut1 = rttiAddr.add(1);
 		Address from3 = addr(0x01005302);
 		createReference(from3, offcut1);
 

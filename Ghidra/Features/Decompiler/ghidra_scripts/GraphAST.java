@@ -150,9 +150,7 @@ public class GraphAST extends GhidraScript {
 
 	private String getOpKey(PcodeOpAST op) {
 		SequenceNumber sq = op.getSeqnum();
-		String id =
-			sq.getTarget().toString(true) + " o " + Integer.toString(op.getSeqnum().getTime());
-		return id;
+        return sq.getTarget().toString(true) + " o " + Integer.toString(op.getSeqnum().getTime());
 	}
 
 	protected AttributedVertex createVarnodeVertex(VarnodeAST vn) {
@@ -262,8 +260,7 @@ public class GraphAST extends GhidraScript {
 	}
 
 	protected Iterator<PcodeOpAST> getPcodeOpIterator() {
-		Iterator<PcodeOpAST> opiter = high.getPcodeOps();
-		return opiter;
+        return high.getPcodeOps();
 	}
 
 	class ASTGraphDisplayListener extends AddressBasedGraphDisplayListener {

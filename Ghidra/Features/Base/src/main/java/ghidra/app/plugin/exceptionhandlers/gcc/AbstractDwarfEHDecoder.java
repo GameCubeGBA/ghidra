@@ -78,12 +78,11 @@ abstract class AbstractDwarfEHDecoder implements DwarfEHDecoder {
 			case 4:
 				return readDWord(program, addr);
 			case 8:
-				long base = readDWord(program, addr);
-				// long ex = readDWord(program, addr.add(4));
+                // long ex = readDWord(program, addr.add(4));
 				// if (ex == 0) {
 				// return (ex << 32) + base;
 				// }
-				return base;
+				return readDWord(program, addr);
 
 			default:
 				throw new AddressTranslationException(

@@ -208,14 +208,13 @@ public class MergeVertexFunctionGraphJob extends AbstractAnimatorJob {
 			edge.setAlpha(alpha);
 		}
 
-		double newComponentsAlpha = percentComplete;
-		mergedVertex.setAlpha(newComponentsAlpha);
+        mergedVertex.setAlpha(percentComplete);
 		edges = getEdges(mergedVertex);
 		for (FGEdge edge : edges) {
 
 			// don't go past the alpha when adding
 			double defaultAlpha = edge.getDefaultAlpha();
-			double alpha = Math.min(newComponentsAlpha, defaultAlpha);
+			double alpha = Math.min(percentComplete, defaultAlpha);
 			edge.setAlpha(alpha);
 		}
 	}

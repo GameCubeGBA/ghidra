@@ -237,8 +237,7 @@ public class VerticalLayoutTextField implements TextField {
 	@Override
 	public int getY(int row) {
 
-		int startY = -heightAbove;
-		int y = startY;
+        int y = -heightAbove;
 		int n = Math.min(row, subFields.size() - 1);
 		for (int i = 0; i < n; i++) {
 			Field f = getField(i);

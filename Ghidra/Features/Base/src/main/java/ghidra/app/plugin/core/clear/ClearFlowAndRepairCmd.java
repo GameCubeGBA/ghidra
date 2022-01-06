@@ -190,8 +190,7 @@ public class ClearFlowAndRepairCmd extends BackgroundCommand {
 				SymbolTable symTable = program.getSymbolTable();
                 for (Address ptrDestination : ptrDestinations) {
                     monitor.checkCanceled();
-                    Address addr = ptrDestination;
-                    Symbol[] syms = symTable.getSymbols(addr);
+                    Symbol[] syms = symTable.getSymbols(ptrDestination);
                     for (Symbol sym : syms) {
                         if (sym.getSource() == SourceType.DEFAULT) {
                             break;
@@ -581,8 +580,7 @@ public class ClearFlowAndRepairCmd extends BackgroundCommand {
 
             for (Address start : starts) {
                 monitor.checkCanceled();
-                Address entry = start;
-                CreateFunctionCmd cmd = new CreateFunctionCmd(entry);
+                CreateFunctionCmd cmd = new CreateFunctionCmd(start);
                 cmd.applyTo(program, monitor);
             }
 		}
@@ -718,15 +716,14 @@ public class ClearFlowAndRepairCmd extends BackgroundCommand {
 		FunctionManager functionManager = program.getFunctionManager();
         for (BlockVertex blockVertex : vertexMap.values()) {
             monitor.checkCanceled();
-            BlockVertex v = blockVertex;
-            if (v == startVertex || v.srcVertices.isEmpty()) {
+            if (blockVertex == startVertex || blockVertex.srcVertices.isEmpty()) {
                 continue;
             }
-            Address addr = v.block.getMinAddress();
+            Address addr = blockVertex.block.getMinAddress();
             Instruction instr = listing.getInstructionAt(addr);
             Address fallFrom = instr.getFallFrom();
             if (fallFrom != null && !blockSet.contains(fallFrom)) {
-                prune(v, blockSet);
+                prune(blockVertex, blockSet);
             } else {
                 ReferenceIterator refIter = refMgr.getReferencesTo(addr);
 
@@ -736,7 +733,7 @@ public class ClearFlowAndRepairCmd extends BackgroundCommand {
                 // TODO: maybe even just symbols with no refs to them should be snipped
                 //       code starts at the symbol someone might have disassembled there.
                 if (!refIter.hasNext() && functionManager.getFunctionAt(addr) != null) {
-                    prune(v, blockSet);
+                    prune(blockVertex, blockSet);
                     continue;
                 }
                 while (refIter.hasNext()) {
@@ -746,13 +743,13 @@ public class ClearFlowAndRepairCmd extends BackgroundCommand {
                     RefType refType = ref.getReferenceType();
                     if (refType.isFlow() && !blockSet.contains(fromAddr) &&
                             !clearSet.contains(fromAddr)) {
-                        prune(v, blockSet);
+                        prune(blockVertex, blockSet);
                         break;
                     }
                     // any addr which corresponds to a entry-point function should be snipped
                     if (refType == RefType.EXTERNAL_REF &&
                             functionManager.getFunctionAt(addr) != null) {
-                        prune(v, blockSet);
+                        prune(blockVertex, blockSet);
                         break;
                     }
                 }
@@ -774,9 +771,8 @@ public class ClearFlowAndRepairCmd extends BackgroundCommand {
 			if (!intersect.isEmpty() && !intersect.getMinAddress().equals(blockAddr)) {
 				Address[] entryPts = new Address[1];
 				entryPts[0] = blockAddr;
-				CodeBlock block = new CodeBlockImpl(blockModel, entryPts,
-					new AddressSet(blockAddr, intersect.getMinAddress().subtract(1)));
-				blockToAdjust = block;
+                blockToAdjust = new CodeBlockImpl(blockModel, entryPts,
+                    new AddressSet(blockAddr, intersect.getMinAddress().subtract(1)));
 			}
 		}
 		return blockToAdjust;

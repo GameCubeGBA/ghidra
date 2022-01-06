@@ -458,7 +458,6 @@ public class InjectPayloadSleigh implements InjectPayload {
 		inputs[1] = zero;
 		OpTpl[] ops = new OpTpl[1];
 		ops[0] = new OpTpl(PcodeOp.INT_ADD, temp, inputs);
-		ConstructTpl pcode = new ConstructTpl(ops);
-		return pcode;
+        return new ConstructTpl(ops);
 	}
 }

@@ -1068,8 +1068,7 @@ public class VTAutoVersionTrackingTest extends AbstractGhidraHeadedIntegrationTe
 
 	private Options getCorrelatorOptions(VTSession vtSession, String correlatorName) {
 		VTMatchSet vtMatchSet = getVTMatchSet(vtSession, correlatorName);
-		Options options = vtMatchSet.getProgramCorrelatorInfo().getOptions();
-		return options;
+        return vtMatchSet.getProgramCorrelatorInfo().getOptions();
 	}
 
 	private void assertExpectedOption(Options options, String optionName,

@@ -644,8 +644,7 @@ public class MemSearchPlugin extends Plugin implements OptionsChangeListener,
 				endIndex++; // exact match on end, so include it
 			}
 
-			List<MemSearchResult> resultList = data.subList(startIndex, endIndex);
-			return resultList;
+            return data.subList(startIndex, endIndex);
 		}
 
 		private int findFirstIndex(List<MemSearchResult> list, Address start, Address end) {

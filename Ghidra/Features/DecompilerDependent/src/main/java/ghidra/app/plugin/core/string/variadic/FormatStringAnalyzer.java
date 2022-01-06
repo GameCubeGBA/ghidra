@@ -292,9 +292,7 @@ public class FormatStringAnalyzer extends AbstractAnalyzer {
 						"Format string could not be parsed: " + formatString);
 			return null;
 		}
-		ParameterDefinition[] paramDefs =
-			createParameters(callFunctionName, dataTypes, functionProgram, namesToParameters);
-		return paramDefs;
+        return createParameters(callFunctionName, dataTypes, functionProgram, namesToParameters);
 	}
 
 	private ParameterDefinition[] createParameters(String callFunctionName, DataType[] dataTypes,

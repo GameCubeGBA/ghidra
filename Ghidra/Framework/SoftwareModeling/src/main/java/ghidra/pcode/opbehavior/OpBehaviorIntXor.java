@@ -28,13 +28,11 @@ public class OpBehaviorIntXor extends BinaryOpBehavior {
 
 	@Override
 	public long evaluateBinary(int sizeout, int sizein, long in1, long in2) {
-		long res = in1 ^ in2;
-		return res;
+        return in1 ^ in2;
 	}
 
 	@Override
 	public BigInteger evaluateBinary(int sizeout, int sizein, BigInteger in1, BigInteger in2) {
-		BigInteger res = in1.xor(in2);
-		return res;
+        return in1.xor(in2);
 	}
 }

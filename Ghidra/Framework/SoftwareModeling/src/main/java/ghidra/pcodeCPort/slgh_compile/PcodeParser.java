@@ -349,8 +349,7 @@ public class PcodeParser extends PcodeCompile {
 	@Override
 	public SectionVector standaloneSection(ConstructTpl main) {
 		// Create SectionVector for just the main rtl section with no named sections
-		SectionVector res = new SectionVector(main, null);
-		return res;
+        return new SectionVector(main, null);
 	}
 
 	@Override

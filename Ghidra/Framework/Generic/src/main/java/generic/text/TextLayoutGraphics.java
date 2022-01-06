@@ -42,29 +42,25 @@ public class TextLayoutGraphics extends Graphics2D {
 	private List<TextInfo> textInfos = new ArrayList<>();
 
 	private Comparator<TextInfo> pointComparator = (o1, o2) -> {
-		TextInfo t1 = o1;
-		TextInfo t2 = o2;
 
-		int diff = t1.point.y - t2.point.y;
+        int diff = o1.point.y - o2.point.y;
 		if (diff != 0) {
 			return diff;
 		}
 
-		diff = t1.point.x - t2.point.x;
+		diff = o1.point.x - o2.point.x;
 
 		return diff;
 	};
 
 	private Comparator<TextInfo> rowComparator = (o1, o2) -> {
-		TextInfo t1 = o1;
-		TextInfo t2 = o2;
 
-		int diff = t1.row - t2.row;
+        int diff = o1.row - o2.row;
 		if (diff != 0) {
 			return diff;
 		}
 
-		diff = t1.point.x - t2.point.x;
+		diff = o1.point.x - o2.point.x;
 
 		return diff;
 	};

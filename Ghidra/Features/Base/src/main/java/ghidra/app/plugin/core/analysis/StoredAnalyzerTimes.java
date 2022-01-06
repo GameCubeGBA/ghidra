@@ -163,9 +163,8 @@ public class StoredAnalyzerTimes implements CustomOption {
 	 */
 	public static StoredAnalyzerTimes getStoredAnalyzerTimes(Program program) {
 		Options options = program.getOptions(OPTIONS_LIST);
-		StoredAnalyzerTimes times = (StoredAnalyzerTimes) options
-			.getCustomOption(StoredAnalyzerTimes.OPTION_NAME, new StoredAnalyzerTimes());
-		return times;
+        return (StoredAnalyzerTimes) options
+            .getCustomOption(StoredAnalyzerTimes.OPTION_NAME, new StoredAnalyzerTimes());
 	}
 
 	/**

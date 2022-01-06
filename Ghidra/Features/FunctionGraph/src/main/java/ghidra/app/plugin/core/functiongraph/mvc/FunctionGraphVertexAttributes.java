@@ -81,8 +81,7 @@ public class FunctionGraphVertexAttributes {
 			ObjectPropertyMap groupVertexLocationPropertyMap) {
 
 		Map<FGVertex, Point> map = new HashMap<>();
-		Graph<FGVertex, FGEdge> graph = functionGraph;
-		Collection<FGVertex> vertices = graph.getVertices();
+        Collection<FGVertex> vertices = ((Graph<FGVertex, FGEdge>) functionGraph).getVertices();
 		for (FGVertex vertex : vertices) {
 			SaveablePoint saveablePoint = getPointFromPropertyMap(vertex, vertexLocationPropertyMap,
 				groupVertexLocationPropertyMap);
@@ -158,8 +157,7 @@ public class FunctionGraphVertexAttributes {
 		}
 
 		Map<FGVertex, Color> map = new HashMap<>();
-		Graph<FGVertex, FGEdge> graph = functionGraph;
-		Collection<FGVertex> vertices = graph.getVertices();
+        Collection<FGVertex> vertices = ((Graph<FGVertex, FGEdge>) functionGraph).getVertices();
 		for (FGVertex vertex : vertices) {
 			AddressSetView codeBlock = vertex.getAddresses();
 			Address minAddress = codeBlock.getMinAddress();
@@ -201,8 +199,7 @@ public class FunctionGraphVertexAttributes {
 			return; // nothing to do
 		}
 
-		Graph<FGVertex, FGEdge> graph = functionGraph;
-		Collection<FGVertex> vertices = graph.getVertices();
+        Collection<FGVertex> vertices = ((Graph<FGVertex, FGEdge>) functionGraph).getVertices();
 		for (FGVertex vertex : vertices) {
 			AddressSetView codeBlock = vertex.getAddresses();
 			Address minAddress = codeBlock.getMinAddress();

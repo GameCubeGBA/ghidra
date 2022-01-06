@@ -1528,8 +1528,7 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 
 		SwingUtilities.invokeLater(() -> action.actionPerformed(new ActionContext()));
 		waitForPostedSwingRunnables();
-		ByteViewerOptionsDialog d = env.waitForDialogComponent(ByteViewerOptionsDialog.class, 2000);
-		return d;
+        return env.waitForDialogComponent(ByteViewerOptionsDialog.class, 2000);
 	}
 
 //	private boolean isHeaderShowing() {

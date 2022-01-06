@@ -460,30 +460,28 @@ public class DeleteProjectFilesTaskTest extends AbstractDockingTest {
 		folders = theFolders != null ? theFolders : Collections.emptySet();
 		files = theFiles != null ? theFiles : Collections.emptySet();
 
-		ProjectDataDeleteAction action = new ProjectDataDeleteAction("Owner", "Group") {
+        this.deleteAction = new ProjectDataDeleteAction("Owner", "Group") {
 
-			@Override
-			DeleteProjectFilesTask createDeleteTask(ProjectDataContext context,
-					Set<DomainFile> myFiles, Set<DomainFolder> myFolders, int fileCount) {
+            @Override
+            DeleteProjectFilesTask createDeleteTask(ProjectDataContext context,
+                    Set<DomainFile> myFiles, Set<DomainFolder> myFolders, int fileCount) {
 
-				task = new DeleteProjectFilesTask(myFolders, myFiles, fileCount, null);
-				task.addTaskListener(new TaskListener() {
+                task = new DeleteProjectFilesTask(myFolders, myFiles, fileCount, null);
+                task.addTaskListener(new TaskListener() {
 
-					@Override
-					public void taskCompleted(Task t) {
-						taskEnded.countDown();
-					}
+                    @Override
+                    public void taskCompleted(Task t) {
+                        taskEnded.countDown();
+                    }
 
-					@Override
-					public void taskCancelled(Task t) {
-						taskEnded.countDown();
-					}
-				});
-				return task;
-			}
-		};
-
-		this.deleteAction = action;
+                    @Override
+                    public void taskCancelled(Task t) {
+                        taskEnded.countDown();
+                    }
+                });
+                return task;
+            }
+        };
 	}
 
 	private void runAction() {

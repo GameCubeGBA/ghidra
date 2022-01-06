@@ -297,9 +297,7 @@ public class GnuDemanglerParser {
 		//
 		// Pattern: operator"" _someText(opeartor_params)
 		//
-		String userDefinedLiteral = "\"\"\\s_.+";
-		String extra = userDefinedLiteral;
-		alternated += '|' + extra;
+        alternated += '|' + "\"\"\\s_.+";
 
 		// note: this capture group seems to fail with excessive templating
 		String operatorTemplates = "(<.+>){0,1}";
@@ -591,8 +589,7 @@ public class GnuDemanglerParser {
 	 */
 	private List<DemangledDataType> parseParameters(String parameterString) {
 		List<String> parameterStrings = tokenizeParameters(parameterString);
-		List<DemangledDataType> parameters = convertIntoParameters(parameterStrings);
-		return parameters;
+        return convertIntoParameters(parameterStrings);
 	}
 
 	private List<String> tokenizeParameters(String parameterString) {
@@ -1325,8 +1322,7 @@ public class GnuDemanglerParser {
 		int paramStart = functionString.indexOf('(', parenEnd + 1);
 		int paramEnd = functionString.lastIndexOf(')');
 		String parameters = functionString.substring(paramStart + 1, paramEnd);
-		DemangledFunctionPointer dfp = createFunctionPointer(parameters, returnType);
-		return dfp;
+        return createFunctionPointer(parameters, returnType);
 	}
 
 	private DemangledFunctionPointer parseFunction(String functionString, int offset) {
@@ -1337,9 +1333,7 @@ public class GnuDemanglerParser {
 
 		String returnType = functionString.substring(0, parenStart).trim();
 
-		int paramStart = parenStart;
-		int paramEnd = parenEnd;
-		String parameters = functionString.substring(paramStart + 1, paramEnd);
+        String parameters = functionString.substring(parenStart + 1, parenEnd);
 		DemangledFunctionPointer dfp = createFunctionPointer(parameters, returnType);
 
 		// disable the function pointer display so this type reads like a function
@@ -1485,8 +1479,7 @@ public class GnuDemanglerParser {
 
 		@Override
 		DemangledObject doBuild(Demangled namespace) {
-			DemangledObject demangledObject = parseItemInNamespace(type);
-			return demangledObject;
+            return parseItemInNamespace(type);
 		}
 	}
 
@@ -1522,8 +1515,7 @@ public class GnuDemanglerParser {
 			this.demangled = demangled;
 			this.prefix = prefix;
 
-			String classname = demangled.substring(prefix.length()).trim();
-			this.type = classname;
+            this.type = demangled.substring(prefix.length()).trim();
 		}
 
 		@Override
@@ -1662,14 +1654,13 @@ public class GnuDemanglerParser {
 			String templates = "";
 			boolean hasTemplates = nextCharIs(demangled, start, '<');
 			if (hasTemplates) {
-				int templateStart = start;
-				int templateEnd = findTemplateEnd(demangled, templateStart);
+                int templateEnd = findTemplateEnd(demangled, start);
 				if (templateEnd == -1) {
 					// should not happen
 					Msg.debug(this, "Unable to find template end for operator: " + demangled);
 					return templates;
 				}
-				templates = demangled.substring(templateStart, templateEnd + 1);
+				templates = demangled.substring(start, templateEnd + 1);
 			}
 			return templates;
 		}
@@ -1944,8 +1935,7 @@ public class GnuDemanglerParser {
 			parameters = parseParameters(parameterString);
 
 			// 'prefix' is the text before the parameters
-			int prefixEndPos = paramStart;
-			rawParameterPrefix = signatureString.substring(0, prefixEndPos).trim();
+            rawParameterPrefix = signatureString.substring(0, paramStart).trim();
 
 			CondensedString prefixString = new CondensedString(rawParameterPrefix);
 			String prefix = prefixString.getCondensedText();

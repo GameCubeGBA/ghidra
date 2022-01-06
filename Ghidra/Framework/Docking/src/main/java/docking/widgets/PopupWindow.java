@@ -295,8 +295,7 @@ public class PopupWindow {
 	 * popup to close.
 	 */
 	private Rectangle createMovementArea(Rectangle popupBounds, Rectangle hoverRectangle) {
-		Rectangle result = popupBounds.union(hoverRectangle);
-		return result;
+        return popupBounds.union(hoverRectangle);
 	}
 
 	private void installDebugPainter(MouseEvent e) {

@@ -204,12 +204,11 @@ public abstract class ArtImageSections {
 
             for (ArtField artField : fieldList) {
                 monitor.checkCanceled();
-                ArtField field = artField;
-                DataType dataType = field.toDataType();
+                DataType dataType = artField.toDataType();
                 program.getListing().createData(address, dataType);
 
                 String comment =
-                        "Declaring Class: 0x" + Integer.toHexString(field.getDeclaringClass());
+                        "Declaring Class: 0x" + Integer.toHexString(artField.getDeclaringClass());
                 program.getListing().setComment(address, CodeUnit.PLATE_COMMENT, comment);
 
                 address = address.add(dataType.getLength());
@@ -223,11 +222,10 @@ public abstract class ArtImageSections {
 				program.getMinAddress().getNewAddress(header.getImageBegin() + section.getOffset());
             for (ArtFieldGroup artFieldGroup : fieldGroupList) {
                 monitor.checkCanceled();
-                ArtFieldGroup fieldGroup = artFieldGroup;
-                DataType dataType = fieldGroup.toDataType();
+                DataType dataType = artFieldGroup.toDataType();
                 program.getListing().createData(address, dataType);
-                if (fieldGroup.getFieldCount() > 0) {
-                    ArtField artField = fieldGroup.getFieldList().get(0);
+                if (artFieldGroup.getFieldCount() > 0) {
+                    ArtField artField = artFieldGroup.getFieldList().get(0);
                     String comment =
                             "Declaring Class: 0x" + Integer.toHexString(artField.getDeclaringClass());
                     program.getListing().setComment(address, CodeUnit.PLATE_COMMENT, comment);
@@ -256,11 +254,10 @@ public abstract class ArtImageSections {
             for (ArtMethod artMethod : methodList) {
                 monitor.checkCanceled();
 
-                ArtMethod method = artMethod;
-                DataType dataType = method.toDataType();
+                DataType dataType = artMethod.toDataType();
                 program.getListing().createData(address, dataType);
                 String comment =
-                        "Declaring Class: 0x" + Integer.toHexString(method.getDeclaringClass());
+                        "Declaring Class: 0x" + Integer.toHexString(artMethod.getDeclaringClass());
                 program.getListing().setComment(address, CodeUnit.PLATE_COMMENT, comment);
 
                 address = address.add(dataType.getLength());
@@ -275,11 +272,10 @@ public abstract class ArtImageSections {
             for (ArtMethodGroup artMethodGroup : methodGroupList) {
                 monitor.checkCanceled();
 
-                ArtMethodGroup methodGroup = artMethodGroup;
-                DataType dataType = methodGroup.toDataType();
+                DataType dataType = artMethodGroup.toDataType();
                 program.getListing().createData(address, dataType);
-                if (methodGroup.getMethodCount() > 0) {
-                    ArtMethod artMethod = methodGroup.getMethodList().get(0);
+                if (artMethodGroup.getMethodCount() > 0) {
+                    ArtMethod artMethod = artMethodGroup.getMethodList().get(0);
                     String comment =
                             "Declaring Class: 0x" + Integer.toHexString(artMethod.getDeclaringClass());
                     program.getListing().setComment(address, CodeUnit.PLATE_COMMENT, comment);

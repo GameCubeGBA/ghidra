@@ -350,92 +350,77 @@ public class SampleLocationGenerator implements GhidraLocationGenerator {
 
 	@Override
 	public ProgramLocation[] getRegisterVarCommentLocations() {
-		ProgramLocation[] locs = new ProgramLocation[1];
-		return locs;
+        return new ProgramLocation[1];
 	}
 
 	@Override
 	public ProgramLocation[] getRegisterVarDescriptionLocations() {
-		ProgramLocation[] locs = new ProgramLocation[1];
-		return locs;
+        return new ProgramLocation[1];
 	}
 
 	@Override
 	public ProgramLocation[] getRegisterVarLocations() {
-		ProgramLocation[] locs = new ProgramLocation[1];
-		return locs;
+        return new ProgramLocation[1];
 	}
 
 	@Override
 	public ProgramLocation[] getRegisterVarNameLocations() {
-		ProgramLocation[] locs = new ProgramLocation[1];
-		return locs;
+        return new ProgramLocation[1];
 	}
 
 	@Override
 	public ProgramLocation[] getRegisterVarTypeLocations() {
-		ProgramLocation[] locs = new ProgramLocation[1];
-		return locs;
+        return new ProgramLocation[1];
 	}
 
 	@Override
 	public ProgramLocation[] getSpaceLocations() {
-		ProgramLocation[] locs = new ProgramLocation[1];
-		return locs;
+        return new ProgramLocation[1];
 	}
 
 	@Override
 	public ProgramLocation[] getSpacerLocations() {
-		ProgramLocation[] locs = new ProgramLocation[1];
-		return locs;
+        return new ProgramLocation[1];
 	}
 
 	@Override
 	public ProgramLocation[] getStackVarCommentLocations() {
-		ProgramLocation[] locs = new ProgramLocation[1];
-		return locs;
+        return new ProgramLocation[1];
 	}
 
 	@Override
 	public ProgramLocation[] getStackVarLocations() {
-		ProgramLocation[] locs = new ProgramLocation[1];
-		return locs;
+        return new ProgramLocation[1];
 	}
 
 	@Override
 	public ProgramLocation[] getStackVarNameLocations() {
-		ProgramLocation[] locs = new ProgramLocation[1];
-		return locs;
+        return new ProgramLocation[1];
 	}
 
 	@Override
 	public ProgramLocation[] getStackVarOffsetLocations() {
-		ProgramLocation[] locs = new ProgramLocation[1];
-		return locs;
+        return new ProgramLocation[1];
 	}
 
 	@Override
 	public ProgramLocation[] getStackVarTypeLocations() {
-		ProgramLocation[] locs = new ProgramLocation[1];
-		return locs;
+        return new ProgramLocation[1];
 	}
 
 	@Override
 	public ProgramLocation[] getStackVarXrefLocations() {
-		ProgramLocation[] locs = new ProgramLocation[1];
-		return locs;
+        return new ProgramLocation[1];
 	}
 
 	@Override
 	public ProgramLocation[] getSubDataLocations() {
-		ProgramLocation[] locs = new ProgramLocation[1];
-		return locs;
+        return new ProgramLocation[1];
 	}
 
 	@Override
 	public ProgramLocation[] getXrefLocations() {
-		ProgramLocation[] locs = new ProgramLocation[1];
-		return locs;
+        return new ProgramLocation[1];
 	}
 
 	@Override

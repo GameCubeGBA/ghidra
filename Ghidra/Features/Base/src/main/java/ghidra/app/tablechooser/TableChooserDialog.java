@@ -368,14 +368,12 @@ public class TableChooserDialog extends DialogComponentProvider
 	}
 
 	public int[] getSelectedRows() {
-		int[] selectedRows = table.getSelectedRows();
-		return selectedRows;
+        return table.getSelectedRows();
 	}
 
 	public List<AddressableRowObject> getSelectedRowObjects() {
 		int[] selectedRows = table.getSelectedRows();
-		List<AddressableRowObject> rowObjects = model.getRowObjects(selectedRows);
-		return rowObjects;
+        return model.getRowObjects(selectedRows);
 	}
 
 	public void dispose() {

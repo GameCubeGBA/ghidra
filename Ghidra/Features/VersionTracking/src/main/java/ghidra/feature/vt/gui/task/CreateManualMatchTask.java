@@ -45,9 +45,8 @@ public class CreateManualMatchTask extends VtTask {
 		VTMatchSet manualMatchSet = session.getManualMatchSet();
 		VTMatchInfo manualMatchInfo = createMatch(manualMatchSet);
 		newlyCreatedMatch = manualMatchSet.addMatch(manualMatchInfo);
-		boolean result = runFollowOnTasks(monitor);
 
-		return result;
+        return runFollowOnTasks(monitor);
 	}
 
 	// to be overridden by subclasses to do work in the same transaction

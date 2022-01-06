@@ -134,36 +134,34 @@ public class SetEquateDialog extends DialogComponentProvider {
 		// Red entries are bad equates
 		// Gray entries are suggestions that are not equates
 
-		GhidraTableCellRenderer renderer = new GhidraTableCellRenderer() {
-			@Override
-			public Component getTableCellRendererComponent(GTableCellRenderingData data) {
+        return new GhidraTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(GTableCellRenderingData data) {
 
-				Component c = super.getTableCellRendererComponent(data);
+                Component c = super.getTableCellRendererComponent(data);
 
-				Object rowObject = data.getRowObject();
-				boolean isSelected = data.isSelected();
+                Object rowObject = data.getRowObject();
+                boolean isSelected = data.isSelected();
 
-				EquateRowObject eqRowObject = (EquateRowObject) rowObject;
-				int refCount = eqRowObject.getRefCount();
-				if (refCount > 0) {
-					if (eqRowObject.getEntryName().contains(EquateManager.ERROR_TAG)) {
-						c.setForeground(isSelected ? Color.WHITE : Color.RED);
-					}
-					else {
-						Equate e = eqRowObject.getEquate();
-						if (e != null && !e.isEnumBased()) {
-							c.setForeground(isSelected ? Color.WHITE : Color.BLUE.brighter());
-						}
-					}
-				}
-				else {
-					c.setForeground(isSelected ? Color.WHITE : Color.GRAY.darker());
-				}
-				return c;
-			}
-		};
-
-		return renderer;
+                EquateRowObject eqRowObject = (EquateRowObject) rowObject;
+                int refCount = eqRowObject.getRefCount();
+                if (refCount > 0) {
+                    if (eqRowObject.getEntryName().contains(EquateManager.ERROR_TAG)) {
+                        c.setForeground(isSelected ? Color.WHITE : Color.RED);
+                    }
+                    else {
+                        Equate e = eqRowObject.getEquate();
+                        if (e != null && !e.isEnumBased()) {
+                            c.setForeground(isSelected ? Color.WHITE : Color.BLUE.brighter());
+                        }
+                    }
+                }
+                else {
+                    c.setForeground(isSelected ? Color.WHITE : Color.GRAY.darker());
+                }
+                return c;
+            }
+        };
 	}
 
 	private List<EquateRowObject> getCurrentAndPotentialEquateNames() {
@@ -429,8 +427,7 @@ public class SetEquateDialog extends DialogComponentProvider {
 		}
 
 		// If text field equals only one match, use that match.
-		EquateRowObject match = getMatchFromTable(equateFromFilter);
-        return match;
+        return getMatchFromTable(equateFromFilter);
     }
 
 	private EquateRowObject getMatchFromTable(String name) {
@@ -441,8 +438,7 @@ public class SetEquateDialog extends DialogComponentProvider {
 		//@formatter:on
 
 		if (getMatch.isPresent()) {
-			EquateRowObject rowObject = getMatch.get();
-			return rowObject;
+            return getMatch.get();
 		}
 		return null;
 	}

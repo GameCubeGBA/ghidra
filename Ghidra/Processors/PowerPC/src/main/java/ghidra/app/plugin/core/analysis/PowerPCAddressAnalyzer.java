@@ -140,8 +140,7 @@ public class PowerPCAddressAnalyzer extends ConstantPropagationAnalyzer {
 			AddressSetView flowSet, final SymbolicPropogator symEval, final TaskMonitor monitor)
 			throws CancelledException {
 
-		RegisterValue initR2Value = lookupR2(program, flowStart);
-		final RegisterValue startingR2Value = initR2Value;
+        final RegisterValue startingR2Value = lookupR2(program, flowStart);
 
 		boolean isPEF = PefLoader.PEF_NAME.equals(program.getExecutableFormat());
 

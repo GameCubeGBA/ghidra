@@ -100,8 +100,7 @@ public class DecompilerClipboardProvider extends ByteCopier
 			return null;
 		}
 
-		String text = token.getText();
-		return text;
+        return token.getText();
 	}
 
 	@Override

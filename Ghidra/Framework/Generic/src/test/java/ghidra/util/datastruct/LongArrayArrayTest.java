@@ -65,8 +65,7 @@ public class LongArrayArrayTest extends AbstractGenericTest {
         LongArrayArray baa = new LongArrayArray();
 
         for(int i=0;i<1000;i++) {
-            long t = i;
-            baa.put(i,new long[]{t,(t+1),(t+2),(t+3),(t+4)});
+            baa.put(i,new long[]{(long) i,((long) i +1),((long) i +2),((long) i +3),((long) i +4)});
         }
         for(int i=0;i<1000;i++) {
             long[] b = baa.get(i);
@@ -83,8 +82,7 @@ public class LongArrayArrayTest extends AbstractGenericTest {
         assertEquals(4,baa.starts.length);
         assertEquals(10,baa.longs.length);
         for(int i=0;i<1000;i++) {
-            long t = i;
-            baa.put(i,new long[]{t,(t+1),(t+2),(t+3),(t+4)});
+            baa.put(i,new long[]{(long) i,((long) i +1),((long) i +2),((long) i +3),((long) i +4)});
         }
         for(int i=0;i<1000;i++) {
             long[] b = baa.get(i);

@@ -78,11 +78,8 @@ public class ExternalMergerAddTest extends AbstractExternalMergerTest {
 		// NOTE: this makes the tests faster.  If you need visual debugging, then make this true
 		boolean showListingPanels = false;
 
-		ProgramMultiUserMergeManager mergeManger =
-			new ProgramMultiUserMergeManager(resultProgram, myProgram, originalProgram,
-				latestProgram, resultChangeSet, myChangeSet, showListingPanels);
-
-		return mergeManger;
+        return new ProgramMultiUserMergeManager(resultProgram, myProgram, originalProgram,
+            latestProgram, resultChangeSet, myChangeSet, showListingPanels);
 	}
 
 	@Test

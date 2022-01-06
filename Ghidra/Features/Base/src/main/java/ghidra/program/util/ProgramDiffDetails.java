@@ -857,12 +857,10 @@ public class ProgramDiffDetails {
 	private void compareSubDataTypes(DataType dt1, DataType dt2, StringBuffer buf1,
 			StringBuffer buf2, String indent) {
 		String newIndent = indent + indent1;
-		DataType actualDt1 = dt1;
-		DataType actualDt2 = dt2;
-		if ((actualDt1 != actualDt2) &&
-			((actualDt1 instanceof Structure && actualDt2 instanceof Structure) ||
-				(actualDt1 instanceof Union && actualDt2 instanceof Union))) {
-			compareCompositeComponents((Composite) actualDt1, (Composite) actualDt2, buf1, buf2,
+        if ((dt1 != dt2) &&
+			((dt1 instanceof Structure && dt2 instanceof Structure) ||
+				(dt1 instanceof Union && dt2 instanceof Union))) {
+			compareCompositeComponents((Composite) dt1, (Composite) dt2, buf1, buf2,
 				newIndent);
 		}
 	}
@@ -2386,11 +2384,10 @@ public class ProgramDiffDetails {
 		int p1Len = p1Diff.length();
 		int nameEnd = nameOffset + nameLen;
 		int p1End = p1Offset + p1Len;
-		int spacesBeforeName = nameOffset;
-		int spacesBeforeP1 = p1Offset - nameEnd;
+        int spacesBeforeP1 = p1Offset - nameEnd;
 		int spacesBeforeP2 = p2Offset - p1End;
 
-		addText(getSpaces(spacesBeforeName));
+		addText(getSpaces(nameOffset));
 		if (underline) {
 			underline(name);
 		}

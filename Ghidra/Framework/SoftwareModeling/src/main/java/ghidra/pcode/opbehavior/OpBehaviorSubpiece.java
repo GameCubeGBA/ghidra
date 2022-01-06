@@ -29,8 +29,7 @@ public class OpBehaviorSubpiece extends BinaryOpBehavior {
 
 	@Override
 	public long evaluateBinary(int sizeout, int sizein, long in1, long in2) {
-		long res = (in1 >>> (in2 * 8)) & Utils.calc_mask(sizeout);
-		return res;
+        return (in1 >>> (in2 * 8)) & Utils.calc_mask(sizeout);
 	}
 
 	@Override

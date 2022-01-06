@@ -58,10 +58,9 @@ public class CompoundBackgroundCommand extends BackgroundCommand {
                 setStatusMsg("Cancelled");
                 return false;
             }
-            Command cmd = command;
 
-            if (!cmd.applyTo(obj)) {
-                setStatusMsg(cmd.getStatusMsg());
+            if (!command.applyTo(obj)) {
+                setStatusMsg(command.getStatusMsg());
                 return false;
             }
         }

@@ -449,9 +449,8 @@ public abstract class ThreadedTableModel<ROW_OBJECT, DATA_SOURCE>
                 return filteredList; // cancelled just return what has matches so far
             }
 
-            ROW_OBJECT rowObject = datum;
-            if (filterCopy.acceptsRow(rowObject)) {
-                filteredList.add(rowObject);
+            if (filterCopy.acceptsRow(datum)) {
+                filteredList.add(datum);
             }
             monitor.incrementProgress(1);
         }
@@ -743,15 +742,13 @@ public abstract class ThreadedTableModel<ROW_OBJECT, DATA_SOURCE>
 	@Override
 	public int getViewIndex(ROW_OBJECT t) {
 		// note: this is faster than it sounds
-		int index = filteredData.indexOf(t);
-		return index;
+        return filteredData.indexOf(t);
 	}
 
 	@Override
 	public int getModelIndex(ROW_OBJECT t) {
 		// note: this is faster than it sounds
-		int index = allData.indexOf(t);
-		return index;
+        return allData.indexOf(t);
 	}
 
 	/**

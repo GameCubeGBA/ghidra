@@ -80,11 +80,10 @@ public class FunctionGraphGroupVertices2Test extends AbstractFunctionGraphTest {
 
 		FGData graphData = graphFunction("01002cf5");
 		FunctionGraph functionGraph = graphData.getFunctionGraph();
-		Graph<FGVertex, FGEdge> graph = functionGraph;
 
-		Set<FGVertex> ungroupedVertices =
+        Set<FGVertex> ungroupedVertices =
 			selectVertices(functionGraph, "01002d2b" /* Another Local*/, "01002d1f" /* MyLocal */);
-		Set<FGEdge> ungroupedEdges = getEdges(graph, ungroupedVertices);
+		Set<FGEdge> ungroupedEdges = getEdges(functionGraph, ungroupedVertices);
 		assertEquals("Did not grab all known edges for vertices", 4, ungroupedEdges.size());
 
 		group(ungroupedVertices);
@@ -121,9 +120,8 @@ public class FunctionGraphGroupVertices2Test extends AbstractFunctionGraphTest {
 
 		ungroup(clonedGroupVertex);
 
-		Graph<FGVertex, FGEdge> clonedGraph = clonedFunctionGraph;
-		assertVertexRemoved(clonedGraph, clonedGroupVertex);
-		assertVerticesAdded(clonedGraph, clonedGroupedVertices);
+        assertVertexRemoved(clonedFunctionGraph, clonedGroupVertex);
+		assertVerticesAdded(clonedFunctionGraph, clonedGroupedVertices);
 		assertEdgesAdded(clonedFunctionGraph, clonedUngroupedEdges);
 	}
 

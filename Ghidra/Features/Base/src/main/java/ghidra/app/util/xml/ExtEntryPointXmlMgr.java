@@ -104,10 +104,9 @@ class ExtEntryPointXmlMgr {
             if (monitor.isCancelled()) {
                 throw new CancelledException();
             }
-            Address addr = address;
-            if (set == null || set.contains(addr)) {
+            if (set == null || set.contains(address)) {
                 XmlAttributes attrs = new XmlAttributes();
-                attrs.addAttribute("ADDRESS", addr.toString());
+                attrs.addAttribute("ADDRESS", address.toString());
                 writer.startElement("PROGRAM_ENTRY_POINT", attrs);
                 writer.endElement("PROGRAM_ENTRY_POINT");
             }

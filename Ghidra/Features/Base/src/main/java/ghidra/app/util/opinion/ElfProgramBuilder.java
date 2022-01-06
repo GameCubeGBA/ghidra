@@ -2706,13 +2706,12 @@ class ElfProgramBuilder extends MemorySectionResolver implements ElfLoadHelper {
 					expandStart = endAddr.add(1);
 				}
 
-				long fullSizeBytes = segmentMemorySizeBytes;
-				if (expandStart == null || fullSizeBytes <= loadSizeBytes) {
+                if (expandStart == null || segmentMemorySizeBytes <= loadSizeBytes) {
 					continue; //
 				}
 
 				try {
-					long expandSize = fullSizeBytes - loadSizeBytes;
+					long expandSize = segmentMemorySizeBytes - loadSizeBytes;
 					Address expandEnd = expandStart.addNoWrap(expandSize - 1);
 					AddressSet intersectRange = memory.intersectRange(expandStart, expandEnd);
 					if (!intersectRange.isEmpty()) {

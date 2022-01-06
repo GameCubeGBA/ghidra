@@ -154,9 +154,7 @@ public class FRPathsModel extends AddressBasedTableModel<FRVertex> {
 
 			Address address = reference.getReferent();
 			ProgramLocation location = new ProgramLocation(data, address);
-			PreviewTableCellData preview =
-				previewTableColumn.getValue(location, settings, data, sp);
-			return preview;
+            return previewTableColumn.getValue(location, settings, data, sp);
 		}
 	}
 }

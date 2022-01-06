@@ -243,18 +243,15 @@ public class ReflectionUtilitiesTest {
 	private class NestedTestClass {
 
 		String getCallerFromOneLevel() {
-			String name = ReflectionUtilities.getClassNameOlderThan(NestedTestClass.class);
-			return name;
+            return ReflectionUtilities.getClassNameOlderThan(NestedTestClass.class);
 		}
 
 		String getCallerFromTwoLevels() {
-			String caller = levelTwo();
-			return caller;
+            return levelTwo();
 		}
 
 		private String levelTwo() {
-			String name = ReflectionUtilities.getClassNameOlderThan(NestedTestClass.class);
-			return name;
+            return ReflectionUtilities.getClassNameOlderThan(NestedTestClass.class);
 		}
 	}
 

@@ -129,9 +129,8 @@ public class FidService {
 		}
 
 		FidHasher fidHasher = getHasher(function.getProgram());
-		FidHashQuad hashTriple = fidHasher.hash(function);
 
-		return hashTriple;
+        return fidHasher.hash(function);
 	}
 
 	/**
@@ -146,9 +145,7 @@ public class FidService {
 		if (list == null) {
 			list = Collections.emptyList();
 		}
-		FidHasher fidHasher =
-			new MessageDigestFidHasher(generator, SHORT_HASH_CODE_UNIT_LENGTH, digestFactory, list);
-		return fidHasher;
+        return new MessageDigestFidHasher(generator, SHORT_HASH_CODE_UNIT_LENGTH, digestFactory, list);
 	}
 
 	/**
@@ -164,9 +161,8 @@ public class FidService {
 	public FidProgramSeeker getProgramSeeker(Program program, FidQueryService fidQueryService,
 			float scoreThreshold) throws VersionException, IOException {
 		FidHasher fidHasher = getHasher(program);
-		FidProgramSeeker seeker = new FidProgramSeeker(fidQueryService, program, fidHasher,
-			getShortHashCodeUnitLength(), getMediumHashCodeUnitLengthLimit(), scoreThreshold);
-		return seeker;
+        return new FidProgramSeeker(fidQueryService, program, fidHasher,
+            getShortHashCodeUnitLength(), getMediumHashCodeUnitLengthLimit(), scoreThreshold);
 	}
 
 	/**
@@ -217,8 +213,7 @@ public class FidService {
 			float scoreThreshold, TaskMonitor monitor)
 			throws CancelledException, VersionException, IOException {
 		FidProgramSeeker seeker = getProgramSeeker(program, queryService, scoreThreshold);
-		List<FidSearchResult> searchResult = seeker.search(monitor);
-		return searchResult;
+        return seeker.search(monitor);
 	}
 
 	/**

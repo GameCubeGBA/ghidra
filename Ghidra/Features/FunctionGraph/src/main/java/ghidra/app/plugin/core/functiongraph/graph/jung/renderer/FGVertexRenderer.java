@@ -36,8 +36,7 @@ public class FGVertexRenderer extends VisualVertexRenderer<FGVertex, FGEdge> {
 		Rectangle bounds = shape.getBounds();
 		if (vertex instanceof GroupedFunctionGraphVertex) {
 			// paint depth images offset from main vertex
-			Rectangle originalBounds = bounds;
-			Rectangle paintBounds = (Rectangle) originalBounds.clone();
+            Rectangle paintBounds = (Rectangle) bounds.clone();
 			Set<FGVertex> vertices = ((GroupedFunctionGraphVertex) vertex).getVertices();
 			int offset = 15;
 			int size = vertices.size();
@@ -47,8 +46,8 @@ public class FGVertexRenderer extends VisualVertexRenderer<FGVertex, FGEdge> {
 			}
 			int currentOffset = offset * size;
 			for (int i = size - 1; i >= 0; i--) {
-				paintBounds.x = originalBounds.x + currentOffset;
-				paintBounds.y = originalBounds.y + currentOffset;
+				paintBounds.x = bounds.x + currentOffset;
+				paintBounds.y = bounds.y + currentOffset;
 				currentOffset -= offset;
 				super.paintDropShadow(rc, g, paintBounds);
 			}

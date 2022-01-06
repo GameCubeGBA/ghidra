@@ -75,10 +75,9 @@ public class OpTemplate implements Serializable {
 			Varnode ptr = in[1];
 			if (ptr.isConstant()) {
 				Varnode space = in[0];
-				Varnode dest = out;
-				Address addr = addressFactory.getAddress((int) space.getOffset(),ptr.getOffset());
+                Address addr = addressFactory.getAddress((int) space.getOffset(),ptr.getOffset());
 				in = new Varnode[1];
-				in[0] = new Varnode(addr,dest.getSize());
+				in[0] = new Varnode(addr, out.getSize());
 				opc = PcodeOp.COPY;
 			}
 		}

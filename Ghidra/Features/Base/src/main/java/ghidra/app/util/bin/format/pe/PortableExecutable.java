@@ -187,8 +187,7 @@ public class PortableExecutable {
 		if (alignment == 0 || (value % alignment) == 0) {
 			return value;
 		}
-		int a = ((value + alignment) / alignment) * alignment;
-		return a;
+        return ((value + alignment) / alignment) * alignment;
 	}
 	
 	public long getFileLength() {

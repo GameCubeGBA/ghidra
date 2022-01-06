@@ -285,8 +285,7 @@ public class FieldFormatModel {
 
 		for (Row value : rows) {
 			Element rowElem = new Element("ROW");
-			Row row = value;
-			FieldFactory[] rowFactorys = row.getFactorys();
+            FieldFactory[] rowFactorys = value.getFactorys();
 			for (FieldFactory ff : rowFactorys) {
 				Element colElem = new Element("FIELD");
 

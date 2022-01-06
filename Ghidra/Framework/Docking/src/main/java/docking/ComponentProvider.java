@@ -781,8 +781,7 @@ public abstract class ComponentProvider implements HelpDescriptor, ActionContext
 	private String getInceptionFromTheFirstClassThatIsNotUs() {
 		Throwable t = ReflectionUtilities.createThrowableWithStackOlderThan(getClass());
 		StackTraceElement[] trace = t.getStackTrace();
-		String classInfo = trace[0].toString();
-		return classInfo;
+        return trace[0].toString();
 	}
 
 	/**

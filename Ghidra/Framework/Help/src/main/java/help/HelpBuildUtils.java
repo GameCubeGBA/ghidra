@@ -278,10 +278,9 @@ public class HelpBuildUtils {
 	}
 
 	private static String fixLinksInFile(Path helpFile, String fileContents) {
-		String updatedContents = fixRelativeLink(HREF_PATTERN, helpFile, fileContents);
 
-		// not sure if more types to come
-		return updatedContents;
+        // not sure if more types to come
+		return fixRelativeLink(HREF_PATTERN, helpFile, fileContents);
 	}
 
 	private static String fixRelativeLink(Pattern pattern, Path helpFile, String fileContents) {
@@ -320,8 +319,7 @@ public class HelpBuildUtils {
 	}
 
 	private static String resolveLink(String linkTextReference) {
-		String helpTopicsPrefix = HELP_TOPICS_ROOT_PATH;
-		if (linkTextReference.startsWith(helpTopicsPrefix)) {
+        if (linkTextReference.startsWith(HELP_TOPICS_ROOT_PATH)) {
 			// this is what we prefer
 			return linkTextReference;
 		}
@@ -582,8 +580,7 @@ public class HelpBuildUtils {
 		}
 
 		// non-remote/local path
-		Path refPath = createPathFromURI(sourceFile, resolved);
-		return refPath;
+        return createPathFromURI(sourceFile, resolved);
 	}
 
 	private static Path createPathFromURI(Path sourceFile, URI resolved) throws URISyntaxException {

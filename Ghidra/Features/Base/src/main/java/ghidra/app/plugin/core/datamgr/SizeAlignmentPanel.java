@@ -141,8 +141,7 @@ public class SizeAlignmentPanel extends JPanel {
 				catch (NoValueException e) {
 					// Actually don't want to find a value so we can set one below.
 				}
-				int alignment = size; // Set the alignment to match the size initially.
-				dataOrganization.setSizeAlignment(size, alignment);
+                dataOrganization.setSizeAlignment(size, size);
 				fireTableDataChanged();
 			}
 		}

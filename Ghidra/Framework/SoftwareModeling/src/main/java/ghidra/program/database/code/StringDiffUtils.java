@@ -121,8 +121,7 @@ class StringDiffUtils {
 
 		List<Line> toDo = list.subList(start, end);
 		boolean newlineNeeded = true; // we are at the end--need a newline
-		StringDiff insert = createInsert(toDo, insertIndex, newlineNeeded);
-		return insert;
+        return createInsert(toDo, insertIndex, newlineNeeded);
 	}
 
 	private static StringDiff createInsert(List<Line> lines, int insertIndex) {
@@ -158,8 +157,7 @@ class StringDiffUtils {
 
 		List<Line> toDo = list.subList(start, end);
 		boolean includeLastNewline = false; // we are at the end--do not include artificial newline
-		StringDiff delete = createDelete(toDo, includeLastNewline);
-		return delete;
+        return createDelete(toDo, includeLastNewline);
 	}
 
 	private static StringDiff createDelete(List<Line> lines) {

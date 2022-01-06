@@ -98,8 +98,7 @@ public abstract class AbstractDecompilerTest extends AbstractProgramBasedTest {
 	}
 
 	protected FieldLocation loc(int lineNumber, int col) {
-		FieldLocation loc = new FieldLocation(lineNumber - 1, 0, 0, col);
-		return loc;
+        return new FieldLocation(lineNumber - 1, 0, 0, col);
 	}
 
 	protected ClangTextField getFieldForLine(int lineNumber) {
@@ -138,8 +137,7 @@ public abstract class AbstractDecompilerTest extends AbstractProgramBasedTest {
 	protected ClangToken getToken(DecompilerProvider theProvider, FieldLocation loc) {
 		int lineNumber = loc.getIndex().intValue() + 1; // 0-based
 		ClangTextField field = getFieldForLine(theProvider, lineNumber);
-		ClangToken token = field.getToken(loc);
-		return token;
+        return field.getToken(loc);
 	}
 
 	protected DecompilerPanel getDecompilerPanel() {

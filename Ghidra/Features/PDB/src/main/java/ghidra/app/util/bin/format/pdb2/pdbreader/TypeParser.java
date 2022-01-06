@@ -67,8 +67,7 @@ public class TypeParser {
 	 * @throws CancelledException Upon user cancellation.
 	 */
 	public MsTypeField parseField(PdbByteReader reader) throws PdbException, CancelledException {
-		MsTypeField result = parse(reader, MsTypeField.class);
-		return result;
+        return parse(reader, MsTypeField.class);
 	}
 
 	/**
@@ -79,8 +78,7 @@ public class TypeParser {
 	 * @throws CancelledException Upon user cancellation.
 	 */
 	public AbstractMsType parse(PdbByteReader reader) throws PdbException, CancelledException {
-		AbstractMsType result = parse(reader, AbstractMsType.class);
-		return result;
+        return parse(reader, AbstractMsType.class);
 	}
 
 	/**

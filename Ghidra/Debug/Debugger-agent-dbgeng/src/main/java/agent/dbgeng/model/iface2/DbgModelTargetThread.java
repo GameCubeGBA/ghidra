@@ -47,8 +47,7 @@ public interface DbgModelTargetThread extends //
 			}
 			DbgModelTargetProcess parentProcess = getParentProcess();
 			DbgProcessImpl process = (DbgProcessImpl) parentProcess.getProcess();
-			DbgThreadImpl thread = manager.getThreadComputeIfAbsent(id, process, tid);
-			return thread;
+            return manager.getThreadComputeIfAbsent(id, process, tid);
 		}
 		catch (IllegalArgumentException e) {
 			return manager.getCurrentThread();

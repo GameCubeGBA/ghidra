@@ -130,9 +130,8 @@ public class CustomFavoritesView extends FavoritesView {
 
 		private void resendNewEventWithFixedTitle(HelpModelEvent originalEvent, String title) {
 
-			HelpModelEvent e = originalEvent;
-			HelpModelEvent newEvent =
-				new HelpModelEvent(e.getSource(), e.getID(), e.getURL(), title, favorites);
+            HelpModelEvent newEvent =
+				new HelpModelEvent(originalEvent.getSource(), originalEvent.getID(), originalEvent.getURL(), title, favorites);
 			idChanged(newEvent);
 		}
 

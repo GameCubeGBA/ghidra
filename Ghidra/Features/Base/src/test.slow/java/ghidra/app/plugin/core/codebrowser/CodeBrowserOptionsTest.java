@@ -1040,9 +1040,7 @@ public class CodeBrowserOptionsTest extends AbstractGhidraHeadedIntegrationTest 
 	private boolean isValidHelpLocation(HelpLocation helpLocation) {
 
 		HelpService help = Help.getHelpService();
-		boolean isValid =
-			(boolean) TestUtils.invokeInstanceMethod("isValidHelpLocation", help, helpLocation);
-		return isValid;
+        return (boolean) TestUtils.invokeInstanceMethod("isValidHelpLocation", help, helpLocation);
 	}
 
 	enum DUMMY {

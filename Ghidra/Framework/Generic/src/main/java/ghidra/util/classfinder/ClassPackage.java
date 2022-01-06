@@ -96,8 +96,7 @@ class ClassPackage extends ClassLocation {
 
         for (ClassPackage child : children) {
             monitor.checkCanceled();
-            ClassPackage subPkg = child;
-            subPkg.getClasses(set, monitor);
+            child.getClasses(set, monitor);
         }
 	}
 

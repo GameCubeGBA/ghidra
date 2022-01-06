@@ -72,8 +72,7 @@ public class GHelpClassLoader extends ClassLoader {
 	private URL findInJarFile(String name) {
 
 		// installation/release usage--data is inside of a jar file
-		URL URL = ResourceManager.getResource("help/" + name);
-        return URL;
+        return ResourceManager.getResource("help/" + name);
     }
 
 	private URL findInModuleDirectory(String name) {

@@ -141,8 +141,7 @@ public abstract class AbstractGhidraHeadlessIntegrationTest extends AbstractDock
 			throw new IllegalArgumentException("null consumer not permitted");
 		}
 		ProgramBuilder builder = new ProgramBuilder(name, languageString, consumer);
-		ProgramDB p = builder.getProgram();
-		return p;
+        return builder.getProgram();
 	}
 
 	/**
@@ -160,8 +159,7 @@ public abstract class AbstractGhidraHeadlessIntegrationTest extends AbstractDock
 			throw new IllegalArgumentException("null consumer not permitted");
 		}
 		ProgramBuilder builder = new ProgramBuilder(name, languageString, compilerSpecID, consumer);
-		ProgramDB p = builder.getProgram();
-		return p;
+        return builder.getProgram();
 	}
 
 	/**

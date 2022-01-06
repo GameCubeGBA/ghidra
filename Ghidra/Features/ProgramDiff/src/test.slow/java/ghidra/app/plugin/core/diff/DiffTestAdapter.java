@@ -576,10 +576,9 @@ public class DiffTestAdapter extends AbstractGhidraHeadedIntegrationTest {
 		openProgram(p);
 		waitForSwing();
 
-		Program pgm = p;
-		addrFactory = pgm.getAddressFactory();
+        addrFactory = ((Program) p).getAddressFactory();
 		space = addrFactory.getDefaultAddressSpace();
-		return pgm;
+		return p;
 	}
 
 	void closeProgram() {
@@ -1138,16 +1137,13 @@ public class DiffTestAdapter extends AbstractGhidraHeadedIntegrationTest {
 	}
 
 	JTree getProgramTree() {
-		JTree tree = findComponent(programTreeProvider.getComponent(), JTree.class);
-		return tree;
+        return findComponent(programTreeProvider.getComponent(), JTree.class);
 	}
 
 	public DomainFile restoreProgram(Program p)
 			throws InvalidNameException, CancelledException, IOException {
 
-		DomainFolder rootFolder = env.getProject().getProjectData().getRootFolder();
-		DomainFolder parent = rootFolder;
-		return parent.createFile(p.getName(), p, TaskMonitor.DUMMY);
+        return env.getProject().getProjectData().getRootFolder().createFile(p.getName(), p, TaskMonitor.DUMMY);
 	}
 //==================================================================================================
 // Inner Classes

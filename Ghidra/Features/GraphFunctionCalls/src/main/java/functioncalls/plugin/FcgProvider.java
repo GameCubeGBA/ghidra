@@ -833,9 +833,7 @@ public class FcgProvider
 		Set<FunctionEdge> edges = edgeCache.get(f);
 		Iterable<FunctionEdge> filtered =
 			IterableUtils.filteredIterable(edges, e -> isCalledFunction(f, e));
-		Iterable<Function> functions =
-			IterableUtils.transformedIterable(filtered, e -> e.getStart());
-		return functions;
+        return IterableUtils.transformedIterable(filtered, e -> e.getStart());
 	}
 
 	private Iterable<Function> getCallerFunctions(Function f) {
@@ -848,8 +846,7 @@ public class FcgProvider
 		Set<FunctionEdge> edges = edgeCache.get(f);
 		Iterable<FunctionEdge> filtered =
 			IterableUtils.filteredIterable(edges, e -> isCallingFunction(f, e));
-		Iterable<Function> functions = IterableUtils.transformedIterable(filtered, e -> e.getEnd());
-		return functions;
+        return IterableUtils.transformedIterable(filtered, e -> e.getEnd());
 	}
 
 	private boolean isCallingFunction(Function f, FunctionEdge e) {

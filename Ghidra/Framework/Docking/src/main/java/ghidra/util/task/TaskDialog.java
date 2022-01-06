@@ -200,9 +200,8 @@ public class TaskDialog extends DialogComponentProvider implements TaskMonitor {
 	 * @return true if the task should be cancelled
 	 */
 	private boolean promptToVerifyCancel() {
-		boolean userSaysYes = OptionDialog.showYesNoDialog(getComponent(), "Cancel?",
-			"Do you really want to cancel \"" + getTitle() + "\"?") == OptionDialog.OPTION_ONE;
-		return userSaysYes;
+        return OptionDialog.showYesNoDialog(getComponent(), "Cancel?",
+            "Do you really want to cancel \"" + getTitle() + "\"?") == OptionDialog.OPTION_ONE;
 	}
 
 	private boolean isInstalled(Component c) {

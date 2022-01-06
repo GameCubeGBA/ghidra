@@ -154,8 +154,7 @@ public class SleighAssemblerBuilder implements AssemblerBuilder {
 	@Override
 	public SleighAssembler getAssembler(AssemblySelector selector) {
 		generateAssembler();
-		SleighAssembler asm = new SleighAssembler(selector, lang, parser, defaultContext, ctxGraph);
-		return asm;
+        return new SleighAssembler(selector, lang, parser, defaultContext, ctxGraph);
 	}
 
 	@Override

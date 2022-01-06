@@ -229,9 +229,7 @@ public class HighParamID extends PcodeSyntaxTree {
 	static public XmlPullParser stringTree(String xml, ErrorHandler handler)
 			throws PcodeXMLException {
 		try {
-			XmlPullParser parser =
-				XmlPullParserFactory.create(xml, "Decompiler Result Parser", handler, false);
-			return parser;
+            return XmlPullParserFactory.create(xml, "Decompiler Result Parser", handler, false);
 		}
 		catch (Exception e) {
 			throw new PcodeXMLException("XML parsing error: " + e.getMessage(), e);

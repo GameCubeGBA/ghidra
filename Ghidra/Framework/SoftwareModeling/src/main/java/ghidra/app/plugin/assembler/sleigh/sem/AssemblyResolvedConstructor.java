@@ -336,9 +336,8 @@ public class AssemblyResolvedConstructor extends AssemblyResolution {
 	 * NOTE: An additional separator {@code ": "} is inserted
 	 */
 	public AssemblyResolvedConstructor copyAppendDescription(String append) {
-		AssemblyResolvedConstructor cp = new AssemblyResolvedConstructor(
-			description + ": " + append, children, ins.copy(), ctx.copy(), backfills, forbids);
-		return cp;
+        return new AssemblyResolvedConstructor(
+            description + ": " + append, children, ins.copy(), ctx.copy(), backfills, forbids);
 	}
 
 	/**

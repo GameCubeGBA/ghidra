@@ -23,8 +23,7 @@ import ghidra.program.model.pcode.PcodeOpAST;
 public class GraphSelectedAST extends GraphAST {
 	
 	protected Iterator<PcodeOpAST> getPcodeOpIterator() {
-		Iterator<PcodeOpAST> opiter = high.getPcodeOps(this.currentAddress);
-		return opiter;
+        return high.getPcodeOps(this.currentAddress);
 	}
   
 }

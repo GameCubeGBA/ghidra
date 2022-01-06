@@ -185,8 +185,7 @@ public abstract class ClangHighlightController {
 
 	public Set<HighlightToken> getSecondaryHighlightsByFunction(
 			ghidra.program.model.listing.Function f) {
-		Set<HighlightToken> highlights = secondaryHighlightTokens.getHighlightsByFunction(f);
-		return highlights;
+        return secondaryHighlightTokens.getHighlightsByFunction(f);
 	}
 
 	public void removeSecondaryHighlights(ghidra.program.model.listing.Function f) {

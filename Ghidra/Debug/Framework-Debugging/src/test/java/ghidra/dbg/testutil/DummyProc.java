@@ -56,8 +56,7 @@ public class DummyProc implements AutoCloseable {
 	}
 
 	public static DummyProc run(String... args) throws IOException {
-		DummyProc proc = new DummyProc(args);
-		return proc;
+        return new DummyProc(args);
 	}
 
 	DummyProc(String... args) throws IOException {

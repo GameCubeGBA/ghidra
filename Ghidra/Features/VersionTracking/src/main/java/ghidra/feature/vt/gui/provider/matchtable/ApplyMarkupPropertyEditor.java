@@ -208,9 +208,8 @@ public class ApplyMarkupPropertyEditor implements OptionsEditor {
 
 		// TODO More needs to be done with the layout here.
 		panel.setBorder(BorderFactory.createTitledBorder("Apply Markup Options"));
-		JScrollPane scrollPane = new JScrollPane(panel);
 
-		return scrollPane;
+        return new JScrollPane(panel);
 	}
 
 	private Component createSeparator() {

@@ -90,8 +90,7 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 				return null;
 			}
 
-			Address possiblePointer = address.getNewAddress(offset);
-			return possiblePointer;
+            return address.getNewAddress(offset);
 
 		}
 		catch (MemoryAccessException e) {
@@ -229,8 +228,7 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 
 		//if function is a thunk, get the thunked function					
 		if (function.isThunk()) {
-			Function thunkedFunction = function.getThunkedFunction(true);
-			function = thunkedFunction;
+            function = function.getThunkedFunction(true);
 		}
 		return function;
 	}
@@ -263,8 +261,7 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 	 */
 	public Address getAddress(Address address, int offset) {
 		try {
-			Address newAddress = address.add(offset);
-			return newAddress;
+            return address.add(offset);
 		}
 		catch (AddressOutOfBoundsException e) {
 			return null;
@@ -343,9 +340,7 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 			disassemble(functionStart);
 		}
 
-		Function function = createFunction(functionStart, null);
-
-		return function;
+        return (Function) createFunction(functionStart, null);
 	}
 
 	public Byte determineFillerByte() throws CancelledException, MemoryAccessException {
@@ -448,24 +443,23 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 
         for (Address containedAddress : containedAddresses) {
             monitor.checkCanceled();
-            Address address = containedAddress;
 
             // a previously created one might call the one that contains this so
             // it may have already been created - if so, skip
-            Function functionContaining = getFunctionContaining(address);
+            Function functionContaining = getFunctionContaining(containedAddress);
             if (functionContaining != null) {
                 continue;
             }
 
-            Function newFunction = createFunctionBefore(address, filler);
+            Function newFunction = createFunctionBefore(containedAddress, filler);
             if (newFunction == null) {
                 //println("Can't find function containing " + address.toString());
                 continue;
             }
 
             AddressSetView functionBody = newFunction.getBody();
-            while (!functionBody.contains(address)) {
-                newFunction = createFunctionBefore(address, filler);
+            while (!functionBody.contains(containedAddress)) {
+                newFunction = createFunctionBefore(containedAddress, filler);
                 if (newFunction == null) {
                     continue;
                 }
@@ -599,8 +593,7 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 				new DumbMemBufferImpl(currentProgram.getMemory(), address);
 			Object value = ibo32.getValue(compMemBuffer, ibo32.getDefaultSettings(), length);
 			if (value instanceof Address) {
-				Address iboAddress = (Address) value;
-				return iboAddress;
+                return (Address) value;
 			}
 			return null;
 		}
@@ -666,8 +659,7 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 
         for (Function function : bFunctions) {
             monitor.checkCanceled();
-            Function bFunction = function;
-            if (doesFunctionACallFunctionB(aFunction, bFunction)) {
+            if (doesFunctionACallFunctionB(aFunction, function)) {
                 return true;
             }
         }
@@ -727,9 +719,8 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 			// add them to list of ref address pairs
             for (Address address : referencesToFunctionBFromFunctionA) {
                 monitor.checkCanceled();
-                Address sourceRefAddr = address;
                 referenceAddressPairs.add(
-                        new ReferenceAddressPair(sourceRefAddr, calledFunction.getEntryPoint()));
+                        new ReferenceAddressPair(address, calledFunction.getEntryPoint()));
             }
 		}
 
@@ -889,8 +880,7 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 		List<Address> referenceAddresses = new ArrayList<Address>(referenceToClassMap.keySet());
         for (Address address : referenceAddresses) {
             monitor.checkCanceled();
-            Address referenceAddress = address;
-            Address referencedAddress = getSingleReferencedAddress(referenceAddress);
+            Address referencedAddress = getSingleReferencedAddress(address);
             if (referencedAddress == null) {
                 continue;
             }
@@ -898,7 +888,7 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 
             // skip the ones that reference a vftable
             if (function != null) {
-                referencesToFunctions.add(referenceAddress);
+                referencesToFunctions.add(address);
             }
         }
 
@@ -1143,14 +1133,13 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 		// template name to class var
         for (RecoveredClass value : recoveredClasses) {
             monitor.checkCanceled();
-            RecoveredClass recoveredClass = value;
 
-            String className = recoveredClass.getName();
+            String className = value.getName();
 
             if (containsTemplate(className)) {
                 String shortenedName = removeTemplate(className) + "<...>";
-                recoveredClass.addShortenedTemplatedName(shortenedName);
-                classesWithTemplates.add(recoveredClass);
+                value.addShortenedTemplatedName(shortenedName);
+                classesWithTemplates.add(value);
             }
         }
 
@@ -1161,14 +1150,13 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 
         for (RecoveredClass classesWithTemplate : classesWithTemplates) {
             monitor.checkCanceled();
-            RecoveredClass currentClass = classesWithTemplate;
 
             // skip if already processed
-            if (!classesToProcess.contains(currentClass)) {
+            if (!classesToProcess.contains(classesWithTemplate)) {
                 continue;
             }
 
-            String currentShortenedName = currentClass.getShortenedTemplateName();
+            String currentShortenedName = classesWithTemplate.getShortenedTemplateName();
 
             // if removing the middle of template results in unique name then keep that name and
             // remove class from list to process
@@ -1176,7 +1164,7 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
                     getClassesWithSameShortenedName(classesToProcess, currentShortenedName);
 
             if (classesWithSameShortenedName.size() == 1) {
-                classesToProcess.remove(currentClass);
+                classesToProcess.remove(classesWithTemplate);
                 continue;
             }
 
@@ -1225,9 +1213,8 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
                 for (RecoveredClass aClass : leftoversWithSameShortName) {
 
                     monitor.checkCanceled();
-                    RecoveredClass currentClassWithSameShortName = aClass;
-                    currentClassWithSameShortName.addShortenedTemplatedName(
-                            getNewShortenedTemplateName(currentClassWithSameShortName, commaIndex));
+                    aClass.addShortenedTemplatedName(
+                            getNewShortenedTemplateName(aClass, commaIndex));
                 }
 
                 // now iterate and see if any are unique and if so remove from list
@@ -1238,10 +1225,9 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
                 for (RecoveredClass recoveredClass : leftovers2WithSameShortName) {
 
                     monitor.checkCanceled();
-                    RecoveredClass currentClassWithSameShortName = recoveredClass;
 
                     String shortenedTemplateName =
-                            currentClassWithSameShortName.getShortenedTemplateName();
+                            recoveredClass.getShortenedTemplateName();
 
                     List<RecoveredClass> classesWithSameShortName =
                             getClassesWithSameShortenedName(classesToProcess, shortenedTemplateName);
@@ -1294,8 +1280,7 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 			commaIndex--;
 		}
 
-		String shortenedName = className.substring(0, nextComma) + " ...>";
-		return shortenedName;
+        return className.substring(0, nextComma) + " ...>";
 	}
 
 	public List<RecoveredClass> getClassesWithSameShortenedName(
@@ -1305,10 +1290,9 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 
         for (RecoveredClass templateClass : templateClasses) {
             monitor.checkCanceled();
-            RecoveredClass currentClass = templateClass;
 
-            if (currentClass.getShortenedTemplateName().equals(shortenedName)) {
-                classesWithSameShortenedName.add(currentClass);
+            if (templateClass.getShortenedTemplateName().equals(shortenedName)) {
+                classesWithSameShortenedName.add(templateClass);
             }
         }
 		return classesWithSameShortenedName;

@@ -111,8 +111,7 @@ public abstract class AbstractBinaryExpressionSolver<T extends BinaryExpression>
 		MaskedLong lval = solver.getValue(exp.getLeft(), vals, res, cur);
 		MaskedLong rval = solver.getValue(exp.getRight(), vals, res, cur);
 		if (lval != null && rval != null) {
-			MaskedLong cval = compute(lval, rval);
-			return cval;
+            return compute(lval, rval);
 		}
 		return null;
 	}

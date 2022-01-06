@@ -138,9 +138,7 @@ public class ByteSequenceRowObject {
 				}
 			}
 		}
-		FilteredBytesAndDisassembly fAndD =
-			new FilteredBytesAndDisassembly(filteredByteStrings, disassembly);
-		return fAndD;
+        return new FilteredBytesAndDisassembly(filteredByteStrings, disassembly);
 	}
 
 	//get all of the byte strings of PatternType type in fInfo

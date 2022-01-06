@@ -62,14 +62,13 @@ class IntelHexMemImage {
 			final byte[] data = record.getData();
 			switch (record.getRecordType()) {
 				case IntelHexRecord.DATA_RECORD_TYPE:
-					final int rangeStartOffset = loadOffset;
-					final int rangeEndOffset = loadOffset + data.length - 1;
-					final Address rangeStart = base.addWrap(rangeStartOffset);
+                    final int rangeEndOffset = loadOffset + data.length - 1;
+					final Address rangeStart = base.addWrap(loadOffset);
 					final Address rangeEnd = base.addWrap(rangeEndOffset);
 					if (rangeEnd.compareTo(rangeStart) < 0) {
 						// split the range
 						final long firstRangeEndOffset =
-							findWrapPoint(rangeStartOffset, rangeEndOffset);
+							findWrapPoint(loadOffset, rangeEndOffset);
 						final Address firstRangeEnd = base.addWrap(firstRangeEndOffset);
 						final AddressRange firstRange =
 							new AddressRangeImpl(rangeStart, firstRangeEnd);

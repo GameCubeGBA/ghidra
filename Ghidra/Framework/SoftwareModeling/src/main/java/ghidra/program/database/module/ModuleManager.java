@@ -348,10 +348,9 @@ class ModuleManager {
 
             for (FragmentHolder fragmentHolder : list) {
                 monitor.checkCanceled();
-                FragmentHolder fh = fragmentHolder;
-                fragMap.paintRange(fh.range.getMinAddress(), fh.range.getMaxAddress(),
-                        new LongField(fh.frag.getKey()));
-                fh.frag.addRange(fh.range);
+                fragMap.paintRange(fragmentHolder.range.getMinAddress(), fragmentHolder.range.getMaxAddress(),
+                        new LongField(fragmentHolder.frag.getKey()));
+                fragmentHolder.frag.addRange(fragmentHolder.range);
             }
 			treeMgr.updateTreeRecord(record);
 

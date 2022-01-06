@@ -245,8 +245,7 @@ public class DiscoverableTableUtils {
 
 		Class<M> destinationType = mapper.getDestinationType();
 		Collection<ColumnConstraint<M>> unmapped = getColumnConstraints(destinationType);
-		Collection<ColumnConstraint<T>> mapped = mapConstraints(mapper, unmapped);
-		return mapped;
+        return mapConstraints(mapper, unmapped);
 	}
 
 	/**

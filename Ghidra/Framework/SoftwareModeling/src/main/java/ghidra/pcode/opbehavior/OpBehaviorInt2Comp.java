@@ -30,8 +30,7 @@ public class OpBehaviorInt2Comp extends UnaryOpBehavior {
 
 	@Override
 	public long evaluateUnary(int sizeout, int sizein, long in1) {
-		long res = Utils.uintb_negate(in1 - 1, sizein);
-		return res;
+        return Utils.uintb_negate(in1 - 1, sizein);
 	}
 
 	@Override
@@ -39,7 +38,6 @@ public class OpBehaviorInt2Comp extends UnaryOpBehavior {
 		if (in1.signum() < 0) {
 			throw new AssertException("Expected unsigned in value");
 		}
-		BigInteger res = in1.negate();
-		return res;
+        return in1.negate();
 	}
 }

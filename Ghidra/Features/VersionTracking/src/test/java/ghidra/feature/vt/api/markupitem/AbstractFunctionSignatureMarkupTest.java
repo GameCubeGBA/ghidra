@@ -416,8 +416,7 @@ public abstract class AbstractFunctionSignatureMarkupTest
 		Collection<VTMatch> matches = vtMatchSet.getMatches(source, destination);
 		VTMatch[] matchesArray = matches.toArray(new VTMatch[matches.size()]);
 		assertTrue(matchesArray.length > 0);
-		VTMatch vtMatch = matchesArray[0];
-		return vtMatch;
+        return matchesArray[0];
 	}
 
 	protected void removeParameter(Function function, int ordinal) {

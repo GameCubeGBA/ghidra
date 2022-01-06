@@ -632,11 +632,10 @@ public class FunctionPlugin extends Plugin implements DataService {
 				throw new IllegalArgumentException("invalid stack offset for variable type");
 			}
 			for (Variable var2 : vars) {
-				Variable v = var2;
-				int voff = v.getStackOffset();
+                int voff = var2.getStackOffset();
 				if (voff < 0) {
-					if (v.getFirstUseOffset() == fuOffset && voff > offset) {
-						if (isParam || !Undefined.isUndefined(v.getDataType())) {
+					if (var2.getFirstUseOffset() == fuOffset && voff > offset) {
+						if (isParam || !Undefined.isUndefined(var2.getDataType())) {
 							return voff - offset;
 						}
 					}
@@ -653,11 +652,10 @@ public class FunctionPlugin extends Plugin implements DataService {
 		}
 
 		for (Variable var2 : vars) {
-			Variable v = var2;
-			int voff = v.getStackOffset();
+            int voff = var2.getStackOffset();
 			if (voff > 0) {
-				if (v.getFirstUseOffset() == fuOffset && voff > offset) {
-					if (isParam || !Undefined.isUndefined(v.getDataType())) {
+				if (var2.getFirstUseOffset() == fuOffset && voff > offset) {
+					if (isParam || !Undefined.isUndefined(var2.getDataType())) {
 						return voff - offset;
 					}
 				}

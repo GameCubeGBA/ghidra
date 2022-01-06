@@ -165,8 +165,7 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 	 */
 	private boolean hasSpecialVtable() throws CancelledException, InvalidInputException {
 
-		boolean hasSpecialVtable = createSpecialVtables();
-		return hasSpecialVtable;
+        return createSpecialVtables();
 
 	}
 
@@ -244,18 +243,15 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 
             monitor.checkCanceled();
 
-            RecoveredClass recoveredClass = aClass;
-
-            List<Address> vftableAddresses = recoveredClass.getVftableAddresses();
+            List<Address> vftableAddresses = aClass.getVftableAddresses();
 
             for (Address address : vftableAddresses) {
                 monitor.checkCanceled();
-                Address vftableAddress = address;
 
-                Address offsetAddress = vftableAddress.subtract(2 * defaultPointerSize);
+                Address offsetAddress = address.subtract(2 * defaultPointerSize);
                 int offsetValue = (int) api.getLong(offsetAddress);
 
-                recoveredClass.addClassOffsetToVftableMapping(offsetValue, vftableAddress);
+                aClass.addClassOffsetToVftableMapping(offsetValue, address);
             }
 
         }
@@ -270,8 +266,7 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 
             monitor.checkCanceled();
 
-            Symbol typeinfoSymbol = symbol;
-            Address typeinfoAddress = typeinfoSymbol.getAddress();
+            Address typeinfoAddress = symbol.getAddress();
 
             // skip the typeinfo symbols from the three special typeinfos
             if (typeinfoAddress.equals(class_type_info) ||
@@ -280,7 +275,7 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
                 continue;
             }
 
-            Namespace classNamespace = typeinfoSymbol.getParentNamespace();
+            Namespace classNamespace = symbol.getParentNamespace();
 
             RecoveredClass recoveredClass = getClass(classNamespace);
 
@@ -438,9 +433,8 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 
             monitor.checkCanceled();
 
-            Symbol vtableSymbol = listOfVtableSymbol;
-            Namespace vtableNamespace = vtableSymbol.getParentNamespace();
-            Address vtableAddress = vtableSymbol.getAddress();
+            Namespace vtableNamespace = listOfVtableSymbol.getParentNamespace();
+            Address vtableAddress = listOfVtableSymbol.getAddress();
 
             processVtable(vtableAddress, vtableNamespace, true, copyListOfVtableSymbols);
         }
@@ -595,9 +589,8 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 
 		if (namespacesByPath.isEmpty()) {
 
-			Namespace newNamespace = NamespaceUtils.createNamespaceHierarchy(name, vtableNamespace,
-				program, SourceType.ANALYSIS);
-			return newNamespace;
+            return NamespaceUtils.createNamespaceHierarchy(name, vtableNamespace,
+                program, SourceType.ANALYSIS);
 
 		}
 		if (namespacesByPath.size() == 1) {
@@ -637,11 +630,10 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 
         for (Address address : typeinfoAddresses) {
             monitor.checkCanceled();
-            Address typeinfoAddress = address;
             // check direct refs to see if they are in undefined area or not in function
-            byte[] bytes = ProgramMemoryUtil.getDirectAddressBytes(program, typeinfoAddress);
+            byte[] bytes = ProgramMemoryUtil.getDirectAddressBytes(program, address);
 
-            addByteSearchPattern(searcher, validTypeinfoRefs, typeinfoAddress, bytes, monitor);
+            addByteSearchPattern(searcher, validTypeinfoRefs, address, bytes, monitor);
 
         }
 		searcher.search(program, searchSet, monitor);
@@ -1052,8 +1044,7 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 		ArrayDataType vftableArrayDataType =
 			new ArrayDataType(pointerDataType, numFunctionPointers, defaultPointerSize);
 
-		Data vftableArrayData = api.createData(vftableAddress, vftableArrayDataType);
-		return vftableArrayData;
+        return api.createData(vftableAddress, vftableArrayDataType);
 	}
 
 	/**
@@ -1488,9 +1479,8 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 
 		// create the new typeinfo symbol in the demangled namespace
 
-		Symbol newSymbol = symbolTable.createLabel(typeinfoAddress, "typeinfo", classNamespace,
-			SourceType.ANALYSIS);
-		return newSymbol;
+        return symbolTable.createLabel(typeinfoAddress, "typeinfo", classNamespace,
+            SourceType.ANALYSIS);
 	}
 
 	private Namespace createTypeinfoClassNamespace(String namespaceString)
@@ -1588,8 +1578,7 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 
             monitor.checkCanceled();
 
-            Symbol typeinfoSymbol = symbol;
-            Address typeinfoAddress = typeinfoSymbol.getAddress();
+            Address typeinfoAddress = symbol.getAddress();
 
             // skip the typeinfo symbols from the three special typeinfos
             if (isSpecialTypeinfo(typeinfoAddress)) {
@@ -1933,9 +1922,7 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 
 		List<RecoveredClass> parentClassList = new ArrayList<RecoveredClass>();
 
-		int numParents = numBaseClasses;
-
-		for (int i = 0; i < numParents; i++) {
+        for (int i = 0; i < numBaseClasses; i++) {
 
 			// get parent from pointer to parent typeinfo
 			Address parentRefAddress =
@@ -2027,7 +2014,7 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 		}
 
 		if (DEBUG) {
-			Msg.debug(this, recoveredClass.getName() + " has " + numParents + " parents");
+			Msg.debug(this, recoveredClass.getName() + " has " + numBaseClasses + " parents");
 		}
 
 		classToParentOrderMap.put(recoveredClass, orderToParentMap);
@@ -2056,9 +2043,7 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 
 		}
 
-		RecoveredClass parentClass = getParentClassFromParentTypeInfoRef(parentTypeinfoRef);
-
-		return parentClass;
+        return getParentClassFromParentTypeInfoRef(parentTypeinfoRef);
 
 	}
 
@@ -2081,9 +2066,8 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 		if (parentNamespace == null) {
 			return null;
 		}
-		RecoveredClass parentClass = getClass(parentNamespace);
 
-        return parentClass;
+        return getClass(parentNamespace);
 	}
 
 	/**
@@ -2206,9 +2190,8 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 
             monitor.checkCanceled();
 
-            Symbol vtableSymbol = listOfVtableSymbol;
-            Namespace vtableNamespace = vtableSymbol.getParentNamespace();
-            Address vtableAddress = vtableSymbol.getAddress();
+            Namespace vtableNamespace = listOfVtableSymbol.getParentNamespace();
+            Address vtableAddress = listOfVtableSymbol.getAddress();
 
             // skip the special tables
             if (vtableAddress.equals(class_type_info_vtable) ||
@@ -2273,8 +2256,7 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 
             monitor.checkCanceled();
 
-            Symbol typeinfoSymbol = symbol;
-            Address typeinfoAddress = typeinfoSymbol.getAddress();
+            Address typeinfoAddress = symbol.getAddress();
 
             // skip the typeinfo symbols from the three special typeinfos
             if (isSpecialTypeinfo(typeinfoAddress)) {
@@ -2286,7 +2268,7 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
                 continue;
             }
 
-            Namespace classNamespace = typeinfoSymbol.getParentNamespace();
+            Namespace classNamespace = symbol.getParentNamespace();
 
             RecoveredClass recoveredClass = getClass(classNamespace);
 
@@ -2418,9 +2400,8 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 			List<RecoveredClass> parentList = recoveredClass.getParentList();
             for (RecoveredClass aClass : parentList) {
                 monitor.checkCanceled();
-                RecoveredClass parentClass = aClass;
-                recoveredClass.addClassHierarchyMapping(parentClass,
-                        parentClass.getClassHierarchy());
+                recoveredClass.addClassHierarchyMapping(aClass,
+                        aClass.getClassHierarchy());
             }
 		}
 
@@ -2451,8 +2432,7 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 		List<RecoveredClass> classHierarchy = recoveredClass.getClassHierarchy();
         for (RecoveredClass aClass : classHierarchy) {
             monitor.checkCanceled();
-            RecoveredClass ancestor = aClass;
-            if (ancestor.inheritsVirtualAncestor()) {
+            if (aClass.inheritsVirtualAncestor()) {
                 return true;
             }
         }
@@ -2509,17 +2489,16 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
         for (RecoveredClass aClass : parentList) {
             monitor.checkCanceled();
 
-            RecoveredClass parentClass = aClass;
-            if (nonInheritedGccClasses.contains(parentClass)) {
-                classHierarchyList.addAll(parentClass.getClassHierarchy());
+            if (nonInheritedGccClasses.contains(aClass)) {
+                classHierarchyList.addAll(aClass.getClassHierarchy());
                 continue;
             }
-            if (singleInheritedGccClasses.contains(parentClass)) {
-                classHierarchyList.addAll(parentClass.getClassHierarchy());
+            if (singleInheritedGccClasses.contains(aClass)) {
+                classHierarchyList.addAll(aClass.getClassHierarchy());
                 continue;
             }
-            if (multiAndOrVirtuallyInheritedGccClasses.contains(parentClass)) {
-                classHierarchyList.addAll(getGccMultiClassHierarchy(parentClass));
+            if (multiAndOrVirtuallyInheritedGccClasses.contains(aClass)) {
+                classHierarchyList.addAll(getGccMultiClassHierarchy(aClass));
             }
         }
 		return classHierarchyList;
@@ -2557,8 +2536,7 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 	 */
 	private Address getAddress(Address address, int offset) {
 		try {
-			Address newAddress = address.add(offset);
-			return newAddress;
+            return address.add(offset);
 		}
 		catch (AddressOutOfBoundsException e) {
 			return null;
@@ -2638,24 +2616,22 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
         for (RecoveredClass aClass : recoveredClasses) {
             monitor.checkCanceled();
 
-            RecoveredClass recoveredClass = aClass;
-
-            if (recoveredClass.hasMultipleInheritance()) {
+            if (aClass.hasMultipleInheritance()) {
                 continue;
             }
 
-            if (recoveredClass.hasParentClass()) {
+            if (aClass.hasParentClass()) {
                 continue;
             }
 
-            if (!recoveredClass.hasVftable()) {
-                createClassStructureWhenNoParentOrVftable(recoveredClass);
-                listOfClasses.remove(recoveredClass);
+            if (!aClass.hasVftable()) {
+                createClassStructureWhenNoParentOrVftable(aClass);
+                listOfClasses.remove(aClass);
                 continue;
             }
 
-            processDataTypes(recoveredClass);
-            listOfClasses.remove(recoveredClass);
+            processDataTypes(aClass);
+            listOfClasses.remove(aClass);
 
         }
 

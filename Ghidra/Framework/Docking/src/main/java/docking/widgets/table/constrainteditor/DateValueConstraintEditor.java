@@ -93,9 +93,7 @@ public class DateValueConstraintEditor extends AbstractColumnConstraintEditor<Lo
 
 	@Override
 	public ColumnConstraint<LocalDate> getValueFromComponent() {
-		LocalDate spinnerDate = spinnerModel.getDate();
-		LocalDate spinnerLocalDate = spinnerDate;
-		return getConstraint().copy(spinnerLocalDate);
+        return getConstraint().copy(spinnerModel.getDate());
 	}
 
 	@Override
@@ -103,8 +101,7 @@ public class DateValueConstraintEditor extends AbstractColumnConstraintEditor<Lo
 		if (hasEditorComponents()) {
 			LocalDate constraintValue = getConstraint().getConstraintValue();
 			if (constraintValue instanceof LocalDate) {
-				LocalDate constraintDate = constraintValue;
-				spinnerModel.setValue(constraintDate);
+                spinnerModel.setValue(constraintValue);
 			}
 		}
 	}

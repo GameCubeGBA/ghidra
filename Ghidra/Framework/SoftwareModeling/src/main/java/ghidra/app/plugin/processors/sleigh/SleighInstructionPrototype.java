@@ -943,8 +943,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 			int bitsize = node.getSize() * 8;
 			bitsize = bitsize > 64 ? 64 : bitsize;
 			boolean signed = node.getOffset() < 0;
-			Scalar scalar = new Scalar(bitsize, node.getOffset(), signed);
-			return scalar;
+            return new Scalar(bitsize, node.getOffset(), signed);
 		}
 		if (node.isAddress() || node.isRegister()) {
 			Register reg = language.getRegister(node.getAddress(), node.getSize());

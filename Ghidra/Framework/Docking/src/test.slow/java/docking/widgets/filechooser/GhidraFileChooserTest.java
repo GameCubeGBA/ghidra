@@ -2326,9 +2326,7 @@ public class GhidraFileChooserTest extends AbstractDockingTest {
 	}
 
 	private DropDownSelectionTextField<?> getFilenameTextField() {
-		DropDownSelectionTextField<?> textField =
-			(DropDownSelectionTextField<?>) getInstanceField("filenameTextField", chooser);
-		return textField;
+        return (DropDownSelectionTextField<?>) getInstanceField("filenameTextField", chooser);
 	}
 
 	private void show() throws Exception {
@@ -2441,8 +2439,7 @@ public class GhidraFileChooserTest extends AbstractDockingTest {
 	}
 
 	private File createTempFile() throws IOException {
-		File file = createTempFile(getName() + "test.dir");
-		return file;
+        return createTempFile(getName() + "test.dir");
 	}
 
 	// Note: this is meant to replace createTempDirectory(String name), as that method will
@@ -2457,8 +2454,7 @@ public class GhidraFileChooserTest extends AbstractDockingTest {
 	}
 
 	private File createTempDir() throws IOException {
-		File dir = myCreateTempDirectory(getName());
-		return dir;
+        return myCreateTempDirectory(getName());
 	}
 
 	private List<File> createTempFilesInDifferentDirectories() throws IOException {
@@ -2639,8 +2635,7 @@ public class GhidraFileChooserTest extends AbstractDockingTest {
 	private File getNewlyCreatedFile(DirectoryList dirlist) throws Exception {
 
 		// artificially high wait period that won't be reached most of the time
-		int timeoutMillis = DEFAULT_TIMEOUT_MILLIS;
-		File newFile = getSelectedFile(dirlist, timeoutMillis);
+        File newFile = getSelectedFile(dirlist, DEFAULT_TIMEOUT_MILLIS);
 
 		assertNotNull("New file never created!", newFile);
 

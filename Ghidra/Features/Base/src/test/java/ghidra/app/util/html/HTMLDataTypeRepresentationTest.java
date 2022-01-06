@@ -1386,9 +1386,8 @@ public class HTMLDataTypeRepresentationTest extends AbstractGenericTest {
 	}
 
 	private Composite createCompositeCopy(Composite composite) {
-		Composite compositeCopy = (Composite) composite.copy(null);
 
-		// the DLL_Table looks like this:
+        // the DLL_Table looks like this:
 		// DLL_Table {
 		//      string COMDLG32
 		//      string SHELL32
@@ -1401,7 +1400,7 @@ public class HTMLDataTypeRepresentationTest extends AbstractGenericTest {
 		// }
 		//
 
-		return compositeCopy;
+		return (Composite) composite.copy(null);
 	}
 
 	private void insertCopyAtIndex(Composite composite, int insertIndex) {

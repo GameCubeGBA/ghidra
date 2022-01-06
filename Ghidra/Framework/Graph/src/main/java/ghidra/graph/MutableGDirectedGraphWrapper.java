@@ -124,14 +124,12 @@ public class MutableGDirectedGraphWrapper<V, E extends GEdge<V>> implements GDir
 
 	@Override
 	public Collection<V> getVertices() {
-		Set<V> set = callOnBothGraphs(GDirectedGraph::getVertices);
-		return set;
+        return callOnBothGraphs(GDirectedGraph::getVertices);
 	}
 
 	@Override
 	public Collection<E> getEdges() {
-		Set<E> set = callOnBothGraphs(GDirectedGraph::getEdges);
-		return set;
+        return callOnBothGraphs(GDirectedGraph::getEdges);
 	}
 
 	@Override
@@ -177,26 +175,22 @@ public class MutableGDirectedGraphWrapper<V, E extends GEdge<V>> implements GDir
 
 	@Override
 	public Collection<E> getInEdges(V v) {
-		Set<E> set = callOnBothGraphs(GDirectedGraph::getInEdges, v);
-		return set;
+        return callOnBothGraphs(GDirectedGraph::getInEdges, v);
 	}
 
 	@Override
 	public Collection<E> getOutEdges(V v) {
-		Set<E> set = callOnBothGraphs(GDirectedGraph::getOutEdges, v);
-		return set;
+        return callOnBothGraphs(GDirectedGraph::getOutEdges, v);
 	}
 
 	@Override
 	public Collection<V> getPredecessors(V v) {
-		Set<V> set = callOnBothGraphs(GDirectedGraph::getPredecessors, v);
-		return set;
+        return callOnBothGraphs(GDirectedGraph::getPredecessors, v);
 	}
 
 	@Override
 	public Collection<V> getSuccessors(V v) {
-		Set<V> set = callOnBothGraphs(GDirectedGraph::getSuccessors, v);
-		return set;
+        return callOnBothGraphs(GDirectedGraph::getSuccessors, v);
 	}
 
 	@Override

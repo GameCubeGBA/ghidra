@@ -752,8 +752,7 @@ public class FollowFlow {
 		if (flowAddressSet.contains(addr))
 			return; // Already processed this address.
 
-		Address min = addr;
-		Address max = min;
+        Address max = addr;
 		int offset = (int) addr.subtract(data.getMinAddress());
 		Data primitive = data.getPrimitiveAt(offset);
 		if (primitive != null) {
@@ -780,7 +779,7 @@ public class FollowFlow {
 				}
 			}
 		}
-		flowAddressSet.addRange(min, max); // Add the addresses for the pointer or Data minimum address.
+		flowAddressSet.addRange(addr, max); // Add the addresses for the pointer or Data minimum address.
 	}
 
 	/**

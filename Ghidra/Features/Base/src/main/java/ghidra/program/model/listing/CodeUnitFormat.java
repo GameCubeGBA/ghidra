@@ -940,8 +940,7 @@ public class CodeUnitFormat {
 	 */
 	private Register findRegister(Varnode v, Map<Register, Integer> regIndexMap) {
 		if (v.isRegister()) {
-			Register reg = getRegister(v.getAddress(), regIndexMap);
-            return reg;
+            return getRegister(v.getAddress(), regIndexMap);
 		}
 		return null;
 	}

@@ -174,9 +174,8 @@ public class SimpleBlockIterator implements CodeBlockIterator {
 	private Address getNextAddress(Address addr) {
 
 		Instruction instr = listing.getInstructionAfter(addr);
-		Address instrAddr = instr != null ? instr.getMinAddress() : null;
 
-		return instrAddr;
+        return instr != null ? instr.getMinAddress() : null;
 // ?? ITERATOR HAS BEEN MODIFIED TO ONLY RETURN INSTRUCTION BLOCKS
 
 //        Data data = getDefinedDataAfter(addr);

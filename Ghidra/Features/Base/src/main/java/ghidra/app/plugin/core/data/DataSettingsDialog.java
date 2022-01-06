@@ -583,12 +583,10 @@ public class DataSettingsDialog extends DialogComponentProvider {
 
 		Object getSettingsChoices() {
 			if (definition instanceof EnumSettingsDefinition) {
-				StringChoices choices = getChoices((EnumSettingsDefinition) definition);
-				return choices;
+                return getChoices((EnumSettingsDefinition) definition);
 			}
 			else if (definition instanceof BooleanSettingsDefinition) {
-				StringChoices choices = getChoices((BooleanSettingsDefinition) definition);
-				return choices;
+                return getChoices((BooleanSettingsDefinition) definition);
 			}
 			return "<Unsupported>";
 		}

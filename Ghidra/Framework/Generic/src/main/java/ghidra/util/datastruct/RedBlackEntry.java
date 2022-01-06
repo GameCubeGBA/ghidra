@@ -46,9 +46,8 @@ public class RedBlackEntry<K, V> implements Map.Entry<K, V> {
 
 	@Override
 	public V setValue(V value) {
-		V oldValue = value;
-		this.value = value;
-		return oldValue;
+        this.value = value;
+		return value;
 	}
 
 	@Override

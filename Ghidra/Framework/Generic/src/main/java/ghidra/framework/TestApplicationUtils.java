@@ -39,8 +39,7 @@ public class TestApplicationUtils {
 		// Update: it seems things have changed (jUnit 4, maybe?)--this value is now 
 		//         ghidra/Ghidra/Features/Base
 		String userDir = System.getProperty("user.dir");
-		File repo = ModuleUtilities.findRepo(new File(userDir));
-		return repo;
+        return ModuleUtilities.findRepo(new File(userDir));
 	}
 
 	/**
@@ -55,8 +54,7 @@ public class TestApplicationUtils {
 		if (repo == null) {
 			return null;
 		}
-		File repoContainer = repo.getParentFile();
-		return repoContainer;
+        return repo.getParentFile();
 	}
 
 	/**
@@ -140,8 +138,7 @@ public class TestApplicationUtils {
 		//
 		File reposContainer = getRepoContainerDirectory();
 		if (reposContainer == null) {
-			File installDir = getInstallationDirectory();
-			reposContainer = installDir;
+            reposContainer = getInstallationDirectory();
 		}
 
 		File tmpDir = new File(System.getProperty("java.io.tmpdir"));

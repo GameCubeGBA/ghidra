@@ -283,8 +283,7 @@ public class GroupHistoryInfo {
 	private static Map<AddressHasher, FGVertex> hashVerticesByStartAndEndAddress(
 			FunctionGraph functionGraph) {
 		Map<AddressHasher, FGVertex> map = new HashMap<>();
-		Graph<FGVertex, FGEdge> graph = functionGraph;
-		Collection<FGVertex> vertices = graph.getVertices();
+        Collection<FGVertex> vertices = ((Graph<FGVertex, FGEdge>) functionGraph).getVertices();
 
 		for (FGVertex vertex : vertices) {
 			AddressSetView addresses = vertex.getAddresses();

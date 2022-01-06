@@ -191,8 +191,7 @@ public class ManagedProcedureSymbolApplier extends MsSymbolApplier {
 			applier.applyTo(this);
 		}
 
-		boolean functionSuccess = applyFunction(monitor);
-        return functionSuccess;
+        return applyFunction(monitor);
 //		registerChangeCalculator = new RegisterChangeCalculator(procedureSymbol, function, monitor);
 //
 //		baseParamOffset = VariableUtilities.getBaseStackParamOffset(function);

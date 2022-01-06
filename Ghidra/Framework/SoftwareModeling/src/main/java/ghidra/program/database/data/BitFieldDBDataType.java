@@ -129,10 +129,9 @@ class BitFieldDBDataType extends BitFieldDataType {
 				dataTypeKind = BaseDatatypeKind.NONE;
 			}
 		}
-		long id = (dataTypeIndex << DATATYPE_INDEX_SHIFT) |
-			(getBaseTypeEncodedField(bitfieldDt, dataTypeKind) << BASE_TYPE_SHIFT) |
-			(bitfieldDt.getBitOffset() << BIT_OFFSET_SHIFT) | bitfieldDt.getDeclaredBitSize();
-		return id;
+        return (dataTypeIndex << DATATYPE_INDEX_SHIFT) |
+            (getBaseTypeEncodedField(bitfieldDt, dataTypeKind) << BASE_TYPE_SHIFT) |
+            (bitfieldDt.getBitOffset() << BIT_OFFSET_SHIFT) | bitfieldDt.getDeclaredBitSize();
 	}
 
 	private static final long getBaseTypeEncodedField(BitFieldDataType bitFieldDt,

@@ -112,32 +112,31 @@ public class GatherParamPanel extends JPanel {
 
 	public void setParamsInState() {
 		for (String string2 : parameters.keySet()) {
-			String key = string2;
-			ParamComponent pc = parameters.get(key);
+            ParamComponent pc = parameters.get(string2);
 			switch (pc.getType()) {
 				case ADDRESS:
 					if (state.getCurrentProgram() != null) {
 						AddressInput addressInput = (AddressInput) pc.getDisplayComponent();
-						state.addEnvironmentVar(key, addressInput.getAddress());
+						state.addEnvironmentVar(string2, addressInput.getAddress());
 					}
 					else {
 						AddressInput addressInput = (AddressInput) pc.getDisplayComponent();
-						state.addEnvironmentVar(key, addressInput.getValue());
+						state.addEnvironmentVar(string2, addressInput.getValue());
 					}
 					break;
 				case FILE:
 				case DIRECTORY:
 					GhidraFileChooserPanel gfcp = (GhidraFileChooserPanel) pc.getDisplayComponent();
-					state.addEnvironmentVar(key, new File(gfcp.getFileName()));
+					state.addEnvironmentVar(string2, new File(gfcp.getFileName()));
 					break;
 				case INTEGER:
 					JTextField iTextField = (JTextField) pc.getDisplayComponent();
 					int val = Integer.parseInt(iTextField.getText());
-					state.addEnvironmentVar(key, val);
+					state.addEnvironmentVar(string2, val);
 					break;
 				default:
 					JTextField textField = (JTextField) pc.getDisplayComponent();
-					state.addEnvironmentVar(key, textField.getText());
+					state.addEnvironmentVar(string2, textField.getText());
 					break;
 			}
 		}
@@ -145,8 +144,7 @@ public class GatherParamPanel extends JPanel {
 
 	public void currentProgramChanged() {
 		for (String string2 : parameters.keySet()) {//OMG!!
-			String key = string2;
-			ParamComponent pc = parameters.get(key);
+            ParamComponent pc = parameters.get(string2);
 			switch (pc.getType()) {
 				case ADDRESS:
 					AddressInput addressInput = (AddressInput) pc.getDisplayComponent();
@@ -154,7 +152,7 @@ public class GatherParamPanel extends JPanel {
 					addressInput.selectDefaultAddressSpace();
 					addressInput.select();
 					if (panelShown()) {
-						state.addEnvironmentVar(key, addressInput.getAddress());
+						state.addEnvironmentVar(string2, addressInput.getAddress());
 					}
 					break;
 			}

@@ -127,8 +127,7 @@ public class LayoutLocationMap<V, E> {
 	 */
 	public Collection<Column> columns() {
         Collection<Column> values = columnsByIndex.values();
-        List<Column> result = new ArrayList<>(values);
-		return result;
+        return new ArrayList<>(values);
 	}
 
 	/**
@@ -138,8 +137,7 @@ public class LayoutLocationMap<V, E> {
 	 */
 	public Collection<Row<V>> rows() {
         Collection<Row<V>> values = rowsByIndex.values();
-        List<Row<V>> results = new ArrayList<>(values);
-		return results;
+        return new ArrayList<>(values);
 	}
 
 	public Column lastColumn() {

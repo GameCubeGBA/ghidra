@@ -44,12 +44,11 @@ public class SkeletonLoader extends AbstractLibrarySupportLoader {
 
 	@Override
 	public Collection<LoadSpec> findSupportedLoadSpecs(ByteProvider provider) throws IOException {
-		List<LoadSpec> loadSpecs = new ArrayList<>();
 
-		// TODO: Examine the bytes in 'provider' to determine if this loader can load it.  If it 
+        // TODO: Examine the bytes in 'provider' to determine if this loader can load it.  If it
 		// can load it, return the appropriate load specifications.
 
-		return loadSpecs;
+		return new ArrayList<>();
 	}
 
 	@Override

@@ -94,8 +94,7 @@ public class FrontEndTestEnv {
 	public Program buildProgram(Object consumer) throws Exception {
 		ProgramBuilder builder =
 			new ClassicSampleX86ProgramBuilder("SampleProgram", true, consumer);
-		ProgramDB p = builder.getProgram();
-		return p;
+        return builder.getProgram();
 	}
 
 	private void startServer() throws Exception {
@@ -346,9 +345,7 @@ public class FrontEndTestEnv {
 	}
 
 	public DockingActionIf getAction(String actionName) {
-		DockingActionIf action =
-			AbstractDockingTest.getAction(frontEndTool, "FrontEndPlugin", actionName);
-		return action;
+        return AbstractDockingTest.getAction(frontEndTool, "FrontEndPlugin", actionName);
 	}
 
 	public void performFrontEndAction(DockingActionIf action) {

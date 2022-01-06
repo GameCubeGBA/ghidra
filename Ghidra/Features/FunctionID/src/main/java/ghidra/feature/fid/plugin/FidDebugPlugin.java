@@ -303,8 +303,7 @@ public class FidDebugPlugin extends ProgramPlugin implements ChangeListener {
 			return null;
 		}
 
-		T s = dialog.getChoiceValue();
-		return s;
+        return dialog.getChoiceValue();
 	}
 
 	/**

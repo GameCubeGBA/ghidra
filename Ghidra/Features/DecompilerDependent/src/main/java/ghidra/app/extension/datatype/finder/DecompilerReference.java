@@ -70,8 +70,7 @@ public abstract class DecompilerReference {
 	}
 
 	public Function getFunction() {
-		Function function = variable.getFunction();
-		return function;
+        return variable.getFunction();
 	}
 
 	public Address getAddress() {
@@ -87,8 +86,7 @@ public abstract class DecompilerReference {
 	}
 
 	protected LocationReferenceContext getContext() {
-		LocationReferenceContext context = getContext(variable);
-		return context;
+        return getContext(variable);
 	}
 
 	protected LocationReferenceContext getContext(DecompilerVariable var) {

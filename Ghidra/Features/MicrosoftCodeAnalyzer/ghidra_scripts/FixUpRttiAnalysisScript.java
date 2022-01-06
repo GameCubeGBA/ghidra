@@ -96,8 +96,7 @@ public class FixUpRttiAnalysisScript extends GhidraScript {
 
 		createMissingBaseClassArrays(classHierarchyDescriptors);
 
-		List<Symbol> vftableSymbols = createMissingVftableSymbols(completeObjectLocatorSymbols);
-		return vftableSymbols;
+        return createMissingVftableSymbols(completeObjectLocatorSymbols);
 
 	}
 
@@ -172,8 +171,7 @@ public class FixUpRttiAnalysisScript extends GhidraScript {
 		int sizeOfDt = completeObjLocatorDataType.getLength();
 
 		clearListing(address, address.add(sizeOfDt));
-		Data completeObjectLocator = createData(address, completeObjLocatorDataType);
-        return completeObjectLocator;
+        return createData(address, completeObjLocatorDataType);
 	}
 
 	/**
@@ -233,8 +231,7 @@ public class FixUpRttiAnalysisScript extends GhidraScript {
 		int sizeOfDt = baseClassDescriptor.getLength();
 
 		clearListing(baseClassDescriptorAddress, baseClassDescriptorAddress.add(sizeOfDt));
-		Data baseClassDescArray = createData(baseClassDescriptorAddress, baseClassDescriptor);
-        return baseClassDescArray;
+        return createData(baseClassDescriptorAddress, baseClassDescriptor);
 	}
 
 	/**
@@ -302,9 +299,8 @@ public class FixUpRttiAnalysisScript extends GhidraScript {
 
         for (Symbol baseClassDescriptor : baseClassDescriptors) {
             monitor.checkCanceled();
-            Symbol symbol = baseClassDescriptor;
             Address classHierarchyDescriptorAddress = createClassHierarchyDescriptor(
-                    symbol.getAddress().add(24), symbol.getParentNamespace());
+                    baseClassDescriptor.getAddress().add(24), baseClassDescriptor.getParentNamespace());
 
             if (classHierarchyDescriptorAddress != null &&
                     !classHierarchyDescriptorAddresses.contains(classHierarchyDescriptorAddress)) {
@@ -315,9 +311,8 @@ public class FixUpRttiAnalysisScript extends GhidraScript {
 
         for (Symbol completeObjectLocator : completeObjectLocators) {
             monitor.checkCanceled();
-            Symbol symbol = completeObjectLocator;
             Address classHierarchyDescriptorAddress = createClassHierarchyDescriptor(
-                    symbol.getAddress().add(16), symbol.getParentNamespace());
+                    completeObjectLocator.getAddress().add(16), completeObjectLocator.getParentNamespace());
             if (classHierarchyDescriptorAddress != null &&
                     !classHierarchyDescriptorAddresses.contains(classHierarchyDescriptorAddress)) {
                 classHierarchyDescriptorAddresses.add(classHierarchyDescriptorAddress);
@@ -387,8 +382,7 @@ public class FixUpRttiAnalysisScript extends GhidraScript {
 		clearListing(classHierarchyDescriptorAddress,
 			classHierarchyDescriptorAddress.add(sizeOfDt));
 
-		Data classHierarchyStructure = createData(classHierarchyDescriptorAddress, classHDatatype);
-        return classHierarchyStructure;
+        return createData(classHierarchyDescriptorAddress, classHDatatype);
 	}
 
 	/**
@@ -410,15 +404,14 @@ public class FixUpRttiAnalysisScript extends GhidraScript {
 
             monitor.checkCanceled();
 
-            Address classHierarchyDescriptorAddress = classHierarchyDescriptor;
             Symbol classHierarchyDescriptorSymbol =
-                    symbolTable.getPrimarySymbol(classHierarchyDescriptorAddress);
+                    symbolTable.getPrimarySymbol(classHierarchyDescriptor);
             Namespace classNamespace = classHierarchyDescriptorSymbol.getParentNamespace();
 
-            int numBaseClasses = getInt(classHierarchyDescriptorAddress.add(8));
+            int numBaseClasses = getInt(classHierarchyDescriptor.add(8));
 
             Address baseClassArrayAddress =
-                    getReferencedAddress(classHierarchyDescriptorAddress.add(12));
+                    getReferencedAddress(classHierarchyDescriptor.add(12));
 
             Data baseClassDescArray = getDataAt(baseClassArrayAddress);
 
@@ -482,9 +475,8 @@ public class FixUpRttiAnalysisScript extends GhidraScript {
 		}
 
 		clearListing(baseClassArrayAddress, baseClassArrayAddress.add(numBaseClasses * sizeOfDt));
-		Data baseClassDescArray = createData(baseClassArrayAddress, baseClassDescArrayDT);
 
-        return baseClassDescArray;
+        return createData(baseClassArrayAddress, baseClassDescArrayDT);
 	}
 
 	/**
@@ -504,11 +496,10 @@ public class FixUpRttiAnalysisScript extends GhidraScript {
 
         for (Symbol objectLocatorSymbol : completeObjectLocatorSymbols) {
             monitor.checkCanceled();
-            Symbol completeObjectLocatorSymbol = objectLocatorSymbol;
 
-            Address completeObjectLocatorAddress = completeObjectLocatorSymbol.getAddress();
+            Address completeObjectLocatorAddress = objectLocatorSymbol.getAddress();
 
-            Namespace classNamespace = completeObjectLocatorSymbol.getParentNamespace();
+            Namespace classNamespace = objectLocatorSymbol.getParentNamespace();
             if (classNamespace.equals(globalNamespace)) {
                 println("no class namespace for " + completeObjectLocatorAddress.toString());
                 continue;

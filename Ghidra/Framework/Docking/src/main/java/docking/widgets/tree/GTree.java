@@ -533,8 +533,7 @@ public class GTree extends JPanel implements BusyListener {
 	 */
 	public Point getViewPosition() {
 		JViewport viewport = scrollPane.getViewport();
-		Point p = viewport.getViewPosition();
-		return p;
+        return viewport.getViewPosition();
 	}
 
 	public void setViewPosition(Point p) {
@@ -544,8 +543,7 @@ public class GTree extends JPanel implements BusyListener {
 
 	public Rectangle getViewRect() {
 		JViewport viewport = scrollPane.getViewport();
-		Rectangle viewRect = viewport.getViewRect();
-		return viewRect;
+        return viewport.getViewRect();
 	}
 
 	public GTreeNode getNodeForLocation(int x, int y) {

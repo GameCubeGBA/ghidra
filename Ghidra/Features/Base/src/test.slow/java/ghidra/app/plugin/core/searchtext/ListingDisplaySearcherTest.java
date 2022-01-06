@@ -819,10 +819,9 @@ public class ListingDisplaySearcherTest extends AbstractGhidraHeadedIntegrationT
         for (Address address : startList) {
             ProgramLocation loc = searcher.next();
             assertNotNull(loc);
-            Address start = address;
 
             assertTrue(fieldClass.isAssignableFrom(loc.getClass()));
-            assertEquals(start, loc.getAddress());
+            assertEquals(address, loc.getAddress());
         }
 
 		assertTrue(!searcher.hasNext());

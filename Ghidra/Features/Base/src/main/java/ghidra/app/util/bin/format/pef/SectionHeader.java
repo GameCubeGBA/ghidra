@@ -162,11 +162,10 @@ public class SectionHeader implements StructConverter {
                         break;
                     }
                     case kPEFPkDataRepeatBlock: {
-                        int commonSize = count;
                         int customSize = unpackNextValue(input);
                         int repeatCount = unpackNextValue(input);
 
-                        byte[] commonData = new byte[commonSize];
+                        byte[] commonData = new byte[count];
                         int nCommonRead = input.read(commonData);
                         if (nCommonRead != commonData.length) {
                             throw new IllegalStateException(
@@ -193,12 +192,11 @@ public class SectionHeader implements StructConverter {
                         break;
                     }
                     case kPEFPkDataRepeatZero: {
-                        int commonSize = count;
                         int customSize = unpackNextValue(input);
                         int repeatCount = unpackNextValue(input);
 
                         for (int i = 0; i < repeatCount; ++i) {
-                            index += commonSize;//skip common size of zero bytes...
+                            index += count;//skip common size of zero bytes...
 
                             byte[] customData = new byte[customSize];
                             int nCustomRead = input.read(customData);
@@ -210,7 +208,7 @@ public class SectionHeader implements StructConverter {
                             index += customData.length;
                         }
 
-                        index += commonSize;//a final common size of zero bytes...
+                        index += count;//a final common size of zero bytes...
 
                         break;
                     }

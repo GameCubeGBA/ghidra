@@ -264,8 +264,7 @@ public class ColumnFilterData<T> implements Comparable<ColumnFilterData<T>> {
 				return null;
 			}
 			Settings settings = model.getColumnSettings(columnModelIndex);
-			String s = renderer.getFilterString(value, settings);
-			return s;
+            return renderer.getFilterString(value, settings);
 		}
 	}
 

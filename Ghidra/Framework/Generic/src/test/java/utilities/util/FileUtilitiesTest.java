@@ -179,8 +179,7 @@ public class FileUtilitiesTest {
 		File parentDir = new File(parentPath);
 		FileUtilities.mkdirs(parentDir);
 		File tempFile = File.createTempFile("FileUtilitiesTest", ".txt", parentDir);
-		ResourceFile resourceFile = new ResourceFile(tempFile);
-		return resourceFile;
+        return new ResourceFile(tempFile);
 	}
 
 	@Test

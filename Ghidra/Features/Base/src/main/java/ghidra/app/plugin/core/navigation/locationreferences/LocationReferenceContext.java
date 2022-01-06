@@ -145,8 +145,7 @@ public class LocationReferenceContext {
 		abstract String getText(String start, String end);
 
 		static String fixBreakingSpaces(String s) {
-			String updated = s.replaceAll("\\s", "&nbsp;");
-			return updated;
+            return s.replaceAll("\\s", "&nbsp;");
 		}
 
 		@Override
@@ -172,8 +171,7 @@ public class LocationReferenceContext {
 		@Override
 		String getHtmlText() {
 			String escaped = HTMLUtilities.escapeHTML(text);
-			String updated = fixBreakingSpaces(escaped);
-			return updated;
+            return fixBreakingSpaces(escaped);
 		}
 	}
 

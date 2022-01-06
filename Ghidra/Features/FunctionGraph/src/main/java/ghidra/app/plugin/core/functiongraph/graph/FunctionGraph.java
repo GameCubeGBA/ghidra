@@ -100,14 +100,12 @@ public class FunctionGraph extends GroupingVisualGraph<FGVertex, FGEdge> {
 
 	@Override
 	public FGVertex findMatchingVertex(FGVertex v) {
-		FGVertex matching = getVertexForAddress(v.getVertexAddress());
-		return matching;
+        return getVertexForAddress(v.getVertexAddress());
 	}
 
 	@Override
 	public FGVertex findMatchingVertex(FGVertex v, Collection<FGVertex> ignore) {
-		FGVertex matching = getVertexForAddress(v.getVertexAddress(), ignore);
-		return matching;
+        return getVertexForAddress(v.getVertexAddress(), ignore);
 	}
 
 	public Function getFunction() {

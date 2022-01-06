@@ -160,9 +160,7 @@ public class CreateEquateCmd extends BackgroundCommand {
 	private String generateFormattedEquateName() {
 		Program program = context.getProgram();
 		Enum enumWithId = (Enum) program.getDataTypeManager().addDataType(enoom, null);
-		String formattedName =
-			EquateManager.formatNameForEquate(enumWithId.getUniversalID(), targetScalarValue);
-		return formattedName;
+        return EquateManager.formatNameForEquate(enumWithId.getUniversalID(), targetScalarValue);
 	}
 
 	/**

@@ -119,8 +119,7 @@ class ServerConnectTask extends Task {
 		HashSet<GhidraPrincipal> pset = new HashSet<>();
 		HashSet<Object> emptySet = new HashSet<>();
 		pset.add(new GhidraPrincipal(username));
-		Subject subj = new Subject(false, pset, emptySet, emptySet);
-		return subj;
+        return new Subject(false, pset, emptySet, emptySet);
 	}
 
 	private static String getPreferredHostname(String name) {

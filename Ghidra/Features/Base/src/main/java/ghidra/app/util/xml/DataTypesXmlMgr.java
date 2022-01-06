@@ -456,8 +456,7 @@ public class DataTypesXmlMgr {
 
 	private CategoryPath getCategoryPath(XmlElement element) {
 		String nameSpace = element.getAttribute("NAMESPACE");
-		CategoryPath cp = nameSpace == null ? CategoryPath.ROOT : new CategoryPath(nameSpace);
-		return cp;
+        return nameSpace == null ? CategoryPath.ROOT : new CategoryPath(nameSpace);
 	}
 
 	private DataType findDataType(XmlElement element) {

@@ -307,14 +307,12 @@ public class MachoPrelinkProgramBuilder extends MachoProgramBuilder {
 
 			List<Address> unchainedLocList = new ArrayList<>(1024);
 
-			long pageOffset = pageEntry; // first entry is byte based
-
-			switch (ptrFormat) {
+            switch (ptrFormat) {
 				case DYLD_CHAINED_PTR_ARM64E:
 				case DYLD_CHAINED_PTR_ARM64E_KERNEL:
 				case DYLD_CHAINED_PTR_ARM64E_USERLAND:
 				case DYLD_CHAINED_PTR_ARM64E_USERLAND24:
-					processPointerChain(chainHeader, unchainedLocList, ptrFormat, page, pageOffset,
+					processPointerChain(chainHeader, unchainedLocList, ptrFormat, page, pageEntry,
 						authValueAdd);
 					break;
 
@@ -326,7 +324,7 @@ public class MachoPrelinkProgramBuilder extends MachoProgramBuilder {
 				case DYLD_CHAINED_PTR_32_CACHE:
 				case DYLD_CHAINED_PTR_32_FIRMWARE:
 				case DYLD_CHAINED_PTR_X86_64_KERNEL_CACHE:
-					processPointerChain(chainHeader, unchainedLocList, ptrFormat, page, pageOffset,
+					processPointerChain(chainHeader, unchainedLocList, ptrFormat, page, pageEntry,
 						authValueAdd);
 					break;
 
@@ -507,8 +505,7 @@ public class MachoPrelinkProgramBuilder extends MachoProgramBuilder {
 		// Pointer checked value
 		if ((pointerValue & BIT63) != 0) {
 			//long tagType = (pointerValue >> 49L) & 0x3L;
-			long pacMod = ((pointerValue >> 32) & 0xffff);
-			fixedPointerType = pacMod;
+            fixedPointerType = ((pointerValue >> 32) & 0xffff);
 			fixedPointerValue = program.getImageBase().getOffset() + (pointerValue & 0xffffffffL);
 		}
 		else {

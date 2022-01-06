@@ -145,37 +145,36 @@ public class FindSharedReturnFunctionsScript extends GhidraScript {
 	}
 
 	private TableChooserExecutor createTableExecutor() {
-		TableChooserExecutor executor = new TableChooserExecutor() {
+        return new TableChooserExecutor() {
 
-			@Override
-			public String getButtonName() {
-				return "Fixup SharedReturn";
-			}
+            @Override
+            public String getButtonName() {
+                return "Fixup SharedReturn";
+            }
 
-			@Override
-			public boolean execute(AddressableRowObject rowObject) {
-				SharedReturnLocations sharedRetLoc = (SharedReturnLocations) rowObject;
-				println("Fixup Shared Return Jump at : " + rowObject.getAddress());
+            @Override
+            public boolean execute(AddressableRowObject rowObject) {
+                SharedReturnLocations sharedRetLoc = (SharedReturnLocations) rowObject;
+                println("Fixup Shared Return Jump at : " + rowObject.getAddress());
 
-				Program cp = sharedRetLoc.getProgram();
-				Address entry = sharedRetLoc.getAddress();
+                Program cp = sharedRetLoc.getProgram();
+                Address entry = sharedRetLoc.getAddress();
 
-				addBookMark(cp, entry, "Shared Return Jump");
+                addBookMark(cp, entry, "Shared Return Jump");
 
-				if (!sharedRetLoc.getStatus().equals("fixed")) {
-					fixSharedReturnLocation(cp, entry);
-				}
+                if (!sharedRetLoc.getStatus().equals("fixed")) {
+                    fixSharedReturnLocation(cp, entry);
+                }
 
-				addBookMark(cp, sharedRetLoc.getWhyAddr(), sharedRetLoc.getExplanation());
-				return false;  // don't remove row
-			}
+                addBookMark(cp, sharedRetLoc.getWhyAddr(), sharedRetLoc.getExplanation());
+                return false;  // don't remove row
+            }
 
-			private void fixSharedReturnLocation(Program cp, Address entry) {
-				Instruction instr = cp.getListing().getInstructionAt(entry);
-				instr.setFlowOverride(FlowOverride.CALL_RETURN);
-			}
-		};
-		return executor;
+            private void fixSharedReturnLocation(Program cp, Address entry) {
+                Instruction instr = cp.getListing().getInstructionAt(entry);
+                instr.setFlowOverride(FlowOverride.CALL_RETURN);
+            }
+        };
 	}
 
 	class SharedReturnLocations implements AddressableRowObject {

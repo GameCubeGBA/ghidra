@@ -54,9 +54,8 @@ public class CliStreamStringsTest extends AbstractGTest {
 		BinaryReader br = new BinaryReader(bap, true);
 
 		CliStreamHeader csh = new CliStreamHeader(null, br);
-		CliStreamStrings css = new CliStreamStrings(csh, offset, 0, br);
 
-		return css;
+        return new CliStreamStrings(csh, offset, 0, br);
 	}
 
 	private CliStreamStrings initCliStreamStringsEmpty() throws IOException {
@@ -78,9 +77,8 @@ public class CliStreamStringsTest extends AbstractGTest {
 		BinaryReader br = new BinaryReader(bap, true);
 
 		CliStreamHeader csh = new CliStreamHeader(null, br);
-		CliStreamStrings css = new CliStreamStrings(csh, offset, 0, br);
 
-		return css;
+        return new CliStreamStrings(csh, offset, 0, br);
 	}
 
 	private CliStreamStrings initCliStreamStringsHeaderOnly() throws IOException {
@@ -101,9 +99,8 @@ public class CliStreamStringsTest extends AbstractGTest {
 		BinaryReader br = new BinaryReader(bap, true);
 
 		CliStreamHeader csh = new CliStreamHeader(null, br);
-		CliStreamStrings css = new CliStreamStrings(csh, offset, 0, br);
 
-		return css;
+        return new CliStreamStrings(csh, offset, 0, br);
 	}
 
 	@Test

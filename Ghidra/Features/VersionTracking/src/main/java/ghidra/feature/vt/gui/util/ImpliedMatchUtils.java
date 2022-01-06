@@ -259,8 +259,7 @@ public class ImpliedMatchUtils {
 			associationManager.getAssociation(sourceAddress, destinationAddress);
 
 		if (existingAssociation != null) {
-			VTMatch bestMatch = getBestMatch(existingAssociation, session);
-			return bestMatch;
+            return getBestMatch(existingAssociation, session);
 		}
 
 		return null;

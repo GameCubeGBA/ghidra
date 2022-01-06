@@ -54,17 +54,15 @@ public class NamespaceTableColumn
 
 	private Symbol getSymbol(ProgramLocation rowObject, Program program)
 			throws IllegalArgumentException {
-		ProgramLocation location = rowObject;
-		if (rowObject instanceof VariableLocation) {
+        if (rowObject instanceof VariableLocation) {
 			Variable var = ((VariableLocation) rowObject).getVariable();
 			if (var != null) {
 				return var.getSymbol();
 			}
 		}
-		Address address = location.getAddress();
+		Address address = rowObject.getAddress();
 		SymbolTable symbolTable = program.getSymbolTable();
-		Symbol symbol = symbolTable.getPrimarySymbol(address);
-        return symbol;
+        return symbolTable.getPrimarySymbol(address);
     }
 
 }

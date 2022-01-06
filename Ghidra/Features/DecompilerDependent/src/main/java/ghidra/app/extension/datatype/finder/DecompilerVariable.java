@@ -152,8 +152,7 @@ public abstract class DecompilerVariable {
 	public Function getFunction() {
 		ClangFunction clangFunction = variable.getClangFunction();
 		HighFunction highFunction = clangFunction.getHighFunction();
-		Function function = highFunction.getFunction();
-		return function;
+        return highFunction.getFunction();
 	}
 
 	public Address getAddress() {
@@ -169,8 +168,7 @@ public abstract class DecompilerVariable {
 			if (parent instanceof ClangFunction) {
 				HighFunction highFunction = ((ClangFunction) parent).getHighFunction();
 				Function function = highFunction.getFunction();
-				Address entry = function.getEntryPoint();
-				return entry;
+                return function.getEntryPoint();
 			}
 
 			Address parentAddress = parent.getMinAddress();
@@ -184,8 +182,7 @@ public abstract class DecompilerVariable {
 	}
 
 	public String getName() {
-		String text = variable.getText();
-		return text;
+        return variable.getText();
 	}
 
 	@Override

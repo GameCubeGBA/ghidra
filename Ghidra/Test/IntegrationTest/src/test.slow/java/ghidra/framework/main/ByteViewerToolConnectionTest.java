@@ -240,9 +240,7 @@ public class ByteViewerToolConnectionTest extends AbstractGhidraHeadedIntegratio
 	}
 
 	private DockingActionIf getAction(String actionName) {
-		DockingActionIf action =
-			AbstractDockingTest.getAction(frontEndTool, "FrontEndPlugin", actionName);
-		return action;
+        return AbstractDockingTest.getAction(frontEndTool, "FrontEndPlugin", actionName);
 	}
 
 	private DockingActionIf getAction(String toolName, String action) {

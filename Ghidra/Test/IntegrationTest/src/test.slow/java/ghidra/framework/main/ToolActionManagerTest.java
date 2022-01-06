@@ -681,9 +681,7 @@ public class ToolActionManagerTest extends AbstractGhidraHeadedIntegrationTest {
 	}
 
 	private DockingActionIf getAction(String actionName) {
-		DockingActionIf action =
-			AbstractDockingTest.getAction(frontEndTool, "FrontEndPlugin", actionName);
-		return action;
+        return AbstractDockingTest.getAction(frontEndTool, "FrontEndPlugin", actionName);
 	}
 
 	private PluginTool createTool() throws Exception {

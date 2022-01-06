@@ -101,8 +101,7 @@ class OldFunctionDataDB {
 	 * @see ghidra.program.model.listing.Function#getRepeatableComment()
 	 */
 	public String getRepeatableComment() {
-		String comment = functionRecord.getString(OldFunctionDBAdapter.REPEATABLE_COMMENT_COL);
-		return comment;
+        return functionRecord.getString(OldFunctionDBAdapter.REPEATABLE_COMMENT_COL);
 	}
 
 	/**
@@ -153,8 +152,7 @@ class OldFunctionDataDB {
 	 * @see ghidra.program.model.listing.Function#getStackPurgeSize()
 	 */
 	public int getStackDepthChange() {
-		int value = functionRecord.getIntValue(OldFunctionDBAdapter.STACK_DEPTH_COL);
-		return value;
+        return functionRecord.getIntValue(OldFunctionDBAdapter.STACK_DEPTH_COL);
 	}
 
 	/* (non-Javadoc)

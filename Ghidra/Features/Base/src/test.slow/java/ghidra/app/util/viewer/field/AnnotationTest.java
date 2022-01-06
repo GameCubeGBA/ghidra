@@ -751,14 +751,12 @@ public class AnnotationTest extends AbstractGhidraHeadedIntegrationTest {
 	@SuppressWarnings("deprecation")
 	private FontMetrics getFontMetrics() {
 		Font testFont = new Font("Times New Roman", Font.BOLD, 12);
-		FontMetrics fm = Toolkit.getDefaultToolkit().getFontMetrics(testFont);
-		return fm;
+        return Toolkit.getDefaultToolkit().getFontMetrics(testFont);
 	}
 
 	private AttributedString prototype() {
 		FontMetrics fontMetrics = getFontMetrics();
-		AttributedString prototypeString = new AttributedString("", Color.BLACK, fontMetrics);
-		return prototypeString;
+        return new AttributedString("", Color.BLACK, fontMetrics);
 	}
 
 	private FieldElement[] getNumberOfSubFieldElements(FieldElement fieldElement) {

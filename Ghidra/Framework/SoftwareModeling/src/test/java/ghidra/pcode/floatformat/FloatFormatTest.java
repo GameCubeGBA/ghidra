@@ -51,17 +51,15 @@ public strictfp class FloatFormatTest extends AbstractGenericTest {
 
 		float minFloat = Float.MIN_VALUE;
 
-		double d0 = minFloat;
-
-		BigFloat minFloatBig4 = FloatFormat.toBigFloat(minFloat);
+        BigFloat minFloatBig4 = FloatFormat.toBigFloat(minFloat);
 		Assert.assertTrue(!minFloatBig4.isNaN() && !minFloatBig4.isNormal());
 
 		// doubles have plenty of room at the bottom, so the mininum float is normal
-		BigFloat minFloatBig8 = FloatFormat.toBigFloat(d0);
+		BigFloat minFloatBig8 = FloatFormat.toBigFloat((double) minFloat);
 		Assert.assertTrue(minFloatBig8.isNormal());
 
 		long trueEncoding = Float.floatToRawIntBits(minFloat);
-		long ffEncoding = ff.getEncoding(d0);
+		long ffEncoding = ff.getEncoding(minFloat);
 		long ffBigEncoding4 = ff.getEncoding(minFloatBig4).longValue();
 		long ffBigEncoding8 = ff.getEncoding(minFloatBig8).longValue();
 
@@ -78,16 +76,14 @@ public strictfp class FloatFormatTest extends AbstractGenericTest {
 
 		float maxFloat = Float.MAX_VALUE;
 
-		double d0 = maxFloat;
-
-		BigFloat maxFloatBig4 = FloatFormat.toBigFloat(maxFloat);
+        BigFloat maxFloatBig4 = FloatFormat.toBigFloat(maxFloat);
 		Assert.assertTrue(maxFloatBig4.isNormal());
 
-		BigFloat maxFloatBig8 = FloatFormat.toBigFloat(d0);
+		BigFloat maxFloatBig8 = FloatFormat.toBigFloat((double) maxFloat);
 		Assert.assertTrue(maxFloatBig8.isNormal());
 
 		long trueEncoding = Float.floatToRawIntBits(maxFloat);
-		long ffEncoding = ff.getEncoding(d0);
+		long ffEncoding = ff.getEncoding(maxFloat);
 		long ffBigEncoding4 = ff.getEncoding(maxFloatBig4).longValue();
 		long ffBigEncoding8 = ff.getEncoding(maxFloatBig8).longValue();
 

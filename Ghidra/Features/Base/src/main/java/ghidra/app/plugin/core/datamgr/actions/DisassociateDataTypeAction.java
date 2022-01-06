@@ -107,8 +107,7 @@ public class DisassociateDataTypeAction extends DockingAction {
 			.stream()
 		    .map(node -> {
 				DataType dataType = node.getDataType();
-				DataTypeManager dtm = dataType.getDataTypeManager();
-				return dtm;
+                return dataType.getDataTypeManager();
 		    })
 		    .filter(dtm -> {
 		     	return !dtm.isUpdatable();

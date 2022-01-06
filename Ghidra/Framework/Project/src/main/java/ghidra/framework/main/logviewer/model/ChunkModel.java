@@ -106,8 +106,7 @@ public class ChunkModel implements Iterable<Chunk> {
 
 	@Override
 	public Iterator<Chunk> iterator() {
-		Iterator<Chunk> iterator = chunks.iterator();
-		return iterator;
+        return chunks.iterator();
 	}
 	
 	/**
@@ -135,8 +134,7 @@ public class ChunkModel implements Iterable<Chunk> {
         for (Chunk chunk : this) {
             if (row < chunk.linesInChunk + totalLines) {
                 int myRow = chunk.linesInChunk - ((chunk.linesInChunk + totalLines) - row);
-                Pair byteRange = chunk.rowToFilePositionMap.get(myRow);
-                return byteRange;
+                return chunk.rowToFilePositionMap.get(myRow);
             }
             totalLines += chunk.linesInChunk;
         }

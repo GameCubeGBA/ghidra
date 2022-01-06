@@ -105,9 +105,8 @@ public class DIECreator {
 			AttrInfo attrInfo = attrInfoList.get(i);
 			attrSpecs[i] = new DWARFAttributeSpecification(attrInfo.attribute, attrInfo.form);
 		}
-		DWARFAbbreviation abbr = new DWARFAbbreviation(cu.getCodeToAbbreviationMap().size(), tag,
-			!children.isEmpty(), attrSpecs);
-		return abbr;
+        return new DWARFAbbreviation(cu.getCodeToAbbreviationMap().size(), tag,
+            !children.isEmpty(), attrSpecs);
 	}
 
 	public DIECreator setParent(DebugInfoEntry parent) {

@@ -82,10 +82,8 @@ public final class GoToServicePlugin extends ProgramPlugin {
 
 	int getMaxHits() {
 		Options opt = tool.getOptions(PluginConstants.SEARCH_OPTION_NAME);
-		int maxSearchHits =
-			opt.getInt(GhidraOptions.OPTION_SEARCH_LIMIT, PluginConstants.DEFAULT_SEARCH_LIMIT);
 
-		return maxSearchHits;
+        return opt.getInt(GhidraOptions.OPTION_SEARCH_LIMIT, PluginConstants.DEFAULT_SEARCH_LIMIT);
 	}
 
 	GoToService getGotoService() {

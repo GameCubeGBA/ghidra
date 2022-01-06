@@ -225,14 +225,13 @@ public class PythonCodeCompletionFactory {
 			INCLUDE_TYPES_DESCRIPTION);
 
         for (Class<?> aClass : classes) {
-            Class<?> currentClass = (Class<?>) aClass;
             options.registerOption(
-                    COMPLETION_LABEL + Options.DELIMITER + getSimpleName(currentClass),
-                    classToColorMap.get(currentClass), null,
-                    "Color to use for " + classDescription.get(currentClass) + ".");
-            classToColorMap.put(currentClass,
-                    options.getColor(COMPLETION_LABEL + Options.DELIMITER + getSimpleName(currentClass),
-                            classToColorMap.get(currentClass)));
+                    COMPLETION_LABEL + Options.DELIMITER + getSimpleName((Class<?>) aClass),
+                    classToColorMap.get((Class<?>) aClass), null,
+                    "Color to use for " + classDescription.get((Class<?>) aClass) + ".");
+            classToColorMap.put((Class<?>) aClass,
+                    options.getColor(COMPLETION_LABEL + Options.DELIMITER + getSimpleName((Class<?>) aClass),
+                            classToColorMap.get((Class<?>) aClass)));
         }
 	}
 

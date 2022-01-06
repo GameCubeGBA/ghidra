@@ -48,10 +48,9 @@ public class Motorola68KAnalyzer extends ConstantPropagationAnalyzer {
 
 	@Override
 	public boolean canAnalyze(Program program) {
-		boolean canAnalyze = program.getLanguage().getProcessor().equals(
-			Processor.findOrPossiblyCreateProcessor(PROCESSOR_NAME));
 
-        return canAnalyze;
+        return program.getLanguage().getProcessor().equals(
+            Processor.findOrPossiblyCreateProcessor(PROCESSOR_NAME));
     }
 
 	@Override

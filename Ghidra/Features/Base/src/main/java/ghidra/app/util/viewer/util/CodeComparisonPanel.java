@@ -159,8 +159,7 @@ public abstract class CodeComparisonPanel<T extends FieldPanelCoordinator> exten
 		// No actions currently that appear for each CodeComparisonPanel.
 		// Classes that extend this class will override this method to get all actions 
 		// specific to that CodeComparisonPanel.
-		DockingAction[] actions = {};
-		return actions;
+        return new DockingAction[]{};
 	}
 
 	public boolean getShowTitles() {

@@ -104,9 +104,7 @@ public class VariableLocFieldFactory extends AbstractVariableFieldFactory {
 	 * @param offset the offset to get a string for
 	 */
 	public String getOffsetString(int offset) {
-		String offString =
-			(offset >= 0 ? Integer.toHexString(offset) : "-" + Integer.toHexString(-offset));
-		return offString;
+        return (offset >= 0 ? Integer.toHexString(offset) : "-" + Integer.toHexString(-offset));
 	}
 
 	/**

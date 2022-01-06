@@ -94,8 +94,7 @@ public class CliSigMethodSpec extends CliAbstractSig {
 		if (types.length > 0) {
 			typesRep = typesRep.substring(0, typesRep.length() - 2); // Take off last comma+space
 		}
-		String rep = String.format("GenericInst %d %s", genArgCount, typesRep);
-		return rep;
+        return String.format("GenericInst %d %s", genArgCount, typesRep);
 	}
 
 }

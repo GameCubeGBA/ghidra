@@ -124,9 +124,8 @@ public class DWARFRegisterMappingsManager {
 			throw new IOException("No DWARF register mapping information found for language " +
 				lang.getLanguageID().getIdAsString());
 		}
-		ResourceFile dwarfFile = new ResourceFile(parentFile, dwarfSpecFilename);
 
-		return dwarfFile;
+        return new ResourceFile(parentFile, dwarfSpecFilename);
 	}
 
 	/**

@@ -347,8 +347,7 @@ public class AttributedGraphExportersTest extends AbstractGenericTest {
 			throws IOException {
 		File file = createTempFile("GraphTest", "." + exporter.getFileExtension());
 		exporter.exportGraph(graph, file);
-		List<String> lines = FileUtilities.getLines(file);
-		return lines;
+        return FileUtilities.getLines(file);
 	}
 
 }

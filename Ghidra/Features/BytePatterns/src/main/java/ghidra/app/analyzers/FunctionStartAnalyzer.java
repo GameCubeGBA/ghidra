@@ -507,8 +507,7 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 				}
 			}
 			if (el.hasAttribute("label")) {
-				String name = el.getAttribute("label");
-				label = name;
+                label = el.getAttribute("label");
 			}
 			if (el.hasAttribute("thunk")) {
 				isThunk = true;
@@ -604,9 +603,8 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 	@Override
 	public boolean canAnalyze(Program program) {
 		ProgramDecisionTree patternDecisionTree = getPatternDecisionTree();
-		boolean hasPatterns = Patterns.hasPatternFiles(program, patternDecisionTree);
 
-		return hasPatterns;
+        return Patterns.hasPatternFiles(program, patternDecisionTree);
 	}
 
 	public AddressSetPropertyMap getOrCreatePotentialMatchPropertyMap(Program program) {
@@ -798,9 +796,7 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 			return null;
 		}
 
-		SequenceSearchState root = SequenceSearchState.buildStateMachine(patternlist);
-
-		return root;
+        return SequenceSearchState.buildStateMachine(patternlist);
 	}
 
 	private ArrayList<Pattern> readPatterns(ResourceFile[] filelist, Program program) {

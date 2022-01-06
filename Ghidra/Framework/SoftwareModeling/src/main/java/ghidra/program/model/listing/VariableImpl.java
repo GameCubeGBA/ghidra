@@ -639,16 +639,14 @@ abstract class VariableImpl implements Variable {
 			VariableStorage curStorage, int newSize, DataType type) throws InvalidInputException {
 
 		Address curAddr = varnode.getAddress();
-		int stackOffset = (int) curAddr.getOffset();
-		int newStackOffset = stackOffset;
 
-		int newEndStackOffset = newStackOffset + newVarnodeSize - 1;
-		if (newStackOffset < 0 && newEndStackOffset >= 0) {
+        int newEndStackOffset = (int) curAddr.getOffset() + newVarnodeSize - 1;
+		if ((int) curAddr.getOffset() < 0 && newEndStackOffset >= 0) {
 			throw new InvalidInputException(
 				"Data type does not fit within variable stack constraints");
 		}
 
-		return new Varnode(curAddr.getNewAddress(newStackOffset), newVarnodeSize);
+		return new Varnode(curAddr.getNewAddress((int) curAddr.getOffset()), newVarnodeSize);
 	}
 
 }

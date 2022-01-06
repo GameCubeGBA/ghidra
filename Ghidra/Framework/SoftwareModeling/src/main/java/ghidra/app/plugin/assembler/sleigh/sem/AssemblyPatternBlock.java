@@ -94,8 +94,7 @@ public class AssemblyPatternBlock implements Comparable<AssemblyPatternBlock> {
 		for (int i = 0; i < mask.length; i++) {
 			mask[i] = -1;
 		}
-		AssemblyPatternBlock res = new AssemblyPatternBlock(offset, mask, vals);
-		return res;
+        return new AssemblyPatternBlock(offset, mask, vals);
 	}
 
 	/**

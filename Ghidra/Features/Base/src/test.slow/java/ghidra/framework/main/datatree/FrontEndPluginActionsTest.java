@@ -837,8 +837,7 @@ public class FrontEndPluginActionsTest extends AbstractGhidraHeadedIntegrationTe
 
 		FrontEndPlugin plugin = getPlugin(frontEndTool, FrontEndPlugin.class);
 		JSplitPane panel = (JSplitPane) invokeInstanceMethod("getProjectDataPanel", plugin);
-		ProjectDataTablePanel pdtp = findComponent(panel, ProjectDataTablePanel.class);
-		return pdtp;
+        return findComponent(panel, ProjectDataTablePanel.class);
 	}
 
 	private ActionContext getTableActionContext() {
@@ -874,8 +873,7 @@ public class FrontEndPluginActionsTest extends AbstractGhidraHeadedIntegrationTe
 
 	private GTreeNode getChild(GTreeNode parent, String childName) {
 		waitForTree();
-		GTreeNode child = parent.getChild(childName);
-		return child;
+        return parent.getChild(childName);
 	}
 
 	private void confirmDelete() {
@@ -916,9 +914,7 @@ public class FrontEndPluginActionsTest extends AbstractGhidraHeadedIntegrationTe
 	}
 
 	private DockingActionIf getAction(String actionName) {
-		DockingActionIf action =
-			AbstractDockingTest.getAction(frontEndTool, "FrontEndPlugin", actionName);
-		return action;
+        return AbstractDockingTest.getAction(frontEndTool, "FrontEndPlugin", actionName);
 	}
 
 	private void expandTreePath(TreePath path) {

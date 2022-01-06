@@ -187,8 +187,7 @@ public class TestFGLayoutProvider extends FGLayoutProvider {
 				case 1:
 					FGEdge e = it.next();
 					FGVertex end = e.getEnd();
-					Node node = nodesByVertices.get(end);
-					parent.left = node;
+                    parent.left = nodesByVertices.get(end);
 
 					treeify(g, end, nodesByVertices);
 					break;
@@ -296,10 +295,9 @@ public class TestFGLayoutProvider extends FGLayoutProvider {
 					double y1 = start.getY(); // hidden
 					articulations.add(new Point2D.Double(x1, y1));
 
-					double x2 = x1;
-					double y2 = vertexBottom + offsetFromVertex;
+                    double y2 = vertexBottom + offsetFromVertex;
 					y2 = end.getY();
-					articulations.add(new Point2D.Double(x2, y2));
+					articulations.add(new Point2D.Double(x1, y2));
 
 					double x3 = end.getX() + (-direction);
 					double y3 = y2;
@@ -321,17 +319,14 @@ public class TestFGLayoutProvider extends FGLayoutProvider {
 					double y1 = start.getY(); // hidden
 					articulations.add(new Point2D.Double(x1, y1));
 
-					double x2 = x1;
-					double y2 = vertexBottom + offsetFromVertex;
-					articulations.add(new Point2D.Double(x2, y2));
+                    double y2 = vertexBottom + offsetFromVertex;
+					articulations.add(new Point2D.Double(x1, y2));
 
 					double x3 = end.getX() + (-direction);
-					double y3 = y2;
-					articulations.add(new Point2D.Double(x3, y3));
+                    articulations.add(new Point2D.Double(x3, y2));
 
-					double x4 = x3;
-					double y4 = end.getY(); // hidden
-					articulations.add(new Point2D.Double(x4, y4));
+                    double y4 = end.getY(); // hidden
+					articulations.add(new Point2D.Double(x3, y4));
 				}
 
 				else {  // same column--nothing to route

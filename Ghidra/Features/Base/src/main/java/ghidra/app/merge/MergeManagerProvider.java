@@ -101,15 +101,12 @@ class MergeManagerProvider extends ComponentProviderAdapter {
 				ListingMergePanel listingMergePanel = (ListingMergePanel) currentComponent;
 				Object actionContext = listingMergePanel.getActionContext(event);
 				if (actionContext instanceof ProgramLocation) {
-					ListingActionContext listingActionContext = new ListingActionContext(this,
-						navigatable, (ProgramLocation) actionContext);
-					return listingActionContext;
+                    return new ListingActionContext(this,
+                        navigatable, (ProgramLocation) actionContext);
 				}
 			}
 			ProgramLocation programLocation = navigatable.getLocation();
-			ListingActionContext listingActionContext =
-				new ListingActionContext(this, navigatable, programLocation);
-			return listingActionContext;
+            return new ListingActionContext(this, navigatable, programLocation);
 		}
 		return null;
 	}
@@ -238,10 +235,8 @@ class MergeManagerProvider extends ComponentProviderAdapter {
 		cancelButton = new JButton("Cancel");
 		cancelButton.addActionListener(e -> cancelCallback(false));
 
-		JPanel panel = ButtonPanelFactory.createButtonPanel(
-			new JButton[] { applyButton, cancelButton }, ButtonPanelFactory.X_AXIS);
-
-		return panel;
+        return ButtonPanelFactory.createButtonPanel(
+            new JButton[] { applyButton, cancelButton }, ButtonPanelFactory.X_AXIS);
 	}
 
 	// Creates the default panel that shows the phases along with the current phase progress.

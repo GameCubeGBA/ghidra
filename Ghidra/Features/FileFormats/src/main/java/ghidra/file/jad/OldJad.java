@@ -139,12 +139,10 @@ class OldJad {
 		if (Platform.CURRENT_PLATFORM == Platform.WIN_X86_32 ||
 			Platform.CURRENT_PLATFORM == Platform.WIN_X86_64) {
 			File jadExecutableFile = Application.getOSFile("jad.exe");
-			String jadPath = jadExecutableFile.getAbsolutePath();
-			return jadPath;
+            return jadExecutableFile.getAbsolutePath();
 		}
 		File jadExecutableFile = Application.getOSFile("jad");
-		String jadPath = jadExecutableFile.getAbsolutePath();
-		return jadPath;
+        return jadExecutableFile.getAbsolutePath();
 	}
 
 	private String readStdinMessagesFromProcess(Process process, TaskMonitor monitor)

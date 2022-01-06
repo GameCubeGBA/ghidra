@@ -124,11 +124,9 @@ public class DexExceptionHandlersAnalyzer extends FileFormatAnalyzer {
             monitor.checkCanceled();
             monitor.incrementProgress(1);
 
-            EncodedMethod method = encodedMethod;
+            Address codeAddress = baseAddress.add(encodedMethod.getCodeOffset());
 
-            Address codeAddress = baseAddress.add(method.getCodeOffset());
-
-            CodeItem codeItem = method.getCodeItem();
+            CodeItem codeItem = encodedMethod.getCodeItem();
             if (codeItem == null) {
                 continue;
             }

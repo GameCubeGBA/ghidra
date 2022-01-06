@@ -456,8 +456,7 @@ public class GhidraTableColumnModelTest extends AbstractGhidraHeadedIntegrationT
 
 	private GhidraTable getTable(LocationReferencesProvider provider) {
 		Object referencesPanel = TestUtils.getInstanceField("referencesPanel", provider);
-		GhidraTable table = (GhidraTable) TestUtils.getInstanceField("table", referencesPanel);
-		return table;
+        return (GhidraTable) TestUtils.getInstanceField("table", referencesPanel);
 	}
 
 	private void sortByClick(JTable table, int columnToClick, int modifiers) throws Exception {

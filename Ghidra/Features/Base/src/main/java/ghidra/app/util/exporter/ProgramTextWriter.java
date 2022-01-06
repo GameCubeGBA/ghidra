@@ -65,8 +65,7 @@ class ProgramTextWriter {
 		this.symbolTable = program.getSymbolTable();
 
 		// Record Starting Time
-		long startTime = System.currentTimeMillis();
-		long time = startTime;
+        long time = System.currentTimeMillis();
 
 		writer = new PrintWriter(new FileOutputStream(file));
 

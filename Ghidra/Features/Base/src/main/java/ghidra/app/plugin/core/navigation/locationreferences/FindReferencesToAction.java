@@ -78,8 +78,7 @@ public class FindReferencesToAction extends ListingContextAction {
 			}
 		}
 
-		LocationDescriptor descriptor = plugin.getLocationDescriptor(location);
-		return descriptor;
+        return plugin.getLocationDescriptor(location);
 	}
 
 	@Override

@@ -73,8 +73,7 @@ public class MultipleParameterStringable extends Stringable {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = prime * ((parameterStringables == null) ? 0 : parameterStringables.hashCode());
-		return result;
+        return prime * ((parameterStringables == null) ? 0 : parameterStringables.hashCode());
 	}
 
 	@Override

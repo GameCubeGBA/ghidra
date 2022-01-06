@@ -330,15 +330,14 @@ public class ModuleAlgorithmCmd extends BackgroundCommand {
 
 		boolean done = false;
 		int index = 0;
-		String baseName = newName;
-		String name = baseName;
+        String name = newName;
 		while (!done) {
 			try {
 				return module.createModule(name);
 			}
 			catch (DuplicateNameException e) {
 				++index;
-				name = baseName + "(" + index + ")";
+				name = newName + "(" + index + ")";
 			}
 		}
 		return null;

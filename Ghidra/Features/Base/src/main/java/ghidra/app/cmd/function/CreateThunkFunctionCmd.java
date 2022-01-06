@@ -556,17 +556,16 @@ public class CreateThunkFunctionCmd extends BackgroundCommand {
 			// check Pcode, any writes to memory are bad
 			PcodeOp[] pcode = instr.getPcode(false);
 			for (PcodeOp element : pcode) {
-				PcodeOp pcodeOp = element;
 
-				// Storing to a location is not allowed for a thunk
+                // Storing to a location is not allowed for a thunk
 				//   as a side-effect of the thunk.
-				if (pcodeOp.getOpcode() == PcodeOp.STORE) {
+				if (element.getOpcode() == PcodeOp.STORE) {
 					return null;
 				}
 
 				// record any used registers, checking for use of an unexpected unset register
 				if (checkForSideEffects && !addRegisterUsage(program, setAtStartRegisters,
-					setRegisters, usedRegisters, pcodeOp, allow8bitNonUse)) {
+					setRegisters, usedRegisters, element, allow8bitNonUse)) {
 					return null;
 				}
 			}
@@ -753,17 +752,16 @@ public class CreateThunkFunctionCmd extends BackgroundCommand {
 			// if scalar, is OK
 			// if memory load, OK
 			// if register, must be on the set list
-			Varnode inVarnode = input;
-			if (inVarnode.isRegister()) {
-				if ((!allow8bitNonUse || inVarnode.getSize() > 1) &&
-					!containsRegister(program, setRegisters, inVarnode) &&
-					!containsRegister(program, setAtStartRegisters, inVarnode)) {
+            if (input.isRegister()) {
+				if ((!allow8bitNonUse || input.getSize() > 1) &&
+					!containsRegister(program, setRegisters, input) &&
+					!containsRegister(program, setAtStartRegisters, input)) {
 					return false;
 				}
 				// it doesn't count as use if the sizes aren't equivalent
 				//  some instructions set flags as a side-effect
-				if (output == null || output.getSize() >= inVarnode.getSize()) {
-					usedRegisters.add(inVarnode);
+				if (output == null || output.getSize() >= input.getSize()) {
+					usedRegisters.add(input);
 				}
 			}
 		}

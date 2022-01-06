@@ -325,8 +325,7 @@ public class TestGraphAlgorithmSteppingViewerPanel<V, E extends GEdge<V>> extend
 			Collection<AlgorithmTestSteppingEdge<V>> children = g.getOutEdges(v);
 			int n = children.size();
 			int middle = n / 2;
-			int start = col - middle;
-			int childCol = start;
+            int childCol = col - middle;
 
 			for (AlgorithmTestSteppingEdge<V> edge : children) {
 				AlgorithmTestSteppingVertex<V> child = edge.getEnd();
@@ -338,8 +337,7 @@ public class TestGraphAlgorithmSteppingViewerPanel<V, E extends GEdge<V>> extend
 		public AbstractVisualGraphLayout<AlgorithmTestSteppingVertex<V>, AlgorithmTestSteppingEdge<V>> createClonedLayout(
 				VisualGraph<AlgorithmTestSteppingVertex<V>, AlgorithmTestSteppingEdge<V>> newGraph) {
 
-			TestGraphLayout newLayout = new TestGraphLayout((TestGraph) newGraph);
-			return newLayout;
+            return new TestGraphLayout((TestGraph) newGraph);
 		}
 
 	}

@@ -337,9 +337,8 @@ public class NamespaceManager implements ManagerDB {
 
             for (NamespaceHolder namespaceHolder : list) {
                 monitor.checkCanceled();
-                NamespaceHolder h = namespaceHolder;
-                namespaceMap.paintRange(h.range.getMinAddress(), h.range.getMaxAddress(),
-                        new LongField(h.namespaceID));
+                namespaceMap.paintRange(namespaceHolder.range.getMinAddress(), namespaceHolder.range.getMaxAddress(),
+                        new LongField(namespaceHolder.namespaceID));
             }
 		}
 		finally {

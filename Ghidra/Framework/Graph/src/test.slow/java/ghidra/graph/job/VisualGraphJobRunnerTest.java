@@ -703,9 +703,8 @@ public class VisualGraphJobRunnerTest extends AbstractGenericTest {
 				runState = testThread.isFinished() ? "finished" : "running";
 			}
 
-			String status = "Job.isFinished()?: " + started + " | " + shortcut + " | " + runState +
-				" (" + this + ")";
-			return status;
+            return "Job.isFinished()?: " + started + " | " + shortcut + " | " + runState +
+                " (" + this + ")";
 		}
 
 		boolean didShortcut() {

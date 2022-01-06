@@ -250,8 +250,7 @@ public class XmlUtilities {
 		SAXBuilder sax = createSecureSAXBuilder(false, false);
 
 		try (Reader r = new FileReader(f)) {
-			Document doc = sax.build(r);
-			return doc;
+            return sax.build(r);
 		}
 	}
 
@@ -269,8 +268,7 @@ public class XmlUtilities {
 
 		try (InputStream is = f.getInputStream()) {
 			Reader r = new InputStreamReader(is, StandardCharsets.UTF_8);
-			Document doc = sax.build(r);
-			return doc;
+            return sax.build(r);
 		}
 	}
 

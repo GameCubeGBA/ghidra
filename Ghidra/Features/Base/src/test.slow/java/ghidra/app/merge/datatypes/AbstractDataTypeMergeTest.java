@@ -152,17 +152,15 @@ public abstract class AbstractDataTypeMergeTest extends AbstractMergeTest {
 
 	private JRadioButton getButtonForChoice(int option) {
 
-		JRadioButton rb = waitForValue(() -> {
-			if (option == DataTypeMergeManager.OPTION_LATEST) {
-				return (JRadioButton) findButton(window, MergeConstants.LATEST_TITLE);
-			}
-			else if (option == DataTypeMergeManager.OPTION_MY) {
-				return (JRadioButton) findButton(window, MergeConstants.MY_TITLE);
-			}
-			return (JRadioButton) findButton(window, MergeConstants.ORIGINAL_TITLE);
-		});
-
-		return rb;
+        return waitForValue(() -> {
+            if (option == DataTypeMergeManager.OPTION_LATEST) {
+                return (JRadioButton) findButton(window, MergeConstants.LATEST_TITLE);
+            }
+            else if (option == DataTypeMergeManager.OPTION_MY) {
+                return (JRadioButton) findButton(window, MergeConstants.MY_TITLE);
+            }
+            return (JRadioButton) findButton(window, MergeConstants.ORIGINAL_TITLE);
+        });
 	}
 
 	private void waitForPreviousApply() {

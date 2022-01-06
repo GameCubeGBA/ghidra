@@ -56,8 +56,7 @@ public class GuidUtil {
 	private static String ARCHIVE_DIR = "msvcrt";
 	private static String ARCHIVE_DIR_PARENT = "typeinfo/win32";
 	private static boolean initialized = false;
-	private static GuidType[] guidTypes = { GuidType.CLSID, GuidType.IID,
-		GuidType.GUID, GuidType.SYNTAX };
+	private static GuidType[] guidTypes = GuidType.values();
 	private static Hashtable<GuidType, Hashtable<String, GuidInfo>> idTables;
 
 	private final static void initialize() {
@@ -100,8 +99,7 @@ public class GuidUtil {
 		initialize();
 		versionedGuidString = versionedGuidString.toUpperCase();
 		Hashtable<String, GuidInfo> table = idTables.get(GuidType.SYNTAX);
-		GuidInfo guidInfo = table.get(versionedGuidString);
-        return guidInfo;
+        return table.get(versionedGuidString);
     }
 
 	private static void buildGuidMap() {

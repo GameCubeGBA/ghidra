@@ -292,11 +292,9 @@ public class DecompileCallback {
 				}
 			}
 
-			PackedBytes pcode = instr.getPrototype()
-					.getPcodePacked(instr.getInstructionContext(),
-						new InstructionPcodeOverride(instr), uniqueFactory);
-
-			return pcode;
+            return instr.getPrototype()
+                    .getPcodePacked(instr.getInstructionContext(),
+                        new InstructionPcodeOverride(instr), uniqueFactory);
 		}
 		catch (UsrException e) {
 			Msg.warn(this,
@@ -893,8 +891,7 @@ public class DecompileCallback {
 
 	public String getUserOpName(String indexStr) {
 		int index = Integer.parseInt(indexStr);
-		String name = pcodelanguage.getUserDefinedOpName(index);
-		return name;
+        return pcodelanguage.getUserDefinedOpName(index);
 	}
 
 	private String buildResult(HighSymbol highSymbol, Namespace namespc) {

@@ -166,8 +166,7 @@ public class HistoryList<T> {
 	 * @return true if this history list's current item pointer is not at the end of the list.
 	 */
 	public boolean hasNext() {
-		boolean hasNext = historyIndex < historyStack.size() - 1;
-		return hasNext;
+        return historyIndex < historyStack.size() - 1;
 	}
 
 	/**
@@ -176,8 +175,7 @@ public class HistoryList<T> {
 	 * @return true if this history list's current item pointer is not at the beginning of the list.
 	 */
 	public boolean hasPrevious() {
-		boolean hasPrevious = historyIndex > 0;
-		return hasPrevious;
+        return historyIndex > 0;
 	}
 
 	/**

@@ -1174,11 +1174,9 @@ public abstract class AbstractFunctionGraphTest extends AbstractGhidraHeadedInte
 
 	protected void assertVerticesRemoved(FGVertex... ungroupedVertices) {
 
-		FunctionGraph functionGraph = getFunctionGraph();
-		Graph<FGVertex, FGEdge> graph = functionGraph;
-		for (FGVertex vertex : ungroupedVertices) {
+        for (FGVertex vertex : ungroupedVertices) {
 			assertTrue("Graph still contains grouped vertex: " + vertex,
-				!graph.containsVertex(vertex));
+				!((Graph<FGVertex, FGEdge>) getFunctionGraph()).containsVertex(vertex));
 		}
 	}
 
@@ -1264,10 +1262,9 @@ public abstract class AbstractFunctionGraphTest extends AbstractGhidraHeadedInte
 		// remove 10041a4
 		removeVertex(functionGraph, getAddress("10041a4"));
 
-		Graph<FGVertex, FGEdge> graph = functionGraph;
-		assertEquals(
+        assertEquals(
 			"Do not have the expected number of vertices after modifying our test " + "graph", 5,
-			graph.getVertexCount());
+			((Graph<FGVertex, FGEdge>) functionGraph).getVertexCount());
 
 		return funtionGraphData;
 	}
@@ -1324,19 +1321,18 @@ public abstract class AbstractFunctionGraphTest extends AbstractGhidraHeadedInte
 	protected void doTestAddingToGroup() {
 		FGData graphData = graphFunction("01002cf5");
 		FunctionGraph functionGraph = graphData.getFunctionGraph();
-		Graph<FGVertex, FGEdge> graph = functionGraph;
 
-		Collection<FGEdge> originalEdges = graph.getEdges();
+        Collection<FGEdge> originalEdges = ((Graph<FGVertex, FGEdge>) functionGraph).getEdges();
 
 		Set<FGVertex> ungroupedVertices =
 			selectVertices(functionGraph, "01002d2b" /* Another Local*/, "01002d1f" /* MyLocal */);
-		Set<FGEdge> ungroupedEdges = getEdges(graph, ungroupedVertices);
+		Set<FGEdge> ungroupedEdges = getEdges(functionGraph, ungroupedVertices);
 		assertEquals("Did not grab all known edges for vertices", 4, ungroupedEdges.size());
 
 		group(ungroupedVertices);
 
-		assertVerticesRemoved(graph, ungroupedVertices);
-		assertEdgesRemoved(graph, ungroupedEdges);
+		assertVerticesRemoved(functionGraph, ungroupedVertices);
+		assertEdgesRemoved(functionGraph, ungroupedEdges);
 
 		// -1 because one of the edges was between two of the vertices being grouped
 		int expectedGroupedEdgeCount = ungroupedEdges.size() - 1;
@@ -1348,12 +1344,12 @@ public abstract class AbstractFunctionGraphTest extends AbstractGhidraHeadedInte
 		//
 		Set<FGVertex> newUngroupedVertices =
 			selectVertices(functionGraph, "01002d66" /* LAB_01002d66 */);
-		Set<FGEdge> newUngroupedEdges = getEdges(graph, newUngroupedVertices);
+		Set<FGEdge> newUngroupedEdges = getEdges(functionGraph, newUngroupedVertices);
 
 		addToGroup(groupedVertex, newUngroupedVertices);
 
-		assertVerticesRemoved(graph, newUngroupedVertices);
-		assertEdgesRemoved(graph, newUngroupedEdges);
+		assertVerticesRemoved(functionGraph, newUngroupedVertices);
+		assertEdgesRemoved(functionGraph, newUngroupedEdges);
 
 		expectedGroupedEdgeCount = 3;
 		GroupedFunctionGraphVertex updatedGroupedVertex = validateNewGroupedVertexFromVertices(
@@ -1369,9 +1365,9 @@ public abstract class AbstractFunctionGraphTest extends AbstractGhidraHeadedInte
 
 		ungroup(updatedGroupedVertex);
 
-		assertVertexRemoved(graph, updatedGroupedVertex);
+		assertVertexRemoved(functionGraph, updatedGroupedVertex);
 
-		assertVerticesAdded(graph, ungroupedVertices);
+		assertVerticesAdded(functionGraph, ungroupedVertices);
 		assertEdgesAdded(functionGraph, originalEdges);
 
 		ungroupedVertices.addAll(newUngroupedVertices);
@@ -1382,18 +1378,17 @@ public abstract class AbstractFunctionGraphTest extends AbstractGhidraHeadedInte
 	protected void doTestGroupAndUngroupVertices() {
 		FGData graphData = graphFunction("01002cf5");
 		FunctionGraph functionGraph = graphData.getFunctionGraph();
-		Graph<FGVertex, FGEdge> graph = functionGraph;
 
-		Set<FGVertex> ungroupedVertices = selectVertices( functionGraph,
+        Set<FGVertex> ungroupedVertices = selectVertices( functionGraph,
 																	"01002d2b" /* Another Local*/,
 																	"01002d1f" /* MyLocal */);
-		Set<FGEdge> ungroupedEdges = getEdges(graph, ungroupedVertices);
+		Set<FGEdge> ungroupedEdges = getEdges(functionGraph, ungroupedVertices);
 		assertEquals("Did not grab all known edges for vertices", 4, ungroupedEdges.size());
 
 		group(ungroupedVertices);
 
-		assertVerticesRemoved(graph, ungroupedVertices);
-		assertEdgesRemoved(graph, ungroupedEdges);
+		assertVerticesRemoved(functionGraph, ungroupedVertices);
+		assertEdgesRemoved(functionGraph, ungroupedEdges);
 
 		// -1 because one one of the edges was between two of the vertices being grouped
 		int expectedGroupedEdgeCount = ungroupedEdges.size() - 1;
@@ -1403,8 +1398,8 @@ public abstract class AbstractFunctionGraphTest extends AbstractGhidraHeadedInte
 
 		ungroup(groupedVertex);
 
-		assertVertexRemoved(graph, groupedVertex);
-		assertVerticesAdded(graph, ungroupedVertices);
+		assertVertexRemoved(functionGraph, groupedVertex);
+		assertVerticesAdded(functionGraph, ungroupedVertices);
 		assertEdgesAdded(functionGraph, ungroupedEdges);
 		assertSelected(ungroupedVertices);
 
@@ -1752,8 +1747,7 @@ public abstract class AbstractFunctionGraphTest extends AbstractGhidraHeadedInte
 		Address endAddress = end.getVertexAddress();
 		FGVertex v1 = functionGraph.getVertexForAddress(startAddress);
 		FGVertex v2 = functionGraph.getVertexForAddress(endAddress);
-		Graph<FGVertex, FGEdge> graph = functionGraph;
-		return graph.findEdge(v1, v2);
+        return ((Graph<FGVertex, FGEdge>) functionGraph).findEdge(v1, v2);
 	}
 
 	protected Set<FGEdge> getEdges(Graph<FGVertex, FGEdge> graph, Set<FGVertex> ungroupedVertices) {
@@ -1898,13 +1892,11 @@ public abstract class AbstractFunctionGraphTest extends AbstractGhidraHeadedInte
 	private void removeEdge(FunctionGraph functionGraph, Address startAddress,
 			Address destinationAddress) {
 
-		Graph<FGVertex, FGEdge> graph = functionGraph;
-
-		FGVertex startVertex = functionGraph.getVertexForAddress(startAddress);
+        FGVertex startVertex = functionGraph.getVertexForAddress(startAddress);
 		FGVertex destinationVertex = functionGraph.getVertexForAddress(destinationAddress);
 
-		FGEdge edge = graph.findEdge(startVertex, destinationVertex);
-		runSwing(() -> graph.removeEdge(edge));
+		FGEdge edge = ((Graph<FGVertex, FGEdge>) functionGraph).findEdge(startVertex, destinationVertex);
+		runSwing(() -> ((Graph<FGVertex, FGEdge>) functionGraph).removeEdge(edge));
 		FGController controller = getFunctionGraphController();
 		controller.repaint();
 	}
@@ -1921,9 +1913,8 @@ public abstract class AbstractFunctionGraphTest extends AbstractGhidraHeadedInte
 	}
 
 	private void removeVertex(FunctionGraph functionGraph, Address vertexAddress) {
-		Graph<FGVertex, FGEdge> graph = functionGraph;
-		FGVertex vertex = functionGraph.getVertexForAddress(vertexAddress);
-		runSwing(() -> graph.removeVertex(vertex));
+        FGVertex vertex = functionGraph.getVertexForAddress(vertexAddress);
+		runSwing(() -> ((Graph<FGVertex, FGEdge>) functionGraph).removeVertex(vertex));
 		FGController controller = getFunctionGraphController();
 		controller.repaint();
 	}
@@ -2076,8 +2067,7 @@ public abstract class AbstractFunctionGraphTest extends AbstractGhidraHeadedInte
 		//
 		// make sure we have new edges
 		//
-		Graph<FGVertex, FGEdge> graph = functionGraph;
-		Collection<FGEdge> groupedEdges = graph.getIncidentEdges(groupedVertex);
+        Collection<FGEdge> groupedEdges = ((Graph<FGVertex, FGEdge>) functionGraph).getIncidentEdges(groupedVertex);
 
 		assertEquals("Ungrouped edges not replaced with new edges for the grouped vertex",
 			expectedGroupedEdgeCount, groupedEdges.size());
@@ -2102,18 +2092,14 @@ public abstract class AbstractFunctionGraphTest extends AbstractGhidraHeadedInte
 
 	protected void verifyEdge(FGVertex start, FGVertex destination) {
 		FGData data = getFunctionGraphData();
-		FunctionGraph functionGraph = data.getFunctionGraph();
-		Graph<FGVertex, FGEdge> graph = functionGraph;
 
-		FGEdge edge = graph.findEdge(start, destination);
+        FGEdge edge = ((Graph<FGVertex, FGEdge>) data.getFunctionGraph()).findEdge(start, destination);
 		assertNotNull("No edge exists for vertices: " + start + "   and   " + destination, edge);
 	}
 
 	protected void verifyEdgeCount(int expectedCount) {
 		FGData data = getFunctionGraphData();
-		FunctionGraph functionGraph = data.getFunctionGraph();
-		Graph<FGVertex, FGEdge> graph = functionGraph;
-		int actualCount = graph.getEdgeCount();
+        int actualCount = ((Graph<FGVertex, FGEdge>) data.getFunctionGraph()).getEdgeCount();
 		assertEquals("Graph has a different number of edges than expected.", expectedCount,
 			actualCount);
 	}
@@ -2169,9 +2155,8 @@ public abstract class AbstractFunctionGraphTest extends AbstractGhidraHeadedInte
 		performAction(action, graphProvider, false);
 
 		Window chooserWindow = waitForWindow("Please Select Background Color");
-		Object colorChooserDialog = chooserWindow;// the name is the real type
-		JColorChooser chooser =
-			(JColorChooser) TestUtils.getInstanceField("chooserPane", colorChooserDialog);
+        JColorChooser chooser =
+			(JColorChooser) TestUtils.getInstanceField("chooserPane", chooserWindow);
 		chooser.setColor(testColor);
 
 		JButton okButton = findButtonByText(chooserWindow, "OK");

@@ -388,8 +388,7 @@ public class DataTypeTreeCopyMoveTask extends Task {
 			return dtName;
 		}
 
-		String baseName = matcher.group(1);
-		return baseName;
+        return matcher.group(1);
 	}
 
 	String getNextCopyName(Category destinationCategory, String baseName) {

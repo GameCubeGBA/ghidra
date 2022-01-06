@@ -215,15 +215,14 @@ public class SubroutineModelCmd extends BackgroundCommand {
 		int index = 0;
 		//String baseName = block.getName();
 		//String name = baseName;
-		String baseName = nodeName;
-		String name = baseName;
+        String name = nodeName;
 		while (!done) {
 			try {
 				return root.createModule(name);
 			}
 			catch (DuplicateNameException e) {
 				++index;
-				name = baseName + "(" + index + ")";
+				name = nodeName + "(" + index + ")";
 			}
 		}
 		return null;

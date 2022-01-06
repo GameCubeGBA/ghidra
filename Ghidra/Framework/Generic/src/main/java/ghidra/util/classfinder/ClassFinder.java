@@ -51,21 +51,20 @@ public class ClassFinder {
 
         for (String s : pathSet) {
             monitor.checkCanceled();
-            String path = s;
-            String lcPath = path.toLowerCase();
-            File file = new File(path);
+            String lcPath = s.toLowerCase();
+            File file = new File(s);
             if ((lcPath.endsWith(".jar") || lcPath.endsWith(".zip")) && file.exists()) {
 
                 if (ClassJar.ignoreJar(lcPath)) {
-                    log.trace("Ignoring jar file: {}", path);
+                    log.trace("Ignoring jar file: {}", s);
                     continue;
                 }
 
-                log.trace("Searching jar file: {}", path);
-                classJars.add(new ClassJar(path, monitor));
+                log.trace("Searching jar file: {}", s);
+                classJars.add(new ClassJar(s, monitor));
             } else if (file.isDirectory()) {
-                log.trace("Searching classpath directory: {}", path);
-                classDirs.add(new ClassDir(path, monitor));
+                log.trace("Searching classpath directory: {}", s);
+                classDirs.add(new ClassDir(s, monitor));
             }
         }
 	}

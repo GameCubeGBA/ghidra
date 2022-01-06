@@ -306,8 +306,7 @@ class VarKeyRecordNode extends VarKeyNode implements FieldKeyRecordNode {
 			if (table != null) {
 				table.updatedRecord(getRecord(table.getSchema(), index), record);
 			}
-			VarKeyNode newRoot = updateRecord(index, record);
-			return newRoot;
+            return updateRecord(index, record);
 		}
 
 		// Handle new record - see if we have room in this leaf
@@ -370,8 +369,7 @@ class VarKeyRecordNode extends VarKeyNode implements FieldKeyRecordNode {
 
 		// Handle removal of last record in node
 		if (keyCount == 1) {
-			VarKeyNode newRoot = removeLeaf();
-			return newRoot;
+            return removeLeaf();
 		}
 
 		// Remove record within this node

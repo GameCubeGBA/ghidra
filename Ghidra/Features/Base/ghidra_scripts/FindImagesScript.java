@@ -124,8 +124,7 @@ public class FindImagesScript extends GhidraScript {
 		gifBytes[4] = (byte) 0x37;
 		gifBytes[5] = (byte) 0x61;
 
-		List<Address> foundGIFS = scanForImages(gifBytes);
-		return foundGIFS;
+        return scanForImages(gifBytes);
 	}
 
 	List<Address> scanForGIF89aImages() {
@@ -138,8 +137,7 @@ public class FindImagesScript extends GhidraScript {
 		gifBytes[4] = (byte) 0x39;
 		gifBytes[5] = (byte) 0x61;
 
-		List<Address> foundGIFS = scanForImages(gifBytes);
-		return foundGIFS;
+        return scanForImages(gifBytes);
 	}
 
 	List<Address> scanForPNGs() {
@@ -154,8 +152,7 @@ public class FindImagesScript extends GhidraScript {
 		pngBytes[6] = (byte) 0x1a;
 		pngBytes[7] = (byte) 0x0a;
 
-		List<Address> foundPNGs = scanForImages(pngBytes);
-		return foundPNGs;
+        return scanForImages(pngBytes);
 
 	}
 

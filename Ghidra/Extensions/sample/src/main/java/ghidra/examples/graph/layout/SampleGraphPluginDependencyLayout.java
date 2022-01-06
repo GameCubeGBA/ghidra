@@ -49,9 +49,7 @@ public class SampleGraphPluginDependencyLayout
 				"to clone the " + getClass().getSimpleName());
 		}
 
-		SampleGraphPluginDependencyLayout newLayout =
-			new SampleGraphPluginDependencyLayout((SampleGraph) newGraph, getLayoutName());
-		return newLayout;
+        return new SampleGraphPluginDependencyLayout((SampleGraph) newGraph, getLayoutName());
 	}
 
 	@Override

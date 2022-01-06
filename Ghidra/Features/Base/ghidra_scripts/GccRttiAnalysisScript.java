@@ -517,8 +517,7 @@ public class GccRttiAnalysisScript extends GhidraScript {
 
             monitor.checkCanceled();
 
-            Symbol typeinfoSymbol = symbol;
-            Address typeinfoAddress = typeinfoSymbol.getAddress();
+            Address typeinfoAddress = symbol.getAddress();
 
             // skip the typeinfo symbols from the three special typeinfos
             if (isSpecialTypeinfo(typeinfoAddress)) {
@@ -689,9 +688,8 @@ public class GccRttiAnalysisScript extends GhidraScript {
 
             monitor.checkCanceled();
 
-            Symbol vtableSymbol = listOfVtableSymbol;
-            Namespace vtableNamespace = vtableSymbol.getParentNamespace();
-            Address vtableAddress = vtableSymbol.getAddress();
+            Namespace vtableNamespace = listOfVtableSymbol.getParentNamespace();
+            Address vtableAddress = listOfVtableSymbol.getAddress();
 
             processVtable(vtableAddress, vtableNamespace, true);
 
@@ -835,8 +833,7 @@ public class GccRttiAnalysisScript extends GhidraScript {
 		ArrayDataType vftableArrayDataType =
 			new ArrayDataType(pointerDataType, numFunctionPointers, defaultPointerSize);
 		try {
-			Data vftableArrayData = createData(vftableAddress, vftableArrayDataType);
-			return vftableArrayData;
+            return createData(vftableAddress, vftableArrayDataType);
 		}
 		catch (Exception e) {
 			return null;
@@ -1128,8 +1125,7 @@ public class GccRttiAnalysisScript extends GhidraScript {
 			if (offset == 0) {
 				return null;
 			}
-			Address possibleFunctionPointer = currentAddress.getNewAddress(offset);
-			return possibleFunctionPointer;
+            return currentAddress.getNewAddress(offset);
 
 		}
 		catch (MemoryAccessException e) {
@@ -1245,8 +1241,7 @@ public class GccRttiAnalysisScript extends GhidraScript {
 	 */
 	private Address getAddress(Address address, int offset) {
 		try {
-			Address newAddress = address.add(offset);
-			return newAddress;
+            return address.add(offset);
 		}
 		catch (AddressOutOfBoundsException e) {
 			return null;

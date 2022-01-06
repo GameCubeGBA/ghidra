@@ -165,8 +165,7 @@ public class LocalDatabaseItem extends LocalFolderItem implements DatabaseItem {
 		}
 
 		boolean success = false;
-		long checkoutId = DEFAULT_CHECKOUT_ID;
-		try {
+        try {
 			propertyFile.putInt(FILE_TYPE, DATABASE_FILE_TYPE);
 			propertyFile.putBoolean(READ_ONLY, false);
 			propertyFile.putString(CONTENT_TYPE, contentType);
@@ -200,7 +199,7 @@ public class LocalDatabaseItem extends LocalFolderItem implements DatabaseItem {
 		finally {
 			if (!success) {
 				if (isVersioned) {
-					endCheckin(checkoutId);
+					endCheckin(DEFAULT_CHECKOUT_ID);
 				}
 				abortCreate();
 			}

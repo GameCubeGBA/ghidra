@@ -1341,8 +1341,7 @@ public class ClipboardPluginTest extends AbstractGhidraHeadedIntegrationTest {
 
 		SwingUtilities.invokeLater(() -> action.actionPerformed(new ActionContext()));
 		waitForSwing();
-		ByteViewerOptionsDialog d = waitForDialogComponent(ByteViewerOptionsDialog.class);
-		return d;
+        return waitForDialogComponent(ByteViewerOptionsDialog.class);
 	}
 
 	private void setByteViewerViewSelected(ByteViewerOptionsDialog dialog, String viewName,
@@ -1451,8 +1450,7 @@ public class ClipboardPluginTest extends AbstractGhidraHeadedIntegrationTest {
 	private ActionContext getActionContext(ComponentProviderWrapper wrapper) {
 		return runSwing(() -> {
 			ComponentProvider provider = wrapper.getComponentProvider();
-			ActionContext context = provider.getActionContext(null);
-			return context;
+            return provider.getActionContext(null);
 		});
 	}
 

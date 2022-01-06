@@ -173,8 +173,7 @@ public class EmptyBorderToggleButton extends EmptyBorderButton {
 		}
 
 		group.setSelected(buttonModel, b);
-		boolean isSelected = group.isSelected(buttonModel);
-		return isSelected;
+        return group.isSelected(buttonModel);
 	}
 
 	/**

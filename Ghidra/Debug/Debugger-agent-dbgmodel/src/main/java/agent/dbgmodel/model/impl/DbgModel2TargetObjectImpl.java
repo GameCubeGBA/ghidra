@@ -191,9 +191,7 @@ public class DbgModel2TargetObjectImpl extends DefaultTargetObject<TargetObject,
 	protected CompletableFuture<Void> processModelObjectElements(List<TargetObject> list) {
 		List<CompletableFuture<Void>> futures =
 			list.stream().map(to -> processElement(to)).collect(Collectors.toList());
-		CompletableFuture<Void> allOf =
-			CompletableFuture.allOf(futures.toArray(new CompletableFuture[futures.size()]));
-		return allOf;
+        return CompletableFuture.allOf(futures.toArray(new CompletableFuture[futures.size()]));
 	}
 
 	private CompletableFuture<Void> processElement(TargetObject targetObject) {

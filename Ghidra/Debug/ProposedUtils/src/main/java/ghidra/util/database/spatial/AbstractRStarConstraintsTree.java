@@ -279,7 +279,6 @@ public abstract class AbstractRStarConstraintsTree< //
 
 		// Keep the first group under the same node, but re-compute its bounds
 		// Move the second group to a new node
-		NR n1 = n;
 		NR n2 = nodeStore.create();
 		// NOTE: Careful here not to remove anything from node 0's entry
 		n2.setParentKey(n.getParentKey());
@@ -289,9 +288,9 @@ public abstract class AbstractRStarConstraintsTree< //
 		// Update existing node's metadata
 		Collection<? extends NS> firstBounds =
 			Collections2.transform(firstGroup, DBTreeRecord::getBounds);
-		n1.setShape(BoundingShape.boundsUnion(firstBounds));
-		n1.setChildCount(index);
-		n1.setDataCount(sum(Collections2.transform(firstGroup, p -> p.getDataCount())));
+		n.setShape(BoundingShape.boundsUnion(firstBounds));
+		n.setChildCount(index);
+		n.setDataCount(sum(Collections2.transform(firstGroup, p -> p.getDataCount())));
 
 		// Set new node's metadata
 		Collection<? extends NS> secondBounds =

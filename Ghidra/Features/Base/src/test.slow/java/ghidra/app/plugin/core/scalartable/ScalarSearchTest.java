@@ -684,8 +684,7 @@ public class ScalarSearchTest extends AbstractGhidraHeadedIntegrationTest {
 		CodeViewerProvider cbp = cb.getProvider();
 		performAction(action, cbp, false);
 
-		ScalarSearchDialog dialog = waitForDialogComponent(ScalarSearchDialog.class);
-		return dialog;
+        return waitForDialogComponent(ScalarSearchDialog.class);
 	}
 
 	private void createCompositeDataType() throws Exception {

@@ -69,8 +69,7 @@ public class DWARFNameInfo {
 	 */
 	public static DWARFNameInfo fromList(DWARFNameInfo parent, List<String> names) {
 		for (String s : names) {
-			DWARFNameInfo tmp = new DWARFNameInfo(parent, s, s, SymbolType.NAMESPACE);
-			parent = tmp;
+            parent = new DWARFNameInfo(parent, s, s, SymbolType.NAMESPACE);
 		}
 		return parent;
 	}

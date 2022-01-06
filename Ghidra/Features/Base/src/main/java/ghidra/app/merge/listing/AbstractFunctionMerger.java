@@ -1371,8 +1371,7 @@ abstract class AbstractFunctionMerger implements ListingMergeConstants {
 			int chosenConflictOption, TaskMonitor monitor) throws CancelledException {
         for (ParamInfoConflict paramInfoConflict : paramInfoConflicts) {
             monitor.checkCanceled();
-            ParamInfoConflict pc = paramInfoConflict;
-            mergeParamInfo(entryPt, pc, chosenConflictOption, monitor);
+            mergeParamInfo(entryPt, paramInfoConflict, chosenConflictOption, monitor);
         }
 	}
 
@@ -1402,8 +1401,7 @@ abstract class AbstractFunctionMerger implements ListingMergeConstants {
 
         for (ParamInfoConflict paramInfoConflict : paramInfoConflicts) {
             monitor.checkCanceled();
-            ParamInfoConflict pc = paramInfoConflict;
-            mergeParamInfo(functions, pc, chosenConflictOption, monitor);
+            mergeParamInfo(functions, paramInfoConflict, chosenConflictOption, monitor);
         }
 	}
 
@@ -1432,8 +1430,7 @@ abstract class AbstractFunctionMerger implements ListingMergeConstants {
 			int chosenConflictOption, TaskMonitor monitor) throws CancelledException {
         for (LocalVariableConflict localVarConflict : localVarConflicts) {
             monitor.checkCanceled();
-            LocalVariableConflict lvc = localVarConflict;
-            mergeLocal(entryPt, lvc, chosenConflictOption, monitor);
+            mergeLocal(entryPt, localVarConflict, chosenConflictOption, monitor);
         }
 	}
 

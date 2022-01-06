@@ -533,8 +533,7 @@ public class AutoVersionTrackingTask extends Task {
 					ApplyMarkupItemTask markupTask =
 						new ApplyMarkupItemTask(controller.getSession(), markupItems, applyOptions);
 					markupTask.run(monitor);
-					boolean currentMatchHasErrors = markupTask.hasErrors();
-                    return currentMatchHasErrors;
+                    return markupTask.hasErrors();
 				}
 			}
 		}

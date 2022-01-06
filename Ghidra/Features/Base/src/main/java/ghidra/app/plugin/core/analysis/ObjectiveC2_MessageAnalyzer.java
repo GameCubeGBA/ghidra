@@ -249,8 +249,7 @@ public class ObjectiveC2_MessageAnalyzer extends AbstractAnalyzer {
 			}
 
 			Data classNameData = program.getListing().getDefinedDataAt(classNameAddress);
-			String className = (String) classNameData.getValue();
-			return className;
+            return (String) classNameData.getValue();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -277,8 +276,7 @@ public class ObjectiveC2_MessageAnalyzer extends AbstractAnalyzer {
 			}
 
 			Data methodNameData = program.getListing().getDefinedDataAt(methodNameAddress);
-			String methodName = (String) methodNameData.getValue();
-			return methodName;
+            return (String) methodNameData.getValue();
 		}
 		catch (Exception e) {
 			e.printStackTrace();

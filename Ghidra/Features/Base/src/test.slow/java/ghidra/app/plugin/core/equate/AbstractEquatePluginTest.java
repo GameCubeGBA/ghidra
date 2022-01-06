@@ -215,8 +215,7 @@ public abstract class AbstractEquatePluginTest extends AbstractProgramBasedTest 
 		ComponentProvider provider = tool.getComponentProvider(PluginConstants.CODE_BROWSER);
 		DockingActionIf action = getAction(equatePlugin, "Apply Enum");
 		performAction(action, provider, false);
-		ApplyEnumDialog d = waitForDialogComponent(ApplyEnumDialog.class);
-		return d;
+        return waitForDialogComponent(ApplyEnumDialog.class);
 	}
 
 	protected void performAction(String name) {
@@ -371,8 +370,7 @@ public abstract class AbstractEquatePluginTest extends AbstractProgramBasedTest 
 	}
 
 	protected SetEquateDialog getSetEquatesDialog() {
-		SetEquateDialog d = showSetEquateDialog();
-		return d;
+        return showSetEquateDialog();
 	}
 
 	protected AddressSet selectScalars_0xb7() {

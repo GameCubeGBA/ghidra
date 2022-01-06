@@ -301,8 +301,7 @@ public class JavaSourceFile {
 		}
 
 		List<JavaSourceLine> list = new ArrayList<>();
-		int startLineNumber = lineNumber;
-		List<JavaSourceLine> remainingList = linesList.subList(startLineNumber, linesList.size());
+        List<JavaSourceLine> remainingList = linesList.subList(lineNumber, linesList.size());
 		for (JavaSourceLine sourceLine : remainingList) {
 			list.add(sourceLine);
 			if (sourceLine.getText().trim().endsWith(";")) {

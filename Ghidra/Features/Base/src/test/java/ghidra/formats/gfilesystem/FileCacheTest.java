@@ -54,8 +54,7 @@ public class FileCacheTest extends AbstractGenericTest {
 		// memory only
 		FileCacheEntryBuilder fceBuilder = cache.createCacheEntryBuilder(Integer.MAX_VALUE);
 		fceBuilder.write(payload.getBytes());
-		FileCacheEntry fce = fceBuilder.finish();
-		return fce;
+        return fceBuilder.finish();
 	}
 
 	@Test

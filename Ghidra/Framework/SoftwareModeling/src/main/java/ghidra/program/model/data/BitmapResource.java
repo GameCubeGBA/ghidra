@@ -612,8 +612,7 @@ public class BitmapResource {
             case BI_RLE8: {
                 int x = 0;
                 int y = 0;
-                int byteWidth = w;
-                decompressedDataSize = byteWidth * h;
+                decompressedDataSize = w * h;
                 if (returnDecompressedData) {
                     decompressedData = new byte[decompressedDataSize];
                 }
@@ -649,7 +648,7 @@ public class BitmapResource {
                                     if (decompressedData != null) {
                                         byte[] bytes = new byte[numFollow];
                                         buf.getBytes(bytes, readOffset);
-                                        System.arraycopy(bytes, 0, decompressedData, y * byteWidth + x,
+                                        System.arraycopy(bytes, 0, decompressedData, y * w + x,
                                                 bytes.length);
                                         x += numFollow;
                                     }
@@ -666,7 +665,7 @@ public class BitmapResource {
                                 if (x >= w || y >= h) {
                                     break;
                                 }
-                                decompressedData[y * byteWidth + x] = (byte) val;
+                                decompressedData[y * w + x] = (byte) val;
                                 x++;
                             }
                         }

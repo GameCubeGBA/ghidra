@@ -70,8 +70,7 @@ public class HTMLResourceDataType extends BuiltIn implements Dynamic {
 			return null;
 		}
 		String htmlString = new String(data);
-		String rawMessage = HTMLUtilities.fromHTML(htmlString);
-		return rawMessage;
+        return HTMLUtilities.fromHTML(htmlString);
 	}
 
 	@Override

@@ -53,10 +53,8 @@ public class DataLabelMarkupItemTest extends AbstractVTMarkupItemTest {
 
 		Symbol[] destinationSymbols = null;
 
-		Symbol[] expectedSymbols = sourceSymbols;
-
-		LabelValidator validator = new LabelValidator("0x010074be", "0x010074be", labelAddress,
-			sourceSymbols, destinationSymbols, expectedSymbols, LabelChoices.ADD);
+        LabelValidator validator = new LabelValidator("0x010074be", "0x010074be", labelAddress,
+			sourceSymbols, destinationSymbols, sourceSymbols, LabelChoices.ADD);
 		doTestFindAndApplyMarkupItem(validator);
 	}
 
@@ -76,10 +74,8 @@ public class DataLabelMarkupItemTest extends AbstractVTMarkupItemTest {
 
 		Symbol[] destinationSymbols = null;
 
-		Symbol[] expectedSymbols = sourceSymbols;
-
-		LabelValidator validator = new LabelValidator("0x010074be", "0x010074be", labelAddress,
-			sourceSymbols, destinationSymbols, expectedSymbols, LabelChoices.REPLACE_ALL);
+        LabelValidator validator = new LabelValidator("0x010074be", "0x010074be", labelAddress,
+			sourceSymbols, destinationSymbols, sourceSymbols, LabelChoices.REPLACE_ALL);
 		doTestFindAndApplyMarkupItem(validator);
 	}
 
@@ -103,10 +99,8 @@ public class DataLabelMarkupItemTest extends AbstractVTMarkupItemTest {
 		Symbol destinationSymbol1 = addLabel(labelAddress, destinationProgram);
 		Symbol[] destinationSymbols = { destinationSymbol1 };
 
-		Symbol[] expectedSymbols = sourceSymbols;
-
-		LabelValidator validator = new LabelValidator("0x010074be", "0x010074be", labelAddress,
-			sourceSymbols, destinationSymbols, expectedSymbols, LabelChoices.ADD);
+        LabelValidator validator = new LabelValidator("0x010074be", "0x010074be", labelAddress,
+			sourceSymbols, destinationSymbols, sourceSymbols, LabelChoices.ADD);
 		doTestFindAndApplyMarkupItem_ApplyFails(validator);
 	}
 

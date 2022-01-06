@@ -237,8 +237,7 @@ public class UnappliedMarkupItemStorageDBTest extends VTBaseTestCase {
 		Address destinationAddress = addr();
 
 		// trigger storage
-		VTMarkupItem unappliedMarkupItem = markupItem;
-		unappliedMarkupItem.setDestinationAddress(destinationAddress);
+        markupItem.setDestinationAddress(destinationAddress);
 
 		VTAssociationDB association = (VTAssociationDB) match.getAssociation();
 		Collection<VTMarkupItem> markupItems =

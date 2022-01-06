@@ -75,51 +75,49 @@ public class DialogResourceDataType extends DynamicDataType {
 	protected DataTypeComponent[] getAllComponents(MemBuffer mbIn) {
 		List<DataTypeComponent> comps = new ArrayList<>();
 		int tempOffset = 0;
-		MemBuffer memBuffer = mbIn;
 
-		try {
+        try {
 
 			// Determine if we are working with a DLGTEMPLATE or DLGTEMPLATEEX structure.
 			// The first 4 bytes will have specific values if it's a DLGTEMPLATEEX.
-			boolean ex = memBuffer.getShort(0) == 1 && memBuffer.getShort(2) == -1;
+			boolean ex = mbIn.getShort(0) == 1 && mbIn.getShort(2) == -1;
 
-			tempOffset = addDlgTemplateStructure(memBuffer, comps, tempOffset, ex);
+			tempOffset = addDlgTemplateStructure(mbIn, comps, tempOffset, ex);
 
-			tempOffset = addDialogMenuArray(memBuffer, comps, tempOffset);
+			tempOffset = addDialogMenuArray(mbIn, comps, tempOffset);
 
-			tempOffset = addDialogClassArray(memBuffer, comps, tempOffset);
+			tempOffset = addDialogClassArray(mbIn, comps, tempOffset);
 
-			tempOffset = addDialogTitleArray(memBuffer, comps, tempOffset);
+			tempOffset = addDialogTitleArray(mbIn, comps, tempOffset);
 
 			//Check to see if extra font size and array info after three dialog items
 			//will only be there if DS_SETFONT mask is set at offset 0 of DLGTEMPLATE
-			byte getStyle = memBuffer.getByte(0);
+			byte getStyle = mbIn.getByte(0);
 			if ((getStyle & DS_SETFONT) > 0) {
-				tempOffset = addDialogFontSizeAndArray(memBuffer, comps, tempOffset);
+				tempOffset = addDialogFontSizeAndArray(mbIn, comps, tempOffset);
 			}
 
 			//get cdit value at offset 8 of DLGTEMPLATE or offset 16 of DLGTEMPLATEEX
 			//this determines how many DLGITEMTEMPLATE(EX) items their are
-			short numComponents = memBuffer.getShort(ex ? 16 : 8);
+			short numComponents = mbIn.getShort(ex ? 16 : 8);
 
 			//loop over DLGITEMTEMPLATES and add them
 			for (int i = 0; i < numComponents; i++) {
 
-				tempOffset = addDlgItemStructure(memBuffer, comps, tempOffset, ex);
+				tempOffset = addDlgItemStructure(mbIn, comps, tempOffset, ex);
 
-				tempOffset = addItemClassArray(memBuffer, comps, tempOffset);
+				tempOffset = addItemClassArray(mbIn, comps, tempOffset);
 
-				tempOffset = addItemTitleArray(memBuffer, comps, tempOffset);
+				tempOffset = addItemTitleArray(mbIn, comps, tempOffset);
 
-				tempOffset = addItemCreationData(memBuffer, comps, tempOffset);
+				tempOffset = addItemCreationData(mbIn, comps, tempOffset);
 			}
 		}
 		catch (MemoryAccessException e) {
 			Msg.error(this, "buffer error: " + e.getMessage(), e);
 		}
 
-		DataTypeComponent[] result = comps.toArray(new DataTypeComponent[comps.size()]);
-		return result;
+        return comps.toArray(new DataTypeComponent[comps.size()]);
 	}
 
 	//adds initial DLGTEMPLATE(EX) structure
@@ -471,8 +469,7 @@ public class DialogResourceDataType extends DynamicDataType {
 	}
 
 	private ArrayDataType createArrayOfShorts(int len) {
-		ArrayDataType array = new ArrayDataType(ShortDataType.dataType, len, 2);
-		return array;
+        return new ArrayDataType(ShortDataType.dataType, len, 2);
 	}
 
 	private int addComp(DataType dataType, int len, String fieldName, Address address,

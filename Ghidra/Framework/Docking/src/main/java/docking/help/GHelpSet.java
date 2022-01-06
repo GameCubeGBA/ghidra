@@ -206,8 +206,7 @@ public class GHelpSet extends HelpSet {
 				return fileURL;
 			}
 
-			URL rawURL = createRawURL(id);
-			return rawURL;
+            return createRawURL(id);
 		}
 
 		private URL createRawURL(String id) {
@@ -254,8 +253,7 @@ public class GHelpSet extends HelpSet {
 			// this allows us to find files by using relative paths (e.g., 'docs/WhatsNew.html'
 			// will get resolved relative to the installation directory in a build).
 			ResourceFile installDir = Application.getInstallationDirectory();
-			ResourceFile helpFile = new ResourceFile(installDir, id);
-			return helpFile;
+            return new ResourceFile(installDir, id);
 		}
 
 		@Override

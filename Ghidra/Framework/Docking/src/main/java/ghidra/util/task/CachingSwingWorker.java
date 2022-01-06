@@ -244,8 +244,7 @@ public abstract class CachingSwingWorker<T> implements CachingLoader<T> {
 	private class SwingWorkerImpl extends SwingWorker<T, Object> {
 		@Override
 		protected T doInBackground() throws Exception {
-			T result = runInBackground(taskMonitor);
-			return result;
+            return runInBackground(taskMonitor);
 		}
 
 		@Override

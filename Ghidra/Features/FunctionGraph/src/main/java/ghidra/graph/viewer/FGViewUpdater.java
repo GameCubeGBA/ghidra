@@ -85,9 +85,8 @@ public class FGViewUpdater extends VisualGraphViewUpdater<FGVertex, FGEdge> {
 		//
 		FGData functionGraphData = controller.getFunctionGraphData();
 		FunctionGraph functionGraph = functionGraphData.getFunctionGraph();
-		Graph<FGVertex, FGEdge> graph = functionGraph;
 
-		if (!graph.containsVertex(groupedVertex)) {
+        if (!((Graph<FGVertex, FGEdge>) functionGraph).containsVertex(groupedVertex)) {
 			throw new IllegalArgumentException(
 				"Cannot ungroup a vertex that is not in the graph!: " +
 					groupedVertex.getUserText());
@@ -95,7 +94,7 @@ public class FGViewUpdater extends VisualGraphViewUpdater<FGVertex, FGEdge> {
 
 		Set<FGVertex> vertices = groupedVertex.getVertices();
 		for (FGVertex newVertex : vertices) {
-			graph.addVertex(newVertex);
+			((Graph<FGVertex, FGEdge>) functionGraph).addVertex(newVertex);
 		}
 
 		//
@@ -118,8 +117,7 @@ public class FGViewUpdater extends VisualGraphViewUpdater<FGVertex, FGEdge> {
 	private void validateAndAddEdge(FGController controller, FunctionGraph functionGraph,
 			GroupedFunctionGraphVertex groupedVertex, FGEdge edge) {
 
-		Graph<FGVertex, FGEdge> graph = functionGraph;
-		FGVertex startVertex =
+        FGVertex startVertex =
 			updateEdgeVertexForUngrouping(functionGraph, groupedVertex, edge.getStart());
 		FGVertex destinationVertex =
 			updateEdgeVertexForUngrouping(functionGraph, groupedVertex, edge.getEnd());
@@ -129,14 +127,13 @@ public class FGViewUpdater extends VisualGraphViewUpdater<FGVertex, FGEdge> {
 			edge = edge.cloneEdge(startVertex, destinationVertex);
 		}
 
-		graph.addEdge(edge, startVertex, destinationVertex);
+		((Graph<FGVertex, FGEdge>) functionGraph).addEdge(edge, startVertex, destinationVertex);
 	}
 
 	public FGVertex updateEdgeVertexForUngrouping(FunctionGraph functionGraph,
 			GroupedFunctionGraphVertex groupedVertex, FGVertex originalVertex) {
 
-		Graph<FGVertex, FGEdge> graph = functionGraph;
-		if (graph.containsVertex(originalVertex)) {
+        if (((Graph<FGVertex, FGEdge>) functionGraph).containsVertex(originalVertex)) {
 			return originalVertex;
 		}
 
@@ -147,7 +144,7 @@ public class FGViewUpdater extends VisualGraphViewUpdater<FGVertex, FGEdge> {
 		// given address.
 		//
 		Address address = originalVertex.getVertexAddress();
-		Collection<FGVertex> vertices = graph.getVertices();
+		Collection<FGVertex> vertices = ((Graph<FGVertex, FGEdge>) functionGraph).getVertices();
 		for (FGVertex vertex : vertices) {
 			if (vertex.containsAddress(address) && !vertex.equals(groupedVertex)) {
 				return vertex;
@@ -167,9 +164,7 @@ public class FGViewUpdater extends VisualGraphViewUpdater<FGVertex, FGEdge> {
 	public void ungroupAllVertices(final FGController controller) {
 
 		FGData functionGraphData = controller.getFunctionGraphData();
-		FunctionGraph functionGraph = functionGraphData.getFunctionGraph();
-		Graph<FGVertex, FGEdge> graph = functionGraph;
-		Collection<FGVertex> vertices = graph.getVertices();
+        Collection<FGVertex> vertices = ((Graph<FGVertex, FGEdge>) functionGraphData.getFunctionGraph()).getVertices();
 
 		Set<GroupedFunctionGraphVertex> groupVertices = new HashSet<>();
 		for (FGVertex vertex : vertices) {
@@ -215,11 +210,9 @@ public class FGViewUpdater extends VisualGraphViewUpdater<FGVertex, FGEdge> {
 		}
 
 		FGData functionGraphData = controller.getFunctionGraphData();
-		FunctionGraph functionGraph = functionGraphData.getFunctionGraph();
-		Graph<FGVertex, FGEdge> graph = functionGraph;
 
-		Set<FGEdge> ungroupedEdges = new HashSet<>();
-		accumulateUngroupedIncidentEdges(graph, groupedVertices, ungroupedEdges);
+        Set<FGEdge> ungroupedEdges = new HashSet<>();
+		accumulateUngroupedIncidentEdges(functionGraphData.getFunctionGraph(), groupedVertices, ungroupedEdges);
 
 		createNewGroupedEdges(controller, groupVertex, ungroupedEdges);
 
@@ -243,13 +236,11 @@ public class FGViewUpdater extends VisualGraphViewUpdater<FGVertex, FGEdge> {
 			GroupedFunctionGraphVertex newGroupVertex) {
 
 		FGData functionGraphData = controller.getFunctionGraphData();
-		FunctionGraph functionGraph = functionGraphData.getFunctionGraph();
-		Graph<FGVertex, FGEdge> graph = functionGraph;
 
-		Collection<FGEdge> inEdges = graph.getInEdges(oldGroupVertex);
-		Collection<FGEdge> outEdges = graph.getOutEdges(oldGroupVertex);
+        Collection<FGEdge> inEdges = ((Graph<FGVertex, FGEdge>) functionGraphData.getFunctionGraph()).getInEdges(oldGroupVertex);
+		Collection<FGEdge> outEdges = ((Graph<FGVertex, FGEdge>) functionGraphData.getFunctionGraph()).getOutEdges(oldGroupVertex);
 
-		graph.addVertex(newGroupVertex);
+		((Graph<FGVertex, FGEdge>) functionGraphData.getFunctionGraph()).addVertex(newGroupVertex);
 
 		FGView view = controller.getView();
 		VisualizationServer<FGVertex, FGEdge> viewer = view.getPrimaryGraphViewer();
@@ -260,16 +251,16 @@ public class FGViewUpdater extends VisualGraphViewUpdater<FGVertex, FGEdge> {
 		for (FGEdge edge : inEdges) {
 			FGVertex startVertex = edge.getStart();
 			FGEdge clonedEdge = edge.cloneEdge(startVertex, newGroupVertex);
-			graph.addEdge(clonedEdge, startVertex, newGroupVertex);
+			((Graph<FGVertex, FGEdge>) functionGraphData.getFunctionGraph()).addEdge(clonedEdge, startVertex, newGroupVertex);
 		}
 
 		for (FGEdge edge : outEdges) {
 			FGVertex destinationVertex = edge.getEnd();
-			graph.addEdge(edge.cloneEdge(newGroupVertex, destinationVertex), newGroupVertex,
+			((Graph<FGVertex, FGEdge>) functionGraphData.getFunctionGraph()).addEdge(edge.cloneEdge(newGroupVertex, destinationVertex), newGroupVertex,
 				destinationVertex);
 		}
 
-		graph.removeVertex(oldGroupVertex);
+		((Graph<FGVertex, FGEdge>) functionGraphData.getFunctionGraph()).removeVertex(oldGroupVertex);
 	}
 
 	public void regroupVertices(FGController controller, FGVertex vertex) {
@@ -411,10 +402,8 @@ public class FGViewUpdater extends VisualGraphViewUpdater<FGVertex, FGEdge> {
 		// Keep track of edges that will be incoming to the new grouped vertex.
 		//
 		FGData functionGraphData = controller.getFunctionGraphData();
-		FunctionGraph functionGraph = functionGraphData.getFunctionGraph();
-		Graph<FGVertex, FGEdge> graph = functionGraph;
-		Set<FGEdge> ungroupedEdges = new HashSet<>();
-		accumulateUngroupedIncidentEdges(graph, groupedVertices, ungroupedEdges);
+        Set<FGEdge> ungroupedEdges = new HashSet<>();
+		accumulateUngroupedIncidentEdges(functionGraphData.getFunctionGraph(), groupedVertices, ungroupedEdges);
 
 		GroupedFunctionGraphVertex groupVertex = new GroupedFunctionGraphVertex(controller,
 			groupVertexText, groupedVertices, ungroupedEdges);

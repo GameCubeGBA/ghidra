@@ -218,8 +218,7 @@ public class HelpModuleCollection implements TOCItemProvider {
 			return null;
 		}
 
-		AnchorDefinition definition = helpFile.getAnchorDefinition(target);
-		return definition;
+        return helpFile.getAnchorDefinition(target);
 	}
 
 	public HelpFile getHelpFile(Path helpPath) {
@@ -248,8 +247,7 @@ public class HelpModuleCollection implements TOCItemProvider {
 	@Override
 	public Map<String, TOCItemDefinition> getTocDefinitionsByID() {
         GhidraTOCFile TOC = inputHelp.getSourceTOCFile();
-        Map<String, TOCItemDefinition> map = new HashMap<>(TOC.getTOCDefinitionByIDMapping());
-		return map;
+        return new HashMap<>(TOC.getTOCDefinitionByIDMapping());
 	}
 
 	@Override
@@ -314,14 +312,12 @@ public class HelpModuleCollection implements TOCItemProvider {
 	 */
 	public Collection<TOCItem> getInputTOCItems() {
         GhidraTOCFile TOC = inputHelp.getSourceTOCFile();
-        Collection<TOCItem> items = new ArrayList<>(TOC.getAllTOCItems());
-		return items;
+        return new ArrayList<>(TOC.getAllTOCItems());
 	}
 
 	public Collection<HREF> getTOC_HREFs() {
         GhidraTOCFile TOC = inputHelp.getSourceTOCFile();
-        Collection<HREF> definitions = new ArrayList<>(getTOC_HREFs(TOC));
-		return definitions;
+        return new ArrayList<>(getTOC_HREFs(TOC));
 	}
 
 	private Collection<HREF> getTOC_HREFs(GhidraTOCFile file) {
@@ -381,8 +377,7 @@ public class HelpModuleCollection implements TOCItemProvider {
 
 			PathKey other = (PathKey) obj;
 
-			boolean result = path.equals(other.path);
-			return result;
+            return path.equals(other.path);
 		}
 
 		@Override

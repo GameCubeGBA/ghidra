@@ -61,8 +61,7 @@ public class AUDataType extends BuiltIn implements Dynamic {
 
 			int dataSize = GhidraBigEndianDataConverter.INSTANCE.getInt(buf, 8);
 
-			int totalSize = dataOffset + dataSize; //header + data = total size			
-			return totalSize;
+            return dataOffset + dataSize;
 
 		}
 		catch (Exception e) {

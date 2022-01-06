@@ -126,8 +126,7 @@ public class FunctionBitPatternsGTreeNode extends GTreeNode {
 		sb.append(" (");
 		sb.append(Double.toString(((Math.round(percentage * 10) * 1.0) / 10)));
 		sb.append("%)");
-		String tip = sb.toString();
-		return tip;
+        return sb.toString();
 	}
 
 	@Override

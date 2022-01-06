@@ -759,8 +759,7 @@ public class GTable extends JTable {
 				}
 
 				// render contents literally, wrapped in HTML
-				String html = HTMLUtilities.toLiteralHTMLForTooltip(string);
-				return html;
+                return HTMLUtilities.toLiteralHTMLForTooltip(string);
 			}
 		}
 		return null;
@@ -1029,8 +1028,7 @@ public class GTable extends JTable {
 		}
 
 		Object value = getCellValue(row, column);
-		Object updated = maybeConvertValue(value);
-		return updated;
+        return maybeConvertValue(value);
 	}
 
 	private Object getCellValue(int row, int viewColumn) {
@@ -1052,8 +1050,7 @@ public class GTable extends JTable {
 		}
 
 		String asString = value.toString();
-		String converted = HTMLUtilities.fromHTML(asString);
-		return converted;
+        return HTMLUtilities.fromHTML(asString);
 	}
 
 	/**

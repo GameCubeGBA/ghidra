@@ -97,8 +97,7 @@ public class OperandValue extends PatternValue {
 		ConstructState tempstate = new ConstructState();
 		ParserWalker newwalker = new ParserWalker(pos.getParserContext());
 		newwalker.setOutOfBandState(ct, index, tempstate, pos);
-		long res = patexp.getValue(newwalker);
-		return res;
+        return patexp.getValue(newwalker);
 	}
 
 	@Override

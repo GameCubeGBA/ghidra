@@ -294,8 +294,7 @@ public class FullOatBundle implements OatBundle {
 		BinaryReader reader = new BinaryReader(provider, isLittleEndian);
 		switch (type) {
 			case ART: {
-				ArtHeader artHeader = ArtFactory.newArtHeader(reader);
-				this.artHeader = artHeader;
+                this.artHeader = ArtFactory.newArtHeader(reader);
 				return true;
 			}
 			case CDEX:

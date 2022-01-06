@@ -247,15 +247,13 @@ public class CollectionUtilsTest {
 		list.add("B");
 		list.add("C");
 
-		List<?> src = list;//note: this is contrived!
+        List<String> dest = CollectionUtils.asList(list, String.class);
 
-		List<String> dest = CollectionUtils.asList(src, String.class);
+		assertEquals(list.size(), dest.size());
 
-		assertEquals(src.size(), dest.size());
-
-		assertEquals(src.get(0), dest.get(0));
-		assertEquals(src.get(1), dest.get(1));
-		assertEquals(src.get(2), dest.get(2));
+		assertEquals(((List<?>) list).get(0), dest.get(0));
+		assertEquals(((List<?>) list).get(1), dest.get(1));
+		assertEquals(((List<?>) list).get(2), dest.get(2));
 	}
 
 	@Test(expected = IllegalArgumentException.class)

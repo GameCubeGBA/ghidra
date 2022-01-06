@@ -95,11 +95,9 @@ public class Img3FileSystem implements GFileSystem {
 			throw new IOException("Unknown file: " + file);
 		}
 
-		ByteProvider derivedBP = fsService.getDerivedByteProvider(fsFSRL.getContainer(),
-			file.getFSRL(), "decrypted_img3_" + file.getName(), dataTag.getTotalLength(),
-			() -> dataTag.getDecryptedInputStream(fsFSRL.getName(2), fsFSRL.getName(1)), monitor);
-
-		return derivedBP;
+        return fsService.getDerivedByteProvider(fsFSRL.getContainer(),
+            file.getFSRL(), "decrypted_img3_" + file.getName(), dataTag.getTotalLength(),
+            () -> dataTag.getDecryptedInputStream(fsFSRL.getName(2), fsFSRL.getName(1)), monitor);
 	}
 
 	public Icon getIcon() {

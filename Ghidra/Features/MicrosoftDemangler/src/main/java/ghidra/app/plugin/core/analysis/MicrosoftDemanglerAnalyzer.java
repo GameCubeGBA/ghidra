@@ -62,7 +62,6 @@ public class MicrosoftDemanglerAnalyzer extends AbstractDemanglerAnalyzer {
 	@Override
 	protected DemangledObject doDemangle(String mangled, DemanglerOptions options, MessageLog log)
 			throws DemangledException {
-		DemangledObject demangled = demangler.demangle(mangled, options);
-		return demangled;
+        return demangler.demangle(mangled, options);
 	}
 }

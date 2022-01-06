@@ -345,8 +345,7 @@ public class SymbolReferenceModel extends AddressBasedTableModel<Reference> {
 
 		private CodeBlockModel getCodeBlockModel(Program program, BlockModelService service) {
 			if (cachedModel == null || program != cachedProgram) {
-				CodeBlockModel model = service.getActiveSubroutineModel(program);
-				cachedModel = model;
+                cachedModel = service.getActiveSubroutineModel(program);
 			}
 
 			cachedProgram = program;
@@ -392,8 +391,7 @@ public class SymbolReferenceModel extends AddressBasedTableModel<Reference> {
 			if (referenceType == RefType.INDIRECTION) {
 				Instruction instruction = listing.getInstructionAt(rowObject.getFromAddress());
 				if (instruction != null) {
-					FlowType flowType = instruction.getFlowType();
-					return flowType;
+                    return instruction.getFlowType();
 				}
 			}
 			return referenceType;

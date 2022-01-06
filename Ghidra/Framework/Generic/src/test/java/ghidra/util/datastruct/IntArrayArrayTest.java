@@ -66,8 +66,7 @@ public class IntArrayArrayTest extends AbstractGenericTest {
         IntArrayArray baa = new IntArrayArray();
 
         for(int i=0;i<1000;i++) {
-            int t = i;
-            baa.put(i,new int[]{t,(t+1),(t+2),(t+3),(t+4)});
+            baa.put(i,new int[]{i,(i +1),(i +2),(i +3),(i +4)});
         }
         for(int i=0;i<1000;i++) {
             int[] b = baa.get(i);
@@ -84,8 +83,7 @@ public class IntArrayArrayTest extends AbstractGenericTest {
         assertEquals(4,baa.starts.length);
         assertEquals(10,baa.ints.length);
         for(int i=0;i<1000;i++) {
-            int t = i;
-            baa.put(i,new int[]{t,(t+1),(t+2),(t+3),(t+4)});
+            baa.put(i,new int[]{i,(i +1),(i +2),(i +3),(i +4)});
         }
         for(int i=0;i<1000;i++) {
             int[] b = baa.get(i);

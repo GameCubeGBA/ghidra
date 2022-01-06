@@ -177,9 +177,7 @@ public class FGProvider extends VisualGraphComponentProvider<FGVertex, FGEdge, F
 			return addresses;
 		}
 
-		FunctionGraph functionGraph = functionGraphData.getFunctionGraph();
-		Graph<FGVertex, FGEdge> graph = functionGraph;
-		Collection<FGVertex> hoveredVertices = GraphViewerUtils.getVerticesOfHoveredEdges(graph);
+        Collection<FGVertex> hoveredVertices = GraphViewerUtils.getVerticesOfHoveredEdges(functionGraphData.getFunctionGraph());
 		for (FGVertex vertex : hoveredVertices) {
 			addresses.add(vertex.getAddresses());
 		}
@@ -197,9 +195,7 @@ public class FGProvider extends VisualGraphComponentProvider<FGVertex, FGEdge, F
 			return addresses;
 		}
 
-		FunctionGraph functionGraph = functionGraphData.getFunctionGraph();
-		Graph<FGVertex, FGEdge> graph = functionGraph;
-		Collection<FGVertex> selectedVertices = GraphViewerUtils.getVerticesOfSelectedEdges(graph);
+        Collection<FGVertex> selectedVertices = GraphViewerUtils.getVerticesOfSelectedEdges(functionGraphData.getFunctionGraph());
 		for (FGVertex vertex : selectedVertices) {
 			addresses.add(vertex.getAddresses());
 		}
@@ -386,13 +382,11 @@ public class FGProvider extends VisualGraphComponentProvider<FGVertex, FGEdge, F
 			return result;
 		}
 
-		FunctionGraph functionGraph = graphData.getFunctionGraph();
-		Graph<FGVertex, FGEdge> graph = functionGraph;
-		String first = "Function Graph";
+        String first = "Function Graph";
 
 		String programName =
 			(currentProgram != null) ? currentProgram.getDomainFile().getName() : "";
-		String second = function.getName() + " - " + graph.getVertexCount() + " vertices  (" +
+		String second = function.getName() + " - " + ((Graph<FGVertex, FGEdge>) graphData.getFunctionGraph()).getVertexCount() + " vertices  (" +
 			programName + ")";
 
 		return new Pair<>(first, second);
@@ -736,8 +730,7 @@ public class FGProvider extends VisualGraphComponentProvider<FGVertex, FGEdge, F
 		// -There must not be any other references to the entry of the vertex
 		// -There must not be any non-dynamic labels on the vertex
 		//
-		Graph<FGVertex, FGEdge> graph = functionGraph;
-		Collection<FGEdge> inEdgesForDestination = graph.getInEdges(destinationVertex);
+        Collection<FGEdge> inEdgesForDestination = ((Graph<FGVertex, FGEdge>) functionGraph).getInEdges(destinationVertex);
 		if (inEdgesForDestination.size() == 0) {
 			// must be in a dirty state with vertices and edges that don't match reality
 			return;
@@ -749,7 +742,7 @@ public class FGProvider extends VisualGraphComponentProvider<FGVertex, FGEdge, F
 
 		FGEdge incomingEdge = inEdgesForDestination.iterator().next();
 		FGVertex parentVertex = incomingEdge.getStart();
-		Collection<FGEdge> outEdges = graph.getOutEdges(parentVertex);
+		Collection<FGEdge> outEdges = ((Graph<FGVertex, FGEdge>) functionGraph).getOutEdges(parentVertex);
 		if (outEdges.size() > 1) {
 			return;
 		}
@@ -843,8 +836,7 @@ public class FGProvider extends VisualGraphComponentProvider<FGVertex, FGEdge, F
 		// -There must not be any other references to the entry of the vertex
 		// -There must not be any non-dynamic labels on the vertex		
 		//
-		Graph<FGVertex, FGEdge> graph = functionGraph;
-		Collection<FGEdge> inEdgesForDestination = graph.getInEdges(destinationVertex);
+        Collection<FGEdge> inEdgesForDestination = ((Graph<FGVertex, FGEdge>) functionGraph).getInEdges(destinationVertex);
 		if (inEdgesForDestination.size() == 0) {
 			// must be in a dirty state with vertices and edges that don't match reality
 			return;
@@ -857,7 +849,7 @@ public class FGProvider extends VisualGraphComponentProvider<FGVertex, FGEdge, F
 
 		FGEdge incomingEdge = inEdgesForDestination.iterator().next();
 		FGVertex parentVertex = incomingEdge.getStart();
-		Collection<FGEdge> outEdges = graph.getOutEdges(parentVertex);
+		Collection<FGEdge> outEdges = ((Graph<FGVertex, FGEdge>) functionGraph).getOutEdges(parentVertex);
 		if (outEdges.size() > 1) {
 			return;
 		}
@@ -1220,9 +1212,8 @@ public class FGProvider extends VisualGraphComponentProvider<FGVertex, FGEdge, F
 
 	@Override
 	public LocationMemento getMemento() {
-		FGLocationMemento memento = new FGLocationMemento(currentProgram, currentLocation,
-			controller.getGraphPerspective(currentLocation));
-		return memento;
+        return new FGLocationMemento(currentProgram, currentLocation,
+            controller.getGraphPerspective(currentLocation));
 	}
 
 	@Override

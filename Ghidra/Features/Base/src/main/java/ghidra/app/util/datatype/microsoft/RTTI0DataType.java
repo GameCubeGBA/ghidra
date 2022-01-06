@@ -128,13 +128,12 @@ public class RTTI0DataType extends RTTIDataType {
 			return comps;
 		}
 
-		int offset = length;
-		int bytesNeeded = (mod != 0) ? (pointerSize - mod) : 0;
+        int bytesNeeded = (mod != 0) ? (pointerSize - mod) : 0;
 		DataType dt = new ArrayDataType(new ByteDataType(), bytesNeeded, 1);
 		DataTypeComponent[] alignedComps = new DataTypeComponent[4];
 		System.arraycopy(comps, 0, alignedComps, 0, 3);
 		alignedComps[3] =
-			new ReadOnlyDataTypeComponent(dt, this, bytesNeeded, 3, offset, "alignmentBytes", null);
+			new ReadOnlyDataTypeComponent(dt, this, bytesNeeded, 3, length, "alignmentBytes", null);
 		return alignedComps;
 	}
 
@@ -189,9 +188,8 @@ public class RTTI0DataType extends RTTIDataType {
 			return null;
 		}
 
-		String s = dti.getDataType().getValue(nameBuf, SettingsImpl.NO_SETTINGS,
-			dti.getLength()).toString();
-		return s;
+        return dti.getDataType().getValue(nameBuf, SettingsImpl.NO_SETTINGS,
+            dti.getLength()).toString();
 	}
 
 	/**

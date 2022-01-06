@@ -186,8 +186,7 @@ public class ToolIconURL implements Comparable<ToolIconURL> {
 			name += location.substring(dotIndex);
 		}
 
-		ImageIcon image = getImageIcon(name);
-        return image;
+        return getImageIcon(name);
     }
 
 	private String stripSizeOffName(String name) {

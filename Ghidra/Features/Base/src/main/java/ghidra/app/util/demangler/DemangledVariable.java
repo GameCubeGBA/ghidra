@@ -266,8 +266,7 @@ public class DemangledVariable extends DemangledObject {
 		}
 
 		String signature = getSignature(true);
-		String fixed = SymbolUtilities.replaceInvalidChars(signature, true);
-		return fixed;
+        return SymbolUtilities.replaceInvalidChars(signature, true);
 	}
 
 	private boolean createPointer(Program program, Address address, long maximumDataTypeSize) {

@@ -51,8 +51,7 @@ public class FcgDataFactory {
 			return new EmptyFcgData();
 		}
 
-		FcgData data = cache.getUnchecked(f);
-		return data;
+        return cache.getUnchecked(f);
 	}
 
 	void remove(Function f) {

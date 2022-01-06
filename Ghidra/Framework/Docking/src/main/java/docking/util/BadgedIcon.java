@@ -345,9 +345,7 @@ public class BadgedIcon implements Icon {
 		double dx = pos.getHorizontalDisplacementFactor();
 		double dy = pos.getVerticalDisplacementFactor();
 
-		Point p = new Point((int) (dx * badgeSize.width), (int) (dy * badgeSize.height));
-
-		return p;
+        return new Point((int) (dx * badgeSize.width), (int) (dy * badgeSize.height));
 	}
 
 	@Override

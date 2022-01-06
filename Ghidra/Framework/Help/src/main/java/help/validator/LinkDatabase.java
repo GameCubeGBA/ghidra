@@ -154,8 +154,7 @@ public class LinkDatabase {
 	}
 
 	private HelpFile findHelpFileForPath(Path helpPath) {
-		HelpFile helpFile = helpCollection.getHelpFile(helpPath);
-        return helpFile;
+        return helpCollection.getHelpFile(helpPath);
     }
 
 	Collection<InvalidLink> getUnresolvedLinks() {

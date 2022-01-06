@@ -160,12 +160,10 @@ public class GzfLoader implements Loader {
 			throws InvalidNameException, CancelledException, IOException {
 
 		File file = provider.getFile();
-		DomainFolder folder = programFolder;
 
-		monitor.setMessage("Restoring " + file.getName());
+        monitor.setMessage("Restoring " + file.getName());
 
-		DomainFile df = folder.createFile(programName, file, monitor);
-		return df;
+        return programFolder.createFile(programName, file, monitor);
 	}
 
 	private static boolean isGzfFile(ByteProvider provider) {

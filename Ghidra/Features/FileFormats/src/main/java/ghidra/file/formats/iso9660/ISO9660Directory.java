@@ -165,8 +165,7 @@ public class ISO9660Directory implements StructConverter {
                 return null;
             }
         }
-		String tmp = new String(bArr);
-		return tmp;
+        return new String(bArr);
 	}
 
 	public boolean isDirectoryFlagSet() {

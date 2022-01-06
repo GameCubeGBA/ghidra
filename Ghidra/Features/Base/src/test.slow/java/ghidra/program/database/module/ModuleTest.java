@@ -730,9 +730,8 @@ public class ModuleTest extends AbstractGhidraHeadedIntegrationTest {
 		Memory memory = program.getMemory();
 		Address start = addr(offset);
 		try {
-			MemoryBlock block = memory.createInitializedBlock(name, start, length, (byte) 0,
-				TaskMonitorAdapter.DUMMY_MONITOR, false);
-			return block;
+            return memory.createInitializedBlock(name, start, length, (byte) 0,
+                TaskMonitorAdapter.DUMMY_MONITOR, false);
 
 		}
 		catch (AddressOverflowException e) {

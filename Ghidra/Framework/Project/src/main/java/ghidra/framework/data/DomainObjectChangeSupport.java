@@ -87,19 +87,17 @@ class DomainObjectChangeSupport {
 
 	private DomainObjectChangedEvent convertEventQueueRecordsToEvent() {
 
-		DomainObjectChangedEvent event = lockQueue(() -> {
+        return lockQueue(() -> {
 
-			if (changesQueue.isEmpty()) {
-				timer.stop();
-				return null;
-			}
+            if (changesQueue.isEmpty()) {
+                timer.stop();
+                return null;
+            }
 
-			DomainObjectChangedEvent e = new DomainObjectChangedEvent(src, changesQueue);
-			changesQueue = new ArrayList<>();
-			return e;
-		});
-
-		return event;
+            DomainObjectChangedEvent e = new DomainObjectChangedEvent(src, changesQueue);
+            changesQueue = new ArrayList<>();
+            return e;
+        });
 	}
 
 	// This version of notify takes in the listeners to notify so that we can send events to

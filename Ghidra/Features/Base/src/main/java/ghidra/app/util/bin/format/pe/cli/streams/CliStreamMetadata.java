@@ -473,7 +473,6 @@ public class CliStreamMetadata extends CliAbstractStream {
 	private int getPresentTableIndex(CliTypeTable table) {
 		int tableId = table.id();
 		long mask = valid & ((1L << tableId) - 1); // mask tables that come after this one. Start with all present tables, 0 out any that are after tableId.
-		int tablesBefore = Long.bitCount(mask);
-		return tablesBefore;
+        return Long.bitCount(mask);
 	}
 }

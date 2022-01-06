@@ -116,8 +116,7 @@ public class CompositeVerticalLayoutTextField implements TextField {
 	private List<FieldRow> layoutRows(List<TextField> fields, int maxLines) {
 
 		List<FieldRow> newSubFields = new ArrayList<>();
-		int startY = -heightAbove;
-		int ySoFar = startY;
+        int ySoFar = -heightAbove;
 		int currentRow = 0;
 		boolean tooManyLines = fields.size() > maxLines;
 		for (int i = 0; i < fields.size() && i < maxLines; i++) {
@@ -291,16 +290,15 @@ public class CompositeVerticalLayoutTextField implements TextField {
                 break;
             }
 
-            FieldRow fieldRow = row;
-            TextField field = fieldRow.field;
-            int subFieldHeight = fieldRow.field.getHeight();
+            TextField field = row.field;
+            int subFieldHeight = row.field.getHeight();
             int endY = startY + subFieldHeight;
 
             // if any part of the line is in the clip region, draw it
             if (endY >= clipStartY) {
                 RowColLocation cursor = null;
-                if (fieldRow == cursorRow) {
-                    int relativeRow = fieldRow.getRelativeRow(cursorLocation.row());
+                if (row == cursorRow) {
+                    int relativeRow = row.getRelativeRow(cursorLocation.row());
                     cursor = cursorLocation.withRow(relativeRow);
                 }
 
@@ -400,8 +398,7 @@ public class CompositeVerticalLayoutTextField implements TextField {
 	@Override
 	public int getY(int row) {
 
-		int startY = -heightAbove;
-		int ySoFar = startY;
+        int ySoFar = -heightAbove;
 		List<FieldRow> rows = getAllRows(row);
 		int lastHeight = 0;
 		for (FieldRow fieldRow : rows) {
@@ -432,8 +429,7 @@ public class CompositeVerticalLayoutTextField implements TextField {
 			if (bottom > y) {
 				int relativeY = y - ySoFar;
 				int relativeRow = fieldRow.field.getRow(relativeY);
-				int displayRow = fieldRow.fromRelativeRow(relativeRow);
-				return displayRow;
+                return fieldRow.fromRelativeRow(relativeRow);
 			}
 			ySoFar += fieldHeight;
 		}
@@ -559,13 +555,12 @@ public class CompositeVerticalLayoutTextField implements TextField {
                 break;
             }
 
-            FieldRow fieldRow = row;
-            int length = fieldRow.field.getText().length() + extraSpace;
+            int length = row.field.getText().length() + extraSpace;
             int end = textOffsetSoFar + length;
             if (end > textOffset) {
                 int relativeOffset = textOffset - textOffsetSoFar;
-                RowColLocation location = fieldRow.field.textOffsetToScreenLocation(relativeOffset);
-                int screenRow = fieldRow.fromRelativeRow(location.row());
+                RowColLocation location = row.field.textOffsetToScreenLocation(relativeOffset);
+                int screenRow = row.fromRelativeRow(location.row());
                 return location.withRow(screenRow);
             }
 

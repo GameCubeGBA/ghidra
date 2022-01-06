@@ -66,14 +66,13 @@ public class VTMarkupItemResetTest extends VTBaseTestCase {
 		VTMarkupItem markupItem = createRandomMarkupItemStub(match);
 		VTAssociation association = match.getAssociation();
 		Address destinationAddress = addr();
-		VTMarkupItem unappliedMarkupItem = markupItem;
 
-		unappliedMarkupItem.setDestinationAddress(destinationAddress);
+        markupItem.setDestinationAddress(destinationAddress);
 
 		Collection<VTMarkupItem> markupItems = getStoredMarkupItems(association);
 		assertEquals(1, markupItems.size());
 
-		unappliedMarkupItem.setDestinationAddress(null);
+		markupItem.setDestinationAddress(null);
 		markupItems = getStoredMarkupItems(association);
 		assertEquals(0, markupItems.size());
 	}
@@ -90,14 +89,13 @@ public class VTMarkupItemResetTest extends VTBaseTestCase {
 		VTMatch match = matchSet.addMatch(createRandomMatch(db));
 		VTMarkupItem markupItem = createRandomMarkupItemStub(match);
 		VTAssociation association = match.getAssociation();
-		VTMarkupItem unappliedMarkupItem = markupItem;
 
-		unappliedMarkupItem.setConsidered(VTMarkupItemConsideredStatus.IGNORE_DONT_CARE);
+        markupItem.setConsidered(VTMarkupItemConsideredStatus.IGNORE_DONT_CARE);
 
 		Collection<VTMarkupItem> markupItems = getStoredMarkupItems(association);
 		assertEquals(1, markupItems.size());
 
-		unappliedMarkupItem.setConsidered(VTMarkupItemConsideredStatus.UNCONSIDERED);
+		markupItem.setConsidered(VTMarkupItemConsideredStatus.UNCONSIDERED);
 		markupItems = getStoredMarkupItems(association);
 		assertEquals(0, markupItems.size());
 	}
@@ -115,13 +113,12 @@ public class VTMarkupItemResetTest extends VTBaseTestCase {
 		VTMarkupItem markupItem = createRandomMarkupItemStub(match);
 		VTAssociation association = match.getAssociation();
 		Address destinationAddress = addr();
-		VTMarkupItem unappliedMarkupItem = markupItem;
 
-		unappliedMarkupItem.setDefaultDestinationAddress(destinationAddress, "Test Source");
+        markupItem.setDefaultDestinationAddress(destinationAddress, "Test Source");
 
 		try {
 			association.setAccepted();
-			unappliedMarkupItem.apply(createRandomApplyAction(unappliedMarkupItem), null);
+			markupItem.apply(createRandomApplyAction(markupItem), null);
 		}
 		catch (VersionTrackingApplyException e) {
 			Assert.fail("Unexpected exception applying a test markup item");
@@ -134,7 +131,7 @@ public class VTMarkupItemResetTest extends VTBaseTestCase {
 		assertEquals(1, markupItems.size());
 
 		try {
-			unappliedMarkupItem.unapply();
+			markupItem.unapply();
 		}
 		catch (VersionTrackingApplyException e) {
 			Assert.fail("Unexpected exception unapplying a test markup item");
@@ -157,13 +154,12 @@ public class VTMarkupItemResetTest extends VTBaseTestCase {
 		VTMarkupItem markupItem = createRandomMarkupItemStub(match);
 		VTAssociation association = match.getAssociation();
 		Address destinationAddress = addr();
-		VTMarkupItem unappliedMarkupItem = markupItem;
 
-		// 1) Set an address - this will prevent a reset
-		unappliedMarkupItem.setDestinationAddress(destinationAddress);
+        // 1) Set an address - this will prevent a reset
+		markupItem.setDestinationAddress(destinationAddress);
 
 		try {
-			unappliedMarkupItem.apply(createRandomApplyAction(unappliedMarkupItem), null);
+			markupItem.apply(createRandomApplyAction(markupItem), null);
 		}
 		catch (VersionTrackingApplyException e) {
 			Assert.fail("Unexpected exception applying a test markup item");
@@ -173,7 +169,7 @@ public class VTMarkupItemResetTest extends VTBaseTestCase {
 		assertEquals(1, markupItems.size());
 
 		try {
-			unappliedMarkupItem.unapply();
+			markupItem.unapply();
 		}
 		catch (VersionTrackingApplyException e) {
 			Assert.fail("Unexpected exception unapplying a test markup item");
@@ -197,17 +193,16 @@ public class VTMarkupItemResetTest extends VTBaseTestCase {
 		VTMarkupItem markupItem = createRandomMarkupItemStub(match);
 		VTAssociation association = match.getAssociation();
 		Address destinationAddress = addr();
-		VTMarkupItem unappliedMarkupItem = markupItem;
 
-		// 1) Set an address - this will prevent a reset
-		unappliedMarkupItem.setDestinationAddress(destinationAddress);
+        // 1) Set an address - this will prevent a reset
+		markupItem.setDestinationAddress(destinationAddress);
 
-		unappliedMarkupItem.setConsidered(VTMarkupItemConsideredStatus.IGNORE_DONT_KNOW);
+		markupItem.setConsidered(VTMarkupItemConsideredStatus.IGNORE_DONT_KNOW);
 
 		Collection<VTMarkupItem> markupItems = getStoredMarkupItems(association);
 		assertEquals(1, markupItems.size());
 
-		unappliedMarkupItem.setConsidered(VTMarkupItemConsideredStatus.UNCONSIDERED);
+		markupItem.setConsidered(VTMarkupItemConsideredStatus.UNCONSIDERED);
 
 		markupItems = getStoredMarkupItems(association);
 		assertEquals("DB item was removed even though we have a user address value that we " +
@@ -227,17 +222,16 @@ public class VTMarkupItemResetTest extends VTBaseTestCase {
 		VTMarkupItem markupItem = createRandomMarkupItemStub(match);
 		VTAssociation association = match.getAssociation();
 		Address destinationAddress = addr();
-		VTMarkupItem unappliedMarkupItem = markupItem;
 
-		// 1) Set a considered status - this will prevent a reset
-		unappliedMarkupItem.setConsidered(VTMarkupItemConsideredStatus.IGNORE_DONT_KNOW);
+        // 1) Set a considered status - this will prevent a reset
+		markupItem.setConsidered(VTMarkupItemConsideredStatus.IGNORE_DONT_KNOW);
 
-		unappliedMarkupItem.setDestinationAddress(destinationAddress);
+		markupItem.setDestinationAddress(destinationAddress);
 
 		Collection<VTMarkupItem> markupItems = getStoredMarkupItems(association);
 		assertEquals(1, markupItems.size());
 
-		unappliedMarkupItem.setDestinationAddress(null);
+		markupItem.setDestinationAddress(null);
 
 		markupItems = getStoredMarkupItems(association);
 		assertEquals("DB item was removed even though we have a user address value that we " +

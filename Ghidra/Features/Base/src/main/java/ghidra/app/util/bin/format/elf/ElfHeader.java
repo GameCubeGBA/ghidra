@@ -862,9 +862,8 @@ public class ElfHeader implements StructConverter, Writeable {
 		int bloomSize = reader.readInt(gnuHashTableOffset + 8);
 		// int bloomShift = reader.readInt(gnuHashTableOffset + 12);
 		int bloomWordSize = is64Bit() ? 8 : 4;
-		long bucketsOffset = gnuHashTableOffset + 16 + (bloomWordSize * bloomSize);
 
-		long bucketOffset = bucketsOffset;
+        long bucketOffset = gnuHashTableOffset + 16 + (bloomWordSize * bloomSize);
 		int maxSymbolIndex = 0;
 		for (int i = 0; i < numBuckets; i++) {
 			int symbolIndex = reader.readInt(bucketOffset);

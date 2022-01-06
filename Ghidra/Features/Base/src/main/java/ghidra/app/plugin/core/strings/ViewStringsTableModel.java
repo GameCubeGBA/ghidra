@@ -256,8 +256,7 @@ class ViewStringsTableModel extends AddressBasedTableModel<ProgramLocation> {
 				Program program, ServiceProvider serviceProvider) throws IllegalArgumentException {
 			Data data = DataUtilities.getDataAtLocation(rowObject);
 			if (StringDataInstance.isString(data)) {
-				StringDataInstance sdi = StringDataInstance.getStringDataInstance(data);
-				return sdi;
+                return StringDataInstance.getStringDataInstance(data);
 			}
 			return null;
 		}

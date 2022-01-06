@@ -171,8 +171,7 @@ public class OmfFixupRecord extends OmfRecord {
 		}
 		
 		public int getP() {
-			int res = (fixData >>2)&1;
-			return res;
+            return (fixData >>2)&1;
 		}
 		
 		public void resolveFrame(FixupState state) throws OmfException {

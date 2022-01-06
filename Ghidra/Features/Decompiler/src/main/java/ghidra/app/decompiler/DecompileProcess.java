@@ -478,8 +478,7 @@ public class DecompileProcess {
 		write(command_end);
 		restring = readResponse().toString();
 		callback = null;
-		int res = Integer.parseInt(restring);
-		return res;
+        return Integer.parseInt(restring);
 	}
 
 	/**

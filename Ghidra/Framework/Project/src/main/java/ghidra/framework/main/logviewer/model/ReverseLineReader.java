@@ -104,8 +104,7 @@ public class ReverseLineReader {
 
 			if (i == -1) {
 				raf.seek(0);
-				String str = bufToString();
-				return str;
+                return bufToString();
 			}
 
 			byte c = linePlus[i];

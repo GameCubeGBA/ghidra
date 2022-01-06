@@ -1017,7 +1017,7 @@ public class ExtensionUtils {
 	 */
 	private static Set<PosixFilePermission> getPermissions(int unixMode) {
 
-		Set<PosixFilePermission> permissions = new HashSet<>();
+		Set<PosixFilePermission> permissions = EnumSet.noneOf(PosixFilePermission.class);
 
 		if ((unixMode & 0400) != 0) {
 			permissions.add(PosixFilePermission.OWNER_READ);

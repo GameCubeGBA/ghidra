@@ -336,9 +336,8 @@ public class CreateNamespacesCmdTest extends AbstractGenericTest {
 
 		int txId = program.startTransaction("Transaction");
 		try {
-			Namespace ns = symbolTable.createNameSpace(parentNamespace, namespaceName,
-				SourceType.USER_DEFINED);
-			return ns;
+            return symbolTable.createNameSpace(parentNamespace, namespaceName,
+                SourceType.USER_DEFINED);
 		}
 		catch (Exception e) {
 			return findMatchingChildNamespace(namespaceName, parentNamespace, symbolTable);

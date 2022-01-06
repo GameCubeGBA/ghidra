@@ -168,13 +168,10 @@ public class DyldCacheSlideInfo1 extends DyldCacheSlideInfoCommon {
 							long loc = (page + pageEntriesIndex * 8 * 4 + bitMapIndex * 4);
 							Address addr =
 								memory.getProgram().getLanguage().getDefaultSpace().getAddress(loc);
-							long origValue = memory.getLong(addr);
 
-							long value = origValue /* + slide */ ;
-
-							// not actually changing bytes, so not really a relocation, but a relocate-able place
+                            // not actually changing bytes, so not really a relocation, but a relocate-able place
 							if (addRelocations) {
-								addRelocationTableEntry(program, addr, 0x1000, value, origBytes,
+								addRelocationTableEntry(program, addr, 0x1000, memory.getLong(addr), origBytes,
 									null);
 							}
 							//memory.setLong(addr, value);

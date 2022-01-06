@@ -458,10 +458,8 @@ class RegisterMergeManager implements ListingMergeConstants {
 		private AddressSet getRegisterDifferences(String regName, ProgramContext context1,
 				ProgramContext context2, AddressSetView addressSet, TaskMonitor monitor) {
 			AddressSet differences = new AddressSet();
-			ProgramContext pc1 = context1;
-			ProgramContext pc2 = context2;
-			Register rb1 = pc1.getRegister(regName);
-			Register rb2 = pc2.getRegister(regName);
+            Register rb1 = context1.getRegister(regName);
+			Register rb2 = context2.getRegister(regName);
 
 			AddressRangeIterator iter = addressSet.getAddressRanges();
 			while (iter.hasNext()) {
@@ -470,16 +468,16 @@ class RegisterMergeManager implements ListingMergeConstants {
 				Address rangeMax = range.getMaxAddress();
 
 				AddressRangeIterator it1 =
-					pc1.getRegisterValueAddressRanges(rb1, rangeMin, rangeMax);
+					context1.getRegisterValueAddressRanges(rb1, rangeMin, rangeMax);
 				AddressRangeIterator it2 =
-					pc2.getRegisterValueAddressRanges(rb2, rangeMin, rangeMax);
+					context2.getRegisterValueAddressRanges(rb2, rangeMin, rangeMax);
 
 				AddressRangeIterator it = new CombinedAddressRangeIterator(it1, it2);
 
 				while (it.hasNext()) {
 					AddressRange addrRange = it.next();
-					BigInteger value1 = pc1.getValue(rb1, addrRange.getMinAddress(), false);
-					BigInteger value2 = pc2.getValue(rb2, addrRange.getMinAddress(), false);
+					BigInteger value1 = context1.getValue(rb1, addrRange.getMinAddress(), false);
+					BigInteger value2 = context2.getValue(rb2, addrRange.getMinAddress(), false);
 					boolean sameValue = (value1 == null) ? (value2 == null) : value1.equals(value2);
 					if (!sameValue) {
 						differences.addRange(addrRange.getMinAddress(), addrRange.getMaxAddress());

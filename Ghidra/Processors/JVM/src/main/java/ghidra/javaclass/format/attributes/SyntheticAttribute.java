@@ -47,8 +47,7 @@ public class SyntheticAttribute extends AbstractAttributeInfo {
 
 	@Override
 	public DataType toDataType() throws DuplicateNameException, IOException {
-		StructureDataType structure = getBaseStructure( "Synthetic_attribute" );
-		return structure;
+        return getBaseStructure( "Synthetic_attribute" );
 	}
 
 }

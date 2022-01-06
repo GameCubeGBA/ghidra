@@ -802,8 +802,7 @@ public class FunctionGraphPlugin1Test extends AbstractFunctionGraphTest {
 		Navigatable navigatable = goTo.getDefaultNavigatable();
 
 		NavigationHistoryService service = tool.getService(NavigationHistoryService.class);
-		List<LocationMemento> locations = service.getPreviousLocations(navigatable);
-		return locations;
+        return service.getPreviousLocations(navigatable);
 	}
 
 	private void assertInHistory(FGVertex... vertices) {

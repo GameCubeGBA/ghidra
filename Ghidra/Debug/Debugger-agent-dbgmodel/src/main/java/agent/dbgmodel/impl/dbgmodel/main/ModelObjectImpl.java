@@ -903,12 +903,10 @@ public class ModelObjectImpl implements ModelObjectInternal {
 		}
 		Map<String, ModelObject> map = getKeyValueMap();
 		if (map.containsKey("BaseAddress")) {
-			String valueString = map.get("BaseAddress").getValueString();
-			return valueString;
+            return map.get("BaseAddress").getValueString();
 		}
 		if (map.containsKey("UniqueID") && map.containsKey("Id")) {
-			String valueString = map.get("Id").getValueString();
-			return valueString;
+            return map.get("Id").getValueString();
 		}
 		return key;
 	}

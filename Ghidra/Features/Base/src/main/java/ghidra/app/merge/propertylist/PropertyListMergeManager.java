@@ -407,13 +407,11 @@ public class PropertyListMergeManager implements MergeResolver {
         for (ConflictInfo conflictInfo : conflictList) {
             currentMonitor.setProgress(++progressIndex);
 
-            ConflictInfo info = conflictInfo;
-
             ++currentConflict;
             if (propertyListChoice != ASK_USER) {
                 conflictOption = propertyListChoice;
             } else if (mergeManager != null && conflictOption == ASK_USER) {
-                showMergePanel(info, currentConflict, totalConflictCount);
+                showMergePanel(conflictInfo, currentConflict, totalConflictCount);
                 // block until the user resolves the conflict or cancels the
                 // process
             }
@@ -424,19 +422,19 @@ public class PropertyListMergeManager implements MergeResolver {
 
                 case MY_VERSION:
                 case ORIGINAL_VERSION:
-                    Options options = resultProgram.getOptions(info.getListName());
-                    options.removeOption(info.getPropertyName());
+                    Options options = resultProgram.getOptions(conflictInfo.getListName());
+                    options.removeOption(conflictInfo.getPropertyName());
                     if (conflictOption == MY_VERSION) {
-                        Object myValue = info.getMyValue();
+                        Object myValue = conflictInfo.getMyValue();
                         if (myValue != null) {
-                            setValue(options, info.getPropertyName(), info.getMyType(),
-                                    info.getMyValue());
+                            setValue(options, conflictInfo.getPropertyName(), conflictInfo.getMyType(),
+                                    conflictInfo.getMyValue());
                         }
                     } else {
-                        Object origValue = info.getOrigValue();
+                        Object origValue = conflictInfo.getOrigValue();
                         if (origValue != null) {
-                            setValue(options, info.getPropertyName(), info.getOrigType(),
-                                    info.getOrigValue());
+                            setValue(options, conflictInfo.getPropertyName(), conflictInfo.getOrigType(),
+                                    conflictInfo.getOrigValue());
                         }
                     }
                     break;

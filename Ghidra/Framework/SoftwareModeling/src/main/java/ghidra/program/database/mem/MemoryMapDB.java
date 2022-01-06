@@ -586,8 +586,7 @@ public class MemoryMapDB implements Memory, ManagerDB, LiveMemoryListener {
 		AddressSpace ovSpace = program.addOverlaySpace(name, start.getAddressSpace(),
 			start.getOffset(), start.getOffset() + (dataLength - 1));
 
-		Address ovAddr = ovSpace.getAddress(start.getOffset());
-		return ovAddr;
+        return ovSpace.getAddress(start.getOffset());
 	}
 
 	@Override

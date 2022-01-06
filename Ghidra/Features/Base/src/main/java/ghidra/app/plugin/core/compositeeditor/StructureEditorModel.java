@@ -101,8 +101,7 @@ class StructureEditorModel extends CompEditorModel {
 	@Override
 	public int getRowCount() {
 		int componentCount = getNumComponents();
-		int rowCount = componentCount + 1; // add blank edit row
-		return rowCount;
+        return componentCount + 1;
 	}
 
 	/**

@@ -62,8 +62,7 @@ public class OmfEnumeratedData extends OmfRecord implements OmfData {
 	@Override
 	public byte[] getByteArray(BinaryReader reader) throws IOException {
 		reader.setPointerIndex(streamOffset);
-		byte[] buffer = reader.readNextByteArray(streamLength);
-		return buffer;
+        return reader.readNextByteArray(streamLength);
 	}
 
 	@Override

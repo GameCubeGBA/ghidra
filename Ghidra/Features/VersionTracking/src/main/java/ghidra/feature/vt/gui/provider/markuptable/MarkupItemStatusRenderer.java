@@ -60,8 +60,7 @@ public class MarkupItemStatusRenderer extends AbstractGhidraColumnRenderer<VTMar
 			VTMarkupItemStatus value) {
 		renderer.setText("");
 		renderer.setHorizontalAlignment(CENTER);
-		VTMarkupItemStatus status = value;
-		switch (status) {
+        switch (value) {
 			case UNAPPLIED:
 				renderer.setIcon(null);
 				renderer.setToolTipText("Not Applied");
@@ -101,7 +100,7 @@ public class MarkupItemStatusRenderer extends AbstractGhidraColumnRenderer<VTMar
 				break;
 			default:
 				renderer.setIcon(ResourceManager.loadImage("images/core.png"));
-				renderer.setToolTipText("Unexpected match status state!: " + status);
+				renderer.setToolTipText("Unexpected match status state!: " + value);
 				break;
 		}
 

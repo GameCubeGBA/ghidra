@@ -597,10 +597,7 @@ public class ProgramMergeManager {
 		// Do a merge of references rather than replace so that we don't lose any non-default 
 		// references where the instruction prototypes matched.
 		// Use only the source's default references if we are ignoring reference diffs.
-		boolean ignoreReferenceDiffs =
-			filter.getFilter(ProgramMergeFilter.REFERENCES) == ProgramMergeFilter.IGNORE;
-		boolean onlyKeepDefaults = ignoreReferenceDiffs;
-		merger.mergeReferences(codeUnitDiffSet2, onlyKeepDefaults, monitor);
+        merger.mergeReferences(codeUnitDiffSet2, filter.getFilter(ProgramMergeFilter.REFERENCES) == ProgramMergeFilter.IGNORE, monitor);
 
 		merger.mergeEquates(equateDiffSet2, monitor);
 	}

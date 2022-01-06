@@ -587,9 +587,7 @@ public class SearchTextPlugin extends ProgramPlugin implements OptionsChangeList
 			}
 
 			// must have completed too fast for the provider to be set; try something cute
-			Component focusOwner =
-				KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
-			return focusOwner; // assume this IS the provider
+            return KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner(); // assume this IS the provider
 		}
 
 		@Override

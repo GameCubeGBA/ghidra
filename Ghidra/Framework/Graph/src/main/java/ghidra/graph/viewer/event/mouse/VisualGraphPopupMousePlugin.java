@@ -39,7 +39,6 @@ public class VisualGraphPopupMousePlugin<V, E> extends AbstractPopupGraphMousePl
 
 	@SuppressWarnings("unchecked")
 	protected VisualizationViewer<V, E> getViewer(MouseEvent e) {
-		VisualizationViewer<V, E> viewer = (VisualizationViewer<V, E>) e.getSource();
-		return viewer;
+        return (VisualizationViewer<V, E>) e.getSource();
 	}
 }

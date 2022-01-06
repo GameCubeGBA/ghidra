@@ -365,10 +365,7 @@ public class FidProgramSeeker {
 			return null;
 		}
 
-		HashMatch result =
-			new HashMatch(functionRecord, functionScore, mode, childScore, parentScore);
-
-		return result;
+        return new HashMatch(functionRecord, functionScore, mode, childScore, parentScore);
 	}
 
 	/**

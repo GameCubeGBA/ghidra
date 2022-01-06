@@ -336,8 +336,7 @@ public class EquateTablePluginTest extends AbstractGhidraHeadedIntegrationTest {
 	}
 
 	private TableCellRenderer getRenderer(int column) {
-		TableCellRenderer renderer = equatesTable.getCellRenderer(0, column);
-		return renderer;
+        return equatesTable.getCellRenderer(0, column);
 	}
 
 	private Address getAddr(long offset) {

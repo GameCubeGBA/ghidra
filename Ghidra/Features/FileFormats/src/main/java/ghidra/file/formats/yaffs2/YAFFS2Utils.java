@@ -46,10 +46,9 @@ public class YAFFS2Utils {
 	public static long parseInteger(final byte[] buffer, final int offset, final int length) {
 		long result = 0;
 		int end = offset + length;
-		int start = offset;
-		int j = 0;
+        int j = 0;
 
-		for (int i = start; i < end; i++) {
+		for (int i = offset; i < end; i++) {
 			result += ((long) buffer[i] & 0xFF) << (8 * j);
 			j++;
 		}
@@ -62,11 +61,10 @@ public class YAFFS2Utils {
 	public static long parseFileSize(final byte[] buffer, final int offset, final int length) {
 		long result = 0;
 		int end = offset + length;
-		int start = offset;
-		int j = 0;
+        int j = 0;
 		int k = 0;
 
-		for (int i = start; i < end; i++) {
+		for (int i = offset; i < end; i++) {
 			// check for 0xffffffff buffer value, a special case
 			if (buffer[i] == -1)
 				k++;
@@ -89,10 +87,9 @@ public class YAFFS2Utils {
 	public static String parseDateTime(final byte[] buffer, final int offset, final int length) {
 		long result = 0;
 		int end = offset + length;
-		int start = offset;
-		int j = 0;
+        int j = 0;
 
-		for (int i = start; i < end; i++) {
+		for (int i = offset; i < end; i++) {
 			result += ((long) buffer[i] & 0xFF) << (8 * j);
 			j++;
 		}

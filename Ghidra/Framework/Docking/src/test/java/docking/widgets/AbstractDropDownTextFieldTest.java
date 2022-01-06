@@ -68,8 +68,7 @@ public abstract class AbstractDropDownTextFieldTest<T> extends AbstractDockingTe
 	protected abstract DropDownTextFieldDataModel<T> createModel();
 
 	protected DropDownTextField<T> createTextField(DropDownTextFieldDataModel<T> model) {
-		DropDownTextField<T> field = new DropDownTextField<>(model);
-		return field;
+        return new DropDownTextField<>(model);
 	}
 
 	private void removeFocusIssues(DropDownTextField<?> field) {
@@ -142,14 +141,12 @@ public abstract class AbstractDropDownTextFieldTest<T> extends AbstractDockingTe
 		if (index < 0) {
 			return null;
 		}
-		T item = dataList.getModel().getElementAt(index);
-		return item;
+        return dataList.getModel().getElementAt(index);
 	}
 
 	protected T getListItemAt(int index) {
 		JList<T> dataList = textField.getJList();
-		T item = dataList.getModel().getElementAt(index);
-		return item;
+        return dataList.getModel().getElementAt(index);
 	}
 
 	/** The item that is selected in the JList; not the 'selectedValue' in the text field */

@@ -189,8 +189,7 @@ class ClassJar extends ClassLocation {
 			return "<no patch dir>"; // not in a distribution
 		}
 		String patchPath = patchDir.getAbsolutePath();
-		String forwardSlashed = patchPath.replaceAll("\\\\", "/");
-		return forwardSlashed;
+        return patchPath.replaceAll("\\\\", "/");
 	}
 
 	private static Set<String> loadUserPluginPaths() {

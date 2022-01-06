@@ -799,10 +799,8 @@ public abstract class AbstractExternalMergerTest extends AbstractListingMergeMan
 			}
 		}
 
-		ExternalLocation externalLocation = externalManager.addExtLocation(currentNamespace,
-			path[nameIndex], memoryAddress, sourceType);
-
-		return externalLocation;
+        return externalManager.addExtLocation(currentNamespace,
+            path[nameIndex], memoryAddress, sourceType);
 	}
 
 	Namespace createExternalNamespace(final Program program, final String[] path,
@@ -859,9 +857,8 @@ public abstract class AbstractExternalMergerTest extends AbstractListingMergeMan
 		Symbol librarySymbol = symbolTable.getLibrarySymbol(path[0]);
 		SymbolType librarySymbolType = librarySymbol.getSymbolType();
 		assertEquals(SymbolType.LIBRARY, librarySymbolType);
-		Library externalLibrary = (Library) librarySymbol.getObject();
 
-		Namespace currentNamespace = externalLibrary;
+        Namespace currentNamespace = (Library) librarySymbol.getObject();
 		for (int i = 1; i < nameIndex; i++) {
 			Symbol nextNamespaceSymbol = getUniqueSymbol(program, path[i], currentNamespace);
 			currentNamespace = (Namespace) nextNamespaceSymbol.getObject();
@@ -873,8 +870,7 @@ public abstract class AbstractExternalMergerTest extends AbstractListingMergeMan
 		}
 		SymbolType functionSymbolType = functionSymbol.getSymbolType();
 		assertEquals(SymbolType.FUNCTION, functionSymbolType);
-		Function function = (Function) functionSymbol.getObject();
-		return function;
+        return (Function) functionSymbol.getObject();
 	}
 
 	ExternalLocation getExternalLocation(Program program, String[] path) {
@@ -900,9 +896,8 @@ public abstract class AbstractExternalMergerTest extends AbstractListingMergeMan
 		Symbol librarySymbol = symbolTable.getLibrarySymbol(path[0]);
 		SymbolType librarySymbolType = librarySymbol.getSymbolType();
 		assertEquals(SymbolType.LIBRARY, librarySymbolType);
-		Library externalLibrary = (Library) librarySymbol.getObject();
 
-		Namespace currentNamespace = externalLibrary;
+        Namespace currentNamespace = (Library) librarySymbol.getObject();
 		for (int i = 1; i < pathLength; i++) {
 			currentNamespace = findExternalNamespaceSymbol(symbolTable, path[i], currentNamespace);
 			if (currentNamespace == null) {

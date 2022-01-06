@@ -57,8 +57,7 @@ public class GlobalRegisterSymbol extends SymbolDB {
 	 * @see ghidra.program.model.symbol.Symbol#getObject()
 	 */
 	public Object getObject() {
-		Register reg = symbolMgr.getProgram().getRegister(getAddress());
-		return reg;
+        return symbolMgr.getProgram().getRegister(getAddress());
 	}
 
 	/**

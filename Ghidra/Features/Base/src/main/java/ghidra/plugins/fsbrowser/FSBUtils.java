@@ -65,10 +65,9 @@ public class FSBUtils {
 	public static List<PluginTool> getRunningProgramManagerTools(PluginTool tool) {
 		List<PluginTool> pluginTools = new ArrayList<>();
 		for (PluginTool runningTool : tool.getToolServices().getRunningTools()) {
-			PluginTool pt = runningTool;
-			ProgramManager pmService = pt.getService(ProgramManager.class);
+            ProgramManager pmService = runningTool.getService(ProgramManager.class);
 			if (pmService != null) {
-				pluginTools.add(pt);
+				pluginTools.add(runningTool);
 			}
 		}
 		return pluginTools;
@@ -92,9 +91,8 @@ public class FSBUtils {
 			return null;
 		}
 
-		PluginTool pt = SelectFromListDialog.selectFromList(pluginTools, "Select tool",
-			"Select a tool to use to open programs", pluginTool -> pluginTool.getName());
-		return pt;
+        return SelectFromListDialog.selectFromList(pluginTools, "Select tool",
+            "Select a tool to use to open programs", pluginTool -> pluginTool.getName());
 	}
 
 }

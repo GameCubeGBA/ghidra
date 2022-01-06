@@ -499,9 +499,8 @@ class MarkupXmlMgr {
                 if (monitor.isCancelled()) {
                     throw new CancelledException();
                 }
-                Reference ref = reference;
-                if (ref.isMemoryReference()) {
-                    writeMemoryReference(ref, writer);
+                if (reference.isMemoryReference()) {
+                    writeMemoryReference(reference, writer);
                 }
             }
 		}
@@ -513,9 +512,8 @@ class MarkupXmlMgr {
                 if (monitor.isCancelled()) {
                     throw new CancelledException();
                 }
-                Reference ref = reference;
-                if (ref.isStackReference()) {
-                    writeStackReference((StackReference) ref, writer);
+                if (reference.isStackReference()) {
+                    writeStackReference((StackReference) reference, writer);
                 }
             }
 		}
@@ -527,9 +525,8 @@ class MarkupXmlMgr {
                 if (monitor.isCancelled()) {
                     throw new CancelledException();
                 }
-                Reference ref = reference;
-                if (ref.isExternalReference()) {
-                    writeExternalReference((ExternalReference) ref, writer);
+                if (reference.isExternalReference()) {
+                    writeExternalReference((ExternalReference) reference, writer);
                 }
             }
 		}

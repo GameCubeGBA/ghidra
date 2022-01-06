@@ -116,9 +116,8 @@ public class DbgModelSetContextMWETest extends AbstractGhidraHeadlessIntegration
 				try {
 					//for (int i = 0; i < parsed.size(); i++) {
 					//List<String> sub = parsed.subList(0, i + 1);
-					List<String> sub = parsed;
-					ModelObject obj = util.getTerminalModelObject(sub);
-					Msg.info(this, PathUtils.toString(sub) + "=" + obj);
+                    ModelObject obj = util.getTerminalModelObject(parsed);
+					Msg.info(this, PathUtils.toString(parsed) + "=" + obj);
 					//}
 				}
 				catch (Exception e) {
@@ -194,9 +193,8 @@ public class DbgModelSetContextMWETest extends AbstractGhidraHeadlessIntegration
 
 			@Override
 			public DebugStatus exception(DebugExceptionRecord64 exception, boolean firstChance) {
-				DebugStatus status = super.exception(exception, firstChance);
-				//dumpAllThreads();
-				return status;
+                //dumpAllThreads();
+				return super.exception(exception, firstChance);
 			}
 
 			@Override
@@ -223,8 +221,7 @@ public class DbgModelSetContextMWETest extends AbstractGhidraHeadlessIntegration
 			@Override
 			public DebugStatus changeDebuggeeState(BitmaskSet<ChangeDebuggeeState> flags,
 					long argument) {
-				DebugStatus status = super.changeDebuggeeState(flags, argument);
-				return status;
+                return super.changeDebuggeeState(flags, argument);
 			}
 
 			Map<Integer, ModelObject> frame0sByT = new HashMap<>();
@@ -270,8 +267,7 @@ public class DbgModelSetContextMWETest extends AbstractGhidraHeadlessIntegration
 
 			@Override
 			public DebugStatus exitThread(int exitCode) {
-				DebugStatus status = super.exitThread(exitCode);
-				return status;
+                return super.exitThread(exitCode);
 			}
 		};
 

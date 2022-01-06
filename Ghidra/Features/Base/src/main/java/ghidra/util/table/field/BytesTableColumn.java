@@ -140,8 +140,7 @@ public class BytesTableColumn extends ProgramLocationTableColumnExtensionPoint<A
 
 			@Override
 			public String getFilterString(Byte[] t, Settings settings) {
-				String formatted = formatBytes(t, settings);
-				return formatted;
+                return formatBytes(t, settings);
 			}
 		};
 

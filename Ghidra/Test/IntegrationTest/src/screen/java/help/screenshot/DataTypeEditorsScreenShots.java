@@ -78,10 +78,7 @@ public class DataTypeEditorsScreenShots extends GhidraScreenShotGenerator {
 
 		performAction("Choose Data Type", "DataPlugin", false);
 
-		DropDownSelectionTextField<?> textField =
-			findComponent(getDialog(), DropDownSelectionTextField.class);
-
-		return textField;
+        return findComponent(getDialog(), DropDownSelectionTextField.class);
 	}
 
 	@Test

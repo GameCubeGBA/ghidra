@@ -219,17 +219,15 @@ public class DWARFTestBase extends AbstractGhidraHeadedIntegrationTest {
 	}
 
 	protected DIECreator newSpecStruct(DebugInfoEntry declDIE, int size) {
-		DIECreator struct = new DIECreator(DW_TAG_structure_type)
-				.addRef(DW_AT_specification, declDIE)
-				.addInt(DW_AT_byte_size, size);
-		return struct;
+        return new DIECreator(DW_TAG_structure_type)
+                .addRef(DW_AT_specification, declDIE)
+                .addInt(DW_AT_byte_size, size);
 	}
 
 	protected DIECreator newDeclStruct(String name) {
-		DIECreator struct = new DIECreator(DW_TAG_structure_type)
-				.addBoolean(DW_AT_declaration, true)
-				.addString(DW_AT_name, name);
-		return struct;
+        return new DIECreator(DW_TAG_structure_type)
+                .addBoolean(DW_AT_declaration, true)
+                .addString(DW_AT_name, name);
 	}
 
 	protected DIECreator newStruct(String name, int size) {
@@ -298,11 +296,10 @@ public class DWARFTestBase extends AbstractGhidraHeadedIntegrationTest {
 			int offset) {
 		assertTrue(
 			dataType == null || dataType.getCompilationUnit() == parentStruct.getCompilationUnit());
-		DIECreator field = new DIECreator(DW_TAG_inheritance)
-				.addRef(DW_AT_type, dataType)
-				.addInt(DW_AT_data_member_location, offset)
-				.setParent(parentStruct);
-		return field;
+        return new DIECreator(DW_TAG_inheritance)
+                .addRef(DW_AT_type, dataType)
+                .addInt(DW_AT_data_member_location, offset)
+                .setParent(parentStruct);
 	}
 
 	protected DebugInfoEntry newArray(MockDWARFCompilationUnit dcu, DebugInfoEntry baseTypeDIE,
@@ -343,12 +340,11 @@ public class DWARFTestBase extends AbstractGhidraHeadedIntegrationTest {
 
 	protected DIECreator newFormalParam(DebugInfoEntry subprogram, String paramName,
 			DebugInfoEntry paramDataType, int... locationExpr) {
-		DIECreator param = new DIECreator(DW_TAG_formal_parameter)
-				.addString(DW_AT_name, paramName)
-				.addRef(DW_AT_type, paramDataType)
-				.addBlock(DW_AT_location, locationExpr)
-				.setParent(subprogram);
-		return param;
+        return new DIECreator(DW_TAG_formal_parameter)
+                .addString(DW_AT_name, paramName)
+                .addRef(DW_AT_type, paramDataType)
+                .addBlock(DW_AT_location, locationExpr)
+                .setParent(subprogram);
 	}
 
 	protected Address addr(long l) {

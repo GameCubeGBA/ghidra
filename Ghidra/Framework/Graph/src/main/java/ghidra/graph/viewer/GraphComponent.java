@@ -283,11 +283,8 @@ public class GraphComponent<V extends VisualVertex, E extends VisualEdge<V>, G e
 	protected SatelliteGraphViewer<V, E> createSatelliteGraphViewer(GraphViewer<V, E> masterViewer,
 			Dimension viewerSize) {
 
-		SatelliteGraphViewer<V, E> viewer =
-			isReallyBigData() ? new CachingSatelliteGraphViewer<>(masterViewer, viewerSize)
-					: new SatelliteGraphViewer<>(masterViewer, viewerSize);
-
-		return viewer;
+        return isReallyBigData() ? new CachingSatelliteGraphViewer<>(masterViewer, viewerSize)
+                : new SatelliteGraphViewer<>(masterViewer, viewerSize);
 	}
 
 	private SatelliteGraphViewer<V, E> buildSatelliteViewer(GraphViewer<V, E> masterViewer,
@@ -862,8 +859,7 @@ public class GraphComponent<V extends VisualVertex, E extends VisualEdge<V>, G e
 	}
 
 	public RenderContext<V, E> getRenderContext() {
-		RenderContext<V, E> context = primaryViewer.getRenderContext();
-		return context;
+        return primaryViewer.getRenderContext();
 	}
 
 	public G getGraph() {
@@ -998,16 +994,14 @@ public class GraphComponent<V extends VisualVertex, E extends VisualEdge<V>, G e
 
 			int backgroundHeight = (stringBounds.height * 3);
 			int backgroundWidth = viewerBounds.width;
-			int backgroundX = startX;
-			int backgroundY = bottomY - backgroundHeight;
+            int backgroundY = bottomY - backgroundHeight;
 
 			float[] fractions = { 0.0f, .95f };
-			int upperY = backgroundY;
-			LinearGradientPaint bottomToTopGradiant = new LinearGradientPaint(
-				new Point(startX, startY), new Point(startX, upperY), fractions, colors);
+            LinearGradientPaint bottomToTopGradiant = new LinearGradientPaint(
+				new Point(startX, startY), new Point(startX, backgroundY), fractions, colors);
 
 			g2.setPaint(bottomToTopGradiant);
-			g2.fillRect(backgroundX, upperY, backgroundWidth, backgroundHeight);
+			g2.fillRect(startX, backgroundY, backgroundWidth, backgroundHeight);
 
 			g2.setPaint(Color.BLACK);
 			int textX =

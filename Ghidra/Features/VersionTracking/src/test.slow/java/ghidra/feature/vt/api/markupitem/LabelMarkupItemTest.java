@@ -58,10 +58,8 @@ public class LabelMarkupItemTest extends AbstractVTMarkupItemTest {
 
 		Symbol[] destinationSymbols = null;
 
-		Symbol[] expectedSymbols = sourceSymbols;
-
-		LabelValidator validator = new LabelValidator("0x01002cf5", "0x01002cf5", labelAddress,
-			sourceSymbols, destinationSymbols, expectedSymbols, LabelChoices.ADD, sourceSymbols[0]);
+        LabelValidator validator = new LabelValidator("0x01002cf5", "0x01002cf5", labelAddress,
+			sourceSymbols, destinationSymbols, sourceSymbols, LabelChoices.ADD, sourceSymbols[0]);
 		doTestFindAndApplyMarkupItem(validator);
 	}
 
@@ -81,11 +79,9 @@ public class LabelMarkupItemTest extends AbstractVTMarkupItemTest {
 
 		Symbol[] destinationSymbols = null;
 
-		Symbol[] expectedSymbols = sourceSymbols;
-
-		LabelValidator validator =
+        LabelValidator validator =
 			new LabelValidator("0x01002cf5", "0x01002cf5", labelAddress, sourceSymbols,
-				destinationSymbols, expectedSymbols, LabelChoices.ADD_AS_PRIMARY, sourceSymbols[0]);
+				destinationSymbols, sourceSymbols, LabelChoices.ADD_AS_PRIMARY, sourceSymbols[0]);
 		doTestFindAndApplyMarkupItem(validator);
 	}
 
@@ -105,11 +101,9 @@ public class LabelMarkupItemTest extends AbstractVTMarkupItemTest {
 
 		Symbol[] destinationSymbols = null;
 
-		Symbol[] expectedSymbols = sourceSymbols;
-
-		LabelValidator validator =
+        LabelValidator validator =
 			new LabelValidator("0x01002cf5", "0x01002cf5", labelAddress, sourceSymbols,
-				destinationSymbols, expectedSymbols, LabelChoices.REPLACE_ALL, sourceSymbols[0]);
+				destinationSymbols, sourceSymbols, LabelChoices.REPLACE_ALL, sourceSymbols[0]);
 		doTestFindAndApplyMarkupItem(validator);
 	}
 
@@ -133,11 +127,9 @@ public class LabelMarkupItemTest extends AbstractVTMarkupItemTest {
 		Symbol destinationSymbol1 = addLabel(labelAddress, destinationProgram);
 		Symbol[] destinationSymbols = { destinationSymbol1 };
 
-		Symbol[] expectedSymbols = sourceSymbols;
-
-		LabelValidator validator =
+        LabelValidator validator =
 			new LabelValidator("0x01002cf5", "0x01002cf5", labelAddress, sourceSymbols,
-				destinationSymbols, expectedSymbols, LabelChoices.ADD, destinationSymbols[0]);
+				destinationSymbols, sourceSymbols, LabelChoices.ADD, destinationSymbols[0]);
 		doTestFindAndApplyMarkupItem_ApplyFails(validator);
 	}
 
@@ -161,11 +153,9 @@ public class LabelMarkupItemTest extends AbstractVTMarkupItemTest {
 		Symbol destinationSymbol1 = addLabel(labelAddress, destinationProgram);
 		Symbol[] destinationSymbols = { destinationSymbol1 };
 
-		Symbol[] expectedSymbols = sourceSymbols;
-
-		LabelValidator validator =
+        LabelValidator validator =
 			new LabelValidator("0x01002cf5", "0x01002cf5", labelAddress, sourceSymbols,
-				destinationSymbols, expectedSymbols, LabelChoices.ADD_AS_PRIMARY, sourceSymbols[0]);
+				destinationSymbols, sourceSymbols, LabelChoices.ADD_AS_PRIMARY, sourceSymbols[0]);
 		doTestFindAndApplyMarkupItem_ApplyFails(validator);
 	}
 

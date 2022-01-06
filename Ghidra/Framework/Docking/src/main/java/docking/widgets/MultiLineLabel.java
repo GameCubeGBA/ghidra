@@ -109,8 +109,7 @@ public class MultiLineLabel extends JPanel {
 	}
 
 	private String getCallerString() {
-		String name = ReflectionUtilities.getClassNameOlderThan(OptionDialog.class);
-		return name;
+        return ReflectionUtilities.getClassNameOlderThan(OptionDialog.class);
 	}
 
 	/**

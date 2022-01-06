@@ -297,8 +297,7 @@ public class FileBytesTest extends AbstractGenericTest {
 		ResourceFile ldefFile = Application.getModuleDataFile("Toy", "languages/toy.ldefs");
 		if (ldefFile != null) {
 			LanguageService languageService = DefaultLanguageService.getLanguageService(ldefFile);
-			Language language = languageService.getLanguage(new LanguageID(languageName));
-			return language;
+            return languageService.getLanguage(new LanguageID(languageName));
 		}
 		throw new LanguageNotFoundException("Unsupported test language: " + languageName);
 	}

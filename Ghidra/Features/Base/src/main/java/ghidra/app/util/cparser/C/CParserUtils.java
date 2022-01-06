@@ -213,8 +213,7 @@ public class CParserUtils {
 			return null;
 		}
 
-		DataTypeManager[] openDTmanagers = service.getDataTypeManagers();
-		return openDTmanagers;
+        return service.getDataTypeManagers();
 	}
 
 	/**

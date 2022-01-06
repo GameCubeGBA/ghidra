@@ -176,13 +176,12 @@ public class ColorUtils {
 		float inverse = (float) 1.0 - ratio;
 
 		//@formatter:off
-		Color color = new Color(
-			rgb1[0] * ratio + rgb2[0] * inverse, 
+        //@formatter:on
+
+		return new Color(
+			rgb1[0] * ratio + rgb2[0] * inverse,
 			rgb1[1] * ratio + rgb2[1] * inverse,
 			rgb1[2] * ratio + rgb2[2] * inverse);
-		//@formatter:on
-
-		return color;
 	}
 
 	/**

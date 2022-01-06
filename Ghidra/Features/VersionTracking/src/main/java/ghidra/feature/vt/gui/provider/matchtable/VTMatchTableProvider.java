@@ -903,8 +903,7 @@ public class VTMatchTableProvider extends ComponentProviderAdapter
 		protected List<VTMatch> translateRowsToValues(int[] rows) {
 			switch (tableSelectionState) {
 				case MAINTAIN_SELECTED_ROW_INDEX:
-					ArrayList<VTMatch> list = new ArrayList<>(rowsToMatches(rows));
-					return list;
+                    return new ArrayList<>(rowsToMatches(rows));
 				case MAINTAIN_SELECTED_ROW_VALUE:
 					return super.translateRowsToValues(rows);
 				case NO_SELECTION_TRACKING:

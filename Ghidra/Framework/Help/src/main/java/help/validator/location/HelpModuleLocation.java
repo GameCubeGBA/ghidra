@@ -80,8 +80,7 @@ public abstract class HelpModuleLocation {
 		Path srcMainHelp = helpDir.getParent();
 		Path srcMain = srcMainHelp.getParent();
 		Path src = srcMain.getParent();
-		Path module = src.getParent();
-		return module;
+        return src.getParent();
 	}
 
 	public Path getModuleRepoRoot() {
@@ -90,8 +89,7 @@ public abstract class HelpModuleLocation {
 		Path module = getHelpModuleLocation();
 		Path category = module.getParent();
 		Path repo = category.getParent();
-		Path repoRoot = repo.getParent();
-		return repoRoot;
+        return repo.getParent();
 	}
 
 	GhidraTOCFile getSourceTOCFile() {

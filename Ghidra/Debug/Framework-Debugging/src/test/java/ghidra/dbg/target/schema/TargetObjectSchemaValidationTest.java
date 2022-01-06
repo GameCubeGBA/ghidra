@@ -171,8 +171,7 @@ public class TargetObjectSchemaValidationTest {
 	}
 
 	protected ValidatedObject createWReqIncorrect(TargetObject root, String name) {
-		ValidatedObject wreq = new ValidatedObject(model, root, name);
-		return wreq;
+        return new ValidatedObject(model, root, name);
 	}
 
 	@Test
@@ -275,8 +274,7 @@ public class TargetObjectSchemaValidationTest {
 					EnumerableTargetObjectSchema.OBJECT.getName(), false, false, false), null)
 				.setDefaultAttributeSchema(AttributeSchema.DEFAULT_VOID)
 				.buildAndAdd();
-		ValidatedObject obj = new ValidatedObject(model, null, "Test", schema);
-		return obj;
+        return new ValidatedObject(model, null, "Test", schema);
 	}
 
 	@Test

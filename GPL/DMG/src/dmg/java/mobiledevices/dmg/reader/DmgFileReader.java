@@ -66,8 +66,7 @@ public class DmgFileReader implements Closeable {
 			UDIFFile udifFile = new UDIFFile(new ReadableFileStream(file.getAbsolutePath()));
 			debug(udifFile.getView().getPlistData(), "dmg-xml");
 
-			UDIFRandomAccessStream stream = new UDIFRandomAccessStream(rras);
-			rras = stream;
+            rras = new UDIFRandomAccessStream(rras);
 		}
 		else {
 			System.err.println("UDIF structure not found. Proceeding...");

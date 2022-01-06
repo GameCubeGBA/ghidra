@@ -439,8 +439,7 @@ public abstract class ByteViewerComponentProvider extends ComponentProviderAdapt
 
 	public Set<String> getCurrentViews() {
 		DataModelInfo info = panel.getDataModelInfo();
-		HashSet<String> currentViewNames = new HashSet<>(Arrays.asList(info.getNames()));
-		return currentViewNames;
+        return new HashSet<>(Arrays.asList(info.getNames()));
 	}
 
 	private void refreshView() {
@@ -472,8 +471,7 @@ public abstract class ByteViewerComponentProvider extends ComponentProviderAdapt
 	}
 
 	protected Set<DataFormatModel> getDataFormatModels() {
-        Set<DataFormatModel> set = new HashSet<>(ClassSearcher.getInstances(UniversalDataFormatModel.class));
-		return set;
+        return new HashSet<>(ClassSearcher.getInstances(UniversalDataFormatModel.class));
 	}
 
 	public List<String> getDataFormatNames() {

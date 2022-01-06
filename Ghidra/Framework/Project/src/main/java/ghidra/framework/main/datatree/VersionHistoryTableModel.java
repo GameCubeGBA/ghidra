@@ -74,8 +74,7 @@ class VersionHistoryTableModel extends AbstractSortedTableModel<Version> {
 	}
 
 	void refresh(Version[] newVersions) {
-        List<Version> newVersionList = new ArrayList<>(Arrays.asList(newVersions));
-		versionList = newVersionList;
+        versionList = new ArrayList<>(Arrays.asList(newVersions));
 		fireTableDataChanged();
 	}
 

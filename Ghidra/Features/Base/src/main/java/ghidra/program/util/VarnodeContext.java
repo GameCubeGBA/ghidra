@@ -892,8 +892,7 @@ public class VarnodeContext implements ProcessorContext {
 	public Varnode getVarnode(int spaceID, long offset, int size) {
 		AddressSpace space = addrFactory.getAddressSpace(spaceID);
 		Address target = space.getTruncatedAddress(offset, true);
-		Varnode vt = new Varnode(target, size);
-		return vt;
+        return new Varnode(target, size);
 	}
 
 	public long getConstant(Varnode vnode, ContextEvaluator evaluator) throws NotFoundException {
@@ -1226,8 +1225,7 @@ public class VarnodeContext implements ProcessorContext {
 			throws NotFoundException {
 		long lresult = getConstant(val1, evaluator) << getConstant(val2, evaluator);
 		lresult = lresult & (0xffffffffffffffffL >>> ((8 - val1.getSize()) * 8));
-		Varnode result = createConstantVarnode(lresult, val1.getSize());
-		return result;
+        return createConstantVarnode(lresult, val1.getSize());
 	}
 
 	// This is bad since registers could have multiple associated spaces 
@@ -1388,8 +1386,7 @@ public class VarnodeContext implements ProcessorContext {
 	public Varnode getRegisterVarnodeValue(Register register) {
 		Varnode regVnode = trans.getVarnode(register);
 		try {
-			Varnode value = this.getValue(regVnode, false, null);
-			return value;
+            return this.getValue(regVnode, false, null);
 		}
 		catch (NotFoundException e) {
 			// Don't care, turn into a null varnode.

@@ -209,8 +209,7 @@ public class GnuDemangler implements Demangler {
 		}
 
 		GnuDemanglerParser parser = new GnuDemanglerParser();
-		DemangledObject demangledObject = parser.parse(mangled, demangled);
-		return demangledObject;
+        return parser.parse(mangled, demangled);
 	}
 
 	private boolean isKnownMangledString(String mangled, String demangled) {

@@ -150,9 +150,7 @@ public class LocationReferencesPlugin extends Plugin
 	boolean useDynamicDataTypeSearching() {
 
 		ToolOptions options = tool.getOptions(LocationReferencesPlugin.SEARCH_OPTION_NAME);
-		boolean optionValue =
-			options.getBoolean(LocationReferencesPlugin.DATA_TYPE_DISCOVERY_OPTION_NAME, true);
-		return optionValue;
+        return options.getBoolean(LocationReferencesPlugin.DATA_TYPE_DISCOVERY_OPTION_NAME, true);
 	}
 
 	private void displayProviderForLocation(ProgramLocation location, Navigatable navigatable) {

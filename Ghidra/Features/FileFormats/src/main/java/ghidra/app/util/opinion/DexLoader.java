@@ -135,18 +135,16 @@ public class DexLoader extends AbstractLibrarySupportLoader {
         for (EncodedMethod method : methods) {
             monitor.checkCanceled();
 
-            EncodedMethod encodedMethod = method;
-
-            CodeItem codeItem = encodedMethod.getCodeItem();
+            CodeItem codeItem = method.getCodeItem();
 
             Address methodIndexAddress =
-                    DexUtil.toLookupAddress(program, encodedMethod.getMethodIndex());
+                    DexUtil.toLookupAddress(program, method.getMethodIndex());
 
             if (codeItem == null) {
                 //external method
             } else {
                 Address methodAddress =
-                        toAddr(program, DexUtil.METHOD_ADDRESS + encodedMethod.getCodeOffset());
+                        toAddr(program, DexUtil.METHOD_ADDRESS + method.getCodeOffset());
 
                 byte[] instructionBytes = codeItem.getInstructionBytes();
                 program.getMemory().setBytes(methodAddress, instructionBytes);

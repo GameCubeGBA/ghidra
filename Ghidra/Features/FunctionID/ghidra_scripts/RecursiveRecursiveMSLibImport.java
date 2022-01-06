@@ -121,9 +121,7 @@ public class RecursiveRecursiveMSLibImport extends GhidraScript {
 		String filePath = file.getAbsolutePath();
 		String rest = filePath.substring(directoryPath.length() + 1);
 		Pair<DomainFolder, String> pair = establishProgramFolder(root, rest);
-		DomainFolder folder =
-			pair.first.createFolder(mangleNameBecauseDomainFoldersAreSoRetro(pair.second));
-		return folder;
+        return pair.first.createFolder(mangleNameBecauseDomainFoldersAreSoRetro(pair.second));
 	}
 
 	private void importLibrary(DomainFolder currentLibrary, File file, MessageLog log)
