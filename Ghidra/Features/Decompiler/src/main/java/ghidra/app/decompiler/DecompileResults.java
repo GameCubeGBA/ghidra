@@ -243,19 +243,15 @@ public class DecompileResults {
 					}
 				}
 			}
-			catch (PcodeXMLException e) {		// Error while walking the DOM
+			catch (PcodeXMLException | RuntimeException e) {		// Error while walking the DOM
 				errMsg = e.getMessage();
 				hfunc = null;
 				hparamid = null;
 				return;
 			}
-			catch (RuntimeException e) {		// Exception from the raw parser
-				errMsg = e.getMessage();
-				hfunc = null;
-				hparamid = null;
-				return;
-			}
-		}
+            // Exception from the raw parser
+
+        }
 		finally {
 			if (parser != null) {
 				parser.dispose();

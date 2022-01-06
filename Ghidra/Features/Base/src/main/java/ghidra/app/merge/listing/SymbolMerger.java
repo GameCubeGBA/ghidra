@@ -2086,15 +2086,11 @@ class SymbolMerger extends AbstractListingMerger {
                 }
             });
 		}
-		catch (InterruptedException e) {
+		catch (InterruptedException | InvocationTargetException e) {
 			Msg.error(this, "Couldn't display Symbol Merger conflict panel. " + e.getMessage());
 			return;
 		}
-		catch (InvocationTargetException e) {
-			Msg.error(this, "Couldn't display Symbol Merger conflict panel. " + e.getMessage());
-			return;
-		}
-		if (listingMergePanel != null) {
+        if (listingMergePanel != null) {
 			conflictInfoPanel.setConflictInfo(conflictNum, totalConflicts);
 		}
 		if (mergeManager != null) {

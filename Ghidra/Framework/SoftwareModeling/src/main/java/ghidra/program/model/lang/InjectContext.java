@@ -105,12 +105,9 @@ public class InjectContext {
 		try {
 			parser.parse(new InputSource(new StringReader(xml)), handler);
 		}
-		catch (SAXException e) {
-			throw new PcodeXMLException("Problem parsing inject context: " + e.getMessage());
-		}
-		catch (IOException e) {
+		catch (SAXException | IOException e) {
 			throw new PcodeXMLException("Problem parsing inject context: " + e.getMessage());
 		}
 
-	}
+    }
 }

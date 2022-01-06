@@ -362,13 +362,10 @@ public class SaveDataDialog extends DialogComponentProvider {
 				try {
 					SwingUtilities.invokeAndWait(() -> close());
 				}
-				catch (InterruptedException e) {
+				catch (InterruptedException | InvocationTargetException e) {
 					// don't care?
 				}
-				catch (InvocationTargetException e) {
-					// don't care?
-				}
-			}
+            }
 			else if (monitor.isCancelled()) {
 				updateList();
 			}

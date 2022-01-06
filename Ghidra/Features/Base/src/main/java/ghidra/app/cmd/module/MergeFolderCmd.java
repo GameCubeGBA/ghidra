@@ -88,9 +88,7 @@ public class MergeFolderCmd implements Command {
                 }
 
                 parentModule.reparent(name, module);
-            } catch (NotEmptyException e) {
-                Msg.showError(this, null, "Error", "Error merging folder with its parent");
-            } catch (NotFoundException e) {
+            } catch (NotEmptyException | NotFoundException e) {
                 Msg.showError(this, null, "Error", "Error merging folder with its parent");
             }
         }

@@ -239,16 +239,10 @@ public class JdiEventHandler implements Runnable {
 					handleExitEvent(iter.next());
 				}
 			}
-			catch (VMDisconnectedException exc) {
+			catch (VMDisconnectedException | InternalError | InterruptedException exc) {
 				// ignore
 			}
-			catch (InterruptedException exc) {
-				// ignore
-			}
-			catch (InternalError exc) {
-				// ignore
-			}
-		}
+        }
 	}
 
 	private ThreadReference eventThread(Event event) {

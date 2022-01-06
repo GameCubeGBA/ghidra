@@ -89,11 +89,9 @@ public class MyHeadlessGraphicsEnvironment extends GraphicsEnvironment {
 			throw new Error("Could not instantiate Graphics Environment: " + preferredGraphicsEnv);
 		} catch (IllegalAccessException e) {
 			throw new Error("Could not access Graphics Environment: " + preferredGraphicsEnv);
-		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
+		} catch (NoSuchMethodException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
-	}
+    }
 
 }

@@ -114,15 +114,10 @@ public class CFStringAnalyzer extends AbstractAnalyzer {
 					SourceType.ANALYSIS);
 				mine.setPrimary();
 			}
-			catch (CodeUnitInsertionException e) {
+			catch (CodeUnitInsertionException | DataTypeConflictException e) {
 				log.appendException(e);
 				return false;
-			}
-			catch (DataTypeConflictException e) {
-				log.appendException(e);
-				return false;
-			}
-			catch (InvalidInputException e) {
+			} catch (InvalidInputException e) {
 				log.appendException(e);
 				// return false;
 				// Returning here causes the analyzer to quit early if it encounters a CFString

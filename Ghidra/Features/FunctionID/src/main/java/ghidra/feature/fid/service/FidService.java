@@ -73,14 +73,9 @@ public class FidService {
 				}
 				list.add(skipper);
 			}
-			catch (InstantiationException e) {
+			catch (InstantiationException | IllegalAccessException e) {
 				// we tried
-			}
-			catch (IllegalAccessException e) {
-				// we tried
-			} catch (NoSuchMethodException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
+			} catch (NoSuchMethodException | InvocationTargetException e) {
                 e.printStackTrace();
             }
         }

@@ -439,14 +439,11 @@ public class PseudoDisassembler {
 				}
 			}
 		}
-		catch (MemoryAccessException e1) {
-			return body;
-		}
-		catch (AddressOutOfBoundsException e2) {
+		catch (MemoryAccessException | AddressOutOfBoundsException e1) {
 			return body;
 		}
 
-		procContext.flowStart(entryPoint);
+        procContext.flowStart(entryPoint);
 
 		try {
 			// look some number of fallthroughs to see if this
@@ -518,17 +515,11 @@ public class PseudoDisassembler {
 				target = newTarget;
 			}
 		}
-		catch (InsufficientBytesException e) {
-			processor.process(null);
-		}
-		catch (UnknownInstructionException e) {
-			processor.process(null);
-		}
-		catch (UnknownContextException e) {
+		catch (InsufficientBytesException | UnknownContextException | UnknownInstructionException e) {
 			processor.process(null);
 		}
 
-		return body;
+        return body;
 	}
 
 	/**
@@ -604,14 +595,11 @@ public class PseudoDisassembler {
 				return false;
 			}
 		}
-		catch (MemoryAccessException e1) {
-			return false;
-		}
-		catch (AddressOutOfBoundsException e2) {
+		catch (MemoryAccessException | AddressOutOfBoundsException e1) {
 			return false;
 		}
 
-		RepeatInstructionByteTracker repeatInstructionByteTracker =
+        RepeatInstructionByteTracker repeatInstructionByteTracker =
 			new RepeatInstructionByteTracker(MAX_REPEAT_BYTES_LIMIT, null);
 
 		procContext.flowStart(entryPoint);
@@ -788,13 +776,9 @@ public class PseudoDisassembler {
 		}
 		catch (
 
-		InsufficientBytesException e) {
+		InsufficientBytesException | UnknownInstructionException e) {
 			return false;
-		}
-		catch (UnknownInstructionException e) {
-			return false;
-		}
-		catch (UnknownContextException e) {
+		} catch (UnknownContextException e) {
 
 		}
 

@@ -48,13 +48,10 @@ public class ApplyAction extends CompositeEditorTableAction {
 		try {
 			model.apply();
 		}
-		catch (EmptyCompositeException e1) {
+		catch (EmptyCompositeException | InvalidDataTypeException e1) {
 			model.setStatus(e1.getMessage(), true);
 		}
-		catch (InvalidDataTypeException e1) {
-			model.setStatus(e1.getMessage(), true);
-		}
-		requestTableFocus();
+        requestTableFocus();
 	}
 
 	@Override

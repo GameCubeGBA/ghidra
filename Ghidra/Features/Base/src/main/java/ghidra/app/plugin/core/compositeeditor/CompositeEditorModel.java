@@ -920,13 +920,10 @@ public abstract class CompositeEditorModel extends CompositeViewerModel implemen
 					compositeInfoChanged();
 				}
 			}
-			catch (DuplicateNameException e) {
+			catch (DuplicateNameException | InvalidNameException e) {
 				Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
 			}
-			catch (InvalidNameException e) {
-				Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-			}
-			originalNameChanged();
+            originalNameChanged();
 		}
 		else {
 			DataType dt = viewDTM.getDataType(oldPath);
@@ -936,13 +933,10 @@ public abstract class CompositeEditorModel extends CompositeViewerModel implemen
 					fireTableDataChanged();
 					componentDataChanged();
 				}
-				catch (InvalidNameException e) {
+				catch (InvalidNameException | DuplicateNameException e) {
 					Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
 				}
-				catch (DuplicateNameException e) {
-					Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-				}
-			}
+            }
 		}
 	}
 

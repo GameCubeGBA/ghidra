@@ -160,13 +160,10 @@ public class IntegerFormatter extends NumberFormatter {
 				}
 				return (Number) parseObject;
 			}
-			catch (ParseException pe) {
+			catch (ParseException | NumberFormatException pe) {
 				return null;
 			}
-			catch (NumberFormatException nfe) {
-				return null;
-			}
-		}
+        }
 
 		private void warn() {
 			Toolkit.getDefaultToolkit().beep();

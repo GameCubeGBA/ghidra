@@ -69,15 +69,11 @@ public class TestAnalyzer extends AbstractAnalyzer {
 				currentAddress = currentAddress.add(data.getLength());
 
 			}
-			catch (CodeUnitInsertionException e) {
+			catch (CodeUnitInsertionException | DataTypeConflictException e) {
 				log.appendException(e);
 				return false;
 			}
-			catch (DataTypeConflictException e) {
-				log.appendException(e);
-				return false;
-			}
-		}
+        }
 
 		return true;
 	}

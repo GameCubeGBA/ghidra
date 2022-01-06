@@ -179,10 +179,8 @@ public class MyHeadlessToolkit extends Toolkit {
 			throw new AWTError("Could not instantiate Toolkit: " + preferredToolkit);
 		} catch (IllegalAccessException e) {
 			throw new AWTError("Could not access Toolkit: " + preferredToolkit);
-		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
+		} catch (NoSuchMethodException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
-	}
+    }
 }

@@ -639,13 +639,10 @@ public class ContextState {
 				}
 			}
 		}
-		catch (MemoryAccessException e) {
+		catch (MemoryAccessException | AddressOutOfBoundsException e) {
 			bytes = null;
 		}
-		catch (AddressOutOfBoundsException e) {
-			bytes = null;
-		}
-		if (bytes == null || zeroMemoryByteCnt == bytes.length) {
+        if (bytes == null || zeroMemoryByteCnt == bytes.length) {
 			// one or mores bytes could not be read or all bytes are zero memory bytes
 			if (varnode.isAddress()) {
 				cachedValue = varnode;

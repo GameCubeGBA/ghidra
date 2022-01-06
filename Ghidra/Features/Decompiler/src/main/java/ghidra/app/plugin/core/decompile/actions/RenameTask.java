@@ -106,13 +106,9 @@ public abstract class RenameTask {
 				commit();
 				commit = true;
 			}
-			catch (DuplicateNameException e) {
+			catch (DuplicateNameException | InvalidInputException e) {
 				Msg.showError(this, tool.getToolFrame(), "Rename Failed", e.getMessage());
-			}
-			catch (InvalidInputException e) {
-				Msg.showError(this, tool.getToolFrame(), "Rename Failed", e.getMessage());
-			}
-			finally {
+			} finally {
 				program.endTransaction(transaction, commit);
 				decompilerPanel.tokenRenamed(tokenAtCursor, newName);
 			}

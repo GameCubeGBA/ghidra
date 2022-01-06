@@ -148,11 +148,9 @@ public class AddressFormatModel implements ProgramDataFormatModel {
 			// Do nothing... Tried to form an address that was not readable or
 			// writeable.
 		}
-		catch (AddressOutOfBoundsException e) {
+		catch (AddressOutOfBoundsException | IllegalArgumentException e) {
 		}
-		catch (IllegalArgumentException e) {
-		}
-		return null;
+        return null;
 	}
 
 	private boolean isUndefined(Address a) {

@@ -117,13 +117,10 @@ public class KeyBindingUtils {
 		try {
 			rootElement = builder.build(inputStream).getRootElement();
 		}
-		catch (JDOMException e) {
+		catch (JDOMException | IOException e) {
 			Msg.showError(log, null, "Error Loading Key Bindings", "Unable to build XML data.", e);
 		}
-		catch (IOException e) {
-			Msg.showError(log, null, "Error Loading Key Bindings", "Unable to build XML data.", e);
-		}
-		if (rootElement != null) {
+        if (rootElement != null) {
 			newKeyBindingOptions = new ToolOptions(rootElement);
 		}
 		try {

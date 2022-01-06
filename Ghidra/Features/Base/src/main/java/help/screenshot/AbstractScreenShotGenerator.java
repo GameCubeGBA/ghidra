@@ -1317,15 +1317,11 @@ public abstract class AbstractScreenShotGenerator extends AbstractGhidraHeadedIn
 			Class<? extends Plugin> pluginClazz = (Class<? extends Plugin>) clazz;
 			return loadPlugin(pluginClazz);
 		}
-		catch (ClassCastException e) {
+		catch (ClassCastException | ClassNotFoundException e) {
 			e.printStackTrace();
 			System.exit(0);
 		}
-		catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			System.exit(0);
-		}
-		return null;
+        return null;
 	}
 
 	public ComponentProvider getProvider(String name) {

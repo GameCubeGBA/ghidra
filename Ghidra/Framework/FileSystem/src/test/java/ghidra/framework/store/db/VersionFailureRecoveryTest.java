@@ -74,13 +74,9 @@ public class VersionFailureRecoveryTest extends AbstractGenericTest {
 				"comment", "PROGRAM", false, TaskMonitor.DUMMY, "test-user");
 			fail("Expected IOException");
 		}
-		catch (InvalidNameException e) {
+		catch (InvalidNameException | CancelledException e) {
 			fail("unexpected");
-		}
-		catch (CancelledException e) {
-			fail("unexpected");
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			assertEquals("forced block read failure", e.getMessage());
 		}
 		finally {

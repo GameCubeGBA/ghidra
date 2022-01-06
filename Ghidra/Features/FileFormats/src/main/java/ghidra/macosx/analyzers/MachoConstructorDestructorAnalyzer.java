@@ -64,13 +64,10 @@ public class MachoConstructorDestructorAnalyzer extends AbstractAnalyzer {
 						program.getListing().createData(currentAddress, new PointerDataType());
 					currentAddress = currentAddress.add(data.getLength());
 				}
-				catch (CodeUnitInsertionException e) {
+				catch (CodeUnitInsertionException | DataTypeConflictException e) {
 					break;
 				}
-				catch (DataTypeConflictException e) {
-					break;
-				}
-			}
+            }
 		}
 
 		return false;

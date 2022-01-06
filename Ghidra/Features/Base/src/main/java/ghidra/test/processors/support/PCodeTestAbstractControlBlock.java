@@ -288,13 +288,10 @@ public abstract class PCodeTestAbstractControlBlock {
 		try {
 			program.getListing().createData(addr, DWordDataType.dataType);
 		}
-		catch (CodeUnitInsertionException e) {
+		catch (CodeUnitInsertionException | DataTypeConflictException e) {
 			// ignore
 		}
-		catch (DataTypeConflictException e) {
-			// ignore
-		}
-	}
+    }
 
 	protected int getStructureComponent(Structure testInfoStruct, String fieldName) {
 		for (DataTypeComponent component : testInfoStruct.getDefinedComponents()) {

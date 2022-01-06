@@ -200,14 +200,10 @@ class OldLanguage implements Language {
 
             parseOldLanguage(root, descriptionOnly);
 
-        } catch (SAXNotRecognizedException e) {
-            throw new IOException("Failed to parse old language: " + oldLangFile, e);
-        } catch (JDOMException e) {
-            throw new IOException("Failed to parse old language: " + oldLangFile, e);
-        } catch (SAXException e) {
+        } catch (SAXException | JDOMException e) {
             throw new IOException("Failed to parse old language: " + oldLangFile, e);
         }
-	}
+    }
 
 	void parseOldLanguage(Element root, boolean descriptionOnly)
 			throws SAXNotRecognizedException, SAXException {

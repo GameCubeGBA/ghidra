@@ -290,13 +290,10 @@ public class RTTI1DataType extends RTTIDataType {
 			// attributes can be any bitmask number so don't check it
 //			int attributes = memory.getInt(startAddress.add(ATTRIBUTES_OFFSET));
 		}
-		catch (MemoryAccessException e) {
+		catch (MemoryAccessException | AddressOutOfBoundsException e) {
 			return false;
 		}
-		catch (AddressOutOfBoundsException e) {
-			return false;
-		}
-		// Last component is either a direct reference or an image base offset.
+        // Last component is either a direct reference or an image base offset.
 		Address rtti3Address = getReferencedAddress(program, startAddress.add(RTTI_3_OFFSET));
 		// Make sure we don't follow flow or validation will get stuck in infinite loop.
 		DataValidationOptions dontFollowOptions = new DataValidationOptions(validationOptions);

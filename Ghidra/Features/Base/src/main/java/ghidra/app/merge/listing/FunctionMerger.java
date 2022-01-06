@@ -699,19 +699,11 @@ class FunctionMerger extends AbstractFunctionMerger implements ListingMerger {
 					f.setParentNamespace(ns);
 				}
 			}
-			catch (DuplicateNameException e) {
+			catch (DuplicateNameException | CircularDependencyException | InvalidInputException e) {
 				Msg.showError(this, mergeManager.getMergeTool().getToolFrame(),
 					"Error Setting Function Namespace", e.getMessage());
 			}
-			catch (InvalidInputException e) {
-				Msg.showError(this, mergeManager.getMergeTool().getToolFrame(),
-					"Error Setting Function Namespace", e.getMessage());
-			}
-			catch (CircularDependencyException e) {
-				Msg.showError(this, mergeManager.getMergeTool().getToolFrame(),
-					"Error Setting Function Namespace", e.getMessage());
-			}
-		}
+        }
 	}
 
 	private void mergeOverlap(Address address, int chosenConflictOption, TaskMonitor monitor)
@@ -761,19 +753,11 @@ class FunctionMerger extends AbstractFunctionMerger implements ListingMerger {
 						listingMergeManager.resolveNamespace(origP, origF.getParentNamespace());
 					resultF.setParentNamespace(ns);
 				}
-				catch (DuplicateNameException e) {
+				catch (DuplicateNameException | CircularDependencyException | InvalidInputException e) {
 					Msg.showError(this, mergeManager.getMergeTool().getToolFrame(),
 						"Error Setting Function Namespace", e.getMessage());
 				}
-				catch (InvalidInputException e) {
-					Msg.showError(this, mergeManager.getMergeTool().getToolFrame(),
-						"Error Setting Function Namespace", e.getMessage());
-				}
-				catch (CircularDependencyException e) {
-					Msg.showError(this, mergeManager.getMergeTool().getToolFrame(),
-						"Error Setting Function Namespace", e.getMessage());
-				}
-			}
+            }
 		}
 	}
 
@@ -1433,15 +1417,11 @@ class FunctionMerger extends AbstractFunctionMerger implements ListingMerger {
 				listingPanel.paintAllBackgrounds(addrSet);
 			});
 		}
-		catch (InterruptedException e) {
+		catch (InterruptedException | InvocationTargetException e) {
 			showOverlapException(entryPt, e);
 			return;
 		}
-		catch (InvocationTargetException e) {
-			showOverlapException(entryPt, e);
-			return;
-		}
-		if (mergeManager != null) {
+        if (mergeManager != null) {
 			mergeManager.setApplyEnabled(false);
 			mergeManager.showListingMergePanel(currentAddress);
 		}

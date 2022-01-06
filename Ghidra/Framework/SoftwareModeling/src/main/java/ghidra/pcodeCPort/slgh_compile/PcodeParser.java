@@ -327,9 +327,7 @@ public class PcodeParser extends PcodeCompile {
             throw new AssertException(); // unexpected condition
         } catch (RecognitionException e) {
             throw new SleighException("Semantic compilation error: " + e.getMessage(), e);
-        } catch (BailoutException e) {
-            throw new SleighException("Unrecoverable error(s), halting compilation", e);
-        } catch (NullPointerException e) {
+        } catch (BailoutException | NullPointerException e) {
             throw new SleighException("Unrecoverable error(s), halting compilation", e);
         }
         // squash!!! we tried

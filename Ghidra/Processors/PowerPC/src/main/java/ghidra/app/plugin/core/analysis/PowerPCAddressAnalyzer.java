@@ -618,13 +618,10 @@ public class PowerPCAddressAnalyzer extends ConstantPropagationAnalyzer {
 				try {
 					program.getListing().createData(address, dt);
 				}
-				catch (CodeUnitInsertionException e) {
+				catch (CodeUnitInsertionException | DataTypeConflictException e) {
 					// ignore
 				}
-				catch (DataTypeConflictException e) {
-					// ignore
-				}
-			}
+            }
 		}
 	}
 

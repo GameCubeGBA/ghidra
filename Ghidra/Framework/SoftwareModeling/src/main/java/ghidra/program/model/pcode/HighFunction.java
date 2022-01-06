@@ -580,13 +580,10 @@ public class HighFunction extends PcodeSyntaxTree {
 			try {
 				return symtab.createNameSpace(parentspace, name, SourceType.USER_DEFINED);
 			}
-			catch (DuplicateNameException e) {
+			catch (DuplicateNameException | InvalidInputException e) {
 				return null;
 			}
-			catch (InvalidInputException e) {
-				return null;
-			}
-		}
+        }
 		return res;
 	}
 

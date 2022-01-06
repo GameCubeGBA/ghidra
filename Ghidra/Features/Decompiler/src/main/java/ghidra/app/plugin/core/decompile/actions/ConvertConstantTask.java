@@ -225,13 +225,9 @@ public class ConvertConstantTask implements Callback {
 			addPrimaryEquate();
 			commit = true;
 		}
-		catch (DuplicateNameException e) {
+		catch (DuplicateNameException | InvalidInputException e) {
 			Msg.showError(this, null, "Convert Failed", e.getMessage());
-		}
-		catch (InvalidInputException e) {
-			Msg.showError(this, null, "Convert Failed", e.getMessage());
-		}
-		finally {
+		} finally {
 			program.endTransaction(transaction, commit);
 		}
 	}
@@ -246,13 +242,9 @@ public class ConvertConstantTask implements Callback {
 			addAlternateEquate();
 			commit = true;
 		}
-		catch (DuplicateNameException e) {
+		catch (DuplicateNameException | InvalidInputException e) {
 			Msg.showError(this, null, "Convert Failed", e.getMessage());
-		}
-		catch (InvalidInputException e) {
-			Msg.showError(this, null, "Convert Failed", e.getMessage());
-		}
-		finally {
+		} finally {
 			program.endTransaction(transaction, commit);
 		}
 	}

@@ -264,13 +264,10 @@ public class DoubleRangeConstraintEditor extends AbstractColumnConstraintEditor<
 
 			return Double.compare(textDouble, roundTripDouble) == 0;
 		}
-		catch (ParseException e) {
+		catch (ParseException | NumberFormatException e) {
 			return false;
 		}
-		catch (NumberFormatException nfe) {
-			return false;
-		}
-	}
+    }
 
 	private static void markSpinnerAsValid(JSpinner spinner, boolean valid) {
 		NumberEditor numEditor = (NumberEditor) spinner.getEditor();

@@ -161,13 +161,10 @@ public class ProgramContextMergeManager implements MergeResolver, ListingMergeCo
 				new ProgramMergeFilter(ProgramMergeFilter.PROGRAM_CONTEXT,
 					ProgramMergeFilter.REPLACE);
 		}
-		catch (ProgramConflictException e) {
+		catch (ProgramConflictException | IllegalArgumentException e) {
 			Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
 		}
-		catch (IllegalArgumentException e) {
-			Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-		}
-	}
+    }
 
 	/* (non-Javadoc)
 	 * @see ghidra.app.merge.MergeResolver#merge(ghidra.util.task.TaskMonitor)

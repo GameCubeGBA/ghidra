@@ -425,12 +425,10 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 		int flags = 0;
 		try {
 			flags = gatherFlags(0, context, -1);
-		} catch (MemoryAccessException e) {
-			return RefType.INVALID;
-		} catch (UnknownContextException e) {
+		} catch (MemoryAccessException | UnknownContextException e) {
 			return RefType.INVALID;
 		}
-		return convertFlowFlags(flags);
+        return convertFlowFlags(flags);
 	}
 
 	@Override
@@ -654,13 +652,11 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 		ArrayList<Address> addresses = new ArrayList<>();
 		try {
 			gatherFlows(addresses, (SleighParserContext) context.getParserContext(), context, -1);
-		} catch (MemoryAccessException e) {
-			return emptyFlow;
-		} catch (UnknownContextException e) {
+		} catch (MemoryAccessException | UnknownContextException e) {
 			return emptyFlow;
 		}
 
-		if (addresses.size() == 0)
+        if (addresses.size() == 0)
 			return emptyFlow;
 		return addresses.toArray(new Address[addresses.size()]);
 	}

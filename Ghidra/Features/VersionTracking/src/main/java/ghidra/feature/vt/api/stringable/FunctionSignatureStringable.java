@@ -547,14 +547,11 @@ public class FunctionSignatureStringable extends Stringable {
 				toFunction.setSignatureSource(signatureSource);
 			}
 		}
-		catch (DuplicateNameException e) {
-			throw new VersionTrackingApplyException(e.getMessage(), e);
-		}
-		catch (InvalidInputException e) {
+		catch (DuplicateNameException | InvalidInputException e) {
 			throw new VersionTrackingApplyException(e.getMessage(), e);
 		}
 
-		boolean hasFromVarArgs = hasVarargs;
+        boolean hasFromVarArgs = hasVarargs;
 		boolean hasToVarArgs = toFunction.hasVarArgs();
 		if (hasFromVarArgs != hasToVarArgs) {
 			applyVarArgs(toFunction, hasFromVarArgs, markupOptions);
@@ -896,13 +893,10 @@ public class FunctionSignatureStringable extends Stringable {
 					toParameter.setName(uniqueParameterName, fromSource);
 					duplicateNameOccurred = true;
 				}
-				catch (DuplicateNameException e1) {
+				catch (DuplicateNameException | InvalidInputException e1) {
 					throw new VersionTrackingApplyException(e1.getMessage(), e1);
 				}
-				catch (InvalidInputException e1) {
-					throw new VersionTrackingApplyException(e1.getMessage(), e1);
-				}
-			}
+            }
 			catch (InvalidInputException e) {
 				throw new VersionTrackingApplyException(e.getMessage(), e);
 			}
@@ -958,13 +952,10 @@ public class FunctionSignatureStringable extends Stringable {
 					toParameter.setName(uniqueParameterName, fromSource);
 					duplicateNameOccurred = true;
 				}
-				catch (DuplicateNameException e1) {
+				catch (DuplicateNameException | InvalidInputException e1) {
 					throw new VersionTrackingApplyException(e1.getMessage(), e1);
 				}
-				catch (InvalidInputException e1) {
-					throw new VersionTrackingApplyException(e1.getMessage(), e1);
-				}
-			}
+            }
 			catch (InvalidInputException e) {
 				throw new VersionTrackingApplyException(e.getMessage(), e);
 			}

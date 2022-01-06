@@ -400,14 +400,8 @@ class BytesFile {
 				size -= n;
 			}
 		}
-		catch (AddressOverflowException e) {
+		catch (AddressOverflowException | IOException | MemoryAccessException e) {
 			throw new IOException(e.getMessage());
 		}
-		catch (MemoryAccessException e) {
-			throw new IOException(e.getMessage());
-		}
-		catch (IOException e) {
-			throw new IOException(e.getMessage());
-		}
-	}
+    }
 }

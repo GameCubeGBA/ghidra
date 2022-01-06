@@ -178,11 +178,9 @@ public class ObjectiveC1_MessageAnalyzer extends AbstractAnalyzer {
 				return symbolTable.createNameSpace(parentNamespace, namespaceName,
 					SourceType.ANALYSIS);
 			}
-			catch (DuplicateNameException e) {
+			catch (DuplicateNameException | InvalidInputException e) {
 			}
-			catch (InvalidInputException e) {
-			}
-			return null;
+            return null;
 		}
 	}
 

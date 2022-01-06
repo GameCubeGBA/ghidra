@@ -585,11 +585,10 @@ public class HelpManager implements HelpService {
 	private boolean isURLValid(URL url) {
         try (InputStream testStream = url.openStream()) {
             return true; // if the above didn't fail, then the resource can be accessed
-        } catch (MalformedURLException e) {
-            return false; // shouldn't happen as the URL should be valid
         } catch (IOException e) {
-            return false; // this happens if the resource doesn't exit
-        }
+            return false; // shouldn't happen as the URL should be valid
+        }// this happens if the resource doesn't exit
+
         // don't care, we tried to close it
     }
 

@@ -97,13 +97,10 @@ public class SetVariableNameCmd implements Command {
 			var.setName(newName, source);
 			return true;
 		}
-		catch (DuplicateNameException e) {
+		catch (DuplicateNameException | InvalidInputException e) {
 			status = e.getMessage();
 		}
-		catch (InvalidInputException e) {
-			status = e.getMessage();
-		}
-		return false;
+        return false;
 	}
 
 	/**

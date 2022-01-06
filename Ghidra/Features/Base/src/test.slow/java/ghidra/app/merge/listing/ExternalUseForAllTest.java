@@ -426,16 +426,12 @@ public class ExternalUseForAllTest extends AbstractExternalMergerTest {
 						Parameter parameter2 = new ParameterImpl("P2", new ByteDataType(), program);
 						function.addParameter(parameter2, SourceType.USER_DEFINED);
 					}
-					catch (InvalidInputException e) {
-						e.printStackTrace();
-						Assert.fail();
-					}
-					catch (DuplicateNameException e) {
+					catch (InvalidInputException | DuplicateNameException e) {
 						e.printStackTrace();
 						Assert.fail();
 					}
 
-					ExternalLocation externalLocation2 =
+                    ExternalLocation externalLocation2 =
 						externalManager.getUniqueExternalLocation("user32.dll", "Green");
 					assertNotNull(externalLocation2);
 					Function function2 = externalLocation2.getFunction();
@@ -446,15 +442,11 @@ public class ExternalUseForAllTest extends AbstractExternalMergerTest {
 						Parameter parameter2 = new ParameterImpl("P2", new ByteDataType(), program);
 						function2.addParameter(parameter2, SourceType.USER_DEFINED);
 					}
-					catch (InvalidInputException e) {
+					catch (InvalidInputException | DuplicateNameException e) {
 						e.printStackTrace();
 						Assert.fail();
 					}
-					catch (DuplicateNameException e) {
-						e.printStackTrace();
-						Assert.fail();
-					}
-					commit = true;
+                    commit = true;
 				}
 				catch (Exception e) {
 					Assert.fail(e.getMessage());

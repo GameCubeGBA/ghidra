@@ -494,14 +494,11 @@ class FunctionsXmlMgr {
 				registerParam.setComment(comment);
 				registerParams.add(registerParam);
 			}
-			catch (InvalidInputException e) {
-				log.appendException(e);
-			}
-			catch (IllegalArgumentException e) {
+			catch (InvalidInputException | IllegalArgumentException e) {
 				log.appendException(e);
 			}
 
-			element = parser.next();
+            element = parser.next();
 			element = parser.peek();
 		}
 	}

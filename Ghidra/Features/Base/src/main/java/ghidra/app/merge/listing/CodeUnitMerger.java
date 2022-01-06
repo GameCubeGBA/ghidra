@@ -605,11 +605,9 @@ class CodeUnitMerger extends AbstractListingMerger {
                     resultAddressFactory.getAddressSet(minAddress, maxAddress));
             });
 		}
-		catch (InterruptedException e) {
+		catch (InterruptedException | InvocationTargetException e) {
 		}
-		catch (InvocationTargetException e) {
-		}
-		if (mergeManager != null) {
+        if (mergeManager != null) {
 			mergeManager.setApplyEnabled(false);
 			mergeManager.showListingMergePanel(currentAddress);
 		}

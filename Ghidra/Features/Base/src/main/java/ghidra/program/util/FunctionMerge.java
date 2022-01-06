@@ -207,11 +207,8 @@ public class FunctionMerge {
 					try {
 						replaceFunctionSymbol(originEntryPoint, conflictSymbolIDMap, monitor);
 					}
-					catch (DuplicateNameException e) {
-					}
-					catch (InvalidInputException e) {
-					}
-					catch (CircularDependencyException e) {
+					catch (DuplicateNameException | InvalidInputException e) {
+					} catch (CircularDependencyException e) {
 						// TODO May want message to user if can't replace name.
 					}
 				}
@@ -246,11 +243,8 @@ public class FunctionMerge {
 					replaceFunctionSymbol(originProgram, resultProgram, resultEntryPt,
 						conflictSymbolIDMap, monitor);
 				}
-				catch (DuplicateNameException e) {
-				}
-				catch (InvalidInputException e) {
-				}
-				catch (CircularDependencyException e) {
+				catch (DuplicateNameException | InvalidInputException e) {
+				} catch (CircularDependencyException e) {
 					// TODO MAy want message to user if can't replace name.
 				}
 			}

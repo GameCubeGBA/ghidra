@@ -809,13 +809,10 @@ class CompositeViewerModel extends AbstractTableModel implements DataTypeManager
 		try {
 			oldCat.setName(newPath.getName());
 		}
-		catch (DuplicateNameException e) {
+		catch (DuplicateNameException | InvalidNameException e) {
 			Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
 		}
-		catch (InvalidNameException e) {
-			Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-		}
-		if (originalDataTypePath.isAncestor(oldPath)) {
+        if (originalDataTypePath.isAncestor(oldPath)) {
 			changeOriginalDataTypeCategory(oldPath, newPath);
 		}
 		compositeInfoChanged();
@@ -898,26 +895,20 @@ class CompositeViewerModel extends AbstractTableModel implements DataTypeManager
 				try {
 					originalComposite.setName(newName); // Is this the correct thing to do?
 				}
-				catch (DuplicateNameException e) {
+				catch (DuplicateNameException | InvalidNameException e) {
 					Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
 				}
-				catch (InvalidNameException e) {
-					Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-				}
-			}
+            }
 			try {
 				if (viewComposite.getName().equals(oldName)) {
 					viewComposite.setName(newName);
 					compositeInfoChanged();
 				}
 			}
-			catch (DuplicateNameException e) {
+			catch (DuplicateNameException | InvalidNameException e) {
 				Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
 			}
-			catch (InvalidNameException e) {
-				Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-			}
-			originalNameChanged();
+            originalNameChanged();
 		}
 		else {
 			DataType dt = viewDTM.getDataType(oldPath);
@@ -927,13 +918,10 @@ class CompositeViewerModel extends AbstractTableModel implements DataTypeManager
 					fireTableDataChanged();
 					componentDataChanged();
 				}
-				catch (InvalidNameException e) {
+				catch (InvalidNameException | DuplicateNameException e) {
 					Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
 				}
-				catch (DuplicateNameException e) {
-					Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-				}
-			}
+            }
 		}
 	}
 

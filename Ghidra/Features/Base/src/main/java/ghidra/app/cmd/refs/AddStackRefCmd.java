@@ -93,11 +93,7 @@ public class AddStackRefCmd implements Command {
 				}
 				catch (DuplicateNameException e) {
 				}
-				catch (InvalidInputException e) {
-					status = e.getMessage();
-					return false;
-				}
-				catch (AddressOutOfBoundsException e) {
+				catch (InvalidInputException | AddressOutOfBoundsException e) {
 					status = e.getMessage();
 					return false;
 				}

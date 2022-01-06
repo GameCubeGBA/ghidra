@@ -244,12 +244,10 @@ public class ModuleTest extends AbstractGhidraHeadedIntegrationTest {
 			s2.add(root);
 			Assert.fail("Should not be able to add root to its child!");
 		}
-		catch (CircularDependencyException e) {
-		}
-		catch (DuplicateGroupException e) {
+		catch (CircularDependencyException | DuplicateGroupException e) {
 		}
 
-	}
+    }
 
 	@Test
 	public void testDuplicateGroup() throws Exception {
@@ -733,16 +731,10 @@ public class ModuleTest extends AbstractGhidraHeadedIntegrationTest {
                 TaskMonitor.DUMMY, false);
 
 		}
-		catch (AddressOverflowException e) {
+		catch (AddressOverflowException | LockException | MemoryConflictException e) {
 			Assert.fail(e.getMessage());
 		}
-		catch (MemoryConflictException e) {
-			Assert.fail(e.getMessage());
-		}
-		catch (LockException e) {
-			Assert.fail(e.getMessage());
-		}
-		return null;
+        return null;
 	}
 
 }

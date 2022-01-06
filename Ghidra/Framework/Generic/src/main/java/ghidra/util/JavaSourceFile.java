@@ -51,8 +51,6 @@ public class JavaSourceFile {
                 linesList.add(new JavaSourceLine(line + newline, ++lineNumber));
             }
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

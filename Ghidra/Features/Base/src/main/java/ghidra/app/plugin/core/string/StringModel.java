@@ -200,13 +200,9 @@ public class StringModel {
 				}
 			}
 		}
-		catch (UnsupportedEncodingException e) {
+		catch (UnsupportedEncodingException | FileNotFoundException e) {
 			System.err.println("Error creating String Model file: " + e);
 			System.exit(0);
 		}
-		catch (FileNotFoundException e) {
-			System.err.println("Error creating String Model file: " + e);
-			System.exit(0);
-		}
-	}
+    }
 }

@@ -301,13 +301,10 @@ public class DexHeaderFormatMarkup {
 			method.updateFunction("__stdcall", returnVar, paramList,
 				FunctionUpdateType.DYNAMIC_STORAGE_ALL_PARAMS, true, SourceType.ANALYSIS);
 		}
-		catch (InvalidInputException ex) {
+		catch (InvalidInputException | DuplicateNameException ex) {
 			log.appendException(ex);
 		}
-		catch (DuplicateNameException ex) {
-			log.appendException(ex);
-		}
-	}
+    }
 
 	private String getParameterName(DexHeader header, CodeItem codeItem, int parameterOrdinal) {
 		try {
@@ -984,14 +981,11 @@ public class DexHeaderFormatMarkup {
 
 				createStringSymbol(stringDataAddress, string, "strings");
 			}
-			catch (DuplicateNameException e) {
+			catch (DuplicateNameException | InvalidInputException e) {
 				log.appendException(e); // Report the exception but keep going
 			}
-			catch (InvalidInputException e) {
-				log.appendException(e);
-			}
 
-			// markup string Id items
+            // markup string Id items
 			DataType dataType = item.toDataType();
 			try {
 				Data data = api.createData(address, dataType);
@@ -1003,13 +997,10 @@ public class DexHeaderFormatMarkup {
 
 				api.createMemoryReference(data, stringDataAddress, RefType.DATA);
 			}
-			catch (DuplicateNameException e) {
+			catch (DuplicateNameException | InvalidInputException e) {
 				log.appendException(e); // Report the exception but keep going
 			}
-			catch (InvalidInputException e) {
-				log.appendException(e);
-			}
-			++index;
+            ++index;
 
 			address = address.add(dataType.getLength());
 		}

@@ -72,16 +72,10 @@ public class ObjectPropertyMapDB extends PropertyMapDB implements ObjectProperty
 				tokenInstance = saveableObjectClass.getConstructor().newInstance();
 			}
 		}
-		catch (InstantiationException e) {
+		catch (InstantiationException | IllegalAccessException e) {
 			throw new RuntimeException(
 				saveableObjectClass.getName() + " must provide public default constructor");
-		}
-		catch (IllegalAccessException e) {
-			throw new RuntimeException(
-				saveableObjectClass.getName() + " must provide public default constructor");
-		} catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
+		} catch (NoSuchMethodException | InvocationTargetException e) {
             e.printStackTrace();
         }
         saveableObjectVersion = tokenInstance.getSchemaVersion();

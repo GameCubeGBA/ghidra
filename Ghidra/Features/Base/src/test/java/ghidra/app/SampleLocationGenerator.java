@@ -438,13 +438,10 @@ public class SampleLocationGenerator implements GhidraLocationGenerator {
 						}
 					}
 				}
-				catch (IllegalAccessException e) {
+				catch (IllegalAccessException | InvocationTargetException e) {
 					e.printStackTrace();
 				}
-				catch (InvocationTargetException e) {
-					e.printStackTrace();
-				}
-			}
+            }
 		}
 	}
 

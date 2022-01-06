@@ -149,14 +149,11 @@ public final class GTableToCSV {
 			SwingUtilities
 					.invokeAndWait(() -> result[0] = getTableCellValue(table, model, row, column));
 		}
-		catch (InterruptedException e) {
-			return null;
-		}
-		catch (InvocationTargetException e) {
+		catch (InterruptedException | InvocationTargetException e) {
 			return null;
 		}
 
-		return result[0];
+        return result[0];
 	}
 
 	/**

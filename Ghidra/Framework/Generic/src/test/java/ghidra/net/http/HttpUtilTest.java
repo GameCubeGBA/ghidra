@@ -36,13 +36,9 @@ public class HttpUtilTest {
 		try {
 			HttpUtil.getFile(urlStr, properties, true, f);
 			System.out.println("getFile completed: " + f);
-		}
-		catch (MalformedURLException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+    }
 
 }

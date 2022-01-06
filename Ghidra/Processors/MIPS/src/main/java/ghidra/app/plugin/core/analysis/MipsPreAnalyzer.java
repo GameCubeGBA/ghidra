@@ -162,15 +162,13 @@ public class MipsPreAnalyzer extends AbstractAnalyzer {
 			b = program.getMemory().getByte(addr);
 			primeOpcode = (b >> 2) & 0x3f;
 		}
-		catch (MemoryAccessException exc) {
+		catch (MemoryAccessException | AddressOutOfBoundsException exc) {
 			return false;
 		}
-		catch (AddressOutOfBoundsException exc) {
-			// could walk of the end of memory, just ignore
-			return false;
-		}
-		
-		// Generally, the load/store left instruction comes before the right,
+        // could walk of the end of memory, just ignore
+
+
+        // Generally, the load/store left instruction comes before the right,
 		// but here a pair will be found in any order.
         // sdl sdr
         return primeOpcode == 34 || primeOpcode == 38 || // lwl lwr

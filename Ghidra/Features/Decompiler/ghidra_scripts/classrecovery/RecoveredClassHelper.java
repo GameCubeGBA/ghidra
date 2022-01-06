@@ -6964,17 +6964,11 @@ public class RecoveredClassHelper {
 					}
 				}
 
-				catch (DuplicateNameException e) {
-					continue;
-				}
-				catch (InvalidInputException e) {
-					continue;
-				}
-				catch (DataTypeDependencyException e) {
+				catch (DuplicateNameException | DataTypeDependencyException | InvalidInputException e) {
 					continue;
 				}
 
-			}
+            }
 
 		}
 		return newChangedItems;

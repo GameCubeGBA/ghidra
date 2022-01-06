@@ -81,16 +81,9 @@ public class DataTypeArchiveContentHandler extends DBContentHandler {
 			success = true;
 			return dataTypeArchive;
 		}
-		catch (VersionException e) {
+		catch (VersionException | CancelledException | IOException e) {
 			throw e;
-		}
-		catch (IOException e) {
-			throw e;
-		}
-		catch (CancelledException e) {
-			throw e;
-		}
-		catch (Throwable t) {
+		} catch (Throwable t) {
 			Msg.error(this, "getImmutableObject failed", t);
 			String msg = t.getMessage();
 			if (msg == null) {
@@ -136,16 +129,9 @@ public class DataTypeArchiveContentHandler extends DBContentHandler {
 			success = true;
 			return dataTypeArchive;
 		}
-		catch (VersionException e) {
+		catch (VersionException | CancelledException | IOException e) {
 			throw e;
-		}
-		catch (IOException e) {
-			throw e;
-		}
-		catch (CancelledException e) {
-			throw e;
-		}
-		catch (Throwable t) {
+		} catch (Throwable t) {
 			Msg.error(this, "getReadOnlyObject failed", t);
 			String msg = t.getMessage();
 			if (msg == null) {
@@ -199,16 +185,9 @@ public class DataTypeArchiveContentHandler extends DBContentHandler {
 			success = true;
 			return dataTypeArchive;
 		}
-		catch (VersionException e) {
+		catch (VersionException | CancelledException | IOException e) {
 			throw e;
-		}
-		catch (IOException e) {
-			throw e;
-		}
-		catch (CancelledException e) {
-			throw e;
-		}
-		catch (Throwable t) {
+		} catch (Throwable t) {
 			Msg.error(this, "getDomainObject failed", t);
 			t.printStackTrace();
 			String msg = t.getMessage();
@@ -296,13 +275,9 @@ public class DataTypeArchiveContentHandler extends DBContentHandler {
 			dataTypeArchive = new DataTypeArchiveDB(dbh, openMode, null, this);
 			return getDataTypeArchiveChangeSet(dataTypeArchive, bf);
 		}
-		catch (VersionException e) {
+		catch (VersionException | IOException e) {
 			throw e;
-		}
-		catch (IOException e) {
-			throw e;
-		}
-		catch (Throwable t) {
+		} catch (Throwable t) {
 			Msg.error(this, "getChangeSet failed", t);
 			String msg = t.getMessage();
 			if (msg == null) {

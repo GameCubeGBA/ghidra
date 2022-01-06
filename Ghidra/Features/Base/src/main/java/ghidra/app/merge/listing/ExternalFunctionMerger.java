@@ -1213,10 +1213,7 @@ public class ExternalFunctionMerger extends AbstractFunctionMerger implements Li
                         myExternalLocation, mergeMy, monitor);
                 myResolvedSymbols.put(myID, resultID);
                 originalResolvedSymbols.put(originalID, resultID);
-            } catch (DuplicateNameException e) {
-                Msg.showError(this, mergeManager.getMergeTool().getToolFrame(),
-                        "Error Merging External Location", e.getMessage());
-            } catch (InvalidInputException e) {
+            } catch (DuplicateNameException | InvalidInputException e) {
                 Msg.showError(this, mergeManager.getMergeTool().getToolFrame(),
                         "Error Merging External Location", e.getMessage());
             }
@@ -1546,10 +1543,7 @@ public class ExternalFunctionMerger extends AbstractFunctionMerger implements Li
                     ExternalLocation[] externalLocations = {
                             resultExternalLocation, latestExternalLocation, myExternalLocation, null};
                     adjustIDMapsForAdd(externalLocations, resultExternalLocation, MY);
-                } catch (DuplicateNameException e) {
-                    Msg.error(this, "Couldn't add external '" +
-                            myExternalLocation.getSymbol().getName(true) + ",. " + e.getMessage());
-                } catch (InvalidInputException e) {
+                } catch (DuplicateNameException | InvalidInputException e) {
                     Msg.error(this, "Couldn't add external '" +
                             myExternalLocation.getSymbol().getName(true) + ",. " + e.getMessage());
                 }
@@ -3338,17 +3332,12 @@ public class ExternalFunctionMerger extends AbstractFunctionMerger implements Li
 			// Add MY external giving it a new name if necessary.
 			resultExternalLocation = addExternal(myExternalLocation, monitor);
 		}
-		catch (DuplicateNameException e) {
+		catch (DuplicateNameException | InvalidInputException e) {
 			Msg.showError(this, mergeManager.getMergeTool().getToolFrame(),
 				"Error Merging External Location", "Couldn't merge external '" +
 					myExternalLocation.getLabel() + "'. " + e.getMessage());
 		}
-		catch (InvalidInputException e) {
-			Msg.showError(this, mergeManager.getMergeTool().getToolFrame(),
-				"Error Merging External Location", "Couldn't merge external '" +
-					myExternalLocation.getLabel() + "'. " + e.getMessage());
-		}
-		return resultExternalLocation;
+        return resultExternalLocation;
 	}
 
 	/**
@@ -3704,15 +3693,11 @@ public class ExternalFunctionMerger extends AbstractFunctionMerger implements Li
 					break;
 			}
 		}
-		catch (DuplicateNameException e) {
+		catch (DuplicateNameException | InvalidInputException e) {
 			Msg.showError(this, mergeManager.getMergeTool().getToolFrame(),
 				"Error Merging External Location", e.getMessage());
 		}
-		catch (InvalidInputException e) {
-			Msg.showError(this, mergeManager.getMergeTool().getToolFrame(),
-				"Error Merging External Location", e.getMessage());
-		}
-	}
+    }
 
 	private void mergeLatest(ExternalLocation[] externalLocations, TaskMonitor monitor)
 			throws DuplicateNameException, InvalidInputException, CancelledException {
@@ -4053,15 +4038,11 @@ public class ExternalFunctionMerger extends AbstractFunctionMerger implements Li
 		try {
 			SwingUtilities.invokeAndWait(() -> addConflictPanel.setBottomComponent(conflictPanel));
 		}
-		catch (InterruptedException e) {
+		catch (InterruptedException | InvocationTargetException e) {
 			Msg.showError(this, null, "Error Displaying Conflict Panel", e);
 			return;
 		}
-		catch (InvocationTargetException e) {
-			Msg.showError(this, null, "Error Displaying Conflict Panel", e);
-			return;
-		}
-		if (mergeManager != null) {
+        if (mergeManager != null) {
 			mergeManager.setApplyEnabled(false);
 			addConflictPanel.setConflictInfo(conflictIndex, latestLocation, myLocation);
 			HelpLocation helpLocation = null;
@@ -4103,15 +4084,11 @@ public class ExternalFunctionMerger extends AbstractFunctionMerger implements Li
 //						entryPtAddr, entryPtAddr));
 			});
 		}
-		catch (InterruptedException e) {
+		catch (InterruptedException | InvocationTargetException e) {
 			Msg.showError(this, null, "Error Displaying Conflict Panel", e);
 			return;
 		}
-		catch (InvocationTargetException e) {
-			Msg.showError(this, null, "Error Displaying Conflict Panel", e);
-			return;
-		}
-		if (mergeManager != null) {
+        if (mergeManager != null) {
 			mergeManager.setApplyEnabled(false);
 
 			Address resultAddress = (externalLocations[RESULT] != null)

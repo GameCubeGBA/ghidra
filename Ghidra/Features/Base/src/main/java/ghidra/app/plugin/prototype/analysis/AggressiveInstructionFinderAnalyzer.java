@@ -163,13 +163,10 @@ public class AggressiveInstructionFinderAnalyzer extends AbstractAnalyzer {
 					funcStartMap.put(bi, 1);
 					funcStartContext.put(bi, disContext);
 				}
-				catch (IllegalStateException exc) {
+				catch (IllegalStateException | IllegalArgumentException exc) {
 					continue;
 				}
-				catch (IllegalArgumentException exc) {
-					continue;
-				}
-			}
+            }
 //			Err.info(this, "" + funcList.size() + " number of starts");
 //
 //			Iterator iter = funcStartMap.keySet().iterator();

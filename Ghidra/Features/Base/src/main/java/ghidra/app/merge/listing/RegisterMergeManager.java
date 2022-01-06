@@ -345,11 +345,9 @@ class RegisterMergeManager implements ListingMergeConstants {
                 listingMergePanel.paintAllBackgrounds(new AddressSet(minAddress, maxAddress));
             });
 		}
-		catch (InterruptedException e) {
+		catch (InterruptedException | InvocationTargetException e) {
 		}
-		catch (InvocationTargetException e) {
-		}
-		if (mergeManager != null) {
+        if (mergeManager != null) {
 			mergeManager.setApplyEnabled(false);
 			mergeManager.showListingMergePanel(minAddress);
 		}

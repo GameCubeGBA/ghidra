@@ -95,13 +95,10 @@ public class SetExternalRefCmd implements Command {
 				refType);
 			return true;
 		}
-		catch (DuplicateNameException e) {
+		catch (DuplicateNameException | InvalidInputException e) {
 			errMsg = e.getMessage();
 		}
-		catch (InvalidInputException e) {
-			errMsg = e.getMessage();
-		}
-		return false;
+        return false;
 	}
 
 	/**

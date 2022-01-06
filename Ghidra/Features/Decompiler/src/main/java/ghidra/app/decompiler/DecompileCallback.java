@@ -163,13 +163,10 @@ public class DecompileCallback {
 			getSAXParser().parse(new InputSource(new StringReader(xml)), nmHandler);
 			return nmHandler.getList();
 		}
-		catch (SAXException e1) {
+		catch (SAXException | IOException e1) {
 			throw new PcodeXMLException("Problem parsing list string " + xml, e1);
 		}
-		catch (IOException e1) {
-			throw new PcodeXMLException("Problem parsing list string " + xml, e1);
-		}
-	}
+    }
 
 	public byte[] getBytes(String addrxml) {
 		try {

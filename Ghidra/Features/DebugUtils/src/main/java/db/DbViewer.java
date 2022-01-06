@@ -261,15 +261,9 @@ public class DbViewer extends JFrame {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		}
-		catch (ClassNotFoundException e) {
+		catch (ClassNotFoundException | UnsupportedLookAndFeelException | IllegalAccessException | InstantiationException e) {
 		}
-		catch (InstantiationException e) {
-		}
-		catch (IllegalAccessException e) {
-		}
-		catch (UnsupportedLookAndFeelException e) {
-		}
-		Application.initializeApplication(layout, configuration);
+        Application.initializeApplication(layout, configuration);
 
 		DbViewer viewer = new DbViewer();
 		viewer.setSize(new Dimension(500, 400));

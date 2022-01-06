@@ -169,15 +169,11 @@ public class InjectPayloadSleigh implements InjectPayload {
 			setupParameters(context, walker);
 			emit.build(pcodeTemplate, -1);
 		}
-		catch (UnknownInstructionException e) { // Should not be happening in a CallFixup
+		catch (UnknownInstructionException | MemoryAccessException e) { // Should not be happening in a CallFixup
 			e.printStackTrace();
 			return;
 		}
-		catch (MemoryAccessException e) { // Should not be happening in a CallFixup
-			e.printStackTrace();
-			return;
-		}
-		emit.resolveRelatives();
+        emit.resolveRelatives();
 	}
 
 	@Override

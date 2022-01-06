@@ -70,13 +70,10 @@ public class JavaLoader extends AbstractLibrarySupportLoader {
 		try {
 			new ClassFileJava(reader);
 		}
-		catch (IOException e) {
+		catch (IOException | RuntimeException e) {
 			return false;
 		}
-		catch (RuntimeException re) {
-			return false;
-		}
-		return true;
+        return true;
 	}
 
 	@Override
@@ -90,22 +87,10 @@ public class JavaLoader extends AbstractLibrarySupportLoader {
 		try {
 			doLoad(provider, program, monitor);
 		}
-		catch (LockException e) {
+		catch (LockException | DuplicateNameException | CancelledException | AddressOverflowException | MemoryConflictException e) {
 			e.printStackTrace();
 		}
-		catch (MemoryConflictException e) {
-			e.printStackTrace();
-		}
-		catch (AddressOverflowException e) {
-			e.printStackTrace();
-		}
-		catch (CancelledException e) {
-			e.printStackTrace();
-		}
-		catch (DuplicateNameException e) {
-			e.printStackTrace();
-		}
-	}
+    }
 
 	public void load(ByteProvider provider, Program program, TaskMonitor monitor)
 			throws IOException {

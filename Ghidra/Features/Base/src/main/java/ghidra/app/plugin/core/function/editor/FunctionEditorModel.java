@@ -1017,16 +1017,12 @@ public class FunctionEditorModel {
 				}
 			}
 		}
-		catch (DuplicateNameException e) {
-			Msg.showError(this, null, "Function Edit Error", e.getMessage());
-			return false;
-		}
-		catch (InvalidInputException e) {
+		catch (DuplicateNameException | InvalidInputException e) {
 			Msg.showError(this, null, "Function Edit Error", e.getMessage());
 			return false;
 		}
 
-		if (function.isInline() != isInLine) {
+        if (function.isInline() != isInLine) {
 			function.setInline(isInLine);
 		}
 

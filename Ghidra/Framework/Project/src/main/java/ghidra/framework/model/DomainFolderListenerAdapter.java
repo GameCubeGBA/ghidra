@@ -38,13 +38,10 @@ public abstract class DomainFolderListenerAdapter implements DomainFolderChangeL
 				foundStateChangedMethod = true;
 			}
 		}
-		catch (SecurityException e) {
+		catch (SecurityException | NoSuchMethodException e) {
 			// ignore
 		}
-		catch (NoSuchMethodException e) {
-			// ignore
-		}
-		enableStateChangeCallback = foundStateChangedMethod;
+        enableStateChangeCallback = foundStateChangedMethod;
 	}
 
 	/**

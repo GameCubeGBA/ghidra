@@ -139,13 +139,10 @@ public class EditReferencesProvider extends ComponentProviderAdapter
 						return true;
 					}
 				}
-				catch (UnsupportedFlavorException e1) {
+				catch (UnsupportedFlavorException | IOException e1) {
 					// handle below by returning false
 				}
-				catch (IOException e1) {
-					// handle below by returning false
-				}
-			}
+            }
 			return false;
 		}
 

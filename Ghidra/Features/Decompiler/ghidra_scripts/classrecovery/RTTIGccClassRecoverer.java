@@ -1203,14 +1203,11 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 					return true;
 				}
 			}
-			catch (MemoryAccessException e) {
-				return false;
-			}
-			catch (AddressOutOfBoundsException e) {
+			catch (MemoryAccessException | AddressOutOfBoundsException e) {
 				return false;
 			}
 
-		}
+        }
 
 		return false;
 	}

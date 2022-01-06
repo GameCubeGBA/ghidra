@@ -100,16 +100,9 @@ public class VTSessionContentHandler extends DBContentHandler {
 				}
 			}
 		}
-		catch (VersionException e) {
+		catch (VersionException | CancelledException | IOException e) {
 			throw e;
-		}
-		catch (IOException e) {
-			throw e;
-		}
-		catch (CancelledException e) {
-			throw e;
-		}
-		catch (Throwable t) {
+		} catch (Throwable t) {
 			Msg.error(this, "getDomainObject failed", t);
 			String msg = t.getMessage();
 			if (msg == null) {

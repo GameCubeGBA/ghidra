@@ -158,15 +158,10 @@ public class LocationMemento {
 		catch (ClassNotFoundException e) {
 			// class must have been deleted or renamed
 		}
-		catch (InstantiationException e) {
+		catch (InstantiationException | IllegalAccessException e) {
 			Msg.showError(ProgramLocation.class, null, "Programming Error", "Class " + className +
 				" must have public constructor!", e);
-		}
-		catch (IllegalAccessException e) {
-			Msg.showError(ProgramLocation.class, null, "Programming Error", "Class " + className +
-				" must have public constructor!", e);
-		}
-		catch (NoSuchMethodException e) {
+		} catch (NoSuchMethodException e) {
 			Msg.showError(ProgramLocation.class, null, "Programming Error", "Class " + className +
 				" must have a public constructor that takes a SaveState " + "and a Program[]!", e);
 			e.printStackTrace();

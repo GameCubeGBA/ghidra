@@ -128,13 +128,10 @@ public class CreateExternalFunctionCmd implements Command {
 			extSymbol = extLoc.getSymbol();
 			return true;
 		}
-		catch (DuplicateNameException e) {
+		catch (DuplicateNameException | InvalidInputException e) {
 			status = e.getMessage();
 		}
-		catch (InvalidInputException e) {
-			status = e.getMessage();
-		}
-		return false;
+        return false;
 	}
 
 	@Override

@@ -229,11 +229,9 @@ class DragNDropHandler implements GTreeDragNDropHandler {
                 Msg.info(this, "\t" + o);
             }
 		}
-		catch (UnsupportedFlavorException e) {
+		catch (UnsupportedFlavorException | IOException e) {
 		}
-		catch (IOException e) {
-		}
-	}
+    }
 
 	@Override
 	public DataFlavor[] getSupportedDataFlavors(List<GTreeNode> dragUserData) {

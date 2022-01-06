@@ -90,7 +90,7 @@ public class ObjectContainer implements Comparable<ObjectContainer> {
 			return linkKey;
 		}
 		boolean noTarget = targetObject == null;
-		String name = noTarget ? targetObject.getName() : targetObject.getName();
+		String name = targetObject.getName();
 		String hint = noTarget ? null : targetObject.getTypeHint();
 		if (name == null) {
 			return hint;
@@ -143,7 +143,7 @@ public class ObjectContainer implements Comparable<ObjectContainer> {
 		if (targetObject == null) {
 			return "Objects";
 		}
-		return targetObject == null ? targetObject.getName() : targetObject.getName();
+		return targetObject.getName();
 	}
 
 	public ObjectContainer getParent() {

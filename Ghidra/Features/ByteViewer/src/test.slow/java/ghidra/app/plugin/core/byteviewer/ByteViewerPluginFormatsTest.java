@@ -724,13 +724,10 @@ public class ByteViewerPluginFormatsTest extends AbstractGhidraHeadedIntegration
 		catch (MemoryAccessException ex) {
 			// Do nothing... Tried to form an address that was not readable or writable
 		}
-		catch (AddressOutOfBoundsException e) {
+		catch (AddressOutOfBoundsException | IllegalArgumentException e) {
 			// ignore??
 		}
-		catch (IllegalArgumentException e) {
-			// ignore??
-		}
-		return null;
+        return null;
 	}
 
 	private Address getAddr(long offset) {

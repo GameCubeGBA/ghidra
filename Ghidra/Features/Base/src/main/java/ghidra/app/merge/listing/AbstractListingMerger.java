@@ -235,13 +235,10 @@ abstract class AbstractListingMerger implements ListingMerger, ListingMergeConst
                     mergeManager.getMergeTool().showDialog(dialog, mergeTool.getActiveWindow());
                 });
 			}
-			catch (InterruptedException e) {
+			catch (InterruptedException | InvocationTargetException e) {
 				throw new AssertException(e);
 			}
-			catch (InvocationTargetException e) {
-				throw new AssertException(e);
-			}
-		}
+        }
 	}
 
 	/**
@@ -268,13 +265,10 @@ abstract class AbstractListingMerger implements ListingMerger, ListingMergeConst
                     mergeManager.getMergeTool().showDialog(dialog, mergeTool.getActiveWindow());
                 });
 			}
-			catch (InterruptedException e) {
+			catch (InterruptedException | InvocationTargetException e) {
 				throw new AssertException(e);
 			}
-			catch (InvocationTargetException e) {
-				throw new AssertException(e);
-			}
-		}
+        }
 	}
 
 	/**

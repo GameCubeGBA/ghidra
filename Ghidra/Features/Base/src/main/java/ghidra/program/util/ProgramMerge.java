@@ -2871,13 +2871,10 @@ public class ProgramMerge implements PropertyVisitor {
 				desiredToNamespace = symbolMerge
 						.resolveNamespace(originFunction.getParentNamespace(), conflictSymbolIDMap);
 			}
-			catch (DuplicateNameException e1) {
+			catch (DuplicateNameException | InvalidInputException e1) {
 				Msg.error(this, "Unexpected Exception: " + e1.getMessage(), e1);
 			}
-			catch (InvalidInputException e1) {
-				Msg.error(this, "Unexpected Exception: " + e1.getMessage(), e1);
-			}
-		}
+        }
 
 		AddressSetView oldResultBody = (resultFunction == null) ? null : resultFunction.getBody();
 		boolean sameBody = newResultBody.equals(oldResultBody);
@@ -2893,7 +2890,7 @@ public class ProgramMerge implements PropertyVisitor {
 							desiredToNamespace, originEntryPoint, newResultBody,
 							originFunction.getSymbol().getSource());
 					}
-					catch (InvalidInputException e) {
+					catch (InvalidInputException | IllegalArgumentException e) {
 						String errorMessage = "Error creating function \"" + originName + "\" at " +
 							originEntryPoint.toString(true) + ".\n  ";
 						errorMsg.append(errorMessage + e.getMessage());
@@ -2903,13 +2900,7 @@ public class ProgramMerge implements PropertyVisitor {
 					 * if data exists where you are trying to create the function.
 					 * This should really happen via the InvalidInputException above.
 					 */
-					catch (IllegalArgumentException e) {
-						String errorMessage = "Error creating function \"" + originName + "\" at " +
-							originEntryPoint.toString(true) + ".\n  ";
-						errorMsg.append(errorMessage + e.getMessage());
-						return null;
-					}
-				}
+                }
 			}
 			catch (OverlappingFunctionException e) {
 				errorMsg.append("Address = " + resultEntryPoint + ": " + e.getMessage() + "\n");
@@ -2958,15 +2949,12 @@ public class ProgramMerge implements PropertyVisitor {
 						: FunctionUpdateType.DYNAMIC_STORAGE_ALL_PARAMS,
 				true, originFunction.getSignatureSource(), originFunction.getParameters());
 		}
-		catch (DuplicateNameException e) {
+		catch (DuplicateNameException | InvalidInputException e) {
 			// should not occur
 			errorMsg.append("Address = " + resultEntryPoint + ": " + e.getMessage() + "\n");
 		}
-		catch (InvalidInputException e) {
-			errorMsg.append("Address = " + resultEntryPoint + ": " + e.getMessage() + "\n");
-		}
 
-		StackFrame originFrame = originFunction.getStackFrame();
+        StackFrame originFrame = originFunction.getStackFrame();
 		StackFrame newToFrame = newResultFunction.getStackFrame();
 		newToFrame.setLocalSize(originFrame.getLocalSize());
 		newToFrame.setReturnAddressOffset(originFrame.getReturnAddressOffset());
@@ -3177,19 +3165,13 @@ public class ProgramMerge implements PropertyVisitor {
 				toVar = DiffUtility.createVariable(fromPgm, fromVar, toPgm);
 			}
 		}
-		catch (InvalidInputException e) {
+		catch (InvalidInputException | DuplicateNameException e) {
 			Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
 			errorMsg.append("Can't replace variable " + fromVar.getSymbol().getName(true) + "\n");
 			errorMsg.append(e.getMessage() + "\n");
 			return null;
 		}
-		catch (DuplicateNameException e) {
-			Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-			errorMsg.append("Can't replace variable " + fromVar.getSymbol().getName(true) + "\n");
-			errorMsg.append(e.getMessage() + "\n");
-			return null;
-		}
-		return toVar;
+        return toVar;
 	}
 
 	private boolean resolveLocalNameConflict(Function toFunc, String name) {

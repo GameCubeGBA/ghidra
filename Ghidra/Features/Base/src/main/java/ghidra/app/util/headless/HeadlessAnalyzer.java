@@ -1791,14 +1791,11 @@ public class HeadlessAnalyzer {
 		try {
 			tempProject = new HeadlessProject(getProjectManager(), locator);
 		}
-		catch (NotOwnerException e) {
-			throw new IOException(e);
-		}
-		catch (LockException e) {
+		catch (NotOwnerException | LockException e) {
 			throw new IOException(e);
 		}
 
-		return tempProject;
+        return tempProject;
 
 	}
 

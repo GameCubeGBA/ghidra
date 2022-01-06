@@ -452,13 +452,10 @@ public class ListingMergeManager implements MergeResolver, ListingMergeConstants
                 }
             });
 		}
-		catch (InterruptedException e) {
+		catch (InterruptedException | InvocationTargetException e) {
 			Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
 		}
-		catch (InvocationTargetException e) {
-			Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-		}
-	}
+    }
 
 	/**
 	 * Sets up the change address sets, Diffs between the various program versions,
@@ -489,13 +486,10 @@ public class ListingMergeManager implements MergeResolver, ListingMergeConstants
 			mergeLatest = new ProgramMerge(programs[RESULT], programs[LATEST]);
 			mergeOriginal = new ProgramMerge(programs[RESULT], programs[ORIGINAL]);
 		}
-		catch (ProgramConflictException e) {
+		catch (ProgramConflictException | IllegalArgumentException e) {
 			throw new AssertException(e);
 		}
-		catch (IllegalArgumentException e) {
-			throw new AssertException(e);
-		}
-	}
+    }
 
 	/**
 	 * Creates all of the individual mergers that are used by the ListingMergeManager.

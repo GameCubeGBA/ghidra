@@ -320,13 +320,10 @@ public class ProgramDnDTree extends DragNDropTree {
 				SelectionTransferData transferData = (SelectionTransferData) data;
 				return program.getDomainFile().getPathname().equals(transferData.getProgramPath());
 			}
-			catch (UnsupportedFlavorException e1) {
+			catch (UnsupportedFlavorException | IOException e1) {
 				return false;
 			}
-			catch (IOException e1) {
-				return false;
-			}
-		}
+            }
 		else return !chosen.equals(TreeTransferable.localTreeNodeFlavor);
     }
 

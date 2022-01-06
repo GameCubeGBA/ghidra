@@ -292,16 +292,10 @@ public class MemoryDiff {
 						memory1.removeBlock(blockToRemove, monitor);
 					}
 					return true;
-				} catch (LockException e) {
+				} catch (LockException | MemoryBlockException | AddressOutOfBoundsException | NotFoundException e) {
 				    Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-				} catch (NotFoundException e) {
-				    Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-				} catch (AddressOutOfBoundsException e) {
-				    Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-				} catch (MemoryBlockException e) {
-					Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
 				}
-				return false;
+                return false;
 			}
 		}
 		if (shouldMerge(mergeFields, MemoryBlockDiff.END_ADDRESS)

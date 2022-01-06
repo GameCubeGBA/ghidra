@@ -210,14 +210,11 @@ public class BytesTableColumn extends ProgramLocationTableColumnExtensionPoint<A
 			return bytesObj;
 
 		}
-		catch (MemoryAccessException e) {
-			// handled below
-		}
-		catch (AddressOutOfBoundsException e) {
+		catch (MemoryAccessException | AddressOutOfBoundsException e) {
 			// handled below
 		}
 
-		return new Byte[0];
+        return new Byte[0];
 	}
 
 	@Override

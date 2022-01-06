@@ -179,13 +179,9 @@ public class OldFunctionManager implements ErrorHandler {
 				}
 			}
 		}
-		catch (OverlappingFunctionException e) {
+		catch (OverlappingFunctionException | InvalidInputException e) {
 			throw new AssertException(e);
-		}
-		catch (InvalidInputException e) {
-			throw new AssertException(e);
-		}
-		finally {
+		} finally {
 			if (func != null) {
 				func.setValidationEnabled(true);
 			}

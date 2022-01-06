@@ -395,12 +395,10 @@ public class DBTraceInstructionsView extends AbstractBaseDBTraceDefinedUnitsView
 			}
 			return result;
 		}
-		catch (CancelledException e) {
+		catch (CancelledException | AddressOverflowException e) {
 			throw new AssertionError(e); // No actual monitor
 		}
-		catch (AddressOverflowException e) {
-			// Better have skipped any delay-slotted instructions whose delays overflowed
-			throw new AssertionError(e);
-		}
-	}
+        // Better have skipped any delay-slotted instructions whose delays overflowed
+
+    }
 }

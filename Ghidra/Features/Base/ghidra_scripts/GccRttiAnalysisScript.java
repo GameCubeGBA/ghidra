@@ -342,17 +342,11 @@ public class GccRttiAnalysisScript extends GhidraScript {
 			return null;
 		}
 
-		catch (AddressOutOfBoundsException e) {
-			return null;
-		}
-		catch (IllegalArgumentException e) {
-			return null;
-		}
-		catch (InvalidInputException e) {
+		catch (AddressOutOfBoundsException | InvalidInputException | IllegalArgumentException e) {
 			return null;
 		}
 
-	}
+    }
 
 	/**
 	 * Method to create long data type at the given vtable address and return the number created OR
@@ -762,15 +756,10 @@ public class GccRttiAnalysisScript extends GhidraScript {
 
 				createVftableArray(vftableAddress, numFunctionPointers);
 			}
-			catch (IllegalArgumentException e) {
+			catch (IllegalArgumentException | InvalidInputException e) {
 				println("Could not label vftable at " + vftableAddress.toString());
 
-			}
-			catch (InvalidInputException e) {
-				println("Could not label vftable at " + vftableAddress.toString());
-
-			}
-			catch (CancelledException e) {
+			} catch (CancelledException e) {
 				return;
 			}
 			catch (AddressOutOfBoundsException e) {
@@ -807,16 +796,12 @@ public class GccRttiAnalysisScript extends GhidraScript {
 					vtableNamespace, SourceType.ANALYSIS);
 				processVtable(possibleInternalVtableAddress, vtableNamespace, false);
 			}
-			catch (IllegalArgumentException e) {
-				println("Could not label internal vtable at " +
-					possibleInternalVtableAddress.toString());
-			}
-			catch (InvalidInputException e) {
+			catch (IllegalArgumentException | InvalidInputException e) {
 				println("Could not label internal vtable at " +
 					possibleInternalVtableAddress.toString());
 			}
 
-		}
+        }
 
 	}
 
@@ -904,14 +889,11 @@ public class GccRttiAnalysisScript extends GhidraScript {
 					return true;
 				}
 			}
-			catch (MemoryAccessException e) {
-				return false;
-			}
-			catch (AddressOutOfBoundsException e) {
+			catch (MemoryAccessException | AddressOutOfBoundsException e) {
 				return false;
 			}
 
-		}
+        }
 
 		return false;
 	}
@@ -935,13 +917,10 @@ public class GccRttiAnalysisScript extends GhidraScript {
 				index++;
 			}
 		}
-		catch (MemoryAccessException e) {
+		catch (MemoryAccessException | AddressOutOfBoundsException e) {
 			return false;
 		}
-		catch (AddressOutOfBoundsException e) {
-			return false;
-		}
-		return true;
+        return true;
 	}
 
 	private boolean areNoReferencesInto(Address topAddress, int length) {
@@ -1125,13 +1104,10 @@ public class GccRttiAnalysisScript extends GhidraScript {
             return currentAddress.getNewAddress(offset);
 
 		}
-		catch (MemoryAccessException e) {
+		catch (MemoryAccessException | AddressOutOfBoundsException e) {
 			return null;
 		}
-		catch (AddressOutOfBoundsException e) {
-			return null;
-		}
-	}
+    }
 
 	private Address findNextTypeinfoRef(Address startAddress) {
 

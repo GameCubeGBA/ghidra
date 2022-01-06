@@ -126,16 +126,12 @@ class VarKeyInteriorNode extends VarKeyNode implements FieldKeyInteriorNode {
 					node = nodeMgr.getVarKeyNode(getBufferId(i));
 					node.parent = this;
 				}
-				catch (IOException e) {
-					logConsistencyError(tableName, "failed to fetch child node: " + e.getMessage(),
-						e);
-				}
-				catch (RuntimeException e) {
+				catch (IOException | RuntimeException e) {
 					logConsistencyError(tableName, "failed to fetch child node: " + e.getMessage(),
 						e);
 				}
 
-				if (node == null) {
+                if (node == null) {
 					consistent = false;
 					lastMaxKey = key; // for lack of a better solution
 					continue; // skip child

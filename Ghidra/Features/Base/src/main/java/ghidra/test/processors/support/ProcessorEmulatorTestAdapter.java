@@ -365,19 +365,11 @@ public abstract class ProcessorEmulatorTestAdapter extends TestCase implements E
 			floatRegSet = new HashSet<>(Arrays.asList(getRegisters(floatRegSetNames)));
 
 		}
-		catch (LanguageNotFoundException e) {
+		catch (LanguageNotFoundException | RuntimeException | CompilerSpecNotFoundException e) {
 			Msg.error(this, getClass().getSimpleName() + " instantiation error", e);
 			throw e;
 		}
-		catch (CompilerSpecNotFoundException e) {
-			Msg.error(this, getClass().getSimpleName() + " instantiation error", e);
-			throw e;
-		}
-		catch (RuntimeException e) {
-			Msg.error(this, getClass().getSimpleName() + " instantiation error", e);
-			throw e;
-		}
-	}
+    }
 
 	private Register[] getRegisters(String[] regNames) {
 		if (regNames == null) {
@@ -1992,13 +1984,11 @@ public abstract class ProcessorEmulatorTestAdapter extends TestCase implements E
 				throw new RuntimeException(
 					"Test control block error (TestInfo structure): " + fileReferencePath, e);
 			}
-			catch (LanguageNotFoundException e) {
+			catch (LanguageNotFoundException | CancelledException e) {
 				throw new RuntimeException("Unexpected Error", e); // we already found language
 			}
-			catch (CancelledException e) {
-				throw new RuntimeException("Unexpected Error", e); // Cancel not used
-			}
-			catch (DuplicateNameException e) {
+            // Cancel not used
+            catch (DuplicateNameException e) {
 				throw new RuntimeException("Test file naming conflict: " + fileReferencePath, e); // Must be avoided with naming of binary files
 			}
 			catch (InvalidNameException e) {
