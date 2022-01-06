@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.util.*;
 
 import ghidra.app.cmd.data.CreateDataCmd;
-import ghidra.app.cmd.label.AddUniqueLabelCmd;
+import ghidra.app.cmd.label.AddLabelCmd;
 import ghidra.app.util.MemoryBlockUtils;
 import ghidra.app.util.Option;
 import ghidra.app.util.bin.ByteProvider;
@@ -360,8 +360,8 @@ public class PefLoader extends AbstractLibrarySupportLoader {
 				SectionHeader section = sections.get(symbol.getSectionIndex());
 				MemoryBlock block = importState.getMemoryBlockForSection(section);
 				Address symbolAddr = block.getStart().add(symbol.getSymbolValue());
-				AddUniqueLabelCmd cmd =
-					new AddUniqueLabelCmd(symbolAddr, symbol.getName(), null, SourceType.IMPORTED);
+				AddLabelCmd cmd =
+					new AddLabelCmd(symbolAddr, symbol.getName(), null, SourceType.IMPORTED);
 				if (!cmd.applyTo(program)) {
 					log.appendMsg(cmd.getStatusMsg());
 				}
