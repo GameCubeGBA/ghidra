@@ -48,7 +48,7 @@ public class ElfLoadAdapter {
 			String name = null;
 			try {
 				if (Modifier.isStatic(field.getModifiers()) &&
-					field.getType().equals(ElfDynamicType.class)) {
+                        field.getType() == ElfDynamicType.class) {
 					ElfDynamicType type = (ElfDynamicType) field.get(this);
 					name = type.name;
 					ElfDynamicType.addDynamicType(type, dynamicTypeMap);
@@ -77,7 +77,7 @@ public class ElfLoadAdapter {
 			String name = null;
 			try {
 				if (Modifier.isStatic(field.getModifiers()) &&
-					field.getType().equals(ElfProgramHeaderType.class)) {
+                        field.getType() == ElfProgramHeaderType.class) {
 					ElfProgramHeaderType type = (ElfProgramHeaderType) field.get(this);
 					name = type.name;
 					ElfProgramHeaderType.addProgramHeaderType(type, programHeaderTypeMap);
@@ -107,7 +107,7 @@ public class ElfLoadAdapter {
 			String name = null;
 			try {
 				if (Modifier.isStatic(field.getModifiers()) &&
-					field.getType().equals(ElfSectionHeaderType.class)) {
+                        field.getType() == ElfSectionHeaderType.class) {
 					ElfSectionHeaderType type = (ElfSectionHeaderType) field.get(this);
 					name = type.name;
 					ElfSectionHeaderType.addSectionHeaderType(type, sectionHeaderTypeMap);

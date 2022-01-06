@@ -85,25 +85,26 @@ public class SparseImageDecompressor {
 			ChunkHeader chunkHeader = new ChunkHeader(reader);
 			short chunkType = chunkHeader.getChunk_type();
 			int chunkSize = chunkHeader.getChunk_sz();
-			if (chunkType == SparseConstants.CHUNK_TYPE_RAW) {
-				processRawChunk(chunkSize, monitor);
-				totalBlocks += chunkSize;
-			}
-			else if (chunkType == SparseConstants.CHUNK_TYPE_FILL) {
-				processFillChunk(chunkSize, monitor);
-				totalBlocks += chunkSize;
-			}
-			else if (chunkType == SparseConstants.CHUNK_TYPE_DONT_CARE) {
-				processSkipChunk(chunkSize, monitor);
-				totalBlocks += chunkSize;
-			}
-			else if (chunkType == SparseConstants.CHUNK_TYPE_CRC32) {
-				processCrcChunk();
-				totalBlocks += chunkSize;
-			}
-			else {
-				throw new IOException("Unkown chunk type: " + chunkType);
-			}
+            switch (chunkType) {
+                case SparseConstants.CHUNK_TYPE_RAW:
+                    processRawChunk(chunkSize, monitor);
+                    totalBlocks += chunkSize;
+                    break;
+                case SparseConstants.CHUNK_TYPE_FILL:
+                    processFillChunk(chunkSize, monitor);
+                    totalBlocks += chunkSize;
+                    break;
+                case SparseConstants.CHUNK_TYPE_DONT_CARE:
+                    processSkipChunk(chunkSize, monitor);
+                    totalBlocks += chunkSize;
+                    break;
+                case SparseConstants.CHUNK_TYPE_CRC32:
+                    processCrcChunk();
+                    totalBlocks += chunkSize;
+                    break;
+                default:
+                    throw new IOException("Unkown chunk type: " + chunkType);
+            }
 			monitor.incrementProgress(1);
 		}
 

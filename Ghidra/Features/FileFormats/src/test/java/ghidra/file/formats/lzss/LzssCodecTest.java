@@ -44,7 +44,7 @@ public class LzssCodecTest {
 		"I do not like them, Sam-I-am.\n" + //
 		"I do not like green eggs and ham.";
 
-	public static final byte[] TEST_COMPRESSED = new byte[] { //
+	public static final byte[] TEST_COMPRESSED = { //
 		(byte) 0xff, (byte) 0x49, (byte) 0x20, (byte) 0x61, //
 		(byte) 0x6d, (byte) 0x20, (byte) 0x53, (byte) 0x61, //
 		(byte) 0x6d, (byte) 0xf3, (byte) 0x0a, (byte) 0x0a, //

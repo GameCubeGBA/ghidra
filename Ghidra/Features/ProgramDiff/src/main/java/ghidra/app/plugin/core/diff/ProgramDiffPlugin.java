@@ -364,22 +364,24 @@ public class ProgramDiffPlugin extends ProgramPlugin
 			Object newValue) {
 		boolean diffHighlightChanged = false;
 		if (options.getName().equals(GhidraOptions.CATEGORY_BROWSER_FIELDS)) {
-			if (optionsName.equals(DIFF_HIGHLIGHT_COLOR_NAME)) {
-				diffHighlightColor = ((Color) newValue);
-				diffHighlightChanged = true;
-			}
-			else if (optionsName.equals(GhidraOptions.HIGHLIGHT_CURSOR_LINE_COLOR)) {
-				cursorHighlightColor = (Color) newValue;
-				if (p2CursorMarkers != null) {
-					p2CursorMarkers.setMarkerColor(cursorHighlightColor);
-				}
-			}
-			else if (optionsName.equals(GhidraOptions.HIGHLIGHT_CURSOR_LINE)) {
-				isHighlightCursorLine = (Boolean) newValue;
-				if (p2CursorMarkers != null) {
-					p2CursorMarkers.setColoringBackground(isHighlightCursorLine);
-				}
-			}
+            switch (optionsName) {
+                case DIFF_HIGHLIGHT_COLOR_NAME:
+                    diffHighlightColor = ((Color) newValue);
+                    diffHighlightChanged = true;
+                    break;
+                case GhidraOptions.HIGHLIGHT_CURSOR_LINE_COLOR:
+                    cursorHighlightColor = (Color) newValue;
+                    if (p2CursorMarkers != null) {
+                        p2CursorMarkers.setMarkerColor(cursorHighlightColor);
+                    }
+                    break;
+                case GhidraOptions.HIGHLIGHT_CURSOR_LINE:
+                    isHighlightCursorLine = (Boolean) newValue;
+                    if (p2CursorMarkers != null) {
+                        p2CursorMarkers.setColoringBackground(isHighlightCursorLine);
+                    }
+                    break;
+            }
 		}
 		if (secondaryDiffProgram == null) {
 			return;
@@ -1056,11 +1058,9 @@ public class ProgramDiffPlugin extends ProgramPlugin
 		clearDiff();
 		if (secondaryDiffProgram != null) {
 			markerManager.setProgram(null);
-			Iterator<BookmarkNavigator> iter = bookmarkMap.values().iterator();
-			while (iter.hasNext()) {
-				BookmarkNavigator nav = iter.next();
-				nav.dispose();
-			}
+            for (BookmarkNavigator nav : bookmarkMap.values()) {
+                nav.dispose();
+            }
 			bookmarkMap.clear();
 
 			actionManager.secondProgramClosed();

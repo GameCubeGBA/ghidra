@@ -280,9 +280,7 @@ public class SleighCompileLauncher implements GhidraLaunchable {
 			return null;
 		}
 		ArrayList<String> list = new ArrayList<>();
-		for (int i = 0; i <= index; i++) {
-			list.add(args[i]);
-		}
+        list.addAll(Arrays.asList(args).subList(0, index + 1));
 
 		try (BufferedReader r = new BufferedReader(new FileReader(optionsFile))) {
 			String option = r.readLine();
@@ -300,9 +298,7 @@ public class SleighCompileLauncher implements GhidraLaunchable {
 			return null;
 		}
 
-		for (int i = index + 1; i < args.length; i++) {
-			list.add(args[i]);
-		}
+        list.addAll(Arrays.asList(args).subList(index + 1, args.length));
 		return list.toArray(new String[list.size()]);
 	}
 

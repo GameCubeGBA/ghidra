@@ -118,24 +118,24 @@ public class SingleEntSubIterator implements CodeBlockIterator {
 			Address[] entPts = modelMSub.getStartAddresses();
 
 			// Check all Model-O subroutines contained within the Model-M subroutine
-			for (int i = 0; i < entPts.length; i++) {
+            for (Address entPt : entPts) {
 
-				CodeBlock sub = model.getCodeBlockAt(entPts[i], monitor);
-				if (sub == null)
-					continue;   // should only happen with screwy code
+                CodeBlock sub = model.getCodeBlockAt(entPt, monitor);
+                if (sub == null)
+                    continue;   // should only happen with screwy code
 
-				if (monitor.isCancelled())
-					return false;
+                if (monitor.isCancelled())
+                    return false;
 
-				if (addrSet != null) {
+                if (addrSet != null) {
 
-					// Keep sub only if it overlaps address set
-					if (!sub.intersects(addrSet)) {
-						continue;
-					}
-				}
-				subList.add(sub);
-			}
+                    // Keep sub only if it overlaps address set
+                    if (!sub.intersects(addrSet)) {
+                        continue;
+                    }
+                }
+                subList.add(sub);
+            }
 
 			// Check for available subroutine which may have been added to list
 			if (!subList.isEmpty()) {

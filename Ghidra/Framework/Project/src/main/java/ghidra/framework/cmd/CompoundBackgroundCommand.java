@@ -47,25 +47,24 @@ public class CompoundBackgroundCommand extends BackgroundCommand {
 	 */
 	@Override
 	public boolean applyTo(DomainObject obj, TaskMonitor monitor) {
-		for (int i = 0; i < bkgroundCmdList.size(); i++) {
-			BackgroundCommand cmd = bkgroundCmdList.get(i);
-			if (!cmd.applyTo(obj, monitor)) {
-				setStatusMsg(cmd.getStatusMsg());
-				return false;
-			}
-		}
-		for (int i = 0; i < cmdList.size(); i++) {
-			if (monitor.isCancelled()) {
-				setStatusMsg("Cancelled");
-				return false;
-			}
-			Command cmd = cmdList.get(i);
+        for (BackgroundCommand cmd : bkgroundCmdList) {
+            if (!cmd.applyTo(obj, monitor)) {
+                setStatusMsg(cmd.getStatusMsg());
+                return false;
+            }
+        }
+        for (Command command : cmdList) {
+            if (monitor.isCancelled()) {
+                setStatusMsg("Cancelled");
+                return false;
+            }
+            Command cmd = command;
 
-			if (!cmd.applyTo(obj)) {
-				setStatusMsg(cmd.getStatusMsg());
-				return false;
-			}
-		}
+            if (!cmd.applyTo(obj)) {
+                setStatusMsg(cmd.getStatusMsg());
+                return false;
+            }
+        }
 		return true;
 	}
 

@@ -56,42 +56,44 @@ public class ISO9660Header implements StructConverter {
 			// not terminator set
 			type = reader.readNextByte();
 			reader.setPointerIndex(reader.getPointerIndex() - 1);
-			if (type == ISO9660Constants.VOLUME_DESC_BOOT_RECORD) {
+            switch (type) {
+                case ISO9660Constants.VOLUME_DESC_BOOT_RECORD:
 
-				volumeDescriptorSet.add(new ISO9660BootRecordVolumeDescriptor(reader));
-			}
-			else if (type == ISO9660Constants.VOLUME_DESC_PRIMARY_VOLUME_DESC) {
-				primaryDesc = new ISO9660VolumeDescriptor(reader);
+                    volumeDescriptorSet.add(new ISO9660BootRecordVolumeDescriptor(reader));
+                    break;
+                case ISO9660Constants.VOLUME_DESC_PRIMARY_VOLUME_DESC:
+                    primaryDesc = new ISO9660VolumeDescriptor(reader);
 
-				directory = primaryDesc.getDirectoryEntry();
+                    directory = primaryDesc.getDirectoryEntry();
 
-				volumeDescriptorSet.add(primaryDesc);
+                    volumeDescriptorSet.add(primaryDesc);
 
-				typeLIndexSizeTable.put(primaryDesc.getTypeLPathTableLocation(),
-					primaryDesc.getLogicalBlockSizeLE());
+                    typeLIndexSizeTable.put(primaryDesc.getTypeLPathTableLocation(),
+                            primaryDesc.getLogicalBlockSizeLE());
 
-				typeMIndexSizeTable.put(primaryDesc.getTypeMPathTableLocation(),
-					primaryDesc.getLogicalBlockSizeBE());
+                    typeMIndexSizeTable.put(primaryDesc.getTypeMPathTableLocation(),
+                            primaryDesc.getLogicalBlockSizeBE());
 
-				if (primaryDesc.getDirectoryEntry().isPaddingFieldPresent()) {
-					reader.setPointerIndex(reader.getPointerIndex() - 1);
-				}
-			}
-			else if (type == ISO9660Constants.VOLUME_DESC_SUPPL_VOLUME_DESC) {
-				ISO9660VolumeDescriptor supplDesc = new ISO9660VolumeDescriptor(reader);
+                    if (primaryDesc.getDirectoryEntry().isPaddingFieldPresent()) {
+                        reader.setPointerIndex(reader.getPointerIndex() - 1);
+                    }
+                    break;
+                case ISO9660Constants.VOLUME_DESC_SUPPL_VOLUME_DESC:
+                    ISO9660VolumeDescriptor supplDesc = new ISO9660VolumeDescriptor(reader);
 
-				volumeDescriptorSet.add(supplDesc);
+                    volumeDescriptorSet.add(supplDesc);
 
-				supplTypeLIndexSizeTable.put(supplDesc.getTypeLPathTableLocation(),
-					supplDesc.getLogicalBlockSizeLE());
+                    supplTypeLIndexSizeTable.put(supplDesc.getTypeLPathTableLocation(),
+                            supplDesc.getLogicalBlockSizeLE());
 
-				supplTypeMIndexSizeTable.put(supplDesc.getTypeMPathTableLocation(),
-					supplDesc.getLogicalBlockSizeBE());
+                    supplTypeMIndexSizeTable.put(supplDesc.getTypeMPathTableLocation(),
+                            supplDesc.getLogicalBlockSizeBE());
 
-				if (supplDesc.getDirectoryEntry().isPaddingFieldPresent()) {
-					reader.setPointerIndex(reader.getPointerIndex() - 1);
-				}
-			}
+                    if (supplDesc.getDirectoryEntry().isPaddingFieldPresent()) {
+                        reader.setPointerIndex(reader.getPointerIndex() - 1);
+                    }
+                    break;
+            }
 		}
 		// got terminator set
 		volumeDescriptorSet.add(new ISO9660SetTerminator(reader));

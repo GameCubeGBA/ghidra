@@ -481,18 +481,16 @@ public class CopyPasteFunctionInfoTest extends AbstractGhidraHeadedIntegrationTe
 
 	private void resetOptions() {
 		List<String> names = fieldOptions2.getOptionNames();
-		for (int i = 0; i < names.size(); i++) {
-			String name = names.get(i);
-			if (!name.startsWith("Format Code")) {
-				continue;
-			}
-			if (name.contains("Show ") || name.contains("Flag ")) {
-				fieldOptions2.setBoolean(name, false);
-			}
-			else if (name.contains("Lines")) {
-				fieldOptions2.setInt(name, 0);
-			}
-		}
+        for (String name : names) {
+            if (!name.startsWith("Format Code")) {
+                continue;
+            }
+            if (name.contains("Show ") || name.contains("Flag ")) {
+                fieldOptions2.setBoolean(name, false);
+            } else if (name.contains("Lines")) {
+                fieldOptions2.setInt(name, 0);
+            }
+        }
 		waitForSwing();
 		CodeBrowserPlugin cb = getPlugin(toolTwo, CodeBrowserPlugin.class);
 		cb.updateNow();
@@ -503,7 +501,7 @@ public class CopyPasteFunctionInfoTest extends AbstractGhidraHeadedIntegrationTe
 		Map<?, ?> serviceMap = (Map<?, ?>) getInstanceField("serviceActionMap", clipboardPlugin);
 		Set<?> keySet = serviceMap.keySet();
 		for (Object service : keySet) {
-			if (service.getClass().equals(CodeBrowserClipboardProvider.class)) {
+			if (service.getClass() == CodeBrowserClipboardProvider.class) {
 				return (ClipboardContentProviderService) service;
 			}
 		}

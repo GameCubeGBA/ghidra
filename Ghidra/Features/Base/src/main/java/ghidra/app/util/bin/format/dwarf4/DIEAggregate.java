@@ -574,7 +574,7 @@ public class DIEAggregate {
 	public List<DWARFLocation> getAsLocation(int attribute) throws IOException {
 		AttrInfo attrInfo = findAttribute(attribute);
 		if (attrInfo == null) {
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 		else if (attrInfo.attr instanceof DWARFNumericAttribute) {
 			return readDebugLocList(((DWARFNumericAttribute) attrInfo.attr).getUnsignedValue());

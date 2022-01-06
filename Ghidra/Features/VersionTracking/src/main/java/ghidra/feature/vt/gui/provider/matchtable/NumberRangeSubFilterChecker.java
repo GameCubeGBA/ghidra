@@ -33,7 +33,7 @@ public interface NumberRangeSubFilterChecker {
 
 		Class<? extends NumberRangeProducer> clazzA = a.getClass();
 		Class<? extends NumberRangeProducer> clazzB = b.getClass();
-		if (!(clazzA.equals(clazzB))) {
+		if (clazzA != clazzB) {
 			return false;
 		}
 

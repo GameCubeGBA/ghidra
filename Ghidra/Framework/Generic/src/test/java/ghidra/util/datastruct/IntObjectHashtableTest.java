@@ -108,9 +108,9 @@ public class IntObjectHashtableTest extends AbstractGenericTest {
 
     public static void testContains(IntObjectHashtable<String> ht, int[] keys, String test) {
 
-        for(int i=0;i<keys.length;i++) {
-            if (!ht.contains(keys[i])) {
-                Assert.fail("hastable should contain key "+keys[i]+", but it doesn't");
+        for (int key : keys) {
+            if (!ht.contains(key)) {
+                Assert.fail("hastable should contain key " + key + ", but it doesn't");
             }
         }
 
@@ -124,8 +124,8 @@ public class IntObjectHashtableTest extends AbstractGenericTest {
     }
 
     public static boolean contains(int[] keys, int key) {
-        for(int i=0;i<keys.length;i++) {
-            if (keys[i] == key) {
+        for (int j : keys) {
+            if (j == key) {
                 return true;
             }
         }

@@ -62,7 +62,7 @@ public class TraceObjectListener implements DebuggerModelListener {
 		while (proc != null) {
 			if (proc == target)
 				return true;
-			if (proc.getClass().equals(target.getClass()))
+			if (proc.getClass() == target.getClass())
 				return false;
 			proc = proc.getParent();
 		}

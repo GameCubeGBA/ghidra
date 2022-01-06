@@ -49,25 +49,26 @@ public class NSDictionary extends NSObject {
 		Structure structure = new StructureDataType("NSDictionary_" + keys.size(), 0);
 		addHeader(structure, keys.size());
 		for (int i = 0; i < keys.size(); ++i) {
-			if (objectRefSize == 1) {
-				structure.add(BYTE, "key" + i, null);
-				structure.add(BYTE, "value" + i, null);
-			}
-			else if (objectRefSize == 2) {
-				structure.add(WORD, "key" + i, null);
-				structure.add(WORD, "value" + i, null);
-			}
-			else if (objectRefSize == 4) {
-				structure.add(DWORD, "key" + i, null);
-				structure.add(DWORD, "value" + i, null);
-			}
-			else if (objectRefSize == 8) {
-				structure.add(QWORD, "key" + i, null);
-				structure.add(QWORD, "value" + i, null);
-			}
-			else {
-				throw new RuntimeException();
-			}
+            switch (objectRefSize) {
+                case 1:
+                    structure.add(BYTE, "key" + i, null);
+                    structure.add(BYTE, "value" + i, null);
+                    break;
+                case 2:
+                    structure.add(WORD, "key" + i, null);
+                    structure.add(WORD, "value" + i, null);
+                    break;
+                case 4:
+                    structure.add(DWORD, "key" + i, null);
+                    structure.add(DWORD, "value" + i, null);
+                    break;
+                case 8:
+                    structure.add(QWORD, "key" + i, null);
+                    structure.add(QWORD, "value" + i, null);
+                    break;
+                default:
+                    throw new RuntimeException();
+            }
 		}
 		return structure;
 	}

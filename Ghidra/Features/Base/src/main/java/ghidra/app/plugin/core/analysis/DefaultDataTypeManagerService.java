@@ -98,7 +98,7 @@ public class DefaultDataTypeManagerService implements DataTypeManagerService {
 		Set<Entry<String, FileDataTypeManager>> entries = archiveMap.entrySet();
 		for (Entry<String, FileDataTypeManager> entry : entries) {
 			FileDataTypeManager manager = entry.getValue();
-			if (manager.equals(dtm)) {
+			if (manager == dtm) {
 				archiveName = entry.getKey();
 				break;
 			}

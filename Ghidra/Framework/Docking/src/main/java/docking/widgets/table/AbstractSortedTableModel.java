@@ -491,7 +491,7 @@ public abstract class AbstractSortedTableModel<T> extends AbstractGTableModel<T>
 			// (Warning: due to comparable being specific to the class upon which it is defined,
 			//           we have to make sure the class is the same to prevent class cast
 			//           exceptions when the table has mixed implementations of 'T')
-			if (t1 instanceof Comparable && t1.getClass().equals(t2.getClass())) {
+			if (t1 instanceof Comparable && t1.getClass() == t2.getClass()) {
 				return ((Comparable) t1).compareTo(t2);
 			}
 

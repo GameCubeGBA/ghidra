@@ -49,27 +49,24 @@ public class RangeTest extends AbstractGenericTest {
 	public void testRange() {
 		Range r;
 		// Valid construction
-		for (int i = 0; i < goodPairs.length; i++) {
-			int[] pair = goodPairs[i];
-			int min = pair[0];
-			int max = pair[1];
-			r = new Range(min, max);
-			assertEquals(min, r.min);
-			assertEquals(max, r.max);
-		}
+        for (int[] pair : goodPairs) {
+            int min = pair[0];
+            int max = pair[1];
+            r = new Range(min, max);
+            assertEquals(min, r.min);
+            assertEquals(max, r.max);
+        }
 
 		// Invalid construction
-		for (int i = 0; i < badPairs.length; i++) {
-			int[] pair = badPairs[i];
-			int min = pair[0];
-			int max = pair[1];
-			try {
-				r = new Range(min, max);
-				Assert.fail("Didn't detect max(" + max + ") less than min(" + min + ") for Range.");
-			}
-			catch (IllegalArgumentException e) {
-			}
-		}
+        for (int[] pair : badPairs) {
+            int min = pair[0];
+            int max = pair[1];
+            try {
+                r = new Range(min, max);
+                Assert.fail("Didn't detect max(" + max + ") less than min(" + min + ") for Range.");
+            } catch (IllegalArgumentException e) {
+            }
+        }
 	}
 
 	@Test
@@ -284,14 +281,13 @@ public class RangeTest extends AbstractGenericTest {
 	public void testEqualsObject() {
 		Range r1;
 		Range r2;
-		for (int i = 0; i < goodPairs.length; i++) {
-			int[] pair = goodPairs[i];
-			int min = pair[0];
-			int max = pair[1];
-			r1 = new Range(min, max);
-			r2 = new Range(min, max);
-			assertEquals("Range equals() failed for " + r1 + ".", r1, r2);
-		}
+        for (int[] pair : goodPairs) {
+            int min = pair[0];
+            int max = pair[1];
+            r1 = new Range(min, max);
+            r2 = new Range(min, max);
+            assertEquals("Range equals() failed for " + r1 + ".", r1, r2);
+        }
 	}
 
 	/*
@@ -300,13 +296,12 @@ public class RangeTest extends AbstractGenericTest {
 	@Test
 	public void testToString() {
 		Range r;
-		for (int i = 0; i < goodPairs.length; i++) {
-			int[] pair = goodPairs[i];
-			int min = pair[0];
-			int max = pair[1];
-			r = new Range(min, max);
-			assertEquals("(" + min + "," + max + ")", r.toString());
-		}
+        for (int[] pair : goodPairs) {
+            int min = pair[0];
+            int max = pair[1];
+            r = new Range(min, max);
+            assertEquals("(" + min + "," + max + ")", r.toString());
+        }
 	}
 
 	@Test
@@ -479,14 +474,13 @@ public class RangeTest extends AbstractGenericTest {
 	public void testSize() {
 		Range r;
 		// Valid construction
-		for (int i = 0; i < goodPairs.length; i++) {
-			int[] pair = goodPairs[i];
-			int min = pair[0];
-			int max = pair[1];
-			r = new Range(min, max);
-			assertEquals("Bad size for range " + r, ((long) max - (long) min + 1),
-				r.size());
-		}
+        for (int[] pair : goodPairs) {
+            int min = pair[0];
+            int max = pair[1];
+            r = new Range(min, max);
+            assertEquals("Bad size for range " + r, ((long) max - (long) min + 1),
+                    r.size());
+        }
 	}
 
 }

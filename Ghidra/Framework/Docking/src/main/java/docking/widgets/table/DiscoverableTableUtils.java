@@ -334,7 +334,7 @@ public class DiscoverableTableUtils {
 
 		List<ColumnConstraint<T>> list = new ArrayList<>();
 		for (ColumnConstraint<?> columnConstraint : constraints) {
-			if (columnConstraint.getColumnType().equals(destinationType)) {
+			if (columnConstraint.getColumnType() == destinationType) {
 				list.add((ColumnConstraint<T>) columnConstraint);
 			}
 		}
@@ -348,7 +348,7 @@ public class DiscoverableTableUtils {
 		try {
 			Method method = columnType.getMethod("toString");
 			// if toString is not overridden then don't bother
-			if (method.getDeclaringClass().equals(Object.class)) {
+			if (method.getDeclaringClass() == Object.class) {
 				return false;
 			}
 		}

@@ -751,36 +751,32 @@ public class VarnodeContext implements ProcessorContext {
 	 *                      processing of the instruction is finished, so it's effects should be kept.
 	 */
 	public void propogateResults(boolean clearContext) {
-		Iterator<Entry<Varnode, Varnode>> iter = tempVals.entrySet().iterator();
 
-		while (iter.hasNext()) {
-			Entry<Varnode, Varnode> element = iter.next();
+        for (Entry<Varnode, Varnode> element : tempVals.entrySet()) {
+            Varnode node = element.getKey();
+            if (!isRegister(node)) {
+                continue;
+            }
 
-			Varnode node = element.getKey();
-			if (!isRegister(node)) {
-				continue;
-			}
+            Register reg = trans.getRegister(node);
+            if (reg == null) {
+                continue;
+            }
+            Varnode val = element.getValue();
 
-			Register reg = trans.getRegister(node);
-			if (reg == null) {
-				continue;
-			}
-			Varnode val = element.getValue();
-
-			// if we must clear the values that should be unknown because of a decision stmt
-			if (clearVals.contains(node)) {
-				val = null;
-			}
-			if (val != null) {
-				propogateValue(reg, node, val, offsetContext.getAddress());
-			}
-			else {
-				if (debug) {
-					Msg.info(this, "      " + reg.getName() + "<-" + " Clear");
-				}
-				clearRegister(reg);
-			}
-		}
+            // if we must clear the values that should be unknown because of a decision stmt
+            if (clearVals.contains(node)) {
+                val = null;
+            }
+            if (val != null) {
+                propogateValue(reg, node, val, offsetContext.getAddress());
+            } else {
+                if (debug) {
+                    Msg.info(this, "      " + reg.getName() + "<-" + " Clear");
+                }
+                clearRegister(reg);
+            }
+        }
 		if (clearContext) {
 			if (!keepTempUniqueValues) {
 				tempUniqueVals = new HashMap<>();

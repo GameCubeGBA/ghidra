@@ -146,9 +146,8 @@ class LibraryHints {
                 throw new SAXNotRecognizedException("Expected LIBRARY_HINTS document");
             }
 
-            Iterator<?> iter = root.getChildren().iterator();
-            while (iter.hasNext()) {
-                Element element = (Element) iter.next();
+            for (Object o : root.getChildren()) {
+                Element element = (Element) o;
                 if ("HINT".equals(element.getName())) {
                     parseHint(element);
                 } else {

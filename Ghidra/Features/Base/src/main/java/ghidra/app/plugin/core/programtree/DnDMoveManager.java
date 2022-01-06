@@ -45,8 +45,8 @@ class DnDMoveManager {
                          int dropAction, int relativeMousePos) {
 
         // must be able to drop all nodes, or none at all
-        for ( int i = 0; i < dropNodes.length; i++ ) {
-            if ( !canDropNode( destinationNode, dropNodes[i], dropAction, relativeMousePos ) ) {
+        for (ProgramNode dropNode : dropNodes) {
+            if (!canDropNode(destinationNode, dropNode, dropAction, relativeMousePos)) {
                 return false;
             }
         }
@@ -110,16 +110,15 @@ class DnDMoveManager {
 		}
 		
 		try {
-		    
-            for ( int i = 0; i < dropNodes.length; i++ ) {            
+
+            for (ProgramNode dropNode : dropNodes) {
                 boolean ok = true;
-                
+
                 // this is a normal drag/drop on the node
                 if (destNode.isFragment()) {
-                    ok = addToFragment(destNode, dropNodes[i]);
-                }
-                else {
-                    addToModule(destNode, dropNodes[i], dropAction);
+                    ok = addToFragment(destNode, dropNode);
+                } else {
+                    addToModule(destNode, dropNode, dropAction);
                 }
                 if (ok) {
                     tree.addSelectionPath(destNode.getTreePath());

@@ -49,9 +49,9 @@ abstract class AbstractPeDebugLoader extends AbstractLibrarySupportLoader {
 		maps.add(postCommentMap);
 		maps.add(eolCommentMap);
 
-		int[] types = new int[] { CodeUnit.PLATE_COMMENT, CodeUnit.PRE_COMMENT,
+		int[] types = { CodeUnit.PLATE_COMMENT, CodeUnit.PRE_COMMENT,
 			CodeUnit.POST_COMMENT, CodeUnit.EOL_COMMENT };
-		String[] typeNames = new String[] { "PLATE", "PRE", "POST", "EOL" };
+		String[] typeNames = { "PLATE", "PRE", "POST", "EOL" };
 		int index = 0;
 		for (HashMap<Address, StringBuffer> map : maps) {
 			List<Address> list = convertSetToSortedList(map.keySet());

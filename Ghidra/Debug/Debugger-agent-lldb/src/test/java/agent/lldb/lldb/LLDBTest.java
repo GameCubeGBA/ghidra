@@ -150,7 +150,7 @@ public class LLDBTest extends AbstractGhidraHeadlessIntegrationTest {
 		@Override
 		public void close() {
 			StateType state = process.GetState();
-			if (!state.equals(StateType.eStateExited)) {
+			if (state != StateType.eStateExited) {
 				kill();
 			}
 		}

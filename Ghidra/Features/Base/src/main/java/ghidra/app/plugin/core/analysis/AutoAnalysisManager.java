@@ -958,16 +958,13 @@ public class AutoAnalysisManager implements DomainObjectListener, DomainObjectCl
 		}
 
 		PluginTool anyTool = null;
-		Iterator<PluginTool> iterator = toolSet.iterator();
-		while (iterator.hasNext()) {
-			PluginTool tool = iterator.next();
-
-			anyTool = tool;
-			JFrame toolFrame = tool.getToolFrame();
-			if (toolFrame != null && toolFrame.isActive()) {
-				return tool;
-			}
-		}
+        for (PluginTool tool : toolSet) {
+            anyTool = tool;
+            JFrame toolFrame = tool.getToolFrame();
+            if (toolFrame != null && toolFrame.isActive()) {
+                return tool;
+            }
+        }
 
 		return anyTool;
 	}

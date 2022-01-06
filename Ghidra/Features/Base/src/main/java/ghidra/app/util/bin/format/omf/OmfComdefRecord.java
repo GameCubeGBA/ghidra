@@ -54,19 +54,21 @@ public class OmfComdefRecord extends OmfExternalSymbol {
 		int val = reader.readNextByte() & 0xff;
 		if (val <= 128)
 			return val;
-		if (val == 0x81) {
-			val = reader.readNextShort() & 0xffff;
-		}
-		else if (val == 0x84) {
-			val = reader.readNextShort() & 0xffff;
-			int hithird = reader.readNextByte() & 0xff;
-			val += (hithird << 16);
-		}
-		else if (val == 0x88) {
-			val = reader.readNextInt();
-		}
-		else
-			throw new OmfException("Illegal communal length encoding");
+        switch (val) {
+            case 0x81:
+                val = reader.readNextShort() & 0xffff;
+                break;
+            case 0x84:
+                val = reader.readNextShort() & 0xffff;
+                int hithird = reader.readNextByte() & 0xff;
+                val += (hithird << 16);
+                break;
+            case 0x88:
+                val = reader.readNextInt();
+                break;
+            default:
+                throw new OmfException("Illegal communal length encoding");
+        }
 		return val;
 	}
 		

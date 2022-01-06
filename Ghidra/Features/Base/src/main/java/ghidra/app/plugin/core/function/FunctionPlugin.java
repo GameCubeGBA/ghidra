@@ -173,10 +173,9 @@ public class FunctionPlugin extends Plugin implements DataService {
 	 * Add the cycle group actions
 	 */
 	private void addCycleGroupActions() {
-		for (int i = 0; i < cgActions.size(); i++) {
-			DockingAction action = cgActions.get(i);
-			tool.removeAction(action);
-		}
+        for (DockingAction action : cgActions) {
+            tool.removeAction(action);
+        }
 		cgActions.clear();
 
 		for (CycleGroup group : CycleGroup.ALL_CYCLE_GROUPS) {

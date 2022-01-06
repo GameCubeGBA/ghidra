@@ -513,12 +513,10 @@ public class DataPlugin extends Plugin implements DataService {
 	 * Get rid of the dynamically created list of data types
 	 */
 	private void clearActions(List<DataAction> actions) {
-		Iterator<DataAction> iter = actions.iterator();
-		while (iter.hasNext()) {
-			DockingAction action = iter.next();
-			tool.removeAction(action);
-			action.dispose();
-		}
+        for (DockingAction action : actions) {
+            tool.removeAction(action);
+            action.dispose();
+        }
 		actions.clear();
 	}
 

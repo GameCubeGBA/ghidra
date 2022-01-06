@@ -1228,7 +1228,7 @@ public class DBTraceFunctionSymbolTest extends AbstractGhidraHeadlessIntegration
 			f.setCallingConvention("__stackcall");
 
 			DataType[] dt =
-				new DataType[] { new ByteDataType(), new WordDataType(), new Pointer16DataType() };
+                    { new ByteDataType(), new WordDataType(), new Pointer16DataType() };
 
 			LocalVariable stackVar = createLocal("TestStack0", dt[0], 4);
 			stackVar.setComment("My Comment0");
@@ -1270,7 +1270,7 @@ public class DBTraceFunctionSymbolTest extends AbstractGhidraHeadlessIntegration
 
 			params = f.getParameters();
 			assertEquals(3, params.length);
-			int[] stackOffsets = new int[] { 7, 10, 14 };
+			int[] stackOffsets = { 7, 10, 14 };
 			for (int i = 0; i < 3; i++) {
 				Parameter param = params[i];
 				assertTrue(param.isStackVariable());
@@ -1294,7 +1294,7 @@ public class DBTraceFunctionSymbolTest extends AbstractGhidraHeadlessIntegration
 			f.setCustomVariableStorage(true);
 
 			DataType[] dt =
-				new DataType[] { new ByteDataType(), new WordDataType(), new Pointer16DataType() };
+                    { new ByteDataType(), new WordDataType(), new Pointer16DataType() };
 
 			LocalVariable stackVar = createLocal("TestStack0", dt[0], 4);
 			stackVar.setComment("My Comment0");
@@ -1332,7 +1332,7 @@ public class DBTraceFunctionSymbolTest extends AbstractGhidraHeadlessIntegration
 				"foo", null, null, SourceType.USER_DEFINED);
 
 			DataType[] dt =
-				new DataType[] { new ByteDataType(), new WordDataType(), new Pointer16DataType() };
+                    { new ByteDataType(), new WordDataType(), new Pointer16DataType() };
 
 			LocalVariable stackVar = createLocal("TestStack0", dt[0], -4);
 			stackVar.setComment("My Comment0");
@@ -1403,7 +1403,7 @@ public class DBTraceFunctionSymbolTest extends AbstractGhidraHeadlessIntegration
 				"foo", null, null, SourceType.USER_DEFINED);
 
 			DataType[] dt =
-				new DataType[] { new ByteDataType(), new WordDataType(), new Pointer16DataType() };
+                    { new ByteDataType(), new WordDataType(), new Pointer16DataType() };
 
 			LocalVariable stackVar = createLocal("TestStack0", dt[0], -4);
 			stackVar.setComment("My Comment0");

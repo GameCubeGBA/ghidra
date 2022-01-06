@@ -205,9 +205,9 @@ public class GroupPath implements Serializable {
 	@Override
     public int hashCode() {
 		int hash = 0;
-		for(int i=0;i<groupNames.length;i++) {
-			hash += groupNames[i].hashCode();
-		}
+        for (String groupName : groupNames) {
+            hash += groupName.hashCode();
+        }
 		return hash;
 	}
 }

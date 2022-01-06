@@ -230,10 +230,9 @@ class DragNDropHandler implements GTreeDragNDropHandler {
 		Msg.info(this, "Dropped the following Files onto " + destUserData);
 		try {
 			List<?> list = (List<?>) transferable.getTransferData(DataFlavor.javaFileListFlavor);
-			Iterator<?> it = list.iterator();
-			while (it.hasNext()) {
-				Msg.info(this, "\t" + it.next());
-			}
+            for (Object o : list) {
+                Msg.info(this, "\t" + o);
+            }
 		}
 		catch (UnsupportedFlavorException e) {
 		}
@@ -263,11 +262,10 @@ class DragNDropHandler implements GTreeDragNDropHandler {
 		}
 		else if (flavor.equals(DataFlavor.stringFlavor)) {
 			StringBuffer buf = new StringBuffer();
-			Iterator<?> it = dragUserData.iterator();
-			while (it.hasNext()) {
-				buf.append(it.next().toString());
-				buf.append("\n");
-			}
+            for (GTreeNode dragUserDatum : dragUserData) {
+                buf.append(dragUserDatum.toString());
+                buf.append("\n");
+            }
 			return buf.toString();
 		}
 		return null;

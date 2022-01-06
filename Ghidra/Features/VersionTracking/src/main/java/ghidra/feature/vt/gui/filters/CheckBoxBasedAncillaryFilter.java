@@ -229,7 +229,7 @@ public abstract class CheckBoxBasedAncillaryFilter<T> extends AncillaryFilter<T>
 
 		Class<?> clazz = getClass();
 		Class<?> otherClazz = otherFilter.getClass();
-		if (!clazz.equals(otherClazz)) {
+		if (clazz != otherClazz) {
 			return false; // must be the same class
 		}
 

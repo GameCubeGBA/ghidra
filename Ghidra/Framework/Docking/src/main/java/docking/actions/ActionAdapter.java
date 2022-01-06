@@ -63,21 +63,18 @@ public class ActionAdapter implements Action, PropertyChangeListener {
 
 	@Override
 	public Object getValue(String key) {
-		if (key.equals(NAME)) {
-			return dockingAction.getName();
-		}
-		else if (key.equals(SHORT_DESCRIPTION)) {
-			return dockingAction.getDescription();
-		}
-		else if (key.equals(LONG_DESCRIPTION)) {
-			return dockingAction.getDescription();
-		}
-		else if (key.equals(SMALL_ICON)) {
-			return getIcon();
-		}
-		else if (key.equals(ACCELERATOR_KEY)) {
-			return dockingAction.getKeyBinding();
-		}
+        switch (key) {
+            case NAME:
+                return dockingAction.getName();
+            case SHORT_DESCRIPTION:
+                return dockingAction.getDescription();
+            case LONG_DESCRIPTION:
+                return dockingAction.getDescription();
+            case SMALL_ICON:
+                return getIcon();
+            case ACCELERATOR_KEY:
+                return dockingAction.getKeyBinding();
+        }
 		return null;
 	}
 

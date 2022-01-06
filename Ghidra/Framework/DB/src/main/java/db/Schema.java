@@ -561,12 +561,12 @@ public class Schema {
 		}
 		Schema otherSchema = (Schema) obj;
 		if (version != otherSchema.version ||
-			!keyType.getClass().equals(otherSchema.keyType.getClass()) ||
+                keyType.getClass() != otherSchema.keyType.getClass() ||
 			fields.length != otherSchema.fields.length) {
 			return false;
 		}
 		for (int i = 0; i < fields.length; i++) {
-			if (!fields[i].getClass().equals(otherSchema.fields[i].getClass())) {
+			if (fields[i].getClass() != otherSchema.fields[i].getClass()) {
 				return false;
 			}
 		}

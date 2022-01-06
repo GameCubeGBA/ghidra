@@ -552,13 +552,11 @@ public class ToolTaskManager implements Runnable {
 	}
 
 	private synchronized boolean hasQueuedTasksForDomainObject(DomainObject domainObject) {
-		Iterator<BackgroundCommandTask> iter = tasks.iterator();
-		while (iter.hasNext()) {
-			BackgroundCommandTask task = iter.next();
-			if (task.getDomainObject() == domainObject) {
-				return true;
-			}
-		}
+        for (BackgroundCommandTask task : tasks) {
+            if (task.getDomainObject() == domainObject) {
+                return true;
+            }
+        }
 		return false;
 	}
 

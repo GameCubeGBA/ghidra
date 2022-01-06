@@ -108,7 +108,7 @@ public class IntegerRangeConstraintEditorTest extends AbstractDockingTest {
 			new NumberColumnConstraintProvider().getColumnConstraints();
 
 		for (ColumnConstraint<?> columnConstraint : columnConstraints) {
-			if (columnConstraint.getColumnType().equals(Integer.class) &&
+			if (columnConstraint.getColumnType() == Integer.class &&
 				columnConstraint.getName().equals("In Range")) {
 				return (InRangeColumnConstraint<Integer>) columnConstraint;
 			}

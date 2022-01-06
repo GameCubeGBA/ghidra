@@ -102,11 +102,11 @@ public class MultiAddressRangeIteratorTest extends AbstractGenericTest {
 		AddressRangeIterator[] iters = { as1.getAddressRanges(forward),
 			as2.getAddressRanges(forward) };
 		MultiAddressRangeIterator multiIter = new MultiAddressRangeIterator(iters, true);
-		for (int i = 0; i < addressRanges.length; i++) {
-			assertTrue("Missing address range = " + addressRanges[i],
-				multiIter.hasNext());
-			assertEquals(addressRanges[i], multiIter.next());
-		}
+        for (AddressRange addressRange : addressRanges) {
+            assertTrue("Missing address range = " + addressRange,
+                    multiIter.hasNext());
+            assertEquals(addressRange, multiIter.next());
+        }
 		assertEquals("Has extra address range(s).", false, multiIter.hasNext());
 	}
 
@@ -151,11 +151,11 @@ public class MultiAddressRangeIteratorTest extends AbstractGenericTest {
 		AddressRangeIterator[] iters = { as1.getAddressRanges(forward),
 			as2.getAddressRanges(forward) };
 		MultiAddressRangeIterator multiIter = new MultiAddressRangeIterator(iters, false);
-		for (int i = 0; i < addressRanges.length; i++) {
-			assertTrue("Missing address range = " + addressRanges[i],
-				multiIter.hasNext());
-			assertEquals(addressRanges[i], multiIter.next());
-		}
+        for (AddressRange addressRange : addressRanges) {
+            assertTrue("Missing address range = " + addressRange,
+                    multiIter.hasNext());
+            assertEquals(addressRange, multiIter.next());
+        }
 		assertEquals("Has extra address range(s).", false, multiIter.hasNext());
 	}
 
@@ -211,11 +211,11 @@ public class MultiAddressRangeIteratorTest extends AbstractGenericTest {
 		AddressRangeIterator[] iters = { as1.getAddressRanges(forward),
 			as2.getAddressRanges(forward), as3.getAddressRanges(forward) };
 		MultiAddressRangeIterator multiIter = new MultiAddressRangeIterator(iters, true);
-		for (int i = 0; i < addressRanges.length; i++) {
-			assertTrue("Missing address range = " + addressRanges[i],
-				multiIter.hasNext());
-			assertEquals(addressRanges[i], multiIter.next());
-		}
+        for (AddressRange addressRange : addressRanges) {
+            assertTrue("Missing address range = " + addressRange,
+                    multiIter.hasNext());
+            assertEquals(addressRange, multiIter.next());
+        }
 		assertEquals("Has extra address range(s).", false, multiIter.hasNext());
 	}
 
@@ -271,11 +271,11 @@ public class MultiAddressRangeIteratorTest extends AbstractGenericTest {
 		AddressRangeIterator[] iters = { as1.getAddressRanges(forward),
 			as2.getAddressRanges(forward), as3.getAddressRanges(forward) };
 		MultiAddressRangeIterator multiIter = new MultiAddressRangeIterator(iters, false);
-		for (int i = 0; i < addressRanges.length; i++) {
-			assertTrue("Missing address range = " + addressRanges[i],
-				multiIter.hasNext());
-			assertEquals(addressRanges[i], multiIter.next());
-		}
+        for (AddressRange addressRange : addressRanges) {
+            assertTrue("Missing address range = " + addressRange,
+                    multiIter.hasNext());
+            assertEquals(addressRange, multiIter.next());
+        }
 		assertEquals("Has extra address range(s).", false, multiIter.hasNext());
 	}
 }

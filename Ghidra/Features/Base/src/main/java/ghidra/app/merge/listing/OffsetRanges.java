@@ -62,11 +62,10 @@ class OffsetRanges {
 	public String toString() {
 		StringBuffer buf = new StringBuffer();
 		int[] keys = firstUseRanges.getKeys();
-		for (int i = 0; i < keys.length; i++) {
-			int firstUse = keys[i];
-			SortedRangeList srl = firstUseRanges.get(firstUse);
-			buf.append("FirstUse=" + firstUse + " Offsets = " + srl + "\n");
-		}
+        for (int firstUse : keys) {
+            SortedRangeList srl = firstUseRanges.get(firstUse);
+            buf.append("FirstUse=" + firstUse + " Offsets = " + srl + "\n");
+        }
 		return buf.toString();
 	}
 

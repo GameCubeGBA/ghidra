@@ -61,29 +61,29 @@ class BookmarkDBAdapterV0 extends BookmarkDBAdapter {
 
 		monitor.setMessage("Translating Old Bookmarks...");
 		int max = 0;
-		for (int i = 0; i < oldTypes.length; i++) {
-			max +=
-				oldMgr.getBookmarkCount(oldTypes[i].getString(BookmarkTypeDBAdapter.TYPE_NAME_COL));
-		}
+        for (DBRecord dbRecord : oldTypes) {
+            max +=
+                    oldMgr.getBookmarkCount(dbRecord.getString(BookmarkTypeDBAdapter.TYPE_NAME_COL));
+        }
 		monitor.initialize(max);
 		int cnt = 0;
 
-		for (int i = 0; i < oldTypes.length; i++) {
-			String type = oldTypes[i].getString(BookmarkTypeDBAdapter.TYPE_NAME_COL);
-			int typeId = (int) oldTypes[i].getKey();
-			conversionAdapter.addType(typeId);
-			AddressIterator iter = oldMgr.getBookmarkAddresses(type);
-			while (iter.hasNext()) {
-				if (monitor.isCancelled()) {
-					throw new IOException("Upgrade Cancelled");
-				}
-				Address addr = iter.next();
-				OldBookmark bm = oldMgr.getBookmark(addr, type);
-				conversionAdapter.createBookmark(typeId, bm.getCategory(),
-					addrMap.getKey(addr, true), bm.getComment());
-				monitor.setProgress(++cnt);
-			}
-		}
+        for (DBRecord oldType : oldTypes) {
+            String type = oldType.getString(BookmarkTypeDBAdapter.TYPE_NAME_COL);
+            int typeId = (int) oldType.getKey();
+            conversionAdapter.addType(typeId);
+            AddressIterator iter = oldMgr.getBookmarkAddresses(type);
+            while (iter.hasNext()) {
+                if (monitor.isCancelled()) {
+                    throw new IOException("Upgrade Cancelled");
+                }
+                Address addr = iter.next();
+                OldBookmark bm = oldMgr.getBookmark(addr, type);
+                conversionAdapter.createBookmark(typeId, bm.getCategory(),
+                        addrMap.getKey(addr, true), bm.getComment());
+                monitor.setProgress(++cnt);
+            }
+        }
 	}
 
 	@Override

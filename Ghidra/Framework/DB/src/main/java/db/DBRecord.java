@@ -83,7 +83,7 @@ public class DBRecord implements Comparable<DBRecord> {
 	 * @param key primary key
 	 */
 	public void setKey(Field key) {
-		if (!this.key.getClass().equals(key.getClass())) {
+		if (this.key.getClass() != key.getClass()) {
 			throw new AssertException();
 		}
 		this.key = key;
@@ -117,7 +117,7 @@ public class DBRecord implements Comparable<DBRecord> {
 			return false;
 		}
 		for (int i = 0; i < fieldValues.length; i++) {
-			if (!fieldValues[i].getClass().equals(otherFieldValues[i].getClass())) {
+			if (fieldValues[i].getClass() != otherFieldValues[i].getClass()) {
 				return false;
 			}
 		}

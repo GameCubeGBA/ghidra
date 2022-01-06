@@ -69,15 +69,17 @@ class FileComparator implements Comparator<File> {
 		}
 
 		int value = 0;
-		if (sortBy == SORT_BY_NAME) {
-			value = file1.getName().compareToIgnoreCase(file2.getName());
-		}
-		else if (sortBy == SORT_BY_SIZE) {
-			value = compare(file1.length(), file2.length());
-		}
-		else if (sortBy == SORT_BY_TIME) {
-			value = compare(file1.lastModified(), file2.lastModified());
-		}
+        switch (sortBy) {
+            case SORT_BY_NAME:
+                value = file1.getName().compareToIgnoreCase(file2.getName());
+                break;
+            case SORT_BY_SIZE:
+                value = compare(file1.length(), file2.length());
+                break;
+            case SORT_BY_TIME:
+                value = compare(file1.lastModified(), file2.lastModified());
+                break;
+        }
 		return value;
 	}
 

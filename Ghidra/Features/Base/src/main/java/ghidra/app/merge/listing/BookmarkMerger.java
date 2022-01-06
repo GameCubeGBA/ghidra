@@ -123,14 +123,14 @@ class BookmarkMerger extends AbstractListingMerger {
 
 			// Check the Original Bookmarks
 			Bookmark[] bookmarks = originalBookmarkMgr.getBookmarks(addr);
-			for (int i = 0; i < bookmarks.length; i++) {
-				checkOriginalBookmark(monitor, addr, bookmarks[i]);
-			}
+            for (Bookmark value : bookmarks) {
+                checkOriginalBookmark(monitor, addr, value);
+            }
 			//Check any bookmarks that were added to MY program at the address.
 			bookmarks = myBookmarkMgr.getBookmarks(addr);
-			for (int i = 0; i < bookmarks.length; i++) {
-				checkAddedBookmark(monitor, addr, bookmarks[i]);
-			}
+            for (Bookmark bookmark : bookmarks) {
+                checkAddedBookmark(monitor, addr, bookmark);
+            }
 		}
 		updateProgress(100, "Done auto-merging Bookmarks and determining conflicts.");
 	}
@@ -401,19 +401,20 @@ class BookmarkMerger extends AbstractListingMerger {
 	 * @return the standardized bookmark information.
 	 */
 	private String[] getBookmarkInfo(int version, Bookmark bookmark) {
-		String[] info = new String[] { "", "", "", "" };
-		if (version == LATEST) {
-			info[0] = getChoice(LATEST_TITLE, bookmark);
-		}
-		else if (version == MY) {
-			info[0] = getChoice(MY_TITLE, bookmark);
-		}
-		else if (version == ORIGINAL) {
-			info[0] = " '" + ORIGINAL_TITLE + "' version";
-		}
-		else {
-			return new String[] { "Option", "Type", "Category", "Description" };
-		}
+		String[] info = { "", "", "", "" };
+        switch (version) {
+            case LATEST:
+                info[0] = getChoice(LATEST_TITLE, bookmark);
+                break;
+            case MY:
+                info[0] = getChoice(MY_TITLE, bookmark);
+                break;
+            case ORIGINAL:
+                info[0] = " '" + ORIGINAL_TITLE + "' version";
+                break;
+            default:
+                return new String[]{"Option", "Type", "Category", "Description"};
+        }
 		if (bookmark != null) {
 			info[1] = bookmark.getTypeString();
 			info[2] = bookmark.getCategory();
@@ -451,21 +452,19 @@ class BookmarkMerger extends AbstractListingMerger {
 		boolean askUser = chosenConflictOption == ASK_USER;
 		ArrayList<BookmarkUid> list = conflicts.get(addr);
 		int size = list.size();
-		for (int i = 0; i < size; i++) {
-			BookmarkUid bmuid = list.get(i);
-			// If we have a bookmark choice then a "Use For All" has already occurred.
-			if ((bookmarkChoice == ASK_USER) && askUser && mergeManager != null) {
-				showMergePanel(listingPanel, bmuid.address, bmuid.bookmarkType,
-					bmuid.bookmarkCategory, monitor);
-				monitor.checkCanceled();
-			}
-			else {
-				int optionToUse =
-					(bookmarkChoice == ASK_USER) ? chosenConflictOption : bookmarkChoice;
-				merge(bmuid.address, bmuid.bookmarkType, bmuid.bookmarkCategory, optionToUse,
-					monitor);
-			}
-		}
+        for (BookmarkUid bmuid : list) {
+            // If we have a bookmark choice then a "Use For All" has already occurred.
+            if ((bookmarkChoice == ASK_USER) && askUser && mergeManager != null) {
+                showMergePanel(listingPanel, bmuid.address, bmuid.bookmarkType,
+                        bmuid.bookmarkCategory, monitor);
+                monitor.checkCanceled();
+            } else {
+                int optionToUse =
+                        (bookmarkChoice == ASK_USER) ? chosenConflictOption : bookmarkChoice;
+                merge(bmuid.address, bmuid.bookmarkType, bmuid.bookmarkCategory, optionToUse,
+                        monitor);
+            }
+        }
 		resolvedSet.addRange(addr, addr);
 	}
 

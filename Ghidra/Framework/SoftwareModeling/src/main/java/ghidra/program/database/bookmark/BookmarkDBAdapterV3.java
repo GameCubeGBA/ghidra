@@ -37,7 +37,7 @@ public class BookmarkDBAdapterV3 extends BookmarkDBAdapter {
 		new Field[] { LongField.INSTANCE, StringField.INSTANCE, StringField.INSTANCE },
 		new String[] { "Address", "Category", "Comment" });
 
-	static int[] INDEXED_COLUMNS = new int[] { V3_ADDRESS_COL, V3_CATEGORY_COL };
+	static int[] INDEXED_COLUMNS = { V3_ADDRESS_COL, V3_CATEGORY_COL };
 
 	private DBHandle dbHandle;
 	private Table[] tables;
@@ -54,11 +54,10 @@ public class BookmarkDBAdapterV3 extends BookmarkDBAdapter {
 			tables = new Table[0];
 		}
 		if (create) {
-			for (int i = 0; i < typeIDs.length; i++) {
-				int id = typeIDs[i];
-				tables[id] =
-					handle.createTable(BOOKMARK_TABLE_NAME + id, V3_SCHEMA, INDEXED_COLUMNS);
-			}
+            for (int id : typeIDs) {
+                tables[id] =
+                        handle.createTable(BOOKMARK_TABLE_NAME + id, V3_SCHEMA, INDEXED_COLUMNS);
+            }
 		}
 		else {
 			Table bmt = handle.getTable(BOOKMARK_TABLE_NAME);
@@ -71,10 +70,9 @@ public class BookmarkDBAdapterV3 extends BookmarkDBAdapter {
 				throw new VersionException(true);
 			}
 			else if (typeIDs.length != 0) {
-				for (int i = 0; i < typeIDs.length; i++) {
-					int id = typeIDs[i];
-					tables[id] = handle.getTable(BOOKMARK_TABLE_NAME + id);
-				}
+                for (int id : typeIDs) {
+                    tables[id] = handle.getTable(BOOKMARK_TABLE_NAME + id);
+                }
 				boolean noTables = (tables[typeIDs[0]] == null);
 				int version = noTables ? -1 : tables[typeIDs[0]].getSchema().getVersion();
 				for (int i = 1; i < typeIDs.length; i++) {

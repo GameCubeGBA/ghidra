@@ -172,15 +172,14 @@ public class LockFile {
 		File[] files = dir.listFiles();
 		if (files == null)
 			return false;
-		for (int i = 0; i < files.length; i++) {
-			if (files[i].isDirectory()) {
-				if (containsLock(files[i]))
-					return true;
-			}
-			else if (files[i].getName().endsWith(LOCK)) {
-				return true;
-			}
-		}
+        for (File file : files) {
+            if (file.isDirectory()) {
+                if (containsLock(file))
+                    return true;
+            } else if (file.getName().endsWith(LOCK)) {
+                return true;
+            }
+        }
 		return false;
 	}
 

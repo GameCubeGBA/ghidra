@@ -47,7 +47,7 @@ public class DefaultGdbDebuggerMappingOpinionTest extends AbstractGhidraHeadless
 		List<DebuggerMappingOffer> offers = DebuggerMappingOpinion.queryOpinions(process, false);
 		assertFalse(offers.isEmpty());
 		Set<DebuggerMappingOffer> ldefsOnes = offers.stream()
-				.filter(o -> o.getClass().equals(GdbDefaultOffer.class))
+				.filter(o -> o.getClass() == GdbDefaultOffer.class)
 				.collect(Collectors.toSet());
 		assertFalse(ldefsOnes.isEmpty());
 		Set<LanguageID> ids =

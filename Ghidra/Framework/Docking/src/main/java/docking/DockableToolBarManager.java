@@ -18,6 +18,7 @@ package docking;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 
 import javax.swing.*;
@@ -49,7 +50,7 @@ class DockableToolBarManager {
 
 	DockableToolBarManager(GenericHeader header) {
 		this.dockableHeader = header;
-		initialize(null, null, new ArrayList<DockingActionIf>().iterator());
+		initialize(null, null, Collections.emptyIterator());
 	}
 
 	/**

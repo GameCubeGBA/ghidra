@@ -806,10 +806,9 @@ public class ThreadedTableTest extends AbstractThreadedTableTest {
 
 		List<Object> modelValues = getModelValues(model, TestDataKeyModel.STRING_COL);
 		assertEquals("Filter did not match the expected row count", 3, modelValues.size());
-		for (int i = 0; i < modelValues.size(); i++) {
-			Object value = modelValues.get(i);
-			assertEquals(text, value);
-		}
+        for (Object value : modelValues) {
+            assertEquals(text, value);
+        }
 	}
 
 	private List<Object> getModelValues(TestDataKeyModel keyModel, int columnIndex) {

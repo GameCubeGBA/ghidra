@@ -109,78 +109,77 @@ public class ScalarOperandAnalyzer extends AbstractAnalyzer {
 		//
 		for (int i = 0; i < instr.getNumOperands(); i++) {
 			Object[] objs = instr.getOpObjects(i);
-			for (int j = 0; j < objs.length; j++) {
-				if (!(objs[j] instanceof Scalar)) {
-					continue;
-				}
-				Scalar scalar = (Scalar) objs[j];
+            for (Object obj : objs) {
+                if (!(obj instanceof Scalar)) {
+                    continue;
+                }
+                Scalar scalar = (Scalar) obj;
 
-				//if a relocation exists, then this is a valid address
-				boolean found = false;
-				for (int r = 0; r < instr.getLength(); ++r) {
-					Address addr = instr.getMinAddress().add(r);
-					RelocationTable relocTable = program.getRelocationTable();
-					Relocation reloc = relocTable.getRelocation(addr);
-					if (reloc != null) {
-						try {
-							switch (scalar.bitLength()) {
-								case 8:
-									if (program.getMemory().getByte(addr) == scalar
-											.getSignedValue()) {
-										found = true;
-									}
-									break;
-								case 16:
-									if (program.getMemory().getShort(addr) == scalar
-											.getSignedValue()) {
-										found = true;
-									}
-									break;
-								case 32:
-									if (program.getMemory().getInt(addr) == scalar
-											.getSignedValue()) {
-										found = true;
-									}
-									break;
-								case 64:
-									if (program.getMemory().getLong(addr) == scalar
-											.getSignedValue()) {
-										found = true;
-									}
-									break;
-							}
-						}
-						catch (MemoryAccessException e) {
-							// don't care, squelch it.
-						}
-					}
-				}
+                //if a relocation exists, then this is a valid address
+                boolean found = false;
+                for (int r = 0; r < instr.getLength(); ++r) {
+                    Address addr = instr.getMinAddress().add(r);
+                    RelocationTable relocTable = program.getRelocationTable();
+                    Relocation reloc = relocTable.getRelocation(addr);
+                    if (reloc != null) {
+                        try {
+                            switch (scalar.bitLength()) {
+                                case 8:
+                                    if (program.getMemory().getByte(addr) == scalar
+                                            .getSignedValue()) {
+                                        found = true;
+                                    }
+                                    break;
+                                case 16:
+                                    if (program.getMemory().getShort(addr) == scalar
+                                            .getSignedValue()) {
+                                        found = true;
+                                    }
+                                    break;
+                                case 32:
+                                    if (program.getMemory().getInt(addr) == scalar
+                                            .getSignedValue()) {
+                                        found = true;
+                                    }
+                                    break;
+                                case 64:
+                                    if (program.getMemory().getLong(addr) == scalar
+                                            .getSignedValue()) {
+                                        found = true;
+                                    }
+                                    break;
+                            }
+                        } catch (MemoryAccessException e) {
+                            // don't care, squelch it.
+                        }
+                    }
+                }
 
-				if (!found) {
-					// don't do any addresses that could be numbers, even if they are in the
-					//   address space.
-					long value = scalar.getUnsignedValue();
-					if (value < 4096 || value == 0xffff || value == 0xff00 || value == 0xffffff ||
-						value == 0xff0000 || value == 0xff00ff || value == 0xffffffff ||
-						value == 0xffffff00 || value == 0xffff0000 || value == 0xff000000) {
-						continue;
-					}
-				}
+                if (!found) {
+                    // don't do any addresses that could be numbers, even if they are in the
+                    //   address space.
+                    long value = scalar.getUnsignedValue();
+                    if (value < 4096 || value == 0xffff || value == 0xff00 || value == 0xffffff ||
+                            value == 0xff0000 || value == 0xff00ff || value == 0xffffffff ||
+                            value == 0xffffff00 || value == 0xffff0000 || value == 0xff000000) {
+                        continue;
+                    }
+                }
 
-				// check the address in this space first
-				if (addReference(program, instr, i, instr.getMinAddress().getAddressSpace(),
-					scalar)) {
-					continue;
-				}
+                // check the address in this space first
+                if (addReference(program, instr, i, instr.getMinAddress().getAddressSpace(),
+                        scalar)) {
+                    continue;
+                }
 
-				// then check all spaces
-				AddressSpace[] spaces = program.getAddressFactory().getAddressSpaces();
-				for (int as = 0; as < spaces.length; as++) {
-					if (addReference(program, instr, i, spaces[as], scalar)) {
-						break;
-					}
-				}
-			}
+                // then check all spaces
+                AddressSpace[] spaces = program.getAddressFactory().getAddressSpaces();
+                for (AddressSpace space : spaces) {
+                    if (addReference(program, instr, i, space, scalar)) {
+                        break;
+                    }
+                }
+            }
 		}
 	}
 
@@ -259,16 +258,16 @@ public class ScalarOperandAnalyzer extends AbstractAnalyzer {
 
 		// figure out the multiple away
 		long entryLen = 0;
-		for (int i = 0; i < opObjects.length; i++) {
-			if (opObjects[i] instanceof Scalar) {
-				Scalar sc = (Scalar) opObjects[i];
-				long value = sc.getUnsignedValue();
-				if (value == 4 || value == 2 || value == 8) {
-					entryLen = value;
-					break;
-				}
-			}
-		}
+        for (Object opObject : opObjects) {
+            if (opObject instanceof Scalar) {
+                Scalar sc = (Scalar) opObject;
+                long value = sc.getUnsignedValue();
+                if (value == 4 || value == 2 || value == 8) {
+                    entryLen = value;
+                    break;
+                }
+            }
+        }
 		if (entryLen == 0) {
 			return;
 		}

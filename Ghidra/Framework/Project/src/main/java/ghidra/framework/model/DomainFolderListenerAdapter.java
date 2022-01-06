@@ -34,7 +34,7 @@ public abstract class DomainFolderListenerAdapter implements DomainFolderChangeL
 		try {
 			Method method =
 				getClass().getMethod("stateChanged", String.class, String.class, boolean.class);
-			if (!method.getDeclaringClass().equals(DomainFolderListenerAdapter.class)) {
+			if (method.getDeclaringClass() != DomainFolderListenerAdapter.class) {
 				foundStateChangedMethod = true;
 			}
 		}

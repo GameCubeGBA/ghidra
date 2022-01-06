@@ -375,11 +375,10 @@ class FileActionManager {
 				buf.append("the following actions:\n \n");
 				Transaction t = udo.getCurrentTransaction();
 				List<String> list = t.getOpenSubTransactions();
-				Iterator<String> it = list.iterator();
-				while (it.hasNext()) {
-					buf.append("\n     ");
-					buf.append(it.next());
-				}
+                for (String s : list) {
+                    buf.append("\n     ");
+                    buf.append(s);
+                }
 				buf.append("\n \n");
 				buf.append(
 					"You may exit Ghidra, but the above action(s) will be aborted and all\n");

@@ -448,18 +448,19 @@ public class FunctionTagListingMerger extends AbstractListingMerger {
 	private String[] getFunctionTagInfo(int version, String tag) {
 		String[] info = { "Keep", "", tag };
 
-		if (version == LATEST) {
-			info[1] = LATEST_TITLE;
-		}
-		else if (version == MY) {
-			info[1] = MY_TITLE;
-		}
-		else if (version == ORIGINAL) {
-			info[1] = ORIGINAL_TITLE;
-		}
-		else {
-			return new String[] { "Option", "Type", "Tags" };
-		}
+        switch (version) {
+            case LATEST:
+                info[1] = LATEST_TITLE;
+                break;
+            case MY:
+                info[1] = MY_TITLE;
+                break;
+            case ORIGINAL:
+                info[1] = ORIGINAL_TITLE;
+                break;
+            default:
+                return new String[]{"Option", "Type", "Tags"};
+        }
 
 		return info;
 	}

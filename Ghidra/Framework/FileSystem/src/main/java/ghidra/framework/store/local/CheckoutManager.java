@@ -258,9 +258,8 @@ class CheckoutManager {
             }
 
             List<Element> elementList = root.getChildren("CHECKOUT");
-            Iterator<Element> iter = elementList.iterator();
-            while (iter.hasNext()) {
-                ItemCheckoutStatus coStatus = parseCheckoutElement(iter.next());
+            for (Element element : elementList) {
+                ItemCheckoutStatus coStatus = parseCheckoutElement(element);
                 checkouts.put(coStatus.getCheckoutId(), coStatus);
             }
         } catch (JDOMException je) {

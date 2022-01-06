@@ -63,14 +63,12 @@ public class SleighLanguageDescription extends BasicLanguageDescription {
 	/**
 	 * @return set of address space names which have been identified for truncation
 	 */
-	@SuppressWarnings("unchecked")
 	public Set<String> getTruncatedSpaceNames() {
 		if (truncatedSpaceMap == null) {
-			return Collections.EMPTY_SET;
+			return Collections.emptySet();
 		}
 		return truncatedSpaceMap.keySet();
 	}
-
 	/**
 	 * Get the truncated space size for the specified address space
 	 * @param spaceName address space name
@@ -122,16 +120,10 @@ public class SleighLanguageDescription extends BasicLanguageDescription {
 		return specFile;
 	}
 
-	/**
-	 * @param slaFile
-	 */
 	public void setSlaFile(ResourceFile slaFile) {
 		this.slaFile = slaFile;
 	}
 
-	/**
-	 * @return
-	 */
 	public ResourceFile getSlaFile() {
 		return slaFile;
 	}

@@ -130,11 +130,11 @@ public class ObjectTable<R> implements ObjectPane {
 	@Override
 	public List<? extends Object> update(ObjectContainer changed) {
 		if (changed.equals(container) &&
-			((clazz.equals(ObjectElementRow.class) && changed.hasElements()) ||
-				(clazz.equals(ObjectAttributeRow.class) && !changed.hasElements()))) {
+			((clazz == ObjectElementRow.class && changed.hasElements()) ||
+				(clazz == ObjectAttributeRow.class && !changed.hasElements()))) {
 			return generateRows(changed);
 		}
-		else if (clazz.equals(ObjectElementRow.class) && !changed.hasElements()) {
+		else if (clazz == ObjectElementRow.class && !changed.hasElements()) {
 			ObjectElementRow match = findMatch(changed);
 			if (match != null) {
 				return updateMatch(match);

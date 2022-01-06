@@ -34,7 +34,7 @@ import ghidra.util.exception.DuplicateNameException;
 class PointerDB extends DataTypeDB implements Pointer {
 
 	private static final SettingsDefinition[] POINTER_SETTINGS_DEFINITIONS =
-		new SettingsDefinition[] { MutabilitySettingsDefinition.DEF };
+            { MutabilitySettingsDefinition.DEF };
 
 	private PointerDBAdapter adapter;
 	private String displayName;

@@ -34,7 +34,6 @@ import util.CollectionUtils;
  */
 class ProgramListener implements DomainObjectListener {
 
-	private static int THRESHOLD_FOR_RELOAD = 10;
 	private ProgramTreeActionManager actionManager;
 	private ProgramTreePlugin plugin;
 	private ProgramDnDTree tree;
@@ -76,29 +75,31 @@ class ProgramListener implements DomainObjectListener {
 			ProgramChangeRecord record = (ProgramChangeRecord) rec;
 			int eventType = rec.getEventType();
 
-			if (eventType == ChangeManager.DOCR_TREE_RENAMED) {
-				plugin.treeRenamed((String) record.getOldValue(), (String) record.getNewValue());
-			}
-			else if (eventType == ChangeManager.DOCR_GROUP_ADDED) {
-				processGroupAdded(record);
-			}
-			else if (eventType == ChangeManager.DOCR_GROUP_REMOVED) {
-				processGroupRemoved(record);
-			}
-			else if (eventType == ChangeManager.DOCR_GROUP_RENAMED) {
-				processGroupRenamed(record);
-			}
-			else if (eventType == ChangeManager.DOCR_MODULE_REORDERED) {
-				processModuleReordered(record);
-			}
-			else if (eventType == ChangeManager.DOCR_GROUP_REPARENTED) {
-				processGroupReparented(record);
-			}
-			else if (eventType == ChangeManager.DOCR_FRAGMENT_MOVED) {
-				plugin.fragmentMoved();
-			}
-			else if (eventType == ChangeManager.DOCR_MEMORY_BLOCKS_JOINED) {
-				viewChanged |= processBlockJoined(record);
+			switch (eventType) {
+				case ChangeManager.DOCR_TREE_RENAMED:
+					plugin.treeRenamed((String) record.getOldValue(), (String) record.getNewValue());
+					break;
+				case ChangeManager.DOCR_GROUP_ADDED:
+					processGroupAdded(record);
+					break;
+				case ChangeManager.DOCR_GROUP_REMOVED:
+					processGroupRemoved(record);
+					break;
+				case ChangeManager.DOCR_GROUP_RENAMED:
+					processGroupRenamed(record);
+					break;
+				case ChangeManager.DOCR_MODULE_REORDERED:
+					processModuleReordered(record);
+					break;
+				case ChangeManager.DOCR_GROUP_REPARENTED:
+					processGroupReparented(record);
+					break;
+				case ChangeManager.DOCR_FRAGMENT_MOVED:
+					plugin.fragmentMoved();
+					break;
+				case ChangeManager.DOCR_MEMORY_BLOCKS_JOINED:
+					viewChanged |= processBlockJoined(record);
+					break;
 			}
 
 			if (viewChanged) {
@@ -158,13 +159,12 @@ class ProgramListener implements DomainObjectListener {
 				nodes = tree.findNodes(childName);
 				List<TreePath> viewList = tree.getViewList();
 				int idx = 0;
-				for (int i = 0; i < nodes.length; i++) {
-					if (!nodes[i].getParentModule().getName().equals(newParentName)) {
+				for (ProgramNode node : nodes) {
+					if (!node.getParentModule().getName().equals(newParentName)) {
 						continue;
 					}
-					TreePath nodePath = nodes[i].getTreePath();
+					TreePath nodePath = node.getTreePath();
 					for (int j = idx; j < viewedIndexes.length; j++) {
-						TreePath p = nodePath;
 						TreePath vp = viewList.get(viewedIndexes[j]);
 						ProgramNode programNode = (ProgramNode) vp.getLastPathComponent();
 						String vname = programNode.getName();
@@ -173,13 +173,12 @@ class ProgramListener implements DomainObjectListener {
 							TreePath descPath = findDescendant(nodePath, vname);
 							if (descPath != null) {
 								viewList.remove(viewedIndexes[j]);
-								tree.addToView(p, viewedIndexes[j]);
+								tree.addToView(nodePath, viewedIndexes[j]);
 								++idx;
 							}
-						}
-						else {
+						} else {
 							viewList.remove(viewedIndexes[j]);
-							tree.addToView(p, viewedIndexes[j]);
+							tree.addToView(nodePath, viewedIndexes[j]);
 							++idx;
 						}
 					}
@@ -367,20 +366,23 @@ class ProgramListener implements DomainObjectListener {
 				plugin.reloadProgram(eventType == DomainObject.DO_OBJECT_RESTORED);
 				return true;
 			}
-			if (eventType == ChangeManager.DOCR_GROUP_ADDED ||
-				eventType == ChangeManager.DOCR_GROUP_REMOVED ||
-				eventType == ChangeManager.DOCR_FRAGMENT_MOVED ||
-				eventType == ChangeManager.DOCR_MODULE_REORDERED) {
-				changeCnt++;
-			}
-			else if (eventType == ChangeManager.DOCR_TREE_REMOVED) {
-				plugin.treeRemoved((String) rec.getOldValue());
-			}
-			else if (eventType == ChangeManager.DOCR_TREE_CREATED) {
-				plugin.treeViewAdded((String) rec.getNewValue());
+			switch (eventType) {
+				case ChangeManager.DOCR_GROUP_ADDED:
+				case ChangeManager.DOCR_GROUP_REMOVED:
+				case ChangeManager.DOCR_FRAGMENT_MOVED:
+				case ChangeManager.DOCR_MODULE_REORDERED:
+					changeCnt++;
+					break;
+				case ChangeManager.DOCR_TREE_REMOVED:
+					plugin.treeRemoved((String) rec.getOldValue());
+					break;
+				case ChangeManager.DOCR_TREE_CREATED:
+					plugin.treeViewAdded((String) rec.getNewValue());
+					break;
 			}
 		}
 
+		int THRESHOLD_FOR_RELOAD = 10;
 		if (changeCnt > THRESHOLD_FOR_RELOAD) {
 			updateManager.updateLater();
 			return true;
@@ -419,9 +421,7 @@ class ProgramListener implements DomainObjectListener {
 		}
 		if (idx <= indexes.length - 1) {
 			int[] temp = new int[idx];
-			for (int i = 0; i < idx; i++) {
-				temp[i] = indexes[i];
-			}
+			System.arraycopy(indexes, 0, temp, 0, idx);
 			indexes = temp;
 		}
 		return indexes;

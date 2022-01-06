@@ -160,11 +160,11 @@ public class ISO9660Directory implements StructConverter {
 	 * of visible not null ascii characters otherwise returns null
 	 */
 	private String analyzeName(byte[] bArr) {
-		for (int i = 0; i < bArr.length; i++) {
-			if (bArr[i] < 32) {
-				return null;
-			}
-		}
+        for (byte b : bArr) {
+            if (b < 32) {
+                return null;
+            }
+        }
 		String tmp = new String(bArr);
 		return tmp;
 	}

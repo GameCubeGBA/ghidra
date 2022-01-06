@@ -212,25 +212,29 @@ public class VTImpliedMatchesTableProvider extends ComponentProviderAdapter
 			DomainObjectChangeRecord doRecord = ev.getChangeRecord(i);
 			int eventType = doRecord.getEventType();
 
-			if (eventType == VTChangeManager.DOCR_VT_ASSOCIATION_STATUS_CHANGED ||
-				eventType == VTChangeManager.DOCR_VT_ASSOCIATION_MARKUP_STATUS_CHANGED) {
-				matchesContextChanged = true;
-			}
-			else if (eventType == DomainObject.DO_OBJECT_RESTORED ||
-				eventType == VTChangeManager.DOCR_VT_MATCH_SET_ADDED) {
-				reload();
-				matchesContextChanged = true;
-			}
-			else if (eventType == VTChangeManager.DOCR_VT_MATCH_ADDED) {
-				VersionTrackingChangeRecord vtRecord = (VersionTrackingChangeRecord) doRecord;
-				impliedMatchTableModel.matchAdded((VTMatch) vtRecord.getNewValue());
-				matchesContextChanged = true;
-			}
-			else if (eventType == VTChangeManager.DOCR_VT_MATCH_DELETED) {
-				VersionTrackingChangeRecord vtRecord = (VersionTrackingChangeRecord) doRecord;
-				impliedMatchTableModel.matchDeleted((DeletedMatch) vtRecord.getOldValue());
-				matchesContextChanged = true;
-			}
+            switch (eventType) {
+                case VTChangeManager.DOCR_VT_ASSOCIATION_STATUS_CHANGED:
+                case VTChangeManager.DOCR_VT_ASSOCIATION_MARKUP_STATUS_CHANGED:
+                    matchesContextChanged = true;
+                    break;
+                case DomainObject.DO_OBJECT_RESTORED:
+                case VTChangeManager.DOCR_VT_MATCH_SET_ADDED:
+                    reload();
+                    matchesContextChanged = true;
+                    break;
+                case VTChangeManager.DOCR_VT_MATCH_ADDED: {
+                    VersionTrackingChangeRecord vtRecord = (VersionTrackingChangeRecord) doRecord;
+                    impliedMatchTableModel.matchAdded((VTMatch) vtRecord.getNewValue());
+                    matchesContextChanged = true;
+                    break;
+                }
+                case VTChangeManager.DOCR_VT_MATCH_DELETED: {
+                    VersionTrackingChangeRecord vtRecord = (VersionTrackingChangeRecord) doRecord;
+                    impliedMatchTableModel.matchDeleted((DeletedMatch) vtRecord.getOldValue());
+                    matchesContextChanged = true;
+                    break;
+                }
+            }
 		}
 		if (matchesContextChanged) {
 			// Update the context so that toolbar actions fix their enablement.

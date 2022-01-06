@@ -82,50 +82,35 @@ public class RegisterTouchesPerFunction extends GhidraScript
             inst = iIter.next();
 
             Object[] o = inst.getResultObjects();
-            for (int i = 0; i < o.length; i++)
-            {
-                if (o[i] instanceof Register)
-                {
-                    String name = ((Register) o[i]).getName();
+            for (Object item : o) {
+                if (item instanceof Register) {
+                    String name = ((Register) item).getName();
 
-                    if (inst.getMnemonicString().equalsIgnoreCase("pop"))
-                    {
+                    if (inst.getMnemonicString().equalsIgnoreCase("pop")) {
                         if (!name.equalsIgnoreCase("mult_addr")
-                                && !name.equalsIgnoreCase("sp"))
-                        {
-                            if (pushPops.size() > 0)
-                            {
+                                && !name.equalsIgnoreCase("sp")) {
+                            if (pushPops.size() > 0) {
                                 restored.add(pushPops.pop() + "->" + name);
-                            }
-                            else
-                            {
+                            } else {
                                 reviewRestored = true;
                             }
                         }
-                    }
-                    else
-                    {
+                    } else {
                         affected.add(name);
                     }
                 }
             }
             o = inst.getInputObjects();
 
-            for (int i = 0; i < o.length; i++)
-            {
-                if (o[i] instanceof Register)
-                {
-                    String name = ((Register) o[i]).getName();
-                    if (inst.getMnemonicString().equalsIgnoreCase("push"))
-                    {
+            for (Object value : o) {
+                if (value instanceof Register) {
+                    String name = ((Register) value).getName();
+                    if (inst.getMnemonicString().equalsIgnoreCase("push")) {
                         if (!name.equalsIgnoreCase("mult_addr")
-                                && !name.equalsIgnoreCase("sp"))
-                        {
+                                && !name.equalsIgnoreCase("sp")) {
                             pushPops.push(name);
                         }
-                    }
-                    else
-                    {
+                    } else {
                         accessed.add(name);
                     }
                 }

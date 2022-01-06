@@ -284,34 +284,34 @@ public class CompositeVerticalLayoutTextField implements TextField {
 		int startY = myStartY;
 		int translatedY = 0;
 
-		for (int i = 0; i < fieldRows.size(); i++) {
+        for (FieldRow row : fieldRows) {
 
-			// if past clipping region we are done
-			if (startY > clipEndY) {
-				break;
-			}
+            // if past clipping region we are done
+            if (startY > clipEndY) {
+                break;
+            }
 
-			FieldRow fieldRow = fieldRows.get(i);
-			TextField field = fieldRow.field;
-			int subFieldHeight = fieldRow.field.getHeight();
-			int endY = startY + subFieldHeight;
+            FieldRow fieldRow = row;
+            TextField field = fieldRow.field;
+            int subFieldHeight = fieldRow.field.getHeight();
+            int endY = startY + subFieldHeight;
 
-			// if any part of the line is in the clip region, draw it
-			if (endY >= clipStartY) {
-				RowColLocation cursor = null;
-				if (fieldRow == cursorRow) {
-					int relativeRow = fieldRow.getRelativeRow(cursorLocation.row());
-					cursor = cursorLocation.withRow(relativeRow);
-				}
+            // if any part of the line is in the clip region, draw it
+            if (endY >= clipStartY) {
+                RowColLocation cursor = null;
+                if (fieldRow == cursorRow) {
+                    int relativeRow = fieldRow.getRelativeRow(cursorLocation.row());
+                    cursor = cursorLocation.withRow(relativeRow);
+                }
 
-				field.paint(c, g, context, clip, colorManager, cursor, rowHeight);
-			}
+                field.paint(c, g, context, clip, colorManager, cursor, rowHeight);
+            }
 
-			// translate for next row of text
-			startY += subFieldHeight;
-			g.translate(0, subFieldHeight);
-			translatedY += subFieldHeight;
-		}
+            // translate for next row of text
+            startY += subFieldHeight;
+            g.translate(0, subFieldHeight);
+            translatedY += subFieldHeight;
+        }
 
 		// restore the graphics to where it was when we started.
 		g.translate(0, -translatedY);
@@ -553,24 +553,24 @@ public class CompositeVerticalLayoutTextField implements TextField {
 		int extraSpace = rowSeparator.length();
 		int n = fieldRows.size();
 		int textOffsetSoFar = 0;
-		for (int i = 0; i < n; i++) {
+        for (FieldRow row : fieldRows) {
 
-			if (textOffsetSoFar > textOffset) {
-				break;
-			}
+            if (textOffsetSoFar > textOffset) {
+                break;
+            }
 
-			FieldRow fieldRow = fieldRows.get(i);
-			int length = fieldRow.field.getText().length() + extraSpace;
-			int end = textOffsetSoFar + length;
-			if (end > textOffset) {
-				int relativeOffset = textOffset - textOffsetSoFar;
-				RowColLocation location = fieldRow.field.textOffsetToScreenLocation(relativeOffset);
-				int screenRow = fieldRow.fromRelativeRow(location.row());
-				return location.withRow(screenRow);
-			}
+            FieldRow fieldRow = row;
+            int length = fieldRow.field.getText().length() + extraSpace;
+            int end = textOffsetSoFar + length;
+            if (end > textOffset) {
+                int relativeOffset = textOffset - textOffsetSoFar;
+                RowColLocation location = fieldRow.field.textOffsetToScreenLocation(relativeOffset);
+                int screenRow = fieldRow.fromRelativeRow(location.row());
+                return location.withRow(screenRow);
+            }
 
-			textOffsetSoFar += length;
-		}
+            textOffsetSoFar += length;
+        }
 
 		FieldRow lastRow = fieldRows.get(fieldRows.size() - 1);
 		int length = lastRow.field.getText().length();

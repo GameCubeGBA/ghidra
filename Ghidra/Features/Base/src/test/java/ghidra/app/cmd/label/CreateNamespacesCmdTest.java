@@ -65,7 +65,7 @@ public class CreateNamespacesCmdTest extends AbstractGenericTest {
 		// 1
 		// string starts with parent (global) name
 		// no parent given
-		String[] namespaces1 = new String[] { "Global", "child1", "child2" };
+		String[] namespaces1 = { "Global", "child1", "child2" };
 		String namespaceString1 = createNamespaceStringFromArray(namespaces1);
 
 		Command command = new CreateNamespacesCmd(namespaceString1, SourceType.USER_DEFINED);
@@ -91,7 +91,7 @@ public class CreateNamespacesCmdTest extends AbstractGenericTest {
 		// 3
 		// string does not start with parent (global) name
 		// no parent given
-		String[] namespaces3 = new String[] { "myChild1", "myChild2" };
+		String[] namespaces3 = { "myChild1", "myChild2" };
 		String namespaceString3 = createNamespaceStringFromArray(namespaces3);
 
 		command = new CreateNamespacesCmd(namespaceString3, SourceType.USER_DEFINED);
@@ -115,7 +115,7 @@ public class CreateNamespacesCmdTest extends AbstractGenericTest {
 		// 5
 		// single name (not parent)
 		// no parent given
-		String[] namespaces5 = new String[] { "singleNameChild" };
+		String[] namespaces5 = { "singleNameChild" };
 		String namespaceString5 = createNamespaceStringFromArray(namespaces5);
 
 		command = new CreateNamespacesCmd(namespaceString5, SourceType.USER_DEFINED);
@@ -138,7 +138,7 @@ public class CreateNamespacesCmdTest extends AbstractGenericTest {
 
 		// 7
 		// test global start string with different namespace parent
-		String[] namespaces7 = new String[] { "Global", "child", "anotherChild" };
+		String[] namespaces7 = { "Global", "child", "anotherChild" };
 		String namespaceString7 = createNamespaceStringFromArray(namespaces7);
 
 		// get a namespace with which to test
@@ -167,7 +167,7 @@ public class CreateNamespacesCmdTest extends AbstractGenericTest {
 
 		// 8
 		// Invalid formats
-		String[] namespaces8 = new String[] { "invalid name" };
+		String[] namespaces8 = { "invalid name" };
 		String namespaceString8 = createNamespaceStringFromArray(namespaces8);
 
 		command = new CreateNamespacesCmd(namespaceString8, SourceType.USER_DEFINED);
@@ -199,7 +199,7 @@ public class CreateNamespacesCmdTest extends AbstractGenericTest {
 
 		// 11
 		// Null parent results in global namespace being used
-		String[] namespaces11 = new String[] { "foo", "bar", "baz", "bah" };
+		String[] namespaces11 = { "foo", "bar", "baz", "bah" };
 		String namespaceString11 = createNamespaceStringFromArray(namespaces11);
 
 		command = new CreateNamespacesCmd(namespaceString11, SourceType.USER_DEFINED);
@@ -211,7 +211,7 @@ public class CreateNamespacesCmdTest extends AbstractGenericTest {
 
 		// 12
 		// test that a non-global parent works
-		String[] namespaces12 = new String[] { "foobarbaz", "child", "anotherChild" };
+		String[] namespaces12 = { "foobarbaz", "child", "anotherChild" };
 		String namespaceString12 = createNamespaceStringFromArray(namespaces12);
 
 		// get a namespace with which to test

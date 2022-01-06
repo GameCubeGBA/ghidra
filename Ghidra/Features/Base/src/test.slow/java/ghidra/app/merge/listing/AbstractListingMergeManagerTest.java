@@ -891,15 +891,17 @@ public abstract class AbstractListingMergeManagerTest extends AbstractMergeTest
 			return;
 		}
 
-		if (option == KEEP_LATEST) {
-			pressButtonByName(comp, "ChoiceComponentRow0Col1");
-		}
-		else if (option == KEEP_MY) {
-			pressButtonByName(comp, "ChoiceComponentRow0Col2");
-		}
-		else if (option == KEEP_ORIGINAL) {
-			pressButtonByName(comp, "ChoiceComponentRow0Col3");
-		}
+        switch (option) {
+            case KEEP_LATEST:
+                pressButtonByName(comp, "ChoiceComponentRow0Col1");
+                break;
+            case KEEP_MY:
+                pressButtonByName(comp, "ChoiceComponentRow0Col2");
+                break;
+            case KEEP_ORIGINAL:
+                pressButtonByName(comp, "ChoiceComponentRow0Col3");
+                break;
+        }
 
 		waitForSwing();
 		setUseForAll(useForAll, VariousChoicesPanel.class);

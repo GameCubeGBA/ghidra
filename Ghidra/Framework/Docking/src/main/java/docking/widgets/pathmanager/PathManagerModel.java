@@ -110,9 +110,9 @@ class PathManagerModel extends AbstractTableModel {
 
 	void remove(int[] selectedRows) {
 		List<Path> list = new ArrayList<Path>();
-		for (int i = 0; i < selectedRows.length; i++) {
-			list.add(paths.get(selectedRows[i]));
-		}
+        for (int selectedRow : selectedRows) {
+            list.add(paths.get(selectedRow));
+        }
 		for (Path path : list) {
 			if (path.isEditable()) {
 				paths.remove(path);

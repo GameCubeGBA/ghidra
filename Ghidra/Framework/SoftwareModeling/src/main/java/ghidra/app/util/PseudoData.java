@@ -501,7 +501,7 @@ public class PseudoData extends PseudoCodeUnit implements Data {
 
 	@Override
 	public boolean hasStringValue() {
-		return String.class.equals(getValueClass());
+		return String.class == getValueClass();
 	}
 
 	@Override

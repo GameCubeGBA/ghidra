@@ -149,10 +149,10 @@ public class LldbModelTargetProcessImpl extends LldbModelTargetObjectImpl
 			LldbReason reason) {
 		TargetExecutionState targetState = DebugClient.convertState(state);
 		setExecutionState(targetState, "ThreadStateChanged");
-		if (state.equals(StateType.eStateStopped)) {
+		if (state == StateType.eStateStopped) {
 			threads.requestElements(true);
 			StopReason stopReason = getManager().getCurrentThread().GetStopReason();
-			if (!stopReason.equals(StopReason.eStopReasonPlanComplete)) {
+			if (stopReason != StopReason.eStopReasonPlanComplete) {
 				memory.requestElements(true);			
 			}
 		}

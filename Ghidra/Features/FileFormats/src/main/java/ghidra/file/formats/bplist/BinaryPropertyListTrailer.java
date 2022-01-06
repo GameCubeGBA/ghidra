@@ -50,18 +50,19 @@ public class BinaryPropertyListTrailer implements StructConverter {
 		offsetTable = new int [ objectCount ];
 
 		for ( int i = 0 ; i < objectCount ; ++i ) {
-			if ( offsetSize == 4 ) {
-				offsetTable[ i ] = reader.readInt( offsetTableOffset + i * offsetSize );
-			}
-			else if ( offsetSize == 2 ) {
-				offsetTable[ i ] = reader.readShort( offsetTableOffset + i * offsetSize ) & 0xffff;
-			}
-			else if ( offsetSize == 1 ) {
-				offsetTable[ i ] = reader.readByte( offsetTableOffset + i * offsetSize ) & 0xff;
-			}
-			else {
-				throw new RuntimeException( "Invalid offset size in binary PList" );
-			}
+            switch (offsetSize) {
+                case 4:
+                    offsetTable[i] = reader.readInt(offsetTableOffset + i * offsetSize);
+                    break;
+                case 2:
+                    offsetTable[i] = reader.readShort(offsetTableOffset + i * offsetSize) & 0xffff;
+                    break;
+                case 1:
+                    offsetTable[i] = reader.readByte(offsetTableOffset + i * offsetSize) & 0xff;
+                    break;
+                default:
+                    throw new RuntimeException("Invalid offset size in binary PList");
+            }
 		}
 	}
 

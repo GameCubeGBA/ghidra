@@ -51,9 +51,9 @@ public final class Prime {
      * @param n the number from which to find the next higher prime number.
      */
     public final static int nextPrime(int n) {
-        for(int i=0;i<PRIMES.length;i++) {
-            if (PRIMES[i] > n) {
-                return PRIMES[i];
+        for (int prime : PRIMES) {
+            if (prime > n) {
+                return prime;
             }
         }
         return 0;

@@ -68,9 +68,9 @@ public class SettingsImpl implements Settings, Serializable {
 	public SettingsImpl(Settings settings) {
 		this();
 		String[] names = settings.getNames();
-		for (int i = 0; i < names.length; i++) {
-			map.put(names[i], settings.getValue(names[i]));
-		}
+        for (String name : names) {
+            map.put(name, settings.getValue(name));
+        }
 	}
 
 	@Override

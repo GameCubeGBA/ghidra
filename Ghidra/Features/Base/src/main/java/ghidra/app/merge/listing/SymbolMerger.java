@@ -740,11 +740,10 @@ class SymbolMerger extends AbstractListingMerger {
 
 		// Save IDs to list since removal may mess up iterator.
 		LongArrayList list = new LongArrayList();
-		Iterator<Long> iter = deferredRemoveIDs.iterator();
-		while (iter.hasNext()) {
-			long id = iter.next().longValue();
-			list.add(id);
-		}
+        for (Long deferredRemoveID : deferredRemoveIDs) {
+            long id = deferredRemoveID.longValue();
+            list.add(id);
+        }
 		// Loop and retry removing if some were removed since this may have
 		// created empty namespaces that previously weren't empty.
 		boolean removedSome;

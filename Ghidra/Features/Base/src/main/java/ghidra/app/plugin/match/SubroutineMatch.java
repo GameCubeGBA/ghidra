@@ -46,14 +46,12 @@ public class SubroutineMatch {
 		if( isA )
 		{
 			newOne = new Address[progAAddrs.length+1];
-			for( int i=0; i<progAAddrs.length; i++)
-				newOne[i] = progAAddrs[i];
+            System.arraycopy(progAAddrs, 0, newOne, 0, progAAddrs.length);
 			newOne[progAAddrs.length] = addr;
 			progAAddrs = newOne;
 		} else {
 			newOne = new Address[progBAddrs.length+1];
-			for( int i=0; i<progBAddrs.length; i++)
-				newOne[i] = progBAddrs[i];
+            System.arraycopy(progBAddrs, 0, newOne, 0, progBAddrs.length);
 			newOne[progBAddrs.length] = addr;
 			progBAddrs = newOne;			
 		}	
@@ -75,11 +73,10 @@ public class SubroutineMatch {
 			}
 			Address [] newOne = new Address[cnt];
 			cnt = 0;
-			for( int i=0; i< progAAddrs.length; i++ )
-			{
-				if( progAAddrs[i] != null)
-					newOne[cnt++] = progAAddrs[i];
-			}
+            for (Address progAAddr : progAAddrs) {
+                if (progAAddr != null)
+                    newOne[cnt++] = progAAddr;
+            }
 			this.progAAddrs = newOne;
 		} else {
 			for( int i=0; i< progBAddrs.length; i++ )
@@ -91,11 +88,10 @@ public class SubroutineMatch {
 			}
 			Address [] newOne = new Address[cnt];
 			cnt = 0;
-			for( int i=0; i< progBAddrs.length; i++ )
-			{
-				if( progBAddrs[i] != null)
-					newOne[cnt++] = progBAddrs[i];
-			}
+            for (Address progBAddr : progBAddrs) {
+                if (progBAddr != null)
+                    newOne[cnt++] = progBAddr;
+            }
 			this.progBAddrs = newOne;
 		}
 		return false;
@@ -123,11 +119,9 @@ public class SubroutineMatch {
 	@Override
     public String toString(){
 		String str = reason + " ";
-		for( int i=0; i<progAAddrs.length; i++)
-			str += progAAddrs[i] + ",";
+        for (Address progAAddr : progAAddrs) str += progAAddr + ",";
 		str += " --- ";
-		for( int i=0; i<progBAddrs.length; i++)
-			str += progBAddrs[i] + ",";
+        for (Address progBAddr : progBAddrs) str += progBAddr + ",";
 		return str;
 	}
 

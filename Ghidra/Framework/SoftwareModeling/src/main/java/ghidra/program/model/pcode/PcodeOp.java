@@ -337,9 +337,7 @@ public class PcodeOp {
 		}
 		else if (slot >= input.length) {
 			Varnode[] newinput = new Varnode[slot + 1];
-			for (int i = 0; i < input.length; ++i) {
-				newinput[i] = input[i];
-			}
+            System.arraycopy(input, 0, newinput, 0, input.length);
 			for (int i = input.length; i < newinput.length; ++i) {
 				newinput[i] = null;
 			}
@@ -359,12 +357,8 @@ public class PcodeOp {
 			return;
 		}
 		Varnode[] newinput = new Varnode[input.length - 1];
-		for (int i = 0; i < slot; ++i) {
-			newinput[i] = input[i];
-		}
-		for (int i = slot; i < newinput.length; ++i) {
-			newinput[i] = input[i + 1];
-		}
+        if (slot >= 0) System.arraycopy(input, 0, newinput, 0, slot);
+        if (newinput.length - slot >= 0) System.arraycopy(input, slot + 1, newinput, slot, newinput.length - slot);
 		input = newinput;
 	}
 
@@ -380,12 +374,9 @@ public class PcodeOp {
 			return;
 		}
 		Varnode[] newinput = new Varnode[input.length + 1];
-		for (int i = 0; i < slot; ++i) {
-			newinput[i] = input[i];
-		}
-		for (int i = slot + 1; i < newinput.length; ++i) {
-			newinput[i] = input[i - 1];
-		}
+        if (slot >= 0) System.arraycopy(input, 0, newinput, 0, slot);
+        if (newinput.length - (slot + 1) >= 0)
+            System.arraycopy(input, slot + 1 - 1, newinput, slot + 1, newinput.length - (slot + 1));
 		newinput[slot] = vn;
 		input = newinput;
 	}

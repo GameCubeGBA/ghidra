@@ -24,7 +24,7 @@ public interface TupleRecord<T extends TupleRecord<T>> {
 
 	@SuppressWarnings("unchecked")
 	default boolean doEquals(Object that) {
-		if (!this.getClass().equals(that.getClass())) {
+		if (this.getClass() != that.getClass()) {
 			return false;
 		}
 		for (Function<T, ?> field : getFieldAccessors()) {

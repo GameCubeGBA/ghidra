@@ -86,20 +86,22 @@ class LabelHistoryPanel extends JPanel {
 		for (int i = 0; i < columnModel.getColumnCount(); i++) {
 			TableColumn column = columnModel.getColumn(i);
 			String name = (String) column.getIdentifier();
-			if (name.equals(LabelHistoryTableModel.DATE)) {
-				column.setCellRenderer(new GenericDateCellRenderer());
-				column.setPreferredWidth(190);
-			}
-			else if (name.equals(LabelHistoryTableModel.LABEL)) {
-				column.setPreferredWidth(280);
-				column.setCellRenderer(new LabelCellRenderer());
-			}
-			else if (name.equals(LabelHistoryTableModel.ADDRESS)) {
-				column.setPreferredWidth(130);
-			}
-			else if (name.equals(LabelHistoryTableModel.USER)) {
-				column.setPreferredWidth(190);
-			}
+            switch (name) {
+                case LabelHistoryTableModel.DATE:
+                    column.setCellRenderer(new GenericDateCellRenderer());
+                    column.setPreferredWidth(190);
+                    break;
+                case LabelHistoryTableModel.LABEL:
+                    column.setPreferredWidth(280);
+                    column.setCellRenderer(new LabelCellRenderer());
+                    break;
+                case LabelHistoryTableModel.ADDRESS:
+                    column.setPreferredWidth(130);
+                    break;
+                case LabelHistoryTableModel.USER:
+                    column.setPreferredWidth(190);
+                    break;
+            }
 		}
 		historyTable.addMouseListener(new MouseAdapter() {
 			@Override

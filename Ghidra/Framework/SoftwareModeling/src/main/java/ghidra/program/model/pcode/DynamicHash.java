@@ -296,9 +296,9 @@ public class DynamicHash {
 			}
 		}
 
-		for (int i = 0; i < opedge.size(); ++i) {
-			reg = opedge.get(i).hash(reg);
-		}
+        for (ToOpEdge toOpEdge : opedge) {
+            reg = toOpEdge.hash(reg);
+        }
 
 		// Build the final 64-bit hash
 		PcodeOp op = null;
@@ -355,17 +355,16 @@ public class DynamicHash {
 			vnlist.clear();
 			vnlist2.clear();
 			gatherFirstLevelVars(vnlist, fd, tmpaddr, tmphash);
-			for (int i = 0; i < vnlist.size(); ++i) {
-				Varnode tmpvn = vnlist.get(i);
-				clear();
-				calcHash(tmpvn, method);
-				if (hash == tmphash) {		// Hash collision
-					vnlist2.add(tmpvn);
-					if (vnlist2.size() > maxduplicates) {
-						break;
-					}
-				}
-			}
+            for (Varnode tmpvn : vnlist) {
+                clear();
+                calcHash(tmpvn, method);
+                if (hash == tmphash) {        // Hash collision
+                    vnlist2.add(tmpvn);
+                    if (vnlist2.size() > maxduplicates) {
+                        break;
+                    }
+                }
+            }
 			if (vnlist2.size() <= maxduplicates) {
 				if ((champion.size() == 0) || (vnlist2.size() < champion.size())) {
 					champion = vnlist2;
@@ -494,14 +493,13 @@ public class DynamicHash {
 		ArrayList<Varnode> vnlist = new ArrayList<Varnode>();
 		ArrayList<Varnode> vnlist2 = new ArrayList<Varnode>();
 		gatherFirstLevelVars(vnlist, fd, addr, h);
-		for (int i = 0; i < vnlist.size(); ++i) {
-			Varnode tmpvn = vnlist.get(i);
-			dhash.clear();
-			dhash.calcHash(tmpvn, method);
-			if (dhash.getHash() == h) {
-				vnlist2.add(tmpvn);
-			}
-		}
+        for (Varnode tmpvn : vnlist) {
+            dhash.clear();
+            dhash.calcHash(tmpvn, method);
+            if (dhash.getHash() == h) {
+                vnlist2.add(tmpvn);
+            }
+        }
 		if (total != vnlist2.size()) {
 			return null;
 		}
@@ -625,9 +623,7 @@ public class DynamicHash {
 					matchWithPossibleExtension(inputs[i].getOffset(), inputs[i].getSize(), value)) {
 					if (count >= tmp.length) {
 						long[] newtmp = new long[count + 10];
-						for(int j=0;j<tmp.length;++j) {
-							newtmp[j] = tmp[j];
-						}
+                        System.arraycopy(tmp, 0, newtmp, 0, tmp.length);
 						tmp = newtmp;
 					}
 					DynamicHash dynamicHash = new DynamicHash(op,i);
@@ -639,9 +635,7 @@ public class DynamicHash {
 			}
 		}
 		long[] res = new long[count];
-		for(int i=0;i<count;++i) {
-			res[i] = tmp[i];
-		}
+        System.arraycopy(tmp, 0, res, 0, count);
 		return res;
 	}
 }

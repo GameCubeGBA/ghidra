@@ -387,7 +387,7 @@ public abstract class RefType {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null || !getClass().equals(obj.getClass())) {
+		if (obj == null || getClass() != obj.getClass()) {
 			return false;
 		}
 		RefType other = (RefType) obj;

@@ -179,13 +179,11 @@ public class CondenseFillerBytes extends GhidraScript {
 		}
 
 		// Determine key corresponding to max val
-		Iterator<String> keyIterator = fillValuesHash.keySet().iterator();
-		while (keyIterator.hasNext()) {
-			String nextKey = keyIterator.next();
-			if (fillValuesHash.get(nextKey).compareTo(max) == 0) {
-				return nextKey;
-			}
-		}
+        for (String nextKey : fillValuesHash.keySet()) {
+            if (fillValuesHash.get(nextKey).compareTo(max) == 0) {
+                return nextKey;
+            }
+        }
 
 		// Should theoretically never reach here
 		return null;

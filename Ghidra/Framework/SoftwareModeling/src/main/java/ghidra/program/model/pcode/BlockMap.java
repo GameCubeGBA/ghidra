@@ -155,26 +155,23 @@ public class BlockMap {
 
 	public void resolveGotoReferences() {
 		sortList(leaflist);
-		for (int i = 0; i < gotoreflist.size(); ++i) {
-			GotoReference gotoref = gotoreflist.get(i);
-			PcodeBlock bl = findBlock(leaflist, gotoref.rootindex);
-			int depth = gotoref.depth;
-			while (depth > 0) {
-				depth -= 1;
-				bl = bl.getParent();
-			}
-			if (gotoref.gotoblock instanceof BlockGoto) {
-				BlockGoto gotoblock = (BlockGoto) gotoref.gotoblock;
-				gotoblock.setGotoTarget(bl);
-			}
-			else if (gotoref.gotoblock instanceof BlockIfGoto) {
-				BlockIfGoto gotoblock = (BlockIfGoto) gotoref.gotoblock;
-				gotoblock.setGotoTarget(bl);
-			}
-			else if (gotoref.gotoblock instanceof BlockMultiGoto) {
-				BlockMultiGoto gotoblock = (BlockMultiGoto) gotoref.gotoblock;
-				gotoblock.addBlock(bl);
-			}
-		}
+        for (GotoReference gotoref : gotoreflist) {
+            PcodeBlock bl = findBlock(leaflist, gotoref.rootindex);
+            int depth = gotoref.depth;
+            while (depth > 0) {
+                depth -= 1;
+                bl = bl.getParent();
+            }
+            if (gotoref.gotoblock instanceof BlockGoto) {
+                BlockGoto gotoblock = (BlockGoto) gotoref.gotoblock;
+                gotoblock.setGotoTarget(bl);
+            } else if (gotoref.gotoblock instanceof BlockIfGoto) {
+                BlockIfGoto gotoblock = (BlockIfGoto) gotoref.gotoblock;
+                gotoblock.setGotoTarget(bl);
+            } else if (gotoref.gotoblock instanceof BlockMultiGoto) {
+                BlockMultiGoto gotoblock = (BlockMultiGoto) gotoref.gotoblock;
+                gotoblock.addBlock(bl);
+            }
+        }
 	}
 }

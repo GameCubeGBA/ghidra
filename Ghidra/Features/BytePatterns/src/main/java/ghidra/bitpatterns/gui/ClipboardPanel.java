@@ -249,15 +249,13 @@ public class ClipboardPanel extends JPanel {
 			return;
 		}
 
-		for (int i = 0; i < mymatches.size(); ++i) {
-			Match match = mymatches.get(i);
-			if (onlyPrePatterns) {
-				evaluatePrePatternMatch(match, program, block, matchStats);
-			}
-			else {
-				evaluateMatch(match, program, block, matchStats);
-			}
-		}
+        for (Match match : mymatches) {
+            if (onlyPrePatterns) {
+                evaluatePrePatternMatch(match, program, block, matchStats);
+            } else {
+                evaluateMatch(match, program, block, matchStats);
+            }
+        }
 	}
 
 //Only pre-patterns: don't compute the various kinds of false positives

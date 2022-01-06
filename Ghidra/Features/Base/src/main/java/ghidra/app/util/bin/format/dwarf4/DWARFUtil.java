@@ -75,18 +75,17 @@ public class DWARFUtil {
 	 */
 	public static Field getStaticFinalFieldWithValue(Class<?> clazz, long value) {
 		Field[] fields = clazz.getDeclaredFields();
-		for (int i = 0; i < fields.length; i++) {
-			if ((!Modifier.isFinal(fields[i].getModifiers())) ||
-				(!Modifier.isStatic(fields[i].getModifiers()))) {
+		for (Field field : fields) {
+			if ((!Modifier.isFinal(field.getModifiers())) ||
+					(!Modifier.isStatic(field.getModifiers()))) {
 				continue;
 			}
 			try {
-				long fieldValue = fields[i].getLong(null);
+				long fieldValue = field.getLong(null);
 				if (fieldValue == value) {
-					return fields[i];
+					return field;
 				}
-			}
-			catch (IllegalArgumentException | IllegalAccessException e) {
+			} catch (IllegalArgumentException | IllegalAccessException e) {
 				// ignore
 			}
 		}
@@ -230,7 +229,7 @@ public class DWARFUtil {
 				}
 			}
 		}
-		return Collections.EMPTY_LIST;
+		return Collections.emptyList();
 	}
 
 	/**

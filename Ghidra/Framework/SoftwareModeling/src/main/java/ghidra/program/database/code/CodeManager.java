@@ -1108,45 +1108,43 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 		Address start = forward ? address : program.getMinAddress();
 		Address end = forward ? program.getMaxAddress() : address;
 
-		if (property.equals(CodeUnit.COMMENT_PROPERTY)) {
-			try {
-				AddressKeyIterator iter = commentAdapter.getKeys(start, end, forward);
-				return new CodeUnitKeyIterator(this, iter, forward);
-			}
-			catch (IOException e) {
-				program.dbError(e);
-			}
-		}
-		else if (property.equals(CodeUnit.INSTRUCTION_PROPERTY)) {
-			try {
-				AddressKeyIterator iter = instAdapter.getKeys(start, end, forward);
-				return new CodeUnitKeyIterator(this, iter, forward);
-			}
-			catch (IOException e) {
-				program.dbError(e);
-			}
-		}
-		else if (property.equals(CodeUnit.DEFINED_DATA_PROPERTY)) {
-			try {
-				AddressKeyIterator iter = dataAdapter.getKeys(start, end, forward);
-				return new CodeUnitKeyIterator(this, iter, forward);
-			}
-			catch (IOException e) {
-				program.dbError(e);
-			}
-		}
-		else {
-			// Possibly a user-defined property.
-			PropertyMapDB pm = (PropertyMapDB) propertyMapMgr.getPropertyMap(property);
-			if (pm != null) {
+		switch (property) {
+			case CodeUnit.COMMENT_PROPERTY:
 				try {
-					AddressKeyIterator iter = pm.getAddressKeyIterator(start, end, forward);
+					AddressKeyIterator iter = commentAdapter.getKeys(start, end, forward);
 					return new CodeUnitKeyIterator(this, iter, forward);
-				}
-				catch (IOException e) {
+				} catch (IOException e) {
 					program.dbError(e);
 				}
-			}
+				break;
+			case CodeUnit.INSTRUCTION_PROPERTY:
+				try {
+					AddressKeyIterator iter = instAdapter.getKeys(start, end, forward);
+					return new CodeUnitKeyIterator(this, iter, forward);
+				} catch (IOException e) {
+					program.dbError(e);
+				}
+				break;
+			case CodeUnit.DEFINED_DATA_PROPERTY:
+				try {
+					AddressKeyIterator iter = dataAdapter.getKeys(start, end, forward);
+					return new CodeUnitKeyIterator(this, iter, forward);
+				} catch (IOException e) {
+					program.dbError(e);
+				}
+				break;
+			default:
+				// Possibly a user-defined property.
+				PropertyMapDB pm = (PropertyMapDB) propertyMapMgr.getPropertyMap(property);
+				if (pm != null) {
+					try {
+						AddressKeyIterator iter = pm.getAddressKeyIterator(start, end, forward);
+						return new CodeUnitKeyIterator(this, iter, forward);
+					} catch (IOException e) {
+						program.dbError(e);
+					}
+				}
+				break;
 		}
 		return new EmptyCodeUnitIterator();
 	}
@@ -2128,7 +2126,7 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 			return;
 		}
 		DataType dt = data.getBaseDataType();
-		if (Address.class.equals(dt.getValueClass(null))) {
+		if (Address.class == dt.getValueClass(null)) {
 			Object obj = data.getValue();
 			if (obj instanceof Address) {
 				// creates a reference unless the value is 0 or all f's
@@ -2158,7 +2156,7 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 				dt = ((Array) dt).getDataType();
 			}
 		}
-		if ((dt instanceof DynamicDataType) || Address.class.equals(dt.getValueClass(null))) {
+		if ((dt instanceof DynamicDataType) || Address.class == dt.getValueClass(null)) {
 			// Assume DynamicDataType could produce an Address component
 			return true;
 		}

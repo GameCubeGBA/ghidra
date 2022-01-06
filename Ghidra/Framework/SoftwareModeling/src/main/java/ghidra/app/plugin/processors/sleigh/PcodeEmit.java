@@ -323,97 +323,100 @@ public abstract class PcodeEmit {
 		int opcode = opt.getOpcode();
 		VarnodeTpl[] inputs = opt.getInput();
 
-		if (opcode == PcodeOp.BRANCH || opcode == PcodeOp.CALL) {
-			int offsetType = inputs[0].getOffset().getType();
-			if (offsetType == ConstTpl.J_RELATIVE || offsetType == ConstTpl.J_START ||
-				offsetType == ConstTpl.J_NEXT) {
-				return false;
-			}
+        switch (opcode) {
+            case PcodeOp.BRANCH:
+            case PcodeOp.CALL: {
+                int offsetType = inputs[0].getOffset().getType();
+                if (offsetType == ConstTpl.J_RELATIVE || offsetType == ConstTpl.J_START ||
+                        offsetType == ConstTpl.J_NEXT) {
+                    return false;
+                }
 
-			AddressSpace defaultAddressSpace = walker.getCurSpace();
-			int ptrSize = defaultAddressSpace.getPointerSize();
+                AddressSpace defaultAddressSpace = walker.getCurSpace();
+                int ptrSize = defaultAddressSpace.getPointerSize();
 
-			//   BRANCH <dest>  (or CALL)
-			// -- maps to --
-			//   tmp = COPY &<dest>
-			//   RETURN tmp
+                //   BRANCH <dest>  (or CALL)
+                // -- maps to --
+                //   tmp = COPY &<dest>
+                //   RETURN tmp
 
-			Address tmpAddr = uniqueFactory.getNextUniqueAddress();
-			VarnodeTpl tmp = new VarnodeTpl(new ConstTpl(tmpAddr.getAddressSpace()),
-				new ConstTpl(ConstTpl.REAL, tmpAddr.getOffset()),
-				new ConstTpl(ConstTpl.REAL, ptrSize));
+                Address tmpAddr = uniqueFactory.getNextUniqueAddress();
+                VarnodeTpl tmp = new VarnodeTpl(new ConstTpl(tmpAddr.getAddressSpace()),
+                        new ConstTpl(ConstTpl.REAL, tmpAddr.getOffset()),
+                        new ConstTpl(ConstTpl.REAL, ptrSize));
 
-			VarnodeTpl destAddr = new VarnodeTpl(new ConstTpl(const_space), inputs[0].getOffset(),
-				new ConstTpl(ConstTpl.REAL, ptrSize));
+                VarnodeTpl destAddr = new VarnodeTpl(new ConstTpl(const_space), inputs[0].getOffset(),
+                        new ConstTpl(ConstTpl.REAL, ptrSize));
 
-			OpTpl copyOpt = new OpTpl(PcodeOp.COPY, tmp, new VarnodeTpl[] { destAddr });
-			dump(copyOpt);
+                OpTpl copyOpt = new OpTpl(PcodeOp.COPY, tmp, new VarnodeTpl[]{destAddr});
+                dump(copyOpt);
 
-			OpTpl retOpt = new OpTpl(PcodeOp.RETURN, null, new VarnodeTpl[] { tmp });
-			dump(retOpt);
+                OpTpl retOpt = new OpTpl(PcodeOp.RETURN, null, new VarnodeTpl[]{tmp});
+                dump(retOpt);
 
-			flowOverride = null;
-			return true;
-		}
-		else if (opcode == PcodeOp.BRANCHIND || opcode == PcodeOp.CALLIND) {
-			OpTpl callopt = new OpTpl(PcodeOp.RETURN, null, inputs);
-			dump(callopt);
-			flowOverride = null;
-			return true;
-		}
-		else if (opcode == PcodeOp.CBRANCH) {
-			int offsetType = inputs[0].getOffset().getType();
-			if (offsetType == ConstTpl.J_RELATIVE || offsetType == ConstTpl.J_START ||
-				offsetType == ConstTpl.J_NEXT) {
-				return false;
-			}
+                flowOverride = null;
+                return true;
+            }
+            case PcodeOp.BRANCHIND:
+            case PcodeOp.CALLIND:
+                OpTpl callopt = new OpTpl(PcodeOp.RETURN, null, inputs);
+                dump(callopt);
+                flowOverride = null;
+                return true;
+            case PcodeOp.CBRANCH: {
+                int offsetType = inputs[0].getOffset().getType();
+                if (offsetType == ConstTpl.J_RELATIVE || offsetType == ConstTpl.J_START ||
+                        offsetType == ConstTpl.J_NEXT) {
+                    return false;
+                }
 
-			AddressSpace defaultAddressSpace = walker.getCurSpace();
-			int ptrSize = defaultAddressSpace.getPointerSize();
+                AddressSpace defaultAddressSpace = walker.getCurSpace();
+                int ptrSize = defaultAddressSpace.getPointerSize();
 
-			//   CBRANCH <dest>,<cond>
-			// -- maps to --
-			//   tmp = BOOL_NEGATE <cond>
-			//   CBRANCH <label>,tmp
-			//   tmp2 = COPY &<dest>
-			//   RETURN <dest>
-			//   <label>
+                //   CBRANCH <dest>,<cond>
+                // -- maps to --
+                //   tmp = BOOL_NEGATE <cond>
+                //   CBRANCH <label>,tmp
+                //   tmp2 = COPY &<dest>
+                //   RETURN <dest>
+                //   <label>
 
-			Address tmpAddr = uniqueFactory.getNextUniqueAddress();
-			VarnodeTpl tmp = new VarnodeTpl(new ConstTpl(tmpAddr.getAddressSpace()),
-				new ConstTpl(ConstTpl.REAL, tmpAddr.getOffset()), inputs[1].getSize());
+                Address tmpAddr = uniqueFactory.getNextUniqueAddress();
+                VarnodeTpl tmp = new VarnodeTpl(new ConstTpl(tmpAddr.getAddressSpace()),
+                        new ConstTpl(ConstTpl.REAL, tmpAddr.getOffset()), inputs[1].getSize());
 
-			tmpAddr = uniqueFactory.getNextUniqueAddress();
-			VarnodeTpl tmp2 = new VarnodeTpl(new ConstTpl(tmpAddr.getAddressSpace()),
-				new ConstTpl(ConstTpl.REAL, tmpAddr.getOffset()),
-				new ConstTpl(ConstTpl.REAL, ptrSize));
+                tmpAddr = uniqueFactory.getNextUniqueAddress();
+                VarnodeTpl tmp2 = new VarnodeTpl(new ConstTpl(tmpAddr.getAddressSpace()),
+                        new ConstTpl(ConstTpl.REAL, tmpAddr.getOffset()),
+                        new ConstTpl(ConstTpl.REAL, ptrSize));
 
-			VarnodeTpl destAddr = new VarnodeTpl(new ConstTpl(const_space), inputs[0].getOffset(),
-				new ConstTpl(ConstTpl.REAL, ptrSize));
+                VarnodeTpl destAddr = new VarnodeTpl(new ConstTpl(const_space), inputs[0].getOffset(),
+                        new ConstTpl(ConstTpl.REAL, ptrSize));
 
-			int labelIndex = labelcount++;
-			VarnodeTpl label = new VarnodeTpl(new ConstTpl(const_space),
-				new ConstTpl(ConstTpl.J_RELATIVE, labelIndex), new ConstTpl(ConstTpl.REAL, 8));
-			VarnodeTpl cond = inputs[1];
+                int labelIndex = labelcount++;
+                VarnodeTpl label = new VarnodeTpl(new ConstTpl(const_space),
+                        new ConstTpl(ConstTpl.J_RELATIVE, labelIndex), new ConstTpl(ConstTpl.REAL, 8));
+                VarnodeTpl cond = inputs[1];
 
-			OpTpl negOpt = new OpTpl(PcodeOp.BOOL_NEGATE, tmp, new VarnodeTpl[] { cond });
-			dump(negOpt);
+                OpTpl negOpt = new OpTpl(PcodeOp.BOOL_NEGATE, tmp, new VarnodeTpl[]{cond});
+                dump(negOpt);
 
-			OpTpl cbranchOpt = new OpTpl(PcodeOp.CBRANCH, null, new VarnodeTpl[] { label, tmp });
-			dump(cbranchOpt);
+                OpTpl cbranchOpt = new OpTpl(PcodeOp.CBRANCH, null, new VarnodeTpl[]{label, tmp});
+                dump(cbranchOpt);
 
-			OpTpl copyOpt = new OpTpl(PcodeOp.COPY, tmp2, new VarnodeTpl[] { destAddr });
-			dump(copyOpt);
+                OpTpl copyOpt = new OpTpl(PcodeOp.COPY, tmp2, new VarnodeTpl[]{destAddr});
+                dump(copyOpt);
 
-			OpTpl retOpt = new OpTpl(PcodeOp.RETURN, null, new VarnodeTpl[] { tmp2 });
-			dump(retOpt);
+                OpTpl retOpt = new OpTpl(PcodeOp.RETURN, null, new VarnodeTpl[]{tmp2});
+                dump(retOpt);
 
-			OpTpl labelOpt = new OpTpl(PcodeOp.PTRADD, null, new VarnodeTpl[] { label });
-			setLabel(labelOpt);
+                OpTpl labelOpt = new OpTpl(PcodeOp.PTRADD, null, new VarnodeTpl[]{label});
+                setLabel(labelOpt);
 
-			flowOverride = null;
-			return true;
-		}
+                flowOverride = null;
+                return true;
+            }
+        }
 		return false;
 	}
 

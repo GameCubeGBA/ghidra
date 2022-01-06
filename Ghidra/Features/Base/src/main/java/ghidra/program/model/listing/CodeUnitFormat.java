@@ -999,14 +999,12 @@ public class CodeUnitFormat {
 	 * @return equate which matches scalar value or null if not found.
 	 */
 	private Equate findEquate(Scalar scalar, List<Equate> equates) {
-		Iterator<Equate> equateItr = equates.iterator();
-		while (equateItr.hasNext()) {
-			Equate equate = equateItr.next();
-			if (equate.getValue() == scalar.getSignedValue() ||
-				equate.getValue() == scalar.getValue()) {
-				return equate;
-			}
-		}
+        for (Equate equate : equates) {
+            if (equate.getValue() == scalar.getSignedValue() ||
+                    equate.getValue() == scalar.getValue()) {
+                return equate;
+            }
+        }
 		return null;
 	}
 

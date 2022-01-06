@@ -168,8 +168,8 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 	private void printWarningIfConflictingInitializationConfigs(ApplicationLayout layout,
 			ApplicationConfiguration configuration) {
 
-		if (loadedApplicationLayout.getClass().equals(layout.getClass()) &&
-			loadedApplicationConfiguration.getClass().equals(configuration.getClass())) {
+		if (loadedApplicationLayout.getClass() == layout.getClass() &&
+                loadedApplicationConfiguration.getClass() == configuration.getClass()) {
 			return;
 		}
 

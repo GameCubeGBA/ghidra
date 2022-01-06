@@ -84,8 +84,7 @@ public class OpTemplate implements Serializable {
 		}
 		
 		// just before emitting pcode, trim constant varnodes to proper size
-		for (int i = 0; i < in.length; i++)
-			in[i].trim();
+        for (Varnode varnode : in) varnode.trim();
 			
 		return new PcodeOp(position.startAddr(),opSequenceNumber,opc,in,out);
 	}

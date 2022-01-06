@@ -73,32 +73,33 @@ class MarkupXmlMgr {
 				throw new CancelledException();
 			}
 			String tagName = element.getName().toUpperCase();
-			if (tagName.equals("MEMORY_REFERENCE")) {
-				processMemoryReference(element, overwrite);
-			}
-			else if (tagName.equals("STACK_REFERENCE")) {
-				if (isFunctions && !ignoreStackReferences) {
-					processStackReference(element, overwrite);
-				}
-			}
-			else if (tagName.equals("EXT_LIBRARY_REFERENCE")) {
-				if (isExtLibs) {
-					processExtLibraryReference(element, overwrite);
-				}
-			}
-			else if (tagName.equals("EQUATE_REFERENCE")) {
-				processEquateReference(element, overwrite);
-			}
-			else if (tagName.equals("MANUAL_OPERAND")) {
-				// Not yet supported
-			}
-			else if (tagName.equals("MANUAL_INSTRUCTION")) {
-				// Not yet supported
-			}
-			else {
-				throw new SAXParseException("Unexpected XML tag: " + tagName, null, null,
-					parser.getLineNumber(), parser.getColumnNumber());
-			}
+            switch (tagName) {
+                case "MEMORY_REFERENCE":
+                    processMemoryReference(element, overwrite);
+                    break;
+                case "STACK_REFERENCE":
+                    if (isFunctions && !ignoreStackReferences) {
+                        processStackReference(element, overwrite);
+                    }
+                    break;
+                case "EXT_LIBRARY_REFERENCE":
+                    if (isExtLibs) {
+                        processExtLibraryReference(element, overwrite);
+                    }
+                    break;
+                case "EQUATE_REFERENCE":
+                    processEquateReference(element, overwrite);
+                    break;
+                case "MANUAL_OPERAND":
+                    // Not yet supported
+                    break;
+                case "MANUAL_INSTRUCTION":
+                    // Not yet supported
+                    break;
+                default:
+                    throw new SAXParseException("Unexpected XML tag: " + tagName, null, null,
+                            parser.getLineNumber(), parser.getColumnNumber());
+            }
 
 			// read end of tag
 			element = parser.next();
@@ -399,11 +400,11 @@ class MarkupXmlMgr {
 					else if (cu instanceof Instruction) {
 						Instruction instr = (Instruction) cu;
 						Object[] opObjects = instr.getOpObjects(opIndex);
-						for (int i = 0; i < opObjects.length; i++) {
-							if (opObjects[i] instanceof Scalar) {
-								instrScalars.add((Scalar) opObjects[i]);
-							}
-						}
+                        for (Object opObject : opObjects) {
+                            if (opObject instanceof Scalar) {
+                                instrScalars.add((Scalar) opObject);
+                            }
+                        }
 
 						if (instrScalars.size() == 0) {
 							log.appendMsg("BAD EQUATE REFERENCE: operand " + "[" + opIndex +
@@ -494,43 +495,43 @@ class MarkupXmlMgr {
 		AddressIterator iter = refManager.getReferenceSourceIterator(set, true);
 		while (iter.hasNext()) {
 			Reference[] refs = refManager.getReferencesFrom(iter.next());
-			for (int i = 0; i < refs.length; i++) {
-				if (monitor.isCancelled()) {
-					throw new CancelledException();
-				}
-				Reference ref = refs[i];
-				if (ref.isMemoryReference()) {
-					writeMemoryReference(ref, writer);
-				}
-			}
+            for (Reference reference : refs) {
+                if (monitor.isCancelled()) {
+                    throw new CancelledException();
+                }
+                Reference ref = reference;
+                if (ref.isMemoryReference()) {
+                    writeMemoryReference(ref, writer);
+                }
+            }
 		}
 
 		iter = refManager.getReferenceSourceIterator(set, true);
 		while (iter.hasNext()) {
 			Reference[] refs = refManager.getReferencesFrom(iter.next());
-			for (int i = 0; i < refs.length; i++) {
-				if (monitor.isCancelled()) {
-					throw new CancelledException();
-				}
-				Reference ref = refs[i];
-				if (ref.isStackReference()) {
-					writeStackReference((StackReference) ref, writer);
-				}
-			}
+            for (Reference reference : refs) {
+                if (monitor.isCancelled()) {
+                    throw new CancelledException();
+                }
+                Reference ref = reference;
+                if (ref.isStackReference()) {
+                    writeStackReference((StackReference) ref, writer);
+                }
+            }
 		}
 
 		iter = refManager.getReferenceSourceIterator(set, true);
 		while (iter.hasNext()) {
 			Reference[] refs = refManager.getReferencesFrom(iter.next());
-			for (int i = 0; i < refs.length; i++) {
-				if (monitor.isCancelled()) {
-					throw new CancelledException();
-				}
-				Reference ref = refs[i];
-				if (ref.isExternalReference()) {
-					writeExternalReference((ExternalReference) ref, writer);
-				}
-			}
+            for (Reference reference : refs) {
+                if (monitor.isCancelled()) {
+                    throw new CancelledException();
+                }
+                Reference ref = reference;
+                if (ref.isExternalReference()) {
+                    writeExternalReference((ExternalReference) ref, writer);
+                }
+            }
 		}
 
 		writeEquateReferences(writer, set, monitor);
@@ -600,21 +601,21 @@ class MarkupXmlMgr {
 			String name = equate.getName();
 			long value = equate.getValue();
 			EquateReference[] refs = equate.getReferences();
-			for (int i = 0; i < refs.length; i++) {
-				if (monitor.isCancelled()) {
-					return;
-				}
-				Address addr = refs[i].getAddress();
-				if (!set.contains(addr)) {
-					continue;
-				}
-				XmlAttributes attr = new XmlAttributes();
-				attr.addAttribute("ADDRESS", XmlProgramUtilities.toString(addr));
-				attr.addAttribute("OPERAND_INDEX", refs[i].getOpIndex(), true);
-				attr.addAttribute("NAME", name);
-				attr.addAttribute("VALUE", value, true);
-				writer.writeElement("EQUATE_REFERENCE", attr);
-			}
+            for (EquateReference ref : refs) {
+                if (monitor.isCancelled()) {
+                    return;
+                }
+                Address addr = ref.getAddress();
+                if (!set.contains(addr)) {
+                    continue;
+                }
+                XmlAttributes attr = new XmlAttributes();
+                attr.addAttribute("ADDRESS", XmlProgramUtilities.toString(addr));
+                attr.addAttribute("OPERAND_INDEX", ref.getOpIndex(), true);
+                attr.addAttribute("NAME", name);
+                attr.addAttribute("VALUE", value, true);
+                writer.writeElement("EQUATE_REFERENCE", attr);
+            }
 		}
 	}
 

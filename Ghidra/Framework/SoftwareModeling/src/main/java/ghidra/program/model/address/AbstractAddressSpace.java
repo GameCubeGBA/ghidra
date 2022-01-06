@@ -514,7 +514,7 @@ abstract class AbstractAddressSpace implements AddressSpace {
 		if (hashcode == space.hashCode() &&
 			// hashcode factors name and type
 			type == space.getType() && name.equals(space.getName()) &&
-			getClass().equals(space.getClass())) {
+				getClass() == space.getClass()) {
 // TODO: This could be bad - should really only be 0 if same instance - although this could have other implications
 // Does not seem to be good way of factoring ID-based ordering with equality
 			// This is not intended to handle complete mixing of address spaces

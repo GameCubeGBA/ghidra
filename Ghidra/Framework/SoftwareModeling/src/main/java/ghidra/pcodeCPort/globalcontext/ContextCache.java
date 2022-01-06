@@ -59,9 +59,7 @@ public class ContextCache {
             first = firstMutable.get();
             last = lastMutable.get();
         }
-        for ( int i = 0; i < database.getContextSize(); ++i ) {
-            buf[i] = context[i];
-        }
+        if (database.getContextSize() >= 0) System.arraycopy(context, 0, buf, 0, database.getContextSize());
     }
 
     public void setContext( Address addr, int num, int mask, int value ) {

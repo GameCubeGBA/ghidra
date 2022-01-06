@@ -104,12 +104,11 @@ public class PluginConfigurationModel {
 	 * @param plugins the list of all loaded plugins.
 	 */
 	private void findDependencies(Plugin plugin, List<Plugin> plugins) {
-		for (int i = 0; i < plugins.size(); i++) {
-			Plugin p = plugins.get(i);
-			if (p.dependsUpon(plugin)) {
-				pluginsWithDependenciesSet.add(getPluginDescription(plugin));
-			}
-		}
+        for (Plugin p : plugins) {
+            if (p.dependsUpon(plugin)) {
+                pluginsWithDependenciesSet.add(getPluginDescription(plugin));
+            }
+        }
 	}
 
 	private PluginDescription getPluginDescription(Plugin plugin) {
@@ -236,12 +235,11 @@ public class PluginConfigurationModel {
 		HashSet<PluginDescription> set = new HashSet<>();
 
 		// find out all plugins that depend on this plugin
-		for (int i = 0; i < plugins.size(); i++) {
-			Plugin p = plugins.get(i);
-			if (p.dependsUpon(plugin)) {
-				set.add(p.getPluginDescription());
-			}
-		}
+        for (Plugin p : plugins) {
+            if (p.dependsUpon(plugin)) {
+                set.add(p.getPluginDescription());
+            }
+        }
 		return new ArrayList<>(set);
 	}
 

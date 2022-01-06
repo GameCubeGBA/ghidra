@@ -113,9 +113,9 @@ public class LongIntHashtableTest extends AbstractGenericTest {
 
     public static void testContains(LongIntHashtable ht, long[] keys, String test) {
 
-        for(int i=0;i<keys.length;i++) {
-            if (!ht.contains(keys[i])) {
-                Assert.fail("hastable should contain key "+keys[i]+", but it doesn't");
+        for (long key : keys) {
+            if (!ht.contains(key)) {
+                Assert.fail("hastable should contain key " + key + ", but it doesn't");
             }
         }
 
@@ -129,8 +129,8 @@ public class LongIntHashtableTest extends AbstractGenericTest {
     }
 
     public static boolean contains(long[] keys, long key) {
-        for(int i=0;i<keys.length;i++) {
-            if (keys[i] == key) {
+        for (long l : keys) {
+            if (l == key) {
                 return true;
             }
         }

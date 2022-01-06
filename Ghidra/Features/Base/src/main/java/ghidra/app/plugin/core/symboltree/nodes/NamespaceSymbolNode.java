@@ -69,7 +69,7 @@ public class NamespaceSymbolNode extends SymbolNode {
 
 	private boolean isProgramSelection(DataFlavor flavor) {
 		Class<?> clazz = flavor.getRepresentationClass();
-		return SelectionTransferData.class.equals(clazz);
+		return SelectionTransferData.class == clazz;
 	}
 
 	@Override

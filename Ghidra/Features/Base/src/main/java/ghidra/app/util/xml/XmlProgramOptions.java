@@ -168,75 +168,76 @@ public class XmlProgramOptions {
 
 			boolean val = ((Boolean) optValue).booleanValue();
 
-			if (optName.equals("Memory Blocks")) {
-				setMemoryBlocks(val);
-			}
-			else if (optName.equals("Memory Contents")) {
-				setMemoryContents(val);
-			}
-			else if (optName.equals("Overwrite Memory Conflicts")) {
-				setOverwriteMemoryConflicts(val);
-			}
-			else if (optName.equals("Instructions")) {
-				setInstructions(val);
-			}
-			else if (optName.equals("Data")) {
-				setData(val);
-			}
-			else if (optName.equals("Overwrite Data Conflicts")) {
-				setOverwriteDataConflicts(val);
-			}
-			else if (optName.equals("Symbols")) {
-				setSymbols(val);
-			}
-			else if (optName.equals("Overwrite Symbol Conflicts")) {
-				setOverwriteSymbolConflicts(val);
-			}
-			else if (optName.equals("Equates")) {
-				setEquates(val);
-			}
-			else if (optName.equals("Comments")) {
-				setComments(val);
-			}
-			else if (optName.equals("Properties")) {
-				setProperties(val);
-			}
-			else if (optName.equals("Overwrite Property Conflicts")) {
-				setOverwritePropertyConflicts(val);
-			}
-			else if (optName.equals("Bookmarks")) {
-				setBookmarks(val);
-			}
-			else if (optName.equals("Overwrite Bookmark Conflicts")) {
-				setOverwriteBookmarkConflicts(val);
-			}
-			else if (optName.equals("Trees")) {
-				setTrees(val);
-			}
-			else if (optName.equals("References")) {
-				setReferences(val);
-			}
-			else if (optName.equals("Overwrite Reference Conflicts")) {
-				setOverwriteReferenceConflicts(val);
-			}
-			else if (optName.equals("Functions")) {
-				setFunctions(val);
-			}
-			else if (optName.equals("Registers")) {
-				setRegisters(val);
-			}
-			else if (optName.equals("Relocation Table")) {
-				setRelocationTable(val);
-			}
-			else if (optName.equals("Entry Points")) {
-				setEntryPoints(val);
-			}
-			else if (optName.equals("External Libraries")) {
-				setExternalLibraries(val);
-			}
-			else {
-				throw new OptionException("Unknown option: " + optName);
-			}
+            switch (optName) {
+                case "Memory Blocks":
+                    setMemoryBlocks(val);
+                    break;
+                case "Memory Contents":
+                    setMemoryContents(val);
+                    break;
+                case "Overwrite Memory Conflicts":
+                    setOverwriteMemoryConflicts(val);
+                    break;
+                case "Instructions":
+                    setInstructions(val);
+                    break;
+                case "Data":
+                    setData(val);
+                    break;
+                case "Overwrite Data Conflicts":
+                    setOverwriteDataConflicts(val);
+                    break;
+                case "Symbols":
+                    setSymbols(val);
+                    break;
+                case "Overwrite Symbol Conflicts":
+                    setOverwriteSymbolConflicts(val);
+                    break;
+                case "Equates":
+                    setEquates(val);
+                    break;
+                case "Comments":
+                    setComments(val);
+                    break;
+                case "Properties":
+                    setProperties(val);
+                    break;
+                case "Overwrite Property Conflicts":
+                    setOverwritePropertyConflicts(val);
+                    break;
+                case "Bookmarks":
+                    setBookmarks(val);
+                    break;
+                case "Overwrite Bookmark Conflicts":
+                    setOverwriteBookmarkConflicts(val);
+                    break;
+                case "Trees":
+                    setTrees(val);
+                    break;
+                case "References":
+                    setReferences(val);
+                    break;
+                case "Overwrite Reference Conflicts":
+                    setOverwriteReferenceConflicts(val);
+                    break;
+                case "Functions":
+                    setFunctions(val);
+                    break;
+                case "Registers":
+                    setRegisters(val);
+                    break;
+                case "Relocation Table":
+                    setRelocationTable(val);
+                    break;
+                case "Entry Points":
+                    setEntryPoints(val);
+                    break;
+                case "External Libraries":
+                    setExternalLibraries(val);
+                    break;
+                default:
+                    throw new OptionException("Unknown option: " + optName);
+            }
 		}
 	}
 

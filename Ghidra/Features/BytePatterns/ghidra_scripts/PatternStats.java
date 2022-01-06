@@ -118,11 +118,11 @@ public class PatternStats extends GhidraScript implements PatternFactory {
 			buf.append("<total>").append(totalHits).append("</total>\n  ");
 			buf.append("<falsecode>").append(falsePosWithCode).append("</falsecode>\n");
 			buf.append("<falsenocode>").append(falsePosNoCode).append("</falsenocode>\n");
-			for (int i = 0; i < exampleFalse.size(); ++i) {
-				buf.append("<example>");
-				buf.append(SpecXmlUtils.encodeUnsignedInteger(exampleFalse.get(i).longValue()));
-				buf.append("</example>\n");
-			}
+            for (Long aLong : exampleFalse) {
+                buf.append("<example>");
+                buf.append(SpecXmlUtils.encodeUnsignedInteger(aLong.longValue()));
+                buf.append("</example>\n");
+            }
 			buf.append("</accumulate>\n");
 		}
 
@@ -257,9 +257,9 @@ public class PatternStats extends GhidraScript implements PatternFactory {
 		}
 		root = SequenceSearchState.buildStateMachine(patternlist);
 		accumList = new ArrayList<>();
-		for (int i = 0; i < patternlist.size(); ++i) {
-			accumList.add(new PatternAccumulate(patternlist.get(i)));
-		}
+        for (Pattern pattern : patternlist) {
+            accumList.add(new PatternAccumulate(pattern));
+        }
 		MemoryBlock[] blocks = currentProgram.getMemory().getBlocks();
 		for (MemoryBlock block2 : blocks) {
 			MemoryBlock block = block2;
@@ -273,11 +273,11 @@ public class PatternStats extends GhidraScript implements PatternFactory {
 		}
 		FileWriter out = new FileWriter(resFile);
 		out.write("<accumlist>\n");
-		for (int i = 0; i < accumList.size(); ++i) {
-			StringBuffer buf = new StringBuffer();
-			accumList.get(i).saveXml(buf);
-			out.write(buf.toString());
-		}
+        for (PatternAccumulate patternAccumulate : accumList) {
+            StringBuffer buf = new StringBuffer();
+            patternAccumulate.saveXml(buf);
+            out.write(buf.toString());
+        }
 		out.write("</accumlist>\n");
 		out.close();
 	}
@@ -334,38 +334,35 @@ public class PatternStats extends GhidraScript implements PatternFactory {
 			return;
 		}
 		Address start = block.getStart();
-		for (int i = 0; i < mymatches.size(); ++i) {
-			Match match = mymatches.get(i);
-			Address addr = start.add(match.getMarkOffset());
-			if (!match.checkPostRules(streamoffset)) {
-				continue;
-			}
-			PatternAccumulate accum = accumList.get(match.getSequenceIndex());
-			MatchAction[] matchActions = match.getMatchActions();
-			for (MatchAction matchAction : matchActions) {
-				boolean isFalse = collectStats(accum, (MatchActionMarker) matchAction, addr);
-				if (isFalse) {
-					displayFalse(accum, addr);
-					accum.addExample(addr);
-				}
-			}
-		}
+        for (Match match : mymatches) {
+            Address addr = start.add(match.getMarkOffset());
+            if (!match.checkPostRules(streamoffset)) {
+                continue;
+            }
+            PatternAccumulate accum = accumList.get(match.getSequenceIndex());
+            MatchAction[] matchActions = match.getMatchActions();
+            for (MatchAction matchAction : matchActions) {
+                boolean isFalse = collectStats(accum, (MatchActionMarker) matchAction, addr);
+                if (isFalse) {
+                    displayFalse(accum, addr);
+                    accum.addExample(addr);
+                }
+            }
+        }
 	}
 
 	@Override
 	public MatchAction getMatchActionByName(String nm) {
-		if (nm.equals("funcstart")) {
-			return functionStart;
-		}
-		else if (nm.equals("possiblefuncstart")) {
-			return possibleFunctionStart;
-		}
-		else if (nm.equals("codeboundary")) {
-			return codeBoundary;
-		}
-		else if (nm.equals("setcontext")) {
-			return context;
-		}
+        switch (nm) {
+            case "funcstart":
+                return functionStart;
+            case "possiblefuncstart":
+                return possibleFunctionStart;
+            case "codeboundary":
+                return codeBoundary;
+            case "setcontext":
+                return context;
+        }
 		return null;
 	}
 

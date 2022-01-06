@@ -167,7 +167,7 @@ public abstract class RangeColumnConstraint<T> implements ColumnConstraint<T> {
 			return false;
 		}
 
-		if (!(getClass().equals(o.getClass()))) {
+		if (getClass() != o.getClass()) {
 			return false;
 		}
 

@@ -191,15 +191,17 @@ public class SettingsTest extends AbstractGhidraHeadedIntegrationTest {
 				EnumSettingsDefinition enumDef = (EnumSettingsDefinition) defs[i];
 				int value = enumDef.getChoice(data);
 				enumDef.setChoice(data, value);
-				if (i == 0) {
-					assertEquals(FormatSettingsDefinition.CHAR, data.getLong("format").longValue());
-				}
-				else if (i == 1) {
-					assertEquals(0, data.getLong("signed").longValue());
-				}
-				else if (i == 2) {
-					assertEquals(1, data.getLong("padded").longValue());
-				}
+                switch (i) {
+                    case 0:
+                        assertEquals(FormatSettingsDefinition.CHAR, data.getLong("format").longValue());
+                        break;
+                    case 1:
+                        assertEquals(0, data.getLong("signed").longValue());
+                        break;
+                    case 2:
+                        assertEquals(1, data.getLong("padded").longValue());
+                        break;
+                }
 
 			}
 		}

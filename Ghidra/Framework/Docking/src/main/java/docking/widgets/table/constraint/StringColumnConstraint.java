@@ -139,7 +139,7 @@ public abstract class StringColumnConstraint implements ColumnConstraint<String>
 			return false;
 		}
 
-		if (!(getClass().equals(o.getClass()))) {
+		if (getClass() != o.getClass()) {
 			return false;
 		}
 

@@ -435,8 +435,8 @@ class Mark implements Serializable {
         }
         if (obj instanceof Object[]) {
             Object[] objArray = (Object[])obj;
-            for(int i=0;i<objArray.length;i++) {
-                if (objArray[i].equals(testObj)) {
+            for (Object o : objArray) {
+                if (o.equals(testObj)) {
                     return true;
                 }
             }

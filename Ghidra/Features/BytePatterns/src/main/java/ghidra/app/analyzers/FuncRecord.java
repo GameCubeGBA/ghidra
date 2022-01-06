@@ -119,9 +119,7 @@ public class FuncRecord implements Comparable<FuncRecord> {
 						totalToHash[bytt] = (byte) ((this.hashValue >>> (8 * (7 - bytt))) % 256);
 					}
 					//Then put in the instruction bytes.
-					for (int index = 0; index < toHash.length; index++) {
-						totalToHash[8 + index] = toHash[index];
-					}
+                    System.arraycopy(toHash, 0, totalToHash, 8, toHash.length);
 
 					digest.reset();
 					digest.update(totalToHash, TaskMonitorAdapter.DUMMY_MONITOR);

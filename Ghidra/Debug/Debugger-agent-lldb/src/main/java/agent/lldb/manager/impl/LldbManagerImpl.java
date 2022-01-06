@@ -1042,7 +1042,7 @@ public class LldbManagerImpl implements LldbManager {
 
 		if (status.equals(DebugStatus.NO_DEBUGGEE)) {
 			waiting = false;
-			if (state.equals(StateType.eStateExited)) {
+			if (state == StateType.eStateExited) {
 				if (eventThread != null) {
 					processEvent(new LldbRunningEvent(DebugClient.getId(eventThread)));
 				}
@@ -1058,16 +1058,16 @@ public class LldbManagerImpl implements LldbManager {
 				processEvent(new LldbProcessSelectedEvent(process));
 				DebugProcessInfo info = evt.getInfo();
 				StopReason stopReason = eventThread.GetStopReason();
-				if (stopReason.equals(StopReason.eStopReasonThreadExiting)) {
+				if (stopReason == StopReason.eStopReasonThreadExiting) {
 					processEvent(new LldbThreadExitedEvent(0));
 				}
-				if (stopReason.equals(StopReason.eStopReasonBreakpoint)) {
+				if (stopReason == StopReason.eStopReasonBreakpoint) {
 					processEvent(new LldbBreakpointHitEvent(info));
 				}
-				if (stopReason.equals(StopReason.eStopReasonWatchpoint)) {
+				if (stopReason == StopReason.eStopReasonWatchpoint) {
 					processEvent(new LldbWatchpointHitEvent(info));
 				}
-				if (stopReason.equals(StopReason.eStopReasonException)) {
+				if (stopReason == StopReason.eStopReasonException) {
 					processEvent(new LldbExceptionEvent(info));
 				}
 			}

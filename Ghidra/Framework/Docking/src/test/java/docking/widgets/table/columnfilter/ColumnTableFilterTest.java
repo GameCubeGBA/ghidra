@@ -58,7 +58,7 @@ public class ColumnTableFilterTest {
 			public List<ColumnConstraint<?>> getColumnConstraints(Class<?> columnType) {
 				List<ColumnConstraint<?>> matches = new ArrayList<>();
 				for (ColumnConstraint<?> columnConstraint : allConstraints) {
-					if (columnConstraint.getColumnType().equals(columnType)) {
+					if (columnConstraint.getColumnType() == columnType) {
 						matches.add(columnConstraint);
 					}
 				}

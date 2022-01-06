@@ -151,19 +151,17 @@ public class FunctionComparisonModel {
 	public void removeFunction(Function function) {
 		List<FunctionComparison> comparisonsToRemove = new ArrayList<>();
 
-		Iterator<FunctionComparison> iter = comparisons.iterator();
-		while (iter.hasNext()) {
+        for (FunctionComparison fc : comparisons) {
 
-			// First remove any comparisons that have the function as its source
-			FunctionComparison fc = iter.next();
-			if (fc.getSource().equals(function)) {
-				comparisonsToRemove.add(fc);
-				continue;
-			}
+            // First remove any comparisons that have the function as its source
+            if (fc.getSource().equals(function)) {
+                comparisonsToRemove.add(fc);
+                continue;
+            }
 
-			// Now remove the function from the target list (if it's there)
-			fc.getTargets().remove(function);
-		}
+            // Now remove the function from the target list (if it's there)
+            fc.getTargets().remove(function);
+        }
 
 		comparisons.removeAll(comparisonsToRemove);
 
@@ -212,11 +210,9 @@ public class FunctionComparisonModel {
 	 */
 	public Set<Function> getTargetFunctions() {
 		Set<Function> items = new HashSet<>();
-		Iterator<FunctionComparison> iter = comparisons.iterator();
-		while (iter.hasNext()) {
-			FunctionComparison fc = iter.next();
-			items.addAll(fc.getTargets());
-		}
+        for (FunctionComparison fc : comparisons) {
+            items.addAll(fc.getTargets());
+        }
 
 		return items;
 	}
@@ -229,14 +225,12 @@ public class FunctionComparisonModel {
 	 */
 	public Set<Function> getTargetFunctions(Function source) {
 		Set<Function> items = new HashSet<>();
-		Iterator<FunctionComparison> iter = comparisons.iterator();
-		while (iter.hasNext()) {
-			FunctionComparison fc = iter.next();
-			if (!fc.getSource().equals(source)) {
-				continue;
-			}
-			items.addAll(fc.getTargets());
-		}
+        for (FunctionComparison fc : comparisons) {
+            if (!fc.getSource().equals(source)) {
+                continue;
+            }
+            items.addAll(fc.getTargets());
+        }
 
 		return items;
 	}

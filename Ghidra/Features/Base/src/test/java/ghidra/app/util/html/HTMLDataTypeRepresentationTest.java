@@ -347,7 +347,7 @@ public class HTMLDataTypeRepresentationTest extends AbstractGenericTest {
 		FunctionDefinitionDataType function = new FunctionDefinitionDataType("myFunction");
 		String nullName = null;
 		ParameterDefinition param1 = new ParameterDefinitionImpl(nullName, new ByteDataType(), "");
-		ParameterDefinition[] variables = new ParameterDefinition[] { param1 };
+		ParameterDefinition[] variables = { param1 };
 		function.setArguments(variables);
 		function.setReturnType(new VoidDataType());
 
@@ -1031,7 +1031,7 @@ public class HTMLDataTypeRepresentationTest extends AbstractGenericTest {
 		DWordDataType dword = new DWordDataType();
 		ParameterDefinition param2 = new ParameterDefinitionImpl("dword_1", dword, "");
 
-		ParameterDefinition[] variables = new ParameterDefinition[] { param1, param2 };
+		ParameterDefinition[] variables = { param1, param2 };
 		functionDataType.setArguments(variables);
 
 		functionDataType.setReturnType(new VoidDataType());
@@ -1050,7 +1050,7 @@ public class HTMLDataTypeRepresentationTest extends AbstractGenericTest {
 
 		ParameterDefinition param3 = new ParameterDefinitionImpl("dword_2", dword, "");
 
-		ParameterDefinition[] variables = new ParameterDefinition[] { param1, param2, param3 };
+		ParameterDefinition[] variables = { param1, param2, param3 };
 		functionDataType.setArguments(variables);
 
 		functionDataType.setReturnType(new VoidDataType());

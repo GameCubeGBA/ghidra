@@ -267,43 +267,42 @@ public class PropagateExternalParametersAnalyzer extends AbstractAnalyzer {
 		// use the 'results' to propagate param info to the local variables, data, and params of
 		// the calling function
 		Msg.trace(this, "Processing propagation results - count: " + results.size());
-		for (int i = 0; i < results.size(); i++) {
-			PushedParamInfo paramInfo = results.get(i);
-			Address paramAddress = paramInfo.getAddress();
-			Instruction instruction = listing.getInstructionAt(paramAddress);
+        for (PushedParamInfo paramInfo : results) {
+            Address paramAddress = paramInfo.getAddress();
+            Instruction instruction = listing.getInstructionAt(paramAddress);
 
-			// wait on applying data types - the microsoft analyzer does some of this
-			// see how much/well it does first
-			if (!instruction.getOperandRefType(0).isData()) {
-				continue;
-			}
+            // wait on applying data types - the microsoft analyzer does some of this
+            // see how much/well it does first
+            if (!instruction.getOperandRefType(0).isData()) {
+                continue;
+            }
 
-			int opType = instruction.getOperandType(0);
-			if (!isAddressReferenceOperand(opType)) {
-				continue;
-			}
+            int opType = instruction.getOperandType(0);
+            if (!isAddressReferenceOperand(opType)) {
+                continue;
+            }
 
-			Address referencedAddress = getReferencedAddress(paramAddress);
-			if (referencedAddress == null) {
-				continue;
-			}
+            Address referencedAddress = getReferencedAddress(paramAddress);
+            if (referencedAddress == null) {
+                continue;
+            }
 
-			String paramName = paramInfo.getName();
-			String symbolName = paramName + "_" + referencedAddress;
+            String paramName = paramInfo.getName();
+            String symbolName = paramName + "_" + referencedAddress;
 
-			addSymbol(symbolTable, referencedAddress, symbolName);
+            addSymbol(symbolTable, referencedAddress, symbolName);
 
-			String paramText = paramName + " parameter of " + paramInfo.getCalledFunctionName();
-			String newComment = paramText + "\n";
-			Msg.trace(this, "External Function Call at " + paramAddress + " : " + paramText +
-				" at " + referencedAddress);
+            String paramText = paramName + " parameter of " + paramInfo.getCalledFunctionName();
+            String newComment = paramText + "\n";
+            Msg.trace(this, "External Function Call at " + paramAddress + " : " + paramText +
+                    " at " + referencedAddress);
 
-			createComment(referencedAddress, newComment, paramInfo);
+            createComment(referencedAddress, newComment, paramInfo);
 
-			clearUndefinedDataType(referencedAddress, monitor);
+            clearUndefinedDataType(referencedAddress, monitor);
 
-			createData(paramInfo, referencedAddress);
-		}
+            createData(paramInfo, referencedAddress);
+        }
 
 		return true;
 	}

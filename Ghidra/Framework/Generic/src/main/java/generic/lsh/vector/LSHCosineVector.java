@@ -93,14 +93,14 @@ public class LSHCosineVector implements LSHVector {
 	private void calcLength() {
 		length = 0.0;
 		hashcount = 0;
-		for (int i = 0; i < hash.length; ++i) {
-			if (hash[i] == null) {
-				continue;
-			}
-			double coeff = hash[i].getCoeff();
-			length += coeff * coeff;
-			hashcount += hash[i].getTF();
-		}
+        for (HashEntry hashEntry : hash) {
+            if (hashEntry == null) {
+                continue;
+            }
+            double coeff = hashEntry.getCoeff();
+            length += coeff * coeff;
+            hashcount += hashEntry.getTF();
+        }
 		length = Math.sqrt(length);
 	}
 
@@ -119,12 +119,12 @@ public class LSHCosineVector implements LSHVector {
 		int idf;
 		int count = 1;
 		int sz = 1;
-		for (int i = 0; i < feature.length; ++i) {
-			if (feature[i] != lasthash) {
-				lasthash = feature[i];
-				sz += 1;
-			}
-		}
+        for (int j : feature) {
+            if (j != lasthash) {
+                lasthash = j;
+                sz += 1;
+            }
+        }
 		hash = new HashEntry[sz];
 		lasthash = feature[0];
 		sz = 0;
@@ -299,13 +299,12 @@ public class LSHCosineVector implements LSHVector {
 	}
 
 	private void writeOnlyList(ArrayList<HashEntry> only, StringBuilder buf) {
-		for (int i = 0; i < only.size(); ++i) {
-			HashEntry entry = only.get(i);
-			buf.append(Integer.toHexString(entry.getHash()));
-			buf.append(' ').append(entry.getTF());
-			buf.append(' ').append(entry.getCoeff());
-			buf.append('\n');
-		}
+        for (HashEntry entry : only) {
+            buf.append(Integer.toHexString(entry.getHash()));
+            buf.append(' ').append(entry.getTF());
+            buf.append(' ').append(entry.getCoeff());
+            buf.append('\n');
+        }
 	}
 
 	private void writeBothList(ArrayList<HashEntry> both, StringBuilder buf) {
@@ -489,9 +488,9 @@ public class LSHCosineVector implements LSHVector {
 		buf.append("<lshcosine>\n");
 		fwrite.append(buf.toString());
 		// The length is not stored as part of XML
-		for (int i = 0; i < hash.length; ++i) {
-			hash[i].saveXml(fwrite);
-		}
+        for (HashEntry hashEntry : hash) {
+            hashEntry.saveXml(fwrite);
+        }
 		fwrite.append("</lshcosine>\n");
 	}
 
@@ -541,19 +540,18 @@ public class LSHCosineVector implements LSHVector {
 	public long calcUniqueHash() {
 		int reg1 = 0x12CF93AB;
 		int reg2 = 0xEE39B2D6;
-		for (int i = 0; i < hash.length; ++i) {
-			HashEntry entry = hash[i];
-			int curtf = entry.getTF();
-			int curhash = entry.getHash();
-			int oldreg1 = reg1;
-			reg1 = SimpleCRC32.hashOneByte(reg1, curtf);
-			reg1 = SimpleCRC32.hashOneByte(reg1, curhash);
-			reg1 = SimpleCRC32.hashOneByte(reg1, (reg2 >>> 24));
-			reg2 = SimpleCRC32.hashOneByte(reg2, (oldreg1 >>> 24));
-			reg2 = SimpleCRC32.hashOneByte(reg2, (curhash >>> 8));
-			reg2 = SimpleCRC32.hashOneByte(reg2, (curhash >>> 16));
-			reg2 = SimpleCRC32.hashOneByte(reg2, (curhash >>> 24));
-		}
+        for (HashEntry entry : hash) {
+            int curtf = entry.getTF();
+            int curhash = entry.getHash();
+            int oldreg1 = reg1;
+            reg1 = SimpleCRC32.hashOneByte(reg1, curtf);
+            reg1 = SimpleCRC32.hashOneByte(reg1, curhash);
+            reg1 = SimpleCRC32.hashOneByte(reg1, (reg2 >>> 24));
+            reg2 = SimpleCRC32.hashOneByte(reg2, (oldreg1 >>> 24));
+            reg2 = SimpleCRC32.hashOneByte(reg2, (curhash >>> 8));
+            reg2 = SimpleCRC32.hashOneByte(reg2, (curhash >>> 16));
+            reg2 = SimpleCRC32.hashOneByte(reg2, (curhash >>> 24));
+        }
 		long res = reg1;
 		long res2 = reg2;
 		res2 <<= 32;// Make sure we don't sign extend, casting from int to long

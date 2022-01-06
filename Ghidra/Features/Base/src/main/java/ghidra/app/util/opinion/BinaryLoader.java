@@ -124,59 +124,58 @@ public class BinaryLoader extends AbstractProgramLoader {
 		for (Option option : options) {
 			String optName = option.getName();
 			try {
-				if (optName.equals(OPTION_NAME_BASE_ADDR)) {
-					// skip - handled above
-				}
-				else if (optName.equals(OPTION_NAME_FILE_OFFSET)) {
-					try {
-						fileOffset = parseLong(option);
-					}
-					catch (Exception e) {
-						fileOffset = -1;
-					}
-					if (fileOffset < 0 || fileOffset >= origFileLength) {
-						return "File Offset must be greater than 0 and less than file length " +
-							origFileLength + " (0x" + Long.toHexString(origFileLength) + ")";
-					}
-				}
-				else if (optName.equals(OPTION_NAME_LEN)) {
-					try {
-						length = parseLong(option);
-					}
-					catch (Exception e) {
-						length = -1;
-					}
-					if (length < 0 || length > origFileLength) {
-						return "Length must be greater than 0 and less than or equal to file length " +
-							origFileLength + " (0x" + Long.toHexString(origFileLength) + ")";
-					}
+                switch (optName) {
+                    case OPTION_NAME_BASE_ADDR:
+                        // skip - handled above
+                        break;
+                    case OPTION_NAME_FILE_OFFSET:
+                        try {
+                            fileOffset = parseLong(option);
+                        } catch (Exception e) {
+                            fileOffset = -1;
+                        }
+                        if (fileOffset < 0 || fileOffset >= origFileLength) {
+                            return "File Offset must be greater than 0 and less than file length " +
+                                    origFileLength + " (0x" + Long.toHexString(origFileLength) + ")";
+                        }
+                        break;
+                    case OPTION_NAME_LEN:
+                        try {
+                            length = parseLong(option);
+                        } catch (Exception e) {
+                            length = -1;
+                        }
+                        if (length < 0 || length > origFileLength) {
+                            return "Length must be greater than 0 and less than or equal to file length " +
+                                    origFileLength + " (0x" + Long.toHexString(origFileLength) + ")";
+                        }
 
-					long baseOffset = baseAddr.getOffset();
-					AddressSpace space = baseAddr.getAddressSpace();
-					long maxLength = Memory.MAX_BINARY_SIZE;
-					if (space.getSize() < 64) {
-						maxLength =
-							Math.min(maxLength, space.getMaxAddress().getOffset() + 1 - baseOffset);
-					}
-					else if (baseOffset < 0 && baseOffset > -Memory.MAX_BINARY_SIZE) {
-						maxLength = -baseAddr.getOffset();
-					}
-					if (length > maxLength) {
-						return "Length must not exceed maximum allowed size of " + maxLength +
-							" (0x" + Long.toHexString(maxLength) + ") bytes";
-					}
-				}
-				else if (optName.equals(OPTION_NAME_BLOCK_NAME)) {
-					if (!String.class.isAssignableFrom(option.getValueClass())) {
-						return OPTION_NAME_BLOCK_NAME + " must be a String";
-					}
-				}
-				else if (optName.equals(OPTION_NAME_IS_OVERLAY)) {
-					if (!Boolean.class.isAssignableFrom(option.getValueClass())) {
-						return OPTION_NAME_IS_OVERLAY + " must be a boolean";
-					}
-					isOverlay = (boolean) option.getValue();
-				}
+                        long baseOffset = baseAddr.getOffset();
+                        AddressSpace space = baseAddr.getAddressSpace();
+                        long maxLength = Memory.MAX_BINARY_SIZE;
+                        if (space.getSize() < 64) {
+                            maxLength =
+                                    Math.min(maxLength, space.getMaxAddress().getOffset() + 1 - baseOffset);
+                        } else if (baseOffset < 0 && baseOffset > -Memory.MAX_BINARY_SIZE) {
+                            maxLength = -baseAddr.getOffset();
+                        }
+                        if (length > maxLength) {
+                            return "Length must not exceed maximum allowed size of " + maxLength +
+                                    " (0x" + Long.toHexString(maxLength) + ") bytes";
+                        }
+                        break;
+                    case OPTION_NAME_BLOCK_NAME:
+                        if (!String.class.isAssignableFrom(option.getValueClass())) {
+                            return OPTION_NAME_BLOCK_NAME + " must be a String";
+                        }
+                        break;
+                    case OPTION_NAME_IS_OVERLAY:
+                        if (!Boolean.class.isAssignableFrom(option.getValueClass())) {
+                            return OPTION_NAME_IS_OVERLAY + " must be a boolean";
+                        }
+                        isOverlay = (boolean) option.getValue();
+                        break;
+                }
 			}
 			catch (Exception e) {
 				if (e instanceof OptionException) {

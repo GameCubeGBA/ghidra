@@ -204,13 +204,12 @@ class MaskGenerator {
 			return result;
 		}
 
-		for (int i = 0; i < ops.size(); i++) {
-			Map<MaskValue, OperandMaskValue> opMap = ops.get(i);
-			if (opMap != null) {
-				OperandMaskValue op = opMap.get(mnemonic);
-				addToMask(op, result);
-			}
-		}
+        for (Map<MaskValue, OperandMaskValue> opMap : ops) {
+            if (opMap != null) {
+                OperandMaskValue op = opMap.get(mnemonic);
+                addToMask(op, result);
+            }
+        }
 
 		return result;
 	}
@@ -282,17 +281,17 @@ class MaskGenerator {
 		List<byte[]> masks = new ArrayList<>();
 		List<byte[]> values = new ArrayList<>();
 		int totalLength = 0;
-		for (int i = 0; i < mnemonics.size(); i++) {
+        for (MaskValue mnemonic : mnemonics) {
 
-			MaskValue result = buildSingleInstructionMask(mnemonics.get(i));
-			byte[] mask = result.getMask();
-			byte[] value = result.getValue();
-			if (value.length == mask.length) {
-				masks.add(mask);
-				values.add(value);
-				totalLength += value.length;
-			}
-		}
+            MaskValue result = buildSingleInstructionMask(mnemonic);
+            byte[] mask = result.getMask();
+            byte[] value = result.getValue();
+            if (value.length == mask.length) {
+                masks.add(mask);
+                values.add(value);
+                totalLength += value.length;
+            }
+        }
 
 		return combineInstructionMasks(masks, values, totalLength);
 	}

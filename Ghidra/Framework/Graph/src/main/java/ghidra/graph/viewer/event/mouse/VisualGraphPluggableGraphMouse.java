@@ -75,17 +75,13 @@ public class VisualGraphPluggableGraphMouse<V extends VisualVertex, E extends Vi
 	 */
 	public void prepend(GraphMousePlugin p) {
 
-		if (mousePlugins.contains(p)) {
-			mousePlugins.remove(p);
-		}
+        mousePlugins.remove(p);
 
 		mousePlugins.add(0, p);
 	}
 
 	public void add(GraphMousePlugin p) {
-		if (mousePlugins.contains(p)) {
-			mousePlugins.remove(p);
-		}
+        mousePlugins.remove(p);
 
 		mousePlugins.add(p);
 	}

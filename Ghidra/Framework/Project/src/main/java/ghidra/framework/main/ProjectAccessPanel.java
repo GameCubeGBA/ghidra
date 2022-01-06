@@ -378,10 +378,10 @@ public class ProjectAccessPanel extends AbstractWizardJPanel {
 
 			List<String> users = new ArrayList<>();
 			int[] selectedRows = table.getSelectedRows();
-			for (int i = 0; i < selectedRows.length; i++) {
-				User user = tableModel.getRowObject(selectedRows[i]);
-				users.add(user.getName());
-			}
+            for (int selectedRow : selectedRows) {
+                User user = tableModel.getRowObject(selectedRow);
+                users.add(user.getName());
+            }
 
 			return users;
 		}

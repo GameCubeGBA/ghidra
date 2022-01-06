@@ -107,24 +107,23 @@ public class ByteTrieNode<T> implements ByteTrieNodeIfc<T> {
 	 */
 	public ByteTrieNode<T> getChild(byte value) {
 		value = transformByte(value);
-		if (children.length == 0) {
-			return null;
-		}
-		else if (children.length == 1) {
-			if (transformByte(children[0].getId()) == value) {
-				return children[0];
-			}
-			return null;
-		}
-		else if (children.length == 2) {
-			if (transformByte(children[0].getId()) == value) {
-				return children[0];
-			}
-			if (transformByte(children[1].getId()) == value) {
-				return children[1];
-			}
-			return null;
-		}
+        switch (children.length) {
+            case 0:
+                return null;
+            case 1:
+                if (transformByte(children[0].getId()) == value) {
+                    return children[0];
+                }
+                return null;
+            case 2:
+                if (transformByte(children[0].getId()) == value) {
+                    return children[0];
+                }
+                if (transformByte(children[1].getId()) == value) {
+                    return children[1];
+                }
+                return null;
+        }
 		int index = findIndex(value);
 		if (index >= children.length) {
 			return null;
@@ -167,13 +166,10 @@ public class ByteTrieNode<T> implements ByteTrieNodeIfc<T> {
 			return;
 		}
 		int newChildIndex = findIndex(value);
-		for (int ii = 0; ii < newChildIndex; ++ii) {
-			newChildren[ii] = children[ii];
-		}
+        if (newChildIndex >= 0) System.arraycopy(children, 0, newChildren, 0, newChildIndex);
 		newChildren[newChildIndex] = child;
-		for (int ii = newChildIndex + 1; ii < newChildren.length; ++ii) {
-			newChildren[ii] = children[ii - 1];
-		}
+        if (newChildren.length - (newChildIndex + 1) >= 0)
+            System.arraycopy(children, newChildIndex + 1 - 1, newChildren, newChildIndex + 1, newChildren.length - (newChildIndex + 1));
 		children = newChildren;
 	}
 

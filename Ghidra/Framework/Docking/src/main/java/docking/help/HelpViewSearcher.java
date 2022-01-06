@@ -276,7 +276,7 @@ class HelpViewSearcher {
 			}
 
 			int start = location.getStartIndexInclusive();
-			DefaultHighlight[] h = new DefaultHighlight[] {
+			DefaultHighlight[] h = {
 				new DefaultHighlight(start, location.getEndIndexInclusive()) };
 
 			// using setHighlights() instead of removeAll + add

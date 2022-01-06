@@ -118,7 +118,7 @@ public abstract class SingleValueColumnConstraint<T> implements ColumnConstraint
 			return false;
 		}
 
-		if (!(getClass().equals(o.getClass()))) {
+		if (getClass() != o.getClass()) {
 			return false;
 		}
 

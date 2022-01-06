@@ -1088,7 +1088,7 @@ public class DBCachedObjectStoreTest {
 			assertTrue(keySet.containsAll(List.of(0L, 1L)));
 			store.delete(obj);
 			assertFalse(keySet.containsAll(List.of(0L, 1L)));
-			assertTrue(keySet.containsAll(List.of(1L)));
+			assertTrue(keySet.contains(1L));
 		}
 	}
 
@@ -1626,7 +1626,7 @@ public class DBCachedObjectStoreTest {
 			assertTrue(values.containsAll(List.of(obj1, obj2)));
 			store.delete(obj1);
 			assertFalse(values.containsAll(List.of(obj1, obj2)));
-			assertTrue(values.containsAll(List.of(obj2)));
+			assertTrue(values.contains(obj2));
 		}
 	}
 
@@ -1992,7 +1992,7 @@ public class DBCachedObjectStoreTest {
 			assertTrue(entrySet.containsAll(List.of(ent0, ent1)));
 			store.deleteKey(0);
 			assertFalse(entrySet.containsAll(List.of(ent0, ent1)));
-			assertTrue(entrySet.containsAll(List.of(ent1)));
+			assertTrue(entrySet.contains(ent1));
 		}
 	}
 
@@ -2706,7 +2706,7 @@ public class DBCachedObjectStoreTest {
 
 		assertTrue(found5.containsAll(List.of()));
 		assertFalse(found5.containsAll(List.of(store.getObjectAt(1), "Wrong Type")));
-		assertTrue(found5.containsAll(List.of(store.getObjectAt(1))));
+		assertTrue(found5.contains(store.getObjectAt(1)));
 		assertFalse(found5.containsAll(List.of(store.getObjectAt(1), store.getObjectAt(0))));
 
 		final MyObject altObj1;
@@ -2716,6 +2716,6 @@ public class DBCachedObjectStoreTest {
 			altObj1 = altDomainObject.store.create(1);
 		}
 
-		assertFalse(found5.containsAll(List.of(altObj1)));
+		assertFalse(found5.contains(altObj1));
 	}
 }

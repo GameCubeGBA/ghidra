@@ -82,8 +82,8 @@ public class MaskImpl implements Mask, Serializable {
 			throw new IncompatibleMaskException();
 		for (int i = 0; i < mask.length; i++)
 			result[i] = (byte) (mask[i] & cde[i]);
-		for (int i = mask.length; i < cde.length; i++)
-			result[i] = cde[i];
+        if (cde.length - mask.length >= 0)
+            System.arraycopy(cde, mask.length, result, mask.length, cde.length - mask.length);
 		return result;
 	}
 
@@ -95,8 +95,7 @@ public class MaskImpl implements Mask, Serializable {
 		if ((cde.length - cdeOffset < mask.length) ||
 			(results.length - resultsOffset < mask.length))
 			throw new IncompatibleMaskException();
-		for (int i = 0; i < mask.length; i++)
-			results[resultsOffset++] = (byte) (mask[i] & cde[cdeOffset++]);
+        for (byte b : mask) results[resultsOffset++] = (byte) (b & cde[cdeOffset++]);
 	}
 
 	/**
@@ -180,13 +179,13 @@ public class MaskImpl implements Mask, Serializable {
 	public String toString() {
 		int b;
 		String s = "", t;
-		for (int i = 0; i < mask.length; i++) {
-			b = 0x0ff & mask[i];
-			t = Integer.toString(b, 16);
-			if (1 == t.length())
-				t = "0" + t;
-			s += t;
-		}
+        for (byte value : mask) {
+            b = 0x0ff & value;
+            t = Integer.toString(b, 16);
+            if (1 == t.length())
+                t = "0" + t;
+            s += t;
+        }
 		return s.toUpperCase();
 	}
 

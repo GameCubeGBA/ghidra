@@ -218,14 +218,20 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 					break;
 				case PcodeOp.BRANCH:
 					destType = res.lastop.getInput()[0].getOffset().getType();
-					if (destType == ConstTpl.J_NEXT)
-						flags = BRANCH_TO_END;
-					else if (destType == ConstTpl.J_START)
-						flags = NO_FALLTHRU;
-					else if (destType == ConstTpl.J_RELATIVE)
-						flags = NO_FALLTHRU;
-					else
-						flags = JUMPOUT | NO_FALLTHRU;
+                    switch (destType) {
+                        case ConstTpl.J_NEXT:
+                            flags = BRANCH_TO_END;
+                            break;
+                        case ConstTpl.J_START:
+                            flags = NO_FALLTHRU;
+                            break;
+                        case ConstTpl.J_RELATIVE:
+                            flags = NO_FALLTHRU;
+                            break;
+                        default:
+                            flags = JUMPOUT | NO_FALLTHRU;
+                            break;
+                    }
 					addExplicitFlow(walker.getState(), res.lastop, flags, res);
 					break;
 				case PcodeOp.CBRANCH:
@@ -858,27 +864,32 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 		if (opID == PcodeOp.CALL || opID == PcodeOp.BRANCH) {
 			return; // flow only
 		}
-		if (opID == PcodeOp.CBRANCH) {
-			++vi; // ignore flow address
-		}
-		else if (opID == PcodeOp.STORE) {
-			++vi; // ignore space ID
-		}
-		else if (opID == PcodeOp.LOAD) {
-			if (varNode[1].isConstant()) {
-				AddressSpace space =
-					language.getAddressFactory().getAddressSpace((int) varNode[0].getOffset());
-				if (space != null) {
-					Address inAddr = space.getAddress(varNode[1].getOffset());
-					// check that we didn't write to the location
-					if (!writtenObjects.contains(inAddr)) {
-						inputObjects.add(inAddr);
-					}
-					return;
-				}
-			}
-			++vi; // ignore space ID
-		}
+        switch (opID) {
+            case PcodeOp.CBRANCH:
+                ++vi; // ignore flow address
+
+                break;
+            case PcodeOp.STORE:
+                ++vi; // ignore space ID
+
+                break;
+            case PcodeOp.LOAD:
+                if (varNode[1].isConstant()) {
+                    AddressSpace space =
+                            language.getAddressFactory().getAddressSpace((int) varNode[0].getOffset());
+                    if (space != null) {
+                        Address inAddr = space.getAddress(varNode[1].getOffset());
+                        // check that we didn't write to the location
+                        if (!writtenObjects.contains(inAddr)) {
+                            inputObjects.add(inAddr);
+                        }
+                        return;
+                    }
+                }
+                ++vi; // ignore space ID
+
+                break;
+        }
 		for (; vi < varNode.length; vi++) {
 			Varnode node = varNode[vi];
 			Object obj = getVarnodeObject(node);
@@ -1459,55 +1470,54 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 			return false;
 		}
 		int type = handle.space.getType();
-		if (type == AddressSpace.TYPE_REGISTER) {
-			Register reg;
-			reg = language.getRegister(handle.space, handle.offset_offset, handle.size);
-			if (reg == null) {
-				list.add("<BAD_register_" + handle.offset_offset + ":" + handle.size + ">");
-			}
-			else {
-				list.add(reg);
-			}
-			return true;
-		}
-		else if (type == AddressSpace.TYPE_CONSTANT) {
-			Scalar sc;
-			int size = handle.size;
-			if (size == 0) {
-				size = handle.offset_size;
-				if (size == 0) {
-					size = language.getDefaultSpace().getPointerSize();
-				}
-			}
-			boolean signed = handle.offset_offset < 0;
-			sc = new Scalar(size * 8, handle.offset_offset, signed);
-			list.add(sc);
-			return true;
-		}
-		else if (type == AddressSpace.TYPE_RAM) {
-			if (handle.offset_space == null) {
-				Address addr = getHandleAddr(handle, curSpace);
-				if (addr != null) {
-					if (addr.getAddressSpace().hasMappedRegisters()) {
-						Register reg = language.getRegister(addr, handle.size);
-						if (reg != null) {
-							list.add(reg);
-							return true;
-						}
-					}
-					list.add(addr);
-					return true;
-				}
-			}
-			// could be simply taking the value of a register as an address
-			else if (handle.offset_space.getType() == AddressSpace.TYPE_REGISTER) {
-				Register reg = language.getRegister(handle.offset_space, handle.offset_offset,
-					handle.offset_size);
-				list.add(reg);
-				return true;
-			}
+        switch (type) {
+            case AddressSpace.TYPE_REGISTER:
+                Register reg;
+                reg = language.getRegister(handle.space, handle.offset_offset, handle.size);
+                if (reg == null) {
+                    list.add("<BAD_register_" + handle.offset_offset + ":" + handle.size + ">");
+                } else {
+                    list.add(reg);
+                }
+                return true;
+            case AddressSpace.TYPE_CONSTANT:
+                Scalar sc;
+                int size = handle.size;
+                if (size == 0) {
+                    size = handle.offset_size;
+                    if (size == 0) {
+                        size = language.getDefaultSpace().getPointerSize();
+                    }
+                }
+                boolean signed = handle.offset_offset < 0;
+                sc = new Scalar(size * 8, handle.offset_offset, signed);
+                list.add(sc);
+                return true;
+            case AddressSpace.TYPE_RAM:
+                if (handle.offset_space == null) {
+                    Address addr = getHandleAddr(handle, curSpace);
+                    if (addr != null) {
+                        if (addr.getAddressSpace().hasMappedRegisters()) {
+                            Register reg = language.getRegister(addr, handle.size);
+                            if (reg != null) {
+                                list.add(reg);
+                                return true;
+                            }
+                        }
+                        list.add(addr);
+                        return true;
+                    }
+                }
+                // could be simply taking the value of a register as an address
+                else if (handle.offset_space.getType() == AddressSpace.TYPE_REGISTER) {
+                    Register reg = language.getRegister(handle.offset_space, handle.offset_offset,
+                            handle.offset_size);
+                    list.add(reg);
+                    return true;
+                }
 
-		}
+                break;
+        }
 		return false;
 	}
 

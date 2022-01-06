@@ -1720,7 +1720,7 @@ public class HeadlessAnalyzer {
 
 			String[] names = dirFile.list();
 			if (names != null) {
-				Collections.sort(Arrays.asList(names));
+				Arrays.sort(names);
 				for (String name : names) {
 					if (name.charAt(0) == '.') {
 						Msg.warn(this, "Ignoring file '" + name + "'.");

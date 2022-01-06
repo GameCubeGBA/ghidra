@@ -832,7 +832,7 @@ public class CopyPasteCommentsTest extends AbstractProgramBasedTest {
 		Set<?> keySet = serviceMap.keySet();
 		for (Object name : keySet) {
 			ClipboardContentProviderService service = (ClipboardContentProviderService) name;
-			if (service.getClass().equals(CodeBrowserClipboardProvider.class)) {
+			if (service.getClass() == CodeBrowserClipboardProvider.class) {
 				return service;
 			}
 		}

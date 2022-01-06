@@ -1369,12 +1369,11 @@ abstract class AbstractFunctionMerger implements ListingMergeConstants {
 
 	protected void mergeParamInfo(Address entryPt, List<ParamInfoConflict> paramInfoConflicts,
 			int chosenConflictOption, TaskMonitor monitor) throws CancelledException {
-		Iterator<ParamInfoConflict> iter = paramInfoConflicts.iterator();
-		while (iter.hasNext()) {
-			monitor.checkCanceled();
-			ParamInfoConflict pc = iter.next();
-			mergeParamInfo(entryPt, pc, chosenConflictOption, monitor);
-		}
+        for (ParamInfoConflict paramInfoConflict : paramInfoConflicts) {
+            monitor.checkCanceled();
+            ParamInfoConflict pc = paramInfoConflict;
+            mergeParamInfo(entryPt, pc, chosenConflictOption, monitor);
+        }
 	}
 
 	protected void mergeParamInfo(Address entryPt, ParamInfoConflict pc, int chosenConflictOption,
@@ -1401,12 +1400,11 @@ abstract class AbstractFunctionMerger implements ListingMergeConstants {
 	protected void mergeParamInfo(Function[] functions, List<ParamInfoConflict> paramInfoConflicts,
 			int chosenConflictOption, TaskMonitor monitor) throws CancelledException {
 
-		Iterator<ParamInfoConflict> iter = paramInfoConflicts.iterator();
-		while (iter.hasNext()) {
-			monitor.checkCanceled();
-			ParamInfoConflict pc = iter.next();
-			mergeParamInfo(functions, pc, chosenConflictOption, monitor);
-		}
+        for (ParamInfoConflict paramInfoConflict : paramInfoConflicts) {
+            monitor.checkCanceled();
+            ParamInfoConflict pc = paramInfoConflict;
+            mergeParamInfo(functions, pc, chosenConflictOption, monitor);
+        }
 	}
 
 	protected void mergeParamInfo(Function[] functions, ParamInfoConflict pc,
@@ -1432,12 +1430,11 @@ abstract class AbstractFunctionMerger implements ListingMergeConstants {
 
 	protected void mergeLocals(Address entryPt, List<LocalVariableConflict> localVarConflicts,
 			int chosenConflictOption, TaskMonitor monitor) throws CancelledException {
-		Iterator<LocalVariableConflict> iter = localVarConflicts.iterator();
-		while (iter.hasNext()) {
-			monitor.checkCanceled();
-			LocalVariableConflict lvc = iter.next();
-			mergeLocal(entryPt, lvc, chosenConflictOption, monitor);
-		}
+        for (LocalVariableConflict localVarConflict : localVarConflicts) {
+            monitor.checkCanceled();
+            LocalVariableConflict lvc = localVarConflict;
+            mergeLocal(entryPt, lvc, chosenConflictOption, monitor);
+        }
 	}
 
 	protected void mergeLocal(Address entryPt, LocalVariableConflict localVarConflict,

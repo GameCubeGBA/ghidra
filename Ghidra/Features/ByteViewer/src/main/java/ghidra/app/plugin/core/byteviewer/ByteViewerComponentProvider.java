@@ -168,27 +168,29 @@ public abstract class ByteViewerComponentProvider extends ComponentProviderAdapt
 			Object newValue) {
 		if (options.getName().equals("ByteViewer")) {
 
-			if (optionName.equals(OPTION_CURRENT_VIEW_CURSOR_COLOR)) {
-				panel.setCurrentCursorColor((Color) newValue);
-			}
-			else if (optionName.equals(OPTION_CURSOR_COLOR)) {
-				panel.setCursorColor((Color) newValue);
-			}
-			else if (optionName.equals(OPTION_CURRENT_LINE_COLOR)) {
-				panel.setCurrentCursorLineColor((Color) newValue);
-			}
-			else if (optionName.equals(OPTION_EDIT_COLOR)) {
-				panel.setEditColor((Color) newValue);
-			}
-			else if (optionName.equals(OPTION_SEPARATOR_COLOR)) {
-				panel.setSeparatorColor((Color) newValue);
-			}
-			else if (optionName.equals(OPTION_NONFOCUS_CURSOR_COLOR)) {
-				panel.setNonFocusCursorColor((Color) newValue);
-			}
-			else if (optionName.equals(OPTION_FONT)) {
-				setFont(SystemUtilities.adjustForFontSizeOverride((Font) newValue));
-			}
+            switch (optionName) {
+                case OPTION_CURRENT_VIEW_CURSOR_COLOR:
+                    panel.setCurrentCursorColor((Color) newValue);
+                    break;
+                case OPTION_CURSOR_COLOR:
+                    panel.setCursorColor((Color) newValue);
+                    break;
+                case OPTION_CURRENT_LINE_COLOR:
+                    panel.setCurrentCursorLineColor((Color) newValue);
+                    break;
+                case OPTION_EDIT_COLOR:
+                    panel.setEditColor((Color) newValue);
+                    break;
+                case OPTION_SEPARATOR_COLOR:
+                    panel.setSeparatorColor((Color) newValue);
+                    break;
+                case OPTION_NONFOCUS_CURSOR_COLOR:
+                    panel.setNonFocusCursorColor((Color) newValue);
+                    break;
+                case OPTION_FONT:
+                    setFont(SystemUtilities.adjustForFontSizeOverride((Font) newValue));
+                    break;
+            }
 		}
 		else if (options.getName().equals(CATEGORY_BROWSER_FIELDS)) {
 			if (optionName.equals(CURSOR_HIGHLIGHT_BUTTON_NAME)) {

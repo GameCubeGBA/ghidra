@@ -107,24 +107,26 @@ public class XmlUtils {
 	public static void xml_escape( PrintStream s, String str ) { 
 		for ( int i = 0; i < str.length(); i++ ) {
 			char c = str.charAt( i );
-			if ( c == '<' ) {
-				s.append( "&lt;" );
-			}
-            else if ( c == '>' ) {
-                s.append( "&gt;" );
+            switch (c) {
+                case '<':
+                    s.append("&lt;");
+                    break;
+                case '>':
+                    s.append("&gt;");
+                    break;
+                case '"':
+                    s.append("&quot;");
+                    break;
+                case '\'':
+                    s.append("&apos;");
+                    break;
+                case '&':
+                    s.append("&amp;");
+                    break;
+                default:
+                    s.append(c);
+                    break;
             }
-            else if ( c == '"' ) {
-                s.append( "&quot;" );
-            }
-            else if ( c == '\'' ) {
-                s.append( "&apos;" );
-            }
-            else if ( c == '&' ) {
-                s.append( "&amp;" );
-            }
-			else {
-				s.append( c );
-			}
 		}
 	}
 }

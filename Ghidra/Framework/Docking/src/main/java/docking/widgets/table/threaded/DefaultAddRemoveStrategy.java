@@ -82,12 +82,11 @@ public class DefaultAddRemoveStrategy<T> implements TableAddRemoveStrategy<T> {
 			TableSortingContext<T> sortContext) {
 
 		List<T> newList = new ArrayList<>(data.size() - toRemove.size());
-		for (int i = 0; i < data.size(); i++) {
-			T rowObject = data.get(i);
-			if (!toRemove.contains(rowObject)) {
-				newList.add(rowObject);
-			}
-		}
+        for (T rowObject : data) {
+            if (!toRemove.contains(rowObject)) {
+                newList.add(rowObject);
+            }
+        }
 
 		return newList;
 	}

@@ -126,9 +126,9 @@ public class MultiTabPanel extends JPanel {
 		currentProgram = null;
 		ArrayList<Program> list = new ArrayList<>(linkedProgramMap.keySet());
 
-		for (int i = 0; i < list.size(); i++) {
-			doRemoveProgram(list.get(i));
-		}
+        for (Program program : list) {
+            doRemoveProgram(program);
+        }
 		linkedProgramMap.clear();
 		visibleTabList.clear();
 		hiddenTabList.clear();

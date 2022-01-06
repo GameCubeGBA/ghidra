@@ -224,17 +224,15 @@ public abstract class LanguageTranslatorAdapter implements LanguageTranslator {
 	protected static AddressSpace findSpaceSameName(AddressSpace oldSpace,
 			ArrayList<AddressSpace> newSpaces) throws IncompatibleLanguageException {
 
-		Iterator<AddressSpace> it = newSpaces.iterator();
-		while (it.hasNext()) {
-			AddressSpace space = it.next();
-			if (space.getName().equals(oldSpace.getName())) {
-				if (oldSpace.getSize() > space.getSize()) {
-					throw new IncompatibleLanguageException("Old language space (" +
-						oldSpace.getName() + ") has larger address space than the new language");
-				}
-				return space;
-			}
-		}
+        for (AddressSpace space : newSpaces) {
+            if (space.getName().equals(oldSpace.getName())) {
+                if (oldSpace.getSize() > space.getSize()) {
+                    throw new IncompatibleLanguageException("Old language space (" +
+                            oldSpace.getName() + ") has larger address space than the new language");
+                }
+                return space;
+            }
+        }
 		return null;
 	}
 

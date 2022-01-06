@@ -94,12 +94,11 @@ class ClassPackage extends ClassLocation {
 
 		set.addAll(classes);
 
-		Iterator<ClassPackage> it = children.iterator();
-		while (it.hasNext()) {
-			monitor.checkCanceled();
-			ClassPackage subPkg = it.next();
-			subPkg.getClasses(set, monitor);
-		}
+        for (ClassPackage child : children) {
+            monitor.checkCanceled();
+            ClassPackage subPkg = child;
+            subPkg.getClasses(set, monitor);
+        }
 	}
 
 	private Set<String> getAllClassNames() {

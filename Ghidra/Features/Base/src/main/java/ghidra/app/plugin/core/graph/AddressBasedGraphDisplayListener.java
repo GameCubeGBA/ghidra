@@ -205,15 +205,17 @@ public abstract class AddressBasedGraphDisplayListener
 				ProgramChangeRecord programRecord = (ProgramChangeRecord) record;
 				Address address = programRecord.getStart();
 
-				if (record.getEventType() == ChangeManager.DOCR_SYMBOL_RENAMED) {
-					handleSymbolAddedOrRenamed(address, (Symbol) programRecord.getObject());
-				}
-				else if (record.getEventType() == ChangeManager.DOCR_SYMBOL_ADDED) {
-					handleSymbolAddedOrRenamed(address, (Symbol) programRecord.getNewValue());
-				}
-				else if (record.getEventType() == ChangeManager.DOCR_SYMBOL_REMOVED) {
-					handleSymbolRemoved(address);
-				}
+                switch (record.getEventType()) {
+                    case ChangeManager.DOCR_SYMBOL_RENAMED:
+                        handleSymbolAddedOrRenamed(address, (Symbol) programRecord.getObject());
+                        break;
+                    case ChangeManager.DOCR_SYMBOL_ADDED:
+                        handleSymbolAddedOrRenamed(address, (Symbol) programRecord.getNewValue());
+                        break;
+                    case ChangeManager.DOCR_SYMBOL_REMOVED:
+                        handleSymbolRemoved(address);
+                        break;
+                }
 			}
 		}
 	}

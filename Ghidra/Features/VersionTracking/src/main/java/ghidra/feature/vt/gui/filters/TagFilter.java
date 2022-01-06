@@ -282,7 +282,7 @@ public class TagFilter extends AncillaryFilter<VTMatch> {
 
 		Class<?> clazz = getClass();
 		Class<?> otherClazz = otherFilter.getClass();
-		if (!clazz.equals(otherClazz)) {
+		if (clazz != otherClazz) {
 			return false; // must be the same class
 		}
 

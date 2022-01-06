@@ -125,21 +125,25 @@ public final class NSObjectParser {
 				int length = parseLength( reader, objectInfo );
 				NSArray array = new NSArray( trailer.getObjectRefSize( ) );
 				for ( int i = 0 ; i < length ; ++i ) {
-					if ( trailer.getObjectRefSize( ) == 1 ) {
-						int value = reader.readNextByte( ) & 0xff;
-						array.add( value );
-					}
-					else if ( trailer.getObjectRefSize( ) == 2 ) {
-						int value = reader.readNextShort( ) & 0xffff;
-						array.add( value );
-					}
-					else if ( trailer.getObjectRefSize( ) == 4 ) {
-						int value = reader.readNextInt( );
-						array.add( value );
-					}
-					else {
-						throw new RuntimeException( "Invalid offset size in binary PList" );
-					}
+                    switch (trailer.getObjectRefSize()) {
+                        case 1: {
+                            int value = reader.readNextByte() & 0xff;
+                            array.add(value);
+                            break;
+                        }
+                        case 2: {
+                            int value = reader.readNextShort() & 0xffff;
+                            array.add(value);
+                            break;
+                        }
+                        case 4: {
+                            int value = reader.readNextInt();
+                            array.add(value);
+                            break;
+                        }
+                        default:
+                            throw new RuntimeException("Invalid offset size in binary PList");
+                    }
 				}
 				return array;
 			}
@@ -147,21 +151,25 @@ public final class NSObjectParser {
 				int length = parseLength( reader, objectInfo );
 				NSSet set = new NSSet( true, trailer.getObjectRefSize( ) );
 				for ( int i = 0 ; i < length ; i++ ) {
-					if ( trailer.getObjectRefSize( ) == 1 ) {
-						int value = reader.readNextByte( ) & 0xff;
-						set.add( value );
-					}
-					else if ( trailer.getObjectRefSize( ) == 2 ) {
-						int value = reader.readNextShort( ) & 0xffff;
-						set.add( value );
-					}
-					else if ( trailer.getObjectRefSize( ) == 4 ) {
-						int value = reader.readNextInt( );
-						set.add( value );
-					}
-					else {
-						throw new RuntimeException( "Invalid offset size in binary PList" );
-					}
+                    switch (trailer.getObjectRefSize()) {
+                        case 1: {
+                            int value = reader.readNextByte() & 0xff;
+                            set.add(value);
+                            break;
+                        }
+                        case 2: {
+                            int value = reader.readNextShort() & 0xffff;
+                            set.add(value);
+                            break;
+                        }
+                        case 4: {
+                            int value = reader.readNextInt();
+                            set.add(value);
+                            break;
+                        }
+                        default:
+                            throw new RuntimeException("Invalid offset size in binary PList");
+                    }
 				}
 				return set;
 			}
@@ -169,21 +177,25 @@ public final class NSObjectParser {
 				int length = parseLength( reader, objectInfo );
 				NSSet set = new NSSet( false, trailer.getObjectRefSize( ) );
 				for ( int i = 0 ; i < length ; i++ ) {
-					if ( trailer.getObjectRefSize( ) == 1 ) {
-						int value = reader.readNextByte( ) & 0xff;
-						set.add( value );
-					}
-					else if ( trailer.getObjectRefSize( ) == 2 ) {
-						int value = reader.readNextShort( ) & 0xffff;
-						set.add( value );
-					}
-					else if ( trailer.getObjectRefSize( ) == 4 ) {
-						int value = reader.readNextInt( );
-						set.add( value );
-					}
-					else {
-						throw new RuntimeException( "Invalid offset size in binary PList" );
-					}
+                    switch (trailer.getObjectRefSize()) {
+                        case 1: {
+                            int value = reader.readNextByte() & 0xff;
+                            set.add(value);
+                            break;
+                        }
+                        case 2: {
+                            int value = reader.readNextShort() & 0xffff;
+                            set.add(value);
+                            break;
+                        }
+                        case 4: {
+                            int value = reader.readNextInt();
+                            set.add(value);
+                            break;
+                        }
+                        default:
+                            throw new RuntimeException("Invalid offset size in binary PList");
+                    }
 				}
 				return set;
 			}
@@ -191,24 +203,28 @@ public final class NSObjectParser {
 				int length = parseLength( reader, objectInfo );
 				NSDictionary dictionary = new NSDictionary( trailer.getObjectRefSize( ) );
 				for ( int i = 0 ; i < length ; ++i ) {
-					if ( trailer.getObjectRefSize( ) == 1 ) {
-						int key = reader.readNextByte( ) & 0xff;
-						int value = reader.readNextByte( ) & 0xff;
-						dictionary.put( key, value );
-					}
-					else if ( trailer.getObjectRefSize( ) == 2 ) {
-						int key = reader.readNextShort( ) & 0xffff;
-						int value = reader.readNextShort( ) & 0xffff;
-						dictionary.put( key, value );
-					}
-					else if ( trailer.getObjectRefSize( ) == 4 ) {
-						int key = reader.readNextInt( );
-						int value = reader.readNextInt( );
-						dictionary.put( key, value );
-					}
-					else {
-						throw new RuntimeException( "Invalid offset size in binary PList" );
-					}
+                    switch (trailer.getObjectRefSize()) {
+                        case 1: {
+                            int key = reader.readNextByte() & 0xff;
+                            int value = reader.readNextByte() & 0xff;
+                            dictionary.put(key, value);
+                            break;
+                        }
+                        case 2: {
+                            int key = reader.readNextShort() & 0xffff;
+                            int value = reader.readNextShort() & 0xffff;
+                            dictionary.put(key, value);
+                            break;
+                        }
+                        case 4: {
+                            int key = reader.readNextInt();
+                            int value = reader.readNextInt();
+                            dictionary.put(key, value);
+                            break;
+                        }
+                        default:
+                            throw new RuntimeException("Invalid offset size in binary PList");
+                    }
 				}
 				return dictionary;
 			}

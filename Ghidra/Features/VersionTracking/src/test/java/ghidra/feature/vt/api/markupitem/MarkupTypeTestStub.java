@@ -39,7 +39,7 @@ public class MarkupTypeTestStub extends VTMarkupType {
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<VTMarkupItem> createMarkupItems(VTAssociation association) {
-		return Collections.EMPTY_LIST;
+		return Collections.emptyList();
 
 	}
 

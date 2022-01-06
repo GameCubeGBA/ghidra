@@ -40,7 +40,7 @@ public class ImageManagerTest extends AbstractGenericTest {
 		Set<String> failedIcons = new HashSet<>();
 		for (Field field : ImageManager.class.getDeclaredFields()) {
 			if (Modifier.isStatic(field.getModifiers()) &&
-					field.getType().equals(ImageIcon.class)) {
+                    field.getType() == ImageIcon.class) {
 				Object fieldValue = field.get(null);
 				if (fieldValue == null || fieldValue == defaultIcon) {
 					failedIcons.add(field.getName());

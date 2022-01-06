@@ -188,7 +188,7 @@ public abstract class AbstractOptions implements Options {
 		}
 		Object optionValue = option.getValue(null);
 		return optionValue == null || defaultValue == null ||
-			optionValue.getClass().equals(defaultValue.getClass());
+                optionValue.getClass() == defaultValue.getClass();
 	}
 
 	@Override

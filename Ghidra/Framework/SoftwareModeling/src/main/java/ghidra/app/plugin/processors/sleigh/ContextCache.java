@@ -52,9 +52,7 @@ public class ContextCache {
 		}
 		BigInteger contextValue = contextRegValue.getUnsignedValueIgnoreMask();
 		int[] words = getWords(contextValue);
-		for (int i = 0; i < buf.length; i++) {
-			buf[i] = words[i];
-		}
+        System.arraycopy(words, 0, buf, 0, buf.length);
 	}
 
 	private synchronized int[] getWords(BigInteger value) {

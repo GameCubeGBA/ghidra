@@ -110,38 +110,38 @@ abstract class BookmarkDBAdapter {
 		BookmarkDBAdapter tmpAdapter = null;
 		try {
 			tmpAdapter = new BookmarkDBAdapterV3(tmpHandle, true, typeIds, addrMap);
-			for (int i = 0; i < typeIds.length; i++) {
-				RecordIterator it = oldAdapter.getRecordsByType(typeIds[i]);
-				while (it.hasNext()) {
-					if (monitor.isCancelled()) {
-						throw new IOException("Upgrade Cancelled");
-					}
-					DBRecord rec = it.next();
-					int typeId = getTypeId(rec);
-					tmpAdapter.addType(typeId);
-					Address addr = oldAddrMap.decodeAddress(rec.getLongValue(ADDRESS_COL));
-					tmpAdapter.createBookmark(typeId, rec.getString(CATEGORY_COL),
-						addrMap.getKey(addr, true), rec.getString(COMMENT_COL));
-					monitor.setProgress(++cnt);
-				}
-			}
+            for (int k : typeIds) {
+                RecordIterator it = oldAdapter.getRecordsByType(k);
+                while (it.hasNext()) {
+                    if (monitor.isCancelled()) {
+                        throw new IOException("Upgrade Cancelled");
+                    }
+                    DBRecord rec = it.next();
+                    int typeId = getTypeId(rec);
+                    tmpAdapter.addType(typeId);
+                    Address addr = oldAddrMap.decodeAddress(rec.getLongValue(ADDRESS_COL));
+                    tmpAdapter.createBookmark(typeId, rec.getString(CATEGORY_COL),
+                            addrMap.getKey(addr, true), rec.getString(COMMENT_COL));
+                    monitor.setProgress(++cnt);
+                }
+            }
 			dbHandle.deleteTable(BOOKMARK_TABLE_NAME);
-			for (int i = 0; i < typeIds.length; i++) {
-				dbHandle.deleteTable(BOOKMARK_TABLE_NAME + typeIds[i]);
-			}
+            for (int j : typeIds) {
+                dbHandle.deleteTable(BOOKMARK_TABLE_NAME + j);
+            }
 			BookmarkDBAdapter newAdapter =
 				new BookmarkDBAdapterV3(dbHandle, true, typeIds, addrMap);
-			for (int i = 0; i < typeIds.length; i++) {
-				RecordIterator it = tmpAdapter.getRecordsByType(typeIds[i]);
-				while (it.hasNext()) {
-					if (monitor.isCancelled()) {
-						throw new IOException("Upgrade Cancelled");
-					}
-					DBRecord rec = it.next();
-					newAdapter.updateRecord(rec);
-					monitor.setProgress(++cnt);
-				}
-			}
+            for (int typeId : typeIds) {
+                RecordIterator it = tmpAdapter.getRecordsByType(typeId);
+                while (it.hasNext()) {
+                    if (monitor.isCancelled()) {
+                        throw new IOException("Upgrade Cancelled");
+                    }
+                    DBRecord rec = it.next();
+                    newAdapter.updateRecord(rec);
+                    monitor.setProgress(++cnt);
+                }
+            }
 			return newAdapter;
 		}
 		finally {

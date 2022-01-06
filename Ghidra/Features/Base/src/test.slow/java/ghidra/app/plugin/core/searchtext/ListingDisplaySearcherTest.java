@@ -816,14 +816,14 @@ public class ListingDisplaySearcherTest extends AbstractGhidraHeadedIntegrationT
 
 	private void checkTextFound(ArrayList<Address> startList, Class<?> fieldClass) {
 
-		for (int i = 0; i < startList.size(); i++) {
-			ProgramLocation loc = searcher.next();
-			assertNotNull(loc);
-			Address start = startList.get(i);
+        for (Address address : startList) {
+            ProgramLocation loc = searcher.next();
+            assertNotNull(loc);
+            Address start = address;
 
-			assertTrue(fieldClass.isAssignableFrom(loc.getClass()));
-			assertEquals(start, loc.getAddress());
-		}
+            assertTrue(fieldClass.isAssignableFrom(loc.getClass()));
+            assertEquals(start, loc.getAddress());
+        }
 
 		assertTrue(!searcher.hasNext());
 	}

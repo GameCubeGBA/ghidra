@@ -67,8 +67,8 @@ public class DumpMissedStarts extends GhidraScript implements PatternFactory {
 		ProgramDecisionTree patternDecisionTree = Patterns.getPatternDecisionTree();
 		ResourceFile[] fileList = Patterns.findPatternFiles(currentProgram, patternDecisionTree);
 		ArrayList<Pattern> patternlist = new ArrayList<>();
-		for (int i = 0; i < fileList.length; ++i)
-			Pattern.readPostPatterns(fileList[i].getFile(true), patternlist, this);
+        for (ResourceFile resourceFile : fileList)
+            Pattern.readPostPatterns(resourceFile.getFile(true), patternlist, this);
 		FileWriter fileWriter = new FileWriter(file);
 		root = SequenceSearchState.buildStateMachine(patternlist);
 

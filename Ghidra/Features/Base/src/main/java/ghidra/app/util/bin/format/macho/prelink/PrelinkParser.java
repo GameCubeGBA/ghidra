@@ -119,16 +119,16 @@ public class PrelinkParser {
 	private void process(List<?> children, List<PrelinkMap> list, TaskMonitor monitor) {
 		monitor.setMessage("Processing prelink information...");
 
-		for (int i = 0; i < children.size(); ++i) {
-			if (monitor.isCancelled()) {
-				break;
-			}
-			Element element = (Element) children.get(i);
-			if (element.getName().equals(TAG_DICT)) {
-				PrelinkMap map = processElement(element, monitor);
-				list.add(map);
-			}
-		}
+        for (Object child : children) {
+            if (monitor.isCancelled()) {
+                break;
+            }
+            Element element = (Element) child;
+            if (element.getName().equals(TAG_DICT)) {
+                PrelinkMap map = processElement(element, monitor);
+                list.add(map);
+            }
+        }
 	}
 
 	private PrelinkMap processElement(Element parentElement, TaskMonitor monitor) {

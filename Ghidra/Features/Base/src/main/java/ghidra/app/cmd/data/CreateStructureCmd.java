@@ -139,8 +139,8 @@ public class CreateStructureCmd extends AbstractCreateStructureCmd{
     }
     
     private void addRefs(Program p, ReferenceManager refMgr, Reference[] refs) {
-        for(int i=0;i<refs.length;i++) {
-            refMgr.addReference(refs[i]);
+        for (Reference ref : refs) {
+            refMgr.addReference(ref);
         }
     }
 }

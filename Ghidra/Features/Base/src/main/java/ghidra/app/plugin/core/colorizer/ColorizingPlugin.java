@@ -154,7 +154,7 @@ public class ColorizingPlugin extends ProgramPlugin implements DomainObjectListe
 
 	@Override
 	public void serviceAdded(Class<?> interfaceClass, Object service) {
-		if (interfaceClass.equals(MarkerService.class)) {
+		if (interfaceClass == MarkerService.class) {
 			markerService = (MarkerService) service;
 		}
 
@@ -162,10 +162,10 @@ public class ColorizingPlugin extends ProgramPlugin implements DomainObjectListe
 
 	@Override
 	public void serviceRemoved(Class<?> interfaceClass, Object service) {
-		if (interfaceClass.equals(MarkerService.class)) {
+		if (interfaceClass == MarkerService.class) {
 			markerService = null;
 		}
-		else if (interfaceClass.equals(GoToService.class)) {
+		else if (interfaceClass == GoToService.class) {
 			nextAction.remove();
 			previousAction.remove();
 		}

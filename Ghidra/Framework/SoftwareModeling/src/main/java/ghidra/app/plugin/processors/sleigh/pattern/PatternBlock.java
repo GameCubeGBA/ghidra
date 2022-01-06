@@ -43,10 +43,8 @@ public class PatternBlock {
 		int delsize = end - start;
 		int newsize = array.length - delsize;
 		int[] res = new int[newsize];
-		for (int i = 0; i < start; ++i)
-			res[i] = array[i];
-		for (int i = end; i < array.length; ++i)
-			res[i - delsize] = array[i];
+        if (start >= 0) System.arraycopy(array, 0, res, 0, start);
+        if (array.length - end >= 0) System.arraycopy(array, end, res, end - delsize, array.length - end);
 		return res;
 	}
 
@@ -418,15 +416,15 @@ public class PatternBlock {
 	 */
 	public byte[] getWholeBytes() {
 		int count = 0;
-		for (int i = 0; i < maskvec.length; i++) {
-			int mask = maskvec[i];
-			for (int j = 0; j < 4; j++) {
-				if ((mask & LEFT_BYTE) == LEFT_BYTE) {
-					count++;
-				}
-				mask <<= 8;
-			}
-		}
+        for (int k : maskvec) {
+            int mask = k;
+            for (int j = 0; j < 4; j++) {
+                if ((mask & LEFT_BYTE) == LEFT_BYTE) {
+                    count++;
+                }
+                mask <<= 8;
+            }
+        }
 		byte[] result = new byte[count];
 		int pos = 0;
 		for (int i = 0; i < maskvec.length; i++) {

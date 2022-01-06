@@ -178,9 +178,9 @@ class RegisterMergeManager implements ListingMergeConstants {
 		conflictSet = new AddressSet();
 		rvrs = rc.getConflicts(setToCheck, monitor);
 		if (rvrs.length > 0) {
-			for (int j = 0; j < rvrs.length; j++) {
-				conflictSet.add(rvrs[j]);
-			}
+            for (AddressRange rvr : rvrs) {
+                conflictSet.add(rvr);
+            }
 		}
 		autoSet = setToCheck.subtract(conflictSet);
 	}
@@ -398,18 +398,19 @@ class RegisterMergeManager implements ListingMergeConstants {
 
 	private String[] getRegisterInfo(int version, BigInteger value) {
 		String[] info = { "", "" };
-		if (version == MergeConstants.LATEST) {
-			info[0] = " '" + MergeConstants.LATEST_TITLE + "' version";
-		}
-		else if (version == MergeConstants.MY) {
-			info[0] = " '" + MergeConstants.MY_TITLE + "' version";
-		}
-		else if (version == MergeConstants.ORIGINAL) {
-			info[0] = " '" + MergeConstants.ORIGINAL_TITLE + "' version";
-		}
-		else {
-			return new String[] { "Option", "Register Value" };
-		}
+        switch (version) {
+            case MergeConstants.LATEST:
+                info[0] = " '" + MergeConstants.LATEST_TITLE + "' version";
+                break;
+            case MergeConstants.MY:
+                info[0] = " '" + MergeConstants.MY_TITLE + "' version";
+                break;
+            case MergeConstants.ORIGINAL:
+                info[0] = " '" + MergeConstants.ORIGINAL_TITLE + "' version";
+                break;
+            default:
+                return new String[]{"Option", "Register Value"};
+        }
 		if (value != null) {
 			info[1] = "0x" + value.toString(16);
 		}

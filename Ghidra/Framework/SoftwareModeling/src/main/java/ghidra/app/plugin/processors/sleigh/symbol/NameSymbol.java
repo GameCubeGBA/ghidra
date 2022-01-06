@@ -48,11 +48,11 @@ public class NameSymbol extends ValueSymbol {
 		long min = getPatternValue().minValue();
 		long max = getPatternValue().maxValue();
 		tableisfilled = (min >= 0) && (max < nametable.length);
-		for (int i = 0; i < nametable.length; ++i) {
-			if (null == nametable[i]) {
-				tableisfilled = false;
-			}
-		}
+        for (String s : nametable) {
+            if (null == s) {
+                tableisfilled = false;
+            }
+        }
 	}
 
 	/* (non-Javadoc)

@@ -149,18 +149,20 @@ public class DbgDebuggerProgramLaunchOpinion implements DebuggerProgramLaunchOpi
 				continue;
 			}
 			String clsName = factory.getClass().getName();
-			if (clsName.equals(InVmDbgengDebuggerProgramLaunchOffer.FACTORY_CLS_NAME)) {
-				offers.add(new InVmDbgengDebuggerProgramLaunchOffer(program, tool, factory));
-			}
-			else if (clsName.equals(GadpDbgengDebuggerProgramLaunchOffer.FACTORY_CLS_NAME)) {
-				offers.add(new GadpDbgengDebuggerProgramLaunchOffer(program, tool, factory));
-			}
-			else if (clsName.equals(InVmDbgmodelDebuggerProgramLaunchOffer.FACTORY_CLS_NAME)) {
-				offers.add(new InVmDbgmodelDebuggerProgramLaunchOffer(program, tool, factory));
-			}
-			else if (clsName.equals(GadpDbgmodelDebuggerProgramLaunchOffer.FACTORY_CLS_NAME)) {
-				offers.add(new GadpDbgmodelDebuggerProgramLaunchOffer(program, tool, factory));
-			}
+            switch (clsName) {
+                case InVmDbgengDebuggerProgramLaunchOffer.FACTORY_CLS_NAME:
+                    offers.add(new InVmDbgengDebuggerProgramLaunchOffer(program, tool, factory));
+                    break;
+                case GadpDbgengDebuggerProgramLaunchOffer.FACTORY_CLS_NAME:
+                    offers.add(new GadpDbgengDebuggerProgramLaunchOffer(program, tool, factory));
+                    break;
+                case InVmDbgmodelDebuggerProgramLaunchOffer.FACTORY_CLS_NAME:
+                    offers.add(new InVmDbgmodelDebuggerProgramLaunchOffer(program, tool, factory));
+                    break;
+                case GadpDbgmodelDebuggerProgramLaunchOffer.FACTORY_CLS_NAME:
+                    offers.add(new GadpDbgmodelDebuggerProgramLaunchOffer(program, tool, factory));
+                    break;
+            }
 		}
 		return offers;
 	}

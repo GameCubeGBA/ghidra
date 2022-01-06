@@ -72,23 +72,20 @@ public class GhidraTableColumnModelTest extends AbstractGhidraHeadedIntegrationT
 
 		List<TableColumn> allColumns = ghidraColumnModel.getAllColumns();
 		int columnCount = allColumns.size();
-		for (int i = 0; i < columnCount; i++) {
-			TableColumn column = allColumns.get(i);
-			assertTrue("Column is not visible by default when it should be.",
-				ghidraColumnModel.isVisible(column));
-		}
+        for (TableColumn column : allColumns) {
+            assertTrue("Column is not visible by default when it should be.",
+                    ghidraColumnModel.isVisible(column));
+        }
 
 		// setVisible()
-		for (int i = 0; i < columnCount; i++) {
-			TableColumn column = allColumns.get(i);
-			ghidraColumnModel.setVisible(column, false);
-		}
+        for (TableColumn column : allColumns) {
+            ghidraColumnModel.setVisible(column, false);
+        }
 
-		for (int i = 0; i < columnCount; i++) {
-			TableColumn column = allColumns.get(i);
-			assertTrue("Column is visible when it was made hidden.",
-				!ghidraColumnModel.isVisible(column));
-		}
+        for (TableColumn column : allColumns) {
+            assertTrue("Column is visible when it was made hidden.",
+                    !ghidraColumnModel.isVisible(column));
+        }
 	}
 
 	@After

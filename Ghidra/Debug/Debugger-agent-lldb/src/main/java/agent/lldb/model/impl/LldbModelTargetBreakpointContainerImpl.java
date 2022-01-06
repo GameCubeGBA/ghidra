@@ -94,7 +94,7 @@ public class LldbModelTargetBreakpointContainerImpl extends LldbModelTargetObjec
 		for (int i = 0; i < nthreads; i++) {
 			SBThread t = eventProcess.GetThreadAtIndex(i);
 			StopReason reason = t.GetStopReason();
-			if (reason.equals(StopReason.eStopReasonBreakpoint)) {
+			if (reason == StopReason.eStopReasonBreakpoint) {
 				BigInteger bptId = t.GetStopReasonDataAtIndex(0);
 				BigInteger locId = t.GetStopReasonDataAtIndex(1);
 				if (bpt.GetID() == bptId.intValue()) {

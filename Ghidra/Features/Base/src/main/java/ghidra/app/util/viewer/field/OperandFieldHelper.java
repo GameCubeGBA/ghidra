@@ -140,22 +140,24 @@ abstract class OperandFieldHelper extends FieldFactory {
 			Object newValue) {
 
 		boolean updateModel = false;
-		if (optionName.equals(MAX_DISPLAY_LINES_MSG)) {
-			setMaximumLinesToDisplay(((Integer) newValue).intValue(), options);
-			updateModel = true;
-		}
-		else if (optionName.equals(ENABLE_WORD_WRAP_MSG)) {
-			isWordWrap = ((Boolean) newValue).booleanValue();
-			updateModel = true;
-		}
-		else if (optionName.equals(UNDERLINE_OPTION)) {
-			underlineChoice = (UNDERLINE_CHOICE) newValue;
-			updateModel = true;
-		}
-		else if (optionName.equals(SPACE_AFTER_SEPARATOR_OPTION)) {
-			spaceAfterSeparator = ((Boolean) newValue).booleanValue();
-			updateModel = true;
-		}
+        switch (optionName) {
+            case MAX_DISPLAY_LINES_MSG:
+                setMaximumLinesToDisplay(((Integer) newValue).intValue(), options);
+                updateModel = true;
+                break;
+            case ENABLE_WORD_WRAP_MSG:
+                isWordWrap = ((Boolean) newValue).booleanValue();
+                updateModel = true;
+                break;
+            case UNDERLINE_OPTION:
+                underlineChoice = (UNDERLINE_CHOICE) newValue;
+                updateModel = true;
+                break;
+            case SPACE_AFTER_SEPARATOR_OPTION:
+                spaceAfterSeparator = ((Boolean) newValue).booleanValue();
+                updateModel = true;
+                break;
+        }
 		if (updateModel) {
 			model.update();
 		}
@@ -449,10 +451,10 @@ abstract class OperandFieldHelper extends FieldFactory {
 
 	private int addElements(Instruction inst, List<OperandFieldElement> elements, List<?> objList,
 			int opIndex, int subOpIndex, boolean underline, int characterOffset) {
-		for (int i = 0; i < objList.size(); i++) {
-			characterOffset = addElement(inst, elements, objList.get(i), underline, opIndex,
-				subOpIndex, characterOffset);
-		}
+        for (Object o : objList) {
+            characterOffset = addElement(inst, elements, o, underline, opIndex,
+                    subOpIndex, characterOffset);
+        }
 		return characterOffset;
 	}
 
@@ -514,11 +516,11 @@ abstract class OperandFieldHelper extends FieldFactory {
 	}
 
 	private boolean containsNonPrimary(Reference[] refs) {
-		for (int i = 0; i < refs.length; i++) {
-			if (!refs[i].isPrimary()) {
-				return true;
-			}
-		}
+        for (Reference ref : refs) {
+            if (!ref.isPrimary()) {
+                return true;
+            }
+        }
 		return false;
 	}
 

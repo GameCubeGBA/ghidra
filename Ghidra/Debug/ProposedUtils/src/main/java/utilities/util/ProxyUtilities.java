@@ -39,7 +39,7 @@ public enum ProxyUtilities {
 			// NOTE: Could be faster using ==, as does Method#equals(Method)
 			return false;
 		}
-		if (!m1.getReturnType().equals(m2.getReturnType())) {
+		if (m1.getReturnType() != m2.getReturnType()) {
 			// NOTE: Method#equals(Method) does NOT use == for this
 			return false;
 		}

@@ -43,7 +43,7 @@ public interface LldbModelTargetThread extends //
 		TargetRegisterContainer container =
 			(TargetRegisterContainer) getCachedAttribute("Registers");
 		TargetRegisterBank bank = (TargetRegisterBank) container.getCachedAttribute("User");
-		if (state.equals(StateType.eStateStopped)) {
+		if (state == StateType.eStateStopped) {
 			bank.readRegistersNamed(getCachedElements().keySet());
 		}
 	}

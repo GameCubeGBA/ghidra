@@ -249,11 +249,11 @@ public class LocalFileChooserModel implements GhidraFileChooserModel {
 	@Override
 	public boolean isDirectory(File file) {
 		File[] localRoots = getRoots(false);
-		for (int i = 0; i < localRoots.length; i++) {
-			if (localRoots[i].equals(file)) {
-				return true;
-			}
-		}
+        for (File localRoot : localRoots) {
+            if (localRoot.equals(file)) {
+                return true;
+            }
+        }
 		return file != null && file.isDirectory();
 	}
 

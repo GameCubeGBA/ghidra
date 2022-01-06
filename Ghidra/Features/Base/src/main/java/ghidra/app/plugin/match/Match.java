@@ -170,10 +170,9 @@ public class Match implements Comparable<Match>
     public String toString()
 	{
 		String str =  otherBeginning.toString(true) + "\n";
-		for( int i=0; i< thisMatch.size(); i++ )
-		{
-			str += thisMatch.get(i).toString() + " ";
-		}
+        for (Object match : thisMatch) {
+            str += match.toString() + " ";
+        }
 		return str;
 	}
 	

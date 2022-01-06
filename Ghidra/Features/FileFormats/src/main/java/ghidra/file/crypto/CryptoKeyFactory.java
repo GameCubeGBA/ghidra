@@ -72,9 +72,7 @@ public final class CryptoKeyFactory {
                     }
                     List<Element> firmwareFileList =
                             CollectionUtils.asList(root.getChildren(), Element.class);
-                    Iterator<Element> firmwareFileIter = firmwareFileList.iterator();
-                    while (firmwareFileIter.hasNext()) {
-                        Element firmwareFileElement = firmwareFileIter.next();
+                    for (Element firmwareFileElement : firmwareFileList) {
                         String path = firmwareFileElement.getAttributeValue("PATH");
                         if (firmwareFileElement.getAttribute("not_encrypted") != null) {
                             cryptoMap.get(firmwareName).put(path, CryptoKey.NOT_ENCRYPTED_KEY);

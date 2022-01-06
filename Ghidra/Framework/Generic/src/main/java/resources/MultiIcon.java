@@ -137,10 +137,9 @@ public class MultiIcon implements Icon {
 	@Override
 	public void paintIcon(Component c, Graphics g, int x, int y) {
 		init();
-		for (int i = 0; i < iconList.size(); i++) {
-			Icon icon = iconList.get(i);
-			icon.paintIcon(c, g, x, y);
-		}
+        for (Icon icon : iconList) {
+            icon.paintIcon(c, g, x, y);
+        }
 
 		if (disabled) {
 			// Alpha blend to background

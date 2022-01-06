@@ -119,45 +119,42 @@ public class AutoOptionsListener<R> implements OptionsChangeListener {
 			method.setAccessible(true);
 
 			Parameter[] parameters = method.getParameters();
-			if (parameters.length == 0) {
-				this.order = ParamOrder.NONE;
-			}
-			else if (parameters.length == 1) {
-				if (parameters[0].getAnnotation(OldValue.class) != null) {
-					this.order = ParamOrder.OLD_ONLY;
-				}
-				else {
-					this.order = ParamOrder.NEW_ONLY;
-				}
-			}
-			else if (parameters.length == 2) {
-				if (parameters[0].getAnnotation(NewValue.class) != null) {
-					if (parameters[1].getAnnotation(NewValue.class) != null) {
-						throw new IllegalArgumentException("Cannot apply " +
-							NewValue.class.getName() + " to both parameters of " + method);
-					}
-					this.order = ParamOrder.NEW_OLD;
-				}
-				else if (parameters[0].getAnnotation(OldValue.class) != null) {
-					if (parameters[1].getAnnotation(OldValue.class) != null) {
-						throw new IllegalArgumentException("Cannot apply " +
-							OldValue.class.getName() + " to both parameters of " + method);
-					}
-					this.order = ParamOrder.OLD_NEW;
-				}
-				else {
-					if (parameters[1].getAnnotation(NewValue.class) != null) {
-						this.order = ParamOrder.OLD_NEW;
-					}
-					else {
-						this.order = ParamOrder.NEW_OLD;
-					}
-				}
-			}
-			else {
-				throw new IllegalArgumentException(AutoOptionConsumed.class + "-annotated method " +
-					method + " cannot have more than two parameters");
-			}
+            switch (parameters.length) {
+                case 0:
+                    this.order = ParamOrder.NONE;
+                    break;
+                case 1:
+                    if (parameters[0].getAnnotation(OldValue.class) != null) {
+                        this.order = ParamOrder.OLD_ONLY;
+                    } else {
+                        this.order = ParamOrder.NEW_ONLY;
+                    }
+                    break;
+                case 2:
+                    if (parameters[0].getAnnotation(NewValue.class) != null) {
+                        if (parameters[1].getAnnotation(NewValue.class) != null) {
+                            throw new IllegalArgumentException("Cannot apply " +
+                                    NewValue.class.getName() + " to both parameters of " + method);
+                        }
+                        this.order = ParamOrder.NEW_OLD;
+                    } else if (parameters[0].getAnnotation(OldValue.class) != null) {
+                        if (parameters[1].getAnnotation(OldValue.class) != null) {
+                            throw new IllegalArgumentException("Cannot apply " +
+                                    OldValue.class.getName() + " to both parameters of " + method);
+                        }
+                        this.order = ParamOrder.OLD_NEW;
+                    } else {
+                        if (parameters[1].getAnnotation(NewValue.class) != null) {
+                            this.order = ParamOrder.OLD_NEW;
+                        } else {
+                            this.order = ParamOrder.NEW_OLD;
+                        }
+                    }
+                    break;
+                default:
+                    throw new IllegalArgumentException(AutoOptionConsumed.class + "-annotated method " +
+                            method + " cannot have more than two parameters");
+            }
 		}
 
 		@Override

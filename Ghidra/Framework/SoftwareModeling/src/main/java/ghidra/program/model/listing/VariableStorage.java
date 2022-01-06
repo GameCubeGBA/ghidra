@@ -261,7 +261,7 @@ public class VariableStorage implements Comparable<VariableStorage> {
 	 */
 	public VariableStorage clone(Program newProgram) throws InvalidInputException {
 		if (program == null || newProgram == program) {
-			if (getClass().equals(VariableStorage.class)) {
+			if (getClass() == VariableStorage.class) {
 				return this; // only reuse if simple VariableStorage instance
 			}
 			if (isUnassignedStorage()) {
@@ -619,13 +619,13 @@ public class VariableStorage implements Comparable<VariableStorage> {
 		if (varnodes == null || otherVarnodes == null) {
 			return false;
 		}
-		for (int i = 0; i < varnodes.length; i++) {
-			for (int j = 0; j < otherVarnodes.length; j++) {
-				if (varnodes[i].intersects(otherVarnodes[j])) {
-					return true;
-				}
-			}
-		}
+        for (Varnode varnode : varnodes) {
+            for (Varnode otherVarnode : otherVarnodes) {
+                if (varnode.intersects(otherVarnode)) {
+                    return true;
+                }
+            }
+        }
 		return false;
 	}
 
@@ -638,11 +638,11 @@ public class VariableStorage implements Comparable<VariableStorage> {
 		if (varnodes == null || set == null || set.isEmpty()) {
 			return false;
 		}
-		for (int i = 0; i < varnodes.length; i++) {
-			if (varnodes[i].intersects(set)) {
-				return true;
-			}
-		}
+        for (Varnode varnode : varnodes) {
+            if (varnode.intersects(set)) {
+                return true;
+            }
+        }
 		return false;
 	}
 
@@ -656,11 +656,11 @@ public class VariableStorage implements Comparable<VariableStorage> {
 			return false;
 		}
 		Varnode regVarnode = new Varnode(reg.getAddress(), reg.getMinimumByteSize());
-		for (int i = 0; i < varnodes.length; i++) {
-			if (varnodes[i].intersects(regVarnode)) {
-				return true;
-			}
-		}
+        for (Varnode varnode : varnodes) {
+            if (varnode.intersects(regVarnode)) {
+                return true;
+            }
+        }
 		return false;
 	}
 
@@ -673,11 +673,11 @@ public class VariableStorage implements Comparable<VariableStorage> {
 		if (varnodes == null) {
 			return false;
 		}
-		for (int i = 0; i < varnodes.length; i++) {
-			if (varnodes[i].contains(address)) {
-				return true;
-			}
-		}
+        for (Varnode varnode : varnodes) {
+            if (varnode.contains(address)) {
+                return true;
+            }
+        }
 		return false;
 	}
 

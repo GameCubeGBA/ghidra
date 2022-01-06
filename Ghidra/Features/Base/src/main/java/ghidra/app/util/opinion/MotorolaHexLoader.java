@@ -99,25 +99,26 @@ public class MotorolaHexLoader extends AbstractProgramLoader {
 		for (Option option : options) {
 			String optName = option.getName();
 			try {
-				if (optName.equals(OPTION_NAME_BASE_ADDRESS)) {
-					baseAddr = (Address) option.getValue();
-					if (baseAddr == null) {
-						return "Invalid base address";
-					}
-				}
-				else if (optName.equals(OPTION_NAME_BLOCK_NAME)) {
-					if (!String.class.isAssignableFrom(option.getValueClass())) {
-						return OPTION_NAME_BLOCK_NAME + " must be a String";
-					}
-				}
-				else if (optName.equals(OPTION_NAME_IS_OVERLAY)) {
-					if (!Boolean.class.isAssignableFrom(option.getValueClass())) {
-						return OPTION_NAME_IS_OVERLAY + " must be a boolean";
-					}
-				}
-				else {
-					return "Unknown option: " + optName;
-				}
+                switch (optName) {
+                    case OPTION_NAME_BASE_ADDRESS:
+                        baseAddr = (Address) option.getValue();
+                        if (baseAddr == null) {
+                            return "Invalid base address";
+                        }
+                        break;
+                    case OPTION_NAME_BLOCK_NAME:
+                        if (!String.class.isAssignableFrom(option.getValueClass())) {
+                            return OPTION_NAME_BLOCK_NAME + " must be a String";
+                        }
+                        break;
+                    case OPTION_NAME_IS_OVERLAY:
+                        if (!Boolean.class.isAssignableFrom(option.getValueClass())) {
+                            return OPTION_NAME_IS_OVERLAY + " must be a boolean";
+                        }
+                        break;
+                    default:
+                        return "Unknown option: " + optName;
+                }
 			}
 			catch (ClassCastException e) {
 				return "Invalid type for option: " + optName + " - " + e.getMessage();

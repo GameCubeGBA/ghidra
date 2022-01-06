@@ -334,15 +334,14 @@ class ModuleDB extends DatabaseObject implements ProgramModule {
 	public AddressSetView getAddressSet() {
 		AddressSet set = new AddressSet();
 		Group[] children = getChildren();
-		for (int i = 0; i < children.length; i++) {
-			if (children[i] instanceof ProgramFragment) {
-				set.add((ProgramFragment) children[i]);
-			}
-			else {
-				ProgramModule m = (ProgramModule) children[i];
-				set.add(m.getAddressSet());
-			}
-		}
+        for (Group child : children) {
+            if (child instanceof ProgramFragment) {
+                set.add((ProgramFragment) child);
+            } else {
+                ProgramModule m = (ProgramModule) child;
+                set.add(m.getAddressSet());
+            }
+        }
 		return set;
 	}
 
@@ -703,14 +702,14 @@ class ModuleDB extends DatabaseObject implements ProgramModule {
 		Field[] keys = adapter.getParentChildKeys(key, TreeManager.PARENT_ID_COL);
 		List<DBRecord> list = new ArrayList<DBRecord>();
 		Comparator<DBRecord> c = new ParentChildRecordComparator();
-		for (int i = 0; i < keys.length; i++) {
-			DBRecord rec = adapter.getParentChildRecord(keys[i].getLongValue());
-			int index = Collections.binarySearch(list, rec, c);
-			if (index < 0) {
-				index = -index - 1;
-			}
-			list.add(index, rec);
-		}
+        for (Field field : keys) {
+            DBRecord rec = adapter.getParentChildRecord(field.getLongValue());
+            int index = Collections.binarySearch(list, rec, c);
+            if (index < 0) {
+                index = -index - 1;
+            }
+            list.add(index, rec);
+        }
 		return list;
 	}
 
@@ -743,23 +742,21 @@ class ModuleDB extends DatabaseObject implements ProgramModule {
 	private Address findFirstAddress(ModuleDB module) {
 		try {
 			List<DBRecord> list = module.getParentChildRecords();
-			for (int i = 0; i < list.size(); i++) {
-				DBRecord rec = list.get(i);
-				long childID = rec.getLongValue(TreeManager.CHILD_ID_COL);
-				if (childID < 0) {
-					FragmentDB frag = moduleMgr.getFragmentDB(-childID);
-					if (!frag.isEmpty()) {
-						return frag.getMinAddress();
-					}
-				}
-				else {
-					ModuleDB m = moduleMgr.getModuleDB(childID);
-					Address addr = findFirstAddress(m);
-					if (addr != null) {
-						return addr;
-					}
-				}
-			}
+            for (DBRecord rec : list) {
+                long childID = rec.getLongValue(TreeManager.CHILD_ID_COL);
+                if (childID < 0) {
+                    FragmentDB frag = moduleMgr.getFragmentDB(-childID);
+                    if (!frag.isEmpty()) {
+                        return frag.getMinAddress();
+                    }
+                } else {
+                    ModuleDB m = moduleMgr.getModuleDB(childID);
+                    Address addr = findFirstAddress(m);
+                    if (addr != null) {
+                        return addr;
+                    }
+                }
+            }
 		}
 		catch (IOException e) {
 			moduleMgr.dbError(e);
@@ -800,27 +797,24 @@ class ModuleDB extends DatabaseObject implements ProgramModule {
 
 		try {
 			List<DBRecord> list = module.getParentChildRecords();
-			for (int i = 0; i < list.size(); i++) {
-				DBRecord rec = list.get(i);
-				long childID = rec.getLongValue(TreeManager.CHILD_ID_COL);
-				Address childMinAddr = null;
-				if (childID < 0) {
-					FragmentDB frag = moduleMgr.getFragmentDB(-childID);
-					if (!frag.isEmpty()) {
-						childMinAddr = frag.getMinAddress();
-					}
-				}
-				else {
-					ModuleDB m = moduleMgr.getModuleDB(childID);
-					childMinAddr = findMinAddress(m, addr);
-				}
-				if (childMinAddr != null && minAddr == null) {
-					minAddr = childMinAddr;
-				}
-				else if (childMinAddr != null && childMinAddr.compareTo(minAddr) < 0) {
-					minAddr = childMinAddr;
-				}
-			}
+            for (DBRecord rec : list) {
+                long childID = rec.getLongValue(TreeManager.CHILD_ID_COL);
+                Address childMinAddr = null;
+                if (childID < 0) {
+                    FragmentDB frag = moduleMgr.getFragmentDB(-childID);
+                    if (!frag.isEmpty()) {
+                        childMinAddr = frag.getMinAddress();
+                    }
+                } else {
+                    ModuleDB m = moduleMgr.getModuleDB(childID);
+                    childMinAddr = findMinAddress(m, addr);
+                }
+                if (childMinAddr != null && minAddr == null) {
+                    minAddr = childMinAddr;
+                } else if (childMinAddr != null && childMinAddr.compareTo(minAddr) < 0) {
+                    minAddr = childMinAddr;
+                }
+            }
 		}
 		catch (IOException e) {
 			moduleMgr.dbError(e);
@@ -834,27 +828,24 @@ class ModuleDB extends DatabaseObject implements ProgramModule {
 
 		try {
 			List<DBRecord> list = module.getParentChildRecords();
-			for (int i = 0; i < list.size(); i++) {
-				DBRecord rec = list.get(i);
-				long childID = rec.getLongValue(TreeManager.CHILD_ID_COL);
-				Address childMaxAddr = null;
-				if (childID < 0) {
-					FragmentDB frag = moduleMgr.getFragmentDB(-childID);
-					if (!frag.isEmpty()) {
-						childMaxAddr = frag.getMaxAddress();
-					}
-				}
-				else {
-					ModuleDB m = moduleMgr.getModuleDB(childID);
-					childMaxAddr = findMaxAddress(m, addr);
-				}
-				if (childMaxAddr != null && maxAddr == null) {
-					maxAddr = childMaxAddr;
-				}
-				else if (childMaxAddr != null && childMaxAddr.compareTo(maxAddr) > 0) {
-					maxAddr = childMaxAddr;
-				}
-			}
+            for (DBRecord rec : list) {
+                long childID = rec.getLongValue(TreeManager.CHILD_ID_COL);
+                Address childMaxAddr = null;
+                if (childID < 0) {
+                    FragmentDB frag = moduleMgr.getFragmentDB(-childID);
+                    if (!frag.isEmpty()) {
+                        childMaxAddr = frag.getMaxAddress();
+                    }
+                } else {
+                    ModuleDB m = moduleMgr.getModuleDB(childID);
+                    childMaxAddr = findMaxAddress(m, addr);
+                }
+                if (childMaxAddr != null && maxAddr == null) {
+                    maxAddr = childMaxAddr;
+                } else if (childMaxAddr != null && childMaxAddr.compareTo(maxAddr) > 0) {
+                    maxAddr = childMaxAddr;
+                }
+            }
 		}
 		catch (IOException e) {
 			moduleMgr.dbError(e);

@@ -467,30 +467,30 @@ public abstract class AbstractVTCorrelatorTest extends AbstractGhidraHeadedInteg
 				String optionName = editorState.getTitle();
 				Component editorComponent = editorState.getEditorComponent();
 
-				if (optionName.equals(
-					VTAbstractReferenceProgramCorrelatorFactory.CONFIDENCE_THRESHOLD)) {
-					PropertyText fieldText = (PropertyText) editorComponent;
-					fieldText.setText(String.format("%f", confidence));
-					fieldText.repaint();
-				}
-				else if (optionName.equals(
-					VTAbstractReferenceProgramCorrelatorFactory.MEMORY_MODEL)) {
-					PropertySelector selector = (PropertySelector) editorComponent;
-					selector.setSelectedItem(memoryModel);
-					selector.repaint();
-				}
-				else if (optionName.equals(
-					VTAbstractReferenceProgramCorrelatorFactory.SIMILARITY_THRESHOLD)) {
-					PropertyText fieldText = (PropertyText) editorComponent;
-					fieldText.setText(String.format("%f", score));
-					fieldText.repaint();
-				}
-				else if (optionName.equals(
-					VTAbstractReferenceProgramCorrelatorFactory.REFINE_RESULTS)) {
-					PropertyBoolean checkBox = (PropertyBoolean) editorComponent;
-					checkBox.setSelected(refineResults);
-					checkBox.repaint();
-				}
+                switch (optionName) {
+                    case VTAbstractReferenceProgramCorrelatorFactory.CONFIDENCE_THRESHOLD: {
+                        PropertyText fieldText = (PropertyText) editorComponent;
+                        fieldText.setText(String.format("%f", confidence));
+                        fieldText.repaint();
+                        break;
+                    }
+                    case VTAbstractReferenceProgramCorrelatorFactory.MEMORY_MODEL:
+                        PropertySelector selector = (PropertySelector) editorComponent;
+                        selector.setSelectedItem(memoryModel);
+                        selector.repaint();
+                        break;
+                    case VTAbstractReferenceProgramCorrelatorFactory.SIMILARITY_THRESHOLD: {
+                        PropertyText fieldText = (PropertyText) editorComponent;
+                        fieldText.setText(String.format("%f", score));
+                        fieldText.repaint();
+                        break;
+                    }
+                    case VTAbstractReferenceProgramCorrelatorFactory.REFINE_RESULTS:
+                        PropertyBoolean checkBox = (PropertyBoolean) editorComponent;
+                        checkBox.setSelected(refineResults);
+                        checkBox.repaint();
+                        break;
+                }
 			}
 		});
 

@@ -60,16 +60,16 @@ public class JunitTestScan {
 		}
 		
 		File[] files = dataDir.listFiles(TEST_XML_FILTER);
-		for (int i = 0; i < files.length; i++) {
-			if (files[i].length() == 0) {
-				try {
-					System.out.println("Found bad test data: " + files[i]);
-					writeXmlFile(files[i]);	
-				} catch (IOException e) {
-					System.err.println("Failed to fix data file: " + files[i]);	
-				}
-			}	
-		}
+        for (File file : files) {
+            if (file.length() == 0) {
+                try {
+                    System.out.println("Found bad test data: " + file);
+                    writeXmlFile(file);
+                } catch (IOException e) {
+                    System.err.println("Failed to fix data file: " + file);
+                }
+            }
+        }
 		
 		
 	}

@@ -88,7 +88,7 @@ public final class OatConstants {
 	 * This array contains version that have been actively tested and verified.
 	 * All other version will be considered unsupported until tested on exemplar firmware.
 	 */
-	public final static String [ ] SUPPORTED_VERSIONS = new String [ ] {
+	public final static String [ ] SUPPORTED_VERSIONS = {
 		VERSION_KITKAT_RELEASE,
 		VERSION_LOLLIPOP_RELEASE,
 		VERSION_LOLLIPOP_MR1_FI_RELEASE,

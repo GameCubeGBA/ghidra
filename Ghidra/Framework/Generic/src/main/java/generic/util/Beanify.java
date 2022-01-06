@@ -29,7 +29,7 @@ public class Beanify {
 			String name = fix(method.getName());
 			if (name != null) {
 				if (Modifier.isPublic(method.getModifiers()) &&
-					!method.getReturnType().equals(Void.TYPE) &&
+                        method.getReturnType() != Void.TYPE &&
 					method.getParameterTypes().length == 0) {
 					try {
 						method.setAccessible(true);

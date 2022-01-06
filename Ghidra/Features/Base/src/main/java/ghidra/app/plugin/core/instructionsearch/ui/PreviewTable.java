@@ -408,33 +408,31 @@ public class PreviewTable extends AbstractInstructionTable {
 	private void refreshView() {
 
 		// Grab an iterator so we can process each preview string.
-		Iterator<Map.Entry<Integer, String>> it = previewStringMap.entrySet().iterator();
 
-		while (it.hasNext()) {
-			Map.Entry<Integer, String> pair = it.next();
-			Integer index = pair.getKey();
-			String instr = pair.getValue();
+        for (Map.Entry<Integer, String> pair : previewStringMap.entrySet()) {
+            Integer index = pair.getKey();
+            String instr = pair.getValue();
 
-			// Create a new string to hold the string we'll set in the table.
-			String previewString = "";
+            // Create a new string to hold the string we'll set in the table.
+            String previewString = "";
 
-			switch (currentView) {
-				case BINARY:
-					// If it's binary, just grab the value of the preview string
-					// in the map; they're stored there as binary so nothing to 
-					// do but format it with the correct mask settings.
-					previewString =
-						InstructionSearchUtils.addSpaceOnByteBoundary(instr, InputMode.BINARY);
-					break;
-				case HEX:
-					// For hex, we have to convert the binary string to hex, so use
-					// our utility...
-					previewString = InstructionSearchUtils.toHex(instr, true);
-					break;
-			}
+            switch (currentView) {
+                case BINARY:
+                    // If it's binary, just grab the value of the preview string
+                    // in the map; they're stored there as binary so nothing to
+                    // do but format it with the correct mask settings.
+                    previewString =
+                            InstructionSearchUtils.addSpaceOnByteBoundary(instr, InputMode.BINARY);
+                    break;
+                case HEX:
+                    // For hex, we have to convert the binary string to hex, so use
+                    // our utility...
+                    previewString = InstructionSearchUtils.toHex(instr, true);
+                    break;
+            }
 
-			setPreviewText(index, previewString);
-		}
+            setPreviewText(index, previewString);
+        }
 
 		repaint();
 	}

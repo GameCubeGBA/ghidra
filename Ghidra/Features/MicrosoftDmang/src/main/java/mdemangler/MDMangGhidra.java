@@ -130,7 +130,7 @@ public class MDMangGhidra extends MDMang {
 
 	private DemangledObject processObjectReserved(MDObjectReserved objectReserved) {
 		DemangledObject object = null;
-		if (objectReserved.getClass().equals(MDObjectReserved.class)) {
+		if (objectReserved.getClass() == MDObjectReserved.class) {
 			//Testing if the class is not a derived class of MDObjectReserved;
 			// In other words, is it exactly a MDObjectReserved?
 			// If so, then return null, which will allow it to get processed

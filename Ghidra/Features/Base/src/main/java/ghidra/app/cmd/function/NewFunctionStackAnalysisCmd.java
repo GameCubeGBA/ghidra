@@ -164,14 +164,14 @@ public class NewFunctionStackAnalysisCmd extends BackgroundCommand {
 			// Later this should change to stack locked.
 			Variable[] variables = func.getVariables(VariableFilter.STACK_VARIABLE_FILTER);
 			boolean hasReferences = false;
-			for (int i = 0; i < variables.length; i++) {
-				Reference[] referencesTo =
-					program.getReferenceManager().getReferencesTo(variables[i]);
-				if (referencesTo.length != 0) {
-					hasReferences = true;
-					break;
-				}
-			}
+            for (Variable variable : variables) {
+                Reference[] referencesTo =
+                        program.getReferenceManager().getReferencesTo(variable);
+                if (referencesTo.length != 0) {
+                    hasReferences = true;
+                    break;
+                }
+            }
 			if (variables.length == 0 || !hasReferences) {
 				// TODO: SHOULD HAVE OPTION JUST TO CREATE REFERENCES
 				// TODO: SHOULD HAVE OPTION JUST TO CREATE PARAMETERS
@@ -820,9 +820,9 @@ public class NewFunctionStackAnalysisCmd extends BackgroundCommand {
 			Variable lastVar = variablesIntersecting.get(variablesIntersecting.size() - 1);
 			int minOffset = firstVar.getStackOffset();
 			int maxOffset = lastVar.getStackOffset() + lastVar.getLength() - 1;
-			for (int i = 0; i < variablesIntersecting.size(); i++) {
-				sortedVariables.remove(variablesIntersecting.get(i));
-			}
+            for (Variable variable : variablesIntersecting) {
+                sortedVariables.remove(variable);
+            }
 
 			// combine all intersecting variables into one
 			if (minOffset > offset) {

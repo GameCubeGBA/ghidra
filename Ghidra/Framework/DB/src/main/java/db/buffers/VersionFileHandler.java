@@ -81,9 +81,9 @@ public class VersionFileHandler {
 					originalBufCount = vf.getOriginalBufferCount();
 					freeIndexes = vf.getFreeIndexList();
 					String[] names = vf.getOldParameterNames();
-					for (int i = 0; i < names.length; i++) {
-						origParms.put(names[i], Integer.valueOf(vf.getOldParameter(names[i])));
-					}
+                    for (String name : names) {
+                        origParms.put(name, Integer.valueOf(vf.getOldParameter(name)));
+                    }
 					originalFileId = vf.getOriginalFileID();
 				}
 				else {
@@ -98,11 +98,11 @@ public class VersionFileHandler {
 				
 				// Add buffer indexes to map which are not present in earlier version file
 				int[] bufferIndexes = vf.getOldBufferIndexes();
-				for (int i = 0; i < bufferIndexes.length; i++) {
-					if (!bufferMap.contains(bufferIndexes[i])) {
-						bufferMap.put(bufferIndexes[i], openFileIx);
-					}
-				}
+                for (int bufferIndex : bufferIndexes) {
+                    if (!bufferMap.contains(bufferIndex)) {
+                        bufferMap.put(bufferIndex, openFileIx);
+                    }
+                }
 			}
 			if (lastTargetFileId != targetFileId)	{
 				throw new IOException("Incorrect version file - wrong file ID");	

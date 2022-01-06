@@ -419,22 +419,24 @@ public class SearchTextPlugin extends ProgramPlugin implements OptionsChangeList
 	@Override
 	public void optionsChanged(ToolOptions options, String optionName, Object oldValue,
 			Object newValue) {
-		if (optionName.equals(GhidraOptions.OPTION_SEARCH_LIMIT)) {
-			int newSearchLimit = ((Integer) newValue).intValue();
-			if (newSearchLimit <= 0) {
-				throw new OptionsVetoException("Search limit must be greater than 0");
-			}
-			searchLimit = newSearchLimit;
-		}
-		else if (optionName.equals(PluginConstants.SEARCH_HIGHLIGHT_CURRENT_COLOR_NAME)) {
-			currentAddrHighlightColor = (Color) newValue;
-		}
-		else if (optionName.equals(PluginConstants.SEARCH_HIGHLIGHT_COLOR_NAME)) {
-			highlightColor = (Color) newValue;
-		}
-		else if (optionName.equals(PluginConstants.SEARCH_HIGHLIGHT_NAME)) {
-			doHighlight = ((Boolean) newValue).booleanValue();
-		}
+        switch (optionName) {
+            case GhidraOptions.OPTION_SEARCH_LIMIT:
+                int newSearchLimit = ((Integer) newValue).intValue();
+                if (newSearchLimit <= 0) {
+                    throw new OptionsVetoException("Search limit must be greater than 0");
+                }
+                searchLimit = newSearchLimit;
+                break;
+            case PluginConstants.SEARCH_HIGHLIGHT_CURRENT_COLOR_NAME:
+                currentAddrHighlightColor = (Color) newValue;
+                break;
+            case PluginConstants.SEARCH_HIGHLIGHT_COLOR_NAME:
+                highlightColor = (Color) newValue;
+                break;
+            case PluginConstants.SEARCH_HIGHLIGHT_NAME:
+                doHighlight = ((Boolean) newValue).booleanValue();
+                break;
+        }
 	}
 
 	private void initializeOptions() {

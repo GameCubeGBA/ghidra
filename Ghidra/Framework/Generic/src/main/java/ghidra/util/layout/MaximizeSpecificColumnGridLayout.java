@@ -146,9 +146,9 @@ public class MaximizeSpecificColumnGridLayout implements LayoutManager {
 
 	private int getTotalWidth(int[] individualWidths) {
 		int total = 0;
-		for (int i = 0; i < individualWidths.length; i++) {
-			total += individualWidths[i];
-		}
+        for (int individualWidth : individualWidths) {
+            total += individualWidth;
+        }
 		return total;
 	}
 
@@ -235,11 +235,11 @@ public class MaximizeSpecificColumnGridLayout implements LayoutManager {
 
 	private int getMaximizedCount() {
 		int count = 0;
-		for (int i = 0; i < maximizedColumns.length; i++) {
-			if (maximizedColumns[i]) {
-				count++;
-			}
-		}
+        for (boolean maximizedColumn : maximizedColumns) {
+            if (maximizedColumn) {
+                count++;
+            }
+        }
 		return count;
 	}
 

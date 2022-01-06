@@ -132,17 +132,13 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 		}
 		ProgramContext programContext = program.getProgramContext();
 
-		Iterator<RegisterValue> iterator = contextValueList.iterator();
-		while (iterator.hasNext()) {
-			RegisterValue contextValue = iterator.next();
-
-			try {
-				programContext.setRegisterValue(addr, addr, contextValue);
-			}
-			catch (ContextChangeException e) {
-				// context conflicts cause problems, let already layed down context win.
-			}
-		}
+        for (RegisterValue contextValue : contextValueList) {
+            try {
+                programContext.setRegisterValue(addr, addr, contextValue);
+            } catch (ContextChangeException e) {
+                // context conflicts cause problems, let already layed down context win.
+            }
+        }
 
 		// context applied at location, throw away
 		contextValueList = null;
@@ -152,17 +148,13 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 		if (contextValueList == null) {
 			return;
 		}
-		Iterator<RegisterValue> iterator = contextValueList.iterator();
-		while (iterator.hasNext()) {
-			RegisterValue contextValue = iterator.next();
-
-			try {
-				pcont.setRegisterValue(contextValue);
-			}
-			catch (ContextChangeException e) {
-				// context conflicts cause problems, let already layed down context win.
-			}
-		}
+        for (RegisterValue contextValue : contextValueList) {
+            try {
+                pcont.setRegisterValue(contextValue);
+            } catch (ContextChangeException e) {
+                // context conflicts cause problems, let already layed down context win.
+            }
+        }
 	}
 
 	public class CodeBoundaryAction implements MatchAction {
@@ -831,18 +823,16 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 
 	@Override
 	public MatchAction getMatchActionByName(String nm) {
-		if (nm.equals("funcstart")) {
-			return new FunctionStartAction();
-		}
-		else if (nm.equals("possiblefuncstart")) {
-			return new PossibleFunctionStartAction();
-		}
-		else if (nm.equals("codeboundary")) {
-			return new CodeBoundaryAction();
-		}
-		else if (nm.equals("setcontext")) {
-			return new ContextAction();
-		}
+        switch (nm) {
+            case "funcstart":
+                return new FunctionStartAction();
+            case "possiblefuncstart":
+                return new PossibleFunctionStartAction();
+            case "codeboundary":
+                return new CodeBoundaryAction();
+            case "setcontext":
+                return new ContextAction();
+        }
 		return null;
 	}
 

@@ -90,22 +90,22 @@ public final class StructConverterUtil {
 		if (fieldClazz.isArray()) {
 			return getArrayDataType(field, object, fieldClazz);
 		}
-		if (fieldClazz.equals(byte.class) || fieldClazz.equals(Byte.class)) {
+		if (fieldClazz == byte.class || fieldClazz == Byte.class) {
 			return new ByteDataType();
 		}
-		if (fieldClazz.equals(short.class) || fieldClazz.equals(Short.class)) {
+		if (fieldClazz == short.class || fieldClazz == Short.class) {
 			return new WordDataType();
 		}
-		if (fieldClazz.equals(int.class) || fieldClazz.equals(Integer.class)) {
+		if (fieldClazz == int.class || fieldClazz == Integer.class) {
 			return new DWordDataType();
 		}
-		if (fieldClazz.equals(long.class) || fieldClazz.equals(Long.class)) {
+		if (fieldClazz == long.class || fieldClazz == Long.class) {
 			return new QWordDataType();
 		}
-		if (fieldClazz.equals(float.class) || fieldClazz.equals(Float.class)) {
+		if (fieldClazz == float.class || fieldClazz == Float.class) {
 			return new FloatDataType();
 		}
-		if (fieldClazz.equals(double.class) || fieldClazz.equals(Double.class)) {
+		if (fieldClazz == double.class || fieldClazz == Double.class) {
 			return new DoubleDataType();
 		}
 		if (StructConverter.class.isAssignableFrom(fieldClazz)) {
@@ -117,7 +117,7 @@ public final class StructConverterUtil {
 	private static DataType getArrayDataType(Field field, Object object, Class<?> clazz) {
 		Class<?> arrayClazz = clazz.getComponentType();
 
-		if (arrayClazz.equals(byte.class)) {
+		if (arrayClazz == byte.class) {
 			try {
 				field.setAccessible(true);
 				byte [] array = (byte [])field.get(object);
@@ -129,7 +129,7 @@ public final class StructConverterUtil {
 				throw new RuntimeException(e);
 			}
 		}
-		else if (arrayClazz.equals(int.class)) {
+		else if (arrayClazz == int.class) {
 			try {
 				field.setAccessible(true);
 				int [] array = (int [])field.get(object);

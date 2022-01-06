@@ -247,33 +247,34 @@ public class HTMLFileParser {
 			}
 		}
 
-		if (mode == READING_ATTR) {
-			map.put(buf.toString().toLowerCase(), null);
-		}
-		else if (mode == LOOKING_FOR_VALUE) {
-			map.put(attr, null);
-		}
-		else if (mode == READING_VALUE) {
-			map.put(attr, buf.toString());
-		}
+        switch (mode) {
+            case READING_ATTR:
+                map.put(buf.toString().toLowerCase(), null);
+                break;
+            case LOOKING_FOR_VALUE:
+                map.put(attr, null);
+                break;
+            case READING_VALUE:
+                map.put(attr, buf.toString());
+                break;
+        }
 
 		tagProcessor.processTag(tagType, map, file, lineNum);
 
 		buf = new StringBuffer();
 		buf.append('<');
 		buf.append(tagType);
-		Iterator<String> iter = map.keySet().iterator();
-		while (iter.hasNext()) {
-			attr = iter.next();
-			String value = map.get(attr);
-			buf.append(' ');
-			buf.append(attr);
-			if (value != null) {
-				buf.append("=\"");
-				buf.append(value);
-				buf.append("\"");
-			}
-		}
+        for (String s : map.keySet()) {
+            attr = s;
+            String value = map.get(attr);
+            buf.append(' ');
+            buf.append(attr);
+            if (value != null) {
+                buf.append("=\"");
+                buf.append(value);
+                buf.append("\"");
+            }
+        }
 		buf.append('>');
 		return buf.toString();
 	}

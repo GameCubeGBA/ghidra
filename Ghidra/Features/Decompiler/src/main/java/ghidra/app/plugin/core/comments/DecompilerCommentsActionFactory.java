@@ -119,7 +119,7 @@ public class DecompilerCommentsActionFactory extends CommentsActionFactory {
     private static class DecompilerEditCommentsAction extends
             DecompilerSetCommentsAction {
         // Edit Comments Action info
-        private final static String[] EDIT_MENUPATH = new String[] {
+        private final static String[] EDIT_MENUPATH = {
                 "Comments", "Set..." };
 
         DecompilerEditCommentsAction(CommentsDialog dialog, String name) {

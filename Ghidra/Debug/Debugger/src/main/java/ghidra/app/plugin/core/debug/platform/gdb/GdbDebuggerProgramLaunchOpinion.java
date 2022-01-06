@@ -134,15 +134,17 @@ public class GdbDebuggerProgramLaunchOpinion implements DebuggerProgramLaunchOpi
 				continue;
 			}
 			String clsName = factory.getClass().getName();
-			if (clsName.equals(InVmGdbDebuggerProgramLaunchOffer.FACTORY_CLS_NAME)) {
-				offers.add(new InVmGdbDebuggerProgramLaunchOffer(program, tool, factory));
-			}
-			else if (clsName.equals(GadpGdbDebuggerProgramLaunchOffer.FACTORY_CLS_NAME)) {
-				offers.add(new GadpGdbDebuggerProgramLaunchOffer(program, tool, factory));
-			}
-			else if (clsName.equals(SshGdbDebuggerProgramLaunchOffer.FACTORY_CLS_NAME)) {
-				offers.add(new SshGdbDebuggerProgramLaunchOffer(program, tool, factory));
-			}
+            switch (clsName) {
+                case InVmGdbDebuggerProgramLaunchOffer.FACTORY_CLS_NAME:
+                    offers.add(new InVmGdbDebuggerProgramLaunchOffer(program, tool, factory));
+                    break;
+                case GadpGdbDebuggerProgramLaunchOffer.FACTORY_CLS_NAME:
+                    offers.add(new GadpGdbDebuggerProgramLaunchOffer(program, tool, factory));
+                    break;
+                case SshGdbDebuggerProgramLaunchOffer.FACTORY_CLS_NAME:
+                    offers.add(new SshGdbDebuggerProgramLaunchOffer(program, tool, factory));
+                    break;
+            }
 		}
 		return offers;
 	}

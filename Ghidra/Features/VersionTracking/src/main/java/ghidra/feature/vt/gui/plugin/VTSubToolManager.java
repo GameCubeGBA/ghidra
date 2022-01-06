@@ -287,9 +287,7 @@ public class VTSubToolManager implements VTControllerListener, OptionsChangeList
 
 		String[] newPath = new String[menuPath.length + 1];
 		newPath[0] = VTPlugin.MARKUP_POPUP_MENU_NAME;
-		for (int i = 0; i < menuPath.length; i++) {
-			newPath[i + 1] = menuPath[i];
-		}
+        System.arraycopy(menuPath, 0, newPath, 1, menuPath.length);
 
 		menuData.setMenuPath(newPath);
 

@@ -122,28 +122,28 @@ public class ClangLayoutController implements LayoutModel, LayoutModelListener {
 
 	@Override
 	public void modelSizeChanged(IndexMapper mapper) {
-		for (int i = 0; i < listeners.size(); ++i) {
-			listeners.get(i).modelSizeChanged(mapper);
-		}
+        for (LayoutModelListener listener : listeners) {
+            listener.modelSizeChanged(mapper);
+        }
 	}
 
 	public void modelChanged() {
-		for (int i = 0; i < listeners.size(); ++i) {
-			listeners.get(i).modelSizeChanged(IndexMapper.IDENTITY_MAPPER);
-		}
+        for (LayoutModelListener listener : listeners) {
+            listener.modelSizeChanged(IndexMapper.IDENTITY_MAPPER);
+        }
 	}
 
 	@Override
 	public void dataChanged(BigInteger start, BigInteger end) {
-		for (int i = 0; i < listeners.size(); ++i) {
-			listeners.get(i).dataChanged(start, end);
-		}
+        for (LayoutModelListener listener : listeners) {
+            listener.dataChanged(start, end);
+        }
 	}
 
 	public void layoutChanged() {
-		for (int i = 0; i < listeners.size(); ++i) {
-			listeners.get(i).dataChanged(BigInteger.ZERO, numIndexes);
-		}
+        for (LayoutModelListener listener : listeners) {
+            listener.dataChanged(BigInteger.ZERO, numIndexes);
+        }
 	}
 
 	@Override
@@ -336,15 +336,15 @@ public class ClangLayoutController implements LayoutModel, LayoutModelListener {
 		for (String element : errlines_init) {
 			splitToMaxWidthLines(errlines, element);
 		}
-		for (int i = 0; i < errlines.size(); ++i) {
-			ClangTokenGroup line = new ClangTokenGroup(docroot);
-			ClangBreak lineBreak = new ClangBreak(line, 1);
-			ClangSyntaxToken message =
-				new ClangSyntaxToken(line, errlines.get(i), ClangXML.COMMENT_COLOR);
-			line.AddTokenGroup(lineBreak);
-			line.AddTokenGroup(message);
-			docroot.AddTokenGroup(line);
-		}
+        for (String errline : errlines) {
+            ClangTokenGroup line = new ClangTokenGroup(docroot);
+            ClangBreak lineBreak = new ClangBreak(line, 1);
+            ClangSyntaxToken message =
+                    new ClangSyntaxToken(line, errline, ClangXML.COMMENT_COLOR);
+            line.AddTokenGroup(lineBreak);
+            line.AddTokenGroup(message);
+            docroot.AddTokenGroup(line);
+        }
 
 		return true; // true signals we have an error message
 	}

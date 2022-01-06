@@ -335,12 +335,12 @@ public class NamespaceManager implements ManagerDB {
 			monitor.checkCanceled();
 			namespaceMap.clearRange(fromAddr, rangeEnd);
 
-			for (int i = 0; i < list.size(); i++) {
-				monitor.checkCanceled();
-				NamespaceHolder h = list.get(i);
-				namespaceMap.paintRange(h.range.getMinAddress(), h.range.getMaxAddress(),
-					new LongField(h.namespaceID));
-			}
+            for (NamespaceHolder namespaceHolder : list) {
+                monitor.checkCanceled();
+                NamespaceHolder h = namespaceHolder;
+                namespaceMap.paintRange(h.range.getMinAddress(), h.range.getMaxAddress(),
+                        new LongField(h.namespaceID));
+            }
 		}
 		finally {
 			clearCache();

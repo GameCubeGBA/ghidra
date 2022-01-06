@@ -159,10 +159,10 @@ public class IntelHexRecord {
 		accum += loadOffset & 0xff;
 		accum += (loadOffset >> 8) & 0xff;
 		accum += recordType & 0xff;
-		for (int ii = 0; ii < data.length; ++ii) {
-			final int t = data[ii] & 0xff;
-			accum += t;
-		}
+        for (byte datum : data) {
+            final int t = datum & 0xff;
+            accum += t;
+        }
 		final int lowest = accum & 0xff;
 		final int chk = (0x100 - lowest) & 0xff;
 		return chk;
@@ -188,9 +188,9 @@ public class IntelHexRecord {
 
 	public String getDataString() {
 		StringBuilder buffy = new StringBuilder();
-		for (int i = 0; i < data.length; i++) {
-			buffy.append(String.format("%02X", data[i]));
-		}
+        for (byte datum : data) {
+            buffy.append(String.format("%02X", datum));
+        }
 		return buffy.toString();
 	}
 
@@ -211,9 +211,9 @@ public class IntelHexRecord {
 		sb.append(String.format(":%02X%04X%02X", getRecordLength(), getLoadOffset(),
 			getRecordType()));
 		// warning: careful with that axe, Eugene
-		for (int ii = 0; ii < data.length; ++ii) {
-			sb.append(String.format("%02X", data[ii]));
-		}
+        for (byte datum : data) {
+            sb.append(String.format("%02X", datum));
+        }
 		sb.append(String.format("%02X", getActualChecksum()));
 		return sb.toString();
 	}

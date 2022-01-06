@@ -75,7 +75,7 @@ public class ClassSymbolNode extends SymbolNode {
 
 	private boolean isProgramSelection(DataFlavor flavor) {
 		Class<?> clazz = flavor.getRepresentationClass();
-		return SelectionTransferData.class.equals(clazz);
+		return SelectionTransferData.class == clazz;
 	}
 
 	private boolean isExternal(DataFlavor dataFlavor) {

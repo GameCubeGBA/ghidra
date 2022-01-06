@@ -17,6 +17,7 @@ package ghidra.feature.vt.db;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.junit.After;
 import org.junit.Before;
@@ -103,7 +104,7 @@ public class VTBaseTestCase extends AbstractGenericTest {
 			{
 				symbolTable.getPrimarySymbolIterator((AddressSetView) any, true);
 				minTimes = 0;
-				result = new SymbolIteratorAdapter(new ArrayList<Symbol>().iterator());
+				result = new SymbolIteratorAdapter(Collections.emptyIterator());
 			}
 		};
 

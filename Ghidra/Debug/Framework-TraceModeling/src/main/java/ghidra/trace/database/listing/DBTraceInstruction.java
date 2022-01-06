@@ -685,7 +685,7 @@ public class DBTraceInstruction extends AbstractDBTraceCodeUnit<DBTraceInstructi
 		}
 		// Ensure that prototype is the same implementation
 		InstructionPrototype otherProto = instruction.getPrototype();
-		if (!otherProto.getClass().equals(prototype.getClass())) {
+		if (otherProto.getClass() != prototype.getClass()) {
 			throw new UnknownContextException("Instruction has incompatible prototype at: (" +
 				getStartSnap() + "," + instructionAddress + ")");
 		}

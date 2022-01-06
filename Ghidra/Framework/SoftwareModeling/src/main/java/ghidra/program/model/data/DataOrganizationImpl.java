@@ -658,78 +658,81 @@ public class DataOrganizationImpl implements DataOrganization {
 		while (parser.peek().isStart()) {
 			String name = parser.peek().getName();
 
-			if (name.equals("char_type")) {
-				XmlElement subel = parser.start();
-				String boolStr = subel.getAttribute("signed");
-				isSignedChar = SpecXmlUtils.decodeBoolean(boolStr);
-				parser.end(subel);
-				continue;
-			}
-			else if (name.equals("bitfield_packing")) {
-				bitFieldPacking.restoreXml(parser);
-				continue;
-			}
-			else if (name.equals("size_alignment_map")) {
-				XmlElement subel = parser.start();
-				while (parser.peek().isStart()) {
-					XmlElement subsubel = parser.start();
-					int size = SpecXmlUtils.decodeInt(subsubel.getAttribute("size"));
-					int alignment = SpecXmlUtils.decodeInt(subsubel.getAttribute("alignment"));
-					sizeAlignmentMap.put(size, alignment);
-					parser.end(subsubel);
-				}
-				parser.end(subel);
-				continue;
-			}
+            switch (name) {
+                case "char_type": {
+                    XmlElement subel = parser.start();
+                    String boolStr = subel.getAttribute("signed");
+                    isSignedChar = SpecXmlUtils.decodeBoolean(boolStr);
+                    parser.end(subel);
+                    continue;
+                }
+                case "bitfield_packing":
+                    bitFieldPacking.restoreXml(parser);
+                    continue;
+                case "size_alignment_map": {
+                    XmlElement subel = parser.start();
+                    while (parser.peek().isStart()) {
+                        XmlElement subsubel = parser.start();
+                        int size = SpecXmlUtils.decodeInt(subsubel.getAttribute("size"));
+                        int alignment = SpecXmlUtils.decodeInt(subsubel.getAttribute("alignment"));
+                        sizeAlignmentMap.put(size, alignment);
+                        parser.end(subsubel);
+                    }
+                    parser.end(subel);
+                    continue;
+                }
+            }
 
 			XmlElement subel = parser.start();
 			String value = subel.getAttribute("value");
 
-			if (name.equals("absolute_max_alignment")) {
-				absoluteMaxAlignment = SpecXmlUtils.decodeInt(value);
-			}
-			else if (name.equals("machine_alignment")) {
-				machineAlignment = SpecXmlUtils.decodeInt(value);
-			}
-			else if (name.equals("default_alignment")) {
-				defaultAlignment = SpecXmlUtils.decodeInt(value);
-			}
-			else if (name.equals("default_pointer_alignment")) {
-				defaultPointerAlignment = SpecXmlUtils.decodeInt(value);
-			}
-			else if (name.equals("pointer_size")) {
-				pointerSize = SpecXmlUtils.decodeInt(value);
-			}
-			else if (name.equals("pointer_shift")) {
-				pointerShift = SpecXmlUtils.decodeInt(value);
-			}
-			else if (name.equals("char_size")) {
-				charSize = SpecXmlUtils.decodeInt(value);
-			}
-			else if (name.equals("wchar_size")) {
-				wideCharSize = SpecXmlUtils.decodeInt(value);
-			}
-			else if (name.equals("short_size")) {
-				shortSize = SpecXmlUtils.decodeInt(value);
-			}
-			else if (name.equals("integer_size")) {
-				integerSize = SpecXmlUtils.decodeInt(value);
-			}
-			else if (name.equals("long_size")) {
-				longSize = SpecXmlUtils.decodeInt(value);
-			}
-			else if (name.equals("long_long_size")) {
-				longLongSize = SpecXmlUtils.decodeInt(value);
-			}
-			else if (name.equals("float_size")) {
-				floatSize = SpecXmlUtils.decodeInt(value);
-			}
-			else if (name.equals("double_size")) {
-				doubleSize = SpecXmlUtils.decodeInt(value);
-			}
-			else if (name.equals("long_double_size")) {
-				longDoubleSize = SpecXmlUtils.decodeInt(value);
-			}
+            switch (name) {
+                case "absolute_max_alignment":
+                    absoluteMaxAlignment = SpecXmlUtils.decodeInt(value);
+                    break;
+                case "machine_alignment":
+                    machineAlignment = SpecXmlUtils.decodeInt(value);
+                    break;
+                case "default_alignment":
+                    defaultAlignment = SpecXmlUtils.decodeInt(value);
+                    break;
+                case "default_pointer_alignment":
+                    defaultPointerAlignment = SpecXmlUtils.decodeInt(value);
+                    break;
+                case "pointer_size":
+                    pointerSize = SpecXmlUtils.decodeInt(value);
+                    break;
+                case "pointer_shift":
+                    pointerShift = SpecXmlUtils.decodeInt(value);
+                    break;
+                case "char_size":
+                    charSize = SpecXmlUtils.decodeInt(value);
+                    break;
+                case "wchar_size":
+                    wideCharSize = SpecXmlUtils.decodeInt(value);
+                    break;
+                case "short_size":
+                    shortSize = SpecXmlUtils.decodeInt(value);
+                    break;
+                case "integer_size":
+                    integerSize = SpecXmlUtils.decodeInt(value);
+                    break;
+                case "long_size":
+                    longSize = SpecXmlUtils.decodeInt(value);
+                    break;
+                case "long_long_size":
+                    longLongSize = SpecXmlUtils.decodeInt(value);
+                    break;
+                case "float_size":
+                    floatSize = SpecXmlUtils.decodeInt(value);
+                    break;
+                case "double_size":
+                    doubleSize = SpecXmlUtils.decodeInt(value);
+                    break;
+                case "long_double_size":
+                    longDoubleSize = SpecXmlUtils.decodeInt(value);
+                    break;
+            }
 			parser.end(subel);
 		}
 

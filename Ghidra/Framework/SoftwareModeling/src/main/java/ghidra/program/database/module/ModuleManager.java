@@ -346,13 +346,13 @@ class ModuleManager {
 			monitor.checkCanceled();
 			fragMap.clearRange(fromAddr, rangeEnd);
 
-			for (int i = 0; i < list.size(); i++) {
-				monitor.checkCanceled();
-				FragmentHolder fh = list.get(i);
-				fragMap.paintRange(fh.range.getMinAddress(), fh.range.getMaxAddress(),
-					new LongField(fh.frag.getKey()));
-				fh.frag.addRange(fh.range);
-			}
+            for (FragmentHolder fragmentHolder : list) {
+                monitor.checkCanceled();
+                FragmentHolder fh = fragmentHolder;
+                fragMap.paintRange(fh.range.getMinAddress(), fh.range.getMaxAddress(),
+                        new LongField(fh.frag.getKey()));
+                fh.frag.addRange(fh.range);
+            }
 			treeMgr.updateTreeRecord(record);
 
 			// generate an event...

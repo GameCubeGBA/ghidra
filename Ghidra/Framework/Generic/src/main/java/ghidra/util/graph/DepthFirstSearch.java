@@ -81,68 +81,55 @@ public class DepthFirstSearch
     {
       do
       {
-        for( int i=0; i< seeds.length; i++ )
-        {
-          v = seeds[i];
-          if( isUnseen( v )  )
-          {
-              seedsUsed.add( v );
-              pending.push( v );
-              unseen.remove( v );
-              while( !pending.isEmpty() )
-              {
-                  o = pending.peek();
-                  if( o instanceof Vertex )
-                  {
-                      v = (Vertex)o;
-                      edges = graph.getOutgoingEdges( v );
-                      edgeIter = edges.iterator();
-                      while( edgeIter.hasNext() )
-                      {
-                          pending.push( edgeIter.next() );
-                      }
-                      if( edges.size() == 0 )
-                      {
-                          finished.add( v );
-                          finishListInReverseOrder.addFirst( v );
-                          pending.pop();
-                      }
-                  }
-                  else //it's an edge
-                  {
-                      e = (Edge)pending.pop();
-                      v = e.to();
-                      if( isUnseen( v ) )
-                      {
-                          pending.push( e );
-                          pending.push( v );
-                          treeEdges.add( e );
-                          unseen.remove( v );
-                      }
-                      else if( isCompleted( v ) )
-                      {
-                          if( pending.peek() instanceof Vertex )
-                          {
-                             v = (Vertex)pending.pop();
-                             finished.add( v );
-                             finishListInReverseOrder.addFirst( v );
+          for (Vertex seed : seeds) {
+              v = seed;
+              if (isUnseen(v)) {
+                  seedsUsed.add(v);
+                  pending.push(v);
+                  unseen.remove(v);
+                  while (!pending.isEmpty()) {
+                      o = pending.peek();
+                      if (o instanceof Vertex) {
+                          v = (Vertex) o;
+                          edges = graph.getOutgoingEdges(v);
+                          edgeIter = edges.iterator();
+                          while (edgeIter.hasNext()) {
+                              pending.push(edgeIter.next());
                           }
-                      }
-                      else //it is pending
-                      {
-                          backEdges.add( e );
-                          if( pending.peek() instanceof Vertex )
-                          {
-                              v = (Vertex)pending.pop();
-                              finished.add( v );
-                              finishListInReverseOrder.addFirst( v );
+                          if (edges.size() == 0) {
+                              finished.add(v);
+                              finishListInReverseOrder.addFirst(v);
+                              pending.pop();
                           }
-                      }
+                      } else //it's an edge
+                      {
+                          e = (Edge) pending.pop();
+                          v = e.to();
+                          if (isUnseen(v)) {
+                              pending.push(e);
+                              pending.push(v);
+                              treeEdges.add(e);
+                              unseen.remove(v);
+                          } else if (isCompleted(v)) {
+                              if (pending.peek() instanceof Vertex) {
+                                  v = (Vertex) pending.pop();
+                                  finished.add(v);
+                                  finishListInReverseOrder.addFirst(v);
+                              }
+                          } else //it is pending
+                          {
+                              backEdges.add(e);
+                              if (pending.peek() instanceof Vertex) {
+                                  v = (Vertex) pending.pop();
+                                  finished.add(v);
+                                  finishListInReverseOrder.addFirst(v);
+                              }
+                          }
 
-                  }//peek at top of stack
-              } //while stack is not empty
-          }//if next seed is unseen
-        }//while there are more seeds
+                      }//peek at top of stack
+                  } //while stack is not empty
+              }//if next seed is unseen
+          }//while there are more seeds
 
         //If we need to search the whole graph (not just what is reachable from
         //the given seeds, then repeat the procedure using an iterator on list
@@ -160,68 +147,55 @@ public class DepthFirstSearch
     {
       do
       {
-        for( int i=0; i< seeds.length; i++ )
-        {
-          v = seeds[i];
-          if( isUnseen( v )  )
-          {
-              seedsUsed.add( v );
-              pending.push( v );
-              unseen.remove( v );
-              while( !pending.isEmpty() )
-              {
-                  o = pending.peek();
-                  if( o instanceof Vertex )
-                  {
-                      v = (Vertex)o;
-                      edges = graph.getIncomingEdges( v );
-                      edgeIter = edges.iterator();
-                      while( edgeIter.hasNext() )
-                      {
-                          pending.push( edgeIter.next() );
-                      }
-                      if( edges.size() == 0 )
-                      {
-                          finished.add( v );
-                          finishListInReverseOrder.addFirst( v );
-                          pending.pop();
-                      }
-                  }
-                  else //it's an edge
-                  {
-                      e = (Edge)pending.pop();
-                      v = e.from();
-                      if( isUnseen( v ) )
-                      {
-                          pending.push( e );
-                          pending.push( v );
-                          treeEdges.add( e );
-                          unseen.remove( v );
-                      }
-                      else if( isCompleted( v ) )
-                      {
-                          if( pending.peek() instanceof Vertex )
-                          {
-                             v = (Vertex)pending.pop();
-                             finished.add( v );
-                             finishListInReverseOrder.addFirst( v );
+          for (Vertex seed : seeds) {
+              v = seed;
+              if (isUnseen(v)) {
+                  seedsUsed.add(v);
+                  pending.push(v);
+                  unseen.remove(v);
+                  while (!pending.isEmpty()) {
+                      o = pending.peek();
+                      if (o instanceof Vertex) {
+                          v = (Vertex) o;
+                          edges = graph.getIncomingEdges(v);
+                          edgeIter = edges.iterator();
+                          while (edgeIter.hasNext()) {
+                              pending.push(edgeIter.next());
                           }
-                      }
-                      else //it is pending
-                      {
-                          backEdges.add( e );
-                          if( pending.peek() instanceof Vertex )
-                          {
-                              v = (Vertex)pending.pop();
-                              finished.add( v );
-                              finishListInReverseOrder.addFirst( v );
+                          if (edges.size() == 0) {
+                              finished.add(v);
+                              finishListInReverseOrder.addFirst(v);
+                              pending.pop();
                           }
-                      }
+                      } else //it's an edge
+                      {
+                          e = (Edge) pending.pop();
+                          v = e.from();
+                          if (isUnseen(v)) {
+                              pending.push(e);
+                              pending.push(v);
+                              treeEdges.add(e);
+                              unseen.remove(v);
+                          } else if (isCompleted(v)) {
+                              if (pending.peek() instanceof Vertex) {
+                                  v = (Vertex) pending.pop();
+                                  finished.add(v);
+                                  finishListInReverseOrder.addFirst(v);
+                              }
+                          } else //it is pending
+                          {
+                              backEdges.add(e);
+                              if (pending.peek() instanceof Vertex) {
+                                  v = (Vertex) pending.pop();
+                                  finished.add(v);
+                                  finishListInReverseOrder.addFirst(v);
+                              }
+                          }
 
-                  }//peek at top of stack
-              } //while stack is not empty
-          }//if next seed is unseen
-        }//while there are more seeds
+                      }//peek at top of stack
+                  } //while stack is not empty
+              }//if next seed is unseen
+          }//while there are more seeds
 
         //If we need to search the whole graph (not just what is reachable from
         //the given seeds, then repeat the procedure using an iterator on list
@@ -240,78 +214,63 @@ public class DepthFirstSearch
     {
       do
       {
-        for( int i=0; i< seeds.length; i++ )
-        {
-          v = seeds[i];
-          if( isUnseen( v )  )
-          {
-              seedsUsed.add( v );
-              pending.push( v );
-              unseen.remove( v );
-              while( !pending.isEmpty() )
-              {
-                  o = pending.peek();
-                  if( o instanceof Vertex )
-                  {
-                      v = (Vertex)o;
-                      edges = graph.getOutgoingEdges( v );
-                      edges.addAll( graph.getIncomingEdges( v ) );
-                      edgeIter = edges.iterator();
-                      while( edgeIter.hasNext() )
-                      {
-                          pending.push( edgeIter.next() );
-                      }
-                      if( edges.size() == 0 )
-                      {
-                          finished.add( v );
-                          finishListInReverseOrder.addFirst( v );
-                          pending.pop();
-                      }
-                  }
-                  else //its an edge
-                  {
-                      e = (Edge)pending.pop();
-                      ListIterator<KeyedObject> li = pending.listIterator(pending.size());
-                      v = null;
-                      while( li.hasPrevious() && (v == null) )
-                      {
-                           o = li.previous();
-                           if( o instanceof Vertex )
-                           {
-                               v = (Vertex)o;
-                           }
-                      }
-                      if( isUnseen( v ) )
-                      {
-                          pending.push( e );
-                          pending.push( v );
-                          treeEdges.add( e );
-                          unseen.remove( v );
-                      }
-                      else if( isCompleted( v ) )
-                      {
-                          if( pending.peek() instanceof Vertex )
-                          {
-                             v = (Vertex)pending.pop();
-                             finished.add( v );
-                             finishListInReverseOrder.addFirst( v );
+          for (Vertex seed : seeds) {
+              v = seed;
+              if (isUnseen(v)) {
+                  seedsUsed.add(v);
+                  pending.push(v);
+                  unseen.remove(v);
+                  while (!pending.isEmpty()) {
+                      o = pending.peek();
+                      if (o instanceof Vertex) {
+                          v = (Vertex) o;
+                          edges = graph.getOutgoingEdges(v);
+                          edges.addAll(graph.getIncomingEdges(v));
+                          edgeIter = edges.iterator();
+                          while (edgeIter.hasNext()) {
+                              pending.push(edgeIter.next());
                           }
-                      }
-                      else //it is pending
-                      {
-                          backEdges.add( e );
-                          if( pending.peek() instanceof Vertex )
-                          {
-                              v = (Vertex)pending.pop();
-                              finished.add( v );
-                              finishListInReverseOrder.addFirst( v );
+                          if (edges.size() == 0) {
+                              finished.add(v);
+                              finishListInReverseOrder.addFirst(v);
+                              pending.pop();
                           }
-                      }
+                      } else //its an edge
+                      {
+                          e = (Edge) pending.pop();
+                          ListIterator<KeyedObject> li = pending.listIterator(pending.size());
+                          v = null;
+                          while (li.hasPrevious() && (v == null)) {
+                              o = li.previous();
+                              if (o instanceof Vertex) {
+                                  v = (Vertex) o;
+                              }
+                          }
+                          if (isUnseen(v)) {
+                              pending.push(e);
+                              pending.push(v);
+                              treeEdges.add(e);
+                              unseen.remove(v);
+                          } else if (isCompleted(v)) {
+                              if (pending.peek() instanceof Vertex) {
+                                  v = (Vertex) pending.pop();
+                                  finished.add(v);
+                                  finishListInReverseOrder.addFirst(v);
+                              }
+                          } else //it is pending
+                          {
+                              backEdges.add(e);
+                              if (pending.peek() instanceof Vertex) {
+                                  v = (Vertex) pending.pop();
+                                  finished.add(v);
+                                  finishListInReverseOrder.addFirst(v);
+                              }
+                          }
 
-                  }//peek at top of stack
-              } //while stack is not empty
-          }//if next seed is unseen
-        }//while there are more seeds
+                      }//peek at top of stack
+                  } //while stack is not empty
+              }//if next seed is unseen
+          }//while there are more seeds
 
         //If we need to search the whole graph (not just what is reachable from
         //the given seeds, then repeat the procedure using an iterator on list
@@ -415,10 +374,8 @@ public class DepthFirstSearch
   public DirectedGraph spanningTree()
   {
       DirectedGraph g = new DirectedGraph( treeEdges.size() + 1, treeEdges.size() );
-      Iterator<Edge> iter = treeEdges.iterator();
-      while( iter.hasNext() )
-      {
-          g.add( iter.next() );
+      for (Edge treeEdge : treeEdges) {
+          g.add(treeEdge);
       }
       return g;
   }

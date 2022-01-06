@@ -196,8 +196,8 @@ public class CreateStructureInStructureCmdTest extends AbstractGenericTest {
 		assertEquals(4, struct.getNumComponents());
 
 		Address address = addr(startOffset);
-		int[] fromPath = new int[] { 1 };
-		int[] toPath = new int[] { 2 };
+		int[] fromPath = { 1 };
+		int[] toPath = { 2 };
 		Structure childStructure = StructureFactory.createStructureDataTypeInStrucuture(program,
 			address, fromPath, toPath, "TestStructB", true);
 		cmd = new CreateStructureInStructureCmd(childStructure, address, fromPath, toPath);

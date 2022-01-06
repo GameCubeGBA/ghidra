@@ -412,31 +412,29 @@ class LibrarySymbolTable {
 			version = root.getAttributeValue("VERSION");
 
 			List<Element> children = CollectionUtils.asList(root.getChildren(), Element.class);
-			Iterator<Element> iter = children.iterator();
-			while (iter.hasNext()) {
-				Element export = iter.next();
-				int ordinal = Integer.parseInt(export.getAttributeValue("ORDINAL"));
-				String name = export.getAttributeValue("NAME");
-				int purge = Integer.parseInt(export.getAttributeValue("PURGE"));
-				String comment = export.getAttributeValue("COMMENT");
-				String fowardLibName = export.getAttributeValue("FOWARDLIBRARY");
-				String fowardSymName = export.getAttributeValue("FOWARDSYMBOL");
+            for (Element export : children) {
+                int ordinal = Integer.parseInt(export.getAttributeValue("ORDINAL"));
+                String name = export.getAttributeValue("NAME");
+                int purge = Integer.parseInt(export.getAttributeValue("PURGE"));
+                String comment = export.getAttributeValue("COMMENT");
+                String fowardLibName = export.getAttributeValue("FOWARDLIBRARY");
+                String fowardSymName = export.getAttributeValue("FOWARDSYMBOL");
 
-				String noReturnStr = export.getAttributeValue("NO_RETURN");
-				boolean noReturn = noReturnStr != null && "y".equals(noReturnStr);
+                String noReturnStr = export.getAttributeValue("NO_RETURN");
+                boolean noReturn = noReturnStr != null && "y".equals(noReturnStr);
 
-				if (fowardLibName != null && fowardLibName.length() > 0 &&
-					!fowardLibName.equals(tableName)) {
-					forwards.add(fowardLibName);
-				}
+                if (fowardLibName != null && fowardLibName.length() > 0 &&
+                        !fowardLibName.equals(tableName)) {
+                    forwards.add(fowardLibName);
+                }
 
-				LibraryExportedSymbol sym = new LibraryExportedSymbol(tableName, size, ordinal,
-					name, fowardLibName, fowardSymName, purge, noReturn, comment);
+                LibraryExportedSymbol sym = new LibraryExportedSymbol(tableName, size, ordinal,
+                        name, fowardLibName, fowardSymName, purge, noReturn, comment);
 
-				exportList.add(sym);
-				symMap.put(name, sym);
-				ordMap.put(Integer.valueOf(ordinal), sym);
-			}
+                exportList.add(sym);
+                symMap.put(name, sym);
+                ordMap.put(Integer.valueOf(ordinal), sym);
+            }
 		}
 		catch (JDOMException e) {
 			throw new IOException(e);
@@ -481,29 +479,26 @@ class LibrarySymbolTable {
 		root.setAttribute("DATE", TIMESTAMP_FORMAT.format(new Date(lastModifiedSeconds)));
 		root.setAttribute("VERSION", lversion);
 
-		Iterator<LibraryExportedSymbol> iter = exportList.iterator();
-		while (iter.hasNext()) {
-			LibraryExportedSymbol sym = iter.next();
+        for (LibraryExportedSymbol sym : exportList) {
+            Element export = new Element("EXPORT");
 
-			Element export = new Element("EXPORT");
+            export.setAttribute("ORDINAL", sym.getOrdinal() + "");
+            export.setAttribute("NAME", sym.getName() == null ? "" : sym.getName());
+            export.setAttribute("PURGE", sym.getPurge() + "");
+            export.setAttribute("COMMENT", sym.getComment() == null ? "" : sym.getComment());
 
-			export.setAttribute("ORDINAL", sym.getOrdinal() + "");
-			export.setAttribute("NAME", sym.getName() == null ? "" : sym.getName());
-			export.setAttribute("PURGE", sym.getPurge() + "");
-			export.setAttribute("COMMENT", sym.getComment() == null ? "" : sym.getComment());
+            if (sym.hasNoReturn()) {
+                export.setAttribute("NO_RETURN", "y");
+            }
 
-			if (sym.hasNoReturn()) {
-				export.setAttribute("NO_RETURN", "y");
-			}
-
-			if (sym.isFowardEntry()) {
-				export.setAttribute("FOWARDLIBRARY",
-					sym.getFowardLibraryName() == null ? "" : sym.getFowardLibraryName());
-				export.setAttribute("FOWARDSYMBOL",
-					sym.getFowardSymbolName() == null ? "" : sym.getFowardSymbolName());
-			}
-			root.addContent(export);
-		}
+            if (sym.isFowardEntry()) {
+                export.setAttribute("FOWARDLIBRARY",
+                        sym.getFowardLibraryName() == null ? "" : sym.getFowardLibraryName());
+                export.setAttribute("FOWARDSYMBOL",
+                        sym.getFowardSymbolName() == null ? "" : sym.getFowardSymbolName());
+            }
+            root.addContent(export);
+        }
 
         try (FileOutputStream fos = new FileOutputStream(output)) {
             Document doc = new Document(root);

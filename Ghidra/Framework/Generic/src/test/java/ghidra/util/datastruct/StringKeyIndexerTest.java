@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 package ghidra.util.datastruct;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -149,9 +150,7 @@ public class StringKeyIndexerTest extends AbstractGenericTest {
 
         String[] keys = indexer.getKeys();
         HashSet<String> hashSet = new HashSet<String>();
-        for(int i=0;i<100;i++) {
-        	hashSet.add(keys[i]);
-        }
+    hashSet.addAll(Arrays.asList(keys).subList(0, 100));
 
         if (keys.length != 100) {
         	Assert.fail("Expeced keys to be length 100 and got "+keys.length);
@@ -165,9 +164,7 @@ public class StringKeyIndexerTest extends AbstractGenericTest {
 
         System.out.println("Test getKeyIterator");
 
-        for(int i=0;i<100;i++) {
-        	hashSet.add(keys[i]);
-        }
+    hashSet.addAll(Arrays.asList(keys).subList(0, 100));
         Iterator<?> it = indexer.getKeyIterator();
 
         while (it.hasNext()) {

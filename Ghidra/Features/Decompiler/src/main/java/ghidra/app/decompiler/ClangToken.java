@@ -207,30 +207,24 @@ public class ClangToken implements ClangNode {
 
 	public static int getColor(String col) {
 		if (col != null) {
-			if (col.equals(ClangXML.KEYWORD_COLOR)) {
-				return KEYWORD_COLOR;
-			}
-			else if (col.equals(ClangXML.VARIABLE_COLOR)) {
-				return VARIABLE_COLOR;
-			}
-			else if (col.equals(ClangXML.CONST_COLOR)) {
-				return CONST_COLOR;
-			}
-			else if (col.equals(ClangXML.PARAMETER_COLOR)) {
-				return PARAMETER_COLOR;
-			}
-			else if (col.equals(ClangXML.GLOBAL_COLOR)) {
-				return GLOBAL_COLOR;
-			}
-			else if (col.equals(ClangXML.TYPE_COLOR)) {
-				return TYPE_COLOR;
-			}
-			else if (col.equals(ClangXML.COMMENT_COLOR)) {
-				return COMMENT_COLOR;
-			}
-			else if (col.equals(ClangXML.FUNCNAME_COLOR)) {
-				return FUNCTION_COLOR;
-			}
+            switch (col) {
+                case ClangXML.KEYWORD_COLOR:
+                    return KEYWORD_COLOR;
+                case ClangXML.VARIABLE_COLOR:
+                    return VARIABLE_COLOR;
+                case ClangXML.CONST_COLOR:
+                    return CONST_COLOR;
+                case ClangXML.PARAMETER_COLOR:
+                    return PARAMETER_COLOR;
+                case ClangXML.GLOBAL_COLOR:
+                    return GLOBAL_COLOR;
+                case ClangXML.TYPE_COLOR:
+                    return TYPE_COLOR;
+                case ClangXML.COMMENT_COLOR:
+                    return COMMENT_COLOR;
+                case ClangXML.FUNCNAME_COLOR:
+                    return FUNCTION_COLOR;
+            }
 		}
 		return DEFAULT_COLOR; // The default color
 	}

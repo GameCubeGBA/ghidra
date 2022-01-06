@@ -70,7 +70,7 @@ public enum MiscellaneousUtils {
 			String key = keyFunc.apply(t);
 			T exists = map.get(key);
 			if (exists != null) {
-				if (exists.getClass().equals(t.getClass())) {
+				if (exists.getClass() == t.getClass()) {
 					continue;
 				}
 				Msg.error(LocationTrackingSpec.class,

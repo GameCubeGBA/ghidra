@@ -81,11 +81,11 @@ class TypedefSettings implements Settings {
         String[] instNames = instanceSettings.getNames();
         List<String> list = new ArrayList<String>(Arrays.asList(instNames));
 		String[] defNames = defaultSettings.getNames();
-		for (int i = 0; i < defNames.length; i++) {
-			if (!list.contains(defNames[i])) {
-				list.add(defNames[i]);
-			}
-		}
+        for (String defName : defNames) {
+            if (!list.contains(defName)) {
+                list.add(defName);
+            }
+        }
 		String[] names = new String[list.size()];
 		return list.toArray(names);
 	}

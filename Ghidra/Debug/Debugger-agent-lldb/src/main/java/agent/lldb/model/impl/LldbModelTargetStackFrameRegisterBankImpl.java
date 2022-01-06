@@ -106,7 +106,7 @@ public class LldbModelTargetStackFrameRegisterBankImpl
 	}
 
 	public void threadStateChangedSpecific(StateType state, LldbReason reason) {
-		if (state.equals(StateType.eStateStopped)) {
+		if (state == StateType.eStateStopped) {
 			requestElements(false).thenAccept(__ -> {
 				readRegistersNamed(getCachedElements().keySet());
 			});

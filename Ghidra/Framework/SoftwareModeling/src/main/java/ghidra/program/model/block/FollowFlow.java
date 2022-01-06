@@ -103,29 +103,23 @@ public class FollowFlow {
 	private void updateFollowFlags(FlowType[] doNotFollow) {
 		if ((doNotFollow != null) && (doNotFollow.length > 0)) {
 			followAllFlow = false;
-			for (int index = 0; index < doNotFollow.length; index++) {
-				if (doNotFollow[index].equals(RefType.COMPUTED_CALL)) {
-					followComputedCall = false;
-				}
-				else if (doNotFollow[index].equals(RefType.CONDITIONAL_CALL)) {
-					followConditionalCall = false;
-				}
-				else if (doNotFollow[index].equals(RefType.UNCONDITIONAL_CALL)) {
-					followUnconditionalCall = false;
-				}
-				else if (doNotFollow[index].equals(RefType.COMPUTED_JUMP)) {
-					followComputedJump = false;
-				}
-				else if (doNotFollow[index].equals(RefType.CONDITIONAL_JUMP)) {
-					followConditionalJump = false;
-				}
-				else if (doNotFollow[index].equals(RefType.UNCONDITIONAL_JUMP)) {
-					followUnconditionalJump = false;
-				}
-				else if (doNotFollow[index].equals(RefType.INDIRECTION)) {
-					followPointers = false;
-				}
-			}
+            for (FlowType flowType : doNotFollow) {
+                if (flowType.equals(RefType.COMPUTED_CALL)) {
+                    followComputedCall = false;
+                } else if (flowType.equals(RefType.CONDITIONAL_CALL)) {
+                    followConditionalCall = false;
+                } else if (flowType.equals(RefType.UNCONDITIONAL_CALL)) {
+                    followUnconditionalCall = false;
+                } else if (flowType.equals(RefType.COMPUTED_JUMP)) {
+                    followComputedJump = false;
+                } else if (flowType.equals(RefType.CONDITIONAL_JUMP)) {
+                    followConditionalJump = false;
+                } else if (flowType.equals(RefType.UNCONDITIONAL_JUMP)) {
+                    followUnconditionalJump = false;
+                } else if (flowType.equals(RefType.INDIRECTION)) {
+                    followPointers = false;
+                }
+            }
 		}
 	}
 
@@ -674,22 +668,22 @@ public class FollowFlow {
 		Reference[] refsFrom = instr.getReferencesFrom();
 		int length = refsFrom.length;
 		List<Address> list = new ArrayList<Address>(length);
-		for (int i = 0; i < length; i++) {
-			RefType refType = refsFrom[i].getReferenceType();
-			if (refType.isFlow()) {
-				if (shouldFollowFlow((FlowType) refType)) {
-					Address toAddr = refsFrom[i].getToAddress();
-					if (!followIntoFunction) {
-						SymbolTable symbolTable = program.getSymbolTable();
-						Symbol primarySymbol = symbolTable.getPrimarySymbol(toAddr);
-						if (primarySymbol.getSymbolType() == SymbolType.FUNCTION) {
-							continue;
-						}
-					}
-					list.add(toAddr);
-				}
-			}
-		}
+        for (Reference reference : refsFrom) {
+            RefType refType = reference.getReferenceType();
+            if (refType.isFlow()) {
+                if (shouldFollowFlow((FlowType) refType)) {
+                    Address toAddr = reference.getToAddress();
+                    if (!followIntoFunction) {
+                        SymbolTable symbolTable = program.getSymbolTable();
+                        Symbol primarySymbol = symbolTable.getPrimarySymbol(toAddr);
+                        if (primarySymbol.getSymbolType() == SymbolType.FUNCTION) {
+                            continue;
+                        }
+                    }
+                    list.add(toAddr);
+                }
+            }
+        }
 		return list.toArray(new Address[list.size()]);
 	}
 
@@ -771,14 +765,14 @@ public class FollowFlow {
 				ReferenceManager referenceManager = program.getReferenceManager();
 				Reference[] memRefs = referenceManager.getReferencesFrom(addr);
 				boolean foundRef = false;
-				for (int i = 0; i < memRefs.length; i++) {
-					RefType rt = memRefs[i].getReferenceType();
-					if (rt.isData()) {
-						if (pushInstruction(instructionStack, memRefs[i].getToAddress())) {
-							foundRef = true; // pointer was to an instruction.
-						}
-					}
-				}
+                for (Reference memRef : memRefs) {
+                    RefType rt = memRef.getReferenceType();
+                    if (rt.isData()) {
+                        if (pushInstruction(instructionStack, memRef.getToAddress())) {
+                            foundRef = true; // pointer was to an instruction.
+                        }
+                    }
+                }
 				if (!foundRef) {
 					// Didn't have a data ref to an instruction so flow to the address indicated 
 					// by the pointer's value if there is an instruction there.

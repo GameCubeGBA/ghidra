@@ -1238,21 +1238,25 @@ public class AARCH64EmulateInstructionStateModifier extends EmulateInstructionSt
 
 	private class SIMD_FLOAT_ADD extends SIMD_UOP2 {
 		protected long op2(long x, long y, int esize) {
-			if (esize == 2) {
-				float fx = shortBitsToFloat(x);
-				float fy = shortBitsToFloat(y);
-				float fz = fx + fy;
-				return floatToShortBits(fz);
-			} else if (esize == 4) {
-				float fx = Float.intBitsToFloat((int) x);
-				float fy = Float.intBitsToFloat((int) y);
-				float fz = fx + fy;
-				return (long) Float.floatToIntBits(fz);
-			} else if (esize == 8) {
-				double fx = Double.longBitsToDouble(x);
-				double fy = Double.longBitsToDouble(y);
-				double fz = fx + fy;
-				return Double.doubleToLongBits(fz);
+			switch (esize) {
+				case 2: {
+					float fx = shortBitsToFloat(x);
+					float fy = shortBitsToFloat(y);
+					float fz = fx + fy;
+					return floatToShortBits(fz);
+				}
+				case 4: {
+					float fx = Float.intBitsToFloat((int) x);
+					float fy = Float.intBitsToFloat((int) y);
+					float fz = fx + fy;
+					return (long) Float.floatToIntBits(fz);
+				}
+				case 8: {
+					double fx = Double.longBitsToDouble(x);
+					double fy = Double.longBitsToDouble(y);
+					double fz = fx + fy;
+					return Double.doubleToLongBits(fz);
+				}
 			}
 			return 0;
 		}
@@ -1262,44 +1266,51 @@ public class AARCH64EmulateInstructionStateModifier extends EmulateInstructionSt
 	private class SIPD_FLOAT_ADD extends SIPD_UOP2 {
 		@Override
 		protected long op2(long x, long y, int iesize, int oesize) {
-			if (iesize == 2) {
-				float fx = shortBitsToFloat(x);
-				float fy = shortBitsToFloat(y);
-				float fz = fx + fy;
-				if (oesize == 2) {
-					return floatToShortBits(fz);
+			switch (iesize) {
+				case 2: {
+					float fx = shortBitsToFloat(x);
+					float fy = shortBitsToFloat(y);
+					float fz = fx + fy;
+					if (oesize == 2) {
+						return floatToShortBits(fz);
+					}
+					if (oesize == 4) {
+						return (long) Float.floatToIntBits(fz);
+					}
+					if (oesize == 8) {
+						return Double.doubleToLongBits((double) fz);
+					}
+					break;
 				}
-				if (oesize == 4) {
-					return (long) Float.floatToIntBits(fz);
+				case 4: {
+					float fx = Float.intBitsToFloat((int) x);
+					float fy = Float.intBitsToFloat((int) y);
+					float fz = fx + fy;
+					if (oesize == 2) {
+						return floatToShortBits(fz);
+					}
+					if (oesize == 4) {
+						return (long) Float.floatToIntBits(fz);
+					}
+					if (oesize == 8) {
+						return Double.doubleToLongBits((double) fz);
+					}
+					break;
 				}
-				if (oesize == 8) {
-					return Double.doubleToLongBits((double) fz);
-				}
-			} else if (iesize == 4) {
-				float fx = Float.intBitsToFloat((int) x);
-				float fy = Float.intBitsToFloat((int) y);
-				float fz = fx + fy;
-				if (oesize == 2) {
-					return floatToShortBits(fz);
-				}
-				if (oesize == 4) {
-					return (long) Float.floatToIntBits(fz);
-				}
-				if (oesize == 8) {
-					return Double.doubleToLongBits((double) fz);
-				}
-			} else if (iesize == 8) {
-				double fx = Double.longBitsToDouble(x);
-				double fy = Double.longBitsToDouble(y);
-				double fz = fx + fy;
-				if (oesize == 2) {
-					return floatToShortBits((float) fz);
-				}
-				if (oesize == 4) {
-					return (long) Float.floatToIntBits((float) fz);
-				}
-				if (oesize == 8) {
-					return Double.doubleToLongBits(fz);
+				case 8: {
+					double fx = Double.longBitsToDouble(x);
+					double fy = Double.longBitsToDouble(y);
+					double fz = fx + fy;
+					if (oesize == 2) {
+						return floatToShortBits((float) fz);
+					}
+					if (oesize == 4) {
+						return (long) Float.floatToIntBits((float) fz);
+					}
+					if (oesize == 8) {
+						return Double.doubleToLongBits(fz);
+					}
+					break;
 				}
 			}
 			return 0;
@@ -1308,21 +1319,25 @@ public class AARCH64EmulateInstructionStateModifier extends EmulateInstructionSt
 
 	private class SIMD_FLOAT_DIV extends SIMD_UOP2 {
 		protected long op2(long x, long y, int esize) {
-			if (esize == 2) {
-				float fx = shortBitsToFloat(x);
-				float fy = shortBitsToFloat(y);
-				float fz = fx / fy;
-				return floatToShortBits(fz);
-			} else if (esize == 4) {
-				float fx = Float.intBitsToFloat((int) x);
-				float fy = Float.intBitsToFloat((int) y);
-				float fz = fx / fy;
-				return (long) Float.floatToIntBits(fz);
-			} else if (esize == 8) {
-				double fx = Double.longBitsToDouble(x);
-				double fy = Double.longBitsToDouble(y);
-				double fz = fx / fy;
-				return Double.doubleToLongBits(fz);
+			switch (esize) {
+				case 2: {
+					float fx = shortBitsToFloat(x);
+					float fy = shortBitsToFloat(y);
+					float fz = fx / fy;
+					return floatToShortBits(fz);
+				}
+				case 4: {
+					float fx = Float.intBitsToFloat((int) x);
+					float fy = Float.intBitsToFloat((int) y);
+					float fz = fx / fy;
+					return (long) Float.floatToIntBits(fz);
+				}
+				case 8: {
+					double fx = Double.longBitsToDouble(x);
+					double fy = Double.longBitsToDouble(y);
+					double fz = fx / fy;
+					return Double.doubleToLongBits(fz);
+				}
 			}
 			return 0;
 		}
@@ -1330,21 +1345,25 @@ public class AARCH64EmulateInstructionStateModifier extends EmulateInstructionSt
 
 	private class SIMD_FLOAT_MULT extends SIMD_UOP2 {
 		protected long op2(long x, long y, int esize) {
-			if (esize == 2) {
-				float fx = shortBitsToFloat(x);
-				float fy = shortBitsToFloat(y);
-				float fz = fx * fy;
-				return floatToShortBits(fz);
-			} else if (esize == 4) {
-				float fx = Float.intBitsToFloat((int) x);
-				float fy = Float.intBitsToFloat((int) y);
-				float fz = fx * fy;
-				return (long) Float.floatToIntBits(fz);
-			} else if (esize == 8) {
-				double fx = Double.longBitsToDouble(x);
-				double fy = Double.longBitsToDouble(y);
-				double fz = fx * fy;
-				return Double.doubleToLongBits(fz);
+			switch (esize) {
+				case 2: {
+					float fx = shortBitsToFloat(x);
+					float fy = shortBitsToFloat(y);
+					float fz = fx * fy;
+					return floatToShortBits(fz);
+				}
+				case 4: {
+					float fx = Float.intBitsToFloat((int) x);
+					float fy = Float.intBitsToFloat((int) y);
+					float fz = fx * fy;
+					return (long) Float.floatToIntBits(fz);
+				}
+				case 8: {
+					double fx = Double.longBitsToDouble(x);
+					double fy = Double.longBitsToDouble(y);
+					double fz = fx * fy;
+					return Double.doubleToLongBits(fz);
+				}
 			}
 			return 0;
 		}
@@ -1352,21 +1371,25 @@ public class AARCH64EmulateInstructionStateModifier extends EmulateInstructionSt
 
 	private class SIMD_FLOAT_SUB extends SIMD_UOP2 {
 		protected long op2(long x, long y, int esize) {
-			if (esize == 2) {
-				float fx = shortBitsToFloat(x);
-				float fy = shortBitsToFloat(y);
-				float fz = fx - fy;
-				return floatToShortBits(fz);
-			} else if (esize == 4) {
-				float fx = Float.intBitsToFloat((int) x);
-				float fy = Float.intBitsToFloat((int) y);
-				float fz = fx - fy;
-				return (long) Float.floatToIntBits(fz);
-			} else if (esize == 8) {
-				double fx = Double.longBitsToDouble(x);
-				double fy = Double.longBitsToDouble(y);
-				double fz = fx - fy;
-				return Double.doubleToLongBits(fz);
+			switch (esize) {
+				case 2: {
+					float fx = shortBitsToFloat(x);
+					float fy = shortBitsToFloat(y);
+					float fz = fx - fy;
+					return floatToShortBits(fz);
+				}
+				case 4: {
+					float fx = Float.intBitsToFloat((int) x);
+					float fy = Float.intBitsToFloat((int) y);
+					float fz = fx - fy;
+					return (long) Float.floatToIntBits(fz);
+				}
+				case 8: {
+					double fx = Double.longBitsToDouble(x);
+					double fy = Double.longBitsToDouble(y);
+					double fz = fx - fy;
+					return Double.doubleToLongBits(fz);
+				}
 			}
 			return 0;
 		}
@@ -1374,18 +1397,22 @@ public class AARCH64EmulateInstructionStateModifier extends EmulateInstructionSt
 
 	private class SIMD_FLOAT_NEG extends SIMD_UOP1 {
 		protected long op1(long x, int esize) {
-			if (esize == 2) {
-				float fx = shortBitsToFloat(x);
-				float fz = - fx;
-				return floatToShortBits(fz);
-			} else if (esize == 4) {
-				float fx = Float.intBitsToFloat((int) x);
-				float fz = - fx;
-				return (long) Float.floatToIntBits(fz);
-			} else if (esize == 8) {
-				double fx = Double.longBitsToDouble(x);
-				double fz = - fx;
-				return Double.doubleToLongBits(fz);
+			switch (esize) {
+				case 2: {
+					float fx = shortBitsToFloat(x);
+					float fz = -fx;
+					return floatToShortBits(fz);
+				}
+				case 4: {
+					float fx = Float.intBitsToFloat((int) x);
+					float fz = -fx;
+					return (long) Float.floatToIntBits(fz);
+				}
+				case 8: {
+					double fx = Double.longBitsToDouble(x);
+					double fz = -fx;
+					return Double.doubleToLongBits(fz);
+				}
 			}
 			return 0;
 		}
@@ -1393,18 +1420,22 @@ public class AARCH64EmulateInstructionStateModifier extends EmulateInstructionSt
 
 	private class SIMD_FLOAT_ABS extends SIMD_UOP1 {
 		protected long op1(long x, int esize) {
-			if (esize == 2) {
-				float fx = shortBitsToFloat(x);
-				float fz = (fx < 0.0F) ? (0.0F - fx) : fx;
-				return floatToShortBits(fz);
-			} else if (esize == 4) {
-				float fx = Float.intBitsToFloat((int) x);
-				float fz = (fx < 0.0F) ? (0.0F - fx) : fx;
-				return (long) Float.floatToIntBits(fz);
-			} else if (esize == 8) {
-				double fx = Double.longBitsToDouble(x);
-				double fz = (fx < 0.0D) ? (0.0F - fx) : fx;
-				return Double.doubleToLongBits(fz);
+			switch (esize) {
+				case 2: {
+					float fx = shortBitsToFloat(x);
+					float fz = (fx < 0.0F) ? (0.0F - fx) : fx;
+					return floatToShortBits(fz);
+				}
+				case 4: {
+					float fx = Float.intBitsToFloat((int) x);
+					float fz = (fx < 0.0F) ? (0.0F - fx) : fx;
+					return (long) Float.floatToIntBits(fz);
+				}
+				case 8: {
+					double fx = Double.longBitsToDouble(x);
+					double fz = (fx < 0.0D) ? (0.0F - fx) : fx;
+					return Double.doubleToLongBits(fz);
+				}
 			}
 			return 0;
 		}
@@ -1413,18 +1444,25 @@ public class AARCH64EmulateInstructionStateModifier extends EmulateInstructionSt
 	private class SIMD_FLOAT2FLOAT extends SIMD_UOP1E {
 		protected long op1e(long x, int s_size, int d_size) {
 			if (s_size == d_size) return x;
-			if (s_size == 2) {
-				float fx = shortBitsToFloat(x);
-				if (d_size == 4) return (long) Float.floatToIntBits(fx);
-				else if (d_size == 8) return Double.doubleToLongBits((double) fx);
-			} else if (s_size == 4) {
-				float fx = Float.intBitsToFloat((int) x);
-				if (d_size == 2) return floatToShortBits(fx);
-				else if (d_size == 8) return Double.doubleToLongBits((double) fx);
-			} else if (s_size == 8) {
-				double fx = Double.longBitsToDouble(x);
-				if (d_size == 2) return floatToShortBits((float) fx);
-				else if (d_size == 4) return Float.floatToIntBits((float) fx);
+			switch (s_size) {
+				case 2: {
+					float fx = shortBitsToFloat(x);
+					if (d_size == 4) return (long) Float.floatToIntBits(fx);
+					else if (d_size == 8) return Double.doubleToLongBits((double) fx);
+					break;
+				}
+				case 4: {
+					float fx = Float.intBitsToFloat((int) x);
+					if (d_size == 2) return floatToShortBits(fx);
+					else if (d_size == 8) return Double.doubleToLongBits((double) fx);
+					break;
+				}
+				case 8: {
+					double fx = Double.longBitsToDouble(x);
+					if (d_size == 2) return floatToShortBits((float) fx);
+					else if (d_size == 4) return Float.floatToIntBits((float) fx);
+					break;
+				}
 			}
 			return x;
 		}
@@ -1433,18 +1471,25 @@ public class AARCH64EmulateInstructionStateModifier extends EmulateInstructionSt
 	private class SIMD_TRUNC extends SIMD_UOP1E {
 		protected long op1e(long x, int s_size, int d_size) {
 			if (s_size == d_size) return x;
-			if (s_size == 2) {
-				float fx = shortBitsToFloat(x);
-				if (d_size == 4) return (long) ((int) fx);
-				else if (d_size == 8) return (long) fx;
-			} else if (s_size == 4) {
-				float fx = Float.intBitsToFloat((int) x);
-				if (d_size == 2) return (long) ((short) fx);
-				else if (d_size == 8) return (long) fx;
-			} else if (s_size == 8) {
-				double fx = Double.longBitsToDouble(x);
-				if (d_size == 2) return (long) ((short) fx);
-				else if (d_size == 4) return (long) ((int) fx);
+			switch (s_size) {
+				case 2: {
+					float fx = shortBitsToFloat(x);
+					if (d_size == 4) return (long) ((int) fx);
+					else if (d_size == 8) return (long) fx;
+					break;
+				}
+				case 4: {
+					float fx = Float.intBitsToFloat((int) x);
+					if (d_size == 2) return (long) ((short) fx);
+					else if (d_size == 8) return (long) fx;
+					break;
+				}
+				case 8: {
+					double fx = Double.longBitsToDouble(x);
+					if (d_size == 2) return (long) ((short) fx);
+					else if (d_size == 4) return (long) ((int) fx);
+					break;
+				}
 			}
 			return x;
 		}
@@ -1453,15 +1498,19 @@ public class AARCH64EmulateInstructionStateModifier extends EmulateInstructionSt
 	@SuppressWarnings("unused")
 	private class SIMD_FLOAT_ROUND extends SIMD_UOP1E {
 		protected long op1e(long x, int s_size, int d_size) {
-			if (s_size == 2) {
-				float fx = shortBitsToFloat(x);
-				return (long) fx;
-			} else if (s_size == 4) {
-				float fx = Float.intBitsToFloat((int) x);
-				return (long) fx;
-			} else if (s_size == 8) {
-				double fx = Double.longBitsToDouble(x);
-				return (long) fx;
+			switch (s_size) {
+				case 2: {
+					float fx = shortBitsToFloat(x);
+					return (long) fx;
+				}
+				case 4: {
+					float fx = Float.intBitsToFloat((int) x);
+					return (long) fx;
+				}
+				case 8: {
+					double fx = Double.longBitsToDouble(x);
+					return (long) fx;
+				}
 			}
 			return 0;
 		}

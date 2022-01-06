@@ -137,25 +137,25 @@ class RefListV0 extends RefList {
 	}
 
 	synchronized void addRefs(Reference[] refs) throws IOException {
-		for (int i = 0; i < refs.length; i++) {
+        for (Reference ref : refs) {
 
-			boolean isPrimary = refs[i].isPrimary();
-			long symbolID = refs[i].getSymbolID();
-			boolean isOffset = false;
-			boolean isShifted = false;
-			long offsetOrShift = 0;
-			if (refs[i].isMemoryReference()) {
-				MemReferenceDB memRef = (MemReferenceDB) refs[i];
-				isOffset = memRef.isOffset();
-				isShifted = memRef.isShifted();
-				offsetOrShift = memRef.getOffsetOrShift();
-			}
+            boolean isPrimary = ref.isPrimary();
+            long symbolID = ref.getSymbolID();
+            boolean isOffset = false;
+            boolean isShifted = false;
+            long offsetOrShift = 0;
+            if (ref.isMemoryReference()) {
+                MemReferenceDB memRef = (MemReferenceDB) ref;
+                isOffset = memRef.isOffset();
+                isShifted = memRef.isShifted();
+                offsetOrShift = memRef.getOffsetOrShift();
+            }
 
-			appendRef(refs[i].getFromAddress(), refs[i].getToAddress(), refs[i].getOperandIndex(),
-				refs[i].getReferenceType(), refs[i].getSource(), isPrimary, symbolID, isOffset,
-				isShifted, offsetOrShift);
+            appendRef(ref.getFromAddress(), ref.getToAddress(), ref.getOperandIndex(),
+                    ref.getReferenceType(), ref.getSource(), isPrimary, symbolID, isOffset,
+                    isShifted, offsetOrShift);
 
-		}
+        }
 		updateRecord();
 	}
 

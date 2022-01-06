@@ -133,9 +133,7 @@ public class JavaHelpFilesBuilder {
             out.println("<map version=\"1.0\">");
 
             Collection<AnchorDefinition> anchors = help.getAllAnchorDefinitions();
-            Iterator<AnchorDefinition> iterator = anchors.iterator();
-            while (iterator.hasNext()) {
-                AnchorDefinition a = iterator.next();
+            for (AnchorDefinition a : anchors) {
                 String anchorTarget = a.getHelpPath();
 
                 //

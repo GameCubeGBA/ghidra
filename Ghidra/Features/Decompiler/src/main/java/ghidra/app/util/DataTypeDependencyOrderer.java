@@ -374,17 +374,15 @@ public class DataTypeDependencyOrderer {
 	private void removeMyDependentsEdgesToMe(Entry entry) {
 		Set<Entry> myDependents = whoDependsOnMe.get(entry);
 		if (myDependents != null) {
-			Iterator<Entry> myDependentsIter = myDependents.iterator();
-			while (myDependentsIter.hasNext()) {
-				Entry myDependent = myDependentsIter.next();
-				//get reverse information to delete forward information.
-				Set<Entry> supportSet = whoIDependOn.get(myDependent);
-				supportSet.remove(entry);
-				if (supportSet.size() == 0) {
-					noDependentsQueue.add(myDependent);
-					whoIDependOn.remove(myDependent);
-				}
-			}
+            for (Entry myDependent : myDependents) {
+                //get reverse information to delete forward information.
+                Set<Entry> supportSet = whoIDependOn.get(myDependent);
+                supportSet.remove(entry);
+                if (supportSet.size() == 0) {
+                    noDependentsQueue.add(myDependent);
+                    whoIDependOn.remove(myDependent);
+                }
+            }
 			myDependents.clear();
 			whoDependsOnMe.remove(entry);
 		}

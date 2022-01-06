@@ -106,7 +106,7 @@ public class DoubleRangeConstraintEditorTest extends AbstractDockingTest {
 
 		for (ColumnConstraint<?> colConstraint : columnConstraints) {
 			if (colConstraint.getName().equals("In Range") &&
-				colConstraint.getColumnType().equals(Double.class)) {
+                    colConstraint.getColumnType() == Double.class) {
 				return (InRangeColumnConstraint<Double>) colConstraint;
 			}
 		}

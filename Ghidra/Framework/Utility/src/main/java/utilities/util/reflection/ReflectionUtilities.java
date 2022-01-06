@@ -434,7 +434,7 @@ public class ReflectionUtilities {
 
 		LinkedHashSet<Class<?>> master = new LinkedHashSet<>();
 		Class<?> start = seed.getClass();
-		boolean shareType = list.stream().allMatch(t -> t.getClass().equals(start));
+		boolean shareType = list.stream().allMatch(t -> t.getClass() == start);
 		if (shareType) {
 			master.add(start);
 		}
@@ -552,7 +552,7 @@ public class ReflectionUtilities {
 	public static LinkedHashSet<Class<?>> getAllParents(Class<?> c) {
 
 		LinkedHashSet<Class<?>> l = new LinkedHashSet<>();
-		if (Object.class.equals(c)) {
+		if (Object.class == c) {
 			l.add(Object.class);
 			return l; // Object has no parents
 		}
@@ -660,7 +660,7 @@ public class ReflectionUtilities {
 			resolvedTypes.put(typeParameters[i], actualTypeArguments[i]);
 		}
 
-		if (rawType.equals(baseClass)) {
+		if (rawType == baseClass) {
 			return rawType;
 		}
 
@@ -685,7 +685,7 @@ public class ReflectionUtilities {
 		if (typeClass == null) {
 			return false;
 		}
-		return typeClass.equals(c);
+		return typeClass == c;
 	}
 
 	private static Class<?> getClass(Type type) {

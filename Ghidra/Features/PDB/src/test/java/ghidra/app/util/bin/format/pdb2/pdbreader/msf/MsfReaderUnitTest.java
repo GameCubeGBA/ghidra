@@ -38,13 +38,13 @@ public class MsfReaderUnitTest extends AbstractGenericTest {
 	private static final byte[] IDENTIFICATION_200 =
 		"Microsoft C/C++ program database 2.00\r\n\u001aJG".getBytes();
 	// Padding between IDENTIFICATION and pageSize
-	private static final byte[] padding200 = new byte[] { 0x00, 0x00 };
+	private static final byte[] padding200 = { 0x00, 0x00 };
 
 	// "Microsoft C/C++ MSF 7.00\r\n" + (char) 0x1a + "DS"
 	private static final byte[] IDENTIFICATION_700 =
 		"Microsoft C/C++ MSF 7.00\r\n\u001aDS".getBytes();
 	// Padding between magic and pageSize
-	private static final byte[] padding700 = new byte[] { 0x00, 0x00, 0x00 };
+	private static final byte[] padding700 = { 0x00, 0x00, 0x00 };
 
 	//==============================================================================================
 	// Internals

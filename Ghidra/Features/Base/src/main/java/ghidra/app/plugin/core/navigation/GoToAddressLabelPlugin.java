@@ -158,23 +158,25 @@ public class GoToAddressLabelPlugin extends Plugin implements OptionsChangeListe
 	@Override
 	public void optionsChanged(ToolOptions options, String opName, Object oldValue,
 			Object newValue) {
-		if (opName.equals(GhidraOptions.OPTION_MAX_GO_TO_ENTRIES)) {
-			maximumGotoEntries =
-				options.getInt(GhidraOptions.OPTION_MAX_GO_TO_ENTRIES, DEFAULT_MAX_GOTO_ENTRIES);
-			if (maximumGotoEntries <= 0) {
-				throw new OptionsVetoException("Search limit must be greater than 0");
-			}
-			goToDialog.maxEntrysChanged();
-		}
-		else if (opName.equals(GhidraOptions.OPTION_NUMERIC_FORMATTING)) {
-			cStyleInput =
-				options.getBoolean(GhidraOptions.OPTION_NUMERIC_FORMATTING, DEFAULT_C_STYLE);
-			goToDialog.setCStyleInput(cStyleInput);
-		}
-		else if (opName.equals(GO_TO_MEMORY)) {
-			goToMemory = options.getBoolean(GO_TO_MEMORY, DEFAULT_MEMORY);
-			goToDialog.setMemory(goToMemory);
-		}
+        switch (opName) {
+            case GhidraOptions.OPTION_MAX_GO_TO_ENTRIES:
+                maximumGotoEntries =
+                        options.getInt(GhidraOptions.OPTION_MAX_GO_TO_ENTRIES, DEFAULT_MAX_GOTO_ENTRIES);
+                if (maximumGotoEntries <= 0) {
+                    throw new OptionsVetoException("Search limit must be greater than 0");
+                }
+                goToDialog.maxEntrysChanged();
+                break;
+            case GhidraOptions.OPTION_NUMERIC_FORMATTING:
+                cStyleInput =
+                        options.getBoolean(GhidraOptions.OPTION_NUMERIC_FORMATTING, DEFAULT_C_STYLE);
+                goToDialog.setCStyleInput(cStyleInput);
+                break;
+            case GO_TO_MEMORY:
+                goToMemory = options.getBoolean(GO_TO_MEMORY, DEFAULT_MEMORY);
+                goToDialog.setMemory(goToMemory);
+                break;
+        }
 	}
 
 	//////////////////////////////////////////////////////////////////////

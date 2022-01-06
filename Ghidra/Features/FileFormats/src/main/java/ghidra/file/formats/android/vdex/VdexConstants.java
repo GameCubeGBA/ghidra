@@ -74,7 +74,7 @@ public final class VdexConstants {
 	 * NOTE: only going to support RELEASE versions
 	 */
 	//@formatter:off
-	public final static String[] SUPPORTED_VERSIONS = new String[] {
+	public final static String[] SUPPORTED_VERSIONS = {
 		VERSION_OREO_RELEASE,
 		VERSION_OREO_M2_RELEASE, 
 		VERSION_PIE_RELEASE, 

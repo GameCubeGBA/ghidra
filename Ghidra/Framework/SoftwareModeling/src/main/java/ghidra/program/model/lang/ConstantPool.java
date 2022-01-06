@@ -48,30 +48,32 @@ public abstract class ConstantPool {
 			StringBuilder buf = new StringBuilder();
 			buf.append("<cpoolrec");
 			SpecXmlUtils.encodeUnsignedIntegerAttribute(buf, "ref", ref);
-			if (tag == STRING_LITERAL) {
-				SpecXmlUtils.encodeStringAttribute(buf, "tag", "string");
-			}
-			else if (tag == CLASS_REFERENCE) {
-				SpecXmlUtils.encodeStringAttribute(buf, "tag", "classref");
-			}
-			else if (tag == POINTER_METHOD) {
-				SpecXmlUtils.encodeStringAttribute(buf, "tag", "method");
-			}
-			else if (tag == POINTER_FIELD) {
-				SpecXmlUtils.encodeStringAttribute(buf, "tag", "field");
-			}
-			else if (tag == ARRAY_LENGTH) {
-				SpecXmlUtils.encodeStringAttribute(buf, "tag", "arraylength");
-			}
-			else if (tag == INSTANCE_OF) {
-				SpecXmlUtils.encodeStringAttribute(buf, "tag", "instanceof");
-			}
-			else if (tag == CHECK_CAST) {
-				SpecXmlUtils.encodeStringAttribute(buf, "tag", "checkcast");
-			}
-			else {
-				SpecXmlUtils.encodeStringAttribute(buf, "tag", "primitive");
-			}
+            switch (tag) {
+                case STRING_LITERAL:
+                    SpecXmlUtils.encodeStringAttribute(buf, "tag", "string");
+                    break;
+                case CLASS_REFERENCE:
+                    SpecXmlUtils.encodeStringAttribute(buf, "tag", "classref");
+                    break;
+                case POINTER_METHOD:
+                    SpecXmlUtils.encodeStringAttribute(buf, "tag", "method");
+                    break;
+                case POINTER_FIELD:
+                    SpecXmlUtils.encodeStringAttribute(buf, "tag", "field");
+                    break;
+                case ARRAY_LENGTH:
+                    SpecXmlUtils.encodeStringAttribute(buf, "tag", "arraylength");
+                    break;
+                case INSTANCE_OF:
+                    SpecXmlUtils.encodeStringAttribute(buf, "tag", "instanceof");
+                    break;
+                case CHECK_CAST:
+                    SpecXmlUtils.encodeStringAttribute(buf, "tag", "checkcast");
+                    break;
+                default:
+                    SpecXmlUtils.encodeStringAttribute(buf, "tag", "primitive");
+                    break;
+            }
 			if (isConstructor) {
 				SpecXmlUtils.encodeBooleanAttribute(buf, "constructor", true);
 			}

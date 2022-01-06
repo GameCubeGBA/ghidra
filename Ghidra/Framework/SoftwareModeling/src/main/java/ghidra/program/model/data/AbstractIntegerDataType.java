@@ -397,7 +397,7 @@ public abstract class AbstractIntegerDataType extends BuiltIn implements ArraySt
 
 	@Override
 	public boolean isEquivalent(DataType dt) {
-		return dt.getClass().equals(getClass());
+		return dt.getClass() == getClass();
 	}
 
 	private static AbstractIntegerDataType[] signedTypes;

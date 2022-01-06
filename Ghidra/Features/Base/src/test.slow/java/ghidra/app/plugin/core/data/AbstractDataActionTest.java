@@ -1347,7 +1347,7 @@ public abstract class AbstractDataActionTest extends AbstractGhidraHeadedIntegra
 			}
 			else {
 				assertTrue("Array contains incorrect data type elements",
-					interiorDt.getClass().equals(d0.getDataType().getClass()));
+                        interiorDt.getClass() == d0.getDataType().getClass());
 			}
 		}
 

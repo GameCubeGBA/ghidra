@@ -96,7 +96,7 @@ public class DoubleValueConstraintEditorTest extends AbstractDockingTest {
 			new NumberColumnConstraintProvider().getColumnConstraints();
 
 		for (ColumnConstraint<?> columnConstraint : columnConstraints) {
-			if (columnConstraint.getColumnType().equals(Double.class)) {
+			if (columnConstraint.getColumnType() == Double.class) {
 				return (ColumnConstraint<Double>) columnConstraint;
 			}
 		}

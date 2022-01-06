@@ -323,106 +323,106 @@ class PropertiesXmlMgr {
 			throws CancelledException {
 		List<String> listNames = program.getOptionsNames();
 		Collections.sort(listNames);
-		for (int i = 0; i < listNames.size(); i++) {
-			Options propList = program.getOptions(listNames.get(i));
-			List<String> propNames = propList.getOptionNames();
-			Collections.sort(propNames);
-			String prefix = listNames.get(i) + PROPERTY_LIST_CATEGORY_DELIMITER;
-			for (String name : propNames) {
-				if (monitor.isCancelled()) {
-					throw new CancelledException();
-				}
-				if (propList.isAlias(name)) {  // don't write out properties that are just mirrors of some other property
-					continue;
-				}
-				if (propList.isDefaultValue(name)) { // don't write out default properties.
-					continue;
-				}
-				OptionType type = propList.getType(name);
-				XmlAttributes attrs = new XmlAttributes();
-				attrs.addAttribute("NAME", prefix + name);
-				switch (type) {
-					case INT_TYPE:
-						attrs.addAttribute("TYPE", "int");
-						attrs.addAttribute("VALUE", propList.getInt(name, 0), true);
-						break;
-					case LONG_TYPE:
-						attrs.addAttribute("TYPE", "long");
-						attrs.addAttribute("VALUE", propList.getLong(name, 0), true);
-						break;
-					case STRING_TYPE:
-						attrs.addAttribute("TYPE", "string");
-						attrs.addAttribute("VALUE", propList.getString(name, ""));
-						break;
-					case BOOLEAN_TYPE:
-						attrs.addAttribute("TYPE", "bool");
-						attrs.addAttribute("VALUE", propList.getBoolean(name, true));
-						break;
-					case DOUBLE_TYPE:
-						attrs.addAttribute("TYPE", "double");
-						attrs.addAttribute("VALUE", propList.getDouble(name, 0));
-						break;
-					case FLOAT_TYPE:
-						attrs.addAttribute("TYPE", "float");
-						attrs.addAttribute("VALUE", propList.getFloat(name, 0f));
-						break;
-					case DATE_TYPE:
-						attrs.addAttribute("TYPE", "date");
-						Date date = propList.getDate(name, (Date) null);
-						long time = date == null ? 0 : date.getTime();
-						attrs.addAttribute("VALUE", time, true);
-						break;
-					case COLOR_TYPE:
-						attrs.addAttribute("TYPE", "color");
-						Color color = propList.getColor(name, null);
-						int rgb = color.getRGB();
-						attrs.addAttribute("VALUE", rgb, true);
-						break;
-					case ENUM_TYPE:
-						attrs.addAttribute("TYPE", "enum");
-						@SuppressWarnings({ "unchecked", "rawtypes" })
-						Enum enuum = propList.getEnum(name, null);
-						String xmlString = OptionType.ENUM_TYPE.convertObjectToString(enuum);
-						attrs.addAttribute("VALUE", XmlUtilities.escapeElementEntities(xmlString));
-						break;
-					case FILE_TYPE:
-						attrs.addAttribute("TYPE", "file");
-						File file = propList.getFile(name, null);
-						String path = file.getAbsolutePath();
-						attrs.addAttribute("VALUE", path);
-						break;
-					case FONT_TYPE:
-						attrs.addAttribute("TYPE", "font");
-						Font font = propList.getFont(name, null);
-						xmlString = OptionType.FONT_TYPE.convertObjectToString(font);
-						attrs.addAttribute("VALUE", XmlUtilities.escapeElementEntities(xmlString));
-						break;
-					case KEYSTROKE_TYPE:
-						attrs.addAttribute("TYPE", "keyStroke");
-						KeyStroke keyStroke = propList.getKeyStroke(name, null);
-						xmlString = OptionType.KEYSTROKE_TYPE.convertObjectToString(keyStroke);
-						attrs.addAttribute("VALUE", XmlUtilities.escapeElementEntities(xmlString));
-						break;
-					case CUSTOM_TYPE:
-						attrs.addAttribute("TYPE", "custom");
-						CustomOption custom = propList.getCustomOption(name, null);
-						xmlString = OptionType.KEYSTROKE_TYPE.convertObjectToString(custom);
-						attrs.addAttribute("VALUE", XmlUtilities.escapeElementEntities(xmlString));
-						break;
-					case BYTE_ARRAY_TYPE:
-						attrs.addAttribute("TYPE", "bytes");
-						byte[] bytes = propList.getByteArray(name, null);
-						xmlString = OptionType.BYTE_ARRAY_TYPE.convertObjectToString(bytes);
-						attrs.addAttribute("VALUE", XmlUtilities.escapeElementEntities(xmlString));
-						break;
-					case NO_TYPE:
-					default:
-						throw new AssertException();
-				}
-				writer.startElement("PROPERTY", attrs);
-				writer.endElement("PROPERTY");
-			}
-		}
+        for (String listName : listNames) {
+            Options propList = program.getOptions(listName);
+            List<String> propNames = propList.getOptionNames();
+            Collections.sort(propNames);
+            String prefix = listName + PROPERTY_LIST_CATEGORY_DELIMITER;
+            for (String name : propNames) {
+                if (monitor.isCancelled()) {
+                    throw new CancelledException();
+                }
+                if (propList.isAlias(name)) {  // don't write out properties that are just mirrors of some other property
+                    continue;
+                }
+                if (propList.isDefaultValue(name)) { // don't write out default properties.
+                    continue;
+                }
+                OptionType type = propList.getType(name);
+                XmlAttributes attrs = new XmlAttributes();
+                attrs.addAttribute("NAME", prefix + name);
+                switch (type) {
+                    case INT_TYPE:
+                        attrs.addAttribute("TYPE", "int");
+                        attrs.addAttribute("VALUE", propList.getInt(name, 0), true);
+                        break;
+                    case LONG_TYPE:
+                        attrs.addAttribute("TYPE", "long");
+                        attrs.addAttribute("VALUE", propList.getLong(name, 0), true);
+                        break;
+                    case STRING_TYPE:
+                        attrs.addAttribute("TYPE", "string");
+                        attrs.addAttribute("VALUE", propList.getString(name, ""));
+                        break;
+                    case BOOLEAN_TYPE:
+                        attrs.addAttribute("TYPE", "bool");
+                        attrs.addAttribute("VALUE", propList.getBoolean(name, true));
+                        break;
+                    case DOUBLE_TYPE:
+                        attrs.addAttribute("TYPE", "double");
+                        attrs.addAttribute("VALUE", propList.getDouble(name, 0));
+                        break;
+                    case FLOAT_TYPE:
+                        attrs.addAttribute("TYPE", "float");
+                        attrs.addAttribute("VALUE", propList.getFloat(name, 0f));
+                        break;
+                    case DATE_TYPE:
+                        attrs.addAttribute("TYPE", "date");
+                        Date date = propList.getDate(name, (Date) null);
+                        long time = date == null ? 0 : date.getTime();
+                        attrs.addAttribute("VALUE", time, true);
+                        break;
+                    case COLOR_TYPE:
+                        attrs.addAttribute("TYPE", "color");
+                        Color color = propList.getColor(name, null);
+                        int rgb = color.getRGB();
+                        attrs.addAttribute("VALUE", rgb, true);
+                        break;
+                    case ENUM_TYPE:
+                        attrs.addAttribute("TYPE", "enum");
+                        @SuppressWarnings({"unchecked", "rawtypes"})
+                        Enum enuum = propList.getEnum(name, null);
+                        String xmlString = OptionType.ENUM_TYPE.convertObjectToString(enuum);
+                        attrs.addAttribute("VALUE", XmlUtilities.escapeElementEntities(xmlString));
+                        break;
+                    case FILE_TYPE:
+                        attrs.addAttribute("TYPE", "file");
+                        File file = propList.getFile(name, null);
+                        String path = file.getAbsolutePath();
+                        attrs.addAttribute("VALUE", path);
+                        break;
+                    case FONT_TYPE:
+                        attrs.addAttribute("TYPE", "font");
+                        Font font = propList.getFont(name, null);
+                        xmlString = OptionType.FONT_TYPE.convertObjectToString(font);
+                        attrs.addAttribute("VALUE", XmlUtilities.escapeElementEntities(xmlString));
+                        break;
+                    case KEYSTROKE_TYPE:
+                        attrs.addAttribute("TYPE", "keyStroke");
+                        KeyStroke keyStroke = propList.getKeyStroke(name, null);
+                        xmlString = OptionType.KEYSTROKE_TYPE.convertObjectToString(keyStroke);
+                        attrs.addAttribute("VALUE", XmlUtilities.escapeElementEntities(xmlString));
+                        break;
+                    case CUSTOM_TYPE:
+                        attrs.addAttribute("TYPE", "custom");
+                        CustomOption custom = propList.getCustomOption(name, null);
+                        xmlString = OptionType.KEYSTROKE_TYPE.convertObjectToString(custom);
+                        attrs.addAttribute("VALUE", XmlUtilities.escapeElementEntities(xmlString));
+                        break;
+                    case BYTE_ARRAY_TYPE:
+                        attrs.addAttribute("TYPE", "bytes");
+                        byte[] bytes = propList.getByteArray(name, null);
+                        xmlString = OptionType.BYTE_ARRAY_TYPE.convertObjectToString(bytes);
+                        attrs.addAttribute("VALUE", XmlUtilities.escapeElementEntities(xmlString));
+                        break;
+                    case NO_TYPE:
+                    default:
+                        throw new AssertException();
+                }
+                writer.startElement("PROPERTY", attrs);
+                writer.endElement("PROPERTY");
+            }
+        }
 	}
 
 	private void writePropertyMaps(XmlWriter writer, AddressSetView set, TaskMonitor monitor)

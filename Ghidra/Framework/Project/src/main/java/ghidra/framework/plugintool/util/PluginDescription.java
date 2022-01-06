@@ -235,7 +235,7 @@ public class PluginDescription implements Comparable<PluginDescription> {
 		if (pluginClass == null) {
             return other.pluginClass == null;
 		}
-		else return pluginClass.equals(other.pluginClass);
+		else return pluginClass == other.pluginClass;
     }
 
 	@Override

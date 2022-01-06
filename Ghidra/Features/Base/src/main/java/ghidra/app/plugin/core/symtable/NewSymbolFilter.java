@@ -149,11 +149,11 @@ public class NewSymbolFilter implements SymbolFilter {
 
 	@Override
 	public boolean acceptsOnlyCodeSymbols() {
-		for (int i = 0; i < activeTypeFilters.length; i++) {
-			if (!activeTypeFilters[i].onlyCodeSymbols) {
-				return false;
-			}
-		}
+        for (Filter activeTypeFilter : activeTypeFilters) {
+            if (!activeTypeFilter.onlyCodeSymbols) {
+                return false;
+            }
+        }
 		return true;
 	}
 
@@ -885,13 +885,11 @@ public class NewSymbolFilter implements SymbolFilter {
 
 		@Override
 		boolean isEnabled() {
-			Iterator<Filter> it = applicableFilters.iterator();
-			while (it.hasNext()) {
-				Filter filter = it.next();
-				if (filter.isActive()) {
-					return true;
-				}
-			}
+            for (Filter filter : applicableFilters) {
+                if (filter.isActive()) {
+                    return true;
+                }
+            }
 			return false;
 		}
 

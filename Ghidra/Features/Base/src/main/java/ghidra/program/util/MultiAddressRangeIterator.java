@@ -96,35 +96,34 @@ public class MultiAddressRangeIterator {
 		
 		// We don't yet know the next minimum value so get the min of the address ranges.
 		if (min == null) {
-			for (int i = 0; i < addrRanges.length; i++) {
-				if (addrRanges[i] != null) {
-					Address checkMinAddr = addrRanges[i].getMinAddress();
-					if ((min == null) || (min.compareTo(checkMinAddr) > 0)) {
-						min = checkMinAddr;
-					}
-				}
-			}
+            for (AddressRange addrRange : addrRanges) {
+                if (addrRange != null) {
+                    Address checkMinAddr = addrRange.getMinAddress();
+                    if ((min == null) || (min.compareTo(checkMinAddr) > 0)) {
+                        min = checkMinAddr;
+                    }
+                }
+            }
 		}
 		
 		// Determine the max value for the current range.
 		max = null;
-		for (int i = 0; i < addrRanges.length; i++) {
-			if (addrRanges[i] != null) {
-				Address checkMinAddr = addrRanges[i].getMinAddress();
-				Address checkMaxAddr = addrRanges[i].getMaxAddress();
-				if (addrRanges[i].contains(min)) {
-					if ((max == null) || (max.compareTo(checkMaxAddr) > 0)) {
-						max = checkMaxAddr;
-					}
-				}
-				else if (min.compareTo(checkMinAddr) < 0) {
-					Address previous = checkMinAddr.previous();
-					if ((max == null) || (max.compareTo(previous) > 0)) {
-						max = previous;
-					}
-				}
-			}
-		}
+        for (AddressRange addrRange : addrRanges) {
+            if (addrRange != null) {
+                Address checkMinAddr = addrRange.getMinAddress();
+                Address checkMaxAddr = addrRange.getMaxAddress();
+                if (addrRange.contains(min)) {
+                    if ((max == null) || (max.compareTo(checkMaxAddr) > 0)) {
+                        max = checkMaxAddr;
+                    }
+                } else if (min.compareTo(checkMinAddr) < 0) {
+                    Address previous = checkMinAddr.previous();
+                    if ((max == null) || (max.compareTo(previous) > 0)) {
+                        max = previous;
+                    }
+                }
+            }
+        }
 		
 		// Save the range to return.
 		AddressRange nextRange = new AddressRangeImpl(min, max);
@@ -170,35 +169,34 @@ public class MultiAddressRangeIterator {
 		
 		// We don't yet know the next maximum value so get the max of the address ranges.
 		if (max == null) {
-			for (int i = 0; i < addrRanges.length; i++) {
-				if (addrRanges[i] != null) {
-					Address checkMaxAddr = addrRanges[i].getMaxAddress();
-					if ((max == null) || (max.compareTo(checkMaxAddr) < 0)) {
-						max = checkMaxAddr;
-					}
-				}
-			}
+            for (AddressRange addrRange : addrRanges) {
+                if (addrRange != null) {
+                    Address checkMaxAddr = addrRange.getMaxAddress();
+                    if ((max == null) || (max.compareTo(checkMaxAddr) < 0)) {
+                        max = checkMaxAddr;
+                    }
+                }
+            }
 		}
 		
 		// Determine the min value for the current range.
 		min = null;
-		for (int i = 0; i < addrRanges.length; i++) {
-			if (addrRanges[i] != null) {
-				Address checkMinAddr = addrRanges[i].getMinAddress();
-				Address checkMaxAddr = addrRanges[i].getMaxAddress();
-				if (addrRanges[i].contains(max)) {
-					if ((min == null) || (min.compareTo(checkMinAddr) < 0)) {
-						min = checkMinAddr;
-					}
-				}
-				else if (max.compareTo(checkMaxAddr) > 0) {
-					Address next = checkMaxAddr.next();
-					if ((min == null) || (min.compareTo(next) < 0)) {
-						min = next;
-					}
-				}
-			}
-		}
+        for (AddressRange addrRange : addrRanges) {
+            if (addrRange != null) {
+                Address checkMinAddr = addrRange.getMinAddress();
+                Address checkMaxAddr = addrRange.getMaxAddress();
+                if (addrRange.contains(max)) {
+                    if ((min == null) || (min.compareTo(checkMinAddr) < 0)) {
+                        min = checkMinAddr;
+                    }
+                } else if (max.compareTo(checkMaxAddr) > 0) {
+                    Address next = checkMaxAddr.next();
+                    if ((min == null) || (min.compareTo(next) < 0)) {
+                        min = next;
+                    }
+                }
+            }
+        }
 		
 		// Save the range to return.
 		AddressRange nextRange = new AddressRangeImpl(min, max);

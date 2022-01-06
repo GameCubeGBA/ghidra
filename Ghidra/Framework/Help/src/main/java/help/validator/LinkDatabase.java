@@ -67,7 +67,7 @@ public class LinkDatabase {
 		new TreeSet<DuplicateAnchorCollection>(new Comparator<DuplicateAnchorCollection>() {
 			@Override
 			public int compare(DuplicateAnchorCollection o1, DuplicateAnchorCollection o2) {
-				if (o1.getClass().equals(o2.getClass())) {
+				if (o1.getClass() == o2.getClass()) {
 					if (o1 instanceof DuplicateAnchorCollectionByHelpTopic) {
 						DuplicateAnchorCollectionByHelpTopic d1 =
 							(DuplicateAnchorCollectionByHelpTopic) o1;

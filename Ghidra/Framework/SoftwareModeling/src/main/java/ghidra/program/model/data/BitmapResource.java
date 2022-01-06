@@ -211,18 +211,20 @@ public class BitmapResource {
 	private int getBytesPerLine() {
 		int lineLen = getWidth() * getBitCount();
 
-		if (getBitCount() == 1) {
-			lineLen = lineLen / 8;
-		}
-		else if (getBitCount() == 4) {
-			lineLen = (lineLen + 4) / 8;
-		}
-		else if (getBitCount() == 24) {
-			lineLen = lineLen / 8;
-		}
-		else {
-			lineLen = lineLen / 8;
-		}
+        switch (getBitCount()) {
+            case 1:
+                lineLen = lineLen / 8;
+                break;
+            case 4:
+                lineLen = (lineLen + 4) / 8;
+                break;
+            case 24:
+                lineLen = lineLen / 8;
+                break;
+            default:
+                lineLen = lineLen / 8;
+                break;
+        }
 		if ((lineLen % 4) != 0) {
 			lineLen = lineLen + (4 - (lineLen % 4));
 		}
@@ -524,160 +526,162 @@ public class BitmapResource {
 
 		int maxBufferOffset = offset + maxCompressedDataLength;
 
-		if (compression == BI_RGB) {
-			rawDataSize = getImageDataSize();
-			decompressedDataSize = rawDataSize;
-			if (returnDecompressedData) {
-				decompressedData = new byte[rawDataSize];
-				buf.getBytes(decompressedData, offset);
-			}
-		}
-		// Real size of image...
-		else if (compression == BI_RLE4) {
-			int x = 0;
-			int y = 0;
-			int byteWidth = (w + 1) / 2;
-			decompressedDataSize = byteWidth * h;
-			if (returnDecompressedData) {
-				decompressedData = new byte[decompressedDataSize];
-			}
-			int readOffset = offset;
-			try {
-				while (true) {
-					if (readOffset >= maxBufferOffset) {
-						throw new MemoryAccessException(
-							"Bitmap resource decompression exceeded memory constraint at " +
-								buf.getAddress());
-					}
-					int val = buf.getByte(readOffset++);
-					if (val == 0) { // escape
-						val = buf.getByte(readOffset++);
-						if (val == 1) {
-							break; // End of Bitmap - break from loop
-						}
-						switch (val) {
-							case 0: // EOL
-								x = 0;
-								y++;
-								break;
-							case 1: // End of Bitmap
-								throw new AssertException(); // already handled
-							case 2: // Delta
-								int xdelta = buf.getByte(readOffset++) & 0xff;
-								int ydelta = buf.getByte(readOffset++) & 0xff;
-								x += xdelta;
-								y += ydelta;
-								break;
-							default: // Absolute
-								int numFollow = val & 0xff;
-								if (decompressedData != null) {
-									byte[] bytes = new byte[numFollow / 2];
-									buf.getBytes(bytes, readOffset);
-									System.arraycopy(bytes, 0, decompressedData,
-										y * byteWidth + x / 2, bytes.length);
-									x += numFollow;
-								}
-								readOffset += (numFollow + 1) / 2;
-								readOffset += (readOffset % 2);
-								break;
-						}
-						continue;
-					}
-					int run = val;
-					val = buf.getByte(readOffset++);
-					if (decompressedData != null) {
-						for (int j = 0; j < run; j++) {
-							if (x >= w || y >= h) {
-								break;
-							}
-							int cval = decompressedData[y * byteWidth + x / 2];
-							int cmask = 0xf0 >> (((x + 1) % 2) * 4);
-							int mask = 0xf0 >> ((j % 2) * 4);
-							int nibble = (val & mask) >> (((j + 1) % 2) * 4);
-							decompressedData[y * byteWidth + x / 2] =
-								(byte) ((cval & cmask) | (nibble << (((x + 1) % 2) * 4)));
-							x++;
-						}
-					}
-				}
-			}
-			catch (ArrayIndexOutOfBoundsException e) {
-				Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-			}
-			rawDataSize = readOffset - offset;
-		}
-		else if (compression == BI_RLE8) {
-			int x = 0;
-			int y = 0;
-			int byteWidth = w;
-			decompressedDataSize = byteWidth * h;
-			if (returnDecompressedData) {
-				decompressedData = new byte[decompressedDataSize];
-			}
-			int readOffset = offset;
-			try {
-				while (true) {
-					if (readOffset >= maxBufferOffset) {
-						throw new MemoryAccessException(
-							"Bitmap resource decompression exceeded memory constraint at " +
-								buf.getAddress());
-					}
-					int val = buf.getByte(readOffset++);
-					if (val == 0) { // escape
-						val = buf.getByte(readOffset++);
-						if (val == 1) {
-							break; // End of Bitmap - break from loop
-						}
-						switch (val) {
-							case 0: // EOL
-								x = 0;
-								y++;
-								break;
-							case 1: // End of Bitmap
-								throw new AssertException(); // already handled
-							case 2: // Delta
-								int xdelta = buf.getByte(readOffset++) & 0xff;
-								int ydelta = buf.getByte(readOffset++) & 0xff;
-								x += xdelta;
-								y += ydelta;
-								break;
-							default: // Absolute
-								int numFollow = val & 0xff;
-								if (decompressedData != null) {
-									byte[] bytes = new byte[numFollow];
-									buf.getBytes(bytes, readOffset);
-									System.arraycopy(bytes, 0, decompressedData, y * byteWidth + x,
-										bytes.length);
-									x += numFollow;
-								}
-								readOffset += numFollow;
-								readOffset += (readOffset % 2);
-								break;
-						}
-						continue;
-					}
-					int run = val;
-					val = buf.getByte(readOffset++);
-					if (decompressedData != null) {
-						for (int j = 0; j < run; j++) {
-							if (x >= w || y >= h) {
-								break;
-							}
-							decompressedData[y * byteWidth + x] = (byte) val;
-							x++;
-						}
-					}
-				}
-			}
-			catch (ArrayIndexOutOfBoundsException e) {
-				Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-			}
-			rawDataSize = readOffset - offset;
-		}
-		else {
-			Msg.error(this, "Unsupported bitmap resource compression type " + compression + " at " +
-				buf.getAddress());
-		}
+        switch (compression) {
+            case BI_RGB:
+                rawDataSize = getImageDataSize();
+                decompressedDataSize = rawDataSize;
+                if (returnDecompressedData) {
+                    decompressedData = new byte[rawDataSize];
+                    buf.getBytes(decompressedData, offset);
+                }
+                break;
+            // Real size of image...
+            case BI_RLE4: {
+                int x = 0;
+                int y = 0;
+                int byteWidth = (w + 1) / 2;
+                decompressedDataSize = byteWidth * h;
+                if (returnDecompressedData) {
+                    decompressedData = new byte[decompressedDataSize];
+                }
+                int readOffset = offset;
+                try {
+                    while (true) {
+                        if (readOffset >= maxBufferOffset) {
+                            throw new MemoryAccessException(
+                                    "Bitmap resource decompression exceeded memory constraint at " +
+                                            buf.getAddress());
+                        }
+                        int val = buf.getByte(readOffset++);
+                        if (val == 0) { // escape
+                            val = buf.getByte(readOffset++);
+                            if (val == 1) {
+                                break; // End of Bitmap - break from loop
+                            }
+                            switch (val) {
+                                case 0: // EOL
+                                    x = 0;
+                                    y++;
+                                    break;
+                                case 1: // End of Bitmap
+                                    throw new AssertException(); // already handled
+                                case 2: // Delta
+                                    int xdelta = buf.getByte(readOffset++) & 0xff;
+                                    int ydelta = buf.getByte(readOffset++) & 0xff;
+                                    x += xdelta;
+                                    y += ydelta;
+                                    break;
+                                default: // Absolute
+                                    int numFollow = val & 0xff;
+                                    if (decompressedData != null) {
+                                        byte[] bytes = new byte[numFollow / 2];
+                                        buf.getBytes(bytes, readOffset);
+                                        System.arraycopy(bytes, 0, decompressedData,
+                                                y * byteWidth + x / 2, bytes.length);
+                                        x += numFollow;
+                                    }
+                                    readOffset += (numFollow + 1) / 2;
+                                    readOffset += (readOffset % 2);
+                                    break;
+                            }
+                            continue;
+                        }
+                        int run = val;
+                        val = buf.getByte(readOffset++);
+                        if (decompressedData != null) {
+                            for (int j = 0; j < run; j++) {
+                                if (x >= w || y >= h) {
+                                    break;
+                                }
+                                int cval = decompressedData[y * byteWidth + x / 2];
+                                int cmask = 0xf0 >> (((x + 1) % 2) * 4);
+                                int mask = 0xf0 >> ((j % 2) * 4);
+                                int nibble = (val & mask) >> (((j + 1) % 2) * 4);
+                                decompressedData[y * byteWidth + x / 2] =
+                                        (byte) ((cval & cmask) | (nibble << (((x + 1) % 2) * 4)));
+                                x++;
+                            }
+                        }
+                    }
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
+                }
+                rawDataSize = readOffset - offset;
+                break;
+            }
+            case BI_RLE8: {
+                int x = 0;
+                int y = 0;
+                int byteWidth = w;
+                decompressedDataSize = byteWidth * h;
+                if (returnDecompressedData) {
+                    decompressedData = new byte[decompressedDataSize];
+                }
+                int readOffset = offset;
+                try {
+                    while (true) {
+                        if (readOffset >= maxBufferOffset) {
+                            throw new MemoryAccessException(
+                                    "Bitmap resource decompression exceeded memory constraint at " +
+                                            buf.getAddress());
+                        }
+                        int val = buf.getByte(readOffset++);
+                        if (val == 0) { // escape
+                            val = buf.getByte(readOffset++);
+                            if (val == 1) {
+                                break; // End of Bitmap - break from loop
+                            }
+                            switch (val) {
+                                case 0: // EOL
+                                    x = 0;
+                                    y++;
+                                    break;
+                                case 1: // End of Bitmap
+                                    throw new AssertException(); // already handled
+                                case 2: // Delta
+                                    int xdelta = buf.getByte(readOffset++) & 0xff;
+                                    int ydelta = buf.getByte(readOffset++) & 0xff;
+                                    x += xdelta;
+                                    y += ydelta;
+                                    break;
+                                default: // Absolute
+                                    int numFollow = val & 0xff;
+                                    if (decompressedData != null) {
+                                        byte[] bytes = new byte[numFollow];
+                                        buf.getBytes(bytes, readOffset);
+                                        System.arraycopy(bytes, 0, decompressedData, y * byteWidth + x,
+                                                bytes.length);
+                                        x += numFollow;
+                                    }
+                                    readOffset += numFollow;
+                                    readOffset += (readOffset % 2);
+                                    break;
+                            }
+                            continue;
+                        }
+                        int run = val;
+                        val = buf.getByte(readOffset++);
+                        if (decompressedData != null) {
+                            for (int j = 0; j < run; j++) {
+                                if (x >= w || y >= h) {
+                                    break;
+                                }
+                                decompressedData[y * byteWidth + x] = (byte) val;
+                                x++;
+                            }
+                        }
+                    }
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
+                }
+                rawDataSize = readOffset - offset;
+                break;
+            }
+            default:
+                Msg.error(this, "Unsupported bitmap resource compression type " + compression + " at " +
+                        buf.getAddress());
+                break;
+        }
 		return new BitmapDecompressResult(rawDataSize, decompressedDataSize, decompressedData);
 	}
 

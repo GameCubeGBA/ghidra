@@ -91,9 +91,9 @@ public class BitTreeTest extends AbstractGenericTest {
 
     public static void expect(BitTree bt, int[] values) {
         short k = bt.getFirst();
-        for(int i=0;i<values.length;i++) {
-            if (k != values[i]) {
-                Assert.fail("Expected "+values[i]+ " and got "+k);
+        for (int value : values) {
+            if (k != value) {
+                Assert.fail("Expected " + value + " and got " + k);
             }
             k = bt.getNext(k);
         }
@@ -103,9 +103,9 @@ public class BitTreeTest extends AbstractGenericTest {
     }
     public static void expectBackwards(BitTree bt, int[] values) {
         short k = bt.getLast();
-        for(int i=0;i<values.length;i++) {
-            if (k != values[i]) {
-                Assert.fail("Expected "+values[i]+ " and got "+k);
+        for (int value : values) {
+            if (k != value) {
+                Assert.fail("Expected " + value + " and got " + k);
             }
             k = bt.getPrevious(k);
         }

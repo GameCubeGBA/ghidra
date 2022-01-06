@@ -48,7 +48,7 @@ public class GdbArmDebuggerMappingOpinionTest extends AbstractGhidraHeadlessInte
 		List<DebuggerMappingOffer> offers = DebuggerMappingOpinion.queryOpinions(process, false);
 		assertFalse(offers.isEmpty());
 		Set<DebuggerMappingOffer> ldefsOnes = offers.stream()
-				.filter(o -> o.getClass().equals(GdbArmOffer.class))
+				.filter(o -> o.getClass() == GdbArmOffer.class)
 				.collect(Collectors.toSet());
 		assertFalse(ldefsOnes.isEmpty());
 		Set<LanguageID> ids =
@@ -71,7 +71,7 @@ public class GdbArmDebuggerMappingOpinionTest extends AbstractGhidraHeadlessInte
 		List<DebuggerMappingOffer> offers = DebuggerMappingOpinion.queryOpinions(process, false);
 		assertFalse(offers.isEmpty());
 		Set<DebuggerMappingOffer> ldefsOnes = offers.stream()
-				.filter(o -> o.getClass().equals(GdbArmOffer.class))
+				.filter(o -> o.getClass() == GdbArmOffer.class)
 				.collect(Collectors.toSet());
 		assertTrue(ldefsOnes.isEmpty());
 	}
@@ -91,7 +91,7 @@ public class GdbArmDebuggerMappingOpinionTest extends AbstractGhidraHeadlessInte
 		List<DebuggerMappingOffer> offers = DebuggerMappingOpinion.queryOpinions(process, false);
 		assertFalse(offers.isEmpty());
 		Set<DebuggerMappingOffer> ldefsOnes = offers.stream()
-				.filter(o -> o.getClass().equals(GdbAArch64Offer.class))
+				.filter(o -> o.getClass() == GdbAArch64Offer.class)
 				.collect(Collectors.toSet());
 		assertFalse(ldefsOnes.isEmpty());
 		Set<LanguageID> ids =

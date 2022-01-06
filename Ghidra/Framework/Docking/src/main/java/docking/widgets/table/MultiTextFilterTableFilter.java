@@ -55,7 +55,7 @@ public class MultiTextFilterTableFilter<ROW_OBJECT> implements TableFilter<ROW_O
 
 		Class<?> clazz = transformer.getClass();
 		Class<?> otherClazz = other.transformer.getClass();
-		return clazz.equals(otherClazz);
+		return clazz == otherClazz;
 	}
 
 	@Override

@@ -113,9 +113,9 @@ public class ShortLongHashtableTest extends AbstractGenericTest {
 
     public static void testContains(ShortLongHashtable ht, short[] keys, String test) {
 
-        for(int i=0;i<keys.length;i++) {
-            if (!ht.contains(keys[i])) {
-                Assert.fail("hastable should contain key "+keys[i]+", but it doesn't");
+        for (short key : keys) {
+            if (!ht.contains(key)) {
+                Assert.fail("hastable should contain key " + key + ", but it doesn't");
             }
         }
 
@@ -129,8 +129,8 @@ public class ShortLongHashtableTest extends AbstractGenericTest {
     }
 
     public static boolean contains(short[] keys, short key) {
-        for(int i=0;i<keys.length;i++) {
-            if (keys[i] == key) {
+        for (short value : keys) {
+            if (value == key) {
                 return true;
             }
         }

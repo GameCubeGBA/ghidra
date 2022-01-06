@@ -146,12 +146,10 @@ public class XmlTestHelper {
 		File file = new File(tempDir, name);
 		file.deleteOnExit();
 		FileWriter writer = new FileWriter(file);
-		Iterator<String> it = xmlList.iterator();
-		while (it.hasNext()) {
-			String xml = it.next();
-			writer.write(xml);
-			writer.write('\n');
-		}
+        for (String xml : xmlList) {
+            writer.write(xml);
+            writer.write('\n');
+        }
 
 		writer.close();
 		XmlPullParser parser = XmlPullParserFactory.create(file, null, false);

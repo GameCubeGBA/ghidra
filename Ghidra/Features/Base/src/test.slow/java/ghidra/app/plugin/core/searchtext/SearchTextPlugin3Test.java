@@ -396,13 +396,12 @@ public class SearchTextPlugin3Test extends AbstractGhidraHeadedIntegrationTest {
 
 		Collections.sort(list);
 		Collections.reverse(list);
-		for (int i = 0; i < list.size(); i++) {
-			Address addr = list.get(i);
-			pressSearchButton(dialog, searchButton);
-			ProgramLocation loc = cbPlugin.getCurrentLocation();
-			assertEquals(addr, loc.getAddress());
-			assertTrue(loc instanceof OperandFieldLocation);
-		}
+        for (Address addr : list) {
+            pressSearchButton(dialog, searchButton);
+            ProgramLocation loc = cbPlugin.getCurrentLocation();
+            assertEquals(addr, loc.getAddress());
+            assertTrue(loc instanceof OperandFieldLocation);
+        }
 	}
 
 	private void addField(FieldFormatModel model, String fieldName, int column) {

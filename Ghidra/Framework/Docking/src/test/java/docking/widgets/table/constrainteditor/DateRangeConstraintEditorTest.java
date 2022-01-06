@@ -124,7 +124,7 @@ public class DateRangeConstraintEditorTest extends AbstractDockingTest {
 			new DateColumnConstraintProvider().getColumnConstraints();
 
 		for (ColumnConstraint<?> colConstraint : columnConstraints) {
-			if (colConstraint.getColumnType().equals(LocalDate.class) &&
+			if (colConstraint.getColumnType() == LocalDate.class &&
 				colConstraint.getName().equals("Between Dates")) {
 				return new MappedColumnConstraint<>(new DateColumnTypeMapper(),
 					(ColumnConstraint<LocalDate>) colConstraint);

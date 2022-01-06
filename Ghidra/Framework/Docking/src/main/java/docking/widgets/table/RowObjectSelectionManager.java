@@ -341,23 +341,22 @@ public class RowObjectSelectionManager<T> extends DefaultListSelectionModel
 			Map<Object, List<Integer>> objectRowMap) {
 		List<Integer> rowsList = new ArrayList<>();
 		int rowCount = modelAdapter.getRowCount();
-		for (int i = 0; i < rowObjects.size(); i++) {
-			Object object = rowObjects.get(i);
-			List<Integer> integerList = objectRowMap.get(object);
-			if (integerList == null) {
-				continue;
-			}
+        for (Object object : rowObjects) {
+            List<Integer> integerList = objectRowMap.get(object);
+            if (integerList == null) {
+                continue;
+            }
 
-			Iterator<Integer> iterator = integerList.iterator();
-			for (; iterator.hasNext();) {
-				Integer rowIndex = iterator.next();
-				iterator.remove(); // remove this value so that we don't process it later
-				if (rowIndex < rowCount) {
-					rowsList.add(rowIndex);
-					break;
-				}
-			}
-		}
+            Iterator<Integer> iterator = integerList.iterator();
+            for (; iterator.hasNext(); ) {
+                Integer rowIndex = iterator.next();
+                iterator.remove(); // remove this value so that we don't process it later
+                if (rowIndex < rowCount) {
+                    rowsList.add(rowIndex);
+                    break;
+                }
+            }
+        }
 		return rowsList;
 	}
 

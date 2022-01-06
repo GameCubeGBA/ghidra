@@ -146,11 +146,9 @@ public class MultiFunctionComparisonPanel extends FunctionComparisonPanel {
 
 		// Reload the functions
 		FunctionComparisonModel model = ((FunctionComparisonProvider) provider).getModel();
-		Iterator<FunctionComparison> compIter = model.getComparisons().iterator();
-		while (compIter.hasNext()) {
-			FunctionComparison fc = compIter.next();
-			sourceFunctionsCBModel.addElement(fc.getSource());
-		}
+        for (FunctionComparison fc : model.getComparisons()) {
+            sourceFunctionsCBModel.addElement(fc.getSource());
+        }
 
 		restoreSelection(sourceFunctionsCB, selection);
 	}
@@ -173,14 +171,12 @@ public class MultiFunctionComparisonPanel extends FunctionComparisonPanel {
 		// Find all target functions associated with the given source function
 		// and add them to the combo box model
 		FunctionComparisonModel model = ((FunctionComparisonProvider) provider).getModel();
-		Iterator<FunctionComparison> compIter = model.getComparisons().iterator();
-		while (compIter.hasNext()) {
-			FunctionComparison fc = compIter.next();
-			if (fc.getSource().equals(source)) {
-				Set<Function> targets = fc.getTargets();
-				targetFunctionsCBModel.addAll(targets);
-			}
-		}
+        for (FunctionComparison fc : model.getComparisons()) {
+            if (fc.getSource().equals(source)) {
+                Set<Function> targets = fc.getTargets();
+                targetFunctionsCBModel.addAll(targets);
+            }
+        }
 
 		restoreSelection(targetFunctionsCB, selection);
 	}

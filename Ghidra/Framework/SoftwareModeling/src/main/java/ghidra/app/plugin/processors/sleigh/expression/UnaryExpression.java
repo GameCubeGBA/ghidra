@@ -44,7 +44,7 @@ public abstract class UnaryExpression extends PatternExpression {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (!this.getClass().equals(obj.getClass())) {
+		if (this.getClass() != obj.getClass()) {
 			return false;
 		}
 		UnaryExpression that = (UnaryExpression) obj;

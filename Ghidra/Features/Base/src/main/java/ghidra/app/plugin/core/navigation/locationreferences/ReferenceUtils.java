@@ -1121,7 +1121,7 @@ public final class ReferenceUtils {
 
 		if (isBuiltIn(searchType)) {
 			Class<? extends DataType> clazz = searchType.getClass();
-			return clazz.equals(possibleType.getClass());
+			return clazz == possibleType.getClass();
 		}
 
 		UniversalID uid1 = searchType.getUniversalID();

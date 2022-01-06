@@ -586,17 +586,19 @@ public class DisassembledViewPlugin extends ProgramPlugin implements DomainObjec
 					}
 				}
 				else if (options.getName().equals(GhidraOptions.CATEGORY_BROWSER_DISPLAY)) {
-					if (optionName.equals(ADDRESS_COLOR_OPTION)) {
-						addressForegroundColor = (Color) newValue;
-						contentList.setForeground(addressForegroundColor);
-					}
-					else if (optionName.equals(BACKGROUND_COLOR_OPTION)) {
-						backgroundColor = (Color) newValue;
-						contentList.setBackground(backgroundColor);
-					}
-					else if (optionName.equals(ADDRESS_FONT_OPTION)) {
-						font = (Font) newValue;
-					}
+                    switch (optionName) {
+                        case ADDRESS_COLOR_OPTION:
+                            addressForegroundColor = (Color) newValue;
+                            contentList.setForeground(addressForegroundColor);
+                            break;
+                        case BACKGROUND_COLOR_OPTION:
+                            backgroundColor = (Color) newValue;
+                            contentList.setBackground(backgroundColor);
+                            break;
+                        case ADDRESS_FONT_OPTION:
+                            font = (Font) newValue;
+                            break;
+                    }
 				}
 
 				// update the display

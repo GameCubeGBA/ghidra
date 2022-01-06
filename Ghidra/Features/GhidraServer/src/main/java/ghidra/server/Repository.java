@@ -168,9 +168,9 @@ public class Repository implements FileSystemListener, RepositoryLogger {
 			GTimer.scheduleRunnable(RepositoryHandle.CLIENT_CHECK_PERIOD, () -> {
 				synchronized (fileSystem) {
 					RepositoryHandleImpl[] handles = getHandles();
-					for (int i = 0; i < handles.length; i++) {
-						handles[i].checkHandle();
-					}
+                    for (RepositoryHandleImpl handle : handles) {
+                        handle.checkHandle();
+                    }
 					scheduleHandleCheck();
 				}
 			});
@@ -194,9 +194,9 @@ public class Repository implements FileSystemListener, RepositoryLogger {
 				handles = new RepositoryHandleImpl[handleList.size()];
 				handleList.toArray(handles);
 			}
-			for (int i = 0; i < handles.length; i++) {
-				handles[i].dispose();
-			}
+            for (RepositoryHandleImpl handle : handles) {
+                handle.dispose();
+            }
 		}
 	}
 
@@ -238,9 +238,9 @@ public class Repository implements FileSystemListener, RepositoryLogger {
 		}
 
 		RepositoryHandleImpl[] handles = getHandles();
-		for (int i = 0; i < handles.length; i++) {
-			handles[i].dispatchEvents(events);
-		}
+        for (RepositoryHandleImpl handle : handles) {
+            handle.dispatchEvents(events);
+        }
 	}
 
 	private RepositoryHandleImpl[] getHandles() {
@@ -348,13 +348,13 @@ public class Repository implements FileSystemListener, RepositoryLogger {
 			validateAdminPrivilege(currentUser);
 
 			LinkedHashMap<String, User> newUserMap = new LinkedHashMap<>();
-			for (int i = 0; i < users.length; i++) {
-				String userName = users[i].getName();
-				if (UserManager.ANONYMOUS_USERNAME.equals(userName)) {
-					continue; // ignore
-				}
-				newUserMap.put(userName, users[i]);
-			}
+            for (User value : users) {
+                String userName = value.getName();
+                if (UserManager.ANONYMOUS_USERNAME.equals(userName)) {
+                    continue; // ignore
+                }
+                newUserMap.put(userName, value);
+            }
 			User user = newUserMap.get(currentUser);
 			if (user == null || !user.isAdmin()) {
 				throw new UserAccessException("User may not remove or change permissions for self");
@@ -409,10 +409,9 @@ public class Repository implements FileSystemListener, RepositoryLogger {
 			validateReadPrivilege(currentUser);
 			User[] users = new User[userMap.size()];
 			int i = 0;
-			Iterator<User> iter = userMap.values().iterator();
-			while (iter.hasNext()) {
-				users[i++] = iter.next();
-			}
+            for (User user : userMap.values()) {
+                users[i++] = user;
+            }
 			return users;
 		}
 	}
@@ -496,9 +495,7 @@ public class Repository implements FileSystemListener, RepositoryLogger {
                 out.println(ANONYMOUS_STR);
             }
 
-            Iterator<User> iter = newUserMap.values().iterator();
-            while (iter.hasNext()) {
-                User user = iter.next();
+            for (User user : newUserMap.values()) {
                 String line = user.getName() + "=" + TYPE_NAMES[user.getPermissionType()];
                 out.println(line);
             }

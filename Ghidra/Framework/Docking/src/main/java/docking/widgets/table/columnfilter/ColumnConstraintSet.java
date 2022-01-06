@@ -234,7 +234,7 @@ public class ColumnConstraintSet<R, T> {
 			return isStringBasedConstraint(constraint);
 		}
 
-		return constraint.getColumnType().equals(String.class);
+		return constraint.getColumnType() == String.class;
 	}
 
 	@Override

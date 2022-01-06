@@ -126,14 +126,12 @@ public class SelectColumnsDialog extends DialogComponentProvider {
 			return;
 		}
 
-		Iterator<TableColumn> iter = visibilityMap.keySet().iterator();
-		while (iter.hasNext()) {
-			TableColumn column = iter.next();
-			Boolean visible = visibilityMap.get(column);
-			if (visible != columnModel.isVisible(column)) {
-				columnModel.setVisible(column, visible);
-			}
-		}
+        for (TableColumn column : visibilityMap.keySet()) {
+            Boolean visible = visibilityMap.get(column);
+            if (visible != columnModel.isVisible(column)) {
+                columnModel.setVisible(column, visible);
+            }
+        }
 		close();
 	}
 
@@ -242,18 +240,17 @@ public class SelectColumnsDialog extends DialogComponentProvider {
 		public Object getValueAt(int row, int column) {
 			TableColumnWrapper tableColumnWrapper = columnList.get(row);
 			TableColumn tableColumn = tableColumnWrapper.getTableColumn();
-			if (column == 0) {
-				return visibilityMap.get(tableColumn);
-			}
-			else if (column == 1) {
-				return tableColumn.getHeaderValue();
-			}
-			else if (column == 2) {
-				if (tableColumnWrapper.isDefault()) {
-					return "Default";
-				}
-				return DISCOVERED_TABLE_COLUMN_NAME;
-			}
+            switch (column) {
+                case 0:
+                    return visibilityMap.get(tableColumn);
+                case 1:
+                    return tableColumn.getHeaderValue();
+                case 2:
+                    if (tableColumnWrapper.isDefault()) {
+                        return "Default";
+                    }
+                    return DISCOVERED_TABLE_COLUMN_NAME;
+            }
 			return "<<unknown>>";
 		}
 
@@ -283,15 +280,14 @@ public class SelectColumnsDialog extends DialogComponentProvider {
 
 		@Override
 		public String getColumnName(int column) {
-			if (column == 0) {
-				return "Visible";
-			}
-			else if (column == 1) {
-				return "Column Name";
-			}
-			else if (column == 2) {
-				return "Is Default?";
-			}
+            switch (column) {
+                case 0:
+                    return "Visible";
+                case 1:
+                    return "Column Name";
+                case 2:
+                    return "Is Default?";
+            }
 			return "<<unknown>>";
 		}
 	}

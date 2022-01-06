@@ -109,11 +109,10 @@ public class DeleteFunctionDefaultPlatesScriptTest extends AbstractGhidraHeadedI
 		program.flushEvents();
 		waitForPostedSwingRunnables();
 
-		for (int i = 0; i < list.size(); i++) {
-			Address addr = list.get(i);
-			Function f = listing.getFunctionAt(addr);
-			assertNull(f.getComment());
-		}
+        for (Address addr : list) {
+            Function f = listing.getFunctionAt(addr);
+            assertNull(f.getComment());
+        }
 	}
 
 	@Test
@@ -143,11 +142,10 @@ public class DeleteFunctionDefaultPlatesScriptTest extends AbstractGhidraHeadedI
 		program.flushEvents();
 		waitForPostedSwingRunnables();
 
-		for (int i = 0; i < list.size(); i++) {
-			Address addr = list.get(i);
-			Function f = listing.getFunctionAt(addr);
-			assertNull(f.getComment());
-		}
+        for (Address addr : list) {
+            Function f = listing.getFunctionAt(addr);
+            assertNull(f.getComment());
+        }
 	}
 
 	private Address getAddr(int offset) {

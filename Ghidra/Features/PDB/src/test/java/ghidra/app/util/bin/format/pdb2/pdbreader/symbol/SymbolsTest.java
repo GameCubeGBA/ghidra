@@ -4122,19 +4122,22 @@ public class SymbolsTest extends AbstractGenericTest {
 			long int32Param2) {
 		PdbByteWriter writer = new PdbByteWriter();
 		compressData(writer, instructionCode);
-		if (instructionCode == 0x00) {
-			writer.putAlign(0);
-		}
-		else if (instructionCode == 0x0c) {
-			compressData(writer, int32Param1);
-			compressData(writer, int32Param2);
-		}
-		else if ((instructionCode == 0x06) || (instructionCode == 0x0a)) {
-			compressData(writer, encodeSignedInt32(int32Param1));
-		}
-		else {
-			compressData(writer, int32Param1);
-		}
+        switch (instructionCode) {
+            case 0x00:
+                writer.putAlign(0);
+                break;
+            case 0x0c:
+                compressData(writer, int32Param1);
+                compressData(writer, int32Param2);
+                break;
+            case 0x06:
+            case 0x0a:
+                compressData(writer, encodeSignedInt32(int32Param1));
+                break;
+            default:
+                compressData(writer, int32Param1);
+                break;
+        }
 		return writer.get();
 	}
 

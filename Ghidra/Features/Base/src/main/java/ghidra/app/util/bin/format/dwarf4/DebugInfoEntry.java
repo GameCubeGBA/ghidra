@@ -125,7 +125,7 @@ public class DebugInfoEntry {
 	 * @return list of child DIE's
 	 */
 	public List<DebugInfoEntry> getChildren() {
-		return children != null ? children : Collections.EMPTY_LIST;
+		return children != null ? children : Collections.emptyList();
 	}
 
 	/**

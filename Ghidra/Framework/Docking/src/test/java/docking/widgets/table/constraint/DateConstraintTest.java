@@ -55,7 +55,7 @@ public class DateConstraintTest {
 			String string) {
 		// @formatter:off
 		Optional<ColumnConstraint<?>> first = columnConstraints.stream()
-				.filter(v -> v.getColumnType().equals(LocalDate.class) && v.getName().equals(string))
+				.filter(v -> v.getColumnType() == LocalDate.class && v.getName().equals(string))
 				.findFirst();
 		// @formatter:on
 		@SuppressWarnings("unchecked")

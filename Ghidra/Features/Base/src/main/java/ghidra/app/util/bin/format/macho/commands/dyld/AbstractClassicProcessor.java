@@ -96,44 +96,45 @@ public abstract class AbstractClassicProcessor {
 			}
 			case MachHeaderFileTypes.MH_KEXT_BUNDLE: {
 
-				if (header.getCpuType() == CpuTypes.CPU_TYPE_X86 ||
-					header.getCpuType() == CpuTypes.CPU_TYPE_X86_64) {
+                switch (header.getCpuType()) {
+                    case CpuTypes.CPU_TYPE_X86:
+                    case CpuTypes.CPU_TYPE_X86_64:
 
-					MemoryBlock block = memory.getBlock(address);
+                        MemoryBlock block = memory.getBlock(address);
 
-					if (block.isExecute()) { //then we must be fixing up code...
-						byte instructionByte = memory.getByte(address.subtract(1));
-						if (instructionByte == (byte) 0xe8 || //relative 32-bit call
-							instructionByte == (byte) 0xe9) { //relative 32-bit jump
+                        if (block.isExecute()) { //then we must be fixing up code...
+                            byte instructionByte = memory.getByte(address.subtract(1));
+                            if (instructionByte == (byte) 0xe8 || //relative 32-bit call
+                                    instructionByte == (byte) 0xe9) { //relative 32-bit jump
 
-							long difference = offset - addressValue - 4;
-							byte[] bytes = converter.getBytes((int) difference);
-							originalBytes = new byte[bytes.length];
-							memory.getBytes(address, originalBytes);
-							memory.setBytes(address, bytes);
-							handled = true;
-						}
-					}
-					else {
-						byte[] bytes = (program.getDefaultPointerSize() == 8)
-								? converter.getBytes(offset) : converter.getBytes((int) offset);
+                                long difference = offset - addressValue - 4;
+                                byte[] bytes = converter.getBytes((int) difference);
+                                originalBytes = new byte[bytes.length];
+                                memory.getBytes(address, originalBytes);
+                                memory.setBytes(address, bytes);
+                                handled = true;
+                            }
+                        } else {
+                            byte[] bytes = (program.getDefaultPointerSize() == 8)
+                                    ? converter.getBytes(offset) : converter.getBytes((int) offset);
 
-						originalBytes = new byte[bytes.length];
-						memory.getBytes(address, originalBytes);
-						memory.setBytes(address, bytes);
-						handled = true;
-					}
-				}
-				else if (header.getCpuType() == CpuTypes.CPU_TYPE_POWERPC) {//TODO powerpc kext files
-					if (SystemUtilities.isInDevelopmentMode()) {
-						System.out.println("CPU_TYPE_POWERPC");
-					}
-				}
-				else if (header.getCpuType() == CpuTypes.CPU_TYPE_ARM) {//TODO ios arm kext files
-					if (SystemUtilities.isInDevelopmentMode()) {
-						System.out.println("CPU_TYPE_ARM ");
-					}
-				}
+                            originalBytes = new byte[bytes.length];
+                            memory.getBytes(address, originalBytes);
+                            memory.setBytes(address, bytes);
+                            handled = true;
+                        }
+                        break;
+                    case CpuTypes.CPU_TYPE_POWERPC: //TODO powerpc kext files
+                        if (SystemUtilities.isInDevelopmentMode()) {
+                            System.out.println("CPU_TYPE_POWERPC");
+                        }
+                        break;
+                    case CpuTypes.CPU_TYPE_ARM: //TODO ios arm kext files
+                        if (SystemUtilities.isInDevelopmentMode()) {
+                            System.out.println("CPU_TYPE_ARM ");
+                        }
+                        break;
+                }
 
 				break;
 			}

@@ -249,17 +249,19 @@ public class ImporterUtilities {
 			//@formatter:on
 		}
 
-		if (choice == 1) {
-			importSingleFile(fullFsrl, destinationFolder, suggestedPath, tool, programManager,
-				monitor);
-		}
-		else if (choice == 2) {
-			BatchImportDialog.showAndImport(tool, null, Arrays.asList(fullFsrl), destinationFolder,
-				programManager);
-		}
-		else if (choice == 3) {
-			fsbService.openFileSystem(fullFsrl);
-		}
+        switch (choice) {
+            case 1:
+                importSingleFile(fullFsrl, destinationFolder, suggestedPath, tool, programManager,
+                        monitor);
+                break;
+            case 2:
+                BatchImportDialog.showAndImport(tool, null, Arrays.asList(fullFsrl), destinationFolder,
+                        programManager);
+                break;
+            case 3:
+                fsbService.openFileSystem(fullFsrl);
+                break;
+        }
 	}
 
 	public static void showAddToProgramDialog(FSRL fsrl, Program program, PluginTool tool,

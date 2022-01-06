@@ -83,7 +83,7 @@ public class IntegerValueConstraintEditorTest extends AbstractDockingTest {
 			new NumberColumnConstraintProvider().getColumnConstraints();
 
 		for (ColumnConstraint<?> columnConstraint : columnConstraints) {
-			if (columnConstraint.getColumnType().equals(Integer.class)) {
+			if (columnConstraint.getColumnType() == Integer.class) {
 				return (ColumnConstraint<Integer>) columnConstraint;
 			}
 		}

@@ -85,7 +85,7 @@ public class LldbModelTargetStackFrameRegisterContainerImpl
 	}
 
 	public void threadStateChangedSpecific(StateType state, LldbReason reason) {
-		if (state.equals(StateType.eStateStopped)) {
+		if (state == StateType.eStateStopped) {
 			requestAttributes(false).thenAccept(__ -> {
 				for (Object attribute : getCachedAttributes().values()) {
 					if (attribute instanceof LldbModelTargetRegisterBank) {

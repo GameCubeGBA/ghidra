@@ -136,13 +136,13 @@ public class ProjectInfoDialog extends DialogComponentProvider {
 		infoPanel.add(new GLabel("Project Storage Type:", SwingConstants.RIGHT));
 		Class<? extends LocalFileSystem> fsClass = project.getProjectData().getLocalStorageClass();
 		String fsClassName = "<UNKNOWN>";
-		if (IndexedV1LocalFileSystem.class.equals(fsClass)) {
+		if (IndexedV1LocalFileSystem.class == fsClass) {
 			fsClassName = "Indexed Filesystem (V1)";
 		}
-		else if (IndexedLocalFileSystem.class.equals(fsClass)) {
+		else if (IndexedLocalFileSystem.class == fsClass) {
 			fsClassName = "Indexed Filesystem (V0)";
 		}
-		else if (MangledLocalFileSystem.class.equals(fsClass)) {
+		else if (MangledLocalFileSystem.class == fsClass) {
 			fsClassName = "Mangled Filesystem";
 		}
 
@@ -182,10 +182,10 @@ public class ProjectInfoDialog extends DialogComponentProvider {
 
 		Class<? extends LocalFileSystem> fsClass = project.getProjectData().getLocalStorageClass();
 		String convertStorageButtonLabel = null;
-		if (IndexedLocalFileSystem.class.equals(fsClass)) {
+		if (IndexedLocalFileSystem.class == fsClass) {
 			convertStorageButtonLabel = "Upgrade Project Storage Index...";
 		}
-		else if (MangledLocalFileSystem.class.equals(fsClass)) {
+		else if (MangledLocalFileSystem.class == fsClass) {
 			convertStorageButtonLabel = "Convert Project Storage to Indexed...";
 		}
 

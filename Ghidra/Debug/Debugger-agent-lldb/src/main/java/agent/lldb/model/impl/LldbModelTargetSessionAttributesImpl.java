@@ -59,13 +59,13 @@ public class LldbModelTargetSessionAttributesImpl extends LldbModelTargetObjectI
 		String[] triple = target.GetTriple().split("-");
 		ByteOrder order = target.GetByteOrder();
 		String orderStr = "invalid";
-		if (order.equals(ByteOrder.eByteOrderLittle)) {
+		if (order == ByteOrder.eByteOrderLittle) {
 			orderStr = "little";
 		}
-		if (order.equals(ByteOrder.eByteOrderBig)) {
+		if (order == ByteOrder.eByteOrderBig) {
 			orderStr = "big";
 		}
-		if (order.equals(ByteOrder.eByteOrderPDP)) {
+		if (order == ByteOrder.eByteOrderPDP) {
 			orderStr = "pdp";
 		}
 

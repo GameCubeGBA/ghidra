@@ -1038,16 +1038,16 @@ public class DWARFFunctionImporter {
 				return 0;
 			}
 			Object[] resultObjects = instruction.getResultObjects();
-			for (int i = 0; i < resultObjects.length; i++) {
-				if (!(resultObjects[i] instanceof Register)) {
-					continue;
-				}
-				Register outReg = (Register) resultObjects[i];
-				if (register.equals(outReg)) {
-					long offset = instruction.getMinAddress().getOffset() - funcAddr;
-					return (int) offset;
-				}
-			}
+            for (Object resultObject : resultObjects) {
+                if (!(resultObject instanceof Register)) {
+                    continue;
+                }
+                Register outReg = (Register) resultObject;
+                if (register.equals(outReg)) {
+                    long offset = instruction.getMinAddress().getOffset() - funcAddr;
+                    return (int) offset;
+                }
+            }
 		}
 		// return the offset from the function entry to the real first use
 		return 0;

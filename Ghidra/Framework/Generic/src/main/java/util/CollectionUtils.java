@@ -117,11 +117,9 @@ public class CollectionUtils {
 			return set;
 		}
 
-		Iterator<T> it = iterable.iterator();
-		while (it.hasNext()) {
-			T t = it.next();
-			set.add(t);
-		}
+        for (T t : iterable) {
+            set.add(t);
+        }
 		return set;
 	}
 

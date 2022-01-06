@@ -84,10 +84,10 @@ class PathnameTableModel extends AbstractTableModel {
 		for (int i=0; i<selectedRows.length; i++) {
 			paths[i] = pathList.get(selectedRows[i]);
 		}
-		
-		for (int i=0; i<paths.length; i++) {
-			pathList.remove(paths[i]);
-		}
+
+        for (String path : paths) {
+            pathList.remove(path);
+        }
 		fireTableDataChanged();
 	}
 	

@@ -79,7 +79,7 @@ public class LldbModelTargetStackImpl extends LldbModelTargetObjectImpl
 	}
 
 	public void threadStateChangedSpecific(StateType state, LldbReason reason) {
-		if (state.equals(StateType.eStateStopped)) {
+		if (state == StateType.eStateStopped) {
 			requestElements(true).thenAccept(__ -> {
 				for (TargetObject element : getCachedElements().values()) {
 					if (element instanceof LldbModelTargetStackFrame) {

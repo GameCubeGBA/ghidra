@@ -561,15 +561,17 @@ public class InformationBlock {
 	public String getApplicationFlagsAsString() {
 		StringBuffer buffer = new StringBuffer();
 		byte application_type = (byte) (ne_flags_app & 0x03);
-		if (application_type == FLAGS_APP_FULL_SCREEN) {
-			buffer.append(TAB + "Full Screen" + "\n");
-		}
-		else if (application_type == FLAGS_APP_WIN_PM_COMPATIBLE) {
-			buffer.append(TAB + "Windows P.M. API Compatible" + "\n");
-		}
-		else if (application_type == FLAGS_APP_WINDOWS_PM) {
-			buffer.append(TAB + "Windows P.M. API" + "\n");
-		}
+        switch (application_type) {
+            case FLAGS_APP_FULL_SCREEN:
+                buffer.append(TAB + "Full Screen" + "\n");
+                break;
+            case FLAGS_APP_WIN_PM_COMPATIBLE:
+                buffer.append(TAB + "Windows P.M. API Compatible" + "\n");
+                break;
+            case FLAGS_APP_WINDOWS_PM:
+                buffer.append(TAB + "Windows P.M. API" + "\n");
+                break;
+        }
 
 		if ((ne_flags_app & FLAGS_APP_LIBRARY_MODULE) != 0) {
 			buffer.append(TAB + "Library Module" + "\n");

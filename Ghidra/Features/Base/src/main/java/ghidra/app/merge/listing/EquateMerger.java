@@ -319,24 +319,21 @@ class EquateMerger extends AbstractListingMerger {
 		if (list != null) {
 			int len = list.size();
 			// merge each conflict at this address.
-			for (int i = 0; i < len; i++) {
-				EquateConflict equateConflict = list.get(i);
-				// If we have a equate choice then a "Use For All" has already occurred.
-				if (equateChoice != ASK_USER) {
-					merge(equateConflict.address, equateConflict.opIndex, equateConflict.scalar,
-						equateChoice);
-				}
-				else {
-					if (askUser && mergeManager != null) {
-						setupConflictPanel(listingPanel, equateConflict);
-						monitor.checkCanceled();
-					}
-					else {
-						merge(equateConflict.address, equateConflict.opIndex,
-							equateConflict.scalar, chosenConflictOption);
-					}
-				}
-			}
+            for (EquateConflict equateConflict : list) {
+                // If we have a equate choice then a "Use For All" has already occurred.
+                if (equateChoice != ASK_USER) {
+                    merge(equateConflict.address, equateConflict.opIndex, equateConflict.scalar,
+                            equateChoice);
+                } else {
+                    if (askUser && mergeManager != null) {
+                        setupConflictPanel(listingPanel, equateConflict);
+                        monitor.checkCanceled();
+                    } else {
+                        merge(equateConflict.address, equateConflict.opIndex,
+                                equateConflict.scalar, chosenConflictOption);
+                    }
+                }
+            }
 		}
 	}
 
@@ -445,18 +442,19 @@ class EquateMerger extends AbstractListingMerger {
 	 */
 	private String[] getEquateInfo(int version, Equate equate) {
 		String[] info = { "", "", "" };
-		if (version == LATEST) {
-			info[0] = getChoice(LATEST_TITLE, equate);
-		}
-		else if (version == MY) {
-			info[0] = getChoice(MY_TITLE, equate);
-		}
-		else if (version == ORIGINAL) {
-			info[0] = " '" + ORIGINAL_TITLE + "' version";
-		}
-		else {
-			return new String[] { "Option", "Equate", "Value" };
-		}
+        switch (version) {
+            case LATEST:
+                info[0] = getChoice(LATEST_TITLE, equate);
+                break;
+            case MY:
+                info[0] = getChoice(MY_TITLE, equate);
+                break;
+            case ORIGINAL:
+                info[0] = " '" + ORIGINAL_TITLE + "' version";
+                break;
+            default:
+                return new String[]{"Option", "Equate", "Value"};
+        }
 		if (equate != null) {
 			info[1] = equate.getDisplayName();
 			info[2] = DiffUtility.toSignedHexString(equate.getValue());

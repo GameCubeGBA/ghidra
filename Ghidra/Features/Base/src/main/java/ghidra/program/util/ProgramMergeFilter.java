@@ -273,11 +273,11 @@ public class ProgramMergeFilter {
 	 */
 	public boolean isSet() {
 		int num = filterFlags.length;
-		for (int i = 0; i < num; i++) {
-			if (filterFlags[i] != IGNORE) {
-				return true;
-			}
-		}
+        for (int filterFlag : filterFlags) {
+            if (filterFlag != IGNORE) {
+                return true;
+            }
+        }
 		return false;
 	}
 

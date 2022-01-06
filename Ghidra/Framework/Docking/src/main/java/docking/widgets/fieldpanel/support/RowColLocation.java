@@ -68,7 +68,7 @@ public class RowColLocation {
 			return false;
 		}
 
-		if (!getClass().equals(object.getClass())) {
+		if (getClass() != object.getClass()) {
 			return false;
 		}
 

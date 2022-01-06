@@ -104,15 +104,17 @@ public class BitFieldPackingImpl implements BitFieldPacking {
 			String name = subel.getName();
 			String value = subel.getAttribute("value");
 
-			if (name.equals("use_MS_convention")) {
-				useMSConvention = SpecXmlUtils.decodeBoolean(value);
-			}
-			else if (name.equals("type_alignment_enabled")) {
-				typeAlignmentEnabled = SpecXmlUtils.decodeBoolean(value);
-			}
-			else if (name.equals("zero_length_boundary")) {
-				zeroLengthBoundary = SpecXmlUtils.decodeInt(value);
-			}
+            switch (name) {
+                case "use_MS_convention":
+                    useMSConvention = SpecXmlUtils.decodeBoolean(value);
+                    break;
+                case "type_alignment_enabled":
+                    typeAlignmentEnabled = SpecXmlUtils.decodeBoolean(value);
+                    break;
+                case "zero_length_boundary":
+                    zeroLengthBoundary = SpecXmlUtils.decodeInt(value);
+                    break;
+            }
 
 			parser.end(subel);
 		}

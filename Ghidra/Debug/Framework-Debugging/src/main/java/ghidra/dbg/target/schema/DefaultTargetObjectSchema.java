@@ -259,7 +259,7 @@ public class DefaultTargetObjectSchema
 		if (!Objects.equals(this.name, that.name)) {
 			return false;
 		}
-		if (!Objects.equals(this.type, that.type)) {
+		if (this.type != that.type) {
 			return false;
 		}
 		if (!Objects.equals(this.interfaces, that.interfaces)) {

@@ -105,12 +105,11 @@ public class ElfDynamicTable implements ElfFileSection {
 	 */
 	public ElfDynamic[] getDynamics(long type) {
 		List<ElfDynamic> list = new ArrayList<ElfDynamic>();
-		for (int i = 0; i < dynamics.size(); i++) {
-			ElfDynamic dyn = dynamics.get(i);
-			if (dyn.getTag() == type) {
-				list.add(dyn);
-			}
-		}
+        for (ElfDynamic dyn : dynamics) {
+            if (dyn.getTag() == type) {
+                list.add(dyn);
+            }
+        }
 		ElfDynamic[] arr = new ElfDynamic[list.size()];
 		list.toArray(arr);
 		return arr;
@@ -132,12 +131,11 @@ public class ElfDynamicTable implements ElfFileSection {
 	 * @param value the new value
 	 */
 	public void setDynamicValue(long type, long value) {
-		for (int i = 0; i < dynamics.size(); i++) {
-			ElfDynamic dyn = dynamics.get(i);
-			if (dyn.getTag() == type) {
-				dyn.setValue(value);
-			}
-		}
+        for (ElfDynamic dyn : dynamics) {
+            if (dyn.getTag() == type) {
+                dyn.setValue(value);
+            }
+        }
 	}
 
 	/**
@@ -155,12 +153,11 @@ public class ElfDynamicTable implements ElfFileSection {
 	 * @return the dynamic value
 	 */
 	public long getDynamicValue(long type) throws NotFoundException {
-		for (int i = 0; i < dynamics.size(); i++) {
-			ElfDynamic dyn = dynamics.get(i);
-			if (dyn.getTag() == type) {
-				return dyn.getValue();
-			}
-		}
+        for (ElfDynamic dyn : dynamics) {
+            if (dyn.getTag() == type) {
+                return dyn.getValue();
+            }
+        }
 		throw new NotFoundException("Dynamic table entry not found: 0x" + Long.toHexString(type));
 	}
 
@@ -179,12 +176,11 @@ public class ElfDynamicTable implements ElfFileSection {
 	 * @return true if dynamic value exists
 	 */
 	public boolean containsDynamicValue(long type) {
-		for (int i = 0; i < dynamics.size(); i++) {
-			ElfDynamic dyn = dynamics.get(i);
-			if (dyn.getTag() == type) {
-				return true;
-			}
-		}
+        for (ElfDynamic dyn : dynamics) {
+            if (dyn.getTag() == type) {
+                return true;
+            }
+        }
 		return false;
 	}
 

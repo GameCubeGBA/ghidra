@@ -122,13 +122,12 @@ public class DataTypesXmlMgr {
 			dtParser = null;
 		}
 
-		Iterator<XmlTreeNode> it = todo.iterator();
-		while (it.hasNext()) {
-			if (monitor.isCancelled()) {
-				throw new CancelledException();
-			}
-			logError(it.next());
-		}
+        for (XmlTreeNode xmlTreeNode : todo) {
+            if (monitor.isCancelled()) {
+                throw new CancelledException();
+            }
+            logError(xmlTreeNode);
+        }
 	}
 
 	private void logError(XmlTreeNode node) {
@@ -160,21 +159,18 @@ public class DataTypesXmlMgr {
 		String name = element.getName();
 
 		try {
-			if (name.equals("STRUCTURE")) {
-				return processStructure(root, firstPass);
-			}
-			else if (name.equals("UNION")) {
-				return processUnion(root, firstPass);
-			}
-			else if (name.equals("FUNCTION_DEF")) {
-				return processFunctionDef(root, firstPass);
-			}
-			else if (name.equals("ENUM")) {
-				return processEnum(root);
-			}
-			else if (name.equals("TYPE_DEF")) {
-				return processTypeDef(root, firstPass);
-			}
+            switch (name) {
+                case "STRUCTURE":
+                    return processStructure(root, firstPass);
+                case "UNION":
+                    return processUnion(root, firstPass);
+                case "FUNCTION_DEF":
+                    return processFunctionDef(root, firstPass);
+                case "ENUM":
+                    return processEnum(root);
+                case "TYPE_DEF":
+                    return processTypeDef(root, firstPass);
+            }
 			log.appendMsg("Unrecognized datatype tag: " + name);
 		}
 		catch (Exception e) {

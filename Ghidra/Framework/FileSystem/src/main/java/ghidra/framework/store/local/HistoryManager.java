@@ -293,10 +293,10 @@ class HistoryManager {
 			tmpFile.delete();
 
 			BufferedWriter out = new BufferedWriter(new FileWriter(tmpFile));
-			for (int i = 0; i < versions.length; i++) {
-				out.write(encodeVersion(versions[i]));
-				out.newLine();
-			}
+            for (Version version : versions) {
+                out.write(encodeVersion(version));
+                out.newLine();
+            }
 			out.close();
 
 			// Rename files

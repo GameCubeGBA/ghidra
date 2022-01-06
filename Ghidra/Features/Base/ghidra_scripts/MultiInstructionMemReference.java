@@ -226,38 +226,38 @@ public class MultiInstructionMemReference extends GhidraScript {
 			 */
 			private boolean getRefsForOperand(VarnodeContext context, Instruction instr, List<Object> list, int opIndex) {
 				Object[] opObjects = instr.getOpObjects(opIndex);
-				for (int indexOpObj = 0; indexOpObj < opObjects.length; indexOpObj++) {
-					if (!(opObjects[indexOpObj] instanceof Register)) {
-						continue;
-					}
-					Register reg = (Register) opObjects[indexOpObj];
+                for (Object opObject : opObjects) {
+                    if (!(opObject instanceof Register)) {
+                        continue;
+                    }
+                    Register reg = (Register) opObject;
 
-					// if operand has a single register and this isn't it
-					if (singleRegister != null && !reg.equals(singleRegister)) {
-						continue;
-					}
-					
-					// check that the register is on the correct input/output list
-					if (!list.contains(reg)) {
-						continue;
-					}
-					RegisterValue rval = context.getRegisterValue(reg);
-					if (rval == null) {
-						continue;
-					}
-					BigInteger uval = rval.getUnsignedValue();
-					if (uval == null) {
-						continue;
-					}
-					long offset = uval.longValue();
-					
-					AddressSpace space = instr.getMinAddress().getAddressSpace();
-					Address addr = space.getTruncatedAddress(offset, true);
+                    // if operand has a single register and this isn't it
+                    if (singleRegister != null && !reg.equals(singleRegister)) {
+                        continue;
+                    }
 
-					// assume that they want the reference, don't worry it isn't in memory
-					makeReference(instr, opIndex, addr);
-					return true;
-				}
+                    // check that the register is on the correct input/output list
+                    if (!list.contains(reg)) {
+                        continue;
+                    }
+                    RegisterValue rval = context.getRegisterValue(reg);
+                    if (rval == null) {
+                        continue;
+                    }
+                    BigInteger uval = rval.getUnsignedValue();
+                    if (uval == null) {
+                        continue;
+                    }
+                    long offset = uval.longValue();
+
+                    AddressSpace space = instr.getMinAddress().getAddressSpace();
+                    Address addr = space.getTruncatedAddress(offset, true);
+
+                    // assume that they want the reference, don't worry it isn't in memory
+                    makeReference(instr, opIndex, addr);
+                    return true;
+                }
 				return false;
 			}
 

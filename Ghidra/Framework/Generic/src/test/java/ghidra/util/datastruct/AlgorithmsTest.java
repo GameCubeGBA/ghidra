@@ -47,9 +47,9 @@ public class AlgorithmsTest extends AbstractGenericTest {
 
 	private List<Long> getList(long[] data) {
 		List<Long> list = new ArrayList<Long>(data.length);
-		for (int i = 0; i < data.length; i++) {
-			list.add(data[i]);
-		}
+        for (long datum : data) {
+            list.add(datum);
+        }
 		return list;
 	}
 

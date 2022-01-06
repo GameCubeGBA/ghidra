@@ -67,21 +67,22 @@ public class NSArray extends NSObject {
 		Structure structure = new StructureDataType("NSArray_" + values.size(), 0);
 		addHeader(structure, values.size());
 		for (int i = 0; i < values.size(); ++i) {
-			if (objectRefSize == 1) {
-				structure.add(BYTE, "value" + i, null);
-			}
-			else if (objectRefSize == 2) {
-				structure.add(WORD, "value" + i, null);
-			}
-			else if (objectRefSize == 4) {
-				structure.add(DWORD, "value" + i, null);
-			}
-			else if (objectRefSize == 8) {
-				structure.add(QWORD, "value" + i, null);
-			}
-			else {
-				throw new RuntimeException();
-			}
+            switch (objectRefSize) {
+                case 1:
+                    structure.add(BYTE, "value" + i, null);
+                    break;
+                case 2:
+                    structure.add(WORD, "value" + i, null);
+                    break;
+                case 4:
+                    structure.add(DWORD, "value" + i, null);
+                    break;
+                case 8:
+                    structure.add(QWORD, "value" + i, null);
+                    break;
+                default:
+                    throw new RuntimeException();
+            }
 		}
 		return structure;
 	}
@@ -94,9 +95,9 @@ public class NSArray extends NSObject {
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("NSArray {");
-		for (int i = 0; i < values.size(); ++i) {
-			builder.append("{0x" + Integer.toHexString(values.get(i)) + "}");
-		}
+        for (Integer value : values) {
+            builder.append("{0x" + Integer.toHexString(value) + "}");
+        }
 		builder.append("}");
 		return builder.toString();
 	}

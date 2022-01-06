@@ -774,114 +774,110 @@ public class GnuDemanglerParser {
 			if (ch == ' ') {
 				continue;
 			}
-			if (ch == '<') {//start of template
-				int contentStart = i + 1;
-				int templateEnd = findTemplateEnd(datatype, i);
-				if (templateEnd == -1 || templateEnd > datatype.length()) {
-					throw new DemanglerParseException("Did not find ending to template");
-				}
+            switch (ch) {
+                case '<': //start of template
+                    int contentStart = i + 1;
+                    int templateEnd = findTemplateEnd(datatype, i);
+                    if (templateEnd == -1 || templateEnd > datatype.length()) {
+                        throw new DemanglerParseException("Did not find ending to template");
+                    }
 
-				String templateContent = datatype.substring(contentStart, templateEnd);
-				DemangledTemplate template = parseTemplate(templateContent);
-				dt.setTemplate(template);
-				i = templateEnd;
-			}
-			else if (ch == '(') {// start of function pointer or array ref/pointer
-				//
-				// function pointer
-				// 		e.g., unsigned long (*)(long const &)
-				// array pointer/refs
-				//  	e.g., short (&)[7]
-				// lambda function
-				//      e.g., {lambda(NS1::Class1 const&, int, int)#1} const&
-				//            {lambda(auto:1&&)#1}<NS1::NS2>>&&
-				//
+                    String templateContent = datatype.substring(contentStart, templateEnd);
+                    DemangledTemplate template = parseTemplate(templateContent);
+                    dt.setTemplate(template);
+                    i = templateEnd;
+                    break;
+                case '(': // start of function pointer or array ref/pointer
+                    //
+                    // function pointer
+                    // 		e.g., unsigned long (*)(long const &)
+                    // array pointer/refs
+                    //  	e.g., short (&)[7]
+                    // lambda function
+                    //      e.g., {lambda(NS1::Class1 const&, int, int)#1} const&
+                    //            {lambda(auto:1&&)#1}<NS1::NS2>>&&
+                    //
 
-				LambdaName lambdaName = getLambdaName(datatype);
+                    LambdaName lambdaName = getLambdaName(datatype);
 
-				//
-				// Check for array case
-				//
-				// remove the templates to allow us to use a simpler regex when checking for arrays
-				DemangledDataType newDt = tryToParseArrayPointerOrReference(dt, datatype);
-				if (newDt != null) {
-					dt = newDt;
-					i = datatype.length();
-				}
-				// lambda case, maybe an array
-				else if (lambdaName != null) {
+                    //
+                    // Check for array case
+                    //
+                    // remove the templates to allow us to use a simpler regex when checking for arrays
+                    DemangledDataType newDt = tryToParseArrayPointerOrReference(dt, datatype);
+                    if (newDt != null) {
+                        dt = newDt;
+                        i = datatype.length();
+                    }
+                    // lambda case, maybe an array
+                    else if (lambdaName != null) {
 
-					DemangledDataType lambdaArrayDt =
-						tryToParseLambdaArrayPointerOrReference(lambdaName, dt, datatype);
-					if (lambdaArrayDt != null) {
-						dt = lambdaArrayDt;
-						i = datatype.length();
-					}
-					else {
-						// try a non-array lambda
-						String fullText = lambdaName.getFullText();
-						dt.setName(fullText);
-						int offset = fullText.indexOf('(');
-						// to to the end of the lambda, which is its length, minus our position
-						// inside the lambda
-						int remaining = fullText.length() - offset;
-						i = i + remaining; // end of lambda's closing '}'
-						i = i - 1; // back up one space to catch optional templates on next loop pass
-					}
-				}
-				// function pointer case
-				else {
-					// e.g., unsigned long (*)(long const &)
-					boolean hasPointerParens = hasConsecutiveSetsOfParens(datatype.substring(i));
-					if (hasPointerParens) {
-						Demangled namespace = dt.getNamespace();
-						DemangledFunctionPointer dfp = parseFunctionPointer(datatype);
-						int firstParenEnd = datatype.indexOf(')', i + 1);
-						int secondParenEnd = datatype.indexOf(')', firstParenEnd + 1);
-						if (secondParenEnd == -1) {
-							throw new DemanglerParseException(
-								"Did not find ending to closure: " + datatype);
-						}
+                        DemangledDataType lambdaArrayDt =
+                                tryToParseLambdaArrayPointerOrReference(lambdaName, dt, datatype);
+                        if (lambdaArrayDt != null) {
+                            dt = lambdaArrayDt;
+                            i = datatype.length();
+                        } else {
+                            // try a non-array lambda
+                            String fullText = lambdaName.getFullText();
+                            dt.setName(fullText);
+                            int offset = fullText.indexOf('(');
+                            // to to the end of the lambda, which is its length, minus our position
+                            // inside the lambda
+                            int remaining = fullText.length() - offset;
+                            i = i + remaining; // end of lambda's closing '}'
+                            i = i - 1; // back up one space to catch optional templates on next loop pass
+                        }
+                    }
+                    // function pointer case
+                    else {
+                        // e.g., unsigned long (*)(long const &)
+                        boolean hasPointerParens = hasConsecutiveSetsOfParens(datatype.substring(i));
+                        if (hasPointerParens) {
+                            Demangled namespace = dt.getNamespace();
+                            DemangledFunctionPointer dfp = parseFunctionPointer(datatype);
+                            int firstParenEnd = datatype.indexOf(')', i + 1);
+                            int secondParenEnd = datatype.indexOf(')', firstParenEnd + 1);
+                            if (secondParenEnd == -1) {
+                                throw new DemanglerParseException(
+                                        "Did not find ending to closure: " + datatype);
+                            }
 
-						dfp.getReturnType().setNamespace(namespace);
-						dt = dfp;
-						i = secondParenEnd + 1; // two sets of parens (normal case)
-					}
-					else {
+                            dfp.getReturnType().setNamespace(namespace);
+                            dt = dfp;
+                            i = secondParenEnd + 1; // two sets of parens (normal case)
+                        } else {
 
-						// parse as a function pointer, but display as a function
-						Demangled namespace = dt.getNamespace();
-						DemangledFunctionPointer dfp = parseFunction(datatype, i);
-						int firstParenEnd = datatype.indexOf(')', i + 1);
-						if (firstParenEnd == -1) {
-							throw new DemanglerParseException(
-								"Did not find ending to closure: " + datatype);
-						}
+                            // parse as a function pointer, but display as a function
+                            Demangled namespace = dt.getNamespace();
+                            DemangledFunctionPointer dfp = parseFunction(datatype, i);
+                            int firstParenEnd = datatype.indexOf(')', i + 1);
+                            if (firstParenEnd == -1) {
+                                throw new DemanglerParseException(
+                                        "Did not find ending to closure: " + datatype);
+                            }
 
-						dfp.getReturnType().setNamespace(namespace);
-						dt = dfp;
-						i = firstParenEnd + 1;// two sets of parens (normal case)
-					}
-				}
-			}
-			else if (ch == '*') {
-				dt.incrementPointerLevels();
-				continue;
-			}
-			else if (ch == '&') {
-				if (!dt.isReference()) {
-					dt.setReference();
-				}
-				else {
-					dt.setRValueReference();
-				}
-				continue;
-			}
-			else if (ch == '[') {
-				dt.setArray(dt.getArrayDimensions() + 1);
-				i = datatype.indexOf(']', i + 1);
-				continue;
-			}
+                            dfp.getReturnType().setNamespace(namespace);
+                            dt = dfp;
+                            i = firstParenEnd + 1;// two sets of parens (normal case)
+                        }
+                    }
+                    break;
+                case '*':
+                    dt.incrementPointerLevels();
+                    continue;
+                case '&':
+                    if (!dt.isReference()) {
+                        dt.setReference();
+                    } else {
+                        dt.setRValueReference();
+                    }
+                    continue;
+                case '[':
+                    dt.setArray(dt.getArrayDimensions() + 1);
+                    i = datatype.indexOf(']', i + 1);
+                    continue;
+            }
 
 			String substr = datatype.substring(i);
 

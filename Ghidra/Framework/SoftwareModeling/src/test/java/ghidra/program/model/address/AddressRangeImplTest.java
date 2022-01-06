@@ -252,11 +252,9 @@ public class AddressRangeImplTest extends AbstractGenericTest {
 
 		AddressRange r1 = new AddressRangeImpl(start, limit);
 		int addrCount = 0;
-		Iterator<Address> addrItr = r1.iterator();
-		while (addrItr.hasNext()) {
-			addrItr.next();
-			addrCount++;
-		}
+        for (Address address : r1) {
+            addrCount++;
+        }
 
 		assertTrue(
 			"Address Iterator does not properly enumerate address range: " +

@@ -96,17 +96,19 @@ abstract public class MachoRelocationHandler implements ExtensionPoint {
 		Memory mem = relocation.getProgram().getMemory();
 		int len = relocation.getRelocationInfo().getLength();
 		Address addr = relocation.getRelocationAddress();
-		if (len == 3) {
-			mem.setLong(addr, value);
-		}
-		else if (len == 2) {
-			mem.setInt(addr, (int) value);
-		}
-		else if (len == 1) {
-			mem.setShort(addr, (short) value);
-		}
-		else {
-			mem.setByte(addr, (byte) value);
-		}
+        switch (len) {
+            case 3:
+                mem.setLong(addr, value);
+                break;
+            case 2:
+                mem.setInt(addr, (int) value);
+                break;
+            case 1:
+                mem.setShort(addr, (short) value);
+                break;
+            default:
+                mem.setByte(addr, (byte) value);
+                break;
+        }
 	}
 }

@@ -38,7 +38,9 @@ processIntegrationTestResources {
 }
 
 dependencies {
-	// integrationtest module may depend on other projects in this repo; add them
+    implementation 'junit:junit:4.13.1'
+
+    // integrationtest module may depend on other projects in this repo; add them
 	// here 
 	def ghidraPath = projectDir.getParentFile().getParentFile().path.replace(File.separator, "/") + "/";
 	

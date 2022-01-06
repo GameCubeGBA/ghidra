@@ -85,12 +85,12 @@ class SynchronizedTransaction implements Transaction {
 		if (status == ABORTED || status == COMMITTED) {
 			return list;
 		}
-		for (int i = 0; i < managers.length; i++) {
-			String name = getDomainObjectName(managers[i]);
-			for (String str : managers[i].getCurrentTransaction().getOpenSubTransactions()) {
-				list.add(name + ": " + str);
-			}
-		}
+        for (DomainObjectTransactionManager manager : managers) {
+            String name = getDomainObjectName(manager);
+            for (String str : manager.getCurrentTransaction().getOpenSubTransactions()) {
+                list.add(name + ": " + str);
+            }
+        }
 		return list;
 	}
 

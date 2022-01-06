@@ -254,19 +254,17 @@ class OldFunctionDataDB {
 		Parameter[] parms = new Parameter[regParams.size() + frame.getParameterCount()];
 		int ordinal = 0;
 
-		Iterator<Parameter> iter = regParams.iterator();
-		while (iter.hasNext()) {
-			Parameter rp = iter.next();
-			parms[ordinal++] = rp;
-		}
+        for (Parameter rp : regParams) {
+            parms[ordinal++] = rp;
+        }
 
 		try {
 			Variable[] stackParams = frame.getParameters();
-			for (int i = 0; i < stackParams.length; i++) {
-				parms[ordinal++] = new OldFunctionParameter(stackParams[i].getName(), ordinal,
-					stackParams[i].getDataType(), stackParams[i].getVariableStorage(), program,
-					SourceType.USER_DEFINED);
-			}
+            for (Variable stackParam : stackParams) {
+                parms[ordinal++] = new OldFunctionParameter(stackParam.getName(), ordinal,
+                        stackParam.getDataType(), stackParam.getVariableStorage(), program,
+                        SourceType.USER_DEFINED);
+            }
 		}
 		catch (InvalidInputException e) {
 			throw new RuntimeException(e); // unexpected

@@ -48,7 +48,7 @@ public class ShowSymbolReferencesAction extends SymbolTreeContextAction {
 
 		@Override
 		public void serviceAdded(Class<?> interfaceClass, Object service) {
-			if (interfaceClass.equals(LocationReferencesService.class)) {
+			if (interfaceClass == LocationReferencesService.class) {
 				setHelpLocation(((LocationReferencesService) service).getHelpLocation());
 				Swing.runLater(() -> tool.removeServiceListener(this));
 			}

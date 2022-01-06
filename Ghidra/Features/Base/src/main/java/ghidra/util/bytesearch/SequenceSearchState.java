@@ -291,9 +291,7 @@ public class SequenceSearchState implements Comparable<SequenceSearchState> {
 				}
 				fullBuffers = 1;
 				byte[] tmp = new byte[ra];
-				for (int i = 0; i < ra; ++i) {
-					tmp[i] = secondBuf[i];
-				}
+                System.arraycopy(secondBuf, 0, tmp, 0, ra);
 				secondBuf = tmp;
 			}
 		}
@@ -302,9 +300,7 @@ public class SequenceSearchState implements Comparable<SequenceSearchState> {
 		}
 		else {
 			byte[] tmp = new byte[ra];
-			for (int i = 0; i < ra; ++i) {
-				tmp[i] = firstBuf[i];
-			}
+            System.arraycopy(firstBuf, 0, tmp, 0, ra);
 			firstBuf = tmp;
 			fullBuffers = 0;
 			secondBuf = new byte[0];
@@ -350,9 +346,7 @@ public class SequenceSearchState implements Comparable<SequenceSearchState> {
 						ra = 0;
 					}
 					tmp = new byte[ra];
-					for (int i = 0; i < ra; ++i) {
-						tmp[i] = secondBuf[i];
-					}
+                    System.arraycopy(secondBuf, 0, tmp, 0, ra);
 					secondBuf = tmp;
 				}
 				bufRelativeOffset = 0;
@@ -408,11 +402,9 @@ public class SequenceSearchState implements Comparable<SequenceSearchState> {
 	static ArrayList<SequenceSearchState> buildTransitionLevel(ArrayList<SequenceSearchState> prev,
 			int pos) {
 		ArrayList<SequenceSearchState> res = new ArrayList<SequenceSearchState>();
-		Iterator<SequenceSearchState> iterator = prev.iterator();
-		while (iterator.hasNext()) {			// For each current state
-			SequenceSearchState next = iterator.next();
+		for (SequenceSearchState next : prev) {            // For each current state
 			next.trans = new SequenceSearchState[256];
-			for (int i = 0; i < 256; ++i) {		// Try every byte transition
+			for (int i = 0; i < 256; ++i) {        // Try every byte transition
 				next.buildSingleTransition(res, pos, i);
 			}
 		}

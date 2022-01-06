@@ -97,7 +97,7 @@ public class FloatValueConstraintEditorTest extends AbstractDockingTest {
 		Collection<ColumnConstraint<?>> columnConstraints =
 			new NumberColumnConstraintProvider().getColumnConstraints();
 		for (ColumnConstraint<?> columnConstraint : columnConstraints) {
-			if (columnConstraint.getColumnType().equals(Double.class)) {
+			if (columnConstraint.getColumnType() == Double.class) {
 				return new MappedColumnConstraint<>(new FloatColumnTypeMapper(),
 					(ColumnConstraint<Double>) columnConstraint);
 			}

@@ -72,24 +72,23 @@ public class PcodeEmitObjects extends PcodeEmit {
 		if (labelref == null) {
 			return;
 		}
-		for (int i = 0; i < labelref.size(); ++i) {
-			int opindex = labelref.get(i);
-			PcodeOp op = oplist.get(opindex);
-			Varnode vn = op.getInput(0);
-			int labelid = (int) vn.getOffset();
-			if ((labelid >= labeldef.size()) || (labeldef.get(labelid) == null)) {
-				throw new SleighException("Reference to non-existant sleigh label");
-			}
-			long res = (long) labeldef.get(labelid) - (long) opindex;
-			if (vn.getSize() < 8) {
-				long mask = -1;
-				mask >>>= (8 - vn.getSize()) * 8;
-				res &= mask;
-			}
-			AddressSpace spc = vn.getAddress().getAddressSpace();
-			vn = new Varnode(spc.getAddress(res), vn.getSize());
-			op.setInput(vn, 0);
-		}
+        for (int opindex : labelref) {
+            PcodeOp op = oplist.get(opindex);
+            Varnode vn = op.getInput(0);
+            int labelid = (int) vn.getOffset();
+            if ((labelid >= labeldef.size()) || (labeldef.get(labelid) == null)) {
+                throw new SleighException("Reference to non-existant sleigh label");
+            }
+            long res = (long) labeldef.get(labelid) - (long) opindex;
+            if (vn.getSize() < 8) {
+                long mask = -1;
+                mask >>>= (8 - vn.getSize()) * 8;
+                res &= mask;
+            }
+            AddressSpace spc = vn.getAddress().getAddressSpace();
+            vn = new Varnode(spc.getAddress(res), vn.getSize());
+            op.setInput(vn, 0);
+        }
 	}
 
 	/* (non-Javadoc)

@@ -255,11 +255,11 @@ public class Fix_ARM_Call_JumpsScript extends GhidraScript {
 		}
 
 		boolean hasIndirect = false;
-		for (int i = 0; i < referencesFrom.length; i++) {
-			if (referencesFrom[i].getReferenceType().isIndirect()) {
-				hasIndirect = true;
-			}
-		}
+        for (Reference value : referencesFrom) {
+            if (value.getReferenceType().isIndirect()) {
+                hasIndirect = true;
+            }
+        }
 		if (hasIndirect) {
 			return true;
 		}

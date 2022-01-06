@@ -604,99 +604,107 @@ public class BasicCompilerSpec implements CompilerSpec {
 		parser.start("compiler_spec");
 		while (parser.peek().isStart()) {
 			String name = parser.peek().getName();
-			if (name.equals("properties")) {
-				restoreProperties(parser);
-			}
-			else if (name.equals("data_organization")) {
-				dataOrganization.restoreXml(parser);
-			}
-			else if (name.equals("callfixup")) {
-				String nm = parser.peek().getAttribute("name");
-				pcodeInject.restoreXmlInject(sourceName, nm, InjectPayload.CALLFIXUP_TYPE, parser);
-			}
-			else if (name.equals("callotherfixup")) {
-				String nm = parser.peek().getAttribute("targetop");
-				pcodeInject.restoreXmlInject(sourceName, nm, InjectPayload.CALLOTHERFIXUP_TYPE,
-					parser);
-			}
-			else if (name.equals("context_data")) {
-				ContextSetting.parseContextData(ctxsetting, parser, this);
-			}
-			else if (name.equals("stackpointer")) {
-				setStackPointer(parser);
-			}
-			else if (name.equals("spacebase")) {
-				restoreSpaceBase(parser);
-			}
-			else if (name.equals("global")) {
-				restoreMemoryTags("global", parser, globalSet);
-			}
-			else if (name.equals("default_proto")) {
-				parser.start();
-				PrototypeModel model = addPrototypeModel(modelList, parser);
-				parser.end();
-				if (!seenDefault) {
-					defaultName = model.name;
-					seenDefault = true;
-				}
-			}
-			else if (name.equals("prototype")) {
-				PrototypeModel model = addPrototypeModel(modelList, parser);
-				if (defaultName == null) {
-					defaultName = model.name;
-				}
-			}
-			else if (name.equals("resolveprototype")) {
-				addPrototypeModel(modelList, parser);
-			}
-			else if (name.equals("eval_current_prototype")) {
-				evalCurrentPrototype = parser.start().getAttribute("name");
-				parser.end();
-			}
-			else if (name.equals("eval_called_prototype")) {
-				evalCalledPrototype = parser.start().getAttribute("name");
-				parser.end();
-			}
-			else if (name.equals("segmentop")) {
-				String source = "cspec: " + language.getLanguageID().getIdAsString();
-				InjectPayloadSleigh payload = new InjectPayloadSegment(source);
-				payload.restoreXml(parser, language);
-				pcodeInject.registerInject(payload);
-			}
-			else if (name.equals("aggressivetrim")) {
-				XmlElement el = parser.start();
-				aggressiveTrim = SpecXmlUtils.decodeBoolean(el.getAttribute("signext"));
-				parser.end(el);
-			}
-			else if (name.equals("prefersplit")) {
-				restorePreferSplit(parser);
-			}
-			else if (name.equals("nohighptr")) {
-				noHighPtr = new AddressSet();
-				restoreMemoryTags("nohighptr", parser, noHighPtr);
-			}
-			else if (name.equals("readonly")) {
-				readOnlySet = new AddressSet();
-				restoreMemoryTags("readonly", parser, readOnlySet);
-			}
-			else if (name.equals("returnaddress")) {
-				restoreReturnAddress(parser);
-			}
-			else if (name.equals("funcptr")) {
-				XmlElement subel = parser.start();
-				funcPtrAlign = SpecXmlUtils.decodeInt(subel.getAttribute("align"));
-				parser.end(subel);
-			}
-			else if (name.equals("deadcodedelay")) {
-				restoreDeadCodeDelay(parser);
-			}
-			else if (name.equals("inferptrbounds")) {
-				restoreInferPtrBounds(parser);
-			}
-			else {
-				XmlElement el = parser.start();
-				parser.discardSubTree(el);
-			}
+            switch (name) {
+                case "properties":
+                    restoreProperties(parser);
+                    break;
+                case "data_organization":
+                    dataOrganization.restoreXml(parser);
+                    break;
+                case "callfixup": {
+                    String nm = parser.peek().getAttribute("name");
+                    pcodeInject.restoreXmlInject(sourceName, nm, InjectPayload.CALLFIXUP_TYPE, parser);
+                    break;
+                }
+                case "callotherfixup": {
+                    String nm = parser.peek().getAttribute("targetop");
+                    pcodeInject.restoreXmlInject(sourceName, nm, InjectPayload.CALLOTHERFIXUP_TYPE,
+                            parser);
+                    break;
+                }
+                case "context_data":
+                    ContextSetting.parseContextData(ctxsetting, parser, this);
+                    break;
+                case "stackpointer":
+                    setStackPointer(parser);
+                    break;
+                case "spacebase":
+                    restoreSpaceBase(parser);
+                    break;
+                case "global":
+                    restoreMemoryTags("global", parser, globalSet);
+                    break;
+                case "default_proto": {
+                    parser.start();
+                    PrototypeModel model = addPrototypeModel(modelList, parser);
+                    parser.end();
+                    if (!seenDefault) {
+                        defaultName = model.name;
+                        seenDefault = true;
+                    }
+                    break;
+                }
+                case "prototype": {
+                    PrototypeModel model = addPrototypeModel(modelList, parser);
+                    if (defaultName == null) {
+                        defaultName = model.name;
+                    }
+                    break;
+                }
+                case "resolveprototype":
+                    addPrototypeModel(modelList, parser);
+                    break;
+                case "eval_current_prototype":
+                    evalCurrentPrototype = parser.start().getAttribute("name");
+                    parser.end();
+                    break;
+                case "eval_called_prototype":
+                    evalCalledPrototype = parser.start().getAttribute("name");
+                    parser.end();
+                    break;
+                case "segmentop":
+                    String source = "cspec: " + language.getLanguageID().getIdAsString();
+                    InjectPayloadSleigh payload = new InjectPayloadSegment(source);
+                    payload.restoreXml(parser, language);
+                    pcodeInject.registerInject(payload);
+                    break;
+                case "aggressivetrim": {
+                    XmlElement el = parser.start();
+                    aggressiveTrim = SpecXmlUtils.decodeBoolean(el.getAttribute("signext"));
+                    parser.end(el);
+                    break;
+                }
+                case "prefersplit":
+                    restorePreferSplit(parser);
+                    break;
+                case "nohighptr":
+                    noHighPtr = new AddressSet();
+                    restoreMemoryTags("nohighptr", parser, noHighPtr);
+                    break;
+                case "readonly":
+                    readOnlySet = new AddressSet();
+                    restoreMemoryTags("readonly", parser, readOnlySet);
+                    break;
+                case "returnaddress":
+                    restoreReturnAddress(parser);
+                    break;
+                case "funcptr":
+                    XmlElement subel = parser.start();
+                    funcPtrAlign = SpecXmlUtils.decodeInt(subel.getAttribute("align"));
+                    parser.end(subel);
+                    break;
+                case "deadcodedelay":
+                    restoreDeadCodeDelay(parser);
+                    break;
+                case "inferptrbounds":
+                    restoreInferPtrBounds(parser);
+                    break;
+                default: {
+                    XmlElement el = parser.start();
+                    parser.discardSubTree(el);
+                    break;
+                }
+            }
 		}
 		parser.end();
 

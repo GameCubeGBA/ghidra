@@ -80,20 +80,19 @@ public class PcodeEmitPacked extends PcodeEmit {
 		if (labelref == null) {
 			return;
 		}
-		for (int i = 0; i < labelref.size(); ++i) {
-			LabelRef ref = labelref.get(i);
-			if ((ref.labelIndex >= labeldef.size()) || (labeldef.get(ref.labelIndex) == null)) {
-				throw new SleighException("Reference to non-existant sleigh label");
-			}
-			long res = (long) labeldef.get(ref.labelIndex) - (long) ref.opIndex;
-			if (ref.labelSize < 8) {
-				long mask = -1;
-				mask >>>= (8 - ref.labelSize) * 8;
-				res &= mask;
-			}
-			// We need to skip over op_tag, op_code, void_tag, addrsz_tag, and spc bytes
-			insertOffset(ref.streampos + 5, res);		// Insert the final offset into the stream
-		}
+        for (LabelRef ref : labelref) {
+            if ((ref.labelIndex >= labeldef.size()) || (labeldef.get(ref.labelIndex) == null)) {
+                throw new SleighException("Reference to non-existant sleigh label");
+            }
+            long res = (long) labeldef.get(ref.labelIndex) - (long) ref.opIndex;
+            if (ref.labelSize < 8) {
+                long mask = -1;
+                mask >>>= (8 - ref.labelSize) * 8;
+                res &= mask;
+            }
+            // We need to skip over op_tag, op_code, void_tag, addrsz_tag, and spc bytes
+            insertOffset(ref.streampos + 5, res);        // Insert the final offset into the stream
+        }
 	}
 
 	/* (non-Javadoc)

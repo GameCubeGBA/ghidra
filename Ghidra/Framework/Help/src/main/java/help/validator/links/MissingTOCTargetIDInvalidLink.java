@@ -98,7 +98,7 @@ public class MissingTOCTargetIDInvalidLink implements InvalidLink {
 				return false;
 			}
 		}
-		else if (!help.equals(other.help)) {
+		else if (help != other.help) {
 			return false;
 		}
 		if (item == null) {

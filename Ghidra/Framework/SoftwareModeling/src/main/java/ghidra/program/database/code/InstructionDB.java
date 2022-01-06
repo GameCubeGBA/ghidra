@@ -220,11 +220,11 @@ public class InstructionDB extends CodeUnitDB implements Instruction, Instructio
 		}
 
 		ArrayList<Address> list = new ArrayList<Address>();
-		for (int i = 0; i < refs.length; ++i) {
-			if (!refs[i].getReferenceType().isIndirect()) {
-				list.add(refs[i].getToAddress());
-			}
-		}
+        for (Reference ref : refs) {
+            if (!ref.getReferenceType().isIndirect()) {
+                list.add(ref.getToAddress());
+            }
+        }
 
 		if (flowOverride == FlowOverride.RETURN && list.size() == 1) {
 			return EMPTY_ADDR_ARRAY;
@@ -804,7 +804,7 @@ public class InstructionDB extends CodeUnitDB implements Instruction, Instructio
 		}
 		// Ensure that prototype is same implementation
 		InstructionPrototype otherProto = instr.getPrototype();
-		if (!otherProto.getClass().equals(proto.getClass())) {
+		if (otherProto.getClass() != proto.getClass()) {
 			throw new UnknownContextException(
 				"Instruction has incompatible prototype at: " + instructionAddress);
 		}

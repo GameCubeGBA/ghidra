@@ -424,38 +424,32 @@ public class Constructor {
 		int lineno = XmlUtils.decodeUnknownInt(el.getAttributeValue("line"));
 
 		List<?> list = el.getChildren();
-		Iterator<?> iter = list.iterator();
-		while (iter.hasNext()) {
-			Element child = (Element) iter.next();
-			if (child.getName().equals("oper")) {
-				id = XmlUtils.decodeUnknownInt(child.getAttributeValue("id"));
-				OperandSymbol sym = (OperandSymbol) trans.findSymbol(id);
-				operands.push_back(sym);
-			}
-			else if (child.getName().equals("print")) {
-				printpiece.push_back(child.getAttributeValue("piece"));
-			}
-			else if (child.getName().equals("opprint")) {
-				int index = XmlUtils.decodeUnknownInt(child.getAttributeValue("id"));
-				char c = (char) ('A' + index);
-				String operstring = "\n" + c;
-				printpiece.push_back(operstring);
-			}
-			else if (child.getName().equals("context_op")) {
-				ContextOp c_op = new ContextOp(location);
-				c_op.restoreXml(child, trans);
-				context.push_back(c_op);
-			}
-			else if (child.getName().equals("commit")) {
-				ContextCommit c_op = new ContextCommit();
-				c_op.restoreXml(child, trans);
-				context.push_back(c_op);
-			}
-			else {
-				templ = new ConstructTpl(null);
-				templ.restoreXml(child, trans);
-			}
-		}
+        for (Object o : list) {
+            Element child = (Element) o;
+            if (child.getName().equals("oper")) {
+                id = XmlUtils.decodeUnknownInt(child.getAttributeValue("id"));
+                OperandSymbol sym = (OperandSymbol) trans.findSymbol(id);
+                operands.push_back(sym);
+            } else if (child.getName().equals("print")) {
+                printpiece.push_back(child.getAttributeValue("piece"));
+            } else if (child.getName().equals("opprint")) {
+                int index = XmlUtils.decodeUnknownInt(child.getAttributeValue("id"));
+                char c = (char) ('A' + index);
+                String operstring = "\n" + c;
+                printpiece.push_back(operstring);
+            } else if (child.getName().equals("context_op")) {
+                ContextOp c_op = new ContextOp(location);
+                c_op.restoreXml(child, trans);
+                context.push_back(c_op);
+            } else if (child.getName().equals("commit")) {
+                ContextCommit c_op = new ContextCommit();
+                c_op.restoreXml(child, trans);
+                context.push_back(c_op);
+            } else {
+                templ = new ConstructTpl(null);
+                templ.restoreXml(child, trans);
+            }
+        }
 		pattern = null;
 		if ((printpiece.size() == 1) && (printpiece.get(0).charAt(0) == '\n')) {
 			flowthruindex = printpiece.get(0).charAt(1) - 'A';

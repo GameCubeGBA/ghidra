@@ -792,7 +792,7 @@ class DataDB extends CodeUnitDB implements Data {
 
 	@Override
 	public boolean hasStringValue() {
-		return String.class.equals(getValueClass());
+		return String.class == getValueClass();
 	}
 
 	@Override

@@ -173,14 +173,14 @@ public abstract class GDynamicColumnTableModel<ROW_TYPE, DATA_SOURCE>
 
 	private boolean isColumnClassMatch(DynamicTableColumn<ROW_TYPE, ?, ?> column, Class<?> clazz) {
 
-		if (clazz.equals(column.getClass())) {
+		if (clazz == column.getClass()) {
 			return true;
 		}
 
 		if (column instanceof MappedTableColumn) {
 			MappedTableColumn<?, ?, ?, ?> mappedColumn = (MappedTableColumn<?, ?, ?, ?>) column;
 			Class<?> columnClass = mappedColumn.getMappedColumnClass();
-            return clazz.equals(columnClass);
+            return clazz == columnClass;
 		}
 
 		return false;

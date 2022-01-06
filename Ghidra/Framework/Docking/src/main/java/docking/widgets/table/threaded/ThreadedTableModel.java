@@ -444,17 +444,17 @@ public abstract class ThreadedTableModel<ROW_OBJECT, DATA_SOURCE>
 
 		TableFilter<ROW_OBJECT> filterCopy = getTableFilter();
 		List<ROW_OBJECT> filteredList = new ArrayList<>();
-		for (int row = 0; row < data.size(); row++) {
-			if (monitor.isCancelled()) {
-				return filteredList; // cancelled just return what has matches so far
-			}
+        for (ROW_OBJECT datum : data) {
+            if (monitor.isCancelled()) {
+                return filteredList; // cancelled just return what has matches so far
+            }
 
-			ROW_OBJECT rowObject = data.get(row);
-			if (filterCopy.acceptsRow(rowObject)) {
-				filteredList.add(rowObject);
-			}
-			monitor.incrementProgress(1);
-		}
+            ROW_OBJECT rowObject = datum;
+            if (filterCopy.acceptsRow(rowObject)) {
+                filteredList.add(rowObject);
+            }
+            monitor.incrementProgress(1);
+        }
 
 		return filteredList;
 	}

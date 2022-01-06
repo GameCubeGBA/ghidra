@@ -143,81 +143,79 @@ public class RTTIClassRecoverer extends RecoveredClassHelper {
 	public void retrieveExistingClassStructures(List<RecoveredClass> recoveredClasses)
 			throws CancelledException {
 
-		Iterator<RecoveredClass> recoveredClassIterator = recoveredClasses.iterator();
-		while (recoveredClassIterator.hasNext()) {
-			monitor.checkCanceled();
-			RecoveredClass recoveredClass = recoveredClassIterator.next();
+        for (RecoveredClass aClass : recoveredClasses) {
+            monitor.checkCanceled();
+            RecoveredClass recoveredClass = aClass;
 
-			// if class is non-virtual have to search for an existing class datatype
-			if (!recoveredClass.hasVftable()) {
-				DataType[] possibleExistingClassStructures =
-					extendedFlatAPI.getDataTypes(recoveredClass.getName());
-				if (possibleExistingClassStructures.length == 0) {
-					continue;
-				}
-				for (int i = 0; i < possibleExistingClassStructures.length; i++) {
+            // if class is non-virtual have to search for an existing class datatype
+            if (!recoveredClass.hasVftable()) {
+                DataType[] possibleExistingClassStructures =
+                        extendedFlatAPI.getDataTypes(recoveredClass.getName());
+                if (possibleExistingClassStructures.length == 0) {
+                    continue;
+                }
+				for (DataType possibleExistingClassStructure : possibleExistingClassStructures) {
 					monitor.checkCanceled();
-					if (!(possibleExistingClassStructures[i] instanceof Structure)) {
+					if (!(possibleExistingClassStructure instanceof Structure)) {
 						continue;
 					}
-					if (possibleExistingClassStructures[i].isNotYetDefined()) {
+					if (possibleExistingClassStructure.isNotYetDefined()) {
 						continue;
 					}
 
 					Structure existingClassStructure =
-						(Structure) possibleExistingClassStructures[i];
+							(Structure) possibleExistingClassStructure;
 
 					recoveredClass.addExistingClassStructure(existingClassStructure);
 					break;
 				}
-			}
-			//Iterate over constructor/destructor functions
-			List<Function> constructorOrDestructorFunctions =
-				recoveredClass.getConstructorOrDestructorFunctions();
-			Iterator<Function> constDestIterator = constructorOrDestructorFunctions.iterator();
-			while (constDestIterator.hasNext()) {
-				monitor.checkCanceled();
-				Function constDestFunction = constDestIterator.next();
-				Namespace parentNamespace = constDestFunction.getParentNamespace();
-				if (!parentNamespace.equals(recoveredClass.getClassNamespace())) {
-					continue;
-				}
+            }
+            //Iterate over constructor/destructor functions
+            List<Function> constructorOrDestructorFunctions =
+                    recoveredClass.getConstructorOrDestructorFunctions();
+            for (Function constructorOrDestructorFunction : constructorOrDestructorFunctions) {
+                monitor.checkCanceled();
+                Function constDestFunction = constructorOrDestructorFunction;
+                Namespace parentNamespace = constDestFunction.getParentNamespace();
+                if (!parentNamespace.equals(recoveredClass.getClassNamespace())) {
+                    continue;
+                }
 
-				if (recoveredClass.hasExistingClassStructure()) {
-					continue;
-				}
+                if (recoveredClass.hasExistingClassStructure()) {
+                    continue;
+                }
 
-				int parameterCount = constDestFunction.getParameterCount();
+                int parameterCount = constDestFunction.getParameterCount();
 
-				if (parameterCount == 0) {
-					continue;
-				}
+                if (parameterCount == 0) {
+                    continue;
+                }
 
-				DataType dataType = constDestFunction.getParameter(0).getDataType();
+                DataType dataType = constDestFunction.getParameter(0).getDataType();
 
-				CategoryPath dataTypePath = dataType.getDataTypePath().getCategoryPath();
+                CategoryPath dataTypePath = dataType.getDataTypePath().getCategoryPath();
 
-				if (!(dataType instanceof Pointer)) {
-					continue;
-				}
+                if (!(dataType instanceof Pointer)) {
+                    continue;
+                }
 
-				String dataTypeName = dataType.getName();
-				dataTypeName = dataTypeName.replace(" *", "");
+                String dataTypeName = dataType.getName();
+                dataTypeName = dataTypeName.replace(" *", "");
 
-				if (!dataTypeName.equals(recoveredClass.getName())) {
-					continue;
-				}
+                if (!dataTypeName.equals(recoveredClass.getName())) {
+                    continue;
+                }
 
-				Structure existingClassStructure =
-					(Structure) dataTypeManager.getDataType(dataTypePath, dataTypeName);
+                Structure existingClassStructure =
+                        (Structure) dataTypeManager.getDataType(dataTypePath, dataTypeName);
 
-				if (existingClassStructure != null && !existingClassStructure.isNotYetDefined()) {
-					recoveredClass.addExistingClassStructure(existingClassStructure);
-					break;
-				}
+                if (existingClassStructure != null && !existingClassStructure.isNotYetDefined()) {
+                    recoveredClass.addExistingClassStructure(existingClassStructure);
+                    break;
+                }
 
-			}
-		}
+            }
+        }
 	}
 
 
@@ -234,49 +232,47 @@ public class RTTIClassRecoverer extends RecoveredClassHelper {
 			throws CancelledException, DuplicateNameException, InvalidInputException,
 			CircularDependencyException {
 
-		Iterator<RecoveredClass> classIterator = recoveredClasses.iterator();
-		while (classIterator.hasNext()) {
-			monitor.checkCanceled();
-			RecoveredClass recoveredClass = classIterator.next();
+        for (RecoveredClass aClass : recoveredClasses) {
+            monitor.checkCanceled();
+            RecoveredClass recoveredClass = aClass;
 
-			// we can only figure out structure info for functions with vftable since that is
-			// what we use to determine which variable is being used to store the class structure
-			if (!recoveredClass.hasVftable()) {
-				continue;
-			}
+            // we can only figure out structure info for functions with vftable since that is
+            // what we use to determine which variable is being used to store the class structure
+            if (!recoveredClass.hasVftable()) {
+                continue;
+            }
 
-			// if the class already has an existing class structure from pdb then no need to process
-			if (recoveredClass.hasExistingClassStructure()) {
-				continue;
-			}
+            // if the class already has an existing class structure from pdb then no need to process
+            if (recoveredClass.hasExistingClassStructure()) {
+                continue;
+            }
 
-			List<Function> memberFunctionsToProcess = new ArrayList<Function>();
+            List<Function> memberFunctionsToProcess = new ArrayList<Function>();
 
-			memberFunctionsToProcess.addAll(recoveredClass.getConstructorList());
-			memberFunctionsToProcess.addAll(recoveredClass.getDestructorList());
-			memberFunctionsToProcess.addAll(recoveredClass.getIndeterminateList());
+            memberFunctionsToProcess.addAll(recoveredClass.getConstructorList());
+            memberFunctionsToProcess.addAll(recoveredClass.getDestructorList());
+            memberFunctionsToProcess.addAll(recoveredClass.getIndeterminateList());
 
-			memberFunctionsToProcess.addAll(recoveredClass.getInlinedConstructorList());
+            memberFunctionsToProcess.addAll(recoveredClass.getInlinedConstructorList());
 
-			Iterator<Function> memberFunctionIterator = memberFunctionsToProcess.iterator();
-			while (memberFunctionIterator.hasNext()) {
-				monitor.checkCanceled();
-				Function memberFunction = memberFunctionIterator.next();
+            for (Function functionsToProcess : memberFunctionsToProcess) {
+                monitor.checkCanceled();
+                Function memberFunction = functionsToProcess;
 
-				if (getVftableReferences(memberFunction) == null) {
-					continue;
-				}
+                if (getVftableReferences(memberFunction) == null) {
+                    continue;
+                }
 
-				// skip if other classes contain this function as an inline inlined destructor or 
-				// inlined indeterminate
-				if (isInlineDestructorOrIndeterminateInAnyClass(memberFunction)) {
-					continue;
-				}
+                // skip if other classes contain this function as an inline inlined destructor or
+                // inlined indeterminate
+                if (isInlineDestructorOrIndeterminateInAnyClass(memberFunction)) {
+                    continue;
+                }
 
-				gatherClassMemberDataInfoForFunction(recoveredClass, memberFunction);
+                gatherClassMemberDataInfoForFunction(recoveredClass, memberFunction);
 
-			}
-		}
+            }
+        }
 	}
 
 

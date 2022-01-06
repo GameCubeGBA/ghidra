@@ -199,7 +199,7 @@ public class DBTest extends AbstractGenericTest {
 		saveAsAndReopen(dbName);
 		Table table = dbh.getTable("TABLE1");
 		assertTrue(!table.useLongKeys());
-		assertTrue(table.getSchema().getKeyFieldType().getClass().equals(BinaryField.class));
+		assertTrue(table.getSchema().getKeyFieldType().getClass() == BinaryField.class);
 		String[] names = table.getSchema().getFieldNames();
 		assertTrue(Arrays.equals(DBTestUtils.getFieldNames(DBTestUtils.ALL_TYPES), names));
 	}

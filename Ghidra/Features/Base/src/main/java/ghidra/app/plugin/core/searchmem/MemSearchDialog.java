@@ -792,13 +792,11 @@ class MemSearchDialog extends DialogComponentProvider {
 		}
 
 		private String findHistoryMatchString(String input) {
-			Iterator<String> itr = history.iterator();
-			while (itr.hasNext()) {
-				String historyString = itr.next();
-				if (historyString.startsWith(input)) {
-					return historyString;
-				}
-			}
+            for (String historyString : history) {
+                if (historyString.startsWith(input)) {
+                    return historyString;
+                }
+            }
 			return null;
 		}
 	}

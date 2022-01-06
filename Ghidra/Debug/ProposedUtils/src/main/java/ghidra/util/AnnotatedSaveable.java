@@ -227,7 +227,7 @@ public abstract class AnnotatedSaveable implements Saveable {
 
 	@SuppressWarnings("unchecked")
 	static void collectAnnotatedFields(List<Field> fields, Class<? extends AnnotatedSaveable> cls) {
-		if (cls.equals(AnnotatedSaveable.class)) {
+		if (cls == AnnotatedSaveable.class) {
 			return;
 		}
 		collectAnnotatedFields(fields, (Class<? extends AnnotatedSaveable>) cls.getSuperclass());

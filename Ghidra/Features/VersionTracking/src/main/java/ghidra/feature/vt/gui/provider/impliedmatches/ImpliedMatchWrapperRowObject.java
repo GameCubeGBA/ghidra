@@ -117,7 +117,7 @@ class ImpliedMatchWrapperRowObject extends VTImpliedMatchInfo {
 			return false;
 		}
 
-		if (!getClass().equals(obj.getClass())) {
+		if (getClass() != obj.getClass()) {
 			return false;
 		}
 

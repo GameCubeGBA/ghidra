@@ -102,9 +102,7 @@ public class LocalSymbolMap {
 		if (highSymbol.isParameter()) {
 			int index = highSymbol.getCategoryIndex();
 			HighSymbol[] newArray = new HighSymbol[paramSymbols.length - 1];
-			for (int i = 0; i < index; ++i) {
-				newArray[i] = paramSymbols[i];
-			}
+            if (index >= 0) System.arraycopy(paramSymbols, 0, newArray, 0, index);
 			for (int i = index + 1; i < paramSymbols.length; ++i) {
 				HighSymbol paramSym = paramSymbols[i];
 				newArray[i - 1] = paramSym;
@@ -343,9 +341,7 @@ public class LocalSymbolMap {
 		resBuf.append("/>\n");
 		resBuf.append("<rangelist/>\n");	// Empty address range
 		resBuf.append("<symbollist>\n");
-		Iterator<HighSymbol> iter = symbolMap.values().iterator();
-		while (iter.hasNext()) {
-			HighSymbol sym = iter.next();
+		for (HighSymbol sym : symbolMap.values()) {
 			HighSymbol.buildMapSymXML(resBuf, sym);
 		}
 		resBuf.append("</symbollist>\n");

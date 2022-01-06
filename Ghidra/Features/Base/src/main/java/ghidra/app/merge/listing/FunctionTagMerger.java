@@ -745,18 +745,19 @@ public class FunctionTagMerger implements MergeResolver, ListingMergeConstants {
 	private String[] getFunctionTagInfo(int version, String name, String comment) {
 		String[] info = { "Keep", "", name, comment };
 
-		if (version == LATEST) {
-			info[1] = LATEST_TITLE;
-		}
-		else if (version == MY) {
-			info[1] = MY_TITLE;
-		}
-		else if (version == ORIGINAL) {
-			info[1] = ORIGINAL_TITLE;
-		}
-		else {
-			return new String[] { "Option", "Type", "Name", "Comment" };
-		}
+        switch (version) {
+            case LATEST:
+                info[1] = LATEST_TITLE;
+                break;
+            case MY:
+                info[1] = MY_TITLE;
+                break;
+            case ORIGINAL:
+                info[1] = ORIGINAL_TITLE;
+                break;
+            default:
+                return new String[]{"Option", "Type", "Name", "Comment"};
+        }
 
 		return info;
 	}

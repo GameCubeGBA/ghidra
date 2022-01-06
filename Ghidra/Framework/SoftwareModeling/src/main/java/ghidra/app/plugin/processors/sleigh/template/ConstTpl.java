@@ -273,66 +273,68 @@ public class ConstTpl {
 	public void restoreXml(XmlPullParser parser, AddressFactory factory) {
 		XmlElement el = parser.start("const_tpl");
 		String typestr = el.getAttribute("type");
-		if (typestr.equals("real")) {
-			type = REAL;
-			value_real = SpecXmlUtils.decodeLong(el.getAttribute("val"));
-		}
-		else if (typestr.equals("handle")) {
-			type = HANDLE;
-			handle_index = (short) SpecXmlUtils.decodeInt(el.getAttribute("val"));
-			String selstr = el.getAttribute("s");
-			if (selstr.equals("space")) {
-				select = V_SPACE;
-			}
-			else if (selstr.equals("offset")) {
-				select = V_OFFSET;
-			}
-			else if (selstr.equals("size")) {
-				select = V_SIZE;
-			}
-			else if (selstr.equals("offset_plus")) {
-				select = V_OFFSET_PLUS;
-				value_real = SpecXmlUtils.decodeLong(el.getAttribute("plus"));
-			}
-			else {
-				throw new SleighException("Bad handle selector");
-			}
-		}
-		else if (typestr.equals("start")) {
-			type = J_START;
-		}
-		else if (typestr.equals("next")) {
-			type = J_NEXT;
-		}
-		else if (typestr.equals("curspace")) {
-			type = J_CURSPACE;
-		}
-		else if (typestr.equals("curspace_size")) {
-			type = J_CURSPACE_SIZE;
-		}
-		else if (typestr.equals("spaceid")) {
-			type = SPACEID;
-			value_spaceid = factory.getAddressSpace(el.getAttribute("name"));
-		}
-		else if (typestr.equals("relative")) {
-			type = J_RELATIVE;
-			value_real = SpecXmlUtils.decodeLong(el.getAttribute("val"));
-		}
-		else if (typestr.equals("flowref")) {
-			type = J_FLOWREF;
-		}
-		else if (typestr.equals("flowref_size")) {
-			type = J_FLOWREF_SIZE;
-		}
-		else if (typestr.equals("flowdest")) {
-			type = J_FLOWDEST;
-		}
-		else if (typestr.equals("flowdest_size")) {
-			type = J_FLOWDEST_SIZE;
-		}
-		else {
-			throw new SleighException("Bad xml for ConstTpl");
-		}
+        switch (typestr) {
+            case "real":
+                type = REAL;
+                value_real = SpecXmlUtils.decodeLong(el.getAttribute("val"));
+                break;
+            case "handle":
+                type = HANDLE;
+                handle_index = (short) SpecXmlUtils.decodeInt(el.getAttribute("val"));
+                String selstr = el.getAttribute("s");
+                switch (selstr) {
+                    case "space":
+                        select = V_SPACE;
+                        break;
+                    case "offset":
+                        select = V_OFFSET;
+                        break;
+                    case "size":
+                        select = V_SIZE;
+                        break;
+                    case "offset_plus":
+                        select = V_OFFSET_PLUS;
+                        value_real = SpecXmlUtils.decodeLong(el.getAttribute("plus"));
+                        break;
+                    default:
+                        throw new SleighException("Bad handle selector");
+                }
+                break;
+            case "start":
+                type = J_START;
+                break;
+            case "next":
+                type = J_NEXT;
+                break;
+            case "curspace":
+                type = J_CURSPACE;
+                break;
+            case "curspace_size":
+                type = J_CURSPACE_SIZE;
+                break;
+            case "spaceid":
+                type = SPACEID;
+                value_spaceid = factory.getAddressSpace(el.getAttribute("name"));
+                break;
+            case "relative":
+                type = J_RELATIVE;
+                value_real = SpecXmlUtils.decodeLong(el.getAttribute("val"));
+                break;
+            case "flowref":
+                type = J_FLOWREF;
+                break;
+            case "flowref_size":
+                type = J_FLOWREF_SIZE;
+                break;
+            case "flowdest":
+                type = J_FLOWDEST;
+                break;
+            case "flowdest_size":
+                type = J_FLOWDEST_SIZE;
+                break;
+            default:
+                throw new SleighException("Bad xml for ConstTpl");
+        }
 		parser.end(el);
 	}
 

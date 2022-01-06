@@ -84,10 +84,9 @@ public class ServiceManager {
 	}
 
 	private void notifyServiceAdded(Class<?> interfaceClass, Object service) {
-		Iterator<?> it = serviceListeners.iterator();
-		while (it.hasNext()) {
-			((ServiceListener) it.next()).serviceAdded(interfaceClass, service);
-		}
+        for (ServiceListener serviceListener : serviceListeners) {
+            serviceListener.serviceAdded(interfaceClass, service);
+        }
 	}
 
 	/**
@@ -172,7 +171,7 @@ public class ServiceManager {
 	 */
 	public boolean isService(Class<?> serviceInterface) {
 		for (Class<?> serviceClass : servicesByInterface.keySet()) {
-			if (serviceClass.equals(serviceInterface)) {
+			if (serviceClass == serviceInterface) {
 				return true;
 			}
 		}

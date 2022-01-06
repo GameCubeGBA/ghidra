@@ -86,12 +86,12 @@ public class StringArrayArray implements Array, Serializable {
 
 	private byte[] stringArrayToBytes(String[] value) {
 		int len = 4;  // 4 bytes to store the number of strings in the array
-		for(int i=0;i<value.length;i++) {
-			len += 2;  // 2 bytes to store the length of each string
-			if (value[i] != null) {
-				len += value[i].length();  // plus the bytes for the string.
-			}
-		}
+        for (String item : value) {
+            len += 2;  // 2 bytes to store the length of each string
+            if (item != null) {
+                len += item.length();  // plus the bytes for the string.
+            }
+        }
 		byte[] bytes = new byte[len];
 		int n = value.length;
 		bytes[0] = (byte)(n >> 24);
@@ -99,20 +99,19 @@ public class StringArrayArray implements Array, Serializable {
 		bytes[2] = (byte)(n >> 8);			
 		bytes[3] = (byte)n;
 		int pos = 4;
-		for(int i=0;i<n;i++) {
-			if (value[i] == null) {
-				bytes[pos++] = (byte)-1;
-				bytes[pos++] = (byte)-1;
-			}
-			else {
-				int strlen = value[i].length();
-			
-				bytes[pos++] = (byte)(strlen >> 8);
-				bytes[pos++] = (byte)(strlen);
-				System.arraycopy(value[i].getBytes(),0,bytes,pos,strlen);
-				pos += strlen;
-			}
-		}
+        for (String s : value) {
+            if (s == null) {
+                bytes[pos++] = (byte) -1;
+                bytes[pos++] = (byte) -1;
+            } else {
+                int strlen = s.length();
+
+                bytes[pos++] = (byte) (strlen >> 8);
+                bytes[pos++] = (byte) (strlen);
+                System.arraycopy(s.getBytes(), 0, bytes, pos, strlen);
+                pos += strlen;
+            }
+        }
 		return bytes;
 	}
 	private String[] bytesToStringArray(byte[] bytes) {

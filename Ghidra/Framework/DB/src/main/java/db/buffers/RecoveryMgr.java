@@ -375,9 +375,9 @@ class RecoveryMgr {
 				//  This is the result of an undo which may have reverted a buffer to
 				// its original unmodified state.
 				int[] indexes = oldIndexSet.getValues();
-				for (int i = 0; i < indexes.length; i++) {
-					activeFile.removeBuffer(indexes[i]);
-				}
+                for (int index : indexes) {
+                    activeFile.removeBuffer(index);
+                }
 				buffersRemoved[snapshotIndex] = indexes.length;
 				File file = activeFile.getFile();
 				activeFile.close();
