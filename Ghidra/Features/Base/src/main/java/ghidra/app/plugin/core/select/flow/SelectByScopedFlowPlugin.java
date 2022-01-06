@@ -45,6 +45,7 @@ import ghidra.util.Msg;
 import ghidra.util.exception.AssertException;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
+import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  * This plugin class contains the structure needed for the user to select code
@@ -166,19 +167,6 @@ public class SelectByScopedFlowPlugin extends ProgramPlugin {
 //==================================================================================================
 // Algorithm Methods
 //==================================================================================================
-
-	private ProgramSelection makeForwardScopedSelection(Function function, Program program,
-			ProgramLocation location, TaskMonitor monitor) throws CancelledException {
-
-		return makeSelectionFromVertex(true, function, program, location, monitor);
-	}
-
-	private ProgramSelection makeReverseScopedSelection(Function function, Program program,
-			ProgramLocation location, TaskMonitor monitor) throws CancelledException {
-
-		return makeSelectionFromVertex(false, function, program, location, monitor);
-	}
-
 	private ProgramSelection makeSelectionFromVertex(boolean forwardFlow, Function function,
 			Program program, ProgramLocation location, TaskMonitor monitor)
 			throws CancelledException {
