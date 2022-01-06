@@ -61,7 +61,7 @@ public class BitmaskSetTest {
 	}
 
 	Set<Integer> intOf0 = new HashSet<>();
-	Set<Integer> intOf3 = new HashSet<>(Arrays.asList(new Integer[] { 0, 1, 2 }));
+	Set<Integer> intOf3 = new HashSet<>(Arrays.asList(0, 1, 2));
 	Set<String> strOf0 = new HashSet<>();
 
 	BitmaskSet<TestUniverse> setOf0 = BitmaskSet.of();

@@ -59,7 +59,7 @@ public class FixLangId extends GhidraScript {
 
 		GhidraFile gf = (GhidraFile) df;
 
-		Method method = GhidraFile.class.getDeclaredMethod("getFileData", new Class<?>[0]);
+		Method method = GhidraFile.class.getDeclaredMethod("getFileData");
 		method.setAccessible(true);
 
 		GhidraFileData fileData = (GhidraFileData) method.invoke(gf, new Object[0]);

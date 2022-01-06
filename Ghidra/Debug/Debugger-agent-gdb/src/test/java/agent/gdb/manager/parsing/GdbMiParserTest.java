@@ -50,7 +50,7 @@ public class GdbMiParserTest {
 	@Test
 	public void testParseList() throws GdbParseError {
 		GdbMiParser parser = new GdbMiParser("[\"Hello\",\"World\"]");
-		assertEquals(Arrays.asList(new String[] { "Hello", "World" }), parser.parseList());
+		assertEquals(Arrays.asList("Hello", "World"), parser.parseList());
 	}
 
 	@Test

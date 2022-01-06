@@ -135,7 +135,6 @@ public abstract class AbstractConstraintsTree< //
 	 * {@link Collection#size()}. Filtering is performed by {@link TreeRecordVisitor}.
 	 * 
 	 * @param parent the parent node
-	 * @param query a query to control the ordering of the children
 	 * @return a collection of the children
 	 */
 	protected Collection<DR> getDataChildrenOf(NR parent) {

@@ -1052,14 +1052,14 @@ public class DBCachedObjectStoreTest {
 		list = Arrays.asList(keySet.toArray(new Long[4]));
 		assertEquals(List.of(-3L, -1L, 1L, 3L), list);
 		list = Arrays.asList(keySet.toArray(new Long[5]));
-		assertEquals(Arrays.asList(new Long[] { -3L, -1L, 1L, 3L, null }), list);
+		assertEquals(Arrays.asList(-3L, -1L, 1L, 3L, null), list);
 
 		List<Long> rList = Arrays.asList(rKeySet.toArray(new Long[0]));
 		assertEquals(List.of(3L, 1L, -1L, -3L), rList);
 		rList = Arrays.asList(rKeySet.toArray(new Long[4]));
 		assertEquals(List.of(3L, 1L, -1L, -3L), rList);
 		rList = Arrays.asList(rKeySet.toArray(new Long[5]));
-		assertEquals(Arrays.asList(new Long[] { 3L, 1L, -1L, -3L, null }), rList);
+		assertEquals(Arrays.asList(3L, 1L, -1L, -3L, null), rList);
 	}
 
 	@SuppressWarnings("unlikely-arg-type")
@@ -1303,14 +1303,14 @@ public class DBCachedObjectStoreTest {
 		list = Arrays.asList(keySet.subSet(-2L, true, 2L, true).toArray(new Long[2]));
 		assertEquals(List.of(-1L, 1L), list);
 		list = Arrays.asList(keySet.subSet(-2L, true, 2L, true).toArray(new Long[3]));
-		assertEquals(Arrays.asList(new Long[] { -1L, 1L, null }), list);
+		assertEquals(Arrays.asList(-1L, 1L, null), list);
 
 		List<Long> rList = Arrays.asList(rKeySet.subSet(2L, true, -2L, true).toArray(new Long[0]));
 		assertEquals(List.of(1L, -1L), rList);
 		rList = Arrays.asList(rKeySet.subSet(2L, true, -2L, true).toArray(new Long[2]));
 		assertEquals(List.of(1L, -1L), rList);
 		rList = Arrays.asList(rKeySet.subSet(2L, true, -2L, true).toArray(new Long[3]));
-		assertEquals(Arrays.asList(new Long[] { 1L, -1L, null }), rList);
+		assertEquals(Arrays.asList(1L, -1L, null), rList);
 	}
 
 	@SuppressWarnings("unlikely-arg-type")
@@ -1584,7 +1584,7 @@ public class DBCachedObjectStoreTest {
 		list = Arrays.stream(values.toArray(new MyObject[5]))
 				.map(nullable(MyObject::getKey))
 				.collect(Collectors.toList());
-		assertEquals(Arrays.asList(new Long[] { -3L, -1L, 1L, 3L, null }), list);
+		assertEquals(Arrays.asList(-3L, -1L, 1L, 3L, null), list);
 
 		List<Long> rList = Arrays.stream(rValues.toArray(new MyObject[0]))
 				.map(MyObject::getKey)
@@ -1597,7 +1597,7 @@ public class DBCachedObjectStoreTest {
 		rList = Arrays.stream(rValues.toArray(new MyObject[5]))
 				.map(nullable(MyObject::getKey))
 				.collect(Collectors.toList());
-		assertEquals(Arrays.asList(new Long[] { 3L, 1L, -1L, -3L, null }), rList);
+		assertEquals(Arrays.asList(3L, 1L, -1L, -3L, null), rList);
 	}
 
 	@SuppressWarnings("unlikely-arg-type")
@@ -1942,7 +1942,7 @@ public class DBCachedObjectStoreTest {
 				.stream()
 				.map(nullable(Entry::getKey))
 				.collect(Collectors.toList());
-		assertEquals(Arrays.asList(new Long[] { -3L, -1L, 1L, 3L, null }), list);
+		assertEquals(Arrays.asList(-3L, -1L, 1L, 3L, null), list);
 
 		List<Long> rList =
 			((List<Entry<Long, ?>>) (List) Arrays.asList(rEntrySet.toArray(new Entry[0]))).stream()
@@ -1958,7 +1958,7 @@ public class DBCachedObjectStoreTest {
 				.stream()
 				.map(nullable(Entry::getKey))
 				.collect(Collectors.toList());
-		assertEquals(Arrays.asList(new Long[] { 3L, 1L, -1L, -3L, null }), rList);
+		assertEquals(Arrays.asList(3L, 1L, -1L, -3L, null), rList);
 	}
 
 	@SuppressWarnings("unlikely-arg-type")
@@ -2293,7 +2293,7 @@ public class DBCachedObjectStoreTest {
 						.stream()
 						.map(nullable(Entry::getKey))
 						.collect(Collectors.toList());
-		assertEquals(Arrays.asList(new Long[] { -1L, 1L, null }), list);
+		assertEquals(Arrays.asList(-1L, 1L, null), list);
 
 		List<Long> rList = ((List<Entry<Long, ?>>) (List) Arrays
 				.asList(rEntrySet.subSet(ent(2), true, ent(-2), true).toArray(new Entry[0])))
@@ -2312,7 +2312,7 @@ public class DBCachedObjectStoreTest {
 						.stream()
 						.map(nullable(Entry::getKey))
 						.collect(Collectors.toList());
-		assertEquals(Arrays.asList(new Long[] { 1L, -1L, null }), rList);
+		assertEquals(Arrays.asList(1L, -1L, null), rList);
 	}
 
 	@SuppressWarnings("unlikely-arg-type")
@@ -2694,7 +2694,7 @@ public class DBCachedObjectStoreTest {
 			new HashSet<>(Arrays.asList(found5.toArray(new MyObject[2]))));
 		assertEquals(
 			new HashSet<>(
-				Arrays.asList(new MyObject[] { store.getObjectAt(1), store.getObjectAt(2), null })),
+				Arrays.asList(store.getObjectAt(1), store.getObjectAt(2), null)),
 			new HashSet<>(Arrays.asList(found5.toArray(new MyObject[3]))));
 	}
 

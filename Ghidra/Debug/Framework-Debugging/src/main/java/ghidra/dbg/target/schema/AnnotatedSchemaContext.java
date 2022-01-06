@@ -100,7 +100,7 @@ public class AnnotatedSchemaContext extends DefaultSchemaContext {
 	static Set<Class<? extends TargetObject>> getBoundsOfFetchElements(
 			Class<? extends TargetObject> cls) {
 		try {
-			Method method = cls.getMethod("fetchElements", new Class<?>[] { boolean.class });
+			Method method = cls.getMethod("fetchElements", boolean.class);
 			Type ret = method.getGenericReturnType();
 			Map<TypeVariable<?>, Type> argsCf =
 				TypeUtils.getTypeArguments(ret, CompletableFuture.class);

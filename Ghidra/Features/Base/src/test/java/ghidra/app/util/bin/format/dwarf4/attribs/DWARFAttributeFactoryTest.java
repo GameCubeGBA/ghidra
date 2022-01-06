@@ -388,7 +388,7 @@ public class DWARFAttributeFactoryTest extends AbstractGenericTest {
 
 	@Test
 	public void testFlagPresent() throws IOException {
-		BinaryReader br = br(new byte[] {} /* no bytes needed for flag_present */);
+		BinaryReader br = br( /* no bytes needed for flag_present */);
 
 		DWARFAttributeValue result = attribFactory.read(br, cu, DWARFForm.DW_FORM_flag_present);
 		assertTrue("Should be flag", result instanceof DWARFBooleanAttribute);

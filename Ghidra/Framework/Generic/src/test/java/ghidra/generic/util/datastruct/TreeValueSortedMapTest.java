@@ -35,7 +35,7 @@ public class TreeValueSortedMapTest {
 		queue.put("1st", 1);
 		queue.put("3rd", 3);
 		List<String> ordered = new ArrayList<>(queue.keySet());
-		assertEquals(Arrays.asList(new String[] { "1st", "2nd", "3rd" }), ordered);
+		assertEquals(Arrays.asList("1st", "2nd", "3rd"), ordered);
 	}
 
 	@Test
@@ -46,7 +46,7 @@ public class TreeValueSortedMapTest {
 		queue.put("1st", 1);
 		queue.put("3rd", 3);
 		List<String> ordered = new ArrayList<>(queue.keySet());
-		assertEquals(Arrays.asList(new String[] { "3rd", "2nd", "1st" }), ordered);
+		assertEquals(Arrays.asList("3rd", "2nd", "1st"), ordered);
 	}
 
 	@Test

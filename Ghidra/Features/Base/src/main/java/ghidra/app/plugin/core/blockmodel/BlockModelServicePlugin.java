@@ -344,16 +344,16 @@ public class BlockModelServicePlugin extends ProgramPlugin
 			Program program, boolean includeExternals) {
 		try {
 			Constructor<? extends CodeBlockModel> c =
-				modelClass.getConstructor(new Class[] { Program.class, boolean.class });
-			return c.newInstance(new Object[] { program, Boolean.valueOf(includeExternals) });
+				modelClass.getConstructor(Program.class, boolean.class);
+			return c.newInstance(program, Boolean.valueOf(includeExternals));
 		}
 		catch (Exception e) {
 		}
 
 		try {
 			Constructor<? extends CodeBlockModel> c =
-				modelClass.getConstructor(new Class[] { Program.class });
-			return c.newInstance(new Object[] { program });
+				modelClass.getConstructor(Program.class);
+			return c.newInstance(program);
 		}
 		catch (Exception e) {
 		}

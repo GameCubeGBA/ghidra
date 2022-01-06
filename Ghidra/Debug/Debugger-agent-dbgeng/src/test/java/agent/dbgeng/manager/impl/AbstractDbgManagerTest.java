@@ -152,7 +152,7 @@ public abstract class AbstractDbgManagerTest extends AbstractGhidraHeadlessInteg
 				}).then(seq -> {
 					mgr.listProcesses().handle(seq::exit);
 				}).finish());
-			assertEquals(new HashSet<>(Arrays.asList(new Integer[] { 1 })), processes.keySet());
+			assertEquals(new HashSet<>(Arrays.asList(1)), processes.keySet());
 		}
 	}
 

@@ -30,13 +30,13 @@ import org.junit.Test;
 public class AsyncUtilsTest {
 	@Test
 	public void testEach() throws Throwable {
-		List<Integer> list = Arrays.asList(new Integer[] { 1, 2, 4, 3 });
+		List<Integer> list = Arrays.asList(1, 2, 4, 3);
 		List<String> res = new ArrayList<>();
 		each(TypeSpec.VOID, list.iterator(), (e, seq) -> {
 			append("" + e, res).handle(seq::repeat);
 		}).get(1000, TimeUnit.MILLISECONDS);
 
-		List<String> exp = Arrays.asList(new String[] { "1", "2", "4", "3" });
+		List<String> exp = Arrays.asList("1", "2", "4", "3");
 		assertEquals(exp, res);
 	}
 
@@ -52,7 +52,7 @@ public class AsyncUtilsTest {
 			append(str, res).handle(seq::next);
 		}).finish().get(1000, TimeUnit.MILLISECONDS);
 
-		List<String> exp = Arrays.asList(new String[] { "3" });
+		List<String> exp = Arrays.asList("3");
 		assertEquals(exp, res);
 	}
 
@@ -72,7 +72,7 @@ public class AsyncUtilsTest {
 			loop.repeat();
 		}).get(1000, TimeUnit.MILLISECONDS);
 
-		List<Integer> exp = Arrays.asList(new Integer[] { 11, 12, 13, 14, 15 });
+		List<Integer> exp = Arrays.asList(11, 12, 13, 14, 15);
 		assertEquals(exp, res);
 		assertEquals(0xdeadbeeff00dL, result);
 	}
@@ -91,7 +91,7 @@ public class AsyncUtilsTest {
 			}).handle(seq::next);
 		}).finish().get(1000, TimeUnit.MILLISECONDS);
 
-		List<String> exp = Arrays.asList(new String[] { "1", "2", "3" });
+		List<String> exp = Arrays.asList("1", "2", "3");
 		assertEquals(exp, res);
 	}
 
@@ -110,7 +110,7 @@ public class AsyncUtilsTest {
 	}
 
 	protected static CompletableFuture<List<Integer>> getListInts() {
-		return CompletableFuture.completedFuture(Arrays.asList(new Integer[] { 1, 2, 3 }));
+		return CompletableFuture.completedFuture(Arrays.asList(1, 2, 3));
 	}
 
 	// Some dummies to construct examples for documentation
@@ -378,7 +378,7 @@ public class AsyncUtilsTest {
 			future.complete(null);
 		}
 
-		List<Integer> exp = Arrays.asList(new Integer[] { 1, 4, 2, 5, 3, 6 });
+		List<Integer> exp = Arrays.asList(1, 4, 2, 5, 3, 6);
 		assertEquals(exp, result);
 	}
 }

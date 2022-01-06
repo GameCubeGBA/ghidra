@@ -219,7 +219,7 @@ class SimpleLanguageTranslator extends LanguageTranslatorAdapter {
 			throw new Exception(handlerClass.getName() + " must extend " +
 				LanguagePostUpgradeInstructionHandler.class.getName());
 		}
-		Constructor<?> constructor = handlerClass.getConstructor(new Class<?>[] { Program.class });
+		Constructor<?> constructor = handlerClass.getConstructor(Program.class);
 		return (LanguagePostUpgradeInstructionHandler) constructor
 				.newInstance(new Object[] { program });
 	}

@@ -129,7 +129,7 @@ public abstract class AbstractGdbManagerTest extends AbstractGhidraHeadlessInteg
 		try (GdbManager mgr = GdbManager.newInstance(getPtyFactory())) {
 			waitOn(startManager(mgr));
 			Map<Integer, GdbInferior> inferiors = waitOn(mgr.listInferiors());
-			assertEquals(new HashSet<>(Arrays.asList(new Integer[] { 1 })), inferiors.keySet());
+			assertEquals(new HashSet<>(Arrays.asList(1)), inferiors.keySet());
 		}
 	}
 

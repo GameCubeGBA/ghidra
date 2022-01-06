@@ -132,7 +132,7 @@ public class ExportGhidraModuleWizard extends Wizard implements INewWizard {
 			String javaHome = javaHomeDir.getAbsolutePath();
 			List<String> jvmArgs = new ArrayList<>();
 			List<String> gradleArgs =
-				Arrays.asList(new String[] { "-PGHIDRA_INSTALL_DIR=" + ghidraInstallDirPath });
+				Arrays.asList("-PGHIDRA_INSTALL_DIR=" + ghidraInstallDirPath);
 			boolean showExecutionView = false;
 			boolean showConsoleView = true;
 			boolean overrideWorkspaceSettings = true;

@@ -119,7 +119,7 @@ public class AsyncLockTest {
 			future.complete(null);
 		}
 
-		List<Integer> exp = Arrays.asList(new Integer[] { 1, 2, 3 });
+		List<Integer> exp = Arrays.asList(1, 2, 3);
 		assertEquals(exp, result);
 	}
 
@@ -164,7 +164,7 @@ public class AsyncLockTest {
 			future.complete(null);
 		}
 
-		List<Integer> exp = Arrays.asList(new Integer[] { 1, 2, 3, 4, 5, 6 });
+		List<Integer> exp = Arrays.asList(1, 2, 3, 4, 5, 6);
 		assertEquals(exp, result);
 	}
 
@@ -217,7 +217,7 @@ public class AsyncLockTest {
 			future.complete(null);
 		}
 
-		List<Integer> exp = Arrays.asList(new Integer[] { 1, 2, 3, 4, 5, 6 });
+		List<Integer> exp = Arrays.asList(1, 2, 3, 4, 5, 6);
 		assertEquals(exp, result);
 	}
 

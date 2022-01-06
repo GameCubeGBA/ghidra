@@ -34,9 +34,9 @@ public class AssemblyNumericTerminal extends AssemblyTerminal {
 	public static final String PREFIX_OCT = "0";
 
 	/** Some suggestions, other than labels, to provide */
-	protected static final Collection<String> suggestions = Arrays.asList(new String[] { //
-		"0", "1", "0x0", "+0x0", "-0x0", "01" //
-	});
+	protected static final Collection<String> suggestions = Arrays.asList(//
+            "0", "1", "0x0", "+0x0", "-0x0", "01" //
+    );
 	/** The maximum number of labels to suggest */
 	protected static final int MAX_LABEL_SUGGESTIONS = 10;
 

@@ -65,7 +65,7 @@ public class DynamicSortedTreeSetTest {
 		queue.add("1st");
 		queue.add("3rd");
 		List<String> ordered = new ArrayList<>(queue);
-		assertEquals(Arrays.asList(new String[] { "1st", "2nd", "3rd" }), ordered);
+		assertEquals(Arrays.asList("1st", "2nd", "3rd"), ordered);
 	}
 
 	@Test(expected = ClassCastException.class)
@@ -86,7 +86,7 @@ public class DynamicSortedTreeSetTest {
 		for (TestElem elem : queue) {
 			ordered.add(elem.key);
 		}
-		assertEquals(Arrays.asList(new String[] { "1st", "2ndB", "2ndA", "3rd" }), ordered);
+		assertEquals(Arrays.asList("1st", "2ndB", "2ndA", "3rd"), ordered);
 	}
 
 	@Test
