@@ -127,7 +127,7 @@ public class DebuggerModelServicePlugin extends Plugin
 				if (!r.isValid()) {
 					forRemoval.invalidated(root, root, "Who knows?");
 				}
-                return DebugModelConventions.findSuitable(TargetFocusScope.class, r);
+                return DebugModelConventions.suitable(TargetFocusScope.class, r);
 			}).thenAccept(fs -> {
 				synchronized (this) {
 					this.focusScope = fs;

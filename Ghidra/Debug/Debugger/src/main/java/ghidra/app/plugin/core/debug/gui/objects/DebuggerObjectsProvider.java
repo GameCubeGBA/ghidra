@@ -63,7 +63,6 @@ import ghidra.framework.options.annotation.*;
 import ghidra.framework.plugintool.*;
 import ghidra.framework.plugintool.annotation.AutoConfigStateField;
 import ghidra.framework.plugintool.annotation.AutoServiceConsumed;
-import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressRange;
 import ghidra.program.model.listing.Program;
 import ghidra.trace.model.Trace;
@@ -187,9 +186,6 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 	//help = @HelpInfo(anchor = "colors") //
 	)
 	String extendedStep = "";
-
-	private static final Icon ENABLED_ICON = ResourceManager.loadImage("images/enabled.png");
-	private static final Icon DISABLED_ICON = ResourceManager.loadImage("images/disabled.png");
 
 	@SuppressWarnings("unused")
 	private final AutoOptions.Wiring autoOptionsWiring;
@@ -686,7 +682,7 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 			if (targetObject instanceof TargetInterpreter) {
 				TargetInterpreter interpreter = (TargetInterpreter) targetObject;
 				plugin.showConsole(interpreter);
-				DebugModelConventions.findSuitable(TargetFocusScope.class, targetObject)
+				DebugModelConventions.suitable(TargetFocusScope.class, targetObject)
 						.thenAccept(f -> {
 							setFocus(f, targetObject);
 						});
@@ -837,7 +833,7 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 		TargetObject result = null;
 		try {
 			result =
-				DebugModelConventions.findSuitable(clazz, object).get(100, TimeUnit.MILLISECONDS);
+				DebugModelConventions.suitable(clazz, object).get(100, TimeUnit.MILLISECONDS);
 		}
 		catch (Exception e) {
 			// IGNORE
@@ -1272,25 +1268,6 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 		}
 	}
 
-	public void performToggleAutoupdate(ActionContext context) {
-		TargetObject object = getObjectFromContext(context);
-		/*
-		if (object instanceof DefaultTargetObject) {
-			Map<String, ?> attributes = object.listAttributes();
-			Boolean autoupdate = (Boolean) attributes.get(AUTOUPDATE_ATTRIBUTE_NAME);
-			if (autoupdate == null) {
-				autoupdate = false;
-			}
-			@SuppressWarnings("unchecked")
-			DefaultTargetObject<TargetObject, TargetObject> defobj =
-				(DefaultTargetObject<TargetObject, TargetObject>) object;
-			defobj.changeAttributes(List.of(), Map.of(//
-				AUTOUPDATE_ATTRIBUTE_NAME, !autoupdate), //
-				"Refreshed");
-		}
-		*/
-	}
-
 	public void performToggleBase(ActionContext context) {
 		//Object contextObject = context.getContextObject();
 		for (TargetConfigurable configurable : configurables) {
@@ -1341,7 +1318,7 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 			obj = root.getTargetObject();
 		}
 		if (!selectionOnly) {
-			DebugModelConventions.findSuitable(cls, obj).thenCompose(t -> {
+			DebugModelConventions.suitable(cls, obj).thenCompose(t -> {
 				return func.apply(t);
 			}).exceptionally(DebuggerResources.showError(getComponent(), errorMsg));
 		}
@@ -1409,7 +1386,7 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 			return;
 		}
 		// NB. This doesn't really mean anything in local-only actions mode
-		DebugModelConventions.findSuitable(TargetAttacher.class, obj).thenCompose(attacher -> {
+		DebugModelConventions.suitable(TargetAttacher.class, obj).thenCompose(attacher -> {
 			return attacher.attach((TargetAttachable) obj);
 		}).exceptionally(DebuggerResources.showError(getComponent(), "Couldn't re-attach"));
 	}
@@ -1555,7 +1532,7 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 		}
 		TargetObject result = null;
 		try {
-			result = DebugModelConventions.findSuitable(TargetExecutionStateful.class, object)
+			result = DebugModelConventions.suitable(TargetExecutionStateful.class, object)
 					.get(100, TimeUnit.MILLISECONDS);
 		}
 		catch (Exception e) {
