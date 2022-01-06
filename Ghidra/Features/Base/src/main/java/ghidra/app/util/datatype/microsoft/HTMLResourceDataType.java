@@ -51,10 +51,7 @@ public class HTMLResourceDataType extends BuiltIn implements Dynamic {
 
 	@Override
 	public int getLength(MemBuffer buf, int maxLength) {
-		if (buf != null && maxLength < 0) {
-			return maxLength;
-		}
-		return maxLength;
+        return maxLength;
 	}
 
 	@Override

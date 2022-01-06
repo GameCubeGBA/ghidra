@@ -217,17 +217,14 @@ public class MemoryMapDB implements Memory, ManagerDB, LiveMemoryListener {
 			AddressSet mappedSet = getMappedIntersection(mappedBlock, blockSet);
 			if (isInitialized) {
 				allInitializedAddrSet = allInitializedAddrSet.union(mappedSet);
-				if (isLoaded) {
-					initializedLoadedAddrSet = initializedLoadedAddrSet.union(mappedSet);
-				}
-			}
+            }
 			else {
 				allInitializedAddrSet = allInitializedAddrSet.subtract(mappedSet);
-				if (isLoaded) {
-					initializedLoadedAddrSet = initializedLoadedAddrSet.union(mappedSet);
-				}
-			}
-		}
+            }
+            if (isLoaded) {
+                initializedLoadedAddrSet = initializedLoadedAddrSet.union(mappedSet);
+            }
+        }
 	}
 
 	private void reloadAll() throws IOException {

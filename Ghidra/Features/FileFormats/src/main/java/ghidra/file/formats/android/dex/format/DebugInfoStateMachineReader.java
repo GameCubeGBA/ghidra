@@ -34,15 +34,12 @@ class DebugInfoStateMachineReader {
 				case DebugStateMachineOpCodes.DBG_END_SEQUENCE: {
 					return (int) (reader.getPointerIndex() - start);//done!
 				}
-				case DebugStateMachineOpCodes.DBG_ADVANCE_PC: {
+				case DebugStateMachineOpCodes.DBG_ADVANCE_PC:
+                case DebugStateMachineOpCodes.DBG_ADVANCE_LINE: {
 					LEB128.readAsUInt32(reader);
 					break;
 				}
-				case DebugStateMachineOpCodes.DBG_ADVANCE_LINE: {
-					LEB128.readAsUInt32(reader);
-					break;
-				}
-				case DebugStateMachineOpCodes.DBG_START_LOCAL: {
+                case DebugStateMachineOpCodes.DBG_START_LOCAL: {
 					int register = LEB128.readAsUInt32(reader);
 
 					//TODO uleb128p1
@@ -67,26 +64,15 @@ class DebugInfoStateMachineReader {
 
 					break;
 				}
-				case DebugStateMachineOpCodes.DBG_END_LOCAL: {
+				case DebugStateMachineOpCodes.DBG_END_LOCAL:
+                case DebugStateMachineOpCodes.DBG_SET_FILE:
+                case DebugStateMachineOpCodes.DBG_RESTART_LOCAL: {
 					int register = LEB128.readAsUInt32(reader);
 					break;
-				}
-				case DebugStateMachineOpCodes.DBG_RESTART_LOCAL: {
-					int register = LEB128.readAsUInt32(reader);
-					break;
-				}
-				case DebugStateMachineOpCodes.DBG_SET_PROLOGUE_END: {
-					break;
-				}
-				case DebugStateMachineOpCodes.DBG_SET_EPILOGUE_BEGIN: {
-					break;
-				}
-				case DebugStateMachineOpCodes.DBG_SET_FILE: {
-					//TODO uleb128p1
-					int name = LEB128.readAsUInt32(reader);
-					break;
-				}
-				default: {
+				}//TODO uleb128p1
+                case DebugStateMachineOpCodes.DBG_SET_EPILOGUE_BEGIN:
+                case DebugStateMachineOpCodes.DBG_SET_PROLOGUE_END:
+                default: {
 					break;
 				}
 			}

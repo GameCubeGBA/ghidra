@@ -311,23 +311,20 @@ public class MachoPrelinkProgramBuilder extends MachoProgramBuilder {
 				case DYLD_CHAINED_PTR_ARM64E_KERNEL:
 				case DYLD_CHAINED_PTR_ARM64E_USERLAND:
 				case DYLD_CHAINED_PTR_ARM64E_USERLAND24:
-					processPointerChain(chainHeader, unchainedLocList, ptrFormat, page, pageEntry,
+
+                    // These might work, but have not been fully tested!
+                case DYLD_CHAINED_PTR_64:
+                case DYLD_CHAINED_PTR_64_OFFSET:
+                case DYLD_CHAINED_PTR_64_KERNEL_CACHE:
+                case DYLD_CHAINED_PTR_32:
+                case DYLD_CHAINED_PTR_32_CACHE:
+                case DYLD_CHAINED_PTR_32_FIRMWARE:
+                case DYLD_CHAINED_PTR_X86_64_KERNEL_CACHE:
+                    processPointerChain(chainHeader, unchainedLocList, ptrFormat, page, pageEntry,
 						authValueAdd);
 					break;
 
-				// These might work, but have not been fully tested!
-				case DYLD_CHAINED_PTR_64:
-				case DYLD_CHAINED_PTR_64_OFFSET:
-				case DYLD_CHAINED_PTR_64_KERNEL_CACHE:
-				case DYLD_CHAINED_PTR_32:
-				case DYLD_CHAINED_PTR_32_CACHE:
-				case DYLD_CHAINED_PTR_32_FIRMWARE:
-				case DYLD_CHAINED_PTR_X86_64_KERNEL_CACHE:
-					processPointerChain(chainHeader, unchainedLocList, ptrFormat, page, pageEntry,
-						authValueAdd);
-					break;
-
-				case DYLD_CHAINED_PTR_ARM64E_FIRMWARE:
+                case DYLD_CHAINED_PTR_ARM64E_FIRMWARE:
 				default:
 					log.appendMsg(
 						"WARNING: Pointer Chain format " + ptrFormat + " not processed yet!");

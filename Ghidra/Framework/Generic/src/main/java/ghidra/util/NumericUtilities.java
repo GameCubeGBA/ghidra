@@ -968,14 +968,12 @@ public final class NumericUtilities {
 		public String toString(long number, int radix) {
 			switch (radix) {
 				case 2:
-					return new UnsignedIntegerRadixRenderer().toString(number, radix);
-				case 8:
-					return new UnsignedIntegerRadixRenderer().toString(number, radix);
-				case 10:
+                case 16:
+                case 8:
+                    return new UnsignedIntegerRadixRenderer().toString(number, radix);
+                case 10:
 					return new SignedIntegerRadixRenderer().toString(number, radix);
-				case 16:
-					return new UnsignedIntegerRadixRenderer().toString(number, radix);
-			}
+            }
 			throw new IllegalArgumentException("Unsupported radix");
 		}
 	}

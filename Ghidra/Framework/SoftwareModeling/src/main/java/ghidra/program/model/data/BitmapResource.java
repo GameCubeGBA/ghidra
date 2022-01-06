@@ -212,15 +212,11 @@ public class BitmapResource {
 		int lineLen = width * bitCount;
 
         switch (bitCount) {
-            case 1:
-                lineLen = lineLen / 8;
-                break;
             case 4:
                 lineLen = (lineLen + 4) / 8;
                 break;
             case 24:
-                lineLen = lineLen / 8;
-                break;
+            case 1:
             default:
                 lineLen = lineLen / 8;
                 break;

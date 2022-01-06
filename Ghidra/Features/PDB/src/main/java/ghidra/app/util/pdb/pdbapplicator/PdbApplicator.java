@@ -1486,10 +1486,7 @@ public class PdbApplicator {
 			if (isMangled() && !PdbApplicator.isMangled(newName)) {
 				return true;
 			}
-			if (isNewSymbol) {
-				return false;
-			}
-			return false;
+            return false;
 		}
 
 		private SourceType getSource() {

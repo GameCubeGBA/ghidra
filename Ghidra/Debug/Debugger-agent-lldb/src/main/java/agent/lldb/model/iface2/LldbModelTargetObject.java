@@ -43,10 +43,7 @@ public interface LldbModelTargetObject extends SpiTargetObject {
 
 	public default LldbManagerImpl getManagerWithCheck() {
 		LldbManagerImpl impl = (LldbManagerImpl) getModel().getManager();
-		if (impl == null) {
-			return impl;
-		}
-		return impl;
+        return impl;
 	}
 
 	public Delta<?, ?> changeAttributes(List<String> remove, Map<String, ?> add, String reason);

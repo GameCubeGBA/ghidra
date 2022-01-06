@@ -44,12 +44,6 @@ public class VisualVertexSatelliteRenderer<V extends VisualVertex, E extends Vis
 			paintHighlight(rc, v, defaultGraphics, bounds);
 		}
 
-		double empahsis = v.getEmphasis();
-		if (empahsis == 0) {
-			super.paintIconForVertex(rc, v, layout);
-			return;
-		}
-
 // POSTERITY NOTE: we used to let the satellite paint the emphasis of nodes, as a way to call
 //		           attention to the selected node.  Now that we use caching, this has the odd 
 //		           side-effect of painting a large vertex in the cached image.  Also, we have 

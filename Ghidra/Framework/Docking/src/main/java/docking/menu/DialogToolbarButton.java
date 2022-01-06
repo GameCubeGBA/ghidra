@@ -69,6 +69,7 @@ public class DialogToolbarButton extends EmptyBorderToggleButton {
                 setEnabled(((Boolean) e.getNewValue()).booleanValue());
                 break;
             case DockingActionIf.DESCRIPTION_PROPERTY:
+            case DockingActionIf.KEYBINDING_DATA_PROPERTY:
                 DockingToolBarUtils.setToolTipText(this, dockingAction);
                 break;
             case DockingActionIf.TOOLBAR_DATA_PROPERTY:
@@ -77,9 +78,6 @@ public class DialogToolbarButton extends EmptyBorderToggleButton {
                 break;
             case ToggleDockingActionIf.SELECTED_STATE_PROPERTY:
                 setSelected((Boolean) e.getNewValue());
-                break;
-            case DockingActionIf.KEYBINDING_DATA_PROPERTY:
-                DockingToolBarUtils.setToolTipText(this, dockingAction);
                 break;
         }
 	}

@@ -166,17 +166,16 @@ public class PKIAuthenticationModule implements AuthenticationModule {
 						throw new FailedLoginException("Distinguished name is unknown");
 					}
 					log.log(Level.WARN, "Know user's DN not found (" + username + ") ");
-					username = UserManager.ANONYMOUS_USERNAME;
-				}
+                }
 				else { // if (!certChain[0].getSubjectX500Principal().equals(dn.asX500Principal())) {
 					userMgr.logUnknownDN(username, certChain[0].getSubjectX500Principal());
 					if (!anonymousAllowed) {
 						throw new FailedLoginException(
 							"Expected distinguished name: " + x500User.getName());
 					}
-					username = UserManager.ANONYMOUS_USERNAME;
-				}
-			}
+                }
+                username = UserManager.ANONYMOUS_USERNAME;
+            }
 			else {
 				if (!anonymousAllowed) {
 					throw new FailedLoginException("Unknown user: " + username);

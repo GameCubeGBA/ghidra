@@ -196,15 +196,9 @@ public class OatHeaderAnalyzer extends FileFormatAnalyzer {
                 }
                 break;
             case OatConstants.VERSION_MARSHMALLOW_RELEASE:
-                //TODO
-                break;
-            case OatConstants.VERSION_NOUGAT_MR1_RELEASE:
-                //TODO
-                break;
-            case OatConstants.VERSION_OREO_RELEASE:
-                //TODO
-                break;
             case OatConstants.VERSION_OREO_M2_RELEASE:
+            case OatConstants.VERSION_OREO_RELEASE:
+            case OatConstants.VERSION_NOUGAT_MR1_RELEASE:
                 //TODO
                 break;
         }

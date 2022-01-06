@@ -758,7 +758,6 @@ public class ListingHighlightProvider
                         break;
                     case PcodeOp.INT_ZEXT:
                     case PcodeOp.INT_SEXT:
-                        return true;
                     case PcodeOp.LOAD:
                         return true;
                     case PcodeOp.COPY:

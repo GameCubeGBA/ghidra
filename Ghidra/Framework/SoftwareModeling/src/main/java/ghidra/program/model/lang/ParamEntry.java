@@ -400,8 +400,6 @@ public class ParamEntry {
                     minsize = SpecXmlUtils.decodeInt(entry.getValue());
                     break;
                 case "size":    // old style
-                    alignment = SpecXmlUtils.decodeInt(entry.getValue());
-                    break;
                 case "align":
                     alignment = SpecXmlUtils.decodeInt(entry.getValue());
                     break;

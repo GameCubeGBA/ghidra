@@ -1024,13 +1024,12 @@ public final class FileUtilities {
 				}
 
 				cIndex--;
-				aIndex--;
-			}
+            }
 			else {
 				// move past relative path element (like '..')
-				aIndex--;
-			}
-		}
+            }
+            aIndex--;
+        }
 
 		return FileResolutionResult.ok();
 	}

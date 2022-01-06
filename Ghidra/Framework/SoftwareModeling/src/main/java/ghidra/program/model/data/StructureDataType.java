@@ -380,7 +380,6 @@ public class StructureDataType extends CompositeDataTypeImpl implements Structur
 					offsetAdjustment -= dtc.getLength();
 				}
 				--ordinalAdjustment;
-				lastDefinedOrdinal = ordinal;
 			}
 			else {
 
@@ -388,8 +387,8 @@ public class StructureDataType extends CompositeDataTypeImpl implements Structur
 					shiftOffset(dtc, ordinalAdjustment, offsetAdjustment);
 				}
 				newComponents.add(dtc);
-				lastDefinedOrdinal = ordinal;
 			}
+			lastDefinedOrdinal = ordinal;
 		}
 		if (treeSet != null) {
 			// Identify removed filler after last defined component

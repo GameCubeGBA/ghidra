@@ -102,18 +102,17 @@ public class ResolveX86orX64LinuxSyscallsScript extends GhidraScript {
 			datatypeArchiveName = "generic_clib_64";
 			syscallFileName = "x64_linux_syscall_numbers";
 			overrideType = RefType.CALLOTHER_OVERRIDE_CALL;
-			callingConvention = "syscall";
-		}
+        }
 		else {
 			tester = ResolveX86orX64LinuxSyscallsScript::checkX86Instruction;
 			syscallRegister = "EAX";
 			datatypeArchiveName = "generic_clib";
 			syscallFileName = "x86_linux_syscall_numbers";
 			overrideType = RefType.CALL_OVERRIDE_UNCONDITIONAL;
-			callingConvention = "syscall";
-		}
+        }
+        callingConvention = "syscall";
 
-		//get the space where the system calls live.  
+        //get the space where the system calls live.
 		//If it doesn't exist, create it.
 		AddressSpace syscallSpace =
 			currentProgram.getAddressFactory().getAddressSpace(SYSCALL_SPACE_NAME);

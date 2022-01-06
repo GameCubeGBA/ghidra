@@ -475,10 +475,9 @@ public class HelpBuildUtils {
 
 		switch (scheme) {
 			case "file":
-				return false;
-			case "jar":
-				return false;
-			default:
+            case "jar":
+                return false;
+            default:
 				break;
 		}
 		return true;

@@ -353,9 +353,7 @@ public class ProgramDiffDetails {
 			underline(false);
 			addText(": ");
 			addColorAddress(minP1Address);
-			bold(false);
-			addText(newLine);
-		}
+        }
 		else {
 			bold(true);
 			underline(true);
@@ -367,10 +365,10 @@ public class ProgramDiffDetails {
 			addText(" - ");
 			addColorAddress(maxP1Address);
 			addText(" ]");
-			bold(false);
-			addText(newLine);
-		}
-	}
+        }
+        bold(false);
+        addText(newLine);
+    }
 
 	private void addFooter() {
 		if (noDifferences) {

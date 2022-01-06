@@ -274,13 +274,12 @@ public class HexFormatModel implements UniversalDataFormatModel {
 			// its the high order byte
 			b &= 0x0f;
 			cb <<= 4;
-			b += cb;
-		}
+        }
 		else {
 			b &= 0xf0;
-			b += cb;
-		}
-		block.setByte(index, b);
+        }
+        b += cb;
+        block.setByte(index, b);
 		return true;
 	}
 

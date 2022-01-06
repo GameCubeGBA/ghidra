@@ -180,10 +180,8 @@ public class GdbModuleImpl implements GdbModule {
 			return matcher;
 		}
 		matcher = matchSectionLine(OBJECT_SECTION_LINE_PATTERN_V8, line);
-		if (matcher.matches()) {
-			return matcher;
-		}
-		return matcher;
+        matcher.matches();
+        return matcher;
 	}
 
 	protected void processSectionLine(String line) {

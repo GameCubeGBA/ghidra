@@ -105,9 +105,8 @@ public class DyldChainedPtr {
 			case DYLD_CHAINED_PTR_32_CACHE:
 			case DYLD_CHAINED_PTR_32_FIRMWARE:
 				return 4;
-			case DYLD_CHAINED_PTR_X86_64_KERNEL_CACHE:
-				return 1;
-			default:
+            case DYLD_CHAINED_PTR_X86_64_KERNEL_CACHE:
+            default:
 				return 1;
 		}
 	}
@@ -274,22 +273,18 @@ public class DyldChainedPtr {
 				break;
 
 			case DYLD_CHAINED_PTR_32:
-				target = (chainValue & 0x3FFFFF); // 26 bits
+
+            case DYLD_CHAINED_PTR_32_FIRMWARE:
+                target = (chainValue & 0x3FFFFF); // 26 bits
 				break;
 
 			case DYLD_CHAINED_PTR_32_CACHE:
-				target = (chainValue & 0x3FFFFFFF); // 30 bits
-				break;
 
-			case DYLD_CHAINED_PTR_32_FIRMWARE:
-				target = (chainValue & 0x3FFFFF); // 26 bits
+            case DYLD_CHAINED_PTR_X86_64_KERNEL_CACHE:
+            case DYLD_CHAINED_PTR_64_KERNEL_CACHE:
+                target = (chainValue & 0x3FFFFFFF); // 30 bits
 				break;
-
-			case DYLD_CHAINED_PTR_X86_64_KERNEL_CACHE:
-			case DYLD_CHAINED_PTR_64_KERNEL_CACHE:
-				target = (chainValue & 0x3FFFFFFF); // 30 bits
-				break;
-			default:
+            default:
 				return 0;
 		}
 

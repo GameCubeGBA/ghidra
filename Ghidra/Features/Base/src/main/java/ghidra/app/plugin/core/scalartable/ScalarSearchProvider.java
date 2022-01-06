@@ -330,7 +330,7 @@ public class ScalarSearchProvider extends ComponentProviderAdapter {
 
 			// for this to work we would have to have this filter keep state to
 			// know what values were used at the time of the filter
-			return false;
+			return true;
 		}
 	}
 }

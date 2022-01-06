@@ -66,46 +66,42 @@ public class DWARFAttributeFactoryFlaky extends DWARFAttributeFactory {
 			DWARFForm form) {
 		switch (form) {
 			case DW_FORM_addr:
-				return new DWARFNumericAttribute(0);
+
+                // Reference Form
+            case DW_FORM_ref8:
+            case DW_FORM_ref4:
+            case DW_FORM_ref2:
+            case DW_FORM_ref1:
+            case DW_FORM_ref_udata:
+            case DW_FORM_ref_addr:
+
+                // Pointer Types Form (lineptr, loclistptr, macptr, rangelistptr)
+            case DW_FORM_sec_offset:
+
+                // Constant Form
+            case DW_FORM_data8:
+            case DW_FORM_data4:
+            case DW_FORM_data2:
+            case DW_FORM_data1:
+            case DW_FORM_udata:
+            case DW_FORM_sdata:
+                return new DWARFNumericAttribute(0);
 
 			// Block Form
 			case DW_FORM_block4:
 			case DW_FORM_block2:
 			case DW_FORM_block1:
 			case DW_FORM_block:
-				return new DWARFBlobAttribute(new byte[] {});
 
-			// Constant Form
-			case DW_FORM_data8:
-			case DW_FORM_data4:
-			case DW_FORM_data2:
-			case DW_FORM_data1:
-			case DW_FORM_udata:
-			case DW_FORM_sdata:
-				return new DWARFNumericAttribute(0);
+                // Exprloc Form
+            case DW_FORM_exprloc:
+                return new DWARFBlobAttribute(new byte[] {});
 
-			// Exprloc Form
-			case DW_FORM_exprloc:
-				return new DWARFBlobAttribute(new byte[] {});
-
-			case DW_FORM_flag_present:
+            case DW_FORM_flag_present:
 			case DW_FORM_flag:
 				return DWARFBooleanAttribute.TRUE;
 
-			// Pointer Types Form (lineptr, loclistptr, macptr, rangelistptr)
-			case DW_FORM_sec_offset:
-				return new DWARFNumericAttribute(0);
-
-			// Reference Form
-			case DW_FORM_ref8:
-			case DW_FORM_ref4:
-			case DW_FORM_ref2:
-			case DW_FORM_ref1:
-			case DW_FORM_ref_udata:
-			case DW_FORM_ref_addr:
-				return new DWARFNumericAttribute(0);
-
-			// String Form
+            // String Form
 			case DW_FORM_strp:
 			case DW_FORM_string:
 				return new DWARFStringAttribute("");

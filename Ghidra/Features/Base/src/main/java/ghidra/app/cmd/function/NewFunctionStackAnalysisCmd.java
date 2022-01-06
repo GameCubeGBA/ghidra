@@ -546,11 +546,9 @@ public class NewFunctionStackAnalysisCmd extends BackgroundCommand {
 			throw new RuntimeException(e); // unexpected
 		}
 
-		if (!argLocation.isStackStorage()) {
-			return nextCopyParamIndex;
-		}
+        argLocation.isStackStorage();
 
-		return nextCopyParamIndex;
+        return nextCopyParamIndex;
 	}
 
 	private int getStackOpIndex(VarnodeContext context, Instruction cu, int offset) {

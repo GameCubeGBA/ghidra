@@ -285,15 +285,14 @@ public class DataTypeMergeManager implements MergeResolver {
 		SourceArchive sourceArchive = null;
 		int optionToUse = (sourceArchiveChoice == ASK_USER) ? conflictOption : sourceArchiveChoice;
 		switch (optionToUse) {
-			case OPTION_LATEST:
-				return;
-			case OPTION_MY:
+            case OPTION_MY:
 				sourceArchive = dtms[MY].getSourceArchive(universalID);
 				break;
 			case OPTION_ORIGINAL:
 				sourceArchive = dtms[ORIGINAL].getSourceArchive(universalID);
 				break;
-			default:
+            case OPTION_LATEST:
+            default:
 				return;
 		}
 		if (resultSourceArchive == null) {

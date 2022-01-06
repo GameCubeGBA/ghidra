@@ -1645,12 +1645,10 @@ public class ProgramDiffPlugin extends ProgramPlugin
 
 		switch (dialogType) {
 			case OptionDialog.PLAIN_MESSAGE:
-				Msg.showInfo(getClass(), parent, title, message);
+            case OptionDialog.INFORMATION_MESSAGE:
+                Msg.showInfo(getClass(), parent, title, message);
 				break;
-			case OptionDialog.INFORMATION_MESSAGE:
-				Msg.showInfo(getClass(), parent, title, message);
-				break;
-			case OptionDialog.WARNING_MESSAGE:
+            case OptionDialog.WARNING_MESSAGE:
 				Msg.showWarn(getClass(), parent, title, message);
 				break;
 			case OptionDialog.ERROR_MESSAGE:

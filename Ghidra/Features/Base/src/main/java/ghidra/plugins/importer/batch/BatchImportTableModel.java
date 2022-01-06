@@ -102,10 +102,9 @@ class BatchImportTableModel extends AbstractSortedTableModel<BatchGroup> {
 			case SELECTED:
 				return Boolean.class;
 			case FILETYPE:
-				return String.class;
-			case LOADER:
-				return String.class;
-			case LANG:
+            case LOADER:
+                return String.class;
+            case LANG:
 				return BatchGroupLoadSpec.class;
 			case FILES:
 				return BatchGroup.class;

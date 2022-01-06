@@ -167,16 +167,10 @@ public class MemviewPanel extends JPanel implements MouseListener, MouseMotionLi
 		if (amap == null || tmap == null) {
 			return;
 		}
-		if (vertical) {
-			amap.createMapping(provider.getZoomAmountA());
-			tmap.createMapping(provider.getZoomAmountT());
-		}
-		else {
-			amap.createMapping(provider.getZoomAmountA());
-			tmap.createMapping(provider.getZoomAmountT());
-		}
+        amap.createMapping(provider.getZoomAmountA());
+        tmap.createMapping(provider.getZoomAmountT());
 
-		updateBoxes();
+        updateBoxes();
 	}
 
 	void updateBoxes() {

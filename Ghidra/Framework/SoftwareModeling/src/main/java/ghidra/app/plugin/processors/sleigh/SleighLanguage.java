@@ -824,14 +824,7 @@ public class SleighLanguage implements Language {
                     list.toArray(defaultMemoryBlocks);
                     break;
                 }
-                case "incidentalcopy": {
-                    XmlElement subel = parser.start();
-                    while (parser.peek().isStart()) {
-                        parser.discardSubTree();
-                    }
-                    parser.end(subel);
-                    break;
-                }
+                case "incidentalcopy":
                 case "inferptrbounds": {
                     XmlElement subel = parser.start();
                     while (parser.peek().isStart()) {

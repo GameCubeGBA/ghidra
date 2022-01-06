@@ -127,10 +127,9 @@ public class MatchStatusUpdaterAssociationHook implements AssociationHook, VTCon
 						dontCareCount++;
 						break;
 					case SAME:
-						break;
-					case CONFLICT:
-						break;
-				}
+                    case CONFLICT:
+                        break;
+                }
 			}
 		}
 		return new VTAssociationMarkupStatus(unappliedCount > 0, appliedCount > 0,

@@ -125,7 +125,8 @@ public class ReferenceMethods {
 
 		switch (descriptor.charAt(0)) {
 			case DescriptorDecoder.BASE_TYPE_BYTE:  //signed byte
-				pCode.emitPopCat1Value(NEW_VALUE);
+            case DescriptorDecoder.BASE_TYPE_BOOLEAN:  //boolean
+                pCode.emitPopCat1Value(NEW_VALUE);
 				pCode.emitAssignVarnodeFromPcodeOpCall(STATIC_OFFSET, 4,
 					ConstantPoolJava.CPOOL_OP, "0", Integer.toString(index),
 					ConstantPoolJava.CPOOL_PUTSTATIC);
@@ -133,17 +134,9 @@ public class ReferenceMethods {
 				pCode.emitWriteToMemory(PcodeOpEmitter.RAM, 1, STATIC_OFFSET,
 					TEMP_1);
 				break;
-			case DescriptorDecoder.BASE_TYPE_BOOLEAN:  //boolean
-				pCode.emitPopCat1Value(NEW_VALUE);
-				pCode.emitAssignVarnodeFromPcodeOpCall(STATIC_OFFSET, 4,
-					ConstantPoolJava.CPOOL_OP, "0", Integer.toString(index),
-					ConstantPoolJava.CPOOL_PUTSTATIC);
-				pCode.emitTruncate(TEMP_1, 1, NEW_VALUE);
-				pCode.emitWriteToMemory(PcodeOpEmitter.RAM, 1, STATIC_OFFSET,
-					TEMP_1);
-				break;
-			case DescriptorDecoder.BASE_TYPE_CHAR:  //char
-				pCode.emitPopCat1Value(NEW_VALUE);
+            case DescriptorDecoder.BASE_TYPE_CHAR:  //char
+            case DescriptorDecoder.BASE_TYPE_SHORT:  //signed short
+                pCode.emitPopCat1Value(NEW_VALUE);
 				pCode.emitAssignVarnodeFromPcodeOpCall(STATIC_OFFSET, 4,
 					ConstantPoolJava.CPOOL_OP, "0", Integer.toString(index),
 					ConstantPoolJava.CPOOL_PUTSTATIC);
@@ -151,16 +144,7 @@ public class ReferenceMethods {
 				pCode.emitWriteToMemory(PcodeOpEmitter.RAM, 2, STATIC_OFFSET,
 					TEMP_1);
 				break;
-			case DescriptorDecoder.BASE_TYPE_SHORT:  //signed short
-				pCode.emitPopCat1Value(NEW_VALUE);
-				pCode.emitAssignVarnodeFromPcodeOpCall(STATIC_OFFSET, 4,
-					ConstantPoolJava.CPOOL_OP, "0", Integer.toString(index),
-					ConstantPoolJava.CPOOL_PUTSTATIC);
-				pCode.emitTruncate(TEMP_1, 2, NEW_VALUE);
-				pCode.emitWriteToMemory(PcodeOpEmitter.RAM, 2, STATIC_OFFSET,
-					TEMP_1);
-				break;
-			case DescriptorDecoder.BASE_TYPE_ARRAY:  //array dimension
+            case DescriptorDecoder.BASE_TYPE_ARRAY:  //array dimension
 			case DescriptorDecoder.BASE_TYPE_FLOAT:  //float
 			case DescriptorDecoder.BASE_TYPE_INT:  //int
 			case DescriptorDecoder.BASE_TYPE_REFERENCE:  //object reference
@@ -271,7 +255,8 @@ public class ReferenceMethods {
 
 		switch (descriptor.charAt(0)) {
 			case DescriptorDecoder.BASE_TYPE_BYTE:  //signed byte
-				pCode.emitPopCat1Value(NEW_VALUE);
+            case DescriptorDecoder.BASE_TYPE_BOOLEAN:  //boolean
+                pCode.emitPopCat1Value(NEW_VALUE);
 				pCode.emitPopCat1Value(OBJECT_REF);
 				pCode.emitAssignVarnodeFromPcodeOpCall(FIELD_OFFSET, 4,
 					ConstantPoolJava.CPOOL_OP, OBJECT_REF, Integer.toString(index),
@@ -280,18 +265,9 @@ public class ReferenceMethods {
 				pCode.emitWriteToMemory(PcodeOpEmitter.RAM, 1, FIELD_OFFSET,
 					TEMP_1);
 				break;
-			case DescriptorDecoder.BASE_TYPE_BOOLEAN:  //boolean
-				pCode.emitPopCat1Value(NEW_VALUE);
-				pCode.emitPopCat1Value(OBJECT_REF);
-				pCode.emitAssignVarnodeFromPcodeOpCall(FIELD_OFFSET, 4,
-					ConstantPoolJava.CPOOL_OP, OBJECT_REF, Integer.toString(index),
-					ConstantPoolJava.CPOOL_PUTFIELD);
-				pCode.emitTruncate(TEMP_1, 1, NEW_VALUE);
-				pCode.emitWriteToMemory(PcodeOpEmitter.RAM, 1, FIELD_OFFSET,
-					TEMP_1);
-				break;
-			case DescriptorDecoder.BASE_TYPE_CHAR:  //char
-				pCode.emitPopCat1Value(NEW_VALUE);
+            case DescriptorDecoder.BASE_TYPE_CHAR:  //char
+            case DescriptorDecoder.BASE_TYPE_SHORT:  //signed short
+                pCode.emitPopCat1Value(NEW_VALUE);
 				pCode.emitPopCat1Value(OBJECT_REF);
 				pCode.emitAssignVarnodeFromPcodeOpCall(FIELD_OFFSET, 4,
 					ConstantPoolJava.CPOOL_OP, OBJECT_REF, Integer.toString(index),
@@ -300,17 +276,7 @@ public class ReferenceMethods {
 				pCode.emitWriteToMemory(PcodeOpEmitter.RAM, 2, FIELD_OFFSET,
 					TEMP_1);
 				break;
-			case DescriptorDecoder.BASE_TYPE_SHORT:  //signed short
-				pCode.emitPopCat1Value(NEW_VALUE);
-				pCode.emitPopCat1Value(OBJECT_REF);
-				pCode.emitAssignVarnodeFromPcodeOpCall(FIELD_OFFSET, 4,
-					ConstantPoolJava.CPOOL_OP, OBJECT_REF, Integer.toString(index),
-					ConstantPoolJava.CPOOL_PUTFIELD);
-				pCode.emitTruncate(TEMP_1, 2, NEW_VALUE);
-				pCode.emitWriteToMemory(PcodeOpEmitter.RAM, 2, FIELD_OFFSET,
-					TEMP_1);
-				break;
-			case DescriptorDecoder.BASE_TYPE_ARRAY:  //array dimension
+            case DescriptorDecoder.BASE_TYPE_ARRAY:  //array dimension
 			case DescriptorDecoder.BASE_TYPE_FLOAT:  //float
 			case DescriptorDecoder.BASE_TYPE_INT:  //int
 			case DescriptorDecoder.BASE_TYPE_REFERENCE:  //object reference

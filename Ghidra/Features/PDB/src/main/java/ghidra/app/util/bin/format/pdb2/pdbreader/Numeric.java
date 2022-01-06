@@ -69,41 +69,33 @@ public class Numeric {
 				return 1;
 			case 0x8001:
 			case 0x8002:
-				return 2;
+            case 0x801b:
+                return 2;
 			case 0x8003:
 			case 0x8004:
 			case 0x8005:
 				return 4;
 			case 0x8006:
-				return 8;
+            case 0x801a:
+            case 0x800c:
+            case 0x8009:
+            case 0x800a:
+                return 8;
 			case 0x8007:
 				return 10;
 			case 0x8008:
-				return 16;
-			case 0x8009:
-			case 0x800a:
-				return 8;
-			case 0x800b:
+            case 0x8019:
+            case 0x8018:
+            case 0x8017:
+            case 0x800d:
+                return 16;
+            case 0x800b:
 				return 6;
-			case 0x800c:
-				return 8;
-			case 0x800d:
-				return 16;
-			case 0x800e:
+            case 0x800e:
 				return 20;
 			case 0x800f:
 				return 32;
-			case 0x8017:
-				return 16;
-			case 0x8018:
-				return 16;
-			case 0x8019:
-				return 16;
-			case 0x801a:
-				return 8;
-			case 0x801b:
-				return 2;
-			default:
+            default:
 				return 0;
 		}
 	}

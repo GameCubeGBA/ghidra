@@ -72,10 +72,7 @@ public class DataTypeEditorManager
 		if (dataType instanceof Enum) {
 			return new HelpLocation("DataTypeEditors", "EnumEditor");
 		}
-		if ((dataType instanceof Union) || (dataType instanceof Structure)) {
-			return new HelpLocation("DataTypeEditors", "Structure_Editor");
-		}
-		// default
+        // default
 		return new HelpLocation("DataTypeEditors", "Structure_Editor");
 	}
 

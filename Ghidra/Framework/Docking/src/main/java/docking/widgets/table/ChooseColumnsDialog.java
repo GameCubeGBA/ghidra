@@ -175,7 +175,7 @@ public class ChooseColumnsDialog extends DialogComponentProvider {
 			boolean isSelected = data.isSelected();
 			boolean hasFocus = data.hasFocus();
 
-			JComponent renderer = null;
+			JComponent renderer;
 			if (column == 0) {
 				TableCellRenderer booleanRenderer = table.getDefaultRenderer(Boolean.class);
 				renderer =
@@ -185,10 +185,6 @@ public class ChooseColumnsDialog extends DialogComponentProvider {
 			else {
 				renderer =
 					(JComponent) super.getTableCellRendererComponent(data);
-			}
-
-			if (isSelected) {
-				return renderer;
 			}
 
 			return renderer;

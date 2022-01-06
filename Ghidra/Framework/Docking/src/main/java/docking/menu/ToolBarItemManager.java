@@ -97,6 +97,7 @@ public class ToolBarItemManager implements PropertyChangeListener, ActionListene
                 toolBarButton.setEnabled(((Boolean) e.getNewValue()).booleanValue());
                 break;
             case DockingActionIf.DESCRIPTION_PROPERTY:
+            case DockingActionIf.KEYBINDING_DATA_PROPERTY:
                 DockingToolBarUtils.setToolTipText(toolBarButton, toolBarAction);
                 break;
             case DockingActionIf.TOOLBAR_DATA_PROPERTY:
@@ -105,9 +106,6 @@ public class ToolBarItemManager implements PropertyChangeListener, ActionListene
                 break;
             case ToggleDockingActionIf.SELECTED_STATE_PROPERTY:
                 toolBarButton.setSelected((Boolean) e.getNewValue());
-                break;
-            case DockingActionIf.KEYBINDING_DATA_PROPERTY:
-                DockingToolBarUtils.setToolTipText(toolBarButton, toolBarAction);
                 break;
         }
 	}

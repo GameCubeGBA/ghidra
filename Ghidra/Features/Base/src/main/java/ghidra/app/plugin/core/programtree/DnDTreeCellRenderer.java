@@ -238,13 +238,8 @@ class DnDTreeCellRenderer extends DefaultTreeCellRenderer {
 		Icon icon = null;
 		// empty module
 		if (node.isDeleted()) {
-			if (isInView) {
-				icon = iconMap.get(DISABLED_VIEWED_CLOSED_FOLDER);
-			}
-			else {
-				icon = iconMap.get(DISABLED_VIEWED_CLOSED_FOLDER);
-			}
-		}
+            icon = iconMap.get(DISABLED_VIEWED_CLOSED_FOLDER);
+        }
 		else if (isInView) {
 			icon = iconMap.get(VIEWED_CLOSED_FOLDER);
 		}

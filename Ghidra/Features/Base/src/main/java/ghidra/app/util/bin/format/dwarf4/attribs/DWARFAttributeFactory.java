@@ -81,13 +81,11 @@ public class DWARFAttributeFactory {
 				// but point to different items (ref_addr points to elements in .debug_info,
 				// sec_offset points to elements in other sections) 
 			case DW_FORM_ref_addr:
-				return new DWARFNumericAttribute(
-					DWARFUtil.readOffsetByDWARFformat(reader, unit.getFormat()));
-			case DW_FORM_sec_offset:
-				return new DWARFNumericAttribute(
+            case DW_FORM_sec_offset:
+                return new DWARFNumericAttribute(
 					DWARFUtil.readOffsetByDWARFformat(reader, unit.getFormat()));
 
-			case DW_FORM_block1: {
+            case DW_FORM_block1: {
 				int length = DWARFUtil.readVarSizedUInt(reader, 1);
 				return new DWARFBlobAttribute(reader.readNextByteArray(length));
 			}

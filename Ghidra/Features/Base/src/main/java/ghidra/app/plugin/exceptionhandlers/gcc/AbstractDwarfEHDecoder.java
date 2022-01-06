@@ -76,15 +76,14 @@ abstract class AbstractDwarfEHDecoder implements DwarfEHDecoder {
 			case 2:
 				return readWord(program, addr);
 			case 4:
-				return readDWord(program, addr);
-			case 8:
+            case 8:
                 // long ex = readDWord(program, addr.add(4));
-				// if (ex == 0) {
-				// return (ex << 32) + base;
-				// }
-				return readDWord(program, addr);
+                // if (ex == 0) {
+                // return (ex << 32) + base;
+                // }
+                return readDWord(program, addr);
 
-			default:
+            default:
 				throw new AddressTranslationException(
 					"Don't know how to make a " + addr.getPointerSize() + "-byte pointer");
 		}
@@ -341,10 +340,6 @@ abstract class AbstractDwarfEHDecoder implements DwarfEHDecoder {
 				}
 				break;
 
-			case DW_EH_PE_aligned:
-
-				break;
-
 			case DW_EH_PE_datarel:
 				val = context.getEhBlock().getStart().add(val).getOffset();
 				break;
@@ -362,6 +357,8 @@ abstract class AbstractDwarfEHDecoder implements DwarfEHDecoder {
 
 				val = txt.getStart().add(val).getOffset();
 				break;
+
+			case DW_EH_PE_aligned:
 
 			default:
 				break;

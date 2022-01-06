@@ -700,13 +700,11 @@ public class NeLoader extends AbstractLibrarySupportLoader {
 				memory.setInt(address, (int) farAddr);
 				break;
 			}
-			case SegmentRelocation.TYPE_FAR_ADDR_48: {
+			case SegmentRelocation.TYPE_FAR_ADDR_48:
+            case SegmentRelocation.TYPE_OFFSET_32: {
 				break;
 			}
-			case SegmentRelocation.TYPE_OFFSET_32: {
-				break;
-			}
-		}
+        }
 		return value;
 	}
 

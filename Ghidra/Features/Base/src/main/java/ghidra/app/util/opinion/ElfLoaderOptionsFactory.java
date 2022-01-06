@@ -158,10 +158,6 @@ public class ElfLoaderOptionsFactory {
 			String name = option.getName();
             switch (name) {
                 case PERFORM_RELOCATIONS_NAME:
-                    if (!Boolean.class.isAssignableFrom(option.getValueClass())) {
-                        return "Invalid type for option: " + name + " - " + option.getValueClass();
-                    }
-                    break;
                 case INCLUDE_OTHER_BLOCKS:
                     if (!Boolean.class.isAssignableFrom(option.getValueClass())) {
                         return "Invalid type for option: " + name + " - " + option.getValueClass();

@@ -91,8 +91,6 @@ class MarkupXmlMgr {
                     processEquateReference(element, overwrite);
                     break;
                 case "MANUAL_OPERAND":
-                    // Not yet supported
-                    break;
                 case "MANUAL_INSTRUCTION":
                     // Not yet supported
                     break;

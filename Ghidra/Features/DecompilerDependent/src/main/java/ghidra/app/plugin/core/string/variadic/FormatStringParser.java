@@ -158,17 +158,14 @@ public class FormatStringParser {
 				if (isOutputType) {
 					// At this point c is either a number, '*', or '.'
 					i = handleOutputConversionArgument(formatString, i, data, formatArgumentList);
-					if (i == -1) {
-						return false;
-					}
-				}
+                }
 				else {
 					i = handleInputConversionArgument(formatString, i, data, formatArgumentList);
-					if (i == -1) {
-						return false;
-					}
-				}
-			}
+                }
+                if (i == -1) {
+                    return false;
+                }
+            }
 			else if (i + 1 < formatString.length()) {
 				i = initiateLengthModifierExtension(formatString, i, data);
 			}

@@ -70,17 +70,13 @@ public class PrimitiveTypeApplier extends MsTypeApplier {
 			//=======================================
 			// No Type (uncharacterized type)
 			case 0x0000:
-				primitiveDataType = primitiveApplicator.getNoType(type);
+                // Segment type
+            case 0x0002:
+                // Absolute symbol
+            case 0x0001:
+                primitiveDataType = primitiveApplicator.getNoType(type);
 				break;
-			// Absolute symbol
-			case 0x0001:
-				primitiveDataType = primitiveApplicator.getNoType(type);
-				break;
-			// Segment type
-			case 0x0002:
-				primitiveDataType = primitiveApplicator.getNoType(type);
-				break;
-			// Void type
+            // Void type
 			case 0x0003:
 				primitiveDataType = primitiveApplicator.getVoidType();
 				break;
@@ -121,45 +117,17 @@ public class PrimitiveTypeApplier extends MsTypeApplier {
 				break;
 			// BASIC 8 byte currency value
 			case 0x0004:
-				primitiveDataType = primitiveApplicator.createTypedefNamedSizedType(type);
+                // OLE/COM HRESULT __ptr128 *
+            case 0x0708: // TODO: Make true pointer version
+                // OLE/COM HRESULT __ptr64 *
+            case 0x0608:
+                // OLE/COM HRESULT __ptr32 *
+            case 0x0408:
+                // OLE/COM HRESULT
+            case 0x0008:
+                primitiveDataType = primitiveApplicator.createTypedefNamedSizedType(type);
 				break;
-			// Near BASIC string
-			case 0x0005:
-				primitiveDataType = primitiveApplicator.createUnmappedPdbType(type);
-				break;
-			// Far BASIC string
-			case 0x0006:
-				primitiveDataType = primitiveApplicator.createUnmappedPdbType(type);
-				break;
-			// Type not translated by cvpack
-			case 0x0007:
-				primitiveDataType = primitiveApplicator.createUnmappedPdbType(type);
-				break;
-			// OLE/COM HRESULT
-			case 0x0008:
-				primitiveDataType = primitiveApplicator.createTypedefNamedSizedType(type);
-				break;
-			// OLE/COM HRESULT __ptr32 *
-			case 0x0408: // TODO: Make true pointer version
-				primitiveDataType = primitiveApplicator.createTypedefNamedSizedType(type);
-				break;
-			// OLE/COM HRESULT __ptr64 *
-			case 0x0608: // TODO: Make true pointer version
-				primitiveDataType = primitiveApplicator.createTypedefNamedSizedType(type);
-				break;
-			// OLE/COM HRESULT __ptr128 *
-			case 0x0708: // TODO: Make true pointer version
-				primitiveDataType = primitiveApplicator.createTypedefNamedSizedType(type);
-				break;
-			// bit
-			case 0x0060:
-				primitiveDataType = primitiveApplicator.createUnmappedPdbType(type);
-				break;
-			// Pascal CHAR
-			case 0x0061:
-				primitiveDataType = primitiveApplicator.createUnmappedPdbType(type);
-				break;
-			// 32-bit BOOL where true is 0xffffffff
+            // 32-bit BOOL where true is 0xffffffff
 			case 0x0062:
 				primitiveDataType =
 					primitiveApplicator.createTypedefNamedSizedType("T_BOOL32FF", 4);
@@ -2052,8 +2020,18 @@ public class PrimitiveTypeApplier extends MsTypeApplier {
 				primitiveDataType = primitiveApplicator.get128PointerType(type,
 					primitiveApplicator.createTypedefNamedSizedType("CVInternal", 1));
 				break;
+            // Pascal CHAR
+            case 0x0061:
+                // bit
+            case 0x0060:
+                // Type not translated by cvpack
+            case 0x0007:
+                // Far BASIC string
+            case 0x0006:
+                // Near BASIC string
+            case 0x0005:
 
-			default:
+            default:
 				// Note: 0x0400 seems to have been used as a this pointer type.
 				primitiveDataType = primitiveApplicator.createUnmappedPdbType(type);
 				break;

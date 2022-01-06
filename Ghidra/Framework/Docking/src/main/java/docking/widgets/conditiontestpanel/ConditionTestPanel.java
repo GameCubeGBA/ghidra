@@ -418,15 +418,13 @@ public class ConditionTestPanel extends JPanel {
 					icon = ERROR_ICON;
 					break;
 				case Cancelled:
-					icon = WARNING_ICON;
+                case Warning:
+                    icon = WARNING_ICON;
 					break;
 				case Passed:
 					icon = PASSED_ICON;
 					break;
-				case Warning:
-					icon = WARNING_ICON;
-					break;
-				case None:
+                case None:
 				case Skipped:
 					break;
 			}

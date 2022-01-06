@@ -388,16 +388,14 @@ class ComponentNode extends Node {
 			case LEFT:
 				splitNode = new SplitNode(winMgr, sourceNode, this, true);
 				break;
-			case RIGHT:
-				splitNode = new SplitNode(winMgr, this, sourceNode, true);
-				break;
-			case TOP:
+            case TOP:
 				splitNode = new SplitNode(winMgr, sourceNode, this, false);
 				break;
 			case BOTTOM:
 				splitNode = new SplitNode(winMgr, this, sourceNode, false);
 				break;
-			default:
+            case RIGHT:
+            default:
 				// default to the right
 				splitNode = new SplitNode(winMgr, this, sourceNode, true);
 

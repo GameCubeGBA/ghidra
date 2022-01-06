@@ -150,9 +150,7 @@ public class AddressTypeOverviewColorService
 		switch (addressType) {
 			case FUNCTION:
 				return functionColor;
-			case UNINITIALIZED:
-				return uninitializedColor;
-			case EXTERNAL_REF:
+            case EXTERNAL_REF:
 				return externalRefColor;
 			case INSTRUCTION:
 				return instructionColor;
@@ -160,7 +158,8 @@ public class AddressTypeOverviewColorService
 				return dataColor;
 			case UNDEFINED:
 				return undefinedColor;
-			default:
+            case UNINITIALIZED:
+            default:
 				return uninitializedColor;
 		}
 	}

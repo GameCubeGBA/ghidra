@@ -67,7 +67,6 @@ public class ActionAdapter implements Action, PropertyChangeListener {
             case NAME:
                 return dockingAction.getName();
             case SHORT_DESCRIPTION:
-                return dockingAction.getDescription();
             case LONG_DESCRIPTION:
                 return dockingAction.getDescription();
             case SMALL_ICON:

@@ -881,12 +881,7 @@ public class VarnodeContext implements ProcessorContext {
 	 */
 	public Address getLastSetLocation(Varnode rvar, BigInteger bval) {
 
-		Address lastSetAddr = lastSet.get(rvar);
-		if (lastSetAddr != null) {
-			return lastSetAddr;
-		}
-
-		return lastSetAddr;
+		return lastSet.get(rvar);
 	}
 
 	public Varnode getVarnode(int spaceID, long offset, int size) {

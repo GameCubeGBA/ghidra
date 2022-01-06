@@ -210,10 +210,7 @@ public class DbgModelSetContextMWETest extends AbstractGhidraHeadlessIntegration
 				if (DebugStatus.isInsideWait(argument)) {
 					return status;
 				}
-				if (DebugStatus.fromArgument(argument) != DebugStatus.BREAK) {
-					return status;
-				}
-				//dumpAllThreads(this::dumpRegsViaDX, false, false);
+                //dumpAllThreads(this::dumpRegsViaDX, false, false);
 				//dumpAllThreads(this::dumpFrame0ViaDX, false, false);
 				return status;
 			}

@@ -111,12 +111,9 @@ public class DefineTable {
 			if (node == null) {
 				node = new Hashtable();
 				findTable.put(chObj, node);
-				findTable = node;
-			}
-			else {
-				findTable = node;
-			}
-		}
+            }
+            findTable = node;
+        }
 
 		findTable.put(VALUE, string);
 	}

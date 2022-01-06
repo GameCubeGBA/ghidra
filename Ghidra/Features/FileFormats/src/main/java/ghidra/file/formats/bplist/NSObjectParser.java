@@ -33,7 +33,11 @@ public final class NSObjectParser {
 		switch ( objectType ) {
 			case 0x0: { // simple
 				switch ( objectInfo ) {
-					case 0x0: { // NULL object
+					case 0x0:
+                    case 0xf:
+                    case 0xe:
+                    case 0xd:
+                    case 0xc: { // NULL object
 						return null;
 					}
 					case 0x8: { // false
@@ -41,20 +45,11 @@ public final class NSObjectParser {
 					}
 					case 0x9: { // TRUE
 						return new NSNumber( true );
-					}
-					case 0xc: { // URL w/o base URL TODO
-						return null;
-					}
-					case 0xd: { // URL w/ base URL TODO
-						return null;
-					}
-					case 0xe: { // 16 byte UUID TODO
-						return null;
-					}
-					case 0xf: { // filler byte
-						return null;
-					}
-					default: {
+					}// URL w/o base URL TODO
+// URL w/ base URL TODO
+// 16 byte UUID TODO
+// filler byte
+                    default: {
 						throw new IOException( "WARNING: The binary PLIST contains unknown SIMPLE object type: " + objectInfo );
 					}
 				}

@@ -229,8 +229,7 @@ public class DecompilerParameterIdCmd extends BackgroundCommand {
 					if (commitReturn) {
 						HighFunctionDBUtil.commitReturnToDatabase(hfunc, SourceType.ANALYSIS);
 					}
-					goodInfo = true;
-				}
+                }
 				else {
 					HighParamID hparamid = decompRes.getHighParamID();
 
@@ -238,10 +237,10 @@ public class DecompilerParameterIdCmd extends BackgroundCommand {
 
 					// Not doing anything with ExtraPop or setStackPurgeSize(int change)
 					hparamid.storeReturnToDatabase(commitDataTypes, SourceType.ANALYSIS);
-					goodInfo = true;
-				}
+                }
+                goodInfo = true;
 
-				checkModelNameConsistency(decompRes.getFunction());
+                checkModelNameConsistency(decompRes.getFunction());
 			}
 
 			if (!monitor.isCancelled() && !goodInfo) {

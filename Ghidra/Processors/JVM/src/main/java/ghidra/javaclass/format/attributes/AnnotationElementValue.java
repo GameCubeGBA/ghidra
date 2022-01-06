@@ -227,14 +227,10 @@ public class AnnotationElementValue implements StructConverter {
             case DescriptorDecoder.BASE_TYPE_DOUBLE:
             case DescriptorDecoder.BASE_TYPE_BOOLEAN:
             case DescriptorDecoder.BASE_TYPE_STRING:
-                break;
-            case DescriptorDecoder.BASE_TYPE_ENUM:
-                break;
-            case DescriptorDecoder.BASE_TYPE_CLASS:
-                break;
-            case DescriptorDecoder.BASE_TYPE_ANNOTATION:
-                break;
             case DescriptorDecoder.BASE_TYPE_ARRAY:
+            case DescriptorDecoder.BASE_TYPE_ANNOTATION:
+            case DescriptorDecoder.BASE_TYPE_CLASS:
+            case DescriptorDecoder.BASE_TYPE_ENUM:
                 break;
         }
 

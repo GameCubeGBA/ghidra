@@ -7154,11 +7154,9 @@ public class RecoveredClassHelper {
 			}
 		}
 
-		if (componentFunctionDefinition.isEquivalent(newFunctionDefinition)) {
-			return changedItems;
-		}
+        componentFunctionDefinition.isEquivalent(newFunctionDefinition);
 
-		return changedItems;
+        return changedItems;
 	}
 
 	private boolean updateFunctionDefinition(FunctionDefinition functionDefinition,

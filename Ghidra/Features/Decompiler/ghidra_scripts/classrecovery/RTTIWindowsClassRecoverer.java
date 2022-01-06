@@ -1801,9 +1801,6 @@ public class RTTIWindowsClassRecoverer extends RTTIClassRecoverer {
 
 		// otherwise try to get the map using destructors/inline destructors
 		parentOrderMap = getParentOrderMap(recoveredClass, parentsWithVfunctions, false);
-		if (!parentOrderMap.isEmpty()) {
-			return parentOrderMap;
-		}
 
 		return parentOrderMap;
 	}

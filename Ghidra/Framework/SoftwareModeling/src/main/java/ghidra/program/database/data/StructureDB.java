@@ -636,15 +636,14 @@ class StructureDB extends CompositeDB implements StructureInternal {
 						offsetAdjustment -= dtc.getLength();
 					}
 					--ordinalAdjustment;
-					lastDefinedOrdinal = ordinal;
 				}
 				else {
 					if (ordinalAdjustment != 0) {
 						shiftOffset(dtc, ordinalAdjustment, offsetAdjustment);
 					}
 					newComponents.add(dtc);
-					lastDefinedOrdinal = ordinal;
 				}
+				lastDefinedOrdinal = ordinal;
 			}
 			if (treeSet != null) {
 				// Identify removed filler after last defined component

@@ -734,10 +734,9 @@ public class DataSettingsDialog extends DialogComponentProvider {
 		public Object getCellEditorValue() {
 			switch (mode) {
 				case ENUM:
-					return getComboBoxEnum();
-				case BOOLEAN:
-					return getComboBoxEnum();
-			}
+                case BOOLEAN:
+                    return getComboBoxEnum();
+            }
 			throw new AssertException();
 		}
 

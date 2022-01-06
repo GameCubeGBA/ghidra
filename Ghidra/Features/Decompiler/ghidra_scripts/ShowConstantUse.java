@@ -851,7 +851,8 @@ public class ShowConstantUse extends GhidraScript {
 					doneSet);
 				return;
 			case PcodeOp.INT_ZEXT:
-				followToParam(constUse, defUseList, highFunction, def.getInput(0), funcList,
+            case PcodeOp.CAST:
+                followToParam(constUse, defUseList, highFunction, def.getInput(0), funcList,
 					doneSet);
 				return;
 			case PcodeOp.MULTIEQUAL:
@@ -862,11 +863,7 @@ public class ShowConstantUse extends GhidraScript {
 				followToParam(constUse, splitUseList, highFunction, def.getInput(1), funcList,
 					doneSet);
 				return;
-			case PcodeOp.CAST:
-				followToParam(constUse, defUseList, highFunction, def.getInput(0), funcList,
-					doneSet);
-				return;
-			case PcodeOp.INDIRECT:
+            case PcodeOp.INDIRECT:
 				Varnode output = def.getOutput();
 				if (output.getAddress().equals(def.getInput(0).getAddress())) {
 					followToParam(constUse, defUseList, highFunction, def.getInput(0), funcList,

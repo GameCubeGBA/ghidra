@@ -356,10 +356,7 @@ class MemoryMapModel extends AbstractSortedTableModel<MemoryBlock> {
 						revertBlockToUnitialized(block);
 					}
 					return;
-
-				case SOURCE:
-					break;
-				case COMMENT:
+                case COMMENT:
 					String cmt = block.getComment();
 					if (cmt == null || !cmt.equals(aValue)) {
 						String value = (String) aValue;
@@ -377,7 +374,9 @@ class MemoryMapModel extends AbstractSortedTableModel<MemoryBlock> {
 						}
 					}
 					break;
-				default:
+
+                case SOURCE:
+                default:
 					break;
 			}
 			fireTableRowsUpdated(rowIndex, rowIndex);

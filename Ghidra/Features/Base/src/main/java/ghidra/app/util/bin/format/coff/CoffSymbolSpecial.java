@@ -78,20 +78,16 @@ public final class CoffSymbolSpecial {
             case DOT_FILE:
                 return CoffSymbolStorageClass.C_FILE;
             case DOT_BB:
-                return CoffSymbolStorageClass.C_BLOCK;
             case DOT_EB:
                 return CoffSymbolStorageClass.C_BLOCK;
             case DOT_BF:
-                return CoffSymbolStorageClass.C_FCN;
             case DOT_EF:
                 return CoffSymbolStorageClass.C_FCN;
             case DOT_EOS:
                 return CoffSymbolStorageClass.C_EOS;
             case DOT_TEXT:
-                return CoffSymbolStorageClass.C_STAT;
-            case DOT_DATA:
-                return CoffSymbolStorageClass.C_STAT;
             case DOT_BSS:
+            case DOT_DATA:
                 return CoffSymbolStorageClass.C_STAT;
         }
 		return -1;
