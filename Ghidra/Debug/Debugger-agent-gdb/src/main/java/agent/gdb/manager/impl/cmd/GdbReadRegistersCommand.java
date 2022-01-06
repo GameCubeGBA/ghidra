@@ -19,6 +19,7 @@ import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import agent.gdb.manager.GdbRegister;
@@ -154,7 +155,7 @@ public class GdbReadRegistersCommand
 			return Collections.emptyMap();
 		}
 		Map<Integer, GdbRegister> regsByNumber =
-			regs.stream().collect(Collectors.toMap(GdbRegister::getNumber, r -> r));
+			regs.stream().collect(Collectors.toMap(GdbRegister::getNumber, Function.identity()));
 		List<GdbMiFieldList> valueList = done.assumeRegisterValueList();
 		Map<GdbRegister, BigInteger> result = new LinkedHashMap<>();
 		for (GdbMiFieldList fields : valueList) {

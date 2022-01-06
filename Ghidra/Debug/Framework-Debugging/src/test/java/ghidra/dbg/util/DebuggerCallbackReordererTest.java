@@ -20,6 +20,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.junit.Test;
@@ -56,7 +57,7 @@ public class DebuggerCallbackReordererTest implements DebuggerModelTestUtils {
 
 		public TestReorderedListener(Collection<List<String>> paths) {
 			waits =
-				paths.stream().collect(Collectors.toMap(p -> p, p -> new CompletableFuture<>()));
+				paths.stream().collect(Collectors.toMap(Function.identity(), p -> new CompletableFuture<>()));
 		}
 
 		protected void done(TargetObject obj) {

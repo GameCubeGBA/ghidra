@@ -752,7 +752,7 @@ public class ByteViewerPanel extends JPanel
 		int charWidth = fm.charWidth('W');
 		indexFactory.setStartX(charWidth);
 		indexPanelWidth =
-			ByteViewerComponentProvider.DEFAULT_NUMBER_OF_CHARS * charWidth + (2 * charWidth);
+				(ByteViewerComponentProvider.DEFAULT_NUMBER_OF_CHARS + 2) * charWidth;
 		if (blocks != null) {
 			indexPanelWidth = getIndexPanelWidth(blocks);
 		}

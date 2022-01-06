@@ -232,7 +232,7 @@ public abstract class AbstractModelHost implements ModelHost, DebuggerModelTestU
 	@Override
 	public <T extends TargetObject> NavigableMap<List<String>, T> findAll(Class<T> cls,
 			List<String> seedPath, boolean atLeastOne) throws Throwable {
-		return findAll(cls, seedPath, pred -> pred, atLeastOne);
+		return findAll(cls, seedPath, Function.identity(), atLeastOne);
 	}
 
 	@Override

@@ -17,6 +17,7 @@ package ghidra.dbg.target;
 
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Function;
 
 import ghidra.dbg.DebuggerObjectModel;
 import ghidra.dbg.util.PathUtils;
@@ -102,7 +103,7 @@ public class TargetObjectPath implements Comparable<TargetObjectPath> {
 	}
 
 	public CompletableFuture<TargetObject> fetch() {
-		return model.fetchModelObject(keyList).thenApply(obj -> obj);
+		return model.fetchModelObject(keyList).thenApply(Function.identity());
 	}
 
 	public String toPathString() {

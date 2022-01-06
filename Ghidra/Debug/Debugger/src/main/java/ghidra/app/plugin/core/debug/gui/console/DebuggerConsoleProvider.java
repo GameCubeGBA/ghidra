@@ -206,7 +206,7 @@ public class DebuggerConsoleProvider extends ComponentProviderAdapter
 			LogTableColumns, ActionContext, LogRow, LogRow> {
 
 		public LogTableModel() {
-			super("Log", LogTableColumns.class, r -> r.getActionContext(), r -> r);
+			super("Log", LogTableColumns.class, r -> r.getActionContext(), Function.identity());
 		}
 
 		@Override

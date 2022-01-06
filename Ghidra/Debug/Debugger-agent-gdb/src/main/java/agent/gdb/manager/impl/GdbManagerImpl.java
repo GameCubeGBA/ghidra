@@ -21,6 +21,7 @@ import java.io.*;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.*;
+import java.util.function.Function;
 
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -1744,7 +1745,7 @@ public class GdbManagerImpl implements GdbManager {
 		return loop(TypeSpec.VOID, loop -> {
 			GdbCommand<Void> interrupt = new GdbInterruptCommand(this);
 			execute(interrupt).thenApply(e -> (Throwable) null)
-					.exceptionally(e -> e)
+					.exceptionally(Function.identity())
 					.handle(loop::consume);
 		}, TypeSpec.cls(Throwable.class), (exc, loop) -> {
 			Msg.debug(this, "Executed an interrupt");

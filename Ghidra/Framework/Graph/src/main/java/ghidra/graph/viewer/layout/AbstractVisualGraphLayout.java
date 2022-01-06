@@ -251,7 +251,7 @@ public abstract class AbstractVisualGraphLayout<V extends VisualVertex,
 
 		Collection<E> edges = originalGraph.getEdges();
 		Map<E, List<Point2D>> edgesToBends =
-			edges.stream().collect(Collectors.toMap(e -> e, e -> e.getArticulationPoints()));
+			edges.stream().collect(Collectors.toMap(java.util.function.Function.identity(), e -> e.getArticulationPoints()));
 
 		VisualGraph<V, E> newGraph = newLayout.getVisualGraph();
 		Collection<E> newEdges = newGraph.getEdges();

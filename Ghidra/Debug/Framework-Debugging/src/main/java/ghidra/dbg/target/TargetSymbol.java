@@ -16,6 +16,7 @@
 package ghidra.dbg.target;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Function;
 
 import ghidra.dbg.DebuggerTargetObjectIface;
 import ghidra.dbg.attributes.TargetDataType;
@@ -55,7 +56,7 @@ public interface TargetSymbol extends TargetObject {
 	 */
 	public default CompletableFuture<DataType> getGhidraDataType(
 			TargetDataTypeConverter converter) {
-		return converter.convertTargetDataType(getDataType()).thenApply(dt -> dt);
+		return converter.convertTargetDataType(getDataType()).thenApply(Function.identity());
 	}
 
 	/**

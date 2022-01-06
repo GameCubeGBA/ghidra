@@ -20,6 +20,7 @@ import java.lang.invoke.MethodHandles;
 import java.net.ConnectException;
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -209,13 +210,13 @@ public class DebuggerTraceManagerServicePlugin extends Plugin
 		Executor exe = CompletableFuture.delayedExecutor(retryAfterMillis, TimeUnit.MILLISECONDS);
 		// NB. thenCompose(f -> f) also ensures exceptions are handled here, not passed through
 		CompletableFuture<T> result =
-			CompletableFuture.supplyAsync(action, AsyncUtils.SWING_EXECUTOR).thenCompose(f -> f);
+			CompletableFuture.supplyAsync(action, AsyncUtils.SWING_EXECUTOR).thenCompose(Function.identity());
 		if (retries > 0) {
 			return result.thenApply(CompletableFuture::completedFuture).exceptionally(ex -> {
 				return CompletableFuture
 						.supplyAsync(() -> tryHarder(action, retries - 1, retryAfterMillis), exe)
-						.thenCompose(f -> f);
-			}).thenCompose(f -> f);
+						.thenCompose(Function.identity());
+			}).thenCompose(Function.identity());
 		}
 		return result;
 	}

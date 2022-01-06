@@ -18,6 +18,7 @@ package ghidra.dbg.target;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import ghidra.async.AsyncFence;
@@ -184,7 +185,7 @@ public interface TargetObject extends Comparable<TargetObject> {
 	static Map<String, Class<? extends TargetObject>> initInterfacesByName() {
 		return ALL_INTERFACES.stream()
 				.collect(
-					Collectors.toUnmodifiableMap(DebuggerObjectModel::requireIfaceName, i -> i));
+					Collectors.toUnmodifiableMap(DebuggerObjectModel::requireIfaceName, Function.identity()));
 	}
 
 	static List<Class<? extends TargetObject>> getInterfacesByName(Collection<String> names) {

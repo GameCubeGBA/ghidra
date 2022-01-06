@@ -396,7 +396,7 @@ public abstract class AbstractLibrarySupportLoader extends AbstractProgramLoader
 			throws CancelledException, IOException {
 
 		Map<String, Program> progsByName = programs.stream().filter(Objects::nonNull).collect(
-			Collectors.toMap((p) -> p.getDomainFile().getName(), (p) -> p));
+			Collectors.toMap((p) -> p.getDomainFile().getName(), java.util.function.Function.identity()));
 
 		monitor.initialize(progsByName.size());
 		for (Program program : progsByName.values()) {

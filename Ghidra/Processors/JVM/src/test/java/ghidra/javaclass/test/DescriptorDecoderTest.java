@@ -140,7 +140,7 @@ public class DescriptorDecoderTest extends AbstractGenericTest {
 
 		String DDtoD = "(DD)D";
 		expectedStackPurge =
-			2 * PcodeInjectLibraryJava.REFERENCE_SIZE + 2 * PcodeInjectLibraryJava.REFERENCE_SIZE;
+				2 * (PcodeInjectLibraryJava.REFERENCE_SIZE + PcodeInjectLibraryJava.REFERENCE_SIZE);
 		expectedReturn = JavaComputationalCategory.CAT_2;
 
 		computedStackPurge = DescriptorDecoder.getStackPurge(DDtoD);

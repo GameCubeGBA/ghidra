@@ -124,7 +124,7 @@ public class DebuggerBreakpointsProvider extends ComponentProviderAdapter
 			LogicalBreakpointTableColumns, LogicalBreakpoint, LogicalBreakpointRow, LogicalBreakpoint> {
 
 		public LogicalBreakpointTableModel(DebuggerBreakpointsProvider provider) {
-			super("Breakpoints", LogicalBreakpointTableColumns.class, lb -> lb,
+			super("Breakpoints", LogicalBreakpointTableColumns.class, Function.identity(),
 				lb -> new LogicalBreakpointRow(provider, lb));
 		}
 

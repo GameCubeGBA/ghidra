@@ -27,6 +27,7 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.junit.Ignore;
@@ -247,9 +248,7 @@ public class GadpClientServerTest implements AsyncTestUtils {
 		@Override
 		public CompletableFuture<Integer> write(S msg) {
 			Msg.debug(this, sendPrefix + msg);
-			return super.write(msg).thenApplyAsync(c -> {
-				return c;
-			});
+			return super.write(msg).thenApplyAsync(Function.identity());
 		}
 
 		@Override

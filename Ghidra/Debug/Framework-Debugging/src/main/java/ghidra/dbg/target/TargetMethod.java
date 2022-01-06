@@ -17,6 +17,7 @@ package ghidra.dbg.target;
 
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -199,7 +200,7 @@ public interface TargetMethod extends TargetObject {
 	 */
 	static TargetParameterMap makeParameters(Stream<ParameterDescription<?>> params) {
 		return TargetParameterMap
-				.copyOf(params.collect(Collectors.toMap(p -> p.name, p -> p, (a, b) -> {
+				.copyOf(params.collect(Collectors.toMap(p -> p.name, Function.identity(), (a, b) -> {
 					throw new IllegalArgumentException("duplicate parameters: " + a + " and " + b);
 				}, LinkedHashMap::new)));
 	}
