@@ -200,7 +200,7 @@ public class ObjectNode extends GTreeSlowLoadingNode {  //extends GTreeNode
 	public void cleanUpOldChildren(List<GTreeNode> newChildren) {
 		if (oldChildren != null) {
 			synchronized (oldChildren) {
-				oldChildren::remove.forEach(newChildren::remove);
+				oldChildren.forEach(newChildren::remove);
 				for (GTreeNode node : oldChildren) {
 					restructured = true;
 					tree.cleanupOldNode((ObjectNode) node);
