@@ -41,14 +41,6 @@ public interface DataType {
 	 */
 	public static final DataType DEFAULT = DefaultDataType.dataType;
 
-	/**
-	 * Instance of void datatype (never use {@code ==})
-	 * 
-	 * @deprecated should use {@link VoidDataType#dataType} instead
-	 */
-	@Deprecated
-	public static final DataType VOID = VoidDataType.dataType;
-
 	public final static String CONFLICT_SUFFIX = ".conflict";
 
 	static final long NO_SOURCE_SYNC_TIME = 0L;

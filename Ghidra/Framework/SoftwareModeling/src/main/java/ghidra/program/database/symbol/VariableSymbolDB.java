@@ -258,7 +258,7 @@ public class VariableSymbolDB extends SymbolDB {
 				dt = DataType.DEFAULT;
 			}
 			else if (storage.isVoidStorage()) {
-				dt = DataType.VOID;
+				dt = VoidDataType.dataType;
 			}
 			else {
 				dt = Undefined.getUndefinedDataType(storage.size());
