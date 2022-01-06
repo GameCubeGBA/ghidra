@@ -618,6 +618,14 @@ public class DataTypeManagerPlugin extends ProgramPlugin
 	}
 
 	@Override
+	public List<DataType> getSelectedDatatypes() {
+		if (provider.isVisible()) {
+			return provider.getSelectedDataTypes();
+		}
+		return Collections.emptyList();
+	}
+
+	@Override
 	public void setRecentlyUsed(DataType dt) {
 		dataTypeManagerHandler.setRecentlyUsedDataType(dt);
 	}
