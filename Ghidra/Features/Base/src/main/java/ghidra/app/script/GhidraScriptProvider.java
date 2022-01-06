@@ -17,6 +17,7 @@ package ghidra.app.script;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.InvocationTargetException;
 import java.util.regex.Pattern;
 
 import generic.jar.ResourceFile;
@@ -86,7 +87,7 @@ public abstract class GhidraScriptProvider
 	 * @throws IllegalAccessException if the class constructor is not accessible
 	 */
 	public abstract GhidraScript getScriptInstance(ResourceFile sourceFile, PrintWriter writer)
-			throws ClassNotFoundException, InstantiationException, IllegalAccessException;
+			throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException;
 
 	/**
 	 * Creates a new script using the specified file.

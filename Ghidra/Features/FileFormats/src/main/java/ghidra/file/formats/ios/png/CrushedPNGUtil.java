@@ -348,16 +348,11 @@ public class CrushedPNGUtil {
 				case 3: //Average
 					upPtr = srcPtr - 4 * width - 1;
 
-					if (y == 0) {
-						for (x = 4; x < 4 * width; x++) {
-							data[srcPtr + x] += ((data[upPtr + x] + data[srcPtr + (x - 4)]) >> 1);
-						}
-					}
-					else {
+					if (y != 0) {
 						data[srcPtr] += (data[upPtr + x] >> 1);
-						for (x = 4; x < 4 * width; x++) {
-							data[srcPtr + x] += ((data[upPtr + x] + data[srcPtr + (x - 4)]) >> 1);
-						}
+					}
+					for (x = 4; x < 4 * width; x++) {
+						data[srcPtr + x] += ((data[upPtr + x] + data[srcPtr + (x - 4)]) >> 1);
 					}
 					break;
 

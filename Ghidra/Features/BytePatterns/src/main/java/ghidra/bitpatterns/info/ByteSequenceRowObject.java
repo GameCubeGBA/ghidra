@@ -89,12 +89,11 @@ public class ByteSequenceRowObject {
 				if (byteSeqCounts.containsKey(currentFilteredByteString)) {
 					Integer count = byteSeqCounts.get(currentFilteredByteString);
 					byteSeqCounts.put(currentFilteredByteString, count + 1);
-					numTotalSeqs++;
 				}
 				else {
 					byteSeqCounts.put(currentFilteredByteString, Integer.valueOf(1));
-					numTotalSeqs++;
 				}
+				numTotalSeqs++;
 			}
 		}
 		return getRowObjectsForLengthFilteredSeqs(byteSeqCounts, bytesToDisassembly, numTotalSeqs);

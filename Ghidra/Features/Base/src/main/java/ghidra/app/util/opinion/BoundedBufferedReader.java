@@ -97,16 +97,14 @@ public class BoundedBufferedReader extends Reader {
 				if (readAheadLimit <= cb.length) {
 					/* Shuffle in the current buffer */
 					System.arraycopy(cb, markedChar, cb, 0, delta);
-					markedChar = 0;
-					dst = delta;
 				} else {
 					/* Reallocate buffer to accommodate read-ahead limit */
 					char[] ncb = new char[readAheadLimit];
 					System.arraycopy(cb, markedChar, ncb, 0, delta);
 					cb = ncb;
-					markedChar = 0;
-					dst = delta;
 				}
+				markedChar = 0;
+				dst = delta;
 				nextChar = nChars = delta;
 			}
 		}
