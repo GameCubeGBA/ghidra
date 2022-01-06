@@ -862,9 +862,9 @@ public abstract class CompositeEditorModel extends CompositeViewerModel implemen
 			baseDt = comp.getDataType();
 			baseDt = DataTypeUtils.getBaseDataType(baseDt);
 		}
-		return ((baseDt != null) && !(baseDt instanceof BuiltInDataType) &&
-			!(baseDt instanceof MissingBuiltInDataType) &&
-			((baseDt instanceof Structure) || baseDt instanceof Union || baseDt instanceof Enum));
+		return (!(baseDt instanceof BuiltInDataType) &&
+                !(baseDt instanceof MissingBuiltInDataType) &&
+                ((baseDt instanceof Structure) || baseDt instanceof Union || baseDt instanceof Enum));
 	}
 
 	@Override

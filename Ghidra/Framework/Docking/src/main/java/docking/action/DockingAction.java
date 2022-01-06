@@ -485,7 +485,7 @@ public abstract class DockingAction implements DockingActionIf {
 			}
 
 			Icon icon = menuBarData.getMenuIcon();
-			if (icon != null && icon instanceof ImageIconWrapper) {
+			if (icon instanceof ImageIconWrapper) {
 				ImageIconWrapper wrapper = (ImageIconWrapper) icon;
 				String filename = wrapper.getFilename();
 				buffer.append("        MENU ICON:           ").append(filename);
@@ -514,7 +514,7 @@ public abstract class DockingAction implements DockingActionIf {
 			}
 
 			Icon icon = popupMenuData.getMenuIcon();
-			if (icon != null && icon instanceof ImageIconWrapper) {
+			if (icon instanceof ImageIconWrapper) {
 				ImageIconWrapper wrapper = (ImageIconWrapper) icon;
 				String filename = wrapper.getFilename();
 				buffer.append("        POPUP ICON:         ").append(filename);

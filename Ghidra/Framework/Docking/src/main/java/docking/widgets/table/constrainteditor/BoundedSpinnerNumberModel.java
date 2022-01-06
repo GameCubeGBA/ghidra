@@ -44,7 +44,7 @@ class BoundedSpinnerNumberModel extends SpinnerNumberModel {
 
 	@Override
 	public void setValue(Object value) {
-		if (value != null && value instanceof Number) {
+		if (value instanceof Number) {
 			Comparable minimum = getMinimum();
 			Comparable maximum = getMaximum();
 

@@ -336,8 +336,7 @@ public class AssemblyParseMachine implements Comparable<AssemblyParseMachine> {
 				if (!unmatched.isEmpty()) {
 					AssemblyParseMachine m = copy();
 					final Collection<AssemblyTerminal> newExpected;
-					if (m.lastTok == null ||
-						!(m.lastTok instanceof TruncatedWhiteSpaceParseToken)) {
+					if (!(m.lastTok instanceof TruncatedWhiteSpaceParseToken)) {
 						newExpected = unmatched;
 					}
 					else {

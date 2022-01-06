@@ -1288,7 +1288,7 @@ public class RecoverClassesFromRTTIScript extends GhidraScript {
 		DataType classMemberDataType = dataTypeManager.getDataType(recoveredClass.getClassPath(),
 			recoveredClass.getName() + CLASS_DATA_STRUCT_NAME);
 
-		if (classMemberDataType != null && classMemberDataType instanceof Structure) {
+		if (classMemberDataType instanceof Structure) {
 
 			Structure memberDataStructure = (Structure) classMemberDataType;
 			int numDefinedComponents = memberDataStructure.getNumDefinedComponents();
@@ -1443,7 +1443,7 @@ public class RecoverClassesFromRTTIScript extends GhidraScript {
 		DataType classMemberDataType = dataTypeManager.getDataType(recoveredClass.getClassPath(),
 			recoveredClass.getName() + CLASS_DATA_STRUCT_NAME);
 
-		if (classMemberDataType != null && classMemberDataType instanceof Structure) {
+		if (classMemberDataType instanceof Structure) {
 
 			Structure memberDataStructure = (Structure) classMemberDataType;
 			int numDefinedComponents = memberDataStructure.getNumDefinedComponents();

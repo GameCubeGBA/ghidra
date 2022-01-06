@@ -177,8 +177,8 @@ public abstract class DBContentHandler implements ContentHandler {
 		String path = "/";
 		String name = ProjectFileManager.getUserDataFilename(associatedFileID);
 		FolderItem item = userfs.getItem(path, name);
-		if (item == null || !(item instanceof DatabaseItem) ||
-			!getUserDataContentType(associatedContentType).equals(item.getContentType())) {
+		if (!(item instanceof DatabaseItem) ||
+                !getUserDataContentType(associatedContentType).equals(item.getContentType())) {
 			return null;
 		}
 		DatabaseItem dbItem = (DatabaseItem) item;

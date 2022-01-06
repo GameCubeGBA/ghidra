@@ -60,7 +60,7 @@ public class Declaration {
 		if (subDecl == null) {
 			return;
 		}
-		if (subDecl.dt != null && subDecl.dt instanceof PointerDataType) {
+		if (subDecl.dt instanceof PointerDataType) {
 			this.dt = new PointerDataType(dt);
 		}
 		this.name = subDecl.name;

@@ -702,7 +702,7 @@ public abstract class SymbolDB extends DatabaseObject implements Symbol {
 
 	@Override
 	public boolean equals(Object obj) {
-		if ((obj == null) || (!(obj instanceof Symbol))) {
+		if ((!(obj instanceof Symbol))) {
 			return false;
 		}
 		if (obj == this) {

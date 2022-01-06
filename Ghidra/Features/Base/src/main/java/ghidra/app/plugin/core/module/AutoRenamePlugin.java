@@ -197,7 +197,7 @@ public class AutoRenamePlugin extends ProgramPlugin {
         public boolean isEnabledForContext(ActionContext context) {
     		Object activeObj = context.getContextObject();
     		// Only make action available for selections which contain a minimum of one Fragment.
-    		if (activeObj != null && activeObj instanceof ProgramNode) {
+    		if (activeObj instanceof ProgramNode) {
     			ProgramNode node = (ProgramNode) activeObj;
     			if (node.getProgram() != null) {
     				// Ensure that at least one Fragment is selected within a multi-select

@@ -1087,7 +1087,7 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 		int numOpenLips = getNumSubstrings(name, "<");
 		int numClosedLips = getNumSubstrings(name, ">");
 
-        return numOpenLips > 0 && numClosedLips > 0 && numOpenLips == numClosedLips;
+        return numClosedLips > 0 && numOpenLips == numClosedLips;
     }
 
 	private boolean containsSimpleTemplate(String name) {

@@ -641,7 +641,7 @@ public class ElfDefaultGotPltMarkup {
 		//    if this is a .so and we come across an address that is not valid, not 0, not a relocation
 		//      get the top of the address of the program.  See how many bytes it fits in
 		Object dValue = data.getValue();
-		if (dValue == null || !(dValue instanceof Address)) {
+		if (!(dValue instanceof Address)) {
 			return null;
 		}
 		Address daddr = (Address) dValue;

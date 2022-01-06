@@ -45,7 +45,7 @@ public interface GComponent {
 	 */
 	public default boolean getHTMLRenderingEnabled() {
 		Object prop = ((JComponent) this).getClientProperty(HTML_DISABLE_STRING);
-		return prop == null || prop != Boolean.TRUE;
+		return prop != Boolean.TRUE;
 	}
 
 	/**

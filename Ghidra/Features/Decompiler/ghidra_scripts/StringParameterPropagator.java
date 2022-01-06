@@ -289,8 +289,8 @@ public class StringParameterPropagator extends GhidraScript {
 			Data data = dataIter.next();
 			// put string dt in addr set
 			DataType dt = data.getDataType();
-			if (!(dt instanceof StringDataType || dt instanceof TerminatedStringDataType ||
-				dt instanceof UnicodeDataType || dt instanceof TerminatedUnicodeDataType)) {
+			if (!(dt instanceof TerminatedStringDataType ||
+                    dt instanceof UnicodeDataType || dt instanceof TerminatedUnicodeDataType)) {
 				continue;
 			}
 			stringLocationSet.add(data.getAddress());

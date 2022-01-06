@@ -118,7 +118,6 @@ public final class VdexConstants {
 	}
 
 	public final static Address findVDEX(Program program) {
-		try {
 			if (program != null) {
 				for (MemoryBlock block : program.getMemory().getBlocks()) {
                     try (ByteProvider provider = new MemoryByteProvider(program.getMemory(), block.getStart())) {
@@ -127,15 +126,11 @@ public final class VdexConstants {
                         if (VdexConstants.MAGIC.equals(magic)) {
                             return block.getStart();
                         }
-                    } catch (Exception e) {
+                    } catch (IOException e) {
                         //ignore
                     }
 				}
 			}
-		}
-		catch (IOException e) {
-			//ignore
-		}
 		return null;
 	}
 }

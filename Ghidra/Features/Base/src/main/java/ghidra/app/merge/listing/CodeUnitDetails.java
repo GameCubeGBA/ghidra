@@ -37,7 +37,7 @@ public abstract class CodeUnitDetails {
 	 * @return info about the code unit and its references.
 	 */
 	public static String getInstructionDetails(CodeUnit cu) {
-		if (cu == null || !(cu instanceof Instruction)) {
+		if (!(cu instanceof Instruction)) {
 			return "You must be on an instruction to see the details.";
 		}
 		return getCodeUnitDetails(cu) + getReferenceDetails(cu);

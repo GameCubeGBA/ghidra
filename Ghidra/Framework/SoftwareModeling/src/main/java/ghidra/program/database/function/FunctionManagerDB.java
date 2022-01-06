@@ -71,7 +71,7 @@ public class FunctionManagerDB implements FunctionManager {
 	private Predicate<Function> functionFilter = f -> {
 		if (f != null) {
 			CodeUnit codeUnitAt = program.getListing().getCodeUnitAt(f.getEntryPoint());
-            return codeUnitAt != null && codeUnitAt instanceof Instruction;
+            return codeUnitAt instanceof Instruction;
 		}
 		return false;
 	};

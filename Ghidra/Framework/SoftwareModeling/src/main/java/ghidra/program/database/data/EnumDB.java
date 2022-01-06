@@ -564,7 +564,7 @@ class EnumDB extends DataTypeDB implements Enum {
 		if (dt == this) {
 			return true;
 		}
-		if (dt == null || !(dt instanceof Enum)) {
+		if (!(dt instanceof Enum)) {
 			return false;
 		}
 

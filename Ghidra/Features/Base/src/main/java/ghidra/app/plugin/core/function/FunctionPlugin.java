@@ -357,7 +357,6 @@ public class FunctionPlugin extends Plugin implements DataService {
         // these locations don't have types
         return !(location instanceof FunctionThunkFieldLocation) &&
                 !(location instanceof FunctionCallingConventionFieldLocation) &&
-                !(location instanceof FunctionInlineFieldLocation) &&
                 !(location instanceof FunctionNameFieldLocation) &&
                 !(location instanceof FunctionNoReturnFieldLocation) &&
                 !(location instanceof FunctionInlineFieldLocation);

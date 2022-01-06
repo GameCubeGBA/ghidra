@@ -201,7 +201,7 @@ public final class ReferenceUtils {
 			TaskMonitor monitor) throws CancelledException {
 
 		// Note: none of the params can be null, but this one gets used much later, so check now
-		Objects.requireNonNull(dataType, () -> "Data Type cannot be null");
+		Objects.requireNonNull(dataType, "Data Type cannot be null");
 
 		// sanity check
 		if (fieldName != null && !(dataType instanceof Composite)) {

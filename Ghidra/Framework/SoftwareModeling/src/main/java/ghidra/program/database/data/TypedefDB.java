@@ -179,7 +179,7 @@ class TypedefDB extends DataTypeDB implements TypeDef {
 		if (obj == this) {
 			return true;
 		}
-		if (obj == null || !(obj instanceof TypeDef)) {
+		if (!(obj instanceof TypeDef)) {
 			return false;
 		}
 		TypeDef td = (TypeDef) obj;

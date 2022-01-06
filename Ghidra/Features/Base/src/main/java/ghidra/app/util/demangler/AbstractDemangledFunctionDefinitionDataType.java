@@ -323,7 +323,7 @@ public abstract class AbstractDemangledFunctionDefinitionDataType extends Demang
 		setParameters(fddt, dataTypeManager);
 
 		DataType dt = DemangledDataType.findDataType(dataTypeManager, namespace, getName());
-		if (dt == null || !(dt instanceof FunctionDefinitionDataType)) {
+		if (!(dt instanceof FunctionDefinitionDataType)) {
 			dt = fddt;
 		}
 

@@ -2839,7 +2839,7 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 				dataOffset, monitor);
 		}
 
-		if (dataLen != UNKNOWN && dataLen > 0) {
+		if (dataLen > 0) {
 
 			Structure recoveredClassDataStruct = createClassMemberDataStructure(recoveredClass,
 				classStructureDataType, dataLen, dataOffset);

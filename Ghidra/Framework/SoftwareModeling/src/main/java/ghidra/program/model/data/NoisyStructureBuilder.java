@@ -128,7 +128,7 @@ public class NoisyStructureBuilder {
 	 * @param dt is the data-type of the pointer to the field (or null)
 	 */
 	public void addReference(long offset, DataType dt) {
-		if (dt != null && dt instanceof Pointer) {
+		if (dt instanceof Pointer) {
 			dt = ((Pointer) dt).getDataType();
 			if (dt != null && dt.equals(structDT)) {
 				return;		// Don't allow structure to contain itself

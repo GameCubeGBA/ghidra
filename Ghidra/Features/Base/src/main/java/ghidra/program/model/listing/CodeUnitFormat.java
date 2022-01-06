@@ -644,7 +644,7 @@ public class CodeUnitFormat {
 
 		dt = ((Pointer) dt).getDataType();
 		dt = removeTypeDefs(dt);
-		if (dt == null || !(dt instanceof Composite) || scalarValue > dt.getLength()) {
+		if (!(dt instanceof Composite) || scalarValue > dt.getLength()) {
 			return false;
 		}
 

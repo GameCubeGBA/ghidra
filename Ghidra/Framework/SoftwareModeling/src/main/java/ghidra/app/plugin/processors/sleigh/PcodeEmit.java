@@ -554,7 +554,7 @@ public abstract class PcodeEmit {
 		// Recover operand index from build statement
 		int index = (int) bld.getInput()[0].getOffset().getReal();
 		Symbol sym = walker.getConstructor().getOperand(index).getDefiningSymbol();
-		if ((sym == null) || (!(sym instanceof SubtableSymbol))) {
+		if ((!(sym instanceof SubtableSymbol))) {
 			return;
 		}
 
@@ -715,7 +715,7 @@ public abstract class PcodeEmit {
 
 		for (int i = 0; i < numops; ++i) {
 			TripleSymbol sym = ct.getOperand(i).getDefiningSymbol();
-			if ((sym == null) || (!(sym instanceof SubtableSymbol))) {
+			if ((!(sym instanceof SubtableSymbol))) {
 				continue;
 			}
 

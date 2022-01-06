@@ -3079,7 +3079,7 @@ public class RecoveredClassHelper {
 		DataType classDataType =
 			dataTypeManager.getDataType(recoveredClass.getClassPath(), recoveredClass.getName());
 
-		if (classDataType != null && classDataType instanceof Structure) {
+		if (classDataType instanceof Structure) {
             return (Structure) classDataType;
 		}
 

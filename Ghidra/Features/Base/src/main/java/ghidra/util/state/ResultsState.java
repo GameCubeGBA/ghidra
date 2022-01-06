@@ -576,7 +576,7 @@ public class ResultsState {
 	}
 
 	private Varnode simplify(Varnode varnode, TaskMonitor monitor) throws CancelledException {
-		if (varnode == null || !(varnode instanceof VarnodeOperation)) {
+		if (!(varnode instanceof VarnodeOperation)) {
 			return varnode;
 		}
 		VarnodeOperation op = (VarnodeOperation) varnode;

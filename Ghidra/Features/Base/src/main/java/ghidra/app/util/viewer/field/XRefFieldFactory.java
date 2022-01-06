@@ -781,7 +781,7 @@ public class XRefFieldFactory extends FieldFactory {
 	@Override
 	public ProgramLocation getProgramLocation(int row, int col, ListingField listingField) {
 		Object obj = listingField.getProxy().getObject();
-		if (obj == null || !(obj instanceof CodeUnit)) {
+		if (!(obj instanceof CodeUnit)) {
 			return null;
 		}
 
@@ -832,14 +832,14 @@ public class XRefFieldFactory extends FieldFactory {
 	 * @return the address
 	 */
 	protected Address getXRefLocation(Object obj) {
-		if (obj == null || !(obj instanceof CodeUnit)) {
+		if (!(obj instanceof CodeUnit)) {
 			return null;
 		}
 		return ((CodeUnit) obj).getMinAddress();
 	}
 
 	protected Program getProgram(Object obj) {
-		if (obj == null || !(obj instanceof CodeUnit)) {
+		if (!(obj instanceof CodeUnit)) {
 			return null;
 		}
 		return ((CodeUnit) obj).getProgram();

@@ -61,7 +61,7 @@ public class DataDropOnBrowserHandler implements ProgramDropProvider {
 		    !evt.isDataFlavorSupported(DataTypeTransferable.localBuiltinDataTypeFlavor) )
 			return false;
 
-		if (contextObj != null  &&  contextObj instanceof ListingActionContext) {
+		if (contextObj instanceof ListingActionContext) {
 			ListingActionContext pl = (ListingActionContext)contextObj;
 			DataService[] services = plugin.getTool().getServices(DataService.class);
             for (DataService service : services) {

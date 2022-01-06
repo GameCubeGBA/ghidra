@@ -227,7 +227,7 @@ public class ByteViewerComponent extends FieldPanel implements FieldMouseListene
 			return;
 		}
 
-		if (field == null || !(field instanceof ByteField)) {
+		if (!(field instanceof ByteField)) {
 			ev.consume();
 			getToolkit().beep();
 			return;

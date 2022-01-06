@@ -31,7 +31,7 @@ public class UniversalID {
 		if (obj == this) {
 			return true;
 		}
-		if (obj == null || !(obj instanceof UniversalID)) {
+		if (!(obj instanceof UniversalID)) {
 			return false;
 		}
 		return ((UniversalID) obj).id == id;

@@ -77,7 +77,7 @@ public class VariableXRefFieldFactory extends XRefFieldFactory {
 	@Override
 	public ListingField getField(ProxyObj<?> proxy, int varWidth) {
 		Object obj = proxy.getObject();
-		if (!enabled || obj == null || !(obj instanceof Variable)) {
+		if (!enabled || !(obj instanceof Variable)) {
 			return null;
 		}
 

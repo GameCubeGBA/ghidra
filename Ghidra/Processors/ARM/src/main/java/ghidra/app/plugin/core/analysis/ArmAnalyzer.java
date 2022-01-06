@@ -642,7 +642,7 @@ public class ArmAnalyzer extends ConstantPropagationAnalyzer {
 		if (data != null) {
 			Object dValue = data.getValue();
 			// if the value at the location looks like a pointer, create a pointer
-			if (dValue != null && dValue instanceof Scalar) {
+			if (dValue instanceof Scalar) {
 				Scalar sValue = (Scalar) dValue;
 
 				long value = sValue.getUnsignedValue();

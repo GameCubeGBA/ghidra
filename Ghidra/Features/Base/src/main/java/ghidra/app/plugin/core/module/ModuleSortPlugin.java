@@ -270,7 +270,7 @@ public class ModuleSortPlugin extends ProgramPlugin {
 			Object activeObj = context.getContextObject();
 
 			// Only make action available for a single selected Module.
-			if (activeObj != null && activeObj instanceof ProgramNode) {
+			if (activeObj instanceof ProgramNode) {
 				ProgramNode node = (ProgramNode) activeObj;
 
                 return node.getProgram() != null && node.isModule() &&

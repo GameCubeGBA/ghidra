@@ -128,7 +128,7 @@ public class VariableXRefHeaderFieldFactory extends VariableXRefFieldFactory {
 	 *      n is the number of off-cut cross references <br><br>
 	 */
 	private String getXRefHeaderString(Object obj) {
-		if (obj == null || !(obj instanceof Variable)) {
+		if (!(obj instanceof Variable)) {
 			return null;
 		}
 		Variable var = (Variable) obj;

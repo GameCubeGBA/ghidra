@@ -277,9 +277,9 @@ public class ByteMappingScheme {
 	 * @throws IllegalArgumentException if invalid mapping scheme specified
 	 */
 	static void validateMappingScheme(int schemeDestByteCount, int schemeSrcByteCount) {
-		if (schemeDestByteCount <= 0 || schemeDestByteCount > 0x7F || schemeSrcByteCount <= 0 ||
-			schemeSrcByteCount > 0x7F ||
-			schemeDestByteCount > schemeSrcByteCount) {
+		if (schemeDestByteCount <= 0 || schemeSrcByteCount <= 0 ||
+                schemeSrcByteCount > 0x7F ||
+                schemeDestByteCount > schemeSrcByteCount) {
 			throw new IllegalArgumentException(
 				"invalid byte mapping ratio: " + schemeDestByteCount + ":" + schemeSrcByteCount);
 		}

@@ -599,13 +599,12 @@ class SearchTextDialog extends DialogComponentProvider {
 		if (textField instanceof LabelFieldLocation) {
 			labelsCB.setSelected(true);
 		}
-		if (textField instanceof FunctionNameFieldLocation ||
-			textField instanceof FunctionRepeatableCommentFieldLocation ||
-			textField instanceof FunctionSignatureFieldLocation ||
-			textField instanceof VariableCommentFieldLocation ||
-			textField instanceof VariableLocFieldLocation ||
-			textField instanceof VariableNameFieldLocation ||
-			textField instanceof VariableTypeFieldLocation) {
+		if (textField instanceof FunctionRepeatableCommentFieldLocation ||
+                textField instanceof FunctionSignatureFieldLocation ||
+                textField instanceof VariableCommentFieldLocation ||
+                textField instanceof VariableLocFieldLocation ||
+                textField instanceof VariableNameFieldLocation ||
+                textField instanceof VariableTypeFieldLocation) {
 
 			functionsCB.setSelected(true);
 		}

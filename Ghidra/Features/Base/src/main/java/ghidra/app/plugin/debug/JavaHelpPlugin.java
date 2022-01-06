@@ -106,7 +106,7 @@ public class JavaHelpPlugin extends Plugin implements FrontEndable {
 		}
 
 		HelpService help = Help.getHelpService();
-		if (help == null || !(help instanceof HelpManager)) {
+		if (!(help instanceof HelpManager)) {
 			Msg.showError(this, null, "Cannot Generate Help Report",
 				"HelpManager failed to initialize properly");
 			return;

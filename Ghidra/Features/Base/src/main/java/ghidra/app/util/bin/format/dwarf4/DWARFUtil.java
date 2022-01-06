@@ -545,8 +545,8 @@ public class DWARFUtil {
 
 		DWARFAttributeValue dwATObjectPointer =
 			paramDIEA.getParent().getAttribute(DWARFAttribute.DW_AT_object_pointer);
-		return dwATObjectPointer != null && dwATObjectPointer instanceof DWARFNumericAttribute &&
-			paramDIEA.hasOffset(((DWARFNumericAttribute) dwATObjectPointer).getUnsignedValue());
+		return dwATObjectPointer instanceof DWARFNumericAttribute &&
+                paramDIEA.hasOffset(((DWARFNumericAttribute) dwATObjectPointer).getUnsignedValue());
 	}
 
 	/**

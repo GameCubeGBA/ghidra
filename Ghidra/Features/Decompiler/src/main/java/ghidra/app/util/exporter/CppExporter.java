@@ -515,7 +515,7 @@ public class CppExporter extends Exporter {
 				TaskMonitor monitor) {
 			Address entryPoint = function.getEntryPoint();
 			CodeUnit codeUnitAt = function.getProgram().getListing().getCodeUnitAt(entryPoint);
-			if (codeUnitAt == null || !(codeUnitAt instanceof Instruction)) {
+			if (!(codeUnitAt instanceof Instruction)) {
 				return new CPPResult(entryPoint, function.getPrototypeString(false, false) + ';',
 					null);
 			}

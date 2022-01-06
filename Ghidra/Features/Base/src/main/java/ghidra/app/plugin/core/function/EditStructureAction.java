@@ -63,7 +63,7 @@ class EditStructureAction extends ListingContextAction {
 			return false;
 		}
 		DataType dt = getDataType(program, (FunctionLocation) loc);
-        return dt != null && (dt instanceof Composite) && !(dt instanceof BuiltInDataType);
+        return (dt instanceof Composite) && !(dt instanceof BuiltInDataType);
 
     }
 

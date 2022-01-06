@@ -138,18 +138,18 @@ public class DemangledDataType extends DemangledType {
 			}
 
 			if (isStruct) {
-				if (baseType == null || !(baseType instanceof Structure)) {
+				if (!(baseType instanceof Structure)) {
 					// Fill it with nonsense
 					dt = createPlaceHolderStructure(name, getNamespace());
 				}
 			}
 			else if (isUnion) {
-				if (baseType == null || !(baseType instanceof Union)) {
+				if (!(baseType instanceof Union)) {
 					dt = new UnionDataType(getDemanglerCategoryPath(name, getNamespace()), name);
 				}
 			}
 			else if (isEnum) {
-				if (baseType == null || !(baseType instanceof Enum)) {
+				if (!(baseType instanceof Enum)) {
 
 					if (enumType == null || INT.equals(enumType) || UNSIGNED_INT.equals(enumType)) {
 						// Can't tell how big an enum is, just use the size of a pointer	
@@ -177,7 +177,7 @@ public class DemangledDataType extends DemangledType {
 				}
 			}
 			else if (isClass || name.equals(STRING)) {
-				if (baseType == null || !(baseType instanceof Structure)) {
+				if (!(baseType instanceof Structure)) {
 					// try creating empty structures for unknown types instead.
 					dt = createPlaceHolderStructure(name, getNamespace());
 				}

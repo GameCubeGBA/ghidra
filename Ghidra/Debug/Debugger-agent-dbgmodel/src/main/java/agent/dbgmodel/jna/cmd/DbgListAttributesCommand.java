@@ -58,7 +58,7 @@ public class DbgListAttributesCommand extends AbstractDbgCommand<Map<String, ?>>
 				ModelObject obj = map.get(key);
 				String atKey = obj.getSearchKey();
 				Object object = existingAttributes.get(atKey);
-				if (object != null && (object instanceof DbgModelTargetObject)) {
+				if ((object instanceof DbgModelTargetObject)) {
 					proxyAttribute = (DbgModel2TargetProxy) object;
 					DelegateDbgModel2TargetObject delegate = proxyAttribute.getDelegate();
 					delegate.setModelObject(obj);

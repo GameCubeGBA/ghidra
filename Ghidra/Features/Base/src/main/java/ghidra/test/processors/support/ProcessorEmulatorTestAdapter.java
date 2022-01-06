@@ -969,14 +969,14 @@ public abstract class ProcessorEmulatorTestAdapter extends TestCase implements E
 		ResourceFile emuTestingArchive = Application.getModuleDataFile("pcodetest/EmuTesting.gdt");
 		archiveDtMgr = FileDataTypeManager.openFileArchive(emuTestingArchive, false);
 		DataType dt = archiveDtMgr.getDataType(CategoryPath.ROOT, TEST_INFO_STRUCT_NAME);
-		if (dt == null || !(dt instanceof Structure)) {
+		if (!(dt instanceof Structure)) {
 			fail(TEST_INFO_STRUCT_NAME +
 				" structure data-type not found in resource EmuTesting.gdt");
 		}
 		testInfoStruct = (Structure) dt;
 
 		dt = archiveDtMgr.getDataType(CategoryPath.ROOT, GROUP_INFO_STRUCT_NAME);
-		if (dt == null || !(dt instanceof Structure)) {
+		if (!(dt instanceof Structure)) {
 			fail(GROUP_INFO_STRUCT_NAME +
 				" structure data-type not found in resource EmuTesting.gdt");
 		}

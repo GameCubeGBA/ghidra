@@ -313,7 +313,7 @@ class FileSystemBrowserComponentProvider extends ComponentProviderAdapter
 				JTree sourceTree = (JTree) source;
 				if (gTree.isMyJTree(sourceTree)) {
 					GTreeNode nodeAtEventLocation = gTree.getNodeForLocation(x, y);
-					if (nodeAtEventLocation != null && nodeAtEventLocation instanceof FSBNode) {
+					if (nodeAtEventLocation instanceof FSBNode) {
 						list.add((FSBNode) nodeAtEventLocation);
 					}
 				}

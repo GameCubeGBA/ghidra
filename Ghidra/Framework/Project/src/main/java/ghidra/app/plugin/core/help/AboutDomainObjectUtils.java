@@ -221,7 +221,7 @@ public class AboutDomainObjectUtils {
 			StringBuilder buffy = new StringBuilder();
 			for (int i = 0; i < components.length; i++) {
 				buffy.append(((JTextComponent) components[i]).getText());
-				if (i != 0 && i % 2 != 0) {
+				if (i % 2 != 0) {
 					buffy.append('\n');
 				}
 				else {

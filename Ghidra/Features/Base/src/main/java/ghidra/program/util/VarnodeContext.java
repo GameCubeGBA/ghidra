@@ -414,7 +414,7 @@ public class VarnodeContext implements ProcessorContext {
 			// We can put references to that location, but don't trust values there even if we wrote them
 			long varnodeOffset = varnode.getOffset();
 			if (isAddr &&
-				(varnodeOffset == 0 || varnodeOffset == 0xffffffff || varnodeOffset == -1L)) {
+				(varnodeOffset == 0 || varnodeOffset == -1L)) {
 				throw notFoundExc;
 			}
 

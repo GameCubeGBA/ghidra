@@ -4,9 +4,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -34,18 +34,18 @@ import resources.ResourceManager;
 public class ObjectNode extends GTreeSlowLoadingNode {  //extends GTreeNode
 
 	static final ImageIcon ICON_POPULATED =
-		ResourceManager.loadImage("images/object-populated.png");
+			ResourceManager.loadImage("images/object-populated.png");
 	static final ImageIcon ICON_EMPTY = ResourceManager.loadImage("images/object-unpopulated.png");
 	static final ImageIcon ICON_RUNNING = ResourceManager.loadImage("images/object-running.png");
 	static final ImageIcon ICON_TERMINATED =
-		ResourceManager.loadImage("images/object-terminated.png");
+			ResourceManager.loadImage("images/object-terminated.png");
 	static final ImageIcon ICON_EVENT = ResourceManager.loadImage("images/register-marker.png");
 
 	private ObjectContainer container;
 	private String name;
 	private ObjectTree tree;
 	private Set<GTreeNode> oldChildren;
-	private boolean restructured = false;
+	private boolean restructured;
 
 	public ObjectNode(ObjectTree tree, ObjectContainer parent, ObjectContainer container) {
 		this.tree = tree;
@@ -86,18 +86,16 @@ public class ObjectNode extends GTreeSlowLoadingNode {  //extends GTreeNode
 			try {
 				CompletableFuture<ObjectContainer> cf = container.getOffspring();
 				if (cf != null) {
-					// NB: We're allowed to do this because we're guaranteed to be 
+					// NB: We're allowed to do this because we're guaranteed to be
 					//   in our own thread by the GTreeSlowLoadingNode
 					ObjectContainer oc = cf.get(60, TimeUnit.SECONDS);
 					return tree.update(oc);
 				}
-			}
-			catch (InterruptedException | ExecutionException e) {
+			} catch (InterruptedException | ExecutionException e) {
 				Msg.warn(this, e);
-			}
-			catch (TimeoutException e) {
+			} catch (TimeoutException e) {
 				Msg.showWarn(this, container.getProvider().getComponent(), "Timeout Exception",
-					"Request for children timed - out - try refreshing the node");
+						"Request for children timed - out - try refreshing the node");
 			}
 		}
 		List<GTreeNode> list = new ArrayList<>();
@@ -165,7 +163,7 @@ public class ObjectNode extends GTreeSlowLoadingNode {  //extends GTreeNode
 			Map<String, Object> rootMap = rootContainer.getAttributeMap();
 			if (rootMap.containsKey(TargetEventScope.EVENT_OBJECT_ATTRIBUTE_NAME)) {
 				TargetThread targetProcess =
-					(TargetThread) rootMap.get(TargetEventScope.EVENT_OBJECT_ATTRIBUTE_NAME);
+						(TargetThread) rootMap.get(TargetEventScope.EVENT_OBJECT_ATTRIBUTE_NAME);
 				if (container.getTargetObject().equals(targetProcess)) {
 					return ICON_EVENT;
 				}
@@ -182,7 +180,7 @@ public class ObjectNode extends GTreeSlowLoadingNode {  //extends GTreeNode
 	@Override
 	public boolean isLeaf() {
 		TargetObject to = container.getTargetObject();
-		return to != null && to instanceof DummyTargetObject;
+		return to instanceof DummyTargetObject;
 	}
 
 	public boolean isVisible() {
@@ -201,10 +199,10 @@ public class ObjectNode extends GTreeSlowLoadingNode {  //extends GTreeNode
 		if (oldChildren != null) {
 			synchronized (oldChildren) {
 				oldChildren.forEach(newChildren::remove);
-				for (GTreeNode node : oldChildren) {
+				oldChildren.forEach(node -> {
 					restructured = true;
 					tree.cleanupOldNode((ObjectNode) node);
-				}
+				});
 			}
 		}
 		oldChildren = new HashSet<>(newChildren);
@@ -216,16 +214,6 @@ public class ObjectNode extends GTreeSlowLoadingNode {  //extends GTreeNode
             List<GTreeNode> updateNodes = tree.update(container);
             if (isRestructured()) {
                 setChildren(updateNodes);
-            }
-        });
-	}
-
-	public void callModified() {
-		// NB: this has to be in its own thread
-		CompletableFuture.runAsync(() -> {
-            List<GTreeNode> updateNodes = tree.update(container);
-            for (GTreeNode n : updateNodes) {
-                n.fireNodeChanged(ObjectNode.this, n);
             }
         });
 	}

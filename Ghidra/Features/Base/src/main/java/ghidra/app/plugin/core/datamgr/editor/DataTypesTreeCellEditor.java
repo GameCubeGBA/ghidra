@@ -67,7 +67,7 @@ public class DataTypesTreeCellEditor extends DefaultTreeCellEditor {
 		// node has been changed before attempting to select it
 		SwingUtilities.invokeLater(() -> {
             Object cellEditorValue = cellEditor.getCellEditorValue();
-            if (cellEditorValue == null || !(cellEditorValue instanceof String)) {
+            if (!(cellEditorValue instanceof String)) {
                 return;
             }
 

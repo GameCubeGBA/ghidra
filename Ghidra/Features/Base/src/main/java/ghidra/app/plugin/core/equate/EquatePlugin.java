@@ -487,7 +487,7 @@ public class EquatePlugin extends Plugin {
 
 		// First make sure the data is defined - otherwise we don't know what to do with it.
 		Object val = data.getValue();
-		if (val == null || !(val instanceof Scalar)) {
+		if (!(val instanceof Scalar)) {
 			return false;
 		}
 

@@ -114,7 +114,7 @@ public class ReferenceTagProcessor extends TagProcessor {
                 break;
             case "link":
                 String rel = tagAttributes.get("rel");
-                if (rel != null && "stylesheet".equalsIgnoreCase(rel)) {
+                if ("stylesheet".equalsIgnoreCase(rel)) {
 // TODO there is at least one help module that has multiple style sheets.  I see no reason to
 //		enforce this constraint:
 //				if (hasStyleSheet) {
