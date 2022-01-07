@@ -28,6 +28,7 @@ import ghidra.program.database.DatabaseObject;
 import ghidra.program.model.address.Address;
 import ghidra.program.util.ProgramLocation;
 import ghidra.util.SystemUtilities;
+import ghidra.util.task.TaskMonitor;
 import ghidra.util.exception.CancelledException;
 
 import java.util.Collection;

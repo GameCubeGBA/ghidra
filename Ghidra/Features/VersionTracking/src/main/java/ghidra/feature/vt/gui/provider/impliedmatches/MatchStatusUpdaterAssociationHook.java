@@ -22,6 +22,7 @@ import ghidra.feature.vt.gui.util.MatchInfo;
 import ghidra.framework.model.DomainObjectChangedEvent;
 import ghidra.framework.options.Options;
 import ghidra.util.exception.CancelledException;
+import ghidra.util.task.TaskMonitor;
 
 import java.util.Collection;
 import java.util.List;

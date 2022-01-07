@@ -34,6 +34,7 @@ import ghidra.program.model.symbol.*;
 import ghidra.program.util.LabelFieldLocation;
 import ghidra.program.util.ProgramLocation;
 import ghidra.util.SystemUtilities;
+import ghidra.util.task.TaskMonitor;
 import ghidra.util.exception.*;
 
 public class LabelMarkupType extends VTMarkupType {
@@ -220,9 +221,6 @@ public class LabelMarkupType extends VTMarkupType {
 			(MultipleSymbolStringable) getCurrentDestinationValue(markupItem.getAssociation(),
 				destinationAddress);
 		boolean replaceAll = labelChoice == LabelChoices.REPLACE_ALL;
-		boolean replaceDefault =
-			(labelChoice == LabelChoices.REPLACE_DEFAULT_ONLY) && (destinationStringable == null ||
-				destinationStringable.isEmpty() || destinationStringable.containsDynamic());
 
 		if (replaceAll) {
 			LabelMarkupUtils.removeAllLabels(getDestinationProgram(association),

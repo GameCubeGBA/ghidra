@@ -33,6 +33,7 @@ import ghidra.program.model.listing.*;
 import ghidra.program.util.ProgramLocation;
 import ghidra.util.StringUtilities;
 import ghidra.util.SystemUtilities;
+import ghidra.util.task.TaskMonitor;
 import ghidra.util.exception.CancelledException;
 
 public abstract class CommentMarkupType extends VTMarkupType {
