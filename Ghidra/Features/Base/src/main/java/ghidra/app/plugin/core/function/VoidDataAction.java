@@ -16,7 +16,7 @@
  */
 package ghidra.app.plugin.core.function;
 
-import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.VoidDataType;
 
 import java.awt.event.KeyEvent;
 

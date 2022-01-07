@@ -107,7 +107,7 @@ public enum DebugModelConventions {
 		if (parent == null) {
 			return AsyncUtils.nil();
 		}
-		return findSuitable(iface, parent);
+		return suitable(iface, parent);
 	}
 
 	/**

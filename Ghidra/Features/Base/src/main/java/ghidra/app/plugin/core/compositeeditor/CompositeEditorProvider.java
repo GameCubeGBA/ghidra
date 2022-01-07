@@ -144,7 +144,7 @@ public abstract class CompositeEditorProvider extends ComponentProviderAdapter
 		return editorModel.getOriginalDataTypeName();
 	}
 
-	protected Plugin getPlugin() {
+	public Plugin getPlugin() {
 		return plugin;
 	}
 

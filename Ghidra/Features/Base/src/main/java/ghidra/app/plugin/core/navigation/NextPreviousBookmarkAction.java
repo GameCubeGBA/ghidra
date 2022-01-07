@@ -18,8 +18,7 @@ package ghidra.app.plugin.core.navigation;
 import java.awt.event.*;
 import java.util.Iterator;
 
-import javax.swing.ImageIcon;
-import javax.swing.KeyStroke;
+import javax.swing.*;
 
 import docking.ActionContext;
 import docking.action.*;

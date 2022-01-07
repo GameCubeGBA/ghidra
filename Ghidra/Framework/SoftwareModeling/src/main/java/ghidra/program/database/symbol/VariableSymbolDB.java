@@ -23,6 +23,7 @@ import ghidra.program.database.function.FunctionDB;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.OldGenericNamespaceAddress;
 import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.VoidDataType;
 import ghidra.program.model.data.Undefined;
 import ghidra.program.model.listing.*;
 import ghidra.program.model.symbol.*;
@@ -228,7 +229,7 @@ public class VariableSymbolDB extends SymbolDB {
 			return SymbolUtilities.getDefaultLocalName(getProgram(), storage, getFirstUseOffset());
 		}
 
-		// TODO: we use to check for a default name and regenerate new default name but we should
+		// TODO: we used to check for a default name and regenerate new default name but we should
 		// not need to do this if source remains at default
 
 		return super.doGetName();

@@ -209,7 +209,7 @@ class IndexField extends Field {
 		if (bytes.length != length()) {
 			throw new IllegalFieldAccessException();
 		}
-		BinaryDataBuffer buffer = new BinaryDataBuffer(bytes);
+		DataBuffer buffer = new DataBuffer(bytes);
 		try {
 			read(buffer, 0);
 		}

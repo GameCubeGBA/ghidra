@@ -66,7 +66,7 @@ public class DataBuffer implements Buffer, Externalizable {
 	 * Construct a data buffer.  A new binary buffer is created.
 	 * @param bufsize buffer size
 	 */
-	protected DataBuffer(int bufsize) {
+	public DataBuffer(int bufsize) {
 		this.data = new byte[bufsize];
 	}
 
@@ -74,7 +74,7 @@ public class DataBuffer implements Buffer, Externalizable {
 	 * Construct a data buffer.
 	 * @param data binary storage array for this buffer.
 	 */
-	protected DataBuffer(byte[] data) {
+	public DataBuffer(byte[] data) {
 		this.data = data;
 	}
 
@@ -82,14 +82,14 @@ public class DataBuffer implements Buffer, Externalizable {
 	 * Get the storage array associated with this buffer.
 	 * @return byte storage array.
 	 */
-	protected byte[] getData() {
+	public byte[] getData() {
 		return data;
 	}
 
 	/**
 	 * Get the storage array associated with this buffer.
 	 */
-	protected void setData(byte[] data) {
+	public void setData(byte[] data) {
 		this.data = data;
 	}
 
@@ -106,7 +106,7 @@ public class DataBuffer implements Buffer, Externalizable {
 	 * Set the ID associated with this buffer.
 	 * @param id buffer ID
 	 */
-	protected void setId(int id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -123,7 +123,7 @@ public class DataBuffer implements Buffer, Externalizable {
 	 * Set the dirty flag.
 	 * @param state flag state.  
 	 */
-	protected void setDirty(boolean state) {
+	public void setDirty(boolean state) {
 		dirty = state;
 	}
 
@@ -139,7 +139,7 @@ public class DataBuffer implements Buffer, Externalizable {
 	 * Set the empty flag.
 	 * @param state flag state
 	 */
-	protected void setEmpty(boolean state) {
+	public void setEmpty(boolean state) {
 		empty = state;
 	}
 

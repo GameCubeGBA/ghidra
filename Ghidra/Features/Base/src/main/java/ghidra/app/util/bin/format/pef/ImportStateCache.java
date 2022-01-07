@@ -106,7 +106,7 @@ public class ImportStateCache {
 		AddLabelCmd cmd =
 			new AddLabelCmd(address, symbolName, libraryNamespace, SourceType.IMPORTED);
 		boolean success = cmd.applyTo(program);
-		Symbol symbol = cmd.getNewSymbol();
+		Symbol symbol = cmd.getSymbol();
 		Map<String, Symbol> map = librarySymbolsMap.get(library);
 		map.put(symbolName, symbol);
 		return success;

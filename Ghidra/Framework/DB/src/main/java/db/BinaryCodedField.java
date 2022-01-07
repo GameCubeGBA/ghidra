@@ -17,6 +17,7 @@ package db;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import db.buffers.DataBuffer;
 
 import ghidra.util.exception.AssertException;
 
@@ -101,7 +102,7 @@ public class BinaryCodedField extends BinaryField {
 	 * @param value the double value
 	 */
 	public BinaryCodedField(double value) {
-		BinaryDataBuffer buffer = new BinaryDataBuffer(9);
+		DataBuffer buffer = new DataBuffer(9);
 		buffer.putByte(DATA_TYPE_OFFSET, DOUBLE);
 		buffer.putLong(DATA_OFFSET, Double.doubleToLongBits(value));
 		data = buffer.getData();
@@ -112,7 +113,7 @@ public class BinaryCodedField extends BinaryField {
 	 * @param value the float value
 	 */
 	public BinaryCodedField(float value) {
-		BinaryDataBuffer buffer = new BinaryDataBuffer(5);
+		DataBuffer buffer = new DataBuffer(5);
 		buffer.putByte(DATA_TYPE_OFFSET, FLOAT);
 		buffer.putInt(DATA_OFFSET, Float.floatToIntBits(value));
 		data = buffer.getData();
@@ -141,7 +142,7 @@ public class BinaryCodedField extends BinaryField {
 	 */
 	public BinaryCodedField(short[] values) {
 		int len = (values != null ? (2 * values.length) : 0) + 2;
-		BinaryDataBuffer buffer = new BinaryDataBuffer(len);
+		DataBuffer buffer = new DataBuffer(len);
 		buffer.putByte(DATA_TYPE_OFFSET, SHORT_ARRAY);
 		if (values != null) {
 			int offset = DATA_OFFSET;
@@ -162,7 +163,7 @@ public class BinaryCodedField extends BinaryField {
 	 */
 	public BinaryCodedField(int[] values) {
 		int len = (values != null ? (4 * values.length) : 0) + 2;
-		BinaryDataBuffer buffer = new BinaryDataBuffer(len);
+		DataBuffer buffer = new DataBuffer(len);
 		buffer.putByte(DATA_TYPE_OFFSET, INT_ARRAY);
 		if (values != null) {
 			int offset = DATA_OFFSET;
@@ -183,7 +184,7 @@ public class BinaryCodedField extends BinaryField {
 	 */
 	public BinaryCodedField(long[] values) {
 		int len = (values != null ? (8 * values.length) : 0) + 2;
-		BinaryDataBuffer buffer = new BinaryDataBuffer(len);
+		DataBuffer buffer = new DataBuffer(len);
 		buffer.putByte(DATA_TYPE_OFFSET, LONG_ARRAY);
 		if (values != null) {
 			int offset = DATA_OFFSET;
@@ -204,7 +205,7 @@ public class BinaryCodedField extends BinaryField {
 	 */
 	public BinaryCodedField(float[] values) {
 		int len = (values != null ? (4 * values.length) : 0) + 2;
-		BinaryDataBuffer buffer = new BinaryDataBuffer(len);
+		DataBuffer buffer = new DataBuffer(len);
 		buffer.putByte(DATA_TYPE_OFFSET, FLOAT_ARRAY);
 		if (values != null) {
 			int offset = DATA_OFFSET;
@@ -225,7 +226,7 @@ public class BinaryCodedField extends BinaryField {
 	 */
 	public BinaryCodedField(double[] values) {
 		int len = (values != null ? (8 * values.length) : 0) + 2;
-		BinaryDataBuffer buffer = new BinaryDataBuffer(len);
+		DataBuffer buffer = new DataBuffer(len);
 		buffer.putByte(DATA_TYPE_OFFSET, DOUBLE_ARRAY);
 		if (values != null) {
 			int offset = DATA_OFFSET;
@@ -245,7 +246,7 @@ public class BinaryCodedField extends BinaryField {
 	 * @param strings String array
 	 */
 	public BinaryCodedField(String[] strings) {
-		BinaryDataBuffer buffer = null;
+		DataBuffer buffer = null;
 		if (strings != null) {
 			int len = 2;
             for (String s : strings) {
@@ -254,7 +255,7 @@ public class BinaryCodedField extends BinaryField {
                     len += s.length();
                 }
             }
-			buffer = new BinaryDataBuffer(len);
+			buffer = new DataBuffer(len);
 			int offset = DATA_OFFSET;
 			buffer.putByte(offset++, (byte) 0);
 			try {
@@ -273,7 +274,7 @@ public class BinaryCodedField extends BinaryField {
 			}
 		}
 		else {
-			buffer = new BinaryDataBuffer(2);
+			buffer = new DataBuffer(2);
 			buffer.putByte(DATA_OFFSET, (byte) -1);
 		}
 		buffer.putByte(DATA_TYPE_OFFSET, STRING_ARRAY);
@@ -297,7 +298,7 @@ public class BinaryCodedField extends BinaryField {
 		if (DOUBLE != data[DATA_TYPE_OFFSET]) {
 			throw new IllegalFieldAccessException();
 		}
-		BinaryDataBuffer buffer = new BinaryDataBuffer(data);
+		DataBuffer buffer = new DataBuffer(data);
 		return Double.longBitsToDouble(buffer.getLong(DATA_OFFSET));
 	}
 
@@ -310,7 +311,7 @@ public class BinaryCodedField extends BinaryField {
 		if (FLOAT != data[DATA_TYPE_OFFSET]) {
 			throw new IllegalFieldAccessException();
 		}
-		BinaryDataBuffer buffer = new BinaryDataBuffer(data);
+		DataBuffer buffer = new DataBuffer(data);
 		return Float.intBitsToFloat(buffer.getInt(DATA_OFFSET));
 	}
 
@@ -344,7 +345,7 @@ public class BinaryCodedField extends BinaryField {
 			return null;
 		}
 		short[] values = new short[(data.length - 2) / 2];
-		BinaryDataBuffer buffer = new BinaryDataBuffer(data);
+		DataBuffer buffer = new DataBuffer(data);
 		int offset = DATA_OFFSET + 1;
 		for (int i = 0; i < values.length; i++) {
 			values[i] = buffer.getShort(offset);
@@ -366,7 +367,7 @@ public class BinaryCodedField extends BinaryField {
 			return null;
 		}
 		int[] values = new int[(data.length - 2) / 4];
-		BinaryDataBuffer buffer = new BinaryDataBuffer(data);
+		DataBuffer buffer = new DataBuffer(data);
 		int offset = DATA_OFFSET + 1;
 		for (int i = 0; i < values.length; i++) {
 			values[i] = buffer.getInt(offset);
@@ -388,7 +389,7 @@ public class BinaryCodedField extends BinaryField {
 			return null;
 		}
 		long[] values = new long[(data.length - 2) / 8];
-		BinaryDataBuffer buffer = new BinaryDataBuffer(data);
+		DataBuffer buffer = new DataBuffer(data);
 		int offset = DATA_OFFSET + 1;
 		for (int i = 0; i < values.length; i++) {
 			values[i] = buffer.getLong(offset);
@@ -410,7 +411,7 @@ public class BinaryCodedField extends BinaryField {
 			return null;
 		}
 		float[] values = new float[(data.length - 2) / 4];
-		BinaryDataBuffer buffer = new BinaryDataBuffer(data);
+		DataBuffer buffer = new DataBuffer(data);
 		int offset = DATA_OFFSET + 1;
 		for (int i = 0; i < values.length; i++) {
 			values[i] = Float.intBitsToFloat(buffer.getInt(offset));
@@ -432,7 +433,7 @@ public class BinaryCodedField extends BinaryField {
 			return null;
 		}
 		double[] values = new double[(data.length - 2) / 8];
-		BinaryDataBuffer buffer = new BinaryDataBuffer(data);
+		DataBuffer buffer = new DataBuffer(data);
 		int offset = DATA_OFFSET + 1;
 		for (int i = 0; i < values.length; i++) {
 			values[i] = Double.longBitsToDouble(buffer.getLong(offset));
@@ -454,7 +455,7 @@ public class BinaryCodedField extends BinaryField {
 			return null;
 		}
 		ArrayList<String> strList = new ArrayList<String>();
-		BinaryDataBuffer buffer = new BinaryDataBuffer(data);
+		DataBuffer buffer = new DataBuffer(data);
 		try {
 			int offset = DATA_OFFSET + 1;
 			while (offset < data.length) {
