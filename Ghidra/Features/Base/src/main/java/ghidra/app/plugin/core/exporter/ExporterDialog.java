@@ -507,39 +507,6 @@ public class ExporterDialog extends DialogComponentProvider implements AddressFa
 		}
 	}
 
-	private boolean tryExport(TaskMonitor monitor) {
-		Exporter exporter = getSelectedExporter();
-
-		exporter.setExporterServiceProvider(tool);
-		DomainObject dobj = getDomainObject(monitor);
-		if (dobj == null) {
-			return false;
-		}
-		ProgramSelection selection = getApplicableProgramSeletion();
-		File outputFile = getSelectedOutputFile();
-
-		try {
-			if (outputFile.exists() &&
-				OptionDialog.showOptionDialog(getComponent(), "Overwrite Existing File?",
-					"The file " + outputFile + " already exists.\nDo you want to overwrite it?",
-					"Overwrite", OptionDialog.QUESTION_MESSAGE) != OptionDialog.OPTION_ONE) {
-				return false;
-			}
-			if (options != null) {
-				exporter.setOptions(options);
-			}
-			boolean success = exporter.export(outputFile, dobj, selection, monitor);
-			displaySummaryResults(exporter, dobj);
-			return success;
-		}
-		catch (Exception e) {
-			Msg.error(this, "Exception exporting", e);
-			SystemUtilities.runSwingLater(() -> setStatusText(
-				"Exception exporting: " + e.getMessage() + ".  If null, see log for details."));
-		}
-		return false;
-	}
-
 	private ProgramSelection getApplicableProgramSeletion() {
 		if (selectionCheckBox.isSelected()) {
 			return currentSelection;
