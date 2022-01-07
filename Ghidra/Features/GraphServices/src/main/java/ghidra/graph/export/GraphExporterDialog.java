@@ -260,7 +260,6 @@ public class GraphExporterDialog extends DialogComponentProvider {
 	}
 
 	private boolean doExport() {
-
 		AtomicBoolean success = new AtomicBoolean();
 		TaskLauncher.launchModal("Exporting Graph",
 			monitor -> success.set(tryExport(monitor)));

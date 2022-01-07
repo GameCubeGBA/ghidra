@@ -233,12 +233,7 @@ public class UndefinedDBTraceData implements DBTraceDataAdapter, DBTraceSpaceKey
 	}
 
 	@Override
-	public TraceData getComponentAt(int offset) {
-		return null;
-	}
-
-	@Override
-	public Data getComponentContaining(int offset) {
+	public TraceData getComponentContaining(int offset) {
 		return null;
 	}
 

@@ -536,7 +536,7 @@ public class ResourceDataDirectory extends DataDirectory {
 
 			int offset = 0;
 			//get first structure
-			Data componentAt = data.getComponentAt(offset);
+			Data componentAt = data.getComponentContaining(offset);
 			if (componentAt.isStructure() &&
 				componentAt.getBaseDataType().getName().equals("DLGTEMPLATE")) {
 
@@ -553,7 +553,7 @@ public class ResourceDataDirectory extends DataDirectory {
 				//get three or five components after initial structure
 				for (int i = 0; i < numAfter; i++) {
 					offset += componentAt.getLength();
-					componentAt = data.getComponentAt(offset);
+					componentAt = data.getComponentContaining(offset);
 					comment.append("\n" + afterTemplate[i] + ": ");
 					if (componentAt.getBaseDataType().getName().equals("short")) {
 						comment.append(componentAt.getDefaultValueRepresentation());
@@ -579,14 +579,14 @@ public class ResourceDataDirectory extends DataDirectory {
 				comment.append("\n");
 				while (currentItem < numItems) {
 					offset += componentAt.getLength();
-					componentAt = data.getComponentAt(offset);
+					componentAt = data.getComponentContaining(offset);
 					if (componentAt.getBaseDataType().getName().equals("DLGITEMTEMPLATE")) {
 						currentItem++;
 						comment.append("\nItem " + currentItem + ": ");
 						//loop over three items after each item structure
 						for (int i = 0; i < 3; i++) {
 							offset += componentAt.getLength();
-							componentAt = data.getComponentAt(offset);
+							componentAt = data.getComponentContaining(offset);
 							comment.append("\n   " + afterItem[i] + ": ");
 							if (componentAt.getBaseDataType().getName().startsWith("short[")) {
 								//no other info
@@ -684,7 +684,7 @@ public class ResourceDataDirectory extends DataDirectory {
 					}
 
 					String menuString = fixupStringRepForDisplay(
-						data.getComponentAt(offset).getDefaultValueRepresentation());
+						data.getComponentContaining(offset).getDefaultValueRepresentation());
 					menuString = menuString.replaceAll("\"", "");
 					if (menuString.isEmpty()) {
 						comment.append("-------------------\n");

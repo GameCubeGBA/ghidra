@@ -283,12 +283,6 @@ public class PseudoData extends PseudoCodeUnit implements Data {
 		return (component == null ? null : component.getComponent(componentPath));
 	}
 
-	@Deprecated
-	@Override
-	public Data getComponentAt(int offset) {
-		return getComponentContaining(offset);
-	}
-
 	@Override
 	public Data getComponentContaining(int offset) {
 		if (offset < 0 || offset > length) {
@@ -468,7 +462,7 @@ public class PseudoData extends PseudoCodeUnit implements Data {
 		if (offset < 0 || offset >= length) {
 			return null;
 		}
-		Data dc = getComponentAt(offset);
+		Data dc = getComponentContaining(offset);
 		if (dc == null || dc == this) {
 			return this;
 		}

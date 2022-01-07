@@ -520,12 +520,6 @@ class DataDB extends CodeUnitDB implements Data {
 		}
 	}
 
-	@Deprecated
-	@Override
-	public Data getComponentAt(int offset) {
-		return getComponentContaining(offset);
-	}
-
 	@Override
 	public Data getComponentContaining(int offset) {
 		lock.acquire();

@@ -39,7 +39,7 @@ public class WrappedDbgModel
 	private HDMAUtil util;
 	private DebugClient client;
 	private HashMap<Object, String> map = new HashMap<Object, String>();
-	private boolean USE_CLIENT = false;
+	//private boolean USE_CLIENT = false;
 
 	//private boolean USE_CLIENT = true;
 
@@ -958,20 +958,6 @@ public class WrappedDbgModel
 			dv = new DebugInt64Value(bytes);
 		}
 		return dv;
-	}
-
-	private DebugValueType getDVType(ModelObject register) {
-		Object value = register.getValue();
-		if (value instanceof Short) {
-			return DebugValueType.INT16;
-		}
-		else if (value instanceof Integer) {
-			return DebugValueType.INT32;
-		}
-		else if (value instanceof Long) {
-			return DebugValueType.INT64;
-		}
-		return DebugValueType.INVALID;
 	}
 
 	@Override
