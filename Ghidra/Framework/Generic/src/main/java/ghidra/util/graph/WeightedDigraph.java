@@ -67,7 +67,6 @@ public class WeightedDigraph extends DirectedGraph {
 	{
       double degree = 0.0;
       Edge[] edges = this.incomingEdges( v );
-      int length = edges.length;
         for (Edge edge : edges) {
             try {
                 degree += weights().getValue(edge);
@@ -86,7 +85,6 @@ public class WeightedDigraph extends DirectedGraph {
 	{
       double degree = 0.0;
       Edge[] edges = this.outgoingEdges( v );
-      int length = edges.length;
         for (Edge edge : edges) {
             try {
                 degree += weights().getValue(edge);
@@ -104,7 +102,6 @@ public class WeightedDigraph extends DirectedGraph {
 	{
       double degree = 0.0;
       Edge[] edges = this.selfEdges( v );
-      int length = edges.length;
         for (Edge edge : edges) {
             try {
                 degree += weights().getValue(edge);

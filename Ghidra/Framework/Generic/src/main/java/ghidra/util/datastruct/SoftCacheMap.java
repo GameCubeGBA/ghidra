@@ -26,7 +26,6 @@ import java.util.AbstractMap.SimpleImmutableEntry;
  */
 
 public class SoftCacheMap<K, V> implements Map<K, V> {
-	private int cacheSize;
 	private LinkedHashMap<K, MySoftReference> map;
 	private ReferenceQueue<? super V> refQueue;
 
@@ -35,7 +34,6 @@ public class SoftCacheMap<K, V> implements Map<K, V> {
 	 * @param cacheSize the max number of entries to cache.
 	 */
 	public SoftCacheMap(int cacheSize) {
-		this.cacheSize = cacheSize;
 		map = new FixedSizeHashMap<>(cacheSize, cacheSize);
 		refQueue = new ReferenceQueue<>();
 	}

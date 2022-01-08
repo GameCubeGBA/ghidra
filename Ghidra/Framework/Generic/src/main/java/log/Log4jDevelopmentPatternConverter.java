@@ -41,7 +41,6 @@ public class Log4jDevelopmentPatternConverter extends LogEventPatternConverter {
 
 	// this allows us to take advantage of refactoring
 	private static final String TOOL_MESSAGE_SERVICE_CLASSNAME = Msg.class.getName();
-	private static final String TOOL_MESSAGE_SERVICE_FILENAME = Msg.class.getSimpleName() + ".java";
 	private static final String LOGGER_PACKAGE = ".logging.";
 	private static final String PRINT_STACK_TRACE_METHOD_NAME = "printStackTrace";
 

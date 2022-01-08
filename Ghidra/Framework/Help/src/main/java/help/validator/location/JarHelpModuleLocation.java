@@ -36,8 +36,6 @@ public class JarHelpModuleLocation extends HelpModuleLocation {
 	 * format of 'helpDir': 
 	 * 	jar:file:///.../ghidra-prep/Ghidra/Features/Base/build/libs/Base.jar!/help
 	 */
-	private static final Pattern JAR_FILENAME_PATTERN = Pattern.compile(".*/(\\w*)\\.jar!/.*");
-
 	private static Map<String, String> env = new HashMap<String, String>();
 	static {
 		env.put("create", "false");

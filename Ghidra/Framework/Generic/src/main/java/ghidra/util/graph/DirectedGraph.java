@@ -482,7 +482,6 @@ public class DirectedGraph {
 			DirectedGraph g = this.inducedSubgraph(nonDescendantVertices);
 			Iterator<Vertex> iter;
 			Set<Vertex>[] strongComponents = g.assignVerticesToStrongComponents();
-			int n = strongComponents.length;
             for (Set<Vertex> strongComponent : strongComponents) {
                 iter = strongComponent.iterator();
                 if (iter.hasNext()) {
@@ -698,16 +697,16 @@ public class DirectedGraph {
 	 * as the intersection but now does not.
 	 */
 	public void intersectionWith(DirectedGraph otherGraph) {
-		GraphIterator<Vertex> vi = otherGraph.vertices.iterator();
 		Vertex v;
+		GraphIterator<Vertex> vi = otherGraph.vertices.iterator();
 		while (vi.hasNext()) {
 			v = vi.next();
 			if (!this.contains(v)) {
 				vi.remove();
 			}
 		}
-		GraphIterator<Edge> ei = otherGraph.edgeIterator();
 		Edge e;
+		GraphIterator<Edge> ei = otherGraph.edgeIterator();
 		while (ei.hasNext()) {
 			e = ei.next();
 			if (!this.contains(e)) {

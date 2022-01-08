@@ -47,7 +47,6 @@ public class GhidraTOCFile {
 	}
 
 	private Path sourceTOCFile;
-	private DummyRootTOCItem rootItem;
 
 	GhidraTOCFile(Path sourceFile) {
 		sourceTOCFile = sourceFile;
@@ -84,7 +83,6 @@ public class GhidraTOCFile {
 		DummyRootTOCItem rootItem = new DummyRootTOCItem(sourceTOCFile);
 
 		buildRootNodes(parser, file, rootItem);
-		file.rootItem = rootItem;
 		return file;
 	}
 
