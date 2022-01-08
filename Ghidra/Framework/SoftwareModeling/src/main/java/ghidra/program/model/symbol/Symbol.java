@@ -109,8 +109,7 @@ public interface Symbol {
 
 	/**
 	 * Returns all memory references to the address of this symbol.  If you do not have a
-	 * {@link TaskMonitor} instance, then you can pass {@link TaskMonitorAdapter#DUMMY_MONITOR} or
-	 * {@code null}.
+	 * {@link TaskMonitor} instance, then you can pass {@code null}.
 	 *
 	 * @return all memory references to the address of this symbol.
 	 *
