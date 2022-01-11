@@ -17,7 +17,6 @@ package ghidra.app.analyzers;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import generic.jar.ResourceFile;
 import ghidra.app.cmd.function.CreateFunctionCmd;
@@ -132,17 +131,13 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 		}
 		ProgramContext programContext = program.getProgramContext();
 
-		Iterator<RegisterValue> iterator = contextValueList.iterator();
-		while (iterator.hasNext()) {
-			RegisterValue contextValue = iterator.next();
-
-			try {
-				programContext.setRegisterValue(addr, addr, contextValue);
-			}
-			catch (ContextChangeException e) {
-				// context conflicts cause problems, let already layed down context win.
-			}
-		}
+        for (RegisterValue contextValue : contextValueList) {
+            try {
+                programContext.setRegisterValue(addr, addr, contextValue);
+            } catch (ContextChangeException e) {
+                // context conflicts cause problems, let already layed down context win.
+            }
+        }
 
 		// context applied at location, throw away
 		contextValueList = null;
@@ -152,17 +147,13 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 		if (contextValueList == null) {
 			return;
 		}
-		Iterator<RegisterValue> iterator = contextValueList.iterator();
-		while (iterator.hasNext()) {
-			RegisterValue contextValue = iterator.next();
-
-			try {
-				pcont.setRegisterValue(contextValue);
-			}
-			catch (ContextChangeException e) {
-				// context conflicts cause problems, let already layed down context win.
-			}
-		}
+        for (RegisterValue contextValue : contextValueList) {
+            try {
+                pcont.setRegisterValue(contextValue);
+            } catch (ContextChangeException e) {
+                // context conflicts cause problems, let already layed down context win.
+            }
+        }
 	}
 
 	public class CodeBoundaryAction implements MatchAction {
@@ -246,9 +237,7 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 					pseudoDisassembler.setMaxInstructions(validcode);
 					isvalid = pseudoDisassembler.checkValidSubroutine(addr, pcont, true, false);
 				}
-				if (!isvalid) {
-					return false;
-				}
+                return isvalid;
 			}
 
 			return true;
@@ -369,39 +358,27 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 					if (funcAbove == null) {
 						return false;
 					}
-					if (checkAlreadyInFunctionAbove(program, addr, funcAbove)) {
-						return false;
-					}
+                    return !checkAlreadyInFunctionAbove(program, addr, funcAbove);
 				}
 				else if (name.startsWith("inst")) {
 					// make sure there is an end of function at location to check
 					Instruction instr = program.getListing().getInstructionContaining(addrToCheck);
-					if (instr == null) {
-						return false;
-					}
+                    return instr != null;
 				}
 				else if (name.startsWith("data")) {
 					// make sure there is defined data at location to check
 					Data data = program.getListing().getDefinedDataContaining(addrToCheck);
-					if (data == null) {
-						return false;
-					}
+                    return data != null;
 				}
 				else if (name.startsWith("def")) {
 					// make sure there is something at location to check
 					Instruction instr = program.getListing().getInstructionContaining(addrToCheck);
 					if (instr != null) {
-						if (checkAlreadyInFunctionAbove(program, addr)) {
-							return false;
-						}
-						return true;
-					}
+                        return !checkAlreadyInFunctionAbove(program, addr);
+                    }
 					Data data = program.getListing().getDefinedDataContaining(addrToCheck);
-					if (data != null) {
-						return true;
-					}
-					return false;
-				}
+                    return data != null;
+                }
 			}
 			return true;
 		}
@@ -430,12 +407,9 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 			if (funcAbove != null) {
 				// check if in function right above
 				Function myfunc = program.getFunctionManager().getFunctionContaining(addr);
-				if (myfunc != null && myfunc.getEntryPoint().equals(funcAbove.getEntryPoint())) {
-					return true;
-				}
+                return myfunc != null && myfunc.getEntryPoint().equals(funcAbove.getEntryPoint());
 				// I could be in a different function, just not one above
-				return false;
-			}
+            }
 
 			// no function above, but check for references, that would make this a function
 			// or references that would imply it is part of another function.
@@ -532,8 +506,7 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 				}
 			}
 			if (el.hasAttribute("label")) {
-				String name = el.getAttribute("label");
-				label = name;
+                label = el.getAttribute("label");
 			}
 			if (el.hasAttribute("thunk")) {
 				isThunk = true;
@@ -629,9 +602,8 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 	@Override
 	public boolean canAnalyze(Program program) {
 		ProgramDecisionTree patternDecisionTree = getPatternDecisionTree();
-		boolean hasPatterns = Patterns.hasPatternFiles(program, patternDecisionTree);
 
-		return hasPatterns;
+        return Patterns.hasPatternFiles(program, patternDecisionTree);
 	}
 
 	public AddressSetPropertyMap getOrCreatePotentialMatchPropertyMap(Program program) {
@@ -819,13 +791,11 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 		if (patternlist == null) {
 			return null;
 		}
-		if (patternlist.size() == 0) {
+		if (patternlist.isEmpty()) {
 			return null;
 		}
 
-		SequenceSearchState root = SequenceSearchState.buildStateMachine(patternlist);
-
-		return root;
+        return SequenceSearchState.buildStateMachine(patternlist);
 	}
 
 	private ArrayList<Pattern> readPatterns(ResourceFile[] filelist, Program program) {
@@ -848,18 +818,16 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 
 	@Override
 	public MatchAction getMatchActionByName(String nm) {
-		if (nm.equals("funcstart")) {
-			return new FunctionStartAction();
-		}
-		else if (nm.equals("possiblefuncstart")) {
-			return new PossibleFunctionStartAction();
-		}
-		else if (nm.equals("codeboundary")) {
-			return new CodeBoundaryAction();
-		}
-		else if (nm.equals("setcontext")) {
-			return new ContextAction();
-		}
+        switch (nm) {
+            case "funcstart":
+                return new FunctionStartAction();
+            case "possiblefuncstart":
+                return new PossibleFunctionStartAction();
+            case "codeboundary":
+                return new CodeBoundaryAction();
+            case "setcontext":
+                return new ContextAction();
+        }
 		return null;
 	}
 
