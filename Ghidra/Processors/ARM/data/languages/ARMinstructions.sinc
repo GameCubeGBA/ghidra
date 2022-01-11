@@ -4303,6 +4303,7 @@ ArmPCRelImmed12: reloff		is U23=0 & immed & rotate
   logicflags();
   resultflags(dest);
   build SBIT_CZNO;
+  cpsr = spsr;
   ALUWritePC(dest);
   return [pc];
 }
@@ -4884,7 +4885,7 @@ macro BitReverse_arm(val) {
   resultflags(dest);
   build SBIT_CZNO;
   ALUWritePC(dest);
-  goto [pc];
+  return [pc];
 }
 
 @if defined(VERSION_6)
