@@ -28,7 +28,7 @@ configurations {
 }
 
 dependencies {
-	jmockitAgent('org.jmockit:jmockit:1.44') {
+	jmockitAgent('org.jmockit:jmockit:1.49') {
 		exclude group: 'com.google.code.findbugs', module: 'jsr305'
 	}
 }
