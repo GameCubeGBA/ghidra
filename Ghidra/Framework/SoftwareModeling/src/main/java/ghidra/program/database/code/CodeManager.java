@@ -475,7 +475,7 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 							endAddr =
 								startAddr
 										.addNoWrap(prototype.getFallThroughOffset(
-											protoInstr.getInstructionContext()))
+											protoInstr.getInstructionContext()) - 1)
 										.previous();
 						}
 						catch (AddressOverflowException e) {
