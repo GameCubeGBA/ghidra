@@ -52,6 +52,6 @@ public class MakeFunctionsInlineVoidScript extends GhidraScript {
 
 	private void updateFunction(Function func) throws InvalidInputException {
 		func.setInline(true);
-		func.setReturnType(DataType.VOID, SourceType.USER_DEFINED);
+		func.setReturnType(VoidDataType.dataType, SourceType.USER_DEFINED);
 	}
 }
