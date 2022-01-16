@@ -484,7 +484,7 @@ public class CParser {
         if (len == 0 && dt instanceof TypeDef) {
             dt = ((TypeDef) dt).getBaseDataType();
         }
-        if (len <= 0 && !dt.isEquivalent(DataType.VOID)) {
+        if (len <= 0 && !dt.isEquivalent(VoidDataType.dataType)) {
             throw new ParseException("'"+retDT.getName()+"'" + " is not fixed length.  Function return must be fixed length data type or void.");
         }
     }

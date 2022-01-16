@@ -42,14 +42,6 @@ public interface DataType {
 	 */
 	public static final DataType DEFAULT = DefaultDataType.dataType;
 
-	/**
-	 * Instance of void datatype (never use <code>==</code>)
-	 * 
-	 * @deprecated should use {@link VoidDataType#dataType} instead
-	 */
-	@Deprecated
-	public static final DataType VOID = VoidDataType.dataType;
-
 	public final static String CONFLICT_SUFFIX = ".conflict";
 
 	public final static String TYPEDEF_ATTRIBUTE_PREFIX = "__((";
