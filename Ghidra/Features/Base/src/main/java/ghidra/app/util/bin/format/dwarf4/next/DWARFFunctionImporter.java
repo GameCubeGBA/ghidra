@@ -1155,7 +1155,7 @@ public class DWARFFunctionImporter {
 
 	private Variable buildReturnVariable(DWARFVariable dvar) throws InvalidInputException {
 		if (dvar == null) {
-			return new ReturnParameterImpl(DataType.VOID, currentProgram);
+			return new ReturnParameterImpl(VoidDataType.dataType, currentProgram);
 		}
 		VariableStorage storage;
 		Varnode[] vnarray = buildVarnodes(dvar);
