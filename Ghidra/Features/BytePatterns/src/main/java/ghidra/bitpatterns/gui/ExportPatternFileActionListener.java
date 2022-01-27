@@ -88,7 +88,7 @@ public class ExportPatternFileActionListener implements ActionListener {
 			return;
 		}
 		GhidraFileChooser gFileChooser = new GhidraFileChooser(component);
-		gFileChooser.setFileSelectionMode(GhidraFileChooser.FILES_ONLY);
+		gFileChooser.setFileSelectionMode(GhidraFileChooserMode.FILES_ONLY);
 		ExtensionFileFilter xmlFilter = new ExtensionFileFilter("xml", "XML Files");
 		gFileChooser.setFileFilter(xmlFilter);
 		String baseDir = Preferences.getProperty(XML_EXPORT_DIR_PROPERTY);

@@ -359,7 +359,7 @@ public class RestoreDialog extends DialogComponentProvider {
 			fileChooser.setCurrentDirectory(file);
 		}
 
-		fileChooser.setFileSelectionMode(GhidraFileChooser.FILES_ONLY);
+		fileChooser.setFileSelectionMode(GhidraFileChooserMode.FILES_ONLY);
 		fileChooser.setFileFilter(new ExtensionFileFilter(exampleExtension, desc));
 
 		return fileChooser;
@@ -374,7 +374,7 @@ public class RestoreDialog extends DialogComponentProvider {
 		GhidraFileChooser fileChooser = new GhidraFileChooser(null);
 		// start the browsing in the user's preferred project directory
 		File projectDirectory = new File(GenericRunInfo.getProjectsDirPath());
-		fileChooser.setFileSelectionMode(GhidraFileChooser.DIRECTORIES_ONLY);
+		fileChooser.setFileSelectionMode(GhidraFileChooserMode.DIRECTORIES_ONLY);
 		fileChooser.setCurrentDirectory(projectDirectory);
 		fileChooser.setSelectedFile(projectDirectory);
 
