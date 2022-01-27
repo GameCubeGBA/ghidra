@@ -67,7 +67,7 @@ class UnionDB extends CompositeDB implements UnionInternal {
 		catch (IOException e) {
 			dataMgr.dbError(e);
 		}
-		Collections.sort(components, ComponentComparator.INSTANCE);
+		components.sort(ComponentComparator.INSTANCE);
 		unionLength = record.getIntValue(CompositeDBAdapter.COMPOSITE_LENGTH_COL);
 		unionAlignment = record.getIntValue(CompositeDBAdapter.COMPOSITE_ALIGNMENT_COL);
 		computedAlignment = -1;

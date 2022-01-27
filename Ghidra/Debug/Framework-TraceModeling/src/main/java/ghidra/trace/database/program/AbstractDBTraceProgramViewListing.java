@@ -154,6 +154,7 @@ public abstract class AbstractDBTraceProgramViewListing implements TraceProgramV
 		return null;
 	}
 
+	@SuppressWarnings("ComparatorCombinators")
 	protected Comparator<CodeUnit> getUnitComparator(boolean forward) {
 		return forward
 				? (u1, u2) -> u1.getMinAddress().compareTo(u2.getMinAddress())

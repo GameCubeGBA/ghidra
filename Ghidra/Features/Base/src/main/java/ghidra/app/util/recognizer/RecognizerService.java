@@ -33,7 +33,7 @@ public class RecognizerService {
 		for (Recognizer Recognizer : allRecognizers) {
 			results.add(Recognizer);
 		}
-		Collections.sort(results, DESCENDING);
+		results.sort(DESCENDING);
 		return results;
 	}
 

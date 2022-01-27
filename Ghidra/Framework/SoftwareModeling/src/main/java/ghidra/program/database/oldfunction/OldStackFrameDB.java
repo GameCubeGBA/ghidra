@@ -93,7 +93,7 @@ class OldStackFrameDB implements StackFrame {
 				DBRecord varRec = adapter.getStackVariableRecord(keys[i].getLongValue());
 				variables.add(getStackVariable(varRec));
 			}
-			Collections.sort(variables, StackVariableComparator.get());
+			variables.sort(StackVariableComparator.get());
 		}
 		catch (IOException e) {
 			functionManager.dbError(e);

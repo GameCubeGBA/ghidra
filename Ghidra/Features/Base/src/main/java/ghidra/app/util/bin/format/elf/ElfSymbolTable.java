@@ -17,6 +17,7 @@ package ghidra.app.util.bin.format.elf;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -110,7 +111,7 @@ public class ElfSymbolTable implements ElfFileSection, ByteArrayConverter {
 
 		// sort the entries by the index in the string table, so don't jump around reading
 		List<ElfSymbol> sortedList = symbolList.stream().sorted(
-			(o1, o2) -> Integer.compare(o1.getName(), o2.getName())).collect(Collectors.toList());
+                Comparator.comparingInt(ElfSymbol::getName)).collect(Collectors.toList());
 
 		// initialize the Symbol string names from string table
 		for (ElfSymbol sym : sortedList) {

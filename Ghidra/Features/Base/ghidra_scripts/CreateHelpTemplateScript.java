@@ -112,7 +112,7 @@ public class CreateHelpTemplateScript extends GhidraScript {
 				return 0;
 			}
 		};
-		Collections.sort(list, comparator);
+		list.sort(comparator);
 		return list;
 	}
 
@@ -127,7 +127,7 @@ public class CreateHelpTemplateScript extends GhidraScript {
 			}
 		};
 
-		Collections.sort(list, comparator);
+		list.sort(comparator);
 		return list;
 	}
 

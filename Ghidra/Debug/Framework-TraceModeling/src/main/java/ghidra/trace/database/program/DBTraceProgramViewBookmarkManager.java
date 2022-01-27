@@ -319,7 +319,7 @@ public class DBTraceProgramViewBookmarkManager implements TraceProgramViewBookma
 
 	protected Comparator<Bookmark> getBookmarkComparator(boolean forward) {
 		return forward
-				? (b1, b2) -> b1.getAddress().compareTo(b2.getAddress())
+				? Comparator.comparing(Bookmark::getAddress)
 				: (b1, b2) -> -b1.getAddress().compareTo(b2.getAddress());
 	}
 

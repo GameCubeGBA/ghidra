@@ -86,7 +86,7 @@ public abstract class SymbolCategoryNode extends SymbolTreeNode {
 				list.add(SymbolNode.createNode(s, program));
 			}
 		}
-		Collections.sort(list, getChildrenComparator());
+		list.sort(getChildrenComparator());
 		return list;
 	}
 

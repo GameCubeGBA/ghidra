@@ -410,7 +410,7 @@ public class FieldFormatModel {
 
 	public FieldFactory[] getAllFactories() {
 		List<FieldFactory> arrayBackedList = new ArrayList<>(Arrays.asList(factories));
-		Collections.sort(arrayBackedList, COMPARATOR);
+		arrayBackedList.sort(COMPARATOR);
 		return arrayBackedList.toArray(new FieldFactory[factories.length]);  // new array
 	}
 

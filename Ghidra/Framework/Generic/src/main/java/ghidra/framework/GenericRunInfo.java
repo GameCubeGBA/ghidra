@@ -74,7 +74,7 @@ public class GenericRunInfo {
 			return (modify1 < modify2) ? 1 : -1;
 		};
 
-		Collections.sort(appDirs, modifyTimeComparator);
+		appDirs.sort(modifyTimeComparator);
 		return appDirs;
 	}
 

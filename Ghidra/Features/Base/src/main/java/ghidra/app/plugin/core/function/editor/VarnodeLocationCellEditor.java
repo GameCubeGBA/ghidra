@@ -177,7 +177,7 @@ class VarnodeLocationCellEditor extends AbstractCellEditor implements TableCellE
 
         validItems.removeIf(register -> register.isProcessorContext() || register.isHidden());
 
-		Collections.sort(validItems, registerWrapperComparator);
+		validItems.sort(registerWrapperComparator);
 		Register[] registers = validItems.toArray(new Register[validItems.size()]);
 
 		combo = new GhidraComboBox<>(registers);

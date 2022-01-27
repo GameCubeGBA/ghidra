@@ -235,6 +235,7 @@ public abstract class AbstractDBTraceProgramViewReferenceManager implements Refe
 		return new ReferenceIteratorAdapter(result.iterator());
 	}
 
+	@SuppressWarnings("ComparatorCombinators")
 	protected Comparator<Reference> getReferenceFromComparator(boolean forward) {
 		return forward
 				? (r1, r2) -> r1.getFromAddress().compareTo(r2.getFromAddress())

@@ -2193,7 +2193,7 @@ public class RecoveredClassHelper {
 		}
 
 		// reverse sort
-		Collections.sort(referencesToVftables, Collections.reverseOrder());
+		referencesToVftables.sort(Collections.reverseOrder());
 
 		int numRefs = referencesToVftables.size();
 		Address lastRef = referencesToVftables.get(numRefs - 1);

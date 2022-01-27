@@ -49,7 +49,7 @@ public class DefaultDropDownSelectionDataModel<T> implements DropDownTextFieldDa
 		this.descriptionConverter =
 			descriptionConverter != null ? descriptionConverter : searchConverter;
 		this.comparator = new ObjectStringComparator();
-		Collections.sort(data, comparator);
+		data.sort(comparator);
 	}
 
 	@Override

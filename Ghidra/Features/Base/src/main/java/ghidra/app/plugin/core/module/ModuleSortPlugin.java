@@ -120,7 +120,7 @@ public class ModuleSortPlugin extends ProgramPlugin {
 			monitor.incrementProgress(1);
 		}
 
-		Collections.sort(list, comparator);
+		list.sort(comparator);
 
 		monitor.initialize(list.size());
 		for (int i = 0; i < list.size(); i++) {

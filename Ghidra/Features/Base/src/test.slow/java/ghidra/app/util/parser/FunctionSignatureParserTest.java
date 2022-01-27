@@ -60,7 +60,7 @@ public class FunctionSignatureParserTest extends AbstractGhidraHeadedIntegration
 				// with Tool-based service.
 				dtList = new ArrayList<>(super.getSortedDataTypeList());
 				program.getDataTypeManager().getAllDataTypes(dtList);
-				Collections.sort(dtList, new NameComparator());
+				dtList.sort(new NameComparator());
 				return dtList;
 			}
 

@@ -1973,7 +1973,7 @@ public class GhidraFileChooser extends DialogComponentProvider
 
 			File[] files = fileChooserModel.getListing(directory, GhidraFileChooser.this);
 			loadedFiles = Arrays.asList(files);
-			Collections.sort(loadedFiles, new FileComparator(fileChooserModel));
+			loadedFiles.sort(new FileComparator(fileChooserModel));
 		}
 
 		@Override

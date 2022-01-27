@@ -286,7 +286,7 @@ public class DyldCacheProgramBuilder extends MachoProgramBuilder {
 		// easier
 		monitor.setMessage("Parsing DYLIB's...");
 		TreeSet<DyldCacheMachoInfo> infoSet =
-			new TreeSet<>((a, b) -> a.headerAddr.compareTo(b.headerAddr));
+			new TreeSet<>(Comparator.comparing(a -> a.headerAddr));
 		List<DyldCacheImage> mappedImages = dyldCacheHeader.getMappedImages();
 		monitor.initialize(mappedImages.size());
 		for (DyldCacheImage mappedImage : mappedImages) {

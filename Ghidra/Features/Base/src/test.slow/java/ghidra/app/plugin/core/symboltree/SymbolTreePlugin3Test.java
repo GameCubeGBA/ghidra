@@ -277,7 +277,7 @@ public class SymbolTreePlugin3Test extends AbstractGhidraHeadedIntegrationTest {
 			program.endTransaction(transactionID, true);
 		}
 
-		Collections.sort(list, util.getSymbolComparator());
+		list.sort(util.getSymbolComparator());
 
 		program.flushEvents();
 		waitForPostedSwingRunnables();

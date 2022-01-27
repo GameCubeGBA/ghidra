@@ -65,7 +65,7 @@ public class VTProgramTableCorrelatorModel extends AbstractGTableModel<VTProgram
 
 		List<VTProgramCorrelatorFactory> list = new ArrayList<>(instances);
 
-		Collections.sort(instances, comparator);
+		instances.sort(comparator);
 
 		return list;
 	}

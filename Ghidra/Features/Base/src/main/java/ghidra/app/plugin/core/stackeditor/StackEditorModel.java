@@ -936,7 +936,7 @@ public class StackEditorModel extends CompositeEditorModel {
 
 			Variable[] newVars = edited.getStackVariables();
 			List<Variable> newVarsList = Arrays.asList(newVars);
-			Collections.sort(newVarsList, StackVariableComparator.get()); // sort for use with getVariableContaining
+			newVarsList.sort(StackVariableComparator.get()); // sort for use with getVariableContaining
 
 			original.setLocalSize(edited.getLocalSize());
 			original.setReturnAddressOffset(edited.getReturnAddressOffset());

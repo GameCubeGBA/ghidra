@@ -89,7 +89,7 @@ public abstract class FSBNode extends GTreeSlowLoadingNode {
 	 */
 	public static List<GTreeNode> createNodesFromFileList(List<GFile> files, TaskMonitor monitor) {
 		files = new ArrayList<>(files);
-		Collections.sort(files, FSUtilities.GFILE_NAME_TYPE_COMPARATOR);
+		files.sort(FSUtilities.GFILE_NAME_TYPE_COMPARATOR);
 
 		List<GTreeNode> nodes = new ArrayList<>(files.size());
 		for (GFile child : files) {
