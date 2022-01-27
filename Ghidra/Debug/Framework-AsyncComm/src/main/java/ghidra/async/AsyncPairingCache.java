@@ -177,6 +177,7 @@ public abstract class AsyncPairingCache<K, V> {
 	 * 
 	 * @param exc the exception for completing the requests
 	 */
+	@SuppressWarnings("CollectionAddAllCanBeReplacedWithConstructor")
 	public void flush(Throwable exc) {
 		Set<CompletableFuture<V>> copy = new HashSet<>();
 		synchronized (this) {

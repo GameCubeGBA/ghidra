@@ -32,12 +32,10 @@ public class DiscoverableFGLayoutFinder implements FGLayoutFinder {
 	@Override
 	public List<FGLayoutProvider> findLayouts() {
 
-		List<FGLayoutProvider> list = new ArrayList<>();
-
-		// add discovered layouts
+        // add discovered layouts
 		List<FGLayoutProvider> instances =
 			ClassSearcher.getInstances(FGLayoutProvider.class);
-		list.addAll(instances);
+        List<FGLayoutProvider> list = new ArrayList<>(instances);
 
 		// add hand-picked, generated layout providers
 		List<String> jgtLayoutNames = JgtLayoutFactory.getSupportedLayoutNames();

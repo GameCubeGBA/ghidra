@@ -234,9 +234,8 @@ public class DBTraceFunctionSymbol extends DBTraceNamespaceSymbol
 		if (!foundBadVariables) {
 			return;
 		}
-		List<AbstractDBTraceVariableSymbol> badns = new ArrayList<>();
-		badns.addAll(Collections2.filter(manager.allLocals.getChildren(this),
-			DBTraceFunctionSymbol::isBadVariable));
+        List<AbstractDBTraceVariableSymbol> badns = new ArrayList<>(Collections2.filter(manager.allLocals.getChildren(this),
+                DBTraceFunctionSymbol::isBadVariable));
 		if (badns.isEmpty()) {
 			return;
 		}

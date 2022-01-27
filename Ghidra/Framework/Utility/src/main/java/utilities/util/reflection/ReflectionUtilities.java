@@ -637,8 +637,7 @@ public class ReflectionUtilities {
 
 			Class<?> clazz = (Class<?>) type;
 			Type[] interfaceTypes = clazz.getGenericInterfaces();
-			Set<Type> toCheck = new HashSet<>();
-			toCheck.addAll(Arrays.asList(interfaceTypes));
+            Set<Type> toCheck = new HashSet<>(Arrays.asList(interfaceTypes));
 
 			Type parentType = clazz.getGenericSuperclass();
 			toCheck.add(parentType);
@@ -666,8 +665,7 @@ public class ReflectionUtilities {
 		}
 
 		Type[] interfaceTypes = rawType.getGenericInterfaces();
-		Set<Type> toCheck = new HashSet<>();
-		toCheck.addAll(Arrays.asList(interfaceTypes));
+        Set<Type> toCheck = new HashSet<>(Arrays.asList(interfaceTypes));
 
 		Type parentType = rawType.getGenericSuperclass();
 		toCheck.add(parentType);

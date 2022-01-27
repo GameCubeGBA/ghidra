@@ -437,6 +437,7 @@ public class DebuggerModelServicePlugin extends Plugin
 		setModelFactories(newFactories);
 	}
 
+	@SuppressWarnings("CollectionAddAllCanBeReplacedWithConstructor")
 	@Internal
 	@Override
 	public synchronized void setModelFactories(Collection<DebuggerModelFactory> newFactories) {

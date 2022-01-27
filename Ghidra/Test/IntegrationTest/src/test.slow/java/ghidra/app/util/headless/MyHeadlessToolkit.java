@@ -162,12 +162,6 @@ public class MyHeadlessToolkit extends Toolkit {
 	}
 
 	private void getRealToolkit() {
-		try {
-            // We disable the JIT during toolkit initialization.  This
-            // tends to touch lots of classes that aren't needed again
-            // later and therefore JITing is counter-productiive.
-            java.lang.Compiler.disable();
-            
 			Class<?> cls = null;
             try {
             	try {
@@ -186,10 +180,5 @@ public class MyHeadlessToolkit extends Toolkit {
             } catch (IllegalAccessException e) {
                 throw new AWTError("Could not access Toolkit: " + preferredToolkit);
             }
-            
-        } finally {
-            // Make sure to always re-enable the JIT.
-            java.lang.Compiler.enable();
-        }
 	}
 }

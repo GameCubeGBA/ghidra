@@ -691,9 +691,8 @@ public class VisualGraphPathHighlighter<V extends VisualVertex, E extends Visual
 
 		Set<E> flowEdges = cache.get(v);
 		if (flowEdges == null) {
-			flowEdges = new HashSet<>();
-			Set<E> pathsToVertex = GraphAlgorithms.getEdgesFrom(graph, v, isForward);
-			flowEdges.addAll(pathsToVertex);
+            Set<E> pathsToVertex = GraphAlgorithms.getEdgesFrom(graph, v, isForward);
+			flowEdges = new HashSet<>(pathsToVertex);
 			cache.put(v, flowEdges);
 		}
 		return Collections.unmodifiableSet(flowEdges);

@@ -185,8 +185,7 @@ public class AggressiveInstructionFinderAnalyzer extends AbstractAnalyzer {
 		monitor.initialize(startAddressCount);
 
 		Collection<RegisterValue> contextStarts = funcStartContext.values();
-		HashSet<RegisterValue> contextSet = new HashSet<>();
-		contextSet.addAll(contextStarts);
+		HashSet<RegisterValue> contextSet = new HashSet<>(contextStarts);
 
 		// get an instruction iterator
 		long count = 0;

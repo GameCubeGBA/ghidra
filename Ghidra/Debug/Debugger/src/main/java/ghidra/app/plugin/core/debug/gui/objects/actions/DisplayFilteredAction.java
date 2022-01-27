@@ -63,8 +63,7 @@ public abstract class DisplayFilteredAction extends DockingAction {
 			}
 
 			lastCmd = dialog.getValueAsString();
-			List<String> path = new ArrayList<>();
-			path.addAll(container.getTargetObject().getPath());
+            List<String> path = new ArrayList<>(container.getTargetObject().getPath());
 			path.add(lastCmd);
 
 			doAction(container, path);
