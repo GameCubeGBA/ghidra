@@ -686,16 +686,8 @@ public class FunctionComparisonPanel extends JPanel implements ChangeListener {
 			}
 
 			// Now go back through the panels and remove those that another one wants to supersede.
-			Iterator<CodeComparisonPanel<? extends FieldPanelCoordinator>> iterator =
-				codeComparisonPanels.iterator();
-			while (iterator.hasNext()) {
-				CodeComparisonPanel<? extends FieldPanelCoordinator> codeComparisonPanel =
-					iterator.next();
-				if (classesOfPanelsToSupersede.contains(codeComparisonPanel.getClass())) {
-					// Remove the superseded panel.
-					iterator.remove();
-				}
-			}
+			// Remove the superseded panel.
+			codeComparisonPanels.removeIf(codeComparisonPanel -> classesOfPanelsToSupersede.contains(codeComparisonPanel.getClass()));
 
 			codeComparisonPanels.sort((p1, p2) -> p1.getTitle().compareTo(p2.getTitle()));
 		}

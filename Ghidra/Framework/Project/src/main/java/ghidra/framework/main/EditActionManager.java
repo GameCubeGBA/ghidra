@@ -24,6 +24,7 @@ import docking.action.MenuData;
 import docking.tool.ToolConstants;
 import docking.widgets.OptionDialog;
 import docking.widgets.filechooser.GhidraFileChooser;
+import docking.widgets.filechooser.GhidraFileChooserMode;
 import ghidra.net.ApplicationKeyManagerFactory;
 import ghidra.util.HelpLocation;
 import ghidra.util.Msg;

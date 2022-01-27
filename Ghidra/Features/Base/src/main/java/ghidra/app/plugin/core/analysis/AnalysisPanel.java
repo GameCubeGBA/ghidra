@@ -643,13 +643,7 @@ class AnalysisPanel extends JPanel implements PropertyChangeListener {
 
 	private List<String> getOptionNames(Options optionsGroup) {
 		List<String> subOptions = optionsGroup.getLeafOptionNames();
-		Iterator<String> it = subOptions.iterator();
-		while (it.hasNext()) {
-			String next = it.next();
-			if (!isEditable(optionsGroup, next)) {
-				it.remove();
-			}
-		}
+		subOptions.removeIf(next -> !isEditable(optionsGroup, next));
 		return subOptions;
 	}
 
