@@ -43,7 +43,7 @@ class ConsistencyChecker {
 	private VectorSTL<SubtableSymbol> postorder = new VectorSTL<>();
 
 	// Sizes associated with tables
-	private MapSTL<SubtableSymbol, Integer> sizemap = new MapSTL<>(Comparator.naturalOrder());
+	private MapSTL<SubtableSymbol, Integer> sizemap = new MapSTL<>((s1, s2) -> s1.compareTo(s2));
 
 	private OperandSymbol getOperandSymbol(int slot, OpTpl op, Constructor ct) {
 		VarnodeTpl vn;

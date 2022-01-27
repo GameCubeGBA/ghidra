@@ -30,6 +30,7 @@ import docking.framework.DockingApplicationConfiguration;
 import docking.framework.DockingApplicationLayout;
 import docking.widgets.combobox.GComboBox;
 import docking.widgets.filechooser.GhidraFileChooser;
+import docking.widgets.filechooser.GhidraFileChooserMode;
 import docking.widgets.label.GDLabel;
 import docking.widgets.label.GLabel;
 import ghidra.app.plugin.debug.dbtable.DbLargeTableModel;
@@ -39,7 +40,7 @@ import ghidra.framework.store.db.PackedDatabase;
 import ghidra.util.Msg;
 import ghidra.util.filechooser.ExtensionFileFilter;
 import ghidra.util.layout.PairLayout;
-import ghidra.util.task.TaskMonitorAdapter;
+import ghidra.util.task.TaskMonitor;
 import utility.application.ApplicationLayout;
 
 /**

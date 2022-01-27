@@ -28,6 +28,7 @@ import docking.action.DockingAction;
 import docking.action.MenuData;
 import docking.tool.ToolConstants;
 import docking.widgets.filechooser.GhidraFileChooser;
+import docking.widgets.filechooser.GhidraFileChooserMode;
 import docking.widgets.label.GLabel;
 import ghidra.bitpatterns.info.*;
 import ghidra.framework.options.OptionsChangeListener;
