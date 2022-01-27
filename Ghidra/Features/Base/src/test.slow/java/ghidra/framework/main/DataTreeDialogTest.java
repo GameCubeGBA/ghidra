@@ -60,10 +60,10 @@ public class DataTreeDialogTest extends AbstractGhidraHeadedIntegrationTest {
 
 		ProgramBuilder builder = new ProgramBuilder("notepad", ProgramBuilder._TOY_BE);
 		Program p = builder.getProgram();
-		rootFolder.createFile("notepad", p, TaskMonitorAdapter.DUMMY_MONITOR);
-		rootFolder.createFile("XNotepad", p, TaskMonitorAdapter.DUMMY_MONITOR);
+		rootFolder.createFile("notepad", p, TaskMonitor.DUMMY);
+		rootFolder.createFile("XNotepad", p, TaskMonitor.DUMMY);
 		for (String name : names) {
-			rootFolder.createFile(name, p, TaskMonitorAdapter.DUMMY_MONITOR);
+			rootFolder.createFile(name, p, TaskMonitor.DUMMY);
 		}
 		builder.dispose();
 

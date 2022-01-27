@@ -80,7 +80,7 @@ public class UpgradeTestProgramScript extends GhidraScript {
 	private boolean upgradeProgramArchive(File gzf) throws IOException, CancelledException,
 			VersionException {
 
-		PackedDatabase db = PackedDatabase.getPackedDatabase(gzf, TaskMonitorAdapter.DUMMY_MONITOR);
+		PackedDatabase db = PackedDatabase.getPackedDatabase(gzf, TaskMonitor.DUMMY);
 		DBHandle dbh = null;
 		ProgramDB p = null;
 		try {

@@ -276,7 +276,7 @@ public class NTHeader implements StructConverter, OffsetValidator {
 		}
 
 		if (advancedProcess) {
-			optionalHeader.processDataDirectories(TaskMonitorAdapter.DUMMY_MONITOR);
+			optionalHeader.processDataDirectories(TaskMonitor.DUMMY);
 		}
 	}
 

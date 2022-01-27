@@ -567,7 +567,7 @@ public class DecompileCallback {
 		Namespace curspace = namespace;
 		long curId = namespace.getID();
 		while (curId != stopId && curId != 0 && !HighFunction.collapseToGlobal(curspace)) {
-			pathSize += 1;
+			pathSize ++;
 			curspace = curspace.getParentNamespace();
 			curId = curspace.getID();
 		}
@@ -1122,7 +1122,7 @@ public class DecompileCallback {
 	 * So now we assume that biggest hole we can find is just 1 byte
 	 * 
 	 * @param addr = Address around which to find region
-	 * @return String <hole> tag
+	 * @return String hole
 	 */
 	private String buildHole(Address addr) {
 //		AddressSpace addrspace = addr.getAddressSpace();

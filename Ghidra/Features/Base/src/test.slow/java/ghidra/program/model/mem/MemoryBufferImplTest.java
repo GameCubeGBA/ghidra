@@ -194,7 +194,7 @@ public class MemoryBufferImplTest extends AbstractGhidraHeadedIntegrationTest {
 		int id = program.startTransaction("add block");
 		try {
 			program.getMemory().createInitializedBlock(".test", start, is, 0x30000,
-				TaskMonitorAdapter.DUMMY_MONITOR, false);
+				TaskMonitor.DUMMY, false);
 		}
 		finally {
 			program.endTransaction(id, true);

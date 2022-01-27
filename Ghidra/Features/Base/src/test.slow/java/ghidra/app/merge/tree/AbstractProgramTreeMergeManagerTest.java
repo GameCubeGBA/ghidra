@@ -52,7 +52,7 @@ public abstract class AbstractProgramTreeMergeManagerTest extends AbstractMergeT
 		if (option >= 0) {
 			programTreeMergeManager.setConflictResolution(option);
 		}
-		programTreeMergeManager.merge(TaskMonitorAdapter.DUMMY_MONITOR);
+		programTreeMergeManager.merge(TaskMonitor.DUMMY);
 	}
 
 	protected void merge() throws Exception {
