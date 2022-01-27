@@ -59,7 +59,7 @@ public class ImportPatternFileActionListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		GhidraFileChooser fileChooser = new GhidraFileChooser(component);
 
-		fileChooser.setFileSelectionMode(GhidraFileChooser.FILES_ONLY);
+		fileChooser.setFileSelectionMode(GhidraFileChooserMode.FILES_ONLY);
 		fileChooser.setTitle("Select Pattern File");
 		String baseDir = Preferences.getProperty(XML_IMPORT_DIR_PROPERTY);
 		if (baseDir != null) {

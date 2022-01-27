@@ -257,7 +257,7 @@ public class ArchiveDialog extends DialogComponentProvider {
 
 		GhidraFileChooser fileChooser = new GhidraFileChooser(getComponent());
 
-		fileChooser.setFileSelectionMode(GhidraFileChooser.FILES_ONLY);
+		fileChooser.setFileSelectionMode(GhidraFileChooserMode.FILES_ONLY);
 		fileChooser.setFileFilter(new GhidraFileFilter() {
 			@Override
 			public boolean accept(File file, GhidraFileChooserModel model) {
