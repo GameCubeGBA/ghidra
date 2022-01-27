@@ -431,7 +431,7 @@ public class FileHeader implements StructConverter {
 		long oldIndex = reader.getPointerIndex();
 
 		int tmpIndex = getPointerToSymbolTable();
-		if (!ntHeader.checkRVA(tmpIndex)) {
+		if (tmpIndex == 0 || !ntHeader.checkRVA(tmpIndex)) {
 			Msg.error(this, "Invalid file index " + Integer.toHexString(tmpIndex));
 			return;
 		}
