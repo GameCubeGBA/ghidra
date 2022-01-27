@@ -54,7 +54,7 @@ public class FunctionManagerTest extends AbstractGhidraHeadedIntegrationTest {
 		transactionID = program.startTransaction("Test");
 		program.getMemory()
 				.createInitializedBlock("temp", addr(0), 10000, (byte) 0,
-					TaskMonitorAdapter.DUMMY_MONITOR, false);
+					TaskMonitor.DUMMY, false);
 	}
 
 	@After

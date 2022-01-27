@@ -60,7 +60,7 @@ public class BitMappedMemoryBlockTest extends AbstractGhidraHeadedIntegrationTes
 		transactionID = program.startTransaction("Test");
 
 		block = memory.createInitializedBlock("BYTE_BLOCK", byteSpace.getAddress(0), bytes.length,
-			(byte) 0, TaskMonitorAdapter.DUMMY_MONITOR, false);
+			(byte) 0, TaskMonitor.DUMMY, false);
 		memory.setBytes(block.getStart(), bytes);
 	}
 

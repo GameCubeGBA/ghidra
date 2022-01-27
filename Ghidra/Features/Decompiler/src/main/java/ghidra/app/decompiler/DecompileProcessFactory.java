@@ -33,8 +33,7 @@ public class DecompileProcessFactory {
 
 	public synchronized static DecompileProcess get() {
 		getExePath();
-		DecompileProcess currentProcess = new DecompileProcess(exepath);
-		return currentProcess;
+		return new DecompileProcess(exepath);
 	}
 
 	public synchronized static void release(DecompileProcess dp) {

@@ -91,7 +91,7 @@ public class IntPropertyMapDBTest extends AbstractGhidraHeadedIntegrationTest im
 
 	private void createPropertyMap(String name) throws Exception {
 		propertyMap = new IntPropertyMapDB(db, DBConstants.CREATE, this, null, addrMap, name,
-			TaskMonitorAdapter.DUMMY_MONITOR);
+			TaskMonitor.DUMMY);
 		propertyMap.setCacheSize(2);
 	}
 

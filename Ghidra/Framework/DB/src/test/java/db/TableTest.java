@@ -334,7 +334,7 @@ public class TableTest extends AbstractGenericTest {
 
 		verifyRangeDoesNotExist(startKey, endKey);
 		verifyRecordsBeforeAndAfterExist(startKey, endKey);
-		assertTrue(table.isConsistent(TaskMonitorAdapter.DUMMY_MONITOR));
+		assertTrue(table.isConsistent(TaskMonitor.DUMMY));
 	}
 
 	private void verifyRangeDoesNotExist(int startKey, int endKey) throws IOException {

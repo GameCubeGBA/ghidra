@@ -71,7 +71,7 @@ public class DisassemblerTest extends AbstractGhidraHeadlessIntegrationTest {
 		programBuilder.createMemory(".text2", "0x3e0", 0x800).setExecute(true);// initialized
 
 		listing = program.getListing();
-		disassembler = new Disassembler(program, TaskMonitorAdapter.DUMMY_MONITOR, null);
+		disassembler = new Disassembler(program, TaskMonitor.DUMMY, null);
 	}
 
 	@After

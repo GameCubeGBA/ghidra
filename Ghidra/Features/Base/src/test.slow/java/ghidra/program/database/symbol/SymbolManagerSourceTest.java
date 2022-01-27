@@ -52,7 +52,7 @@ public class SymbolManagerSourceTest extends AbstractGhidraHeadedIntegrationTest
 		Memory memory = program.getMemory();
 		transactionID = program.startTransaction("Test");
 		memory.createInitializedBlock("test", addr(0), 5000, (byte) 0,
-			TaskMonitorAdapter.DUMMY_MONITOR, false);
+			TaskMonitor.DUMMY, false);
 		st = program.getSymbolTable();
 		refMgr = program.getReferenceManager();
 	}
