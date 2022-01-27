@@ -454,13 +454,7 @@ public class ToolTaskManager implements Runnable {
 	 * @param obj domain object
 	 */
 	public synchronized void clearTasks(UndoableDomainObject obj) {
-		Iterator<BackgroundCommandTask> iter = tasks.iterator();
-		while (iter.hasNext()) {
-			BackgroundCommandTask task = iter.next();
-			if (task.getDomainObject() == obj) {
-				iter.remove();
-			}
-		}
+        tasks.removeIf(task -> task.getDomainObject() == obj);
 	}
 
 	/**

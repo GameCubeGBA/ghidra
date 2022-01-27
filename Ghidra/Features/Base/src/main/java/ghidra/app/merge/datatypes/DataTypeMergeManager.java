@@ -1084,13 +1084,7 @@ public class DataTypeMergeManager implements MergeResolver {
 		if (!fixUpIDSet.remove(sourceDtID)) {
 			return;
 		}
-		Iterator<FixUpInfo> iter = fixUpList.iterator();
-		while (iter.hasNext()) {
-			FixUpInfo info = iter.next();
-			if (info.id == sourceDtID) {
-				iter.remove();
-			}
-		}
+		fixUpList.removeIf(info -> info.id == sourceDtID);
 	}
 
 	private void updateStructure(long sourceDtID, Structure sourceDt, Structure destStruct,
