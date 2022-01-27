@@ -100,15 +100,6 @@ public enum DebugModelConventions {
 		return iface.cast(seed.getModel().getModelObject(path));
 	}
 
-	private static <T extends TargetObject> CompletableFuture<T> findParentSuitable(Class<T> iface,
-			TargetObject obj) {
-		TargetObject parent = obj.getParent();
-		if (parent == null) {
-			return AsyncUtils.nil();
-		}
-		return findSuitable(iface, parent);
-	}
-
 	/**
 	 * Search for an object implementing the given interface among itself and its attributes.
 	 * 
