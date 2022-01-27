@@ -361,6 +361,7 @@ public class AsyncReference<T, C> {
 	 * 
 	 * @param reason the reason for disposal
 	 */
+	@SuppressWarnings("CollectionAddAllCanBeReplacedWithConstructor")
 	public void dispose(Throwable reason) {
 		List<CompletableFuture<?>> toExcept = new ArrayList<>();
 		synchronized (this) {

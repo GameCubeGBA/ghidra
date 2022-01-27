@@ -302,8 +302,7 @@ public class ListenerMap<K, P, V extends P> {
 			if (chained.contains(map)) {
 				return;
 			}
-			Set<ListenerMap<?, ? extends P, ?>> newChained = new LinkedHashSet<>();
-			newChained.addAll(chained);
+            Set<ListenerMap<?, ? extends P, ?>> newChained = new LinkedHashSet<>(chained);
 			newChained.add(map);
 			chained = newChained;
 		}
@@ -314,8 +313,7 @@ public class ListenerMap<K, P, V extends P> {
 			if (!chained.contains(map)) {
 				return;
 			}
-			Set<ListenerMap<?, ? extends P, ?>> newChained = new LinkedHashSet<>();
-			newChained.addAll(chained);
+            Set<ListenerMap<?, ? extends P, ?>> newChained = new LinkedHashSet<>(chained);
 			newChained.remove(map);
 			chained = newChained;
 		}

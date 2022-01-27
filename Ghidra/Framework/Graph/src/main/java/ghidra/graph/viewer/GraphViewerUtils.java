@@ -1048,8 +1048,7 @@ public class GraphViewerUtils {
 		getVerticesOfSelectedOrHoveredEdges(Graph<V, E> graph, boolean useHover) {
 	//@formatter:on
 
-		List<V> result = new LinkedList<>();
-		Collection<E> edges = graph.getEdges();
+        Collection<E> edges = graph.getEdges();
 		LinkedList<E> filteredEdges = new LinkedList<>();
 		if (useHover) {
 			for (E edge : edges) {
@@ -1067,7 +1066,7 @@ public class GraphViewerUtils {
 		}
 
 		Collection<V> vertices = GraphAlgorithms.toVertices(filteredEdges);
-		result.addAll(vertices);
+        List<V> result = new LinkedList<>(vertices);
 		return result;
 	}
 

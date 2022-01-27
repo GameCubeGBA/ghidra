@@ -533,8 +533,7 @@ public class GenerateOldLanguagePlugin extends Plugin implements FrontEndable {
 		public List<LanguageDescription> getLanguageDescriptions(
 				boolean includeDeprecatedLanguages) {
 			// Include deprecated languages
-			List<LanguageDescription> list = new ArrayList<LanguageDescription>();
-			list.addAll(langService.getLanguageDescriptions(true));
+            List<LanguageDescription> list = new ArrayList<LanguageDescription>(langService.getLanguageDescriptions(true));
 			if (includeOldLanguages) {
 				list.addAll(Arrays.asList(oldLangFactory.getLatestOldLanaguageDescriptions()));
 			}

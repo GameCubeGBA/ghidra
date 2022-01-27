@@ -955,7 +955,6 @@ public class DebuggerRegistersProvider extends ComponentProviderAdapter
 	}
 
 	public LinkedHashSet<Register> computeDefaultRegistersOld(TraceThread thread) {
-		LinkedHashSet<Register> viewKnown = new LinkedHashSet<>();
 		/**
 		 * NOTE: It is rare that this includes registers outside of those common to the view and
 		 * target, but in case the user has manually populated such registers, this will ensure they
@@ -963,7 +962,7 @@ public class DebuggerRegistersProvider extends ComponentProviderAdapter
 		 * 
 		 * Also, in case the current thread is not live, we want the DB values to appear.
 		 */
-		viewKnown.addAll(collectBaseRegistersWithKnownValues(thread));
+		LinkedHashSet<Register> viewKnown = new LinkedHashSet<>(collectBaseRegistersWithKnownValues(thread));
 		Trace trace = thread.getTrace();
 		TraceRecorder recorder = modelService.getRecorder(trace);
 		if (recorder == null) {

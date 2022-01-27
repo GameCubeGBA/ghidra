@@ -57,8 +57,7 @@ public class CreateImpliedMatchesTask extends VtTask {
 	}
 
 	private Set<VTImpliedMatchInfo> dedupMatches() {
-		Set<VTImpliedMatchInfo> set = new HashSet<>();
-		set.addAll(matches);
+        Set<VTImpliedMatchInfo> set = new HashSet<>(matches);
 		return set;
 	}
 

@@ -471,8 +471,7 @@ public abstract class ByteViewerComponentProvider extends ComponentProviderAdapt
 	}
 
 	protected Set<DataFormatModel> getDataFormatModels() {
-		Set<DataFormatModel> set = new HashSet<>();
-		set.addAll(ClassSearcher.getInstances(UniversalDataFormatModel.class));
+		Set<DataFormatModel> set = new HashSet<>(ClassSearcher.getInstances(UniversalDataFormatModel.class));
 		return set;
 	}
 

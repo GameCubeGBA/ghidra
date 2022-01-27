@@ -324,8 +324,7 @@ public class ErrLogExpandableDialog extends AbstractErrDialog {
 
 			public static boolean containsAny(Collection<? extends GTreeNode> included,
 					Collection<GTreeNode> allChildren) {
-				Set<GTreeNode> res = new HashSet<>();
-				res.addAll(included);
+                Set<GTreeNode> res = new HashSet<>(included);
 				res.retainAll(allChildren);
 				return !res.isEmpty();
 			}

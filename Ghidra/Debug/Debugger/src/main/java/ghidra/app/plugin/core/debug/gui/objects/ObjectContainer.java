@@ -282,10 +282,9 @@ public class ObjectContainer implements Comparable<ObjectContainer> {
 			}
 		}
 
-		Set<ObjectContainer> result = new TreeSet<ObjectContainer>();
-		List<ObjectContainer> nodeFromElements =
+        List<ObjectContainer> nodeFromElements =
 			DebuggerObjectsProvider.getContainersFromObjects(elementMap, targetObject, false);
-		result.addAll(nodeFromElements);
+        Set<ObjectContainer> result = new TreeSet<ObjectContainer>(nodeFromElements);
 
 		List<ObjectContainer> nodeFromAttributes =
 			DebuggerObjectsProvider.getContainersFromObjects(attributeMap, targetObject, true);

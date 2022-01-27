@@ -214,7 +214,7 @@ public enum DebuggerStaticMappingUtils {
 					.copyOf(manager.findAllOverlapping(range, fromLifespan))) {
 				existing.delete();
 				if (fromLifespan.hasLowerBound() &&
-					Long.compare(existing.getStartSnap(), truncEnd) <= 0) {
+						existing.getStartSnap() <= truncEnd) {
 					manager.add(existing.getTraceAddressRange(),
 						Range.closed(existing.getStartSnap(), truncEnd),
 						existing.getStaticProgramURL(), existing.getStaticAddress());

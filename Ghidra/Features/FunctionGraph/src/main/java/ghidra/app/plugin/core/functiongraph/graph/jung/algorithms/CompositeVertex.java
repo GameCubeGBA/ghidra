@@ -63,8 +63,7 @@ public class CompositeVertex<V, E> {
     }
 
     public Set<V> collectSimpleVertices() {
-        HashSet<V> result = new HashSet<V>();
-        result.addAll(vertices);
+        HashSet<V> result = new HashSet<V>(vertices);
         for (CompositeVertex<V, E> composite : nestedComposites) {
             Set<V> simpleVertices = composite.collectSimpleVertices();
             result.addAll(simpleVertices);
@@ -73,8 +72,7 @@ public class CompositeVertex<V, E> {
     }
 
     public Set<E> collectInternalEdges() {
-        HashSet<E> result = new HashSet<E>();
-        result.addAll(internalEdges);
+        HashSet<E> result = new HashSet<E>(internalEdges);
         for (CompositeVertex<V, E> composite : nestedComposites) {
             Set<E> edges = composite.collectInternalEdges();
             result.addAll(edges);

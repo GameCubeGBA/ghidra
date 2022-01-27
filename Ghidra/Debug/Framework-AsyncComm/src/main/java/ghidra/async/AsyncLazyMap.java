@@ -373,6 +373,7 @@ public class AsyncLazyMap<K, V> {
 	 * <p>
 	 * Pending requests will be cancelled
 	 */
+	@SuppressWarnings("CollectionAddAllCanBeReplacedWithConstructor")
 	public void clear() {
 		Set<KeyedFuture<K, V>> copy = new LinkedHashSet<>();
 		synchronized (this) {
