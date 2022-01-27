@@ -66,7 +66,7 @@ class PluginDetailsPanel extends AbstractDetailsPanel {
 		}
 
 		List<PluginDescription> dependencies = model.getDependencies(descriptor);
-		Collections.sort(dependencies, (pd1, pd2) -> pd1.getName().compareTo(pd2.getName()));
+		dependencies.sort(Comparator.comparing(PluginDescription::getName));
 
 		StringBuilder buffer = new StringBuilder("<HTML>");
 

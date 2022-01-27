@@ -374,7 +374,7 @@ public class EquateTablePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		Iterator<Equate> iter = et.getEquates();
 		List<Equate> list = CollectionUtils.asList(iter);
 
-		Collections.sort(list, (e1, e2) -> e1.getName().compareTo(e2.getName()));
+		list.sort(Comparator.comparing(Equate::getName));
 		assertEquals(list.size(), equatesModel.getRowCount());
 
 		TableCellRenderer nameRenderer = getRenderer(EquateTableModel.NAME_COL);

@@ -17,6 +17,7 @@ package ghidra.program.model.pcode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 
 import ghidra.app.plugin.processors.sleigh.SleighLanguage;
 import ghidra.docking.settings.FormatSettingsDefinition;
@@ -1099,7 +1100,7 @@ public class PcodeDataTypeManager {
 	 * Sort the list of core data-types based their id
 	 */
 	private void sortCoreTypes() {
-		Arrays.sort(coreBuiltin, (o1, o2) -> Long.compare(o1.id, o2.id));
+		Arrays.sort(coreBuiltin, Comparator.comparingLong(o -> o.id));
 	}
 
 	/**

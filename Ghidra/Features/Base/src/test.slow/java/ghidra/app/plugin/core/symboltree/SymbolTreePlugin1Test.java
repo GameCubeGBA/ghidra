@@ -899,7 +899,7 @@ public class SymbolTreePlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 				}
 			}
 		}
-		Collections.sort(list, util.getSymbolComparator());
+		list.sort(util.getSymbolComparator());
 		return list;
 	}
 
@@ -912,8 +912,8 @@ public class SymbolTreePlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 			list.add(iter.next());
 		}
 
-		Collections.sort(list, (type == SymbolType.FUNCTION) ? util.getFunctionComparator()
-				: util.getSymbolComparator());
+		list.sort((type == SymbolType.FUNCTION) ? util.getFunctionComparator()
+                : util.getSymbolComparator());
 		return list;
 	}
 

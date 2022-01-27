@@ -450,9 +450,8 @@ public class ExternalReferencesProvider extends ComponentProviderAdapter {
 				// the constant updates cause the table to sort randomly when
 				// there are lots of empty path values. 
 				Comparator<ExternalNamesRow> c1 =
-					(r1, r2) -> Objects.requireNonNullElse(r1.getPath(), "")
-							.compareTo(Objects.requireNonNullElse(r2.getPath(), ""));
-				return c1.thenComparing((r1, r2) -> r1.getName().compareTo(r2.getName()));
+                        Comparator.comparing(r -> Objects.requireNonNullElse(r.getPath(), ""));
+				return c1.thenComparing(Comparator.comparing(ExternalNamesRow::getName));
 			}
 			return super.createSortComparator(columnIndex);
 		}

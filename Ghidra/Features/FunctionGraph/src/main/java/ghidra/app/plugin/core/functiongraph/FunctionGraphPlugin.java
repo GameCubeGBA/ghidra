@@ -144,7 +144,7 @@ public class FunctionGraphPlugin extends ProgramPlugin implements OptionsChangeL
 		}
 
 		List<FGLayoutProvider> layouts = new ArrayList<>(instances);
-		Collections.sort(layouts, (o1, o2) -> -o1.getPriorityLevel() + o2.getPriorityLevel());
+		layouts.sort((o1, o2) -> -o1.getPriorityLevel() + o2.getPriorityLevel());
 		return layouts;
 	}
 

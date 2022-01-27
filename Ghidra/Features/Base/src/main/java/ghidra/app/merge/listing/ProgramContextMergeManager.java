@@ -197,12 +197,12 @@ public class ProgramContextMergeManager implements MergeResolver, ListingMergeCo
 			// Sort the registers by size so that largest come first.
 			// This prevents the remove call below from incorrectly clearing 
 			// smaller registers that are part of a larger register.
-			Collections.sort(regs, new Comparator<Register>() {
-				@Override
-				public int compare(Register r1, Register r2) {
-					return r2.getBitLength() - r1.getBitLength();
-				}
-			});
+			regs.sort(new Comparator<Register>() {
+                @Override
+                public int compare(Register r1, Register r2) {
+                    return r2.getBitLength() - r1.getBitLength();
+                }
+            });
 
 			int transactionID = resultPgm.startTransaction(getDescription());
 			boolean commit = false;

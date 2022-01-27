@@ -1051,14 +1051,14 @@ public class DockingWindowManager implements PropertyChangeListener, Placeholder
 		Set<Entry<ComponentProvider, ComponentPlaceholder>> entrySet = activeProviders.entrySet();
 
 		List<Entry<ComponentProvider, ComponentPlaceholder>> list = new ArrayList<>(entrySet);
-		Collections.sort(list, (e1, e2) -> {
+		list.sort((e1, e2) -> {
 
-			ComponentProvider p1 = e1.getKey();
-			ComponentProvider p2 = e2.getKey();
-			String g1 = p1.getWindowGroup();
-			String g2 = p2.getWindowGroup();
-			return g1.compareToIgnoreCase(g2);
-		});
+            ComponentProvider p1 = e1.getKey();
+            ComponentProvider p2 = e2.getKey();
+            String g1 = p1.getWindowGroup();
+            String g2 = p2.getWindowGroup();
+            return g1.compareToIgnoreCase(g2);
+        });
 		return list;
 	}
 

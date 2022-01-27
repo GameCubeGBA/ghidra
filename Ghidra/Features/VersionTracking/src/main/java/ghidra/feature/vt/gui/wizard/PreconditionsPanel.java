@@ -120,7 +120,7 @@ public class PreconditionsPanel extends AbstractMageJPanel<VTWizardStateKey> imp
 
 		List<ConditionTester> list =
 			getConditionTests(sourceProgram, destinationProgram, existingResults);
-		Collections.sort(list, new ConditionsComparator());
+		list.sort(new ConditionsComparator());
 		ConditionTestPanel panel = new ConditionTestPanel(list);
 		panel.addListener(new ConditionTestListener() {
 			@Override

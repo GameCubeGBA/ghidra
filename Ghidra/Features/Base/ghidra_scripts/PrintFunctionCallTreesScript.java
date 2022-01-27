@@ -58,7 +58,7 @@ public class PrintFunctionCallTreesScript extends GhidraScript {
 
 		// sort them by address
 		List<Function> list = new ArrayList<>(callingFunctions);
-		Collections.sort(list, (f1, f2) -> f1.getEntryPoint().compareTo(f2.getEntryPoint()));
+		list.sort((f1, f2) -> f1.getEntryPoint().compareTo(f2.getEntryPoint()));
 
 		for (Function f : list) {
 			println("Incoming Function Call: " + f.getName() + " @ " + f.getEntryPoint());
@@ -78,7 +78,7 @@ public class PrintFunctionCallTreesScript extends GhidraScript {
 
 		// sort them by address
 		List<Function> list = new ArrayList<>(outgoingFunctions);
-		Collections.sort(list, (f1, f2) -> f1.getEntryPoint().compareTo(f2.getEntryPoint()));
+		list.sort((f1, f2) -> f1.getEntryPoint().compareTo(f2.getEntryPoint()));
 
 		for (Function f : list) {
 			println("Outgoing Function Call: " + f.getName() + " @ " + f.getEntryPoint());

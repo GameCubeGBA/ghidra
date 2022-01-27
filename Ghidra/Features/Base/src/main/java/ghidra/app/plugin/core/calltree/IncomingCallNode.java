@@ -109,7 +109,7 @@ public class IncomingCallNode extends CallNode {
 					.stream()
 					.flatMap(list -> list.stream())
 					.collect(Collectors.toList());
-		Collections.sort(children, new CallNodeComparator());
+		children.sort(new CallNodeComparator());
 
 		return children;
 	}

@@ -68,7 +68,7 @@ public class SymbolNode extends SymbolTreeNode {
 	}
 
 	protected void sort(List<GTreeNode> list) {
-		Collections.sort(list, getChildrenComparator());
+		list.sort(getChildrenComparator());
 	}
 
 	@Override

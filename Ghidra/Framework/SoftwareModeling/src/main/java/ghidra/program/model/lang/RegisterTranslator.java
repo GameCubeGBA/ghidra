@@ -60,7 +60,7 @@ public class RegisterTranslator {
 			registerList.add(register);
 		}
 		for (List<Register> registerList : offsetMap.values()) {
-			Collections.sort(registerList, registerSizeComparator);
+			registerList.sort(registerSizeComparator);
 		}
 		return offsetMap;
 	}

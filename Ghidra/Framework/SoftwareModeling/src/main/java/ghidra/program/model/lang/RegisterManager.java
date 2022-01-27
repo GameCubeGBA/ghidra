@@ -96,7 +96,7 @@ public class RegisterManager {
 		List<String> registerNameList = new ArrayList<String>();
 		List<Register> contextRegisterList = new ArrayList<Register>();
 		ArrayList<Register> registerListSortedBySize = new ArrayList<>(registers); // copy for sorting
-		Collections.sort(registerListSortedBySize, registerSizeComparator);
+		registerListSortedBySize.sort(registerSizeComparator);
 		for (Register reg : registerListSortedBySize) {
 			String regName = reg.getName();
 			registerNameList.add(regName);
@@ -272,7 +272,7 @@ public class RegisterManager {
 					list.add(reg);
 				}
 			}
-			Collections.sort(list, RegisterManager::compareVectorRegisters);
+			list.sort(RegisterManager::compareVectorRegisters);
 			sortedVectorRegisters = Collections.unmodifiableList(list);
 		}
 		return sortedVectorRegisters;

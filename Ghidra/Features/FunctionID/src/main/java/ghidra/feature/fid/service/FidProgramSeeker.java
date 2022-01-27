@@ -393,7 +393,7 @@ public class FidProgramSeeker {
 			}
 		}
 
-		Collections.sort(result, MOST_SIGNIFICANT);
+		result.sort(MOST_SIGNIFICANT);
 
 		return result;
 	}

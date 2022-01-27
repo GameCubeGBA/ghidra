@@ -2052,11 +2052,11 @@ public abstract class ProcessorEmulatorTestAdapter extends TestCase implements E
 	}
 
 	private void sortTestControlBlocks() {
-		Collections.sort(testControlBlocks, (o1, o2) -> {
-			String cf1 = o1.testFile.fileReferencePath;
-			String cf2 = o2.testFile.fileReferencePath;
-			return cf1.compareTo(cf2);
-		});
+		testControlBlocks.sort((o1, o2) -> {
+            String cf1 = o1.testFile.fileReferencePath;
+            String cf2 = o2.testFile.fileReferencePath;
+            return cf1.compareTo(cf2);
+        });
 	}
 
 	public Symbol getUniqueGlobalSymbol(Program program, String name) {

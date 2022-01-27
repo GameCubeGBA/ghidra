@@ -17,6 +17,7 @@ package ghidra.app.util.bin.format.macho.commands;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -73,8 +74,7 @@ public class SymbolTableCommand extends LoadCommand {
 		
 		// sort the entries by the index in the string table, so don't jump around reading
 		List<NList> sortedList =
-			nlistList.stream().sorted((o1, o2) -> Integer.compare(o1.getStringTableIndex(),
-				o2.getStringTableIndex())).collect(Collectors.toList());
+			nlistList.stream().sorted(Comparator.comparingInt(NList::getStringTableIndex)).collect(Collectors.toList());
 
 		// initialize the sorted NList strings from string table
 		for (NList nList : sortedList) {
