@@ -376,8 +376,7 @@ public abstract class HTMLDataTypeRepresentation {
 
 		// add the comment for the composite
 		String comment = getCommentForDataType(dataType);
-		List<ValidatableLine> headerLines = new ArrayList<>();
-		headerLines.addAll(createCommentLines(comment, 4));
+        List<ValidatableLine> headerLines = new ArrayList<>(createCommentLines(comment, 4));
 
 		// put the path info in; don't display a floating '/' when the path is the root path
 		CategoryPath path = dataType.getCategoryPath();

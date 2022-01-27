@@ -116,8 +116,7 @@ public class GTreeEventTest extends AbstractDockingTest {
 
 		waitForTree();
 
-		List<GTreeNode> list = new ArrayList<>();
-		list.addAll(parentNode.getChildren());
+        List<GTreeNode> list = new ArrayList<>(parentNode.getChildren());
 		for (String name : children) {
 			NamedNode node = new NamedNode(name);
 			list.add(node);

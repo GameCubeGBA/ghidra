@@ -157,8 +157,7 @@ public class GroupedFunctionGraphVertex extends AbstractFunctionGraphVertex {
 
 		Set<FGEdge> startGroupEdges = startGroup.getUngroupedEdges();
 		Set<FGEdge> destinationGroupEdges = destinationGroup.getUngroupedEdges();
-		Set<FGEdge> intersectingEdges = new HashSet<>();
-		intersectingEdges.addAll(startGroupEdges);
+        Set<FGEdge> intersectingEdges = new HashSet<>(startGroupEdges);
 		intersectingEdges.retainAll(destinationGroupEdges);
 		return intersectingEdges;
 	}

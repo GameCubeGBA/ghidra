@@ -722,9 +722,9 @@ public class DBTrace extends DBCachedDomainObjectAdapter implements Trace, Trace
 	}
 
 	protected void allViews(Consumer<DBTraceProgramView> action) {
-		Collection<DBTraceProgramView> all = new ArrayList<>();
+		Collection<DBTraceProgramView> all;
 		synchronized (programViews) {
-			all.addAll(programViews.keySet());
+			all = new ArrayList<>(programViews.keySet());
 		}
 		synchronized (fixedProgramViews) {
 			all.addAll(fixedProgramViews.values());

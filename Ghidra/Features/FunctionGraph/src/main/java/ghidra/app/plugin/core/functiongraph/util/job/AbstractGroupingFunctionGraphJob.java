@@ -112,8 +112,7 @@ public abstract class AbstractGroupingFunctionGraphJob extends AbstractFunctionG
 	abstract protected void notifyGroupChange();
 
 	protected LayoutPositions<FGVertex, FGEdge> updateDestinationLocations() {
-		Set<FGVertex> ignore = new HashSet<>();
-		ignore.addAll(getVerticesToBeRemoved());
+		Set<FGVertex> ignore = new HashSet<>(getVerticesToBeRemoved());
 
 		LayoutPositions<FGVertex, FGEdge> positions;
 		if (relayout) {

@@ -112,8 +112,7 @@ public class ImportFromXMLAction extends ImportExportAsAction {
 		for (Object c : e.getChildren()) {
 			if (c instanceof Element) {
 				Element ce = (Element) c;
-				List<String> npath = new ArrayList<>();
-				npath.addAll(path);
+                List<String> npath = new ArrayList<>(path);
 				npath.add(convertName(ce.getName()));
 				TargetObject to = xmlToObject(p, ce, npath);
 				objects.add(to);
