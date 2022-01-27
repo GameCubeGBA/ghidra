@@ -108,7 +108,7 @@ public class DbViewer extends JFrame {
 	private void openDb() {
 		if (fileChooser == null) {
 			fileChooser = new GhidraFileChooser(this);
-			fileChooser.setFileSelectionMode(GhidraFileChooser.FILES_ONLY);
+			fileChooser.setFileSelectionMode(GhidraFileChooserMode.FILES_ONLY);
 			fileChooser.setFileFilter(new ExtensionFileFilter("gbf", "Ghidra Buffer File"));
 			fileChooser.setCurrentDirectory(new File("C:\\"));
 		}

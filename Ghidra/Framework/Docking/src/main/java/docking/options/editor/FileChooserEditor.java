@@ -163,7 +163,7 @@ public class FileChooserEditor extends PropertyEditorSupport {
 
 			fileChooser.setApproveButtonText("Choose Path");
 			fileChooser.setTitle("Choose Path");
-			fileChooser.setFileSelectionMode(GhidraFileChooser.FILES_AND_DIRECTORIES);
+			fileChooser.setFileSelectionMode(GhidraFileChooserMode.FILES_AND_DIRECTORIES);
 			if (currentFileValue != null) {
 				fileChooser.setSelectedFile(currentFileValue);
 			}

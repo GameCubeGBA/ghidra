@@ -403,7 +403,7 @@ public class SaveToolConfigDialog extends DialogComponentProvider implements Lis
 	 */
 	private void browseForIcons() {
 		GhidraFileChooser iconFileChooser = new GhidraFileChooser(getComponent());
-		iconFileChooser.setFileSelectionMode(GhidraFileChooser.FILES_ONLY);
+		iconFileChooser.setFileSelectionMode(GhidraFileChooserMode.FILES_ONLY);
 		iconFileChooser.setTitle("Choose Icon");
 		iconFileChooser.setApproveButtonToolTipText("Choose Icon");
 		iconFileChooser.setFileFilter(

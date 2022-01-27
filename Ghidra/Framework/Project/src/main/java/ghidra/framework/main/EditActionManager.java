@@ -186,7 +186,7 @@ class EditActionManager {
 		fileChooser.setTitle("Select Certificate (req'd for PKI authentication only)");
 		fileChooser.setApproveButtonText("Set Certificate");
 		fileChooser.setFileFilter(ApplicationKeyManagerFactory.CERTIFICATE_FILE_FILTER);
-		fileChooser.setFileSelectionMode(GhidraFileChooser.FILES_ONLY);
+		fileChooser.setFileSelectionMode(GhidraFileChooserMode.FILES_ONLY);
 		fileChooser.setHelpLocation(new HelpLocation(plugin.getName(), "Set_PKI_Certificate"));
 		return fileChooser;
 	}

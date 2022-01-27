@@ -151,7 +151,7 @@ public class PopulateFidDialog extends DialogComponentProvider {
 		browseButton.addActionListener(e -> {
 			GhidraFileChooser chooser = new GhidraFileChooser(tool.getToolFrame());
 			chooser.setTitle("Choose Common Symbols File");
-			chooser.setFileSelectionMode(GhidraFileChooser.FILES_ONLY);
+			chooser.setFileSelectionMode(GhidraFileChooserMode.FILES_ONLY);
 //			chooser.setFileFilter(null);
 			File selectedFile = chooser.getSelectedFile();
 			if (selectedFile != null) {

@@ -642,28 +642,6 @@ public class GhidraFileChooser extends DialogComponentProvider
 	}
 
 	/**
-	 * Sets the <code>GhidraFileChooser</code> to allow the user to just
-	 * select files, just select
-	 * directories, or select both files and directories.  The default is
-	 * <code>JFilesChooser.FILES_ONLY</code>.
-	 *
-	 * @param mode the type of files to be displayed:
-	 * <ul>
-	 * <li>GhidraFileChooser.FILES_ONLY
-	 * <li>GhidraFileChooser.DIRECTORIES_ONLY
-	 * <li>GhidraFileChooser.FILES_AND_DIRECTORIES
-	 * </ul>
-	 *
-	 * @exception IllegalArgumentException  if <code>mode</code> is an
-	 *              illegal Dialog mode
-	 * @deprecated use instead {@link #setFileSelectionMode(GhidraFileChooserMode)}
-	 */
-	@Deprecated
-	public void setFileSelectionMode(int mode) {
-		this.fileSelectionMode = GhidraFileChooserMode.values()[mode];
-	}
-
-	/**
 	 * Sets this file chooser to allow the user to just select files, just select
 	 * directories, or select both files and directories.  The default is
 	 * {@link GhidraFileChooserMode#FILES_ONLY}.

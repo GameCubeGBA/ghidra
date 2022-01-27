@@ -227,7 +227,7 @@ public class FunctionBitPatternsMainProvider extends ComponentProviderAdapter
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				GhidraFileChooser fileChooser = new GhidraFileChooser(component);
-				fileChooser.setFileSelectionMode(GhidraFileChooser.DIRECTORIES_ONLY);
+				fileChooser.setFileSelectionMode(GhidraFileChooserMode.DIRECTORIES_ONLY);
 				fileChooser.setTitle("Select Directory Containing XML Files");
 				String baseDir = Preferences.getProperty(PATTERN_INFO_DIR);
 				if (baseDir != null) {
