@@ -56,13 +56,7 @@ public class AssemblyFixedNumericTerminal extends AssemblyNumericTerminal {
 		// TODO: Allow label substitution here? For now, no.
 		Collection<AssemblyParseNumericToken> toks =
 			new HashSet<>(super.match(buffer, pos, grammar, AssemblyNumericSymbols.EMPTY));
-		Iterator<AssemblyParseNumericToken> tokit = toks.iterator();
-		while (tokit.hasNext()) {
-			AssemblyParseNumericToken tok = tokit.next();
-			if (tok.getNumericValue() != val) {
-				tokit.remove();
-			}
-		}
+		toks.removeIf(tok -> tok.getNumericValue() != val);
 		return toks;
 	}
 }

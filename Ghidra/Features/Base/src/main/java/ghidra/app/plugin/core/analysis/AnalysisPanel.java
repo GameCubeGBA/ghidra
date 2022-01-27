@@ -710,19 +710,7 @@ class AnalysisPanel extends JPanel implements PropertyChangeListener {
 
 	private List<String> getOptionNames(Options optionsGroup) {
 		List<String> subOptions = optionsGroup.getLeafOptionNames();
-		Iterator<String> it = subOptions.iterator();
-		while (it.hasNext()) {
-			String name = it.next();
-			if (!isEditable(optionsGroup, name)) {
-				it.remove();
-			}
-
-			// also filter out unregistered options
-			if (!optionsGroup.isRegistered(name)) {
-				it.remove();
-			}
-		}
-
+		subOptions.removeIf(next -> !isEditable(optionsGroup, next) || !optionsGroup.isRegistered(next));
 		return subOptions;
 	}
 

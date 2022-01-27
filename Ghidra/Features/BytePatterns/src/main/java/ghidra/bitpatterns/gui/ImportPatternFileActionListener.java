@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
 
+import docking.widgets.filechooser.GhidraFileChooserMode;
 import org.xml.sax.SAXException;
 
 import docking.widgets.filechooser.GhidraFileChooser;
