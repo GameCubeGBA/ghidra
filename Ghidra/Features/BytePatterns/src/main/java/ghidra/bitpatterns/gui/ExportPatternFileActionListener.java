@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Objects;
 
 import docking.widgets.filechooser.GhidraFileChooser;
+import docking.widgets.filechooser.GhidraFileChooserMode;
 import ghidra.bitpatterns.info.ContextRegisterFilter;
 import ghidra.bitpatterns.info.PatternType;
 import ghidra.framework.preferences.Preferences;

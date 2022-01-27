@@ -23,6 +23,7 @@ import javax.swing.*;
 import docking.DialogComponentProvider;
 import docking.widgets.OptionDialog;
 import docking.widgets.filechooser.GhidraFileChooser;
+import docking.widgets.filechooser.GhidraFileChooserMode;
 import docking.widgets.label.GDLabel;
 import ghidra.framework.GenericRunInfo;
 import ghidra.framework.model.ProjectLocator;
@@ -50,7 +51,6 @@ public class ArchiveDialog extends DialogComponentProvider {
 	/**
 	 * Constructor
 	 *
-	 * @param parent the parent frame of the NumberInputDialog.
 	 * @param plugin the archive plugin using this dialog.
 	 */
 	ArchiveDialog(ArchivePlugin plugin) {

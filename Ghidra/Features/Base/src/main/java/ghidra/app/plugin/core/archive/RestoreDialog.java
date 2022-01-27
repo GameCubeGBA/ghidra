@@ -24,6 +24,7 @@ import javax.swing.*;
 
 import docking.DialogComponentProvider;
 import docking.widgets.filechooser.GhidraFileChooser;
+import docking.widgets.filechooser.GhidraFileChooserMode;
 import docking.widgets.label.GDLabel;
 import ghidra.framework.GenericRunInfo;
 import ghidra.framework.model.ProjectLocator;
@@ -331,7 +332,7 @@ public class RestoreDialog extends DialogComponentProvider {
 	 * Creates a file chooser for selecting files with the specified extension.
 	 * @param extension the file extension for valid files to choose.
 	 * @param desc the description for the extension
-	 * @param fileURL the URL indicating the default directory/file to select.
+	 * @param filePathName the URL indicating the default directory/file to select.
 	 * @return the file chooser.
 	 */
 	private GhidraFileChooser createFileChooser(String extension, String desc,
