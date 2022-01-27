@@ -25,6 +25,7 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import docking.widgets.filechooser.GhidraFileChooserMode;
 import org.apache.commons.lang3.StringUtils;
 
 import docking.widgets.filechooser.GhidraFileChooser;
