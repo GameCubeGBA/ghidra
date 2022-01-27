@@ -79,7 +79,7 @@ public class StringPropertyMapDBTest extends AbstractGhidraHeadlessIntegrationTe
 
 	private void createPropertyMap(String name) throws Exception {
 		propertyMap = new StringPropertyMapDB(db, DBConstants.CREATE, this, null, addrMap, name,
-			TaskMonitorAdapter.DUMMY_MONITOR);
+			TaskMonitor.DUMMY);
 		propertyMap.setCacheSize(2);
 	}
 

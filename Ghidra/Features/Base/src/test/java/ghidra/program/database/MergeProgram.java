@@ -113,7 +113,7 @@ public class MergeProgram {
 
 				try {
 					memory.createInitializedBlock(name, startAddress, size, (byte) 0,
-						TaskMonitorAdapter.DUMMY_MONITOR, false);
+						TaskMonitor.DUMMY, false);
 				}
 				catch (Exception e) {
 					throw new RuntimeException("Exception building memory", e);

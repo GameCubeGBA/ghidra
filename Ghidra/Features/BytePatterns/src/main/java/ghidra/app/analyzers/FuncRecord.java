@@ -124,7 +124,7 @@ public class FuncRecord implements Comparable<FuncRecord> {
 					}
 
 					digest.reset();
-					digest.update(totalToHash, TaskMonitorAdapter.DUMMY_MONITOR);
+					digest.update(totalToHash, TaskMonitor.DUMMY);
 
 					//Finally, update the hash signature.
 					this.hashValue = digest.digestLong();

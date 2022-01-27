@@ -731,7 +731,7 @@ public class ModuleTest extends AbstractGhidraHeadedIntegrationTest {
 		Address start = addr(offset);
 		try {
 			MemoryBlock block = memory.createInitializedBlock(name, start, length, (byte) 0,
-				TaskMonitorAdapter.DUMMY_MONITOR, false);
+				TaskMonitor.DUMMY, false);
 			return block;
 
 		}

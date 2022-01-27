@@ -205,7 +205,7 @@ public class BookmarkDeleteCmd implements Command {
 
 	private void deleteBookmarks(BookmarkManager mgr, String theType, String theCategory) {
 		try {
-			mgr.removeBookmarks(theType, theCategory, TaskMonitorAdapter.DUMMY_MONITOR);
+			mgr.removeBookmarks(theType, theCategory, TaskMonitor.DUMMY);
 		}
 		catch (CancelledException e) {
 			// can't happen--dummy monitor
@@ -214,7 +214,7 @@ public class BookmarkDeleteCmd implements Command {
 
 	private void deleteBookmarks(BookmarkManager mgr, AddressSetView set) {
 		try {
-			mgr.removeBookmarks(set, TaskMonitorAdapter.DUMMY_MONITOR);
+			mgr.removeBookmarks(set, TaskMonitor.DUMMY);
 		}
 		catch (CancelledException e) {
 			// can't happen--dummy monitor
@@ -223,7 +223,7 @@ public class BookmarkDeleteCmd implements Command {
 
 	private void deleteBookmarks(BookmarkManager mgr, AddressSetView set, String theType) {
 		try {
-			mgr.removeBookmarks(set, theType, TaskMonitorAdapter.DUMMY_MONITOR);
+			mgr.removeBookmarks(set, theType, TaskMonitor.DUMMY);
 		}
 		catch (CancelledException e) {
 			// can't happen--dummy monitor
@@ -233,7 +233,7 @@ public class BookmarkDeleteCmd implements Command {
 	private void deleteBookmarks(BookmarkManager mgr, AddressSetView set, String theType,
 			String theCategory) {
 		try {
-			mgr.removeBookmarks(set, theType, theCategory, TaskMonitorAdapter.DUMMY_MONITOR);
+			mgr.removeBookmarks(set, theType, theCategory, TaskMonitor.DUMMY);
 		}
 		catch (CancelledException e) {
 			// can't happen--dummy monitor
