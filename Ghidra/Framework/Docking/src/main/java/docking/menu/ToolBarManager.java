@@ -63,7 +63,7 @@ public class ToolBarManager {
 		}
 		items.add(new ToolBarItemManager(action, windowManager));
 
-		Collections.sort(items, toolBarItemComparator);
+		items.sort(toolBarItemComparator);
 	}
 
 	public DockingActionIf getAction(String actionName) {

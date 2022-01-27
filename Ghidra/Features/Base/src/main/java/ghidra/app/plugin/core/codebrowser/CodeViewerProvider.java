@@ -498,11 +498,11 @@ public class CodeViewerProvider extends NavigatableComponentProviderAdapter
 			return;
 		}
 		list.add(dndProvider);
-		Collections.sort(list, (pdp1, pdp2) -> {
-			int p1 = pdp1.getPriority();
-			int p2 = pdp2.getPriority();
-			return p2 - p1;
-		});
+		list.sort((pdp1, pdp2) -> {
+            int p1 = pdp1.getPriority();
+            int p2 = pdp2.getPriority();
+            return p2 - p1;
+        });
 		dropProviders = list.toArray(new ProgramDropProvider[list.size()]);
 		if (dropTargetAdapter == null) {
 			setUpDragDrop();

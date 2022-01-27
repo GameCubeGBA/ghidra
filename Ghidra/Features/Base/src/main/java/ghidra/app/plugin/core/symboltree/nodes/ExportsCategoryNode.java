@@ -44,7 +44,7 @@ class ExportsCategoryNode extends SymbolCategoryNode {
 			list.add(SymbolNode.createNode(symbol, program));
 		}
 
-		Collections.sort(list, getChildrenComparator());
+		list.sort(getChildrenComparator());
 
 		return list;
 	}

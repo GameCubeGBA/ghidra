@@ -51,7 +51,7 @@ class HelpViewSearcher {
 		KeyStroke.getKeyStroke(KeyEvent.VK_F, DockingUtils.CONTROL_KEY_MODIFIER_MASK);
 
 	private Comparator<SearchHit> searchResultComparator =
-		(o1, o2) -> o1.getBegin() - o2.getBegin();
+			Comparator.comparingInt(SearchHit::getBegin);
 
 	private Comparator<? super SearchHit> searchResultReverseComparator =
 		(o1, o2) -> o2.getBegin() - o1.getBegin();
@@ -309,7 +309,7 @@ class HelpViewSearcher {
 			int position = cursorPosition.getPosition(); // move to the next item
 
 			if (searchForward) {
-				Collections.sort(searchResults, searchResultComparator);
+				searchResults.sort(searchResultComparator);
 				for (SearchHit searchHit : searchResults) {
 					int begin = searchHit.getBegin();
 					if (begin <= position) {
@@ -319,7 +319,7 @@ class HelpViewSearcher {
 				}
 			}
 			else {
-				Collections.sort(searchResults, searchResultReverseComparator);
+				searchResults.sort(searchResultReverseComparator);
 				for (SearchHit searchHit : searchResults) {
 					int begin = searchHit.getBegin();
 					if (begin >= position) {

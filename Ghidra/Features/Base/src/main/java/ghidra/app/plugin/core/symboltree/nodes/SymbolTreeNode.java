@@ -87,7 +87,7 @@ public abstract class SymbolTreeNode extends GTreeSlowLoadingNode {
 	};
 
 	static final Comparator<GTreeNode> DEFAULT_NODE_COMPARATOR =
-		(node1, node2) -> node1.compareTo(node2);
+            Comparator.naturalOrder();
 
 	/**
 	 * Returns true if this node can be cut and moved to a different location.

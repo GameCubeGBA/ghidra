@@ -212,7 +212,7 @@ public class RegisterFieldFactory extends FieldFactory {
 			}
 			setRegisters = dedupedRegisters;
 		}
-		Collections.sort(setRegisters, regComp);
+		setRegisters.sort(regComp);
 		return setRegisters;
 	}
 

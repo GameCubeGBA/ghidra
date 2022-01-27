@@ -241,7 +241,7 @@ public class MenuManager implements ManagedMenuItem {
 			}
 
 			List<ManagedMenuItem> list = new ArrayList<>(managedMenuItems);
-			Collections.sort(list, comparator);
+			list.sort(comparator);
 			String lastGroup = null;
 
 			for (ManagedMenuItem item : list) {
@@ -300,7 +300,7 @@ public class MenuManager implements ManagedMenuItem {
 			popupMenu = new JPopupMenu(name);
 
 			List<ManagedMenuItem> list = new ArrayList<>(managedMenuItems);
-			Collections.sort(list, comparator);
+			list.sort(comparator);
 			String lastGroup = NULL_GROUP_NAME;
 			boolean hasMenuItems = false;
 

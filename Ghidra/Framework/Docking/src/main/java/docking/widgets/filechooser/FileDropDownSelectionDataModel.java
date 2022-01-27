@@ -100,7 +100,7 @@ public class FileDropDownSelectionDataModel implements DropDownTextFieldDataMode
 			list.add(file);
 		}
 
-		Collections.sort(list, sortComparator);
+		list.sort(sortComparator);
 
 		return getMatchingSubList(searchText, searchText + END_CHAR, list);
 	}

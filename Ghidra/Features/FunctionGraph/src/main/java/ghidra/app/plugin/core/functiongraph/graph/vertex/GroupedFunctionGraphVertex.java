@@ -406,11 +406,11 @@ public class GroupedFunctionGraphVertex extends AbstractFunctionGraphVertex {
 
 	public static String generateGroupVertexDescription(Set<FGVertex> vertices) {
 		ArrayList<FGVertex> sortedList = new ArrayList<>(vertices);
-		Collections.sort(sortedList, (v1, v2) -> {
-			Address a1 = v1.getVertexAddress();
-			Address a2 = v2.getVertexAddress();
-			return a1.compareTo(a2);
-		});
+		sortedList.sort((v1, v2) -> {
+            Address a1 = v1.getVertexAddress();
+            Address a2 = v2.getVertexAddress();
+            return a1.compareTo(a2);
+        });
 
 		StringBuilder buffy = new StringBuilder();
 		for (FGVertex subVertex : sortedList) {

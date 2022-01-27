@@ -92,8 +92,7 @@ public class UnusedHelpImageFileFinder {
 		}
 
 		SortedSet<Path> set =
-			new TreeSet<>((f1, f2) -> f1.toUri().toString().toLowerCase().compareTo(
-				f2.toUri().toString().toLowerCase()));
+			new TreeSet<>(Comparator.comparing(f -> f.toUri().toString().toLowerCase()));
 		for (Path file : imageFiles) {
 			IMG img = fileToIMGMap.get(file);
 			if (img == null && !isExcludedImageFile(file)) {

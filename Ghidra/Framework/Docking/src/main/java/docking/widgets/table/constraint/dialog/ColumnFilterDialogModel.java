@@ -350,7 +350,7 @@ public class ColumnFilterDialogModel<R> {
 				columnFilterData.setViewIndex(viewIndex);
 			}
 		}
-		Collections.sort(allFilters, (o1, o2) -> o1.getViewIndex() - o2.getViewIndex());
+		allFilters.sort(Comparator.comparingInt(ColumnFilterData::getViewIndex));
 	}
 
 	public void setCurrentlyAppliedFilter(ColumnBasedTableFilter<R> tableColumnFilter) {

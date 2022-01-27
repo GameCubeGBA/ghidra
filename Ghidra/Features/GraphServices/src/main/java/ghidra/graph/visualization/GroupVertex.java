@@ -38,7 +38,7 @@ public class GroupVertex extends AttributedVertex {
 		// the set of vertices given may include group nodes, we only want "real nodes"
 		Set<AttributedVertex> set = flatten(vertices);
 		List<AttributedVertex> list = new ArrayList<>(set);
-		Collections.sort(list, Comparator.comparing(AttributedVertex::getName));
+		list.sort(Comparator.comparing(AttributedVertex::getName));
 		return new GroupVertex(set, getUniqueId(list), list.get(0));
 	}
 

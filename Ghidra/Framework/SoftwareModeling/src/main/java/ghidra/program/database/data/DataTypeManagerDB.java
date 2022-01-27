@@ -756,7 +756,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 		}
 		List<DataType> list = new ArrayList<>();
 		popuplateDataTypeList(list, root);
-		Collections.sort(list, nameComparator);
+		list.sort(nameComparator);
 		sortedDataTypes = list;
 	}
 
@@ -3519,7 +3519,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 		CategoryDB category = (CategoryDB) getCategory(dt.getCategoryPath());
 		category.dataTypeRenamed(dt, oldName);
 		if (sortedDataTypes != null) {
-			Collections.sort(sortedDataTypes, nameComparator);
+			sortedDataTypes.sort(nameComparator);
 		}
 		updateLastChangeTime();
 		setDirtyFlag(dt);

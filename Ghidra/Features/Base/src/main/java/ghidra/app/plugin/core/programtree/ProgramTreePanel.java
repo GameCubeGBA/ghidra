@@ -196,7 +196,7 @@ class ProgramTreePanel extends JPanel implements ChangeListener {
 
 	GroupPath[] getViewedGroups() {
 		ArrayList<TreePath> list = new ArrayList<TreePath>(tree.getViewList());
-		Collections.sort(list, nodeComparator);
+		list.sort(nodeComparator);
 		GroupPath[] gp = new GroupPath[list.size()];
 		for (int i = 0; i < gp.length; i++) {
 			TreePath path = list.get(i);

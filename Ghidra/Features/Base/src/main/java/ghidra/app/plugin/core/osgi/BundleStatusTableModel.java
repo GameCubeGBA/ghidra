@@ -268,7 +268,7 @@ public class BundleStatusTableModel
 				return result;
 			}
 		};
-		Collections.sort(data, wrapper);
+		data.sort(wrapper);
 		sortCompleted(sortingContext);
 		if (changed.get()) {
 			notifyModelSorted(false);
@@ -498,7 +498,7 @@ public class BundleStatusTableModel
 	private class BundleFileColumn extends Column<ResourceFile> {
 		final BundleFileRenderer renderer = new BundleFileRenderer();
 		final Comparator<ResourceFile> comparator =
-			(a, b) -> Path.toPathString(a).compareTo(Path.toPathString(b));
+				Comparator.comparing(Path::toPathString);
 
 		BundleFileColumn() {
 			super("Path");

@@ -97,7 +97,7 @@ public class ClassCategoryNode extends SymbolCategoryNode {
 			}
 			monitor.incrementProgress(1);
 		}
-		Collections.sort(list, getChildrenComparator());
+		list.sort(getChildrenComparator());
 		return list;
 	}
 

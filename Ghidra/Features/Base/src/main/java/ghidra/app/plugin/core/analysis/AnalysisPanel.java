@@ -176,7 +176,7 @@ class AnalysisPanel extends JPanel implements PropertyChangeListener {
 		AutoAnalysisManager manager = AutoAnalysisManager.getAnalysisManager(program);
 
 		List<String> optionNames = analysisOptions.getOptionNames();
-		Collections.sort(optionNames, (o1, o2) -> o1.compareToIgnoreCase(o2));
+		optionNames.sort((o1, o2) -> o1.compareToIgnoreCase(o2));
 		for (String analyzerName : optionNames) {
 			if (analyzerName.indexOf('.') == -1) {
 				if (analysisOptions.getType(analyzerName) != OptionType.BOOLEAN_TYPE) {
@@ -860,13 +860,7 @@ class AnalysisPanel extends JPanel implements PropertyChangeListener {
 	}
 
 	private boolean isUserConfiguration(Options options) {
-		if (options == STANDARD_DEFAULT_OPTIONS ||
-			options == currentProgramOptions) {
-			// these two are not user configurations.
-			return false;
-		}
-		return true;
-
+		return (options != STANDARD_DEFAULT_OPTIONS && options != currentProgramOptions);
 	}
 
 	private void optionsComboBoxChanged(ItemEvent e) {

@@ -137,7 +137,7 @@ public class DataTypeIndexer {
 				monitor.incrementProgress(1);
 			}
 
-			Collections.sort(list, dataTypeComparator);
+			list.sort(dataTypeComparator);
 		}
 
 		List<DataType> getList() {

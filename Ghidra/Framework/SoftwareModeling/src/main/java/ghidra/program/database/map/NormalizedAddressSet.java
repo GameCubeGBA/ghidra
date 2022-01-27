@@ -119,7 +119,7 @@ public class NormalizedAddressSet implements AddressSetView {
 			set = new SortedRangeList();
 			baseLists.put(baseKey, set);
 			bases.add(Long.valueOf(baseKey));
-			Collections.sort(bases, baseComparator);
+			bases.sort(baseComparator);
 		}
 		set.addRange((int) minKey + Integer.MIN_VALUE, (int) maxKey + Integer.MIN_VALUE);
 	}

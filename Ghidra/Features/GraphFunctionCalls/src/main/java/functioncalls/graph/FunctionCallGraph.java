@@ -34,7 +34,7 @@ public class FunctionCallGraph extends FilteringVisualGraph<FcgVertex, FcgEdge> 
 	private FcgVertex source;
 	private Map<Function, FcgVertex> verticesByFunction = new HashMap<>();
 	private Comparator<FcgVertex> vertexComparator =
-		(v1, v2) -> v1.getAddress().compareTo(v2.getAddress());
+            Comparator.comparing(FcgVertex::getAddress);
 	private Map<FcgLevel, Set<FcgVertex>> verticesByLevel =
 		LazyMap.lazyMap(new HashMap<>(), () -> new TreeSet<>(vertexComparator));
 

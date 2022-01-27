@@ -330,7 +330,7 @@ public abstract class AbstractSortedTableModel<T> extends AbstractGTableModel<T>
 		}
 
 		hasEverSorted = true; // signal that we have sorted at least one time
-		Collections.sort(data, sortingContext.getComparator());
+		data.sort(sortingContext.getComparator());
 		sortCompleted(sortingContext);
 		notifyModelSorted(false);
 	}

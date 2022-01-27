@@ -322,7 +322,7 @@ public class ProgramRegisterContextDB extends AbstractStoredProgramContext imple
 		// This prevents the remove call below from incorrectly clearing 
 		// smaller registers that are part of a larger register.
 		List<Register> registers = new ArrayList<Register>(language.getRegisters());
-		Collections.sort(registers, (r1, r2) -> r2.getBitLength() - r1.getBitLength());
+		registers.sort((r1, r2) -> r2.getBitLength() - r1.getBitLength());
 
 		// Map all register stores to new registers
 		for (Register register : registers) {
