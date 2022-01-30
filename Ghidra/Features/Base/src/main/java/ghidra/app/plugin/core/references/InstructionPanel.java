@@ -109,11 +109,9 @@ class InstructionPanel extends JPanel implements ChangeListener {
 						return true;
 					}
 				}
-				catch (UnsupportedFlavorException e1) {
+				catch (UnsupportedFlavorException | IOException e1) {
 				}
-				catch (IOException e1) {
-				}
-			}
+            }
 			return false;
 		}
 

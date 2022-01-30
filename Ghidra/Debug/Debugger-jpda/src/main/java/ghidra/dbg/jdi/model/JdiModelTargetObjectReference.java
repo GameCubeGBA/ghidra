@@ -101,13 +101,10 @@ public class JdiModelTargetObjectReference extends JdiModelTargetValue {
 				referringObjects //
 			), Map.of(), "Initialized");
 		}
-		catch (UnsupportedOperationException e) {
+		catch (UnsupportedOperationException | IllegalArgumentException e) {
 			// Ignore
 		}
-		catch (IllegalArgumentException e) {
-			// Ignore
-		}
-		try {
+        try {
 			int entryCount = objref.entryCount();
 			changeAttributes(List.of(), List.of(), Map.of( //
 				"Entry Count", entryCount //

@@ -238,13 +238,10 @@ abstract class AbstractListingMerger implements ListingMerger, ListingMergeConst
 					}
 				});
 			}
-			catch (InterruptedException e) {
+			catch (InterruptedException | InvocationTargetException e) {
 				throw new AssertException(e);
 			}
-			catch (InvocationTargetException e) {
-				throw new AssertException(e);
-			}
-		}
+        }
 	}
 
 	/**
@@ -274,13 +271,10 @@ abstract class AbstractListingMerger implements ListingMerger, ListingMergeConst
 					}
 				});
 			}
-			catch (InterruptedException e) {
+			catch (InterruptedException | InvocationTargetException e) {
 				throw new AssertException(e);
 			}
-			catch (InvocationTargetException e) {
-				throw new AssertException(e);
-			}
-		}
+        }
 	}
 
 	/**

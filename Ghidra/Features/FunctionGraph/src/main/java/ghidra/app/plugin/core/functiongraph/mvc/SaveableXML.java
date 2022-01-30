@@ -73,15 +73,13 @@ public class SaveableXML extends PrivateSaveable {
 		try {
 			element = builder.build(reader).getRootElement();
 		}
-		catch (JDOMException e) {
+		catch (JDOMException | IOException e) {
 			Msg.error(getClass(), "Unable to read XML data.", e);
 		}
-		catch (IOException e) {
-			// shouldn't happen, as we are using our own reader
-			Msg.error(getClass(), "Unable to read XML data.", e);
-		}
+        // shouldn't happen, as we are using our own reader
 
-	}
+
+    }
 
 	public Element getElement() {
 		return element;

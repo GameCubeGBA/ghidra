@@ -84,13 +84,10 @@ public class DataTypeDragNDropHandler implements GTreeDragNDropHandler {
 				(DataTypeArchiveGTree) tree, plugin.getConflictHandler());
 			plugin.getTool().execute(task, 250);
 		}
-		catch (UnsupportedFlavorException e) {
+		catch (UnsupportedFlavorException | IOException e) {
 			Msg.error(this, "Unable to perform drop operation", e);
 		}
-		catch (IOException e) {
-			Msg.error(this, "Unable to perform drop operation", e);
-		}
-	}
+    }
 
 	private CategoryNode getDropTargetNode(GTreeNode node) {
 

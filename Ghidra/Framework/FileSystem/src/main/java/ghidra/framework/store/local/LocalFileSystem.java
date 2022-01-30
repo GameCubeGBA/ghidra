@@ -879,9 +879,7 @@ public abstract class LocalFileSystem implements FileSystem {
 		}
 		StringBuilder buf = new StringBuilder();
 		// keep number of hidden prefix chars even
-		for (int i = 0; i < prefixCount; ++i) {
-			buf.append(HIDDEN_DIR_PREFIX_CHAR);
-		}
+        buf.append(String.valueOf(HIDDEN_DIR_PREFIX_CHAR).repeat(prefixCount));
 		buf.append(name);
 		return buf.toString();
 	}

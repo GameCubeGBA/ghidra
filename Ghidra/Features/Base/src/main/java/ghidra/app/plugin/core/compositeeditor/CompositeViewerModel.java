@@ -748,13 +748,10 @@ abstract class CompositeViewerModel extends AbstractTableModel
 		try {
 			oldCat.setName(newPath.getName());
 		}
-		catch (DuplicateNameException e) {
+		catch (DuplicateNameException | InvalidNameException e) {
 			Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
 		}
-		catch (InvalidNameException e) {
-			Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-		}
-		if (originalDataTypePath.isAncestor(oldPath)) {
+        if (originalDataTypePath.isAncestor(oldPath)) {
 			changeOriginalDataTypeCategory(oldPath, newPath);
 		}
 		compositeInfoChanged();

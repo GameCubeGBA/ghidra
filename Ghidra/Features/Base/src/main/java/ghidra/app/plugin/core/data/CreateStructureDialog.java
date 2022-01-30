@@ -474,15 +474,11 @@ public class CreateStructureDialog extends DialogComponentProvider {
 			try {
 				currentStructure.setName(nameText);
 			}
-			catch (InvalidNameException ine) {
+			catch (InvalidNameException | DuplicateNameException ine) {
 				setStatusText(ine.getMessage());
 				return;
 			}
-			catch (DuplicateNameException dne) {
-				setStatusText(dne.getMessage());
-				return;
-			}
-		}
+        }
 		else {
 			// get the selected object in the table
 			currentStructure = ((StructureWrapper) matchingStructuresTable.getValueAt(

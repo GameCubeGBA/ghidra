@@ -492,15 +492,10 @@ class ProgramSaveManager {
 			catch (CancelledException e) {
 				// ignore
 			}
-			catch (NotConnectedException e) {
+			catch (NotConnectedException | ConnectException e) {
 				ClientUtil.promptForReconnect(tool.getProject().getRepository(),
 					tool.getToolFrame());
-			}
-			catch (ConnectException e) {
-				ClientUtil.promptForReconnect(tool.getProject().getRepository(),
-					tool.getToolFrame());
-			}
-			catch (IOException e) {
+			} catch (IOException e) {
 				ClientUtil.handleException(tool.getProject().getRepository(), e, "Save File",
 					tool.getToolFrame());
 			}
@@ -547,13 +542,9 @@ class ProgramSaveManager {
 			catch (CancelledException e) {
 				// ignore
 			}
-			catch (IOException e) {
+			catch (IOException | InvalidNameException e) {
 				Msg.showError(this, null, "Program SaveAs Error", e.getMessage());
-			}
-			catch (InvalidNameException e) {
-				Msg.showError(this, null, "Program SaveAs Error", e.getMessage());
-			}
-			catch (Throwable e) {
+			} catch (Throwable e) {
 				Msg.showError(this, null, "Program SaveAs Error", e.getMessage(), e);
 			}
 		}

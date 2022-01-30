@@ -242,9 +242,7 @@ public class DecompileDebug {
 				buf.append(">\n");
 				tagstarted = true;
 			}
-			for (int i = 0; i < chunk.min; ++i) {
-				buf.append("  ");					// pad the hex display to 16 bytes
-			}
+            buf.append("  ".repeat(chunk.min));					// pad the hex display to 16 bytes
 			for (int i = chunk.min; i < chunk.max; ++i) {
 				int hi = (chunk.val[i] >> 4) & 0xf;
 				int lo = chunk.val[i] & 0xf;

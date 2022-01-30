@@ -360,13 +360,10 @@ public class DecompInterface {
 					DecompileProcessFactory.release(decompProcess);
 				}
 			}
-			catch (IOException e) {
+			catch (IOException | DecompileException e) {
 				// don't care
 			}
-			catch (DecompileException e) {
-				// don't care
-			}
-			stopProcess();
+            stopProcess();
 		}
 	}
 
@@ -419,13 +416,10 @@ public class DecompInterface {
 					.toString()
 					.equals("t");
 		}
-		catch (IOException e) {
+		catch (IOException | DecompileException e) {
 			// don't care
 		}
-		catch (DecompileException e) {
-			// don't care
-		}
-		stopProcess();
+        stopProcess();
 		return false;
 	}
 
@@ -457,13 +451,10 @@ public class DecompInterface {
 					.toString()
 					.equals("t");
 		}
-		catch (IOException e) {
+		catch (IOException | DecompileException e) {
 			// don't care
 		}
-		catch (DecompileException e) {
-			// don't care
-		}
-		stopProcess();
+        stopProcess();
 		return false;
 	}
 
@@ -496,13 +487,10 @@ public class DecompInterface {
 					.toString()
 					.equals("t");
 		}
-		catch (IOException e) {
+		catch (IOException | DecompileException e) {
 			// don't care
 		}
-		catch (DecompileException e) {
-			// don't care
-		}
-		stopProcess();
+        stopProcess();
 		return false;
 	}
 
@@ -534,13 +522,10 @@ public class DecompInterface {
 					.toString()
 					.equals("t");
 		}
-		catch (IOException e) {
+		catch (IOException | DecompileException e) {
 			// don't care
 		}
-		catch (DecompileException e) {
-			// don't care
-		}
-		stopProcess();
+        stopProcess();
 		return false;
 	}
 
@@ -565,13 +550,10 @@ public class DecompInterface {
 					.toString()
 					.equals("t");
 		}
-		catch (IOException e) {
+		catch (IOException | DecompileException e) {
 			// don't care
 		}
-		catch (DecompileException e) {
-			// don't care
-		}
-		stopProcess();
+        stopProcess();
 		return false;
 	}
 
@@ -603,13 +585,10 @@ public class DecompInterface {
 					.toString()
 					.equals("t");
 		}
-		catch (IOException e) {
+		catch (IOException | DecompileException e) {
 			// don't care
 		}
-		catch (DecompileException e) {
-			// don't care
-		}
-		stopProcess();
+        stopProcess();
 		return false;
 	}
 
@@ -640,13 +619,10 @@ public class DecompInterface {
 				return Integer.parseInt(retval);
 			}
 		}
-		catch (IOException e) {
+		catch (IOException | DecompileException e) {
 			// don't care
 		}
-		catch (DecompileException e) {
-			// don't care
-		}
-		stopProcess();
+        stopProcess();
 		return res;
 	}
 

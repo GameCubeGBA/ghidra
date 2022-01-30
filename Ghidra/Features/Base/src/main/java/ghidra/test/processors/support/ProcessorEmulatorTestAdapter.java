@@ -365,15 +365,7 @@ public abstract class ProcessorEmulatorTestAdapter extends TestCase implements E
 			floatRegSet = new HashSet<>(Arrays.asList(getRegisters(floatRegSetNames)));
 
 		}
-		catch (LanguageNotFoundException e) {
-			Msg.error(this, getClass().getSimpleName() + " instantiation error", e);
-			throw e;
-		}
-		catch (CompilerSpecNotFoundException e) {
-			Msg.error(this, getClass().getSimpleName() + " instantiation error", e);
-			throw e;
-		}
-		catch (RuntimeException e) {
+		catch (LanguageNotFoundException | RuntimeException | CompilerSpecNotFoundException e) {
 			Msg.error(this, getClass().getSimpleName() + " instantiation error", e);
 			throw e;
 		}
@@ -687,12 +679,8 @@ public abstract class ProcessorEmulatorTestAdapter extends TestCase implements E
 				buf2.append(testRunner.getRegisterValueString(reg));
 				buf2.append(' ');
 				int diff = buf1.length() - buf2.length();
-				for (int n = diff; n < 0; n++) {
-					buf1.append(' ');
-				}
-				for (int n = diff; n > 0; n--) {
-					buf2.append(' ');
-				}
+                buf1.append(" ".repeat(0 - diff));
+                buf2.append(" ".repeat(diff));
 			}
 			if (buf1.length() > 1) {
 				log(testRunner.getTestGroup(), buf1.toString());
@@ -1995,12 +1983,10 @@ public abstract class ProcessorEmulatorTestAdapter extends TestCase implements E
 				throw new RuntimeException(
 					"Test control block error (TestInfo structure): " + fileReferencePath, e);
 			}
-			catch (LanguageNotFoundException e) {
+			catch (LanguageNotFoundException | CancelledException e) {
 				throw new RuntimeException("Unexpected Error", e); // we already found language
 			}
-			catch (CancelledException e) {
-				throw new RuntimeException("Unexpected Error", e); // Cancel not used
-			}
+			// Cancel not used
 			catch (DuplicateNameException e) {
 				throw new RuntimeException("Test file naming conflict: " + fileReferencePath, e); // Must be avoided with naming of binary files
 			}

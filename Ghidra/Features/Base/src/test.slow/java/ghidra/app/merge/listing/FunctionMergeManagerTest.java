@@ -1245,15 +1245,10 @@ public class FunctionMergeManagerTest extends AbstractListingMergeManagerTest {
 
 					commit = true;
 				}
-				catch (DuplicateNameException e) {
+				catch (DuplicateNameException | InvalidInputException e) {
 					e.printStackTrace();
 					Assert.fail(e.getMessage());
-				}
-				catch (InvalidInputException e) {
-					e.printStackTrace();
-					Assert.fail(e.getMessage());
-				}
-				finally {
+				} finally {
 					program.endTransaction(txId, commit);
 				}
 			}
@@ -1290,15 +1285,10 @@ public class FunctionMergeManagerTest extends AbstractListingMergeManagerTest {
 
 					commit = true;
 				}
-				catch (DuplicateNameException e) {
+				catch (DuplicateNameException | InvalidInputException e) {
 					e.printStackTrace();
 					Assert.fail(e.getMessage());
-				}
-				catch (InvalidInputException e) {
-					e.printStackTrace();
-					Assert.fail(e.getMessage());
-				}
-				finally {
+				} finally {
 					program.endTransaction(txId, commit);
 				}
 			}
@@ -1785,15 +1775,10 @@ public class FunctionMergeManagerTest extends AbstractListingMergeManagerTest {
 
 					commit = true;
 				}
-				catch (DuplicateNameException e) {
+				catch (DuplicateNameException | InvalidInputException e) {
 					e.printStackTrace();
 					Assert.fail(e.getMessage());
-				}
-				catch (InvalidInputException e) {
-					e.printStackTrace();
-					Assert.fail(e.getMessage());
-				}
-				finally {
+				} finally {
 					program.endTransaction(txId, commit);
 				}
 			}
@@ -1827,15 +1812,10 @@ public class FunctionMergeManagerTest extends AbstractListingMergeManagerTest {
 
 					commit = true;
 				}
-				catch (DuplicateNameException e) {
+				catch (DuplicateNameException | InvalidInputException e) {
 					e.printStackTrace();
 					Assert.fail(e.getMessage());
-				}
-				catch (InvalidInputException e) {
-					e.printStackTrace();
-					Assert.fail(e.getMessage());
-				}
-				finally {
+				} finally {
 					program.endTransaction(txId, commit);
 				}
 			}

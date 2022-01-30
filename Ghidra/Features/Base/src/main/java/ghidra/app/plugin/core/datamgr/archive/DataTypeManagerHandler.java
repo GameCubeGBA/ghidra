@@ -1553,15 +1553,10 @@ public class DataTypeManagerHandler {
 			catch (CancelledException e) {
 				// O.K., expected
 			}
-			catch (NotConnectedException e) {
+			catch (NotConnectedException | ConnectException e) {
 				ClientUtil.promptForReconnect(pluginTool.getProject().getRepository(),
 					pluginTool.getToolFrame());
-			}
-			catch (ConnectException e) {
-				ClientUtil.promptForReconnect(pluginTool.getProject().getRepository(),
-					pluginTool.getToolFrame());
-			}
-			catch (IOException e) {
+			} catch (IOException e) {
 				ClientUtil.handleException(pluginTool.getProject().getRepository(), e, "Save File",
 					pluginTool.getToolFrame());
 			}

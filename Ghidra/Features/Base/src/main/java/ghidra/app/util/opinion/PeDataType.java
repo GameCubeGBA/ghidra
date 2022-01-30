@@ -82,13 +82,9 @@ public class PeDataType extends FactoryStructureDataType {
 				addComponent(struct, section.toDataType(), section.getReadableName());
 			}
 		}
-		catch (IOException e) {
+		catch (IOException | DuplicateNameException | MemoryAccessException e) {
 		}
-		catch (MemoryAccessException e) {
-		}
-		catch (DuplicateNameException e) {
-		}
-	}
+    }
 
 	@Override
 	public DataType clone(DataTypeManager dtm) {

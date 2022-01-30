@@ -213,13 +213,10 @@ public class DomainEventDisplayPlugin extends Plugin implements DomainObjectList
 					break;
 				}
 			}
-			catch (IllegalArgumentException e) {
+			catch (IllegalArgumentException | IllegalAccessException e) {
 				//ignore
 			}
-			catch (IllegalAccessException e) {
-				//ignore
-			}
-		}
+        }
 		return eventName;
 	}
 

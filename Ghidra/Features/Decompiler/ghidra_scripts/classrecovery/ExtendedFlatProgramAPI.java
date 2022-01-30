@@ -91,13 +91,10 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 			return possiblePointer;
 
 		}
-		catch (MemoryAccessException e) {
+		catch (MemoryAccessException | AddressOutOfBoundsException e) {
 			return null;
 		}
-		catch (AddressOutOfBoundsException e) {
-			return null;
-		}
-	}
+    }
 
 	/**
 	 * Method to check to see if there is a valid function pointer at the given address. If it is 
@@ -199,13 +196,10 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 				index++;
 			}
 		}
-		catch (MemoryAccessException e) {
+		catch (MemoryAccessException | AddressOutOfBoundsException e) {
 			return false;
 		}
-		catch (AddressOutOfBoundsException e) {
-			return false;
-		}
-		return true;
+        return true;
 	}
 
 	/**
@@ -330,14 +324,11 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 				filler = getByte(maxAddress.add(offset));
 			}
 		}
-		catch (MemoryAccessException e) {
-			return null;
-		}
-		catch (AddressOutOfBoundsException e) {
+		catch (MemoryAccessException | AddressOutOfBoundsException e) {
 			return null;
 		}
 
-		Address functionStart = maxAddress.add(offset);
+        Address functionStart = maxAddress.add(offset);
 
 		// check to see if the address after the instruction and filler is the start of a valid 
 		// subroutine

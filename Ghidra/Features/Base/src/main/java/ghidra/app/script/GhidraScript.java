@@ -1810,8 +1810,8 @@ public abstract class GhidraScript extends FlatProgramAPI {
 			Msg.info(this, message);
 		}
 		else {
-			String name = getClass().getName();
-			Msg.showInfo(getClass(), null, name, message);
+			var c = getClass();
+			Msg.showInfo(c, null, c.getName(), message);
 		}
 	}
 
@@ -1830,14 +1830,12 @@ public abstract class GhidraScript extends FlatProgramAPI {
 		char separator = ' ';
 		StringBuilder buffy = new StringBuilder("");
 		for (String s : input) {
-			if (s == null) {
-				continue;
+			if (s != null) {
+				buffy.append(s.trim()).append(separator);
 			}
-			buffy.append(s.trim()).append(separator);
 		}
 
-		String newString = buffy.toString();
-		return newString.trim();
+		return buffy.toString().trim();
 	}
 
 	/**
@@ -1881,8 +1879,7 @@ public abstract class GhidraScript extends FlatProgramAPI {
 	 * @return null if no value was found in the aforementioned sources
 	 */
 	private <T> T loadAskValue(StringTransformer<T> transformer, String key) {
-		T value = loadAskValue(null, transformer, key);
-		return value;
+		return loadAskValue(null, transformer, key);
 	}
 
 	/**
@@ -1934,17 +1931,15 @@ public abstract class GhidraScript extends FlatProgramAPI {
 			return t;
 		}
 		catch (IllegalArgumentException e) {
-			// handled below
+			if (isHeadless) {
+				throw new IllegalArgumentException("Error processing variable '" + propertyKey +
+					"' in headless mode -- its value '" + storedValue + "' is not a valid value.");
+			}
+	
+			Msg.warn(this, "Failed to parse script properties value '" + key + "' from file " +
+				propertiesFileParams.getFilename());
+			return null;
 		}
-
-		if (isHeadless) {
-			throw new IllegalArgumentException("Error processing variable '" + propertyKey +
-				"' in headless mode -- its value '" + storedValue + "' is not a valid value.");
-		}
-
-		Msg.warn(this, "Failed to parse script properties value '" + key + "' from file " +
-			propertiesFileParams.getFilename());
-		return null;
 	}
 
 	/**

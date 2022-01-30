@@ -71,12 +71,10 @@ public class SetLabelNamespaceCmd implements Command {
 			return true;
 		}catch (DuplicateNameException e) {
 			errorMsg = "Symbol named "+name+" already exists in namespace "+newNamespace;
-		} catch (InvalidInputException e) {
+		} catch (InvalidInputException | CircularDependencyException e) {
 			errorMsg = e.getMessage();
-		} catch (CircularDependencyException e) {
-			errorMsg = e.getMessage();
-		}	
-		return false;
+		}
+        return false;
 	}
 
 

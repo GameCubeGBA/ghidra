@@ -261,23 +261,11 @@ class MemoryMapManager {
 			try {
 				memory.split(block, newStart);
 			}
-			catch (MemoryBlockException e) {
+			catch (MemoryBlockException | LockException | NotFoundException | IllegalArgumentException e) {
 				msg = e.getMessage();
 				return false;
 			}
-			catch (IllegalArgumentException e) {
-				msg = e.getMessage();
-				return false;
-			}
-			catch (NotFoundException e) {
-				msg = e.getMessage();
-				return false;
-			}
-			catch (LockException e) {
-				msg = e.getMessage();
-				return false;
-			}
-			MemoryBlock newBlock = memory.getBlock(newStart);
+            MemoryBlock newBlock = memory.getBlock(newStart);
 			try {
 				newBlock.setName(newBlockName);
 			}

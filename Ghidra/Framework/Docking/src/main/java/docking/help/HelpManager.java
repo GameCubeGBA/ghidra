@@ -607,14 +607,10 @@ public class HelpManager implements HelpService {
 		try {
 			testStream = url.openStream();
 			return true; // if the above didn't fail, then the resource can be accessed
-		}
-		catch (MalformedURLException e) {
+		} catch (IOException e) {
 			return false; // shouldn't happen as the URL should be valid
-		}
-		catch (IOException e) {
-			return false; // this happens if the resource doesn't exit
-		}
-		finally {
+		}// this happens if the resource doesn't exit
+        finally {
 			if (testStream != null) {
 				try {
 					testStream.close();

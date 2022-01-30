@@ -147,17 +147,11 @@ public class PatternStats extends GhidraScript implements PatternFactory {
 			String totalString = Integer.toString(totalHits);
 			String falseWithString = Integer.toString(falsePosWithCode);
 			String falseNoString = Integer.toString(falsePosNoCode);
-			for (int i = totalString.length(); i < 10; ++i) {
-				buf.append(' ');
-			}
+            buf.append(" ".repeat(10 - totalString.length()));
 			buf.append(totalString);
-			for (int i = falseWithString.length(); i < 10; ++i) {
-				buf.append(' ');
-			}
+            buf.append(" ".repeat(10 - falseWithString.length()));
 			buf.append(falseWithString);
-			for (int i = falseNoString.length(); i < 10; ++i) {
-				buf.append(' ');
-			}
+            buf.append(" ".repeat(10 - falseNoString.length()));
 			buf.append(falseNoString);
 			buf.append(" -- ").append(pattern.toString());
 		}

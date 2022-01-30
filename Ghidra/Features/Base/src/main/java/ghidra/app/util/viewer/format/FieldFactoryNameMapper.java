@@ -56,11 +56,8 @@ public class FieldFactoryNameMapper {
 		try {
 			return factoryClass.getConstructor().newInstance();
 		}
-		catch (IllegalAccessException e) {
-		}
-		catch (InstantiationException e) {
-		}
-		catch (Exception e) {
+		catch (IllegalAccessException | InstantiationException e) {
+		} catch (Exception e) {
 			Msg.error(FieldFactoryNameMapper.class, "Unexpected Exception: " + e.getMessage(), e);
 		}
 		return null;

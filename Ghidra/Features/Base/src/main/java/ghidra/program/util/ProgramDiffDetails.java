@@ -117,9 +117,7 @@ public class ProgramDiffDetails {
 	private static String getIndentString(int indentCount) {
 		int indentChars = indentCount * INDENT_SIZE;
 		StringBuffer buf = new StringBuffer(indentChars);
-		for (int i = 0; i < indentChars; i++) {
-			buf.append(' ');
-		}
+        buf.append(" ".repeat(indentChars));
 		return buf.toString();
 	}
 
@@ -2423,9 +2421,7 @@ public class ProgramDiffDetails {
 			return "";
 		}
 		StringBuffer buf = new StringBuffer(numSpaces);
-		for (int i = 0; i < numSpaces; i++) {
-			buf.append(" ");
-		}
+        buf.append(" ".repeat(numSpaces));
 		return buf.toString();
 	}
 

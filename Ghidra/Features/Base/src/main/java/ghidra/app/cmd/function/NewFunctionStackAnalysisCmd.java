@@ -476,14 +476,11 @@ public class NewFunctionStackAnalysisCmd extends BackgroundCommand {
 					func.getSignatureSource());
 			}
 		}
-		catch (DuplicateNameException e) {
-			// ignore - unexpected
-		}
-		catch (InvalidInputException e) {
+		catch (DuplicateNameException | InvalidInputException e) {
 			// ignore - unexpected
 		}
 
-	}
+    }
 
 	private static final int MAX_PARAM_FILLIN_COUNT = 10;
 

@@ -643,14 +643,10 @@ public class ObjectiveC2_DecompilerMessageAnalyzer extends AbstractAnalyzer {
 		Address address;
 		try {
 			address = program.getAddressFactory().getDefaultAddressSpace().getAddress(offset);
-		}
-		catch (AddressOutOfBoundsException e) {
+		} catch (Exception e) {
 			address = null;
 		}
-		catch (Exception e) {
-			address = null;
-		}
-		return address;
+        return address;
 	}
 
 	// Tries to lay down a reference to the function that is actually being

@@ -441,13 +441,9 @@ public class PcodeParser extends PcodeCompile {
 		catch (RecognitionException e) {
 			throw new SleighException("Semantic compilation error: " + e.getMessage(), e);
 		}
-		catch (BailoutException e) {
+		catch (BailoutException | NullPointerException e) {
 			throw new SleighException("Unrecoverable error(s), halting compilation", e);
-		}
-		catch (NullPointerException e) {
-			throw new SleighException("Unrecoverable error(s), halting compilation", e);
-		}
-		finally {
+		} finally {
 			if (writer != null) {
 				try {
 					writer.close();

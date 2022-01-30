@@ -549,9 +549,7 @@ public class PostCommentFieldFactory extends FieldFactory {
 		}
 		// Initialize dashed separator lines
 		StringBuffer sb = new StringBuffer();
-		for (int i = 0; i < 80; i++) {
-			sb.append("-");
-		}
+        sb.append("-".repeat(80));
 		DEFAULT_FLAG_COMMENT = sb.toString();
 
 	}

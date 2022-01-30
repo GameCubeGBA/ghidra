@@ -137,10 +137,9 @@ public class UpgradeDexToGhidra71Script extends GhidraScript {
 				LocalVariableImpl newlocal = new LocalVariableImpl( var.getName(), 0, var.getDataType(), localRegister, func.getProgram() );
 				func.removeVariable(var);
 				func.addLocalVariable(newlocal, SourceType.ANALYSIS);
-			} catch (InvalidInputException e) {
-			} catch (DuplicateNameException e) {
+			} catch (InvalidInputException | DuplicateNameException e) {
 			}
-			
-		}
+
+        }
 	}
 }

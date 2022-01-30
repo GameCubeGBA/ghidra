@@ -889,13 +889,9 @@ public class CodeUnitMergeManager1Test extends AbstractListingMergeManagerTest {
 
 					commit = true;
 				}
-				catch (CodeUnitInsertionException e) {
+				catch (CodeUnitInsertionException | DataTypeConflictException e) {
 					e.printStackTrace();
-				}
-				catch (DataTypeConflictException e) {
-					e.printStackTrace();
-				}
-				finally {
+				} finally {
 					program.endTransaction(txId, commit);
 				}
 			}
@@ -1013,13 +1009,9 @@ public class CodeUnitMergeManager1Test extends AbstractListingMergeManagerTest {
 
 					commit = true;
 				}
-				catch (CodeUnitInsertionException e) {
+				catch (CodeUnitInsertionException | DataTypeConflictException e) {
 					e.printStackTrace();
-				}
-				catch (DataTypeConflictException e) {
-					e.printStackTrace();
-				}
-				finally {
+				} finally {
 					program.endTransaction(txId, commit);
 				}
 			}
@@ -1131,13 +1123,9 @@ public class CodeUnitMergeManager1Test extends AbstractListingMergeManagerTest {
 
 					commit = true;
 				}
-				catch (CodeUnitInsertionException e) {
+				catch (CodeUnitInsertionException | DataTypeConflictException e) {
 					e.printStackTrace();
-				}
-				catch (DataTypeConflictException e) {
-					e.printStackTrace();
-				}
-				finally {
+				} finally {
 					program.endTransaction(txId, commit);
 				}
 			}
@@ -1273,13 +1261,9 @@ public class CodeUnitMergeManager1Test extends AbstractListingMergeManagerTest {
 
 					commit = true;
 				}
-				catch (CodeUnitInsertionException e) {
+				catch (CodeUnitInsertionException | DataTypeConflictException e) {
 					e.printStackTrace();
-				}
-				catch (DataTypeConflictException e) {
-					e.printStackTrace();
-				}
-				finally {
+				} finally {
 					program.endTransaction(txId, commit);
 				}
 			}

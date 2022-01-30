@@ -1008,19 +1008,13 @@ public class StackEditorModel extends CompositeEditorModel {
 					}
 					newSv.setComment(sv.getComment());
 				}
-				catch (DuplicateNameException e) {
+				catch (DuplicateNameException | InvalidInputException e) {
 					Msg.showError(this, null, "Stack Edit Error",
 						"Stack variable error at offset " + sv.getStackOffset() + ": " +
 							e.getMessage());
 					continue;
 				}
-				catch (InvalidInputException e) {
-					Msg.showError(this, null, "Stack Edit Error",
-						"Stack variable error at offset " + sv.getStackOffset() + ": " +
-							e.getMessage());
-					continue;
-				}
-				String comment = sv.getComment();
+                String comment = sv.getComment();
 				if (comment != null) {
 					newSv.setComment(comment);
 				}

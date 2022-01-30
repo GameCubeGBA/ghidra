@@ -135,16 +135,10 @@ public class Handler extends URLStreamHandler {
 			try {
 				protocolHandlers.add((GhidraProtocolHandler) c.getConstructor().newInstance());
 			}
-			catch (InstantiationException | IllegalAccessException e) {
+			catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
 				Msg.error(Handler.class,
 					"Failed to instantiate ghidra protocol extension handler: " + c.getName());
-			} catch (NoSuchMethodException e) {
-				Msg.error(Handler.class,
-					"Failed to instantiate ghidra protocol extension handler: " + c.getName());
-            } catch (InvocationTargetException e) {
-				Msg.error(Handler.class,
-					"Failed to instantiate ghidra protocol extension handler: " + c.getName());
-            }
+			}
         }
 	}
 

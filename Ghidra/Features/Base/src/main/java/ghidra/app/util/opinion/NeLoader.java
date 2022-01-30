@@ -432,15 +432,11 @@ public class NeLoader extends AbstractLibrarySupportLoader {
 						SourceType.IMPORTED);
 					refFunction = loc.getFunction();
 				}
-				catch (DuplicateNameException e) {
+				catch (DuplicateNameException | InvalidInputException e) {
 					log.appendMsg(e.getMessage() + '\n');
 					continue;
 				}
-				catch (InvalidInputException e) {
-					log.appendMsg(e.getMessage() + '\n');
-					continue;
-				}
-				AddressSet body = new AddressSet();
+                AddressSet body = new AddressSet();
 				body.add(addr, addr.add(thunkBodySize - 1));
 				try {
 					functionManager.createThunkFunction(null, globalNamespace, addr, body,

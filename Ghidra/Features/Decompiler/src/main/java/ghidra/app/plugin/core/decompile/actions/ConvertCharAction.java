@@ -55,9 +55,7 @@ public class ConvertCharAction extends ConvertConstantAction {
 		}
 		pad = pad - res.length();
 		buffer.append("'\\x");
-		for (int i = 0; i < pad; ++i) {
-			buffer.append('0');
-		}
+		buffer.append("0".repeat(pad));
 		buffer.append(res.toLowerCase());
 		buffer.append('\'');
 	}

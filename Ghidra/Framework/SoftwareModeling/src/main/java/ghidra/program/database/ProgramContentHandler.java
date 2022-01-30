@@ -82,16 +82,9 @@ public class ProgramContentHandler extends DBContentHandler {
 		catch (Field.UnsupportedFieldException e) {
 			throw new VersionException(false);
 		}
-		catch (VersionException e) {
+		catch (VersionException | CancelledException | IOException e) {
 			throw e;
-		}
-		catch (IOException e) {
-			throw e;
-		}
-		catch (CancelledException e) {
-			throw e;
-		}
-		catch (Throwable t) {
+		} catch (Throwable t) {
 			Msg.error(this, "getImmutableObject failed", t);
 			String msg = t.getMessage();
 			if (msg == null) {
@@ -141,16 +134,9 @@ public class ProgramContentHandler extends DBContentHandler {
 		catch (Field.UnsupportedFieldException e) {
 			throw new VersionException(false);
 		}
-		catch (VersionException e) {
+		catch (VersionException | CancelledException | IOException e) {
 			throw e;
-		}
-		catch (IOException e) {
-			throw e;
-		}
-		catch (CancelledException e) {
-			throw e;
-		}
-		catch (Throwable t) {
+		} catch (Throwable t) {
 			Msg.error(this, "getReadOnlyObject failed", t);
 			t.printStackTrace();
 			String msg = t.getMessage();
@@ -207,16 +193,9 @@ public class ProgramContentHandler extends DBContentHandler {
 		catch (Field.UnsupportedFieldException e) {
 			throw new VersionException(false);
 		}
-		catch (VersionException e) {
+		catch (VersionException | CancelledException | IOException e) {
 			throw e;
-		}
-		catch (IOException e) {
-			throw e;
-		}
-		catch (CancelledException e) {
-			throw e;
-		}
-		catch (Throwable t) {
+		} catch (Throwable t) {
 			Msg.error(this, "getDomainObject failed", t);
 			String msg = t.getMessage();
 			if (msg == null) {
@@ -311,13 +290,9 @@ public class ProgramContentHandler extends DBContentHandler {
 			program = new ProgramDB(dbh, openMode, null, this);
 			return getProgramChangeSet(program, bf);
 		}
-		catch (VersionException e) {
+		catch (VersionException | IOException e) {
 			throw e;
-		}
-		catch (IOException e) {
-			throw e;
-		}
-		catch (Throwable t) {
+		} catch (Throwable t) {
 			Msg.error(this, "getChangeSet failed", t);
 			String msg = t.getMessage();
 			if (msg == null) {

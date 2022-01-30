@@ -829,12 +829,7 @@ public class DebuggerTraceManagerServicePlugin extends Plugin
 					try {
 						trace.getDomainFile().save(monitor);
 						future.complete(null);
-					}
-					catch (CancelledException e) {
-						// Done
-						future.completeExceptionally(e);
-					}
-					catch (NotConnectedException | ConnectException e) {
+					} catch (NotConnectedException | ConnectException e) {
 						ClientUtil.promptForReconnect(tool.getProject().getRepository(),
 							tool.getToolFrame());
 						future.completeExceptionally(e);
@@ -843,11 +838,11 @@ public class DebuggerTraceManagerServicePlugin extends Plugin
 						ClientUtil.handleException(tool.getProject().getRepository(), e,
 							"Save Trace", tool.getToolFrame());
 						future.completeExceptionally(e);
-					}
-					catch (Throwable e) {
+					} catch (Throwable e) {
+						// Done
 						future.completeExceptionally(e);
 					}
-				}
+                }
 			});
 		}
 		else {

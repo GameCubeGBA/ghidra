@@ -304,9 +304,7 @@ public class HexFormatModel implements UniversalDataFormatModel {
 		else {
 			int len = 2 - strLen;
 
-			for (int i = 0; i < len; i++) {
-				sb.append("0");
-			}
+            sb.append("0".repeat(len));
 			sb.append(value);
 		}
 		return (sb.toString());

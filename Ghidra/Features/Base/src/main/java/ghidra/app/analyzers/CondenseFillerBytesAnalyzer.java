@@ -207,19 +207,13 @@ public class CondenseFillerBytesAnalyzer extends AbstractAnalyzer {
 		try {
 			listing.createData(fillerAddress, new AlignmentDataType(), fillerLength);
 		}
-		catch (CodeUnitInsertionException e) {
+		catch (CodeUnitInsertionException | DataTypeConflictException e) {
 			// shouldn't happen if we have true filler bytes
 			Msg.error(this,
 				"Unable to condense filler bytes (bad filler value?) at " + fillerAddress, e);
 			return;
 		}
-		catch (DataTypeConflictException e) {
-			// shouldn't happen if we have true filler bytes
-			Msg.error(this,
-				"Unable to condense filler bytes (bad filler value?) at " + fillerAddress, e);
-			return;
-		}
-	}
+    }
 
 	@Override
 	public boolean removed(Program program, AddressSetView set, TaskMonitor monitor, MessageLog log)

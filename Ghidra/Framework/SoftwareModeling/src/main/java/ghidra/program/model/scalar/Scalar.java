@@ -410,9 +410,7 @@ public class Scalar implements Comparable<Scalar> {
 		buf.append(pre);
 		if (zeroPadded) {
 			int numDigits = getDigits(radix);
-			for (int i = 0; i < numDigits - b.length(); ++i) {
-				buf.append("0");
-			}
+            buf.append("0".repeat(numDigits - b.length()));
 		}
 		buf.append(b);
 		buf.append(post);

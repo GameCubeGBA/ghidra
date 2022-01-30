@@ -119,11 +119,9 @@ public class RangeMap implements Serializable {
 				index = map.getPreviousPropertyIndex(index);	
 				return map.getInt(index);
 			}
-			catch(NoSuchIndexException ex) {
+			catch(NoSuchIndexException | NoValueException ex) {
 			}
-			catch(NoValueException ex) {
-			}
-		}		
+        }
 		return 0;
 	}
 	

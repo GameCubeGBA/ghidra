@@ -202,17 +202,9 @@ class OldLanguage implements Language {
 
 			parseOldLanguage(root, descriptionOnly);
 
-		}
-		catch (SAXNotRecognizedException e) {
+		} catch (SAXException | JDOMException e) {
 			throw new IOException("Failed to parse old language: " + oldLangFile, e);
-		}
-		catch (JDOMException e) {
-			throw new IOException("Failed to parse old language: " + oldLangFile, e);
-		}
-		catch (SAXException e) {
-			throw new IOException("Failed to parse old language: " + oldLangFile, e);
-		}
-		finally {
+		} finally {
 			if (is != null) {
 				try {
 					is.close();
