@@ -455,7 +455,7 @@ public class Schema {
 	 * @return packed name list.
 	 */
 	String getPackedFieldNames() {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		buf.append(keyName);
 		buf.append(NAME_SEPARATOR);
 		for (String fieldName : fieldNames) {

@@ -325,9 +325,11 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 		switch (flowFlags) { // Convert flags to a standard flowtype
 			case 0:
 			case BRANCH_TO_END:
-				return RefType.FALL_THROUGH;
+            case NO_FALLTHRU | BRANCH_TO_END:
+                return RefType.FALL_THROUGH;
 			case CALL:
-				return RefType.UNCONDITIONAL_CALL;
+            case CALL | NO_FALLTHRU | BRANCH_TO_END | RETURN:
+                return RefType.UNCONDITIONAL_CALL;
 			case CALL | NO_FALLTHRU | RETURN:
 				return RefType.CALL_TERMINATOR;
 			case CALL_INDIRECT | NO_FALLTHRU | RETURN:
@@ -335,14 +337,12 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 			case CALL | BRANCH_TO_END:
 				return RefType.CONDITIONAL_CALL; // This could be wrong but doesn't matter much
 			case CALL | NO_FALLTHRU | JUMPOUT:
-				return RefType.COMPUTED_JUMP;
-			case CALL | NO_FALLTHRU | BRANCH_TO_END | RETURN:
-				return RefType.UNCONDITIONAL_CALL;
-			case CALL_INDIRECT:
+            case JUMPOUT | NO_FALLTHRU | BRANCH_INDIRECT:
+            case BRANCH_INDIRECT | NO_FALLTHRU:
+                return RefType.COMPUTED_JUMP;
+            case CALL_INDIRECT:
 				return RefType.COMPUTED_CALL;
-			case BRANCH_INDIRECT | NO_FALLTHRU:
-				return RefType.COMPUTED_JUMP;
-			case BRANCH_INDIRECT | BRANCH_TO_END:
+            case BRANCH_INDIRECT | BRANCH_TO_END:
 			case BRANCH_INDIRECT | NO_FALLTHRU | BRANCH_TO_END:
 			case BRANCH_INDIRECT | JUMPOUT | NO_FALLTHRU | BRANCH_TO_END:
 				return RefType.CONDITIONAL_COMPUTED_JUMP;
@@ -350,29 +350,21 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 			case CALL_INDIRECT | NO_FALLTHRU | BRANCH_TO_END:
 				return RefType.CONDITIONAL_COMPUTED_CALL;
 			case RETURN | NO_FALLTHRU:
-				return RefType.TERMINATOR;
+            case NO_FALLTHRU:
+                return RefType.TERMINATOR;
 			case RETURN | BRANCH_TO_END:
 			case RETURN | NO_FALLTHRU | BRANCH_TO_END:
 				return RefType.CONDITIONAL_TERMINATOR;
 			case JUMPOUT:
-				return RefType.CONDITIONAL_JUMP;
+            case BRANCH_TO_END | JUMPOUT:
+            case JUMPOUT | NO_FALLTHRU | BRANCH_TO_END:
+                return RefType.CONDITIONAL_JUMP;
 			case JUMPOUT | NO_FALLTHRU:
 				return RefType.UNCONDITIONAL_JUMP;
-			case JUMPOUT | NO_FALLTHRU | BRANCH_TO_END:
-				return RefType.CONDITIONAL_JUMP;
-			case JUMPOUT | NO_FALLTHRU | RETURN:
-				return RefType.JUMP_TERMINATOR;
-			case JUMPOUT | NO_FALLTHRU | BRANCH_INDIRECT:
-				return RefType.COMPUTED_JUMP; //added for tableswitch in jvm
-			case BRANCH_INDIRECT | NO_FALLTHRU | RETURN:
-				return RefType.JUMP_TERMINATOR;
-			case NO_FALLTHRU:
-				return RefType.TERMINATOR;
-			case BRANCH_TO_END | JUMPOUT:
-				return RefType.CONDITIONAL_JUMP;
-			case NO_FALLTHRU | BRANCH_TO_END:
-				return RefType.FALL_THROUGH;
-			default:
+            case JUMPOUT | NO_FALLTHRU | RETURN:
+            case BRANCH_INDIRECT | NO_FALLTHRU | RETURN:
+                return RefType.JUMP_TERMINATOR;//added for tableswitch in jvm
+            default:
 				break;
 		}
 		return RefType.INVALID;

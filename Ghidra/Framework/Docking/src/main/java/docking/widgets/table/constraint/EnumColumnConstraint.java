@@ -89,7 +89,7 @@ public class EnumColumnConstraint<T extends Enum<T>> implements ColumnConstraint
 	public String getConstraintValueTooltip() {
 		EnumConstraintEditor<T> editor = (EnumConstraintEditor<T>) getEditor(null);
 
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 
 		buf.append("{");
 		// @formatter:off
@@ -105,7 +105,7 @@ public class EnumColumnConstraint<T extends Enum<T>> implements ColumnConstraint
 	@Override
 	public String getConstraintValueString() {
 
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 
 		buf.append("{");
 		// @formatter:off

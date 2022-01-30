@@ -324,9 +324,7 @@ public class DynamicHash {
 		}
 
 		switch (method) {
-			case 0:
-				break;
-			case 1:
+            case 1:
 				gatherUnmarkedOp();
 				for (; opproc < markop.size(); ++opproc) {
 					buildOpUp(markop.get(opproc));
@@ -359,7 +357,8 @@ public class DynamicHash {
 					buildVnDown(markvn.get(vnproc));
 				}
 				break;
-			default:
+            case 0:
+            default:
 				break;
 		}
 

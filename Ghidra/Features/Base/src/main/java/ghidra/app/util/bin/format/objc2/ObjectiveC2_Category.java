@@ -144,7 +144,7 @@ public class ObjectiveC2_Category implements StructConverter {
 	}
 
 	public DataType toDataType() throws DuplicateNameException, IOException {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		buffer.append(NAME);
 
 		if (cls == null) {

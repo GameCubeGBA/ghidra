@@ -565,7 +565,7 @@ class ProgramTextWriter {
 
 		try {
 			byte[] bytes = cu.getBytes();
-			StringBuffer bytesbuf = new StringBuffer();
+			StringBuilder bytesbuf = new StringBuilder();
 			for (int i = 0; i < bytes.length; ++i) {
 				if (i > 0) {
 					bytesbuf.append(BYTES_DELIM);
@@ -712,7 +712,7 @@ class ProgramTextWriter {
 
 		String fill = genFill(options.getAddrWidth() + options.getBytesWidth());
 
-		StringBuffer stars = new StringBuffer();
+		StringBuilder stars = new StringBuilder();
 		for (x = 0; x < width; x++) {
 			stars.append("*");
 		}

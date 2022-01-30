@@ -276,7 +276,7 @@ public class StatusBar extends JPanel {
 	@Override
 	public String getToolTipText() {
 		if (messageQueue.size() > 0) {
-			StringBuffer buffer = new StringBuffer("<HTML>");
+			StringBuilder buffer = new StringBuilder("<HTML>");
 
 			Iterator<String> iter = messageQueue.iterator();
 			for (int i = 0; iter.hasNext(); i++) {

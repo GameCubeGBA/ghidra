@@ -444,7 +444,7 @@ public class MachoPrelinkFileSystem extends GFileSystemBase implements GFileSyst
 							String string = new String(bytes);
 							int index = string.indexOf("com.apple");
 							String kmodNameString = string.substring(index, index + 64).trim();
-							StringBuffer buffer = new StringBuffer();
+							StringBuilder buffer = new StringBuilder();
 							for (int i = 0; i < kmodNameString.length(); i++) {
 								char c = kmodNameString.charAt(i);
 								if (LocalFileSystem.isValidNameCharacter(c)) {

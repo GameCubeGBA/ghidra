@@ -152,14 +152,12 @@ public class LabelMarkupType extends VTMarkupType {
 			options.getEnum(VTOptionDefines.LABELS, LabelChoices.ADD);
 		switch (labelChoice) {
 			case ADD:
-				return VTMarkupItemApplyActionType.ADD;
-			case ADD_AS_PRIMARY:
-				return VTMarkupItemApplyActionType.ADD;
-			case REPLACE_DEFAULT_ONLY:
-				return VTMarkupItemApplyActionType.REPLACE;
-			case REPLACE_ALL:
-				return VTMarkupItemApplyActionType.REPLACE;
-			case EXCLUDE:
+            case ADD_AS_PRIMARY:
+                return VTMarkupItemApplyActionType.ADD;
+            case REPLACE_DEFAULT_ONLY:
+            case REPLACE_ALL:
+                return VTMarkupItemApplyActionType.REPLACE;
+            case EXCLUDE:
 			default:
 				return null;
 		}

@@ -211,7 +211,7 @@ public class ProgramAddressFactory extends DefaultAddressFactory {
 	 */
 	private String fixupOverlaySpaceName(String blockName) {
 		int len = blockName.length();
-		StringBuffer buf = new StringBuffer(len);
+		StringBuilder buf = new StringBuilder(len);
 		for (int i = 0; i < len; i++) {
 			char c = blockName.charAt(i);
 			if (c == ':' || c <= 0x20) {

@@ -954,7 +954,7 @@ public abstract class AbstractDataActionTest extends AbstractGhidraHeadedIntegra
 	}
 
 	protected String getString(byte[] bytes, boolean terminated) {
-		StringBuffer strBuf = new StringBuffer(bytes.length + 2);
+		StringBuilder strBuf = new StringBuilder(bytes.length + 2);
 		boolean bytemode = true;
 		for (int index = 0; index < bytes.length; index++) {
 			char c = (char) (bytes[index]);
@@ -994,7 +994,7 @@ public abstract class AbstractDataActionTest extends AbstractGhidraHeadedIntegra
 	}
 
 	protected String getUnicodeString(byte[] bytes) {
-		StringBuffer strBuf = new StringBuffer(bytes.length + 2);
+		StringBuilder strBuf = new StringBuilder(bytes.length + 2);
 		boolean bytemode = true;
 		for (int index = 0; index < bytes.length; index += 2) {
 			char c = 0;

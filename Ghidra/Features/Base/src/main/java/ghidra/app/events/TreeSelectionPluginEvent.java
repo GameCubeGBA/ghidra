@@ -68,7 +68,7 @@ public final class TreeSelectionPluginEvent extends PluginEvent {
 	 */
 	@Override
     public String toString() {
-		StringBuffer sb = new StringBuffer("Tree Name = ");
+		StringBuilder sb = new StringBuilder("Tree Name = ");
 		sb.append(treeName);
 		sb.append(", Group Paths = {");
 		for (int i=0; i<groupPaths.length; i++) {

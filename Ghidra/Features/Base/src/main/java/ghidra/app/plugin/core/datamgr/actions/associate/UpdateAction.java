@@ -79,7 +79,7 @@ public class UpdateAction extends SyncAction {
 
 	@Override
 	protected String getConfirmationMessage(List<DataTypeSyncInfo> infos) {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		if (containsConflicts(infos)) {
 			buf.append("You are updating one or more conflicts which will OVERWRITE\n");
 			buf.append("changes in this program or archive!\n\n");

@@ -107,7 +107,7 @@ public class MachoPrelinkMap {
 
 	@Override
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		List<String> keyList = new ArrayList<String>( map.keySet() );
 		Collections.sort( keyList );
 		Iterator<String> keyIterator = keyList.iterator();

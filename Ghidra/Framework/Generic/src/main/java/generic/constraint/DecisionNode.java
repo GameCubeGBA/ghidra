@@ -88,7 +88,7 @@ public class DecisionNode<T> {
 
 	@Override
 	public String toString() {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		List<String> decisionPath = getDecisionPath();
 		for (String string : decisionPath) {
 			buf.append("/");

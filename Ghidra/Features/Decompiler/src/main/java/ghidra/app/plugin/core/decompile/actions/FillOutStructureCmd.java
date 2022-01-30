@@ -704,15 +704,11 @@ public class FillOutStructureCmd extends BackgroundCommand {
 
 						break;
 					case PcodeOp.CAST:
-						putOnList(output, currentRef.offset, todoList, doneList);
+                    case PcodeOp.COPY:
+                    case PcodeOp.MULTIEQUAL:
+                        putOnList(output, currentRef.offset, todoList, doneList);
 						break;
-					case PcodeOp.MULTIEQUAL:
-						putOnList(output, currentRef.offset, todoList, doneList);
-						break;
-					case PcodeOp.COPY:
-						putOnList(output, currentRef.offset, todoList, doneList);
-						break;
-					case PcodeOp.CALL:
+                    case PcodeOp.CALL:
 						if (currentRef.offset == 0) {		// If pointer is passed directly (no offset)
 							// find it as an input
 							int slot = pcodeOp.getSlot(currentRef.varnode);

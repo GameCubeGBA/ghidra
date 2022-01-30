@@ -1484,7 +1484,7 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 	 * @return A string representation of the given collection
 	 */
 	public static String toString(Collection<?> collection) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		TypeVariable<?>[] typeParameters = collection.getClass().getTypeParameters();
 		buffer.append("Collection<");
 		for (TypeVariable<?> typeVariable : typeParameters) {

@@ -179,7 +179,7 @@ public class HelpBuildUtils {
 	private static String fixStyleSheetLinkInFile(Path helpFile, String fileContents) {
 
 		int currentPosition = 0;
-		StringBuffer newContents = new StringBuffer();
+		StringBuilder newContents = new StringBuilder();
 		Matcher matcher = STYLE_SHEET_PATTERN.matcher(fileContents);
 
 		boolean hasMatches = matcher.find();
@@ -229,7 +229,7 @@ public class HelpBuildUtils {
 	private static String fixStyleSheetClassNames(Path helpFile, String fileContents) {
 
 		int currentPosition = 0;
-		StringBuffer newContents = new StringBuffer();
+		StringBuilder newContents = new StringBuilder();
 		Matcher matcher = STYLE_CLASS_PATTERN.matcher(fileContents);
 
 		boolean hasMatches = matcher.find();
@@ -286,7 +286,7 @@ public class HelpBuildUtils {
 
 	private static String fixRelativeLink(Pattern pattern, Path helpFile, String fileContents) {
 		int currentPosition = 0;
-		StringBuffer newContents = new StringBuffer();
+		StringBuilder newContents = new StringBuilder();
 		Matcher matcher = pattern.matcher(fileContents);
 
 		boolean hasMatches = matcher.find();
@@ -342,7 +342,7 @@ public class HelpBuildUtils {
 		InputStreamReader isr = new InputStreamReader(Files.newInputStream(helpFile));
 		BufferedReader reader = new BufferedReader(isr);
 		try {
-			StringBuffer buffy = new StringBuffer();
+			StringBuilder buffy = new StringBuilder();
 			String line = null;
 			while ((line = reader.readLine()) != null) {
 				buffy.append(line).append('\n');
@@ -485,10 +485,9 @@ public class HelpBuildUtils {
 
 		switch (scheme) {
 			case "file":
-				return false;
-			case "jar":
-				return false;
-			default:
+            case "jar":
+                return false;
+            default:
 				break;
 		}
 		return true;

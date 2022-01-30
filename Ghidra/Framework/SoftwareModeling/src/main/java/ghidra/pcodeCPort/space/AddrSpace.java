@@ -351,7 +351,7 @@ public class AddrSpace {
 	}
 
 	public String toString(long offset) {
-		StringBuffer s = new StringBuffer();
+		StringBuilder s = new StringBuilder();
 		int addrSize = getAddrSize();
 		int padLength = 2 * addrSize;
 		String longString = Long.toHexString(offset >>> scale);

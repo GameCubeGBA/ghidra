@@ -435,10 +435,9 @@ class RegisterValueRangeComparator implements Comparator<RegisterValueRange> {
 	public int compare(RegisterValueRange range1, RegisterValueRange range2) {
 		switch (sortColumn) {
 			case 0:
-				return range1.getStartAddress().compareTo(range2.getStartAddress());
-			case 1:
-				return range1.getStartAddress().compareTo(range2.getStartAddress());
-			case 2:
+            case 1:
+                return range1.getStartAddress().compareTo(range2.getStartAddress());
+            case 2:
 				return range1.getValue().compareTo(range2.getValue());
 		}
 		return 0;

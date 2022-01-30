@@ -116,8 +116,6 @@ public abstract class CliAbstractSig extends CliBlob implements CliRepresentable
 		*/
 
 		switch (typeCode) {
-			case ELEMENT_TYPE_VOID:
-				return VoidDataType.dataType;
 
 			case ELEMENT_TYPE_BOOLEAN:
 				return BooleanDataType.dataType;
@@ -134,9 +132,13 @@ public abstract class CliAbstractSig extends CliBlob implements CliRepresentable
 				return UnsignedShortDataType.dataType;
 
 			case ELEMENT_TYPE_I4:
-				return IntegerDataType.dataType;
+
+                // TODO: Does this change for native architectures other than 32-bit?
+            case ELEMENT_TYPE_I:
+                return IntegerDataType.dataType;
 			case ELEMENT_TYPE_U4:
-				return UnsignedIntegerDataType.dataType;
+            case ELEMENT_TYPE_U:
+                return UnsignedIntegerDataType.dataType;
 
 			case ELEMENT_TYPE_R4:
 				return Float4DataType.dataType;
@@ -148,18 +150,16 @@ public abstract class CliAbstractSig extends CliBlob implements CliRepresentable
 			case ELEMENT_TYPE_U8:
 				return UnsignedLongLongDataType.dataType;
 
-			// TODO: Does this change for native architectures other than 32-bit?
-			case ELEMENT_TYPE_I:
-				return IntegerDataType.dataType;
-			case ELEMENT_TYPE_U:
-				return UnsignedIntegerDataType.dataType;
+            case ELEMENT_TYPE_PTR:
 
-			case ELEMENT_TYPE_PTR:
-				return PointerDataType.dataType;
-			case ELEMENT_TYPE_FNPTR:
-				return PointerDataType.dataType;
+            case ELEMENT_TYPE_OBJECT: // System.Object
+            case ELEMENT_TYPE_CLASS:
+            case ELEMENT_TYPE_VALUETYPE:
+            case ELEMENT_TYPE_GENERICINST:
+            case ELEMENT_TYPE_FNPTR:
+                return PointerDataType.dataType;
 
-			case ELEMENT_TYPE_STRING:
+            case ELEMENT_TYPE_STRING:
 				return new PointerDataType(new CharDataType());
 			case ELEMENT_TYPE_ARRAY:
 			case ELEMENT_TYPE_SZARRAY:
@@ -167,14 +167,9 @@ public abstract class CliAbstractSig extends CliBlob implements CliRepresentable
 			case ELEMENT_TYPE_MVAR:
 				return new PointerDataType(new ByteDataType());
 
-			case ELEMENT_TYPE_OBJECT: // System.Object
-			case ELEMENT_TYPE_CLASS:
-			case ELEMENT_TYPE_VALUETYPE:
-			case ELEMENT_TYPE_GENERICINST:
-				return PointerDataType.dataType;
-
-			case ELEMENT_TYPE_SENTINEL:
+            case ELEMENT_TYPE_SENTINEL:
 				return Undefined1DataType.dataType;
+			case ELEMENT_TYPE_VOID:
 
 			default:
 				return VoidDataType.dataType;

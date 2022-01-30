@@ -74,14 +74,11 @@ public class MDTypeInfoParser {
 				typeInfo.setStatic();
 				break;
 			case '3': // Believe this to be "global" data
-				dmang.increment();
+            case '4': // Believe this to be "static local" data
+                dmang.increment();
 				typeInfo = new MDVariableInfo(dmang);
 				break;
-			case '4': // Believe this to be "static local" data
-				dmang.increment();
-				typeInfo = new MDVariableInfo(dmang);
-				break;
-			case '5': // Believe this to be "guard" data.
+            case '5': // Believe this to be "guard" data.
 				dmang.increment();
 				typeInfo = new MDGuard(dmang);
 				break;

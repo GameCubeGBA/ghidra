@@ -520,7 +520,7 @@ public class KeyBindingsPanel extends JPanel {
 			return;
 		}
 		if (list.size() > 0) {
-			StringBuffer sb = new StringBuffer();
+			StringBuilder sb = new StringBuilder();
 			sb.append("Actions mapped to key " + ksName + ":\n");
 			for (int i = 0; i < list.size(); i++) {
 				sb.append("  ");

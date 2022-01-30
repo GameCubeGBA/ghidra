@@ -609,12 +609,12 @@ public abstract class AbstractExternalMergerTest extends AbstractListingMergeMan
 		waitForPrompting();
 		Component mergePanel = getMergePanel(ExternalConflictInfoPanel.class);
 		Window window = windowForComponent(mergePanel);
-		JComponent comp = findComponent(window, ExternalConflictInfoPanel.class);
+		ExternalConflictInfoPanel comp = findComponent(window, ExternalConflictInfoPanel.class);
 		assertNotNull(comp);
 		Border border = comp.getBorder();
 		String title = ((TitledBorder) border).getTitle();
 		assertEquals("Resolve External Location Conflict", title);
-		ExternalConflictInfoPanel panel = (ExternalConflictInfoPanel) comp;
+		ExternalConflictInfoPanel panel = comp;
 		String versionTitle = (String) TestUtils.getInstanceField("versionTitle", panel);
 		assertEquals(programVersion, versionTitle);
 		String labelPathName = (String) TestUtils.getInstanceField("labelPathName", panel);

@@ -24,7 +24,7 @@ public abstract class AbstractStructureEditorUnlockedCellEditTest
 		extends AbstractStructureEditorTest {
 
 	protected void init(final Structure dt, final Category cat) {
-		final DataType dtClone = dt.clone(programDTM);
+		final Structure dtClone = dt.clone(programDTM);
 		try {
 			dtClone.setCategoryPath(cat.getCategoryPath());
 		}
@@ -32,7 +32,7 @@ public abstract class AbstractStructureEditorUnlockedCellEditTest
 			Assert.fail(e.getMessage());
 		}
 		runSwing(() -> {
-			installProvider(new StructureEditorProvider(plugin, (Structure) dtClone, false));
+			installProvider(new StructureEditorProvider(plugin, dtClone, false));
 			model = provider.getModel();
 		});
 		waitForSwing();

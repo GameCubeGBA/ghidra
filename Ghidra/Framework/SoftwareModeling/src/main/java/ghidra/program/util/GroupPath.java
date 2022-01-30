@@ -189,7 +189,7 @@ public class GroupPath implements Serializable {
 	 */
     @Override
     public String toString() {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		for (int i=0; i<groupNames.length; i++) {
 			sb.append(groupNames[i]);
 			if (i < groupNames.length-1) {

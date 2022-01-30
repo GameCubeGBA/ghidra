@@ -179,7 +179,7 @@ public class MethodInfoJava implements StructConverter {
 		ConstantPoolUtf8Info methodName = (ConstantPoolUtf8Info) constantPool[nameIndex];
 		ConstantPoolUtf8Info methodDescriptor =
 			(ConstantPoolUtf8Info) constantPool[descriptorIndex];
-		StringBuffer stringBuffer = new StringBuffer();
+		StringBuilder stringBuffer = new StringBuilder();
 		stringBuffer.append(MethodsInfoAccessFlags.toString(accessFlags));
 
 		if (methodName.getString().equals("<clinit>")) {

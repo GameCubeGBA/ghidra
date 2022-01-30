@@ -178,7 +178,7 @@ public class JavaSourceFile {
 			return lineText;
 		}
 
-		StringBuffer buffy = new StringBuffer(startLine.getText());
+		StringBuilder buffy = new StringBuilder(startLine.getText());
 		List<JavaSourceLine> statementLines =
 			getRemainingLinesForStatement(startLine, startLine.getLineNumber() + 1);
 		for (JavaSourceLine sourceLine : statementLines) {

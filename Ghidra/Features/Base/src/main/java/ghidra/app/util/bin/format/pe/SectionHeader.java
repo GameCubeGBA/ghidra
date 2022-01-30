@@ -352,7 +352,7 @@ public class SectionHeader implements StructConverter, ByteArrayConverter {
 	 * @return a readable ascii version of the name
 	 */
 	public String getReadableName() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		for (int i = 0; i < name.length(); ++i) {
 			char ch = name.charAt(i);
 			if (ch >= 0x20 && ch <= 0x7e) {//is readable ascii?
@@ -493,7 +493,7 @@ public class SectionHeader implements StructConverter, ByteArrayConverter {
 	 */
 	@Override
 	public String toString() {
-		StringBuffer buff = new StringBuffer();
+		StringBuilder buff = new StringBuilder();
 
 		buff.append("Section Header:" + "\n");
 		buff.append("\t" + "name:                 " + name + "\n");

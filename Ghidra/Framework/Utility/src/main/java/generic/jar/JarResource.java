@@ -171,7 +171,7 @@ public class JarResource implements Resource {
 		if (split.length == 1) {
 			return null;
 		}
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		buf.append(split[0]);
 		for (int i = 1; i < split.length; i++) {
 			buf.append("/");

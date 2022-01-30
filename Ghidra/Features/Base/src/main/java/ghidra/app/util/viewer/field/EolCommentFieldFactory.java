@@ -593,7 +593,7 @@ public class EolCommentFieldFactory extends FieldFactory {
 		if (comments.length == 0) {
 			return null;
 		}
-		StringBuffer buf = new StringBuffer(comments[0]);
+		StringBuilder buf = new StringBuilder(comments[0]);
 
 		for (int i = 1; i < comments.length; i++) {
 			buf.append(separatorChar + comments[i]);

@@ -126,7 +126,7 @@ public class DecompilerScriptUtils {
 			return null;
 		}
 
-		StringBuffer stringBuffer = new StringBuffer();
+		StringBuilder stringBuffer = new StringBuilder();
 
 		DecompileResults decompRes = decompInterface.decompileFunction(function,
 			decompInterface.getOptions().getDefaultTimeout(), monitor);

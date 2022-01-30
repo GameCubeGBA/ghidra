@@ -81,7 +81,8 @@ public abstract class AbstractClassicProcessor {
 			case MachHeaderFileTypes.MH_EXECUTE:
 			case MachHeaderFileTypes.MH_DYLIB:
 			case MachHeaderFileTypes.MH_BUNDLE:
-			case MachHeaderFileTypes.MH_DYLINKER: {
+			case MachHeaderFileTypes.MH_DYLINKER:
+            case MachHeaderFileTypes.MH_OBJECT: {
 
 				byte[] bytes = (program.getDefaultPointerSize() == 8) ? converter.getBytes(offset)
 						: converter.getBytes((int) offset);
@@ -137,17 +138,7 @@ public abstract class AbstractClassicProcessor {
 
 				break;
 			}
-			case MachHeaderFileTypes.MH_OBJECT: {
-				byte[] bytes = (program.getDefaultPointerSize() == 8) ? converter.getBytes(offset)
-						: converter.getBytes((int) offset);
-
-				originalBytes = new byte[bytes.length];
-				memory.getBytes(address, originalBytes);
-				memory.setBytes(address, bytes);
-				handled = true;
-				break;
-			}
-			default: {
+            default: {
 				break;
 			}
 		}

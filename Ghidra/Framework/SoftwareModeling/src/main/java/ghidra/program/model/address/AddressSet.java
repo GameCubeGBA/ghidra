@@ -389,7 +389,7 @@ public class AddressSet implements AddressSetView {
 	 * @return a string displaying the ranges in this set.
 	 */
 	public String printRanges() {
-		StringBuffer buffy = new StringBuffer("[");
+		StringBuilder buffy = new StringBuilder("[");
 		for (AddressRange range : this) {
 			buffy.append(range);
 			buffy.append(" ");

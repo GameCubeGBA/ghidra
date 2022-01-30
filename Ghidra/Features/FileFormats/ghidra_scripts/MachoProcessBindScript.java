@@ -184,7 +184,7 @@ public class MachoProcessBindScript extends GhidraScript {
 	}
 
 	private String readString( ByteArrayInputStream byteServer ) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		while ( !monitor.isCancelled() ) {
 			int value = byteServer.read();
 			if ( value == -1 ) {
@@ -348,7 +348,7 @@ public class MachoProcessBindScript extends GhidraScript {
 
 			File file = new File( fromDylib );
 
-			StringBuffer buffer = new StringBuffer();
+			StringBuilder buffer = new StringBuilder();
 			buffer.append(  segmentName );
 			buffer.append( ' ' );
 			buffer.append( ' ' );

@@ -242,7 +242,7 @@ class RegisterTreeNode extends SearchableRegisterTreeNode {
 	}
 
 	private String getAliases() {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		for (String alias : register.getAliases()) {
 			buf.append(buf.length() == 0 ? "; " : ", ");
 			buf.append(alias);

@@ -310,7 +310,7 @@ public abstract class AbstractGTest {
 	private static String printListFailureMessage(String message, List<?> expected,
 			List<?> actual) {
 
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		buffer.append("Expected: ").append(expected.toString());
 		buffer.append(" Found: ").append(actual.toString());
 		buffer.toString();

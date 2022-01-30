@@ -620,7 +620,7 @@ public class JavaAnalyzer extends AbstractJavaAnalyzer implements AnalysisWorker
 
 			Address methodAddress = toCpAddr(program, methodInfo.getOffset());
 
-			StringBuffer buffer = new StringBuffer();
+			StringBuilder buffer = new StringBuilder();
 			buffer.append("MethodName = " + methodName.getString() + "\n");
 			buffer.append("MethodDescriptor = " + methodDescriptor.getString() + "\n");
 

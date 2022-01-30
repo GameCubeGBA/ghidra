@@ -460,7 +460,7 @@ public class ExecuteDiffDialog extends DialogComponentProvider {
 
 	private String getAddressText() {
 		AddressSetView addrs = getAddressSet();
-		StringBuffer addrStr = new StringBuffer();
+		StringBuilder addrStr = new StringBuilder();
 		if ((addrs == null) || addrs.equals(pgm1MemorySet)) {
 			return "Entire Program";
 		}

@@ -65,6 +65,10 @@ public class RevertDataTypeAction extends DockingAction {
 
 		switch (syncStatus) {
 			case UNKNOWN:
+			case CONFLICT:
+			case IN_SYNC:
+			case ORPHAN:
+			case UPDATE:
 				return false;
 			case COMMIT:
 			case CONFLICT:
@@ -72,9 +76,9 @@ public class RevertDataTypeAction extends DockingAction {
 			case IN_SYNC:
 			case ORPHAN:
 			case UPDATE:
+			default:
 				return false;
 		}
-		return false;
 	}
 
 	@Override

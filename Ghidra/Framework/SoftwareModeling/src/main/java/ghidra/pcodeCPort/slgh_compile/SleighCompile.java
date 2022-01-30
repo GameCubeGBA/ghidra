@@ -1817,7 +1817,7 @@ public class SleighCompile extends SleighBase {
 			}
 			if ((parseres == 0) && (numErrors() == 0)) {
 				// If no errors
-				PrintStream s = new PrintStream(new FileOutputStream(new File(fileout)));
+				PrintStream s = new PrintStream(new FileOutputStream(fileout));
 				saveXml(s); // Dump output xml
 				s.close();
 			}

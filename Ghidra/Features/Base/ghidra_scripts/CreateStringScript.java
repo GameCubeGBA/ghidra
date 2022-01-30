@@ -104,7 +104,7 @@ public class CreateStringScript extends GhidraScript {
 		}
 
 		boolean needsUnderscore = true;
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		buf.append("s");
 		byte[] bytes = new byte[length];
 		try {

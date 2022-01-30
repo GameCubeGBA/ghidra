@@ -267,7 +267,7 @@ public class ClientUtil {
 			return;
 		}
 
-		final StringBuffer sb = new StringBuffer();
+		final StringBuilder sb = new StringBuilder();
 		if (mustRetry) {
 			sb.append("The " + operation +
 				" may have failed due to a lost connection with the Ghidra Server.\n");

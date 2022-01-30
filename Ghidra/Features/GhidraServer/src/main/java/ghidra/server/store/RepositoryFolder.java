@@ -131,7 +131,7 @@ public class RepositoryFolder {
 	 */
 	public String getPathname() {
 		synchronized (fileSystem) {
-			StringBuffer buf = new StringBuffer(parent != null ? parent.getPathname() : "");
+			StringBuilder buf = new StringBuilder(parent != null ? parent.getPathname() : "");
 			if (buf.length() != 1) {
 				buf.append(FileSystem.SEPARATOR_CHAR);
 			}

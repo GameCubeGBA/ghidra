@@ -60,7 +60,7 @@ class OffsetRanges {
 
 	@Override
 	public String toString() {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		int[] keys = firstUseRanges.getKeys();
 		for (int i = 0; i < keys.length; i++) {
 			int firstUse = keys[i];

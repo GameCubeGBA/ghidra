@@ -59,16 +59,12 @@ public class MDContext {
 			//  for others though they "might" need to store off an MDFragment (but only if we
 			//  are doing MDReusable???).
 			case MODIFIER:
-				backrefNames = copyFrom.backrefNames;
+            case FUNCTION:
+                backrefNames = copyFrom.backrefNames;
 				backrefParametersMDDataType = copyFrom.backrefParametersMDDataType;
 				backrefTemplateParametersMDDataType = copyFrom.backrefTemplateParametersMDDataType;
 				break;
-			case FUNCTION:
-				backrefNames = copyFrom.backrefNames;
-				backrefParametersMDDataType = copyFrom.backrefParametersMDDataType;
-				backrefTemplateParametersMDDataType = copyFrom.backrefTemplateParametersMDDataType;
-				break;
-			case TEMPLATE:
+            case TEMPLATE:
 				backrefNames = new ArrayList<>();
 				backrefParametersMDDataType = new ArrayList<>();
 				backrefTemplateParametersMDDataType = copyFrom.backrefTemplateParametersMDDataType;

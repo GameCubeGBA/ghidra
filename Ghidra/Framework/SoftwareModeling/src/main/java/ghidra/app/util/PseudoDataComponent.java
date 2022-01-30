@@ -107,7 +107,7 @@ class PseudoDataComponent extends PseudoData {
 	}
 
 	private String getComponentName(String parentPath) {
-		StringBuffer nameBuffer = new StringBuffer();
+		StringBuilder nameBuffer = new StringBuilder();
 		if (parentPath != null && parentPath.length() > 0) {
 			nameBuffer.append(parentPath);
 			if (component != null) { // not an array?

@@ -157,7 +157,7 @@ public class GdbThreadImpl implements GdbThread {
 
 	private List<String> generateEvaluateSizesParts(Collection<String> names) {
 		List<String> result = new ArrayList<>();
-		StringBuffer buf = new StringBuffer("{");
+		StringBuilder buf = new StringBuilder("{");
 		for (String n : names) {
 			String toAdd = "sizeof($" + n + "),";
 			if (buf.length() + toAdd.length() > GdbEvaluateCommand.MAX_EXPR_LEN) {

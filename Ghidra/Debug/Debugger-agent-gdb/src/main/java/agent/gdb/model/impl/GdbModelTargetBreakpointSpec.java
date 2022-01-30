@@ -268,16 +268,14 @@ public class GdbModelTargetBreakpointSpec extends
 			case BREAKPOINT:
 			case HW_BREAKPOINT:
 			case OTHER:
-				return String.format("%d %s %s %s %s %s", info.getNumber(), info.getTypeName(),
+            case DPRINTF:
+                // TODO: script?
+                return String.format("%d %s %s %s %s %s", info.getNumber(), info.getTypeName(),
 					info.getDisp(), enb, addr, what).trim();
 			case CATCHPOINT:
 				return String.format("%d %s %s %s %s", info.getNumber(), info.getTypeName(),
 					info.getDisp(), enb, what).trim();
-			case DPRINTF:
-				// TODO: script?
-				return String.format("%d %s %s %s %s %s", info.getNumber(), info.getTypeName(),
-					info.getDisp(), enb, addr, what).trim();
-		}
+        }
 		throw new AssertionError();
 	}
 

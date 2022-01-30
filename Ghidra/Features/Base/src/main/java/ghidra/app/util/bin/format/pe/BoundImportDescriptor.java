@@ -138,7 +138,7 @@ public class BoundImportDescriptor implements StructConverter, ByteArrayConverte
 	 */
 	@Override
     public String toString() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		buffer.append("TimeStamp:"+Integer.toHexString(timeDateStamp)+",");
 		buffer.append("OffsetModuleName:"+Integer.toHexString(Conv.shortToInt(offsetModuleName))+"["+moduleName+"]"+",");
 		buffer.append("NumberOfModuleForwarderRefs:"+Integer.toHexString(Conv.shortToInt(numberOfModuleForwarderRefs)));

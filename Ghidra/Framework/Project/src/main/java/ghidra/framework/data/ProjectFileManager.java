@@ -872,7 +872,7 @@ public class ProjectFileManager implements ProjectData {
 	@Override
 	public String makeValidName(String name) {
 		int maxNameLength = getMaxNameLength();
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		for (int i = 0; i < name.length(); i++) {
 			if (buf.length() == maxNameLength) {
 				break;

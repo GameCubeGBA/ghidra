@@ -136,7 +136,7 @@ public class RelocationInfo implements StructConverter {
 
 	@Override
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		buffer.append("Address:      " + Long.toHexString(r_address));
 		buffer.append('\n');
 		buffer.append("Value:        " + Integer.toHexString(r_value));

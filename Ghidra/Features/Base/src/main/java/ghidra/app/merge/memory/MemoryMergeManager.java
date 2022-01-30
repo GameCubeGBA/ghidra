@@ -463,7 +463,7 @@ public class MemoryMergeManager implements MergeResolver {
 	}
 
 	private String getPermissionString(MemoryBlock block) {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append("Read = ");
 		sb.append(block.isExecute());
 		sb.append(", ");

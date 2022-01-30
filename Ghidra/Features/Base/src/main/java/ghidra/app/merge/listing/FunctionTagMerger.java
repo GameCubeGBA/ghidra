@@ -712,7 +712,7 @@ public class FunctionTagMerger implements MergeResolver, ListingMergeConstants {
 	 * @return
 	 */
 	private String getConflictInfo(TaskMonitor monitor) {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		buf.append(
 			"<center><b>" + "Resolving conflict " + (monitor.getProgress() + 1) + " of " +
 				tagConflicts.size() + "</b></center>");

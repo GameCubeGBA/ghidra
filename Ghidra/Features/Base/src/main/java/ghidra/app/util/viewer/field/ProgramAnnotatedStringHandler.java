@@ -66,7 +66,7 @@ public class ProgramAnnotatedStringHandler implements AnnotatedStringHandler {
 	private String getDisplayText(String[] text) {
 		// assume that the 'extra text' means that is how the user wants to display the annotation
 		if (text.length > 2) {
-			StringBuffer buffer = new StringBuffer();
+			StringBuilder buffer = new StringBuilder();
 			for (int i = 2; i < text.length; i++) {
 				buffer.append(text[i]).append(" ");
 			}

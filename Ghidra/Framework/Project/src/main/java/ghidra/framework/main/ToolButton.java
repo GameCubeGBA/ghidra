@@ -283,7 +283,7 @@ class ToolButton extends EmptyBorderButton implements Draggable, Droppable {
 	}
 
 	private void showFilesNotAcceptedMessage(DomainFile[] domainFiles) {
-		StringBuffer buffer = new StringBuffer("Tool did not accept files: ");
+		StringBuilder buffer = new StringBuilder("Tool did not accept files: ");
 		for (int i = 0; i < domainFiles.length; i++) {
 			buffer.append(domainFiles[i].getName());
 			if (i != domainFiles.length - 1) {

@@ -690,7 +690,7 @@ public class HeadlessAnalyzer {
 	}
 
 	private void showConfiguredScriptPaths() {
-		StringBuffer buf = new StringBuffer("HEADLESS Script Paths:");
+		StringBuilder buf = new StringBuilder("HEADLESS Script Paths:");
 		for (ResourceFile dir : GhidraScriptUtil.getScriptSourceDirectories()) {
 			buf.append("\n    ");
 			buf.append(dir.getAbsolutePath());

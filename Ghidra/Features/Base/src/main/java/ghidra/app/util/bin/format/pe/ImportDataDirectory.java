@@ -317,7 +317,7 @@ public class ImportDataDirectory extends DataDirectory {
 					ordinal = ibn.getHint();
 				}
 
-				StringBuffer cmt = new StringBuffer();
+				StringBuilder cmt = new StringBuilder();
 				if (ordinal != -1) {
 					cmt.append(Long.toString(ordinal) + "  ");
 				}
@@ -354,7 +354,7 @@ public class ImportDataDirectory extends DataDirectory {
 	 */
 	@Override
 	public String toString() {
-		StringBuffer buff = new StringBuffer();
+		StringBuilder buff = new StringBuilder();
 		buff.append("\t\t" + "Import Directory: [" + super.toString() + "]" + "\n");
 		for (ImportInfo info : imports) {
 			buff.append("\t\t\t" + "0x" + Long.toHexString(info.getAddress()) + "  " +

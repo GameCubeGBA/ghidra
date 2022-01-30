@@ -166,7 +166,7 @@ public class GroupHistoryInfo {
 		String text = GroupedFunctionGraphVertex.getVertexDescription(vertex);
 		int index = groupDescription.indexOf(text);
 		if (index != -1) {
-			StringBuffer buffy = new StringBuffer(groupDescription);
+			StringBuilder buffy = new StringBuilder(groupDescription);
 			buffy.delete(index, index + text.length());
 			groupDescription = buffy.toString();
 		}

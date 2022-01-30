@@ -1009,12 +1009,10 @@ public abstract class CompositeEditorPanel extends JPanel
 	public void compositeEditStateChanged(int type) {
 		switch (type) {
 			case COMPOSITE_LOADED:
-				cancelCellEditing(); // Make sure a field isn't being edited.
+            case NO_COMPOSITE_LOADED:
+                cancelCellEditing(); // Make sure a field isn't being edited.
 				break;
-			case NO_COMPOSITE_LOADED:
-				cancelCellEditing(); // Make sure a field isn't being edited.
-				break;
-			case COMPOSITE_MODIFIED:
+            case COMPOSITE_MODIFIED:
 			case COMPOSITE_UNMODIFIED:
 				// No change in the panel.
 				break;

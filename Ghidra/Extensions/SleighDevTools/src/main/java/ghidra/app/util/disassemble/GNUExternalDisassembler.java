@@ -679,7 +679,7 @@ public class GNUExternalDisassembler implements ExternalDisassembler {
 	}
 
 	private String getBytes(ByteProvider byteProvider, int size) throws IOException {
-		StringBuffer byteString = new StringBuffer();
+		StringBuilder byteString = new StringBuilder();
 		for (int i = 0; i < size; i++) {
 			byteString.append(formatHexString(byteProvider.readByte(i)));
 		}
@@ -687,7 +687,7 @@ public class GNUExternalDisassembler implements ExternalDisassembler {
 	}
 
 	private String getBytes(MemBuffer mem, int size) {
-		StringBuffer byteString = new StringBuffer();
+		StringBuilder byteString = new StringBuilder();
 		for (int i = 0; i < size; i++) {
 			try {
 				byteString.append(formatHexString(mem.getByte(i)));

@@ -164,7 +164,7 @@ public class MultiIcon implements Icon {
 	}
 
 	private String getIconNames() {
-		StringBuffer buffy = new StringBuffer();
+		StringBuilder buffy = new StringBuilder();
 		for (Icon icon : iconList) {
 			if (buffy.length() > 0) {
 				buffy.append(", ");

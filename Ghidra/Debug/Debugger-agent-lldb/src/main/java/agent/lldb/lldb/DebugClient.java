@@ -87,11 +87,10 @@ public interface DebugClient extends DebugClientReentrant {
 				case 2: // eStateConnected
 				case 3: // eStateAttaching
 				case 4: // eStateLaunching
+				case 6: // eStateRunning
 					return DebugStatus.GO;
 				case 5: // eStateStopped
 					return DebugStatus.BREAK;
-				case 6: // eStateRunning
-					return DebugStatus.GO;
 				case 7: // eStateStepping
 					return DebugStatus.STEP_INTO;
 				case 8:  // eStateCrashed
@@ -349,6 +348,8 @@ public interface DebugClient extends DebugClientReentrant {
 	public static TargetExecutionState convertState(StateType state) {
 		switch (state.swigValue()) {
 			case 0:	// eStateInvalid
+			case 6: // eStateRunning
+			case 7: // eStateStepping
 				return TargetExecutionState.RUNNING;
 			case 1: // eStateUnloaded
 				return TargetExecutionState.INACTIVE;
@@ -356,16 +357,12 @@ public interface DebugClient extends DebugClientReentrant {
 			case 3: // eStateAttaching
 			case 4: // eStateLaunching
 				return TargetExecutionState.ALIVE;
-			case 5: // eStateStopped
-				return TargetExecutionState.STOPPED;
-			case 6: // eStateRunning
-			case 7: // eStateStepping
-				return TargetExecutionState.RUNNING;
 			case 8:  // eStateCrashed
 			case 9:  // eStateDetached
 			case 10: // eStateExited
 			case 11: // eStateSuspended
 				return TargetExecutionState.TERMINATED;
+			case 5: // eStateStopped
 			default:
 				return TargetExecutionState.STOPPED;
 		}

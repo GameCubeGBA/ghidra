@@ -178,7 +178,9 @@ public class FileViewer extends JPanel implements Observer {
 				break;
 
 			case FILE_CHANGED:
-				reloadFile();
+
+            case RELOAD_FILE:
+                reloadFile();
 				break;
 
 			case INCREMENT_SELECTION:
@@ -206,11 +208,7 @@ public class FileViewer extends JPanel implements Observer {
 				}
 				break;
 
-			case RELOAD_FILE:
-				reloadFile();
-				break;
-
-			case SCROLL_HOME:
+            case SCROLL_HOME:
 				viewTopOfFile();
 				setScrollLock(true);
 				break;

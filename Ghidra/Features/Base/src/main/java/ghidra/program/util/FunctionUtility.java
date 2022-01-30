@@ -367,7 +367,7 @@ public class FunctionUtility {
 		if (function == null) {
 			return HTMLUtilities.wrapAsHTML("No Function");
 		}
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		String padStr = HTMLUtilities.spaces(4);
 		buf.append(padStr);
 

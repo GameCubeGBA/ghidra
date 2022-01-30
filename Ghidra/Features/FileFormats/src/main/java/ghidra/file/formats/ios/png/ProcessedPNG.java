@@ -105,7 +105,7 @@ public class ProcessedPNG implements StructConverter {
 
 	@Override
 	public String toString() {
-		StringBuffer buff = new StringBuffer();
+		StringBuilder buff = new StringBuilder();
 
 		buff.append("Type: Crushed PNG Image\n");
 		buff.append("Size: " + totalLength + " bytes\n");

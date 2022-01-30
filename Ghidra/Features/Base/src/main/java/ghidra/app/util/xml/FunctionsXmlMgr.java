@@ -563,7 +563,7 @@ class FunctionsXmlMgr {
 	 * For example, "User32.dll::SomeClass::printf".
 	 */
 	private String getName(Function function) {
-		StringBuffer nameBuff = new StringBuffer(function.getName());
+		StringBuilder nameBuff = new StringBuilder(function.getName());
 		Namespace ns = function.getParentNamespace();
 		while (ns != program.getGlobalNamespace()) {
 			nameBuff.insert(0, ns.getName() + "::");

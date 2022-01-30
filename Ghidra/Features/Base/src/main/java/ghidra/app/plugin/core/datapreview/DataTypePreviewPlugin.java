@@ -572,12 +572,9 @@ public class DataTypePreviewPlugin extends ProgramPlugin {
 		boolean removeAll(DataType deletedDataType) {
 			boolean removed = false;
 			ArrayList<Preview> clone = new ArrayList<>(data);
-			Iterator<Preview> iter = clone.iterator();
-			while (iter.hasNext()) {
-				Object obj = iter.next();
-				Preview preview = (Preview) obj;
-				if (preview.getDataType().equals(deletedDataType)) {
-					data.remove(preview);
+			for (Preview obj : clone) {
+				if (obj.getDataType().equals(deletedDataType)) {
+					data.remove(obj);
 					removed = true;
 				}
 			}

@@ -193,7 +193,7 @@ public class OctalFormatModel implements UniversalDataFormatModel {
 	// *** private methods ***
 	/////////////////////////////////////////////////////////////////
 	private String pad(String value) {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		int len = symbolSize - value.length();
 
         sb.append("0".repeat(len));

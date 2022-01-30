@@ -85,7 +85,7 @@ public class XCoffSymbol {
 
 	@Override
     public String toString() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		buffer.append("SYMBOL TABLE ENTRY").append(NL);
 		buffer.append("n_value = ").append(n_value).append(NL);
 		buffer.append("n_scnum = ").append(n_scnum).append(NL);

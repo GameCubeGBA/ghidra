@@ -183,7 +183,7 @@ public abstract class AbstractSelectByFlowPluginTest extends AbstractGhidraHeade
 
 		@Override
 		public String toString() {
-			StringBuffer buf = new StringBuffer();
+			StringBuilder buf = new StringBuilder();
 			AddressRangeIterator ranges = getAddressRanges();
 			for (AddressRange addressRange : ranges) {
 				buf.append("\n[" + addressRange.getMinAddress() + " - " +

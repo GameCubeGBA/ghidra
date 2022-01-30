@@ -25,7 +25,11 @@ public final class OatQuickMethodHeaderFactory {
 	public final static int getOatQuickMethodHeaderSize(String oatVersion) throws IOException {
 		switch (oatVersion) {
 			case OatConstants.VERSION_LOLLIPOP_RELEASE:
-				return 12 + QuickMethodFrameInfo.SIZE;
+            case OatConstants.VERSION_OREO_RELEASE:
+            case OatConstants.VERSION_OREO_M2_RELEASE:
+            case OatConstants.VERSION_OREO_DR3_RELEASE:
+            case OatConstants.VERSION_PIE_RELEASE:
+                return 12 + QuickMethodFrameInfo.SIZE;
 			case OatConstants.VERSION_LOLLIPOP_MR1_FI_RELEASE:
 			case OatConstants.VERSION_LOLLIPOP_WEAR_RELEASE:
 			case OatConstants.VERSION_MARSHMALLOW_RELEASE:
@@ -33,12 +37,7 @@ public final class OatQuickMethodHeaderFactory {
 			case OatConstants.VERSION_NOUGAT_RELEASE:
 			case OatConstants.VERSION_NOUGAT_MR1_RELEASE:
 				return 8 + QuickMethodFrameInfo.SIZE;
-			case OatConstants.VERSION_OREO_RELEASE:
-			case OatConstants.VERSION_OREO_M2_RELEASE:
-			case OatConstants.VERSION_OREO_DR3_RELEASE:
-			case OatConstants.VERSION_PIE_RELEASE:
-				return 12 + QuickMethodFrameInfo.SIZE;
-			case OatConstants.VERSION_10_RELEASE:
+            case OatConstants.VERSION_10_RELEASE:
 			case OatConstants.VERSION_11_RELEASE:
 				return 8;
 			case OatConstants.VERSION_12_RELEASE:

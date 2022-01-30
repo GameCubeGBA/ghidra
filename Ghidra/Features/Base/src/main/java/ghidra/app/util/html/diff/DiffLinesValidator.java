@@ -51,7 +51,7 @@ class DiffLinesValidator {
 	}
 
 	private String toString(List<?> list) {
-		StringBuffer buffer = new StringBuffer("[ ");
+		StringBuilder buffer = new StringBuilder("[ ");
 		for (int i = 0; i < list.size(); i++) {
 			buffer.append(markup(i, list.get(i).toString()));
 			if (i + 1 < list.size()) {
