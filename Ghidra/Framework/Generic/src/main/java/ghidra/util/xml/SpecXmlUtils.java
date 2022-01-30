@@ -197,18 +197,26 @@ public class SpecXmlUtils {
 	static public void xmlEscapeWriter(Writer writer,String val) throws IOException {
 		for(int i=0;i<val.length();++i) {
 			char c = val.charAt(i);
-			if (c == '&')
-				writer.append("&amp;");
-			else if (c == '<')
-				writer.append("&lt;");
-			else if (c == '>')
-				writer.append("&gt;");
-			else if (c == '"')
-				writer.append("&quot;");
-			else if (c == '\'')
-				writer.append("&apos;");
-			else
-				writer.append(c);
+            switch (c) {
+                case '&':
+                    writer.append("&amp;");
+                    break;
+                case '<':
+                    writer.append("&lt;");
+                    break;
+                case '>':
+                    writer.append("&gt;");
+                    break;
+                case '"':
+                    writer.append("&quot;");
+                    break;
+                case '\'':
+                    writer.append("&apos;");
+                    break;
+                default:
+                    writer.append(c);
+                    break;
+            }
 		}
 		
 	}

@@ -65,36 +65,32 @@ public class AttributeManager<T extends KeyedObject>
 //           Err.info(this, "Creating new attribute using same name as old attribute.");
 //           Err.info(this, "Earlier attribute is now permanently destroyed.");
 //       }
-       if( attributeType.equals( INTEGER_TYPE ) )
-       {
-          newAttribute = new IntegerAttribute<T>( attributeName, attributedSet );
-          definedAttributes.put( attributeName, newAttribute );
-       }
-       else if( attributeType.equals( LONG_TYPE ) )
-       {
-          newAttribute = new LongAttribute<T>( attributeName, attributedSet );
-          definedAttributes.put( attributeName, newAttribute );
-       }
-       else if( attributeType.equals( DOUBLE_TYPE ) )
-       {
-          newAttribute = new DoubleAttribute<T>( attributeName, attributedSet );
-          definedAttributes.put( attributeName, newAttribute );
-       }
-       else if( attributeType.equals( STRING_TYPE ) )
-       {
-          newAttribute = new StringAttribute<T>( attributeName, attributedSet );
-          definedAttributes.put( attributeName, newAttribute );
-       }
-       else if( attributeType.equals( OBJECT_TYPE ) )
-       {
-          newAttribute = new ObjectAttribute<T>( attributeName, attributedSet );
-          definedAttributes.put( attributeName, newAttribute );
-       }
-       else
-       {
-          Msg.warn(this, "Unknown attribute type. New Attribute is null");
-          newAttribute = null;
-       }
+      switch (attributeType) {
+          case INTEGER_TYPE:
+              newAttribute = new IntegerAttribute<T>(attributeName, attributedSet);
+              definedAttributes.put(attributeName, newAttribute);
+              break;
+          case LONG_TYPE:
+              newAttribute = new LongAttribute<T>(attributeName, attributedSet);
+              definedAttributes.put(attributeName, newAttribute);
+              break;
+          case DOUBLE_TYPE:
+              newAttribute = new DoubleAttribute<T>(attributeName, attributedSet);
+              definedAttributes.put(attributeName, newAttribute);
+              break;
+          case STRING_TYPE:
+              newAttribute = new StringAttribute<T>(attributeName, attributedSet);
+              definedAttributes.put(attributeName, newAttribute);
+              break;
+          case OBJECT_TYPE:
+              newAttribute = new ObjectAttribute<T>(attributeName, attributedSet);
+              definedAttributes.put(attributeName, newAttribute);
+              break;
+          default:
+              Msg.warn(this, "Unknown attribute type. New Attribute is null");
+              newAttribute = null;
+              break;
+      }
        return newAttribute;
   }
 

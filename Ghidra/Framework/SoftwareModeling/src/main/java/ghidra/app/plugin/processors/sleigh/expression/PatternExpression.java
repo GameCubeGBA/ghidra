@@ -39,42 +39,61 @@ public abstract class PatternExpression {
 		XmlElement el = parser.peek();
 		PatternExpression res;
 		String nm = el.getName();
-		if (nm.equals("tokenfield"))
-			res = new TokenField();
-		else if (nm.equals("contextfield"))
-			res = new ContextField();
-		else if (nm.equals("intb"))
-			res = new ConstantValue();
-		else if (nm.equals("operand_exp"))
-			res = new OperandValue();
-		else if (nm.equals("start_exp"))
-			res = new StartInstructionValue();
-		else if (nm.equals("end_exp"))
-			res = new EndInstructionValue();
-		else if (nm.equals("plus_exp"))
-			res = new PlusExpression();
-		else if (nm.equals("sub_exp"))
-			res = new SubExpression();
-		else if (nm.equals("mult_exp"))
-			res = new MultExpression();
-		else if (nm.equals("lshift_exp"))
-			res = new LeftShiftExpression();
-		else if (nm.equals("rshift_exp"))
-			res = new RightShiftExpression();
-		else if (nm.equals("and_exp"))
-			res = new AndExpression();
-		else if (nm.equals("or_exp"))
-			res = new OrExpression();
-		else if (nm.equals("xor_exp"))
-			res = new XorExpression();
-		else if (nm.equals("div_exp"))
-			res = new DivExpression();
-		else if (nm.equals("minus_exp"))
-			res = new MinusExpression();
-		else if (nm.equals("not_exp"))
-			res = new NotExpression();
-		else
-			return null;
+        switch (nm) {
+            case "tokenfield":
+                res = new TokenField();
+                break;
+            case "contextfield":
+                res = new ContextField();
+                break;
+            case "intb":
+                res = new ConstantValue();
+                break;
+            case "operand_exp":
+                res = new OperandValue();
+                break;
+            case "start_exp":
+                res = new StartInstructionValue();
+                break;
+            case "end_exp":
+                res = new EndInstructionValue();
+                break;
+            case "plus_exp":
+                res = new PlusExpression();
+                break;
+            case "sub_exp":
+                res = new SubExpression();
+                break;
+            case "mult_exp":
+                res = new MultExpression();
+                break;
+            case "lshift_exp":
+                res = new LeftShiftExpression();
+                break;
+            case "rshift_exp":
+                res = new RightShiftExpression();
+                break;
+            case "and_exp":
+                res = new AndExpression();
+                break;
+            case "or_exp":
+                res = new OrExpression();
+                break;
+            case "xor_exp":
+                res = new XorExpression();
+                break;
+            case "div_exp":
+                res = new DivExpression();
+                break;
+            case "minus_exp":
+                res = new MinusExpression();
+                break;
+            case "not_exp":
+                res = new NotExpression();
+                break;
+            default:
+                return null;
+        }
 
 		res.restoreXml(parser, lang);
 		return res;

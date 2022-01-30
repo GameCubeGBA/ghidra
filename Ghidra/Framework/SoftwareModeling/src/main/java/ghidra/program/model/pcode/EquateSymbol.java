@@ -73,21 +73,23 @@ public class EquateSymbol extends HighSymbol {
 		convert = FORMAT_DEFAULT;
 		String formString = symel.getAttribute("format");
 		if (formString != null) {
-			if (formString.equals("hex")) {
-				convert = FORMAT_HEX;
-			}
-			else if (formString.equals("dec")) {
-				convert = FORMAT_DEC;
-			}
-			else if (formString.equals("char")) {
-				convert = FORMAT_CHAR;
-			}
-			else if (formString.equals("oct")) {
-				convert = FORMAT_OCT;
-			}
-			else if (formString.equals("bin")) {
-				convert = FORMAT_BIN;
-			}
+            switch (formString) {
+                case "hex":
+                    convert = FORMAT_HEX;
+                    break;
+                case "dec":
+                    convert = FORMAT_DEC;
+                    break;
+                case "char":
+                    convert = FORMAT_CHAR;
+                    break;
+                case "oct":
+                    convert = FORMAT_OCT;
+                    break;
+                case "bin":
+                    convert = FORMAT_BIN;
+                    break;
+            }
 		}
 		parser.start("value");
 		value = SpecXmlUtils.decodeLong(parser.end().getText());			// End <value> tag
@@ -100,21 +102,23 @@ public class EquateSymbol extends HighSymbol {
 		saveXMLHeader(buf);
 		if (convert != 0) {
 			String formString = "hex";
-			if (convert == FORMAT_HEX) {
-				// Most common case
-			}
-			else if (convert == FORMAT_DEC) {
-				formString = "dec";
-			}
-			else if (convert == FORMAT_OCT) {
-				formString = "oct";
-			}
-			else if (convert == FORMAT_BIN) {
-				formString = "bin";
-			}
-			else if (convert == FORMAT_CHAR) {
-				formString = "char";
-			}
+            switch (convert) {
+                case FORMAT_HEX:
+                    // Most common case
+                    break;
+                case FORMAT_DEC:
+                    formString = "dec";
+                    break;
+                case FORMAT_OCT:
+                    formString = "oct";
+                    break;
+                case FORMAT_BIN:
+                    formString = "bin";
+                    break;
+                case FORMAT_CHAR:
+                    formString = "char";
+                    break;
+            }
 			SpecXmlUtils.encodeStringAttribute(buf, "format", formString);
 		}
 		buf.append(">\n");

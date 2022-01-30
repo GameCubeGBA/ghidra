@@ -58,43 +58,45 @@ public class ThreadCommand extends LoadCommand {
 
 		threadStateHeader = ThreadStateHeader.createThreadStateHeader(reader);
 
-		if (header.getCpuType() == CpuTypes.CPU_TYPE_X86) {
-			if (threadStateHeader.getFlavor() == ThreadStateX86.x86_THREAD_STATE32) {
-				threadState = ThreadStateX86_32.createThreadStateX86_32(reader);
-			}
-		}
-		else if (header.getCpuType() == CpuTypes.CPU_TYPE_X86_64) {
-			if (threadStateHeader.getFlavor() == ThreadStateX86.x86_THREAD_STATE64) {
-				threadState = ThreadStateX86_64.createThreadStateX86_64(reader);
-			}
-		}
-		else if (header.getCpuType() == CpuTypes.CPU_TYPE_POWERPC) {
-			if (threadStateHeader.getFlavor() == ThreadStatePPC.PPC_THREAD_STATE) {
-				threadState = ThreadStatePPC.createThreadStatePPC(reader, header.is32bit());
-			}
-		}
-		else if (header.getCpuType() == CpuTypes.CPU_TYPE_POWERPC64) {
-			if (threadStateHeader.getFlavor() == ThreadStatePPC.PPC_THREAD_STATE64) {
-				threadState = ThreadStatePPC.createThreadStatePPC(reader, header.is32bit());
-			}
-		}
-		else if (header.getCpuType() == CpuTypes.CPU_TYPE_ARM) {
-			if (threadStateHeader.getFlavor() == ThreadStateARM.ARM_THREAD_STATE) {
-				threadState = ThreadStateARM.createThreadStateARM(reader);
-			}
-		}
-		else if (header.getCpuType() == CpuTypes.CPU_TYPE_ARM_64) {
-			if (threadStateHeader.getFlavor() == ThreadStateARM_64.ARM64_THREAD_STATE) {
-				threadState = ThreadStateARM_64.createThreadStateARM_64(reader);
-			}	
-		}
-		else {
-			Msg.info("Mach-O Thread Command",
-				"Unsupported thread command flavor: 0x" +
-					Integer.toHexString(threadStateHeader.getFlavor()) + " for CPU type 0x" +
-					Integer.toHexString(header.getCpuType()));
-			//throw new MachException("Unsupported thread command flavor: 0x"+Integer.toHexString(threadStateHeader.getFlavor())+" for CPU type 0x"+Integer.toHexString(header.getCpuType()));
-		}
+        switch (header.getCpuType()) {
+            case CpuTypes.CPU_TYPE_X86:
+                if (threadStateHeader.getFlavor() == ThreadStateX86.x86_THREAD_STATE32) {
+                    threadState = ThreadStateX86_32.createThreadStateX86_32(reader);
+                }
+                break;
+            case CpuTypes.CPU_TYPE_X86_64:
+                if (threadStateHeader.getFlavor() == ThreadStateX86.x86_THREAD_STATE64) {
+                    threadState = ThreadStateX86_64.createThreadStateX86_64(reader);
+                }
+                break;
+            case CpuTypes.CPU_TYPE_POWERPC:
+                if (threadStateHeader.getFlavor() == ThreadStatePPC.PPC_THREAD_STATE) {
+                    threadState = ThreadStatePPC.createThreadStatePPC(reader, header.is32bit());
+                }
+                break;
+            case CpuTypes.CPU_TYPE_POWERPC64:
+                if (threadStateHeader.getFlavor() == ThreadStatePPC.PPC_THREAD_STATE64) {
+                    threadState = ThreadStatePPC.createThreadStatePPC(reader, header.is32bit());
+                }
+                break;
+            case CpuTypes.CPU_TYPE_ARM:
+                if (threadStateHeader.getFlavor() == ThreadStateARM.ARM_THREAD_STATE) {
+                    threadState = ThreadStateARM.createThreadStateARM(reader);
+                }
+                break;
+            case CpuTypes.CPU_TYPE_ARM_64:
+                if (threadStateHeader.getFlavor() == ThreadStateARM_64.ARM64_THREAD_STATE) {
+                    threadState = ThreadStateARM_64.createThreadStateARM_64(reader);
+                }
+                break;
+            default:
+                Msg.info("Mach-O Thread Command",
+                        "Unsupported thread command flavor: 0x" +
+                                Integer.toHexString(threadStateHeader.getFlavor()) + " for CPU type 0x" +
+                                Integer.toHexString(header.getCpuType()));
+                //throw new MachException("Unsupported thread command flavor: 0x"+Integer.toHexString(threadStateHeader.getFlavor())+" for CPU type 0x"+Integer.toHexString(header.getCpuType()));
+                break;
+        }
 	}
 
 	public ThreadStateHeader getThreadStateHeader() {

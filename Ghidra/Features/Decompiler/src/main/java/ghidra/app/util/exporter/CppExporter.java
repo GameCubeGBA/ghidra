@@ -338,27 +338,28 @@ public class CppExporter extends Exporter {
 		for (Option option : options) {
 			String optName = option.getName();
 			try {
-				if (optName.equals(CREATE_HEADER_FILE)) {
-					isCreateHeaderFile = ((Boolean) option.getValue()).booleanValue();
-				}
-				else if (optName.equals(CREATE_C_FILE)) {
-					isCreateCFile = ((Boolean) option.getValue()).booleanValue();
-				}
-				else if (optName.equals(USE_CPP_STYLE_COMMENTS)) {
-					isUseCppStyleComments = ((Boolean) option.getValue()).booleanValue();
-				}
-				else if (optName.equals(EMIT_TYPE_DEFINITONS)) {
-					emitDataTypeDefinitions = ((Boolean) option.getValue()).booleanValue();
-				}
-				else if (optName.equals(FUNCTION_TAG_FILTERS)) {
-					tagOptions = (String) option.getValue();
-				}
-				else if (optName.equals(FUNCTION_TAG_EXCLUDE)) {
-					excludeMatchingTags = ((Boolean) option.getValue()).booleanValue();
-				}
-				else {
-					throw new OptionException("Unknown option: " + optName);
-				}
+                switch (optName) {
+                    case CREATE_HEADER_FILE:
+                        isCreateHeaderFile = ((Boolean) option.getValue()).booleanValue();
+                        break;
+                    case CREATE_C_FILE:
+                        isCreateCFile = ((Boolean) option.getValue()).booleanValue();
+                        break;
+                    case USE_CPP_STYLE_COMMENTS:
+                        isUseCppStyleComments = ((Boolean) option.getValue()).booleanValue();
+                        break;
+                    case EMIT_TYPE_DEFINITONS:
+                        emitDataTypeDefinitions = ((Boolean) option.getValue()).booleanValue();
+                        break;
+                    case FUNCTION_TAG_FILTERS:
+                        tagOptions = (String) option.getValue();
+                        break;
+                    case FUNCTION_TAG_EXCLUDE:
+                        excludeMatchingTags = ((Boolean) option.getValue()).booleanValue();
+                        break;
+                    default:
+                        throw new OptionException("Unknown option: " + optName);
+                }
 			}
 			catch (ClassCastException e) {
 				throw new OptionException(

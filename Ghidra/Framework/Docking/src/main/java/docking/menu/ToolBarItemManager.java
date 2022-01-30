@@ -92,22 +92,24 @@ public class ToolBarItemManager implements PropertyChangeListener, ActionListene
 			return;
 		}
 		String name = e.getPropertyName();
-		if (name.equals(DockingActionIf.ENABLEMENT_PROPERTY)) {
-			toolBarButton.setEnabled(((Boolean) e.getNewValue()).booleanValue());
-		}
-		else if (name.equals(DockingActionIf.DESCRIPTION_PROPERTY)) {
-			DockingToolBarUtils.setToolTipText(toolBarButton, toolBarAction);
-		}
-		else if (name.equals(DockingActionIf.TOOLBAR_DATA_PROPERTY)) {
-			ToolBarData toolBarData = (ToolBarData) e.getNewValue();
-			toolBarButton.setIcon(toolBarData == null ? null : toolBarData.getIcon());
-		}
-		else if (name.equals(ToggleDockingActionIf.SELECTED_STATE_PROPERTY)) {
-			toolBarButton.setSelected((Boolean) e.getNewValue());
-		}
-		else if (name.equals(DockingActionIf.KEYBINDING_DATA_PROPERTY)) {
-			DockingToolBarUtils.setToolTipText(toolBarButton, toolBarAction);
-		}
+        switch (name) {
+            case DockingActionIf.ENABLEMENT_PROPERTY:
+                toolBarButton.setEnabled(((Boolean) e.getNewValue()).booleanValue());
+                break;
+            case DockingActionIf.DESCRIPTION_PROPERTY:
+                DockingToolBarUtils.setToolTipText(toolBarButton, toolBarAction);
+                break;
+            case DockingActionIf.TOOLBAR_DATA_PROPERTY:
+                ToolBarData toolBarData = (ToolBarData) e.getNewValue();
+                toolBarButton.setIcon(toolBarData == null ? null : toolBarData.getIcon());
+                break;
+            case ToggleDockingActionIf.SELECTED_STATE_PROPERTY:
+                toolBarButton.setSelected((Boolean) e.getNewValue());
+                break;
+            case DockingActionIf.KEYBINDING_DATA_PROPERTY:
+                DockingToolBarUtils.setToolTipText(toolBarButton, toolBarAction);
+                break;
+        }
 	}
 
 	@Override

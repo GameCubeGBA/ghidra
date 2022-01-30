@@ -73,60 +73,61 @@ public abstract class PatternExpression {
 		PatternExpression res;
 		String nm = el.getName();
 
-		if (nm.equals("tokenfield")) {
-			res = new TokenField(null);
-		}
-		else if (nm.equals("contextfield")) {
-			res = new ContextField(null);
-		}
-		else if (nm.equals("intb")) {
-			res = new ConstantValue(null);
-		}
-		else if (nm.equals("operand_exp")) {
-			res = new OperandValue(null);
-		}
-		else if (nm.equals("start_exp")) {
-			res = new StartInstructionValue(null);
-		}
-		else if (nm.equals("end_exp")) {
-			res = new EndInstructionValue(null);
-		}
-		else if (nm.equals("plus_exp")) {
-			res = new PlusExpression(null);
-		}
-		else if (nm.equals("sub_exp")) {
-			res = new SubExpression(null);
-		}
-		else if (nm.equals("mult_exp")) {
-			res = new MultExpression(null);
-		}
-		else if (nm.equals("lshift_exp")) {
-			res = new LeftShiftExpression(null);
-		}
-		else if (nm.equals("rshift_exp")) {
-			res = new RightShiftExpression(null);
-		}
-		else if (nm.equals("and_exp")) {
-			res = new AndExpression(null);
-		}
-		else if (nm.equals("or_exp")) {
-			res = new OrExpression(null);
-		}
-		else if (nm.equals("xor_exp")) {
-			res = new XorExpression(null);
-		}
-		else if (nm.equals("div_exp")) {
-			res = new DivExpression(null);
-		}
-		else if (nm.equals("minus_exp")) {
-			res = new MinusExpression(null);
-		}
-		else if (nm.equals("not_exp")) {
-			res = new NotExpression(null);
-		}
-		else {
-			return null;
-		}
+        switch (nm) {
+            case "tokenfield":
+                res = new TokenField(null);
+                break;
+            case "contextfield":
+                res = new ContextField(null);
+                break;
+            case "intb":
+                res = new ConstantValue(null);
+                break;
+            case "operand_exp":
+                res = new OperandValue(null);
+                break;
+            case "start_exp":
+                res = new StartInstructionValue(null);
+                break;
+            case "end_exp":
+                res = new EndInstructionValue(null);
+                break;
+            case "plus_exp":
+                res = new PlusExpression(null);
+                break;
+            case "sub_exp":
+                res = new SubExpression(null);
+                break;
+            case "mult_exp":
+                res = new MultExpression(null);
+                break;
+            case "lshift_exp":
+                res = new LeftShiftExpression(null);
+                break;
+            case "rshift_exp":
+                res = new RightShiftExpression(null);
+                break;
+            case "and_exp":
+                res = new AndExpression(null);
+                break;
+            case "or_exp":
+                res = new OrExpression(null);
+                break;
+            case "xor_exp":
+                res = new XorExpression(null);
+                break;
+            case "div_exp":
+                res = new DivExpression(null);
+                break;
+            case "minus_exp":
+                res = new MinusExpression(null);
+                break;
+            case "not_exp":
+                res = new NotExpression(null);
+                break;
+            default:
+                return null;
+        }
 
 		res.restoreXml(el, trans);
 		return res;

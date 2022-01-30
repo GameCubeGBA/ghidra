@@ -241,150 +241,145 @@ public class ResourceDataDirectory extends DataDirectory {
 					"Size of resource: 0x" + Integer.toHexString(info.getSize()) + " bytes";
 				StringBuilder extraComment = new StringBuilder();
 
-				if (info.getTypeID() == ResourceDataDirectory.RT_NOTDEFINED) {
-					if (info.getName().startsWith("Rsrc_IMAGE") ||
-						info.getName().startsWith("Rsrc_PNG")) {
-						DataType dataType = null;
-						try {
-							// Check for PNG magic number
-							if (program.getMemory().getInt(addr) == 0x474e5089) {
-								dataType = new PngDataType();
-							}
-							// Check for GIF magic number
-							else if (program.getMemory().getInt(addr) == 0x47494638) {
-								dataType = new GifDataType();
-							}
+                switch (info.getTypeID()) {
+                    case ResourceDataDirectory.RT_NOTDEFINED:
+                        if (info.getName().startsWith("Rsrc_IMAGE") ||
+                                info.getName().startsWith("Rsrc_PNG")) {
+                            DataType dataType = null;
+                            try {
+                                // Check for PNG magic number
+                                if (program.getMemory().getInt(addr) == 0x474e5089) {
+                                    dataType = new PngDataType();
+                                }
+                                // Check for GIF magic number
+                                else if (program.getMemory().getInt(addr) == 0x47494638) {
+                                    dataType = new GifDataType();
+                                }
 
-						}
-						catch (MemoryAccessException e) {
-							// ignore - let createData produce error
-						}
-						PeUtils.createData(program, addr, dataType, log);
-					}
-					else if (info.getName().startsWith("Rsrc_WAV")) {
-						DataType dataType = null;
-						// Check for WAV magic number
-						try {
-							if (program.getMemory().getInt(addr) == 0x46464952) {
-								dataType = new WAVEDataType();
-							}
-						}
-						catch (MemoryAccessException e) {
-							// ignore - let createData produce error
-						}
-						PeUtils.createData(program, addr, dataType, log);
-					}
-					else if (info.getName().startsWith("Rsrc_WEVT")) {
-						DataType dataType = null;
-						// Check for WEVT magic number "CRIM"
-						try {
-							if (program.getMemory().getInt(addr) == 0x4d495243) {
-								dataType = new WEVTResourceDataType();
-							}
-						}
-						catch (MemoryAccessException e) {
-							// ignore - let createData produce error
-						}
-						PeUtils.createData(program, addr, dataType, log);
-					}
-					else if (info.getName().startsWith("Rsrc_MUI")) {
-						DataType dataType = null;
-						// Check for MUI magic number
-						try {
-							if (program.getMemory().getInt(addr) == 0xfecdfecd) {
-								dataType = new MUIResourceDataType();
-							}
-						}
-						catch (MemoryAccessException e) {
-							// ignore - let createData produce error
-						}
-						PeUtils.createData(program, addr, dataType, log);
-					}
-					else {
-						//add byte array of correct size until data type can be created for missing types- this will keep auto analysis from incorrectly analyzing here
-						ArrayDataType byteArray =
-							new ArrayDataType(ByteDataType.dataType, info.getSize(), 1);
-						PeUtils.createData(program, addr, byteArray, log);
-					}
-				}
-				else if (info.getTypeID() == ResourceDataDirectory.RT_STRING) {
-					for (int s = 0; s < 0x10; ++s) {
-						int id = ((info.getID() - 1) * 0x10) + s;
-						setEolComment(program, addr, "Rsrc String ID " + id);
-						PascalUnicodeDataType str = new PascalUnicodeDataType();
-						PeUtils.createData(program, addr, str, log);
-						Data data = program.getListing().getDataAt(addr);
-						if (data != null) {
-							addr = data.getMaxAddress().add(1);
-						}
-					}
-				}
-				else if (info.getTypeID() == ResourceDataDirectory.RT_BITMAP) {
-					BitmapResourceDataType bitmapDatatype = new BitmapResourceDataType();
-					PeUtils.createData(program, addr, bitmapDatatype, log);
-				}
-				else if (info.getTypeID() == ResourceDataDirectory.RT_ICON) {
-					DataType iconDataType = null;
-					try {
-						// Check for PNG magic number
-						if (program.getMemory().getInt(addr) == 0x474e5089) {
-							iconDataType = new PngDataType();
-						}
-						// Check for GIF magic number
-						else if (program.getMemory().getInt(addr) == 0x47494638) {
-							iconDataType = new GifDataType();
-						}
-					}
-					catch (MemoryAccessException e) {
-						// ignore - let createData produce error
-					}
-					if (iconDataType == null) {
-						// assume Icon resource by default if not PNG
-						iconDataType = new IconResourceDataType();
-					}
-					PeUtils.createData(program, addr, iconDataType, log);
-				}
-				//			else if (info.getTypeID() == ResourceDataDirectory.RT_CURSOR) {
-				//
-				//			}
-				else if (info.getTypeID() == ResourceDataDirectory.RT_GROUP_ICON) {
-					GroupIconResourceDataType groupIconDataType = new GroupIconResourceDataType();
-					PeUtils.createData(program, addr, groupIconDataType, log);
-				}
-				//else if (info.getTypeID() == ResourceDataDirectory.RT_GROUP_CURSOR) {
-				//
-				//			}
-				else if (info.getTypeID() == ResourceDataDirectory.RT_MENU) {
-					MenuResourceDataType menuResourceDataType = new MenuResourceDataType();
-					Data createData = PeUtils.createData(program, addr, menuResourceDataType, log);
-					if (createData != null) {
-						extraComment.append("\n" + setExtraCommentForMenuResource(createData));
-					}
-				}
-				else if (info.getTypeID() == ResourceDataDirectory.RT_DIALOG) {
-					DialogResourceDataType dialogResourceDataType = new DialogResourceDataType();
-					Data createData =
-						PeUtils.createData(program, addr, dialogResourceDataType, log);
-					if (createData != null) {
-						extraComment.append("\n" + setExtraCommentForDialogResource(createData));
-					}
-				}
-				else if (info.getTypeID() == ResourceDataDirectory.RT_VERSION) {
-					processVersionInfo(addr, info, program, log, monitor);
-				}
-				else if (info.getTypeID() == ResourceDataDirectory.RT_MANIFEST) { // XML manifest string
-					PeUtils.createData(program, addr, TerminatedStringDataType.dataType, log);
-				}
-				else if (info.getTypeID() == ResourceDataDirectory.RT_HTML) {
-					HTMLResourceDataType htmlResourceDataType = new HTMLResourceDataType();
-					PeUtils.createData(program, addr, htmlResourceDataType, info.getSize(), log);
-				}
-				else {
-					//add byte array of correct size until data type can be created for missing types- this will keep auto analysis from incorrectly analyzing here
-					ArrayDataType byteArray =
-						new ArrayDataType(ByteDataType.dataType, info.getSize(), 1);
-					PeUtils.createData(program, addr, byteArray, log);
-				}
+                            } catch (MemoryAccessException e) {
+                                // ignore - let createData produce error
+                            }
+                            PeUtils.createData(program, addr, dataType, log);
+                        } else if (info.getName().startsWith("Rsrc_WAV")) {
+                            DataType dataType = null;
+                            // Check for WAV magic number
+                            try {
+                                if (program.getMemory().getInt(addr) == 0x46464952) {
+                                    dataType = new WAVEDataType();
+                                }
+                            } catch (MemoryAccessException e) {
+                                // ignore - let createData produce error
+                            }
+                            PeUtils.createData(program, addr, dataType, log);
+                        } else if (info.getName().startsWith("Rsrc_WEVT")) {
+                            DataType dataType = null;
+                            // Check for WEVT magic number "CRIM"
+                            try {
+                                if (program.getMemory().getInt(addr) == 0x4d495243) {
+                                    dataType = new WEVTResourceDataType();
+                                }
+                            } catch (MemoryAccessException e) {
+                                // ignore - let createData produce error
+                            }
+                            PeUtils.createData(program, addr, dataType, log);
+                        } else if (info.getName().startsWith("Rsrc_MUI")) {
+                            DataType dataType = null;
+                            // Check for MUI magic number
+                            try {
+                                if (program.getMemory().getInt(addr) == 0xfecdfecd) {
+                                    dataType = new MUIResourceDataType();
+                                }
+                            } catch (MemoryAccessException e) {
+                                // ignore - let createData produce error
+                            }
+                            PeUtils.createData(program, addr, dataType, log);
+                        } else {
+                            //add byte array of correct size until data type can be created for missing types- this will keep auto analysis from incorrectly analyzing here
+                            ArrayDataType byteArray =
+                                    new ArrayDataType(ByteDataType.dataType, info.getSize(), 1);
+                            PeUtils.createData(program, addr, byteArray, log);
+                        }
+                        break;
+                    case ResourceDataDirectory.RT_STRING:
+                        for (int s = 0; s < 0x10; ++s) {
+                            int id = ((info.getID() - 1) * 0x10) + s;
+                            setEolComment(program, addr, "Rsrc String ID " + id);
+                            PascalUnicodeDataType str = new PascalUnicodeDataType();
+                            PeUtils.createData(program, addr, str, log);
+                            Data data = program.getListing().getDataAt(addr);
+                            if (data != null) {
+                                addr = data.getMaxAddress().add(1);
+                            }
+                        }
+                        break;
+                    case ResourceDataDirectory.RT_BITMAP:
+                        BitmapResourceDataType bitmapDatatype = new BitmapResourceDataType();
+                        PeUtils.createData(program, addr, bitmapDatatype, log);
+                        break;
+                    case ResourceDataDirectory.RT_ICON:
+                        DataType iconDataType = null;
+                        try {
+                            // Check for PNG magic number
+                            if (program.getMemory().getInt(addr) == 0x474e5089) {
+                                iconDataType = new PngDataType();
+                            }
+                            // Check for GIF magic number
+                            else if (program.getMemory().getInt(addr) == 0x47494638) {
+                                iconDataType = new GifDataType();
+                            }
+                        } catch (MemoryAccessException e) {
+                            // ignore - let createData produce error
+                        }
+                        if (iconDataType == null) {
+                            // assume Icon resource by default if not PNG
+                            iconDataType = new IconResourceDataType();
+                        }
+                        PeUtils.createData(program, addr, iconDataType, log);
+                        break;
+                    //			else if (info.getTypeID() == ResourceDataDirectory.RT_CURSOR) {
+                    //
+                    //			}
+                    case ResourceDataDirectory.RT_GROUP_ICON:
+                        GroupIconResourceDataType groupIconDataType = new GroupIconResourceDataType();
+                        PeUtils.createData(program, addr, groupIconDataType, log);
+                        break;
+                    //else if (info.getTypeID() == ResourceDataDirectory.RT_GROUP_CURSOR) {
+                    //
+                    //			}
+                    case ResourceDataDirectory.RT_MENU: {
+                        MenuResourceDataType menuResourceDataType = new MenuResourceDataType();
+                        Data createData = PeUtils.createData(program, addr, menuResourceDataType, log);
+                        if (createData != null) {
+                            extraComment.append("\n" + setExtraCommentForMenuResource(createData));
+                        }
+                        break;
+                    }
+                    case ResourceDataDirectory.RT_DIALOG: {
+                        DialogResourceDataType dialogResourceDataType = new DialogResourceDataType();
+                        Data createData =
+                                PeUtils.createData(program, addr, dialogResourceDataType, log);
+                        if (createData != null) {
+                            extraComment.append("\n" + setExtraCommentForDialogResource(createData));
+                        }
+                        break;
+                    }
+                    case ResourceDataDirectory.RT_VERSION:
+                        processVersionInfo(addr, info, program, log, monitor);
+                        break;
+                    case ResourceDataDirectory.RT_MANIFEST:  // XML manifest string
+                        PeUtils.createData(program, addr, TerminatedStringDataType.dataType, log);
+                        break;
+                    case ResourceDataDirectory.RT_HTML:
+                        HTMLResourceDataType htmlResourceDataType = new HTMLResourceDataType();
+                        PeUtils.createData(program, addr, htmlResourceDataType, info.getSize(), log);
+                        break;
+                    default:
+                        //add byte array of correct size until data type can be created for missing types- this will keep auto analysis from incorrectly analyzing here
+                        ArrayDataType byteArray =
+                                new ArrayDataType(ByteDataType.dataType, info.getSize(), 1);
+                        PeUtils.createData(program, addr, byteArray, log);
+                        break;
+                }
 
 				setPlateComment(program, addr, info.getName() + " " + cmt + extraComment);
 			}
