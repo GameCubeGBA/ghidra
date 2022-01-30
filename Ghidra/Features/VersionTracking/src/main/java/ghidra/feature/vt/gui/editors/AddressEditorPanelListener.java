@@ -22,6 +22,7 @@ package ghidra.feature.vt.gui.editors;
  * The listener can then call the getAddress() on the editor panel for the current 
  * address value.
  */
+@FunctionalInterface
 public interface AddressEditorPanelListener {
 
 	/**

@@ -16,6 +16,7 @@
  */
 package docking.menu;
 
+@FunctionalInterface
 public interface MenuGroupListener {
 	public void menuGroupChanged(String[] menuPath, String group);
 }

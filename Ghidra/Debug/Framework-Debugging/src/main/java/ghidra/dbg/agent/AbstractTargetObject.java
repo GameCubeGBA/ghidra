@@ -42,7 +42,8 @@ import ghidra.util.datastruct.ListenerSet;
  * @param <P> the type of the parent
  */
 public abstract class AbstractTargetObject<P extends TargetObject> implements SpiTargetObject {
-	public static interface ProxyFactory<I> {
+	@FunctionalInterface
+    public static interface ProxyFactory<I> {
 		SpiTargetObject createProxy(AbstractTargetObject<?> delegate, I info);
 	}
 

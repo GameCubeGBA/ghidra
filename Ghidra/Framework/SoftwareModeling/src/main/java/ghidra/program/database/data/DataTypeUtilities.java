@@ -556,6 +556,7 @@ public class DataTypeUtilities {
 	 * <code>NamespaceMatcher</code> is used to check data type categoryPath for match against
 	 * preferred namespace.
 	 */
+	@FunctionalInterface
 	private static interface NamespaceMatcher {
 		/**
 		 * Score category path match.

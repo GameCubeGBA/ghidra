@@ -18,6 +18,7 @@ package ghidra.graph.viewer;
 /**
  * A listener to get notified of changes to the {@link SatelliteGraphViewer}
  */
+@FunctionalInterface
 public interface GraphSatelliteListener {
 
 	/**

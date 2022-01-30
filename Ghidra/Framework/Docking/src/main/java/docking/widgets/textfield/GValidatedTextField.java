@@ -113,11 +113,13 @@ public class GValidatedTextField extends JTextField {
 		}
 	}
 
-	public static interface TextValidator {
+	@FunctionalInterface
+    public static interface TextValidator {
 		public void validate(String oldText, String newText) throws ValidationFailedException;
 	}
 
-	public static interface ValidationMessageListener {
+	@FunctionalInterface
+    public static interface ValidationMessageListener {
 		public void message(String msg);
 	}
 

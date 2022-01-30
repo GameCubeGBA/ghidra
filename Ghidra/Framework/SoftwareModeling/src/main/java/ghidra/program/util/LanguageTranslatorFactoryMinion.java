@@ -18,6 +18,7 @@ package ghidra.program.util;
 
 import java.util.Collection;
 
+@FunctionalInterface
 public interface LanguageTranslatorFactoryMinion {
 
 	/**

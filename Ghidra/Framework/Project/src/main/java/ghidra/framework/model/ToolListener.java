@@ -24,6 +24,7 @@ import ghidra.framework.plugintool.PluginEvent;
  * @see PluginEvent
  */
 
+@FunctionalInterface
 public interface ToolListener {
     
     /**

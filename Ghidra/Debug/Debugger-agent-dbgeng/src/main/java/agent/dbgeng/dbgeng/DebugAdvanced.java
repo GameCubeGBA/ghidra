@@ -18,6 +18,7 @@ package agent.dbgeng.dbgeng;
 /**
  * A wrapper for {@code IDebugAdvanced} and its newer variants.
  */
+@FunctionalInterface
 public interface DebugAdvanced {
 	public static class DebugThreadBasicInformation {
 		public final Integer exitStatus;

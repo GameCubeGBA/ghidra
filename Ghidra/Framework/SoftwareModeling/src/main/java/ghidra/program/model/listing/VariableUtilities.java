@@ -653,7 +653,8 @@ public class VariableUtilities {
 		}
 	}
 
-	public interface VariableConflictHandler {
+	@FunctionalInterface
+    public interface VariableConflictHandler {
 		/**
 		 * Provides means of resolving variable conflicts (e.g., removing of conflicts)
 		 * @param conflicts variable conflicts

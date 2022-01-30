@@ -39,7 +39,8 @@ public class DBTraceOverlaySpaceAdapter implements DBTraceManager {
 	/**
 	 * An interface required for any object having a field using {@link AddressDBFieldCodec}.
 	 */
-	public interface DecodesAddresses {
+	@FunctionalInterface
+    public interface DecodesAddresses {
 		/**
 		 * Get the space adapter for the trace containing the object
 		 * 

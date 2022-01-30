@@ -21,6 +21,7 @@ package ghidra.framework.client;
  * which facilitates notifcation when the connection
  * state of a remote server/repository adapter changes.
  */
+@FunctionalInterface
 public interface RemoteAdapterListener {
 	
 	 /**

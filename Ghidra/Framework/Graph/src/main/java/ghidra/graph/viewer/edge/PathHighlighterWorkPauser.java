@@ -18,6 +18,7 @@ package ghidra.graph.viewer.edge;
 /**
  * A simple boolean supplier that signals if path highlighting work should not take place
  */
+@FunctionalInterface
 public interface PathHighlighterWorkPauser {
 
 	/**

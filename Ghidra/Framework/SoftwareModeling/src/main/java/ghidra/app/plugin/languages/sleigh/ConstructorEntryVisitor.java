@@ -25,6 +25,7 @@ import ghidra.app.plugin.processors.sleigh.symbol.SubtableSymbol;
  * 
  * @see SleighLanguages#traverseConstructors(SleighLanguage, ConstructorEntryVisitor)
  */
+@FunctionalInterface
 public interface ConstructorEntryVisitor extends VisitorResults {
 	/**
 	 * Callback to visit a constructor

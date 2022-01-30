@@ -21,6 +21,7 @@ import ghidra.program.util.ProgramSelection;
 /**
  * Listener that is notified when the program selection changes
  */
+@FunctionalInterface
 public interface ProgramSelectionListener {
 
 	/**

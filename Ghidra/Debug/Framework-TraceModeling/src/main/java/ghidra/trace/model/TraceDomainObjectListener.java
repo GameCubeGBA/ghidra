@@ -25,11 +25,13 @@ import ghidra.util.TimedMsg;
 
 public class TraceDomainObjectListener implements DomainObjectListener {
 
-	public interface EventRecordHandler<T, U> {
+	@FunctionalInterface
+    public interface EventRecordHandler<T, U> {
 		void handle(TraceChangeRecord<T, U> record);
 	}
 
-	public interface FullEventRecordHandler<T, U> extends EventRecordHandler<T, U> {
+	@FunctionalInterface
+    public interface FullEventRecordHandler<T, U> extends EventRecordHandler<T, U> {
 		void handle(TraceAddressSpace space, T affectedObject, U oldValue, U newValue);
 
 		@Override
@@ -39,7 +41,8 @@ public class TraceDomainObjectListener implements DomainObjectListener {
 		}
 	}
 
-	public interface AffectedObjectHandler<T> extends EventRecordHandler<T, Void> {
+	@FunctionalInterface
+    public interface AffectedObjectHandler<T> extends EventRecordHandler<T, Void> {
 		void handle(TraceAddressSpace space, T affectedObject);
 
 		@Override
@@ -48,7 +51,8 @@ public class TraceDomainObjectListener implements DomainObjectListener {
 		}
 	}
 
-	public interface AffectedObjectOnlyHandler<T> extends EventRecordHandler<T, Void> {
+	@FunctionalInterface
+    public interface AffectedObjectOnlyHandler<T> extends EventRecordHandler<T, Void> {
 		void handle(T affectedObject);
 
 		@Override
@@ -57,7 +61,8 @@ public class TraceDomainObjectListener implements DomainObjectListener {
 		}
 	}
 
-	public interface AffectedAndValuesOnlyHandler<T, U> extends EventRecordHandler<T, U> {
+	@FunctionalInterface
+    public interface AffectedAndValuesOnlyHandler<T, U> extends EventRecordHandler<T, U> {
 		void handle(T affectedObject, U oldValue, U newValue);
 
 		@Override
@@ -66,7 +71,8 @@ public class TraceDomainObjectListener implements DomainObjectListener {
 		}
 	}
 
-	public interface SpaceValuesHandler<U> extends EventRecordHandler<Void, U> {
+	@FunctionalInterface
+    public interface SpaceValuesHandler<U> extends EventRecordHandler<Void, U> {
 		void handle(TraceAddressSpace space, U oldValue, U newValue);
 
 		@Override
@@ -75,7 +81,8 @@ public class TraceDomainObjectListener implements DomainObjectListener {
 		}
 	}
 
-	public interface ValuesOnlyHandler<U> extends EventRecordHandler<Void, U> {
+	@FunctionalInterface
+    public interface ValuesOnlyHandler<U> extends EventRecordHandler<Void, U> {
 		void handle(U oldValue, U newValue);
 
 		@Override
@@ -84,7 +91,8 @@ public class TraceDomainObjectListener implements DomainObjectListener {
 		}
 	}
 
-	public interface IgnoreValuesHandler extends EventRecordHandler<Object, Object> {
+	@FunctionalInterface
+    public interface IgnoreValuesHandler extends EventRecordHandler<Object, Object> {
 		void handle(TraceAddressSpace space);
 
 		@Override
@@ -93,7 +101,8 @@ public class TraceDomainObjectListener implements DomainObjectListener {
 		}
 	}
 
-	public interface IgnoreAllHandler extends EventRecordHandler<Object, Object> {
+	@FunctionalInterface
+    public interface IgnoreAllHandler extends EventRecordHandler<Object, Object> {
 		void handle();
 
 		@Override

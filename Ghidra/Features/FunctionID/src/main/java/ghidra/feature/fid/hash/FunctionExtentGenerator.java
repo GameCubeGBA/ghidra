@@ -25,6 +25,7 @@ import ghidra.program.model.listing.Function;
  * calculateExtent.
  *
  */
+@FunctionalInterface
 public interface FunctionExtentGenerator {
 	/**
 	 * Calculates the extent of a function, and returns a deterministic, 

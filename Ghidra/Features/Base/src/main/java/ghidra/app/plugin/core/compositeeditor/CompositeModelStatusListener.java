@@ -20,6 +20,7 @@ package ghidra.app.plugin.core.compositeeditor;
 /**
  * Composite Viewer Model status information change listener interface.
  */
+@FunctionalInterface
 public interface CompositeModelStatusListener {
 	/**
 	 * Notification that the CompositeViewerModel's status information has changed.

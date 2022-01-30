@@ -93,7 +93,8 @@ public class FileSystemService {
 	 * <p>
 	 * See {@link #produceDerivedStream()}.   
 	 */
-	public interface DerivedStreamProducer {
+	@FunctionalInterface
+    public interface DerivedStreamProducer {
 
 		/**
 		 * Callback method intended to be implemented by the caller to
@@ -128,7 +129,8 @@ public class FileSystemService {
 	 * See {@link #push(OutputStream)}.   
 	 * 
 	 */
-	public interface DerivedStreamPushProducer {
+	@FunctionalInterface
+    public interface DerivedStreamPushProducer {
 		/**
 		 * Callback method intended to be implemented by the caller to
 		 * {@link FileSystemService#getDerivedByteProviderPush(FSRL, FSRL, String, long, DerivedStreamPushProducer, TaskMonitor) getDerivedByteProviderPush()}

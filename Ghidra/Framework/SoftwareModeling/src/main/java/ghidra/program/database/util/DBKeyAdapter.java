@@ -27,6 +27,7 @@ import db.DBLongIterator;
  * 
  * 
  */
+@FunctionalInterface
 public interface DBKeyAdapter {
 
 	/**

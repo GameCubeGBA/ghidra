@@ -19,6 +19,7 @@ import ghidra.app.plugin.core.functiongraph.graph.vertex.FGVertex;
 
 import java.util.Set;
 
+@FunctionalInterface
 public interface FunctionGraphValidGraphActionContextIf {
 
 	public Set<FGVertex> getSelectedVertices();

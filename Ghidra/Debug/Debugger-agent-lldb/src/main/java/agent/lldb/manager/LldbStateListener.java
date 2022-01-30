@@ -21,6 +21,7 @@ import ghidra.util.TriConsumer;
 /**
  * A listener for changes in LLDB's state
  */
+@FunctionalInterface
 public interface LldbStateListener extends TriConsumer<StateType, StateType, LldbCause> {
 	/**
 	 * The state has changed because of the given cause

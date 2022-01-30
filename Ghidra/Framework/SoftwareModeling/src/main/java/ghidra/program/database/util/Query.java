@@ -20,6 +20,7 @@ import db.DBRecord;
 /**
  * Query interface used to test a record for some condition.  
  */
+@FunctionalInterface
 public interface Query {
 	/**
 	 * Returns true if the given record matches the querys condition.

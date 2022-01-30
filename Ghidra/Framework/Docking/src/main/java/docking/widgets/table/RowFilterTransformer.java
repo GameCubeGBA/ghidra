@@ -25,6 +25,7 @@ import java.util.List;
  * included in the filter.
  * @param <ROW_OBJECT> the table row object.
  */
+@FunctionalInterface
 public interface RowFilterTransformer<ROW_OBJECT> {
 	public List<String> transform(ROW_OBJECT rowObject);
 }

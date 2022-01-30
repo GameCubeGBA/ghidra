@@ -29,6 +29,7 @@ import com.sun.jna.platform.win32.COM.IUnknown;
 
 import ghidra.util.datastruct.WeakValueHashMap;
 
+@FunctionalInterface
 public interface UnknownExInternal extends UnknownEx {
 	Map<Pointer, UnknownExInternal> CACHE = new WeakValueHashMap<>();
 

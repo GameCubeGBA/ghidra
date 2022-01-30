@@ -22,6 +22,7 @@ import java.util.List;
  *
  * @param <T> type of object displayed in the drop down list
  */
+@FunctionalInterface
 public interface DropDownMultiSelectionChoiceListener<T> {
 	
 	/**

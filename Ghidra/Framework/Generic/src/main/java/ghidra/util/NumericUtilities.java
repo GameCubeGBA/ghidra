@@ -900,7 +900,8 @@ public final class NumericUtilities {
 	/**
 	 * Provides the protocol for rendering integer-type numbers in different signed-ness modes.
 	 */
-	private static interface IntegerRadixRenderer {
+	@FunctionalInterface
+    private static interface IntegerRadixRenderer {
 		/**
 		 * Format the given number in the provided radix base.
 		 *

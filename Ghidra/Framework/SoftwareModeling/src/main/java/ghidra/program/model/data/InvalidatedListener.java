@@ -18,6 +18,7 @@ package ghidra.program.model.data;
 /**
  * @see DataTypeManager
  */
+@FunctionalInterface
 public interface InvalidatedListener {
 
 	/**

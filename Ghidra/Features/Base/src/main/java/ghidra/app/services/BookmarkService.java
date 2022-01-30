@@ -16,6 +16,7 @@
  */
 package ghidra.app.services;
 
+@FunctionalInterface
 public interface BookmarkService {
 
 	public void setBookmarksVisible(boolean visible);

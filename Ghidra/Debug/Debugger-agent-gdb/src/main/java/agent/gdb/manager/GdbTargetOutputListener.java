@@ -21,6 +21,7 @@ package agent.gdb.manager;
  * Note the details of this listener are not well established, for lack of examples that use
  * GDB/MI's target output record.
  */
+@FunctionalInterface
 public interface GdbTargetOutputListener {
 	/**
 	 * The target outputted some text

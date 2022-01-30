@@ -25,6 +25,7 @@ import java.io.RandomAccessFile;
  * An interface for writing out class state information.
  * 
  */
+@FunctionalInterface
 public interface Writeable {
 	/**
 	 * Writes this object to the specified random access file using

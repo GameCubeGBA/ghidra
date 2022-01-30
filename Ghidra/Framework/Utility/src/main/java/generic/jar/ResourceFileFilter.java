@@ -16,6 +16,7 @@
  */
 package generic.jar;
 
+@FunctionalInterface
 public interface ResourceFileFilter {
 	public boolean accept(ResourceFile file);
 }

@@ -26,6 +26,7 @@ import ghidra.async.AsyncUtils;
  *
  * @param <R> the type of result for the whole loop
  */
+@FunctionalInterface
 public interface AsyncLoopOnlyActionRuns<R> extends Consumer<AsyncLoopHandlerForSecond<R>> {
 	// Nothing
 }

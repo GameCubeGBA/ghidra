@@ -24,6 +24,7 @@ import ghidra.program.model.lang.LanguageID;
 /**
  * A listener for the SelectLanguagePanel
  */
+@FunctionalInterface
 public interface SelectLanguagePanelListener {
     /**
      * This method is invoked every time a languauge is selected.

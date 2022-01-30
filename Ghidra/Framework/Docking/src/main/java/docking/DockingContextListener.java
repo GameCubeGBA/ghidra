@@ -22,6 +22,7 @@ import docking.action.DockingActionIf;
  * manage {@link DockingActionIf} enablement directly by the system.  This class allows 
  * clients to listen to context change as well.
  */
+@FunctionalInterface
 public interface DockingContextListener {
 
 	/**

@@ -19,6 +19,7 @@ package ghidra.util.bean;
 
 import java.awt.Graphics;
 
+@FunctionalInterface
 public interface GGlassPanePainter {
 
     public void paint( GGlassPane glassPane, Graphics graphics );

@@ -20,6 +20,7 @@ package ghidra.app.plugin.core.compositeeditor;
 /**
  * Composite Viewer Model component selection change listener interface.
  */
+@FunctionalInterface
 public interface CompositeModelSelectionListener {
     /**
      * Called to indicate the model's component selection has changed.

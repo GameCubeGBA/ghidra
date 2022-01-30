@@ -18,6 +18,7 @@ package ghidra.comm.util;
 /**
  * The interface for enumerations usable with {@link BitmaskSet}
  */
+@FunctionalInterface
 public interface BitmaskUniverse {
 	/**
 	 * Get the bit associated with this constant

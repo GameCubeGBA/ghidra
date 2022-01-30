@@ -25,6 +25,7 @@ import docking.widgets.fieldpanel.FieldPanel;
  * to display the same model data on the screen, the IndexMapper can be used to convert old
  * indexes to new indexes.
  */
+@FunctionalInterface
 public interface IndexMapper {
 	public static final IndexMapper IDENTITY_MAPPER = new IndexMapper() {
 		@Override

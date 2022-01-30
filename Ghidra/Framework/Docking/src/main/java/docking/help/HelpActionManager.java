@@ -23,6 +23,7 @@ import javax.swing.JComponent;
 /**
  * Register help for a specific component.
  */
+@FunctionalInterface
 public interface HelpActionManager {
 	
 	/**

@@ -22,6 +22,7 @@ import docking.widgets.fieldpanel.support.FieldLocation;
 /**
  * Listener interface for mouse pressed events in the field panel.
  */
+@FunctionalInterface
 public interface FieldMouseListener {
 	/**
 	 * Called whenever the mouse button is pressed.

@@ -17,6 +17,7 @@ package agent.dbgmodel.dbgmodel;
 
 import com.sun.jna.Pointer;
 
+@FunctionalInterface
 public interface UnknownEx {
 
 	Pointer getPointer();

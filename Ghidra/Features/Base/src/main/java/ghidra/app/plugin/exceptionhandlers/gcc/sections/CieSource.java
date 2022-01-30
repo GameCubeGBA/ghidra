@@ -25,6 +25,7 @@ import ghidra.program.model.mem.MemoryAccessException;
  * Provides GCC exception handling model classes the means to obtain a Common Information Entry
  * (CIE) object for a given address.
  */
+@FunctionalInterface
 public interface CieSource {
 
 	/**

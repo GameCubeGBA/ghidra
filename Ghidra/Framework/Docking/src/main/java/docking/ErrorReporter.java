@@ -18,6 +18,7 @@ package docking;
 
 import java.awt.Component;
 
+@FunctionalInterface
 public interface ErrorReporter {
 	public void report(Component parent, String title, String details);
 }

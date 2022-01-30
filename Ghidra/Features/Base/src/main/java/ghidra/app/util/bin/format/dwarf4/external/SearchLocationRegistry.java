@@ -87,7 +87,8 @@ public class SearchLocationRegistry {
 		return null;
 	}
 
-	public interface SearchLocationCreator {
+	@FunctionalInterface
+    public interface SearchLocationCreator {
 		/**
 		 * Creates a new {@link SearchLocation} instance using the provided location string.
 		 * 

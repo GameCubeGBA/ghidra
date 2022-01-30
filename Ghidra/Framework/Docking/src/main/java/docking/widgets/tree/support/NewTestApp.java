@@ -76,6 +76,7 @@ public class NewTestApp extends JPanel {
 	}
 }
 
+@FunctionalInterface
 interface FileData {
 	File getFile();
 }

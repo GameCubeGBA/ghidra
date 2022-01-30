@@ -20,6 +20,7 @@ package ghidra.util.search.trie;
  *
  * @param <T> the client item type
  */
+@FunctionalInterface
 public interface Op<T> {
 	/**
 	 * Perform an operation on a node.

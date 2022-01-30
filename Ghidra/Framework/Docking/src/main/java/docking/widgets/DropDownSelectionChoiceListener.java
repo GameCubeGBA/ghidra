@@ -23,6 +23,7 @@ package docking.widgets;
  *
  * @param <T> The type of objects used by the field.
  */
+@FunctionalInterface
 public interface DropDownSelectionChoiceListener<T> {
 
     public void selectionChanged( T t );

@@ -18,6 +18,7 @@ package log;
 /**
  * An interface that allows clients to receive log messages.
  */
+@FunctionalInterface
 public interface LogListener {
 
 	/**

@@ -19,6 +19,7 @@ package ghidra.util.datastruct;
 /**
  * Interface that defines a method for comparing two long values.
  */
+@FunctionalInterface
 public interface LongComparator {
 	
 	/**

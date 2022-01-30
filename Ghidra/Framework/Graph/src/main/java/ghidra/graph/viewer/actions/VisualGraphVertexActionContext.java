@@ -23,6 +23,7 @@ import ghidra.graph.viewer.VisualVertex;
  *
  * @param <V> the vertex type
  */
+@FunctionalInterface
 public interface VisualGraphVertexActionContext<V extends VisualVertex>
 		extends VisualGraphActionContext {
 	public V getVertex();

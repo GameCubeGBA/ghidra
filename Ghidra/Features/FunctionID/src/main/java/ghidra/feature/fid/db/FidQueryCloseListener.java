@@ -15,6 +15,7 @@
  */
 package ghidra.feature.fid.db;
 
+@FunctionalInterface
 public interface FidQueryCloseListener {
 	public void fidQueryClosed(FidQueryService service);
 }

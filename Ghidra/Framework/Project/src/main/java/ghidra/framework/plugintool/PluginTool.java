@@ -1479,7 +1479,8 @@ public abstract class PluginTool extends AbstractDockingTool {
 		}
 	}
 
-	private interface CheckedRunnable<T extends Throwable> {
+	@FunctionalInterface
+    private interface CheckedRunnable<T extends Throwable> {
 		public void run() throws T;
 	}
 

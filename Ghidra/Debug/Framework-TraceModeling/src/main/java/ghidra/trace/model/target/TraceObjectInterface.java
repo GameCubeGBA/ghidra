@@ -26,6 +26,7 @@ import ghidra.trace.model.thread.TraceObjectThread;
  * A common interface for object-based implementations of other trace manager entries, e.g.,
  * {@link TraceObjectThread}.
  */
+@FunctionalInterface
 public interface TraceObjectInterface {
 	/**
 	 * Get the object backing this implementation

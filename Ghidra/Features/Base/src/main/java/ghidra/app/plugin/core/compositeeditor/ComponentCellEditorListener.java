@@ -20,6 +20,7 @@ package ghidra.app.plugin.core.compositeeditor;
  * The composite data type editor uses this listener so that the cell editor can indicate
  * to the panel that it should try to stop editing the current cell and move to the indicated cell.
  */
+@FunctionalInterface
 interface ComponentCellEditorListener {
     static int NEXT = 1;
     static int PREVIOUS = 2;

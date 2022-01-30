@@ -20,6 +20,7 @@ package docking.widgets.fieldpanel;
  * 
  * @see FieldPanelOverLayoutManager
  */
+@FunctionalInterface
 public interface FieldPanelOverLayoutListener {
 	/**
 	 * The manager is about to layout a component over a field in the panel

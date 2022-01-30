@@ -17,6 +17,7 @@ package db;
 
 import java.io.IOException;
 
+@FunctionalInterface
 public interface RecordTranslator {
 	
 	/**

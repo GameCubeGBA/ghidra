@@ -4331,7 +4331,8 @@ public class ExternalFunctionMerger extends AbstractFunctionMerger implements Li
 		return null;
 	}
 
-	private interface ConflictListener {
+	@FunctionalInterface
+    private interface ConflictListener {
 		public void resolveConflict();
 	}
 

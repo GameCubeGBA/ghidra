@@ -16,6 +16,7 @@
 package ghidra.app.plugin.core.diff;
 
 /** A simple listener to allow signalling when a diff tasks starts and ends */
+@FunctionalInterface
 public interface DiffTaskListener {
 
 	public static DiffTaskListener NULL_LISTENER = new DiffTaskListener() {

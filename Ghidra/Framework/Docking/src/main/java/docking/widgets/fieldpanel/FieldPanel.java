@@ -1389,7 +1389,8 @@ public class FieldPanel extends JPanel
 		}
 	}
 
-	public interface KeyAction {
+	@FunctionalInterface
+    public interface KeyAction {
 		public void handleKeyEvent(KeyEvent event);
 	}
 

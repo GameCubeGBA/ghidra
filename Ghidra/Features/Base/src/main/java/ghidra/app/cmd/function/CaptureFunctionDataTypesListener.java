@@ -19,6 +19,7 @@ package ghidra.app.cmd.function;
 /**
  * Listener that is notified when the CaptureFunctionDataTypesCmd completes.
  */
+@FunctionalInterface
 public interface CaptureFunctionDataTypesListener {
 
 	/**

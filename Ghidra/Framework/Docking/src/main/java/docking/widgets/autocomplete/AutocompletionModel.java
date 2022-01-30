@@ -22,6 +22,7 @@ import java.util.Collection;
  *
  * @param <T> the type of suggestions this model gives.
  */
+@FunctionalInterface
 public interface AutocompletionModel<T> {
 	/**
 	 * Compute a collection of possible completions to the given text (prefix).

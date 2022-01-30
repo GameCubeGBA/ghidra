@@ -23,6 +23,7 @@ import ghidra.program.model.listing.Program;
  * Interface to define a method that is called when an address in the 
  * Label History table is selected.
  */
+@FunctionalInterface
 interface LabelHistoryListener {
 
 	/**
