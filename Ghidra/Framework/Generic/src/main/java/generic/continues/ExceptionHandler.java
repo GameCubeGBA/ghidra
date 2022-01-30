@@ -16,6 +16,7 @@
  */
 package generic.continues;
 
+@FunctionalInterface
 public interface ExceptionHandler {
 	public void handle(Throwable e) throws Throwable;
 }

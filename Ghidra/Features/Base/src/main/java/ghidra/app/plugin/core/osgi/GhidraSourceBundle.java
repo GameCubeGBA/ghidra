@@ -70,7 +70,8 @@ public class GhidraSourceBundle extends GhidraBundle {
 	private static final Predicate<String> IS_CLASS_FILE =
 		Pattern.compile("(\\$.*)?\\.class", Pattern.CASE_INSENSITIVE).asMatchPredicate();
 
-	protected interface DiscrepencyCallback {
+	@FunctionalInterface
+    protected interface DiscrepencyCallback {
 		/**
 		 * Invoked when there is a discrepancy between {@code sourceFile} and its
 		 * corresponding class file(s), {@code classFiles}

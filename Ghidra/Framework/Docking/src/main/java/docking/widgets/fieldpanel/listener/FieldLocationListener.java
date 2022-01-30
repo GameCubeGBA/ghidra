@@ -23,6 +23,7 @@ import docking.widgets.fieldpanel.support.FieldLocation;
 /**
  * Listener interface for field location changes
  */
+@FunctionalInterface
 public interface FieldLocationListener {
 	
 	/**

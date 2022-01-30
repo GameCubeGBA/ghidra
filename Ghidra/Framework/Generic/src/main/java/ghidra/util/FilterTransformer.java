@@ -18,6 +18,7 @@ package ghidra.util;
 
 import java.util.List;
 
+@FunctionalInterface
 public interface FilterTransformer<T> {
 
 	public List<String> transform(T t);

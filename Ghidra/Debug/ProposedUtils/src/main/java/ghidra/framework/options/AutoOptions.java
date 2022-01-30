@@ -114,7 +114,8 @@ public interface AutoOptions {
 		// no attributes
 	}
 
-	public interface Wiring {
+	@FunctionalInterface
+    public interface Wiring {
 		void dispose();
 	}
 

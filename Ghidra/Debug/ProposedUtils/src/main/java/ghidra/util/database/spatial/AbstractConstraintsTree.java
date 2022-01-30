@@ -592,9 +592,7 @@ public abstract class AbstractConstraintsTree< //
 		if (children == null) {
 			return;
 		}
-		if (!children.remove(child)) {
-			throw new AssertionError();
-		}
+		assert children.remove(child);
 	}
 
 	protected <R> void doAddToCachedChildren(long parentKey, R child,
@@ -603,9 +601,7 @@ public abstract class AbstractConstraintsTree< //
 		if (children == null) {
 			return;
 		}
-		if (!children.add(child)) {
-			throw new AssertionError();
-		}
+		assert children.add(child);
 	}
 
 	protected <R extends DBTreeRecord<?, ?>> void doSetParentKey(R child, long key,
@@ -633,9 +629,7 @@ public abstract class AbstractConstraintsTree< //
 
 	protected void doDeleteEntry(DR data) {
 		doUnparentEntry(data);
-		if (!dataStore.delete(data)) {
-			throw new AssertionError();
-		}
+		assert dataStore.delete(data);
 	}
 
 	protected boolean doRemoveData(DS shape, T value, Q query) {
@@ -787,9 +781,7 @@ public abstract class AbstractConstraintsTree< //
 		if (expectedBounds == null && n != root) {
 			throw new AssertionError("Non-root node cannot be empty");
 		}
-		if (expectedBounds != null && !expectedBounds.equals(n.getBounds())) {
-			throw new AssertionError("Parent bounds do not match expected");
-		}
+		assert expectedBounds == null || expectedBounds.equals(n.getBounds()) : "Parent bounds do not match expected";
 
 		// Check parent type wrt. child types
 		switch (n.getType()) {
@@ -797,14 +789,9 @@ public abstract class AbstractConstraintsTree< //
 				Collection<DR> dataChildren = getDataChildrenOf(n.getKey());
 				// NOTE: isEmpty() uses size(), which uses getChildCount
 				// Has no regard for which table. Use iterator instead.
-				if (dataChildren.iterator().hasNext()) {
-					throw new AssertionError(
-						"Directory node " + n + " cannot contain data " + dataChildren);
-				}
+				assert !dataChildren.iterator().hasNext() : "Directory node " + n + " cannot contain data " + dataChildren;
 				Collection<NR> nodeChildren = getNodeChildrenOf(n);
-				if (!nodeChildren.iterator().hasNext()) {
-					throw new AssertionError("Directory node " + n + " cannot be empty");
-				}
+				assert nodeChildren.iterator().hasNext() : "Directory node " + n + " cannot be empty";
 				NodeType childType = nodeChildren.iterator().next().getType();
 				if (childType == NodeType.LEAF) {
 					throw new AssertionError(
@@ -812,23 +799,15 @@ public abstract class AbstractConstraintsTree< //
 							",children=" + nodeChildren);
 				}
 				for (NR nr : nodeChildren) {
-					if (nr.getType() != childType) {
-						throw new AssertionError(
-							"All sibling must have the same type: " + nodeChildren);
-					}
+					assert nr.getType() == childType : "All sibling must have the same type: " + nodeChildren;
 				}
 				break;
 			}
 			case LEAF_PARENT: {
 				Collection<DR> dataChildren = getDataChildrenOf(n);
-				if (dataChildren.iterator().hasNext()) {
-					throw new AssertionError(
-						"Directory node " + n + " cannot contain data " + dataChildren);
-				}
+				assert !dataChildren.iterator().hasNext() : "Directory node " + n + " cannot contain data " + dataChildren;
 				Collection<NR> nodeChildren = getNodeChildrenOf(n);
-				if (!nodeChildren.iterator().hasNext()) {
-					throw new AssertionError("Leaf-parent " + n + " cannot be empty");
-				}
+				assert nodeChildren.iterator().hasNext() : "Leaf-parent " + n + " cannot be empty";
 				for (NR nr : nodeChildren) {
 					if (nr.getType() != NodeType.LEAF) {
 						throw new AssertionError("Leaf-parent node " + n +

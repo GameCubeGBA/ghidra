@@ -20,7 +20,8 @@ import java.util.Collection;
 public interface ObservableCollection<E, L extends CollectionChangeListener<? super E>>
 		extends Collection<E> {
 
-	interface ChangeAggregator extends AutoCloseable {
+	@FunctionalInterface
+    interface ChangeAggregator extends AutoCloseable {
 		@Override
 		void close();
 	}

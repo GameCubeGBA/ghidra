@@ -19,6 +19,7 @@ package ghidra.app.util.bin.format.pdb2.pdbreader.symbol;
  * This interface is for symbols that have a symbol name.
  */
 // TODO: Consider whether symbol 'Internals' classes should implement this.
+@FunctionalInterface
 public interface NameMsSymbol {
 
 	/**

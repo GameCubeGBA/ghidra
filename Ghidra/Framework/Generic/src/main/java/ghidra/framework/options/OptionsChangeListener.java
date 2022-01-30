@@ -22,6 +22,7 @@ import ghidra.util.bean.opteditor.OptionsVetoException;
  * <p>
  * Register with {@link ToolOptions#addOptionsChangeListener(OptionsChangeListener)}.
  */
+@FunctionalInterface
 public interface OptionsChangeListener {
 
 	/**

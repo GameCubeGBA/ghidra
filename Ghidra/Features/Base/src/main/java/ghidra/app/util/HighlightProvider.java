@@ -23,6 +23,7 @@ import docking.widgets.fieldpanel.support.Highlight;
  * Provider of Highlight objects appropriate for the text, object, and FieldFactory class.
  *
  */
+@FunctionalInterface
 public interface HighlightProvider {
 
 	public static final Highlight[] EMPTY_HIGHLIGHT = new Highlight[0];

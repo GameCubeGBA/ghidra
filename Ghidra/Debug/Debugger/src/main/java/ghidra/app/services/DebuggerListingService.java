@@ -35,7 +35,8 @@ public interface DebuggerListingService extends CodeViewerService {
 	/**
 	 * A listener for changes in location tracking specification
 	 */
-	interface LocationTrackingSpecChangeListener {
+    @FunctionalInterface
+    interface LocationTrackingSpecChangeListener {
 		/**
 		 * The specification has changed
 		 * 

@@ -20,6 +20,7 @@ import java.util.List;
 
 import docking.ActionContext;
 
+@FunctionalInterface
 public interface MultiActionDockingActionIf {
 	List<DockingActionIf> getActionList(ActionContext context);
 }

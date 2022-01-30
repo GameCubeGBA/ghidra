@@ -21,6 +21,7 @@ import java.awt.Component;
  * A listener interface to know when a component has been 
  * made {@link Component#isDisplayable() displayable}
  */
+@FunctionalInterface
 public interface ComponentLoadedListener {
 
 	/**

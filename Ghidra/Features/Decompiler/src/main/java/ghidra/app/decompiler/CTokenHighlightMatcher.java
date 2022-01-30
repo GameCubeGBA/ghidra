@@ -26,6 +26,7 @@ import java.awt.Color;
  * 
  * @see DecompilerHighlightService
  */
+@FunctionalInterface
 public interface CTokenHighlightMatcher {
 	public default void start(ClangNode root) {
 		// stub; provided for clients that may wish to work from the root

@@ -30,11 +30,13 @@ import utilities.util.reflection.ReflectionUtilities;
 public enum GadpRegistry {
 	;
 
-	public interface InvocationBuilder {
+	@FunctionalInterface
+    public interface InvocationBuilder {
 		Message.Builder buildMessage(String oid, Object[] args);
 	}
 
-	public interface ServerInvoker<M> {
+	@FunctionalInterface
+    public interface ServerInvoker<M> {
 		CompletableFuture<Message.Builder> invoke(TargetObject object, M msg);
 	}
 

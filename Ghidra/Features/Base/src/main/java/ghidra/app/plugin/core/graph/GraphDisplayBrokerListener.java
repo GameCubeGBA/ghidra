@@ -15,6 +15,7 @@
  */
 package ghidra.app.plugin.core.graph;
 
+@FunctionalInterface
 public interface GraphDisplayBrokerListener {
 
 	void providersChanged();

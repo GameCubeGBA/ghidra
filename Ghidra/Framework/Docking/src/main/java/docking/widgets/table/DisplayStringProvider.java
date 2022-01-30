@@ -21,6 +21,7 @@ package docking.widgets.table;
  * table filtering mechanism, which will look for this interface when attempting to transform
  * table cell data to filterable Strings.
  */
+@FunctionalInterface
 public interface DisplayStringProvider {
 
 	/**

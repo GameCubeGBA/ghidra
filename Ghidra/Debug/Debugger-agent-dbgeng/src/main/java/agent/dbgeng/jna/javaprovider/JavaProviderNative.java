@@ -18,6 +18,7 @@ package agent.dbgeng.jna.javaprovider;
 import com.sun.jna.*;
 import com.sun.jna.platform.win32.WinNT.HRESULT;
 
+@FunctionalInterface
 public interface JavaProviderNative extends Library {
 	JavaProviderNative INSTANCE = Native.loadLibrary("javaprovider", JavaProviderNative.class);
 

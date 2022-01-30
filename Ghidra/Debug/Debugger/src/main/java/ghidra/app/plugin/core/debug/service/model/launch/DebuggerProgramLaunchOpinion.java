@@ -22,6 +22,7 @@ import ghidra.framework.plugintool.PluginTool;
 import ghidra.program.model.listing.Program;
 import ghidra.util.classfinder.ExtensionPoint;
 
+@FunctionalInterface
 public interface DebuggerProgramLaunchOpinion extends ExtensionPoint {
 	Collection<DebuggerProgramLaunchOffer> getOffers(Program program, PluginTool tool,
 			DebuggerModelService service);

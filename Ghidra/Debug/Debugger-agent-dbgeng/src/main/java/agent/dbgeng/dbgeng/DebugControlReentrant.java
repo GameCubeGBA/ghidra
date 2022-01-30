@@ -22,6 +22,7 @@ import agent.dbgeng.dbgeng.DebugControl.DebugInterrupt;
  * 
  * All other methods should be called only by the thread which created the client.
  */
+@FunctionalInterface
 public interface DebugControlReentrant {
 	void setInterrupt(DebugInterrupt interrupt);
 }

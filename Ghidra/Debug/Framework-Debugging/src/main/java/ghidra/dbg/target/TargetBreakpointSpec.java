@@ -132,7 +132,8 @@ public interface TargetBreakpointSpec extends TargetObject, /*@Transitional*/ Ta
 	 */
 	public void removeAction(TargetBreakpointAction action);
 
-	public interface TargetBreakpointAction {
+	@FunctionalInterface
+    public interface TargetBreakpointAction {
 		/**
 		 * An effective breakpoint from this specification trapped execution
 		 * 

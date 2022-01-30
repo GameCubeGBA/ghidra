@@ -21,6 +21,7 @@ package ghidra.app.plugin.core.datamgr;
  * Interface to define a method that is called when the selected data type changes in 
  * the data type sync table.
  */
+@FunctionalInterface
 interface DataTypeSyncListener {
 	
 	/**

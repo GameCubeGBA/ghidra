@@ -27,6 +27,7 @@ import ghidra.app.decompiler.ClangToken;
  * Function since we can declare a {@code ColorProvider} as a parameter to methods instead of
  * a {@link Function}.
  */
+@FunctionalInterface
 public interface ColorProvider {
 
 	/**

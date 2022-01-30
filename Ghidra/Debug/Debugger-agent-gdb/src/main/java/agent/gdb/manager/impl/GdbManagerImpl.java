@@ -1549,7 +1549,8 @@ public class GdbManagerImpl implements GdbManager {
 	/**
 	 * An interface for taking lines of input
 	 */
-	public interface LineReader {
+	@FunctionalInterface
+    public interface LineReader {
 		String readLine(String prompt) throws IOException;
 	}
 

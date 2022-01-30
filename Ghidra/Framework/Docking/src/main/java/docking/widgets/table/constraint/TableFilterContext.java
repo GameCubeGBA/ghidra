@@ -23,6 +23,7 @@ import docking.widgets.table.GDynamicColumnTableModel;
  * information other than just the column value.  For example, the column value might be a key
  * into some other data mapping.
  */
+@FunctionalInterface
 public interface TableFilterContext {
 	/**
 	 * Returns the table's data source object if it has one; otherwise it returns null.

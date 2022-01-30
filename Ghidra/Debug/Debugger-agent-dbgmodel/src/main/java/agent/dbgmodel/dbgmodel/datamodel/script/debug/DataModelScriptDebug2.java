@@ -18,5 +18,6 @@ package agent.dbgmodel.dbgmodel.datamodel.script.debug;
 /**
  * A wrapper for {@code IDataModelScriptDebug2} and its newer variants.
  */
+@FunctionalInterface
 public interface DataModelScriptDebug2 extends DataModelScriptDebug1 {
 }

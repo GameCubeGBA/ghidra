@@ -966,7 +966,8 @@ public class DBCachedObjectStore<T extends DBAnnotatedObject> implements ErrorHa
 		}
 	}
 
-	protected interface SupplierAllowsIOException<U> {
+	@FunctionalInterface
+    protected interface SupplierAllowsIOException<U> {
 		U get() throws IOException;
 	}
 

@@ -18,6 +18,7 @@ package ghidra.app.plugin.core.function;
 
 import java.util.EventListener;
 
+@FunctionalInterface
 public interface StackDepthChangeListener extends EventListener {
 
     /**

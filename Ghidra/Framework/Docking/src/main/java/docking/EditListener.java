@@ -19,6 +19,7 @@ package docking;
 /**
  * Provides notification when a text edit is completed.
  */
+@FunctionalInterface
 public interface EditListener {
 
 	/**

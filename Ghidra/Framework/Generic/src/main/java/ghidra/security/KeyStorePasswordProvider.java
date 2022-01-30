@@ -16,6 +16,7 @@
  */
 package ghidra.security;
 
+@FunctionalInterface
 public interface KeyStorePasswordProvider {
 
 	/**

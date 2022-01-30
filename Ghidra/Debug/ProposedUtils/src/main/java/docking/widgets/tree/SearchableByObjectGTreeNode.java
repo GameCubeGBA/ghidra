@@ -17,6 +17,7 @@ package docking.widgets.tree;
 
 import java.util.Map;
 
+@FunctionalInterface
 public interface SearchableByObjectGTreeNode {
 	Map<? extends Object, ? extends GTreeNode> getObjectNodeMap();
 

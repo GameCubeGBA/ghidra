@@ -616,7 +616,8 @@ public class HelpBuildUtils {
 // Inner Classes
 //==================================================================================================    
 
-	public static interface Stringizer<T> {
+	@FunctionalInterface
+    public static interface Stringizer<T> {
 		public String stringize(T obj);
 	}
 

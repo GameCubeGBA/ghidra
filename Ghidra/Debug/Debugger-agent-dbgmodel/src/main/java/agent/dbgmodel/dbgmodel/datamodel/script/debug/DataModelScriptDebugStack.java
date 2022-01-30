@@ -20,5 +20,6 @@ import agent.dbgmodel.dbgmodel.UnknownEx;
 /**
  * A wrapper for {@code IDataModelScriptDebugStack} and its newer variants.
  */
+@FunctionalInterface
 public interface DataModelScriptDebugStack extends UnknownEx {
 }

@@ -24,6 +24,7 @@ import ghidra.formats.gfilesystem.factory.FileSystemInfoRec;
  * multiple filesystem types indicate that they can open a container file.
  * <p>
  */
+@FunctionalInterface
 public interface FileSystemProbeConflictResolver {
 
 	/**

@@ -24,6 +24,7 @@ import java.awt.Graphics;
  * An interface used with {@link AnimationUtils} to allow clients to use the timing 
  * framework while performing their own painting.
  */
+@FunctionalInterface
 public interface AnimationPainter {
 
 	/**

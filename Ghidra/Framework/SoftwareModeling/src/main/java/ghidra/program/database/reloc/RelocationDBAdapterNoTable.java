@@ -21,8 +21,6 @@ import ghidra.program.model.address.AddressSetView;
 
 import java.io.IOException;
 
-import java.lang.UnsupportedOperationException;
-
 import db.DBRecord;
 import db.RecordIterator;
 

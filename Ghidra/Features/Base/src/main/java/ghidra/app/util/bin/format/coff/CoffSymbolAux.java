@@ -17,6 +17,7 @@ package ghidra.app.util.bin.format.coff;
 
 import ghidra.app.util.bin.StructConverter;
 
+@FunctionalInterface
 public interface CoffSymbolAux extends StructConverter {
 	// Effectively renames interface
 }

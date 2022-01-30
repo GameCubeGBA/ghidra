@@ -17,6 +17,7 @@
 package ghidra.app.decompiler.component;
 
 
+@FunctionalInterface
 public interface DualDecompileResultsListener {
 
 //	void setProvider(DecompilerFunctionComparisonProvider provider);

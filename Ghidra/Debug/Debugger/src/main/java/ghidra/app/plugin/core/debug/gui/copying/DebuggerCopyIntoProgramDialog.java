@@ -210,7 +210,8 @@ public class DebuggerCopyIntoProgramDialog extends DialogComponentProvider {
 		}
 	}
 
-	protected interface CopyDestination {
+	@FunctionalInterface
+    protected interface CopyDestination {
 		default Program getExistingProgram() {
 			return null;
 		}

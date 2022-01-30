@@ -28,7 +28,8 @@ import agent.gdb.manager.parsing.GdbParsingUtils.GdbParseError;
 import utility.function.ExceptionalFunction;
 
 public class GdbCValueParser extends AbstractGdbParser {
-	public interface GdbCValue {
+	@FunctionalInterface
+    public interface GdbCValue {
 		public GdbCValue EMPTY = new GdbCValue() {
 			@Override
 			public boolean isEmpty() {

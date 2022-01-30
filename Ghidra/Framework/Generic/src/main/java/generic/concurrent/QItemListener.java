@@ -23,6 +23,7 @@ package generic.concurrent;
  * @param <I> The type for the items being processed.
  * @param <R> The type for result object returned from the QWorkers process method.
  */
+@FunctionalInterface
 public interface QItemListener<I, R> {
 
 	/**

@@ -286,10 +286,8 @@ public abstract class AbstractDebuggerProgramLaunchOffer implements DebuggerProg
 		return connect(prompt).thenComposeAsync(m -> {
 			List<String> launcherPath = getLauncherPath();
 			TargetObjectSchema schema = m.getRootSchema().getSuccessorSchema(launcherPath);
-			if (!schema.getInterfaces().contains(TargetLauncher.class)) {
-				throw new AssertionError("LaunchOffer / model implementation error: " +
-					"The given launcher path is not a TargetLauncher, according to its schema");
-			}
+			assert schema.getInterfaces().contains(TargetLauncher.class) : "LaunchOffer / model implementation error: " +
+					"The given launcher path is not a TargetLauncher, according to its schema";
 			return new ValueExpecter(m, launcherPath);
 		}, SwingExecutorService.INSTANCE).thenCompose(l -> {
 			monitor.incrementProgress(1);

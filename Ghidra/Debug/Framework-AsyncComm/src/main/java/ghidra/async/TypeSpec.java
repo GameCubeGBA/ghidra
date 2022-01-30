@@ -217,7 +217,8 @@ public interface TypeSpec<U> {
 	 *
 	 * @param <R> the return type of the method
 	 */
-	interface FuncArity0<R> {
+    @FunctionalInterface
+    interface FuncArity0<R> {
 		R func();
 	}
 
@@ -227,7 +228,8 @@ public interface TypeSpec<U> {
 	 * @param <R> the return type of the method
 	 * @param <P0> the type of the first parameter
 	 */
-	interface FuncArity1<R, P0> {
+    @FunctionalInterface
+    interface FuncArity1<R, P0> {
 		R func(P0 arg0);
 	}
 
@@ -238,7 +240,8 @@ public interface TypeSpec<U> {
 	 * @param <P0> the type of the first parameter
 	 * @param <P1> the type of the second parameter
 	 */
-	interface FuncArity2<R, P0, P1> {
+    @FunctionalInterface
+    interface FuncArity2<R, P0, P1> {
 		R func(P0 arg0, P1 arg1);
 	}
 
@@ -250,7 +253,8 @@ public interface TypeSpec<U> {
 	 * @param <P1> the type of the second parameter
 	 * @param <P2> the type of the third parameter
 	 */
-	interface FuncArity3<R, P0, P1, P2> {
+    @FunctionalInterface
+    interface FuncArity3<R, P0, P1, P2> {
 		R func(P0 arg0, P1 arg1, P2 arg2);
 	}
 
@@ -263,7 +267,8 @@ public interface TypeSpec<U> {
 	 * @param <P2> the type of the third parameter
 	 * @param <P3> the type of the fourth parameter
 	 */
-	interface FuncArity4<R, P0, P1, P2, P3> {
+    @FunctionalInterface
+    interface FuncArity4<R, P0, P1, P2, P3> {
 		R func(P0 arg0, P1 arg1, P2 arg2, P3 arg3);
 	}
 

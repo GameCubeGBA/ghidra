@@ -512,7 +512,8 @@ public class TableChooserDialogTest extends AbstractGhidraHeadedIntegrationTest 
 // Inner Classes
 //==================================================================================================
 
-	private interface TestExecutorDecision {
+	@FunctionalInterface
+    private interface TestExecutorDecision {
 		public boolean decide(AddressableRowObject rowObject);
 	}
 

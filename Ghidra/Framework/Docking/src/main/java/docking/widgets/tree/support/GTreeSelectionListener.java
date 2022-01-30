@@ -17,6 +17,7 @@
 package docking.widgets.tree.support;
 
 
+@FunctionalInterface
 public interface GTreeSelectionListener {
 	/** 
      * Called whenever the value of the selection changes.

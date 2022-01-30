@@ -24,6 +24,7 @@ import javax.swing.KeyStroke;
  * 
  * 
  */
+@FunctionalInterface
 public interface KeyEntryListener {
 
 	public void processEntry(KeyStroke keyStroke);

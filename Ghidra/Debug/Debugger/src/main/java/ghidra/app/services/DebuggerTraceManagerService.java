@@ -42,7 +42,8 @@ public interface DebuggerTraceManagerService {
 	 * <p>
 	 * TODO: Seems this is still leaking an implementation detail
 	 */
-	public interface BooleanChangeAdapter extends TriConsumer<Boolean, Boolean, Void> {
+	@FunctionalInterface
+    public interface BooleanChangeAdapter extends TriConsumer<Boolean, Boolean, Void> {
 		@Override
 		default void accept(Boolean oldVal, Boolean newVal, Void cause) {
 			changed(newVal);

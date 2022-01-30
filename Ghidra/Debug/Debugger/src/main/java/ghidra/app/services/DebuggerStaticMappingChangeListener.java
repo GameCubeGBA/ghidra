@@ -20,6 +20,7 @@ import java.util.Set;
 import ghidra.program.model.listing.Program;
 import ghidra.trace.model.Trace;
 
+@FunctionalInterface
 public interface DebuggerStaticMappingChangeListener {
 	/**
 	 * The mappings among programs and traces open in this tool have changed

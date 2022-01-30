@@ -36,6 +36,7 @@ import ghidra.formats.gfilesystem.FSRL;
  * user isn't spammed with requests for an unknown password during batch / recursive
  * operations.
  */
+@FunctionalInterface
 public interface PasswordProvider extends CryptoProvider {
 	/**
 	 * Returns a sequence of passwords (ordered by quality) that may apply to

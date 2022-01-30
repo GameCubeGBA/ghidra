@@ -27,6 +27,7 @@ import ghidra.util.task.TaskMonitor;
  *            return value, then make this value whatever you want, like <code>Object</code> or the 
  *            same value as {@link I} and return null from {@link #process(Object, TaskMonitor) process(I, TaskMonitor)}.
  */
+@FunctionalInterface
 public interface QCallback<I, R> {
 
 	/**

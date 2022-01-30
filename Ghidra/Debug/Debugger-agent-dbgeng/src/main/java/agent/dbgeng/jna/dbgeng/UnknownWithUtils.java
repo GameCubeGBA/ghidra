@@ -20,7 +20,8 @@ import com.sun.jna.platform.win32.WinNT.HRESULT;
 import com.sun.jna.platform.win32.COM.Unknown;
 
 public class UnknownWithUtils extends Unknown {
-	public static interface VTableIndex {
+	@FunctionalInterface
+    public static interface VTableIndex {
 		int getIndex();
 
 		public static <I extends Enum<I> & VTableIndex> int follow(Class<I> prev) {

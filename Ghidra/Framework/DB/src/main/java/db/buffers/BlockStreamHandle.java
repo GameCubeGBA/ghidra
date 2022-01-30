@@ -17,6 +17,7 @@ package db.buffers;
 
 import java.io.IOException;
 
+@FunctionalInterface
 public interface BlockStreamHandle<T extends BlockStream> {
 
 	/**

@@ -15,6 +15,7 @@
  */
 package docking.widgets;
 
+@FunctionalInterface
 public interface ExpanderArrowExpansionListener {
 	/**
 	 * @throws ExpanderArrowExpansionVetoException

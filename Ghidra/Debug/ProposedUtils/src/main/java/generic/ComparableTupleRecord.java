@@ -18,6 +18,7 @@ package generic;
 import java.util.List;
 import java.util.function.Function;
 
+@FunctionalInterface
 public interface ComparableTupleRecord<T extends ComparableTupleRecord<T>>
 		extends TupleRecord<T>, Comparable<T> {
 	List<Function<T, ? extends Comparable<?>>> getComparableFieldAccessors();
