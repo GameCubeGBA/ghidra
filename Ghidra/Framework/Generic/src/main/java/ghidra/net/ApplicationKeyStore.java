@@ -33,7 +33,7 @@ import ghidra.util.Msg;
  * X.509 form (*.pem, *.crt, *.cer, *.der) or Java JKS (*.jks) form, while keystores 
  * for client/server may be in a PKCS12 form (*.p12, *.pks, *.pfx) or Java JKS (*.jks) form.
  */
-class ApplicationKeyStore {
+final class ApplicationKeyStore {
 
 	static final String[] PKCS_FILE_EXTENSIONS = new String[] { "p12", "pks", "pfx" };
 

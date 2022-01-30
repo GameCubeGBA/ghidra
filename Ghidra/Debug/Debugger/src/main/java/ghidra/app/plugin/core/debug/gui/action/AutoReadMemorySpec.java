@@ -33,7 +33,7 @@ import ghidra.util.classfinder.ClassSearcher;
 import ghidra.util.classfinder.ExtensionPoint;
 
 public interface AutoReadMemorySpec extends ExtensionPoint {
-	class Private {
+	final class Private {
 		private final Map<String, AutoReadMemorySpec> specsByName = new TreeMap<>();
 		private final ChangeListener classListener = this::classesChanged;
 
@@ -49,7 +49,7 @@ public interface AutoReadMemorySpec extends ExtensionPoint {
 
 	Private PRIVATE = new Private();
 
-	public static class AutoReadMemorySpecConfigFieldCodec
+	class AutoReadMemorySpecConfigFieldCodec
 			implements ConfigFieldCodec<AutoReadMemorySpec> {
 		@Override
 		public AutoReadMemorySpec read(SaveState state, String name,

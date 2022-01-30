@@ -23,7 +23,7 @@ import ghidra.util.xml.XmlUtilities;
 import ghidra.xml.XmlElement;
 import ghidra.xml.XmlPullParser;
 
-class ApplySourceFiles {
+final class ApplySourceFiles {
 
 	private ApplySourceFiles() {
 		// static use only

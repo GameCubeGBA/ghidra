@@ -154,7 +154,7 @@ public class AsyncLock {
 	/**
 	 * An opaque lock ownership handle
 	 */
-	public class Hold {
+	public final class Hold {
 		final HoldState state = new HoldState();
 		final Cleanable cleanable;
 

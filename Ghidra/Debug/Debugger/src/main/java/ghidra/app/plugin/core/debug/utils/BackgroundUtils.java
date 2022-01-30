@@ -31,7 +31,7 @@ import ghidra.util.task.*;
 public enum BackgroundUtils {
 	;
 
-	public static class AsyncBackgroundCommand<T extends UndoableDomainObject>
+	public static final class AsyncBackgroundCommand<T extends UndoableDomainObject>
 			extends BackgroundCommand {
 		private CompletableFuture<?> promise;
 

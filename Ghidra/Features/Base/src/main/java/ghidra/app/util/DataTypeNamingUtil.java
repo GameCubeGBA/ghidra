@@ -18,7 +18,7 @@ package ghidra.app.util;
 import ghidra.program.model.data.*;
 import ghidra.util.InvalidNameException;
 
-public class DataTypeNamingUtil {
+public final class DataTypeNamingUtil {
 	
 	private DataTypeNamingUtil() {
 		// no construct

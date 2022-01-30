@@ -23,7 +23,7 @@ import java.util.Arrays;
  * <p>
  * {@link #close() Closing} an instance will clear the characters of the char array.
  */
-public class PasswordValue implements Closeable {
+public final class PasswordValue implements Closeable {
 
 	/**
 	 * Creates a new PasswordValue using a copy the specified characters.

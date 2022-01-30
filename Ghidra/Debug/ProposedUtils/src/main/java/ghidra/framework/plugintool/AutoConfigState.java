@@ -272,7 +272,7 @@ public interface AutoConfigState {
 		}
 	}
 
-	class ConfigStateField<T> {
+	final class ConfigStateField<T> {
 		private static final Map<Class<?>, ConfigFieldCodec<?>> CODECS_BY_TYPE = new HashMap<>();
 		private static final Map<Class<?>, ConfigFieldCodec<?>> CODECS_BY_SPEC = new HashMap<>();
 
