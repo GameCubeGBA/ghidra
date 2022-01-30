@@ -18,7 +18,6 @@
 //@category Update
 
 import ghidra.app.script.GhidraScript;
-import ghidra.program.model.symbol.*;
 
 public class Update8051 extends GhidraScript {
 

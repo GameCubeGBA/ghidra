@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ghidra.app.script.GhidraScript;
-import ghidra.app.util.bin.format.dwarf4.external.*;
 import ghidra.util.Msg;
 
 public class DWARFSetExternalDebugFilesLocationPrescript extends GhidraScript {

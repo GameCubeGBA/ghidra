@@ -25,7 +25,6 @@ import ghidra.program.model.address.AddressSpace;
 import ghidra.program.model.listing.Program;
 import ghidra.program.model.mem.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  * Test for the BitMemoryBlock for the database implementation.

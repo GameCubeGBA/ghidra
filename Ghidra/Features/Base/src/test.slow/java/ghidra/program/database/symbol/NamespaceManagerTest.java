@@ -28,7 +28,6 @@ import ghidra.program.model.listing.*;
 import ghidra.program.model.mem.MemoryBlock;
 import ghidra.program.model.symbol.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  */

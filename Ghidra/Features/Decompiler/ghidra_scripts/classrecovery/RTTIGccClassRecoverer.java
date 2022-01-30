@@ -24,16 +24,10 @@ import ghidra.app.util.demangler.*;
 import ghidra.app.util.opinion.ElfLoader;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.program.flatapi.FlatProgramAPI;
-import ghidra.program.model.address.*;
-import ghidra.program.model.data.*;
-import ghidra.program.model.listing.*;
-import ghidra.program.model.mem.*;
 import ghidra.program.model.scalar.Scalar;
-import ghidra.program.model.symbol.*;
 import ghidra.program.util.ProgramLocation;
 import ghidra.program.util.ProgramMemoryUtil;
 import ghidra.util.Msg;
-import ghidra.util.bytesearch.*;
 import ghidra.util.exception.*;
 import ghidra.util.task.TaskMonitor;
 

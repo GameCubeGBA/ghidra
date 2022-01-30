@@ -26,9 +26,6 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.table.TableModel;
 
-import org.junit.*;
-
-import docking.*;
 import docking.action.DockingActionIf;
 import docking.action.ToggleDockingAction;
 import docking.options.editor.OptionsDialog;
@@ -66,7 +63,6 @@ import ghidra.program.model.symbol.SymbolTable;
 import ghidra.util.Msg;
 import ghidra.util.exception.UsrException;
 import ghidra.util.table.GhidraTable;
-import ghidra.util.task.*;
 
 public class VersionTrackingPluginScreenShots extends GhidraScreenShotGenerator {
 

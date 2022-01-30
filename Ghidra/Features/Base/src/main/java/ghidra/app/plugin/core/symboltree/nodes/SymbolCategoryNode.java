@@ -27,7 +27,6 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.symbol.*;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public abstract class SymbolCategoryNode extends SymbolTreeNode {
 	public static final int MAX_NODES_BEFORE_ORGANIZING = 40;

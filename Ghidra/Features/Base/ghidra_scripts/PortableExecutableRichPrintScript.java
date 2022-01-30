@@ -31,7 +31,6 @@ import ghidra.app.util.bin.format.mz.DOSHeader;
 import ghidra.app.util.bin.format.pe.PortableExecutable;
 import ghidra.app.util.bin.format.pe.PortableExecutable.SectionLayout;
 import ghidra.app.util.bin.format.pe.RichHeader;
-import ghidra.app.util.bin.format.pe.rich.*;
 import ghidra.util.Conv;
 
 public class PortableExecutableRichPrintScript extends GhidraScript {

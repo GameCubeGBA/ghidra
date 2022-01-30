@@ -15,9 +15,6 @@
  */
 package ghidra.program.model.data;
 
-import java.nio.CharBuffer;
-import java.nio.charset.Charset;
-
 import ghidra.docking.settings.Settings;
 import ghidra.docking.settings.SettingsDefinition;
 import ghidra.program.model.mem.MemBuffer;

@@ -52,7 +52,6 @@ import ghidra.app.util.demangler.DemangledException;
 import ghidra.app.util.demangler.gnu.GnuDemangler;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressSet;
-import ghidra.program.model.data.*;
 import ghidra.program.model.listing.Data;
 import ghidra.program.model.listing.Instruction;
 import ghidra.program.model.mem.MemoryBlock;

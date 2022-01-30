@@ -25,7 +25,6 @@ import ghidra.app.plugin.core.symboltree.SymbolTreeProvider;
 import ghidra.app.util.AddressInput;
 import ghidra.program.model.listing.GhidraClass;
 import ghidra.program.model.listing.Library;
-import ghidra.program.model.symbol.*;
 
 public class SymbolTreePluginScreenShots extends GhidraScreenShotGenerator {
 

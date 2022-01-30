@@ -21,7 +21,6 @@ import ghidra.util.Msg;
 import ghidra.util.exception.AssertException;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  * <code>LocalManagedBufferFile</code> implements a BufferFile as block-oriented

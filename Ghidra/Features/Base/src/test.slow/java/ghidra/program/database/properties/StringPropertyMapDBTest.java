@@ -32,7 +32,6 @@ import ghidra.program.model.address.*;
 import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
 import ghidra.util.Saveable;
 import ghidra.util.prop.PropertyVisitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public class StringPropertyMapDBTest extends AbstractGhidraHeadlessIntegrationTest implements ErrorHandler {
 

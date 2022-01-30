@@ -38,7 +38,6 @@ import ghidra.util.DataConverter;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.InvalidInputException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public class OmfLoader extends AbstractLibrarySupportLoader {
 	public final static String OMF_NAME = "Relocatable Object Module Format (OMF)";

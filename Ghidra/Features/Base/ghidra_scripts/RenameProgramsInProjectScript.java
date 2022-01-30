@@ -18,7 +18,6 @@
 //@category Examples
 
 import ghidra.app.script.GhidraScript;
-import ghidra.framework.model.*;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.util.InvalidNameException;
 

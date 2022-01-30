@@ -26,7 +26,6 @@ import ghidra.feature.fid.service.FidService;
 import ghidra.framework.model.DomainFile;
 import ghidra.framework.model.DomainFolder;
 import ghidra.program.database.ProgramContentHandler;
-import ghidra.program.model.listing.*;
 import ghidra.util.Msg;
 import ghidra.util.NumericUtilities;
 import ghidra.util.exception.CancelledException;

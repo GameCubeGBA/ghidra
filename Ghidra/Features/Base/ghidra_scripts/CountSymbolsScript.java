@@ -18,7 +18,6 @@
 //@category Symbol
 
 import ghidra.app.script.GhidraScript;
-import ghidra.program.model.symbol.*;
 
 public class CountSymbolsScript extends GhidraScript {
 

@@ -22,7 +22,6 @@ import ghidra.app.script.GhidraScript;
 import ghidra.framework.model.DomainFile;
 import ghidra.framework.model.DomainFolder;
 import ghidra.program.database.ProgramContentHandler;
-import ghidra.program.model.listing.*;
 import ghidra.util.Msg;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.VersionException;

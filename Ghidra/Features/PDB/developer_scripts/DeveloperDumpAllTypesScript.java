@@ -25,7 +25,6 @@ import ghidra.app.script.GhidraScript;
 import ghidra.app.services.DataTypeManagerService;
 import ghidra.app.util.ToolTipUtils;
 import ghidra.framework.plugintool.PluginTool;
-import ghidra.program.model.data.*;
 import ghidra.util.HTMLUtilities;
 import ghidra.util.Msg;
 import ghidra.util.exception.CancelledException;

@@ -24,13 +24,9 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
-import org.junit.*;
-
 import docking.widgets.indexedscrollpane.IndexedScrollPane;
 import generic.test.TestUtils;
 import ghidra.app.cmd.function.AddRegisterParameterCommand;
-import ghidra.app.merge.*;
-import ghidra.app.merge.listing.*;
 import ghidra.app.merge.tool.ListingMergePanel;
 import ghidra.app.util.viewer.listingpanel.ListingPanel;
 import ghidra.app.util.viewer.util.TitledPanel;
@@ -39,20 +35,15 @@ import ghidra.framework.model.DomainFile;
 import ghidra.framework.model.DomainFolder;
 import ghidra.framework.options.Options;
 import ghidra.framework.store.LockException;
-import ghidra.program.database.*;
 import ghidra.program.database.external.ExternalManagerDB;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressSet;
-import ghidra.program.model.data.*;
 import ghidra.program.model.lang.Register;
-import ghidra.program.model.listing.*;
 import ghidra.program.model.mem.MemoryBlock;
-import ghidra.program.model.symbol.*;
 import ghidra.program.model.util.IntPropertyMap;
 import ghidra.program.model.util.PropertyMapManager;
 import ghidra.test.TestEnv;
 import ghidra.util.InvalidNameException;
-import ghidra.util.exception.*;
 import ghidra.util.task.TaskMonitor;
 import ghidra.util.task.TaskMonitorAdapter;
 

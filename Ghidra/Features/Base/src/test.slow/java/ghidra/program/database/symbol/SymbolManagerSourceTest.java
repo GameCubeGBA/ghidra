@@ -29,7 +29,6 @@ import ghidra.program.model.symbol.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.exception.InvalidInputException;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public class SymbolManagerSourceTest extends AbstractGhidraHeadedIntegrationTest {
 

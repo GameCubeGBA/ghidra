@@ -48,7 +48,6 @@ import ghidra.test.TestEnv;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.exception.InvalidInputException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public class VTMatchApplyFunctionSignatureTest extends AbstractGhidraHeadedIntegrationTest {
 

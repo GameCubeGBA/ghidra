@@ -18,7 +18,6 @@
 //@menupath    Tools.Version Control.Add All
 
 import ghidra.app.script.GhidraScript;
-import ghidra.framework.model.*;
 import ghidra.program.database.ProgramContentHandler;
 
 public class VersionControl_AddAll extends GhidraScript {

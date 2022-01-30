@@ -21,9 +21,7 @@ import java.util.Iterator;
 import ghidra.app.script.GhidraScript;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressSetView;
-import ghidra.program.model.listing.*;
 import ghidra.program.model.mem.MemoryAccessException;
-import ghidra.program.model.symbol.*;
 
 public class CompareAnalysisScript extends GhidraScript {
 

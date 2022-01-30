@@ -28,10 +28,6 @@
 import ghidra.app.cmd.disassemble.SetFlowOverrideCmd;
 import ghidra.app.cmd.function.CreateFunctionCmd;
 import ghidra.app.script.GhidraScript;
-import ghidra.program.model.address.*;
-import ghidra.program.model.block.*;
-import ghidra.program.model.listing.*;
-import ghidra.program.model.symbol.*;
 
 import java.util.Iterator;
 

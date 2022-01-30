@@ -32,7 +32,6 @@ import ghidra.util.Msg;
 import ghidra.util.ReadOnlyException;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  * Database version of the DomainObjectAdapter; this version adds the

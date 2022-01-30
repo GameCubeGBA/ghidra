@@ -15,8 +15,6 @@
  */
 package ghidra.app.plugin.core.debug.gui.stack;
 
-import org.junit.*;
-
 import com.google.common.collect.Range;
 
 import ghidra.app.plugin.core.debug.service.modules.DebuggerStaticMappingServicePlugin;
@@ -25,7 +23,6 @@ import ghidra.app.plugin.core.debug.service.tracemgr.DebuggerTraceManagerService
 import ghidra.app.plugin.core.progmgr.ProgramManagerPlugin;
 import ghidra.app.services.*;
 import ghidra.framework.model.DomainFolder;
-import ghidra.program.model.address.*;
 import ghidra.program.model.listing.FunctionManager;
 import ghidra.program.model.listing.Program;
 import ghidra.program.model.symbol.SourceType;

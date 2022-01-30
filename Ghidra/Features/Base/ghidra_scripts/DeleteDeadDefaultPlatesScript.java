@@ -18,7 +18,6 @@
 //@category Update
 
 import ghidra.app.script.GhidraScript;
-import ghidra.program.model.address.*;
 import ghidra.program.model.listing.CodeUnit;
 import ghidra.program.model.listing.Listing;
 

@@ -18,7 +18,6 @@ import java.io.FileWriter;
 import java.util.*;
 
 import ghidra.app.script.GhidraScript;
-import ghidra.feature.fid.db.*;
 import ghidra.util.Msg;
 import ghidra.util.exception.VersionException;
 

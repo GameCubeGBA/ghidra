@@ -26,7 +26,6 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.mem.MemoryBlock;
 import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
 import ghidra.test.ToyProgramBuilder;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public class DisassemblerLargeSetTest extends AbstractGhidraHeadlessIntegrationTest {
 

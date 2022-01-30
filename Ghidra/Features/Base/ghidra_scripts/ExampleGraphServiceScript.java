@@ -16,7 +16,6 @@
 import ghidra.app.script.GhidraScript;
 import ghidra.app.services.GraphDisplayBroker;
 import ghidra.framework.plugintool.PluginTool;
-import ghidra.service.graph.*;
 
 /**
  * Example script for creating and displaying a graph in ghidra

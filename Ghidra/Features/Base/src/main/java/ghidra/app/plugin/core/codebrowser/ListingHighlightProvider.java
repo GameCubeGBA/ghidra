@@ -30,7 +30,6 @@ import docking.widgets.fieldpanel.field.FieldElement;
 import docking.widgets.fieldpanel.support.FieldLocation;
 import docking.widgets.fieldpanel.support.Highlight;
 import ghidra.GhidraOptions;
-import ghidra.GhidraOptions.CURSOR_MOUSE_BUTTON_NAMES;
 import ghidra.app.plugin.processors.generic.PcodeFieldFactory;
 import ghidra.app.services.ButtonPressedListener;
 import ghidra.app.util.HighlightProvider;

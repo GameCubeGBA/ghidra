@@ -15,7 +15,6 @@
  */
 package ghidra.pcodeCPort.slgh_compile;
 
-import java.util.Comparator;
 import java.util.Iterator;
 
 import generic.stl.*;

@@ -17,7 +17,6 @@
 //@category Examples.Bundle
 
 import docking.ActionContext;
-import docking.action.*;
 import ghidra.app.script.GhidraScript;
 import ghidra.app.services.CodeViewerService;
 import ghidra.app.services.ConsoleService;

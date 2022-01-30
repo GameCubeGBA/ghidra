@@ -31,7 +31,6 @@ import ghidra.program.model.listing.*;
 import ghidra.program.model.symbol.SourceType;
 import ghidra.program.util.ProgramDiff;
 import ghidra.program.util.ProgramDiffFilter;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public class FunctionMergerUseForAllTest extends AbstractListingMergeManagerTest {
 

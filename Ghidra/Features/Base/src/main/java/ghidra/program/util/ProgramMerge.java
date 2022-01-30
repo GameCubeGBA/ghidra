@@ -34,7 +34,6 @@ import ghidra.util.datastruct.LongLongHashtable;
 import ghidra.util.exception.*;
 import ghidra.util.prop.PropertyVisitor;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  * <CODE>ProgramMerge</CODE> is a class for merging the differences between two

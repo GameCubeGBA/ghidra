@@ -23,7 +23,6 @@
 
 import ghidra.app.script.GhidraScript;
 import ghidra.program.model.address.AddressSetView;
-import ghidra.program.model.listing.*;
 import ghidra.util.Msg;
 
 public class ReportPercentDisassembled extends GhidraScript {

@@ -36,7 +36,6 @@ import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
 import ghidra.util.exception.InvalidInputException;
 import ghidra.util.exception.NotFoundException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public class PinnedSymbolTest extends AbstractGhidraHeadlessIntegrationTest {
 	private static int EXPECTED_PROCESSOR_SYMBOLS = 9;

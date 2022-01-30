@@ -34,7 +34,6 @@ import ghidra.program.util.ChangeManager;
 import ghidra.util.*;
 import ghidra.util.exception.*;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  * Manages generic address keyed properties.

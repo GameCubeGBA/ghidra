@@ -23,7 +23,6 @@ import java.util.List;
 import ghidra.app.plugin.core.instructionsearch.InstructionSearchApi;
 import ghidra.app.plugin.core.instructionsearch.model.MaskSettings;
 import ghidra.app.script.GhidraScript;
-import ghidra.program.model.address.*;
 import ghidra.util.exception.InvalidInputException;
 
 public class InstructionSearchScript extends GhidraScript {

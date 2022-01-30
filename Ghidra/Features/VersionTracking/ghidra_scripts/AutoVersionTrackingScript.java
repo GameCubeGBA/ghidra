@@ -24,7 +24,6 @@ import ghidra.app.script.GhidraScript;
 import ghidra.feature.vt.api.db.VTSessionDB;
 import ghidra.feature.vt.api.main.VTSession;
 import ghidra.feature.vt.gui.actions.AutoVersionTrackingTask;
-import ghidra.feature.vt.gui.plugin.*;
 import ghidra.framework.model.DomainFolder;
 import ghidra.framework.plugintool.Plugin;
 import ghidra.framework.plugintool.PluginTool;

@@ -22,7 +22,6 @@ import org.junit.Test;
 import ghidra.app.plugin.core.exporter.ExporterDialog;
 import ghidra.app.util.OptionsDialog;
 import ghidra.app.util.exporter.Exporter;
-import ghidra.framework.model.*;
 import ghidra.framework.preferences.Preferences;
 import ghidra.program.model.listing.Program;
 

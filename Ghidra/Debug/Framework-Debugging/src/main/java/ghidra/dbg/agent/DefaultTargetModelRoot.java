@@ -15,7 +15,6 @@
  */
 package ghidra.dbg.agent;
 
-import ghidra.dbg.DebuggerObjectModel;
 import ghidra.dbg.target.TargetAggregate;
 import ghidra.dbg.target.TargetObject;
 import ghidra.dbg.target.schema.EnumerableTargetObjectSchema;

@@ -36,7 +36,6 @@ import ghidra.program.model.util.*;
 import ghidra.program.util.ChangeManager;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.Lock;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  *

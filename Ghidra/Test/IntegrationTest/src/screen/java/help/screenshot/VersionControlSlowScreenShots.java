@@ -21,8 +21,6 @@ import java.io.IOException;
 
 import javax.swing.JFrame;
 
-import org.junit.*;
-
 import docking.ActionContext;
 import docking.action.DockingActionIf;
 import docking.widgets.tree.GTreeNode;

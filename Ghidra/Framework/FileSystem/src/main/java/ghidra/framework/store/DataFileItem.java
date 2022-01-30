@@ -17,8 +17,6 @@
 package ghidra.framework.store;
 
 import java.io.*;
-import java.io.InputStream;
-import java.io.OutputStream;
 
 /**
  * <code>DataFileItem</code> corresponds to a private serialized

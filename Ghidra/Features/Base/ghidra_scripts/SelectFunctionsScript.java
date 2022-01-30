@@ -19,7 +19,6 @@
 
 import ghidra.app.script.GhidraScript;
 import ghidra.program.model.address.AddressSet;
-import ghidra.program.model.listing.*;
 
 public class SelectFunctionsScript extends GhidraScript {
     @Override

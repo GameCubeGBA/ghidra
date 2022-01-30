@@ -18,7 +18,6 @@ package agent.dbgeng.manager.cmd;
 import agent.dbgeng.dbgeng.DebugBreakpoint;
 import agent.dbgeng.dbgeng.DebugBreakpoint.BreakFlags;
 import agent.dbgeng.dbgeng.DebugControl;
-import agent.dbgeng.manager.evt.DbgCommandDoneEvent;
 import agent.dbgeng.manager.impl.DbgManagerImpl;
 
 /**

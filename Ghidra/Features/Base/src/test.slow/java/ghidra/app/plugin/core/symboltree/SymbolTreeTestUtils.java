@@ -15,8 +15,6 @@
  */
 package ghidra.app.plugin.core.symboltree;
 
-import static generic.test.AbstractGTest.*;
-import static generic.test.AbstractGenericTest.*;
 import static ghidra.test.AbstractGhidraHeadedIntegrationTest.*;
 import static org.junit.Assert.*;
 

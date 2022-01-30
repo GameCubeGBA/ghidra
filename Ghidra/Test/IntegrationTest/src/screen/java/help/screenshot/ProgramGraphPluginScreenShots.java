@@ -20,7 +20,6 @@ import java.awt.*;
 import org.junit.Test;
 
 import docking.action.DockingActionIf;
-import ghidra.app.util.viewer.field.*;
 import ghidra.graph.visualization.DefaultGraphDisplayComponentProvider;
 
 public class ProgramGraphPluginScreenShots extends GhidraScreenShotGenerator {

@@ -21,7 +21,6 @@ import ghidra.program.model.address.AddressSet;
 import ghidra.program.model.block.FollowFlow;
 import ghidra.program.model.symbol.FlowType;
 import ghidra.test.ToyProgramBuilder;
-import ghidra.util.task.TaskMonitorAdapter;
 
 import org.junit.*;
 

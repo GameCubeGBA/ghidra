@@ -19,7 +19,6 @@
 import ghidra.app.cmd.disassemble.DisassembleCommand;
 import ghidra.app.script.GhidraScript;
 import ghidra.program.model.address.AddressSet;
-import ghidra.program.model.lang.*;
 import ghidra.util.Msg;
 
 import java.math.BigInteger;

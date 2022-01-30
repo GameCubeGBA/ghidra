@@ -20,7 +20,6 @@
 //@category FunctionID
 import ghidra.app.script.GhidraScript;
 import ghidra.program.model.address.AddressSetView;
-import ghidra.program.model.listing.*;
 
 public class FunctionIDHeadlessPostscript extends GhidraScript {
 	public static final int MINIMUM_FUNCTION_SIZE_IN_BYTES = 6;

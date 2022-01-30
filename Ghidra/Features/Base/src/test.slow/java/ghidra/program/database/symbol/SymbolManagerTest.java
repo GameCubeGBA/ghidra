@@ -39,7 +39,6 @@ import ghidra.test.TestEnv;
 import ghidra.util.SystemUtilities;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.exception.InvalidInputException;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /*
  * Tests for the symbol manager that uses database.

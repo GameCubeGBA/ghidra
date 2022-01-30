@@ -675,7 +675,7 @@ public abstract class AbstractConstraintsTree< //
 		for (DBTreeRecord<?, ? extends NS> child : getChildrenOf(node)) {
 			childCount++;
 			dataCount += child.getDataCount();
-			bounds = bounds == null ? child.getBounds() : bounds.unionBounds(child.getBounds());
+			bounds = bounds == null ? child.getBounds() : (NS) bounds.unionBounds(child.getBounds());
 		}
 		node.setChildCount(childCount);
 		node.setDataCount(dataCount);
@@ -732,40 +732,6 @@ public abstract class AbstractConstraintsTree< //
 	}
 
 	/**
-	 * Dump the tree to the console, for debugging and testing purposes
-	 * 
-	 * @param query optionally include only those portions matching a query
-	 */
-	protected void dump(Q query) {
-		visit(query, new TreeRecordVisitor() {
-			String getLevel(DBTreeRecord<?, ?> record) {
-				String level = "";
-				NR parent = getParentOf(record);
-				while (parent != null) {
-					level = level + "  ";
-					parent = getParentOf(parent);
-				}
-				return level;
-			}
-
-			@Override
-			protected VisitResult beginNode(NR parent, NR n, QueryInclusion inclusion) {
-				System.out.println(getLevel(n) + n + ": (" + inclusion + ")");
-				if (inclusion == QueryInclusion.NONE) {
-					return VisitResult.NEXT;
-				}
-				return VisitResult.DESCEND;
-			}
-
-			@Override
-			protected VisitResult visitData(NR parent, DR d, boolean included) {
-				System.out.println(getLevel(d) + d + ": (" + included + ")");
-				return VisitResult.NEXT;
-			}
-		}, true);
-	}
-
-	/**
 	 * Check the integrity of a single node entry.
 	 * 
 	 * This method is for tree developers and testers. Override this method if you have additional
@@ -778,9 +744,7 @@ public abstract class AbstractConstraintsTree< //
 		Collection<? extends NS> childBounds =
 			Collections2.transform(getChildrenOf(n), DBTreeRecord::getBounds);
 		NS expectedBounds = BoundingShape.boundsUnion(childBounds);
-		if (expectedBounds == null && n != root) {
-			throw new AssertionError("Non-root node cannot be empty");
-		}
+		assert expectedBounds != null || n == root : "Non-root node cannot be empty";
 		assert expectedBounds == null || expectedBounds.equals(n.getBounds()) : "Parent bounds do not match expected";
 
 		// Check parent type wrt. child types

@@ -28,7 +28,6 @@ import ghidra.program.model.util.TypeMismatchException;
 import ghidra.util.*;
 import ghidra.util.exception.*;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  * <CODE>ProgramDiff</CODE> is a class for comparing two programs and
