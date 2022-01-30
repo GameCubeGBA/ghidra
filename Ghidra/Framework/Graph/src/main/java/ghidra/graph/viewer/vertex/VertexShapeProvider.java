@@ -28,6 +28,7 @@ import java.awt.Shape;
  * shape, those graph views that paint only shapes, like the satellite viewer, will look 
  * peculiar.  
  */
+@FunctionalInterface
 public interface VertexShapeProvider {
 
 	/**

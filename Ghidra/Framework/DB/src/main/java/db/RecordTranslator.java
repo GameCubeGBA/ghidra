@@ -15,6 +15,7 @@
  */
 package db;
 
+@FunctionalInterface
 public interface RecordTranslator {
 	
 	/**

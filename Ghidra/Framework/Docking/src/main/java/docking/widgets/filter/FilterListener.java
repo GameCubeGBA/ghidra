@@ -18,6 +18,7 @@ package docking.widgets.filter;
 /**
  * An interface that will be called when the text filter changes.
  */
+@FunctionalInterface
 public interface FilterListener {
 
 	public void filterChanged(String text);

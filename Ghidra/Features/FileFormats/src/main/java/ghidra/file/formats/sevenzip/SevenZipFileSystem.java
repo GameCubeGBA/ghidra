@@ -602,7 +602,8 @@ public class SevenZipFileSystem implements GFileSystem {
 
 	}
 
-	interface SZGetter<T> {
+	@FunctionalInterface
+    interface SZGetter<T> {
 		T get() throws SevenZipException;
 	}
 

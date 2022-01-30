@@ -15,6 +15,7 @@
  */
 package ghidra.trace.model.target;
 
+@FunctionalInterface
 public interface TraceObjectInterface {
 	TraceObject getObject();
 }

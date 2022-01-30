@@ -18,6 +18,7 @@ package generic.jar;
 
 import java.util.jar.JarEntry;
 
+@FunctionalInterface
 public interface JarEntryFilter {
 
 	boolean accepts(JarEntry jarEntry);

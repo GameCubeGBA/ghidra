@@ -33,7 +33,8 @@ public class AsyncProtobufMessageChannel<S extends GeneratedMessageV3, R extends
 	public static final boolean LOG_READ = false;
 	public static final boolean LOG_WRITE = false;
 
-	public interface IOFunction<R extends Message> {
+	@FunctionalInterface
+    public interface IOFunction<R extends Message> {
 		R read(CodedInputStream stream) throws IOException;
 	}
 

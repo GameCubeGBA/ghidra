@@ -24,6 +24,7 @@ import docking.widgets.fieldpanel.field.Field;
  * Interface implemented by objects that want to be notified when key events occur
  * in the FieldPanel.
  */
+@FunctionalInterface
 public interface FieldInputListener {
 
 	/**

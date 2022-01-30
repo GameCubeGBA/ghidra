@@ -24,19 +24,23 @@ import ghidra.program.model.address.*;
 import ghidra.util.LockHold;
 
 public interface DBTraceDelegatingManager<M> {
-	interface ExcFunction<T, R, E extends Throwable> {
+	@FunctionalInterface
+    interface ExcFunction<T, R, E extends Throwable> {
 		R apply(T t) throws E;
 	}
 
-	interface ExcConsumer<T, E extends Throwable> {
+	@FunctionalInterface
+    interface ExcConsumer<T, E extends Throwable> {
 		void accept(T t) throws E;
 	}
 
-	interface ExcSupplier<T, E extends Throwable> {
+	@FunctionalInterface
+    interface ExcSupplier<T, E extends Throwable> {
 		T get() throws E;
 	}
 
-	interface ExcPredicate<T, E extends Throwable> {
+	@FunctionalInterface
+    interface ExcPredicate<T, E extends Throwable> {
 		boolean test(T t) throws E;
 	}
 

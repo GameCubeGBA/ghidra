@@ -26,6 +26,7 @@ import db.RecordIterator;
  * Interface to get a record iterator. 
  * 
  */
+@FunctionalInterface
 public interface DBRecordAdapter {
 
 	/**

@@ -16,6 +16,7 @@
  */
 package ghidra.util.task;
 
+@FunctionalInterface
 public interface CancelledListener {
 
 	/**

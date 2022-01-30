@@ -22,6 +22,7 @@ package docking.widgets.table.constrainteditor;
  *
  * @param <T> The number type
  */
+@FunctionalInterface
 public interface LongConverter<T> {
 
 	/**

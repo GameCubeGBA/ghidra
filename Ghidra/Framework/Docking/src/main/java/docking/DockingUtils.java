@@ -204,7 +204,8 @@ public class DockingUtils {
 	 * @param <T> the type of component on which to operate
 	 * @see DockingUtils#forAllDescendants(Container, Class, TreeTraversalOrder, ComponentCallback)
 	 */
-	public static interface ComponentCallback<T extends Component> {
+	@FunctionalInterface
+    public static interface ComponentCallback<T extends Component> {
 		TreeTraversalResult call(T component);
 	}
 

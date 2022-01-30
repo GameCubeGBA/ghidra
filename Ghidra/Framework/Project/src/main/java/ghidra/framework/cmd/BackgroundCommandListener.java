@@ -19,6 +19,7 @@ package ghidra.framework.cmd;
 /**
  * Listener that is notified when a BackgroundCommand completes.
  */
+@FunctionalInterface
 public interface BackgroundCommandListener {
 	/**
 	 * Notification that the given BackgroundCommand has completed.

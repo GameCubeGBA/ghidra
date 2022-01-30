@@ -16,6 +16,7 @@
  */
 package ghidra.util.classfinder;
 
+@FunctionalInterface
 public interface ClassFilter {
 
 	public boolean accepts(Class<?> c);

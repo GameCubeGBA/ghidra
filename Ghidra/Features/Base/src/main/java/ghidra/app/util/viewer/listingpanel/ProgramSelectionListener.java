@@ -24,6 +24,7 @@ import ghidra.program.util.ProgramSelection;
  *  
  * 
  */
+@FunctionalInterface
 public interface ProgramSelectionListener {
 
 	/**

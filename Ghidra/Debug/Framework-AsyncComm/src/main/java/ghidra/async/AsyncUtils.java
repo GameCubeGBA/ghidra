@@ -829,11 +829,13 @@ public interface AsyncUtils<T> {
 		});
 	}
 
-	public interface TemperamentalRunnable {
+	@FunctionalInterface
+    public interface TemperamentalRunnable {
 		public void run() throws Throwable;
 	}
 
-	public interface TemperamentalSupplier<T> {
+	@FunctionalInterface
+    public interface TemperamentalSupplier<T> {
 		public T get() throws Throwable;
 	}
 

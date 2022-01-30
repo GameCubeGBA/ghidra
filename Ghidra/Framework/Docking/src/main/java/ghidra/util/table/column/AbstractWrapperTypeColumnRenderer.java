@@ -31,6 +31,7 @@ import ghidra.docking.settings.Settings;
  *
  * @param <T> the column type
  */
+@FunctionalInterface
 public interface AbstractWrapperTypeColumnRenderer<T> extends GColumnRenderer<T> {
 
 	// Overridden to only allow the constraint filtering mechanism.

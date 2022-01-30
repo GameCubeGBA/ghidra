@@ -23,6 +23,7 @@ import ghidra.framework.plugintool.PluginTool;
 /**
  * Interface for classes that will handle drop actions for files dropped onto the tool
  */
+@FunctionalInterface
 public interface FileOpenDataFlavorHandler {
 	public void handle(PluginTool tool, Object obj, DropTargetDropEvent e, DataFlavor f);
 }

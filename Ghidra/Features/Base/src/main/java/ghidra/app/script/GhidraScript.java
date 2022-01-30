@@ -1986,7 +1986,8 @@ public abstract class GhidraScript extends FlatProgramAPI {
 		return newValue;
 	}
 
-	private interface CancellableFunction<T, R> {
+	@FunctionalInterface
+    private interface CancellableFunction<T, R> {
 		R apply(T t) throws CancelledException;
 	}
 

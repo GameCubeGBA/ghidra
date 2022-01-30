@@ -23,8 +23,6 @@ import ghidra.util.exception.VersionException;
 
 import java.io.IOException;
 
-import java.lang.UnsupportedOperationException;
-
 import db.*;
 
 public class RelocationDBAdapterV4 extends RelocationDBAdapter {

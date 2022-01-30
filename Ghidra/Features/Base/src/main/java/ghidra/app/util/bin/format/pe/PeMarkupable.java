@@ -27,6 +27,7 @@ import ghidra.util.task.TaskMonitor;
 /**
  * Common interface for standardizing the markup of a PE structure.
  */
+@FunctionalInterface
 public interface PeMarkupable {
 
 	/**

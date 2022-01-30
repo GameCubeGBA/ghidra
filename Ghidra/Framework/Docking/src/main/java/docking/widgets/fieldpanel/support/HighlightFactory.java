@@ -17,6 +17,7 @@ package docking.widgets.fieldpanel.support;
 
 import docking.widgets.fieldpanel.field.Field;
 
+@FunctionalInterface
 public interface HighlightFactory {
 
 	/**

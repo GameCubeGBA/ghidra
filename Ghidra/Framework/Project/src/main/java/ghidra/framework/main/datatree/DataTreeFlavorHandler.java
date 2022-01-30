@@ -21,6 +21,7 @@ import ghidra.framework.plugintool.PluginTool;
 /**
  * Interface for classes that will handle drop actions for {@link DataTree}s.
  */
+@FunctionalInterface
 public interface DataTreeFlavorHandler {
 	public void handle(PluginTool tool, DataTree dataTree, GTreeNode destinationNode,
 			Object transferData, int dropAction);

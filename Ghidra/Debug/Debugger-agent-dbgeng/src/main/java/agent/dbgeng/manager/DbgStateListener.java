@@ -20,6 +20,7 @@ import ghidra.util.TriConsumer;
 /**
  * A listener for changes in Dbg's state
  */
+@FunctionalInterface
 public interface DbgStateListener extends TriConsumer<DbgState, DbgState, DbgCause> {
 	/**
 	 * The state has changed because of the given cause

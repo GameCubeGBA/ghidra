@@ -71,6 +71,7 @@ public class GhidraSourceBundle extends GhidraBundle {
 	/**
 	 * Used to report source and class file deviation
 	 */
+	@FunctionalInterface
 	protected interface DiscrepancyCallback {
 		/**
 		 * Invoked when there is a discrepancy between {@code sourceFile} and its corresponding 

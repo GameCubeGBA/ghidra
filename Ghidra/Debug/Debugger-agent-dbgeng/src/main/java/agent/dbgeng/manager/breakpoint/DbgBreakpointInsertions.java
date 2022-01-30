@@ -19,6 +19,7 @@ import java.util.concurrent.CompletableFuture;
 
 import ghidra.util.NumericUtilities;
 
+@FunctionalInterface
 public interface DbgBreakpointInsertions {
 	/**
 	 * Insert a breakpoint

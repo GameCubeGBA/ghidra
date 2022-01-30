@@ -20,6 +20,7 @@ import ghidra.program.model.listing.Program;
 
 import java.util.List;
 
+@FunctionalInterface
 public interface MultipleProgramsStrategy {
     public static final MultipleProgramsStrategy ALL_PROGRAMS = new MultipleProgramsStrategy() {
         public List<Program> handlePrograms(List<Program> programs,

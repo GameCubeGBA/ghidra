@@ -20,6 +20,7 @@ package docking.widgets.table;
  *
  * @param <T> the object type
  */
+@FunctionalInterface
 public interface ObjectSelectedListener<T> {
 
 	/**

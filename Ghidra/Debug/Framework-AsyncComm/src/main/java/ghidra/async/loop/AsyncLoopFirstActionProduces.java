@@ -28,6 +28,7 @@ import ghidra.async.AsyncUtils;
  * @param <R> the type of result for the whole loop
  * @param <T> the type of result produced, i.e., provided by the subordinate asynchronous task
  */
+@FunctionalInterface
 public interface AsyncLoopFirstActionProduces<R, T>
 		extends Consumer<AsyncLoopHandlerForFirst<R, T>> {
 	// Nothing

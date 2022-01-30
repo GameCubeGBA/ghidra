@@ -26,6 +26,7 @@ import ghidra.util.task.TaskMonitor;
  * A {@link GFileSystemProbe} interface for filesystems that need to examine
  * a {@link ByteProvider}.
  */
+@FunctionalInterface
 public interface GFileSystemProbeByteProvider extends GFileSystemProbe {
 	/**
 	 * Probes the specified {@code ByteProvider} to determine if this filesystem implementation

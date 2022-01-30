@@ -37,7 +37,8 @@ import pdb.symbolserver.FindOption;
  * Also allows the user to tweak search options.
  */
 class SymbolFilePanel extends JPanel {
-	interface SearchCallback {
+	@FunctionalInterface
+    interface SearchCallback {
 		void searchForPdbs(boolean allowRemote);
 	}
 	static final String SEARCH_OPTIONS_HELP_ANCHOR = "PDB_Search_Search_Options";

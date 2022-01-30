@@ -23,6 +23,7 @@ package generic.cache;
  * @param <K> the key used to get a value
  * @param <V> the value returned for the given key
  */
+@FunctionalInterface
 public interface Factory<K, V> {
 	public V get(K key);
 }

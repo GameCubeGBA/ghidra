@@ -28,8 +28,6 @@ import ghidra.util.exception.InvalidInputException;
 
 import java.util.*;
 
-import java.lang.UnsupportedOperationException;
-
 /**
  * <p>Implements a simple stack frame for a function.  Each frame consists of a
  * local sections, parameter section, and save information (return address,

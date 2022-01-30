@@ -16,6 +16,7 @@
  */
 package docking.widgets.table;
 
+@FunctionalInterface
 public interface SortListener {
 	public void modelSorted(TableSortState sortState);
 }

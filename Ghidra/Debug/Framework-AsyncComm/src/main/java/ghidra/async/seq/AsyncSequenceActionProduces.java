@@ -31,6 +31,7 @@ import ghidra.async.TypeSpec;
  * @param <R> the type of result of the whole sequence
  * @param <U> the type of temporary produced, i.e., consumed by the following action
  */
+@FunctionalInterface
 public interface AsyncSequenceActionProduces<R, U>
 		extends Consumer<AsyncSequenceHandlerForProducer<R, U>> {
 	// Nothing

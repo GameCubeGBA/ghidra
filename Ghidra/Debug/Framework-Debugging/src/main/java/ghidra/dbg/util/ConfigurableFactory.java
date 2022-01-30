@@ -29,6 +29,7 @@ import ghidra.framework.plugintool.AutoConfigState.ConfigFieldCodec;
 import ghidra.framework.plugintool.AutoConfigState.ConfigStateField;
 import ghidra.util.Msg;
 
+@FunctionalInterface
 public interface ConfigurableFactory<T> {
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target(ElementType.TYPE)

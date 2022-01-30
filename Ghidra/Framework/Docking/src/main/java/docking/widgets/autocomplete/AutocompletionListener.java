@@ -21,6 +21,7 @@ package docking.widgets.autocomplete;
  * @param <T> the type of suggestions presented by the autocompleter.
  * @see TextFieldAutocompleter
  */
+@FunctionalInterface
 public interface AutocompletionListener<T> {
 	/**
 	 * The user has activated a suggested item.

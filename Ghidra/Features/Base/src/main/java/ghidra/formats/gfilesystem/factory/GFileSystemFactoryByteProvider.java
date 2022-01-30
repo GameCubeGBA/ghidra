@@ -28,6 +28,7 @@ import ghidra.util.task.TaskMonitor;
  * <p>
  * @param <FSTYPE>
  */
+@FunctionalInterface
 public interface GFileSystemFactoryByteProvider<FSTYPE extends GFileSystem>
 		extends GFileSystemFactory<FSTYPE> {
 

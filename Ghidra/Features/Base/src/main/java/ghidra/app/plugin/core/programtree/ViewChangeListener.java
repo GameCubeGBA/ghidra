@@ -21,6 +21,7 @@ import ghidra.program.model.address.AddressSetView;
  * Define a method that will be called when the view changes either because
  * the user made a new selection, or the user switched to a different view.
  */
+@FunctionalInterface
 public interface ViewChangeListener {
 
     /**

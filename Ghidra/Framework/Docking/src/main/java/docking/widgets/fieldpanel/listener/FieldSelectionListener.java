@@ -22,6 +22,7 @@ import docking.widgets.fieldpanel.support.FieldSelection;
 /**
  * Listener interface for when the selection changes.
  */
+@FunctionalInterface
 public interface FieldSelectionListener {
 
 	/**

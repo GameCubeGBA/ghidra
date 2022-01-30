@@ -16,6 +16,7 @@
  */
 package ghidra.program.model.listing;
 
+@FunctionalInterface
 public interface VariableFilter {
 
 	/**

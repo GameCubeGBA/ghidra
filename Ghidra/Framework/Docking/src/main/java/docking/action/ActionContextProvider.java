@@ -20,6 +20,7 @@ import java.awt.event.MouseEvent;
 
 import docking.ActionContext;
 
+@FunctionalInterface
 public interface ActionContextProvider {
 
 	public ActionContext getActionContext(MouseEvent e);

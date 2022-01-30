@@ -20,6 +20,7 @@ import ghidra.util.TriConsumer;
 /**
  * A listener for changes in GDB's state
  */
+@FunctionalInterface
 public interface GdbStateListener extends TriConsumer<GdbState, GdbState, GdbCause> {
 	/**
 	 * The state has changed because of the given cause

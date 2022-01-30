@@ -28,6 +28,7 @@ import ghidra.util.NumericUtilities;
 /**
  * Data copied from a {@code DEBUG_VALUE} as defined in {dbgeng.h}.
  */
+@FunctionalInterface
 @ForDebugValueType(DebugValueType.INVALID)
 public interface DebugValue {
 	@Retention(RetentionPolicy.RUNTIME)

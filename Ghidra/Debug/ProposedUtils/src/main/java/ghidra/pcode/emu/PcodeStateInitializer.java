@@ -28,6 +28,7 @@ import ghidra.util.classfinder.ExtensionPoint;
  * <p>
  * TODO: Implement annotation-based {@link #isApplicable(Language)}?
  */
+@FunctionalInterface
 public interface PcodeStateInitializer extends ExtensionPoint {
 
 	/**

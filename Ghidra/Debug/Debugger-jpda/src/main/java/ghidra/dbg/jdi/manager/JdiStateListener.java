@@ -20,6 +20,7 @@ import ghidra.util.TriConsumer;
 /**
  * A listener for changes in JDI's state
  */
+@FunctionalInterface
 public interface JdiStateListener extends TriConsumer<Integer, Integer, JdiCause> {
 	/**
 	 * The state has changed because of the given cause

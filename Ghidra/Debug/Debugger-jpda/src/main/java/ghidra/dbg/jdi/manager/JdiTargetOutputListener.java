@@ -21,6 +21,7 @@ package ghidra.dbg.jdi.manager;
  * Note the details of this listener are not well established, for lack of examples that use JDI's
  * target output record.
  */
+@FunctionalInterface
 public interface JdiTargetOutputListener {
 	/**
 	 * The target outputted some text

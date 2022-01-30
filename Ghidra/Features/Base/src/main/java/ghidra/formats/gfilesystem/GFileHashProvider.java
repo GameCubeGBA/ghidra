@@ -23,6 +23,7 @@ import ghidra.util.task.TaskMonitor;
 /**
  * GFileSystem add-on interface that provides MD5 hashing for file located within the filesystem 
  */
+@FunctionalInterface
 public interface GFileHashProvider {
 	/**
 	 * Returns the MD5 hash of the specified file.

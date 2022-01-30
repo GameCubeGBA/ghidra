@@ -18,6 +18,7 @@ package ghidra.app.merge;
 
 import ghidra.program.model.data.DataTypeManager;
 
+@FunctionalInterface
 public interface DataTypeManagerOwner {
 
 	/**
