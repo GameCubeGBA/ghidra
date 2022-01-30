@@ -68,7 +68,7 @@ public class MatchTypeFilter extends CheckBoxBasedAncillaryFilter<VTMatch> {
 			if (!isSelected()) {
 				return false;
 			}
-			return match.getAssociation().getType().equals(associationType);
+			return match.getAssociation().getType() == associationType;
 		}
 	}
 }

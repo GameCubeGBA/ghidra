@@ -345,7 +345,7 @@ public class DbgModel2TargetRootImpl extends DbgModel2DefaultTargetModelRoot
 				return;
 			}
 			DbgModelTargetProcess process = (DbgModelTargetProcess) object.getProxy();
-			if (!process.getExecutionState().equals(TargetExecutionState.TERMINATED)) {
+			if (process.getExecutionState() != TargetExecutionState.TERMINATED) {
 				process.setExecutionState(TargetExecutionState.INACTIVE, "Detached");
 			}
 			DbgModelTargetObject container = (DbgModelTargetObject) process.getParent();

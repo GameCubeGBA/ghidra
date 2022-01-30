@@ -15,6 +15,7 @@
  */
 package ghidra.app.util.bin.format.pe;
 
+import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -55,7 +56,7 @@ public enum DllCharacteristics {
 	}
 
 	public static Set<DllCharacteristics> resolveCharacteristics(int value) {
-		Set<DllCharacteristics> applied = new HashSet<>();
+		Set<DllCharacteristics> applied = EnumSet.noneOf(DllCharacteristics.class);
 		for (DllCharacteristics ch : values()) {
 			if ((ch.getMask() & value) == ch.getMask()) {
 				applied.add(ch);

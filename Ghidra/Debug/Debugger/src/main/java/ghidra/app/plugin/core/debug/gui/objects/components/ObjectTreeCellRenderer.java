@@ -73,7 +73,7 @@ class ObjectTreeCellRenderer extends GTreeRenderer {
 			}
 			if (container.getTargetObject() instanceof TargetExecutionStateful) {
 				TargetExecutionStateful stateful = (TargetExecutionStateful) targetObject;
-				if (stateful.getExecutionState().equals(TargetExecutionState.TERMINATED)) {
+				if (stateful.getExecutionState() == TargetExecutionState.TERMINATED) {
 					component.setForeground(provider
 							.getColor(
 								DebuggerObjectsProvider.OPTION_NAME_INVALIDATED_FOREGROUND_COLOR));

@@ -222,10 +222,10 @@ public class JavaConfig {
 		if (javaExecutable == null) {
 			throw new FileNotFoundException("Missing java executable");
 		}
-		if (javaFilter.equals(JavaFilter.JDK_ONLY) && javacExecutable == null) {
+		if (javaFilter == JavaFilter.JDK_ONLY && javacExecutable == null) {
 			throw new FileNotFoundException("JDK is missing javac executable");
 		}
-		if (javaFilter.equals(JavaFilter.JRE_ONLY) && javacExecutable != null) {
+		if (javaFilter == JavaFilter.JRE_ONLY && javacExecutable != null) {
 			throw new FileNotFoundException("JRE should not have javac executable");
 		}
 

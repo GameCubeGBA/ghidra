@@ -76,7 +76,7 @@ public class PatternInfoTableModel extends ThreadedTableModelStub<PatternInfoRow
 		//alignment only matters for post-patterns
 		if (columnIndex == ALIGNMENT_COLUMN) {
 			PatternInfoRowObject rowObject = filteredData.get(row);
-			return (rowObject.getPatternType().equals(PatternType.FIRST));
+			return (rowObject.getPatternType() == PatternType.FIRST);
 		}
 		return false;
 	}
@@ -135,7 +135,7 @@ public class PatternInfoTableModel extends ThreadedTableModelStub<PatternInfoRow
 		@Override
 		public String getValue(PatternInfoRowObject rowObject, Settings settings, Object data,
 				ServiceProvider sProvider) throws IllegalArgumentException {
-			if (rowObject.getPatternType().equals(PatternType.FIRST)) {
+			if (rowObject.getPatternType() == PatternType.FIRST) {
 				return "POST";
 			}
 			return "PRE";

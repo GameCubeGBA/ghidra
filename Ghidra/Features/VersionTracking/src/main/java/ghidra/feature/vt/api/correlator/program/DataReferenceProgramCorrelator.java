@@ -47,7 +47,7 @@ public class DataReferenceProgramCorrelator extends VTAbstractReferenceProgramCo
 
 	@Override
 	protected boolean isExpectedRefType(VTAssociationType mytype) {
-		return mytype.equals(VTAssociationType.DATA);
+		return mytype == VTAssociationType.DATA;
 	}
 
 	@Override

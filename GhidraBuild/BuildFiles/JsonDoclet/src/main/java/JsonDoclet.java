@@ -124,7 +124,7 @@ public class JsonDoclet implements Doclet {
 		//@formatter:off
 		ElementFilter.typesIn(docEnv.getIncludedElements())
 			.stream()
-			.filter(el -> el.getKind().equals(ElementKind.CLASS) || el.getKind().equals(ElementKind.INTERFACE))
+			.filter(el -> el.getKind() == ElementKind.CLASS || el.getKind() == ElementKind.INTERFACE)
 			.forEach(el -> writeJsonToFile(classToJson(el), el.getQualifiedName()));
 		//@formatter:on
 
@@ -282,7 +282,7 @@ public class JsonDoclet implements Doclet {
 			DocCommentTree commentTree = docTrees.getDocCommentTree(execElement);
 			if (commentTree != null) {
 				for (DocTree blockTag : commentTree.getBlockTags()) {
-					if (blockTag.getKind().equals(DocTree.Kind.PARAM)) {
+					if (blockTag.getKind() == DocTree.Kind.PARAM) {
 						ParamTree paramTree = (ParamTree) blockTag;
 						if (paramTree.getName().getName().equals(varElement.getSimpleName())) {
 							comment = getComment(blockTag);
@@ -313,7 +313,7 @@ public class JsonDoclet implements Doclet {
 		DocCommentTree commentTree = docTrees.getDocCommentTree(execElement);
 		if (commentTree != null) {
 			for (DocTree blockTag : commentTree.getBlockTags()) {
-				if (blockTag.getKind().equals(DocTree.Kind.RETURN)) {
+				if (blockTag.getKind() == DocTree.Kind.RETURN) {
 					comment = getComment(blockTag);
 				}
 			}
@@ -341,7 +341,7 @@ public class JsonDoclet implements Doclet {
 			DocCommentTree commentTree = docTrees.getDocCommentTree(execElement);
 			if (commentTree != null) {
 				for (DocTree blockTag : commentTree.getBlockTags()) {
-					if (blockTag.getKind().equals(DocTree.Kind.THROWS)) {
+					if (blockTag.getKind() == DocTree.Kind.THROWS) {
 						ThrowsTree throwsTree = (ThrowsTree) blockTag;
 						if (throwsTree.getExceptionName().toString().equals(typeShort)) {
 							comment = getComment(blockTag);

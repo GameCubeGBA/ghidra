@@ -194,7 +194,7 @@ class ApplySymbols {
 		if (primarySymbol != null) {
 			SourceType primarySymbolSource = primarySymbol.getSource();
 
-			if (primarySymbolSource.equals(SourceType.ANALYSIS)) {
+			if (primarySymbolSource == SourceType.ANALYSIS) {
 				return true;
 			}
 		}

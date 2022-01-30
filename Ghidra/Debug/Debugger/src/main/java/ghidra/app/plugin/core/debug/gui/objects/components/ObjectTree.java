@@ -75,7 +75,7 @@ public class ObjectTree implements ObjectPane {
 					ObjectNode node = (ObjectNode) last;
 					TargetObject targetObject = node.getTargetObject();
 					if (targetObject != null && !(targetObject instanceof DummyTargetObject) &&
-						e.getEventOrigin().equals(EventOrigin.USER_GENERATED)) {
+                            e.getEventOrigin() == EventOrigin.USER_GENERATED) {
 						DebugModelConventions.requestActivation(targetObject).exceptionally(ex -> {
 							Msg.error(this, "Could not activate " + targetObject, ex);
 							return null;

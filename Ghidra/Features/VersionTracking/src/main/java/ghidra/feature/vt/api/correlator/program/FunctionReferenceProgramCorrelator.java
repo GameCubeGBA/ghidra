@@ -46,7 +46,7 @@ public class FunctionReferenceProgramCorrelator extends VTAbstractReferenceProgr
 
 	@Override
 	protected boolean isExpectedRefType(VTAssociationType mytype) {
-		return mytype.equals(VTAssociationType.FUNCTION);
+		return mytype == VTAssociationType.FUNCTION;
 	}
 
 	@Override

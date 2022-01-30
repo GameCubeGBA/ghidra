@@ -277,7 +277,7 @@ public class DefaultTargetObjectSchema
 		if (!Objects.equals(this.defaultElementSchema, that.defaultElementSchema)) {
 			return false;
 		}
-		if (!Objects.equals(this.elementResync, that.elementResync)) {
+		if (this.elementResync != that.elementResync) {
 			return false;
 		}
 		if (!Objects.equals(this.attributeSchemas, that.attributeSchemas)) {
@@ -286,7 +286,7 @@ public class DefaultTargetObjectSchema
 		if (!Objects.equals(this.defaultAttributeSchema, that.defaultAttributeSchema)) {
 			return false;
 		}
-		if (!Objects.equals(this.attributeResync, that.attributeResync)) {
+		if (this.attributeResync != that.attributeResync) {
 			return false;
 		}
 		return true;

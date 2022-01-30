@@ -84,7 +84,7 @@ public class DbgModelTargetStackImpl extends DbgModelTargetObjectImpl
 	*/
 
 	public void threadStateChangedSpecific(DbgState state, DbgReason reason) {
-		if (!state.equals(DbgState.RUNNING)) {
+		if (state != DbgState.RUNNING) {
 			requestElements(true).exceptionally(e -> {
 				Msg.error(this, "Could not update stack " + this + " on STOPPED");
 				return null;

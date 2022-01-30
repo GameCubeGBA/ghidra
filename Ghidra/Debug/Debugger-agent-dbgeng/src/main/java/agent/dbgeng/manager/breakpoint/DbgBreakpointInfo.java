@@ -70,7 +70,7 @@ public class DbgBreakpointInfo {
 		this.number = bpt.getId();
 		this.bptType = bpt.getType();
 		this.flags = bpt.getFlags();
-		if (bpt.getType().breakType.equals(BreakType.DATA)) {
+		if (bpt.getType().breakType == BreakType.DATA) {
 			this.parameters = bpt.getDataParameters();
 		}
 		this.access = parameters.access;
@@ -150,7 +150,7 @@ public class DbgBreakpointInfo {
 	 * @return the type
 	 */
 	public DbgBreakpointType getType() {
-		boolean isCode = bpt.getType().breakType.equals(BreakType.CODE);
+		boolean isCode = bpt.getType().breakType == BreakType.CODE;
 		if (isCode) {
 			return DbgBreakpointType.BREAKPOINT;
 		}
@@ -292,7 +292,7 @@ public class DbgBreakpointInfo {
 		this.flags = bpt.getFlags();
 		this.offset = bpt.getOffset();
 		this.expression = bpt.getOffsetExpression();
-		if (bptType.breakType.equals(BreakType.DATA)) {
+		if (bptType.breakType == BreakType.DATA) {
 			BreakDataParameters p = bpt.getDataParameters();
 			this.access = p.access;
 			this.size = p.size;

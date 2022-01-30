@@ -109,7 +109,7 @@ public class DbgDebugEventCallbacksAdapter extends DebugEventCallbacksAdapter {
 			}
 			DebugStatus status = DebugStatus.fromArgument(argument);
 			Msg.info(this, "***ExecutionStatus: " + status);
-			if (status.equals(DebugStatus.NO_DEBUGGEE)) {
+			if (status == DebugStatus.NO_DEBUGGEE) {
 				long processCount = manager.getProcessCount();
 				event.setState(processCount > 0 ? DbgState.SESSION_EXIT : DbgState.EXIT);
 			}

@@ -57,9 +57,9 @@ public class InvokeMethods {
 		String descriptor = DescriptorDecoder.getDescriptorForInvoke(offset, constantPool, type);
 		List<JavaComputationalCategory> categories =
 			DescriptorDecoder.getParameterCategories(descriptor);
-		boolean includeThisPointer = type.equals(JavaInvocationType.INVOKE_VIRTUAL) ||
-			type.equals(JavaInvocationType.INVOKE_SPECIAL) ||
-			type.equals(JavaInvocationType.INVOKE_INTERFACE);
+		boolean includeThisPointer = type == JavaInvocationType.INVOKE_VIRTUAL ||
+                type == JavaInvocationType.INVOKE_SPECIAL ||
+                type == JavaInvocationType.INVOKE_INTERFACE;
 
 		int stackPurge = DescriptorDecoder.getStackPurge(descriptor);
 		if (includeThisPointer) {

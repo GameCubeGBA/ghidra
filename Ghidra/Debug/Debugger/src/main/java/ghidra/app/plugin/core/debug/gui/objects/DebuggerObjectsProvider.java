@@ -1593,7 +1593,7 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 				TargetExecutionStateful stateful = (TargetExecutionStateful) object;
 				TargetExecutionState executionState = stateful.getExecutionState();
 				//System.err.println(stateful + ":" + executionState);
-				return !executionState.equals(TargetExecutionState.RUNNING);
+				return executionState != TargetExecutionState.RUNNING;
 			}
 			return false;
 		}
@@ -1608,7 +1608,7 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 		if (result != null) {
 			TargetExecutionStateful stateful = (TargetExecutionStateful) result;
 			TargetExecutionState executionState = stateful.getExecutionState();
-			return !executionState.equals(TargetExecutionState.RUNNING);
+			return executionState != TargetExecutionState.RUNNING;
 		}
 		return false;
 	}

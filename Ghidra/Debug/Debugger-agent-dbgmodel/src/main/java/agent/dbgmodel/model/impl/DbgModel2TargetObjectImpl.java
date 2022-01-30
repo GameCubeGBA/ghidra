@@ -227,7 +227,7 @@ public class DbgModel2TargetObjectImpl extends DefaultTargetObject<TargetObject,
 		}
 		if (value != null && !value.equals("")) {
 			attrs.put(VALUE_ATTRIBUTE_NAME, value);
-			if (!kind.equals(ModelObjectKind.OBJECT_PROPERTY_ACCESSOR)) {
+			if (kind != ModelObjectKind.OBJECT_PROPERTY_ACCESSOR) {
 				synchronized (attributes) {
 					String oldval = (String) attributes.get(DISPLAY_ATTRIBUTE_NAME);
 					String newval = getName() + " : " + value;
