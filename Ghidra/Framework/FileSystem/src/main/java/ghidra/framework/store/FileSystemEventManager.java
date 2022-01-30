@@ -114,7 +114,7 @@ public class FileSystemEventManager implements FileSystemListener {
 	}
 
 	@Override
-	public void syncronize() {
+	public void synchronize() {
 		// Note: synchronize calls will only work when using a threaded event queue
 		if (isAsynchronous()) {
 			add(new SynchronizeEvent());
@@ -330,7 +330,7 @@ public class FileSystemEventManager implements FileSystemListener {
 
 		@Override
 		void dispatch(FileSystemListener listener) {
-			listener.syncronize();
+			listener.synchronize();
 		}
 	}
 

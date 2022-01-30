@@ -467,53 +467,54 @@ public class ConstTpl {
 
 	public void restoreXml(Element el, Translate trans) {
 		String typestring = el.getAttributeValue("type");
-		if (typestring.equals("real")) {
-			type = const_type.real;
-			value_real = XmlUtils.decodeUnknownLong(el.getAttributeValue("val"));
-		}
-		else if (typestring.equals("handle")) {
-			type = const_type.handle;
-			handle_index = XmlUtils.decodeUnknownInt(el.getAttributeValue("val"));
-			select = readHandleSelector(el.getAttributeValue("s"));
-			if (select == v_field.v_offset_plus) {
-				value_real = XmlUtils.decodeUnknownLong(el.getAttributeValue("plus"));
-			}
-		}
-		else if (typestring.equals("start")) {
-			type = const_type.j_start;
-		}
-		else if (typestring.equals("next")) {
-			type = const_type.j_next;
-		}
-		else if (typestring.equals("curspace")) {
-			type = const_type.j_curspace;
-		}
-		else if (typestring.equals("curspace_size")) {
-			type = const_type.j_curspace_size;
-		}
-		else if (typestring.equals("spaceid")) {
-			type = const_type.spaceid;
-			spaceid = trans.getSpaceByName(el.getAttributeValue("name"));
-		}
-		else if (typestring.equals("relative")) {
-			type = const_type.j_relative;
-			value_real = XmlUtils.decodeUnknownLong(el.getAttributeValue("val"));
-		}
-		else if (typestring.equals("flowref")) {
-			type = const_type.j_flowref;
-		}
-		else if (typestring.equals("flowref_size")) {
-			type = const_type.j_flowref_size;
-		}
-		else if (typestring.equals("flowdest")) {
-			type = const_type.j_flowdest;
-		}
-		else if (typestring.equals("flowdest_size")) {
-			type = const_type.j_flowdest_size;
-		}
-		else {
-			throw new LowlevelError("Bad constant type");
-		}
+        switch (typestring) {
+            case "real":
+                type = const_type.real;
+                value_real = XmlUtils.decodeUnknownLong(el.getAttributeValue("val"));
+                break;
+            case "handle":
+                type = const_type.handle;
+                handle_index = XmlUtils.decodeUnknownInt(el.getAttributeValue("val"));
+                select = readHandleSelector(el.getAttributeValue("s"));
+                if (select == v_field.v_offset_plus) {
+                    value_real = XmlUtils.decodeUnknownLong(el.getAttributeValue("plus"));
+                }
+                break;
+            case "start":
+                type = const_type.j_start;
+                break;
+            case "next":
+                type = const_type.j_next;
+                break;
+            case "curspace":
+                type = const_type.j_curspace;
+                break;
+            case "curspace_size":
+                type = const_type.j_curspace_size;
+                break;
+            case "spaceid":
+                type = const_type.spaceid;
+                spaceid = trans.getSpaceByName(el.getAttributeValue("name"));
+                break;
+            case "relative":
+                type = const_type.j_relative;
+                value_real = XmlUtils.decodeUnknownLong(el.getAttributeValue("val"));
+                break;
+            case "flowref":
+                type = const_type.j_flowref;
+                break;
+            case "flowref_size":
+                type = const_type.j_flowref_size;
+                break;
+            case "flowdest":
+                type = const_type.j_flowdest;
+                break;
+            case "flowdest_size":
+                type = const_type.j_flowdest_size;
+                break;
+            default:
+                throw new LowlevelError("Bad constant type");
+        }
 	}
 
 }

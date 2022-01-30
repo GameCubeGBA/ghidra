@@ -386,7 +386,7 @@ public class RepositoryFileSystemTest extends AbstractGhidraHeadedIntegrationTes
 		}
 
 		@Override
-		public void syncronize() {
+		public void synchronize() {
 			// Nothing to do
 		}
 	}

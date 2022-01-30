@@ -78,69 +78,67 @@ public class ReferenceTagProcessor extends TagProcessor {
 			int lineNum) throws IOException {
 
 		tagType = tagType.toLowerCase();
-		if ("a".equals(tagType)) {
-			if (tagAttributes.containsKey("href")) {
-				try {
-					anchorManager
-							.addAnchorRef(new HREF(help, file, tagAttributes.get("href"), lineNum));
-				}
-				catch (URISyntaxException e) {
+		switch (tagType) {
+			case "a":
+				if (tagAttributes.containsKey("href")) {
+					try {
+						anchorManager
+								.addAnchorRef(new HREF(help, file, tagAttributes.get("href"), lineNum));
+					} catch (URISyntaxException e) {
+						errorCount++;
+						errors.append(
+								"Malformed Anchor Tag at (line " + lineNum + "): " + htmlFile + EOL);
+					}
+				} else if (tagAttributes.containsKey("name")) {
+					anchorManager.addAnchor(file, tagAttributes.get("name"), lineNum);
+				} else {
 					errorCount++;
-					errors.append(
-						"Malformed Anchor Tag at (line " + lineNum + "): " + htmlFile + EOL);
+					errors.append("Bad Anchor Tag - unexpected attribtute (line " + lineNum + "): " +
+							htmlFile + EOL);
 				}
-			}
-			else if (tagAttributes.containsKey("name")) {
-				anchorManager.addAnchor(file, tagAttributes.get("name"), lineNum);
-			}
-			else {
-				errorCount++;
-				errors.append("Bad Anchor Tag - unexpected attribtute (line " + lineNum + "): " +
-					htmlFile + EOL);
-			}
-		}
-		else if ("img".equals(tagType)) {
-			if (tagAttributes.containsKey("src")) {
-				try {
-					anchorManager
-							.addImageRef(new IMG(help, file, tagAttributes.get("src"), lineNum));
-				}
-				catch (URISyntaxException e) {
+				break;
+			case "img":
+				if (tagAttributes.containsKey("src")) {
+					try {
+						anchorManager
+								.addImageRef(new IMG(help, file, tagAttributes.get("src"), lineNum));
+					} catch (URISyntaxException e) {
+						errorCount++;
+						errors.append("Malformed IMG Tag at (line " + lineNum + "): " + htmlFile + EOL);
+					}
+				} else {
 					errorCount++;
-					errors.append("Malformed IMG Tag at (line " + lineNum + "): " + htmlFile + EOL);
+					errors.append("Bad IMG Tag - unexpected attribtute (line " + lineNum + "): " +
+							htmlFile + EOL);
 				}
-			}
-			else {
-				errorCount++;
-				errors.append("Bad IMG Tag - unexpected attribtute (line " + lineNum + "): " +
-					htmlFile + EOL);
-			}
-		}
-		else if ("link".equals(tagType)) {
-			String rel = tagAttributes.get("rel");
-			if (rel != null && "stylesheet".equals(rel.toLowerCase())) {
-// TODO there is at least one help module that has multiple style sheets.  I see no reason to
-//		enforce this constraint:
-//				if (hasStyleSheet) {
-//					errorCount++;
-//					errors.append("Multiple Stylesheets specified: " + htmlFile + EOL);
-//				}
-//				else {
+				break;
+			case "link":
+				String rel = tagAttributes.get("rel");
+				if (rel != null && "stylesheet".equals(rel.toLowerCase())) {
+					// TODO there is at least one help module that has multiple style sheets. I see
+					// no reason to
+					// enforce this constraint:
+					// if (hasStyleSheet) {
+					// errorCount++;
+					// errors.append("Multiple Stylesheets specified: " + htmlFile + EOL);
+					// }
+					// else {
 
-				String href = tagAttributes.get("href");
-				if (href != null) {
-					Path css = HelpBuildUtils.getFile(htmlFile, href);
-					css = css.normalize();
-					styleSheets.add(css); // validated later
+					String href = tagAttributes.get("href");
+					if (href != null) {
+						Path css = HelpBuildUtils.getFile(htmlFile, href);
+						css = css.normalize();
+						styleSheets.add(css); // validated later
+					}
+					// }
 				}
-//				}
-			}
-		}
-		else if ("title".equals(tagType)) {
-			readingTitle = true;
-		}
-		else if ("/title".equals(tagType)) {
-			readingTitle = false;
+				break;
+			case "title":
+				readingTitle = true;
+				break;
+			case "/title":
+				readingTitle = false;
+				break;
 		}
 	}
 

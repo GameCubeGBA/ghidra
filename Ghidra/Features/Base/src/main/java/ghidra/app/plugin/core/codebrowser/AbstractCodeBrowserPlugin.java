@@ -386,53 +386,59 @@ public abstract class AbstractCodeBrowserPlugin<P extends CodeViewerProvider> ex
 		else if (options.getName().equals(GhidraOptions.CATEGORY_BROWSER_FIELDS)) {
 
 			FieldPanel fieldPanel = listingPanel.getFieldPanel();
-			if (optionName.equals(GhidraOptions.OPTION_SELECTION_COLOR)) {
-				Color color = ((Color) newValue);
-				fieldPanel.setSelectionColor(color);
-				MarkerSet selectionMarkers = getSelectionMarkers(currentProgram);
-				if (selectionMarkers != null) {
-					selectionMarkers.setMarkerColor(color);
-				}
-				ListingPanel otherPanel = connectedProvider.getOtherPanel();
-				if (otherPanel != null) {
-					otherPanel.getFieldPanel().setSelectionColor(color);
-				}
-			}
-			else if (optionName.equals(GhidraOptions.OPTION_HIGHLIGHT_COLOR)) {
-				Color color = ((Color) newValue);
-				fieldPanel.setHighlightColor(color);
-				MarkerSet highlightMarkers = getHighlightMarkers(currentProgram);
-				if (highlightMarkers != null) {
-					highlightMarkers.setMarkerColor(color);
-				}
-			}
-			else if (optionName.equals(CURSOR_COLOR)) {
-				Color color = ((Color) newValue);
-				fieldPanel.setFocusedCursorColor(color);
-			}
-			else if (optionName.equals(UNFOCUSED_CURSOR_COLOR)) {
-				Color color = ((Color) newValue);
-				fieldPanel.setNonFocusCursorColor(color);
-			}
-			else if (optionName.equals(BLINK_CURSOR)) {
-				Boolean isBlinkCursor = ((Boolean) newValue);
-				fieldPanel.setBlinkCursor(isBlinkCursor);
-			}
-			else if (optionName.equals(GhidraOptions.HIGHLIGHT_CURSOR_LINE_COLOR)) {
-				cursorHighlightColor = (Color) newValue;
-				if (currentCursorMarkers != null) {
-					currentCursorMarkers.setMarkerColor(cursorHighlightColor);
-				}
-			}
-			else if (optionName.equals(GhidraOptions.HIGHLIGHT_CURSOR_LINE)) {
-				isHighlightCursorLine = (Boolean) newValue;
-				if (currentCursorMarkers != null) {
-					currentCursorMarkers.setColoringBackground(isHighlightCursorLine);
-				}
-			}
-			else if (optionName.equals(MOUSE_WHEEL_HORIZONTAL_SCROLLING)) {
-				fieldPanel.setHorizontalScrollingEnabled((Boolean) newValue);
-			}
+            switch (optionName) {
+                case GhidraOptions.OPTION_SELECTION_COLOR: {
+                    Color color = ((Color) newValue);
+                    fieldPanel.setSelectionColor(color);
+                    MarkerSet selectionMarkers = getSelectionMarkers(currentProgram);
+                    if (selectionMarkers != null) {
+                        selectionMarkers.setMarkerColor(color);
+                    }
+                    ListingPanel otherPanel = connectedProvider.getOtherPanel();
+                    if (otherPanel != null) {
+                        otherPanel.getFieldPanel().setSelectionColor(color);
+                    }
+                    break;
+                }
+                case GhidraOptions.OPTION_HIGHLIGHT_COLOR: {
+                    Color color = ((Color) newValue);
+                    fieldPanel.setHighlightColor(color);
+                    MarkerSet highlightMarkers = getHighlightMarkers(currentProgram);
+                    if (highlightMarkers != null) {
+                        highlightMarkers.setMarkerColor(color);
+                    }
+                    break;
+                }
+                case CURSOR_COLOR: {
+                    Color color = ((Color) newValue);
+                    fieldPanel.setFocusedCursorColor(color);
+                    break;
+                }
+                case UNFOCUSED_CURSOR_COLOR: {
+                    Color color = ((Color) newValue);
+                    fieldPanel.setNonFocusCursorColor(color);
+                    break;
+                }
+                case BLINK_CURSOR:
+                    Boolean isBlinkCursor = ((Boolean) newValue);
+                    fieldPanel.setBlinkCursor(isBlinkCursor);
+                    break;
+                case GhidraOptions.HIGHLIGHT_CURSOR_LINE_COLOR:
+                    cursorHighlightColor = (Color) newValue;
+                    if (currentCursorMarkers != null) {
+                        currentCursorMarkers.setMarkerColor(cursorHighlightColor);
+                    }
+                    break;
+                case GhidraOptions.HIGHLIGHT_CURSOR_LINE:
+                    isHighlightCursorLine = (Boolean) newValue;
+                    if (currentCursorMarkers != null) {
+                        currentCursorMarkers.setColoringBackground(isHighlightCursorLine);
+                    }
+                    break;
+                case MOUSE_WHEEL_HORIZONTAL_SCROLLING:
+                    fieldPanel.setHorizontalScrollingEnabled((Boolean) newValue);
+                    break;
+            }
 
 			connectedProvider.fieldOptionChanged(optionName, newValue);
 		}

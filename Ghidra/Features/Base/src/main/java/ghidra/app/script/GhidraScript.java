@@ -1805,14 +1805,7 @@ public abstract class GhidraScript extends FlatProgramAPI {
 	 * @param message the message to display in the dialog
 	 */
 	public void popup(final String message) {
-
-		if (isRunningHeadless()) {
-			Msg.info(this, message);
-		}
-		else {
-			var c = getClass();
-			Msg.showInfo(c, null, c.getName(), message);
-		}
+		Msg.showInfo(getClass(), null, getClass().getName(), message);
 	}
 
 	/**

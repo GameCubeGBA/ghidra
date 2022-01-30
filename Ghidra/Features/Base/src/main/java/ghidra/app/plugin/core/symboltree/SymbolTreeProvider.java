@@ -684,42 +684,47 @@ public class SymbolTreeProvider extends ComponentProviderAdapter {
 					object = ((ProgramChangeRecord) rec).getObject();
 				}
 
-				if (eventType == ChangeManager.DOCR_SYMBOL_RENAMED) {
-					Symbol symbol = (Symbol) object;
-					symbolChanged(symbol, (String) rec.getOldValue());
-				}
-				else if (eventType == ChangeManager.DOCR_SYMBOL_DATA_CHANGED ||
-					eventType == ChangeManager.DOCR_SYMBOL_SCOPE_CHANGED ||
-					eventType == ChangeManager.DOCR_FUNCTION_CHANGED) {
+                switch (eventType) {
+                    case ChangeManager.DOCR_SYMBOL_RENAMED: {
+                        Symbol symbol = (Symbol) object;
+                        symbolChanged(symbol, (String) rec.getOldValue());
+                        break;
+                    }
+                    case ChangeManager.DOCR_SYMBOL_DATA_CHANGED:
+                    case ChangeManager.DOCR_SYMBOL_SCOPE_CHANGED:
+                    case ChangeManager.DOCR_FUNCTION_CHANGED: {
 
-					Symbol symbol = null;
-					if (object instanceof Symbol) {
-						symbol = (Symbol) object;
-					}
-					else if (object instanceof Namespace) {
-						symbol = ((Namespace) object).getSymbol();
-					}
+                        Symbol symbol = null;
+                        if (object instanceof Symbol) {
+                            symbol = (Symbol) object;
+                        } else if (object instanceof Namespace) {
+                            symbol = ((Namespace) object).getSymbol();
+                        }
 
-					symbolChanged(symbol, symbol.getName());
-				}
-				else if (eventType == ChangeManager.DOCR_SYMBOL_ADDED) {
-					Symbol symbol = (Symbol) rec.getNewValue();
-					symbolAdded(symbol);
-				}
-				else if (eventType == ChangeManager.DOCR_SYMBOL_REMOVED) {
-					Symbol symbol = (Symbol) object;
-					symbolRemoved(symbol);
-				}
-				else if (eventType == ChangeManager.DOCR_EXTERNAL_ENTRY_POINT_ADDED ||
-					eventType == ChangeManager.DOCR_EXTERNAL_ENTRY_POINT_REMOVED) {
-					ProgramChangeRecord programChangeRecord = (ProgramChangeRecord) rec;
-					Address address = programChangeRecord.getStart();
-					SymbolTable symbolTable = program.getSymbolTable();
-					Symbol[] symbols = symbolTable.getSymbols(address);
-					for (Symbol symbol : symbols) {
-						symbolChanged(symbol, symbol.getName());
-					}
-				}
+                        symbolChanged(symbol, symbol.getName());
+                        break;
+                    }
+                    case ChangeManager.DOCR_SYMBOL_ADDED: {
+                        Symbol symbol = (Symbol) rec.getNewValue();
+                        symbolAdded(symbol);
+                        break;
+                    }
+                    case ChangeManager.DOCR_SYMBOL_REMOVED: {
+                        Symbol symbol = (Symbol) object;
+                        symbolRemoved(symbol);
+                        break;
+                    }
+                    case ChangeManager.DOCR_EXTERNAL_ENTRY_POINT_ADDED:
+                    case ChangeManager.DOCR_EXTERNAL_ENTRY_POINT_REMOVED:
+                        ProgramChangeRecord programChangeRecord = (ProgramChangeRecord) rec;
+                        Address address = programChangeRecord.getStart();
+                        SymbolTable symbolTable = program.getSymbolTable();
+                        Symbol[] symbols = symbolTable.getSymbols(address);
+                        for (Symbol symbol : symbols) {
+                            symbolChanged(symbol, symbol.getName());
+                        }
+                        break;
+                }
 			}
 
 		}

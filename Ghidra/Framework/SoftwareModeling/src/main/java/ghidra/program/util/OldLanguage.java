@@ -528,33 +528,33 @@ class OldLanguage implements Language {
 			Element childElement = (Element) iter.next();
 			String elementName = childElement.getName();
 			String text = childElement.getText().trim();
-			if (elementName.equals("name")) {
-				LanguageCompilerSpecPair pair =
-					OldLanguageMappingService.lookupMagicString(text, false);
-				if (pair != null) {
-					id = pair.languageID;
-					compilerSpecID = pair.compilerSpecID;
-				}
-				else {
-					throw new SAXException("Failed to map old language name: " + text);
-				}
-			}
-			else if (elementName.equals("id")) {
-				id = new LanguageID(text);
-			}
-			else if (elementName.equals("processor")) {
-				processor = Processor.findOrPossiblyCreateProcessor(text);
-			}
-			else if (elementName.equals("variant")) {
-				variant = text;
-			}
-			else if (elementName.equals("size")) {
-				try {
-					size = Integer.parseInt(text);
-				}
-				catch (NumberFormatException e) {
-					throw new SAXException(e);
-				}
+			switch (elementName) {
+				case "name":
+					LanguageCompilerSpecPair pair =
+							OldLanguageMappingService.lookupMagicString(text, false);
+					if (pair != null) {
+						id = pair.languageID;
+						compilerSpecID = pair.compilerSpecID;
+					} else {
+						throw new SAXException("Failed to map old language name: " + text);
+					}
+					break;
+				case "id":
+					id = new LanguageID(text);
+					break;
+				case "processor":
+					processor = Processor.findOrPossiblyCreateProcessor(text);
+					break;
+				case "variant":
+					variant = text;
+					break;
+				case "size":
+					try {
+						size = Integer.parseInt(text);
+					} catch (NumberFormatException e) {
+						throw new SAXException(e);
+					}
+					break;
 			}
 		}
 		if (id == null) {

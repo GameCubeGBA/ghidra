@@ -74,32 +74,37 @@ public class AnnotationElementValue implements StructConverter {
 	public AnnotationElementValue(BinaryReader reader) throws IOException {
 		tag = reader.readNextByte();
 
-		if (tag == DescriptorDecoder.BASE_TYPE_BYTE || tag == DescriptorDecoder.BASE_TYPE_CHAR ||
-			tag == DescriptorDecoder.BASE_TYPE_INT || tag == DescriptorDecoder.BASE_TYPE_SHORT ||
-			tag == DescriptorDecoder.BASE_TYPE_LONG || tag == DescriptorDecoder.BASE_TYPE_FLOAT ||
-			tag == DescriptorDecoder.BASE_TYPE_DOUBLE ||
-			tag == DescriptorDecoder.BASE_TYPE_BOOLEAN ||
-			tag == DescriptorDecoder.BASE_TYPE_STRING) {
+        switch (tag) {
+            case DescriptorDecoder.BASE_TYPE_BYTE:
+            case DescriptorDecoder.BASE_TYPE_CHAR:
+            case DescriptorDecoder.BASE_TYPE_INT:
+            case DescriptorDecoder.BASE_TYPE_SHORT:
+            case DescriptorDecoder.BASE_TYPE_LONG:
+            case DescriptorDecoder.BASE_TYPE_FLOAT:
+            case DescriptorDecoder.BASE_TYPE_DOUBLE:
+            case DescriptorDecoder.BASE_TYPE_BOOLEAN:
+            case DescriptorDecoder.BASE_TYPE_STRING:
 
-			constantValueIndex = reader.readNextShort();
-		}
-		else if (tag == DescriptorDecoder.BASE_TYPE_ENUM) {
-			typeNameIndex = reader.readNextShort();
-			constantNameIndex = reader.readNextShort();
-		}
-		else if (tag == DescriptorDecoder.BASE_TYPE_CLASS) {
-			classInfoIndex = reader.readNextShort();
-		}
-		else if (tag == DescriptorDecoder.BASE_TYPE_ANNOTATION) {
-			annotation = new AnnotationJava(reader);
-		}
-		else if (tag == DescriptorDecoder.BASE_TYPE_ARRAY) {
-			numberOfValues = reader.readNextShort();
-			values = new AnnotationElementValue[numberOfValues & 0xffff];
-			for (int i = 0; i < (numberOfValues & 0xffff); ++i) {
-				values[i] = new AnnotationElementValue(reader);
-			}
-		}
+                constantValueIndex = reader.readNextShort();
+                break;
+            case DescriptorDecoder.BASE_TYPE_ENUM:
+                typeNameIndex = reader.readNextShort();
+                constantNameIndex = reader.readNextShort();
+                break;
+            case DescriptorDecoder.BASE_TYPE_CLASS:
+                classInfoIndex = reader.readNextShort();
+                break;
+            case DescriptorDecoder.BASE_TYPE_ANNOTATION:
+                annotation = new AnnotationJava(reader);
+                break;
+            case DescriptorDecoder.BASE_TYPE_ARRAY:
+                numberOfValues = reader.readNextShort();
+                values = new AnnotationElementValue[numberOfValues & 0xffff];
+                for (int i = 0; i < (numberOfValues & 0xffff); ++i) {
+                    values[i] = new AnnotationElementValue(reader);
+                }
+                break;
+        }
 	}
 
 	/**
@@ -212,21 +217,26 @@ public class AnnotationElementValue implements StructConverter {
 		String name = "element_value" + "|" + tag + "|";
 		StructureDataType structure = new StructureDataType(name, 0);
 
-		if (tag == DescriptorDecoder.BASE_TYPE_BYTE || tag == DescriptorDecoder.BASE_TYPE_CHAR ||
-			tag == DescriptorDecoder.BASE_TYPE_INT || tag == DescriptorDecoder.BASE_TYPE_SHORT ||
-			tag == DescriptorDecoder.BASE_TYPE_LONG || tag == DescriptorDecoder.BASE_TYPE_FLOAT ||
-			tag == DescriptorDecoder.BASE_TYPE_DOUBLE ||
-			tag == DescriptorDecoder.BASE_TYPE_BOOLEAN ||
-			tag == DescriptorDecoder.BASE_TYPE_STRING) {
-		}
-		else if (tag == DescriptorDecoder.BASE_TYPE_ENUM) {
-		}
-		else if (tag == DescriptorDecoder.BASE_TYPE_CLASS) {
-		}
-		else if (tag == DescriptorDecoder.BASE_TYPE_ANNOTATION) {
-		}
-		else if (tag == DescriptorDecoder.BASE_TYPE_ARRAY) {
-		}
+        switch (tag) {
+            case DescriptorDecoder.BASE_TYPE_BYTE:
+            case DescriptorDecoder.BASE_TYPE_CHAR:
+            case DescriptorDecoder.BASE_TYPE_INT:
+            case DescriptorDecoder.BASE_TYPE_SHORT:
+            case DescriptorDecoder.BASE_TYPE_LONG:
+            case DescriptorDecoder.BASE_TYPE_FLOAT:
+            case DescriptorDecoder.BASE_TYPE_DOUBLE:
+            case DescriptorDecoder.BASE_TYPE_BOOLEAN:
+            case DescriptorDecoder.BASE_TYPE_STRING:
+                break;
+            case DescriptorDecoder.BASE_TYPE_ENUM:
+                break;
+            case DescriptorDecoder.BASE_TYPE_CLASS:
+                break;
+            case DescriptorDecoder.BASE_TYPE_ANNOTATION:
+                break;
+            case DescriptorDecoder.BASE_TYPE_ARRAY:
+                break;
+        }
 
 		return structure;
 	}

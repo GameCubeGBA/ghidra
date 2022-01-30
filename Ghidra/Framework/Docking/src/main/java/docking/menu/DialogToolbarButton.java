@@ -64,22 +64,24 @@ public class DialogToolbarButton extends EmptyBorderToggleButton {
 		super.doPropertyChange(e);
 
 		String name = e.getPropertyName();
-		if (name.equals(DockingActionIf.ENABLEMENT_PROPERTY)) {
-			setEnabled(((Boolean) e.getNewValue()).booleanValue());
-		}
-		else if (name.equals(DockingActionIf.DESCRIPTION_PROPERTY)) {
-			DockingToolBarUtils.setToolTipText(this, dockingAction);
-		}
-		else if (name.equals(DockingActionIf.TOOLBAR_DATA_PROPERTY)) {
-			ToolBarData toolBarData = (ToolBarData) e.getNewValue();
-			setIcon(toolBarData == null ? null : toolBarData.getIcon());
-		}
-		else if (name.equals(ToggleDockingActionIf.SELECTED_STATE_PROPERTY)) {
-			setSelected((Boolean) e.getNewValue());
-		}
-		else if (name.equals(DockingActionIf.KEYBINDING_DATA_PROPERTY)) {
-			DockingToolBarUtils.setToolTipText(this, dockingAction);
-		}
+        switch (name) {
+            case DockingActionIf.ENABLEMENT_PROPERTY:
+                setEnabled(((Boolean) e.getNewValue()).booleanValue());
+                break;
+            case DockingActionIf.DESCRIPTION_PROPERTY:
+                DockingToolBarUtils.setToolTipText(this, dockingAction);
+                break;
+            case DockingActionIf.TOOLBAR_DATA_PROPERTY:
+                ToolBarData toolBarData = (ToolBarData) e.getNewValue();
+                setIcon(toolBarData == null ? null : toolBarData.getIcon());
+                break;
+            case ToggleDockingActionIf.SELECTED_STATE_PROPERTY:
+                setSelected((Boolean) e.getNewValue());
+                break;
+            case DockingActionIf.KEYBINDING_DATA_PROPERTY:
+                DockingToolBarUtils.setToolTipText(this, dockingAction);
+                break;
+        }
 	}
 
 	@Override

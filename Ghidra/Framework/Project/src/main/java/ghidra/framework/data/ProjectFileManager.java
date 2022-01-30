@@ -838,7 +838,7 @@ public class ProjectFileManager implements ProjectData {
 		}
 
 		@Override
-		public void syncronize() {
+		public void synchronize() {
 
 			if (SystemUtilities.isInHeadlessMode()) {
 				doSynchronize();

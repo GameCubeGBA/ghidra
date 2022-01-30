@@ -76,71 +76,72 @@ public strictfp class FloatFormat {
 	FloatFormat(int sz) throws UnsupportedFloatFormatException {
 		size = sz;
 
-		if (size == 2) {
-			signbit_pos = 15;
-			exp_pos = 10;
-			exp_size = 5;
-			frac_pos = 0;
-			frac_size = 10;
-			bias = 15;
-			jbitimplied = true;
-			displayContext = new MathContext(7, RoundingMode.HALF_EVEN);
-		}
-		else if (size == 4) {
-			signbit_pos = 31;
-			exp_pos = 23;
-			exp_size = 8;
-			frac_pos = 0;
-			frac_size = 23;
-			bias = 127;
-			jbitimplied = true;
-			displayContext = new MathContext(7, RoundingMode.HALF_EVEN);
-		}
-		else if (size == 8) {
-			signbit_pos = 63;
-			exp_pos = 52;
-			exp_size = 11;
-			frac_pos = 0;
-			frac_size = 52;
-			bias = 1023;
-			jbitimplied = true;
-			displayContext = new MathContext(16, RoundingMode.HALF_EVEN);
-		}
-		else if (size == 16) {
-			signbit_pos = 127;
-			exp_pos = 112;
-			exp_size = 15;
-			frac_pos = 0;
-			frac_size = 112;
-			bias = 16383;
-			jbitimplied = true;
-			displayContext = new MathContext(33, RoundingMode.HALF_EVEN);
-		}
-		else if (size == 10) {
-			signbit_pos = 79;
-			exp_pos = 64;
-			exp_size = 15;
-			frac_pos = 0;
-			frac_size = 64;
-			bias = 16383;
-			jbitimplied = true;
-			displayContext = new MathContext(18, RoundingMode.HALF_EVEN);
-		}
-		else if (size == 12) { // For the Motorola 68000, extended precision, in which bits 80 to 63 are always 0.
-			// Note that m68k internal floating point regs are 80-bits, but 96 bits are moved to/from memory.
-			// Also note this is not IEEE format.
-			signbit_pos = 95;
-			exp_pos = 80;
-			exp_size = 15;
-			frac_pos = 16;
-			frac_size = 64;
-			bias = 16383;
-			jbitimplied = true;
-			displayContext = new MathContext(18, RoundingMode.HALF_EVEN);
-		}
-		else {
-			throw new UnsupportedFloatFormatException(sz);
-		}
+        switch (size) {
+            case 2:
+                signbit_pos = 15;
+                exp_pos = 10;
+                exp_size = 5;
+                frac_pos = 0;
+                frac_size = 10;
+                bias = 15;
+                jbitimplied = true;
+                displayContext = new MathContext(7, RoundingMode.HALF_EVEN);
+                break;
+            case 4:
+                signbit_pos = 31;
+                exp_pos = 23;
+                exp_size = 8;
+                frac_pos = 0;
+                frac_size = 23;
+                bias = 127;
+                jbitimplied = true;
+                displayContext = new MathContext(7, RoundingMode.HALF_EVEN);
+                break;
+            case 8:
+                signbit_pos = 63;
+                exp_pos = 52;
+                exp_size = 11;
+                frac_pos = 0;
+                frac_size = 52;
+                bias = 1023;
+                jbitimplied = true;
+                displayContext = new MathContext(16, RoundingMode.HALF_EVEN);
+                break;
+            case 16:
+                signbit_pos = 127;
+                exp_pos = 112;
+                exp_size = 15;
+                frac_pos = 0;
+                frac_size = 112;
+                bias = 16383;
+                jbitimplied = true;
+                displayContext = new MathContext(33, RoundingMode.HALF_EVEN);
+                break;
+            case 10:
+                signbit_pos = 79;
+                exp_pos = 64;
+                exp_size = 15;
+                frac_pos = 0;
+                frac_size = 64;
+                bias = 16383;
+                jbitimplied = true;
+                displayContext = new MathContext(18, RoundingMode.HALF_EVEN);
+                break;
+            case 12:  // For the Motorola 68000, extended precision, in which bits 80 to 63 are always 0.
+                // Note that m68k internal floating point regs are 80-bits, but 96 bits are moved to/from memory.
+                // Also note this is not IEEE format.
+                signbit_pos = 95;
+                exp_pos = 80;
+                exp_size = 15;
+                frac_pos = 16;
+                frac_size = 64;
+                bias = 16383;
+                jbitimplied = true;
+                displayContext = new MathContext(18, RoundingMode.HALF_EVEN);
+                break;
+            default:
+                throw new UnsupportedFloatFormatException(sz);
+        }
 		maxexponent = (1 << exp_size) - 1;
 
 		maxValue = new BigFloat(frac_size, exp_size, FloatKind.FINITE, +1,

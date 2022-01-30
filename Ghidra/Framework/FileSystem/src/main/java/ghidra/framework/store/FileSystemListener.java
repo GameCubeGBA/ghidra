@@ -92,6 +92,6 @@ public interface FileSystemListener {
 	/**
 	 * Perform a full refresh / synchronization
 	 */
-	void syncronize();
+	void synchronize();
 
 }
