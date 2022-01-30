@@ -34,7 +34,7 @@ import ghidra.util.xml.XmlUtilities;
 import ghidra.xml.XmlElement;
 import ghidra.xml.XmlPullParser;
 
-class ApplySymbols {
+final class ApplySymbols {
 //	private static final String MS_VF_TABLE_PREFIX = "??_7";
 //	private static final String MS_VB_TABLE_PREFIX = "??_8";
 //	private static final String MS_STRING_PREFIX = "??_C@_";

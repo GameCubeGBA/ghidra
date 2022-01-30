@@ -43,7 +43,7 @@ import ghidra.util.filechooser.GhidraFileFilter;
  * is restricted to package access.  Certain public operations are exposed via the
  * {@link ApplicationKeyManagerUtils} class.
  */
-public class ApplicationKeyManagerFactory {
+public final class ApplicationKeyManagerFactory {
 
 	/**
 	 * Keystore path system property or user preference.  Setting the system

@@ -29,7 +29,7 @@ import utilities.util.reflection.ReflectionUtilities;
 /**
  * A utility class to handle running code on the AWT Event Dispatch Thread
  */
-public class Swing {
+public final class Swing {
 
 	private static final String SWING_TIMEOUT_SECONDS_PROPERTY =
 		Swing.class.getName().toLowerCase() + ".timeout.seconds";

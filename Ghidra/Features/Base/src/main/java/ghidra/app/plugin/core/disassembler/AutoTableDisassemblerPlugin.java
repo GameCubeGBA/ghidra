@@ -452,7 +452,7 @@ public class AutoTableDisassemblerPlugin extends ProgramPlugin implements Domain
 		return shortestRowIndex;
 	}
 
-	private class MakeTablesTask extends Task {
+	private final class MakeTablesTask extends Task {
 
 		private Address[] addresses;
 		private int collisionCount;

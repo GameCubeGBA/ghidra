@@ -25,7 +25,7 @@ import ghidra.util.xml.XmlUtilities;
 import ghidra.xml.XmlElement;
 import ghidra.xml.XmlPullParser;
 
-class ApplyEnums {
+final class ApplyEnums {
 
 	private ApplyEnums() {
 		// static use only

@@ -28,7 +28,7 @@ import ghidra.async.seq.AsyncSequenceWithoutTemp;
  * {@link ExecutorService}. This makes it a suitable first parameter to
  * {@link AsyncSequenceWithoutTemp#then(ExecutorService, AsyncSequenceActionRuns)} and similar.
  */
-public class SwingExecutorService extends AbstractExecutorService {
+public final class SwingExecutorService extends AbstractExecutorService {
 	public static final SwingExecutorService INSTANCE = new SwingExecutorService();
 
 	private SwingExecutorService() {

@@ -43,7 +43,7 @@ import utility.module.ModuleUtilities;
  *   Application.initalizeApplication(layout, configuration);
  * </pre>
  */
-public class Application {
+public final class Application {
 
 	private static final String JAR_EXTENSION = ".jar";
 	private static final String DATA_DIRNAME = "data/";

@@ -56,7 +56,7 @@ import ghidra.util.task.*;
  * Provides support for auto analysis tasks.
  * Manages a pipeline or priority of tasks to run given some event has occurred.
  */
-public class AutoAnalysisManager implements DomainObjectListener, DomainObjectClosedListener {
+public final class AutoAnalysisManager implements DomainObjectListener, DomainObjectClosedListener {
 
 	/**
 	 * The name of the shared thread pool that analyzers can uses to do parallel processing.

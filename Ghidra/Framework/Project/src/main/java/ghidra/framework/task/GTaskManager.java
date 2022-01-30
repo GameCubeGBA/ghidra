@@ -154,7 +154,7 @@ public class GTaskManager {
 	 * 
 	 * @param task the task to be run.
 	 * @param priority the priority of the task.  Lower numbers are run before higher numbers.
-	 * @param groupName. The name of the group that the task will be added to.
+	 * @param groupName The name of the group that the task will be added to.
 	 */
 	public void scheduleTask(GTask task, int priority, String groupName) {
 		lock.lock();
