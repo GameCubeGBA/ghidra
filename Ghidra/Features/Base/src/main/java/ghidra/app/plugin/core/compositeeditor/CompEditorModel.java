@@ -744,8 +744,7 @@ public abstract class CompEditorModel extends CompositeEditorModel {
 		checkIsAllowableDataType(datatype);
 
 		int oldCompSize = oldDtc.getLength();
-		int newCompSize = length;
-		int sizeDiff = newCompSize - oldCompSize;
+        int sizeDiff = length - oldCompSize;
 
 		// New one is larger so check to make sure it will fit.
 		if (sizeDiff > 0) {
@@ -756,7 +755,7 @@ public abstract class CompEditorModel extends CompositeEditorModel {
 
 		// Replace the component at index.
 		DataTypeComponent dtc =
-			replace(rowIndex, datatype, newCompSize, oldDtc.getFieldName(), oldDtc.getComment());
+			replace(rowIndex, datatype, length, oldDtc.getFieldName(), oldDtc.getComment());
 
 		fixSelection();
 		componentEdited();

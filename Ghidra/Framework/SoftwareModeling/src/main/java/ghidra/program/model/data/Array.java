@@ -131,9 +131,8 @@ public interface Array extends DataType {
 			return null;
 		}
 		ArrayStringable as = ArrayStringable.getArrayStringable(getDataType());
-		Object value = (as != null) ? as.getArrayString(buf, settings, length) : null;
 
-		return value;
+        return (as != null) ? as.getArrayString(buf, settings, length) : null;
 		// TODO
 		// For large array it is not scalable to create a java array object.  Perhaps
 		// we could create a GhidraArray that can dish out objects.

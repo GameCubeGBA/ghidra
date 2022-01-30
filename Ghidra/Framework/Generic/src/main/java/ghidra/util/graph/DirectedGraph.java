@@ -1282,9 +1282,8 @@ public class DirectedGraph {
 	 */
 	protected Object getEdgeProperty(String propName, Edge e) {
 		ObjectAttribute<Edge> attrib = getEdgeAttribute(propName);
-		Object o = attrib.getValue(e);
 
-		return o;
+        return attrib.getValue(e);
 	}
 
 	/**

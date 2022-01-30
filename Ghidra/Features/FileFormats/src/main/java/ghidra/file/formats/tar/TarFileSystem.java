@@ -176,26 +176,24 @@ public class TarFileSystem implements GFileSystem {
 			throw new IOException("Unknown file " + file);
 		}
 
-		ByteProvider fileBP = fsService.getDerivedByteProvider(provider.getFSRL(), file.getFSRL(),
-			file.getPath(), tmd.tarArchiveEntry.getSize(), () -> {
-				TarArchiveInputStream tarInput = new TarArchiveInputStream(provider.getInputStream(0));
+        return fsService.getDerivedByteProvider(provider.getFSRL(), file.getFSRL(),
+            file.getPath(), tmd.tarArchiveEntry.getSize(), () -> {
+                TarArchiveInputStream tarInput = new TarArchiveInputStream(provider.getInputStream(0));
 
-				int fileNum = 0;
-				TarArchiveEntry tarEntry;
-				while ((tarEntry = tarInput.getNextTarEntry()) != null) {
-					if (fileNum == tmd.fileNum) {
-						if (!tmd.tarArchiveEntry.getName().equals(tarEntry.getName())) {
-							throw new IOException(
-								"Mismatch between filenum and tarEntry for " + file);
-						}
-						return tarInput;
-					}
-					fileNum++;
-				}
-				throw new IOException("Could not find requested file " + file);
-			}, monitor);
-
-		return fileBP;
+                int fileNum = 0;
+                TarArchiveEntry tarEntry;
+                while ((tarEntry = tarInput.getNextTarEntry()) != null) {
+                    if (fileNum == tmd.fileNum) {
+                        if (!tmd.tarArchiveEntry.getName().equals(tarEntry.getName())) {
+                            throw new IOException(
+                                "Mismatch between filenum and tarEntry for " + file);
+                        }
+                        return tarInput;
+                    }
+                    fileNum++;
+                }
+                throw new IOException("Could not find requested file " + file);
+            }, monitor);
 	}
 
 	@Override

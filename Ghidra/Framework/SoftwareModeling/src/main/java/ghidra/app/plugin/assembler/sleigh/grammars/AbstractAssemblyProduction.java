@@ -81,8 +81,7 @@ public abstract class AbstractAssemblyProduction<NT extends AssemblyNonTerminal>
 
 	@Override
 	public String toString() {
-		String result = idx + ". " + lhs + " => " + rhs;
-		return result;
+        return idx + ". " + lhs + " => " + rhs;
 	}
 
 	@Override

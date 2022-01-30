@@ -1261,8 +1261,7 @@ public class EnumEditor1Test extends AbstractGhidraHeadedIntegrationTest {
 
 	private JTable getEditTable() {
 		EnumEditorPanel panel = findEditorPanel(tool.getToolFrame());
-		JTable table = panel.getTable();
-		return table;
+        return panel.getTable();
 	}
 
 	private void doTestFieldChangedWithWarning(boolean alsoRemove) throws Exception {

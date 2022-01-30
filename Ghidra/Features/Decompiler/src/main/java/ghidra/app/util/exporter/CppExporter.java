@@ -504,8 +504,7 @@ public class CppExporter extends Exporter {
 
 			DecompInterface decompiler = pool.get();
 			try {
-				CPPResult result = doWork(function, decompiler, monitor);
-				return result;
+                return doWork(function, decompiler, monitor);
 			}
 			finally {
 				pool.release(decompiler);

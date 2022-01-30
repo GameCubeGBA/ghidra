@@ -144,8 +144,7 @@ public class ScrollableOptionsEditor implements OptionsEditor {
 			//			
 			Dimension mySize = getPreferredSize();
 			Dimension viewSize = scrollPane.getViewport().getSize();
-			boolean viewIsLarger = viewSize.height > mySize.height;
-			return viewIsLarger;
+            return viewSize.height > mySize.height;
 		}
 
 		@Override
@@ -159,8 +158,7 @@ public class ScrollableOptionsEditor implements OptionsEditor {
 			//			
 			Dimension mySize = getPreferredSize();
 			Dimension viewSize = scrollPane.getViewport().getSize();
-			boolean viewIsLarger = viewSize.width > mySize.width;
-			return viewIsLarger;
+            return viewSize.width > mySize.width;
 		}
 
 		@Override

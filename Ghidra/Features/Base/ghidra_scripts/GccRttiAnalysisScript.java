@@ -826,8 +826,7 @@ public class GccRttiAnalysisScript extends GhidraScript {
 		ArrayDataType vftableArrayDataType =
 			new ArrayDataType(pointerDataType, numFunctionPointers, defaultPointerSize);
 		try {
-			Data vftableArrayData = createData(vftableAddress, vftableArrayDataType);
-			return vftableArrayData;
+            return createData(vftableAddress, vftableArrayDataType);
 		}
 		catch (Exception e) {
 			return null;
@@ -1125,8 +1124,7 @@ public class GccRttiAnalysisScript extends GhidraScript {
 			if (offset == 0) {
 				return null;
 			}
-			Address possibleFunctionPointer = currentAddress.getNewAddress(offset);
-			return possibleFunctionPointer;
+            return currentAddress.getNewAddress(offset);
 
 		}
 		catch (MemoryAccessException | AddressOutOfBoundsException e) {
@@ -1239,8 +1237,7 @@ public class GccRttiAnalysisScript extends GhidraScript {
 	 */
 	private Address getAddress(Address address, int offset) {
 		try {
-			Address newAddress = address.add(offset);
-			return newAddress;
+            return address.add(offset);
 		}
 		catch (AddressOutOfBoundsException e) {
 			return null;

@@ -579,8 +579,7 @@ public abstract class AbstractPdb implements AutoCloseable {
 		MsfStream stream = msf.getStream(streamNumber);
 		numToRead = Math.min(numToRead, stream.getLength());
 		byte[] bytes = stream.read(streamOffset, numToRead, monitor);
-		PdbByteReader reader = new PdbByteReader(bytes);
-		return reader;
+        return new PdbByteReader(bytes);
 	}
 
 	/**

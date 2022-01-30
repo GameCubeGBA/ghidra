@@ -112,8 +112,7 @@ public class DataTypeUrl {
 			return manager.getDataType(new DataTypePath(CategoryPath.ROOT, dataTypeName));
 		}
 
-		DataType dt = manager.findDataTypeForID(dataTypeId);
-		return dt;
+        return manager.findDataTypeForID(dataTypeId);
 	}
 
 	private DataTypeManager findManager(DataTypeManagerService service) {

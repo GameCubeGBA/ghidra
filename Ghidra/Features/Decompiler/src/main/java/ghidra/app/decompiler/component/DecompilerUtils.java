@@ -497,8 +497,7 @@ public class DecompilerUtils {
 			return 0;
 		}
 
-		int tokenIndex = textLine.getTokenIndex(location);
-		return tokenIndex;
+        return textLine.getTokenIndex(location);
 	}
 
 	private static int getEndIndex(ClangTextField textLine, FieldLocation location) {
@@ -509,8 +508,7 @@ public class DecompilerUtils {
 			return 0;
 		}
 
-		int nextTokenIndex = textLine.getNextTokenIndexStartingAfter(location);
-		return nextTokenIndex;
+        return textLine.getNextTokenIndexStartingAfter(location);
 	}
 
 	public static Address findAddressBefore(Field[] lines, ClangToken token) {
@@ -587,8 +585,7 @@ public class DecompilerUtils {
 				}
 
 				// found our starting token, take the current value on the stack
-				ClangSyntaxToken matchingBrace = braceStack.pop();
-				return matchingBrace;
+                return braceStack.pop();
 			}
 
 			if (!isBrace(syntaxToken)) {
@@ -770,20 +767,17 @@ public class DecompilerUtils {
 		if (varnode != null) {
 			HighVariable highVariable = varnode.getHigh();
 			if (highVariable != null) {
-				DataType dataType = highVariable.getDataType();
-				return dataType;
+                return highVariable.getDataType();
 
 			}
 		}
 
 		if (token instanceof ClangTypeToken) {
-			DataType dataType = ((ClangTypeToken) token).getDataType();
-			return dataType;
+            return ((ClangTypeToken) token).getDataType();
 		}
 
 		if (token instanceof ClangFieldToken) {
-			DataType dataType = ((ClangFieldToken) token).getDataType();
-			return dataType;
+            return ((ClangFieldToken) token).getDataType();
 		}
 
 		return null;

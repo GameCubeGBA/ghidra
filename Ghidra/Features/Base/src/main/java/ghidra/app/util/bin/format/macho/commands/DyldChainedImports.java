@@ -53,8 +53,7 @@ public class DyldChainedImports implements StructConverter {
 	private void initDyldChainedStartsInImage(FactoryBundledWithBinaryReader reader,
 			DyldChainedFixupHeader cfh) throws IOException {
 
-		long ptrIndex = reader.getPointerIndex();
-		imports_offset = ptrIndex;
+        imports_offset = reader.getPointerIndex();
 
 		this.imports_count = cfh.getImports_count();
 		this.imports_format = cfh.getImports_format();
@@ -69,10 +68,8 @@ public class DyldChainedImports implements StructConverter {
 	@Override
 	public DataType toDataType() throws DuplicateNameException, IOException {
 		DataType chainedImportDt = chainedImports[0].toDataType();
-		DataType dt =
-			new ArrayDataType(chainedImportDt, imports_count, chainedImportDt.getLength());
 
-		return dt;
+        return new ArrayDataType(chainedImportDt, imports_count, chainedImportDt.getLength());
 	}
 
 	public int getImportsCount() {

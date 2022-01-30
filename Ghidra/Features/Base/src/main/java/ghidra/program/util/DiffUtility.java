@@ -711,9 +711,8 @@ public class DiffUtility extends SimpleDiffUtility {
 			if (byteAddress == null) {
 				byteAddress = address; // Make sure the byte address isn't null.
 			}
-			ProgramLocation otherLocation = new ProgramLocation(otherProgram, address, byteAddress,
-				location.getComponentPath(), refAddress, 0, 0, 0);
-			return otherLocation;
+            return new ProgramLocation(otherProgram, address, byteAddress,
+                location.getComponentPath(), refAddress, 0, 0, 0);
 		}
 		return null;
 	}

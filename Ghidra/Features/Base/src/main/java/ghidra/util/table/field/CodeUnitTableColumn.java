@@ -61,8 +61,7 @@ public class CodeUnitTableColumn
 	@Override
 	public CodeUnitTableCellData getValue(ProgramLocation rowObject, Settings settings,
 			Program data, ServiceProvider serviceProvider) throws IllegalArgumentException {
-		ProgramLocation loc = rowObject;
-		return new CodeUnitTableCellData(loc, getCodeUnitFormat(serviceProvider),
+        return new CodeUnitTableCellData(rowObject, getCodeUnitFormat(serviceProvider),
 			CODE_UNIT_OFFSET.getOffset(settings), CODE_UNIT_COUNT.getCount(settings));
 	}
 

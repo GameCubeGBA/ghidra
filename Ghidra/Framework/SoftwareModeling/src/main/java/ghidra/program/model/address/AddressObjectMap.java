@@ -68,8 +68,7 @@ public class AddressObjectMap {
      */
     public Object[] getObjects(Address addr) {
 
-        Object[] objarray = getObj(addrMap.getKey(addr));
-        return objarray;
+        return getObj(addrMap.getKey(addr));
     }
 
 	/**

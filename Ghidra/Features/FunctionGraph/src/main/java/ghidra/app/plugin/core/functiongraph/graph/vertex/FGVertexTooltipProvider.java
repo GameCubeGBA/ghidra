@@ -26,20 +26,17 @@ public class FGVertexTooltipProvider implements VertexTooltipProvider<FGVertex, 
 
 	@Override
 	public JComponent getTooltip(FGVertex v) {
-		JComponent c = v.getToolTipComponentForVertex();
-		return c;
+        return v.getToolTipComponentForVertex();
 	}
 
 	@Override
 	public JComponent getTooltip(FGVertex v, FGEdge e) {
-		JComponent c = v.getToolTipComponentForEdge(e);
-		return c;
+        return v.getToolTipComponentForEdge(e);
 	}
 
 	@Override
 	public String getTooltipText(FGVertex v, MouseEvent e) {
-		String tooltip = v.getToolTipText(e);
-		return tooltip;
+        return v.getToolTipText(e);
 	}
 
 }

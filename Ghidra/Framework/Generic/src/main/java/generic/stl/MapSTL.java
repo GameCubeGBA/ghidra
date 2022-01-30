@@ -92,8 +92,7 @@ public class MapSTL<K,V> {
 
 	public IteratorSTL<Pair<K,V>> upper_bound( K key ) {
 		RedBlackNode<K, V> node = rbTree.upperBound( key );
-		MapIteratorSTL<K, V> it = new MapIteratorSTL<>(rbTree, node);
-		return it;	
+        return new MapIteratorSTL<>(rbTree, node);
 	}
 	
 	public boolean isEmpty() {

@@ -382,8 +382,7 @@ private void paintText( Graphics2D graphics, Color color, double textPosition ) 
             }
             
             int elapsedTime = (int) (System.currentTimeMillis() - startRampupTime);
-            int increment = (255 * elapsedTime) / rampDelayTime;
-            alphaLevel = increment;
+            alphaLevel = (255 * elapsedTime) / rampDelayTime;
             if ( alphaLevel >= 255 ) {
                 alphaLevel = 255;
                 inRampUpPeriod = false;

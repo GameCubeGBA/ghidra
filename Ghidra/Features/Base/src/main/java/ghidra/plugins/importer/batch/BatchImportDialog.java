@@ -474,74 +474,71 @@ public class BatchImportDialog extends DialogComponentProvider {
 	}
 
 	private TableCellRenderer createFilesColumnCellRenderer() {
-		TableCellRenderer cellRenderer = new GTableCellRenderer() {
-			@Override
-			public Component getTableCellRendererComponent(GTableCellRenderingData data) {
 
-				JLabel renderer = (JLabel) super.getTableCellRendererComponent(data);
-				renderer.setToolTipText("Click to view the files");
-				return renderer;
-			}
+        return new GTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(GTableCellRenderingData data) {
 
-			@Override
-			protected String getText(Object value) {
-				BatchGroup batchGroup = (BatchGroup) value;
-				if (batchGroup != null) {
-					return batchGroup.size() + " files...";
-				}
-				return "";
-			}
-		};
+                JLabel renderer = (JLabel) super.getTableCellRendererComponent(data);
+                renderer.setToolTipText("Click to view the files");
+                return renderer;
+            }
 
-		return cellRenderer;
+            @Override
+            protected String getText(Object value) {
+                BatchGroup batchGroup = (BatchGroup) value;
+                if (batchGroup != null) {
+                    return batchGroup.size() + " files...";
+                }
+                return "";
+            }
+        };
 	}
 
 	private TableCellEditor createLangColumnCellEditor() {
 		JComboBox<Object> comboBox = new GComboBox<>();
-		DefaultCellEditor cellEditor = new DefaultCellEditor(comboBox) {
-			@Override
-			public boolean shouldSelectCell(EventObject anEvent) {
-				return false;
-			}
 
-			@Override
-			public Component getTableCellEditorComponent(JTable jtable, Object value,
-					boolean isSelected, int row, int column) {
-				comboBox.removeAllItems();
-				BatchGroup batchGroup = tableModel.getRowObject(row);
-				for (BatchGroupLoadSpec bo : batchGroup.getCriteria().getBatchGroupLoadSpecs()) {
-					comboBox.addItem(bo);
-				}
+        return new DefaultCellEditor(comboBox) {
+            @Override
+            public boolean shouldSelectCell(EventObject anEvent) {
+                return false;
+            }
 
-				return super.getTableCellEditorComponent(jtable, value, isSelected, row, column);
-			}
-		};
+            @Override
+            public Component getTableCellEditorComponent(JTable jtable, Object value,
+                    boolean isSelected, int row, int column) {
+                comboBox.removeAllItems();
+                BatchGroup batchGroup = tableModel.getRowObject(row);
+                for (BatchGroupLoadSpec bo : batchGroup.getCriteria().getBatchGroupLoadSpecs()) {
+                    comboBox.addItem(bo);
+                }
 
-		return cellEditor;
+                return super.getTableCellEditorComponent(jtable, value, isSelected, row, column);
+            }
+        };
 	}
 
 	private TableCellRenderer createLangColumnCellRenderer() {
-		TableCellRenderer cellRenderer = new GTableCellRenderer() {
-			{
-				setHTMLRenderingEnabled(true);
-			}
 
-			@Override
-			public Component getTableCellRendererComponent(GTableCellRenderingData data) {
-				JLabel renderer = (JLabel) super.getTableCellRendererComponent(data);
-				renderer.setToolTipText("Click to set language");
-				return renderer;
-			}
+        return new GTableCellRenderer() {
+            {
+                setHTMLRenderingEnabled(true);
+            }
 
-			@Override
-			protected String getText(Object value) {
-				BatchGroupLoadSpec bgls = (BatchGroupLoadSpec) value;
-				return (bgls != null) ? bgls.toString()
-						: "<html><font size=\"-2\" color=\"gray\">Click to set language</font>";
-			}
-		};
+            @Override
+            public Component getTableCellRendererComponent(GTableCellRenderingData data) {
+                JLabel renderer = (JLabel) super.getTableCellRendererComponent(data);
+                renderer.setToolTipText("Click to set language");
+                return renderer;
+            }
 
-		return cellRenderer;
+            @Override
+            protected String getText(Object value) {
+                BatchGroupLoadSpec bgls = (BatchGroupLoadSpec) value;
+                return (bgls != null) ? bgls.toString()
+                        : "<html><font size=\"-2\" color=\"gray\">Click to set language</font>";
+            }
+        };
 	}
 
 	private class SourcesListModel extends AbstractListModel<String> {
@@ -561,12 +558,11 @@ public class BatchImportDialog extends DialogComponentProvider {
 			}
 
 			UserAddedSourceInfo uasi = list.get(index);
-			String info = String.format("%s [%d files/%d apps/%d containers/%d%s levels]",
-				uasi.getFSRL().getPath(), uasi.getRawFileCount(), uasi.getFileCount(),
-				uasi.getContainerCount(),
-				uasi.getMaxNestLevel() - uasi.getFSRL().getNestingDepth() + 1,
-				uasi.wasRecurseTerminatedEarly() ? "+" : "");
-			return info;
+            return String.format("%s [%d files/%d apps/%d containers/%d%s levels]",
+                uasi.getFSRL().getPath(), uasi.getRawFileCount(), uasi.getFileCount(),
+                uasi.getContainerCount(),
+                uasi.getMaxNestLevel() - uasi.getFSRL().getNestingDepth() + 1,
+                uasi.wasRecurseTerminatedEarly() ? "+" : "");
 		}
 
 		public void refresh() {

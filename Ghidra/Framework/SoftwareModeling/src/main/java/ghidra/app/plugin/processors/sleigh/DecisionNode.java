@@ -100,8 +100,7 @@ public class DecisionNode {
 			debugInstructionBitsDecision(debug, walker, val);
 		}
 
-		Constructor c = children[val].resolve(walker, debug);
-		return c;
+        return children[val].resolve(walker, debug);
 	}
 
 	private void debugContextBitsDecision(SleighDebugLogger debug, ParserWalker walker, int val) {

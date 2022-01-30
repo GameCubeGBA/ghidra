@@ -55,8 +55,7 @@ public class ParameterStringable extends Stringable {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = prime * ((parameterInfo == null) ? 0 : parameterInfo.hashCode());
-		return result;
+        return prime * ((parameterInfo == null) ? 0 : parameterInfo.hashCode());
 	}
 
 	@Override

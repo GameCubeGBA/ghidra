@@ -495,8 +495,7 @@ public class VisualGraphPathHighlighter<V extends VisualVertex, E extends Visual
 			return v;
 		}
 
-		V matchingVertex = ((GroupingVisualGraph<V, E>) graph).findMatchingVertex(v);
-		return matchingVertex;
+        return ((GroupingVisualGraph<V, E>) graph).findMatchingVertex(v);
 	}
 
 	private void clearCacheSwing() {
@@ -743,8 +742,7 @@ public class VisualGraphPathHighlighter<V extends VisualVertex, E extends Visual
 	private <T> T getAsync(CompletableFuture<T> cf) {
 
 		try {
-			T t = cf.get(); // blocking
-			return t;
+            return cf.get();
 		}
 		catch (InterruptedException e) {
 			Msg.trace(VisualGraphPathHighlighter.this,

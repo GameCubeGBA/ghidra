@@ -440,8 +440,7 @@ public class ScalarSearchModel extends AddressBasedTableModel<ScalarRowObject> {
 				ServiceProvider provider) throws IllegalArgumentException {
 			Scalar scalar = rowObject.getScalar();
 
-			Scalar unsigned = new Scalar(scalar.bitLength(), scalar.getUnsignedValue(), false);
-			return unsigned;
+            return new Scalar(scalar.bitLength(), scalar.getUnsignedValue(), false);
 
 		}
 	}
@@ -489,8 +488,7 @@ public class ScalarSearchModel extends AddressBasedTableModel<ScalarRowObject> {
 				ServiceProvider provider) throws IllegalArgumentException {
 			Scalar scalar = rowObject.getScalar();
 
-			Scalar signed = new Scalar(scalar.bitLength(), scalar.getUnsignedValue(), true);
-			return signed;
+            return new Scalar(scalar.bitLength(), scalar.getUnsignedValue(), true);
 
 		}
 
@@ -539,8 +537,7 @@ public class ScalarSearchModel extends AddressBasedTableModel<ScalarRowObject> {
 				ServiceProvider provider) throws IllegalArgumentException {
 			Scalar scalar = rowObject.getScalar();
 
-			Scalar unsigned = new Scalar(scalar.bitLength(), scalar.getUnsignedValue(), false);
-			return unsigned;
+            return new Scalar(scalar.bitLength(), scalar.getUnsignedValue(), false);
 
 		}
 

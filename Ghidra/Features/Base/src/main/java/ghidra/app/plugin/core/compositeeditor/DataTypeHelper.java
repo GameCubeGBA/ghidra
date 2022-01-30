@@ -214,13 +214,12 @@ public class DataTypeHelper {
 			actualDt = ((TypeDef) actualDt).getBaseDataType();
 		}
 
-		int maxDtBytes = maxBytes;
-		int dtBytes = model.getLastNumBytes();
-		dtBytes = ((maxDtBytes > 0) && (dtBytes > maxDtBytes)) ? maxDtBytes : dtBytes;
+        int dtBytes = model.getLastNumBytes();
+		dtBytes = ((maxBytes > 0) && (dtBytes > maxBytes)) ? maxBytes : dtBytes;
 
 		int size;
 		try {
-			size = requestDtSize(provider, dt.getName(), dtBytes, maxDtBytes);
+			size = requestDtSize(provider, dt.getName(), dtBytes, maxBytes);
 		}
 		catch (CancelledException e) {
 			return null;
@@ -234,9 +233,8 @@ public class DataTypeHelper {
 	}
 
 	static public DataType getBaseType(DataType dt) {
-		DataType testTypeDefDt = dt;
-		if (testTypeDefDt instanceof TypeDef) {
-			return ((TypeDef) testTypeDefDt).getBaseDataType();
+        if (dt instanceof TypeDef) {
+			return ((TypeDef) dt).getBaseDataType();
 		}
 		if (dt instanceof Array) {
 			return ((Array) dt).getDataType();

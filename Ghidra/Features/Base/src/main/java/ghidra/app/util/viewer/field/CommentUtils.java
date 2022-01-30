@@ -114,8 +114,7 @@ public class CommentUtils {
 		//            but seemed unnecessary.  Refer to the history if needed.
 		AttributedString prototype = createPrototype();
 		FieldElement element = parseTextForAnnotations(rawCommentText, program, prototype, 0);
-		String displayText = element.getText();
-		return displayText;
+        return element.getText();
 	}
 
 	/**

@@ -164,8 +164,7 @@ public class IntelHexRecord {
 			accum += t;
 		}
 		final int lowest = accum & 0xff;
-		final int chk = (0x100 - lowest) & 0xff;
-		return chk;
+        return (0x100 - lowest) & 0xff;
 	}
 
 	public int getRecordLength() {

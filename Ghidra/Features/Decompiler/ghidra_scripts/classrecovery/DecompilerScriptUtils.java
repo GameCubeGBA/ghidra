@@ -263,9 +263,7 @@ public class DecompilerScriptUtils {
 
 		long offset = defInputAddress.getOffset();
 
-		Address calledAddress = program.getMinAddress().getNewAddress(offset);
-
-		return calledAddress;
+        return program.getMinAddress().getNewAddress(offset);
 	}
 
 	/**

@@ -529,8 +529,7 @@ public class ImporterDialog extends DialogComponentProvider {
 
 	private boolean isFilenameTooLong() {
 		int maxNameLen = tool.getProject().getProjectData().getMaxNameLength();
-		String fullPath = getName();
-		String currentPath = fullPath;
+        String currentPath = getName();
 		while (!StringUtils.isBlank(currentPath)) {
 			String filename = FilenameUtils.getName(currentPath);
 			if (filename.isEmpty()) {

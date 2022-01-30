@@ -713,9 +713,8 @@ public abstract class AbstractCodeBrowserPlugin<P extends CodeViewerProvider> ex
 	public boolean goToField(Address a, String fieldName, int occurrence, int row, int col,
 			boolean scroll) {
 
-		boolean result = SystemUtilities
-				.runSwingNow(() -> doGoToField(a, fieldName, occurrence, row, col, scroll));
-		return result;
+        return SystemUtilities
+                .runSwingNow(() -> doGoToField(a, fieldName, occurrence, row, col, scroll));
 	}
 
 	private boolean doGoToField(Address a, String fieldName, int occurrence, int row, int col,

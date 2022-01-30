@@ -576,9 +576,7 @@ public class KeyBindingUtilsTest extends AbstractGhidraHeadedIntegrationTest {
 		// export the data, which causes a file chooser to be shown
 		executeOnSwingWithoutBlocking(() -> KeyBindingUtils.exportKeyBindings(options));
 
-		File selectedFile = findAndTestFileChooser(null, TEST_FILENAME);
-
-		return selectedFile;
+        return findAndTestFileChooser(null, TEST_FILENAME);
 	}
 
 	// locates the open file chooser and verifies its state

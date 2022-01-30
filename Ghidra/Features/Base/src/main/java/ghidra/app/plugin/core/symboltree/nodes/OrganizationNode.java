@@ -433,12 +433,10 @@ public class OrganizationNode extends SymbolTreeNode {
 				// we want to use this org node's compareTo() method, so, flip the comparison 
 				// and then negate the result so that the sorting is the same as if we had
 				// not flipped the comparison.
-				int result = -g2.compareTo(g1);
-				return result;
+                return -g2.compareTo(g1);
 			}
 
-			int result = g1.compareTo(g2);
-			return result;
+            return g1.compareTo(g2);
 		}
 	}
 

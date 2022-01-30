@@ -99,8 +99,7 @@ public class ListLinked<T> {
 		LinkedNode newNode = new LinkedNode(terminal.previousNode,terminal,o);
 		terminal.previousNode.nextNode = newNode;
 		terminal.previousNode = newNode;
-		LinkedIterator iter = new LinkedIterator(newNode);
-		return iter;	
+        return new LinkedIterator(newNode);
 	}
 
 	/**
@@ -150,8 +149,7 @@ public class ListLinked<T> {
 	 * @return an iterator over this linked list
 	 */
 	public Iterator<T> iterator() {
-		LinkedIterator iter = new LinkedIterator(terminal);			// Build starting iterator
-		return iter;	
+        return new LinkedIterator(terminal);
 	}
 	
 	/**

@@ -62,17 +62,14 @@ public class ViewManagerComponentProvider extends ComponentProviderAdapter
 		// This provider used to be name ViewManagerPlugin and owned by ViewManagerPlugin so 
 		// register owner/name change
 		String oldOwner = "ViewManagerPlugin";
-		String oldName = oldOwner;
-		String currentOwner = "ProgramTreePlugin";
-		String intermediateName = currentOwner;
-		ComponentProvider.registerProviderNameOwnerChange(oldName, oldOwner, intermediateName,
+        String currentOwner = "ProgramTreePlugin";
+        ComponentProvider.registerProviderNameOwnerChange(oldOwner, oldOwner, currentOwner,
 			currentOwner);
 
 		// note: it was a mistake above to name the provider the same as the owner; this update
 		// fixes that
-		String currentName = NAME;
-		ComponentProvider.registerProviderNameOwnerChange(intermediateName, currentOwner,
-			currentName, currentOwner);
+        ComponentProvider.registerProviderNameOwnerChange(currentOwner, currentOwner,
+                NAME, currentOwner);
 	}
 
 	void serviceAdded(ViewProviderService service) {

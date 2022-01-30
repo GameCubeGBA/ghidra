@@ -449,9 +449,8 @@ public class DataTypeMarkupItemTest extends AbstractVTMarkupItemTest {
 			List<VTMarkupItem> items =
 				DataTypeMarkupType.INSTANCE.createMarkupItems(match.getAssociation());
 			assertTrue("Did not find any data type markup items", (items.size() >= 1));
-			VTMarkupItem item = items.get(0);
 
-			return item;
+            return items.get(0);
 		}
 
 		@Override

@@ -36,15 +36,12 @@ public class Callout {
 		// Callout Size
 		//
 		Dimension cSize = calloutInfo.getSize();
-		int newHeight = cSize.height * 4;
-		int calloutHeight = newHeight;
-		int calloutWidth = calloutHeight; // square
 
-		//
+        //
 		// Callout Distance (from original component)
 		//
-		double xDistance = calloutWidth * distanceFactor * .80;
-		double yDistance = calloutHeight * distanceFactor * distanceFactor;
+		double xDistance = cSize.height * 4 * distanceFactor * .80;
+		double yDistance = cSize.height * 4 * distanceFactor * distanceFactor;
 
 		// only pad if the callout leaves the bounds of the parent image
 		int padding = 0;
@@ -52,7 +49,7 @@ public class Callout {
 		Point cLoc = cBounds.getLocation();
 		if (yDistance > cLoc.y) {
 			// need some padding!
-			padding = (int) Math.round(calloutHeight * distanceFactor);
+			padding = (int) Math.round(cSize.height * 4 * distanceFactor);
 			cLoc.y += padding;
 			cBounds.setLocation(cLoc.x, cLoc.y); // move y down by the padding
 		}
@@ -69,19 +66,15 @@ public class Callout {
 		//
 		// Callout Bounds
 		//
-		int calloutX = (int) (cLoc.x + (goLeft ? -(xDistance + calloutWidth) : xDistance));
+		int calloutX = (int) (cLoc.x + (goLeft ? -(xDistance + cSize.height * 4) : xDistance));
 		int calloutY = (int) (cLoc.y + -yDistance);
-		int backgroundWidth = calloutWidth;
-		int backgroundHeight = backgroundWidth; // square
-		Rectangle calloutBounds =
-			new Rectangle(calloutX, calloutY, backgroundWidth, backgroundHeight);
+        Rectangle calloutBounds =
+			new Rectangle(calloutX, calloutY, cSize.height * 4, cSize.height * 4);
 
 		//
 		// Full Callout Shape Bounds
 		//
 		Rectangle fullBounds = cBounds.union(calloutBounds);
-		BufferedImage calloutImage =
-			createCalloutImage(calloutInfo, cLoc, calloutBounds, fullBounds);
 
 //		DropShadow dropShadow = new DropShadow();
 //		Image shadow = dropShadow.createDrowShadow(calloutImage, 40);
@@ -90,7 +83,7 @@ public class Callout {
 		// Create our final image and draw into it the callout image and its shadow
 		//
 
-		return calloutImage;
+		return createCalloutImage(calloutInfo, cLoc, calloutBounds, fullBounds);
 
 //		int width = Math.max(shadow.getWidth(null), calloutImage.getWidth());
 //		int height = Math.max(shadow.getHeight(null), calloutImage.getHeight());
@@ -135,18 +128,15 @@ public class Callout {
 		// Callout Size
 		//
 		Dimension cSize = calloutInfo.getSize();
-		int newHeight = cSize.height * 6;
-		int calloutHeight = newHeight;
-		int calloutWidth = calloutHeight; // square
 
-		//
+        //
 		// Callout Distance (from original component).  This is the location (relative to 
 		// the original component) of the callout image (not the full shape).  So, if the
 		// x distance was 10, then the callout image would start 10 pixels to the right of 
 		// the component.
 		//
-		double distanceX = calloutWidth * 1.5;
-		double distanceY = calloutHeight * 2;
+		double distanceX = cSize.height * 6 * 1.5;
+		double distanceY = cSize.height * 6 * 2;
 
 		// only pad if the callout leaves the bounds of the parent image
 		int topPadding = 0;
@@ -176,10 +166,8 @@ public class Callout {
 		int calloutX = (int) (componentLocation.x + (Math.cos(theta) * distanceX));
 		int calloutY = (int) (componentLocation.y - (Math.sin(theta) * distanceY));
 
-		int backgroundWidth = calloutWidth;
-		int backgroundHeight = backgroundWidth; // square
-		Rectangle calloutBounds =
-			new Rectangle(calloutX, calloutY, backgroundWidth, backgroundHeight);
+        Rectangle calloutBounds =
+			new Rectangle(calloutX, calloutY, cSize.height * 6, cSize.height * 6);
 
 		//
 		// Full Callout Shape Bounds (this does not include the drop-shadow)

@@ -115,95 +115,94 @@ public enum FlowOverride {
 	 */
 	public static FlowType getModifiedFlowType(FlowType originalFlowType,
 			FlowOverride flowOverride) {
-		FlowType flowType = originalFlowType;
-		if (flowOverride == FlowOverride.NONE ||
-			!flowType.isJump() && !flowType.isTerminal() && !flowType.isCall()) {
-			return flowType;
+        if (flowOverride == FlowOverride.NONE ||
+			!originalFlowType.isJump() && !originalFlowType.isTerminal() && !originalFlowType.isCall()) {
+			return originalFlowType;
 		}
 		// NOTE: The following flow-type overrides assume that a return will always 
 		// be the last flow pcode-op - since it is the first primary flow pcode-op
 		// that will get replaced.
 		if (flowOverride == FlowOverride.BRANCH) {
-			if (flowType.isJump()) {
-				return flowType;
+			if (originalFlowType.isJump()) {
+				return originalFlowType;
 			}
-			if (flowType.isConditional()) {
+			if (originalFlowType.isConditional()) {
 				// assume that we will never start with a complex flow with terminator
 				// i.e., CONDITIONAL-JUMP-TERMINATOR
-				if (flowType.isTerminal()) {
+				if (originalFlowType.isTerminal()) {
 					// assume return replaced
 					return RefType.CONDITIONAL_COMPUTED_JUMP;
 				}
 				return RefType.CONDITIONAL_JUMP;
 			}
-			if (flowType.isComputed()) {
+			if (originalFlowType.isComputed()) {
 				return RefType.COMPUTED_JUMP;
 			}
-			if (flowType.isTerminal()) {
+			if (originalFlowType.isTerminal()) {
 				// assume return replaced
 				return RefType.COMPUTED_JUMP;
 			}
 			return RefType.UNCONDITIONAL_JUMP;
 		}
 		else if (flowOverride == FlowOverride.CALL) {
-			if (flowType.isCall()) {
-				return flowType;
+			if (originalFlowType.isCall()) {
+				return originalFlowType;
 			}
-			if (flowType.isConditional()) {
-				if (flowType.isTerminal() && (flowType.isCall() || flowType.isJump())) {
+			if (originalFlowType.isConditional()) {
+				if (originalFlowType.isTerminal() && (originalFlowType.isCall() || originalFlowType.isJump())) {
 					// assume original return was preserved
 					return RefType.CONDITIONAL_CALL_TERMINATOR;
 				}
-				if (flowType.isTerminal()) {
+				if (originalFlowType.isTerminal()) {
 					// assume return was replaced
 					return RefType.CONDITIONAL_COMPUTED_CALL;
 				}
 				return RefType.CONDITIONAL_CALL;
 			}
-			if (flowType.isComputed()) {
-				if (flowType.isTerminal() && (flowType.isCall() || flowType.isJump())) {
+			if (originalFlowType.isComputed()) {
+				if (originalFlowType.isTerminal() && (originalFlowType.isCall() || originalFlowType.isJump())) {
 					// assume original return was preserved
 					return RefType.COMPUTED_CALL_TERMINATOR;
 				}
 				return RefType.COMPUTED_CALL;
 			}
-			if (flowType.isTerminal() && (flowType.isCall() || flowType.isJump())) {
+			if (originalFlowType.isTerminal() && (originalFlowType.isCall() || originalFlowType.isJump())) {
 				// assume original return was preserved
 				return RefType.CALL_TERMINATOR;
 			}
-			if (flowType.isTerminal()) {
+			if (originalFlowType.isTerminal()) {
 				// assume return was replaced
 				return RefType.COMPUTED_CALL;
 			}
 			return RefType.UNCONDITIONAL_CALL;
 		}
 		else if (flowOverride == FlowOverride.CALL_RETURN) {
-			if (flowType.isConditional()) {
-				if (flowType.isComputed()) {
+			if (originalFlowType.isConditional()) {
+				if (originalFlowType.isComputed()) {
 					return RefType.CONDITIONAL_COMPUTED_CALL;
 				}
-				if (flowType.isTerminal()) {
+				if (originalFlowType.isTerminal()) {
 					// assume return was replaced
 					return RefType.COMPUTED_CALL_TERMINATOR;
 				}
-				return flowType;  // don't replace
+				return originalFlowType;  // don't replace
 			}
-			if (flowType.isComputed()) {
+			if (originalFlowType.isComputed()) {
 				return RefType.COMPUTED_CALL_TERMINATOR;
 			}
-			if (flowType.isTerminal()) {
+			if (originalFlowType.isTerminal()) {
 				// assume return was replaced
 				return RefType.COMPUTED_CALL_TERMINATOR;
 			}
 			return RefType.CALL_TERMINATOR;
 		}
 		else if (flowOverride == FlowOverride.RETURN) {
-			if (flowType.isConditional()) {
+			if (originalFlowType.isConditional()) {
 				return RefType.CONDITIONAL_TERMINATOR;
 			}
 			return RefType.TERMINATOR;
 		}
-		return flowType;
+		return originalFlowType;
 	}
 
 }

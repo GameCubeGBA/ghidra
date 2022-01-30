@@ -972,12 +972,10 @@ public class DataTypeMergeManager implements MergeResolver {
 			}
 
 			if (resolvedBaseDt != null) {
-				TypedefDataType typedefDataType =
-					new TypedefDataType(originalTypeDef.getCategoryPath(),
-						originalTypeDef.getName(), resolvedBaseDt, originalTypeDef.getUniversalID(),
-						resultSourceArchive, originalTypeDef.getLastChangeTime(),
-						originalTypeDef.getLastChangeTimeInSourceArchive(), dtms[RESULT]);
-				return typedefDataType;
+                return new TypedefDataType(originalTypeDef.getCategoryPath(),
+                    originalTypeDef.getName(), resolvedBaseDt, originalTypeDef.getUniversalID(),
+                    resultSourceArchive, originalTypeDef.getLastChangeTime(),
+                    originalTypeDef.getLastChangeTimeInSourceArchive(), dtms[RESULT]);
 			}
 		}
 		return null;

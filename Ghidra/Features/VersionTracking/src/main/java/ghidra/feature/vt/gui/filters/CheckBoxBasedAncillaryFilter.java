@@ -94,9 +94,8 @@ public abstract class CheckBoxBasedAncillaryFilter<T> extends AncillaryFilter<T>
 
 	private LayoutManager createLayoutManager() {
 		int maxColumnThreshold = 7;
-		LayoutManager manager = checkBoxInfos.size() <= maxColumnThreshold ? new VerticalLayout(1)
-				: new ColumnLayout(1, 1, 2);
-		return manager;
+        return checkBoxInfos.size() <= maxColumnThreshold ? new VerticalLayout(1)
+                : new ColumnLayout(1, 1, 2);
 	}
 
 	private void addCheckBoxes(Container container) {

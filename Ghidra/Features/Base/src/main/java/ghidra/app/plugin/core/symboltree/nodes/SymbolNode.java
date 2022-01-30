@@ -176,8 +176,7 @@ public class SymbolNode extends SymbolTreeNode {
 	public static SymbolNode createKeyNode(Symbol symbol, String searchSymbolName,
 			Program program) {
 
-		SymbolNode newNode = new SearchKeySymbolNode(program, symbol, searchSymbolName);
-		return newNode;
+        return new SearchKeySymbolNode(program, symbol, searchSymbolName);
 	}
 
 	public static SymbolNode createNode(Symbol symbol, Program program) {
@@ -277,11 +276,9 @@ public class SymbolNode extends SymbolTreeNode {
 
 		SymbolNode node = (SymbolNode) o;
 		if (symbol != null) {
-			boolean symbolEquals = symbol.equals(node.symbol);
-			return symbolEquals;
+            return symbol.equals(node.symbol);
 		}
-		boolean nameEquals = getName().equals(node.getName());
-		return nameEquals;
+        return getName().equals(node.getName());
 	}
 
 	// overridden to handle duplicate symbols
@@ -306,7 +303,6 @@ public class SymbolNode extends SymbolTreeNode {
 
 		// next, when the names are the same, provide a consistent order via address and symbol
 		SymbolNode other = (SymbolNode) node;
-		int result = SYMBOL_COMPARATOR.compare(symbol, other.symbol);
-		return result;
+        return SYMBOL_COMPARATOR.compare(symbol, other.symbol);
 	}
 }

@@ -418,8 +418,7 @@ public class TableChooserDialogTest extends AbstractGhidraHeadedIntegrationTest 
 	}
 
 	private JButton getToolBarButton(Icon icon) {
-		JButton button = findButtonByIcon(dialog.getComponent(), icon);
-		return button;
+        return findButtonByIcon(dialog.getComponent(), icon);
 	}
 
 	private void assertRowCount(int expected) {
@@ -542,8 +541,7 @@ public class TableChooserDialogTest extends AbstractGhidraHeadedIntegrationTest 
 				return v;
 			});
 
-			boolean result = testDecision.decide(rowObject);
-			return result;
+            return testDecision.decide(rowObject);
 		}
 
 		boolean wasExecuted(AddressableRowObject rowObject) {

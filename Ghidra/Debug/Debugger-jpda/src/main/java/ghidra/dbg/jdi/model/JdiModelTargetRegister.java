@@ -87,9 +87,7 @@ public class JdiModelTargetRegister extends JdiModelTargetObjectImpl implements 
 		), "Initialized");
 		setModified(!addr.equals(oldval));
 
-		byte[] bytes =
-			ConversionUtils.bigIntegerToBytes(getBitLength() / 8, addr.getOffsetAsBigInteger());
-		return bytes;
+        return ConversionUtils.bigIntegerToBytes(getBitLength() / 8, addr.getOffsetAsBigInteger());
 	}
 
 }

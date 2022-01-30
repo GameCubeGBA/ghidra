@@ -367,13 +367,12 @@ public final class ObjectiveC1_TypeEncodings {
 				if (struct.getLength() == 0) {
 					struct.add(DataType.DEFAULT);
 				}
-				DataType dt = checkForExistingAnonymousEquivalent(struct);
 				/*
 				if (dt.getLength() == 0) {
 					return PointerDataType.getPointer(dt, pointerSize); 
 				}
 				*/
-				return dt;
+				return checkForExistingAnonymousEquivalent(struct);
 			}
 			case _C_VECTOR: {
 				throw new UnsupportedOperationException("vector not supported");

@@ -37,9 +37,8 @@ public class ElfScalarOperandAnalyzer extends ScalarOperandAnalyzer {
 
 	@Override
 	public boolean canAnalyze(Program program) {
-		boolean elf = isELF(program);
 
-		return elf;
+        return isELF(program);
 	}
 
 	@Override

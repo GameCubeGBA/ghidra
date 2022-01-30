@@ -187,9 +187,8 @@ public class SplashScreenTest extends AbstractDockingTest {
 	}
 
 	private SplashScreen getSplash() {
-		SplashScreen splash = runSwing(() -> {
-			return (SplashScreen) getInstanceField("splashWindow", SplashScreen.class);
-		});
-		return splash;
+        return runSwing(() -> {
+            return (SplashScreen) getInstanceField("splashWindow", SplashScreen.class);
+        });
 	}
 }

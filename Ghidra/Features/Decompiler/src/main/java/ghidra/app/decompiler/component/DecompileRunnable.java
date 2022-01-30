@@ -56,8 +56,7 @@ class DecompileRunnable implements SwingRunnable {
 	public boolean update(DecompileRunnable newRunnable) {
 
 		ProgramLocation newLocation = newRunnable.location;
-		Program newProgram = newRunnable.program;
-		if (!matches(newProgram, newLocation)) {
+        if (!matches(newRunnable.program, newLocation)) {
 			return false;
 		}
 

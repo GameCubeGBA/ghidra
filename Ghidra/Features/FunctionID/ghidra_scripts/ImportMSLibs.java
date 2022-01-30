@@ -187,8 +187,7 @@ public class ImportMSLibs extends GhidraScript {
 	}
 
 	private String[] splitPreferredName(String preferredName) {
-		String[] splits = preferredName.split("[/\\\\]");
-		return splits;
+        return preferredName.split("[/\\\\]");
 	}
 
 //	private DomainFolder formLibraryPath(DomainFolder root, String directoryPath, File file)

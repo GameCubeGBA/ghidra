@@ -206,8 +206,7 @@ public class DiffController {
 	 */
 	boolean apply(AddressSetView p1AddressSet, TaskMonitor monitor) throws MemoryAccessException,
 			CancelledException {
-		boolean applied = mergeEngine.merge(p1AddressSet, monitor);
-		return applied;
+        return mergeEngine.merge(p1AddressSet, monitor);
 	}
 
 	/**

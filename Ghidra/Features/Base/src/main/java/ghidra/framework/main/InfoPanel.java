@@ -107,15 +107,14 @@ class InfoPanel extends JPanel {
 		if (view == null) {
 			// must not be HTML content in the splash screen text (this shouldn't 
 			// happen, but let's just protect against this anyway).
-			JLabel label = new GDLabel(content) {
-				@Override
-				public Dimension getPreferredSize() {
-					Dimension preferredSize = super.getPreferredSize();
-					preferredSize.width = desiredTextViewWidth;
-					return preferredSize;
-				}
-			};
-			return label;
+            return new GDLabel(content) {
+                @Override
+                public Dimension getPreferredSize() {
+                    Dimension preferredSize = super.getPreferredSize();
+                    preferredSize.width = desiredTextViewWidth;
+                    return preferredSize;
+                }
+            };
 		}
 
 		view.setSize(desiredTextViewWidth, 0);

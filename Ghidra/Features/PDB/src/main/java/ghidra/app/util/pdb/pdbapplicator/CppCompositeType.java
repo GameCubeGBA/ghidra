@@ -605,8 +605,7 @@ public class CppCompositeType {
 		else {
 			initialLayoutDetermination = ObjectOrientedClassLayout.COMPLEX;
 		}
-		ObjectOrientedClassLayout classLayoutOption = layoutOptions;
-		return classLayoutOption.compareTo(initialLayoutDetermination) >= 0 ? classLayoutOption
+        return layoutOptions.compareTo(initialLayoutDetermination) >= 0 ? layoutOptions
 				: initialLayoutDetermination;
 	}
 

@@ -122,8 +122,7 @@ public abstract class AbstractProgramBasedTest extends AbstractGhidraHeadedInteg
 	}
 
 	public AddressRange range(long from, long to) {
-		AddressRangeImpl range = new AddressRangeImpl(addr(from), addr(to));
-		return range;
+        return new AddressRangeImpl(addr(from), addr(to));
 	}
 
 	public void showProvider(String name) {
@@ -132,8 +131,7 @@ public abstract class AbstractProgramBasedTest extends AbstractGhidraHeadedInteg
 
 	public Function function(Address addr) {
 		FunctionManager fm = program.getFunctionManager();
-		Function f = fm.getFunctionContaining(addr);
-		return f;
+        return fm.getFunctionContaining(addr);
 	}
 
 	public List<Address> addrs(long... offsets) {
@@ -146,8 +144,7 @@ public abstract class AbstractProgramBasedTest extends AbstractGhidraHeadedInteg
 
 	public AddressSet toAddressSet(long... offsets) {
 		List<Address> list = addrs(offsets);
-		AddressSet addrs = toAddressSet(list);
-		return addrs;
+        return toAddressSet(list);
 	}
 
 	public List<Address> addrs(Address... addrs) {

@@ -41,8 +41,7 @@ public class DecompilerFieldAccess extends DecompilerVariable {
 	@Override
 	public DataType getParentDataType() {
 		ClangFieldToken field = (ClangFieldToken) variable;
-		DataType dt = field.getDataType();
-		return dt;
+        return field.getDataType();
 	}
 
 	@Override

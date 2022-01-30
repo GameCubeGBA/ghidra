@@ -229,10 +229,9 @@ public class RttiUtil {
 
 		@Override
 		public void accept(Address foundAddress) {
-			Address mangledClassNameAddress = foundAddress;
 
-			Address pointerToTypeInfoVftable =
-				mangledClassNameAddress.subtract(2 * defaultPointerSize);
+            Address pointerToTypeInfoVftable =
+				foundAddress.subtract(2 * defaultPointerSize);
 
 			Address possibleVftableAddress =
 				MSDataTypeUtils.getAbsoluteAddress(program, pointerToTypeInfoVftable);

@@ -141,8 +141,7 @@ public class GTreeState {
 	 * @return the top few paths that are visible in the view.
 	 */
 	public TreePath[] getViewPaths() {
-		TreePath[] arrrr = viewPaths.toArray(new TreePath[viewPaths.size()]);
-		return arrrr;
+        return viewPaths.toArray(new TreePath[viewPaths.size()]);
 	}
 
 	public void updateStateForMovedNodes() {

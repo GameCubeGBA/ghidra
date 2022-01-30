@@ -139,9 +139,8 @@ public class EHESTypeListModel extends AbstractCreateDataTypeModel {
 	 */
 	public EHCatchHandlerModel getCatchHandlerModel() throws InvalidDataTypeException {
 		checkValidity();
-		EHCatchHandlerModel catchHandlerModel = new EHCatchHandlerModel(getProgram(),
-			getHandlerTypeCount(), getHandlerTypeMapAddress(), validationOptions);
-		return catchHandlerModel;
+        return new EHCatchHandlerModel(getProgram(),
+            getHandlerTypeCount(), getHandlerTypeMapAddress(), validationOptions);
 	}
 
 	/**

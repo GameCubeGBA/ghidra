@@ -161,7 +161,6 @@ public class GraphNavigator<V, E extends GEdge<V>> {
 	 * @return the ordered vertices
 	 */
 	public List<V> getVerticesInPostOrder(GDirectedGraph<V, E> graph) {
-		List<V> postOrder = asList(GraphAlgorithms.getVerticesInPostOrder(graph, this));
-		return postOrder;
+        return asList(GraphAlgorithms.getVerticesInPostOrder(graph, this));
 	}
 }

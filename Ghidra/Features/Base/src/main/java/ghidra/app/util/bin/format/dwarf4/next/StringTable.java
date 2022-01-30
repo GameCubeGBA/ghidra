@@ -77,10 +77,8 @@ public class StringTable {
 			throw new IOException("Invalid offset requested " + offset);
 		}
 
-		String tmp = new String(bytes, (int) offset, getNullTermStringLen(bytes, (int) offset),
-			StandardCharsets.UTF_8);
-
-		return tmp;
+        return new String(bytes, (int) offset, getNullTermStringLen(bytes, (int) offset),
+            StandardCharsets.UTF_8);
 	}
 
 	private static final int getNullTermStringLen(byte[] bytes, int startOffset) {

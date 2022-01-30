@@ -506,10 +506,8 @@ public abstract class PcodeCompile {
 			}
 			specialoff = new ConstTpl(const_type.real, basevn.getOffset().getReal() + plus);
 		}
-		VarnodeTpl res =
-			new VarnodeTpl(loc, basevn.getSpace(), specialoff, new ConstTpl(const_type.real,
-				numbytes));
-		return res;
+        return new VarnodeTpl(loc, basevn.getSpace(), specialoff, new ConstTpl(const_type.real,
+            numbytes));
 	}
 
 	// Take output of res expression, combine with constant,
@@ -619,18 +617,16 @@ public abstract class PcodeCompile {
 		if ((errmsg.length() == 0) && (bitoffset == 0) && (!maskneeded)) {
 			if ((vn.getSpace().getType() == ConstTpl.const_type.handle) && vn.isZeroSize()) {
 				vn.setSize(new ConstTpl(ConstTpl.const_type.real, finalsize));
-				ExprTree res = new ExprTree(sym.getLocation(), vn);
-				// VarnodeTpl *cruft = buildTemporary();
+                // VarnodeTpl *cruft = buildTemporary();
 				// delete cruft;
-				return res;
+				return new ExprTree(sym.getLocation(), vn);
 			}
 		}
 
 		if (errmsg.length() == 0) {
 			VarnodeTpl truncvn = buildTruncatedVarnode(location, vn, bitoffset, numbits);
 			if (truncvn != null) {		// If we are able to construct a simple truncated varnode
-				ExprTree res = new ExprTree(location, truncvn);		// Return just the varnode as an expression
-				return res;
+                return new ExprTree(location, truncvn);
 			}
 		}
 

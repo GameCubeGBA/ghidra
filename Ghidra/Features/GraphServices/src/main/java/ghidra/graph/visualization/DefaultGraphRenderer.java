@@ -308,8 +308,7 @@ public class DefaultGraphRenderer implements GraphRenderer {
 			ImageUtils.createScaledImage(bufferedImage, iconWidth * ICON_ZOOM,
 				iconHeight * ICON_ZOOM,
 				Image.SCALE_FAST);
-		ImageIcon imageIcon = new ImageIcon(scaledImage);
-		return imageIcon;
+        return new ImageIcon(scaledImage);
 
 	}
 

@@ -32,8 +32,7 @@ public class MDFunctionInfo extends MDTypeInfo {
 
 	public MDFunctionInfo(MDMang dmang) {
 		super(dmang);
-		MDFunctionType functionType = new MDFunctionType(dmang);
-		mdtype = functionType;
+        mdtype = new MDFunctionType(dmang);
 	}
 
 	@Override

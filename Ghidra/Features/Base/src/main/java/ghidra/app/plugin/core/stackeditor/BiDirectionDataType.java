@@ -628,8 +628,7 @@ public abstract class BiDirectionDataType extends StructureDataType
 		checkAncestry(dataType);
 		dataType = dataType.clone(getDataTypeManager());
 		DataTypeComponent origDtc = getComponentAt(offset);
-		DataTypeComponent newDtc = replace(origDtc, dataType, length, newName, comment);
-		return newDtc;
+        return replace(origDtc, dataType, length, newName, comment);
 	}
 
 	/**

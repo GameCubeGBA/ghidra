@@ -780,8 +780,7 @@ public class VTSubToolManager implements VTControllerListener, OptionsChangeList
 		}
 		FieldSelection selection = service.getFieldPanel().getSelection();
 		AddressIndexMap addressIndexMap = service.getListingPanel().getAddressIndexMap();
-		AddressSet addressSet = addressIndexMap.getAddressSet(selection);
-		return addressSet;
+        return addressIndexMap.getAddressSet(selection);
 	}
 
 	/**

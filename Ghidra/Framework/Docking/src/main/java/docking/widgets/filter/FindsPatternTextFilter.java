@@ -29,8 +29,7 @@ public class FindsPatternTextFilter extends AbstractPatternTextFilter {
 	@Override
 	protected Pattern createPattern() {
 		try {
-			Pattern pattern = Pattern.compile(filterText, Pattern.DOTALL);
-			return pattern;
+            return Pattern.compile(filterText, Pattern.DOTALL);
 		}
 		catch (Exception e) {
 			// This can happen as the user is typing their regex; not sure what else we can do.
@@ -63,8 +62,7 @@ public class FindsPatternTextFilter extends AbstractPatternTextFilter {
 
 		// only allow simple globbing characters (in order to avoid complex things like look ahead
 		// and look behind
-		boolean isSubFilter = areAllCharactersSimpleEnough(child.substring(parent.length()));
-		return isSubFilter;
+        return areAllCharactersSimpleEnough(child.substring(parent.length()));
 	}
 
 	// Note: this choice of characters is seriously arbitrary, decided through manual testing.  If

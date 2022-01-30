@@ -186,9 +186,8 @@ public class VisualGraphSatelliteTranslatingGraphMousePlugin<V extends VisualVer
 		Rectangle lensBounds =
 			moveRectangleCompletelyOntoOtherRectangle(bounds, satelliteBounds.getBounds());
 
-		Point lensPointRelativeToSatellite = SwingUtilities.convertPoint(
-			satelliteViewer.getParent(), lensBounds.getLocation(), satelliteViewer);
-		return lensPointRelativeToSatellite;
+        return SwingUtilities.convertPoint(
+            satelliteViewer.getParent(), lensBounds.getLocation(), satelliteViewer);
 	}
 
 	private Rectangle moveRectangleCompletelyOntoOtherRectangle(Rectangle moveeRectangle,

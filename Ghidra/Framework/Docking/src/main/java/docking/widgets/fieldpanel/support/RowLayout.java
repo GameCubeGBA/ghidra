@@ -75,8 +75,7 @@ public class RowLayout implements Layout {
 		// Notes: we have to account for any offset for fields that are disabled and are in
 		//        the beginning of the row.
 		//
-		int startX = fields[0].getStartX();
-		int rowWidth = startX;
+        int rowWidth = fields[0].getStartX();
 
 		for (int i = 0; i < fields.length - 1; i++) {
 			Field field = fields[i];
@@ -330,11 +329,10 @@ public class RowLayout implements Layout {
 		cursorLoc.fieldNum = index;
 		Field field = fields[index];
 
-		int x = lastX;
-		y = fromTop ? -field.getHeightAbove() : field.getHeightBelow() - 1;
+        y = fromTop ? -field.getHeightAbove() : field.getHeightBelow() - 1;
 
 		cursorLoc.row = field.getRow(y);
-		cursorLoc.col = field.getCol(cursorLoc.row, x);
+		cursorLoc.col = field.getCol(cursorLoc.row, lastX);
 		lastCursorY = y;
 		return true;
 

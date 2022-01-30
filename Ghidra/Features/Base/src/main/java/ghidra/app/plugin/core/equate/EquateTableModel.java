@@ -179,8 +179,7 @@ class EquateTableModel extends GDynamicColumnTableModel<Equate, Object> {
 				if (enoom == null) {
 					return null;
 				}
-				String tooltip = ToolTipUtils.getToolTipText(enoom);
-				return tooltip;
+                return ToolTipUtils.getToolTipText(enoom);
 			}
 
 		};

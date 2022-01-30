@@ -188,8 +188,7 @@ public final class ObjectiveC1_Utilities {
 	public static Data createPointer(Program program, Address address) {
 		try {
 			program.getListing().createData(address, new PointerDataType());
-			Data data = program.getListing().getDefinedDataAt(address);
-			return data;
+            return program.getListing().getDefinedDataAt(address);
 		}
 		catch (Exception e) {
 		}

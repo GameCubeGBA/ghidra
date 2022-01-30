@@ -522,15 +522,13 @@ public class NewProjectWizardTest extends AbstractGhidraHeadedIntegrationTest {
 		JTextField dirField = (JTextField) findComponentByName(projectPanel, "Project Directory");
 		JTextField projectField = (JTextField) findComponentByName(projectPanel, "Project Name");
 
-		String message = "Finish button did not become enabled - status message: " + statusMessage +
-			".\n\tDirectory: " + dirField.getText() + "\n\tProject name: " + projectField.getText();
-		return message;
+        return "Finish button did not become enabled - status message: " + statusMessage +
+            ".\n\tDirectory: " + dirField.getText() + "\n\tProject name: " + projectField.getText();
 	}
 
 	private DockingActionIf getAction(String actionName) {
 
-		DockingActionIf action = getAction(frontEndTool, "FrontEndPlugin", actionName);
-		return action;
+        return getAction(frontEndTool, "FrontEndPlugin", actionName);
 	}
 
 	private void startServer() throws Exception {

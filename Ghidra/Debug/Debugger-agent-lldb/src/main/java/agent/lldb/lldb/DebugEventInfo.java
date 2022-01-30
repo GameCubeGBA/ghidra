@@ -38,19 +38,13 @@ public class DebugEventInfo {
 
 	public BitmaskSet<?> getFlags() {
 		if (SBTarget.EventIsTargetEvent(event)) {
-			BitmaskSet<DebugClient.ChangeSessionState> flags =
-				new BitmaskSet<>(DebugClient.ChangeSessionState.class, event.GetType());
-			return flags;
+            return new BitmaskSet<>(DebugClient.ChangeSessionState.class, event.GetType());
 		}
 		if (SBProcess.EventIsProcessEvent(event)) {
-			BitmaskSet<DebugClient.ChangeProcessState> flags =
-				new BitmaskSet<>(DebugClient.ChangeProcessState.class, event.GetType());
-			return flags;
+            return new BitmaskSet<>(DebugClient.ChangeProcessState.class, event.GetType());
 		}
 		if (SBThread.EventIsThreadEvent(event)) {
-			BitmaskSet<DebugClient.ChangeThreadState> flags =
-				new BitmaskSet<>(DebugClient.ChangeThreadState.class, event.GetType());
-			return flags;
+            return new BitmaskSet<>(DebugClient.ChangeThreadState.class, event.GetType());
 		}
 		return null;
 	}

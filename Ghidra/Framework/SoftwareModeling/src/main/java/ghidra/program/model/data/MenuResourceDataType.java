@@ -69,12 +69,11 @@ public class MenuResourceDataType extends DynamicDataType {
 		List<DataTypeComponent> comps = new ArrayList<>();
 		int tempOffset = 0;
 		boolean lastMenuItem = false;
-		MemBuffer memBuffer = mbIn;
-		short option;
+        short option;
 
 		try {
 			//add the header structure
-			tempOffset = addMenuItemTemplateHeaderStructure(memBuffer, comps, tempOffset);
+			tempOffset = addMenuItemTemplateHeaderStructure(mbIn, comps, tempOffset);
 			if (tempOffset < 0) {
 				return null;
 			}
@@ -82,8 +81,8 @@ public class MenuResourceDataType extends DynamicDataType {
 			//loop through menu items and add them
 			boolean lastItem = false;
 			while (!lastItem) {
-				option = memBuffer.getShort(tempOffset);
-				tempOffset = addMenuItemTemplate(memBuffer, comps, tempOffset, option);
+				option = mbIn.getShort(tempOffset);
+				tempOffset = addMenuItemTemplate(mbIn, comps, tempOffset, option);
 				//last item in a menu
 				if (option == MF_END) {
 					if (lastMenuItem == true) {
@@ -100,9 +99,7 @@ public class MenuResourceDataType extends DynamicDataType {
 			Msg.error(this, "buffer error: " + e.getMessage(), e);
 		}
 
-		DataTypeComponent[] result = comps.toArray(new DataTypeComponent[comps.size()]);
-
-		return result;
+        return comps.toArray(new DataTypeComponent[comps.size()]);
 	}
 
 	//adds initial MENUITEM_TEMPLATE_HEADER structure

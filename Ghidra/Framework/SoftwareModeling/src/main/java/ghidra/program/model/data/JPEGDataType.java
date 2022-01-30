@@ -56,8 +56,7 @@ public class JPEGDataType extends BuiltIn implements Dynamic, Resource {
 				new MemBufferImageInputStream(buf, ByteOrder.BIG_ENDIAN);
 			BufferedImage image = ImageIO.read(inputStream);
 			if (image != null) {
-				int length = inputStream.getConsumedLength();
-				return length;
+                return inputStream.getConsumedLength();
 			}
 		}
 		catch (Exception e) {

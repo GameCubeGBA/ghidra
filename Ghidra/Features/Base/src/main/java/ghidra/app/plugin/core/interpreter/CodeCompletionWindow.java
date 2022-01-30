@@ -197,8 +197,7 @@ public class CodeCompletionWindow extends JDialog {
 		}
 
 		// Preferred location: lower and slightly to the right of the caret
-		int offset = textHeight;
-		Point newPoint = new Point(location.x + offset, location.y + offset);
+        Point newPoint = new Point(location.x + textHeight, location.y + textHeight);
 
 		if (isOnScreen(screenBounds, newPoint)) {
 			return newPoint; // nothing to do
@@ -215,7 +214,7 @@ public class CodeCompletionWindow extends JDialog {
 			// check for going off the bottom of the screen as well
 			if (newPoint.y + myHeight > screenHeight) {
 				// off the right and bottom of the screen; move above prompt
-				testPoint = new Point(screenWidth - myWidth, newPoint.y - myHeight - offset);
+				testPoint = new Point(screenWidth - myWidth, newPoint.y - myHeight - textHeight);
 			}
 			else {
 				// the bottom is fine, move to the left
@@ -224,7 +223,7 @@ public class CodeCompletionWindow extends JDialog {
 		}
 		// does the bottom of the window go off the bottom of the screen?
 		else if (newPoint.y + myHeight > screenHeight) {
-			testPoint = new Point(newPoint.x, screenHeight - myHeight - offset);
+			testPoint = new Point(newPoint.x, screenHeight - myHeight - textHeight);
 		}
 
 		newPoint = validateLocation(screenBounds, testPoint, newPoint);

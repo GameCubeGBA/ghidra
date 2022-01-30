@@ -240,8 +240,7 @@ public class FrontEndTool extends PluginTool implements OptionsChangeListener {
 		options.registerOption(ENABLE_COMPRESSED_DATABUFFER_OUTPUT, Boolean.FALSE, help,
 			"When enabled data buffers sent to Ghidra Server are compressed (see server configuration for other direction)");
 
-		boolean autoSave = options.getBoolean(AUTOMATICALLY_SAVE_TOOLS, true);
-		GhidraTool.autoSave = autoSave;
+        GhidraTool.autoSave = options.getBoolean(AUTOMATICALLY_SAVE_TOOLS, true);
 
 		boolean animationEnabled = options.getBoolean(USE_ALERT_ANIMATION_OPTION_NAME, true);
 		AnimationUtils.setAnimationEnabled(animationEnabled);
@@ -566,9 +565,8 @@ public class FrontEndTool extends PluginTool implements OptionsChangeListener {
 
 	@Override
 	public ToolTemplate getToolTemplate(boolean includeConfigState) {
-		ToolTemplate toolTemplate = new FrontEndToolTemplate(getIconURL(),
-			saveToXml(includeConfigState), getSupportedDataTypes());
-		return toolTemplate;
+        return new FrontEndToolTemplate(getIconURL(),
+            saveToXml(includeConfigState), getSupportedDataTypes());
 	}
 
 	//////////////////////////////////////////////////////////////////////

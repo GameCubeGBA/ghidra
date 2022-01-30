@@ -203,10 +203,8 @@ public class EHTryBlockModel extends AbstractCreateDataTypeModel {
 	public EHCatchHandlerModel getCatchHandlerModel(int tryBlockOrdinal)
 			throws InvalidDataTypeException {
 		checkValidity();
-		EHCatchHandlerModel catchHandlerModel =
-			new EHCatchHandlerModel(getProgram(), getCatchHandlerCount(tryBlockOrdinal),
-				getCatchHandlerMapAddress(tryBlockOrdinal), validationOptions);
-		return catchHandlerModel;
+        return new EHCatchHandlerModel(getProgram(), getCatchHandlerCount(tryBlockOrdinal),
+            getCatchHandlerMapAddress(tryBlockOrdinal), validationOptions);
 	}
 
 	/**

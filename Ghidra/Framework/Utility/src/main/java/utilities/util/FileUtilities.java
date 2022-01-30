@@ -898,8 +898,7 @@ public final class FileUtilities {
 			return null;
 		}
 
-		String childPath = otherPath.substring(parentPath.length());
-		return childPath;
+        return otherPath.substring(parentPath.length());
 	}
 
 	/**
@@ -1001,8 +1000,7 @@ public final class FileUtilities {
 		}
 
 		String absolutePath = file.getAbsolutePath();
-		FileResolutionResult result = pathIsCaseDependent(canonicalPath, absolutePath);
-		return result;
+        return pathIsCaseDependent(canonicalPath, absolutePath);
 	}
 
 	/*testing*/ static FileResolutionResult pathIsCaseDependent(String canonicalPath,

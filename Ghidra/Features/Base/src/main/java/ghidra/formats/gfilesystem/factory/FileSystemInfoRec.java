@@ -87,10 +87,7 @@ public class FileSystemInfoRec {
 				(Class<? extends GFileSystemBase>) fsClazz);
 		}
 
-		FileSystemInfoRec fsir =
-			new FileSystemInfoRec(fsType, fsi.description(), fsi.priority(), fsClazz, factory);
-
-		return fsir;
+        return new FileSystemInfoRec(fsType, fsi.description(), fsi.priority(), fsClazz, factory);
 	}
 
 	private FileSystemInfoRec(String type, String description, int priority,

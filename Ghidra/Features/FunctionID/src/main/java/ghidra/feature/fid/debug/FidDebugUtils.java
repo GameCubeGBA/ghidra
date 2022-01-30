@@ -124,8 +124,7 @@ public class FidDebugUtils {
 	 */
 	public static Long validateHashText(String text, String errorMessage) {
 		try {
-			long parseLong = NumericUtilities.parseLong(text);
-			return parseLong;
+            return NumericUtilities.parseLong(text);
 		}
 		catch (NumberFormatException e) {
 			popupNumericParseError(errorMessage, text);

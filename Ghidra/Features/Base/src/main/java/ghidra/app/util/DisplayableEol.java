@@ -294,9 +294,8 @@ public class DisplayableEol {
 		}
 
 		DumbMemBufferImpl mb = new DumbMemBufferImpl(data.getMemory(), dataAddress.add(diff));
-		String s = dt.getRepresentation(mb, data, len - diff);
 
-		return s;
+        return dt.getRepresentation(mb, data, len - diff);
 	}
 
 	private boolean handleIndirectDataReference(Set<String> set, Reference reference,
@@ -895,8 +894,7 @@ public class DisplayableEol {
 		int numRefRepeats = getCommentLineCount(REF_REPEATABLES);
 
 		int beforeEol = 0;
-		int beforeRepeatable = beforeEol + numEol;
-		int beforeRefRepeats = beforeRepeatable;
+        int beforeRefRepeats = beforeEol + numEol;
 		if (alwaysShowRepeatable || !hasEol) {
 			beforeRefRepeats += numRepeatable;
 		}

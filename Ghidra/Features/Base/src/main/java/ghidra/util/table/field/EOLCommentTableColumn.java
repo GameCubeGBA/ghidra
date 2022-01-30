@@ -53,11 +53,10 @@ public class EOLCommentTableColumn extends
 
 	private String getEOLComment(ProgramLocation loc, Program program)
 			throws IllegalArgumentException {
-		ProgramLocation location = loc;
-		if (loc instanceof VariableLocation) {
+        if (loc instanceof VariableLocation) {
 			return null;
 		}
-		Address address = location.getAddress();
+		Address address = loc.getAddress();
 		return program.getListing().getComment(CodeUnit.EOL_COMMENT, address);
 	}
 }

@@ -124,8 +124,7 @@ public class AlignmentPanelBuilder extends ContextRegisterFilterablePanelBuilder
 		}
 
 		AlignmentTableModel model = new AlignmentTableModel(data);
-		GTable table = new GTable(model);
-		return table;
+        return new GTable(model);
 	}
 
 	/**

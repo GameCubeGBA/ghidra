@@ -119,11 +119,10 @@ public class CodeUnitTableCellDataTest extends AbstractProgramBasedTest {
 		Address address = addr(TEST_ADDRESS);
 		int[] componentPath = null;
 		Address refAddr = null;
-		String rep = MNEMONIC_DISPLAY_STRING;
-		int opIndex = 0;
+        int opIndex = 0;
 		int charOffset = 0;
 		OperandFieldLocation location = new OperandFieldLocation(program, address, componentPath,
-			refAddr, rep, opIndex, charOffset);
+			refAddr, MNEMONIC_DISPLAY_STRING, opIndex, charOffset);
 
 		int cuOffset = 0;
 		int cuCount = 1;

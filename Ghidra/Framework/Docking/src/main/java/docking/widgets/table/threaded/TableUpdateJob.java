@@ -395,8 +395,7 @@ public class TableUpdateJob<T> {
 			// must use all data due to a new filter
 			startSourceData = model.getAllTableData();
 		}
-		TableData<T> copy = startSourceData.copy();
-		return copy;
+        return startSourceData.copy();
 	}
 
 	/**
@@ -418,9 +417,7 @@ public class TableUpdateJob<T> {
 		}
 
 		TableFilter<T> appliedOrPendingFilter = model.getTableFilter();
-		TableData<T> alreadyFilteredData =
-			currentAppliedData.getLowestLevelSourceDataForFilter(appliedOrPendingFilter);
-		return alreadyFilteredData;
+        return currentAppliedData.getLowestLevelSourceDataForFilter(appliedOrPendingFilter);
 	}
 
 	/**
@@ -641,8 +638,7 @@ public class TableUpdateJob<T> {
 	}
 
 	private TableData<T> getCurrentFilteredData() {
-		TableData<T> currentData = model.getCurrentTableData();
-		return currentData;
+        return model.getCurrentTableData();
 	}
 
 	/**

@@ -626,17 +626,15 @@ public class RepositoryScreenShots extends AbstractListingMergeManagerTest {
 		int descriptionWidth2 = getDescriptionWidth(image, description2);
 		int descriptionWidth = Math.max(descriptionWidth1, descriptionWidth2);
 		int arrowTailX = lock0X - 60;
-		int arrowHeadX = lock0X;
-		int descriptionX = arrowTailX - 5 - descriptionWidth;
+        int descriptionX = arrowTailX - 5 - descriptionWidth;
 		int arrowTailY = (lock0Y + lock3Y) / 2;
 		int arrowHead1Y = lock0Y + lockButton0.getHeight();
-		int arrowHead2Y = lock3Y;
-		int description1Y = arrowTailY - 10;
+        int description1Y = arrowTailY - 10;
 		int description2Y = arrowTailY + 10;
 		mtfGenerator.drawArrow(Color.RED, 2, new Point(arrowTailX, arrowTailY),
-			new Point(arrowHeadX, arrowHead1Y), 8);
+			new Point(lock0X, arrowHead1Y), 8);
 		mtfGenerator.drawArrow(Color.RED, 2, new Point(arrowTailX, arrowTailY),
-			new Point(arrowHeadX, arrowHead2Y), 8);
+			new Point(lock0X, lock3Y), 8);
 		mtfGenerator.drawText(description1, Color.RED, new Point(descriptionX, description1Y),
 			DESCRIPTION_FONT_SIZE);
 		mtfGenerator.drawText(description2, Color.RED, new Point(descriptionX, description2Y),
@@ -678,11 +676,9 @@ public class RepositoryScreenShots extends AbstractListingMergeManagerTest {
 			"Lets you adjust the fields displayed in all four listings.";
 		int descriptionWidth = getDescriptionWidth(image, adjustFieldsDescription);
 		int descriptionX = buttonX - 40 - descriptionWidth;
-		int arrowHeadY = buttonY;
-		int arrowTailY = buttonY;
-		int descriptionY = buttonY + 5;
-		mtfGenerator.drawArrow(Color.RED, 2, new Point(arrowTailX, arrowTailY),
-			new Point(arrowHeadX, arrowHeadY), 8);
+        int descriptionY = buttonY + 5;
+		mtfGenerator.drawArrow(Color.RED, 2, new Point(arrowTailX, buttonY),
+			new Point(arrowHeadX, buttonY), 8);
 		mtfGenerator.drawText(adjustFieldsDescription, Color.RED,
 			new Point(descriptionX, descriptionY), DESCRIPTION_FONT_SIZE);
 	}
@@ -693,19 +689,16 @@ public class RepositoryScreenShots extends AbstractListingMergeManagerTest {
 		Point westLabelLocation = westLabel.getLocationOnScreen();
 		Dimension size = westLabel.getSize();
 		int westLabelX = westLabelLocation.x - windowLocationOnScreen.x;
-		int conflictNumberX = westLabelX + (size.width / 4);
-		int arrowHeadX = conflictNumberX;
-		int arrowTailX = arrowHeadX + 40;
+        int arrowTailX = westLabelX + (size.width / 4) + 40;
 		int descriptionX = arrowTailX + 5;
 		int westLabelY = westLabelLocation.y - windowLocationOnScreen.y + 5;
 		int westLabelBottomY = westLabelY + size.height;
-		int arrowHeadY = westLabelBottomY;
-		int arrowTailY = westLabelBottomY + 15;
+        int arrowTailY = westLabelBottomY + 15;
 		int descriptionY = westLabelBottomY + 20;
 		mtfGenerator.drawArrow(Color.RED, 2, new Point(arrowTailX, arrowTailY),
-			new Point(arrowHeadX, arrowTailY), 0);
-		mtfGenerator.drawArrow(Color.RED, 2, new Point(arrowHeadX, arrowTailY),
-			new Point(arrowHeadX, arrowHeadY), 8);
+			new Point(westLabelX + (size.width / 4), arrowTailY), 0);
+		mtfGenerator.drawArrow(Color.RED, 2, new Point(westLabelX + (size.width / 4), arrowTailY),
+			new Point(westLabelX + (size.width / 4), westLabelBottomY), 8);
 		mtfGenerator.drawText("Indicates which conflict you are resolving.", Color.RED,
 			new Point(descriptionX, descriptionY), DESCRIPTION_FONT_SIZE);
 	}
@@ -718,15 +711,13 @@ public class RepositoryScreenShots extends AbstractListingMergeManagerTest {
 		String addressRangeDescription = "Indicates how many address ranges have conflicts.";
 		int descriptionWidth = getDescriptionWidth(image, addressRangeDescription);
 		int eastLabelX = eastLabelLocation.x - windowLocationOnScreen.x;
-		int eastLabelMidX = eastLabelX + (size.width / 2);
-		int arrowHeadX = eastLabelMidX;
-		int descriptionX = eastLabelX + size.width - descriptionWidth;
+        int descriptionX = eastLabelX + size.width - descriptionWidth;
 		int eastLabelY = eastLabelLocation.y - windowLocationOnScreen.y + 5;
 		int arrowHeadY = eastLabelY - 10;
 		int arrowTailY = arrowHeadY - 30;
 		int descriptionY = arrowTailY - 5;
-		mtfGenerator.drawArrow(Color.RED, 2, new Point(arrowHeadX, arrowTailY),
-			new Point(arrowHeadX, arrowHeadY), 8);
+		mtfGenerator.drawArrow(Color.RED, 2, new Point(eastLabelX + (size.width / 2), arrowTailY),
+			new Point(eastLabelX + (size.width / 2), arrowHeadY), 8);
 		mtfGenerator.drawText(addressRangeDescription, Color.RED,
 			new Point(descriptionX, descriptionY), DESCRIPTION_FONT_SIZE);
 	}
@@ -737,8 +728,7 @@ public class RepositoryScreenShots extends AbstractListingMergeManagerTest {
 		g.setFont(font.deriveFont(DESCRIPTION_FONT_SIZE));
 		g.setColor(Color.RED);
 		FontMetrics fontMetrics = g.getFontMetrics(font.deriveFont(DESCRIPTION_FONT_SIZE));
-		int descriptionWidth = fontMetrics.stringWidth(description);
-		return descriptionWidth;
+        return fontMetrics.stringWidth(description);
 	}
 
 	private void addAddressDescription(Point windowLocationOnScreen,
@@ -753,11 +743,10 @@ public class RepositoryScreenShots extends AbstractListingMergeManagerTest {
 		int descriptionX = arrowTailX + 10;
 		int westLabelY = westLabelLocation.y - windowLocationOnScreen.y;
 		int arrowY = westLabelY + 5;
-		int descriptionY = arrowY;
-		mtfGenerator.drawArrow(Color.RED, 2, new Point(arrowTailX, arrowY),
+        mtfGenerator.drawArrow(Color.RED, 2, new Point(arrowTailX, arrowY),
 			new Point(arrowHeadX, arrowY), 8);
 		mtfGenerator.drawText("Indicates the address(es) in conflict.", Color.RED,
-			new Point(descriptionX, descriptionY), DESCRIPTION_FONT_SIZE);
+			new Point(descriptionX, arrowY), DESCRIPTION_FONT_SIZE);
 	}
 
 	private void addConflictTypeDescription(Point windowLocationOnScreen,
@@ -773,11 +762,10 @@ public class RepositoryScreenShots extends AbstractListingMergeManagerTest {
 		int endTitleTextY = infoPanelLocation.y - windowLocationOnScreen.y;
 		int arrowTailY = endTitleTextY - 5;
 		int arrowHeadY = endTitleTextY + 5;
-		int descriptionY = endTitleTextY;
-		mtfGenerator.drawArrow(Color.RED, 2, new Point(arrowTailX, arrowTailY),
+        mtfGenerator.drawArrow(Color.RED, 2, new Point(arrowTailX, arrowTailY),
 			new Point(arrowHeadX, arrowHeadY), 8);
 		mtfGenerator.drawText("Type of conflict to resolve.", Color.RED,
-			new Point(descriptionX, descriptionY), DESCRIPTION_FONT_SIZE);
+			new Point(descriptionX, endTitleTextY), DESCRIPTION_FONT_SIZE);
 	}
 
 	private void addConflictAreaDescription(Point windowLocationOnScreen,
@@ -800,19 +788,16 @@ public class RepositoryScreenShots extends AbstractListingMergeManagerTest {
 		int rowPanelHeight = rowPanelSize.height;
 		int radioButtonX = (window.getWidth() / 2) + (rowPanelWidth / 2) + 5;
 		int radioButtonY = rowPanelLocation.y - windowLocationOnScreen.y + (rowPanelHeight / 2);
-		int arrowHeadX = radioButtonX;
-		int arrowTailX = radioButtonX + 40;
+        int arrowTailX = radioButtonX + 40;
 		int descriptionX = radioButtonX + 45;
-		int arrowHeadY = radioButtonY;
-		int arrowTailY = radioButtonY - 10;
+        int arrowTailY = radioButtonY - 10;
 		int description1Y = radioButtonY - 20;
-		int description2Y = radioButtonY;
-		mtfGenerator.drawArrow(Color.RED, 2, new Point(arrowTailX, arrowTailY),
-			new Point(arrowHeadX, arrowHeadY), 8);
+        mtfGenerator.drawArrow(Color.RED, 2, new Point(arrowTailX, arrowTailY),
+			new Point(radioButtonX, radioButtonY), 8);
 		mtfGenerator.drawText("Radio buttons or check boxes to", Color.RED,
 			new Point(descriptionX, description1Y), DESCRIPTION_FONT_SIZE);
 		mtfGenerator.drawText("select for resolving the conflict(s).", Color.RED,
-			new Point(descriptionX, description2Y), DESCRIPTION_FONT_SIZE);
+			new Point(descriptionX, radioButtonY), DESCRIPTION_FONT_SIZE);
 	}
 
 	private void addUseForAllDescription(Point windowLocationOnScreen,
@@ -821,16 +806,14 @@ public class RepositoryScreenShots extends AbstractListingMergeManagerTest {
 		Point useForAllLocation = useForAllCB.getLocationOnScreen();
 		Dimension useForAllSize = useForAllCB.getPreferredSize();
 		int useForAllWidth = useForAllSize.width;
-		int useForAllRightEdge = useForAllLocation.x - windowLocationOnScreen.x + useForAllWidth;
-		int arrowHeadX = useForAllRightEdge;
-		int arrowTailX = arrowHeadX + 50;
+        int arrowTailX = useForAllLocation.x - windowLocationOnScreen.x + useForAllWidth + 50;
 		int descriptionX = arrowTailX + 5;
 		int useForAllY = useForAllLocation.y - windowLocationOnScreen.y;
 		int checkBoxHeight = useForAllCB.getSize().height;
 		int arrowY = useForAllY + (checkBoxHeight / 2);
 		int descriptionY = useForAllY + 15;
 		mtfGenerator.drawArrow(Color.RED, 2, new Point(arrowTailX, arrowY),
-			new Point(arrowHeadX, arrowY), 8);
+			new Point(useForAllLocation.x - windowLocationOnScreen.x + useForAllWidth, arrowY), 8);
 		mtfGenerator.drawText(
 			"Check this box to automatically make the same choice for all remaining conflicts like this one.",
 			Color.RED, new Point(descriptionX, descriptionY), DESCRIPTION_FONT_SIZE);

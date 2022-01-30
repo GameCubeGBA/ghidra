@@ -80,8 +80,6 @@ public class SH4EarlyAddressAnalyzer extends SH4AddressAnalyzer {
 			}
 		};
 
-		AddressSet resultSet = symEval.flowConstants(flowStart, null, eval, true, monitor);
-
-		return resultSet;
+        return symEval.flowConstants(flowStart, null, eval, true, monitor);
 	}
 }

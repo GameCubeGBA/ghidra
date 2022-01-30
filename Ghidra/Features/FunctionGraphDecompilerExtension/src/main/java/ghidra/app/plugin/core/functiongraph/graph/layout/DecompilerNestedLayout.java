@@ -360,8 +360,7 @@ public class DecompilerNestedLayout extends AbstractFGLayout {
 		double x = Math.min(rightSide,
 			nextColumn.x - GraphViewerUtils.EXTRA_LAYOUT_COLUMN_SPACING_CONDENSED);
 
-		List<Point2D> articulations = routeLoopEdge(start, end, x);
-		return articulations;
+        return routeLoopEdge(start, end, x);
 	}
 
 	private List<Vertex2d> getVerticesInBounds(Vertex2dFactory vertex2dFactory, int startRow,
@@ -475,20 +474,17 @@ public class DecompilerNestedLayout extends AbstractFGLayout {
 		double y1 = start.getY(); // hidden
 		articulations.add(new Point2D.Double(x1, y1));
 
-		double x2 = x1; // same distance over
-		double y2 = end.getY();
-		articulations.add(new Point2D.Double(x2, y2));
+        double y2 = end.getY();
+		articulations.add(new Point2D.Double(x1, y2));
 
 		double x3 = end.getX() + (-distanceSpacing);
-		double y3 = y2;
 
-		routeAroundColumnVertices(start, end, vertex2dFactory, articulations, x3);
+        routeAroundColumnVertices(start, end, vertex2dFactory, articulations, x3);
 
-		articulations.add(new Point2D.Double(x3, y3));
+		articulations.add(new Point2D.Double(x3, y2));
 
 		double x4 = end.getX();
-		double y4 = y3;
-		articulations.add(new Point2D.Double(x4, y4)); // point is hidden behind the vertex
+        articulations.add(new Point2D.Double(x4, y2)); // point is hidden behind the vertex
 
 	}
 
@@ -546,8 +542,7 @@ public class DecompilerNestedLayout extends AbstractFGLayout {
 		}
 		double endXLimit = end.getX() + VERTEX_BORDER_THICKNESS + edgeOffset;
 		x3 = Math.max(x3, endXLimit);
-		double y3 = y2;
-		articulations.add(new Point2D.Double(x3, y3)); // into the top of the end vertex
+        articulations.add(new Point2D.Double(x3, y2)); // into the top of the end vertex
 
 		routeAroundColumnVertices(start, end, vertex2dFactory, articulations, x3);
 
@@ -609,13 +604,11 @@ public class DecompilerNestedLayout extends AbstractFGLayout {
 
 		routeAroundColumnVertices(start, end, vertex2dFactory, articulations, x2);
 
-		double x3 = x2;
-		double y3 = end.getY();
-		articulations.add(new Point2D.Double(x3, y3)); // point is hidden behind the vertex
+        double y3 = end.getY();
+		articulations.add(new Point2D.Double(x2, y3)); // point is hidden behind the vertex
 
 		double x4 = end.getX();
-		double y4 = y3;
-		articulations.add(new Point2D.Double(x4, y4)); // point is hidden behind the vertex
+        articulations.add(new Point2D.Double(x4, y3)); // point is hidden behind the vertex
 	}
 
 	private void routeAroundColumnVertices(Vertex2d start, Vertex2d end,
@@ -674,8 +667,7 @@ public class DecompilerNestedLayout extends AbstractFGLayout {
 		int delta = endRow - startRow;
 		for (Vertex2d otherVertex : toCheck) {
 
-			int padding = VERTEX_TO_EDGE_AVOIDANCE_PADDING;
-			int distanceSpacing = padding + delta; // adding the delta makes overlap less likely
+            int distanceSpacing = VERTEX_TO_EDGE_AVOIDANCE_PADDING + delta; // adding the delta makes overlap less likely
 
 			// Condensing is when the graph will pull nodes closer together on the x axis to
 			// reduce whitespace and make the entire graph easier to see.   In this case, update
@@ -825,8 +817,7 @@ public class DecompilerNestedLayout extends AbstractFGLayout {
 			points.add(v2d);
 		}
 
-		FGVertex v = getRightmostVertex(points);
-		return v;
+        return getRightmostVertex(points);
 	}
 
 	private FGVertex getRightmostVertex(Collection<Vertex2d> points) {
@@ -1423,8 +1414,7 @@ public class DecompilerNestedLayout extends AbstractFGLayout {
 			}
 
 			FGVertex myVertex = getVertex();
-			DecompilerBlock block = compareToMyVertex(myVertex, vertex);
-			return block;
+            return compareToMyVertex(myVertex, vertex);
 		}
 
 		private DecompilerBlock compareToMyVertex(FGVertex myVertex, FGVertex vertex) {
@@ -1534,8 +1524,7 @@ public class DecompilerNestedLayout extends AbstractFGLayout {
 			// -all nodes are at the same level
 			//
 			for (DecompilerBlock block : allChildren) {
-				int column = col;
-				block.setCol(column);
+                block.setCol(col);
 			}
 
 			doSetCol(col);

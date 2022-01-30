@@ -87,8 +87,7 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 				return null;
 			}
 
-			Address possiblePointer = address.getNewAddress(offset);
-			return possiblePointer;
+            return address.getNewAddress(offset);
 
 		}
 		catch (MemoryAccessException | AddressOutOfBoundsException e) {
@@ -227,8 +226,7 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 
 		//if function is a thunk, get the thunked function					
 		if (function.isThunk()) {
-			Function thunkedFunction = function.getThunkedFunction(true);
-			function = thunkedFunction;
+            function = function.getThunkedFunction(true);
 		}
 		return function;
 	}
@@ -261,8 +259,7 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 	 */
 	public Address getAddress(Address address, int offset) {
 		try {
-			Address newAddress = address.add(offset);
-			return newAddress;
+            return address.add(offset);
 		}
 		catch (AddressOutOfBoundsException e) {
 			return null;
@@ -578,8 +575,7 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 				new DumbMemBufferImpl(currentProgram.getMemory(), address);
 			Object value = ibo32.getValue(compMemBuffer, ibo32.getDefaultSettings(), length);
 			if (value instanceof Address) {
-				Address iboAddress = (Address) value;
-				return iboAddress;
+                return (Address) value;
 			}
 			return null;
 		}
@@ -1299,8 +1295,7 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 			commaIndex--;
 		}
 
-		String shortenedName = className.substring(0, nextComma) + "...>";
-		return shortenedName;
+        return className.substring(0, nextComma) + "...>";
 	}
 
 	public List<RecoveredClass> getClassesWithSameShortenedName(

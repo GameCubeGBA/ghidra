@@ -139,8 +139,7 @@ public class WAVEDataType extends BuiltIn implements Dynamic {
 			Msg.error(this, "WAVE-Sound error: " + "Not enough bytes!");
 			return null;
 		}
-		WAVEData waveData = new WAVEData(data);
-		return waveData;
+        return new WAVEData(data);
 	}
 
 	@Override

@@ -112,10 +112,8 @@ public class DropShadow {
 
 		int left = (shadowSize - 1) >> 1;
 		int right = shadowSize - left;
-		int xStart = left;
-		int xStop = dstWidth - right;
-		int yStart = left;
-		int yStop = dstHeight - right;
+        int xStop = dstWidth - right;
+        int yStop = dstHeight - right;
 
 		int shadowRgb = shadowColor.getRGB() & 0x00ffffff;
 		int[] aHistory = new int[shadowSize];
@@ -138,7 +136,7 @@ public class DropShadow {
 
 			bufferOffset -= right;
 
-			for (int x = xStart; x < xStop; x++, bufferOffset++) {
+			for (int x = left; x < xStop; x++, bufferOffset++) {
 				int a = (int) (aSum * sumDivider);
 				dataBuffer[bufferOffset] = a << 24 | shadowRgb;
 
@@ -168,7 +166,7 @@ public class DropShadow {
 
 			bufferOffset -= lastPixelOffset;
 
-			for (int y = yStart; y < yStop; y++, bufferOffset += dstWidth) {
+			for (int y = left; y < yStop; y++, bufferOffset += dstWidth) {
 				int a = (int) (aSum * sumDivider);
 				dataBuffer[bufferOffset] = a << 24 | shadowRgb;
 

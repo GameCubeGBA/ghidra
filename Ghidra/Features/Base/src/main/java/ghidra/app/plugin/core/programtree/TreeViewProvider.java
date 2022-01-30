@@ -401,11 +401,10 @@ class TreeViewProvider implements ViewProviderService {
 				}
 				LinkedList<String> list = new LinkedList<>();
 				list.add(fragment.getName());
-				Group group = fragment;
 
-				ArrayList<LinkedList<String>> pathNameList = new ArrayList<>();
+                ArrayList<LinkedList<String>> pathNameList = new ArrayList<>();
 				// need GroupPath for all occurrences of fragment
-				setAncestorList(group, list, pathNameList);
+				setAncestorList(fragment, list, pathNameList);
 
 				paths = new GroupPath[pathNameList.size()];
 				for (int i = 0; i < paths.length; i++) {

@@ -339,8 +339,7 @@ public class CompositeDataTypeHTMLRepresentation extends HTMLDataTypeRepresentat
 		//
 		DataType dt = line.getDataType();
 		DataTypeUrl url = new DataTypeUrl(dt);
-		String wrapped = HTMLUtilities.wrapWithLinkPlaceholder(type, url.toString());
-		return wrapped;
+        return HTMLUtilities.wrapWithLinkPlaceholder(type, url.toString());
 	}
 
 	protected static StringBuilder addAlignmentValue(String alignmentValueString,

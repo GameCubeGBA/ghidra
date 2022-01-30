@@ -1071,9 +1071,8 @@ public class DataTypeManagerPluginTest extends AbstractGhidraHeadedIntegrationTe
 	}
 
 	private void assertSingleFilterMatch(String[] path) {
-		GTreeNode rootNode = tree.getViewRoot();
 
-		GTreeNode node = rootNode;
+        GTreeNode node = tree.getViewRoot();
 		for (int i = 0; i < path.length; i++) {
 			String nodeName = path[i];
 			assertEquals(node.getName(), nodeName);

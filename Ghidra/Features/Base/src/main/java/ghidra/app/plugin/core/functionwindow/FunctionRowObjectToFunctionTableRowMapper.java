@@ -26,8 +26,7 @@ public class FunctionRowObjectToFunctionTableRowMapper
 	@Override
 	public Function map(FunctionRowObject rowObject, Program program,
 			ServiceProvider serviceProvider) {
-		Function function = rowObject.getFunction();
-		return function;
+        return rowObject.getFunction();
 	}
 
 }

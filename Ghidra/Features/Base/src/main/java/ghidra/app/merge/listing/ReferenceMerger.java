@@ -769,8 +769,7 @@ class ReferenceMerger extends AbstractListingMerger {
 		currentBackgroundSet = new AddressSet(addr, addr);
 		currentConflictType = REMOVE_CONFLICT;
 		for (Iterator<Reference> iter = removeList.iterator(); iter.hasNext();) {
-			Reference removeRef = iter.next();
-			currentReference = removeRef;
+            currentReference = iter.next();
 			if (currentReference.getOperandIndex() == opIndex) {
 				// If we have a reference choice then a "Use For All" has already occurred.
 				if (referenceChoice != ASK_USER) {
@@ -801,8 +800,7 @@ class ReferenceMerger extends AbstractListingMerger {
 		currentBackgroundSet = new AddressSet(addr, addr);
 		currentConflictType = CHANGE_CONFLICT;
 		for (Iterator<Reference> iter = changeList.iterator(); iter.hasNext();) {
-			Reference changeRef = iter.next();
-			currentReference = changeRef;
+            currentReference = iter.next();
 			if (currentReference.getOperandIndex() == opIndex) {
 				// If we have a reference choice then a "Use For All" has already occurred.
 				if (referenceChoice != ASK_USER) {
@@ -833,8 +831,7 @@ class ReferenceMerger extends AbstractListingMerger {
 		currentBackgroundSet = new AddressSet(addr, addr);
 		currentConflictType = ADD_CONFLICT;
 		for (Iterator<Reference> iter = addList.iterator(); iter.hasNext();) {
-			Reference changeRef = iter.next();
-			currentReference = changeRef;
+            currentReference = iter.next();
 			if (currentReference.getReferenceType().isFallthrough()) {
 				continue; // Ignore fallthrough references.
 			}
@@ -1093,12 +1090,11 @@ class ReferenceMerger extends AbstractListingMerger {
 
 	protected VerticalChoicesPanel getRemoveConflictPanel(Reference ref, ChangeListener listener) {
 		VerticalChoicesPanel panel = getVerticalConflictPanel();
-		Reference originalRef = ref;
-		Reference latestRef = DiffUtility.getReference(originalPgm, originalRef, latestPgm);
-		Reference myRef = DiffUtility.getReference(originalPgm, originalRef, myPgm);
-		if (originalRef.getReferenceType().isFallthrough()) {
-			Address fromAddr = originalRef.getFromAddress();
-			int opIndex = originalRef.getOperandIndex();
+        Reference latestRef = DiffUtility.getReference(originalPgm, ref, latestPgm);
+		Reference myRef = DiffUtility.getReference(originalPgm, ref, myPgm);
+		if (ref.getReferenceType().isFallthrough()) {
+			Address fromAddr = ref.getFromAddress();
+			int opIndex = ref.getOperandIndex();
 			Reference latestFallthrough = getFallThroughReference(latestPgm, fromAddr, opIndex);
 			Reference myFallthrough = getFallThroughReference(myPgm, fromAddr, opIndex);
 			latestRef = latestFallthrough;
@@ -1122,7 +1118,7 @@ class ReferenceMerger extends AbstractListingMerger {
 		String[] myRefInfo = getReferenceInfo(myPgm, myRef, myPrefix, suffix);
 		panel.addRadioButtonRow(latestRefInfo, LATEST_BUTTON_NAME, KEEP_LATEST, listener);
 		panel.addRadioButtonRow(myRefInfo, CHECKED_OUT_BUTTON_NAME, KEEP_MY, listener);
-		panel.addInfoRow(getReferenceInfo(originalPgm, originalRef, "'", suffix));
+		panel.addInfoRow(getReferenceInfo(originalPgm, ref, "'", suffix));
 
 		return panel;
 	}
@@ -1177,24 +1173,23 @@ class ReferenceMerger extends AbstractListingMerger {
 	protected VerticalChoicesPanel getAddConflictPanel(Reference myReference,
 			ChangeListener listener) {
 		VerticalChoicesPanel panel = getVerticalConflictPanel();
-		Reference myRef = myReference;
-		Reference latestRef = DiffUtility.getReference(myPgm, myRef, latestPgm);
-		Reference originalRef = DiffUtility.getReference(myPgm, myRef, originalPgm);
+        Reference latestRef = DiffUtility.getReference(myPgm, myReference, latestPgm);
+		Reference originalRef = DiffUtility.getReference(myPgm, myReference, originalPgm);
 		if (latestRef == null) {
 			Reference[] latestRefs =
-				latestRefMgr.getReferencesFrom(myRef.getFromAddress(), myRef.getOperandIndex());
+				latestRefMgr.getReferencesFrom(myReference.getFromAddress(), myReference.getOperandIndex());
 			latestRef = (latestRefs.length > 0) ? latestRefs[0] : null;
 		}
 		if (originalRef == null) {
 			Reference[] originalRefs =
-				originalRefMgr.getReferencesFrom(myRef.getFromAddress(), myRef.getOperandIndex());
+				originalRefMgr.getReferencesFrom(myReference.getFromAddress(), myReference.getOperandIndex());
 			originalRef = (originalRefs.length > 0) ? originalRefs[0] : null;
 		}
 		panel.setTitle("Reference");
-		String fromAddrStr = ConflictUtility.getAddressString(myRef.getFromAddress());
+		String fromAddrStr = ConflictUtility.getAddressString(myReference.getFromAddress());
 		String text =
-			getRefGroup(myRef) + " Reference from '" + fromAddrStr + "' " +
-				getOperandIndexString(myRef) + " was added in both versions.";
+			getRefGroup(myReference) + " Reference from '" + fromAddrStr + "' " +
+				getOperandIndexString(myReference) + " was added in both versions.";
 		panel.setHeader(text);
 		panel.setRowHeader(getReferenceInfo(null, null, null, null));
 		String latestPrefix = "Use '";
@@ -1202,7 +1197,7 @@ class ReferenceMerger extends AbstractListingMerger {
 		String suffix = "' version";
 		panel.addRadioButtonRow(getReferenceInfo(latestPgm, latestRef, latestPrefix, suffix),
 			LATEST_BUTTON_NAME, KEEP_LATEST, listener);
-		panel.addRadioButtonRow(getReferenceInfo(myPgm, myRef, myPrefix, suffix),
+		panel.addRadioButtonRow(getReferenceInfo(myPgm, myReference, myPrefix, suffix),
 			CHECKED_OUT_BUTTON_NAME, KEEP_MY, listener);
 		panel.addInfoRow(getReferenceInfo(originalPgm, originalRef, "'", suffix));
 
@@ -1415,13 +1410,12 @@ class ReferenceMerger extends AbstractListingMerger {
 	}
 
 	private Reference resolveAddConflict(Reference ref, int chosenConflictOption) {
-		Reference myRef = ref;
-		Reference resultRef = null;
+        Reference resultRef = null;
 		if ((chosenConflictOption & KEEP_LATEST) != 0) {
-			resultRef = keepLatestRefForAddConflict(ref, myRef, resultRef);
+			resultRef = keepLatestRefForAddConflict(ref, ref, resultRef);
 		}
 		else if ((chosenConflictOption & KEEP_MY) != 0) {
-			resultRef = keepMyRefForAddConflict(ref, myRef, resultRef);
+			resultRef = keepMyRefForAddConflict(ref, ref, resultRef);
 		}
 		return resultRef;
 	}

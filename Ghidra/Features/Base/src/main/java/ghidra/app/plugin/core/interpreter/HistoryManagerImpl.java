@@ -49,8 +49,7 @@ class HistoryManagerImpl implements HistoryManager {
 	public String getHistoryDown() {
 		if (position < history.size() - 1) {
 			++position;
-			String result = history.get(position);
-			return result;
+            return history.get(position);
 		}
 		if (position == history.size() - 1) {
 			position = history.size();

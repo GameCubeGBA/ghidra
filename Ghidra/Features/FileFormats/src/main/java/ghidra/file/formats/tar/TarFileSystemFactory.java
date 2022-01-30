@@ -143,8 +143,7 @@ public class TarFileSystemFactory implements GFileSystemFactoryByteProvider<TarF
 
 	private static int readMagicBytes(ByteProvider bp) throws IOException {
 		BinaryReader br = new BinaryReader(bp, true /* LE */);
-		int magicBytes = br.readUnsignedShort(0);
 
-		return magicBytes;
+        return br.readUnsignedShort(0);
 	}
 }

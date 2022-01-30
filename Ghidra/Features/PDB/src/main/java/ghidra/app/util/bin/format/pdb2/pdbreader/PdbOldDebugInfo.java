@@ -104,8 +104,7 @@ class PdbOldDebugInfo extends PdbDebugInfo {
 
 	@Override
 	protected String parseFileInfoName(PdbByteReader reader) throws PdbException {
-		String filename = reader.parseString(pdb, StringParseType.StringSt);
-		return filename;
+        return reader.parseString(pdb, StringParseType.StringSt);
 	}
 
 	@Override

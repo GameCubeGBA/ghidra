@@ -176,8 +176,7 @@ public class FunctionCallGraphPluginScreenShots extends GhidraScreenShotGenerato
 				provider);
 
 		GraphViewer<FcgVertex, FcgEdge> primaryViewer = view.getPrimaryGraphViewer();
-		VisualGraphViewUpdater<FcgVertex, FcgEdge> updater = primaryViewer.getViewUpdater();
-		return updater;
+        return primaryViewer.getViewUpdater();
 	}
 
 	private void waitForGraph() {

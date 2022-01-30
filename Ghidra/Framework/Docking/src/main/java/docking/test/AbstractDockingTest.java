@@ -211,9 +211,8 @@ public abstract class AbstractDockingTest extends AbstractGenericTest {
 				windowClass.getName() + " does not extend Dialog or Frame.");
 		}
 
-		int timeout = DEFAULT_WAIT_TIMEOUT;
-		int totalTime = 0;
-		while (totalTime <= timeout) {
+        int totalTime = 0;
+		while (totalTime <= DEFAULT_WAIT_TIMEOUT) {
 
 			Set<Window> winList = getAllWindows();
 			Iterator<Window> it = winList.iterator();
@@ -239,8 +238,7 @@ public abstract class AbstractDockingTest extends AbstractGenericTest {
 		}
 
 		int totalTime = 0;
-		int timeout = DEFAULT_WAIT_TIMEOUT;
-		while (totalTime <= timeout) {
+        while (totalTime <= DEFAULT_WAIT_TIMEOUT) {
 
 			window = getWindowByTitleContaining(null, text);
 			if (window != null) {
@@ -282,8 +280,7 @@ public abstract class AbstractDockingTest extends AbstractGenericTest {
 		}
 
 		int totalTime = 0;
-		int timeout = DEFAULT_WAIT_TIMEOUT;
-		while (totalTime <= timeout) {
+        while (totalTime <= DEFAULT_WAIT_TIMEOUT) {
 
 			window = getWindow(title);
 			if (window != null) {
@@ -304,8 +301,7 @@ public abstract class AbstractDockingTest extends AbstractGenericTest {
 	public static Window waitForWindowByName(String name) {
 
 		int time = 0;
-		int timeout = DEFAULT_WAIT_TIMEOUT;
-		while (time <= timeout) {
+        while (time <= DEFAULT_WAIT_TIMEOUT) {
 			Set<Window> allWindows = getAllWindows();
 			for (Window window : allWindows) {
 				String windowName = window.getName();
@@ -437,8 +433,7 @@ public abstract class AbstractDockingTest extends AbstractGenericTest {
 				}
 			}
 
-			Window w = window;
-			runSwing(() -> w.dispose());
+            runSwing(() -> window.dispose());
 		}
 	}
 
@@ -474,8 +469,7 @@ public abstract class AbstractDockingTest extends AbstractGenericTest {
 	private static String getDebugTitleForWindow(Window window) {
 		String defaultTitle = "<no title> - id = " + System.identityHashCode(window) +
 			"; class = " + window.getClass().getSimpleName();
-		String title = getDebugTitleForWindow(window, defaultTitle);
-		return title;
+        return getDebugTitleForWindow(window, defaultTitle);
 	}
 
 	private static String getDebugTitleForWindow(Window window, String defaultTitle) {
@@ -749,8 +743,7 @@ public abstract class AbstractDockingTest extends AbstractGenericTest {
 		DockingWindowManager dwm = findActiveDockingWindowManager();
 		assertNotNull("Unable to find a DockingWindowManager - is there a tool showing?", dwm);
 
-		T provider = doWaitForComponentProvider(dwm, clazz);
-		return provider;
+        return doWaitForComponentProvider(dwm, clazz);
 	}
 
 	/**
@@ -769,8 +762,7 @@ public abstract class AbstractDockingTest extends AbstractGenericTest {
 		DockingWindowManager dwm = findActiveDockingWindowManager();
 		assertNotNull("Unable to find a DockingWindowManager - is there a tool showing?", dwm);
 
-		T provider = doWaitForComponentProvider(dwm, clazz, title);
-		return provider;
+        return doWaitForComponentProvider(dwm, clazz, title);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1201,8 +1193,7 @@ public abstract class AbstractDockingTest extends AbstractGenericTest {
 	public static DockingActionIf getLocalAction(ComponentProvider provider, String actionName) {
 		Tool tool = provider.getTool();
 		DockingToolActions toolActions = tool.getToolActions();
-		DockingActionIf action = toolActions.getLocalAction(provider, actionName);
-		return action;
+        return toolActions.getLocalAction(provider, actionName);
 	}
 
 	/**
@@ -1803,8 +1794,7 @@ public abstract class AbstractDockingTest extends AbstractGenericTest {
 		Transferable t = c.getContents(null);
 
 		try {
-			String text = (String) t.getTransferData(DataFlavor.stringFlavor);
-			return text;
+            return (String) t.getTransferData(DataFlavor.stringFlavor);
 		}
 		catch (UnsupportedFlavorException e) {
 			Msg.error(this, "Unsupported data flavor - 'string'.  Supported flavors: ");
@@ -2245,15 +2235,14 @@ public abstract class AbstractDockingTest extends AbstractGenericTest {
 
 		yieldToSwing();
 
-		Image i = runSwing(() -> {
-			try {
-				return doCreateRenderedImage(c);
-			}
-			catch (Exception e) {
-				throw new RuntimeException(e);
-			}
-		});
-		return i;
+        return runSwing(() -> {
+            try {
+                return doCreateRenderedImage(c);
+            }
+            catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
 	}
 
 	private static Image doCreateRenderedImage(Component c) {

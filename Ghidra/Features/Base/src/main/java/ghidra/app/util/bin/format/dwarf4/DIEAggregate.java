@@ -137,9 +137,8 @@ public class DIEAggregate {
 	 * @return
 	 */
 	public static DIEAggregate createSingle(DebugInfoEntry die) {
-		DIEAggregate result = new DIEAggregate(new DebugInfoEntry[] { die });
 
-		return result;
+        return new DIEAggregate(new DebugInfoEntry[] { die });
 	}
 
 	/**

@@ -180,9 +180,8 @@ public class CoffArchiveBinaryAnalysisCommand extends FlatProgramAPI
 
 			String name = SymbolUtilities.replaceInvalidChars(archiveMemberHeader.getName(), true);
 
-			Address payloadAddress = end;
-			createFragment(name, payloadAddress, archiveMemberHeader.getSize());
-			createLabel(payloadAddress, name, true);
+            createFragment(name, end, archiveMemberHeader.getSize());
+			createLabel(end, name, true);
 		}
 	}
 

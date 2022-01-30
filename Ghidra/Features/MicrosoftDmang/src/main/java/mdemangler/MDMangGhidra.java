@@ -301,10 +301,8 @@ public class MDMangGhidra extends MDMang {
 			String baseName = objectCPP.getName();
 			if (objectCPP.isString()) {
 				MDString mstring = objectCPP.getMDString();
-				DemangledString demangledString =
-					new DemangledString(mangledSource, demangledSource, mstring.getName(),
-						mstring.toString(), mstring.getLength(), mstring.isUnicode());
-				resultObject = demangledString;
+                resultObject = new DemangledString(mangledSource, demangledSource, mstring.getName(),
+                    mstring.toString(), mstring.getLength(), mstring.isUnicode());
 			}
 			else if (baseName.length() != 0) {
 				DemangledVariable variable;
@@ -329,9 +327,7 @@ public class MDMangGhidra extends MDMang {
 	// doesn't match
 	// well to the current DemangledObject hierarchy.
 	private DemangledVariable processTemplate(MDTemplateNameAndArguments template) {
-		DemangledVariable variable =
-			new DemangledVariable(mangledSource, demangledSource, template.toString());
-		// NO NAMESPACE for high level template: variable.setNamespace(XXX);
+        // NO NAMESPACE for high level template: variable.setNamespace(XXX);
 		// DemangledTemplate objectTemplate = new DemangledTemplate();
 		// DemangledDataType dataType = new DemangledDataType((String) null);
 		// MDTemplateArgumentsList args = template.getArgumentsList();
@@ -343,7 +339,7 @@ public class MDMangGhidra extends MDMang {
 		// }
 		// dataType.setTemplate(objectTemplate);
 		// variable.setDatatype(dataType);
-		return variable;
+		return new DemangledVariable(mangledSource, demangledSource, template.toString());
 	}
 
 	private DemangledFunction processFunction(MDFunctionInfo functionInfo,

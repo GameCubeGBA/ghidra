@@ -277,8 +277,7 @@ public class VisualGraphView<V extends VisualVertex,
 		try {
 			viewPanel.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
-			T t = s.get();
-			return t;
+            return s.get();
 		}
 		finally {
 			viewPanel.setCursor(originalCursor);
@@ -508,8 +507,7 @@ public class VisualGraphView<V extends VisualVertex,
 			return null;
 		}
 		GraphViewer<V, E> viewer = getPrimaryGraphViewer();
-		VisualGraphViewUpdater<V, E> updater = viewer.getViewUpdater();
-		return updater;
+        return viewer.getViewUpdater();
 	}
 
 	public Point getVertexPointInViewSpace(V v) {

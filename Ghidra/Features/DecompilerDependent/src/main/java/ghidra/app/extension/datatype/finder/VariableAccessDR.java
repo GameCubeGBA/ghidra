@@ -76,14 +76,13 @@ public class VariableAccessDR extends DecompilerReference {
 		DecompilerVariable start = variable;
 		for (DecompilerVariable field : fields) {
 
-			DecompilerVariable next = field;
-			DecompilerVariable var = getMatch(dt, fieldName, start, next);
+            DecompilerVariable var = getMatch(dt, fieldName, start, field);
 			if (var != null) {
-				DataTypeReference ref = createReference(var, next);
+				DataTypeReference ref = createReference(var, field);
 				results.add(ref);
 			}
 
-			start = next;
+			start = field;
 		}
 
 		//
@@ -180,8 +179,7 @@ public class VariableAccessDR extends DecompilerReference {
 		}
 
 		DataType varType = var.getParentDataType();
-		boolean matches = isEqual(varType, dt);
-		return matches;
+        return isEqual(varType, dt);
 	}
 
 	private boolean matchesType(DecompilerVariable var, DataType dt) {
@@ -195,8 +193,7 @@ public class VariableAccessDR extends DecompilerReference {
 			// statement of a switch
 			return false;
 		}
-		boolean matches = isEqual(varType, dt);
-		return matches;
+        return isEqual(varType, dt);
 	}
 
 	protected DataTypeReference createReference(DecompilerVariable var) {
@@ -219,8 +216,7 @@ public class VariableAccessDR extends DecompilerReference {
 	@Override
 	protected LocationReferenceContext getContext(DecompilerVariable var) {
 		DecompilerVariable field = findFieldFor(var);
-		LocationReferenceContext context = super.getContext(field);
-		return context;
+        return super.getContext(field);
 	}
 
 	private DecompilerVariable findFieldFor(DecompilerVariable var) {
@@ -251,8 +247,7 @@ public class VariableAccessDR extends DecompilerReference {
 			fieldIndex = allVars.size() - 1;
 		}
 
-		DecompilerVariable field = allVars.get(fieldIndex);
-		return field;
+        return allVars.get(fieldIndex);
 	}
 
 	private List<DecompilerVariable> getAllVariablesInOrder() {

@@ -46,8 +46,7 @@ public abstract class AbstractJgtGraphMousePlugin<V, E>
 	protected E selectedEdge;
 
 	public VisualizationViewer<V, E> getViewer(MouseEvent e) {
-		VisualizationViewer<V, E> viewer = getGraphViewer(e);
-		return viewer;
+        return getGraphViewer(e);
 	}
 
 	/**

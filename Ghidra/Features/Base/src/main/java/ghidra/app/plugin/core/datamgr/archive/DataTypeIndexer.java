@@ -96,8 +96,7 @@ public class DataTypeIndexer {
 			task.run(TaskMonitor.DUMMY);
 		}
 
-		List<DataType> newList = task.getList();
-		return newList;
+        return task.getList();
 	}
 
 	// Note: purposefully not synchronized for speed

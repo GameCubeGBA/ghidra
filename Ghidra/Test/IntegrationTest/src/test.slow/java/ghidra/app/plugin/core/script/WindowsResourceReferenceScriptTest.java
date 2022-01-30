@@ -148,25 +148,21 @@ public class WindowsResourceReferenceScriptTest extends AbstractGhidraHeadedInte
 	 * in regression testing
 	 */
 	protected Address[] propagateWinMineTestAddrs(Program pgm) {
-		Address[] winmineTestAddrs = { addr(0x01001b99, pgm), addr(0x01001bc2, pgm),
-			addr(0x01001b5e, pgm), addr(0x010022c2, pgm), addr(0x01002243, pgm),
-			addr(0x01003d52, pgm), addr(0x010022ac, pgm), addr(0x01002334, pgm),
-			addr(0x01001f3b, pgm), addr(0x0100398f, pgm), addr(0x01003ade, pgm),
-			addr(0x01003aec, pgm), addr(0x01003ad0, pgm), addr(0x010039c5, pgm),
-			addr(0x01003d45, pgm), addr(0x0100385b, pgm), addr(0x01003d36, pgm),
-			addr(0x01003920, pgm), addr(0x0100390e, pgm) };
 
-		return winmineTestAddrs;
+        return new Address[]{ addr(0x01001b99, pgm), addr(0x01001bc2, pgm),
+            addr(0x01001b5e, pgm), addr(0x010022c2, pgm), addr(0x01002243, pgm),
+            addr(0x01003d52, pgm), addr(0x010022ac, pgm), addr(0x01002334, pgm),
+            addr(0x01001f3b, pgm), addr(0x0100398f, pgm), addr(0x01003ade, pgm),
+            addr(0x01003aec, pgm), addr(0x01003ad0, pgm), addr(0x010039c5, pgm),
+            addr(0x01003d45, pgm), addr(0x0100385b, pgm), addr(0x01003d36, pgm),
+            addr(0x01003920, pgm), addr(0x0100390e, pgm) };
 	}
 
 	protected Address[] propagateMIPTestAddrs(Program pgm) {
-		Address[] mipTestAddrs =
 
-			{ addr(0x1400172c7L, pgm), addr(0x14005282dL, pgm), addr(0x14005276cL, pgm),
-				addr(0x1400523baL, pgm), addr(0x14004ca38L, pgm), addr(0x14003d855L, pgm),
-				addr(0x14001a964L, pgm), addr(0x14001846fL, pgm), addr(0x140025c87L, pgm) };
-
-		return mipTestAddrs;
+        return new Address[]{ addr(0x1400172c7L, pgm), addr(0x14005282dL, pgm), addr(0x14005276cL, pgm),
+            addr(0x1400523baL, pgm), addr(0x14004ca38L, pgm), addr(0x14003d855L, pgm),
+            addr(0x14001a964L, pgm), addr(0x14001846fL, pgm), addr(0x140025c87L, pgm) };
 	}
 
 }

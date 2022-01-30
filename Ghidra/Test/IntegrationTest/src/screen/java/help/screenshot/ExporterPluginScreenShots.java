@@ -96,13 +96,12 @@ public class ExporterPluginScreenShots extends GhidraScreenShotGenerator {
 
 	private DomainFile createDomainFile() {
 		TestDummyDomainFolder root = new TestDummyDomainFolder(null, "Project");
-		DomainFile df = new TestDummyDomainFile(root, "Program_A") {
-			@Override
-			public Class<? extends DomainObject> getDomainObjectClass() {
-				return Program.class;
-			}
-		};
-		return df;
+        return (DomainFile) new TestDummyDomainFile(root, "Program_A") {
+            @Override
+            public Class<? extends DomainObject> getDomainObjectClass() {
+                return Program.class;
+            }
+        };
 	}
 
 }

@@ -446,9 +446,8 @@ public class ProgramDiffPlugin extends ProgramPlugin
 			}
 			Address primaryRefAddr = SimpleDiffUtility.getCompatibleAddress(secondaryDiffProgram,
 				refAddr, primaryProgram);
-			ProgramLocation newP1Location = new ProgramLocation(primaryProgram, primaryAddr,
-				primaryByteAddr, location.getComponentPath(), primaryRefAddr, 0, 0, 0);
-			previousP1Location = newP1Location;
+            previousP1Location = new ProgramLocation(primaryProgram, primaryAddr,
+                primaryByteAddr, location.getComponentPath(), primaryRefAddr, 0, 0, 0);
 		}
 
 		Address p1LocationAddress = previousP1Location.getAddress();
@@ -737,10 +736,8 @@ public class ProgramDiffPlugin extends ProgramPlugin
 			new ProgramSelection(DiffUtility.getCodeUnitSet(newP2Selection, secondaryDiffProgram));
 		AddressFactory p1AddressFactory =
 			(primaryProgram != null) ? primaryProgram.getAddressFactory() : null;
-		ProgramSelection intersection =
-			new ProgramSelection(p2AddressFactory, p2CodeUnitSelection.intersect(p2DiffHighlight));
 
-		p2Selection = intersection;
+        p2Selection = new ProgramSelection(p2AddressFactory, p2CodeUnitSelection.intersect(p2DiffHighlight));
 		AddressSet p2SelectionAsP1Set =
 			DiffUtility.getCompatibleAddressSet(p2Selection, primaryProgram);
 
@@ -856,8 +853,7 @@ public class ProgramDiffPlugin extends ProgramPlugin
 		}
 
 		AddressSet p2DiffSet = DiffUtility.getCompatibleAddressSet(p1DiffSet, secondaryDiffProgram);
-		ProgramSelection p2DiffSelection = new ProgramSelection(p2AddressFactory, p2DiffSet);
-		p2DiffHighlight = p2DiffSelection;
+        p2DiffHighlight = new ProgramSelection(p2AddressFactory, p2DiffSet);
 		AddressSet p2DiffSetAsP1 = DiffUtility.getCompatibleAddressSet(p2DiffSet, primaryProgram);
 
 		// Must be on the Swing thread to modify MarkerSets
@@ -1401,8 +1397,7 @@ public class ProgramDiffPlugin extends ProgramPlugin
 		opt.registerOption(DIFF_HIGHLIGHT_COLOR_NAME, diffHighlightColor,
 			new HelpLocation("CodeBrowserPlugin", "Browser_Fields"),
 			"Color used to highlight differences between two programs.");
-		Color c = opt.getColor(DIFF_HIGHLIGHT_COLOR_NAME, diffHighlightColor);
-		diffHighlightColor = c;
+        diffHighlightColor = opt.getColor(DIFF_HIGHLIGHT_COLOR_NAME, diffHighlightColor);
 		opt.addOptionsChangeListener(this);
 
 		cursorHighlightColor = opt.getColor(GhidraOptions.HIGHLIGHT_CURSOR_LINE_COLOR, null);

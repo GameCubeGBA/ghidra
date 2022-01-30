@@ -208,17 +208,16 @@ public abstract class AbstractGroupingFunctionGraphJob extends AbstractFunctionG
 			}
 		}
 
-		double newComponentsAlpha = percentComplete;
-		vertices = getNewVertices();
+        vertices = getNewVertices();
 		for (FGVertex vertex : vertices) {
-			vertex.setAlpha(newComponentsAlpha);
+			vertex.setAlpha(percentComplete);
 
 			Collection<FGEdge> edges = getEdges(vertex);
 			for (FGEdge edge : edges) {
 
 				// don't go past the alpha when adding
 				double defaultAlpha = edge.getDefaultAlpha();
-				double alpha = Math.min(newComponentsAlpha, defaultAlpha);
+				double alpha = Math.min(percentComplete, defaultAlpha);
 				edge.setAlpha(alpha);
 			}
 		}

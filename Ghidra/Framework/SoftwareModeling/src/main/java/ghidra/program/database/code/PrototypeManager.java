@@ -68,16 +68,14 @@ class PrototypeManager {
 	final static Schema REGISTER_SCHEMA = createRegisterSchema();
 
 	private static Schema createPrototypeSchema() {
-		Schema schema = new Schema(1, "Keys",
-			new Field[] { BinaryField.INSTANCE, LongField.INSTANCE, BooleanField.INSTANCE },
-			new String[] { "Bytes", "Address", "InDelaySlot" });
-		return schema;
+        return new Schema(1, "Keys",
+            new Field[] { BinaryField.INSTANCE, LongField.INSTANCE, BooleanField.INSTANCE },
+            new String[] { "Bytes", "Address", "InDelaySlot" });
 	}
 
 	private static Schema createRegisterSchema() {
-		Schema schema = new Schema(1, "Keys", new Field[] { StringField.INSTANCE },
-			new String[] { "Register Context" });
-		return schema;
+        return new Schema(1, "Keys", new Field[] { StringField.INSTANCE },
+            new String[] { "Register Context" });
 	}
 
 	private static final int CURRENT_VERSION = 1;
@@ -486,8 +484,7 @@ class PrototypeManager {
 				DBRecord record = contextTable.getRecord(protoID);
 				if (record != null) {
 					String s = record.getString(0);
-					BigInteger value = new BigInteger(s);
-					return value;
+                    return new BigInteger(s);
 				}
 			}
 			catch (IOException e) {

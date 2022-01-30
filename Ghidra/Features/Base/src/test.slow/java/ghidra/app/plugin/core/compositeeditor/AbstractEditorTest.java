@@ -738,9 +738,7 @@ public abstract class AbstractEditorTest extends AbstractGhidraHeadedIntegration
 		Component editorComponent = getTable().getEditorComponent();
 		if (editorComponent instanceof JPanel) {
 			Object editor = getTable().getCellEditor();
-			DataTypeSelectionEditor internalEditor =
-				(DataTypeSelectionEditor) getInstanceField("editor", editor);
-			return internalEditor;
+            return (DataTypeSelectionEditor) getInstanceField("editor", editor);
 		}
 
 		return null;

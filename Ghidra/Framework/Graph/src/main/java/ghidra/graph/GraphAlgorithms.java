@@ -132,8 +132,7 @@ public class GraphAlgorithms {
 			Collection<V> vertices) {
 
 		Set<E> edges = getEdgesFrom(g, vertices, true);
-		Set<V> descendants = toVertices(edges);
-		return descendants;
+        return toVertices(edges);
 	}
 
 	/**
@@ -149,8 +148,7 @@ public class GraphAlgorithms {
 			Collection<V> vertices) {
 
 		Set<E> edges = getEdgesFrom(g, vertices, false);
-		Set<V> ancestors = toVertices(edges);
-		return ancestors;
+        return toVertices(edges);
 	}
 
 	/**
@@ -165,8 +163,7 @@ public class GraphAlgorithms {
 			boolean topDown) {
 
 		List<V> list = Arrays.asList(v);
-		Set<E> edges = getEdgesFrom(g, list, topDown);
-		return edges;
+        return getEdgesFrom(g, list, topDown);
 	}
 
 	/**
@@ -322,8 +319,7 @@ public class GraphAlgorithms {
 			TaskMonitor monitor) throws CancelledException {
 
 		ChkDominanceAlgorithm<V, E> algo = new ChkDominanceAlgorithm<>(g, monitor);
-		Set<V> dominated = algo.getDominated(from);
-		return dominated;
+        return algo.getDominated(from);
 	}
 
 	/**
@@ -340,8 +336,7 @@ public class GraphAlgorithms {
 			TaskMonitor monitor) throws CancelledException {
 
 		ChkPostDominanceAlgorithm<V, E> algo = new ChkPostDominanceAlgorithm<>(g, monitor);
-		Set<V> postDominated = algo.getDominated(from);
-		return postDominated;
+        return algo.getDominated(from);
 	}
 
 	/**
@@ -460,8 +455,7 @@ public class GraphAlgorithms {
 	 */
 	public static <V, E extends GEdge<V>> List<V> getVerticesInPostOrder(GDirectedGraph<V, E> g,
 			GraphNavigator<V, E> navigator) {
-		List<V> postOrder = DepthFirstSorter.postOrder(g, navigator);
-		return postOrder;
+        return DepthFirstSorter.postOrder(g, navigator);
 	}
 
 	/**
@@ -474,8 +468,7 @@ public class GraphAlgorithms {
 	 */
 	public static <V, E extends GEdge<V>> List<V> getVerticesInPreOrder(GDirectedGraph<V, E> g,
 			GraphNavigator<V, E> navigator) {
-		List<V> preOrder = DepthFirstSorter.preOrder(g, navigator);
-		return preOrder;
+        return DepthFirstSorter.preOrder(g, navigator);
 	}
 
 	/**
@@ -512,15 +505,12 @@ public class GraphAlgorithms {
 
 		//@formatter:off
 		Collection<E> edges = graph.getEdges();
-		Set<E> results = 
-			edges.stream()
-				 .filter(e -> vertices.contains(e.getStart()))
-				 .filter(e -> vertices.contains(e.getEnd()))
-				 .collect(Collectors.toSet())
-				 ;
-		//@formatter:on
+        //@formatter:on
 
-		return results;
+		return edges.stream()
+             .filter(e -> vertices.contains(e.getStart()))
+             .filter(e -> vertices.contains(e.getEnd()))
+             .collect(Collectors.toSet());
 	}
 
 	/**

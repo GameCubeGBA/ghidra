@@ -220,12 +220,11 @@ public class AssemblyTreeResolver {
 				AssemblyResolvedConstructor rc = (AssemblyResolvedConstructor) ar;
 				AssemblyPatternBlock dst = rc.getContext();
 				// TODO: The desired context may need to be passed in. For now, just take start.
-				AssemblyPatternBlock src = context; // TODO: This is only correct for "instruction"
-				String table = branch.getProduction().getName();
+                String table = branch.getProduction().getName();
 
 				dbg.println("Finding paths from " + context + " to " + ar.lineToString());
 				Collection<Deque<AssemblyConstructorSemantic>> paths =
-					ctxGraph.computeOptimalApplications(src, table, dst, table);
+					ctxGraph.computeOptimalApplications(context, table, dst, table);
 				dbg.println("Found " + paths.size());
 				for (Deque<AssemblyConstructorSemantic> path : paths) {
 					dbg.println("  " + path);

@@ -380,9 +380,8 @@ public class ToolTipUtils {
 		String type = param.getDataType().getName();
 		String name = param.getName();
 		int length = type.length() + 1 + name.length();
-		int rawTextLength = length;
 
-		//
+        //
 		// Bound the max width of the tooltip
 		//
 		if (length > PARAM_MAX_CHAR_LENGTH) {
@@ -406,7 +405,7 @@ public class ToolTipUtils {
 
 		pb.append(colorString(PARAM_NAME_COLOR, friendlyEncodeHTML(name)));
 		params.add(pb.toString());
-		return rawTextLength;
+		return length;
 	}
 
 }

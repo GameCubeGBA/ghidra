@@ -192,8 +192,7 @@ public class QualifiedSelectionPlugin extends Plugin {
 			return new AddressSet();//return an empty address set...
 		}
 		AddressSet notUndefinedSet = definedDataSet.union(instructionSet);
-		AddressSet undefinedSet = startSet.subtract(notUndefinedSet);
-		return undefinedSet;
+        return startSet.subtract(notUndefinedSet);
 	}
 
 	private AddressSetView adjustToCodeUnitBoundaries(AddressSetView startSet,

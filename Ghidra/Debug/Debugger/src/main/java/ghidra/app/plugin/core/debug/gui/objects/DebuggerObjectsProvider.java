@@ -860,8 +860,7 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 	}
 
 	public TargetObject getAncestor(ActionContext context, Class<? extends TargetObject> clazz) {
-		TargetObject object = this.getObjectFromContext(context);
-		TargetObject ref = object;
+        TargetObject ref = this.getObjectFromContext(context);
 		while (ref != null) {
 			if (clazz.isInstance(ref)) {
 				return ref;

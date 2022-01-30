@@ -105,8 +105,7 @@ public class TableUtils {
 		}
 
 		Settings settings = columnBasedModel.getColumnSettings(columnIndex);
-		String s = renderer.getFilterString(columnValue, settings);
-		return s;
+        return renderer.getFilterString(columnValue, settings);
 	}
 
 	private static <ROW_OBJECT> GColumnRenderer<Object> getColumnRenderer(

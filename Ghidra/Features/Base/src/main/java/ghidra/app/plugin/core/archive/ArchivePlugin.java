@@ -346,8 +346,7 @@ public class ArchivePlugin extends Plugin implements FrontEndOnly, ProjectListen
 				jarIn.closeEntry();
 				if (name.endsWith(ProjectLocator.getProjectExtension())) {
 					int endIndex = name.length() - ProjectLocator.getProjectExtension().length();
-					String projectName = name.substring(0, endIndex);
-					return projectName;
+                    return name.substring(0, endIndex);
 				}
 			}
 		}

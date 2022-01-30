@@ -165,8 +165,7 @@ public class ComponentProviderActionsTest extends AbstractGhidraHeadedIntegratio
 
 		showProvider();
 
-		KeyStroke newKs = CONTROL_T;
-		setKeyBindingViaF4Dialog_FromWindowsMenu(newKs);
+        setKeyBindingViaF4Dialog_FromWindowsMenu(CONTROL_T);
 
 		hideProvider();
 		triggerKey(tool.getToolFrame(), CONTROL_T);
@@ -186,8 +185,7 @@ public class ComponentProviderActionsTest extends AbstractGhidraHeadedIntegratio
 
 		showProvider();
 
-		KeyStroke newKs = CONTROL_T;
-		applyBindingToDialog_FromWindowsMenu(newKs);
+        applyBindingToDialog_FromWindowsMenu(CONTROL_T);
 
 		assertCollisionsWithKeyStroke();
 	}
@@ -435,8 +433,7 @@ public class ComponentProviderActionsTest extends AbstractGhidraHeadedIntegratio
 		GlobalMenuAndToolBarManager toolbarManager =
 			(GlobalMenuAndToolBarManager) getInstanceField("menuAndToolBarManager", guiActions);
 		DockingActionIf action = provider.getShowProviderAction();
-		DockingActionIf toolbarAction = toolbarManager.getToolbarAction(action.getName());
-		return toolbarAction;
+        return toolbarManager.getToolbarAction(action.getName());
 	}
 
 	private void setOptionsKeyStroke(KeyStroke newKs) {

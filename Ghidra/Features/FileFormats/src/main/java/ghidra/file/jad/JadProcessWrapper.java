@@ -117,8 +117,7 @@ public class JadProcessWrapper {
 			Application.getOSFile((Platform.CURRENT_PLATFORM == Platform.WIN_X86_32 ||
 				Platform.CURRENT_PLATFORM == Platform.WIN_X86_64) ? "jad.exe" : "jad");
 
-		String jadPath = jadExecutableFile.getAbsolutePath();
-		return jadPath;
+        return jadExecutableFile.getAbsolutePath();
 	}
 
 	/**

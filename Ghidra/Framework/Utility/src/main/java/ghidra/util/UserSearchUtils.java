@@ -106,8 +106,7 @@ public class UserSearchUtils {
 			options |= Pattern.CASE_INSENSITIVE;
 		}
 
-		Pattern p = createPattern(input, true, options);
-		return p;
+        return createPattern(input, true, options);
 	}
 
 	/**
@@ -126,8 +125,7 @@ public class UserSearchUtils {
 	 *             if the input could be compiled
 	 */
 	public static Pattern createLiteralSearchPattern(String text) {
-		Pattern p = createPattern(text, false, CASE_SENSITIVE);
-		return p;
+        return createPattern(text, false, CASE_SENSITIVE);
 	}
 
 	/**
@@ -160,8 +158,7 @@ public class UserSearchUtils {
 		}
 
 		String converted = convertUserInputToRegex(input, allowGlobbing);
-		Pattern p = Pattern.compile(converted + ".*", options);
-		return p;
+        return Pattern.compile(converted + ".*", options);
 	}
 
 	/**
@@ -193,8 +190,7 @@ public class UserSearchUtils {
 		}
 
 		String converted = convertUserInputToRegex(input, allowGlobbing);
-		Pattern p = Pattern.compile(".*" + converted, options);
-		return p;
+        return Pattern.compile(".*" + converted, options);
 	}
 
 	/**
@@ -222,8 +218,7 @@ public class UserSearchUtils {
 		}
 
 		String converted = convertUserInputToRegex(input, allowGlobbing);
-		Pattern p = Pattern.compile(".*" + converted + ".*", options);
-		return p;
+        return Pattern.compile(".*" + converted + ".*", options);
 	}
 
 	/**
@@ -253,8 +248,7 @@ public class UserSearchUtils {
 		}
 
 		String converted = convertUserInputToRegex(input, allowGlobbing);
-		Pattern p = Pattern.compile(converted, options);
-		return p;
+        return Pattern.compile(converted, options);
 	}
 
 	/**
@@ -280,8 +274,7 @@ public class UserSearchUtils {
 			return wildCardPatternString;
 		}
 
-		String converted = convertUserInputToRegex(input, allowGlobbing);
-		return converted;
+        return convertUserInputToRegex(input, allowGlobbing);
 	}
 
 	private static Pattern createSingleStarPattern(String input, boolean allowGlobbing,
@@ -344,8 +337,7 @@ public class UserSearchUtils {
 
 		// *? is a Reluctant Quantifier, matching zero or more.  '*' is the quantifier, '?' makes
 		// it reluctant
-		String starReplaced = starMatcher.replaceAll(".*?");
-		return starReplaced;
+        return starMatcher.replaceAll(".*?");
 	}
 
 	/**

@@ -205,8 +205,7 @@ public class SharedStubKeyBindingAction extends DockingAction implements Options
 	}
 
 	private KeyStroke getKeyStrokeFromOptions(KeyStroke validatedKeyStroke) {
-		KeyStroke ks = keyBindingOptions.getKeyStroke(getFullName(), validatedKeyStroke);
-		return ks;
+        return keyBindingOptions.getKeyStroke(getFullName(), validatedKeyStroke);
 	}
 
 	private KeyStroke getKeyStroke(KeyBindingData data) {

@@ -110,8 +110,7 @@ public class OperandValue extends PatternValue {
 		ConstructState tempstate = new ConstructState(null);
 		ParserWalker newwalker = new ParserWalker(walker.getParserContext());
 		newwalker.setOutOfBandState(ct, index, tempstate, walker);
-		long res = patexp.getValue(newwalker);
-		return res;
+        return patexp.getValue(newwalker);
 	}
 
 	/* (non-Javadoc)

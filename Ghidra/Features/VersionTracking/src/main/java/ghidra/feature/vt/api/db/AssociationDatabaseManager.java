@@ -237,8 +237,7 @@ public class AssociationDatabaseManager implements VTAssociationManager {
 
 		try {
 			DBRecord record = markupItemTableAdapter.createMarkupItemRecord(markupItem);
-			MarkupItemStorageDB appliedMarkupItem = getMarkupItemForRecord(record);
-			return appliedMarkupItem;
+            return getMarkupItemForRecord(record);
 		}
 		catch (IOException e) {
 			session.dbError(e);

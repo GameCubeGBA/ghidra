@@ -81,9 +81,7 @@ public class JdiModelTargetConstantPool extends JdiModelTargetObjectImpl impleme
 	}
 
 	private JdiModelTargetReferenceType getClassType() {
-		JdiModelTargetReferenceType classType =
-			((JdiModelTargetSectionContainer) parent).getClassType();
-		return classType;
+        return ((JdiModelTargetSectionContainer) parent).getClassType();
 	}
 
 	@Override

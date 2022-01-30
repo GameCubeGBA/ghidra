@@ -43,8 +43,7 @@ public class MouseDraggedLinePaintableShape extends PaintableShape {
 	private void buildShape() {
 		controls.clear();
 
-		Point start = points.get(0);
-		Point p1 = start;
+        Point p1 = points.get(0);
 		Point p2 = points.get(1);
 
 		GeneralPath path = new GeneralPath();

@@ -169,10 +169,8 @@ public class EnumTypeApplier extends AbstractComplexTypeApplier {
 //		// Ghidra does not like size of zero.
 //		length = Integer.max(length, 1);
 
-		EnumDataType enumDataType = new EnumDataType(categoryPath, fixedPath.getName(), getLength(),
-			applicator.getDataTypeManager());
-
-		return enumDataType;
+        return new EnumDataType(categoryPath, fixedPath.getName(), getLength(),
+            applicator.getDataTypeManager());
 	}
 
 	@Override

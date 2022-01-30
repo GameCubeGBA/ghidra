@@ -962,8 +962,7 @@ public class GTreeTest extends AbstractDockingTest {
 	}
 
 	private TreePath rowToPath(int row) {
-		TreePath path = gTree.getPathForRow(row);
-		return path;
+        return gTree.getPathForRow(row);
 	}
 
 	private void assertExpaned(List<TreePath> expandedPaths, GTreeNode expected) {
@@ -1035,8 +1034,7 @@ public class GTreeTest extends AbstractDockingTest {
 			gTree.scrollPathToVisible(path);
 		});
 
-		TreePath path = getLastVisiblePath();
-		return path;
+        return getLastVisiblePath();
 	}
 
 	private TreePath getLastVisiblePath() {
@@ -1044,8 +1042,7 @@ public class GTreeTest extends AbstractDockingTest {
 
 		JTree jTree = gTree.getJTree();
 		int start = jTree.getClosestRowForLocation(r.x, r.y + r.height);
-		TreePath path = gTree.getPathForRow(start);
-		return path;
+        return gTree.getPathForRow(start);
 	}
 
 	private void assertProgressPanel(boolean isShowing) {

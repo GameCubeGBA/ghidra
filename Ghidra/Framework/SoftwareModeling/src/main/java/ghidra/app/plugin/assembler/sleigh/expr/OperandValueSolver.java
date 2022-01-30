@@ -96,8 +96,7 @@ public class OperandValueSolver extends AbstractExpressionSolver<OperandValue> {
 		}
 		int shamt = AssemblyTreeResolver.computeOffset(sym, cons, res);
 		cur = cur == null ? null : cur.truncate(shamt);
-		MaskedLong result = solver.getValue(patexp, vals, res, cur);
-		return result;
+        return solver.getValue(patexp, vals, res, cur);
 	}
 
 	@Override

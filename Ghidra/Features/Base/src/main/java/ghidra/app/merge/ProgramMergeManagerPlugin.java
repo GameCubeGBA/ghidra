@@ -69,8 +69,7 @@ public class ProgramMergeManagerPlugin extends MergeManagerPlugin implements Pro
 	@Override
 	public void processEvent(PluginEvent event) {
 		if (event instanceof ProgramActivatedPluginEvent) {
-			Program activeProgram = ((ProgramActivatedPluginEvent) event).getActiveProgram();
-			currentDomainObject = activeProgram;
+            currentDomainObject = ((ProgramActivatedPluginEvent) event).getActiveProgram();
 		}
 	}
 

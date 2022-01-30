@@ -326,8 +326,7 @@ public class PcodeSyntaxTree implements PcodeFactory {
 
 		// This is the most common case, 1 piece, and address is pulled from the piece
 		if ((pieces.length == 1) && (addr == null)) {
-			Varnode vn = newVarnode(pieces[0].getSize(), pieces[0].getAddress());
-			return vn;
+            return newVarnode(pieces[0].getSize(), pieces[0].getAddress());
 		}
 
 		// Anything past here allocates varnode from the JOIN (VARIABLE) space.
@@ -343,8 +342,7 @@ public class PcodeSyntaxTree implements PcodeFactory {
 		} catch (InvalidInputException e) {
 			return null;
 		}
-		Varnode vn = newVarnode(logicalSize, addr);
-		return vn;
+        return newVarnode(logicalSize, addr);
 	}
 
 	@Override

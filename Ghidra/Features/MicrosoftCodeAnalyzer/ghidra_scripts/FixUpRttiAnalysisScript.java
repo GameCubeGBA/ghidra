@@ -94,8 +94,7 @@ public class FixUpRttiAnalysisScript extends GhidraScript {
 
 		createMissingBaseClassArrays(classHierarchyDescriptors);
 
-		List<Symbol> vftableSymbols = createMissingVftableSymbols(completeObjectLocatorSymbols);
-		return vftableSymbols;
+        return createMissingVftableSymbols(completeObjectLocatorSymbols);
 
 	}
 

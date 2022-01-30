@@ -410,8 +410,7 @@ public class AddressMapDB implements AddressMap {
 			// Check for match
 			Address base = sortedBaseStartAddrs[search];
 			if (base.hasSameAddressSpace(addr) && normalizedBaseOffset == base.getOffset()) {
-				int index = addrToIndexMap.get(base);
-				return index;
+                return addrToIndexMap.get(base);
 			}
 		}
 		if (indexOperation == INDEX_MATCH_OR_PREVIOUS) {

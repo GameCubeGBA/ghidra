@@ -56,8 +56,7 @@ public class ApplyMarkupItemTask extends VtTask {
 	protected VTMarkupItemApplyActionType getApplyActionType(VTMarkupItem markupItem,
 			ToolOptions markupItemOptions) {
 		VTMarkupType markupType = markupItem.getMarkupType();
-		VTMarkupItemApplyActionType applyActionType = markupType.getApplyAction(markupItemOptions);
-		return applyActionType;
+        return markupType.getApplyAction(markupItemOptions);
 	}
 
 	@Override

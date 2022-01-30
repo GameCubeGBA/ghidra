@@ -154,9 +154,7 @@ public class HCS12X_ElfExtension extends ElfExtension {
 
 		laddr = hcs12TranslatePagedAddress(laddr);
 
-		Address mappedAddr = address.getNewAddress(laddr);
-
-		return mappedAddr;
+        return address.getNewAddress(laddr);
 	}
 
 }

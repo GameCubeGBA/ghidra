@@ -121,8 +121,7 @@ class BookmarkTableModel extends AddressBasedTableModel<BookmarkRowObject> {
 	}
 
 	void restoreFilterState(FilterState filterState) {
-		Set<String> newTypes = filterState.getBookmarkTypes();
-		types = newTypes;
+        types = filterState.getBookmarkTypes();
 	}
 
 	private void adjustTypeFilter(BookmarkType[] bmTypes) {

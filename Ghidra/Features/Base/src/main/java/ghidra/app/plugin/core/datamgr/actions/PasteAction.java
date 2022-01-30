@@ -87,8 +87,7 @@ public class PasteAction extends DockingAction {
 			return null;
 		}
 
-		DataTypeTreeNode node = (DataTypeTreeNode) selectionPaths[0].getLastPathComponent();
-		return node;
+        return (DataTypeTreeNode) selectionPaths[0].getLastPathComponent();
 	}
 
 	private boolean canPaste(DataTypeTreeNode destinationNode, List<GTreeNode> transferNodeList) {

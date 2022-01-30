@@ -68,10 +68,9 @@ public class RowLayout implements LayoutManager {
 
 		int height = numRows * compHeight + (numRows - 1) * vgap;
 		int width = numCols * compWidth + (numCols - 1) * hgap;
-		Dimension d = new Dimension(width + insets.left + insets.right + 2,
-			height + insets.top + insets.bottom + 2);
 
-		return d;
+        return new Dimension(width + insets.left + insets.right + 2,
+            height + insets.top + insets.bottom + 2);
 	}
 
 	/**

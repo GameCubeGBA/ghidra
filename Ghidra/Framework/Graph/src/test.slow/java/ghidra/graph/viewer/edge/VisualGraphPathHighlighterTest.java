@@ -40,8 +40,7 @@ public class VisualGraphPathHighlighterTest extends AbstractVisualGraphTest {
 	protected TestVisualGraph buildGraph() {
 
 		// each test will populate the graph as needed 
-		TestVisualGraph g = new TestVisualGraph();
-		return g;
+        return new TestVisualGraph();
 	}
 
 	@Override

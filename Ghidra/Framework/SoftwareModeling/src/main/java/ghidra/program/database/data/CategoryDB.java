@@ -267,8 +267,7 @@ class CategoryDB extends DatabaseObject implements Category {
 					// can't happen here because we made a copy
 				}
 			}
-			DataType resolvedDataType = mgr.resolve(dt, handler);
-			return resolvedDataType;
+            return mgr.resolve(dt, handler);
 		}
 		finally {
 			mgr.lock.release();
@@ -308,8 +307,7 @@ class CategoryDB extends DatabaseObject implements Category {
 		mgr.lock.acquire();
 		try {
 			checkDeleted();
-			CategoryDB cat = mgr.createCategoryDB(this, categoryName);
-			return cat;
+            return mgr.createCategoryDB(this, categoryName);
 		}
 		catch (IOException e1) {
 			mgr.dbError(e1);

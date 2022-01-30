@@ -536,8 +536,7 @@ public class PdbResearch {
 	}
 
 	private static Composite createComposite(DataTypeManager dtm, String name) {
-		Composite composite = new StructureDataType(CategoryPath.ROOT, name, 0, dtm);
-		return composite;
+        return new StructureDataType(CategoryPath.ROOT, name, 0, dtm);
 	}
 
 	private static void fillComposite(Composite composite, TaskMonitor monitor, DataType extra)

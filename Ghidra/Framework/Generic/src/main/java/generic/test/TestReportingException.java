@@ -157,8 +157,7 @@ public class TestReportingException extends RuntimeException {
 			printTrace(testThreadTrace, writer);
 		}
 
-		String output = stringWriter.toString();
-		return output;
+        return stringWriter.toString();
 	}
 
 	private void addAllCauseExceptions(PrintWriter writer) {
@@ -201,13 +200,9 @@ public class TestReportingException extends RuntimeException {
 	private StackTraceElement[] filterTrace(StackTraceElement[] trace) {
 		if (threadName.contains("AWT-EventQueue")) {
 
-			StackTraceElement[] filtered =
-				ReflectionUtilities.filterStackTrace(trace, SWING_STACK_ELEMENT_PATTERNS);
-			return filtered;
+            return ReflectionUtilities.filterStackTrace(trace, SWING_STACK_ELEMENT_PATTERNS);
 		}
-		StackTraceElement[] filtered =
-			ReflectionUtilities.filterStackTrace(trace, GENERAL_USELESS_STACK_ELEMET_PATTERNS);
-		return filtered;
+        return ReflectionUtilities.filterStackTrace(trace, GENERAL_USELESS_STACK_ELEMET_PATTERNS);
 	}
 
 	private static void printTrace(StackTraceElement[] trace, PrintWriter writer) {

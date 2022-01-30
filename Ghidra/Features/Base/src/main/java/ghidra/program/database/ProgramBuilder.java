@@ -658,8 +658,7 @@ public class ProgramBuilder {
 		return tx(() -> {
 			Namespace ns = getNamespace(parentNamespace);
 			SymbolTable symbolTable = program.getSymbolTable();
-			GhidraClass c = symbolTable.createClass(ns, name, SourceType.USER_DEFINED);
-			return c;
+            return symbolTable.createClass(ns, name, SourceType.USER_DEFINED);
 		});
 	}
 
@@ -747,9 +746,8 @@ public class ProgramBuilder {
 			SourceType sourceType, int opIndex) {
 		return tx(() -> {
 			ReferenceManager refManager = program.getReferenceManager();
-			Reference ref = refManager.addMemoryReference(addr(fromAddress), addr(toAddress),
-				refType, sourceType, opIndex);
-			return ref;
+            return refManager.addMemoryReference(addr(fromAddress), addr(toAddress),
+                refType, sourceType, opIndex);
 		});
 	}
 
@@ -757,9 +755,8 @@ public class ProgramBuilder {
 			RefType refType, SourceType sourceType, int opIndex) {
 		return tx(() -> {
 			ReferenceManager refManager = program.getReferenceManager();
-			Reference ref = refManager.addOffsetMemReference(addr(fromAddress), addr(toAddress),
-				offset, refType, sourceType, opIndex);
-			return ref;
+            return refManager.addOffsetMemReference(addr(fromAddress), addr(toAddress),
+                offset, refType, sourceType, opIndex);
 		});
 	}
 
@@ -767,9 +764,8 @@ public class ProgramBuilder {
 			SourceType sourceType, int opIndex) {
 		return tx(() -> {
 			ReferenceManager refManager = program.getReferenceManager();
-			Reference ref = refManager.addStackReference(addr(fromAddress), opIndex, stackOffset,
-				refType, sourceType);
-			return ref;
+            return refManager.addStackReference(addr(fromAddress), opIndex, stackOffset,
+                refType, sourceType);
 		});
 	}
 
@@ -783,9 +779,8 @@ public class ProgramBuilder {
 		return tx(() -> {
 			ReferenceManager refManager = program.getReferenceManager();
 			Register register = program.getRegister(registerName);
-			Reference ref = refManager.addRegisterReference(addr(fromAddress), opIndex, register,
-				refType, sourceType);
-			return ref;
+            return refManager.addRegisterReference(addr(fromAddress), opIndex, register,
+                refType, sourceType);
 		});
 	}
 
@@ -804,8 +799,7 @@ public class ProgramBuilder {
 		return tx(() -> {
 			BookmarkManager bookMgr = program.getBookmarkManager();
 			Address addr = addr(address);
-			Bookmark bm = bookMgr.setBookmark(addr, bookmarkType, category, comment);
-			return bm;
+            return bookMgr.setBookmark(addr, bookmarkType, category, comment);
 		});
 	}
 

@@ -166,8 +166,7 @@ class ProgramListener implements DomainObjectListener {
 					}
 					TreePath nodePath = nodes[i].getTreePath();
 					for (int j = idx; j < viewedIndexes.length; j++) {
-						TreePath p = nodePath;
-						TreePath vp = viewList.get(viewedIndexes[j]);
+                        TreePath vp = viewList.get(viewedIndexes[j]);
 						ProgramNode programNode = (ProgramNode) vp.getLastPathComponent();
 						String vname = programNode.getName();
 						if (!vname.equals(childName)) {
@@ -175,13 +174,13 @@ class ProgramListener implements DomainObjectListener {
 							TreePath descPath = findDescendant(nodePath, vname);
 							if (descPath != null) {
 								viewList.remove(viewedIndexes[j]);
-								tree.addToView(p, viewedIndexes[j]);
+								tree.addToView(nodePath, viewedIndexes[j]);
 								++idx;
 							}
 						}
 						else {
 							viewList.remove(viewedIndexes[j]);
-							tree.addToView(p, viewedIndexes[j]);
+							tree.addToView(nodePath, viewedIndexes[j]);
 							++idx;
 						}
 					}

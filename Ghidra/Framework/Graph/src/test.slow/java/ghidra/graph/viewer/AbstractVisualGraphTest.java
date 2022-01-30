@@ -118,8 +118,7 @@ public abstract class AbstractVisualGraphTest extends AbstractDockingTest {
 	}
 
 	protected TestEdge getEdge(AbstractTestVertex v1, AbstractTestVertex v2) {
-		TestEdge e = graph.findEdge(v1, v2);
-		return e;
+        return graph.findEdge(v1, v2);
 	}
 
 	protected void swing(Runnable r) {
@@ -202,10 +201,8 @@ public abstract class AbstractVisualGraphTest extends AbstractDockingTest {
 	protected Point getViewLocation(AbstractTestVertex v) {
 
 		GraphViewer<AbstractTestVertex, TestEdge> viewer = graphComponent.getPrimaryViewer();
-		Point vertexUpperLeftCornerInViewSpace =
-			swing(() -> GraphViewerUtils.getVertexUpperLeftCornerInViewSpace(viewer, v));
 
-		return vertexUpperLeftCornerInViewSpace;
+        return swing(() -> GraphViewerUtils.getVertexUpperLeftCornerInViewSpace(viewer, v));
 	}
 
 	/**

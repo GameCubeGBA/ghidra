@@ -33,8 +33,7 @@ public class CpioFileSystemFactory
 	public CpioFileSystem create(FSRLRoot targetFSRL, ByteProvider byteProvider,
 			FileSystemService fsService, TaskMonitor monitor)
 			throws IOException, CancelledException {
-		CpioFileSystem fs = new CpioFileSystem(targetFSRL, byteProvider, fsService, monitor);
-		return fs;
+        return new CpioFileSystem(targetFSRL, byteProvider, fsService, monitor);
 	}
 
 	@Override

@@ -44,8 +44,7 @@ public class PcodeOpEmitter {
 	private int seqnum;
 
 	private Varnode convertRegisterToVarnode(Register reg) {
-		Varnode vn = new Varnode(reg.getAddress(), reg.getBitLength() / 8);
-		return vn;
+        return new Varnode(reg.getAddress(), reg.getBitLength() / 8);
 	}
 
 	private String findTempName(Address addr) {
