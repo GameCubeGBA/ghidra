@@ -619,9 +619,7 @@ public class ClangLayoutController implements LayoutModel, LayoutModelListener {
 			int padLength = maxNumberOfDigits - lineNumberLength;
 
 			StringBuffer buffy = new StringBuffer();
-			for (int i = 0; i < padLength; i++) {
-				buffy.append(' ');
-			}
+			buffy.append(" ".repeat(padLength));
 			buffy.append(lineNumberString).append(' '); // space for separation
 			return buffy.toString();
 		}

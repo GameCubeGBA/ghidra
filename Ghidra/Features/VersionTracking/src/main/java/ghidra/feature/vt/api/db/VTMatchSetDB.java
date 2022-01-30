@@ -146,14 +146,11 @@ public class VTMatchSetDB extends DatabaseObject implements VTMatchSet {
 			Element rootElement = builder.build(reader).getRootElement();
 			options = new ToolOptions(rootElement);
 		}
-		catch (JDOMException e) {
-			Msg.showError(this, null, "Error Loading Key Bindings", "Unable to build XML data.", e);
-		}
-		catch (IOException e) {
+		catch (JDOMException | IOException e) {
 			Msg.showError(this, null, "Error Loading Key Bindings", "Unable to build XML data.", e);
 		}
 
-		return options;
+        return options;
 	}
 
 	@Override

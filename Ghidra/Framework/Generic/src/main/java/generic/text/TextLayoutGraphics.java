@@ -124,9 +124,7 @@ public class TextLayoutGraphics extends Graphics2D {
 		int currentX = 0; //The x coordinate of the end of the last string
 		for (TextInfo info : textInfos) {
 			// insert newlines as appropriate
-			for (int i = lastRow; i < info.row; i++) {
-				buffer.append('\n');
-			}
+            buffer.append("\n".repeat(info.row - lastRow));
 
 			// if we started a new row, reset the x position
 			if (lastRow != info.row) {
@@ -151,9 +149,7 @@ public class TextLayoutGraphics extends Graphics2D {
 				fillSpaces = 1;
 			}
 
-			for (int i = 0; i < fillSpaces; i++) {
-				buffer.append(' ');
-			}
+            buffer.append(" ".repeat(fillSpaces));
 
 			int stringWidth = metrics.stringWidth(info.text);
 			currentX = info.point.x + stringWidth;

@@ -1428,13 +1428,10 @@ public class MachoProgramBuilder {
 		try {
 			functionMgr.createFunction(name, address, new AddressSet(address), SourceType.IMPORTED);
 		}
-		catch (InvalidInputException e) {
+		catch (InvalidInputException | OverlappingFunctionException e) {
 			// ignore
 		}
-		catch (OverlappingFunctionException e) {
-			// ignore
-		}
-	}
+    }
 
 	private byte[] getOriginalRelocationBytes(RelocationInfo relocation,
 			Address relocationAddress) {

@@ -359,13 +359,10 @@ public class EntryPointAnalyzer extends AbstractAnalyzer {
 				}
 			}
 		}
-		catch (CodeUnitInsertionException e) {
+		catch (CodeUnitInsertionException | DataTypeConflictException e) {
 			// couldn't create
 		}
-		catch (DataTypeConflictException e) {
-			// couldn't create
-		}
-	}
+    }
 
 	private int addExternalSymbolsToSet(Program program, AddressSetView addressSet,
 			TaskMonitor monitor, Set<Address> set) throws CancelledException {

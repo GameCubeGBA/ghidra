@@ -647,13 +647,10 @@ public abstract class AbstractExternalMergerTest extends AbstractListingMergeMan
 			try {
 				p.setName(name, SourceType.USER_DEFINED);
 			}
-			catch (DuplicateNameException e) {
+			catch (DuplicateNameException | InvalidInputException e) {
 				Assert.fail(e.getMessage());
 			}
-			catch (InvalidInputException e) {
-				Assert.fail(e.getMessage());
-			}
-		}
+        }
 		if (comment != null) {
 			p.setComment(comment);
 		}
@@ -701,13 +698,10 @@ public abstract class AbstractExternalMergerTest extends AbstractListingMergeMan
 			try {
 				p.setName(name, SourceType.USER_DEFINED);
 			}
-			catch (DuplicateNameException e) {
+			catch (DuplicateNameException | InvalidInputException e) {
 				Assert.fail(e.getMessage());
 			}
-			catch (InvalidInputException e) {
-				Assert.fail(e.getMessage());
-			}
-		}
+        }
 		if (comment != null) {
 			p.setComment(comment);
 		}

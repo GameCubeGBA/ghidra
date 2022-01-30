@@ -44,7 +44,6 @@ public interface LogicalBreakpoint {
 			public Enablement combineTrace(TraceEnablement traceEn) {
 				switch (traceEn) {
 					case NONE:
-						return Enablement.NONE;
 					case MISSING:
 						return Enablement.NONE;
 					case ENABLED:
@@ -70,7 +69,6 @@ public interface LogicalBreakpoint {
 			public Enablement combineTrace(TraceEnablement traceEn) {
 				switch (traceEn) {
 					case NONE:
-						return Enablement.NONE;
 					case MISSING:
 						return Enablement.NONE;
 					case ENABLED:

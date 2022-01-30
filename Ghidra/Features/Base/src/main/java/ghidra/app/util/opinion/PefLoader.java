@@ -95,13 +95,9 @@ public class PefLoader extends AbstractLibrarySupportLoader {
 			processInitSymbol(header, program, importState, log, monitor);
 			processTermSymbol(header, program, importState, log, monitor);
 		}
-		catch (PefException e) {
+		catch (PefException | AddressOverflowException e) {
 			throw new IOException(e);
-		}
-		catch (AddressOverflowException e) {
-			throw new IOException(e);
-		}
-		finally {
+		} finally {
 			if (importState != null) {
 				importState.dispose();
 			}

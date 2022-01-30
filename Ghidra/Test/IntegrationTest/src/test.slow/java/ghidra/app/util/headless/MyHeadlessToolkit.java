@@ -176,14 +176,10 @@ public class MyHeadlessToolkit extends Toolkit {
                     	localToolKit = new HeadlessToolkit(localToolKit);
                     }
                 }
-            } catch (InstantiationException e) {
+            } catch (InstantiationException | InvocationTargetException | NoSuchMethodException e) {
                 throw new AWTError("Could not instantiate Toolkit: " + preferredToolkit);
             } catch (IllegalAccessException e) {
                 throw new AWTError("Could not access Toolkit: " + preferredToolkit);
-            } catch (NoSuchMethodException e) {
-				throw new AWTError("Could not instantiate Toolkit: " + preferredToolkit);
-			} catch (InvocationTargetException e) {
-				throw new AWTError("Could not instantiate Toolkit: " + preferredToolkit);
-			}
-	}
+            }
+    }
 }

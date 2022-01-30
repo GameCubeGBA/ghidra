@@ -949,9 +949,7 @@ public class DecompilerNestedLayout extends AbstractFGLayout {
 		}
 
 		StringBuilder buffy = new StringBuilder();
-		for (int i = 0; i < depth * 2; i++) {
-			buffy.append(' ');
-		}
+        buffy.append(" ".repeat(depth * 2));
 
 		buffy.append(' ');
 		return buffy.toString();

@@ -73,16 +73,9 @@ public class FidService {
 				}
 				list.add(skipper);
 			}
-			catch (InstantiationException e) {
+			catch (InstantiationException | InvocationTargetException | NoSuchMethodException | IllegalAccessException e) {
 				// we tried
 			}
-			catch (IllegalAccessException e) {
-				// we tried
-			} catch (NoSuchMethodException e) {
-                // we tried
-            } catch (InvocationTargetException e) {
-                // we tried
-            }
         }
 	}
 

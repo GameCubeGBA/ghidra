@@ -289,13 +289,10 @@ public abstract class AbstractProgramLoader implements Loader {
 				try {
 					prog.setImageBase(imageBase, true);
 				}
-				catch (AddressOverflowException e) {
+				catch (AddressOverflowException | LockException e) {
 					// can't happen here
 				}
-				catch (LockException e) {
-					// can't happen here
-				}
-			}
+            }
 		}
 		finally {
 			prog.endTransaction(id, true);
@@ -366,13 +363,10 @@ public abstract class AbstractProgramLoader implements Loader {
 			functionMgr.createFunction(name, funcStart, new AddressSet(funcStart, funcStart),
 				SourceType.IMPORTED);
 		}
-		catch (InvalidInputException e) {
+		catch (InvalidInputException | OverlappingFunctionException e) {
 			// ignore
 		}
-		catch (OverlappingFunctionException e) {
-			// ignore
-		}
-	}
+    }
 
 	/**
 	 * Gets the {@link Loader}'s language service.

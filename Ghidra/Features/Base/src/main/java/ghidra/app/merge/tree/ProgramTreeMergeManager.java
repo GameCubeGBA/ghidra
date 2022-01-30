@@ -893,11 +893,9 @@ public class ProgramTreeMergeManager implements MergeResolver {
 				}
 			});
 		}
-		catch (InterruptedException e) {
+		catch (InterruptedException | InvocationTargetException e) {
 		}
-		catch (InvocationTargetException e) {
-		}
-		mergeManager.setApplyEnabled(false);
+        mergeManager.setApplyEnabled(false);
 		mergeManager.showComponent(mergePanel, "ProgramTreeMerge", new HelpLocation(
 			HelpTopics.REPOSITORY, "ProgramTreeConflict"));
 		// block until the user either cancels or hits the "Apply" button

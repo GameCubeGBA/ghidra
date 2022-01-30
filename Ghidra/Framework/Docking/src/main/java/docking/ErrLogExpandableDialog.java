@@ -302,9 +302,7 @@ public class ErrLogExpandableDialog extends AbstractErrDialog {
 					String text = nwt.getReportText();
 					if (text != null) {
 						b.append('\n');
-						for (int i = 0; i < indent; i++) {
-							b.append(INDENTATION);
-						}
+                        b.append(INDENTATION.repeat(indent));
 						b.append(nwt.getReportText());
 					}
 					if (nwt.doesIndent()) {

@@ -1601,13 +1601,10 @@ public class ListingCodeComparisonPanel
 				correlator =
 					new HashedFunctionAddressCorrelation(leftFunction, rightFunction, monitor);
 			}
-			catch (CancelledException e) {
+			catch (CancelledException | MemoryAccessException e) {
 				correlator = null;
 			}
-			catch (MemoryAccessException e) {
-				correlator = null;
-			}
-			if (isShowingEntireListing) {
+            if (isShowingEntireListing) {
 				loadEntirePrograms();
 			}
 			else {

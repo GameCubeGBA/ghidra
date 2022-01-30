@@ -826,15 +826,11 @@ public class ExternalMergerChangeTest extends AbstractExternalMergerTest {
 						Parameter parameter2 = new ParameterImpl("P2", new ByteDataType(), program);
 						function.addParameter(parameter2, SourceType.USER_DEFINED);
 					}
-					catch (InvalidInputException e) {
+					catch (InvalidInputException | DuplicateNameException e) {
 						e.printStackTrace();
 						Assert.fail();
 					}
-					catch (DuplicateNameException e) {
-						e.printStackTrace();
-						Assert.fail();
-					}
-					commit = true;
+                    commit = true;
 				}
 				catch (Exception e) {
 					Assert.fail(e.getMessage());
@@ -940,15 +936,11 @@ public class ExternalMergerChangeTest extends AbstractExternalMergerTest {
 						Parameter parameter2 = new ParameterImpl("P2", new ByteDataType(), program);
 						function.addParameter(parameter2, SourceType.USER_DEFINED);
 					}
-					catch (InvalidInputException e) {
+					catch (InvalidInputException | DuplicateNameException e) {
 						e.printStackTrace();
 						Assert.fail();
 					}
-					catch (DuplicateNameException e) {
-						e.printStackTrace();
-						Assert.fail();
-					}
-					commit = true;
+                    commit = true;
 				}
 				catch (Exception e) {
 					Assert.fail(e.getMessage());
@@ -1072,15 +1064,11 @@ public class ExternalMergerChangeTest extends AbstractExternalMergerTest {
 						Parameter parameter2 = new ParameterImpl("P2", new ByteDataType(), program);
 						function.addParameter(parameter2, SourceType.USER_DEFINED);
 					}
-					catch (InvalidInputException e) {
+					catch (InvalidInputException | DuplicateNameException e) {
 						e.printStackTrace();
 						Assert.fail();
 					}
-					catch (DuplicateNameException e) {
-						e.printStackTrace();
-						Assert.fail();
-					}
-					commit = true;
+                    commit = true;
 				}
 				catch (Exception e) {
 					Assert.fail(e.getMessage());
@@ -1181,15 +1169,11 @@ public class ExternalMergerChangeTest extends AbstractExternalMergerTest {
 						Parameter parameter2 = new ParameterImpl("P2", new ByteDataType(), program);
 						function.addParameter(parameter2, SourceType.USER_DEFINED);
 					}
-					catch (InvalidInputException e) {
+					catch (InvalidInputException | DuplicateNameException e) {
 						e.printStackTrace();
 						Assert.fail();
 					}
-					catch (DuplicateNameException e) {
-						e.printStackTrace();
-						Assert.fail();
-					}
-					commit = true;
+                    commit = true;
 				}
 				catch (Exception e) {
 					Assert.fail(e.getMessage());
@@ -1314,15 +1298,11 @@ public class ExternalMergerChangeTest extends AbstractExternalMergerTest {
 						Parameter parameter2 = new ParameterImpl("P2", new ByteDataType(), program);
 						function.addParameter(parameter2, SourceType.USER_DEFINED);
 					}
-					catch (InvalidInputException e) {
+					catch (InvalidInputException | DuplicateNameException e) {
 						e.printStackTrace();
 						Assert.fail();
 					}
-					catch (DuplicateNameException e) {
-						e.printStackTrace();
-						Assert.fail();
-					}
-					commit = true;
+                    commit = true;
 				}
 				catch (Exception e) {
 					Assert.fail(e.getMessage());
@@ -1441,15 +1421,11 @@ public class ExternalMergerChangeTest extends AbstractExternalMergerTest {
 						Parameter parameter2 = new ParameterImpl("P2", new ByteDataType(), program);
 						function.addParameter(parameter2, SourceType.USER_DEFINED);
 					}
-					catch (InvalidInputException e) {
+					catch (InvalidInputException | DuplicateNameException e) {
 						e.printStackTrace();
 						Assert.fail();
 					}
-					catch (DuplicateNameException e) {
-						e.printStackTrace();
-						Assert.fail();
-					}
-					commit = true;
+                    commit = true;
 				}
 				catch (Exception e) {
 					Assert.fail(e.getMessage());

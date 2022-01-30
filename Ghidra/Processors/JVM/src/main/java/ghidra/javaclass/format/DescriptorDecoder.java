@@ -230,9 +230,7 @@ public class DescriptorDecoder {
 			String baseType = getTypeNameFromDescriptor(descriptor.replace("[", ""),
 				fullyQualifiedName, replaceSlash);
 			StringBuilder sb = new StringBuilder(baseType);
-			for (int i = 0; i < dimension; ++i) {
-				sb.append("[]");
-			}
+            sb.append("[]".repeat(dimension));
 			return sb.toString();
 		}
 		switch (descriptor.charAt(0)) {

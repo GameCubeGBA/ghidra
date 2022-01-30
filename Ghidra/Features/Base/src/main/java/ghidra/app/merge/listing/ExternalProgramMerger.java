@@ -175,13 +175,10 @@ public class ExternalProgramMerger implements MergeResolver, ListingMergeConstan
 					}
 				});
 			}
-			catch (InterruptedException e) {
+			catch (InterruptedException | InvocationTargetException e) {
 				throw new AssertException(e);
 			}
-			catch (InvocationTargetException e) {
-				throw new AssertException(e);
-			}
-		}
+        }
 	}
 
 	/* (non-Javadoc)
@@ -885,13 +882,10 @@ public class ExternalProgramMerger implements MergeResolver, ListingMergeConstan
 				}
 			});
 		}
-		catch (InterruptedException e) {
+		catch (InterruptedException | InvocationTargetException e) {
 			Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
 		}
-		catch (InvocationTargetException e) {
-			Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-		}
-	}
+    }
 
 	/**
 	 * Actually merges (sets or removes) the indicated external program name in

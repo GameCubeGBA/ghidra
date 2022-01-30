@@ -1806,13 +1806,10 @@ public abstract class GhidraScript extends FlatProgramAPI {
 					SwingUtilities
 						.invokeAndWait(() -> Msg.showInfo(getClass(), null, name, message));
 				}
-				catch (InterruptedException e) {
+				catch (InterruptedException | InvocationTargetException e) {
 					// shouldn't happen
 				}
-				catch (InvocationTargetException e) {
-					// shouldn't happen
-				}
-			}
+            }
 		}
 	}
 

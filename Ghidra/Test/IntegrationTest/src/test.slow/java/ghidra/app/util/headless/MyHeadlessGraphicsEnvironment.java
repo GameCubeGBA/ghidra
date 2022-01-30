@@ -85,15 +85,11 @@ public class MyHeadlessGraphicsEnvironment extends GraphicsEnvironment {
 			}
 		} catch (ClassNotFoundException e) {
 			throw new Error("Could not find class: " + preferredGraphicsEnv);
-		} catch (InstantiationException e) {
+		} catch (InstantiationException | InvocationTargetException | NoSuchMethodException e) {
 			throw new Error("Could not instantiate Graphics Environment: " + preferredGraphicsEnv);
 		} catch (IllegalAccessException e) {
 			throw new Error("Could not access Graphics Environment: " + preferredGraphicsEnv);
-		} catch (NoSuchMethodException e) {
-            throw new Error("Could not instantiate Graphics Environment: " + preferredGraphicsEnv);
-        } catch (InvocationTargetException e) {
-            throw new Error("Could not instantiate Graphics Environment: " + preferredGraphicsEnv);
-        }
+		}
     }
 
 }

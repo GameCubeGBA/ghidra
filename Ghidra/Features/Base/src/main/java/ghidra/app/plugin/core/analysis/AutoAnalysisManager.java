@@ -557,16 +557,13 @@ public final class AutoAnalysisManager implements DomainObjectListener, DomainOb
 					}
 				}, null, true, monitor);
 			}
-			catch (CancelledException e) {
+			catch (CancelledException | InterruptedException e) {
 				// ignore
 			}
 			catch (InvocationTargetException e) {
 				Msg.error(this, "Error occurred while waiting for analysis", e);
 			}
-			catch (InterruptedException e) {
-				// ignore
-			}
-			return;
+            return;
 		}
 		if (activeTask == null) {
 			throw new AssertException();

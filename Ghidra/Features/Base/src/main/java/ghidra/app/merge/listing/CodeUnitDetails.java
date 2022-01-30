@@ -165,9 +165,7 @@ public abstract class CodeUnitDetails {
 			return "";
 		}
 		StringBuffer buf = new StringBuffer(numSpaces);
-		for (int i = 0; i < numSpaces; i++) {
-			buf.append(" ");
-		}
+		buf.append(" ".repeat(numSpaces));
 		return buf.toString();
 	}
 

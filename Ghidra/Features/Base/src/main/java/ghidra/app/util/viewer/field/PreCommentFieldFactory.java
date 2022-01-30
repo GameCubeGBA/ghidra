@@ -417,25 +417,17 @@ public class PreCommentFieldFactory extends FieldFactory {
 		}
 		StringBuffer sb = new StringBuffer();
 		sb.append("\n");
-		for (int i = 0; i < 20; i++) {
-			sb.append("|");
-		}
+        sb.append("|".repeat(20));
 		sb.append(" FUNCTION ");
-		for (int i = 0; i < 50; i++) {
-			sb.append("|");
-		}
+        sb.append("|".repeat(50));
 		sb.append("\n");
 		FUNCTION_FLAG_COMMENT = sb.toString();
 
 		sb.setLength(0);
 		sb.append("\n");
-		for (int i = 0; i < 19; i++) {
-			sb.append("|");
-		}
+        sb.append("|".repeat(19));
 		sb.append(" SUBROUTINE ");
-		for (int i = 0; i < 49; i++) {
-			sb.append("|");
-		}
+        sb.append("|".repeat(49));
 		sb.append("\n");
 		SUBROUTINE_FLAG_COMMENT = sb.toString();
 

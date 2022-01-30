@@ -83,9 +83,7 @@ public class PrintStructureScript extends GhidraScript {
 	}
 
 	private void tabs(StringBuilder buffer, int level) {
-		for (int i = 0; i < level + 1; i++) {
-			buffer.append('\t');
-		}
+        buffer.append("\t".repeat(level + 1));
 	}
 
 	private DataType findDataTypeByName(String name) {

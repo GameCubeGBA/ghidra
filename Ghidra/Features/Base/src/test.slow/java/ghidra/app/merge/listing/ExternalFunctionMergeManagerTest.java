@@ -1421,13 +1421,10 @@ public class ExternalFunctionMergeManagerTest extends AbstractExternalMergerTest
 						externalLocation.setLocation(externalLocation.getLabel(),
 							addr(program, "70db1234"), externalLocation.getSource());
 					}
-					catch (DuplicateNameException e) {
+					catch (DuplicateNameException | InvalidInputException e) {
 						Assert.fail();
 					}
-					catch (InvalidInputException e) {
-						Assert.fail();
-					}
-					commit = true;
+                    commit = true;
 				}
 				catch (Exception e) {
 					Assert.fail(e.getMessage());
@@ -1453,14 +1450,11 @@ public class ExternalFunctionMergeManagerTest extends AbstractExternalMergerTest
 						externalLocation.setLocation(externalLocation.getLabel(),
 							addr(program, "77cc4444"), externalLocation.getSource());
 					}
-					catch (DuplicateNameException e) {
-						Assert.fail();
-					}
-					catch (InvalidInputException e) {
+					catch (DuplicateNameException | InvalidInputException e) {
 						Assert.fail();
 					}
 
-					Function function =
+                    Function function =
 						getExternalFunction(program, new String[] { "user32.dll", "apples" });
 
 					function.setName("FRED", SourceType.USER_DEFINED);

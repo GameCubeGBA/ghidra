@@ -1522,19 +1522,10 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 			try {
 				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			}
-			catch (ClassNotFoundException e1) {
+			catch (ClassNotFoundException | UnsupportedLookAndFeelException | IllegalAccessException | InstantiationException e1) {
 				// don't care
 			}
-			catch (InstantiationException e2) {
-				// don't care
-			}
-			catch (IllegalAccessException e3) {
-				// don't care
-			}
-			catch (UnsupportedLookAndFeelException e4) {
-				// don't care
-			}
-		});
+        });
 		// Fix up the default fonts that Java 1.5.0 changed to Courier, which looked terrible.
 		Font f = new Font("Monospaced", Font.PLAIN, 12);
 		UIManager.put("PasswordField.font", f);

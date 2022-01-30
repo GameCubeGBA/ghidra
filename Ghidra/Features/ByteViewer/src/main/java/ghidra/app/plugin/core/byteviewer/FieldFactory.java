@@ -122,10 +122,7 @@ class FieldFactory {
 			// usually caused by unInitialized memory block
 			return getByteField(readErrorStr, index);
 		}
-		catch (AddressOutOfBoundsException e) {
-			return getByteField(noValueStr, index);
-		}
-		catch (IndexOutOfBoundsException e) {
+		catch (AddressOutOfBoundsException | IndexOutOfBoundsException e) {
 			return getByteField(noValueStr, index);
 		}
 	}
@@ -195,9 +192,7 @@ class FieldFactory {
 	private String getString(String value) {
 		StringBuffer sb = new StringBuffer();
 		int count = model.getDataUnitSymbolSize();
-		for (int i = 0; i < count; i++) {
-			sb.append(value);
-		}
+        sb.append(String.valueOf(value).repeat(count));
 		return sb.toString();
 	}
 

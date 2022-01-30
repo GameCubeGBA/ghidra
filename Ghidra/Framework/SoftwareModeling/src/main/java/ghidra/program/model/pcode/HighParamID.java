@@ -316,13 +316,10 @@ public class HighParamID extends PcodeSyntaxTree {
 			}
 
 		}
-		catch (InvalidInputException e) {
+		catch (InvalidInputException | DuplicateNameException e) {
 			Msg.error(this, e.getMessage());
 		}
-		catch (DuplicateNameException e) {
-			Msg.error(this, e.getMessage());
-		}
-	}
+    }
 
 	private boolean paramStorageMatches(Function function, List<Variable> params) {
 

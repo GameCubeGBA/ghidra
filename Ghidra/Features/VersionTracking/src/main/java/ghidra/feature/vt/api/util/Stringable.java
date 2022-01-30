@@ -62,23 +62,11 @@ public abstract class Stringable implements ExtensionPoint, DisplayStringProvide
 			}
 			return name;
 		}
-		catch (SecurityException e) {
+		catch (SecurityException | IllegalAccessException | IllegalArgumentException | NoSuchFieldException e) {
 			throw new AssertException(
 				"Error reading Stringable SHORT_NAME field for class: " + clazz, e);
 		}
-		catch (NoSuchFieldException e) {
-			throw new AssertException(
-				"Error reading Stringable SHORT_NAME field for class: " + clazz, e);
-		}
-		catch (IllegalArgumentException e) {
-			throw new AssertException(
-				"Error reading Stringable SHORT_NAME field for class: " + clazz, e);
-		}
-		catch (IllegalAccessException e) {
-			throw new AssertException(
-				"Error reading Stringable SHORT_NAME field for class: " + clazz, e);
-		}
-	}
+    }
 
 	private static Map<String, Class<? extends Stringable>> getNameMap() {
 		if (shortNameToClassnameMap == null) {

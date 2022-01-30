@@ -387,9 +387,7 @@ public class AssemblyPatternBlock implements Comparable<AssemblyPatternBlock> {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < offset; i++) {
-			sb.append(SHIFT_STR);
-		}
+        sb.append(SHIFT_STR.repeat(offset));
 		if (mask.length == 0) {
 			if (sb.length() == 0) {
 				return "[]";

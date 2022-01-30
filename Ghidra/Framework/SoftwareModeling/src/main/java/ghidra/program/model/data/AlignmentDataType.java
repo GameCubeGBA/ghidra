@@ -61,13 +61,10 @@ public class AlignmentDataType extends BuiltIn implements Dynamic {
 				++length;
 			}
 		}
-		catch (MemoryAccessException e) {
+		catch (MemoryAccessException | AddressOutOfBoundsException e) {
 			// stop counting
 		}
-		catch (AddressOutOfBoundsException exc) {
-			// stop counting
-		}
-		return length > 0 ? length : -1;
+        return length > 0 ? length : -1;
 	}
 
 	@Override

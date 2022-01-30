@@ -166,11 +166,8 @@ public class ProgramUtilities {
 			extFunc.setVarArgs(func.hasVarArgs());
 			functionSymbol.delete();
 		}
-		catch (InvalidInputException e) {
+		catch (InvalidInputException | DuplicateNameException e) {
 			Msg.error(ProgramUtilities.class, "Unexpected Exception", e);
 		}
-		catch (DuplicateNameException e) {
-			Msg.error(ProgramUtilities.class, "Unexpected Exception", e);
-		}
-	}
+    }
 }

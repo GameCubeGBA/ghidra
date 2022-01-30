@@ -86,19 +86,9 @@ abstract class AbstractAddMemoryBlockCmd implements Command {
 			renameFragment(program, block.getStart());
 			return true;
 		}
-		catch (IllegalArgumentException e) {
+		catch (IllegalArgumentException | IllegalStateException | MemoryConflictException | AddressOverflowException e) {
 			message = e.getMessage();
-		}
-		catch (AddressOverflowException e) {
-			message = e.getMessage();
-		}
-		catch (MemoryConflictException e) {
-			message = e.getMessage();
-		}
-		catch (IllegalStateException e) {
-			message = e.getMessage();
-		}
-		catch (Throwable t) {
+		} catch (Throwable t) {
 			message = "Create block failed";
 			Msg.showError(this, null, "Create Block Failed", t.getMessage(), t);
 		}

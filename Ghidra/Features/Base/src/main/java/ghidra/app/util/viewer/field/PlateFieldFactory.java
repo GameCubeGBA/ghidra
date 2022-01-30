@@ -307,9 +307,7 @@ public class PlateFieldFactory extends FieldFactory {
 	}
 
 	private void addPadding(StringBuilder buf, int count) {
-		for (int i = 0; i < count; i++) {
-			buf.append(' ');
-		}
+        buf.append(" ".repeat(count));
 	}
 
 	private void addBlankLines(List<FieldElement> elements, int numberBlankLines, CodeUnit cu) {
@@ -436,9 +434,7 @@ public class PlateFieldFactory extends FieldFactory {
 
 		if (stars.length() != n) {
 			StringBuilder buf = new StringBuilder();
-			for (int i = 0; i < n; i++) {
-				buf.append('*');
-			}
+            buf.append("*".repeat(n));
 			stars = buf.toString();
 		}
 		return stars;

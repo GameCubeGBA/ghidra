@@ -467,11 +467,9 @@ public class PropertyListMergeManager implements MergeResolver {
 				}
 			});
 		}
-		catch (InterruptedException e) {
+		catch (InterruptedException | InvocationTargetException e) {
 		}
-		catch (InvocationTargetException e) {
-		}
-		mergeManager.setApplyEnabled(false);
+        mergeManager.setApplyEnabled(false);
 		mergeManager.showComponent(mergePanel, "PropertyListMerge", new HelpLocation(
 			HelpTopics.REPOSITORY, "PropertyListConflict"));
 		// block until the user either cancels or hits the "Apply" button

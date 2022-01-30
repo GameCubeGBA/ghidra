@@ -354,9 +354,7 @@ public class GenericAddress implements Address {
 		String addressString = Long.toHexString(displayOffset);
 		int numHexDigits = addressString.length();
 		int numZerosToPad = Math.max(padSize - numHexDigits, 0);
-		for (int i = 0; i < numZerosToPad; i++) {
-			buf.append('0');
-		}
+        buf.append("0".repeat(numZerosToPad));
 		buf.append(addressString);
 		if (mod != 0) {
 			buf.append('.');

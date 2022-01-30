@@ -377,9 +377,7 @@ class DataTypePanel extends JPanel {
 	private String pad(String str, int length) {
 		StringBuffer sb = new StringBuffer(str);
 		int len = length - str.length();
-		for (int i = 0; i < len; i++) {
-			sb.append(" ");
-		}
+		sb.append(" ".repeat(len));
 		return sb.toString();
 	}
 

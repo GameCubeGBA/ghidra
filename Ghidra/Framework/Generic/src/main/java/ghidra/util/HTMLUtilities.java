@@ -214,9 +214,7 @@ public class HTMLUtilities {
 	 */
 	public static String spaces(int num) {
 		StringBuilder buf = new StringBuilder(HTML_SPACE.length() * num);
-		for (int i = 0; i < num; i++) {
-			buf.append(HTML_SPACE);
-		}
+        buf.append(String.valueOf(HTML_SPACE).repeat(num));
 		return buf.toString();
 	}
 
@@ -553,9 +551,7 @@ public class HTMLUtilities {
 			}
 			else if (c == '\t') {
 				int cnt = TAB_SIZE - (col % TAB_SIZE);
-				for (int k = 0; k < cnt; k++) {
-					buffer.append(HTML_SPACE);
-				}
+                buffer.append(String.valueOf(HTML_SPACE).repeat(cnt));
 				col = 0;
 				continue;
 			}

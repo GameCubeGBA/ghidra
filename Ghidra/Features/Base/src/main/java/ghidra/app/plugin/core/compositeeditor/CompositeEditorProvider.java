@@ -258,13 +258,10 @@ public abstract class CompositeEditorProvider extends ComponentProviderAdapter
 		try {
 			return editorModel.apply();
 		}
-		catch (EmptyCompositeException e) {
+		catch (EmptyCompositeException | InvalidDataTypeException e) {
 			setStatusMessage(e.getMessage());
 		}
-		catch (InvalidDataTypeException e) {
-			setStatusMessage(e.getMessage());
-		}
-		return false;
+        return false;
 	}
 
 	/**

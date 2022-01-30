@@ -320,13 +320,10 @@ public class ProgramDnDTree extends DragNDropTree {
 				SelectionTransferData transferData = (SelectionTransferData) data;
 				return program.getDomainFile().getPathname().equals(transferData.getProgramPath());
 			}
-			catch (UnsupportedFlavorException e1) {
+			catch (UnsupportedFlavorException | IOException e1) {
 				return false;
 			}
-			catch (IOException e1) {
-				return false;
-			}
-		}
+        }
 		else if (chosen.equals(TreeTransferable.localTreeNodeFlavor)) {
 			// fromObject is null, so we know this is
 			// from another tree, so don't allow the drop

@@ -162,15 +162,11 @@ public class CreateWorkspaceTest extends AbstractGhidraHeadedIntegrationTest {
 				try {
 					project = ProjectTestUtils.getProject(DIRECTORY_NAME, PROJECT_NAME);
 				}
-				catch (LockException exc) {
+				catch (LockException | IOException exc) {
 					exc.printStackTrace();
 					Assert.fail();
 				}
-				catch (IOException exc) {
-					exc.printStackTrace();
-					Assert.fail();
-				}
-			}
+            }
 		});
 
 		tm = project.getToolManager();

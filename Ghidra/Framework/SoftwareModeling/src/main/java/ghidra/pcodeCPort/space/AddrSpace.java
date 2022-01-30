@@ -355,9 +355,7 @@ public class AddrSpace {
 		int addrSize = getAddrSize();
 		int padLength = 2 * addrSize;
 		String longString = Long.toHexString(offset >>> scale);
-		for (int i = 0; i < padLength - longString.length(); i++) {
-			s.append('0');
-		}
+		s.append("0".repeat(padLength - longString.length()));
 		s.append(longString);
 
 		if (wordsize > 1) {

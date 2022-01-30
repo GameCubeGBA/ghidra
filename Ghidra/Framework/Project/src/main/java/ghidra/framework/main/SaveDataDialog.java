@@ -385,13 +385,10 @@ public class SaveDataDialog extends DialogComponentProvider {
 						}
 					});
 				}
-				catch (InterruptedException e) {
+				catch (InterruptedException | InvocationTargetException e) {
 					// don't care?
 				}
-				catch (InvocationTargetException e) {
-					// don't care?
-				}
-			}
+            }
 			else if (monitor.isCancelled()) {
 				updateList();
 			}

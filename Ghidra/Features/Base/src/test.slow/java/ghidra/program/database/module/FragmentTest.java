@@ -463,16 +463,10 @@ public class FragmentTest extends AbstractGhidraHeadedIntegrationTest {
 			return block;
 
 		}
-		catch (AddressOverflowException e) {
+		catch (AddressOverflowException | LockException | MemoryConflictException e) {
 			Assert.fail(e.getMessage());
 		}
-		catch (MemoryConflictException e) {
-			Assert.fail(e.getMessage());
-		}
-		catch (LockException e) {
-			Assert.fail(e.getMessage());
-		}
-		return null;
+        return null;
 	}
 
 }

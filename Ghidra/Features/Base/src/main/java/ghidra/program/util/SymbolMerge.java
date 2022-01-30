@@ -681,15 +681,11 @@ class SymbolMerge {
 						}
 					}
 				}
-				catch (DuplicateNameException e1) {
+				catch (DuplicateNameException | InvalidInputException e1) {
 					// TODO Auto-generated catch block
 					Msg.error(this, "Unexpected Exception: " + e1.getMessage(), e1);
 				}
-				catch (InvalidInputException e1) {
-					// TODO Auto-generated catch block
-					Msg.error(this, "Unexpected Exception: " + e1.getMessage(), e1);
-				}
-				try {
+                try {
 					fromAddress = fromAddress.addNoWrap(0x1L);
 				}
 				catch (AddressOverflowException e) {
@@ -777,13 +773,10 @@ class SymbolMerge {
 				toSym.setName(fromSym.getName(), fromSym.getSource());
 				dupSyms.remove(fromSym);
 			}
-			catch (DuplicateNameException e) {
+			catch (DuplicateNameException | InvalidInputException e) {
 				continue; // Leaves it in the hashtable
 			}
-			catch (InvalidInputException e) {
-				continue; // Leaves it in the hashtable
-			}
-		}
+        }
 	}
 
 	static String getDuplicateSymbolsInfo(Hashtable<Symbol, Symbol> dupSyms) {

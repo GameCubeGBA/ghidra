@@ -546,13 +546,10 @@ public class FillOutStructureCmd extends BackgroundCommand {
 			newClass =
 				symbolTable.createClass(rootNamespace, newClassName, SourceType.USER_DEFINED);
 		}
-		catch (DuplicateNameException e) {
+		catch (DuplicateNameException | InvalidInputException e) {
 			Msg.error(this, "Error creating class '" + newClassName + "'", e);
 		}
-		catch (InvalidInputException e) {
-			Msg.error(this, "Error creating class '" + newClassName + "'", e);
-		}
-		return newClass;
+        return newClass;
 	}
 
 	private String createUniqueStructName(HighVariable var, String category, String base) {
