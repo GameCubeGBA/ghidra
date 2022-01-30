@@ -19,7 +19,7 @@ package ghidra.util.xml;
 class XmlSummary {
 
     static String getSummary(Counter counter) {
-        StringBuffer buffer = new StringBuffer(256);
+        StringBuilder buffer = new StringBuilder(256);
 
 		int origTotal = counter.getTotalCount();
 

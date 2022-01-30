@@ -394,7 +394,9 @@ public class PrimitiveTypeListing {
 				return new Pointer32DataType(new WordDataType());
 			case T_INT8 :
 			case T_UINT8 :
-				return new QWordDataType();
+            case T_QUAD :
+            case T_UQUAD :
+                return new QWordDataType();
 			case T_PINT8 :
 			case T_PUINT8 :
 			case T_PFINT8 :
@@ -405,10 +407,22 @@ public class PrimitiveTypeListing {
 			case T_32PUINT8 :
 			case T_32PFINT8 :
 			case T_32PFUINT8 :
-				return new Pointer32DataType(new QWordDataType());
+            case T_PQUAD :
+            case T_PUQUAD :
+            case T_PFQUAD :
+            case T_PFUQUAD :
+            case T_PHQUAD :
+            case T_PHUQUAD :
+            case T_32PQUAD :
+            case T_32PUQUAD :
+            case T_32PFQUAD :
+            case T_32PFUQUAD :
+                return new Pointer32DataType(new QWordDataType());
 			case T_INT4 :
 			case T_UINT4 :
-				return new DWordDataType();
+            case T_LONG :
+            case T_ULONG :
+                return new DWordDataType();
 			case T_PINT4 :
 			case T_PUINT4 :
 			case T_PFINT4 :
@@ -419,36 +433,18 @@ public class PrimitiveTypeListing {
 			case T_32PUINT4 :
 			case T_32PFINT4 :
 			case T_32PFUINT4 :
-				return new Pointer32DataType(new DWordDataType());
-			case T_LONG :
-			case T_ULONG :
-				return new DWordDataType();
-			case T_PLONG :
-			case T_PULONG :
-			case T_PFLONG :
-			case T_PFULONG :
-			case T_PHLONG :
-			case T_PHULONG :
-			case T_32PLONG :
-			case T_32PULONG :
-			case T_P2PFLONG :
-			case T_32PFULONG :
-				return new Pointer32DataType(new DWordDataType());
-			case T_QUAD :
-			case T_UQUAD :
-				return new QWordDataType();
-			case T_PQUAD :
-			case T_PUQUAD :
-			case T_PFQUAD :
-			case T_PFUQUAD :
-			case T_PHQUAD :
-			case T_PHUQUAD :
-			case T_32PQUAD :
-			case T_32PUQUAD :
-			case T_32PFQUAD :
-			case T_32PFUQUAD :
-				return new Pointer32DataType(new QWordDataType());
-			case T_REAL32 :
+            case T_PLONG :
+            case T_PULONG :
+            case T_PFLONG :
+            case T_PFULONG :
+            case T_PHLONG :
+            case T_PHULONG :
+            case T_32PLONG :
+            case T_32PULONG :
+            case T_P2PFLONG :
+            case T_32PFULONG :
+                return new Pointer32DataType(new DWordDataType());
+            case T_REAL32 :
 			case T_PREAL32 :
 				return new FloatDataType();
 			case T_PFREAL32 :
@@ -478,7 +474,8 @@ public class PrimitiveTypeListing {
 				return new TypedefDataType("HINSTANCE", new Pointer32DataType());
 			case T_CHAR :
 			case T_UCHAR :
-				return new CharDataType();
+            case T_RCHAR :
+                return new CharDataType();
 			case T_PCHAR :
 			case T_PUCHAR :
 			case T_PFCHAR :
@@ -489,16 +486,13 @@ public class PrimitiveTypeListing {
 			case T_32PUCHAR :
 			case T_32PFCHAR :
 			case T_32PFUCHAR :
-				return new Pointer32DataType(new CharDataType());
-			case T_RCHAR :
-				return new CharDataType();
-			case T_PRCHAR :
-			case T_PFRCHAR :
-			case T_PHRCHAR :
-			case T_32PRCHAR :
-			case T_32PFRCHAR :
-				return new Pointer32DataType(new CharDataType());
-			case T_WCHAR :
+            case T_PRCHAR :
+            case T_PFRCHAR :
+            case T_PHRCHAR :
+            case T_32PRCHAR :
+            case T_32PFRCHAR :
+                return new Pointer32DataType(new CharDataType());
+            case T_WCHAR :
 				return new UnicodeDataType();
 			case T_PWCHAR :
 			case T_PFWCHAR :

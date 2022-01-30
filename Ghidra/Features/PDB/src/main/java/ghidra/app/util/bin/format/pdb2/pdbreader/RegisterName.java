@@ -883,7 +883,35 @@ public class RegisterName extends AbstractParsableItem {
 			case UNKNOWN:
 			case UNK1AB:
 			case UNK304:
-				break;
+
+            case D3D11_SHADER:
+
+            case THUMB:
+            case ARMNT:
+            case ARM64:
+
+            case EBC:
+
+            case TRICORE:
+
+            case M32R:
+
+            case AM33:
+
+            case CEE:
+
+            case OMNI:
+
+            case ARM3:
+            case ARM4:
+            case ARM4T:
+            case ARM5:
+            case ARM5T:
+            case ARM6:
+            case ARM_XMAC:
+            case ARM_WMMX:
+            case ARM7:
+                break;
 
 			case I8080:
 			case I8086:
@@ -953,57 +981,20 @@ public class RegisterName extends AbstractParsableItem {
 				}
 				break;
 
-			case ARM3:
-			case ARM4:
-			case ARM4T:
-			case ARM5:
-			case ARM5T:
-			case ARM6:
-			case ARM_XMAC:
-			case ARM_WMMX:
-			case ARM7:
-				break;
-
-			case OMNI:
-				break;
-
-			case IA64_IA64_1:
+            case IA64_IA64_1:
 			case IA64_2:
 				if (registerIn < ia64RegistersById.size()) {
 					registerName = ia64RegistersById.get(registerIn);
 				}
 				break;
 
-			case CEE:
-				break;
-
-			case AM33:
-				break;
-
-			case M32R:
-				break;
-
-			case TRICORE:
-				break;
-
-			case X64_AMD64:
+            case X64_AMD64:
 				if (registerIn < regAmd64.length) {
 					registerName = regAmd64[registerIn];
 				}
 				break;
 
-			case EBC:
-				break;
-
-			case THUMB:
-			case ARMNT:
-			case ARM64:
-				break;
-
-			case D3D11_SHADER:
-				break;
-
-		}
+        }
 		return registerName;
 
 	}

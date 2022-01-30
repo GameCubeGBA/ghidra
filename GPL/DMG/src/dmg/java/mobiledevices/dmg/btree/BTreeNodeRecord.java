@@ -69,7 +69,7 @@ public class BTreeNodeRecord /*implements StructConverter*/ {
 	}
 
 	private String readType( GBinaryReader reader ) throws IOException {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		for ( int i = 0 ; i < _typeLength ; ++i ) {
 			reader.readNextByte();//skip it...
 			buffer.append( (char) reader.readNextByte() );

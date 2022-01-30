@@ -132,7 +132,7 @@ public class GenericSaveable implements Saveable {
 		if (record == null || schema == null) {
 			return super.toString();
 		}
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		String[] fieldNames = schema.getFieldNames();
 		int numFields = fieldNames.length;
 		for (int i = 0; i < numFields; i++) {

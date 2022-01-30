@@ -238,12 +238,10 @@ public abstract class AbstractFunctionTypeApplier extends MsTypeApplier {
 				case THISCALL: // "this" passed in register (we have not yet seen this)
 					convention = GenericCallingConvention.thiscall; // Is this correct if in reg?
 					break;
-				case NEAR_C: // we have seen this one 
-					convention = GenericCallingConvention.cdecl;
-					break;
-				case NEAR_VECTOR: // we have seen this one 
+				case NEAR_VECTOR: // we have seen this one
 					convention = GenericCallingConvention.vectorcall;
 					break;
+				case NEAR_C: // we have seen this one
 				default:
 //				applicator.getLog().appendMsg(
 //					"TODO: calling convention not implemented for value " + callingConventionVal +

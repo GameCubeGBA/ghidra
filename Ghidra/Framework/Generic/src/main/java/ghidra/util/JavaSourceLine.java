@@ -44,7 +44,7 @@ public class JavaSourceLine {
 	        return "";
 	    }
 	    
-	    StringBuffer buffy = new StringBuffer();
+	    StringBuilder buffy = new StringBuilder();
 	    for ( int i = 0; i < length; i++ ) {
 	        char charAt = lineText.charAt( i );
 	        if ( !Character.isWhitespace( charAt ) ) {

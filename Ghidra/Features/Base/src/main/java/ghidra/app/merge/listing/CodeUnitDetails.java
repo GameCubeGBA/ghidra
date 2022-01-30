@@ -54,7 +54,7 @@ public abstract class CodeUnitDetails {
 			return "You must be on a code unit to see the details.";
 		}
 		String indent = INDENT1;
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		buf.append("Code Unit:" + NEW_LINE);
 		Address min = cu.getMinAddress();
 		Address max = cu.getMaxAddress();
@@ -115,7 +115,7 @@ public abstract class CodeUnitDetails {
 		if (cu == null) {
 			return "You must be on a code unit to see the details.";
 		}
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		buf.append("References: " + NEW_LINE);
 		buf.append(getProgramRefDetails(cu.getProgram(), cu.getReferencesFrom()));
 		return buf.toString();
@@ -145,7 +145,7 @@ public abstract class CodeUnitDetails {
 		if (refs.length == 0) {
 			return indent + "None";
 		}
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		for (int i = 0; i < refs.length; i++) {
 			if (refs[i].isExternalReference()) {
 				buf.append(indent + "External Reference " + getRefInfo(pgm, refs[i]) + NEW_LINE);
@@ -164,7 +164,7 @@ public abstract class CodeUnitDetails {
 		if (numSpaces <= 0) {
 			return "";
 		}
-		StringBuffer buf = new StringBuffer(numSpaces);
+		StringBuilder buf = new StringBuilder(numSpaces);
 		buf.append(" ".repeat(numSpaces));
 		return buf.toString();
 	}

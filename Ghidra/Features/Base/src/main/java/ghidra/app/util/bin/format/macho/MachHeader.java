@@ -289,7 +289,7 @@ public class MachHeader implements StructConverter {
 	}
 
 	public String getDescription() {//TODO
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		buffer.append("Magic: 0x" + Integer.toHexString(magic));
 		buffer.append('\n');
 		buffer.append("CPU Type: " + CpuTypes.getProcessor(cpuType, cpuSubType).toString());

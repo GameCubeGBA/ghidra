@@ -104,12 +104,10 @@ public class InstructionTableDataObject {
 				notifySubscribers();
 				break;
 			case NA:
-				// do nothing
+            case PREVIEW:
+                // do nothing
 				break;
-			case PREVIEW:
-				// do nothing
-				break;
-		}
+        }
 	}
 
 	/**

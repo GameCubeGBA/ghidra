@@ -46,7 +46,7 @@ public class AndroidXmlConvertor {
 			while ((type = parser.next()) != XmlPullParser.END_DOCUMENT) {
 				monitor.checkCanceled();
 
-				StringBuffer buffer = new StringBuffer();
+				StringBuilder buffer = new StringBuilder();
 				switch (type) {
 					case XmlPullParser.START_DOCUMENT:
 						buffer.append("<?xml version=\"1.0\" encoding=\"utf-8\"?>");

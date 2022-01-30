@@ -77,7 +77,7 @@ public class FatArch {
 
 	@Override
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		buffer.append("CPU Type: 0x" + Integer.toHexString(cputype));
 		buffer.append('\n');
 		buffer.append("CPU Sub Type: 0x" + Integer.toHexString(cpusubtype));

@@ -375,7 +375,7 @@ public class ProjectDataTreePanel extends JPanel {
 		String[] pathsArray = new String[expandedPaths.size()];
 		Iterator<TreePath> iterator = expandedPaths.iterator();
 		for (int counter = 0; iterator.hasNext(); counter++) {
-			StringBuffer buffy = new StringBuffer();
+			StringBuilder buffy = new StringBuilder();
 			TreePath treePath = iterator.next();
 			Object[] path = treePath.getPath();
 			for (Object object : path) {

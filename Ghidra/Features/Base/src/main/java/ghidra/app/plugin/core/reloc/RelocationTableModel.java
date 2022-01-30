@@ -126,7 +126,7 @@ class RelocationTableModel extends AddressBasedTableModel<Relocation> {
 			if (values == null) {
 				return "";
 			}
-			StringBuffer buf = new StringBuffer();
+			StringBuilder buf = new StringBuilder();
 			for (long v : values) {
 				if (buf.length() != 0) {
 					buf.append(", ");
@@ -155,7 +155,7 @@ class RelocationTableModel extends AddressBasedTableModel<Relocation> {
 			if (bytes == null) {
 				return "";
 			}
-			StringBuffer buf = new StringBuffer();
+			StringBuilder buf = new StringBuilder();
 			for (long b : bytes) {
 				if (buf.length() != 0) {
 					buf.append(' ');

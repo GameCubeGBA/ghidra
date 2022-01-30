@@ -202,7 +202,7 @@ public abstract class Stringable implements ExtensionPoint, DisplayStringProvide
 		if (encodedComment == null) {
 			return null;
 		}
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		int startIndex = 0;
 		int index = encodedComment.indexOf('\\', startIndex);
 		while (index != -1) {

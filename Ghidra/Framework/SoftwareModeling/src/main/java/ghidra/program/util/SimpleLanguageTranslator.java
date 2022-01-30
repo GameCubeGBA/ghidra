@@ -85,7 +85,7 @@ class SimpleLanguageTranslator extends LanguageTranslatorAdapter {
 			AddressFactory oldFactory = getOldLanguage().getAddressFactory();
 			AddressFactory newFactory = getNewLanguage().getAddressFactory();
 
-			StringBuffer errBuf = new StringBuffer();
+			StringBuilder errBuf = new StringBuilder();
 			ArrayList<AddressSpace> oldSpaces =
 				new ArrayList<AddressSpace>(Arrays.asList(oldFactory.getPhysicalSpaces()));
 			for (String name : spaceNameMap.keySet()) {

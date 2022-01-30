@@ -2040,7 +2040,7 @@ public class MemoryMapDB implements Memory, ManagerDB, LiveMemoryListener {
 			if (blocks == null || blocks.isEmpty()) {
 				return "[empty]\n";
 			}
-			StringBuffer buffer = new StringBuffer();
+			StringBuilder buffer = new StringBuilder();
 			for (MemoryBlock block : blocks) {
 				buffer.append("[");
 				buffer.append(block.getStart());

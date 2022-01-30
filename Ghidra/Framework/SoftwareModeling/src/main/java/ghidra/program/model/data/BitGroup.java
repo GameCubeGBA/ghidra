@@ -59,7 +59,7 @@ public class BitGroup {
 
 	@Override
 	public String toString() {
-		StringBuffer buf = new StringBuffer("BitGroup - Mask: ");
+		StringBuilder buf = new StringBuilder("BitGroup - Mask: ");
 		buf.append(Long.toHexString(mask));
 		buf.append(" values: ");
 		for (Long value : values) {

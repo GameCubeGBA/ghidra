@@ -88,7 +88,7 @@ public class AddressTypeOverviewColorService
 			return "";
 		}
 		AddressType addressType = getAddressType(address);
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		buffer.append("<b>");
 		buffer.append(HTMLUtilities.escapeHTML(getName()));
 		buffer.append("</b>\n");
@@ -150,9 +150,7 @@ public class AddressTypeOverviewColorService
 		switch (addressType) {
 			case FUNCTION:
 				return functionColor;
-			case UNINITIALIZED:
-				return uninitializedColor;
-			case EXTERNAL_REF:
+            case EXTERNAL_REF:
 				return externalRefColor;
 			case INSTRUCTION:
 				return instructionColor;
@@ -160,7 +158,8 @@ public class AddressTypeOverviewColorService
 				return dataColor;
 			case UNDEFINED:
 				return undefinedColor;
-			default:
+            case UNINITIALIZED:
+            default:
 				return uninitializedColor;
 		}
 	}

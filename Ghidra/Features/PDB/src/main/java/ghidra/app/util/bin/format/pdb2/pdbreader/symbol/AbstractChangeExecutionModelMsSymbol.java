@@ -136,14 +136,11 @@ public abstract class AbstractChangeExecutionModelMsSymbol extends AbstractMsSym
 					offsetToPcodeFunctionTable, offsetToSegmentPcodeInformation));
 				break;
 			case PCODE32MACINTOSH:
-				builder.append(String.format("callTable = %08X, segment = %08X\n",
+            case PCODE32MACINTOSH_NATIVE_ENTRY_POINT:
+                builder.append(String.format("callTable = %08X, segment = %08X\n",
 					offsetToFunctionTable, segmentOfFunctionTable));
 				break;
-			case PCODE32MACINTOSH_NATIVE_ENTRY_POINT:
-				builder.append(String.format("callTable = %08X, segment = %08X\n",
-					offsetToFunctionTable, segmentOfFunctionTable));
-				break;
-			case UNKNOWN:
+            case UNKNOWN:
 				builder.append(String.format(" = %04X\n", modelVal));
 				break;
 			default:

@@ -50,7 +50,7 @@ public class VersionFileHandler {
 	 * Construct a VersionFile handler.
 	 * VersionFiles will be used to provide original BufferFile data
 	 * for the version origVer.
-	 * @param bf current buffer file which will use this version file
+	 * @param bfMgr current buffer file which will use this version file
 	 * handler to reconstruct an older version.
 	 * @param targetFileId file ID of buffer file to which the version file
 	 * buffers will be applied.

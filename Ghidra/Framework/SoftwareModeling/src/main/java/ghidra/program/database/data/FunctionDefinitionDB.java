@@ -107,7 +107,7 @@ class FunctionDefinitionDB extends DataTypeDB implements FunctionDefinition {
 		lock.acquire();
 		try {
 			checkIsValid();
-			StringBuffer buf = new StringBuffer();
+			StringBuilder buf = new StringBuilder();
 			DataType returnType = getReturnType();
 			buf.append((returnType != null ? returnType.getDisplayName() : "void"));
 			buf.append(" ");

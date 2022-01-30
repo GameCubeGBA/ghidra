@@ -31,7 +31,7 @@ public class MapSTL<K,V> {
 
 	@Override
     public String toString() {
-        StringBuffer buffy = new StringBuffer("{");
+        StringBuilder buffy = new StringBuilder("{");
         IteratorSTL<Pair<K, V>> begin = begin();
         while ( !begin.isEnd() ) {
             Pair<K, V> pair = begin.get();

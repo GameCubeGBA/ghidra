@@ -915,7 +915,7 @@ public class GhidraJarBuilder implements GhidraLaunchable {
 		}
 		String invocationName = System.getProperty(INVOCATION_NAME_PROPERTY);
 
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		buf.append("\nUsage: ");
 		buf.append(invocationName != null ? invocationName : "GhidraJarBuilder");
 		buf.append(

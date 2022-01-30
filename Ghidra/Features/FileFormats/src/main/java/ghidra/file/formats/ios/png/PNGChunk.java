@@ -122,7 +122,7 @@ public class PNGChunk implements StructConverter {
 
 	@Override
 	public String toString() {
-		StringBuffer buff = new StringBuffer();
+		StringBuilder buff = new StringBuilder();
 
 		buff.append("Length: 0x" + Integer.toHexString(length) + "\n");
 		buff.append("Chunk ID: " + getIDString() + "\n");

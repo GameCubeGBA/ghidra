@@ -394,7 +394,7 @@ public class ProgramMergeFilter {
 	 */
 	@Override
 	public String toString() {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		buf.append("ProgramMergeFilter:\n");
 		int[] types = getPrimaryTypes();
 		for (int type : types) {

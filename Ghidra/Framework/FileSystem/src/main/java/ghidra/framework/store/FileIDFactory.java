@@ -40,7 +40,7 @@ public class FileIDFactory {
 		byte[] addrBytes = null;
 		ServerSocket serverSocket = null;
 		try {
-			StringBuffer buf = new StringBuffer();
+			StringBuilder buf = new StringBuilder();
 			serverSocket = ServerSocketFactory.getDefault().createServerSocket();
 			serverSocket.bind(null);
 			uniquePort = serverSocket.getLocalPort();

@@ -59,7 +59,7 @@ public class ISO9660BootRecordVolumeDescriptor extends ISO9660BaseVolume {
 	 */
 	@Override
 	public String toString() {
-		StringBuffer buff = new StringBuffer();
+		StringBuilder buff = new StringBuilder();
 
 		buff.append("Type: 0x" + Integer.toHexString(super.getTypeCode()) + " => " +
 			getTypeCodeString() + "\n");

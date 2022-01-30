@@ -165,7 +165,7 @@ class DataComponent extends DataDB {
 	}
 
 	private String getComponentName(String parentPath) {
-		StringBuffer stringBuffer = new StringBuffer();
+		StringBuilder stringBuffer = new StringBuilder();
 		if (parentPath != null && parentPath.length() > 0) {
 			stringBuffer.append(parentPath);
 			if (component != null) { // not an array?

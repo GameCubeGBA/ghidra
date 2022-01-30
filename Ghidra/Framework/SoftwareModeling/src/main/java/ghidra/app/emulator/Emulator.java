@@ -241,7 +241,7 @@ public class Emulator {
 	}
 
 	private String dumpBytesAsSingleValue(byte[] bytes) {
-		StringBuffer buf = new StringBuffer("0x");
+		StringBuilder buf = new StringBuilder("0x");
 		if (language.isBigEndian()) {
 			for (byte b : bytes) {
 				String byteStr = Integer.toHexString(b & 0xff);

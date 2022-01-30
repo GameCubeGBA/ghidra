@@ -440,7 +440,7 @@ public class SpecExtensionPanel extends JPanel {
 		FileReader inputReader = new FileReader(file);
 		BufferedReader reader = new BufferedReader(inputReader);
 		try {
-			StringBuffer buffer = new StringBuffer();
+			StringBuilder buffer = new StringBuilder();
 			String line = null;
 			while ((line = reader.readLine()) != null) {
 				buffer.append(line);

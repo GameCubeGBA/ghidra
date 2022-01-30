@@ -420,7 +420,7 @@ public class SleighDebugLogger {
 	}
 
 	private String getIndent() {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
         buf.append("   ".repeat(indentLevel));
 		return buf.toString();
 	}
@@ -947,7 +947,7 @@ public class SleighDebugLogger {
 	 * @return binary formatted bytes
 	 */
 	public static String getFormattedBytes(byte[] value) {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		for (int i = 0; i < value.length; i++) {
 			String byteStr = StringUtilities.pad(Integer.toBinaryString(value[i] & 0xff), '0', 8);
 			buf.append(byteStr);
@@ -1205,7 +1205,7 @@ public class SleighDebugLogger {
 
 	private static String getPrototypeRepresentation(SleighInstructionPrototype proto,
 			InstructionContext instrContext) {
-		StringBuffer stringBuffer = new StringBuffer();
+		StringBuilder stringBuffer = new StringBuilder();
 		stringBuffer.append(proto.getMnemonic(instrContext));
 		int n = proto.getNumOperands();
 		for (int i = 0; i < n; i++) {
@@ -1222,7 +1222,7 @@ public class SleighDebugLogger {
 		if (opList == null) {
 			return "<UNSUPPORTED>";
 		}
-		StringBuffer strBuf = new StringBuffer();
+		StringBuilder strBuf = new StringBuilder();
 		for (Object opElem : opList) {
 			if (opElem instanceof Address) {
 				Address opAddr = (Address) opElem;

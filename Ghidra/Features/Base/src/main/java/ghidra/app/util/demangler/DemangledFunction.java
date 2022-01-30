@@ -316,7 +316,7 @@ public class DemangledFunction extends DemangledObject {
 	}
 
 	public String getParameterString() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		buffer.append('(');
 		Iterator<DemangledDataType> dditer = parameters.iterator();
 		while (dditer.hasNext()) {

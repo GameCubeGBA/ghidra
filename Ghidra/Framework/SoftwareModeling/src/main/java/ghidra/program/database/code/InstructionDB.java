@@ -289,7 +289,7 @@ public class InstructionDB extends CodeUnitDB implements Instruction, Instructio
 			if (opList == null) {
 				return "<UNSUPPORTED>";
 			}
-			StringBuffer strBuf = new StringBuffer();
+			StringBuilder strBuf = new StringBuilder();
 			for (Object opElem : opList) {
 				if (opElem instanceof Address) {
 					Address opAddr = (Address) opElem;
@@ -447,7 +447,7 @@ public class InstructionDB extends CodeUnitDB implements Instruction, Instructio
 		lock.acquire();
 		try {
 			checkIsValid();
-			StringBuffer stringBuffer = new StringBuffer();
+			StringBuilder stringBuffer = new StringBuilder();
 			stringBuffer.append(getMnemonicString());
 
 			int n = getNumOperands();

@@ -85,7 +85,7 @@ public class ISO9660PathTable implements StructConverter {
 	 */
 	@Override
 	public String toString() {
-		StringBuffer buff = new StringBuffer();
+		StringBuilder buff = new StringBuilder();
 
 		buff.append("Directory Identifier Length: 0x" + Integer.toHexString(dirIdentifierLength) +
 			"\n");

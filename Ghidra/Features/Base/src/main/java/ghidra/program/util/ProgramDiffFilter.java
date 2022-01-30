@@ -268,7 +268,7 @@ public class ProgramDiffFilter {
      */
     @Override
     public String toString() {
-    	StringBuffer buf = new StringBuffer();
+    	StringBuilder buf = new StringBuilder();
     	buf.append("ProgramDiffFilter:\n");
     	for (int i=0; i<NUM_PRIMARY_TYPES; i++) {
     		buf.append("  "+typeToName(1<<i)+"="+getFilter(1<<i)+"\n");

@@ -127,16 +127,15 @@ public class DWARFExpression {
 				case S_INT:
 					return reader.readNextInt();
 				case S_LONG:
-					return reader.readNextLong();
+                case U_LONG:
+                    return reader.readNextLong();
 				case U_BYTE:
 					return reader.readNextUnsignedByte();
 				case U_SHORT:
 					return reader.readNextUnsignedShort();
 				case U_INT:
-					return reader.readNextUnsignedInt();
-				case U_LONG:
-					return reader.readNextLong(); /* & there is no mask for ulong */
-				case S_LEB128:
+					return reader.readNextUnsignedInt();/* & there is no mask for ulong */
+                case S_LEB128:
 					return LEB128.readAsLong(reader, true);
 				case U_LEB128:
 					return LEB128.readAsLong(reader, false);

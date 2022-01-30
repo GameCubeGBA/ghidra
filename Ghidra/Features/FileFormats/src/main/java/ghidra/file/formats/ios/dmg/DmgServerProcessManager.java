@@ -325,7 +325,7 @@ class DmgServerProcessManager implements Closeable {
 		Set<String> libraryPaths = new HashSet<>();
 		addOSPaths(libraryPaths);
 
-		StringBuffer buffy = new StringBuffer();
+		StringBuilder buffy = new StringBuilder();
 		buffy.append(pathKey + "=");
 		for (String path : libraryPaths) {
 			buffy.append(path).append(File.pathSeparator);

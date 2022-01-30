@@ -180,7 +180,7 @@ public class MarkupItemStorageDB extends DatabaseObject implements MarkupItemSto
 	@Override
 	public String toString() {
 		//@formatter:off
-		StringBuffer buffy = new StringBuffer();
+		StringBuilder buffy = new StringBuilder();
 		buffy.append('\n').append(getClass().getSimpleName()).append('\n');
 		buffy.append('\t').append("Source Address          = ").append(getSourceAddress()).append('\n');
 		buffy.append('\t').append("Dest Address            = ").append(getDestinationAddress()).append('\n');

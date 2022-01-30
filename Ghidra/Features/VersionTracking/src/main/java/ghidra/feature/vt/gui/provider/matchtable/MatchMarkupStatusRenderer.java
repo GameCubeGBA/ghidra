@@ -96,7 +96,7 @@ public class MatchMarkupStatusRenderer extends AbstractGhidraColumnRenderer<VTMa
 	}
 
 	private String getDescription(VTAssociationMarkupStatus status) {
-		StringBuffer buf = new StringBuffer("<html>");
+		StringBuilder buf = new StringBuilder("<html>");
 
 		if (!status.isInitialized()) {
 			buf.append("Match has not been accepted; unknown markup status");

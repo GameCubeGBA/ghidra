@@ -250,7 +250,7 @@ public class VTMatchDB extends DatabaseObject implements VTMatch {
 
 	@Override
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 
 		Address destinationAddress = getDestinationAddress();
 		Address sourceAddress = getSourceAddress();

@@ -91,7 +91,8 @@ public class X86_32_ElfRelocationHandler extends ElfRelocationHandler {
 				}
 				break;
 			case X86_32_ElfRelocationConstants.R_386_PC32:
-				value = (int) (symbolValue + addend - offset);
+            case X86_32_ElfRelocationConstants.R_386_PLT32:
+                value = (int) (symbolValue + addend - offset);
 				memory.setInt(relocationAddress, value);
 				break;
 			// we punt on these because they're not linked yet!
@@ -99,11 +100,7 @@ public class X86_32_ElfRelocationHandler extends ElfRelocationHandler {
 				value = (int) (symbolValue + addend);
 				memory.setInt(relocationAddress, value);
 				break;
-			case X86_32_ElfRelocationConstants.R_386_PLT32:
-				value = (int) (symbolValue + addend - offset);
-				memory.setInt(relocationAddress, value);
-				break;
-			case X86_32_ElfRelocationConstants.R_386_GLOB_DAT:
+            case X86_32_ElfRelocationConstants.R_386_GLOB_DAT:
 			case X86_32_ElfRelocationConstants.R_386_JMP_SLOT:
 				value = (int) symbolValue;
 				memory.setInt(relocationAddress, value);

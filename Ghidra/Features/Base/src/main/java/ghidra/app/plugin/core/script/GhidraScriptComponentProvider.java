@@ -213,12 +213,10 @@ public class GhidraScriptComponentProvider extends ComponentProviderAdapter {
 			String name = (String) column.getHeaderValue();
 			switch (name) {
 				case GhidraScriptTableModel.SCRIPT_ACTION_COLUMN_NAME:
-					initializeUnresizableColumn(column, 50);
+                case GhidraScriptTableModel.SCRIPT_STATUS_COLUMN_NAME:
+                    initializeUnresizableColumn(column, 50);
 					break;
-				case GhidraScriptTableModel.SCRIPT_STATUS_COLUMN_NAME:
-					initializeUnresizableColumn(column, 50);
-					break;
-			}
+            }
 		}
 
 		JScrollPane scriptTableScroll = new JScrollPane(scriptTable);

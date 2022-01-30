@@ -226,7 +226,7 @@ public class FunctionDefinitionDataType extends GenericDataType implements Funct
 
 	@Override
 	public String getPrototypeString(boolean includeCallingConvention) {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		buf.append((returnType != null ? returnType.getDisplayName() : "void"));
 		buf.append(" ");
 		if (includeCallingConvention &&

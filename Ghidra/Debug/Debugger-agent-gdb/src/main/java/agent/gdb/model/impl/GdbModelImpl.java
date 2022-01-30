@@ -104,13 +104,11 @@ public class GdbModelImpl extends AbstractDebuggerObjectModel {
 
 	protected void checkExited(GdbState state, GdbCause cause) {
 		switch (state) {
-			case NOT_STARTED: {
+			case NOT_STARTED:
+            case STARTING: {
 				break;
 			}
-			case STARTING: {
-				break;
-			}
-			case RUNNING: {
+            case RUNNING: {
 				session.setAccessible(false);
 				break;
 			}

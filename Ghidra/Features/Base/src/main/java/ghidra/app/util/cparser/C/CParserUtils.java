@@ -318,7 +318,7 @@ public class CParserUtils {
 			parseMessage = "<br><br>" + parseMessage + "<br>";
 		}
 
-		StringBuffer successFailureBuffer = new StringBuffer();
+		StringBuilder successFailureBuffer = new StringBuilder();
 		successFailureBuffer.append("<blockquote>");
 		if (errorIndex == 0) {
 			successFailureBuffer.append("<font color=\"red\"><b>");

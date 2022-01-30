@@ -370,7 +370,7 @@ public class ExportDataDirectory extends DataDirectory {
 	 */
 	@Override
 	public String toString() {
-		StringBuffer buff = new StringBuffer();
+		StringBuilder buff = new StringBuilder();
 		buff.append("\t\t" + "Export Directory: [" + super.toString() + "]" + "\n");
 		for (ExportInfo info : exports) {
 			buff.append("\t\t\t" + "0x" + Long.toHexString(info.getAddress()) + "  " +

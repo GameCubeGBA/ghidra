@@ -87,7 +87,7 @@ public class XmlUtilities {
 	 * @return the encoded XML string
 	 */
 	public static String escapeElementEntities(String xml) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		for (int i = 0; i < xml.length(); i++) {
 			char next = xml.charAt(i);
 			if ((next < ' ') && (next != 0x09) && (next != 0x0A) && (next != 0x0D)) {
@@ -137,7 +137,7 @@ public class XmlUtilities {
 	public static String unEscapeElementEntities(String escapedXMLString) {
 
 		Matcher matcher = HEX_DIGIT_PATTERN.matcher(escapedXMLString);
-		StringBuffer buffy = new StringBuffer();
+		StringBuilder buffy = new StringBuilder();
 		while (matcher.find()) {
 			int intValue = Integer.parseInt(matcher.group(1), 16);
 			matcher.appendReplacement(buffy, Character.toString((char) intValue));

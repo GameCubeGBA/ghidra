@@ -104,7 +104,7 @@ public class User implements Comparable<User>, Serializable {
 	 */
 	@Override
 	public String toString() {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		buf.append(name);
 		buf.append(" (");
 		buf.append(types[permission]);

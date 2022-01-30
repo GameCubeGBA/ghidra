@@ -173,13 +173,11 @@ public class FieldHeaderComp extends JPanel {
 		}
 
 		switch (state) {
-			case OVER_FIELD:
-				setCursor(defaultCursor);
-				break;
-			case NEAR_EDGE:
+            case NEAR_EDGE:
 				setCursor(resizeCursor);
 				break;
-			default:
+            case OVER_FIELD:
+            default:
 				setCursor(defaultCursor);
 				break;
 

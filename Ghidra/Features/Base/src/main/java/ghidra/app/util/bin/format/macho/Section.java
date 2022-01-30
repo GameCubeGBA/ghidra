@@ -245,7 +245,7 @@ public class Section implements StructConverter {
 
 	@Override
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		buffer.append("      Name: " + sectname + '\n');
 		buffer.append("   Address: 0x" + Long.toHexString(addr) + '\n');
 		buffer.append("    Length: 0x" + Long.toHexString(size) + '\n');

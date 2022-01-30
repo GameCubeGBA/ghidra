@@ -530,7 +530,7 @@ public class FunctionDB extends DatabaseObject implements Function {
 				loadVariables();
 			}
 
-			StringBuffer buf = new StringBuffer();
+			StringBuilder buf = new StringBuilder();
 			ReturnParameterDB rtn = getReturn();
 			buf.append(formalSignature ? rtn.getFormalDataType().getDisplayName()
 					: rtn.getDataType().getDisplayName());

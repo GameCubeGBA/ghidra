@@ -122,7 +122,7 @@ public class AddToSessionTask extends Task {
 				}
 			}
 			if (!noMatchList.isEmpty()) {
-				StringBuffer messageBuffer = new StringBuffer(
+				StringBuilder messageBuffer = new StringBuilder(
 					"No matches were found by the following program correlators: ");
 				for (VTProgramCorrelator vtProgramCorrelator : noMatchList) {
 					messageBuffer.append("\n  " + vtProgramCorrelator.getName());

@@ -235,7 +235,7 @@ public class GTreeState {
 	}
 
 	private String getPaths(List<TreePath> paths) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		for (TreePath treePath : paths) {
 			buffer.append(treePath);
 		}

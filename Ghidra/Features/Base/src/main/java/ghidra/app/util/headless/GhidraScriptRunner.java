@@ -194,7 +194,7 @@ public class GhidraScriptRunner implements GhidraLaunchable {
 	 * Gather paths where scripts may be found.
 	 */
 	private void initializeScriptPaths() {
-		StringBuffer buf = new StringBuffer("HEADLESS Script Paths:");
+		StringBuilder buf = new StringBuilder("HEADLESS Script Paths:");
 		for (ResourceFile dir : GhidraScriptUtil.getScriptSourceDirectories()) {
 			buf.append("\n    ");
 			buf.append(dir.getAbsolutePath());

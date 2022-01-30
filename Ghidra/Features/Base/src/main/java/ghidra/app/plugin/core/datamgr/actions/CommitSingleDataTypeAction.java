@@ -75,15 +75,14 @@ public class CommitSingleDataTypeAction extends DockingAction {
 
 		switch (syncStatus) {
 			case UNKNOWN:
-				return false;
+            case UPDATE:
+            case IN_SYNC:
+                return false;
 			case CONFLICT:
 			case COMMIT:
 			case ORPHAN:
 				return true;
-			case UPDATE:
-			case IN_SYNC:
-				return false;
-		}
+        }
 		return false;
 	}
 

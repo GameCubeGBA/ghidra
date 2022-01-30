@@ -72,7 +72,7 @@ public class JavaHelpFilesBuilder {
 		LogFileWriter errorLog = createLogFile();
 
 		boolean hasErrors = false;
-		StringBuffer shortErrorDescription = new StringBuffer();
+		StringBuilder shortErrorDescription = new StringBuilder();
 		try {
 			generateMapFile(help);
 		}

@@ -151,7 +151,7 @@ public class VTMatchInfo {
 
 	@Override
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		double simScoreValue = getSimilarityScore() == null ? 0.0 : getSimilarityScore().getScore();
 		double confScoreValue =
 			getConfidenceScore() == null ? 0.0 : getConfidenceScore().getScore();

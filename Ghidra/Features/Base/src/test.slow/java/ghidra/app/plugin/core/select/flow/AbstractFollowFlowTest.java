@@ -192,7 +192,7 @@ public abstract class AbstractFollowFlowTest extends AbstractGhidraHeadedIntegra
 
 		@Override
 		public String toString() {
-			StringBuffer buf = new StringBuffer();
+			StringBuilder buf = new StringBuilder();
 			AddressRangeIterator ranges = getAddressRanges();
 			for (AddressRange addressRange : ranges) {
 				buf.append("\n[" + addressRange.getMinAddress() + " - " +

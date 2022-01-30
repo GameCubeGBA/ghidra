@@ -59,7 +59,7 @@ public class URLAnnotatedStringHandler implements AnnotatedStringHandler {
 
 		String displayText = url.toExternalForm();
 		if (text.length > 2) { // URL and display text
-			StringBuffer buffer = new StringBuffer();
+			StringBuilder buffer = new StringBuilder();
 			for (int i = 2; i < text.length; i++) {
 				buffer.append(text[i]).append(" ");
 			}

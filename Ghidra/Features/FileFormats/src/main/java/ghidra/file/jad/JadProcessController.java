@@ -129,7 +129,7 @@ public class JadProcessController {
 		Runnable runnable = new Runnable() {
 			@Override
 			public void run() {
-				StringBuffer buffer = new StringBuffer();
+				StringBuilder buffer = new StringBuilder();
 				try {
 					byte[] bytes = new byte[0x1000];
 					while (!monitor.isCancelled()) {

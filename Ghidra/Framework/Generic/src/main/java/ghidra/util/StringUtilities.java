@@ -493,7 +493,7 @@ public class StringUtilities {
 			return null;
 		}
 
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 
 		int linepos = 0;
 

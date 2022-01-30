@@ -357,7 +357,7 @@ public class BadgedIcon implements Icon {
 
 	private String getIconNames() {
 
-		StringBuffer buffy = new StringBuffer();
+		StringBuilder buffy = new StringBuilder();
 
 		for (BadgePosition pos : BadgePosition.values()) {
 			MultiIcon mi = badgeMap.get(pos);

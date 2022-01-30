@@ -198,7 +198,8 @@ class ConsistencyChecker {
 			case CPUI_BOOL_XOR:
 			case CPUI_BOOL_AND:
 			case CPUI_BOOL_OR:
-				vnout = recoverSize(op.getOut().getSize(), ct);
+            case CPUI_BOOL_NEGATE:
+                vnout = recoverSize(op.getOut().getSize(), ct);
 				if (vnout == -1) {
 					printOpError(op, ct, -1, -1, "Using subtable with exports in expression");
 					return false;
@@ -217,27 +218,7 @@ class ConsistencyChecker {
 					return false;
 				}
 				return true;
-			case CPUI_BOOL_NEGATE:
-				vnout = recoverSize(op.getOut().getSize(), ct);
-				if (vnout == -1) {
-					printOpError(op, ct, -1, -1, "Using subtable with exports in expression");
-					return false;
-				}
-				if (vnout != 1) {
-					printOpError(op, ct, -1, -1, "Output must be a boolean (size 1)");
-					return false;
-				}
-				vn0 = recoverSize(op.getIn(0).getSize(), ct);
-				if (vn0 == -1) {
-					printOpError(op, ct, 0, 0, "Using subtable with exports in expression");
-					return false;
-				}
-				if (vn0 != 1) {
-					printOpError(op, ct, 0, 0, "Input must be a boolean (size 1)");
-					return false;
-				}
-				return true;
-			// The shift amount does not necessarily have to be the same size
+            // The shift amount does not necessarily have to be the same size
 			// But the output and first parameter must be same size
 			case CPUI_INT_LEFT:
 			case CPUI_INT_RIGHT:

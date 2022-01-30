@@ -287,7 +287,7 @@ public class ClangLayoutController implements LayoutModel, LayoutModelListener {
 			maxchar = maxWidth / indentWidth;
 		}
 		String[] toklist = line.split("[ \t]+");
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		int cursize = 0;
 		boolean atleastone = false;
 		int i = 0;
@@ -305,7 +305,7 @@ public class ClangLayoutController implements LayoutModel, LayoutModelListener {
 				res.add(finishLine);
 				cursize = 5;
 				atleastone = false;
-				buf = new StringBuffer();
+				buf = new StringBuilder();
 				buf.append("     ");
 			}
 			else {
@@ -618,7 +618,7 @@ public class ClangLayoutController implements LayoutModel, LayoutModelListener {
 			int lineNumberLength = lineNumberString.length();
 			int padLength = maxNumberOfDigits - lineNumberLength;
 
-			StringBuffer buffy = new StringBuffer();
+			StringBuilder buffy = new StringBuilder();
 			buffy.append(" ".repeat(padLength));
 			buffy.append(lineNumberString).append(' '); // space for separation
 			return buffy.toString();

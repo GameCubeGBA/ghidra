@@ -50,7 +50,7 @@ public class DumpMissedStarts extends GhidraScript implements PatternFactory {
 	}
 
 	private void writeBytes(Writer w, byte[] buffer, int numbytes) throws IOException {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		for (int i = 0; i < numbytes; ++i)
 			buf.append(Integer.toHexString(buffer[i] & 0xff)).append(' ');
 		buf.append('\n');

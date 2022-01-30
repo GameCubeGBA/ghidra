@@ -37,7 +37,7 @@ public class IterateDataScript extends GhidraScript {
 				break;
 			}
 
-			StringBuffer buffer = new StringBuffer();
+			StringBuilder buffer = new StringBuilder();
 
 			buffer.append(data.getMinAddress());
 			buffer.append(' ');

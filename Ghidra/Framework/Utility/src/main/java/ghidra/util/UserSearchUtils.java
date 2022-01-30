@@ -387,7 +387,7 @@ public class UserSearchUtils {
 	 */
 	// note: 'package' for testing
 	static String escapeSomeRegexCharacters(String input, char[] doNotEscape) {
-		StringBuffer buffy = new StringBuffer();
+		StringBuilder buffy = new StringBuilder();
 		for (int i = 0; i < input.length(); i++) {
 			char c = input.charAt(i);
 

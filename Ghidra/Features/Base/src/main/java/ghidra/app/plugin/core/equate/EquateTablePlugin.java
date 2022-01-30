@@ -156,7 +156,7 @@ public class EquateTablePlugin extends ProgramPlugin implements DomainObjectList
 
 		// create a string list of names of all equates to be removed...
 		String[] equateNames = new String[equates.size()];
-		StringBuffer equateList = new StringBuffer();
+		StringBuilder equateList = new StringBuilder();
 		for (int i = 0; i < equates.size(); ++i) {
 			equateNames[i] = equates.get(i).getName();
 			equateList.append(equateNames[i]);

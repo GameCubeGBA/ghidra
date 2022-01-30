@@ -95,13 +95,13 @@ public class SSHKeyManager {
 	private static CipherParameters getSSHPrivateKey(InputStream sshPrivateKeyIn, String srcName)
 			throws InvalidKeyException, IOException {
 
-		StringBuffer keyBuf = new StringBuffer();
+		StringBuilder keyBuf = new StringBuilder();
 		try (BufferedReader r = new BufferedReader(new InputStreamReader(sshPrivateKeyIn))) {
 			boolean checkKeyFormat = true;
 			String line;
 			while ((line = r.readLine()) != null) {
 				if (checkKeyFormat) {
-					if (!line.startsWith("-----BEGIN ") || line.indexOf(" KEY-----") < 0) {
+					if (!line.startsWith("-----BEGIN ") || !line.contains(" KEY-----")) {
 						throw new InvalidKeyException("Invalid SSH Private Key");
 					}
 					if (!line.startsWith("-----BEGIN RSA PRIVATE KEY-----") &&
@@ -112,7 +112,7 @@ public class SSHKeyManager {
 					}
 					checkKeyFormat = false;
 				}
-				if (keyBuf.length() != 0) {
+				if (!keyBuf.isEmpty()) {
 					keyBuf.append('\n');
 				}
 				keyBuf.append(line);

@@ -86,7 +86,7 @@ public class DataMnemonicOperandFieldSearcher extends ProgramDatabaseFieldSearch
 	}
 
 	private void findMatchesForCurrentAddress(Data data, List<ProgramLocation> currentMatches) {
-		StringBuffer searchStrBuf = new StringBuffer();
+		StringBuilder searchStrBuf = new StringBuilder();
 		String mnemonicString = "";
 		String operandString = "";
 		if (doMnemonics) {

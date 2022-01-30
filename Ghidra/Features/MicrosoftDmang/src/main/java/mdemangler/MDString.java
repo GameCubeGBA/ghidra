@@ -139,15 +139,12 @@ public class MDString extends MDParsableItem {
 		crcNumber.parse();
 		crcVal = crcNumber.getValue().longValue();
 		switch (charType) {
-			case '0': // char string
-				typeSize = 1;
-				name = "`string'";
-				break;
-			case '1': // wchar_t string
+            case '1': // wchar_t string
 				typeSize = 2;
 				name = "`string'";
 				break;
-			default:
+            case '0': // char string
+            default:
 				typeSize = 1;
 				name = "`string'";
 				// name = "MDString: Microsoft string of unknown type: " + charType;

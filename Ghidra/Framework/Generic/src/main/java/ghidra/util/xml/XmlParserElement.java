@@ -81,7 +81,7 @@ public class XmlParserElement {
 
 	@Override
 	public String toString() {
-		StringBuffer buffer = new StringBuffer(name);
+		StringBuilder buffer = new StringBuilder(name);
 		String [] attrNames = getAttrNames();
 		Arrays.sort(attrNames);
 		for (int i = 0; i < attrNames.length; i++) {
