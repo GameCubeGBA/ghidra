@@ -519,14 +519,12 @@ public class ExternalFunctionMerger extends AbstractFunctionMerger implements Li
 			}
 		}
 		for (Long latestID : latestAddIDs) { // Added
-			Long resultID = latestID;
-			latestResolvedSymbols.put(latestID, resultID);
+            latestResolvedSymbols.put(latestID, latestID);
 		}
 		for (Long latestID : latestModifiedIDs) { // Changed
-			Long resultID = latestID;
-			latestResolvedSymbols.put(latestID, resultID);
+            latestResolvedSymbols.put(latestID, latestID);
 			long originalID = resolveOriginalIDFromLatestID(latestID);
-			originalResolvedSymbols.put(originalID, resultID);
+			originalResolvedSymbols.put(originalID, latestID);
 		}
 	}
 
@@ -2423,10 +2421,9 @@ public class ExternalFunctionMerger extends AbstractFunctionMerger implements Li
 		// Handle Detailed Function Conflicts
 		if (funcSet.contains(myAddress)) {
 			monitor.checkCanceled();
-			Address myEntryPoint = myAddress;
-			Function[] functions = getFunctions(externalLocations);
+            Function[] functions = getFunctions(externalLocations);
 			updateExternalNameInfo(externalLocations, MY);
-			handleExternalFunctionConflict(functions, myEntryPoint, chosenConflictOption,
+			handleExternalFunctionConflict(functions, myAddress, chosenConflictOption,
 				listingMergePanel, monitor);
 
 			// The following removes myAddress from funcSet since we just handled it here.
@@ -4249,8 +4246,7 @@ public class ExternalFunctionMerger extends AbstractFunctionMerger implements Li
 		if (symbol == null) {
 			return null;
 		}
-		ExternalLocation externalLocation = externalManagers[version].getExternalLocation(symbol);
-		return externalLocation;
+        return externalManagers[version].getExternalLocation(symbol);
 	}
 
 	private StringBuffer getRenamedConflictsInfo() {

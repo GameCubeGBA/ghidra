@@ -519,8 +519,7 @@ public class EquatePlugin2Test extends AbstractProgramBasedTest {
 		ComponentProvider provider = tool.getComponentProvider(PluginConstants.CODE_BROWSER);
 		DockingActionIf action = getAction(equatePlugin, "Apply Enum");
 		performAction(action, provider, false);
-		ApplyEnumDialog d = waitForDialogComponent(ApplyEnumDialog.class);
-		return d;
+        return waitForDialogComponent(ApplyEnumDialog.class);
 	}
 
 }

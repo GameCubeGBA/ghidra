@@ -80,8 +80,7 @@ public class CliTableModule extends CliAbstractTable {
 	
 	@Override
 	public DataType toDataType() {
-		DataType rowDt = getRowDataType();
-		return rowDt;
+        return getRowDataType();
 	}
 
 	@Override

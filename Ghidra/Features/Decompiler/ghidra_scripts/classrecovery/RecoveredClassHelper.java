@@ -1744,10 +1744,8 @@ public class RecoveredClassHelper {
 	}
 
 	public List<Function> getFunctionsOnBothLists(List<Function> list1, List<Function> list2) {
-		List<Function> commonFunctions =
-			list1.stream().distinct().filter(list2::contains).collect(Collectors.toList());
 
-		return commonFunctions;
+        return list1.stream().distinct().filter(list2::contains).collect(Collectors.toList());
 	}
 
 	/**
@@ -1757,10 +1755,8 @@ public class RecoveredClassHelper {
 	 * @return a set of functions contained in both of the given sets of functions
 	 */
 	public Set<Function> getFunctionsContainedInBothSets(Set<Function> set1, Set<Function> set2) {
-		Set<Function> commonFunctions =
-			set1.stream().distinct().filter(set2::contains).collect(Collectors.toSet());
 
-		return commonFunctions;
+        return set1.stream().distinct().filter(set2::contains).collect(Collectors.toSet());
 
 	}
 
@@ -2943,8 +2939,7 @@ public class RecoveredClassHelper {
 		ArrayDataType vftableArrayDataType =
 			new ArrayDataType(pointerDataType, numFunctionPointers, defaultPointerSize);
 		try {
-			Data vftableArrayData = api.createData(vftableAddress, vftableArrayDataType);
-			return vftableArrayData;
+            return api.createData(vftableAddress, vftableArrayDataType);
 		}
 		catch (Exception e) {
 			return null;
@@ -3228,8 +3223,7 @@ public class RecoveredClassHelper {
 			dataTypeManager.getDataType(recoveredClass.getClassPath(), recoveredClass.getName());
 
 		if (classDataType != null && classDataType instanceof Structure) {
-			Structure classStructure = (Structure) classDataType;
-			return classStructure;
+            return (Structure) classDataType;
 		}
 
 		return null;
@@ -3389,10 +3383,9 @@ public class RecoveredClassHelper {
 
 		Function vbaseDestructorFunction = recoveredClass.getVBaseDestructor();
 		if (vbaseDestructorFunction != null) {
-			String destructorName = VBASE_DESTRUCTOR_LABEL;
 
-			if (nameVfunctions) {
-				createNewSymbolAtFunction(vbaseDestructorFunction, destructorName, classNamespace,
+            if (nameVfunctions) {
+				createNewSymbolAtFunction(vbaseDestructorFunction, VBASE_DESTRUCTOR_LABEL, classNamespace,
 					true, true);
 			}
 
@@ -3838,9 +3831,8 @@ public class RecoveredClassHelper {
 		if (!returnType.getName().equals(namespace.getName()) &&
 			extendedFlatAPI.isPointerToEmptyStructure(returnType)) {
 			Pointer ptr = (Pointer) returnType;
-			Structure structure = (Structure) ptr.getDataType();
 
-			return structure;
+            return (Structure) ptr.getDataType();
 
 		}
 		return null;
@@ -7606,8 +7598,7 @@ public class RecoveredClassHelper {
 		if (!(pointedToDataType instanceof FunctionDefinition)) {
 			return null;
 		}
-		FunctionDefinition componentFunctionDefinition = (FunctionDefinition) pointedToDataType;
-		return componentFunctionDefinition;
+        return (FunctionDefinition) pointedToDataType;
 	}
 
 	/**
@@ -7643,10 +7634,8 @@ public class RecoveredClassHelper {
 			// since anyone calling purecall will call it
 			if (!componentFunctionDefinition.getName().contains("purecall")) {
 				// otherwise update data type with new new signature
-				FunctionDefinition changedFunctionDefinition =
-					updateFunctionDefinition(componentFunctionDefinition, newFunctionDefinition);
 
-				return changedFunctionDefinition;
+                return updateFunctionDefinition(componentFunctionDefinition, newFunctionDefinition);
 			}
 		}
 
@@ -8269,9 +8258,8 @@ public class RecoveredClassHelper {
 	private Category getDataTypeCategory(DataType dataType) {
 
 		CategoryPath originalPath = dataType.getCategoryPath();
-		Category category = dataTypeManager.getCategory(originalPath);
 
-		return category;
+        return dataTypeManager.getCategory(originalPath);
 	}
 
 	/**

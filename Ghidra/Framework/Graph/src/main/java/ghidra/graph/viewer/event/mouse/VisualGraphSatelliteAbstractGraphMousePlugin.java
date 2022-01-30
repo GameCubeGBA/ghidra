@@ -77,8 +77,7 @@ public abstract class VisualGraphSatelliteAbstractGraphMousePlugin<V extends Vis
 		// ...now translate the shape from the shared layout space to the satellite view space
 		MultiLayerTransformer satelliteMultiLayerTransformer =
 			satelliteViewer.getRenderContext().getMultiLayerTransformer();
-		Shape lenInSatelliteViewSpace = satelliteMultiLayerTransformer.transform(lensInLayoutSpace);
-		return lenInSatelliteViewSpace;
+        return satelliteMultiLayerTransformer.transform(lensInLayoutSpace);
 	}
 
 	protected Point translateSatelliteViewPointToLayoutPoint(VisualizationViewer<V, E> viewer,

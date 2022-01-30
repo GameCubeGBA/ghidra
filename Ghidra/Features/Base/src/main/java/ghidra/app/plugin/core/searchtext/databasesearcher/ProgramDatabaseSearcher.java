@@ -279,18 +279,17 @@ public class ProgramDatabaseSearcher implements Searcher {
 	private ProgramLocation adjustStartLocation(Program program, ProgramLocation start,
 			AddressSetView trimmedSet, boolean forward) {
 
-		ProgramLocation adjustedStart = start;
-		if (adjustedStart != null && trimmedSet != null && !trimmedSet.isEmpty()) {
+        if (start != null && trimmedSet != null && !trimmedSet.isEmpty()) {
 			Address minAddress = trimmedSet.getMinAddress();
 			Address maxAddress = trimmedSet.getMaxAddress();
-			if (forward && adjustedStart.getAddress().compareTo(minAddress) < 0) {
+			if (forward && start.getAddress().compareTo(minAddress) < 0) {
 				return new ProgramLocation(program, minAddress);
 			}
-			else if (!forward && adjustedStart.getAddress().compareTo(maxAddress) > 0) {
+			else if (!forward && start.getAddress().compareTo(maxAddress) > 0) {
 				return new ProgramLocation(program, maxAddress);
 			}
 		}
-		return adjustedStart;
+		return start;
 	}
 
 	/**

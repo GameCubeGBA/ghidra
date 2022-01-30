@@ -93,8 +93,7 @@ public class ProgramInfo {
 		this.compilerSpecID = null;
 		if (compiler != null) {
 			String translated = this.translateCompiler(compiler);
-			CompilerSpecID cspec = new CompilerSpecID(translated);
-			this.compilerSpecID = cspec;
+            this.compilerSpecID = new CompilerSpecID(translated);
 		}
 	}
 

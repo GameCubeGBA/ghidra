@@ -1088,9 +1088,7 @@ public class DWARFDataTypeImporter {
 			dt = subArray;
 		}
 
-		DWARFDataType result = new DWARFDataType(dt, null, diea.getOffset());
-
-		return result;
+        return new DWARFDataType(dt, null, diea.getOffset());
 	}
 
 	/**

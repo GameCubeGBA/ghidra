@@ -215,8 +215,7 @@ public class DBTraceObjectValue extends DBAnnotatedObject implements InternalTra
 		this.maxSnap = DBTraceUtils.upperEndpoint(lifespan);
 		this.lifespan = DBTraceUtils.toRange(triple.minSnap, maxSnap);
 		if (value instanceof TraceObject) {
-			DBTraceObject child = manager.assertIsMine((TraceObject) value);
-			this.child = child;
+            this.child = manager.assertIsMine((TraceObject) value);
 			this.primitive = null;
 		}
 		else {

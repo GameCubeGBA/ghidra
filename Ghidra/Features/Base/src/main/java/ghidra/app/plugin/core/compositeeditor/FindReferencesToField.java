@@ -64,8 +64,7 @@ public class FindReferencesToField extends CompositeEditorTableAction {
 
 		int row = rows[0];
 		DataTypeComponent dtComponet = model.getComponent(row);
-		String fieldName = dtComponet.getFieldName();
-		return fieldName;
+        return dtComponet.getFieldName();
 	}
 
 	@Override

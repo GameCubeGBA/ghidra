@@ -154,8 +154,7 @@ public class EHFunctionInfoModel extends AbstractCreateDataTypeModel {
 		int defaultPointerSize = getDefaultPointerSize();
 		int size20;
 		int additional21;
-		int additional22 = intSize;
-		if (isRelative()) {
+        if (isRelative()) {
 			size20 = (uintSize * 3) + intSize + ibo32Size * 4;
 			additional21 = ibo32Size;
 		}
@@ -170,7 +169,7 @@ public class EHFunctionInfoModel extends AbstractCreateDataTypeModel {
 			return size20 + additional21;
 		}
 		else if (isV3) {
-			return size20 + additional21 + additional22;
+			return size20 + additional21 + intSize;
 		}
 		return 0;
 	}
@@ -374,10 +373,7 @@ public class EHFunctionInfoModel extends AbstractCreateDataTypeModel {
 				struct.add(compDt, "EHFlags", null);
 			}
 
-			TypedefDataType typedef =
-				new TypedefDataType(categoryPath, getName(), struct, dataTypeManager);
-
-			dataType = typedef;
+            dataType = new TypedefDataType(categoryPath, getName(), struct, dataTypeManager);
 		}
 
 		return MSDataTypeUtils.getMatchingDataType(program, dataType);

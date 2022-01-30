@@ -404,9 +404,7 @@ public class ComputeChecksumsPluginTest extends AbstractGhidraHeadedIntegrationT
 	}
 
 	private ComputeChecksumsProvider getProvider() {
-		ComputeChecksumsProvider provider =
-			waitForComponentProvider(ComputeChecksumsProvider.class);
-		return provider;
+        return waitForComponentProvider(ComputeChecksumsProvider.class);
 	}
 
 	private ChecksumTableModel setupModelForSelection(String from, String to) throws Exception {
@@ -437,7 +435,6 @@ public class ComputeChecksumsPluginTest extends AbstractGhidraHeadedIntegrationT
 		waitForTasks(); // allow the provider to compute the checksums
 
 		ComputeChecksumsProvider provider = getProvider();
-		ChecksumTableModel model = provider.getModel();
-		return model;
+        return provider.getModel();
 	}
 }

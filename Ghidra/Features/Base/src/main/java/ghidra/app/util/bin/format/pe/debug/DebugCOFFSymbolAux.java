@@ -114,7 +114,6 @@ public class DebugCOFFSymbolAux implements StructConverter {
     @Override
 	public DataType toDataType() throws DuplicateNameException, IOException {
     	String structureName = StructConverterUtil.parseName(DebugCOFFSymbolAux.class);
-    	Structure structure = new StructureDataType(structureName, IMAGE_SIZEOF_AUX_SYMBOL);
     	/*
     	if (sym != null) {
     		structure.add(sym.toDataType());
@@ -126,7 +125,7 @@ public class DebugCOFFSymbolAux implements StructConverter {
     		structure.add(section.toDataType());
     	}
     	*/
-    	return structure;
+    	return new StructureDataType(structureName, IMAGE_SIZEOF_AUX_SYMBOL);
     }
 
 	public static class AuxSym implements StructConverter {

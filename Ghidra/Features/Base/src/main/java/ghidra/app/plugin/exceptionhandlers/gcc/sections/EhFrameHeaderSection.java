@@ -132,8 +132,7 @@ public class EhFrameHeaderSection {
 
 	private DwarfEHDecoder getFdeCountDecoder(ExceptionHandlerFrameHeader eh_frame_hdr) {
 		int fdeCntEnc = eh_frame_hdr.getEh_FrameDescEntryCntEncoding();
-		DwarfEHDecoder fdeDecoder = DwarfDecoderFactory.getDecoder(fdeCntEnc);
-		return fdeDecoder;
+        return DwarfDecoderFactory.getDecoder(fdeCntEnc);
 	}
 
 	/**
@@ -176,8 +175,7 @@ public class EhFrameHeaderSection {
 			DwarfEHDecoder fdeDecoder) throws MemoryAccessException {
 
 		DwarfDecodeContext context = new DwarfDecodeContext(program, countAddress, curMemBlock);
-		int fdeTableCnt = (int) fdeDecoder.decode(context);
-		return fdeTableCnt;
+        return (int) fdeDecoder.decode(context);
 	}
 
 	private void createFdeTable(Address curAddress, ExceptionHandlerFrameHeader eh_frame_hdr,

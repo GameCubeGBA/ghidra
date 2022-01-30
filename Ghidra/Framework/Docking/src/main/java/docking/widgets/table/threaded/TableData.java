@@ -264,8 +264,7 @@ public class TableData<ROW_OBJECT> implements Iterable<ROW_OBJECT> {
 			return null;
 		}
 
-		TableData<ROW_OBJECT> parent = source.getLowestLevelSourceDataForFilter(filter);
-		return parent;
+        return source.getLowestLevelSourceDataForFilter(filter);
 	}
 
 	/**
@@ -286,8 +285,7 @@ public class TableData<ROW_OBJECT> implements Iterable<ROW_OBJECT> {
 			return false; // no previous filter--can't be a sub-filter
 		}
 
-		boolean isSubFilter = filter.isSubFilterOf(tableFilter);
-		return isSubFilter;
+        return filter.isSubFilterOf(tableFilter);
 	}
 
 	/**

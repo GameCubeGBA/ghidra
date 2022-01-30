@@ -343,8 +343,7 @@ public class ProjectInfoDialogTest extends AbstractGhidraHeadedIntegrationTest {
 	}
 
 	private DockingActionIf getAction(String actionName) {
-		DockingActionIf action = getAction(frontEndTool, "FrontEndPlugin", actionName);
-		return action;
+        return getAction(frontEndTool, "FrontEndPlugin", actionName);
 	}
 
 	private void stepThroughWizard(boolean doFinish) throws Exception {

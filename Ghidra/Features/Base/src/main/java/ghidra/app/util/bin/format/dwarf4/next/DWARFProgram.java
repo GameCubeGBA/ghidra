@@ -437,19 +437,16 @@ public class DWARFProgram implements Closeable {
 		String origName = isAnon ? null : name;
 		String workingName = ensureSafeNameLength(name);
 
-		DWARFNameInfo result =
-			parentDNI.createChild(origName, workingName, DWARFUtil.getSymbolTypeFromDIE(diea));
-		return result;
+        return parentDNI.createChild(origName, workingName, DWARFUtil.getSymbolTypeFromDIE(diea));
 	}
 
 	private String getAnonBaseTypeName(DIEAggregate diea) {
 		try {
 			int dwarfSize = diea.parseInt(DWARFAttribute.DW_AT_byte_size, 0);
 			int dwarfEncoding = (int) diea.getUnsignedLong(DWARFAttribute.DW_AT_encoding, -1);
-			String name = createAnonName(
-				"anon_basetype_" + DWARFEncoding.getTypeName(dwarfEncoding) + "_" + dwarfSize,
-				diea);
-			return name;
+            return createAnonName(
+                "anon_basetype_" + DWARFEncoding.getTypeName(dwarfEncoding) + "_" + dwarfSize,
+                diea);
 		}
 		catch (IOException | DWARFExpressionException e) {
 			return createAnonName("anon_basetype_unknown", diea);
@@ -458,8 +455,7 @@ public class DWARFProgram implements Closeable {
 
 	private String getAnonEnumName(DIEAggregate diea) {
 		int enumSize = Math.max(1, (int) diea.getUnsignedLong(DWARFAttribute.DW_AT_byte_size, 1));
-		String name = createAnonName("anon_enum_" + (enumSize * 8), diea);
-		return name;
+        return createAnonName("anon_enum_" + (enumSize * 8), diea);
 	}
 
 	private static String createAnonName(String baseName, DIEAggregate diea) {
@@ -551,8 +547,7 @@ public class DWARFProgram implements Closeable {
 	}
 
 	public DWARFNameInfo lookupDNIByOffset(long offset) {
-		DWARFNameInfo tmp = dniCache.get(offset);
-		return tmp;
+        return dniCache.get(offset);
 	}
 
 	public void cacheDNIByOffset(long offset, DWARFNameInfo dni) {

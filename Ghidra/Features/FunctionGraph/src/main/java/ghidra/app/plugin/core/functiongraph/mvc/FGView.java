@@ -88,8 +88,7 @@ public class FGView extends VisualGraphView<FGVertex, FGEdge, FunctionGraph> {
 		// note: not sure we need the 'busy cursor' here, as the graph has already been 
 		//       created at this point
 		return getWithBusyCursor(() -> {
-			FGComponent newViewer = new FGComponent(this, functionGraphData, layoutProvider);
-			return newViewer;
+            return new FGComponent(this, functionGraphData, layoutProvider);
 		});
 	}
 
@@ -198,9 +197,7 @@ public class FGView extends VisualGraphView<FGVertex, FGEdge, FunctionGraph> {
 	}
 
 	void refreshDisplayWithoutRebuilding() {
-		FunctionGraph functionGraph = functionGraphData.getFunctionGraph();
-		Graph<FGVertex, FGEdge> graph = functionGraph;
-		Collection<FGVertex> vertices = graph.getVertices();
+        Collection<FGVertex> vertices = ((Graph<FGVertex, FGEdge>) functionGraphData.getFunctionGraph()).getVertices();
 		for (FGVertex vertex : vertices) {
 			vertex.refreshDisplay();
 		}

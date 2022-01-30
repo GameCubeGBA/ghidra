@@ -187,7 +187,6 @@ public class DmgServer {
 
 	private static String parseLine(String openLine) {
 		int space = openLine.indexOf(' ');
-		String path = openLine.substring(space + 1).trim();
-		return path;
+        return openLine.substring(space + 1).trim();
 	}
 }

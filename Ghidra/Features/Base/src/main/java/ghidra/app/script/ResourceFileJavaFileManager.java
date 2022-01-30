@@ -136,8 +136,7 @@ public class ResourceFileJavaFileManager implements JavaFileManager {
 			}
 			throw new AssertException("Expected name to end in .java but got " + name);
 		}
-		String inferBinaryName = fileManager.inferBinaryName(location, file);
-		return inferBinaryName;
+        return fileManager.inferBinaryName(location, file);
 	}
 
 	@Override

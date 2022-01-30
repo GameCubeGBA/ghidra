@@ -546,9 +546,8 @@ public class StringDataInstance {
 			return StringDataInstance.UNKNOWN_DOT_DOT_DOT;
 		}
 		AdjustedCharsetInfo aci = getAdjustedCharsetInfo(stringBytes);
-		String str = convertBytesToString(stringBytes, aci);
 
-		return str;
+        return convertBytesToString(stringBytes, aci);
 	}
 
 	private byte[] getStringBytes() {
@@ -1033,10 +1032,9 @@ public class StringDataInstance {
 			return NULL_INSTANCE;
 		}
 		int newLength = Math.max(0, length - byteOffset);
-		StringDataInstance sub = new StringDataInstance(this, getOffcutLayout(),
-			new WrappedMemBuffer(buf, byteOffset), newLength, charsetName);
 
-		return sub;
+        return new StringDataInstance(this, getOffcutLayout(),
+            new WrappedMemBuffer(buf, byteOffset), newLength, charsetName);
 	}
 
 	/**

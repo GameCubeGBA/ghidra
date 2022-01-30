@@ -87,9 +87,7 @@ public class JgtNamedLayout extends AbstractFGLayout {
 
 		layoutModel.accept(layout);
 
-		GridLocationMap<FGVertex, FGEdge> grid = convertToGrid(jGraph, layoutModel, layout);
-
-		return grid;
+        return convertToGrid(jGraph, layoutModel, layout);
 	}
 
 	private GridLocationMap<FGVertex, FGEdge> convertToGrid(FGTempGraph jGraph,

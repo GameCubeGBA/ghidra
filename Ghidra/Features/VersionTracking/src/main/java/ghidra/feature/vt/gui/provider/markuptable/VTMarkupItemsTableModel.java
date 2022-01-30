@@ -523,8 +523,7 @@ public class VTMarkupItemsTableModel extends AddressBasedTableModel<VTMarkupItem
 
 			private String getText(String value) {
 				String addressSource = (value != null) ? (String) value : NO_SOURCE_TEXT;
-				String sourceString = "(" + addressSource + ")";
-				return sourceString;
+                return "(" + addressSource + ")";
 			}
 
 			@Override
@@ -541,8 +540,7 @@ public class VTMarkupItemsTableModel extends AddressBasedTableModel<VTMarkupItem
 		@Override
 		public String getValue(VTMarkupItem rowObject, Settings settings, Program program,
 				ServiceProvider serviceProvider) throws IllegalArgumentException {
-			String destinationAddressSource = rowObject.getDestinationAddressSource();
-			return destinationAddressSource;
+            return rowObject.getDestinationAddressSource();
 		}
 
 		@Override

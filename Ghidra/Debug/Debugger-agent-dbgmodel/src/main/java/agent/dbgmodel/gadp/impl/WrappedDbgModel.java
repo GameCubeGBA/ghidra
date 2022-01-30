@@ -906,8 +906,7 @@ public class WrappedDbgModel
 	}
 
 	private String obj2id(Object obj) {
-		String id = map.get(obj);
-		return id;
+        return map.get(obj);
 	}
 
 	public DebugValue getDebugValue(ModelObject register) {

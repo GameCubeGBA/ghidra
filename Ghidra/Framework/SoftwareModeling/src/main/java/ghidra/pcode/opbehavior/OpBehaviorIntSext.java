@@ -29,8 +29,7 @@ public class OpBehaviorIntSext extends UnaryOpBehavior {
 
 	@Override
 	public long evaluateUnary(int sizeout, int sizein, long in1) {
-		long res = Utils.sign_extend(in1, sizein, sizeout);
-		return res;
+        return Utils.sign_extend(in1, sizein, sizeout);
 	}
 
 	@Override

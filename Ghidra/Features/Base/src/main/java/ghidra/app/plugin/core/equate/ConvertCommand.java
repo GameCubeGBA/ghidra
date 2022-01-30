@@ -93,8 +93,7 @@ public class ConvertCommand extends BackgroundCommand {
 	private boolean applyDataSettings(Data data) throws CodeUnitInsertionException {
 
 		DataType dt = data.getBaseDataType();
-		Settings settings = data;
-		Settings defaultSettings = dt.getDefaultSettings();
+        Settings defaultSettings = dt.getDefaultSettings();
 		if (!(Scalar.class.equals(data.getValueClass())) ||
 			!(dt instanceof AbstractIntegerDataType)) {
 			msg = "Unsupported data type for convert: " + data.getDataType().getDisplayName();
@@ -120,10 +119,10 @@ public class ConvertCommand extends BackgroundCommand {
 		}
 
 		if (FormatSettingsDefinition.DEF.getChoice(defaultSettings) == formatChoice) {
-			FormatSettingsDefinition.DEF.clear(settings);
+			FormatSettingsDefinition.DEF.clear(data);
 		}
 		else {
-			FormatSettingsDefinition.DEF.setChoice(settings, formatChoice);
+			FormatSettingsDefinition.DEF.setChoice(data, formatChoice);
 		}
 
 		return true;

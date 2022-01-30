@@ -222,8 +222,7 @@ public class ErrLogExpandableDialog extends AbstractErrDialog {
 	}
 
 	private String addBR(String text) {
-		String withBRs = HTMLUtilities.lineWrapWithHTMLLineBreaks(text, 0);
-		return withBRs;
+        return HTMLUtilities.lineWrapWithHTMLLineBreaks(text, 0);
 	}
 
 	private String getMessage(Throwable t) {

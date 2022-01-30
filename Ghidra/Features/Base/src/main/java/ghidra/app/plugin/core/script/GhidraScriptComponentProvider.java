@@ -1244,8 +1244,7 @@ public class GhidraScriptComponentProvider extends ComponentProviderAdapter {
 			}
 
 			// matches the category?
-			boolean isMatch = info.isCategory(category);
-			return isMatch;
+            return info.isCategory(category);
 		}
 
 		private boolean matchesRootNode(ScriptInfo info) {

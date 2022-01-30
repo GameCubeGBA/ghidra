@@ -182,8 +182,7 @@ public class PdbNewDebugInfo extends PdbDebugInfo {
 	@Override
 	protected String parseFileInfoName(PdbByteReader reader) throws PdbException {
 		// Totally guessing that this is the correct type of string here.
-		String filename = reader.parseString(pdb, StringParseType.StringNt);
-		return filename;
+        return reader.parseString(pdb, StringParseType.StringNt);
 	}
 
 	@Override

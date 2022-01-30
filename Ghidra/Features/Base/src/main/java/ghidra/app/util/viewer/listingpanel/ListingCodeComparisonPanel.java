@@ -371,9 +371,7 @@ public class ListingCodeComparisonPanel
 	}
 
 	private String getLeftProgramName() {
-		String leftProgramName =
-			(programs[LEFT] != null) ? programs[LEFT].getDomainFile().toString() : "none";
-		return leftProgramName;
+        return (programs[LEFT] != null) ? programs[LEFT].getDomainFile().toString() : "none";
 	}
 
 	private void updateRightListingTitle() {
@@ -381,9 +379,7 @@ public class ListingCodeComparisonPanel
 	}
 
 	private String getRightProgramName() {
-		String rightProgramName =
-			(programs[RIGHT] != null) ? programs[RIGHT].getDomainFile().toString() : "none";
-		return rightProgramName;
+        return (programs[RIGHT] != null) ? programs[RIGHT].getDomainFile().toString() : "none";
 	}
 
 	private void initializeListingFieldNavigation() {
@@ -2501,8 +2497,7 @@ public class ListingCodeComparisonPanel
 		if (rightData != null) {
 			rightOffset = rightData.getMaxAddress().subtract(rightData.getMinAddress());
 		}
-		long maxOffset = Math.max(leftOffset, rightOffset);
-		return maxOffset;
+        return Math.max(leftOffset, rightOffset);
 	}
 
 	/**

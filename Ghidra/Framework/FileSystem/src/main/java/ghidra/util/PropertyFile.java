@@ -231,8 +231,7 @@ public class PropertyFile {
 		if (pair == null || pair.first != PropertyEntryType.STRING_TYPE) {
 			return defaultValue;
 		}
-		String value = pair.second;
-		return value;
+        return pair.second;
 	}
 
 	/**

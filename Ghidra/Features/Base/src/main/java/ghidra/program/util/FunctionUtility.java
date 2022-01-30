@@ -319,8 +319,7 @@ public class FunctionUtility {
 		VariableStorage storage =
 			(useCustomStorage) ? sourceReturn.getVariableStorage().clone(destinationProgram)
 					: VariableStorage.UNASSIGNED_STORAGE;
-		Parameter returnValue = new ReturnParameterImpl(dataType, storage, destinationProgram);
-		return returnValue;
+        return new ReturnParameterImpl(dataType, storage, destinationProgram);
 	}
 
 	private static List<Parameter> determineParameters(Function destinationFunction,

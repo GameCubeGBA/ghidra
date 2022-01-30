@@ -103,9 +103,7 @@ public class PointerTypeApplier extends MsTypeApplier {
 		if (size == applicator.getDataOrganization().getPointerSize()) {
 			size = -1; // Use default
 		}
-		Pointer pointer =
-			new PointerDataType(underlyingType, size, applicator.getDataTypeManager());
-		return pointer;
+        return new PointerDataType(underlyingType, size, applicator.getDataTypeManager());
 	}
 
 }

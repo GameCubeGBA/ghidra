@@ -389,8 +389,7 @@ public class FunctionTagProvider extends ComponentProviderAdapter
 
 		if (loc instanceof FunctionLocation) {
 			FunctionLocation functionLocation = (FunctionLocation) loc;
-			Address functionAddress = functionLocation.getFunctionAddress();
-			return functionAddress;
+            return functionLocation.getFunctionAddress();
 		}
 
 		return null;

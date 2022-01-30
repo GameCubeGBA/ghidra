@@ -51,8 +51,7 @@ abstract class VariableStorageDBAdapter {
 		}
 
 		try {
-			VariableStorageDBAdapter adapter = new VariableStorageDBAdapterV2(dbHandle, false);
-			return adapter;
+            return new VariableStorageDBAdapterV2(dbHandle, false);
 		}
 		catch (VersionException e) {
 			if (!e.isUpgradable() || openMode == DBConstants.UPDATE) {

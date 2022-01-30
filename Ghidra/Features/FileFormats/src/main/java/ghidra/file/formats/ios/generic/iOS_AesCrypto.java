@@ -64,9 +64,7 @@ public class iOS_AesCrypto {
 
 			cipher.init(Cipher.DECRYPT_MODE, key, iv);
 
-			CipherInputStream cis = new CipherInputStream(is, cipher);
-
-			return cis;
+            return new CipherInputStream(is, cipher);
 		}
 		catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException
 				| InvalidAlgorithmParameterException e) {
@@ -86,8 +84,7 @@ public class iOS_AesCrypto {
 			}
 
 			cipher.init(Cipher.DECRYPT_MODE, key, iv);
-			byte[] decrypted = cipher.doFinal(cipherText);
-			return decrypted;
+            return cipher.doFinal(cipherText);
 		}
 		catch (NoSuchAlgorithmException | NoSuchPaddingException | BadPaddingException
 				| InvalidKeyException | InvalidAlgorithmParameterException

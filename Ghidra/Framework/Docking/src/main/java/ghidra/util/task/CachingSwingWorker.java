@@ -288,8 +288,8 @@ public abstract class CachingSwingWorker<T> implements CachingLoader<T> {
 				return;
 			}
 
-			for (int i = 0; i < monitors.size(); i++) {
-				monitors.get(i).setMessage(message);
+			for (TaskMonitor monitor : monitors) {
+				monitor.setMessage(message);
 			}
 		}
 
@@ -310,36 +310,36 @@ public abstract class CachingSwingWorker<T> implements CachingLoader<T> {
 
 		@Override
 		public void initialize(long maximum) {
-			for (int i = 0; i < monitors.size(); i++) {
-				monitors.get(i).initialize(maximum);
+			for (TaskMonitor monitor : monitors) {
+				monitor.initialize(maximum);
 			}
 		}
 
 		@Override
 		public void setMaximum(long max) {
-			for (int i = 0; i < monitors.size(); i++) {
-				monitors.get(i).initialize(max);
+			for (TaskMonitor monitor : monitors) {
+				monitor.setMaximum(max);
 			}
 		}
 
 		@Override
 		public void setProgress(long value) {
-			for (int i = 0; i < monitors.size(); i++) {
-				monitors.get(i).setProgress(value);
+			for (TaskMonitor monitor : monitors) {
+				monitor.setProgress(value);
 			}
 		}
 
 		@Override
 		public void incrementProgress(long incrementAmount) {
-			for (int i = 0; i < monitors.size(); i++) {
-				monitors.get(i).incrementProgress(incrementAmount);
+			for (TaskMonitor monitor : monitors) {
+				monitor.incrementProgress(incrementAmount);
 			}
 		}
 
 		@Override
 		public void checkCanceled() throws CancelledException {
-			for (int i = 0; i < monitors.size(); i++) {
-				monitors.get(i).checkCanceled();
+			for (TaskMonitor monitor : monitors) {
+				monitor.checkCanceled();
 			}
 		}
 
@@ -367,8 +367,7 @@ public abstract class CachingSwingWorker<T> implements CachingLoader<T> {
 
 		@Override
 		public boolean isCancelled() {
-			for (int i = 0; i < monitors.size(); i++) {
-				TaskMonitor tm = monitors.get(i);
+			for (TaskMonitor tm : monitors) {
 				if (tm.isCancelled()) {
 					return true;
 				}

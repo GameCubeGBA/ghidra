@@ -44,8 +44,7 @@ public class PreviewTableColumn
 	@Override
 	public PreviewTableCellData getValue(ProgramLocation rowObject, Settings settings,
 			Program program, ServiceProvider serviceProvider) throws IllegalArgumentException {
-		ProgramLocation loc = rowObject;
-		return new PreviewTableCellData(loc, getCodeUnitFormat(serviceProvider));
+        return new PreviewTableCellData(rowObject, getCodeUnitFormat(serviceProvider));
 	}
 
 	private CodeUnitFormat getCodeUnitFormat(ServiceProvider serviceProvider) {

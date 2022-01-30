@@ -37,10 +37,8 @@ public class OpBehaviorIntCarry extends BinaryOpBehavior {
 		if (in1.signum() < 0 || in2.signum() < 0) {
 			throw new AssertException("Expected unsigned in values");
 		}
-		BigInteger res =
-			(in1.compareTo(in1.add(in2).and(Utils.calc_bigmask(sizein))) > 0) ? BigInteger.ONE
-					: BigInteger.ZERO;
-		return res;
+        return (in1.compareTo(in1.add(in2).and(Utils.calc_bigmask(sizein))) > 0) ? BigInteger.ONE
+                : BigInteger.ZERO;
 	}
 
 }

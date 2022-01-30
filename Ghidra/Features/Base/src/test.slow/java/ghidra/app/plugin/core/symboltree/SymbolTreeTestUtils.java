@@ -78,8 +78,7 @@ class SymbolTreeTestUtils {
 			return nameCompare;
 		}
 
-		int result = SymbolTreeNode.SYMBOL_COMPARATOR.compare(s1, s2);
-		return result;
+        return SymbolTreeNode.SYMBOL_COMPARATOR.compare(s1, s2);
 	};
 
 	private Comparator<Symbol> functionComparator = new FunctionSymbolComparator();
@@ -266,16 +265,15 @@ class SymbolTreeTestUtils {
 
 	GTreeNode getSelectedNode() {
 
-		GTreeNode node = runSwing(() -> {
+        return runSwing(() -> {
 
-			TreePath path = tree.getSelectionPath();
-			if (path == null) {
-				return null;
-			}
+            TreePath path = tree.getSelectionPath();
+            if (path == null) {
+                return null;
+            }
 
-			return (GTreeNode) path.getLastPathComponent();
-		});
-		return node;
+            return (GTreeNode) path.getLastPathComponent();
+        });
 	}
 
 	ActionContext getSymbolTreeContext() {

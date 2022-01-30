@@ -297,46 +297,45 @@ public class ShowConstantUse extends GhidraScript {
 	@SuppressWarnings("unused")
 	private TableChooserExecutor createTableExecutor() {
 
-		TableChooserExecutor executor = new TableChooserExecutor() {
+        return new TableChooserExecutor() {
 
-			@Override
-			public String getButtonName() {
-				return "Create Structure";
-			}
+            @Override
+            public String getButtonName() {
+                return "Create Structure";
+            }
 
-			@Override
-			public boolean execute(AddressableRowObject rowObject) {
-				ConstUseLocation constLoc = (ConstUseLocation) rowObject;
-				println("Follow Structure : " + rowObject.getAddress());
+            @Override
+            public boolean execute(AddressableRowObject rowObject) {
+                ConstUseLocation constLoc = (ConstUseLocation) rowObject;
+                println("Follow Structure : " + rowObject.getAddress());
 
-				Program cp = constLoc.getProgram();
-				Address entry = constLoc.getAddress();
+                Program cp = constLoc.getProgram();
+                Address entry = constLoc.getAddress();
 
-				println("Create Structure at " + entry);
+                println("Create Structure at " + entry);
 
-				runScript("CreateStructure.java", cp, entry);
-				return false; // don't remove row from display table
-			}
+                runScript("CreateStructure.java", cp, entry);
+                return false; // don't remove row from display table
+            }
 
-			public void runScript(String name, Program prog, Address loc) {
-				GhidraState scriptState = new GhidraState(state.getTool(), state.getProject(), prog,
-					new ProgramLocation(prog, loc), null, null);
-				try {
-					ResourceFile scriptSource = GhidraScriptUtil.findScriptByName(name);
-					if (scriptSource != null) {
-						GhidraScriptProvider provider = GhidraScriptUtil.getProvider(scriptSource);
-						GhidraScript script = provider.getScriptInstance(scriptSource, writer);
-						script.execute(scriptState, monitor, writer);
-						return;
-					}
-				}
-				catch (Exception exc) {
-					Msg.error(this, "Exception running script", exc);
-				}
-				throw new IllegalArgumentException("Script does not exist: " + name);
-			}
-		};
-		return executor;
+            public void runScript(String name, Program prog, Address loc) {
+                GhidraState scriptState = new GhidraState(state.getTool(), state.getProject(), prog,
+                    new ProgramLocation(prog, loc), null, null);
+                try {
+                    ResourceFile scriptSource = GhidraScriptUtil.findScriptByName(name);
+                    if (scriptSource != null) {
+                        GhidraScriptProvider provider = GhidraScriptUtil.getProvider(scriptSource);
+                        GhidraScript script = provider.getScriptInstance(scriptSource, writer);
+                        script.execute(scriptState, monitor, writer);
+                        return;
+                    }
+                }
+                catch (Exception exc) {
+                    Msg.error(this, "Exception running script", exc);
+                }
+                throw new IllegalArgumentException("Script does not exist: " + name);
+            }
+        };
 	}
 
 	// Object that gathers the constant used locations within the program

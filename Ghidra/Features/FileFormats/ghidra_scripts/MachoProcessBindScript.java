@@ -144,8 +144,7 @@ public class MachoProcessBindScript extends GhidraScript {
 							bind.libraryOrdinal = 0;
 						}
 						else {
-							byte signExtended = (byte) ( DyldInfoCommandConstants.BIND_OPCODE_MASK | immediate );
-							bind.libraryOrdinal = signExtended;
+                            bind.libraryOrdinal = (byte) ( DyldInfoCommandConstants.BIND_OPCODE_MASK | immediate );
 						}
 						bind.fromDylib = getOrdinalName( bind );
 						break;
@@ -405,8 +404,7 @@ public class MachoProcessBindScript extends GhidraScript {
 
 		Address getAddress() {
 			long result = segmentStartAddress + segmentOffset;//TODO
-			Address sectionAddress = toAddr( result & 0xffffffffL );
-			return sectionAddress;
+            return toAddr( result & 0xffffffffL );
 		}
 	}
 }

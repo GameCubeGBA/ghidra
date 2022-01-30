@@ -382,8 +382,7 @@ public abstract class AbstractAddressRangeFilter<T> extends AncillaryFilter<T>
 			return null;
 		}
 
-		Long longValue = Long.valueOf(text, 16);
-		return longValue;
+        return Long.valueOf(text, 16);
 	}
 
 	@Override
@@ -394,8 +393,7 @@ public abstract class AbstractAddressRangeFilter<T> extends AncillaryFilter<T>
 			return null;
 		}
 
-		Long longValue = Long.valueOf(text, 16);
-		return longValue;
+        return Long.valueOf(text, 16);
 	}
 
 	@Override

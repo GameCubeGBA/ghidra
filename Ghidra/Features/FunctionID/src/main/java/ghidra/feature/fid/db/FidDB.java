@@ -243,9 +243,7 @@ public class FidDB implements Closeable {
 	 */
 	public List<FunctionRecord> findFunctionsByLibraryAndName(LibraryRecord library, String name) {
 		try {
-			List<FunctionRecord> list =
-				functionsTable.getFunctionRecordsByLibraryAndName(library, name);
-			return list;
+            return functionsTable.getFunctionRecordsByLibraryAndName(library, name);
 		}
 		catch (IOException e) {
 			Msg.error(this, "Serious problem searching for FID Functions by name and namespace", e);
@@ -260,8 +258,7 @@ public class FidDB implements Closeable {
 	 */
 	public List<FunctionRecord> findFunctionsByNameSubstring(String name) {
 		try {
-			List<FunctionRecord> list = functionsTable.getFunctionRecordsByNameSubstring(name);
-			return list;
+            return functionsTable.getFunctionRecordsByNameSubstring(name);
 		}
 		catch (IOException e) {
 			Msg.error(this, "Serious problem searching for FID Functions by name substring", e);
@@ -276,8 +273,7 @@ public class FidDB implements Closeable {
 	 */
 	public List<FunctionRecord> findFunctionsByNameRegex(String regex) {
 		try {
-			List<FunctionRecord> list = functionsTable.getFunctionRecordsByNameRegex(regex);
-			return list;
+            return functionsTable.getFunctionRecordsByNameRegex(regex);
 		}
 		catch (IOException e) {
 			Msg.error(this, "Serious problem search for FID Functions by regular expression", e);
@@ -292,9 +288,7 @@ public class FidDB implements Closeable {
 	 */
 	public List<FunctionRecord> findFunctionsByDomainPathSubstring(String domainPath) {
 		try {
-			List<FunctionRecord> list =
-				functionsTable.getFunctionRecordsByDomainPathSubstring(domainPath);
-			return list;
+            return functionsTable.getFunctionRecordsByDomainPathSubstring(domainPath);
 		}
 		catch (IOException e) {
 			Msg.error(this, "Serious problem searching for FID Functions by domain path", e);
@@ -311,8 +305,7 @@ public class FidDB implements Closeable {
 	 */
 	public Long findFullHashValueAtOrAfter(long value) {
 		try {
-			Long search = functionsTable.getFullHashValueAtOrAfter(value);
-			return search;
+            return functionsTable.getFullHashValueAtOrAfter(value);
 		}
 		catch (IOException e) {
 			Msg.error(this, "Serious problem searching for full hash values", e);
@@ -327,9 +320,7 @@ public class FidDB implements Closeable {
 	 */
 	public List<FunctionRecord> findFunctionsBySpecificHash(long specificHash) {
 		try {
-			List<FunctionRecord> list =
-				functionsTable.getFunctionRecordsBySpecificHash(specificHash);
-			return list;
+            return functionsTable.getFunctionRecordsBySpecificHash(specificHash);
 		}
 		catch (IOException e) {
 			Msg.error(this, "Serious problem searching for FID Functions by specific hash", e);
@@ -344,8 +335,7 @@ public class FidDB implements Closeable {
 	 */
 	public List<FunctionRecord> findFunctionsByFullHash(long fullHash) {
 		try {
-			List<FunctionRecord> list = functionsTable.getFunctionRecordsByFullHash(fullHash);
-			return list;
+            return functionsTable.getFunctionRecordsByFullHash(fullHash);
 		}
 		catch (IOException e) {
 			Msg.error(this, "Serious problem searching for FID Functions by full hash", e);
@@ -364,8 +354,7 @@ public class FidDB implements Closeable {
 	 */
 	public List<LibraryRecord> findLibrariesByName(String family, String version, String variant) {
 		try {
-			List<LibraryRecord> list = librariesTable.getLibrariesByName(family, version, variant);
-			return list;
+            return librariesTable.getLibrariesByName(family, version, variant);
 		}
 		catch (IOException e) {
 			Msg.error(this, "Serious problem search for FID Libraries by name", e);
@@ -422,8 +411,7 @@ public class FidDB implements Closeable {
 	 */
 	public FunctionRecord getFunctionByID(long functionID) {
 		try {
-			FunctionRecord functionRecord = functionsTable.getFunctionByID(functionID);
-			return functionRecord;
+            return functionsTable.getFunctionByID(functionID);
 		}
 		catch (IOException e) {
 			Msg.error(this, "Serious problem finding Function record by ID", e);
@@ -508,9 +496,8 @@ public class FidDB implements Closeable {
 
 		try {
 			checkUpdateAllowed();
-			FunctionRecord functionRecord = functionsTable.createFunctionRecord(
-				library.getLibraryID(), hashQuad, name, entryPoint, domainPath, hasTerminator);
-			return functionRecord;
+            return functionsTable.createFunctionRecord(
+                library.getLibraryID(), hashQuad, name, entryPoint, domainPath, hasTerminator);
 		}
 		catch (ReadOnlyException e) {
 			Msg.error(this, e);

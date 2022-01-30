@@ -175,15 +175,14 @@ public class ParamListStandard implements ParamList {
 	public VariableStorage[] getPotentialRegisterStorage(Program prog) {
 		ArrayList<VariableStorage> res = new ArrayList<>();
 		for (ParamEntry element : entry) {
-			ParamEntry pe = element;
-			if (!pe.isExclusion()) {
+            if (!element.isExclusion()) {
 				continue;
 			}
-			if (pe.getSpace().isRegisterSpace()) {
+			if (element.getSpace().isRegisterSpace()) {
 				VariableStorage var = null;
 				try {
-					var = new VariableStorage(prog, pe.getSpace().getAddress(pe.getAddressBase()),
-						pe.getSize());
+					var = new VariableStorage(prog, element.getSpace().getAddress(element.getAddressBase()),
+						element.getSize());
 				}
 				catch (InvalidInputException e) {
 					// Skip this particular storage location
@@ -335,18 +334,17 @@ public class ParamListStandard implements ParamList {
 	@Override
 	public Long getStackParameterOffset() {
 		for (ParamEntry element : entry) {
-			ParamEntry pentry = element;
-			if (pentry.isExclusion()) {
+            if (element.isExclusion()) {
 				continue;
 			}
-			if (!pentry.getSpace().isStackSpace()) {
+			if (!element.getSpace().isStackSpace()) {
 				continue;
 			}
-			long res = pentry.getAddressBase();
-			if (pentry.isReverseStack()) {
-				res += pentry.getSize();
+			long res = element.getAddressBase();
+			if (element.isReverseStack()) {
+				res += element.getSize();
 			}
-			res = pentry.getSpace().truncateOffset(res);
+			res = element.getSpace().truncateOffset(res);
 			return res;
 		}
 		return null;

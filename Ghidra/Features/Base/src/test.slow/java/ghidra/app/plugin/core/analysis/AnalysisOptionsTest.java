@@ -368,8 +368,7 @@ public class AnalysisOptionsTest extends AbstractGhidraHeadedIntegrationTest {
 		if (row == rowCount) {
 			Assert.fail("Couldn't find analyzer named " + name);
 		}
-		int analyzerRow = row;
-		return analyzerRow;
+        return row;
 	}
 
 }

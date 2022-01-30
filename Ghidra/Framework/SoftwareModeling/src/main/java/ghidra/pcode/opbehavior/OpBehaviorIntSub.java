@@ -29,14 +29,12 @@ public class OpBehaviorIntSub extends BinaryOpBehavior {
 
 	@Override
 	public long evaluateBinary(int sizeout, int sizein, long in1, long in2) {
-		long res = (in1 - in2) & Utils.calc_mask(sizeout);
-		return res;
+        return (in1 - in2) & Utils.calc_mask(sizeout);
 	}
 
 	@Override
 	public BigInteger evaluateBinary(int sizeout, int sizein, BigInteger in1, BigInteger in2) {
-		BigInteger res = in1.subtract(in2);
-		return res;
+        return in1.subtract(in2);
 	}
 
 }

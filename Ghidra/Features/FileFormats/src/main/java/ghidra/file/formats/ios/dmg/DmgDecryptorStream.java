@@ -173,7 +173,6 @@ public class DmgDecryptorStream extends InputStream {
 	private static byte[] computeIV(iOS_Sha1Crypto sha1, int block) throws CryptoException {
 		sha1.update(CryptoUtil.htonl(block));
 		byte[] bytes = sha1.decrypt();
-		byte[] iv = Arrays.copyOfRange(bytes, 0, 16);
-		return iv;
+        return Arrays.copyOfRange(bytes, 0, 16);
 	}
 }

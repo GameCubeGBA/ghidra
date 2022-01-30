@@ -101,9 +101,8 @@ public abstract class AbstractSymbolServer implements SymbolServer {
 				String fileRoot = getFileDir(symbolFileInfo.getName());
 
 				// "ke/kernelstuff.pdb/12345ABCFF0/"
-				String uniqueFileDir = fileRoot + symbolFileInfo.getUniqueDirName() + "/";
 
-				return uniqueFileDir;
+                return fileRoot + symbolFileInfo.getUniqueDirName() + "/";
 			default:
 				throw new IllegalArgumentException(
 					"Unsupported Symbol Server storage level: " + storageLevel);

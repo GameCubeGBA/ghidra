@@ -731,8 +731,7 @@ public class ExternalProgramMerger implements MergeResolver, ListingMergeConstan
 	public String getConflictInfo(IDGroup idGroup, int conflictIndex, int totalConflicts) {
 		String leftText = getConflictCount(conflictIndex, totalConflicts);
 		String rightText = createNameInfo(idGroup.getName());
-		String text = leftText + ConflictUtility.spaces(8) + rightText;
-		return text;
+        return leftText + ConflictUtility.spaces(8) + rightText;
 	}
 
 	private String getConflictCount(int conflictNum, int totalConflicts) {

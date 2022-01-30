@@ -37,15 +37,13 @@ public class LldbContinueCommand extends AbstractLldbCommand<Void> {
 	public boolean handle(LldbEvent<?> evt, LldbPendingCommand<?> pending) {
 		if (evt instanceof AbstractLldbCompletedCommandEvent && pending.getCommand().equals(this)) {
 			pending.claim(evt);
-			boolean b = evt instanceof LldbCommandErrorEvent ||
-				!pending.findAllOf(LldbRunningEvent.class).isEmpty();
-			return b;
+            return evt instanceof LldbCommandErrorEvent ||
+                !pending.findAllOf(LldbRunningEvent.class).isEmpty();
 		}
 		else if (evt instanceof LldbRunningEvent) {
 			// Event happens no matter which interpreter received the command
 			pending.claim(evt);
-			boolean b = !pending.findAllOf(AbstractLldbCompletedCommandEvent.class).isEmpty();
-			return b;
+            return !pending.findAllOf(AbstractLldbCompletedCommandEvent.class).isEmpty();
 		}
 		return false;
 	}

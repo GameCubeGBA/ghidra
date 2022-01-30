@@ -163,19 +163,17 @@ public class PowerPC_ElfExtension extends ElfExtension {
 		for (MemoryBlock block : blocks) {
 			monitor.checkCanceled();
 
-			MemoryBlock gotBlock = block;
-
-			if (!gotBlock.getName().startsWith(ElfSectionHeaderConstants.dot_got) ||
-				!gotBlock.isExecute()) {
+            if (!block.getName().startsWith(ElfSectionHeaderConstants.dot_got) ||
+				!block.isExecute()) {
 				continue;
 			}
 
-			Address blrlAddr = findBLRL(gotBlock, memory.isBigEndian());
+			Address blrlAddr = findBLRL(block, memory.isBigEndian());
 			if (blrlAddr == null) {
 				continue;
 			}
 
-			listing.clearCodeUnits(blrlAddr, gotBlock.getEnd(), false);
+			listing.clearCodeUnits(blrlAddr, block.getEnd(), false);
 
 			Address blrlEndAddr = blrlAddr.add(3);
 			AddressSet range = new AddressSet(blrlAddr, blrlEndAddr);
@@ -186,13 +184,13 @@ public class PowerPC_ElfExtension extends ElfExtension {
 				Instruction blrlInstr = listing.getInstructionAt(blrlAddr);
 				if (blrlInstr == null) {
 					elfLoadHelper.log(
-						"Failed to generate blrl instruction within " + gotBlock.getName());
+						"Failed to generate blrl instruction within " + block.getName());
 					continue;
 				}
 
 				blrlInstr.setFlowOverride(FlowOverride.RETURN);
 
-				Function f = listing.createFunction(GOT_THUNK_NAME + gotBlock.getName(), blrlAddr,
+				Function f = listing.createFunction(GOT_THUNK_NAME + block.getName(), blrlAddr,
 					range, SourceType.IMPORTED);
 				if (applyCallFixup) {
 					f.setCallFixup(GOT_THUNK_NAME);

@@ -252,8 +252,7 @@ public class ImportBatchTask extends Task {
 				? fullPath.substring(container, filename)
 				: "";
 		String filenameStr = fullPath.substring(filename);
-		String result = FSUtilities.appendPath(leading, containerPath, filenameStr);
-		return result;
+        return FSUtilities.appendPath(leading, containerPath, filenameStr);
 	}
 
 	private Pair<DomainFolder, String> getDestinationInfo(BatchLoadConfig batchLoadConfig,
@@ -289,8 +288,6 @@ public class ImportBatchTask extends Task {
 
 	private List<Option> getOptionsFor(BatchLoadConfig batchLoadConfig, LoadSpec loadSpec,
 			ByteProvider byteProvider) {
-		List<Option> options =
-			batchLoadConfig.getLoader().getDefaultOptions(byteProvider, loadSpec, null, false);
-		return options;
+        return batchLoadConfig.getLoader().getDefaultOptions(byteProvider, loadSpec, null, false);
 	}
 }

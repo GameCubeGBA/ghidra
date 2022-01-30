@@ -292,8 +292,7 @@ public class SampleGraphProvider extends ComponentProviderAdapter {
 
 	/*package*/ VisualGraphViewUpdater<?, ?> getGraphViewUpdater() {
 		GraphViewer<SampleVertex, SampleEdge> viewer = view.getPrimaryGraphViewer();
-		VisualGraphViewUpdater<SampleVertex, SampleEdge> updater = viewer.getViewUpdater();
-		return updater;
+        return viewer.getViewUpdater();
 	}
 
 	private SampleVertex locateService(Map<Class<?>, SampleVertex> pluginToVertices,
@@ -305,8 +304,7 @@ public class SampleGraphProvider extends ComponentProviderAdapter {
 			return null;
 		}
 
-		SampleVertex v = pluginToVertices.get(service.getClass());
-		return v;
+        return pluginToVertices.get(service.getClass());
 	}
 
 	@Override

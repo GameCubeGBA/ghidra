@@ -335,9 +335,8 @@ public class ViewportUtility implements Observer {
 		if (filePos == null) {
 			return;
 		}
-		
-		long filePosForTopRow = filePos.getStart();
-		model.selectedByteStart = filePosForTopRow;
+
+        model.selectedByteStart = filePos.getStart();
 		table.restoreSelection();
 	}
 
@@ -353,8 +352,7 @@ public class ViewportUtility implements Observer {
 		if (filePos == null) {
 			return;
 		}
-		long filePosForBottomRow = filePos.getEnd();
-		model.selectedByteEnd = filePosForBottomRow;
+        model.selectedByteEnd = filePos.getEnd();
 		table.restoreSelection();
 	}
 	

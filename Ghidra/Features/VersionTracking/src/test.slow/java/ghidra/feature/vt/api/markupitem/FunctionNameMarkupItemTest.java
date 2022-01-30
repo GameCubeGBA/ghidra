@@ -603,9 +603,8 @@ public class FunctionNameMarkupItemTest extends AbstractVTMarkupItemTest {
 		int nameIndex = path.length - 1;
 
 		Symbol librarySymbol = symbolTable.getLibrarySymbol(path[0]);
-		Library externalLibrary = (Library) librarySymbol.getObject();
 
-		Namespace currentNamespace = externalLibrary;
+        Namespace currentNamespace = (Library) librarySymbol.getObject();
 		for (int i = 1; i < nameIndex; i++) {
 			Symbol nextNamespaceSymbol = getUniqueSymbol(program, path[i], currentNamespace);
 			currentNamespace = (Namespace) nextNamespaceSymbol.getObject();
@@ -617,8 +616,7 @@ public class FunctionNameMarkupItemTest extends AbstractVTMarkupItemTest {
 		}
 		SymbolType functionSymbolType = functionSymbol.getSymbolType();
 		assertEquals(SymbolType.FUNCTION, functionSymbolType);
-		Function function = (Function) functionSymbol.getObject();
-		return function;
+        return (Function) functionSymbol.getObject();
 	}
 
 	Function createExternalFunction(Program program, String[] path)

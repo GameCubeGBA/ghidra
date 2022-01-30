@@ -420,9 +420,8 @@ public class EnumEditorProvider extends ComponentProviderAdapter
 		msg.append(
 			"Invalidated equates can be automatically removed now or<br>managed later from the <i><b>Equates Table</i></b> window.");
 		msg.append("</html>");
-		int choice = OptionDialog.showOptionDialog(editorPanel, "Equate Conflicts", msg.toString(),
-			"Save and remove", "Save", OptionDialog.ERROR_MESSAGE);
-		return choice;
+        return OptionDialog.showOptionDialog(editorPanel, "Equate Conflicts", msg.toString(),
+            "Save and remove", "Save", OptionDialog.ERROR_MESSAGE);
 	}
 
 	private void applyDescription(Enum newEnuum) {

@@ -317,8 +317,7 @@ public class ImagePanel extends JPanel {
 		double cx = bounds.getCenterX();
 		double cy = bounds.getCenterY();
 
-		Point p = new Point(bounds.x + (int) cx, bounds.y + (int) cy);
-		return p;
+        return new Point(bounds.x + (int) cx, bounds.y + (int) cy);
 	}
 
 	/**

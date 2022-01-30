@@ -453,9 +453,7 @@ public class SelectByFlowPlugin extends Plugin implements OptionsChangeListener 
 	}
 
 	private void selectChangeSet(NavigatableActionContext context) {
-		ProgramChangeSet cs = context.getProgram().getChanges();
-		ProgramChangeSet pcs = cs;
-		ProgramSelection selection = new ProgramSelection(pcs.getAddressSet());
+        ProgramSelection selection = new ProgramSelection(context.getProgram().getChanges().getAddressSet());
 		NavigationUtils.setSelection(tool, context.getNavigatable(), selection);
 	}
 

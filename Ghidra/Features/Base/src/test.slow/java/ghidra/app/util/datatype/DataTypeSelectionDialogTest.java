@@ -984,8 +984,7 @@ public class DataTypeSelectionDialogTest extends AbstractGhidraHeadedIntegration
 
 	private DataTypeChooserDialog getDataTypeChooserDialog() {
 		waitForSwing();
-		DataTypeChooserDialog d = waitForDialogComponent(DataTypeChooserDialog.class);
-		return d;
+        return waitForDialogComponent(DataTypeChooserDialog.class);
 	}
 
 	private void pressOKButtonToSelectChoice(JButton okButton) {

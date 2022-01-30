@@ -104,13 +104,12 @@ public class Register implements java.io.Serializable, Comparable<Register> {
 
 		int leastSigByte = leastSignificantBit / 8;
 		int mostSigByte = (leastSignificantBit + bitLength - 1) / 8;
-		int extraLowerBytes = leastSigByte;
-		int extraHighBytes = numBytes - mostSigByte - 1;
+        int extraHighBytes = numBytes - mostSigByte - 1;
 
 		if (bigEndian) {
-			if (extraLowerBytes > 0) {
-				this.numBytes = numBytes - extraLowerBytes;
-				this.leastSigBit -= extraLowerBytes * 8;
+			if (leastSigByte > 0) {
+				this.numBytes = numBytes - leastSigByte;
+				this.leastSigBit -= leastSigByte * 8;
 			}
 			if (extraHighBytes > 0) {
 				this.address = address.add(extraHighBytes);
@@ -118,10 +117,10 @@ public class Register implements java.io.Serializable, Comparable<Register> {
 			}
 		}
 		else {
-			if (extraLowerBytes > 0) {
-				this.address = address.add(extraLowerBytes);
-				this.numBytes -= extraLowerBytes;
-				this.leastSigBit -= extraLowerBytes * 8;
+			if (leastSigByte > 0) {
+				this.address = address.add(leastSigByte);
+				this.numBytes -= leastSigByte;
+				this.leastSigBit -= leastSigByte * 8;
 			}
 			if (extraHighBytes > 0) {
 				this.numBytes -= extraHighBytes;

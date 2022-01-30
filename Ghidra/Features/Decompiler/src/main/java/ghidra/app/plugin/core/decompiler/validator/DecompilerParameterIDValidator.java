@@ -35,12 +35,11 @@ public class DecompilerParameterIDValidator extends PostAnalysisValidator {
 
 	@Override
 	public ConditionResult doRun(TaskMonitor monitor) {
-		int threshold = MIN_NUM_FUNCS_DEFAULT;
-		ConditionStatus status = ConditionStatus.Passed;
+        ConditionStatus status = ConditionStatus.Passed;
 		StringBuilder warnings = new StringBuilder();
 		int number;
 		number = checkNumberAnalyzed(program, monitor);
-		if (number < threshold) {
+		if (number < MIN_NUM_FUNCS_DEFAULT) {
 			status = ConditionStatus.Warning;
 			warnings.append(program.getDomainFile().getName() +
 				" number of functions with signatures from the decompiler parameter id analyzer = " +

@@ -56,9 +56,7 @@ public class SameDirSymbolStore implements SymbolStore {
 	public static SymbolFileLocation createManuallySelectedSymbolFileLocation(File symbolFile,
 			SymbolFileInfo symbolFileInfo) {
 		SameDirSymbolStore samedirSymbolStore = new SameDirSymbolStore(symbolFile.getParentFile());
-		SymbolFileLocation symbolFileLocation =
-			new SymbolFileLocation(symbolFile.getName(), samedirSymbolStore, symbolFileInfo);
-		return symbolFileLocation;
+        return new SymbolFileLocation(symbolFile.getName(), samedirSymbolStore, symbolFileInfo);
 	}
 
 	private final File rootDir;

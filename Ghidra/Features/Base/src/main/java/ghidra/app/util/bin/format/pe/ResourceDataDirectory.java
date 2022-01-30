@@ -499,9 +499,8 @@ public class ResourceDataDirectory extends DataDirectory {
 		if (ptr < 0) {
 			return false;
 		}
-		int resourceBase = ptr;
 
-		rootDirectory = new ResourceDirectory(reader, ptr, resourceBase, true, ntHeader);
+        rootDirectory = new ResourceDirectory(reader, ptr, ptr, true, ntHeader);
 		return true;
 	}
 

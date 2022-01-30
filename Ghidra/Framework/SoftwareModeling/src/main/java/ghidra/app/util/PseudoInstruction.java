@@ -280,8 +280,7 @@ public class PseudoInstruction extends PseudoCodeUnit implements Instruction, In
 
 	@Override
 	public int getOperandType(int opIndex) {
-		int optype = instrProto.getOpType(opIndex, this);
-		return optype;
+        return instrProto.getOpType(opIndex, this);
 	}
 
 	@Override

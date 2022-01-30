@@ -566,9 +566,8 @@ public class GHelpBroker extends DefaultHelpBroker {
 			int scale = 20;
 			double lr = Math.max(outerRadius, innerRadius);
 			int width = (int) (scale * (2 * lr));
-			int height = width;// square bounds
-			double cx = location.x + width / 2;
-			double cy = location.y + height / 2;
+            double cx = location.x + width / 2;
+			double cy = location.y + width / 2;
 			Point2D.Double center = new Point2D.Double(cx, cy);
 
 			// start the first point...
@@ -596,7 +595,7 @@ public class GHelpBroker extends DefaultHelpBroker {
 			//       shape's location is just over the beginning of the text that follows the
 			//       anchor, in most cases.
 			double offsetx = width / 4;
-			double offsety = height / 4;
+			double offsety = width / 4;
 
 			// scaled offset x/y
 			double sox = scx - offsetx;// move the x from center to 0

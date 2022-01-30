@@ -69,8 +69,7 @@ public class MultipleLocalVariableStringable extends Stringable {
     @Override
     public int hashCode() {
         final int prime = 31;
-        int result = prime * ((localVariableStringables == null) ? 0 : localVariableStringables.hashCode());
-        return result;
+        return prime * ((localVariableStringables == null) ? 0 : localVariableStringables.hashCode());
     }
 
     @Override

@@ -269,8 +269,7 @@ public class ObjectiveC2_DecompilerMessageAnalyzer extends AbstractAnalyzer {
 			return null;
 		}
 		SymbolTable symbolTable = program.getSymbolTable();
-		Symbol symbol = symbolTable.getPrimarySymbol(address);
-		return symbol;
+        return symbolTable.getPrimarySymbol(address);
 	}
 
 	private String getNameForVarnode(Program program, Function function, Varnode input,
@@ -717,8 +716,7 @@ public class ObjectiveC2_DecompilerMessageAnalyzer extends AbstractAnalyzer {
 			}
 
 			Data classNameData = program.getListing().getDefinedDataAt(classNameAddress);
-			String className = (String) classNameData.getValue();
-			return className;
+            return (String) classNameData.getValue();
 		}
 		catch (Exception e) {
 			// Too bad. Expecting a class but got something else, don't care.

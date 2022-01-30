@@ -306,25 +306,24 @@ public class LocationReferencesPlugin3Test extends AbstractLocationReferencesTes
 		createString_CallStructure(addressString); 		// "call_structure_A: %s\n",00
 
 		Address stringAddr = addr(addressString);
-		Address start = stringAddr;
-		Address from1 = addr(0x01005300);
-		createReference(from1, start);
+        Address from1 = addr(0x01005300);
+		createReference(from1, stringAddr);
 
-		Address offcut1 = start.add(1);
+		Address offcut1 = stringAddr.add(1);
 		Address from2 = addr(0x01005301);
 		createReference(from2, offcut1);
 
-		Address offcut2 = start.add(2);
+		Address offcut2 = stringAddr.add(2);
 		Address from3 = addr(0x01005302);
 		createReference(from3, offcut2);
 
-		goToDataAddressField(start);
+		goToDataAddressField(stringAddr);
 		search();
 
 		List<LocationReference> results = getResultLocations();
 		assertContains(results, from1, from2, from3);
 
-		goToDataMnemonicField(start);
+		goToDataMnemonicField(stringAddr);
 		search();
 
 		results = getResultLocations();
@@ -345,19 +344,18 @@ public class LocationReferencesPlugin3Test extends AbstractLocationReferencesTes
 		createString_CallStructure(addressString); 		// "call_structure_A: %s\n",00
 
 		Address stringAddr = addr(addressString);
-		Address start = stringAddr;
-		Address from1 = addr(0x01005300);
-		createReference(from1, start);
+        Address from1 = addr(0x01005300);
+		createReference(from1, stringAddr);
 
-		Address offcut1 = start.add(1);
+		Address offcut1 = stringAddr.add(1);
 		Address from2 = addr(0x01005301);
 		createReference(from2, offcut1);
 
-		Address offcut2 = start.add(2);
+		Address offcut2 = stringAddr.add(2);
 		Address from3 = addr(0x01005302);
 		createReference(from3, offcut2);
 
-		goToDataMnemonicField(start);
+		goToDataMnemonicField(stringAddr);
 		search();
 
 		List<LocationReference> results = getResultLocations();

@@ -141,9 +141,8 @@ public class GTableHeader extends JTableHeader {
 		int borderWidthTop = 2;
 		int borderWidthRight = 4;
 		int paddedHeight = HELP_ICON_HEIGHT + padding;
-		int paddedWidth = paddedHeight;
-		int headerEndX = headerRect.x + headerRect.width;
-		int helpIconStartX = headerEndX - (paddedWidth + borderWidthRight);
+        int headerEndX = headerRect.x + headerRect.width;
+		int helpIconStartX = headerEndX - (paddedHeight + borderWidthRight);
 		int hoverWidth = headerEndX - helpIconStartX;
 		int hoverHeight = paddedHeight + borderWidthTop;
 		Rectangle helpIconRect = new Rectangle(helpIconStartX, 0, hoverWidth, hoverHeight);

@@ -356,9 +356,7 @@ public class FunctionGraphPluginScreenShots extends AbstractFunctionGraphTest {
 		FGController controller = getFunctionGraphController();
 		FGView view = controller.getView();
 		VisualizationViewer<FGVertex, FGEdge> viewer = view.getPrimaryGraphViewer();
-		FunctionGraph functionGraph = getFunctionGraph();
-		Graph<FGVertex, FGEdge> graph = functionGraph;
-		Collection<FGVertex> vertices = graph.getVertices();
+        Collection<FGVertex> vertices = ((Graph<FGVertex, FGEdge>) getFunctionGraph()).getVertices();
 		Rectangle layoutBounds =
 			GraphViewerUtils.getBoundsForVerticesInLayoutSpace(viewer, vertices);
 		Rectangle viewBounds =
@@ -639,8 +637,7 @@ public class FunctionGraphPluginScreenShots extends AbstractFunctionGraphTest {
 			FGView view = controller.getView();
 			VisualizationViewer<FGVertex, FGEdge> viewer = view.getPrimaryGraphViewer();
 
-			FunctionGraph graph = functionGraph;
-			Collection<FGVertex> vertices = graph.getVertices();
+            Collection<FGVertex> vertices = functionGraph.getVertices();
 			Rectangle layoutBounds =
 				GraphViewerUtils.getBoundsForVerticesInLayoutSpace(viewer, vertices);
 			Rectangle viewBounds =

@@ -1229,9 +1229,7 @@ public class SymbolTablePluginTest extends AbstractGhidraHeadedIntegrationTest {
 	private JPopupMenu triggerPopup(int row) {
 		DockingWindowManager dwm = DockingWindowManager.getInstance(symbolTable);
 		ActionContext context = provider.getActionContext(null);
-		JPopupMenu popup =
-			runSwing(() -> DockingWindowManagerTestHelper.getPopupMenu(dwm, context));
-		return popup;
+        return runSwing(() -> DockingWindowManagerTestHelper.getPopupMenu(dwm, context));
 	}
 
 	private void selectRow(int row) {
@@ -1325,16 +1323,12 @@ public class SymbolTablePluginTest extends AbstractGhidraHeadedIntegrationTest {
 	}
 
 	private Integer getRefCount(int row) {
-		Integer count =
-			runSwing(() -> (Integer) symbolModel.getValueAt(row, SymbolTableModel.REFS_COL));
-		return count;
+        return runSwing(() -> (Integer) symbolModel.getValueAt(row, SymbolTableModel.REFS_COL));
 	}
 
 	private AddressBasedLocation getLocation(int row) {
-		AddressBasedLocation location =
-			runSwing(() -> (AddressBasedLocation) symbolModel.getValueAt(row,
-				SymbolTableModel.LOCATION_COL));
-		return location;
+        return runSwing(() -> (AddressBasedLocation) symbolModel.getValueAt(row,
+            SymbolTableModel.LOCATION_COL));
 	}
 
 	private void assertReferencesAddressColumnValue(int row, long value) {
@@ -1510,14 +1504,12 @@ public class SymbolTablePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		assertTrue("There are no filtered matches as expected from filter string: " + string,
 			rowCount > 0);
 
-		String filterText = string;
-
-		for (int i = 0; i < rowCount; i++) {
+        for (int i = 0; i < rowCount; i++) {
 			Symbol symbol = getSymbol(i);
 			assertTrue(
 				"Found an entry in the symbol table model that does not match the given " +
 					"filter: " + string + " and symbol: " + symbol.getName(),
-				symbol.getName().toUpperCase().startsWith(filterText.toUpperCase()));
+				symbol.getName().toUpperCase().startsWith(string.toUpperCase()));
 		}
 	}
 

@@ -70,27 +70,25 @@ public class MUIResourceDataType extends DynamicDataType {
 	protected DataTypeComponent[] getAllComponents(MemBuffer mbIn) {
 		List<DataTypeComponent> comps = new ArrayList<>();
 		int tempOffset = 0;
-		MemBuffer memBuffer = mbIn;
-		int[] offsets = new int[6];
+        int[] offsets = new int[6];
 		int[] sizes = new int[6];
 
 		byte[] bytes = new byte[4];
-		if (memBuffer.getBytes(bytes, 0) < 4) {
+		if (mbIn.getBytes(bytes, 0) < 4) {
 			Msg.debug(this, "Can't read bytes for MUI File Header at " + mbIn.getAddress());
 		}
-		if (checkMagic(memBuffer)) {
+		if (checkMagic(mbIn)) {
 			StructureDataType sdt = MUIStructureHeader();
 			tempOffset = addComp(sdt, sdt.getLength(), "muiResourceHeader",
-				memBuffer.getAddress().add(tempOffset), comps, tempOffset);
-			sdt = MUIStructureData(tempOffset, memBuffer, offsets, sizes);
+				mbIn.getAddress().add(tempOffset), comps, tempOffset);
+			sdt = MUIStructureData(tempOffset, mbIn, offsets, sizes);
 			tempOffset = addComp(sdt, sdt.getLength(), "muiResourceData",
-				memBuffer.getAddress().add(tempOffset), comps, tempOffset);
+				mbIn.getAddress().add(tempOffset), comps, tempOffset);
 		}
 		else {
 			Msg.debug(this, "Not an MUI resource data type at " + mbIn.getAddress());
 		}
-		DataTypeComponent[] result = comps.toArray(new DataTypeComponent[comps.size()]);
-		return result;
+        return comps.toArray(new DataTypeComponent[comps.size()]);
 	}
 
 	private StructureDataType MUIStructureHeader() {

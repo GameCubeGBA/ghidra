@@ -252,18 +252,15 @@ public abstract class AbstractMemSearchTest extends AbstractProgramBasedTest {
 
 	protected Address currentAddress() {
 		cb.updateNow();
-		Address addr = cb.getCurrentLocation().getAddress();
-		return addr;
+        return cb.getCurrentLocation().getAddress();
 	}
 
 	protected CodeUnit currentCodeUnit() {
-		CodeUnit cu = program.getListing().getCodeUnitContaining(currentAddress());
-		return cu;
+        return program.getListing().getCodeUnitContaining(currentAddress());
 	}
 
 	protected CodeUnit codeUnitContaining(Address addr) {
-		CodeUnit cu = program.getListing().getCodeUnitContaining(addr);
-		return cu;
+        return program.getListing().getCodeUnitContaining(addr);
 	}
 
 	protected void assertSearchSelectionSelected() {
@@ -298,8 +295,7 @@ public abstract class AbstractMemSearchTest extends AbstractProgramBasedTest {
 	protected Highlight[] getByteHighlights(Address address, String bytes) {
 		CodeUnit cu = codeUnitContaining(address);
 		HighlightProvider provider1 = getHighlightProvider();
-		Highlight[] h = provider1.getHighlights(bytes, cu, BytesFieldFactory.class, -1);
-		return h;
+        return provider1.getHighlights(bytes, cu, BytesFieldFactory.class, -1);
 	}
 
 	protected void setEndianess(String text) {

@@ -792,25 +792,24 @@ public class AddressTable {
 		Listing listing = program.getListing();
 		boolean gotNewCode = false;
 		for (Address tableElement : tableElements) {
-			Address caseStart = tableElement;
 
-			// if conflict skip case
-			if (listing.getUndefinedDataAt(caseStart) == null) {
+            // if conflict skip case
+			if (listing.getUndefinedDataAt(tableElement) == null) {
 				continue;
 			}
 			if (switchContext != null) {
 				try {
 					// Use disassembler context based upon context register value from function entry point
 					RegisterValue curContext =
-						programContext.getRegisterValue(baseContextRegister, caseStart);
+						programContext.getRegisterValue(baseContextRegister, tableElement);
 					if (curContext != null) {
 						curContext = curContext.combineValues(switchContext);
 
 						// lay down the new merged context
-						programContext.setRegisterValue(caseStart, caseStart, curContext);
+						programContext.setRegisterValue(tableElement, tableElement, curContext);
 					}
 					else {
-						programContext.setRegisterValue(caseStart, caseStart, switchContext);
+						programContext.setRegisterValue(tableElement, tableElement, switchContext);
 					}
 				}
 				catch (ContextChangeException e) {
@@ -819,7 +818,7 @@ public class AddressTable {
 				}
 			}
 
-			gotNewCode |= !disassembleTarget(program, caseStart, monitor).isEmpty();
+			gotNewCode |= !disassembleTarget(program, tableElement, monitor).isEmpty();
 		}
 
 		return gotNewCode;

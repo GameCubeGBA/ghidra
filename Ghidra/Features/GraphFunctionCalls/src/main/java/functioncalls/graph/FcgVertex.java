@@ -127,8 +127,7 @@ public class FcgVertex extends AbstractVisualVertex implements VertexShapeProvid
 
 		Color vertexShapeColor = getVertexShapeColor();
 
-		Color lightColor = vertexShapeColor;
-		Color darkColor = vertexShapeColor.darker();
+        Color darkColor = vertexShapeColor.darker();
 		Color darkestColor = darkColor.darker();
 		int offset = 5 * level.getDistance();
 		int half = VERTEX_SHAPE_SIZE / 2;
@@ -137,12 +136,12 @@ public class FcgVertex extends AbstractVisualVertex implements VertexShapeProvid
 
 		// paint top-down: dark to light for incoming; light to dark for outgoing 
 		inPaint = new LinearGradientPaint(new Point(0, start), new Point(0, end),
-			new float[] { .0f, .2f, 1f }, new Color[] { darkestColor, darkColor, lightColor });
+			new float[] { .0f, .2f, 1f }, new Color[] { darkestColor, darkColor, vertexShapeColor});
 
 		start = half - offset; // (offset + 10);
 		end = VERTEX_SHAPE_SIZE;
 		outPaint = new LinearGradientPaint(new Point(0, start), new Point(0, end),
-			new float[] { .0f, .8f, 1f }, new Color[] { lightColor, darkColor, darkestColor });
+			new float[] { .0f, .8f, 1f }, new Color[] {vertexShapeColor, darkColor, darkestColor });
 	}
 
 	private void buildUi() {
@@ -265,14 +264,12 @@ public class FcgVertex extends AbstractVisualVertex implements VertexShapeProvid
 
 	private boolean isInDirection() {
 		FcgDirection direction = level.getDirection();
-		boolean isIn = direction.isIn() || direction.isSource();
-		return isIn;
+        return direction.isIn() || direction.isSource();
 	}
 
 	private boolean isOutDirection() {
 		FcgDirection direction = level.getDirection();
-		boolean isOut = direction.isOut() || direction.isSource();
-		return isOut;
+        return direction.isOut() || direction.isSource();
 	}
 
 	private void addVertexShape() {

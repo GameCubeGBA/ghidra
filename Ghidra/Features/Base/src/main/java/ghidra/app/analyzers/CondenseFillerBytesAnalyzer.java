@@ -90,10 +90,9 @@ public class CondenseFillerBytesAnalyzer extends AbstractAnalyzer {
 			return null;
 		}
 
-		// Decide that filler value is the one with the greatest count				
-		String filler = getMostFrequentFillValue(patterns);
+		// Decide that filler value is the one with the greatest count
 
-		return filler;
+        return getMostFrequentFillValue(patterns);
 	}
 
 	private String getMostFrequentFillValue(HashMap<String, Integer> fillValuesHash) {

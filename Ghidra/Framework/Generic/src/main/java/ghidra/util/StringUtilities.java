@@ -566,8 +566,7 @@ public class StringUtilities {
 	 */
 	public static String toFixedSize(String s, char pad, int size) {
 		String trimmed = trim(s, size + ELLIPSES.length());
-		String padded = pad(trimmed, pad, -size);
-		return padded;
+        return pad(trimmed, pad, -size);
 	}
 
 	/**
@@ -673,8 +672,7 @@ public class StringUtilities {
 		char currChar = s.charAt(index);
 		if (!isWordChar(currChar, charsToAllow)) {
 			String substring = s.substring(index, index + 1);
-			WordLocation wordLocation = new WordLocation(s, substring.trim(), index);
-			return wordLocation;
+            return new WordLocation(s, substring.trim(), index);
 		}
 
 		int start = index;
@@ -695,8 +693,7 @@ public class StringUtilities {
 
 		int wordIndex = start + 1;
 		String substring = s.substring(wordIndex, end);
-		WordLocation wordLocation = new WordLocation(s, substring.trim(), wordIndex);
-		return wordLocation;
+        return new WordLocation(s, substring.trim(), wordIndex);
 	}
 
 	/**
@@ -767,8 +764,7 @@ public class StringUtilities {
 
 		String escaped = Pattern.quote(separator);
 		String[] parts = s.split(escaped);
-		String last = parts[parts.length - 1];
-		return last;
+        return parts[parts.length - 1];
 	}
 
 	/**
@@ -809,8 +805,7 @@ public class StringUtilities {
 		}
 
 		String asString = o.toString();
-		String indented = indentLines(asString, "\t");
-		return indented;
+        return indentLines(asString, "\t");
 	}
 
 	/**

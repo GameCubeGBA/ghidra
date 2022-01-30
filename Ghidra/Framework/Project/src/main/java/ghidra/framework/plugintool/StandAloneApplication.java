@@ -211,8 +211,7 @@ public abstract class StandAloneApplication implements GenericStandAloneApplicat
 			}
 
 			SAXBuilder sax = XmlUtilities.createSecureSAXBuilder(false, false);
-			Element root = sax.build(instream).getRootElement();
-			return root;
+            return sax.build(instream).getRootElement();
 		}
 		catch (Exception e) {
 			Msg.showError(getClass(), null, "Error Reading Tool",
@@ -231,8 +230,7 @@ public abstract class StandAloneApplication implements GenericStandAloneApplicat
 		try {
 			fileInputStream = new FileInputStream(savedToolFile.getAbsolutePath());
 			SAXBuilder sax = XmlUtilities.createSecureSAXBuilder(false, false);
-			Element root = sax.build(fileInputStream).getRootElement();
-			return root;
+            return sax.build(fileInputStream).getRootElement();
 		}
 		catch (Exception e) {
 			Msg.showError(getClass(), null, "Error Reading Tool",

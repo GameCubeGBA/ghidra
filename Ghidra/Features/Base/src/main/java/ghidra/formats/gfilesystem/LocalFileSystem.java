@@ -109,8 +109,7 @@ public class LocalFileSystem implements GFileSystem, GFileHashProvider {
 		if (!isSameFS(fsrl)) {
 			throw new IOException("FSRL does not specify local file: " + fsrl);
 		}
-		File localFile = new File(fsrl.getPath());
-		return localFile;
+        return new File(fsrl.getPath());
 	}
 
 	/**
@@ -224,9 +223,8 @@ public class LocalFileSystem implements GFileSystem, GFileHashProvider {
 	@Override
 	public GFileImpl lookup(String path) throws IOException {
 		File f = new File(path);
-		GFileImpl gf = GFileImpl.fromPathString(this, FilenameUtils.separatorsToUnix(f.getPath()),
-			null, f.isDirectory(), f.length());
-		return gf;
+        return GFileImpl.fromPathString(this, FilenameUtils.separatorsToUnix(f.getPath()),
+            null, f.isDirectory(), f.length());
 	}
 
 	@Override

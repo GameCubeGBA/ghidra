@@ -176,8 +176,7 @@ public class JavaHelpFilesBuilder {
 
 		Path relative = anchorPath.subpath(1, anchorPath.getNameCount());
 		String relativePath = relative.toString();
-		String normalized = relativePath.replaceAll("\\\\", "/");
-		return normalized;
+        return relativePath.replaceAll("\\\\", "/");
 	}
 
 	private void generateTOCFile(LinkDatabase database, HelpModuleCollection help)

@@ -242,9 +242,8 @@ public class ProgramAnnotatedStringHandler implements AnnotatedStringHandler {
 			return null;
 		}
 		AddressFactory addressFactory = program.getAddressFactory();
-		Address address = addressFactory.getAddress(addressText);
 
-		return address;
+        return addressFactory.getAddress(addressText);
 	}
 
 	// recursive program to find a program by the given name within the given folder

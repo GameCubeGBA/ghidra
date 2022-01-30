@@ -171,10 +171,9 @@ public class DateRangeConstraintEditor extends AbstractColumnConstraintEditor<Lo
 
 	@Override
 	public void reset() {
-		LocalDate minVal = oneYearAgo;
-		LocalDate maxVal = LocalDate.now();
+        LocalDate maxVal = LocalDate.now();
 
-		setValue(getConstraint().copy(minVal, maxVal));
+		setValue(getConstraint().copy(oneYearAgo, maxVal));
 	}
 
 	@Override

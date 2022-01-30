@@ -259,40 +259,39 @@ public class FixupNoReturnFunctionsScript extends GhidraScript {
 	}
 
 	private TableChooserExecutor createTableExecutor() {
-		TableChooserExecutor executor = new TableChooserExecutor() {
 
-			@Override
-			public String getButtonName() {
-				return "Fixup NoReturn";
-			}
+        return new TableChooserExecutor() {
 
-			@Override
-			public boolean execute(AddressableRowObject rowObject) {
-				NoReturnLocations noRetLoc = (NoReturnLocations) rowObject;
-				println("Fixup NoReturn Function at : " + rowObject.getAddress());
+            @Override
+            public String getButtonName() {
+                return "Fixup NoReturn";
+            }
 
-				Program cp = noRetLoc.getProgram();
-				Address entry = noRetLoc.getAddress();
+            @Override
+            public boolean execute(AddressableRowObject rowObject) {
+                NoReturnLocations noRetLoc = (NoReturnLocations) rowObject;
+                println("Fixup NoReturn Function at : " + rowObject.getAddress());
 
-				Function func = currentProgram.getFunctionManager().getFunctionAt(entry);
-				if (func == null) {
-					noRetLoc.setStatus("No function at " + entry);
-					return false;
-				}
+                Program cp = noRetLoc.getProgram();
+                Address entry = noRetLoc.getAddress();
 
-				addBookMark(cp, entry, "Non Returning Function");
+                Function func = currentProgram.getFunctionManager().getFunctionAt(entry);
+                if (func == null) {
+                    noRetLoc.setStatus("No function at " + entry);
+                    return false;
+                }
 
-				if (!noRetLoc.isFixed()) {
-					repairDamage(cp, func, entry);
-				}
+                addBookMark(cp, entry, "Non Returning Function");
 
-				addBookMark(cp, noRetLoc.getWhyAddr(), noRetLoc.getExplanation());
+                if (!noRetLoc.isFixed()) {
+                    repairDamage(cp, func, entry);
+                }
 
-				return false; // don't remove row
-			}
-		};
+                addBookMark(cp, noRetLoc.getWhyAddr(), noRetLoc.getExplanation());
 
-		return executor;
+                return false; // don't remove row
+            }
+        };
 	}
 
 	class NoReturnLocations implements AddressableRowObject {

@@ -47,8 +47,7 @@ public class DataTypeDiffBuilder {
 
 	public static DataTypeDiff diffHeader(DataTypeDiffInput left, DataTypeDiffInput right) {
 
-		DataTypeDiff result = diffLines(left, right);
-		return result;
+        return diffLines(left, right);
 	}
 
 	public static void padLines(DiffLines leftLines, DiffLines rightLines) {

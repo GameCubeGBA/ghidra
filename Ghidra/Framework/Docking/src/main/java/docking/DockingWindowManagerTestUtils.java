@@ -58,8 +58,7 @@ public class DockingWindowManagerTestUtils {
 			dwm.movePlaceholder(placeholder, point);
 		});
 
-		Window w = AbstractGTest.waitForValue(() -> dwm.getProviderWindow(provider));
-		return w;
+        return AbstractGTest.waitForValue(() -> dwm.getProviderWindow(provider));
 	}
 
 	public static void moveProvider(final DockingWindowManager dwm, final ComponentProvider movee,

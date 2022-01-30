@@ -111,9 +111,8 @@ public class RttiAnalyzer extends AbstractAnalyzer {
 		int alignment = program.getDefaultPointerSize();
 		List<MemoryBlock> dataBlocks = ProgramMemoryUtil.getMemoryBlocksStartingWithName(
 				program, program.getMemory(), ".data", TaskMonitor.DUMMY);
-		Set<Address> possibleTypeAddresses = ProgramMemoryUtil.findDirectReferences(program,
-				dataBlocks, alignment, commonVfTableAddress, monitor);
-		return possibleTypeAddresses;
+        return ProgramMemoryUtil.findDirectReferences(program,
+                dataBlocks, alignment, commonVfTableAddress, monitor);
 	}
 
 	private void processRtti0(Collection<Address> possibleRtti0Addresses, Program program,
@@ -194,10 +193,7 @@ public class RttiAnalyzer extends AbstractAnalyzer {
 
 		monitor.checkCanceled();
 
-		List<Address> addresses =
-			getRefsToRtti0(program, rtti4Blocks, rtti0Locations, validationOptions, monitor);
-
-		return addresses;
+        return getRefsToRtti0(program, rtti4Blocks, rtti0Locations, validationOptions, monitor);
 	}
 
 	/** For each of the RTTI0 locations found locate the associated RTTI4 structure referring to it.

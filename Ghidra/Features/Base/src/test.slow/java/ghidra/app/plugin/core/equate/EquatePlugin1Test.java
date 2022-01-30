@@ -1415,8 +1415,7 @@ public class EquatePlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 
 	private AddressSet toAddressSet(long... offsets) {
 		List<Address> list = addrs(offsets);
-		AddressSet addrs = toAddressSet(list);
-		return addrs;
+        return toAddressSet(list);
 	}
 
 	private List<Address> addrs(long... offsets) {

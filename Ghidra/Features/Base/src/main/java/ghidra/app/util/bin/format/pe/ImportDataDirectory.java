@@ -298,8 +298,7 @@ public class ImportDataDirectory extends DataDirectory {
 
 				if (intThunk.isOrdinal()) {
 					ordinal = intThunk.getOrdinal();
-					String ordinalStr = "Ordinal" + "_" + ordinal;
-					boundName = ordinalStr;
+                    boundName = "Ordinal" + "_" + ordinal;
 				}
 				else {
 					// retrieve the IMAGE_IMPORT_BY_NAME struct, but do so in pieces

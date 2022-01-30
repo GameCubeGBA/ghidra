@@ -558,9 +558,7 @@ public abstract class AbstractCreateDataTypeModel {
 		MemBuffer baseMemBuffer = getMemBuffer();
 		long offset = size * ordinal;
 		Address specificAddress = baseMemBuffer.getAddress().add(offset);
-		MemBuffer specificMemBuffer =
-			new DumbMemBufferImpl(getProgram().getMemory(), specificAddress);
-		return specificMemBuffer;
+        return new DumbMemBufferImpl(getProgram().getMemory(), specificAddress);
 	}
 
 	/**

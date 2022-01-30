@@ -53,10 +53,8 @@ public class DyldChainedImports implements StructConverter {
 	@Override
 	public DataType toDataType() throws DuplicateNameException, IOException {
 		DataType chainedImportDt = chainedImports[0].toDataType();
-		DataType dt =
-			new ArrayDataType(chainedImportDt, imports_count, chainedImportDt.getLength());
 
-		return dt;
+        return new ArrayDataType(chainedImportDt, imports_count, chainedImportDt.getLength());
 	}
 
 	public int getImportsCount() {

@@ -63,8 +63,7 @@ public class EnumEditor extends PropertyEditorSupport {
 
 		try {
 			Method m = value.getClass().getMethod("values");
-			Enum<?>[] enums = (Enum<?>[]) m.invoke(null);
-			return enums;
+            return (Enum<?>[]) m.invoke(null);
 		}
 		catch (Throwable t) {
 			Msg.error(this, "Unexpected Exception: " + t.getMessage(), t);

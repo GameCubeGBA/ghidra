@@ -633,7 +633,6 @@ public class FunctionTagListingMerger extends AbstractListingMerger {
 	 */
 	private FunctionTag getTag(Long id, Program program) throws IOException {
 		FunctionManagerDB functionManagerDB = (FunctionManagerDB) program.getFunctionManager();
-		FunctionTag tag = functionManagerDB.getFunctionTagManager().getFunctionTag(id);
-		return tag;
+        return functionManagerDB.getFunctionTagManager().getFunctionTag(id);
 	}
 }

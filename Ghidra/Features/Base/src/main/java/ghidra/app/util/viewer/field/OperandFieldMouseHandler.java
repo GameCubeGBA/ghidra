@@ -82,9 +82,8 @@ public class OperandFieldMouseHandler implements FieldMouseHandlerExtension {
 			OperandFieldLocation location) {
 
 		Program program = navigatable.getProgram();
-		OperandFieldLocation operandLocation = location;
-		Listing listing = program.getListing();
-		CodeUnit codeUnit = listing.getCodeUnitContaining(operandLocation.getAddress());
+        Listing listing = program.getListing();
+		CodeUnit codeUnit = listing.getCodeUnitContaining(location.getAddress());
 		if (codeUnit instanceof Data) {
 			Data data = (Data) codeUnit;
 			Object value = data.getValue();
@@ -172,8 +171,7 @@ public class OperandFieldMouseHandler implements FieldMouseHandlerExtension {
 
 		Symbol thunkedSymbol = thunked.getSymbol();
 		ExternalLocation extLoc = program.getExternalManager().getExternalLocation(thunkedSymbol);
-		boolean success = goToService.goToExternalLocation(extLoc, true);
-		return success;
+        return goToService.goToExternalLocation(extLoc, true);
 	}
 
 	private boolean checkVariableReference(Navigatable navigatable, CodeUnit codeUnit,

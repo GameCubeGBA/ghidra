@@ -61,8 +61,7 @@ public class FGVertexPickableBackgroundPaintTransformer implements Function<FGVe
 		if (!selection.isEmpty()) {
 			// mix the colors so the user can see both the selection and the background color
 			Color selectionColor = v.getSelectionColor();
-			Color mixed = mix(selectionColor, backgroundColor);
-			backgroundColor = mixed;
+            backgroundColor = mix(selectionColor, backgroundColor);
 		}
 
 		FGVertexType vertexType = v.getVertexType();

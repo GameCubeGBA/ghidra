@@ -48,8 +48,7 @@ public class PdbUtils {
 			case "pdb":
 				try (AbstractPdb pdb =
 					PdbParser.parse(file.getPath(), new PdbReaderOptions(), monitor)) {
-					PdbIdentifiers identifiers = pdb.getIdentifiers();
-					return identifiers;
+                    return pdb.getIdentifiers();
 				}
 				catch (Exception e) {
 					return null;

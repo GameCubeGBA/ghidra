@@ -288,8 +288,7 @@ public class VTMatchTableTest extends AbstractGhidraHeadedIntegrationTest {
 
 	private ThreadedTableModel<?, ?> getModel() {
 		GTable table = getTable();
-		ThreadedTableModel<?, ?> model = (ThreadedTableModel<?, ?>) table.getModel();
-		return model;
+        return (ThreadedTableModel<?, ?>) table.getModel();
 	}
 
 	private void deselect(AncillaryFilterDialogComponentProvider<?> dialog, String name) {
@@ -323,8 +322,7 @@ public class VTMatchTableTest extends AbstractGhidraHeadedIntegrationTest {
 
 	private GTable getTable() {
 		VTMatchTableProvider provider = env.getMatchTableProvider();
-		GTable table = (GTable) getInstanceField("matchesTable", provider);
-		return table;
+        return (GTable) getInstanceField("matchesTable", provider);
 	}
 
 	private void triggerTableDataChanged() {

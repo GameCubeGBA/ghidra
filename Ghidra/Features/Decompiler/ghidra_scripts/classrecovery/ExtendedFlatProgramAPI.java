@@ -87,8 +87,7 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 				return null;
 			}
 
-			Address possiblePointer = address.getNewAddress(offset);
-			return possiblePointer;
+            return address.getNewAddress(offset);
 
 		}
 		catch (MemoryAccessException | AddressOutOfBoundsException e) {
@@ -227,8 +226,7 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 
 		//if function is a thunk, get the thunked function					
 		if (function.isThunk()) {
-			Function thunkedFunction = function.getThunkedFunction(true);
-			function = thunkedFunction;
+            function = function.getThunkedFunction(true);
 		}
 		return function;
 	}
@@ -261,8 +259,7 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 	 */
 	public Address getAddress(Address address, int offset) {
 		try {
-			Address newAddress = address.add(offset);
-			return newAddress;
+            return address.add(offset);
 		}
 		catch (AddressOutOfBoundsException e) {
 			return null;
@@ -340,9 +337,7 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 		}
 
 		// if so, create a function there
-		Function function = createFunction(functionStart, null);
-
-		return function;
+        return createFunction(functionStart, null);
 	}
 
 	public Byte determineFillerByte() throws CancelledException, MemoryAccessException {
@@ -474,27 +469,27 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 	 * Method to create a function in the given program at the given address
 	 * @param prog the given program
 	 * @param addr the given address
-	 * @return true if the function was created, false otherwise
+	 * @return function if the function was created, null otherwise
 	 */
-	public boolean createFunction(Program prog, Address addr) {
+	public Function createFunction(Program prog, Address addr) {
 
 		try {
 			AddressSet subroutineAddresses = getSubroutineAddresses(prog, addr);
 			if (subroutineAddresses.isEmpty()) {
-				return false;
+				return null;
 			}
 
 			CreateFunctionCmd cmd = new CreateFunctionCmd(null, subroutineAddresses.getMinAddress(),
 				null, SourceType.DEFAULT);
 			if (cmd.applyTo(prog, monitor)) {
-				return true;
+				return cmd.getFunction();
 			}
 
-			return false;
+			return null;
 		}
 		catch (CancelledException e) {
 			// FIXME: this should not be caught by this method and should propogate 
-			return false;
+			return null;
 		}
 
 	}
@@ -578,8 +573,7 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 				new DumbMemBufferImpl(currentProgram.getMemory(), address);
 			Object value = ibo32.getValue(compMemBuffer, ibo32.getDefaultSettings(), length);
 			if (value instanceof Address) {
-				Address iboAddress = (Address) value;
-				return iboAddress;
+                return (Address) value;
 			}
 			return null;
 		}
@@ -1238,8 +1232,7 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 			commaIndex--;
 		}
 
-		String shortenedName = className.substring(0, nextComma) + "...>";
-		return shortenedName;
+        return className.substring(0, nextComma) + "...>";
 	}
 
 	public List<RecoveredClass> getClassesWithSameShortenedName(

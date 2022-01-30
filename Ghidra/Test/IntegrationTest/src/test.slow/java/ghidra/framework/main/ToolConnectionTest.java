@@ -208,8 +208,7 @@ public class ToolConnectionTest extends AbstractGhidraHeadedIntegrationTest {
 	}
 
 	private DockingActionIf getAction(String actionName) {
-		DockingActionIf action = getAction(frontEndTool, "FrontEndPlugin", actionName);
-		return action;
+        return getAction(frontEndTool, "FrontEndPlugin", actionName);
 	}
 
 	private DockingActionIf getAction(String toolName, String action) {

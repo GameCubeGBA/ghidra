@@ -328,9 +328,8 @@ public class PdbApplicator {
 		isClassByNamespace = new TreeMap<>();
 		if (program != null) {
 			// Currently, this must happen after symbolGroups are created.
-			PdbVbtManager pdbVbtManager = new PdbVbtManager(this);
-			//pdbVbtManager.CreateVirtualBaseTables(); // Depends on symbolGroups
-			vbtManager = pdbVbtManager;
+            //pdbVbtManager.CreateVirtualBaseTables(); // Depends on symbolGroups
+			vbtManager = new PdbVbtManager(this);
 			registerNameToRegisterMapper = new PdbRegisterNameToProgramRegisterMapper(program);
 		}
 		else {

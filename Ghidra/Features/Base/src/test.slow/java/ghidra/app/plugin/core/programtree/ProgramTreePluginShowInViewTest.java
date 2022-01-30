@@ -298,8 +298,7 @@ public class ProgramTreePluginShowInViewTest extends AbstractGhidraHeadedIntegra
 	private ActionContext getActionContext() {
 
 		ViewManagerComponentProvider provider = (ViewManagerComponentProvider) viewMgrService;
-		ActionContext context = runSwing(() -> provider.getActionContext(null));
-		return context;
+        return runSwing(() -> provider.getActionContext(null));
 	}
 
 	@Test

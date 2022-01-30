@@ -768,8 +768,7 @@ public class ByteViewerPlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 
 		String fieldText = runSwing(() -> {
 			Field field = fp.getCurrentField();
-			String text = field.getText();
-			return text;
+            return field.getText();
 		});
 		assertEquals(expectedFieldText, fieldText);
 
@@ -782,8 +781,7 @@ public class ByteViewerPlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 
 		String fieldText = runSwing(() -> {
 			Field field = view.getCurrentField();
-			String text = field.getText();
-			return text;
+            return field.getText();
 		});
 		assertEquals(expectedFieldText, fieldText);
 
@@ -821,8 +819,7 @@ public class ByteViewerPlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 
 		runSwing(() -> action.actionPerformed(new ActionContext()), false);
 		waitForSwing();
-		ByteViewerOptionsDialog d = waitForDialogComponent(ByteViewerOptionsDialog.class);
-		return d;
+        return waitForDialogComponent(ByteViewerOptionsDialog.class);
 	}
 
 	private void setView(ByteViewerComponent view) {

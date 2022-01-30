@@ -111,8 +111,7 @@ public class ArticulatedEdgeTransformer<V extends VisualVertex, E extends Visual
 			// TODO it is not clear why this is using an inverse transform; why not just create
 			// the transform that we want?
 			AffineTransform inverse = transform.createInverse();
-			Shape transformedShape = inverse.createTransformedShape(path);
-			return transformedShape;
+            return inverse.createTransformedShape(path);
 		}
 		catch (NoninvertibleTransformException e1) {
 			Msg.error(this, "Unexpected exception transforming an edge", e1);

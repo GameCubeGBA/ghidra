@@ -83,8 +83,7 @@ public abstract class AbstractFloatDataType extends BuiltIn {
 				return doubleValue;
 			}
 			BigInteger value = Utils.bytesToBigInteger(bytes, len, buf.isBigEndian(), false);
-			BigDecimal decValue = floatFormat.round(floatFormat.getHostFloat(value));
-			return decValue;
+            return floatFormat.round(floatFormat.getHostFloat(value));
 		}
 		catch (UnsupportedFloatFormatException e) {
 			return null;

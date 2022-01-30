@@ -291,8 +291,7 @@ public class CompareSleighExternal extends GhidraScript {
 		} else {
 			opS = str.substring(start, sepEnd);
 		}
-		String extOp = opS.trim();
-		return extOp;
+        return opS.trim();
 	}
 
 	private void markBad(Address addr, String type, String error) {

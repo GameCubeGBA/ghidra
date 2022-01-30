@@ -100,8 +100,7 @@ public class GhidraColorMap {
 			grn[ii] = (byte) colors[ii].getGreen();
 			blu[ii] = (byte) colors[ii].getBlue();
 		}
-		IndexColorModel colorModel = new IndexColorModel(8, colors.length, red, grn, blu);
 
-		return colorModel;
+        return new IndexColorModel(8, colors.length, red, grn, blu);
 	}
 }

@@ -457,8 +457,7 @@ public final class DataUtilities {
 			return null;
 		}
 
-		Data dataAtAddr = dataContaining.getComponent(loc.getComponentPath());
-		return dataAtAddr;
+        return dataContaining.getComponent(loc.getComponentPath());
 	}
 
 	/**

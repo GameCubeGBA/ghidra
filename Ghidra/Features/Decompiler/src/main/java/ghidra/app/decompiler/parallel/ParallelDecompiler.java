@@ -47,8 +47,7 @@ public class ParallelDecompiler {
 		Listing listing = program.getListing();
 		FunctionIterator iterator = listing.getFunctions(addresses, true);
 
-		List<R> results = doDecompileFunctions(callback, iterator, functionCount, monitor);
-		return results;
+        return doDecompileFunctions(callback, iterator, functionCount, monitor);
 	}
 
 	/**
@@ -66,10 +65,8 @@ public class ParallelDecompiler {
 			TaskMonitor monitor)
 			throws InterruptedException, Exception {
 
-		List<R> results =
-			doDecompileFunctions(callback, functions.iterator(), functions.size(),
-				monitor);
-		return results;
+        return doDecompileFunctions(callback, functions.iterator(), functions.size(),
+            monitor);
 	}
 
 	/**

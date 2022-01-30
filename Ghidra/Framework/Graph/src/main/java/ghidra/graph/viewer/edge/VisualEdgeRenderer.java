@@ -169,12 +169,9 @@ public abstract class VisualEdgeRenderer<V extends VisualVertex, E extends Visua
 
 		Color highlightColor = getHighlightColor(graph, e);
 		Color baseColor = getBaseColor(graph, e);
-		Color hoveredColor = highlightColor;
-		Color focusedColor = baseColor;
-		Color selectedColor = highlightColor.darker(); // note: we can do better for selected color
-		Color selectedAccentColor = highlightColor;
+        Color selectedColor = highlightColor.darker(); // note: we can do better for selected color
 
-		float scale = Math.min(scalex, scaley);
+        float scale = Math.min(scalex, scaley);
 
 		Point2D p1 = layout.apply(v1);
 		Point2D p2 = layout.apply(v2);
@@ -241,7 +238,7 @@ public abstract class VisualEdgeRenderer<V extends VisualVertex, E extends Visua
 
 			if (isInHoveredPath) {
 				Stroke saveStroke = g.getStroke();
-				g.setPaint(hoveredColor);
+				g.setPaint(highlightColor);
 				g.setStroke(hoverStroke);
 				g.fill(edgeShape);
 				g.setStroke(saveStroke);
@@ -249,7 +246,7 @@ public abstract class VisualEdgeRenderer<V extends VisualVertex, E extends Visua
 
 			if (isInFocusedPath) {
 				Stroke saveStroke = g.getStroke();
-				g.setPaint(focusedColor);
+				g.setPaint(baseColor);
 				g.setStroke(focusedStroke);
 				g.fill(edgeShape);
 				g.setStroke(saveStroke);
@@ -284,7 +281,7 @@ public abstract class VisualEdgeRenderer<V extends VisualVertex, E extends Visua
 
 		if (isInHoveredPath) {
 			Stroke saveStroke = g.getStroke();
-			g.setPaint(hoveredColor);
+			g.setPaint(highlightColor);
 			g.setStroke(hoverStroke);
 			g.draw(edgeShape);
 			g.setStroke(saveStroke);
@@ -292,7 +289,7 @@ public abstract class VisualEdgeRenderer<V extends VisualVertex, E extends Visua
 
 		if (isInFocusedPath) {
 			Stroke saveStroke = g.getStroke();
-			g.setPaint(focusedColor);
+			g.setPaint(baseColor);
 			g.setStroke(focusedStroke);
 			g.draw(edgeShape);
 			g.setStroke(saveStroke);
@@ -301,7 +298,7 @@ public abstract class VisualEdgeRenderer<V extends VisualVertex, E extends Visua
 		if (isSelected) {
 			Stroke saveStroke = g.getStroke();
 
-			g.setPaint(selectedAccentColor);
+			g.setPaint(highlightColor);
 			g.setStroke(selectedAccentStroke);
 			g.draw(edgeShape);
 
@@ -375,7 +372,7 @@ public abstract class VisualEdgeRenderer<V extends VisualVertex, E extends Visua
 
 		if (isInHoveredPath) {
 			Stroke saveStroke = g.getStroke();
-			g.setPaint(hoveredColor);
+			g.setPaint(highlightColor);
 			g.setStroke(hoverStroke);
 			g.fill(arrow);
 			g.draw(arrow);
@@ -384,7 +381,7 @@ public abstract class VisualEdgeRenderer<V extends VisualVertex, E extends Visua
 
 		if (isInFocusedPath) {
 			Stroke saveStroke = g.getStroke();
-			g.setPaint(focusedColor);
+			g.setPaint(baseColor);
 			g.setStroke(focusedStroke);
 			g.draw(edgeShape);
 			g.setStroke(saveStroke);
@@ -449,8 +446,7 @@ public abstract class VisualEdgeRenderer<V extends VisualVertex, E extends Visua
 
 	private BasicStroke getEmphasisStroke(E e, float scale) {
 		double emphasisRatio = e.getEmphasis(); // this value is 0 when no emphasis
-		float fullEmphasis = EMPHASIZED_STOKE_WIDTH;
-		float emphasis = (float) (fullEmphasis * emphasisRatio);
+        float emphasis = (float) (EMPHASIZED_STOKE_WIDTH * emphasisRatio);
 		float width = emphasis / (float) Math.pow(scale, .80);
 		return new BasicStroke(width);
 	}

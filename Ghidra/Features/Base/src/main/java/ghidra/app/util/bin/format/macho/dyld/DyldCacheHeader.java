@@ -626,9 +626,7 @@ public class DyldCacheHeader implements StructConverter {
 
 	private DyldCacheSlideInfoCommon parseSlideInfo(long offset, MessageLog log,
 			TaskMonitor monitor) throws CancelledException {
-		DyldCacheSlideInfoCommon slideInfo =
-			DyldCacheSlideInfoCommon.parseSlideInfo(reader, offset, log, monitor);
-		return slideInfo;
+        return DyldCacheSlideInfoCommon.parseSlideInfo(reader, offset, log, monitor);
 	}
 
 	private void parseLocalSymbolsInfo(MessageLog log, TaskMonitor monitor)

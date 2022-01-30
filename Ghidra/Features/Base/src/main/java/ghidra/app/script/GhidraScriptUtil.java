@@ -164,8 +164,7 @@ public class GhidraScriptUtil {
 			root = override;
 		}
 
-		String sourcePath = root + File.separator + SCRIPTS_SUBDIR_NAME;
-		return sourcePath;
+        return root + File.separator + SCRIPTS_SUBDIR_NAME;
 	}
 
 	/**

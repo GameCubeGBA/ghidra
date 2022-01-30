@@ -159,16 +159,14 @@ public class Icons {
 		}
 
 		// +1 for the '.'
-		String fieldName = snippet.substring(Icons.class.getSimpleName().length() + 1);
-		return fieldName;
+        return snippet.substring(Icons.class.getSimpleName().length() + 1);
 	}
 
 	private static ImageIcon getIconByFieldName(String fieldName) {
 
 		try {
 			Field field = Icons.class.getField(fieldName);
-			ImageIcon icon = (ImageIcon) field.get(Icons.class);
-			return icon;
+            return (ImageIcon) field.get(Icons.class);
 		}
 		catch (Exception e) {
 			Msg.debug(Icons.class,
@@ -190,8 +188,7 @@ public class Icons {
 		}
 
 		try {
-			URL url = new URL(description);
-			return url;
+            return new URL(description);
 		}
 		catch (MalformedURLException e) {
 			Msg.trace(Icons.class, "Unable to get URL for icon: " + description);

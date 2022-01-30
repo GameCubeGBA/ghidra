@@ -92,10 +92,9 @@ public class DWARFExpressionEvaluator {
 	public static DWARFExpressionEvaluator create(DebugInfoEntry die) {
 		DWARFCompilationUnit compUnit = die.getCompilationUnit();
 		DWARFProgram prog = die.getCompilationUnit().getProgram();
-		DWARFExpressionEvaluator evaluator = new DWARFExpressionEvaluator(compUnit.getPointerSize(),
-			!prog.isBigEndian(), compUnit.getFormat(), prog.getRegisterMappings());
 
-		return evaluator;
+        return new DWARFExpressionEvaluator(compUnit.getPointerSize(),
+            !prog.isBigEndian(), compUnit.getFormat(), prog.getRegisterMappings());
 	}
 
 	public DWARFExpressionEvaluator(byte pointerSize, boolean isLittleEndian, int dwarfFormat,
@@ -150,9 +149,7 @@ public class DWARFExpressionEvaluator {
 	}
 
 	public DWARFExpression readExpr(byte[] exprBytes) throws DWARFExpressionException {
-		DWARFExpression tmp =
-			DWARFExpression.read(exprBytes, pointerSize, isLittleEndian, dwarfFormat);
-		return tmp;
+        return DWARFExpression.read(exprBytes, pointerSize, isLittleEndian, dwarfFormat);
 	}
 
 	public DWARFExpressionResult evaluate(byte[] exprBytes) throws DWARFExpressionException {

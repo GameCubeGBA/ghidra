@@ -565,9 +565,8 @@ public class StackFrameDataType extends BiDirectionDataType {
 		String defaultName = getDefaultName(comp);
 		String oldName = comp.getFieldName();
 		boolean isDefault = (oldName == null) || (oldName.equals(defaultName));
-		DataTypeComponent newComp = replaceAtOffset(newOffset, comp.getDataType(), comp.getLength(),
-			isDefault ? null : oldName, comp.getComment());
-		return newComp;
+        return replaceAtOffset(newOffset, comp.getDataType(), comp.getLength(),
+            isDefault ? null : oldName, comp.getComment());
 	}
 
 	/**

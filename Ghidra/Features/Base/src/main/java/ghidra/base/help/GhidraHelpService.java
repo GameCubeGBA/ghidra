@@ -85,8 +85,7 @@ public class GhidraHelpService extends HelpManager {
 	private Map<ResourceFile, Set<URL>> findHelpSetsByModule() {
 		Set<URL> allHelpSets = ResourceManager.getResources("help", "hs");
 		Collection<ResourceFile> moduleRoots = Application.getModuleRootDirectories();
-		Map<ResourceFile, Set<URL>> helpSetsByModule = mapHelpToModule(moduleRoots, allHelpSets);
-		return helpSetsByModule;
+        return mapHelpToModule(moduleRoots, allHelpSets);
 	}
 
 	private Map<ResourceFile, Set<URL>> mapHelpToModule(Collection<ResourceFile> moduleRoots,

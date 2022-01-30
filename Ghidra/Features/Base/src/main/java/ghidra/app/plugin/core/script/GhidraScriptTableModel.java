@@ -550,8 +550,7 @@ class GhidraScriptTableModel extends GDynamicColumnTableModel<ResourceFile, Obje
 
 		@Override
 		public String getFilterString(Date t, Settings settings) {
-			String formatted = DateUtils.formatDate(t);
-			return formatted;
+            return DateUtils.formatDate(t);
 		}
 	}
 

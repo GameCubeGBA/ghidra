@@ -191,9 +191,9 @@ public class TickStep implements Step {
 	public <T> void execute(PcodeThread<T> emuThread, Consumer<PcodeThread<T>> stepAction,
 			TaskMonitor monitor) throws CancelledException {
 		for (int i = 0; i < tickCount; i++) {
-			monitor.incrementProgress(1);
 			monitor.checkCanceled();
 			stepAction.accept(emuThread);
+			monitor.incrementProgress(1);
 		}
 	}
 

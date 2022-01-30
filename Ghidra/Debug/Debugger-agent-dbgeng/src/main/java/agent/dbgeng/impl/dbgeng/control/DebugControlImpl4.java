@@ -109,10 +109,8 @@ public class DebugControlImpl4 extends DebugControlImpl3 {
 		PointerByReference ppBp = new PointerByReference();
 		COMUtils.checkRC(jnaControl.AddBreakpoint2(ulType, ulDesiredId, ppBp));
 		IDebugBreakpoint Bp = new WrapIDebugBreakpoint(ppBp.getValue());
-		DebugBreakpoint bpt =
-			DebugBreakpointInternal.tryPreferredInterfaces(this, Bp::QueryInterface);
-		// AddRef or no? Probably not.
-		return bpt;
+        // AddRef or no? Probably not.
+		return DebugBreakpointInternal.tryPreferredInterfaces(this, Bp::QueryInterface);
 	}
 
 	@Override

@@ -155,10 +155,8 @@ public class FileSystemFactoryMgr {
 			throw new IOException("Unknown file system type " + fsType);
 		}
 
-		GFileSystem result = mountUsingFactory(fsir, byteProvider,
-			byteProvider.getFSRL().makeNested(fsType), fsService, monitor);
-
-		return result;
+        return mountUsingFactory(fsir, byteProvider,
+            byteProvider.getFSRL().makeNested(fsType), fsService, monitor);
 	}
 
 	private GFileSystem mountUsingFactory(FileSystemInfoRec fsir, ByteProvider byteProvider,

@@ -141,13 +141,12 @@ public class TagEditorRenderer extends GListCellRenderer<TagState> {
 			}
 
 			public void updateButton(Component mousedComponent, boolean pressed) {
-				Component component = mousedComponent;
-				if (component == undoButton) {
+                if (mousedComponent == undoButton) {
 					undoButton.getTagState().setMousePressed(pressed);
 					list.repaint();
 				}
 
-				if (component == null) {
+				if (mousedComponent == null) {
 					undoButton.getTagState().setMousePressed(false);
 					list.repaint();
 				}

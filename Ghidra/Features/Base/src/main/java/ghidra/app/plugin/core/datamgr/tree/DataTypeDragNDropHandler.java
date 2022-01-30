@@ -141,9 +141,8 @@ public class DataTypeDragNDropHandler implements GTreeDragNDropHandler {
 			return dragUserData;
 		}
 		else if (flavor.equals(DataFlavor.javaFileListFlavor)) {
-			List<?> nodeList = dragUserData;
-			ArrayList<ResourceFile> fileList = new ArrayList<ResourceFile>();
-			for (Object node : nodeList) {
+            ArrayList<ResourceFile> fileList = new ArrayList<ResourceFile>();
+			for (Object node : dragUserData) {
 
 				ArchiveNode archiveNode = (ArchiveNode) node;
 				FileArchive archive = (FileArchive) archiveNode.getArchive();

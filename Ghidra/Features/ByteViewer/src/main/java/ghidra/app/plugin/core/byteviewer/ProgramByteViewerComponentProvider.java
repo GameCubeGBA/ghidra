@@ -427,9 +427,7 @@ public class ProgramByteViewerComponentProvider extends ByteViewerComponentProvi
 
 	ProgramLocation getLocation(ByteBlock block, BigInteger offset, int column) {
 		Address address = blockSet.getAddress(block, offset);
-		int characterOffset = column;
-		ProgramLocation loc = new ByteViewerProgramLocation(program, address, characterOffset);
-		return loc;
+        return new ByteViewerProgramLocation(program, address, column);
 	}
 
 	protected void setLocation(ProgramLocation location) {

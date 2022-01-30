@@ -90,8 +90,7 @@ public class FSRL {
 	public static FSRL fromString(FSRL parent, String fsrlStr) throws MalformedURLException {
 		String[] partStrs = fsrlStr.trim().split("\\|");
 		for (String partStr : partStrs) {
-			FSRL fsrl = fromPartString(parent, partStr);
-			parent = fsrl;
+            parent = fromPartString(parent, partStr);
 		}
 		return parent;
 	}

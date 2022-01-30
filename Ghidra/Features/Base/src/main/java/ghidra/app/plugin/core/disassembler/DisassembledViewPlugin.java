@@ -413,8 +413,7 @@ public class DisassembledViewPlugin extends ProgramPlugin implements DomainObjec
 			setHelpLocation(pluginHelpLocation);
 			setDefaultWindowPosition(WindowPosition.BOTTOM);
 			contentList = new JList<>();
-			JScrollPane scrollPane = new JScrollPane(contentList);
-			component = scrollPane;
+            component = new JScrollPane(contentList);
 
 			contentList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 

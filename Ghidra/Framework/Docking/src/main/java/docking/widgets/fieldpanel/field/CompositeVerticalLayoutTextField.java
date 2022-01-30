@@ -116,8 +116,7 @@ public class CompositeVerticalLayoutTextField implements TextField {
 	private List<FieldRow> layoutRows(List<TextField> fields, int maxLines) {
 
 		List<FieldRow> newSubFields = new ArrayList<>();
-		int startY = -heightAbove;
-		int ySoFar = startY;
+        int ySoFar = -heightAbove;
 		int currentRow = 0;
 		boolean tooManyLines = fields.size() > maxLines;
 		for (int i = 0; i < fields.size() && i < maxLines; i++) {
@@ -403,8 +402,7 @@ public class CompositeVerticalLayoutTextField implements TextField {
 	@Override
 	public int getY(int row) {
 
-		int startY = -heightAbove;
-		int ySoFar = startY;
+        int ySoFar = -heightAbove;
 		List<FieldRow> rows = getAllRows(row);
 		int lastHeight = 0;
 		for (FieldRow fieldRow : rows) {
@@ -435,8 +433,7 @@ public class CompositeVerticalLayoutTextField implements TextField {
 			if (bottom > y) {
 				int relativeY = y - ySoFar;
 				int relativeRow = fieldRow.field.getRow(relativeY);
-				int displayRow = fieldRow.fromRelativeRow(relativeRow);
-				return displayRow;
+                return fieldRow.fromRelativeRow(relativeRow);
 			}
 			ySoFar += fieldHeight;
 		}

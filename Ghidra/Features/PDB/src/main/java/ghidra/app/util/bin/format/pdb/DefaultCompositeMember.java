@@ -1160,10 +1160,8 @@ public class DefaultCompositeMember extends CompositeMember {
 			int preferredCompositeSize, List<? extends PdbMember> members,
 			Consumer<String> errorConsumer, TaskMonitor monitor) throws CancelledException {
 
-		Composite editComposite = composite;
-
-		DefaultCompositeMember rootMember =
-			new DefaultCompositeMember(isClass, editComposite, errorConsumer);
+        DefaultCompositeMember rootMember =
+			new DefaultCompositeMember(isClass, composite, errorConsumer);
 
 		for (PdbMember m : members) {
 			monitor.checkCanceled();

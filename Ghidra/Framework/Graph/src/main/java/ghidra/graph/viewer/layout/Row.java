@@ -144,14 +144,11 @@ public class Row<V> {
 		Integer start = verticesByColumn.firstKey();
 		Integer n = getColumnCount();
 		IntStream columnIndexes = IntStream.range(start, start + n);
-		List<V> vertices = 
-			columnIndexes
-			.mapToObj(col -> verticesByColumn.get(col))
-			.filter(v -> v != null)
-			.collect(Collectors.toList())
-			;
-		//@formatter:on
-		return vertices;
+        //@formatter:on
+		return columnIndexes
+        .mapToObj(col -> verticesByColumn.get(col))
+        .filter(v -> v != null)
+        .collect(Collectors.toList());
 	}
 
 	public int getPaddedHeight(boolean isCondensed) {

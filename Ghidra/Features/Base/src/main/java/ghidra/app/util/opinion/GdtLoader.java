@@ -72,13 +72,10 @@ public class GdtLoader implements Loader {
 			throws InvalidNameException, CancelledException, IOException {
 
 		File file = provider.getFile();
-		DomainFolder folder = programFolder;
 
-		monitor.setMessage("Restoring " + file.getName());
+        monitor.setMessage("Restoring " + file.getName());
 
-		DomainFile df = folder.createFile(filename, file, monitor);
-
-		return df;
+        return programFolder.createFile(filename, file, monitor);
 	}
 
 	@Override

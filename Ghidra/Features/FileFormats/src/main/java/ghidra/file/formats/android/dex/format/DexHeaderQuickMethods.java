@@ -34,8 +34,7 @@ public final class DexHeaderQuickMethods {
 
 		byte[] signature = reader.readNextByteArray(20);
 
-		int fileSize = reader.readNextInt();
-		return fileSize;
+        return reader.readNextInt();
 	}
 
 }

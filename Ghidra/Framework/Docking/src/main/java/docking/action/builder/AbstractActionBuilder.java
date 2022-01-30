@@ -701,8 +701,7 @@ public abstract class AbstractActionBuilder<T extends DockingActionIf, C extends
 
 		actionContextClass = newActionContextClass;
 
-		B2 newSelf = (B2) self();
-		return newSelf;
+        return (B2) self();
 	}
 
 	protected void validate() {
@@ -763,10 +762,9 @@ public abstract class AbstractActionBuilder<T extends DockingActionIf, C extends
 			return (Predicate<ActionContext>) predicate;
 		}
 		// Convert a sub-classed ActionContext predicate to a plain ActionContext predicate
-		Predicate<ActionContext> predicateAdapter = (ac) -> {
-			return actionContextClass.isInstance(ac) && predicate.test((C) ac);
-		};
-		return predicateAdapter;
+        return (ac) -> {
+            return actionContextClass.isInstance(ac) && predicate.test((C) ac);
+        };
 	}
 
 	protected boolean isPopupAction() {

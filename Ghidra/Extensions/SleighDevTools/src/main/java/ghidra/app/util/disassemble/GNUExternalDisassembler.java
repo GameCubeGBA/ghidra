@@ -100,8 +100,7 @@ public class GNUExternalDisassembler implements ExternalDisassembler {
 			return null;
 		}
 		long value = getContextRegisterValue(cu, contextRegister);
-		String option = gdisConfig.getDisplayPrefixMap().get(value);
-		return option;
+        return gdisConfig.getDisplayPrefixMap().get(value);
 	}
 
 	private static void reportMultipleMappings(Language language) {

@@ -1470,9 +1470,7 @@ public class DefaultGraphDisplay implements GraphDisplay {
 			LayoutModel<AttributedVertex> layoutModel =
 				vv.getVisualizationModel().getLayoutModel();
 			Point2D p = vv.getTransformSupport().inverseTransform(vv, event.getPoint());
-			AttributedVertex vertex =
-				vv.getPickSupport().getVertex(layoutModel, p.getX(), p.getY());
-			return vertex;
+            return vv.getPickSupport().getVertex(layoutModel, p.getX(), p.getY());
 		}
 
 		@Override
@@ -1480,8 +1478,7 @@ public class DefaultGraphDisplay implements GraphDisplay {
 			LayoutModel<AttributedVertex> layoutModel =
 				vv.getVisualizationModel().getLayoutModel();
 			Point2D p = vv.getTransformSupport().inverseTransform(vv, event.getPoint());
-			AttributedEdge edge = vv.getPickSupport().getEdge(layoutModel, p.getX(), p.getY());
-			return edge;
+            return vv.getPickSupport().getEdge(layoutModel, p.getX(), p.getY());
 		}
 
 		@Override

@@ -122,8 +122,7 @@ public class FilterVerticesJob<V extends VisualVertex, E extends VisualEdge<V>>
 
 		UnmodifiableIterator<V> nonMatchingIterator =
 			Iterators.filter(filterGraph.getUnfilteredVertices(), v -> !validVertices.contains(v));
-		Set<V> nonMatching = asSet(nonMatchingIterator);
-		return nonMatching;
+        return asSet(nonMatchingIterator);
 	}
 
 	/*
@@ -148,9 +147,8 @@ public class FilterVerticesJob<V extends VisualVertex, E extends VisualEdge<V>>
 		// only have an effect if the current alpha is not already 1.0, such as from a 
 		// previous filter.
 		//
-		double fadeInAlpha = percentComplete;
-		passedVertices.forEach(v -> fadeInAlpha(v, fadeInAlpha));
-		passedEdges.forEach(e -> fadeInAlpha(e, fadeInAlpha));
+        passedVertices.forEach(v -> fadeInAlpha(v, percentComplete));
+		passedEdges.forEach(e -> fadeInAlpha(e, percentComplete));
 
 	}
 

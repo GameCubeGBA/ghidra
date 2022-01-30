@@ -88,8 +88,7 @@ public class BowTieExpandVerticesJob extends AbstractGraphTransitionJob<FcgVerte
 		 	edges can be seen through the vertices, which looks bad.   To fix this, have the
 		 	edges be less visible until the vertices are more opaque.
 		 */
-		double x = percentComplete;
-		double x2 = x * x;  					 // change slower than x
+        double x2 = percentComplete * percentComplete;  					 // change slower than x
 		double remaining = 1 - percentComplete;  // start opacity towards the end 
 		double y = x2 - remaining;
 
@@ -98,10 +97,9 @@ public class BowTieExpandVerticesJob extends AbstractGraphTransitionJob<FcgVerte
 
 		Set<FcgVertex> newVertices = newVertexCollection.getNewVertices();
 
-		double vertexAlpha = x;
-		double edgeAlpha = Math.max(y, 0);
+        double edgeAlpha = Math.max(y, 0);
 		for (FcgVertex v : newVertices) {
-			v.setAlpha(vertexAlpha);
+			v.setAlpha(percentComplete);
 		}
 
 		Iterable<FcgEdge> newEdges = newVertexCollection.getNewEdges();
@@ -294,8 +292,7 @@ public class BowTieExpandVerticesJob extends AbstractGraphTransitionJob<FcgVerte
 		// range from 0-1 (%) based on edge count, with 20 being the high-side
 		int delta = maxPadding - basePadding;
 		double percent = Math.min(count / 20f, 1);
-		int padding = basePadding + (int) (delta * percent);
-		return padding;
+        return basePadding + (int) (delta * percent);
 	}
 
 	private Map<FcgVertex, Point2D> getExistingLocations(List<FcgVertex> vertices) {

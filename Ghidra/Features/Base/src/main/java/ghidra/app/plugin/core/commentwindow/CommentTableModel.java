@@ -200,8 +200,7 @@ class CommentTableModel extends AddressBasedTableModel<CommentRowObject> {
 		@Override
 		public String getValue(CommentRowObject rowObject, Settings settings, Program program,
 				ServiceProvider provider) throws IllegalArgumentException {
-			String comment = getCommentForRowObject(rowObject);
-			return comment;
+            return getCommentForRowObject(rowObject);
 		}
 
 		@Override

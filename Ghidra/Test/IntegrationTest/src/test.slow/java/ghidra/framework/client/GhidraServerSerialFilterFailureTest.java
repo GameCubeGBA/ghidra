@@ -99,8 +99,7 @@ public class GhidraServerSerialFilterFailureTest extends AbstractGhidraHeadlessI
 		HashSet<BogusPrincipal> pset = new HashSet<>();
 		HashSet<Object> emptySet = new HashSet<>();
 		pset.add(new BogusPrincipal(username));
-		Subject subj = new Subject(false, pset, emptySet, emptySet);
-		return subj;
+        return new Subject(false, pset, emptySet, emptySet);
 	}
 
 	@Test

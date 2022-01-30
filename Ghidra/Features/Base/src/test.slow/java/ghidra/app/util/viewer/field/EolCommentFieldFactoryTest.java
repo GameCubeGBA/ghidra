@@ -150,8 +150,7 @@ public class EolCommentFieldFactoryTest extends AbstractGhidraHeadedIntegrationT
 
 	private ListingTextField getFieldText(Address address) {
 		assertTrue(cb.goToField(address, EolCommentFieldFactory.FIELD_NAME, 1, 1));
-		ListingTextField tf = (ListingTextField) cb.getCurrentField();
-		return tf;
+        return (ListingTextField) cb.getCurrentField();
 	}
 
 	private void setFieldWidth(final FieldFactory fieldFactory, final int width) throws Exception {

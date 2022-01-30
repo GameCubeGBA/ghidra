@@ -44,8 +44,7 @@ public class KandL {
 		double thetabound = acos(tau);
 		// taubound <= tau   =>   theta <= thetabound
 		//                  =>  probofmatch = 1 -theta/pi  >=  1 -thetabound/pi
-		double probbound = 1.0 - thetabound / PI;
-		return probbound;
+        return 1.0 - thetabound / PI;
 	}
 
 	public static int memoryModelToL(LSHMemoryModel model) {
@@ -72,8 +71,7 @@ public class KandL {
 		BigInteger numbins = new BigInteger(new byte[] { 1 });
 		numbins = numbins.shiftLeft(k);
 		double hitsperbin = new BigDecimal(n).divide(new BigDecimal(numbins)).doubleValue();// Expected number of elements per bin
-		double numcompare = hitsperbin * L;
-		return numcompare;
+        return hitsperbin * L;
 	}
 
 	static void print_result(PrintStream out, int k, int L, BigInteger n, double qt) {

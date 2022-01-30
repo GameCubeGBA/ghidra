@@ -431,8 +431,7 @@ public class OptionsGui extends JPanel {
 	 */
 	private JComponent buildPreviewPanel() {
 		fieldPanel = new FieldPanel(new SimpleLayoutModel());
-		IndexedScrollPane scroll = new IndexedScrollPane(fieldPanel);
-		return scroll;
+        return new IndexedScrollPane(fieldPanel);
 	}
 
 	/**

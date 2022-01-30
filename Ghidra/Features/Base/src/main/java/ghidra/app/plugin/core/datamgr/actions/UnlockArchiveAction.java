@@ -99,8 +99,7 @@ public class UnlockArchiveAction extends DockingAction {
 	private TreePath[] getSelectionPaths(ActionContext context) {
 		Object contextObject = context.getContextObject();
 		GTree gtree = (GTree) contextObject;
-		TreePath[] selectionPaths = gtree.getSelectionPaths();
-		return selectionPaths;
+        return gtree.getSelectionPaths();
 	}
 
 	private boolean hasWriteLock(FileArchiveNode fileArchiveNode) {

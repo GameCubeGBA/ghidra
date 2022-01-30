@@ -248,8 +248,7 @@ public abstract class AbstractGhidraScriptMgrPluginTest
 
 	protected ResourceFile finishNewScriptDialog() {
 
-		ResourceFile script = finishNewScriptDialog(null);
-		return script;
+        return finishNewScriptDialog(null);
 	}
 
 	protected ResourceFile finishNewScriptDialog(String newScriptName) {
@@ -299,8 +298,7 @@ public abstract class AbstractGhidraScriptMgrPluginTest
 		Set<DockingActionIf> actions =
 			getActionsByOwnerAndName(plugin.getTool(), plugin.getName(), "Rerun Last Script");
 		assertFalse(actions.isEmpty());
-		DockingActionIf runLastAction = CollectionUtils.any(actions);
-		return runLastAction;
+        return CollectionUtils.any(actions);
 	}
 
 	protected void assertRunLastActionEnabled(boolean enabled) {
@@ -361,8 +359,7 @@ public abstract class AbstractGhidraScriptMgrPluginTest
 		});
 		waitForSwing();
 
-		ResourceFile scriptFile = provider.getScriptAt(row);
-		return scriptFile;
+        return provider.getScriptAt(row);
 	}
 
 	protected ResourceFile loadTempScriptIntoEditor() throws IOException {

@@ -583,22 +583,21 @@ public class StructureEditorUnlockedActions5Test
 	public void testSizeNoChange() throws Exception {
 		init(complexStructure, pgmTestCat);
 		int originalLength = complexStructure.getLength();
-		int newLength = originalLength;
 
-		assertEquals(originalLength, model.getLength());
+        assertEquals(originalLength, model.getLength());
 
 		Component component = findComponentByName(provider.editorPanel, "Total Length");
 		assertNotNull(component);
-		((JTextField) component).setText(Integer.toString(newLength));
+		((JTextField) component).setText(Integer.toString(originalLength));
 		triggerActionKey(component, 0, KeyEvent.VK_ENTER);
 
-		assertEquals(newLength, model.getLength());
+		assertEquals(originalLength, model.getLength());
 		assertFalse(applyAction.isEnabled());
 		setErrorsExpected(true);
 		invoke(applyAction);
 		setErrorsExpected(false);
 		assertTrue(complexStructure.isEquivalent(model.viewComposite));
-		assertEquals(newLength, complexStructure.getLength());
+		assertEquals(originalLength, complexStructure.getLength());
 	}
 
 	@Test

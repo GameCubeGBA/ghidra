@@ -71,7 +71,7 @@ public class MenuResourceDataType extends DynamicDataType {
 
 		try {
 			//add the header structure
-			tempOffset = addMenuItemTemplateHeaderStructure(memBuffer, comps, tempOffset);
+			tempOffset = addMenuItemTemplateHeaderStructure(mbIn, comps, tempOffset);
 			if (tempOffset < 0) {
 				return null;
 			}
@@ -109,9 +109,7 @@ public class MenuResourceDataType extends DynamicDataType {
 			Msg.error(this, "buffer error: " + e.getMessage(), e);
 		}
 
-		DataTypeComponent[] result = comps.toArray(new DataTypeComponent[comps.size()]);
-
-		return result;
+        return comps.toArray(new DataTypeComponent[comps.size()]);
 	}
 
 	//adds initial MENUITEM_TEMPLATE_HEADER structure

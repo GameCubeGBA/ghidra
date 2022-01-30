@@ -131,8 +131,7 @@ public class ApplicationProperties extends Properties {
 		}
 
 		ResourceFile resourceFile = new ResourceFile(propsFile);
-		ApplicationProperties properties = new ApplicationProperties(resourceFile);
-		return properties;
+        return new ApplicationProperties(resourceFile);
 	}
 
 	/**

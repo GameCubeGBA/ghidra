@@ -91,8 +91,7 @@ public class CombinePattern extends DisjointPattern {
 			res1.shiftInstruction(-sa);
 		else
 			res2.shiftInstruction(sa);
-		OrPattern tmp = new OrPattern(res1, res2);
-		return tmp;
+        return new OrPattern(res1, res2);
 	}
 
 	/* (non-Javadoc)

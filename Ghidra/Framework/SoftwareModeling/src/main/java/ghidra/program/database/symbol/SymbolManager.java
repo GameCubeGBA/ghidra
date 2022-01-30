@@ -1602,8 +1602,7 @@ public class SymbolManager implements SymbolTable, ManagerDB {
 		long addr = record.getLongValue(SymbolDatabaseAdapter.SYMBOL_ADDR_COL);
 		byte typeID = record.getByteValue(SymbolDatabaseAdapter.SYMBOL_TYPE_COL);
 		SymbolType type = SymbolType.getSymbolType(typeID);
-		SymbolDB s = makeSymbol(addrMap.decodeAddress(addr), record, type);
-		return s;
+        return makeSymbol(addrMap.decodeAddress(addr), record, type);
 	}
 
 	SymbolDB getSymbol(DBRecord record) {
@@ -2096,8 +2095,7 @@ public class SymbolManager implements SymbolTable, ManagerDB {
 	public SymbolIterator getExternalSymbols(String name) {
 		lock.acquire();
 		try {
-			SymbolIterator symIter = new ExternalSymbolNameRecordIterator(name);
-			return symIter;
+            return new ExternalSymbolNameRecordIterator(name);
 		}
 		catch (IOException e) {
 			program.dbError(e);

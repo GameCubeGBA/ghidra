@@ -30,8 +30,7 @@ public class OpBehaviorIntNegate extends UnaryOpBehavior {
 
 	@Override
 	public long evaluateUnary(int sizeout, int sizein, long in1) {
-		long res = Utils.uintb_negate(in1, sizein);
-		return res;
+        return Utils.uintb_negate(in1, sizein);
 	}
 
 	@Override

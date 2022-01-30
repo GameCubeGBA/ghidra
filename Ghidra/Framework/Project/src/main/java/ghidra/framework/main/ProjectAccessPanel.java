@@ -547,8 +547,7 @@ public class ProjectAccessPanel extends AbstractWizardJPanel {
 		 * @return list of user names
 		 */
 		List<String> getAllUsers() {
-			List<String> allUsers = CollectionUtils.asList(listModel.elements());
-			return allUsers;
+            return CollectionUtils.asList(listModel.elements());
 		}
 
 		/**

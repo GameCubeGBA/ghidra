@@ -136,9 +136,8 @@ public class InstructionSearchApi {
 			throws InvalidInputException {
 
 		MaskSettings maskSettings = new MaskSettings(false, false, false);
-		String searchString = getBinarySearchString(program, addressRange, maskSettings);
 
-		return searchString;
+        return getBinarySearchString(program, addressRange, maskSettings);
 	}
 
 	/**

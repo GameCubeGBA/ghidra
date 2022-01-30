@@ -324,8 +324,7 @@ public class Function2Test extends AbstractGhidraHeadedIntegrationTest {
 
 	private JTextField getTextField(NumberInputDialog dialog) {
 		IntegerTextField field = (IntegerTextField) getInstanceField("numberInputField", dialog);
-		JTextField textField = (JTextField) getInstanceField("textField", field);
-		return textField;
+        return (JTextField) getInstanceField("textField", field);
 	}
 
 	private NumberInputDialog waitForStackDepthChange() {

@@ -143,8 +143,7 @@ public class SampleGraphPluginTest extends AbstractGhidraHeadedIntegrationTest {
 	private VisualGraphLayout<SampleVertex, SampleEdge> getCurrentLayout() {
 
 		SampleGraph graph = provider.getGraph();
-		VisualGraphLayout<SampleVertex, SampleEdge> layout = graph.getLayout();
-		return layout;
+        return graph.getLayout();
 	}
 
 	private void setNewLayout(String layoutName) {

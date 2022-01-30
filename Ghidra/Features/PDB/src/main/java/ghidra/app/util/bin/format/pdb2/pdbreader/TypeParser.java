@@ -63,8 +63,7 @@ public class TypeParser {
 	 */
 	public static MsTypeField parseField(AbstractPdb pdb, PdbByteReader reader)
 			throws PdbException, CancelledException {
-		MsTypeField result = parse(pdb, reader, MsTypeField.class);
-		return result;
+		return parse(pdb, reader, MsTypeField.class);
 	}
 
 	/**
@@ -77,8 +76,7 @@ public class TypeParser {
 	 */
 	public static AbstractMsType parse(AbstractPdb pdb, PdbByteReader reader)
 			throws PdbException, CancelledException {
-		AbstractMsType result = parse(pdb, reader, AbstractMsType.class);
-		return result;
+		return parse(pdb, reader, AbstractMsType.class);
 	}
 
 	/**

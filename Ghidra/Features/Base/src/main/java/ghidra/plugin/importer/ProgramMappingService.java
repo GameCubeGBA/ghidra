@@ -417,8 +417,7 @@ public class ProgramMappingService {
 		String dfFSRLStr = metadata.get(PROGRAM_SOURCE_FSRL);
 		if (dfFSRLStr != null) {
 			try {
-				FSRL dfFSRL = FSRL.fromString(dfFSRLStr);
-				return dfFSRL;
+                return FSRL.fromString(dfFSRLStr);
 			}
 			catch (MalformedURLException e) {
 				Msg.warn(ProgramMappingService.class,

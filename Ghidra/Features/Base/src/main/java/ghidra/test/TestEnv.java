@@ -205,14 +205,12 @@ public class TestEnv {
 
 	private List<Program> getOpenProgamsFor(PluginTool theTool) {
 		//@formatter:off
-		List<Program> toolPrograms = programManager.getOpenPrograms()
+        //@formatter:on
+
+		return programManager.getOpenPrograms()
 			.stream()
 			.filter(p -> p.getConsumerList().contains(theTool))
-			.collect(Collectors.toList())
-			;
-		//@formatter:on
-
-		return toolPrograms;
+			.collect(Collectors.toList());
 	}
 
 	/**
@@ -464,9 +462,7 @@ public class TestEnv {
 	}
 
 	public ComponentProvider getFrontEndProvider() {
-		ComponentProvider provider =
-			(ComponentProvider) TestUtils.invokeInstanceMethod("getProvider", getFrontEndTool());
-		return provider;
+        return (ComponentProvider) TestUtils.invokeInstanceMethod("getProvider", getFrontEndTool());
 	}
 
 	private void removeFrontEndFromSystem() {
@@ -485,8 +481,7 @@ public class TestEnv {
 	 * @return the tool
 	 */
 	public PluginTool createDefaultTool() {
-		PluginTool newTool = launchDefaultToolByName(AbstractGenericTest.DEFAULT_TEST_TOOL_NAME);
-		return newTool;
+        return launchDefaultToolByName(AbstractGenericTest.DEFAULT_TEST_TOOL_NAME);
 	}
 
 	/**
@@ -680,8 +675,7 @@ public class TestEnv {
 	 * @throws FileNotFoundException if the program file cannot be found
 	 */
 	public DomainFile restoreProgram(String programName) throws FileNotFoundException {
-		DomainFile df = programManager.addProgramToProject(getProject(), programName);
-		return df;
+        return programManager.addProgramToProject(getProject(), programName);
 	}
 
 	public static ResourceFile findProvidedDataTypeArchive(String relativePathName) {
@@ -810,8 +804,7 @@ public class TestEnv {
 	 */
 
 	public ProgramDB getProgram(String programName) {
-		ProgramDB p = programManager.getProgram(programName);
-		return p;
+        return programManager.getProgram(programName);
 	}
 
 	/**

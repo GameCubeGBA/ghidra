@@ -34,8 +34,7 @@ public class TextAreaDialog extends DialogComponentProvider {
 	private JComponent createComponent(String text) {
 		JTextArea area = new JTextArea(text);
 		area.setEditable(false);
-		JScrollPane sp = new JScrollPane(area);
-		return sp;
+        return new JScrollPane(area);
 	}
 
 	@Override

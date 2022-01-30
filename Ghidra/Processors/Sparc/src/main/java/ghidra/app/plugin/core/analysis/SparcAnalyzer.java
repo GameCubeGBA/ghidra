@@ -127,8 +127,6 @@ public class SparcAnalyzer extends ConstantPropagationAnalyzer {
 			}
 		};
 
-		AddressSet resultSet = symEval.flowConstants(flowStart, flowSet, eval, true, monitor);
-
-		return resultSet;
+        return symEval.flowConstants(flowStart, flowSet, eval, true, monitor);
 	}
 }

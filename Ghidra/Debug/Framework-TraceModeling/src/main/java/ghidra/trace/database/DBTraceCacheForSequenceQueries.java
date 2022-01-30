@@ -160,16 +160,14 @@ public abstract class DBTraceCacheForSequenceQueries<T> {
 
 	public T getFloor(long snap, Address address) {
 		//long start = System.currentTimeMillis();
-		T result = ensureInCache(snap, address).getFloor(address);
-		//totalQuery += System.currentTimeMillis() - start;
-		return result;
+        //totalQuery += System.currentTimeMillis() - start;
+		return ensureInCache(snap, address).getFloor(address);
 	}
 
 	public T getCeiling(long snap, Address address) {
 		//long start = System.currentTimeMillis();
-		T result = ensureInCache(snap, address).getCeiling(address);
-		//totalQuery += System.currentTimeMillis() - start;
-		return result;
+        //totalQuery += System.currentTimeMillis() - start;
+		return ensureInCache(snap, address).getCeiling(address);
 	}
 
 	public void notifyNewEntry(Range<Long> lifespan, AddressRangeImpl range, T item) {

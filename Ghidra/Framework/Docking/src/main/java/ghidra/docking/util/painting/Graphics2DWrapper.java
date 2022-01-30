@@ -77,8 +77,7 @@ public class Graphics2DWrapper extends Graphics2D {
 		// revert the color or it will get restored incorrectly.
 		//
 		Color alt = delegate.getColor();
-		Color orig = getComplementaryColor(alt);
-		return orig;
+        return getComplementaryColor(alt);
 	}
 
 	private static Color getComplementaryColor(Color c) {
@@ -87,8 +86,7 @@ public class Graphics2DWrapper extends Graphics2D {
 			return null;
 		}
 
-		Color alt = new Color(255 - c.getRed(), 255 - c.getGreen(), 255 - c.getBlue());
-		return alt;
+        return new Color(255 - c.getRed(), 255 - c.getGreen(), 255 - c.getBlue());
 	}
 
 	@Override
@@ -104,8 +102,7 @@ public class Graphics2DWrapper extends Graphics2D {
 		// revert the color or it will get restored incorrectly.
 		//
 		Color alt = delegate.getBackground();
-		Color orig = getComplementaryColor(alt);
-		return orig;
+        return getComplementaryColor(alt);
 	}
 
 	@Override
@@ -120,16 +117,13 @@ public class Graphics2DWrapper extends Graphics2D {
 
 		if (alt instanceof Color) {
 			Color c = (Color) alt;
-			Color orig = getComplementaryColor(c);
-			return orig;
+            return getComplementaryColor(c);
 		}
 		else if (alt instanceof GradientPaint) {
 			GradientPaint gp = (GradientPaint) alt;
 			Color alt1 = getComplementaryColor(gp.getColor1());
 			Color alt2 = getComplementaryColor(gp.getColor2());
-			GradientPaint orig =
-				new GradientPaint(gp.getPoint1(), alt1, gp.getPoint2(), alt2, gp.isCyclic());
-			return orig;
+            return new GradientPaint(gp.getPoint1(), alt1, gp.getPoint2(), alt2, gp.isCyclic());
 		}
 		else if (alt instanceof LinearGradientPaint) {
 
@@ -139,9 +133,7 @@ public class Graphics2DWrapper extends Graphics2D {
 			Point2D start = gp.getStartPoint();
 			Point2D end = gp.getEndPoint();
 			CycleMethod cycleMethod = gp.getCycleMethod();
-			LinearGradientPaint orig =
-				new LinearGradientPaint(start, end, fractions, colors, cycleMethod);
-			return orig;
+            return new LinearGradientPaint(start, end, fractions, colors, cycleMethod);
 		}
 		else {
 			// Else case from  setPaint()

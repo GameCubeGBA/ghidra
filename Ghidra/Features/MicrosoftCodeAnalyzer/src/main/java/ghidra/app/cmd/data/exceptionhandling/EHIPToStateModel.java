@@ -160,9 +160,7 @@ public class EHIPToStateModel extends AbstractCreateDataTypeModel {
 		}
 
 		// ULONG  - Does this actually represent an address?
-		Scalar scalarValue =
-			EHDataTypeUtilities.getScalarValue(ipToStateDt, IP_ORDINAL, specificMemBuffer);
-		return scalarValue;
+        return EHDataTypeUtilities.getScalarValue(ipToStateDt, IP_ORDINAL, specificMemBuffer);
 	}
 
 	/**

@@ -348,8 +348,7 @@ public class AddressTableDialog extends DialogComponentProvider {
 	int getMinTableSize() {
 		try {
 			Integer ilen = Integer.decode(minLengthField.getText());
-			int len = ilen.intValue();
-			return len;
+            return ilen.intValue();
 		}
 		catch (NumberFormatException e) {
 			return 0;
@@ -360,8 +359,7 @@ public class AddressTableDialog extends DialogComponentProvider {
 
 		try {
 			Integer ilen = Integer.decode(alignField.getText());
-			int len = ilen.intValue();
-			return len;
+            return ilen.intValue();
 		}
 		catch (NumberFormatException e) {
 			return 1;
@@ -372,8 +370,7 @@ public class AddressTableDialog extends DialogComponentProvider {
 
 		try {
 			Integer ilen = Integer.decode(skipField.getText());
-			int len = ilen.intValue();
-			return len;
+            return ilen.intValue();
 		}
 		catch (NumberFormatException e) {
 			return 0;
@@ -390,8 +387,7 @@ public class AddressTableDialog extends DialogComponentProvider {
 	int getOffset() {
 		try {
 			Integer ilen = Integer.decode(offsetField.getText());
-			int len = ilen.intValue();
-			return len;
+            return ilen.intValue();
 		}
 		catch (NumberFormatException e) {
 			return -1;

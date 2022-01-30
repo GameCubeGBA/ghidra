@@ -2772,8 +2772,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 		for (String enumName : enumNames) {
 			enumValueAdapter.createRecord(enumID, enumName, enumm.getValue(enumName), enumm.getComment(enumName));
 		}
-		EnumDB enumDB = new EnumDB(this, dtCache, enumAdapter, enumValueAdapter, record);
-		return enumDB;
+        return new EnumDB(this, dtCache, enumAdapter, enumValueAdapter, record);
 	}
 
 	private Pointer createPointer(DataType dt, Category cat, byte length,

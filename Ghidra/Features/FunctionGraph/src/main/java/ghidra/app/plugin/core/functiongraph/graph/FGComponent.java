@@ -139,8 +139,7 @@ public class FGComponent extends GraphComponent<FGVertex, FGEdge, FunctionGraph>
 
 	private FGLayout getFunctionGraphLayout() {
 		Layout<FGVertex, FGEdge> graphLayout = primaryViewer.getVisualGraphLayout();
-		FGLayout layout = (FGLayout) graphLayout;
-		return layout;
+        return (FGLayout) graphLayout;
 	}
 
 	private void restoreVertexLocations() {

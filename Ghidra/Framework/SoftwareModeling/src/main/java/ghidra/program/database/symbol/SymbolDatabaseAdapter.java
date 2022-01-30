@@ -77,8 +77,7 @@ abstract class SymbolDatabaseAdapter {
 		}
 
 		try {
-			SymbolDatabaseAdapter adapter = new SymbolDatabaseAdapterV3(dbHandle, addrMap, false);
-			return adapter;
+            return new SymbolDatabaseAdapterV3(dbHandle, addrMap, false);
 		}
 		catch (VersionException e) {
 			if (!e.isUpgradable() || openMode == DBConstants.UPDATE) {

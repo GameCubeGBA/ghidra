@@ -86,10 +86,8 @@ public class SharedReturnAnalyzer extends AbstractAnalyzer {
 	public boolean getDefaultEnablement(Program program) {
 		Language language = program.getLanguage();
 
-		boolean sharedReturnEnabled = language.getPropertyAsBoolean(
-			GhidraLanguagePropertyKeys.ENABLE_SHARED_RETURN_ANALYSIS, true);
-
-		return sharedReturnEnabled;
+        return language.getPropertyAsBoolean(
+            GhidraLanguagePropertyKeys.ENABLE_SHARED_RETURN_ANALYSIS, true);
 	}
 
 	@Override

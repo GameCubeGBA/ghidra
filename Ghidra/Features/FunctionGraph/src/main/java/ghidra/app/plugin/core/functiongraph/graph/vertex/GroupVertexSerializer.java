@@ -48,8 +48,7 @@ public class GroupVertexSerializer {
 
 	public static Element getXMLForGroupedVertices(FunctionGraph functionGraph) {
 		Element element = new Element(GROUP_VERTICES_ELEMENT_NAME);
-		Graph<FGVertex, FGEdge> graph = functionGraph;
-		Collection<FGVertex> vertices = graph.getVertices();
+        Collection<FGVertex> vertices = ((Graph<FGVertex, FGEdge>) functionGraph).getVertices();
 		for (FGVertex vertex : vertices) {
 			if (vertex instanceof GroupedFunctionGraphVertex) {
 				GroupedVertexInfo info =
@@ -77,8 +76,7 @@ public class GroupVertexSerializer {
 	public static void recreateGroupedVertices(FGController controller, Element element) {
 		FGData functionGraphData = controller.getFunctionGraphData();
 		FunctionGraph functionGraph = functionGraphData.getFunctionGraph();
-		Graph<FGVertex, FGEdge> graph = functionGraph;
-		Collection<FGVertex> vertices = graph.getVertices();
+        Collection<FGVertex> vertices = ((Graph<FGVertex, FGEdge>) functionGraph).getVertices();
 		for (FGVertex vertex : vertices) {
 			if (vertex instanceof GroupedFunctionGraphVertex) {
 				//

@@ -43,8 +43,6 @@ public class IconResource extends BitmapResource {
 		// each mask line is padded to fall on a 4 byte boundary
 		int lineLen = ((((getWidth() + 7) / 8) + 3) / 4) * 4;
 
-		int masklen = lineLen * getHeight();
-
-		return masklen;
+        return lineLen * getHeight();
 	}
 }

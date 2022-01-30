@@ -53,9 +53,7 @@ public class JavaClassDecompilerFileSystemFactory implements
 			FileSystemService fsService, TaskMonitor monitor)
 			throws IOException, CancelledException {
 
-		JavaClassDecompilerFileSystem fs =
-			new JavaClassDecompilerFileSystem(targetFSRL, provider, fsService, monitor);
-		return fs;
+        return new JavaClassDecompilerFileSystem(targetFSRL, provider, fsService, monitor);
 	}
 
 }

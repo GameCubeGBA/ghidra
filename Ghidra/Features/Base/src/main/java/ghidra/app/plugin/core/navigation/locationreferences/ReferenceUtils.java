@@ -308,8 +308,7 @@ public final class ReferenceUtils {
 
 		Predicate<Data> dataMatcher = data -> {
 			DataType baseType = getBaseDataType(data.getDataType());
-			boolean matches = dataTypesMatch(dataType, baseType);
-			return matches;
+            return dataTypesMatch(dataType, baseType);
 		};
 
 		findDataTypeMatchesInDefinedData(asSet, program, dataMatcher, fieldMatcher, monitor);
@@ -465,9 +464,8 @@ public final class ReferenceUtils {
 
 		Program program = location.getProgram();
 		if (location instanceof FunctionSignatureFieldLocation) {
-			LocationDescriptor result = createFunctionSignatureFieldLocationDescriptor(
-				(FunctionSignatureFieldLocation) location);
-			return result;
+            return createFunctionSignatureFieldLocationDescriptor(
+                (FunctionSignatureFieldLocation) location);
 		}
 		else if (location instanceof MnemonicFieldLocation) {
 			return createMnemonicLocationDescriptor((MnemonicFieldLocation) location);
@@ -515,9 +513,7 @@ public final class ReferenceUtils {
 		}
 		else if (location instanceof FieldNameFieldLocation) {
 			FieldNameFieldLocation fieldLocation = (FieldNameFieldLocation) location;
-			LocationDescriptor dataMemberDescriptor =
-				createDataMemberLocationDescriptor(fieldLocation);
-			return dataMemberDescriptor;
+            return createDataMemberLocationDescriptor(fieldLocation);
 		}
 		// keep this last because some of the above locations extend CodeUnitLocation
 		else if (location instanceof CodeUnitLocation) {
@@ -623,9 +619,7 @@ public final class ReferenceUtils {
 		}
 
 		Data subData = outermostData.getComponent(location.getComponentPath());
-		LocationDescriptor descriptor =
-			createSubDataMemberLocationDescriptor(program, address, location, subData);
-		return descriptor;
+        return createSubDataMemberLocationDescriptor(program, address, location, subData);
 	}
 
 	// Sub-data locations are within other types, like Composites or Arrays
@@ -663,9 +657,7 @@ public final class ReferenceUtils {
 		if (type instanceof Array) {
 
 			AddressFieldLocation addressLocation = new AddressFieldLocation(program, address);
-			AddressLocationDescriptor descriptor =
-				new AddressLocationDescriptor(addressLocation, program);
-			return descriptor;
+            return new AddressLocationDescriptor(addressLocation, program);
 		}
 
 		return null;
@@ -706,9 +698,7 @@ public final class ReferenceUtils {
 				return null;
 			}
 
-			LocationDescriptor dtDescriptor =
-				createGenericDataTypeLocationDescriptor(program, type, fieldPath);
-			return dtDescriptor;
+            return createGenericDataTypeLocationDescriptor(program, type, fieldPath);
 		}
 
 		String fieldName = getFieldName(location);
@@ -720,9 +710,7 @@ public final class ReferenceUtils {
 			int[] componentPath = subData.getComponentPath();
 			FieldNameFieldLocation fieldLocation =
 				new FieldNameFieldLocation(program, address, componentPath, fieldName, 0);
-			LocationDescriptor descriptor =
-				createSubDataMemberLocationDescriptor(program, address, fieldLocation, subData);
-			return descriptor;
+            return createSubDataMemberLocationDescriptor(program, address, fieldLocation, subData);
 		}
 
 		//
@@ -778,9 +766,7 @@ public final class ReferenceUtils {
 		Variable variable = variableOffset.getVariable();
 		DataType type = variable.getDataType();
 		String string = variableOffset.getDataTypeDisplayText();
-		GenericDataTypeLocationDescriptor descriptor =
-			createGenericDataTypeLocationDescriptor(program, type, string);
-		return descriptor;
+        return createGenericDataTypeLocationDescriptor(program, type, string);
 	}
 
 	private static GenericDataTypeLocationDescriptor createGenericDataTypeLocationDescriptor(
@@ -853,8 +839,7 @@ public final class ReferenceUtils {
 		Data dataContaining = listing.getDataContaining(addr);
 		Address start = dataContaining.getAddress();
 		long depth = addr.subtract(start);
-		Data primitiveAtAddr = dataContaining.getPrimitiveAt((int) depth);
-		return primitiveAtAddr;
+        return dataContaining.getPrimitiveAt((int) depth);
 	}
 
 	private static Data getDataAt(ProgramLocation location) {
@@ -983,8 +968,7 @@ public final class ReferenceUtils {
 		String rep = location.getOperandRepresentation();
 
 		// normalize on dots so that follow-on processing is easier
-		String path = rep.replace("->", ".");
-		return path;
+        return rep.replace("->", ".");
 	}
 
 	private static String getFieldName(OperandFieldLocation location) {
@@ -992,8 +976,7 @@ public final class ReferenceUtils {
 		// from the OperandLocation is an object that knows more information about where the
 		// operand is pointing.  This would make it easier to avoid parsing the display text
 		// to try and find structure members.
-		String rep = location.getOperandRepresentation();
-		String fieldName = rep;
+        String fieldName = location.getOperandRepresentation();
 		if (fieldName.contains(".")) {
 			String[] path = fieldName.split("\\.");
 			fieldName = path[path.length - 1];
@@ -1242,8 +1225,7 @@ public final class ReferenceUtils {
 
 		UniversalID uid1 = searchType.getUniversalID();
 		UniversalID uid2 = possibleType.getUniversalID();
-		boolean equal = SystemUtilities.isEqual(uid1, uid2);
-		return equal;
+        return SystemUtilities.isEqual(uid1, uid2);
 	}
 
 	private static boolean isBuiltIn(DataType dt) {

@@ -178,13 +178,11 @@ public class GzfLoader implements Loader {
 		if (file == null) {
 			file = tmpFile = createTmpFile(provider, monitor);
 		}
-		DomainFolder folder = programFolder;
 
-		monitor.setMessage("Restoring " + provider.getName());
+        monitor.setMessage("Restoring " + provider.getName());
 
 		try {
-			DomainFile df = folder.createFile(programName, file, monitor);
-			return df;
+            return programFolder.createFile(programName, file, monitor);
 		}
 		finally {
 			if (tmpFile != null) {

@@ -242,11 +242,10 @@ class DmgServerProcessManager implements Closeable {
 
 		// optional: -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=18200
 		try {
-			Process p = Runtime.getRuntime().exec(
-				new String[] { java, "-classpath", classPath, "-Xmx" + dmgServerMemoryMB + "m", //need more memory to load and xfer data across pipe
-					"mobiledevices.dmg.server.DmgServer" },
-				envp, null);
-			return p;
+            return Runtime.getRuntime().exec(
+                new String[] { java, "-classpath", classPath, "-Xmx" + dmgServerMemoryMB + "m", //need more memory to load and xfer data across pipe
+                    "mobiledevices.dmg.server.DmgServer" },
+                envp, null);
 		}
 		catch (IOException e) {
 			Msg.info(this, "Error when creating DMG sever process: ", e);
@@ -282,10 +281,9 @@ class DmgServerProcessManager implements Closeable {
 		ResourceFile serverMemoryCfgFile = new ResourceFile(dmgModule, "data/server_memory.cfg");
 		try {
 			List<String> lines = FileUtilities.getLines(serverMemoryCfgFile);
-			int result = (lines.size() > 0)
-					? Math.max(Integer.parseInt(lines.get(0)), MIN_DMG_SERVER_MEMORY_MB)
-					: defaultValue;
-			return result;
+            return (lines.size() > 0)
+                    ? Math.max(Integer.parseInt(lines.get(0)), MIN_DMG_SERVER_MEMORY_MB)
+                    : defaultValue;
 		}
 		catch (NumberFormatException | IOException e) {
 			// ignore

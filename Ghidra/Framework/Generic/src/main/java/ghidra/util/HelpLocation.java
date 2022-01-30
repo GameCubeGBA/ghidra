@@ -292,8 +292,7 @@ public class HelpLocation {
 		Throwable throwable = new Throwable();
 		StackTraceElement[] stackTrace = throwable.getStackTrace();
 
-		String information = getInceptionInformationFromTheFirstClassThatIsNotUs(stackTrace);
-		return information;
+        return getInceptionInformationFromTheFirstClassThatIsNotUs(stackTrace);
 	}
 
 	private static String getInceptionInformationFromTheFirstClassThatIsNotUs(

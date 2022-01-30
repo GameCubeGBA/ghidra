@@ -84,9 +84,8 @@ public class ColumnSortState {
 	}
 
 	public ColumnSortState createFlipState() {
-		ColumnSortState newSortState = new ColumnSortState(columnModelIndex,
-			isAscending() ? SortDirection.DESCENDING : SortDirection.ASCENDING, sortOrder_OneBased);
-		return newSortState;
+        return new ColumnSortState(columnModelIndex,
+            isAscending() ? SortDirection.DESCENDING : SortDirection.ASCENDING, sortOrder_OneBased);
 	}
 
 	@Override
