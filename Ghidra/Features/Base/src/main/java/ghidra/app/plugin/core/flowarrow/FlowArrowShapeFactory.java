@@ -151,10 +151,9 @@ class FlowArrowShapeFactory {
 		double halfHeight = TRIANGLE_HEIGHT / 2;
 		GeneralPath arrowPath = new GeneralPath();
 		if (endY != 0 && endY != height) { // completely on screen
-			int arrowY = endY;
-			arrowPath.moveTo(width, arrowY);
-			arrowPath.lineTo(width - TRIANGLE_WIDTH, arrowY - halfHeight);
-			arrowPath.lineTo(width - TRIANGLE_WIDTH, arrowY + halfHeight);
+            arrowPath.moveTo(width, endY);
+			arrowPath.lineTo(width - TRIANGLE_WIDTH, endY - halfHeight);
+			arrowPath.lineTo(width - TRIANGLE_WIDTH, endY + halfHeight);
 			arrowPath.closePath();
 		}
 		else if (endY == 0) {

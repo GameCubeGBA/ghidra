@@ -223,8 +223,7 @@ public class CliMetadataTokenAnalyzer extends AbstractAnalyzer {
 		Scalar indexOp = (Scalar) ops[1];
 		int table = (int) tableOp.getUnsignedValue();
 		int index = (int) indexOp.getUnsignedValue();
-		CliAbstractTableRow tableRow = metaStream.getTable(table).getRow(index);
-		return tableRow;
+        return metaStream.getTable(table).getRow(index);
 	}
 
 	private void markMetadataRow(Instruction inst, CliAbstractTableRow tableRow,

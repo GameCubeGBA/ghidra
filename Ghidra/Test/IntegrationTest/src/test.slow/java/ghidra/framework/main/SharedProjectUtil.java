@@ -238,9 +238,7 @@ public class SharedProjectUtil {
 
 	private static DockingActionIf getAction(FrontEndTool frontEndTool, String actionName) {
 
-		DockingActionIf action =
-			AbstractDockingTest.getAction(frontEndTool, "FrontEndPlugin", actionName);
-		return action;
+        return AbstractDockingTest.getAction(frontEndTool, "FrontEndPlugin", actionName);
 	}
 
 	private static class UtilProjectListener implements ProjectListener {

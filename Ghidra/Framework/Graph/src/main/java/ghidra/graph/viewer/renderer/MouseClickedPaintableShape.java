@@ -40,8 +40,7 @@ public class MouseClickedPaintableShape extends PaintableShape {
 		int half = radius >> 1;
 		x = x - half;
 		y = y - half;
-		Ellipse2D circle = new Ellipse2D.Double(x, y, radius, radius);
-		this.shape = circle;
+        this.shape = new Ellipse2D.Double(x, y, radius, radius);
 
 		shapeFinished = true;
 	}

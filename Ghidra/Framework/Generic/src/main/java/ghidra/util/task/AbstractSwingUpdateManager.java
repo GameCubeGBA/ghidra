@@ -361,7 +361,6 @@ public abstract class AbstractSwingUpdateManager {
 		Throwable t = ReflectionUtilities.createThrowableWithStackOlderThan(getClass());
 
 		StackTraceElement[] trace = t.getStackTrace();
-		String classInfo = trace[0].toString();
 
 		/*
 		// debug source of creation
@@ -370,7 +369,7 @@ public abstract class AbstractSwingUpdateManager {
 		classInfo = classInfo + "\n\tfrom:\n\n" + string;
 		*/
 
-		return classInfo;
+		return trace[0].toString();
 	}
 
 }

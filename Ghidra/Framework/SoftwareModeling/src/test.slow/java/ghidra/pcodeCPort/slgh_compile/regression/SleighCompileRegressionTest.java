@@ -126,8 +126,7 @@ public class SleighCompileRegressionTest extends AbstractGenericTest {
 		new IOThread(process.getInputStream()).start();
 		new IOThread(process.getErrorStream()).start();
 
-		int retval = process.waitFor();
-		return retval;
+        return process.waitFor();
 	}
 
 	private String getCppSleighCompilerForArch() throws FileNotFoundException {
@@ -250,9 +249,7 @@ public class SleighCompileRegressionTest extends AbstractGenericTest {
 	}
 
 	private List<ResourceFile> getSlaspecFiles() {
-		List<ResourceFile> allSlaspecFiles =
-			Application.findFilesByExtensionInApplication(".slaspec");
-		return allSlaspecFiles;
+        return Application.findFilesByExtensionInApplication(".slaspec");
 
 //		Predicate<ResourceFile> predicate = new Predicate<ResourceFile>() {
 //			@Override

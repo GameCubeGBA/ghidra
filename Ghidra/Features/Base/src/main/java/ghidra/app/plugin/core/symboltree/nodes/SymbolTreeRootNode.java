@@ -106,8 +106,7 @@ public class SymbolTreeRootNode extends SymbolCategoryNode {
 			getFunctionsNode()
 		);
 		//@formatter:on
-		GTreeNode node = searchCategories(categories, key, loadChildren, monitor);
-		return node;
+        return searchCategories(categories, key, loadChildren, monitor);
 	}
 
 	private GTreeNode findNamespaceSymbol(SymbolNode key, boolean loadChildren,
@@ -152,8 +151,7 @@ public class SymbolTreeRootNode extends SymbolCategoryNode {
 			getNamespacesNode()
 		);
 		//@formatter:on
-		GTreeNode node = searchCategories(categories, key, loadChildren, monitor);
-		return node;
+        return searchCategories(categories, key, loadChildren, monitor);
 	}
 
 	private GTreeNode searchCategories(List<SymbolCategoryNode> categories, SymbolNode key,
@@ -176,8 +174,7 @@ public class SymbolTreeRootNode extends SymbolCategoryNode {
 			return null; // assume category is filtered out
 		}
 
-		GTreeNode node = category.findSymbolTreeNode(key, loadChildren, monitor);
-		return node;
+        return category.findSymbolTreeNode(key, loadChildren, monitor);
 	}
 
 	private SymbolCategoryNode getLabelsNode() {

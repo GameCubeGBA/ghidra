@@ -1015,31 +1015,29 @@ public class MultiTabPanel extends JPanel {
 		protected void paintRaisedBevel(Component c, Graphics g, int x, int y, int width,
 				int height) {
 			Color oldColor = g.getColor();
-			int h = height;
-			int w = width;
 
-			g.translate(x, y);
+            g.translate(x, y);
 
 			Shape saveClip = g.getClip();
 			Rectangle bounds = saveClip.getBounds();
 			g.setClip(bounds.x, bounds.y, bounds.width, getHeight() + 2);
 
 			g.setColor(getShadowOuterColor(c));
-			g.drawLine(0, 0, 0, h); // left outer
+			g.drawLine(0, 0, 0, height); // left outer
 			g.setColor(getHighlightOuterColor(c));
-			g.drawLine(1, 0, w - 2, 0); // upper outer
+			g.drawLine(1, 0, width - 2, 0); // upper outer
 
 			g.setColor(getHighlightInnerColor(c));
-			g.drawLine(1, 1, 1, h); // left inner
-			g.drawLine(2, 1, w - 3, 1); // upper inner
+			g.drawLine(1, 1, 1, height); // left inner
+			g.drawLine(2, 1, width - 3, 1); // upper inner
 
 			// bottom outer
 			g.setColor(getShadowOuterColor(c));
-			g.drawLine(w - 1, 0, w - 1, h); // right outer
+			g.drawLine(width - 1, 0, width - 1, height); // right outer
 
 			// bottom inner
 			g.setColor(getShadowInnerColor(c));
-			g.drawLine(w - 2, 1, w - 2, h); // right inner
+			g.drawLine(width - 2, 1, width - 2, height); // right inner
 
 			g.setClip(saveClip);
 
@@ -1060,14 +1058,12 @@ public class MultiTabPanel extends JPanel {
 		protected void paintRaisedBevel(Component c, Graphics g, int x, int y, int width,
 				int height) {
 			Color oldColor = g.getColor();
-			int h = height;
-			int w = width;
 
-			g.translate(x, y);
+            g.translate(x, y);
 
 			// bottom outer
 			g.setColor(getHighlightOuterColor(c));
-			g.drawLine(0, h - 1, w - 1, h - 1);
+			g.drawLine(0, height - 1, width - 1, height - 1);
 
 			// bottom inner         
 			g.setColor(getShadowInnerColor(c));

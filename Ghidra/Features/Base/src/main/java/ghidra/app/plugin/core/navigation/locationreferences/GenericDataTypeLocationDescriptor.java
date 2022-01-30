@@ -83,8 +83,7 @@ public class GenericDataTypeLocationDescriptor extends DataTypeLocationDescripto
 
 	@Override
 	protected DataType getBaseDataType() {
-		DataType type = ReferenceUtils.getBaseDataType(getSourceDataType());
-		return type;
+        return ReferenceUtils.getBaseDataType(getSourceDataType());
 	}
 
 	// Overridden to perform a simple check against data types, since the program locations are

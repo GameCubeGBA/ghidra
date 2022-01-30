@@ -44,8 +44,7 @@ public class ExtensionFileFilter implements GhidraFileFilter {
 	 * @return new {@link ExtensionFileFilter} instance.
 	 */
 	public static ExtensionFileFilter forExtensions(String description, String... exts) {
-		ExtensionFileFilter eff = new ExtensionFileFilter(exts, description);
-		return eff;
+        return new ExtensionFileFilter(exts, description);
 	}
 
 	private List<String> extensions;

@@ -60,10 +60,8 @@ public class DWARFAbbreviation
 		DWARFAttributeSpecification[] attrSpecArray =
 			tmpAttrSpecs.toArray(new DWARFAttributeSpecification[tmpAttrSpecs.size()]);
 
-		DWARFAbbreviation result = new DWARFAbbreviation(ac, tag,
-			hasChildren == DWARFChildren.DW_CHILDREN_yes, attrSpecArray);
-
-		return result;
+        return new DWARFAbbreviation(ac, tag,
+            hasChildren == DWARFChildren.DW_CHILDREN_yes, attrSpecArray);
 	}
 
 	public static Map<Integer, DWARFAbbreviation> readAbbreviations(BinaryReader reader,

@@ -217,8 +217,7 @@ abstract class DataTypeLocationDescriptor extends LocationDescriptor {
 			Data data = (Data) object;
 			DataType otherBaseDataType = ReferenceUtils.getBaseDataType(data.getDataType());
 			if (otherBaseDataType.isEquivalent(baseDataType)) {
-				Highlight[] dtHighlights = getMnemonicDataTypeHighlights(text, highlightColor);
-				return dtHighlights;
+                return getMnemonicDataTypeHighlights(text, highlightColor);
 			}
 		}
 		else if (MnemonicFieldFactory.class.isAssignableFrom(fieldFactoryClass) ||

@@ -40,8 +40,7 @@ public class StackEditorActions4Test extends AbstractStackEditorTest {
 		JTable table = getTable();
 		Component editorComponent = table.getEditorComponent();
 		assertNotNull(editorComponent);
-		JTextComponent textComponent = (JTextComponent) editorComponent;
-		return textComponent;
+        return (JTextComponent) editorComponent;
 	}
 
 	private void selectAllText(JTextComponent tc) {

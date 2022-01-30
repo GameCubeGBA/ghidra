@@ -132,8 +132,7 @@ public class IterativeFindPathsAlgorithm<V, E extends GEdge<V>>
 
 		blockedSet.remove(v);
 		setStatus(v, STATUS.WAITING);
-		Set<V> set = blockedBackEdgesMap.get(v);
-		return set;
+        return blockedBackEdgesMap.get(v);
 	}
 
 	private void blockBackEdge(V u, V v) {
@@ -235,8 +234,7 @@ public class IterativeFindPathsAlgorithm<V, E extends GEdge<V>>
 				return null;
 			}
 
-			Node node = new Node(this, unexplored.pop());
-			return node;
+            return new Node(this, unexplored.pop());
 		}
 
 		@Override

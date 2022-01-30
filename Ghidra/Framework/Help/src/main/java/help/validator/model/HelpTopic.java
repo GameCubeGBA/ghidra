@@ -41,8 +41,7 @@ public class HelpTopic implements Comparable<HelpTopic> {
 		Path helpDir = topicsDir.getParent();
 
 		DirectoryHelpModuleLocation loc = new DirectoryHelpModuleLocation(helpDir.toFile());
-		HelpTopic helpTopic = new HelpTopic(loc, topicFile);
-		return helpTopic;
+        return new HelpTopic(loc, topicFile);
 	}
 
 	public HelpTopic(HelpModuleLocation help, Path topicFile) {

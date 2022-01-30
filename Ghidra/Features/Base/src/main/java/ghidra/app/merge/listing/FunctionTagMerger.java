@@ -307,10 +307,8 @@ public class FunctionTagMerger implements MergeResolver, ListingMergeConstants {
 	private FunctionTag getTag(Program program, long id) {
 		FunctionManagerDB functionManagerDBResult =
 			(FunctionManagerDB) program.getFunctionManager();
-		FunctionTag tag =
-			functionManagerDBResult.getFunctionTagManager().getFunctionTag(id);
 
-		return tag;
+        return functionManagerDBResult.getFunctionTagManager().getFunctionTag(id);
 	}
 
 	/**

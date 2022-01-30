@@ -335,8 +335,7 @@ public class RowObjectSelectionManager<T> extends DefaultListSelectionModel
 		}
 
 		List<Integer> rowsList = translateRowObjectsToIndices(lastSelectedObjects, objectRowMap);
-		int[] asInts = rowsList.stream().mapToInt(i -> i).toArray();
-		return asInts;
+        return rowsList.stream().mapToInt(i -> i).toArray();
 	}
 
 	private List<Integer> translateRowObjectsToIndices(List<T> rowObjects,

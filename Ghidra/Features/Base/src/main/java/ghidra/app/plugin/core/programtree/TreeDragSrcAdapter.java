@@ -120,8 +120,7 @@ class TreeDragSrcAdapter extends DragSrcAdapter {
 		ImageIcon icon = ResourceManager.loadImage(filename);
 		Image image = icon.getImage();
 		Toolkit tk = Toolkit.getDefaultToolkit();
-		Cursor cursor = tk.createCustomCursor(image, hotSpot, cursorName);
-		return cursor;
+        return tk.createCustomCursor(image, hotSpot, cursorName);
 	}
 
 }

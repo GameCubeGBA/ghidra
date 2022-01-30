@@ -86,9 +86,8 @@ public class DBTraceNamespaceSymbol extends AbstractDBTraceSymbol implements Tra
 		if (isGlobal()) {
 			return allAddresses;
 		}
-		AddressSet result = super.getAddressSet();
 
-		/**
+        /**
 		 * TODO: Decide whether I'm tracking the full address set in the parent or relying on
 		 * getChildren(). If I use getChildren, I'll need a private getChildren that doesn't
 		 * checkIsMine. Otherwise, I cannot recover function bodies upon deletion, which is required
@@ -97,7 +96,7 @@ public class DBTraceNamespaceSymbol extends AbstractDBTraceSymbol implements Tra
 		//for (AbstractDBTraceSymbol child : getChildren()) {
 		//	child.doCollectAddressSet(result);
 		//}
-		return result;
+		return super.getAddressSet();
 	}
 
 	@Override

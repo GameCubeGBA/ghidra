@@ -322,8 +322,7 @@ abstract class LongKeyRecordNode extends LongKeyNode implements RecordNode {
 				// update index tables associated with table
 				table.updatedRecord(getRecord(table.getSchema(), index), record);
 			}
-			LongKeyNode newRoot = updateRecord(index, record);
-			return newRoot;
+            return updateRecord(index, record);
 		}
 
 		// Handle new record - see if we have room in this leaf
@@ -387,8 +386,7 @@ abstract class LongKeyRecordNode extends LongKeyNode implements RecordNode {
 
 		// Handle removal of last record in node
 		if (keyCount == 1) {
-			LongKeyNode newRoot = removeLeaf();
-			return newRoot;
+            return removeLeaf();
 		}
 
 		// Remove record within this node

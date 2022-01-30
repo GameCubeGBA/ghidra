@@ -61,8 +61,7 @@ public class RenameAction extends DockingAction {
 			return null;
 		}
 
-		GTreeNode node = (GTreeNode) selectionPaths[0].getLastPathComponent();
-		return node;
+        return (GTreeNode) selectionPaths[0].getLastPathComponent();
 	}
 
 	@Override

@@ -64,14 +64,13 @@ public class LabelTableColumn
 
 	private Symbol getSymbol(ProgramLocation rowObject, Program program)
 			throws IllegalArgumentException {
-		ProgramLocation location = rowObject;
-		if (rowObject instanceof VariableLocation) {
+        if (rowObject instanceof VariableLocation) {
 			Variable var = ((VariableLocation) rowObject).getVariable();
 			if (var != null) {
 				return var.getSymbol();
 			}
 		}
-		Address address = location.getAddress();
+		Address address = rowObject.getAddress();
 		SymbolTable symbolTable = program.getSymbolTable();
 
 		return symbolTable.getPrimarySymbol(address);

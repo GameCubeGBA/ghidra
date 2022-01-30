@@ -147,8 +147,7 @@ public class WindowUtilities {
 			return null; // not on screen (don't think this can happen)
 		}
 
-		Point p = c.getLocationOnScreen();
-		return p;
+        return c.getLocationOnScreen();
 	}
 
 	/**
@@ -201,18 +200,17 @@ public class WindowUtilities {
 	private static Point center(Rectangle area, Dimension d) {
 
 		// restrict to bounds size
-		Rectangle b = area;
-		int userWidth = Math.min(b.width, d.width);
-		int userHeigh = Math.min(b.height, d.height);
+        int userWidth = Math.min(area.width, d.width);
+		int userHeigh = Math.min(area.height, d.height);
 
-		int halfScreenWidth = b.width / 2;
+		int halfScreenWidth = area.width / 2;
 		int halfUserWidth = userWidth / 2;
-		int halfScreenHeight = b.height / 2;
+		int halfScreenHeight = area.height / 2;
 		int halfUserHeight = userHeigh / 2;
 		int widthOffset = halfScreenWidth - halfUserWidth;
 		int heightOffset = halfScreenHeight - halfUserHeight;
-		int x = b.x + widthOffset;
-		int y = b.y + heightOffset;
+		int x = area.x + widthOffset;
+		int y = area.y + heightOffset;
 		return new Point(x, y);
 	}
 

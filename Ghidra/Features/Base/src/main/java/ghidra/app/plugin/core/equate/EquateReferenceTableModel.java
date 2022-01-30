@@ -105,9 +105,8 @@ class EquateReferenceTableModel extends GDynamicColumnTableModel<EquateReference
 	@Override
 	public ProgramLocation getProgramLocation(int row, int column) {
 		EquateReference reference = getRowObject(row);
-		OperandFieldLocation loc = new OperandFieldLocation(getProgram(), reference.getAddress(),
-			null, null, null, reference.getOpIndex(), 0);
-		return loc;
+        return new OperandFieldLocation(getProgram(), reference.getAddress(),
+            null, null, null, reference.getOpIndex(), 0);
 	}
 
 	@Override

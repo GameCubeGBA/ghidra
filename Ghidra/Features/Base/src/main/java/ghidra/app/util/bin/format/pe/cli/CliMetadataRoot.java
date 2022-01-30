@@ -358,7 +358,6 @@ public class CliMetadataRoot implements StructConverter, PeMarkupable {
 	public int getBlobOffsetAtIndex(int index) {
 		CliStreamHeader blobHdr = getStreamHeader("#Blob");
 		if (blobHdr == null) return -1; // TODO: this isn't a nice way of doing this
-		int offset = (int) this.fileOffset + blobHdr.getOffset() + index;
-		return offset;
+        return (int) this.fileOffset + blobHdr.getOffset() + index;
 	}
 }

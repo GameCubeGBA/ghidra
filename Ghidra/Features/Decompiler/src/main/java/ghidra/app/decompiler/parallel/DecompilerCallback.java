@@ -77,8 +77,7 @@ public abstract class DecompilerCallback<R> implements QCallback<Function, R> {
 			}
 		}
 
-		R r = process(decompileResults, monitor);
-		return r;
+        return process(decompileResults, monitor);
 
 	}
 

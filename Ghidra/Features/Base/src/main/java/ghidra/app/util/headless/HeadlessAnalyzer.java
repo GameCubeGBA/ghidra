@@ -1369,8 +1369,7 @@ public class HeadlessAnalyzer {
 		}
 
 		// Find files that match the wildcard pattern
-		Pattern p = UserSearchUtils.createSearchPattern(name, true);
-		return p;
+        return UserSearchUtils.createSearchPattern(name, true);
 	}
 
 	private boolean checkOverwrite(DomainFile df) throws IOException {

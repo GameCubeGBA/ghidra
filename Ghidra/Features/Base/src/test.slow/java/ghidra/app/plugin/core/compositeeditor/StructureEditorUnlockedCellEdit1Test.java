@@ -69,15 +69,14 @@ public class StructureEditorUnlockedCellEdit1Test
 		int column = model.getDataTypeColumn();
 		String str = "string";
 		int numComponents = simpleStructure.getNumComponents();
-		int editRow = numComponents;
-		DataType dt = getDataType(editRow);
+        DataType dt = getDataType(numComponents);
 		assertNull(dt);
 		int originalStructSize = 29;
 		int newStringComponentSize = 15;
 
 		assertEquals(originalStructSize, model.getLength());
-		editCell(getTable(), editRow, column);
-		assertIsEditingField(editRow, column);
+		editCell(getTable(), numComponents, column);
+		assertIsEditingField(numComponents, column);
 
 		deleteAllInCellEditor();
 		type(str);
@@ -91,11 +90,11 @@ public class StructureEditorUnlockedCellEdit1Test
 
 		assertNotEditingField();
 		assertEquals(1, model.getNumSelectedRows());
-		assertEquals(editRow + 1, model.getMinIndexSelected());
-		assertCellString(str, editRow, column);
+		assertEquals(numComponents + 1, model.getMinIndexSelected());
+		assertCellString(str, numComponents, column);
 		assertEquals(originalStructSize + newStringComponentSize, model.getLength());
-		assertEquals(-1, getDataType(editRow).getLength());
-		assertEquals(newStringComponentSize, model.getComponent(editRow).getLength());
+		assertEquals(-1, getDataType(numComponents).getLength());
+		assertEquals(newStringComponentSize, model.getComponent(numComponents).getLength());
 		assertEquals(numComponents + 1, model.getNumComponents());
 	}
 
@@ -105,15 +104,14 @@ public class StructureEditorUnlockedCellEdit1Test
 		int column = model.getDataTypeColumn();
 		String str = "string";
 		int numComponents = emptyStructure.getNumComponents();
-		int editRow = numComponents;
-		DataType dt = getDataType(editRow);
+        DataType dt = getDataType(numComponents);
 		assertNull(dt);
 		int originalStructSize = 0;
 		int newStringComponentSize = 15;
 
 		assertEquals(originalStructSize, model.getLength());
-		editCell(getTable(), editRow, column);
-		assertIsEditingField(editRow, column);
+		editCell(getTable(), numComponents, column);
+		assertIsEditingField(numComponents, column);
 
 		deleteAllInCellEditor();
 		type(str);
@@ -127,11 +125,11 @@ public class StructureEditorUnlockedCellEdit1Test
 
 		assertNotEditingField();
 		assertEquals(1, model.getNumSelectedRows());
-		assertEquals(editRow + 1, model.getMinIndexSelected());
-		assertCellString(str, editRow, column);
+		assertEquals(numComponents + 1, model.getMinIndexSelected());
+		assertCellString(str, numComponents, column);
 		assertEquals(newStringComponentSize, model.getLength());
-		assertEquals(-1, getDataType(editRow).getLength());
-		assertEquals(newStringComponentSize, model.getComponent(editRow).getLength());
+		assertEquals(-1, getDataType(numComponents).getLength());
+		assertEquals(newStringComponentSize, model.getComponent(numComponents).getLength());
 		assertEquals(numComponents + 1, model.getNumComponents());
 	}
 

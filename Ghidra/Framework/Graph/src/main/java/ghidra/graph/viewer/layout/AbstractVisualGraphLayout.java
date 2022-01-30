@@ -203,8 +203,7 @@ public abstract class AbstractVisualGraphLayout<V extends VisualVertex,
 		try {
 			monitor = taskMonitor;
 			gridLocations = performInitialGridLayout(g);
-			LayoutPositions<V, E> positions = positionInLayoutSpaceFromGrid(g, gridLocations);
-			return positions;
+            return positionInLayoutSpaceFromGrid(g, gridLocations);
 		}
 		catch (CancelledException ce) {
 			return LayoutPositions.createEmptyPositions();
@@ -455,15 +454,12 @@ public abstract class AbstractVisualGraphLayout<V extends VisualVertex,
 
 		if (!usesEdgeArticulations()) {
 
-			Rectangle bounds =
-				GraphViewerUtils.getBoundsForVerticesInLayoutSpace(vertices, vertexToBounds);
-			return bounds;
+            return GraphViewerUtils.getBoundsForVerticesInLayoutSpace(vertices, vertexToBounds);
 		}
 
 		Function<E, List<Point2D>> edgeToArticulations = e -> Collections.emptyList();
-		Rectangle bounds = GraphViewerUtils.getTotalGraphSizeInLayoutSpace(vertices, edges,
-			vertexToBounds, edgeToArticulations);
-		return bounds;
+        return GraphViewerUtils.getTotalGraphSizeInLayoutSpace(vertices, edges,
+            vertexToBounds, edgeToArticulations);
 	}
 
 	protected void condenseVertices(List<Row<V>> rows, Map<V, Point2D> newLocations,
@@ -673,8 +669,7 @@ public abstract class AbstractVisualGraphLayout<V extends VisualVertex,
 		// The neighbors do not touch, but sometimes this is because our 'vertex' has been
 		// moved to far past the 'otherVertex'.  So, we also have to check the x values.
 
-		boolean crossed = moveRight ? p1.x < p2.x : p1.x > p2.x;
-		return crossed;
+        return moveRight ? p1.x < p2.x : p1.x > p2.x;
 	}
 //==================================================================================================
 // Listener Stuff

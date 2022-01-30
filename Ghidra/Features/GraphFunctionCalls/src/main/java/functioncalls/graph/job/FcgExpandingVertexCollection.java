@@ -146,14 +146,12 @@ public class FcgExpandingVertexCollection {
 		Set<FcgVertex> existingVertices = newVerticesBySource.keySet();
 
 		//@formatter:off		
-		List<FcgVertex> verticesAtLevel = existingVertices
+        //@formatter:on
+
+		return existingVertices
 			.stream()
 			.filter(v -> v.getLevel().equals(level))
-			.collect(Collectors.toList())
-			;					
-		//@formatter:on
-
-		return verticesAtLevel;
+			.collect(Collectors.toList());
 	}
 
 	/**

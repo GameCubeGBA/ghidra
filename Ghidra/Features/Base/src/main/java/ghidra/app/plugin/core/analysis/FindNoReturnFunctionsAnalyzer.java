@@ -742,10 +742,8 @@ public class FindNoReturnFunctionsAnalyzer extends AbstractAnalyzer {
 	public boolean getDefaultEnablement(Program prog) {
 		Language language = prog.getLanguage();
 
-		boolean noReturnEnabled = language.getPropertyAsBoolean(
-			GhidraLanguagePropertyKeys.ENABLE_NO_RETURN_ANALYSIS, true);
-
-		return noReturnEnabled;
+        return language.getPropertyAsBoolean(
+            GhidraLanguagePropertyKeys.ENABLE_NO_RETURN_ANALYSIS, true);
 	}
 
 	@Override

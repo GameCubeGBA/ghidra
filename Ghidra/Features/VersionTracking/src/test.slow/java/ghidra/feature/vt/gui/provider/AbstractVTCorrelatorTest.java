@@ -292,8 +292,7 @@ public abstract class AbstractVTCorrelatorTest extends AbstractGhidraHeadedInteg
 			Address destinationAddress) {
 		Collection<VTMatch> desiredMatches = matchSet.getMatches(sourceAddress, destinationAddress);
 		assertEquals(1, desiredMatches.size());
-		VTMatch matchToApply = desiredMatches.iterator().next();
-		return matchToApply;
+        return desiredMatches.iterator().next();
 	}
 
 	protected boolean hasHigherScore(VTMatch matchA, VTMatch matchB) {

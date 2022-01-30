@@ -388,8 +388,7 @@ public class DataTypesProvider extends ComponentProviderAdapter {
 			public void mouseClicked(MouseEvent e) {
 				super.mouseClicked(e);
 				Point point = e.getPoint();
-				GTreeNode clickedNode = archiveGTree.getNodeForLocation(point.x, point.y);
-				lastClickedNode = clickedNode;
+                lastClickedNode = archiveGTree.getNodeForLocation(point.x, point.y);
 			}
 		});
 
@@ -923,8 +922,7 @@ public class DataTypesProvider extends ComponentProviderAdapter {
 		}
 
 		DataTypeNode dtNode = (DataTypeNode) node;
-		DataType dt = dtNode.getDataType();
-		return dt;
+        return dtNode.getDataType();
 	}
 
 	HistoryList<DataTypeUrl> getNavigationHistory() {

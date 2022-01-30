@@ -49,8 +49,7 @@ public class MemoryTypeProgramLocationBasedTableColumn
 	public MemoryBlock getValue(ProgramLocation rowObject, Settings settings, Program program,
 			ServiceProvider serviceProvider) throws IllegalArgumentException {
 		Memory memory = program.getMemory();
-		MemoryBlock block = memory.getBlock(rowObject.getAddress());
-		return block;
+        return memory.getBlock(rowObject.getAddress());
 	}
 
 	@Override

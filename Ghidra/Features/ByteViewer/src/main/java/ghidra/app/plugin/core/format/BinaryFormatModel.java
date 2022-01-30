@@ -84,8 +84,7 @@ public class BinaryFormatModel implements UniversalDataFormatModel {
 	public String getDataRepresentation(ByteBlock block, BigInteger index)
 			throws ByteBlockAccessException {
 
-		byte b = block.getByte(index);
-		int i = b;
+        int i = block.getByte(index);
 		i &= 0xff;
 
 		String str = Integer.toBinaryString(i);

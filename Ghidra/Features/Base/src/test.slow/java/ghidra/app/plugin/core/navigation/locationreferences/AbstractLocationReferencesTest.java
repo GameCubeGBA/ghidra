@@ -258,8 +258,7 @@ public abstract class AbstractLocationReferencesTest extends AbstractProgramBase
 			}
 		});
 
-		List<LocationReference> list = new ArrayList<>(accumulator.get());
-		return list;
+        return new ArrayList<>(accumulator.get());
 	}
 
 	protected List<Address> getReferenceAddresses(LocationDescriptor locationDescriptor) {
@@ -333,15 +332,13 @@ public abstract class AbstractLocationReferencesTest extends AbstractProgramBase
 	protected List<LocationReference> getResultLocations() {
 		LocationReferencesProvider provider = getResultsProvider();
 		LocationDescriptor descriptor = provider.getLocationDescriptor();
-		List<LocationReference> references = getReferences(descriptor);
-		return references;
+        return getReferences(descriptor);
 	}
 
 	protected List<Address> getResultAddresses() {
 		LocationReferencesProvider provider = getResultsProvider();
 		LocationDescriptor descriptor = provider.getLocationDescriptor();
-		List<Address> addrs = getReferenceAddresses(descriptor);
-		return addrs;
+        return getReferenceAddresses(descriptor);
 	}
 
 	protected String getContextColumnValue(LocationReference rowObject) {

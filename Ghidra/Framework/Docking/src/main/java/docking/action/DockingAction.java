@@ -669,8 +669,7 @@ public abstract class DockingAction implements DockingActionIf {
 		Throwable t = ReflectionUtilities.createThrowableWithStackOlderThan(getClass());
 		StackTraceElement[] trace =
 			ReflectionUtilities.filterStackTrace(t.getStackTrace(), "ActionBuilder");
-		String classInfo = trace[0].toString();
-		return classInfo;
+        return trace[0].toString();
 	}
 
 }

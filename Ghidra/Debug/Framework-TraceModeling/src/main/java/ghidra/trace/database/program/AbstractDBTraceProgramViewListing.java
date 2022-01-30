@@ -664,8 +664,8 @@ public abstract class AbstractDBTraceProgramViewListing implements TraceProgramV
 			TaskMonitor monitor) throws CancelledException {
 		AddressSet result = new AddressSet();
 		for (AddressRange range : getUndefinedRangeIterator(set, true)) {
-			result.add(range);
 			monitor.checkCanceled();
+			result.add(range);
 		}
 		return result;
 	}

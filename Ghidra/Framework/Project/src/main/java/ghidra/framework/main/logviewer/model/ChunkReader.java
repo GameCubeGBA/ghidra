@@ -271,10 +271,9 @@ public class ChunkReader {
 		}
 
 		// Store the end position of the read (where we'll actually start reading from).
-		long endPos = startByte;
 
-		// And now tell the reverser where to start.
-		reverser.setFilePos(endPos);
+        // And now tell the reverser where to start.
+		reverser.setFilePos(startByte);
 
 		// Create a new chunk to represent the next set of lines we'll be reading.
 		Chunk chunk = new Chunk();
@@ -306,7 +305,7 @@ public class ChunkReader {
 		}
 
 		// If we have a valid chunk, store some metadata and add it to the model.
-		addChunkToModel(chunk, lines, raf.getFilePointer(), endPos-1, true);
+		addChunkToModel(chunk, lines, raf.getFilePointer(), startByte -1, true);
 
 		// The lines have been read-in in reverse order, so we have to flip them before 
 		// returning.

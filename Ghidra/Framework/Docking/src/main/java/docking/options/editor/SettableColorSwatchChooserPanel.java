@@ -391,7 +391,7 @@ class MainSwatchPanel extends SwatchPanel {
 	// @formatter:off
     private int[] initRawValues() {
 
-        int[] rawValues = {     
+        return new int[]{
             255, 255, 255, // first row.
             204, 255, 255,
             204, 204, 255,
@@ -577,7 +577,7 @@ class MainSwatchPanel extends SwatchPanel {
             0, 204, 51,
             0, 204, 102,
             0, 204, 153,
-            0, 204, 204, 
+            0, 204, 204,
             102, 102, 102, // seventh row
             0, 153, 153,
             0, 153, 153,
@@ -671,7 +671,6 @@ class MainSwatchPanel extends SwatchPanel {
             0, 51, 51,
             0, 51, 51,
             51, 51, 51 };
-        return rawValues;
     }
     // @formatter:on
 }

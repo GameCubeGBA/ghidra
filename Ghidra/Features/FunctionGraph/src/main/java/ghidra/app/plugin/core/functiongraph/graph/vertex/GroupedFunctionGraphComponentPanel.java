@@ -321,8 +321,7 @@ public class GroupedFunctionGraphComponentPanel extends AbstractGraphComponentPa
 	public Dimension getPreferredSize() {
 		Dimension preferredSize = super.getPreferredSize();
 
-		int headerWidth = genericHeader.getPreferredSize().width;
-		preferredSize.width = headerWidth;
+        preferredSize.width = genericHeader.getPreferredSize().width;
 		return preferredSize;
 	}
 

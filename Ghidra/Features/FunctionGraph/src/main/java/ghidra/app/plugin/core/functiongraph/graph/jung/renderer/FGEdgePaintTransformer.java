@@ -35,7 +35,6 @@ public class FGEdgePaintTransformer implements Function<FGEdge, Paint> {
 	@Override
 	public Paint apply(FGEdge e) {
 		FlowType flowType = e.getFlowType();
-		Color color = options.getColor(flowType);
-		return color;
+        return options.getColor(flowType);
 	}
 }

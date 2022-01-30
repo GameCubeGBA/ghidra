@@ -626,8 +626,7 @@ public class DefineTable {
 			// check if this is a numeric expression that could be simplified
 			//
 			String strValue = getValue(defName);
-			String strExpanded = expand(strValue, true);
-			strValue = strExpanded;
+            strValue = expand(strValue, true);
 
 			// strip off any casting/parentheses
 			strValue = stripCast(strValue);

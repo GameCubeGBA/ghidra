@@ -128,8 +128,7 @@ public class HTMLFileParser {
 			line = line.substring(tagEnd + 1);
 		}
 
-		TagBlock tag = new TagBlock(line, tagBody);
-		return tag;
+        return new TagBlock(line, tagBody);
 	}
 
 	private static TagBlock skipPastCommentEnd(LineNumberReader rdr, Line line, int start)
@@ -151,8 +150,7 @@ public class HTMLFileParser {
 			line = line.substring(index + COMMENT_END_TAG.length());
 		}
 
-		TagBlock tag = new TagBlock(line, comment);
-		return tag;
+        return new TagBlock(line, comment);
 	}
 
 	private static ScanResult getTagName(Line line, int index) throws IOException {

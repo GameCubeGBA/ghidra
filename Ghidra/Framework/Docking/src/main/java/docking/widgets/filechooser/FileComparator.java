@@ -46,9 +46,7 @@ class FileComparator implements Comparator<File> {
 		if (sortBy == SORT_BY_NAME || sortBy == SORT_BY_SIZE) {
 			if (model.isDirectory(file1)) {
 				if (model.isDirectory(file2)) {
-					int value =
-						file1.getAbsolutePath().compareToIgnoreCase(file2.getAbsolutePath());
-					return value;
+                    return file1.getAbsolutePath().compareToIgnoreCase(file2.getAbsolutePath());
 				}
 				return -1; // dirs come before files
 			}

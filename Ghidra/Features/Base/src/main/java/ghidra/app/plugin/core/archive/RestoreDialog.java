@@ -418,16 +418,15 @@ public class RestoreDialog extends DialogComponentProvider {
 				return null; // user cancelled, get out
 			}
 
-			File file = selectedFile;
-			String chosenName = file.getName();
+            String chosenName = selectedFile.getName();
 			if (!NamingUtilities.isValidName(chosenName)) {
 				Msg.showError(getClass(), null, "Invalid Archive Name",
 					chosenName + " is not a valid archive name");
 				continue;
 			}
 
-			Preferences.setProperty(ArchivePlugin.LAST_ARCHIVE_DIR, file.getParent());
-			pathname = file.getAbsolutePath();
+			Preferences.setProperty(ArchivePlugin.LAST_ARCHIVE_DIR, selectedFile.getParent());
+			pathname = selectedFile.getAbsolutePath();
 		}
 		return pathname;
 	}

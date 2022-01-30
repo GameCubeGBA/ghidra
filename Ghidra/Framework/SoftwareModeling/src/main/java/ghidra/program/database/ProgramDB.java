@@ -1262,8 +1262,7 @@ public class ProgramDB extends DomainObjectAdapterDB implements Program, ChangeM
 				}
 			}
 
-			Address oldBase = currentImageBase;
-			addrMap.setImageBase(base);
+            addrMap.setImageBase(base);
 
 			if (commit) {
 				try {
@@ -1271,9 +1270,9 @@ public class ProgramDB extends DomainObjectAdapterDB implements Program, ChangeM
 					storedImageBase = base;
 					imageBaseOverride = false;
 
-					setChanged(ChangeManager.DOCR_IMAGE_BASE_CHANGED, oldBase, base);
+					setChanged(ChangeManager.DOCR_IMAGE_BASE_CHANGED, currentImageBase, base);
 					invalidate();
-					((SymbolManager) managers[SYMBOL_MGR]).imageBaseChanged(oldBase, base);
+					((SymbolManager) managers[SYMBOL_MGR]).imageBaseChanged(currentImageBase, base);
 					changed = true;
 				}
 				catch (IOException e) {

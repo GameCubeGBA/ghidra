@@ -44,9 +44,7 @@ public class PluginDescription implements Comparable<PluginDescription> {
 	 */
 	public static PluginDescription getPluginDescription(Class<? extends Plugin> c) {
 		// TODO: sync the hashmap?
-		PluginDescription cachedPD =
-			CACHE.computeIfAbsent(c, PluginDescription::createPluginDescription);
-		return cachedPD;
+        return CACHE.computeIfAbsent(c, PluginDescription::createPluginDescription);
 	}
 
 	private static HashMap<Class<? extends Plugin>, PluginDescription> CACHE = new HashMap<>();
@@ -278,9 +276,8 @@ public class PluginDescription implements Comparable<PluginDescription> {
 			PluginStatus status, String pluginPackage, String category, String shortDescription,
 			String description) {
 
-		PluginDescription pd = createPluginDescription(pluginClass, status, pluginPackage, category,
-			shortDescription, description, false);
-		return pd;
+        return createPluginDescription(pluginClass, status, pluginPackage, category,
+            shortDescription, description, false);
 	}
 
 	/**

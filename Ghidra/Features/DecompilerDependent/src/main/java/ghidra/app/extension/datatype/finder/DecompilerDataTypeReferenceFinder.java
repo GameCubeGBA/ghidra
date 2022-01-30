@@ -145,8 +145,7 @@ public class DecompilerDataTypeReferenceFinder implements DataTypeReferenceFinde
 		Predicate<Data> dataMatcher = data -> {
 			counter.incrementAndGet();
 			DataType dt = data.getDataType();
-			boolean matches = potentialTypes.contains(dt);
-			return matches;
+            return potentialTypes.contains(dt);
 		};
 
 		FieldMatcher emptyMatcher = new FieldMatcher(dataType);

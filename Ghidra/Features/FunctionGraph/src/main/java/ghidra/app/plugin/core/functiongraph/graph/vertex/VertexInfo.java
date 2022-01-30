@@ -99,29 +99,23 @@ class VertexInfo {
 	Set<FGEdge> getInEdges(FGController controller, FGVertex vertex) {
 
         FGData functionGraphData = controller.getFunctionGraphData();
-		FunctionGraph functionGraph = functionGraphData.getFunctionGraph();
-		Graph<FGVertex, FGEdge> graph = functionGraph;
-		Collection<FGEdge> inEdges = graph.getInEdges(vertex);
+        Collection<FGEdge> inEdges = ((Graph<FGVertex, FGEdge>) functionGraphData.getFunctionGraph()).getInEdges(vertex);
 		if (inEdges == null) {
 			return null;
 		}
 
-        Set<FGEdge> edges = new HashSet<>(inEdges);
-		return edges;
+        return new HashSet<>(inEdges);
 	}
 
 	Set<FGEdge> getOutEdges(FGController controller, FGVertex vertex) {
 
         FGData functionGraphData = controller.getFunctionGraphData();
-		FunctionGraph functionGraph = functionGraphData.getFunctionGraph();
-		Graph<FGVertex, FGEdge> graph = functionGraph;
-		Collection<FGEdge> outEdges = graph.getOutEdges(vertex);
+        Collection<FGEdge> outEdges = ((Graph<FGVertex, FGEdge>) functionGraphData.getFunctionGraph()).getOutEdges(vertex);
 		if (outEdges == null) {
 			return null;
 		}
 
-        Set<FGEdge> edges = new HashSet<>(outEdges);
-		return edges;
+        return new HashSet<>(outEdges);
 	}
 
 	Point2D getVertexLocation() {

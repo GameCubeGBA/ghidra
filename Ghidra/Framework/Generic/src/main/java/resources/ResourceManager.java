@@ -176,8 +176,7 @@ public class ResourceManager {
 		Set<String> testNames = doGetResourceNames(getTestSearchPaths(), dirName, extension);
 		names.addAll(testNames);
 
-		Set<URL> urls = names.stream().map(name -> getResource(name)).collect(Collectors.toSet());
-		return urls;
+        return names.stream().map(name -> getResource(name)).collect(Collectors.toSet());
 	}
 
 	/**
@@ -292,13 +291,12 @@ public class ResourceManager {
 					continue;
 				}
 
-				String startPath = resourceDirName;
-				if (!name.startsWith(startPath)) {
+                if (!name.startsWith(resourceDirName)) {
 					continue;
 				}
 
 				// is it a subdir?
-				name = name.substring(startPath.length() + 1); // strip off valid path info
+				name = name.substring(resourceDirName.length() + 1); // strip off valid path info
 				File entryAsFile = new File(name);
 				if (entryAsFile.getParent() != null) {
 					continue; // the name was a subdir and not simply a file 

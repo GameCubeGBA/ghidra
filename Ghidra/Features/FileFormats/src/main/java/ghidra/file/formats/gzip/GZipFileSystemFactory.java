@@ -34,8 +34,7 @@ public class GZipFileSystemFactory
 			FileSystemService fsService, TaskMonitor monitor)
 			throws IOException, CancelledException {
 
-		GZipFileSystem fs = new GZipFileSystem(byteProvider, targetFSRL, fsService, monitor);
-		return fs;
+        return new GZipFileSystem(byteProvider, targetFSRL, fsService, monitor);
 	}
 
 	@Override

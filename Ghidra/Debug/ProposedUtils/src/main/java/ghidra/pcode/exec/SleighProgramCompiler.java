@@ -36,9 +36,7 @@ public class SleighProgramCompiler {
 
 	public static ConstructTpl compileTemplate(Language language, PcodeParser parser,
 			String sourceName, String text) {
-		ConstructTpl template =
-			Objects.requireNonNull(parser.compilePcode(text, EXPRESSION_SOURCE_NAME, 1));
-		return template;
+        return Objects.requireNonNull(parser.compilePcode(text, EXPRESSION_SOURCE_NAME, 1));
 	}
 
 	public static List<PcodeOp> buildOps(Language language, ConstructTpl template)

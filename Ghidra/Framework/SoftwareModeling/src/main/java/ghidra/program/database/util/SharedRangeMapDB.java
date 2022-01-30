@@ -138,19 +138,18 @@ public class SharedRangeMapDB {
 					DBRecord rangeRec = rangeTable.getRecord(rangeKey);
 
 					// Consoldate range if it overlaps
-					long min = rangeKey;
-					long max = rangeRec.getLongValue(RANGE_TO_COL);
-					if (min <= start) {
+                    long max = rangeRec.getLongValue(RANGE_TO_COL);
+					if (rangeKey <= start) {
 						if (max >= end) {
 							return;
 						}
 						else if (max >= (start - 1)) {
 							mapTable.deleteRecord(mapKey);
 							consolidateRange(rangeKey, max);
-							start = min;
+							start = rangeKey;
 						}
 					}
-					else if (min <= (end + 1)) {
+					else if (rangeKey <= (end + 1)) {
 						mapTable.deleteRecord(mapKey);
 						consolidateRange(rangeKey, max);
 						if (max > end) {

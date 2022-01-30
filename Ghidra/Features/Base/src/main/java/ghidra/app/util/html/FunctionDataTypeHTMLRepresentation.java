@@ -257,8 +257,7 @@ public class FunctionDataTypeHTMLRepresentation extends HTMLDataTypeRepresentati
 		//
 		DataType dataType = line.getDataType();
 		DataTypeUrl url = new DataTypeUrl(dataType);
-		String wrapped = HTMLUtilities.wrapWithLinkPlaceholder(type, url.toString());
-		return wrapped;
+        return HTMLUtilities.wrapWithLinkPlaceholder(type, url.toString());
 	}
 
 	@Override

@@ -32,8 +32,7 @@ import ghidra.graph.viewer.*;
 public interface VisualGraphMousePlugin<V extends VisualVertex, E extends VisualEdge<V>> {
 
 	public default VisualizationViewer<V, E> getViewer(MouseEvent e) {
-		GraphViewer<V, E> viewer = getGraphViewer(e);
-		return viewer;
+        return getGraphViewer(e);
 	}
 
 	/**
@@ -52,8 +51,7 @@ public interface VisualGraphMousePlugin<V extends VisualVertex, E extends Visual
 		}
 
 		if (viewer instanceof GraphViewer) {
-			GraphViewer<V, E> graphViewer = (GraphViewer<V, E>) viewer;
-			return graphViewer;
+            return (GraphViewer<V, E>) viewer;
 		}
 
 		throw new IllegalStateException("Do not have a master or satellite GraphViewer");
@@ -87,8 +85,7 @@ public interface VisualGraphMousePlugin<V extends VisualVertex, E extends Visual
 	 */
 	public default VisualGraphViewUpdater<V, E> getViewUpdater(MouseEvent e) {
 		GraphViewer<V, E> viewer = getGraphViewer(e);
-		VisualGraphViewUpdater<V, E> updater = viewer.getViewUpdater();
-		return updater;
+        return viewer.getViewUpdater();
 	}
 
 	/**
@@ -98,8 +95,7 @@ public interface VisualGraphMousePlugin<V extends VisualVertex, E extends Visual
 	 * @return the updater
 	 */
 	public default VisualGraphViewUpdater<V, E> getViewUpdater(GraphViewer<V, E> viewer) {
-		VisualGraphViewUpdater<V, E> updater = viewer.getViewUpdater();
-		return updater;
+        return viewer.getViewUpdater();
 	}
 
 	/**

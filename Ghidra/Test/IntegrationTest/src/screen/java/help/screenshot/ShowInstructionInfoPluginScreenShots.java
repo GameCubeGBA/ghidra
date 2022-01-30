@@ -157,8 +157,7 @@ public class ShowInstructionInfoPluginScreenShots extends GhidraScreenShotGenera
 	private StatusBar getStatusBar() {
 		DockingWindowManager windowManager = tool.getWindowManager();
 		Object root = getInstanceField("root", windowManager);
-		StatusBar statusBar = (StatusBar) getInstanceField("statusBar", root);
-		return statusBar;
+        return (StatusBar) getInstanceField("statusBar", root);
 	}
 
 	private Point getEndOfRow(CodeBrowserPlugin cb, ListingPanel listingPanel, Window window) {

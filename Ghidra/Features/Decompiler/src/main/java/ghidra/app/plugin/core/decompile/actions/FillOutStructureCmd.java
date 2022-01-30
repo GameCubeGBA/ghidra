@@ -525,9 +525,8 @@ public class FillOutStructureCmd extends BackgroundCommand {
 		}
 		String structName = createUniqueStructName(var, DEFAULT_CATEGORY, DEFAULT_BASENAME);
 
-		StructureDataType dt = new StructureDataType(new CategoryPath(DEFAULT_CATEGORY), structName,
-			size, f.getProgram().getDataTypeManager());
-		return dt;
+        return new StructureDataType(new CategoryPath(DEFAULT_CATEGORY), structName,
+            size, f.getProgram().getDataTypeManager());
 	}
 
 	private Namespace createUniqueClassName(Namespace rootNamespace) {

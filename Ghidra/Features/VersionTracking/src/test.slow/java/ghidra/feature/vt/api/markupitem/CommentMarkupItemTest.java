@@ -63,16 +63,15 @@ public class CommentMarkupItemTest extends AbstractVTMarkupItemTest {
     public void testFindAndApplyMarkupItem_Merge_WithNullDestinationValue() throws Exception {
 		String sourceComment = "Hi mom merge";
 		String destinationComment = null;
-		String appliedComment = sourceComment;
 
-		String commentAddressString = "0x01002d06";
+    String commentAddressString = "0x01002d06";
 		Address commentAddress = addr(commentAddressString, destinationProgram);
 		setComment(sourceProgram, sourceComment, commentAddress);
 		setComment(destinationProgram, destinationComment, commentAddress);
 
 		CommentValidator validator =
 			new CommentValidator("0x01002cf5", "0x01002cf5", commentAddress, sourceComment,
-				destinationComment, appliedComment, CodeUnit.EOL_COMMENT,
+				destinationComment, sourceComment, CodeUnit.EOL_COMMENT,
 				CommentChoices.APPEND_TO_EXISTING);
 		doTestFindAndApplyMarkupItem(validator);
 	}
@@ -81,16 +80,15 @@ public class CommentMarkupItemTest extends AbstractVTMarkupItemTest {
     public void testFindAndApplyMarkupItem_Replace_WithNonNullDestinationValue() throws Exception {
 		String sourceComment = "Hi mom merge";
 		String destinationComment = "Hi dad merge";
-		String appliedComment = sourceComment;
 
-		String commentAddressString = "0x01002d06";
+    String commentAddressString = "0x01002d06";
 		Address commentAddress = addr(commentAddressString, destinationProgram);
 		setComment(sourceProgram, sourceComment, commentAddress);
 		setComment(destinationProgram, destinationComment, commentAddress);
 
 		CommentValidator validator =
 			new CommentValidator("0x01002cf5", "0x01002cf5", commentAddress, sourceComment,
-				destinationComment, appliedComment, CodeUnit.EOL_COMMENT,
+				destinationComment, sourceComment, CodeUnit.EOL_COMMENT,
 				CommentChoices.OVERWRITE_EXISTING);
 		doTestFindAndApplyMarkupItem(validator);
 	}
@@ -99,16 +97,15 @@ public class CommentMarkupItemTest extends AbstractVTMarkupItemTest {
     public void testFindAndApplyMarkupItem_Replace_WithNullDestinationValue() throws Exception {
 		String sourceComment = "Hi mom merge";
 		String destinationComment = null;
-		String appliedComment = sourceComment;
 
-		String commentAddressString = "0x01002d06";
+    String commentAddressString = "0x01002d06";
 		Address commentAddress = addr(commentAddressString, destinationProgram);
 		setComment(sourceProgram, sourceComment, commentAddress);
 		setComment(destinationProgram, destinationComment, commentAddress);
 
 		CommentValidator validator =
 			new CommentValidator("0x01002cf5", "0x01002cf5", commentAddress, sourceComment,
-				destinationComment, appliedComment, CodeUnit.EOL_COMMENT,
+				destinationComment, sourceComment, CodeUnit.EOL_COMMENT,
 				CommentChoices.OVERWRITE_EXISTING);
 		doTestFindAndApplyMarkupItem(validator);
 	}
@@ -117,16 +114,15 @@ public class CommentMarkupItemTest extends AbstractVTMarkupItemTest {
     public void testFindAndApplyMarkupItem_IgnoreAction() throws Exception {
 		String sourceComment = "Hi mom merge";
 		String destinationComment = null;
-		String appliedComment = destinationComment; // the comment is not applied
 
-		String commentAddressString = "0x01002d06";
+    String commentAddressString = "0x01002d06";
 		Address commentAddress = addr(commentAddressString, destinationProgram);
 		setComment(sourceProgram, sourceComment, commentAddress);
 		setComment(destinationProgram, destinationComment, commentAddress);
 
 		CommentValidator validator =
 			new CommentValidator("0x01002cf5", "0x01002cf5", commentAddress, sourceComment,
-				destinationComment, appliedComment, CodeUnit.EOL_COMMENT, CommentChoices.EXCLUDE);
+				destinationComment, destinationComment, CodeUnit.EOL_COMMENT, CommentChoices.EXCLUDE);
 		doTestFindAndApplyMarkupItem(validator);
 	}
 

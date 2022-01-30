@@ -290,8 +290,7 @@ public class GHelpHTMLEditorKit extends HTMLEditorKit {
 			Msg.debug(this, "Unable to read the lines of the help style sheet: " + url);
 		}
 
-		StringReader reader = new StringReader(buffy.toString());
-		return reader;
+        return new StringReader(buffy.toString());
 	}
 
 	private void changePixels(String line, int amount, StringBuffer buffy) {
@@ -309,8 +308,7 @@ public class GHelpHTMLEditorKit extends HTMLEditorKit {
 	private String adjustFontSize(String sizeString) {
 		try {
 			int size = Integer.parseInt(sizeString);
-			String adjusted = Integer.toString(size + fontSizeModifier);
-			return adjusted;
+            return Integer.toString(size + fontSizeModifier);
 		}
 		catch (NumberFormatException e) {
 			Msg.debug(this, "Unable to parse font size string '" + sizeString + "'");
@@ -485,8 +483,7 @@ public class GHelpHTMLEditorKit extends HTMLEditorKit {
 				return installImageFromJavaCode(srcString);
 			}
 
-			URL url = doGetImageURL(srcString);
-			return url;
+            return doGetImageURL(srcString);
 		}
 
 		private URL installImageFromJavaCode(String srcString) {
@@ -499,8 +496,7 @@ public class GHelpHTMLEditorKit extends HTMLEditorKit {
 			ImageIcon imageIcon = iconProvider.getIcon();
 			this.image = imageIcon.getImage();
 
-			URL url = iconProvider.getOrCreateUrl();
-			return url;
+            return iconProvider.getOrCreateUrl();
 		}
 
 		private URL doGetImageURL(String srcString) {
@@ -520,8 +516,7 @@ public class GHelpHTMLEditorKit extends HTMLEditorKit {
 
 			// Try the ResourceManager.  This will work for images that start with GHelp 
 			// relative link syntax such as 'help/', 'help/topics/' and 'images/'
-			URL resource = ResourceManager.getResource(srcString);
-			return resource;
+            return ResourceManager.getResource(srcString);
 		}
 
 		private boolean isJavaCode(String src) {

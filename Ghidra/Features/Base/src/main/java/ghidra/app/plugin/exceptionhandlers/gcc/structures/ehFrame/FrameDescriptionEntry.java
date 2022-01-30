@@ -325,8 +325,7 @@ public class FrameDescriptionEntry extends GccAnalysisClass {
 		curSize += dtLength;
 
 		try {
-			Address nextAddr = addr.add(dtLength);
-			return nextAddr;
+            return addr.add(dtLength);
 		}
 		catch (AddressOutOfBoundsException e) {
 			// At the end of the block so return null.

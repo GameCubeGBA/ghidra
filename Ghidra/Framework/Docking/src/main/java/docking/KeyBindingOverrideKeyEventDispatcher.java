@@ -249,8 +249,7 @@ public class KeyBindingOverrideKeyEventDispatcher implements KeyEventDispatcher 
 
 		Component destination = event.getComponent();
 		if (destination == null) {
-			Component focusOwner = focusProvider.getFocusOwner();
-			destination = focusOwner;
+            destination = focusProvider.getFocusOwner();
 		}
 
 		if (!(destination instanceof JTextComponent)) {
@@ -438,9 +437,7 @@ public class KeyBindingOverrideKeyEventDispatcher implements KeyEventDispatcher 
 		}
 
 		KeyStroke keyStroke = KeyStroke.getKeyStrokeForEvent(event);
-		DockingKeyBindingAction bindingAction =
-			(DockingKeyBindingAction) activeManager.getActionForKeyStroke(keyStroke);
-		return bindingAction;
+        return (DockingKeyBindingAction) activeManager.getActionForKeyStroke(keyStroke);
 	}
 
 	private DockingWindowManager getActiveDockingWindowManager() {

@@ -208,9 +208,7 @@ public abstract class PluginTool extends AbstractDockingTool {
 			boolean isModal) {
 
 		List<Image> windowIcons = ApplicationInformationDisplayFactory.getWindowIcons();
-		DockingWindowManager newManager =
-			new DockingWindowManager(this, windowIcons, isModal, isDockable, hasStatus, null);
-		return newManager;
+        return new DockingWindowManager(this, windowIcons, isModal, isDockable, hasStatus, null);
 	}
 
 	protected void installHomeButton() {

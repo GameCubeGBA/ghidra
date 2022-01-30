@@ -32,9 +32,7 @@ public class CompLzssFileSystemFactory
 	public CompLzssFileSystem create(FSRLRoot targetFSRL, ByteProvider byteProvider,
 			FileSystemService fsService, TaskMonitor monitor)
 			throws IOException, CancelledException {
-		CompLzssFileSystem fs =
-			new CompLzssFileSystem(targetFSRL, byteProvider, fsService, monitor);
-		return fs;
+        return new CompLzssFileSystem(targetFSRL, byteProvider, fsService, monitor);
 	}
 
 	@Override

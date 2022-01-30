@@ -36,8 +36,7 @@ public class MatchesExactlyTextFilter extends MatchesPatternTextFilter {
 			options |= Pattern.CASE_INSENSITIVE;
 		}
 
-		Pattern pattern = UserSearchUtils.createPattern(filterText, allowGlobbing, options);
-		return pattern;
+        return UserSearchUtils.createPattern(filterText, allowGlobbing, options);
 	}
 
 	@Override

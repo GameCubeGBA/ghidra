@@ -362,8 +362,7 @@ public class DynamicSymbolTableCommand extends LoadCommand {
 		}
 		int id = 0;
 		Address dyrefStartAddr = baseAddress.getNewAddress(getReferencedSymbolTableOffset());
-		Address dyrefAddr = dyrefStartAddr;
-		int offset = 0;
+        int offset = 0;
 		for (DynamicLibraryReference dyref : getReferencedSymbolList()) {
 			if (monitor.isCancelled()) {
 				return;
@@ -376,7 +375,7 @@ public class DynamicSymbolTableCommand extends LoadCommand {
 
 			DynamicLibraryModule module = findModuleContaining(id);
 
-			api.setPlateComment(dyrefAddr, "0x" + Integer.toHexString(id) + " -- " +
+			api.setPlateComment(dyrefStartAddr, "0x" + Integer.toHexString(id) + " -- " +
 				module.getModuleName() + "::" + dyrefSym.getString());
 
 			offset += dyrefDT.getLength();

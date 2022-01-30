@@ -283,8 +283,7 @@ public class RTTIWindowsClassRecoverer extends RTTIClassRecoverer {
 
 		createMissingBaseClassArrays(classHierarchyDescriptors);
 
-		List<Symbol> vftableSymbols = createMissingVftableSymbols(completeObjectLocatorSymbols);
-		return vftableSymbols;
+        return createMissingVftableSymbols(completeObjectLocatorSymbols);
 
 	}
 
@@ -950,10 +949,8 @@ public class RTTIWindowsClassRecoverer extends RTTIClassRecoverer {
 	 */
 	private List<Symbol> getListOfClassHierarchyDescriptors() throws CancelledException {
 
-		List<Symbol> classHierarchyDescriptorList = extendedFlatAPI.getListOfSymbolsInAddressSet(
-			getInitializedMemory(), RTTI_CLASS_HIERARCHY_DESCRIPTOR_LABEL, false);
-
-		return classHierarchyDescriptorList;
+        return extendedFlatAPI.getListOfSymbolsInAddressSet(
+            getInitializedMemory(), RTTI_CLASS_HIERARCHY_DESCRIPTOR_LABEL, false);
 	}
 
 	/**
@@ -2585,9 +2582,8 @@ public class RTTIWindowsClassRecoverer extends RTTIClassRecoverer {
 		if (namespace.equals(globalNamespace)) {
 			return null;
 		}
-		RecoveredClass baseClass = getClass(namespace);
 
-		return baseClass;
+        return getClass(namespace);
 	}
 
 	/**

@@ -90,8 +90,7 @@ public class ByteSequenceTableModel extends ThreadedTableModelStub<ByteSequenceR
 		if (rows.size() == 0) {
 			return null;
 		}
-		DittedBitSequence currentMerge = ByteSequenceRowObject.merge(rows);
-		return currentMerge;
+        return ByteSequenceRowObject.merge(rows);
 	}
 
 	//==================================================================================================

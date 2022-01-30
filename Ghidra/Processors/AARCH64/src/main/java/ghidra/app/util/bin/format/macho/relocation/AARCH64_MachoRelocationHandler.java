@@ -72,8 +72,7 @@ public class AARCH64_MachoRelocationHandler extends MachoRelocationHandler {
 		switch (relocationInfo.getType()) {
 			case ARM64_RELOC_UNSIGNED:
 			case ARM64_RELOC_POINTER_TO_GOT: {
-				long addend = orig;
-				long value = targetAddr.getOffset() + addend;
+                long value = targetAddr.getOffset() + orig;
 				write(relocation, value);
 				break;
 			}

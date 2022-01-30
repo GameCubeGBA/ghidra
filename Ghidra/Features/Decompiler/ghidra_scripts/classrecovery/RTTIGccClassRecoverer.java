@@ -169,8 +169,7 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 	 */
 	private boolean hasSpecialVtable() throws CancelledException, InvalidInputException {
 
-		boolean hasSpecialVtable = createSpecialVtables();
-		return hasSpecialVtable;
+        return createSpecialVtables();
 
 	}
 
@@ -619,9 +618,8 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 
 		if (namespacesByPath.isEmpty()) {
 
-			Namespace newNamespace = NamespaceUtils.createNamespaceHierarchy(name, vtableNamespace,
-				program, SourceType.ANALYSIS);
-			return newNamespace;
+            return NamespaceUtils.createNamespaceHierarchy(name, vtableNamespace,
+                program, SourceType.ANALYSIS);
 
 		}
 		if (namespacesByPath.size() == 1) {
@@ -1509,9 +1507,8 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 
 		// create the new typeinfo symbol in the demangled namespace
 
-		Symbol newSymbol = symbolTable.createLabel(typeinfoAddress, "typeinfo", classNamespace,
-			SourceType.ANALYSIS);
-		return newSymbol;
+        return symbolTable.createLabel(typeinfoAddress, "typeinfo", classNamespace,
+            SourceType.ANALYSIS);
 	}
 
 	private Namespace createTypeinfoClassNamespace(String namespaceString)
@@ -1990,9 +1987,7 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 
 		List<RecoveredClass> parentClassList = new ArrayList<RecoveredClass>();
 
-		int numParents = numBaseClasses;
-
-		for (int i = 0; i < numParents; i++) {
+        for (int i = 0; i < numBaseClasses; i++) {
 
 			// get parent from pointer to parent typeinfo
 			Address parentRefAddress =
@@ -2084,7 +2079,7 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 		}
 
 		if (DEBUG) {
-			Msg.debug(this, recoveredClass.getName() + " has " + numParents + " parents");
+			Msg.debug(this, recoveredClass.getName() + " has " + numBaseClasses + " parents");
 		}
 
 		classToParentOrderMap.put(recoveredClass, orderToParentMap);
@@ -2113,9 +2108,7 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 
 		}
 
-		RecoveredClass parentClass = getParentClassFromParentTypeInfoRef(parentTypeinfoRef);
-
-		return parentClass;
+        return getParentClassFromParentTypeInfoRef(parentTypeinfoRef);
 
 	}
 
@@ -2633,8 +2626,7 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 	 */
 	private Address getAddress(Address address, int offset) {
 		try {
-			Address newAddress = address.add(offset);
-			return newAddress;
+            return address.add(offset);
 		}
 		catch (AddressOutOfBoundsException e) {
 			return null;

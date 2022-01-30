@@ -62,9 +62,7 @@ public class EolCommentMarkupType extends CommentMarkupType {
 
 	@Override
 	public VTMatchApplyChoices.CommentChoices getCommentChoice(ToolOptions options) {
-		VTMatchApplyChoices.CommentChoices commentChoice =
-			options.getEnum(VTOptionDefines.END_OF_LINE_COMMENT, CommentChoices.APPEND_TO_EXISTING);
-		return commentChoice;
+        return options.getEnum(VTOptionDefines.END_OF_LINE_COMMENT, CommentChoices.APPEND_TO_EXISTING);
 	}
 
 	@Override

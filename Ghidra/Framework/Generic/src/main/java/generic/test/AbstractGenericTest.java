@@ -205,8 +205,7 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 	}
 
 	protected ApplicationConfiguration createApplicationConfiguration() {
-		ApplicationConfiguration configuration = new ApplicationConfiguration();
-		return configuration;
+        return new ApplicationConfiguration();
 	}
 
 	/**
@@ -1267,9 +1266,7 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 		//
 		String message = "Exception in Swing thread via runSwingAndWait():";
 		if (!BATCH_MODE) {
-			TestReportingException exception =
-				TestReportingException.fromSwingThread(message, throwable);
-			throw exception;
+            throw TestReportingException.fromSwingThread(message, throwable);
 		}
 
 		//
@@ -1599,8 +1596,7 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 			TimeUnit.MILLISECONDS.convert(end - start, TimeUnit.NANOSECONDS));
 		*/
 
-		boolean wasEverBusy = waitForSwing(set, true);
-		return wasEverBusy;
+        return waitForSwing(set, true);
 	}
 
 	private static boolean waitForSwing(Set<AbstractSwingUpdateManager> managers, boolean flush) {
@@ -1835,8 +1831,7 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 	 * @see #createTempFilePath(String, String)
 	 */
 	public String createTempFilePath(String name) throws IOException {
-		String path = createTempFilePath(name, ".tmp");
-		return path;
+        return createTempFilePath(name, ".tmp");
 	}
 
 	/**
@@ -1902,8 +1897,7 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 	 * @see #createTempFile(String, String)
 	 */
 	public File createTempFile(String name) throws IOException {
-		File file = createTempFile(name, ".tmp");
-		return file;
+        return createTempFile(name, ".tmp");
 	}
 
 	/**
@@ -1979,8 +1973,7 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 		String tempPath = getTestDirectoryPath();
 		File testTempDir = new File(tempPath);
 		File[] oldFiles = testTempDir.listFiles((dir, filename) -> {
-			boolean matches = pattern.matcher(filename).matches();
-			return matches;
+            return pattern.matcher(filename).matches();
 		});
 
 		for (File file : oldFiles) {

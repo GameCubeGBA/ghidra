@@ -203,10 +203,7 @@ public class GroupedFunctionGraphVertex extends AbstractFunctionGraphVertex {
 		HashSet<FGVertex> newVertices = new HashSet<>(vertices);
 		newVertices.addAll(additionalGroupedVertices);
 
-		GroupedFunctionGraphVertex newVertex =
-			new GroupedFunctionGraphVertex(getController(), groupVertexText, newVertices, newEdges);
-
-		return newVertex;
+        return new GroupedFunctionGraphVertex(getController(), groupVertexText, newVertices, newEdges);
 	}
 
 	/**
@@ -230,10 +227,7 @@ public class GroupedFunctionGraphVertex extends AbstractFunctionGraphVertex {
 			return null;
 		}
 
-		GroupedFunctionGraphVertex newVertex =
-			new GroupedFunctionGraphVertex(getController(), getUserText(), newVertices, newEdges);
-
-		return newVertex;
+        return new GroupedFunctionGraphVertex(getController(), getUserText(), newVertices, newEdges);
 	}
 
 	private void removeIncidentEdges(FGVertex vertex, Set<FGEdge> newEdges) {

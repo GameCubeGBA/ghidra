@@ -134,8 +134,7 @@ public class DelegateDbgModel2TargetObject extends DbgModel2TargetObjectImpl imp
 	public static DbgModelTargetObject makeProxy(DbgModel2Impl model, DbgModelTargetObject parent,
 			String key, ModelObject object) {
 		List<Class<? extends TargetObject>> mixins = new ArrayList<>();
-		String lkey = key;
-		String pname = parent.getName();
+        String pname = parent.getName();
 
 		/*
 		if (object.getKind().equals(ModelObjectKind.OBJECT_METHOD) || lkey.contains(")")) {
@@ -152,7 +151,7 @@ public class DelegateDbgModel2TargetObject extends DbgModel2TargetObjectImpl imp
 			mixins.add(DbgModelTargetMethod.class);
 		}
 		else {
-			Class<? extends DbgModelTargetObject> mixin = lookupWrapperType(lkey, pname);
+			Class<? extends DbgModelTargetObject> mixin = lookupWrapperType(key, pname);
 			if (mixin != null) {
 				mixins.add(mixin);
 			}
@@ -205,9 +204,7 @@ public class DelegateDbgModel2TargetObject extends DbgModel2TargetObjectImpl imp
 		if (mixin != null) {
 			mixins.add(mixin);
 		}
-		DelegateDbgModel2TargetObject delegate =
-			new DelegateDbgModel2TargetObject(getModel(), p, key, modelObject, mixins);
-		return delegate;
+        return new DelegateDbgModel2TargetObject(getModel(), p, key, modelObject, mixins);
 	}
 
 	@Override

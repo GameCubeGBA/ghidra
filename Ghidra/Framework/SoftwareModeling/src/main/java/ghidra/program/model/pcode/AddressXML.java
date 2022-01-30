@@ -432,8 +432,7 @@ public class AddressXML {
 			attrstart += 6;
 			int attrend = addrxml.indexOf('\"', attrstart);
 			if (attrend > attrstart) {
-				int size = SpecXmlUtils.decodeInt(addrxml.substring(attrstart, attrend));
-				return size;
+                return SpecXmlUtils.decodeInt(addrxml.substring(attrstart, attrend));
 			}
 		}
 		return 0;

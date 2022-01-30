@@ -268,13 +268,12 @@ class SymbolTableModel extends AddressBasedTableModel<Symbol> {
 	}
 
 	void symbolChanged(Symbol s) {
-		Symbol Symbol = s;
-		if (filter.accepts(s, getProgram())) {
-			updateObject(Symbol);
+        if (filter.accepts(s, getProgram())) {
+			updateObject(s);
 		}
 		else {
 			// the symbol may be in the table, as it could have passed the filter before the change
-			removeObject(Symbol);
+			removeObject(s);
 		}
 	}
 

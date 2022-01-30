@@ -474,8 +474,7 @@ public abstract class ClangHighlightController {
 		add(allColors, primaryHl);
 		add(allColors, blendedHlColor);
 
-		Color blended = blend(allColors);
-		return blended;
+        return blend(allColors);
 	}
 
 	public Color blend(List<Color> colors) {

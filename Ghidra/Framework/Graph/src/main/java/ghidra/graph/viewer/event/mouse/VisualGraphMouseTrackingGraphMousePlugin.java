@@ -149,8 +149,7 @@ public class VisualGraphMouseTrackingGraphMousePlugin<V extends VisualVertex,
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		Point p = e.getPoint();
-		down = p;
+        down = e.getPoint();
 	}
 
 	@Override

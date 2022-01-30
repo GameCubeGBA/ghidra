@@ -41,8 +41,7 @@ public class FcgView extends VisualGraphView<FcgVertex, FcgEdge, FunctionCallGra
 
 	private FcgComponent createGraphComponent() {
 
-		FcgComponent component = new FcgComponent(getVisualGraph());
-		return component;
+        return new FcgComponent(getVisualGraph());
 	}
 
 	@Override

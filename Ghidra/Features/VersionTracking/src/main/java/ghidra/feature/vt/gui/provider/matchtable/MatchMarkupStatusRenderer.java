@@ -167,7 +167,6 @@ public class MatchMarkupStatusRenderer extends AbstractGhidraColumnRenderer<VTMa
 		VTAssociation association = t.getAssociation();
 		VTAssociationMarkupStatus markupStatus = association.getMarkupStatus();
 		String htmlDescription = getDescription(markupStatus);
-		String raw = HTMLUtilities.fromHTML(htmlDescription);
-		return raw;
+        return HTMLUtilities.fromHTML(htmlDescription);
 	}
 }

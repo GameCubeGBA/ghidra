@@ -395,8 +395,7 @@ public class VisualGraphViewUpdater<V extends VisualVertex, E extends VisualEdge
 			}
 		}
 
-		boolean busy = jobRunner.isBusy();
-		return busy;
+        return jobRunner.isBusy();
 	}
 
 	/**
@@ -405,8 +404,7 @@ public class VisualGraphViewUpdater<V extends VisualVertex, E extends VisualEdge
 	 * @return true if busy
 	 */
 	public boolean isMutatingGraph() {
-		boolean busy = jobRunner.isBusy();
-		return busy;
+        return jobRunner.isBusy();
 	}
 
 //==================================================================================================

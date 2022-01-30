@@ -565,9 +565,8 @@ public class FormatStringParser {
 		}
 		List<DataType> dataTypeList = formatArguments.stream().map(argument -> {
 			String conversionSpecifier = argument.getConversionSpecifier();
-			DataType dt = convertPairToDataType(argument.getLengthModifier(),
-				conversionSpecifier.equals("*") ? "d" : conversionSpecifier);
-			return dt;
+            return convertPairToDataType(argument.getLengthModifier(),
+                conversionSpecifier.equals("*") ? "d" : conversionSpecifier);
 		}).collect(Collectors.toList());
 		return dataTypeList.contains(null) ? null
 				: dataTypeList.toArray(DataType[]::new);

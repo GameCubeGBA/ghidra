@@ -143,9 +143,7 @@ public class DmgClientFileSystem implements GFileSystem {
 			if (!extractedFile.exists() || extractedFile.length() == 0) {
 				return null;
 			}
-			ByteProvider fileProvider =
-				fsService.pushFileToCache(extractedFile, file.getFSRL(), monitor);
-			return fileProvider;
+            return fsService.pushFileToCache(extractedFile, file.getFSRL(), monitor);
 		}
 		finally {
 			monitor.removeCancelledListener(listener);

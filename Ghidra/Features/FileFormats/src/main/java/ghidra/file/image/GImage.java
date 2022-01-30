@@ -73,8 +73,7 @@ public class GImage {
 			imageOut.close();
 		}
 
-		Icon icon = new ImageIcon(bufferedImage);
-		return icon;
+        return new ImageIcon(bufferedImage);
 	}
 
 	private ImageWriter getImageWriter(String format) throws IOException {
@@ -82,8 +81,7 @@ public class GImage {
 		if (!imageWriters.hasNext()) {
 			throw new IOException("No image writer found for PNG.");
 		}
-		ImageWriter imageWriter = imageWriters.next();
-		return imageWriter;
+        return imageWriters.next();
 	}
 
 	private int [] packDataIntoArray(GImageFormat format, InputStream data, long dataLength) throws IOException {

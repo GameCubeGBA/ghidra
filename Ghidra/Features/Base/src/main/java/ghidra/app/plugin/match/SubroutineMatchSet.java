@@ -62,8 +62,7 @@ public class SubroutineMatchSet extends ArrayList<SubroutineMatch> {
 	 * @return The sorted array of matches.
 	 */
 	public SubroutineMatch[] getMatches() {
-		SubroutineMatch[] theMatches = this.toArray(new SubroutineMatch[0]);
-		return theMatches;
+        return this.toArray(new SubroutineMatch[0]);
 	}
 
 //	/**

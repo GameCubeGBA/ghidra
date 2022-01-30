@@ -194,9 +194,8 @@ public class ToolScreenShots extends GhidraScreenShotGenerator {
 		int textY = textTopMargin + metrics.getHeight();
 		int arrowX = bounds.x + bounds.width / 2 + leftMargin;
 		int arrowStartY = textY + 5;
-		int arrowEndY = topMargin;
-		drawText(label, Color.BLACK, new Point(textX, textY), font);
-		drawArrow(Color.BLACK, 1, new Point(arrowX, arrowStartY), new Point(arrowX, arrowEndY), 9);
+        drawText(label, Color.BLACK, new Point(textX, textY), font);
+		drawArrow(Color.BLACK, 1, new Point(arrowX, arrowStartY), new Point(arrowX, topMargin), 9);
 	}
 
 	private int getTextStart(Rectangle bounds, FontMetrics metrics, String string) {

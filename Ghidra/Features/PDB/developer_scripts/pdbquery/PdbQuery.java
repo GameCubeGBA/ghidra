@@ -61,8 +61,7 @@ public class PdbQuery {
 			return new PrimitiveMsType(pdb, number);
 		}
 		RecordNumber recordNumber = RecordNumber.typeRecordNumber(number);
-		AbstractMsType typeRecord = pdb.getTypeRecord(recordNumber);
-		return typeRecord;
+        return pdb.getTypeRecord(recordNumber);
 	}
 
 	/**
@@ -95,8 +94,7 @@ public class PdbQuery {
 			return new PrimitiveMsType(pdb, number);
 		}
 		RecordNumber recordNumber = RecordNumber.itemRecordNumber(number);
-		AbstractMsType typeRecord = pdb.getTypeRecord(recordNumber);
-		return typeRecord;
+        return pdb.getTypeRecord(recordNumber);
 	}
 
 	/**

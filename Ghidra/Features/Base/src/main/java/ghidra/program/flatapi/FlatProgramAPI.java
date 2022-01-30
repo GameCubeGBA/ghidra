@@ -742,8 +742,7 @@ public class FlatProgramAPI {
 		AddressFactory factory = currentProgram.getAddressFactory();
 		AddressSet addressRange = factory.getAddressSet(start, memory.getMaxAddress());
 
-		Address[] bytes = findBytes(addressRange, byteString, matchLimit, alignment, false);
-		return bytes;
+        return findBytes(addressRange, byteString, matchLimit, alignment, false);
 	}
 
 	/**
@@ -2107,9 +2106,8 @@ public class FlatProgramAPI {
 	public final Reference createMemoryReference(Instruction instruction, int operandIndex,
 			Address toAddress, RefType flowType) {
 		ReferenceManager referenceManager = currentProgram.getReferenceManager();
-		Reference ref = referenceManager.addMemoryReference(instruction.getMinAddress(), toAddress,
-			flowType, SourceType.USER_DEFINED, operandIndex);
-		return ref;
+        return referenceManager.addMemoryReference(instruction.getMinAddress(), toAddress,
+            flowType, SourceType.USER_DEFINED, operandIndex);
 	}
 
 	/**
@@ -2122,9 +2120,8 @@ public class FlatProgramAPI {
 	public final Reference createMemoryReference(Data data, Address toAddress,
 			RefType dataRefType) {
 		ReferenceManager referenceManager = currentProgram.getReferenceManager();
-		Reference ref = referenceManager.addMemoryReference(data.getMinAddress(), toAddress,
-			dataRefType, SourceType.USER_DEFINED, 0);
-		return ref;
+        return referenceManager.addMemoryReference(data.getMinAddress(), toAddress,
+            dataRefType, SourceType.USER_DEFINED, 0);
 	}
 
 	/**
@@ -2180,10 +2177,8 @@ public class FlatProgramAPI {
 			String libraryName, String externalLabel, Address externalAddr, RefType refType)
 			throws Exception {
 		ReferenceManager referenceManager = currentProgram.getReferenceManager();
-		Reference reference =
-			referenceManager.addExternalReference(instruction.getMinAddress(), libraryName,
-				externalLabel, externalAddr, SourceType.USER_DEFINED, operandIndex, refType);
-		return reference;
+        return referenceManager.addExternalReference(instruction.getMinAddress(), libraryName,
+            externalLabel, externalAddr, SourceType.USER_DEFINED, operandIndex, refType);
 	}
 
 	/**
@@ -2199,9 +2194,8 @@ public class FlatProgramAPI {
 	public final Reference createExternalReference(Data data, String libraryName,
 			String externalLabel, Address externalAddr) throws Exception {
 		ReferenceManager referenceManager = currentProgram.getReferenceManager();
-		Reference reference = referenceManager.addExternalReference(data.getMinAddress(),
-			libraryName, externalLabel, externalAddr, SourceType.USER_DEFINED, 0, RefType.DATA);
-		return reference;
+        return referenceManager.addExternalReference(data.getMinAddress(),
+            libraryName, externalLabel, externalAddr, SourceType.USER_DEFINED, 0, RefType.DATA);
 	}
 
 	/**
@@ -2217,9 +2211,8 @@ public class FlatProgramAPI {
 			int stackOffset, boolean isWrite) {
 		ReferenceManager referenceManager = currentProgram.getReferenceManager();
 		RefType type = isWrite ? RefType.WRITE : RefType.READ;
-		Reference ref = referenceManager.addStackReference(instruction.getMinAddress(),
-			operandIndex, stackOffset, type, SourceType.USER_DEFINED);
-		return ref;
+        return referenceManager.addStackReference(instruction.getMinAddress(),
+            operandIndex, stackOffset, type, SourceType.USER_DEFINED);
 	}
 
 	/**
@@ -2437,8 +2430,7 @@ public class FlatProgramAPI {
 	 */
 	public final FileDataTypeManager openDataTypeArchive(File archiveFile, boolean readOnly)
 			throws Exception {
-		FileDataTypeManager dtfm = FileDataTypeManager.openFileArchive(archiveFile, !readOnly);
-		return dtfm;
+        return FileDataTypeManager.openFileArchive(archiveFile, !readOnly);
 	}
 
 	/**
@@ -2533,8 +2525,7 @@ public class FlatProgramAPI {
 	public DomainFolder getProjectRootFolder() {
 		Project project = AppInfo.getActiveProject();
 		ProjectData projectData = project.getProjectData();
-		DomainFolder folder = projectData.getRootFolder();
-		return folder;
+        return projectData.getRootFolder();
 	}
 
 	private Address findComment(int type, String text) {

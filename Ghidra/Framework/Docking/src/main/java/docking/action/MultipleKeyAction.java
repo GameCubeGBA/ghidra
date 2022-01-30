@@ -282,8 +282,7 @@ public class MultipleKeyAction extends DockingKeyBindingAction {
 		ActionContext localContext = getLocalContext(localProvider);
 		localContext.setSourceObject(eventSource);
 		ActionContext globalContext = tool.getDefaultToolContext();
-		List<ExecutableAction> validActions = getValidContextActions(localContext, globalContext);
-		return validActions;
+        return getValidContextActions(localContext, globalContext);
 	}
 
 	private List<ExecutableAction> getDialogActions(Window window) {
@@ -294,8 +293,7 @@ public class MultipleKeyAction extends DockingKeyBindingAction {
 			return Collections.emptyList();
 		}
 		ActionContext context = provider.getActionContext(null);
-		List<ExecutableAction> validActions = getValidContextActions(context, null);
-		return validActions;
+        return getValidContextActions(context, null);
 	}
 
 	private ComponentProvider getProvider(DockingWindowManager dwm, Object eventSource) {

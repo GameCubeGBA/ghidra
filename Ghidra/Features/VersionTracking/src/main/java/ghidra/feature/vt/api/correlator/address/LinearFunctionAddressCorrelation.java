@@ -82,9 +82,7 @@ public class LinearFunctionAddressCorrelation implements AddressCorrelation {
 			}
 		}
 
-		double percentOffset = (double) (accumulatedLength) / srcBody.getNumAddresses();
-
-		return percentOffset;
+        return (double) (accumulatedLength) / srcBody.getNumAddresses();
 	}
 
 	private Address getDestinationAddress(double percentOffset) {
@@ -95,8 +93,7 @@ public class LinearFunctionAddressCorrelation implements AddressCorrelation {
 			AddressRange addressRange = addressRanges.next();
 			long rangeLength = addressRange.getLength();
 			if (offset < rangeLength) {
-				Address address = addressRange.getMinAddress().add(offset);
-				return address;
+                return addressRange.getMinAddress().add(offset);
 			}
 			offset -= rangeLength;
 		}

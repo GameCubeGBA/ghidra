@@ -160,8 +160,7 @@ public class NamespaceUtils {
 		}
 
 		List<String> namespaceNames = path.asList();
-		List<Namespace> namespaces = doGetNamespaces(namespaceNames, parent, program);
-		return namespaces;
+        return doGetNamespaces(namespaceNames, parent, program);
 	}
 
 	private static List<Namespace> doGetNamespaces(List<String> namespaceNames,
@@ -173,8 +172,7 @@ public class NamespaceUtils {
 
 		List<Namespace> parents = Arrays.asList(root);
 		for (String name : namespaceNames) {
-			List<Namespace> matches = getMatchingNamespaces(name, parents, program);
-			parents = matches;
+            parents = getMatchingNamespaces(name, parents, program);
 		}
 		return parents;
 	}

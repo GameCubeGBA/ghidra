@@ -55,8 +55,7 @@ public class TestKeyEventDispatcher {
 		//
 		focusProvider.focusOwner = event.getComponent();
 		try {
-			boolean success = systemDispatcher.dispatchKeyEvent(event);
-			return success;
+            return systemDispatcher.dispatchKeyEvent(event);
 		}
 		finally {
 			focusProvider.focusOwner = null;

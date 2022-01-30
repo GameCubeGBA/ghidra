@@ -94,12 +94,11 @@ public class SymbolServerService {
 	 * @return number of remote symbol servers
 	 */
 	public int getRemoteSymbolServerCount() {
-		int remoteSymbolServerCount = (int) getSymbolServers()
-				.stream()
-				.filter(ss -> !ss.isLocal())
-				.count();
 
-		return remoteSymbolServerCount;
+        return (int) getSymbolServers()
+                .stream()
+                .filter(ss -> !ss.isLocal())
+                .count();
 	}
 
 	/**
@@ -224,10 +223,7 @@ public class SymbolServerService {
 		Msg.debug(this,
 			logPrefix() + ": getting symbol file: " + symbolFileLocation.getLocationStr());
 
-		SymbolFileLocation localSymbolFileLocation =
-			ensureLocalUncompressedFile(symbolFileLocation, monitor);
-
-		return localSymbolFileLocation;
+        return ensureLocalUncompressedFile(symbolFileLocation, monitor);
 	}
 
 	private SymbolFileLocation ensureLocalUncompressedFile(SymbolFileLocation symbolFileLocation,

@@ -358,8 +358,7 @@ public class ArrayLocationReferencesTest extends AbstractLocationReferencesTest 
 		list.stream()
 		    .filter(ref -> {
 		    		Address addr = ref.getLocationOfUse();
-		    		boolean contains = Arrays.asList(expected).contains(addr);
-		    		return contains;
+                return Arrays.asList(expected).contains(addr);
 		    	})
 		    .collect(Collectors.toList())
 		    .forEach(ref -> {
@@ -383,11 +382,10 @@ public class ArrayLocationReferencesTest extends AbstractLocationReferencesTest 
 
 		createData(addr, array);
 
-		Address element1Addr = addr;
-		Address from1 = addr(0x01005300);
-		createReference(from1, element1Addr);
+        Address from1 = addr(0x01005300);
+		createReference(from1, addr);
 
-		Address element2Addr = element1Addr.add(length);
+		Address element2Addr = addr.add(length);
 		Address from2 = addr(0x01005301);
 		createReference(from2, element2Addr);
 
@@ -404,11 +402,10 @@ public class ArrayLocationReferencesTest extends AbstractLocationReferencesTest 
 
 		createData(addr, array);
 
-		Address element1Addr = addr;
-		Address from1 = addr(0x01005300);
-		createReference(from1, element1Addr);
+        Address from1 = addr(0x01005300);
+		createReference(from1, addr);
 
-		Address element2Addr = element1Addr.add(length);
+		Address element2Addr = addr.add(length);
 		Address from2 = addr(0x01005301);
 		createReference(from2, element2Addr.add(1)); // offcut
 

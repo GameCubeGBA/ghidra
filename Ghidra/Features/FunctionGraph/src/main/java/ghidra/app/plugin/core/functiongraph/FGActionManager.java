@@ -792,9 +792,7 @@ class FGActionManager {
 					// if no vertex is selected, then just select all code blocks in the graph
 					else {
 						FGData functionGraphData = controller.getFunctionGraphData();
-						FunctionGraph functionGraph = functionGraphData.getFunctionGraph();
-						Graph<FGVertex, FGEdge> graph = functionGraph;
-						addresses = getAddressesForVertices(graph.getVertices());
+                        addresses = getAddressesForVertices(((Graph<FGVertex, FGEdge>) functionGraphData.getFunctionGraph()).getVertices());
 					}
 
 					makeSelectionFromAddresses(addresses);
@@ -1092,9 +1090,7 @@ class FGActionManager {
 
 	private Set<FGVertex> getAllVertices() {
 		FGData functionGraphData = controller.getFunctionGraphData();
-		FunctionGraph functionGraph = functionGraphData.getFunctionGraph();
-		Graph<FGVertex, FGEdge> graph = functionGraph;
-		return new HashSet<>(graph.getVertices());
+        return new HashSet<>(((Graph<FGVertex, FGEdge>) functionGraphData.getFunctionGraph()).getVertices());
 	}
 
 	private Set<GroupedFunctionGraphVertex> getGroupVertices(Set<FGVertex> vertices) {

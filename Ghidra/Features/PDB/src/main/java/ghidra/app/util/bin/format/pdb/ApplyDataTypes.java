@@ -85,10 +85,7 @@ public class ApplyDataTypes {
 
 // FIXME:		GraphAlgorithms.findCircuits(graph, monitor);
 
-		List<CompositeDefinition> verticesInPostOrder =
-			GraphAlgorithms.getVerticesInPostOrder(graph, GraphNavigator.topDownNavigator());
-
-		return verticesInPostOrder;
+        return GraphAlgorithms.getVerticesInPostOrder(graph, GraphNavigator.topDownNavigator());
 	}
 
 	/**

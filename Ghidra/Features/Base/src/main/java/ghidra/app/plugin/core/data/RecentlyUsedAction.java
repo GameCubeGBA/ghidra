@@ -63,8 +63,7 @@ public class RecentlyUsedAction extends DataAction {
 
 		this.dataType = recentDataType;
 
-		boolean enabled = super.isEnabledForContext(context);
-		return enabled;
+        return super.isEnabledForContext(context);
 	}
 
 	private DataType getRecentDataType() {

@@ -208,7 +208,6 @@ public abstract class AbstractColumnConstraintEditor<T> implements ColumnConstra
 	protected final static String formatStatus(String message, boolean error) {
 		Color color = error ? Color.RED : Color.BLACK;
 		String messageWithFont = HTMLUtilities.setFont(message, color, 12);
-		String html = HTMLUtilities.wrapAsHTML(messageWithFont);
-		return html;
+        return HTMLUtilities.wrapAsHTML(messageWithFont);
 	}
 }

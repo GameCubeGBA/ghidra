@@ -77,8 +77,7 @@ public class NameTable {
 	 * @return Index of the name.
 	 */
 	public int getStreamNumberFromName(String name) {
-		Integer x = streamNumbersByName.getOrDefault(name, -1);
-		return x;
+        return streamNumbersByName.getOrDefault(name, -1);
 	}
 
 	/**

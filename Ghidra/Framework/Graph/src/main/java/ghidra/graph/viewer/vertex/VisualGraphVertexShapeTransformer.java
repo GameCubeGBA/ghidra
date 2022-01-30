@@ -89,9 +89,8 @@ public class VisualGraphVertexShapeTransformer<V extends VisualVertex>
 		int y = halfHeight - bounds.y;
 
 		AffineTransform xform = AffineTransform.getTranslateInstance(x, y);
-		Shape movedShape = xform.createTransformedShape(s);
 
-		return movedShape;
+        return xform.createTransformedShape(s);
 	}
 
 	private Shape getFullShape(V v) {

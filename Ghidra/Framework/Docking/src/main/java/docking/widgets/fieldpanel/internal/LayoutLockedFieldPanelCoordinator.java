@@ -57,8 +57,7 @@ public class LayoutLockedFieldPanelCoordinator extends LineLockedFieldPanelCoord
 			}
 			
 			// "topIndex" is the IndexMap index of the top of the listing in view.
-			BigInteger topIndex1 = index;
-			LayoutModel layoutModel1 = fp.getLayoutModel();
+            LayoutModel layoutModel1 = fp.getLayoutModel();
 			Layout lockedLineLayout1 = layoutModel1.getLayout(lockedLineIndex1);
 			if (lockedLineLayout1 == null) {
 				return; // transitioning from one function to another.
@@ -70,7 +69,7 @@ public class LayoutLockedFieldPanelCoordinator extends LineLockedFieldPanelCoord
 
 			// numIndexes is the total number of indexes in this field panels indexMap.
 			BigInteger numIndexes1 = layoutModel1.getNumIndexes();
-			Layout firstLayout1 = layoutModel1.getLayout(topIndex1);
+			Layout firstLayout1 = layoutModel1.getLayout(index);
 			
 			// "yPos" is a negative number indicating the number of pixels the start of the current 
 			// layout is above the top of the field panel view.
@@ -83,14 +82,14 @@ public class LayoutLockedFieldPanelCoordinator extends LineLockedFieldPanelCoord
 			// the start of the current layout.
 			int offsetInLayout1 = 0;
 			int offsetFromLockedIndex1 = 0;
-			if (lockedLineIndex1.compareTo(topIndex1) == 0) {
+			if (lockedLineIndex1.compareTo(index) == 0) {
 				offsetInLayout1 -= yPos;
 				offsetFromLockedIndex1 += offsetInLayout1;
 			}
-			else if (lockedLineIndex1.compareTo(topIndex1) < 0) {
+			else if (lockedLineIndex1.compareTo(index) < 0) {
 				BigInteger currentIndex1 = lockedLineIndex1;
 				while (currentIndex1 != null && (currentIndex1.compareTo(numIndexes1) < 0) &&
-					currentIndex1.compareTo(topIndex1) < 0) {
+					currentIndex1.compareTo(index) < 0) {
 					Layout currentLayout = layoutModel1.getLayout(currentIndex1);
 					if (currentLayout != null) {
 						offsetFromLockedIndex1 += currentLayout.getHeight();
@@ -100,7 +99,7 @@ public class LayoutLockedFieldPanelCoordinator extends LineLockedFieldPanelCoord
 				offsetFromLockedIndex1 -= yPos;
 			}
 			else { // lockedlineIndex1 > topIndex1
-				BigInteger currentIndex1 = layoutModel1.getIndexAfter(topIndex1);
+				BigInteger currentIndex1 = layoutModel1.getIndexAfter(index);
 				while (currentIndex1 != null && (currentIndex1.compareTo(numIndexes1) < 0) &&
 					currentIndex1.compareTo(lockedLineIndex1) < 0) {
 					Layout currentLayout = layoutModel1.getLayout(currentIndex1);
@@ -126,7 +125,7 @@ public class LayoutLockedFieldPanelCoordinator extends LineLockedFieldPanelCoord
 					int lockedLineHeight2 = lockedLineLayout2.getHeight();
 
 					// Handle when the locked line's layout is at the top of the viewer.
-					if (lockedLineIndex1.equals(topIndex1)) {
+					if (lockedLineIndex1.equals(index)) {
 						int difference = lockedLineHeight1 - lockedLineHeight2; // positive means layout1 is larger.
 						int yPos2 = yPos + difference;
 						// A negative yPos indicates the number of pixels to move the layout
@@ -138,9 +137,7 @@ public class LayoutLockedFieldPanelCoordinator extends LineLockedFieldPanelCoord
 					// Start with the layout of the line locked index and position the top of the 
 					// view at the same distance from it as the other view is from the layout for
 					// its locked line.
-					int offsetFromLockedIndex2 =
-						offsetFromLockedIndex1 + (lockedLineHeight2 - lockedLineHeight1);
-					int remainingOffset2 = offsetFromLockedIndex2;
+                    int remainingOffset2 = offsetFromLockedIndex1 + (lockedLineHeight2 - lockedLineHeight1);
 					BigInteger currentIndex2 = lockedLineIndex2;
 					if (remainingOffset2 < 0) {
 						currentIndex2 = layoutModel2.getIndexBefore(currentIndex2);

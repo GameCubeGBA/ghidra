@@ -84,8 +84,7 @@ public class PriorityQueue<T> {
 		if (tree.isEmpty()) {
 			return null;
 		}
-		Integer key = tree.firstKey();
-		return key;
+        return tree.firstKey();
 	}
 		
 	/**
@@ -111,8 +110,7 @@ public class PriorityQueue<T> {
 		if (tree.isEmpty()) {
 			return null;
 		}
-		Integer key = tree.lastKey();
-		return key;
+        return tree.lastKey();
 	}
 
 	/**

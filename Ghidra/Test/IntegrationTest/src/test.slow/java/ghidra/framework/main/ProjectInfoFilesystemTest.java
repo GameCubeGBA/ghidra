@@ -155,8 +155,7 @@ public class ProjectInfoFilesystemTest extends AbstractGhidraHeadedIntegrationTe
 
 	private DockingActionIf getAction(PluginTool tool, String actionName) {
 
-		DockingActionIf action = getAction(frontEndTool, "FrontEndPlugin", actionName);
-		return action;
+        return getAction(frontEndTool, "FrontEndPlugin", actionName);
 	}
 
 	private void openProjectAndInfo(int filesystemVersion) throws Exception {

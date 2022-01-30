@@ -43,16 +43,15 @@ public class JungLayoutProviderFactory {
 	//@formatter:on
 
         //@formatter:off
-        Set<JungLayoutProvider<V, E, G>> providers = new HashSet<>(CollectionUtils.asSet(
+        //@formatter:on
+
+		return new HashSet<>(CollectionUtils.asSet(
                 // create("DAG Layout", DAGLayout.class),
                 create("Circle Layout", CircleLayout.class),
                 create("Spring Layout", SpringLayout.class),
                 create("KK Layout", KKLayout.class),
                 create("ISOM Layout", ISOMLayout.class)
         ));
-		//@formatter:on
-
-		return providers;
 	}
 
 	//@formatter:off
@@ -64,34 +63,33 @@ public class JungLayoutProviderFactory {
 		JungLayoutProvider<V, E, G> create(String name, Class<? extends Layout> layoutClass) {
 	//@formatter:on
 
-		JungLayoutProvider<V, E, G> provider = new JungLayoutProvider<V, E, G>() {
+        return new JungLayoutProvider<V, E, G>() {
 
-			@Override
-			public String getLayoutName() {
-				return name;
-			}
+            @Override
+            public String getLayoutName() {
+                return name;
+            }
 
-			@Override
-			protected Layout<V, E> createLayout(G g) {
+            @Override
+            protected Layout<V, E> createLayout(G g) {
 
-				try {
-					Constructor<?> c = layoutClass.getConstructor(Graph.class);
+                try {
+                    Constructor<?> c = layoutClass.getConstructor(Graph.class);
 
-					// we are using the interface to this factory to get compile-time 
-					// enforcement of types; at this point we cannot enforce types using a 
-					// class object to create a new layout
-					@SuppressWarnings("unchecked")
-					Layout<V, E> l = (Layout<V, E>) c.newInstance(g);
-					return l;
-				}
-				catch (Exception e) {
-					Msg.error(JungLayoutProviderFactory.class,
-						"Unable to construct layout: " + layoutClass, e);
-				}
-				return null;
-			}
+                    // we are using the interface to this factory to get compile-time
+                    // enforcement of types; at this point we cannot enforce types using a
+                    // class object to create a new layout
+                    @SuppressWarnings("unchecked")
+                    Layout<V, E> l = (Layout<V, E>) c.newInstance(g);
+                    return l;
+                }
+                catch (Exception e) {
+                    Msg.error(JungLayoutProviderFactory.class,
+                        "Unable to construct layout: " + layoutClass, e);
+                }
+                return null;
+            }
 
-		};
-		return provider;
+        };
 	}
 }

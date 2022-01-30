@@ -68,9 +68,7 @@ public class AssemblyResolvedBackfill extends AssemblyResolution {
 	 * @return the duplicate
 	 */
 	AssemblyResolvedBackfill copy() {
-		AssemblyResolvedBackfill cp =
-			new AssemblyResolvedBackfill(description, exp, goal, inslen, offset);
-		return cp;
+        return new AssemblyResolvedBackfill(description, exp, goal, inslen, offset);;
 	}
 
 	@Override

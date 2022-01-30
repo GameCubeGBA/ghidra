@@ -94,8 +94,7 @@ public class ClosedPatternRowObject {
 	}
 
 	private DittedBitSequence getDittedBitSequenceBinary(String minedString) {
-		DittedBitSequence seq = new DittedBitSequence(minedString, false);
-		return seq;
+        return new DittedBitSequence(minedString, false);
 	}
 
 	/**

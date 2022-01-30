@@ -95,8 +95,7 @@ abstract public class RecordNumber {
 	public static RecordNumber parseNoWitness(AbstractPdb pdb, PdbByteReader reader,
 			RecordCategory category, int size) throws PdbException {
 		int number = reader.parseVarSizedInt(size);
-		RecordNumber recordNumber = make(category, number);
-		return recordNumber;
+        return make(category, number);
 	}
 
 	private final int number;

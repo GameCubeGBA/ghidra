@@ -116,8 +116,7 @@ public class EnumDataType extends GenericDataType implements Enum {
 
 	@Override
 	public long[] getValues() {
-		long[] values = valueMap.keySet().stream().mapToLong(Long::longValue).toArray();
-		return values;
+        return valueMap.keySet().stream().mapToLong(Long::longValue).toArray();
 	}
 
 	@Override

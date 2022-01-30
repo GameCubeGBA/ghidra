@@ -63,8 +63,7 @@ public class EnsureAreaVisibleAnimatorFunctionGraphJob<V extends VisualVertex, E
 		// get the point of the cursor, centered in the vertex (this prevents jumping from 
 		// side-to-side as we move the vertex)
 		Rectangle vertexBounds = GraphViewerUtils.getVertexBoundsInViewSpace(viewer, vertex);
-		int vertexCenterX = vertexBounds.x + (vertexBounds.width >> 1);
-		newPoint.x = vertexCenterX;
+        newPoint.x = vertexBounds.x + (vertexBounds.width >> 1);
 
 		// see if the cursor bounds are not completely in screen
 		Rectangle viewerBounds = viewer.getBounds();

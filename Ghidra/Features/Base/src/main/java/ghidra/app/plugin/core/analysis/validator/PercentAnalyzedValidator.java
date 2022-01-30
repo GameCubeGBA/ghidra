@@ -35,8 +35,7 @@ public class PercentAnalyzedValidator extends PostAnalysisValidator {
 
 	@Override
 	public ConditionResult doRun(TaskMonitor monitor) {
-		float threshold = COVERAGE_THRESHOLD_DEFAULT;
-		ConditionStatus status = ConditionStatus.Passed;
+        ConditionStatus status = ConditionStatus.Passed;
 		StringBuilder warnings = new StringBuilder();
 		float percent;
 		try {
@@ -49,7 +48,7 @@ public class PercentAnalyzedValidator extends PostAnalysisValidator {
 		catch (CancelledException e) {
 			return new ConditionResult(ConditionStatus.Cancelled);
 		}
-		if (percent < threshold) {
+		if (percent < COVERAGE_THRESHOLD_DEFAULT) {
 			status = ConditionStatus.Warning;
 			warnings.append(program.getDomainFile().getName() +
 				" percent disassembled/defined in executable memory = " + format(percent) + "\n");
@@ -109,14 +108,13 @@ public class PercentAnalyzedValidator extends PostAnalysisValidator {
 		monitor.setProgress(numPossibleDefined);
 
 		int totalDefined = instCount + dataCount;
-		float coverage = (float) totalDefined / (float) numPossibleDefined;
-		//println("Executable Memory Length = " + numPossibleDefined);
+        //println("Executable Memory Length = " + numPossibleDefined);
 		//println("MyExecSetLen = " + myExecSetLen);
 		//println("Defined Instruction Bytes = " + instCount);
 		//println("Defined Data Bytes = " + dataCount);
 
 		//println("Total Defined Bytes = " + totalDefined);
-		return coverage;
+		return (float) totalDefined / (float) numPossibleDefined;
 	}
 
 	@Override

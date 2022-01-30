@@ -86,8 +86,7 @@ public class DndTableCellRenderer implements TableCellRenderer {
 		@Override
 		public Insets getBorderInsets(Component c) {
 			if (under != null) {
-				Insets result = under.getBorderInsets(c);
-				return result;
+                return under.getBorderInsets(c);
 			}
 			throw new IllegalStateException("Must set under border");
 		}

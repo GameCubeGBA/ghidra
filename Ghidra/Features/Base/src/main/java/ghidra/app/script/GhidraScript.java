@@ -1899,33 +1899,31 @@ public abstract class GhidraScript extends FlatProgramAPI {
 
 		boolean hasDefault = !isBlank(defaultValue);
 
-		String propertyKey = key;
-		if (propertiesFileParams == null) {
+        if (propertiesFileParams == null) {
 
 			if (isHeadless && !hasDefault) { // require either a props file or a default value
-				throw new IllegalArgumentException("Error processing variable '" + propertyKey +
+				throw new IllegalArgumentException("Error processing variable '" + key +
 					"' in headless mode -- it was not found in a .properties file.");
 			}
 			return defaultValue; // may be null
 		}
 
-		String storedValue = propertiesFileParams.getValue(propertyKey);
+		String storedValue = propertiesFileParams.getValue(key);
 		if (storedValue.isEmpty()) {
 
 			if (isHeadless && !hasDefault) { // require either a props file or a default value
-				throw new IllegalArgumentException("Error processing variable '" + propertyKey +
+				throw new IllegalArgumentException("Error processing variable '" + key +
 					"' in headless mode -- it was not found in a .properties file.");
 			}
 			return defaultValue;
 		}
 
 		try {
-			T t = transformer.apply(storedValue);
-			return t;
+            return transformer.apply(storedValue);
 		}
 		catch (IllegalArgumentException e) {
 			if (isHeadless) {
-				throw new IllegalArgumentException("Error processing variable '" + propertyKey +
+				throw new IllegalArgumentException("Error processing variable '" + key +
 					"' in headless mode -- its value '" + storedValue + "' is not a valid value.");
 			}
 	
@@ -2024,7 +2022,7 @@ public abstract class GhidraScript extends FlatProgramAPI {
 			return existingValue;
 		}
 
-		File choice = doAsk(File.class, title, approveButtonText, existingValue, lastValue -> {
+        return doAsk(File.class, title, approveButtonText, existingValue, lastValue -> {
 
 			GhidraFileChooser chooser = new GhidraFileChooser(null);
 			chooser.setSelectedFile(lastValue);
@@ -2039,8 +2037,6 @@ public abstract class GhidraScript extends FlatProgramAPI {
 
 			return file;
 		});
-
-		return choice;
 	}
 
 	/**
@@ -2101,7 +2097,7 @@ public abstract class GhidraScript extends FlatProgramAPI {
 			return existingValue;
 		}
 
-		File choice = doAsk(DIRECTORY.class, title, approveButtonText, existingValue, lastValue -> {
+        return doAsk(DIRECTORY.class, title, approveButtonText, existingValue, lastValue -> {
 
 			GhidraFileChooser chooser = new GhidraFileChooser(null);
 			chooser.setSelectedFile(lastValue);
@@ -2116,8 +2112,6 @@ public abstract class GhidraScript extends FlatProgramAPI {
 
 			return file;
 		});
-
-		return choice;
 	}
 
 	/**
@@ -2204,9 +2198,7 @@ public abstract class GhidraScript extends FlatProgramAPI {
 		}
 
 		Class<LanguageCompilerSpecPair> clazz = LanguageCompilerSpecPair.class;
-		LanguageCompilerSpecPair choice =
-			doAsk(clazz, title, approveButtonText, existingValue, lastValue -> {
-
+		return doAsk(clazz, title, approveButtonText, existingValue, lastValue -> {
 				SelectLanguageDialog dialog = new SelectLanguageDialog(title, approveButtonText);
 				dialog.setSelectedLanguage(lastValue);
 				dialog.show();
@@ -2216,8 +2208,6 @@ public abstract class GhidraScript extends FlatProgramAPI {
 
 				return dialog.getSelectedLanguage();
 			});
-
-		return choice;
 	}
 
 	/**
@@ -2278,7 +2268,7 @@ public abstract class GhidraScript extends FlatProgramAPI {
 			return existingValue;
 		}
 
-		DomainFolder choice = doAsk(Program.class, title, "", existingValue, lastValue -> {
+        return doAsk(Program.class, title, "", existingValue, lastValue -> {
 
 			DataTreeDialog dtd = new DataTreeDialog(null, title, DataTreeDialog.CHOOSE_FOLDER);
 			dtd.show();
@@ -2288,8 +2278,6 @@ public abstract class GhidraScript extends FlatProgramAPI {
 
 			return dtd.getDomainFolder();
 		});
-
-		return choice;
 	}
 
 	/**
@@ -2357,8 +2345,7 @@ public abstract class GhidraScript extends FlatProgramAPI {
 				throw new CancelledException();
 			}
 
-			Integer newValue = dialog.getValueAsInt();
-			return newValue;
+            return dialog.getValueAsInt();
 		});
 
 		if (choice == null) {
@@ -2503,19 +2490,16 @@ public abstract class GhidraScript extends FlatProgramAPI {
 			return existingValue;
 		}
 
-		Address choice = doAsk(Integer.class, title, message, existingValue, lastValue -> {
+        return doAsk(Integer.class, title, message, existingValue, lastValue -> {
 
-			AskAddrDialog dialog =
-				new AskAddrDialog(title, message, currentProgram.getAddressFactory(), lastValue);
-			if (dialog.isCanceled()) {
-				throw new CancelledException();
-			}
+            AskAddrDialog dialog =
+                new AskAddrDialog(title, message, currentProgram.getAddressFactory(), lastValue);
+            if (dialog.isCanceled()) {
+                throw new CancelledException();
+            }
 
-			Address addr = dialog.getValueAsAddress();
-			return addr;
-		});
-
-		return choice;
+            return dialog.getValueAsAddress();
+        });
 	}
 
 	/**
@@ -2577,21 +2561,18 @@ public abstract class GhidraScript extends FlatProgramAPI {
 			return existingValue;
 		}
 
-		byte[] choice = doAsk(byte[].class, title, message, existingValue, lastValue -> {
+        return doAsk(byte[].class, title, message, existingValue, lastValue -> {
 
-			String lastByteString = NumericUtilities.convertBytesToString(lastValue, " ");
-			AskDialog<Byte> dialog =
-				new AskDialog<>(title, message, AskDialog.BYTES, lastByteString);
-			if (dialog.isCanceled()) {
-				throw new CancelledException();
-			}
+            String lastByteString = NumericUtilities.convertBytesToString(lastValue, " ");
+            AskDialog<Byte> dialog =
+                new AskDialog<>(title, message, AskDialog.BYTES, lastByteString);
+            if (dialog.isCanceled()) {
+                throw new CancelledException();
+            }
 
-			String bytesString = dialog.getValueAsString();
-			byte[] bytes = NumericUtilities.convertStringToBytes(bytesString);
-			return bytes;
-		});
-
-		return choice;
+            String bytesString = dialog.getValueAsString();
+            return NumericUtilities.convertStringToBytes(bytesString);
+        });
 	}
 
 	/**
@@ -2719,8 +2700,7 @@ public abstract class GhidraScript extends FlatProgramAPI {
 		}
 
 		String message = "";
-		DomainFile choice = doAsk(DomainFile.class, title, message, existingValue, lastValue -> {
-
+		return doAsk(DomainFile.class, title, message, existingValue, lastValue -> {
 			DataTreeDialog dtd = new DataTreeDialog(null, title, DataTreeDialog.OPEN);
 			dtd.show();
 			if (dtd.wasCancelled()) {
@@ -2729,8 +2709,6 @@ public abstract class GhidraScript extends FlatProgramAPI {
 
 			return dtd.getDomainFile();
 		});
-
-		return choice;
 	}
 
 	/**
@@ -2904,17 +2882,15 @@ public abstract class GhidraScript extends FlatProgramAPI {
 			return existingValue;
 		}
 
-		String choice = doAsk(String.class, title, message, existingValue, lastValue -> {
-			AskDialog<String> dialog = new AskDialog<>(title, message, AskDialog.STRING, lastValue);
+        return doAsk(String.class, title, message, existingValue, lastValue -> {
+            AskDialog<String> dialog = new AskDialog<>(title, message, AskDialog.STRING, lastValue);
 
-			if (dialog.isCanceled()) {
-				throw new CancelledException();
-			}
+            if (dialog.isCanceled()) {
+                throw new CancelledException();
+            }
 
-			return dialog.getValueAsString();
-		});
-
-		return choice;
+            return dialog.getValueAsString();
+        });
 	}
 
 	/**
@@ -2984,19 +2960,17 @@ public abstract class GhidraScript extends FlatProgramAPI {
 		}
 
 		Class<?> clazz = choices.get(0).getClass();
-		T choice = doAsk(clazz, title, message, existingValue, lastValue -> {
 
-			AskDialog<T> dialog =
-				new AskDialog<>(null, title, message, AskDialog.STRING, choices, lastValue);
-			if (dialog.isCanceled()) {
-				throw new CancelledException();
-			}
+        return doAsk(clazz, title, message, existingValue, lastValue -> {
 
-			T value = dialog.getChoiceValue();
-			return value;
-		});
+            AskDialog<T> dialog =
+                new AskDialog<>(null, title, message, AskDialog.STRING, choices, lastValue);
+            if (dialog.isCanceled()) {
+                throw new CancelledException();
+            }
 
-		return choice;
+            return dialog.getChoiceValue();
+        });
 	}
 
 	private boolean isBlank(Object o) {
@@ -3113,8 +3087,7 @@ public abstract class GhidraScript extends FlatProgramAPI {
 		}
 
 		Class<?> clazz = choices.get(0).getClass();
-		List<T> choice = doAsk(clazz, title, message, existingValue, lastValue -> {
-
+		return doAsk(clazz, title, message, existingValue, lastValue -> {
 			MultipleOptionsDialog<T> dialog =
 				new MultipleOptionsDialog<>(title, message, choices, true);
 			dialog.show();
@@ -3124,8 +3097,6 @@ public abstract class GhidraScript extends FlatProgramAPI {
 
 			return dialog.getUserChoices();
 		});
-
-		return choice;
 	}
 
 	/**
@@ -3186,8 +3157,7 @@ public abstract class GhidraScript extends FlatProgramAPI {
 		}
 
 		Class<?> clazz = choices.get(0).getClass();
-		List<T> choice = doAsk(clazz, title, message, existingValue, lastValue -> {
-
+		return doAsk(clazz, title, message, existingValue, lastValue -> {
 			MultipleOptionsDialog<T> dialog =
 				new MultipleOptionsDialog<>(title, message, choices, choiceLabels, true);
 			dialog.show();
@@ -3197,8 +3167,6 @@ public abstract class GhidraScript extends FlatProgramAPI {
 
 			return dialog.getUserChoices();
 		});
-
-		return choice;
 	}
 
 	/**

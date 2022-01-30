@@ -534,8 +534,7 @@ public abstract class AbstractVTMatchTableModel extends AddressBasedTableModel<V
 			VTController controller = serviceProvider.getService(VTController.class);
 			Program sourceProgram = controller.getSourceProgram();
 			Address sourceAddress = association.getSourceAddress();
-			Symbol[] symbols = sourceProgram.getSymbolTable().getSymbols(sourceAddress);
-			return symbols;
+            return sourceProgram.getSymbolTable().getSymbols(sourceAddress);
 		}
 	}
 
@@ -772,8 +771,7 @@ public abstract class AbstractVTMatchTableModel extends AddressBasedTableModel<V
 			VTController controller = serviceProvider.getService(VTController.class);
 			Program destinationProgram = controller.getDestinationProgram();
 			Address destinationAddress = association.getDestinationAddress();
-			Symbol[] symbols = destinationProgram.getSymbolTable().getSymbols(destinationAddress);
-			return symbols;
+            return destinationProgram.getSymbolTable().getSymbols(destinationAddress);
 		}
 	}
 

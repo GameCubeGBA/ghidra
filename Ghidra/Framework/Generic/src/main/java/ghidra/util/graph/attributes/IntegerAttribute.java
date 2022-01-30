@@ -105,21 +105,19 @@ public class IntegerAttribute<T extends KeyedObject> extends Attribute<T> {
 	class IntegerComparator implements Comparator<KeyedObject> {
 		@Override
 		public int compare(KeyedObject object1, KeyedObject object2) {
-			KeyedObject ko1 = object1;
-			KeyedObject ko2 = object2;
-			int value1 = 0;
+            int value1 = 0;
 			int value2 = 0;
 			try {
-				value1 = getValue(ko1);
+				value1 = getValue(object1);
 				try {
-					value2 = getValue(ko2);
+					value2 = getValue(object2);
 					if ((value1 - value2) != 0) {
 						return (value1 - value2);
 					}
-					if ((ko1.key() - ko2.key()) < 0) {
+					if ((object1.key() - object2.key()) < 0) {
 						return -1;
 					}
-					else if ((ko1.key() - ko2.key()) > 0) {
+					else if ((object1.key() - object2.key()) > 0) {
 						return +1;
 					}
 					else
@@ -132,14 +130,14 @@ public class IntegerAttribute<T extends KeyedObject> extends Attribute<T> {
 			}
 			catch (ghidra.util.exception.NoValueException exc) {
 				try {
-					value2 = getValue(ko2);
+					value2 = getValue(object2);
 					return 1; //ko2 is ok so it precedes ko1
 				}
 				catch (ghidra.util.exception.NoValueException exc2) {
-					if ((ko1.key() - ko2.key()) < 0) {
+					if ((object1.key() - object2.key()) < 0) {
 						return -1;
 					}
-					else if ((ko1.key() - ko2.key()) > 0) {
+					else if ((object1.key() - object2.key()) > 0) {
 						return +1;
 					}
 					else

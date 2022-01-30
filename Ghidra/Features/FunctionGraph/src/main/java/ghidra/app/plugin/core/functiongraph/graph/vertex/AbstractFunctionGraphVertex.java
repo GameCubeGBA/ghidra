@@ -124,9 +124,7 @@ public abstract class AbstractFunctionGraphVertex implements FGVertex {
 
 	private boolean isInGraph() {
 		FGData graphData = controller.getFunctionGraphData();
-		FunctionGraph functionGraph = graphData.getFunctionGraph();
-		Graph<FGVertex, FGEdge> graph = functionGraph;
-		return graph.containsVertex(this);
+        return ((Graph<FGVertex, FGEdge>) graphData.getFunctionGraph()).containsVertex(this);
 	}
 
 	@Override

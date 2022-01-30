@@ -97,8 +97,7 @@ public class DockingWindowsLookAndFeelUtils {
 		boolean useHistoricalValue = true;
 		String useInvertedColorsString = Preferences.getProperty(USE_INVERTED_COLORS_KEY,
 			Boolean.FALSE.toString(), useHistoricalValue);
-		boolean useInvertedColors = Boolean.parseBoolean(useInvertedColorsString);
-		return useInvertedColors;
+        return Boolean.parseBoolean(useInvertedColorsString);
 	}
 
 	/**

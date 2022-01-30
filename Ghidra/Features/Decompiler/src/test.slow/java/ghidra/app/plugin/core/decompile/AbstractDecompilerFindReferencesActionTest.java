@@ -94,8 +94,7 @@ public abstract class AbstractDecompilerFindReferencesActionTest extends Abstrac
 		DecompilerActionContext context = new DecompilerActionContext(provider, addr(0x0), false);
 		performAction(findReferencesAction, context, true);
 
-		ThreadedTableModel<?, ?> model = waitForSearchProvider();
-		return model;
+        return waitForSearchProvider();
 	}
 
 	protected ThreadedTableModel<?, ?> performFindReferencesToAddress() {
@@ -105,8 +104,7 @@ public abstract class AbstractDecompilerFindReferencesActionTest extends Abstrac
 		DecompilerActionContext context = new DecompilerActionContext(provider, addr(0x0), false);
 		performAction(findReferencesToAddressAction, context, true);
 
-		ThreadedTableModel<?, ?> model = waitForSearchProvider();
-		return model;
+        return waitForSearchProvider();
 	}
 
 	protected ThreadedTableModel<?, ?> performFindReferencesToSymbol() {
@@ -116,8 +114,7 @@ public abstract class AbstractDecompilerFindReferencesActionTest extends Abstrac
 		DecompilerActionContext context = new DecompilerActionContext(provider, addr(0x0), false);
 		performAction(findReferencesToSymbolAction, context, true);
 
-		ThreadedTableModel<?, ?> model = waitForSearchProvider();
-		return model;
+        return waitForSearchProvider();
 	}
 
 	protected ThreadedTableModel<?, ?> waitForSearchProvider() {

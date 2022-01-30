@@ -345,8 +345,7 @@ public class TypeDefDataTypeHTMLRepresentation extends HTMLDataTypeRepresentatio
 	private HTMLDataTypeRepresentation[] doDiff(HTMLDataTypeRepresentation myBaseRepresentation,
 			HTMLDataTypeRepresentation otherBaseRepresentation) {
 
-		HTMLDataTypeRepresentation[] diffs = myBaseRepresentation.diff(otherBaseRepresentation);
-		return diffs;
+        return myBaseRepresentation.diff(otherBaseRepresentation);
 	}
 
 }

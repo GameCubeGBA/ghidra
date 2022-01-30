@@ -39,8 +39,7 @@ public class OpBehaviorIntRem extends BinaryOpBehavior {
 		if (in2.signum() == 0) {
 			throw new LowlevelError("Remainder by 0");
 		}
-		BigInteger res = in1.remainder(in2);
-		return res;
+        return in1.remainder(in2);
 	}
 
 }

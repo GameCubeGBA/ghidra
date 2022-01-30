@@ -520,10 +520,8 @@ public class RecoverClassesFromRTTIScript extends GhidraScript {
 	 */
 	private boolean shouldDoOutput() {
 
-		boolean doOutput = OUTPUT_CLASS_DEFINITIONS || OUTPUT_CLASS_INFO ||
-			OUTPUT_CLASS_PARENTS_AND_CHILDREN || OUTPUT_SIMPLE_CLASS_HIERARCHIES;
-
-		return doOutput;
+        return OUTPUT_CLASS_DEFINITIONS || OUTPUT_CLASS_INFO ||
+            OUTPUT_CLASS_PARENTS_AND_CHILDREN || OUTPUT_SIMPLE_CLASS_HIERARCHIES;
 	}
 
 

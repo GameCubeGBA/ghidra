@@ -162,10 +162,8 @@ public class DebugControlImpl1 implements DebugControlInternal {
 		PointerByReference ppBp = new PointerByReference();
 		COMUtils.checkRC(jnaControl.AddBreakpoint(ulType, ulDesiredId, ppBp));
 		IDebugBreakpoint Bp = new WrapIDebugBreakpoint(ppBp.getValue());
-		DebugBreakpoint bpt =
-			DebugBreakpointInternal.tryPreferredInterfaces(this, Bp::QueryInterface);
-		// AddRef or no? Probably not.
-		return bpt;
+        // AddRef or no? Probably not.
+		return DebugBreakpointInternal.tryPreferredInterfaces(this, Bp::QueryInterface);
 	}
 
 	@Override
@@ -181,10 +179,8 @@ public class DebugControlImpl1 implements DebugControlInternal {
 		PointerByReference ppBp = new PointerByReference();
 		COMUtils.checkRC(jnaControl.GetBreakpointByIndex(ulIndex, ppBp));
 		IDebugBreakpoint Bp = new WrapIDebugBreakpoint(ppBp.getValue());
-		DebugBreakpoint bpt =
-			DebugBreakpointInternal.tryPreferredInterfaces(this, Bp::QueryInterface);
-		// NOTE: Do not AddRef. dbgeng manages lifecycle
-		return bpt;
+        // NOTE: Do not AddRef. dbgeng manages lifecycle
+		return DebugBreakpointInternal.tryPreferredInterfaces(this, Bp::QueryInterface);
 	}
 
 	@Override
@@ -200,10 +196,8 @@ public class DebugControlImpl1 implements DebugControlInternal {
 		}
 		COMUtils.checkRC(hr);
 		IDebugBreakpoint Bp = new WrapIDebugBreakpoint(ppBp.getValue());
-		DebugBreakpoint bpt =
-			DebugBreakpointInternal.tryPreferredInterfaces(this, Bp::QueryInterface);
-		// NOTE: Do not AddRef. dbgeng manages lifecycle
-		return bpt;
+        // NOTE: Do not AddRef. dbgeng manages lifecycle
+		return DebugBreakpointInternal.tryPreferredInterfaces(this, Bp::QueryInterface);
 	}
 
 	@Override

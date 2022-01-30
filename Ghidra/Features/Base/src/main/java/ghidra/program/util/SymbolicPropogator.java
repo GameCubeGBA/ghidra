@@ -1761,12 +1761,11 @@ public class SymbolicPropogator {
 		if (trustSignature) {
 			// Loop through defined parameters for a valid address value
 			for (Parameter param : params) {
-				Parameter p = param;
-				if (!p.isRegisterVariable()) {
+                if (!param.isRegisterVariable()) {
 					continue;
 				}
 				createVariableStorageReference(instruction, varnodeContext, monitor,
-					p.getVariableStorage(), callOffset);
+					param.getVariableStorage(), callOffset);
 			}
 		}
 		else {
@@ -2402,9 +2401,8 @@ public class SymbolicPropogator {
 		catch (DataTypeConflictException e) {
 			// do nothing
 		}
-		int addrByteSize = dt.getLength();
 
-		return addrByteSize;
+        return dt.getLength();
 	}
 
 	private int findOpIndexForRef(VarnodeContext context, Instruction instruction, int opIndex,

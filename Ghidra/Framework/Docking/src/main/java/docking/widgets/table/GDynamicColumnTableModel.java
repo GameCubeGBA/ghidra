@@ -211,8 +211,7 @@ public abstract class GDynamicColumnTableModel<ROW_TYPE, DATA_SOURCE>
 	@SuppressWarnings("unchecked") // the column provides the values itself; safe cast
 	protected Comparator<Object> createSortComparatorForColumn(int columnIndex) {
 		DynamicTableColumn<ROW_TYPE, ?, ?> column = getColumn(columnIndex);
-		Comparator<Object> comparator = (Comparator<Object>) column.getComparator();
-		return comparator;
+        return (Comparator<Object>) column.getComparator();
 	}
 
 	/**

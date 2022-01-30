@@ -189,8 +189,7 @@ public abstract class DefaultVisualGraph<V extends VisualVertex,
 
 		Collection<E> in = getInEdges(v);
 		Collection<E> out = getOutEdges(v);
-		Iterable<E> concatenated = Iterables.concat(in, out);
-		return concatenated;
+        return Iterables.concat(in, out);
 	}
 
 	/**
@@ -208,10 +207,9 @@ public abstract class DefaultVisualGraph<V extends VisualVertex,
 		unique.addAll(outs);
 		unique.addAll(ins);
 
-		Iterable<E> filtered = IterableUtils.filteredIterable(unique, e -> {
-			return e.getStart().equals(start) && e.getEnd().equals(end);
-		});
-		return filtered;
+        return IterableUtils.filteredIterable(unique, e -> {
+            return e.getStart().equals(start) && e.getEnd().equals(end);
+        });
 	}
 
 //==================================================================================================

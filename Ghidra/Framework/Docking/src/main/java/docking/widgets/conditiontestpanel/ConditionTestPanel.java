@@ -144,8 +144,7 @@ public class ConditionTestPanel extends JPanel {
 		detailsLabel = new ScrollableLabel();
 
 		detailsLabel.setVerticalAlignment(SwingConstants.TOP);
-		JScrollPane scroll = new JScrollPane(detailsLabel);
-		return scroll;
+        return new JScrollPane(detailsLabel);
 	}
 
 	private Component buildTestPanel() {

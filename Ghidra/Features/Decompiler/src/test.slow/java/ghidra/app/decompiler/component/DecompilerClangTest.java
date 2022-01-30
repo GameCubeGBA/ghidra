@@ -1858,24 +1858,21 @@ public class DecompilerClangTest extends AbstractDecompilerTest {
 
 		DecompilerController controller = provider.getController();
 		DecompilerPanel panel = controller.getDecompilerPanel();
-		Color c = panel.getCurrentVariableHighlightColor();
-		return c;
+        return panel.getCurrentVariableHighlightColor();
 	}
 
 	private Color getSpecialHighlightColor() {
 
 		DecompilerController controller = provider.getController();
 		DecompilerPanel panel = controller.getDecompilerPanel();
-		Color c = panel.getSpecialHighlightColor();
-		return c;
+        return panel.getSpecialHighlightColor();
 	}
 
 	private Color getMiddleMouseHighlightColor() {
 
 		DecompilerController controller = provider.getController();
 		DecompilerPanel panel = controller.getDecompilerPanel();
-		Color c = panel.getMiddleMouseHighlightColor();
-		return c;
+        return panel.getMiddleMouseHighlightColor();
 	}
 
 	private Color getBlendedColor(Color... colors) {
@@ -2232,8 +2229,7 @@ public class DecompilerClangTest extends AbstractDecompilerTest {
 		int a = c.getAlpha();
 		// "Color[r=" + r +",g=" + g  +",b=" + b + ",a="+ a + "]"
 		// "Color[r=%s,g=%s,b=%s,a=%s]"
-		String formatted = String.format("Color{%s, %s, %s, %s}", r, g, b, a);
-		return formatted;
+        return String.format("Color{%s, %s, %s, %s}", r, g, b, a);
 	}
 
 	private void copy() {
@@ -2271,8 +2267,7 @@ public class DecompilerClangTest extends AbstractDecompilerTest {
 	}
 
 	private ClangTextField getTextField(FieldLocation loc) {
-		ClangTextField field = getFieldForIndex(loc.getIndex().intValue());
-		return field;
+        return getFieldForIndex(loc.getIndex().intValue());
 	}
 
 	private void assertDisplayText(String expected, int line) {
@@ -2290,15 +2285,13 @@ public class DecompilerClangTest extends AbstractDecompilerTest {
 	}
 
 	private int getTokenIndex(ClangTextField field, FieldLocation loc) {
-		Integer index = (Integer) invokeInstanceMethod("getTokenIndex", field,
-			new Class[] { FieldLocation.class }, new Object[] { loc });
-		return index;
+        return (Integer) invokeInstanceMethod("getTokenIndex", field,
+            new Class[] { FieldLocation.class }, new Object[] { loc });
 	}
 
 	private int getNextTokenIndex(ClangTextField field, FieldLocation loc) {
-		Integer index = (Integer) invokeInstanceMethod("getNextTokenIndexStartingAfter", field,
-			new Class[] { FieldLocation.class }, new Object[] { loc });
-		return index;
+        return (Integer) invokeInstanceMethod("getNextTokenIndexStartingAfter", field,
+            new Class[] { FieldLocation.class }, new Object[] { loc });
 	}
 
 	private class ColorMatcher {

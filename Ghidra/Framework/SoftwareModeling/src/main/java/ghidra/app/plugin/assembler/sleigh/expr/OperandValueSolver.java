@@ -96,10 +96,13 @@ public class OperandValueSolver extends AbstractExpressionSolver<OperandValue> {
 		if (patexp == null) {
 			return MaskedLong.ZERO;
 		}
-		int shamt = AssemblyTreeResolver.computeOffset(sym, cons);
-		cur = cur == null ? null : cur.truncate(shamt);
-		MaskedLong result = solver.getValue(patexp, vals, cur);
-		return result;
+		
+		if (cur != null)
+		{
+			cur = cur.truncate(AssemblyTreeResolver.computeOffset(sym, cons));
+		}
+			
+		return solver.getValue(patexp, vals, cur);
 	}
 
 	@Override
@@ -121,18 +124,16 @@ public class OperandValueSolver extends AbstractExpressionSolver<OperandValue> {
 		Constructor cons = ov.getConstructor();
 		OperandSymbol sym = cons.getOperand(ov.getIndex());
 		PatternExpression patexp = sym.getDefiningExpression();
-		if (patexp != null) {
-			// We're good to go
-		}
-		else {
+		if (patexp == null) {
 			TripleSymbol defSym = sym.getDefiningSymbol();
 			if (defSym != null) {
 				patexp = defSym.getPatternExpression();
 			}
+			if (patexp == null) {
+				return MaskedLong.ZERO; // TODO: ZERO or UNKS?
+			}
 		}
-		if (patexp == null) {
-			return MaskedLong.ZERO; // TODO: ZERO or UNKS?
-		}
+
 		// TODO: Can just shift the rc to the left the appropriate number of bytes.
 		// Would only affect the instruction block.
 		// Since I'm using this just for context, ignore shifting for now.

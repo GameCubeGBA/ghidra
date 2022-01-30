@@ -62,9 +62,7 @@ public class PreCommentMarkupType extends CommentMarkupType {
 
 	@Override
 	public VTMatchApplyChoices.CommentChoices getCommentChoice(ToolOptions options) {
-		VTMatchApplyChoices.CommentChoices commentChoice =
-			options.getEnum(VTOptionDefines.PRE_COMMENT, CommentChoices.APPEND_TO_EXISTING);
-		return commentChoice;
+        return options.getEnum(VTOptionDefines.PRE_COMMENT, CommentChoices.APPEND_TO_EXISTING);
 	}
 
 	@Override

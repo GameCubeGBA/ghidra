@@ -58,8 +58,7 @@ public abstract class VTPostAnalysisPreconditionValidatorAdaptor extends VTPreco
 		TaskMonitor[] subMonitors = TaskMonitorSplitter.splitTaskMonitor(monitor, 2);
 		ConditionResult sourceResult = sourceValidator.run(subMonitors[0]);
 		ConditionResult destinationResult = destinationValidator.run(subMonitors[1]);
-		ConditionResult result = combine(sourceResult, destinationResult);
-		return result;
+        return combine(sourceResult, destinationResult);
 	}
 
 	private ConditionResult combine(ConditionResult sourceResult, ConditionResult destinationResult) {

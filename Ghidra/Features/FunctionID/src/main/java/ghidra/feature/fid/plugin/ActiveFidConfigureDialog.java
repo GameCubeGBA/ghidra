@@ -82,8 +82,7 @@ public class ActiveFidConfigureDialog extends DialogComponentProvider {
 	}
 
 	private Component buildCheckboxPanelScroller() {
-		JScrollPane scrollPane = new JScrollPane(buildCheckBoxPanel());
-		return scrollPane;
+        return new JScrollPane(buildCheckBoxPanel());
 	}
 
 	private Component buildCheckBoxPanel() {

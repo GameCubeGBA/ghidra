@@ -58,8 +58,7 @@ public class MultiSetSTL<K> {
 
 	public IteratorSTL<K> upper_bound( K key ) {
 		RedBlackNode<K,K> node = rbTree.upperBound( key );
-		SetIterator<K> it = new SetIterator<>(rbTree, node);
-		return it;
+        return new SetIterator<>(rbTree, node);
 	}
 	public static void main(String[] args) {
 		MultiSetSTL<Integer> set = new ComparableMultiSetSTL<Integer>();

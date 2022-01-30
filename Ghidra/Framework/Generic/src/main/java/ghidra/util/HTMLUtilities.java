@@ -394,8 +394,7 @@ public class HTMLUtilities {
 		matcher.appendTail(buffy);
 
 		String pass1 = buffy.toString();
-		String pass2 = pass1.replaceAll(LINK_PLACEHOLDER_CLOSE, "</A>");
-		return pass2;
+        return pass1.replaceAll(LINK_PLACEHOLDER_CLOSE, "</A>");
 	}
 
 	/**
@@ -407,8 +406,7 @@ public class HTMLUtilities {
 	 */
 	public static String toHTML(String text) {
 		int noMax = 0;
-		String html = toWrappedHTML(text, noMax);
-		return html;
+        return toWrappedHTML(text, noMax);
 	}
 
 	/**
@@ -472,9 +470,7 @@ public class HTMLUtilities {
 			text = text.substring(0, MAX_TOOLTIP_LENGTH) + "...";
 		}
 
-		String html =
-			toHTMLWithLineWrappingAndEncoding(text, DEFAULT_TOOLTIP_MAX_LINE_LENGTH, false);
-		return html;
+        return toHTMLWithLineWrappingAndEncoding(text, DEFAULT_TOOLTIP_MAX_LINE_LENGTH, false);
 	}
 
 	/**
@@ -663,8 +659,7 @@ public class HTMLUtilities {
 	 * @return the updated text
 	 */
 	public static String toLiteralHTML(String text, int maxLineLength) {
-		String html = toHTMLWithLineWrappingAndEncoding(text, maxLineLength, true);
-		return html;
+        return toHTMLWithLineWrappingAndEncoding(text, maxLineLength, true);
 	}
 
 	private static String toHTMLWithLineWrappingAndEncoding(String text, int maxLineLength,
@@ -682,8 +677,7 @@ public class HTMLUtilities {
 			}
 		}
 
-		String html = wrapAsHTML(buffy.toString());
-		return html;
+        return wrapAsHTML(buffy.toString());
 	}
 
 	/**
@@ -786,9 +780,7 @@ public class HTMLUtilities {
 		String raw = g.getBuffer();
 		raw = raw.trim(); // I can't see any reason to keep leading/trailing newlines/whitespace
 
-		String updated = replaceKnownSpecialCharacters(raw);
-
-		//
+        //
 		// Unfortunately, the label adds odd artifacts to the output, like newlines after
 		// formatting tags (like <B>, <FONT>, etc).   So, just normalize the text, not
 		// preserving any of the line breaks.
@@ -797,7 +789,7 @@ public class HTMLUtilities {
 		//       need for this call is found, this can be revisited. 
 		//       (see history for condense() code)
 		// String condensed = condense(updated);
-		return updated;
+		return replaceKnownSpecialCharacters(raw);
 	}
 
 	/**

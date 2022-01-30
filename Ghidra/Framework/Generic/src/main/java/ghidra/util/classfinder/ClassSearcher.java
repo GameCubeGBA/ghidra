@@ -284,22 +284,19 @@ public class ClassSearcher {
 			rawPaths.add(st.nextToken());
 		}
 
-		List<String> canonicalPaths = canonicalizePaths(rawPaths);
-		return canonicalPaths;
+        return canonicalizePaths(rawPaths);
 	}
 
 	private static List<String> canonicalizePaths(Collection<String> paths) {
 
 		//@formatter:off
-		List<String> canonical = paths.stream()
+        //@formatter:on
+
+		return paths.stream()
 			 .map(path -> {
-				 String normalized = normalize(path);
-				 return normalized;
+                 return normalize(path);
 			 })
 			 .collect(Collectors.toList());
-		//@formatter:on
-
-		return canonical;
 	}
 
 	private static String normalize(String path) {

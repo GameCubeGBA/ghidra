@@ -484,8 +484,7 @@ public class DecompilerProvider extends NavigatableComponentProviderAdapter
 		ClangLine line = lines.get(cursor.getRow());
 		ClangToken tokenAtCursor = decompilerPanel.getTokenAtCursor();
 		List<ClangToken> tokens = Arrays.asList(tokenAtCursor);
-		String string = line.toDebugString(tokens);
-		return string;
+        return line.toDebugString(tokens);
 	}
 
 	/**
@@ -545,8 +544,7 @@ public class DecompilerProvider extends NavigatableComponentProviderAdapter
 
 		Navigatable navigatable = this;
 		if (newWindow) {
-			DecompilerProvider newProvider = plugin.createNewDisconnectedProvider();
-			navigatable = newProvider;
+            navigatable = plugin.createNewDisconnectedProvider();
 		}
 
 		annotation.handleMouseClicked(navigatable, tool);
@@ -568,8 +566,7 @@ public class DecompilerProvider extends NavigatableComponentProviderAdapter
 
 		Navigatable navigatable = this;
 		if (newWindow) {
-			DecompilerProvider newProvider = plugin.createNewDisconnectedProvider();
-			navigatable = newProvider;
+            navigatable = plugin.createNewDisconnectedProvider();
 		}
 
 		QueryData queryData = new QueryData(symbolName, true);
@@ -614,8 +611,7 @@ public class DecompilerProvider extends NavigatableComponentProviderAdapter
 
 		Navigatable navigatable = this;
 		if (newWindow) {
-			DecompilerProvider newProvider = plugin.createNewDisconnectedProvider();
-			navigatable = newProvider;
+            navigatable = plugin.createNewDisconnectedProvider();
 		}
 
 		service.goTo(navigatable, new ProgramLocation(program, address), program);
@@ -631,8 +627,7 @@ public class DecompilerProvider extends NavigatableComponentProviderAdapter
 
 		Navigatable navigatable = this;
 		if (newWindow) {
-			DecompilerProvider newProvider = plugin.createNewDisconnectedProvider();
-			navigatable = newProvider;
+            navigatable = plugin.createNewDisconnectedProvider();
 		}
 
 		if (function.isExternal()) {
@@ -938,23 +933,22 @@ public class DecompilerProvider extends NavigatableComponentProviderAdapter
 		//
 
 		// note: set the menu group so that the 'References' group is with the 'Find' action
-		String referencesParentGroup = searchGroup;
 
-		FindReferencesToDataTypeAction findReferencesAction =
+        FindReferencesToDataTypeAction findReferencesAction =
 			new FindReferencesToDataTypeAction(owner, tool, controller);
 		setGroupInfo(findReferencesAction, searchGroup, subGroupPosition++);
-		findReferencesAction.getPopupMenuData().setParentMenuGroup(referencesParentGroup);
+		findReferencesAction.getPopupMenuData().setParentMenuGroup(searchGroup);
 
 		FindReferencesToSymbolAction findReferencesToSymbolAction =
 			new FindReferencesToSymbolAction();
 		setGroupInfo(findReferencesToSymbolAction, searchGroup, subGroupPosition++);
-		findReferencesToSymbolAction.getPopupMenuData().setParentMenuGroup(referencesParentGroup);
+		findReferencesToSymbolAction.getPopupMenuData().setParentMenuGroup(searchGroup);
 		addLocalAction(findReferencesToSymbolAction);
 
 		FindReferencesToAddressAction findReferencesToAdressAction =
 			new FindReferencesToAddressAction(tool, owner);
 		setGroupInfo(findReferencesToAdressAction, searchGroup, subGroupPosition++);
-		findReferencesToAdressAction.getPopupMenuData().setParentMenuGroup(referencesParentGroup);
+		findReferencesToAdressAction.getPopupMenuData().setParentMenuGroup(searchGroup);
 		addLocalAction(findReferencesToAdressAction);
 
 		//

@@ -179,8 +179,7 @@ public class FunctionsTable {
 		byte flags = (byte) (hasTerminator ? FunctionRecord.HAS_TERMINATOR_FLAG : 0);
 		record.setByteValue(FLAGS_COL, flags);
 		table.putRecord(record);
-		FunctionRecord functionRecord = new FunctionRecord(fidDb, functionCache, record);
-		return functionRecord;
+        return new FunctionRecord(fidDb, functionCache, record);
 	}
 
 	/**

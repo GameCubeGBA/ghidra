@@ -135,8 +135,7 @@ public class XmlTestHelper {
 	}
 
 	public boolean containsXml(String line) {
-		boolean contains = xmlList.contains(line);
-		return contains;
+        return xmlList.contains(line);
 	}
 
 	public void printExpectedLines() {
@@ -158,8 +157,7 @@ public class XmlTestHelper {
 		}
 
 		writer.close();
-		XmlPullParser parser = XmlPullParserFactory.create(file, null, false);
-		return parser;
+        return XmlPullParserFactory.create(file, null, false);
 	}
 
 	/**

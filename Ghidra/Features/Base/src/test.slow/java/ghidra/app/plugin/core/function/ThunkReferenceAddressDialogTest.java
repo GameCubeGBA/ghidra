@@ -192,9 +192,7 @@ public class ThunkReferenceAddressDialogTest extends AbstractGhidraHeadedIntegra
 		assertFalse(revertThunk.isEnabledForContext(actionContext));
 		performAction(editThunk, actionContext, false);
 
-		ThunkReferenceAddressDialog dialog =
-			waitForDialogComponent(ThunkReferenceAddressDialog.class);
-		return dialog;
+        return waitForDialogComponent(ThunkReferenceAddressDialog.class);
 	}
 
 	private Address addr(long offset) {

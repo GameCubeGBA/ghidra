@@ -969,12 +969,11 @@ public class DataTypeManagerHandler {
 		DomainFile df = pa.getDomainObject().getDomainFile();
 		ProjectLocator projectLocator = df.getProjectLocator();
 		String projectName = projectLocator.getName();
-		String dfProjectName = projectName;
-		boolean remember = df.isInWritableProject();
+        boolean remember = df.isInWritableProject();
 		if (!remember) {
 			// handle read-only case
 			Project project = tool.getProjectManager().getActiveProject();
-			remember = (project != null && project.getName().equals(dfProjectName) &&
+			remember = (project != null && project.getName().equals(projectName) &&
 				df.getVersion() == DomainFile.DEFAULT_VERSION);
 		}
 		return remember ? getProjectPathname(projectName, df.getPathname()) : null;

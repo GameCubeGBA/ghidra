@@ -139,7 +139,6 @@ public class PythonScriptTest extends AbstractGhidraHeadedIntegrationTest {
 			ref.set(text);
 		});
 
-		String text = ref.get();
-		return text;
+        return ref.get();
 	}
 }

@@ -197,8 +197,7 @@ public class SelectByScopedFlowPlugin extends ProgramPlugin {
 		}
 
 		Collection<CodeBlock> blocks = generateCodeBlocksFromVertices(dominated);
-		ProgramSelection selection = makeSelectionFromCodeBlocks(blocks, program);
-		return selection;
+        return makeSelectionFromCodeBlocks(blocks, program);
 	}
 
 	private CodeBlockVertex getVertex(ProgramLocation location,
@@ -239,8 +238,7 @@ public class SelectByScopedFlowPlugin extends ProgramPlugin {
 			Program program) {
 		AddressSet set = getAddressForCodeBlocks(blocks, program);
 		AddressFactory addressFactory = program.getAddressFactory();
-		ProgramSelection selection = new ProgramSelection(addressFactory, set);
-		return selection;
+        return new ProgramSelection(addressFactory, set);
 	}
 
 	private AddressSet getAddressForCodeBlocks(Collection<CodeBlock> blocks, Program program) {

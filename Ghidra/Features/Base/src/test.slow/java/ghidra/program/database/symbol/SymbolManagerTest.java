@@ -2368,8 +2368,7 @@ public class SymbolManagerTest extends AbstractGhidraHeadedIntegrationTest {
 
 	private List<String> search(String text, boolean caseSensitive) {
 		SymbolIterator it = st.getSymbolIterator(text, caseSensitive);
-		List<String> list = drain(it);
-		return list;
+        return drain(it);
 	}
 
 	private void assertContains(List<String> list, String... strings) {

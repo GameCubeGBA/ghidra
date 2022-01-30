@@ -759,17 +759,15 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 			throws CancelledException {
 		lock.acquire();
 		try {
-			Address start = fromAddr;
-			Address newStart = toAddr;
-			Address newEnd = newStart.add(length - 1);
+            Address newEnd = toAddr.add(length - 1);
 
 			monitor.setMessage("Moving code...");
 
 			try {
-				moveDefinedCodeUnits(start, newStart, length, monitor);
+				moveDefinedCodeUnits(fromAddr, toAddr, length, monitor);
 				invalidateCache(true);
-				addMovedInstructionReferences(newStart, newEnd, monitor);
-				addMovedDataReferences(newStart, newEnd, monitor);
+				addMovedInstructionReferences(toAddr, newEnd, monitor);
+				addMovedDataReferences(toAddr, newEnd, monitor);
 			}
 			catch (IOException e) {
 				program.dbError(e);
@@ -804,8 +802,7 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 				return getUndefinedDataDB(address, addr);
 			}
 			// Dummy back a Data for the data type.
-			DataDB dataDB = new DataDB(this, null, addr, address, addr, dataType);
-			return dataDB;
+            return new DataDB(this, null, addr, address, addr, dataType);
 		}
 		return getCodeUnitAt(addr);
 	}
@@ -1028,8 +1025,7 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 						return getUndefinedDataDB(address, addr);
 					}
 					// Dummy back a Data for the data type.
-					DataDB dataDB = new DataDB(this, null, addr, address, addr, dataType);
-					return dataDB;
+                    return new DataDB(this, null, addr, address, addr, dataType);
 				}
 			}
 			catch (IOException e) {
@@ -1755,8 +1751,7 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 				return getUndefinedDataDB(address, addr);
 			}
 			// Dummy back a Data for the data type.
-			DataDB dataDB = new DataDB(this, null, addr, address, addr, dataType);
-			return dataDB;
+            return new DataDB(this, null, addr, address, addr, dataType);
 		}
 		return null;
 	}
@@ -3064,8 +3059,7 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 	DataType getDataType(DBRecord dataRecord) {
 		if (dataRecord != null) {
 			long datatypeID = dataRecord.getLongValue(DataDBAdapter.DATA_TYPE_ID_COL);
-			DataType dt = dataManager.getDataType(datatypeID);
-			return dt;
+            return dataManager.getDataType(datatypeID);
 		}
 		return null;
 	}
@@ -3091,9 +3085,7 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 				if (address instanceof SegmentedAddress) {
 					address = normalize((SegmentedAddress) address, program.getMemory());
 				}
-				DataDB data =
-					new DataDB(this, cache, addr, address, addr, DefaultDataType.dataType);
-				return data;
+                return new DataDB(this, cache, addr, address, addr, DefaultDataType.dataType);
 			}
 			else if (cu instanceof Data) {
 				if (!((Data) cu).isDefined()) {

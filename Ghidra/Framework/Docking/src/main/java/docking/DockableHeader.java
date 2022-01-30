@@ -379,10 +379,9 @@ public class DockableHeader extends GenericHeader
 
 			DockableComponent draggedOverComponent = placeholder.getComponent();
 			SwingUtilities.convertPointFromScreen(screenPoint, draggedOverComponent);
-			Component hoveredComponent = SwingUtilities.getDeepestComponentAt(draggedOverComponent,
-				screenPoint.x, screenPoint.y);
 
-			mousedComponent = hoveredComponent;
+            mousedComponent = SwingUtilities.getDeepestComponentAt(draggedOverComponent,
+                screenPoint.x, screenPoint.y);
 			if (mousedComponent == null) {
 				mousedComponent = placeholder.getComponent();
 			}

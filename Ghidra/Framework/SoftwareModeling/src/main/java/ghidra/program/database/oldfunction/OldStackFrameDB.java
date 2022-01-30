@@ -415,9 +415,7 @@ class OldStackFrameDB implements StackFrame {
 		int index = 0;
 		for (index = 0; index < length; index++) {
 			Variable var = variables.get(index);
-			int stackOffset = var.getStackOffset();
-			int start = stackOffset;
-			if (start >= 0 || start > paramStart) {
+            if (var.getStackOffset() >= 0 || var.getStackOffset() > paramStart) {
 				break;
 			}
 		}

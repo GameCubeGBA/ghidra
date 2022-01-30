@@ -726,8 +726,7 @@ public strictfp class FloatFormat {
 	public long opEqual(long a, long b) { // a == b
 		double val1 = getHostFloat(a);
 		double val2 = getHostFloat(b);
-		long res = (val1 == val2) ? 1 : 0;
-		return res;
+        return (val1 == val2) ? 1 : 0;
 	}
 
 	public BigInteger opEqual(BigInteger a, BigInteger b) { // a == b
@@ -736,15 +735,13 @@ public strictfp class FloatFormat {
 		if (fa.isNaN() || fb.isNaN()) {
 			return BigInteger.ZERO;
 		}
-		BigInteger res = SystemUtilities.isEqual(fa, fb) ? BigInteger.ONE : BigInteger.ZERO;
-		return res;
+        return SystemUtilities.isEqual(fa, fb) ? BigInteger.ONE : BigInteger.ZERO;
 	}
 
 	public long opNotEqual(long a, long b) { // a != b
 		double val1 = getHostFloat(a);
 		double val2 = getHostFloat(b);
-		long res = (val1 != val2) ? 1 : 0;
-		return res;
+        return (val1 != val2) ? 1 : 0;
 	}
 
 	public BigInteger opNotEqual(BigInteger a, BigInteger b) { // a != b
@@ -753,49 +750,42 @@ public strictfp class FloatFormat {
 		if (fa.isNaN() || fb.isNaN()) {
 			return BigInteger.ONE;
 		}
-		BigInteger res = SystemUtilities.isEqual(fa, fb) ? BigInteger.ZERO : BigInteger.ONE;
-		return res;
+        return SystemUtilities.isEqual(fa, fb) ? BigInteger.ZERO : BigInteger.ONE;
 	}
 
 	public long opLess(long a, long b) { // a < b
 		double val1 = getHostFloat(a);
 		double val2 = getHostFloat(b);
-		long res = (val1 < val2) ? 1 : 0;
-		return res;
+        return (val1 < val2) ? 1 : 0;
 	}
 
 	public BigInteger opLess(BigInteger a, BigInteger b) { // a < b
 		BigFloat fa = getHostFloat(a);
 		BigFloat fb = getHostFloat(b);
-		BigInteger res = (fa.compareTo(fb) < 0) ? BigInteger.ONE : BigInteger.ZERO;
-		return res;
+        return (fa.compareTo(fb) < 0) ? BigInteger.ONE : BigInteger.ZERO;
 	}
 
 	public long opLessEqual(long a, long b) { // a <= b
 		double val1 = getHostFloat(a);
 		double val2 = getHostFloat(b);
-		long res = (val1 <= val2) ? 1 : 0;
-		return res;
+        return (val1 <= val2) ? 1 : 0;
 	}
 
 	public BigInteger opLessEqual(BigInteger a, BigInteger b) { // a <= b
 		BigFloat fa = getHostFloat(a);
 		BigFloat fb = getHostFloat(b);
-		BigInteger res = (fa.compareTo(fb) <= 0) ? BigInteger.ONE : BigInteger.ZERO;
-		return res;
+        return (fa.compareTo(fb) <= 0) ? BigInteger.ONE : BigInteger.ZERO;
 	}
 
 	// true if a is "not a number"
 	public long opNan(long a) {
 		double val = getHostFloat(a);
-		long res = Double.isNaN(val) ? 1 : 0;
-		return res;
+        return Double.isNaN(val) ? 1 : 0;
 	}
 
 	public BigInteger opNan(BigInteger a) {
 		BigFloat val = getHostFloat(a);
-		BigInteger res = (val.isNaN()) ? BigInteger.ONE : BigInteger.ZERO;
-		return res;
+        return (val.isNaN()) ? BigInteger.ONE : BigInteger.ZERO;
 	}
 
 	public long opAdd(long a, long b) { // a + b

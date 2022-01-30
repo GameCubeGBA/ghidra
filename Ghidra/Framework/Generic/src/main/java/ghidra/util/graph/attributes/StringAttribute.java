@@ -107,13 +107,11 @@ public class StringAttribute<T extends KeyedObject> extends Attribute<T> {
 	class StringComparator implements Comparator<KeyedObject> {
 		@Override
 		public int compare(KeyedObject object1, KeyedObject object2) {
-			KeyedObject ko1 = object1;
-			KeyedObject ko2 = object2;
-			int returnValue = 0;
+            int returnValue = 0;
 			String value1 = null;
 			String value2 = null;
-			value1 = getValue(ko1); //}catch( NoValueException exc ){value1 = null;}          	
-			value2 = getValue(ko2); //} catch( NoValueException exc){value2 = null;}          	
+			value1 = getValue(object1); //}catch( NoValueException exc ){value1 = null;}
+			value2 = getValue(object2); //} catch( NoValueException exc){value2 = null;}
 
 			if (value1 != null) {
 				if (value2 != null) {
@@ -121,10 +119,10 @@ public class StringAttribute<T extends KeyedObject> extends Attribute<T> {
 					if (returnValue != 0) {
 						return returnValue;
 					}
-					if ((ko1.key() - ko2.key()) < 0) {
+					if ((object1.key() - object2.key()) < 0) {
 						return -1;
 					}
-					else if ((ko1.key() - ko2.key()) > 0) {
+					else if ((object1.key() - object2.key()) > 0) {
 						return +1;
 					}
 					else {
@@ -137,10 +135,10 @@ public class StringAttribute<T extends KeyedObject> extends Attribute<T> {
 			if (value2 != null) {
 				return 1; //ko2 is ok so it precedes ko1
 			}
-			if ((ko1.key() - ko2.key()) < 0) {
+			if ((object1.key() - object2.key()) < 0) {
 				return -1;
 			}
-			else if ((ko1.key() - ko2.key()) > 0) {
+			else if ((object1.key() - object2.key()) > 0) {
 				return +1;
 			}
 			else {

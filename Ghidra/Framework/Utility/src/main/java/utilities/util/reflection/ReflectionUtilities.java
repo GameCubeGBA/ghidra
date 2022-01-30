@@ -288,9 +288,7 @@ public class ReflectionUtilities {
 			return trace;
 		}
 
-		StackTraceElement[] updatedTrace =
-			Arrays.copyOfRange(trace, desiredStartIndex, trace.length);
-		return updatedTrace;
+        return Arrays.copyOfRange(trace, desiredStartIndex, trace.length);
 	}
 
 	/**

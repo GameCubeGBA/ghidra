@@ -238,8 +238,7 @@ public abstract class VisualGraphComponentProvider<V extends VisualVertex,
 			return null;
 		}
 
-		V vertex = info.getVertex();
-		return vertex;
+        return info.getVertex();
 	}
 
 	private GraphViewer<V, E> getPrimaryGraphViewer(Object source) {

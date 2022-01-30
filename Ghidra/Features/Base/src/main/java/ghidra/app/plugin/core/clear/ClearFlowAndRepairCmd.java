@@ -778,9 +778,8 @@ public class ClearFlowAndRepairCmd extends BackgroundCommand {
 			if (!intersect.isEmpty() && !intersect.getMinAddress().equals(blockAddr)) {
 				Address[] entryPts = new Address[1];
 				entryPts[0] = blockAddr;
-				CodeBlock block = new CodeBlockImpl(blockModel, entryPts,
-					new AddressSet(blockAddr, intersect.getMinAddress().subtract(1)));
-				blockToAdjust = block;
+                blockToAdjust = new CodeBlockImpl(blockModel, entryPts,
+                    new AddressSet(blockAddr, intersect.getMinAddress().subtract(1)));
 			}
 		}
 		return blockToAdjust;

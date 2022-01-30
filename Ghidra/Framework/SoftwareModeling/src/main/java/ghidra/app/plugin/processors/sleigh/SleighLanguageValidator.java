@@ -226,8 +226,7 @@ public class SleighLanguageValidator {
 	private static Verifier getVerifier(ResourceFile relaxSchemaFile) throws Exception {
 		VerifierFactory factory = new com.sun.msv.verifier.jarv.TheFactoryImpl();
 		Schema schema = factory.compileSchema(relaxSchemaFile.toURL().toExternalForm());
-		Verifier verifier = schema.newVerifier();
-		return verifier;
+        return schema.newVerifier();
 	}
 
 	private static class VerifierErrorHandler implements ErrorHandler {

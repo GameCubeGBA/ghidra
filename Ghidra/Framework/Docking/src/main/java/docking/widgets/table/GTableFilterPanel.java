@@ -684,8 +684,7 @@ public class GTableFilterPanel<ROW_OBJECT> extends JPanel {
 	 * @return the row object matching the given index
 	 */
 	public ROW_OBJECT getRowObject(int viewRow) {
-		ROW_OBJECT rowObject = textFilterModel.getRowObject(viewRow);
-		return rowObject;
+        return textFilterModel.getRowObject(viewRow);
 	}
 
 	/**
@@ -986,8 +985,7 @@ public class GTableFilterPanel<ROW_OBJECT> extends JPanel {
 		String filterName = "Filter"; // this catches xyzFilterPane and xyzFilterTable
 		StackTraceElement[] filteredTrace =
 			ReflectionUtilities.filterStackTrace(stackTrace, filterName);
-		String clientName = filteredTrace[0].getClassName();
-		return clientName;
+        return filteredTrace[0].getClassName();
 	}
 
 //==================================================================================================

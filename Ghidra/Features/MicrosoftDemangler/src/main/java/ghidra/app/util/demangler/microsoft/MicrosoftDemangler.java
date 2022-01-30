@@ -42,8 +42,7 @@ public class MicrosoftDemangler implements Demangler {
 	public DemangledObject demangle(String mangled, boolean demangleOnlyKnownPatterns)
 			throws DemangledException {
 		try {
-			DemangledObject demangled = demangleMS(mangled, demangleOnlyKnownPatterns);
-			return demangled;
+            return demangleMS(mangled, demangleOnlyKnownPatterns);
 		}
 		catch (DemangledException e) {
 			throw new DemangledException(true);
@@ -55,8 +54,7 @@ public class MicrosoftDemangler implements Demangler {
 			throws DemangledException {
 
 		try {
-			DemangledObject demangled = demangleMS(mangled, options.demangleOnlyKnownPatterns());
-			return demangled;
+            return demangleMS(mangled, options.demangleOnlyKnownPatterns());
 		}
 		catch (DemangledException e) {
 			throw new DemangledException(true);
@@ -72,8 +70,7 @@ public class MicrosoftDemangler implements Demangler {
 		MDMangGhidra demangler = new MDMangGhidra();
 		try {
 			demangler.demangle(mangled, demangleOnlyKnownPatterns);
-			DemangledObject object = demangler.getObject();
-			return object;
+            return demangler.getObject();
 		}
 		catch (MDException e) {
 			DemangledException de =

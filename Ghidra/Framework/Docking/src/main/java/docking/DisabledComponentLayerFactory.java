@@ -35,9 +35,8 @@ public class DisabledComponentLayerFactory {
 	}
 
 	public static JLayer<JComponent> getDisabledLayer(JComponent component) {
-		JLayer<JComponent> layer = new JLayer<JComponent>(component, disabledUI);
 
-		return layer;
+        return new JLayer<JComponent>(component, disabledUI);
 	}
 
 	private static class DisabledComponentLayerUI extends LayerUI<JComponent> {

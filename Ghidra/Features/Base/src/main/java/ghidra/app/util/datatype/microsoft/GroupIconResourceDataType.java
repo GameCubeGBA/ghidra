@@ -70,8 +70,7 @@ public class GroupIconResourceDataType extends DynamicDataType {
 	protected DataTypeComponent[] getAllComponents(MemBuffer buf) {
 
 		List<DataTypeComponent> comps = new ArrayList<>();
-		MemBuffer memBuffer = buf;
-		int structureOffset = 0;
+        int structureOffset = 0;
 		int numIconDirEntries;
 
 		try {
@@ -80,7 +79,7 @@ public class GroupIconResourceDataType extends DynamicDataType {
 				comps.size(), structureOffset, "GroupIcon Header", null));
 
 			//get the number of Icon Directory Entry Structures from the idCount member of the header structure 
-			numIconDirEntries = memBuffer.getShort(structureOffset + 4);
+			numIconDirEntries = buf.getShort(structureOffset + 4);
 
 			//increment the offset by the header size
 			structureOffset += 6;
@@ -97,8 +96,7 @@ public class GroupIconResourceDataType extends DynamicDataType {
 			Msg.debug(this, "Error applying GroupIcon Resource Data Type.");
 		}
 
-		DataTypeComponent[] result = comps.toArray(new DataTypeComponent[comps.size()]);
-		return result;
+        return comps.toArray(new DataTypeComponent[comps.size()]);
 	}
 
 	//This is the first thing in a Group Icon Resource

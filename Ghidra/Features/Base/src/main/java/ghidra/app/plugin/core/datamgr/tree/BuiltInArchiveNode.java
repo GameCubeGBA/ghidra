@@ -29,8 +29,7 @@ public class BuiltInArchiveNode extends ArchiveNode {
 	@Override
 	public Icon getIcon(boolean expanded) {
 		Icon baseIcon = archive.getIcon(expanded);
-		MultiIcon multiIcon = new MultiIcon(baseIcon);
-		return multiIcon;
+        return new MultiIcon(baseIcon);
 	}
 
 	@Override
