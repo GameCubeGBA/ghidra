@@ -702,17 +702,13 @@ public class DemangledDataType extends DemangledType {
 			buffer.append(SPACE + RESTRICT);
 		}
 
-		for (int i = 1; i < pointerLevels; i++) {
-			buffer.append(SPACE + PTR_NOTATION);
-		}
+		buffer.append((SPACE + PTR_NOTATION).repeat(pointerLevels - 1));
 
 		if (isArray()) {
 			// only put subscript on if the name doesn't have it
 			Matcher matcher = ARRAY_SUBSCRIPT_PATTERN.matcher(getName());
 			if (!matcher.find()) {
-				for (int i = 0; i < arrayDimensions; i++) {
-					buffer.append(ARR_NOTATION);
-				}
+				buffer.append(ARR_NOTATION.repeat(arrayDimensions));
 			}
 		}
 		return buffer.toString();

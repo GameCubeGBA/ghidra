@@ -53,14 +53,9 @@ public class JavaSourceFile {
 				linesList.add(new JavaSourceLine(line + newline, ++lineNumber));
 			}
 
-		}
-		catch (FileNotFoundException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-		finally {
+		} finally {
 			if (reader != null) {
 				try {
 					reader.close();

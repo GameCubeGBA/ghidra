@@ -98,9 +98,7 @@ public abstract class ConvertConstantAction extends AbstractDecompilerAction {
 			return baseString;
 		}
 		StringBuilder buf = new StringBuilder(baseString);
-		for (int i = 0; i < paddingSize; i++) {
-			buf.append(" ");
-		}
+        buf.append(" ".repeat(paddingSize));
 		return buf.toString();
 	}
 

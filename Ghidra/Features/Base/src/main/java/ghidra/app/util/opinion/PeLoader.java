@@ -151,19 +151,10 @@ public class PeLoader extends AbstractPeDebugLoader {
 			program.setCompiler(compiler);
 
 		}
-		catch (AddressOverflowException e) {
+		catch (AddressOverflowException | MemoryAccessException | DataTypeConflictException | CodeUnitInsertionException | DuplicateNameException e) {
 			throw new IOException(e);
 		}
-		catch (DuplicateNameException e) {
-			throw new IOException(e);
-		}
-		catch (CodeUnitInsertionException e) {
-			throw new IOException(e);
-		}
-		catch (MemoryAccessException e) {
-			throw new IOException(e);
-		}
-		monitor.setMessage("[" + program.getName() + "]: done!");
+        monitor.setMessage("[" + program.getName() + "]: done!");
 	}
 
 	protected SectionLayout getSectionLayout() {
@@ -470,10 +461,7 @@ public class PeLoader extends AbstractPeDebugLoader {
 					importInfo.getDLL().toUpperCase(),
 					importInfo.getName(), extAddr, SourceType.IMPORTED, 0, RefType.DATA);
 			}
-			catch (DuplicateNameException e) {
-				log.appendMsg("External location not created: " + e.getMessage());
-			}
-			catch (InvalidInputException e) {
+			catch (DuplicateNameException | InvalidInputException e) {
 				log.appendMsg("External location not created: " + e.getMessage());
 			}
 		}
@@ -684,13 +672,10 @@ public class PeLoader extends AbstractPeDebugLoader {
 								refManager.addExternalReference(address, dllName.toUpperCase(),
 									expName, null, SourceType.IMPORTED, 0, RefType.DATA);
 							}
-							catch (DuplicateNameException e) {
+							catch (DuplicateNameException | InvalidInputException e) {
 								log.appendMsg("External location not created: " + e.getMessage());
 							}
-							catch (InvalidInputException e) {
-								log.appendMsg("External location not created: " + e.getMessage());
-							}
-						}
+                        }
 					}
 				}
 				catch (CodeUnitInsertionException e) {

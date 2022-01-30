@@ -34,13 +34,10 @@ public class iOS_Sha1Crypto {
 			this.mac = Mac.getInstance(CRYPTO_ALGORITHM);
 			this.mac.init(macKey);
 		}
-		catch (NoSuchAlgorithmException e) {
+		catch (NoSuchAlgorithmException | InvalidKeyException e) {
 			throw new CryptoException(e);
 		}
-		catch (InvalidKeyException e) {
-			throw new CryptoException(e);
-		}
-	}
+    }
 
 	public void update(byte[] update) {
 		mac.update(update);

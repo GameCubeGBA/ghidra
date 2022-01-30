@@ -294,13 +294,9 @@ public class EvaluateVTMatch extends GhidraScript {
 			vtDomainObject = domainFile.getDomainObject(this, false, false, monitor);
 			doWork((VTSessionDB) vtDomainObject);
 		}
-		catch (VersionException e) {
+		catch (VersionException | CancelledException e) {
 			e.printStackTrace();
-		}
-		catch (CancelledException e) {
-			e.printStackTrace();
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		finally {

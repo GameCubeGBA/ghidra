@@ -385,9 +385,7 @@ public class PatternBlock {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < offset; i++) {
-			sb.append("SS:");
-		}
+        sb.append("SS:".repeat(offset));
 		for (int i = 0; i < maskvec.length; i++) {
 			if (i != 0) {
 				sb.append(':');

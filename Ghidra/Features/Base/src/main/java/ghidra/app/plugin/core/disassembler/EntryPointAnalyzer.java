@@ -361,7 +361,7 @@ public class EntryPointAnalyzer extends AbstractAnalyzer {
 				}
 			}
 		}
-		catch (CodeUnitInsertionException e) {
+		catch (CodeUnitInsertionException | DataTypeConflictException e) {
 			// couldn't create
 		}
 		return null;

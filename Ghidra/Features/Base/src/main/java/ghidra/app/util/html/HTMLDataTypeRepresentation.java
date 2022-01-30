@@ -92,9 +92,7 @@ public abstract class HTMLDataTypeRepresentation {
 
 	private static String createSpace(int numberOfSpaces) {
 		StringBuilder buffer = new StringBuilder();
-		for (int i = 0; i < numberOfSpaces; i++) {
-			buffer.append(HTML_SPACE);
-		}
+		buffer.append(HTML_SPACE.repeat(numberOfSpaces));
 		return buffer.toString();
 	}
 

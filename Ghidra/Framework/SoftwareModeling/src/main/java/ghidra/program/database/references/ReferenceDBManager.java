@@ -1899,13 +1899,10 @@ public class ReferenceDBManager implements ReferenceManager, ManagerDB, ErrorHan
 				return addExternalReference(from, extLoc.getParentNameSpace(), extLoc.getLabel(),
 					extLoc.getAddress(), sourceType, opIndex, type);
 			}
-			catch (DuplicateNameException e) {
+			catch (DuplicateNameException | InvalidInputException e) {
 				throw new AssertException(e);
 			}
-			catch (InvalidInputException e) {
-				throw new AssertException(e);
-			}
-		}
+        }
 		if (ref.getToAddress().isStackAddress()) {
 			return addStackReference(ref.getFromAddress(), opIndex,
 				(int) ref.getToAddress().getOffset(), type, sourceType);

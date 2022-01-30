@@ -435,9 +435,7 @@ public class PatternBlock {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		//sb.append("(offset=" + offset + ",nonzero=" + nonzerosize + ")");
-		for (int i = 0; i < offset; i++) {
-			sb.append("........ ");
-		}
+        sb.append("........ ".repeat(offset));
 		int pos = -1;
 		for (int i = 0; i < maskvec.size(); i++) {
 			int m = maskvec.get(i);

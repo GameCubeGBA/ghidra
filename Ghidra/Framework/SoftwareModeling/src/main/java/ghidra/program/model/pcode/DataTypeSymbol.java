@@ -68,13 +68,10 @@ public class DataTypeSymbol {
 		try {
 			datatype.setNameAndCategory(path, type_hashname);
 		}
-		catch (InvalidNameException e) {
+		catch (InvalidNameException | DuplicateNameException e) {
 			return null;
 		}
-		catch (DuplicateNameException e) {
-			return null;
-		}
-		DataType preexists = dtmanage.getDataType(path, type_hashname);
+        DataType preexists = dtmanage.getDataType(path, type_hashname);
 		if (preexists != null) {		// Named datatype already exists
 			if (preexists.isEquivalent(datatype)) {		// If this is the right type
 				datatype = preexists;

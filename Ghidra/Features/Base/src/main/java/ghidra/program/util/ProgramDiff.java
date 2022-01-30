@@ -554,13 +554,10 @@ public class ProgramDiff {
 				filterChanged = true;
 			}
 		}
-		catch (ProgramConflictException e1) {
+		catch (ProgramConflictException | IllegalArgumentException e1) {
 			Msg.error(this, "Unexpected Exception: " + e1.getMessage(), e1);
 		}
-		catch (IllegalArgumentException e1) {
-			Msg.error(this, "Unexpected Exception: " + e1.getMessage(), e1);
-		}
-	}
+    }
 
 	/**
 	 * Returns an address set indicating where the user defined property differs
@@ -3027,14 +3024,11 @@ public class ProgramDiff {
 					int intProp = cu.getIntProperty(localPropertyName);
 					return Integer.valueOf(intProp);
 				}
-				catch (NoValueException e) {
-					// Do nothing. Instead fall-through to next property type.
-				}
-				catch (TypeMismatchException e) {
+				catch (NoValueException | TypeMismatchException e) {
 					// Do nothing. Instead fall-through to next property type.
 				}
 
-				// String property.
+                // String property.
 				try {
 					String stringProp = cu.getStringProperty(localPropertyName);
 					return stringProp;

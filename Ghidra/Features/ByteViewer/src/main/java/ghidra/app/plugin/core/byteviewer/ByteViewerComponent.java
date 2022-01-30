@@ -283,13 +283,9 @@ public class ByteViewerComponent extends FieldPanel implements FieldMouseListene
 			getToolkit().beep();
 
 		}
-		catch (AddressOutOfBoundsException e) {
+		catch (AddressOutOfBoundsException | IndexOutOfBoundsException e) {
 			getToolkit().beep();
-		}
-		catch (IndexOutOfBoundsException e) {
-			getToolkit().beep();
-		}
-		catch (Throwable t) {
+		} catch (Throwable t) {
 			Msg.showError(this, null, "Error", "Error editing memory", t);
 
 		}

@@ -556,13 +556,11 @@ class CategoryDB extends DatabaseObject implements Category {
 				movedDataType.setCategoryPath(path);
 			}
 		}
-		catch (InvalidNameException e) {
+		catch (InvalidNameException | DuplicateNameException e) {
 			throw new AssertException(e); // can't happen
 		}
-		catch (DuplicateNameException e) {
-			throw new AssertException(e); // can't happen?
-		}
-		finally {
+        // can't happen?
+        finally {
 			mgr.lock.release();
 		}
 	}

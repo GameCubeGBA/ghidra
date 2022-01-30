@@ -62,9 +62,7 @@ public class GNUDisassembleBlockScript extends GhidraScript {
 			}
 			if (cnt < maxByteLen) {
 				int pad = (maxByteLen - cnt) * 3;
-				for (int i = 0; i < pad; i++) {
-					sb.append(' ');
-				}
+                sb.append(" ".repeat(pad));
 			}
 			sb.append(result.getInstruction());
 			sb.append("\n");

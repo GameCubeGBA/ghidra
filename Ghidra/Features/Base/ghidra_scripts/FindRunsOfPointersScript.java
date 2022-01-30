@@ -68,13 +68,10 @@ public class FindRunsOfPointersScript extends GhidraScript {
 					prevAddress = addr;
 				}
 			}
-			catch (MemoryAccessException e) {
+			catch (MemoryAccessException | AddressOutOfBoundsException e) {
 				break;
 			}
-			catch (AddressOutOfBoundsException e) {
-				break;
-			}
-		}
+        }
 		// go through the list of pointers and only print out the ones with a run of the same distance between them
 		// keep the one before the run and include the last one with the same distance
 		//println("tableAddress distance tableSize");

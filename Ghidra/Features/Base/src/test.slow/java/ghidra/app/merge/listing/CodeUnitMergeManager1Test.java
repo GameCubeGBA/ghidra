@@ -889,7 +889,7 @@ public class CodeUnitMergeManager1Test extends AbstractListingMergeManagerTest {
 
 					commit = true;
 				}
-				catch (CodeUnitInsertionException e) {
+				catch (CodeUnitInsertionException | DataTypeConflictException e) {
 					e.printStackTrace();
 				}
 				finally {
@@ -1010,7 +1010,7 @@ public class CodeUnitMergeManager1Test extends AbstractListingMergeManagerTest {
 
 					commit = true;
 				}
-				catch (CodeUnitInsertionException e) {
+				catch (CodeUnitInsertionException | DataTypeConflictException e) {
 					e.printStackTrace();
 				}
 				finally {
@@ -1125,7 +1125,7 @@ public class CodeUnitMergeManager1Test extends AbstractListingMergeManagerTest {
 
 					commit = true;
 				}
-				catch (CodeUnitInsertionException e) {
+				catch (CodeUnitInsertionException | DataTypeConflictException e) {
 					e.printStackTrace();
 				}
 				finally {
@@ -1264,7 +1264,7 @@ public class CodeUnitMergeManager1Test extends AbstractListingMergeManagerTest {
 
 					commit = true;
 				}
-				catch (CodeUnitInsertionException e) {
+				catch (CodeUnitInsertionException | DataTypeConflictException e) {
 					e.printStackTrace();
 				}
 				finally {

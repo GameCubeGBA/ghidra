@@ -552,13 +552,10 @@ public class AddressTable {
 			space = program.getSymbolTable().createNameSpace(null,
 				"switch_" + start_inst.getMinAddress(), SourceType.ANALYSIS);
 		}
-		catch (DuplicateNameException e) {
+		catch (DuplicateNameException | InvalidInputException e) {
 			// just go with default space
 		}
-		catch (InvalidInputException e) {
-			// just go with default space
-		}
-		Symbol oldSym = program.getSymbolTable().getPrimarySymbol(tableNameLabel.getLabelAddr());
+        Symbol oldSym = program.getSymbolTable().getPrimarySymbol(tableNameLabel.getLabelAddr());
 		if (oldSym != null && oldSym.getSource() == SourceType.ANALYSIS &&
 			oldSym.getName().startsWith("Addr")) {
 			oldSym.delete();
@@ -911,11 +908,9 @@ public class AddressTable {
 				}
 			}
 		}
-		catch (DuplicateNameException exc) {
+		catch (DuplicateNameException | InvalidInputException exc) {
 		}
-		catch (InvalidInputException exc) {
-		}
-	}
+    }
 
 	public String getTableTypeString(Memory memory) {
 		Address addr = tableElements[0];
@@ -1137,13 +1132,10 @@ public class AddressTable {
 
 				count++;
 			}
-			catch (MemoryAccessException e) {
+			catch (MemoryAccessException | AddressOutOfBoundsException e) {
 				break;
 			}
-			catch (AddressOutOfBoundsException e) {
-				break;
-			}
-		}
+        }
 
 		// if table too small, don't even check later...
 		if (count < minimumTableSize) {

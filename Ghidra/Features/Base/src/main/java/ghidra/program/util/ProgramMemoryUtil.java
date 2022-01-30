@@ -398,13 +398,10 @@ public class ProgramMemoryUtil {
 					accumulator.add(new ReferenceAddressPair(a, addrShifted));
 				}
 			}
-			catch (MemoryAccessException e) {
+			catch (MemoryAccessException | AddressOutOfBoundsException e) {
 				// ignore (tsk, tsk)
 			}
-			catch (AddressOutOfBoundsException e) {
-				// ignore (tsk, tsk)
-			}
-		}
+        }
 	}
 
 	/**

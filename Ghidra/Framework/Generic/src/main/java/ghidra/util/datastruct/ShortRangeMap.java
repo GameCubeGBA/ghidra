@@ -104,11 +104,9 @@ public class ShortRangeMap implements Serializable {
 				index = map.getPreviousPropertyIndex(index);	
 				return map.getShort(index);
 			}
-			catch(NoSuchIndexException ex) {
+			catch(NoSuchIndexException | NoValueException ex) {
 			}
-			catch(NoValueException ex) {
-			}
-		}		
+        }
 		return 0;
 	}
 	/**

@@ -433,15 +433,11 @@ public class StringParameterPropagator extends GhidraScript {
 				// TODO: Fix deprecated method call
 				param = func.addParameter(param, SourceType.USER_DEFINED);
 			}
-			catch (DuplicateNameException e) {
+			catch (DuplicateNameException | InvalidInputException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			catch (InvalidInputException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+        }
 		if (param == null) {
 			return false;
 		}
@@ -502,13 +498,10 @@ public class StringParameterPropagator extends GhidraScript {
 				// TODO: Fix deprecated method call
 				f.addParameter(param, SourceType.ANALYSIS);
 			}
-			catch (DuplicateNameException e) {
+			catch (DuplicateNameException | InvalidInputException e) {
 				println("  ** problem at \n" + e.getMessage());
 			}
-			catch (InvalidInputException e) {
-				println("  ** problem at \n" + e.getMessage());
-			}
-		}
+        }
 
 	}
 

@@ -961,14 +961,11 @@ public class RefMergerRegTest extends AbstractListingMergeManagerTest {
 							"printf", addr(program, "0x01234567"), SourceType.USER_DEFINED, 0,
 							RefType.DATA);
 					}
-					catch (DuplicateNameException e) {
-						Assert.fail(e.getMessage());
-					}
-					catch (InvalidInputException e) {
+					catch (DuplicateNameException | InvalidInputException e) {
 						Assert.fail(e.getMessage());
 					}
 
-					commit = true;
+                    commit = true;
 				}
 				finally {
 					program.endTransaction(txId, commit);

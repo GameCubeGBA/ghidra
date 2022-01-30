@@ -114,7 +114,7 @@ public class CFStringAnalyzer extends AbstractAnalyzer {
 					SourceType.ANALYSIS);
 				mine.setPrimary();
 			}
-			catch (CodeUnitInsertionException e) {
+			catch (CodeUnitInsertionException | DataTypeConflictException e) {
 				log.appendException(e);
 				return false;
 			}

@@ -78,16 +78,12 @@ public class DataTypeIDConverter implements GhidraLaunchable {
 		try {
 			loadMap(idMapFile);
 		}
-		catch (InvalidInputException e) {
-			e.printStackTrace();
-			return;
-		}
-		catch (IOException e) {
+		catch (InvalidInputException | IOException e) {
 			e.printStackTrace();
 			return;
 		}
 
-		FileDataTypeManager oldFileArchive = null;
+        FileDataTypeManager oldFileArchive = null;
 		try {
 			oldFileArchive = FileDataTypeManager.openFileArchive(inFile, false);
 
@@ -98,14 +94,11 @@ public class DataTypeIDConverter implements GhidraLaunchable {
 
 			oldFileArchive.saveAs(outFile, newFileID);
 		}
-		catch (IOException e) {
+		catch (IOException | NoValueException e) {
 			e.printStackTrace();
 		}
-		catch (NoValueException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		finally {
+        // TODO Auto-generated catch block
+        finally {
 			if (oldFileArchive != null) {
 				oldFileArchive.close();
 			}
@@ -142,13 +135,9 @@ public class DataTypeIDConverter implements GhidraLaunchable {
 //					Long.toHexString(newID));
 			}
 		}
-		catch (NumberFormatException e) {
+		catch (NumberFormatException | IOException e) {
 			e.printStackTrace();
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-		finally {
+		} finally {
 			if (bufferedReader != null) {
 				bufferedReader.close();
 			}

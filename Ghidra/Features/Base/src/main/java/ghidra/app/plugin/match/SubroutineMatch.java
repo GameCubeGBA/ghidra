@@ -125,11 +125,9 @@ public class SubroutineMatch {
 	@Override
     public String toString(){
 		String str = reason + " ";
-		for( int i=0; i<progAAddrs.length; i++)
-			str += progAAddrs[i] + ",";
+		for (Address progAAddr : progAAddrs) str += progAAddr + ",";
 		str += " --- ";
-		for( int i=0; i<progBAddrs.length; i++)
-			str += progBAddrs[i] + ",";
+		for (Address progBAddr : progBAddrs) str += progBAddr + ",";
 		return str;
 	}
 

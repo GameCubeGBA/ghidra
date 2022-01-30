@@ -224,23 +224,12 @@ public class MzLoader extends AbstractLibrarySupportLoader {
 						blocks[i].setName(oldName);
 						break;
 					}
-				}
-				catch (LockException e) {
+				} catch (MemoryBlockException | AddressOutOfBoundsException e) {
+					// TODO: ignore?
+				} catch (LockException | NotFoundException | MemoryAccessException e) {
 					// TODO: ignore?
 				}
-				catch (MemoryBlockException e) {
-					// TODO: ignore?
-				}
-				catch (AddressOutOfBoundsException e) {
-					// TODO: ignore?
-				}
-				catch (MemoryAccessException e) {
-					// TODO: ignore?
-				}
-				catch (NotFoundException e) {
-					// TODO: ignore?
-				}
-			}
+            }
 		}
 	}
 
@@ -336,13 +325,10 @@ public class MzLoader extends AbstractLibrarySupportLoader {
 //			mbu.createUninitializedBlock(false, "Stack", stackStart, dos.e_sp(), "", "", true, true, false);
 
 		}
-		catch (IOException e) {
+		catch (IOException | AddressOverflowException e) {
 			throw new RuntimeException(e);
 		}
-		catch (AddressOverflowException e) {
-			throw new RuntimeException(e);
-		}
-	}
+    }
 
 	private void doRelocations(Program prog, BinaryReader reader, DOSHeader dos) {
 		try {
@@ -377,13 +363,10 @@ public class MzLoader extends AbstractLibrarySupportLoader {
 							null);
 			}
 		}
-		catch (IOException e) {
+		catch (IOException | MemoryAccessException e) {
 			throw new RuntimeException(e);
 		}
-		catch (MemoryAccessException e) {
-			throw new RuntimeException(e);
-		}
-	}
+    }
 
 	private void createSymbols(SegmentedAddressSpace space, SymbolTable symbolTable,
 			DOSHeader dos) {

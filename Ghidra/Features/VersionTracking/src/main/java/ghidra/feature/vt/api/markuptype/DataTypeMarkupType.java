@@ -268,7 +268,7 @@ public class DataTypeMarkupType extends VTMarkupType {
 		try {
 			listing.createData(startAddress, dataType, dataLength);
 		}
-		catch (CodeUnitInsertionException e) {
+		catch (CodeUnitInsertionException | DataTypeConflictException e) {
 			tryToRestoreOriginalData(listing, startAddress, originalDataType, originalDataLength);
 			throw e;
 		}
@@ -281,7 +281,7 @@ public class DataTypeMarkupType extends VTMarkupType {
 		try {
 			listing.createData(address, originalDataType, originalDataLength);
 		}
-		catch (CodeUnitInsertionException e2) {
+		catch (CodeUnitInsertionException | DataTypeConflictException e2) {
 			// If we get an error trying to put the original back then dump a message and bail out.
 			Msg.error(this,
 				"Couldn't restore data type of " + originalDataType.getName() +
@@ -336,9 +336,9 @@ public class DataTypeMarkupType extends VTMarkupType {
 			return setDataType(destinationProgram, destinationAddress, sourceDataType,
 				sourceDataLength, replaceChoice);
 		}
-		catch (CodeUnitInsertionException e) {
+		catch (CodeUnitInsertionException | DataTypeConflictException e) {
 			throw new VersionTrackingApplyException(getApplyFailedMessage(sourceAddress,
-				destinationAddress, e, sourceDataLength, destinationData.getLength()), e);
+					destinationAddress, e, sourceDataLength, destinationData.getLength()), e);
 		}
 	}
 
@@ -387,11 +387,11 @@ public class DataTypeMarkupType extends VTMarkupType {
 			setDataType(destinationProgram, destinationAddress, originalDataType,
 				originalDataLength, VTMatchApplyChoices.ReplaceDataChoices.REPLACE_ALL_DATA);
 		}
-		catch (CodeUnitInsertionException e) {
+		catch (CodeUnitInsertionException | DataTypeConflictException e) {
 			throw new VersionTrackingApplyException("Couldn't unapply data type markup @ " +
 				destinationAddress.toString() + "." + e.getMessage() + ".", e);
 		}
-	}
+    }
 
 	@Override
 	public ProgramLocation getDestinationLocation(VTAssociation association,

@@ -205,11 +205,9 @@ public class FileDataTypeManager extends StandAloneDataTypeManager
 		try {
 			root.setName(newName);
 		}
-		catch (DuplicateNameException e) {
+		catch (DuplicateNameException | InvalidNameException e) {
 		}
-		catch (InvalidNameException e) {
-		}
-	}
+    }
 
 	private String getRootName(String newName) {
 		int pos = newName.lastIndexOf(SUFFIX);

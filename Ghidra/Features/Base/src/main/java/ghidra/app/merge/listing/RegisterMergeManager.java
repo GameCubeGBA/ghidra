@@ -354,11 +354,9 @@ class RegisterMergeManager implements ListingMergeConstants {
 				}
 			});
 		}
-		catch (InterruptedException e) {
+		catch (InterruptedException | InvocationTargetException e) {
 		}
-		catch (InvocationTargetException e) {
-		}
-		if (mergeManager != null) {
+        if (mergeManager != null) {
 			mergeManager.setApplyEnabled(false);
 			mergeManager.showListingMergePanel(minAddress);
 		}

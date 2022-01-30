@@ -113,13 +113,12 @@ public class AddRegisterRefCmd implements Command {
 						new LocalVariableImpl(null, useOffset, null, new VariableStorage(p, reg), p);
 					var = f.addLocalVariable(var, SourceType.DEFAULT);
 				}
-				catch (DuplicateNameException e) {
+				catch (DuplicateNameException | InvalidInputException e) {
 					throw new AssertException(); // Unexpected - we did not specify name
 				}
-				catch (InvalidInputException e) {
-					throw new AssertException(); // Unexpected - we did not specify data-type
-				}
-			}
+                // Unexpected - we did not specify data-type
+
+            }
 		}
 
 		refMgr.addRegisterReference(fromAddr, opIndex, reg, refType, source);

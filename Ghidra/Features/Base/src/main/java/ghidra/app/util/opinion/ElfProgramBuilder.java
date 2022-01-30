@@ -503,11 +503,11 @@ class ElfProgramBuilder extends MemorySectionResolver implements ElfLoadHelper {
 			try {
 				cu = listing.createData(nextAddr, WORD);
 			}
-			catch (CodeUnitInsertionException e) {
+			catch (CodeUnitInsertionException | DataTypeConflictException e) {
 				// ignore
 			}
 
-			if (cu == null) {
+            if (cu == null) {
 				cu = listing.getCodeUnitAt(nextAddr);
 			}
 			if (cu != null) {

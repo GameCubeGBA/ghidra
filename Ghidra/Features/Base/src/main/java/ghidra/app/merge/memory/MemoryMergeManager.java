@@ -449,13 +449,10 @@ public class MemoryMergeManager implements MergeResolver {
 				}
 			});
 		}
-		catch (InterruptedException e) {
+		catch (InterruptedException | InvocationTargetException e) {
 			Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
 		}
-		catch (InvocationTargetException e) {
-			Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-		}
-		mergeManager.setApplyEnabled(false);
+        mergeManager.setApplyEnabled(false);
 		mergeManager.showComponent(mergePanel, "MemoryMerge", new HelpLocation(
 			HelpTopics.REPOSITORY, "MemoryConflict"));
 		// block until the user either cancels or hits the "Apply" button

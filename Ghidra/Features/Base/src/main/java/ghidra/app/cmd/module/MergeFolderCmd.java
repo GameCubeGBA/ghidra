@@ -89,13 +89,10 @@ public class MergeFolderCmd implements Command {
 
 				parentModule.reparent(name, module);
 			}
-			catch (NotEmptyException e) {
+			catch (NotEmptyException | NotFoundException e) {
 				Msg.showError(this, null, "Error", "Error merging folder with its parent");
 			}
-			catch (NotFoundException e) {
-				Msg.showError(this, null, "Error", "Error merging folder with its parent");
-			}
-		}
+        }
 		// now remove the module from its parent...
 		try {
 			ProgramModule m = listing.getModule(treeName, folderName);

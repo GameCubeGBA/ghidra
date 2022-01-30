@@ -998,10 +998,7 @@ public abstract class CompositeEditorModel extends CompositeViewerModel implemen
 					compositeInfoChanged();
 				}
 			}
-			catch (DuplicateNameException e) {
-				Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-			}
-			catch (InvalidNameException e) {
+			catch (DuplicateNameException | InvalidNameException e) {
 				Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
 			}
 		}
@@ -1013,13 +1010,10 @@ public abstract class CompositeEditorModel extends CompositeViewerModel implemen
 					fireTableDataChanged();
 					componentDataChanged();
 				}
-				catch (InvalidNameException e) {
+				catch (InvalidNameException | DuplicateNameException e) {
 					Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
 				}
-				catch (DuplicateNameException e) {
-					Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-				}
-			}
+            }
 		}
 	}
 

@@ -594,9 +594,7 @@ public class StringUtilities {
 
 		int n = length - source.length();
 		StringBuilder buffer = new StringBuilder();
-		for (int i = 0; i < n; i++) {
-			buffer.append(filler);
-		}
+        buffer.append(String.valueOf(filler).repeat(n));
 
 		if (rightJustify) {
 			buffer.append(source);

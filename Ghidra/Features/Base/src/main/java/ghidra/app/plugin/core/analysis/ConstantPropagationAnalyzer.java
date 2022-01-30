@@ -456,7 +456,7 @@ public class ConstantPropagationAnalyzer extends AbstractAnalyzer {
 		try {
 			program.getListing().createData(address, dt);
 		}
-		catch (CodeUnitInsertionException e) {
+		catch (CodeUnitInsertionException | DataTypeConflictException e) {
 			// don't care; we tried
 		}
 	}

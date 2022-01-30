@@ -813,9 +813,7 @@ public class DataTypeWriter {
 		}
 		if (functionPointerArrayType instanceof Pointer) {
 			Pointer p = (Pointer) functionPointerArrayType;
-			for (int i = 0; i < getPointerDepth(p); i++) {
-				sb.append('*');
-			}
+            sb.append("*".repeat(getPointerDepth(p)));
 			if (name != null) {
 				sb.append(' ');
 			}

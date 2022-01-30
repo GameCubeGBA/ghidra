@@ -421,9 +421,7 @@ public class SleighDebugLogger {
 
 	private String getIndent() {
 		StringBuffer buf = new StringBuffer();
-		for (int i = 0; i < indentLevel; i++) {
-			buf.append("   ");
-		}
+        buf.append("   ".repeat(indentLevel));
 		return buf.toString();
 	}
 

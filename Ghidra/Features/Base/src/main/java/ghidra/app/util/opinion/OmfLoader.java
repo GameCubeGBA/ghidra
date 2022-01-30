@@ -258,15 +258,11 @@ public class OmfLoader extends AbstractLibrarySupportLoader {
 								break;
 						}
 					}
-					catch (MemoryAccessException e) {
+					catch (MemoryAccessException | OmfException e) {
 						relocationError(program, log, state);
 						continue;
 					}
-					catch (OmfException e) {
-						relocationError(program, log, state);
-						continue;
-					}
-					long[] values = new long[1];
+                    long[] values = new long[1];
 					values[0] = finalvalue;
 					program.getRelocationTable().add(state.locAddress, state.locationType, values,
 						origbytes, null);

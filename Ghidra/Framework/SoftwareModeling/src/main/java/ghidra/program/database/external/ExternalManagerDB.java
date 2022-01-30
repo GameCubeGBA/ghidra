@@ -128,13 +128,10 @@ public class ExternalManagerDB implements ManagerDB, ExternalManager {
 					SourceType.USER_DEFINED);
 				nameMap.put(rec.getKey(), name);
 			}
-			catch (DuplicateNameException e) {
+			catch (DuplicateNameException | InvalidInputException e) {
 				// ignore
 			}
-			catch (InvalidInputException e) {
-				// ignore
-			}
-			monitor.setProgress(++cnt);
+            monitor.setProgress(++cnt);
 		}
 
 		AddressMap oldAddrMap = addrMap.getOldAddressMap();
@@ -167,13 +164,10 @@ public class ExternalManagerDB implements ManagerDB, ExternalManager {
 					userDefined ? SourceType.USER_DEFINED : SourceType.IMPORTED, opIndex,
 					RefType.DATA);
 			}
-			catch (DuplicateNameException e) {
+			catch (DuplicateNameException | InvalidInputException e) {
 				Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
 			}
-			catch (InvalidInputException e) {
-				Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-			}
-			monitor.setProgress(++cnt);
+            monitor.setProgress(++cnt);
 		}
 		oldExtRefAdapter = null;
 		return true;

@@ -148,15 +148,10 @@ public class FunctionNameMarkupType extends FunctionEntryPointBasedAbstractMarku
 		try {
 			destinationSymbolStringable.applyFunctionName(destinationProgram, destinationFunction);
 		}
-		catch (DuplicateNameException e) {
+		catch (DuplicateNameException | InvalidInputException e) {
 			throw new VersionTrackingApplyException(
 				"Unable to restore function name: " + destinationName, e);
-		}
-		catch (InvalidInputException e) {
-			throw new VersionTrackingApplyException(
-				"Unable to restore function name: " + destinationName, e);
-		}
-		catch (CircularDependencyException e) {
+		} catch (CircularDependencyException e) {
 			throw new VersionTrackingApplyException("Unable to restore function name: " +
 				destinationName + " due to circular dependancy on namespaces", e);
 		}

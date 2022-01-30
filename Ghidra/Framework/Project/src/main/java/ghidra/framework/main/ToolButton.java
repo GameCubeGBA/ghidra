@@ -202,13 +202,10 @@ class ToolButton extends EmptyBorderButton implements Draggable, Droppable {
 				}
 			}
 		}
-		catch (UnsupportedFlavorException e1) {
+		catch (UnsupportedFlavorException | IOException e1) {
 			// don't care; return false
 		}
-		catch (IOException e1) {
-			// don't care; return false
-		}
-		return false;
+        return false;
 	}
 
 	/**

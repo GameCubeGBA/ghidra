@@ -829,13 +829,10 @@ abstract class AbstractFunctionMerger implements ListingMergeConstants {
 				try {
 					pgmMerge.replaceFunctionParameterName(entry, ordinal, monitor);
 				}
-				catch (InvalidInputException e) {
+				catch (InvalidInputException | DuplicateNameException e) {
 					Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
 				}
-				catch (DuplicateNameException e) {
-					Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-				}
-				break;
+                break;
 			case VAR_DATATYPE:
 				pgmMerge.replaceFunctionParameterDataType(entry, ordinal, monitor);
 				break;
@@ -917,13 +914,10 @@ abstract class AbstractFunctionMerger implements ListingMergeConstants {
 				try {
 					pgmMerge.replaceFunctionVariableName(entry, var, monitor);
 				}
-				catch (DuplicateNameException e) {
+				catch (DuplicateNameException | InvalidInputException e) {
 					Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
 				}
-				catch (InvalidInputException e) {
-					Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-				}
-				break;
+                break;
 			case VAR_DATATYPE:
 				pgmMerge.replaceFunctionVariableDataType(entry, var, monitor);
 				break;
@@ -1645,15 +1639,11 @@ abstract class AbstractFunctionMerger implements ListingMergeConstants {
 				listingPanel.paintAllBackgrounds(new AddressSet(entryPt, entryPt));
 			});
 		}
-		catch (InterruptedException e) {
+		catch (InterruptedException | InvocationTargetException e) {
 			showConflictPanelException(entryPt, e);
 			return;
 		}
-		catch (InvocationTargetException e) {
-			showConflictPanelException(entryPt, e);
-			return;
-		}
-		if (mergeManager != null) {
+        if (mergeManager != null) {
 			mergeManager.setApplyEnabled(false);
 			mergeManager.showListingMergePanel(entryPt);
 		}
@@ -1759,25 +1749,19 @@ abstract class AbstractFunctionMerger implements ListingMergeConstants {
 				}
 			});
 		}
-		catch (InterruptedException e) {
+		catch (InterruptedException | InvocationTargetException e) {
 			Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
 		}
-		catch (InvocationTargetException e) {
-			Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-		}
-	}
+    }
 
 	protected void runSwing(Runnable r) {
 		try {
 			SwingUtilities.invokeAndWait(r);
 		}
-		catch (InterruptedException e) {
+		catch (InterruptedException | InvocationTargetException e) {
 			Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
 		}
-		catch (InvocationTargetException e) {
-			Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-		}
-	}
+    }
 
 	/**
 	 * Clears all text from the error buffer.
@@ -1803,13 +1787,10 @@ abstract class AbstractFunctionMerger implements ListingMergeConstants {
 					mergeManager.getMergeTool().showDialog(dialog, mergeTool.getActiveWindow());
 				});
 			}
-			catch (InterruptedException e) {
+			catch (InterruptedException | InvocationTargetException e) {
 				throw new AssertException(e);
 			}
-			catch (InvocationTargetException e) {
-				throw new AssertException(e);
-			}
-		}
+        }
 	}
 
 	/**
@@ -1835,13 +1816,10 @@ abstract class AbstractFunctionMerger implements ListingMergeConstants {
 					mergeManager.getMergeTool().showDialog(dialog, mergeTool.getActiveWindow());
 				});
 			}
-			catch (InterruptedException e) {
+			catch (InterruptedException | InvocationTargetException e) {
 				throw new AssertException(e);
 			}
-			catch (InvocationTargetException e) {
-				throw new AssertException(e);
-			}
-		}
+        }
 	}
 
 	protected VariousChoicesPanel createLocalVariableConflictPanel(final LocalVariableConflict lvc,
@@ -1989,19 +1967,11 @@ abstract class AbstractFunctionMerger implements ListingMergeConstants {
 					f.setParentNamespace(ns);
 				}
 			}
-			catch (DuplicateNameException e) {
+			catch (DuplicateNameException | CircularDependencyException | InvalidInputException e) {
 				Msg.showError(this, mergeManager.getMergeTool().getToolFrame(),
 					"Error Setting Function Namespace", e.getMessage());
 			}
-			catch (InvalidInputException e) {
-				Msg.showError(this, mergeManager.getMergeTool().getToolFrame(),
-					"Error Setting Function Namespace", e.getMessage());
-			}
-			catch (CircularDependencyException e) {
-				Msg.showError(this, mergeManager.getMergeTool().getToolFrame(),
-					"Error Setting Function Namespace", e.getMessage());
-			}
-		}
+        }
 	}
 
 	protected ScrollingListChoicesPanel createStorageConflictPanel(final Address entryPt,

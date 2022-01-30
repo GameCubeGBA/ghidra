@@ -519,13 +519,10 @@ public class SleighLanguage implements Language {
 			try {
 				initialize(description);
 			}
-			catch (SAXException e) {
+			catch (SAXException | UnknownInstructionException e) {
 				throw new IOException(e.getMessage());
 			}
-			catch (UnknownInstructionException e) {
-				throw new IOException(e.getMessage());
-			}
-		}
+        }
 	}
 
 	@Override

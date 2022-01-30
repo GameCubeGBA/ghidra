@@ -200,11 +200,8 @@ class PropertyPage implements Serializable {
 		        Saveable so = (Saveable) objectClass.getConstructor().newInstance();
 		        so.restore(new ObjectStorageAdapter(table, row));  
 		        return so;
-			}catch(IllegalAccessException e) {
-			}catch(InstantiationException e) {
-			} catch (NoSuchMethodException e) {
-            } catch (InvocationTargetException e) {
-            }
+			}catch(IllegalAccessException | InvocationTargetException | NoSuchMethodException | InstantiationException e) {
+			}
         }
         return null;
     }

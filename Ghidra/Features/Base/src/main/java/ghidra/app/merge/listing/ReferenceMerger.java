@@ -969,13 +969,10 @@ class ReferenceMerger extends AbstractListingMerger {
 				}
 			});
 		}
-		catch (InterruptedException e) {
+		catch (InterruptedException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
-		catch (InvocationTargetException e) {
-			e.printStackTrace();
-		}
-		if (mergeManager != null && conflictPanel.hasChoice()) {
+        if (mergeManager != null && conflictPanel.hasChoice()) {
 			mergeManager.setApplyEnabled(false);
 			mergeManager.showListingMergePanel(currentAddress);
 			// block until the user either cancels or hits the "Apply" button

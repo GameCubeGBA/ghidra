@@ -735,13 +735,10 @@ public class OptionalHeaderImpl implements OptionalHeader {
 					}
 				}
 			}
-			catch (MemoryAccessException e) {
+			catch (MemoryAccessException | AddressOutOfBoundsException e) {
 				e.printStackTrace();
 			}
-			catch (AddressOutOfBoundsException e) {
-				e.printStackTrace();
-			}
-		}
+        }
 	}
 
 	@Override
