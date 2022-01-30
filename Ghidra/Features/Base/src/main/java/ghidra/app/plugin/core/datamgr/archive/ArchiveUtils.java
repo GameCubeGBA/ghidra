@@ -30,7 +30,7 @@ import ghidra.util.Msg;
 import ghidra.util.ReadOnlyException;
 import ghidra.util.exception.DuplicateFileException;
 
-public class ArchiveUtils {
+public final class ArchiveUtils {
 	static final Logger log = LogManager.getLogger(ArchiveUtils.class);
 
 	private ArchiveUtils() {

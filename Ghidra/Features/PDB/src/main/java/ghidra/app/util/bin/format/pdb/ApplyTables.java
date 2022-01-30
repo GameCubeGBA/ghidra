@@ -21,7 +21,7 @@ import ghidra.util.task.TaskMonitor;
 import ghidra.xml.XmlElement;
 import ghidra.xml.XmlPullParser;
 
-class ApplyTables {
+final class ApplyTables {
 
 	private ApplyTables() {
 		// static use only

@@ -48,7 +48,7 @@ import ghidra.util.exception.AssertException;
  * generate keystores for testing or when a self-signed certificate will
  * suffice.
  */
-public class ApplicationKeyManagerUtils {
+public final class ApplicationKeyManagerUtils {
 
 	public static final String RSA_TYPE = "RSA";
 

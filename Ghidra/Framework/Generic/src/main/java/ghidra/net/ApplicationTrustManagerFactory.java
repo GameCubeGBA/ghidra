@@ -48,7 +48,7 @@ import ghidra.util.Msg;
  * The application may choose to set the file path automatically based upon the presence of
  * a <i>cacerts</i> file at a predetermined location.
  */
-public class ApplicationTrustManagerFactory {
+public final class ApplicationTrustManagerFactory {
 
 	/**
 	 * The X509 cacerts file to be used when authenticating remote 

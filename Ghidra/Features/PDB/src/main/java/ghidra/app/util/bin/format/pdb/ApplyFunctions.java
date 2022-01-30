@@ -31,7 +31,7 @@ import ghidra.util.xml.XmlUtilities;
 import ghidra.xml.XmlElement;
 import ghidra.xml.XmlPullParser;
 
-class ApplyFunctions {
+final class ApplyFunctions {
 
 	private ApplyFunctions() {
 		// static use only

@@ -36,7 +36,7 @@ import ghidra.service.graph.Attributed;
  * A filtering mechanism where filters (and filter control buttons) are discovered and created
  * based on the contents of the Attribute map
  */
-public class AttributeFilters implements ItemSelectable {
+public final class AttributeFilters implements ItemSelectable {
 
 	public static class Builder {
 		/**

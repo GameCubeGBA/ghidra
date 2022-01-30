@@ -10,7 +10,7 @@ package mobiledevices.dmg.ghidra;
  * 
  * 
  */ 
-public class GConv {
+public final class GConv {
 	
 	private GConv() {
 	}

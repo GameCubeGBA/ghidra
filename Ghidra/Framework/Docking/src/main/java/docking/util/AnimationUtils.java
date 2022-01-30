@@ -33,7 +33,7 @@ import ghidra.util.bean.GGlassPanePainter;
 import ghidra.util.exception.AssertException;
 import resources.ResourceManager;
 
-public class AnimationUtils {
+public final class AnimationUtils {
 
 	private static boolean animationEnabled = true;
 
