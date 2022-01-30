@@ -107,7 +107,7 @@ public final class XCoffOptionalHeader implements StructConverter {
 
 	@Override
     public String toString() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		buffer.append("OPTIONAL HEADER VALUES").append(NL);
 		buffer.append("magic      = ").append(o_magic).append(NL);
 		buffer.append("vstamp     = ").append(o_vstamp).append(NL);

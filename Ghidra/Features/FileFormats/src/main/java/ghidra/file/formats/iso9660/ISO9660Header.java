@@ -133,7 +133,7 @@ public class ISO9660Header implements StructConverter {
 	 */
 	@Override
 	public String toString() {
-		StringBuffer buff = new StringBuffer();
+		StringBuilder buff = new StringBuilder();
 
 		for (ISO9660BaseVolume volume : volumeDescriptorSet) {
 

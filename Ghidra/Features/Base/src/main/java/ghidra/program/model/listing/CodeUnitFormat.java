@@ -112,7 +112,7 @@ public class CodeUnitFormat {
 	 */
 	public String getRepresentationString(CodeUnit cu, boolean includeEOLcomment) {
 
-		StringBuffer stringBuffer = new StringBuffer(getMnemonicRepresentation(cu));
+		StringBuilder stringBuffer = new StringBuilder(getMnemonicRepresentation(cu));
 		if (cu instanceof Instruction) {
 			Instruction instr = (Instruction) cu;
 			int n = instr.getNumOperands();
@@ -152,7 +152,7 @@ public class CodeUnitFormat {
 	 * @return mnemonic representation
 	 */
 	public String getMnemonicRepresentation(CodeUnit cu) {
-		StringBuffer stringBuffer = new StringBuffer();
+		StringBuilder stringBuffer = new StringBuilder();
 		String mnemonic = cu.getMnemonicString();
 		if (options.showDataMutability && (cu instanceof Data) && mnemonic != null) {
 			Data d = (Data) cu;

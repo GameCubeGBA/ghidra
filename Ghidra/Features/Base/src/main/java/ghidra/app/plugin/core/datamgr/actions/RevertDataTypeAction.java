@@ -66,15 +66,14 @@ public class RevertDataTypeAction extends DockingAction {
 
 		switch (syncStatus) {
 			case UNKNOWN:
-				return false;
+            case CONFLICT:
+            case IN_SYNC:
+            case ORPHAN:
+            case UPDATE:
+                return false;
 			case COMMIT:
 				return true;
-			case CONFLICT:
-			case IN_SYNC:
-			case ORPHAN:
-			case UPDATE:
-				return false;
-		}
+        }
 		return false;
 	}
 

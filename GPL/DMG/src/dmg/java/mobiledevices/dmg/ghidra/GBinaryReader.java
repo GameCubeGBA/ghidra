@@ -466,7 +466,7 @@ public class GBinaryReader {
      * @exception IOException if an I/O error occurs
      */
     public String readAsciiString(long index) throws IOException {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         while (true) {
             byte b = provider.readByte(index++);
             if ((b >= 32) && (b <= 126)) {
@@ -489,7 +489,7 @@ public class GBinaryReader {
      * @exception IOException if an I/O error occurs
      */
     public String readAsciiString(long index, int length) throws IOException {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         for (int i = 0 ; i < length ; ++i) {
             byte b = provider.readByte(index++);
             buffer.append((char) (b & 0x00FF));
@@ -506,7 +506,7 @@ public class GBinaryReader {
      * @exception IOException if an I/O error occurs
      */
     public String readUnicodeString(long index) throws IOException {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 		char c = 0;
 		int i = 0;
         while (i < length()) {
@@ -531,7 +531,7 @@ public class GBinaryReader {
      * @exception IOException if an I/O error occurs
      */
     public String readUnicodeString(long index, int length) throws IOException {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         char c = 0;
         for (int i = 0 ; i < length*2 ; i+=2) {
             c  = (char)((provider.readByte(index++) & 0xff));

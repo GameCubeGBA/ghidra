@@ -154,14 +154,14 @@ class DataTypePanel extends JPanel {
 	}
 
 	private void insertAlignment(Composite composite) {
-		StringBuffer alignmentBuffer = new StringBuffer();
+		StringBuilder alignmentBuffer = new StringBuilder();
 		alignmentBuffer.append("Alignment: ");
 		alignmentBuffer.append(Integer.toString(composite.getAlignment()));
 		insertString(alignmentBuffer.toString() + "\n", sourceAttrSet);
 	}
 
 	private void insertLength(Composite composite) {
-		StringBuffer lengthBuffer = new StringBuffer();
+		StringBuilder lengthBuffer = new StringBuilder();
 		lengthBuffer.append("Length: ");
 		lengthBuffer.append(Integer.toString(composite.getLength()));
 		insertString(lengthBuffer.toString() + "\n", sourceAttrSet);
@@ -276,7 +276,7 @@ class DataTypePanel extends JPanel {
 		insertString(enuum.getDisplayName(), nameAttrSet);
 		insertString(" { \n", contentAttrSet);
 
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 
 		int maxNameLength = 0;
 		int maxValueLength = 0;
@@ -343,7 +343,7 @@ class DataTypePanel extends JPanel {
 			}
 		}
 
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < vars.length; i++) {
 			sb.append("\n");
 			String name = vars[i].getDataType().getDisplayName();
@@ -375,7 +375,7 @@ class DataTypePanel extends JPanel {
 	}
 
 	private String pad(String str, int length) {
-		StringBuffer sb = new StringBuffer(str);
+		StringBuilder sb = new StringBuilder(str);
 		int len = length - str.length();
 		sb.append(" ".repeat(len));
 		return sb.toString();

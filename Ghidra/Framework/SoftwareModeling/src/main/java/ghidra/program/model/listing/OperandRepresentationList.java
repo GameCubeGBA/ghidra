@@ -97,7 +97,7 @@ public class OperandRepresentationList extends ArrayList<Object> {
 	 */
 	@Override
     public String toString() {
-		StringBuffer strBuf = new StringBuffer();
+		StringBuilder strBuf = new StringBuilder();
 		for (Object opElem : this) {
 			strBuf.append(opElem.toString());
 		}

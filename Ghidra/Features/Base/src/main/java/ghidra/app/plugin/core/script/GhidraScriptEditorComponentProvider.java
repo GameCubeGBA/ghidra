@@ -198,7 +198,7 @@ public class GhidraScriptEditorComponentProvider extends ComponentProvider {
 	}
 
 	private String loadSciptFile() throws IOException {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		BufferedReader reader =
 			new BufferedReader(new InputStreamReader(scriptSourceFile.getInputStream()));
 		try {

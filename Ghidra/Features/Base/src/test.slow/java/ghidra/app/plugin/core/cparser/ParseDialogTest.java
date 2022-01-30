@@ -344,7 +344,7 @@ public class ParseDialogTest extends AbstractGhidraHeadedIntegrationTest {
 
 	private void readDefaultParseProfileFile() throws Exception {
 
-		StringBuffer buffy = new StringBuffer();
+		StringBuilder buffy = new StringBuilder();
 		List<String> pathList = new ArrayList<>();
 
 		ResourceFile profileFile = getPrfFile();

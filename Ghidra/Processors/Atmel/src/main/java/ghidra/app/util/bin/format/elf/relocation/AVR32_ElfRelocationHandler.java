@@ -122,11 +122,11 @@ public class AVR32_ElfRelocationHandler extends ElfRelocationHandler {
 								currElfSymbolSize = 2;
 							}
 
-							StringBuffer newSectionNameBuff = new StringBuffer();
+							StringBuilder newSectionNameBuff = new StringBuilder();
 							newSectionNameBuff.append("cpool.");
 							newSectionNameBuff.append(currElfSymbolName);
 
-							StringBuffer newSectionTypeBuff = new StringBuffer();
+							StringBuilder newSectionTypeBuff = new StringBuilder();
 							newSectionTypeBuff.append("Constant Pool ");
 							boolean isReadable = true;
 							boolean isWritable = true;

@@ -154,7 +154,7 @@ public class DataSettingsDialog extends DialogComponentProvider {
 		if (selection != null) {
 			return "Common Settings for Selected Data";
 		}
-		StringBuffer nameBuf = new StringBuffer();
+		StringBuilder nameBuf = new StringBuilder();
 		if (data == null) {
 			nameBuf.append("Default ");
 		}
@@ -736,10 +736,9 @@ public class DataSettingsDialog extends DialogComponentProvider {
 		public Object getCellEditorValue() {
 			switch (mode) {
 				case ENUM:
-					return getComboBoxEnum();
-				case BOOLEAN:
-					return getComboBoxEnum();
-			}
+                case BOOLEAN:
+                    return getComboBoxEnum();
+            }
 			throw new AssertException();
 		}
 

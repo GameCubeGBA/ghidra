@@ -327,7 +327,7 @@ class InstructionInfoProvider extends ComponentProviderAdapter implements Domain
 			return "-none-";
 		}
 
-		StringBuffer outStr = new StringBuffer();
+		StringBuilder outStr = new StringBuilder();
 		for (String str : strs) {
 			if (outStr.length() != 0) {
 				outStr.append(", ");

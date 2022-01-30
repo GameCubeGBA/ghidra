@@ -84,7 +84,7 @@ public class BTreeAnnotationScript extends GhidraScript {
 			BTreeNodeDescriptor nodeI = root.getNode(nodeIndex);
 			createBTreeNode(program, nodeI, i);
 
-			StringBuffer buffer = new StringBuffer();
+			StringBuilder buffer = new StringBuilder();
 			buffer.append("Index:   0x" + Integer.toHexString(nodeIndex) + '\n');
 			buffer.append("flink:   0x" + Integer.toHexString(nodeI.getFLink()) + '\n');
 			buffer.append("blink:   0x" + Integer.toHexString(nodeI.getBLink()) + '\n');
@@ -151,7 +151,7 @@ public class BTreeAnnotationScript extends GhidraScript {
 		changeEndianSettings(headerData);
 		createFragment(header.getCompressionMagic(), headerData.getMinAddress(),
 			headerData.getLength());
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		buffer.append(header.getCompressionMagic());
 		buffer.append('\n');
 		buffer.append("CompressionType: 0x" + Integer.toHexString(header.getCompressionType()));

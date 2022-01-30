@@ -122,7 +122,7 @@ public class SSHKeyManager {
 			throws IOException {
 
 		boolean isEncrypted = false;
-		StringBuffer keyBuf = new StringBuffer();
+		StringBuilder keyBuf = new StringBuilder();
 		BufferedReader r = new BufferedReader(new InputStreamReader(sshPrivateKeyIn));
 		String line;
 		while ((line = r.readLine()) != null) {

@@ -145,7 +145,7 @@ public class PseudoData extends PseudoCodeUnit implements Data {
 	}
 
 	public String getByteCodeString() {
-		StringBuffer bytesStr = new StringBuffer();
+		StringBuilder bytesStr = new StringBuilder();
 
 		for (int i = 0; i < length; i++) {
 			if (i != 0) {

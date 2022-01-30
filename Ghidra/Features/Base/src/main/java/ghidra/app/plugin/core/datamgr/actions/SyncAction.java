@@ -279,7 +279,7 @@ public abstract class SyncAction extends DockingAction implements Comparable<Syn
 				case UNKNOWN:
 			}
 		}
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		if (updateCount > 0) {
 			buf.append("\nNumber of UPDATES remaining:   " + updateCount);
 		}

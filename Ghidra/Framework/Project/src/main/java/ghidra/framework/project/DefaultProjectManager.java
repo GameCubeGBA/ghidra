@@ -589,7 +589,7 @@ public class DefaultProjectManager implements ProjectManager {
 	}
 
 	private void setProjectLocatorProperty(List<ProjectLocator> list, String propertyName) {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < list.size(); i++) {
 			ProjectLocator projectLocator = list.get(i);
 			sb.append(projectLocator.toString());
@@ -601,7 +601,7 @@ public class DefaultProjectManager implements ProjectManager {
 	}
 
 	private void setProjectURLProperty(List<URL> list, String propertyName) {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < list.size(); i++) {
 			URL url = list.get(i);
 			sb.append(url.toExternalForm());

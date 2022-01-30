@@ -420,7 +420,7 @@ class HistoryManager {
 		if (text == null) {
 			return "";
 		}
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		boolean controlChar = false;
 		for (int i = 0; i < text.length(); i++) {
 			char next = text.charAt(i);

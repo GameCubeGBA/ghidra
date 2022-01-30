@@ -550,24 +550,17 @@ public class DataTreeDialog extends DialogComponentProvider
 
 				switch (type) {
 					case OPEN:
-						// handled by valueChanged()
+                    case CHOOSE_FOLDER:
+                        // handled by valueChanged()
 						break;
 					case SAVE:
-						if (text == null || text.isEmpty()) {
+                    case CREATE:
+                        if (text == null || text.isEmpty()) {
 							DomainFile file = treePanel.getSelectedDomainFile();
 							okButton.setEnabled(file != null);
 						}
 						break;
-					case CREATE:
-						if (text == null || text.isEmpty()) {
-							DomainFile file = treePanel.getSelectedDomainFile();
-							okButton.setEnabled(file != null);
-						}
-						break;
-					case CHOOSE_FOLDER:
-						// handled by valueChanged()
-						break;
-					default:
+                    default:
 						throw new AssertException("Must handle new type!: " + type);
 				}
 

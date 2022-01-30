@@ -266,7 +266,7 @@ public class VTImpliedMatchesTableProvider extends ComponentProviderAdapter
 			int unfilteredCount = impliedMatchTableModel.getUnfilteredRowCount();
 
 			String sessionName = controller.getVersionTrackingSessionName();
-			StringBuffer buffy = new StringBuffer();
+			StringBuilder buffy = new StringBuilder();
 			buffy.append("[Session: ").append(sessionName).append("] ");
 			buffy.append('-').append(filteredCount).append(" matches");
 			if (filteredCount != unfilteredCount) {

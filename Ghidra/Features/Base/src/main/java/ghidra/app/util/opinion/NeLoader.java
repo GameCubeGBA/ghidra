@@ -196,7 +196,7 @@ public class NeLoader extends AbstractLibrarySupportLoader {
 		Address addr = memory.getMinAddress();
 		CodeUnit firstCU = listing.getCodeUnitAt(addr);
 
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 
 		buffer.append("Title:  " + nrnt.getTitle() + "\n");
 		buffer.append("Format: " + "New Executable (NE) Windows" + "\n");
@@ -270,7 +270,7 @@ public class NeLoader extends AbstractLibrarySupportLoader {
 					}
 				}
 
-				StringBuffer buff = new StringBuffer();
+				StringBuilder buff = new StringBuilder();
 				buff.append("Segment:    " + (i + 1) + "\n");
 				buff.append(
 					"Offset:     " + Conv.toHexString(segments[i].getOffsetShiftAligned()) + "\n");
@@ -700,13 +700,11 @@ public class NeLoader extends AbstractLibrarySupportLoader {
 				memory.setInt(address, (int) farAddr);
 				break;
 			}
-			case SegmentRelocation.TYPE_FAR_ADDR_48: {
+			case SegmentRelocation.TYPE_FAR_ADDR_48:
+            case SegmentRelocation.TYPE_OFFSET_32: {
 				break;
 			}
-			case SegmentRelocation.TYPE_OFFSET_32: {
-				break;
-			}
-		}
+        }
 		return value;
 	}
 

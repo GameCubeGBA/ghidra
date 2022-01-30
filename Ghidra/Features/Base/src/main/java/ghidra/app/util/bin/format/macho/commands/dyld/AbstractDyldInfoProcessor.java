@@ -102,7 +102,7 @@ abstract public class AbstractDyldInfoProcessor {
 	}
 
 	protected String readString( ByteArrayInputStream byteStream, TaskMonitor monitor ) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		while ( !monitor.isCancelled() ) {
 			int value = byteStream.read();
 			if ( value == -1 ) {

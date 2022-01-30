@@ -47,7 +47,7 @@ public class LazyBindState extends AbstractDyldInfoState {
 
 		File file = new File( getOrdinalName( ) );
 
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		buffer.append(  getSegmentName( ) );
 		buffer.append( ' ' );
 		buffer.append( ' ' );

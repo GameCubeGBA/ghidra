@@ -183,12 +183,12 @@ public class DebugData {
 					deserializeFramePointerOmissionData(streamNum, monitor);
 					break;
 				case EXCEPTION:
-					// TODO: implement.
+                case NEW_FRAME_POINTER_OMISSION:
+                case TOKEN_RID_MAP:
+                case FIXUP:
+                    // TODO: implement.
 					break;
-				case FIXUP:
-					// TODO: implement.
-					break;
-				case OMAP_TO_SOURCE:
+                case OMAP_TO_SOURCE:
 					// omapToSource = deserializeOMap(streamNum, monitor);
 					break;
 				case OMAP_FROM_SOURCE:
@@ -197,19 +197,13 @@ public class DebugData {
 				case SECTION_HEADER:
 					imageSectionHeaders = deserializeSectionHeaders(streamNum, monitor);
 					break;
-				case TOKEN_RID_MAP:
-					// TODO: implement.
-					break;
-				case X_DATA:
+                case X_DATA:
 					deserializeXData(streamNum, monitor);
 					break;
 				case P_DATA:
 					deserializePData(streamNum, monitor);
 					break;
-				case NEW_FRAME_POINTER_OMISSION:
-					// TODO: implement.
-					break;
-				case SECTION_HEADER_ORIG:
+                case SECTION_HEADER_ORIG:
 					imageSectionHeadersOrig = deserializeSectionHeaders(streamNum, monitor);
 					break;
 			}
@@ -328,10 +322,8 @@ public class DebugData {
 			PdbNewDebugInfo dbi = (PdbNewDebugInfo) pdb.getDebugInfo();
 			ImageFileMachine machine = dbi.getMachineType();
 			switch (machine) {
-				case IA64:
-					break;
 				case AMD64:
-					break;
+				case IA64:
 				default:
 					break;
 			}

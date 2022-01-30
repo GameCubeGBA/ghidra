@@ -165,7 +165,7 @@ class SymbolTableXmlMgr {
 	 * For example, "User32.dll::SomeClass::printf".
 	 */
 	private String getNamespace(Symbol symbol) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		Namespace namespace = symbol.getParentNamespace();
 		while (namespace != program.getGlobalNamespace()) {
 			buffer.insert(0, namespace.getName() + "::");

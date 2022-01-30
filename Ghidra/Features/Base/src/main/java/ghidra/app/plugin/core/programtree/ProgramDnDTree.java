@@ -349,7 +349,7 @@ public class ProgramDnDTree extends DragNDropTree {
 		}
 
 		AddressRangeIterator iter = f.getAddressRanges();
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		int count = 0;
 		while (iter.hasNext()) {
 			AddressRange range = iter.next();

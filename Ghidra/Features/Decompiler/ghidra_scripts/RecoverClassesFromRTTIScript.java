@@ -973,7 +973,7 @@ public class RecoverClassesFromRTTIScript extends GhidraScript {
 			List<RecoveredClass> recoveredClasses) throws CancelledException {
 
 
-		StringBuffer wholeBuffer = new StringBuffer();
+		StringBuilder wholeBuffer = new StringBuilder();
 		wholeBuffer.append("\r\n");
 		Iterator<RecoveredClass> recoveredClassIterator = recoveredClasses.iterator();
 

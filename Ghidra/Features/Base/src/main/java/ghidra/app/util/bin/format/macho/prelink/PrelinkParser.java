@@ -233,7 +233,7 @@ public class PrelinkParser {
 		if (!arrayElement.getName().equals(TAG_ARRAY)) {
 			throw new RuntimeException("not an array element");
 		}
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		Iterator<?> iterator = arrayElement.getChildren().iterator();
 		while (iterator.hasNext()) {
 			if (monitor.isCancelled()) {

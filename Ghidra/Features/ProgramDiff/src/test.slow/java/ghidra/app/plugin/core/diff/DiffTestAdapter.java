@@ -779,7 +779,7 @@ public class DiffTestAdapter extends AbstractGhidraHeadedIntegrationTest {
 	}
 
 	String getDisplayableAddressSet(ProgramSelection selection) {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		for (AddressRange range : selection) {
 			buf.append("[" + range.getMinAddress().toString() + ", " +
 				range.getMaxAddress().toString() + "]");
@@ -1114,7 +1114,7 @@ public class DiffTestAdapter extends AbstractGhidraHeadedIntegrationTest {
 			ProgramSelection currentSelection) {
 		AddressSet missingFromSelection = expectedSelection.subtract(currentSelection);
 		AddressSet unexpectedlySelected = currentSelection.subtract(expectedSelection);
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		if (!missingFromSelection.isEmpty()) {
 			buf.append("\nSelection expected the following addresses but they are missing: \n" +
 				missingFromSelection.toString());

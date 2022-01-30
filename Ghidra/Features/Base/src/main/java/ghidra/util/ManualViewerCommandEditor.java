@@ -169,7 +169,7 @@ public class ManualViewerCommandEditor extends PropertyEditorSupport
 		void setOption(ManualViewerCommandWrappedOption option) {
 			commandField.setText(option.getCommandString());
 			String[] commandArguments = option.getCommandArguments();
-			StringBuffer buffer = new StringBuffer();
+			StringBuilder buffer = new StringBuilder();
 			for (String string : commandArguments) {
 				buffer.append(string);
 				buffer.append(" ");

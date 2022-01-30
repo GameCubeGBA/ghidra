@@ -27,7 +27,7 @@ public class ListSTL<T> {
 
 	@Override
 	public String toString() {
-		StringBuffer buffy = new StringBuffer( "ListSTL[size=" + size + "]\n" );
+		StringBuilder buffy = new StringBuilder( "ListSTL[size=" + size + "]\n" );
 		int showSize = Math.min( 20, size() );
 		ListNodeSTL<T> current = root.next;
 		for ( int i = 0; i < showSize; i++ ) {
@@ -39,7 +39,7 @@ public class ListSTL<T> {
 
 	// for debug
 	public void printDebug() {
-		StringBuffer buffy = new StringBuffer();
+		StringBuilder buffy = new StringBuilder();
 		IteratorSTL<T> begin = begin();
 		while ( !begin.isEnd() ) {
 			T t = begin.get();

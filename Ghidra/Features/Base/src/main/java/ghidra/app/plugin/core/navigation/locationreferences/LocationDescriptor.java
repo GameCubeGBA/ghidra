@@ -121,7 +121,8 @@ public abstract class LocationDescriptor {
 				case ChangeManager.DOCR_SYMBOL_ADDED:
 				case ChangeManager.DOCR_SYMBOL_RENAMED:
 				case ChangeManager.DOCR_SYMBOL_REMOVED:
-					checkForAddressChange(domainObjectRecord);
+                case DomainObject.DO_OBJECT_RESTORED:
+                    checkForAddressChange(domainObjectRecord);
 					return true;
 				case ChangeManager.DOCR_MEM_REFERENCE_ADDED:
 					ProgramChangeRecord changeRecord = (ProgramChangeRecord) domainObjectRecord;
@@ -148,10 +149,7 @@ public abstract class LocationDescriptor {
 						return true;
 					}
 					break;
-				case DomainObject.DO_OBJECT_RESTORED:
-					checkForAddressChange(domainObjectRecord);
-					return true;
-			}
+            }
 		}
 
 		return false;

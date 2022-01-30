@@ -145,7 +145,7 @@ public final class ObjectiveC1_TypeEncodings {
 
 		new ApplyFunctionSignatureCmd(methodAddress, sig, SourceType.ANALYSIS).applyTo(program);
 
-		StringBuffer commentBuffer = new StringBuffer();
+		StringBuilder commentBuffer = new StringBuilder();
 		commentBuffer.append("Function Stack Size: 0x" + Integer.toHexString(totalSize) + " bytes");
 
 		if (method.getComment() == null) {
@@ -398,15 +398,12 @@ public final class ObjectiveC1_TypeEncodings {
 				DataType dt = parseDataType(buffer);
 				return new TypedefDataType("OUT " + dt.getDisplayName(), dt);
 			}
-			case _C_BYCOPY: {
+			case _C_BYCOPY:
+            case _C_BYREF: {
 				buffer.deleteCharAt(0);
 				return parseDataType(buffer);
 			}
-			case _C_BYREF: {
-				buffer.deleteCharAt(0);
-				return parseDataType(buffer);
-			}
-			case _C_ONEWAY: {
+            case _C_ONEWAY: {
 				buffer.deleteCharAt(0);
 				DataType dt = parseDataType(buffer);
 				return new TypedefDataType("ONEWAY " + dt.getDisplayName(), dt);
@@ -556,7 +553,7 @@ public final class ObjectiveC1_TypeEncodings {
 		if (buffer.charAt(0) == _C_UNDEF) {
 			buffer.deleteCharAt(0);
 		}
-		StringBuffer numberBuffer = new StringBuffer();
+		StringBuilder numberBuffer = new StringBuilder();
 		while (buffer.length() > 0 && Character.isDigit(buffer.charAt(0))) {
 			numberBuffer.append(buffer.charAt(0));
 			buffer.deleteCharAt(0);

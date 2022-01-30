@@ -106,24 +106,20 @@ public class LldbModelTargetThreadContainerImpl extends LldbModelTargetObjectImp
 	private TargetEventType getEventType(StateType state, LldbCause cause, LldbReason reason) {
 		switch (state.swigValue()) {
 			case 0:	// eStateInvalid
-				return TargetEventType.RUNNING;
+            case 6: // eStateRunning
+            case 7: // eStateStepping
+                return TargetEventType.RUNNING;
 			case 1: // eStateUnloaded
-				return TargetEventType.PROCESS_EXITED;
+            case 8:  // eStateCrashed
+            case 9:  // eStateDetached
+            case 10: // eStateExited
+                return TargetEventType.PROCESS_EXITED;
 			case 2: // eStateConnected
 			case 3: // eStateAttaching
 			case 4: // eStateLaunching
 				return TargetEventType.PROCESS_CREATED;
-			case 5: // eStateStopped
-				return TargetEventType.STOPPED;
-			case 6: // eStateRunning
-			case 7: // eStateStepping
-				return TargetEventType.RUNNING;
-			case 8:  // eStateCrashed
-			case 9:  // eStateDetached
-			case 10: // eStateExited
-				return TargetEventType.PROCESS_EXITED;
 			case 11: // eStateSuspended
-				return TargetEventType.STOPPED;
+			case 5: // eStateStopped
 			default:
 				return TargetEventType.STOPPED;
 		}

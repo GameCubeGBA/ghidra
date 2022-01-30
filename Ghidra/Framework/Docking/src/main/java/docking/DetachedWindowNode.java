@@ -229,7 +229,7 @@ class DetachedWindowNode extends WindowNode {
 		List<String> titles = generateTitles(placeholders);
 
 		boolean firstItem = true;
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		for (String title : titles) {
 			if (!firstItem) {
 				buf.append(", ");
@@ -299,7 +299,7 @@ class DetachedWindowNode extends WindowNode {
 				finalTitles.add(titles.get(0));
 			}
 			else {
-				StringBuffer buffy = new StringBuffer(providerName);
+				StringBuilder buffy = new StringBuilder(providerName);
 				buffy.append(" [ ");
 				boolean firstItem = true;
 				for (String title : titles) {

@@ -415,7 +415,7 @@ public class PreCommentFieldFactory extends FieldFactory {
 		if (FUNCTION_FLAG_COMMENT != null) {
 			return;
 		}
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append("\n");
         sb.append("|".repeat(20));
 		sb.append(" FUNCTION ");

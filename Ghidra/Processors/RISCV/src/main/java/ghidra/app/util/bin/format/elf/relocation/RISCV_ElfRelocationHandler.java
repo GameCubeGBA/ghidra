@@ -135,18 +135,15 @@ public class RISCV_ElfRelocationHandler extends ElfRelocationHandler {
 			break;
 
 		case RISCV_ElfRelocationConstants.R_RISCV_TLS_DTPMOD32:
-			// TLS relocation word32 = S->TLSINDEX
+
+            case RISCV_ElfRelocationConstants.R_RISCV_TLS_DTPMOD64:
+                // TLS relocation word64 = S->TLSINDEX
+                // TLS relocation word32 = S->TLSINDEX
 			markAsWarning(program, relocationAddress, "R_RISCV_TLS_DTPMOD32", symbolName, symbolIndex,
 					"TODO, needs support ", elfRelocationContext.getLog());     
 			break;
 
-		case RISCV_ElfRelocationConstants.R_RISCV_TLS_DTPMOD64:
-			// TLS relocation word64 = S->TLSINDEX
-			markAsWarning(program, relocationAddress, "R_RISCV_TLS_DTPMOD32", symbolName, symbolIndex,
-					"TODO, needs support ", elfRelocationContext.getLog());       
-			break;
-
-		case RISCV_ElfRelocationConstants.R_RISCV_TLS_DTPREL32:
+            case RISCV_ElfRelocationConstants.R_RISCV_TLS_DTPREL32:
 			// TLS relocation word32 = TLS + S + A - TLS_TP_OFFSET
 			markAsWarning(program, relocationAddress, "R_RISCV_TLS_DTPREL32", symbolName, symbolIndex,
 					"TODO, needs support ", elfRelocationContext.getLog());       

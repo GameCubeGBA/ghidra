@@ -263,7 +263,7 @@ public class BinaryField extends Field {
 	 * @return formatted value string
 	 */
 	public static String getValueAsString(byte[] data) {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		int i = 0;
 		for (; i < 24 && i < data.length; i++) {
 			String b = Integer.toHexString(data[i] & 0xff);

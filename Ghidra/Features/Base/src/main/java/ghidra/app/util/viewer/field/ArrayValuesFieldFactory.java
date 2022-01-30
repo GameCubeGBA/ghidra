@@ -111,7 +111,7 @@ public class ArrayValuesFieldFactory extends FieldFactory {
 	private String getDisplayValue(Data data, boolean addDelimeter) {
 		DataType dt = data.getDataType();
 		int minLength = data.getLength() * 3 + 1;  // this just seems a decent minimum size
-		StringBuffer buf = new StringBuffer(dt.getRepresentation(data, data, data.getLength()));
+		StringBuilder buf = new StringBuilder(dt.getRepresentation(data, data, data.getLength()));
 		if (buf.length() < minLength) {
 			for (int i = buf.length(); i < minLength; i++) {
 				buf.insert(0, ' ');

@@ -402,14 +402,12 @@ public class JSONParser {
 			i = tp.start;
 			switch(s[tp.start]){
 			case 't':
-				Msg.error(this, "what is this? "+tstr);
+                case 'f':
+                    Msg.error(this, "what is this? "+tstr);
 				//rv = mkvalcval2(cval1);
 				break;
-			case 'f':
-				Msg.error(this, "what is this? "+tstr);
-				//rv = mkvalcval2(cval0);
-				break;
-			case 'n':
+                //rv = mkvalcval2(cval0);
+                case 'n':
 				//rv = null;
 				break;
 			case '-':

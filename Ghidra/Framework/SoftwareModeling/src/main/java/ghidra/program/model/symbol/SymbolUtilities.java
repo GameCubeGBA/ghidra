@@ -644,7 +644,7 @@ public class SymbolUtilities {
 	}
 
 	private static String buildSpaceName(String[] pieces, int start, int end) {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		buf.append(pieces[start]);
 		for (int i = start + 1; i <= end; i++) {
 			buf.append(UNDERSCORE);

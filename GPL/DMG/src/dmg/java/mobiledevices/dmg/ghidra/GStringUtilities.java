@@ -28,7 +28,7 @@ public class GStringUtilities {
 	}
 
 	public static String convertBytesToString( byte [] bytes, int length ) {
-		StringBuffer buf = new StringBuffer( length * 2);
+		StringBuilder buf = new StringBuilder( length * 2);
 		for ( int i = 0 ; i < length ; ++i ) {
 			String bs = Integer.toHexString( bytes[ i ] & 0xff );
 			if ( bs.length() == 1 ) {

@@ -183,7 +183,7 @@ public class DataTypeDependencyOrderer {
 	 * @return  String of debug data.
 	 */
 	private String dumpDebug() {
-		StringBuffer res = new StringBuffer();
+		StringBuilder res = new StringBuilder();
 		res.append("\nDepend Size\n  orderedDependentsList: " + orderedDependentsList.size() +
 			"\n  whoIDependOn: " + whoIDependOn.size() + "\n  whoDependsOnMe: " +
 			whoDependsOnMe.size() + "\n\n");

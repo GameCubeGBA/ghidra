@@ -92,7 +92,7 @@ public class FunctionComparisonProvider extends ComponentProviderAdapter
 
 	@Override
 	public String toString() {
-		StringBuffer buff = new StringBuffer();
+		StringBuilder buff = new StringBuilder();
 		buff.append("FunctionComparisonProvider\n");
 		buff.append("Name: ");
 		buff.append(getName() + "\n");

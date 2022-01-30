@@ -108,7 +108,7 @@ public class MultipleLabelsRenderer extends AbstractGhidraColumnRenderer<Symbol[
 
 			// Set up the tooltip information.
 			String displayString = type.getDisplayString();
-			StringBuffer buffer = new StringBuffer();
+			StringBuilder buffer = new StringBuilder();
 			buffer.append("Has " + labelCount + " " + displayString +
 				" labels. Labels can also be viewed using the dual listing of Markup Items.");
 			buffer.append("\n");
@@ -143,7 +143,7 @@ public class MultipleLabelsRenderer extends AbstractGhidraColumnRenderer<Symbol[
 		if (labelCount > 1) {
 			// Set up the tooltip information.
 			String displayString = type.getDisplayString();
-			StringBuffer buffer = new StringBuffer();
+			StringBuilder buffer = new StringBuilder();
 			buffer.append("Has " + labelCount + " " + displayString +
 				" labels. Labels can also be viewed using the dual listing of Markup Items.");
 			buffer.append("\n");

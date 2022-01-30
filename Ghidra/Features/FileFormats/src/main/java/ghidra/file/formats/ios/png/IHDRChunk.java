@@ -195,7 +195,7 @@ public class IHDRChunk {
 
 	@Override
 	public String toString() {
-		StringBuffer buff = new StringBuffer();
+		StringBuilder buff = new StringBuilder();
 
 		buff.append("Data Length: " + length + "\n");
 		buff.append("Chunk ID: " + new String(chunkID) + "\n");

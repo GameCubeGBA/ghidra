@@ -206,7 +206,7 @@ public class DefineTable {
 	 * @return
 	 */
 	public String toString(String string) {
-		StringBuffer buf = new StringBuffer(string);
+		StringBuilder buf = new StringBuilder(string);
 		PPToken token = defs.get(string);
 		Vector<PPToken> argVector = getArgs(string);
 
@@ -416,7 +416,7 @@ public class DefineTable {
 		ArrayList<String> subValue = new ArrayList<>();
 		int index = 0;
 		int pos = 0;
-		StringBuffer argsfound = new StringBuffer();
+		StringBuilder argsfound = new StringBuilder();
 		while (pos < parms.length() || index < argv.size()) {
 			String argValue = "";
 			if (pos < parms.length()) {
@@ -477,7 +477,7 @@ public class DefineTable {
 			while (curpos >= 0);
 		}
 
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		int listSize = beginPos.size();
 		int startpos = 0;
 		for (int i = 0; i < listSize; i++) {
@@ -567,7 +567,7 @@ public class DefineTable {
 
 	private String joinPdPd(String image) {
 		int currIndex = image.length();
-		StringBuffer buf = new StringBuffer(image);
+		StringBuilder buf = new StringBuilder(image);
 		do {
 			currIndex = image.lastIndexOf("##", currIndex);
 			if (currIndex >= 0) {

@@ -94,7 +94,7 @@ public class SingleRowLayout extends RowLayout {
 
 	@Override
 	public String toString() {
-		StringBuffer buffy = new StringBuffer();
+		StringBuilder buffy = new StringBuilder();
 		int n = getNumFields();
 		for (int i = 0; i < n; i++) {
 			Field layoutField = getField(i);

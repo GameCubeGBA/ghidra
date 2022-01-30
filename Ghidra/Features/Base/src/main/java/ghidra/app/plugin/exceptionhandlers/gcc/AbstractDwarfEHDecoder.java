@@ -336,10 +336,6 @@ abstract class AbstractDwarfEHDecoder implements DwarfEHDecoder {
 				// just pass this through
 				break;
 
-			case DW_EH_PE_aligned:
-
-				break;
-
 			case DW_EH_PE_datarel:
 				val = context.getEhBlock().getStart().add(val).getOffset();
 				break;
@@ -357,6 +353,8 @@ abstract class AbstractDwarfEHDecoder implements DwarfEHDecoder {
 
 				val = txt.getStart().add(val).getOffset();
 				break;
+
+			case DW_EH_PE_aligned:
 
 			default:
 				break;

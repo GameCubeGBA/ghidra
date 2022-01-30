@@ -54,7 +54,7 @@ class SynchronizedTransaction implements Transaction {
 
 	@Override
 	public String getDescription() {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		for (int i = 0; i < managers.length; i++) {
 			if (descriptions[i] != null) {
 				if (buf.length() != 0) {

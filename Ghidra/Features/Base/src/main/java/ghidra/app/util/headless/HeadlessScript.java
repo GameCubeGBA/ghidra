@@ -492,12 +492,10 @@ public abstract class HeadlessScript extends GhidraScript {
 				break;
 
 			case ABORT_AND_DELETE:
-				// nothing changes
-				break;
 
-			case ABORT:
-				// nothing changes
+            case ABORT:
+                // nothing changes
 				break;
-		}
+        }
 	}
 }

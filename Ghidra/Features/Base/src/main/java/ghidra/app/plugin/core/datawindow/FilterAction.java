@@ -351,7 +351,7 @@ class FilterAction extends ToggleDockingAction {
 				while (itr.hasNext()) {
 					String curType = itr.next();
 					Boolean lEnabled = typeEnabledMap.get(curType);
-					StringBuffer buildMetaCurTypeBuff = new StringBuffer(curType);
+					StringBuilder buildMetaCurTypeBuff = new StringBuilder(curType);
 					int firstIndex = StringUtils.indexOfIgnoreCase(curType, filteredText, 0);
 					int lastIndex = firstIndex + filteredText.length();
 					buildMetaCurTypeBuff.insert(lastIndex, "</b>");//THIS MUST ALWAYS COME BEFORE FIRST INDEX (FOR NO MATH on INDEX)

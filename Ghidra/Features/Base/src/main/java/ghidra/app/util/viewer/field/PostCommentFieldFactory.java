@@ -550,7 +550,7 @@ public class PostCommentFieldFactory extends FieldFactory {
 			return;
 		}
 		// Initialize dashed separator lines
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
         sb.append("-".repeat(80));
 		DEFAULT_FLAG_COMMENT = sb.toString();
 

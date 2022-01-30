@@ -190,7 +190,7 @@ class FieldFactory {
 	 * Get the padded string that has the given char value.
 	 */
 	private String getString(String value) {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		int count = model.getDataUnitSymbolSize();
         sb.append(String.valueOf(value).repeat(count));
 		return sb.toString();

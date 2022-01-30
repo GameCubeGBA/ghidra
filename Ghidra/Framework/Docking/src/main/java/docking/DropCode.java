@@ -40,12 +40,10 @@ enum DropCode {
 				c = HeaderCursor.BOTTOM;
 				break;
 			case STACK:
-				c = HeaderCursor.STACK;
+            case ROOT:
+                c = HeaderCursor.STACK;
 				break;
-			case ROOT:
-				c = HeaderCursor.STACK;
-				break;
-			case WINDOW:
+            case WINDOW:
 				c = HeaderCursor.NEW_WINDOW;
 				break;
 			case INVALID:
@@ -63,10 +61,9 @@ enum DropCode {
 				return WindowPosition.LEFT;
 			case RIGHT:
 				return WindowPosition.RIGHT;
-			case STACK:
-				return WindowPosition.STACK;
 			case TOP:
 				return WindowPosition.TOP;
+			case STACK:
 			default:
 				return WindowPosition.STACK;
 		}

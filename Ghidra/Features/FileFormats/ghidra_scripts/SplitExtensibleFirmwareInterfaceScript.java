@@ -31,7 +31,7 @@ public class SplitExtensibleFirmwareInterfaceScript extends GhidraScript {
 	@Override
 	public void run() throws Exception {
 
-		StringBuffer messages = new StringBuffer();
+		StringBuilder messages = new StringBuilder();
 
 		File efiFile = askFile("Select EFI File", "EFI");
 

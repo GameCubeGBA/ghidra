@@ -251,7 +251,7 @@ public abstract class LocalFileSystem implements FileSystem {
 			repositoryLogger.log(path, msg, user);
 		}
 		else {
-			StringBuffer buf = new StringBuffer();
+			StringBuilder buf = new StringBuilder();
 			if (item != null) {
 				buf.append(item.getPathName());
 			}

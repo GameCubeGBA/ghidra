@@ -100,7 +100,7 @@ public class HelpLocation {
 		if (str == null) {
 			return str;
 		}
-		StringBuffer buf = new StringBuffer(str);
+		StringBuilder buf = new StringBuilder(str);
 		int n = buf.length();
 		for (int i = 0; i < n; i++) {
 			char c = buf.charAt(i);

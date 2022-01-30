@@ -131,7 +131,7 @@ public class MergeProgressPanel extends JPanel {
 	 * @return a string representation for the phase.
 	 */
 	private String getPhaseString(String[] phase) {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		buf.append(phase[0]);
 		for (int i = 1; i < phase.length; i++) {
 			buf.append(":" + phase[i]);

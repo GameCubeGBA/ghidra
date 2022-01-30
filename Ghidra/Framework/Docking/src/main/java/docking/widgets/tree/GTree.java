@@ -844,7 +844,7 @@ public class GTree extends JPanel implements BusyListener {
 	 * @param e the TreeModelEvent;
 	 */
 	public static void printEvent(PrintWriter out, String name, TreeModelEvent e) {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		buf.append(name);
 		buf.append("\n\tPath: ");
 		Object[] path = e.getPath();

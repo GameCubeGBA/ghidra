@@ -65,12 +65,8 @@ public class EncodedValue implements StructConverter {
 				annotation = new EncodedAnnotation(reader);
 				break;
 			}
-			case ValueFormats.VALUE_NULL: {
-				break;// do nothing...
-			}
-			case ValueFormats.VALUE_BOOLEAN: {
-				break;// do nothing...
-			}
+			case ValueFormats.VALUE_BOOLEAN:
+			case ValueFormats.VALUE_NULL:
 			default: {
 				break;// do nothing...
 			}
@@ -144,13 +140,11 @@ public class EncodedValue implements StructConverter {
 				builder.append("_" + dataType.getName());
 				break;
 			}
-			case ValueFormats.VALUE_NULL: {
+			case ValueFormats.VALUE_NULL:
+            case ValueFormats.VALUE_BOOLEAN: {
 				break;// do nothing
 			}
-			case ValueFormats.VALUE_BOOLEAN: {
-				break;// do nothing
-			}
-			default: {
+            default: {
 				//TODO throw new RuntimeException( "unsupported encoded value: 0x" + Integer.toHexString( valueType & 0xff ) );
 			}
 		}

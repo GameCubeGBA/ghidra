@@ -2005,7 +2005,7 @@ public class BufferMgr {
 	}
 
 	public String getStatusInfo() {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		if (corruptedState) {
 			buf.append("BufferMgr is Corrupt!\n");
 		}

@@ -61,7 +61,7 @@ public class RedBlackTree<K,V> {
     
     @Override
 	public String toString() {
-		StringBuffer buffy = new StringBuffer( "RedBlackTree[size=" + size + "]\n" );
+		StringBuilder buffy = new StringBuilder( "RedBlackTree[size=" + size + "]\n" );
 		int showSize = Math.min( 20, size() );		
 		RedBlackNode<K, V> current = getFirst();
 		for ( int i = 0; i < showSize; i++ ) {

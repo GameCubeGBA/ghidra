@@ -1360,7 +1360,7 @@ public class DataTypeManagerHandler {
 	private boolean getSaveAsLock(UndoableDomainObject undoableDomainObject) {
 		if (!undoableDomainObject.lock(null)) {
 			String title = "Save " + CONTENT_NAME + " As (Busy)";
-			StringBuffer buf = new StringBuffer();
+			StringBuilder buf = new StringBuilder();
 			buf.append("The " + CONTENT_NAME +
 				" is currently being modified by the following actions/tasks:\n \n");
 			Transaction t = undoableDomainObject.getCurrentTransaction();

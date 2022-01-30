@@ -152,7 +152,7 @@ class ReferenceLineDispenser extends AbstractLineDispenser {
 			return;
 		}
 
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 
 		Address[] all = new Address[refs.length + offcuts.length];
 		System.arraycopy(refs, 0, all, 0, refs.length);
@@ -160,7 +160,7 @@ class ReferenceLineDispenser extends AbstractLineDispenser {
 
 		if (displayRefHeader) {
 			if (refs.length > 0 || offcuts.length > 0) {
-				StringBuffer tmp = new StringBuffer();
+				StringBuilder tmp = new StringBuilder();
 				tmp.append(header);
 				tmp.append("[");
 				tmp.append(refs.length);

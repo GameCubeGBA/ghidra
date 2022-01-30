@@ -261,7 +261,7 @@ public class ShowInstructionInfoPlugin extends ProgramPlugin {
 
 	private String buildMissingManualMessage(Language language, String filename,
 			String missingDescription) {
-		StringBuffer buf = new StringBuffer(HTMLUtilities.HTML);
+		StringBuilder buf = new StringBuilder(HTMLUtilities.HTML);
 		buf.append("Ghidra could not find the processor manual for ").append(language);
 		buf.append(HTMLUtilities.BR);
 		buf.append(HTMLUtilities.BR);
