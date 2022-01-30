@@ -15,8 +15,6 @@
  */
 package ghidra.app.plugin.core.debug.gui.watch;
 
-import org.junit.*;
-
 import ghidra.app.plugin.core.debug.service.tracemgr.DebuggerTraceManagerServicePlugin;
 import ghidra.app.services.DebuggerTraceManagerService;
 import ghidra.pcode.exec.PcodeExecutor;

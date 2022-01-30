@@ -32,8 +32,6 @@ import ghidra.app.script.GhidraScript;
 import ghidra.app.util.PseudoDisassembler;
 import ghidra.app.util.PseudoInstruction;
 import ghidra.program.model.address.Address;
-import ghidra.program.model.lang.*;
-import ghidra.program.model.listing.*;
 import ghidra.program.model.mem.Memory;
 
 public class FindUndefinedFunctionsFollowUpScript extends GhidraScript {

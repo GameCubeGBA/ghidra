@@ -18,11 +18,7 @@
 //@category Examples.Version Tracking
 
 import ghidra.app.script.GhidraScript;
-import ghidra.feature.vt.api.correlator.program.*;
 import ghidra.feature.vt.api.db.VTSessionDB;
-import ghidra.feature.vt.api.main.*;
-import ghidra.feature.vt.api.markuptype.*;
-import ghidra.feature.vt.api.util.*;
 import ghidra.framework.model.DomainFolder;
 import ghidra.framework.options.ToolOptions;
 import ghidra.framework.plugintool.PluginTool;

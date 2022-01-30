@@ -19,7 +19,6 @@
 
 import ghidra.app.script.GhidraScript;
 import ghidra.app.script.GhidraState;
-import ghidra.framework.model.*;
 import ghidra.program.database.ProgramContentHandler;
 import ghidra.program.model.listing.Program;
 import ghidra.util.exception.CancelledException;

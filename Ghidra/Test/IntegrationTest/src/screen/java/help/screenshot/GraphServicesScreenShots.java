@@ -26,7 +26,6 @@ import ghidra.graph.CallGraphType;
 import ghidra.graph.export.GraphExporterDialog;
 import ghidra.graph.visualization.DefaultGraphDisplay;
 import ghidra.graph.visualization.DefaultGraphDisplayComponentProvider;
-import ghidra.service.graph.*;
 import ghidra.util.exception.AssertException;
 import ghidra.util.task.TaskMonitor;
 

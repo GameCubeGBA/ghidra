@@ -26,8 +26,6 @@ import org.junit.Test;
 
 import ghidra.app.plugin.core.debug.gui.objects.components.*;
 import ghidra.app.plugin.core.debug.service.model.DebuggerModelServiceProxyPlugin;
-import ghidra.dbg.model.*;
-import ghidra.dbg.target.*;
 import ghidra.dbg.testutil.DebuggerModelTestUtils;
 import ghidra.util.Swing;
 import help.screenshot.GhidraScreenShotGenerator;

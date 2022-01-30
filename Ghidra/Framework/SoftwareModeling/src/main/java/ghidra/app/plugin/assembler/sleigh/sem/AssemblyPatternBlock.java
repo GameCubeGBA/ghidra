@@ -31,7 +31,6 @@ import ghidra.app.plugin.processors.sleigh.pattern.DisjointPattern;
 import ghidra.app.plugin.processors.sleigh.pattern.PatternBlock;
 import ghidra.program.model.lang.RegisterValue;
 import ghidra.util.NumericUtilities;
-import ghidra.util.StringUtilities;
 
 /**
  * The analog of {@link PatternBlock}, designed for use by the assembler

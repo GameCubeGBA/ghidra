@@ -29,7 +29,6 @@ import ghidra.program.database.ProgramBuilder;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public class MemoryBufferImplTest extends AbstractGhidraHeadedIntegrationTest {
 	private Program program;

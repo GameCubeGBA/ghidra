@@ -21,8 +21,6 @@ import static org.junit.Assert.assertFalse;
 
 import java.util.Set;
 
-import org.junit.*;
-
 import com.google.common.collect.Range;
 
 import generic.Unique;

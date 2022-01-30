@@ -20,7 +20,6 @@
 import ghidra.app.script.GhidraScript;
 import ghidra.program.disassemble.Disassembler;
 import ghidra.program.model.address.AddressSetView;
-import ghidra.program.model.listing.*;
 import ghidra.program.model.pcode.PcodeOp;
 
 public class MarkUnimplementedPcode extends GhidraScript {

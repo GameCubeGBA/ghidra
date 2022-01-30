@@ -29,7 +29,6 @@ import ghidra.app.decompiler.parallel.ParallelDecompiler;
 import ghidra.app.plugin.core.analysis.SwitchAnalysisDecompileConfigurer;
 import ghidra.app.plugin.core.bookmark.BookmarkEditCmd;
 import ghidra.app.script.GhidraScript;
-import ghidra.program.model.listing.*;
 import ghidra.program.model.symbol.FlowType;
 import ghidra.program.model.symbol.Reference;
 import ghidra.util.task.TaskMonitor;

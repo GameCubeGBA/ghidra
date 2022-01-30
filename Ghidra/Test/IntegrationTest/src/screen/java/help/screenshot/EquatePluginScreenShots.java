@@ -34,9 +34,6 @@ import ghidra.app.plugin.core.flowarrow.FlowArrowPlugin;
 import ghidra.app.util.bean.SetEquateDialog;
 import ghidra.app.util.datatype.ApplyEnumDialog;
 import ghidra.framework.plugintool.Plugin;
-import ghidra.program.model.address.*;
-import ghidra.program.model.data.*;
-import ghidra.program.model.listing.*;
 import ghidra.program.util.OperandFieldLocation;
 import ghidra.program.util.ProgramSelection;
 

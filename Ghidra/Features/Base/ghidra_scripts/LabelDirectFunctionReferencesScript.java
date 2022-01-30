@@ -23,10 +23,8 @@ import java.util.*;
 
 import ghidra.app.script.GhidraScript;
 import ghidra.program.model.address.Address;
-import ghidra.program.model.listing.*;
 import ghidra.program.model.mem.Memory;
 import ghidra.program.model.mem.MemoryAccessException;
-import ghidra.program.model.symbol.*;
 import ghidra.program.util.ProgramUtilities;
 import ghidra.util.task.TaskMonitor;
 

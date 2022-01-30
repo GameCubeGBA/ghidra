@@ -22,7 +22,6 @@ import ghidra.program.model.symbol.FlowType;
 import ghidra.util.Msg;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  * CodeBlockImpl is an implementation of a CodeBlock.

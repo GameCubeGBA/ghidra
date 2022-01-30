@@ -18,7 +18,6 @@ package help.screenshot;
 import org.junit.Test;
 
 import docking.action.DockingActionIf;
-import ghidra.app.plugin.core.scalartable.*;
 
 public class ScalarSearchPluginScreenShots extends GhidraScreenShotGenerator {
 

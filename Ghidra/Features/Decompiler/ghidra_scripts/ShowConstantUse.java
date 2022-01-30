@@ -26,21 +26,14 @@
 import java.util.*;
 
 import generic.jar.ResourceFile;
-import ghidra.app.decompiler.*;
 import ghidra.app.decompiler.component.DecompilerUtils;
-import ghidra.app.script.*;
-import ghidra.app.tablechooser.*;
 import ghidra.framework.options.ToolOptions;
 import ghidra.framework.plugintool.util.OptionsService;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressSpace;
 import ghidra.program.model.lang.Register;
-import ghidra.program.model.listing.*;
-import ghidra.program.model.pcode.*;
 import ghidra.program.model.symbol.Reference;
 import ghidra.program.model.symbol.ReferenceIterator;
-import ghidra.program.util.*;
-import ghidra.util.*;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.InvalidInputException;
 

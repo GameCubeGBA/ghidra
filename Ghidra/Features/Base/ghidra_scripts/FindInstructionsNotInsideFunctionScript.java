@@ -25,8 +25,6 @@
 import ghidra.app.script.GhidraScript;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressSet;
-import ghidra.program.model.block.*;
-import ghidra.program.model.listing.*;
 import ghidra.util.Msg;
 import ghidra.util.SystemUtilities;
 

@@ -19,7 +19,6 @@ import ghidra.program.model.address.*;
 import ghidra.program.model.listing.*;
 import ghidra.program.model.symbol.*;
 import ghidra.program.util.*;
-import ghidra.util.task.TaskMonitor;
 
 class MemReferenceDB extends ReferenceDB {
 

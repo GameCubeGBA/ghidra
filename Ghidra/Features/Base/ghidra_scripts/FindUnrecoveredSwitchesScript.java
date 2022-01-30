@@ -22,10 +22,8 @@
 //@toolbar
 
 import ghidra.app.script.GhidraScript;
-import ghidra.program.model.address.*;
 import ghidra.program.model.listing.Instruction;
 import ghidra.program.model.listing.InstructionIterator;
-import ghidra.program.model.symbol.*;
 import ghidra.util.Msg;
 import ghidra.util.SystemUtilities;
 

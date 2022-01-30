@@ -23,7 +23,6 @@
 //@category Search
 
 import ghidra.app.script.GhidraScript;
-import ghidra.program.model.address.*;
 import ghidra.util.exception.CancelledException;
 
 public class SearchForImageBaseOffsetsScript extends GhidraScript {

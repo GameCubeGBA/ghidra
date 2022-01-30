@@ -56,7 +56,6 @@ import ghidra.util.HTMLUtilities;
 import ghidra.util.Msg;
 import ghidra.util.table.GhidraTable;
 import ghidra.util.task.Task;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  * An abstract class for Correlator Tests.

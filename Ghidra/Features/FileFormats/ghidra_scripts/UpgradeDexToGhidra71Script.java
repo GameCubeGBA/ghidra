@@ -20,17 +20,14 @@ import java.util.Map;
 
 import ghidra.app.cmd.function.ApplyFunctionSignatureCmd;
 import ghidra.app.script.GhidraScript;
-import ghidra.framework.model.*;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.program.model.address.AddressSpace;
 import ghidra.program.model.data.FunctionDefinitionDataType;
 import ghidra.program.model.data.GenericCallingConvention;
 import ghidra.program.model.lang.Language;
 import ghidra.program.model.lang.Register;
-import ghidra.program.model.listing.*;
 import ghidra.program.model.pcode.Varnode;
 import ghidra.program.model.symbol.SourceType;
-import ghidra.util.exception.*;
 
 /**
  * There was a major rearrangement of registers in the Dalvik.slaspec from 7.0 -> 7.1 which invalidates function prototypes

@@ -17,8 +17,6 @@ package ghidra.app.plugin.core.debug.gui.copying;
 
 import java.util.Set;
 
-import org.junit.*;
-
 import com.google.common.collect.Range;
 
 import ghidra.app.plugin.core.debug.gui.AbstractGhidraHeadedDebuggerGUITest.TestDebuggerTargetTraceMapper;

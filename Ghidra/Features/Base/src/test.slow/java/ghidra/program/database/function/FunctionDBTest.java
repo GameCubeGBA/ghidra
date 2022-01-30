@@ -41,7 +41,6 @@ import ghidra.program.util.ProgramChangeRecord;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.exception.InvalidInputException;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  *

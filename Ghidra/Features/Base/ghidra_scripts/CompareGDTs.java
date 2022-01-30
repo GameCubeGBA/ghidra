@@ -25,7 +25,6 @@ import java.io.PrintWriter;
 import java.util.Iterator;
 
 import ghidra.app.script.GhidraScript;
-import ghidra.program.model.data.*;
 import ghidra.util.UniversalID;
 
 public class CompareGDTs extends GhidraScript {

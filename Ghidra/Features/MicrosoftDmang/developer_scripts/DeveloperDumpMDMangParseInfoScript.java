@@ -17,14 +17,12 @@
 //
 //@category Demangler
 
-import docking.*;
 import ghidra.app.context.ProgramSymbolActionContext;
 import ghidra.app.script.GhidraScript;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Data;
 import ghidra.program.model.listing.Function;
 import ghidra.program.model.symbol.Symbol;
-import ghidra.program.util.*;
 import ghidra.util.Msg;
 import mdemangler.MDException;
 import mdemangler.MDMangParseInfo;

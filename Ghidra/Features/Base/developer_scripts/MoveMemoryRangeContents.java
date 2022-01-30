@@ -21,7 +21,6 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressRange;
 import ghidra.program.model.listing.Listing;
 import ghidra.program.model.mem.MemoryBlock;
-import ghidra.program.model.symbol.*;
 import ghidra.util.Msg;
 
 public class MoveMemoryRangeContents extends GhidraScript {

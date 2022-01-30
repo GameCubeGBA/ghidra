@@ -29,7 +29,6 @@ import ghidra.program.model.mem.DumbMemBufferImpl;
 import ghidra.program.model.mem.Memory;
 import ghidra.program.util.DefaultLanguageService;
 import ghidra.test.*;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public class SymbolUtilities2Test extends AbstractGhidraHeadedIntegrationTest {
 	private ProgramDB program;

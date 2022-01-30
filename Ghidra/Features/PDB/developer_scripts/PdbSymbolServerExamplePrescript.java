@@ -28,7 +28,6 @@ import ghidra.app.plugin.core.analysis.PdbAnalyzer;
 import ghidra.app.plugin.core.analysis.PdbUniversalAnalyzer;
 import ghidra.app.script.GhidraScript;
 import pdb.PdbPlugin;
-import pdb.symbolserver.*;
 
 public class PdbSymbolServerExamplePrescript extends GhidraScript {
 

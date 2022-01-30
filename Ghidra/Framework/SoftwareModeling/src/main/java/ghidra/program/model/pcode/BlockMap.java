@@ -16,7 +16,6 @@
 package ghidra.program.model.pcode;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 
 import ghidra.program.model.address.AddressFactory;

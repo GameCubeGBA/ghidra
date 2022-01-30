@@ -18,11 +18,9 @@
 // switch at the current instruction which should be modifying the 
 // program counter.
 
-import ghidra.app.plugin.core.analysis.*;
 import ghidra.app.script.GhidraScript;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.lang.Processor;
-import ghidra.program.model.listing.*;
 import ghidra.util.Msg;
 
 public class CreatePICSwitch extends GhidraScript {

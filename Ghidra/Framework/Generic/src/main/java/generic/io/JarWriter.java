@@ -18,7 +18,6 @@ package generic.io;
 
 import ghidra.util.Msg;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 import java.io.*;
 import java.util.jar.JarOutputStream;

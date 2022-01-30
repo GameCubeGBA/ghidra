@@ -20,7 +20,6 @@ import ghidra.app.script.GhidraScript;
 import ghidra.app.services.DataTypeManagerService;
 import ghidra.app.util.ToolTipUtils;
 import ghidra.framework.plugintool.PluginTool;
-import ghidra.program.model.data.*;
 
 public class PrintStructureScript extends GhidraScript {
 

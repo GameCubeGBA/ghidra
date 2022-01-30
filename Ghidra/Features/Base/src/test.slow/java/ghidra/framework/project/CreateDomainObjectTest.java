@@ -25,7 +25,6 @@ import ghidra.framework.protocol.ghidra.GhidraURL;
 import ghidra.program.database.ProgramBuilder;
 import ghidra.program.model.listing.Program;
 import ghidra.test.*;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  * test for creating a new empty tool with the new front end

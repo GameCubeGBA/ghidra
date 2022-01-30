@@ -27,7 +27,6 @@ import docking.action.DockingActionIf;
 import ghidra.app.plugin.core.codebrowser.CodeBrowserPlugin;
 import ghidra.app.plugin.core.codebrowser.CodeViewerProvider;
 import ghidra.app.plugin.core.searchmem.mask.MnemonicSearchPlugin;
-import ghidra.program.model.address.*;
 
 /**
  * Screenshots for help/topics/Search/Search_Memory.htm

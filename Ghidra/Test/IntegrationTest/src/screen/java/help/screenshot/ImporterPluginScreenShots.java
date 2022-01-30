@@ -28,7 +28,6 @@ import org.junit.Test;
 
 import docking.widgets.filechooser.GhidraFileChooser;
 import ghidra.app.util.importer.LibrarySearchPathManager;
-import ghidra.app.util.opinion.*;
 import ghidra.plugin.importer.ImporterDialog;
 import ghidra.plugin.importer.ImporterLanguageDialog;
 import ghidra.plugins.importer.batch.BatchImportDialog;

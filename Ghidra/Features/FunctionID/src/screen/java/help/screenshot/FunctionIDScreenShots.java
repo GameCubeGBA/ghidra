@@ -19,8 +19,6 @@ import java.io.File;
 import java.util.List;
 import java.util.Set;
 
-import org.junit.*;
-
 import docking.DialogComponentProvider;
 import ghidra.app.util.viewer.field.AddressFieldFactory;
 import ghidra.feature.fid.db.FidFile;

@@ -28,9 +28,6 @@
 //@category Functions
 
 import ghidra.app.script.GhidraScript;
-import ghidra.app.tablechooser.*;
-import ghidra.program.model.address.*;
-import ghidra.program.model.listing.*;
 import ghidra.program.model.symbol.Reference;
 import ghidra.program.model.symbol.ReferenceIterator;
 

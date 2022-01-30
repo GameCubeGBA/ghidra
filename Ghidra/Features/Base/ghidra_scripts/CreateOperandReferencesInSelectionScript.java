@@ -25,7 +25,6 @@ import ghidra.program.model.listing.CodeUnit;
 import ghidra.program.model.listing.Listing;
 import ghidra.program.model.mem.Memory;
 import ghidra.program.model.scalar.Scalar;
-import ghidra.program.model.symbol.*;
 
 public class CreateOperandReferencesInSelectionScript extends GhidraScript {
 

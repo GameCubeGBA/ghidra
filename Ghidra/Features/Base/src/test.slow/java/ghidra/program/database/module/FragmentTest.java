@@ -28,7 +28,6 @@ import ghidra.program.model.mem.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.exception.NotFoundException;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  * 

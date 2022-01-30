@@ -24,7 +24,6 @@ import ghidra.app.plugin.exceptionhandlers.gcc.datatype.UnsignedLeb128DataType;
 import ghidra.app.plugin.exceptionhandlers.gcc.sections.CieSource;
 import ghidra.app.plugin.exceptionhandlers.gcc.sections.DebugFrameSection;
 import ghidra.app.plugin.exceptionhandlers.gcc.structures.gccexcepttable.LSDATable;
-import ghidra.app.util.opinion.ElfLoader;
 import ghidra.program.model.address.*;
 import ghidra.program.model.data.*;
 import ghidra.program.model.listing.*;

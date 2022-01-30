@@ -16,7 +16,6 @@
 import java.util.List;
 
 import ghidra.app.script.GhidraScript;
-import ghidra.program.model.address.*;
 import ghidra.program.model.listing.Function;
 import ghidra.program.model.symbol.EquateTable;
 import util.CollectionUtils;

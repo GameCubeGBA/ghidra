@@ -22,7 +22,6 @@ import ghidra.app.script.GhidraScript;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.data.PointerDataType;
 import ghidra.program.model.listing.Listing;
-import ghidra.program.model.symbol.*;
 import ghidra.util.Msg;
 
 public class FindFunctionsUsingTOCinPEFScript extends GhidraScript {

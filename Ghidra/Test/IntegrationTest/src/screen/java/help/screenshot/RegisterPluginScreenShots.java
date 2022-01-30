@@ -21,7 +21,6 @@ import org.junit.Test;
 
 import docking.action.DockingActionIf;
 import ghidra.app.cmd.register.SetRegisterCmd;
-import ghidra.app.plugin.core.register.*;
 import ghidra.app.util.viewer.field.OperandFieldFactory;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressSet;

@@ -18,11 +18,9 @@ import java.util.*;
 
 import ghidra.app.script.GhidraScript;
 import ghidra.feature.vt.api.db.VTSessionDB;
-import ghidra.feature.vt.api.main.*;
 import ghidra.framework.model.DomainFile;
 import ghidra.framework.model.DomainObject;
 import ghidra.program.model.address.Address;
-import ghidra.program.model.listing.*;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.VersionException;
 

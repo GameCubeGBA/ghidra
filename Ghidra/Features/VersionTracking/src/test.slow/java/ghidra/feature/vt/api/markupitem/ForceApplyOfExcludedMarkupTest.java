@@ -32,7 +32,6 @@ import ghidra.framework.options.ToolOptions;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.*;
 import ghidra.program.model.symbol.SourceType;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public class ForceApplyOfExcludedMarkupTest extends AbstractFunctionSignatureMarkupTest {
 

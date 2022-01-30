@@ -27,7 +27,6 @@ import ghidra.program.model.lang.LanguageID;
 import ghidra.program.model.listing.Program;
 import ghidra.program.model.mem.Memory;
 import ghidra.program.model.mem.MemoryConflictException;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public class AddressMapDB64BitTest extends AbstractAddressMapDBTestClass {
 

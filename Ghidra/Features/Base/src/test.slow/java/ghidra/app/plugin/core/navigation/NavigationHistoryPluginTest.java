@@ -37,7 +37,6 @@ import ghidra.program.model.listing.*;
 import ghidra.program.model.symbol.*;
 import ghidra.program.util.*;
 import ghidra.test.*;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  * Tests for tool state history plugin.

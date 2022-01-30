@@ -16,7 +16,6 @@
 package ghidra.program.model.util;
 
 import ghidra.program.model.address.*;
-import ghidra.util.datastruct.NoSuchIndexException;
 import ghidra.util.prop.PropertyVisitor;
 
 /**

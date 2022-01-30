@@ -29,7 +29,6 @@ import generic.jar.ResourceFile;
 import generic.util.Path;
 import ghidra.app.plugin.core.console.ConsoleComponentProvider;
 import ghidra.app.plugin.core.osgi.BundleStatusComponentProvider;
-import ghidra.app.plugin.core.script.*;
 import ghidra.app.script.GhidraScriptUtil;
 import ghidra.app.services.ConsoleService;
 import ghidra.util.HelpLocation;

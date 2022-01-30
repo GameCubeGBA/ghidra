@@ -42,7 +42,6 @@ import ghidra.app.script.GhidraState;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressSet;
 import ghidra.program.model.lang.Register;
-import ghidra.program.model.listing.*;
 import ghidra.program.util.ProgramLocation;
 
 public class Mips_Fix_T9_PositionIndependentCode extends GhidraScript {

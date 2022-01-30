@@ -32,7 +32,6 @@ import ghidra.program.util.ChangeManager;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.exception.DuplicateNameException;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public class AddressSetPropertyMapTest extends AbstractGhidraHeadedIntegrationTest {
 
