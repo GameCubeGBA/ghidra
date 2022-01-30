@@ -28,7 +28,6 @@ import ghidra.app.script.GhidraScript;
 import ghidra.app.script.ImproperUseException;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressRange;
-import ghidra.program.model.listing.*;
 import ghidra.program.model.mem.Memory;
 
 public class SearchBaseExtended extends GhidraScript {

@@ -29,7 +29,6 @@ import ghidra.app.script.GhidraScript;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.data.Pointer;
 import ghidra.program.model.data.Structure;
-import ghidra.program.model.listing.*;
 
 public class NameStringPointersPlus extends GhidraScript {
 

@@ -17,8 +17,6 @@ package help.screenshot;
 
 import java.awt.Dimension;
 
-import docking.wizard.*;
-
 class TestDummyPanelManager implements PanelManager {
 	private WizardPanel panel;
 	private boolean canFinish;

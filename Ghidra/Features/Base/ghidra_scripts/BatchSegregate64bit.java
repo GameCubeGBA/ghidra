@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.util.Map;
 
 import ghidra.app.script.GhidraScript;
-import ghidra.framework.model.*;
 import ghidra.util.InvalidNameException;
 
 public class BatchSegregate64bit extends GhidraScript {

@@ -27,7 +27,6 @@ import db.DBFileListener;
 import db.Database;
 import generic.test.AbstractGenericTest;
 import ghidra.framework.store.db.PrivateDatabase;
-import ghidra.util.task.TaskMonitorAdapter;
 import utilities.util.FileUtilities;
 
 /**

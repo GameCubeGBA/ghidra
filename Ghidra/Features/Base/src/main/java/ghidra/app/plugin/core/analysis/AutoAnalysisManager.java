@@ -17,7 +17,6 @@ package ghidra.app.plugin.core.analysis;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
-import java.util.Stack;
 import java.util.concurrent.CountDownLatch;
 
 import javax.swing.JFrame;

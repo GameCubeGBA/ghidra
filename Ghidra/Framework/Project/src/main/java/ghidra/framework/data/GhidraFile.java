@@ -29,7 +29,6 @@ import ghidra.util.InvalidNameException;
 import ghidra.util.ReadOnlyException;
 import ghidra.util.exception.*;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public class GhidraFile implements DomainFile {
 

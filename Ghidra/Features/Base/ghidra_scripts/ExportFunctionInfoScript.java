@@ -19,12 +19,10 @@
 import java.io.File;
 import java.io.FileWriter;
 
-import com.google.gson.*;
 import com.google.gson.stream.JsonWriter;
 
 import ghidra.app.script.GhidraScript;
 import ghidra.program.model.address.Address;
-import ghidra.program.model.listing.*;
 
 public class ExportFunctionInfoScript extends GhidraScript {
 

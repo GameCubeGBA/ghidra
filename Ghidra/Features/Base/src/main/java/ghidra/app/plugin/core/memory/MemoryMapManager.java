@@ -15,7 +15,6 @@
  */
 package ghidra.app.plugin.core.memory;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 

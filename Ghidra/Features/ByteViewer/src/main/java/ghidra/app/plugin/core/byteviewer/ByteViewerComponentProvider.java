@@ -26,7 +26,6 @@ import javax.swing.JComponent;
 
 import docking.action.ToggleDockingAction;
 import ghidra.GhidraOptions;
-import ghidra.GhidraOptions.CURSOR_MOUSE_BUTTON_NAMES;
 import ghidra.app.plugin.core.format.*;
 import ghidra.app.services.MarkerService;
 import ghidra.app.util.viewer.listingpanel.AddressSetDisplayListener;

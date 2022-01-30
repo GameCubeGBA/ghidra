@@ -22,7 +22,6 @@
 
 import ghidra.app.script.GhidraScript;
 import ghidra.program.model.lang.Register;
-import ghidra.program.model.listing.*;
 
 import java.util.*;
 

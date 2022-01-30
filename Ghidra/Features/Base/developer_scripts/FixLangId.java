@@ -21,7 +21,6 @@ import java.util.List;
 
 import javax.swing.SwingUtilities;
 
-import db.*;
 import db.buffers.BufferFile;
 import ghidra.app.script.GhidraScript;
 import ghidra.app.script.ImproperUseException;

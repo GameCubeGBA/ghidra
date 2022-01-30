@@ -38,11 +38,6 @@ import java.util.*;
 import ghidra.app.cmd.function.CreateFunctionCmd;
 import ghidra.app.plugin.core.clear.ClearFlowAndRepairCmd;
 import ghidra.app.script.GhidraScript;
-import ghidra.app.tablechooser.*;
-import ghidra.program.model.address.*;
-import ghidra.program.model.block.*;
-import ghidra.program.model.listing.*;
-import ghidra.program.model.symbol.*;
 import ghidra.util.exception.CancelledException;
 
 public class FixupNoReturnFunctionsScript extends GhidraScript {

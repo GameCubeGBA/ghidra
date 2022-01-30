@@ -20,7 +20,6 @@ import java.io.*;
 import java.util.List;
 
 import ghidra.app.script.GhidraScript;
-import ghidra.feature.fid.db.*;
 import ghidra.util.Msg;
 import ghidra.util.exception.VersionException;
 

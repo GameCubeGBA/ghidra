@@ -18,7 +18,6 @@
 //@category Import
 
 import ghidra.app.script.GhidraScript;
-import ghidra.program.model.lang.*;
 import ghidra.program.model.listing.Program;
 
 import java.io.File;

@@ -16,10 +16,7 @@
 package ghidra.app.util.bin.format.elf.extend;
 
 import ghidra.app.util.bin.format.elf.*;
-import ghidra.program.model.address.Address;
 import ghidra.program.model.lang.*;
-import ghidra.program.model.listing.Program;
-import ghidra.program.model.listing.ContextChangeException;
 
 public class RISCV_ElfExtension extends ElfExtension {
 

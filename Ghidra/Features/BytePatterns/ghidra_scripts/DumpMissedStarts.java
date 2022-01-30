@@ -22,9 +22,7 @@ import generic.jar.ResourceFile;
 import ghidra.app.analyzers.Patterns;
 import ghidra.app.script.GhidraScript;
 import ghidra.framework.Application;
-import ghidra.program.model.listing.*;
 import ghidra.program.model.mem.Memory;
-import ghidra.util.bytesearch.*;
 import ghidra.util.constraint.ProgramDecisionTree;
 
 public class DumpMissedStarts extends GhidraScript implements PatternFactory {

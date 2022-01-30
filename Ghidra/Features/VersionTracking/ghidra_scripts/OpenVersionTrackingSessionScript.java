@@ -21,7 +21,6 @@ import java.util.Collection;
 import java.util.List;
 
 import ghidra.feature.vt.GhidraVersionTrackingScript;
-import ghidra.feature.vt.api.main.*;
 
 public class OpenVersionTrackingSessionScript extends GhidraVersionTrackingScript {
 

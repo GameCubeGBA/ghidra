@@ -22,7 +22,6 @@ import ghidra.app.cmd.function.CreateFunctionCmd;
 import ghidra.app.plugin.core.analysis.ReferenceAddressPair;
 import ghidra.app.util.PseudoDisassembler;
 import ghidra.program.flatapi.FlatProgramAPI;
-import ghidra.program.model.address.*;
 import ghidra.program.model.block.CodeBlock;
 import ghidra.program.model.block.IsolatedEntrySubModel;
 import ghidra.program.model.data.*;

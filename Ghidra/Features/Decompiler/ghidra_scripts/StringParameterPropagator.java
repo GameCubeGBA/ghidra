@@ -27,18 +27,12 @@
 //
 //@category Analysis
 
-import ghidra.app.decompiler.*;
 import ghidra.app.script.GhidraScript;
 import ghidra.framework.options.ToolOptions;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.framework.plugintool.util.OptionsService;
 import ghidra.program.model.address.Address;
-import ghidra.program.model.data.*;
 import ghidra.program.model.lang.PrototypeModel;
-import ghidra.program.model.listing.*;
-import ghidra.program.model.pcode.*;
-import ghidra.program.model.symbol.*;
-import ghidra.util.exception.*;
 
 import java.util.*;
 

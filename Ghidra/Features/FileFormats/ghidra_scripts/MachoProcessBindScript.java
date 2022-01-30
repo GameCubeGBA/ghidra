@@ -25,7 +25,6 @@ import ghidra.app.util.bin.ByteProvider;
 import ghidra.app.util.bin.RandomAccessByteProvider;
 import ghidra.app.util.bin.format.macho.MachHeader;
 import ghidra.app.util.bin.format.macho.Section;
-import ghidra.app.util.bin.format.macho.commands.*;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.symbol.*;
 import ghidra.util.DataConverter;

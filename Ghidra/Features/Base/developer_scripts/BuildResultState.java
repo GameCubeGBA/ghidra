@@ -21,17 +21,11 @@ import java.util.*;
 import ghidra.app.events.ProgramSelectionPluginEvent;
 import ghidra.app.script.GhidraScript;
 import ghidra.framework.plugintool.PluginTool;
-import ghidra.program.model.address.*;
 import ghidra.program.model.data.Undefined;
 import ghidra.program.model.lang.Language;
 import ghidra.program.model.lang.Register;
-import ghidra.program.model.listing.*;
-import ghidra.program.model.pcode.*;
-import ghidra.program.model.symbol.*;
 import ghidra.program.util.ProgramSelection;
 import ghidra.util.Msg;
-import ghidra.util.exception.*;
-import ghidra.util.state.*;
 import ghidra.util.task.TaskMonitor;
 
 @SuppressWarnings("all") // TODO remove this when we decide to support this script

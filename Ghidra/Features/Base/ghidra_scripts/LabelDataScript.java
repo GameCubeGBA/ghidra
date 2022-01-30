@@ -22,7 +22,6 @@ import ghidra.app.script.GhidraScript;
 import ghidra.program.model.listing.Data;
 import ghidra.program.model.listing.Listing;
 import ghidra.program.model.mem.Memory;
-import ghidra.program.model.symbol.*;
 
 public class LabelDataScript extends GhidraScript {
 

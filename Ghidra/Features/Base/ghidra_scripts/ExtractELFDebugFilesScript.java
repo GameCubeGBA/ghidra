@@ -33,7 +33,6 @@ import org.apache.commons.io.FilenameUtils;
 
 import ghidra.app.script.GhidraScript;
 import ghidra.app.util.bin.ByteProvider;
-import ghidra.formats.gfilesystem.*;
 import ghidra.util.exception.CancelledException;
 import utilities.util.FileUtilities;
 

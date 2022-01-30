@@ -15,8 +15,6 @@
  */
 package ghidra.app.plugin.core.debug.gui.pcode;
 
-import org.junit.*;
-
 import com.google.common.collect.Range;
 
 import ghidra.app.plugin.assembler.Assembler;

@@ -18,7 +18,6 @@ package ghidra.util.datastruct;
 
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 import java.util.*;
 

@@ -22,7 +22,6 @@ import org.junit.Test;
 import ghidra.program.database.OriginalProgramModifierListener;
 import ghidra.program.database.ProgramDB;
 import ghidra.program.model.data.*;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  * Data type merge tests with fixup for data types added in My program.

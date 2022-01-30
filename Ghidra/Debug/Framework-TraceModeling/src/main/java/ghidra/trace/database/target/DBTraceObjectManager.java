@@ -43,7 +43,6 @@ import ghidra.trace.database.map.DBTraceAddressSnapRangePropertyMapTree.TraceAdd
 import ghidra.trace.database.module.TraceObjectSection;
 import ghidra.trace.database.target.DBTraceObjectValue.PrimaryTriple;
 import ghidra.trace.database.thread.DBTraceObjectThread;
-import ghidra.trace.database.thread.DBTraceThreadManager;
 import ghidra.trace.model.ImmutableTraceAddressSnapRange;
 import ghidra.trace.model.Trace;
 import ghidra.trace.model.Trace.TraceObjectChangeType;
@@ -54,7 +53,6 @@ import ghidra.trace.model.modules.TraceObjectModule;
 import ghidra.trace.model.stack.TraceObjectStack;
 import ghidra.trace.model.stack.TraceObjectStackFrame;
 import ghidra.trace.model.target.*;
-import ghidra.trace.model.target.DuplicateKeyException;
 import ghidra.trace.model.target.TraceObject.ConflictResolution;
 import ghidra.trace.model.target.annot.TraceObjectInterfaceUtils;
 import ghidra.trace.model.thread.TraceObjectThread;

@@ -30,7 +30,6 @@ import ghidra.program.model.listing.*;
 import ghidra.program.model.symbol.SourceType;
 import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
 import ghidra.test.ToyProgramBuilder;
-import ghidra.util.task.TaskMonitorAdapter;
 import util.CollectionUtils;
 
 public class DisassemblerTest extends AbstractGhidraHeadlessIntegrationTest {

@@ -17,7 +17,6 @@ import java.io.File;
 import java.util.ArrayList;
 
 import ghidra.app.script.GhidraScript;
-import ghidra.framework.model.*;
 import ghidra.program.model.listing.Program;
 
 public class PopulateBigRepoScript extends GhidraScript {

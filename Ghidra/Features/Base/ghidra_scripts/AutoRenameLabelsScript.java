@@ -20,8 +20,6 @@
 import ghidra.app.cmd.label.RenameLabelCmd;
 import ghidra.app.script.GhidraScript;
 import ghidra.framework.cmd.CompoundCmd;
-import ghidra.program.model.address.*;
-import ghidra.program.model.symbol.*;
 
 public class AutoRenameLabelsScript extends GhidraScript {
 

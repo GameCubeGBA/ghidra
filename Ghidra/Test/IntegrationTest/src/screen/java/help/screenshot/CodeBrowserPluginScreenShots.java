@@ -35,10 +35,8 @@ import ghidra.app.plugin.core.codebrowser.CodeBrowserPlugin;
 import ghidra.app.plugin.core.codebrowser.CodeViewerProvider;
 import ghidra.app.plugin.core.datamgr.DataTypesProvider;
 import ghidra.app.plugin.core.programtree.ViewManagerComponentProvider;
-import ghidra.app.util.viewer.field.*;
 import ghidra.app.util.viewer.listingpanel.ListingPanel;
 import ghidra.app.util.viewer.listingpanel.OverviewProvider;
-import ghidra.program.model.data.*;
 import ghidra.program.model.listing.CodeUnit;
 
 public class CodeBrowserPluginScreenShots extends GhidraScreenShotGenerator {

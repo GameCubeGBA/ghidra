@@ -20,7 +20,6 @@ import java.io.*;
 import java.util.List;
 
 import ghidra.app.script.GhidraScript;
-import ghidra.bitpatterns.info.*;
 import ghidra.program.model.address.AddressSetView;
 import ghidra.program.model.listing.Function;
 import ghidra.program.model.listing.FunctionIterator;

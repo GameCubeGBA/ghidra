@@ -24,7 +24,6 @@ import docking.widgets.filter.FilterTextField;
 import docking.widgets.table.GTable;
 import docking.widgets.table.GTableFilterPanel;
 import docking.widgets.table.threaded.ThreadedTableModel;
-import ghidra.program.model.listing.*;
 
 public class CommentWindowPluginScreenShots extends GhidraScreenShotGenerator {
 

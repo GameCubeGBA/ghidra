@@ -31,7 +31,6 @@ import ghidra.program.model.listing.FunctionManager;
 import ghidra.program.model.symbol.SourceType;
 import ghidra.program.util.ProgramDiff;
 import ghidra.program.util.ProgramDiffFilter;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  * Test the multi-user merge of thunk functions.

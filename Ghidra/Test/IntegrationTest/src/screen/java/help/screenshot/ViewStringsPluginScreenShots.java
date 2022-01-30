@@ -24,7 +24,6 @@ import org.junit.Test;
 
 import ghidra.app.plugin.core.strings.ViewStringsProvider;
 import ghidra.app.services.ProgramManager;
-import ghidra.program.model.data.*;
 import ghidra.program.model.listing.Data;
 import ghidra.test.ToyProgramBuilder;
 

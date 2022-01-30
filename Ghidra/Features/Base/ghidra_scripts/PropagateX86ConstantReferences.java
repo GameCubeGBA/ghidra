@@ -29,17 +29,12 @@ import ghidra.app.cmd.label.AddLabelCmd;
 import ghidra.app.plugin.core.analysis.ConstantPropagationContextEvaluator;
 import ghidra.app.plugin.core.disassembler.AddressTable;
 import ghidra.app.script.GhidraScript;
-import ghidra.program.model.address.*;
-import ghidra.program.model.block.*;
 import ghidra.program.model.lang.Register;
 import ghidra.program.model.lang.RegisterValue;
-import ghidra.program.model.listing.*;
 import ghidra.program.model.pcode.Varnode;
 import ghidra.program.model.scalar.Scalar;
-import ghidra.program.model.symbol.*;
 import ghidra.program.util.SymbolicPropogator;
 import ghidra.program.util.VarnodeContext;
-import ghidra.util.exception.*;
 
 public class PropagateX86ConstantReferences extends GhidraScript {
 

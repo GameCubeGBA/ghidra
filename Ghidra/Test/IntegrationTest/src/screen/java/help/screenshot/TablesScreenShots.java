@@ -20,7 +20,6 @@ import javax.swing.table.TableColumnModel;
 import org.junit.Test;
 
 import docking.ComponentProvider;
-import docking.widgets.table.*;
 import docking.widgets.table.ColumnSortState.SortDirection;
 import docking.widgets.table.threaded.GThreadedTablePanel;
 import docking.widgets.table.threaded.ThreadedTableModel;

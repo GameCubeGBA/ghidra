@@ -20,7 +20,6 @@
 import java.util.Arrays;
 
 import ghidra.app.script.GhidraScript;
-import ghidra.framework.model.*;
 import ghidra.util.datastruct.IntIntHashtable;
 
 public class VersionControl_VersionSummary extends GhidraScript {

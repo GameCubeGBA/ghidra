@@ -36,7 +36,6 @@ import ghidra.util.Msg;
 import ghidra.util.Saveable;
 import ghidra.util.exception.*;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  * <code>ProgramUserDataDB</code> stores user data associated with a specific program.

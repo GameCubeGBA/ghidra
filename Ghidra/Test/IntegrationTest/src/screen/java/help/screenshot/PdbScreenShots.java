@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.io.FilenameUtils;
-import org.junit.*;
 
 import ghidra.app.util.bin.format.pdb.PdbInfo;
 import ghidra.app.util.bin.format.pdb.PdbInfoDotNet;
@@ -30,7 +29,6 @@ import ghidra.app.util.datatype.microsoft.GUID;
 import ghidra.framework.options.Options;
 import ghidra.program.model.listing.Program;
 import pdb.PdbPlugin;
-import pdb.symbolserver.*;
 import pdb.symbolserver.ui.ConfigPdbDialog;
 import pdb.symbolserver.ui.LoadPdbDialog;
 

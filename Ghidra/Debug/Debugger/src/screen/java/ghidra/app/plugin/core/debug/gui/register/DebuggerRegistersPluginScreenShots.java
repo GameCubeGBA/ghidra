@@ -17,8 +17,6 @@ package ghidra.app.plugin.core.debug.gui.register;
 
 import java.math.BigInteger;
 
-import org.junit.*;
-
 import com.google.common.collect.Range;
 
 import ghidra.app.plugin.core.debug.service.tracemgr.DebuggerTraceManagerServicePlugin;

@@ -28,7 +28,6 @@ import ghidra.program.model.mem.Memory;
 import ghidra.program.model.mem.MemoryBlock;
 import ghidra.program.util.DiffUtility;
 import ghidra.test.ClassicSampleX86ProgramBuilder;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public class DiffOverlayApplyTest extends DiffApplyTestAdapter {
 

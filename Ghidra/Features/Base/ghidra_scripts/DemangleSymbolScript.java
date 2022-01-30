@@ -18,7 +18,6 @@
 //Works for both Microsoft and Gnu mangled symbols
 //@category Symbol
 
-import docking.*;
 import ghidra.app.cmd.label.DemanglerCmd;
 import ghidra.app.context.ProgramSymbolActionContext;
 import ghidra.app.script.GhidraScript;
@@ -26,7 +25,6 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Data;
 import ghidra.program.model.listing.Function;
 import ghidra.program.model.symbol.Symbol;
-import ghidra.program.util.*;
 
 public class DemangleSymbolScript extends GhidraScript {
 

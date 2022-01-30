@@ -21,7 +21,6 @@ import java.util.List;
 import com.google.common.collect.Range;
 
 import ghidra.dbg.target.TargetObject;
-import ghidra.program.model.address.*;
 import ghidra.trace.model.target.*;
 import ghidra.trace.model.target.TraceObject.ConflictResolution;
 import ghidra.util.LockHold;

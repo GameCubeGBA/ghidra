@@ -24,7 +24,6 @@ import ghidra.app.plugin.core.overview.OverviewColorLegendDialog;
 import ghidra.app.plugin.core.overview.OverviewColorPlugin;
 import ghidra.app.plugin.core.overview.addresstype.AddressTypeOverviewColorService;
 import ghidra.app.plugin.core.overview.addresstype.AddressTypeOverviewLegendPanel;
-import ghidra.app.plugin.core.overview.entropy.*;
 
 public class OverviewPluginScreenShots extends GhidraScreenShotGenerator {
 
