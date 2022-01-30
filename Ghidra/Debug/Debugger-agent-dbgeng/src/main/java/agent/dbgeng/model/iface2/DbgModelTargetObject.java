@@ -48,7 +48,7 @@ public interface DbgModelTargetObject extends SpiTargetObject {
 			return impl;
 		}
 		DebugStatus status = impl.getControl().getExecutionStatus();
-		if (status.equals(DebugStatus.GO)) {
+		if (status == DebugStatus.GO) {
 			System.err.println("Attempt to access DbgManager while GO");
 			throw new RuntimeException("Attempt to access DbgManager while GO");
 		}

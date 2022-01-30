@@ -538,7 +538,7 @@ public class DbgManagerImpl implements DbgManager {
 			if (ret == null) {
 				ret = DebugStatus.NO_CHANGE;
 			}
-			waiting = ret.equals(DebugStatus.NO_DEBUGGEE) ? false : waitState;
+			waiting = ret == DebugStatus.NO_DEBUGGEE ? false : waitState;
 			return ret;
 		}
 	}
@@ -924,7 +924,7 @@ public class DbgManagerImpl implements DbgManager {
 			}
 			status = DebugStatus.fromArgument(argument);
 
-			if (status.equals(DebugStatus.NO_DEBUGGEE)) {
+			if (status == DebugStatus.NO_DEBUGGEE) {
 				waiting = false;
 				return DebugStatus.NO_DEBUGGEE;
 			}
@@ -934,13 +934,13 @@ public class DbgManagerImpl implements DbgManager {
 				eventThread = getCurrentThread();
 				DbgState dbgState = null;
 				if (eventThread != null) {
-					if (status.threadState.equals(ExecutionState.STOPPED)) {
+					if (status.threadState == ExecutionState.STOPPED) {
 						dbgState = DbgState.STOPPED;
 						//System.err.println("STOPPED " + id);
 						processEvent(new DbgStoppedEvent(eventThread.getId()));
 						processEvent(new DbgPromptChangedEvent(getControl().getPromptText()));
 					}
-					if (status.threadState.equals(ExecutionState.RUNNING)) {
+					if (status.threadState == ExecutionState.RUNNING) {
 						//System.err.println("RUNNING " + id);
 						dbgState = DbgState.RUNNING;
 						// NB: Needed by GADP variants, but not IN-VM
@@ -959,7 +959,7 @@ public class DbgManagerImpl implements DbgManager {
 					return DebugStatus.NO_CHANGE;
 				}
 			}
-			if (status.equals(DebugStatus.BREAK)) {
+			if (status == DebugStatus.BREAK) {
 				waiting = false;
 				processEvent(new DbgStoppedEvent(getSystemObjects().getCurrentThreadId()));
 				DbgProcessImpl process = getCurrentProcess();
@@ -969,7 +969,7 @@ public class DbgManagerImpl implements DbgManager {
 				processEvent(new DbgPromptChangedEvent(getControl().getPromptText()));
 				return DebugStatus.BREAK;
 			}
-			if (status.equals(DebugStatus.GO)) {
+			if (status == DebugStatus.GO) {
 				waiting = true;
 				processEvent(new DbgRunningEvent(getSystemObjects().getCurrentThreadId()));
 				return DebugStatus.GO;

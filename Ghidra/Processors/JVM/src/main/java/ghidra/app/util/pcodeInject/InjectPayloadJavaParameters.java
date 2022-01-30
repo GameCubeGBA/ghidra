@@ -172,7 +172,7 @@ public class InjectPayloadJavaParameters implements InjectPayload {
 		Varnode increment = null;
 
 		for (JavaComputationalCategory cat : paramCategories) {
-			if (cat.equals(JavaComputationalCategory.CAT_1)) {
+			if (cat == JavaComputationalCategory.CAT_1) {
 				tempLocation = temp4;
 				increment = four;
 			}

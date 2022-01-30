@@ -48,7 +48,7 @@ public class CombinedFunctionAndDataReferenceProgramCorrelator extends
 
 	@Override
 	protected boolean isExpectedRefType(VTAssociationType mytype) {
-		return (mytype.equals(VTAssociationType.DATA) || mytype.equals(VTAssociationType.FUNCTION));
+		return (mytype == VTAssociationType.DATA || mytype == VTAssociationType.FUNCTION);
 	}
 
 	@Override

@@ -1772,7 +1772,7 @@ public class CppCompositeType {
 			if (access.getValue() > Access.BLANK.getValue()) {
 				builder.append(access);
 			}
-			if (property.equals(Property.VIRTUAL)) {
+			if (property == Property.VIRTUAL) {
 				builder.append(property);
 			}
 			return builder.toString();

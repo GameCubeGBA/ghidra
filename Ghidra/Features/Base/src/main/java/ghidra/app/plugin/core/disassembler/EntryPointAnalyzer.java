@@ -457,7 +457,7 @@ public class EntryPointAnalyzer extends AbstractAnalyzer {
 		for (AddressLabelInfo info : labelList) {
 			if (addr.equals(info.getAddress())) {
 				ProcessorSymbolType type = info.getProcessorSymbolType();
-				return type != null && type.equals(ProcessorSymbolType.CODE_PTR);
+				return type != null && type == ProcessorSymbolType.CODE_PTR;
 			}
 		}
 		return false;

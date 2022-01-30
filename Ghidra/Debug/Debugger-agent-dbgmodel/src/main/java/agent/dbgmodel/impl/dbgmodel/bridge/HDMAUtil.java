@@ -86,14 +86,14 @@ public class HDMAUtil {
 			return new HashMap<String, ModelObject>();
 		}
 		ModelObjectKind kind = target.getKind();
-		if (kind.equals(ModelObjectKind.OBJECT_ERROR)) {
+		if (kind == ModelObjectKind.OBJECT_ERROR) {
 			HashMap<String, ModelObject> map = new HashMap<String, ModelObject>();
 			map.put("ERROR", target);
 			return map;
 		}
-		if (kind.equals(ModelObjectKind.OBJECT_INTRINSIC) ||
-			kind.equals(ModelObjectKind.OBJECT_TARGET_OBJECT) ||
-			kind.equals(ModelObjectKind.OBJECT_TARGET_OBJECT_REFERENCE)) {
+		if (kind == ModelObjectKind.OBJECT_INTRINSIC ||
+                kind == ModelObjectKind.OBJECT_TARGET_OBJECT ||
+                kind == ModelObjectKind.OBJECT_TARGET_OBJECT_REFERENCE) {
 			Map<String, ModelObject> map = target.getRawValueMap();
 			if (!map.isEmpty()) {
 				return map;
@@ -109,7 +109,7 @@ public class HDMAUtil {
 			return new ArrayList<ModelObject>();
 		}
 		ModelObjectKind kind = target.getKind();
-		if (kind.equals(ModelObjectKind.OBJECT_ERROR)) {
+		if (kind == ModelObjectKind.OBJECT_ERROR) {
 			List<ModelObject> list = new ArrayList<ModelObject>();
 			list.add(target);
 			return list;
@@ -137,7 +137,7 @@ public class HDMAUtil {
 			found = false;
 			if (str.endsWith(")")) {
 				target = evaluatePredicate(target, str);
-				if (target.getKind().equals(ModelObjectKind.OBJECT_ERROR)) {
+				if (target.getKind() == ModelObjectKind.OBJECT_ERROR) {
 					return target;
 				}
 			}

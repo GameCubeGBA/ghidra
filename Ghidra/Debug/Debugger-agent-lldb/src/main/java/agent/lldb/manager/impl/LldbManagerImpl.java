@@ -610,7 +610,7 @@ public class LldbManagerImpl implements LldbManager {
 			if (ret == null) {
 				ret = DebugStatus.NO_CHANGE;
 			}
-			waiting = ret.equals(DebugStatus.NO_DEBUGGEE) ? false : waitState;
+			waiting = ret == DebugStatus.NO_DEBUGGEE ? false : waitState;
 			return ret;
 		}
 	}
@@ -1040,7 +1040,7 @@ public class LldbManagerImpl implements LldbManager {
 		StateType state = evt.getInfo().state;
 		status = DebugStatus.fromArgument(state);
 
-		if (status.equals(DebugStatus.NO_DEBUGGEE)) {
+		if (status == DebugStatus.NO_DEBUGGEE) {
 			waiting = false;
 			if (state.equals(StateType.eStateExited)) {
 				if (eventThread != null) {
@@ -1051,7 +1051,7 @@ public class LldbManagerImpl implements LldbManager {
 			}
 			return DebugStatus.NO_DEBUGGEE;
 		}
-		if (status.equals(DebugStatus.BREAK)) {
+		if (status == DebugStatus.BREAK) {
 			waiting = false;
 			SBProcess process = getCurrentProcess();
 			if (process != null) {
@@ -1076,7 +1076,7 @@ public class LldbManagerImpl implements LldbManager {
 			processEvent(new LldbStoppedEvent(DebugClient.getId(eventThread)));
 			return DebugStatus.BREAK;
 		}
-		if (status.equals(DebugStatus.GO)) {
+		if (status == DebugStatus.GO) {
 			waiting = true;
 			processEvent(new LldbRunningEvent(DebugClient.getId(eventThread)));
 			return DebugStatus.GO;

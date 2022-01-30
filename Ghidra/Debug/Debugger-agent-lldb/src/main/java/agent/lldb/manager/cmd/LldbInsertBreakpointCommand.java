@@ -60,8 +60,8 @@ public class LldbInsertBreakpointCommand extends AbstractLldbCommand<LldbBreakpo
 	@Override
 	public void invoke() {
 		SBTarget currentSession = manager.getCurrentSession();
-		if (type.equals(LldbBreakpointType.BREAKPOINT) ||
-			type.equals(LldbBreakpointType.HW_BREAKPOINT)) {
+		if (type == LldbBreakpointType.BREAKPOINT ||
+                type == LldbBreakpointType.HW_BREAKPOINT) {
 			SBBreakpoint bpt;
 			// TODO: HW_BREAKPOINT not handled here!
 			if (loc != null) {
@@ -78,10 +78,10 @@ public class LldbInsertBreakpointCommand extends AbstractLldbCommand<LldbBreakpo
 			boolean write = true;
 			SBError error = new SBError();
 			len = 8;
-			if (type.equals(LldbBreakpointType.READ_WATCHPOINT)) {
+			if (type == LldbBreakpointType.READ_WATCHPOINT) {
 				write = false;
 			}
-			if (type.equals(LldbBreakpointType.WRITE_WATCHPOINT)) {
+			if (type == LldbBreakpointType.WRITE_WATCHPOINT) {
 				read = false;
 			}
 			SBWatchpoint wpt = currentSession.WatchAddress(loc, len, read, write, error);

@@ -210,7 +210,7 @@ public class LaunchSupport {
 	private static int askJavaHome(JavaConfig javaConfig, JavaFinder javaFinder,
 			JavaFilter javaFilter) throws IOException {
 
-		String javaName = javaFilter.equals(JavaFilter.JDK_ONLY) ? "JDK" : "Java";
+		String javaName = javaFilter == JavaFilter.JDK_ONLY ? "JDK" : "Java";
 		String javaRange;
 		int min = javaConfig.getMinSupportedJava();
 		int max = javaConfig.getMaxSupportedJava();

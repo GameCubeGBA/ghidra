@@ -247,7 +247,7 @@ public class DbgThreadImpl implements DbgThread {
 	public void setInfo(DebugEventInformation info) {
 		Machine newType = WinNTExtra.Machine.getByNumber(info.getExecutingProcessorType());
 		Machine oldType = getExecutingProcessorType();
-		if (!newType.equals(oldType)) {
+		if (newType != oldType) {
 			registers.forget();
 		}
 		this.info = info;

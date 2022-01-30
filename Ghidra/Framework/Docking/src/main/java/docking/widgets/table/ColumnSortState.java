@@ -123,7 +123,7 @@ public class ColumnSortState {
 				return false;
 			}
 		}
-		else if (!sortDirection.equals(other.sortDirection)) {
+		else if (sortDirection != other.sortDirection) {
 			return false;
 		}
 

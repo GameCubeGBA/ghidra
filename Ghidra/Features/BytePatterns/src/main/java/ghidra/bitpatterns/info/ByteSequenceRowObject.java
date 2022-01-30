@@ -134,7 +134,7 @@ public class ByteSequenceRowObject {
 				if (currentByteString != null) {
 					filteredByteStrings.add(currentByteString);
 					disassembly.add(getCompleteDisassembly(fInfo, type,
-						type.equals(PatternType.RETURN) ? i : 0));
+                            type == PatternType.RETURN ? i : 0));
 				}
 			}
 		}
@@ -187,7 +187,7 @@ public class ByteSequenceRowObject {
 	private static String getDisassemblyForTreePath(InstructionSequence instSeq,
 			InstructionSequenceTreePathFilter pathFilter) {
 		int numInstructions = pathFilter.getInstructions().size();
-		boolean inOrder = pathFilter.getInstructionType().equals(PatternType.FIRST);
+		boolean inOrder = pathFilter.getInstructionType() == PatternType.FIRST;
 		return instSeq.getDisassembly(numInstructions, inOrder);
 	}
 

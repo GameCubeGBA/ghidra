@@ -91,12 +91,12 @@ public abstract class JavaFinder {
 				for (File dir : javaRootInstallDir.listFiles()) {
 					if (dir.isDirectory()) {
 						dir = new File(dir, getJavaHomeSubDirPath());
-						if (javaFilter.equals(JavaFilter.ANY) ||
-							javaFilter.equals(JavaFilter.JDK_ONLY)) {
+						if (javaFilter == JavaFilter.ANY ||
+                                javaFilter == JavaFilter.JDK_ONLY) {
 							potentialJavaHomeSet.add(getJdkHomeFromJavaHome(dir));
 						}
-						if (javaFilter.equals(JavaFilter.ANY) ||
-							javaFilter.equals(JavaFilter.JRE_ONLY)) {
+						if (javaFilter == JavaFilter.ANY ||
+                                javaFilter == JavaFilter.JRE_ONLY) {
 							potentialJavaHomeSet.add(getJreHomeFromJavaHome(dir));
 						}
 					}
@@ -141,10 +141,10 @@ public abstract class JavaFinder {
 		String javaHomeProperty = System.getProperty("java.home");
 		if (javaHomeProperty != null && !javaHomeProperty.isEmpty()) {
 			File dir = new File(javaHomeProperty);
-			if (javaFilter.equals(JavaFilter.ANY) || javaFilter.equals(JavaFilter.JDK_ONLY)) {
+			if (javaFilter == JavaFilter.ANY || javaFilter == JavaFilter.JDK_ONLY) {
 				potentialJavaHomeSet.add(getJdkHomeFromJavaHome(dir));
 			}
-			if (javaFilter.equals(JavaFilter.ANY) || javaFilter.equals(JavaFilter.JRE_ONLY)) {
+			if (javaFilter == JavaFilter.ANY || javaFilter == JavaFilter.JRE_ONLY) {
 				potentialJavaHomeSet.add(getJreHomeFromJavaHome(dir));
 			}
 			for (File potentialJavaHomeDir : potentialJavaHomeSet) {

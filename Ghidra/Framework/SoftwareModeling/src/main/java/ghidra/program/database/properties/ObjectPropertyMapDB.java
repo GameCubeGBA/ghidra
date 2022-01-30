@@ -16,6 +16,7 @@
 package ghidra.program.database.properties;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 
 import db.*;
 import db.util.ErrorHandler;
@@ -68,7 +69,7 @@ public class ObjectPropertyMapDB extends PropertyMapDB implements ObjectProperty
 				tokenInstance = new GenericSaveable(null, null);
 			}
 			else {
-				tokenInstance = saveableObjectClass.newInstance();
+				tokenInstance = saveableObjectClass.getConstructor().newInstance();
 			}
 		}
 		catch (InstantiationException e) {
@@ -78,8 +79,14 @@ public class ObjectPropertyMapDB extends PropertyMapDB implements ObjectProperty
 		catch (IllegalAccessException e) {
 			throw new RuntimeException(
 				saveableObjectClass.getName() + " must provide public default constructor");
-		}
-		saveableObjectVersion = tokenInstance.getSchemaVersion();
+		} catch (NoSuchMethodException e) {
+			throw new RuntimeException(
+				saveableObjectClass.getName() + " must provide public default constructor");
+        } catch (InvocationTargetException e) {
+			throw new RuntimeException(
+				saveableObjectClass.getName() + " must provide public default constructor");
+        }
+        saveableObjectVersion = tokenInstance.getSchemaVersion();
 		checkMapVersion(openMode, tokenInstance, monitor);
 	}
 
@@ -348,7 +355,7 @@ public class ObjectPropertyMapDB extends PropertyMapDB implements ObjectProperty
 				obj = new GenericSaveable(rec, propertyTable.getSchema());
 			}
 			else {
-				obj = saveableObjectClass.newInstance();
+				obj = saveableObjectClass.getConstructor().newInstance();
 				obj.restore(objStorage);
 			}
 		}

@@ -1959,7 +1959,7 @@ public class FieldPanel extends JPanel
 				lastX = layout.setCursor(newCursorPosition, x, y);
 				currentField = layout.getField(newCursorPosition.fieldNum);
 				if (!newCursorPosition.equals(cursorPosition) ||
-					EventTrigger.MODEL_CHANGE.equals(trigger)) {
+                        EventTrigger.MODEL_CHANGE == trigger) {
 					cursorPosition = newCursorPosition;
 					notifyCursorChanged(trigger);
 				}

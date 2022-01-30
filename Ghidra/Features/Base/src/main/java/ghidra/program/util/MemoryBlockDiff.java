@@ -233,7 +233,7 @@ public class MemoryBlockDiff {
 		if (block1.isVolatile() != block2.isVolatile()) {
 			flags |= VOLATILE;
 		}
-		if (!block1.getType().equals(block2.getType())) {
+		if (block1.getType() != block2.getType()) {
 			flags |= TYPE;
 		}
 		if (block1.isInitialized() != block2.isInitialized()) {

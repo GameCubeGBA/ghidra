@@ -268,7 +268,7 @@ public class JdiModelTargetThread extends JdiModelTargetObjectReference implemen
 
 	private void stateChanged(int state, JdiReason reason) {
 		TargetExecutionState targetState = convertState(state);
-		if (targetState.equals(TargetExecutionState.STOPPED)) {
+		if (targetState == TargetExecutionState.STOPPED) {
 			update();
 			threadSelected(thread, null, JdiCause.Causes.UNCLAIMED);
 		}

@@ -84,7 +84,7 @@ public class DbgModelTargetContinuationOptionImpl extends DbgModelTargetObjectIm
 			DISPLAY_ATTRIBUTE_NAME, getName() + " : " + optionCont.description, //
 			VALUE_ATTRIBUTE_NAME, optionCont, //
 			ENABLED_ATTRIBUTE_NAME,
-			optionCont.equals(DebugFilterContinuationOption.DEBUG_FILTER_GO_HANDLED)),
+                        optionCont == DebugFilterContinuationOption.DEBUG_FILTER_GO_HANDLED),
 			"Refreshed");
 	}
 

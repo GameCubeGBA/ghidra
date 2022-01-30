@@ -139,7 +139,7 @@ public class XmlLoader extends AbstractProgramLoader {
 			List<LanguageDescription> languageDescriptions =
 				getLanguageService().getLanguageDescriptions(false);
 			for (LanguageDescription languageDescription : languageDescriptions) {
-				if (endian != null && !languageDescription.getEndian().equals(endian)) {
+				if (endian != null && languageDescription.getEndian() != endian) {
 					continue;
 				}
 				Collection<CompilerSpecDescription> compilerSpecDescriptions =

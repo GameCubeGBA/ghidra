@@ -66,10 +66,10 @@ public class ExportPatternFileActionListener implements ActionListener {
 		boolean containsPostPattern = false;
 		boolean containsPrePattern = false;
 		for (PatternInfoRowObject row : selected) {
-			if (row.getPatternType().equals(PatternType.FIRST)) {
+			if (row.getPatternType() == PatternType.FIRST) {
 				containsPostPattern = true;
 			}
-			if (row.getPatternType().equals(PatternType.PRE)) {
+			if (row.getPatternType() == PatternType.PRE) {
 				containsPrePattern = true;
 			}
 		}
@@ -131,7 +131,7 @@ public class ExportPatternFileActionListener implements ActionListener {
 		Integer alignment = null;
 		ContextRegisterFilter cRegFilter = null;
 		for (PatternInfoRowObject row : selected) {
-			if (!row.getPatternType().equals(PatternType.FIRST)) {
+			if (row.getPatternType() != PatternType.FIRST) {
 				continue;
 			}
 			alignment = row.getAlignment();
@@ -140,7 +140,7 @@ public class ExportPatternFileActionListener implements ActionListener {
 		}
 		//now check that all POST patterns agree with the first POST pattern
 		for (PatternInfoRowObject row : selected) {
-			if (!row.getPatternType().equals(PatternType.FIRST)) {
+			if (row.getPatternType() != PatternType.FIRST) {
 				continue; //not a POST pattern, don't worry about it
 			}
 			if (!Objects.equals(alignment, row.getAlignment()) ||

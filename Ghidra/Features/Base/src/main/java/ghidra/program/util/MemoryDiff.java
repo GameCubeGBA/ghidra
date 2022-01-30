@@ -216,7 +216,7 @@ public class MemoryDiff {
 		if (block1.getPermissions() != block2.getPermissions()) {
 			return false;
 		}
-		if (!block1.getType().equals(block2.getType())) {
+		if (block1.getType() != block2.getType()) {
 			return false;
 		}
 		if (block1.isInitialized() != block2.isInitialized()) {

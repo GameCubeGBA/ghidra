@@ -143,10 +143,10 @@ public class ObjectNode extends GTreeSlowLoadingNode {  //extends GTreeNode
 		TargetObject targetObject = container.getTargetObject();
 		if (targetObject instanceof TargetExecutionStateful) {
 			TargetExecutionStateful stateful = (TargetExecutionStateful) targetObject;
-			if (stateful.getExecutionState().equals(TargetExecutionState.RUNNING)) {
+			if (stateful.getExecutionState() == TargetExecutionState.RUNNING) {
 				return ICON_RUNNING;
 			}
-			if (stateful.getExecutionState().equals(TargetExecutionState.TERMINATED)) {
+			if (stateful.getExecutionState() == TargetExecutionState.TERMINATED) {
 				return ICON_TERMINATED;
 			}
 		}

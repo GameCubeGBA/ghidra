@@ -56,7 +56,7 @@ public class ISO9660Analyzer extends AbstractAnalyzer {
 	public boolean canAnalyze(Program program) {
 
 		Offset result = checkSignatures(program);
-		if (result.equals(Offset.NotFound)) {
+		if (result == Offset.NotFound) {
 			return false;
 		}
 		return true;
@@ -202,10 +202,10 @@ public class ISO9660Analyzer extends AbstractAnalyzer {
 	}
 
 	private void setPointerOffset(Offset offset, BinaryReader reader) {
-		if (offset.equals(Offset.Offset1)) {
+		if (offset == Offset.Offset1) {
 			reader.setPointerIndex(ISO9660Constants.SIGNATURE_OFFSET1_0x8001 - 1);
 		}
-		else if (offset.equals(Offset.Offset2)) {
+		else if (offset == Offset.Offset2) {
 			reader.setPointerIndex(ISO9660Constants.SIGNATURE_OFFSET2_0x8801 - 1);
 		}
 		else {
@@ -215,10 +215,10 @@ public class ISO9660Analyzer extends AbstractAnalyzer {
 
 	private int getOffsetValue(Offset offsetEnum) {
 
-		if (offsetEnum.equals(Offset.Offset1)) {
+		if (offsetEnum == Offset.Offset1) {
 			return ISO9660Constants.SIGNATURE_OFFSET1_0x8001;
 		}
-		else if (offsetEnum.equals(Offset.Offset2)) {
+		else if (offsetEnum == Offset.Offset2) {
 			return ISO9660Constants.SIGNATURE_OFFSET2_0x8801;
 		}
 		else {

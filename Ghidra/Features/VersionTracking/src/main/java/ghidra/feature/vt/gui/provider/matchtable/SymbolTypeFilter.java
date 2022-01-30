@@ -92,7 +92,7 @@ public class SymbolTypeFilter extends CheckBoxBasedAncillaryFilter<VTMatch> {
 			Symbol sourceSymbol = sourceSymbolTable.getPrimarySymbol(sourceAddress);
 			if (sourceSymbol != null) {
 				SourceType sourceSymbolSourceType = sourceSymbol.getSource();
-				if (sourceSymbolSourceType.equals(sourceType)) {
+				if (sourceSymbolSourceType == sourceType) {
 					return true;
 				}
 			}
@@ -103,7 +103,7 @@ public class SymbolTypeFilter extends CheckBoxBasedAncillaryFilter<VTMatch> {
 			Symbol destinationSymbol = destinationSymbolTable.getPrimarySymbol(destinationAddress);
 			if (destinationSymbol != null) {
 				SourceType destinationSymbolSourceType = destinationSymbol.getSource();
-				return destinationSymbolSourceType.equals(sourceType);
+				return destinationSymbolSourceType == sourceType;
 			}
 			return false;
 		}
