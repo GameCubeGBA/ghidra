@@ -602,65 +602,48 @@ class Operator {
 	 * @return the static operator object.
 	 */
 	public static Operator getOperator(String tok) {
-		if (tok.equals("+")) {
-			return PLUS;
-		}
-		if (tok.equals("&")) {
-			return AND;
-		}
-		if (tok.equals("|")) {
-			return OR;
-		}
-		if (tok.equals("^")) {
-			return XOR;
-		}
-		else if (tok.equals("-")) {
-			return MINUS;
-		}
-		else if (tok.equals("~")) {
-			return NOT;
-		}
-		else if (tok.equals("*")) {
-			return TIMES;
-		}
-		else if (tok.equals("/")) {
-			return DIVIDE;
-		}
-		else if (tok.equals(")")) {
-			return RIGHT_PAREN;
-		}
-		else if (tok.equals("(")) {
-			return LEFT_PAREN;
-		}
-		else if (tok.equals("<<")) {
-			return LEFTSHIFT;
-		}
-		else if (tok.equals(">>")) {
-			return RIGHTSHIFT;
-		}
-		else if (tok.equals("==")) {
-			return EQUALS;
-		}
-		else if (tok.equals("!=")) {
-			return NOTEQUALS;
-		}
-		else if (tok.equals("<")) {
-			return LESS;
-		}
-		else if (tok.equals(">")) {
-			return GREATER;
-		}
-		else if (tok.equals("<=")) {
-			return LESSEQUALS;
-		}
-		else if (tok.equals(">=")) {
-			return GREATEREQUALS;
-		}
-		else if (tok.equals("||")) {
-			return LOG_OR;
-		}
-		else if (tok.equals("&&")) {
-			return LOG_AND;
+
+		switch (tok) {
+			case "+":
+				return PLUS;
+			case "&":
+				return AND;
+			case "|":
+				return OR;
+			case "^":
+				return XOR;
+			case "-":
+				return MINUS;
+			case "~":
+				return NOT;
+			case "*":
+				return TIMES;
+			case "/":
+				return DIVIDE;
+			case ")":
+				return RIGHT_PAREN;
+			case "(":
+				return LEFT_PAREN;
+			case "<<":
+				return LEFTSHIFT;
+			case ">>":
+				return RIGHTSHIFT;
+			case "==":
+				return EQUALS;
+			case "!=":
+				return NOTEQUALS;
+			case "<":
+				return LESS;
+			case ">":
+				return GREATER;
+			case "<=":
+				return LESSEQUALS;
+			case ">=":
+				return GREATEREQUALS;
+			case "||":
+				return LOG_OR;
+			case "&&":
+				return LOG_AND;
 		}
 		return null;
 	}

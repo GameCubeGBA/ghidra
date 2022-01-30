@@ -62,7 +62,7 @@ public final class Swing {
 	 * @return  true if this is the event dispatch thread -OR- is in headless mode.
 	 */
 	public static boolean isSwingThread() {
-		if (isInHeadlessMode()) {
+		if (SystemUtilities.isInHeadlessMode()) {
 			return true;
 		}
 
@@ -115,7 +115,7 @@ public final class Swing {
 	 * @param r the runnable
 	 */
 	public static void runIfSwingOrRunLater(Runnable r) {
-		if (isInHeadlessMode()) {
+		if (SystemUtilities.isInHeadlessMode()) {
 			r.run();
 			return;
 		}
@@ -204,7 +204,7 @@ public final class Swing {
 	public static void runNow(Runnable r, long timeout, TimeUnit unit)
 			throws UnableToSwingException {
 
-		if (isInHeadlessMode() || SystemUtilities.isEventDispatchThread()) {
+		if (SystemUtilities.isInHeadlessMode() || SystemUtilities.isEventDispatchThread()) {
 			doRun(r, true, SWING_RUN_ERROR_MSG);
 			return;
 		}
@@ -269,16 +269,13 @@ public final class Swing {
 		}
 		catch (InterruptedException | BrokenBarrierException e) {
 			// our Swing tasks may be interrupted from the framework
+			return false;
 		}
-		return false;
-	}
-
-	private static boolean isInHeadlessMode() {
-		return SystemUtilities.isInHeadlessMode();
+		
 	}
 
 	private static void doRun(Runnable r, boolean wait, String errorMessage) {
-		if (isInHeadlessMode()) {
+		if (SystemUtilities.isInHeadlessMode()) {
 			r.run();
 			return;
 		}

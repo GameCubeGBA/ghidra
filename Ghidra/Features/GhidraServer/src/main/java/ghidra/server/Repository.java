@@ -950,10 +950,10 @@ public class Repository implements FileSystemListener, RepositoryLogger {
 	}
 
 	/*
-	 * @see ghidra.framework.store.FileSystemListener#syncronize()
+	 * @see ghidra.framework.store.FileSystemListener#synchronize()
 	 */
 	@Override
-	public void syncronize() {
+	public void synchronize() {
 		// not required
 	}
 

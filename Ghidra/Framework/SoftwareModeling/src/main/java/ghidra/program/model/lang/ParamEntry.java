@@ -491,52 +491,48 @@ public class ParamEntry {
 		while (iter.hasNext()) {
 			Entry<String, String> entry = iter.next();
 			String name = entry.getKey();
-			if (name.equals("minsize")) {
-				minsize = SpecXmlUtils.decodeInt(entry.getValue());
-			}
-			else if (name.equals("size")) {	// old style
-				alignment = SpecXmlUtils.decodeInt(entry.getValue());
-			}
-			else if (name.equals("align")) {
-				alignment = SpecXmlUtils.decodeInt(entry.getValue());
-			}
-			else if (name.equals("maxsize")) {
-				size = SpecXmlUtils.decodeInt(entry.getValue());
-			}
-			else if (name.equals("metatype")) {		// Not implemented at the moment
-				String meta = entry.getValue();
-				// TODO:  Currently only supporting "float", "ptr", and "unknown" metatypes
-				if ((meta != null)) {
-					if (meta.equals("float")) {
-						type = TYPE_FLOAT;
-					}
-					else if (meta.equals("ptr")) {
-						type = TYPE_PTR;
-					}
-				}
-			}
-			else if (name.equals("extension")) {
-				flags &= ~(SMALLSIZE_ZEXT | SMALLSIZE_SEXT | SMALLSIZE_INTTYPE | SMALLSIZE_FLOAT);
-				String value = entry.getValue();
-				if (value.equals("sign")) {
-					flags |= SMALLSIZE_SEXT;
-				}
-				else if (value.equals("zero")) {
-					flags |= SMALLSIZE_ZEXT;
-				}
-				else if (value.equals("inttype")) {
-					flags |= SMALLSIZE_INTTYPE;
-				}
-				else if (value.equals("float")) {
-					flags |= SMALLSIZE_FLOAT;
-				}
-				else if (!value.equals("none")) {
-					throw new XmlParseException("Bad extension attribute: " + value);
-				}
-			}
-			else {
-				throw new XmlParseException("Unknown paramentry attribute: " + name);
-			}
+            switch (name) {
+                case "minsize":
+                    minsize = SpecXmlUtils.decodeInt(entry.getValue());
+                    break;
+                case "size":    // old style
+                    alignment = SpecXmlUtils.decodeInt(entry.getValue());
+                    break;
+                case "align":
+                    alignment = SpecXmlUtils.decodeInt(entry.getValue());
+                    break;
+                case "maxsize":
+                    size = SpecXmlUtils.decodeInt(entry.getValue());
+                    break;
+                case "metatype":        // Not implemented at the moment
+                    String meta = entry.getValue();
+                    // TODO:  Currently only supporting "float", "ptr", and "unknown" metatypes
+                    if ((meta != null)) {
+                        if (meta.equals("float")) {
+                            type = TYPE_FLOAT;
+                        } else if (meta.equals("ptr")) {
+                            type = TYPE_PTR;
+                        }
+                    }
+                    break;
+                case "extension":
+                    flags &= ~(SMALLSIZE_ZEXT | SMALLSIZE_SEXT | SMALLSIZE_INTTYPE | SMALLSIZE_FLOAT);
+                    String value = entry.getValue();
+                    if (value.equals("sign")) {
+                        flags |= SMALLSIZE_SEXT;
+                    } else if (value.equals("zero")) {
+                        flags |= SMALLSIZE_ZEXT;
+                    } else if (value.equals("inttype")) {
+                        flags |= SMALLSIZE_INTTYPE;
+                    } else if (value.equals("float")) {
+                        flags |= SMALLSIZE_FLOAT;
+                    } else if (!value.equals("none")) {
+                        throw new XmlParseException("Bad extension attribute: " + value);
+                    }
+                    break;
+                default:
+                    throw new XmlParseException("Unknown paramentry attribute: " + name);
+            }
 		}
 		if (minsize < 1 || size < minsize) {
 			throw new XmlParseException(

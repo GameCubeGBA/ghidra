@@ -230,7 +230,7 @@ public class RemoteFileSystem implements FileSystem, RemoteAdapterListener {
 	@Override
 	public void connectionStateChanged(Object adapter) {
 		if (adapter == repository) {
-			eventManager.syncronize();
+			eventManager.synchronize();
 		}
 	}
 

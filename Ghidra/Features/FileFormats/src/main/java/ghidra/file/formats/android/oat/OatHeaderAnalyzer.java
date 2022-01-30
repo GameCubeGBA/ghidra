@@ -180,45 +180,46 @@ public class OatHeaderAnalyzer extends FileFormatAnalyzer {
 		monitor.setMessage("Annotating OAT Patches...");
 		Memory memory = program.getMemory();
 
-		if (oatHeader.getVersion().equals(OatConstants.VERSION_LOLLIPOP_MR1_FI_RELEASE)) {
-			MemoryBlock oatBlock = memory.getBlock(OatConstants.DOT_OAT_PATCHES_SECTION_NAME);
-			MemoryBlock destinationBlock = findOatPatchesDestinationBlock(program, oatBlock);
-			if (oatBlock == null || destinationBlock == null) {
-				log.appendMsg("Could not locate OAT patches source / destination block.");
-				return;
-			}
-			DataType dataType = new DWordDataType();
-			monitor.setProgress(0);
-			long numberOfElements = oatBlock.getSize() / dataType.getLength();
-			monitor.setMaximum(numberOfElements);
-			for (int i = 0; i < numberOfElements; ++i) {
-				monitor.checkCanceled();
-				monitor.incrementProgress(1);
-				try {
-					Address address = oatBlock.getStart().add(i * dataType.getLength());
-					Data data = createData(program, address, dataType);
-					Scalar scalar = data.getScalar(0);
-					Address toAddr = destinationBlock.getStart().add(scalar.getUnsignedValue());
-					program.getListing().setComment(address, CodeUnit.EOL_COMMENT, "->" + toAddr);
-				}
-				catch (Exception e) {
-					log.appendException(e);
-					return;
-				}
-			}
-		}
-		else if (oatHeader.getVersion().equals(OatConstants.VERSION_MARSHMALLOW_RELEASE)) {
-			//TODO
-		}
-		else if (oatHeader.getVersion().equals(OatConstants.VERSION_NOUGAT_MR1_RELEASE)) {
-			//TODO
-		}
-		else if (oatHeader.getVersion().equals(OatConstants.VERSION_OREO_RELEASE)) {
-			//TODO
-		}
-		else if (oatHeader.getVersion().equals(OatConstants.VERSION_OREO_M2_RELEASE)) {
-			//TODO
-		}
+        switch (oatHeader.getVersion()) {
+            case OatConstants.VERSION_LOLLIPOP_MR1_FI_RELEASE:
+                MemoryBlock oatBlock = memory.getBlock(OatConstants.DOT_OAT_PATCHES_SECTION_NAME);
+                MemoryBlock destinationBlock = findOatPatchesDestinationBlock(program, oatBlock);
+                if (oatBlock == null || destinationBlock == null) {
+                    log.appendMsg("Could not locate OAT patches source / destination block.");
+                    return;
+                }
+                DataType dataType = new DWordDataType();
+                monitor.setProgress(0);
+                long numberOfElements = oatBlock.getSize() / dataType.getLength();
+                monitor.setMaximum(numberOfElements);
+                for (int i = 0; i < numberOfElements; ++i) {
+                    monitor.checkCanceled();
+                    monitor.incrementProgress(1);
+                    try {
+                        Address address = oatBlock.getStart().add(i * dataType.getLength());
+                        Data data = createData(program, address, dataType);
+                        Scalar scalar = data.getScalar(0);
+                        Address toAddr = destinationBlock.getStart().add(scalar.getUnsignedValue());
+                        program.getListing().setComment(address, CodeUnit.EOL_COMMENT, "->" + toAddr);
+                    } catch (Exception e) {
+                        log.appendException(e);
+                        return;
+                    }
+                }
+                break;
+            case OatConstants.VERSION_MARSHMALLOW_RELEASE:
+                //TODO
+                break;
+            case OatConstants.VERSION_NOUGAT_MR1_RELEASE:
+                //TODO
+                break;
+            case OatConstants.VERSION_OREO_RELEASE:
+                //TODO
+                break;
+            case OatConstants.VERSION_OREO_M2_RELEASE:
+                //TODO
+                break;
+        }
 	}
 
 	private MemoryBlock findOatPatchesDestinationBlock(Program program,

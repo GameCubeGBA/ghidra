@@ -201,8 +201,7 @@ public class SystemUtilities {
 	 * @return true if the system is running without a GUI.
 	 */
 	public static boolean isInHeadlessMode() {
-		String headlessProperty = System.getProperty(HEADLESS_PROPERTY, Boolean.TRUE.toString());
-		return Boolean.parseBoolean(headlessProperty);
+		return Boolean.parseBoolean(System.getProperty(HEADLESS_PROPERTY, Boolean.TRUE.toString()));
 	}
 
 	/**

@@ -142,70 +142,74 @@ class ProgramTextOptions {
 				if (groupName.equals(OPTION_WIDTH)) {
 					int value = ((Integer) option.getValue()).intValue();
 
-					if (optionName.equals(OPTION_WIDTH_LABEL)) {
-						labelWidth = value;
-					}
-					else if (optionName.equals(OPTION_WIDTH_ADDR)) {
-						addrWidth = value;
-					}
-					else if (optionName.equals(OPTION_WIDTH_BYTES)) {
-						bytesWidth = value;
-					}
-					else if (optionName.equals(OPTION_WIDTH_PREMNEMONIC)) {
-						preMnemonicWidth = value;
-					}
-					else if (optionName.equals(OPTION_WIDTH_MNEMONIC)) {
-						mnemonicWidth = value;
-					}
-					else if (optionName.equals(OPTION_WIDTH_OPERAND)) {
-						operandWidth = value;
-					}
-					else if (optionName.equals(OPTION_WIDTH_EOL)) {
-						eolWidth = value;
-					}
-					else if (optionName.equals(OPTION_WIDTH_REF)) {
-						refWidth = value;
-					}
-					else if (optionName.equals(OPTION_WIDTH_DATA_FIELD)) {
-						dataFieldNameWidth = value;
-					}
-					else {
-						wasOptionHandled = false;
-					}
+                    switch (optionName) {
+                        case OPTION_WIDTH_LABEL:
+                            labelWidth = value;
+                            break;
+                        case OPTION_WIDTH_ADDR:
+                            addrWidth = value;
+                            break;
+                        case OPTION_WIDTH_BYTES:
+                            bytesWidth = value;
+                            break;
+                        case OPTION_WIDTH_PREMNEMONIC:
+                            preMnemonicWidth = value;
+                            break;
+                        case OPTION_WIDTH_MNEMONIC:
+                            mnemonicWidth = value;
+                            break;
+                        case OPTION_WIDTH_OPERAND:
+                            operandWidth = value;
+                            break;
+                        case OPTION_WIDTH_EOL:
+                            eolWidth = value;
+                            break;
+                        case OPTION_WIDTH_REF:
+                            refWidth = value;
+                            break;
+                        case OPTION_WIDTH_DATA_FIELD:
+                            dataFieldNameWidth = value;
+                            break;
+                        default:
+                            wasOptionHandled = false;
+                            break;
+                    }
 				}
 				else if (groupName.equals(OPTION_SHOW)) {
 					boolean value = ((Boolean) option.getValue()).booleanValue();
 
-					if (optionName.equals(OPTION_SHOW_COMMENTS)) {
-						showComments = value;
-					}
-					else if (optionName.equals(OPTION_SHOW_PROPERTIES)) {
-						showProperties = value;
-					}
-					else if (optionName.equals(OPTION_SHOW_STRUCTURES)) {
-						showStructures = value;
-					}
-					else if (optionName.equals(OPTION_SHOW_UNDEFINED)) {
-						showUndefinedData = value;
-					}
-					else if (optionName.equals(OPTION_SHOW_REF_HEADER)) {
-						showReferenceHeaders = value;
-					}
-					else if (optionName.equals(OPTION_SHOW_BACK_REFS)) {
-						showBackReferences = value;
-					}
-					else if (optionName.equals(OPTION_SHOW_FORWARD_REFS)) {
-						showForwardReferences = value;
-					}
-					else if (optionName.equals(OPTION_SHOW_FUNCTIONS)) {
-						showFunctions = value;
-					}
-					else if (optionName.equals(OPTION_SHOW_BLOCK_NAMES)) {
-						showBlockNameInOperands = value;
-					}
-					else {
-						wasOptionHandled = false;
-					}
+                    switch (optionName) {
+                        case OPTION_SHOW_COMMENTS:
+                            showComments = value;
+                            break;
+                        case OPTION_SHOW_PROPERTIES:
+                            showProperties = value;
+                            break;
+                        case OPTION_SHOW_STRUCTURES:
+                            showStructures = value;
+                            break;
+                        case OPTION_SHOW_UNDEFINED:
+                            showUndefinedData = value;
+                            break;
+                        case OPTION_SHOW_REF_HEADER:
+                            showReferenceHeaders = value;
+                            break;
+                        case OPTION_SHOW_BACK_REFS:
+                            showBackReferences = value;
+                            break;
+                        case OPTION_SHOW_FORWARD_REFS:
+                            showForwardReferences = value;
+                            break;
+                        case OPTION_SHOW_FUNCTIONS:
+                            showFunctions = value;
+                            break;
+                        case OPTION_SHOW_BLOCK_NAMES:
+                            showBlockNameInOperands = value;
+                            break;
+                        default:
+                            wasOptionHandled = false;
+                            break;
+                    }
 				}
 				else if (groupName.equals(OPTION_ADV)) {
 					String value = (String) option.getValue();

@@ -920,7 +920,7 @@ public abstract class AbstractLocalFileSystemTest extends AbstractGenericTest {
 		}
 
 		@Override
-		public void syncronize() {
+		public void synchronize() {
 			// not tracked
 		}
 	}

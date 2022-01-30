@@ -573,51 +573,53 @@ public class PlateFieldFactory extends FieldFactory {
 	public void fieldOptionsChanged(Options options, String optionName, Object oldValue,
 			Object newValue) {
 
-		if (optionName.equals(SHOW_EXT_ENTRY_PLATES_OPTION)) {
-			showExternalPlates = ((Boolean) newValue).booleanValue();
-			model.update();
-		}
-		else if (optionName.equals(SHOW_FUNCTION_PLATES_OPTION)) {
-			showFunctionPlates = ((Boolean) newValue).booleanValue();
-			model.update();
-		}
-		else if (optionName.equals(SHOW_SUBROUTINE_PLATES_OPTION)) {
-			showSubroutinePlates = ((Boolean) newValue).booleanValue();
-			model.update();
-		}
-		else if (optionName.equals(SHOW_TRANSITION_PLATES_OPTION)) {
-			showTransitionPlates = ((Boolean) newValue).booleanValue();
-			model.update();
-		}
-		else if (optionName.equals(LINES_BEFORE_FUNCTIONS_OPTION)) {
-			nLinesBeforeFunctions = ((Integer) newValue).intValue();
-			if (nLinesBeforeFunctions < 0) {
-				nLinesBeforeFunctions = 0;
-			}
-			model.update();
-		}
-		else if (optionName.equals(LINES_BEFORE_LABELS_OPTION)) {
-			nLinesBeforeLabels = ((Integer) newValue).intValue();
-			if (nLinesBeforeLabels < 0) {
-				nLinesBeforeLabels = 0;
-			}
-			model.update();
-		}
-		else if (optionName.equals(LINES_BEFORE_PLATES_OPTION)) {
-			nLinesBeforePlates = ((Integer) newValue).intValue();
-			if (nLinesBeforePlates < 0) {
-				nLinesBeforePlates = 0;
-			}
-			model.update();
-		}
-		else if (optionName.equals(ENABLE_WORD_WRAP_MSG)) {
-			isWordWrap = ((Boolean) newValue).booleanValue();
-		}
-		else if (optionName.equals(ListingModel.DISPLAY_EXTERNAL_FUNCTION_POINTER_OPTION_NAME)) {
-			showExternalFunctionPointerPlates = (Boolean) newValue;
-		}
-		else if (optionName.equals(ListingModel.DISPLAY_NONEXTERNAL_FUNCTION_POINTER_OPTION_NAME)) {
-			showNonExternalFunctionPointerPlates = (Boolean) newValue;
+		switch (optionName) {
+			case SHOW_EXT_ENTRY_PLATES_OPTION:
+				showExternalPlates = ((Boolean) newValue).booleanValue();
+				model.update();
+				break;
+			case SHOW_FUNCTION_PLATES_OPTION:
+				showFunctionPlates = ((Boolean) newValue).booleanValue();
+				model.update();
+				break;
+			case SHOW_SUBROUTINE_PLATES_OPTION:
+				showSubroutinePlates = ((Boolean) newValue).booleanValue();
+				model.update();
+				break;
+			case SHOW_TRANSITION_PLATES_OPTION:
+				showTransitionPlates = ((Boolean) newValue).booleanValue();
+				model.update();
+				break;
+			case LINES_BEFORE_FUNCTIONS_OPTION:
+				nLinesBeforeFunctions = ((Integer) newValue).intValue();
+				if (nLinesBeforeFunctions < 0) {
+					nLinesBeforeFunctions = 0;
+				}
+				model.update();
+				break;
+			case LINES_BEFORE_LABELS_OPTION:
+				nLinesBeforeLabels = ((Integer) newValue).intValue();
+				if (nLinesBeforeLabels < 0) {
+					nLinesBeforeLabels = 0;
+				}
+				model.update();
+				break;
+			case LINES_BEFORE_PLATES_OPTION:
+				nLinesBeforePlates = ((Integer) newValue).intValue();
+				if (nLinesBeforePlates < 0) {
+					nLinesBeforePlates = 0;
+				}
+				model.update();
+				break;
+			case ENABLE_WORD_WRAP_MSG:
+				isWordWrap = ((Boolean) newValue).booleanValue();
+				break;
+			case ListingModel.DISPLAY_EXTERNAL_FUNCTION_POINTER_OPTION_NAME:
+				showExternalFunctionPointerPlates = (Boolean) newValue;
+				break;
+			case ListingModel.DISPLAY_NONEXTERNAL_FUNCTION_POINTER_OPTION_NAME:
+				showNonExternalFunctionPointerPlates = (Boolean) newValue;
+				break;
 		}
 	}
 

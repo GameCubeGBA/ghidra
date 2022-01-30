@@ -117,29 +117,31 @@ public class BytesFieldFactory extends FieldFactory {
 	public void fieldOptionsChanged(Options options, String optionName, Object oldValue,
 			Object newValue) {
 
-		if (optionName.equals(MAX_DISPLAY_LINES_MSG)) {
-			setDisplayLines(((Integer) newValue).intValue(), options);
-			model.update();
-		}
-		else if (optionName.equals(DELIMITER_MSG)) {
-			setDelim((String) newValue, options);
-			model.update();
-		}
-		else if (optionName.equals(BYTE_GROUP_SIZE_MSG)) {
-			setGroupSize(((Integer) newValue).intValue(), options);
-			model.update();
-		}
-		else if (optionName.equals(DISPLAY_UCASE_MSG)) {
-			displayUpperCase = ((Boolean) newValue).booleanValue();
-			model.update();
-		}
-		else if (optionName.equals(REVERSE_INSTRUCTION_BYTE_ORDERING)) {
-			reverseInstByteOrdering = ((Boolean) newValue).booleanValue();
-			model.update();
-		}
-		else if (optionName.equals(DISPLAY_STRUCTURE_ALIGNMENT_BYTES_MSG)) {
-			displayStructureAlignmentBytes = ((Boolean) newValue).booleanValue();
-			model.update();
+		switch (optionName) {
+			case MAX_DISPLAY_LINES_MSG:
+				setDisplayLines(((Integer) newValue).intValue(), options);
+				model.update();
+				break;
+			case DELIMITER_MSG:
+				setDelim((String) newValue, options);
+				model.update();
+				break;
+			case BYTE_GROUP_SIZE_MSG:
+				setGroupSize(((Integer) newValue).intValue(), options);
+				model.update();
+				break;
+			case DISPLAY_UCASE_MSG:
+				displayUpperCase = ((Boolean) newValue).booleanValue();
+				model.update();
+				break;
+			case REVERSE_INSTRUCTION_BYTE_ORDERING:
+				reverseInstByteOrdering = ((Boolean) newValue).booleanValue();
+				model.update();
+				break;
+			case DISPLAY_STRUCTURE_ALIGNMENT_BYTES_MSG:
+				displayStructureAlignmentBytes = ((Boolean) newValue).booleanValue();
+				model.update();
+				break;
 		}
 	}
 
