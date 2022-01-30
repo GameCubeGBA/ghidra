@@ -65,7 +65,7 @@ public class ConstantPoolJava extends ConstantPool {
 		int name_index = methodNameAndType.getNameIndex();
 		res.tag = ConstantPool.POINTER_METHOD;
 
-		if (methodType.equals(JavaInvocationType.INVOKE_STATIC)) {
+		if (methodType == JavaInvocationType.INVOKE_STATIC) {
 			AbstractConstantPoolReferenceInfo poolRef =
 				(AbstractConstantPoolReferenceInfo) constantPool[index];
 			ConstantPoolClassInfo classInfo =
@@ -95,8 +95,8 @@ public class ConstantPoolJava extends ConstantPool {
 		ParameterDefinitionImpl[] paramDefs;
 
 		//invokestatic and invokedynamic don't have a this pointer on the stack
-		if (methodType.equals(JavaInvocationType.INVOKE_STATIC) ||
-			methodType.equals(JavaInvocationType.INVOKE_DYNAMIC)) {
+		if (methodType == JavaInvocationType.INVOKE_STATIC ||
+                methodType == JavaInvocationType.INVOKE_DYNAMIC) {
 			paramDefs = new ParameterDefinitionImpl[params.size()];
 			for (int i = 0, max = params.size(); i < max; ++i) {
 				ParameterDefinitionImpl currentParam =

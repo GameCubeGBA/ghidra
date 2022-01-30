@@ -69,7 +69,7 @@ public class AssociationStatusFilter extends CheckBoxBasedAncillaryFilter<VTMatc
 			if (!isSelected()) {
 				return false;
 			}
-			return match.getAssociation().getStatus().equals(associationStatus);
+			return match.getAssociation().getStatus() == associationStatus;
 		}
 	}
 }

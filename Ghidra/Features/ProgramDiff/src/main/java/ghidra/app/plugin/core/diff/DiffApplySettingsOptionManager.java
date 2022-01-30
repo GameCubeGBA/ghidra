@@ -316,7 +316,7 @@ class DiffApplySettingsOptionManager {
 		REPLACE_CHOICE defaultSetting = REPLACE_CHOICE.REPLACE;
 		REPLACE_CHOICE optionSetting = options.getEnum(getOptionName(setting), defaultSetting);
 		REPLACE_CHOICE diffSetting = convertTypeToReplaceEnum(defaultApplyFilter, filter);
-		if (!diffSetting.equals(optionSetting)) {
+		if (diffSetting != optionSetting) {
 			options.setEnum(getOptionName(setting), diffSetting);
 		}
 	}
@@ -327,7 +327,7 @@ class DiffApplySettingsOptionManager {
 		REPLACE_CHOICE optionSetting = options.getEnum(getOptionName(setting), defaultSetting);
 		REPLACE_CHOICE diffSetting =
 			convertTypeToReplaceEnum(defaultApplyFilter, getMergeFilterType(setting));
-		if (!diffSetting.equals(optionSetting)) {
+		if (diffSetting != optionSetting) {
 			options.setEnum(getOptionName(setting), diffSetting);
 		}
 	}
@@ -337,7 +337,7 @@ class DiffApplySettingsOptionManager {
 		MERGE_CHOICE optionSetting = options.getEnum(getOptionName(setting), defaultSetting);
 		MERGE_CHOICE diffSetting =
 			convertTypeToMergeEnum(defaultApplyFilter, getMergeFilterType(setting));
-		if (!diffSetting.equals(optionSetting)) {
+		if (diffSetting != optionSetting) {
 			options.setEnum(getOptionName(setting), diffSetting);
 		}
 	}
@@ -347,7 +347,7 @@ class DiffApplySettingsOptionManager {
 		SYMBOL_MERGE_CHOICE defaultSetting = SYMBOL_MERGE_CHOICE.MERGE_AND_SET_PRIMARY;
 		SYMBOL_MERGE_CHOICE optionSetting = options.getEnum(getOptionName(setting), defaultSetting);
 		SYMBOL_MERGE_CHOICE diffSetting = getSymbolMergeEnum(defaultApplyFilter);
-		if (!diffSetting.equals(optionSetting)) {
+		if (diffSetting != optionSetting) {
 			options.setEnum(getOptionName(setting), diffSetting);
 		}
 	}

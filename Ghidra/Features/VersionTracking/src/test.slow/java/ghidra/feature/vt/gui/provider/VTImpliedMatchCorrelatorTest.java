@@ -146,7 +146,7 @@ public class VTImpliedMatchCorrelatorTest extends AbstractVTCorrelatorTest {
 
 		Collection<VTMatch> matches = testMatchSet.getMatches();
 		for (VTMatch match : matches) {
-			if (match.getAssociation().getType().equals(VTAssociationType.FUNCTION)) {
+			if (match.getAssociation().getType() == VTAssociationType.FUNCTION) {
 				Function sourceFunc = srcFunctionManager.getFunctionAt(match.getSourceAddress());
 				Function destFunc =
 					destFunctionManager.getFunctionAt(match.getDestinationAddress());

@@ -63,7 +63,7 @@ public class MarkupStatusFilter extends CheckBoxBasedAncillaryFilter<VTMarkupIte
 			if (!isSelected()) {
 				return false;
 			}
-			return adapter.getStatus().equals(status);
+			return adapter.getStatus() == status;
 		}
 	}
 }

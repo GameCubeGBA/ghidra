@@ -137,7 +137,7 @@ public class GhidraModuleUtils {
 		List<String> excludeRegexes = new ArrayList<>();
 		for (ModuleTemplateType moduleTemplateType : ModuleTemplateType.values()) {
 			if (!moduleTemplateTypes.contains(moduleTemplateType)) {
-				if (moduleTemplateType.equals(ModuleTemplateType.PROCESSOR)) {
+				if (moduleTemplateType == ModuleTemplateType.PROCESSOR) {
 					excludeRegexes.add("languages");
 					excludeRegexes.add("buildLanguage\\.xml");
 					excludeRegexes.add("sleighArgs\\.txt");

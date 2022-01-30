@@ -747,7 +747,7 @@ public class DecompileOptions {
 			appendOption(buf, "commentindent", Integer.toString(commentindent), "", "");
 		}
 		if (commentStyle != COMMENTSTYLE_OPTIONDEFAULT) {
-			String curstyle = CommentStyleEnum.CPPStyle.equals(commentStyle) ? "cplusplus" : "c";
+			String curstyle = CommentStyleEnum.CPPStyle == commentStyle ? "cplusplus" : "c";
 			appendOption(buf, "commentstyle", curstyle, "", "");
 		}
 		if (commentPLATEInclude != COMMENTPLATE_OPTIONDEFAULT) {

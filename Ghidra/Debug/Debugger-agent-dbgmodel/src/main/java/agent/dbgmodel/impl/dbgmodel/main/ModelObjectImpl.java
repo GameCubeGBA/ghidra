@@ -859,11 +859,11 @@ public class ModelObjectImpl implements ModelObjectInternal {
 	public TypeKind getTypeKind() {
 		ModelObjectKind modelKind = getKind();
 		TypeKind typeKind = null;
-		if (modelKind.equals(ModelObjectKind.OBJECT_TARGET_OBJECT)) {
+		if (modelKind == ModelObjectKind.OBJECT_TARGET_OBJECT) {
 			DebugHostType1 targetInfo = getTargetInfo();
 			typeKind = targetInfo.getTypeKind();
 		}
-		if (modelKind.equals(ModelObjectKind.OBJECT_INTRINSIC)) {
+		if (modelKind == ModelObjectKind.OBJECT_INTRINSIC) {
 			DebugHostType1 typeInfo = getTypeInfo();
 			if (typeInfo != null) {
 				typeKind = typeInfo.getTypeKind();
@@ -875,7 +875,7 @@ public class ModelObjectImpl implements ModelObjectInternal {
 	@Override
 	public ModelMethod getMethod(String name) {
 		ModelObject m = getKeyValue(name);
-		if (m == null || !m.getKind().equals(ModelObjectKind.OBJECT_METHOD)) {
+		if (m == null || m.getKind() != ModelObjectKind.OBJECT_METHOD) {
 			return null;
 		}
 		Unknown unk = (Unknown) m.getIntrinsicValue();

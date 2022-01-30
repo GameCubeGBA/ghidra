@@ -860,7 +860,7 @@ public class VTAutoVersionTrackingTest extends AbstractGhidraHeadedIntegrationTe
 		while (it.hasNext()) {
 			VTMatch match = it.next();
 			VTAssociationStatus status = match.getAssociation().getStatus();
-			if (status.equals(VTAssociationStatus.ACCEPTED)) {
+			if (status == VTAssociationStatus.ACCEPTED) {
 				Msg.info(this,
 					match.getSourceAddress().toString() + " " +
 						match.getDestinationAddress().toString() + " " +
@@ -883,7 +883,7 @@ public class VTAutoVersionTrackingTest extends AbstractGhidraHeadedIntegrationTe
 		while (it.hasNext()) {
 			VTMatch match = it.next();
 			VTAssociationStatus status = match.getAssociation().getStatus();
-			if (status.equals(VTAssociationStatus.ACCEPTED)) {
+			if (status == VTAssociationStatus.ACCEPTED) {
 				count++;
 			}
 		}

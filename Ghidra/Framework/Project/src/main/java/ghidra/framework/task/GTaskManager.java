@@ -107,7 +107,7 @@ public class GTaskManager {
 	 * 
 	 * @param task the task to be run.
 	 * @param priority the priority of the task.  Lower numbers are run before higher numbers.
-	 * @param useCurrentGroup. If true, this task will be rolled into the current transaction group
+	 * @param useCurrentGroup If true, this task will be rolled into the current transaction group
 	 * 							if one exists.  If false, any open transaction 
 	 * 							will be closed and a new transaction will be opened before 
 	 * 							this task is run.

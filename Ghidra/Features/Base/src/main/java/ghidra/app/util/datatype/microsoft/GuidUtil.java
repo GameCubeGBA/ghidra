@@ -84,7 +84,7 @@ public class GuidUtil {
 		initialize();
 		guidString = guidString.toUpperCase();
 		for (GuidType guidType : guidTypes) {
-			if (guidType.equals(GuidType.SYNTAX)) {
+			if (guidType == GuidType.SYNTAX) {
 				continue;
 			}
 			Hashtable<String, GuidInfo> table = idTables.get(guidType);

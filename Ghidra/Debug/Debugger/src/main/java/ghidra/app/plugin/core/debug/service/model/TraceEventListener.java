@@ -120,7 +120,7 @@ public class TraceEventListener extends AnnotatedDebuggerAttributeListener {
 			description + " params=" + parameters);
 		// Just use this to step the snaps. Creation/destruction still handled in add/remove
 		if (eventThread == null) {
-			if (!type.equals(TargetEventType.PROCESS_CREATED)) {
+			if (type != TargetEventType.PROCESS_CREATED) {
 				Msg.error(this, "Null eventThread for " + type);
 			}
 			return;

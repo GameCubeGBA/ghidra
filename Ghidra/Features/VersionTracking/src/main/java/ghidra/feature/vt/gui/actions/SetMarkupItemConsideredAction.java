@@ -70,7 +70,7 @@ abstract class SetMarkupItemConsideredAction extends DockingAction {
 
 		for (VTMarkupItem markupItem : markupItems) {
 			VTMarkupItemStatus status = markupItem.getStatus();
-			if (!markupItem.canApply() || status.equals(thisActionsStatus)) {
+			if (!markupItem.canApply() || status == thisActionsStatus) {
 				return false;
 			}
 		}

@@ -138,7 +138,7 @@ public class DefaultTraceRecorder implements TraceRecorder {
 
 	@Override
 	public Set<TraceBreakpointKind> getSupportedBreakpointKinds() {
-		Set<TargetBreakpointKind> tKinds = new HashSet<>();
+		Set<TargetBreakpointKind> tKinds = EnumSet.noneOf(TargetBreakpointKind.class);
 		objectManager.onBreakpointContainers(null, cont -> {
 			tKinds.addAll(cont.getSupportedBreakpointKinds());
 		});

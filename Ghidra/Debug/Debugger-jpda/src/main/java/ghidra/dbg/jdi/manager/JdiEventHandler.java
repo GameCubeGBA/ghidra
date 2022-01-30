@@ -109,7 +109,7 @@ public class JdiEventHandler implements Runnable {
 					status = DebugStatus.update(processEvent(nextEvent));
 				}
 
-				if (status.equals(DebugStatus.GO)) {
+				if (status == DebugStatus.GO) {
 					state.set(ThreadReference.THREAD_STATUS_RUNNING, JdiCause.Causes.UNCLAIMED);
 					eventSet.resume();
 				}

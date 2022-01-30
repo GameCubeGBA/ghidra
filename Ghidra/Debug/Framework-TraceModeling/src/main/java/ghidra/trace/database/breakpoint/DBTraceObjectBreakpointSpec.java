@@ -154,7 +154,7 @@ public class DBTraceObjectBreakpointSpec
 
 	@Override
 	public Set<TraceBreakpointKind> getKinds() {
-		Set<TraceBreakpointKind> result = new HashSet<>();
+		Set<TraceBreakpointKind> result = EnumSet.noneOf(TraceBreakpointKind.class);
 		String kindsStr = TraceObjectInterfaceUtils.getValue(object, getPlacedSnap(),
 			TargetBreakpointSpec.KINDS_ATTRIBUTE_NAME, String.class, null);
 		if (kindsStr == null) {

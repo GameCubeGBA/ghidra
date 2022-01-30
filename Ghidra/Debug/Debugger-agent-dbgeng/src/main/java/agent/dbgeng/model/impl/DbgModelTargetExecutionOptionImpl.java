@@ -85,7 +85,7 @@ public class DbgModelTargetExecutionOptionImpl extends DbgModelTargetObjectImpl
 			DISPLAY_ATTRIBUTE_NAME, getName() + " : " + optionExc.description, //
 			VALUE_ATTRIBUTE_NAME, optionExc, //
 			ENABLED_ATTRIBUTE_NAME,
-			optionExc.equals(DebugFilterExecutionOption.DEBUG_FILTER_BREAK)), "Refreshed");
+                optionExc == DebugFilterExecutionOption.DEBUG_FILTER_BREAK), "Refreshed");
 	}
 
 }

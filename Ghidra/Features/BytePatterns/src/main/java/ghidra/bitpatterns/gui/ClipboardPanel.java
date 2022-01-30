@@ -426,7 +426,7 @@ public class ClipboardPanel extends JPanel {
 		List<PatternInfoRowObject> postPatterns = new ArrayList<>();
 		sequenceToCRegFilter.clear();
 		for (PatternInfoRowObject row : rows) {
-			if (row.getPatternType().equals(PatternType.FIRST)) {
+			if (row.getPatternType() == PatternType.FIRST) {
 				postPatterns.add(row);
 			}
 			else {

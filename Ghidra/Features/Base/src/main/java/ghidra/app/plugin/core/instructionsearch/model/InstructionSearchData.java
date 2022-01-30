@@ -350,7 +350,7 @@ public class InstructionSearchData extends Observable {
 		}
 
 		instructions.get(row).getOperands().get(col).setMasked(
-			table.getCellData(row, col + 1).getState().equals(OperandState.MASKED));
+                table.getCellData(row, col + 1).getState() == OperandState.MASKED);
 	}
 
 	/**
@@ -368,7 +368,7 @@ public class InstructionSearchData extends Observable {
 		}
 
 		OperandState mnemonicMaskState = table.getCellData(row, 0).getState();
-		instructions.get(row).setMasked(mnemonicMaskState.equals(OperandState.MASKED));
+		instructions.get(row).setMasked(mnemonicMaskState == OperandState.MASKED);
 	}
 
 	/**

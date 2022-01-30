@@ -148,7 +148,7 @@ public class DelegateDbgModel2TargetObject extends DbgModel2TargetObjectImpl imp
 		}
 		*/
 
-		if (object.getKind().equals(ModelObjectKind.OBJECT_METHOD)) {
+		if (object.getKind() == ModelObjectKind.OBJECT_METHOD) {
 			mixins.add(DbgModelTargetMethod.class);
 		}
 		else {
@@ -218,7 +218,7 @@ public class DelegateDbgModel2TargetObject extends DbgModel2TargetObjectImpl imp
 	protected static String getHintForObject(ModelObject obj) {
 		ModelObjectKind kind = obj.getKind();
 		String ret = kind == null ? "" : kind.name();
-		if (kind.equals(ModelObjectKind.OBJECT_INTRINSIC)) {
+		if (kind == ModelObjectKind.OBJECT_INTRINSIC) {
 			ret += " " + obj.getValueString();
 		}
 		return ret;
@@ -381,7 +381,7 @@ public class DelegateDbgModel2TargetObject extends DbgModel2TargetObjectImpl imp
 	}
 
 	public void threadStateChangedSpecific(DbgState state, DbgReason reason) {
-		if (state.equals(DbgState.RUNNING)) {
+		if (state == DbgState.RUNNING) {
 			return;
 		}
 		if (proxy instanceof TargetThread) {

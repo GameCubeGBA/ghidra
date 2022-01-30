@@ -84,7 +84,7 @@ public class DbgModelTargetRegisterContainerImpl extends DbgModelTargetObjectImp
 	}
 
 	public void threadStateChangedSpecific(DbgState state, DbgReason reason) {
-		if (!state.equals(DbgState.RUNNING)) {
+		if (state != DbgState.RUNNING) {
 			readRegistersNamed(getCachedElements().keySet());
 		}
 	}

@@ -15,6 +15,7 @@
  */
 package ghidra.app.util.bin.format.pe;
 
+import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -81,7 +82,7 @@ public enum SectionFlags {
 	}
 
 	public static Set<SectionFlags> resolveFlags(int value) {
-		Set<SectionFlags> applied = new HashSet<>();
+		Set<SectionFlags> applied = EnumSet.noneOf(SectionFlags.class);
 		for (SectionFlags ch : values()) {
 			if ((ch.getMask() & value) == ch.getMask()) {
 				applied.add(ch);

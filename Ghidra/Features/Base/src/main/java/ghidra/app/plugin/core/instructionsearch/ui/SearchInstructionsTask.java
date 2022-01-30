@@ -73,8 +73,7 @@ class SearchInstructionsTask extends Task {
 
 		// See if we're searching forward or backwards.
 		boolean forward =
-			searchDialog.getControlPanel().getDirectionWidget().getSearchDirection().equals(
-				Direction.FORWARD);
+                searchDialog.getControlPanel().getDirectionWidget().getSearchDirection() == Direction.FORWARD;
 
 		// If we're searching backwards we need to process address ranges in reverse so reverse
 		// the list.

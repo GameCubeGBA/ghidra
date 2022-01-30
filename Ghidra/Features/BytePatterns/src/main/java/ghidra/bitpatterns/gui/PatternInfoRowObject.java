@@ -129,7 +129,7 @@ public class PatternInfoRowObject {
 			return false;
 		}
 		PatternInfoRowObject otherRow = (PatternInfoRowObject) o;
-		if (!(otherRow.type.equals(type))) {
+		if (otherRow.type != type) {
 			return false;
 		}
 		if (!(otherRow.bitSequence.equals(bitSequence))) {
@@ -165,7 +165,7 @@ public class PatternInfoRowObject {
 			bWriter.write("\">\n");
 			bWriter.write("    <prepatterns>\n");
 			for (PatternInfoRowObject row : rows) {
-				if (row.getPatternType().equals(PatternType.PRE)) {
+				if (row.getPatternType() == PatternType.PRE) {
 					bWriter.write("        <data>");
 					bWriter.write(row.getDittedBitSequence().getHexString());
 					bWriter.write("</data>\n");
@@ -174,7 +174,7 @@ public class PatternInfoRowObject {
 			bWriter.write("    </prepatterns>\n");
 			bWriter.write("    <postpatterns>\n");
 			for (PatternInfoRowObject row : rows) {
-				if (row.getPatternType().equals(PatternType.FIRST)) {
+				if (row.getPatternType() == PatternType.FIRST) {
 					bWriter.write("       <data>");
 					bWriter.write(row.getDittedBitSequence().getHexString());
 					bWriter.write("</data>\n");
@@ -184,7 +184,7 @@ public class PatternInfoRowObject {
 			Integer alignment = null;
 			ContextRegisterFilter cRegFilter = null;
 			for (PatternInfoRowObject row : rows) {
-				if (row.getPatternType().equals(PatternType.FIRST)) {
+				if (row.getPatternType() == PatternType.FIRST) {
 					alignment = row.getAlignment();
 					cRegFilter = row.getContextRegisterFilter();
 					break;

@@ -60,23 +60,23 @@ public class DbgInsertBreakpointCommand extends AbstractDbgCommand<DbgBreakpoint
 	public void invoke() {
 		DebugControl control = manager.getControl();
 		BreakType bt = BreakType.DATA;
-		if (type.equals(DbgBreakpointType.BREAKPOINT)) {
+		if (type == DbgBreakpointType.BREAKPOINT) {
 			bt = BreakType.CODE;
 		}
 		// 2 for BU, 1 for BP
 		DebugBreakpoint bp = control.addBreakpoint/*2*/(bt);
-		if (bt.equals(BreakType.DATA)) {
+		if (bt == BreakType.DATA) {
 			BitmaskSet<BreakAccess> access = BitmaskSet.of(BreakAccess.EXECUTE);
-			if (type.equals(DbgBreakpointType.ACCESS_WATCHPOINT)) {
+			if (type == DbgBreakpointType.ACCESS_WATCHPOINT) {
 				access = BitmaskSet.of(BreakAccess.READ, BreakAccess.WRITE);
 			}
-			if (type.equals(DbgBreakpointType.READ_WATCHPOINT)) {
+			if (type == DbgBreakpointType.READ_WATCHPOINT) {
 				access = BitmaskSet.of(BreakAccess.READ);
 			}
-			if (type.equals(DbgBreakpointType.HW_WATCHPOINT)) {
+			if (type == DbgBreakpointType.HW_WATCHPOINT) {
 				access = BitmaskSet.of(BreakAccess.WRITE);
 			}
-			if (type.equals(DbgBreakpointType.HW_BREAKPOINT)) {
+			if (type == DbgBreakpointType.HW_BREAKPOINT) {
 				access = BitmaskSet.of(BreakAccess.EXECUTE);
 				len = 1;
 			}
