@@ -586,14 +586,13 @@ public class FunctionEditorModel {
 			}
 			autoParamCount = 0;
 			int paramCnt = parameters.size();
-			for (int i = 0; i < paramCnt; i++) {
-				ParamInfo paramInfo = parameters.get(i);
-				DataType dt = paramInfo.getDataType();
-				VariableStorage storage = paramInfo.getStorage();
-				signatureTransformed |= storage.isAutoStorage();
-				paramInfo.setFormalDataType(dt);
-				paramInfo.setStorage(storage.clone(program));
-			}
+            for (ParamInfo paramInfo : parameters) {
+                DataType dt = paramInfo.getDataType();
+                VariableStorage storage = paramInfo.getStorage();
+                signatureTransformed |= storage.isAutoStorage();
+                paramInfo.setFormalDataType(dt);
+                paramInfo.setStorage(storage.clone(program));
+            }
 		}
 		catch (InvalidInputException e) {
 			throw new AssertException(e); // unexpected

@@ -47,9 +47,9 @@ public class ObjectStorageAdapterDB implements ObjectStorage {
 	public ObjectStorageAdapterDB(DBRecord rec) {
 		readOnly = true;
 		Field[] fields = rec.getFields();
-		for (int i = 0; i < fields.length; i++) {
-			fieldList.add(fields[i]);
-		}
+        for (Field field : fields) {
+            fieldList.add(field);
+        }
 	}
 
 	@Override

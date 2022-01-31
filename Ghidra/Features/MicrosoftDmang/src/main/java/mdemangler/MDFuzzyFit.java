@@ -84,48 +84,45 @@ public class MDFuzzyFit {
 		outputBuilder.append(mangledArg);
 		while (--offset >= 0) {
 			substring = mangledArg.substring(offset);
-			Iterator<Class<? extends MDParsableItem>> classIter = classList.iterator();
-			while (classIter.hasNext()) {
-				Class<? extends MDParsableItem> tryClass = classIter.next();
-				boolean pass = true;
-				try {
-					dmang.setMangledSymbol(substring);
-					dmang.pushContext();
-					numCharsRemaining = substring.length();
-					MDParsableItem tryItem = createItem(tryClass, dmang);
-					tryItem.parse();
-					numCharsRemaining = dmang.getNumCharsRemaining();
-					dmang.popContext();
-					StringBuilder builder = new StringBuilder();
-					tryItem.insert(builder);
-					String substringDemangled = builder.toString();
-					if (numCharsRemaining == 0) {
-						// System.out.println("Offset: " + offset + ";
-						// Class: " +
-						// tryClass.getSimpleName() + "; Output:" +
-						// substringDemangled);
-						outputBuilder.append("Offset: ");
-						outputBuilder.append(offset);
-						outputBuilder.append("; Class: ");
-						outputBuilder.append(tryClass.getSimpleName());
-						outputBuilder.append("; Output:");
-						outputBuilder.append(substringDemangled);
-					}
-				}
-				catch (MDException e) {
-					// errorMessage = e.getMessage();
-					pass = false;
-				}
-				// errorMessage = "";
-				// System.out.println("Offset: " + offset + "; Class: " +
-				// tryClass.getSimpleName() + "; GoodResult: " + pass);
-				outputBuilder.append("Offset: ");
-				outputBuilder.append(offset);
-				outputBuilder.append("; Class: ");
-				outputBuilder.append(tryClass.getSimpleName());
-				outputBuilder.append("; GoodResult: ");
-				outputBuilder.append(pass);
-			}
+            for (Class<? extends MDParsableItem> tryClass : classList) {
+                boolean pass = true;
+                try {
+                    dmang.setMangledSymbol(substring);
+                    dmang.pushContext();
+                    numCharsRemaining = substring.length();
+                    MDParsableItem tryItem = createItem(tryClass, dmang);
+                    tryItem.parse();
+                    numCharsRemaining = dmang.getNumCharsRemaining();
+                    dmang.popContext();
+                    StringBuilder builder = new StringBuilder();
+                    tryItem.insert(builder);
+                    String substringDemangled = builder.toString();
+                    if (numCharsRemaining == 0) {
+                        // System.out.println("Offset: " + offset + ";
+                        // Class: " +
+                        // tryClass.getSimpleName() + "; Output:" +
+                        // substringDemangled);
+                        outputBuilder.append("Offset: ");
+                        outputBuilder.append(offset);
+                        outputBuilder.append("; Class: ");
+                        outputBuilder.append(tryClass.getSimpleName());
+                        outputBuilder.append("; Output:");
+                        outputBuilder.append(substringDemangled);
+                    }
+                } catch (MDException e) {
+                    // errorMessage = e.getMessage();
+                    pass = false;
+                }
+                // errorMessage = "";
+                // System.out.println("Offset: " + offset + "; Class: " +
+                // tryClass.getSimpleName() + "; GoodResult: " + pass);
+                outputBuilder.append("Offset: ");
+                outputBuilder.append(offset);
+                outputBuilder.append("; Class: ");
+                outputBuilder.append(tryClass.getSimpleName());
+                outputBuilder.append("; GoodResult: ");
+                outputBuilder.append(pass);
+            }
 		}
 		Msg.info(this, outputBuilder);
 		return true;

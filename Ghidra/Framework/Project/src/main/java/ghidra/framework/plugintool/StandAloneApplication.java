@@ -226,28 +226,16 @@ public abstract class StandAloneApplication implements GenericStandAloneApplicat
 			return null;
 		}
 
-		FileInputStream fileInputStream = null;
-		try {
-			fileInputStream = new FileInputStream(savedToolFile.getAbsolutePath());
-			SAXBuilder sax = XmlUtilities.createSecureSAXBuilder(false, false);
+        try (FileInputStream fileInputStream = new FileInputStream(savedToolFile.getAbsolutePath())) {
+            SAXBuilder sax = XmlUtilities.createSecureSAXBuilder(false, false);
             return sax.build(fileInputStream).getRootElement();
-		}
-		catch (Exception e) {
-			Msg.showError(getClass(), null, "Error Reading Tool",
-				"Could not read tool: " + savedToolFile, e);
-		}
-		finally {
-			if (fileInputStream != null) {
-				try {
-					fileInputStream.close();
-				}
-				catch (IOException e) {
-					// we tried
-				}
-			}
-		}
+        } catch (Exception e) {
+            Msg.showError(getClass(), null, "Error Reading Tool",
+                    "Could not read tool: " + savedToolFile, e);
+        }
+        // we tried
 
-		return null;
+        return null;
 	}
 
 	@Override

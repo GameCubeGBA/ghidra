@@ -248,10 +248,27 @@ public class MultiInstructionMemReference extends GhidraScript {
 					AddressSpace space = instr.getMinAddress().getAddressSpace();
 					Address addr = space.getTruncatedAddress(offset, true);
 
-					// assume that they want the reference, don't worry it isn't in memory
-					makeReference(instr, opIndex, addr);
-					return true;
-				}
+                    // check that the register is on the correct input/output list
+                    if (!list.contains(reg)) {
+                        continue;
+                    }
+                    RegisterValue rval = context.getRegisterValue(reg);
+                    if (rval == null) {
+                        continue;
+                    }
+                    BigInteger uval = rval.getUnsignedValue();
+                    if (uval == null) {
+                        continue;
+                    }
+                    long offset = uval.longValue();
+
+                    AddressSpace space = instr.getMinAddress().getAddressSpace();
+                    Address addr = space.getTruncatedAddress(offset, true);
+
+                    // assume that they want the reference, don't worry it isn't in memory
+                    makeReference(instr, opIndex, addr);
+                    return true;
+                }
 				return false;
 			}
 

@@ -204,14 +204,12 @@ public class PythonCodeCompletionFactory {
 			}
 
 			comp = new GDLabel(description);
-			Iterator<Class<?>> iter = classes.iterator();
-			while (iter.hasNext()) {
-				Class<?> testClass = iter.next();
-				if (testClass.isInstance(pyObj)) {
-					comp.setForeground(classToColorMap.get(testClass));
-					break;
-				}
-			}
+            for (Class<?> testClass : classes) {
+                if (testClass.isInstance(pyObj)) {
+                    comp.setForeground(classToColorMap.get(testClass));
+                    break;
+                }
+            }
 		}
 		return new CodeCompletion(description, insertion, comp);
 	}
@@ -226,17 +224,16 @@ public class PythonCodeCompletionFactory {
 		options.registerOption(INCLUDE_TYPES_LABEL, INCLUDE_TYPES_DEFAULT, null,
 			INCLUDE_TYPES_DESCRIPTION);
 
-		Iterator<?> iter = classes.iterator();
-		while (iter.hasNext()) {
-			Class<?> currentClass = (Class<?>) iter.next();
-			options.registerOption(
-				COMPLETION_LABEL + Options.DELIMITER + getSimpleName(currentClass),
-				classToColorMap.get(currentClass), null,
-				"Color to use for " + classDescription.get(currentClass) + ".");
-			classToColorMap.put(currentClass,
-				options.getColor(COMPLETION_LABEL + Options.DELIMITER + getSimpleName(currentClass),
-					classToColorMap.get(currentClass)));
-		}
+        for (Class<?> aClass : classes) {
+            Class<?> currentClass = (Class<?>) aClass;
+            options.registerOption(
+                    COMPLETION_LABEL + Options.DELIMITER + getSimpleName(currentClass),
+                    classToColorMap.get(currentClass), null,
+                    "Color to use for " + classDescription.get(currentClass) + ".");
+            classToColorMap.put(currentClass,
+                    options.getColor(COMPLETION_LABEL + Options.DELIMITER + getSimpleName(currentClass),
+                            classToColorMap.get(currentClass)));
+        }
 	}
 
 	/**

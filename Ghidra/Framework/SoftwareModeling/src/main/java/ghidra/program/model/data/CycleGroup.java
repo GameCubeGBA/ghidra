@@ -162,12 +162,11 @@ public class CycleGroup {
 	 * data types in the list.
 	 */
 	private boolean exists(DataType dt) {
-		for (int i = 0; i < dataList.size(); i++) {
-			DataType d = dataList.get(i);
-			if (dt.isEquivalent(d)) {
-				return true;
-			}
-		}
+        for (DataType d : dataList) {
+            if (dt.isEquivalent(d)) {
+                return true;
+            }
+        }
 		return false;
 	}
 

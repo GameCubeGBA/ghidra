@@ -49,11 +49,9 @@ public class AddressRecordDeleter {
 			throws IOException {
 		List<KeyRange> keyRangeList = addrMap.getKeyRanges(start, end, false);
 		boolean success = false;
-		Iterator<KeyRange> it = keyRangeList.iterator();
-		while (it.hasNext()) {
-			KeyRange kr = it.next();
-			success |= table.deleteRecords(kr.minKey, kr.maxKey);
-		}
+        for (KeyRange kr : keyRangeList) {
+            success |= table.deleteRecords(kr.minKey, kr.maxKey);
+        }
 		return success;
 	}
 

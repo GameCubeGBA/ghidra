@@ -507,72 +507,70 @@ public class GccRttiAnalysisScript extends GhidraScript {
 		StructureDataType baseClassTypeInfoStructure =
 			createBaseClassTypeInfoStructure(classTypeInfoStructure);
 
-		Iterator<Symbol> typeinfoIterator = typeinfoSymbols.iterator();
-		while (typeinfoIterator.hasNext()) {
+        for (Symbol symbol : typeinfoSymbols) {
 
-			monitor.checkCanceled();
+            monitor.checkCanceled();
 
-			Symbol typeinfoSymbol = typeinfoIterator.next();
-			Address typeinfoAddress = typeinfoSymbol.getAddress();
+            Symbol typeinfoSymbol = symbol;
+            Address typeinfoAddress = typeinfoSymbol.getAddress();
 
-			// skip the typeinfo symbols from the three special typeinfos 
-			if (isSpecialTypeinfo(typeinfoAddress)) {
-				continue;
-			}
+            // skip the typeinfo symbols from the three special typeinfos
+            if (isSpecialTypeinfo(typeinfoAddress)) {
+                continue;
+            }
 
-			Address specialTypeinfoRef = getSingleReferencedAddress(typeinfoAddress);
-			if (specialTypeinfoRef == null) {
-				println("No special typeinfo reference found. Cannot process typeinfo struct at " +
-					typeinfoAddress.toString());
-				continue;
-			}
+            Address specialTypeinfoRef = getSingleReferencedAddress(typeinfoAddress);
+            if (specialTypeinfoRef == null) {
+                println("No special typeinfo reference found. Cannot process typeinfo struct at " +
+                        typeinfoAddress.toString());
+                continue;
+            }
 
-			if (!isSpecialTypeinfo(specialTypeinfoRef)) {
-				continue;
-			}
+            if (!isSpecialTypeinfo(specialTypeinfoRef)) {
+                continue;
+            }
 
-			try {
-				// create a "no inheritance" struct here
-				if (specialTypeinfoRef.equals(class_type_info)) {
-					clearListing(typeinfoAddress,
-						typeinfoAddress.add(classTypeInfoStructure.getLength()));
-					createData(typeinfoAddress, classTypeInfoStructure);
-					continue;
-				}
+            try {
+                // create a "no inheritance" struct here
+                if (specialTypeinfoRef.equals(class_type_info)) {
+                    clearListing(typeinfoAddress,
+                            typeinfoAddress.add(classTypeInfoStructure.getLength()));
+                    createData(typeinfoAddress, classTypeInfoStructure);
+                    continue;
+                }
 
-				// create a "single inheritance" struct here
-				if (specialTypeinfoRef.equals(si_class_type_info)) {
-					clearListing(typeinfoAddress,
-						typeinfoAddress.add(siClassTypeInfoStructure.getLength() - 1));
-					createData(typeinfoAddress, siClassTypeInfoStructure);
-					continue;
-				}
+                // create a "single inheritance" struct here
+                if (specialTypeinfoRef.equals(si_class_type_info)) {
+                    clearListing(typeinfoAddress,
+                            typeinfoAddress.add(siClassTypeInfoStructure.getLength() - 1));
+                    createData(typeinfoAddress, siClassTypeInfoStructure);
+                    continue;
+                }
 
-				// create a "virtual multip inheritance" struct here
-				if (specialTypeinfoRef.equals(vmi_class_type_info)) {
+                // create a "virtual multip inheritance" struct here
+                if (specialTypeinfoRef.equals(vmi_class_type_info)) {
 
-					// get num base classes
-					int offsetOfNumBases = 2 * defaultPointerSize + 4;
-					int numBases = getInt(typeinfoAddress.add(offsetOfNumBases));
+                    // get num base classes
+                    int offsetOfNumBases = 2 * defaultPointerSize + 4;
+                    int numBases = getInt(typeinfoAddress.add(offsetOfNumBases));
 
-					// get or create the vmiClassTypeInfoStruct
-					Structure vmiClassTypeinfoStructure =
-						(Structure) dataTypeManager.getDataType(classDataTypesCategoryPath,
-							"VmiClassTypeInfoStructure" + numBases);
-					if (vmiClassTypeinfoStructure == null) {
-						vmiClassTypeinfoStructure =
-							createVmiClassTypeInfoStructure(baseClassTypeInfoStructure, numBases);
-					}
-					clearListing(typeinfoAddress,
-						typeinfoAddress.add(vmiClassTypeinfoStructure.getLength() - 1));
-					createData(typeinfoAddress, vmiClassTypeinfoStructure);
+                    // get or create the vmiClassTypeInfoStruct
+                    Structure vmiClassTypeinfoStructure =
+                            (Structure) dataTypeManager.getDataType(classDataTypesCategoryPath,
+                                    "VmiClassTypeInfoStructure" + numBases);
+                    if (vmiClassTypeinfoStructure == null) {
+                        vmiClassTypeinfoStructure =
+                                createVmiClassTypeInfoStructure(baseClassTypeInfoStructure, numBases);
+                    }
+                    clearListing(typeinfoAddress,
+                            typeinfoAddress.add(vmiClassTypeinfoStructure.getLength() - 1));
+                    createData(typeinfoAddress, vmiClassTypeinfoStructure);
 
-				}
-			}
-			catch (Exception e) {
-				println("ERROR: Could not apply structure to " + typeinfoAddress);
-			}
-		}
+                }
+            } catch (Exception e) {
+                println("ERROR: Could not apply structure to " + typeinfoAddress);
+            }
+        }
 
 	}
 
@@ -684,18 +682,17 @@ public class GccRttiAnalysisScript extends GhidraScript {
 		List<Symbol> listOfVtableSymbols = getListOfSymbolsInAddressSet(
 			currentProgram.getAddressFactory().getAddressSet(), VTABLE_LABEL, false);
 
-		Iterator<Symbol> vtableIterator = listOfVtableSymbols.iterator();
-		while (vtableIterator.hasNext()) {
+        for (Symbol listOfVtableSymbol : listOfVtableSymbols) {
 
-			monitor.checkCanceled();
+            monitor.checkCanceled();
 
-			Symbol vtableSymbol = vtableIterator.next();
-			Namespace vtableNamespace = vtableSymbol.getParentNamespace();
-			Address vtableAddress = vtableSymbol.getAddress();
+            Symbol vtableSymbol = listOfVtableSymbol;
+            Namespace vtableNamespace = vtableSymbol.getParentNamespace();
+            Address vtableAddress = vtableSymbol.getAddress();
 
-			processVtable(vtableAddress, vtableNamespace, true);
+            processVtable(vtableAddress, vtableNamespace, true);
 
-		}
+        }
 		return;
 	}
 

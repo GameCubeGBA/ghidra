@@ -272,12 +272,11 @@ class UserDefinedPropertyMerger extends AbstractListingMerger {
 	 */
 	public int getConflictCount(Address addr) {
 		int count = 0;
-		for (int i = 0; i < conflictSets.length; i++) {
-			AddressSet addrSet = conflictSets[i];
-			if (addrSet.contains(addr)) {
-				count++;
-			}
-		}
+        for (AddressSet addrSet : conflictSets) {
+            if (addrSet.contains(addr)) {
+                count++;
+            }
+        }
 		return count;
 	}
 

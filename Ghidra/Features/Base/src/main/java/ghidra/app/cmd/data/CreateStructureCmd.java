@@ -131,8 +131,8 @@ public class CreateStructureCmd extends AbstractCreateStructureCmd{
         while(it.hasNext()) {
             Address addr = it.next();
             Reference[] refs = refMgr.getReferencesFrom(addr);
-            for(int i=0;i<refs.length;i++) {
-                list.add(refs[i]);
+            for (Reference ref : refs) {
+                list.add(ref);
             }
         }
         Reference[] refList = new Reference[list.size()];
@@ -140,8 +140,8 @@ public class CreateStructureCmd extends AbstractCreateStructureCmd{
     }
     
     private void addRefs(Program p, ReferenceManager refMgr, Reference[] refs) {
-        for(int i=0;i<refs.length;i++) {
-            refMgr.addReference(refs[i]);
+        for (Reference ref : refs) {
+            refMgr.addReference(ref);
         }
     }
 }

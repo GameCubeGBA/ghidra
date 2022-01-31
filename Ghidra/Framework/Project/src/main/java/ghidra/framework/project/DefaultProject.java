@@ -364,13 +364,11 @@ public class DefaultProject implements Project {
 
 	@Override
 	public void close() {
-		Iterator<ProjectFileManager> iter = otherViews.values().iterator();
-		while (iter.hasNext()) {
-			ProjectFileManager dataMgr = iter.next();
-			if (dataMgr != null) {
-				dataMgr.dispose();
-			}
-		}
+        for (ProjectFileManager dataMgr : otherViews.values()) {
+            if (dataMgr != null) {
+                dataMgr.dispose();
+            }
+        }
 		otherViews.clear();
 
 		try {
@@ -592,12 +590,11 @@ public class DefaultProject implements Project {
 		}
 		List<DomainFile> list = new ArrayList<>();
 		TransientDataManager.getTransients(list);
-		for (int i = 0; i < list.size(); i++) {
-			DomainFile df = list.get(i);
-			if (df != null && df.isOpen()) {
-				openFiles.add(df);
-			}
-		}
+        for (DomainFile df : list) {
+            if (df != null && df.isOpen()) {
+                openFiles.add(df);
+            }
+        }
 		return openFiles;
 	}
 
@@ -648,11 +645,9 @@ public class DefaultProject implements Project {
 	@Override
 	public void releaseFiles(Object consumer) {
 		fileMgr.releaseDomainFiles(consumer);
-		Iterator<ProjectFileManager> it = otherViews.values().iterator();
-		while (it.hasNext()) {
-			ProjectFileManager mgr = it.next();
-			mgr.releaseDomainFiles(consumer);
-		}
+        for (ProjectFileManager mgr : otherViews.values()) {
+            mgr.releaseDomainFiles(consumer);
+        }
 		TransientDataManager.releaseFiles(consumer);
 	}
 }

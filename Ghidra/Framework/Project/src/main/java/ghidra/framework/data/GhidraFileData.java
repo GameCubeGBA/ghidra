@@ -745,14 +745,10 @@ public class GhidraFileData {
 				}
 				else if (folderItem instanceof DataFileItem) {
 					DataFileItem dataFileItem = (DataFileItem) folderItem;
-					InputStream istream = dataFileItem.getInputStream();
-					try {
-						versionedFolderItem = versionedFileSystem.createDataFile(parentPath, name,
-							istream, comment, folderItem.getContentType(), monitor);
-					}
-					finally {
-						istream.close();
-					}
+                    try (InputStream istream = dataFileItem.getInputStream()) {
+                        versionedFolderItem = versionedFileSystem.createDataFile(parentPath, name,
+                                istream, comment, folderItem.getContentType(), monitor);
+                    }
 				}
 				else {
 					throw new AssertException("Unknown folder item type");
@@ -877,14 +873,10 @@ public class GhidraFileData {
 				}
 				else if (versionedFolderItem instanceof DataFileItem) {
 					DataFileItem dataFileItem = (DataFileItem) versionedFolderItem;
-					InputStream istream = dataFileItem.getInputStream(checkoutVersion);
-					try {
-						folderItem = fileSystem.createDataFile(parentPath, name, istream, null,
-							dataFileItem.getContentType(), monitor);
-					}
-					finally {
-						istream.close();
-					}
+                    try (InputStream istream = dataFileItem.getInputStream(checkoutVersion)) {
+                        folderItem = fileSystem.createDataFile(parentPath, name, istream, null,
+                                dataFileItem.getContentType(), monitor);
+                    }
 				}
 				else {
 					throw new AssertException("Can't checkout - unknown file type");
@@ -1620,14 +1612,10 @@ public class GhidraFileData {
 					}
 				}
 				else if (item instanceof DataFileItem) {
-					InputStream istream = ((DataFileItem) item).getInputStream();
-					try {
-						newParentData.getLocalFileSystem().createDataFile(pathname, targetName,
-							istream, null, contentType, monitor);
-					}
-					finally {
-						istream.close();
-					}
+                    try (InputStream istream = ((DataFileItem) item).getInputStream()) {
+                        newParentData.getLocalFileSystem().createDataFile(pathname, targetName,
+                                istream, null, contentType, monitor);
+                    }
 				}
 				else {
 					throw new AssertException("Unknown Item in copyTo");

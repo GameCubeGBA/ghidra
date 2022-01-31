@@ -255,12 +255,11 @@ public class SymbolTableAddRemoveStrategy implements TableAddRemoveStrategy<Symb
 		// Copy to a new list those items that are not marked for removal.  This saves the 
 		// list move its items every time a remove takes place
 		List<Symbol> newList = new ArrayList<>(data.size() - toRemove.size());
-		for (int i = 0; i < data.size(); i++) {
-			Symbol rowObject = data.get(i);
-			if (!toRemove.contains(rowObject)) {
-				newList.add(rowObject);
-			}
-		}
+        for (Symbol rowObject : data) {
+            if (!toRemove.contains(rowObject)) {
+                newList.add(rowObject);
+            }
+        }
 
 		return newList;
 	}

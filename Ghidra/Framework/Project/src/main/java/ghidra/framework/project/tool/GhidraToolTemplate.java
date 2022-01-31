@@ -145,19 +145,17 @@ public class GhidraToolTemplate implements ToolTemplate {
 	public void restoreFromXml(Element root) {
 		java.util.List<?> list = root.getChildren("SUPPORTED_DATA_TYPE");
 		java.util.List<Class<?>> dtList = new ArrayList<>();
-		for (int i = 0; i < list.size(); ++i) {
-			Element elem = (Element) list.get(i);
-			String className = elem.getAttribute(CLASS_NAME_XML_NAME).getValue();
-			try {
-				dtList.add(Class.forName(className));
-			}
-			catch (ClassNotFoundException e) {
-				Msg.error(this, "Class not found: " + className, e);
-			}
-			catch (Exception exc) {//TODO
-				Msg.error(this, "Unexpected Exception: " + exc.getMessage(), exc);
-			}
-		}
+        for (Object o : list) {
+            Element elem = (Element) o;
+            String className = elem.getAttribute(CLASS_NAME_XML_NAME).getValue();
+            try {
+                dtList.add(Class.forName(className));
+            } catch (ClassNotFoundException e) {
+                Msg.error(this, "Class not found: " + className, e);
+            } catch (Exception exc) {//TODO
+                Msg.error(this, "Unexpected Exception: " + exc.getMessage(), exc);
+            }
+        }
 		supportedDataTypes = new Class<?>[dtList.size()];
 		dtList.toArray(supportedDataTypes);
 

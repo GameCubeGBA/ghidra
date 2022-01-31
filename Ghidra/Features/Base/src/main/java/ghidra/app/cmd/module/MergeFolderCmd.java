@@ -66,40 +66,39 @@ public class MergeFolderCmd implements Command {
 		}
 		Group[] groups = module.getChildren();
 
-		for (int i = 0; i < groups.length; i++) {
+        for (Group group : groups) {
 
-			// first check to make sure that the parent module
-			// does not alreay contain tree group
+            // first check to make sure that the parent module
+            // does not alreay contain tree group
 
-			String name = groups[i].getName();
-			ProgramModule m = listing.getModule(treeName, name);
-			ProgramFragment f = null;
-			try {
-				if (m != null && parentModule.contains(m)) {
-					module.removeChild(name);
-					continue;
-				}
-				if (m == null) {
-					f = listing.getFragment(treeName, name);
-					if (parentModule.contains(f)) {
-						module.removeChild(name);
-						continue;
-					}
-				}
+            String name = group.getName();
+            ProgramModule m = listing.getModule(treeName, name);
+            ProgramFragment f = null;
+            try {
+                if (m != null && parentModule.contains(m)) {
+                    module.removeChild(name);
+                    continue;
+                }
+                if (m == null) {
+                    f = listing.getFragment(treeName, name);
+                    if (parentModule.contains(f)) {
+                        module.removeChild(name);
+                        continue;
+                    }
+                }
 
-				parentModule.reparent(name, module);
-			}
-			catch (NotEmptyException | NotFoundException e) {
-				Msg.showError(this, null, "Error", "Error merging folder with its parent");
-			}
+                parentModule.reparent(name, module);
+            } catch (NotEmptyException | NotFoundException e) {
+                Msg.showError(this, null, "Error", "Error merging folder with its parent");
+            }
         }
 		// now remove the module from its parent...
 		try {
 			ProgramModule m = listing.getModule(treeName, folderName);
 			ProgramModule[] parents = m.getParents();
-			for (int i = 0; i < parents.length; i++) {
-				parents[i].removeChild(folderName);
-			}
+            for (ProgramModule parent : parents) {
+                parent.removeChild(folderName);
+            }
 			return true;
 		}
 		catch (NotEmptyException e) {

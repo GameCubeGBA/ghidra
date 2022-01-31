@@ -47,9 +47,9 @@ public class MultipleOptionsDialog<T> extends DialogComponentProvider {
 
 		stringChoices = new ArrayList<>();
 
-		for (int i = 0; i < choices.size(); i++) {
-			stringChoices.add(choices.get(i).toString());
-		}
+        for (T choice : choices) {
+            stringChoices.add(choice.toString());
+        }
 
 		actualChoices = choices;
 		includeSelectAll = includeSelectAllBox;

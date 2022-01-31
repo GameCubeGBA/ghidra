@@ -279,19 +279,17 @@ public class DockingWindowsLookAndFeelUtils {
 		UIDefaults defaults = UIManager.getDefaults();
 
 		Set<Entry<Object, Object>> set = defaults.entrySet();
-		Iterator<Entry<Object, Object>> iterator = set.iterator();
-		while (iterator.hasNext()) {
-			Entry<Object, Object> entry = iterator.next();
-			Object key = entry.getKey();
+        for (Entry<Object, Object> entry : set) {
+            Object key = entry.getKey();
 
-			if (key.toString().toLowerCase().indexOf("font") != -1) {
-				Font currentFont = defaults.getFont(key);
-				if (currentFont != null) {
-					Font newFont = currentFont.deriveFont((float) fontSize);
-					UIManager.put(key, newFont);
-				}
-			}
-		}
+            if (key.toString().toLowerCase().indexOf("font") != -1) {
+                Font currentFont = defaults.getFont(key);
+                if (currentFont != null) {
+                    Font newFont = currentFont.deriveFont((float) fontSize);
+                    UIManager.put(key, newFont);
+                }
+            }
+        }
 	}
 
 	/**

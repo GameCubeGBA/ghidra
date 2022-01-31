@@ -396,10 +396,8 @@ public class ParamEntry {
 		groupsize = 1;				// default
 
 		XmlElement el = parser.start("pentry");
-		Iterator<Entry<String, String>> iter = el.getAttributes().entrySet().iterator();
-		while (iter.hasNext()) {
-			Entry<String, String> entry = iter.next();
-			String name = entry.getKey();
+        for (Entry<String, String> entry : el.getAttributes().entrySet()) {
+            String name = entry.getKey();
             switch (name) {
                 case "minsize":
                     minsize = SpecXmlUtils.decodeInt(entry.getValue());
@@ -442,7 +440,7 @@ public class ParamEntry {
                 default:
                     throw new XmlParseException("Unknown paramentry attribute: " + name);
             }
-		}
+        }
 		if (minsize < 1 || size < minsize) {
 			throw new XmlParseException(
 				"paramentry size not specified properly: minsize=" + minsize + " maxsize=" + size);

@@ -206,14 +206,12 @@ public class KeyEntryDialog extends DialogComponentProvider {
 		String ksName = KeyBindingUtils.parseKeyStroke(ks);
 		try {
 			doc.insertString(0, "Actions mapped to " + ksName + "\n\n", textAttrSet);
-			for (int i = 0; i < list.size(); i++) {
-				DockingActionIf a = list.get(i);
-
-				String collisionStr = "\t" + a.getName() + " (" + a.getOwnerDescription() + ")\n";
-				int offset = doc.getLength();
-				doc.insertString(offset, collisionStr, textAttrSet);
-				doc.setParagraphAttributes(offset, 1, tabAttrSet, false);
-			}
+            for (DockingActionIf a : list) {
+                String collisionStr = "\t" + a.getName() + " (" + a.getOwnerDescription() + ")\n";
+                int offset = doc.getLength();
+                doc.insertString(offset, collisionStr, textAttrSet);
+                doc.setParagraphAttributes(offset, 1, tabAttrSet, false);
+            }
 			collisionPane.setCaretPosition(0);
 		}
 		catch (BadLocationException e) {

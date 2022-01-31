@@ -112,25 +112,20 @@ public class DwarfLineNumberAnalyzer extends AbstractAnalyzer {
 			if (!dSymFile.exists()) {
 				return null;
 			}
-			RandomAccessByteProvider provider = new RandomAccessByteProvider(dSymFile);
-			try {
-				MachHeader header =
-					MachHeader.createMachHeader(RethrowContinuesFactory.INSTANCE, provider);
-				header.parse();
-				List<Section> allSections = header.getAllSections();
-				for (Section section : allSections) {
-					if (section.getSectionName().equals(sectionNames.SECTION_NAME_LINE())) {
-						return new InputStreamByteProvider(section.getDataStream(header),
-							section.getSize());
-					}
-				}
-				return null;
-			}
-			catch (MachException e) {
-			}
-			finally {
-				provider.close();
-			}
+            try (RandomAccessByteProvider provider = new RandomAccessByteProvider(dSymFile)) {
+                MachHeader header =
+                        MachHeader.createMachHeader(RethrowContinuesFactory.INSTANCE, provider);
+                header.parse();
+                List<Section> allSections = header.getAllSections();
+                for (Section section : allSections) {
+                    if (section.getSectionName().equals(sectionNames.SECTION_NAME_LINE())) {
+                        return new InputStreamByteProvider(section.getDataStream(header),
+                                section.getSize());
+                    }
+                }
+                return null;
+            } catch (MachException e) {
+            }
 			return null;//no line number section existed!
 		}
 		else if (ElfLoader.ELF_NAME.equals(program.getExecutableFormat())) {

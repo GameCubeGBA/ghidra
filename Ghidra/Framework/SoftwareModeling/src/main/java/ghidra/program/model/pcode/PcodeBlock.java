@@ -365,9 +365,9 @@ public class PcodeBlock {
 
 	public void saveXmlEdges(Writer writer) throws IOException {
 		StringBuilder buf = new StringBuilder();
-		for (int i = 0; i < intothis.size(); ++i) {
-			intothis.get(i).saveXml(buf);
-		}
+        for (BlockEdge intothi : intothis) {
+            intothi.saveXml(buf);
+        }
 		writer.write(buf.toString());
 	}
 

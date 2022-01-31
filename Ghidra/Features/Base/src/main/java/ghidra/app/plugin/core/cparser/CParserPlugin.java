@@ -295,16 +295,16 @@ public class CParserPlugin extends ProgramPlugin {
 
 			ArrayList<DataTypeManager> list = new ArrayList<>();
 			String htmlNamesList = "";
-			for (int i = 0; i < openDTmanagers.length; i++) {
-				if (openDTmanagers[i] instanceof ProgramDataTypeManager) {
-					continue;
-				}
-				list.add(openDTmanagers[i]);
-				if (!(openDTmanagers[i] instanceof BuiltInDataTypeManager)) {
-					htmlNamesList += "<li><b>" +
-						HTMLUtilities.escapeHTML(openDTmanagers[i].getName()) + "</b></li>";
-				}
-			}
+            for (DataTypeManager openDTmanager : openDTmanagers) {
+                if (openDTmanager instanceof ProgramDataTypeManager) {
+                    continue;
+                }
+                list.add(openDTmanager);
+                if (!(openDTmanager instanceof BuiltInDataTypeManager)) {
+                    htmlNamesList += "<li><b>" +
+                            HTMLUtilities.escapeHTML(openDTmanager.getName()) + "</b></li>";
+                }
+            }
 			openDTmanagers = list.toArray(new DataTypeManager[0]);
 
 			if (openDTmanagers.length > 1 && OptionDialog.showOptionDialog(

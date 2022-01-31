@@ -53,10 +53,10 @@ public class BlockPanel extends JPanel implements ComponentListener {
 			return;
 		}
 
-		for (int i = 0; i < blocks.length; i++) {
-			Rectangle rect = map.getBlockPosition(blocks[i]);
-			g.drawLine(rect.x, 0, rect.x, height - 1);
-		}
+        for (MemoryBlock block : blocks) {
+            Rectangle rect = map.getBlockPosition(block);
+            g.drawLine(rect.x, 0, rect.x, height - 1);
+        }
 		g.drawLine(getWidth() - 1, 0, getWidth() - 1, height - 1);
 
 		g.drawLine(0, height - 1, getWidth() - 1, height - 1);

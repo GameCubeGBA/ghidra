@@ -81,11 +81,9 @@ class BookmarkTableModel extends AddressBasedTableModel<BookmarkRowObject> {
 			return 0;
 		}
 		int cnt = 0;
-		Iterator<String> it = types.iterator();
-		while (it.hasNext()) {
-			String type = it.next();
-			cnt += bookmarkMgr.getBookmarkCount(type);
-		}
+        for (String type : types) {
+            cnt += bookmarkMgr.getBookmarkCount(type);
+        }
 		return cnt;
 	}
 
@@ -264,14 +262,12 @@ class BookmarkTableModel extends AddressBasedTableModel<BookmarkRowObject> {
 		private Iterator<Bookmark> currIter;
 
 		BookmarkKeyIterator(BookmarkManager bookmarkMgr) {
-			Iterator<String> it = types.iterator();
-			while (it.hasNext()) {
-				String type = it.next();
-				Iterator<Bookmark> bkIt = bookmarkMgr.getBookmarksIterator(type);
-				if (bkIt.hasNext()) {
-					iters.add(bkIt);
-				}
-			}
+            for (String type : types) {
+                Iterator<Bookmark> bkIt = bookmarkMgr.getBookmarksIterator(type);
+                if (bkIt.hasNext()) {
+                    iters.add(bkIt);
+                }
+            }
 			if (iters.size() > 0) {
 				currIter = iters.get(0);
 			}

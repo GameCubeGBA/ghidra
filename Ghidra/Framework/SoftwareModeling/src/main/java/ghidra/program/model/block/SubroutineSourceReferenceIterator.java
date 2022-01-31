@@ -160,16 +160,16 @@ public class SubroutineSourceReferenceIterator implements CodeBlockReferenceIter
     		CodeBlock[] srcBlocks = model.getCodeBlocksContaining(srcAddr, monitor);
     		int cnt = srcBlocks.length;
     		if (blockRefQueue != null) {
-    			for (int i = 0; i < cnt; i++) {
-// ?? Non-block references are lost since they don't have a corresponding code block     			
-	        		CodeBlockReference blockRef = new CodeBlockReferenceImpl(
-	        										srcBlocks[i], 
-	        										destBlock, 
-	        										flowType, 
-	        										destAddr, 
-	        										srcAddr);
-					blockRefQueue.add(blockRef);
-	        	}
+                for (CodeBlock srcBlock : srcBlocks) {
+// ?? Non-block references are lost since they don't have a corresponding code block
+                    CodeBlockReference blockRef = new CodeBlockReferenceImpl(
+                            srcBlock,
+                            destBlock,
+                            flowType,
+                            destAddr,
+                            srcAddr);
+                    blockRefQueue.add(blockRef);
+                }
     		}
     		if (cnt != 0) {
     			return cnt;

@@ -88,11 +88,9 @@ public class MenuBarManager implements MenuGroupListener {
 	 *
 	 */
 	public void dispose() {
-		Iterator<MenuManager> it = menuManagers.values().iterator();
-		while (it.hasNext()) {
-			MenuManager mgr = it.next();
-			mgr.dispose();
-		}
+        for (MenuManager mgr : menuManagers.values()) {
+            mgr.dispose();
+        }
 		menuManagers.clear();
 	}
 
@@ -129,14 +127,12 @@ public class MenuBarManager implements MenuGroupListener {
 			menuBar.add(editMenu.getMenu());
 		}
 
-		Iterator<MenuManager> it = menuManagers.values().iterator();
-		while (it.hasNext()) {
-			MenuManager mgr = it.next();
-			if (mgr != fileMenu && mgr != editMenu && mgr != windowMenu && mgr != helpMenu) {
+        for (MenuManager mgr : menuManagers.values()) {
+            if (mgr != fileMenu && mgr != editMenu && mgr != windowMenu && mgr != helpMenu) {
 
-				menuBar.add(mgr.getMenu());
-			}
-		}
+                menuBar.add(mgr.getMenu());
+            }
+        }
 
 		if (windowMenu != null) {
 			menuBar.add(windowMenu.getMenu());

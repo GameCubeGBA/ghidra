@@ -161,13 +161,11 @@ class DataTypeSyncTableModel extends AbstractSortedTableModel<RowData> {
 
 	public List<DataTypeSyncInfo> getSelectedItems() {
 		List<DataTypeSyncInfo> selectedItems = new ArrayList<>();
-		Iterator<RowData> iterator = rowDataList.iterator();
-		while (iterator.hasNext()) {
-			RowData rowData = iterator.next();
-			if (rowData.isSelected()) {
-				selectedItems.add(rowData.syncInfo);
-			}
-		}
+        for (RowData rowData : rowDataList) {
+            if (rowData.isSelected()) {
+                selectedItems.add(rowData.syncInfo);
+            }
+        }
 		return selectedItems;
 	}
 

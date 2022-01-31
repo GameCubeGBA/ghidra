@@ -320,18 +320,10 @@ public class PrivateDatabase extends Database {
 			TaskMonitor monitor) throws IOException, CancelledException {
 		synchronized (syncObject) {
 			File file = bfMgr.getBufferFile(currentVersion);
-			InputStream itemIn = new BufferedInputStream(new FileInputStream(file));
-			try {
-				ItemSerializer.outputItem(name, contentType, filetype, file.length(), itemIn,
-					outputFile, monitor);
-			}
-			finally {
-				try {
-					itemIn.close();
-				}
-				catch (IOException e) {
-				}
-			}
+            try (InputStream itemIn = new BufferedInputStream(new FileInputStream(file))) {
+                ItemSerializer.outputItem(name, contentType, filetype, file.length(), itemIn,
+                        outputFile, monitor);
+            }
 		}
 	}
 

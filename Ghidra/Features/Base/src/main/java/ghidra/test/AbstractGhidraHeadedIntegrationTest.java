@@ -100,13 +100,11 @@ public abstract class AbstractGhidraHeadedIntegrationTest
 
 	public static Plugin getPluginByName(PluginTool tool, String pluginName) {
 		List<Plugin> list = tool.getManagedPlugins();
-		Iterator<Plugin> it = list.iterator();
-		while (it.hasNext()) {
-			Plugin p = it.next();
-			if (pluginName.equals(p.getName())) {
-				return p;
-			}
-		}
+        for (Plugin p : list) {
+            if (pluginName.equals(p.getName())) {
+                return p;
+            }
+        }
 		return null;
 	}
 

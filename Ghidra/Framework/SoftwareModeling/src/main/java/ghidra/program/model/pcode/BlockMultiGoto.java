@@ -49,19 +49,18 @@ public class BlockMultiGoto extends BlockGraph {
 	@Override
 	public void saveXmlBody(Writer writer) throws IOException {
 		super.saveXmlBody(writer);
-		for(int i=0;i<targets.size();++i) {
-			
-			PcodeBlock gototarget = targets.get(i);
-			StringBuilder buf = new StringBuilder();
-			buf.append("<target");
-			PcodeBlock leaf = gototarget.getFrontLeaf();
-			int depth = gototarget.calcDepth(leaf);
-			SpecXmlUtils.encodeSignedIntegerAttribute(buf, "index", leaf.getIndex());
-			SpecXmlUtils.encodeSignedIntegerAttribute(buf, "depth", depth);
+        for (PcodeBlock gototarget : targets) {
+
+            StringBuilder buf = new StringBuilder();
+            buf.append("<target");
+            PcodeBlock leaf = gototarget.getFrontLeaf();
+            int depth = gototarget.calcDepth(leaf);
+            SpecXmlUtils.encodeSignedIntegerAttribute(buf, "index", leaf.getIndex());
+            SpecXmlUtils.encodeSignedIntegerAttribute(buf, "depth", depth);
 //			SpecXmlUtils.encodeSignedIntegerAttribute(buf, "type", 2);		// Always a break
-			buf.append("/>\n");
-			writer.write(buf.toString());
-		}
+            buf.append("/>\n");
+            writer.write(buf.toString());
+        }
 	}
 
 	@Override

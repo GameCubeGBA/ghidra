@@ -605,13 +605,11 @@ public class DataTypePreviewPlugin extends ProgramPlugin {
 		}
 
 		private boolean contains(DataType dt) {
-			Iterator<Preview> iter = data.iterator();
-			while (iter.hasNext()) {
-				Preview p = iter.next();
-				if (p.getDataType().equals(dt) || p.getDataType().isEquivalent(dt)) {
-					return true;
-				}
-			}
+            for (Preview p : data) {
+                if (p.getDataType().equals(dt) || p.getDataType().isEquivalent(dt)) {
+                    return true;
+                }
+            }
 			return false;
 		}
 

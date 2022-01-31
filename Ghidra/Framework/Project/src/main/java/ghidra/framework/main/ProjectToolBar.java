@@ -92,11 +92,9 @@ class ProjectToolBar extends JToolBar implements ToolChestChangeListener {
 
 	private void clear() {
 		this.removeAll();
-		Iterator<ToolButton> it = toolButtonMap.values().iterator();
-		while (it.hasNext()) {
-			ToolButton tb = it.next();
-			tb.dispose();
-		}
+        for (ToolButton tb : toolButtonMap.values()) {
+            tb.dispose();
+        }
 		toolButtonMap.clear();
 
 		if (tool.isVisible()) {

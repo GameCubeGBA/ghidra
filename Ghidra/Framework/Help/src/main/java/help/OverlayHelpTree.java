@@ -132,19 +132,16 @@ public class OverlayHelpTree {
 	void printTreeForID(PrintWriter writer, String sourceFileID) {
 		initializeTree();
 
-		try {
-			writer.println("<?xml version='1.0' encoding='ISO-8859-1' ?>");
-			writer.println("<!-- Auto-generated on " + (new Date()).toString() + " -->");
-			writer.println();
-			writer.println("<toc version=\"2.0\">");
+        try (writer) {
+            writer.println("<?xml version='1.0' encoding='ISO-8859-1' ?>");
+            writer.println("<!-- Auto-generated on " + (new Date()).toString() + " -->");
+            writer.println();
+            writer.println("<toc version=\"2.0\">");
 
-			printContents(sourceFileID, writer);
+            printContents(sourceFileID, writer);
 
-			writer.println("</toc>");
-		}
-		finally {
-			writer.close();
-		}
+            writer.println("</toc>");
+        }
 	}
 
 	private void printContents(String sourceFileID, PrintWriter writer) {

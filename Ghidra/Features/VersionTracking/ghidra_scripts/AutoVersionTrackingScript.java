@@ -80,13 +80,11 @@ public class AutoVersionTrackingScript extends GhidraScript {
 
 	public static <T extends Plugin> T getPlugin(PluginTool tool, Class<T> c) {
 		List<Plugin> list = tool.getManagedPlugins();
-		Iterator<Plugin> it = list.iterator();
-		while (it.hasNext()) {
-			Plugin p = it.next();
-			if (p.getClass() == c) {
-				return c.cast(p);
-			}
-		}
+        for (Plugin p : list) {
+            if (p.getClass() == c) {
+                return c.cast(p);
+            }
+        }
 		return null;
 	}
 

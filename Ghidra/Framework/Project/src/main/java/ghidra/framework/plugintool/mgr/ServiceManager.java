@@ -84,10 +84,9 @@ public class ServiceManager {
 	}
 
 	private void notifyServiceAdded(Class<?> interfaceClass, Object service) {
-		Iterator<?> it = serviceListeners.iterator();
-		while (it.hasNext()) {
-			((ServiceListener) it.next()).serviceAdded(interfaceClass, service);
-		}
+        for (ServiceListener serviceListener : serviceListeners) {
+            serviceListener.serviceAdded(interfaceClass, service);
+        }
 	}
 
 	/**

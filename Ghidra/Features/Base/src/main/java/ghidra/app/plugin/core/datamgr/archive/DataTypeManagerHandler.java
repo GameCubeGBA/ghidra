@@ -1330,11 +1330,10 @@ public class DataTypeManagerHandler {
 			buf.append("the following actions:\n ");
 			Transaction t = undoableDomainObject.getCurrentTransaction();
 			List<String> list = t.getOpenSubTransactions();
-			Iterator<String> it = list.iterator();
-			while (it.hasNext()) {
-				buf.append("\n     ");
-				buf.append(it.next());
-			}
+            for (String s : list) {
+                buf.append("\n     ");
+                buf.append(s);
+            }
 			buf.append("\n \n");
 			buf.append(
 				"WARNING! The above task(s) should be cancelled before attempting a Save.\n");
@@ -1364,11 +1363,10 @@ public class DataTypeManagerHandler {
 				" is currently being modified by the following actions/tasks:\n \n");
 			Transaction t = undoableDomainObject.getCurrentTransaction();
 			List<String> list = t.getOpenSubTransactions();
-			Iterator<String> it = list.iterator();
-			while (it.hasNext()) {
-				buf.append("\n     ");
-				buf.append(it.next());
-			}
+            for (String s : list) {
+                buf.append("\n     ");
+                buf.append(s);
+            }
 			buf.append("\n \n");
 			buf.append(
 				"WARNING! The above task(s) should be cancelled before attempting a Save As...\n");
@@ -1612,19 +1610,17 @@ public class DataTypeManagerHandler {
 				file.getContentType())) {
 				return;
 			}
-			Iterator<Archive> archiveIter = openArchives.iterator();
-			while (archiveIter.hasNext()) {
-				Archive archive = archiveIter.next();
-				if (archive instanceof ProjectArchive) {
-					ProjectArchive projectArchive = (ProjectArchive) archive;
-					DomainFile domainFile = projectArchive.getDomainFile();
-					if (file.equals(domainFile) && !projectArchive.isModifiable() &&
-						file.isCheckedOut()) {
-						replaceArchiveWithFile(projectArchive, file);
-						return;
-					}
-				}
-			}
+            for (Archive archive : openArchives) {
+                if (archive instanceof ProjectArchive) {
+                    ProjectArchive projectArchive = (ProjectArchive) archive;
+                    DomainFile domainFile = projectArchive.getDomainFile();
+                    if (file.equals(domainFile) && !projectArchive.isModifiable() &&
+                            file.isCheckedOut()) {
+                        replaceArchiveWithFile(projectArchive, file);
+                        return;
+                    }
+                }
+            }
 		}
 
 		@Override
@@ -1635,18 +1631,16 @@ public class DataTypeManagerHandler {
 		@Override
 		public void domainFileObjectReplaced(DomainFile file, DomainObject oldObject) {
 			if (oldObject instanceof DataTypeArchiveDB) {
-				Iterator<Archive> archiveIter = openArchives.iterator();
-				while (archiveIter.hasNext()) {
-					Archive archive = archiveIter.next();
-					if (archive instanceof ProjectArchive) {
-						ProjectArchive projectArchive = (ProjectArchive) archive;
-						DomainObject domainObject = projectArchive.getDomainObject();
-						if (domainObject == oldObject) {
-							replaceArchiveWithFile(projectArchive, file);
-							return;
-						}
-					}
-				}
+                for (Archive archive : openArchives) {
+                    if (archive instanceof ProjectArchive) {
+                        ProjectArchive projectArchive = (ProjectArchive) archive;
+                        DomainObject domainObject = projectArchive.getDomainObject();
+                        if (domainObject == oldObject) {
+                            replaceArchiveWithFile(projectArchive, file);
+                            return;
+                        }
+                    }
+                }
 			}
 		}
 
@@ -1658,15 +1652,13 @@ public class DataTypeManagerHandler {
 			}
 			String newName = file.getName();
 			String fileID = file.getFileID();
-			Iterator<Archive> archiveIter = openArchives.iterator();
-			while (archiveIter.hasNext()) {
-				Archive archive = archiveIter.next();
-				if (!archive.isModifiable()) {
-					continue;
-				}
-				DataTypeManager dataTypeManager = archive.getDataTypeManager();
-				updateSourceArchiveName(dataTypeManager, fileID, newName);
-			}
+            for (Archive archive : openArchives) {
+                if (!archive.isModifiable()) {
+                    continue;
+                }
+                DataTypeManager dataTypeManager = archive.getDataTypeManager();
+                updateSourceArchiveName(dataTypeManager, fileID, newName);
+            }
 		}
 
 		private void replaceArchiveWithFile(ProjectArchive projectArchive,

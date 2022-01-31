@@ -182,18 +182,14 @@ public class DecompInterface {
 	}
 
 	private static String fileToString(ResourceFile file) throws IOException {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream()));
-		try {
-			StringBuilder buffer = new StringBuilder();
-			String line = null;
-			while ((line = reader.readLine()) != null) {
-				buffer.append(line);
-			}
-			return buffer.toString();
-		}
-		finally {
-			reader.close();
-		}
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
+            StringBuilder buffer = new StringBuilder();
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                buffer.append(line);
+            }
+            return buffer.toString();
+        }
 	}
 
 	/**

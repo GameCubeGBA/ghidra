@@ -68,19 +68,16 @@ public class LinearFunctionAddressCorrelation implements AddressCorrelation {
 
 		long accumulatedLength = 0;
 
-		Iterator<AddressRange> iterator = srcBody.iterator();
-		while (iterator.hasNext()) {
-			AddressRange range = iterator.next();
-			if (range.getMaxAddress().compareTo(address) < 0) {
-				accumulatedLength += range.getLength();
-			}
-			else {
-				if (range.contains(address)) {
-					accumulatedLength += address.subtract(range.getMinAddress());
-				}
-				break;
-			}
-		}
+        for (AddressRange range : srcBody) {
+            if (range.getMaxAddress().compareTo(address) < 0) {
+                accumulatedLength += range.getLength();
+            } else {
+                if (range.contains(address)) {
+                    accumulatedLength += address.subtract(range.getMinAddress());
+                }
+                break;
+            }
+        }
 
         return (double) (accumulatedLength) / srcBody.getNumAddresses();
 	}

@@ -87,13 +87,12 @@ public class FindPossibleReferencesPlugin extends Plugin {
 	private void programClosed(Program program) {
 		List<TableComponentProvider<ReferenceAddressPair>> list = new ArrayList<>(providerList);
 
-		for (int i = 0; i < list.size(); i++) {
-			TableComponentProvider<ReferenceAddressPair> p = list.get(i);
-			FindReferencesTableModel model = (FindReferencesTableModel) p.getModel();
-			if (program == model.getProgram()) {
-				providerList.remove(p);
-			}
-		}
+        for (TableComponentProvider<ReferenceAddressPair> p : list) {
+            FindReferencesTableModel model = (FindReferencesTableModel) p.getModel();
+            if (program == model.getProgram()) {
+                providerList.remove(p);
+            }
+        }
 	}
 
 	private void createActions() {
@@ -209,25 +208,23 @@ public class FindPossibleReferencesPlugin extends Plugin {
 		}
 
 		List<TableComponentProvider<ReferenceAddressPair>> list = new ArrayList<>(providerList);
-		for (int i = 0; i < list.size(); i++) {
-			TableComponentProvider<ReferenceAddressPair> p = list.get(i);
-			if (!tool.isVisible(p)) {
-				providerList.remove(p);
-			}
-			else {
-				FindReferencesTableModel model = (FindReferencesTableModel) p.getModel();
-				AddressSetView searchSet = model.getSearchAddressSet();
-				Address searchAddr = model.getAddress();
-				// If this model matches the search about to be performed.
-				// (i.e. same search address set or same individual address)
-				if (((fromSet != null && !fromSet.isEmpty()) && (fromSet.equals(searchSet))) ||
-					(((fromSet == null) || fromSet.isEmpty()) && fromAddr.equals(searchAddr))) {
-					model.refresh();
-					tool.showComponentProvider(p, true);
-					return;
-				}
-			}
-		}
+        for (TableComponentProvider<ReferenceAddressPair> p : list) {
+            if (!tool.isVisible(p)) {
+                providerList.remove(p);
+            } else {
+                FindReferencesTableModel model = (FindReferencesTableModel) p.getModel();
+                AddressSetView searchSet = model.getSearchAddressSet();
+                Address searchAddr = model.getAddress();
+                // If this model matches the search about to be performed.
+                // (i.e. same search address set or same individual address)
+                if (((fromSet != null && !fromSet.isEmpty()) && (fromSet.equals(searchSet))) ||
+                        (((fromSet == null) || fromSet.isEmpty()) && fromAddr.equals(searchAddr))) {
+                    model.refresh();
+                    tool.showComponentProvider(p, true);
+                    return;
+                }
+            }
+        }
 		FindReferencesTableModel model = null;
 
 		model = new FindReferencesTableModel(fromSet, tool, currentProgram);

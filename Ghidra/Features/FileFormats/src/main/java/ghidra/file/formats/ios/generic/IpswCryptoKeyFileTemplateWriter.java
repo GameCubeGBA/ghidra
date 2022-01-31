@@ -69,25 +69,22 @@ public final class IpswCryptoKeyFileTemplateWriter {
 
 		PrintWriter writer = new PrintWriter(xmlFile);
 
-		writer.println("<FIRMWARE NAME=\"" + ipswZipFile.getName() + "\">");
-		try {
-			Enumeration<? extends ZipEntry> entries = ipswZipFile.entries();
-			while (entries.hasMoreElements()) {
-				ZipEntry entry = entries.nextElement();
+        try (writer) {
+            writer.println("<FIRMWARE NAME=\"" + ipswZipFile.getName() + "\">");
+            Enumeration<? extends ZipEntry> entries = ipswZipFile.entries();
+            while (entries.hasMoreElements()) {
+                ZipEntry entry = entries.nextElement();
 
-				if (entry.isDirectory()) {
-					continue;
-				}
+                if (entry.isDirectory()) {
+                    continue;
+                }
 
-				writer.println("    <FILE PATH=\"/" + entry.getName() + "\">");
-				writer.println("        <KEY></KEY>");
-				writer.println("        <IV></IV>");
-				writer.println("    </FILE>");
-			}
-			writer.println("</FIRMWARE>");
-		}
-		finally {
-			writer.close();
-		}
+                writer.println("    <FILE PATH=\"/" + entry.getName() + "\">");
+                writer.println("        <KEY></KEY>");
+                writer.println("        <IV></IV>");
+                writer.println("    </FILE>");
+            }
+            writer.println("</FIRMWARE>");
+        }
 	}
 }

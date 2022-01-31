@@ -188,31 +188,26 @@ public class EvaluateVTMatch extends GhidraScript {
 		}
 		
 		public void calcStats() {
-			Iterator<MyFunction> iterator2 = nameset.values().iterator();
-			while (iterator2.hasNext()) {
-				MyFunction myfunc = iterator2.next();
-				if (myfunc.srcexists && myfunc.destexists) {
-					possiblematches += 1;
-					if (!myfunc.srcbody || !myfunc.destbody)
-						emptybodymatches += 1;			// One side or other does not have a body
-				}
-				else if (myfunc.srcexists) {
-					othersrcfuncs += 1;
-				}
-				else if (myfunc.destexists) {
-					otherdestfuncs += 1;
-				}
-				if (myfunc.mismatched)
-					mismatch += 1;
-				if (myfunc.matched) {
-					if ((myfunc.srchits == 1) && (myfunc.desthits == 1)) {
-						matchdiscovered += 1;
-					}
-					else {
-						conflicts += 1;						// Match confused by conflicts
-					}
-				}
-			}
+            for (MyFunction myfunc : nameset.values()) {
+                if (myfunc.srcexists && myfunc.destexists) {
+                    possiblematches += 1;
+                    if (!myfunc.srcbody || !myfunc.destbody)
+                        emptybodymatches += 1;            // One side or other does not have a body
+                } else if (myfunc.srcexists) {
+                    othersrcfuncs += 1;
+                } else if (myfunc.destexists) {
+                    otherdestfuncs += 1;
+                }
+                if (myfunc.mismatched)
+                    mismatch += 1;
+                if (myfunc.matched) {
+                    if ((myfunc.srchits == 1) && (myfunc.desthits == 1)) {
+                        matchdiscovered += 1;
+                    } else {
+                        conflicts += 1;                        // Match confused by conflicts
+                    }
+                }
+            }
 			falsepositive = (double) mismatch / (double) possiblematches;		// Functions in source that were mismatched with dest
 			falsenegative =
 				(double) (possiblematches - matchdiscovered) / (double) possiblematches;			
@@ -310,10 +305,9 @@ public class EvaluateVTMatch extends GhidraScript {
 		println("Working on session: " + session);
 
 		List<VTMatchSet> matchSets = session.getMatchSets();
-		Iterator<VTMatchSet> iterator = matchSets.iterator();
-		while (iterator.hasNext()) {
-			evaluateMatchSet(iterator.next());
-		}
+        for (VTMatchSet matchSet : matchSets) {
+            evaluateMatchSet(matchSet);
+        }
 		evaluateAccepted(session);
 	}
 
@@ -349,14 +343,12 @@ public class EvaluateVTMatch extends GhidraScript {
 		VTScorer scorer = new VTScorer(vtsession.getSourceProgram(),vtsession.getDestinationProgram());
 		scorer.tag();
 
-		Iterator<VTMatch> iterator = matches.iterator();
-		while (iterator.hasNext()) {
-			VTMatch next = iterator.next();
-			VTAssociation association = next.getAssociation();
-			Address srcAddr = association.getSourceAddress();
-			Address destAddr = association.getDestinationAddress();
-			scorer.registerMatch(srcAddr, destAddr);
-		}
+        for (VTMatch next : matches) {
+            VTAssociation association = next.getAssociation();
+            Address srcAddr = association.getSourceAddress();
+            Address destAddr = association.getDestinationAddress();
+            scorer.registerMatch(srcAddr, destAddr);
+        }
 		scorer.calcStats();
 		scorer.reportResults(this,matchset.getProgramCorrelatorInfo().getName() + " (" + matchset.getID() +
 			"):");

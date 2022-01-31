@@ -92,11 +92,9 @@ public class RepositoryManager {
 	 * Dispose this repository manager and all repository instances
 	 */
 	public synchronized void dispose() {
-		Iterator<Repository> iter = repositoryMap.values().iterator();
-		while (iter.hasNext()) {
-			Repository rep = iter.next();
-			rep.dispose();
-		}
+        for (Repository rep : repositoryMap.values()) {
+            rep.dispose();
+        }
 	}
 
 	/**
@@ -212,18 +210,15 @@ public class RepositoryManager {
 	public synchronized String[] getRepositoryNames(String currentUser) {
 
 		ArrayList<String> list = new ArrayList<>();
-		Iterator<Repository> iter = repositoryMap.values().iterator();
-		while (iter.hasNext()) {
-			Repository rep = iter.next();
-			if (isAnonymousUser(currentUser)) {
-				if (rep.anonymousAccessAllowed()) {
-					list.add(rep.getName());
-				}
-			}
-			else if (rep.getUser(currentUser) != null) {
-				list.add(rep.getName());
-			}
-		}
+        for (Repository rep : repositoryMap.values()) {
+            if (isAnonymousUser(currentUser)) {
+                if (rep.anonymousAccessAllowed()) {
+                    list.add(rep.getName());
+                }
+            } else if (rep.getUser(currentUser) != null) {
+                list.add(rep.getName());
+            }
+        }
 		Collections.sort(list);
 		String[] names = new String[list.size()];
 		return list.toArray(names);

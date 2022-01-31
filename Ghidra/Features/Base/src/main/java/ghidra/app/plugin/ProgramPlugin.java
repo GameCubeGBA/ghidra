@@ -429,10 +429,9 @@ public abstract class ProgramPlugin extends Plugin {
 	 * @param removeFromPopup only used if enabled is false
 	 */
 	private void enableActions(ArrayList<DockingAction> list, boolean enabled) {
-		for (int i = 0; i < list.size(); i++) {
-			DockingAction a = list.get(i);
-			a.setEnabled(enabled);
-		}
+        for (DockingAction a : list) {
+            a.setEnabled(enabled);
+        }
 	}
 
 	public ProgramLocation getProgramLocation() {

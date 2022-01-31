@@ -60,55 +60,49 @@ public class Img4FileSystem extends GFileSystemBase {
 	public void open(TaskMonitor monitor) throws IOException {
 		monitor.setMessage("Opening IMG4...");
 		try {
-			ASN1InputStream asn1InputStream = new ASN1InputStream(provider.getInputStream(0));
-			try {
-				ASN1Primitive asn1Primitive = asn1InputStream.readObject();
-				if (asn1Primitive instanceof ASN1Sequence) {
-					ASN1Sequence asn1Sequence = (ASN1Sequence) asn1Primitive;
-					Enumeration<?> enumeration = asn1Sequence.getObjects();
-					while (enumeration.hasMoreElements()) {
-						if (monitor.isCancelled()) {
-							break;
-						}
-						Object nextElement = enumeration.nextElement();
-						if (nextElement instanceof DEROctetString) {
-							DEROctetString octet = (DEROctetString) nextElement;
+            try (ASN1InputStream asn1InputStream = new ASN1InputStream(provider.getInputStream(0))) {
+                ASN1Primitive asn1Primitive = asn1InputStream.readObject();
+                if (asn1Primitive instanceof ASN1Sequence) {
+                    ASN1Sequence asn1Sequence = (ASN1Sequence) asn1Primitive;
+                    Enumeration<?> enumeration = asn1Sequence.getObjects();
+                    while (enumeration.hasMoreElements()) {
+                        if (monitor.isCancelled()) {
+                            break;
+                        }
+                        Object nextElement = enumeration.nextElement();
+                        if (nextElement instanceof DEROctetString) {
+                            DEROctetString octet = (DEROctetString) nextElement;
 
-							byte[] encryptedBytes = octet.getOctets();
+                            byte[] encryptedBytes = octet.getOctets();
 
-							FSRLRoot fsFSRL = getFSRL();
+                            FSRLRoot fsFSRL = getFSRL();
 
-							CryptoKey cryptoKey = CryptoKey.NOT_ENCRYPTED_KEY;
-							try {
-								cryptoKey = CryptoKeyFactory.getCryptoKey(fsFSRL.getName(2),
-									fileSystemName);
-							}
-							catch (IOException e) {
-								monitor.setMessage(
-									"WARNING: Crypto Key file not found! Trying unencrypted");
-							}
+                            CryptoKey cryptoKey = CryptoKey.NOT_ENCRYPTED_KEY;
+                            try {
+                                cryptoKey = CryptoKeyFactory.getCryptoKey(fsFSRL.getName(2),
+                                        fileSystemName);
+                            } catch (IOException e) {
+                                monitor.setMessage(
+                                        "WARNING: Crypto Key file not found! Trying unencrypted");
+                            }
 
-							if (cryptoKey == CryptoKey.NOT_ENCRYPTED_KEY) {
-								decryptedBytes = encryptedBytes;
-							}
-							else {
-								iOS_AesCrypto aes = new iOS_AesCrypto(cryptoKey.key, cryptoKey.iv);
-								decryptedBytes = aes.decrypt(encryptedBytes);
-							}
+                            if (cryptoKey == CryptoKey.NOT_ENCRYPTED_KEY) {
+                                decryptedBytes = encryptedBytes;
+                            } else {
+                                iOS_AesCrypto aes = new iOS_AesCrypto(cryptoKey.key, cryptoKey.iv);
+                                decryptedBytes = aes.decrypt(encryptedBytes);
+                            }
 
-							String filename = "im4p_data";
-							GFileImpl dataFile = GFileImpl.fromPathString(this, root, filename,
-								null, false, decryptedBytes.length);
-							dataFileList.add(dataFile);
+                            String filename = "im4p_data";
+                            GFileImpl dataFile = GFileImpl.fromPathString(this, root, filename,
+                                    null, false, decryptedBytes.length);
+                            dataFileList.add(dataFile);
 
-							break;
-						}
-					}
-				}
-			}
-			finally {
-				asn1InputStream.close();
-			}
+                            break;
+                        }
+                    }
+                }
+            }
 		}
 		catch (Exception e) {
 			throw new IOException("Error opening IMG4 file: ", e);

@@ -139,9 +139,9 @@ public class FieldFormatModel {
 
 	private void findWidth() {
 		width = 0;
-		for (int i = 0; i < rows.size(); i++) {
-			width = Math.max(width, (rows.get(i)).width);
-		}
+        for (Row row : rows) {
+            width = Math.max(width, row.width);
+        }
 	}
 
 	/**
@@ -272,10 +272,9 @@ public class FieldFormatModel {
 	 * Notifies each row that the services have changed.
 	 */
 	public void servicesChanged() {
-		for (int i = 0; i < rows.size(); i++) {
-			Row row = rows.get(i);
-			row.servicesChanged();
-		}
+        for (Row row : rows) {
+            row.servicesChanged();
+        }
 	}
 
 	/**
@@ -284,31 +283,30 @@ public class FieldFormatModel {
 	public Element saveToXml() {
 		Element root = new Element("FORMAT");
 
-		for (int i = 0; i < rows.size(); i++) {
-			Element rowElem = new Element("ROW");
-			Row row = rows.get(i);
-			FieldFactory[] rowFactorys = row.getFactorys();
-			for (FieldFactory ff : rowFactorys) {
-				Element colElem = new Element("FIELD");
+        for (Row value : rows) {
+            Element rowElem = new Element("ROW");
+            Row row = value;
+            FieldFactory[] rowFactorys = row.getFactorys();
+            for (FieldFactory ff : rowFactorys) {
+                Element colElem = new Element("FIELD");
 
-				if (ff instanceof SpacerFieldFactory) {
-					SpacerFieldFactory sff = (SpacerFieldFactory) ff;
-					String text = sff.getText();
-					// has no name!
-					if (text != null) {
-						colElem.setAttribute("TEXT", text);
-					}
-				}
-				else {
-					colElem.setAttribute("NAME", ff.getFieldName());
-				}
-				colElem.setAttribute("WIDTH", "" + ff.getWidth());
-				colElem.setAttribute("ENABLED", "" + ff.isEnabled());
+                if (ff instanceof SpacerFieldFactory) {
+                    SpacerFieldFactory sff = (SpacerFieldFactory) ff;
+                    String text = sff.getText();
+                    // has no name!
+                    if (text != null) {
+                        colElem.setAttribute("TEXT", text);
+                    }
+                } else {
+                    colElem.setAttribute("NAME", ff.getFieldName());
+                }
+                colElem.setAttribute("WIDTH", "" + ff.getWidth());
+                colElem.setAttribute("ENABLED", "" + ff.isEnabled());
 
-				rowElem.addContent(colElem);
-			}
-			root.addContent(rowElem);
-		}
+                rowElem.addContent(colElem);
+            }
+            root.addContent(rowElem);
+        }
 		return root;
 	}
 
@@ -330,37 +328,34 @@ public class FieldFormatModel {
 
 	private Row createRow(Element rowElement) {
 		Row row = new Row();
-		Iterator<?> colIter = rowElement.getChildren("FIELD").iterator();
-		while (colIter.hasNext()) {
-			Element colElem = (Element) colIter.next();
+        for (Object o : rowElement.getChildren("FIELD")) {
+            Element colElem = (Element) o;
 
-			String fieldName = colElem.getAttributeValue("NAME");
-			String text = colElem.getAttributeValue("TEXT");
-			String fieldWidth = colElem.getAttributeValue("WIDTH");
-			String enabled = colElem.getAttributeValue("ENABLED");
+            String fieldName = colElem.getAttributeValue("NAME");
+            String text = colElem.getAttributeValue("TEXT");
+            String fieldWidth = colElem.getAttributeValue("WIDTH");
+            String enabled = colElem.getAttributeValue("ENABLED");
 
-			FieldFactory factoryPrototype =
-				FieldFactoryNameMapper.getFactoryPrototype(fieldName, factories);
-			FieldFactory newInstance = getNewFieldFactoryInstance(factoryPrototype, text);
+            FieldFactory factoryPrototype =
+                    FieldFactoryNameMapper.getFactoryPrototype(fieldName, factories);
+            FieldFactory newInstance = getNewFieldFactoryInstance(factoryPrototype, text);
 
-			try {
-				newInstance.setWidth(Integer.parseInt(fieldWidth));
-			}
-			catch (Exception exc) {
-				Msg.error(this, "Unparsable format for element 'fieldWidth' - '" + fieldWidth +
-					"': " + exc.getMessage(), exc);
-			}
+            try {
+                newInstance.setWidth(Integer.parseInt(fieldWidth));
+            } catch (Exception exc) {
+                Msg.error(this, "Unparsable format for element 'fieldWidth' - '" + fieldWidth +
+                        "': " + exc.getMessage(), exc);
+            }
 
-			try {
-				newInstance.setEnabled(Boolean.valueOf(enabled).booleanValue());
-			}
-			catch (Exception exc) {
-				Msg.error(this, "Unparsable format for element 'enabled' - '" + enabled + "': " +
-					exc.getMessage(), exc);
-			}
+            try {
+                newInstance.setEnabled(Boolean.valueOf(enabled).booleanValue());
+            } catch (Exception exc) {
+                Msg.error(this, "Unparsable format for element 'enabled' - '" + enabled + "': " +
+                        exc.getMessage(), exc);
+            }
 
-			row.addField(newInstance);
-		}
+            row.addField(newInstance);
+        }
 		return row;
 	}
 
@@ -392,19 +387,18 @@ public class FieldFormatModel {
 	 */
 	public FieldFactory[] getUnusedFactories() {
 		List<FieldFactory> list = new ArrayList<>(Arrays.asList(factories));
-		for (int i = 0; i < rows.size(); i++) {
-			Row row = rows.get(i);
-			FieldFactory[] rowFactorys = row.getFactorys();
-			for (FieldFactory rowFactory : rowFactorys) {
-				Class<?> c = rowFactory.getClass();
-				for (int k = 0; k < list.size(); k++) {
-					if (c.equals(list.get(k).getClass())) {
-						list.remove(k);
-						break;
-					}
-				}
-			}
-		}
+        for (Row row : rows) {
+            FieldFactory[] rowFactorys = row.getFactorys();
+            for (FieldFactory rowFactory : rowFactorys) {
+                Class<?> c = rowFactory.getClass();
+                for (int k = 0; k < list.size(); k++) {
+                    if (c.equals(list.get(k).getClass())) {
+                        list.remove(k);
+                        break;
+                    }
+                }
+            }
+        }
 		return list.toArray(new FieldFactory[list.size()]);
 	}
 
@@ -418,12 +412,11 @@ public class FieldFormatModel {
 	 * Removes all fields from this model.
 	 */
 	public void removeAllFactories() {
-		for (int i = 0; i < rows.size(); i++) {
-			Row row = rows.get(i);
-			while (row.size() > 0) {
-				row.removeField(0);
-			}
-		}
+        for (Row row : rows) {
+            while (row.size() > 0) {
+                row.removeField(0);
+            }
+        }
 		findWidth();
 		formatMgr.modelChanged(this);
 
@@ -472,10 +465,9 @@ class Row {
 	}
 
 	public void servicesChanged() {
-		for (int i = 0; i < fields.size(); i++) {
-			FieldFactory factory = fields.get(i);
-			factory.servicesChanged();
-		}
+        for (FieldFactory factory : fields) {
+            factory.servicesChanged();
+        }
 	}
 
 	public void addField(FieldFactory ff) {
@@ -485,32 +477,29 @@ class Row {
 
 	public void layoutFields() {
 		width = 0;
-		for (int i = 0; i < fields.size(); i++) {
-			FieldFactory factory = fields.get(i);
-			factory.setStartX(width);
-			width += factory.getWidth();
-		}
+        for (FieldFactory factory : fields) {
+            factory.setStartX(width);
+            width += factory.getWidth();
+        }
 	}
 
 	public RowLayout getLayout(int index, ProxyObj<?> proxy, int id) {
 		ArrayList<Field> temp = new ArrayList<>(20);
 		int varWidth = 0;
-		for (int i = 0; i < fields.size(); i++) {
-			FieldFactory ff = fields.get(i);
-			ListingField f = null;
-			try {
-				f = ff.getField(proxy, varWidth);
-			}
-			catch (Throwable t) {
-				f = new ErrorListingField(ff, proxy, varWidth, t);
-			}
-			if (f != null) {
-				if (f.getWidth() != ff.getWidth()) {
-					varWidth += f.getWidth() - ff.getWidth();
-				}
-				temp.add(f);
-			}
-		}
+        for (FieldFactory ff : fields) {
+            ListingField f = null;
+            try {
+                f = ff.getField(proxy, varWidth);
+            } catch (Throwable t) {
+                f = new ErrorListingField(ff, proxy, varWidth, t);
+            }
+            if (f != null) {
+                if (f.getWidth() != ff.getWidth()) {
+                    varWidth += f.getWidth() - ff.getWidth();
+                }
+                temp.add(f);
+            }
+        }
 		if (temp.size() > 0) {
 			Field[] rowFields = new Field[temp.size()];
 			rowFields = temp.toArray(rowFields);

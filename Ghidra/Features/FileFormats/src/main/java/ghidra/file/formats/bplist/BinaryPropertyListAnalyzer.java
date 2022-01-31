@@ -89,17 +89,14 @@ public class BinaryPropertyListAnalyzer extends FileFormatAnalyzer {
 	private void markup(Address baseAddress, ByteProvider provider, Program program,
 			TaskMonitor monitor) throws Exception {
 		BinaryReader reader = new BinaryReader(provider, false /* always big */);
-		try {
-			BinaryPropertyListHeader header =
-				markupBinaryPropertyListHeader(program, reader, baseAddress);
-			BinaryPropertyListTrailer trailer =
-				markupBinaryPropertyListTrailer(program, header, baseAddress);
-			markupObjects(reader, program, trailer, baseAddress, monitor);
-			markupOffsetTable(program, trailer, baseAddress, monitor);
-		}
-		finally {
-			provider.close();
-		}
+        try (provider) {
+            BinaryPropertyListHeader header =
+                    markupBinaryPropertyListHeader(program, reader, baseAddress);
+            BinaryPropertyListTrailer trailer =
+                    markupBinaryPropertyListTrailer(program, header, baseAddress);
+            markupObjects(reader, program, trailer, baseAddress, monitor);
+            markupOffsetTable(program, trailer, baseAddress, monitor);
+        }
 	}
 
 	private void markupOffsetTable(Program program, BinaryPropertyListTrailer trailer,

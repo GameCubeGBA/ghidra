@@ -72,42 +72,40 @@ public class KnotPanel extends JPanel implements ComponentListener {
 		int baseline = (height - fontHeight - 1) / 2 + metrics.getMaxAscent();
 
 		ArrayList<KnotRecord> knots = palette.getKnots();
-		for (int i = 0; i < knots.size(); i++) {
-			KnotRecord rec = knots.get(i);
-			int start = (rec.start * width) / palsize;
-			int end = (rec.end * width) / palsize;
-			g.drawLine(start, 0, start, height - 1);
-			g.drawLine(end, 0, end, height - 1);
-			g.drawLine(start, height - 1, end, height - 1);
+        for (KnotRecord rec : knots) {
+            int start = (rec.start * width) / palsize;
+            int end = (rec.end * width) / palsize;
+            g.drawLine(start, 0, start, height - 1);
+            g.drawLine(end, 0, end, height - 1);
+            g.drawLine(start, height - 1, end, height - 1);
 
-			FontMetrics currentMetrics = metrics;
-			int w = currentMetrics.stringWidth(rec.name);
-			int knotwidth = end - start;
-			while (w > knotwidth) {
-				currentMetrics = getSmallerFontMetrics(currentMetrics);
-				w = currentMetrics.stringWidth(rec.name);
+            FontMetrics currentMetrics = metrics;
+            int w = currentMetrics.stringWidth(rec.name);
+            int knotwidth = end - start;
+            while (w > knotwidth) {
+                currentMetrics = getSmallerFontMetrics(currentMetrics);
+                w = currentMetrics.stringWidth(rec.name);
 
-				if (currentMetrics.getFont().getSize() <= 4) {
-					break; // can't go any smaller
-				}
-			}
+                if (currentMetrics.getFont().getSize() <= 4) {
+                    break; // can't go any smaller
+                }
+            }
 
-			if (w < knotwidth) { // we found a suitable font
-				g.setFont(currentMetrics.getFont());
-				GraphicsUtils.drawString(this, g, rec.name, start + (knotwidth - 1) / 2 - w / 2,
-					baseline);
-				g.setFont(FONT);
-			}
-			else { // must be no room to paint the string, even with a small font
-				String ellipsis = "...";
-				w = metrics.stringWidth(ellipsis);
-				GraphicsUtils.drawString(this, g, ellipsis, start + (knotwidth - 1) / 2 - w / 2,
-					baseline);
-			}
+            if (w < knotwidth) { // we found a suitable font
+                g.setFont(currentMetrics.getFont());
+                GraphicsUtils.drawString(this, g, rec.name, start + (knotwidth - 1) / 2 - w / 2,
+                        baseline);
+                g.setFont(FONT);
+            } else { // must be no room to paint the string, even with a small font
+                String ellipsis = "...";
+                w = metrics.stringWidth(ellipsis);
+                GraphicsUtils.drawString(this, g, ellipsis, start + (knotwidth - 1) / 2 - w / 2,
+                        baseline);
+            }
 
-			// reset the font
-			currentMetrics = metrics;
-		}
+            // reset the font
+            currentMetrics = metrics;
+        }
 
 	}
 

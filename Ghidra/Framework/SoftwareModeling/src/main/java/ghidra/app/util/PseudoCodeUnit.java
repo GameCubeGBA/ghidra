@@ -799,9 +799,9 @@ abstract class PseudoCodeUnit implements CodeUnit {
 		ArrayList<Reference> list = new ArrayList<Reference>();
 		for (int i = 0; i < getNumOperands(); i++) {
 			Reference[] refs = getOperandReferences(i);
-			for (int j = 0; j < refs.length; j++) {
-				list.add(refs[j]);
-			}
+            for (Reference ref : refs) {
+                list.add(ref);
+            }
 		}
 		return list.toArray(emptyMemRefs);
 	}

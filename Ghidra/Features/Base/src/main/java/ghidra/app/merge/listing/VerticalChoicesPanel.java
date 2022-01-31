@@ -179,9 +179,9 @@ public class VerticalChoicesPanel extends ConflictPanel {
 		JComponent[] headerComps = getRowComponents(0);
 		if (headerComps != null) {
 			// remove the header
-			for (int i = 0; i < headerComps.length; i++) {
-				rowPanel.remove(headerComps[i]);
-			}
+            for (JComponent headerComp : headerComps) {
+                rowPanel.remove(headerComp);
+            }
 			headerComps = null;
 			if (rowComps.isEmpty()) {
 				rowComps.add(0, new ArrayList<JComponent>());
@@ -366,16 +366,12 @@ public class VerticalChoicesPanel extends ConflictPanel {
 	@Override
 	public void clear() {
 		setHeader(null);
-		ListIterator<ArrayList<JComponent>> iter = rowComps.listIterator();
-		while (iter.hasNext()) {
-			ArrayList<JComponent> compList = iter.next();
-			ListIterator<JComponent> compIter = compList.listIterator();
-			while (compIter.hasNext()) {
-				Component rowComp = compIter.next();
-				rowPanel.remove(rowComp);
-			}
-			compList.clear();
-		}
+        for (ArrayList<JComponent> compList : rowComps) {
+            for (Component rowComp : compList) {
+                rowPanel.remove(rowComp);
+            }
+            compList.clear();
+        }
 		rowComps.clear();
 		rows.clear();
 		rowTypes.clear();
@@ -638,16 +634,14 @@ public class VerticalChoicesPanel extends ConflictPanel {
 		int rowCount = rowComps.size();
 		for (int row = 0; row < rowCount; row++) {
 			JComponent[] comps = getRowComponents(row);
-			for (int i = 0; i < comps.length; i++) {
-				JComponent component = comps[i];
-				if (component instanceof MyRadioButton &&
-					((MyRadioButton) component).isSelected()) {
-					conflictOption |= ((MyRadioButton) component).option;
-				}
-				else if (component instanceof MyCheckBox && ((MyCheckBox) component).isSelected()) {
-					conflictOption |= ((MyCheckBox) component).option;
-				}
-			}
+            for (JComponent component : comps) {
+                if (component instanceof MyRadioButton &&
+                        ((MyRadioButton) component).isSelected()) {
+                    conflictOption |= ((MyRadioButton) component).option;
+                } else if (component instanceof MyCheckBox && ((MyCheckBox) component).isSelected()) {
+                    conflictOption |= ((MyCheckBox) component).option;
+                }
+            }
 		}
 		return conflictOption;
 	}
@@ -665,12 +659,12 @@ public class VerticalChoicesPanel extends ConflictPanel {
 	 */
 	@Override
 	public boolean hasChoice() {
-		for (Iterator<Long> iterator = rowTypes.iterator(); iterator.hasNext();) {
-			long rowType = iterator.next().longValue();
-			if (rowType == RADIO_BUTTON || rowType == CHECK_BOX) {
-				return true;
-			}
-		}
+        for (Long type : rowTypes) {
+            long rowType = type.longValue();
+            if (rowType == RADIO_BUTTON || rowType == CHECK_BOX) {
+                return true;
+            }
+        }
 		return false;
 	}
 }

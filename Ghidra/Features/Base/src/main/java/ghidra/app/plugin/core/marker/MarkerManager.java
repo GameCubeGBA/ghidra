@@ -321,13 +321,11 @@ public class MarkerManager implements MarkerService {
 		}
 
 		int viewHeight = panel.getHeight() - MarkerSetImpl.MARKER_HEIGHT;
-		Iterator<MarkerSetImpl> it = currentMarkerSets.iterator();
-		while (it.hasNext()) {
-			MarkerSetImpl markers = it.next();
-			if (markers.active) {
-				markers.paintNavigation(g, viewHeight, panel, addrMap);
-			}
-		}
+        for (MarkerSetImpl markers : currentMarkerSets) {
+            if (markers.active) {
+                markers.paintNavigation(g, viewHeight, panel, addrMap);
+            }
+        }
 	}
 
 	/**
@@ -473,11 +471,9 @@ public class MarkerManager implements MarkerService {
 
 	private void updateMarkerSets(boolean updateMarkers, boolean updateNavigation,
 			boolean updateNow) {
-		Iterator<MarkerSetImpl> it = currentMarkerSets.iterator();
-		while (it.hasNext()) {
-			MarkerSetImpl marker = it.next();
-			marker.updateView(updateMarkers, updateNavigation);
-		}
+        for (MarkerSetImpl marker : currentMarkerSets) {
+            marker.updateView(updateMarkers, updateNavigation);
+        }
 
 		if (updateNow) {
 			updater.updateNow();

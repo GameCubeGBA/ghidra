@@ -174,10 +174,9 @@ public abstract class HTMLDataTypeRepresentation {
 		for (String nativeCommentLine : string.split("\n")) {
 			List<String> wrappedLines = breakLongLineAtWordBoundaries(nativeCommentLine,
 				MAX_CHARACTER_LENGTH - MIDDLE_COMMENT.length());
-			for (int i = 0; i < wrappedLines.size(); i++) {
-				String wrappedLine = wrappedLines.get(i);
-				list.add(MIDDLE_COMMENT + wrappedLine + BR);
-			}
+            for (String wrappedLine : wrappedLines) {
+                list.add(MIDDLE_COMMENT + wrappedLine + BR);
+            }
 		}
 		return list;
 	}

@@ -110,18 +110,15 @@ public class PrelinkMap {
 		StringBuilder buffer = new StringBuilder();
 		List<String> keyList = new ArrayList<String>( map.keySet() );
 		Collections.sort( keyList );
-		Iterator<String> keyIterator = keyList.iterator();
-		while ( keyIterator.hasNext() ) {
-			String key = keyIterator.next();
-			Object value = map.get( key );
-			if ( value instanceof Long ) {
-				long longValue = (Long) value;
-				buffer.append( key + '=' + "0x" + Long.toHexString( longValue ) + '\n' );
-			}
-			else {
-				buffer.append( key + '=' + value + '\n' );
-			}
-		}
+        for (String key : keyList) {
+            Object value = map.get(key);
+            if (value instanceof Long) {
+                long longValue = (Long) value;
+                buffer.append(key + '=' + "0x" + Long.toHexString(longValue) + '\n');
+            } else {
+                buffer.append(key + '=' + value + '\n');
+            }
+        }
 		return buffer.toString();
 	}
 

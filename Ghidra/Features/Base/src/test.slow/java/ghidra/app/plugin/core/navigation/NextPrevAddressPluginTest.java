@@ -440,31 +440,29 @@ public class NextPrevAddressPluginTest extends AbstractGhidraHeadedIntegrationTe
 		Map<WindowNode, WindowActionManager> map =
 			(Map<WindowNode, WindowActionManager>) TestUtils.getInstanceField(
 				"windowToActionManagerMap", menuAndToolBarManager);
-		Iterator<WindowActionManager> iterator = map.values().iterator();
 
-		while (iterator.hasNext()) {
-			WindowActionManager wam = iterator.next();
-			ToolBarManager toolBarManager =
-				(ToolBarManager) TestUtils.getInstanceField("toolBarMgr", wam);
+        for (WindowActionManager wam : map.values()) {
+            ToolBarManager toolBarManager =
+                    (ToolBarManager) TestUtils.getInstanceField("toolBarMgr", wam);
 
-			Map<String, List<ToolBarItemManager>> groupToItemsMap =
-				(Map<String, List<ToolBarItemManager>>) TestUtils.getInstanceField(
-					"groupToItemsMap", toolBarManager);
+            Map<String, List<ToolBarItemManager>> groupToItemsMap =
+                    (Map<String, List<ToolBarItemManager>>) TestUtils.getInstanceField(
+                            "groupToItemsMap", toolBarManager);
 
-			ToolBarData toolBarData = action.getToolBarData();
-			String group = toolBarData.getToolBarGroup();
-			List<ToolBarItemManager> items = groupToItemsMap.get(group);
-			if (items == null) {
-				continue;
-			}
+            ToolBarData toolBarData = action.getToolBarData();
+            String group = toolBarData.getToolBarGroup();
+            List<ToolBarItemManager> items = groupToItemsMap.get(group);
+            if (items == null) {
+                continue;
+            }
 
-			for (ToolBarItemManager item : items) {
-				DockingActionProxy proxy = (DockingActionProxy) item.getAction();
-				if (proxy.getAction() == action) {
-					return item.getButton();
-				}
-			}
-		}
+            for (ToolBarItemManager item : items) {
+                DockingActionProxy proxy = (DockingActionProxy) item.getAction();
+                if (proxy.getAction() == action) {
+                    return item.getButton();
+                }
+            }
+        }
 
 		Assert.fail("Unable to locate button for action: " + action.getName());
 		return null; // can't get here, but the compiler doesn't know that

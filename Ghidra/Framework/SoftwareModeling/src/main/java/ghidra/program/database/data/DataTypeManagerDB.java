@@ -463,39 +463,33 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 	 */
 	private void initializedParentChildTable() {
 		buildSortedDataTypeList();
-		Iterator<DataType> it = sortedDataTypes.iterator();
-		while (it.hasNext()) {
-			DataType dt = it.next();
-			if (dt instanceof Array) {
-				((Array) dt).getDataType().addParent(dt);
-			}
-			else if (dt instanceof Pointer) {
-				DataType pdt = ((Pointer) dt).getDataType();
-				if (pdt != null) {
-					pdt.addParent(dt);
-				}
-			}
-			else if (dt instanceof TypeDef) {
-				((TypeDef) dt).getDataType().addParent(dt);
-			}
-			else if (dt instanceof Composite) {
-				DataTypeComponent[] comps = ((Composite) dt).getDefinedComponents();
-				for (DataTypeComponent comp : comps) {
-					comp.getDataType().addParent(dt);
-				}
-			}
-			else if (dt instanceof FunctionDefinition) {
-				FunctionDefinition funDef = (FunctionDefinition) dt;
-				DataType retType = funDef.getReturnType();
-				if (retType != null) {
-					retType.addParent(dt);
-				}
-				ParameterDefinition[] vars = funDef.getArguments();
-				for (ParameterDefinition var : vars) {
-					var.getDataType().addParent(dt);
-				}
-			}
-		}
+        for (DataType dt : sortedDataTypes) {
+            if (dt instanceof Array) {
+                ((Array) dt).getDataType().addParent(dt);
+            } else if (dt instanceof Pointer) {
+                DataType pdt = ((Pointer) dt).getDataType();
+                if (pdt != null) {
+                    pdt.addParent(dt);
+                }
+            } else if (dt instanceof TypeDef) {
+                ((TypeDef) dt).getDataType().addParent(dt);
+            } else if (dt instanceof Composite) {
+                DataTypeComponent[] comps = ((Composite) dt).getDefinedComponents();
+                for (DataTypeComponent comp : comps) {
+                    comp.getDataType().addParent(dt);
+                }
+            } else if (dt instanceof FunctionDefinition) {
+                FunctionDefinition funDef = (FunctionDefinition) dt;
+                DataType retType = funDef.getReturnType();
+                if (retType != null) {
+                    retType.addParent(dt);
+                }
+                ParameterDefinition[] vars = funDef.getArguments();
+                for (ParameterDefinition var : vars) {
+                    var.getDataType().addParent(dt);
+                }
+            }
+        }
 	}
 
 	/**
@@ -1358,11 +1352,9 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 			buildSortedDataTypeList();
 			// make copy of sortedDataTypes list before iterating as dt.dataTypeReplaced may
 			// call back into this class and cause a modification to the sortedDataTypes list.
-			Iterator<DataType> it = new ArrayList<>(sortedDataTypes).iterator();
-			while (it.hasNext()) {
-				DataType dt = it.next();
-				dt.dataTypeReplaced(existingDt, newDt);
-			}
+            for (DataType dt : new ArrayList<>(sortedDataTypes)) {
+                dt.dataTypeReplaced(existingDt, newDt);
+            }
 		}
 	}
 
@@ -1647,11 +1639,9 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 			deletedIds.addFirst(l);
 		}
 
-		Iterator<Long> it = deletedIds.iterator();
-		while (it.hasNext()) {
-			Long l = it.next();
-			deleteDataType(l.longValue());
-		}
+        for (Long l : deletedIds) {
+            deleteDataType(l.longValue());
+        }
 
 		try {
 			deleteDataTypeIDs(deletedIds, monitor);
@@ -3593,10 +3583,10 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 		try {
 			List<?> addrKeyRanges = addrMap.getKeyRanges(startAddr, endAddr, false);
 			int cnt = addrKeyRanges.size();
-			for (int i = 0; i < cnt; i++) {
-				KeyRange kr = (KeyRange) addrKeyRanges.get(i);
-				instanceSettingsAdapter.delete(kr.minKey, kr.maxKey, monitor);
-			}
+            for (Object addrKeyRange : addrKeyRanges) {
+                KeyRange kr = (KeyRange) addrKeyRange;
+                instanceSettingsAdapter.delete(kr.minKey, kr.maxKey, monitor);
+            }
 		}
 		catch (IOException e) {
 			dbError(e);

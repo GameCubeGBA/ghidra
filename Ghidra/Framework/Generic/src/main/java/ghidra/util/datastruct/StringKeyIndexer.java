@@ -215,9 +215,9 @@ public class StringKeyIndexer implements Serializable {
 		String[] oldKeys = keys;
         keys = new String[newCapacity];
         capacity = newCapacity;
-		for(int i=0;i<oldKeys.length;i++) {
-			put(oldKeys[i]);
-		}
+         for (String oldKey : oldKeys) {
+             put(oldKey);
+         }
     }
     private class KeyIterator implements Iterator<String> {
         private int nLists;

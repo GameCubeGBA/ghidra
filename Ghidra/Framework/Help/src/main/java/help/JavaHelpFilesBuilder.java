@@ -126,37 +126,31 @@ public class JavaHelpFilesBuilder {
 		if (Files.exists(mapFile)) {
 			Files.delete(mapFile);
 		}
-		PrintWriter out = new LogFileWriter(mapFile);
-		try {
-			out.println("<?xml version='1.0' encoding='ISO-8859-1' ?>");
-			out.println("<!doctype MAP public \"-//Sun Microsystems Inc.//DTD JavaHelp Map Version 1.0//EN\">");
-			out.println("<!-- Auto-generated on " + (new Date()).toString() + " : Do Not Edit -->");
-			out.println("<map version=\"1.0\">");
+        try (PrintWriter out = new LogFileWriter(mapFile)) {
+            out.println("<?xml version='1.0' encoding='ISO-8859-1' ?>");
+            out.println("<!doctype MAP public \"-//Sun Microsystems Inc.//DTD JavaHelp Map Version 1.0//EN\">");
+            out.println("<!-- Auto-generated on " + (new Date()).toString() + " : Do Not Edit -->");
+            out.println("<map version=\"1.0\">");
 
-			Collection<AnchorDefinition> anchors = help.getAllAnchorDefinitions();
-			Iterator<AnchorDefinition> iterator = anchors.iterator();
-			while (iterator.hasNext()) {
-				AnchorDefinition a = iterator.next();
-				String anchorTarget = a.getHelpPath();
+            Collection<AnchorDefinition> anchors = help.getAllAnchorDefinitions();
+            for (AnchorDefinition a : anchors) {
+                String anchorTarget = a.getHelpPath();
 
-				//
-				// JavaHelp Note:  the JavaHelp system will resolve relative map entries by using
-				//                 this map file that we are generating as the base. So, whatever
-				//                 directory this file lives under is the root directory for the
-				//                 relative path that we are writing here for the 'mapID' entry.
-				//                 Thus, make sure that the relative entry is relative to the 
-				//                 directory of this map file.
-				//
+                //
+                // JavaHelp Note:  the JavaHelp system will resolve relative map entries by using
+                //                 this map file that we are generating as the base. So, whatever
+                //                 directory this file lives under is the root directory for the
+                //                 relative path that we are writing here for the 'mapID' entry.
+                //                 Thus, make sure that the relative entry is relative to the
+                //                 directory of this map file.
+                //
 
-				String updatedPath = relativize(outputDir, anchorTarget);
-				out.println("  <mapID target=\"" + a.getId() + "\" url=\"" + updatedPath + "\"/>");
-			}
-			out.println("</map>");
-			message("\tfinished generating map file");
-		}
-		finally {
-			out.close();
-		}
+                String updatedPath = relativize(outputDir, anchorTarget);
+                out.println("  <mapID target=\"" + a.getId() + "\" url=\"" + updatedPath + "\"/>");
+            }
+            out.println("</map>");
+            message("\tfinished generating map file");
+        }
 	}
 
 	private String relativize(Path parent, String anchorTarget) {

@@ -209,10 +209,9 @@ public class LocationReferencesPlugin extends Plugin
 	}
 
 	private void disposeProviderList() {
-		for (int i = 0; i < providerList.size(); i++) {
-			LocationReferencesProvider provider = providerList.get(i);
-			provider.dispose();
-		}
+        for (LocationReferencesProvider provider : providerList) {
+            provider.dispose();
+        }
 		providerList.clear();
 	}
 

@@ -44,9 +44,9 @@ class IndexProvider {
 	 */
 	IndexProvider(int indexCount, int[] freeIndexes) {
 		nextIndex = indexCount;
-		for (int i = 0; i < freeIndexes.length; i++) {
-			freeIndexStack.push(Integer.valueOf(freeIndexes[i]));
-		}
+        for (int freeIndex : freeIndexes) {
+            freeIndexStack.push(Integer.valueOf(freeIndex));
+        }
 	}
 	
 	/**

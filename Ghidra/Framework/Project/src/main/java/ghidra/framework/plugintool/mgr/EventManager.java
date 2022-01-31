@@ -319,17 +319,14 @@ public class EventManager {
 		try {
 			event.setSourceName(PluginEvent.EXTERNAL_SOURCE_NAME);
 			event.setTriggerEvent(null);
-			for (int i = 0; i < toolListeners.size(); i++) {
-				ToolListener tl = toolListeners.get(i);
-
-				try {
-					tl.processToolEvent(event);
-				}
-				catch (Throwable t) {
-					Msg.showError(this, tool.getToolFrame(), "Plugin Event Error",
-						"Error sending event to connected tool", t);
-				}
-			}
+            for (ToolListener tl : toolListeners) {
+                try {
+                    tl.processToolEvent(event);
+                } catch (Throwable t) {
+                    Msg.showError(this, tool.getToolFrame(), "Plugin Event Error",
+                            "Error sending event to connected tool", t);
+                }
+            }
 		}
 		finally {
 			sendingToolEvent = false;
@@ -346,27 +343,24 @@ public class EventManager {
 
 		List<Class<? extends PluginEvent>> unusedList = new ArrayList<>();
 
-		Iterator<Class<? extends PluginEvent>> iter = listenersByEventType.keySet().iterator();
-		while (iter.hasNext()) {
-			Class<? extends PluginEvent> eventClass = iter.next();
-			Set<PluginEventListener> set = listenersByEventType.get(eventClass);
-			Iterator<PluginEventListener> it = set.iterator();
-			while (it.hasNext()) {
-				PluginEventListener listener = it.next();
-				if (listener.getClass().getName().equals(className)) {
-					it.remove();
-					if (set.isEmpty()) {
-						unusedList.add(eventClass);
-					}
-					break;
-				}
-			}
-		}
+        for (Class<? extends PluginEvent> eventClass : listenersByEventType.keySet()) {
+            Set<PluginEventListener> set = listenersByEventType.get(eventClass);
+            Iterator<PluginEventListener> it = set.iterator();
+            while (it.hasNext()) {
+                PluginEventListener listener = it.next();
+                if (listener.getClass().getName().equals(className)) {
+                    it.remove();
+                    if (set.isEmpty()) {
+                        unusedList.add(eventClass);
+                    }
+                    break;
+                }
+            }
+        }
 
-		for (int i = 0; i < unusedList.size(); i++) {
-			Class<? extends PluginEvent> eventClass = unusedList.get(i);
-			eventConsumerRemoved(eventClass);
-		}
+        for (Class<? extends PluginEvent> eventClass : unusedList) {
+            eventConsumerRemoved(eventClass);
+        }
 	}
 
 }

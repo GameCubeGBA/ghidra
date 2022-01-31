@@ -418,24 +418,22 @@ public class DecisionNode {
 		bitsize = XmlUtils.decodeUnknownInt(el.getAttributeValue("size"));
 
 		List<?> childlist = el.getChildren();
-		Iterator<?> iter = childlist.iterator();
-		while (iter.hasNext()) {
-			Element child = (Element) iter.next();
-			if (child.getName().equals("pair")) {
-				int id = XmlUtils.decodeUnknownInt(child.getAttributeValue("id"));
-				Constructor ct = sub.getConstructor(id);
-				DisjointPattern pat =
-					DisjointPattern.restoreDisjoint((Element) child.getChildren().get(0));
-				// This increments num addConstructorPair(pat,ct);
-				list.push_back(new Pair<>(pat, ct));
-				// delete pat; // addConstructorPair makes its own copy
-			}
-			else if (child.getName().equals("decision")) {
-				DecisionNode subnode = new DecisionNode();
-				subnode.restoreXml(child, this, sub);
-				children.push_back(subnode);
-			}
-		}
+        for (Object o : childlist) {
+            Element child = (Element) o;
+            if (child.getName().equals("pair")) {
+                int id = XmlUtils.decodeUnknownInt(child.getAttributeValue("id"));
+                Constructor ct = sub.getConstructor(id);
+                DisjointPattern pat =
+                        DisjointPattern.restoreDisjoint((Element) child.getChildren().get(0));
+                // This increments num addConstructorPair(pat,ct);
+                list.push_back(new Pair<>(pat, ct));
+                // delete pat; // addConstructorPair makes its own copy
+            } else if (child.getName().equals("decision")) {
+                DecisionNode subnode = new DecisionNode();
+                subnode.restoreXml(child, this, sub);
+                children.push_back(subnode);
+            }
+        }
 	}
 
 }

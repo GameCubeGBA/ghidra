@@ -92,26 +92,18 @@ public class HeadlessClientAuthenticator implements ClientAuthenticator {
 				// InputStream keyIn = ResourceManager.getResourceAsStream(keystorePath);
 				InputStream keyIn = keystorePath.getClass().getResourceAsStream(keystorePath);
 				if (keyIn != null) {
-					try {
-						sshPrivateKey = SSHKeyManager.getSSHPrivateKey(keyIn);
-						Msg.info(HeadlessClientAuthenticator.class,
-							"Loaded SSH key: " + keystorePath);
-						return;
-					}
-					catch (Exception e) {
-						Msg.error(HeadlessClientAuthenticator.class,
-							"Failed to open keystore for SSH use: " + keystorePath, e);
-						throw new IOException("Failed to parse keystore: " + keystorePath);
-					}
-					finally {
-						try {
-							keyIn.close();
-						}
-						catch (IOException e) {
-							// ignore
-						}
-					}
-				}
+                    try (keyIn) {
+                        sshPrivateKey = SSHKeyManager.getSSHPrivateKey(keyIn);
+                        Msg.info(HeadlessClientAuthenticator.class,
+                                "Loaded SSH key: " + keystorePath);
+                        return;
+                    } catch (Exception e) {
+                        Msg.error(HeadlessClientAuthenticator.class,
+                                "Failed to open keystore for SSH use: " + keystorePath, e);
+                        throw new IOException("Failed to parse keystore: " + keystorePath);
+                    }
+                    // ignore
+                }
 				Msg.error(HeadlessClientAuthenticator.class, "Keystore not found: " + keystorePath);
 				throw new FileNotFoundException("Keystore not found: " + keystorePath);
 			}

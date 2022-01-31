@@ -114,18 +114,17 @@ public class VersionControlCheckInAction extends VersionControlAction {
 
 		ArrayList<DomainFile> changedList = new ArrayList<>();
 		ArrayList<DomainFile> list = new ArrayList<>();
-		for (int i = 0; i < fileList.size(); i++) {
-			DomainFile df = fileList.get(i);
-			if (df != null && df.canCheckin()) {
-				if (!canCloseDomainFile(df)) {
-					continue;
-				}
-				list.add(df);
-				if (df.isChanged()) {
-					changedList.add(df);
-				}
-			}
-		}
+        for (DomainFile df : fileList) {
+            if (df != null && df.canCheckin()) {
+                if (!canCloseDomainFile(df)) {
+                    continue;
+                }
+                list.add(df);
+                if (df.isChanged()) {
+                    changedList.add(df);
+                }
+            }
+        }
 
 		if (changedList.size() > 0) {
 			ChangedFilesDialog dialog = new ChangedFilesDialog(tool, changedList);
@@ -134,12 +133,11 @@ public class VersionControlCheckInAction extends VersionControlAction {
 				tool.setStatusInfo("Checkin canceled");
 				return;
 			}
-			for (int i = 0; i < changedList.size(); i++) {
-				DomainFile df = changedList.get(i);
-				if (df.isChanged()) {
-					list.remove(df);
-				}
-			}
+            for (DomainFile df : changedList) {
+                if (df.isChanged()) {
+                    list.remove(df);
+                }
+            }
 		}
 		if (list.size() > 0) {
 			tool.execute(new CheckInTask(tool, list, parent));

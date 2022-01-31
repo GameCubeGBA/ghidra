@@ -119,8 +119,8 @@ public class AutoRenamePlugin extends ProgramPlugin {
             // Find selected Fragments
             TreePath[] selectedPaths = node.getTree().getSelectionPaths();
             boolean ignoreDuplicateNames = (selectedPaths.length > 1);
-            for (int i = 0; i < selectedPaths.length; i++) {
-                ProgramNode n = (ProgramNode) selectedPaths[i].getLastPathComponent();
+            for (TreePath selectedPath : selectedPaths) {
+                ProgramNode n = (ProgramNode) selectedPath.getLastPathComponent();
                 if (!n.isFragment())
                     continue;
 
@@ -131,8 +131,8 @@ public class AutoRenamePlugin extends ProgramPlugin {
                     continue; // empty Fragment
                 Symbol s = symTable.getPrimarySymbol(a);
                 if (s != null) {
-                    cmd.add(new RenameCmd(f.getTreeName(), false, f.getName(), s.getName(), 
-                    	ignoreDuplicateNames));
+                    cmd.add(new RenameCmd(f.getTreeName(), false, f.getName(), s.getName(),
+                            ignoreDuplicateNames));
                 }
             }
 
@@ -202,12 +202,12 @@ public class AutoRenamePlugin extends ProgramPlugin {
     			if (node.getProgram() != null) {
     				// Ensure that at least one Fragment is selected within a multi-select
     				TreePath[] selectedPaths = node.getTree().getSelectionPaths();
-    				for (int i = 0; i < selectedPaths.length; i++) {
-    					ProgramNode n =
-    						(ProgramNode) selectedPaths[i].getLastPathComponent();
-    					if (n.isFragment())
-    						return true;
-    				}
+                    for (TreePath selectedPath : selectedPaths) {
+                        ProgramNode n =
+                                (ProgramNode) selectedPath.getLastPathComponent();
+                        if (n.isFragment())
+                            return true;
+                    }
     			}
     		}
     		return false;

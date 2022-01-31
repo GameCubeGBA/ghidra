@@ -369,22 +369,18 @@ class PlaceholderManager {
 	Map<ComponentProvider, ComponentPlaceholder> getActiveProvidersToPlaceholders() {
 		Map<ComponentProvider, ComponentPlaceholder> map =
 			new HashMap<>();
-		Iterator<PlaceholderSet> placeholderIterator = ownerToPlaceholderMap.values().iterator();
-		while (placeholderIterator.hasNext()) {
-			PlaceholderSet placeholders = placeholderIterator.next();
-			map.putAll(placeholders.getProviderMap());
-		}
+        for (PlaceholderSet placeholders : ownerToPlaceholderMap.values()) {
+            map.putAll(placeholders.getProviderMap());
+        }
 		return map;
 	}
 
 	private Set<ComponentPlaceholder> getAllActivePlaceholders() {
 
 		Set<ComponentPlaceholder> set = new HashSet<>();
-		Iterator<PlaceholderSet> placeholderIterator = ownerToPlaceholderMap.values().iterator();
-		while (placeholderIterator.hasNext()) {
-			PlaceholderSet placeholders = placeholderIterator.next();
-			set.addAll(placeholders.getUsedPlaceholders());
-		}
+        for (PlaceholderSet placeholders : ownerToPlaceholderMap.values()) {
+            set.addAll(placeholders.getUsedPlaceholders());
+        }
 		return set;
 	}
 

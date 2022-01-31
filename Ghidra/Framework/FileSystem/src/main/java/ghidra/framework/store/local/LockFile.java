@@ -172,15 +172,14 @@ public class LockFile {
 		File[] files = dir.listFiles();
 		if (files == null)
 			return false;
-		for (int i = 0; i < files.length; i++) {
-			if (files[i].isDirectory()) {
-				if (containsLock(files[i]))
-					return true;
-			}
-			else if (files[i].getName().endsWith(LOCK)) {
-				return true;
-			}
-		}
+        for (File file : files) {
+            if (file.isDirectory()) {
+                if (containsLock(file))
+                    return true;
+            } else if (file.getName().endsWith(LOCK)) {
+                return true;
+            }
+        }
 		return false;
 	}
 
@@ -246,33 +245,21 @@ public class LockFile {
 
 	private String getLockOwner(boolean includeId) {
 		String owner = null;
-		FileInputStream fin = null;
-		try {
-			fin = new FileInputStream(lockFile);
-			byte[] bytes = new byte[32];
-			int cnt = fin.read(bytes);
-			owner = new String(bytes, 0, cnt);
-			if (!includeId) {
-				int spaceIndex = owner.indexOf(' ');
-				if (spaceIndex > 0) {
-					owner = owner.substring(0, spaceIndex);
-				}
-			}
-		}
-		catch (Exception e) {
-			owner = "<Unknown>";
-		}
-		finally {
-			if (fin != null) {
-				try {
-					fin.close();
-				}
-				catch (IOException e1) {
-					// we tried
-				}
-			}
-		}
-		return owner;
+        try (FileInputStream fin = new FileInputStream(lockFile)) {
+            byte[] bytes = new byte[32];
+            int cnt = fin.read(bytes);
+            owner = new String(bytes, 0, cnt);
+            if (!includeId) {
+                int spaceIndex = owner.indexOf(' ');
+                if (spaceIndex > 0) {
+                    owner = owner.substring(0, spaceIndex);
+                }
+            }
+        } catch (Exception e) {
+            owner = "<Unknown>";
+        }
+        // we tried
+        return owner;
 	}
 
 	private boolean setLockOwner() {

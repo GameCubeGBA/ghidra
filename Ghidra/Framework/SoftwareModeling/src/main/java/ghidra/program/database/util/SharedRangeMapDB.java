@@ -129,34 +129,31 @@ public class SharedRangeMapDB {
 			try {
 				// Consoldate existing ranges for this value which overlap
 				Field[] mapKeys = mapTable.findRecords(new LongField(value), MAP_VALUE_COL);
-				for (int i = 0; i < mapKeys.length; i++) {
+                for (Field mapKey : mapKeys) {
 
-					// Get next range
-					Field mapKey = mapKeys[i];
-					DBRecord mapRec = mapTable.getRecord(mapKey);
-					long rangeKey = mapRec.getLongValue(MAP_RANGE_KEY_COL);
-					DBRecord rangeRec = rangeTable.getRecord(rangeKey);
+                    // Get next range
+                    DBRecord mapRec = mapTable.getRecord(mapKey);
+                    long rangeKey = mapRec.getLongValue(MAP_RANGE_KEY_COL);
+                    DBRecord rangeRec = rangeTable.getRecord(rangeKey);
 
-					// Consoldate range if it overlaps
+                    // Consoldate range if it overlaps
                     long max = rangeRec.getLongValue(RANGE_TO_COL);
-					if (rangeKey <= start) {
-						if (max >= end) {
-							return;
-						}
-						else if (max >= (start - 1)) {
-							mapTable.deleteRecord(mapKey);
-							consolidateRange(rangeKey, max);
-							start = rangeKey;
-						}
-					}
-					else if (rangeKey <= (end + 1)) {
-						mapTable.deleteRecord(mapKey);
-						consolidateRange(rangeKey, max);
-						if (max > end) {
-							end = max;
-						}
-					}
-				}
+                    if (rangeKey <= start) {
+                        if (max >= end) {
+                            return;
+                        } else if (max >= (start - 1)) {
+                            mapTable.deleteRecord(mapKey);
+                            consolidateRange(rangeKey, max);
+                            start = rangeKey;
+                        }
+                    } else if (rangeKey <= (end + 1)) {
+                        mapTable.deleteRecord(mapKey);
+                        consolidateRange(rangeKey, max);
+                        if (max > end) {
+                            end = max;
+                        }
+                    }
+                }
 
 				// Handle existing range which overlaps start index.
 				DBRecord rangeRec = rangeTable.getRecordBefore(start);
@@ -257,12 +254,12 @@ public class SharedRangeMapDB {
 
 		// Split related map records
 		Field[] mapKeys = mapTable.findRecords(rangeRecord.getKeyField(), MAP_RANGE_KEY_COL);
-		for (int i = 0; i < mapKeys.length; i++) {
-			DBRecord mapRec = mapTable.getRecord(mapKeys[i]);
-			mapRec.setKey(mapTable.getMaxKey() + 1);
-			mapRec.setField(MAP_RANGE_KEY_COL, newRange.getKeyField());
-			mapTable.putRecord(mapRec);
-		}
+        for (Field mapKey : mapKeys) {
+            DBRecord mapRec = mapTable.getRecord(mapKey);
+            mapRec.setKey(mapTable.getMaxKey() + 1);
+            mapRec.setField(MAP_RANGE_KEY_COL, newRange.getKeyField());
+            mapTable.putRecord(mapRec);
+        }
 
 		return newRange;
 	}
@@ -315,9 +312,9 @@ public class SharedRangeMapDB {
 				rangeTable.putRecord(rangeRec);
 
 				// Delete Map entries on old rangeKey
-				for (int i = 0; i < mapKeys.length; i++) {
-					mapTable.deleteRecord(mapKeys[i]);
-				}
+                for (Field mapKey : mapKeys) {
+                    mapTable.deleteRecord(mapKey);
+                }
 
 				rangeKey = rangeRec.getKey();
 			}
@@ -336,9 +333,9 @@ public class SharedRangeMapDB {
 				rangeTable.putRecord(rangeRec);
 
 				// Delete Map entries on old rangeKey
-				for (int i = 0; i < keys.length; i++) {
-					mapTable.deleteRecord(keys[i]);
-				}
+                for (Field key : keys) {
+                    mapTable.deleteRecord(key);
+                }
 			}
 		}
 
@@ -353,18 +350,17 @@ public class SharedRangeMapDB {
 			//++modCount;
 			try {
 				Field[] mapKeys = mapTable.findRecords(new LongField(value), MAP_VALUE_COL);
-				for (int i = 0; i < mapKeys.length; i++) {
+                for (Field mapKey : mapKeys) {
 
-					// Remove Map entry
-					Field mapKey = mapKeys[i];
-					DBRecord mapRec = mapTable.getRecord(mapKey);
-					mapTable.deleteRecord(mapKey);
+                    // Remove Map entry
+                    DBRecord mapRec = mapTable.getRecord(mapKey);
+                    mapTable.deleteRecord(mapKey);
 
-					// Consolidate Range
-					long rangeKey = mapRec.getLongValue(MAP_RANGE_KEY_COL);
-					DBRecord rangeRec = rangeTable.getRecord(rangeKey);
-					consolidateRange(rangeKey, rangeRec.getLongValue(RANGE_TO_COL));
-				}
+                    // Consolidate Range
+                    long rangeKey = mapRec.getLongValue(MAP_RANGE_KEY_COL);
+                    DBRecord rangeRec = rangeTable.getRecord(rangeKey);
+                    consolidateRange(rangeKey, rangeRec.getLongValue(RANGE_TO_COL));
+                }
 			}
 			catch (IOException e) {
 				errHandler.dbError(e);

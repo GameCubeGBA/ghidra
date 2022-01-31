@@ -419,15 +419,14 @@ public class PatternBlock {
 		nonzerosize = XmlUtils.decodeUnknownInt(el.getAttributeValue("nonzero"));
 
 		List<?> list = el.getChildren();
-		Iterator<?> it = list.iterator();
 
-		while (it.hasNext()) {
-			Element subel = (Element) it.next();
-			int mask = XmlUtils.decodeUnknownInt(subel.getAttributeValue("mask"));
-			int val = XmlUtils.decodeUnknownInt(subel.getAttributeValue("val"));
-			maskvec.push_back(mask);
-			valvec.push_back(val);
-		}
+        for (Object o : list) {
+            Element subel = (Element) o;
+            int mask = XmlUtils.decodeUnknownInt(subel.getAttributeValue("mask"));
+            int val = XmlUtils.decodeUnknownInt(subel.getAttributeValue("val"));
+            maskvec.push_back(mask);
+            valvec.push_back(val);
+        }
 		normalize();
 	}
 

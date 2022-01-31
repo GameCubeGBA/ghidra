@@ -82,23 +82,22 @@ public class SharedReturnJumpAnalyzer extends SharedReturnAnalyzer {
 			}
 			Reference[] refs = mgr.getFlowReferencesFrom(addr);
 
-			for (int refIndex = 0; refIndex < refs.length; refIndex++) {
-				Reference ref = refs[refIndex];
-				RefType refType = ref.getReferenceType();
+            for (Reference ref : refs) {
+                RefType refType = ref.getReferenceType();
 
-				if (refType.isJump()) {
-					// check if the refto is a function
-					// throw it on the jump to function list
-					Address entryAddr = ref.getToAddress();
+                if (refType.isJump()) {
+                    // check if the refto is a function
+                    // throw it on the jump to function list
+                    Address entryAddr = ref.getToAddress();
 
-					Function funcAt = program.getFunctionManager().getFunctionAt(entryAddr);
-					if (funcAt == null) {
-						continue;
-					}
+                    Function funcAt = program.getFunctionManager().getFunctionAt(entryAddr);
+                    if (funcAt == null) {
+                        continue;
+                    }
 
-					sharedReturnSet.addRange(entryAddr, entryAddr);
-				}
-			}
+                    sharedReturnSet.addRange(entryAddr, entryAddr);
+                }
+            }
 		}
 
 		return super.added(program, sharedReturnSet, monitor, log);

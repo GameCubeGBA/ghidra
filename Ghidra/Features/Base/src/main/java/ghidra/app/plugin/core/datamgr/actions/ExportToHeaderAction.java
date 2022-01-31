@@ -200,15 +200,11 @@ public class ExportToHeaderAction extends DockingAction {
 		public void run(TaskMonitor monitor) {
 			try {
 				monitor.setMessage("Export to " + file.getName() + "...");
-				PrintWriter writer = new PrintWriter(file);
-				try {
-					DataTypeWriter dataTypeWriter =
-						new DataTypeWriter(programDataTypeMgr, writer, handler);
-					dataTypeWriter.write(dataTypeList, monitor, false);
-				}
-				finally {
-					writer.close();
-				}
+                try (PrintWriter writer = new PrintWriter(file)) {
+                    DataTypeWriter dataTypeWriter =
+                            new DataTypeWriter(programDataTypeMgr, writer, handler);
+                    dataTypeWriter.write(dataTypeList, monitor, false);
+                }
 				plugin.getTool().setStatusInfo(
 					"Successfully exported data type(s) to " + file.getAbsolutePath());
 			}

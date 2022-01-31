@@ -245,17 +245,15 @@ class PluginManager {
 
 		SaveState saveState = new SaveState("PLUGIN_STATE");
 
-		Iterator<Plugin> it = pluginList.iterator();
-		while (it.hasNext()) {
-			Plugin p = it.next();
-			p.writeConfigState(saveState);
-			if (!saveState.isEmpty()) {
-				Element pluginElem = saveState.saveToXml();
-				pluginElem.setAttribute("CLASS", p.getClass().getName());
-				root.addContent(pluginElem);
-				saveState = new SaveState("PLUGIN_STATE");
-			}
-		}
+        for (Plugin p : pluginList) {
+            p.writeConfigState(saveState);
+            if (!saveState.isEmpty()) {
+                Element pluginElem = saveState.saveToXml();
+                pluginElem.setAttribute("CLASS", p.getClass().getName());
+                root.addContent(pluginElem);
+                saveState = new SaveState("PLUGIN_STATE");
+            }
+        }
 	}
 
 	void restorePluginsFromXml(Element root) throws PluginException {
@@ -299,12 +297,11 @@ class PluginManager {
 	private List<String> getPLuginClassNamesFromOldXml(Element root) {
 		List<String> classNames = new ArrayList<>();
 		List<?> pluginElementList = root.getChildren("PLUGIN");
-		Iterator<?> iter = pluginElementList.iterator();
-		while (iter.hasNext()) {
-			Element elem = (Element) iter.next();
-			String className = elem.getAttributeValue("CLASS");
-			classNames.add(className);
-		}
+        for (Object o : pluginElementList) {
+            Element elem = (Element) o;
+            String className = elem.getAttributeValue("CLASS");
+            classNames.add(className);
+        }
 		PluginClassManager pluginClassManager = tool.getPluginClassManager();
 		return pluginClassManager.fillInPackageClasses(classNames);
 	}
@@ -324,14 +321,13 @@ class PluginManager {
 	 */
 	void restoreDataStateFromXml(Element root) {
 		Map<String, SaveState> map = new HashMap<>();
-		Iterator<?> iter = root.getChildren("PLUGIN").iterator();
-		while (iter.hasNext()) {
-			Element elem = (Element) iter.next();
-			String pluginName = elem.getAttributeValue("NAME");
+        for (Object o : root.getChildren("PLUGIN")) {
+            Element elem = (Element) o;
+            String pluginName = elem.getAttributeValue("NAME");
 
-			SaveState saveState = new SaveState(elem);
-			map.put(pluginName, saveState);
-		}
+            SaveState saveState = new SaveState(elem);
+            map.put(pluginName, saveState);
+        }
 
 		Map<String, Exception> badMap = new LinkedHashMap<>();
 		List<Plugin> list = getPluginsByServiceOrder(0);
@@ -495,11 +491,9 @@ class PluginManager {
 
 	private void initConfigStates(Map<String, SaveState> map) throws PluginException {
 		StringBuilder errMsg = new StringBuilder();
-		Iterator<Plugin> it = pluginList.iterator();
-		while (it.hasNext()) {
-			Plugin p = it.next();
-			readSaveState(p, map, errMsg);
-		}
+        for (Plugin p : pluginList) {
+            readSaveState(p, map, errMsg);
+        }
 		if (errMsg.length() > 0) {
 			throw new PluginException(errMsg.toString());
 		}

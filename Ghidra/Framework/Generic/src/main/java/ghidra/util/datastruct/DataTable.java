@@ -35,9 +35,9 @@ public class DataTable implements Serializable {
      * @param row The row to be removed
      */
     public void removeRow(int row) {
-        for(int i=0;i<dataColumns.length;i++) {
-            if (dataColumns[i] != null) {
-                dataColumns[i].remove(row);
+        for (Array dataColumn : dataColumns) {
+            if (dataColumn != null) {
+                dataColumn.remove(row);
             }
         }
     }

@@ -67,13 +67,12 @@ public class TOCConverter {
 	 */
 	void writeTOCMapFile(PrintWriter out) {
 		out.println("  <!-- Table of Contents help IDs -->");
-		for (int i = 0; i < tocList.size(); i++) {
-			String target = tocList.get(i);
-			String url = urlMap.get(target);
+        for (String target : tocList) {
+            String url = urlMap.get(target);
 
-			String line = "  <mapID target=\"" + target + "\" url=\"" + url + "\" />";
-			out.println(line);
-		}
+            String line = "  <mapID target=\"" + target + "\" url=\"" + url + "\" />";
+            out.println(line);
+        }
 		out.println("  <!-- End of Table of Contents help IDs -->");
 	}
 

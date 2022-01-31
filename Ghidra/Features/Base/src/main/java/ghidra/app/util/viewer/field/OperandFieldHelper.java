@@ -477,10 +477,10 @@ abstract class OperandFieldHelper extends FieldFactory {
 
 	private int addElements(Instruction inst, List<OperandFieldElement> elements, List<?> objList,
 			int opIndex, int subOpIndex, boolean underline, int characterOffset) {
-		for (int i = 0; i < objList.size(); i++) {
-			characterOffset = addElement(inst, elements, objList.get(i), underline, opIndex,
-				subOpIndex, characterOffset);
-		}
+        for (Object o : objList) {
+            characterOffset = addElement(inst, elements, o, underline, opIndex,
+                    subOpIndex, characterOffset);
+        }
 		return characterOffset;
 	}
 

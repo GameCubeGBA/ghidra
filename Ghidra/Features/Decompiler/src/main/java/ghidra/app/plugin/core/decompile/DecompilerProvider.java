@@ -293,19 +293,17 @@ public class DecompilerProvider extends NavigatableComponentProviderAdapter
 			controller.resetDecompiler();
 		}
 		else if (ev.containsEvent(DomainObject.DO_PROPERTY_CHANGED)) {
-			Iterator<DomainObjectChangeRecord> iter = ev.iterator();
-			while (iter.hasNext()) {
-				DomainObjectChangeRecord record = iter.next();
-				if (record.getEventType() == DomainObject.DO_PROPERTY_CHANGED) {
-					if (record.getOldValue() instanceof String) {
-						String value = (String) record.getOldValue();
-						if (value.startsWith(SpecExtension.SPEC_EXTENSION)) {
-							controller.resetDecompiler();
-							break;
-						}
-					}
-				}
-			}
+            for (DomainObjectChangeRecord record : ev) {
+                if (record.getEventType() == DomainObject.DO_PROPERTY_CHANGED) {
+                    if (record.getOldValue() instanceof String) {
+                        String value = (String) record.getOldValue();
+                        if (value.startsWith(SpecExtension.SPEC_EXTENSION)) {
+                            controller.resetDecompiler();
+                            break;
+                        }
+                    }
+                }
+            }
 		}
 
 		// Trigger a redecompile an any program change if the window is active

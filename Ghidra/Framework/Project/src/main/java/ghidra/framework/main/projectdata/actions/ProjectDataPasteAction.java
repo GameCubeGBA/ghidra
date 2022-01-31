@@ -191,19 +191,18 @@ public class ProjectDataPasteAction extends ProjectDataCopyCutBaseAction {
 		List<GTreeNode> newList = new ArrayList<>();
 		for (int i = 0; i < list.size(); i++) {
 			GTreeNode destNode = list.get(i);
-			for (int j = 0; j < list.size(); j++) {
-				GTreeNode node = list.get(j);
-				if (destNode == node) {
-					continue;
-				}
-				if (node.isAncestor(destNode)) {
-					newList.add(node);
-				}
-			}
+            for (GTreeNode node : list) {
+                if (destNode == node) {
+                    continue;
+                }
+                if (node.isAncestor(destNode)) {
+                    newList.add(node);
+                }
+            }
 		}
-		for (int i = 0; i < newList.size(); i++) {
-			list.remove(newList.get(i));
-		}
+        for (GTreeNode gTreeNode : newList) {
+            list.remove(gTreeNode);
+        }
 		return newList.size() > 0;
 	}
 

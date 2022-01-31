@@ -213,8 +213,8 @@ public class ObjectStorageStreamAdapter implements ObjectStorage {
                 return;
             }
             out.writeInt(value.length);
-            for (int i = 0; i < value.length; i++) {
-                out.writeInt(value[i]);
+            for (int j : value) {
+                out.writeInt(j);
             }
         } catch (IOException e) {}
     }
@@ -229,8 +229,8 @@ public class ObjectStorageStreamAdapter implements ObjectStorage {
                 return;
             }
             out.writeInt(value.length);
-            for (int i = 0; i < value.length; i++) {
-                out.writeByte(value[i]);
+            for (byte b : value) {
+                out.writeByte(b);
             }
         } catch (IOException e) {}
     }
@@ -245,8 +245,8 @@ public class ObjectStorageStreamAdapter implements ObjectStorage {
                 return;
             }
             out.writeInt(value.length);
-            for (int i = 0; i < value.length; i++) {
-                out.writeShort(value[i]);
+            for (short item : value) {
+                out.writeShort(item);
             }
         } catch (IOException e) {}
 
@@ -262,8 +262,8 @@ public class ObjectStorageStreamAdapter implements ObjectStorage {
                 return;
             }
             out.writeInt(value.length);
-            for (int i = 0; i < value.length; i++) {
-                out.writeLong(value[i]);
+            for (long l : value) {
+                out.writeLong(l);
             }
         } catch (IOException e) {}
 
@@ -279,8 +279,8 @@ public class ObjectStorageStreamAdapter implements ObjectStorage {
                 return;
             }
             out.writeInt(value.length);
-            for (int i = 0; i < value.length; i++) {
-                out.writeFloat(value[i]);
+            for (float v : value) {
+                out.writeFloat(v);
             }
         } catch (IOException e) {}
     
@@ -296,8 +296,8 @@ public class ObjectStorageStreamAdapter implements ObjectStorage {
                 return;
             }
             out.writeInt(value.length);
-            for (int i = 0; i < value.length; i++) {
-                out.writeDouble(value[i]);
+            for (double v : value) {
+                out.writeDouble(v);
             }
         } catch (IOException e) {}
     }
@@ -312,8 +312,8 @@ public class ObjectStorageStreamAdapter implements ObjectStorage {
                 return;
             }
             out.writeInt(value.length);
-            for (int i = 0; i < value.length; i++) {
-                out.writeObject(value[i]);
+            for (String s : value) {
+                out.writeObject(s);
             }
         } catch (IOException e) {}
     }

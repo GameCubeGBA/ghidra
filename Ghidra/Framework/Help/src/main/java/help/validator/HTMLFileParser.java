@@ -260,18 +260,17 @@ public class HTMLFileParser {
 		buf = new StringBuilder();
 		buf.append('<');
 		buf.append(tagType);
-		Iterator<String> iter = map.keySet().iterator();
-		while (iter.hasNext()) {
-			attr = iter.next();
-			String value = map.get(attr);
-			buf.append(' ');
-			buf.append(attr);
-			if (value != null) {
-				buf.append("=\"");
-				buf.append(value);
-				buf.append("\"");
-			}
-		}
+        for (String s : map.keySet()) {
+            attr = s;
+            String value = map.get(attr);
+            buf.append(' ');
+            buf.append(attr);
+            if (value != null) {
+                buf.append("=\"");
+                buf.append(value);
+                buf.append("\"");
+            }
+        }
 		buf.append('>');
 		return buf.toString();
 	}

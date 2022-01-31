@@ -201,12 +201,12 @@ public class BTreeAnnotationScript extends GhidraScript {
 		for (int i = 0; i < data.getNumComponents(); ++i) {
 			Data component = data.getComponent(i);
 			SettingsDefinition[] settings = component.getDataType().getSettingsDefinitions();
-			for (int j = 0; j < settings.length; ++j) {
-				if (settings[j] instanceof EndianSettingsDefinition) {
-					EndianSettingsDefinition setting = (EndianSettingsDefinition) settings[j];
-					setting.setBigEndian(component, false);
-				}
-			}
+            for (SettingsDefinition settingsDefinition : settings) {
+                if (settingsDefinition instanceof EndianSettingsDefinition) {
+                    EndianSettingsDefinition setting = (EndianSettingsDefinition) settingsDefinition;
+                    setting.setBigEndian(component, false);
+                }
+            }
 		}
 	}
 }

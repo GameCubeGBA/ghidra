@@ -481,18 +481,16 @@ public class CopyPasteFunctionInfoTest extends AbstractGhidraHeadedIntegrationTe
 
 	private void resetOptions() {
 		List<String> names = fieldOptions2.getOptionNames();
-		for (int i = 0; i < names.size(); i++) {
-			String name = names.get(i);
-			if (!name.startsWith("Format Code")) {
-				continue;
-			}
-			if (name.indexOf("Show ") >= 0 || name.indexOf("Flag ") >= 0) {
-				fieldOptions2.setBoolean(name, false);
-			}
-			else if (name.indexOf("Lines") >= 0) {
-				fieldOptions2.setInt(name, 0);
-			}
-		}
+        for (String name : names) {
+            if (!name.startsWith("Format Code")) {
+                continue;
+            }
+            if (name.indexOf("Show ") >= 0 || name.indexOf("Flag ") >= 0) {
+                fieldOptions2.setBoolean(name, false);
+            } else if (name.indexOf("Lines") >= 0) {
+                fieldOptions2.setInt(name, 0);
+            }
+        }
 		waitForSwing();
 		CodeBrowserPlugin cb = getPlugin(toolTwo, CodeBrowserPlugin.class);
 		cb.updateNow();

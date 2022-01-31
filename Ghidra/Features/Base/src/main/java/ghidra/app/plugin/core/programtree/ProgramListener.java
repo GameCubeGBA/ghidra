@@ -160,31 +160,30 @@ class ProgramListener implements DomainObjectListener {
 				nodes = tree.findNodes(childName);
 				List<TreePath> viewList = tree.getViewList();
 				int idx = 0;
-				for (int i = 0; i < nodes.length; i++) {
-					if (!nodes[i].getParentModule().getName().equals(newParentName)) {
-						continue;
-					}
-					TreePath nodePath = nodes[i].getTreePath();
-					for (int j = idx; j < viewedIndexes.length; j++) {
+                for (ProgramNode node : nodes) {
+                    if (!node.getParentModule().getName().equals(newParentName)) {
+                        continue;
+                    }
+                    TreePath nodePath = node.getTreePath();
+                    for (int j = idx; j < viewedIndexes.length; j++) {
                         TreePath vp = viewList.get(viewedIndexes[j]);
-						ProgramNode programNode = (ProgramNode) vp.getLastPathComponent();
-						String vname = programNode.getName();
-						if (!vname.equals(childName)) {
-							// find descendant with name
-							TreePath descPath = findDescendant(nodePath, vname);
-							if (descPath != null) {
-								viewList.remove(viewedIndexes[j]);
-								tree.addToView(nodePath, viewedIndexes[j]);
-								++idx;
-							}
-						}
-						else {
-							viewList.remove(viewedIndexes[j]);
-							tree.addToView(nodePath, viewedIndexes[j]);
-							++idx;
-						}
-					}
-				}
+                        ProgramNode programNode = (ProgramNode) vp.getLastPathComponent();
+                        String vname = programNode.getName();
+                        if (!vname.equals(childName)) {
+                            // find descendant with name
+                            TreePath descPath = findDescendant(nodePath, vname);
+                            if (descPath != null) {
+                                viewList.remove(viewedIndexes[j]);
+                                tree.addToView(nodePath, viewedIndexes[j]);
+                                ++idx;
+                            }
+                        } else {
+                            viewList.remove(viewedIndexes[j]);
+                            tree.addToView(nodePath, viewedIndexes[j]);
+                            ++idx;
+                        }
+                    }
+                }
 				if (childName.equals(actionManager.getLastGroupPasted())) {
 					tree.setBusyCursor(false);
 				}

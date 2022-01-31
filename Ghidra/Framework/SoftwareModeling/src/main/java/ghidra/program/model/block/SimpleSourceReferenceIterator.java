@@ -118,30 +118,30 @@ public class SimpleSourceReferenceIterator implements CodeBlockReferenceIterator
         Address[] entryPts = block.getStartAddresses();
 
 		// Check references to all entry points - very special case to have more than one
-    	for (int n = 0; n < entryPts.length; n++) {
-     		ReferenceIterator iter = refMgr.getReferencesTo(entryPts[n]);
-    		while (iter.hasNext()) {
-    			Reference ref = iter.next();
-    			RefType refType = ref.getReferenceType();
-    			
-    			if (monitor != null && monitor.isCancelled())
-					throw new CancelledException();
-    			
-    			// Handle FlowType reference 
-    			if (refType.isFlow()) {
-    				queueDestReference(
-    					blockRefQueue,
-    					block, 
-            			entryPts[n],
-            			ref.getFromAddress(),
-            			(FlowType)refType,
-            			monitor);
-            		++count;
-    			}
-    			
-    			// Handle possible indirection
-    			else if (followIndirectFlows && (instr != null || start.isExternalAddress())) {
-        			int cnt = followIndirection(blockRefQueue, block, ref, monitor);
+        for (Address entryPt : entryPts) {
+            ReferenceIterator iter = refMgr.getReferencesTo(entryPt);
+            while (iter.hasNext()) {
+                Reference ref = iter.next();
+                RefType refType = ref.getReferenceType();
+
+                if (monitor != null && monitor.isCancelled())
+                    throw new CancelledException();
+
+                // Handle FlowType reference
+                if (refType.isFlow()) {
+                    queueDestReference(
+                            blockRefQueue,
+                            block,
+                            entryPt,
+                            ref.getFromAddress(),
+                            (FlowType) refType,
+                            monitor);
+                    ++count;
+                }
+
+                // Handle possible indirection
+                else if (followIndirectFlows && (instr != null || start.isExternalAddress())) {
+                    int cnt = followIndirection(blockRefQueue, block, ref, monitor);
 //        			if (cnt == 0) {
 //        				// Could not resolve indirection - include ref as invalid flow
 //        				queueDestReference(
@@ -152,10 +152,10 @@ public class SimpleSourceReferenceIterator implements CodeBlockReferenceIterator
 //                			FlowType.INVALID);
 //                		cnt = 1;
 //        			}
-        			count += cnt;        
-				}
-    		}
-    	}
+                    count += cnt;
+                }
+            }
+        }
 
         // Get single fall-from address for instruction block		
  		if (instr != null) {

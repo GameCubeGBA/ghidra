@@ -724,19 +724,17 @@ public class AddressSet implements AddressSetView {
 			entry = rbTree.getFirst();
 		}
 
-		Iterator<AddressRange> iterator = addrSet.iterator();
-		while (iterator.hasNext()) {
-			AddressRange range = iterator.next();
-			while (range.compareTo(entry.getValue()) > 0) {
-				entry = entry.getSuccessor();
-				if (entry == null) {
-					return false;
-				}
-			}
-			if (range.getMaxAddress().compareTo(entry.getKey()) >= 0) {
-				return true;
-			}
-		}
+        for (AddressRange range : addrSet) {
+            while (range.compareTo(entry.getValue()) > 0) {
+                entry = entry.getSuccessor();
+                if (entry == null) {
+                    return false;
+                }
+            }
+            if (range.getMaxAddress().compareTo(entry.getKey()) >= 0) {
+                return true;
+            }
+        }
 		return false;
 	}
 
@@ -746,19 +744,17 @@ public class AddressSet implements AddressSetView {
 		if (entry == null) {
 			return false;
 		}
-		Iterator<AddressRange> iterator = addrSet.iterator();
-		while (iterator.hasNext()) {
-			AddressRange range = iterator.next();
-			while (range.compareTo(entry.getValue()) > 0) {
-				entry = entry.getSuccessor();
-				if (entry == null) {
-					return false;
-				}
-			}
-			if (range.getMaxAddress().compareTo(entry.getValue()) > 0) {
-				return false;
-			}
-		}
+        for (AddressRange range : addrSet) {
+            while (range.compareTo(entry.getValue()) > 0) {
+                entry = entry.getSuccessor();
+                if (entry == null) {
+                    return false;
+                }
+            }
+            if (range.getMaxAddress().compareTo(entry.getValue()) > 0) {
+                return false;
+            }
+        }
 		return true;
 	}
 

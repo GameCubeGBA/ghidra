@@ -266,11 +266,9 @@ public class BookmarkPlugin extends ProgramPlugin
 	}
 
 	private void disposeAllBookmarkers() {
-		Iterator<BookmarkNavigator> it = bookmarkNavigators.values().iterator();
-		while (it.hasNext()) {
-			BookmarkNavigator nav = it.next();
-			nav.dispose();
-		}
+        for (BookmarkNavigator nav : bookmarkNavigators.values()) {
+            nav.dispose();
+        }
 		bookmarkNavigators.clear();
 	}
 
@@ -627,10 +625,9 @@ public class BookmarkPlugin extends ProgramPlugin
 				types.add(type);
 			}
 			else {
-				Iterator<String> it = bookmarkNavigators.keySet().iterator();
-				while (it.hasNext()) {
-					types.add(it.next());
-				}
+                for (String s : bookmarkNavigators.keySet()) {
+                    types.add(s);
+                }
 			}
 			updateMgr.update();
 		}
@@ -658,11 +655,9 @@ public class BookmarkPlugin extends ProgramPlugin
 				running = true;
 			}
 			try {
-				Iterator<String> it = myTypes.iterator();
-				while (it.hasNext()) {
-					String type = it.next();
-					updateNav(type);
-				}
+                for (String type : myTypes) {
+                    updateNav(type);
+                }
 			}
 			catch (Throwable t) {
 				// This is squashed due to the nature of this primitive thread.  This thread 

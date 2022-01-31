@@ -419,51 +419,48 @@ public class DecompileDebug {
 		int[] buf = new int[ctxcache.getContextSize()];
 		int[] lastbuf = null;
 
-		Iterator<Address> iter = contextchange.iterator();
-		while (iter.hasNext()) {
-			Address addr = iter.next();
-			ProgramProcessorContext procctx = new ProgramProcessorContext(progctx, addr);
-			ctxcache.getContext(procctx, buf);
-			StringBuilder stringBuf = new StringBuilder();
-			if (lastbuf != null) {		// Check to make sure we don't have identical context data
-				int i;
-				for (i = 0; i < buf.length; ++i) {
-					if (buf[i] != lastbuf[i]) {
-						break;
-					}
-				}
-				if (i == buf.length) {
-					continue;	// If all data is identical, then changepoint is not necessary
-				}
-			}
-			else {
-				lastbuf = new int[buf.length];
-			}
-			for (int i = 0; i < buf.length; ++i) {
-				lastbuf[i] = buf[i];
-			}
+        for (Address addr : contextchange) {
+            ProgramProcessorContext procctx = new ProgramProcessorContext(progctx, addr);
+            ctxcache.getContext(procctx, buf);
+            StringBuilder stringBuf = new StringBuilder();
+            if (lastbuf != null) {        // Check to make sure we don't have identical context data
+                int i;
+                for (i = 0; i < buf.length; ++i) {
+                    if (buf[i] != lastbuf[i]) {
+                        break;
+                    }
+                }
+                if (i == buf.length) {
+                    continue;    // If all data is identical, then changepoint is not necessary
+                }
+            } else {
+                lastbuf = new int[buf.length];
+            }
+            for (int i = 0; i < buf.length; ++i) {
+                lastbuf[i] = buf[i];
+            }
 
-			stringBuf.append("<context_pointset");
-			AddressXML.appendAttributes(stringBuf, addr);
-			stringBuf.append(">\n");
-			for (ContextSymbol sym : ctxsymbols) {
-				int sbit = sym.getInternalLow();
-				int ebit = sym.getInternalHigh();
-				int word = sbit / (8 * 4);
-				int startbit = sbit - word * (8 * 4);
-				int endbit = ebit - word * (8 * 4);
-				int shift = (8 * 4) - endbit - 1;
-				int mask = -1 >>> (startbit + shift);
-				int val = (buf[word] >>> shift) & mask;
-				stringBuf.append("  <set");
-				SpecXmlUtils.encodeStringAttribute(stringBuf, "name", sym.getName());
-				SpecXmlUtils.encodeSignedIntegerAttribute(stringBuf, "val", val);
-				stringBuf.append("/>\n");
-			}
-			stringBuf.append("</context_pointset>\n");
-			String end = stringBuf.toString();
-			debugStream.write(end.getBytes());
-		}
+            stringBuf.append("<context_pointset");
+            AddressXML.appendAttributes(stringBuf, addr);
+            stringBuf.append(">\n");
+            for (ContextSymbol sym : ctxsymbols) {
+                int sbit = sym.getInternalLow();
+                int ebit = sym.getInternalHigh();
+                int word = sbit / (8 * 4);
+                int startbit = sbit - word * (8 * 4);
+                int endbit = ebit - word * (8 * 4);
+                int shift = (8 * 4) - endbit - 1;
+                int mask = -1 >>> (startbit + shift);
+                int val = (buf[word] >>> shift) & mask;
+                stringBuf.append("  <set");
+                SpecXmlUtils.encodeStringAttribute(stringBuf, "name", sym.getName());
+                SpecXmlUtils.encodeSignedIntegerAttribute(stringBuf, "val", val);
+                stringBuf.append("/>\n");
+            }
+            stringBuf.append("</context_pointset>\n");
+            String end = stringBuf.toString();
+            debugStream.write(end.getBytes());
+        }
 	}
 
 	private void dumpCPool(OutputStream debugStream) throws IOException {

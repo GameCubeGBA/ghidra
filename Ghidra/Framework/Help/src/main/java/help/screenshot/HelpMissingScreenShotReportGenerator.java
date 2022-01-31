@@ -98,26 +98,14 @@ public class HelpMissingScreenShotReportGenerator {
 	void generateReport() {
 		outputFile.getParentFile().mkdirs(); // make sure the folder exists
 
-		BufferedWriter writer = null;
-		try {
-			writer = new BufferedWriter(new FileWriter(outputFile));
-			doGenerateReport(writer);
-			System.out.println("Report written to " + outputFile);
-		}
-		catch (Exception e) {
-			errorMessage("FAILED!", e);
-		}
-		finally {
-			if (writer != null) {
-				try {
-					writer.close();
-				}
-				catch (IOException e1) {
-					// don't care
-				}
-			}
-		}
-	}
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {
+            doGenerateReport(writer);
+            System.out.println("Report written to " + outputFile);
+        } catch (Exception e) {
+            errorMessage("FAILED!", e);
+        }
+        // don't care
+    }
 
 	private void doGenerateReport(BufferedWriter writer) throws IOException {
 		writeHeader(writer);
@@ -290,25 +278,13 @@ public class HelpMissingScreenShotReportGenerator {
 	}
 
 	private void generateUntestedImagesFile(File untestedOutputFile) {
-		BufferedWriter writer = null;
-		try {
-			writer = new BufferedWriter(new FileWriter(untestedOutputFile));
-			doGenerateUntestedImagesFile(writer);
-		}
-		catch (Exception e) {
-			errorMessage("FAILED! writing untested images file", e);
-		}
-		finally {
-			if (writer != null) {
-				try {
-					writer.close();
-				}
-				catch (IOException e1) {
-					// don't care
-				}
-			}
-		}
-	}
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(untestedOutputFile))) {
+            doGenerateUntestedImagesFile(writer);
+        } catch (Exception e) {
+            errorMessage("FAILED! writing untested images file", e);
+        }
+        // don't care
+    }
 
 	private void doGenerateUntestedImagesFile(BufferedWriter writer) throws IOException {
 		writeHeader(writer);

@@ -176,28 +176,23 @@ class ByteViewerHeader extends JTableHeader implements Scrollable {
 	 */
 	private void recomputeColumnHeaders() {
 
-		Iterator<Component> iter = components.keySet().iterator();
+        for (Component c : components.keySet()) {
 
-		while (iter.hasNext()) {
+            TableColumn col = components.get(c);
+            int width = c.getPreferredSize().width;
+            int index = columnModel.getColumnIndex(col.getIdentifier());
 
-			Component c = iter.next();
-			TableColumn col = components.get(c);
-			int width = c.getPreferredSize().width;
-			int index = columnModel.getColumnIndex(col.getIdentifier());
-
-			if (index == 0) {
-				width += separatorWidth / 2;
-			}
-			else if (index == components.size() - 1) {
-				width += separatorWidth / 2;
-			}
-			else {
-				width += separatorWidth;
-			}
-			col.setMinWidth(width);
-			col.setMaxWidth(width);
-			col.setPreferredWidth(width);
-		}
+            if (index == 0) {
+                width += separatorWidth / 2;
+            } else if (index == components.size() - 1) {
+                width += separatorWidth / 2;
+            } else {
+                width += separatorWidth;
+            }
+            col.setMinWidth(width);
+            col.setMaxWidth(width);
+            col.setPreferredWidth(width);
+        }
 
 	}
 
