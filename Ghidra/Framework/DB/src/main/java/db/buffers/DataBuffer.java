@@ -22,7 +22,7 @@ import java.util.zip.*;
 import db.Buffer;
 
 /**
- * <code>DataBuffer</code> provides an accessible binary buffer
+ * {@code DataBuffer} provides an accessible binary buffer
  * for use with a BufferMgr and BufferFile.
  */
 public class DataBuffer implements Buffer, Externalizable {

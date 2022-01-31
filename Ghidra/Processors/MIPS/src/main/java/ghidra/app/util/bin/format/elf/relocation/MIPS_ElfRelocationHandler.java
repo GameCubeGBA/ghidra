@@ -1000,7 +1000,7 @@ public class MIPS_ElfRelocationHandler extends ElfRelocationHandler {
 	}
 
 	/**
-	 * <code>MIPS_ElfRelocationContext</code> provides extended relocation context with the ability
+	 * {@code MIPS_ElfRelocationContext} provides extended relocation context with the ability
 	 * to retain deferred relocation lists.  In addition, the ability to generate a section GOT
 	 * table is provided to facilitate relocations encountered within object modules.
 	 */
@@ -1283,7 +1283,7 @@ public class MIPS_ElfRelocationHandler extends ElfRelocationHandler {
 	}
 
 	/**
-	 * <code>MIPS_DeferredRelocation</code> is used to capture a relocation whose processing
+	 * {@code MIPS_DeferredRelocation} is used to capture a relocation whose processing
 	 * must be deferred.
 	 */
 	private static class MIPS_DeferredRelocation {

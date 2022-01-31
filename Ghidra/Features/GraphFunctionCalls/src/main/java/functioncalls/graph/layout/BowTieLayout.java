@@ -15,17 +15,21 @@
  */
 package functioncalls.graph.layout;
 
-import java.awt.Rectangle;
-import java.awt.geom.Point2D;
-import java.util.*;
-import java.util.stream.Collectors;
-
-import functioncalls.graph.*;
+import functioncalls.graph.FcgEdge;
+import functioncalls.graph.FcgVertex;
+import functioncalls.graph.FunctionCallGraph;
 import ghidra.graph.VisualGraph;
 import ghidra.graph.viewer.edge.AbstractVisualEdge;
 import ghidra.graph.viewer.layout.*;
-import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
+
+import java.awt.*;
+import java.awt.geom.Point2D;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * A layout that will arrange vertices around a single vertex, with the incoming and outgoing
@@ -86,7 +90,7 @@ public class BowTieLayout extends AbstractVisualGraphLayout<FcgVertex, FcgEdge> 
 
 	@Override
 	protected GridLocationMap<FcgVertex, FcgEdge> performInitialGridLayout(
-			VisualGraph<FcgVertex, FcgEdge> g) throws CancelledException {
+			VisualGraph<FcgVertex, FcgEdge> g) {
 
 		if (!(g instanceof FunctionCallGraph)) {
 			throw new IllegalArgumentException(

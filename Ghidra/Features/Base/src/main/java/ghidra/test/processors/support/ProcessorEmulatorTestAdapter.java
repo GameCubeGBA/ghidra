@@ -63,7 +63,7 @@ import utilities.util.FileUtilities;
 import utility.application.ApplicationLayout;
 
 /**
- * <code>ProcessorEmulatorTestAdapter</code> provides an abstract JUnit test implementation
+ * {@code ProcessorEmulatorTestAdapter} provides an abstract JUnit test implementation
  * for processor-specific test cases.  All test cases which extend this class must have a
  * class name which ends with 'EmulatorTest' and starts with the processor designator which
  * will be used to identify associated test binaries within either the processor module's
@@ -487,7 +487,7 @@ public abstract class ProcessorEmulatorTestAdapter extends TestCase implements E
 	/**
 	 * Create TestSuite based upon available test groups contained within binary
 	 * test files associated with target processor.
-	 * @param emulatorTestClass test which extends <code>ProcessorEmulatorTestAdapter</code>
+	 * @param emulatorTestClass test which extends {@code ProcessorEmulatorTestAdapter}
 	 * and whose name ends with "EmulatorTest".
 	 * @return test suite
 	 */

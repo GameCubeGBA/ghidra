@@ -77,9 +77,9 @@ public abstract class ThreadedTableModel<ROW_OBJECT, DATA_SOURCE>
 	 * This variable can be in one of three states:
 	 * 	<ul>
 	 * 		<li>null - signals that there is no filter change taking place</li>
-	 * 		<li>An instance of <code>NullTableFilter</code> - the client has removed the current
+	 * 		<li>An instance of {@code NullTableFilter} - the client has removed the current
 	 *          filter by calling {@link #setTableFilter(TableFilter)} with a null value</li>
-	 * 		<li>An instance of a custom <code>TableFilter</code> - the client has changed the
+	 * 		<li>An instance of a custom {@code TableFilter} - the client has changed the
 	 *          filter to a non-null value by calling {@link #setTableFilter(TableFilter)}</li>
 	 *  </ul>
 	 */
@@ -467,7 +467,7 @@ public abstract class ThreadedTableModel<ROW_OBJECT, DATA_SOURCE>
 	}
 
 	/**
-	 * Sets the given <code>TableFilter</code> on this model.  This table filter will then be used
+	 * Sets the given {@code TableFilter} on this model.  This table filter will then be used
 	 * by this model in the default {@link #doFilter(List, TableSortingContext, TaskMonitor)}
 	 * method.
 	 * @param tableFilter The filter to use for table filtering.

@@ -20,7 +20,7 @@ import ghidra.program.model.listing.*;
 import java.io.Serializable;
 
 /**
- * The <CODE>GroupPath</CODE> is a class to represent a unique path in a tree for a Group.
+ * The {@code GroupPath} is a class to represent a unique path in a tree for a Group.
  */
 public class GroupPath implements Serializable {
     private final static long serialVersionUID = 1;

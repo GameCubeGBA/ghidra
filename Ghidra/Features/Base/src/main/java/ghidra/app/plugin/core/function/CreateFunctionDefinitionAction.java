@@ -25,7 +25,7 @@ import ghidra.program.util.FunctionSignatureFieldLocation;
 import docking.action.MenuData;
 
 /**
- * <CODE>CreateFunctionDefinitionAction</CODE> allows the user to create a 
+ * {@code CreateFunctionDefinitionAction} allows the user to create a
  * function definition data type from a function's signature.
  */
 class CreateFunctionDefinitionAction extends ListingContextAction {

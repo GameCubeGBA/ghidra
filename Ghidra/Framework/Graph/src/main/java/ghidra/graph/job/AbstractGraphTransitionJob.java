@@ -64,7 +64,7 @@ public abstract class AbstractGraphTransitionJob<V extends VisualVertex, E exten
 
 	/**
 	 * Create the vertex locations that will be transitioned over the life of this animator. 
-	 * The locations are in <code>layout space</code>.   This method is expected to update
+	 * The locations are in {@code layout space}.   This method is expected to update
 	 * {@link #vertexLocations} (and optionally {@link #edgeArticulationLocations}).
 	 */
 	protected abstract void initializeVertexLocations();

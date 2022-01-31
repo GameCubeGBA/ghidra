@@ -679,7 +679,7 @@ public class GhidraFileChooser extends DialogComponentProvider
 	}
 
 	/**
-	 * Sets the text used in the <code>OK</code> button 
+	 * Sets the text used in the {@code OK} button
 	 * 
 	 * @param buttonText the text 
 	 */
@@ -688,7 +688,7 @@ public class GhidraFileChooser extends DialogComponentProvider
 	}
 
 	/**
-	 * Sets the tooltip text used in the <code>OK</code> button
+	 * Sets the tooltip text used in the {@code OK} button
 	 * 
 	 * @param tooltipText the tooltip text
 	 */
@@ -1099,13 +1099,13 @@ public class GhidraFileChooser extends DialogComponentProvider
 	}
 
 	/**
-	 * Sets the current directory. Passing in <code>null</code> sets the
+	 * Sets the current directory. Passing in {@code null} sets the
 	 * file chooser to point to the user's default directory.
 	 * This default depends on the operating system. It is
 	 * typically the "My Documents" folder on Windows, and the user's
 	 * home directory on Unix.
 	 * <br>
-	 * If the file passed in as <code>currentDirectory</code> is not a
+	 * If the file passed in as {@code currentDirectory} is not a
 	 * directory, the parent of the file will be used as the currentDirectory.
 	 * If the parent is not traversable, then it will walk up the parent tree
 	 * until it finds a traversable directory, or hits the root of the

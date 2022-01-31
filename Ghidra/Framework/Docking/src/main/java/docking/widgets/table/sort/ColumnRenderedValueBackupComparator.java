@@ -25,7 +25,7 @@ import ghidra.util.table.column.GColumnRenderer;
 
 /**
  * A special version of the backup comparator that uses the column's rendered value for 
- * the backup sort, rather the just <code>toString</code>, which is what the default parent
+ * the backup sort, rather the just {@code toString}, which is what the default parent
  * table model will do.
  * 
  * @param <T> the row type 

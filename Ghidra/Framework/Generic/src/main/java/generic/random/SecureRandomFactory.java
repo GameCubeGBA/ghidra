@@ -21,7 +21,7 @@ import java.security.SecureRandom;
 import ghidra.util.Msg;
 
 /**
- * <code>SecureRandomFactory</code> provides a static singleton instance of SecureRandom
+ * {@code SecureRandomFactory} provides a static singleton instance of SecureRandom
  */
 public class SecureRandomFactory {
 

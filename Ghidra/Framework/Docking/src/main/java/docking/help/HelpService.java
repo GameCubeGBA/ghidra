@@ -77,7 +77,7 @@ public interface HelpService {
 	/**
 	 * Register help for a specific object.
 	 * 
-	 * <P>Do not call this method will a <code>null</code> help location.  Instead, to signal that
+	 * <P>Do not call this method will a {@code null} help location.  Instead, to signal that
 	 * an item has no help, call {@link #excludeFromHelp(Object)}.
 	 * 
 	 * @param helpObject the object to associate the specified help location with

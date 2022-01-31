@@ -318,14 +318,14 @@ public interface ReferenceManager {
 
 	/**
 	 * Returns the number of memory References to the specified
-	 * <code>toAddr</code>
+	 * {@code toAddr}
 	 * @param toAddr the address being referenced
 	 */
 	public int getReferenceCountTo(Address toAddr);
 
 	/**
 	 * Returns the number of memory References from the specified
-	 * <code>fromAddr</code>
+	 * {@code fromAddr}
 	 * @param fromAddr the address of the codeunit making the reference.
 	 */
 	public int getReferenceCountFrom(Address fromAddr);

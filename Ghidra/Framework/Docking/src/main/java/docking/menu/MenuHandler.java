@@ -23,7 +23,7 @@ import javax.swing.event.*;
 import docking.action.DockingActionIf;
 
 /**
- * <code>MenuHandler</code> provides a listener interface for menus.
+ * {@code MenuHandler} provides a listener interface for menus.
  * This interface has been provided to allow the listener to
  * manage focus and help behavior.
  */

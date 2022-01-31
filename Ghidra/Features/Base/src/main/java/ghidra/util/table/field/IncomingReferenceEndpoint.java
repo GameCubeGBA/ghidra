@@ -19,7 +19,7 @@ import ghidra.program.model.symbol.Reference;
 
 /**
  * Marker row object that signals to the table API that the references contained therein all
- * share the <code>to</code> address, with each row showing the <code>from</code> address.
+ * share the {@code to} address, with each row showing the <code>from</code> address.
  */
 public class IncomingReferenceEndpoint extends ReferenceEndpoint {
 

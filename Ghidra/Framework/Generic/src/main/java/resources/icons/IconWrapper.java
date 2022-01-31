@@ -22,7 +22,7 @@ import java.awt.Graphics;
 import javax.swing.Icon;
 
 /**
- * <code>IconWrapper</code> provides a simple icon wrapper which 
+ * {@code IconWrapper} provides a simple icon wrapper which
  * delays icon construction until its first use.
  */
 public abstract class IconWrapper implements Icon {

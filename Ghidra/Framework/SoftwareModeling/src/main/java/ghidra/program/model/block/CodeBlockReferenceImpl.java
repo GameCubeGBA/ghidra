@@ -24,14 +24,14 @@ import ghidra.util.task.TaskMonitor;
 /**
  *  CodeBlockReferenceImpl implements a CodeBlockReference.
  * <P>
- *  A <CODE>CodeBlockReference</CODE> represents the flow from one source block
+ *  A {@code CodeBlockReference} represents the flow from one source block
  * to a destination block, including information about how
  * flow occurs between the two blocks (JUMP, CALL, etc..).
  * <P>
- *  The <CODE>reference</CODE> is the address in the destination
+ *  The {@code reference} is the address in the destination
  * block that is actually flowed to by some instruction in the source block.
  * <P>
- *  The <CODE>referent</CODE> is the address of the instruction in
+ *  The {@code referent} is the address of the instruction in
  * the source block that flows to the destination block.
  * <P>
  * 

@@ -27,7 +27,7 @@ import ghidra.program.model.mem.MemoryBlock;
 import ghidra.util.exception.*;
 
 /**
- * <code>ElfRelocationContext</code> provides a relocation handler context related
+ * {@code ElfRelocationContext} provides a relocation handler context related
  * to the processing of entries contained within a specific relocation table.
  */
 public class ElfRelocationContext {

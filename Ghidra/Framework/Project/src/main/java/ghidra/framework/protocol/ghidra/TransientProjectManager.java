@@ -50,8 +50,8 @@ public class TransientProjectManager {
 	private static TransientProjectManager transientProjectManager = null;
 
 	/**
-	 * Get the <code>TransientProjectManager</code> singleton instance for the JVM
-	 * @return <code>TransientProjectManager</code> singleton instance
+	 * Get the {@code TransientProjectManager} singleton instance for the JVM
+	 * @return {@code TransientProjectManager} singleton instance
 	 */
 	public static synchronized TransientProjectManager getTransientProjectManager() {
 		if (transientProjectManager == null) {

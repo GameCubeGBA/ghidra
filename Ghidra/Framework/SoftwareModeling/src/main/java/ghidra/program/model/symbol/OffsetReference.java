@@ -18,7 +18,7 @@ package ghidra.program.model.symbol;
 import ghidra.program.model.address.Address;
 
 /**
- * <code>OffsetReference</code> is a memory reference whose "to" address is
+ * {@code OffsetReference} is a memory reference whose "to" address is
  * computed from a base address plus an offset.
  */
 public interface OffsetReference extends Reference {

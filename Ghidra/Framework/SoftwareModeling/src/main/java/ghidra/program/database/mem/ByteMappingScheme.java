@@ -20,7 +20,7 @@ import ghidra.program.model.address.AddressOverflowException;
 import ghidra.program.model.mem.*;
 
 /**
- * <code>ByteMappingScheme</code> facilitate byte mapping/decimation scheme for a mapped sub-block to
+ * {@code ByteMappingScheme} facilitate byte mapping/decimation scheme for a mapped sub-block to
  * an underlying source memory region.
  */
 public class ByteMappingScheme {

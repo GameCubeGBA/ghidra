@@ -26,7 +26,7 @@ import ghidra.framework.remote.SSHSignatureCallback;
 import ghidra.net.ApplicationKeyManagerFactory;
 
 /**
- * <code>PasswordClientAuthenticator</code> provides a fixed username/password 
+ * {@code PasswordClientAuthenticator} provides a fixed username/password
  * authentication response when connecting to any Ghidra Server or accessing
  * a protected PKI keystore.  The use of this authenticator is intended for
  * headless applications in which the user is unable to respond to such

@@ -22,7 +22,7 @@ import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>IndexTable</code> maintains a secondary index within a private Table instance.
+ * {@code IndexTable} maintains a secondary index within a private Table instance.
  * This index facilitates the indexing of non-unique secondary keys within a
  * user Table.
  */

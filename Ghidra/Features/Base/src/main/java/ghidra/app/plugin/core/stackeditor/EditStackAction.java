@@ -27,7 +27,7 @@ import ghidra.util.HelpLocation;
 import docking.action.MenuData;
 
 /**
- * <CODE>EditStackAction</CODE> allows the user to edit a function's stack frame.
+ * {@code EditStackAction} allows the user to edit a function's stack frame.
  */
 public class EditStackAction extends ListingContextAction {
 	/** the plugin associated with this action. */

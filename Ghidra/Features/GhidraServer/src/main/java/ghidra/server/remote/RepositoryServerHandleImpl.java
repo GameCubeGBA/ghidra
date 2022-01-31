@@ -26,7 +26,7 @@ import ghidra.server.RepositoryManager;
 import ghidra.util.exception.UserAccessException;
 
 /**
- * <code>RepositoryServerHandleImpl</code> provides a Respository Server handle to a
+ * {@code RepositoryServerHandleImpl} provides a Respository Server handle to a
  * remote user.
  */
 public class RepositoryServerHandleImpl extends UnicastRemoteObject

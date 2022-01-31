@@ -24,7 +24,7 @@ import ghidra.docking.settings.Settings;
 import ghidra.util.exception.DuplicateNameException;
 
 /**
- * <code>AlignedStructureInspector</code> provides a simple instance of a structure 
+ * {@code AlignedStructureInspector} provides a simple instance of a structure
  * member container used to perform alignment operations without forcing modification
  * of the actual structure.
  */

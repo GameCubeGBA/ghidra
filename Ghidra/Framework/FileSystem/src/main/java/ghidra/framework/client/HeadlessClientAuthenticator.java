@@ -29,7 +29,7 @@ import ghidra.net.ApplicationKeyManagerFactory;
 import ghidra.util.Msg;
 
 /**
- * <code>HeadlessClientAuthenticator</code> provides the ability to install a Ghidra Server 
+ * {@code HeadlessClientAuthenticator} provides the ability to install a Ghidra Server
  * authenticator needed when operating in a headless mode.
  */
 public class HeadlessClientAuthenticator implements ClientAuthenticator {

@@ -79,7 +79,7 @@ public enum GnuDemanglerFormat {
 	}
 
 	/**
-	 * Gets the format option to be passed to the demangler via the <code>-s</code> option
+	 * Gets the format option to be passed to the demangler via the {@code -s} option
 	 * @return the format option to be passed to the demangler
 	 */
 	public String getFormat() {

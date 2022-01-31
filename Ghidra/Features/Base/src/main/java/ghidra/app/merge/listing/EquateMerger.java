@@ -481,7 +481,7 @@ class EquateMerger extends AbstractListingMerger {
 	}
 
 	/**
-	 * <code>EquateConflict</code> provides the information needed to retain 
+	 * {@code EquateConflict} provides the information needed to retain
 	 * and display an equate conflict to the user. It contains the address,
 	 * operand index, and scalar value.
 	 */

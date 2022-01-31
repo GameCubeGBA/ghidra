@@ -65,7 +65,7 @@ abstract class AbstractDwarfEHDecoder implements DwarfEHDecoder {
 	}
 
 	/**
-	 * Reads a pointer-size value from <code>program</code> at <code>addr</code>
+	 * Reads a pointer-size value from {@code program} at <code>addr</code>
 	 * @param program Program to read from
 	 * @param addr Address to read from
 	 * @return The value of the pointer reference
@@ -91,7 +91,7 @@ abstract class AbstractDwarfEHDecoder implements DwarfEHDecoder {
 	}
 
 	/**
-	 * Reads a <code>ptrSize</code> integer value at the address of <code>buf</code>
+	 * Reads a {@code ptrSize} integer value at the address of <code>buf</code>
 	 * @param buf Buffer to read from
 	 * @param ptrSize the size of the pointer to be read.
 	 * @return The value of the pointer reference
@@ -113,7 +113,7 @@ abstract class AbstractDwarfEHDecoder implements DwarfEHDecoder {
 	}
 
 	/**
-	 * Reads an 8-bit value from <code>program</code> at <code>addr</code>
+	 * Reads an 8-bit value from {@code program} at <code>addr</code>
 	 * @param program Program to read from
 	 * @param addr Address to read from
 	 * @return The value of the byte
@@ -124,7 +124,7 @@ abstract class AbstractDwarfEHDecoder implements DwarfEHDecoder {
 	}
 
 	/**
-	 * Reads an 8-bit value from <code>program</code> at the address of <code>buf</code>
+	 * Reads an 8-bit value from {@code program} at the address of <code>buf</code>
 	 * @param buf Buffer to read from
 	 * @param length Unused
 	 * @return The value of the byte
@@ -135,7 +135,7 @@ abstract class AbstractDwarfEHDecoder implements DwarfEHDecoder {
 	}
 
 	/**
-	 * Reads a 16-bit value from <code>program</code> at <code>addr</code>
+	 * Reads a 16-bit value from {@code program} at <code>addr</code>
 	 * @param program Program to read from
 	 * @param addr Address to read from
 	 * @return The value of the word
@@ -146,7 +146,7 @@ abstract class AbstractDwarfEHDecoder implements DwarfEHDecoder {
 	}
 
 	/**
-	 * Reads a 16-bit value at the address of <code>buf</code>
+	 * Reads a 16-bit value at the address of {@code buf}
 	 * @param buf Buffer to read from
 	 * @return The value of the word
 	 * @throws MemoryAccessException if the data can't be read
@@ -156,7 +156,7 @@ abstract class AbstractDwarfEHDecoder implements DwarfEHDecoder {
 	}
 
 	/**
-	 * Reads a 32-bit value from <code>program</code> at <code>addr</code>
+	 * Reads a 32-bit value from {@code program} at <code>addr</code>
 	 * @param program Program to read from
 	 * @param addr Address to read from
 	 * @return The value of the dword
@@ -167,7 +167,7 @@ abstract class AbstractDwarfEHDecoder implements DwarfEHDecoder {
 	}
 
 	/**
-	 * Reads a 32-bit value at the address of <code>buf</code>
+	 * Reads a 32-bit value at the address of {@code buf}
 	 * @param buf Buffer to read from
 	 * @return The value of the dword
 	 * @throws MemoryAccessException if the data can't be read
@@ -177,7 +177,7 @@ abstract class AbstractDwarfEHDecoder implements DwarfEHDecoder {
 	}
 
 	/**
-	 * Reads a 64-bit value from <code>program</code> at <code>addr</code>
+	 * Reads a 64-bit value from {@code program} at <code>addr</code>
 	 * @param program Program to read from
 	 * @param addr Address to read from
 	 * @return The value of the qword
@@ -188,7 +188,7 @@ abstract class AbstractDwarfEHDecoder implements DwarfEHDecoder {
 	}
 
 	/**
-	 * Reads a 64-bit value at the address of <code>buf</code>
+	 * Reads a 64-bit value at the address of {@code buf}
 	 * @param buf Buffer to read from
 	 * @return The value of the qword
 	 * @throws MemoryAccessException if the data can't be read
@@ -198,7 +198,7 @@ abstract class AbstractDwarfEHDecoder implements DwarfEHDecoder {
 	}
 
 	/**
-	 * Reads bytes from <code>program</code> at <code>addr</code>
+	 * Reads bytes from {@code program} at <code>addr</code>
 	 * @param program Program to read from
 	 * @param addr Address to read from
 	 * @param buffer Destination buffer to read into
@@ -210,8 +210,8 @@ abstract class AbstractDwarfEHDecoder implements DwarfEHDecoder {
 	}
 
 	/**
-	 * Reads bytes at the address of <code>buf</code> into <code>buffer</code> up to the length of 
-	 * <code>buffer</code>. 
+	 * Reads bytes at the address of {@code buf} into <code>buffer</code> up to the length of
+	 * {@code buffer}.
 	 * @param buf Buffer to read from
 	 * @param buffer Destination buffer to read into
 	 * @return the number of bytes read into the buffer
@@ -222,7 +222,7 @@ abstract class AbstractDwarfEHDecoder implements DwarfEHDecoder {
 	}
 
 	/**
-	 * Reads an unsigned LEB128-encoded value from <code>program</code> at <code>addr</code>
+	 * Reads an unsigned LEB128-encoded value from {@code program} at <code>addr</code>
 	 * @param program Program to read from
 	 * @param addr Address to read from
 	 * @throws MemoryAccessException if the data can't be read
@@ -238,7 +238,7 @@ abstract class AbstractDwarfEHDecoder implements DwarfEHDecoder {
 	}
 
 	/**
-	 * Reads an unsigned LEB128-encoded value from <code>program</code> at the address of <code>buf</code>
+	 * Reads an unsigned LEB128-encoded value from {@code program} at the address of <code>buf</code>
 	 * @param buf Buffer to read from
 	 * @param length Unused
 	 * @throws MemoryAccessException if the data can't be read
@@ -254,7 +254,7 @@ abstract class AbstractDwarfEHDecoder implements DwarfEHDecoder {
 	}
 
 	/**
-	 * Reads a signed LEB128-encoded value from <code>program</code> at <code>addr</code>
+	 * Reads a signed LEB128-encoded value from {@code program} at <code>addr</code>
 	 * @param program Program to read from
 	 * @param addr Address to read from
 	 * @throws MemoryAccessException if the data can't be read
@@ -270,7 +270,7 @@ abstract class AbstractDwarfEHDecoder implements DwarfEHDecoder {
 	}
 
 	/**
-	 * Reads a signed LEB128-encoded value from <code>program</code> at the address of <code>buf</code>
+	 * Reads a signed LEB128-encoded value from {@code program} at the address of <code>buf</code>
 	 * @param buf Buffer to read from
 	 * @param length Number of bytes to read
 	 * @param buffer Destination buffer to read into
@@ -369,7 +369,7 @@ abstract class AbstractDwarfEHDecoder implements DwarfEHDecoder {
 	}
 
 	/**
-	 * Decode an integer value according to parameters stored in the <code>context</code> object.
+	 * Decode an integer value according to parameters stored in the {@code context} object.
 	 * @param context Stores program location and decode parameters
 	 * @return the integer value
 	 * @throws MemoryAccessException if the data can't be read

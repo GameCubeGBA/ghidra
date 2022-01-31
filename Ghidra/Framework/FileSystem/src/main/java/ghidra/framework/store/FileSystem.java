@@ -24,7 +24,7 @@ import ghidra.util.exception.*;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>FileSystem</code> provides a hierarchical view and management of a 
+ * {@code FileSystem} provides a hierarchical view and management of a
  * set of files and folders.  
  */
 public interface FileSystem {

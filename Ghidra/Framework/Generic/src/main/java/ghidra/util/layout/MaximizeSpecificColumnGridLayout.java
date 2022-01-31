@@ -18,7 +18,7 @@ package ghidra.util.layout;
 import java.awt.*;
 
 /**
- * <CODE>MaximizeSpecificColumnGridLayout</CODE> is a row oriented grid type of layout.
+ * {@code MaximizeSpecificColumnGridLayout} is a row oriented grid type of layout.
  * It lays out rows of information in a table format using a specific number of columns. 
  * Components are added left to right and top to bottom. The table will try to give each column
  * the width that is necessary to display the longest item in that column. The columns with the 

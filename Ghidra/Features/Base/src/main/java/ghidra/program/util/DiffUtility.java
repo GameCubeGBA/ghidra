@@ -22,7 +22,7 @@ import ghidra.program.model.symbol.*;
 import ghidra.util.exception.*;
 
 /**
- * The <CODE>DiffUtility</CODE> class provides static methods for getting and
+ * The {@code DiffUtility} class provides static methods for getting and
  * creating an object in one program based on an object from another program.
  */
 public class DiffUtility extends SimpleDiffUtility {

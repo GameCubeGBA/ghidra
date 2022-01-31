@@ -26,8 +26,8 @@ import ghidra.util.Msg;
 import ghidra.util.exception.DuplicateNameException;
 
 /**
- * A class to represent the <code>IMAGE_DEBUG_MISC</code> struct
- * as defined in <b><code>winnt.h</code></b>.
+ * A class to represent the {@code IMAGE_DEBUG_MISC} struct
+ * as defined in <b>{@code winnt.h}</b>.
  * <br>
  * 
  * <pre>

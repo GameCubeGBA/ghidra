@@ -34,7 +34,7 @@ import ghidra.program.util.ProgramSelection;
 import ghidra.util.HelpLocation;
 
 /**
- * <CODE>AnalyzeStackRefsAction</CODE> reanalyze functions stack references.
+ * {@code AnalyzeStackRefsAction} reanalyze functions stack references.
  */
 class AnalyzeStackRefsAction extends ListingContextAction {
 

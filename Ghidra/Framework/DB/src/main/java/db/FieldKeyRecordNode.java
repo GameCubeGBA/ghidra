@@ -18,7 +18,7 @@ package db;
 import java.io.IOException;
 
 /**
- * <code>FieldKeyRecordNode</code> defines a common interface for {@link FieldKeyNode} 
+ * {@code FieldKeyRecordNode} defines a common interface for {@link FieldKeyNode}
  * implementations which are also a {@link RecordNode} (i.e., leaf node).
  */
 interface FieldKeyRecordNode extends RecordNode, FieldKeyNode {

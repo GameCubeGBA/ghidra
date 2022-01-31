@@ -19,8 +19,8 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.symbol.*;
 
 /**
- * <CODE>AddressLabelInfo</CODE> is a utility class for storing
- * an <CODE>Address</CODE> and a corresponding label or alias together.
+ * {@code AddressLabelInfo} is a utility class for storing
+ * an {@code Address} and a corresponding label or alias together.
  */
 public class AddressLabelInfo implements Comparable<AddressLabelInfo> {
 	private Address addr;

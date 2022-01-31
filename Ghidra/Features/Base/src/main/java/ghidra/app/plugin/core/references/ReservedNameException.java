@@ -17,7 +17,7 @@
 package ghidra.app.plugin.core.references;
 
 /**
- * <code>ReservedNameException</code> indicates that the specified name
+ * {@code ReservedNameException} indicates that the specified name
  * is reserved for system use.
  *
  */

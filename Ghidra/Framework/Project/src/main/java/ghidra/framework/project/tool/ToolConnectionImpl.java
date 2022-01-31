@@ -195,7 +195,7 @@ class ToolConnectionImpl implements ToolConnection, ToolListener {
 	/**
 	 * Returns a hash code value for the object. This method is
 	 * supported for the benefit of hashtables such as those provided by
-	 * <code>java.util.Hashtable</code>.
+	 * {@code java.util.Hashtable}.
 	 */
 	@Override
 	public int hashCode() {
@@ -227,7 +227,7 @@ class ToolConnectionImpl implements ToolConnection, ToolListener {
 
 	/**
 	 * Returns a string representation of the object. In general, the
-	 * <code>toString</code> method returns a string that
+	 * {@code toString} method returns a string that
 	 * "textually represents" this object. The result should
 	 * be a concise but informative representation that is easy for a
 	 * person to read.

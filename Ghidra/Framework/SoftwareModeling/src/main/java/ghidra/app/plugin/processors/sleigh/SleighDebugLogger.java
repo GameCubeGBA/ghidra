@@ -32,7 +32,7 @@ import ghidra.program.model.scalar.Scalar;
 import ghidra.util.StringUtilities;
 
 /**
- * <code>SleighDebugLogger</code> provides the ability to obtain detailed instruction
+ * {@code SleighDebugLogger} provides the ability to obtain detailed instruction
  * parse details.
  */
 public class SleighDebugLogger {

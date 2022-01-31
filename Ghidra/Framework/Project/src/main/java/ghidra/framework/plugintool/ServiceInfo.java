@@ -37,9 +37,9 @@ public @interface ServiceInfo {
 	 * if you want to prevent any form of reference between the service class and
 	 * the implementation class.
 	 * <p>
-	 * For example, <code>defaultProviderName = "packageX.subPackageY.SomeClass"</code>
+	 * For example, {@code defaultProviderName = "packageX.subPackageY.SomeClass"}
 	 * <p>
-	 * Using <code>defaultProviderName = packageX.subPackageY.SomeClass.class.getName()</code>
+	 * Using {@code defaultProviderName = packageX.subPackageY.SomeClass.class.getName()}
 	 * will not work (value needs to be a constant expression).
 	 * <p>
 	 *

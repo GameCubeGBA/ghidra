@@ -55,9 +55,9 @@ public enum MethodsInfoAccessFlags {
 	 * Return a text representation for a given set of access flags.  
 	 * Here are some examples:
 	 * <DL>
-	 *  <DD><CODE>"public static final"</CODE>,</DD>
-	 *  <DD><CODE>"package private"</CODE>, or</DD>
-	 *  <DD><CODE>"protected transient"</CODE>.</DD>
+	 *  <DD>{@code "public static final"},</DD>
+	 *  <DD>{@code "package private"}, or</DD>
+	 *  <DD>{@code "protected transient"}.</DD>
 	 * </DL>
 	 * Note: only access flags that map to Java modifier keywords are returned.
 	 * @param access the mask of flags denoting access permission.

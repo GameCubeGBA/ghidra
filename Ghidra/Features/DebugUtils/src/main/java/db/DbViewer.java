@@ -44,7 +44,7 @@ import ghidra.util.task.TaskMonitor;
 import utility.application.ApplicationLayout;
 
 /**
- * <code>DbViewer</code> is a diagnostic application for viewing a
+ * {@code DbViewer} is a diagnostic application for viewing a
  * Ghidra database.
  */
 public class DbViewer extends JFrame {

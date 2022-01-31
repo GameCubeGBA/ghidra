@@ -25,24 +25,24 @@ import ghidra.program.model.mem.*;
  * This class maintains the running state while
  * applying relocations.
  * <p>
- * <b><code>relocAddress</code></b>
+ * <b>{@code relocAddress}</b>
  * Holds an address within the section where the relocations
  * are to be performed. The initial value is the base address
  * of the section to be relocated.
  * <p>
- * <b><code>importIndex</code></b>
+ * <b>{@code importIndex}</b>
  * Holds a symbol index, which is used to access an
  * imported symbol's address. This address can then
  * be used for relocations. The initial value is 0.
  * <p>
- * <b><code>sectionC</code></b>
+ * <b>{@code sectionC}</b>
  * Holds the memory address of an instantiated section
  * within the PEF container, this variable is used by relocation
  * instructions that relocate section addresses. The initial 
  * value is the memory address of section 0 (if that section
  * is present and instantiated), otherwise it is 0.
  * <p>
- * <b><code>sectionD</code></b>
+ * <b>{@code sectionD}</b>
  * Holds the memory address of an instantiated section
  * within the PEF container, this variable is used by relocation
  * instructions that relocate section addresses. The initial 

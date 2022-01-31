@@ -159,7 +159,7 @@ public class SystemUtilities {
 	/**
 	 * Checks to see if the font size override setting is enabled and adjusts
 	 * the given font as necessary to match the override setting. If the setting
-	 * is not enabled, then <code>font</code> is returned.
+	 * is not enabled, then {@code font} is returned.
 	 *
 	 * @param font
 	 *            The current font to adjust, if necessary.
@@ -415,7 +415,7 @@ public class SystemUtilities {
 	 * This method is useful to print values of code that you cannot edit while debugging.
 	 * <p>
 	 * Example, inside of your conditional breakpoint for a method on a Sun Java file you
-	 * can put something like: <code>printString("Value of first arg: " + arg0, System.err)</code>
+	 * can put something like: {@code printString("Value of first arg: " + arg0, System.err)}
 	 * <p>
 	 * Note: Don't remove this method simply because no code is referencing it, as it is used
 	 * by conditional breakpoints.

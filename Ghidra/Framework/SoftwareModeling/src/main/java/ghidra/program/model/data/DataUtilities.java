@@ -54,7 +54,7 @@ public final class DataUtilities {
 	}
 
 	/**
-	 * <code>ClearDataMode</code> specifies how conflicting data should be cleared
+	 * {@code ClearDataMode} specifies how conflicting data should be cleared
 	 * when creating/re-creating data
 	 */
 	public static enum ClearDataMode {

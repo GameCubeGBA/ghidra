@@ -219,7 +219,7 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 
 	/**
 	 * A callback for subclasses when a test has failed. This will be called
-	 * <b>after</b> <code>tearDown()</code>.  This means that any diagnostics will have to
+	 * <b>after</b> {@code tearDown()}.  This means that any diagnostics will have to
 	 * take into account items that have already been disposed.
 	 * 
 	 * @param e the exception that happened when the test failed
@@ -506,7 +506,7 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 	/**
 	 * Sets the instance field by the given name on the given object instance.
 	 * <p>
-	 * Note: if the field is static, then the <code>ownerInstance</code> field can
+	 * Note: if the field is static, then the {@code ownerInstance} field can
 	 * be the class of the object that contains the variable.
 	 *
 	 * @param fieldName The name of the field to retrieve.
@@ -528,7 +528,7 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 	 * Gets the instance field by the given name on the given object instance.
 	 * The value is a primitive wrapper if it is a primitive type.
 	 * <p>
-	 * Note: if the field is static, then the <code>ownerInstance</code> field can
+	 * Note: if the field is static, then the {@code ownerInstance} field can
 	 * be the class of the object that contains the variable.
 	 *
 	 * @param fieldName The name of the field to retrieve.
@@ -574,9 +574,9 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 	/**
 	 * Uses reflection to execute the method denoted by the given method name.
 	 * If any value is returned from the method execution, then it will be
-	 * returned from this method. Otherwise, <code>null</code> is returned.
+	 * returned from this method. Otherwise, {@code null} is returned.
 	 * <p>
-	 * Note: if the method is static, then the <code>ownerInstance</code> field can
+	 * Note: if the method is static, then the {@code ownerInstance} field can
 	 * be the class of the object that contains the method.
 	 *
 	 * @param methodName The name of the method to execute.
@@ -1088,7 +1088,7 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 	 * Run the given code snippet on the Swing thread later, not blocking the current thread.  Use
 	 * this if the code snippet causes a blocking operation.
 	 * 
-	 * <P>This is a shortcut for <code>runSwing(r, false);</code>.
+	 * <P>This is a shortcut for {@code runSwing(r, false);}.
 	 * 
 	 * @param r the runnable code snippet
 	 */
@@ -1501,7 +1501,7 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 	}
 
 	/**
-	 * Invoke <code>fixupGUI</code> at the beginning of your JUnit test or in
+	 * Invoke {@code fixupGUI} at the beginning of your JUnit test or in
 	 * its setup() method to make your GUI for the JUnit test appear using the
 	 * system Look and Feel. The system look and feel is the default that Ghidra
 	 * uses. This will also change the default fonts for the JUnit test to be
@@ -1509,9 +1509,9 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 	 *
 	 * @exception InterruptedException if we're interrupted while waiting for
 	 *                the event dispatching thread to finish excecuting
-	 *                <code>doRun.run()</code>
+	 *                {@code doRun.run()}
 	 * @exception InvocationTargetException if an exception is thrown while
-	 *                running <code>doRun</code>
+	 *                running {@code doRun}
 	 */
 	public static void fixupGUI() throws InterruptedException, InvocationTargetException {
 		// Make the test look & feel as it would normally.
@@ -1825,7 +1825,7 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 	/**
 	 * Creates a file path with a filename that is under the system temp
 	 * directory. The path returned will not point to an existing file. The
-	 * suffix of the file will be <code>.tmp</code>.
+	 * suffix of the file will be {@code .tmp}.
 	 * 
 	 * @param name the filename
 	 * @return a new file path
@@ -1888,7 +1888,7 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 	 * prefix and the given suffix. The final filename will also include the
 	 * current test name, as well as any data added by
 	 * {@link File#createTempFile(String, String)}. The file suffix will be
-	 * <code>.tmp</code>
+	 * {@code .tmp}
 	 * <p>
 	 * The file will be marked to delete on JVM exit. This will not work if the
 	 * JVM is taken down the hard way, as when pressing the stop button in

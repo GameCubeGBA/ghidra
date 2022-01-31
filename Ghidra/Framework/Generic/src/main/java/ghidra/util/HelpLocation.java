@@ -44,7 +44,7 @@ public class HelpLocation {
 	 * An html file contained within the specified help topic directory must have an Anchor
 	 * defined using the specified anchor name.
 	 * <p>
-	 * <b>Note:</b>  You can specify a <code>null</code> anchor value.  In that case, the given topic
+	 * <b>Note:</b>  You can specify a {@code null} anchor value.  In that case, the given topic
 	 * will be searched for a file with the same name as the topic.  If such a file exists, 
 	 * then that file will be used as the file for this location.  If no such file exists, then 
 	 * the help file to use <b>cannot be resolved</b>.  Therefore, it is best to always specify
@@ -62,7 +62,7 @@ public class HelpLocation {
 	 * An html file contained within the specified help topic directory must have an Anchor
 	 * defined using the specified anchor name.
 	 * <p>
-	 * <b>Note:</b>  You can specify a <code>null</code> anchor value.  In that case, the given topic
+	 * <b>Note:</b>  You can specify a {@code null} anchor value.  In that case, the given topic
 	 * will be searched for a file with the same name as the topic.  If such a file exists, 
 	 * then that file will be used as the file for this location.  If no such file exists, then 
 	 * the help file to use <b>cannot be resolved</b>.  Therefore, it is best to always specify
@@ -189,7 +189,7 @@ public class HelpLocation {
 
 	/**
 	 * Get the help URL for this help location. A URL is created when the
-	 * constructor <code>HelpLocation(Class, String, String)</code> is
+	 * constructor {@code HelpLocation(Class, String, String)} is
 	 * used by a plugin that has help relative to its class.
 	 * @return the URL or null if a help ID is used
 	 */

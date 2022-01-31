@@ -20,7 +20,7 @@ import ghidra.program.model.mem.MemoryBlock;
 import ghidra.util.SystemUtilities;
 
 /**
- * <CODE>MemoryBlockDiff</CODE> determines the types of differences between two memory blocks.
+ * {@code MemoryBlockDiff} determines the types of differences between two memory blocks.
  */
 public class MemoryBlockDiff {
 	
@@ -43,7 +43,7 @@ public class MemoryBlockDiff {
 	private int diffFlags;
 	
 	/**
-	 * Constructor. <CODE>MemoryBlockDiff</CODE> determines the types of differences 
+	 * Constructor. {@code MemoryBlockDiff} determines the types of differences
 	 * between two memory blocks.
 	 * @param block1 the first program's memory block
 	 * @param block2 the second program's memory block

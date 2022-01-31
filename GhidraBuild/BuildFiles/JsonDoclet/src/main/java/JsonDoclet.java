@@ -298,7 +298,7 @@ public class JsonDoclet implements Doclet {
 	}
 
 	/**
-	 * Parses the given {@link ExecutableElement} for any <code>return</code> information
+	 * Parses the given {@link ExecutableElement} for any {@code return} information
 	 * and adds it to the json object.
 	 * 
 	 * @param execElement the element to parse

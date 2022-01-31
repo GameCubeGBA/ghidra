@@ -529,7 +529,7 @@ public class DataTypeEditorManager
 //==================================================================================================
 
 	/**
-	 * <code>DTMEditFunctionSignatureDialog</code> provides the ability to edit the
+	 * {@code DTMEditFunctionSignatureDialog} provides the ability to edit the
 	 * function signature associated with a specific {@link FunctionDefinition}.  
 	 * Use of this editor requires the presence of the tool-based datatype manager service.
 	 */

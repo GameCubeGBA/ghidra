@@ -1292,7 +1292,7 @@ public class DecompilerPanel extends JPanel implements FieldMouseListener, Field
 		/**
 		 * Moves this field panel to the given line and column.  Further, this navigation will
 		 * fire an event to the rest of the tool.   (This is in contrast to a field panel
-		 * <code>goTo</code>, which we use to simply move the cursor, but not trigger an
+		 * {@code goTo}, which we use to simply move the cursor, but not trigger an
 		 * tool-level navigation event.)
 		 * 
 		 * @param lineNumber the line number

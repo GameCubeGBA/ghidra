@@ -18,7 +18,7 @@ package db.buffers;
 import java.io.IOException;
 
 /**
- * <code>InputBlockStream</code> provides a BufferFile input block stream.
+ * {@code InputBlockStream} provides a BufferFile input block stream.
  * The nature of the stream and the block sequence is determined by the
  * particular instance.
  */

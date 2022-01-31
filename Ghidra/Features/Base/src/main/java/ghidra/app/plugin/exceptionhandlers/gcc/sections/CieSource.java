@@ -31,7 +31,7 @@ public interface CieSource {
 	/**
 	 * For the provided address, return a Common Information Entry (CIE)
 	 * @param currAddress the address with the CIE
-	 * @return the Cie at <code>currAddress</code>
+	 * @return the Cie at {@code currAddress}
 	 * @throws MemoryAccessException if memory for the CIE couldn't be read
 	 * @throws ExceptionHandlerFrameException if a problem was encountered
 	 */

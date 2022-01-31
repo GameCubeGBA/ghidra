@@ -25,7 +25,7 @@ import ghidra.framework.options.CustomOptionsEditor;
 import ghidra.util.layout.PairLayout;
 
 /**
- * <code>StoredAnalyzerTimesPropertyEditor</code> implements a custom option
+ * {@code StoredAnalyzerTimesPropertyEditor} implements a custom option
  * editor panel for {@link StoredAnalyzerTimes}.  Ability to edit values
  * is disabled with panel intended for display purpose only.
  */

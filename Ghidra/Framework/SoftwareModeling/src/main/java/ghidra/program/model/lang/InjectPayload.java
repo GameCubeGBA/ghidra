@@ -23,7 +23,7 @@ import ghidra.xml.XmlParseException;
 import ghidra.xml.XmlPullParser;
 
 /**
- * <code>InjectPayload</code> encapsulates a semantic (p-code) override which can be injected
+ * {@code InjectPayload} encapsulates a semantic (p-code) override which can be injected
  * into analyses that work with p-code (Decompiler, SymbolicPropagator)
  * The payload typically replaces either a subroutine call or a userop
  *

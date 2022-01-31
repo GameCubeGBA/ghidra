@@ -19,8 +19,8 @@ import mdemangler.MDException;
 import mdemangler.MDMang;
 
 /**
- * This class represents a derivative of an <b><code>MDObject</code></b> which is a C++ object
- *  and an additional <b><code>"CV:"</code></b> prefix, which supposedly means that it came from
+ * This class represents a derivative of an <b>{@code MDObject}</b> which is a C++ object
+ *  and an additional <b>{@code "CV:"}</b> prefix, which supposedly means that it came from
  *  a CodeView compiler (older version of compiler?).
  */
 // TODO: Not sure what this is, so:

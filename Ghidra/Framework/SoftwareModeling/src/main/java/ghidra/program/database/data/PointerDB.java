@@ -40,7 +40,7 @@ class PointerDB extends DataTypeDB implements Pointer {
 	private String displayName;
 
 	/**
-	 * <code>isEquivalentActive</code> is used to break cyclical recursion when
+	 * {@code isEquivalentActive} is used to break cyclical recursion when
 	 * performing an {@link #isEquivalent(DataType)} checks on pointers which must
 	 * also check the base datatype equivelency.
 	 */

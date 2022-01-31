@@ -25,7 +25,7 @@ import ghidra.util.exception.*;
 import ghidra.util.task.*;
 
 /**
- * <code>LocalBufferFile</code> implements a BufferFile as block-oriented
+ * {@code LocalBufferFile} implements a BufferFile as block-oriented
  * random-access file.  This type of buffer file supports save-as but does
  * not support the save operation.
  */
@@ -100,7 +100,7 @@ public class LocalBufferFile implements BufferFile {
 	static final int MAX_BUFFER_INDEX = Integer.MAX_VALUE - 1;
 
 	/**
-	 * <code>userParms</code> contains application parameters which correspond to
+	 * {@code userParms} contains application parameters which correspond to
 	 * this buffer file.  This list is established for 
 	 * an existing buffer file when the readHeader is invoked.  For a non-temporary 
 	 * writable buffer file, this list is flushed to the file when either close or
@@ -109,7 +109,7 @@ public class LocalBufferFile implements BufferFile {
 	private Hashtable<String, Integer> userParms = new Hashtable<>();
 
 	/**
-	 * <code>freeIndexes</code> contains those buffer indexes which are free/empty
+	 * {@code freeIndexes} contains those buffer indexes which are free/empty
 	 * and may be re-used in an update of this file.  This list is established for 
 	 * an existing buffer file when the readHeader is invoked.  For a non-temporary 
 	 * writable buffer file, this list is flushed to the file when either close or
@@ -118,17 +118,17 @@ public class LocalBufferFile implements BufferFile {
 	private int[] freeIndexes = new int[0];
 
 	/**
-	 * <code>file</code> is the underlying storage file for this buffer file.
+	 * {@code file} is the underlying storage file for this buffer file.
 	 */
 	private File file;
 
 	/**
-	 * <code>raf</code> is the random-access object for the underlying file.
+	 * {@code raf} is the random-access object for the underlying file.
 	 */
 	private RandomAccessFile raf;
 
 	/**
-	 * <code>activeBlockStream</code> provides a handle to the active 
+	 * {@code activeBlockStream} provides a handle to the active
 	 * OutputBlockStream used to update file via raf.  This should be
 	 * checked during {@link #close()} to guard against partially 
 	 * written file.  A LocalOutputBlockStream should only be used
@@ -137,20 +137,20 @@ public class LocalBufferFile implements BufferFile {
 	private volatile LocalOutputBlockStream activeOutputBlockStream;
 
 	/**
-	 * When <code>temporary</code> is true and this file is writable (!readOnly)
+	 * When {@code temporary} is true and this file is writable (!readOnly)
 	 * it will be deleted when disposed or closed.
 	 */
 	private boolean temporary = false;
 
 	/**
-	 * <code>fileId</code> corresponds to a random file ID assigned to this file.
+	 * {@code fileId} corresponds to a random file ID assigned to this file.
 	 * This file ID can be used as an integrity check when applying version files
 	 * to a specific buffer file.
 	 */
 	private long fileId;
 
 	/**
-	 * If <code>readOnly</code> is true, this file may not be modified 
+	 * If {@code readOnly} is true, this file may not be modified
 	 * via the buffer put method.  
 	 * A read-only file may be considered "updateable" if the canSave
 	 * method returns true.  The term "updateable" means that a Save file
@@ -159,20 +159,20 @@ public class LocalBufferFile implements BufferFile {
 	private boolean readOnly;
 
 	/**
-	 * <code>blockSize</code> is the "actual" size of each block within this
-	 * file. The <code>blockSize</code> equals the <code>bufferSize</code> plus
+	 * {@code blockSize} is the "actual" size of each block within this
+	 * file. The {@code blockSize} equals the <code>bufferSize</code> plus
 	 * a few bytes used for flags and to identify the user-level buffer ID.
 	 */
 	private int blockSize;
 
 	/**
-	 * <code>bufferSize</code> is the "usable" buffer space within each
+	 * {@code bufferSize} is the "usable" buffer space within each
 	 * block of this file.
 	 */
 	private int bufferSize;
 
 	/**
-	 * <code>bufferCount</code> indicates the number of buffer which have been 
+	 * {@code bufferCount} indicates the number of buffer which have been
 	 * allocated within this file and directly reflects the size of the file.
 	 * The value corresponds to the next buffer index which can be allocated once all
 	 * free indexes have been utilized.  When an existing file is opened, this value
@@ -960,7 +960,7 @@ public class LocalBufferFile implements BufferFile {
 	}
 
 	/**
-	 * <code>LocalBufferInputBlockStream</code> provides an input BlockStream for 
+	 * {@code LocalBufferInputBlockStream} provides an input BlockStream for
 	 * transferring the entire file content associated with a read-only buffer
 	 * file use a buffer-based transfer.
 	 */
@@ -1031,7 +1031,7 @@ public class LocalBufferFile implements BufferFile {
 	}
 
 	/**
-	 * <code>LocalFileInputBlockStream</code> provides an input BlockStream for 
+	 * {@code LocalFileInputBlockStream} provides an input BlockStream for
 	 * transferring the entire file content associated with a read-only file.
 	 * This implementation reads the data directly from a single local file
 	 * and must not be used when performing version reconstruction or 
@@ -1099,14 +1099,14 @@ public class LocalBufferFile implements BufferFile {
 	}
 
 	/**
-	 * <code>LocalRandomInputBlockStream</code> provides ability to
+	 * {@code LocalRandomInputBlockStream} provides ability to
 	 * selectively read a select set of buffers from the LocalBufferFile
 	 * based upon a specified ChangeMap.
 	 */
 	class LocalRandomInputBlockStream implements InputBlockStream {
 
 		/**
-		 * The <code>bufferIndexList</code> contains the DataBuffer indexes
+		 * The {@code bufferIndexList} contains the DataBuffer indexes
 		 * which are to be transferred.  Buffer index values plus 1 equal the 
 		 * file block index.
 		 */
@@ -1195,7 +1195,7 @@ public class LocalBufferFile implements BufferFile {
 	}
 
 	/**
-	 * <code>LocalOutputBlockStream</code> provides an OutputBlockStream for 
+	 * {@code LocalOutputBlockStream} provides an OutputBlockStream for
 	 * updating specific buffers of a non-read-only file.
 	 */
 	class LocalOutputBlockStream implements OutputBlockStream {
@@ -1461,7 +1461,7 @@ public class LocalBufferFile implements BufferFile {
 	}
 
 	/**
-	 * <code>BlockStreamCancelMonitor</code> is used to close associated BlockStreams
+	 * {@code BlockStreamCancelMonitor} is used to close associated BlockStreams
 	 * when a TaskMonitor is cancelled
 	 */
 	static class BlockStreamCancelMonitor implements Closeable, CancelledListener {

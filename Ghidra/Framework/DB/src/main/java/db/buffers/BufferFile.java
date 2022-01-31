@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.util.NoSuchElementException;
 
 /**
- * <code>BufferFile</code> facilitates read/write access to buffer oriented file.
+ * {@code BufferFile} facilitates read/write access to buffer oriented file.
  * Access to related resources, such as parameters and change data, is also facilitated.
  */
 public interface BufferFile {

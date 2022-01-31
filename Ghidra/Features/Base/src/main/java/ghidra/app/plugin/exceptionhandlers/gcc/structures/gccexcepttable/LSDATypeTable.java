@@ -45,7 +45,7 @@ public class LSDATypeTable extends GccAnalysisClass {
 
 	/**
 	 * Constructor for a table of references to types that are associated with catch actions.
-	 * <br>Note: The <code>create(Address, Address)</code> method must be called after constructing 
+	 * <br>Note: The {@code create(Address, Address)} method must be called after constructing
 	 * an LSDATypeTable to associate it with an address before any of its "get..." methods 
 	 * are called.
 	 * @param monitor task monitor to see if the user has cancelled analysis.
@@ -58,7 +58,7 @@ public class LSDATypeTable extends GccAnalysisClass {
 	}
 
 	/**
-	 * Create a LSDA Type Table from the bytes between <code>bottom</code> and <code>top</code>. 
+	 * Create a LSDA Type Table from the bytes between {@code bottom} and <code>top</code>.
 	 * This table is built from bottom-to-top.
 	 * <br>Note: This method must get called before any of the "get..." methods.
 	 * @param bottom the bottom address of the type table

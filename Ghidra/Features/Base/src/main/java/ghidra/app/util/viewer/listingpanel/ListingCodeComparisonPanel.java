@@ -1154,15 +1154,15 @@ public class ListingCodeComparisonPanel
 	}
 
 	/**
-	 * Infers a desired byte address based on the specified <code>byteAddress</code> as well 
-	 * as the <code>address</code> and <code>desiredAddress</code> that were matched.
-	 * @param address matches up with the <code>desiredAddress</code> from the other function/data.
-	 * @param desiredAddress matches up with the <code>address</code> from the other function/data.
-	 * @param byteAddress the byte address that is associated with <code>address</code>
-	 * @param program the program for the <code>address</code> and <code>byteAddress</code>.
-	 * @param desiredProgram the program for the <code>desiredAddress</code> and 
-	 * <code>desiredByteAddress</code>.
-	 * @return the desired byte address that matches up with the indicated <code>byteAddress</code>
+	 * Infers a desired byte address based on the specified {@code byteAddress} as well
+	 * as the {@code address} and <code>desiredAddress</code> that were matched.
+	 * @param address matches up with the {@code desiredAddress} from the other function/data.
+	 * @param desiredAddress matches up with the {@code address} from the other function/data.
+	 * @param byteAddress the byte address that is associated with {@code address}
+	 * @param program the program for the {@code address} and <code>byteAddress</code>.
+	 * @param desiredProgram the program for the {@code desiredAddress} and
+	 * {@code desiredByteAddress}.
+	 * @return the desired byte address that matches up with the indicated {@code byteAddress}
 	 * or null if it can't be determined.
 	 */
 	private Address inferDesiredByteAddress(Address address, Address desiredAddress,
@@ -1184,20 +1184,20 @@ public class ListingCodeComparisonPanel
 
 	/**
 	 * This infers the desired byte address within Data based on the code units at 
-	 * <code>codeUnitAddress</code> and <code>desiredCodeUnitAddress</code>.
-	 * The inferred address will be at an offset from the <code>desiredCodeUnitAddress</code> 
-	 * that is the same distance the <code>byteAddress</code> is from the <code>codeUnitAddress</code>.
+	 * {@code codeUnitAddress} and <code>desiredCodeUnitAddress</code>.
+	 * The inferred address will be at an offset from the {@code desiredCodeUnitAddress}
+	 * that is the same distance the {@code byteAddress} is from the <code>codeUnitAddress</code>.
 	 * 
-	 * @param codeUnitAddress matches up with the <code>desiredCodeUnitAddress</code> from 
+	 * @param codeUnitAddress matches up with the {@code desiredCodeUnitAddress} from
 	 * the other data.
-	 * @param desiredCodeUnitAddress matches up with the <code>codeUnitAddress</code> from 
+	 * @param desiredCodeUnitAddress matches up with the {@code codeUnitAddress} from
 	 * the other data.
-	 * @param byteAddress the byte address that is associated with <code>codeUnitAddress</code>
-	 * @param program the program for the <code>codeUnitAddress</code> and <code>byteAddress</code>.
-	 * @param desiredProgram the program for the <code>desiredCodeUnitAddress</code> and 
-	 * <code>desiredByteAddress</code>.
+	 * @param byteAddress the byte address that is associated with {@code codeUnitAddress}
+	 * @param program the program for the {@code codeUnitAddress} and <code>byteAddress</code>.
+	 * @param desiredProgram the program for the {@code desiredCodeUnitAddress} and
+	 * {@code desiredByteAddress}.
 	 * @return the desired byte address within the data that matches up with the indicated 
-	 * <code>byteAddress</code> or null if it can't be determined.
+	 * {@code byteAddress} or null if it can't be determined.
 	 */
 	private Address inferDesiredDataAddress(Address codeUnitAddress, Address desiredCodeUnitAddress,
 			Address byteAddress, Program program, Program desiredProgram) {
@@ -1224,18 +1224,18 @@ public class ListingCodeComparisonPanel
 
 	/**
 	 * This infers the desired byte address within a function based on the code units at 
-	 * <code>address</code> and <code>desiredAddress</code>.
+	 * {@code address} and <code>desiredAddress</code>.
 	 * If the inferred address would be beyond the last byte of the code unit then it 
-	 * will get set to the last byte of the code unit at the <code>desiredAddress</code>.
+	 * will get set to the last byte of the code unit at the {@code desiredAddress}.
 	 * 
-	 * @param address matches up with the <code>desiredAddress</code> from the other function.
-	 * @param desiredAddress matches up with the <code>address</code> from the other function.
-	 * @param byteAddress the byte address that is associated with <code>address</code>
-	 * @param program the program for the <code>address</code> and <code>byteAddress</code>.
-	 * @param desiredProgram the program for the <code>desiredAddress</code> and 
-	 * <code>desiredByteAddress</code>.
+	 * @param address matches up with the {@code desiredAddress} from the other function.
+	 * @param desiredAddress matches up with the {@code address} from the other function.
+	 * @param byteAddress the byte address that is associated with {@code address}
+	 * @param program the program for the {@code address} and <code>byteAddress</code>.
+	 * @param desiredProgram the program for the {@code desiredAddress} and
+	 * {@code desiredByteAddress}.
 	 * @return the desired byte address within the data that matches up with the indicated 
-	 * <code>byteAddress</code> or null if it can't be determined.
+	 * {@code byteAddress} or null if it can't be determined.
 	 */
 	private Address inferDesiredFunctionAddress(Address address, Address desiredAddress,
 			Address byteAddress, Program program, Program desiredProgram) {
@@ -2137,8 +2137,8 @@ public class ListingCodeComparisonPanel
 	}
 
 	/**
-	 * Gets an address in the program indicated by <code>leftOrRight</code> that matches the 
-	 * <code>otherSidesAddress</code> that is an address in a function in the other program.
+	 * Gets an address in the program indicated by {@code leftOrRight} that matches the
+	 * {@code otherSidesAddress} that is an address in a function in the other program.
 	 * @param leftOrRight indicates whether to get the address from the LEFT or RIGHT program.
 	 * @param otherSidesAddress address in the other program that is equivalent to the 
 	 * desired address.

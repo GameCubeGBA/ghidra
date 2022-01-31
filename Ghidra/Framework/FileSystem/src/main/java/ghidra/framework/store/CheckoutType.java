@@ -18,7 +18,7 @@ package ghidra.framework.store;
 import ghidra.framework.remote.GhidraServerHandle;
 
 /**
- * <code>ChecoutType</code> identifies the type of checkout
+ * {@code ChecoutType} identifies the type of checkout
  */
 public enum CheckoutType {
 

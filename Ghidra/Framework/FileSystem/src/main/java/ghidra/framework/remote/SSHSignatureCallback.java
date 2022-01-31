@@ -25,7 +25,7 @@ import ch.ethz.ssh2.signature.*;
 import generic.random.SecureRandomFactory;
 
 /**
- * <code>SSHSignatureCallback</code> provides a Callback implementation used
+ * {@code SSHSignatureCallback} provides a Callback implementation used
  * to perform SSH authentication.  This callback is instantiated
  * by the server with a random token which must be signed using the 
  * user's SSH private key.

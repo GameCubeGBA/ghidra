@@ -20,7 +20,7 @@ import java.io.IOException;
 import db.buffers.DataBuffer;
 
 /**
- * <code>LongField</code> provides a wrapper for 8-byte signed long data 
+ * {@code LongField} provides a wrapper for 8-byte signed long data
  * which is read or written to a Record. 
  */
 public final class LongField extends PrimitiveField {

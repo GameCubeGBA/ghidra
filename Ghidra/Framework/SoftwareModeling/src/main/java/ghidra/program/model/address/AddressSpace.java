@@ -66,14 +66,14 @@ public interface AddressSpace extends Comparable<AddressSpace> {
 	public static final int ID_UNIQUE_SHIFT = 7;
 
 	/**
-	 * The <code>OTHER_SPACE</code> is used to store data from the original program file that doesn't
+	 * The {@code OTHER_SPACE} is used to store data from the original program file that doesn't
 	 * get loaded into the final memory image and for user-defined spaces.
 	 */
 	public static final AddressSpace OTHER_SPACE = new GenericAddressSpace(
 		SpaceNames.OTHER_SPACE_NAME, 64, TYPE_OTHER, SpaceNames.OTHER_SPACE_INDEX);
 
 	/**
-	 * The <code>EXTERNAL_SPACE</code> is used to contain all external locations (i.e., data and functions) 
+	 * The {@code EXTERNAL_SPACE} is used to contain all external locations (i.e., data and functions)
 	 * defined within a given library namespace.  All external locations within a program
 	 * are given a unique offset within the EXTERNAL space.
 	 */
@@ -81,7 +81,7 @@ public interface AddressSpace extends Comparable<AddressSpace> {
 		new GenericAddressSpace("EXTERNAL", 32, TYPE_EXTERNAL, 0);
 
 	/**
-	 * The <code>VARIABLE_SPACE</code> is used to contain all variables and parameters 
+	 * The {@code VARIABLE_SPACE} is used to contain all variables and parameters
 	 * defined within a given namespace (i.e., function).  All variables within a program
 	 * are given a unique offset within the VARIABLE space.
 	 */
@@ -89,7 +89,7 @@ public interface AddressSpace extends Comparable<AddressSpace> {
 		new GenericAddressSpace("VARIABLE", 32, TYPE_VARIABLE, 0);
 
 	/**
-	 * The <code>HASH_SPACE</code> provides a 60-bit space for encoding of unique hashcodes. 
+	 * The {@code HASH_SPACE} provides a 60-bit space for encoding of unique hashcodes.
 	 */
 	public static final AddressSpace HASH_SPACE =
 		new GenericAddressSpace("HASH", 60, TYPE_UNKNOWN, 0);
@@ -263,7 +263,7 @@ public interface AddressSpace extends Comparable<AddressSpace> {
 	 *
 	 * @param addr1 the address to subtract from.
 	 * @param addr2 the address to subtract.
-	 * @return the difference. (<code>addr1.offset - addr2.offset</code>).
+	 * @return the difference. ({@code addr1.offset - addr2.offset}).
 	 *
 	 * @throws IllegalArgumentException if the two addresses are not in the
 	 * same address space.

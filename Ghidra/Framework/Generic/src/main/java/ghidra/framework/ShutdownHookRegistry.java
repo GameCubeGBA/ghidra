@@ -75,7 +75,7 @@ public class ShutdownHookRegistry {
 	}
 
 	/**
-	 * <code>ShutdownHook</code> wrapper class for shutdown callback
+	 * {@code ShutdownHook} wrapper class for shutdown callback
 	 */
 	public static class ShutdownHook implements Comparable<ShutdownHook> {
 		Runnable r;

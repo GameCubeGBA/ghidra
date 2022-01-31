@@ -37,7 +37,7 @@ public interface FieldMouseHandler {
 	 * @param mouseEvent The mouse event that triggered the click
 	 * @param serviceProvider A service provider used to access system resources.
 	 * @return true if this handler wishes to have exclusive handling rights to processing the
-	 *         <code>clickedObject</code>
+	 *         {@code clickedObject}
 	 * @see   ListingField#getClickedObject(ghidra.util.bean.field.FieldLocation)
 	 */
 	public boolean fieldElementClicked(Object clickedObject, Navigatable sourceNavigatable,

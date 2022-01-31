@@ -28,7 +28,7 @@ import ghidra.util.exception.*;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>SymbolMerge</code> provides functionality for replacing or merging
+ * {@code SymbolMerge} provides functionality for replacing or merging
  * symbols from one program to another.
  */
 class SymbolMerge {
@@ -42,7 +42,7 @@ class SymbolMerge {
 	private SymbolTable toSymbolTable;
 
 	/**
-	 * Creates a <code>SymbolMerge</code> for replacing or merging symbols from one program
+	 * Creates a {@code SymbolMerge} for replacing or merging symbols from one program
 	 * to another program.
 	 * @param fromProgram the program to get symbols "from".
 	 * @param toProgram the program to merge symbols "to".
@@ -75,14 +75,14 @@ class SymbolMerge {
 	 * one and the name may match the original or have a conflict name.
 	 * <br>If the namespace can't be resolved, an exception is thrown.
 	 * <br>Any namespaces that are created with a conflict name will have their symbol IDs mapped
-	 * into the <code>conflictSymbolIDMap</code>.
+	 * into the {@code conflictSymbolIDMap}.
 	 *
 	 * @param fromNamespace the namespace in the "from" program.
 	 * @param conflictSymbolIDMap maps the symbol IDs in the "from" program to the symbol IDs
 	 * in the "to" program for any symbols (and their associated objects) that were created
 	 * with conflict names.
 	 * (key = "from" program's symbol ID; value = "to" program's symbol ID)
-	 * @return the resolved namespace in the "to" program. Also the <code>conflictSymbolIDMap</code>
+	 * @return the resolved namespace in the "to" program. Also the {@code conflictSymbolIDMap}
 	 * will have been modified, if this namespace had to be created with a conflict name.
 	 *
 	 * @throws DuplicateNameException if the name space can't be resolved due
@@ -252,7 +252,7 @@ class SymbolMerge {
 	}
 
 	/**
-	 * <code>replaceSymbols</code> will replace the symbols at the indicated address
+	 * {@code replaceSymbols} will replace the symbols at the indicated address
 	 * in the destination program with those from the source program. If the same symbol exists
 	 * in the source and destination programs, this method will simply allow it to remain in the
 	 * destination program. For a symbol to be the same, it must have the same name and the same
@@ -298,7 +298,7 @@ class SymbolMerge {
 	}
 
 	/**
-	 * <code>removeUniqueToSymbols</code> removes all the symbols in the
+	 * {@code removeUniqueToSymbols} removes all the symbols in the
 	 * destination program at the specified address that don't have the same
 	 * symbol in the source program at that address. The FUNCTION symbol will
 	 * not be removed at the address even if it is different. Otherwise, the
@@ -349,7 +349,7 @@ class SymbolMerge {
 	 * (key = "from" program's symbol ID; value = "to" program's symbol ID)
 	 * @param monitor the task monitor for updating user progress and allowing cancelling.
 	 *
-	 * @return an array of <code>SymbolTranslators</code> for symbols that ended up with different
+	 * @return an array of {@code SymbolTranslators} for symbols that ended up with different
 	 * pathnames in the destination program than they had in the source program. These map symbols
 	 * in the source program to a symbol with another name due to a duplicate symbol problem.
 	 *
@@ -608,7 +608,7 @@ class SymbolMerge {
 	}
 
 	/**
-	 * <CODE>mergeLabels</CODE> merges all symbols and aliases
+	 * {@code mergeLabels} merges all symbols and aliases
 	 * in the specified address set from the second program.
 	 * It merges them into the merge program.
 	 *
@@ -619,7 +619,7 @@ class SymbolMerge {
 	 * @throws CancelledException if user cancels via the monitor.
 	 */
 	/**
-	 * <CODE>mergeLabels</CODE> either replaces the symbols in the "to" program with those in the
+	 * {@code mergeLabels} either replaces the symbols in the "to" program with those in the
 	 * "from" program or merges the symbols from the "from" program into the "to" program at
 	 * the indicated addresses.
 	 * @param fromAddressSet the addresses where symbols should be replaced or merged.

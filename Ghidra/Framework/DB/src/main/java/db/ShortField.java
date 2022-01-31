@@ -20,7 +20,7 @@ import java.io.IOException;
 import db.buffers.DataBuffer;
 
 /**
- * <code>ShortField</code> provides a wrapper for 2-byte signed short data 
+ * {@code ShortField} provides a wrapper for 2-byte signed short data
  * which is read or written to a Record. 
  */
 public final class ShortField extends PrimitiveField {

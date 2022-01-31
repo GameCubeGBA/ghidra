@@ -28,7 +28,7 @@ import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>RemoteFileSystem</code> provides access to versioned FolderItem's which 
+ * {@code RemoteFileSystem} provides access to versioned FolderItem's which
  * exist within a Repository-based directory structure.  FolderItem
  * caching is provided by the remote implementation which is intended
  * to be shared across multiple clients.

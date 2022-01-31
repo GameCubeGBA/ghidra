@@ -155,7 +155,7 @@ public class FlatProgramAPI {
 
 	/**
 	 * Returns the path to the program's executable file.
-	 * For example, <code>c:\temp\test.exe</code>.
+	 * For example, {@code c:\temp\test.exe}.
 	 * @return path to program's executable file
 	 */
 	public final File getProgramFile() {
@@ -652,7 +652,7 @@ public class FlatProgramAPI {
 	 * starting from the address. If the start address is null, then the find will start
 	 * from the minimum address of the program.
 	 * <p>
-	 * The <code>byteString</code> may contain regular expressions.  The following
+	 * The {@code byteString} may contain regular expressions.  The following
 	 * highlights some example search strings (note the use of double backslashes ("\\")):
 	 * <pre>
 	 *             "\\x80" - A basic search pattern for a byte value of 0x80
@@ -681,7 +681,7 @@ public class FlatProgramAPI {
 	 * the given byte string, starting from the address. If the start address is null, then the
 	 * find will start from the minimum address of the program.
 	 * <p>
-	 * The <code>byteString</code> may contain regular expressions.  The following
+	 * The {@code byteString} may contain regular expressions.  The following
 	 * highlights some example search strings (note the use of double backslashes ("\\")):
 	 * <pre>
 	 *             "\\x80" - A basic search pattern for a byte value of 0x80
@@ -707,7 +707,7 @@ public class FlatProgramAPI {
 	 * the given byte string, starting from the address. If the start address is null, then the
 	 * find will start from the minimum address of the program.
 	 * <p>
-	 * The <code>byteString</code> may contain regular expressions.  The following
+	 * The {@code byteString} may contain regular expressions.  The following
 	 * highlights some example search strings (note the use of double backslashes ("\\")):
 	 * <pre>
 	 *             "\\x80" - A basic search pattern for a byte value of 0x80
@@ -750,7 +750,7 @@ public class FlatProgramAPI {
 	 *
 	 * Note: The ranges within the addressSet are NOT treated as a contiguous set when searching
 	 * <p>
-	 * The <code>byteString</code> may contain regular expressions.  The following
+	 * The {@code byteString} may contain regular expressions.  The following
 	 * highlights some example search strings (note the use of double backslashes ("\\")):
 	 * <pre>
 	 *             "\\x80" - A basic search pattern for a byte value of 0x80
@@ -782,7 +782,7 @@ public class FlatProgramAPI {
 	 * treated as a contiguous set when searching.
 	 *
 	 * <p>
-	 * The <code>byteString</code> may contain regular expressions.  The following
+	 * The {@code byteString} may contain regular expressions.  The following
 	 * highlights some example search strings (note the use of double backslashes ("\\")):
 	 * <pre>
 	 *             "\\x80" - A basic search pattern for a byte value of 0x80
@@ -1466,7 +1466,7 @@ public class FlatProgramAPI {
 
 	/**
 	 * Returns the symbol with the given name in the given namespace if there is only one.
-	 * Pass <code>null</code> for namespace to indicate the global namespace.
+	 * Pass {@code null} for namespace to indicate the global namespace.
 	 * @param name the name of the symbol
 	 * @param namespace the parent namespace, or null for global namespace
 	 * @return the symbol with the given name in the given namespace
@@ -1499,7 +1499,7 @@ public class FlatProgramAPI {
 	/**
 	 * Returns the non-function namespace with the given name contained inside the
 	 * specified parent namespace.
-	 * Pass <code>null</code> for namespace to indicate the global namespace.
+	 * Pass {@code null} for namespace to indicate the global namespace.
 	 * @param parent the parent namespace, or null for global namespace
 	 * @param namespaceName the requested namespace's name
 	 * @return the namespace with the given name or null if not found
@@ -2033,7 +2033,7 @@ public class FlatProgramAPI {
 	 * Note: If more than 4096 references exists to this address,
 	 * only the first 4096 will be returned.
 	 * If you need to access all the references, please
-	 * refer to the method <code>ReferenceManager::getReferencesTo(Address)</code>.
+	 * refer to the method {@code ReferenceManager::getReferencesTo(Address)}.
 	 * @param address the from address of the references
 	 * @return an array of the references TO the given address
 	 */
@@ -2375,9 +2375,9 @@ public class FlatProgramAPI {
 	}
 
 	/**
-	 * Creates a <code>NOTE</code> bookmark at the specified address
+	 * Creates a {@code NOTE} bookmark at the specified address
 	 * <br>
-	 * NOTE: if a <code>NOTE</code> bookmark already exists at the address, it will be replaced.
+	 * NOTE: if a {@code NOTE} bookmark already exists at the address, it will be replaced.
 	 * This is intentional and is done to match the behavior of setting bookmarks from the UI.
 	 * 
 	 * @param address  the address to create the bookmark
