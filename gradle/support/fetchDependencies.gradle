@@ -80,15 +80,15 @@ ext.deps = [
 		destination: file("${DEPS_DIR}/GhidraServer")
 	],
 	[
-		name: "PyDev 6.3.1.zip",
-		url: "https://sourceforge.net/projects/pydev/files/pydev/PyDev%206.3.1/PyDev%206.3.1.zip",
-		sha256: "4d81fe9d8afe7665b8ea20844d3f5107f446742927c59973eade4f29809b0699",
+		name: 'PyDev 9.2.0.zip',
+		url: 'https://sourceforge.net/projects/pydev/files/pydev/PyDev%209.2.0/PyDev%209.2.0.zip',
+		sha256: '77fdea05c53a6c62ee0ac774c146dc46317117e5d58f82afd4780afdceb87571',
 		destination: file("${DEPS_DIR}/GhidraDev")
 	],
 	[
-		name: "cdt-8.6.0.zip",
-		url: "https://archive.eclipse.org/tools/cdt/releases/8.6/cdt-8.6.0.zip",
-		sha256: "81b7d19d57c4a3009f4761699a72e8d642b5e1d9251d2bb98df438b1e28f8ba9",
+		name: 'cdt-10.3.3.zip',
+		url: 'https://archive.eclipse.org/tools/cdt/releases/10.3/cdt-10.3.3/cdt-10.3.3.zip',
+		sha256: 'd4ab4c851237cd6578a44212e4ea828b525b974a6d892074a747ca290a67ab53',
 		destination: file("${DEPS_DIR}/GhidraDev")
 	],
 	[
