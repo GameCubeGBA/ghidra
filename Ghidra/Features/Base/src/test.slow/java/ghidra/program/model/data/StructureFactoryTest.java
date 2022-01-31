@@ -233,8 +233,8 @@ public class StructureFactoryTest extends AbstractGhidraHeadedIntegrationTest {
 
 		int structureLength = (int) (offset - startOffset);
 		Address address = addr(startOffset);
-		int[] fromPath = new int[] { 1 };
-		int[] toPath = new int[] { 2 };
+		int[] fromPath = { 1 };
+		int[] toPath = { 2 };
 
 		// null structure name
 		try {

@@ -84,10 +84,10 @@ public class StackEditorPanel extends CompositeEditorPanel {
 			createNamedTextPanel(returnAddrOffsetField, "Return Address Offset");
 
 		JPanel[] hPanels =
-			new JPanel[] {
-				createHorizontalPanel(new JPanel[] { frameSizePanel, returnAddrOffsetPanel,
-					localSizePanel }),
-				createHorizontalPanel(new JPanel[] { paramOffsetPanel, paramSizePanel }) };
+                {
+                    createHorizontalPanel(new JPanel[] { frameSizePanel, returnAddrOffsetPanel,
+                        localSizePanel }),
+                    createHorizontalPanel(new JPanel[] { paramOffsetPanel, paramSizePanel }) };
 		JPanel outerPanel = createVerticalPanel(hPanels);
 		outerPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 

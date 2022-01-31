@@ -29,8 +29,8 @@ public class ShowComponentPathAction extends CompositeEditorTableAction {
 	private final static String GROUP_NAME = BASIC_ACTION_GROUP;
 	private final static String DESCRIPTION =
 		"Show the category for the selected component's data type";
-	private static String[] POPUP_PATH = new String[] { ACTION_NAME };
-	private static String[] MENU_PATH = new String[] { ACTION_NAME };
+	private static String[] POPUP_PATH = { ACTION_NAME };
+	private static String[] MENU_PATH = { ACTION_NAME };
 
 	public ShowComponentPathAction(CompositeEditorProvider provider) {
 		super(provider, EDIT_ACTION_PREFIX + ACTION_NAME, GROUP_NAME, POPUP_PATH, MENU_PATH, null);

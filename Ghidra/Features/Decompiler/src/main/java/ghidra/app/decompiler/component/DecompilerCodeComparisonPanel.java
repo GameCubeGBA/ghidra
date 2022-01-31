@@ -524,7 +524,7 @@ public abstract class DecompilerCodeComparisonPanel<T extends DualDecompilerFiel
 	@Override
 	public DockingAction[] getActions() {
 		DockingAction[] codeCompActions = super.getActions();
-		DockingAction[] otherActions = new DockingAction[] { applyFunctionSignatureAction };
+		DockingAction[] otherActions = { applyFunctionSignatureAction };
 		int compCount = codeCompActions.length;
 		int otherCount = otherActions.length;
 		DockingAction[] actions = new DockingAction[compCount + otherCount];

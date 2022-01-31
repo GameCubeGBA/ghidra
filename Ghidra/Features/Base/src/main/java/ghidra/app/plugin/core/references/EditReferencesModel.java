@@ -47,7 +47,7 @@ class EditReferencesModel extends AbstractSortedTableModel<Reference> {
 	static final int DEFAULT_SORT_COL = OPERAND_COL;
 
 	private static final String[] COLUMN_NAMES =
-		new String[] { OPERAND, LOCATION, LABEL, REF_TYPE, IS_PRIMARY, REF_SOURCE, };
+            { OPERAND, LOCATION, LABEL, REF_TYPE, IS_PRIMARY, REF_SOURCE, };
 
 	private static final Class<?>[] COLUMN_CLASSES = new Class[] { String.class,
 		AddressBasedLocation.class, String.class, RefType.class, Boolean.class, SourceType.class, };

@@ -39,7 +39,7 @@ import ghidra.util.task.TaskMonitor;
  */
 public class DataTypeMergeManager implements MergeResolver {
 
-	private static String[] DATA_TYPES_PHASE = new String[] { "Data Types" };
+	private static String[] DATA_TYPES_PHASE = { "Data Types" };
 	private static final int RESULT = MergeConstants.RESULT;
 	private static final int ORIGINAL = MergeConstants.ORIGINAL;
 	private static final int LATEST = MergeConstants.LATEST;

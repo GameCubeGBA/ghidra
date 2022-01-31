@@ -102,11 +102,11 @@ public class GhidraScriptRealProgramTest extends AbstractGhidraHeadedIntegration
 	@Test
 	public void testFindBytes() throws Exception {
 		GhidraScript script = getScript();
-		byte[] byteValues1 = new byte[] { (byte) 0x8b, (byte) 0x4d, (byte) 0x08 };
+		byte[] byteValues1 = { (byte) 0x8b, (byte) 0x4d, (byte) 0x08 };
 		Address address1000 = script.toAddr(0x01001000);
 		assertEquals(addr(0x010022bf), script.find(address1000, byteValues1));
 
-		byte[] byteValues2 = new byte[] { (byte) 0x68, (byte) 0x88, (byte) 0x18, (byte) 0x00 };
+		byte[] byteValues2 = { (byte) 0x68, (byte) 0x88, (byte) 0x18, (byte) 0x00 };
 		assertEquals(addr(0x01006425), script.find(script.toAddr(0x01006420), byteValues2));
 
 		String byteValues1String = "\\x8b\\x4d\\x08";

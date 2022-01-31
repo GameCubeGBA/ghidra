@@ -55,7 +55,7 @@ public class ShowInstructionInfoPluginTest extends AbstractGhidraHeadedIntegrati
 	private static final String startAddressString = "1000000";
 	private static final String beyondAddressString = "100000a";
 	private static final byte[] BYTES =
-		new byte[] { (byte) 0xff, 0x15, 0x10, 0x32, 0x00, 0x01, (byte) 0xff, 0x75, 0x14, 0x5f };
+            { (byte) 0xff, 0x15, 0x10, 0x32, 0x00, 0x01, (byte) 0xff, 0x75, 0x14, 0x5f };
 
 	private TestEnv env;
 	private PluginTool tool;

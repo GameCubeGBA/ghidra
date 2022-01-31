@@ -46,12 +46,12 @@ public class CodeUnitFormat {
 	/**
 	 * Supported memory address shift cases (bits)
 	 */
-	private static final int[] SHIFT_CASES = new int[] { 1, 2, 8, 16, 32 };
+	private static final int[] SHIFT_CASES = { 1, 2, 8, 16, 32 };
 
 	/**
 	 * Supported memory address mask cases (mask value)
 	 */
-	private static final long[] MASK_CASES = new long[] { 0x0ff, 0x0ffff, 0x0ffffffff };
+	private static final long[] MASK_CASES = { 0x0ff, 0x0ffff, 0x0ffffffff };
 
 	/**
 	 * Default code unit format

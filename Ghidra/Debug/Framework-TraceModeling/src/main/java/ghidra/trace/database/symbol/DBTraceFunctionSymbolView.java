@@ -37,7 +37,7 @@ import ghidra.util.exception.InvalidInputException;
 public class DBTraceFunctionSymbolView
 		extends AbstractDBTraceSymbolSingleTypeWithLocationView<DBTraceFunctionSymbol>
 		implements TraceFunctionSymbolView {
-	protected static final PrototypeModel[] EMPTY_MODEL_LIST = new PrototypeModel[] {};
+	protected static final PrototypeModel[] EMPTY_MODEL_LIST = {};
 
 	protected static void assertProperSpace(AddressSpace expected, AddressSetView body) {
 		if (!expected.isMemorySpace()) {

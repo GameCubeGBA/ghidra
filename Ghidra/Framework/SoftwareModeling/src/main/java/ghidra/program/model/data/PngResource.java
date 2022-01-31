@@ -25,7 +25,7 @@ import java.util.zip.CRC32;
 class PngResource {
 
 	private static final int MAX_CHUNK_SIZE = 10 * 1024 * 1024;
-	private static final byte[] IEND = new byte[] { 'I', 'E', 'N', 'D' };
+	private static final byte[] IEND = { 'I', 'E', 'N', 'D' };
 
 	private MemBuffer buf;
 	private int bufOffset;

@@ -24,7 +24,7 @@ import docking.widgets.fieldpanel.field.FieldElement;
  */
 public class FieldUtils {
 
-	private static final char[] WHITE_SPACE = new char[] { '\t', '\n', '\r', '\f' };
+	private static final char[] WHITE_SPACE = { '\t', '\n', '\r', '\f' };
 
 	private FieldUtils() { // utility class
 	}

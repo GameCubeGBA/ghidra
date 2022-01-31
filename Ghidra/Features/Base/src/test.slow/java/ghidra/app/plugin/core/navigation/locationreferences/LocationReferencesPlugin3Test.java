@@ -235,7 +235,7 @@ public class LocationReferencesPlugin3Test extends AbstractLocationReferencesTes
 
 		openData(0x01005520);
 
-		int[] path = new int[] { 1, 0 }; // from the parent: array element 1, field member 0
+		int[] path = { 1, 0 }; // from the parent: array element 1, field member 0
 		FieldNameFieldLocation fieldLocation =
 			new FieldNameFieldLocation(program, addr(0x01005525), path, "my_int", 1);
 		goTo(fieldLocation);

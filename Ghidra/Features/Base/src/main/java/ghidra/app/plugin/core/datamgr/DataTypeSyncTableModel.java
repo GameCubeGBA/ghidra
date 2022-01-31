@@ -39,7 +39,7 @@ class DataTypeSyncTableModel extends AbstractSortedTableModel<RowData> {
 	final static int CHANGE_TIME_COL = 4;
 
 	private String[] columnNames =
-		new String[] { "Apply", "Status", "Datatype", "Category Path", "Change Time", };
+            { "Apply", "Status", "Datatype", "Category Path", "Change Time", };
 
 	private final List<RowData> rowDataList;
 	private final boolean showSourceChangeTime;

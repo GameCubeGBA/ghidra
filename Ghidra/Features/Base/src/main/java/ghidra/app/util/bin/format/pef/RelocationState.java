@@ -205,7 +205,7 @@ public class RelocationState {
 
 			byte[] bytes = new byte[4];
 			memory.getBytes(address, bytes);
-			long[] values = new long[] { addend };
+			long[] values = { addend };
 
 			// TODO does PEF have symbol names?
 			String symbolName = null;

@@ -458,7 +458,7 @@ public class GTreeFilterTest extends AbstractDockingTest {
 			GTreeFilterProvider filterProvider = gTree.getFilterProvider();
 			String key = (String) getInstanceField("uniquePreferenceKey", gTree);
 			Class<?>[] classes = new Class[] { DockingWindowManager.class, String.class };
-			Object[] objs = new Object[] { winMgr, key };
+			Object[] objs = { winMgr, key };
 			invokeInstanceMethod("loadFilterPreference", filterProvider, classes, objs);
 		});
 		waitForTree();

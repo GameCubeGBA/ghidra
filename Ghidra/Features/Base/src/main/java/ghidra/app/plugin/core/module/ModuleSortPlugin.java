@@ -69,11 +69,11 @@ public class ModuleSortPlugin extends ProgramPlugin {
 	public static final int SORT_BY_ADDRESS = 2;
 
 	// Sort by Address Action info
-	private final static String[] SORT_BY_ADDR_MENUPATH = new String[] { "Sort", "by Address" };
+	private final static String[] SORT_BY_ADDR_MENUPATH = { "Sort", "by Address" };
 	private ModuleSortAction sortByAddrAction;
 
 	// Sort by Address Action info
-	private final static String[] SORT_BY_NAME_MENUPATH = new String[] { "Sort", "by Name" };
+	private final static String[] SORT_BY_NAME_MENUPATH = { "Sort", "by Name" };
 	private ModuleSortAction sortByNameAction;
 
 	public ModuleSortPlugin(PluginTool tool) {

@@ -65,7 +65,7 @@ public class ServerTestUtil {
 	public static final String TEST_PKI_CA_DN = "CN=Ghidra Test CA, O=Ghidra, OU=Test, C=US";
 
 	private static String[] AUTH_MODES =
-		new String[] { "Private Password", "NT Login Password", "PKI", "NT/Private Password" };
+            { "Private Password", "NT Login Password", "PKI", "NT/Private Password" };
 
 	public static final URL TEST_REPO_URL =
 		GhidraURL.makeURL(LOCALHOST, GHIDRA_TEST_SERVER_PORT, "Test");

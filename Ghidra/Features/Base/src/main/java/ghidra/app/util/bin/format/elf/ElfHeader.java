@@ -95,7 +95,7 @@ public class ElfHeader implements StructConverter, Writeable {
 
 	private Consumer<String> errorConsumer;
 
-	private static int INITIAL_READ_LEN = ElfConstants.EI_NIDENT + 18;
+	private static final int INITIAL_READ_LEN = ElfConstants.EI_NIDENT + 18;
 
 	/**
 	 * Construct <code>ElfHeader</code> from byte provider
@@ -1308,22 +1308,6 @@ public class ElfHeader implements StructConverter, Writeable {
 	}
 
 	/**
-	 * This member identifies the target operating system and ABI.
-	 * @return the target operating system and ABI
-	 */
-	public byte e_ident_osabi() {
-		return e_ident_osabi;
-	}
-
-	/**
-	 * This member identifies the target ABI version.
-	 * @return the target ABI version
-	 */
-	public byte e_ident_abiversion() {
-		return e_ident_abiversion;
-	}
-
-	/**
 	 * This member holds the size in bytes of one entry in the file's program header table;
 	 * all entries are the same size.
 	 * @return the size in bytes of one program header table entry 
@@ -1606,36 +1590,6 @@ public class ElfHeader implements StructConverter, Writeable {
 	 */
 	public ElfDynamicTable getDynamicTable() {
 		return dynamicTable;
-	}
-
-	/**
-	 * Returns the program header with type of PT_PHDR.
-	 * Or, null if one does not exist.
-	 * @return the program header with type of PT_PHDR
-	 */
-	public ElfProgramHeader getProgramHeaderProgramHeader() {
-		ElfProgramHeader[] pharr = getProgramHeaders(ElfProgramHeaderConstants.PT_PHDR);
-		if (pharr.length == 0 || pharr.length > 1) {
-			return null;
-			//throw new RuntimeException("Unable to locate PT_PHDR program header");
-		}
-		return pharr[0];
-	}
-
-	/**
-	 * Returns the program header at the specified address,
-	 * or null if no program header exists at that address.
-	 * @param virtualAddr the address of the requested program header
-	 * @return the program header with the specified address
-	 */
-	public ElfProgramHeader getProgramHeaderAt(long virtualAddr) {
-		for (ElfProgramHeader programHeader : programHeaders) {
-			if (programHeader.getType() == ElfProgramHeaderConstants.PT_LOAD &&
-				programHeader.getVirtualAddress() == virtualAddr) {
-				return programHeader;
-			}
-		}
-		return null;
 	}
 
 	/**
@@ -2020,14 +1974,6 @@ public class ElfHeader implements StructConverter, Writeable {
 	 */
 	public void setSectionHeaderOffset(long offset) {
 		this.e_shoff = offset;
-	}
-
-	/**
-	 * Sets the program header offset.
-	 * @param offset the new program header offset
-	 */
-	public void setProgramHeaderOffset(long offset) {
-		this.e_phoff = offset;
 	}
 
 }

@@ -47,7 +47,7 @@ public class DisplayMethodsAction extends DockingAction {
 		this.tool = tool;
 		this.provider = provider;
 
-		String[] path = new String[] { "Display methods" };
+		String[] path = { "Display methods" };
 		setPopupMenuData(new MenuData(path, GROUP));
 		setHelpLocation(new HelpLocation(owner, "display_methods"));
 		provider.addLocalAction(this);

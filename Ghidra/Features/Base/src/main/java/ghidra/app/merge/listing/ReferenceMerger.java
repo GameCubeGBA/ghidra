@@ -1234,7 +1234,7 @@ return false;
 			return new String[] { "Option", "Type", "From", "Operand", "To", "Symbol", "Primary",
 				"Source" };
 		}
-		String[] info = new String[] { "", "", "", "", "", "", "", "" };
+		String[] info = { "", "", "", "", "", "", "", "" };
 		String version = "";
 		if (pgm == originalPgm) {
 			version = ORIGINAL_TITLE;

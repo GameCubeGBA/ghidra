@@ -172,7 +172,7 @@ public class FilterVerticesJobTest extends AbstractFilteringVisualGraphTest {
 		 		-ape-->turtle
 		 */
 
-		AbstractTestVertex[] failed = new AbstractTestVertex[] { worm, ape, turtle };
+		AbstractTestVertex[] failed = { worm, ape, turtle };
 		assertOnlyTheseAreFiltered(failed);
 		assertAllVisibleBut(failed);
 		TestEdge apeToTurtle = edge(ape, turtle);
@@ -212,7 +212,7 @@ public class FilterVerticesJobTest extends AbstractFilteringVisualGraphTest {
 
 		waitForJobRunner();
 
-		AbstractTestVertex[] filteredOut = new AbstractTestVertex[] { worm, ape, turtle };
+		AbstractTestVertex[] filteredOut = { worm, ape, turtle };
 		assertOnlyTheseAreFiltered(filteredOut);
 		assertAllVisibleBut(filteredOut);
 		TestEdge apeToTurtle = edge(ape, turtle);

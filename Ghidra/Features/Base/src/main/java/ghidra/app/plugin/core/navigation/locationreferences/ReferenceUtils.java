@@ -213,7 +213,7 @@ public final class ReferenceUtils {
 			TaskMonitor monitor) throws CancelledException {
 
 		// Note: none of the params can be null, but this one gets used much later, so check now
-		Objects.requireNonNull(dataType, () -> "Data Type cannot be null");
+		Objects.requireNonNull(dataType, "Data Type cannot be null");
 
 		FieldMatcher fieldMatcher = new FieldMatcher(dataType, fieldName);
 		doFindDataTypeReferences(accumulator, fieldMatcher, program, discoverTypes, monitor);
@@ -936,7 +936,7 @@ return createDataMemberLocationDescriptor(fieldLocation);
 
 		// ...how about a function member (variable/param)?
 		LocationDescriptor functionMemberDescriptor =
-			createFunctionMemberLocationDescriptor(location, reference, operandAddress);
+			createFunctionMemberLocationDescriptor(location, reference);
 		if (functionMemberDescriptor != null) {
 			return functionMemberDescriptor;
 		}
@@ -986,7 +986,7 @@ return createDataMemberLocationDescriptor(fieldLocation);
 	}
 
 	private static LocationDescriptor createFunctionMemberLocationDescriptor(
-			OperandFieldLocation location, Reference reference, Address operandAddress) {
+            OperandFieldLocation location, Reference reference) {
 
 		Program program = location.getProgram();
 		if (reference.isStackReference() || reference.isRegisterReference()) {

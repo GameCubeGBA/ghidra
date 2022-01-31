@@ -61,7 +61,7 @@ class DexHeaderFragmentManager {
 	AddressSet stringDataAddressSet = new AddressSet();
 	AddressSet stringsDataSet = new AddressSet();
 
-	AddressSet[] addressSets = new AddressSet[] {
+	AddressSet[] addressSets = {
 		classesAddressSet, classStaticValuesAddressSet, classDataAddressSet,
 		codeItemAddressSet,
 		encodedFieldsAddressSet, encodedMethodsAddressSet,
@@ -74,7 +74,7 @@ class DexHeaderFragmentManager {
 		stringDataAddressSet, stringsDataSet,
 	};
 
-	private String[] addressSetNames = new String[] {
+	private String[] addressSetNames = {
 		"classes", "class_static_values", "class_data", CodeItem.CODE_ITEM,
 		"encoded_fields", "encoded_methods", "debug_info",
 		"handlers", "try", "annotations", "class_annotations",

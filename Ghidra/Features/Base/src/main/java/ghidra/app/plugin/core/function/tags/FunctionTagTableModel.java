@@ -105,7 +105,7 @@ public class FunctionTagTableModel extends ThreadedTableModel<FunctionTagRowObje
 		return getAllData().stream()
 				.filter(row -> row.getName().equals(name))
 				.findFirst()
-				.orElseGet(() -> null);
+				.orElse(null);
 	}
 
 	/**

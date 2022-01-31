@@ -857,7 +857,7 @@ class ProgramTreeActionManager implements ClipboardOwner {
 		if (tree.getSelectionCount() == 1) {
 
 			// cut to clipboard
-			TreePath[] paths = new TreePath[] { tree.getSelectionPath() };
+			TreePath[] paths = { tree.getSelectionPath() };
 			setClipboardContents(GClipboard.getSystemClipboard(), paths);
 			// put on the temporary clipboard
 			setClipboardContents(tempClipboard, paths);

@@ -79,7 +79,7 @@ public class EditReferencesProvider extends ComponentProviderAdapter
 	static Color HIGHLIGHT_COLOR = new Color(205, 205, 205);
 
 	private static final DataFlavor[] ACCEPTABLE_DROP_FLAVORS =
-		new DataFlavor[] { SelectionTransferable.localProgramSelectionFlavor };
+            { SelectionTransferable.localProgramSelectionFlavor };
 
 	private ReferencesPlugin plugin;
 

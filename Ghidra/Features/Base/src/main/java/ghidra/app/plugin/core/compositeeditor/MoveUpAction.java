@@ -36,7 +36,7 @@ public class MoveUpAction extends CompositeEditorTableAction {
 	public final static String ACTION_NAME = "Move Components Up";
 	private final static String GROUP_NAME = COMPONENT_ACTION_GROUP;
 	private final static String DESCRIPTION = "Move selected components up";
-	private final static String[] POPUP_PATH = new String[] { ACTION_NAME };
+	private final static String[] POPUP_PATH = { ACTION_NAME };
 
 	private final static KeyStroke KEY_STROKE =
 		KeyStroke.getKeyStroke(KeyEvent.VK_UP, InputEvent.ALT_DOWN_MASK);

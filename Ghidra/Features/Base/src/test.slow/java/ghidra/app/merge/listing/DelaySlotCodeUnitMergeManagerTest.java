@@ -25,10 +25,10 @@ import ghidra.program.model.listing.Listing;
 
 public class DelaySlotCodeUnitMergeManagerTest extends AbstractListingMergeManagerTest {
 
-	private final byte[] delaySlotPair1 = new byte[] { 0x54, 0x40, 0x00, 0x01, 0x24, 0x16, 0x00,
+	private final byte[] delaySlotPair1 = { 0x54, 0x40, 0x00, 0x01, 0x24, 0x16, 0x00,
 		0x40 };
 
-	private final byte[] delaySlotPair2 = new byte[] { 0x0c, 0x10, (byte) 0xcf, (byte) 0xe7, 0x02,
+	private final byte[] delaySlotPair2 = { 0x0c, 0x10, (byte) 0xcf, (byte) 0xe7, 0x02,
 		0x20, 0x28, 0x21 };
 
 	/**

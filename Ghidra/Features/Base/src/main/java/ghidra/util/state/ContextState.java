@@ -34,10 +34,10 @@ public class ContextState {
 
 	private static boolean DEBUG = false;
 
-	private static final long[] VALUE_MASK = new long[] { 0x0, 0x0ff, 0x0ffff, 0x0ffffff,
+	private static final long[] VALUE_MASK = { 0x0, 0x0ff, 0x0ffff, 0x0ffffff,
 		0x0ffffffffL, 0x0ffffffffffL, 0x0ffffffffffffL, 0x0ffffffffffffffL, -1 };
 
-	private static final long[] SIGN_BIT = new long[] { 0x0, 0x080, 0x08000, 0x0800000,
+	private static final long[] SIGN_BIT = { 0x0, 0x080, 0x08000, 0x0800000,
 		0x080000000L, 0x08000000000L, 0x0800000000000L, 0x080000000000000L };
 
 // TODO: How do we store a partial values (i.e., unknown bits) - we need a special varnode or operation
@@ -729,7 +729,7 @@ public class ContextState {
 			size = result.getSize() + next.getSize();
 			next = leftShiftExpression(next, result.getSize(), size, monitor);
 
-			Varnode[] inputs = new Varnode[] { zeroExtendExpression(result, size), next };
+			Varnode[] inputs = { zeroExtendExpression(result, size), next };
 			PcodeOp op =
 				new PcodeOp(Address.NO_ADDRESS, -1, PcodeOp.INT_ADD, inputs, new Varnode(
 					Address.NO_ADDRESS, size));
@@ -883,7 +883,7 @@ public class ContextState {
 					new Varnode(addrFactory.getConstantAddress(-(1L << (8 * maskedOp.byteShift))),
 						result.getSize());
 				mask.trim();
-				Varnode[] inputs = new Varnode[] { result, mask };
+				Varnode[] inputs = { result, mask };
 				result =
 					getOperation(result.getAddress(), PcodeOp.INT_AND, inputs, new Varnode(
 						Address.NO_ADDRESS, result.getSize()));
@@ -897,15 +897,15 @@ public class ContextState {
 				}
 			}
 			else if (result.getSize() < targetSize) {
-				Varnode[] inputs = new Varnode[] { result };
+				Varnode[] inputs = { result };
 				result =
 					getOperation(Address.NO_ADDRESS, PcodeOp.INT_ZEXT, inputs, new Varnode(
 						Address.NO_ADDRESS, targetSize));
 			}
 			else if (result.getSize() > targetSize) {
 				Varnode[] inputs =
-					new Varnode[] { result,
-						new Varnode(addrFactory.getConstantAddress(targetSize), 1) };
+                        { result,
+                            new Varnode(addrFactory.getConstantAddress(targetSize), 1) };
 				result =
 					getOperation(Address.NO_ADDRESS, PcodeOp.SUBPIECE, inputs, new Varnode(
 						Address.NO_ADDRESS, targetSize));

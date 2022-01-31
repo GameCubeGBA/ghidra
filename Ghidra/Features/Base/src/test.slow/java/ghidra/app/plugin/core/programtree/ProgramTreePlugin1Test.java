@@ -1029,7 +1029,7 @@ public class ProgramTreePlugin1Test extends AbstractProgramTreePluginTest {
 	public void testDoubleClick2() {
 		setTreeView("Main Tree");
 		ProgramNode node = root.getChild(".data");
-		TreePath[] paths = new TreePath[] { node.getTreePath() };
+		TreePath[] paths = { node.getTreePath() };
 		setViewPaths(paths);
 
 		int row = getRowForPath(paths[0]);

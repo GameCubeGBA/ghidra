@@ -84,7 +84,7 @@ public class RefTypeFactory {
 			RefType.CALLOTHER_OVERRIDE_JUMP);
 	}
 
-	private static RefType[] memoryRefTypes = new RefType[] { RefType.INDIRECTION,
+	private static RefType[] memoryRefTypes = { RefType.INDIRECTION,
 		RefType.COMPUTED_CALL, RefType.COMPUTED_JUMP, RefType.CONDITIONAL_CALL,
 		RefType.CONDITIONAL_JUMP, RefType.UNCONDITIONAL_CALL, RefType.UNCONDITIONAL_JUMP,
 		RefType.CONDITIONAL_COMPUTED_CALL, RefType.CONDITIONAL_COMPUTED_JUMP, RefType.PARAM,
@@ -101,18 +101,18 @@ public class RefTypeFactory {
 	}
 
 	private static RefType[] stackRefTypes =
-		new RefType[] { RefType.DATA, RefType.READ, RefType.WRITE, RefType.READ_WRITE };
+            { RefType.DATA, RefType.READ, RefType.WRITE, RefType.READ_WRITE };
 
-	private static RefType[] dataRefTypes = new RefType[] { RefType.DATA, RefType.PARAM,
+	private static RefType[] dataRefTypes = { RefType.DATA, RefType.PARAM,
 		RefType.READ, RefType.WRITE, RefType.READ_WRITE, };
 
 	private static RefType[] extRefTypes =
-		new RefType[] { RefType.COMPUTED_CALL, RefType.COMPUTED_JUMP, RefType.CONDITIONAL_CALL,
-			RefType.CONDITIONAL_JUMP, RefType.UNCONDITIONAL_CALL, RefType.UNCONDITIONAL_JUMP,
-			RefType.CONDITIONAL_COMPUTED_CALL, RefType.CONDITIONAL_COMPUTED_JUMP, RefType.DATA,
-			RefType.DATA_IND, RefType.READ, RefType.READ_IND, RefType.WRITE, RefType.WRITE_IND,
-			RefType.READ_WRITE, RefType.READ_WRITE_IND, RefType.CALL_OVERRIDE_UNCONDITIONAL,
-			RefType.CALLOTHER_OVERRIDE_CALL, RefType.CALLOTHER_OVERRIDE_JUMP };
+            { RefType.COMPUTED_CALL, RefType.COMPUTED_JUMP, RefType.CONDITIONAL_CALL,
+                RefType.CONDITIONAL_JUMP, RefType.UNCONDITIONAL_CALL, RefType.UNCONDITIONAL_JUMP,
+                RefType.CONDITIONAL_COMPUTED_CALL, RefType.CONDITIONAL_COMPUTED_JUMP, RefType.DATA,
+                RefType.DATA_IND, RefType.READ, RefType.READ_IND, RefType.WRITE, RefType.WRITE_IND,
+                RefType.READ_WRITE, RefType.READ_WRITE_IND, RefType.CALL_OVERRIDE_UNCONDITIONAL,
+                RefType.CALLOTHER_OVERRIDE_CALL, RefType.CALLOTHER_OVERRIDE_JUMP };
 
 	public static RefType[] getMemoryRefTypes() {
 		return memoryRefTypes;

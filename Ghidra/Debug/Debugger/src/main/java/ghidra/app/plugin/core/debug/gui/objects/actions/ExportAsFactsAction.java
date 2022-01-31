@@ -46,7 +46,7 @@ public class ExportAsFactsAction extends ImportExportAsAction {
 		super("ExportAsFacts", tool, owner, provider);
 		fileExt = "";
 		fileMode = GhidraFileChooserMode.DIRECTORIES_ONLY;
-		String[] path = new String[] { "Export as...", "Facts" };
+		String[] path = { "Export as...", "Facts" };
 		setPopupMenuData(new MenuData(path, ICON_FACTS));
 		setKeyBindingData(new KeyBindingData(KeyEvent.VK_F,
 			InputEvent.SHIFT_DOWN_MASK));

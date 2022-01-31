@@ -50,7 +50,7 @@ public class JadProcessController {
 
 	private MessageLog log = new MessageLog();
 	private Runtime runtime = Runtime.getRuntime();
-	private String[] environment = new String[] {};
+	private String[] environment = {};
 	private Runnable timeoutRunnable;
 	private volatile DisposeState disposeState = DisposeState.NOT_DISPOSED;// How this process was (or was not) disposed
 	private volatile Process process;

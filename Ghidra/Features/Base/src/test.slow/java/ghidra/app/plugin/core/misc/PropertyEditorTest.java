@@ -217,7 +217,7 @@ public class PropertyEditorTest extends AbstractGhidraHeadedIntegrationTest {
 	public void testStringWithChoices() throws Exception {
 
 		Options options = new ToolOptions("Test");
-		String[] choices = new String[] { "abc", "def", "ghi", "jkl" };
+		String[] choices = { "abc", "def", "ghi", "jkl" };
 		options.registerOption("TestStringWithChoices", OptionType.STRING_TYPE, choices[0], null,
 			"String Choices", new StringWithChoicesEditor(choices));
 

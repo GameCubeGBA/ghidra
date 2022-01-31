@@ -66,11 +66,11 @@ public class AutoRenamePlugin extends ProgramPlugin {
     private final static String GROUP_NAME = "delete";
 
     // Auto Rename Action info
-    private final static String[] AUTO_RENAME_MENUPATH = new String[] { "Auto Rename" };
+    private final static String[] AUTO_RENAME_MENUPATH = { "Auto Rename" };
     private AutoRenameAction autoRenameAction;
 
     // Auto Rename with Label Action
-    private final static String[] AUTO_LBL_RENAME_MENUPATH = new String[] { "Rename Fragment to Label" };
+    private final static String[] AUTO_LBL_RENAME_MENUPATH = { "Rename Fragment to Label" };
     private DockingAction autoLblRenameAction;
 
     private ProgramTreeService treeService;

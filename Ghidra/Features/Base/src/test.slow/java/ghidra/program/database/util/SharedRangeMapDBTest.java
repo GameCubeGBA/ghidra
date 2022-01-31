@@ -129,14 +129,14 @@ public class SharedRangeMapDBTest extends AbstractGhidraHeadedIntegrationTest
 		map.add(50, 60, 1);
 		map.add(70, 80, 1);
 
-		IndexRange[] ranges = new IndexRange[] {
+		IndexRange[] ranges = {
 			new IndexRange(10, 20),
 			new IndexRange(30, 40),
 			new IndexRange(50, 60),
 			new IndexRange(70, 80)
 		};
 
-		IndexRange[] entries = new IndexRange[] {
+		IndexRange[] entries = {
 			new IndexRange(10, 1),
 			new IndexRange(30, 1),
 			new IndexRange(50, 1),
@@ -327,7 +327,7 @@ public class SharedRangeMapDBTest extends AbstractGhidraHeadedIntegrationTest
 		// Remove
 		map.remove(4);
 
-		IndexRange[] ranges = new IndexRange[] {
+		IndexRange[] ranges = {
 			new IndexRange(10, 19),
 			new IndexRange(20, 27),
 			new IndexRange(28, 30),
@@ -335,7 +335,7 @@ public class SharedRangeMapDBTest extends AbstractGhidraHeadedIntegrationTest
 			new IndexRange(36, 90)
 		};
 
-		IndexRange[] entries = new IndexRange[] {
+		IndexRange[] entries = {
 			new IndexRange(10, 1),
 			new IndexRange(20, 1),
 			new IndexRange(28, 1),
@@ -411,7 +411,7 @@ public class SharedRangeMapDBTest extends AbstractGhidraHeadedIntegrationTest
 
 		// Test 1
 		Iterator<Field> iter = map.getValueIterator(29, 34);
-		LongField[] values = new LongField[] {
+		LongField[] values = {
 			new LongField(1),
 			new LongField(2),
 			new LongField(3),
@@ -489,7 +489,7 @@ public class SharedRangeMapDBTest extends AbstractGhidraHeadedIntegrationTest
 		map.add(25, 39, 4);
 
 		IndexRangeIterator iter = map.getValueRangeIterator(2);
-		IndexRange[] ranges = new IndexRange[] {
+		IndexRange[] ranges = {
 			new IndexRange(20, 24),
 			new IndexRange(25, 27),
 			new IndexRange(28, 30)

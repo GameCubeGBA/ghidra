@@ -822,8 +822,8 @@ public class ExternalUseForAllTest extends AbstractExternalMergerTest {
 
 	@Test
 	public void testExternalFunctionRemoveConflictDontUseForAll() throws Exception {
-		final String[] applesPath = new String[] { "user32.dll", "Class1", "apples" };
-		final String[] orangesPath = new String[] { "user32.dll", "NamespaceA", "oranges" };
+		final String[] applesPath = { "user32.dll", "Class1", "apples" };
+		final String[] orangesPath = { "user32.dll", "NamespaceA", "oranges" };
 
 		setupExternalFunctionRemoveUseForAll(applesPath, orangesPath);
 
@@ -867,8 +867,8 @@ public class ExternalUseForAllTest extends AbstractExternalMergerTest {
 
 	@Test
 	public void testExternalFunctionRemoveConflictUseForAll() throws Exception {
-		final String[] applesPath = new String[] { "user32.dll", "Class1", "apples" };
-		final String[] orangesPath = new String[] { "user32.dll", "NamespaceA", "oranges" };
+		final String[] applesPath = { "user32.dll", "Class1", "apples" };
+		final String[] orangesPath = { "user32.dll", "NamespaceA", "oranges" };
 
 		setupExternalFunctionRemoveUseForAll(applesPath, orangesPath);
 
@@ -1010,8 +1010,8 @@ public class ExternalUseForAllTest extends AbstractExternalMergerTest {
 
 	@Test
 	public void testExternalFunctionParameterSignatureConflictDontUseForAll() throws Exception {
-		final String[] applesPath = new String[] { "user32.dll", "Class1", "apples" };
-		final String[] orangesPath = new String[] { "user32.dll", "NamespaceA", "oranges" };
+		final String[] applesPath = { "user32.dll", "Class1", "apples" };
+		final String[] orangesPath = { "user32.dll", "NamespaceA", "oranges" };
 
 		setupParameterSignatureUseForAll(applesPath, orangesPath);
 
@@ -1074,8 +1074,8 @@ public class ExternalUseForAllTest extends AbstractExternalMergerTest {
 
 	@Test
 	public void testExternalFunctionParameterSignatureConflictUseForAll() throws Exception {
-		final String[] applesPath = new String[] { "user32.dll", "Class1", "apples" };
-		final String[] orangesPath = new String[] { "user32.dll", "NamespaceA", "oranges" };
+		final String[] applesPath = { "user32.dll", "Class1", "apples" };
+		final String[] orangesPath = { "user32.dll", "NamespaceA", "oranges" };
 
 		setupParameterSignatureUseForAll(applesPath, orangesPath);
 
@@ -1271,8 +1271,8 @@ public class ExternalUseForAllTest extends AbstractExternalMergerTest {
 
 	@Test
 	public void testExternalParameterInfoConflictDontUseForAll() throws Exception {
-		final String[] applesPath = new String[] { "user32.dll", "Class1", "apples" };
-		final String[] orangesPath = new String[] { "user32.dll", "NamespaceA", "oranges" };
+		final String[] applesPath = { "user32.dll", "Class1", "apples" };
+		final String[] orangesPath = { "user32.dll", "NamespaceA", "oranges" };
 
 		setupExternalParameterInfoUseForAll(applesPath, orangesPath);
 
@@ -1321,8 +1321,8 @@ public class ExternalUseForAllTest extends AbstractExternalMergerTest {
 
 	@Test
 	public void testExternalParameterInfoConflictUseForAll() throws Exception {
-		final String[] applesPath = new String[] { "user32.dll", "Class1", "apples" };
-		final String[] orangesPath = new String[] { "user32.dll", "NamespaceA", "oranges" };
+		final String[] applesPath = { "user32.dll", "Class1", "apples" };
+		final String[] orangesPath = { "user32.dll", "NamespaceA", "oranges" };
 
 		setupExternalParameterInfoUseForAll(applesPath, orangesPath);
 
@@ -1473,8 +1473,8 @@ public class ExternalUseForAllTest extends AbstractExternalMergerTest {
 	@Test
 	public void testExternalFunctionReturnTypeDontUseForAll() throws Exception {
 
-		final String[] applesPath = new String[] { "user32.dll", "Class1", "apples" };
-		final String[] orangesPath = new String[] { "user32.dll", "NamespaceA", "oranges" };
+		final String[] applesPath = { "user32.dll", "Class1", "apples" };
+		final String[] orangesPath = { "user32.dll", "NamespaceA", "oranges" };
 
 		setupExternalReturnTypeUseForAll(applesPath, orangesPath);
 
@@ -1498,8 +1498,8 @@ public class ExternalUseForAllTest extends AbstractExternalMergerTest {
 	@Test
 	public void testExternalFunctionReturnTypeUseForAll() throws Exception {
 
-		final String[] applesPath = new String[] { "user32.dll", "Class1", "apples" };
-		final String[] orangesPath = new String[] { "user32.dll", "NamespaceA", "oranges" };
+		final String[] applesPath = { "user32.dll", "Class1", "apples" };
+		final String[] orangesPath = { "user32.dll", "NamespaceA", "oranges" };
 
 		setupExternalReturnTypeUseForAll(applesPath, orangesPath);
 

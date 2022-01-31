@@ -23,10 +23,10 @@ import ghidra.program.model.mem.MemoryAccessException;
 import ghidra.util.Msg;
 
 public class PngDataType extends BuiltIn implements Dynamic, Resource {
-	public static byte[] MAGIC = new byte[] { (byte) 0x89, (byte) 0x50, (byte) 0x4e, (byte) 0x47,
+	public static byte[] MAGIC = { (byte) 0x89, (byte) 0x50, (byte) 0x4e, (byte) 0x47,
 		(byte) 0x0d, (byte) 0x0a, (byte) 0x1a, (byte) 0x0a };
 
-	public static byte[] MASK = new byte[] { (byte) 0xff, (byte) 0xff, (byte) 0xff, (byte) 0xff,
+	public static byte[] MASK = { (byte) 0xff, (byte) 0xff, (byte) 0xff, (byte) 0xff,
 		(byte) 0xff, (byte) 0xff, (byte) 0xff, (byte) 0xff };
 
 	public PngDataType() {

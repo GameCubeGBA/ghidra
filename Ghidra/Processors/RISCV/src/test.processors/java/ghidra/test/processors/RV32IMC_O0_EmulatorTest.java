@@ -22,7 +22,7 @@ public class RV32IMC_O0_EmulatorTest extends ProcessorEmulatorTestAdapter {
 	private static final String LANGUAGE_ID = "RISCV:LE:32:RV32IMC";
 	private static final String COMPILER_SPEC_ID = "gcc";
 
-	private static final String[] REG_DUMP_SET = new String[] {};
+	private static final String[] REG_DUMP_SET = {};
 	
 	public RV32IMC_O0_EmulatorTest(String name) throws Exception {
 		super(name, LANGUAGE_ID, COMPILER_SPEC_ID, REG_DUMP_SET);
