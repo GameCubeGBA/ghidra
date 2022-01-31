@@ -45,7 +45,7 @@ public class DisplayFilteredGraphAction extends DisplayFilteredAction {
 	public DisplayFilteredGraphAction(PluginTool tool, String owner,
 			DebuggerObjectsProvider provider) {
 		super("DisplayFilteredGraph", tool, owner, provider);
-		String[] path = new String[] { "Display filtered...", "Graph" };
+		String[] path = { "Display filtered...", "Graph" };
 		setPopupMenuData(new MenuData(path, ICON_GRAPH));
 		setKeyBindingData(new KeyBindingData(KeyEvent.VK_G,
 			InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK));

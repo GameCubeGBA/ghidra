@@ -17,7 +17,7 @@
 package ghidra.program.model.data;
 
 public class DefaultAnnotationHandler implements AnnotationHandler {
-	private static final String[] FILE_EXTENSIONS = new String[] { "c", "h", "cpp" };
+	private static final String[] FILE_EXTENSIONS = { "c", "h", "cpp" };
 
 	public String getPrefix(Enum e, String member) {
 		return "";

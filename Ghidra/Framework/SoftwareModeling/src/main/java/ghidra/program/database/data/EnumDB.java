@@ -39,7 +39,7 @@ import ghidra.util.UniversalID;
 class EnumDB extends DataTypeDB implements Enum {
 
 	private static final SettingsDefinition[] ENUM_SETTINGS_DEFINITIONS =
-		new SettingsDefinition[] { MutabilitySettingsDefinition.DEF };
+            { MutabilitySettingsDefinition.DEF };
 
 	private EnumDBAdapter adapter;
 	private EnumValueDBAdapter valueAdapter;

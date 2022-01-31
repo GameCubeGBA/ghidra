@@ -123,7 +123,7 @@ public class ByteMappedMemoryBlockTest extends AbstractGhidraHeadedIntegrationTe
 			assertEquals(~i & 0xff, b & 0xff);
 		}
 
-		byte[] data1 = new byte[] { 1, 2, 3 };
+		byte[] data1 = { 1, 2, 3 };
 		byteMappedBlock.putBytes(addr(0x1080), data1);
 
 		byte[] data2 = new byte[3];
@@ -192,7 +192,7 @@ public class ByteMappedMemoryBlockTest extends AbstractGhidraHeadedIntegrationTe
 			assertEquals(~(2 * i) & 0xff, b & 0xff);
 		}
 
-		byte[] data1 = new byte[] { 1, 2, 3, 4 };
+		byte[] data1 = { 1, 2, 3, 4 };
 		byteMappedBlock.putBytes(addr(0x1040), data1);
 
 		byte[] data2 = new byte[4];
@@ -264,7 +264,7 @@ public class ByteMappedMemoryBlockTest extends AbstractGhidraHeadedIntegrationTe
 			assertEquals(val & 0xff, b & 0xff);
 		}
 
-		byte[] data1 = new byte[] { 1, 2, 3, 4 };
+		byte[] data1 = { 1, 2, 3, 4 };
 		byteMappedBlock.putBytes(addr(0x1040), data1);
 
 		byte[] data2 = new byte[4];
@@ -342,7 +342,7 @@ public class ByteMappedMemoryBlockTest extends AbstractGhidraHeadedIntegrationTe
 			assertEquals(val & 0xff, b & 0xff);
 		}
 
-		byte[] data1 = new byte[] { 1, 2, 3, 4 };
+		byte[] data1 = { 1, 2, 3, 4 };
 		byteMappedBlock.putBytes(testSpace.getAddress(0x1040), data1);
 
 		byte[] data2 = new byte[4];

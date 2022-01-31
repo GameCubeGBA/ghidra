@@ -34,7 +34,7 @@ public class DisplayFilteredTableAction extends DisplayFilteredAction {
 	public DisplayFilteredTableAction(PluginTool tool, String owner,
 			DebuggerObjectsProvider provider) {
 		super("DisplayFilteredTable", tool, owner, provider);
-		String[] path = new String[] { "Display filtered...", "Table" };
+		String[] path = { "Display filtered...", "Table" };
 		setPopupMenuData(new MenuData(path, ObjectTable.ICON_TABLE));
 		setKeyBindingData(new KeyBindingData(KeyEvent.VK_T,
 			InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK));

@@ -99,7 +99,7 @@ public class ExternalProgramMergerTest extends AbstractListingMergeManagerTest {
 		String[] names = resultExtMgr.getExternalLibraryNames();
 		assertEquals(8, names.length);
 		Arrays.sort(names);
-		String[] expectedNames = new String[] { "ADVAPI32.DLL", "COMDLG32.DLL", "GDI32.DLL",
+		String[] expectedNames = { "ADVAPI32.DLL", "COMDLG32.DLL", "GDI32.DLL",
 			"KERNEL32.DLL", "MSVCRT.DLL", "SHELL32.DLL", "USER32.DLL", "WINSPOOL.DRV" };
 		assertTrue(Arrays.equals(expectedNames, names));
 		assertEquals("//advapi32.dll", resultExtMgr.getExternalLibraryPath("ADVAPI32.DLL"));
@@ -169,7 +169,7 @@ public class ExternalProgramMergerTest extends AbstractListingMergeManagerTest {
 		String[] names = resultExtMgr.getExternalLibraryNames();
 		assertEquals(8, names.length);
 		Arrays.sort(names);
-		String[] expectedNames = new String[] { "ADVAPI32.DLL", "COMDLG32.DLL", "GDI32.DLL",
+		String[] expectedNames = { "ADVAPI32.DLL", "COMDLG32.DLL", "GDI32.DLL",
 			"KERNEL32.DLL", "MSVCRT.DLL", "SHELL32.DLL", "USER32.DLL", "WINSPOOL.DRV" };
 		assertTrue(Arrays.equals(expectedNames, names));
 		assertEquals("//foo.dll", resultExtMgr.getExternalLibraryPath("ADVAPI32.DLL"));
@@ -226,7 +226,7 @@ public class ExternalProgramMergerTest extends AbstractListingMergeManagerTest {
 		String[] names = resultExtMgr.getExternalLibraryNames();
 		assertEquals(6, names.length);
 		Arrays.sort(names);
-		String[] expectedNames = new String[] { "COMDLG32.DLL", "GDI32.DLL", "KERNEL32.DLL",
+		String[] expectedNames = { "COMDLG32.DLL", "GDI32.DLL", "KERNEL32.DLL",
 			"MSVCRT.DLL", "SHELL32.DLL", "WINSPOOL.DRV" };
 		assertTrue(Arrays.equals(expectedNames, names));
 		assertEquals(null, resultExtMgr.getExternalLibraryPath("COMDLG32.DLL"));
@@ -302,7 +302,7 @@ public class ExternalProgramMergerTest extends AbstractListingMergeManagerTest {
 		String[] names = resultExtMgr.getExternalLibraryNames();
 		assertEquals(7, names.length);
 		Arrays.sort(names);
-		String[] expectedNames = new String[] { "COMDLG32.DLL", "GDI32.DLL", "KERNEL32.DLL",
+		String[] expectedNames = { "COMDLG32.DLL", "GDI32.DLL", "KERNEL32.DLL",
 			"MSVCRT.DLL", "SHELL32.DLL", "USER32.DLL", "WINSPOOL.DRV" };
 		assertTrue(Arrays.equals(expectedNames, names));
 		assertEquals(null, resultExtMgr.getExternalLibraryPath("COMDLG32.DLL"));
@@ -379,7 +379,7 @@ public class ExternalProgramMergerTest extends AbstractListingMergeManagerTest {
 		String[] names = resultExtMgr.getExternalLibraryNames();
 		assertEquals(7, names.length);
 		Arrays.sort(names);
-		String[] expectedNames = new String[] { "ADVAPI32.DLL", "COMDLG32.DLL", "GDI32.DLL",
+		String[] expectedNames = { "ADVAPI32.DLL", "COMDLG32.DLL", "GDI32.DLL",
 			"KERNEL32.DLL", "MSVCRT.DLL", "SHELL32.DLL", "WINSPOOL.DRV" };
 		assertTrue(Arrays.equals(expectedNames, names));
 		assertEquals("//my.dll", resultExtMgr.getExternalLibraryPath("ADVAPI32.DLL"));
@@ -455,7 +455,7 @@ public class ExternalProgramMergerTest extends AbstractListingMergeManagerTest {
 		String[] names = resultExtMgr.getExternalLibraryNames();
 		assertEquals(7, names.length);
 		Arrays.sort(names);
-		String[] expectedNames = new String[] { "ADVAPI32.DLL", "COMDLG32.DLL", "GDI32.DLL",
+		String[] expectedNames = { "ADVAPI32.DLL", "COMDLG32.DLL", "GDI32.DLL",
 			"KERNEL32.DLL", "MSVCRT.DLL", "SHELL32.DLL", "WINSPOOL.DRV" };
 		assertTrue(Arrays.equals(expectedNames, names));
 		assertEquals("//my.dll", resultExtMgr.getExternalLibraryPath("ADVAPI32.DLL"));
@@ -526,7 +526,7 @@ public class ExternalProgramMergerTest extends AbstractListingMergeManagerTest {
 		String[] names = resultExtMgr.getExternalLibraryNames();
 		assertEquals(8, names.length);
 		Arrays.sort(names);
-		String[] expectedNames = new String[] { "ADVAPI32.DLL", "COMDLG32.DLL", "GDI32.DLL",
+		String[] expectedNames = { "ADVAPI32.DLL", "COMDLG32.DLL", "GDI32.DLL",
 			"KERNEL32.DLL", "MSVCRT.DLL", "SHELL32.DLL", "USER32.DLL", "WINSPOOL.DRV" };
 		assertTrue(Arrays.equals(expectedNames, names));
 		assertEquals("//advapi32.dll", resultExtMgr.getExternalLibraryPath("ADVAPI32.DLL"));
@@ -610,7 +610,7 @@ public class ExternalProgramMergerTest extends AbstractListingMergeManagerTest {
 		String[] names = resultExtMgr.getExternalLibraryNames();
 		assertEquals(6, names.length);
 		Arrays.sort(names);
-		String[] expectedNames = new String[] { "COMDLG32.DLL", "GDI32.DLL", "KERNEL32.DLL",
+		String[] expectedNames = { "COMDLG32.DLL", "GDI32.DLL", "KERNEL32.DLL",
 			"MSVCRT.DLL", "SHELL32.DLL", "WINSPOOL.DRV" };
 		assertTrue(Arrays.equals(expectedNames, names));
 		assertEquals(null, resultExtMgr.getExternalLibraryPath("COMDLG32.DLL"));
@@ -684,7 +684,7 @@ public class ExternalProgramMergerTest extends AbstractListingMergeManagerTest {
 		String[] names = resultExtMgr.getExternalLibraryNames();
 		assertEquals(8, names.length);
 		Arrays.sort(names);
-		String[] expectedNames = new String[] { "ADVAPI32.DLL", "COMDLG32.DLL", "GDI32.DLL",
+		String[] expectedNames = { "ADVAPI32.DLL", "COMDLG32.DLL", "GDI32.DLL",
 			"KERNEL32.DLL", "MSVCRT.DLL", "SHELL32.DLL", "USER32.DLL", "WINSPOOL.DRV" };
 		assertTrue(Arrays.equals(expectedNames, names));
 		assertEquals("//advapi32.dll", resultExtMgr.getExternalLibraryPath("ADVAPI32.DLL"));

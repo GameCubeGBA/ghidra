@@ -25,7 +25,7 @@ public class SparcV9_32_O0_EmulatorTest extends ProcessorEmulatorTestAdapter {
 	private static final String LANGUAGE_ID = "sparc:BE:32:default";
 	private static final String COMPILER_SPEC_ID = "default";
 
-	private static final String[] REG_DUMP_SET = new String[] {};
+	private static final String[] REG_DUMP_SET = {};
 
 	public SparcV9_32_O0_EmulatorTest(String name) throws Exception {
 		super(name, LANGUAGE_ID, COMPILER_SPEC_ID, REG_DUMP_SET);

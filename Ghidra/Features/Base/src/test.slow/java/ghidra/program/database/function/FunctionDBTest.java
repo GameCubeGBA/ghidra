@@ -1296,7 +1296,7 @@ public class FunctionDBTest extends AbstractGhidraHeadedIntegrationTest
 		f.setCallingConvention("__stackcall");
 
 		DataType[] dt =
-			new DataType[] { new ByteDataType(), new WordDataType(), new Pointer16DataType() };
+                { new ByteDataType(), new WordDataType(), new Pointer16DataType() };
 
 		LocalVariableImpl stackVar = new LocalVariableImpl("TestStack0", dt[0], 4, program);
 		stackVar.setComment("My Comment0");
@@ -1347,7 +1347,7 @@ public class FunctionDBTest extends AbstractGhidraHeadedIntegrationTest
 		f = functionManager.getFunctionAt(addr(100));
 		params = f.getParameters();
 		assertEquals(3, params.length);
-		int[] stackOffsets = new int[] { 7, 10, 14 };
+		int[] stackOffsets = { 7, 10, 14 };
 		for (int i = 0; i < 3; i++) {
 			Parameter param = params[i];
 			assertTrue(param.isStackVariable());
@@ -1368,7 +1368,7 @@ public class FunctionDBTest extends AbstractGhidraHeadedIntegrationTest
 		f.setCustomVariableStorage(true);
 
 		DataType[] dt =
-			new DataType[] { new ByteDataType(), new WordDataType(), new Pointer16DataType() };
+                { new ByteDataType(), new WordDataType(), new Pointer16DataType() };
 
 		LocalVariableImpl stackVar = new LocalVariableImpl("TestStack0", dt[0], 4, program);
 		stackVar.setComment("My Comment0");
@@ -1404,7 +1404,7 @@ public class FunctionDBTest extends AbstractGhidraHeadedIntegrationTest
 		Function f = createFunction("foo", addr(100), new AddressSet(addr(100), addr(200)));
 
 		DataType[] dt =
-			new DataType[] { new ByteDataType(), new WordDataType(), new Pointer16DataType() };
+                { new ByteDataType(), new WordDataType(), new Pointer16DataType() };
 
 		LocalVariableImpl stackVar = new LocalVariableImpl("TestStack0", dt[0], -4, program);
 		stackVar.setComment("My Comment0");
@@ -1470,7 +1470,7 @@ public class FunctionDBTest extends AbstractGhidraHeadedIntegrationTest
 		Function f = createFunction("foo", addr(100), new AddressSet(addr(100), addr(200)));
 
 		DataType[] dt =
-			new DataType[] { new ByteDataType(), new WordDataType(), new Pointer16DataType() };
+                { new ByteDataType(), new WordDataType(), new Pointer16DataType() };
 
 		LocalVariableImpl stackVar = new LocalVariableImpl("TestStack0", dt[0], -4, program);
 		stackVar.setComment("My Comment0");
@@ -1507,12 +1507,12 @@ public class FunctionDBTest extends AbstractGhidraHeadedIntegrationTest
 		f.setCustomVariableStorage(true);
 
 		DataType[] dt =
-			new DataType[] { new LongDataType(), new WordDataType(), new Pointer16DataType() };
+                { new LongDataType(), new WordDataType(), new Pointer16DataType() };
 
 		Register[] regs =
-			new Register[] { functionManager.getProgram().getProgramContext().getRegister("r1"),
-				functionManager.getProgram().getProgramContext().getRegister("r2l"),
-				functionManager.getProgram().getProgramContext().getRegister("r3l") };
+                { functionManager.getProgram().getProgramContext().getRegister("r1"),
+                    functionManager.getProgram().getProgramContext().getRegister("r2l"),
+                    functionManager.getProgram().getProgramContext().getRegister("r3l") };
 
 		LocalVariableImpl regVar = new LocalVariableImpl("TestReg0", 0, dt[0], regs[0], program);
 		regVar.setComment("My Comment0");
@@ -1546,14 +1546,14 @@ public class FunctionDBTest extends AbstractGhidraHeadedIntegrationTest
 		f.setCustomVariableStorage(true);
 
 		DataType[] dt =
-			new DataType[] { new LongDataType(), new WordDataType(), new Pointer16DataType() };
+                { new LongDataType(), new WordDataType(), new Pointer16DataType() };
 
 		Register[] regs =
-			new Register[] { functionManager.getProgram().getProgramContext().getRegister("r1"),
-				functionManager.getProgram().getProgramContext().getRegister("r2l"),
-				functionManager.getProgram().getProgramContext().getRegister("r1l")
-			// same address as regs[0]
-			};
+                { functionManager.getProgram().getProgramContext().getRegister("r1"),
+                    functionManager.getProgram().getProgramContext().getRegister("r2l"),
+                    functionManager.getProgram().getProgramContext().getRegister("r1l")
+                // same address as regs[0]
+                };
 
 		LocalVariableImpl regVar = new LocalVariableImpl("TestReg0", 0, dt[0], regs[0], program);
 		regVar.setComment("My Comment0");
@@ -1587,12 +1587,12 @@ public class FunctionDBTest extends AbstractGhidraHeadedIntegrationTest
 		Function f = createFunction("foo", addr(100), new AddressSet(addr(100), addr(200)));
 
 		DataType[] dt =
-			new DataType[] { new LongDataType(), new WordDataType(), new Pointer16DataType() };
+                { new LongDataType(), new WordDataType(), new Pointer16DataType() };
 
 		Register[] regs =
-			new Register[] { functionManager.getProgram().getProgramContext().getRegister("r1"),
-				functionManager.getProgram().getProgramContext().getRegister("r1l"),
-				functionManager.getProgram().getProgramContext().getRegister("r3l") };
+                { functionManager.getProgram().getProgramContext().getRegister("r1"),
+                    functionManager.getProgram().getProgramContext().getRegister("r1l"),
+                    functionManager.getProgram().getProgramContext().getRegister("r3l") };
 
 		LocalVariableImpl regVar = new LocalVariableImpl("TestReg0", 0, dt[0], regs[0], program);
 		regVar.setComment("My Comment0");
@@ -1626,12 +1626,12 @@ public class FunctionDBTest extends AbstractGhidraHeadedIntegrationTest
 		Function f = createFunction("foo", addr(100), new AddressSet(addr(100), addr(200)));
 
 		DataType[] dt =
-			new DataType[] { new ByteDataType(), new WordDataType(), new Pointer16DataType() };
+                { new ByteDataType(), new WordDataType(), new Pointer16DataType() };
 
 		Register[] regs =
-			new Register[] { functionManager.getProgram().getProgramContext().getRegister("r1l"),
-				functionManager.getProgram().getProgramContext().getRegister("r1l"),
-				functionManager.getProgram().getProgramContext().getRegister("r3l") };
+                { functionManager.getProgram().getProgramContext().getRegister("r1l"),
+                    functionManager.getProgram().getProgramContext().getRegister("r1l"),
+                    functionManager.getProgram().getProgramContext().getRegister("r3l") };
 
 		LocalVariableImpl regVar = new LocalVariableImpl("TestReg0", 4, dt[0], regs[0], program);
 		regVar.setComment("My Comment0");
@@ -1666,7 +1666,7 @@ public class FunctionDBTest extends AbstractGhidraHeadedIntegrationTest
 		f.setCustomVariableStorage(true);
 
 		DataType[] dt =
-			new DataType[] { new ByteDataType(), new WordDataType(), new Pointer16DataType() };
+                { new ByteDataType(), new WordDataType(), new Pointer16DataType() };
 
 		LocalVariableImpl memVar = new LocalVariableImpl("TestMem0", 0, dt[0], addr(0), program);
 		memVar.setComment("My Comment0");
@@ -1700,7 +1700,7 @@ public class FunctionDBTest extends AbstractGhidraHeadedIntegrationTest
 		f.setCustomVariableStorage(true);
 
 		DataType[] dt =
-			new DataType[] { new ByteDataType(), new WordDataType(), new Pointer16DataType() };
+                { new ByteDataType(), new WordDataType(), new Pointer16DataType() };
 
 		LocalVariableImpl memVar = new LocalVariableImpl("TestMem0", 0, dt[0], addr(0), program);
 		memVar.setComment("My Comment0");
@@ -1737,12 +1737,12 @@ public class FunctionDBTest extends AbstractGhidraHeadedIntegrationTest
 		f.setCustomVariableStorage(true);
 
 		DataType[] dt =
-			new DataType[] { new LongDataType(), new WordDataType(), new Pointer16DataType() };
+                { new LongDataType(), new WordDataType(), new Pointer16DataType() };
 
 		Register[] regs =
-			new Register[] { functionManager.getProgram().getProgramContext().getRegister("r1"),
-				functionManager.getProgram().getProgramContext().getRegister("r2l"),
-				functionManager.getProgram().getProgramContext().getRegister("r3l") };
+                { functionManager.getProgram().getProgramContext().getRegister("r1"),
+                    functionManager.getProgram().getProgramContext().getRegister("r2l"),
+                    functionManager.getProgram().getProgramContext().getRegister("r3l") };
 
 		LocalVariableImpl regVar = new LocalVariableImpl("TestReg0", 0, dt[0], regs[0], program);
 		regVar.setComment("My Comment0");

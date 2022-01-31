@@ -59,8 +59,8 @@ public class AddressRangeMapDB implements DBListener {
 	private static final int TO_COL = 0;
 	private static final int VALUE_COL = 1;
 
-	private static final String[] COLUMN_NAMES = new String[] { "To", "Value" };
-	private static final int[] INDEXED_COLUMNS = new int[] { VALUE_COL };
+	private static final String[] COLUMN_NAMES = { "To", "Value" };
+	private static final int[] INDEXED_COLUMNS = { VALUE_COL };
 	private final Lock lock;
 
 	/**

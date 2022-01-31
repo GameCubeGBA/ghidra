@@ -27,10 +27,10 @@ import ghidra.program.model.mem.MemoryAccessException;
 import ghidra.util.Msg;
 
 public class JPEGDataType extends BuiltIn implements Dynamic, Resource {
-	public static byte[] MAGIC = new byte[] { (byte) 0xff, (byte) 0xd8, (byte) 0, (byte) 0,
+	public static byte[] MAGIC = { (byte) 0xff, (byte) 0xd8, (byte) 0, (byte) 0,
 		(byte) 0, (byte) 0, (byte) 'J', (byte) 'F', (byte) 'I', (byte) 'F', (byte) 0 };
 
-	public static byte[] MAGIC_MASK = new byte[] { (byte) 0xff, (byte) 0xff, (byte) 0, (byte) 0,
+	public static byte[] MAGIC_MASK = { (byte) 0xff, (byte) 0xff, (byte) 0, (byte) 0,
 		(byte) 0, (byte) 0, (byte) 0xff, (byte) 0xff, (byte) 0xff, (byte) 0xff, (byte) 0xff };
 
 	public JPEGDataType() {

@@ -43,7 +43,7 @@ public class DisplayFilteredXMLAction extends DisplayFilteredAction {
 	public DisplayFilteredXMLAction(PluginTool tool, String owner,
 			DebuggerObjectsProvider provider) {
 		super("DisplayFilteredXML", tool, owner, provider);
-		String[] path = new String[] { "Display filtered...", "XML" };
+		String[] path = { "Display filtered...", "XML" };
 		setPopupMenuData(new MenuData(path, ICON_XML));
 		setKeyBindingData(new KeyBindingData(KeyEvent.VK_E,
 			InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK));

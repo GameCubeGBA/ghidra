@@ -1562,8 +1562,8 @@ public class ExternalMergerChangeTest extends AbstractExternalMergerTest {
 	@Test
 	public void testExternalLabelChangeVersusNamespaceRename() throws Exception {
 
-		final String[] applesPath = new String[] { "user32.dll", "Class1", "Blue" };
-		final String[] namespacePath = new String[] { "user32.dll", "Class1" };
+		final String[] applesPath = { "user32.dll", "Class1", "Blue" };
+		final String[] namespacePath = { "user32.dll", "Class1" };
 
 		mtf.initialize("NotepadMergeListingTest", new OriginalProgramModifierListener() {
 
@@ -1647,7 +1647,7 @@ public class ExternalMergerChangeTest extends AbstractExternalMergerTest {
 	@Test
 	public void testExternalLabelMoveToDifferentNamespacesPickLatest() throws Exception {
 
-		final String[] applesPath = new String[] { "user32.dll", "Class1", "Blue" };
+		final String[] applesPath = { "user32.dll", "Class1", "Blue" };
 
 		mtf.initialize("NotepadMergeListingTest", new OriginalProgramModifierListener() {
 
@@ -1745,7 +1745,7 @@ public class ExternalMergerChangeTest extends AbstractExternalMergerTest {
 	@Test
 	public void testExternalLabelMoveToDifferentNamespacesPickMy() throws Exception {
 
-		final String[] applesPath = new String[] { "user32.dll", "Class1", "Blue" };
+		final String[] applesPath = { "user32.dll", "Class1", "Blue" };
 
 		mtf.initialize("NotepadMergeListingTest", new OriginalProgramModifierListener() {
 
@@ -1844,7 +1844,7 @@ public class ExternalMergerChangeTest extends AbstractExternalMergerTest {
 	public void testExternalLabelMoveToDifferentNamespacesAndLocationConflictsWithNamespacePickMy()
 			throws Exception {
 
-		final String[] applesPath = new String[] { "user32.dll", "Class1", "Blue" };
+		final String[] applesPath = { "user32.dll", "Class1", "Blue" };
 
 		mtf.initialize("NotepadMergeListingTest", new OriginalProgramModifierListener() {
 

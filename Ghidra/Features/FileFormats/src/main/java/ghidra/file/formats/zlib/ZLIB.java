@@ -28,9 +28,9 @@ import java.util.zip.*;
  */
 public class ZLIB {
 	
-	public static final byte [] ZLIB_COMPRESSION_BEST    = new byte [] { (byte)0x78, (byte)0xda };
-	public static final byte [] ZLIB_COMPRESSION_DEFAULT = new byte [] { (byte)0x78, (byte)0x9c };
-	public static final byte [] ZLIB_COMPRESSION_NO_LOW  = new byte [] { (byte)0x78, (byte)0x01 };
+	public static final byte [] ZLIB_COMPRESSION_BEST    = { (byte)0x78, (byte)0xda };
+	public static final byte [] ZLIB_COMPRESSION_DEFAULT = { (byte)0x78, (byte)0x9c };
+	public static final byte [] ZLIB_COMPRESSION_NO_LOW  = { (byte)0x78, (byte)0x01 };
 
 	public ZLIB() {
 	}

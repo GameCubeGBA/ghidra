@@ -598,7 +598,7 @@ public class FunctionNameMarkupItemTest extends AbstractVTMarkupItemTest {
 
 	Function getExternalFunction(Program program, String functionName) {
 
-		String[] path = new String[] { "user32.dll", functionName };
+		String[] path = { "user32.dll", functionName };
 		SymbolTable symbolTable = program.getSymbolTable();
 		int nameIndex = path.length - 1;
 

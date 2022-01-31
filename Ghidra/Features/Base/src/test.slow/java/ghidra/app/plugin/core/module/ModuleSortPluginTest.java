@@ -138,7 +138,7 @@ public class ModuleSortPluginTest extends AbstractGhidraHeadedIntegrationTest {
 
 		ProgramModule stringsModule = program.getListing().getModule("Main Tree", "Strings");
 		Group[] kids = stringsModule.getChildren();
-		String[] names = new String[] { "C", "G", "S", "L" };
+		String[] names = { "C", "G", "S", "L" };
 		for (int i = 0; i < names.length; i++) {
 			assertEquals(names[i], kids[i].getName());
 		}
@@ -192,7 +192,7 @@ public class ModuleSortPluginTest extends AbstractGhidraHeadedIntegrationTest {
 
 		ProgramModule sModule = program.getListing().getModule("Main Tree", "S");
 		Group[] kids = sModule.getChildren();
-		String[] names = new String[] { "0100746c", "010074be", "010074a0" };
+		String[] names = { "0100746c", "010074be", "010074a0" };
 		for (int i = 0; i < names.length; i++) {
 			assertEquals(names[i], kids[i].getName());
 		}

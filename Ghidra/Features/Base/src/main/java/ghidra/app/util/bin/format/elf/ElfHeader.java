@@ -97,7 +97,7 @@ public class ElfHeader implements StructConverter, Writeable {
 
 	private Consumer<String> errorConsumer;
 
-	private static int INITIAL_READ_LEN = ElfConstants.EI_NIDENT + 18;
+	private static final int INITIAL_READ_LEN = ElfConstants.EI_NIDENT + 18;
 
 	/**
 	 * Constructs a new ELF header using the specified byte provider.
@@ -1276,22 +1276,6 @@ public class ElfHeader implements StructConverter, Writeable {
 	}
 
 	/**
-	 * This member identifies the target operating system and ABI.
-	 * @return the target operating system and ABI
-	 */
-	public byte e_ident_osabi() {
-		return e_ident_osabi;
-	}
-
-	/**
-	 * This member identifies the target ABI version.
-	 * @return the target ABI version
-	 */
-	public byte e_ident_abiversion() {
-		return e_ident_abiversion;
-	}
-
-	/**
 	 * This member holds the size in bytes of one entry in the file's program header table;
 	 * all entries are the same size.
 	 * @return the size in bytes of one program header table entry 
@@ -1572,36 +1556,6 @@ public class ElfHeader implements StructConverter, Writeable {
 	 */
 	public ElfDynamicTable getDynamicTable() {
 		return dynamicTable;
-	}
-
-	/**
-	 * Returns the program header with type of PT_PHDR.
-	 * Or, null if one does not exist.
-	 * @return the program header with type of PT_PHDR
-	 */
-	public ElfProgramHeader getProgramHeaderProgramHeader() {
-		ElfProgramHeader[] pharr = getProgramHeaders(ElfProgramHeaderConstants.PT_PHDR);
-		if (pharr.length == 0 || pharr.length > 1) {
-			return null;
-			//throw new RuntimeException("Unable to locate PT_PHDR program header");
-		}
-		return pharr[0];
-	}
-
-	/**
-	 * Returns the program header at the specified address,
-	 * or null if no program header exists at that address.
-	 * @param virtualAddr the address of the requested program header
-	 * @return the program header with the specified address
-	 */
-	public ElfProgramHeader getProgramHeaderAt(long virtualAddr) {
-		for (ElfProgramHeader programHeader : programHeaders) {
-			if (programHeader.getType() == ElfProgramHeaderConstants.PT_LOAD &&
-				programHeader.getVirtualAddress() == virtualAddr) {
-				return programHeader;
-			}
-		}
-		return null;
 	}
 
 	/**
@@ -1892,47 +1846,6 @@ public class ElfHeader implements StructConverter, Writeable {
 	}
 
 	/**
-	 * Appends the new program header to the end of the existing
-	 * program header table.
-	 * @param ph the new program header
-	 */
-	public void addProgramHeader(ElfProgramHeader ph) {
-		ElfProgramHeader[] tmp = new ElfProgramHeader[programHeaders.length + 1];
-
-		int pos = tmp.length - 1;
-
-		boolean firstLoad = true;
-		int firstLoadPos = -1;
-
-		/*PT_LOAD segments must be inserted in sorted order*/
-		if (ph.getType() == ElfProgramHeaderConstants.PT_LOAD) {
-			for (int i = 0; i < programHeaders.length - 1; ++i) {
-				if (programHeaders[i].getType() == ElfProgramHeaderConstants.PT_LOAD) {
-					if (firstLoad) {
-						firstLoad = false;
-						firstLoadPos = i;
-					}
-					pos = i;
-				}
-			}
-			++pos;
-		}
-
-		System.arraycopy(programHeaders, 0, tmp, 0, pos);
-		tmp[pos] = ph;
-		System.arraycopy(programHeaders, pos, tmp, pos + 1, programHeaders.length - pos);
-
-		if (ph.getType() == ElfProgramHeaderConstants.PT_LOAD) {
-			Arrays.sort(tmp, firstLoadPos, pos + 1);
-		}
-
-		programHeaders = tmp;
-
-		e_phnum = (short) programHeaders.length;
-
-	}
-
-	/**
 	 * @see ghidra.app.util.bin.format.Writeable#write(java.io.RandomAccessFile, ghidra.util.DataConverter)
 	 */
 	@Override
@@ -1976,14 +1889,6 @@ public class ElfHeader implements StructConverter, Writeable {
 	 */
 	public void setSectionHeaderOffset(long offset) {
 		this.e_shoff = offset;
-	}
-
-	/**
-	 * Sets the program header offset.
-	 * @param offset the new program header offset
-	 */
-	public void setProgramHeaderOffset(long offset) {
-		this.e_phoff = offset;
 	}
 
 }

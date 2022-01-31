@@ -173,7 +173,7 @@ public class GnuDemanglerNativeProcess {
 			applicationName + Platform.CURRENT_PLATFORM.getExecutableExtension();
 		File commandPath = Application.getOSFile(executableName);
 
-		String[] command = new String[] { commandPath.getAbsolutePath() };
+		String[] command = { commandPath.getAbsolutePath() };
 		if (!StringUtils.isBlank(options)) {
 			String[] optionsArray = options.split("\\s");
 			command = ArrayUtils.addAll(command, optionsArray);

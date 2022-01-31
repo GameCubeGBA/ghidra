@@ -183,12 +183,12 @@ public class MultiTabPluginTest extends AbstractGhidraHeadedIntegrationTest {
 		assertNotNull(list);
 
 		ListModel<?> model = list.getModel();
-		Program[] hiddenPrograms = new Program[] { programs[2], programs[3] };// 4 tabs fit before 5th program was open
+		Program[] hiddenPrograms = { programs[2], programs[3] };// 4 tabs fit before 5th program was open
 		for (int i = 0; i < hiddenPrograms.length; i++) {
 			assertEquals(hiddenPrograms[i], model.getElementAt(i));
 		}
 
-		Program[] shownPrograms = new Program[] { programs[0], programs[1], programs[4] };
+		Program[] shownPrograms = { programs[0], programs[1], programs[4] };
 		for (int i = 0; i < shownPrograms.length; i++) {
 			assertEquals(shownPrograms[i], model.getElementAt(i + 2));
 		}

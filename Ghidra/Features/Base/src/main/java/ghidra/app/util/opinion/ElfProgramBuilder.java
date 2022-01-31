@@ -866,7 +866,7 @@ class ElfProgramBuilder extends MemorySectionResolver implements ElfLoadHelper {
 				context != null ? context.getRelocationAddress(baseAddress, reloc.getOffset())
 						: baseAddress.addWrap(reloc.getOffset());
 
-			long[] values = new long[] { reloc.getSymbolIndex() };
+			long[] values = { reloc.getSymbolIndex() };
 
 			byte[] bytes = elf.is64Bit() ? new byte[8] : new byte[4];
 

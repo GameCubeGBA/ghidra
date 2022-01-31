@@ -375,7 +375,7 @@ public class GhidraTableFilterTest extends AbstractGhidraHeadedIntegrationTest {
 	private void restorePreferences() {
 		runSwing(() -> {
 			Class<?>[] classes = new Class[] { DockingWindowManager.class };
-			Object[] objs = new Object[] { winMgr };
+			Object[] objs = { winMgr };
 			invokeInstanceMethod("loadFilterPreference", filterPanel, classes, objs);
 		});
 		waitForSwing();

@@ -28,7 +28,7 @@ public class SourceArchiveUpgradeMap {
 	private static final long OLD_WINDOWS_ARCHIVE_ID = 2592694847825635591L;
 	private static final long OLD_NTDDK_ARCHIVE_ID = 2585014353215059675L;
 	private static final long[] oldArchiveIds =
-		new long[] { OLD_CLIB_ARCHIVE_ID, OLD_NTDDK_ARCHIVE_ID, OLD_WINDOWS_ARCHIVE_ID };
+            { OLD_CLIB_ARCHIVE_ID, OLD_NTDDK_ARCHIVE_ID, OLD_WINDOWS_ARCHIVE_ID };
 
 	private CompilerSpecID WINDOWS_CSPEC_ID = new CompilerSpecID("windows");
 	private Map<UniversalID, SourceArchive> windowsMap;

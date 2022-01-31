@@ -917,7 +917,7 @@ public class ProgramTreePlugin3Test extends AbstractProgramTreePluginTest {
 
 		moveNode(cnode, lnode);
 
-		String[] names = new String[] { "CC", "L", "G", "S" };
+		String[] names = { "CC", "L", "G", "S" };
 		for (int i = 0; i < names.length; i++) {
 			assertEquals(names[i], stringsNode.getChildAt(i).toString());
 		}
@@ -925,7 +925,7 @@ public class ProgramTreePlugin3Test extends AbstractProgramTreePluginTest {
 		assertTrue(tree.isPathSelected(node.getTreePath()));
 		undo();
 		stringsNode = root.getChild("Strings");
-		String[] origNames = new String[] { "CC", "G", "S", "L" };
+		String[] origNames = { "CC", "G", "S", "L" };
 		for (int i = 0; i < origNames.length; i++) {
 			assertEquals(origNames[i], stringsNode.getChildAt(i).toString());
 		}
@@ -962,7 +962,7 @@ public class ProgramTreePlugin3Test extends AbstractProgramTreePluginTest {
 		});
 
 		program.flushEvents();
-		String[] names = new String[] { "CC", "S", "G", "L" };
+		String[] names = { "CC", "S", "G", "L" };
 		for (int i = 0; i < names.length; i++) {
 			assertEquals(names[i], stringsNode.getChildAt(i).toString());
 		}
@@ -970,7 +970,7 @@ public class ProgramTreePlugin3Test extends AbstractProgramTreePluginTest {
 		assertTrue(tree.isPathSelected(node.getTreePath()));
 		undo();
 		stringsNode = root.getChild("Strings");
-		String[] origNames = new String[] { "CC", "G", "S", "L" };
+		String[] origNames = { "CC", "G", "S", "L" };
 		for (int i = 0; i < origNames.length; i++) {
 			assertEquals(origNames[i], stringsNode.getChildAt(i).toString());
 		}

@@ -44,7 +44,7 @@ public class PropertyListMergeManager implements MergeResolver {
 	final static int MY_VERSION = 2;
 	final static int ORIGINAL_VERSION = 3;
 
-	private static String[] PROPERTY_LIST_PHASE = new String[] { "Property List" };
+	private static String[] PROPERTY_LIST_PHASE = { "Property List" };
 	private int conflictOption;
 
 	private Program resultProgram;

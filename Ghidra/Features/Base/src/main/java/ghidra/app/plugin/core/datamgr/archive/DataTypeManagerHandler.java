@@ -58,7 +58,7 @@ public class DataTypeManagerHandler {
 	private final static String RECENT_NAMES = "RecentArchiveNames";
 	private static final String FAVORITES = "Favorite Dts";
 
-	private static final String[] UNALLOWED_ARCHIVE_PATH_FRAGMENTS = new String[] {
+	private static final String[] UNALLOWED_ARCHIVE_PATH_FRAGMENTS = {
 		"/Ghidra/Extensions/", "/Ghidra/docs/", "/Ghidra/Features/", "/Ghidra/Test/" };
 
 	public static final String OLD_DATA_TYPE_ARCHIVE_PATH_KEY = "DATA_TYPE_ARCHIVE_PATH";

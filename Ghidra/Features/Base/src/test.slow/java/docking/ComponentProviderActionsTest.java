@@ -415,7 +415,7 @@ public class ComponentProviderActionsTest extends AbstractGhidraHeadedIntegratio
 				.stream()
 				.filter(a -> a.getOwner().equals(DockingWindowManager.DOCKING_WINDOWS_OWNER))
 				.findFirst()
-				.orElseGet(() -> null)
+				.orElse(null)
 				;
 			//@formatter:on
 		});

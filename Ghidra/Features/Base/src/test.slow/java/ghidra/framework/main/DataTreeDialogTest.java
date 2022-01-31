@@ -38,7 +38,7 @@ public class DataTreeDialogTest extends AbstractGhidraHeadedIntegrationTest {
 	private TestEnv env;
 	private FrontEndTool frontEndTool;
 	private DataTreeDialog dialog;
-	private String[] names = new String[] { "tNotepadA", "tNotepadB", "tNotepadC", "tNotepadD" };
+	private String[] names = { "tNotepadA", "tNotepadB", "tNotepadC", "tNotepadD" };
 
 	/**
 	 * Constructor for DataTreeDialogTest.

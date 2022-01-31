@@ -31,7 +31,7 @@ public class DisplayAsTreeAction extends DisplayAsAction {
 	public DisplayAsTreeAction(PluginTool tool, String owner, DebuggerObjectsProvider provider) {
 		super("DisplayTree", tool, owner, provider);
 		isTree = true;
-		String[] path = new String[] { "Display as...", "Tree" };
+		String[] path = { "Display as...", "Tree" };
 		setPopupMenuData(new MenuData(path, ObjectTree.ICON_TREE));
 		setKeyBindingData(new KeyBindingData(KeyEvent.VK_R, InputEvent.CTRL_DOWN_MASK));
 		setHelpLocation(new HelpLocation(owner, "display_as_tree"));

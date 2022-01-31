@@ -294,8 +294,8 @@ public class StringsAnalyzerTest extends AbstractGhidraHeadedIntegrationTest {
 
 		// These are the strings that we expect to find, with their corresponding offsets
 		String[] strings =
-			new String[] { "Notepad", "Now Printing", "Paper", "NpSaveDialog", "Preview" };
-		int[] offsets = new int[] { 0x1008018, 0x100d612, 0x100d72e, 0x10013b0, 0x100daaa };
+                { "Notepad", "Now Printing", "Paper", "NpSaveDialog", "Preview" };
+		int[] offsets = { 0x1008018, 0x100d612, 0x100d72e, 0x10013b0, 0x100daaa };
 
 		HashMap<Address, String> addressToValueMap = new HashMap<>();
 
@@ -351,10 +351,10 @@ public class StringsAnalyzerTest extends AbstractGhidraHeadedIntegrationTest {
 		Listing listing = testProgram.getListing();
 		AddressSpace space = testProgram.getLanguage().getAddressFactory().getDefaultAddressSpace();
 
-		String[] existingStrings = new String[] { "drm/duration", "PVFMVideoMIO",
+		String[] existingStrings = { "drm/duration", "PVFMVideoMIO",
 			"set to invalid mode (%d)", "device", "height", "PLAYER_QUIT", "video/decoder" };
 
-		int[] offsets = new int[] { 0xa7198120, 0xa7195fd4, 0xa7196ee8, 0xa717fa48, 0xa71956a0,
+		int[] offsets = { 0xa7198120, 0xa7195fd4, 0xa7196ee8, 0xa717fa48, 0xa71956a0,
 			0xa7197304, 0xa718025c };
 		Address[] existingAddresses = new Address[offsets.length];
 
@@ -399,7 +399,7 @@ public class StringsAnalyzerTest extends AbstractGhidraHeadedIntegrationTest {
 		AddressSpace space = testProgram.getLanguage().getAddressFactory().getDefaultAddressSpace();
 
 		// Locations of strings created in "testNullTermination"
-		int[] nonExpectedOffsets = new int[] { 0x5a2afc20, 0x5a2b00e4, 0x5a2b0384, 0x5a2cdafe,
+		int[] nonExpectedOffsets = { 0x5a2afc20, 0x5a2b00e4, 0x5a2b0384, 0x5a2cdafe,
 			0x5a2cdcd2, 0x5a2b5278, 0x5a2b598e };
 
 		Data dataHere;
@@ -436,8 +436,8 @@ public class StringsAnalyzerTest extends AbstractGhidraHeadedIntegrationTest {
 		AddressSpace space = testProgram.getLanguage().getAddressFactory().getDefaultAddressSpace();
 
 		// Create a string that overlaps where a string normally would be automatically created.
-		String[] makeExistingStrs = new String[] { "duration", "VideoMIO" };
-		int[] offsets = new int[] { 0xa7198124, 0xa7195fd8 };
+		String[] makeExistingStrs = { "duration", "VideoMIO" };
+		int[] offsets = { 0xa7198124, 0xa7195fd8 };
 		Address[] makeExistingAddrs = new Address[offsets.length];
 
 		CreateDataCmd cmd;
@@ -458,7 +458,7 @@ public class StringsAnalyzerTest extends AbstractGhidraHeadedIntegrationTest {
 
 		// Offsets where there shouldn't be strings because existing strings were
 		// "in the way"
-		int[] nonExpectedOffsets = new int[] { 0xa7198120, 0xa7195fd4 };
+		int[] nonExpectedOffsets = { 0xa7198120, 0xa7195fd4 };
 
 		// Verify these are not there before running the Strings Analyzer
 		for (int nonExpectedOffset : nonExpectedOffsets) {
@@ -480,7 +480,7 @@ public class StringsAnalyzerTest extends AbstractGhidraHeadedIntegrationTest {
 		}
 
 		// Larger string that would have been created if parameter is checked
-		String[] largerStrs = new String[] { "drm/duration", "PVFMVideoMIO" };
+		String[] largerStrs = { "drm/duration", "PVFMVideoMIO" };
 
 		// Now run again with parameter enabled and verify strings are there
 		analyzer.setCreateStringOverExistingString(true);// Option is checked
@@ -507,7 +507,7 @@ public class StringsAnalyzerTest extends AbstractGhidraHeadedIntegrationTest {
 		AddressSpace space = testProgram.getLanguage().getAddressFactory().getDefaultAddressSpace();
 
 		// Offsets where there shouldn't be strings because existing refs were "in the way"
-		int[] nonExpectedOffsets = new int[] { 0xa7195fd4, 0xa7196ee8 };
+		int[] nonExpectedOffsets = { 0xa7195fd4, 0xa7196ee8 };
 		Data dataHere;
 
 		// Verify these aren't here before running Strings Analyzer
@@ -538,8 +538,8 @@ public class StringsAnalyzerTest extends AbstractGhidraHeadedIntegrationTest {
 		}
 
 		// String that would have been created if parameter is checked
-		String[] largerStrs = new String[] { "PVFMVideoMIO", "set to invalid mode (%d)" };
-		String[] nullBits = new String[] { "00", "00" };
+		String[] largerStrs = { "PVFMVideoMIO", "set to invalid mode (%d)" };
+		String[] nullBits = { "00", "00" };
 
 		// Now run again with parameter enabled and verify strings are there
 		analyzer.setCreateStringOverExistingReference(true);// Option is checked
@@ -567,9 +567,9 @@ public class StringsAnalyzerTest extends AbstractGhidraHeadedIntegrationTest {
 		AddressSpace space = testProgram.getLanguage().getAddressFactory().getDefaultAddressSpace();
 
 		// Test strings
-		String[] existingStrings = new String[] { "drm/duration", "PVFMVideoMIO",
+		String[] existingStrings = { "drm/duration", "PVFMVideoMIO",
 			"set to invalid mode (%d)", "device", "height", "PLAYER_QUIT", "video/decoder" };
-		int[] offsets = new int[] { 0xa7198120, 0xa7195fd4, 0xa7196ee8, 0xa717fa48, 0xa71956a0,
+		int[] offsets = { 0xa7198120, 0xa7195fd4, 0xa7196ee8, 0xa717fa48, 0xa71956a0,
 			0xa7197304, 0xa718025c };
 
 		// Sort strings by length
@@ -667,10 +667,10 @@ public class StringsAnalyzerTest extends AbstractGhidraHeadedIntegrationTest {
 		Listing listing = testProgram.getListing();
 		AddressSpace space = testProgram.getLanguage().getAddressFactory().getDefaultAddressSpace();
 
-		String[] existingStrings = new String[] { "KeyPress", "FriendlyName", "RemoteWriteW",
+		String[] existingStrings = { "KeyPress", "FriendlyName", "RemoteWriteW",
 			"Longitude in tenths of a degreeWWW",
 			"Returns an enumerator for Tuning Spaces accepted by this tuner" };
-		int[] offsets = new int[] { 0x5a2afc20, 0x5a2b00e4, 0x5a2b0384, 0x5a2cdafe, 0x5a2cdcd2 };
+		int[] offsets = { 0x5a2afc20, 0x5a2b00e4, 0x5a2b0384, 0x5a2cdafe, 0x5a2cdcd2 };
 		Address[] existingAddresses = new Address[offsets.length];
 
 		for (int i = 0; i < offsets.length; i++) {
@@ -726,8 +726,8 @@ public class StringsAnalyzerTest extends AbstractGhidraHeadedIntegrationTest {
 		Listing listing = testProgram.getListing();
 		AddressSpace space = testProgram.getLanguage().getAddressFactory().getDefaultAddressSpace();
 
-		String[] existingStrings = new String[] { "WDIMSVidOutputDeviceWW(#", "DLVideoWWWP-" };
-		int[] offsets = new int[] { 0x5a2b4aea, 0x5a2b598e };
+		String[] existingStrings = { "WDIMSVidOutputDeviceWW(#", "DLVideoWWWP-" };
+		int[] offsets = { 0x5a2b4aea, 0x5a2b598e };
 		Address[] existingAddresses = new Address[offsets.length];
 
 		for (int i = 0; i < offsets.length; i++) {
@@ -787,13 +787,13 @@ public class StringsAnalyzerTest extends AbstractGhidraHeadedIntegrationTest {
 		Listing listing = testProgram.getListing();
 		AddressSpace space = testProgram.getLanguage().getAddressFactory().getDefaultAddressSpace();
 
-		String[] existingStrings = new String[] { "ReleaseBoundObjectsW`\\t", "currentImage(#",
+		String[] existingStrings = { "ReleaseBoundObjectsW`\\t", "currentImage(#",
 			"ContentBecomingStale,3", "EnumMediaTypesWW0*" };
-		int[] offsets = new int[] { 0x5a2b07a8, 0x5a2b5278, 0x5a2b6270, 0x5a2cc2fc };
+		int[] offsets = { 0x5a2b07a8, 0x5a2b5278, 0x5a2b6270, 0x5a2cc2fc };
 
-		String[] stringsAlignedAt2 = new String[] { "mciSendCommandW", "Component Type,",
+		String[] stringsAlignedAt2 = { "mciSendCommandW", "Component Type,",
 			"Set the sink filter (CLSID)WWW\\t", "MS Video Control Interface;" };
-		int[] offsetsAlignedAt2 = new int[] { 0x5a29b0c2, 0x5a2b7722, 0x5a2b891a, 0x5a2b90b2 };
+		int[] offsetsAlignedAt2 = { 0x5a29b0c2, 0x5a2b7722, 0x5a2b891a, 0x5a2b90b2 };
 
 		Address[] existingAddresses = new Address[offsets.length];
 		Address[] alignAt2Addresses = new Address[offsetsAlignedAt2.length];
@@ -874,10 +874,10 @@ public class StringsAnalyzerTest extends AbstractGhidraHeadedIntegrationTest {
 		Listing listing = testProgram.getListing();
 		AddressSpace space = testProgram.getLanguage().getAddressFactory().getDefaultAddressSpace();
 
-		String[] existingStrings = new String[] { "TLOSS error\\r\\n", "SING error\\r\\n",
+		String[] existingStrings = { "TLOSS error\\r\\n", "SING error\\r\\n",
 			"Microsoft Visual C++ Runtime Library", "GetLastActivePopup" };
-		int[] offsets = new int[] { 0x300010d0, 0x300010e0, 0x30001348, 0x300013ac };
-		int[] extraLength = new int[] { 2, 3, 3, 1 };
+		int[] offsets = { 0x300010d0, 0x300010e0, 0x30001348, 0x300013ac };
+		int[] extraLength = { 2, 3, 3, 1 };
 
 		Address[] existingAddresses = new Address[offsets.length];
 
@@ -931,10 +931,10 @@ public class StringsAnalyzerTest extends AbstractGhidraHeadedIntegrationTest {
 		Listing listing = testProgram.getListing();
 		AddressSpace space = testProgram.getLanguage().getAddressFactory().getDefaultAddressSpace();
 
-		String[] existingStrings = new String[] { "SING error\\r\\n",
+		String[] existingStrings = { "SING error\\r\\n",
 			"Microsoft Visual C++ Runtime Library", "GetLastActivePopup", "user32.dll" };
-		int[] offsets = new int[] { 0x300010e0, 0x30001348, 0x300013ac, 0x300013dc };
-		int[] extraLength = new int[] { 1, 0, 0, 2 };
+		int[] offsets = { 0x300010e0, 0x30001348, 0x300013ac, 0x300013dc };
+		int[] extraLength = { 1, 0, 0, 2 };
 
 		Address[] existingAddresses = new Address[offsets.length];
 
@@ -987,9 +987,9 @@ public class StringsAnalyzerTest extends AbstractGhidraHeadedIntegrationTest {
 		Listing listing = testProgram.getListing();
 		AddressSpace space = testProgram.getLanguage().getAddressFactory().getDefaultAddressSpace();
 
-		String[] existingStrings = new String[] { "TLOSS error\\r\\n", "SING error\\r\\n",
+		String[] existingStrings = { "TLOSS error\\r\\n", "SING error\\r\\n",
 			"Microsoft Visual C++ Runtime Library", "GetLastActivePopup" };
-		int[] offsets = new int[] { 0x300010d0, 0x300010e0, 0x30001348, 0x300013ac };
+		int[] offsets = { 0x300010d0, 0x300010e0, 0x30001348, 0x300013ac };
 
 		Address[] existingAddresses = new Address[offsets.length];
 
@@ -1044,14 +1044,14 @@ public class StringsAnalyzerTest extends AbstractGhidraHeadedIntegrationTest {
 
 		// These inaccessible strings will be in the .comment address space/memory block
 		String[] inaccessibleStrings =
-			new String[] { "GCC: (GNU) 3.2 20020720 (Red Hat Linux Rawhide 3.2-0.1)",
-				"GCC: (GNU) 3.2 20020720 (Red Hat Linux Rawhide 3.2-0.1.1)" };
-		int[] offsets = new int[] { 0x00000001, 0x000002fc };
+                { "GCC: (GNU) 3.2 20020720 (Red Hat Linux Rawhide 3.2-0.1)",
+                    "GCC: (GNU) 3.2 20020720 (Red Hat Linux Rawhide 3.2-0.1.1)" };
+		int[] offsets = { 0x00000001, 0x000002fc };
 
 		String[] accessibleStrings =
-			new String[] { "Anguilla", "Q80@AT", "Bosnia and Herzegowina", "Kingdom of Sweden" };
-		int[] offsets2 = new int[] { 0x08057b60, 0x08057e38, 0x08057fb0, 0x0805bc6c };
-		boolean[] shouldExist = new boolean[] { true, false, true, true };
+                { "Anguilla", "Q80@AT", "Bosnia and Herzegowina", "Kingdom of Sweden" };
+		int[] offsets2 = { 0x08057b60, 0x08057e38, 0x08057fb0, 0x0805bc6c };
+		boolean[] shouldExist = { true, false, true, true };
 
 		AddressSpace space = testProgram.getLanguage().getAddressFactory().getDefaultAddressSpace();
 
@@ -1142,13 +1142,13 @@ public class StringsAnalyzerTest extends AbstractGhidraHeadedIntegrationTest {
 		Program testProgram = buildProgram("libopencoreplayer.so", false);
 
 		// Strings that will only be found in the "good" (regular) model
-		String[] stringsInGoodModel = new String[] { "device", "video/decoder", "player" };
-		int[] goodStringOffsets = new int[] { 0xa717fa48, 0xa718025c, 0xa71802a8 };
+		String[] stringsInGoodModel = { "device", "video/decoder", "player" };
+		int[] goodStringOffsets = { 0xa717fa48, 0xa718025c, 0xa71802a8 };
 		Address[] goodStringAddresses = new Address[goodStringOffsets.length];
 
 		// Strings that will only be found in the "bad" (contrived) model
-		String[] stringsInBadModel = new String[] { "tnihtxetL\\t", "OMXAacDec", "rBBASepzNnLr" };
-		int[] badStringOffsets = new int[] { 0xa71756c4, 0xa7192c00, 0xa7192fa0 };
+		String[] stringsInBadModel = { "tnihtxetL\\t", "OMXAacDec", "rBBASepzNnLr" };
+		int[] badStringOffsets = { 0xa71756c4, 0xa7192c00, 0xa7192fa0 };
 		Address[] badStringAddresses = new Address[badStringOffsets.length];
 
 		AddressSpace space = testProgram.getLanguage().getAddressFactory().getDefaultAddressSpace();
@@ -1266,8 +1266,8 @@ public class StringsAnalyzerTest extends AbstractGhidraHeadedIntegrationTest {
 		AddressSpace space = testProgram.getLanguage().getAddressFactory().getDefaultAddressSpace();
 
 		// These are the strings that we expect to find, with their corresponding offsets
-		String[] strings = new String[] { "ParserTokenTypes", "ParserTokenTypes" };
-		int[] offsets = new int[] { 0x1f1e1d, 0x1f1e3c };
+		String[] strings = { "ParserTokenTypes", "ParserTokenTypes" };
+		int[] offsets = { 0x1f1e1d, 0x1f1e3c };
 
 		HashMap<Address, String> addressToValueMap = new HashMap<>();
 

@@ -30,10 +30,10 @@ import ghidra.util.Msg;
 import resources.ResourceManager;
 
 public class AUDataType extends BuiltIn implements Dynamic {
-	public static byte[] MAGIC = new byte[] { (byte) '.', (byte) 's', (byte) 'n', (byte) 'd' };
+	public static byte[] MAGIC = { (byte) '.', (byte) 's', (byte) 'n', (byte) 'd' };
 
 	public static byte[] MAGIC_MASK =
-		new byte[] { (byte) 0xff, (byte) 0xff, (byte) 0xff, (byte) 0xff };
+            { (byte) 0xff, (byte) 0xff, (byte) 0xff, (byte) 0xff };
 
 	public AUDataType() {
 		this(null);

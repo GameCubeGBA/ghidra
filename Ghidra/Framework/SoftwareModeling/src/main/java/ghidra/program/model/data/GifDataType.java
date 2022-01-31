@@ -23,11 +23,11 @@ import ghidra.util.Msg;
 
 public class GifDataType extends BuiltIn implements Dynamic, Resource {
 	public static byte[] MAGIC_87 =
-		new byte[] { (byte) 'G', (byte) 'I', (byte) 'F', (byte) '8', (byte) '7', (byte) 'a' };
+            { (byte) 'G', (byte) 'I', (byte) 'F', (byte) '8', (byte) '7', (byte) 'a' };
 	public static byte[] MAGIC_89 =
-		new byte[] { (byte) 'G', (byte) 'I', (byte) 'F', (byte) '8', (byte) '9', (byte) 'a' };
+            { (byte) 'G', (byte) 'I', (byte) 'F', (byte) '8', (byte) '9', (byte) 'a' };
 	public static byte[] GIFMASK =
-		new byte[] { (byte) 0xff, (byte) 0xff, (byte) 0xff, (byte) 0xff, (byte) 0xff, (byte) 0xff };
+            { (byte) 0xff, (byte) 0xff, (byte) 0xff, (byte) 0xff, (byte) 0xff, (byte) 0xff };
 
 	public GifDataType() {
 		this(null);

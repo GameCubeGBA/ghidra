@@ -143,7 +143,7 @@ public class CompositeVerticalLayoutTextField implements TextField {
 
 	private ClippingTextField createClippedField(FieldElement element) {
 
-		FieldElement[] elements = new FieldElement[] {
+		FieldElement[] elements = {
 			element,
 			new StrutFieldElement(500)
 		};

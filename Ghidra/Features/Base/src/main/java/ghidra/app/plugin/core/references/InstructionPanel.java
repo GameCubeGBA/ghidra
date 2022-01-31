@@ -54,7 +54,7 @@ class InstructionPanel extends JPanel implements ChangeListener {
 	private final static Color DEFAULT_FG_COLOR = Color.black;
 
 	private static final DataFlavor[] ACCEPTABLE_DROP_FLAVORS =
-		new DataFlavor[] { SelectionTransferable.localProgramSelectionFlavor };
+            { SelectionTransferable.localProgramSelectionFlavor };
 
 	private MouseListener mouseListener = new LabelMouseListener();
 	private boolean locked;

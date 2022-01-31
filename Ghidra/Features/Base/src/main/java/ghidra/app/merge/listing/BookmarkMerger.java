@@ -401,7 +401,7 @@ class BookmarkMerger extends AbstractListingMerger {
 	 * @return the standardized bookmark information.
 	 */
 	private String[] getBookmarkInfo(int version, Bookmark bookmark) {
-		String[] info = new String[] { "", "", "", "" };
+		String[] info = { "", "", "", "" };
 		if (version == LATEST) {
 			info[0] = getChoice(LATEST_TITLE, bookmark);
 		}

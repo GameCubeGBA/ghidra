@@ -89,7 +89,7 @@ class RelocationDBAdapterV2 extends RelocationDBAdapter {
 	DBRecord adaptRecord(DBRecord rec) {
 		DBRecord newRec = SCHEMA.createRecord(rec.getKey());
 		newRec.setIntValue(TYPE_COL, rec.getIntValue(TYPE_COL));
-		long[] values = new long[] { rec.getLongValue(VALU_COL) };
+		long[] values = { rec.getLongValue(VALU_COL) };
 		newRec.setField(VALU_COL, new BinaryCodedField(values));
 		newRec.setBinaryData(BYTES_COL, null);
 		return newRec;
