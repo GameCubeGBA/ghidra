@@ -218,7 +218,7 @@ public class ImportMSLibs extends GhidraScript {
 		if (name == null) {
 			return "(NULL)";
 		}
-		if (name.equals("")) {
+		if (name.isEmpty()) {
 			return "(EMPTY)";
 		}
 		StringBuilder sb = new StringBuilder();

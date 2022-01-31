@@ -1063,7 +1063,7 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 		}
 
 		String path;
-		if (parent.getName().equals("")) {
+		if (parent.getName().isEmpty()) {
 			path = "/" + categoryName;
 		}
 		else {
