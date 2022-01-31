@@ -154,7 +154,7 @@ public class ColumnFilterData<T> implements Comparable<ColumnFilterData<T>> {
 	 * @return the list of applicable constraints for this column
 	 */
 	public ColumnConstraint<?>[] getConstraints() {
-		return applicableConstraints.stream().toArray(ColumnConstraint[]::new);
+		return applicableConstraints.toArray(ColumnConstraint[]::new);
 	}
 
 	/**

@@ -30,8 +30,8 @@ import java.util.Set;
 public class JavaHelpSetBuilder {
 	private static final String TAB = "\t";
 	private static final Set<String> searchFileNames =
-		new HashSet<String>(Arrays.asList(new String[] { "DOCS", "DOCS.TAB", "OFFSETS",
-			"POSITIONS", "SCHEMA", "TMAP" }));
+		new HashSet<String>(Arrays.asList("DOCS", "DOCS.TAB", "OFFSETS",
+				"POSITIONS", "SCHEMA", "TMAP"));
 	private static int indentionLevel;
 
 	private final String moduleName;

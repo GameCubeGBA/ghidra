@@ -432,7 +432,7 @@ public class SaveState {
 		try {
 			Class<?> enumClass = Class.forName(enumClassName).asSubclass(Enum.class);
 
-			Method m = enumClass.getMethod("valueOf", new Class[] { String.class });
+			Method m = enumClass.getMethod("valueOf", String.class);
 			if (m != null) {
 				return (Enum<?>) m.invoke(null, new Object[] { value });
 			}

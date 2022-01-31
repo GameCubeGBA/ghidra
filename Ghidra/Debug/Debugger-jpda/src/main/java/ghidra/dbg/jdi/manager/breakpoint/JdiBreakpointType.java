@@ -15,39 +15,20 @@
  */
 package ghidra.dbg.jdi.manager.breakpoint;
 
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
 /**
  * The type of JDI breakpoint
  */
 public enum JdiBreakpointType {
 
-	BREAKPOINT("breakpoint", false),
-	ACCESS_WATCHPOINT("access watchpont", true),
-	MODIFICATION_WATCHPOINT("modification watchpoint", true),
-	OTHER("<OTHER>", false);
-
-	public static final Map<String, JdiBreakpointType> BY_NAME =
-		List.of(values()).stream().collect(Collectors.toMap(v -> v.getName(), v -> v));
-
-	/**
-	 * Parse a type from a JDI breakpoint information block
-	 * 
-	 * @param string the value of type parsed
-	 * @return the enum constant, or {@link #OTHER} if unrecognized
-	 */
-	public static JdiBreakpointType fromStr(String string) {
-		return BY_NAME.getOrDefault(string, OTHER);
-	}
+	BREAKPOINT("breakpoint"),
+	ACCESS_WATCHPOINT("access watchpont"),
+	MODIFICATION_WATCHPOINT("modification watchpoint"),
+	OTHER("<OTHER>");
 
 	private final String name;
-	private final boolean isWatchpoint;
 
-	private JdiBreakpointType(String name, boolean isWatchpoint) {
+	private JdiBreakpointType(String name) {
 		this.name = name;
-		this.isWatchpoint = isWatchpoint;
 	}
 
 	@Override
@@ -59,7 +40,4 @@ public enum JdiBreakpointType {
 		return name;
 	}
 
-	public boolean isWatchpoint() {
-		return isWatchpoint;
-	}
 }

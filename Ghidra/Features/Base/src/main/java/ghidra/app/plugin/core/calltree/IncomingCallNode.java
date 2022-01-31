@@ -105,11 +105,9 @@ public class IncomingCallNode extends CallNode {
 		}
 
 		List<GTreeNode> children =
-			nodesByFunction.values()
-					.stream()
-					.flatMap(list -> list.stream())
-					.collect(Collectors.toList());
-		children.sort(new CallNodeComparator());
+				nodesByFunction.values()
+						.stream()
+						.flatMap(Collection::stream).sorted(new CallNodeComparator()).collect(Collectors.toList());
 
 		return children;
 	}

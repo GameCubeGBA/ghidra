@@ -15,8 +15,6 @@
  */
 package generic.continues;
 
-import java.lang.reflect.Constructor;
-
 import net.sf.cglib.proxy.Enhancer;
 
 public class ContinuesFactory implements GenericFactory {
@@ -36,16 +34,14 @@ public class ContinuesFactory implements GenericFactory {
 	public Object create(Class<?> type, Object... args) {
 		try {
 			Object thing;
-			if (!enabled) {
-				Constructor<?> c = type.getConstructor(new Class<?>[0]);
-				thing = c.newInstance(args);
-			}
-			else {
+			if (enabled) {
 				ContinuesInterceptor interceptor = new ContinuesInterceptor(exceptionHandler);
 				Enhancer e = new Enhancer();
 				e.setSuperclass(type);
 				e.setCallback(interceptor);
 				thing = e.create();
+			} else {
+				thing = type.getConstructor().newInstance(args);
 			}
 			return thing;
 		}

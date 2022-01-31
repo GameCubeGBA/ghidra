@@ -830,14 +830,8 @@ public class FlatProgramAPI {
 
 		Accumulator<MemSearchResult> accumulator = new ListAccumulator<>();
 		searcher.search(accumulator, monitor);
-
-		//@formatter:off
-		List<Address> addresses =
-			accumulator.stream()
-                       .map(r -> r.getAddress())
-                       .collect(Collectors.toList());
-		//@formatter:on
-		return addresses.toArray(new Address[addresses.size()]);
+		return accumulator.stream()
+				.map(MemSearchResult::getAddress).toArray(Address[]::new);
 	}
 
 	/**

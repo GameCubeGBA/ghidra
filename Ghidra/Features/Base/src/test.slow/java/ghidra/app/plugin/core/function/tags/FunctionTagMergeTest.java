@@ -1217,11 +1217,7 @@ public class FunctionTagMergeTest extends AbstractListingMergeManagerTest {
 
 		Collection<? extends FunctionTag> resultTags = getAllTags(program);
 
-		// @formatter:off
-       	return resultTags.stream()
-		      		     .filter(t -> t.getName().equals(name)) 
-		       		     .count() > 0;
-		// @formatter:on
+       	return resultTags.stream().anyMatch(t -> t.getName().equals(name));
 	}
 
 	/**
