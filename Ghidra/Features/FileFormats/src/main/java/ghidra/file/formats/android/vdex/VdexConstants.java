@@ -102,15 +102,13 @@ public final class VdexConstants {
 		if (program != null) {
 			for (MemoryBlock block : program.getMemory().getBlocks()) {
 
-				try (ByteProvider provider =
-					new MemoryByteProvider(program.getMemory(), block.getStart())) {
+				try (ByteProvider provider = new MemoryByteProvider(program.getMemory(), block.getStart())) {
 					String magic = new String(provider.readBytes(0, VdexConstants.MAGIC.length()));
 					if (VdexConstants.MAGIC.equals(magic)) {
 						return true;
 					}
-				}
-				catch (Exception e) {
-					//ignore
+				} catch (Exception e) {
+					// ignore
 				}
 			}
 		}
@@ -118,23 +116,17 @@ public final class VdexConstants {
 	}
 
 	public final static Address findVDEX(Program program) {
-		try {
-			if (program != null) {
-				for (MemoryBlock block : program.getMemory().getBlocks()) {
-                    try (ByteProvider provider = new MemoryByteProvider(program.getMemory(), block.getStart())) {
-                        String magic =
-                                new String(provider.readBytes(0, VdexConstants.MAGIC.length()));
-                        if (VdexConstants.MAGIC.equals(magic)) {
-                            return block.getStart();
-                        }
-                    } catch (Exception e) {
-                        //ignore
-                    }
+		if (program != null) {
+			for (MemoryBlock block : program.getMemory().getBlocks()) {
+				try (ByteProvider provider = new MemoryByteProvider(program.getMemory(), block.getStart())) {
+					String magic = new String(provider.readBytes(0, VdexConstants.MAGIC.length()));
+					if (VdexConstants.MAGIC.equals(magic)) {
+						return block.getStart();
+					}
+				} catch (Exception e) {
+					// ignore
 				}
 			}
-		}
-		catch (IOException e) {
-			//ignore
 		}
 		return null;
 	}
