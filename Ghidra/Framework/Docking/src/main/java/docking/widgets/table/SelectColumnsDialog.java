@@ -129,14 +129,12 @@ public class SelectColumnsDialog extends DialogComponentProvider {
 			return;
 		}
 
-		Iterator<TableColumn> iter = visibilityMap.keySet().iterator();
-		while (iter.hasNext()) {
-			TableColumn column = iter.next();
-			Boolean visible = visibilityMap.get(column);
-			if (visible != columnModel.isVisible(column)) {
-				columnModel.setVisible(column, visible);
-			}
-		}
+        for (TableColumn column : visibilityMap.keySet()) {
+            Boolean visible = visibilityMap.get(column);
+            if (visible != columnModel.isVisible(column)) {
+                columnModel.setVisible(column, visible);
+            }
+        }
 
 		// force a save of the new table column state here so clients to not use the table with
 		// a pending state save

@@ -47,11 +47,11 @@ public class MarkCallOtherPcode extends GhidraScript {
 
 			PcodeOp[] pcode = instr.getPcode();
 
-			for (int i = 0; i < pcode.length; i++) {
-				if (pcode[i].getOpcode() == PcodeOp.CALLOTHER) {
-					markCallOtherPcode(instr, pcode[i]);
-				}
-			}
+            for (PcodeOp pcodeOp : pcode) {
+                if (pcodeOp.getOpcode() == PcodeOp.CALLOTHER) {
+                    markCallOtherPcode(instr, pcodeOp);
+                }
+            }
 
 			completed += instr.getLength();
 			if ((completed % 1000) == 0) {

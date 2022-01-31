@@ -164,37 +164,36 @@ class WorkspaceImpl implements Workspace {
 			return;
 		}
 
-		Iterator<?> iter = root.getChildren("RUNNING_TOOL").iterator();
-		while (iter.hasNext()) {
-			Element element = (Element) iter.next();
-			String toolName = element.getAttributeValue(ToolTemplate.TOOL_NAME_XML_NAME);
-			if (toolName == null) {
-				continue;
-			}
+        for (Object o : root.getChildren("RUNNING_TOOL")) {
+            Element element = (Element) o;
+            String toolName = element.getAttributeValue(ToolTemplate.TOOL_NAME_XML_NAME);
+            if (toolName == null) {
+                continue;
+            }
 
-			PluginTool tool = toolManager.getTool(toolName);
-			if (tool != null) {
-				tool.setVisible(isActive);
+            PluginTool tool = toolManager.getTool(toolName);
+            if (tool != null) {
+                tool.setVisible(isActive);
 
-				if (tool instanceof GhidraTool) {
-					GhidraTool gTool = (GhidraTool) tool;
-					gTool.checkForNewExtensions();
-				}
+                if (tool instanceof GhidraTool) {
+                    GhidraTool gTool = (GhidraTool) tool;
+                    gTool.checkForNewExtensions();
+                }
 
-				boolean hadChanges = tool.hasConfigChanged();
-				tool.restoreWindowingDataFromXml(element);
+                boolean hadChanges = tool.hasConfigChanged();
+                tool.restoreWindowingDataFromXml(element);
 
-				Element toolDataElem = element.getChild("DATA_STATE");
-				tool.restoreDataStateFromXml(toolDataElem);
-				if (hadChanges) {
-					// restore the dirty state, which is cleared by the restoreDataState call
-					tool.setConfigChanged(true);
-				}
+                Element toolDataElem = element.getChild("DATA_STATE");
+                tool.restoreDataStateFromXml(toolDataElem);
+                if (hadChanges) {
+                    // restore the dirty state, which is cleared by the restoreDataState call
+                    tool.setConfigChanged(true);
+                }
 
-				runningTools.add(tool);
-				toolManager.fireToolAddedEvent(this, tool);
-			}
-		}
+                runningTools.add(tool);
+                toolManager.fireToolAddedEvent(this, tool);
+            }
+        }
 	}
 
 //==================================================================================================

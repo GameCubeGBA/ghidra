@@ -67,11 +67,11 @@ public class RepackFid extends GhidraScript {
 		PackedDBHandle newHandle = new PackedDBHandle(pdb.getContentType());
 
 		Table[] tables = handle.getTables();
-		for(int i=0;i<tables.length;++i) {
-			long transactionID = newHandle.startTransaction();
-			copyTable(tables[i],newHandle);
-			newHandle.endTransaction(transactionID, true);			
-		}
+        for (Table table : tables) {
+            long transactionID = newHandle.startTransaction();
+            copyTable(table, newHandle);
+            newHandle.endTransaction(transactionID, true);
+        }
 		newHandle.saveAs(pdb.getContentType(), saveFile.getParentFile(),saveFile.getName(), TaskMonitor.DUMMY);
 		newHandle.close();
 	}

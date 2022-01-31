@@ -391,10 +391,9 @@ public class Motorola68KAnalyzer extends ConstantPropagationAnalyzer {
 	}
 
 	private void createData(Program program, ArrayList<CreateDataCmd> dataCommands) {
-		for (Iterator<CreateDataCmd> iterator = dataCommands.iterator(); iterator.hasNext();) {
-			CreateDataCmd createDataCmd = iterator.next();
-			createDataCmd.applyTo(program);
-		}
+        for (CreateDataCmd createDataCmd : dataCommands) {
+            createDataCmd.applyTo(program);
+        }
 	}
 
 	private void labelTable(Program program, Address loc, ArrayList<Address> targets) {
@@ -414,16 +413,14 @@ public class Motorola68KAnalyzer extends ConstantPropagationAnalyzer {
 		}
 
 		int tableNumber = 0;
-		for (Iterator<Address> iterator = targets.iterator(); iterator.hasNext();) {
-			Address addr = iterator.next();
+        for (Address addr : targets) {
+            AddLabelCmd lcmd = new AddLabelCmd(addr, "case_" + Long.toHexString(tableNumber), space,
+                    SourceType.ANALYSIS);
+            tableNumber++;
+            lcmd.setNamespace(space);
 
-			AddLabelCmd lcmd = new AddLabelCmd(addr, "case_" + Long.toHexString(tableNumber), space,
-				SourceType.ANALYSIS);
-			tableNumber++;
-			lcmd.setNamespace(space);
-
-			lcmd.applyTo(program);
-		}
+            lcmd.applyTo(program);
+        }
 	}
 
 	@Override

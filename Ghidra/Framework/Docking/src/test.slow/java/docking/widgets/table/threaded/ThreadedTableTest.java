@@ -622,19 +622,15 @@ public class ThreadedTableTest extends AbstractThreadedTableTest {
 			throws FileNotFoundException, IOException {
 
 		int expectedIndex = 0;
-		BufferedReader actualReader = new BufferedReader(new FileReader(actualFile));
-		try {
-			while (true) {
-				String line = actualReader.readLine();
-				if (line == null) {
-					break;
-				}
-				assertEquals(expectedList.get(expectedIndex++), line);
-			}
-		}
-		finally {
-			actualReader.close();
-		}
+        try (BufferedReader actualReader = new BufferedReader(new FileReader(actualFile))) {
+            while (true) {
+                String line = actualReader.readLine();
+                if (line == null) {
+                    break;
+                }
+                assertEquals(expectedList.get(expectedIndex++), line);
+            }
+        }
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -810,10 +806,9 @@ public class ThreadedTableTest extends AbstractThreadedTableTest {
 
 		List<Object> modelValues = getModelValues(model, TestDataKeyModel.STRING_COL);
 		assertEquals("Filter did not match the expected row count", 3, modelValues.size());
-		for (int i = 0; i < modelValues.size(); i++) {
-			Object value = modelValues.get(i);
-			assertEquals(text, value);
-		}
+        for (Object value : modelValues) {
+            assertEquals(text, value);
+        }
 	}
 
 	private List<Object> getModelValues(TestDataKeyModel keyModel, int columnIndex) {

@@ -161,12 +161,12 @@ class FunctionDefinitionDBAdapterV1 extends FunctionDefinitionDBAdapter {
 		Field[] keys = table.findRecords(new LongField(datatypeID.getValue()),
 			V1_FUNCTION_DEF_UNIVERSAL_DT_ID_COL);
 
-		for (int i = 0; i < keys.length; i++) {
-			DBRecord record = table.getRecord(keys[i]);
-			if (record.getLongValue(V1_FUNCTION_DEF_SOURCE_ARCHIVE_ID_COL) == sourceID.getValue()) {
-				return record;
-			}
-		}
+        for (Field key : keys) {
+            DBRecord record = table.getRecord(key);
+            if (record.getLongValue(V1_FUNCTION_DEF_SOURCE_ARCHIVE_ID_COL) == sourceID.getValue()) {
+                return record;
+            }
+        }
 		return null;
 	}
 }

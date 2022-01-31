@@ -400,70 +400,57 @@ public class PcodeParser extends PcodeCompile {
 	public ConstructTpl compilePcode(String pcodeStatements, String srcFile, int srcLine)
 			throws SleighException {
 
-		LineArrayListWriter writer = null;
-		try {
-			writer = new LineArrayListWriter();
-			ParsingEnvironment env = new ParsingEnvironment(writer);
+        try (LineArrayListWriter writer = new LineArrayListWriter()) {
+            ParsingEnvironment env = new ParsingEnvironment(writer);
 
-			// inject pcode statement lines into writer (needed for error reporting)
-			BufferedReader r = new BufferedReader(new StringReader(pcodeStatements));
-			String line;
-			while ((line = r.readLine()) != null) {
-				writer.write(line);
-				writer.newLine();
-			}
+            // inject pcode statement lines into writer (needed for error reporting)
+            BufferedReader r = new BufferedReader(new StringReader(pcodeStatements));
+            String line;
+            while ((line = r.readLine()) != null) {
+                writer.write(line);
+                writer.newLine();
+            }
 
-			CharStream input = new ANTLRStringStream(writer.toString());
+            CharStream input = new ANTLRStringStream(writer.toString());
 
-			env.getLocator().registerLocation(input.getLine(), new Location(srcFile, srcLine));
+            env.getLocator().registerLocation(input.getLine(), new Location(srcFile, srcLine));
 
-			SleighLexer lex = new SleighLexer(input);
-			lex.setEnv(env);
-			UnbufferedTokenStream tokens = new UnbufferedTokenStream(lex);
-			SleighParser parser = new SleighParser(tokens);
-			parser.setEnv(env);
-			parser.setLexer(lex);
-			lex.pushMode(SleighRecognizerConstants.SEMANTIC);
-			semantic_return semantic = parser.semantic();
-			lex.popMode();
+            SleighLexer lex = new SleighLexer(input);
+            lex.setEnv(env);
+            UnbufferedTokenStream tokens = new UnbufferedTokenStream(lex);
+            SleighParser parser = new SleighParser(tokens);
+            parser.setEnv(env);
+            parser.setLexer(lex);
+            lex.pushMode(SleighRecognizerConstants.SEMANTIC);
+            semantic_return semantic = parser.semantic();
+            lex.popMode();
 
-			CommonTreeNodeStream nodes = new CommonTreeNodeStream(semantic.getTree());
-			nodes.setTokenStream(tokens);
-			// ANTLRUtil.debugNodeStream(nodes, System.out);
-			SleighCompiler walker = new SleighCompiler(nodes);
+            CommonTreeNodeStream nodes = new CommonTreeNodeStream(semantic.getTree());
+            nodes.setTokenStream(tokens);
+            // ANTLRUtil.debugNodeStream(nodes, System.out);
+            SleighCompiler walker = new SleighCompiler(nodes);
 
-			SectionVector rtl = walker.semantic(env, null, this, semantic.getTree(), false, false);
+            SectionVector rtl = walker.semantic(env, null, this, semantic.getTree(), false, false);
 
-			if (getErrors() != 0) {
-				return null;
-			}
+            if (getErrors() != 0) {
+                return null;
+            }
 
-			ConstructTpl result = null;
-			if (rtl != null) {
-				result = buildConstructor(rtl.getMainSection());
-			}
+            ConstructTpl result = null;
+            if (rtl != null) {
+                result = buildConstructor(rtl.getMainSection());
+            }
 
-			return result;
-		}
-		catch (IOException e) {
-			throw new AssertException(); // unexpected condition
-		}
-		catch (RecognitionException e) {
-			throw new SleighException("Semantic compilation error: " + e.getMessage(), e);
-		}
-		catch (BailoutException | NullPointerException e) {
-			throw new SleighException("Unrecoverable error(s), halting compilation", e);
-		} finally {
-			if (writer != null) {
-				try {
-					writer.close();
-				}
-				catch (IOException e) {
-					// squash!!! we tried
-				}
-			}
-		}
-	}
+            return result;
+        } catch (IOException e) {
+            throw new AssertException(); // unexpected condition
+        } catch (RecognitionException e) {
+            throw new SleighException("Semantic compilation error: " + e.getMessage(), e);
+        } catch (BailoutException | NullPointerException e) {
+            throw new SleighException("Unrecoverable error(s), halting compilation", e);
+        }
+        // squash!!! we tried
+    }
 
 	@Override
 	public SectionSymbol newSectionSymbol(Location where, String text) {

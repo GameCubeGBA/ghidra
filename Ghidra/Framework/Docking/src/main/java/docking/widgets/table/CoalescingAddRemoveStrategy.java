@@ -252,8 +252,7 @@ public class CoalescingAddRemoveStrategy<T> implements TableAddRemoveStrategy<T>
 		// Copy to a new list those items that are not marked for removal.  This saves the
 		// list move its items every time a remove takes place
 		List<T> newList = new ArrayList<>(data.size() - toRemove.size());
-		for (int i = 0; i < data.size(); i++) {
-			T rowObject = data.get(i);
+		for (T rowObject : data) {
 			if (!toRemove.contains(rowObject)) {
 				newList.add(rowObject);
 			}

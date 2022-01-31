@@ -103,11 +103,11 @@ public class NewGuid {
 	
 	
 	public boolean isOK() {
-	    for (int i = 0; i < data.length; i++) {
-	        if ((data[i] != 0) || (data[i] != 0xFFFFFFFFL)) {
-	            return true;
-	        }
-	    }
+        for (long datum : data) {
+            if ((datum != 0) || (datum != 0xFFFFFFFFL)) {
+                return true;
+            }
+        }
 	    return false;
 	}
 	

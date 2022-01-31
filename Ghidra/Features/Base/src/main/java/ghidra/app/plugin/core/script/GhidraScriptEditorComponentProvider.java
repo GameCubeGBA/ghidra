@@ -199,21 +199,16 @@ public class GhidraScriptEditorComponentProvider extends ComponentProvider {
 
 	private String loadSciptFile() throws IOException {
 		StringBuilder buffer = new StringBuilder();
-		BufferedReader reader =
-			new BufferedReader(new InputStreamReader(scriptSourceFile.getInputStream()));
-		try {
-			while (true) {
-				String line = reader.readLine();
-				if (line == null) {
-					break;
-				}
-				buffer.append(line);
-				buffer.append('\n');
-			}
-		}
-		finally {
-			reader.close();
-		}
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(scriptSourceFile.getInputStream()))) {
+            while (true) {
+                String line = reader.readLine();
+                if (line == null) {
+                    break;
+                }
+                buffer.append(line);
+                buffer.append('\n');
+            }
+        }
 		return buffer.toString();
 	}
 
@@ -522,11 +517,9 @@ public class GhidraScriptEditorComponentProvider extends ComponentProvider {
 		defaultFont = (Font) editor.getValue();
 
 		Collection<GhidraScriptEditorComponentProvider> values = provider.getEditorMap().values();
-		Iterator<GhidraScriptEditorComponentProvider> iterator = values.iterator();
-		while (iterator.hasNext()) {
-			GhidraScriptEditorComponentProvider editorComponent = iterator.next();
-			editorComponent.textArea.setFont(defaultFont);
-		}
+        for (GhidraScriptEditorComponentProvider editorComponent : values) {
+            editorComponent.textArea.setFont(defaultFont);
+        }
 	}
 
 	private void save() {

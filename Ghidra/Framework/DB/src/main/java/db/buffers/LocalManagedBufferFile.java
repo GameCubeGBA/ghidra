@@ -227,9 +227,9 @@ public class LocalManagedBufferFile extends LocalBufferFile implements ManagedBu
 		setFreeIndexes(versionFileHandler.getFreeIndexList());
 		String[] names = versionFileHandler.getOldParameterNames();
 		clearParameters();
-		for (int i = 0; i < names.length; i++) {
-			setParameter(names[i], versionFileHandler.getOldParameter(names[i]));
-		}
+        for (String name : names) {
+            setParameter(name, versionFileHandler.getOldParameter(name));
+        }
 	}
 
 	/**

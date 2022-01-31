@@ -517,11 +517,10 @@ public class DynamicHash {
 			vnlist.clear();
 			vnlist2.clear();
 			gatherFirstLevelVars(vnlist, fd, tmpaddr, tmphash);
-			for (int i = 0; i < vnlist.size(); ++i) {
-				Varnode tmpvn = vnlist.get(i);
+			for (Varnode tmpvn : vnlist) {
 				clear();
 				calcHash(tmpvn, method);
-				if (getComparable(hash) == getComparable(tmphash)) {		// Hash collision
+				if (getComparable(hash) == getComparable(tmphash)) { // Hash collision
 					vnlist2.add(tmpvn);
 					if (vnlist2.size() > maxduplicates) {
 						break;
@@ -656,8 +655,7 @@ public class DynamicHash {
 		ArrayList<Varnode> vnlist = new ArrayList<>();
 		ArrayList<Varnode> vnlist2 = new ArrayList<>();
 		gatherFirstLevelVars(vnlist, fd, addr, h);
-		for (int i = 0; i < vnlist.size(); ++i) {
-			Varnode tmpvn = vnlist.get(i);
+		for (Varnode tmpvn : vnlist) {
 			dhash.clear();
 			dhash.calcHash(tmpvn, method);
 			if (getComparable(dhash.getHash()) == getComparable(h)) {

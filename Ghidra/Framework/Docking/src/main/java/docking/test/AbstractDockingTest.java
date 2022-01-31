@@ -153,17 +153,15 @@ public abstract class AbstractDockingTest extends AbstractGenericTest {
 
 	public static Window getWindowByTitleContaining(Window parentWindow, String text) {
 		Set<Window> winList = getWindows(parentWindow);
-		Iterator<Window> iter = winList.iterator();
-		while (iter.hasNext()) {
-			Window w = iter.next();
-			if (!w.isShowing()) {
-				continue;
-			}
-			String titleForWindow = getTitleForWindow(w);
-			if (titleForWindow.toLowerCase().contains(text.toLowerCase())) {
-				return w;
-			}
-		}
+        for (Window w : winList) {
+            if (!w.isShowing()) {
+                continue;
+            }
+            String titleForWindow = getTitleForWindow(w);
+            if (titleForWindow.toLowerCase().contains(text.toLowerCase())) {
+                return w;
+            }
+        }
 		return null;
 	}
 
@@ -173,17 +171,15 @@ public abstract class AbstractDockingTest extends AbstractGenericTest {
 
 	protected static Window getWindowByTitle(Window parentWindow, String title) {
 		Set<Window> winList = getWindows(parentWindow);
-		Iterator<Window> iter = winList.iterator();
-		while (iter.hasNext()) {
-			Window w = iter.next();
-			if (!w.isShowing()) {
-				continue;
-			}
-			String titleForWindow = getTitleForWindow(w);
-			if (title.equals(titleForWindow)) {
-				return w;
-			}
-		}
+        for (Window w : winList) {
+            if (!w.isShowing()) {
+                continue;
+            }
+            String titleForWindow = getTitleForWindow(w);
+            if (title.equals(titleForWindow)) {
+                return w;
+            }
+        }
 		return null;
 	}
 
@@ -215,13 +211,11 @@ public abstract class AbstractDockingTest extends AbstractGenericTest {
 		while (totalTime <= DEFAULT_WAIT_TIMEOUT) {
 
 			Set<Window> winList = getAllWindows();
-			Iterator<Window> it = winList.iterator();
-			while (it.hasNext()) {
-				Window w = it.next();
-				if (windowClass.isAssignableFrom(w.getClass()) && w.isShowing()) {
-					return w;
-				}
-			}
+            for (Window w : winList) {
+                if (windowClass.isAssignableFrom(w.getClass()) && w.isShowing()) {
+                    return w;
+                }
+            }
 
 			totalTime += sleep(DEFAULT_WAIT_DELAY);
 		}
@@ -497,16 +491,14 @@ public abstract class AbstractDockingTest extends AbstractGenericTest {
 		while (totalTime <= DEFAULT_WINDOW_TIMEOUT) {
 
 			Set<Window> winList = getAllWindows();
-			Iterator<Window> iter = winList.iterator();
-			while (iter.hasNext()) {
-				Window w = iter.next();
-				if ((w instanceof JDialog) && w.isShowing()) {
-					String windowTitle = getTitleForWindow(w);
-					if (title.equals(windowTitle)) {
-						return (JDialog) w;
-					}
-				}
-			}
+            for (Window w : winList) {
+                if ((w instanceof JDialog) && w.isShowing()) {
+                    String windowTitle = getTitleForWindow(w);
+                    if (title.equals(windowTitle)) {
+                        return (JDialog) w;
+                    }
+                }
+            }
 
 			totalTime += sleep(DEFAULT_WAIT_DELAY);
 		}
@@ -532,16 +524,14 @@ public abstract class AbstractDockingTest extends AbstractGenericTest {
 		while (totalTime <= DEFAULT_WAIT_TIMEOUT) {
 
 			Set<Window> winList = getWindows(window);
-			Iterator<Window> iter = winList.iterator();
-			while (iter.hasNext()) {
-				Window w = iter.next();
-				if ((w instanceof JDialog) && w.isShowing()) {
-					String windowTitle = getTitleForWindow(w);
-					if (title.equals(windowTitle)) {
-						return (JDialog) w;
-					}
-				}
-			}
+            for (Window w : winList) {
+                if ((w instanceof JDialog) && w.isShowing()) {
+                    String windowTitle = getTitleForWindow(w);
+                    if (title.equals(windowTitle)) {
+                        return (JDialog) w;
+                    }
+                }
+            }
 
 			totalTime += sleep(DEFAULT_WAIT_DELAY);
 		}
@@ -635,24 +625,22 @@ public abstract class AbstractDockingTest extends AbstractGenericTest {
 	private static <T extends DialogComponentProvider> T getDialogComponent(Window parentWindow,
 			Class<T> ghidraClass) {
 		Set<Window> winList = getWindows(parentWindow);
-		Iterator<Window> iter = winList.iterator();
-		while (iter.hasNext()) {
-			Window w = iter.next();
-			DialogComponentProvider dialogComponentProvider =
-				getDialogComponentProvider(w, ghidraClass);
-			if (dialogComponentProvider != null) {
-				return ghidraClass.cast(dialogComponentProvider);
-			}
+        for (Window w : winList) {
+            DialogComponentProvider dialogComponentProvider =
+                    getDialogComponentProvider(w, ghidraClass);
+            if (dialogComponentProvider != null) {
+                return ghidraClass.cast(dialogComponentProvider);
+            }
 
-			// try child windows of the given window too (depth-first)
-			Set<Window> windows = getWindows(w);
-			for (Window window : windows) {
-				dialogComponentProvider = getDialogComponentProvider(window, ghidraClass);
-				if (dialogComponentProvider != null) {
-					return ghidraClass.cast(dialogComponentProvider);
-				}
-			}
-		}
+            // try child windows of the given window too (depth-first)
+            Set<Window> windows = getWindows(w);
+            for (Window window : windows) {
+                dialogComponentProvider = getDialogComponentProvider(window, ghidraClass);
+                if (dialogComponentProvider != null) {
+                    return ghidraClass.cast(dialogComponentProvider);
+                }
+            }
+        }
 		return null;
 	}
 
@@ -953,12 +941,10 @@ public abstract class AbstractDockingTest extends AbstractGenericTest {
 				// So, just ignore the exception.  Client code that *really* wants all windows,
 				// like that which waits for windows, should be calling this method repeatedly anyway.
 			}
-			Iterator<Window> iter = dockableWinList.iterator();
-			while (iter.hasNext()) {
-				Window w = iter.next();
-				windowSet.add(w);
-				findOwnedWindows(w, windowSet);
-			}
+            for (Window w : dockableWinList) {
+                windowSet.add(w);
+                findOwnedWindows(w, windowSet);
+            }
 		}
 		else {
 			findOwnedWindows(win, windowSet);

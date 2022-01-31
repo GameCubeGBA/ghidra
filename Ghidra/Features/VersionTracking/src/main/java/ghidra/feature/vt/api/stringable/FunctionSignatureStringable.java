@@ -378,35 +378,34 @@ public class FunctionSignatureStringable extends Stringable {
 	private String saveParameterInfos() {
 		StringBuilder storageBuilder = new StringBuilder();
 		int nameCount = parameterInfos.size();
-		for (int i = 0; i < nameCount; i++) {
-			ParameterInfo parameterInfo = parameterInfos.get(i);
-			String name = parameterInfo.name;
-			SourceType source = parameterInfo.source;
-			String comment = parameterInfo.comment;
-			if (comment == null) {
-				comment = EMPTY_STRING;
-			}
-			String encodedComment = encodeString(comment);
+        for (ParameterInfo parameterInfo : parameterInfos) {
+            String name = parameterInfo.name;
+            SourceType source = parameterInfo.source;
+            String comment = parameterInfo.comment;
+            if (comment == null) {
+                comment = EMPTY_STRING;
+            }
+            String encodedComment = encodeString(comment);
 
-			boolean makePointer = false;
-			DataType dt = parameterInfo.dataType;
-			if (dt instanceof Pointer) {
-				// handle auto-param/forced-indirect which may have unresolved pointer
-				makePointer = true;
-				dt = ((Pointer) dt).getDataType();
-			}
-			long dataTypeID = program.getDataTypeManager().getResolvedID(dt);
+            boolean makePointer = false;
+            DataType dt = parameterInfo.dataType;
+            if (dt instanceof Pointer) {
+                // handle auto-param/forced-indirect which may have unresolved pointer
+                makePointer = true;
+                dt = ((Pointer) dt).getDataType();
+            }
+            long dataTypeID = program.getDataTypeManager().getResolvedID(dt);
 
-			String serializedDataTypeID = Long.toString(dataTypeID);
-			if (makePointer) {
-				serializedDataTypeID = MAKE_POINTER_PREFIX + serializedDataTypeID;
-			}
-			storageBuilder.append(serializedDataTypeID).append(PARAMETER_INFO_DELIMITER);
-			storageBuilder.append(name).append(PARAMETER_INFO_DELIMITER);
-			storageBuilder.append(source.name()).append(PARAMETER_INFO_DELIMITER);
-			storageBuilder.append(encodedComment).append(PARAMETER_INFO_DELIMITER);
-			storageBuilder.append(DELIMITER);
-		}
+            String serializedDataTypeID = Long.toString(dataTypeID);
+            if (makePointer) {
+                serializedDataTypeID = MAKE_POINTER_PREFIX + serializedDataTypeID;
+            }
+            storageBuilder.append(serializedDataTypeID).append(PARAMETER_INFO_DELIMITER);
+            storageBuilder.append(name).append(PARAMETER_INFO_DELIMITER);
+            storageBuilder.append(source.name()).append(PARAMETER_INFO_DELIMITER);
+            storageBuilder.append(encodedComment).append(PARAMETER_INFO_DELIMITER);
+            storageBuilder.append(DELIMITER);
+        }
 		return storageBuilder.toString();
 	}
 

@@ -483,11 +483,9 @@ class AnalysisPanel extends JPanel implements PropertyChangeListener {
 	void setAnalyzerEnabled(String analyzerName, boolean enabled, boolean fireEvent) {
 		List<Component> list = analyzerManagedComponentsMap.get(analyzerName);
 		if (list != null) {
-			Iterator<Component> iterator = list.iterator();
-			while (iterator.hasNext()) {
-				Component next = iterator.next();
-				next.setEnabled(enabled);
-			}
+            for (Component next : list) {
+                next.setEnabled(enabled);
+            }
 		}
 		if (fireEvent) {
 			propertyChange(null);

@@ -27,9 +27,9 @@ public final class EmulateInstructionOptions {
   public static EmulateInstructionOptions swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-    for (int i = 0; i < swigValues.length; i++)
-      if (swigValues[i].swigValue == swigValue)
-        return swigValues[i];
+      for (EmulateInstructionOptions value : swigValues)
+          if (value.swigValue == swigValue)
+              return value;
     throw new IllegalArgumentException("No enum " + EmulateInstructionOptions.class + " with value " + swigValue);
   }
 

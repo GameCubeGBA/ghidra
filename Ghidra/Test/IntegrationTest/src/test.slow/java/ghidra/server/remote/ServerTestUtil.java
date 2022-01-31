@@ -314,14 +314,10 @@ public class ServerTestUtil {
 		}
 
 		// Unpack repository archive
-		InputStream in = new FileInputStream(testRepositoryArchiveZipPath);
-		try {
-			ZipInputStream zip = new ZipInputStream(in);
-			unpackArchive(zip, serverRoot);
-		}
-		finally {
-			in.close();
-		}
+        try (InputStream in = new FileInputStream(testRepositoryArchiveZipPath)) {
+            ZipInputStream zip = new ZipInputStream(in);
+            unpackArchive(zip, serverRoot);
+        }
 
 		startServer(serverRoot.getAbsolutePath(), GHIDRA_TEST_SERVER_PORT, authMode,
 			enableAltLoginName, enableSSHAuthentication, enableAnonymousAuthentication);
@@ -709,22 +705,14 @@ public class ServerTestUtil {
 
 		file.delete();
 
-		BufferedWriter bw = new BufferedWriter(new FileWriter(file));
-		try {
-			for (String line : lines) {
-				bw.write(line);
-				bw.newLine();
-			}
-		}
-		finally {
-			try {
-				bw.close();
-			}
-			catch (IOException e) {
-				// we tried
-			}
-		}
-	}
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
+            for (String line : lines) {
+                bw.write(line);
+                bw.newLine();
+            }
+        }
+        // we tried
+    }
 
 	private static void addSSHKeys(String dirPath, String privateKey, String privateKeyFilename,
 			String publicKey, String publicKeyFilename) throws IOException {

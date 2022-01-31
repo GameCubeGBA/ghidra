@@ -109,11 +109,10 @@ public class DomainEventComponentProvider extends ComponentProviderAdapter {
 			}
 			textArea.setText("");
 			int length = 0;
-			for (int i = 0; i < eventList.size(); i++) {
-				String str = eventList.get(i);
-				textArea.append(str);
-				length += str.length();
-			}
+            for (String str : eventList) {
+                textArea.append(str);
+                length += str.length();
+            }
 			textArea.setCaretPosition(length);
 		}
 	}

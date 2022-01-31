@@ -108,18 +108,10 @@ public class RemoteDatabaseItem extends RemoteFolderItem implements DatabaseItem
 				LocalBufferFile.copyFile(bf, tmpBf, null, monitor);
 				tmpBf.close();
 
-				InputStream itemIn = new FileInputStream(tmpFile);
-				try {
-					ItemSerializer.outputItem(getName(), getContentType(), DATABASE_FILE_TYPE,
-						tmpFile.length(), itemIn, outputFile, monitor);
-				}
-				finally {
-					try {
-						itemIn.close();
-					}
-					catch (IOException e) {
-					}
-				}
+                try (InputStream itemIn = new FileInputStream(tmpFile)) {
+                    ItemSerializer.outputItem(getName(), getContentType(), DATABASE_FILE_TYPE,
+                            tmpFile.length(), itemIn, outputFile, monitor);
+                }
 			}
 			finally {
 				tmpBf.close();

@@ -125,43 +125,34 @@ public class SourceCodeLookupPlugin extends ProgramPlugin {
 		while (true) {
 			EclipseConnection connection = service.connectToEclipse(port);
 			Socket clientSocket = connection.getSocket();
-			if (clientSocket == null) {
-				handleUnableToConnect(connection);
-				return;
-			}
-			try (BufferedReader input =
-				new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-					PrintStream output = new PrintStream(clientSocket.getOutputStream())) {
+            try (clientSocket; BufferedReader input =
+                    new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                 PrintStream output = new PrintStream(clientSocket.getOutputStream())) {
+                if (clientSocket == null) {
+                    handleUnableToConnect(connection);
+                    return;
+                }
 
-				output.print(symbolText + "\n");
-				output.flush();
+                output.print(symbolText + "\n");
+                output.flush();
 
-				String reply = input.readLine();
-				Msg.debug(this, reply);
-				tool.setStatusInfo(reply);
+                String reply = input.readLine();
+                Msg.debug(this, reply);
+                tool.setStatusInfo(reply);
 
-				if (symbolText.startsWith("_")) {
-					symbolText = symbolText.substring(1);
-				}
-				else {
-					break;
-				}
-			}
-			catch (IOException e) {
-				// shouldn't happen
-				Msg.showError(this, null, "Unexpected Exception",
-					"Unexpected exception " + "connecting to source lookup editor", e);
-				return;
-			}
-			finally {
-				try {
-					clientSocket.close();
-				}
-				catch (IOException e) {
-					// Nothing to do
-				}
-			}
-		}
+                if (symbolText.startsWith("_")) {
+                    symbolText = symbolText.substring(1);
+                } else {
+                    break;
+                }
+            } catch (IOException e) {
+                // shouldn't happen
+                Msg.showError(this, null, "Unexpected Exception",
+                        "Unexpected exception " + "connecting to source lookup editor", e);
+                return;
+            }
+            // Nothing to do
+        }
 	}
 
 	private String getSymbolText() {

@@ -183,11 +183,9 @@ public class EntryPointAnalyzer extends AbstractAnalyzer {
 
 	private AddressSetView toAddressSet(Set<Address> doLaterSet) {
 		AddressSet set = new AddressSet();
-		Iterator<Address> iterator = doLaterSet.iterator();
-		while (iterator.hasNext()) {
-			Address address = iterator.next();
-			set.add(address);
-		}
+        for (Address address : doLaterSet) {
+            set.add(address);
+        }
 		return set;
 	}
 

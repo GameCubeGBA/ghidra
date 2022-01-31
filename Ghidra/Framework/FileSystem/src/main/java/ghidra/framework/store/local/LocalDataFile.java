@@ -82,24 +82,17 @@ public class LocalDataFile extends LocalFolderItem implements DataFileItem {
 		if (istream != null) {
 			boolean success = false;
 			byte[] buffer = new byte[IO_BUFFER_SIZE];
-			FileOutputStream out = new FileOutputStream(dataFile);
-			try {
-				int cnt = 0;
-				while ((cnt = istream.read(buffer)) >= 0) {
-					out.write(buffer, 0, cnt);
-				}
-				success = true;
-			}
-			finally {
-				try {
-					out.close();
-				}
-				catch (IOException e) {
-				}
-				if (!success) {
-					abortCreate();
-				}
-			}
+            try (FileOutputStream out = new FileOutputStream(dataFile)) {
+                int cnt = 0;
+                while ((cnt = istream.read(buffer)) >= 0) {
+                    out.write(buffer, 0, cnt);
+                }
+                success = true;
+            } finally {
+                if (!success) {
+                    abortCreate();
+                }
+            }
 		}
 		else {
 			if (!dataFile.createNewFile()) {

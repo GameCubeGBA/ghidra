@@ -143,20 +143,18 @@ public class BlockGraph extends PcodeBlock {
 	@Override
 	public void saveXmlBody(Writer writer) throws IOException {
 		super.saveXmlBody(writer);
-		for(int i=0;i<list.size();++i) {
-			PcodeBlock bl = list.get(i);
-			StringBuilder buf = new StringBuilder();
-			buf.append("<bhead");
-			SpecXmlUtils.encodeSignedIntegerAttribute(buf, "index", bl.getIndex());
-			String name = PcodeBlock.typeToName(bl.blocktype);
-			SpecXmlUtils.encodeStringAttribute(buf, "type", name);
-			buf.append("/>\n");
-			writer.write(buf.toString());
-		}
-		for(int i=0;i<list.size();++i) {
-			PcodeBlock bl = list.get(i);
-			bl.saveXml(writer);
-		}
+        for (PcodeBlock bl : list) {
+            StringBuilder buf = new StringBuilder();
+            buf.append("<bhead");
+            SpecXmlUtils.encodeSignedIntegerAttribute(buf, "index", bl.getIndex());
+            String name = PcodeBlock.typeToName(bl.blocktype);
+            SpecXmlUtils.encodeStringAttribute(buf, "type", name);
+            buf.append("/>\n");
+            writer.write(buf.toString());
+        }
+        for (PcodeBlock bl : list) {
+            bl.saveXml(writer);
+        }
 	}
 
 	@Override
@@ -175,11 +173,10 @@ public class BlockGraph extends PcodeBlock {
 			parser.end(el);
 		}
 		newresolver.sortLevelList();
-		for(int i=0;i<tmplist.size();++i) {
-			PcodeBlock bl = tmplist.get(i);
-			bl.restoreXml(parser, newresolver);
-			addBlock(bl);
-		}
+        for (PcodeBlock bl : tmplist) {
+            bl.restoreXml(parser, newresolver);
+            addBlock(bl);
+        }
 	}
 
 	/**

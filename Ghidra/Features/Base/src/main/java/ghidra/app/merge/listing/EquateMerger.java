@@ -319,24 +319,21 @@ class EquateMerger extends AbstractListingMerger {
 		if (list != null) {
 			int len = list.size();
 			// merge each conflict at this address.
-			for (int i = 0; i < len; i++) {
-				EquateConflict equateConflict = list.get(i);
-				// If we have a equate choice then a "Use For All" has already occurred.
-				if (equateChoice != ASK_USER) {
-					merge(equateConflict.address, equateConflict.opIndex, equateConflict.scalar,
-						equateChoice);
-				}
-				else {
-					if (askUser && mergeManager != null) {
-						setupConflictPanel(listingPanel, equateConflict);
-						monitor.checkCanceled();
-					}
-					else {
-						merge(equateConflict.address, equateConflict.opIndex,
-							equateConflict.scalar, chosenConflictOption);
-					}
-				}
-			}
+            for (EquateConflict equateConflict : list) {
+                // If we have a equate choice then a "Use For All" has already occurred.
+                if (equateChoice != ASK_USER) {
+                    merge(equateConflict.address, equateConflict.opIndex, equateConflict.scalar,
+                            equateChoice);
+                } else {
+                    if (askUser && mergeManager != null) {
+                        setupConflictPanel(listingPanel, equateConflict);
+                        monitor.checkCanceled();
+                    } else {
+                        merge(equateConflict.address, equateConflict.opIndex,
+                                equateConflict.scalar, chosenConflictOption);
+                    }
+                }
+            }
 		}
 	}
 

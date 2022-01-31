@@ -258,12 +258,11 @@ public class DecompilerUtils {
 		for (int i = 0; i < fields.length; i++) {
 			ClangTextField f = (ClangTextField) fields[i];
 			List<ClangToken> fieldTokens = f.getTokens();
-			for (int j = 0; j < fieldTokens.size(); j++) {
-				ClangNode fieldToken = fieldTokens.get(j);
-				if (queryTokens.contains(fieldToken)) {
-					return i;
-				}
-			}
+            for (ClangNode fieldToken : fieldTokens) {
+                if (queryTokens.contains(fieldToken)) {
+                    return i;
+                }
+            }
 		}
 		return -1;
 	}

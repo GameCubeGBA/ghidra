@@ -78,10 +78,10 @@ class ParentChildDBAdapterV0 extends ParentChildAdapter {
 	Set<Long> getParentIds(long childID) throws IOException {
 		Field[] ids = table.findRecords(new LongField(childID), CHILD_COL);
 		Set<Long> parentIds = new HashSet<>(ids.length);
-		for (int i = 0; i < ids.length; i++) {
-			DBRecord rec = table.getRecord(ids[i]);
-			parentIds.add(rec.getLongValue(PARENT_COL));
-		}
+        for (Field id : ids) {
+            DBRecord rec = table.getRecord(id);
+            parentIds.add(rec.getLongValue(PARENT_COL));
+        }
 		return parentIds;
 	}
 

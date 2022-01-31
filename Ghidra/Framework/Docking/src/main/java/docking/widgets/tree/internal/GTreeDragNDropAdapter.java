@@ -220,9 +220,9 @@ public class GTreeDragNDropAdapter implements DragSourceListener, DragGestureLis
 			return list;
 		}
 
-		for (int i = 0; i < selectionPaths.length; i++) {
-			list.add((GTreeNode) selectionPaths[i].getLastPathComponent());
-		}
+        for (TreePath selectionPath : selectionPaths) {
+            list.add((GTreeNode) selectionPath.getLastPathComponent());
+        }
 		return list;
 	}
 

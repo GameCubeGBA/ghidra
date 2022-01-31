@@ -258,14 +258,12 @@ public class VTImpliedMatchCorrelatorTest extends AbstractVTCorrelatorTest {
 	protected VTMatch getMatch(VTMatchSet matches, Address sourceAddress,
 			Address destinationAddress) {
 
-		Iterator<VTMatch> it = matches.getMatches().iterator();
-		while (it.hasNext()) {
-			VTMatch match = it.next();
-			if (match.getSourceAddress().equals(sourceAddress) &&
-				match.getDestinationAddress().equals(destinationAddress)) {
-				return match;
-			}
-		}
+        for (VTMatch match : matches.getMatches()) {
+            if (match.getSourceAddress().equals(sourceAddress) &&
+                    match.getDestinationAddress().equals(destinationAddress)) {
+                return match;
+            }
+        }
 		return null;
 	}
 

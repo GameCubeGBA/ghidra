@@ -28,9 +28,9 @@ public final class CommandInterpreterResult {
   public static CommandInterpreterResult swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-    for (int i = 0; i < swigValues.length; i++)
-      if (swigValues[i].swigValue == swigValue)
-        return swigValues[i];
+      for (CommandInterpreterResult value : swigValues)
+          if (value.swigValue == swigValue)
+              return value;
     throw new IllegalArgumentException("No enum " + CommandInterpreterResult.class + " with value " + swigValue);
   }
 

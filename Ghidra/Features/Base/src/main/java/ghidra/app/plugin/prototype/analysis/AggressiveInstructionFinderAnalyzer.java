@@ -229,72 +229,70 @@ public class AggressiveInstructionFinderAnalyzer extends AbstractAnalyzer {
 					// check start, if no other function starts like this, don't do it!
 					Integer startCount = 0;
 					boolean isvalid = false;
-					Iterator<RegisterValue> contextIter = contextSet.iterator();
-					while (contextIter.hasNext()) {
-						disContext = contextIter.next();
-						try {
-							PseudoDisassemblerContext pseudoContext =
-								new PseudoDisassemblerContext(program.getProgramContext());
-							if (disContext != null) {
-								pseudoContext.flowStart(entry);
-								pseudoContext.setRegisterValue(disContext);
-							}
-							SleighDebugLogger ilog = new SleighDebugLogger(
-								new MemoryBufferImpl(program.getMemory(), entry), pseudoContext,
-								program.getLanguage(), SleighDebugMode.MASKS_ONLY);
-							if (ilog.parseFailed()) {
-								continue;
-							}
-							byte[] imask = ilog.getInstructionMask();
-							if (imask.length == 1) {
-								imask[0] = (byte) 0xff;
-							}
-							byte[] ibytes = ilog.getMaskedBytes(imask);
+                    for (RegisterValue registerValue : contextSet) {
+                        disContext = registerValue;
+                        try {
+                            PseudoDisassemblerContext pseudoContext =
+                                    new PseudoDisassemblerContext(program.getProgramContext());
+                            if (disContext != null) {
+                                pseudoContext.flowStart(entry);
+                                pseudoContext.setRegisterValue(disContext);
+                            }
+                            SleighDebugLogger ilog = new SleighDebugLogger(
+                                    new MemoryBufferImpl(program.getMemory(), entry), pseudoContext,
+                                    program.getLanguage(), SleighDebugMode.MASKS_ONLY);
+                            if (ilog.parseFailed()) {
+                                continue;
+                            }
+                            byte[] imask = ilog.getInstructionMask();
+                            if (imask.length == 1) {
+                                imask[0] = (byte) 0xff;
+                            }
+                            byte[] ibytes = ilog.getMaskedBytes(imask);
 
-							Address nextEntryAddr = entry.add(ibytes.length);
-							ilog = new SleighDebugLogger(
-								new MemoryBufferImpl(program.getMemory(), nextEntryAddr),
-								pseudoContext, program.getLanguage(), SleighDebugMode.MASKS_ONLY);
+                            Address nextEntryAddr = entry.add(ibytes.length);
+                            ilog = new SleighDebugLogger(
+                                    new MemoryBufferImpl(program.getMemory(), nextEntryAddr),
+                                    pseudoContext, program.getLanguage(), SleighDebugMode.MASKS_ONLY);
 
-							byte[] imask2 = ilog.getInstructionMask();
-							if (imask2.length == 1) {
-								imask2[0] = (byte) 0xff;
-							}
-							byte[] ibytes2 = ilog.getMaskedBytes(imask2);
-							byte[] ibytes1 = ibytes;
-							ibytes = new byte[ibytes1.length + ibytes2.length];
-							System.arraycopy(ibytes1, 0, ibytes, 0, ibytes1.length);
-							System.arraycopy(ibytes2, 0, ibytes, ibytes1.length, ibytes2.length);
+                            byte[] imask2 = ilog.getInstructionMask();
+                            if (imask2.length == 1) {
+                                imask2[0] = (byte) 0xff;
+                            }
+                            byte[] ibytes2 = ilog.getMaskedBytes(imask2);
+                            byte[] ibytes1 = ibytes;
+                            ibytes = new byte[ibytes1.length + ibytes2.length];
+                            System.arraycopy(ibytes1, 0, ibytes, 0, ibytes1.length);
+                            System.arraycopy(ibytes2, 0, ibytes, ibytes1.length, ibytes2.length);
 
-							BigInteger bi = new BigInteger(ibytes);
-							startCount = funcStartMap.get(bi);
-							if (startCount == null) {
-								continue;
-							}
-							if (startCount < 4) {
-								continue;
-							}
-							RegisterValue possibleDisContext = funcStartContext.get(bi);
-							if (!possibleDisContext.equals(disContext)) {
-								continue;
-							}
-						}
-						catch (IllegalStateException exc) {
-							continue;
-						}
+                            BigInteger bi = new BigInteger(ibytes);
+                            startCount = funcStartMap.get(bi);
+                            if (startCount == null) {
+                                continue;
+                            }
+                            if (startCount < 4) {
+                                continue;
+                            }
+                            RegisterValue possibleDisContext = funcStartContext.get(bi);
+                            if (!possibleDisContext.equals(disContext)) {
+                                continue;
+                            }
+                        } catch (IllegalStateException exc) {
+                            continue;
+                        }
 
-						PseudoDisassemblerContext pseudoContext =
-							new PseudoDisassemblerContext(program.getProgramContext());
-						if (disContext != null) {
-							pseudoContext.setValue(disContext.getRegister(), entry,
-								disContext.getUnsignedValueIgnoreMask());
-						}
-						isvalid = pseudo.checkValidSubroutine(entry, pseudoContext, true, false);
-						//isvalid = pseudo.isValidSubroutine(entry);
-						if (isvalid) {
-							break;
-						}
-					}
+                        PseudoDisassemblerContext pseudoContext =
+                                new PseudoDisassemblerContext(program.getProgramContext());
+                        if (disContext != null) {
+                            pseudoContext.setValue(disContext.getRegister(), entry,
+                                    disContext.getUnsignedValueIgnoreMask());
+                        }
+                        isvalid = pseudo.checkValidSubroutine(entry, pseudoContext, true, false);
+                        //isvalid = pseudo.isValidSubroutine(entry);
+                        if (isvalid) {
+                            break;
+                        }
+                    }
 					if (isvalid == false) {
 						continue;
 					}

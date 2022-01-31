@@ -216,16 +216,14 @@ public class PropertyListMergeManager implements MergeResolver {
 		List<String> myNameList = myList.getOptionNames();
 		List<String> resultNameList = resultList.getOptionNames();
 
-		for (int i = 0; i < myNameList.size(); i++) {
-			String name = myNameList.get(i);
-			if (resultNameList.contains(name)) {
-				updateValue(myList, resultList, origList, name);
-			}
-			else {
-				// not in the result
-				checkForAddedProperty(myList, resultList, origList, name);
-			}
-		}
+        for (String name : myNameList) {
+            if (resultNameList.contains(name)) {
+                updateValue(myList, resultList, origList, name);
+            } else {
+                // not in the result
+                checkForAddedProperty(myList, resultList, origList, name);
+            }
+        }
 		checkDeletedProperties(resultList, origList, myNameList, resultNameList,
 			origList.getOptionNames());
 	}
@@ -240,12 +238,11 @@ public class PropertyListMergeManager implements MergeResolver {
 	private void checkDeletedProperties(Options latestList, Options origList, List<String> myNames,
 			List<String> latestNames, List<String> origNames) {
 
-		for (int i = 0; i < latestNames.size(); i++) {
-			String propertyName = latestNames.get(i);
-			if (!myNames.contains(propertyName) && origNames.contains(propertyName)) {
-				try {
-					Object latestValue = getValue(latestList, propertyName);
-					Object origValue = getValue(origList, propertyName);
+        for (String propertyName : latestNames) {
+            if (!myNames.contains(propertyName) && origNames.contains(propertyName)) {
+                try {
+                    Object latestValue = getValue(latestList, propertyName);
+                    Object origValue = getValue(origList, propertyName);
 
 					if (latestValue.equals(origValue)) {
 						latestList.removeOption(propertyName);
@@ -411,47 +408,45 @@ public class PropertyListMergeManager implements MergeResolver {
 		for (int i = 0; i < conflictList.size(); i++) {
 			currentMonitor.setProgress(i);
 
-			ConflictInfo info = conflictList.get(i);
+            ConflictInfo info = conflictList.get(i);
 
-			++currentConflict;
-			if (propertyListChoice != ASK_USER) {
-				conflictOption = propertyListChoice;
-			}
-			else if (mergeManager != null && conflictOption == ASK_USER) {
-				showMergePanel(info, currentConflict, totalConflictCount);
-				// block until the user resolves the conflict or cancels the 
-				// process 
-			}
+            ++currentConflict;
+            if (propertyListChoice != ASK_USER) {
+                conflictOption = propertyListChoice;
+            } else if (mergeManager != null && conflictOption == ASK_USER) {
+                showMergePanel(info, currentConflict, totalConflictCount);
+                // block until the user resolves the conflict or cancels the
+                // process
+            }
 
-			switch (conflictOption) {
-				case LATEST_VERSION:
-					break;// no action required
+            switch (conflictOption) {
+                case LATEST_VERSION:
+                    break;// no action required
 
-				case MY_VERSION:
-				case ORIGINAL_VERSION:
-					Options options = resultProgram.getOptions(info.getListName());
-					options.removeOption(info.getPropertyName());
-					if (conflictOption == MY_VERSION) {
-						Object myValue = info.getMyValue();
-						if (myValue != null) {
-							setValue(options, info.getPropertyName(), info.getMyType(),
-								info.getMyValue());
-						}
-					}
-					else {
-						Object origValue = info.getOrigValue();
-						if (origValue != null) {
-							setValue(options, info.getPropertyName(), info.getOrigType(),
-								info.getOrigValue());
-						}
-					}
-					break;
+                case MY_VERSION:
+                case ORIGINAL_VERSION:
+                    Options options = resultProgram.getOptions(info.getListName());
+                    options.removeOption(info.getPropertyName());
+                    if (conflictOption == MY_VERSION) {
+                        Object myValue = info.getMyValue();
+                        if (myValue != null) {
+                            setValue(options, info.getPropertyName(), info.getMyType(),
+                                    info.getMyValue());
+                        }
+                    } else {
+                        Object origValue = info.getOrigValue();
+                        if (origValue != null) {
+                            setValue(options, info.getPropertyName(), info.getOrigType(),
+                                    info.getOrigValue());
+                        }
+                    }
+                    break;
 
-				case CANCELED:
-					throw new CancelledException();
-			}
-			conflictOption = ASK_USER;
-		}
+                case CANCELED:
+                    throw new CancelledException();
+            }
+            conflictOption = ASK_USER;
+        }
 	}
 
 	private void showMergePanel(final ConflictInfo info, final int conflictIndex,

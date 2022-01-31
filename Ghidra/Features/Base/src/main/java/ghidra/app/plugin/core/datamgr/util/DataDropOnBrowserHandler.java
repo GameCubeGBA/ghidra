@@ -62,13 +62,13 @@ public class DataDropOnBrowserHandler implements ProgramDropProvider {
 
 		if (contextObj != null  &&  contextObj instanceof ListingActionContext) {
 			ListingActionContext pl = (ListingActionContext)contextObj;
-			DataService[] services = plugin.getTool().getServices(DataService.class); 
-			for (int i=0; i<services.length; i++) {
-				if (services[i].isCreateDataAllowed(pl)) {
-					curService = services[i];
-					return true;
-				}
-			}
+			DataService[] services = plugin.getTool().getServices(DataService.class);
+            for (DataService service : services) {
+                if (service.isCreateDataAllowed(pl)) {
+                    curService = service;
+                    return true;
+                }
+            }
 		}
 		
 		return false;

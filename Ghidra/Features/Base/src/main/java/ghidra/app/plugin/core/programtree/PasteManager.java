@@ -138,25 +138,23 @@ class PasteManager {
 				return;
 			}
 
-			for (int i = 0; i < list.size(); i++) {
-				ProgramNode tnode = list.get(i);
+            for (ProgramNode tnode : list) {
+                if (destNode.getRoot() != tnode.getRoot()) {
+                    lastGroupPasted = null;
+                    break;
+                }
 
-				if (destNode.getRoot() != tnode.getRoot()) {
-					lastGroupPasted = null;
-					break;
-				}
-
-				if (!destNode.getName().equals(tnode.getName())) {
-					if (pasteGroup(destNode, tnode)) {
-						if (!(destNode.isFragment() && tnode.isModule())) {
-							// this was not a "flatten module" operation
-							// so we can leave the busy cursor set
-							// until the domain object event comes in
-							lastGroupPasted = tnode.getName();
-						}
-					}
-				}
-			}
+                if (!destNode.getName().equals(tnode.getName())) {
+                    if (pasteGroup(destNode, tnode)) {
+                        if (!(destNode.isFragment() && tnode.isModule())) {
+                            // this was not a "flatten module" operation
+                            // so we can leave the busy cursor set
+                            // until the domain object event comes in
+                            lastGroupPasted = tnode.getName();
+                        }
+                    }
+                }
+            }
 
 			if (lastGroupPasted == null) {
 				tree.setBusyCursor(false);

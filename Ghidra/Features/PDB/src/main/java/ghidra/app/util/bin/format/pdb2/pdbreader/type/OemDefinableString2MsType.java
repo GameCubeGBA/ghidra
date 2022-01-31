@@ -60,7 +60,7 @@ public class OemDefinableString2MsType extends AbstractMsType {
 
 	@Override
 	public void emit(StringBuilder builder, Bind bind) {
-		builder.append(String.format("OEM Definable String 2\n"));
+		builder.append("OEM Definable String 2\n");
 		builder.append(String.format("  GUID: %s\n", guid.toString()));
 		builder.append(String.format("  count: %d\n", recordNumbers.size()));
 		for (int i = 0; i < recordNumbers.size(); i++) {

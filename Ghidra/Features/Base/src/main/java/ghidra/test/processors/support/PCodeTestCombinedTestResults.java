@@ -64,30 +64,26 @@ public class PCodeTestCombinedTestResults {
 	private void restoreFromXml() throws IOException {
 
 		FileInputStream istream = new FileInputStream(xmlFile);
-		BufferedInputStream bis = new BufferedInputStream(istream);
-		try {
-			SAXBuilder sax = XmlUtilities.createSecureSAXBuilder(false, false);
-			Document doc = sax.build(bis);
-			Element root = doc.getRootElement();
+        try (istream) {
+            BufferedInputStream bis = new BufferedInputStream(istream);
+            SAXBuilder sax = XmlUtilities.createSecureSAXBuilder(false, false);
+            Document doc = sax.build(bis);
+            Element root = doc.getRootElement();
 
-			if (!"PCODE_TESTS".equals(root.getName()) ||
-				!XML_VERSION.equals(root.getAttributeValue("VERSION"))) {
-				return;
-			}
+            if (!"PCODE_TESTS".equals(root.getName()) ||
+                    !XML_VERSION.equals(root.getAttributeValue("VERSION"))) {
+                return;
+            }
 
-			@SuppressWarnings("unchecked")
-			List<Element> elementList = root.getChildren(PCodeTestResults.TAG_NAME);
-			for (Element element : elementList) {
-				PCodeTestResults testResults = new PCodeTestResults(element);
-				combinedResults.put(testResults.getJUnitName(), testResults);
-			}
-		}
-		catch (org.jdom.JDOMException je) {
-			throw new IOException("Invalid P-Code test results xml file: " + xmlFile, je);
-		}
-		finally {
-			istream.close();
-		}
+            @SuppressWarnings("unchecked")
+            List<Element> elementList = root.getChildren(PCodeTestResults.TAG_NAME);
+            for (Element element : elementList) {
+                PCodeTestResults testResults = new PCodeTestResults(element);
+                combinedResults.put(testResults.getJUnitName(), testResults);
+            }
+        } catch (org.jdom.JDOMException je) {
+            throw new IOException("Invalid P-Code test results xml file: " + xmlFile, je);
+        }
 
 	}
 
@@ -110,16 +106,12 @@ public class PCodeTestCombinedTestResults {
 		File tmpFile = new File(xmlFile.getParentFile(), xmlFile.getName() + ".new");
 		tmpFile.delete();
 		FileOutputStream ostream = new FileOutputStream(tmpFile);
-		BufferedOutputStream bos = new BufferedOutputStream(ostream);
 
-		try {
-			Document doc = new Document(root);
-			XMLOutputter xmlout = new GenericXMLOutputter();
-			xmlout.output(doc, bos);
-		}
-		finally {
-			bos.close();
-		}
+        try (BufferedOutputStream bos = new BufferedOutputStream(ostream)) {
+            Document doc = new Document(root);
+            XMLOutputter xmlout = new GenericXMLOutputter();
+            xmlout.output(doc, bos);
+        }
 
 		// Rename files
 		File oldFile = null;

@@ -122,13 +122,12 @@ public class DataTypesXmlMgr {
 			dtParser = null;
 		}
 
-		Iterator<XmlTreeNode> it = todo.iterator();
-		while (it.hasNext()) {
-			if (monitor.isCancelled()) {
-				throw new CancelledException();
-			}
-			logError(it.next());
-		}
+        for (XmlTreeNode xmlTreeNode : todo) {
+            if (monitor.isCancelled()) {
+                throw new CancelledException();
+            }
+            logError(xmlTreeNode);
+        }
 	}
 
 	private void logError(XmlTreeNode node) {

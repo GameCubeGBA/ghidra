@@ -170,30 +170,28 @@ class DomainObjectDBTransaction implements Transaction {
 
 	private void restoreToolStatesAfterUndo(DomainObject object) {
 		List<Object> consumers = object.getConsumerList();
-		for (int i = 0; i < consumers.size(); i++) {
-			Object obj = consumers.get(i);
-			if (obj instanceof PluginTool) {
-				PluginTool tool = (PluginTool) obj;
-				ToolState toolState = toolStates.get(tool);
-				if (toolState != null) {
-					toolState.restoreAfterUndo(object);
-				}
-			}
-		}
+        for (Object obj : consumers) {
+            if (obj instanceof PluginTool) {
+                PluginTool tool = (PluginTool) obj;
+                ToolState toolState = toolStates.get(tool);
+                if (toolState != null) {
+                    toolState.restoreAfterUndo(object);
+                }
+            }
+        }
 	}
 
 	private void restoreToolStatesAfterRedo(DomainObject object) {
 		List<Object> consumers = object.getConsumerList();
-		for (int i = 0; i < consumers.size(); i++) {
-			Object obj = consumers.get(i);
-			if (obj instanceof PluginTool) {
-				PluginTool tool = (PluginTool) obj;
-				ToolState toolState = toolStates.get(tool);
-				if (toolState != null) {
-					toolState.restoreAfterRedo(object);
-				}
-			}
-		}
+        for (Object obj : consumers) {
+            if (obj instanceof PluginTool) {
+                PluginTool tool = (PluginTool) obj;
+                ToolState toolState = toolStates.get(tool);
+                if (toolState != null) {
+                    toolState.restoreAfterRedo(object);
+                }
+            }
+        }
 	}
 
 	/* (non-Javadoc)
@@ -221,13 +219,11 @@ class DomainObjectDBTransaction implements Transaction {
 	@Override
 	public ArrayList<String> getOpenSubTransactions() {
 		ArrayList<String> subTxList = new ArrayList<String>();
-		Iterator<TransactionEntry> iter = list.iterator();
-		while (iter.hasNext()) {
-			TransactionEntry entry = iter.next();
-			if (entry.status == NOT_DONE) {
-				subTxList.add(entry.description);
-			}
-		}
+        for (TransactionEntry entry : list) {
+            if (entry.status == NOT_DONE) {
+                subTxList.add(entry.description);
+            }
+        }
 		return subTxList;
 	}
 
@@ -243,16 +239,15 @@ class DomainObjectDBTransaction implements Transaction {
 
 	void initAfterState(DomainObject object) {
 		List<Object> consumers = object.getConsumerList();
-		for (int i = 0; i < consumers.size(); i++) {
-			Object obj = consumers.get(i);
-			if (obj instanceof PluginTool) {
-				PluginTool tool = (PluginTool) obj;
-				ToolState toolState = toolStates.get(tool);
-				if (toolState != null) {
-					toolState.getAfterState(object);
-				}
-			}
-		}
+        for (Object obj : consumers) {
+            if (obj instanceof PluginTool) {
+                PluginTool tool = (PluginTool) obj;
+                ToolState toolState = toolStates.get(tool);
+                if (toolState != null) {
+                    toolState.getAfterState(object);
+                }
+            }
+        }
 	}
 
 	void abort() {

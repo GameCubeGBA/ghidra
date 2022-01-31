@@ -106,11 +106,10 @@ public class SampleGraphPluginDependencyLayout
 			int columnCount = rowVertices.size();
 			int col = ((longestRow - columnCount) / 2); // center column
 
-			for (int j = 0; j < columnCount; j++) {
-				SampleVertex v = rowVertices.get(j);
-				int reverseRow = rows - i - 1; // -1 for 0-based
-				results.set(v, reverseRow, col++);
-			}
+            for (SampleVertex v : rowVertices) {
+                int reverseRow = rows - i - 1; // -1 for 0-based
+                results.set(v, reverseRow, col++);
+            }
 		}
 
 		//
@@ -124,20 +123,19 @@ public class SampleGraphPluginDependencyLayout
 		int start = indent / 2;
 		int col = start;
 		int currentRow = rows + 4; // +4 to create space between these and those above
-		for (int i = 0; i < lastRow.size(); i++) {
+        for (SampleVertex v : lastRow) {
 
-			SampleVertex v = lastRow.get(i);
-			results.set(v, currentRow, col);
+            results.set(v, currentRow, col);
 
-			col++;
+            col++;
 
-			// reset for the 
-			if ((col - start) == limit) {
-				// reset for next row
-				col = start;
-				currentRow++;
-			}
-		}
+            // reset for the
+            if ((col - start) == limit) {
+                // reset for next row
+                col = start;
+                currentRow++;
+            }
+        }
 
 		return results;
 	}

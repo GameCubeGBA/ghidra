@@ -152,25 +152,22 @@ public class RegisterValueStore {
 		while (rangeIt.hasNext()) {
 			list.add(rangeIt.next());
 		}
-		Iterator<AddressRange> it = list.iterator();
-		while (it.hasNext()) {
-			AddressRange indexRange = it.next();
-			Address rangeStart = indexRange.getMinAddress();
-			Address rangeEnd = indexRange.getMaxAddress();
-			if (rangeStart.compareTo(start) > 0) {
-				rangeMap.set(start, rangeStart.previous(), newValue.toBytes());
-			}
-			byte[] currentBytes = rangeMap.getValue(rangeStart);
-			RegisterValue currentValue = new RegisterValue(baseRegister, currentBytes);
-			RegisterValue combinedValue = currentValue.combineValues(newValue);
-			rangeMap.set(rangeStart, rangeEnd, combinedValue.toBytes());
-			try {
-				start = rangeEnd.addNoWrap(1);
-			}
-			catch (AddressOverflowException e) {
-				return;
-			}
-		}
+        for (AddressRange indexRange : list) {
+            Address rangeStart = indexRange.getMinAddress();
+            Address rangeEnd = indexRange.getMaxAddress();
+            if (rangeStart.compareTo(start) > 0) {
+                rangeMap.set(start, rangeStart.previous(), newValue.toBytes());
+            }
+            byte[] currentBytes = rangeMap.getValue(rangeStart);
+            RegisterValue currentValue = new RegisterValue(baseRegister, currentBytes);
+            RegisterValue combinedValue = currentValue.combineValues(newValue);
+            rangeMap.set(rangeStart, rangeEnd, combinedValue.toBytes());
+            try {
+                start = rangeEnd.addNoWrap(1);
+            } catch (AddressOverflowException e) {
+                return;
+            }
+        }
 		if (start != null && start.compareTo(end) <= 0) {
 			rangeMap.set(start, end, newValue.toBytes());
 		}
@@ -208,26 +205,23 @@ public class RegisterValueStore {
 		while (rangeIt.hasNext()) {
 			list.add(rangeIt.next());
 		}
-		Iterator<AddressRange> it = list.iterator();
-		while (it.hasNext()) {
-			AddressRange indexRange = it.next();
-			Address rangeStart = indexRange.getMinAddress();
-			Address rangeEnd = indexRange.getMaxAddress();
+        for (AddressRange indexRange : list) {
+            Address rangeStart = indexRange.getMinAddress();
+            Address rangeEnd = indexRange.getMaxAddress();
 
-			byte[] mask = register.getBaseMask();
+            byte[] mask = register.getBaseMask();
 
-			RegisterValue currentBaseValue =
-				new RegisterValue(register.getBaseRegister(), rangeMap.getValue(rangeStart));
-			RegisterValue newBaseValue = currentBaseValue.clearBitValues(mask);
+            RegisterValue currentBaseValue =
+                    new RegisterValue(register.getBaseRegister(), rangeMap.getValue(rangeStart));
+            RegisterValue newBaseValue = currentBaseValue.clearBitValues(mask);
 
-			if (!newBaseValue.hasAnyValue()) {
-				rangeMap.clearRange(rangeStart, rangeEnd);
-			}
-			else {
-				rangeMap.set(rangeStart, rangeEnd, newBaseValue.toBytes());
-			}
-			start = rangeEnd.next();
-		}
+            if (!newBaseValue.hasAnyValue()) {
+                rangeMap.clearRange(rangeStart, rangeEnd);
+            } else {
+                rangeMap.set(rangeStart, rangeEnd, newBaseValue.toBytes());
+            }
+            start = rangeEnd.next();
+        }
 	}
 
 	/**

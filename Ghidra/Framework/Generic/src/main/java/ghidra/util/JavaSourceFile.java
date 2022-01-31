@@ -42,29 +42,20 @@ public class JavaSourceFile {
 	}
 
 	private void loadFile() {
-		BufferedReader reader = null;
-		try {
-			reader = new BufferedReader(new FileReader(filename));
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
 
-			String newline = System.getProperty("line.separator");
-			int lineNumber = 0;
-			String line = null;
-			while ((line = reader.readLine()) != null) {
-				linesList.add(new JavaSourceLine(line + newline, ++lineNumber));
-			}
+            String newline = System.getProperty("line.separator");
+            int lineNumber = 0;
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                linesList.add(new JavaSourceLine(line + newline, ++lineNumber));
+            }
 
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			if (reader != null) {
-				try {
-					reader.close();
-				}
-				catch (IOException e) { // we tried 					
-				}
-			}
-		}
-	}
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // we tried
+    }
 
 	public boolean hasChanges() {
 		return initialLineCount != linesList.size() || hasLineChanges();
@@ -346,25 +337,13 @@ public class JavaSourceFile {
 			return;
 		}
 
-		FileWriter fileWriter = null;
-		try {
-			fileWriter = new FileWriter(filename);
-			doWrite(new PrintWriter(fileWriter));
+        try (FileWriter fileWriter = new FileWriter(filename)) {
+            doWrite(new PrintWriter(fileWriter));
 
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-		finally {
-			if (fileWriter != null) {
-				try {
-					fileWriter.close();
-				}
-				catch (IOException e) {
-					// we tried
-				}
-			}
-		}
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // we tried
 
 //		doWrite( new PrintWriter( System.err ) );
 

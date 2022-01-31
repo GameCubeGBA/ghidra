@@ -255,33 +255,28 @@ class HistoryManager {
 		curVersion = 0;
 
 		File historyFile = getHistoryFile();
-		BufferedReader in = new BufferedReader(new FileReader(historyFile));
-		try {
-			String line = in.readLine();
-			while (line != null) {
-				Version ver;
-				try {
-					ver = decodeVersion(line);
-				}
-				catch (Exception e) {
-					throw new IOException("Bad history file: " + historyFile);
-				}
-				int version = ver.getVersion();
-				if (curVersion != 0 && version != (curVersion + 1)) {
-					// Versions must be in sequential order
-					throw new IOException("Bad history file" + historyFile);
-				}
-				if (minVersion == 0) {
-					minVersion = version;
-				}
-				curVersion = version;
-				list.add(ver);
-				line = in.readLine();
-			}
-		}
-		finally {
-			in.close();
-		}
+        try (BufferedReader in = new BufferedReader(new FileReader(historyFile))) {
+            String line = in.readLine();
+            while (line != null) {
+                Version ver;
+                try {
+                    ver = decodeVersion(line);
+                } catch (Exception e) {
+                    throw new IOException("Bad history file: " + historyFile);
+                }
+                int version = ver.getVersion();
+                if (curVersion != 0 && version != (curVersion + 1)) {
+                    // Versions must be in sequential order
+                    throw new IOException("Bad history file" + historyFile);
+                }
+                if (minVersion == 0) {
+                    minVersion = version;
+                }
+                curVersion = version;
+                list.add(ver);
+                line = in.readLine();
+            }
+        }
 
 		versions = new Version[list.size()];
 		list.toArray(versions);
@@ -298,10 +293,10 @@ class HistoryManager {
 			tmpFile.delete();
 
 			BufferedWriter out = new BufferedWriter(new FileWriter(tmpFile));
-			for (int i = 0; i < versions.length; i++) {
-				out.write(encodeVersion(versions[i]));
-				out.newLine();
-			}
+            for (Version version : versions) {
+                out.write(encodeVersion(version));
+                out.newLine();
+            }
 			out.close();
 
 			// Rename files

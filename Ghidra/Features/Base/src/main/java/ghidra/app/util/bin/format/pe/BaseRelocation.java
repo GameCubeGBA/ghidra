@@ -184,11 +184,11 @@ public class BaseRelocation implements StructConverter, ByteArrayConverter {
 		pos += BinaryReader.SIZEOF_INT;
 		dc.getBytes(sizeOfBlock, bytes, pos);
 		pos += BinaryReader.SIZEOF_INT;
-		for (int i = 0; i < typeOffsetList.size(); i++) {
-			short typeOffset = typeOffsetList.get(i).typeOffset;
-			dc.getBytes(typeOffset, bytes, pos);
-			pos += BinaryReader.SIZEOF_SHORT;
-		}
+        for (TypeOffset offset : typeOffsetList) {
+            short typeOffset = offset.typeOffset;
+            dc.getBytes(typeOffset, bytes, pos);
+            pos += BinaryReader.SIZEOF_SHORT;
+        }
 		return bytes;
 	}
 

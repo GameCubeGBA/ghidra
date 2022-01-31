@@ -147,11 +147,9 @@ class RootNode extends WindowNode {
 	void setToolName(String toolName) {
 		this.toolName = toolName;
 		windowWrapper.setTitle(toolName);
-		Iterator<DetachedWindowNode> it = detachedWindows.iterator();
-		while (it.hasNext()) {
-			DetachedWindowNode windowNode = it.next();
-			windowNode.updateTitle();
-		}
+        for (DetachedWindowNode windowNode : detachedWindows) {
+            windowNode.updateTitle();
+        }
 
 	}
 
@@ -183,11 +181,9 @@ class RootNode extends WindowNode {
 	void setIcon(ImageIcon icon) {
 		Image iconImage = icon.getImage();
 		setFrameIcon(windowWrapper.getParentFrame(), iconImage);
-		Iterator<DetachedWindowNode> it = detachedWindows.iterator();
-		while (it.hasNext()) {
-			DetachedWindowNode windowNode = it.next();
-			windowNode.setIcon(iconImage);
-		}
+        for (DetachedWindowNode windowNode : detachedWindows) {
+            windowNode.setIcon(iconImage);
+        }
 	}
 
 	/**
@@ -200,11 +196,9 @@ class RootNode extends WindowNode {
 		mainWindow.setVisible(state);
 		WindowUtilities.ensureOnScreen(mainWindow);
 
-		Iterator<DetachedWindowNode> it = detachedWindows.iterator();
-		while (it.hasNext()) {
-			DetachedWindowNode windowNode = it.next();
-			windowNode.setVisible(state);
-		}
+        for (DetachedWindowNode windowNode : detachedWindows) {
+            windowNode.setVisible(state);
+        }
 	}
 
 	void add(ComponentPlaceholder info) {
@@ -301,13 +295,11 @@ class RootNode extends WindowNode {
 		if (child != null && child.contains(info)) {
 			return windowWrapper.getWindow();
 		}
-		Iterator<DetachedWindowNode> iter = detachedWindows.iterator();
-		while (iter.hasNext()) {
-			DetachedWindowNode winNode = iter.next();
-			if (winNode.contains(info)) {
-				return winNode.getWindow();
-			}
-		}
+        for (DetachedWindowNode winNode : detachedWindows) {
+            if (winNode.contains(info)) {
+                return winNode.getWindow();
+            }
+        }
 		return null;
 	}
 
@@ -318,11 +310,9 @@ class RootNode extends WindowNode {
 		if (invalid) {
 			clearContextTypes();
 			updateChild();
-			Iterator<DetachedWindowNode> it = detachedWindows.iterator();
-			while (it.hasNext()) {
-				DetachedWindowNode windowNode = it.next();
-				windowNode.update();
-			}
+            for (DetachedWindowNode windowNode : detachedWindows) {
+                windowNode.update();
+            }
 			invalid = false;
 		}
 
@@ -331,11 +321,9 @@ class RootNode extends WindowNode {
 	}
 
 	void updateDialogs() {
-		Iterator<DetachedWindowNode> it = detachedWindows.iterator();
-		while (it.hasNext()) {
-			DetachedWindowNode windowNode = it.next();
-			windowNode.updateDialog();
-		}
+        for (DetachedWindowNode windowNode : detachedWindows) {
+            windowNode.updateDialog();
+        }
 	}
 
 	@Override
@@ -442,11 +430,9 @@ class RootNode extends WindowNode {
 		if (child != null) {
 			root.addContent(child.saveToXML());
 		}
-		Iterator<DetachedWindowNode> it = detachedWindows.iterator();
-		while (it.hasNext()) {
-			DetachedWindowNode windowNode = it.next();
-			root.addContent(windowNode.saveToXML());
-		}
+        for (DetachedWindowNode windowNode : detachedWindows) {
+            root.addContent(windowNode.saveToXML());
+        }
 		return root;
 	}
 
@@ -476,21 +462,19 @@ class RootNode extends WindowNode {
 		frame.setBounds(bounds);
 
 		List<ComponentPlaceholder> restoredPlaceholders = new ArrayList<>();
-		Iterator<?> elementIterator = rootNodeElement.getChildren().iterator();
-		while (elementIterator.hasNext()) {
-			Element elem = (Element) elementIterator.next();
+        for (Object o : rootNodeElement.getChildren()) {
+            Element elem = (Element) o;
 
-			if (elem.getName().equals("WINDOW_NODE")) {
-				Node node = new DetachedWindowNode(elem, winMgr, this, dropTargetFactory,
-					restoredPlaceholders);
-				DetachedWindowNode windowNode = (DetachedWindowNode) node;
-				detachedWindows.add(windowNode);
-				notifyWindowAdded(windowNode);
-			}
-			else {
-				child = processChildElement(elem, winMgr, this, restoredPlaceholders);
-			}
-		}
+            if (elem.getName().equals("WINDOW_NODE")) {
+                Node node = new DetachedWindowNode(elem, winMgr, this, dropTargetFactory,
+                        restoredPlaceholders);
+                DetachedWindowNode windowNode = (DetachedWindowNode) node;
+                detachedWindows.add(windowNode);
+                notifyWindowAdded(windowNode);
+            } else {
+                child = processChildElement(elem, winMgr, this, restoredPlaceholders);
+            }
+        }
 
 		return restoredPlaceholders;
 	}
@@ -521,12 +505,10 @@ class RootNode extends WindowNode {
 			rootDropTargetHandler.dispose();
 		}
 
-		Iterator<DetachedWindowNode> it = detachedWindows.iterator();
-		while (it.hasNext()) {
-			DetachedWindowNode windowNode = it.next();
-			notifyWindowRemoved(windowNode);
-			windowNode.dispose();
-		}
+        for (DetachedWindowNode windowNode : detachedWindows) {
+            notifyWindowRemoved(windowNode);
+            windowNode.dispose();
+        }
 		detachedWindows.clear();
 
 		windowWrapper.dispose();
@@ -537,13 +519,11 @@ class RootNode extends WindowNode {
 		if (child != null && child.contains(info)) {
 			return true;
 		}
-		Iterator<DetachedWindowNode> iter = detachedWindows.iterator();
-		while (iter.hasNext()) {
-			DetachedWindowNode winNode = iter.next();
-			if (winNode.contains(info)) {
-				return true;
-			}
-		}
+        for (DetachedWindowNode winNode : detachedWindows) {
+            if (winNode.contains(info)) {
+                return true;
+            }
+        }
 		return false;
 	}
 
@@ -572,11 +552,9 @@ class RootNode extends WindowNode {
 
 		statusBar.clearStatusMessages();
 
-		Iterator<DetachedWindowNode> iter = detachedWindows.iterator();
-		while (iter.hasNext()) {
-			DetachedWindowNode winNode = iter.next();
-			winNode.clearStatusMessages();
-		}
+        for (DetachedWindowNode winNode : detachedWindows) {
+            winNode.clearStatusMessages();
+        }
 	}
 
 	public void setStatusText(String text) {
@@ -586,11 +564,9 @@ class RootNode extends WindowNode {
 
 		statusBar.setStatusText(text);
 
-		Iterator<DetachedWindowNode> iter = detachedWindows.iterator();
-		while (iter.hasNext()) {
-			DetachedWindowNode winNode = iter.next();
-			winNode.setStatusText(text);
-		}
+        for (DetachedWindowNode winNode : detachedWindows) {
+            winNode.setStatusText(text);
+        }
 	}
 
 	public String getStatusText() {

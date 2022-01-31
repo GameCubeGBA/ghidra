@@ -49,27 +49,25 @@ public class ClassFinder {
 
 		Set<String> pathSet = new LinkedHashSet<>(searchPaths);
 
-		Iterator<String> pathIterator = pathSet.iterator();
-		while (pathIterator.hasNext()) {
-			monitor.checkCanceled();
-			String path = pathIterator.next();
-			String lcPath = path.toLowerCase();
-			File file = new File(path);
-			if ((lcPath.endsWith(".jar") || lcPath.endsWith(".zip")) && file.exists()) {
+        for (String s : pathSet) {
+            monitor.checkCanceled();
+            String path = s;
+            String lcPath = path.toLowerCase();
+            File file = new File(path);
+            if ((lcPath.endsWith(".jar") || lcPath.endsWith(".zip")) && file.exists()) {
 
-				if (ClassJar.ignoreJar(lcPath)) {
-					log.trace("Ignoring jar file: {}", path);
-					continue;
-				}
+                if (ClassJar.ignoreJar(lcPath)) {
+                    log.trace("Ignoring jar file: {}", path);
+                    continue;
+                }
 
-				log.trace("Searching jar file: {}", path);
-				classJars.add(new ClassJar(path, monitor));
-			}
-			else if (file.isDirectory()) {
-				log.trace("Searching classpath directory: {}", path);
-				classDirs.add(new ClassDir(path, monitor));
-			}
-		}
+                log.trace("Searching jar file: {}", path);
+                classJars.add(new ClassJar(path, monitor));
+            } else if (file.isDirectory()) {
+                log.trace("Searching classpath directory: {}", path);
+                classDirs.add(new ClassDir(path, monitor));
+            }
+        }
 	}
 
 	List<Class<?>> getClasses(TaskMonitor monitor) throws CancelledException {

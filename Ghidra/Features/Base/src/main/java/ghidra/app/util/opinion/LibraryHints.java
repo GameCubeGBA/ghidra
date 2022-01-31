@@ -139,40 +139,26 @@ class LibraryHints {
 
 	private void readLibraryHints(ResourceFile hintsFile) {
 
-		InputStream is = null;
-		try {
-			is = new BufferedInputStream(hintsFile.getInputStream());
-			SAXBuilder sax = XmlUtilities.createSecureSAXBuilder(false, false);
-			Document document = sax.build(is);
-			Element root = document.getRootElement();
+        try (InputStream is = new BufferedInputStream(hintsFile.getInputStream())) {
+            SAXBuilder sax = XmlUtilities.createSecureSAXBuilder(false, false);
+            Document document = sax.build(is);
+            Element root = document.getRootElement();
 
-			if (!"LIBRARY_HINTS".equals(root.getName())) {
-				throw new SAXNotRecognizedException("Expected LIBRARY_HINTS document");
-			}
+            if (!"LIBRARY_HINTS".equals(root.getName())) {
+                throw new SAXNotRecognizedException("Expected LIBRARY_HINTS document");
+            }
 
-			Iterator<?> iter = root.getChildren().iterator();
-			while (iter.hasNext()) {
-				Element element = (Element) iter.next();
-				if ("HINT".equals(element.getName())) {
-					parseHint(element);
-				}
-				else {
-					throw new SAXNotRecognizedException("Unexpected element: " + element.getName());
-				}
-			}
-		}
-		catch (Exception e) {
-			Msg.error(this, "Error occurred while parsing hints file: " + hintsFile, e);
-		}
-		finally {
-			if (is != null) {
-				try {
-					is.close();
-				}
-				catch (IOException e1) {
-				}
-			}
-		}
+            for (Object o : root.getChildren()) {
+                Element element = (Element) o;
+                if ("HINT".equals(element.getName())) {
+                    parseHint(element);
+                } else {
+                    throw new SAXNotRecognizedException("Unexpected element: " + element.getName());
+                }
+            }
+        } catch (Exception e) {
+            Msg.error(this, "Error occurred while parsing hints file: " + hintsFile, e);
+        }
 	}
 
 	private void parseHint(Element element) throws SAXException {

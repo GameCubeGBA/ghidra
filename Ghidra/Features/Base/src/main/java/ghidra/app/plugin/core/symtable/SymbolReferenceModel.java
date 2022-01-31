@@ -149,14 +149,12 @@ public class SymbolReferenceModel extends AddressBasedTableModel<Reference> {
 	}
 
 	private void checkRefs(Symbol symbol) {
-		Iterator<Reference> iter = filteredData.iterator();
-		while (iter.hasNext()) {
-			Reference ref = iter.next();
-			if (ref.getFromAddress().equals(symbol.getAddress())) {
-				reload();
-				return;
-			}
-		}
+        for (Reference ref : filteredData) {
+            if (ref.getFromAddress().equals(symbol.getAddress())) {
+                reload();
+                return;
+            }
+        }
 	}
 
 	void showReferencesTo() {

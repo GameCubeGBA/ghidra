@@ -433,9 +433,9 @@ public class ToolActionManagerTest extends AbstractGhidraHeadedIntegrationTest {
 		}
 		newList.removeAll(origList);
 		runSwing(() -> {
-			for (int i = 0; i < newList.size(); i++) {
-				tc.remove(newList.get(i));
-			}
+            for (String s : newList) {
+                tc.remove(s);
+            }
 		});
 		assertEquals(origList.size(), tc.getToolCount());
 	}

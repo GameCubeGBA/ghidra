@@ -141,12 +141,10 @@ public class DisassemblerContextImpl implements DisassemblerContext {
 					: contextRegisterValue);
 		setRegisterValue(fromAddr, destAddr, flowValue, false);
 
-		Iterator<Register> it = registerStateMap.keySet().iterator();
-		while (it.hasNext()) {
-			Register reg = it.next();
-			RegisterValue value = registerStateMap.get(reg);
-			setRegisterValue(fromAddr, destAddr, value, false);
-		}
+        for (Register reg : registerStateMap.keySet()) {
+            RegisterValue value = registerStateMap.get(reg);
+            setRegisterValue(fromAddr, destAddr, value, false);
+        }
 		return flowValue;
 	}
 
@@ -176,17 +174,15 @@ public class DisassemblerContextImpl implements DisassemblerContext {
 		}
 		setRegisterValue(fromAddr, destAddr, programContext.getFlowValue(contextRegisterValue), false);
 
-		Iterator<Register> it = registerStateMap.keySet().iterator();
-		while (it.hasNext()) {
-			Register reg = it.next();
-			RegisterValue value = registerStateMap.get(reg);
-			RegisterValue curValue = getRegisterValue(reg, fromAddr, destAddr);
-			// check if there already is a value
-			if (curValue != null && !value.equals(curValue)) {
-				collisionList.add(value);
-			}
-			setRegisterValue(fromAddr, destAddr, value, false);
-		}
+        for (Register reg : registerStateMap.keySet()) {
+            RegisterValue value = registerStateMap.get(reg);
+            RegisterValue curValue = getRegisterValue(reg, fromAddr, destAddr);
+            // check if there already is a value
+            if (curValue != null && !value.equals(curValue)) {
+                collisionList.add(value);
+            }
+            setRegisterValue(fromAddr, destAddr, value, false);
+        }
 
 		return collisionList;
 	}
@@ -737,20 +733,17 @@ public class DisassemblerContextImpl implements DisassemblerContext {
 
 // TODO: Should disassembler context be used for anything other than the context-register ??
 
-		Iterator<Register> it = registerStateMap.keySet().iterator();
-		while (it.hasNext()) {
-			Register reg = it.next();
-			if (reg.isProcessorContext()) {
-				continue;
-			}
-			RegisterValue value = registerStateMap.get(reg);
-			try {
-				programContext.setRegisterValue(start, end, value);
-			}
-			catch (ContextChangeException e) {
-				// we should never be writing the context register
-			}
-		}
+        for (Register reg : registerStateMap.keySet()) {
+            if (reg.isProcessorContext()) {
+                continue;
+            }
+            RegisterValue value = registerStateMap.get(reg);
+            try {
+                programContext.setRegisterValue(start, end, value);
+            } catch (ContextChangeException e) {
+                // we should never be writing the context register
+            }
+        }
 	}
 
 	@Override

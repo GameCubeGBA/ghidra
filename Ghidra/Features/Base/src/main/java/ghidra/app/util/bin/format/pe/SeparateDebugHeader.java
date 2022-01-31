@@ -256,14 +256,14 @@ public class SeparateDebugHeader implements OffsetValidator {
 
 	@Override
 	public boolean checkPointer(long ptr) {
-		for (int i = 0; i < sections.length; ++i) {
-			long rawSize = sections[i].getSizeOfRawData() & Conv.INT_MASK;
-			long rawPtr = sections[i].getPointerToRawData() & Conv.INT_MASK;
+        for (SectionHeader section : sections) {
+            long rawSize = section.getSizeOfRawData() & Conv.INT_MASK;
+            long rawPtr = section.getPointerToRawData() & Conv.INT_MASK;
 
-			if (ptr >= rawPtr && ptr <= rawPtr + rawSize) { // <= allows data after the last section, which is OK
-				return true;
-			}
-		}
+            if (ptr >= rawPtr && ptr <= rawPtr + rawSize) { // <= allows data after the last section, which is OK
+                return true;
+            }
+        }
 		return false;
 	}
 

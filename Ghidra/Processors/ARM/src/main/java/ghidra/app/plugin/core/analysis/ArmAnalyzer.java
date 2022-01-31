@@ -531,12 +531,10 @@ public class ArmAnalyzer extends ConstantPropagationAnalyzer {
 							switchEvaluator.getAddrByteSize(), 0, false);
 						Instruction jmpInstr = program.getListing().getInstructionAt(loc);
 						if (jmpInstr.getReferencesFrom().length <= 1) {
-							Iterator<Address> jmpIter = switchEvaluator.getTargetList().iterator();
-							while (jmpIter.hasNext()) {
-								Address address = jmpIter.next();
-								jmpInstr.addMnemonicReference(address, jmpInstr.getFlowType(),
-									SourceType.ANALYSIS);
-							}
+                            for (Address address : switchEvaluator.getTargetList()) {
+                                jmpInstr.addMnemonicReference(address, jmpInstr.getFlowType(),
+                                        SourceType.ANALYSIS);
+                            }
 						}
 						table.disassemble(program, jmpInstr, monitor);
 						table.fixupFunctionBody(program, jmpInstr, monitor);

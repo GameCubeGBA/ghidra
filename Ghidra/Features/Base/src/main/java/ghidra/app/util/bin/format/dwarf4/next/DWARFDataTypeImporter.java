@@ -1036,8 +1036,8 @@ public class DWARFDataTypeImporter {
 		// dimension would be defined.
 		List<Integer> dimensions = new ArrayList<>();
 		List<DebugInfoEntry> subrangeDIEs = diea.getChildren(DW_TAG_subrange_type);
-		for (int subRangeDIEIndex = 0; subRangeDIEIndex < subrangeDIEs.size(); subRangeDIEIndex++) {
-			DIEAggregate subrangeAggr = prog.getAggregate(subrangeDIEs.get(subRangeDIEIndex));
+		for (DebugInfoEntry subrangeDY : subrangeDIEs) {
+			DIEAggregate subrangeAggr = prog.getAggregate(subrangeDY);
 			long numElements = -1;
 			try {
 				if (subrangeAggr.hasAttribute(DW_AT_count)) {

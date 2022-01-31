@@ -120,14 +120,14 @@ public class StringRenderBuilder {
 			sb.append("???");
 			return;
 		}
-		for (int i = 0; i < bytes.length; i++) {
-			ensureByteMode();
-			String valStr = Integer.toHexString(bytes[i] & 0xff).toUpperCase();
-			if (valStr.length() < 2) {
-				sb.append("0");
-			}
-			sb.append(valStr).append("h");
-		}
+        for (byte aByte : bytes) {
+            ensureByteMode();
+            String valStr = Integer.toHexString(aByte & 0xff).toUpperCase();
+            if (valStr.length() < 2) {
+                sb.append("0");
+            }
+            sb.append(valStr).append("h");
+        }
 	}
 
 	/**

@@ -163,13 +163,9 @@ public class TextEditorComponentProvider extends ComponentProviderAdapter {
 	}
 
 	private String loadTextFile(InputStream inputStream) throws IOException {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-		try {
-			return loadTextFile(reader);
-		}
-		finally {
-			reader.close();
-		}
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+            return loadTextFile(reader);
+        }
 	}
 
 	private String loadTextFile(BufferedReader reader) throws IOException {
@@ -293,11 +289,9 @@ public class TextEditorComponentProvider extends ComponentProviderAdapter {
 		defaultFont = (Font) editor.getValue();
 
 		List<TextEditorComponentProvider> values = plugin.getEditors();
-		Iterator<TextEditorComponentProvider> iterator = values.iterator();
-		while (iterator.hasNext()) {
-			TextEditorComponentProvider editorComponent = iterator.next();
-			editorComponent.textarea.setFont(defaultFont);
-		}
+        for (TextEditorComponentProvider editorComponent : values) {
+            editorComponent.textarea.setFont(defaultFont);
+        }
 	}
 
 	private void save() {

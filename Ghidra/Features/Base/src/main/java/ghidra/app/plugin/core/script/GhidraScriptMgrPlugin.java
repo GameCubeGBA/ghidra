@@ -135,27 +135,19 @@ public class GhidraScriptMgrPlugin extends ProgramPlugin implements GhidraScript
 
 		EclipseConnection connection = service.connectToEclipse(port);
 		Socket socket = connection.getSocket();
-		if (socket == null) {
-			return false;
-		}
-		try (PrintStream output = new PrintStream(socket.getOutputStream())) {
-			output.print("open_" + file.getAbsolutePath());
-			return true;
-		}
-		catch (IOException e) {
-			service.handleEclipseError("Unexpected exception opening stream for socket to Eclipse",
-				false, e);
-			return false;
-		}
-		finally {
-			try {
-				socket.close();
-			}
-			catch (IOException e) {
-				// we tried
-			}
-		}
-	}
+        try (socket; PrintStream output = new PrintStream(socket.getOutputStream())) {
+            if (socket == null) {
+                return false;
+            }
+            output.print("open_" + file.getAbsolutePath());
+            return true;
+        } catch (IOException e) {
+            service.handleEclipseError("Unexpected exception opening stream for socket to Eclipse",
+                    false, e);
+            return false;
+        }
+        // we tried
+    }
 
 	@Override
 	protected void programClosed(Program program) {

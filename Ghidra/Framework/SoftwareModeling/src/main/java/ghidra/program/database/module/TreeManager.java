@@ -98,11 +98,9 @@ public class TreeManager implements ManagerDB {
 	public void imageBaseChanged(boolean commit) {
 		lock.acquire();
 		try {
-			Iterator<ModuleManager> iter = treeMap.values().iterator();
-			while (iter.hasNext()) {
-				ModuleManager m = iter.next();
-				m.imageBaseChanged(commit);
-			}
+            for (ModuleManager m : treeMap.values()) {
+                m.imageBaseChanged(commit);
+            }
 		}
 		finally {
 			lock.release();
@@ -359,11 +357,10 @@ public class TreeManager implements ManagerDB {
 	public void addMemoryBlock(String name, AddressRange range) {
 		lock.acquire();
 		try {
-			Iterator<String> keys = treeMap.keySet().iterator();
-			while (keys.hasNext()) {
-				ModuleManager m = treeMap.get(keys.next());
-				m.addMemoryBlock(name, range);
-			}
+            for (String s : treeMap.keySet()) {
+                ModuleManager m = treeMap.get(s);
+                m.addMemoryBlock(name, range);
+            }
 		}
 		catch (IOException e) {
 			errHandler.dbError(e);
@@ -378,14 +375,13 @@ public class TreeManager implements ManagerDB {
 			throws CancelledException {
 		lock.acquire();
 		try {
-			Iterator<String> keys = treeMap.keySet().iterator();
-			while (keys.hasNext()) {
-				if (monitor.isCancelled()) {
-					throw new CancelledException();
-				}
-				ModuleManager m = treeMap.get(keys.next());
-				m.removeMemoryBlock(startAddr, endAddr, monitor);
-			}
+            for (String s : treeMap.keySet()) {
+                if (monitor.isCancelled()) {
+                    throw new CancelledException();
+                }
+                ModuleManager m = treeMap.get(s);
+                m.removeMemoryBlock(startAddr, endAddr, monitor);
+            }
 		}
 		catch (IOException e) {
 			errHandler.dbError(e);
@@ -524,11 +520,10 @@ public class TreeManager implements ManagerDB {
 			}
 			treeMap.put(treeName, mm);
 		}
-		Iterator<String> it = oldTreeMap.keySet().iterator();
-		while (it.hasNext()) {
-			ModuleManager mm = oldTreeMap.get(it.next());
-			mm.invalidateCache();
-		}
+        for (String s : oldTreeMap.keySet()) {
+            ModuleManager mm = oldTreeMap.get(s);
+            mm.invalidateCache();
+        }
 	}
 
 	@Override
@@ -543,11 +538,10 @@ public class TreeManager implements ManagerDB {
 	}
 
 	public void setProgramName(String oldName, String newName) {
-		Iterator<String> it = treeMap.keySet().iterator();
-		while (it.hasNext()) {
-			ModuleManager mm = treeMap.get(it.next());
-			mm.setProgramName(oldName, newName);
-		}
+        for (String s : treeMap.keySet()) {
+            ModuleManager mm = treeMap.get(s);
+            mm.setProgramName(oldName, newName);
+        }
 	}
 
 	void updateTreeRecord(DBRecord record) {

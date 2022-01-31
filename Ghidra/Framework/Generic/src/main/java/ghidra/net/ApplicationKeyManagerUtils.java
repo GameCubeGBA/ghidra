@@ -388,20 +388,15 @@ public final class ApplicationKeyManagerUtils {
 			keyStore.setKeyEntry(alias, keyPair.getPrivate(), protectedPassphrase, chain);
 
 			if (keyFile != null) {
-				FileOutputStream out = new FileOutputStream(keyFile);
-				try {
-					keyStore.store(out, protectedPassphrase);
-					out.flush();
-					out.getFD().sync();
-					Msg.debug(ApplicationKeyManagerUtils.class,
-						out.getChannel().size() + " bytes written to key/cert file: " + keyFile);
-				}
-				catch (SyncFailedException e) {
-					// ignore
-				}
-				finally {
-					out.close();
-				}
+                try (FileOutputStream out = new FileOutputStream(keyFile)) {
+                    keyStore.store(out, protectedPassphrase);
+                    out.flush();
+                    out.getFD().sync();
+                    Msg.debug(ApplicationKeyManagerUtils.class,
+                            out.getChannel().size() + " bytes written to key/cert file: " + keyFile);
+                } catch (SyncFailedException e) {
+                    // ignore
+                }
 				keyFile.setReadable(true, true);
 				keyFile.setWritable(false);
 			}

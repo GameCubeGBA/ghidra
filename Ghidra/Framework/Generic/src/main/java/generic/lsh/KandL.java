@@ -75,8 +75,8 @@ public class KandL {
 	}
 
 	static void print_result(PrintStream out, int k, int L, BigInteger n, double qt) {
-		out.println(String.format("k=%d L=%d n=%s bin hits=%f k*L=%d", k, L, n.toString(), qt, k *
-			L));
+		out.printf("k=%d L=%d n=%s bin hits=%f k*L=%d%n", k, L, n.toString(), qt, k *
+			L);
 	}
 
 	static void process_n(PrintStream out, BigInteger n, double taubound, double probthresh) {

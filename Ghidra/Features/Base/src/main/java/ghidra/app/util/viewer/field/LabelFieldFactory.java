@@ -198,16 +198,16 @@ public class LabelFieldFactory extends FieldFactory {
 		int nextPos = 0;
 
 		if (hasOffcuts) {
-			for (int i = 0; i < offcuts.size(); i++) {
-				AttributedString as = getAttributedOffsetText(obj, cu, currAddr, offcuts.get(i));
-				if (as == null) {
-					as = new AttributedString(EMPTY_ICON,
-						SymbolUtilities.getDynamicOffcutName(currAddr),
-						inspector.getOffcutSymbolColor(),
-						getMetrics(inspector.getOffcutSymbolStyle()), false, null);
-				}
-				textElements[nextPos++] = new TextFieldElement(as, nextPos, 0);
-			}
+            for (Address offcut : offcuts) {
+                AttributedString as = getAttributedOffsetText(obj, cu, currAddr, offcut);
+                if (as == null) {
+                    as = new AttributedString(EMPTY_ICON,
+                            SymbolUtilities.getDynamicOffcutName(currAddr),
+                            inspector.getOffcutSymbolColor(),
+                            getMetrics(inspector.getOffcutSymbolStyle()), false, null);
+                }
+                textElements[nextPos++] = new TextFieldElement(as, nextPos, 0);
+            }
 		}
 
 		for (Symbol symbol : symbols) {

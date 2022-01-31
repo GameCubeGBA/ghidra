@@ -54,16 +54,16 @@ public class OrPattern extends Pattern {
 	 */
 	@Override
     public Pattern simplifyClone() {
-		for(int i=0;i<orlist.length;++i) {
-			if (orlist[i].alwaysTrue())
-				return new InstructionPattern(true);
-		}
+        for (DisjointPattern pattern : orlist) {
+            if (pattern.alwaysTrue())
+                return new InstructionPattern(true);
+        }
 		
 		ArrayList<Object> newlist = new ArrayList<Object>();
-		for(int i=0;i<orlist.length;++i) {
-			if (!orlist[i].alwaysFalse())
-				newlist.add(orlist[i].simplifyClone());
-		}
+        for (DisjointPattern disjointPattern : orlist) {
+            if (!disjointPattern.alwaysFalse())
+                newlist.add(disjointPattern.simplifyClone());
+        }
 		if (newlist.size()==0)
 			return new InstructionPattern(false);
 		else if (newlist.size()==1)
@@ -76,8 +76,7 @@ public class OrPattern extends Pattern {
 	 */
 	@Override
     public void shiftInstruction(int sa) {
-		for(int i=0;i<orlist.length;++i)
-			orlist[i].shiftInstruction(sa);
+        for (DisjointPattern disjointPattern : orlist) disjointPattern.shiftInstruction(sa);
 	}
 
 	/* (non-Javadoc)
@@ -86,12 +85,10 @@ public class OrPattern extends Pattern {
 	@Override
     public Pattern doOr(Pattern b, int sa) {
 		ArrayList<Object> newlist = new ArrayList<Object>();
-		
-		for(int i=0;i<orlist.length;++i)
-			newlist.add(orlist[i].simplifyClone());
+
+        for (DisjointPattern pattern : orlist) newlist.add(pattern.simplifyClone());
 		if (sa < 0) {
-			for(int i=0;i<orlist.length;++i)
-				orlist[i].shiftInstruction(-sa);
+            for (DisjointPattern disjointPattern : orlist) disjointPattern.shiftInstruction(-sa);
 		}
 		
 		if (b instanceof OrPattern) {
@@ -103,8 +100,7 @@ public class OrPattern extends Pattern {
 			newlist.add(b.simplifyClone());
 		}
 		if (sa > 0) {
-			for(int i=0;i<newlist.size();++i)
-				((Pattern)newlist.get(i)).shiftInstruction(sa);
+            for (Object o : newlist) ((Pattern) o).shiftInstruction(sa);
 		}
 		return new OrPattern(newlist);
 	}
@@ -118,18 +114,18 @@ public class OrPattern extends Pattern {
 		ArrayList<Object> newlist = new ArrayList<Object>();
 		if (b instanceof OrPattern) {
 			OrPattern b2 = (OrPattern)b;
-			for(int i=0;i<orlist.length;++i) {
-				for(int j=0;j<b2.orlist.length;++j) {
-					tmp = (DisjointPattern)orlist[i].doAnd(b2.orlist[j],sa);
-					newlist.add(tmp);
-				}
-			}
+            for (DisjointPattern disjointPattern : orlist) {
+                for (int j = 0; j < b2.orlist.length; ++j) {
+                    tmp = (DisjointPattern) disjointPattern.doAnd(b2.orlist[j], sa);
+                    newlist.add(tmp);
+                }
+            }
 		}
 		else {
-			for(int i=0;i<orlist.length;++i) {
-				tmp = (DisjointPattern)orlist[i].doAnd(b,sa);
-				newlist.add(tmp);
-			}
+            for (DisjointPattern disjointPattern : orlist) {
+                tmp = (DisjointPattern) disjointPattern.doAnd(b, sa);
+                newlist.add(tmp);
+            }
 		}
 		return new OrPattern(newlist);
 	}
@@ -196,9 +192,9 @@ public class OrPattern extends Pattern {
 	 */
 	@Override
     public boolean alwaysTrue() {
-		for(int i=0;i<orlist.length;++i) {
-			if (orlist[i].alwaysTrue()) return true;
-		}
+        for (DisjointPattern disjointPattern : orlist) {
+            if (disjointPattern.alwaysTrue()) return true;
+        }
 		return false;
 	}
 
@@ -207,9 +203,9 @@ public class OrPattern extends Pattern {
 	 */
 	@Override
     public boolean alwaysFalse() {
-		for(int i=0;i<orlist.length;++i) {
-			if (!orlist[i].alwaysFalse()) return false;
-		}
+        for (DisjointPattern disjointPattern : orlist) {
+            if (!disjointPattern.alwaysFalse()) return false;
+        }
 		return true;
 	}
 
@@ -218,9 +214,9 @@ public class OrPattern extends Pattern {
 	 */
 	@Override
     public boolean alwaysInstructionTrue() {
-		for(int i=0;i<orlist.length;++i) {
-			if (!orlist[i].alwaysInstructionTrue()) return false;
-		}
+        for (DisjointPattern disjointPattern : orlist) {
+            if (!disjointPattern.alwaysInstructionTrue()) return false;
+        }
 		return true;
 	}
 

@@ -44,11 +44,11 @@ public class StretchLayout implements LayoutManager, Serializable {
 		Component[] comps = container.getComponents();
 		int maxWidth = 0;
 		int maxHeight = 0;
-		for (int i = 0; i < comps.length; i++) {
-			Dimension size = new Dimension(comps[i].getPreferredSize());
-			maxWidth = Math.max(maxWidth, size.width);
-			maxHeight = Math.max(maxHeight, size.height);
-		}
+        for (Component comp : comps) {
+            Dimension size = new Dimension(comp.getPreferredSize());
+            maxWidth = Math.max(maxWidth, size.width);
+            maxHeight = Math.max(maxHeight, size.height);
+        }
 		Insets insets = container.getInsets();
 		return new Dimension(maxWidth + insets.left + insets.right,
 			maxHeight + insets.top + insets.bottom);
@@ -78,9 +78,9 @@ public class StretchLayout implements LayoutManager, Serializable {
 			height = 0;
 		try {
 			Component[] comps = container.getComponents();
-			for (int i = 0; i < comps.length; i++) {
-				comps[i].setBounds(insets.left, insets.top, width, height);
-			}
+            for (Component comp : comps) {
+                comp.setBounds(insets.left, insets.top, width, height);
+            }
 		}
 		catch (Exception e) {
 		}

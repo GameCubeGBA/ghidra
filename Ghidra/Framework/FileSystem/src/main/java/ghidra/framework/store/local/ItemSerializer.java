@@ -136,22 +136,11 @@ public class ItemSerializer {
 	 * @throws IOException If there is a problem reading the given file
 	 */
 	public static boolean isPackedFile(File file) throws IOException {
-		InputStream inputStream = null;
-		try {
-			inputStream = new BufferedInputStream(new FileInputStream(file));
-			return isPackedFile(inputStream);
-		}
-		finally {
-			if (inputStream != null) {
-				try {
-					inputStream.close();
-				}
-				catch (IOException e) {
-					// we tried
-				}
-			}
-		}
-	}
+        try (InputStream inputStream = new BufferedInputStream(new FileInputStream(file))) {
+            return isPackedFile(inputStream);
+        }
+        // we tried
+    }
 
 	/**
 	 * A convenience method for checking if the file denoted by the given inputStream is a 

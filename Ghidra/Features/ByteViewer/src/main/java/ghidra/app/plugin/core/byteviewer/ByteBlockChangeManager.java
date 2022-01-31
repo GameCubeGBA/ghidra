@@ -147,13 +147,12 @@ public class ByteBlockChangeManager {
 	 * @param offset offset into the block
 	 */
 	private boolean contains(Address blockAddr, BigInteger offset) {
-		for (int i = 0; i < changeList.size(); i++) {
-			ByteEditInfo edit = changeList.get(i);
-			if (edit.getBlockAddress().compareTo(blockAddr) == 0 &&
-				edit.getOffset().equals(offset)) {
-				return true;
-			}
-		}
+        for (ByteEditInfo edit : changeList) {
+            if (edit.getBlockAddress().compareTo(blockAddr) == 0 &&
+                    edit.getOffset().equals(offset)) {
+                return true;
+            }
+        }
 		return false;
 	}
 }

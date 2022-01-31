@@ -48,10 +48,9 @@ public class MultipleSymbolStringable extends Stringable {
 			return;
 		}
 		int count = symbols.size();
-		for (int index = 0; index < count; index++) {
-			Symbol symbol = symbols.get(index);
-			symbolInfos.add(new SymbolInfo(symbol));
-		}
+        for (Symbol symbol : symbols) {
+            symbolInfos.add(new SymbolInfo(symbol));
+        }
 	}
 
 	@Override

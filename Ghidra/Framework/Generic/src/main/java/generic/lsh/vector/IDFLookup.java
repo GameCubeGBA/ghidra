@@ -141,18 +141,18 @@ public class IDFLookup {
 	 */
 	public int[] toArray() {
 		int count = 0;
-		for(int i=0;i<hashtable.length;++i)
-			if (hashtable[i].count != 0xffffffff)	// If not empty
-				count += 1;							//   count it
+        for (IDFEntry entry : hashtable)
+            if (entry.count != 0xffffffff)    // If not empty
+                count += 1;                            //   count it
 		int[] res = new int[count * 2];
 		int pos = 0;
-		for(int i=0;i<hashtable.length;++i) {
-			if (hashtable[i].count == 0xffffffff) continue;
-			res[pos] = hashtable[i].hash;
-			pos += 1;
-			res[pos] = hashtable[i].count;
-			pos += 1;
-		}
+        for (IDFEntry idfEntry : hashtable) {
+            if (idfEntry.count == 0xffffffff) continue;
+            res[pos] = idfEntry.hash;
+            pos += 1;
+            res[pos] = idfEntry.count;
+            pos += 1;
+        }
 		return res;
 	}
 

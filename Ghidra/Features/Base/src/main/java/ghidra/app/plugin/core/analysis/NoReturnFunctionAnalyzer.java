@@ -186,33 +186,28 @@ public class NoReturnFunctionAnalyzer extends AbstractAnalyzer {
 		ResourceFile[] files = NonReturningFunctionNames.findDataFiles(program);
 		for (ResourceFile file : files) {
 
-			BufferedReader reader =
-				new BufferedReader(new InputStreamReader(file.getInputStream()));
-			try {
-				while (true) {
-					String line = reader.readLine();
-					if (line == null) {
-						break;
-					}
-					line = line.trim();
-					if (line.length() == 0 || line.charAt(0) == '#') {
-						continue;
-					}
-					int startIndex = 0;
-					while (line.charAt(startIndex) == '_') {
-						++startIndex;
-					}
-					if (startIndex != 0) {
-						Msg.warn(this, "Ignoring leading '_' chars on no-return name '" + line +
-							"' specified in file: " + file.getAbsolutePath());
-						line = line.substring(startIndex);
-					}
-					functionNames.add(line.trim());
-				}
-			}
-			finally {
-				reader.close();
-			}
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
+                while (true) {
+                    String line = reader.readLine();
+                    if (line == null) {
+                        break;
+                    }
+                    line = line.trim();
+                    if (line.length() == 0 || line.charAt(0) == '#') {
+                        continue;
+                    }
+                    int startIndex = 0;
+                    while (line.charAt(startIndex) == '_') {
+                        ++startIndex;
+                    }
+                    if (startIndex != 0) {
+                        Msg.warn(this, "Ignoring leading '_' chars on no-return name '" + line +
+                                "' specified in file: " + file.getAbsolutePath());
+                        line = line.substring(startIndex);
+                    }
+                    functionNames.add(line.trim());
+                }
+            }
 		}
 	}
 

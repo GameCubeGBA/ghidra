@@ -57,10 +57,10 @@ public class VarnodeListSymbol extends ValueSymbol {
 		long min = getPatternValue().minValue();
 		long max = getPatternValue().maxValue();
 		tableisfilled = (min >= 0) && (max < varnode_table.length);
-		for (int i = 0; i < varnode_table.length; ++i) {
-			if (varnode_table[i] == null)
-				tableisfilled = false;
-		}
+        for (VarnodeSymbol varnodeSymbol : varnode_table) {
+            if (varnodeSymbol == null)
+                tableisfilled = false;
+        }
 	}
 
 	/* (non-Javadoc)

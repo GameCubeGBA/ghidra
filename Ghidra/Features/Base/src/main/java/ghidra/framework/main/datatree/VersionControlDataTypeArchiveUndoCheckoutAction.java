@@ -245,20 +245,19 @@ public class VersionControlDataTypeArchiveUndoCheckoutAction extends VersionCont
 		@Override
 		public void run(TaskMonitor monitor) {
 			try {
-				for (int i = 0; i < unmodifiedCheckOutsList.size(); i++) {
-					DomainFileArchive archive = unmodifiedCheckOutsList.get(i);
-					DomainFile df = archive.getDomainFile();
-					if (df.isCheckedOut() && (dtmPlugin != null)) {
-						// TODO Need to close archive here if it is open.
-						archive.close();
+                for (DomainFileArchive archive : unmodifiedCheckOutsList) {
+                    DomainFile df = archive.getDomainFile();
+                    if (df.isCheckedOut() && (dtmPlugin != null)) {
+                        // TODO Need to close archive here if it is open.
+                        archive.close();
 
-						df.undoCheckout(false);
+                        df.undoCheckout(false);
 
-						// TODO Need to open the archive here if it got closed above.
-						dtmPlugin.openArchive(df);
+                        // TODO Need to open the archive here if it got closed above.
+                        dtmPlugin.openArchive(df);
 
-					}
-				}
+                    }
+                }
 				for (DomainFileArchive currentArchive : modifiedCheckedOutFiles) {
 					monitor.checkCanceled();
 					DomainFile currentDF = currentArchive.getDomainFile();

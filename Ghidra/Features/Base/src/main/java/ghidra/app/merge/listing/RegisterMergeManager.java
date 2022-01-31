@@ -178,9 +178,9 @@ class RegisterMergeManager implements ListingMergeConstants {
 		conflictSet = new AddressSet();
 		rvrs = rc.getConflicts(setToCheck, monitor);
 		if (rvrs.length > 0) {
-			for (int j = 0; j < rvrs.length; j++) {
-				conflictSet.add(rvrs[j]);
-			}
+            for (AddressRange rvr : rvrs) {
+                conflictSet.add(rvr);
+            }
 		}
 		autoSet = setToCheck.subtract(conflictSet);
 	}

@@ -163,7 +163,6 @@ public class FileLocker {
 	}
 
 	private boolean storeProperties(Properties properties) {
-
 		try (OutputStream os = new FileOutputStream(lockFile)) {
 			properties.store(os, "Ghidra Lock File");
 			return true;

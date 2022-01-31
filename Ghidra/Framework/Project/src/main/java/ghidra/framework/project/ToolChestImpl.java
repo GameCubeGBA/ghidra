@@ -103,9 +103,9 @@ class ToolChestImpl implements ToolChest {
 		SystemUtilities.runSwingNow(() -> {
 			ToolChestChangeListener[] tcListeners = new ToolChestChangeListener[listeners.size()];
 			listeners.toArray(tcListeners);
-			for (int l = 0; l < tcListeners.length; l++) {
-				tcListeners[l].toolRemoved(name);
-			}
+            for (ToolChestChangeListener tcListener : tcListeners) {
+                tcListener.toolRemoved(name);
+            }
 		});
 
 		return true;

@@ -2515,34 +2515,33 @@ public class SymbolicPropogator {
 					long baseRegVal = 0;
 					long offset_residue_pos = wordOffset; // subtract all register values and add constants, check for zero
 					long offset_residue_neg = wordOffset; // subtract all registers and subtract constants, check for zero
-					for (int idx = 0; idx < len; idx++) {
-						Object obj = list.get(idx);
-						if (obj instanceof Scalar) {
-							long val = ((Scalar) obj).getUnsignedValue();
-							// sort of a hack, for memory that is not byte addressable
-							if (val == wordOffset || val == (wordOffset >> 1) ||
-								(val + baseRegVal) == wordOffset) {
-								opIndex = i;
-								foundExactValue = true;
-								break;
-							}
-							val = ((Scalar) obj).getSignedValue();
-							offset_residue_neg -= val;
-							offset_residue_pos += val;
-						}
-						if (obj instanceof Register) {
-							Register reg = (Register) obj;
-							BigInteger val = context.getValue(reg, false);
-							if (val != null) {
-								baseRegVal = val.longValue();
-								if ((baseRegVal & pointerMask) == wordOffset) {
-									opIndex = i;
-								}
-								offset_residue_neg -= baseRegVal;
-								offset_residue_pos -= baseRegVal;
-							}
-						}
-					}
+                    for (Object obj : list) {
+                        if (obj instanceof Scalar) {
+                            long val = ((Scalar) obj).getUnsignedValue();
+                            // sort of a hack, for memory that is not byte addressable
+                            if (val == wordOffset || val == (wordOffset >> 1) ||
+                                    (val + baseRegVal) == wordOffset) {
+                                opIndex = i;
+                                foundExactValue = true;
+                                break;
+                            }
+                            val = ((Scalar) obj).getSignedValue();
+                            offset_residue_neg -= val;
+                            offset_residue_pos += val;
+                        }
+                        if (obj instanceof Register) {
+                            Register reg = (Register) obj;
+                            BigInteger val = context.getValue(reg, false);
+                            if (val != null) {
+                                baseRegVal = val.longValue();
+                                if ((baseRegVal & pointerMask) == wordOffset) {
+                                    opIndex = i;
+                                }
+                                offset_residue_neg -= baseRegVal;
+                                offset_residue_pos -= baseRegVal;
+                            }
+                        }
+                    }
 					if (offset_residue_neg == 0 || offset_residue_pos == 0) {
 						opIndex = i;
 						foundExactValue = true;

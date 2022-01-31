@@ -82,8 +82,8 @@ public class DbgLoader extends AbstractPeDebugLoader {
 		String parentPath = prog.getExecutablePath();
 		File parentFile = new File(parentPath);
 
-		RandomAccessByteProvider provider2 = null;
-		try {
+		try (RandomAccessByteProvider provider2 = new RandomAccessByteProvider(parentFile))
+		{
 			provider2 = new RandomAccessByteProvider(parentFile);
 			PortableExecutable parentPE = new PortableExecutable(provider2, SectionLayout.FILE);
 			Address imageBase = prog.getImageBase();
@@ -97,12 +97,6 @@ public class DbgLoader extends AbstractPeDebugLoader {
 			processDebug(debug.getParser(), parentPE.getNTHeader(), sectionToAddress, prog,
 				monitor);
 		}
-		finally {
-			if (provider2 != null) {
-				provider2.close();
-			}
-		}
-	}
 
 	@Override
 	public String getName() {

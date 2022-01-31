@@ -408,14 +408,12 @@ public class SequenceSearchState implements Comparable<SequenceSearchState> {
 	static ArrayList<SequenceSearchState> buildTransitionLevel(ArrayList<SequenceSearchState> prev,
 			int pos) {
 		ArrayList<SequenceSearchState> res = new ArrayList<SequenceSearchState>();
-		Iterator<SequenceSearchState> iterator = prev.iterator();
-		while (iterator.hasNext()) {			// For each current state
-			SequenceSearchState next = iterator.next();
-			next.trans = new SequenceSearchState[256];
-			for (int i = 0; i < 256; ++i) {		// Try every byte transition
-				next.buildSingleTransition(res, pos, i);
-			}
-		}
+        for (SequenceSearchState next : prev) {            // For each current state
+            next.trans = new SequenceSearchState[256];
+            for (int i = 0; i < 256; ++i) {        // Try every byte transition
+                next.buildSingleTransition(res, pos, i);
+            }
+        }
 		if (res.isEmpty()) {
 			return res;
 		}

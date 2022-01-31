@@ -77,11 +77,10 @@ public class MultiActionDialog extends DialogComponentProvider {
 		okButton.setEnabled(false);
 		this.list = list;
 		listModel.clear();
-		for (int i = 0; i < list.size(); i++) {
-			ExecutableAction actionProxy = list.get(i);
-			DockingActionIf action = actionProxy.getAction();
-			listModel.addElement(action.getName() + " (" + action.getOwnerDescription() + ")");
-		}
+        for (ExecutableAction actionProxy : list) {
+            DockingActionIf action = actionProxy.getAction();
+            listModel.addElement(action.getName() + " (" + action.getOwnerDescription() + ")");
+        }
 		actionList.setSelectedIndex(0);
 	}
 

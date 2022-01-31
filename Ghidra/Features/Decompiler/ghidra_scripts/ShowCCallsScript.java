@@ -67,26 +67,26 @@ public class ShowCCallsScript extends GhidraScript {
 	        Symbol sym = this.getSymbolAt(func.getEntryPoint());
 	
 	        Reference[] refs = sym.getReferences(null);
-	
-	        for (int i = 0; i < refs.length; i++) {
-	            if (monitor.isCancelled()) {
-	                break;
-	            }
-	
-	            // get function containing.
-	            Address refAddr = refs[i].getFromAddress();
-	            Function refFunc = currentProgram.getFunctionManager()
-	                    .getFunctionContaining(refAddr);
-	
-	            if (refFunc == null) {
-	                continue;
-	            }
-	
-	            // decompile function
-	            // look for call to this function
-	            // display call
-	            analyzeFunction(decomplib, currentProgram, refFunc, refAddr);
-	        }
+
+            for (Reference ref : refs) {
+                if (monitor.isCancelled()) {
+                    break;
+                }
+
+                // get function containing.
+                Address refAddr = ref.getFromAddress();
+                Function refFunc = currentProgram.getFunctionManager()
+                        .getFunctionContaining(refAddr);
+
+                if (refFunc == null) {
+                    continue;
+                }
+
+                // decompile function
+                // look for call to this function
+                // display call
+                analyzeFunction(decomplib, currentProgram, refFunc, refAddr);
+            }
         }
         finally {
         	decomplib.dispose();

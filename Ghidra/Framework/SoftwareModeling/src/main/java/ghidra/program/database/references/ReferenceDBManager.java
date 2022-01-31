@@ -772,25 +772,23 @@ public class ReferenceDBManager implements ReferenceManager, ManagerDB, ErrorHan
 		int outOfScopeOffset = scope.getOutOfScopeOffset();
 
 		SortedMap<Address, List<Reference>> subMap = dataReferences.tailMap(minStorageAddr);
-		Iterator<List<Reference>> refListIter = subMap.values().iterator();
-		while (refListIter.hasNext()) {
+        for (List<Reference> refList : subMap.values()) {
 
-			List<Reference> refList = refListIter.next();
-			for (Reference ref : refList) {
+            for (Reference ref : refList) {
 
-				if (ref.getToAddress().compareTo(maxStorageAddr) > 0) {
-					return;
-				}
-				int refOffset = (int) ref.getFromAddress().subtract(entry);
-				if (refOffset < 0) {
-					refOffset = Integer.MAX_VALUE - refOffset;
-				}
-				if (refOffset >= firstUseOffset && refOffset < outOfScopeOffset) {
-					// reference is within variable scope - add to list
-					matchingReferences.add(ref);
-				}
-			}
-		}
+                if (ref.getToAddress().compareTo(maxStorageAddr) > 0) {
+                    return;
+                }
+                int refOffset = (int) ref.getFromAddress().subtract(entry);
+                if (refOffset < 0) {
+                    refOffset = Integer.MAX_VALUE - refOffset;
+                }
+                if (refOffset >= firstUseOffset && refOffset < outOfScopeOffset) {
+                    // reference is within variable scope - add to list
+                    matchingReferences.add(ref);
+                }
+            }
+        }
 	}
 
 	@Override

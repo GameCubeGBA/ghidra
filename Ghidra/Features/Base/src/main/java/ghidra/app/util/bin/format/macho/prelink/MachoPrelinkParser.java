@@ -118,11 +118,11 @@ public class MachoPrelinkParser {
 	private void process(List<?> children, List<MachoPrelinkMap> list, TaskMonitor monitor) {
 		monitor.setMessage("Processing prelink information...");
 
-		for (int i = 0; i < children.size(); ++i) {
+		for (Object child : children) {
 			if (monitor.isCancelled()) {
 				break;
 			}
-			Element element = (Element) children.get(i);
+			Element element = (Element) child;
 			if (element.getName().equals(TAG_DICT)) {
 				MachoPrelinkMap map = processElement(element, monitor);
 				list.add(map);

@@ -776,60 +776,46 @@ public class GNUExternalDisassembler implements ExternalDisassembler {
 			return;
 		}
 
-		Reader mapFileReader = null;
-		try {
-			mapFileReader = new InputStreamReader(mapFile.getInputStream());
-			BufferedReader reader = new BufferedReader(mapFileReader);
-			String line = null;
-			while ((line = reader.readLine()) != null) {
-				if (line.startsWith("//") || line.isEmpty()) {
-					continue;
-				}
-				String[] parts = line.split("#");
-				if (parts.length > 1) {
+        try (Reader mapFileReader = new InputStreamReader(mapFile.getInputStream())) {
+            BufferedReader reader = new BufferedReader(mapFileReader);
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                if (line.startsWith("//") || line.isEmpty()) {
+                    continue;
+                }
+                String[] parts = line.split("#");
+                if (parts.length > 1) {
 
-					//System.out.println("found: " + parts[0] + " . " + parts[1]);
+                    //System.out.println("found: " + parts[0] + " . " + parts[1]);
 
-					// TODO: should probably store exe module/name in map and defer search 
-					// until GdisConfig is created.  This will allow us to complain about a 
-					// missing exe when it is needed/used.
+                    // TODO: should probably store exe module/name in map and defer search
+                    // until GdisConfig is created.  This will allow us to complain about a
+                    // missing exe when it is needed/used.
 
-					String gdisExe = parts[1];
-					if (Platform.CURRENT_PLATFORM.getOperatingSystem() == OperatingSystem.WINDOWS) {
-						gdisExe = gdisExe + ".exe";
-					}
-					try {
-						File customGdisExecFile;
-						try {
-							customGdisExecFile =
-								Application.getOSFile(moduleForResourceFile.getName(), gdisExe);
-						}
-						catch (FileNotFoundException e) {
-							customGdisExecFile = Application.getOSFile(gdisExe);
-						}
-						languageGdisMap.put(parts[0], customGdisExecFile);
-					}
-					catch (FileNotFoundException e) {
-						Msg.error(GNUExternalDisassembler.class,
-							"External disassembler not found (" + parts[0] + "): " + gdisExe);
-					}
+                    String gdisExe = parts[1];
+                    if (Platform.CURRENT_PLATFORM.getOperatingSystem() == OperatingSystem.WINDOWS) {
+                        gdisExe = gdisExe + ".exe";
+                    }
+                    try {
+                        File customGdisExecFile;
+                        try {
+                            customGdisExecFile =
+                                    Application.getOSFile(moduleForResourceFile.getName(), gdisExe);
+                        } catch (FileNotFoundException e) {
+                            customGdisExecFile = Application.getOSFile(gdisExe);
+                        }
+                        languageGdisMap.put(parts[0], customGdisExecFile);
+                    } catch (FileNotFoundException e) {
+                        Msg.error(GNUExternalDisassembler.class,
+                                "External disassembler not found (" + parts[0] + "): " + gdisExe);
+                    }
 
-				}
-			}
-		}
-		catch (Exception e) {
-			Msg.error(GNUExternalDisassembler.class,
-				"Error reading from language mapping file: " + mapFile, e);
-		}
-		finally {
-			if (mapFileReader != null) {
-				try {
-					mapFileReader.close();
-				}
-				catch (Exception e) {
-					// we tried
-				}
-			}
-		}
-	}
+                }
+            }
+        } catch (Exception e) {
+            Msg.error(GNUExternalDisassembler.class,
+                    "Error reading from language mapping file: " + mapFile, e);
+        }
+        // we tried
+    }
 }

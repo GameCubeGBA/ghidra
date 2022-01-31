@@ -181,16 +181,15 @@ public class ApplyFunctionSignatureCmd extends BackgroundCommand {
 	private void adjustParameterNamesToAvoidConflicts(SymbolTable symbolTable, Function function,
 			List<Parameter> params) throws DuplicateNameException, InvalidInputException {
 
-		for (int i = 0; i < params.size(); i++) {
-			Parameter param = params.get(i);
-			String name = param.getName();
-			if (name == null || SymbolUtilities.isDefaultParameterName(name)) {
-				continue;
-			}
+        for (Parameter param : params) {
+            String name = param.getName();
+            if (name == null || SymbolUtilities.isDefaultParameterName(name)) {
+                continue;
+            }
 
-			String uniqueName = getUniqueParameterName(symbolTable, function, name);
-			param.setName(uniqueName, param.getSource());
-		}
+            String uniqueName = getUniqueParameterName(symbolTable, function, name);
+            param.setName(uniqueName, param.getSource());
+        }
 	}
 
 	private int getIndexOfFirstParameter(String conventionName, ParameterDefinition[] args) {

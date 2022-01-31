@@ -338,31 +338,23 @@ public class HelpBuildUtils {
 
 	private static String readFile(Path helpFile) throws IOException {
 		InputStreamReader isr = new InputStreamReader(Files.newInputStream(helpFile));
-		BufferedReader reader = new BufferedReader(isr);
-		try {
-			StringBuilder buffy = new StringBuilder();
-			String line = null;
-			while ((line = reader.readLine()) != null) {
-				buffy.append(line).append('\n');
-			}
+        try (BufferedReader reader = new BufferedReader(isr)) {
+            StringBuilder buffy = new StringBuilder();
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                buffy.append(line).append('\n');
+            }
 
-			return buffy.toString();
-		}
-		finally {
-			reader.close();
-		}
+            return buffy.toString();
+        }
 	}
 
 	private static void writeFileContents(Path helpFile, String updatedContents)
 			throws IOException {
 		OutputStreamWriter osw = new OutputStreamWriter(Files.newOutputStream(helpFile));
-		BufferedWriter writer = new BufferedWriter(osw);
-		try {
-			writer.write(updatedContents);
-		}
-		finally {
-			writer.close();
-		}
+        try (BufferedWriter writer = new BufferedWriter(osw)) {
+            writer.write(updatedContents);
+        }
 	}
 
 	public static void debug(String text) {

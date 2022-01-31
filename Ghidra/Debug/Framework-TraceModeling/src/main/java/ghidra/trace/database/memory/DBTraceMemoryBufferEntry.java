@@ -269,11 +269,11 @@ public class DBTraceMemoryBufferEntry extends DBAnnotatedObject {
 	}
 
 	public boolean isEmpty() {
-		for (int i = 0; i < inUse.length; i++) {
-			if (inUse[i] != 0) {
-				return false;
-			}
-		}
+        for (byte b : inUse) {
+            if (b != 0) {
+                return false;
+            }
+        }
 		return true;
 	}
 }

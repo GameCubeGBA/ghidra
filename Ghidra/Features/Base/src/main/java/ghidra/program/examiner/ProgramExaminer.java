@@ -79,32 +79,24 @@ public class ProgramExaminer {
 	private ProgramExaminer(ByteProvider provider) throws GhidraException {
 		initializeGhidra();
 		messageLog = new MessageLog();
-		try {
-			program = AutoImporter.importByUsingBestGuess(provider, null, this, messageLog,
-				TaskMonitor.DUMMY);
+        try (provider) {
+            program = AutoImporter.importByUsingBestGuess(provider, null, this, messageLog,
+                    TaskMonitor.DUMMY);
 
-			if (program == null) {
-				program = AutoImporter.importAsBinary(provider, null, defaultLanguage, null, this,
-					messageLog, TaskMonitor.DUMMY);
-			}
-			if (program == null) {
-				throw new GhidraException(
-					"Can't create program from input: " + messageLog.toString());
-			}
-		}
-		catch (Exception e) {
-			messageLog.appendException(e);
-			throw new GhidraException(e);
-		}
-		finally {
-			try {
-				provider.close();
-			}
-			catch (IOException e) {
-				// tried to close
-			}
-		}
-	}
+            if (program == null) {
+                program = AutoImporter.importAsBinary(provider, null, defaultLanguage, null, this,
+                        messageLog, TaskMonitor.DUMMY);
+            }
+            if (program == null) {
+                throw new GhidraException(
+                        "Can't create program from input: " + messageLog.toString());
+            }
+        } catch (Exception e) {
+            messageLog.appendException(e);
+            throw new GhidraException(e);
+        }
+        // tried to close
+    }
 
 	public synchronized static void initializeGhidra() throws GhidraException {
 		if (!Application.isInitialized()) {

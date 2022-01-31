@@ -684,27 +684,23 @@ class EditMemoryReferencePanel extends EditReferencePanel {
 	@SuppressWarnings("unchecked")
 	void readXmlDataState(Element element) {
 		List<Element> programElements = element.getChildren("ADDR_HISTORY");
-		Iterator<Element> iter = programElements.iterator();
-		while (iter.hasNext()) {
-			Element programElement = iter.next();
-			String programName = programElement.getAttributeValue("PROGRAM");
-			Program program = getOpenProgram(programName);
-			if (program != null) {
-				AddressFactory addrFactory = program.getAddressFactory();
-				List<Element> addrElements = programElement.getChildren("ADDRESS");
-				Iterator<Element> addrIter = addrElements.iterator();
-				while (addrIter.hasNext()) {
-					Element addrElement = addrIter.next();
-					String addrStr = addrElement.getAttributeValue("VALUE");
-					if (addrStr != null) {
-						Address addr = addrFactory.getAddress(addrStr);
-						if (addr != null) {
-							addHistoryAddress(program, addr);
-						}
-					}
-				}
-			}
-		}
+        for (Element programElement : programElements) {
+            String programName = programElement.getAttributeValue("PROGRAM");
+            Program program = getOpenProgram(programName);
+            if (program != null) {
+                AddressFactory addrFactory = program.getAddressFactory();
+                List<Element> addrElements = programElement.getChildren("ADDRESS");
+                for (Element addrElement : addrElements) {
+                    String addrStr = addrElement.getAttributeValue("VALUE");
+                    if (addrStr != null) {
+                        Address addr = addrFactory.getAddress(addrStr);
+                        if (addr != null) {
+                            addHistoryAddress(program, addr);
+                        }
+                    }
+                }
+            }
+        }
 	}
 
 	void writeXmlDataState(Element element) {
