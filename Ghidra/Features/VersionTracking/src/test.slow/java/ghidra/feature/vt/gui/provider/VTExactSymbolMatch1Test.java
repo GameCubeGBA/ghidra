@@ -131,7 +131,7 @@ public class VTExactSymbolMatch1Test extends AbstractGhidraHeadedIntegrationTest
 	public boolean isMatch(Address srcAddr, Address destAddr) {
 		List<VTMatchSet> matchSets = session.getMatchSets();
         for (VTMatchSet matchSet : matchSets) {
-            if (matchSet.getMatches(srcAddr, destAddr).size() > 0) {
+            if (!matchSet.getMatches(srcAddr, destAddr).isEmpty()) {
                 return true;
             }
         }

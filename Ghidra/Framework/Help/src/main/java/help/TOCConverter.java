@@ -117,7 +117,7 @@ public class TOCConverter {
 				}
 				line = getPadString(line) + TOCITEM + " " + TEXT + "=\"" + item.getText() + "\"";
 
-				if (item.getTarget().length() > 0) {
+				if (!item.getTarget().isEmpty()) {
 					line = line + TARGET + "=\"" + item.getTarget() + "\"";
 				}
 				line = line + endline;
@@ -236,7 +236,7 @@ public class TOCConverter {
 
 				String url = atts.getValue(1);
 				String target = url;
-				if (url != null && url.length() > 0) {
+				if (url != null && !url.isEmpty()) {
 					target = target.replace('.', '_');
 					target = target.replace('#', '_');
 					target = target.replace('-', '_');

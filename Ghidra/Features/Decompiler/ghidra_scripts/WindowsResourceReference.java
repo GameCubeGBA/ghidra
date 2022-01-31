@@ -251,7 +251,7 @@ public class WindowsResourceReference extends GhidraScript {
 		HashSet<Address> doneRoutines = new HashSet<>();
 
 		//Have a list of routines found based on symbol lookups
-		while (routines.size() > 0) {
+		while (!routines.isEmpty()) {
 			// get the next routine to lookup
 			Address addr = routines.remove(0);
 			paramIndex = paramIndexes.remove(0);

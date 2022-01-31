@@ -137,7 +137,7 @@ public class ProgramAnnotatedStringHandler implements AnnotatedStringHandler {
 		String programText = getProgramText(annotationParts);
 		String programName = FilenameUtils.getName(programText);
 		String path = FilenameUtils.getFullPathNoEndSeparator(programText);
-		if (path.length() > 0) {
+		if (!path.isEmpty()) {
 			path = StringUtils.prependIfMissing(FilenameUtils.separatorsToUnix(path), "/");
 			folder = projectData.getFolder(path);
 		}

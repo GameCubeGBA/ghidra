@@ -227,7 +227,7 @@ public class SymbolUtilities {
 		if (name == null) {
 			throw new InvalidInputException("Symbol name can't be null");
 		}
-		if (name.length() == 0) {
+		if (name.isEmpty()) {
 			throw new InvalidInputException("Symbol name can't be empty string");
 		}
 		if (name.length() > MAX_SYMBOL_NAME_LENGTH) {
@@ -627,7 +627,7 @@ public class SymbolUtilities {
 
 		int start = 1;
 		int end = pieces.length - 2;
-		if (pieces[end].length() == 0) { // if last piece is empty string, then it is not part of spaceName;
+		if (pieces[end].isEmpty()) { // if last piece is empty string, then it is not part of spaceName;
 			end--;
 		}
 
@@ -664,7 +664,7 @@ public class SymbolUtilities {
 	}
 
 	public static boolean isDefaultParameterName(String name) {
-		if (name == null || name.length() == 0) {
+		if (name == null || name.isEmpty()) {
 			return true;
 		}
 		if (name.startsWith(Function.DEFAULT_PARAM_PREFIX)) {
@@ -742,7 +742,7 @@ public class SymbolUtilities {
 
 	public static boolean isDefaultLocalName(Program program, String name,
 			VariableStorage storage) {
-		if (name == null || name.length() == 0) {
+		if (name == null || name.isEmpty()) {
 			return true;
 		}
 		if (storage == VariableStorage.BAD_STORAGE) {
@@ -784,7 +784,7 @@ public class SymbolUtilities {
 	}
 
 	public static boolean isDefaultLocalStackName(String name) {
-		if (name == null || name.length() == 0) {
+		if (name == null || name.isEmpty()) {
 			return true;
 		}
 		if (name.startsWith(Function.DEFAULT_LOCAL_PREFIX)) {

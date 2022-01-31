@@ -375,7 +375,7 @@ public class BatchInfo {
 				batchGroup.add(provider, loadSpecs, fsrl, currentUASI);
 			}
 
-			return loaderMap.keySet().size() > 0;
+			return !loaderMap.keySet().isEmpty();
 		}
 		catch (IOException ioe) {
 			Msg.warn(this, "Error while probing file " + fsrl + " for loader applications: " +

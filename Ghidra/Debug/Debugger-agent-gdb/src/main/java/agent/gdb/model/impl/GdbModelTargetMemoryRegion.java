@@ -51,7 +51,7 @@ public class GdbModelTargetMemoryRegion
 
 	protected static String computeDisplay(GdbMemoryMapping mapping) {
 		// NOTE: This deviates from GDB's table display, as it'd be confusing in isolation
-		if (mapping.getObjfile() == null || mapping.getObjfile().length() == 0) {
+		if (mapping.getObjfile() == null || mapping.getObjfile().isEmpty()) {
 			return String.format("?? (0x%x-0x%x)", mapping.getStart(), mapping.getEnd());
 		}
 		return String.format("%s (0x%x-0x%x,0x%x)", mapping.getObjfile(), mapping.getStart(),

@@ -153,7 +153,7 @@ public class HexOrDecimalInput extends JTextField {
 	}
 
 	private Long computeValueFromString(String text) {
-		if (text.length() == 0) {
+		if (text.isEmpty()) {
 			return null;
 		}
 
@@ -216,7 +216,7 @@ public class HexOrDecimalInput extends JTextField {
 		public void remove(int offs, int len) throws BadLocationException {
 			super.remove(offs, len);
 			String newText = HexOrDecimalInput.this.getText();
-			if (newText.length() == 0 || newText.equals("-")) {
+			if (newText.isEmpty() || newText.equals("-")) {
 				currentValue = null;
 			}
 			else {

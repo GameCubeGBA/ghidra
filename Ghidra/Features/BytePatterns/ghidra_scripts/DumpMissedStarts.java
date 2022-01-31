@@ -36,7 +36,7 @@ public class DumpMissedStarts extends GhidraScript implements PatternFactory {
 	private boolean functionMatchesPattern(byte[] buff, int numbytes) {
 		matchlist.clear();
 		root.sequenceMatch(buff, numbytes, matchlist);
-		if (matchlist.size() > 0)
+		if (!matchlist.isEmpty())
 			return true;
 		return false;
 	}

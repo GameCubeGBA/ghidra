@@ -177,7 +177,7 @@ class CheckoutManager {
 	 */
 	synchronized boolean isCheckedOut() throws IOException {
 		validate();
-		return checkouts.size() != 0;
+		return !checkouts.isEmpty();
 	}
 
 	/**

@@ -81,7 +81,7 @@ class SplitBlockDialog extends DialogComponentProvider {
 	protected void okCallback() {
 		// call plugin to do the work
 		String newBlockName = blockTwoNameField.getText();
-		if (newBlockName.length() == 0) {
+		if (newBlockName.isEmpty()) {
 			newBlockName = block.getName() + ".split";
 			blockTwoNameField.setText(newBlockName);
 		}

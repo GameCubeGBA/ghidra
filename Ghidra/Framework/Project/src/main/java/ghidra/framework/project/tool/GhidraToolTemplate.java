@@ -164,7 +164,7 @@ public class GhidraToolTemplate implements ToolTemplate {
 		String location = iconElem.getAttributeValue(LOCATION_XML_NAME);
 		String iconText = iconElem.getText();
 
-		if (iconText != null && iconText.length() > 0) {
+		if (iconText != null && !iconText.isEmpty()) {
 			iconText = iconText.trim();
 			byte[] imageBytes = NumericUtilities.convertStringToBytes(iconText);
 			iconURL = new ToolIconURL(location, imageBytes);

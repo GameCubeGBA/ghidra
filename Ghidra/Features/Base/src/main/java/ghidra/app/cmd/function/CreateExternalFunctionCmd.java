@@ -57,7 +57,7 @@ public class CreateExternalFunctionCmd implements Command {
 	public CreateExternalFunctionCmd(String libraryName, String name, Address address,
 			SourceType source) {
 		this.libraryName = libraryName != null ? libraryName : Library.UNKNOWN;
-		if (name == null || name.length() == 0) {
+		if (name == null || name.isEmpty()) {
 			throw new IllegalArgumentException("External function name must be specified");
 		}
 		this.name = name;
@@ -77,7 +77,7 @@ public class CreateExternalFunctionCmd implements Command {
 	 */
 	public CreateExternalFunctionCmd(Namespace externalParentNamespace, String name,
 			Address address, SourceType source) {
-		if (externalParentNamespace == null || name.length() == 0) {
+		if (externalParentNamespace == null || name.isEmpty()) {
 			throw new IllegalArgumentException("A parent namespace must be specified.");
 		}
 		if (!externalParentNamespace.isExternal()) {

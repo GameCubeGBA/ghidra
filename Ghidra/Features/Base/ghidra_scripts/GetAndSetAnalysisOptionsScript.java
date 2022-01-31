@@ -101,7 +101,7 @@ public class GetAndSetAnalysisOptionsScript extends GhidraScript {
 
 			defaultVal = optionDefaults.get(option);
 
-			if (defaultVal.length() > 0) {
+			if (!defaultVal.isEmpty()) {
 				printStr.append(" [ Default value = " + optionDefaults.get(option) + " ]");
 			}
 

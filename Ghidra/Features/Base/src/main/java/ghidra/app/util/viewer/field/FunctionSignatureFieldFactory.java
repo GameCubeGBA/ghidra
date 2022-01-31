@@ -270,7 +270,7 @@ public class FunctionSignatureFieldFactory extends FieldFactory {
                 }
                 ExternalManager externalManager = function.getProgram().getExternalManager();
                 String path = externalManager.getExternalLibraryPath(libName);
-                if (path == null || path.length() == 0) {
+                if (path == null || path.isEmpty()) {
                     return unresolvedThunkRefColor;
                 }
                 return resolvedThunkRefColor;

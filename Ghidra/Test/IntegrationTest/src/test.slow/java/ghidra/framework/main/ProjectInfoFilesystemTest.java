@@ -193,7 +193,7 @@ public class ProjectInfoFilesystemTest extends AbstractGhidraHeadedIntegrationTe
 		ProjectData projectData = project.getProjectData();
 		DomainFolder folder = projectData.getRootFolder();
 		for (String folderName : folderPath.split("/")) {
-			if (folderName.length() == 0) {
+			if (folderName.isEmpty()) {
 				continue;
 			}
 			DomainFolder f = folder.getFolder(folderName);

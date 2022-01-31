@@ -95,12 +95,12 @@ public class RepositoryItem implements java.io.Serializable {
 		folderPath = in.readUTF();
 		itemName = in.readUTF();
 		fileID = in.readUTF();
-		if (fileID.length() == 0) {
+		if (fileID.isEmpty()) {
 			fileID = null;
 		}
 		itemType = in.readInt();
 		contentType = in.readUTF();
-		if (contentType.length() == 0) {
+		if (contentType.isEmpty()) {
 			contentType = null;
 		}
 		version = in.readInt();

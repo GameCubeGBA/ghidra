@@ -401,7 +401,7 @@ public class SymbolInspector implements OptionsChangeListener {
 
 	private ScreenElement getExternalScreenElement(Symbol s) {
 		String path = program.getExternalManager().getExternalLibraryPath(getExternalName(s));
-		if (path != null && path.length() > 0) {
+		if (path != null && !path.isEmpty()) {
 			return OptionsGui.EXT_REF_RESOLVED;
 		}
 		return OptionsGui.BAD_REF_ADDR;

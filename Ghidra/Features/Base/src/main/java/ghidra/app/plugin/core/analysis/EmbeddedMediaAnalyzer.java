@@ -89,7 +89,7 @@ public class EmbeddedMediaAnalyzer extends AbstractAnalyzer {
 
 		searcher.search(program, searchSet, monitor);
 
-		return foundMedia.size() > 0;
+		return !foundMedia.isEmpty();
 	}
 
 	private void addByteSearchPattern(MemoryBytePatternSearcher searcher, Program program,

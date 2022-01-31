@@ -593,7 +593,7 @@ public class UserManager {
 							// Distinguished Name
 							if (st.hasMoreTokens()) {
 								String dn = st.nextToken();
-								if (dn.length() > 0) {
+								if (!dn.isEmpty()) {
 									entry.x500User = new X500Principal(dn);
 								}
 

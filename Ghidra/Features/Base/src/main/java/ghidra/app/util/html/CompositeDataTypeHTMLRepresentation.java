@@ -89,11 +89,11 @@ public class CompositeDataTypeHTMLRepresentation extends HTMLDataTypeRepresentat
 	protected List<ValidatableLine> buildAlignmentText(Composite dataType) {
 		List<ValidatableLine> list = new ArrayList<>();
 		String alignStr = CompositeInternal.getMinAlignmentString(dataType);
-		if (alignStr != null && alignStr.length() != 0) {
+		if (alignStr != null && !alignStr.isEmpty()) {
 			list.add(new TextLine(alignStr));
 		}
 		String packStr = CompositeInternal.getPackingString(dataType);
-		if (packStr != null && packStr.length() != 0) {
+		if (packStr != null && !packStr.isEmpty()) {
 			list.add(new TextLine(packStr));
 		}
 		return list;

@@ -253,7 +253,7 @@ public abstract class HTMLDataTypeRepresentation {
 	 * @return list of html marked-up {@link TextLine}s
 	 */
 	protected static List<TextLine> createCommentLines(String comment, int maxLines) {
-		if (comment == null || comment.length() == 0) {
+		if (comment == null || comment.isEmpty()) {
 			return Collections.emptyList();
 		}
 

@@ -162,7 +162,7 @@ public class VerticalChoicesPanel extends ConflictPanel {
 	 * @param text the text
 	 */
 	void setHeader(String text) {
-		if (text != null && text.length() != 0) {
+		if (text != null && !text.isEmpty()) {
 			headerLabel.setText(ConflictUtility.wrapAsHTML(text));
 			add(headerLabel, BorderLayout.NORTH);
 		}
@@ -239,7 +239,7 @@ public class VerticalChoicesPanel extends ConflictPanel {
 			return new JComponent[0];
 		}
 		ArrayList<JComponent> list = rowComps.get(row);
-		if (list == null || list.size() == 0) {
+		if (list == null || list.isEmpty()) {
 			return new JComponent[0];
 		}
         return list.toArray(new JComponent[list.size()]);

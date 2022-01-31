@@ -244,7 +244,7 @@ public class PatternStats extends GhidraScript implements PatternFactory {
 		for (ResourceFile element : fileList) {
 			Pattern.readPatterns(element, patternlist, this);
 		}
-		if (patternlist.size() == 0) {
+		if (patternlist.isEmpty()) {
 			return;
 		}
 		root = SequenceSearchState.buildStateMachine(patternlist);

@@ -92,13 +92,13 @@ public class DataTypeArchiveTransformer implements GhidraLaunchable {
 	private static void validate(File oldFile, File newFile, File destinationFile)
 			throws InvalidInputException {
 
-		if (oldFile == null || oldFile.getPath().length() == 0) {
+		if (oldFile == null || oldFile.getPath().isEmpty()) {
 			throw new InvalidInputException("Old data type archive file must be specified.");
 		}
-		if (newFile == null || newFile.getPath().length() == 0) {
+		if (newFile == null || newFile.getPath().isEmpty()) {
 			throw new InvalidInputException("New data type archive file must be specified.");
 		}
-		if (destinationFile == null || destinationFile.getPath().length() == 0) {
+		if (destinationFile == null || destinationFile.getPath().isEmpty()) {
 			throw new InvalidInputException(
 				"Destination data type archive file must be specified.");
 		}

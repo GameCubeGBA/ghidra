@@ -338,7 +338,7 @@ public class AnalyzeHeadless implements GhidraLaunchable {
 		// only if there are scripts to be run.
 		if (options.runScriptsNoImport) {
 
-			if (filesToImport != null && filesToImport.size() > 0) {
+			if (filesToImport != null && !filesToImport.isEmpty()) {
 				System.err.print("Must use either -process or -import parameters, but not both.");
 				System.err.print(" -process runs scripts over existing program(s) in a project, " +
 					"whereas -import");
@@ -360,7 +360,7 @@ public class AnalyzeHeadless implements GhidraLaunchable {
 			}
 		}
 		else {
-			if (filesToImport == null || filesToImport.size() == 0) {
+			if (filesToImport == null || filesToImport.isEmpty()) {
 				if (options.preScripts.isEmpty() && options.postScripts.isEmpty()) {
 					System.err.println("Nothing to do ... must specify -import, -process, or " +
 						"prescript and/or postscript.");

@@ -595,7 +595,7 @@ public class GnuDemanglerParser {
 	private List<String> tokenizeParameters(String parameterString) {
 		List<String> parameters = new ArrayList<>();
 
-		if (parameterString.length() == 0) {
+		if (parameterString.isEmpty()) {
 			return parameters;
 		}
 
@@ -1384,7 +1384,7 @@ public class GnuDemanglerParser {
 	 * @return the newly created type
 	 */
 	private DemangledType convertToNamespaces(List<String> names) {
-		if (names.size() == 0) {
+		if (names.isEmpty()) {
 			return null;
 		}
 		int index = names.size() - 1;

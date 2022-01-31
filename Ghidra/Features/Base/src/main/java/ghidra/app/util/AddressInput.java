@@ -154,7 +154,7 @@ public class AddressInput extends JPanel {
 	 * a valid address.
 	 */
 	public boolean hasInput() {
-		return textField.getText().length() != 0;
+		return !textField.getText().isEmpty();
 	}
 
 	/**
@@ -289,7 +289,7 @@ public class AddressInput extends JPanel {
 			spaceField.setEnabled(false);
 			remove(combo);
 			add(spaceField, BorderLayout.WEST);
-			if (textField.getText().length() == 0) {
+			if (textField.getText().isEmpty()) {
 				updateSpaceField = true;
 			}
 		}

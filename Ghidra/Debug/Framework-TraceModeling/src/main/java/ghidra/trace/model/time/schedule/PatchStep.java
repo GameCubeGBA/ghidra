@@ -202,7 +202,7 @@ public class PatchStep implements Step {
 	@Override
 	public boolean isNop() {
 		// TODO: If parsing beforehand, base on number of ops
-		return sleigh.length() == 0;
+		return sleigh.isEmpty();
 	}
 
 	@Override

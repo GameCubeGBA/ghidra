@@ -157,7 +157,7 @@ class CommentsXmlMgr {
 				// if a comment already exists, then merge...
 				//
 				String currCmt = cu.getComment(commentType);
-				if (currCmt == null || currCmt.length() == 0) {
+				if (currCmt == null || currCmt.isEmpty()) {
 					cu.setComment(commentType, comments);
 				}
 				else if (currCmt.indexOf(comments) < 0) {

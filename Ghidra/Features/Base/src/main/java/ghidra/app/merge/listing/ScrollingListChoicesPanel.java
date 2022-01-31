@@ -125,7 +125,7 @@ public class ScrollingListChoicesPanel extends ConflictPanel {
 	 * @param text the text
 	 */
 	void setHeader(String text) {
-		if (text != null && text.length() != 0) {
+		if (text != null && !text.isEmpty()) {
 			headerLabel.setText(ConflictUtility.wrapAsHTML(text));
 			add(headerLabel, BorderLayout.NORTH);
 		}

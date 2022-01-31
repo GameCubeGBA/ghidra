@@ -132,7 +132,7 @@ public class FileChooserEditor extends PropertyEditorSupport {
 			}
 
 			String path = textField.getText().trim();
-			if (path.length() != 0) {
+			if (!path.isEmpty()) {
 				File f = new File(path);
 				if (f.isDirectory()) {
 					fileChooser.setCurrentDirectory(f);

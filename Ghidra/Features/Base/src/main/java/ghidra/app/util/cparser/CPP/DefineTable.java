@@ -375,7 +375,7 @@ public class DefineTable {
 			System.err.println("DONT Replace " + currKey + " in: " + buf);
 			return -1;
 		}
-		if (argv != null && argv.size() > 0) {
+		if (argv != null && !argv.isEmpty()) {
 			// need to scan carefully, and recursively
 			// there shouldn't be so many globals...
 			// could be screwed up by so many things
@@ -558,7 +558,7 @@ public class DefineTable {
 		if (join) {
 			image = joinPdPd(image);
 		}
-		if (image.length() > 0 && image.charAt(0) == '#') {
+		if (!image.isEmpty() && image.charAt(0) == '#') {
 			image = "\"" + image.substring(1) + "\"";
 		}
 
@@ -708,7 +708,7 @@ public class DefineTable {
 	 */
 	private static CategoryPath getCategory(String catName) {
 		CategoryPath rootCat = CategoryPath.ROOT;
-		if (catName == null || catName.length() == 0) {
+		if (catName == null || catName.isEmpty()) {
 			return rootCat;
 		}
 		return new CategoryPath(rootCat, catName);

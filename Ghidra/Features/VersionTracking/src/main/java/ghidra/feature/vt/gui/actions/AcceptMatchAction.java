@@ -82,7 +82,7 @@ public class AcceptMatchAction extends DockingAction {
 		else {
 			selectedMatches = new ArrayList<VTMatch>();
 		}
-		return (selectedMatches.size() > 0);
+		return (!selectedMatches.isEmpty());
 	}
 
 	@Override

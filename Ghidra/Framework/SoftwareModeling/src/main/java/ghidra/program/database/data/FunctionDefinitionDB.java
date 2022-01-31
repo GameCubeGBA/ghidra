@@ -134,7 +134,7 @@ class FunctionDefinitionDB extends DataTypeDB implements FunctionDefinition {
 			if (hasVarArgs) {
 				buf.append(VAR_ARGS_DISPLAY_STRING);
 			}
-			else if (parameters.size() == 0) {
+			else if (parameters.isEmpty()) {
 				buf.append(VOID_PARAM_DISPLAY_STRING);
 			}
 			buf.append(")");

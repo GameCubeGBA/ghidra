@@ -167,7 +167,7 @@ public class SSHAuthenticationModule {
 		if (nameCallbackAllowed && nameCb != null) {
 			username = nameCb.getName();
 		}
-		if (username == null || username.length() == 0) {
+		if (username == null || username.isEmpty()) {
 			throw new FailedLoginException("User ID must be specified");
 		}
 		if (!userMgr.isValidUser(username)) {

@@ -596,13 +596,13 @@ class FunctionsXmlMgr {
 	}
 
 	private void writeRegularComment(XmlWriter writer, String comment) {
-		if (comment != null && comment.length() > 0) {
+		if (comment != null && !comment.isEmpty()) {
 			writer.writeElement("REGULAR_CMT", null, comment);
 		}
 	}
 
 	private void writeRepeatableComment(XmlWriter writer, String comment) {
-		if (comment != null && comment.length() > 0) {
+		if (comment != null && !comment.isEmpty()) {
 			writer.writeElement("REPEATABLE_CMT", null, comment);
 		}
 	}
@@ -644,7 +644,7 @@ class FunctionsXmlMgr {
 		attrs.addAttribute("SIZE", var.getLength(), true);
 
 		String comment = var.getComment();
-		if (comment == null || comment.length() == 0) {
+		if (comment == null || comment.isEmpty()) {
 			writer.writeElement("STACK_VAR", attrs);
 		}
 		else {
@@ -664,7 +664,7 @@ class FunctionsXmlMgr {
 			attrs.addAttribute("DATATYPE_NAMESPACE", reg.getDataType().getCategoryPath().getPath());
 
 			String comment = reg.getComment();
-			if (comment == null || comment.length() == 0) {
+			if (comment == null || comment.isEmpty()) {
 				writer.writeElement("REGISTER_VAR", attrs);
 			}
 			else {

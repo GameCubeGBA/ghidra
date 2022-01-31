@@ -193,7 +193,7 @@ public class MatchNameAnalysis {
 			finalNameList = similarBaseNames;
 		}
 
-		if (matches.size() > 0) {
+		if (!matches.isEmpty()) {
 			overallScore = matches.get(0).getOverallScore();
 		}
 	}

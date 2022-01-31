@@ -169,7 +169,7 @@ public class DecompInterface {
 	}
 
 	private boolean isErrorMessage() {
-		if (decompileMessage == null || decompileMessage.length() == 0) {
+		if (decompileMessage == null || decompileMessage.isEmpty()) {
 			return false;
 		}
 
@@ -224,7 +224,7 @@ public class DecompInterface {
 		decompCallback.setNativeMessage(null);
 		decompProcess.registerProgram(decompCallback, pspecxml, cspecxml, tspec, coretypes);
 		String nativeMessage = decompCallback.getNativeMessage();
-		if ((nativeMessage != null) && (nativeMessage.length() != 0)) {
+		if ((nativeMessage != null) && (!nativeMessage.isEmpty())) {
 			throw new IOException("Could not register program: " + nativeMessage);
 		}
 		if (xmlOptions != null) {

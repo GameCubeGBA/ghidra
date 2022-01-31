@@ -206,7 +206,7 @@ public class NormalizedAddressSet implements AddressSetView {
 	 */
 	@Override
 	public boolean isEmpty() {
-		return baseLists.size() == 0;
+		return baseLists.isEmpty();
 	}
 
 	/**
@@ -214,7 +214,7 @@ public class NormalizedAddressSet implements AddressSetView {
 	 */
 	@Override
 	public Address getMinAddress() {
-		if (bases.size() == 0) {
+		if (bases.isEmpty()) {
 			return null;
 		}
 
@@ -229,7 +229,7 @@ public class NormalizedAddressSet implements AddressSetView {
 	 */
 	@Override
 	public Address getMaxAddress() {
-		if (bases.size() == 0) {
+		if (bases.isEmpty()) {
 			return null;
 		}
 

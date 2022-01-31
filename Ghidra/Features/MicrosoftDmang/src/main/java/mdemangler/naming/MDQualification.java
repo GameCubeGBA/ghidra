@@ -31,7 +31,7 @@ public class MDQualification extends MDParsableItem implements Iterable<MDQualif
 	}
 
 	public boolean hasContent() {
-		return (quals.size() > 0);
+		return (!quals.isEmpty());
 	}
 
 	@Override
@@ -89,7 +89,7 @@ public class MDQualification extends MDParsableItem implements Iterable<MDQualif
 	}
 
 	public void insertHeadQualifier(StringBuilder builder) {
-		if (quals.size() != 0) {
+		if (!quals.isEmpty()) {
 			quals.get(0).insert(builder);
 		}
 	}

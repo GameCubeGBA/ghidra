@@ -199,7 +199,7 @@ public class ProgramBigListingModel implements ListingModel, FormatModelListener
 			dataList = null;
 		}
 
-		if (list.size() > 0) {
+		if (!list.isEmpty()) {
 			return new MultiRowLayout(list.toArray(new RowLayout[list.size()]), indexSize);
 		}
         if (cu != null) {

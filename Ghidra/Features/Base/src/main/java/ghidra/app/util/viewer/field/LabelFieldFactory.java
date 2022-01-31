@@ -172,7 +172,7 @@ public class LabelFieldFactory extends FieldFactory {
 		// if there is, then create a "OFF" label
 		//
 		List<Address> offcuts = getOffcutReferenceAddress(cu);
-		boolean hasOffcuts = offcuts.size() > 0;
+		boolean hasOffcuts = !offcuts.isEmpty();
 
 		// if there is only a function symbol and we are not showing function symbols, get out.
 		if (!hasOffcuts && symbols.length == 1 && func != null && !displayFunctionLabel) {

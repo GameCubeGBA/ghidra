@@ -174,7 +174,7 @@ public class Annotation {
 		String[] strings = content.split("\\s");
 		for (String string : strings) {
 			// 0 length strings can happen when 'content' begins with a space
-			if (string.length() > 0) {
+			if (!string.isEmpty()) {
 				tokenContainer.add(string);
 			}
 		}

@@ -1353,7 +1353,7 @@ public class Disassembler implements DisassemblerConflictHandler {
 			return true;
 		}
 		String callFixupStr = func.getCallFixup();
-		if (callFixupStr == null || callFixupStr.length() == 0) {
+		if (callFixupStr == null || callFixupStr.isEmpty()) {
 			return false;
 		}
 		PcodeInjectLibrary pcodeInjectLibrary = program.getCompilerSpec().getPcodeInjectLibrary();

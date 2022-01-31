@@ -601,7 +601,7 @@ abstract class OperandFieldHelper extends FieldFactory {
 
 				// has external reference been resolved?
 				String path = extMgr.getExternalLibraryPath(extLoc.getLibraryName());
-				if (path != null && path.length() > 0) {
+				if (path != null && !path.isEmpty()) {
 					return externalRefAttributes;
 				}
 				return badRefAttributes;

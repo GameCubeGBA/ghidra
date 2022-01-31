@@ -626,7 +626,7 @@ abstract class CompositeViewerModel extends AbstractTableModel
 	 *  Clears the current status string.
 	 */
 	public void clearStatus() {
-		if (status.length() == 0) {
+		if (status.isEmpty()) {
 			return;
 		}
 		status = "";

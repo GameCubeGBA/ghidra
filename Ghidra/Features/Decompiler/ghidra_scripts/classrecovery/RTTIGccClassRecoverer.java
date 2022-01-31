@@ -1142,7 +1142,7 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 			List<Address> referenceFromAddresses =
 				extendedFlatAPI.getReferenceFromAddresses(address);
 
-			if (referenceFromAddresses.size() > 0) {
+			if (!referenceFromAddresses.isEmpty()) {
 				return false;
 			}
 

@@ -144,7 +144,7 @@ public abstract class AbstractMagePanelManager<T> implements PanelManager {
 
 	@Override
 	public final boolean hasPreviousPanel() {
-		return panelPath.size() > 0;
+		return !panelPath.isEmpty();
 	}
 
 	@Override

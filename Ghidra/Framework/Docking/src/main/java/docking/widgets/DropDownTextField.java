@@ -426,7 +426,7 @@ public class DropDownTextField<T> extends JTextField implements GComponent {
 
 	// for testing so that we can override, otherwise would be private
 	protected List<T> getMatchingData(String searchText) {
-		if (searchText == null || searchText.length() == 0) {
+		if (searchText == null || searchText.isEmpty()) {
 			return Collections.emptyList();
 		}
 

@@ -389,7 +389,7 @@ public class FrontEndTool extends PluginTool implements OptionsChangeListener {
             }
         }
 
-		if (changedList.size() > 0) {
+		if (!changedList.isEmpty()) {
 			ChangedFilesDialog dialog = new ChangedFilesDialog(tool, changedList);
 			dialog.setCancelToolTipText("Cancel Check In");
 			if (!dialog.showDialog()) {// blocks until the user hits Save or Cancel
@@ -402,7 +402,7 @@ public class FrontEndTool extends PluginTool implements OptionsChangeListener {
                 }
             }
 		}
-		if (list.size() > 0) {
+		if (!list.isEmpty()) {
 			tool.execute(new CheckInTask(tool, list, parent));
 		}
 		else {
@@ -455,7 +455,7 @@ public class FrontEndTool extends PluginTool implements OptionsChangeListener {
                 }
             }
         }
-		if (changedList.size() > 0) {
+		if (!changedList.isEmpty()) {
 			ChangedFilesDialog dialog = new ChangedFilesDialog(tool, changedList);
 			dialog.setCancelToolTipText("Cancel Merge");
 			if (!dialog.showDialog()) {// blocks until the user hits Save or Cancel
@@ -468,7 +468,7 @@ public class FrontEndTool extends PluginTool implements OptionsChangeListener {
                 }
             }
 		}
-		if (list.size() > 0) {
+		if (!list.isEmpty()) {
 			execute(new MergeTask(tool, list, taskListener));
 		}
 		else {

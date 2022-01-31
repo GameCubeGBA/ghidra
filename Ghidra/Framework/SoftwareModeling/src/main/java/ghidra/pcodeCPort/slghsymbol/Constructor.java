@@ -388,7 +388,7 @@ public class Constructor {
 		final int printpieces = printpiece.size();
 		for (int i = 0; i < printpieces; ++i) {
 			String piece = printpiece.get(i);
-			if (piece.length() > 0 && piece.charAt(0) == '\n') {
+			if (!piece.isEmpty() && piece.charAt(0) == '\n') {
 				int index = piece.charAt(1) - 'A';
 				s.append("<opprint id=\"");
 				s.print(index);
@@ -540,7 +540,7 @@ public class Constructor {
 		// Fix up printpiece operand refs
 		for (int i = 0; i < printpiece.size(); ++i) {
 			final String piece = printpiece.get(i);
-			if (piece.length() > 0 && piece.charAt(0) == '\n') {
+			if (!piece.isEmpty() && piece.charAt(0) == '\n') {
 				int index = piece.charAt(1) - 'A';
 				index = handmap.get(index);
 				char c = (char) ('A' + index);

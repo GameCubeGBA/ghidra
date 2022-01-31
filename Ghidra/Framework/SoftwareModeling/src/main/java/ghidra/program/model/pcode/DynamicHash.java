@@ -315,7 +315,7 @@ public class DynamicHash {
 	}
 
 	private void pieceTogetherHash(Varnode root, int method) {
-		if (opedge.size() == 0) {
+		if (opedge.isEmpty()) {
 			hash = 0;
 			addrresult = null;
 			return;
@@ -467,7 +467,7 @@ public class DynamicHash {
                 }
             }
 			if (vnlist2.size() <= maxduplicates) {
-				if ((champion.size() == 0) || (vnlist2.size() < champion.size())) {
+				if ((champion.isEmpty()) || (vnlist2.size() < champion.size())) {
 					champion = vnlist2;
 					vnlist2 = new ArrayList<>();
 					if (champion.size() == 1) {
@@ -476,7 +476,7 @@ public class DynamicHash {
 				}
 			}
 		}
-		if (champion.size() == 0) {
+		if (champion.isEmpty()) {
 			hash = 0;
 			addrresult = Address.NO_ADDRESS;	// Couldn't find a unique hash
 			return;

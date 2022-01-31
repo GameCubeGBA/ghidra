@@ -268,7 +268,7 @@ public class FillOutStructureCmd extends BackgroundCommand {
 	private void pushIntoCalls() {
 		AddressSet doneSet = new AddressSet();
 
-		while (addressToCallInputMap.size() > 0) {
+		while (!addressToCallInputMap.isEmpty()) {
 			currentCallDepth += 1;
 			if (currentCallDepth > maxCallDepth) {
 				return;

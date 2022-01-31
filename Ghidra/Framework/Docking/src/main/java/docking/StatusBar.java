@@ -254,7 +254,7 @@ public class StatusBar extends JPanel {
 	}
 
 	private void addMessageToQueue(String message) {
-		if (message != null && message.trim().length() != 0) {
+		if (message != null && !message.trim().isEmpty()) {
 			if (message.endsWith("\n")) {
 				message = message.substring(0, message.length() - 1);
 			}
@@ -275,7 +275,7 @@ public class StatusBar extends JPanel {
 	 */
 	@Override
 	public String getToolTipText() {
-		if (messageQueue.size() > 0) {
+		if (!messageQueue.isEmpty()) {
 			StringBuilder buffer = new StringBuilder("<HTML>");
 
 			Iterator<String> iter = messageQueue.iterator();

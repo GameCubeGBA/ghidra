@@ -101,7 +101,7 @@ public class GnuDemangler implements Demangler {
 
 			GnuDemanglerNativeProcess process = getNativeProcess(options);
 			String demangled = process.demangle(mangled).trim();
-			if (mangled.equals(demangled) || demangled.length() == 0) {
+			if (mangled.equals(demangled) || demangled.isEmpty()) {
 				throw new DemangledException(true);
 			}
 

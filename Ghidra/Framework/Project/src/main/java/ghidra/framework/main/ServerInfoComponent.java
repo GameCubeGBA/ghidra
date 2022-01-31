@@ -164,7 +164,7 @@ public class ServerInfoComponent extends JPanel {
 		if (statusListener == null) {
 			return;
 		}
-		if (text == null || text.length() == 0) {
+		if (text == null || text.isEmpty()) {
 			statusListener.clearStatusText();
 		}
 		else {
@@ -199,7 +199,7 @@ public class ServerInfoComponent extends JPanel {
 	private boolean checkServerName() {
 		String name = nameField.getText();
 		String msg = null;
-		if (name.length() == 0) {
+		if (name.isEmpty()) {
 			msg = "Enter the server name";
 		}
 		setStatus(msg);

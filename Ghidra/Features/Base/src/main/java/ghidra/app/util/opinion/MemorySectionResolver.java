@@ -122,7 +122,7 @@ public abstract class MemorySectionResolver {
 	private String getUniqueSectionName(String baseName) {
 		if (baseName != null) {
 			baseName = baseName.trim();
-			if (baseName.length() == 0) {
+			if (baseName.isEmpty()) {
 				baseName = "NO-NAME";
 			}
 		}

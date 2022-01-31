@@ -268,7 +268,7 @@ public abstract class GhidraScript extends FlatProgramAPI {
 			String basename = getScriptName();
 			basename = basename.substring(0, basename.lastIndexOf('.'));
 
-			if (potentialPropertiesFileLocs.size() > 0) {
+			if (!potentialPropertiesFileLocs.isEmpty()) {
 				propertiesFileParams.loadGhidraScriptProperties(potentialPropertiesFileLocs,
 					basename);
 			}
@@ -837,7 +837,7 @@ public abstract class GhidraScript extends FlatProgramAPI {
 			GhidraScript script = provider.getScriptInstance(scriptSource, writer);
 			script.setScriptArgs(scriptArguments);
 
-			if (potentialPropertiesFileLocs.size() > 0) {
+			if (!potentialPropertiesFileLocs.isEmpty()) {
 				script.setPotentialPropertiesFileLocations(potentialPropertiesFileLocs);
 			}
 
@@ -1345,7 +1345,7 @@ public abstract class GhidraScript extends FlatProgramAPI {
 			String returnString = setAnalysisOption(options, analysisOptionName,
 				analysisSettings.get(analysisOptionName));
 
-			if (returnString.length() > 0) {
+			if (!returnString.isEmpty()) {
 				errorBuffer.append(returnString);
 				errorBuffer.append("\n");
 			}
@@ -1376,7 +1376,7 @@ public abstract class GhidraScript extends FlatProgramAPI {
 		Options options = program.getOptions(Program.ANALYSIS_PROPERTIES);
 		String errorMsg = setAnalysisOption(options, optionName, optionValue);
 
-		if (errorMsg.length() > 0) {
+		if (!errorMsg.isEmpty()) {
 			if (isRunningHeadless()) {
 				Msg.error(this, errorMsg);
 			}

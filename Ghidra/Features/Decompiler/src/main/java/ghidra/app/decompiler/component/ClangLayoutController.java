@@ -316,7 +316,7 @@ public class ClangLayoutController implements LayoutModel, LayoutModelListener {
 			}
 		}
 		String finalLine = buf.toString();
-		if (finalLine.length() != 0) {
+		if (!finalLine.isEmpty()) {
 			res.add(finalLine);
 		}
 	}

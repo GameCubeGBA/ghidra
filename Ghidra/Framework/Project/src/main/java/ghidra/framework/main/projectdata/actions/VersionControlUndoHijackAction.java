@@ -96,7 +96,7 @@ public class VersionControlUndoHijackAction extends VersionControlAction {
 		if (!checkRepositoryConnected()) {
 			return;
 		}
-		if (hijackList.size() > 0) {
+		if (!hijackList.isEmpty()) {
 			UndoActionDialog dialog = new UndoActionDialog("Confirm Undo Hijack",
 				ResourceManager.loadImage("images/undo_hijack.png"), "Undo_Hijack", "hijack",
 				hijackList);

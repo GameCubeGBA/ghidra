@@ -213,7 +213,7 @@ public class FormatStringAnalyzer extends AbstractAnalyzer {
 				}
 				List<FunctionCallData> functionCallDataList = pcodeParser.parseFunctionForCallData(
 					pcodeOpASTs, stringsByAddress, variadicFuncNames);
-				if (functionCallDataList != null && functionCallDataList.size() > 0) {
+				if (functionCallDataList != null && !functionCallDataList.isEmpty()) {
 					overrideCallList(program, function, functionCallDataList, namesToParameters,
 						namesToReturn);
 				}

@@ -92,7 +92,7 @@ public class StackEditorManager implements EditorListener {
 	 * @return true if editing stack frame(s).
 	 */
 	boolean isEditInProgress() {
-		return editorMap.size() > 0;
+		return !editorMap.isEmpty();
 	}
 
 	/**

@@ -139,7 +139,7 @@ public abstract class AbstractFieldListMsType extends AbstractMsType {
 		memberBuilder.append("}");
 
 		StringBuilder otherBuilder = new StringBuilder();
-		if (methodList.size() != 0) {
+		if (!methodList.isEmpty()) {
 			otherBuilder.append("...");
 		}
 		builder.append(classBuilder);

@@ -117,7 +117,7 @@ public class ParamInfo {
 	}
 
 	void setName(String name) {
-		if (name != null && name.length() == 0) {
+		if (name != null && name.isEmpty()) {
 			name = null;
 		}
 		this.name = name;

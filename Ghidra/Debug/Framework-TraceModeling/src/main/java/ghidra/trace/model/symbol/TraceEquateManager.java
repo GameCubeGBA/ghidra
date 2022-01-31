@@ -32,7 +32,7 @@ public interface TraceEquateManager extends TraceEquateOperations {
 		if (name == null) {
 			throw new IllegalArgumentException("name cannot be null");
 		}
-		if (name.length() == 0) {
+		if (name.isEmpty()) {
 			throw new IllegalArgumentException("name cannot be empty string");
 		}
 		Pattern whitespace = Pattern.compile("\\s+");

@@ -701,7 +701,7 @@ public class ProgramTreePlugin extends ProgramPlugin
                 for (GroupPath gp : newViewList) {
                     tree.addGroupViewPath(gp);
                 }
-				if (newViewList.size() > 0 && tree.getViewList().size() == 0) {
+				if (!newViewList.isEmpty() && tree.getViewList().isEmpty()) {
 					tree.addGroupViewPath(new GroupPath(rootNode.getName()));
 				}
 			}
