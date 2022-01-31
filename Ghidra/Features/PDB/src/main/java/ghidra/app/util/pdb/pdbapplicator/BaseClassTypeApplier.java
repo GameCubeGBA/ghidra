@@ -70,10 +70,10 @@ public class BaseClassTypeApplier extends MsTypeApplier {
 		if (msType instanceof AbstractBaseClassMsType) {
 			throw new PdbException("Base Pointer Offset is not valid field");
 		}
-		else if (msType instanceof AbstractVirtualBaseClassMsType) {
-			return ((AbstractVirtualBaseClassMsType) msType).getBasePointerOffset();
-		}
-		return ((AbstractIndirectVirtualBaseClassMsType) msType).getBasePointerOffset();
+        if (msType instanceof AbstractVirtualBaseClassMsType) {
+            return ((AbstractVirtualBaseClassMsType) msType).getBasePointerOffset();
+        }
+        return ((AbstractIndirectVirtualBaseClassMsType) msType).getBasePointerOffset();
 	}
 
 	/**
@@ -84,10 +84,10 @@ public class BaseClassTypeApplier extends MsTypeApplier {
 		if (msType instanceof AbstractBaseClassMsType) {
 			return ((AbstractBaseClassMsType) msType).getAttributes();
 		}
-		else if (msType instanceof AbstractVirtualBaseClassMsType) {
-			return ((AbstractVirtualBaseClassMsType) msType).getAttributes();
-		}
-		return ((AbstractIndirectVirtualBaseClassMsType) msType).getAttributes();
+        if (msType instanceof AbstractVirtualBaseClassMsType) {
+            return ((AbstractVirtualBaseClassMsType) msType).getAttributes();
+        }
+        return ((AbstractIndirectVirtualBaseClassMsType) msType).getAttributes();
 	}
 
 	/**
@@ -98,10 +98,10 @@ public class BaseClassTypeApplier extends MsTypeApplier {
 		if (msType instanceof AbstractBaseClassMsType) {
 			return ((AbstractBaseClassMsType) msType).getBaseClassRecordNumber();
 		}
-		else if (msType instanceof AbstractVirtualBaseClassMsType) {
-			return ((AbstractVirtualBaseClassMsType) msType).getBaseClassRecordNumber();
-		}
-		return ((AbstractIndirectVirtualBaseClassMsType) msType).getBaseClassRecordNumber();
+        if (msType instanceof AbstractVirtualBaseClassMsType) {
+            return ((AbstractVirtualBaseClassMsType) msType).getBaseClassRecordNumber();
+        }
+        return ((AbstractIndirectVirtualBaseClassMsType) msType).getBaseClassRecordNumber();
 	}
 
 	/**
@@ -121,10 +121,10 @@ public class BaseClassTypeApplier extends MsTypeApplier {
 		if (msType instanceof AbstractVirtualBaseClassMsType) {
 			return ((AbstractVirtualBaseClassMsType) msType).getVirtualBasePointerRecordNumber();
 		}
-		else if (msType instanceof AbstractIndirectVirtualBaseClassMsType) {
-			return ((AbstractIndirectVirtualBaseClassMsType) msType).getVirtualBasePointerRecordNumber();
-		}
-		throw new PdbException("Not a virtual base class");
+        if (msType instanceof AbstractIndirectVirtualBaseClassMsType) {
+            return ((AbstractIndirectVirtualBaseClassMsType) msType).getVirtualBasePointerRecordNumber();
+        }
+        throw new PdbException("Not a virtual base class");
 	}
 
 	@Override

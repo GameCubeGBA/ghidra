@@ -316,14 +316,14 @@ public class FSBActionContext extends ActionContext {
 				fsrls.add(validated);
 				continue;
 			}
-			else if (node instanceof FSBRootNode && fsrl.getFS().hasContainer()) {
-				// 'convert' a file system root node back into its container file
-				fsrls.add(fsrl.getFS().getContainer());
-			}
-			else if (node instanceof FSBFileNode) {
-				fsrls.add(fsrl);
-			}
-		}
+            if (node instanceof FSBRootNode && fsrl.getFS().hasContainer()) {
+                // 'convert' a file system root node back into its container file
+                fsrls.add(fsrl.getFS().getContainer());
+            }
+            else if (node instanceof FSBFileNode) {
+                fsrls.add(fsrl);
+            }
+        }
 		return fsrls;
 	}
 

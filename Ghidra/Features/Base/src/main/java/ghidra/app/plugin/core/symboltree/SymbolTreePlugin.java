@@ -120,11 +120,11 @@ public class SymbolTreePlugin extends Plugin {
 					goToService.goTo(symbol.getAddress(), program);
 					return; // let GoTo service provide status messages
 				}
-				else if (loc != null) {
-					reason = " (not in-memory)";
-					success = goToService.goTo(loc);
-				}
-			}
+                if (loc != null) {
+                    reason = " (not in-memory)";
+                    success = goToService.goTo(loc);
+                }
+            }
 			finally {
 				processingGoTo = false;
 			}

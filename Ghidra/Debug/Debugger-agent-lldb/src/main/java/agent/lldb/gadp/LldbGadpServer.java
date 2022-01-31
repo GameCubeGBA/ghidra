@@ -96,36 +96,36 @@ public interface LldbGadpServer extends AutoCloseable {
 					printUsage();
 					System.exit(0);
 				}
-				else if ("-p".equals(a) || "--port".equals(a)) {
-					if (!ait.hasNext()) {
-						System.err.println("Expected PORT");
-						printUsage();
-						System.exit(-1);
-					}
-					String portStr = ait.next();
-					try {
-						port = Integer.parseInt(portStr);
-					}
-					catch (NumberFormatException e) {
-						System.err.println("Integer required. Got " + portStr);
-						printUsage();
-						System.exit(-1);
-					}
-				}
-				else if ("-H".equals(a) || "--host".equals(a)) {
-					if (!ait.hasNext()) {
-						System.err.println("Expected HOST/ADDR");
-						printUsage();
-						System.exit(-1);
-					}
-					iface = ait.next();
-				}
-				else {
-					System.err.println("Unknown option: " + a);
-					printUsage();
-					System.exit(-1);
-				}
-			}
+                if ("-p".equals(a) || "--port".equals(a)) {
+                    if (!ait.hasNext()) {
+                        System.err.println("Expected PORT");
+                        printUsage();
+                        System.exit(-1);
+                    }
+                    String portStr = ait.next();
+                    try {
+                        port = Integer.parseInt(portStr);
+                    }
+                    catch (NumberFormatException e) {
+                        System.err.println("Integer required. Got " + portStr);
+                        printUsage();
+                        System.exit(-1);
+                    }
+                }
+                else if ("-H".equals(a) || "--host".equals(a)) {
+                    if (!ait.hasNext()) {
+                        System.err.println("Expected HOST/ADDR");
+                        printUsage();
+                        System.exit(-1);
+                    }
+                    iface = ait.next();
+                }
+                else {
+                    System.err.println("Unknown option: " + a);
+                    printUsage();
+                    System.exit(-1);
+                }
+            }
 
 			bindTo = new InetSocketAddress(iface, port);
 		}

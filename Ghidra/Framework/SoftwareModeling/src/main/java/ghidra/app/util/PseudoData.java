@@ -208,12 +208,12 @@ public class PseudoData extends PseudoCodeUnit implements Data {
 			if (obj instanceof Scalar) {
 				return (Scalar) obj;
 			}
-			else if (obj instanceof Address) {
-				Address addrObj = (Address) obj;
-				long offset = addrObj.getAddressableWordOffset();
-				return new Scalar(addrObj.getAddressSpace().getPointerSize() * 8, offset, false);
-			}
-		}
+            if (obj instanceof Address) {
+                Address addrObj = (Address) obj;
+                long offset = addrObj.getAddressableWordOffset();
+                return new Scalar(addrObj.getAddressSpace().getPointerSize() * 8, offset, false);
+            }
+        }
 		return null;
 	}
 
@@ -294,21 +294,21 @@ public class PseudoData extends PseudoCodeUnit implements Data {
 			int index = offset / elementLength;
 			return getComponent(index);
 		}
-		else if (baseDataType instanceof Structure) {
-			Structure struct = (Structure) baseDataType;
-			DataTypeComponent dtc = struct.getComponentContaining(offset);
-			return (dtc != null) ? getComponent(dtc.getOrdinal()) : null;
-		}
-		else if (baseDataType instanceof DynamicDataType) {
-			DynamicDataType ddt = (DynamicDataType) baseDataType;
-			DataTypeComponent dtc = ddt.getComponentAt(offset, this);
-			return (dtc != null) ? getComponent(dtc.getOrdinal()) : null;
-		}
-		else if (baseDataType instanceof Union) {
-			// TODO: Returning anything is potentially bad
-			//return getComponent(0);
-		}
-		return null;
+        if (baseDataType instanceof Structure) {
+            Structure struct = (Structure) baseDataType;
+            DataTypeComponent dtc = struct.getComponentContaining(offset);
+            return (dtc != null) ? getComponent(dtc.getOrdinal()) : null;
+        }
+        if (baseDataType instanceof DynamicDataType) {
+            DynamicDataType ddt = (DynamicDataType) baseDataType;
+            DataTypeComponent dtc = ddt.getComponentAt(offset, this);
+            return (dtc != null) ? getComponent(dtc.getOrdinal()) : null;
+        }
+        if (baseDataType instanceof Union) {
+            // TODO: Returning anything is potentially bad
+            //return getComponent(0);
+        }
+        return null;
 	}
 
 	@Override
@@ -390,13 +390,13 @@ public class PseudoData extends PseudoCodeUnit implements Data {
 		if (baseDataType instanceof Composite) {
 			return ((Composite) baseDataType).getNumComponents();
 		}
-		else if (baseDataType instanceof Array) {
-			return ((Array) baseDataType).getNumElements();
-		}
-		else if (baseDataType instanceof DynamicDataType) {
-			return ((DynamicDataType) baseDataType).getNumComponents(this);
-		}
-		return 0;
+        if (baseDataType instanceof Array) {
+            return ((Array) baseDataType).getNumElements();
+        }
+        if (baseDataType instanceof DynamicDataType) {
+            return ((DynamicDataType) baseDataType).getNumComponents(this);
+        }
+        return 0;
 	}
 
 	@Override

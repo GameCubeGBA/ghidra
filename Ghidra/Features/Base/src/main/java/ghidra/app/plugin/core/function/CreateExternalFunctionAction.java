@@ -78,19 +78,19 @@ public class CreateExternalFunctionAction extends ProgramContextAction {
 			ListingActionContext listingContext = (ListingActionContext) context;
 			return getExternalCodeSymbol(listingContext) != null;
 		}
-		else if (context instanceof ProgramSymbolActionContext) {
-			ProgramSymbolActionContext symbolContext = (ProgramSymbolActionContext) context;
-			if (symbolContext.getSymbolCount() == 0) {
-				return false;
-			}
-			for (Symbol s : symbolContext.getSymbols()) {
-				if (!s.isExternal() || s.getSymbolType() != SymbolType.LABEL) {
-					return false;
-				}
-			}
-			return true;
-		}
-		return false;
+        if (context instanceof ProgramSymbolActionContext) {
+            ProgramSymbolActionContext symbolContext = (ProgramSymbolActionContext) context;
+            if (symbolContext.getSymbolCount() == 0) {
+                return false;
+            }
+            for (Symbol s : symbolContext.getSymbols()) {
+                if (!s.isExternal() || s.getSymbolType() != SymbolType.LABEL) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
 	}
 
 	@Override

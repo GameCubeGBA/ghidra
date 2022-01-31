@@ -156,14 +156,14 @@ public class PdbPlugin extends Plugin {
 			if (loadPdbTask.getResultException() != null) {
 				throw loadPdbTask.getResultException();
 			}
-			else if (loadPdbTask.getResultMessages() != null) {
-				MultiLineMessageDialog dialog = new MultiLineMessageDialog("Load PDB File",
-					"There were warnings/errors loading PDB file: " + pdbFile,
-					loadPdbTask.getResultMessages(),
-					MultiLineMessageDialog.WARNING_MESSAGE, false);
-				DockingWindowManager.showDialog(null, dialog);
-			}
-		}
+            if (loadPdbTask.getResultMessages() != null) {
+                MultiLineMessageDialog dialog = new MultiLineMessageDialog("Load PDB File",
+                    "There were warnings/errors loading PDB file: " + pdbFile,
+                    loadPdbTask.getResultMessages(),
+                    MultiLineMessageDialog.WARNING_MESSAGE, false);
+                DockingWindowManager.showDialog(null, dialog);
+            }
+        }
 		catch (Exception e) {
 			String message = null;
 			if (e instanceof InvocationTargetException && e.getCause() != null) {

@@ -348,9 +348,9 @@ public class ElfRelocationTable implements ElfFileSection, ByteArrayConverter {
 			return new ElfRelrRelocationTableDataType(relrStructureName, (int) length,
 				(int) entrySize);
 		}
-		else if (format == TableFormat.ANDROID) {
-			return new AndroidElfRelocationTableDataType();
-		}
+        if (format == TableFormat.ANDROID) {
+            return new AndroidElfRelocationTableDataType();
+        }
 
 		ElfRelocation relocationRepresentative =
 			ElfRelocation.createElfRelocation(elfHeader, -1, addendTypeReloc, 0, 0, 0);

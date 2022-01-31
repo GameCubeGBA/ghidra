@@ -45,10 +45,10 @@ class OldExtNameAdapter {
 		if (nameTable == null) {
 			throw new VersionException("Missing Table: " + EXT_NAME_TABLE_NAME);
 		}
-		else if (nameTable.getSchema().getVersion() != 0) {
-			throw new VersionException(VersionException.NEWER_VERSION, false);
-		}
-	}
+        if (nameTable.getSchema().getVersion() != 0) {
+            throw new VersionException(VersionException.NEWER_VERSION, false);
+        }
+    }
 
 	/**
 	 * Get iterator over all records

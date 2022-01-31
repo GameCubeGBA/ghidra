@@ -489,20 +489,18 @@ public class DIEAggregate {
 		if (attr instanceof DWARFNumericAttribute) {
 			return assertValidInt(((DWARFNumericAttribute) attr).getValue());
 		}
-		else if (attr instanceof DWARFBlobAttribute) {
-			byte[] exprBytes = ((DWARFBlobAttribute) attr).getBytes();
-			DWARFExpressionEvaluator evaluator = DWARFExpressionEvaluator.create(getHeadFragment());
-			ghidra.app.util.bin.format.dwarf4.expression.DWARFExpression expr =
-				evaluator.readExpr(exprBytes);
+        if (attr instanceof DWARFBlobAttribute) {
+            byte[] exprBytes = ((DWARFBlobAttribute) attr).getBytes();
+            DWARFExpressionEvaluator evaluator = DWARFExpressionEvaluator.create(getHeadFragment());
+            DWARFExpression expr =
+                evaluator.readExpr(exprBytes);
 
-			evaluator.evaluate(expr, 0);
-			return assertValidInt(evaluator.pop());
-		}
-		else {
-			throw new IOException(
-				"DWARF attribute form not valid for integer value: " + attrInfo.form);
-		}
-	}
+            evaluator.evaluate(expr, 0);
+            return assertValidInt(evaluator.pop());
+        }
+        throw new IOException(
+            "DWARF attribute form not valid for integer value: " + attrInfo.form);
+    }
 
 	/**
 	 * Returns the unsigned integer value of the requested attribute after resolving
@@ -525,19 +523,17 @@ public class DIEAggregate {
 		if (attr instanceof DWARFNumericAttribute) {
 			return ((DWARFNumericAttribute) attr).getUnsignedValue();
 		}
-		else if (attr instanceof DWARFBlobAttribute) {
-			byte[] exprBytes = ((DWARFBlobAttribute) attr).getBytes();
-			DWARFExpressionEvaluator evaluator = DWARFExpressionEvaluator.create(getHeadFragment());
-			DWARFExpression expr = evaluator.readExpr(exprBytes);
+        if (attr instanceof DWARFBlobAttribute) {
+            byte[] exprBytes = ((DWARFBlobAttribute) attr).getBytes();
+            DWARFExpressionEvaluator evaluator = DWARFExpressionEvaluator.create(getHeadFragment());
+            DWARFExpression expr = evaluator.readExpr(exprBytes);
 
-			evaluator.evaluate(expr, 0);
-			return evaluator.pop();
-		}
-		else {
-			throw new IOException(
-				"DWARF attribute form not valid for integer value: " + attrInfo.form);
-		}
-	}
+            evaluator.evaluate(expr, 0);
+            return evaluator.pop();
+        }
+        throw new IOException(
+            "DWARF attribute form not valid for integer value: " + attrInfo.form);
+    }
 
 	private int assertValidInt(long l) throws IOException {
 		if (l < Integer.MIN_VALUE || l > Integer.MAX_VALUE) {
@@ -575,23 +571,21 @@ public class DIEAggregate {
 		if (attr instanceof DWARFNumericAttribute) {
 			return assertValidUInt(((DWARFNumericAttribute) attr).getUnsignedValue());
 		}
-		else if (attr instanceof DWARFBlobAttribute) {
-			byte[] exprBytes = ((DWARFBlobAttribute) attr).getBytes();
-			DWARFExpressionEvaluator evaluator = DWARFExpressionEvaluator.create(getHeadFragment());
-			ghidra.app.util.bin.format.dwarf4.expression.DWARFExpression expr =
-				evaluator.readExpr(exprBytes);
+        if (attr instanceof DWARFBlobAttribute) {
+            byte[] exprBytes = ((DWARFBlobAttribute) attr).getBytes();
+            DWARFExpressionEvaluator evaluator = DWARFExpressionEvaluator.create(getHeadFragment());
+            DWARFExpression expr =
+                evaluator.readExpr(exprBytes);
 
-			// DW_AT_data_member_location expects the address of the containing object
-			// to be on the stack before evaluation starts.  We don't have that so we
-			// fake it with zero.
-			evaluator.evaluate(expr, 0);
-			return assertValidUInt(evaluator.pop());
-		}
-		else {
-			throw new IOException(
-				"DWARF attribute form not valid for data member offset: " + attrInfo.form);
-		}
-	}
+            // DW_AT_data_member_location expects the address of the containing object
+            // to be on the stack before evaluation starts.  We don't have that so we
+            // fake it with zero.
+            evaluator.evaluate(expr, 0);
+            return assertValidUInt(evaluator.pop());
+        }
+        throw new IOException(
+            "DWARF attribute form not valid for data member offset: " + attrInfo.form);
+    }
 
 	/**
 	 * Returns the location list info specified in the attribute.
@@ -610,17 +604,15 @@ public class DIEAggregate {
 		if (attrInfo == null) {
 			return Collections.EMPTY_LIST;
 		}
-		else if (attrInfo.attr instanceof DWARFNumericAttribute) {
-			return readDebugLocList(((DWARFNumericAttribute) attrInfo.attr).getUnsignedValue());
-		}
-		else if (attrInfo.attr instanceof DWARFBlobAttribute) {
-			return _exprBytesAsLocation((DWARFBlobAttribute) attrInfo.attr);
-		}
-		else {
-			throw new UnsupportedOperationException(
-				"This method is unsupported for the attribute type " + attrInfo.form + ".");
-		}
-	}
+        if (attrInfo.attr instanceof DWARFNumericAttribute) {
+            return readDebugLocList(((DWARFNumericAttribute) attrInfo.attr).getUnsignedValue());
+        }
+        if (attrInfo.attr instanceof DWARFBlobAttribute) {
+            return _exprBytesAsLocation((DWARFBlobAttribute) attrInfo.attr);
+        }
+        throw new UnsupportedOperationException(
+            "This method is unsupported for the attribute type " + attrInfo.form + ".");
+    }
 
 	/**
 	 * Evaluate the DWARFExpression located in the DWARFLocation object in the context of

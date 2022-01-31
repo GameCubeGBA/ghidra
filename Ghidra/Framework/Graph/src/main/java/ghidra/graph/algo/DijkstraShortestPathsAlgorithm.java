@@ -257,15 +257,15 @@ public class DijkstraShortestPathsAlgorithm<V, E extends GEdge<V>> {
 				queueByDistance.put(dest, newDist);
 				return true;
 			}
-			else if (newDist < curDist) {
-				queueByDistance.put(dest, newDist);
-				bestIns.get(dest).clear();
-				return true;
-			}
-			else if (newDist == curDist) {
-				return true;
-			}
-			return false;
+            if (newDist < curDist) {
+                queueByDistance.put(dest, newDist);
+                bestIns.get(dest).clear();
+                return true;
+            }
+            if (newDist == curDist) {
+                return true;
+            }
+            return false;
 		}
 
 		/**

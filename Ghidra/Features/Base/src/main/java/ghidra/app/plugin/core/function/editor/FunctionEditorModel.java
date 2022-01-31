@@ -227,12 +227,12 @@ public class FunctionEditorModel {
 				returnDataTypeSize + "-bytes)";
 			return false;
 		}
-		else if (storageSize > returnDataTypeSize) {
-			statusText = "Too much Return Storage (" + storageSize + "-bytes) for datatype (" +
-				returnDataTypeSize + "-bytes)";
-			return false;
-		}
-		return true;
+        if (storageSize > returnDataTypeSize) {
+            statusText = "Too much Return Storage (" + storageSize + "-bytes) for datatype (" +
+                returnDataTypeSize + "-bytes)";
+            return false;
+        }
+        return true;
 	}
 
 	private void checkUnassignedStorage() {
@@ -305,15 +305,15 @@ public class FunctionEditorModel {
 				requiredSize + "-bytes) assigned to parameter " + (param.getOrdinal() + 1);
 			return false;
 		}
-		else if (requiredSize == 0) {
-			// assume 0-sized structure which we need to allow
-		}
-		else if (storageSize > requiredSize) {
-			statusText = "Too much storage (" + storageSize + "-bytes) for datatype (" +
-				requiredSize + "-bytes) assigned to parameter " + (param.getOrdinal() + 1);
-			return false;
-		}
-		return true;
+        if (requiredSize == 0) {
+            // assume 0-sized structure which we need to allow
+        }
+        else if (storageSize > requiredSize) {
+            statusText = "Too much storage (" + storageSize + "-bytes) for datatype (" +
+                requiredSize + "-bytes) assigned to parameter " + (param.getOrdinal() + 1);
+            return false;
+        }
+        return true;
 	}
 
 	public boolean hasValidName() {

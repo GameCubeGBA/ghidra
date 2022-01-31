@@ -567,25 +567,25 @@ public class SymbolManager implements SymbolTable, ManagerDB {
 		if (type == SymbolType.CLASS) {
 			return new ClassSymbol(this, cache, addr, record);
 		}
-		else if (type == SymbolType.LABEL) {
-			return new CodeSymbol(this, cache, addr, record);
-		}
-		else if (type == SymbolType.NAMESPACE) {
-			return new NamespaceSymbol(this, cache, addr, record);
-		}
-		else if (type == SymbolType.FUNCTION) {
-			return new FunctionSymbol(this, cache, addr, record);
-		}
-		else if (type == SymbolType.LIBRARY) {
-			return new LibrarySymbol(this, cache, addr, record);
-		}
-		else if (type == SymbolType.PARAMETER || type == SymbolType.LOCAL_VAR) {
-			return new VariableSymbolDB(this, cache, type, variableStorageMgr, addr, record);
-		}
-		else if (type == SymbolType.GLOBAL_VAR) {
-			return new GlobalVariableSymbolDB(this, cache, variableStorageMgr, addr, record);
-		}
-		throw new IllegalArgumentException("No symbol type for " + type);
+        if (type == SymbolType.LABEL) {
+            return new CodeSymbol(this, cache, addr, record);
+        }
+        if (type == SymbolType.NAMESPACE) {
+            return new NamespaceSymbol(this, cache, addr, record);
+        }
+        if (type == SymbolType.FUNCTION) {
+            return new FunctionSymbol(this, cache, addr, record);
+        }
+        if (type == SymbolType.LIBRARY) {
+            return new LibrarySymbol(this, cache, addr, record);
+        }
+        if (type == SymbolType.PARAMETER || type == SymbolType.LOCAL_VAR) {
+            return new VariableSymbolDB(this, cache, type, variableStorageMgr, addr, record);
+        }
+        if (type == SymbolType.GLOBAL_VAR) {
+            return new GlobalVariableSymbolDB(this, cache, variableStorageMgr, addr, record);
+        }
+        throw new IllegalArgumentException("No symbol type for " + type);
 	}
 
 	@Override
@@ -1702,10 +1702,10 @@ public class SymbolManager implements SymbolTable, ManagerDB {
 			if (sym1 == null) {
 				return 1;
 			}
-			else if (sym2 == null) {
-				return -1;
-			}
-			return sym1.getAddress().compareTo(sym2.getAddress());
+            if (sym2 == null) {
+                return -1;
+            }
+            return sym1.getAddress().compareTo(sym2.getAddress());
 		}
 
 		private void findNextRealSymbol() {
@@ -2799,18 +2799,18 @@ public class SymbolManager implements SymbolTable, ManagerDB {
 		if (addr.isMemoryAddress()) {
 			return doCreateMemoryFunctionSymbol(addr, name, namespace, source, stringData);
 		}
-		else if (addr.isExternalAddress()) {
-			// only one symbol per external address is allowed
-			Symbol primary = getPrimarySymbol(addr);
-			if (primary != null) {
-				throw new IllegalArgumentException("external address already used");
-			}
-		}
-		else {
-			throw new IllegalArgumentException("bad function address");
-		}
+        if (addr.isExternalAddress()) {
+            // only one symbol per external address is allowed
+            Symbol primary = getPrimarySymbol(addr);
+            if (primary != null) {
+                throw new IllegalArgumentException("external address already used");
+            }
+        }
+        else {
+            throw new IllegalArgumentException("bad function address");
+        }
 
-		return doCreateSymbol(name, addr, namespace, SymbolType.FUNCTION, stringData, null, null,
+        return doCreateSymbol(name, addr, namespace, SymbolType.FUNCTION, stringData, null, null,
 			source, true);
 	}
 

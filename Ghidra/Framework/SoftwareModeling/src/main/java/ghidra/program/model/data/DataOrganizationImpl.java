@@ -664,24 +664,24 @@ public class DataOrganizationImpl implements DataOrganization {
 				parser.end(subel);
 				continue;
 			}
-			else if (name.equals("bitfield_packing")) {
-				bitFieldPacking.restoreXml(parser);
-				continue;
-			}
-			else if (name.equals("size_alignment_map")) {
-				XmlElement subel = parser.start();
-				while (parser.peek().isStart()) {
-					XmlElement subsubel = parser.start();
-					int size = SpecXmlUtils.decodeInt(subsubel.getAttribute("size"));
-					int alignment = SpecXmlUtils.decodeInt(subsubel.getAttribute("alignment"));
-					sizeAlignmentMap.put(size, alignment);
-					parser.end(subsubel);
-				}
-				parser.end(subel);
-				continue;
-			}
+            if (name.equals("bitfield_packing")) {
+                bitFieldPacking.restoreXml(parser);
+                continue;
+            }
+            if (name.equals("size_alignment_map")) {
+                XmlElement subel = parser.start();
+                while (parser.peek().isStart()) {
+                    XmlElement subsubel = parser.start();
+                    int size = SpecXmlUtils.decodeInt(subsubel.getAttribute("size"));
+                    int alignment = SpecXmlUtils.decodeInt(subsubel.getAttribute("alignment"));
+                    sizeAlignmentMap.put(size, alignment);
+                    parser.end(subsubel);
+                }
+                parser.end(subel);
+                continue;
+            }
 
-			XmlElement subel = parser.start();
+            XmlElement subel = parser.start();
 			String value = subel.getAttribute("value");
 
             switch (name) {

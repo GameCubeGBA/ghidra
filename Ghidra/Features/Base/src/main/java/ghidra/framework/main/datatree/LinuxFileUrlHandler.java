@@ -117,10 +117,10 @@ public final class LinuxFileUrlHandler implements DataTreeFlavorHandler, FileOpe
 		if (destinationNode instanceof DomainFolderNode) {
 			return ((DomainFolderNode) destinationNode).getDomainFolder();
 		}
-		else if (destinationNode instanceof DomainFileNode) {
-			DomainFolderNode parent = (DomainFolderNode) destinationNode.getParent();
-			return parent.getDomainFolder();
-		}
-		return null;
+        if (destinationNode instanceof DomainFileNode) {
+            DomainFolderNode parent = (DomainFolderNode) destinationNode.getParent();
+            return parent.getDomainFolder();
+        }
+        return null;
 	}
 }

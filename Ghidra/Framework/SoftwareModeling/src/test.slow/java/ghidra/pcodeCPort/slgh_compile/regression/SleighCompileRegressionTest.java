@@ -207,16 +207,16 @@ public class SleighCompileRegressionTest extends AbstractGenericTest {
 						target.equals(actual));
 					continue;
 				}
-				else if (!bothSpace) {
-					// expected absent trailing space in Java version
-					if (!TPLMATCH.matcher(actual).find()) {
-						ok &= itsOK("difference (space!) on actual line " + actualLineNumber +
-							", target line " + targetLineNumber + ":\nEXPECTED:\n" + target +
-							"\nACTUAL:\n" + actual, false);
-					}
-				}
+                if (!bothSpace) {
+                    // expected absent trailing space in Java version
+                    if (!TPLMATCH.matcher(actual).find()) {
+                        ok &= itsOK("difference (space!) on actual line " + actualLineNumber +
+                            ", target line " + targetLineNumber + ":\nEXPECTED:\n" + target +
+                            "\nACTUAL:\n" + actual, false);
+                    }
+                }
 
-				while (actualIsSpace) {
+                while (actualIsSpace) {
 					actual = actualReader.readLine();
 					++actualLineNumber;
 					actualIsSpace = actual != null && SPACEMATCH.matcher(actual).find();

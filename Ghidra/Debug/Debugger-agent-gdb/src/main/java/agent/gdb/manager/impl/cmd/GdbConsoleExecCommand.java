@@ -128,27 +128,27 @@ public class GdbConsoleExecCommand extends AbstractGdbCommandWithThreadAndFrameI
 		if (evt instanceof GdbCommandRunningEvent) {
 			return cwr.handleRunning((GdbCommandRunningEvent) evt, pending);
 		}
-		else if (evt instanceof AbstractGdbCompletedCommandEvent) {
-			pending.claim(evt);
-			return true;
-		}
-		else if (evt instanceof GdbConsoleOutputEvent) {
-			GdbConsoleOutputEvent out = (GdbConsoleOutputEvent) evt;
-			// This is not a great check...
-			if (out.getInterpreter() == Interpreter.MI2 && ">".equals(out.getOutput().trim()) &&
-				!command.trim().startsWith("ec")) {
-				manager.injectInput(Interpreter.MI2, "end\n");
-				manager.synthesizeConsoleOut(Channel.STDERR,
-					"Ghidra GDB Agent: Multi-line / follow-up input is not currently supported. " +
-						"I just typed 'end' for you.\n");
-			}
-			if (to == Output.CAPTURE) {
-				if (out.getInterpreter() == getInterpreter()) {
-					pending.steal(evt);
-				}
-			}
-		}
-		return false;
+        if (evt instanceof AbstractGdbCompletedCommandEvent) {
+            pending.claim(evt);
+            return true;
+        }
+        if (evt instanceof GdbConsoleOutputEvent) {
+            GdbConsoleOutputEvent out = (GdbConsoleOutputEvent) evt;
+            // This is not a great check...
+            if (out.getInterpreter() == Interpreter.MI2 && ">".equals(out.getOutput().trim()) &&
+                !command.trim().startsWith("ec")) {
+                manager.injectInput(Interpreter.MI2, "end\n");
+                manager.synthesizeConsoleOut(Channel.STDERR,
+                    "Ghidra GDB Agent: Multi-line / follow-up input is not currently supported. " +
+                        "I just typed 'end' for you.\n");
+            }
+            if (to == Output.CAPTURE) {
+                if (out.getInterpreter() == getInterpreter()) {
+                    pending.steal(evt);
+                }
+            }
+        }
+        return false;
 	}
 
 	@Override

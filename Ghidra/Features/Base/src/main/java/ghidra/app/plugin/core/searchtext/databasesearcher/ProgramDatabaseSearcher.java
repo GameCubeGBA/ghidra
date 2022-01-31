@@ -285,10 +285,10 @@ public class ProgramDatabaseSearcher implements Searcher {
 			if (forward && start.getAddress().compareTo(minAddress) < 0) {
 				return new ProgramLocation(program, minAddress);
 			}
-			else if (!forward && start.getAddress().compareTo(maxAddress) > 0) {
-				return new ProgramLocation(program, maxAddress);
-			}
-		}
+            if (!forward && start.getAddress().compareTo(maxAddress) > 0) {
+                return new ProgramLocation(program, maxAddress);
+            }
+        }
 		return start;
 	}
 

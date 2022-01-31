@@ -137,16 +137,16 @@ abstract class AbstractListingMerger implements ListingMerger, ListingMergeConst
 		if (pgm == resultPgm) {
 			return RESULT;
 		}
-		else if (pgm == latestPgm) {
-			return LATEST;
-		}
-		else if (pgm == myPgm) {
-			return MY;
-		}
-		else if (pgm == originalPgm) {
-			return ORIGINAL;
-		}
-		return -1;
+        if (pgm == latestPgm) {
+            return LATEST;
+        }
+        if (pgm == myPgm) {
+            return MY;
+        }
+        if (pgm == originalPgm) {
+            return ORIGINAL;
+        }
+        return -1;
 	}
 
 	/**

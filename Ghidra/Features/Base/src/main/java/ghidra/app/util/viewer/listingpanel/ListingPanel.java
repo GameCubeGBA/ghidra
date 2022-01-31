@@ -646,10 +646,10 @@ public class ListingPanel extends JPanel implements FieldMouseListener, FieldLoc
 			if (!cu.getMinAddress().equals(address)) {
 				return getFieldLocationForDataAndOpenAsNeeded(data, address);
 			}
-			else if (!cu.getMinAddress().equals(loc.getByteAddress())) {
-				return getFieldLocationForDataAndOpenAsNeeded(data, loc.getByteAddress());
-			}
-		}
+            if (!cu.getMinAddress().equals(loc.getByteAddress())) {
+                return getFieldLocationForDataAndOpenAsNeeded(data, loc.getByteAddress());
+            }
+        }
 		return layoutModel.getFieldLocation(new ProgramLocation(program, address));
 	}
 

@@ -99,32 +99,31 @@ public class ToolTipUtils {
 	 * @return dataType details formatted as HTML
 	 */
 	public static HTMLDataTypeRepresentation getHTMLRepresentation(DataType dataType) {
-		if (dataType != null) {
-			if (dataType instanceof TypeDef) {
-				return new TypeDefDataTypeHTMLRepresentation((TypeDef) dataType);
-			}
-			if (dataType instanceof Composite) {
-				return new CompositeDataTypeHTMLRepresentation((Composite) dataType);
-			}
-			if (dataType instanceof Enum) {
-				return new EnumDataTypeHTMLRepresentation((Enum) dataType);
-			}
-			if (dataType instanceof FunctionDefinition) {
-				return new FunctionDataTypeHTMLRepresentation((FunctionDefinition) dataType);
-			}
-			if (dataType instanceof Pointer) {
-				return new PointerDataTypeHTMLRepresentation((Pointer) dataType);
-			}
-			if (dataType instanceof Array) {
-				return new ArrayDataTypeHTMLRepresentation((Array) dataType);
-			}
-			if (dataType instanceof BitFieldDataType) {
-				return new BitFieldDataTypeHTMLRepresentation((BitFieldDataType) dataType);
-			}
-			return new DefaultDataTypeHTMLRepresentation(dataType);
+		if (dataType == null) {
+			return new NullDataTypeHTMLRepresentation();
 		}
-
-		return new NullDataTypeHTMLRepresentation();
+		if (dataType instanceof TypeDef) {
+			return new TypeDefDataTypeHTMLRepresentation((TypeDef) dataType);
+		}
+		if (dataType instanceof Composite) {
+			return new CompositeDataTypeHTMLRepresentation((Composite) dataType);
+		}
+		if (dataType instanceof Enum) {
+			return new EnumDataTypeHTMLRepresentation((Enum) dataType);
+		}
+		if (dataType instanceof FunctionDefinition) {
+			return new FunctionDataTypeHTMLRepresentation((FunctionDefinition) dataType);
+		}
+		if (dataType instanceof Pointer) {
+			return new PointerDataTypeHTMLRepresentation((Pointer) dataType);
+		}
+		if (dataType instanceof Array) {
+			return new ArrayDataTypeHTMLRepresentation((Array) dataType);
+		}
+		if (dataType instanceof BitFieldDataType) {
+			return new BitFieldDataTypeHTMLRepresentation((BitFieldDataType) dataType);
+		}
+		return new DefaultDataTypeHTMLRepresentation(dataType);
 	}
 
 	/**

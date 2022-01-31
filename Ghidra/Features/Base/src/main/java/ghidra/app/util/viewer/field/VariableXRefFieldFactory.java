@@ -115,7 +115,7 @@ public class VariableXRefFieldFactory extends XRefFieldFactory {
 				as = createRefTypeAttributedString(reference, as);
 			}
 			if (count < totalXrefs - 1) {
-				as = new CompositeAttributedString(new AttributedString[] { as, delimiter });
+				as = new CompositeAttributedString(as, delimiter);
 			}
 			else {
 				// This added to prevent a situation where resizing field to a particular size, resulted in layout of references to be strange
@@ -123,7 +123,7 @@ public class VariableXRefFieldFactory extends XRefFieldFactory {
 				Arrays.fill(charSpaces, ' ');
 				AttributedString spaces =
 					new AttributedString(new String(charSpaces), color, getMetrics());
-				as = new CompositeAttributedString(new AttributedString[] { as, spaces });
+				as = new CompositeAttributedString(as, spaces);
 			}
 			elements[count] = new TextFieldElement(as, count, 0);
 		}
@@ -137,7 +137,7 @@ public class VariableXRefFieldFactory extends XRefFieldFactory {
 				as = createRefTypeAttributedString(ref, as);
 			}
 			if (count < totalXrefs - 1) {
-				as = new CompositeAttributedString(new AttributedString[] { as, delimiter });
+				as = new CompositeAttributedString(as, delimiter);
 			}
 			else {
 				// This added to prevent a situation where resizing field to a particular size, resulted in layout of references to be strange
@@ -145,7 +145,7 @@ public class VariableXRefFieldFactory extends XRefFieldFactory {
 				Arrays.fill(charSpaces, ' ');
 				AttributedString spaces =
 					new AttributedString(new String(charSpaces), offcutColor, getMetrics());
-				as = new CompositeAttributedString(new AttributedString[] { as, spaces });
+				as = new CompositeAttributedString(as, spaces);
 			}
 			elements[count] = new TextFieldElement(as, count, 0);
 		}

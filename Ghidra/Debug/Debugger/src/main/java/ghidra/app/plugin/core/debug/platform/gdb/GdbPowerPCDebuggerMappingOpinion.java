@@ -85,15 +85,15 @@ public class GdbPowerPCDebuggerMappingOpinion implements DebuggerMappingOpinion 
 		if (arch.startsWith("powerpc:32")) {
 			return Set.of(new GdbPowerPCBE32DefLinuxOffer(process));
 		}
-		else if (arch.startsWith("powerpc:A2")) {
-			return Set.of(new GdbPowerPCBE64A2LinuxOffer(process));
-		}
-		else if (arch.startsWith("powerpc:A2-Alt")) {
-			return Set.of(new GdbPowerPCBA64A2AltLinuxOffer(process));
-		}
-		else if (arch.startsWith("powerpc")) {
-			return Set.of(new GdbPowerPCBE64DefLinuxOffer(process));
-		}
-		return Set.of();
+        if (arch.startsWith("powerpc:A2")) {
+            return Set.of(new GdbPowerPCBE64A2LinuxOffer(process));
+        }
+        if (arch.startsWith("powerpc:A2-Alt")) {
+            return Set.of(new GdbPowerPCBA64A2AltLinuxOffer(process));
+        }
+        if (arch.startsWith("powerpc")) {
+            return Set.of(new GdbPowerPCBE64DefLinuxOffer(process));
+        }
+        return Set.of();
 	}
 }

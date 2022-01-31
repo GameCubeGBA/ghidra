@@ -158,10 +158,10 @@ public class FunctionSymbolApplier extends MsSymbolApplier {
 		if (procedureSymbol != null) {
 			return procedureSymbol.getName();
 		}
-		else if (thunkSymbol != null) {
-			return thunkSymbol.getName();
-		}
-		return "";
+        if (thunkSymbol != null) {
+            return thunkSymbol.getName();
+        }
+        return "";
 	}
 
 	@Override

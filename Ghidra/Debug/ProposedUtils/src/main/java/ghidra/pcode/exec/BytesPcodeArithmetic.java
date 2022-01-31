@@ -72,12 +72,10 @@ public enum BytesPcodeArithmetic implements PcodeArithmetic<byte[]> {
 			BigInteger outVal = op.evaluateUnary(sizeout, sizein1, in1Val);
 			return Utils.bigIntegerToBytes(outVal, sizeout, isBigEndian);
 		}
-		else {
-			long in1Val = Utils.bytesToLong(in1, sizein1, isBigEndian);
-			long outVal = op.evaluateUnary(sizeout, sizein1, in1Val);
-			return Utils.longToBytes(outVal, sizeout, isBigEndian);
-		}
-	}
+        long in1Val = Utils.bytesToLong(in1, sizein1, isBigEndian);
+        long outVal = op.evaluateUnary(sizeout, sizein1, in1Val);
+        return Utils.longToBytes(outVal, sizeout, isBigEndian);
+    }
 
 	@Override
 	public byte[] binaryOp(BinaryOpBehavior op, int sizeout, int sizein1, byte[] in1, int sizein2,
@@ -88,13 +86,11 @@ public enum BytesPcodeArithmetic implements PcodeArithmetic<byte[]> {
 			BigInteger outVal = op.evaluateBinary(sizeout, sizein1, in1Val, in2Val);
 			return Utils.bigIntegerToBytes(outVal, sizeout, isBigEndian);
 		}
-		else {
-			long in1Val = Utils.bytesToLong(in1, sizein1, isBigEndian);
-			long in2Val = Utils.bytesToLong(in2, sizein2, isBigEndian);
-			long outVal = op.evaluateBinary(sizeout, sizein1, in1Val, in2Val);
-			return Utils.longToBytes(outVal, sizeout, isBigEndian);
-		}
-	}
+        long in1Val = Utils.bytesToLong(in1, sizein1, isBigEndian);
+        long in2Val = Utils.bytesToLong(in2, sizein2, isBigEndian);
+        long outVal = op.evaluateBinary(sizeout, sizein1, in1Val, in2Val);
+        return Utils.longToBytes(outVal, sizeout, isBigEndian);
+    }
 
 	@Override
 	public byte[] fromConst(long value, int size) {

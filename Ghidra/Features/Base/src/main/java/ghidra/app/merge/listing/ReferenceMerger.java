@@ -486,10 +486,10 @@ class ReferenceMerger extends AbstractListingMerger {
 			return (compatibleRefs(originalRefs[0], latestRefs) && compatibleRefs(originalRefs[0],
 				myRefs));
 		}
-		else if (latestRefs.length > 0) {
-			return (compatibleRefs(latestRefs[0], myRefs));
-		}
-		return true;
+        if (latestRefs.length > 0) {
+            return (compatibleRefs(latestRefs[0], myRefs));
+        }
+        return true;
 	}
 
 	private void addToRefsHash(Address address, Reference ref,
@@ -515,10 +515,10 @@ class ReferenceMerger extends AbstractListingMerger {
 		if (myRefs.length > 0) {
 			return myRefs[0];
 		}
-		else if (latestRefs.length > 0) {
-			return latestRefs[0];
-		}
-		return null;
+        if (latestRefs.length > 0) {
+            return latestRefs[0];
+        }
+        return null;
 	}
 
 	private boolean compatibleRefs(Reference ref1, Reference[] refs) {
@@ -531,15 +531,15 @@ class ReferenceMerger extends AbstractListingMerger {
             }
 			return true;
 		}
-		else if (toAddr.isExternalAddress()) {
-            for (Reference ref : refs) {
-                if (!ref.getToAddress().isExternalAddress()) {
-                    return false;
-                }
-            }
-			return true;
-		}
-		if (toAddr.isRegisterAddress()) {
+        if (toAddr.isExternalAddress()) {
+for (Reference ref : refs) {
+if (!ref.getToAddress().isExternalAddress()) {
+return false;
+}
+}
+            return true;
+        }
+        if (toAddr.isRegisterAddress()) {
             for (Reference ref : refs) {
                 if (!ref.getToAddress().isRegisterAddress()) {
                     return false;
@@ -1217,13 +1217,13 @@ class ReferenceMerger extends AbstractListingMerger {
 		if (ref.isMemoryReference()) {
 			return "Memory";
 		}
-		else if (ref.isExternalReference()) {
-			return "External";
-		}
-		else if (ref.isStackReference()) {
-			return "Stack";
-		}
-		if (ref.isRegisterReference()) {
+        if (ref.isExternalReference()) {
+            return "External";
+        }
+        if (ref.isStackReference()) {
+            return "Stack";
+        }
+        if (ref.isRegisterReference()) {
 			return "Register";
 		}
 		return "Unknown";

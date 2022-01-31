@@ -818,13 +818,13 @@ public class AnnotationTest extends AbstractGhidraHeadedIntegrationTest {
 			if (serviceClass == ProgramManager.class) {
 				return (T) spyProgramManager;
 			}
-			else if (serviceClass == ProjectDataService.class) {
-				return (T) spyProjectDataService;
-			}
-			else if (serviceClass == GoToService.class) {
-				return (T) spyGoToService;
-			}
-			return super.getService(serviceClass);
+            if (serviceClass == ProjectDataService.class) {
+                return (T) spyProjectDataService;
+            }
+            if (serviceClass == GoToService.class) {
+                return (T) spyGoToService;
+            }
+            return super.getService(serviceClass);
 		}
 
 		boolean programOpened(String path) {

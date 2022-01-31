@@ -35,13 +35,13 @@ public class DbgRunCommand extends AbstractDbgCommand<DbgThread> {
 			pending.claim(evt);
 			return true;
 		}
-		else if (evt instanceof DbgRunningEvent) {
-			pending.claim(evt);
-		}
-		else if (evt instanceof DbgThreadCreatedEvent) {
-			pending.claim(evt);
-		}
-		return false;
+        if (evt instanceof DbgRunningEvent) {
+            pending.claim(evt);
+        }
+        else if (evt instanceof DbgThreadCreatedEvent) {
+            pending.claim(evt);
+        }
+        return false;
 	}
 
 	@Override

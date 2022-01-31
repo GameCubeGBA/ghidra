@@ -178,10 +178,10 @@ public class VariableUtilities {
 			}
 			return getPointer(function.getProgram(), classStruct, storage.size());
 		}
-		else if (autoParameterType == AutoParameterType.RETURN_STORAGE_PTR) {
-			return getPointer(function.getProgram(), returnDataType, storage.size());
-		}
-		return Undefined.getUndefinedDataType(storage.size());
+        if (autoParameterType == AutoParameterType.RETURN_STORAGE_PTR) {
+            return getPointer(function.getProgram(), returnDataType, storage.size());
+        }
+        return Undefined.getUndefinedDataType(storage.size());
 	}
 
 	private static Pointer getPointer(Program program, DataType baseType, int ptrSize) {

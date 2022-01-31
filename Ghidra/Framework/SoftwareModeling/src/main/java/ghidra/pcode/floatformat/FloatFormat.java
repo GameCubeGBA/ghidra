@@ -410,7 +410,7 @@ public strictfp class FloatFormat {
 			return BigFloat.quietNaN(frac_size, exp_size, sign);
 		}
 
-		if (jbitimplied) {
+        if (jbitimplied) {
 			frac = frac.setBit(frac_size);
 		}
 		return new BigFloat(frac_size, exp_size, FloatKind.FINITE, sign, frac, exp - bias);

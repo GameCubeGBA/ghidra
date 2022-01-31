@@ -97,31 +97,31 @@ public class ProgramLoadImage {
 				handleWriteFault(bytes, currentOffset, remaining, nextAddr);
 				break;
 			}
-			else if (range.contains(nextAddr)) {
-				// nextAddr is in memory
-				if (endAddr.compareTo(range.getMaxAddress()) > 0) {
-					chunkSize = (int) (range.getMaxAddress().subtract(nextAddr) + 1);
-				}
-				try {
-					memory.setBytes(nextAddr, bytes, currentOffset, chunkSize);
-				}
-				catch (MemoryAccessException e) {
-					throw new LowlevelError("Unexpected memory write error: " + e.getMessage());
-				}
-			}
-			else {
-				// nextAddr not in initialized memory, but is less than some initialized range
-				Address rangeAddr = range.getMinAddress();
-				if (!rangeAddr.getAddressSpace().equals(addr.getAddressSpace())) {
-					handleWriteFault(bytes, currentOffset, remaining, nextAddr);
-					break;
-				}
-				long gapSize = rangeAddr.subtract(nextAddr);
-				chunkSize = (int) Math.min(gapSize, remaining);
-				handleWriteFault(bytes, currentOffset, chunkSize, nextAddr);
-			}
+            if (range.contains(nextAddr)) {
+                // nextAddr is in memory
+                if (endAddr.compareTo(range.getMaxAddress()) > 0) {
+                    chunkSize = (int) (range.getMaxAddress().subtract(nextAddr) + 1);
+                }
+                try {
+                    memory.setBytes(nextAddr, bytes, currentOffset, chunkSize);
+                }
+                catch (MemoryAccessException e) {
+                    throw new LowlevelError("Unexpected memory write error: " + e.getMessage());
+                }
+            }
+            else {
+                // nextAddr not in initialized memory, but is less than some initialized range
+                Address rangeAddr = range.getMinAddress();
+                if (!rangeAddr.getAddressSpace().equals(addr.getAddressSpace())) {
+                    handleWriteFault(bytes, currentOffset, remaining, nextAddr);
+                    break;
+                }
+                long gapSize = rangeAddr.subtract(nextAddr);
+                chunkSize = (int) Math.min(gapSize, remaining);
+                handleWriteFault(bytes, currentOffset, chunkSize, nextAddr);
+            }
 
-			///
+            ///
 			/// End change for addressSet changes - wcb		
 			///
 
@@ -183,43 +183,43 @@ public class ProgramLoadImage {
 				}
 				break;
 			}
-			else if (range.contains(nextAddr)) {
-				// nextAddr found in initialized memory
-				if (endAddr.compareTo(range.getMaxAddress()) > 0) {
-					chunkSize = (int) (range.getMaxAddress().subtract(nextAddr) + 1);
-				}
-				try {
-					memory.getBytes(nextAddr, bytes, currentOffset, chunkSize);
-				}
-				catch (MemoryAccessException e) {
-					//throw new LowlevelError("Unexpected memory read error: " + e.getMessage());
-					Msg.warn(this, "Unexpected memory read error: " + e.getMessage());
-				}
-			}
-			else {
-				Address rangeAddr = range.getMinAddress();
-				if (!rangeAddr.getAddressSpace().equals(addr.getAddressSpace())) {
-					if (generateInitializedMask) {
-						initializedMask = getInitializedMask(bytes.length, offset, currentOffset,
-							remaining, initializedMask);
-					}
-					else {
-						handleReadFault(bytes, currentOffset, remaining, nextAddr);
-					}
-					break;
-				}
+            if (range.contains(nextAddr)) {
+                // nextAddr found in initialized memory
+                if (endAddr.compareTo(range.getMaxAddress()) > 0) {
+                    chunkSize = (int) (range.getMaxAddress().subtract(nextAddr) + 1);
+                }
+                try {
+                    memory.getBytes(nextAddr, bytes, currentOffset, chunkSize);
+                }
+                catch (MemoryAccessException e) {
+                    //throw new LowlevelError("Unexpected memory read error: " + e.getMessage());
+                    Msg.warn(this, "Unexpected memory read error: " + e.getMessage());
+                }
+            }
+            else {
+                Address rangeAddr = range.getMinAddress();
+                if (!rangeAddr.getAddressSpace().equals(addr.getAddressSpace())) {
+                    if (generateInitializedMask) {
+                        initializedMask = getInitializedMask(bytes.length, offset, currentOffset,
+                            remaining, initializedMask);
+                    }
+                    else {
+                        handleReadFault(bytes, currentOffset, remaining, nextAddr);
+                    }
+                    break;
+                }
 
-				long gapSize = rangeAddr.subtract(nextAddr);
-				chunkSize = (gapSize > 0) ? (int) Math.min(gapSize, remaining) : remaining;
-				if (generateInitializedMask) {
-					initializedMask = getInitializedMask(bytes.length, offset, currentOffset,
-						chunkSize, initializedMask);
-				}
-				else {
-					handleReadFault(bytes, currentOffset, chunkSize, nextAddr);
-				}
-			}
-			///
+                long gapSize = rangeAddr.subtract(nextAddr);
+                chunkSize = (gapSize > 0) ? (int) Math.min(gapSize, remaining) : remaining;
+                if (generateInitializedMask) {
+                    initializedMask = getInitializedMask(bytes.length, offset, currentOffset,
+                        chunkSize, initializedMask);
+                }
+                else {
+                    handleReadFault(bytes, currentOffset, chunkSize, nextAddr);
+                }
+            }
+            ///
 			/// End change for addressSet changes - wcb		
 			///
 

@@ -69,31 +69,31 @@ public class BookmarkDBAdapterV3 extends BookmarkDBAdapter {
 				// Indicates use of Bookmark Properties
 				throw new VersionException(true);
 			}
-			else if (typeIDs.length != 0) {
-                for (int id : typeIDs) {
-                    tables[id] = handle.getTable(BOOKMARK_TABLE_NAME + id);
+            if (typeIDs.length != 0) {
+for (int id : typeIDs) {
+tables[id] = handle.getTable(BOOKMARK_TABLE_NAME + id);
+}
+                boolean noTables = (tables[typeIDs[0]] == null);
+                int version = noTables ? -1 : tables[typeIDs[0]].getSchema().getVersion();
+                for (int i = 1; i < typeIDs.length; i++) {
+                    int id = typeIDs[i];
+                    if (noTables) {
+                        if (tables[id] != null) {
+                            throw new IOException("Missing bookmark table");
+                        }
+                    }
+                    else if (tables[id].getSchema().getVersion() != version) {
+                        throw new IOException("Inconsistent bookmark table versions");
+                    }
                 }
-				boolean noTables = (tables[typeIDs[0]] == null);
-				int version = noTables ? -1 : tables[typeIDs[0]].getSchema().getVersion();
-				for (int i = 1; i < typeIDs.length; i++) {
-					int id = typeIDs[i];
-					if (noTables) {
-						if (tables[id] != null) {
-							throw new IOException("Missing bookmark table");
-						}
-					}
-					else if (tables[id].getSchema().getVersion() != version) {
-						throw new IOException("Inconsistent bookmark table versions");
-					}
-				}
-				if (noTables) {
-					throw new VersionException(true);
-				}
-				else if (version != VERSION) {
-					throw new VersionException(false);
-				}
-			}
-		}
+                if (noTables) {
+                    throw new VersionException(true);
+                }
+                if (version != VERSION) {
+                    throw new VersionException(false);
+                }
+            }
+        }
 	}
 
 	private Table getTable(long id) {

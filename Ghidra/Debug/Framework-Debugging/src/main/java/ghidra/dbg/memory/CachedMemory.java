@@ -204,10 +204,8 @@ public class CachedMemory implements MemoryReader, MemoryWriter {
 					throw new AssertionError("No data available at " +
 						Long.toUnsignedString(addr, 16) + " even after a successful read?");
 				}
-				else {
-					return ExceptionUtils.rethrow(e);
-				}
-			}
+                return ExceptionUtils.rethrow(e);
+            }
 			if (e != null && !isTimeout(e)) {
 				Msg.error(this,
 					"Some reads requested by the cache failed. Returning a partial result: " +

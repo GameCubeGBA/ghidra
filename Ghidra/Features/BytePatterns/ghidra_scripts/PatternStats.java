@@ -347,16 +347,16 @@ public class PatternStats extends GhidraScript implements PatternFactory {
 		if (nm.equals("funcstart")) {
 			return functionStart;
 		}
-		else if (nm.equals("possiblefuncstart")) {
-			return possibleFunctionStart;
-		}
-		else if (nm.equals("codeboundary")) {
-			return codeBoundary;
-		}
-		else if (nm.equals("setcontext")) {
-			return context;
-		}
-		return null;
+        if (nm.equals("possiblefuncstart")) {
+            return possibleFunctionStart;
+        }
+        if (nm.equals("codeboundary")) {
+            return codeBoundary;
+        }
+        if (nm.equals("setcontext")) {
+            return context;
+        }
+        return null;
 	}
 
 	@Override

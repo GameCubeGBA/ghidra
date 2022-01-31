@@ -45,11 +45,11 @@ class CategoryDBAdapterV0 extends CategoryDBAdapter {
 			if (table == null) {
 				throw new VersionException("Missing Table: " + CATEGORY_TABLE_NAME);
 			}
-			else if (table.getSchema().getVersion() != 0) {
-				throw new VersionException("Expected version 0 for table " + CATEGORY_TABLE_NAME +
-					" but got " + table.getSchema().getVersion());
-			}
-		}
+            if (table.getSchema().getVersion() != 0) {
+                throw new VersionException("Expected version 0 for table " + CATEGORY_TABLE_NAME +
+                    " but got " + table.getSchema().getVersion());
+            }
+        }
 	}
 
 	@Override

@@ -116,11 +116,11 @@ public class DataTypeHelper {
 		if (dt instanceof FactoryDataType) {
 			throw new InvalidDataTypeException("Factory data types are not allowed.");
 		}
-		else if (dt instanceof Dynamic && !((Dynamic) dt).canSpecifyLength()) {
-			throw new InvalidDataTypeException("Non-sizable Dynamic data types are not allowed.");
-		}
+        if (dt instanceof Dynamic && !((Dynamic) dt).canSpecifyLength()) {
+            throw new InvalidDataTypeException("Non-sizable Dynamic data types are not allowed.");
+        }
 
-		// A function definition can't be directly applied, only a pointer to the function definition.
+        // A function definition can't be directly applied, only a pointer to the function definition.
 		// Convert any function definition to a pointer. Otherwise, keep the original data type.
 		boolean isFunctionDef = (dt instanceof FunctionDefinition);
 		if (dt instanceof TypeDef) {
@@ -239,16 +239,14 @@ public class DataTypeHelper {
 		if (dt instanceof Array) {
 			return ((Array) dt).getDataType();
 		}
-		else if (dt instanceof Pointer) {
-			DataType pdt = ((Pointer) dt).getDataType();
-			if (pdt == null) {
-				return dt;
-			}
-			return pdt;
-		}
-		else {
-			return dt;
-		}
-	}
+        if (dt instanceof Pointer) {
+            DataType pdt = ((Pointer) dt).getDataType();
+            if (pdt == null) {
+                return dt;
+            }
+            return pdt;
+        }
+        return dt;
+    }
 
 }

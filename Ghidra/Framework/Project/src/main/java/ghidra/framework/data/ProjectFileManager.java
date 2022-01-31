@@ -444,10 +444,10 @@ public class ProjectFileManager implements ProjectData {
 			throw new IllegalArgumentException(
 				"Absolute path must begin with '" + FileSystem.SEPARATOR_CHAR + "'");
 		}
-		else if (path.charAt(len - 1) == FileSystem.SEPARATOR_CHAR) {
-			throw new IllegalArgumentException("Missing file name in path");
-		}
-		int ix = path.lastIndexOf(FileSystem.SEPARATOR);
+        if (path.charAt(len - 1) == FileSystem.SEPARATOR_CHAR) {
+            throw new IllegalArgumentException("Missing file name in path");
+        }
+        int ix = path.lastIndexOf(FileSystem.SEPARATOR);
 
 		DomainFolder folder;
 		if (ix > 0) {
@@ -635,11 +635,11 @@ public class ProjectFileManager implements ProjectData {
 			}
 			return;
 		}
-		else if (notOnline) {
-			return;
-		}
+        if (notOnline) {
+            return;
+        }
 
-		userDataReconcileTimer = new GhidraSwinglessTimer(USER_DATA_RECONCILE_DELAY_MS, () -> {
+        userDataReconcileTimer = new GhidraSwinglessTimer(USER_DATA_RECONCILE_DELAY_MS, () -> {
 			synchronized (ProjectFileManager.this) {
 				startReconcileUserDataFiles();
 			}

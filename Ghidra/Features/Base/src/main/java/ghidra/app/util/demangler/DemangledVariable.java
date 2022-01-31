@@ -148,16 +148,16 @@ public class DemangledVariable extends DemangledObject {
 			DemangledFunctionPointer funcPtr = (DemangledFunctionPointer) datatype;
 			return buffer.append(funcPtr.toSignature(datatypeBuffer.toString())).toString();
 		}
-		else if (datatype instanceof DemangledFunctionReference) {
-			DemangledFunctionReference funcRef = (DemangledFunctionReference) datatype;
-			return buffer.append(funcRef.toSignature(datatypeBuffer.toString())).toString();
-		}
-		else if (datatype instanceof DemangledFunctionIndirect) {
-			DemangledFunctionIndirect funcDef = (DemangledFunctionIndirect) datatype;
-			return buffer.append(funcDef.toSignature(datatypeBuffer.toString())).toString();
-		}
+        if (datatype instanceof DemangledFunctionReference) {
+            DemangledFunctionReference funcRef = (DemangledFunctionReference) datatype;
+            return buffer.append(funcRef.toSignature(datatypeBuffer.toString())).toString();
+        }
+        if (datatype instanceof DemangledFunctionIndirect) {
+            DemangledFunctionIndirect funcDef = (DemangledFunctionIndirect) datatype;
+            return buffer.append(funcDef.toSignature(datatypeBuffer.toString())).toString();
+        }
 
-		buffer.append(datatypeBuffer);
+        buffer.append(datatypeBuffer);
 
 		return buffer.toString();
 	}

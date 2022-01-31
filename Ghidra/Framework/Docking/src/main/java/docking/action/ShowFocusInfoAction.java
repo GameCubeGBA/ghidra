@@ -95,17 +95,17 @@ public class ShowFocusInfoAction extends DockingAction {
 			JFrame frame = (JFrame) printComponent;
 			return "Window (" + frame.getTitle() + "): " + System.identityHashCode(frame);
 		}
-		else if (printComponent instanceof DockingDialog) {
-			DockingDialog dockingDialog = (DockingDialog) printComponent;
-			return "DockingDialog: " + dockingDialog.getTitle() + ": " +
-				System.identityHashCode(printComponent);
-		}
-		else if (printComponent instanceof JButton) {
-			return "JButton: " + ((JButton) printComponent).getText() + ": " +
-				System.identityHashCode(printComponent);
-		}
+        if (printComponent instanceof DockingDialog) {
+            DockingDialog dockingDialog = (DockingDialog) printComponent;
+            return "DockingDialog: " + dockingDialog.getTitle() + ": " +
+                System.identityHashCode(printComponent);
+        }
+        if (printComponent instanceof JButton) {
+            return "JButton: " + ((JButton) printComponent).getText() + ": " +
+                System.identityHashCode(printComponent);
+        }
 
-		String name = "";
+        String name = "";
 		String componentName = printComponent.getName();
 		if (componentName != null) {
 			name = " - '" + componentName + "' ";

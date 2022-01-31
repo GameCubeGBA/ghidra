@@ -54,11 +54,11 @@ public abstract class AbstractTranslateAction extends DockingAction {
 			setPopupMenuData(dataListMenuData);
 			return isEnabledForContext((DataLocationListContext) context);
 		}
-		else if (context instanceof CodeViewerActionContext) {
-			setPopupMenuData(codeViewerMenuData);
-			return isEnabledForContext((CodeViewerActionContext) context);
-		}
-		return false;
+        if (context instanceof CodeViewerActionContext) {
+            setPopupMenuData(codeViewerMenuData);
+            return isEnabledForContext((CodeViewerActionContext) context);
+        }
+        return false;
 	}
 
 	@Override

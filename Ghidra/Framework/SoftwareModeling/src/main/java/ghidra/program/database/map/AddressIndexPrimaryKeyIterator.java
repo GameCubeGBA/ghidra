@@ -189,21 +189,21 @@ public class AddressIndexPrimaryKeyIterator implements DBFieldIterator {
 		if (it == null) {
 			return false;
 		}
-		else if (!it.hasNext()) {
-			while (keyRangeIndex < (keyRangeList.size() - 1)) {
-				KeyRange keyRange = keyRangeList.get(++keyRangeIndex);
-				it = table.indexKeyIterator(indexCol, new LongField(keyRange.minKey),
-					new LongField(keyRange.maxKey), true);
-				if (it.hasPrevious()) {
-					it.previous();
-				}
-				if (it.hasNext()) {
-					return true;
-				}
-			}
-			return false;
-		}
-		return true;
+        if (!it.hasNext()) {
+            while (keyRangeIndex < (keyRangeList.size() - 1)) {
+                KeyRange keyRange = keyRangeList.get(++keyRangeIndex);
+                it = table.indexKeyIterator(indexCol, new LongField(keyRange.minKey),
+                    new LongField(keyRange.maxKey), true);
+                if (it.hasPrevious()) {
+                    it.previous();
+                }
+                if (it.hasNext()) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        return true;
 	}
 
 	@Override
@@ -211,21 +211,21 @@ public class AddressIndexPrimaryKeyIterator implements DBFieldIterator {
 		if (it == null) {
 			return false;
 		}
-		else if (!it.hasPrevious()) {
-			while (keyRangeIndex > 0) {
-				KeyRange keyRange = keyRangeList.get(--keyRangeIndex);
-				it = table.indexKeyIterator(indexCol, new LongField(keyRange.minKey),
-					new LongField(keyRange.maxKey), false);
-				if (it.hasNext()) {
-					it.next();
-				}
-				if (it.hasPrevious()) {
-					return true;
-				}
-			}
-			return false;
-		}
-		return true;
+        if (!it.hasPrevious()) {
+            while (keyRangeIndex > 0) {
+                KeyRange keyRange = keyRangeList.get(--keyRangeIndex);
+                it = table.indexKeyIterator(indexCol, new LongField(keyRange.minKey),
+                    new LongField(keyRange.maxKey), false);
+                if (it.hasNext()) {
+                    it.next();
+                }
+                if (it.hasPrevious()) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        return true;
 	}
 
 	@Override

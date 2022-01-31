@@ -155,10 +155,8 @@ public class DBTraceProgramViewFunctionManager implements FunctionManager {
 				if (entryPoint.equals(at.getEntryPoint())) {
 					return at;
 				}
-				else {
-					return null; // Anything below is occluded by the found function
-				}
-			}
+                return null; // Anything below is occluded by the found function
+            }
 		}
 		return null;
 	}

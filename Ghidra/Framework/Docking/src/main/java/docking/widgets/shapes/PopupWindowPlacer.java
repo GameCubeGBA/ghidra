@@ -464,13 +464,13 @@ public abstract class PopupWindowPlacer {
 			}
 			return greaterBoundedLocation;
 		}
-		else if (minorBegin.isLesser()) {
-			if (minorEnd.isLesser() && lesserLocation != lesserBoundedLocation) {
-				return null; // no solution
-			}
-			return lesserBoundedLocation;
-		}
-		return centerLocation;
+        if (minorBegin.isLesser()) {
+            if (minorEnd.isLesser() && lesserLocation != lesserBoundedLocation) {
+                return null; // no solution
+            }
+            return lesserBoundedLocation;
+        }
+        return centerLocation;
 	}
 
 	/**

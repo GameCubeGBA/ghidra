@@ -699,10 +699,10 @@ class OffsetComparator implements Comparator<Object> {
 		if (offset < dtc.getOffset()) {
 			return 1;
 		}
-		else if (offset > dtc.getEndOffset()) {
-			return -1;
-		}
-		return 0;
+        if (offset > dtc.getEndOffset()) {
+            return -1;
+        }
+        return 0;
 	}
 
 }

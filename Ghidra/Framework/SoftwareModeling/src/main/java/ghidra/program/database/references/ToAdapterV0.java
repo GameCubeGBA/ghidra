@@ -52,10 +52,10 @@ class ToAdapterV0 extends ToAdapter {
 		if (table == null) {
 			throw new VersionException("Missing Table: " + TO_REFS_TABLE_NAME);
 		}
-		else if (table.getSchema().getVersion() != 0) {
-			throw new VersionException(false);
-		}
-	}
+        if (table.getSchema().getVersion() != 0) {
+            throw new VersionException(false);
+        }
+    }
 
 	@Override
 	public RefList createRefList(ProgramDB program, DBObjectCache<RefList> cache, Address to)

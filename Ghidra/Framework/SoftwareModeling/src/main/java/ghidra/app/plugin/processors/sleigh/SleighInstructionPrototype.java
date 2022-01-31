@@ -204,11 +204,11 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 				walker.popBuild();
 				continue;
 			}
-			else if (state instanceof Integer) {
-				walker.pushBuild(((Integer) state).intValue());
-				continue;
-			}
-			res.lastop = (OpTpl) state;
+            if (state instanceof Integer) {
+                walker.pushBuild(((Integer) state).intValue());
+                continue;
+            }
+            res.lastop = (OpTpl) state;
 			switch (res.lastop.getOpcode()) {
 				case PcodeOp.PTRSUB:			// encoded crossbuild directive
 					res.hasCrossBuilds = true;
@@ -1489,45 +1489,45 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 			}
 			return true;
 		}
-		else if (type == AddressSpace.TYPE_CONSTANT) {
-			Scalar sc;
-			int size = handle.size;
-			if (size == 0) {
-				size = handle.offset_size;
-				if (size == 0) {
-					size = language.getDefaultSpace().getPointerSize();
-				}
-			}
-			boolean signed = handle.offset_offset < 0;
-			sc = new Scalar(size * 8, handle.offset_offset, signed);
-			list.add(sc);
-			return true;
-		}
-		else if (type == AddressSpace.TYPE_RAM) {
-			if (handle.offset_space == null) {
-				Address addr = getHandleAddr(handle, curSpace);
-				if (addr != null) {
-					if (addr.getAddressSpace().hasMappedRegisters()) {
-						Register reg = language.getRegister(addr, handle.size);
-						if (reg != null) {
-							list.add(reg);
-							return true;
-						}
-					}
-					list.add(addr);
-					return true;
-				}
-			}
-			// could be simply taking the value of a register as an address
-			else if (handle.offset_space.getType() == AddressSpace.TYPE_REGISTER) {
-				Register reg = language.getRegister(handle.offset_space, handle.offset_offset,
-					handle.offset_size);
-				list.add(reg);
-				return true;
-			}
+        if (type == AddressSpace.TYPE_CONSTANT) {
+            Scalar sc;
+            int size = handle.size;
+            if (size == 0) {
+                size = handle.offset_size;
+                if (size == 0) {
+                    size = language.getDefaultSpace().getPointerSize();
+                }
+            }
+            boolean signed = handle.offset_offset < 0;
+            sc = new Scalar(size * 8, handle.offset_offset, signed);
+            list.add(sc);
+            return true;
+        }
+        if (type == AddressSpace.TYPE_RAM) {
+            if (handle.offset_space == null) {
+                Address addr = getHandleAddr(handle, curSpace);
+                if (addr != null) {
+                    if (addr.getAddressSpace().hasMappedRegisters()) {
+                        Register reg = language.getRegister(addr, handle.size);
+                        if (reg != null) {
+                            list.add(reg);
+                            return true;
+                        }
+                    }
+                    list.add(addr);
+                    return true;
+                }
+            }
+            // could be simply taking the value of a register as an address
+            else if (handle.offset_space.getType() == AddressSpace.TYPE_REGISTER) {
+                Register reg = language.getRegister(handle.offset_space, handle.offset_offset,
+                    handle.offset_size);
+                list.add(reg);
+                return true;
+            }
 
-		}
-		return false;
+        }
+        return false;
 	}
 
 	private Address getHandleAddr(FixedHandle hand, AddressSpace curSpace) {

@@ -248,11 +248,11 @@ public class EmulatorHelper implements MemoryFaultHandler, EmulatorConfiguration
 			Msg.error(this, "Failed to read memory from Emulator at: " + addr);
 			return null;
 		}
-		else if (len < length) {
-			Msg.error(this,
-				"Only " + len + " of " + length + " bytes read memory from Emulator at: " + addr);
-		}
-		return res;
+        if (len < length) {
+            Msg.error(this,
+                "Only " + len + " of " + length + " bytes read memory from Emulator at: " + addr);
+        }
+        return res;
 	}
 
 	public void writeMemory(Address addr, byte[] bytes) {

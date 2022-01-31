@@ -848,11 +848,11 @@ class SymbolMerger extends AbstractListingMerger {
 				}
 				continue;
 			}
-			else if ((myType != SymbolType.LABEL) && (myType != SymbolType.CLASS) &&
-				(myType != SymbolType.NAMESPACE)) {
-				continue;
-			}
-			// Skip external labels since they should have already been handled by ExternalFunctionMerger.
+            if ((myType != SymbolType.LABEL) && (myType != SymbolType.CLASS) &&
+                (myType != SymbolType.NAMESPACE)) {
+                continue;
+            }
+            // Skip external labels since they should have already been handled by ExternalFunctionMerger.
 			if (myType == SymbolType.LABEL && mySym.isExternal()) {
 				continue;
 			}

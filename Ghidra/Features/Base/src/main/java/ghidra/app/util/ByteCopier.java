@@ -271,30 +271,30 @@ public abstract class ByteCopier {
 			String byteString = copyBytesAsString(getSelectedAddresses(), true, monitor);
 			return new ByteStringTransferable(byteString);
 		}
-		else if (copyType == BYTE_STRING_NO_SPACE_TYPE) {
-			String byteString = copyBytesAsString(getSelectedAddresses(), false, monitor);
-			return new ByteStringTransferable(byteString);
-		}
-		else if (copyType == PYTHON_BYTE_STRING_TYPE) {
-			String prefix = "\\x";
-			String bs = copyBytesAsString(getSelectedAddresses(), prefix, monitor);
-			String fixed = "b'" + prefix + bs + "'";
-			return new ProgrammingByteStringTransferable(fixed, copyType.getFlavor());
-		}
-		else if (copyType == PYTHON_LIST_TYPE) {
-			String prefix = "0x";
-			String bs = copyBytesAsString(getSelectedAddresses(), ", " + prefix, monitor);
-			String fixed = "[ " + prefix + bs + " ]";
-			return new ProgrammingByteStringTransferable(fixed, copyType.getFlavor());
-		}
-		else if (copyType == CPP_BYTE_ARRAY_TYPE) {
-			String prefix = "0x";
-			String bs = copyBytesAsString(getSelectedAddresses(), ", " + prefix, monitor);
-			String byteString = "{ " + prefix + bs + " }";
-			return new ProgrammingByteStringTransferable(byteString, copyType.getFlavor());
-		}
+        if (copyType == BYTE_STRING_NO_SPACE_TYPE) {
+            String byteString = copyBytesAsString(getSelectedAddresses(), false, monitor);
+            return new ByteStringTransferable(byteString);
+        }
+        if (copyType == PYTHON_BYTE_STRING_TYPE) {
+            String prefix = "\\x";
+            String bs = copyBytesAsString(getSelectedAddresses(), prefix, monitor);
+            String fixed = "b'" + prefix + bs + "'";
+            return new ProgrammingByteStringTransferable(fixed, copyType.getFlavor());
+        }
+        if (copyType == PYTHON_LIST_TYPE) {
+            String prefix = "0x";
+            String bs = copyBytesAsString(getSelectedAddresses(), ", " + prefix, monitor);
+            String fixed = "[ " + prefix + bs + " ]";
+            return new ProgrammingByteStringTransferable(fixed, copyType.getFlavor());
+        }
+        if (copyType == CPP_BYTE_ARRAY_TYPE) {
+            String prefix = "0x";
+            String bs = copyBytesAsString(getSelectedAddresses(), ", " + prefix, monitor);
+            String byteString = "{ " + prefix + bs + " }";
+            return new ProgrammingByteStringTransferable(byteString, copyType.getFlavor());
+        }
 
-		return null;
+        return null;
 	}
 
 	protected boolean pasteBytes(Transferable pasteData)

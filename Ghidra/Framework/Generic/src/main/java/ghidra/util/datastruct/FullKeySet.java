@@ -106,7 +106,7 @@ public class FullKeySet implements ShortKeySet, Serializable {
         if ((key < 0) || (key >= numKeys)) {
             throw new IndexOutOfBoundsException();
         }
-        else if (key == numKeys-1) {
+        if (key == numKeys-1) {
             return -1;
         }
         return (short)(key+1);
@@ -120,7 +120,7 @@ public class FullKeySet implements ShortKeySet, Serializable {
         if ((key < 0) || (key >= numKeys)) {
             throw new IndexOutOfBoundsException();
         }
-        else if (key == 0) {
+        if (key == 0) {
             return -1;
         }
         return (short)(key-1);

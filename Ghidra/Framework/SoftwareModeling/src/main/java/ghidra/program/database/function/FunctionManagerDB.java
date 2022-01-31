@@ -146,10 +146,10 @@ public class FunctionManagerDB implements FunctionManager {
 		if (id == CallingConventionDBAdapter.DEFAULT_CALLING_CONVENTION_ID) {
 			return Function.DEFAULT_CALLING_CONVENTION_STRING;
 		}
-		else if (id == CallingConventionDBAdapter.UNKNOWN_CALLING_CONVENTION_ID) {
-			return null;
-		}
-		String name = callingConventionIDToNameMap.get(id);
+        if (id == CallingConventionDBAdapter.UNKNOWN_CALLING_CONVENTION_ID) {
+            return null;
+        }
+        String name = callingConventionIDToNameMap.get(id);
 		if (name != null) {
 			return name;
 		}
@@ -185,10 +185,10 @@ public class FunctionManagerDB implements FunctionManager {
 		if (name == null || name.equals(Function.UNKNOWN_CALLING_CONVENTION_STRING)) {
 			return CallingConventionDBAdapter.UNKNOWN_CALLING_CONVENTION_ID;
 		}
-		else if (name.equals(Function.DEFAULT_CALLING_CONVENTION_STRING)) {
-			return CallingConventionDBAdapter.DEFAULT_CALLING_CONVENTION_ID;
-		}
-		Byte id = callingConventionNameToIDMap.get(name);
+        if (name.equals(Function.DEFAULT_CALLING_CONVENTION_STRING)) {
+            return CallingConventionDBAdapter.DEFAULT_CALLING_CONVENTION_ID;
+        }
+        Byte id = callingConventionNameToIDMap.get(name);
 		if (id != null) {
 			return id;
 		}

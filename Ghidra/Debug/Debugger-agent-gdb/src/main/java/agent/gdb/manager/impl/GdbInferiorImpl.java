@@ -313,14 +313,12 @@ public class GdbInferiorImpl implements GdbInferior {
 			}
 			return name;
 		}
-		else {
-			Matcher nameMatcher = GdbModuleImpl.OBJECT_FILE_LINE_PATTERN.matcher(line);
-			if (!nameMatcher.matches()) {
-				return null;
-			}
-			return nameMatcher.group("name");
-		}
-	}
+        Matcher nameMatcher = GdbModuleImpl.OBJECT_FILE_LINE_PATTERN.matcher(line);
+        if (!nameMatcher.matches()) {
+            return null;
+        }
+        return nameMatcher.group("name");
+    }
 
 	protected void parseAndUpdateAllModuleSections(String out, boolean v11) {
 		Set<String> namesSeen = new HashSet<>();

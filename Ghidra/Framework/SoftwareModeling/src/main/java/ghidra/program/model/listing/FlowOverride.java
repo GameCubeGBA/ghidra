@@ -144,65 +144,65 @@ public enum FlowOverride {
 			}
 			return RefType.UNCONDITIONAL_JUMP;
 		}
-		else if (flowOverride == FlowOverride.CALL) {
-			if (originalFlowType.isCall()) {
-				return originalFlowType;
-			}
-			if (originalFlowType.isConditional()) {
-				if (originalFlowType.isTerminal() && (originalFlowType.isCall() || originalFlowType.isJump())) {
-					// assume original return was preserved
-					return RefType.CONDITIONAL_CALL_TERMINATOR;
-				}
-				if (originalFlowType.isTerminal()) {
-					// assume return was replaced
-					return RefType.CONDITIONAL_COMPUTED_CALL;
-				}
-				return RefType.CONDITIONAL_CALL;
-			}
-			if (originalFlowType.isComputed()) {
-				if (originalFlowType.isTerminal() && (originalFlowType.isCall() || originalFlowType.isJump())) {
-					// assume original return was preserved
-					return RefType.COMPUTED_CALL_TERMINATOR;
-				}
-				return RefType.COMPUTED_CALL;
-			}
-			if (originalFlowType.isTerminal() && (originalFlowType.isCall() || originalFlowType.isJump())) {
-				// assume original return was preserved
-				return RefType.CALL_TERMINATOR;
-			}
-			if (originalFlowType.isTerminal()) {
-				// assume return was replaced
-				return RefType.COMPUTED_CALL;
-			}
-			return RefType.UNCONDITIONAL_CALL;
-		}
-		else if (flowOverride == FlowOverride.CALL_RETURN) {
-			if (originalFlowType.isConditional()) {
-				if (originalFlowType.isComputed()) {
-					return RefType.CONDITIONAL_COMPUTED_CALL;
-				}
-				if (originalFlowType.isTerminal()) {
-					// assume return was replaced
-					return RefType.COMPUTED_CALL_TERMINATOR;
-				}
-				return originalFlowType;  // don't replace
-			}
-			if (originalFlowType.isComputed()) {
-				return RefType.COMPUTED_CALL_TERMINATOR;
-			}
-			if (originalFlowType.isTerminal()) {
-				// assume return was replaced
-				return RefType.COMPUTED_CALL_TERMINATOR;
-			}
-			return RefType.CALL_TERMINATOR;
-		}
-		else if (flowOverride == FlowOverride.RETURN) {
-			if (originalFlowType.isConditional()) {
-				return RefType.CONDITIONAL_TERMINATOR;
-			}
-			return RefType.TERMINATOR;
-		}
-		return originalFlowType;
+        if (flowOverride == FlowOverride.CALL) {
+            if (originalFlowType.isCall()) {
+                return originalFlowType;
+            }
+            if (originalFlowType.isConditional()) {
+                if (originalFlowType.isTerminal() && (originalFlowType.isCall() || originalFlowType.isJump())) {
+                    // assume original return was preserved
+                    return RefType.CONDITIONAL_CALL_TERMINATOR;
+                }
+                if (originalFlowType.isTerminal()) {
+                    // assume return was replaced
+                    return RefType.CONDITIONAL_COMPUTED_CALL;
+                }
+                return RefType.CONDITIONAL_CALL;
+            }
+            if (originalFlowType.isComputed()) {
+                if (originalFlowType.isTerminal() && (originalFlowType.isCall() || originalFlowType.isJump())) {
+                    // assume original return was preserved
+                    return RefType.COMPUTED_CALL_TERMINATOR;
+                }
+                return RefType.COMPUTED_CALL;
+            }
+            if (originalFlowType.isTerminal() && (originalFlowType.isCall() || originalFlowType.isJump())) {
+                // assume original return was preserved
+                return RefType.CALL_TERMINATOR;
+            }
+            if (originalFlowType.isTerminal()) {
+                // assume return was replaced
+                return RefType.COMPUTED_CALL;
+            }
+            return RefType.UNCONDITIONAL_CALL;
+        }
+        if (flowOverride == FlowOverride.CALL_RETURN) {
+            if (originalFlowType.isConditional()) {
+                if (originalFlowType.isComputed()) {
+                    return RefType.CONDITIONAL_COMPUTED_CALL;
+                }
+                if (originalFlowType.isTerminal()) {
+                    // assume return was replaced
+                    return RefType.COMPUTED_CALL_TERMINATOR;
+                }
+                return originalFlowType;  // don't replace
+            }
+            if (originalFlowType.isComputed()) {
+                return RefType.COMPUTED_CALL_TERMINATOR;
+            }
+            if (originalFlowType.isTerminal()) {
+                // assume return was replaced
+                return RefType.COMPUTED_CALL_TERMINATOR;
+            }
+            return RefType.CALL_TERMINATOR;
+        }
+        if (flowOverride == FlowOverride.RETURN) {
+            if (originalFlowType.isConditional()) {
+                return RefType.CONDITIONAL_TERMINATOR;
+            }
+            return RefType.TERMINATOR;
+        }
+        return originalFlowType;
 	}
 
 }

@@ -201,7 +201,7 @@ public class RedBlackLongKeySet implements Serializable {
             if (key == node.key) {
                 return;
             }
-            else if (key < node.key) {
+            if (key < node.key) {
                 if (node.left != null) {
                     node = node.left;
                 }

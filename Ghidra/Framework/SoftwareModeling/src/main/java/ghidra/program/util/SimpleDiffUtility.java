@@ -89,13 +89,13 @@ public class SimpleDiffUtility {
 			}
 			return null;
 		}
-		else if (addr.isMemoryAddress() || addr.isStackAddress()) {
-			Address otherAddr = getCompatibleAddress(program, addr, otherProgram);
-			if (otherAddr != null) {
-				return new Varnode(otherAddr, varnode.getSize());
-			}
-		}
-		return null;
+        if (addr.isMemoryAddress() || addr.isStackAddress()) {
+            Address otherAddr = getCompatibleAddress(program, addr, otherProgram);
+            if (otherAddr != null) {
+                return new Varnode(otherAddr, varnode.getSize());
+            }
+        }
+        return null;
 	}
 
 	/*
@@ -204,10 +204,10 @@ public class SimpleDiffUtility {
 		if (addr.isMemoryAddress()) {
 			return translateMemoryAddress(addr, otherProgram, true);
 		}
-		else if (addr.isVariableAddress()) {
+        if (addr.isVariableAddress()) {
 // TODO: We should not attempt to correlate variables by their variable address
-			throw new IllegalArgumentException(
-				"correlation of variables by their variable address not allowed");
+            throw new IllegalArgumentException(
+                "correlation of variables by their variable address not allowed");
 //          Address storageAddr = program.getVariableStorageManager().getStorageAddress(addr);
 //          if (storageAddr == null) {
 //              return null;
@@ -223,45 +223,45 @@ public class SimpleDiffUtility {
 //              return null;
 //          }
 //          return otherProgram.getVariableStorageManager().findVariableAddress(otherNamespace.getID(), otherStorageAddr);
-		}
-		else if (addr.isStackAddress()) {
-			return otherProgram.getAddressFactory().getStackSpace().getAddress(addr.getOffset());
-		}
-		else if (addr.isRegisterAddress()) {
-			if (program.getLanguage().getLanguageID().equals(
-				otherProgram.getLanguage().getLanguageID())) {
-				return addr;
-			}
-			// TODO: should we handle small varnodes within big endian registers
-			Register reg = program.getRegister(addr);
-			if (reg != null) {
-				Register otherReg = otherProgram.getRegister(reg.getName());
-				if (otherReg != null && reg.getMinimumByteSize() == otherReg.getMinimumByteSize()) {
-					long delta = addr.subtract(reg.getAddress());
-					if (delta != 0) {
-						return otherReg.getAddress().add(delta);
-					}
-					return otherReg.getAddress();
-				}
-			}
-			return null;
-		}
-		else if (addr.isExternalAddress()) {
-			Symbol s = program.getSymbolTable().getPrimarySymbol(addr);
-			if (s != null && s.isExternal()) {
-				s = getSymbol(s, otherProgram);
-				if (s != null) {
-					return s.getAddress();
-				}
-			}
-			return null;
-		}
-		else if (addr.getAddressSpace().getType() == AddressSpace.TYPE_NONE ||
-			addr.getAddressSpace().getType() == AddressSpace.TYPE_UNKNOWN) {
+        }
+        if (addr.isStackAddress()) {
+            return otherProgram.getAddressFactory().getStackSpace().getAddress(addr.getOffset());
+        }
+        if (addr.isRegisterAddress()) {
+            if (program.getLanguage().getLanguageID().equals(
+                otherProgram.getLanguage().getLanguageID())) {
+                return addr;
+            }
+            // TODO: should we handle small varnodes within big endian registers
+            Register reg = program.getRegister(addr);
+            if (reg != null) {
+                Register otherReg = otherProgram.getRegister(reg.getName());
+                if (otherReg != null && reg.getMinimumByteSize() == otherReg.getMinimumByteSize()) {
+                    long delta = addr.subtract(reg.getAddress());
+                    if (delta != 0) {
+                        return otherReg.getAddress().add(delta);
+                    }
+                    return otherReg.getAddress();
+                }
+            }
+            return null;
+        }
+        if (addr.isExternalAddress()) {
+            Symbol s = program.getSymbolTable().getPrimarySymbol(addr);
+            if (s != null && s.isExternal()) {
+                s = getSymbol(s, otherProgram);
+                if (s != null) {
+                    return s.getAddress();
+                }
+            }
+            return null;
+        }
+        if (addr.getAddressSpace().getType() == AddressSpace.TYPE_NONE ||
+            addr.getAddressSpace().getType() == AddressSpace.TYPE_UNKNOWN) {
 // TODO: Not sure if this is correct ??
-			return addr;
-		}
-		throw new IllegalArgumentException("Unsupported address type");
+            return addr;
+        }
+        throw new IllegalArgumentException("Unsupported address type");
 	}
 
 	/**
@@ -286,10 +286,10 @@ public class SimpleDiffUtility {
 				if (offset < otherSpace.getMinAddress().getOffset()) {
 					return exactMatchOnly ? null : otherSpace.getMinAddress();
 				}
-				else if (offset > otherSpace.getMaxAddress().getOffset()) {
-					return exactMatchOnly ? null : otherSpace.getMaxAddress();
-				}
-				return otherSpace.getAddress(offset);
+                if (offset > otherSpace.getMaxAddress().getOffset()) {
+                    return exactMatchOnly ? null : otherSpace.getMaxAddress();
+                }
+                return otherSpace.getAddress(offset);
 			}
 			return otherSpace.getAddress(addr.getOffset());
 		}

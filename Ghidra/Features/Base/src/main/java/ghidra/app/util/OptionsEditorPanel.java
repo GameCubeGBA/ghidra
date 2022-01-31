@@ -191,30 +191,28 @@ public class OptionsEditorPanel extends JPanel {
 		if (Address.class.isAssignableFrom(optionClass)) {
 			return getAddressEditorComponent(option);
 		}
-		else if (Boolean.class.isAssignableFrom(optionClass)) {
-			return getBooleanEditorComponent(option);
-		}
-		else if (Long.class.isAssignableFrom(optionClass)) {
-			return getLongEditorComponent(option);
-		}
-		else if (Integer.class.isAssignableFrom(optionClass)) {
-			return getIntegerEditorComponent(option);
-		}
-		else if (HexLong.class.isAssignableFrom(optionClass)) {
-			return getHexLongEditorComponent(option);
-		}
-		else if (String.class.isAssignableFrom(optionClass)) {
-			return getStringEditorComponent(option);
-		}
-		else if (AddressSpace.class.isAssignableFrom(optionClass)) {
-			return getAddressSpaceEditorComponent(option);
-		}
-		else {
-			throw new AssertException(
-				"Attempted to get default editor component for Option type: " +
-					optionClass.getName() + ". Please register a custom editor");
-		}
-	}
+        if (Boolean.class.isAssignableFrom(optionClass)) {
+            return getBooleanEditorComponent(option);
+        }
+        if (Long.class.isAssignableFrom(optionClass)) {
+            return getLongEditorComponent(option);
+        }
+        if (Integer.class.isAssignableFrom(optionClass)) {
+            return getIntegerEditorComponent(option);
+        }
+        if (HexLong.class.isAssignableFrom(optionClass)) {
+            return getHexLongEditorComponent(option);
+        }
+        if (String.class.isAssignableFrom(optionClass)) {
+            return getStringEditorComponent(option);
+        }
+        if (AddressSpace.class.isAssignableFrom(optionClass)) {
+            return getAddressSpaceEditorComponent(option);
+        }
+        throw new AssertException(
+            "Attempted to get default editor component for Option type: " +
+                optionClass.getName() + ". Please register a custom editor");
+    }
 
 	private Component buildLoadLibraryPathsEditor(Option option) {
 		JPanel panel = new JPanel(new BorderLayout());

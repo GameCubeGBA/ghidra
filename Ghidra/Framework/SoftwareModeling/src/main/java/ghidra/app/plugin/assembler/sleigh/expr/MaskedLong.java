@@ -808,10 +808,10 @@ public class MaskedLong implements Comparable<MaskedLong> {
 		if (lmv == 3 || rmv == 3) {
 			return 3;
 		}
-		else if (lmv == 2 && rmv == 2) {
-			return 2;
-		}
-		return 0;
+        if (lmv == 2 && rmv == 2) {
+            return 2;
+        }
+        return 0;
 	}
 
 	private static byte or(byte t1, byte t2, byte t3) {
@@ -840,19 +840,19 @@ public class MaskedLong implements Comparable<MaskedLong> {
 		if (this.isFullyDefined() && that.isFullyDefined()) {
 			return fromMaskAndValue(-1, this.val * that.val);
 		}
-		else if (that.isFullyDefined()) {
-			// If it's a power of 2, re-write as bit shift
-			if (Long.bitCount(that.val) == 1) {
-				return this.shiftLeft(Long.numberOfTrailingZeros(that.val));
-			}
-		}
-		else if (this.isFullyDefined()) {
-			if (Long.bitCount(this.val) == 1) {
-				return that.shiftLeft(Long.numberOfTrailingZeros(this.val));
-			}
-		}
+        if (that.isFullyDefined()) {
+            // If it's a power of 2, re-write as bit shift
+            if (Long.bitCount(that.val) == 1) {
+                return this.shiftLeft(Long.numberOfTrailingZeros(that.val));
+            }
+        }
+        else if (this.isFullyDefined()) {
+            if (Long.bitCount(this.val) == 1) {
+                return that.shiftLeft(Long.numberOfTrailingZeros(this.val));
+            }
+        }
 
-		// TODO: Distinguish size, don't knows, from don't cares.
+        // TODO: Distinguish size, don't knows, from don't cares.
 		// Assume unknown bits to the left are actually don't cares. That is, they specify the size
 		// of the "field"
 		int thisSize = Long.numberOfTrailingZeros(~this.msk);
@@ -873,18 +873,18 @@ public class MaskedLong implements Comparable<MaskedLong> {
 			long newVal = this.val / that.val;
 			return fromMaskAndValue(-1, newVal);
 		}
-		else if (that.isFullyDefined()) {
-			// If it's a power of 2, re-write as bit shift
-			if (Long.bitCount(that.val) == 1) {
-				return shiftRight(Long.numberOfTrailingZeros(that.val));
-			}
-			// Ditto from #divideUnsigned
-			else if (Long.numberOfLeadingZeros(this.msk) +
-				Long.numberOfTrailingZeros(~this.msk) == Long.SIZE) {
-				return fromMaskAndValue(this.msk, this.val / that.val);
-			}
-		}
-		throw new UnsupportedOperationException("Cannot divide unknown values, yet.");
+        if (that.isFullyDefined()) {
+            // If it's a power of 2, re-write as bit shift
+            if (Long.bitCount(that.val) == 1) {
+                return shiftRight(Long.numberOfTrailingZeros(that.val));
+            }
+            // Ditto from #divideUnsigned
+            if (Long.numberOfLeadingZeros(this.msk) +
+                Long.numberOfTrailingZeros(~this.msk) == Long.SIZE) {
+                return fromMaskAndValue(this.msk, this.val / that.val);
+            }
+        }
+        throw new UnsupportedOperationException("Cannot divide unknown values, yet.");
 	}
 
 	/**
@@ -899,21 +899,21 @@ public class MaskedLong implements Comparable<MaskedLong> {
 			long newVal = Long.divideUnsigned(this.val, that.val);
 			return fromMaskAndValue(-1, newVal);
 		}
-		else if (that.isFullyDefined()) {
-			// If it's a power of 2, re-write as bit shift
-			if (Long.bitCount(that.val) == 1) {
-				return shiftRightLogical(Long.numberOfTrailingZeros(that.val));
-			}
-			// TODO: Some way to distinguish size, or perhaps don't know from don't care
-			// TODO: Some way to distinguish sign
-			// If all unknown bits are at the far left, just assume they are zero
-			// We may lose some possibilities, but we'll have at least found one
-			else if (Long.numberOfLeadingZeros(this.msk) +
-				Long.numberOfTrailingZeros(~this.msk) == Long.SIZE) {
-				return fromMaskAndValue(this.msk, Long.divideUnsigned(this.val, that.val));
-			}
-		}
-		throw new UnsupportedOperationException("Cannot divide unknown values, yet.");
+        if (that.isFullyDefined()) {
+            // If it's a power of 2, re-write as bit shift
+            if (Long.bitCount(that.val) == 1) {
+                return shiftRightLogical(Long.numberOfTrailingZeros(that.val));
+            }
+            // TODO: Some way to distinguish size, or perhaps don't know from don't care
+            // TODO: Some way to distinguish sign
+            // If all unknown bits are at the far left, just assume they are zero
+            // We may lose some possibilities, but we'll have at least found one
+            if (Long.numberOfLeadingZeros(this.msk) +
+                Long.numberOfTrailingZeros(~this.msk) == Long.SIZE) {
+                return fromMaskAndValue(this.msk, Long.divideUnsigned(this.val, that.val));
+            }
+        }
+        throw new UnsupportedOperationException("Cannot divide unknown values, yet.");
 		// TODO: Work this using a bitwise algorithm, if *really* needed.
 		// AFAICT, a bitwise algorithm doesn't buy much at all
 	}
@@ -937,11 +937,11 @@ public class MaskedLong implements Comparable<MaskedLong> {
 			}
 			// Ditto comments from #divideUnsigned
 			// TODO: Is this correct or even useful?
-			else if (Long.numberOfLeadingZeros(this.msk) +
-				Long.numberOfTrailingZeros(~this.msk) == Long.SIZE) {
-				return fromMaskAndValue(this.msk, Long.divideUnsigned(this.val, that.val));
-			}
-		}
+            if (Long.numberOfLeadingZeros(this.msk) +
+                Long.numberOfTrailingZeros(~this.msk) == Long.SIZE) {
+                return fromMaskAndValue(this.msk, Long.divideUnsigned(this.val, that.val));
+            }
+        }
 		throw new UnsupportedOperationException("Cannot divide unknown values, yet.");
 	}
 
@@ -998,13 +998,11 @@ public class MaskedLong implements Comparable<MaskedLong> {
 		if (that instanceof Long) {
 			return agrees(((Long) that).longValue());
 		}
-		else if (that instanceof MaskedLong) {
-			return agrees((MaskedLong) that);
-		}
-		else {
-			throw new IllegalArgumentException("must be Long or MaskedLong: " + that);
-		}
-	}
+        if (that instanceof MaskedLong) {
+            return agrees((MaskedLong) that);
+        }
+        throw new IllegalArgumentException("must be Long or MaskedLong: " + that);
+    }
 
 	/**
 	 * Check if the masked value falls within a given range

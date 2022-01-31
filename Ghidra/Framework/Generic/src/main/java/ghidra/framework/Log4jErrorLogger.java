@@ -27,19 +27,17 @@ public class Log4jErrorLogger implements ErrorLogger {
 		if (originator == null) {
 			return LogManager.getLogger("(null)");
 		}
-		else if (originator instanceof Logger) {
-			return (Logger) originator;
-		}
-		else if (originator instanceof Class<?>) {
-			return LogManager.getLogger((Class<?>) originator);
-		}
-		else if (originator instanceof String) {
-			return LogManager.getLogger((String) originator);
-		}
-		else {
-			return LogManager.getLogger(originator.getClass());
-		}
-	}
+        if (originator instanceof Logger) {
+            return (Logger) originator;
+        }
+        if (originator instanceof Class<?>) {
+            return LogManager.getLogger((Class<?>) originator);
+        }
+        if (originator instanceof String) {
+            return LogManager.getLogger((String) originator);
+        }
+        return LogManager.getLogger(originator.getClass());
+    }
 
 	@Override
 	public void debug(Object originator, Object message) {

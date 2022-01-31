@@ -238,11 +238,11 @@ class RecoveryMgr {
 						}
 						return null; // can not use either file!
 					}
-					else if (modTimes[1] > modTimes[0]) {
-						closeRf = recoveryFiles[0];
-						return recoveryFiles[1];
-					}
-					closeRf = recoveryFiles[1];
+                    if (modTimes[1] > modTimes[0]) {
+                        closeRf = recoveryFiles[0];
+                        return recoveryFiles[1];
+                    }
+                    closeRf = recoveryFiles[1];
 					return recoveryFiles[0];
 				}
 				finally {

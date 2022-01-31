@@ -218,13 +218,11 @@ public class ISO9660Analyzer extends AbstractAnalyzer {
 		if (offsetEnum == Offset.Offset1) {
 			return ISO9660Constants.SIGNATURE_OFFSET1_0x8001;
 		}
-		else if (offsetEnum == Offset.Offset2) {
-			return ISO9660Constants.SIGNATURE_OFFSET2_0x8801;
-		}
-		else {
-			return ISO9660Constants.SIGNATURE_OFFSET3_0x9001;
-		}
-	}
+        if (offsetEnum == Offset.Offset2) {
+            return ISO9660Constants.SIGNATURE_OFFSET2_0x8801;
+        }
+        return ISO9660Constants.SIGNATURE_OFFSET3_0x9001;
+    }
 
 	private void setDescriptorData(Program program, List<ISO9660BaseVolume> volumes,
 			ProgramModule descriptorModule) throws DuplicateNameException, IOException, Exception {

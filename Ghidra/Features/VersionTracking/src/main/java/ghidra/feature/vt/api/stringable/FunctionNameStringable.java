@@ -167,10 +167,10 @@ public class FunctionNameStringable extends Stringable {
 		if (type == SymbolType.LIBRARY) {
 			return symbolTable.createExternalLibrary(name, namespaceSourceType);
 		}
-		else if (type == SymbolType.CLASS) {
-			return symbolTable.createClass(namespace, name, namespaceSourceType);
-		}
-		return symbolTable.createNameSpace(namespace, name, namespaceSourceType);
+        if (type == SymbolType.CLASS) {
+            return symbolTable.createClass(namespace, name, namespaceSourceType);
+        }
+        return symbolTable.createNameSpace(namespace, name, namespaceSourceType);
 	}
 
 	@Override

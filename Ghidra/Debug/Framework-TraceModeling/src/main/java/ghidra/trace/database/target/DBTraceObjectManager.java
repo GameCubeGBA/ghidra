@@ -267,15 +267,15 @@ public class DBTraceObjectManager implements TraceObjectManager, DBTraceManager 
 			entry.set(parent, key, false);
 			return entry;
 		}
-		else if (value instanceof Address) {
-			Address address = (Address) value;
-			AddressRange singleton = new AddressRangeImpl(address, address);
-			DBTraceObjectAddressRangeValue entry = rangeValueMap
-					.put(new ImmutableTraceAddressSnapRange(singleton, lifespan), null);
-			entry.set(parent, key, true);
-			return entry;
-		}
-		DBTraceObjectValue entry = valueStore.create();
+        if (value instanceof Address) {
+            Address address = (Address) value;
+            AddressRange singleton = new AddressRangeImpl(address, address);
+            DBTraceObjectAddressRangeValue entry = rangeValueMap
+                    .put(new ImmutableTraceAddressSnapRange(singleton, lifespan), null);
+            entry.set(parent, key, true);
+            return entry;
+        }
+        DBTraceObjectValue entry = valueStore.create();
 		entry.set(lifespan, parent, key, value);
 		if (parent != null) {
 			// Don't need event for root value created

@@ -168,40 +168,40 @@ public interface DBTraceDefinedDataAdapter extends DBTraceDataAdapter {
 				int index = offset / elementLength;
 				return Collections.singletonList(getComponent(index));
 			}
-			else if (baseDataType instanceof Structure) {
-				Structure struct = (Structure) baseDataType;
-				List<Data> result = new ArrayList<>();
-				for (DataTypeComponent dtc : struct.getComponentsContaining(offset)) {
-					result.add(getComponent(dtc.getOrdinal()));
-				}
-				return result;
-			}
-			else if (baseDataType instanceof DynamicDataType) {
-				DynamicDataType ddt = (DynamicDataType) baseDataType;
-				DataTypeComponent dtc = ddt.getComponentAt(offset, this);
-				List<Data> result = new ArrayList<>();
-				// Logic handles overlapping bit-fields
-				// Include if offset is contained within bounds of component
-				while (dtc != null && (offset >= dtc.getOffset()) &&
-					(offset < (dtc.getOffset() + dtc.getLength()))) {
-					int ordinal = dtc.getOrdinal();
-					result.add(getComponent(ordinal++));
-					dtc = ordinal < ddt.getNumComponents(this) ? ddt.getComponent(ordinal, this)
-							: null;
-				}
-				return result;
-			}
-			else if (baseDataType instanceof Union) {
-				Union union = (Union) baseDataType;
-				List<Data> result = new ArrayList<>();
-				for (DataTypeComponent dtc : union.getComponents()) {
-					if (offset < dtc.getLength()) {
-						result.add(getComponent(dtc.getOrdinal()));
-					}
-				}
-				return result;
-			}
-			return Collections.emptyList();
+            if (baseDataType instanceof Structure) {
+                Structure struct = (Structure) baseDataType;
+                List<Data> result = new ArrayList<>();
+                for (DataTypeComponent dtc : struct.getComponentsContaining(offset)) {
+                    result.add(getComponent(dtc.getOrdinal()));
+                }
+                return result;
+            }
+            if (baseDataType instanceof DynamicDataType) {
+                DynamicDataType ddt = (DynamicDataType) baseDataType;
+                DataTypeComponent dtc = ddt.getComponentAt(offset, this);
+                List<Data> result = new ArrayList<>();
+                // Logic handles overlapping bit-fields
+                // Include if offset is contained within bounds of component
+                while (dtc != null && (offset >= dtc.getOffset()) &&
+                    (offset < (dtc.getOffset() + dtc.getLength()))) {
+                    int ordinal = dtc.getOrdinal();
+                    result.add(getComponent(ordinal++));
+                    dtc = ordinal < ddt.getNumComponents(this) ? ddt.getComponent(ordinal, this)
+                            : null;
+                }
+                return result;
+            }
+            if (baseDataType instanceof Union) {
+                Union union = (Union) baseDataType;
+                List<Data> result = new ArrayList<>();
+                for (DataTypeComponent dtc : union.getComponents()) {
+                    if (offset < dtc.getLength()) {
+                        result.add(getComponent(dtc.getOrdinal()));
+                    }
+                }
+                return result;
+            }
+            return Collections.emptyList();
 		}
 	}
 

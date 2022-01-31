@@ -199,12 +199,10 @@ public class DBTraceObjectStack implements TraceObjectStack, DBTraceObjectInterf
 				return doGetFrame(level);
 			}
 		}
-		else {
-			try (LockHold hold = object.getTrace().lockRead()) {
-				return doGetFrame(level);
-			}
-		}
-	}
+        try (LockHold hold = object.getTrace().lockRead()) {
+            return doGetFrame(level);
+        }
+    }
 
 	protected Stream<TraceObjectStackFrame> doGetFrames(long snap) {
 		return object

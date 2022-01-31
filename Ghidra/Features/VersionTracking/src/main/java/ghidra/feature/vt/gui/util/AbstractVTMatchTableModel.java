@@ -279,13 +279,13 @@ public abstract class AbstractVTMatchTableModel extends AddressBasedTableModel<V
 					if (markupStatus.isFullyApplied()) {
 						return ACCEPTED_FULLY_APPLIED;
 					}
-					else if (markupStatus.hasErrors()) {
-						return ACCEPTED_HAS_ERRORS;
-					}
-					else if (markupStatus.hasUnexaminedMarkup()) {
-						return ACCEPTED_SOME_UNEXAMINED;
-					}
-					return ACCEPTED_NO_UNEXAMINED;
+                    if (markupStatus.hasErrors()) {
+                        return ACCEPTED_HAS_ERRORS;
+                    }
+                    if (markupStatus.hasUnexaminedMarkup()) {
+                        return ACCEPTED_SOME_UNEXAMINED;
+                    }
+                    return ACCEPTED_NO_UNEXAMINED;
 				case AVAILABLE:
 					return AVAILABLE;
 				case BLOCKED:

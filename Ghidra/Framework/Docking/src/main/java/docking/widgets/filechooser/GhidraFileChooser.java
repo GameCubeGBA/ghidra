@@ -830,10 +830,10 @@ public class GhidraFileChooser extends DialogComponentProvider implements FileFi
 			}
 			return str;
 		}
-		else if (GhidraFileChooser.RECENT.equals(getCurrentDirectory())) {
-			return file.getAbsolutePath() + "  ";
-		}
-		return getFilename(file) + "  ";
+        if (GhidraFileChooser.RECENT.equals(getCurrentDirectory())) {
+            return file.getAbsolutePath() + "  ";
+        }
+        return getFilename(file) + "  ";
 	}
 
 	private void setDirectoryList(File directory, List<File> files) {
@@ -882,10 +882,10 @@ public class GhidraFileChooser extends DialogComponentProvider implements FileFi
 		if (isFilesAndDirectories()) {
 			return "Please make a selection";
 		}
-		else if (isFilesOnly()) {
-			return "Please select a file";
-		}
-		return "Please select a directory";
+        if (isFilesOnly()) {
+            return "Please select a file";
+        }
+        return "Please select a directory";
 	}
 
 	private List<File> filterFilesForSelectionMode(FileList list) {

@@ -129,10 +129,10 @@ public final class BooleanField extends PrimitiveField {
 		if (value == f.value) {
 			return 0;
 		}
-		else if (value < f.value) {
-			return -1;
-		}
-		return 1;
+        if (value < f.value) {
+            return -1;
+        }
+        return 1;
 	}
 
 	@Override
@@ -141,10 +141,10 @@ public final class BooleanField extends PrimitiveField {
 		if (value == otherValue) {
 			return 0;
 		}
-		else if (value < otherValue) {
-			return -1;
-		}
-		return 1;
+        if (value < otherValue) {
+            return -1;
+        }
+        return 1;
 	}
 
 	@Override

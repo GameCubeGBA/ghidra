@@ -412,17 +412,17 @@ class ServerConnectTask extends Task {
 			if (name.equals(GhidraServerHandle.BIND_NAME)) {
 				return; // found it
 			}
-			else if (name.startsWith(GhidraServerHandle.BIND_NAME_PREFIX)) {
-				String version = name.substring(GhidraServerHandle.BIND_NAME_PREFIX.length());
-				if (version.length() == 0) {
-					version = "4.3.x (or older)";
-				}
-				exc = new RemoteException(
-					"Incompatible Ghidra Server interface, detected interface version " + version +
-						",\nthis client requires server version " + requiredVersion);
-				++badVerCount;
-			}
-		}
+            if (name.startsWith(GhidraServerHandle.BIND_NAME_PREFIX)) {
+                String version = name.substring(GhidraServerHandle.BIND_NAME_PREFIX.length());
+                if (version.length() == 0) {
+                    version = "4.3.x (or older)";
+                }
+                exc = new RemoteException(
+                    "Incompatible Ghidra Server interface, detected interface version " + version +
+                        ",\nthis client requires server version " + requiredVersion);
+                ++badVerCount;
+            }
+        }
 		if (exc != null) {
 			if (badVerCount == 1) {
 				throw exc;

@@ -676,11 +676,11 @@ public class ConcurrentQ<I, R> {
 			if (listener1 == listener) {
 				return listener2;
 			}
-			else if (listener2 == listener) {
-				return listener1;
-			}
+            if (listener2 == listener) {
+                return listener1;
+            }
 
-			if (listener1 instanceof ChainedProgressListener) {
+            if (listener1 instanceof ChainedProgressListener) {
 				listener1 = ((ChainedProgressListener<I>) listener1).removeListener(listener);
 			}
 			if (listener2 instanceof ChainedProgressListener) {

@@ -959,29 +959,29 @@ public class AddressSet implements AddressSetView {
 			if (endCompare < 0) {
 				return RangeCompare.RANGE1_STARTS_BEFORE_RANGE2_ENDS_INSIDE_RANGE2;
 			}
-			else if (endCompare > 0) {
-				return RangeCompare.RANGE1_STARTS_BEFORE_RANGE2_ENDS_AFTER_RANGE2;
-			}
-			return RangeCompare.RANGE1_STARTS_BEFORE_RANGE2_ENDS_AT_RANGE2_END;
+            if (endCompare > 0) {
+                return RangeCompare.RANGE1_STARTS_BEFORE_RANGE2_ENDS_AFTER_RANGE2;
+            }
+            return RangeCompare.RANGE1_STARTS_BEFORE_RANGE2_ENDS_AT_RANGE2_END;
 		}
 		if (startCompare > 0) {
 			if (endCompare < 0) {
 				return RangeCompare.RANGE1_STARTS_INSIDE_RANGE2_ENDS_INSIDE_RANGE2;
 			}
-			else if (endCompare > 0) {
-				return RangeCompare.RANGE1_STARTS_INSIDE_RANGE2_ENDS_AFTER_RANGE2;
-			}
-			return RangeCompare.RANGE1_STARTS_INSIDE_RANGE2_ENDS_AT_RANGE2;
+            if (endCompare > 0) {
+                return RangeCompare.RANGE1_STARTS_INSIDE_RANGE2_ENDS_AFTER_RANGE2;
+            }
+            return RangeCompare.RANGE1_STARTS_INSIDE_RANGE2_ENDS_AT_RANGE2;
 
 		}
 
 		if (endCompare < 0) {
 			return RangeCompare.RANGE1_STARTS_AT_RANGE2_ENDS_BEFORE_RANGE2;
 		}
-		else if (endCompare > 0) {
-			return RangeCompare.RANGE1_STARTS_AT_RANGE2_ENDS_AFTER_RANGE2;
-		}
-		return RangeCompare.RANGE1_EQUALS_RANGE2;
+        if (endCompare > 0) {
+            return RangeCompare.RANGE1_STARTS_AT_RANGE2_ENDS_AFTER_RANGE2;
+        }
+        return RangeCompare.RANGE1_EQUALS_RANGE2;
 
 	}
 

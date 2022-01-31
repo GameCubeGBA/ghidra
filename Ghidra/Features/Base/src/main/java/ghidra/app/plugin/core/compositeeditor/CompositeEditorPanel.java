@@ -519,26 +519,26 @@ public abstract class CompositeEditorPanel extends JPanel
 			Msg.showWarn(this, this, "Program Restored", info);
 			return;
 		}
-		else if (originalDt.isDeleted()) {
-			cancelCellEditing(); // Make sure a field isn't being edited.
-			provider.dispose(); // Close the editor.
-			return;
-		}
-		else if (model.hasChanges()) {
-			provider.show();
-			// The user has modified the structure so prompt for whether or
-			// not to reload the structure.
-			String question =
-				"The " + objectType + " \"" + domainObject.getName() + "\" has been restored.\n" +
-					"\"" + model.getCompositeName() + "\" may have changed outside the editor.\n" +
-					"Discard edits & reload the " + model.getTypeName() + "?";
-			String title = "Reload " + model.getTypeName() + " Editor?";
-			int response = OptionDialog.showYesNoDialogWithNoAsDefaultButton(this, title, question);
-			if (response != 1) {
-				reload = false;
-			}
-		}
-		if (reload) {
+        if (originalDt.isDeleted()) {
+            cancelCellEditing(); // Make sure a field isn't being edited.
+            provider.dispose(); // Close the editor.
+            return;
+        }
+        if (model.hasChanges()) {
+            provider.show();
+            // The user has modified the structure so prompt for whether or
+            // not to reload the structure.
+            String question =
+                "The " + objectType + " \"" + domainObject.getName() + "\" has been restored.\n" +
+                    "\"" + model.getCompositeName() + "\" may have changed outside the editor.\n" +
+                    "Discard edits & reload the " + model.getTypeName() + "?";
+            String title = "Reload " + model.getTypeName() + " Editor?";
+            int response = OptionDialog.showYesNoDialogWithNoAsDefaultButton(this, title, question);
+            if (response != 1) {
+                reload = false;
+            }
+        }
+        if (reload) {
 			cancelCellEditing(); // Make sure a field isn't being edited.
 			model.load(originalDt); // reload the structure
 			model.updateAndCheckChangeState();

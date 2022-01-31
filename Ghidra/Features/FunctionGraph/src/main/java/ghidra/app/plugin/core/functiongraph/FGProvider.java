@@ -279,11 +279,11 @@ public class FGProvider extends VisualGraphComponentProvider<FGVertex, FGEdge, F
 			// we may want to change the actions over the satellite in the future
 			return new FunctionGraphSatelliteViewerActionContext(this);
 		}
-		else if (source instanceof VisualGraphContextMarker) {
-			return new FunctionGraphValidGraphActionContext(this, new HashSet<FGVertex>());
-		}
+        if (source instanceof VisualGraphContextMarker) {
+            return new FunctionGraphValidGraphActionContext(this, new HashSet<FGVertex>());
+        }
 
-		// handle the 'full vertex zoom' case, where only one vertex is in the view (not graph mode)
+        // handle the 'full vertex zoom' case, where only one vertex is in the view (not graph mode)
 		if (source instanceof FieldPanel) {
 			FGVertex vertex = controller.getFocusedVertex();
 			return new FunctionGraphVertexLocationInFullViewModeActionContext(this, vertex);
@@ -868,14 +868,14 @@ public class FGProvider extends VisualGraphComponentProvider<FGVertex, FGEdge, F
 			controller.refreshDisplayWithoutRebuilding();
 			return; // real user symbols
 		}
-		else if (symbols.length == 1) {
-			if (!symbols[0].isDynamic()) {
-				controller.refreshDisplayWithoutRebuilding();
-				return; // real user symbol
-			}
-		}
+        if (symbols.length == 1) {
+            if (!symbols[0].isDynamic()) {
+                controller.refreshDisplayWithoutRebuilding();
+                return; // real user symbol
+            }
+        }
 
-		ReferenceManager referenceManager = currentProgram.getReferenceManager();
+        ReferenceManager referenceManager = currentProgram.getReferenceManager();
 		ReferenceIterator references = referenceManager.getReferencesTo(minAddress);
 		if (references.hasNext()) {
 			return; // other references to this vertex entry point

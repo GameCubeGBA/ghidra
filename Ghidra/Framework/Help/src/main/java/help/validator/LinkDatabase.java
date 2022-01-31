@@ -75,14 +75,14 @@ public class LinkDatabase {
 							(DuplicateAnchorCollectionByHelpTopic) o2;
 						return d1.compareTo(d2);
 					}
-					else if (o1 instanceof DuplicateAnchorCollectionByHelpFile) {
-						DuplicateAnchorCollectionByHelpFile d1 =
-							(DuplicateAnchorCollectionByHelpFile) o1;
-						DuplicateAnchorCollectionByHelpFile d2 =
-							(DuplicateAnchorCollectionByHelpFile) o2;
-						return d1.compareTo(d2);
-					}
-					throw new RuntimeException(
+                    if (o1 instanceof DuplicateAnchorCollectionByHelpFile) {
+                        DuplicateAnchorCollectionByHelpFile d1 =
+                            (DuplicateAnchorCollectionByHelpFile) o1;
+                        DuplicateAnchorCollectionByHelpFile d2 =
+                            (DuplicateAnchorCollectionByHelpFile) o2;
+                        return d1.compareTo(d2);
+                    }
+                    throw new RuntimeException(
 						"New type of DuplicateAnchorCollection not handled by this comparator");
 				}
 

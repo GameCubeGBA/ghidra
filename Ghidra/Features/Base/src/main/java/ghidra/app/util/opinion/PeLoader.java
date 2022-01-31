@@ -761,11 +761,11 @@ public class PeLoader extends AbstractPeDebugLoader {
 					if (rawDataSize == virtualSize) {
 						continue;
 					}
-					else if (rawDataSize > virtualSize) {
-						// virtual size fully initialized
-						continue;
-					}
-					// remainder of virtual size is uninitialized
+                    if (rawDataSize > virtualSize) {
+                        // virtual size fully initialized
+                        continue;
+                    }
+                    // remainder of virtual size is uninitialized
 					if (rawDataSize < 0) {
 						Msg.error(this,
 							"Section[" + i + "] has invalid size " +
@@ -1071,20 +1071,20 @@ public class PeLoader extends AbstractPeDebugLoader {
 					compilerType = CompilerEnum.VisualStudio;
 					return compilerType;
 				}
-				else if (dh.e_lfanew() == 0x100) {
-					offsetChoice = CompilerEnum.BorlandPascal;
-				}
-				else if (dh.e_lfanew() == 0x200) {
-					offsetChoice = CompilerEnum.BorlandCpp;
-				}
-				else if (dh.e_lfanew() > 0x300) {
-					compilerType = CompilerEnum.Unknown;
-					return compilerType;
-				}
-				else {
-					offsetChoice = CompilerEnum.Unknown;
-				}
-			} // End PE header offset check
+                if (dh.e_lfanew() == 0x100) {
+                    offsetChoice = CompilerEnum.BorlandPascal;
+                }
+                else if (dh.e_lfanew() == 0x200) {
+                    offsetChoice = CompilerEnum.BorlandCpp;
+                }
+                else if (dh.e_lfanew() > 0x300) {
+                    compilerType = CompilerEnum.Unknown;
+                    return compilerType;
+                }
+                else {
+                    offsetChoice = CompilerEnum.Unknown;
+                }
+            } // End PE header offset check
 
 			int counter;
 			byte[] asm = provider.readBytes(0x40, 256);
@@ -1216,12 +1216,12 @@ public class PeLoader extends AbstractPeDebugLoader {
 //				compilerType = CompilerEnum.BorlandCpp;
 //				return compilerType;
 			}
-			else if (!probablyNotVS) {
-				compilerType = CompilerEnum.VisualStudio;
-				return compilerType;
-			}
+            if (!probablyNotVS) {
+                compilerType = CompilerEnum.VisualStudio;
+                return compilerType;
+            }
 
-			if (getSectionHeader(".tls", headers) != null) {
+            if (getSectionHeader(".tls", headers) != null) {
 				// expect Borland - prefer cpp since CODE segment didn't occur
 				compilerType = CompilerEnum.BorlandCpp;
 			}

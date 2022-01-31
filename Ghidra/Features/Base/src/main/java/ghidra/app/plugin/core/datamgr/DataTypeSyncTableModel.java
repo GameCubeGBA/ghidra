@@ -111,10 +111,10 @@ class DataTypeSyncTableModel extends AbstractSortedTableModel<RowData> {
 		if (columnIndex == CHECKED_COL) {
 			return Boolean.class;
 		}
-		else if (columnIndex == STATUS_COL) {
-			return DataTypeSyncState.class;
-		}
-		return String.class;
+        if (columnIndex == STATUS_COL) {
+            return DataTypeSyncState.class;
+        }
+        return String.class;
 	}
 
 	@Override

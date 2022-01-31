@@ -72,14 +72,14 @@ public class CopyAction extends DockingAction {
 			if (node instanceof ArchiveRootNode) {
 				return true;
 			}
-			else if (node instanceof ArchiveNode) {
-				return true;
-			}
-			else if (node instanceof CategoryNode) {
-				CategoryNode categoryNode = (CategoryNode) node;
-				return !categoryNode.isEnabled();
-			}
-		}
+            if (node instanceof ArchiveNode) {
+                return true;
+            }
+            if (node instanceof CategoryNode) {
+                CategoryNode categoryNode = (CategoryNode) node;
+                return !categoryNode.isEnabled();
+            }
+        }
 		return false;
 	}
 

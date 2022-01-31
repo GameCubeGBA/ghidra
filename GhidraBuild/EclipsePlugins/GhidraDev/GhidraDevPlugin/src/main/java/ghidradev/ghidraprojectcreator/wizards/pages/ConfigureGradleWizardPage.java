@@ -169,16 +169,14 @@ public class ConfigureGradleWizardPage extends WizardPage {
 		if (gradleLocalChoiceButton.getSelection()) {
 			return GradleDistribution.forLocalInstallation(new File(gradleLocalDirText.getText()));
 		}
-		else if (gradleVersion != null) {
-			return GradleDistribution.forVersion(gradleVersion);
-		}
-		else {
-			// This case should only happen if someone deleted the Gradle version from
-			// application.properties.  In that case, we'll just try the standard wrapper and hope
-			// for the best.
-			return GradleDistribution.fromBuild();
-		}
-	}
+        if (gradleVersion != null) {
+            return GradleDistribution.forVersion(gradleVersion);
+        }
+        // This case should only happen if someone deleted the Gradle version from
+        // application.properties.  In that case, we'll just try the standard wrapper and hope
+        // for the best.
+        return GradleDistribution.fromBuild();
+    }
 
 	/**
 	 * Validates the fields on the page and updates the page's status.

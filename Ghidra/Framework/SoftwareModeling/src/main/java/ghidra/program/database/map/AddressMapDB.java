@@ -385,11 +385,11 @@ public class AddressMapDB implements AddressMap {
 			lastIndex = tIndex;
 			return tIndex;
 		}
-		else if (indexOperation == INDEX_MATCH) {
-			return Integer.MIN_VALUE;
-		}
+        if (indexOperation == INDEX_MATCH) {
+            return Integer.MIN_VALUE;
+        }
 
-		int search = normalize
+        int search = normalize
 				? Arrays.binarySearch(sortedBaseStartAddrs, addr, normalizingAddressComparator)
 				: Arrays.binarySearch(sortedBaseStartAddrs, addr);
 

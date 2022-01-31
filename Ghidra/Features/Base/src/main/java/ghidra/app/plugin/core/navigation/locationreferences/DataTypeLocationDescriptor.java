@@ -304,10 +304,10 @@ abstract class DataTypeLocationDescriptor extends LocationDescriptor {
 		if (dataTypeName.endsWith("*") && dataTypeName.startsWith(listingDisplayText)) {
 			return listingDisplayText;
 		}
-		else if (listingDisplayText.startsWith(dataTypeName) && listingDisplayText.endsWith("*")) {
-			return dataTypeName;
-		}
+        if (listingDisplayText.startsWith(dataTypeName) && listingDisplayText.endsWith("*")) {
+            return dataTypeName;
+        }
 
-		return null;
+        return null;
 	}
 }

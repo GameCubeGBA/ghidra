@@ -334,13 +334,13 @@ public class InstructionDB extends CodeUnitDB implements Instruction, Instructio
 				optype |= OperandType.ADDRESS;
 				return optype;
 			}
-			else if (ref instanceof ExternalReference) {
-				optype |= OperandType.ADDRESS;
-			}
-			else if (ref != null && ref.getToAddress().isMemoryAddress()) {
-				optype |= OperandType.ADDRESS;
-			}
-			return optype;
+            if (ref instanceof ExternalReference) {
+                optype |= OperandType.ADDRESS;
+            }
+            else if (ref != null && ref.getToAddress().isMemoryAddress()) {
+                optype |= OperandType.ADDRESS;
+            }
+            return optype;
 		}
 		finally {
 			lock.release();

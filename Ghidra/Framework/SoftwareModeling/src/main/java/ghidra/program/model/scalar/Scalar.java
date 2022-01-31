@@ -210,10 +210,10 @@ public class Scalar implements Comparable<Scalar> {
 		if (v > 0) {
 			return 1;
 		}
-		else if (v < 0) {
-			return -1;
-		}
-		return 0;
+        if (v < 0) {
+            return -1;
+        }
+        return 0;
 	}
 
 	/**

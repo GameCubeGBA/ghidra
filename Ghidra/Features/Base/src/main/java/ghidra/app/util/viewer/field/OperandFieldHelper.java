@@ -177,10 +177,10 @@ abstract class OperandFieldHelper extends FieldFactory {
 			RowColLocation rcl = btf.dataToScreenLocation(opIndex, column);
 			return new FieldLocation(index, fieldNum, rcl.row(), rcl.col());
 		}
-		else if (bf instanceof ImageFactoryField) {
-			return new FieldLocation(index, fieldNum, 0, 0);
-		}
-		return null;
+        if (bf instanceof ImageFactoryField) {
+            return new FieldLocation(index, fieldNum, 0, 0);
+        }
+        return null;
 	}
 
 	ListingField getField(Object obj, ProxyObj<?> proxy, int varWidth) {
@@ -190,10 +190,10 @@ abstract class OperandFieldHelper extends FieldFactory {
 		if (obj instanceof Instruction) {
 			return getFieldForInstruction((Instruction) obj, proxy, varWidth);
 		}
-		else if (obj instanceof Data) {
-			return getFieldForData((Data) obj, proxy, varWidth);
-		}
-		return null;
+        if (obj instanceof Data) {
+            return getFieldForData((Data) obj, proxy, varWidth);
+        }
+        return null;
 	}
 
 	@Override
@@ -304,15 +304,15 @@ abstract class OperandFieldHelper extends FieldFactory {
 		if (representation instanceof VariableOffset) {
 			return (VariableOffset) representation;
 		}
-		else if (representation instanceof OperandRepresentationList) {
-			OperandRepresentationList list = (OperandRepresentationList) representation;
-			for (Object innerRepresentation : list) {
-				if (innerRepresentation instanceof VariableOffset) {
-					return (VariableOffset) innerRepresentation;
-				}
-			}
-		}
-		return null;
+        if (representation instanceof OperandRepresentationList) {
+            OperandRepresentationList list = (OperandRepresentationList) representation;
+            for (Object innerRepresentation : list) {
+                if (innerRepresentation instanceof VariableOffset) {
+                    return (VariableOffset) innerRepresentation;
+                }
+            }
+        }
+        return null;
 	}
 
 	private Address getVariableStorageAddress(Instruction inst, OperandRepresentationList opList,
@@ -353,12 +353,12 @@ abstract class OperandFieldHelper extends FieldFactory {
 			return new ImageFactoryField(this, ((DataImage) value).getImageIcon(), proxy,
 				getMetrics(), startX + varWidth, width);
 		}
-		else if (value instanceof Playable) {
-			return new ImageFactoryField(this, ((Playable) value).getImageIcon(), proxy,
-				getMetrics(), startX + varWidth, width);
-		}
+        if (value instanceof Playable) {
+            return new ImageFactoryField(this, ((Playable) value).getImageIcon(), proxy,
+                getMetrics(), startX + varWidth, width);
+        }
 
-		OperandRepresentationList dataValueRepresentation =
+        OperandRepresentationList dataValueRepresentation =
 			codeUnitFormat.getDataValueRepresentation(data);
 		boolean underline =
 			isUnderlined(data, 0, dataValueRepresentation.isPrimaryReferenceHidden());

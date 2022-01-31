@@ -40,11 +40,11 @@ public class VTAddressCorrelationAdapterV0 extends VTAddressCorrelatorAdapter {
 		if (table == null) {
 			throw new VersionException("Missing Table: " + TABLE_NAME);
 		}
-		else if(table.getSchema().getVersion() != 0) {
-			throw new VersionException("Expected version 0 for table "+ TABLE_NAME + 
-					" but got "+table.getSchema().getVersion());
-		}
-	}
+        if(table.getSchema().getVersion() != 0) {
+            throw new VersionException("Expected version 0 for table "+ TABLE_NAME +
+                    " but got "+table.getSchema().getVersion());
+        }
+    }
 
 	@Override
 	void createAddressRecord(long sourceEntryLong, long sourceLong,long destinationLong) throws IOException {

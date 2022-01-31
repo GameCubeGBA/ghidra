@@ -553,13 +553,13 @@ public class DataTypeWriter {
 		if (dataType instanceof Structure) {
 			return "struct ";
 		}
-		else if (dataType instanceof Union) {
-			return "union ";
-		}
-		else if (dataType instanceof Enum) {
-			return "enum ";
-		}
-		return "";
+        if (dataType instanceof Union) {
+            return "union ";
+        }
+        if (dataType instanceof Enum) {
+            return "enum ";
+        }
+        return "";
 	}
 
 	private void writeEnum(Enum enumm, TaskMonitor monitor) throws IOException {

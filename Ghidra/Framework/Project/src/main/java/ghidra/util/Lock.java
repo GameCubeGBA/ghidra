@@ -47,11 +47,11 @@ public class Lock {
 				owner = currThread;
 				return;
 			}
-			else if (owner == currThread) {
-				lockAquireCount++;
-				return;
-			}
-			try {
+            if (owner == currThread) {
+                lockAquireCount++;
+                return;
+            }
+            try {
 				waiterCount++;
 				wait();
 			}

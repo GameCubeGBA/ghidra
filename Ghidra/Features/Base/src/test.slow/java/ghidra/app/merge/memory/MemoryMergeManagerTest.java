@@ -840,13 +840,13 @@ public class MemoryMergeManagerTest extends AbstractMergeTest {
 				((AbstractButton) element).getText().indexOf(text) >= 0) {
 				return (AbstractButton) element;
 			}
-			else if ((element instanceof Container) && element.isVisible()) {
-				AbstractButton b = findButton((Container) element, text);
-				if (b != null) {
-					return b;
-				}
-			}
-		}
+            if ((element instanceof Container) && element.isVisible()) {
+                AbstractButton b = findButton((Container) element, text);
+                if (b != null) {
+                    return b;
+                }
+            }
+        }
 		return null;
 	}
 

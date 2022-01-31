@@ -64,19 +64,19 @@ public class CreateClassAction extends SymbolTreeContextAction {
 		if (object instanceof ClassCategoryNode) {
 			return true;
 		}
-		else if (object instanceof SymbolNode) {
-			SymbolNode symbolNode = (SymbolNode) object;
-			Symbol symbol = symbolNode.getSymbol();
-			SymbolType symbolType = symbol.getSymbolType();
-			if (symbolType == SymbolType.NAMESPACE) {
-				// allow SymbolType to perform additional checks
-				Namespace parentNamespace = (Namespace) symbol.getObject();
-				return SymbolType.CLASS.isValidParent(context.getProgram(), parentNamespace,
-					Address.NO_ADDRESS, parentNamespace.isExternal());
-			}
-			return (symbolType == SymbolType.CLASS || symbolType == SymbolType.LIBRARY);
-		}
-		return false;
+        if (object instanceof SymbolNode) {
+            SymbolNode symbolNode = (SymbolNode) object;
+            Symbol symbol = symbolNode.getSymbol();
+            SymbolType symbolType = symbol.getSymbolType();
+            if (symbolType == SymbolType.NAMESPACE) {
+                // allow SymbolType to perform additional checks
+                Namespace parentNamespace = (Namespace) symbol.getObject();
+                return SymbolType.CLASS.isValidParent(context.getProgram(), parentNamespace,
+                    Address.NO_ADDRESS, parentNamespace.isExternal());
+            }
+            return (symbolType == SymbolType.CLASS || symbolType == SymbolType.LIBRARY);
+        }
+        return false;
 	}
 
 	private void createNewClass(SymbolTreeActionContext context) {

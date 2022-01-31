@@ -2366,16 +2366,16 @@ public class ResultsState {
 					};
 				return new VarnodeOperation(pcodeOp, simplifiedInputValues);
 			}
-			else if (opValues[0] instanceof VarnodeOperation) {
-				Varnode newOpValue0 =
-					pushDownIntAddOffset((VarnodeOperation) opValues[0], offset, addrFactory,
-						monitor);
-				if (newOpValue0 != null) {
-					Varnode[] simplifiedInputValues = new Varnode[] { newOpValue0, opValues[1] };
-					return new VarnodeOperation(pcodeOp, simplifiedInputValues);
-				}
-			}
-		}
+            if (opValues[0] instanceof VarnodeOperation) {
+                Varnode newOpValue0 =
+                    pushDownIntAddOffset((VarnodeOperation) opValues[0], offset, addrFactory,
+                        monitor);
+                if (newOpValue0 != null) {
+                    Varnode[] simplifiedInputValues = new Varnode[] { newOpValue0, opValues[1] };
+                    return new VarnodeOperation(pcodeOp, simplifiedInputValues);
+                }
+            }
+        }
 		return null;
 	}
 

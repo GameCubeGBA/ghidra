@@ -243,11 +243,11 @@ public class DBTraceRegisterContextSpace implements TraceRegisterContextSpace, D
 			doPut(valueMap, tasr, baseValue.toBytes());
 			return;
 		}
-		else if (!baseValue.hasAnyValue()) {
-			return; // NOP
-		}
+        if (!baseValue.hasAnyValue()) {
+            return; // NOP
+        }
 
-		// Otherwise, combine with existing values
+        // Otherwise, combine with existing values
 		HashMap<TraceAddressSnapRange, byte[]> existing = new HashMap<>();
 		for (Entry<TraceAddressSnapRange, byte[]> entry : valueMap.reduce(
 			TraceAddressSnapRangeQuery.intersecting(range, lifespan)).entries()) {

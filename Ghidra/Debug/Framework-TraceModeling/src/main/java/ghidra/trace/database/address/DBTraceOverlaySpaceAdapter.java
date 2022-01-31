@@ -87,22 +87,20 @@ public class DBTraceOverlaySpaceAdapter implements DBTraceManager {
 			if (enc == null) {
 				return null;
 			}
-			else {
-				ByteBuffer buf = ByteBuffer.wrap(enc);
-				byte overlay = buf.get();
-				final AddressSpace as;
-				if (overlay == 1) {
-					short key = buf.getShort();
-					as = osa.spacesByKey.get(key & 0xffffL);
-				}
-				else {
-					short id = buf.getShort();
-					as = osa.trace.getInternalAddressFactory().getAddressSpace(id);
-				}
-				long offset = buf.getLong();
-				return as.getAddress(offset);
-			}
-		}
+            ByteBuffer buf = ByteBuffer.wrap(enc);
+            byte overlay = buf.get();
+            final AddressSpace as;
+            if (overlay == 1) {
+                short key = buf.getShort();
+                as = osa.spacesByKey.get(key & 0xffffL);
+            }
+            else {
+                short id = buf.getShort();
+                as = osa.trace.getInternalAddressFactory().getAddressSpace(id);
+            }
+            long offset = buf.getLong();
+            return as.getAddress(offset);
+        }
 
 		public AddressDBFieldCodec(Class<OT> objectType, Field field, int column) {
 			super(Address.class, objectType, BinaryField.class, field, column);

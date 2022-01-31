@@ -54,14 +54,14 @@ class OldStackVariableDBAdapterV1 extends OldStackVariableDBAdapter {
 		if (table == null) {
 			throw new VersionException("Missing Table: " + STACK_VARS_TABLE_NAME);
 		}
-		else if (table.getSchema().getVersion() != SCHEMA_VERSION) {
-			int version = table.getSchema().getVersion();
-			if (version < SCHEMA_VERSION) {
-				throw new VersionException(true);
-			}
-			throw new VersionException(VersionException.NEWER_VERSION, false);
-		}
-	}
+        if (table.getSchema().getVersion() != SCHEMA_VERSION) {
+            int version = table.getSchema().getVersion();
+            if (version < SCHEMA_VERSION) {
+                throw new VersionException(true);
+            }
+            throw new VersionException(VersionException.NEWER_VERSION, false);
+        }
+    }
 
 	@Override
 	public DBRecord getStackVariableRecord(long key) throws IOException {

@@ -40,12 +40,12 @@ public class LldbContinueCommand extends AbstractLldbCommand<Void> {
             return evt instanceof LldbCommandErrorEvent ||
                 !pending.findAllOf(LldbRunningEvent.class).isEmpty();
 		}
-		else if (evt instanceof LldbRunningEvent) {
-			// Event happens no matter which interpreter received the command
-			pending.claim(evt);
-            return !pending.findAllOf(AbstractLldbCompletedCommandEvent.class).isEmpty();
-		}
-		return false;
+        if (evt instanceof LldbRunningEvent) {
+            // Event happens no matter which interpreter received the command
+            pending.claim(evt);
+return !pending.findAllOf(AbstractLldbCompletedCommandEvent.class).isEmpty();
+        }
+        return false;
 	}
 
 	@Override

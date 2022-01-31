@@ -137,19 +137,19 @@ public class ObjectPropertyMapDB extends PropertyMapDB implements ObjectProperty
 					"(" + schemaVersion + ", " + saveableObjectVersion + ")");
 			throw new VersionException(VersionException.NEWER_VERSION, false);
 		}
-		else if (addrMap.isUpgraded() || schemaVersion < saveableObjectVersion) {
-			// An older version was used to create the database
-			if (openMode != DBConstants.UPGRADE) {
-				throw new VersionException(true);
-			}
-			if (!upgradeTable(tokenInstance, monitor)) {
-				Msg.showError(this, null, "Properties Removed on Upgrade",
-					"Warning! unable to upgrade properties for " + saveableObjectClass.getName() +
-						"\nThese properties have been removed.");
+        if (addrMap.isUpgraded() || schemaVersion < saveableObjectVersion) {
+            // An older version was used to create the database
+            if (openMode != DBConstants.UPGRADE) {
+                throw new VersionException(true);
+            }
+            if (!upgradeTable(tokenInstance, monitor)) {
+                Msg.showError(this, null, "Properties Removed on Upgrade",
+                    "Warning! unable to upgrade properties for " + saveableObjectClass.getName() +
+                        "\nThese properties have been removed.");
 
-			}
-		}
-	}
+            }
+        }
+    }
 
 	/**
 	 * Attempt to upgrade the map table records to the current schema.

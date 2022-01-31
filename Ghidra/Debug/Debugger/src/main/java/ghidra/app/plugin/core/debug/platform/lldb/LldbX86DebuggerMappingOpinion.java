@@ -90,40 +90,34 @@ public class LldbX86DebuggerMappingOpinion implements DebuggerMappingOpinion {
 				Msg.info(this, "Using os=" + os + " arch=" + arch);
 				return Set.of(new LldbI386X86_64MacosOffer(process));
 			}
-			else if (is32Bit) {
-				Msg.info(this, "Using os=" + os + " arch=" + arch);
-				return Set.of(new LldbI386MacosOffer(process));
-			}
-			else {
-				return Set.of();
-			}
-		}
-		else if (os.contains("Linux") || os.contains("linux")) {
-			if (is64Bit) {
-				Msg.info(this, "Using os=" + os + " arch=" + arch);
-				return Set.of(new LldbI386X86_64LinuxOffer(process));
-			}
-			else if (is32Bit) {
-				Msg.info(this, "Using os=" + os + " arch=" + arch);
-				return Set.of(new LldbI386LinuxOffer(process));
-			}
-			else {
-				return Set.of();
-			}
-		}
-		else if (os.contains("windows")) {
-			if (is64Bit) {
-				Msg.info(this, "Using os=" + os + " arch=" + arch);
-				return Set.of(new LldbI386X86_64WindowsOffer(process));
-			}
-			else if (is32Bit) {
-				Msg.info(this, "Using os=" + os + " arch=" + arch);
-				return Set.of(new LldbI386WindowsOffer(process));
-			}
-			else {
-				return Set.of();
-			}
-		}
-		return Set.of();
+            if (is32Bit) {
+                Msg.info(this, "Using os=" + os + " arch=" + arch);
+                return Set.of(new LldbI386MacosOffer(process));
+            }
+            return Set.of();
+        }
+        if (os.contains("Linux") || os.contains("linux")) {
+            if (is64Bit) {
+                Msg.info(this, "Using os=" + os + " arch=" + arch);
+                return Set.of(new LldbI386X86_64LinuxOffer(process));
+            }
+            if (is32Bit) {
+                Msg.info(this, "Using os=" + os + " arch=" + arch);
+                return Set.of(new LldbI386LinuxOffer(process));
+            }
+            return Set.of();
+        }
+        if (os.contains("windows")) {
+            if (is64Bit) {
+                Msg.info(this, "Using os=" + os + " arch=" + arch);
+                return Set.of(new LldbI386X86_64WindowsOffer(process));
+            }
+            if (is32Bit) {
+                Msg.info(this, "Using os=" + os + " arch=" + arch);
+                return Set.of(new LldbI386WindowsOffer(process));
+            }
+            return Set.of();
+        }
+        return Set.of();
 	}
 }

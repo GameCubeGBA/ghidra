@@ -2368,10 +2368,10 @@ public class ProgramDiff {
 		if (isDefaultName(symbol1)) {
 			return isDefaultName(symbol2);
 		}
-		else if (isDefaultName(symbol2)) {
-			return false;
-		}
-		return name1.equals(name2);
+        if (isDefaultName(symbol2)) {
+            return false;
+        }
+        return name1.equals(name2);
 	}
 
 	private static boolean isDefaultName(Symbol symbol) {
@@ -3215,16 +3215,16 @@ public class ProgramDiff {
 			if (iterator instanceof AddressIterator) {
 				return ((AddressIterator) iterator).hasNext();
 			}
-			else if (iterator instanceof CodeUnitIterator) {
-				return ((CodeUnitIterator) iterator).hasNext();
-			}
-			else if (iterator instanceof SymbolIterator) {
-				return ((SymbolIterator) iterator).hasNext();
-			}
-			else if (iterator instanceof FunctionIterator) {
-				return ((FunctionIterator) iterator).hasNext();
-			}
-			return false;
+            if (iterator instanceof CodeUnitIterator) {
+                return ((CodeUnitIterator) iterator).hasNext();
+            }
+            if (iterator instanceof SymbolIterator) {
+                return ((SymbolIterator) iterator).hasNext();
+            }
+            if (iterator instanceof FunctionIterator) {
+                return ((FunctionIterator) iterator).hasNext();
+            }
+            return false;
 		}
 
 		/** Returns the next element in the iteration.
@@ -3236,16 +3236,16 @@ public class ProgramDiff {
 			if (iterator instanceof AddressIterator) {
 				return ((AddressIterator) iterator).next();
 			}
-			else if (iterator instanceof CodeUnitIterator) {
-				return ((CodeUnitIterator) iterator).next();
-			}
-			else if (iterator instanceof SymbolIterator) {
-				return ((SymbolIterator) iterator).next();
-			}
-			else if (iterator instanceof FunctionIterator) {
-				return ((FunctionIterator) iterator).next();
-			}
-			return null;
+            if (iterator instanceof CodeUnitIterator) {
+                return ((CodeUnitIterator) iterator).next();
+            }
+            if (iterator instanceof SymbolIterator) {
+                return ((SymbolIterator) iterator).next();
+            }
+            if (iterator instanceof FunctionIterator) {
+                return ((FunctionIterator) iterator).next();
+            }
+            return null;
 		}
 
 	}
@@ -3282,10 +3282,10 @@ public class ProgramDiff {
 		if (p1Symbol.isDynamic()) {
 			return p2Symbol.isDynamic();
 		}
-		else if (p2Symbol.isDynamic()) {
-			return false;
-		}
-		Address p1SymbolAddress = p1Symbol.getAddress();
+        if (p2Symbol.isDynamic()) {
+            return false;
+        }
+        Address p1SymbolAddress = p1Symbol.getAddress();
 		Address p2SymbolAddress = p2Symbol.getAddress();
 		Address p2SymbolAddressAsP1 =
 			SimpleDiffUtility.getCompatibleAddress(p2, p2SymbolAddress, p1);
@@ -3324,10 +3324,10 @@ public class ProgramDiff {
 		if (p1Symbol.isDynamic()) {
 			return p2Symbol.isDynamic();
 		}
-		else if (p2Symbol.isDynamic()) {
-			return false;
-		}
-		SourceType p1SourceType = (p1Symbol instanceof GlobalSymbol) ? null : p1Symbol.getSource();
+        if (p2Symbol.isDynamic()) {
+            return false;
+        }
+        SourceType p1SourceType = (p1Symbol instanceof GlobalSymbol) ? null : p1Symbol.getSource();
 		SourceType p2SourceType = (p2Symbol instanceof GlobalSymbol) ? null : p2Symbol.getSource();
 		if (p1SourceType != p2SourceType) {
 			return false;

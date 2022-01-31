@@ -48,12 +48,12 @@ class ArrayDBAdapterV0 extends ArrayDBAdapter {
 		if (table == null) {
 			throw new VersionException("Missing Table: " + ARRAY_TABLE_NAME);
 		}
-		else if (table.getSchema().getVersion() != 0) {
-			throw new VersionException("Expected version 0 for table " + ARRAY_TABLE_NAME +
-				" but got " + table.getSchema().getVersion());
-		}
+        if (table.getSchema().getVersion() != 0) {
+            throw new VersionException("Expected version 0 for table " + ARRAY_TABLE_NAME +
+                " but got " + table.getSchema().getVersion());
+        }
 
-	}
+    }
 
 	@Override
 	public DBRecord createRecord(long dataTypeID, int numberOfElements, int length, long catID)

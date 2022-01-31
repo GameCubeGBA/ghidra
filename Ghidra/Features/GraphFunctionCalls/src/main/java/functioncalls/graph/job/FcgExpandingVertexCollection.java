@@ -122,11 +122,11 @@ public class FcgExpandingVertexCollection {
 			if (l1.equals(parentLevel)) {
 				return -1;
 			}
-			else if (l2.equals(parentLevel)) {
-				return 1;
-			}
+            if (l2.equals(parentLevel)) {
+                return 1;
+            }
 
-			return result;
+            return result;
 		}
 
 		Point2D p1 = layout.apply(v1);

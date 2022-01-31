@@ -279,10 +279,10 @@ public class SystemUtilities {
 		if (c1 == null) {
 			return c2 == null ? 0 : 1;
 		}
-		else if (c2 == null) {
-			return -1;
-		}
-		return c1.compareTo(c2);
+        if (c2 == null) {
+            return -1;
+        }
+        return c1.compareTo(c2);
 	}
 
 	public static boolean isArrayEqual(Object[] array1, Object[] array2) {

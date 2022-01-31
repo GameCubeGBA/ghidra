@@ -198,13 +198,13 @@ class VarKeyInteriorNode extends VarKeyNode implements FieldKeyInteriorNode {
 			if (rc == 0) {
 				return i;
 			}
-			else if (rc > 0) {
-				min = i + 1;
-			}
-			else {
-				max = i - 1;
-			}
-		}
+            if (rc > 0) {
+                min = i + 1;
+            }
+            else {
+                max = i - 1;
+            }
+        }
 		return max;
 	}
 
@@ -220,13 +220,13 @@ class VarKeyInteriorNode extends VarKeyNode implements FieldKeyInteriorNode {
 			if (rc == 0) {
 				return i;
 			}
-			else if (rc > 0) {
-				min = i + 1;
-			}
-			else {
-				max = i - 1;
-			}
-		}
+            if (rc > 0) {
+                min = i + 1;
+            }
+            else {
+                max = i - 1;
+            }
+        }
 		return -(min + 1);
 	}
 
@@ -248,13 +248,13 @@ class VarKeyInteriorNode extends VarKeyNode implements FieldKeyInteriorNode {
 			if (keyOff == offset) {
 				return i;
 			}
-			else if (keyOff < offset) {
-				max = i - 1;
-			}
-			else {
-				min = i + 1;
-			}
-		}
+            if (keyOff < offset) {
+                max = i - 1;
+            }
+            else {
+                min = i + 1;
+            }
+        }
 		return min;
 	}
 

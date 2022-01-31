@@ -168,19 +168,13 @@ public class GLifespanField extends JPanel {
 			if (POS_INF.equals(max)) {
 				return Range.all();
 			}
-			else {
-				return Range.atMost(Long.parseLong(max));
-			}
-		}
-		else {
-			if (POS_INF.equals(max)) {
-				return Range.atLeast(Long.parseLong(min));
-			}
-			else {
-				return Range.closed(Long.parseLong(min), Long.parseLong(max));
-			}
-		}
-	}
+            return Range.atMost(Long.parseLong(max));
+        }
+        if (POS_INF.equals(max)) {
+            return Range.atLeast(Long.parseLong(min));
+        }
+        return Range.closed(Long.parseLong(min), Long.parseLong(max));
+    }
 
 	@Override
 	public void setEnabled(boolean enabled) {

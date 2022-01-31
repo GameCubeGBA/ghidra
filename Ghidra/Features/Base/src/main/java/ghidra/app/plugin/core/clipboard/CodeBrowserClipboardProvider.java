@@ -141,19 +141,19 @@ public class CodeBrowserClipboardProvider extends ByteCopier
 				if (element.equals(LABELS_COMMENTS_TYPE.getFlavor())) {
 					return pasteLabelsComments(pasteData, true, true);
 				}
-				else if (element.equals(LABELS_TYPE.getFlavor())) {
-					return pasteLabelsComments(pasteData, true, false);
-				}
-				else if (element.equals(COMMENTS_TYPE.getFlavor())) {
-					return pasteLabelsComments(pasteData, false, true);
-				}
-				else if (element.equals(LabelStringTransferable.labelStringFlavor)) {
-					return pasteLabelString(pasteData);
-				}
-				else if (element.equals(NonLabelStringTransferable.nonLabelStringFlavor)) {
-					return pasteNonLabelString(pasteData);
-				}
-			}
+                if (element.equals(LABELS_TYPE.getFlavor())) {
+                    return pasteLabelsComments(pasteData, true, false);
+                }
+                if (element.equals(COMMENTS_TYPE.getFlavor())) {
+                    return pasteLabelsComments(pasteData, false, true);
+                }
+                if (element.equals(LabelStringTransferable.labelStringFlavor)) {
+                    return pasteLabelString(pasteData);
+                }
+                if (element.equals(NonLabelStringTransferable.nonLabelStringFlavor)) {
+                    return pasteNonLabelString(pasteData);
+                }
+            }
 
 			if (super.pasteBytes(pasteData)) {
 				return true;
@@ -184,20 +184,20 @@ public class CodeBrowserClipboardProvider extends ByteCopier
 		if (copyType == ADDRESS_TEXT_TYPE) {
 			return copyAddress();
 		}
-		else if (copyType == CODE_TEXT_TYPE) {
-			return copyCode(monitor);
-		}
-		else if (copyType == LABELS_COMMENTS_TYPE) {
-			return copyLabelsComments(true, true);
-		}
-		else if (copyType == LABELS_TYPE) {
-			return copyLabelsComments(true, false);
-		}
-		else if (copyType == COMMENTS_TYPE) {
-			return copyLabelsComments(false, true);
-		}
+        if (copyType == CODE_TEXT_TYPE) {
+            return copyCode(monitor);
+        }
+        if (copyType == LABELS_COMMENTS_TYPE) {
+            return copyLabelsComments(true, true);
+        }
+        if (copyType == LABELS_TYPE) {
+            return copyLabelsComments(true, false);
+        }
+        if (copyType == COMMENTS_TYPE) {
+            return copyLabelsComments(false, true);
+        }
 
-		return copyBytes(copyType, monitor);
+        return copyBytes(copyType, monitor);
 	}
 
 	public void setStringContent(String text) {
@@ -238,38 +238,38 @@ public class CodeBrowserClipboardProvider extends ByteCopier
 		if (currentLocation instanceof AddressFieldLocation) {
 			return new NonLabelStringTransferable(address.toString());
 		}
-		else if (currentLocation instanceof LabelFieldLocation) {
-			LabelFieldLocation labelFieldLocation = (LabelFieldLocation) currentLocation;
-			return new LabelStringTransferable(labelFieldLocation.getName());
-		}
-		else if (currentLocation instanceof FunctionNameFieldLocation) {
-			FunctionNameFieldLocation functionNameLocation =
-				(FunctionNameFieldLocation) currentLocation;
-			return new LabelStringTransferable(functionNameLocation.getFunctionName());
-		}
-		else if (currentLocation instanceof CommentFieldLocation) {
-			CommentFieldLocation commentFieldLocation = (CommentFieldLocation) currentLocation;
-			String[] comment = commentFieldLocation.getComment();
-			return new NonLabelStringTransferable(comment);
-		}
-		else if (currentLocation instanceof BytesFieldLocation) {
-			// bytes are special--let them get copied and pasted as normal
-			return copyByteString(address);
-		}
-		else if (currentLocation instanceof OperandFieldLocation) {
-			return getOperandLocationTransferable((OperandFieldLocation) currentLocation);
-		}
-		else if (currentLocation instanceof MnemonicFieldLocation) {
-			MnemonicFieldLocation location = (MnemonicFieldLocation) currentLocation;
-			return new NonLabelStringTransferable(location.getMnemonic());
-		}
-		else if (currentLocation instanceof VariableLocation) {
-			VariableLocation variableLocation = (VariableLocation) currentLocation;
-			Variable variable = variableLocation.getVariable();
-			return new LabelStringTransferable(variable.getName());
-		}
+        if (currentLocation instanceof LabelFieldLocation) {
+            LabelFieldLocation labelFieldLocation = (LabelFieldLocation) currentLocation;
+            return new LabelStringTransferable(labelFieldLocation.getName());
+        }
+        if (currentLocation instanceof FunctionNameFieldLocation) {
+            FunctionNameFieldLocation functionNameLocation =
+                (FunctionNameFieldLocation) currentLocation;
+            return new LabelStringTransferable(functionNameLocation.getFunctionName());
+        }
+        if (currentLocation instanceof CommentFieldLocation) {
+            CommentFieldLocation commentFieldLocation = (CommentFieldLocation) currentLocation;
+            String[] comment = commentFieldLocation.getComment();
+            return new NonLabelStringTransferable(comment);
+        }
+        if (currentLocation instanceof BytesFieldLocation) {
+            // bytes are special--let them get copied and pasted as normal
+            return copyByteString(address);
+        }
+        if (currentLocation instanceof OperandFieldLocation) {
+            return getOperandLocationTransferable((OperandFieldLocation) currentLocation);
+        }
+        if (currentLocation instanceof MnemonicFieldLocation) {
+            MnemonicFieldLocation location = (MnemonicFieldLocation) currentLocation;
+            return new NonLabelStringTransferable(location.getMnemonic());
+        }
+        if (currentLocation instanceof VariableLocation) {
+            VariableLocation variableLocation = (VariableLocation) currentLocation;
+            Variable variable = variableLocation.getVariable();
+            return new LabelStringTransferable(variable.getName());
+        }
 
-		return null;
+        return null;
 	}
 
 	private Transferable getOperandLocationTransferable(OperandFieldLocation location) {
@@ -403,19 +403,19 @@ public class CodeBrowserClipboardProvider extends ByteCopier
 				new RenameLabelCmd(address, oldName, labelName, SourceType.USER_DEFINED);
 			return tool.execute(cmd, currentProgram);
 		}
-		else if (currentLocation instanceof FunctionNameFieldLocation) {
-			FunctionNameFieldLocation functionNameLocation =
-				(FunctionNameFieldLocation) currentLocation;
-			String oldName = functionNameLocation.getFunctionName();
-			RenameLabelCmd cmd =
-				new RenameLabelCmd(address, oldName, labelName, SourceType.USER_DEFINED);
-			return tool.execute(cmd, currentProgram);
-		}
-		else if (currentLocation instanceof OperandFieldLocation) {
-			return pasteOperandField((OperandFieldLocation) currentLocation, labelName);
-		}
+        if (currentLocation instanceof FunctionNameFieldLocation) {
+            FunctionNameFieldLocation functionNameLocation =
+                (FunctionNameFieldLocation) currentLocation;
+            String oldName = functionNameLocation.getFunctionName();
+            RenameLabelCmd cmd =
+                new RenameLabelCmd(address, oldName, labelName, SourceType.USER_DEFINED);
+            return tool.execute(cmd, currentProgram);
+        }
+        if (currentLocation instanceof OperandFieldLocation) {
+            return pasteOperandField((OperandFieldLocation) currentLocation, labelName);
+        }
 
-		// try pasting onto something that is not a label
+        // try pasting onto something that is not a label
 		return maybePasteNonLabelString(labelName);
 	}
 
@@ -585,29 +585,29 @@ public class CodeBrowserClipboardProvider extends ByteCopier
 		if (currentLocation instanceof AddressFieldLocation) {
 			return true;
 		}
-		else if (currentLocation instanceof LabelFieldLocation) {
-			return true;
-		}
-		else if (currentLocation instanceof FunctionNameFieldLocation) {
-			return true;
-		}
-		else if (currentLocation instanceof CommentFieldLocation) {
-			return true;
-		}
-		else if (currentLocation instanceof BytesFieldLocation) {
-			return true;
-		}
-		else if (currentLocation instanceof OperandFieldLocation) {
-			return true;
-		}
-		else if (currentLocation instanceof MnemonicFieldLocation) {
-			return true;
-		}
-		else if (currentLocation instanceof VariableLocation) {
-			return true;
-		}
+        if (currentLocation instanceof LabelFieldLocation) {
+            return true;
+        }
+        if (currentLocation instanceof FunctionNameFieldLocation) {
+            return true;
+        }
+        if (currentLocation instanceof CommentFieldLocation) {
+            return true;
+        }
+        if (currentLocation instanceof BytesFieldLocation) {
+            return true;
+        }
+        if (currentLocation instanceof OperandFieldLocation) {
+            return true;
+        }
+        if (currentLocation instanceof MnemonicFieldLocation) {
+            return true;
+        }
+        if (currentLocation instanceof VariableLocation) {
+            return true;
+        }
 
-		return false;
+        return false;
 	}
 
 	@Override

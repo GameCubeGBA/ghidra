@@ -172,10 +172,10 @@ abstract class VariableImpl implements Variable {
 					this.variableStorage = new VariableStorage(program, register);
 					return;
 				}
-				else if (register.isBigEndian() && regSize > size) {
-					storageAddr = storageAddr.add(regSize - size);
-				}
-			}
+                if (register.isBigEndian() && regSize > size) {
+                    storageAddr = storageAddr.add(regSize - size);
+                }
+            }
 			else {
 				if (stackOffset != null) {
 					storageAddr =

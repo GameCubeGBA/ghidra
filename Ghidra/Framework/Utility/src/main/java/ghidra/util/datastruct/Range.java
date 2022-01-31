@@ -47,10 +47,10 @@ public class Range implements Comparable<Range>, Iterable<Integer> {
 		if (min == other.min) {
 			return 0;
 		}
-		else if (min > other.min) {
-			return 1;
-		}
-		return -1;
+        if (min > other.min) {
+            return 1;
+        }
+        return -1;
 	}
 
 	@Override

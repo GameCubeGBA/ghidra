@@ -43,11 +43,11 @@ public class VTMatchTableDBAdapterV0 extends VTMatchTableDBAdapter {
 		if (table == null) {
 			throw new VersionException("Missing Table: " + TABLE_NAME);
 		}
-		else if (table.getSchema().getVersion() != 0) {
-			throw new VersionException("Expected version 0 for table " + TABLE_NAME + " but got " +
-				table.getSchema().getVersion());
-		}
-	}
+        if (table.getSchema().getVersion() != 0) {
+            throw new VersionException("Expected version 0 for table " + TABLE_NAME + " but got " +
+                table.getSchema().getVersion());
+        }
+    }
 
 	@Override
 	public DBRecord insertMatchRecord(VTMatchInfo info, VTMatchSetDB matchSet,

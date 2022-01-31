@@ -846,14 +846,14 @@ public abstract class AbstractLocalFileSystemTest extends AbstractGenericTest {
 				fp = n;
 				continue;
 			}
-			else if (index > 0) {
-				n = fp.substring(1, index);
-				fp = fp.substring(index);
-			}
-			else {
-				fp = "";
-			}
-			fs.createFolder(path, n);
+            if (index > 0) {
+                n = fp.substring(1, index);
+                fp = fp.substring(index);
+            }
+            else {
+                fp = "";
+            }
+            fs.createFolder(path, n);
 			if (!path.endsWith("/")) {
 				path += "/";
 			}

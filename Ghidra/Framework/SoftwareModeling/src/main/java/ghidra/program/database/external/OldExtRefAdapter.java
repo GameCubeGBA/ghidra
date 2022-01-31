@@ -52,10 +52,10 @@ class OldExtRefAdapter {
 		if (refTable == null) {
 			throw new VersionException("Missing Table: " + EXT_REF_TABLE_NAME);
 		}
-		else if (refTable.getSchema().getVersion() != 0) {
-			throw new VersionException(VersionException.NEWER_VERSION, false);
-		}
-	}
+        if (refTable.getSchema().getVersion() != 0) {
+            throw new VersionException(VersionException.NEWER_VERSION, false);
+        }
+    }
 
 	/**
 	 * Get iterator over all records

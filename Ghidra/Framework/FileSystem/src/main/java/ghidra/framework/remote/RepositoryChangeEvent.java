@@ -87,10 +87,10 @@ public class RepositoryChangeEvent implements Serializable {
 			buf.append(">");
 			return buf.toString();
 		}
-		else if (type == REP_NULL_EVENT) {
-			return "<Null Event>";
-		}
-		return "<Unknown RepositoryChangeEvent>";
+        if (type == REP_NULL_EVENT) {
+            return "<Null Event>";
+        }
+        return "<Unknown RepositoryChangeEvent>";
 	}
 
 }

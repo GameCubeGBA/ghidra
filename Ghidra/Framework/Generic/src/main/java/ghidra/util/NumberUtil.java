@@ -32,20 +32,20 @@ public class NumberUtil {
 		if (value instanceof Byte) {
 			return value.byteValue() & UNSIGNED_BYTE_MASK;
 		}
-		else if (value instanceof Short) {
-			return value.shortValue() & UNSIGNED_SHORT_MASK;
-		}
-		else if (value instanceof Integer) {
-			return value.intValue() & UNSIGNED_INT_MASK;
-		}
-		else if (value instanceof Long) {
-			// TODO: Is this valid?
-			if (value.longValue() < 0) {
-				return value.longValue() & 0xffffffffffffffffL;
-			}
-			return value;
-		}
-		throw new UnsupportedOperationException("Number instance not handled!");
+        if (value instanceof Short) {
+            return value.shortValue() & UNSIGNED_SHORT_MASK;
+        }
+        if (value instanceof Integer) {
+            return value.intValue() & UNSIGNED_INT_MASK;
+        }
+        if (value instanceof Long) {
+            // TODO: Is this valid?
+            if (value.longValue() < 0) {
+                return value.longValue() & 0xffffffffffffffffL;
+            }
+            return value;
+        }
+        throw new UnsupportedOperationException("Number instance not handled!");
 	}
 
 	/**

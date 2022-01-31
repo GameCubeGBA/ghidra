@@ -129,16 +129,16 @@ public class PcodeInjectLibrary {
 		if (type == InjectPayload.CALLFIXUP_TYPE) {
 			return callFixupMap.get(name);
 		}
-		else if (type == InjectPayload.CALLOTHERFIXUP_TYPE) {
-			return callOtherFixupMap.get(name);
-		}
-		else if (type == InjectPayload.CALLMECHANISM_TYPE) {
-			return callMechFixupMap.get(name);
-		}
-		else if (type == InjectPayload.EXECUTABLEPCODE_TYPE) {
-			return exePcodeMap.get(name);
-		}
-		return null;
+        if (type == InjectPayload.CALLOTHERFIXUP_TYPE) {
+            return callOtherFixupMap.get(name);
+        }
+        if (type == InjectPayload.CALLMECHANISM_TYPE) {
+            return callMechFixupMap.get(name);
+        }
+        if (type == InjectPayload.EXECUTABLEPCODE_TYPE) {
+            return exePcodeMap.get(name);
+        }
+        return null;
 	}
 
 	/**
@@ -368,10 +368,10 @@ public class PcodeInjectLibrary {
 		if (tp == InjectPayload.CALLFIXUP_TYPE) {
 			return new InjectPayloadCallfixup(sourceName);
 		}
-		else if (tp == InjectPayload.CALLOTHERFIXUP_TYPE) {
-			return new InjectPayloadCallother(sourceName);
-		}
-		return new InjectPayloadSleigh(name, tp, sourceName);
+        if (tp == InjectPayload.CALLOTHERFIXUP_TYPE) {
+            return new InjectPayloadCallother(sourceName);
+        }
+        return new InjectPayloadSleigh(name, tp, sourceName);
 	}
 
 	/**

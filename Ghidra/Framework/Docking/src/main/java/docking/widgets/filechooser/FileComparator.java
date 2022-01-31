@@ -50,10 +50,10 @@ class FileComparator implements Comparator<File> {
 				}
 				return -1; // dirs come before files
 			}
-			else if (model.isDirectory(file2)) {
-				return 1; // files go after dirs
-			}
-		}
+            if (model.isDirectory(file2)) {
+                return 1; // files go after dirs
+            }
+        }
 		else if (sortBy == SORT_BY_TIME) {
 			if (model.isDirectory(file1)) {
 				if (model.isDirectory(file2)) {
@@ -61,10 +61,10 @@ class FileComparator implements Comparator<File> {
 				}
 				return -1; // dirs come before files
 			}
-			else if (model.isDirectory(file2)) {
-				return 1; // files go after dirs
-			}
-		}
+            if (model.isDirectory(file2)) {
+                return 1; // files go after dirs
+            }
+        }
 
 		int value = 0;
 		if (sortBy == SORT_BY_NAME) {

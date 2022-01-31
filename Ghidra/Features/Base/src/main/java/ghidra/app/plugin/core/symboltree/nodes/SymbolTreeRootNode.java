@@ -79,19 +79,19 @@ public class SymbolTreeRootNode extends SymbolCategoryNode {
 		if (type == FUNCTION) {
 			return findFunctionSymbolNode(key, loadChildren, monitor);
 		}
-		else if (type == PARAMETER || type == LOCAL_VAR) {
-			return findVariableSymbolNode(key, loadChildren, monitor);
-		}
-		else if (type == CLASS) {
-			return findClassSymbol(key, loadChildren, monitor);
-		}
-		else if (type == LIBRARY || type == NAMESPACE) {
-			return findNamespaceSymbol(key, loadChildren, monitor);
-		}
-		else if (type == LABEL) {
-			return findCodeSymbol(key, loadChildren, monitor);
-		}
-		//else { GLOBAL, GLOBAL_VAR } // not sure where these end up
+        if (type == PARAMETER || type == LOCAL_VAR) {
+            return findVariableSymbolNode(key, loadChildren, monitor);
+        }
+        if (type == CLASS) {
+            return findClassSymbol(key, loadChildren, monitor);
+        }
+        if (type == LIBRARY || type == NAMESPACE) {
+            return findNamespaceSymbol(key, loadChildren, monitor);
+        }
+        if (type == LABEL) {
+            return findCodeSymbol(key, loadChildren, monitor);
+        }
+        //else { GLOBAL, GLOBAL_VAR } // not sure where these end up
 
 		return super.findSymbolTreeNode(key, loadChildren, monitor);
 	}

@@ -151,10 +151,10 @@ public class HREF implements Comparable<HREF> {
 			if (helpPath == null && otherHelpPath != null) {
 				return -1; // our path is null and 'other's is not; we go before
 			}
-			else if (helpPath != null && otherHelpPath == null) {
-				return 1; // we have a non-null path, but 'other' doesn't; we go after
-			}
-		}
+            if (helpPath != null && otherHelpPath == null) {
+                return 1; // we have a non-null path, but 'other' doesn't; we go after
+            }
+        }
 
 		// highly unlikely case that we have to HREFs from the same file, pointing to the same
 		// place, on the same HTML line.  In this case, just use the object that was created first,

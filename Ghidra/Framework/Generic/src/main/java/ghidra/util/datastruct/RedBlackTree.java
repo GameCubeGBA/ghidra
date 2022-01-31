@@ -164,39 +164,39 @@ public class RedBlackTree<K extends Comparable<K>, V> implements Iterable<RedBla
 			if (comp == 0) {
 				return node;
 			}
-			else if (comp < 0) {
-				if (node.left != null) {
-					node = node.left;
-				}
-				else {
-					size++;
-					modCount++;
-					RedBlackEntry<K, V> newNode = new RedBlackEntry<K, V>(key, null, node);
-					node.left = newNode;
-					if (node == minEntry) {
-						minEntry = newNode;
-					}
-					fixAfterInsertion(node.left);
-					return newNode;
-				}
-			}
-			else {
-				if (node.right != null) {
-					node = node.right;
-				}
-				else {
-					size++;
-					modCount++;
-					RedBlackEntry<K, V> newNode = new RedBlackEntry<K, V>(key, null, node);
-					node.right = newNode;
-					if (node == maxEntry) {
-						maxEntry = newNode;
-					}
-					fixAfterInsertion(node.right);
-					return newNode;
-				}
-			}
-		}
+            if (comp < 0) {
+                if (node.left != null) {
+                    node = node.left;
+                }
+                else {
+                    size++;
+                    modCount++;
+                    RedBlackEntry<K, V> newNode = new RedBlackEntry<K, V>(key, null, node);
+                    node.left = newNode;
+                    if (node == minEntry) {
+                        minEntry = newNode;
+                    }
+                    fixAfterInsertion(node.left);
+                    return newNode;
+                }
+            }
+            else {
+                if (node.right != null) {
+                    node = node.right;
+                }
+                else {
+                    size++;
+                    modCount++;
+                    RedBlackEntry<K, V> newNode = new RedBlackEntry<K, V>(key, null, node);
+                    node.right = newNode;
+                    if (node == maxEntry) {
+                        maxEntry = newNode;
+                    }
+                    fixAfterInsertion(node.right);
+                    return newNode;
+                }
+            }
+        }
 
 	}
 

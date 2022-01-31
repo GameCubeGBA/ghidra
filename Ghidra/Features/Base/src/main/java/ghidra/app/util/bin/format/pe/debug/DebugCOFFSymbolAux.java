@@ -95,13 +95,13 @@ public class DebugCOFFSymbolAux implements StructConverter {
         if (file != null) {
             return file.getName();
         }
-        else if (sym != null) {
+        if (sym != null) {
             return  "Tag="+Integer.toHexString(sym.getTagIndex())+"  "+
                     "TvIndex="+Integer.toHexString(sym.getTvIndex());
 //TODO:
 //there are other cases here!
         }
-        else if (section != null) {
+        if (section != null) {
             return  "Section="+Integer.toHexString(section.getNumber())+"  "+
                     "Len="+Integer.toHexString(section.getLength())+"  "+
                     "NumOfRelocs="+section.getNumberOfRelocations()+"  "+

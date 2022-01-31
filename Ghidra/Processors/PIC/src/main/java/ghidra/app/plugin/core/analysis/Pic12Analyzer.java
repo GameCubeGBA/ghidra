@@ -466,30 +466,30 @@ public class Pic12Analyzer extends AbstractAnalyzer {
 			wContext.setValueAt(instr, 0, false);
 			return true;
 		}
-		else if ("MOVF".equals(mnemonic)) {
-			modUnknown = true;
-		}
-		else if ("MOVLW".equals(mnemonic)) {
-			Scalar s = instr.getScalar(0);
-			if (s != null) {
-				wContext.setValueAt(instr, s.getUnsignedValue(), false);
-				return true;
-			}
-			modUnknown = true;
-		}
-		else if (REG_MODIFICATION_MNEMONICS.contains(mnemonic) && instr.getNumOperands() == 2) {
-			List<?> repObjs = instr.getDefaultOperandRepresentationList(1);
-			if (repObjs.size() == 1 && DEST_W.equals(repObjs.get(0))) {
-				// Unhandled W modification
-				wContext.setValueUnknown();
-				return true;
-			}
-		}
-		else if (WREG_MODIFICATION_MNEMONICS.contains(mnemonic)) {
-			modUnknown = true;
-		}
+        if ("MOVF".equals(mnemonic)) {
+            modUnknown = true;
+        }
+        else if ("MOVLW".equals(mnemonic)) {
+            Scalar s = instr.getScalar(0);
+            if (s != null) {
+                wContext.setValueAt(instr, s.getUnsignedValue(), false);
+                return true;
+            }
+            modUnknown = true;
+        }
+        else if (REG_MODIFICATION_MNEMONICS.contains(mnemonic) && instr.getNumOperands() == 2) {
+            List<?> repObjs = instr.getDefaultOperandRepresentationList(1);
+            if (repObjs.size() == 1 && DEST_W.equals(repObjs.get(0))) {
+                // Unhandled W modification
+                wContext.setValueUnknown();
+                return true;
+            }
+        }
+        else if (WREG_MODIFICATION_MNEMONICS.contains(mnemonic)) {
+            modUnknown = true;
+        }
 
-		if (modUnknown) {
+        if (modUnknown) {
 			wContext.setValueUnknown();
 			return true;
 		}

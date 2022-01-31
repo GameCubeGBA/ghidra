@@ -273,13 +273,13 @@ public class FileSystemBrowserPlugin extends Plugin implements FrontEndable, Pro
 		if (file == null) {
 			return; // cancelled
 		}
-		else if (!file.exists()) {
-			Msg.showInfo(this, parent, "Open File System Failed",
-				"The specified file does not exist: " + file.getPath());
-			return;
-		}
+        if (!file.exists()) {
+            Msg.showInfo(this, parent, "Open File System Failed",
+                "The specified file does not exist: " + file.getPath());
+            return;
+        }
 
-		if (FileUtilities.isEmpty(file)) {
+        if (FileUtilities.isEmpty(file)) {
 			Msg.showInfo(this, parent, "Empty file",
 				"The selected file is 0 bytes long, skipping.");
 			return;

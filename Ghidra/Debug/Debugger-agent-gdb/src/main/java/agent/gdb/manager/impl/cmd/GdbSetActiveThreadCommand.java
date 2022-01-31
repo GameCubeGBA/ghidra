@@ -54,10 +54,10 @@ public class GdbSetActiveThreadCommand extends AbstractGdbCommandWithThreadAndFr
 		if (super.handle(evt, pending)) {
 			return true;
 		}
-		else if (evt instanceof GdbThreadSelectedEvent) {
-			pending.claim(evt);
-		}
-		return false;
+        if (evt instanceof GdbThreadSelectedEvent) {
+            pending.claim(evt);
+        }
+        return false;
 	}
 
 	@Override

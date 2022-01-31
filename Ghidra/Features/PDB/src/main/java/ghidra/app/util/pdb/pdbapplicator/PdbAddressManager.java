@@ -154,11 +154,11 @@ public class PdbAddressManager {
 			if (segment > imageSectionHeaders.size() + 1) {
 				return BAD_ADDRESS;
 			}
-			else if (segment == 0 || segment == imageSectionHeaders.size() + 1) {
-				// External address.
-				return EXTERNAL_ADDRESS;
-			}
-			relativeVirtualAddress =
+            if (segment == 0 || segment == imageSectionHeaders.size() + 1) {
+                // External address.
+                return EXTERNAL_ADDRESS;
+            }
+            relativeVirtualAddress =
 				imageSectionHeaders.get(segment - 1).getVirtualAddress() + offset;
 			relativeVirtualAddress = applyOMap(relativeVirtualAddress);
 			if (relativeVirtualAddress == null) {
@@ -173,11 +173,11 @@ public class PdbAddressManager {
 			if (segment > segmentMapList.size() + 1) {
 				return BAD_ADDRESS;
 			}
-			else if (segment == 0 || segment == segmentMapList.size() + 1) {
-				// External address.
-				return EXTERNAL_ADDRESS;
-			}
-			// TODO: Need to verify. Guessing at the moment
+            if (segment == 0 || segment == segmentMapList.size() + 1) {
+                // External address.
+                return EXTERNAL_ADDRESS;
+            }
+            // TODO: Need to verify. Guessing at the moment
 			relativeVirtualAddress = segmentMapList.get(segment - 1).getSegmentOffset();
 		}
 
@@ -554,12 +554,12 @@ public class PdbAddressManager {
 					blockAccum = 0;
 					break;
 				}
-				else if (blockAccum > segmentDescription.getLength()) {
-					// Problem... TODO: how do we reconcile?
-					throw new PdbException(
-						"Memory block reconciliation failure--needs reverse aggregation");
-				}
-				progIndex++;
+                if (blockAccum > segmentDescription.getLength()) {
+                    // Problem... TODO: how do we reconcile?
+                    throw new PdbException(
+                        "Memory block reconciliation failure--needs reverse aggregation");
+                }
+                progIndex++;
 			}
 		}
 		if (pdbIndex == pdbIndexLimit - 1 &&

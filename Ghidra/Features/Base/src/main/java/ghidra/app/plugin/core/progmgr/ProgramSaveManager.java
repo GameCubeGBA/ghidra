@@ -180,11 +180,11 @@ class ProgramSaveManager {
 			return true;
 		}
 		// calling can close here ensures that we use the same dialog for single files
-		else if (saveProgramsList.size() == 1) {
-			return canClose(saveProgramsList.get(0));
-		}
+        if (saveProgramsList.size() == 1) {
+            return canClose(saveProgramsList.get(0));
+        }
 
-		return saveDataDialog.showDialog(domainFilesToSaveList);
+        return saveDataDialog.showDialog(domainFilesToSaveList);
 	}
 
 	void saveProgram(Program program) {
@@ -427,11 +427,11 @@ class ProgramSaveManager {
 				program.forceLock(true, "Save Program As");
 				return true;
 			}
-			else if (result == OptionDialog.OPTION_TWO) {
-				program.forceLock(false, "Save Program As");
-				return true;
-			}
-			return false;
+            if (result == OptionDialog.OPTION_TWO) {
+                program.forceLock(false, "Save Program As");
+                return true;
+            }
+            return false;
 		}
 		return true;
 	}
@@ -446,12 +446,12 @@ class ProgramSaveManager {
 					dataTreeSaveDialog.setStatusText("Please enter a name");
 					return;
 				}
-				else if (folder == null) {
-					dataTreeSaveDialog.setStatusText("Please select a folder");
-					return;
-				}
+                if (folder == null) {
+                    dataTreeSaveDialog.setStatusText("Please select a folder");
+                    return;
+                }
 
-				DomainFile file = folder.getFile(newName);
+                DomainFile file = folder.getFile(newName);
 				if (file != null && file.isReadOnly()) {
 					dataTreeSaveDialog.setStatusText("Read Only.  Choose new name/folder");
 				}

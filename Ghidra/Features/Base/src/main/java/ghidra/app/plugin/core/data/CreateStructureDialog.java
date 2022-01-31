@@ -404,12 +404,12 @@ public class CreateStructureDialog extends DialogComponentProvider {
 
 			return false;
 		}
-		else if (typeA.getName().equals(typeB.getName()) &&
-			typeA.getLength() == typeB.getLength()) {
-			return true;
-		}
+        if (typeA.getName().equals(typeB.getName()) &&
+            typeA.getLength() == typeB.getLength()) {
+            return true;
+        }
 
-		return false;
+        return false;
 	}
 
 	/**

@@ -58,10 +58,8 @@ public class ThreadPcodeExecutorState<T> implements PcodeExecutorState<T> {
 		if (isThreadLocalSpace(space)) {
 			return localState.longToOffset(space, l);
 		}
-		else {
-			return sharedState.longToOffset(space, l);
-		}
-	}
+        return sharedState.longToOffset(space, l);
+    }
 
 	@Override
 	public void setVar(AddressSpace space, T offset, int size, boolean truncateAddressableUnit,
@@ -79,10 +77,8 @@ public class ThreadPcodeExecutorState<T> implements PcodeExecutorState<T> {
 		if (isThreadLocalSpace(space)) {
 			return localState.getVar(space, offset, size, truncateAddressableUnit);
 		}
-		else {
-			return sharedState.getVar(space, offset, size, truncateAddressableUnit);
-		}
-	}
+        return sharedState.getVar(space, offset, size, truncateAddressableUnit);
+    }
 
 	@Override
 	public MemBuffer getConcreteBuffer(Address address) {

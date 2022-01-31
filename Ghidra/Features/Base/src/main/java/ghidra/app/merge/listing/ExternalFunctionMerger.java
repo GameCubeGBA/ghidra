@@ -1053,11 +1053,11 @@ public class ExternalFunctionMerger extends AbstractFunctionMerger implements Li
 		if (externalLocation1 == null) {
 			return (externalLocation2 == null);
 		}
-		else if (externalLocation2 == null) {
-			return false;
-		}
+        if (externalLocation2 == null) {
+            return false;
+        }
 
-		// Neither is null so lets compare them.
+        // Neither is null so lets compare them.
 
 		Namespace namespace1 = externalLocation1.getParentNameSpace();
 		String label1 = externalLocation1.getLabel();
@@ -1358,11 +1358,11 @@ public class ExternalFunctionMerger extends AbstractFunctionMerger implements Li
 					// Can't get here. This CONFLICT is handled by "if (myChangedDataType)" above.
 					throw new AssertException("Shouldn't be here!");
 				}
-				else if (latestHasDataType && myChangedFunction && myIsFunction) {
-					// LATEST data type conflicts with MY function.
-					saveExternalFunctionVersusDataTypeConflict(myExternalAddress);
-				}
-				// Otherwise, RESULT should already have the LATEST data type.
+                if (latestHasDataType && myChangedFunction && myIsFunction) {
+                    // LATEST data type conflicts with MY function.
+                    saveExternalFunctionVersusDataTypeConflict(myExternalAddress);
+                }
+                // Otherwise, RESULT should already have the LATEST data type.
 			}
 		}
 	}
@@ -1382,23 +1382,23 @@ public class ExternalFunctionMerger extends AbstractFunctionMerger implements Li
 							: ""));
 			return;
 		}
-		else if ((chosenConflictOption & KEEP_LATEST) != 0) {
-			chosenExternalLocation = externalLocations[LATEST];
-		}
-		else if ((chosenConflictOption & KEEP_MY) != 0) {
-			chosenExternalLocation = externalLocations[MY];
-		}
-		else {
+        if ((chosenConflictOption & KEEP_LATEST) != 0) {
+            chosenExternalLocation = externalLocations[LATEST];
+        }
+        else if ((chosenConflictOption & KEEP_MY) != 0) {
+            chosenExternalLocation = externalLocations[MY];
+        }
+        else {
 //			chosenExternalLocation = null;
-			Msg.showError(this, mergeManager.getMergeTool().getToolFrame(),
-				"Error Merging External Location",
-				"Can only merge external data type from LATEST or MY program." +
-					((externalLocations[RESULT] != null)
-							? (" RESULT external was " + externalLocations[RESULT].getLabel() + ".")
-							: ""));
-			return;
-		}
-		replaceExternalDataType(externalLocations[RESULT], chosenExternalLocation, monitor);
+            Msg.showError(this, mergeManager.getMergeTool().getToolFrame(),
+                "Error Merging External Location",
+                "Can only merge external data type from LATEST or MY program." +
+                    ((externalLocations[RESULT] != null)
+                            ? (" RESULT external was " + externalLocations[RESULT].getLabel() + ".")
+                            : ""));
+            return;
+        }
+        replaceExternalDataType(externalLocations[RESULT], chosenExternalLocation, monitor);
 	}
 
 	/**

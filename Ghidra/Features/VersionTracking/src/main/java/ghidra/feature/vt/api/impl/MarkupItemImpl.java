@@ -288,11 +288,11 @@ public class MarkupItemImpl implements VTMarkupItem {
 		if (type instanceof FunctionEntryPointBasedAbstractMarkupType) {
 			return UNEDITABLE_FUNCTION_ENTRY_POINT;
 		}
-		else if (type instanceof DataTypeMarkupType) {
-			return UNEDITABLE_DATA_ADDRESS;
-		}
+        if (type instanceof DataTypeMarkupType) {
+            return UNEDITABLE_DATA_ADDRESS;
+        }
 
-		if (!getAssociation().getStatus().canApply()) {
+        if (!getAssociation().getStatus().canApply()) {
 			return UNEDITABLE_UNAPPLIABLE_ASSOCIATION_STATUS;
 		}
 

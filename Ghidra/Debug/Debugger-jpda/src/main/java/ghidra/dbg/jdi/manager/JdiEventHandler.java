@@ -139,65 +139,63 @@ public class JdiEventHandler implements Runnable {
 		if (event instanceof ExceptionEvent) {
 			return processException((ExceptionEvent) event);
 		}
-		else if (event instanceof BreakpointEvent) {
-			return processBreakpoint((BreakpointEvent) event);
-		}
-		else if (event instanceof WatchpointEvent) {
-			return processWatchpoint((WatchpointEvent) event);
-		}
-		else if (event instanceof AccessWatchpointEvent) {
-			return processAccessWatchpoint((AccessWatchpointEvent) event);
-		}
-		else if (event instanceof ModificationWatchpointEvent) {
-			return processWatchpointModification((ModificationWatchpointEvent) event);
-		}
-		else if (event instanceof StepEvent) {
-			return processStep((StepEvent) event);
-		}
-		else if (event instanceof MethodEntryEvent) {
-			return processMethodEntry((MethodEntryEvent) event);
-		}
-		else if (event instanceof MethodExitEvent) {
-			return processMethodExit((MethodExitEvent) event);
-		}
-		else if (event instanceof MonitorContendedEnteredEvent) {
-			return processMCEntered((MonitorContendedEnteredEvent) event);
-		}
-		else if (event instanceof MonitorContendedEnterEvent) {
-			return processMCEnter((MonitorContendedEnterEvent) event);
-		}
-		else if (event instanceof MonitorWaitedEvent) {
-			return processMonitorWaited((MonitorWaitedEvent) event);
-		}
-		else if (event instanceof MonitorWaitEvent) {
-			return processMonitorWait((MonitorWaitEvent) event);
-		}
-		else if (event instanceof ClassPrepareEvent) {
-			return processClassPrepare((ClassPrepareEvent) event);
-		}
-		else if (event instanceof ClassUnloadEvent) {
-			return processClassUnload((ClassUnloadEvent) event);
-		}
-		else if (event instanceof ThreadStartEvent) {
-			return processThreadStart((ThreadStartEvent) event);
-		}
-		else if (event instanceof ThreadDeathEvent) {
-			return processThreadDeath((ThreadDeathEvent) event);
-		}
-		else if (event instanceof VMStartEvent) {
-			return processVMStart((VMStartEvent) event);
-		}
-		else if (event instanceof VMDisconnectEvent) {
-			return processVMDisconnect((VMDisconnectEvent) event);
-		}
-		else if (event instanceof VMDeathEvent) {
-			return processVMDeath((VMDeathEvent) event);
-		}
-		else {
-			System.err.println("Unknown event: " + event);
-			return null;
-		}
-	}
+        if (event instanceof BreakpointEvent) {
+            return processBreakpoint((BreakpointEvent) event);
+        }
+        if (event instanceof WatchpointEvent) {
+            return processWatchpoint((WatchpointEvent) event);
+        }
+        if (event instanceof AccessWatchpointEvent) {
+            return processAccessWatchpoint((AccessWatchpointEvent) event);
+        }
+        if (event instanceof ModificationWatchpointEvent) {
+            return processWatchpointModification((ModificationWatchpointEvent) event);
+        }
+        if (event instanceof StepEvent) {
+            return processStep((StepEvent) event);
+        }
+        if (event instanceof MethodEntryEvent) {
+            return processMethodEntry((MethodEntryEvent) event);
+        }
+        if (event instanceof MethodExitEvent) {
+            return processMethodExit((MethodExitEvent) event);
+        }
+        if (event instanceof MonitorContendedEnteredEvent) {
+            return processMCEntered((MonitorContendedEnteredEvent) event);
+        }
+        if (event instanceof MonitorContendedEnterEvent) {
+            return processMCEnter((MonitorContendedEnterEvent) event);
+        }
+        if (event instanceof MonitorWaitedEvent) {
+            return processMonitorWaited((MonitorWaitedEvent) event);
+        }
+        if (event instanceof MonitorWaitEvent) {
+            return processMonitorWait((MonitorWaitEvent) event);
+        }
+        if (event instanceof ClassPrepareEvent) {
+            return processClassPrepare((ClassPrepareEvent) event);
+        }
+        if (event instanceof ClassUnloadEvent) {
+            return processClassUnload((ClassUnloadEvent) event);
+        }
+        if (event instanceof ThreadStartEvent) {
+            return processThreadStart((ThreadStartEvent) event);
+        }
+        if (event instanceof ThreadDeathEvent) {
+            return processThreadDeath((ThreadDeathEvent) event);
+        }
+        if (event instanceof VMStartEvent) {
+            return processVMStart((VMStartEvent) event);
+        }
+        if (event instanceof VMDisconnectEvent) {
+            return processVMDisconnect((VMDisconnectEvent) event);
+        }
+        if (event instanceof VMDeathEvent) {
+            return processVMDeath((VMDeathEvent) event);
+        }
+        System.err.println("Unknown event: " + event);
+        return null;
+    }
 
 	private boolean vmDied = false;
 
@@ -206,22 +204,20 @@ public class JdiEventHandler implements Runnable {
 			vmDied = true;
 			return processVMDeath((VMDeathEvent) event);
 		}
-		else if (event instanceof VMDisconnectEvent) {
-			connected = false;
-			if (!vmDied) {
-				processVMDisconnect((VMDisconnectEvent) event);
-			}
-			/*
-			 * Inform jdb command line processor that jdb is being shutdown. JDK-8154144.
-			 */
-			event(() -> listenersEvent.fire.processShutdown(event, JdiCause.Causes.UNCLAIMED),
-				"processStopped");
-			return null; ///false;
-		}
-		else {
-			throw new InternalError();
-		}
-	}
+        if (event instanceof VMDisconnectEvent) {
+            connected = false;
+            if (!vmDied) {
+                processVMDisconnect((VMDisconnectEvent) event);
+            }
+            /*
+             * Inform jdb command line processor that jdb is being shutdown. JDK-8154144.
+             */
+            event(() -> listenersEvent.fire.processShutdown(event, JdiCause.Causes.UNCLAIMED),
+                "processStopped");
+            return null; ///false;
+        }
+        throw new InternalError();
+    }
 
 	synchronized void handleDisconnectedException() {
 		/*
@@ -249,22 +245,20 @@ public class JdiEventHandler implements Runnable {
 		if (event instanceof ClassPrepareEvent) {
 			return ((ClassPrepareEvent) event).thread();
 		}
-		else if (event instanceof LocatableEvent) {
-			return ((LocatableEvent) event).thread();
-		}
-		else if (event instanceof ThreadStartEvent) {
-			return ((ThreadStartEvent) event).thread();
-		}
-		else if (event instanceof ThreadDeathEvent) {
-			return ((ThreadDeathEvent) event).thread();
-		}
-		else if (event instanceof VMStartEvent) {
-			return ((VMStartEvent) event).thread();
-		}
-		else {
-			return null;
-		}
-	}
+        if (event instanceof LocatableEvent) {
+            return ((LocatableEvent) event).thread();
+        }
+        if (event instanceof ThreadStartEvent) {
+            return ((ThreadStartEvent) event).thread();
+        }
+        if (event instanceof ThreadDeathEvent) {
+            return ((ThreadDeathEvent) event).thread();
+        }
+        if (event instanceof VMStartEvent) {
+            return ((VMStartEvent) event).thread();
+        }
+        return null;
+    }
 
 	private void setCurrentThread(EventSet set) {
 		ThreadReference thread;

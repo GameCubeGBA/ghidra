@@ -101,12 +101,12 @@ public class BootImageFileSystem extends GFileSystemBase {
 				FileAttribute.create(FileAttributeType.COMMENT_ATTR,
 					"This is a ramdisk, it is a GZIP file containing a CPIO archive."));
 		}
-		else if (file == secondStageFile) {
-			return FileAttributes.of(
-				FileAttribute.create(FileAttributeType.COMMENT_ATTR,
-					"This is a second stage loader file. It appears unused at this time."));
-		}
-		return null;
+        if (file == secondStageFile) {
+            return FileAttributes.of(
+                FileAttribute.create(FileAttributeType.COMMENT_ATTR,
+                    "This is a second stage loader file. It appears unused at this time."));
+        }
+        return null;
 	}
 
 	@Override

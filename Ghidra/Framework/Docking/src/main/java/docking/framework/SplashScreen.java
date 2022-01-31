@@ -158,10 +158,10 @@ public class SplashScreen extends JWindow {
 		if (window instanceof JDialog) {
 			return ((JDialog) window).getTitle() + " - id: " + System.identityHashCode(window);
 		}
-		else if (window instanceof JFrame) {
-			return ((JFrame) window).getTitle() + " - id: " + System.identityHashCode(window);
-		}
-		return "<No Title> - id: " + System.identityHashCode(window);
+        if (window instanceof JFrame) {
+            return ((JFrame) window).getTitle() + " - id: " + System.identityHashCode(window);
+        }
+        return "<No Title> - id: " + System.identityHashCode(window);
 	}
 
 	private static boolean isApplicationVisible() {

@@ -459,7 +459,7 @@ public abstract class AbstractDataActionTest extends AbstractGhidraHeadedIntegra
 
 		try {
 			dt = data1.getBaseDataType();
-			assertTrue("Default data type unexpected", !DefaultDataType.class.isInstance(dt));
+			assertTrue("Default data type unexpected", !(dt instanceof DefaultDataType));
 			assertNotNull(data2);
 
 			DataType dt2 = data2.getBaseDataType();
@@ -1227,18 +1227,16 @@ public abstract class AbstractDataActionTest extends AbstractGhidraHeadedIntegra
 				checkOnUndefined(actions);
 				return;
 			}
-			else if (dt instanceof Composite) {
+			if (dt instanceof Composite) {
 				checkOnStructure(actions, -1);
 				return;
 			}
-			else if (dt instanceof Array) {
+			if (dt instanceof Array) {
 				checkOnArray(actions, ((Array) dt).getDataType(), -1);
 				return;
 			}
-			else {
-				checkOnDefined(actions, dt.getClass());
-				return;
-			}
+			checkOnDefined(actions, dt.getClass());
+			return;
 		}
 
 		// All actions should be disabled for non-data locations
@@ -1382,7 +1380,7 @@ public abstract class AbstractDataActionTest extends AbstractGhidraHeadedIntegra
 		assertNotNull("Expected Array", d);
 		assertTrue("Expected Array", d.isArray());
 		DataType dt = d.getDataType();
-		assertTrue("Expected Array", Array.class.isInstance(dt));
+		assertTrue("Expected Array", dt instanceof Array);
 
 		String caseName = "On Array at: " + getCurrentLocation();
 
@@ -1451,7 +1449,7 @@ public abstract class AbstractDataActionTest extends AbstractGhidraHeadedIntegra
 		assertNotNull("Expected Structure", d);
 		assertTrue("Expected Structure", d.isStructure());
 		DataType dt = d.getDataType();
-		assertTrue("Expected Structure", Structure.class.isInstance(dt));
+		assertTrue("Expected Structure", dt instanceof Structure);
 
 		String caseName = "On Structure at: " + getCurrentLocation();
 

@@ -67,10 +67,10 @@ public class ObjectiveC2_Implementation implements StructConverter {
 		if (_isSmall) {
 			return new TypedefDataType("ImplementationOffset", DWORD);
 		}
-		else if (_is32bit) {
-			return new TypedefDataType("Implementation", DWORD);
-		}
-		return new TypedefDataType("Implementation", QWORD);
+        if (_is32bit) {
+            return new TypedefDataType("Implementation", DWORD);
+        }
+        return new TypedefDataType("Implementation", QWORD);
 	}
 
 	public void applyTo() throws Exception {

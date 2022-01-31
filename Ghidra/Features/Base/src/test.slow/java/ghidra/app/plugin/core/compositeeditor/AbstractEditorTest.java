@@ -671,14 +671,14 @@ public abstract class AbstractEditorTest extends AbstractGhidraHeadedIntegration
 		if (editorComponent instanceof JTextField) {
 			return (JTextField) editorComponent;
 		}
-		else if (editorComponent instanceof JPanel) {
-			DataTypeSelectionEditor dataTypeSelectionEditor = getDataTypeSelectionEditor();
-			assertNotNull("Could not find data type editor when attempting to edit a data type",
-				dataTypeSelectionEditor);
-			return dataTypeSelectionEditor.getDropDownTextField();
-		}
+        if (editorComponent instanceof JPanel) {
+            DataTypeSelectionEditor dataTypeSelectionEditor = getDataTypeSelectionEditor();
+            assertNotNull("Could not find data type editor when attempting to edit a data type",
+                dataTypeSelectionEditor);
+            return dataTypeSelectionEditor.getDropDownTextField();
+        }
 
-		return null;
+        return null;
 	}
 
 	protected Component getKeyEventDestination() {

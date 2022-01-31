@@ -596,15 +596,15 @@ public class CppCompositeType {
 		if (layoutOptions == ObjectOrientedClassLayout.MEMBERS_ONLY) {
 			return ObjectOrientedClassLayout.MEMBERS_ONLY;
 		}
-		else if (getNumLayoutBaseClasses() == 0) {
-			initialLayoutDetermination = ObjectOrientedClassLayout.BASIC_SIMPLE_COMPLEX;
-		}
-		else if (getNumLayoutVirtualBaseClasses() == 0) {
-			initialLayoutDetermination = ObjectOrientedClassLayout.SIMPLE_COMPLEX;
-		}
-		else {
-			initialLayoutDetermination = ObjectOrientedClassLayout.COMPLEX;
-		}
+        if (getNumLayoutBaseClasses() == 0) {
+            initialLayoutDetermination = ObjectOrientedClassLayout.BASIC_SIMPLE_COMPLEX;
+        }
+        else if (getNumLayoutVirtualBaseClasses() == 0) {
+            initialLayoutDetermination = ObjectOrientedClassLayout.SIMPLE_COMPLEX;
+        }
+        else {
+            initialLayoutDetermination = ObjectOrientedClassLayout.COMPLEX;
+        }
         return layoutOptions.compareTo(initialLayoutDetermination) >= 0 ? layoutOptions
 				: initialLayoutDetermination;
 	}

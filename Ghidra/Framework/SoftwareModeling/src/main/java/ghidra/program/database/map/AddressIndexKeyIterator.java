@@ -195,22 +195,22 @@ public class AddressIndexKeyIterator implements DBLongIterator {
 		if (it == null) {
 			return false;
 		}
-		else if (!it.hasNext()) {
-			while (keyRangeIndex < (keyRangeList.size() - 1)) {
-				KeyRange keyRange = keyRangeList.get(++keyRangeIndex);
-				it =
-					table.indexFieldIterator(new LongField(keyRange.minKey), new LongField(
-						keyRange.maxKey), true, indexCol);
-				if (it.hasPrevious()) {
-					it.previous();
-				}
-				if (it.hasNext()) {
-					return true;
-				}
-			}
-			return false;
-		}
-		return true;
+        if (!it.hasNext()) {
+            while (keyRangeIndex < (keyRangeList.size() - 1)) {
+                KeyRange keyRange = keyRangeList.get(++keyRangeIndex);
+                it =
+                    table.indexFieldIterator(new LongField(keyRange.minKey), new LongField(
+                        keyRange.maxKey), true, indexCol);
+                if (it.hasPrevious()) {
+                    it.previous();
+                }
+                if (it.hasNext()) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        return true;
 	}
 
 	/**
@@ -221,22 +221,22 @@ public class AddressIndexKeyIterator implements DBLongIterator {
 		if (it == null) {
 			return false;
 		}
-		else if (!it.hasPrevious()) {
-			while (keyRangeIndex > 0) {
-				KeyRange keyRange = keyRangeList.get(--keyRangeIndex);
-				it =
-					table.indexFieldIterator(new LongField(keyRange.minKey), new LongField(
-						keyRange.maxKey), false, indexCol);
-				if (it.hasNext()) {
-					it.next();
-				}
-				if (it.hasPrevious()) {
-					return true;
-				}
-			}
-			return false;
-		}
-		return true;
+        if (!it.hasPrevious()) {
+            while (keyRangeIndex > 0) {
+                KeyRange keyRange = keyRangeList.get(--keyRangeIndex);
+                it =
+                    table.indexFieldIterator(new LongField(keyRange.minKey), new LongField(
+                        keyRange.maxKey), false, indexCol);
+                if (it.hasNext()) {
+                    it.next();
+                }
+                if (it.hasPrevious()) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        return true;
 	}
 
 	/**

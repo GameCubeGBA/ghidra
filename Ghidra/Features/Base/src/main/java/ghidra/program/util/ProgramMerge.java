@@ -929,10 +929,10 @@ public class ProgramMerge implements PropertyVisitor {
 						e);
 				}
 			}
-			else if (eq.getValue() == value) {
-				return eq;
-			}
-		}
+            if (eq.getValue() == value) {
+                return eq;
+            }
+        }
 		throw new RuntimeException(
 			"Can't merge equate with name [" + name + "] and value [" + value + "].");
 	}
@@ -3885,29 +3885,29 @@ public class ProgramMerge implements PropertyVisitor {
 		if (map instanceof VoidPropertyMap) {
 			return ((VoidPropertyMap) map).getNextPropertyAddress(address);
 		}
-		else if (map instanceof ObjectPropertyMap) {
-			return ((ObjectPropertyMap) map).getObject(address);
-		}
-		else if (map instanceof LongPropertyMap) {
-			try {
-				return Long.valueOf(((LongPropertyMap) map).getLong(address));
-			}
-			catch (NoValueException e) {
-				return null;
-			}
-		}
-		else if (map instanceof IntPropertyMap) {
-			try {
-				return Integer.valueOf(((IntPropertyMap) map).getInt(address));
-			}
-			catch (NoValueException e) {
-				return null;
-			}
-		}
-		else if (map instanceof StringPropertyMap) {
-			return ((StringPropertyMap) map).getString(address);
-		}
-		return null;
+        if (map instanceof ObjectPropertyMap) {
+            return ((ObjectPropertyMap) map).getObject(address);
+        }
+        if (map instanceof LongPropertyMap) {
+            try {
+                return Long.valueOf(((LongPropertyMap) map).getLong(address));
+            }
+            catch (NoValueException e) {
+                return null;
+            }
+        }
+        if (map instanceof IntPropertyMap) {
+            try {
+                return Integer.valueOf(((IntPropertyMap) map).getInt(address));
+            }
+            catch (NoValueException e) {
+                return null;
+            }
+        }
+        if (map instanceof StringPropertyMap) {
+            return ((StringPropertyMap) map).getString(address);
+        }
+        return null;
 	}
 
 	private void setProperty(PropertyMap map, Address address, Object property) {

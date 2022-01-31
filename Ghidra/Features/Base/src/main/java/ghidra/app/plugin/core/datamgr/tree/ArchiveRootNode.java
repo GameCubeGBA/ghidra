@@ -85,19 +85,19 @@ public class ArchiveRootNode extends DataTypeTreeNode {
 		if (archive instanceof FileArchive) {
 			return new FileArchiveNode((FileArchive) archive, filterState);
 		}
-		else if (archive instanceof ProjectArchive) {
-			return new ProjectArchiveNode((ProjectArchive) archive, filterState);
-		}
-		else if (archive instanceof InvalidFileArchive) {
-			return new InvalidArchiveNode((InvalidFileArchive) archive);
-		}
-		else if (archive instanceof ProgramArchive) {
-			return new ProgramArchiveNode((ProgramArchive) archive, filterState);
-		}
-		else if (archive instanceof BuiltInArchive) {
-			return new BuiltInArchiveNode((BuiltInArchive) archive, filterState);
-		}
-		return null;
+        if (archive instanceof ProjectArchive) {
+            return new ProjectArchiveNode((ProjectArchive) archive, filterState);
+        }
+        if (archive instanceof InvalidFileArchive) {
+            return new InvalidArchiveNode((InvalidFileArchive) archive);
+        }
+        if (archive instanceof ProgramArchive) {
+            return new ProgramArchiveNode((ProgramArchive) archive, filterState);
+        }
+        if (archive instanceof BuiltInArchive) {
+            return new BuiltInArchiveNode((BuiltInArchive) archive, filterState);
+        }
+        return null;
 	}
 
 //==================================================================================================

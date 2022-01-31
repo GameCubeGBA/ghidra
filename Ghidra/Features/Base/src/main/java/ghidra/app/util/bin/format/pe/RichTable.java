@@ -163,10 +163,10 @@ public class RichTable {
 		if (src instanceof MemBuffer) {
 			return readInt((MemBuffer) src, offset);
 		}
-		else if (src instanceof BinaryReader) {
-			return readInt((BinaryReader) src, offset);
-		}
-		throw new IOException("Source must be a MemBuffer or BinaryReader");
+        if (src instanceof BinaryReader) {
+            return readInt((BinaryReader) src, offset);
+        }
+        throw new IOException("Source must be a MemBuffer or BinaryReader");
 	}
 
 	private static int readInt(MemBuffer buf, long offset) throws IOException {

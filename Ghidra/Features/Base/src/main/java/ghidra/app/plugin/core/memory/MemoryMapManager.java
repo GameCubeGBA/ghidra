@@ -138,15 +138,15 @@ class MemoryMapManager {
 							"Can't merge blocks because they are not contiguous");
 						return false;
 					}
-					else if (blockA.getType() == MemoryBlockType.BIT_MAPPED) {
-						Msg.showError(this, plugin.getMemoryMapProvider().getComponent(),
-							"Merge Blocks Failed",
-							"Can't merge Bit Memory Blocks because they do not\n" +
-								"have successive block end and block start addresses.");
-						return false;
-					}
+                    if (blockA.getType() == MemoryBlockType.BIT_MAPPED) {
+                        Msg.showError(this, plugin.getMemoryMapProvider().getComponent(),
+                            "Merge Blocks Failed",
+                            "Can't merge Bit Memory Blocks because they do not\n" +
+                                "have successive block end and block start addresses.");
+                        return false;
+                    }
 
-				}
+                }
 				catch (AddressOverflowException e) {
 				}
 			}

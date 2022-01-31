@@ -210,10 +210,10 @@ public final class StringField extends Field {
 			}
 			return -1;
 		}
-		else if (f.str == null) {
-			return 1;
-		}
-		return str.compareTo(f.str);
+        if (f.str == null) {
+            return 1;
+        }
+        return str.compareTo(f.str);
 	}
 
 	@Override

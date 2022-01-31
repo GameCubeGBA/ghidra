@@ -211,9 +211,9 @@ public class VarnodeAST extends Varnode {
 				return (uniqId == vn.uniqId);
 			return false;
 		}
-		else if (vn.isFree())
-			return false;
-		if (isInput() != vn.isInput())
+        if (vn.isFree())
+            return false;
+        if (isInput() != vn.isInput())
 			return false;
 		if (def != null) {
 			PcodeOp vnDef = vn.getDef();

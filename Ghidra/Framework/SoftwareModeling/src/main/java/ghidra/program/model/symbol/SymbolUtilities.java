@@ -923,10 +923,10 @@ public class SymbolUtilities {
 			if (obj instanceof Instruction) {
 				return "Instruction Label";
 			}
-			else if (obj != null) {
-				return "Data Label";
-			}
-		}
+            if (obj != null) {
+                return "Data Label";
+            }
+        }
 		else if (symType == SymbolType.FUNCTION) {
 			if (symbol.isExternal()) {
 				return "External Function";
