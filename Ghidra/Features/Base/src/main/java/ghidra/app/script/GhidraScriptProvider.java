@@ -86,7 +86,7 @@ public abstract class GhidraScriptProvider
 	 * @throws IllegalAccessException if the class constructor is not accessible
 	 */
 	public abstract GhidraScript getScriptInstance(ResourceFile sourceFile, PrintWriter writer)
-			throws ClassNotFoundException, InstantiationException, IllegalAccessException;
+			throws ClassNotFoundException, InstantiationException, InvocationTargetException, IllegalAccessException;
 
 	/**
 	 * Creates a new script using the specified file.
