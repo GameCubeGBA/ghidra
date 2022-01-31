@@ -397,14 +397,10 @@ public class VersionedDatabase extends Database {
 			if (version == LATEST_VERSION || version == currentVersion) {
 				File file = bfMgr.getBufferFile(currentVersion);
                 try (InputStream itemIn = new BufferedInputStream(new FileInputStream(file))) {
-                    boolean success = false;
                     ItemSerializer.outputItem(name, contentType, filetype, file.length(), itemIn,
                             outputFile, monitor);
-                    success = true;
-                } finally {
-                    if (!success) {
-                        outputFile.delete();
-                    }
+                } catch (Exception e) {
+                    outputFile.delete();
                 }
 			}
 			else {
