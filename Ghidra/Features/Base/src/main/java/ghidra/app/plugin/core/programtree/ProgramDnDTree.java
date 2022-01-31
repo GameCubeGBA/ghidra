@@ -496,12 +496,11 @@ public class ProgramDnDTree extends DragNDropTree {
 
 		TreePath path = node.getTreePath();
 
-		for (int i = 0; i < viewList.size(); i++) {
-			TreePath viewPath = viewList.get(i);
-			if (viewPath.isDescendant(path) && !viewPath.equals(path)) {
-				return true;
-			}
-		}
+        for (TreePath viewPath : viewList) {
+            if (viewPath.isDescendant(path) && !viewPath.equals(path)) {
+                return true;
+            }
+        }
 		return false;
 	}
 
@@ -1006,10 +1005,9 @@ public class ProgramDnDTree extends DragNDropTree {
 				treeModel.reload(parent);
 
 			}
-			for (int i = 0; i < list.size(); i++) {
-				TreePath p = list.get(i);
-				expandPath(p);
-			}
+            for (TreePath p : list) {
+                expandPath(p);
+            }
 		}
 	}
 
@@ -1187,13 +1185,11 @@ public class ProgramDnDTree extends DragNDropTree {
 
 		ArrayList<ProgramNode> list = new ArrayList<>();
 
-		for (int i = 0; i < nodeList.size(); i++) {
-			ProgramNode node = nodeList.get(i);
-
-			if (node.getName().equals(groupName)) {
-				list.add(node);
-			}
-		}
+        for (ProgramNode node : nodeList) {
+            if (node.getName().equals(groupName)) {
+                list.add(node);
+            }
+        }
 		ProgramNode[] nodes = new ProgramNode[list.size()];
 		return list.toArray(nodes);
 	}
@@ -1317,10 +1313,9 @@ public class ProgramDnDTree extends DragNDropTree {
 	 * @param list list of TreePaths.
 	 */
 	public void expandPaths(List<TreePath> list) {
-		for (int i = 0; i < list.size(); i++) {
-			TreePath path = list.get(i);
-			expandPath(path);
-		}
+        for (TreePath path : list) {
+            expandPath(path);
+        }
 	}
 
 	/**
@@ -1371,14 +1366,12 @@ public class ProgramDnDTree extends DragNDropTree {
 
 		ArrayList<ProgramNode> list = new ArrayList<>();
 
-		for (int i = 0; i < nodeList.size(); i++) {
-			ProgramNode node = nodeList.get(i);
-
-			Group group = node.getGroup();
-			if (group != null && group.equals(g)) {
-				list.add(node);
-			}
-		}
+        for (ProgramNode node : nodeList) {
+            Group group = node.getGroup();
+            if (group != null && group.equals(g)) {
+                list.add(node);
+            }
+        }
 		ProgramNode[] nodes = new ProgramNode[list.size()];
 		return list.toArray(nodes);
 	}
@@ -1388,13 +1381,12 @@ public class ProgramDnDTree extends DragNDropTree {
 	 */
 	private TreePath findTreePath(GroupPath groupPath) {
 
-		for (int i = 0; i < nodeList.size(); i++) {
-			ProgramNode node = nodeList.get(i);
-			GroupPath p = node.getGroupPath();
-			if (p.equals(groupPath)) {
-				return node.getTreePath();
-			}
-		}
+        for (ProgramNode node : nodeList) {
+            GroupPath p = node.getGroupPath();
+            if (p.equals(groupPath)) {
+                return node.getTreePath();
+            }
+        }
 		return null;
 	}
 
@@ -1739,10 +1731,9 @@ public class ProgramDnDTree extends DragNDropTree {
 	 * garbage collected.
 	 */
 	private void disposeOfNodes() {
-		for (int i = 0; i < nodeList.size(); i++) {
-			ProgramNode node = nodeList.get(i);
-			node.dispose();
-		}
+        for (ProgramNode node : nodeList) {
+            node.dispose();
+        }
 	}
 
 	/**

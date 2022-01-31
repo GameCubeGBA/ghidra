@@ -118,27 +118,25 @@ public class SleighParserContext implements ParserContext {
 		ContextCache contextCache = prototype.getContextCache();
 		ParserWalker walker = new ParserWalker(this);
 		walker.baseState();
-		for (int i = 0; i < contextcommit.size(); ++i) {
-			ContextSet set = contextcommit.get(i);
-			FixedHandle hand;
-			if (set.sym instanceof OperandSymbol) {		// value of OperandSymbol is already calculated, find right node
-				int ind = ((OperandSymbol) set.sym).getIndex();
-				hand = getFixedHandle(set.point.getSubState(ind));
-			}
-			else {
-				hand = new FixedHandle();
-				set.sym.getFixedHandle(hand, walker);
-			}
-			// TODO: this is a hack. Addresses that are computed end up in the
-			// constant space and we must factor-in the wordsize.
-			long offset = hand.offset_offset;
-			AddressSpace curSpace = addr.getAddressSpace();
-			if (hand.space.getType() == AddressSpace.TYPE_CONSTANT) {
-				offset = offset * curSpace.getAddressableUnitSize();
-			}
-			Address address = curSpace.getAddress(offset);
-			contextCache.setContext(ctx, address, set.num, set.mask, set.value);
-		}
+        for (ContextSet set : contextcommit) {
+            FixedHandle hand;
+            if (set.sym instanceof OperandSymbol) {        // value of OperandSymbol is already calculated, find right node
+                int ind = ((OperandSymbol) set.sym).getIndex();
+                hand = getFixedHandle(set.point.getSubState(ind));
+            } else {
+                hand = new FixedHandle();
+                set.sym.getFixedHandle(hand, walker);
+            }
+            // TODO: this is a hack. Addresses that are computed end up in the
+            // constant space and we must factor-in the wordsize.
+            long offset = hand.offset_offset;
+            AddressSpace curSpace = addr.getAddressSpace();
+            if (hand.space.getType() == AddressSpace.TYPE_CONSTANT) {
+                offset = offset * curSpace.getAddressableUnitSize();
+            }
+            Address address = curSpace.getAddress(offset);
+            contextCache.setContext(ctx, address, set.num, set.mask, set.value);
+        }
 		contextcommit.clear();
 	}
 

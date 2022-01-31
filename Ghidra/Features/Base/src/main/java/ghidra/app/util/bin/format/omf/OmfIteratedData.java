@@ -54,11 +54,11 @@ public class OmfIteratedData extends OmfRecord implements OmfData {
 
 	@Override
 	public boolean isAllZeroes() {
-		for (int i = 0; i < datablock.length; ++i) {
-			if (!datablock[i].isAllZeroes()) {
-				return false;
-			}
-		}
+        for (DataBlock dataBlock : datablock) {
+            if (!dataBlock.isAllZeroes()) {
+                return false;
+            }
+        }
 		return true;
 	}
 
@@ -162,11 +162,11 @@ public class OmfIteratedData extends OmfRecord implements OmfData {
 				}
 			}
 			if (nestedBlock != null) {
-				for (int i = 0; i < nestedBlock.length; ++i) {
-					if (!nestedBlock[i].isAllZeroes()) {
-						return false;
-					}
-				}
+                for (DataBlock dataBlock : nestedBlock) {
+                    if (!dataBlock.isAllZeroes()) {
+                        return false;
+                    }
+                }
 			}
 			return true;
 		}

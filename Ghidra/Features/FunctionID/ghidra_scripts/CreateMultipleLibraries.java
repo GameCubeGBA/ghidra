@@ -148,10 +148,10 @@ public class CreateMultipleLibraries extends GhidraScript {
 	private long calculateFinalHash(ArrayList<Long> hashList) throws CancelledException {
 		MessageDigest digest = new FNV1a64MessageDigest();
 		Collections.sort(hashList);
-		for (int i = 0; i < hashList.size(); ++i) {
-			monitor.checkCanceled();
-			digest.update(hashList.get(i));
-		}
+        for (Long aLong : hashList) {
+            monitor.checkCanceled();
+            digest.update(aLong);
+        }
 		return digest.digestLong();
 	}
 
@@ -159,21 +159,18 @@ public class CreateMultipleLibraries extends GhidraScript {
 		String fullName =
 			currentLibraryName + ':' + currentLibraryVersion + ':' + currentLibraryVariant;
 		ArrayList<Long> hashList = new ArrayList<>();
-		for (int i = 0; i < programs.size(); ++i) {
-			monitor.checkCanceled();
-			try {
-				hashListProgram(programs.get(i), hashList);
-			}
-			catch (VersionException ex) {
-				outputLine("Version exception for " + fullName);
-			}
-			catch (IOException ex) {
-				outputLine("IO exception for " + fullName);
-			}
-			catch (MemoryAccessException ex) {
-				outputLine("Memory access exception for " + fullName);
-			}
-		}
+        for (DomainFile program : programs) {
+            monitor.checkCanceled();
+            try {
+                hashListProgram(program, hashList);
+            } catch (VersionException ex) {
+                outputLine("Version exception for " + fullName);
+            } catch (IOException ex) {
+                outputLine("IO exception for " + fullName);
+            } catch (MemoryAccessException ex) {
+                outputLine("Memory access exception for " + fullName);
+            }
+        }
 		long val = calculateFinalHash(hashList);
 		String string = duplicatemap.get(val);
 		boolean res;

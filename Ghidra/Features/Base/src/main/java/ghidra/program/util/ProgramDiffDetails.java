@@ -1204,9 +1204,9 @@ public class ProgramDiffDetails {
 		}
 		else {
 			addDisplayEquate(null, nameLen, valueLen);
-			for (int i = 0; i < num; i++) {
-				addDisplayEquate(eq[i], nameLen, valueLen);
-			}
+            for (Equate equate : eq) {
+                addDisplayEquate(equate, nameLen, valueLen);
+            }
 		}
 	}
 

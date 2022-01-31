@@ -160,12 +160,12 @@ class EditExternalReferencePanel extends EditReferencePanel {
 		extLibName.clearModel();
 		extLibName.addItem(Library.UNKNOWN);
 		Arrays.sort(names);
-		for (int i = 0; i < names.length; i++) {
-			if (Library.UNKNOWN.equals(extLibName)) {
-				continue;
-			}
-			extLibName.addItem(names[i]);
-		}
+        for (String name : names) {
+            if (Library.UNKNOWN.equals(extLibName)) {
+                continue;
+            }
+            extLibName.addItem(name);
+        }
 	}
 
 	private void updateExtLibPath() {

@@ -202,14 +202,14 @@ public class DBTraceBreakpoint
 			// NOTE: Caching this result could get hairy if any threads are invalidated....
 			Set<TraceThread> threads = new LinkedHashSet<>(threadKeys.length);
 			DBTraceThreadManager threadManager = space.trace.getThreadManager();
-			for (int i = 0; i < threadKeys.length; i++) {
-				TraceThread t = threadManager.getThread(threadKeys[i]);
-				if (t == null) {
-					Msg.warn(this, "Thread " + threadKeys[i] +
-						" has been deleted since creating this breakpoint.");
-				}
-				threads.add(t);
-			}
+            for (long threadKey : threadKeys) {
+                TraceThread t = threadManager.getThread(threadKey);
+                if (t == null) {
+                    Msg.warn(this, "Thread " + threadKey +
+                            " has been deleted since creating this breakpoint.");
+                }
+                threads.add(t);
+            }
 			return Collections.unmodifiableSet(threads);
 		}
 	}

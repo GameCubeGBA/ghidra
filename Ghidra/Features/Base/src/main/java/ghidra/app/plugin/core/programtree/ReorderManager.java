@@ -150,9 +150,9 @@ class ReorderManager {
 		}
 
 		try {
-            for ( int i = 0; i < dropNodes.length; i++ ) {
-                ProgramNode parentNode = (ProgramNode)destNode.getParent();
-                reorderNode( destNode, dropAction, relativeMousePos, parentNode, dropNodes[i] );
+            for (ProgramNode dropNode : dropNodes) {
+                ProgramNode parentNode = (ProgramNode) destNode.getParent();
+                reorderNode(destNode, dropAction, relativeMousePos, parentNode, dropNode);
             }
 		} finally {
 			tree.endTransaction(transactionID, true);

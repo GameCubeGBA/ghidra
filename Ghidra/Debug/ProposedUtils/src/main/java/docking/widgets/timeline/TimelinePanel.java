@@ -30,7 +30,6 @@ import javax.swing.event.*;
 import com.google.common.collect.*;
 
 import docking.widgets.table.RowObjectTableModel;
-import ghidra.util.Swing;
 import ghidra.util.UIManagerWrapper;
 import ghidra.util.datastruct.ListenerSet;
 
@@ -107,20 +106,18 @@ public class TimelinePanel<T, N extends Number & Comparable<N>> extends JPanel {
 			return t.toString();
 		}
 
-		default boolean columnAffectsBounds(int column) {
+		default boolean columnAffectsBounds() {
 			return true;
 		}
 
-		default Color getForegroundColor(T t, JComponent in, int track, boolean selected,
-				boolean hasFocus) {
+		default Color getForegroundColor(int track, boolean selected) {
 			if (selected) {
 				return UIManagerWrapper.getColor("Table[Enabled+Selected].textForeground");
 			}
 			return UIManagerWrapper.getColor("Table.textForeground");
 		}
 
-		default Color getBackgroundColor(T t, JComponent in, int track, boolean selected,
-				boolean hasFocus) {
+		default Color getBackgroundColor(T t, JComponent in, int track, boolean selected) {
 			if (selected) {
 				return UIManagerWrapper.getColor("Table[Enabled+Selected].textBackground");
 			}
@@ -512,14 +509,6 @@ public class TimelinePanel<T, N extends Number & Comparable<N>> extends JPanel {
 		recolor(); // TODO: Way too draconian
 	}
 
-	public void addTimelineListener(TimelineListener listener) {
-		timelineListeners.add(listener);
-	}
-
-	public void removeTimelineListener(TimelineListener listener) {
-		timelineListeners.remove(listener);
-	}
-
 	protected Range<Double> computeViewRange() {
 		// TODO: Optimize when adding if performance is an issue
 		Double min = null;
@@ -653,7 +642,7 @@ public class TimelinePanel<T, N extends Number & Comparable<N>> extends JPanel {
 				}
 				else {
 					int column = e.getColumn();
-					if (info.columnAffectsBounds(column)) {
+					if (info.columnAffectsBounds()) {
 						List<T> itemsUpdated = rows.itemsUpdated(e.getFirstRow(), e.getLastRow());
 						adjustTracks(itemsUpdated);
 						reSortTracks();
@@ -759,8 +748,8 @@ public class TimelinePanel<T, N extends Number & Comparable<N>> extends JPanel {
 			JComponent comp = track.componentMap.get(t);
 			boolean hasFocus = comp.hasFocus();
 			// TODO: I'd rather not use indexOf, but I suppose I shouldn't expect many tracks?
-			Color bg = info.getBackgroundColor(t, comp, tracks.indexOf(track), selected, hasFocus);
-			Color fg = info.getForegroundColor(t, comp, tracks.indexOf(track), selected, hasFocus);
+			Color bg = info.getBackgroundColor(t, comp, tracks.indexOf(track), selected);
+			Color fg = info.getForegroundColor(tracks.indexOf(track), selected);
 			comp.setBackground(bg);
 			comp.setForeground(fg);
 			BoundTypeBorder rangeBorder = new BoundTypeBorder(info.getRange(t));
@@ -786,36 +775,6 @@ public class TimelinePanel<T, N extends Number & Comparable<N>> extends JPanel {
 		timelineListeners.fire.viewRangeChanged(newViewRange);
 	}
 
-	public Range<Double> getViewRange() {
-		return viewRange;
-	}
-
-	protected <C> void dumpkeys(Class<C> cls, Function<C, String> fmt) { // For debugging and experimentation
-		TreeMap<Object, C> sorted = new TreeMap<>();
-		UIManager.getDefaults()
-				.entrySet()
-				.stream()
-				.filter(ent -> cls.isInstance(ent.getValue()))
-				.forEach(ent -> sorted.put(ent.getKey(), cls.cast(ent.getValue())));
-		for (Entry<Object, C> ent : sorted.entrySet()) {
-			System.out.println(String.format("%s=%s", ent.getKey(), fmt.apply(ent.getValue())));
-		}
-	}
-
-	public void setMaxAtLeast(double maxAtLeast) {
-		if (this.maxAtLeast == maxAtLeast) {
-			return;
-		}
-		this.maxAtLeast = maxAtLeast;
-		if (!viewRange.contains(maxAtLeast + SLACK)) {
-			Swing.runIfSwingOrRunLater(() -> fitView());
-		}
-	}
-
-	public double getMaxAtLeast() {
-		return maxAtLeast;
-	}
-
 	public boolean isCompressed() {
 		return isCompressed;
 	}
@@ -824,25 +783,4 @@ public class TimelinePanel<T, N extends Number & Comparable<N>> extends JPanel {
 		this.isCompressed = isCompressed;
 	}
 
-	/**
-	 * Get the cell bounds, relative to the timeline, of the given item
-	 * 
-	 * @param t the item
-	 * @return the rectangle, or {@code null} if the given item is not present
-	 */
-	public synchronized Rectangle getCellBounds(T t) {
-		TimelineTrack<T, N> track = trackMap.get(t);
-		if (track == null) {
-			return null;
-		}
-		JComponent comp = track.componentMap.get(t);
-		if (comp == null) {
-			return null;
-		}
-		Rectangle bounds = comp.getBounds();
-		Point tl = track.getLocation();
-		bounds.x += tl.x;
-		bounds.y += tl.y;
-		return bounds;
-	}
 }

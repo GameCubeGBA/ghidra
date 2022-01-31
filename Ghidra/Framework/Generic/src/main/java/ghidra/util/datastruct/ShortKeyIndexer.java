@@ -204,8 +204,8 @@ public class ShortKeyIndexer implements Serializable {
 		short[] oldKeys = keys;
         keys = new short[newCapacity];
         capacity = newCapacity;
-		for(short i=0;i<oldKeys.length;i++) {
-			put(oldKeys[i]);
-		}
+         for (short oldKey : oldKeys) {
+             put(oldKey);
+         }
     }
 }

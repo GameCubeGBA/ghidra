@@ -287,30 +287,18 @@ public class GhidraJarBuilder implements GhidraLaunchable {
 			return;
 		}
 
-		BufferedReader reader = null;
-		try {
-			reader = new BufferedReader(new FileReader(manifest));
-			String line;
-			while ((line = reader.readLine()) != null) {
-				suffixes.add(line);
-			}
-		}
-		catch (Exception e) {
-			Msg.error(ClassSearcher.class,
-				"Error opening extension point file " + manifest.getAbsolutePath(), e);
-		}
-		finally {
-			if (reader != null) {
-				try {
-					reader.close();
-				}
-				catch (IOException e) {
-					// oh well
-				}
-			}
-		}
+        try (BufferedReader reader = new BufferedReader(new FileReader(manifest))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                suffixes.add(line);
+            }
+        } catch (Exception e) {
+            Msg.error(ClassSearcher.class,
+                    "Error opening extension point file " + manifest.getAbsolutePath(), e);
+        }
+        // oh well
 
-	}
+    }
 
 	public void buildSrcZip(File outputFile, TaskMonitor monitor)
 			throws IOException, CancelledException {

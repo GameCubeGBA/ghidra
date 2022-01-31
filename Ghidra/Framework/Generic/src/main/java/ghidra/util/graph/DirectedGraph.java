@@ -209,15 +209,14 @@ public class DirectedGraph {
 		Set<Vertex> children = new HashSet<>();
 		Vertex v;
 		Edge e;
-		Iterator<Vertex> i = vs.iterator();
-		while (i.hasNext()) {
-			v = i.next();
-			e = vertices.getFirstOutgoingEdge(v);
-			while (e != null) {
-				children.add(e.to());
-				e = edges.getNextEdgeWithSameFrom(e);
-			}
-		}
+        for (Vertex vertex : vs) {
+            v = vertex;
+            e = vertices.getFirstOutgoingEdge(v);
+            while (e != null) {
+                children.add(e.to());
+                e = edges.getNextEdgeWithSameFrom(e);
+            }
+        }
 		return children;
 	}
 
@@ -226,15 +225,14 @@ public class DirectedGraph {
 		Set<Vertex> parents = new HashSet<>();
 		Edge e;
 		Vertex v;
-		Iterator<Vertex> i = vs.iterator();
-		while (i.hasNext()) {
-			v = i.next();
-			e = vertices.getFirstIncomingEdge(v);
-			while (e != null) {
-				parents.add(e.from());
-				e = edges.getNextEdgeWithSameTo(e);
-			}
-		}
+        for (Vertex vertex : vs) {
+            v = vertex;
+            e = vertices.getFirstIncomingEdge(v);
+            while (e != null) {
+                parents.add(e.from());
+                e = edges.getNextEdgeWithSameTo(e);
+            }
+        }
 		return parents;
 	}
 
@@ -498,28 +496,27 @@ public class DirectedGraph {
 			Iterator<Vertex> iter;
 			Set<Vertex>[] strongComponents = g.assignVerticesToStrongComponents();
 			int n = strongComponents.length;
-			for (int i = 0; i < n; i++) {
-				iter = strongComponents[i].iterator();
-				if (iter.hasNext()) {
-					u = iter.next();
-					Set<Vertex> parents = this.getParents(u);
-					while (iter.hasNext()) {
-						v = iter.next();
-						parents.addAll(this.getParents(v));
-						if (v.key() < u.key()) {
-							u = v;
-						}
-					}
-					if (strongComponents[i].containsAll(parents)) {
-						entryPointSet.add(u);
-					}
-				}
-			}
+            for (Set<Vertex> strongComponent : strongComponents) {
+                iter = strongComponent.iterator();
+                if (iter.hasNext()) {
+                    u = iter.next();
+                    Set<Vertex> parents = this.getParents(u);
+                    while (iter.hasNext()) {
+                        v = iter.next();
+                        parents.addAll(this.getParents(v));
+                        if (v.key() < u.key()) {
+                            u = v;
+                        }
+                    }
+                    if (strongComponent.containsAll(parents)) {
+                        entryPointSet.add(u);
+                    }
+                }
+            }
 		}
-		Iterator<Vertex> iter = entryPointSet.iterator();
-		while (iter.hasNext()) {
-			entryPoints.add(0, iter.next());
-		}
+        for (Vertex vertex : entryPointSet) {
+            entryPoints.add(0, vertex);
+        }
 		return entryPoints;
 	}
 
@@ -789,10 +786,9 @@ public class DirectedGraph {
 	 */
 	public Set<Vertex> getNeighborhood(Set<Vertex> vs) {
 		Set<Vertex> neighborhood = new HashSet<>(2 * vs.size());
-		Iterator<Vertex> iter = vs.iterator();
-		while (iter.hasNext()) {
-			neighborhood.addAll(getNeighborhood(iter.next()));
-		}
+        for (Vertex v : vs) {
+            neighborhood.addAll(getNeighborhood(v));
+        }
 		return neighborhood;
 	}
 
@@ -821,13 +817,12 @@ public class DirectedGraph {
 				v = topologicalSort[i];
 				parents = this.getParents(v);
 				maxParentLevel = -1;
-				Iterator<Vertex> iter = parents.iterator();
-				while (iter.hasNext()) {
-					parent = iter.next();
-					if (levels.getValue(parent) > maxParentLevel) {
-						maxParentLevel = levels.getValue(parent);
-					}
-				}
+                for (Vertex vertex : parents) {
+                    parent = vertex;
+                    if (levels.getValue(parent) > maxParentLevel) {
+                        maxParentLevel = levels.getValue(parent);
+                    }
+                }
 				levels.setValue(v, maxParentLevel + 1);
 			}
 		}
@@ -866,13 +861,12 @@ public class DirectedGraph {
 				v = topologicalSort[i];
 				children = this.getChildren(v);
 				maxChildLevel = -1;
-				Iterator<Vertex> iter = children.iterator();
-				while (iter.hasNext()) {
-					child = iter.next();
-					if (complexityDepth.getValue(child) > maxChildLevel) {
-						maxChildLevel = complexityDepth.getValue(child);
-					}
-				}
+                for (Vertex vertex : children) {
+                    child = vertex;
+                    if (complexityDepth.getValue(child) > maxChildLevel) {
+                        maxChildLevel = complexityDepth.getValue(child);
+                    }
+                }
 				complexityDepth.setValue(v, maxChildLevel + 1);
 				if (maxChildLevel + 1 > maximumLevel) {
 					maximumLevel = maxChildLevel + 1;
@@ -907,13 +901,12 @@ public class DirectedGraph {
 	public boolean areRelatedAs(Vertex parent, Vertex child) {
 		Edge e;
 		Set<Edge> outgoingEdges = this.getOutgoingEdges(parent);
-		Iterator<Edge> iter = outgoingEdges.iterator();
-		while (iter.hasNext()) {
-			e = iter.next();
-			if (e.to() == child) {
-				return true;
-			}
-		}
+        for (Edge outgoingEdge : outgoingEdges) {
+            e = outgoingEdge;
+            if (e.to() == child) {
+                return true;
+            }
+        }
 		return false;
 	}
 
@@ -1360,11 +1353,9 @@ public class DirectedGraph {
 	 */
 	public static Set<?> verts2referentSet(Collection<Vertex> verts) {
 		Set<Object> s = new HashSet<>();
-		Iterator<Vertex> vIter = verts.iterator();
-		while (vIter.hasNext()) {
-			Vertex vert = vIter.next();
-			s.add(vert.referent());
-		}
+        for (Vertex vert : verts) {
+            s.add(vert.referent());
+        }
 		return s;
 	}
 

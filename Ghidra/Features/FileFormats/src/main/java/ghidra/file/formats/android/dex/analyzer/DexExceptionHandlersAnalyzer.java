@@ -120,18 +120,18 @@ public class DexExceptionHandlersAnalyzer extends FileFormatAnalyzer {
 		monitor.setMaximum(methods.size());
 		monitor.setProgress(0);
 
-		for (int i = 0; i < methods.size(); ++i) {
-			monitor.checkCanceled();
-			monitor.incrementProgress(1);
+        for (EncodedMethod encodedMethod : methods) {
+            monitor.checkCanceled();
+            monitor.incrementProgress(1);
 
-			EncodedMethod method = methods.get(i);
+            EncodedMethod method = encodedMethod;
 
-			Address codeAddress = baseAddress.add(method.getCodeOffset());
+            Address codeAddress = baseAddress.add(method.getCodeOffset());
 
-			CodeItem codeItem = method.getCodeItem();
-			if (codeItem == null) {
-				continue;
-			}
+            CodeItem codeItem = method.getCodeItem();
+            if (codeItem == null) {
+                continue;
+            }
 
 //			for ( TryItem tryItem : codeItem.getTries( ) ) {
 //				monitor.checkCanceled( );
@@ -140,36 +140,36 @@ public class DexExceptionHandlersAnalyzer extends FileFormatAnalyzer {
 //				set.add( tryAddress );
 //			}
 
-			EncodedCatchHandlerList handlerList = codeItem.getHandlerList();
-			if (handlerList == null) {
-				continue;
-			}
+            EncodedCatchHandlerList handlerList = codeItem.getHandlerList();
+            if (handlerList == null) {
+                continue;
+            }
 
-			for (EncodedCatchHandler handler : handlerList.getHandlers()) {
-				monitor.checkCanceled();
+            for (EncodedCatchHandler handler : handlerList.getHandlers()) {
+                monitor.checkCanceled();
 
-				List<EncodedTypeAddressPair> pairs = handler.getPairs();
-				for (EncodedTypeAddressPair pair : pairs) {
-					monitor.checkCanceled();
+                List<EncodedTypeAddressPair> pairs = handler.getPairs();
+                for (EncodedTypeAddressPair pair : pairs) {
+                    monitor.checkCanceled();
 
-					int catchTypeIndex = pair.getTypeIndex();
-					TypeIDItem catchTypeIDItem = header.getTypes().get(catchTypeIndex);
-					StringIDItem catchStringItem =
-						header.getStrings().get(catchTypeIDItem.getDescriptorIndex());
-					String catchString = catchStringItem.getStringDataItem().getString();
-					Address catchAddress = codeAddress.add(pair.getAddress() * 2);
+                    int catchTypeIndex = pair.getTypeIndex();
+                    TypeIDItem catchTypeIDItem = header.getTypes().get(catchTypeIndex);
+                    StringIDItem catchStringItem =
+                            header.getStrings().get(catchTypeIDItem.getDescriptorIndex());
+                    String catchString = catchStringItem.getStringDataItem().getString();
+                    Address catchAddress = codeAddress.add(pair.getAddress() * 2);
 
-					createCatchSymbol(program, catchString, catchAddress);
-					set.add(catchAddress);
-				}
+                    createCatchSymbol(program, catchString, catchAddress);
+                    set.add(catchAddress);
+                }
 
-				if (handler.getSize() <= 0) {
-					Address catchAllAddress = codeAddress.add(handler.getCatchAllAddress() * 2);
-					createCatchSymbol(program, "CatchAll", catchAllAddress);
-					set.add(catchAllAddress);
-				}
-			}
-		}
+                if (handler.getSize() <= 0) {
+                    Address catchAllAddress = codeAddress.add(handler.getCatchAllAddress() * 2);
+                    createCatchSymbol(program, "CatchAll", catchAllAddress);
+                    set.add(catchAllAddress);
+                }
+            }
+        }
 
 		return set;
 	}

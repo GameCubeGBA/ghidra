@@ -141,16 +141,15 @@ public abstract class Database {
 		if (flist == null) {
 			return false;
 		}
-		for (int i = 0; i < flist.length; i++) {
-			if (flist[i].isDirectory()) {
-				if (!deleteDir(flist[i]))
-					return false;
-			}
-			else {
-				if (!flist[i].delete())
-					return false;
-			}
-		}
+        for (File file : flist) {
+            if (file.isDirectory()) {
+                if (!deleteDir(file))
+                    return false;
+            } else {
+                if (!file.delete())
+                    return false;
+            }
+        }
 		return dir.delete();
 	}
 
@@ -215,23 +214,20 @@ public abstract class Database {
 //		boolean bufferFileFound = false;
 		boolean versionFileFound = false;
 
-		for (int i = 0; i < fileList.length; i++) {
-			// Identify files of interest
-			String fname = fileList[i];
-			if (fname.endsWith(LocalBufferFile.BUFFER_FILE_EXTENSION)) {
-				if (fname.startsWith(DATABASE_FILE_PREFIX)) {
+        for (String fname : fileList) {
+            // Identify files of interest
+            if (fname.endsWith(LocalBufferFile.BUFFER_FILE_EXTENSION)) {
+                if (fname.startsWith(DATABASE_FILE_PREFIX)) {
 //					bufferFileFound = true;
-				}
-				else if (fname.equals(CUMULATIVE_CHANGE_FILENAME)) {
+                } else if (fname.equals(CUMULATIVE_CHANGE_FILENAME)) {
 // TODO: This check is not reliable
 // If the detabase is checked-out and not yet modified, this file will not yet exist
-					isCheckOutCopy = true;
-				}
-				else if (fname.startsWith(VERSION_FILE_PREFIX)) {
-					versionFileFound = true;
-				}
-			}
-		}
+                    isCheckOutCopy = true;
+                } else if (fname.startsWith(VERSION_FILE_PREFIX)) {
+                    versionFileFound = true;
+                }
+            }
+        }
 
 //		if (!bufferFileFound) {
 //			throw new IOException("Bad database directory: " + dbDir);
@@ -273,32 +269,29 @@ public abstract class Database {
 				throw new FileNotFoundException(dbDir + " not found");
 			}
 
-			for (int i = 0; i < fileList.length; i++) {
-				// Identify files of interest
-				String fname = fileList[i];
-				if (fname.endsWith(LocalBufferFile.BUFFER_FILE_EXTENSION)) {
-					if (fname.startsWith(DATABASE_FILE_PREFIX)) {
-						bufFiles.add(fname);
-					}
-					else if (fname.startsWith(VERSION_FILE_PREFIX)) {
-						verFiles.add(fname);
-					}
-					else if (fname.startsWith(CHANGE_FILE_PREFIX)) {
-						changeFiles.add(fname);
-					}
-					//				else {
-					//					// unknown buffer file
-					//					delFiles.add(fname);
-					//				}
-				}
-				//			else if (fname.endsWith(LocalBufferFile.PRESAVE_FILE_EXT) ||
-				//					fname.endsWith(LocalBufferFile.TEMP_FILE_EXT)) {
-				//				// Attempt to remove all presave and temp files 
-				//				// Open files on Windows will not be deleted, however they will under Unix
-				// TODO This can cause problems under UNIX since it can be deleted while open
-				//				delFiles.add(fname);	
-				//			}
-			}
+            for (String fname : fileList) {
+                // Identify files of interest
+                if (fname.endsWith(LocalBufferFile.BUFFER_FILE_EXTENSION)) {
+                    if (fname.startsWith(DATABASE_FILE_PREFIX)) {
+                        bufFiles.add(fname);
+                    } else if (fname.startsWith(VERSION_FILE_PREFIX)) {
+                        verFiles.add(fname);
+                    } else if (fname.startsWith(CHANGE_FILE_PREFIX)) {
+                        changeFiles.add(fname);
+                    }
+                    //				else {
+                    //					// unknown buffer file
+                    //					delFiles.add(fname);
+                    //				}
+                }
+                //			else if (fname.endsWith(LocalBufferFile.PRESAVE_FILE_EXT) ||
+                //					fname.endsWith(LocalBufferFile.TEMP_FILE_EXT)) {
+                //				// Attempt to remove all presave and temp files
+                //				// Open files on Windows will not be deleted, however they will under Unix
+                // TODO This can cause problems under UNIX since it can be deleted while open
+                //				delFiles.add(fname);
+                //			}
+            }
 
 			// Identify buffer files and current version - keep current version only
 			int[] bufVersions = getFileVersions(bufFiles);
@@ -385,23 +378,20 @@ public abstract class Database {
 
 	private int[] getFileVersions(ArrayList<String> fileList) {
 		ArrayList<Integer> list = new ArrayList<>();
-		Iterator<String> iter = fileList.iterator();
-		while (iter.hasNext()) {
-			String fname = iter.next();
-			int ix1 = fname.indexOf('.');
-			int ix2 = fname.indexOf('.', ix1 + 1);
-			if (ix1 < 0 || ix2 < ix1) {
-				log.error(dbDir + ": bad file name: " + fname);
-				continue;
-			}
-			String v = fname.substring(ix1 + 1, ix2);
-			try {
-				list.add(Integer.valueOf(v));
-			}
-			catch (NumberFormatException e) {
-				log.error(dbDir + ": bad file name: " + fname);
-			}
-		}
+        for (String fname : fileList) {
+            int ix1 = fname.indexOf('.');
+            int ix2 = fname.indexOf('.', ix1 + 1);
+            if (ix1 < 0 || ix2 < ix1) {
+                log.error(dbDir + ": bad file name: " + fname);
+                continue;
+            }
+            String v = fname.substring(ix1 + 1, ix2);
+            try {
+                list.add(Integer.valueOf(v));
+            } catch (NumberFormatException e) {
+                log.error(dbDir + ": bad file name: " + fname);
+            }
+        }
 		int[] versions = new int[list.size()];
 		Iterator<Integer> versionsIter = list.iterator();
 		int ix = 0;

@@ -1714,10 +1714,9 @@ public abstract class ProcessorEmulatorTestAdapter extends TestCase implements E
 			}
 		}
 		Collections.sort(list);
-		for (int i = 0; i < list.size(); i++) {
-			String relativePath = list.get(i);
-			testFiles.add(new PCodeTestFile(new File(testResourceDir, relativePath), relativePath));
-		}
+        for (String relativePath : list) {
+            testFiles.add(new PCodeTestFile(new File(testResourceDir, relativePath), relativePath));
+        }
 		return testFiles;
 	}
 

@@ -41,8 +41,8 @@ class CodeBlockCache extends AddressObjectMap {
      */
     CodeBlock getBlockAt(Address addr){
         Object[] blocks = getObjects(addr);
-        for (int i=0; i < blocks.length; i++) {
-            CodeBlock block = (CodeBlock) blocks[i];
+        for (Object o : blocks) {
+            CodeBlock block = (CodeBlock) o;
             Address startAddr = block.getFirstStartAddress();
             if (startAddr.equals(addr)) {
                 return block;
@@ -59,11 +59,11 @@ class CodeBlockCache extends AddressObjectMap {
      */
     CodeBlock getBlockWithEntryAt(Address addr){
         Object[] blocks = getObjects(addr);
-        for (int i=0; i < blocks.length; i++) {
-            CodeBlock block = (CodeBlock) blocks[i];
+        for (Object o : blocks) {
+            CodeBlock block = (CodeBlock) o;
             Address[] starts = block.getStartAddresses();
-            for (int j=0; j < starts.length; j++) {
-                if (starts[j].equals(addr)) {
+            for (Address start : starts) {
+                if (start.equals(addr)) {
                     return block;
                 }
             }

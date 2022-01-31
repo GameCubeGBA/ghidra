@@ -38,9 +38,9 @@ class PathnameTableModel extends AbstractTableModel {
 		this.isEditable = isEditable;
 		pathList = new ArrayList<String>();
 		if (paths != null) {
-			for (int i=0; i<paths.length; i++) {
-				pathList.add(paths[i]);
-			}
+            for (String path : paths) {
+                pathList.add(path);
+            }
 		}
 	}
 
@@ -85,10 +85,10 @@ class PathnameTableModel extends AbstractTableModel {
 		for (int i=0; i<selectedRows.length; i++) {
 			paths[i] = pathList.get(selectedRows[i]);
 		}
-		
-		for (int i=0; i<paths.length; i++) {
-			pathList.remove(paths[i]);
-		}
+
+        for (String path : paths) {
+            pathList.remove(path);
+        }
 		fireTableDataChanged();
 	}
 	

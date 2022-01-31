@@ -48,13 +48,12 @@ public class CompoundCmd implements Command {
 	 * @see ghidra.framework.cmd.Command#applyTo(ghidra.framework.model.DomainObject)
 	 */
 	public boolean applyTo(DomainObject obj) {
-		for(int i = 0;i<cmds.size();i++) {
-			Command cmd = cmds.get(i);
-			if (!cmd.applyTo(obj)) {
-				statusMsg = cmd.getStatusMsg();
-				return false;
-			}
-		}
+        for (Command cmd : cmds) {
+            if (!cmd.applyTo(obj)) {
+                statusMsg = cmd.getStatusMsg();
+                return false;
+            }
+        }
 		return true;
 	}
 

@@ -156,12 +156,12 @@ class EquatesXmlMgr {
 		}
 		else {
 			EquateReference[] refs = equate.getReferences();
-			for (int i=0; i<refs.length; ++i) {
-				if (set.contains(refs[i].getAddress())) {
-					okToWrite = true;
-					break;
-				}
-			}
+            for (EquateReference ref : refs) {
+                if (set.contains(ref.getAddress())) {
+                    okToWrite = true;
+                    break;
+                }
+            }
 		}
 		if (okToWrite) {
 			XmlAttributes attrs = new XmlAttributes();

@@ -346,11 +346,9 @@ public class LocalSymbolMap {
 		resBuf.append("/>\n");
 		resBuf.append("<rangelist/>\n");	// Empty address range
 		resBuf.append("<symbollist>\n");
-		Iterator<HighSymbol> iter = symbolMap.values().iterator();
-		while (iter.hasNext()) {
-			HighSymbol sym = iter.next();
-			HighSymbol.buildMapSymXML(resBuf, sym);
-		}
+        for (HighSymbol sym : symbolMap.values()) {
+            HighSymbol.buildMapSymXML(resBuf, sym);
+        }
 		resBuf.append("</symbollist>\n");
 		resBuf.append("</scope>\n");
 		resBuf.append("</localdb>\n");

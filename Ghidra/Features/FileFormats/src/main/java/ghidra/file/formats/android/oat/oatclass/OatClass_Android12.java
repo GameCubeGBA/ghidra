@@ -55,9 +55,9 @@ public class OatClass_Android12 extends OatClass {
 			bitmap_ = reader.readNextByteArray(getBitmapSize());
 
 			//For every set bit, there will be a corresponding entry in method_offsets.;
-			for (int i = 0; i < bitmap_.length; ++i) {
-				methodOffsetsCount += Integer.bitCount(Byte.toUnsignedInt(bitmap_[i]));
-			}
+            for (byte b : bitmap_) {
+                methodOffsetsCount += Integer.bitCount(Byte.toUnsignedInt(b));
+            }
 		}
 		else if (type_ == OatClassType.kOatClassAllCompiled.ordinal()) {
 			methodOffsetsCount =

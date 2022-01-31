@@ -456,15 +456,9 @@ public class TestSuiteUtilities {
     	File dir = makeDir(baseDir, pkgName);
     	String srcCode = ALL_TESTS_CODE.replaceAll("%CLASSNAME%", className);
     	srcCode = srcCode.replaceAll("%PACKAGE%", pkgName);
-    	FileWriter out = null;
-		try {
-			out = new FileWriter(new File(dir, className + ".java"));
-			out.write(srcCode);
-		} finally {
-			if (out != null) {
-				try { out.close(); } catch (IOException e) {}
-			}
-		}
+        try (FileWriter out = new FileWriter(new File(dir, className + ".java"))) {
+            out.write(srcCode);
+        }
     }
     
     /**

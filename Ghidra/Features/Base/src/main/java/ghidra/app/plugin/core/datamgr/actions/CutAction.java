@@ -106,10 +106,10 @@ public class CutAction extends DockingAction {
 	private ArrayList<GTreeNode> createList(TreePath[] paths) {
 		ArrayList<GTreeNode> list = new ArrayList<GTreeNode>();
 		if (paths != null) {
-			for (int i = 0; i < paths.length; i++) {
-				GTreeNode node = (GTreeNode) paths[i].getLastPathComponent();
-				list.add(node);
-			}
+            for (TreePath path : paths) {
+                GTreeNode node = (GTreeNode) path.getLastPathComponent();
+                list.add(node);
+            }
 		}
 		return list;
 	}

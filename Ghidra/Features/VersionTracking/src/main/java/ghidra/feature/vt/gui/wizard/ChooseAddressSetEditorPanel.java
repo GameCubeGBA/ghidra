@@ -289,10 +289,10 @@ public class ChooseAddressSetEditorPanel extends JPanel {
 	private synchronized void removeRange() {
 		int[] selectedIndices = list.getSelectedIndices();
 		AddressSet removeRanges = new AddressSet();
-		for (int i = 0; i < selectedIndices.length; i++) {
-			AddressRange addressRange = listModel.getElementAt(selectedIndices[i]);
-			removeRanges.add(addressRange);
-		}
+        for (int selectedIndex : selectedIndices) {
+            AddressRange addressRange = listModel.getElementAt(selectedIndex);
+            removeRanges.add(addressRange);
+        }
 		myCurrentAddressSet.delete(removeRanges);
 		listModel.setData(myCurrentAddressSet.toList());
 		list.clearSelection();

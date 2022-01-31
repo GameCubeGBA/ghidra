@@ -233,11 +233,11 @@ public class GoToAddressLabelDialog extends DialogComponentProvider implements G
 	private void readHistory(SaveState saveState) {
 		String[] strs = saveState.getStrings("GO_TO_HISTORY", null);
 		if (strs != null) {
-			for (int i = 0; i < strs.length; i++) {
-				if (!history.contains(strs[i])) {
-					history.add(strs[i]);
-				}
-			}
+            for (String str : strs) {
+                if (!history.contains(str)) {
+                    history.add(str);
+                }
+            }
 			truncateHistoryAsNeeded();
 			updateCombo();
 		}

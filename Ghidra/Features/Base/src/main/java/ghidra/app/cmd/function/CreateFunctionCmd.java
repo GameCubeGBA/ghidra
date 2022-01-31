@@ -529,17 +529,14 @@ public class CreateFunctionCmd extends BackgroundCommand {
 	 */
 	private void restoreOriginalBodies(Map<Function, AddressSetView> bodyChangeMap) {
 		Set<Map.Entry<Function, AddressSetView>> entries = bodyChangeMap.entrySet();
-		Iterator<Map.Entry<Function, AddressSetView>> iter = entries.iterator();
-		while (iter.hasNext()) {
-			Map.Entry<Function, AddressSetView> entry = iter.next();
-			try {
-				entry.getKey().setBody(entry.getValue());
-			}
-			catch (OverlappingFunctionException e) {
-				// This shouldn't happen.
-				e.printStackTrace();
-			}
-		}
+        for (Map.Entry<Function, AddressSetView> entry : entries) {
+            try {
+                entry.getKey().setBody(entry.getValue());
+            } catch (OverlappingFunctionException e) {
+                // This shouldn't happen.
+                e.printStackTrace();
+            }
+        }
 	}
 
 	/**

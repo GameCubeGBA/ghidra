@@ -592,12 +592,10 @@ class RecoveryFile {
 		recoveryFile.clearParameters();
 
 		// Restore recovery parameters
-		Iterator<String> iter = recoveryProps.keySet().iterator();
-		while (iter.hasNext()) {
-			String name = iter.next();
-			recoveryFile.setParameter(
-				name, recoveryProps.get(name).intValue());
-		}
+        for (String name : recoveryProps.keySet()) {
+            recoveryFile.setParameter(
+                    name, recoveryProps.get(name).intValue());
+        }
 	}
 
 	/**

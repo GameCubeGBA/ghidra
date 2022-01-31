@@ -62,13 +62,12 @@ public class Partition {
 
 	private static int partition(final int identity, final HashEntry[] values) {
 		float total = 0;
-		for (int i=0;i<values.length;++i) {
-			HashEntry entry = values[i];
-			if (partition(identity, entry.getHash()))
-				total += entry.getCoeff();
-			else
-				total -= entry.getCoeff();
-		}
+        for (HashEntry entry : values) {
+            if (partition(identity, entry.getHash()))
+                total += entry.getCoeff();
+            else
+                total -= entry.getCoeff();
+        }
 		return total < 0 ? 0 : 1;
 	}
 

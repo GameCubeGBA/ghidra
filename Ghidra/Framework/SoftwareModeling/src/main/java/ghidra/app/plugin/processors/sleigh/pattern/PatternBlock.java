@@ -416,15 +416,15 @@ public class PatternBlock {
 	 */
 	public byte[] getWholeBytes() {
 		int count = 0;
-		for (int i = 0; i < maskvec.length; i++) {
-			int mask = maskvec[i];
-			for (int j = 0; j < 4; j++) {
-				if ((mask & LEFT_BYTE) == LEFT_BYTE) {
-					count++;
-				}
-				mask <<= 8;
-			}
-		}
+        for (int k : maskvec) {
+            int mask = k;
+            for (int j = 0; j < 4; j++) {
+                if ((mask & LEFT_BYTE) == LEFT_BYTE) {
+                    count++;
+                }
+                mask <<= 8;
+            }
+        }
 		byte[] result = new byte[count];
 		int pos = 0;
 		for (int i = 0; i < maskvec.length; i++) {

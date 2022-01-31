@@ -128,10 +128,9 @@ class VersionFile {
 		
 		// Copy original parameter values
 		String[] parmNames = originalBf.getParameterNames();
-		for (int i = 0; i < parmNames.length; i++) {
-			String name = parmNames[i];
-			versionFile.setParameter(name, originalBf.getParameter(name));
-		}
+        for (String name : parmNames) {
+            versionFile.setParameter(name, originalBf.getParameter(name));
+        }
 		
 	}
 	
@@ -383,21 +382,21 @@ class VersionFile {
 		int offset = FIRST_ENTRY_OFFSET;
 		
 		// Save freeIndexes entries
-		for (int i = 0; i < freeIndexes.length; i++) {
+        for (int freeIndex : freeIndexes) {
 
-			if (offset > maxOffset) {
-				nextIndex = vfIndexProvider.allocateIndex();
-				buf.putInt(NEXT_BUFFER_INDEX_OFFSET, nextIndex);
-				versionFile.put(buf, thisIndex);
+            if (offset > maxOffset) {
+                nextIndex = vfIndexProvider.allocateIndex();
+                buf.putInt(NEXT_BUFFER_INDEX_OFFSET, nextIndex);
+                versionFile.put(buf, thisIndex);
 
-				offset = FIRST_ENTRY_OFFSET;
-				thisIndex = nextIndex;
-				buf.setId(thisIndex);
-			}
-			
-			// Save list entry as single integer
-			offset = buf.putInt(offset, freeIndexes[i]);
-		}
+                offset = FIRST_ENTRY_OFFSET;
+                thisIndex = nextIndex;
+                buf.setId(thisIndex);
+            }
+
+            // Save list entry as single integer
+            offset = buf.putInt(offset, freeIndex);
+        }
 		
 		// Mark end of list
 		if (offset > maxOffset) {	
@@ -583,11 +582,11 @@ class VersionFile {
 		}
 		String[] allNames = versionFile.getParameterNames();
 		ArrayList<String> list = new ArrayList<String>();
-		for (int i = 0; i < allNames.length; i++) {
-			if (!allNames[i].startsWith(VERSION_PARM_PREFIX)) {
-				list.add(allNames[i]);	
-			}	
-		}
+        for (String allName : allNames) {
+            if (!allName.startsWith(VERSION_PARM_PREFIX)) {
+                list.add(allName);
+            }
+        }
 		String[] names = new String[list.size()];
 		list.toArray(names);
 		return names;

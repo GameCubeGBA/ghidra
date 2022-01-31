@@ -111,17 +111,13 @@ public class HttpUtil {
 			connection = getContent(httpUrlString, httpRequestProperties, allowRedirect);
 			content = connection.getInputStream();
 
-			BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(destFile));
-			byte[] dataBuffer = new byte[8 * 1024];
-			try {
-				int len;
-				while ((len = content.read(dataBuffer)) >= 0) {
-					out.write(dataBuffer, 0, len);
-				}
-			}
-			finally {
-				out.close();
-			}
+            try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(destFile))) {
+                byte[] dataBuffer = new byte[8 * 1024];
+                int len;
+                while ((len = content.read(dataBuffer)) >= 0) {
+                    out.write(dataBuffer, 0, len);
+                }
+            }
 		}
 		finally {
 			if (content != null) {

@@ -198,12 +198,12 @@ class MasterTable {
 	 * @throws IOException database IO error
 	 */
 	void flush() throws IOException {
-		for (int i = 0; i < tableRecords.length; i++) {
-			DBRecord rec = tableRecords[i].getRecord();
-			if (rec.isDirty()) {
-				table.putRecord(rec);
-			}
-		}
+        for (TableRecord tableRecord : tableRecords) {
+            DBRecord rec = tableRecord.getRecord();
+            if (rec.isDirty()) {
+                table.putRecord(rec);
+            }
+        }
 	}
 
 	/**
@@ -212,11 +212,11 @@ class MasterTable {
 	 * @param newName new tablename
 	 */
 	void changeTableName(String oldName, String newName) {
-		for (int i = 0; i < tableRecords.length; i++) {
-			if (oldName.equals(tableRecords[i].getName())) {
-				tableRecords[i].setName(newName);
-			}
-		}
+        for (TableRecord tableRecord : tableRecords) {
+            if (oldName.equals(tableRecord.getName())) {
+                tableRecord.setName(newName);
+            }
+        }
 	}
 
 }

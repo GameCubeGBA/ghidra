@@ -110,12 +110,11 @@ public class VersionControlAddAction extends VersionControlAction {
 				tool.setStatusInfo("Add to version control canceled");
 				return;
 			}
-			for (int i = 0; i < changedList.size(); i++) {
-				DomainFile df = changedList.get(i);
-				if (df.isChanged()) {
-					list.remove(df);
-				}
-			}
+            for (DomainFile df : changedList) {
+                if (df.isChanged()) {
+                    list.remove(df);
+                }
+            }
 		}
 		if (list.size() > 0) {
 			AddToVersionControlTask task = new AddToVersionControlTask(list, tool);

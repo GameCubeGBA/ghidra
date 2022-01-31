@@ -652,11 +652,9 @@ public class SymbolManager implements SymbolTable, ManagerDB {
 		while (symIt.hasNext()) {
 			list.add(symIt.next());
 		}
-		Iterator<Symbol> it = list.iterator();
-		while (it.hasNext()) {
-			Symbol s = it.next();
-			s.delete();
-		}
+        for (Symbol s : list) {
+            s.delete();
+        }
 	}
 
 	/**
@@ -1465,11 +1463,9 @@ public class SymbolManager implements SymbolTable, ManagerDB {
 					DBRecord rec = iter.next();
 					symbols.add(getSymbol(rec));
 				}
-				Iterator<SymbolDB> it = symbols.iterator();
-				while (it.hasNext()) {
-					SymbolDB s = it.next();
-					s.delete();
-				}
+                for (SymbolDB s : symbols) {
+                    s.delete();
+                }
 			}
 			catch (IOException e) {
 				dbError(e);

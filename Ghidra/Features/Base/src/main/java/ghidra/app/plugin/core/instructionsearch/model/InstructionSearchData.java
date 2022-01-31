@@ -382,16 +382,16 @@ public class InstructionSearchData extends Observable {
 		List<byte[]> masks = new ArrayList<byte[]>();
 		List<byte[]> values = new ArrayList<byte[]>();
 
-		for (int i = 0; i < instructions.size(); i++) {
-			MaskContainer result = buildSingleInstructionMask(instructions.get(i));
+        for (InstructionMetadata instruction : instructions) {
+            MaskContainer result = buildSingleInstructionMask(instruction);
 
-			if (result == null) {
-				continue;
-			}
+            if (result == null) {
+                continue;
+            }
 
-			masks.add(result.getMask());
-			values.add(result.getValue());
-		}
+            masks.add(result.getMask());
+            values.add(result.getValue());
+        }
 
 		return combineInstructionMasks(masks, values);
 	}
@@ -625,9 +625,9 @@ public class InstructionSearchData extends Observable {
 		// Now figure out the size of the final array we need to construct.  We 
 		// could use ArrayList objects instead but that would be too inefficient.
 		int totalLength = 0;
-		for (int i = 0; i < values.size(); i++) {
-			totalLength += values.get(i).length;
-		}
+        for (byte[] bytes : values) {
+            totalLength += bytes.length;
+        }
 
 		// This takes the masks and values from each command and concats them together to form
 		// a single mask and value byte array. 

@@ -659,19 +659,17 @@ public class FGProvider extends VisualGraphComponentProvider<FGVertex, FGEdge, F
 
 		AddressSet addresses = new AddressSet();
 
-		Iterator<DomainObjectChangeRecord> iterator = ev.iterator();
-		while (iterator.hasNext()) {
-			DomainObjectChangeRecord record = iterator.next();
-			if (record instanceof ProgramChangeRecord) {
-				ProgramChangeRecord programRecord = (ProgramChangeRecord) record;
-				Address start = programRecord.getStart();
-				Address end = programRecord.getEnd();
+        for (DomainObjectChangeRecord record : ev) {
+            if (record instanceof ProgramChangeRecord) {
+                ProgramChangeRecord programRecord = (ProgramChangeRecord) record;
+                Address start = programRecord.getStart();
+                Address end = programRecord.getEnd();
 
-				if (start != null && end != null) {
-					addresses.addRange(start, end);
-				}
-			}
-		}
+                if (start != null && end != null) {
+                    addresses.addRange(start, end);
+                }
+            }
+        }
 
 		controller.invalidateCacheForAddresses(addresses);
 	}

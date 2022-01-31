@@ -366,10 +366,9 @@ public class DiffApplySettingsProvider extends ComponentProviderAdapter {
 		if (adjustingApplyFilter) {
 			return;
 		}
-		for (int i = 0; i < listenerList.size(); i++) {
-			ActionListener listener = listenerList.get(i);
-			listener.actionPerformed(new ActionEvent(this, 0, APPLY_FILTER_CHANGED_ACTION));
-		}
+        for (ActionListener listener : listenerList) {
+            listener.actionPerformed(new ActionEvent(this, 0, APPLY_FILTER_CHANGED_ACTION));
+        }
 	}
 
 	@Override

@@ -100,10 +100,9 @@ public abstract class AbstractWizardJPanel extends JPanel implements WizardPanel
 	 * Notification that something on the panel has changed.
 	 */
     public void notifyListenersOfValidityChanged() {
-        for (int i = 0; i < listeners.size() ; ++i) {
-            WizardPanelListener wpl = listeners.get(i);
-            wpl.validityChanged();
-        }
+		for (WizardPanelListener wpl : listeners) {
+			wpl.validityChanged();
+		}
     }
 
 	/**
@@ -111,9 +110,8 @@ public abstract class AbstractWizardJPanel extends JPanel implements WizardPanel
 	 * @param msg message to display
 	 */
     public void notifyListenersOfStatusMessage(String msg) {
-        for (int i = 0; i < listeners.size() ; ++i) {
-            WizardPanelListener wpl = listeners.get(i);
-            wpl.setStatusMessage(msg);
-        }
+		for (WizardPanelListener wpl : listeners) {
+			wpl.setStatusMessage(msg);
+		}
     }
 }

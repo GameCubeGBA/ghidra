@@ -1234,15 +1234,13 @@ public class SleighLanguage implements Language {
 		ManualEntry manualEntry = null;
 		int maxInCommon = -1;
 
-		Iterator<Entry<String, ManualEntry>> ii = subMap.entrySet().iterator();
-		while (ii.hasNext()) {
-			Entry<String, ManualEntry> mapEntry = ii.next();
-			String key = mapEntry.getKey();
-			if (instruction.startsWith(key) && key.length() > maxInCommon) {
-				manualEntry = mapEntry.getValue();
-				maxInCommon = key.length();
-			}
-		}
+        for (Entry<String, ManualEntry> mapEntry : subMap.entrySet()) {
+            String key = mapEntry.getKey();
+            if (instruction.startsWith(key) && key.length() > maxInCommon) {
+                manualEntry = mapEntry.getValue();
+                maxInCommon = key.length();
+            }
+        }
 
 		if (manualEntry == null) {
 			return manual.get(null);
@@ -1298,102 +1296,87 @@ public class SleighLanguage implements Language {
 		ResourceFile currentManual = null;
 		ResourceFile defaultManual = null;
 		String missingDescription = "(no information available)";
-		Reader fr = null;
-		BufferedReader buff = null;
-		try {
-			fr = new InputStreamReader(processorFile.getInputStream());
-			buff = new BufferedReader(fr);
-			String line;
-			while ((line = buff.readLine()) != null) {
-				Matcher matcher = COMMENT.matcher(line);
-				if (matcher.find()) {
-					continue; // skip comment line
-				}
-				matcher = FILE_INCLUDE.matcher(line);
-				if (matcher.find()) {
-					String includeFilePath = matcher.group(1).trim();
-					ResourceFile includedIndexFile =
-						new ResourceFile(manualDirectory, includeFilePath);
-					FileResolutionResult result =
-						FileUtilities.existsAndIsCaseDependent(includedIndexFile);
-					if (!result.isOk()) {
-						throw new SleighException("manual index file " + includedIndexFile +
-							" is not properly case dependent: " + result.getMessage());
-					}
-					loadIndex(includedIndexFile);
-				}
-				else {
-					matcher = FILE_SWITCH_WITH_DESCRIPTION.matcher(line);
-					if (matcher.find()) {
-						if (SystemUtilities.isInDevelopmentMode()) {
-							// Search across repositories in development mode
-							currentManual = Application
-									.findDataFileInAnyModule("manuals/" + matcher.group(1).trim());
-						}
-						if (currentManual == null) {
-							currentManual =
-								new ResourceFile(manualDirectory, matcher.group(1).trim());
-						}
-						FileResolutionResult result =
-							FileUtilities.existsAndIsCaseDependent(currentManual);
-						missingDescription = matcher.group(2).trim();
-						if (defaultManual == null) {
-							defaultManual = currentManual;
-						}
-						if (!result.isOk()) {
-							// Since we do not always deliver manuals, generate warning only
-							Msg.warn(this,
-								"manual file " + currentManual +
-									" not found or is not properly case dependent.\n  >>  " +
-									missingDescription);
-						}
-					}
-					else {
-						matcher = FILE_SWITCH.matcher(line);
-						if (matcher.find()) {
-							currentManual =
-								new ResourceFile(manualDirectory, matcher.group(1).trim());
-							FileResolutionResult result =
-								FileUtilities.existsAndIsCaseDependent(currentManual);
-							if (!result.isOk()) {
-								throw new SleighException("manual file " + currentManual +
-									" is not properly case dependent: " + result.getMessage());
-							}
-							missingDescription = "(no information available)";
-							if (defaultManual == null) {
-								defaultManual = currentManual;
-							}
-						}
-						else {
-							matcher = INSTRUCTION.matcher(line);
-							if (matcher.find()) {
-								if (currentManual == null) {
-									throw new IOException("index file " + processorFile +
-										" does not specify manual first");
-								}
-								String mnemonic = matcher.group(1).trim().toUpperCase();
-								String page = matcher.group(2).trim();
-								ManualEntry entry = new ManualEntry(mnemonic,
-									currentManual.getAbsolutePath(), missingDescription, page);
-								manual.put(mnemonic, entry);
-							}
-						}
-					}
-				}
-			}
-			if (defaultManual != null) {
-				manual.put(null, new ManualEntry(null, defaultManual.getAbsolutePath(),
-					missingDescription, null));
-			}
-		}
-		finally {
-			if (fr != null) {
-				fr.close();
-			}
-			if (buff != null) {
-				buff.close();
-			}
-		}
+        try (Reader fr = new InputStreamReader(processorFile.getInputStream()); BufferedReader buff = new BufferedReader(fr)) {
+            String line;
+            while ((line = buff.readLine()) != null) {
+                Matcher matcher = COMMENT.matcher(line);
+                if (matcher.find()) {
+                    continue; // skip comment line
+                }
+                matcher = FILE_INCLUDE.matcher(line);
+                if (matcher.find()) {
+                    String includeFilePath = matcher.group(1).trim();
+                    ResourceFile includedIndexFile =
+                            new ResourceFile(manualDirectory, includeFilePath);
+                    FileResolutionResult result =
+                            FileUtilities.existsAndIsCaseDependent(includedIndexFile);
+                    if (!result.isOk()) {
+                        throw new SleighException("manual index file " + includedIndexFile +
+                                " is not properly case dependent: " + result.getMessage());
+                    }
+                    loadIndex(includedIndexFile);
+                } else {
+                    matcher = FILE_SWITCH_WITH_DESCRIPTION.matcher(line);
+                    if (matcher.find()) {
+                        if (SystemUtilities.isInDevelopmentMode()) {
+                            // Search across repositories in development mode
+                            currentManual = Application
+                                    .findDataFileInAnyModule("manuals/" + matcher.group(1).trim());
+                        }
+                        if (currentManual == null) {
+                            currentManual =
+                                    new ResourceFile(manualDirectory, matcher.group(1).trim());
+                        }
+                        FileResolutionResult result =
+                                FileUtilities.existsAndIsCaseDependent(currentManual);
+                        missingDescription = matcher.group(2).trim();
+                        if (defaultManual == null) {
+                            defaultManual = currentManual;
+                        }
+                        if (!result.isOk()) {
+                            // Since we do not always deliver manuals, generate warning only
+                            Msg.warn(this,
+                                    "manual file " + currentManual +
+                                            " not found or is not properly case dependent.\n  >>  " +
+                                            missingDescription);
+                        }
+                    } else {
+                        matcher = FILE_SWITCH.matcher(line);
+                        if (matcher.find()) {
+                            currentManual =
+                                    new ResourceFile(manualDirectory, matcher.group(1).trim());
+                            FileResolutionResult result =
+                                    FileUtilities.existsAndIsCaseDependent(currentManual);
+                            if (!result.isOk()) {
+                                throw new SleighException("manual file " + currentManual +
+                                        " is not properly case dependent: " + result.getMessage());
+                            }
+                            missingDescription = "(no information available)";
+                            if (defaultManual == null) {
+                                defaultManual = currentManual;
+                            }
+                        } else {
+                            matcher = INSTRUCTION.matcher(line);
+                            if (matcher.find()) {
+                                if (currentManual == null) {
+                                    throw new IOException("index file " + processorFile +
+                                            " does not specify manual first");
+                                }
+                                String mnemonic = matcher.group(1).trim().toUpperCase();
+                                String page = matcher.group(2).trim();
+                                ManualEntry entry = new ManualEntry(mnemonic,
+                                        currentManual.getAbsolutePath(), missingDescription, page);
+                                manual.put(mnemonic, entry);
+                            }
+                        }
+                    }
+                }
+            }
+            if (defaultManual != null) {
+                manual.put(null, new ManualEntry(null, defaultManual.getAbsolutePath(),
+                        missingDescription, null));
+            }
+        }
 	}
 
 	@Override

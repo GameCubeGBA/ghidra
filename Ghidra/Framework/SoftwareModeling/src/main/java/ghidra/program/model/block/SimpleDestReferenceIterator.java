@@ -247,69 +247,68 @@ public class SimpleDestReferenceIterator implements CodeBlockReferenceIterator {
 
 			// Follow pointer - could have multiple references 			
 			Reference[] refs = primitive.getReferencesFrom();
-			for (int i = 0; i < refs.length; i++) {
-				
-				monitor.checkCanceled();
-				
-				CodeBlock destBlock = null;
-				
-				Address toAddr = refs[i].getToAddress();
-				if (toAddr.isMemoryAddress()) {
-				
-					CodeUnit cu = listing.getCodeUnitAt(toAddr);
-						
-					if (cu != null) {
-						
-						// Handle instruction reference
-						if (cu instanceof Instruction) {
-							if (blockRefQueue != null) {
-								destBlock = model.getFirstCodeBlockContaining(toAddr, monitor);
-							}				
-						}
-						
-						// Skip indirect defined-data destinations
-						else if ((cu instanceof Data) && ((Data)cu).isDefined()) {
-							continue;
-						}
-					}
-				}
-				else if (toAddr.isExternalAddress()) {
-					if (!includeExternals) {
-						continue;
-					}
-					if (blockRefQueue != null) {
-						destBlock = model.getFirstCodeBlockContaining(toAddr, monitor);
-					}	
-				}
-					
-				// Queue block reference
-				if (blockRefQueue != null) {
-					
-					if (destBlock == null) {						
-						// means that there will not be a good destination block there,
-				        //    make an invalid destination block
-				        //  TODO: This might not be the right thing to do.  Return a
-				        //        codeBlock that really isn't there, but should be if
-				        //        there were valid instructions.  If you got it's start
-				        //        address then got the block starting at from the model,
-				        //        you would get null, so maybe the model should be changed
-				        //        to return a block at this address....
+            for (Reference ref : refs) {
 
-						// Create artificial block at bad destination
-						destBlock = model.createSimpleDataBlock(toAddr, toAddr);
-					}
+                monitor.checkCanceled();
 
-					blockRefQueue.add(
-						new CodeBlockReferenceImpl(
-							srcBlock,
-							destBlock,
-							indirectFlowType,
-							toAddr,
-							srcRef.getFromAddress()));
-				}
-				++cnt;
-				
-			}  			
+                CodeBlock destBlock = null;
+
+                Address toAddr = ref.getToAddress();
+                if (toAddr.isMemoryAddress()) {
+
+                    CodeUnit cu = listing.getCodeUnitAt(toAddr);
+
+                    if (cu != null) {
+
+                        // Handle instruction reference
+                        if (cu instanceof Instruction) {
+                            if (blockRefQueue != null) {
+                                destBlock = model.getFirstCodeBlockContaining(toAddr, monitor);
+                            }
+                        }
+
+                        // Skip indirect defined-data destinations
+                        else if ((cu instanceof Data) && ((Data) cu).isDefined()) {
+                            continue;
+                        }
+                    }
+                } else if (toAddr.isExternalAddress()) {
+                    if (!includeExternals) {
+                        continue;
+                    }
+                    if (blockRefQueue != null) {
+                        destBlock = model.getFirstCodeBlockContaining(toAddr, monitor);
+                    }
+                }
+
+                // Queue block reference
+                if (blockRefQueue != null) {
+
+                    if (destBlock == null) {
+                        // means that there will not be a good destination block there,
+                        //    make an invalid destination block
+                        //  TODO: This might not be the right thing to do.  Return a
+                        //        codeBlock that really isn't there, but should be if
+                        //        there were valid instructions.  If you got it's start
+                        //        address then got the block starting at from the model,
+                        //        you would get null, so maybe the model should be changed
+                        //        to return a block at this address....
+
+                        // Create artificial block at bad destination
+                        destBlock = model.createSimpleDataBlock(toAddr, toAddr);
+                    }
+
+                    blockRefQueue.add(
+                            new CodeBlockReferenceImpl(
+                                    srcBlock,
+                                    destBlock,
+                                    indirectFlowType,
+                                    toAddr,
+                                    srcRef.getFromAddress()));
+                }
+                ++cnt;
+
+            }
     	}
     	return cnt;
     }

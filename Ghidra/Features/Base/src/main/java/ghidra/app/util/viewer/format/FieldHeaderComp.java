@@ -324,24 +324,23 @@ public class FieldHeaderComp extends JPanel {
 			FieldFactory[] factorys = model.getFactorys(i);
 			int nfields = factorys.length;
 			int startX = 0;
-			for (int j = 0; j < nfields; j++) {
-				String name = factorys[j].getFieldText();
-				int startY = i * rowHeight;
-				int width = factorys[j].getWidth();
-				int height = rowHeight;
-				label.setText(name);
-				label.setEnabled(factorys[j].isEnabled());
-				if (factorys[j] == selectedFactory) {
-					label.setBackground(highlightButtonColor);
-				}
-				else {
-					label.setBackground(buttonColor);
-				}
+            for (FieldFactory factory : factorys) {
+                String name = factory.getFieldText();
+                int startY = i * rowHeight;
+                int width = factory.getWidth();
+                int height = rowHeight;
+                label.setText(name);
+                label.setEnabled(factory.isEnabled());
+                if (factory == selectedFactory) {
+                    label.setBackground(highlightButtonColor);
+                } else {
+                    label.setBackground(buttonColor);
+                }
 
-				renderPane.paintComponent(g, label, this, startX, startY, width, height, true);
+                renderPane.paintComponent(g, label, this, startX, startY, width, height, true);
 
-				startX += width;
-			}
+                startX += width;
+            }
 		}
 		if (moving != null) {
 			label.setText(moving.name);

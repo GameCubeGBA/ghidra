@@ -57,47 +57,43 @@ public class CreateHelpTemplateScript extends GhidraScript {
 
 	private void writeHelpFile(PluginTool tool, Plugin plugin, File outputFile)
 			throws FileNotFoundException, CancelledException {
-		PrintWriter printWriter = new PrintWriter(outputFile);
-		try {
-			printWriter.println(
-				"<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
-			printWriter.println("<html>");
-			printWriter.println("");
-			printWriter.println("<head>");
-			printWriter.println("\t" + "<title>" + plugin.getName() + "</title>");
-			printWriter.println("\t" +
-				"<link rel=\"stylesheet\" type=\"text/css\" href=\"../../shared/Frontpage.css\">");
-			printWriter.println("</head>");
-			printWriter.println("");
-			printWriter.println("<body>");
-			printWriter.println("");
-			printWriter.println("<h1>" + plugin.getName() + "</h1>");
-			printWriter.println("");
-			printWriter.println("<h2>Introduction</h2>");
-			printWriter.println("\t\t" + "<blockquote>");
-			printWriter.println("");
-			printWriter.println("\t\t" + "</blockquote>");
-			printWriter.println("");
-			printWriter.println("<h2>Actions</h2>");
-			printWriter.println("");
-			printWriter.println("<blockquote>");
-			List<DockingActionIf> actions = getActions(tool, plugin);
-			for (DockingActionIf action : actions) {
-				monitor.checkCanceled();
-				printWriter.println("\t" + "<h3><A name=\"" + action.getName().replace(' ', '_') +
-					"\"></A>" + action.getName() + "</h3>");
-				printWriter.println("\t\t" + "<blockquote>");
-				printWriter.println("");
-				printWriter.println("\t\t" + "</blockquote>");
-			}
-			printWriter.println("");
-			printWriter.println("</blockquote>");
-			printWriter.println("</body>");
-			printWriter.println("</html>");
-		}
-		finally {
-			printWriter.close();
-		}
+        try (PrintWriter printWriter = new PrintWriter(outputFile)) {
+            printWriter.println(
+                    "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
+            printWriter.println("<html>");
+            printWriter.println("");
+            printWriter.println("<head>");
+            printWriter.println("\t" + "<title>" + plugin.getName() + "</title>");
+            printWriter.println("\t" +
+                    "<link rel=\"stylesheet\" type=\"text/css\" href=\"../../shared/Frontpage.css\">");
+            printWriter.println("</head>");
+            printWriter.println("");
+            printWriter.println("<body>");
+            printWriter.println("");
+            printWriter.println("<h1>" + plugin.getName() + "</h1>");
+            printWriter.println("");
+            printWriter.println("<h2>Introduction</h2>");
+            printWriter.println("\t\t" + "<blockquote>");
+            printWriter.println("");
+            printWriter.println("\t\t" + "</blockquote>");
+            printWriter.println("");
+            printWriter.println("<h2>Actions</h2>");
+            printWriter.println("");
+            printWriter.println("<blockquote>");
+            List<DockingActionIf> actions = getActions(tool, plugin);
+            for (DockingActionIf action : actions) {
+                monitor.checkCanceled();
+                printWriter.println("\t" + "<h3><A name=\"" + action.getName().replace(' ', '_') +
+                        "\"></A>" + action.getName() + "</h3>");
+                printWriter.println("\t\t" + "<blockquote>");
+                printWriter.println("");
+                printWriter.println("\t\t" + "</blockquote>");
+            }
+            printWriter.println("");
+            printWriter.println("</blockquote>");
+            printWriter.println("</body>");
+            printWriter.println("</html>");
+        }
 	}
 
 	private List<DockingActionIf> getActions(PluginTool tool, Plugin plugin) {

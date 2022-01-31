@@ -422,23 +422,12 @@ public class IndexedLocalFileSystem extends LocalFileSystem {
 
 	public static int readIndexVersion(String rootPath) throws IOException {
 		File indexFile = new File(rootPath, INDEX_FILE);
-		BufferedReader indexReader = null;
-		try {
-			indexReader = new BufferedReader(new InputStreamReader(
-				new BufferedInputStream(new FileInputStream(indexFile)), "UTF8"));
-			return getIndexVersion(indexReader.readLine());
-		}
-		finally {
-			if (indexReader != null) {
-				try {
-					indexReader.close();
-				}
-				catch (IOException e) {
-					// ignore
-				}
-			}
-		}
-	}
+        try (BufferedReader indexReader = new BufferedReader(new InputStreamReader(
+                new BufferedInputStream(new FileInputStream(indexFile)), "UTF8"))) {
+            return getIndexVersion(indexReader.readLine());
+        }
+        // ignore
+    }
 
 	private void readIndex() throws IndexReadException {
 
@@ -461,63 +450,48 @@ public class IndexedLocalFileSystem extends LocalFileSystem {
 
 		String md5Str = null;
 		String idLine = null;
-		BufferedReader indexReader = null;
-		try {
-			indexReader = new BufferedReader(new InputStreamReader(
-				new BufferedInputStream(new FileInputStream(indexFile)), "UTF8"));
-			String line = indexReader.readLine();
-			if (checkIndexVersion(line)) {
-				// version line consumed - read next line
-				line = indexReader.readLine();
-			}
-			Folder currentFolder = null;
-			while (line != null) {
-				if (line.startsWith(MD5_PREFIX)) {
-					// should be last line in file
-					md5Str = line.substring(MD5_PREFIX.length());
-				}
-				else if (line.startsWith(NEXT_FILE_INDEX_ID_PREFIX)) {
-					// should immediately proceed MD5 line
-					md5Str = null;
-					digest(line, messageDigest);
-					idLine = line.substring(NEXT_FILE_INDEX_ID_PREFIX.length());
-				}
-				else {
-					md5Str = null;
-					idLine = null;
-					if (line.startsWith(SEPARATOR)) {
-						digest(line, messageDigest);
-						currentFolder = getFolder(line, GetFolderOption.CREATE);
-					}
-					else {
-						String entry = line.substring(INDEX_ITEM_INDENT.length());
-						digest(entry, messageDigest);
-						if (parseIndexItem(currentFolder, entry) == null) {
-							throw new IOException("Invalid filesystem index: " + indexFile);
-						}
-					}
-				}
-				line = indexReader.readLine();
-			}
-		}
-		catch (Exception e) {
-			if (e instanceof IndexVersionException) {
-				throw (IndexVersionException) e;
-			}
-			throw new IndexReadException("Filesystem Index error: " + indexFile, e);
-		}
-		finally {
-			if (indexReader != null) {
-				try {
-					indexReader.close();
-				}
-				catch (IOException e) {
-					// ignore
-				}
-			}
-		}
+        try (BufferedReader indexReader = new BufferedReader(new InputStreamReader(
+                new BufferedInputStream(new FileInputStream(indexFile)), "UTF8"))) {
+            String line = indexReader.readLine();
+            if (checkIndexVersion(line)) {
+                // version line consumed - read next line
+                line = indexReader.readLine();
+            }
+            Folder currentFolder = null;
+            while (line != null) {
+                if (line.startsWith(MD5_PREFIX)) {
+                    // should be last line in file
+                    md5Str = line.substring(MD5_PREFIX.length());
+                } else if (line.startsWith(NEXT_FILE_INDEX_ID_PREFIX)) {
+                    // should immediately proceed MD5 line
+                    md5Str = null;
+                    digest(line, messageDigest);
+                    idLine = line.substring(NEXT_FILE_INDEX_ID_PREFIX.length());
+                } else {
+                    md5Str = null;
+                    idLine = null;
+                    if (line.startsWith(SEPARATOR)) {
+                        digest(line, messageDigest);
+                        currentFolder = getFolder(line, GetFolderOption.CREATE);
+                    } else {
+                        String entry = line.substring(INDEX_ITEM_INDENT.length());
+                        digest(entry, messageDigest);
+                        if (parseIndexItem(currentFolder, entry) == null) {
+                            throw new IOException("Invalid filesystem index: " + indexFile);
+                        }
+                    }
+                }
+                line = indexReader.readLine();
+            }
+        } catch (Exception e) {
+            if (e instanceof IndexVersionException) {
+                throw (IndexVersionException) e;
+            }
+            throw new IndexReadException("Filesystem Index error: " + indexFile, e);
+        }
+        // ignore
 
-		try {
+        try {
 			nextFileIndexID = NumericUtilities.parseHexLong(idLine);
 		}
 		catch (Exception e) {

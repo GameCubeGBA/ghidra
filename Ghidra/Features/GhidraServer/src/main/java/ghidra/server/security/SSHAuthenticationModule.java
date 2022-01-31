@@ -88,12 +88,12 @@ public class SSHAuthenticationModule {
 
 	public boolean hasSignedSSHCallback(Callback[] callbacks) {
 		if (callbacks != null) {
-			for (int i = 0; i < callbacks.length; i++) {
-				if (callbacks[i] instanceof SSHSignatureCallback) {
-					SSHSignatureCallback sshCb = (SSHSignatureCallback) callbacks[i];
-					return sshCb.isSigned();
-				}
-			}
+            for (Callback callback : callbacks) {
+                if (callback instanceof SSHSignatureCallback) {
+                    SSHSignatureCallback sshCb = (SSHSignatureCallback) callback;
+                    return sshCb.isSigned();
+                }
+            }
 		}
 		return false;
 	}
@@ -154,14 +154,14 @@ public class SSHAuthenticationModule {
 		NameCallback nameCb = null;
 		SSHSignatureCallback sshCb = null;
 		if (callbacks != null) {
-			for (int i = 0; i < callbacks.length; i++) {
-				if (callbacks[i] instanceof NameCallback) {
-					nameCb = (NameCallback) callbacks[i];
-				}
-				if (callbacks[i] instanceof SSHSignatureCallback) {
-					sshCb = (SSHSignatureCallback) callbacks[i];
-				}
-			}
+            for (Callback callback : callbacks) {
+                if (callback instanceof NameCallback) {
+                    nameCb = (NameCallback) callback;
+                }
+                if (callback instanceof SSHSignatureCallback) {
+                    sshCb = (SSHSignatureCallback) callback;
+                }
+            }
 		}
 
 		if (nameCallbackAllowed && nameCb != null) {

@@ -161,12 +161,11 @@ public class VersionControlUndoCheckOutAction extends VersionControlAction {
 		@Override
 		public void run(TaskMonitor monitor) {
 			try {
-				for (int i = 0; i < unmodifiedCheckOutsList.size(); i++) {
-					DomainFile df = unmodifiedCheckOutsList.get(i);
-					if (df.isCheckedOut()) {
-						df.undoCheckout(false);
-					}
-				}
+                for (DomainFile df : unmodifiedCheckOutsList) {
+                    if (df.isCheckedOut()) {
+                        df.undoCheckout(false);
+                    }
+                }
 				for (DomainFile currentDF : modifiedCheckedOutFiles) {
 					monitor.checkCanceled();
 					monitor.setMessage("Undoing Check Out " + currentDF.getName());

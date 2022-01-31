@@ -76,9 +76,9 @@ public class LabelHistoryAction extends ListingContextAction {
 	private List<LabelHistory> getHistoryList(Program program, Address addr) {
 		List<LabelHistory> list = new ArrayList<LabelHistory>();
 		LabelHistory[] history = program.getSymbolTable().getLabelHistory(addr);
-		for (int i = 0; i < history.length; i++) {
-			list.add(history[i]);
-		}
+        for (LabelHistory labelHistory : history) {
+            list.add(labelHistory);
+        }
 		return list;
 	}
 

@@ -75,11 +75,10 @@ public class SubroutineMatch {
 			}
 			Address [] newOne = new Address[cnt];
 			cnt = 0;
-			for( int i=0; i< progAAddrs.length; i++ )
-			{
-				if( progAAddrs[i] != null)
-					newOne[cnt++] = progAAddrs[i];
-			}
+            for (Address progAAddr : progAAddrs) {
+                if (progAAddr != null)
+                    newOne[cnt++] = progAAddr;
+            }
 			this.progAAddrs = newOne;
 		} else {
 			for( int i=0; i< progBAddrs.length; i++ )
@@ -91,11 +90,10 @@ public class SubroutineMatch {
 			}
 			Address [] newOne = new Address[cnt];
 			cnt = 0;
-			for( int i=0; i< progBAddrs.length; i++ )
-			{
-				if( progBAddrs[i] != null)
-					newOne[cnt++] = progBAddrs[i];
-			}
+            for (Address progBAddr : progBAddrs) {
+                if (progBAddr != null)
+                    newOne[cnt++] = progBAddr;
+            }
 			this.progBAddrs = newOne;
 		}
 		return false;

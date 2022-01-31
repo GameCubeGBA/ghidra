@@ -179,18 +179,17 @@ class ToolConnectionImpl implements ToolConnection, ToolListener {
 	public void restoreFromXml(Element root) {
 		listenerAdded = false;
 
-		Iterator<?> iter = root.getChildren("EVENT").iterator();
-		while (iter.hasNext()) {
-			Element elem = (Element) iter.next();
-			String name = elem.getAttributeValue("NAME");
-			String state = elem.getAttributeValue("CONNECTED");
-			boolean connected = (state != null && state.equalsIgnoreCase("true"));
-			connectHt.put(name, (connected ? CONNECTED : DISCONNECTED));
-			if (connected && !listenerAdded) {
-				producerTool.addToolListener(this);
-				listenerAdded = true;
-			}
-		}
+        for (Object o : root.getChildren("EVENT")) {
+            Element elem = (Element) o;
+            String name = elem.getAttributeValue("NAME");
+            String state = elem.getAttributeValue("CONNECTED");
+            boolean connected = (state != null && state.equalsIgnoreCase("true"));
+            connectHt.put(name, (connected ? CONNECTED : DISCONNECTED));
+            if (connected && !listenerAdded) {
+                producerTool.addToolListener(this);
+                listenerAdded = true;
+            }
+        }
 	}
 
 	/**
@@ -266,12 +265,11 @@ class ToolConnectionImpl implements ToolConnection, ToolListener {
 		producerList.retainAll(consumerList);
 		consumerList.retainAll(producerList);
 
-		for (int i = 0; i < producerList.size(); i++) {
-			String event = producerList.get(i);
-			if (!connectHt.contains(event)) {
-				connectHt.put(event, DISCONNECTED);
-			}
-		}
+        for (String event : producerList) {
+            if (!connectHt.contains(event)) {
+                connectHt.put(event, DISCONNECTED);
+            }
+        }
 		String[] keys = connectHt.getKeys();
 		for (String key : keys) {
 			if (!producerList.contains(key)) {

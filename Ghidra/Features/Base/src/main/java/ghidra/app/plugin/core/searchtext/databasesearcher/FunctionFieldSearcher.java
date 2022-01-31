@@ -70,19 +70,19 @@ public class FunctionFieldSearcher extends ProgramDatabaseFieldSearcher {
 
 	private void findVariableMatches(Function function, List<ProgramLocation> currentMatches) {
 		Parameter[] parameters = function.getParameters();
-		for (int i = 0; i < parameters.length; i++) {
-			checkTypeString(parameters[i], currentMatches);
-			checkName(parameters[i], currentMatches);
-			checkStorage(parameters[i], currentMatches);
-			checkComment(parameters[i], currentMatches);
-		}
+        for (Parameter parameter : parameters) {
+            checkTypeString(parameter, currentMatches);
+            checkName(parameter, currentMatches);
+            checkStorage(parameter, currentMatches);
+            checkComment(parameter, currentMatches);
+        }
 		Variable[] localVariables = function.getLocalVariables();
-		for (int i = 0; i < localVariables.length; i++) {
-			checkTypeString(localVariables[i], currentMatches);
-			checkName(localVariables[i], currentMatches);
-			checkStorage(localVariables[i], currentMatches);
-			checkComment(localVariables[i], currentMatches);
-		}
+        for (Variable localVariable : localVariables) {
+            checkTypeString(localVariable, currentMatches);
+            checkName(localVariable, currentMatches);
+            checkStorage(localVariable, currentMatches);
+            checkComment(localVariable, currentMatches);
+        }
 
 	}
 

@@ -303,9 +303,9 @@ public class VariousChoicesPanel extends ConflictPanel {
 		ChoiceRow cr = rows.get(rowNum);
 		rowPanel.remove(cr.titleLabel);
 		JComponent[] comps = cr.rb;
-		for (int i = 0; i < comps.length; i++) {
-			rowPanel.remove(comps[i]);
-		}
+        for (JComponent comp : comps) {
+            rowPanel.remove(comp);
+        }
 		rows.remove(rowNum);
 	}
 
@@ -315,22 +315,19 @@ public class VariousChoicesPanel extends ConflictPanel {
 			return 0;
 		}
 		int firstChoice = -1;
-		Iterator<ChoiceRow> iter = rows.iterator();
-		while (iter.hasNext()) {
-			ChoiceRow cr = iter.next();
-			int currentChoice = cr.getChoice();
-			if (cr.hasChoices()) {
-				if (currentChoice == 0) {
-					return 0;
-				}
-				if (firstChoice == -1) {
-					firstChoice = currentChoice;
-				}
-				else if (currentChoice != firstChoice) {
-					return 0;
-				}
-			}
-		}
+        for (ChoiceRow cr : rows) {
+            int currentChoice = cr.getChoice();
+            if (cr.hasChoices()) {
+                if (currentChoice == 0) {
+                    return 0;
+                }
+                if (firstChoice == -1) {
+                    firstChoice = currentChoice;
+                } else if (currentChoice != firstChoice) {
+                    return 0;
+                }
+            }
+        }
 		return (firstChoice != -1) ? firstChoice : 0;
 	}
 
@@ -339,13 +336,11 @@ public class VariousChoicesPanel extends ConflictPanel {
 	 */
 	@Override
 	public boolean allChoicesAreResolved() {
-		Iterator<ChoiceRow> iter = rows.iterator();
-		while (iter.hasNext()) {
-			ChoiceRow cr = iter.next();
-			if (cr.hasChoices() && cr.getChoice() == 0) {
-				return false;
-			}
-		}
+        for (ChoiceRow cr : rows) {
+            if (cr.hasChoices() && cr.getChoice() == 0) {
+                return false;
+            }
+        }
 		return true;
 	}
 
@@ -359,22 +354,19 @@ public class VariousChoicesPanel extends ConflictPanel {
 			return false;
 		}
 		int firstChoice = -1;
-		Iterator<ChoiceRow> iter = rows.iterator();
-		while (iter.hasNext()) {
-			ChoiceRow cr = iter.next();
-			int currentChoice = cr.getChoice();
-			if (cr.hasChoices()) {
-				if (currentChoice == 0) {
-					return false;
-				}
-				if (firstChoice == -1) {
-					firstChoice = currentChoice;
-				}
-				else if (currentChoice != firstChoice) {
-					return false;
-				}
-			}
-		}
+        for (ChoiceRow cr : rows) {
+            int currentChoice = cr.getChoice();
+            if (cr.hasChoices()) {
+                if (currentChoice == 0) {
+                    return false;
+                }
+                if (firstChoice == -1) {
+                    firstChoice = currentChoice;
+                } else if (currentChoice != firstChoice) {
+                    return false;
+                }
+            }
+        }
 		return (firstChoice != -1);
 	}
 
@@ -384,23 +376,19 @@ public class VariousChoicesPanel extends ConflictPanel {
 	@Override
 	public int getNumConflictsResolved() {
 		int count = 0;
-		Iterator<ChoiceRow> iter = rows.iterator();
-		while (iter.hasNext()) {
-			ChoiceRow cr = iter.next();
-			if (cr.getChoice() != 0) {
-				count++;
-			}
-		}
+        for (ChoiceRow cr : rows) {
+            if (cr.getChoice() != 0) {
+                count++;
+            }
+        }
 		return count;
 	}
 
 	@Override
 	public void removeAllListeners() {
-		Iterator<ChoiceRow> iter = rows.iterator();
-		while (iter.hasNext()) {
-			ChoiceRow cr = iter.next();
-			removeListeners(cr);
-		}
+        for (ChoiceRow cr : rows) {
+            removeListeners(cr);
+        }
 	}
 
 	private void removeListeners(ChoiceRow cr) {
@@ -495,11 +483,11 @@ public class VariousChoicesPanel extends ConflictPanel {
 		}
 
 		boolean hasChoices() {
-			for (int i = 0; i < rb.length; i++) {
-				if ((rb[i] instanceof MyRadioButton) || (rb[i] instanceof MyCheckBox)) {
-					return true;
-				}
-			}
+            for (JComponent jComponent : rb) {
+                if ((jComponent instanceof MyRadioButton) || (jComponent instanceof MyCheckBox)) {
+                    return true;
+                }
+            }
 			return false;
 		}
 	}

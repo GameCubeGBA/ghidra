@@ -138,21 +138,21 @@ public class JarWriter {
 
 		if (baseFile.isDirectory()) {
 			subFiles = baseFile.listFiles();
-			for (int i = 0; i < subFiles.length; i++) {
-				if (monitor.isCancelled()) {
-					break;
-				}
-				String newPath = jarPath + baseFile.getName() + File.separator;
-				succeeded = outputRecursively(subFiles[i], newPath, monitor) && succeeded;
-			}
+            for (File subFile : subFiles) {
+                if (monitor.isCancelled()) {
+                    break;
+                }
+                String newPath = jarPath + baseFile.getName() + File.separator;
+                succeeded = outputRecursively(subFile, newPath, monitor) && succeeded;
+            }
 		}
 		else {
 			String name = baseFile.getName();
-			for (int i = 0; i < excludedExtensions.length; i++) {
-				if (name.endsWith(excludedExtensions[i])) {
-					return true;
-				}
-			}
+            for (String excludedExtension : excludedExtensions) {
+                if (name.endsWith(excludedExtension)) {
+                    return true;
+                }
+            }
 			succeeded = outputFile(baseFile, jarPath, monitor);
 		}
 		return succeeded;

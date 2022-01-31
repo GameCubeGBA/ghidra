@@ -86,19 +86,15 @@ public class ResourceFileJavaFileObject implements JavaFileObject {
 	@Override
 	public CharSequence getCharContent(boolean ignoreEncodingErrors) throws IOException {
 		Reader openReader = openReader(true);
-		BufferedReader in = new BufferedReader(openReader);
-		try {
-			StringBuffer buffy = new StringBuffer();
-			String line;
-			while ((line = in.readLine()) != null) {
-				buffy.append(line);
-				buffy.append("\n");
-			}
-			return buffy;
-		}
-		finally {
-			in.close();
-		}
+        try (BufferedReader in = new BufferedReader(openReader)) {
+            StringBuffer buffy = new StringBuffer();
+            String line;
+            while ((line = in.readLine()) != null) {
+                buffy.append(line);
+                buffy.append("\n");
+            }
+            return buffy;
+        }
 	}
 
 	@Override

@@ -238,12 +238,12 @@ public class RepositoryFile {
 			if (!userObj.isAdmin()) {
 				Version[] versions = databaseItem.getVersions();
 				if (version == -1) {
-					for (int i = 0; i < versions.length; i++) {
-						if (!user.equals(versions[i].getUser())) {
-							throw new UserAccessException(getName() + " version " +
-								versions[i].getVersion() + " owned by " + versions[i].getUser());
-						}
-					}
+                    for (Version value : versions) {
+                        if (!user.equals(value.getUser())) {
+                            throw new UserAccessException(getName() + " version " +
+                                    value.getVersion() + " owned by " + value.getUser());
+                        }
+                    }
 				}
 				else if (version == versions[0].getVersion()) {
 					if (!user.equals(versions[0].getUser())) {

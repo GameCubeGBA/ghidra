@@ -143,13 +143,12 @@ public class BoundImportDescriptor implements StructConverter, ByteArrayConverte
 		buffer.append("OffsetModuleName:"+Integer.toHexString(Conv.shortToInt(offsetModuleName))+"["+moduleName+"]"+",");
 		buffer.append("NumberOfModuleForwarderRefs:"+Integer.toHexString(Conv.shortToInt(numberOfModuleForwarderRefs)));
 		buffer.append("\n");
-		for(int i=0;i<forwarders.size();i++) {
-			BoundImportForwarderRef ref = forwarders.get(i);
-			buffer.append("\t"+"TimeStamp:"+Integer.toHexString(ref.getTimeDateStamp())+",");
-			buffer.append("\t"+"OffsetModuleName:"+Integer.toHexString(Conv.shortToInt(ref.getOffsetModuleName()))+"["+ref.getModuleName()+"]"+",");
-			buffer.append("\t"+"Reserved:"+Integer.toHexString(Conv.shortToInt(ref.getReserved())));
-			buffer.append("\n");
-		}
+        for (BoundImportForwarderRef ref : forwarders) {
+            buffer.append("\t" + "TimeStamp:" + Integer.toHexString(ref.getTimeDateStamp()) + ",");
+            buffer.append("\t" + "OffsetModuleName:" + Integer.toHexString(Conv.shortToInt(ref.getOffsetModuleName())) + "[" + ref.getModuleName() + "]" + ",");
+            buffer.append("\t" + "Reserved:" + Integer.toHexString(Conv.shortToInt(ref.getReserved())));
+            buffer.append("\n");
+        }
 		return buffer.toString();
 	}
 
@@ -163,10 +162,9 @@ public class BoundImportDescriptor implements StructConverter, ByteArrayConverte
         struct.add( WORD,"OffsetModuleName",null);
         struct.add( WORD,"NumberOfModuleForwarderRefs",null);
 
-        for(int i=0;i<forwarders.size();i++) {
-            BoundImportForwarderRef ref = forwarders.get(i);
+        for (BoundImportForwarderRef ref : forwarders) {
             struct.add(ref.toDataType());
-		}
+        }
 
         struct.setCategoryPath(new CategoryPath("/PE"));
 

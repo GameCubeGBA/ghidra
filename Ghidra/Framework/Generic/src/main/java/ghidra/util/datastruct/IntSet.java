@@ -38,9 +38,9 @@ public class IntSet {
 	 */
 	public IntSet(int[] values) {
 		this((values.length*3)/4);
-		for(int i=0;i<values.length;i++) {
-			add(values[i]);
-		}
+        for (int value : values) {
+            add(value);
+        }
 	}
 	
 	/**

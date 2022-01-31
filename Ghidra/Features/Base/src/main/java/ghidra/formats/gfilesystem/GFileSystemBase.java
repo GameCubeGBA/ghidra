@@ -138,13 +138,9 @@ public abstract class GFileSystemBase implements GFileSystem {
 		try {
 			if (SystemUtilities.isInDevelopmentMode()) {
 				File file = File.createTempFile(fileName, ".ghidra.tmp");
-				OutputStream out = new FileOutputStream(file);
-				try {
-					out.write(bytes);
-				}
-				finally {
-					out.close();
-				}
+                try (OutputStream out = new FileOutputStream(file)) {
+                    out.write(bytes);
+                }
 			}
 		}
 		catch (IOException e) {//ignore...

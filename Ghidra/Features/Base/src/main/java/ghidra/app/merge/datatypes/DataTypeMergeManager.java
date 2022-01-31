@@ -3371,21 +3371,18 @@ public class DataTypeMergeManager implements MergeResolver {
 				return;
 			}
 			Set<Map<Long, DataType>> keySet = map.keySet();
-			Iterator<Map<Long, DataType>> iterator = keySet.iterator();
-			while (iterator.hasNext()) {
-				Map<Long, DataType> ht = iterator.next();
-				DataType dt = ht.get(id);
-				if (dt instanceof Composite) {
-					int[] indexArray = map.get(ht);
-					if (dt instanceof Union) {
-						cleanUpUnion(indexArray, (Union) dt);
-					}
-					else {
-						cleanUpStructure(indexArray, (Structure) dt);
-					}
-					map.remove(ht); // remove it from the map
-				}
-			}
+            for (Map<Long, DataType> ht : keySet) {
+                DataType dt = ht.get(id);
+                if (dt instanceof Composite) {
+                    int[] indexArray = map.get(ht);
+                    if (dt instanceof Union) {
+                        cleanUpUnion(indexArray, (Union) dt);
+                    } else {
+                        cleanUpStructure(indexArray, (Structure) dt);
+                    }
+                    map.remove(ht); // remove it from the map
+                }
+            }
 			map = null;
 		}
 

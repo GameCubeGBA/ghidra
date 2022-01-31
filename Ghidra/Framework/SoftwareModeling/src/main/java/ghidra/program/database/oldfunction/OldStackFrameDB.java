@@ -89,10 +89,10 @@ class OldStackFrameDB implements StackFrame {
 		try {
 			variables = new ArrayList<Variable>();
 			Field[] keys = adapter.getStackVariableKeys(function.getKey());
-			for (int i = 0; i < keys.length; i++) {
-				DBRecord varRec = adapter.getStackVariableRecord(keys[i].getLongValue());
-				variables.add(getStackVariable(varRec));
-			}
+            for (Field key : keys) {
+                DBRecord varRec = adapter.getStackVariableRecord(key.getLongValue());
+                variables.add(getStackVariable(varRec));
+            }
 			variables.sort(StackVariableComparator.get());
 		}
 		catch (IOException e) {

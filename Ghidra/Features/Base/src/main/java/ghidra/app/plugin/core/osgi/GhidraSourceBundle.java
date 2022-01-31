@@ -860,28 +860,35 @@ public class GhidraSourceBundle extends GhidraBundle {
 			throws OSGiException, IOException {
 		// no manifest, so create one with bndtools
 		Analyzer analyzer = new Analyzer();
-		analyzer.setJar(new Jar(binaryDir.toFile())); // give bnd the contents
-		analyzer.setProperty("Bundle-SymbolicName",
-			GhidraSourceBundle.sourceDirHash(getSourceDirectory()));
-		analyzer.setProperty("Bundle-Version", GENERATED_VERSION);
 
 		if (importPackageValues.isEmpty()) {
 			analyzer.setProperty("Import-Package", "*");
-		}
-		else {
-			// constrain analyzed imports according to what's declared in @importpackage tags
+		} else {
+			// constrain analyzed imports according to what's declared in @importpackage
+			// tags
 			analyzer.setProperty("Import-Package",
-				importPackageValues.stream().collect(Collectors.joining(",")) + ",*");
+					importPackageValues.stream().collect(Collectors.joining(",")) + ",*");
 		}
 
-		analyzer.setProperty("Export-Package", "!*.private.*,!*.internal.*,*");
+		String activatorClassName = null;
+		try {
+			for (Clazz clazz : analyzer.getClassspace().values()) {
+				if (clazz.is(QUERY.IMPLEMENTS,
+						new Instruction("org.osgi.framework.BundleActivator"), analyzer)) {
+					System.err.printf("found BundleActivator class %s\n", clazz);
+					activatorClassName = clazz.toString();
+				}
+			}
+		} catch (Exception e) {
+			summary.print("failed bnd analysis");
+			throw new OSGiException("failed to query classes while searching for activator", e);
+		}
 
 		try {
 			Manifest manifest;
 			try {
 				manifest = analyzer.calcManifest();
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				summary.print("Bad manifest");
 				throw new OSGiException("Failed to calculate manifest by analyzing code", e);
 			}
@@ -895,8 +902,7 @@ public class GhidraSourceBundle extends GhidraBundle {
 			try (OutputStream out = Files.newOutputStream(binaryManifest)) {
 				manifest.write(out);
 			}
-		}
-		finally {
+		} finally {
 			analyzer.close();
 		}
 		return summary.getValue();
@@ -1159,7 +1165,7 @@ public class GhidraSourceBundle extends GhidraBundle {
 			String fileName = p.getFileName().toString();
 			// if f is the class file of an inner class, use the class name
 			int money = fileName.indexOf('$');
-			if (money >= 0) {
+			if (money != -1) {
 				return fileName.substring(0, money);
 			}
 			return fileName.substring(0, fileName.length() - 6); // drop ".class"

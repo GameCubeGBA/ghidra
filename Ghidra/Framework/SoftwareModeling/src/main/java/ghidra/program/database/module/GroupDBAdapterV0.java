@@ -106,12 +106,12 @@ class GroupDBAdapterV0 implements GroupDBAdapter {
 	public DBRecord getParentChildRecord(long parentID, long childID) throws IOException {
 		Field[] keys =
 			parentChildTable.findRecords(new LongField(parentID), TreeManager.PARENT_ID_COL);
-		for (int i = 0; i < keys.length; i++) {
-			DBRecord pcRec = parentChildTable.getRecord(keys[i]);
-			if (pcRec.getLongValue(TreeManager.CHILD_ID_COL) == childID) {
-				return pcRec;
-			}
-		}
+        for (Field key : keys) {
+            DBRecord pcRec = parentChildTable.getRecord(key);
+            if (pcRec.getLongValue(TreeManager.CHILD_ID_COL) == childID) {
+                return pcRec;
+            }
+        }
 		return null;
 	}
 

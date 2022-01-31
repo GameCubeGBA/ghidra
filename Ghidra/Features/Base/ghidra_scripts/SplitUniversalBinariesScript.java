@@ -49,20 +49,15 @@ public class SplitUniversalBinariesScript extends GhidraScript {
 			int processorSize = CpuTypes.getProcessorBitSize(arch.getCpuType());
 
 			File outFile = new File(outputDirectory, ubiFile.getName()+"."+processor+"."+processorSize);
-			OutputStream out = new FileOutputStream(outFile);
-			try {
-				for (int i = offset ; i < offset+size ; i+=4096) {
-					if (i + 4096 < offset+size) {
-						out.write(provider.readBytes(i, 4096));
-					}
-					else {
-						out.write(provider.readBytes(i, offset+size-i));
-					}
-				}
-			}
-			finally {
-				out.close();
-			}
+            try (OutputStream out = new FileOutputStream(outFile)) {
+                for (int i = offset; i < offset + size; i += 4096) {
+                    if (i + 4096 < offset + size) {
+                        out.write(provider.readBytes(i, 4096));
+                    } else {
+                        out.write(provider.readBytes(i, offset + size - i));
+                    }
+                }
+            }
 		}
 	}
 }
