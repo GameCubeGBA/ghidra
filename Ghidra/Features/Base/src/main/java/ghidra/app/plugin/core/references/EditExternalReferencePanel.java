@@ -149,7 +149,7 @@ class EditExternalReferencePanel extends EditReferencePanel {
 	}
 
 	private void extProgNameChanged() {
-		boolean hasText = (extLibName.getText().trim().length() != 0);
+		boolean hasText = (!extLibName.getText().trim().isEmpty());
 		clearButton.setEnabled(hasText);
 		editButton.setEnabled(hasText);
 		extLibPath.setText(null);
@@ -171,7 +171,7 @@ class EditExternalReferencePanel extends EditReferencePanel {
 	private void updateExtLibPath() {
 		String name = extLibName.getText().trim();
 		String path = null;
-		if (name.length() != 0) {
+		if (!name.isEmpty()) {
 			name = name.trim();
 			path = fromCodeUnit.getProgram().getExternalManager().getExternalLibraryPath(name);
 		}
@@ -288,7 +288,7 @@ class EditExternalReferencePanel extends EditReferencePanel {
 		}
 
 		String name = extLibName.getText();
-		if (name == null || name.trim().length() == 0) {
+		if (name == null || name.trim().isEmpty()) {
 			showInputErr("An external program 'Name' must be specified.");
 			return false;
 		}
@@ -308,7 +308,7 @@ class EditExternalReferencePanel extends EditReferencePanel {
 				space.getMaxAddress().toString(false));
 			return false;
 		}
-		if (addr == null && (label == null || label.length() == 0)) {
+		if (addr == null && (label == null || label.isEmpty())) {
 			showInputErr(
 				"Either (or both) an external 'Label' and/or 'Address' must be specified.");
 			return false;

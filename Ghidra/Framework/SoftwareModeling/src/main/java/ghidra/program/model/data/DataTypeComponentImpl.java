@@ -130,7 +130,7 @@ public class DataTypeComponentImpl implements InternalDataTypeComponent, Seriali
 	public void setFieldName(String name) throws DuplicateNameException {
 		if (name != null) {
 			name = name.trim();
-			if (name.length() == 0 || name.equals(getDefaultFieldName())) {
+			if (name.isEmpty() || name.equals(getDefaultFieldName())) {
 				name = null;
 			}
 			else {
@@ -164,7 +164,7 @@ public class DataTypeComponentImpl implements InternalDataTypeComponent, Seriali
 				subname = subname.substring(3);
 				base = 16;
 			}
-			if (subname.length() != 0) {
+			if (!subname.isEmpty()) {
 				try {
 					Integer.parseInt(subname, base);
 					throw new DuplicateNameException("Reserved field name: " + fieldName);

@@ -224,7 +224,7 @@ class SynchronizedTransactionManager extends AbstractTransactionManager {
 
 	@Override
 	synchronized boolean canRedo() {
-		if (redoList.size() > 0) {
+		if (!redoList.isEmpty()) {
 			for (DomainObjectTransactionManager mgr : domainObjectTransactionManagers) {
 				if (mgr.canRedo()) {
 					return true;
@@ -236,7 +236,7 @@ class SynchronizedTransactionManager extends AbstractTransactionManager {
 
 	@Override
 	synchronized boolean canUndo() {
-		if (undoList.size() > 0) {
+		if (!undoList.isEmpty()) {
 			for (DomainObjectTransactionManager mgr : domainObjectTransactionManagers) {
 				if (mgr.canUndo()) {
 					return true;
@@ -248,7 +248,7 @@ class SynchronizedTransactionManager extends AbstractTransactionManager {
 
 	@Override
 	synchronized String getRedoName() {
-		if (redoList.size() > 0) {
+		if (!redoList.isEmpty()) {
 			Transaction t = redoList.getLast();
 			return t.getDescription();
 		}
@@ -257,7 +257,7 @@ class SynchronizedTransactionManager extends AbstractTransactionManager {
 
 	@Override
 	synchronized String getUndoName() {
-		if (undoList.size() > 0) {
+		if (!undoList.isEmpty()) {
 			Transaction t = undoList.getLast();
 			return t.getDescription();
 		}

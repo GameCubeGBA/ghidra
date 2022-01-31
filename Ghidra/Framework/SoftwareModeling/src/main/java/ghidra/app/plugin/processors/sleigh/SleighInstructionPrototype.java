@@ -670,7 +670,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 	@Override
 	public Address[] getFlows(InstructionContext context) {
 
-		if (flowStateList.size() == 0) {
+		if (flowStateList.isEmpty()) {
 			return emptyFlow;
 		}
 
@@ -682,7 +682,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 			return emptyFlow;
 		}
 
-        if (addresses.size() == 0) {
+        if (addresses.isEmpty()) {
 			return emptyFlow;
 		}
 		return addresses.toArray(new Address[addresses.size()]);

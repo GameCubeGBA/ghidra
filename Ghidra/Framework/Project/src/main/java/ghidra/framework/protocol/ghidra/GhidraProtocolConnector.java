@@ -94,7 +94,7 @@ public abstract class GhidraProtocolConnector {
 	 */
 	protected void checkHostInfo() throws MalformedURLException {
 		String host = url.getHost();
-		if (host.length() == 0) {
+		if (host.isEmpty()) {
 			throw new MalformedURLException("missing server host specification");
 		}
 	}
@@ -121,7 +121,7 @@ public abstract class GhidraProtocolConnector {
 			path = path.substring(0, index);
 		}
 
-		if (path.length() == 0) {
+		if (path.isEmpty()) {
 			throw new MalformedURLException("invalid path specification");
 		}
 
@@ -162,7 +162,7 @@ public abstract class GhidraProtocolConnector {
 		}
 		for (int i = 1; i < pieces.length; i++) {
 			String p = pieces[i];
-			if (p.length() == 0) {
+			if (p.isEmpty()) {
 				throw new MalformedURLException("invalid repository path specification");
 			}
 			if (!isFolder && i == (pieces.length - 1)) {
@@ -172,7 +172,7 @@ public abstract class GhidraProtocolConnector {
 				folderPath = folderPath + FileSystem.SEPARATOR + p;
 			}
 		}
-		if (folderPath.length() == 0) {
+		if (folderPath.isEmpty()) {
 			folderPath = FileSystem.SEPARATOR;
 		}
 

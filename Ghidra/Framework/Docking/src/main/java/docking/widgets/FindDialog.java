@@ -96,7 +96,7 @@ public class FindDialog extends DialogComponentProvider {
 
 			private void handleDocumentUpdate() {
 				String text = textField.getText();
-				enableButtons(text.length() != 0);
+				enableButtons(!text.isEmpty());
 			}
 		});
 

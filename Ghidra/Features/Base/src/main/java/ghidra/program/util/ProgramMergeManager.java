@@ -460,13 +460,13 @@ public class ProgramMergeManager {
 
 		merger.reApplyDuplicateEquates();
 		String dupEquatesMessage = merger.getDuplicateEquatesInfo();
-		if (dupEquatesMessage.length() > 0) {
+		if (!dupEquatesMessage.isEmpty()) {
 			infoMsg.append(dupEquatesMessage);
 		}
 
 		merger.reApplyDuplicateSymbols();
 		String dupSymbolsMessage = merger.getDuplicateSymbolsInfo();
-		if (dupSymbolsMessage.length() > 0) {
+		if (!dupSymbolsMessage.isEmpty()) {
 			infoMsg.append(dupSymbolsMessage);
 		}
 

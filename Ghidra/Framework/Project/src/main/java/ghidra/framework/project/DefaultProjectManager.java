@@ -193,7 +193,7 @@ public class DefaultProjectManager implements ProjectManager {
 	@Override
 	public ProjectLocator getLastOpenedProject() {
 		String projectPath = Preferences.getProperty(LAST_OPENED_PROJECT);
-		if (projectPath == null || projectPath.trim().length() == 0) {
+		if (projectPath == null || projectPath.trim().isEmpty()) {
 			return null;
 		}
 		return getLocatorFromProjectPath(projectPath);
@@ -349,7 +349,7 @@ public class DefaultProjectManager implements ProjectManager {
 
 	private File getMostRecentValidProjectDirectory() {
 		List<File> ghidraUserDirsByTime = GenericRunInfo.getPreviousApplicationSettingsDirsByTime();
-		if (ghidraUserDirsByTime.size() == 0) {
+		if (ghidraUserDirsByTime.isEmpty()) {
 			return null;
 		}
 

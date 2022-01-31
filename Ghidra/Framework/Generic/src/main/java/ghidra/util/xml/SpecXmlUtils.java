@@ -40,7 +40,7 @@ import org.xml.sax.*;
 public class SpecXmlUtils {
 
 	static public boolean decodeBoolean(String val) {
-		if (val!=null && val.length()!=0) {
+		if (val!=null && !val.isEmpty()) {
 			switch(val.charAt(0)) {
 			case 'y':
 			case 't':

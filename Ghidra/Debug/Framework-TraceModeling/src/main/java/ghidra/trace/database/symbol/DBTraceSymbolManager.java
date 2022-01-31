@@ -860,7 +860,7 @@ public class DBTraceSymbolManager implements TraceSymbolManager, DBTraceManager 
 	}
 
 	protected static void assertValidName(String name) throws InvalidInputException {
-		if (name == null || name.length() == 0 || !name.matches("\\p{Graph}+")) {
+		if (name == null || name.isEmpty() || !name.matches("\\p{Graph}+")) {
 			throw new InvalidInputException(name);
 		}
 	}

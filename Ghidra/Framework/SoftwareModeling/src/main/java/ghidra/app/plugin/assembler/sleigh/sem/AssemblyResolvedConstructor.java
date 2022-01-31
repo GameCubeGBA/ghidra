@@ -135,7 +135,7 @@ public class AssemblyResolvedConstructor extends AssemblyResolution {
 			ctx = AssemblyPatternBlock.fromString(str.substring(CTX.length(), end));
 			str = str.substring(end);
 		}
-		if (str.length() != 0) {
+		if (!str.isEmpty()) {
 			throw new IllegalArgumentException(str);
 		}
 		return AssemblyResolution.resolved(//

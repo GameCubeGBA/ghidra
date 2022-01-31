@@ -122,7 +122,7 @@ public class CodeUnitFormat {
 				}
 				else {
 					String separator = instr.getSeparator(i);
-					if (separator != null && separator.length() != 0) {
+					if (separator != null && !separator.isEmpty()) {
 						stringBuffer.append(separator);
 					}
 				}
@@ -420,7 +420,7 @@ public class CodeUnitFormat {
 			return false;
 		}
 
-		if (representationList.size() == 0) {
+		if (representationList.isEmpty()) {
 			return false;
 		}
 
@@ -1307,7 +1307,7 @@ public class CodeUnitFormat {
 				namespaceName = parentNamespace.getName(true);
 			}
 		}
-		if (namespaceName.length() != 0 && !namespaceName.endsWith(Namespace.DELIMITER)) {
+		if (!namespaceName.isEmpty() && !namespaceName.endsWith(Namespace.DELIMITER)) {
 			namespaceName += Namespace.DELIMITER;
 		}
 		return namespaceName + name;

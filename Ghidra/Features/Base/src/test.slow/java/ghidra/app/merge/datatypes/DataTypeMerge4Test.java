@@ -1423,7 +1423,7 @@ public class DataTypeMerge4Test extends AbstractDataTypeMergeTest {
 
 		// other Arrays on Bar should exist
 		dtm.findDataTypes("Bar[*", list, false, null);
-		assertTrue(list.size() > 0);
+		assertTrue(!list.isEmpty());
 
 		// should be no .conflict data types
 		checkConflictCount(0);
@@ -1625,7 +1625,7 @@ public class DataTypeMerge4Test extends AbstractDataTypeMergeTest {
 		ArrayList<DataType> list = new ArrayList<DataType>();
 		// other Arrays on Foo should exist
 		dtm.findDataTypes("Foo[*", list, false, null);
-		assertTrue(list.size() > 0);
+		assertTrue(!list.isEmpty());
 
 		// should be no .conflict data types
 		checkConflictCount(0);

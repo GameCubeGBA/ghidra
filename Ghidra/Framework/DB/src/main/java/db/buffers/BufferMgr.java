@@ -1225,7 +1225,7 @@ public class BufferMgr {
 	 * @return true if redo is available
 	 */
 	public boolean hasRedoCheckpoints() {
-		return redoCheckpointHeads.size() != 0;
+		return !redoCheckpointHeads.isEmpty();
 	}
 
 	/**

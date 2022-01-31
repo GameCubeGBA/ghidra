@@ -773,7 +773,7 @@ public class ExternalProgramMerger implements MergeResolver, ListingMergeConstan
 	 * @see ghidra.app.merge.listing.ListingMerger#hasConflict(ghidra.program.model.address.Address)
 	 */
 	public boolean hasConflict() {
-		return (extPgms.size() > 0);
+		return (!extPgms.isEmpty());
 	}
 
 	/* (non-Javadoc)

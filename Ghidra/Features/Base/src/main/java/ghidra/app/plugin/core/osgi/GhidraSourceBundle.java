@@ -766,7 +766,7 @@ public class GhidraSourceBundle extends GhidraBundle {
 			for (BundleRequirement requirement : requirements) {
 				List<ResourceFile> requiringFiles =
 					requirementToSourceFileMap.get(requirement.toString());
-				if (requiringFiles != null && requiringFiles.size() > 0) {
+				if (requiringFiles != null && !requiringFiles.isEmpty()) {
 					writer.printf("  %s, from %s\n", requirement.toString(),
 						requiringFiles.stream()
 								.map(generic.util.Path::toPathString)

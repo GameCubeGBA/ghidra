@@ -220,7 +220,7 @@ public final class DexUtil {
 	 * @return the Ghidra datatype
 	 */
 	public static DataType toDataType(DataTypeManager dtm, String dataTypeString) {
-		if (dataTypeString.length() == 0) {
+		if (dataTypeString.isEmpty()) {
 			return null;
 		}
 		switch (dataTypeString.charAt(0)) {

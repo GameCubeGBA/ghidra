@@ -110,7 +110,7 @@ public class ProgramDataTypeManager extends DataTypeManagerDB
 
 	@Override
 	public void setName(String name) throws InvalidNameException {
-		if (name == null || name.length() == 0) {
+		if (name == null || name.isEmpty()) {
 			throw new InvalidNameException("Name is invalid: " + name);
 		}
 

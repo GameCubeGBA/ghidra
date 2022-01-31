@@ -777,7 +777,7 @@ public class RecoveredClassHelper {
 			classList.remove(recoveredClass);
 		}
 
-		if (classList.size() == 0) {
+		if (classList.isEmpty()) {
 			return null;
 		}
 
@@ -857,7 +857,7 @@ public class RecoveredClassHelper {
 	public Address getStoredVftableAddress(List<OffsetPcodeOpPair> storedPcodeOps)
 			throws CancelledException {
 
-		if (storedPcodeOps.size() > 0) {
+		if (!storedPcodeOps.isEmpty()) {
             // figure out if vftable is referenced
             for (OffsetPcodeOpPair storedPcodeOp : storedPcodeOps) {
                 monitor.checkCanceled();
@@ -1813,7 +1813,7 @@ public class RecoveredClassHelper {
 		Set<Function> functionsContainedInBothSets =
 			getFunctionsContainedInBothSets(constructorKeySet, destructorKeySet);
 
-		if (functionsContainedInBothSets.size() > 0) {
+		if (!functionsContainedInBothSets.isEmpty()) {
 			constructorKeySet.removeAll(functionsContainedInBothSets);
 			destructorKeySet.removeAll(functionsContainedInBothSets);
 			if (constructorKeySet.isEmpty() && destructorKeySet.isEmpty()) {
@@ -1902,7 +1902,7 @@ public class RecoveredClassHelper {
 
 		// create vftable mapping for any class that didn't have a constructor when the
 		// original mappings were created
-		if (recoveredClass.getOrderToVftableMap().size() == 0) {
+		if (recoveredClass.getOrderToVftableMap().isEmpty()) {
 			createVftableOrderMapping(recoveredClass);
 		}
 		
@@ -1969,7 +1969,7 @@ public class RecoveredClassHelper {
 
 		Map<Integer, Address> classOffsetToVftableMap = recoveredClass.getClassOffsetToVftableMap();
 
-		if (classOffsetToVftableMap.size() == 0) {
+		if (classOffsetToVftableMap.isEmpty()) {
 			return;
 		}
 
@@ -3390,7 +3390,7 @@ public class RecoveredClassHelper {
 		List<Symbol> symbolsByNameAtAddress = getSymbolsByNameAtAddress(address, name);
 
 		// if no same name symbol, add new symbol
-		if (symbolsByNameAtAddress.size() == 0) {
+		if (symbolsByNameAtAddress.isEmpty()) {
 			AddLabelCmd lcmd = new AddLabelCmd(address, name, namespace, SourceType.ANALYSIS);
 			if (!lcmd.applyTo(program)) {
 				if (DEBUG) {
@@ -3640,7 +3640,7 @@ public class RecoveredClassHelper {
 			getSymbolsByNameAtAddress(function.getEntryPoint(), name);
 
 		// if no same name symbol, add new symbol
-		if (symbolsByNameAtAddress.size() == 0) {
+		if (symbolsByNameAtAddress.isEmpty()) {
 			AddLabelCmd lcmd =
 				new AddLabelCmd(function.getEntryPoint(), name, namespace, SourceType.ANALYSIS);
 			if (!lcmd.applyTo(program)) {
@@ -3787,7 +3787,7 @@ public class RecoveredClassHelper {
 
 		// if bad structures were found delete and recreate the function and all calling functions
 		// in order to remove the bad data types from the function signature
-		if (badStructureDataTypes.size() > 0) {
+		if (!badStructureDataTypes.isEmpty()) {
 			// find all functions that call this function and do the same
 			fixBadSignatures(function, badStructureDataTypes);
 			// add all the new bad dts to the list of bad ones 
@@ -4075,7 +4075,7 @@ public class RecoveredClassHelper {
 			extendedFlatAPI.getOrderedReferenceAddressPairsFromCallingFunction(constructor);
 
 		// if there are no calls from the function then return false
-		if (orderedReferenceAddressPairsFromCallingFunction.size() == 0) {
+		if (orderedReferenceAddressPairsFromCallingFunction.isEmpty()) {
 			return false;
 		}
 
@@ -4906,7 +4906,7 @@ public class RecoveredClassHelper {
 		// if no ancestor has virtual functions then return the given class's class path
 		List<RecoveredClass> ancestorsWithVirtualFunctions =
 			getAncestorsWithVirtualFunctions(recoveredClass);
-		if (ancestorsWithVirtualFunctions.size() == 0) {
+		if (ancestorsWithVirtualFunctions.isEmpty()) {
 			return classPath;
 		}
 
@@ -5499,7 +5499,7 @@ public class RecoveredClassHelper {
 			getVirtualParentClassStructures(recoveredClass);
 
 		// if there are no virtual parents there will be no internal data		
-		if (virtualParentClassStructures.size() == 0) {
+		if (virtualParentClassStructures.isEmpty()) {
 			return NONE;
 		}
 
@@ -5778,7 +5778,7 @@ public class RecoveredClassHelper {
                         continue;
                     }
 
-                    if (stores.size() == 1 && loads.size() == 0) {
+                    if (stores.size() == 1 && loads.isEmpty()) {
                         recoveredClass.addNonThisDestructor(indeterminateFunction);
                         indeterminateIterator.remove();
                     }
@@ -6062,14 +6062,14 @@ public class RecoveredClassHelper {
                     }
 
                     // inlined constructor
-                    if (stores.size() > 1 && loads.size() == 0) {
+                    if (stores.size() > 1 && loads.isEmpty()) {
                         processInlineConstructor(recoveredClass, inlineFunction,
                                 referenceToClassMap);
                         isConstructor = true;
                     }
 
                     // inlined destructor
-                    else if (stores.size() == 1 && loads.size() > 0) {
+                    else if (stores.size() == 1 && !loads.isEmpty()) {
                         processInlineDestructor(recoveredClass, inlineFunction,
                                 referenceToClassMap);
                         isDestructor = true;
@@ -6220,10 +6220,10 @@ public class RecoveredClassHelper {
                     continue;
                 }
 
-                if (stores.size() > 1 && loads.size() == 0) {
+                if (stores.size() > 1 && loads.isEmpty()) {
                     addConstructorToClass(recoveredClass, indeterminateFunction);
                     indeterminateIterator.remove();
-                } else if (stores.size() == 1 && loads.size() > 0) {
+                } else if (stores.size() == 1 && !loads.isEmpty()) {
                     addDestructorToClass(recoveredClass, indeterminateFunction);
                     indeterminateIterator.remove();
                 }

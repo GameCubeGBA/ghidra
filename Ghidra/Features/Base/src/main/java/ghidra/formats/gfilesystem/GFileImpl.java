@@ -83,7 +83,7 @@ public class GFileImpl implements GFile {
 			split[2] = "//" + split[2];
 		}
 		for (int i = 0; i < split.length - 1; ++i) {
-			if (split[i].length() == 0) {
+			if (split[i].isEmpty()) {
 				continue;
 			}
 			parent = fromFilename(fileSystem, parent, split[i], true, -1, null);

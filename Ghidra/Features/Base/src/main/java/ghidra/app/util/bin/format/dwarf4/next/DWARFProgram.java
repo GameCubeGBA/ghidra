@@ -931,7 +931,7 @@ public class DWARFProgram implements Closeable {
 
 		monitor.setMaximum(getCompilationUnits().size());
 
-		if (getCompilationUnits().size() > 0 &&
+		if (!getCompilationUnits().isEmpty() &&
 			getCompilationUnits().get(0).getCompileUnit().hasDWO()) {
 			// probably won't get anything from the file because its all in an external DWO
 			Msg.warn(this,

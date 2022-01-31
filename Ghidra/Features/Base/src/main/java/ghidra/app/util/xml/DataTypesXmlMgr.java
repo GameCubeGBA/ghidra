@@ -599,7 +599,7 @@ public class DataTypesXmlMgr {
 	}
 
 	private void writeRegularComment(XmlWriter writer, String comment) {
-		if (comment != null && comment.length() > 0) {
+		if (comment != null && !comment.isEmpty()) {
 			writer.writeElement("REGULAR_CMT", null, comment);
 		}
 	}

@@ -151,7 +151,7 @@ public class CreateStructureDialog extends DialogComponentProvider {
 			private void checkText(Document document) {
 				try {
 					String text = document.getText(0, document.getLength());
-					if ((text == null) || (text.trim().length() == 0)) {
+					if ((text == null) || (text.trim().isEmpty())) {
 						okButton.setEnabled(false);
 						updateStatusText(true, null);
 					}

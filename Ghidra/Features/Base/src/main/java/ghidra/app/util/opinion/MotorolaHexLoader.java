@@ -217,7 +217,7 @@ public class MotorolaHexLoader extends AbstractProgramLoader {
 		String blockName = getBlockName(options);
 		boolean isOverlay = isOverlay(options);
 
-		if (blockName == null || blockName.length() == 0) {
+		if (blockName == null || blockName.isEmpty()) {
 			blockName = generateBlockName(program, isOverlay, baseAddr.getAddressSpace());
 		}
 

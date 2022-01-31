@@ -62,7 +62,7 @@ public class JarEntryNode {
 			return "";
 		}
 		String parentPath = parent.getPath();
-		return parentPath.length() == 0 ? name : parentPath + "/" + name;
+		return parentPath.isEmpty() ? name : parentPath + "/" + name;
 	}
 
 	public List<JarEntryNode> getChildren() {

@@ -1778,7 +1778,7 @@ class ElfProgramBuilder extends MemorySectionResolver implements ElfLoadHelper {
 		// Add versioned symbol as comment only
 		Address address = s.getAddress();
 		String comment = listing.getComment(CodeUnit.PRE_COMMENT, address);
-		if (comment == null || comment.length() == 0) {
+		if (comment == null || comment.isEmpty()) {
 			comment = symName;
 		}
 		else {
@@ -2413,7 +2413,7 @@ class ElfProgramBuilder extends MemorySectionResolver implements ElfLoadHelper {
 						ElfStringTable dynamicStringTable = elf.getDynamicStringTable();
 						if (dynamicStringTable != null) {
 							String str = dynamicStringTable.readString(elf.getReader(), value);
-							if (str != null && str.length() != 0) {
+							if (str != null && !str.isEmpty()) {
 								valueData.setComment(CodeUnit.EOL_COMMENT, str);
 							}
 						}

@@ -351,7 +351,7 @@ public class SpecExtension {
 	 * @return true if the name is valid
 	 */
 	public static boolean isValidFormalName(String formalName) {
-		if (formalName.length() == 0) {
+		if (formalName.isEmpty()) {
 			return false;
 		}
 		for (int i = 0; i < formalName.length(); ++i) {

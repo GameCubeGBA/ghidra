@@ -500,7 +500,7 @@ class Row {
                 temp.add(f);
             }
         }
-		if (temp.size() > 0) {
+		if (!temp.isEmpty()) {
 			Field[] rowFields = new Field[temp.size()];
 			rowFields = temp.toArray(rowFields);
 			temp.clear();

@@ -103,7 +103,7 @@ public class ExpandBlockUpModelTest extends AbstractGhidraHeadedIntegrationTest 
 	public void testSetBadStartAddr() {
 
 		model.setStartAddress(getAddr(0x1003000));
-		assertTrue(model.getMessage().length() > 0);
+		assertTrue(!model.getMessage().isEmpty());
 	}
 
 	@Test
@@ -115,13 +115,13 @@ public class ExpandBlockUpModelTest extends AbstractGhidraHeadedIntegrationTest 
 	@Test
 	public void testSetBadLength() {
 		model.setLength(0x5500);
-		assertTrue(model.getMessage().length() > 0);
+		assertTrue(!model.getMessage().isEmpty());
 
 		model.setLength(0x8000);
-		assertTrue(model.getMessage().length() == 0);
+		assertTrue(model.getMessage().isEmpty());
 
 		model.setLength(-1);
-		assertTrue(model.getMessage().length() > 0);
+		assertTrue(!model.getMessage().isEmpty());
 	}
 
 	@Test
@@ -139,7 +139,7 @@ public class ExpandBlockUpModelTest extends AbstractGhidraHeadedIntegrationTest 
 		model.initialize(block);
 		model.setStartAddress(getAddr(0x1007500));
 		assertTrue(!model.execute());
-		assertTrue(model.getMessage().length() > 0);
+		assertTrue(!model.getMessage().isEmpty());
 	}
 
 	@Test

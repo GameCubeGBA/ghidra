@@ -269,7 +269,7 @@ public class FidFileManager {
 		String[] filePaths = concatenatedFilePaths.split(SEPARATOR);
 		for (String filePath : filePaths) {
 			filePath = filePath.trim();
-			if (filePath.length() == 0) {
+			if (filePath.isEmpty()) {
 				continue;
 			}
 			Path path = new Path(filePath);

@@ -348,7 +348,7 @@ class AnalysisPanel extends JPanel implements PropertyChangeListener {
 			return;
 		}
 		saveName = saveName.trim();
-		if (saveName.length() == 0) {
+		if (saveName.isEmpty()) {
 			return;
 		}
 		File saveFile = getOptionsSaveFile(saveName);
@@ -776,7 +776,7 @@ class AnalysisPanel extends JPanel implements PropertyChangeListener {
 
 	private File getMostRecentApplicationSettingsDirWithSavedOptions() {
 		List<File> ghidraUserDirsByTime = GenericRunInfo.getPreviousApplicationSettingsDirsByTime();
-		if (ghidraUserDirsByTime.size() == 0) {
+		if (ghidraUserDirsByTime.isEmpty()) {
 			return null;
 		}
 

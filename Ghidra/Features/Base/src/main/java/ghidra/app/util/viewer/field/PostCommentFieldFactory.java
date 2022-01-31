@@ -255,7 +255,7 @@ public class PostCommentFieldFactory extends FieldFactory {
 				}
 			}
 		}
-		if (comments.size() > 0) {
+		if (!comments.isEmpty()) {
 			return comments.toArray(new String[0]);
 		}
 		return null;

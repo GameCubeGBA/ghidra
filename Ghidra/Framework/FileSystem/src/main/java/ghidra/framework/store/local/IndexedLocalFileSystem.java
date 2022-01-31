@@ -401,7 +401,7 @@ public class IndexedLocalFileSystem extends LocalFileSystem {
 	 */
 	private static int getIndexVersion(String firstIndexLine) {
 		int indexVersion = -1;
-		if (firstIndexLine != null && firstIndexLine.length() != 0) {
+		if (firstIndexLine != null && !firstIndexLine.isEmpty()) {
 			if (firstIndexLine.startsWith(INDEX_VERSION_PREFIX)) {
 				String versionStr = firstIndexLine.substring(INDEX_VERSION_PREFIX.length());
 				try {
@@ -937,7 +937,7 @@ public class IndexedLocalFileSystem extends LocalFileSystem {
 		indexJournal.open();
 		try {
 			Folder folder = getFolder(folderPath, GetFolderOption.READ_ONLY);
-			if (folder.folders.size() != 0 || folder.items.size() != 0) {
+			if (!folder.folders.isEmpty() || !folder.items.isEmpty()) {
 				throw new FolderNotEmptyException(folderPath + " is not empty");
 			}
 

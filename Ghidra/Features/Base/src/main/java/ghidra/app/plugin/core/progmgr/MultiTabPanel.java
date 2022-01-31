@@ -431,7 +431,7 @@ public class MultiTabPanel extends JPanel {
 	}
 
 	private int getNextProgramIndex(int visibleListIndex, boolean forwardDirection) {
-		boolean hasHiddenPrograms = hiddenTabList.size() != 0;
+		boolean hasHiddenPrograms = !hiddenTabList.isEmpty();
 
 		if (forwardDirection) {
 			visibleListIndex++;

@@ -185,7 +185,7 @@ class EditPluginPathDialog extends DialogComponentProvider {
 	}
 
 	private void setStatusMessage(String msg) {
-		if (msg == null || msg.length() == 0) {
+		if (msg == null || msg.isEmpty()) {
 			msg = EMPTY_STATUS;
 		}
 		statusMessage.setText(msg);

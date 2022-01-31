@@ -594,7 +594,7 @@ public class GhidraServer extends UnicastRemoteObject implements GhidraServerHan
 					hostname = s.substring(3);
 				}
 				hostname = hostname.trim();
-				if (hostname.length() == 0 || hostname.startsWith("-")) {
+				if (hostname.isEmpty() || hostname.startsWith("-")) {
 					displayUsage("Missing -ip hostname");
 					System.exit(-1);
 				}
@@ -610,7 +610,7 @@ public class GhidraServer extends UnicastRemoteObject implements GhidraServerHan
 					bindIp = s.substring(2);
 				}
 				bindIp = bindIp.trim();
-				if (bindIp.length() == 0 || bindIp.startsWith("-")) {
+				if (bindIp.isEmpty() || bindIp.startsWith("-")) {
 					displayUsage("Missing -i interface bind address");
 					System.exit(-1);
 				}
@@ -956,14 +956,14 @@ public class GhidraServer extends UnicastRemoteObject implements GhidraServerHan
 						line = line.substring(0, ix);
 					}
 					line = line.trim();
-					if (line.length() == 0) {
+					if (line.isEmpty()) {
 						continue;
 					}
 					if (!line.endsWith(";")) {
 						throw new IllegalArgumentException(
 							"all filter statements must end with `;`");
 					}
-					if (line.length() != 0) {
+					if (!line.isEmpty()) {
 						buf.append(line);
 					}
 				}

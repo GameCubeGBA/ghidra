@@ -1413,7 +1413,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 
 	@Override
 	public void findDataTypes(String name, List<DataType> list) {
-		if (name == null || name.length() == 0) {
+		if (name == null || name.isEmpty()) {
 			return;
 		}
 		if (name.equals(DataType.DEFAULT.getName())) {
@@ -1445,7 +1445,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 	@Override
 	public void findDataTypes(String name, List<DataType> list, boolean caseSensitive,
 			TaskMonitor monitor) {
-		if (name == null || name.length() == 0) {
+		if (name == null || name.isEmpty()) {
 			return;
 		}
 		if (name.equals(DataType.DEFAULT.getName())) {
@@ -2370,7 +2370,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 			long sourceArchiveIdValue, long universalIdValue)
 			throws IOException {
 		try {
-			if (name == null || name.length() == 0) {
+			if (name == null || name.isEmpty()) {
 				throw new IllegalArgumentException("Data type must have a valid name");
 			}
 			creatingDataType++;
@@ -2439,7 +2439,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 	private TypeDef createTypeDef(TypeDef typedef, String name, Category cat,
 			long sourceArchiveIdValue, long universalIdValue)
 			throws IOException {
-		if (name == null || name.length() == 0) {
+		if (name == null || name.isEmpty()) {
 			throw new IllegalArgumentException("Data type must have a valid name");
 		}
 		DataType dataType = resolve(typedef.getDataType(), getDependencyConflictHandler());
@@ -2454,7 +2454,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 	private Union createUnion(UnionInternal union, String name, CategoryDB category,
 			long sourceArchiveIdValue, long universalIdValue)
 			throws IOException {
-		if (name == null || name.length() == 0) {
+		if (name == null || name.isEmpty()) {
 			throw new IllegalArgumentException("Data type must have a valid name");
 		}
 		try {
@@ -2486,7 +2486,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 
 	private Enum createEnum(Enum enumm, String name, Category cat, long sourceArchiveIdValue,
 			long universalIdValue) throws IOException {
-		if (name == null || name.length() == 0) {
+		if (name == null || name.isEmpty()) {
 			throw new IllegalArgumentException("Data type must have a valid name");
 		}
 		DBRecord record = enumAdapter.createRecord(name, enumm.getDescription(), cat.getID(),
@@ -2697,7 +2697,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 
 	private FunctionDefinition createFunctionDefinition(FunctionDefinition funDef, String name,
 			CategoryDB cat, long sourceArchiveIdValue, long universalIdValue) throws IOException {
-		if (name == null || name.length() == 0) {
+		if (name == null || name.isEmpty()) {
 			throw new IllegalArgumentException("Data type must have a valid name");
 		}
 		try {

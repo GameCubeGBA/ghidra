@@ -123,7 +123,7 @@ public class TestSuiteUtilities {
         HashSet<String> classNames = new HashSet<String>();
 
         String classPath = System.getProperty("java.class.path");
-        if (classPath == null || classPath.trim().length() == 0) {
+        if (classPath == null || classPath.trim().isEmpty()) {
             classPath = System.getProperty("user.dir");
         }
         String javaHome = System.getProperty("java.home");
@@ -229,7 +229,7 @@ public class TestSuiteUtilities {
 		try (JarFile jarFile = new JarFile(jarFilename)) {
 
 			String pkgPath = pkgName != null ? pkgName.replace('.', JAR_FILE_SEPARATOR) : "";
-			if (pkgPath.length() > 0) {
+			if (!pkgPath.isEmpty()) {
 				pkgPath += JAR_FILE_SEPARATOR;
 			}
 			int lastSepIx = pkgPath.length() - 1;
@@ -275,7 +275,7 @@ public class TestSuiteUtilities {
      */
     private static String createClassName(String filename, String pkgName, char fileSep) {
     	String pkgPath = pkgName != null ? pkgName.trim() : "";
-    	if (pkgPath.length() > 0 && !pkgPath.endsWith(".")) {
+    	if (!pkgPath.isEmpty() && !pkgPath.endsWith(".")) {
     		pkgPath += ".";
     	}
     	String name = filename.substring(0, filename.indexOf(".class"));
@@ -304,7 +304,7 @@ public class TestSuiteUtilities {
         HashSet<String> pkgNames = new HashSet<String>();
 
         String classPath = System.getProperty("java.class.path");
-        if (classPath == null || classPath.trim().length() == 0) {
+        if (classPath == null || classPath.trim().isEmpty()) {
             classPath = System.getProperty("user.dir");
         }
         String javaHome = System.getProperty("java.home");
@@ -356,7 +356,7 @@ public class TestSuiteUtilities {
         classPath += pkgPath;
         
         String pkgPrefix = pkgName;
-        if (pkgName != null && pkgName.length() > 0) {
+        if (pkgName != null && !pkgName.isEmpty()) {
         		pkgPrefix += '.';
         }
 
@@ -391,13 +391,13 @@ public class TestSuiteUtilities {
 		try (JarFile jarFile = new JarFile(jarFilename);) {
 
 			String pkgPath = pkgName != null ? pkgName.replace('.', JAR_FILE_SEPARATOR) : "";
-			if (pkgPath.length() > 0) {
+			if (!pkgPath.isEmpty()) {
 				pkgPath += JAR_FILE_SEPARATOR;
 			}
 			int lastSepIx = pkgPath.length() - 1;
 
 			String pkgPrefix = pkgName;
-			if (pkgName != null && pkgName.length() > 0) {
+			if (pkgName != null && !pkgName.isEmpty()) {
 				pkgPrefix += '.';
 			}
 
@@ -519,12 +519,12 @@ public class TestSuiteUtilities {
 					throw new RuntimeException();
 				}
 				String className = args[2];
-				if (className.length() == 0 || !className.matches("[A-Z][a-zA-Z0-9]*?")) {
+				if (className.isEmpty() || !className.matches("[A-Z][a-zA-Z0-9]*?")) {
 					System.err.println("TestUtilities: invalid class name (" + args[2] + ")");
 					throw new RuntimeException();
 				}
 				String pkg = args[3];
-				if (pkg.length() == 0 || !pkg.matches("[a-z][a-zA-Z0-9]*(\\.[a-z][a-zA-Z0-9]*)*")) {
+				if (pkg.isEmpty() || !pkg.matches("[a-z][a-zA-Z0-9]*(\\.[a-z][a-zA-Z0-9]*)*")) {
 					System.err.println("TestUtilities: invalid package name (" + args[3] + ")");
 					throw new RuntimeException();
 				}

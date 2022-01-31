@@ -762,7 +762,7 @@ public abstract class CompositeEditorModel extends CompositeViewerModel implemen
 	protected boolean nameExistsElsewhere(String name, int rowIndex) {
 		if (name != null) {
 			name = name.trim();
-			if (name.length() == 0) {
+			if (name.isEmpty()) {
 				return false;
 			}
 			int numComponents = getNumComponents();

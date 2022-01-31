@@ -77,7 +77,7 @@ public class ItemDeserializer {
 
 			itemName = objIn.readUTF();
 			contentType = objIn.readUTF();
-			if (contentType.length() == 0) {
+			if (contentType.isEmpty()) {
 				contentType = null;
 			}
 			fileType = objIn.readInt();

@@ -173,7 +173,7 @@ public class FGViewUpdater extends VisualGraphViewUpdater<FGVertex, FGEdge> {
 			}
 		}
 
-		if (groupVertices.size() == 0) {
+		if (groupVertices.isEmpty()) {
 			return; // nothing left to ungroup
 		}
 

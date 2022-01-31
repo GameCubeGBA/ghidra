@@ -941,7 +941,7 @@ public class FunctionDB extends DatabaseObject implements Function {
 			var = getResolvedVariable(var, false, false);
 
 			String name = var.getName();
-			if (name == null || name.length() == 0 ||
+			if (name == null || name.isEmpty() ||
 				SymbolUtilities.isDefaultParameterName(name)) {
 				name = DEFAULT_LOCAL_PREFIX;
 				source = SourceType.DEFAULT;
@@ -1366,7 +1366,7 @@ public class FunctionDB extends DatabaseObject implements Function {
 				if (updateType == FunctionUpdateType.DYNAMIC_STORAGE_ALL_PARAMS &&
 					!thisParamRemoved &&
 					CompilerSpec.CALLING_CONVENTION_thiscall.equals(callingConvention) &&
-					newParams.size() != 0) {
+                        !newParams.isEmpty()) {
 					// Attempt to remove inferred unnamed 'this' parameter
 					// WARNING! This is a bit of a hack - not sure how to account for what may be auto-params
 					// within a list of parameters computed via analysis
@@ -1452,7 +1452,7 @@ public class FunctionDB extends DatabaseObject implements Function {
 				VariableStorage storage = useCustomStorage ? newParam.getVariableStorage()
 						: VariableStorage.UNASSIGNED_STORAGE;
 				String name = newParam.getName();
-				if (name == null || name.length() == 0) {
+				if (name == null || name.isEmpty()) {
 					name = SymbolUtilities.getDefaultParamName(i);
 				}
 				VariableSymbolDB s = symbolMgr.createVariableSymbol(name, this,
@@ -1484,7 +1484,7 @@ public class FunctionDB extends DatabaseObject implements Function {
 			Set<String> nonParamNames) throws DuplicateNameException {
 
 		String name = param.getName();
-		if (name == null || name.length() == 0 || SymbolUtilities.isDefaultParameterName(name)) {
+		if (name == null || name.isEmpty() || SymbolUtilities.isDefaultParameterName(name)) {
 			return;
 		}
 
@@ -1600,7 +1600,7 @@ public class FunctionDB extends DatabaseObject implements Function {
 
 			String name = var.getName();
 			SourceType paramSource = source;
-			if (name == null || name.length() == 0 || paramSource == SourceType.DEFAULT ||
+			if (name == null || name.isEmpty() || paramSource == SourceType.DEFAULT ||
 				SymbolUtilities.isDefaultParameterName(name)) {
 				name = DEFAULT_PARAM_PREFIX;
 				paramSource = SourceType.DEFAULT;

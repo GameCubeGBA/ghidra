@@ -463,10 +463,10 @@ public class CompositeTypeApplier extends AbstractComplexTypeApplier {
 		FieldListTypeApplier fieldListApplier = (FieldListTypeApplier) applier;
 		AbstractFieldListMsType fieldListType =
 			((AbstractFieldListMsType) fieldListApplier.getMsType());
-		if (fieldListType.getBaseClassList().size() != 0) {
+		if (!fieldListType.getBaseClassList().isEmpty()) {
 			return true;
 		}
-		return (fieldListType.getBaseClassList().size() != 0);
+		return (!fieldListType.getBaseClassList().isEmpty());
 	}
 
 	private boolean hasHiddenComponents() {
@@ -496,8 +496,8 @@ public class CompositeTypeApplier extends AbstractComplexTypeApplier {
 		AbstractFieldListMsType fieldListType =
 			((AbstractFieldListMsType) fieldListApplier.getMsType());
 
-		return (fieldListType.getMethodList().size() != 0 ||
-			fieldListType.getBaseClassList().size() != 0);
+		return (!fieldListType.getMethodList().isEmpty() ||
+                !fieldListType.getBaseClassList().isEmpty());
 	}
 
 	private void addClassTypeBaseClasses(Composite composite, FieldListTypeApplier fieldListApplier)

@@ -99,7 +99,7 @@ public class AddMemoryBlockCmdTest extends AbstractGenericTest {
 		catch (RollbackException e) {
 			// good
 		}
-		assertTrue(command.getStatusMsg().length() > 0);
+		assertTrue(!command.getStatusMsg().isEmpty());
 	}
 
 	@Test

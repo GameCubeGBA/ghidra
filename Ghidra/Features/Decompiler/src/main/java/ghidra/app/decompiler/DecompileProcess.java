@@ -628,7 +628,7 @@ public class DecompileProcess {
 		String name = readQueryString();
 		String res = callback.getRegister(name);
 		write(query_response_start);
-		if ((res != null) && (res.length() != 0)) {
+		if ((res != null) && (!res.isEmpty())) {
 			writeString(res);
 		}
 		write(query_response_end);
@@ -683,7 +683,7 @@ public class DecompileProcess {
 		String context = readQueryString();
 		String res = callback.getPcodeInject(name, context, type);
 		write(query_response_start);
-		if ((res != null) && (res.length() != 0)) {
+		if ((res != null) && (!res.isEmpty())) {
 			writeString(res);
 		}
 		write(query_response_end);
@@ -698,7 +698,7 @@ public class DecompileProcess {
 		}
 		String res = callback.getCPoolRef(refs);
 		write(query_response_start);
-		if ((res != null) && (res.length() != 0)) {
+		if ((res != null) && (!res.isEmpty())) {
 			writeString(res);
 		}
 		write(query_response_end);
@@ -709,7 +709,7 @@ public class DecompileProcess {
 
 		String res = callback.getMappedSymbolsXML(addr);
 		write(query_response_start);
-		if ((res != null) && (res.length() != 0)) {
+		if ((res != null) && (!res.isEmpty())) {
 			writeString(res);
 		}
 		write(query_response_end);
@@ -720,7 +720,7 @@ public class DecompileProcess {
 		long id = Long.parseLong(idString, 16);
 		String res = callback.getNamespacePath(id);
 		write(query_response_start);
-		if ((res != null) && (res.length() != 0)) {
+		if ((res != null) && (!res.isEmpty())) {
 			writeString(res);
 		}
 		write(query_response_end);
@@ -744,7 +744,7 @@ public class DecompileProcess {
 		String refaddr = readQueryString();
 		String res = callback.getExternalRefXML(refaddr);
 		write(query_response_start);
-		if ((res != null) && (res.length() != 0)) {
+		if ((res != null) && (!res.isEmpty())) {
 			writeString(res);
 		}
 		write(query_response_end);
@@ -789,7 +789,7 @@ public class DecompileProcess {
 		String id = readQueryString();
 		String res = callback.getType(name, id);
 		write(query_response_start);
-		if ((res != null) && (res.length() != 0)) {
+		if ((res != null) && (!res.isEmpty())) {
 			writeString(res);
 		}
 		write(query_response_end);

@@ -123,7 +123,7 @@ public class CategoryPath implements Comparable<CategoryPath> {
 	// constructor, called with a single argument that would not be escaped, would conflict with
 	// this constructor, which requires an escaped argument. 
 	public CategoryPath(String path) {
-		if (path == null || path.length() == 0 || path.equals(DELIMITER_STRING)) {
+		if (path == null || path.isEmpty() || path.equals(DELIMITER_STRING)) {
 			// parent can only be null for ROOT
 			parent = null;
 			name = "";

@@ -502,7 +502,7 @@ public class ThreadedTableTest extends AbstractThreadedTableTest {
 
 		List<String> expectedList = loadTextResource(getClass(), "threaded.table.test.csv.txt");
 		assertNotNull(expectedList);
-		assertTrue(expectedList.size() > 0);
+		assertTrue(!expectedList.isEmpty());
 
 		String path = createTempFilePath("~csv_table_test");
 		File outputFile = new File(path);

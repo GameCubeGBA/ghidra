@@ -557,7 +557,7 @@ public abstract class PcodeCompile {
 			}
 		}
 
-		if (errmsg.length() > 0) { // Was there an error condition
+		if (!errmsg.isEmpty()) { // Was there an error condition
 			reportError(location, errmsg); // Report the error
 			VectorSTL<OpTpl> resops = rhs.ops; // Passthru old expression
 			rhs.ops = null;
@@ -588,7 +588,7 @@ public abstract class PcodeCompile {
 			finalout = new VarnodeTpl(location, vn);
 			res = createOpOut(location, finalout, OpCode.CPUI_INT_OR, res, rhs);
 		}
-		if (errmsg.length() > 0) {
+		if (!errmsg.isEmpty()) {
 			reportError(location, errmsg);
 		}
 		VectorSTL<OpTpl> resops = res.ops;
@@ -614,7 +614,7 @@ public abstract class PcodeCompile {
 
 		// Special case where we can set the size, without invoking
 		// a truncation operator
-		if ((errmsg.length() == 0) && (bitoffset == 0) && (!maskneeded)) {
+		if ((errmsg.isEmpty()) && (bitoffset == 0) && (!maskneeded)) {
 			if ((vn.getSpace().getType() == ConstTpl.const_type.handle) && vn.isZeroSize()) {
 				vn.setSize(new ConstTpl(ConstTpl.const_type.real, finalsize));
                 // VarnodeTpl *cruft = buildTemporary();
@@ -623,7 +623,7 @@ public abstract class PcodeCompile {
 			}
 		}
 
-		if (errmsg.length() == 0) {
+		if (errmsg.isEmpty()) {
 			VarnodeTpl truncvn = buildTruncatedVarnode(location, vn, bitoffset, numbits);
 			if (truncvn != null) {		// If we are able to construct a simple truncated varnode
                 return new ExprTree(location, truncvn);
@@ -665,7 +665,7 @@ public abstract class PcodeCompile {
 
 		ExprTree res = new ExprTree(sym.getLocation(), vn);
 
-		if (errmsg.length() > 0) { // Check for error condition
+		if (!errmsg.isEmpty()) { // Check for error condition
 			reportError(location, errmsg);
 			return res;
 		}

@@ -197,7 +197,7 @@ public class ClassModuleTree {
 				return "";
 			}
 			String parentPath = parent.getPath();
-			if (parentPath.length() == 0) {
+			if (parentPath.isEmpty()) {
 				return name;
 			}
 			return parentPath + "/" + name;

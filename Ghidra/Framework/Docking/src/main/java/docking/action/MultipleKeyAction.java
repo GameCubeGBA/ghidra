@@ -329,7 +329,7 @@ public class MultipleKeyAction extends DockingKeyBindingAction {
 			buildy.append(data.action.toString()).append("\n\t");
 		}
 
-		if (actions.size() > 0) {
+		if (!actions.isEmpty()) {
 			buildy.delete(buildy.length() - 2, buildy.length()); // trim off newline and tab
 		}
 

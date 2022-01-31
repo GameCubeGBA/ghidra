@@ -83,7 +83,7 @@ public class HtmlLineSplitter {
 			retainSpacing ? new PreservingWhitespaceHandler() : new TrimmingWhitespaceHandler();
 
 		for (String line : newlines) {
-			if (line.length() == 0) {
+			if (line.isEmpty()) {
 				// this was a newline character
 				lines.add(line);
 				continue;

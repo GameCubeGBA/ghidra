@@ -1145,7 +1145,7 @@ public class DecompilerClangTest extends AbstractDecompilerTest {
 		DecompilerHighlighter highlighter = hlService.createHighlighter(spyMatcher);
 		highlighter.applyHighlights();
 
-		assertTrue(spyMatcher.getMatchingTokens().size() > 0);
+		assertTrue(!spyMatcher.getMatchingTokens().isEmpty());
 		assertAllHighlighterFieldsHighlighted(spyMatcher, hlText, hlColor);
 
 		highlighter.clearHighlights();
@@ -1797,7 +1797,7 @@ public class DecompilerClangTest extends AbstractDecompilerTest {
 		// this function also has calls to '_printf'
 		decompile("100000e10"); // '_call_structure_B'
 
-		assertTrue(spyMatcher.getMatchingTokens().size() > 0);
+		assertTrue(!spyMatcher.getMatchingTokens().isEmpty());
 		assertAllHighlighterFieldsHighlighted(spyMatcher, hlText, hlColor);
 
 		highlighter.dispose();

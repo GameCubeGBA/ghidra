@@ -317,7 +317,7 @@ public class SleighAssemblerBuilder implements AssemblerBuilder {
 				AssemblySentential<AssemblyNonTerminal> rhs = new AssemblySentential<>();
 				List<Integer> indices = new ArrayList<>();
 				for (String str : cons.getPrintPieces()) {
-					if (str.length() != 0) {
+					if (!str.isEmpty()) {
 						if (str.charAt(0) == '\n') {
 							int index = str.charAt(1) - 'A';
 							OperandSymbol opsym = cons.getOperand(index);

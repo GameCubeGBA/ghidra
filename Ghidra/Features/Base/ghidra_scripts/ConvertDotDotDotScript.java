@@ -90,7 +90,7 @@ public class ConvertDotDotDotScript extends GhidraScript {
 			} catch (IndexOutOfBoundsException e) {
 			}
 			String newString = prefix + suffix;
-			if (newString.length() != 0) {
+			if (!newString.isEmpty()) {
 				stringmap.add(addr, newString);
 				println("Removed dotdotdot tag " + " from " +
 						HighFunction.DECOMPILER_TAG_MAP + " property at " + addr.toString() + ".");
@@ -106,7 +106,7 @@ public class ConvertDotDotDotScript extends GhidraScript {
 
 	private boolean removeEmptyTag(StringPropertyMap stringmap, Address addr) {
 		String currentString = stringmap.getString(addr);
-		if (currentString != null && currentString.length() == 0) {
+		if (currentString != null && currentString.isEmpty()) {
 			stringmap.remove(addr);
 			println("Removed " + HighFunction.DECOMPILER_TAG_MAP +
 					" property at " + addr.toString() + " since it is empty.");

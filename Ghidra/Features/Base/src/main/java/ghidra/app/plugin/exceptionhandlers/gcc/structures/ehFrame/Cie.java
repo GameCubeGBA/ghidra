@@ -570,7 +570,7 @@ public class Cie extends GccAnalysisClass {
 		/*
 		 * If the first character is a 'z', Augmentation Data is included.
 		 */
-		if (augmentationString != null && augmentationString.length() > 0 &&
+		if (augmentationString != null && !augmentationString.isEmpty() &&
 			augmentationString.charAt(0) == 'z') {
 
 			// Create the Augmentation Data Length and Augmentation Data fields

@@ -162,7 +162,7 @@ public class TaskViewer {
 			taskViewerComponent.add(element.getComponent());
 		}
 
-		if (waitingList.size() > 0 && runningList.size() > 0) {
+		if (!waitingList.isEmpty() && !runningList.isEmpty()) {
 			taskViewerComponent.add(new JSeparator());
 		}
 

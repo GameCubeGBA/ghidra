@@ -1019,7 +1019,7 @@ public class FunctionSignatureStringable extends Stringable {
 			}
 			if (commentChoice == CommentChoices.APPEND_TO_EXISTING) {
 				String mergedComment = StringUtilities.mergeStrings(toComment, fromComment);
-				if (mergedComment != null && mergedComment.length() == 0) {
+				if (mergedComment != null && mergedComment.isEmpty()) {
 					mergedComment = null;
 				}
 				if (!SystemUtilities.isEqual(mergedComment, toComment)) {
@@ -1027,7 +1027,7 @@ public class FunctionSignatureStringable extends Stringable {
 				}
 			}
 			if (commentChoice == CommentChoices.OVERWRITE_EXISTING) {
-				if (fromComment != null && fromComment.length() == 0) {
+				if (fromComment != null && fromComment.isEmpty()) {
 					fromComment = null;
 				}
 				toParameter.setComment(fromComment);
@@ -1058,7 +1058,7 @@ public class FunctionSignatureStringable extends Stringable {
 			this.storage = storage;
 			this.source = source;
 			this.comment = comment;
-			if (comment != null && comment.trim().length() == 0) {
+			if (comment != null && comment.trim().isEmpty()) {
 				comment = null;
 			}
 		}
@@ -1085,7 +1085,7 @@ public class FunctionSignatureStringable extends Stringable {
 			this.storage = storage;
 			this.source = source;
 			this.comment = comment;
-			if (comment != null && comment.trim().length() == 0) {
+			if (comment != null && comment.trim().isEmpty()) {
 				comment = null;
 			}
 		}

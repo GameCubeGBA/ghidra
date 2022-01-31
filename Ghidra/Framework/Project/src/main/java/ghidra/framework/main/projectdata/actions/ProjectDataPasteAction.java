@@ -203,7 +203,7 @@ public class ProjectDataPasteAction extends ProjectDataCopyCutBaseAction {
         for (GTreeNode gTreeNode : newList) {
             list.remove(gTreeNode);
         }
-		return newList.size() > 0;
+		return !newList.isEmpty();
 	}
 
 	private boolean isCutOperation(List<GTreeNode> list) {

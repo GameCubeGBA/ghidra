@@ -406,7 +406,7 @@ class MarkupXmlMgr {
                             }
                         }
 
-						if (instrScalars.size() == 0) {
+						if (instrScalars.isEmpty()) {
 							log.appendMsg("BAD EQUATE REFERENCE: operand " + "[" + opIndex +
 								"] at address " + "[" + addr + "] is not a scalar.");
 							return;
@@ -434,7 +434,7 @@ class MarkupXmlMgr {
 					return;
 				}
 			}
-			else if (instrScalars.size() > 0) {
+			else if (!instrScalars.isEmpty()) {
 				// use scalar value as default - seems like a bad idea
 				Msg.warn(this, "NO VALUE SPECIFIED");
 				value = instrScalars.get(0).getSignedValue();

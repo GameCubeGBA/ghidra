@@ -209,7 +209,7 @@ public class ByteViewerOptionsDialog extends DialogComponentProvider
 	}
 
 	private boolean hasValidFieldValues() {
-		if (addressInputField.getValue().length() == 0) {
+		if (addressInputField.getValue().isEmpty()) {
 			setStatusText("Enter an alignment address");
 			return false;
 		}

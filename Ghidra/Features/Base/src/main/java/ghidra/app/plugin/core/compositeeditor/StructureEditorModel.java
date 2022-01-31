@@ -1194,7 +1194,7 @@ class StructureEditorModel extends CompEditorModel {
 			final String parentStructureName, final DataTypeManager applyDTM) {
 		InputDialogListener listener = dialog -> {
 			String name = dialog.getValue();
-			if ((name == null) || (name.length() == 0)) {
+			if ((name == null) || (name.isEmpty())) {
 				dialog.setStatusText("A name must be specified.");
 				return false;
 			}

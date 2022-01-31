@@ -84,7 +84,7 @@ public class TipOfTheDayPlugin extends Plugin implements FrontEndOnly {
 	private List<String> loadTips() throws IOException {
 		try (InputStream in = getClass().getResourceAsStream("tips.txt")) {
 			List<String> tips = in == null ? Collections.emptyList() : FileUtilities.getLines(in);
-			return tips.stream().filter(s -> s.length() > 0).collect(Collectors.toList());
+			return tips.stream().filter(s -> !s.isEmpty()).collect(Collectors.toList());
 		}
 	}
 

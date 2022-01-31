@@ -486,9 +486,9 @@ public class BitFieldPlacementComponent extends JPanel implements Scrollable {
 		}
 
 		try {
-			String name = (fieldName != null && fieldName.length() != 0) ? fieldName : null;
+			String name = (fieldName != null && !fieldName.isEmpty()) ? fieldName : null;
 			String comment =
-				(fieldComment != null && fieldComment.length() != 0) ? fieldComment : null;
+				(fieldComment != null && !fieldComment.isEmpty()) ? fieldComment : null;
 			DataTypeComponent dtc;
 			if (composite instanceof Union) {
 				throw new UnsupportedOperationException(
@@ -602,7 +602,7 @@ public class BitFieldPlacementComponent extends JPanel implements Scrollable {
 		String conflictMsg = "";
 		DataTypeComponent conflict = attrs.getConflict();
 		if (conflict != null) {
-			if (tip.length() != 0) {
+			if (!tip.isEmpty()) {
 				conflictMsg = "<br>";
 			}
 			String conflictName = conflict.getFieldName();

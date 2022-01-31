@@ -758,7 +758,7 @@ public abstract class AbstractOptions implements Options {
 
 	@Override
 	public String getID(String optionName) {
-		if (name.length() == 0) {
+		if (name.isEmpty()) {
 			return optionName;
 		}
 		return name + DELIMITER + optionName;
