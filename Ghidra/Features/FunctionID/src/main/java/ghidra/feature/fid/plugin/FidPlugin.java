@@ -247,8 +247,8 @@ public class FidPlugin extends ProgramPlugin implements ChangeListener {
 	 * Method to properly set action enablement based upon appropriate business logic.
 	 */
 	private void enableActions() {
-		boolean atLeastOneFidDb = fidFileManager.getFidFiles().size() > 0;
-		boolean atLeastOneUserFidDb = fidFileManager.getUserAddedFiles().size() > 0;
+		boolean atLeastOneFidDb = !fidFileManager.getFidFiles().isEmpty();
+		boolean atLeastOneUserFidDb = !fidFileManager.getUserAddedFiles().isEmpty();
 		chooseAction.setEnabled(atLeastOneFidDb);
 		createAction.setEnabled(true);
 		attachAction.setEnabled(true);

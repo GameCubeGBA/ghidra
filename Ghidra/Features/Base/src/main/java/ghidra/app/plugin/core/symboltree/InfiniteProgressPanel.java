@@ -232,7 +232,7 @@ paintText( g2, textColor, textPosition );
     }
 
 private void paintText( Graphics2D graphics, Color color, double textPosition ) { 
-    if ( text == null || text.trim().length() == 0 ) {
+    if ( text == null || text.trim().isEmpty()) {
         return;
     }
     

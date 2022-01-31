@@ -204,17 +204,17 @@ public class PcodeParser extends PcodeCompile {
 		String errstring = "";
 		if (rtl != null) {
 			errstring = checkLabels();
-			if ((errstring.length() == 0) && (!propagateSize(rtl))) {
+			if ((errstring.isEmpty()) && (!propagateSize(rtl))) {
 				errstring = "   Could not resolve at least 1 variable size";
 			}
-			if ((errstring.length() == 0) && rtl.delaySlot() != 0) { // Delay slot is present in this
+			if ((errstring.isEmpty()) && rtl.delaySlot() != 0) { // Delay slot is present in this
 				errstring = "   delayslot not permitted in pcode fragment";
 			}
 			if (rtl.getResult() != null) {
 				errstring = "   export not permitted in pcode fragment";
 			}
 		}
-		if (errstring.length() != 0) {
+		if (!errstring.isEmpty()) {
 			throw new SleighException(errstring);
 		}
 		return translateConstructTpl(rtl);

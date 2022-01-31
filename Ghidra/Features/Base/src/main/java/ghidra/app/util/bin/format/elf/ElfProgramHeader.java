@@ -193,7 +193,7 @@ public class ElfProgramHeader
 		ElfProgramHeaderType programHeaderType = header.getProgramHeaderType(p_type);
 		if (programHeaderType != null) {
 			String description = programHeaderType.description;
-			if (description != null && description.length() != 0) {
+			if (description != null && !description.isEmpty()) {
 				return programHeaderType.description;
 			}
 		}

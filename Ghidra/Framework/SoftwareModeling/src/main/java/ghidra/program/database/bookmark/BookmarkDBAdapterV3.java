@@ -160,7 +160,7 @@ tables[id] = handle.getTable(BOOKMARK_TABLE_NAME + id);
 		while (it.hasNext()) {
 			DBRecord rec = it.next();
 			String cat = rec.getString(V3_CATEGORY_COL);
-			if (cat != null && cat.length() != 0) {
+			if (cat != null && !cat.isEmpty()) {
 				set.add(cat);
 			}
 		}

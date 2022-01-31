@@ -544,7 +544,7 @@ public class ArmAnalyzer extends ConstantPropagationAnalyzer {
 					}
 				}
 			}
-			if (switchEvaluator.getTargetList().size() > 0) {
+			if (!switchEvaluator.getTargetList().isEmpty()) {
 				AddressTable table;
 				table = new AddressTable(loc, switchEvaluator.getTargetList().toArray(new Address[0]),
 						switchEvaluator.getAddrByteSize(), 0, false);

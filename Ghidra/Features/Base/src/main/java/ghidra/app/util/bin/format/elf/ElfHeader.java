@@ -384,7 +384,7 @@ public class ElfHeader implements StructConverter, Writeable {
 			return null;
 		}
 		String typeSuffix = elfLoadAdapter.getDataTypeSuffix();
-		if (typeSuffix != null && typeSuffix.length() == 0) {
+		if (typeSuffix != null && typeSuffix.isEmpty()) {
 			typeSuffix = null;
 		}
 		return typeSuffix;
@@ -1466,7 +1466,7 @@ public class ElfHeader implements StructConverter, Writeable {
 				list.add(sectionHeader);
 			}
 		}
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			return null;
 		}
 		if (list.size() > 1) {

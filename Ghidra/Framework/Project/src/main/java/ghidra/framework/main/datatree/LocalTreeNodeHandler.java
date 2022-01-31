@@ -70,7 +70,7 @@ public final class LocalTreeNodeHandler
 		this.treeState = tree.getTreeState();
 
 		List<GTreeNode> list = (List<GTreeNode>) transferData;
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			return;
 		}
 
@@ -181,7 +181,7 @@ public final class LocalTreeNodeHandler
 		}
 		catch (FileInUseException fiue) {
 			String message = fiue.getMessage();
-			if (message == null || message.length() == 0) {
+			if (message == null || message.isEmpty()) {
 				message = "Cannot move folder '" + sourceFolder.toString() + "' to '" +
 					destFolder.toString() +
 					"'\nsince it contains a file that is checked out or in use.";

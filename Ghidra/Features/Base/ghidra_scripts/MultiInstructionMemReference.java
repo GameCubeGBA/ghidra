@@ -298,7 +298,7 @@ public class MultiInstructionMemReference extends GhidraScript {
 				if (comment.replace('\'', ' ').contains(markup.replace('\'', ' '))) {
 					return false;
 				}
-				comment = (comment.trim().length() == 0 ? markup : comment + "\n" + markup);
+				comment = (comment.trim().isEmpty() ? markup : comment + "\n" + markup);
 				instr.setComment(Instruction.EOL_COMMENT, comment);
 				return false;
 			}

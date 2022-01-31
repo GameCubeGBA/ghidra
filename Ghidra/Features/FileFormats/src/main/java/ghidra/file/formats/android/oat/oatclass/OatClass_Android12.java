@@ -108,7 +108,7 @@ public class OatClass_Android12 extends OatClass {
 	public DataType toDataType() throws DuplicateNameException, IOException {
 		String className = OatClass_Android12.class.getSimpleName();
 
-		if (methods_pointer_.size() > 0) {
+		if (!methods_pointer_.isEmpty()) {
 			className += "_" + methods_pointer_.size();
 		}
 		if (bitmap_.length > 0) {

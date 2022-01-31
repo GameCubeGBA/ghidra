@@ -70,7 +70,7 @@ public class DBTraceDataTypeManager extends ProgramBasedDataTypeManagerDB
 
 	@Override
 	public void setName(String name) throws InvalidNameException {
-		if (name == null || name.length() == 0) {
+		if (name == null || name.isEmpty()) {
 			throw new InvalidNameException("Name must be at least one character long: " + name);
 		}
 

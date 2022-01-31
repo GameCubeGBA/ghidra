@@ -489,7 +489,7 @@ public class DirectedGraph {
 		Set<Vertex> descendantsOfSources = this.getDescendants(sources);
 		Set<Vertex> nonDescendants = this.vertices().toSet();
 		nonDescendants.removeAll(descendantsOfSources);
-		if (nonDescendants.size() > 0) {
+		if (!nonDescendants.isEmpty()) {
 			Vertex u, v = null;
 			Vertex[] nonDescendantVertices = nonDescendants.toArray(new Vertex[0]);
 			DirectedGraph g = this.inducedSubgraph(nonDescendantVertices);

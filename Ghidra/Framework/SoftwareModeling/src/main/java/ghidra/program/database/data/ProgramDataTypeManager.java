@@ -115,7 +115,7 @@ public class ProgramDataTypeManager extends ProgramBasedDataTypeManagerDB
 
 	@Override
 	public void setName(String name) throws InvalidNameException {
-		if (name == null || name.length() == 0) {
+		if (name == null || name.isEmpty()) {
 			throw new InvalidNameException("Name is invalid: " + name);
 		}
 

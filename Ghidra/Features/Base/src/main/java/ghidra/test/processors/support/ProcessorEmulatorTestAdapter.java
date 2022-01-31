@@ -532,7 +532,7 @@ public abstract class ProcessorEmulatorTestAdapter extends TestCase implements E
 
 		try {
 			instance.setUp();
-			if (instance.testGroupMap == null || instance.testGroupMap.size() == 0) {
+			if (instance.testGroupMap == null || instance.testGroupMap.isEmpty()) {
 				return getTestFailure(emulatorTestClass, "No test binaries found", null);
 			}
 			ArrayList<PCodeTestGroup> testGroups = new ArrayList<>(instance.testGroupMap.values());
@@ -1092,7 +1092,7 @@ public abstract class ProcessorEmulatorTestAdapter extends TestCase implements E
 			}
 		}
 
-		if (testGroupName == null || testGroupName.length() == 0) {
+		if (testGroupName == null || testGroupName.isEmpty()) {
 			fail("Empty test group name");
 		}
 
@@ -1228,7 +1228,7 @@ public abstract class ProcessorEmulatorTestAdapter extends TestCase implements E
 				failTest(testRunner,
 					"ERROR Unexpected number of assertions ( " + passFailText + " )");
 			}
-			if (fail != 0 || callOtherErrors != 0 || testFailures.size() != 0) {
+			if (fail != 0 || callOtherErrors != 0 || !testFailures.isEmpty()) {
 				failTest(testRunner,
 					"ERROR One or more group tests failed ( " + passFailText + " )");
 			}
@@ -1841,7 +1841,7 @@ public abstract class ProcessorEmulatorTestAdapter extends TestCase implements E
 			resourcesTestDataDir);
 		testFiles = findBinaryTestFiles(resourcesTestDataDir);
 
-		if (testFiles.size() == 0) {
+		if (testFiles.isEmpty()) {
 			throw new AssertException("No test binaries found");
 		}
 

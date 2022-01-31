@@ -87,7 +87,7 @@ public class GdtLoader implements Loader {
 
 	@Override
 	public String validateOptions(ByteProvider provider, LoadSpec loadSpec, List<Option> options, Program program) {
-		if (options != null && options.size() > 0) {
+		if (options != null && !options.isEmpty()) {
 			return "GDTLoader takes no options";
 		}
 		return null;

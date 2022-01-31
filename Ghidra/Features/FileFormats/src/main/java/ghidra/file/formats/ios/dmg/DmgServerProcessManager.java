@@ -281,7 +281,7 @@ class DmgServerProcessManager implements Closeable {
 		ResourceFile serverMemoryCfgFile = new ResourceFile(dmgModule, "data/server_memory.cfg");
 		try {
 			List<String> lines = FileUtilities.getLines(serverMemoryCfgFile);
-            return (lines.size() > 0)
+            return (!lines.isEmpty())
                     ? Math.max(Integer.parseInt(lines.get(0)), MIN_DMG_SERVER_MEMORY_MB)
                     : defaultValue;
 		}

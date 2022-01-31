@@ -922,7 +922,7 @@ public class DefaultCompositeMember extends CompositeMember {
 
 		if (member.memberOffset == 0) {
 
-			if (unionMemberList.size() != 0 && member.isBitFieldMember()) {
+			if (!unionMemberList.isEmpty() && member.isBitFieldMember()) {
 				CompositeMember lastUnionMember = unionMemberList.get(unionMemberList.size() - 1);
 				if (isRelatedBitField(lastUnionMember, member)) {
 					if (lastUnionMember.isSingleBitFieldMember() &&

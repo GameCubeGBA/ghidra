@@ -673,7 +673,7 @@ public class DemangledDataType extends DemangledType {
 			buffer.append(SPACE + basedName);
 		}
 
-		if ((memberScope != null) && (memberScope.length() != 0)) {
+		if ((memberScope != null) && (!memberScope.isEmpty())) {
 			buffer.append(SPACE + memberScope + "::");
 		}
 

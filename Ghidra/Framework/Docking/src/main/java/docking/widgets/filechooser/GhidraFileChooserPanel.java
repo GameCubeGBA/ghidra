@@ -177,7 +177,7 @@ public class GhidraFileChooserPanel extends JPanel implements Droppable {
 	private void fileChanged() {
 		if (listener != null) {
 			String file = filenameTextField.getText();
-			if (file.length() == 0) {
+			if (file.isEmpty()) {
 				listener.fileChanged(null);
 			}
 			else {
@@ -270,7 +270,7 @@ public class GhidraFileChooserPanel extends JPanel implements Droppable {
 	public void add(Object obj, DropTargetDropEvent e, DataFlavor f) {
 		if (f == DataFlavor.javaFileListFlavor) {
 			List<?> files = (java.util.List<?>) obj;
-			if (files.size() > 0) {
+			if (!files.isEmpty()) {
 				File file = (File) files.get(0);
 				filenameTextField.setText(file.getAbsolutePath());
 				if (listener != null) {

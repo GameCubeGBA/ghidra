@@ -24,7 +24,7 @@ public class ErrorStatus {
 	private List<Exception> exceptions = new ArrayList<Exception>();
 
 	boolean hasErrors() {
-		return exceptions.size() > 0;
+		return !exceptions.isEmpty();
 	}
 
 	public String printMessage() {

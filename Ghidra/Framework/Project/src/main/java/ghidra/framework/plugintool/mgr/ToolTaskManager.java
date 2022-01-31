@@ -474,7 +474,7 @@ public class ToolTaskManager implements Runnable {
 				if (!monitor.isCancelled()) {
 					monitor.cancel();
 					String msg = taskCmd.getStatusMsg();
-					if (msg == null || msg.length() == 0) {
+					if (msg == null || msg.isEmpty()) {
 						msg = "Unspecified error occurred.";
 					}
 					Msg.showError(this, tool.getToolFrame(), taskCmd.getName() + " Failed", msg);

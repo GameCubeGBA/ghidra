@@ -455,7 +455,7 @@ public abstract class LanguageTranslatorAdapter implements LanguageTranslator {
 				return oldCompilerSpecID;
 			}
 		}
-		if (compilerSpecDescriptions.size() != 0) {
+		if (!compilerSpecDescriptions.isEmpty()) {
 			return compilerSpecDescriptions.get(0).getCompilerSpecID();
 		}
 		return oldCompilerSpecID;

@@ -955,10 +955,10 @@ public class ProgramMerge implements PropertyVisitor {
 		for (int opIndex = 0; opIndex < Program.MAX_OPERANDS; opIndex++) {
 			List<Equate> originList = originEt.getEquates(originAddress, opIndex);
 			Equate originEquate =
-				(originList.size() > 0) ? originList.get(originList.size() - 1) : null;
+				(!originList.isEmpty()) ? originList.get(originList.size() - 1) : null;
 			List<Equate> resultList = resultEt.getEquates(resultAddress, opIndex);
 			Equate resultEquate =
-				(resultList.size() > 0) ? resultList.get(resultList.size() - 1) : null;
+				(!resultList.isEmpty()) ? resultList.get(resultList.size() - 1) : null;
 			if ((originEquate == null && resultEquate == null) ||
 				(resultEquate != null && resultEquate.equals(originEquate))) {
 				continue; // Do nothing.

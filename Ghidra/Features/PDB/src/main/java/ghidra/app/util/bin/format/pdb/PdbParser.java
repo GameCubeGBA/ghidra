@@ -663,7 +663,7 @@ public class PdbParser {
 			}
 		}
 
-		if (warning.length() > 0) {
+		if (!warning.isEmpty()) {
 			if (SystemUtilities.isInHeadlessMode()) {
 				throw new PdbException(warning + ".. Skipping PDB processing.");
 			}

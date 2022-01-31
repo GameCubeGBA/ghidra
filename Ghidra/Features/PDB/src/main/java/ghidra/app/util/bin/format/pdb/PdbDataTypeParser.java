@@ -174,7 +174,7 @@ class PdbDataTypeParser {
 		// should be case-sensitive
 		datatype = datatype.trim();
 
-		if (datatype == null || datatype.length() == 0) {
+		if (datatype == null || datatype.isEmpty()) {
 			return null;
 		}
 

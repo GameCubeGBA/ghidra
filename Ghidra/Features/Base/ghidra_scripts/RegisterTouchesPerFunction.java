@@ -88,7 +88,7 @@ public class RegisterTouchesPerFunction extends GhidraScript
                     if (inst.getMnemonicString().equalsIgnoreCase("pop")) {
                         if (!name.equalsIgnoreCase("mult_addr")
                                 && !name.equalsIgnoreCase("sp")) {
-                            if (pushPops.size() > 0) {
+                            if (!pushPops.isEmpty()) {
                                 restored.add(pushPops.pop() + "->" + name);
                             } else {
                                 reviewRestored = true;
@@ -140,7 +140,7 @@ public class RegisterTouchesPerFunction extends GhidraScript
         }
         buffer.append(DIVIDER);
 
-        if (pushPops.size() > 0)
+        if (!pushPops.isEmpty())
         {
 
         	buffer.append("Registers Remaining on Stack:\r\n");

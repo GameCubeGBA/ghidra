@@ -56,7 +56,7 @@ public class PluginConfigurationModel {
 		List<PluginPackage> pluginPackages = pluginPackagingProvider.getPluginPackages();
 		List<PluginPackage> packagesWithStablePlugins = new ArrayList<>();
 		for (PluginPackage pluginPackage : pluginPackages) {
-			if (pluginPackagingProvider.getPluginDescriptions(pluginPackage).size() > 0) {
+			if (!pluginPackagingProvider.getPluginDescriptions(pluginPackage).isEmpty()) {
 				packagesWithStablePlugins.add(pluginPackage);
 			}
 		}

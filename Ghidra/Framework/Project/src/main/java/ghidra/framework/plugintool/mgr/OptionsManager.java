@@ -207,7 +207,7 @@ public class OptionsManager implements OptionsService, OptionsChangeListener {
 
 	private OptionsDialog createOptionsDialog() {
 		OptionsDialog dialog = null;
-		if (optionsMap.size() == 0) {
+		if (optionsMap.isEmpty()) {
 			return null;
 		}
 

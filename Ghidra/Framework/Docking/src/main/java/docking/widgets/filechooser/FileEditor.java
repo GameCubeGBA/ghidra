@@ -136,7 +136,7 @@ class FileEditor extends AbstractCellEditor implements TableCellEditor {
 		iconLabel.setIcon(icon);
 		nameField.setText(name);
 		nameField.requestFocus();
-		if (name.length() > 0) {
+		if (!name.isEmpty()) {
 			nameField.setCaretPosition(name.length());
 			nameField.selectAll();
 		}

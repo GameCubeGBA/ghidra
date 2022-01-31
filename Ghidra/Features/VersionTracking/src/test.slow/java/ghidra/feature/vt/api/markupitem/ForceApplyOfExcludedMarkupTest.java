@@ -217,7 +217,7 @@ public class ForceApplyOfExcludedMarkupTest extends AbstractFunctionSignatureMar
 		// Test Apply of Comment Markup
 		List<VTMarkupItem> commentMarkupItems =
 			getSpecificTypeOfMarkup(commentMarkupClass, testMatch, true);
-		assertTrue(commentMarkupItems.size() > 0);
+		assertTrue(!commentMarkupItems.isEmpty());
 		forceMarkup(commentMarkupItems);
 
 		// Verify the markup was applied.

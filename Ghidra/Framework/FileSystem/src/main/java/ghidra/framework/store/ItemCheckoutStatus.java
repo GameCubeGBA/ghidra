@@ -102,7 +102,7 @@ public class ItemCheckoutStatus implements java.io.Serializable {
 		}
 		if (ver > 1) { // Client project path added with Version 2
 			projectPath = in.readUTF();
-			if (projectPath.length() == 0) {
+			if (projectPath.isEmpty()) {
 				projectPath = null;
 			}
 		}

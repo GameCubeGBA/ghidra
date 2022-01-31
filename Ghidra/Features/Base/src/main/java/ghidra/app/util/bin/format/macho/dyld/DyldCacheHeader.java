@@ -293,7 +293,7 @@ public class DyldCacheHeader implements StructConverter {
 				slideInfoList.add(slideInfo);
 			}
 		}
-		else if (cacheMappingAndSlideInfoList.size() > 0) {
+		else if (!cacheMappingAndSlideInfoList.isEmpty()) {
 			// last section contains the real slide infos
 			int listLen = cacheMappingAndSlideInfoList.size();
 			DyldCacheMappingAndSlideInfo linkEditInfo =
@@ -440,7 +440,7 @@ public class DyldCacheHeader implements StructConverter {
 	 */
 	public List<DyldCacheImage> getMappedImages() {
 		List<DyldCacheImage> images = new ArrayList<>();
-		if (imageInfoList.size() > 0) {
+		if (!imageInfoList.isEmpty()) {
 			// The old, simple way
 			images.addAll(imageInfoList);
 		}
@@ -807,7 +807,7 @@ public class DyldCacheHeader implements StructConverter {
 		monitor.setMessage("Marking up DYLD slide info...");
 		monitor.initialize(1);
 		try {
-			if (slideInfoList.size() > 0) {
+			if (!slideInfoList.isEmpty()) {
 				for (DyldCacheSlideInfoCommon info : slideInfoList) {
 					Address addr = fileOffsetToAddr(info.getSlideInfoOffset(), program, space);
 					DataUtilities.createData(program, addr, info.toDataType(), -1, false,

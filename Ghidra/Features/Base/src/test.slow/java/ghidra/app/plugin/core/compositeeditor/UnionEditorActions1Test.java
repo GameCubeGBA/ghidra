@@ -820,7 +820,7 @@ public class UnionEditorActions1Test extends AbstractUnionEditorTest {
 		assertEquals(model.getStatus(), "Name is not valid.");
 		assertTrue(complexUnion.isEquivalent(model.viewComposite));
 		assertTrue(viewCopy.isEquivalent(model.viewComposite));
-		assertTrue(model.getStatus().length() > 0);
+		assertTrue(!model.getStatus().isEmpty());
 		assertEquals("complexUnion#/$", model.getCompositeName());
 		assertEquals("complexUnion", complexUnion.getName());
 	}

@@ -153,7 +153,7 @@ public class AskDialog<T> extends DialogComponentProvider {
 		else {
 			switch (type) {
 				case STRING: {
-					if (textField.getText().length() == 0) {
+					if (textField.getText().isEmpty()) {
 						setStatusText("Please enter a valid STRING.");
 						return;
 					}

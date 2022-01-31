@@ -88,10 +88,10 @@ public final class ApplicationTrustManagerFactory {
 		}
 
 		String cacertsPath = System.getProperty(GHIDRA_CACERTS_PATH_PROPERTY);
-		if (cacertsPath == null || cacertsPath.length() == 0) {
+		if (cacertsPath == null || cacertsPath.isEmpty()) {
 			// check user preferences if cacerts not set via system property
 			cacertsPath = Preferences.getProperty(GHIDRA_CACERTS_PATH_PROPERTY);
-			if (cacertsPath == null || cacertsPath.length() == 0) {
+			if (cacertsPath == null || cacertsPath.isEmpty()) {
 				Msg.info(ApplicationTrustManagerFactory.class,
 					"Trust manager disabled, cacerts have not been set");
 				trustManager = new OpenTrustManager();

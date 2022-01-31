@@ -176,7 +176,7 @@ class ProgramSaveManager {
 			}
 		}
 
-		if (saveProgramsList.size() == 0) {
+		if (saveProgramsList.isEmpty()) {
 			return true;
 		}
 		// calling can close here ensures that we use the same dialog for single files
@@ -442,7 +442,7 @@ class ProgramSaveManager {
 			ActionListener listener = event -> {
 				DomainFolder folder = dataTreeSaveDialog.getDomainFolder();
 				String newName = dataTreeSaveDialog.getNameText();
-				if (newName.length() == 0) {
+				if (newName.isEmpty()) {
 					dataTreeSaveDialog.setStatusText("Please enter a name");
 					return;
 				}

@@ -103,7 +103,7 @@ public class VersionControlAddAction extends VersionControlAction {
 				changedList.add(domainFile);
 			}
 		}
-		if (changedList.size() > 0) {
+		if (!changedList.isEmpty()) {
 			ChangedFilesDialog dialog = new ChangedFilesDialog(tool, changedList);
 			dialog.setCancelToolTipText("Cancel Add to Version Control");
 			if (!dialog.showDialog()) { // blocks until the user hits Save or Cancel
@@ -116,7 +116,7 @@ public class VersionControlAddAction extends VersionControlAction {
                 }
             }
 		}
-		if (list.size() > 0) {
+		if (!list.isEmpty()) {
 			AddToVersionControlTask task = new AddToVersionControlTask(list, tool);
 			tool.execute(task);
 		}

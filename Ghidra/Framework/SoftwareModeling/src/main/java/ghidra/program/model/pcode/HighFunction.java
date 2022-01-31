@@ -365,7 +365,7 @@ public class HighFunction extends PcodeSyntaxTree {
 					oldinst.add(curvn);
 				}
 			}
-			if (oldinst.size() == 0) {
+			if (oldinst.isEmpty()) {
 				return high; // Everybody is in the same group
 			}
 			if (!(high instanceof HighLocal)) {
@@ -465,18 +465,18 @@ public class HighFunction extends PcodeSyntaxTree {
 		}
 		localSymbols.buildLocalDbXML(resBuf, namespace);
 		proto.buildPrototypeXML(resBuf, getDataTypeManager());
-		if ((jumpTables != null) && (jumpTables.size() > 0)) {
+		if ((jumpTables != null) && (!jumpTables.isEmpty())) {
 			resBuf.append("<jumptablelist>\n");
 			for (JumpTable jumpTable : jumpTables) {
 				jumpTable.buildXml(resBuf);
 			}
 			resBuf.append("</jumptablelist>\n");
 		}
-		boolean hasOverrideTag = ((protoOverrides != null) && (protoOverrides.size() > 0));
+		boolean hasOverrideTag = ((protoOverrides != null) && (!protoOverrides.isEmpty()));
 		if (hasOverrideTag) {
 			resBuf.append("<override>\n");
 		}
-		if ((protoOverrides != null) && (protoOverrides.size() > 0)) {
+		if ((protoOverrides != null) && (!protoOverrides.isEmpty())) {
 			PcodeDataTypeManager dtmanage = getDataTypeManager();
 			for (DataTypeSymbol sym : protoOverrides) {
 				Address addr = sym.getAddress();

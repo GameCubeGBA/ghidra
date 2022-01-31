@@ -122,7 +122,7 @@ public class VariousChoicesPanel extends ConflictPanel {
 	 * @param text the text
 	 */
 	void setHeader(String text) {
-		if (text != null && text.length() != 0) {
+		if (text != null && !text.isEmpty()) {
 			headerLabel.setText(ConflictUtility.wrapAsHTML(text));
 			add(headerLabel, BorderLayout.NORTH);
 		}
@@ -191,7 +191,7 @@ public class VariousChoicesPanel extends ConflictPanel {
 			if (choices[i] == null) {
 				choices[i] = "-- none --";
 			}
-			else if (choices[i].length() == 0) {
+			else if (choices[i].isEmpty()) {
 				choices[i] = "-- empty --";
 			}
 		}
@@ -497,7 +497,7 @@ public class VariousChoicesPanel extends ConflictPanel {
 	 */
 	@Override
 	public boolean hasChoice() {
-		return rows.size() > 0;
+		return !rows.isEmpty();
 	}
 
 	private class MyLabel extends GLabel {

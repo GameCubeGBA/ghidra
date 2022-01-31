@@ -483,7 +483,7 @@ public class DataTypeMergeManager implements MergeResolver {
 	}
 
 	private void processDataTypeConflicts() throws CancelledException {
-		while (dtConflictList.size() > 0) {
+		while (!dtConflictList.isEmpty()) {
 			currentMonitor.checkCanceled();
 			currentMonitor.setProgress(++progressIndex);
 
@@ -497,7 +497,7 @@ public class DataTypeMergeManager implements MergeResolver {
 
 		cleanUpDataTypes();
 
-		if (fixUpList.size() > 0) {
+		if (!fixUpList.isEmpty()) {
 			StringBuilder sb = new StringBuilder();
 			sb.append("The following data types are unresolved:\n");
 			for (FixUpInfo info : fixUpList) {

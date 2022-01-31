@@ -88,7 +88,7 @@ class PseudoDataComponent extends PseudoData {
 		String myName = component.getFieldName();
 
 		// if the name is blank, look up in sym table for any references
-		if (myName == null || myName.length() == 0) {
+		if (myName == null || myName.isEmpty()) {
 			myName = "field" + component.getOffset();
 		}
 		return myName;
@@ -108,7 +108,7 @@ class PseudoDataComponent extends PseudoData {
 
 	private String getComponentName(String parentPath) {
 		StringBuilder nameBuffer = new StringBuilder();
-		if (parentPath != null && parentPath.length() > 0) {
+		if (parentPath != null && !parentPath.isEmpty()) {
 			nameBuffer.append(parentPath);
 			if (component != null) { // not an array?
 				nameBuffer.append('.');

@@ -156,7 +156,7 @@ public class ClangTokenGroup implements ClangNode, Iterable<ClangNode> {
 		StringBuilder buffer = new StringBuilder();
         for (ClangNode node : tokgroup) {
             String tokenStr = node.toString();
-            if (tokenStr.length() == 0) {
+            if (tokenStr.isEmpty()) {
                 continue;
             }
             if (lastTokenStr != null && isLetterDigitOrUnderscore(tokenStr.charAt(0)) &&

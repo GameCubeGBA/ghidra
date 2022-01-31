@@ -351,7 +351,7 @@ class WorkspacePanel extends JPanel implements WorkspaceChangeListener {
 			if (newName.equals(workspaceName)) {
 				return;
 			}
-			if (newName.length() > 0) {
+			if (!newName.isEmpty()) {
 
 				try {
 					activeWorkspace.setName(newName);

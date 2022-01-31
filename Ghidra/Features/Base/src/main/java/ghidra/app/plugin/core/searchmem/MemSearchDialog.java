@@ -672,7 +672,7 @@ class MemSearchDialog extends DialogComponentProvider {
 	private void updateSearchData() {
 		currentFormat.setEndieness(bigEndian.isSelected());
 		SearchData inputData = currentFormat.getSearchData(valueField.getText());
-		if (valueField.getText().trim().length() != 0 && inputData.isValidInputData()) {
+		if (!valueField.getText().trim().isEmpty() && inputData.isValidInputData()) {
 			updateSearchData(inputData);
 		}
 		else {
@@ -749,7 +749,7 @@ class MemSearchDialog extends DialogComponentProvider {
 			String afterOffset = currentText.substring(len + offs, currentText.length());
 			String proposedResult = beforeOffset + afterOffset;
 
-			if (proposedResult.length() == 0) {
+			if (proposedResult.isEmpty()) {
 				updateSearchData(DEFAULT_SEARCH_DATA);
 				super.remove(offs, len);
 				return;

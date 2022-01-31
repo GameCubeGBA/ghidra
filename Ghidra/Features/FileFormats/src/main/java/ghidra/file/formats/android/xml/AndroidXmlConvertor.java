@@ -126,7 +126,7 @@ public class AndroidXmlConvertor {
 	}
 
 	private static String getNamespacePrefix(String prefix) {
-		if (prefix == null || prefix.length() == 0) {
+		if (prefix == null || prefix.isEmpty()) {
 			return "";
 		}
 		return prefix + ":";

@@ -446,7 +446,7 @@ public class Register implements java.io.Serializable, Comparable<Register> {
 	}
 
 	public boolean hasChildren() {
-		return childRegisters.size() != 0;
+		return !childRegisters.isEmpty();
 	}
 
 	void setGroup(String group) {

@@ -291,7 +291,7 @@ public abstract class DockingAction implements DockingActionIf {
 
 		button.setIcon(icon);
 		String tt = getDescription();
-		if (tt == null || tt.length() == 0) {
+		if (tt == null || tt.isEmpty()) {
 			tt = getName();
 		}
 		button.setToolTipText(tt);

@@ -208,7 +208,7 @@ public class ExternalLocationDB implements ExternalLocation {
 	@Override
 	public void setLocation(String label, Address addr, SourceType source)
 			throws InvalidInputException {
-		if (label != null && label.length() == 0) {
+		if (label != null && label.isEmpty()) {
 			label = null;
 		}
 		if (label == null && addr == null) {
@@ -255,7 +255,7 @@ public class ExternalLocationDB implements ExternalLocation {
 			if (!namespace.isExternal()) {
 				throw new IllegalArgumentException("external namespace required");
 			}
-			if (newName == null || newName.length() == 0) {
+			if (newName == null || newName.isEmpty()) {
 				sourceType = SourceType.DEFAULT;
 				String originalName = getOriginalImportedName();
 				if (originalName != null) {

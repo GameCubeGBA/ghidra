@@ -986,7 +986,7 @@ public class GccRttiAnalysisScript extends GhidraScript {
 
 			List<Address> referenceFromAddresses = getReferenceFromAddresses(address);
 
-			if (referenceFromAddresses.size() > 0) {
+			if (!referenceFromAddresses.isEmpty()) {
 				return false;
 			}
 

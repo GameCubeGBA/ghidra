@@ -907,7 +907,7 @@ public class CompEditorPanel extends CompositeEditorPanel {
 				if (doc.equals(nameTextField.getDocument())) {
 					model.clearStatus();
 					String name = nameTextField.getText().trim();
-					if (name.length() == 0) {
+					if (name.isEmpty()) {
 						return;
 					}
 					try {
@@ -1008,7 +1008,7 @@ public class CompEditorPanel extends CompositeEditorPanel {
 		String nameText = this.nameTextField.getText();
 		String newName = nameText.trim();
 		if (!DataUtilities.isValidDataTypeName(newName)) {
-			if (newName.length() == 0) {
+			if (newName.isEmpty()) {
 				model.setStatus("Name is required.");
 			}
 			else {
@@ -1017,7 +1017,7 @@ public class CompEditorPanel extends CompositeEditorPanel {
 			return;
 		}
 		String originalDtName = model.getOriginalDataTypeName();
-		if (!newName.equals(originalDtName) && newName.length() == 0) {
+		if (!newName.equals(originalDtName) && newName.isEmpty()) {
 			nameTextField.setText(originalDtName);
 			model.setStatus("Name is required. So original name has been restored.");
 			return;

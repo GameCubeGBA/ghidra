@@ -268,7 +268,7 @@ class BookmarkTableModel extends AddressBasedTableModel<BookmarkRowObject> {
                     iters.add(bkIt);
                 }
             }
-			if (iters.size() > 0) {
+			if (!iters.isEmpty()) {
 				currIter = iters.get(0);
 			}
 		}

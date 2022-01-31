@@ -35,7 +35,7 @@ public final class DataLanguageHelper {
 
         List<LanguageCompilerSpecPair> pairs = languageService.getLanguageCompilerSpecPairs( query );
 
-        if ( pairs.size() > 0 ) {
+        if (!pairs.isEmpty()) {
             if ( pairs.size() > 1 ) {
                 throw new LanguageNotFoundException( "Too many DATA languages" );
             }

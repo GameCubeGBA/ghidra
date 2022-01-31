@@ -157,7 +157,7 @@ class EnumEditorPanel extends JPanel {
 
 	String getDescription() {
 		String desc = descField.getText();
-		if (desc.length() == 0) {
+		if (desc.isEmpty()) {
 			desc = null;
 		}
 		return desc;
@@ -325,7 +325,7 @@ class EnumEditorPanel extends JPanel {
 
 			private void changed() {
 				String name = nameField.getText().trim();
-				if (name.length() == 0) {
+				if (name.isEmpty()) {
 					return;
 				}
 

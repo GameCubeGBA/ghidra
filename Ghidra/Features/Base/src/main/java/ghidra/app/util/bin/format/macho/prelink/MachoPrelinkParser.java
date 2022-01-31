@@ -105,7 +105,7 @@ public class MachoPrelinkParser {
 		String value = element.getValue();
 		if (value.equals(MachoPrelinkConstants.kPrelinkPersonalitiesKey)) {
 			Element arrayElement = (Element) iterator.next();
-			if (arrayElement.getChildren().size() == 0) {
+			if (arrayElement.getChildren().isEmpty()) {
 				//should be empty...
 			}
 		}

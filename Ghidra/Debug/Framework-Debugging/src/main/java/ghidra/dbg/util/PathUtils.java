@@ -256,7 +256,7 @@ public enum PathUtils {
 
 		protected List<String> parse() {
 			String first = parseName();
-			if (first.length() != 0) {
+			if (!first.isEmpty()) {
 				result.add(first);
 			}
 			while (buf.hasRemaining()) {

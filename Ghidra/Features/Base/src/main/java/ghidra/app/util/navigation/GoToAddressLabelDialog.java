@@ -271,7 +271,7 @@ public class GoToAddressLabelDialog extends DialogComponentProvider implements G
 			input = parseNumber(input);
 		}
 
-		if (input.length() == 0) {
+		if (input.isEmpty()) {
 			escapeCallback();
 			return;
 		}

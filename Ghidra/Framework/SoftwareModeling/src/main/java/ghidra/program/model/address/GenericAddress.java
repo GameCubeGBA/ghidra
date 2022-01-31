@@ -300,7 +300,7 @@ public class GenericAddress implements Address {
 	 */
 	@Override
 	public String toString(String prefix) {
-		boolean showSpace = prefix.length() == 0 && addrSpace.showSpaceName();
+		boolean showSpace = prefix.isEmpty() && addrSpace.showSpaceName();
 		return prefix + toString(showSpace, MINIMUM_DIGITS);
 	}
 

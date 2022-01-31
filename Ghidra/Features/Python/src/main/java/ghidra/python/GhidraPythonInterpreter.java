@@ -446,7 +446,7 @@ public class GhidraPythonInterpreter extends InteractiveInterpreter {
 	 * @see PythonPlugin#getCompletions
 	 */
 	List<CodeCompletion> getCommandCompletions(String cmd, boolean includeBuiltins) {
-		if ((cmd.length() > 0) && (cmd.charAt(cmd.length() - 1) == '(')) {
+		if ((!cmd.isEmpty()) && (cmd.charAt(cmd.length() - 1) == '(')) {
 			return getMethodCommandCompletions(cmd);
 		}
 		return getPropertyCommandCompletions(cmd, includeBuiltins);

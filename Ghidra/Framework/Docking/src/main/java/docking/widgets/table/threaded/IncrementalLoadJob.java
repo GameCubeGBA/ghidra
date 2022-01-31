@@ -218,7 +218,7 @@ public class IncrementalLoadJob<ROW_OBJECT> extends Job implements ThreadedTable
 		@Override
 		public synchronized void addAll(Collection<ROW_OBJECT> collection) {
 			super.addAll(collection);
-			if (collection.size() > 0) {
+			if (!collection.isEmpty()) {
 				swingUpdateManager.update();
 			}
 		}

@@ -186,7 +186,7 @@ public class BrowserCodeUnitFormatOptions extends CodeUnitFormatOptions
 			}
 			if (namespaceOption.isUseLocalPrefixOverride()) {
 				localPrefixOverride = namespaceOption.getLocalPrefixText().trim();
-				if (localPrefixOverride.length() == 0) {
+				if (localPrefixOverride.isEmpty()) {
 					localPrefixOverride = null;
 				}
 			}

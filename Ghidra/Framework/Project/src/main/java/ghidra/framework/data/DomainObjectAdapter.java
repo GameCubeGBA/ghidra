@@ -103,7 +103,7 @@ public abstract class DomainObjectAdapter implements DomainObject {
 				throw new IllegalArgumentException(
 					"Attempted to release domain object with unknown consumer: " + consumer);
 			}
-			if (consumers.size() != 0) {
+			if (!consumers.isEmpty()) {
 				return;
 			}
 		}
@@ -355,7 +355,7 @@ public abstract class DomainObjectAdapter implements DomainObject {
 
 	boolean hasConsumers() {
 		synchronized (consumers) {
-			return consumers.size() > 0;
+			return !consumers.isEmpty();
 		}
 	}
 

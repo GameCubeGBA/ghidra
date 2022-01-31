@@ -374,7 +374,7 @@ public class DataTreeDialog extends DialogComponentProvider
 
 				folderNameLabel.setText(domainFolder.getPathname());
 				if (nameField.isEditable()) {
-					if (nameField.getText().length() > 0) {
+					if (!nameField.getText().isEmpty()) {
 						nameField.selectAll();
 					}
 				}

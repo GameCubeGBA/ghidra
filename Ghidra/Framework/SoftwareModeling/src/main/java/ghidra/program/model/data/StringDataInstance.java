@@ -476,7 +476,7 @@ public class StringDataInstance {
 
 		if (stringLayout.shouldTrimTrailingNulls()) {
 			String str = getStringValueNoTrim();
-			return (str != null) && (str.length() > 0) && str.charAt(str.length() - 1) != 0;
+			return (str != null) && (!str.isEmpty()) && str.charAt(str.length() - 1) != 0;
 		}
 		return false;
 	}
@@ -781,7 +781,7 @@ public class StringDataInstance {
 			return UNKNOWN_DOT_DOT_DOT;
 		}
 
-		if (stringValue.length() == 0 && aci.byteStartOffset != 0) {
+		if (stringValue.isEmpty() && aci.byteStartOffset != 0) {
 			// If the byteStartOffset isn't zero it means there was one char that was the unicode BOM.
 			// Asking the Charset to decode it returned nothing, so force it.
 			stringValue = BOM_RESULT_STR;
@@ -980,7 +980,7 @@ public class StringDataInstance {
 		if (str == null) {
 			return defaultStr;
 		}
-		if (str.length() == 0) {
+		if (str.isEmpty()) {
 			return prefixStr;
 		}
 

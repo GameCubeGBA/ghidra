@@ -217,7 +217,7 @@ public class CreateMultipleLibraries extends GhidraScript {
 		String line = reader.readLine();
 		while (line != null) {
 			monitor.checkCanceled();
-			if (line.length() != 0) {
+			if (!line.isEmpty()) {
 				commonSymbols.add(line);
 			}
 			line = reader.readLine();

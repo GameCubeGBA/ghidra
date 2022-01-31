@@ -127,7 +127,7 @@ public class NextPrevAddressPlugin extends Plugin {
 			Program program = locationMomento.getProgram();
 
 			// add an action to signal a change; don't make the first element a separator
-			if (program != lastProgram && actionList.size() != 0) {
+			if (program != lastProgram && !actionList.isEmpty()) {
 				// add an action that will trigger a separator to be added to the menu
 				actionList.add(createHorizontalRule(lastProgram, program));
 			}

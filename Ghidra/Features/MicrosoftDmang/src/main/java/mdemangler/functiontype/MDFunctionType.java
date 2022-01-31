@@ -174,7 +174,7 @@ public class MDFunctionType extends MDType {
 		}
 		if (throwAttribute != null) {
 			String ta = throwAttribute.toString();
-			if (ta.length() != 0) {
+			if (!ta.isEmpty()) {
 				dmang.appendString(builder, " " + ta);
 			}
 		}

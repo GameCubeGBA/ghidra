@@ -111,7 +111,7 @@ public final class ApplicationKeyManagerFactory {
 	private static String prunePath(String path) {
 		if (path != null) {
 			path = path.trim();
-			if (path.length() == 0) {
+			if (path.isEmpty()) {
 				path = null;
 			}
 		}
@@ -546,7 +546,7 @@ public final class ApplicationKeyManagerFactory {
 
 			ProtectedKeyStoreData keystoreData = null;
 			try {
-				if (newKeystorePath != null && newKeystorePath.length() != 0) {
+				if (newKeystorePath != null && !newKeystorePath.isEmpty()) {
 					keystoreData = getProtectedKeyStoreData(newKeystorePath);
 				}
 				else if (defaultIdentity != null) {

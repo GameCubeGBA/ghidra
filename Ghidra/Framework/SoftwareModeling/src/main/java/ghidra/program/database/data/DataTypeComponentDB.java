@@ -222,7 +222,7 @@ class DataTypeComponentDB implements InternalDataTypeComponent {
 		if (record != null) {
 			if (name != null) {
 				name = name.trim();
-				if (name.length() == 0 || name.equals(getDefaultFieldName())) {
+				if (name.isEmpty() || name.equals(getDefaultFieldName())) {
 					name = null;
 				}
 				else {

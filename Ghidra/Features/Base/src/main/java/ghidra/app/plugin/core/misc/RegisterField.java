@@ -164,7 +164,7 @@ public class RegisterField extends JTextField {
 	private boolean processText() {
 		String text = getText();
 	
-		if (text.length() == 0){
+		if (text.isEmpty()){
 			if (currentValue != null) {
 				currentValue = null;
 				notifyListeners();

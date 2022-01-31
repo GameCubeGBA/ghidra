@@ -587,10 +587,10 @@ public class ReferenceDBManager implements ReferenceManager, ManagerDB, ErrorHan
 	public Reference addExternalReference(Address fromAddr, String libraryName, String extLabel,
 			Address extAddr, SourceType sourceType, int opIndex, RefType type)
 			throws InvalidInputException, DuplicateNameException {
-		if (libraryName == null || libraryName.length() == 0) {
+		if (libraryName == null || libraryName.isEmpty()) {
 			throw new InvalidInputException("A valid library name must be specified.");
 		}
-		if (extLabel != null && extLabel.length() == 0) {
+		if (extLabel != null && extLabel.isEmpty()) {
 			extLabel = null;
 		}
 		if (extLabel == null && extAddr == null) {
@@ -622,7 +622,7 @@ public class ReferenceDBManager implements ReferenceManager, ManagerDB, ErrorHan
 		if (extNamespace == null || !extNamespace.isExternal()) {
 			throw new InvalidInputException("The namespace must be an external namespace.");
 		}
-		if (extLabel != null && extLabel.length() == 0) {
+		if (extLabel != null && extLabel.isEmpty()) {
 			extLabel = null;
 		}
 		if (extLabel == null && extAddr == null) {

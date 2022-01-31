@@ -202,7 +202,7 @@ public class ViewportUtility implements Observer {
 				// any valid lines, then we must be moving to the top of the file so just move
 				// the viewport to the top.
 				List<String> readLines = reader.readPreviousChunk();
-				if (readLines.size() > 0) {
+				if (!readLines.isEmpty()) {
 
 					// We have valid rows, so add them to the table (at the top, because we're 
 					// reading a previous chunk).
@@ -281,7 +281,7 @@ public class ViewportUtility implements Observer {
 				// any valid lines, then we must be at the end of the file so just move the 
 				// viewport to the bottom.
 				List<String> readLines = reader.readNextChunk();
-				if (readLines.size() > 0) {
+				if (!readLines.isEmpty()) {
 
 					// We have valid rows, so add them to the table (at the bottom, because we're 
 					// reading the next chunk).

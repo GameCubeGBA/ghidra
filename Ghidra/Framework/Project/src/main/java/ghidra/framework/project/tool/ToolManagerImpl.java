@@ -115,7 +115,7 @@ public class ToolManagerImpl implements ToolManager, PropertyChangeListener {
 		List<PluginTool> list = namesMap.get(toolName);
 		SystemUtilities.assertTrue(list != null, "Attempted to remove tool that's not there");
 		list.remove(tool);
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			namesMap.remove(toolName);
 			toolStatusMap.remove(toolName);
 		}
@@ -190,7 +190,7 @@ public class ToolManagerImpl implements ToolManager, PropertyChangeListener {
 	public Workspace createWorkspace(String name) throws DuplicateNameException {
 		// if passed in the default "untitled" name, or no name at all,
 		// then bump up the name with the "one-up" number to create a new one
-		if (name == null || name.length() == 0) {
+		if (name == null || name.isEmpty()) {
 			name = DEFAULT_WORKSPACE_NAME;
 		}
 		if (isDefaultWorkspaceName(name)) {
@@ -256,7 +256,7 @@ public class ToolManagerImpl implements ToolManager, PropertyChangeListener {
 		// set the oldest workspace to now be the active workspace;
 		// if this is the last workspace, then create a new "empty"
 		// workspace which is the project default
-		if (workspaces.size() == 0) {
+		if (workspaces.isEmpty()) {
 			try {
 				createWorkspace(DEFAULT_WORKSPACE_NAME);
 			}
@@ -368,7 +368,7 @@ public class ToolManagerImpl implements ToolManager, PropertyChangeListener {
 
 		// have the workspaces added/removed any tools?
 		// or has the active workspace changed?
-		return ((changedWorkspaces.size() > 0) || activeWorkspaceChanged);
+		return ((!changedWorkspaces.isEmpty()) || activeWorkspaceChanged);
 	}
 
 	/**
@@ -679,7 +679,7 @@ public class ToolManagerImpl implements ToolManager, PropertyChangeListener {
 
 		PluginTool lastTool = list.get(list.size() - 2);	// the last one is the one we just added above
 		String instanceName = lastTool.getInstanceName();
-		if (instanceName.length() == 0) {
+		if (instanceName.isEmpty()) {
 			return "2";
 		}
 
