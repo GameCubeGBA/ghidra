@@ -208,14 +208,14 @@ public enum PathUtils {
 					buf.get();
 					break;
 				}
-				else if (LPAREN.matcher(buf).lookingAt()) {
-					buf.get();
-					advanceParenthesized();
-				}
-				else {
-					buf.get();
-				}
-			}
+                if (LPAREN.matcher(buf).lookingAt()) {
+                    buf.get();
+                    advanceParenthesized();
+                }
+                else {
+                    buf.get();
+                }
+            }
 		}
 
 		protected String parseName() {
@@ -224,17 +224,17 @@ public enum PathUtils {
 				if (sep.matcher(buf).lookingAt()) {
 					break;
 				}
-				else if (LBRACKET.matcher(buf).lookingAt()) {
-					break;
-				}
-				else if (LPAREN.matcher(buf).lookingAt()) {
-					buf.get();
-					advanceParenthesized();
-				}
-				else {
-					buf.get();
-				}
-			}
+                if (LBRACKET.matcher(buf).lookingAt()) {
+                    break;
+                }
+                if (LPAREN.matcher(buf).lookingAt()) {
+                    buf.get();
+                    advanceParenthesized();
+                }
+                else {
+                    buf.get();
+                }
+            }
 			int e = buf.position();
 			buf.position(p);
 			String tok = buf.subSequence(0, e - p).toString();

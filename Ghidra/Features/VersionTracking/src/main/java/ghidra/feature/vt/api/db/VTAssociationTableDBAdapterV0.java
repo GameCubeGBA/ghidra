@@ -41,11 +41,11 @@ public class VTAssociationTableDBAdapterV0 extends VTAssociationTableDBAdapter {
 		if (table == null) {
 			throw new VersionException("Missing Table: " + TABLE_NAME);
 		}
-		else if (table.getSchema().getVersion() != 0) {
-			throw new VersionException("Expected version 0 for table " + TABLE_NAME + " but got " +
-				table.getSchema().getVersion());
-		}
-	}
+        if (table.getSchema().getVersion() != 0) {
+            throw new VersionException("Expected version 0 for table " + TABLE_NAME + " but got " +
+                table.getSchema().getVersion());
+        }
+    }
 
 	@Override
 	DBRecord insertRecord(long sourceAddressID, long destinationAddressID, VTAssociationType type,

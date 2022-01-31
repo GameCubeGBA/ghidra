@@ -278,11 +278,11 @@ public class OverlayHelpTree {
 				if (text1 == null) {
 					return 1;
 				}
-				else if (text2 == null) {
-					return -1;
-				}
+                if (text2 == null) {
+                    return -1;
+                }
 
-				int result = text1.compareTo(text2);
+                int result = text1.compareTo(text2);
 				if (result != 0) {
 					return result;
 				}

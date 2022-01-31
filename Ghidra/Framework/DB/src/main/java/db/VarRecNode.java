@@ -237,13 +237,13 @@ class VarRecNode extends LongKeyRecordNode {
 			if (offset == halfway) {
 				return i;
 			}
-			else if (offset < halfway) {
-				max = i - 1;
-			}
-			else {
-				min = i + 1;
-			}
-		}
+            if (offset < halfway) {
+                max = i - 1;
+            }
+            else {
+                min = i + 1;
+            }
+        }
 		return min;
 	}
 

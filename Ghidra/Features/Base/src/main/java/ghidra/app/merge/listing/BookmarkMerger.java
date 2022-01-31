@@ -285,20 +285,20 @@ class BookmarkMerger extends AbstractListingMerger {
 					"Error in LATEST checked in program - Shouldn't be multiple notes at a single address. Address=" +
 						addr.toString());
 			}
-			else if (latest.length == 0) {
-				// MY added
-				merge(addr, myType, null, KEEP_MY, monitor);
-			}
-			else if (latest.length == 1) {
-				String latestCategory = latest[0].getCategory();
-				String latestComment = latest[0].getComment();
-				if (!myCategory.equals(latestCategory) ||
-					!myComment.equals(latestComment)) {
-					// MY & LATEST added different NOTEs, so conflict.
-					addConflict(addr, myType, null);
-				}
-			}
-		}
+            if (latest.length == 0) {
+                // MY added
+                merge(addr, myType, null, KEEP_MY, monitor);
+            }
+            else if (latest.length == 1) {
+                String latestCategory = latest[0].getCategory();
+                String latestComment = latest[0].getComment();
+                if (!myCategory.equals(latestCategory) ||
+                    !myComment.equals(latestComment)) {
+                    // MY & LATEST added different NOTEs, so conflict.
+                    addConflict(addr, myType, null);
+                }
+            }
+        }
 	}
 
 	private void checkAddedNonNoteBookmark(TaskMonitor monitor, Address addr, Bookmark currentBookmark)

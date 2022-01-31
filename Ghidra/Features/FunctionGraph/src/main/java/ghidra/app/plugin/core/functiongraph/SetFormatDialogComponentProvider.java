@@ -64,10 +64,10 @@ public class SetFormatDialogComponentProvider extends DialogComponentProvider {
 			if ("Reset All Formats".equals(action.getName())) {
 				continue;
 			}
-			else if ("Reset Format".equals(action.getName())) {
-				continue;
-			}
-			addAction(action);
+            if ("Reset Format".equals(action.getName())) {
+                continue;
+            }
+            addAction(action);
 		}
 
 		addAction(new CustomResetFormatAction());

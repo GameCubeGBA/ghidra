@@ -407,18 +407,18 @@ public class ExtensionUtils {
 				throw new ExtensionException(e.getMessage(), ExtensionExceptionType.ZIP_ERROR);
 			}
 		}
-		else if (file.isDirectory() && file.canRead()) {
-			File[] files = file.listFiles();
-			if (files != null) {
-				for (File f : files) {
-					if (f.getName().equals(PROPERTIES_FILE_NAME)) {
-						return true;
-					}
-				}
-			}
-		}
+        if (file.isDirectory() && file.canRead()) {
+            File[] files = file.listFiles();
+            if (files != null) {
+                for (File f : files) {
+                    if (f.getName().equals(PROPERTIES_FILE_NAME)) {
+                        return true;
+                    }
+                }
+            }
+        }
 
-		return false;
+        return false;
 	}
 
 	/**

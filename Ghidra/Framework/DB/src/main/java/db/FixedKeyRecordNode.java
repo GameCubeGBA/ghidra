@@ -203,13 +203,13 @@ abstract class FixedKeyRecordNode extends FixedKeyNode implements FieldKeyRecord
 			if (rc == 0) {
 				return i;
 			}
-			else if (rc > 0) {
-				min = i + 1;
-			}
-			else {
-				max = i - 1;
-			}
-		}
+            if (rc > 0) {
+                min = i + 1;
+            }
+            else {
+                max = i - 1;
+            }
+        }
 		return -(min + 1);
 	}
 

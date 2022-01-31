@@ -172,7 +172,7 @@ public class ShortListIndexer implements Serializable {
         if (capacity == Short.MAX_VALUE) {
             return -1;
         }
-        else if (capacity < Short.MAX_VALUE/2) {
+        if (capacity < Short.MAX_VALUE/2) {
 
             newCapacity = (short)(capacity*2);
         }

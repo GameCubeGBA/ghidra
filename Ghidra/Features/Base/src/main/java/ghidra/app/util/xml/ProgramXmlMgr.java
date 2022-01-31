@@ -406,20 +406,20 @@ public class ProgramXmlMgr {
 		if (name == null) {
 			return "Unknown";
 		}
-		else if (name.toLowerCase().indexOf("portable executable") >= 0 &&
-			name.toLowerCase().indexOf("(pe)") >= 0) {
-			return PeLoader.PE_NAME;
-		}
-		else if (name.toLowerCase().indexOf("(elf)") != -1) {
-			return ElfLoader.ELF_NAME;
-		}
-		else if (name.toLowerCase().indexOf("dos executable") >= 0) {
-			return MzLoader.MZ_NAME;
-		}
-		else if (name.toLowerCase().indexOf("new executable") >= 0) {
-			return NeLoader.NE_NAME;
-		}
-		return name;
+        if (name.toLowerCase().indexOf("portable executable") >= 0 &&
+            name.toLowerCase().indexOf("(pe)") >= 0) {
+            return PeLoader.PE_NAME;
+        }
+        if (name.toLowerCase().indexOf("(elf)") != -1) {
+            return ElfLoader.ELF_NAME;
+        }
+        if (name.toLowerCase().indexOf("dos executable") >= 0) {
+            return MzLoader.MZ_NAME;
+        }
+        if (name.toLowerCase().indexOf("new executable") >= 0) {
+            return NeLoader.NE_NAME;
+        }
+        return name;
 	}
 
 	private boolean isOldXml() {

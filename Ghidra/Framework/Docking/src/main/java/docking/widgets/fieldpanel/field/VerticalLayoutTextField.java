@@ -389,13 +389,11 @@ public class VerticalLayoutTextField implements TextField {
 		if (direction > 0) { // if scrolling down
 			return rowHeight - rowOffset;
 		}
-		else if (rowOffset == 0) {
-			return -rowHeight;
-		}
-		else {
-			return -rowOffset;
-		}
-	}
+        if (rowOffset == 0) {
+            return -rowHeight;
+        }
+        return -rowOffset;
+    }
 
 	@Override
 	public boolean isPrimary() {

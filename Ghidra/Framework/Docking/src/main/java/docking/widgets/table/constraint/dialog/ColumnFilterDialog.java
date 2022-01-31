@@ -155,11 +155,11 @@ public class ColumnFilterDialog<R> extends DialogComponentProvider
 				d.setStatusText("Please enter a name!");
 				return false;
 			}
-			else if (filterSaveManager.containsFilterWithName(name)) {
-				d.setStatusText("Filter already exists with that name!");
-				return false;
-			}
-			return true;
+            if (filterSaveManager.containsFilterWithName(name)) {
+                d.setStatusText("Filter already exists with that name!");
+                return false;
+            }
+            return true;
 		});
 
 		DockingWindowManager.showDialog(this.getComponent(), dialog);

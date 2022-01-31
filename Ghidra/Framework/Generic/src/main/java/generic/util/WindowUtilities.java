@@ -43,10 +43,10 @@ public class WindowUtilities {
 		if (w instanceof Frame) {
 			return ((Frame) w).getTitle();
 		}
-		else if (w instanceof Dialog) {
-			return ((Dialog) w).getTitle();
-		}
-		return null;
+        if (w instanceof Dialog) {
+            return ((Dialog) w).getTitle();
+        }
+        return null;
 	}
 
 	/**

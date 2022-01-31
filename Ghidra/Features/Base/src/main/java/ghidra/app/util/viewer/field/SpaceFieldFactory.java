@@ -77,10 +77,10 @@ public class SpaceFieldFactory extends FieldFactory {
 					cu.removeProperty(CodeUnit.SPACE_PROPERTY);
 					return null;
 				}
-				else if (n < 0) {
-					n = -n;
-				}
-				FieldElement[] fes = new FieldElement[n];
+                if (n < 0) {
+                    n = -n;
+                }
+                FieldElement[] fes = new FieldElement[n];
 				AttributedString as = new AttributedString("", Color.BLACK, getMetrics());
 				for (int i = 0; i < n; i++) {
 					fes[i] = new TextFieldElement(as, 0, 0);

@@ -283,11 +283,11 @@ abstract class CompositeDB extends DataTypeDB implements CompositeInternal {
 			throw new DataTypeDependencyException(
 				"Data type " + getDisplayName() + " can't contain itself.");
 		}
-		else if (DataTypeUtilities.isSecondPartOfFirst(dataType, this)) {
-			throw new DataTypeDependencyException("Data type " + dataType.getDisplayName() +
-				" has " + getDisplayName() + " within it.");
-		}
-	}
+        if (DataTypeUtilities.isSecondPartOfFirst(dataType, this)) {
+            throw new DataTypeDependencyException("Data type " + dataType.getDisplayName() +
+                " has " + getDisplayName() + " within it.");
+        }
+    }
 
 	protected DataType doCheckedResolve(DataType dt)
 			throws DataTypeDependencyException {

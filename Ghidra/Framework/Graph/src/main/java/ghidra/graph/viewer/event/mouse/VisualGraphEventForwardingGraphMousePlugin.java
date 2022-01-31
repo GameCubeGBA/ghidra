@@ -163,13 +163,13 @@ public class VisualGraphEventForwardingGraphMousePlugin<V extends VisualVertex,
 				handleMouseEventAfterLeavingVertex(e, mousePressedInfo);
 				return;
 			}
-			else if (mousePressedInfo != mouseDraggedMouseInfo) {
-				// don't allow dragging from one vertex into another
-				handleMouseEventAfterLeavingVertex(e, mousePressedInfo);
-				return;
-			}
+            if (mousePressedInfo != mouseDraggedMouseInfo) {
+                // don't allow dragging from one vertex into another
+                handleMouseEventAfterLeavingVertex(e, mousePressedInfo);
+                return;
+            }
 
-			if (mouseDraggedMouseInfo.isScaledPastInteractionThreshold()) {
+            if (mouseDraggedMouseInfo.isScaledPastInteractionThreshold()) {
 				return;
 			}
 

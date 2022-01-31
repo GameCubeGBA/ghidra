@@ -141,11 +141,11 @@ class EdgeSet implements KeyIndexableSet<Edge> {
 		if (contains(e)) {
 			return false;
 		}
-		else if (nextIndex >= capacity) {
-			grow();
-		}
+        if (nextIndex >= capacity) {
+            grow();
+        }
 
-		edges[nextIndex] = e;
+        edges[nextIndex] = e;
 		edgeIndices.add(e.key(), nextIndex++);
 		VertexSet vertices = parentGraph.vertices();
 		Vertex from = e.from();

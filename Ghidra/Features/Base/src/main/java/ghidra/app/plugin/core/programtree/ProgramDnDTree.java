@@ -698,10 +698,10 @@ public class ProgramDnDTree extends DragNDropTree {
 			if (selectionCount == 1) {
 				return true;
 			}
-			else if (selectionCount == 0) {
-				return true;
-			}
-			return false;
+            if (selectionCount == 0) {
+                return true;
+            }
+            return false;
 		}
 		// allow 1 or many in selection
 		if (selectionCount > 0) {

@@ -91,10 +91,10 @@ public class FunctionSymbolNode extends SymbolNode {
 		if (symbol.isExternal()) {
 			return cut ? DISABLED_EXTERNAL_ICON : EXTERNAL_ICON;
 		}
-		else if (isThunk()) {
-			return cut ? DISABLED_THUNK_ICON : THUNK_ICON;
-		}
-		return cut ? DISABLED_FUNCTION_ICON : FUNCTION_ICON;
+        if (isThunk()) {
+            return cut ? DISABLED_THUNK_ICON : THUNK_ICON;
+        }
+        return cut ? DISABLED_FUNCTION_ICON : FUNCTION_ICON;
 	}
 
 	@Override

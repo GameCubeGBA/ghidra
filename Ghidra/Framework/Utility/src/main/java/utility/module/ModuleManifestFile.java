@@ -87,40 +87,39 @@ public class ModuleManifestFile {
 		if (trimmedLine.length() == 0) {
 			return; // ignore empty lines.
 		}
-
-		else if (trimmedLine.startsWith(NAME_IDENTIFIER)) {
-			processNameLine(trimmedLine);
-		}
-		else if (trimmedLine.startsWith(DEPENDENCY_IDENTIFIER)) {
-			// ignore for now
-		}
-		else if (trimmedLine.startsWith(EXCLUDE_FROM_GHIDRA_JAR)) {
-			String[] tokens = trimmedLine.split(":");
-			String value = tokens.length == 2 ? tokens[1].trim() : "";
-			excludeFromGhidraJar = Boolean.valueOf(value);
-		}
-		else if (trimmedLine.startsWith(MODULE_FILE_LICENSE)) {
-			processModuleFileLicense(trimmedLine);
-		}
-		else if (trimmedLine.startsWith(COMMENT_IDENTIFIER)) {
-			// this is a comment line--ignore!
-		}
-		else if (trimmedLine.startsWith(DATA_SEARCH_IGNORE_DIR)) {
-			processDataSearchIgnoreDir(trimmedLine);
-		}
-		else if (trimmedLine.startsWith(MODULE_DIR_IDENTIFIER)) {
-			// do nothing for now
-		}
-		else if (trimmedLine.startsWith(FAT_JAR)) {
-			processFatJar(trimmedLine);
-		}
-		else {
-			String message =
-				"Module manifest file error on line " + (lineNumber + 1) + " of file: " + file +
-					"\n\t-> Invalid line encountered: " + trimmedLine;
-			Msg.debug(this, message);
-		}
-	}
+        if (trimmedLine.startsWith(NAME_IDENTIFIER)) {
+            processNameLine(trimmedLine);
+        }
+        else if (trimmedLine.startsWith(DEPENDENCY_IDENTIFIER)) {
+            // ignore for now
+        }
+        else if (trimmedLine.startsWith(EXCLUDE_FROM_GHIDRA_JAR)) {
+            String[] tokens = trimmedLine.split(":");
+            String value = tokens.length == 2 ? tokens[1].trim() : "";
+            excludeFromGhidraJar = Boolean.valueOf(value);
+        }
+        else if (trimmedLine.startsWith(MODULE_FILE_LICENSE)) {
+            processModuleFileLicense(trimmedLine);
+        }
+        else if (trimmedLine.startsWith(COMMENT_IDENTIFIER)) {
+            // this is a comment line--ignore!
+        }
+        else if (trimmedLine.startsWith(DATA_SEARCH_IGNORE_DIR)) {
+            processDataSearchIgnoreDir(trimmedLine);
+        }
+        else if (trimmedLine.startsWith(MODULE_DIR_IDENTIFIER)) {
+            // do nothing for now
+        }
+        else if (trimmedLine.startsWith(FAT_JAR)) {
+            processFatJar(trimmedLine);
+        }
+        else {
+            String message =
+                "Module manifest file error on line " + (lineNumber + 1) + " of file: " + file +
+                    "\n\t-> Invalid line encountered: " + trimmedLine;
+            Msg.debug(this, message);
+        }
+    }
 
 	private void processDataSearchIgnoreDir(String trimmedLine) {
 		String ignoreDirName = trimmedLine.substring(DATA_SEARCH_IGNORE_DIR.length()).trim();

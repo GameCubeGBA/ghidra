@@ -68,10 +68,10 @@ class FunctionAdapterV0 extends FunctionAdapter {
 		if (table == null) {
 			throw new VersionException("Missing Table: " + FUNCTIONS_TABLE_NAME);
 		}
-		else if (table.getSchema().getVersion() != SCHEMA_VERSION) {
-			throw new VersionException(false);
-		}
-	}
+        if (table.getSchema().getVersion() != SCHEMA_VERSION) {
+            throw new VersionException(false);
+        }
+    }
 
 	/**
 	 * @see ghidra.program.database.function.FunctionAdapter#deleteTable(db.DBHandle)

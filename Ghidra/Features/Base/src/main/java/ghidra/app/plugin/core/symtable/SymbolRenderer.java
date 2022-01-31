@@ -89,13 +89,13 @@ class SymbolRenderer extends GhidraTableCellRenderer {
 		if (address.isStackAddress()) {
 			return getStackAddressString(address);
 		}
-		else if (address.isRegisterAddress()) {
-			return getRegisterAddressString(address);
-		}
-		else if (address.isExternalAddress() || address == Address.NO_ADDRESS) {
-			return "";
-		}
-		return address.toString();
+        if (address.isRegisterAddress()) {
+            return getRegisterAddressString(address);
+        }
+        if (address.isExternalAddress() || address == Address.NO_ADDRESS) {
+            return "";
+        }
+        return address.toString();
 	}
 
 	private String getRegisterAddressString(Address address) {

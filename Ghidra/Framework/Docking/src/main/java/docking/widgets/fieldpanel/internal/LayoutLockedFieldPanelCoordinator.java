@@ -154,36 +154,36 @@ public class LayoutLockedFieldPanelCoordinator extends LineLockedFieldPanelCoord
 								currentIndex2 = layoutModel2.getIndexBefore(currentIndex2);
 								continue;
 							}
-							else if (remainingOffset2 > 0) {
-								// Go again when processing layout heights in forward direction.
-								currentIndex2 = layoutModel2.getIndexAfter(currentIndex2);
-								continue;
-							}
-							return; // currentLayout2 is null.
+                            if (remainingOffset2 > 0) {
+                                // Go again when processing layout heights in forward direction.
+                                currentIndex2 = layoutModel2.getIndexAfter(currentIndex2);
+                                continue;
+                            }
+                            return; // currentLayout2 is null.
 						}
 						int height = currentLayout2.getHeight();
 						if (remainingOffset2 == 0) {
 							panels[i].setViewerPosition(currentIndex2, xPos, 0);
 							return;
 						}
-						else if (remainingOffset2 < 0) {
-							int offset = height + remainingOffset2;
-							if (offset >= 0) {
-								panels[i].setViewerPosition(currentIndex2, xPos, -offset);
-								return;
-							}
-							currentIndex2 = layoutModel2.getIndexBefore(currentIndex2);
-							remainingOffset2 = offset;
-						}
-						else { // remainingOffset2 > 0
-							if (remainingOffset2 < height) {
-								panels[i].setViewerPosition(currentIndex2, xPos, -remainingOffset2);
-								return;
-							}
-							currentIndex2 = layoutModel2.getIndexAfter(currentIndex2);
-							remainingOffset2 -= height;
-						}
-					}
+                        if (remainingOffset2 < 0) {
+                            int offset = height + remainingOffset2;
+                            if (offset >= 0) {
+                                panels[i].setViewerPosition(currentIndex2, xPos, -offset);
+                                return;
+                            }
+                            currentIndex2 = layoutModel2.getIndexBefore(currentIndex2);
+                            remainingOffset2 = offset;
+                        }
+                        else { // remainingOffset2 > 0
+                            if (remainingOffset2 < height) {
+                                panels[i].setViewerPosition(currentIndex2, xPos, -remainingOffset2);
+                                return;
+                            }
+                            currentIndex2 = layoutModel2.getIndexAfter(currentIndex2);
+                            remainingOffset2 -= height;
+                        }
+                    }
 				}
 			}
 		}

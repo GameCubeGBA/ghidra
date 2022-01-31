@@ -40,7 +40,7 @@ public class RelocationFactory {
 		long index = reader.getPointerIndex();
 		for (Class<?> relocationClass : relocationClasses) {
 			try {
-				Constructor<?> constructor = relocationClass.getDeclaredConstructor(new Class[]{BinaryReader.class});
+				Constructor<?> constructor = relocationClass.getDeclaredConstructor(BinaryReader.class);
 				Relocation relocation = (Relocation)constructor.newInstance(new Object[]{reader});
 				if (relocation.isMatch()) {
 					return relocation;

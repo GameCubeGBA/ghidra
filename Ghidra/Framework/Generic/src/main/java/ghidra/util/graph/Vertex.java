@@ -92,13 +92,11 @@ public class Vertex implements KeyedObject, Comparable<Vertex> {
 		if (difference < 0) {
 			return -1;
 		}
-		else if (difference == 0) {
-			return 0;
-		}
-		else {
-			return 1;
-		}
-	}
+        if (difference == 0) {
+            return 0;
+        }
+        return 1;
+    }
 
 	/** 
 	 * Return the name of this vertex. If the Vertex has a referent, the 

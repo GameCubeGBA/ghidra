@@ -436,10 +436,10 @@ public abstract class LocalFolderItem implements FolderItem {
 					if (newDbDir.exists()) {
 						throw new DuplicateFileException(getName() + " already exists");
 					}
-					else if (!oldDbDir.renameTo(newDbDir)) {
-						throw new FileInUseException(getName() + " is in use");
-					}
-				}
+                    if (!oldDbDir.renameTo(newDbDir)) {
+                        throw new FileInUseException(getName() + " is in use");
+                    }
+                }
 				success = true;
 			}
 			finally {
@@ -805,10 +805,10 @@ public abstract class LocalFolderItem implements FolderItem {
 			if (fileType == DATAFILE_FILE_TYPE) {
 				return new LocalDataFile(fileSystem, propertyFile);
 			}
-			else if (fileType == DATABASE_FILE_TYPE) {
-				return new LocalDatabaseItem(fileSystem, propertyFile);
-			}
-		}
+            if (fileType == DATABASE_FILE_TYPE) {
+                return new LocalDatabaseItem(fileSystem, propertyFile);
+            }
+        }
 		catch (FileNotFoundException e) {
 			log.error("Item may be corrupt due to missing file: " + propertyFile.getPath(), e);
 		}

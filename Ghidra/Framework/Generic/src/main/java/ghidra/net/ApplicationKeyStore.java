@@ -159,14 +159,14 @@ final class ApplicationKeyStore {
 				if (certificate == null) {
 					continue;
 				}
-				else if (certificate instanceof X509Certificate) {
-					logCert(alias, (X509Certificate) certificate);
-				}
-				else {
-					Msg.warn(ApplicationKeyStore.class, "Ignore unrecognized certificate: alias=" +
-						alias + ", type=" + certificate.getType());
-				}
-			}
+                if (certificate instanceof X509Certificate) {
+                    logCert(alias, (X509Certificate) certificate);
+                }
+                else {
+                    Msg.warn(ApplicationKeyStore.class, "Ignore unrecognized certificate: alias=" +
+                        alias + ", type=" + certificate.getType());
+                }
+            }
 		}
 		catch (KeyStoreException e) {
 			Msg.error(ApplicationKeyStore.class, "KeyStore failure", e);

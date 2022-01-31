@@ -111,16 +111,16 @@ class MemReferenceDB extends ReferenceDB {
 			}
 			return true;
 		}
-		else if (obj instanceof Reference) {
-			Reference ref = (Reference) obj;
-			return fromAddr.equals(ref.getFromAddress()) && toAddr.equals(ref.getToAddress()) &&
-				opIndex == ref.getOperandIndex() && symbolID == ref.getSymbolID() &&
-				isPrimary == ref.isPrimary() && sourceType == ref.getSource() &&
-				refType == ref.getReferenceType() &&
-				isShiftedReference() == ref.isShiftedReference() &&
-				isOffsetReference() == ref.isOffsetReference();
-		}
-		return false;
+        if (obj instanceof Reference) {
+            Reference ref = (Reference) obj;
+            return fromAddr.equals(ref.getFromAddress()) && toAddr.equals(ref.getToAddress()) &&
+                opIndex == ref.getOperandIndex() && symbolID == ref.getSymbolID() &&
+                isPrimary == ref.isPrimary() && sourceType == ref.getSource() &&
+                refType == ref.getReferenceType() &&
+                isShiftedReference() == ref.isShiftedReference() &&
+                isOffsetReference() == ref.isOffsetReference();
+        }
+        return false;
 
 	}
 }

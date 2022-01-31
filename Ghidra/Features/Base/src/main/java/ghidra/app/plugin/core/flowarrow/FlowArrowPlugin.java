@@ -524,11 +524,11 @@ public class FlowArrowPlugin extends Plugin implements MarginProvider, OptionsCh
 		if (refType.isFallthrough()) {
 			return new FallthroughFlowArrow(this, flowArrowPanel, start, end, refType);
 		}
-		else if (refType.isConditional()) {
-			return new ConditionalFlowArrow(this, flowArrowPanel, start, end, refType);
-		}
+        if (refType.isConditional()) {
+            return new ConditionalFlowArrow(this, flowArrowPanel, start, end, refType);
+        }
 
-		return new DefaultFlowArrow(this, flowArrowPanel, start, end, refType);
+        return new DefaultFlowArrow(this, flowArrowPanel, start, end, refType);
 	}
 
 	private void validateState() {

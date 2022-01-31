@@ -1653,20 +1653,18 @@ class ElfProgramBuilder extends MemorySectionResolver implements ElfLoadHelper {
 					" - 0x" + Long.toHexString(elfSymbol.getValue()));
 				return Address.NO_ADDRESS;
 			}
-			else if (symSectionBase == null) {
-				log("No Memory for symbol: " + elfSymbol.getNameAsString() +
-					" - 0x" + Long.toHexString(elfSymbol.getValue()));
-				return Address.NO_ADDRESS;
-			}
-			else {
-				// Section relative symbol - ensure that symbol remains in
-				// overlay space even if beyond bounds of associated block
-				// Note: don't use symOffset variable since it may have been
-				//   adjusted for image base
-				address = symSectionBase.addWrapSpace(elfSymbol.getValue() *
-					symSectionBase.getAddressSpace().getAddressableUnitSize());
-			}
-		}
+            if (symSectionBase == null) {
+                log("No Memory for symbol: " + elfSymbol.getNameAsString() +
+                    " - 0x" + Long.toHexString(elfSymbol.getValue()));
+                return Address.NO_ADDRESS;
+            }
+            // Section relative symbol - ensure that symbol remains in
+            // overlay space even if beyond bounds of associated block
+            // Note: don't use symOffset variable since it may have been
+            //   adjusted for image base
+            address = symSectionBase.addWrapSpace(elfSymbol.getValue() *
+                symSectionBase.getAddressSpace().getAddressableUnitSize());
+        }
 		else if (!elfSymbol.isSection() && elfSymbol.getValue() == 0) {
 			return Address.NO_ADDRESS;
 		}

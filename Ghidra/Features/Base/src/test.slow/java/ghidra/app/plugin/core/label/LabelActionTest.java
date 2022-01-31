@@ -192,52 +192,52 @@ public class LabelActionTest extends AbstractGhidraHeadedIntegrationTest
 
 			return;
 		}
-		else if (loc instanceof OperandFieldLocation) {
-			OperandFieldLocation opLoc = (OperandFieldLocation) loc;
-			int opIndex = opLoc.getOperandIndex();
+        if (loc instanceof OperandFieldLocation) {
+            OperandFieldLocation opLoc = (OperandFieldLocation) loc;
+            int opIndex = opLoc.getOperandIndex();
 
-			ReferenceManager refMgr = program.getReferenceManager();
-			SymbolTable st = program.getSymbolTable();
+            ReferenceManager refMgr = program.getReferenceManager();
+            SymbolTable st = program.getSymbolTable();
 
-			Symbol s = null;
-			DataTypeComponent component = null;
-			if (hasComponentPath) {
-				component = LabelMgrPlugin.getComponent((ListingActionContext) context);
-			}
-			else {
-				Reference ref = refMgr.getPrimaryReferenceFrom(loc.getAddress(), opIndex);
-				if (ref != null) {
-					s = st.getSymbol(ref);
-				}
-			}
+            Symbol s = null;
+            DataTypeComponent component = null;
+            if (hasComponentPath) {
+                component = LabelMgrPlugin.getComponent((ListingActionContext) context);
+            }
+            else {
+                Reference ref = refMgr.getPrimaryReferenceFrom(loc.getAddress(), opIndex);
+                if (ref != null) {
+                    s = st.getSymbol(ref);
+                }
+            }
 
-			assertEquals(caseName, s == null && !hasComponentPath,
-				addLabel.isEnabledForContext(context));
-			boolean editLabelEnabled =
-				((s instanceof CodeSymbol || s instanceof FunctionSymbol) && !s.isExternal()) ||
-					component != null;
-			assertEquals(caseName, editLabelEnabled, editLabel.isEnabledForContext(context));
-			assertEquals(caseName,
-				(s instanceof CodeSymbol || s instanceof FunctionSymbol) && s.isExternal(),
-				editExternalLocation.isEnabledForContext(context));
-			assertEquals(caseName, (s instanceof CodeSymbol && !s.isDynamic() && !s.isExternal()),
-				removeLabel.isEnabledForContext(context));
-			assertEquals(caseName, s != null && !s.isExternal(),
-				setLabel.isEnabledForContext(context));
-			if (editLabelEnabled) {
-				if (component == null) {
-					assertEquals(EditLabelAction.EDIT_LABEL,
-						editLabel.getPopupMenuData().getMenuItemName());
-				}
-				else {
-					assertEquals(EditLabelAction.EDIT_FIELDNAME,
-						editLabel.getPopupMenuData().getMenuItemName());
-				}
-			}
-			return;
-		}
+            assertEquals(caseName, s == null && !hasComponentPath,
+                addLabel.isEnabledForContext(context));
+            boolean editLabelEnabled =
+                ((s instanceof CodeSymbol || s instanceof FunctionSymbol) && !s.isExternal()) ||
+                    component != null;
+            assertEquals(caseName, editLabelEnabled, editLabel.isEnabledForContext(context));
+            assertEquals(caseName,
+                (s instanceof CodeSymbol || s instanceof FunctionSymbol) && s.isExternal(),
+                editExternalLocation.isEnabledForContext(context));
+            assertEquals(caseName, (s instanceof CodeSymbol && !s.isDynamic() && !s.isExternal()),
+                removeLabel.isEnabledForContext(context));
+            assertEquals(caseName, s != null && !s.isExternal(),
+                setLabel.isEnabledForContext(context));
+            if (editLabelEnabled) {
+                if (component == null) {
+                    assertEquals(EditLabelAction.EDIT_LABEL,
+                        editLabel.getPopupMenuData().getMenuItemName());
+                }
+                else {
+                    assertEquals(EditLabelAction.EDIT_FIELDNAME,
+                        editLabel.getPopupMenuData().getMenuItemName());
+                }
+            }
+            return;
+        }
 
-		if (loc instanceof CodeUnitLocation) {
+        if (loc instanceof CodeUnitLocation) {
 
 			DataTypeComponent component = null;
 			if (hasComponentPath) {

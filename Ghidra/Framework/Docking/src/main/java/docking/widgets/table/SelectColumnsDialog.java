@@ -251,16 +251,16 @@ public class SelectColumnsDialog extends DialogComponentProvider {
 			if (column == 0) {
 				return visibilityMap.get(tableColumn);
 			}
-			else if (column == 1) {
-				return tableColumn.getHeaderValue();
-			}
-			else if (column == 2) {
-				if (tableColumnWrapper.isDefault()) {
-					return "Default";
-				}
-				return DISCOVERED_TABLE_COLUMN_NAME;
-			}
-			return "<<unknown>>";
+            if (column == 1) {
+                return tableColumn.getHeaderValue();
+            }
+            if (column == 2) {
+                if (tableColumnWrapper.isDefault()) {
+                    return "Default";
+                }
+                return DISCOVERED_TABLE_COLUMN_NAME;
+            }
+            return "<<unknown>>";
 		}
 
 		@Override
@@ -281,10 +281,10 @@ public class SelectColumnsDialog extends DialogComponentProvider {
 			if (columnIndex == 0) {
 				return Boolean.class;
 			}
-			else if (columnIndex == 2) {
-				return String.class;
-			}
-			return String.class;
+            if (columnIndex == 2) {
+                return String.class;
+            }
+            return String.class;
 		}
 
 		@Override
@@ -292,13 +292,13 @@ public class SelectColumnsDialog extends DialogComponentProvider {
 			if (column == 0) {
 				return "Visible";
 			}
-			else if (column == 1) {
-				return "Column Name";
-			}
-			else if (column == 2) {
-				return "Is Default?";
-			}
-			return "<<unknown>>";
+            if (column == 1) {
+                return "Column Name";
+            }
+            if (column == 2) {
+                return "Is Default?";
+            }
+            return "<<unknown>>";
 		}
 	}
 }

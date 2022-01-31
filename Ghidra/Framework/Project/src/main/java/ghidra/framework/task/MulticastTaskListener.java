@@ -75,10 +75,10 @@ class MulticastTaskListener implements GTaskListener {
 		if (a == listener) {
 			return b;
 		}
-		else if (b == listener) {
-			return a;
-		}
-		if (a instanceof MulticastTaskListener) {
+        if (b == listener) {
+            return a;
+        }
+        if (a instanceof MulticastTaskListener) {
 			MulticastTaskListener ma = (MulticastTaskListener) a;
 			a = ma.removeListener(listener);
 		}

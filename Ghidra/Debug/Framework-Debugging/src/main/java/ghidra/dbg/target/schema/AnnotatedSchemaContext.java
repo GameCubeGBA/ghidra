@@ -100,7 +100,7 @@ public class AnnotatedSchemaContext extends DefaultSchemaContext {
 	static Set<Class<? extends TargetObject>> getBoundsOfFetchElements(
 			Class<? extends TargetObject> cls) {
 		try {
-			Method method = cls.getMethod("fetchElements", new Class<?>[] { boolean.class });
+			Method method = cls.getMethod("fetchElements", boolean.class);
 			Type ret = method.getGenericReturnType();
 			Map<TypeVariable<?>, Type> argsCf =
 				TypeUtils.getTypeArguments(ret, CompletableFuture.class);
@@ -268,20 +268,18 @@ public class AnnotatedSchemaContext extends DefaultSchemaContext {
 				throw new IllegalArgumentException(
 					"Could not identify unique element class (" + bounds + ") for " + cls);
 			}
-			else {
-				Class<? extends TargetObject> bound = bounds.iterator().next();
-				SchemaName schemaName;
-				try {
-					schemaName = nameFromClass(bound);
-				}
-				catch (IllegalArgumentException e) {
-					throw new IllegalArgumentException(
-						"Could not get schema name from bound " + bound + " of " + cls +
-							".fetchElements()",
-						e);
-				}
-				builder.setDefaultElementSchema(schemaName);
+			Class<? extends TargetObject> bound = bounds.iterator().next();
+			SchemaName schemaName;
+			try {
+				schemaName = nameFromClass(bound);
 			}
+			catch (IllegalArgumentException e) {
+				throw new IllegalArgumentException(
+					"Could not get schema name from bound " + bound + " of " + cls +
+						".fetchElements()",
+					e);
+			}
+			builder.setDefaultElementSchema(schemaName);
 		}
 
 		addPublicMethodsFromClass(builder, cls, cls);

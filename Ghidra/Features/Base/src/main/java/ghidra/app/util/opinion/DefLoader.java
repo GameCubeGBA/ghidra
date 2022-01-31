@@ -45,17 +45,17 @@ public class DefLoader extends AbstractLibrarySupportLoader {
 				if (line.startsWith(";") || line.isEmpty()) {// comment
 					continue;
 				}
-				else if (line.startsWith("LIBRARY")) {
-					// why skip libraries?  Who knows?  If you do, please update this comment
-				}
-				else if (line.startsWith("EXPORTS")) {
-					hasExports = true;
-				}
-				else if (hasExports) {
-					DefExportLine exp = new DefExportLine(line);
-					list.add(exp);
-				}
-			}
+                if (line.startsWith("LIBRARY")) {
+                    // why skip libraries?  Who knows?  If you do, please update this comment
+                }
+                else if (line.startsWith("EXPORTS")) {
+                    hasExports = true;
+                }
+                else if (hasExports) {
+                    DefExportLine exp = new DefExportLine(line);
+                    list.add(exp);
+                }
+            }
 		}
 		return list;
 	}

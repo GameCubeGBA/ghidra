@@ -177,13 +177,13 @@ abstract class LongKeyRecordNode extends LongKeyNode implements RecordNode {
 			if (k == key) {
 				return i;
 			}
-			else if (k < key) {
-				min = i + 1;
-			}
-			else {
-				max = i - 1;
-			}
-		}
+            if (k < key) {
+                min = i + 1;
+            }
+            else {
+                max = i - 1;
+            }
+        }
 		return -(min + 1);
 	}
 

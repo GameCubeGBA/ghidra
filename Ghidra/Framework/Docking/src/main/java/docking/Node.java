@@ -124,10 +124,10 @@ abstract class Node {
 		if (elem.getName().equals("SPLIT_NODE")) {
 			return new SplitNode(elem, mgr, parentNode, restoredPlaceholders);
 		}
-		else if (elem.getName().equals("COMPONENT_NODE")) {
-			return new ComponentNode(elem, mgr, parentNode, restoredPlaceholders);
-		}
-		return null;
+        if (elem.getName().equals("COMPONENT_NODE")) {
+            return new ComponentNode(elem, mgr, parentNode, restoredPlaceholders);
+        }
+        return null;
 	}
 
 	/**

@@ -1270,11 +1270,11 @@ class ProgramTreeActionManager implements ClipboardOwner {
 					// for cut operation all nodes must be able to be pasted at destNode
 					return false;
 				}
-				else if (!isCutOperation && pasteAllowed) {
-					// for copy operation at least one node must be able to be pasted at destNode
-					return true;
-				}
-				pasteEnabled |= pasteAllowed;
+                if (!isCutOperation && pasteAllowed) {
+                    // for copy operation at least one node must be able to be pasted at destNode
+                    return true;
+                }
+                pasteEnabled |= pasteAllowed;
 			}
 			return pasteEnabled;
 

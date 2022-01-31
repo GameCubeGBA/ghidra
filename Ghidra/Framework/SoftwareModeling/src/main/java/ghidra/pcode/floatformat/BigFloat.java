@@ -658,11 +658,11 @@ public strictfp class BigFloat implements Comparable<BigFloat> {
 		if (d > fracbits + 1) {
 			return;
 		}
-		else if (d < -(fracbits + 1)) {
-			this.copyFrom(other);
-			return;
-		}
-		boolean residue;
+        if (d < -(fracbits + 1)) {
+            this.copyFrom(other);
+            return;
+        }
+        boolean residue;
 		BigFloat a;
 		BigFloat b;
 
@@ -691,11 +691,11 @@ public strictfp class BigFloat implements Comparable<BigFloat> {
 		if (d > fracbits + 2) {
 			return;
 		}
-		else if (d < -(fracbits + 2)) {
-			this.copyFrom(other);
-			return;
-		}
-		boolean residue;
+        if (d < -(fracbits + 2)) {
+            this.copyFrom(other);
+            return;
+        }
+        boolean residue;
 		BigFloat a;
 		BigFloat b;
 		if (d >= 0) {
@@ -822,12 +822,12 @@ public strictfp class BigFloat implements Comparable<BigFloat> {
 		if (isZero()) {
 			return;
 		}
-		else if (scale < 0) {
-			makeOne();
-			return;
-		}
+        if (scale < 0) {
+            makeOne();
+            return;
+        }
 
-		int nbitsUnderOne = fracbits - scale;
+        int nbitsUnderOne = fracbits - scale;
 		boolean increment = unscaled.getLowestSetBit() < nbitsUnderOne;
 		unscaled = unscaled.shiftRight(nbitsUnderOne).shiftLeft(nbitsUnderOne);
 		if (increment) {

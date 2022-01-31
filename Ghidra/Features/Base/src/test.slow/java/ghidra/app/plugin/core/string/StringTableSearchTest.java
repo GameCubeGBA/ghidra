@@ -1543,13 +1543,13 @@ public class StringTableSearchTest extends AbstractGhidraHeadedIntegrationTest {
 				((AbstractButton) element).getText().equals(text)) {
 				return (AbstractButton) element;
 			}
-			else if (element instanceof Container) {
-				AbstractButton b = findButton((Container) element, text);
-				if (b != null) {
-					return b;
-				}
-			}
-		}
+            if (element instanceof Container) {
+                AbstractButton b = findButton((Container) element, text);
+                if (b != null) {
+                    return b;
+                }
+            }
+        }
 		return null;
 	}
 

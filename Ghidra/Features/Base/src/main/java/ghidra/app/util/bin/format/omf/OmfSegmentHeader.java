@@ -397,22 +397,20 @@ public class OmfSegmentHeader extends OmfRecord {
 					bufferpointer = 0;
 					return;
 				}
-				else if (pointer == data.getDataOffset()) {
-					buffer = data.getByteArray(reader);
-					bufferpointer = 0;
-					dataUpNext++;
-					if (buffer.length == 0) {
-						continue;
-					}
-					return;
-				}
-				else {
-					dataUpNext++;
-					throw new IOException(String.format(
-						"Segment %s:%s has bad data offset (0x%x) in data block %d...skipping.",
-						segmentName, className, data.getDataOffset(), dataUpNext - 1));
-				}
-			}
+                if (pointer == data.getDataOffset()) {
+                    buffer = data.getByteArray(reader);
+                    bufferpointer = 0;
+                    dataUpNext++;
+                    if (buffer.length == 0) {
+                        continue;
+                    }
+                    return;
+                }
+                dataUpNext++;
+                throw new IOException(String.format(
+                    "Segment %s:%s has bad data offset (0x%x) in data block %d...skipping.",
+                    segmentName, className, data.getDataOffset(), dataUpNext - 1));
+            }
 			// We may have filler after the last block
 			long size = segmentLength - pointer;
 			if (size > OmfLoader.MAX_UNINITIALIZED_FILL) {

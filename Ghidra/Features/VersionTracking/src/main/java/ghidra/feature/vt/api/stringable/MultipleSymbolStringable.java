@@ -183,10 +183,10 @@ public class MultipleSymbolStringable extends Stringable {
 		if (type == SymbolType.LIBRARY) {
 			return symbolTable.createExternalLibrary(name, sourceType);
 		}
-		else if (type == SymbolType.CLASS) {
-			return symbolTable.createClass(namespace, name, sourceType);
-		}
-		return symbolTable.createNameSpace(namespace, name, sourceType);
+        if (type == SymbolType.CLASS) {
+            return symbolTable.createClass(namespace, name, sourceType);
+        }
+        return symbolTable.createNameSpace(namespace, name, sourceType);
 	}
 
 	@Override

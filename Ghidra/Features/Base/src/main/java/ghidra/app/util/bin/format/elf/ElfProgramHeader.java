@@ -465,13 +465,13 @@ public class ElfProgramHeader
 				}
 				return -1;
 			}
-			else if (this.p_vaddr > that.p_vaddr) {
-				if (that.p_vaddr == 0xffffffff) {
-					return -1;
-				}
-				return 1;
-			}
-		}
+            if (this.p_vaddr > that.p_vaddr) {
+                if (that.p_vaddr == 0xffffffff) {
+                    return -1;
+                }
+                return 1;
+            }
+        }
 		return 0;
 	}
 

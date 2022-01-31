@@ -1330,12 +1330,12 @@ public class CodeUnitFormat {
 			// do not show namespace for local labels
 			return name;
 		}
-		else if (!isLocal && options.showNamespace == ShowNamespace.LOCAL) {
-			// do not show namespace for non-local labels
-			return name;
-		}
+        if (!isLocal && options.showNamespace == ShowNamespace.LOCAL) {
+            // do not show namespace for non-local labels
+            return name;
+        }
 
-		String namespaceName = null;
+        String namespaceName = null;
 		if (isLocal) {
 			namespaceName = options.localPrefixOverride;
 		}
@@ -1363,10 +1363,10 @@ public class CodeUnitFormat {
 			if (isOffcut(symbolAddress, cu)) {
 				return getOffcutLabelString(symbolAddress, cu);
 			}
-			else if (isStringData(cu)) {
-				return getLabelStringForStringData((Data) cu, symbol);
-			}
-		}
+            if (isStringData(cu)) {
+                return getLabelStringForStringData((Data) cu, symbol);
+            }
+        }
 		String name = symbol.getName();
 		return addNamespace(program, symbol.getParentNamespace(), name, markupAddress);
 	}

@@ -368,13 +368,13 @@ public final class AutoAnalysisManager implements DomainObjectListener, DomainOb
 		if (program == null) {
 			return;
 		}
-		else if (program.isClosed()) {
-			cancelQueuedTasks();
-			dispose();
-			return;
-		}
+        if (program.isClosed()) {
+            cancelQueuedTasks();
+            dispose();
+            return;
+        }
 
-		if (ignoreChanges) {
+        if (ignoreChanges) {
 			return;
 		}
 

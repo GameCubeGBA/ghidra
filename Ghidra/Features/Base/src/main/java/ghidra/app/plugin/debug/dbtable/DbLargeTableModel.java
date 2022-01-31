@@ -70,25 +70,25 @@ public class DbLargeTableModel implements TableModel {
 		if (field instanceof ByteField) {
 			return new ByteColumnAdapter();
 		}
-		else if (field instanceof BooleanField) {
-			return new BooleanColumnAdapter();
-		}
-		else if (field instanceof ShortField) {
-			return new ShortColumnAdapter();
-		}
-		else if (field instanceof IntField) {
-			return new IntegerColumnAdapter();
-		}
-		else if (field instanceof LongField) {
-			return new LongColumnAdapter();
-		}
-		else if (field instanceof StringField) {
-			return new StringColumnAdapter();
-		}
-		else if (field instanceof BinaryField) {
-			return new BinaryColumnAdapter();
-		}
-		throw new AssertException(
+        if (field instanceof BooleanField) {
+            return new BooleanColumnAdapter();
+        }
+        if (field instanceof ShortField) {
+            return new ShortColumnAdapter();
+        }
+        if (field instanceof IntField) {
+            return new IntegerColumnAdapter();
+        }
+        if (field instanceof LongField) {
+            return new LongColumnAdapter();
+        }
+        if (field instanceof StringField) {
+            return new StringColumnAdapter();
+        }
+        if (field instanceof BinaryField) {
+            return new BinaryColumnAdapter();
+        }
+        throw new AssertException(
 			"New, unexpected DB column type: " + field.getClass().getSimpleName());
 	}
 

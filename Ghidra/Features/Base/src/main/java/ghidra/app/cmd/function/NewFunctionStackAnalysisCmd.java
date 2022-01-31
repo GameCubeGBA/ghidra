@@ -410,11 +410,11 @@ public class NewFunctionStackAnalysisCmd extends BackgroundCommand {
 			if (growsNegative && (var instanceof Parameter)) {
 				break;
 			}
-			else if (!growsNegative && !(var instanceof Parameter)) {
-				--index;
-				break;
-			}
-		}
+            if (!growsNegative && !(var instanceof Parameter)) {
+                --index;
+                break;
+            }
+        }
 
 		if (index < 0 || index == sortedVarCnt) {
 			// no parameters found
@@ -667,13 +667,13 @@ public class NewFunctionStackAnalysisCmd extends BackgroundCommand {
 				}
 				return;
 			}
-			else if (ref == null) {
-				RefType refType = RefTypeFactory.getDefaultStackRefType(instr, opIndex);
-				refMgr.addStackReference(instr.getMinAddress(), opIndex, stackOffset, refType,
-					SourceType.ANALYSIS);
-				accumulateVariable(func, stackOffset, refSize, sortedVariables);
-			}
-		}
+            if (ref == null) {
+                RefType refType = RefTypeFactory.getDefaultStackRefType(instr, opIndex);
+                refMgr.addStackReference(instr.getMinAddress(), opIndex, stackOffset, refType,
+                    SourceType.ANALYSIS);
+                accumulateVariable(func, stackOffset, refSize, sortedVariables);
+            }
+        }
 		catch (InvalidInputException e) {
 			Msg.debug(this, "Failed to create variable (instruction at " + instr.getMinAddress() +
 				", stack-offset=" + stackOffset + ", size=" + refSize + "): " + e.getMessage());

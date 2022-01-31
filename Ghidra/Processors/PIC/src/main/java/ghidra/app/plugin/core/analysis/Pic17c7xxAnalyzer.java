@@ -518,34 +518,34 @@ public class Pic17c7xxAnalyzer extends AbstractAnalyzer {
 		if (objs[0] instanceof Register) {
 			return ((Register) objs[0]).getName();
 		}
-		else if (objs[0] instanceof Address) {
-			addr = (Address) objs[0];
-			reg = program.getRegister(addr, 1);
-		}
-		else if (objs[0] instanceof Scalar) {
-			long offset = ((Scalar) objs[0]).getUnsignedValue();
-			long bank = 0;
-			if (offset >= 0x10 && offset <= 0x17) {
-				if (!bsrContext.hasValue()) {
-					return null;
-				}
-				bank = bsrContext.longValue() & 0x0f;
-			}
-			else if (offset >= 0x20) {
-				if (!bsrContext.hasValue()) {
-					return null;
-				}
-				bank = bsrContext.longValue() >> 4;
-			}
-			offset += bank << 8;
-			addr = program.getAddressFactory().getAddressSpace("DATA").getAddress(offset);
-			reg = program.getRegister(addr);
-		}
-		else {
-			return null;
-		}
+        if (objs[0] instanceof Address) {
+            addr = (Address) objs[0];
+            reg = program.getRegister(addr, 1);
+        }
+        else if (objs[0] instanceof Scalar) {
+            long offset = ((Scalar) objs[0]).getUnsignedValue();
+            long bank = 0;
+            if (offset >= 0x10 && offset <= 0x17) {
+                if (!bsrContext.hasValue()) {
+                    return null;
+                }
+                bank = bsrContext.longValue() & 0x0f;
+            }
+            else if (offset >= 0x20) {
+                if (!bsrContext.hasValue()) {
+                    return null;
+                }
+                bank = bsrContext.longValue() >> 4;
+            }
+            offset += bank << 8;
+            addr = program.getAddressFactory().getAddressSpace("DATA").getAddress(offset);
+            reg = program.getRegister(addr);
+        }
+        else {
+            return null;
+        }
 
-		// Determine RefType
+        // Determine RefType
 		if (refType == null) {
 			refType = RefType.READ;
 			String mnemonic = instr.getMnemonicString();
@@ -692,45 +692,45 @@ public class Pic17c7xxAnalyzer extends AbstractAnalyzer {
 			wContext.setValueAt(instr, 0, false);
 			return true;
 		}
-		else if ("MOVLW".equals(mnemonic)) {
-			Scalar s = instr.getScalar(0);
-			if (s != null) {
-				wContext.setValueAt(instr, s.getUnsignedValue(), false);
-				return true;
-			}
-			modUnknown = true;
-		}
-		else if ("MOVFP".equals(mnemonic) || "MOVPF".equals(mnemonic)) {
-			Object[] objs = instr.getOpObjects(1);
-			if (objs.length == 0) {
-				return false;
-			}
-			if (wReg.equals(objs[0]) || wReg.getAddress().equals(objs[0])) {
-				wContext.setValueUnknown();
-				return true;
-			}
-		}
-		else if (REG_S_MODIFICATION_MNEMONICS.contains(mnemonic) && instr.getNumOperands() == 2) {
-			List<?> repObjs = instr.getDefaultOperandRepresentationList(1);
-			if (repObjs.size() == 1 && S_0.equals(repObjs.get(0))) {
-				// Unhandled W modification
-				wContext.setValueUnknown();
-				return false; // allow operand-0 register modiofication to be examined
-			}
-		}
-		else if (REG_MODIFICATION_MNEMONICS.contains(mnemonic) && instr.getNumOperands() == 2) {
-			List<?> repObjs = instr.getDefaultOperandRepresentationList(1);
-			if (repObjs.size() == 1 && DEST_W.equals(repObjs.get(0))) {
-				// Unhandled W modification
-				wContext.setValueUnknown();
-				return true;
-			}
-		}
-		else if (WREG_MODIFICATION_MNEMONICS.contains(mnemonic)) {
-			modUnknown = true;
-		}
+        if ("MOVLW".equals(mnemonic)) {
+            Scalar s = instr.getScalar(0);
+            if (s != null) {
+                wContext.setValueAt(instr, s.getUnsignedValue(), false);
+                return true;
+            }
+            modUnknown = true;
+        }
+        else if ("MOVFP".equals(mnemonic) || "MOVPF".equals(mnemonic)) {
+            Object[] objs = instr.getOpObjects(1);
+            if (objs.length == 0) {
+                return false;
+            }
+            if (wReg.equals(objs[0]) || wReg.getAddress().equals(objs[0])) {
+                wContext.setValueUnknown();
+                return true;
+            }
+        }
+        else if (REG_S_MODIFICATION_MNEMONICS.contains(mnemonic) && instr.getNumOperands() == 2) {
+            List<?> repObjs = instr.getDefaultOperandRepresentationList(1);
+            if (repObjs.size() == 1 && S_0.equals(repObjs.get(0))) {
+                // Unhandled W modification
+                wContext.setValueUnknown();
+                return false; // allow operand-0 register modiofication to be examined
+            }
+        }
+        else if (REG_MODIFICATION_MNEMONICS.contains(mnemonic) && instr.getNumOperands() == 2) {
+            List<?> repObjs = instr.getDefaultOperandRepresentationList(1);
+            if (repObjs.size() == 1 && DEST_W.equals(repObjs.get(0))) {
+                // Unhandled W modification
+                wContext.setValueUnknown();
+                return true;
+            }
+        }
+        else if (WREG_MODIFICATION_MNEMONICS.contains(mnemonic)) {
+            modUnknown = true;
+        }
 
-		if (modUnknown) {
+        if (modUnknown) {
 			wContext.setValueUnknown();
 			return true;
 		}

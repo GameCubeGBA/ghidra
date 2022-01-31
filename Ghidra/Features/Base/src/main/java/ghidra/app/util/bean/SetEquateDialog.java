@@ -459,13 +459,11 @@ public class SetEquateDialog extends DialogComponentProvider {
 		if (applyToAll.isSelected()) {
 			return SelectionType.ENTIRE_PROGRAM;
 		}
-		else if (applyToSelection.isSelected()) {
-			return SelectionType.SELECTION;
-		}
-		else {
-			return SelectionType.CURRENT_ADDRESS;
-		}
-	}
+        if (applyToSelection.isSelected()) {
+            return SelectionType.SELECTION;
+        }
+        return SelectionType.CURRENT_ADDRESS;
+    }
 
 	/**
 	 * Returns true if the user has chosen to overwrite any existing equate rules.

@@ -83,15 +83,13 @@ public final class NSObjectParser {
 					float floatValue = Float.intBitsToFloat( intValue );
 					return new NSNumber( floatValue );
 				}
-				else if ( length == 8 ) {
-					long longValue = reader.readLong( objectOffset + 1 );
-					double doubleValue = Double.longBitsToDouble( longValue );
-					return new NSNumber( doubleValue );
-				}
-				else {
-					throw new IOException( "WARNING: Invalid real number length specified in the binary PList." );
-				}
-			}
+                if ( length == 8 ) {
+                    long longValue = reader.readLong( objectOffset + 1 );
+                    double doubleValue = Double.longBitsToDouble( longValue );
+                    return new NSNumber( doubleValue );
+                }
+                throw new IOException( "WARNING: Invalid real number length specified in the binary PList." );
+            }
 			case 0x3: { // date
 				if ( objectInfo != 3 ) {
 					throw new IOException( "WARNING: Binary PLIST contains unknown date type:" + objectInfo );

@@ -406,10 +406,10 @@ public class ProgramLocation implements Comparable<ProgramLocation> {
 			}
 			return -1;
 		}
-		else if (addr2 == null) {
-			return 1;
-		}
-		return addr1.compareTo(addr2);
+        if (addr2 == null) {
+            return 1;
+        }
+        return addr1.compareTo(addr2);
 	}
 
 	private static Address getCodeUnitAddress(Program p, Address addr) {

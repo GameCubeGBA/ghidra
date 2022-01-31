@@ -178,20 +178,20 @@ public class AddressKeyRecordIterator implements RecordIterator {
 		if (it == null) {
 			return false;
 		}
-		else if (!it.hasNext()) {
-			while (keyRangeIndex < (keyRangeList.size() - 1)) {
-				KeyRange keyRange = keyRangeList.get(++keyRangeIndex);
-				it = table.iterator(keyRange.minKey, keyRange.maxKey, keyRange.minKey);
-				if (it.hasPrevious()) {
-					it.previous();
-				}
-				if (it.hasNext()) {
-					return true;
-				}
-			}
-			return false;
-		}
-		return true;
+        if (!it.hasNext()) {
+            while (keyRangeIndex < (keyRangeList.size() - 1)) {
+                KeyRange keyRange = keyRangeList.get(++keyRangeIndex);
+                it = table.iterator(keyRange.minKey, keyRange.maxKey, keyRange.minKey);
+                if (it.hasPrevious()) {
+                    it.previous();
+                }
+                if (it.hasNext()) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        return true;
 	}
 
 	/**
@@ -202,20 +202,20 @@ public class AddressKeyRecordIterator implements RecordIterator {
 		if (it == null) {
 			return false;
 		}
-		else if (!it.hasPrevious()) {
-			while (keyRangeIndex > 0) {
-				KeyRange keyRange = keyRangeList.get(--keyRangeIndex);
-				it = table.iterator(keyRange.minKey, keyRange.maxKey, keyRange.maxKey);
-				if (it.hasNext()) {
-					it.next();
-				}
-				if (it.hasPrevious()) {
-					return true;
-				}
-			}
-			return false;
-		}
-		return true;
+        if (!it.hasPrevious()) {
+            while (keyRangeIndex > 0) {
+                KeyRange keyRange = keyRangeList.get(--keyRangeIndex);
+                it = table.iterator(keyRange.minKey, keyRange.maxKey, keyRange.maxKey);
+                if (it.hasNext()) {
+                    it.next();
+                }
+                if (it.hasPrevious()) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        return true;
 	}
 
 	/**

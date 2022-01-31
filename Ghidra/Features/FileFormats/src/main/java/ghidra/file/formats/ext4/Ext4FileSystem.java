@@ -317,15 +317,13 @@ public class Ext4FileSystem implements GFileSystem {
 			return Ext4ExtentsHelper.getByteProvider(inode.getI_block(), provider, inode.getSize(),
 				blockSize, inodeFSRL);
 		}
-		else if (inode.isFlagInlineData() || inode.isSymLink()) {
-			byte[] data = inode.getInlineDataValue();
-			return new ByteArrayProvider(data, inodeFSRL);
-		}
-		else {
-			return Ext4BlockMapHelper.getByteProvider(inode.getI_block(), provider, inode.getSize(),
-				blockSize, inodeFSRL);
-		}
-	}
+        if (inode.isFlagInlineData() || inode.isSymLink()) {
+            byte[] data = inode.getInlineDataValue();
+            return new ByteArrayProvider(data, inodeFSRL);
+        }
+        return Ext4BlockMapHelper.getByteProvider(inode.getI_block(), provider, inode.getSize(),
+            blockSize, inodeFSRL);
+    }
 
 	private Ext4Inode[] getInodes(BinaryReader reader, Ext4GroupDescriptor[] groupDescriptors,
 			TaskMonitor monitor) throws IOException, CancelledException {

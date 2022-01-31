@@ -260,12 +260,12 @@ class ConsistencyChecker {
 					dealWithUnnecessaryExt(op, ct);
 					return true;
 				}
-				else if (vnout < vn0) {
-					printOpError(op, ct, -1, 0,
-						"Output size must be strictly bigger than input size");
-					return false;
-				}
-				return true;
+                if (vnout < vn0) {
+                    printOpError(op, ct, -1, 0,
+                        "Output size must be strictly bigger than input size");
+                    return false;
+                }
+                return true;
 			case CPUI_CBRANCH:
 				vn1 = recoverSize(op.getIn(1).getSize(), ct);
 				if (vn1 == -1) {
@@ -312,11 +312,11 @@ class ConsistencyChecker {
 					dealWithUnnecessaryTrunc(op, ct);
 					return true;
 				}
-				else if (vnout >= vn0) {
-					printOpError(op, ct, -1, 0, "Output must be strictly smaller than input");
-					return false;
-				}
-				if (vnout > vn0 - vn1) {
+                if (vnout >= vn0) {
+                    printOpError(op, ct, -1, 0, "Output must be strictly smaller than input");
+                    return false;
+                }
+                if (vnout > vn0 - vn1) {
 					printOpError(op, ct, -1, 0, "Too much truncation");
 					return false;
 				}

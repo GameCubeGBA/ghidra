@@ -320,10 +320,10 @@ public abstract class AbstractDockingTest extends AbstractGenericTest {
 		if (c instanceof JLabel) {
 			return ((JLabel) c).getText();
 		}
-		else if (c instanceof MultiLineLabel) {
-			return ((MultiLineLabel) c).getLabel();
-		}
-		return null;
+        if (c instanceof MultiLineLabel) {
+            return ((MultiLineLabel) c).getLabel();
+        }
+        return null;
 	}
 
 	/**
@@ -454,10 +454,10 @@ public abstract class AbstractDockingTest extends AbstractGenericTest {
 		if (window instanceof Frame) {
 			return ((Frame) window).getTitle();
 		}
-		else if (window instanceof Dialog) {
-			return ((Dialog) window).getTitle();
-		}
-		return null;
+        if (window instanceof Dialog) {
+            return ((Dialog) window).getTitle();
+        }
+        return null;
 	}
 
 	private static String getDebugTitleForWindow(Window window) {
@@ -470,10 +470,10 @@ public abstract class AbstractDockingTest extends AbstractGenericTest {
 		if (window instanceof Frame) {
 			return "Frame: '" + ((Frame) window).getTitle() + "'";
 		}
-		else if (window instanceof Dialog) {
-			return "Dialog: '" + ((Dialog) window).getTitle() + "'";
-		}
-		return "Non-Frame/Dialog window: " + defaultTitle;
+        if (window instanceof Dialog) {
+            return "Dialog: '" + ((Dialog) window).getTitle() + "'";
+        }
+        return "Non-Frame/Dialog window: " + defaultTitle;
 	}
 
 	/**

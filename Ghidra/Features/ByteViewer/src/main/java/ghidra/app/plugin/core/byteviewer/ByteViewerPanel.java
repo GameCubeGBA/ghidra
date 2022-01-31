@@ -667,14 +667,14 @@ public class ByteViewerPanel extends JPanel
 				// don't put the index panel into the data model info, as it is not configurable
 				continue;
 			}
-			else if (element instanceof ByteViewerComponent) {
-				DataFormatModel model = ((ByteViewerComponent) element).getDataModel();
-				String name = model.getName();
-				int groupSize = model.getGroupSize();
-				info.set(index, name, groupSize);
-				++index;
-			}
-		}
+            if (element instanceof ByteViewerComponent) {
+                DataFormatModel model = ((ByteViewerComponent) element).getDataModel();
+                String name = model.getName();
+                int groupSize = model.getGroupSize();
+                info.set(index, name, groupSize);
+                ++index;
+            }
+        }
 		return info;
 	}
 

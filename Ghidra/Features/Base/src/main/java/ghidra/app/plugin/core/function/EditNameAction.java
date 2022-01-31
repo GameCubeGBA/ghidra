@@ -109,15 +109,15 @@ class EditNameAction extends ListingContextAction {
 				FunctionPlugin.VARIABLE_MENU_PULLRIGHT, FunctionPlugin.VARIABLE_MENU_SUBGROUP);
 			return true;
 		}
-		else if (isFunction && loc instanceof FunctionSignatureFieldLocation) {
-			return true;
-		}
-		else if (isFunction && loc instanceof OperandFieldLocation) {
-			Function function = functionPlugin.getFunctionInOperandField(context.getProgram(),
-				(OperandFieldLocation) loc);
-			return function != null && !function.isExternal();
-		}
-		return false;
+        if (isFunction && loc instanceof FunctionSignatureFieldLocation) {
+            return true;
+        }
+        if (isFunction && loc instanceof OperandFieldLocation) {
+            Function function = functionPlugin.getFunctionInOperandField(context.getProgram(),
+                (OperandFieldLocation) loc);
+            return function != null && !function.isExternal();
+        }
+        return false;
 	}
 
 }

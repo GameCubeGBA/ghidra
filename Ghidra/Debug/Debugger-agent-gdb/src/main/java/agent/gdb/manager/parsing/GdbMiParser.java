@@ -378,10 +378,10 @@ public class GdbMiParser extends AbstractGdbParser {
 			if (c == '"') {
 				break;
 			}
-			else if (c == '\\') {
-				buf.get();
-			}
-		}
+            if (c == '\\') {
+                buf.get();
+            }
+        }
 		// the closing " will already have been consumed
 		int end = buf.position();
 		buf.position(0);

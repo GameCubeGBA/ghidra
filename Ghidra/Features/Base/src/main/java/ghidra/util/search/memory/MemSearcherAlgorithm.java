@@ -105,15 +105,15 @@ public class MemSearcherAlgorithm implements MemorySearchAlgorithm {
 		if (codeUnit instanceof Instruction) {
 			return codeUnitSearchInfo.isSearchInstructions();
 		}
-		else if (codeUnit instanceof Data) {
-			Data data = (Data) codeUnit;
-			if (data.isDefined()) {
-				return codeUnitSearchInfo.isSearchDefinedData();
-			}
-			return codeUnitSearchInfo.isSearchUndefinedData();
-		}
+        if (codeUnit instanceof Data) {
+            Data data = (Data) codeUnit;
+            if (data.isDefined()) {
+                return codeUnitSearchInfo.isSearchDefinedData();
+            }
+            return codeUnitSearchInfo.isSearchUndefinedData();
+        }
 
-		return true;
+        return true;
 	}
 
 	private int getRangeDifference(AddressRange range, Address address) {

@@ -876,13 +876,13 @@ public abstract class CompositeEditorModel extends CompositeViewerModel implemen
 			throw new InvalidDataTypeException(
 				"Factory data types are not " + "allowed in a composite data type.");
 		}
-		else if (datatype instanceof Dynamic) {
-			if (!((Dynamic) datatype).canSpecifyLength()) {
-				throw new InvalidDataTypeException("Non-sizable Dynamic data types are not " +
-					"allowed in a composite data type.");
-			}
-		}
-	}
+        if (datatype instanceof Dynamic) {
+            if (!((Dynamic) datatype).canSpecifyLength()) {
+                throw new InvalidDataTypeException("Non-sizable Dynamic data types are not " +
+                    "allowed in a composite data type.");
+            }
+        }
+    }
 
 	protected boolean allowsZeroLengthComponents() {
 		return true;

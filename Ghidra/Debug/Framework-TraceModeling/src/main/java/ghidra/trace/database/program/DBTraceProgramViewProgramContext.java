@@ -73,10 +73,10 @@ public class DBTraceProgramViewProgramContext extends AbstractProgramContext {
 		if (v1 == null) {
 			return v2;
 		}
-		else if (v2 == null) {
-			return v1;
-		}
-		return v1.combineValues(v2);
+        if (v2 == null) {
+            return v1;
+        }
+        return v1.combineValues(v2);
 	}
 
 	protected RegisterValue stack(RegisterValue value, Register register, Address address) {

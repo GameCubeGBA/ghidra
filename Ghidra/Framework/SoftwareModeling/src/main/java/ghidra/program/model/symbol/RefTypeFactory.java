@@ -495,10 +495,10 @@ public class RefTypeFactory {
 				if (flowType.isCall()) {
 					return RefType.CONDITIONAL_COMPUTED_CALL;
 				}
-				else if (flowType.isJump()) {
-					return RefType.CONDITIONAL_COMPUTED_JUMP;
-				}
-			}
+                if (flowType.isJump()) {
+                    return RefType.CONDITIONAL_COMPUTED_JUMP;
+                }
+            }
 			else if (flowType.isCall()) {
 				return RefType.CONDITIONAL_CALL;
 			}
@@ -510,10 +510,10 @@ public class RefTypeFactory {
 			if (flowType.isCall()) {
 				return RefType.COMPUTED_CALL;
 			}
-			else if (flowType.isJump()) {
-				return RefType.COMPUTED_JUMP;
-			}
-		}
+            if (flowType.isJump()) {
+                return RefType.COMPUTED_JUMP;
+            }
+        }
 		else if (flowType.isCall()) {
 			return RefType.UNCONDITIONAL_CALL;
 		}

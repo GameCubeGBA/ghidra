@@ -131,19 +131,19 @@ public class DwarfLineNumberAnalyzer extends AbstractAnalyzer {
 			}
 			return null;//no line number section existed!
 		}
-		else if (ElfLoader.ELF_NAME.equals(program.getExecutableFormat())) {
-			// We now load the .debug section as an overlay block, no need for the
-			// original file
-			MemoryBlock block = null;
-			block = program.getMemory().getBlock(sectionNames.SECTION_NAME_LINE());
-			if (block != null) {
-				return new MemoryByteProvider(program.getMemory(), block.getStart());
-			}
-			// TODO: this will not handle the case where the .debug section is
-			// in a separate file.  Can the file in a separate location?
-			return null;  // no line number section existed!
-		}
-		throw new IllegalArgumentException("Unrecognized program format: " +
+        if (ElfLoader.ELF_NAME.equals(program.getExecutableFormat())) {
+            // We now load the .debug section as an overlay block, no need for the
+            // original file
+            MemoryBlock block = null;
+            block = program.getMemory().getBlock(sectionNames.SECTION_NAME_LINE());
+            if (block != null) {
+                return new MemoryByteProvider(program.getMemory(), block.getStart());
+            }
+            // TODO: this will not handle the case where the .debug section is
+            // in a separate file.  Can the file in a separate location?
+            return null;  // no line number section existed!
+        }
+        throw new IllegalArgumentException("Unrecognized program format: " +
 			program.getExecutableFormat());
 	}
 

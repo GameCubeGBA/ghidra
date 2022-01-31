@@ -42,11 +42,11 @@ public class ANTLRUtil {
 					++indent;
 					continue;
 				}
-				else if (token.getType() == 3) {
-					--indent;
-					continue;
-				}
-			}
+                if (token.getType() == 3) {
+                    --indent;
+                    continue;
+                }
+            }
 			String line =
 				token == null ? "no pos" : token.getLine() + ":" + token.getCharPositionInLine();
 			out.println(indent(indent) + "'" + object + "'     (" + line + ")");

@@ -144,10 +144,10 @@ public class SingleFileSystemIndexHelper {
 		if (path == null || path.equals("/")) {
 			return rootDir;
 		}
-		else if (path.equals(payloadFile.getFSRL().getPath())) {
-			return payloadFile;
-		}
-		return null;
+        if (path.equals(payloadFile.getFSRL().getPath())) {
+            return payloadFile;
+        }
+        return null;
 	}
 
 	@Override

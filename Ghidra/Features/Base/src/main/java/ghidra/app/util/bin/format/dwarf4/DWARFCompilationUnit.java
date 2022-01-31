@@ -141,11 +141,9 @@ public class DWARFCompilationUnit {
 				debugInfoBR.setPointerIndex(debugInfoBR.length());
 				return null;
 			}
-			else {
-				throw new DWARFException(
-					"Invalid DWARF length 0 at 0x" + Long.toHexString(startOffset));
-			}
-		}
+            throw new DWARFException(
+                "Invalid DWARF length 0 at 0x" + Long.toHexString(startOffset));
+        }
 
 		long endOffset = debugInfoBR.getPointerIndex() + lengthInfo.length;
 		short version = debugInfoBR.readNextShort();
@@ -161,12 +159,12 @@ public class DWARFCompilationUnit {
 			throw new IOException("Invalid length " + (endOffset - startOffset) +
 				" for DWARF Compilation Unit at 0x" + Long.toHexString(startOffset));
 		}
-		else if (firstDIEOffset == endOffset) {
-			// silently skip this empty compunit
-			return null;
-		}
+        if (firstDIEOffset == endOffset) {
+            // silently skip this empty compunit
+            return null;
+        }
 
-		debugAbbrBR.setPointerIndex(abbreviationOffset);
+        debugAbbrBR.setPointerIndex(abbreviationOffset);
 		Map<Integer, DWARFAbbreviation> abbrMap =
 			DWARFAbbreviation.readAbbreviations(debugAbbrBR, dwarfProgram, monitor);
 

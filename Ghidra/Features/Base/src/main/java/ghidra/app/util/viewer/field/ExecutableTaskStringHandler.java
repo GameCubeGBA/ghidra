@@ -54,12 +54,12 @@ public class ExecutableTaskStringHandler implements AnnotatedStringHandler {
 		if (text.length == 4) {
 			return text[3]; // 4 items means they have display text
 		}
-		else if (text.length != 2) {
-			throw new AnnotationException(
-				"Invalid number of inputs - " + (text.length - 1) + " found - 1 or 3 required");
-		}
+        if (text.length != 2) {
+            throw new AnnotationException(
+                "Invalid number of inputs - " + (text.length - 1) + " found - 1 or 3 required");
+        }
 
-		// otherwise, no display text, just use the executable name
+        // otherwise, no display text, just use the executable name
 		String programInfo = text[1];
 		return getDisplayTextForFilePathOrName(programInfo);
 	}

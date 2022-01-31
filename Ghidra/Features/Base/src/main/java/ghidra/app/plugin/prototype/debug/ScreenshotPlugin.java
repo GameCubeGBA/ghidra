@@ -130,10 +130,10 @@ public class ScreenshotPlugin extends ProgramPlugin {
 		if (window instanceof JFrame) {
 			return ((JFrame) window).getTitle();
 		}
-		else if (window instanceof JDialog) {
-			return ((JDialog) window).getTitle();
-		}
-		return "Ghidra Window";
+        if (window instanceof JDialog) {
+            return ((JDialog) window).getTitle();
+        }
+        return "Ghidra Window";
 	}
 
 	private File getFile(String fileName) {

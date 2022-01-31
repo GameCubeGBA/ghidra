@@ -41,14 +41,14 @@ class RelocationDBAdapterV3 extends RelocationDBAdapter {
 			if (relocTable == null) {
 				throw new VersionException("Missing Table: " + TABLE_NAME);
 			}
-			else if (relocTable.getSchema().getVersion() != VERSION) {
-				int version = relocTable.getSchema().getVersion();
-				if (version < VERSION) {
-					throw new VersionException(true);
-				}
-				throw new VersionException(VersionException.NEWER_VERSION, false);
-			}
-		}
+            if (relocTable.getSchema().getVersion() != VERSION) {
+                int version = relocTable.getSchema().getVersion();
+                if (version < VERSION) {
+                    throw new VersionException(true);
+                }
+                throw new VersionException(VersionException.NEWER_VERSION, false);
+            }
+        }
 	}
 
 	@Override

@@ -63,10 +63,10 @@ class ApplyStackVariables {
 			if (elem.isEnd() && elem.getName().equals("function")) {
 				break;
 			}
-			else if (elem.isStart() && elem.getName().equals("line_number")) {
-				break;
-			}
-			elem = xmlParser.next();//stack variable number start tag
+            if (elem.isStart() && elem.getName().equals("line_number")) {
+                break;
+            }
+            elem = xmlParser.next();//stack variable number start tag
 
 			PdbXmlMember member = pdbParser.getPdbXmlMember(elem);
 

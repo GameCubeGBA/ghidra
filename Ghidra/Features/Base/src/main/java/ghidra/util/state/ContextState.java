@@ -633,11 +633,11 @@ public class ContextState {
 					bytes = null;
 					break;
 				}
-				else if ((bytes[bytePos] instanceof MemoryByteVarnode) &&
-					bytes[bytePos].getOffset() == 0) {
-					++zeroMemoryByteCnt;
-				}
-			}
+                if ((bytes[bytePos] instanceof MemoryByteVarnode) &&
+                    bytes[bytePos].getOffset() == 0) {
+                    ++zeroMemoryByteCnt;
+                }
+            }
 		}
 		catch (MemoryAccessException | AddressOutOfBoundsException e) {
 			bytes = null;

@@ -282,10 +282,10 @@ public class FunctionPurgeAnalysisCmd extends BackgroundCommand {
 				if (instr.getMnemonicString().compareToIgnoreCase("ret") == 0) {
 					return instr;
 				}
-				else if (ftype.isCall()) {
-					backupPurge = instr;	// Use as last resort, if we can't find RET
-				}
-			}
+                if (ftype.isCall()) {
+                    backupPurge = instr;	// Use as last resort, if we can't find RET
+                }
+            }
 		}
 
 		return backupPurge;

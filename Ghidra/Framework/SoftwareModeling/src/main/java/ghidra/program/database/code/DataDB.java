@@ -317,12 +317,12 @@ class DataDB extends CodeUnitDB implements Data {
 			if (obj instanceof Scalar) {
 				return (Scalar) obj;
 			}
-			else if (obj instanceof Address) {
-				Address addrObj = (Address) obj;
-				long offset = addrObj.getAddressableWordOffset();
-				return new Scalar(addrObj.getAddressSpace().getPointerSize() * 8, offset, false);
-			}
-		}
+            if (obj instanceof Address) {
+                Address addrObj = (Address) obj;
+                long offset = addrObj.getAddressableWordOffset();
+                return new Scalar(addrObj.getAddressSpace().getPointerSize() * 8, offset, false);
+            }
+        }
 		return null;
 	}
 
@@ -496,21 +496,21 @@ class DataDB extends CodeUnitDB implements Data {
 				int index = offset / elementLength;
 				return getComponent(index);
 			}
-			else if (baseDataType instanceof Structure) {
-				Structure struct = (Structure) baseDataType;
-				DataTypeComponent dtc = struct.getComponentContaining(offset);
-				return (dtc != null) ? getComponent(dtc.getOrdinal()) : null;
-			}
-			else if (baseDataType instanceof DynamicDataType) {
-				DynamicDataType ddt = (DynamicDataType) baseDataType;
-				DataTypeComponent dtc = ddt.getComponentAt(offset, this);
-				return (dtc != null) ? getComponent(dtc.getOrdinal()) : null;
-			}
-			else if (baseDataType instanceof Union) {
-				// TODO: Returning anything is potentially bad
-				//return getComponent(0);
-			}
-			return null;
+            if (baseDataType instanceof Structure) {
+                Structure struct = (Structure) baseDataType;
+                DataTypeComponent dtc = struct.getComponentContaining(offset);
+                return (dtc != null) ? getComponent(dtc.getOrdinal()) : null;
+            }
+            if (baseDataType instanceof DynamicDataType) {
+                DynamicDataType ddt = (DynamicDataType) baseDataType;
+                DataTypeComponent dtc = ddt.getComponentAt(offset, this);
+                return (dtc != null) ? getComponent(dtc.getOrdinal()) : null;
+            }
+            if (baseDataType instanceof Union) {
+                // TODO: Returning anything is potentially bad
+                //return getComponent(0);
+            }
+            return null;
 		}
 		finally {
 			lock.release();
@@ -532,40 +532,40 @@ class DataDB extends CodeUnitDB implements Data {
 				int index = offset / elementLength;
 				return Collections.singletonList(getComponent(index));
 			}
-			else if (baseDataType instanceof Structure) {
-				Structure struct = (Structure) baseDataType;
-				List<Data> result = new ArrayList<>();
-				for (DataTypeComponent dtc : struct.getComponentsContaining(offset)) {
-					result.add(getComponent(dtc.getOrdinal()));
-				}
-				return result;
-			}
-			else if (baseDataType instanceof DynamicDataType) {
-				DynamicDataType ddt = (DynamicDataType) baseDataType;
-				DataTypeComponent dtc = ddt.getComponentAt(offset, this);
-				List<Data> result = new ArrayList<>();
-				// Logic handles overlapping bit-fields
-				// Include if offset is contained within bounds of component
-				while (dtc != null && (offset >= dtc.getOffset()) &&
-					(offset < (dtc.getOffset() + dtc.getLength()))) {
-					int ordinal = dtc.getOrdinal();
-					result.add(getComponent(ordinal++));
-					dtc = ordinal < ddt.getNumComponents(this) ? ddt.getComponent(ordinal, this)
-							: null;
-				}
-				return result;
-			}
-			else if (baseDataType instanceof Union) {
-				Union union = (Union) baseDataType;
-				List<Data> result = new ArrayList<>();
-				for (DataTypeComponent dtc : union.getComponents()) {
-					if (offset < dtc.getLength()) {
-						result.add(getComponent(dtc.getOrdinal()));
-					}
-				}
-				return result;
-			}
-			return Collections.emptyList();
+            if (baseDataType instanceof Structure) {
+                Structure struct = (Structure) baseDataType;
+                List<Data> result = new ArrayList<>();
+                for (DataTypeComponent dtc : struct.getComponentsContaining(offset)) {
+                    result.add(getComponent(dtc.getOrdinal()));
+                }
+                return result;
+            }
+            if (baseDataType instanceof DynamicDataType) {
+                DynamicDataType ddt = (DynamicDataType) baseDataType;
+                DataTypeComponent dtc = ddt.getComponentAt(offset, this);
+                List<Data> result = new ArrayList<>();
+                // Logic handles overlapping bit-fields
+                // Include if offset is contained within bounds of component
+                while (dtc != null && (offset >= dtc.getOffset()) &&
+                    (offset < (dtc.getOffset() + dtc.getLength()))) {
+                    int ordinal = dtc.getOrdinal();
+                    result.add(getComponent(ordinal++));
+                    dtc = ordinal < ddt.getNumComponents(this) ? ddt.getComponent(ordinal, this)
+                            : null;
+                }
+                return result;
+            }
+            if (baseDataType instanceof Union) {
+                Union union = (Union) baseDataType;
+                List<Data> result = new ArrayList<>();
+                for (DataTypeComponent dtc : union.getComponents()) {
+                    if (offset < dtc.getLength()) {
+                        result.add(getComponent(dtc.getOrdinal()));
+                    }
+                }
+                return result;
+            }
+            return Collections.emptyList();
 		}
 		finally {
 			lock.release();
@@ -614,20 +614,20 @@ class DataDB extends CodeUnitDB implements Data {
 			if (baseDataType instanceof Composite) {
 				return ((Composite) baseDataType).getNumComponents();
 			}
-			else if (baseDataType instanceof Array) {
-				return ((Array) baseDataType).getNumElements();
-			}
-			else if (baseDataType instanceof DynamicDataType) {
-				try {
-					return ((DynamicDataType) baseDataType).getNumComponents(this);
-				}
-				catch (Throwable t) {
-					//Msg.error(this,
-					//	"Data type error (" + baseDataType.getName() + "): " + t.getMessage(), t);
-					return 0;
-				}
-			}
-			return 0;
+            if (baseDataType instanceof Array) {
+                return ((Array) baseDataType).getNumElements();
+            }
+            if (baseDataType instanceof DynamicDataType) {
+                try {
+                    return ((DynamicDataType) baseDataType).getNumComponents(this);
+                }
+                catch (Throwable t) {
+                    //Msg.error(this,
+                    //	"Data type error (" + baseDataType.getName() + "): " + t.getMessage(), t);
+                    return 0;
+                }
+            }
+            return 0;
 		}
 		finally {
 			lock.release();

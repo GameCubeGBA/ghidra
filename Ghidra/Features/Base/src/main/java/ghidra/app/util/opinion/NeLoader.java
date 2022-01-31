@@ -716,11 +716,11 @@ public class NeLoader extends AbstractLibrarySupportLoader {
 		if (reloc.isImportName()) {
 			return imp.getNameAt(reloc.getTargetOffset()).getString();
 		}
-		else if (reloc.isImportOrdinal()) {
-			int ordinal = Conv.shortToInt(reloc.getTargetOffset());
-			return SymbolUtilities.ORDINAL_PREFIX + ordinal;
-		}
-		return null;
+        if (reloc.isImportOrdinal()) {
+            int ordinal = Conv.shortToInt(reloc.getTargetOffset());
+            return SymbolUtilities.ORDINAL_PREFIX + ordinal;
+        }
+        return null;
 	}
 
 	private void initVars() {

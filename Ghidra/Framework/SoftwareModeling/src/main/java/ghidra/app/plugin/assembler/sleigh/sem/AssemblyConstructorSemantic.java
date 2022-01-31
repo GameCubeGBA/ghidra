@@ -263,7 +263,7 @@ public class AssemblyConstructorSemantic implements Comparable<AssemblyConstruct
 					return CONTINUE;
 				}
 
-				// Finally, check the line number
+                // Finally, check the line number
 				if (sibcons.getId() < cons.getId()) {
 					forbids.add(sibpat.withDescription(getLocation(sibcons) + " forbids " +
 						getLocation(cons) + " by rule position"));

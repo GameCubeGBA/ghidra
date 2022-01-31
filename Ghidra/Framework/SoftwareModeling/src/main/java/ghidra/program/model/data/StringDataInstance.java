@@ -434,13 +434,11 @@ public class StringDataInstance {
 		if (stringLayout.isPascal()) {
 			return getPascalLength();
 		}
-		else if (isBadCharSize() || (buf == null) || isAlreadyDeterminedFixedLen()) {
-			return length;
-		}
-		else {
-			return getNullTerminatedLength();
-		}
-	}
+        if (isBadCharSize() || (buf == null) || isAlreadyDeterminedFixedLen()) {
+            return length;
+        }
+        return getNullTerminatedLength();
+    }
 
 	private int getNullTerminatedLength() {
 		int localLen = length;

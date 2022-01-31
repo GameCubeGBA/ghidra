@@ -206,12 +206,12 @@ public class VersionedDatabase extends Database {
 			if (!versionFile.renameTo(delVersionFile)) {
 				throw new FileInUseException("Version " + minVersion + " is in use");
 			}
-			else if (!changeFile.renameTo(delChangeFile)) {
-				delVersionFile.renameTo(versionFile);
-				throw new FileInUseException("Version " + minVersion + " is in use");
-			}
+            if (!changeFile.renameTo(delChangeFile)) {
+                delVersionFile.renameTo(versionFile);
+                throw new FileInUseException("Version " + minVersion + " is in use");
+            }
 
-			// Complete removal
+            // Complete removal
 			delVersionFile.delete();
 			delChangeFile.delete();
 			int deletedVersion = minVersion++;
@@ -263,12 +263,12 @@ public class VersionedDatabase extends Database {
 			if (!versionFile.renameTo(delVersionFile)) {
 				throw new FileInUseException("Version " + prevVer + " is in use");
 			}
-			else if (!changeFile.renameTo(delChangeFile)) {
-				delVersionFile.renameTo(versionFile);
-				throw new FileInUseException("Version " + prevVer + " is in use");
-			}
+            if (!changeFile.renameTo(delChangeFile)) {
+                delVersionFile.renameTo(versionFile);
+                throw new FileInUseException("Version " + prevVer + " is in use");
+            }
 
-			// Remove current version
+            // Remove current version
 			if (!bfMgr.getBufferFile(currentVersion).delete()) {
 				prevBFile.delete();
 				delVersionFile.renameTo(versionFile);

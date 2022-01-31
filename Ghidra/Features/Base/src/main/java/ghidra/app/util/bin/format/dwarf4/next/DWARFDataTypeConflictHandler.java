@@ -88,12 +88,12 @@ class DWARFDataTypeConflictHandler extends DataTypeConflictHandler {
 	private boolean isCompositePart(Composite full, Composite part, Set<Long> visitedDataTypes) {
 		if (full instanceof Structure && part instanceof Structure) {
 			return isStructurePart((Structure) full, (Structure) part, visitedDataTypes);
-		} else if (full instanceof Union && part instanceof Union) {
-			return isUnionPart((Union) full, (Union) part, visitedDataTypes);
-		} else {
-			return false;
 		}
-	}
+        if (full instanceof Union && part instanceof Union) {
+            return isUnionPart((Union) full, (Union) part, visitedDataTypes);
+        }
+        return false;
+    }
 
 	/**
 	 * Returns true if one union is a subset of another union.

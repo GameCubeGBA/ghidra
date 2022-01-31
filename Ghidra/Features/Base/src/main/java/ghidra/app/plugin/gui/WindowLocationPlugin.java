@@ -527,20 +527,20 @@ public class WindowLocationPlugin extends Plugin {
 				provider.repaint();
 				return;
 			}
-			else if (intersection.size() == 1) {
+            if (intersection.size() == 1) {
 
-				if (isRightClick) {
-					lastPoint = null;
-					intersection.get(0).resetLocation();
-					return;
-				}
+                if (isRightClick) {
+                    lastPoint = null;
+                    intersection.get(0).resetLocation();
+                    return;
+                }
 
-				intersection.get(0).setSelected(true);
-				provider.repaint();
-				return;
-			}
+                intersection.get(0).setSelected(true);
+                provider.repaint();
+                return;
+            }
 
-			if (e.isShiftDown()) {
+            if (e.isShiftDown()) {
 				cycleZOrder(intersection);
 			}
 			else {

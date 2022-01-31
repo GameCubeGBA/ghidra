@@ -60,11 +60,11 @@ class OldFunctionDBAdapterV0 extends OldFunctionDBAdapter {
 		if (table == null) {
 			throw new VersionException("Missing Table: " + V0_FUNCTIONS_TABLE_NAME);
 		}
-		else if (table.getSchema().getVersion() != 0) {
-			throw new VersionException("Expected version 0 for table " + V0_FUNCTIONS_TABLE_NAME +
-				" but got " + table.getSchema().getVersion());
-		}
-	}
+        if (table.getSchema().getVersion() != 0) {
+            throw new VersionException("Expected version 0 for table " + V0_FUNCTIONS_TABLE_NAME +
+                " but got " + table.getSchema().getVersion());
+        }
+    }
 
 	/**
 	 * @see ghidra.program.database.function.FunctionDBAdapter#getFunctionRecord(long)

@@ -156,36 +156,34 @@ public class PrelinkParser {
 		if (valueElement.getName().equals(TAG_STRING)) {
 			return processString(map, key, valueElement);
 		}
-		else if (valueElement.getName().equals(TAG_INTEGER)) {
-			return processInteger(map, key, valueElement);
-		}
-		else if (valueElement.getName().equals(TAG_TRUE)) {
-			map.put(key, true);
-			return "true";
-		}
-		else if (valueElement.getName().equals(TAG_FALSE)) {
-			map.put(key, false);
-			return "false";
-		}
-		else if (valueElement.getName().equals(TAG_DATA)) {
-			map.put(key, valueElement.getValue());
-			return valueElement.getValue();
-		}
-		else if (valueElement.getName().equals(TAG_DICT)) {
-			PrelinkMap dictMap = processElement(valueElement, monitor);
-			map.put(key, dictMap);
-			return dictMap.toString();
-		}
-		else if (valueElement.getName().equals(TAG_ARRAY)) {
-			String arrayString = processArray(valueElement, map, monitor);
-			map.put(key, arrayString);
-			return arrayString;
-		}
-		else {
-			System.out.println("Unhandled value type: " + valueElement.getName());
-			return valueElement.getValue();
-		}
-	}
+        if (valueElement.getName().equals(TAG_INTEGER)) {
+            return processInteger(map, key, valueElement);
+        }
+        if (valueElement.getName().equals(TAG_TRUE)) {
+            map.put(key, true);
+            return "true";
+        }
+        if (valueElement.getName().equals(TAG_FALSE)) {
+            map.put(key, false);
+            return "false";
+        }
+        if (valueElement.getName().equals(TAG_DATA)) {
+            map.put(key, valueElement.getValue());
+            return valueElement.getValue();
+        }
+        if (valueElement.getName().equals(TAG_DICT)) {
+            PrelinkMap dictMap = processElement(valueElement, monitor);
+            map.put(key, dictMap);
+            return dictMap.toString();
+        }
+        if (valueElement.getName().equals(TAG_ARRAY)) {
+            String arrayString = processArray(valueElement, map, monitor);
+            map.put(key, arrayString);
+            return arrayString;
+        }
+        System.out.println("Unhandled value type: " + valueElement.getName());
+        return valueElement.getValue();
+    }
 
 	private String processString(PrelinkMap map, String key, Element valueElement) {
 		String value = valueElement.getValue();

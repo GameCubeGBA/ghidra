@@ -79,11 +79,11 @@ class TokenKey {
 			}
 			return true;
 		}
-		else if (l2 == null) {
-			return false;
-		}
+        if (l2 == null) {
+            return false;
+        }
 
-		return l1.getLineNumber() == l2.getLineNumber();
+        return l1.getLineNumber() == l2.getLineNumber();
 	}
 
 	@Override

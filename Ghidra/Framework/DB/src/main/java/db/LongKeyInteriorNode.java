@@ -197,13 +197,13 @@ class LongKeyInteriorNode extends LongKeyNode implements InteriorNode {
 			if (k == key) {
 				return i;
 			}
-			else if (k < key) {
-				min = i + 1;
-			}
-			else {
-				max = i - 1;
-			}
-		}
+            if (k < key) {
+                min = i + 1;
+            }
+            else {
+                max = i - 1;
+            }
+        }
 		return max;
 	}
 
@@ -232,13 +232,13 @@ class LongKeyInteriorNode extends LongKeyNode implements InteriorNode {
 			if (k == key) {
 				return i;
 			}
-			else if (k < key) {
-				min = i + 1;
-			}
-			else {
-				max = i - 1;
-			}
-		}
+            if (k < key) {
+                min = i + 1;
+            }
+            else {
+                max = i - 1;
+            }
+        }
 		return -(min + 1);
 	}
 

@@ -138,17 +138,17 @@ public abstract class DecompilerReference {
 		if (dt instanceof Array) {
 			return getBaseType(((Array) dt).getDataType());
 		}
-		else if (dt instanceof Pointer) {
-			DataType baseDataType = ((Pointer) dt).getDataType();
-			if (baseDataType != null) {
-				return getBaseType(baseDataType);
-			}
-		}
-		else if (dt instanceof TypeDef) {
-			DataType baseDataType = ((TypeDef) dt).getBaseDataType();
-			return getBaseType(baseDataType);
-		}
-		return dt;
+        if (dt instanceof Pointer) {
+            DataType baseDataType = ((Pointer) dt).getDataType();
+            if (baseDataType != null) {
+                return getBaseType(baseDataType);
+            }
+        }
+        else if (dt instanceof TypeDef) {
+            DataType baseDataType = ((TypeDef) dt).getBaseDataType();
+            return getBaseType(baseDataType);
+        }
+        return dt;
 	}
 
 	public static DataType getFieldDataType(ClangFieldToken field) {

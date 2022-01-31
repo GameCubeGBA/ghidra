@@ -53,11 +53,11 @@ class BuiltinDBAdapterV0 extends BuiltinDBAdapter {
 			if (table == null) {
 				throw new VersionException("Missing Table: " + BUILT_IN_TABLE_NAME);
 			}
-			else if (table.getSchema().getVersion() != 0) {
-				throw new VersionException("Expected version 0 for table " + BUILT_IN_TABLE_NAME +
-					" but got " + table.getSchema().getVersion());
-			}
-		}
+            if (table.getSchema().getVersion() != 0) {
+                throw new VersionException("Expected version 0 for table " + BUILT_IN_TABLE_NAME +
+                    " but got " + table.getSchema().getVersion());
+            }
+        }
 	}
 
 	@Override

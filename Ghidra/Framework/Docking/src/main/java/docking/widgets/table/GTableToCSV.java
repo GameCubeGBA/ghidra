@@ -252,11 +252,11 @@ public final class GTableToCSV {
 			RowObjectFilterModel<?> threadedModel = (RowObjectFilterModel<?>) model;
 			return threadedModel.getModelRow(viewRow);
 		}
-		else if (model instanceof TableModelWrapper) {
-			TableModelWrapper<?> wrapper = (TableModelWrapper<?>) model;
-			return wrapper.getModelRow(viewRow);
-		}
-		return viewRow; // assume no filtering, as we don't know how to handle it anyway
+        if (model instanceof TableModelWrapper) {
+            TableModelWrapper<?> wrapper = (TableModelWrapper<?>) model;
+            return wrapper.getModelRow(viewRow);
+        }
+        return viewRow; // assume no filtering, as we don't know how to handle it anyway
 	}
 
 	private static void writeAllModelData(PrintWriter writer, JTable table, TableModel model,

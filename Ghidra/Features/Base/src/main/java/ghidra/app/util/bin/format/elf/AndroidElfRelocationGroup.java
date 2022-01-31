@@ -184,10 +184,10 @@ class AndroidElfRelocationGroup extends DynamicDataType {
 			AndroidElfRelocationOffset d = (AndroidElfRelocationOffset) dt;
 			return d.getRelocationOffset(); // return stashed offset
 		}
-		else if (dt instanceof AndroidElfRelocationData) {
-			AndroidElfRelocationData d = (AndroidElfRelocationData) dt;
-			return d.getRelocationOffset(); // return stashed offset
-		}
-		return -1; // unexpected
+        if (dt instanceof AndroidElfRelocationData) {
+            AndroidElfRelocationData d = (AndroidElfRelocationData) dt;
+            return d.getRelocationOffset(); // return stashed offset
+        }
+        return -1; // unexpected
 	}
 }

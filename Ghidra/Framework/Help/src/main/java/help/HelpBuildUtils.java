@@ -56,10 +56,10 @@ public class HelpBuildUtils {
 		if (file.isDirectory()) {
 			return new DirectoryHelpModuleLocation(file);
 		}
-		else if (file.isFile()) {
-			return new JarHelpModuleLocation(file);
-		}
-		throw new IllegalArgumentException(
+        if (file.isFile()) {
+            return new JarHelpModuleLocation(file);
+        }
+        throw new IllegalArgumentException(
 			"Don't know how to create a help module location for file: " + file);
 	}
 

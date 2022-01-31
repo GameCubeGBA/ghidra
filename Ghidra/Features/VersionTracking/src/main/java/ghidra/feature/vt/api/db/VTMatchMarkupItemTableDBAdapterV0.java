@@ -51,11 +51,11 @@ public class VTMatchMarkupItemTableDBAdapterV0 extends VTMatchMarkupItemTableDBA
 		if (table == null) {
 			throw new VersionException("Missing Table: " + TABLE_NAME);
 		}
-		else if (table.getSchema().getVersion() != 0) {
-			throw new VersionException("Expected version 0 for table " + TABLE_NAME + " but got " +
-				table.getSchema().getVersion());
-		}
-	}
+        if (table.getSchema().getVersion() != 0) {
+            throw new VersionException("Expected version 0 for table " + TABLE_NAME + " but got " +
+                table.getSchema().getVersion());
+        }
+    }
 
 	@Override
 	public DBRecord createMarkupItemRecord(MarkupItemStorage markupItem) throws IOException {

@@ -110,22 +110,22 @@ public class ByteTrieNode<T> implements ByteTrieNodeIfc<T> {
 		if (children.length == 0) {
 			return null;
 		}
-		else if (children.length == 1) {
-			if (transformByte(children[0].getId()) == value) {
-				return children[0];
-			}
-			return null;
-		}
-		else if (children.length == 2) {
-			if (transformByte(children[0].getId()) == value) {
-				return children[0];
-			}
-			if (transformByte(children[1].getId()) == value) {
-				return children[1];
-			}
-			return null;
-		}
-		int index = findIndex(value);
+        if (children.length == 1) {
+            if (transformByte(children[0].getId()) == value) {
+                return children[0];
+            }
+            return null;
+        }
+        if (children.length == 2) {
+            if (transformByte(children[0].getId()) == value) {
+                return children[0];
+            }
+            if (transformByte(children[1].getId()) == value) {
+                return children[1];
+            }
+            return null;
+        }
+        int index = findIndex(value);
 		if (index >= children.length) {
 			return null;
 		}
@@ -201,13 +201,13 @@ public class ByteTrieNode<T> implements ByteTrieNodeIfc<T> {
 			if (id == value) {
 				return mid;
 			}
-			else if (id < value) {
-				left = mid + 1;
-			}
-			else {
-				right = mid - 1;
-			}
-		}
+            if (id < value) {
+                left = mid + 1;
+            }
+            else {
+                right = mid - 1;
+            }
+        }
 		return left;
 	}
 

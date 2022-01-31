@@ -259,15 +259,15 @@ class DragNDropHandler implements GTreeDragNDropHandler {
 			}
 			return fileList;
 		}
-		else if (flavor.equals(DataFlavor.stringFlavor)) {
-			StringBuilder buf = new StringBuilder();
-            for (GTreeNode dragUserDatum : dragUserData) {
-                buf.append(dragUserDatum.toString());
-                buf.append("\n");
-            }
-			return buf.toString();
-		}
-		return null;
+        if (flavor.equals(DataFlavor.stringFlavor)) {
+            StringBuilder buf = new StringBuilder();
+for (GTreeNode dragUserDatum : dragUserData) {
+buf.append(dragUserDatum.toString());
+buf.append("\n");
+}
+            return buf.toString();
+        }
+        return null;
 
 	}
 

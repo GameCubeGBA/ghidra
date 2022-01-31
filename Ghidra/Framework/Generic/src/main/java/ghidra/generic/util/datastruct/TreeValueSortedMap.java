@@ -300,21 +300,21 @@ public class TreeValueSortedMap<K, V> extends AbstractMap<K, V> implements Value
 				if (i < 0) {
 					throw new AssertionError("INTERNAL: sizeLeft values inconsistent");
 				}
-				else if (cur == null) {
-					throw new IndexOutOfBoundsException(Integer.toString(index));
-				}
-				else if (i == cur.sizeLeft) {
-					return cur;
-				}
-				else if (i > cur.sizeLeft) {
-					i -= cur.sizeLeft;
-					i--;
-					cur = cur.rChild;
-				}
-				else {
-					cur = cur.lChild;
-				}
-			}
+                if (cur == null) {
+                    throw new IndexOutOfBoundsException(Integer.toString(index));
+                }
+                if (i == cur.sizeLeft) {
+                    return cur;
+                }
+                if (i > cur.sizeLeft) {
+                    i -= cur.sizeLeft;
+                    i--;
+                    cur = cur.rChild;
+                }
+                else {
+                    cur = cur.lChild;
+                }
+            }
 		}
 
 		@Override

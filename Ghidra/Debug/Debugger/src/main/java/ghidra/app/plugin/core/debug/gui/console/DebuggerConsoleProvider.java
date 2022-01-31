@@ -426,13 +426,13 @@ public class DebuggerConsoleProvider extends ComponentProviderAdapter
 		if (level == Level.FATAL) {
 			return DebuggerResources.ICON_LOG_FATAL;
 		}
-		else if (level == Level.ERROR) {
-			return DebuggerResources.ICON_LOG_ERROR;
-		}
-		else if (level == Level.WARN) {
-			return DebuggerResources.ICON_LOG_WARN;
-		}
-		return null;
+        if (level == Level.ERROR) {
+            return DebuggerResources.ICON_LOG_ERROR;
+        }
+        if (level == Level.WARN) {
+            return DebuggerResources.ICON_LOG_WARN;
+        }
+        return null;
 	}
 
 	protected void logEvent(LogEvent event) {

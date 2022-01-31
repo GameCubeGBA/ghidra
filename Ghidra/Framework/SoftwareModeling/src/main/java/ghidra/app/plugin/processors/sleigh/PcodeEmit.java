@@ -218,13 +218,13 @@ public abstract class PcodeEmit {
 			flowOverride = null;
 			return true;
 		}
-		else if (opcode == PcodeOp.CALLIND || opcode == PcodeOp.RETURN) {
-			OpTpl callopt = new OpTpl(PcodeOp.BRANCHIND, null, inputs);
-			dump(callopt);
-			flowOverride = null;
-			return true;
-		}
-		return false;
+        if (opcode == PcodeOp.CALLIND || opcode == PcodeOp.RETURN) {
+            OpTpl callopt = new OpTpl(PcodeOp.BRANCHIND, null, inputs);
+            dump(callopt);
+            flowOverride = null;
+            return true;
+        }
+        return false;
 	}
 
 	private void dumpNullReturn() {
@@ -254,66 +254,66 @@ public abstract class PcodeEmit {
 			flowOverride = null;
 			return true;
 		}
-		else if (opcode == PcodeOp.BRANCHIND || opcode == PcodeOp.RETURN) {
-			OpTpl callopt = new OpTpl(PcodeOp.CALLIND, null, inputs);
-			dump(callopt);
-			if (returnAfterCall) {
-				dumpNullReturn();
-			}
-			flowOverride = null;
-			return true;
-		}
-		else if (opcode == PcodeOp.CBRANCH) {
-			int offsetType = inputs[0].getOffset().getType();
-			if (offsetType == ConstTpl.J_RELATIVE || offsetType == ConstTpl.J_START ||
-				offsetType == ConstTpl.J_NEXT) {
-				return false;
-			}
+        if (opcode == PcodeOp.BRANCHIND || opcode == PcodeOp.RETURN) {
+            OpTpl callopt = new OpTpl(PcodeOp.CALLIND, null, inputs);
+            dump(callopt);
+            if (returnAfterCall) {
+                dumpNullReturn();
+            }
+            flowOverride = null;
+            return true;
+        }
+        if (opcode == PcodeOp.CBRANCH) {
+            int offsetType = inputs[0].getOffset().getType();
+            if (offsetType == ConstTpl.J_RELATIVE || offsetType == ConstTpl.J_START ||
+                offsetType == ConstTpl.J_NEXT) {
+                return false;
+            }
 
-			//   CBRANCH <dest>,<cond>
-			// -- maps to --
-			//   tmp = BOOL_NEGATE <cond>
-			//   CBRANCH <label>,tmp
-			//   CALL <dest>
-			//   <label>
+            //   CBRANCH <dest>,<cond>
+            // -- maps to --
+            //   tmp = BOOL_NEGATE <cond>
+            //   CBRANCH <label>,tmp
+            //   CALL <dest>
+            //   <label>
 
-			VarnodeTpl tmp =
-				new VarnodeTpl(new ConstTpl(uniq_space),
-					new ConstTpl(ConstTpl.REAL,
-						UniqueLayout.RUNTIME_BOOLEAN_INVERT.getOffset(language)),
-					inputs[1].getSize());
-			int labelIndex = labelcount++;
-			VarnodeTpl label = new VarnodeTpl(new ConstTpl(const_space),
-				new ConstTpl(ConstTpl.J_RELATIVE, labelIndex), new ConstTpl(ConstTpl.REAL, 8));
-			VarnodeTpl dest = inputs[0];
-			VarnodeTpl cond = inputs[1];
+            VarnodeTpl tmp =
+                new VarnodeTpl(new ConstTpl(uniq_space),
+                    new ConstTpl(ConstTpl.REAL,
+                        UniqueLayout.RUNTIME_BOOLEAN_INVERT.getOffset(language)),
+                    inputs[1].getSize());
+            int labelIndex = labelcount++;
+            VarnodeTpl label = new VarnodeTpl(new ConstTpl(const_space),
+                new ConstTpl(ConstTpl.J_RELATIVE, labelIndex), new ConstTpl(ConstTpl.REAL, 8));
+            VarnodeTpl dest = inputs[0];
+            VarnodeTpl cond = inputs[1];
 
-			OpTpl negOpt = new OpTpl(PcodeOp.BOOL_NEGATE, tmp, new VarnodeTpl[] { cond });
-			dump(negOpt);
+            OpTpl negOpt = new OpTpl(PcodeOp.BOOL_NEGATE, tmp, new VarnodeTpl[] { cond });
+            dump(negOpt);
 
-			OpTpl cbranchOpt = new OpTpl(PcodeOp.CBRANCH, null, new VarnodeTpl[] { label, tmp });
-			dump(cbranchOpt);
+            OpTpl cbranchOpt = new OpTpl(PcodeOp.CBRANCH, null, new VarnodeTpl[] { label, tmp });
+            dump(cbranchOpt);
 
-			OpTpl callOpt = new OpTpl(PcodeOp.CALL, null, new VarnodeTpl[] { dest });
-			dump(callOpt);
+            OpTpl callOpt = new OpTpl(PcodeOp.CALL, null, new VarnodeTpl[] { dest });
+            dump(callOpt);
 
-			if (returnAfterCall) {
-				dumpNullReturn();
-			}
+            if (returnAfterCall) {
+                dumpNullReturn();
+            }
 
-			OpTpl labelOpt = new OpTpl(PcodeOp.PTRADD, null, new VarnodeTpl[] { label });
-			setLabel(labelOpt);
+            OpTpl labelOpt = new OpTpl(PcodeOp.PTRADD, null, new VarnodeTpl[] { label });
+            setLabel(labelOpt);
 
-			flowOverride = null;
-			return true;
-		}
-		else if ((opcode == PcodeOp.CALL || opcode == PcodeOp.CALLIND) && returnAfterCall) {
-			dump(opt); // dump original call
-			dumpNullReturn();
-			flowOverride = null;
-			return true;
-		}
-		return false;
+            flowOverride = null;
+            return true;
+        }
+        if ((opcode == PcodeOp.CALL || opcode == PcodeOp.CALLIND) && returnAfterCall) {
+            dump(opt); // dump original call
+            dumpNullReturn();
+            flowOverride = null;
+            return true;
+        }
+        return false;
 	}
 
 	private boolean dumpReturnOverride(OpTpl opt) {
@@ -352,68 +352,68 @@ public abstract class PcodeEmit {
 			flowOverride = null;
 			return true;
 		}
-		else if (opcode == PcodeOp.BRANCHIND || opcode == PcodeOp.CALLIND) {
-			OpTpl callopt = new OpTpl(PcodeOp.RETURN, null, inputs);
-			dump(callopt);
-			flowOverride = null;
-			return true;
-		}
-		else if (opcode == PcodeOp.CBRANCH) {
-			int offsetType = inputs[0].getOffset().getType();
-			if (offsetType == ConstTpl.J_RELATIVE || offsetType == ConstTpl.J_START ||
-				offsetType == ConstTpl.J_NEXT) {
-				return false;
-			}
+        if (opcode == PcodeOp.BRANCHIND || opcode == PcodeOp.CALLIND) {
+            OpTpl callopt = new OpTpl(PcodeOp.RETURN, null, inputs);
+            dump(callopt);
+            flowOverride = null;
+            return true;
+        }
+        if (opcode == PcodeOp.CBRANCH) {
+            int offsetType = inputs[0].getOffset().getType();
+            if (offsetType == ConstTpl.J_RELATIVE || offsetType == ConstTpl.J_START ||
+                offsetType == ConstTpl.J_NEXT) {
+                return false;
+            }
 
-			AddressSpace defaultAddressSpace = walker.getCurSpace();
-			int ptrSize = defaultAddressSpace.getPointerSize();
+            AddressSpace defaultAddressSpace = walker.getCurSpace();
+            int ptrSize = defaultAddressSpace.getPointerSize();
 
-			//   CBRANCH <dest>,<cond>
-			// -- maps to --
-			//   tmp = BOOL_NEGATE <cond>
-			//   CBRANCH <label>,tmp
-			//   tmp2 = COPY &<dest>
-			//   RETURN <dest>
-			//   <label>
+            //   CBRANCH <dest>,<cond>
+            // -- maps to --
+            //   tmp = BOOL_NEGATE <cond>
+            //   CBRANCH <label>,tmp
+            //   tmp2 = COPY &<dest>
+            //   RETURN <dest>
+            //   <label>
 
-			VarnodeTpl tmp =
-				new VarnodeTpl(new ConstTpl(uniq_space),
-					new ConstTpl(ConstTpl.REAL,
-						UniqueLayout.RUNTIME_BOOLEAN_INVERT.getOffset(language)),
-					inputs[1].getSize());
+            VarnodeTpl tmp =
+                new VarnodeTpl(new ConstTpl(uniq_space),
+                    new ConstTpl(ConstTpl.REAL,
+                        UniqueLayout.RUNTIME_BOOLEAN_INVERT.getOffset(language)),
+                    inputs[1].getSize());
 
-			VarnodeTpl tmp2 = new VarnodeTpl(new ConstTpl(uniq_space),
-				new ConstTpl(ConstTpl.REAL,
-					UniqueLayout.RUNTIME_RETURN_LOCATION.getOffset(language)),
-				new ConstTpl(ConstTpl.REAL, ptrSize));
+            VarnodeTpl tmp2 = new VarnodeTpl(new ConstTpl(uniq_space),
+                new ConstTpl(ConstTpl.REAL,
+                    UniqueLayout.RUNTIME_RETURN_LOCATION.getOffset(language)),
+                new ConstTpl(ConstTpl.REAL, ptrSize));
 
-			VarnodeTpl destAddr = new VarnodeTpl(new ConstTpl(const_space), inputs[0].getOffset(),
-				new ConstTpl(ConstTpl.REAL, ptrSize));
+            VarnodeTpl destAddr = new VarnodeTpl(new ConstTpl(const_space), inputs[0].getOffset(),
+                new ConstTpl(ConstTpl.REAL, ptrSize));
 
-			int labelIndex = labelcount++;
-			VarnodeTpl label = new VarnodeTpl(new ConstTpl(const_space),
-				new ConstTpl(ConstTpl.J_RELATIVE, labelIndex), new ConstTpl(ConstTpl.REAL, 8));
-			VarnodeTpl cond = inputs[1];
+            int labelIndex = labelcount++;
+            VarnodeTpl label = new VarnodeTpl(new ConstTpl(const_space),
+                new ConstTpl(ConstTpl.J_RELATIVE, labelIndex), new ConstTpl(ConstTpl.REAL, 8));
+            VarnodeTpl cond = inputs[1];
 
-			OpTpl negOpt = new OpTpl(PcodeOp.BOOL_NEGATE, tmp, new VarnodeTpl[] { cond });
-			dump(negOpt);
+            OpTpl negOpt = new OpTpl(PcodeOp.BOOL_NEGATE, tmp, new VarnodeTpl[] { cond });
+            dump(negOpt);
 
-			OpTpl cbranchOpt = new OpTpl(PcodeOp.CBRANCH, null, new VarnodeTpl[] { label, tmp });
-			dump(cbranchOpt);
+            OpTpl cbranchOpt = new OpTpl(PcodeOp.CBRANCH, null, new VarnodeTpl[] { label, tmp });
+            dump(cbranchOpt);
 
-			OpTpl copyOpt = new OpTpl(PcodeOp.COPY, tmp2, new VarnodeTpl[] { destAddr });
-			dump(copyOpt);
+            OpTpl copyOpt = new OpTpl(PcodeOp.COPY, tmp2, new VarnodeTpl[] { destAddr });
+            dump(copyOpt);
 
-			OpTpl retOpt = new OpTpl(PcodeOp.RETURN, null, new VarnodeTpl[] { tmp2 });
-			dump(retOpt);
+            OpTpl retOpt = new OpTpl(PcodeOp.RETURN, null, new VarnodeTpl[] { tmp2 });
+            dump(retOpt);
 
-			OpTpl labelOpt = new OpTpl(PcodeOp.PTRADD, null, new VarnodeTpl[] { label });
-			setLabel(labelOpt);
+            OpTpl labelOpt = new OpTpl(PcodeOp.PTRADD, null, new VarnodeTpl[] { label });
+            setLabel(labelOpt);
 
-			flowOverride = null;
-			return true;
-		}
-		return false;
+            flowOverride = null;
+            return true;
+        }
+        return false;
 	}
 
 	private boolean dumpFlowOverride(OpTpl opt) {
@@ -423,16 +423,16 @@ public abstract class PcodeEmit {
 		if (flowOverride == FlowOverride.BRANCH) {
 			return dumpBranchOverride(opt);
 		}
-		else if (flowOverride == FlowOverride.CALL) {
-			return dumpCallOverride(opt, false);
-		}
-		else if (flowOverride == FlowOverride.CALL_RETURN) {
-			return dumpCallOverride(opt, true);
-		}
-		else if (flowOverride == FlowOverride.RETURN) {
-			return dumpReturnOverride(opt);
-		}
-		return false;
+        if (flowOverride == FlowOverride.CALL) {
+            return dumpCallOverride(opt, false);
+        }
+        if (flowOverride == FlowOverride.CALL_RETURN) {
+            return dumpCallOverride(opt, true);
+        }
+        if (flowOverride == FlowOverride.RETURN) {
+            return dumpReturnOverride(opt);
+        }
+        return false;
 	}
 
 	/**

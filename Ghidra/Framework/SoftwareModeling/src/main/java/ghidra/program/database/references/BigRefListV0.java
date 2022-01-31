@@ -225,18 +225,18 @@ class BigRefListV0 extends RefList {
 			return new OffsetReferenceDB(program, from, to, refType, opIndex, source,
 				flags.isPrimary(), symbolID, offsetOrShift);
 		}
-		else if (to.isExternalAddress()) {
-			return new ExternalReferenceDB(program, from, to, refType, opIndex, source);
-		}
-		else if (from.equals(Address.EXT_FROM_ADDRESS)) {
-			return new EntryPointReferenceDB(from, to, refType, opIndex, source, flags.isPrimary(),
-				symbolID);
-		}
-		else if (to.isStackAddress()) {
-			return new StackReferenceDB(program, from, to, refType, opIndex, source,
-				flags.isPrimary(), symbolID);
-		}
-		return new MemReferenceDB(program, from, to, refType, opIndex, source, flags.isPrimary(),
+        if (to.isExternalAddress()) {
+            return new ExternalReferenceDB(program, from, to, refType, opIndex, source);
+        }
+        if (from.equals(Address.EXT_FROM_ADDRESS)) {
+            return new EntryPointReferenceDB(from, to, refType, opIndex, source, flags.isPrimary(),
+                symbolID);
+        }
+        if (to.isStackAddress()) {
+            return new StackReferenceDB(program, from, to, refType, opIndex, source,
+                flags.isPrimary(), symbolID);
+        }
+        return new MemReferenceDB(program, from, to, refType, opIndex, source, flags.isPrimary(),
 			symbolID);
 	}
 

@@ -148,11 +148,11 @@ public abstract class CompositeDataTypeImpl extends GenericDataType implements C
 			throw new IllegalArgumentException(
 				"Data type " + getDisplayName() + " can't contain itself.");
 		}
-		else if (DataTypeUtilities.isSecondPartOfFirst(dataType, this)) {
-			throw new IllegalArgumentException("Data type " + dataType.getDisplayName() + " has " +
-				getDisplayName() + " within it.");
-		}
-	}
+        if (DataTypeUtilities.isSecondPartOfFirst(dataType, this)) {
+            throw new IllegalArgumentException("Data type " + dataType.getDisplayName() + " has " +
+                getDisplayName() + " within it.");
+        }
+    }
 
 	/**
 	 * This method throws an exception if the indicated data type is not a valid

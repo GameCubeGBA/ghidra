@@ -54,14 +54,14 @@ class ToAdapterV1 extends ToAdapter {
 			if (table == null) {
 				throw new VersionException("Missing Table: " + TO_REFS_TABLE_NAME);
 			}
-			else if (table.getSchema().getVersion() != 1) {
-				int version = table.getSchema().getVersion();
-				if (version < 1) {
-					throw new VersionException(true);
-				}
-				throw new VersionException(VersionException.NEWER_VERSION, false);
-			}
-		}
+            if (table.getSchema().getVersion() != 1) {
+                int version = table.getSchema().getVersion();
+                if (version < 1) {
+                    throw new VersionException(true);
+                }
+                throw new VersionException(VersionException.NEWER_VERSION, false);
+            }
+        }
 	}
 
 	@Override

@@ -61,13 +61,11 @@ public class StaticMappingRow {
 		if (length == 0) {
 			return BIT64;
 		}
-		else if (length < 0) {
-			return BigInteger.valueOf(length).add(BIT64);
-		}
-		else {
-			return BigInteger.valueOf(length);
-		}
-	}
+        if (length < 0) {
+            return BigInteger.valueOf(length).add(BIT64);
+        }
+        return BigInteger.valueOf(length);
+    }
 
 	public long getShift() {
 		return mapping.getShift();

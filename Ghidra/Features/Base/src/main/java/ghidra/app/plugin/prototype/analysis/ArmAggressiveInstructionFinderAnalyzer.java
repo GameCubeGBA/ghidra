@@ -121,11 +121,11 @@ public class ArmAggressiveInstructionFinderAnalyzer extends AbstractAnalyzer {
 			if (!symbol.isExternalEntryPoint()) {
 				continue;
 			}
-			else if (doValidStart(entry, monitor)) {
-				scheduleFollowOnAnalysis(curProgram, todoSet);
-				return true;
-			}
-		}
+            if (doValidStart(entry, monitor)) {
+                scheduleFollowOnAnalysis(curProgram, todoSet);
+                return true;
+            }
+        }
 
 		// get an instruction iterator
 		while (todoSet.isEmpty() == false) {

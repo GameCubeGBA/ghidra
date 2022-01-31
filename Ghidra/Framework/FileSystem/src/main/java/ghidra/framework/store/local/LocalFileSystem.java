@@ -111,11 +111,11 @@ public abstract class LocalFileSystem implements FileSystem {
 			return new IndexedV1LocalFileSystem(rootPath, isVersioned, readOnly,
 				enableAsyncronousDispatching, true);
 		}
-		else if (!readOnly && !root.canWrite()) {
-			throw new IOException("filesystem directory is not writable: " + rootPath);
-		}
+        if (!readOnly && !root.canWrite()) {
+            throw new IOException("filesystem directory is not writable: " + rootPath);
+        }
 
-		int indexVersion = -1;
+        int indexVersion = -1;
 		if (IndexedLocalFileSystem.isIndexed(rootPath)) {
 			indexVersion = IndexedLocalFileSystem.readIndexVersion(rootPath);
 		}

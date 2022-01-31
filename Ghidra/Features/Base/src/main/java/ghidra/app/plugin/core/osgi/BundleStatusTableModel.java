@@ -536,11 +536,11 @@ public class BundleStatusTableModel
 			if (bundle == null) {
 				return "no bundle";
 			}
-			else if (bundle instanceof GhidraPlaceholderBundle) {
-				// placeholders will have a summary assigned on construction
-				return ((GhidraPlaceholderBundle) bundle).getSummary();
-			}
-			// other bundles will update their summary on build
+            if (bundle instanceof GhidraPlaceholderBundle) {
+                // placeholders will have a summary assigned on construction
+                return ((GhidraPlaceholderBundle) bundle).getSummary();
+            }
+            // other bundles will update their summary on build
 			return status.getSummary();
 		}
 

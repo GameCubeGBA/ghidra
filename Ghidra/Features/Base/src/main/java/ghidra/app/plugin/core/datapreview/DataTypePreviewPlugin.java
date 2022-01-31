@@ -628,10 +628,10 @@ public class DataTypePreviewPlugin extends ProgramPlugin {
 			if (col == NAME_COL) {
 				return "Name";
 			}
-			else if (col == PREVIEW_COL) {
-				return "Preview";
-			}
-			return "<<unknown>>";
+            if (col == PREVIEW_COL) {
+                return "Preview";
+            }
+            return "<<unknown>>";
 		}
 
 		@Override

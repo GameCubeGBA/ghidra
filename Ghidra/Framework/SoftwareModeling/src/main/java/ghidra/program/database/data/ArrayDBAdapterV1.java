@@ -57,10 +57,10 @@ class ArrayDBAdapterV1 extends ArrayDBAdapter {
 			if (table == null) {
 				throw new VersionException("Missing Table: " + ARRAY_TABLE_NAME);
 			}
-			else if (table.getSchema().getVersion() != VERSION) {
-				throw new VersionException(VersionException.NEWER_VERSION, false);
-			}
-		}
+            if (table.getSchema().getVersion() != VERSION) {
+                throw new VersionException(VersionException.NEWER_VERSION, false);
+            }
+        }
 	}
 
 	@Override

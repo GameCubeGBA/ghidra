@@ -443,14 +443,14 @@ class UnionEditorModel extends CompEditorModel {
 			String msg = datatype.getDisplayName() + " can't contain itself.";
 			throw new InvalidDataTypeException(msg);
 		}
-		else if ((datatype instanceof Composite) &&
-			(((Composite) datatype).isPartOf(viewComposite))) {
-			String msg = "Can't replace with " + datatype.getDisplayName() + " since it has " +
-				viewComposite.getDisplayName() + " within it.";
-			throw new InvalidDataTypeException(msg);
-		}
+        if ((datatype instanceof Composite) &&
+            (((Composite) datatype).isPartOf(viewComposite))) {
+            String msg = "Can't replace with " + datatype.getDisplayName() + " since it has " +
+                viewComposite.getDisplayName() + " within it.";
+            throw new InvalidDataTypeException(msg);
+        }
 
-		if (startRowIndex > endRowIndex) {
+        if (startRowIndex > endRowIndex) {
 			throw new IllegalArgumentException("startIndex of " + startRowIndex +
 				" is greater than endIndex of " + endRowIndex + ".");
 		}

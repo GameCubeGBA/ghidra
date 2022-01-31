@@ -212,13 +212,13 @@ public class TextFieldAutocompleter<T> {
 			if (nearRight && nearBottom || nearRight && closeBottom || closeRight && nearBottom) {
 				return REGION_SE;
 			}
-			else if (nearRight) {
-				return REGION_E;
-			}
-			else if (nearBottom) {
-				return REGION_S;
-			}
-			return REGION_NONE;
+            if (nearRight) {
+                return REGION_E;
+            }
+            if (nearBottom) {
+                return REGION_S;
+            }
+            return REGION_NONE;
 		}
 
 		@Override
@@ -729,23 +729,23 @@ public class TextFieldAutocompleter<T> {
 			if (comp == null || comp.size() == 0) {
 				return;
 			}
-			else if (comp.size() == 1) {
-				T sel = comp.iterator().next();
-				if (getCompletionCanDefault(sel)) {
-					completionActivated(comp.iterator().next());
-				}
-				else {
-					setCompletionListVisible(true);
-					updateDisplayContents();
-					return;
-				}
-			}
-			else if (!isCompletionListVisible()) {
-				setCompletionListVisible(true);
-				updateDisplayContents();
-				return;
-			}
-		}
+            if (comp.size() == 1) {
+                T sel = comp.iterator().next();
+                if (getCompletionCanDefault(sel)) {
+                    completionActivated(comp.iterator().next());
+                }
+                else {
+                    setCompletionListVisible(true);
+                    updateDisplayContents();
+                    return;
+                }
+            }
+            else if (!isCompletionListVisible()) {
+                setCompletionListVisible(true);
+                updateDisplayContents();
+                return;
+            }
+        }
 	}
 
 	/**

@@ -470,13 +470,13 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 			if (desiredClass.isAssignableFrom(element.getClass())) {
 				return desiredClass.cast(element);
 			}
-			else if (element instanceof Container) {
-				T c = findComponent((Container) element, desiredClass, checkOwnedWindows);
-				if (c != null) {
-					return desiredClass.cast(c);
-				}
-			}
-		}
+            if (element instanceof Container) {
+                T c = findComponent((Container) element, desiredClass, checkOwnedWindows);
+                if (c != null) {
+                    return desiredClass.cast(c);
+                }
+            }
+        }
 		if (checkOwnedWindows && (parent instanceof Window)) {
 			Window[] windows = ((Window) parent).getOwnedWindows();
 			for (int i = windows.length - 1; i >= 0; i--) {
@@ -774,14 +774,14 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 			if (name != null && name.equals(componentName)) {
 				return element;
 			}
-			else if (element instanceof Container) {
-				Component comp =
-					findComponentByName((Container) element, componentName, checkOwnedWindows);
-				if (comp != null) {
-					return comp;
-				}
-			}
-		}
+            if (element instanceof Container) {
+                Component comp =
+                    findComponentByName((Container) element, componentName, checkOwnedWindows);
+                if (comp != null) {
+                    return comp;
+                }
+            }
+        }
 		if (checkOwnedWindows && (container instanceof Window)) {
 			Window[] windows = ((Window) container).getOwnedWindows();
 			for (int i = windows.length - 1; i >= 0; i--) {
@@ -887,13 +887,13 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 				text.equals(((AbstractButton) element).getText())) {
 				return (AbstractButton) element;
 			}
-			else if (element instanceof Container) {
-				AbstractButton b = findAbstractButtonByText((Container) element, text);
-				if (b != null) {
-					return b;
-				}
-			}
-		}
+            if (element instanceof Container) {
+                AbstractButton b = findAbstractButtonByText((Container) element, text);
+                if (b != null) {
+                    return b;
+                }
+            }
+        }
 		return null;
 	}
 
@@ -913,13 +913,13 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 				name.equals(((AbstractButton) element).getName())) {
 				return (AbstractButton) element;
 			}
-			else if (element instanceof Container) {
-				AbstractButton b = findAbstractButtonByName((Container) element, name);
-				if (b != null) {
-					return b;
-				}
-			}
-		}
+            if (element instanceof Container) {
+                AbstractButton b = findAbstractButtonByName((Container) element, name);
+                if (b != null) {
+                    return b;
+                }
+            }
+        }
 		return null;
 	}
 

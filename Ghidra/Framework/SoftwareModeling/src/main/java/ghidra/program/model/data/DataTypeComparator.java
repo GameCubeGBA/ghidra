@@ -46,21 +46,21 @@ public class DataTypeComparator implements Comparator<Object> {
 
 			return dt1.getPathName().compareToIgnoreCase(dt2.getPathName());
 		}
-		// these cases are for lookups by string keys        
-		else if (o1 instanceof String && o2 instanceof DataType) {
+		// these cases are for lookups by string keys
+        if (o1 instanceof String && o2 instanceof DataType) {
 
-			DataType dt2 = (DataType) o2;
-			String name2 = dt2.getName();
+            DataType dt2 = (DataType) o2;
+            String name2 = dt2.getName();
 
-			return ((String) o1).compareToIgnoreCase(name2);
-		}
-		else if (o1 instanceof DataType && o2 instanceof String) {
-			DataType dt1 = (DataType) o1;
-			String name1 = dt1.getName();
+            return ((String) o1).compareToIgnoreCase(name2);
+        }
+        if (o1 instanceof DataType && o2 instanceof String) {
+            DataType dt1 = (DataType) o1;
+            String name1 = dt1.getName();
 
-			return name1.compareToIgnoreCase(((String) o2));
-		}
+            return name1.compareToIgnoreCase(((String) o2));
+        }
 
-		return 0;
+        return 0;
 	}
 }

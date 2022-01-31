@@ -449,10 +449,10 @@ class Mark implements Serializable {
         if ((obj == null) || (mark.obj == null)) {
             return false;
         }
-        else if (obj.equals(mark.obj)) {
+        if (obj.equals(mark.obj)) {
             return true;
         }
-        else if ((obj instanceof Object[]) && (mark.obj instanceof Object[])) {
+        if ((obj instanceof Object[]) && (mark.obj instanceof Object[])) {
             Object[] array1 = (Object[])obj;
             Object[] array2 = (Object[])mark.obj;
             if (array1.length == array2.length) {

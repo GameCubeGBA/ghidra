@@ -79,11 +79,11 @@ public class OpenCloseFieldFactory extends FieldFactory {
 			return new OpenCloseField(this, proxy, indentLevel, getMetrics(), startX + varWidth,
 				width, isLast);
 		}
-		else if (indentLevel > 0) {
-			return new IndentField(this, proxy, indentLevel, getMetrics(), startX + varWidth, width,
-				isLast);
-		}
-		return null;
+        if (indentLevel > 0) {
+            return new IndentField(this, proxy, indentLevel, getMetrics(), startX + varWidth, width,
+                isLast);
+        }
+        return null;
 	}
 
 	/**

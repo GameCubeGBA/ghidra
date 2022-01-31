@@ -215,11 +215,11 @@ class FutureTaskMonitor<I, R> extends FutureTask<R> implements TaskMonitor {
 			if (listener1 == listener) {
 				return listener2;
 			}
-			else if (listener2 == listener) {
-				return listener1;
-			}
+            if (listener2 == listener) {
+                return listener1;
+            }
 
-			if (listener1 instanceof ChainedCancelledListener) {
+            if (listener1 instanceof ChainedCancelledListener) {
 				listener1 = ((ChainedCancelledListener) listener1).removeListener(listener);
 			}
 			if (listener2 instanceof ChainedCancelledListener) {

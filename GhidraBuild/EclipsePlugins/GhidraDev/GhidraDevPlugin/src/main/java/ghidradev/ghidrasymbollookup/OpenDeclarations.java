@@ -98,12 +98,12 @@ public class OpenDeclarations {
 				openSingleFile(indexNames.get(0).getFileLocation(), symbolName);
 				return true;
 			}
-			else if (indexNames.size() > 1) {
-				EclipseMessageUtils.info("Found multiple matches - showing dialog");
-				openMultipleFileDialog(symbolName);
-				return true;
-			}
-			return false;
+            if (indexNames.size() > 1) {
+                EclipseMessageUtils.info("Found multiple matches - showing dialog");
+                openMultipleFileDialog(symbolName);
+                return true;
+            }
+            return false;
 
 		}
 		catch (Exception e) {

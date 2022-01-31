@@ -33,30 +33,30 @@ public class CommentType {
 			CommentFieldLocation cfLoc = (CommentFieldLocation) loc;
 			return cfLoc.getCommentType();
 		}
-		else if (loc instanceof PlateFieldLocation) {
-			return CodeUnit.PLATE_COMMENT;
-		}
-		else if (loc instanceof FunctionRepeatableCommentFieldLocation) {
-			return CodeUnit.REPEATABLE_COMMENT;
-		}
-		else if (cu != null) {
-			if (cu.getComment(CodeUnit.PRE_COMMENT) != null) {
-				return CodeUnit.PRE_COMMENT;
-			}
-			if (cu.getComment(CodeUnit.POST_COMMENT) != null) {
-				return CodeUnit.POST_COMMENT;
-			}
-			if (cu.getComment(CodeUnit.EOL_COMMENT) != null) {
-				return CodeUnit.EOL_COMMENT;
-			}
-			if (cu.getComment(CodeUnit.PLATE_COMMENT) != null) {
-				return CodeUnit.PLATE_COMMENT;
-			}
-			if (cu.getComment(CodeUnit.REPEATABLE_COMMENT) != null) {
-				return CodeUnit.REPEATABLE_COMMENT;
-			}
-		}
-		return defaultCommentType;
+        if (loc instanceof PlateFieldLocation) {
+            return CodeUnit.PLATE_COMMENT;
+        }
+        if (loc instanceof FunctionRepeatableCommentFieldLocation) {
+            return CodeUnit.REPEATABLE_COMMENT;
+        }
+        if (cu != null) {
+            if (cu.getComment(CodeUnit.PRE_COMMENT) != null) {
+                return CodeUnit.PRE_COMMENT;
+            }
+            if (cu.getComment(CodeUnit.POST_COMMENT) != null) {
+                return CodeUnit.POST_COMMENT;
+            }
+            if (cu.getComment(CodeUnit.EOL_COMMENT) != null) {
+                return CodeUnit.EOL_COMMENT;
+            }
+            if (cu.getComment(CodeUnit.PLATE_COMMENT) != null) {
+                return CodeUnit.PLATE_COMMENT;
+            }
+            if (cu.getComment(CodeUnit.REPEATABLE_COMMENT) != null) {
+                return CodeUnit.REPEATABLE_COMMENT;
+            }
+        }
+        return defaultCommentType;
 	}
 
 	public static boolean isCommentAllowed(CodeUnit cu, ProgramLocation loc) {

@@ -43,13 +43,13 @@ public class GdbDetachCommand extends AbstractGdbCommandWithThreadId<Void> {
 		if (super.handle(evt, pending)) {
 			return true;
 		}
-		else if (evt instanceof GdbThreadExitedEvent) {
-			pending.claim(evt);
-		}
-		else if (evt instanceof GdbThreadGroupExitedEvent) {
-			pending.claim(evt);
-		}
-		return false;
+        if (evt instanceof GdbThreadExitedEvent) {
+            pending.claim(evt);
+        }
+        else if (evt instanceof GdbThreadGroupExitedEvent) {
+            pending.claim(evt);
+        }
+        return false;
 	}
 
 	@Override

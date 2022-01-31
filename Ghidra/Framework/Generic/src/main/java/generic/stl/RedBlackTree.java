@@ -204,13 +204,13 @@ public class RedBlackTree<K,V> {
                 node.value = value;
                 return new Pair<RedBlackNode<K, V>, Boolean>( node, Boolean.FALSE );
             }
-            else if (comp < 0) {
+            if (comp < 0) {
                 if (node.left != null) {
                     node = node.left;
                 }
                 else {
                     size++;
-                    RedBlackNode<K, V> newNode = new RedBlackNode<K,V>(key, value, node); 
+                    RedBlackNode<K, V> newNode = new RedBlackNode<K,V>(key, value, node);
                     node.left = newNode;
                     fixAfterInsertion(newNode);
                     return new Pair<RedBlackNode<K, V>, Boolean>( newNode, Boolean.TRUE );
@@ -222,7 +222,7 @@ public class RedBlackTree<K,V> {
                 }
                 else {
                     size++;
-                    RedBlackNode<K, V> newNode = new RedBlackNode<K,V>(key, value, node); 
+                    RedBlackNode<K, V> newNode = new RedBlackNode<K,V>(key, value, node);
                     node.right = newNode;
                     fixAfterInsertion(newNode);
                     return new Pair<RedBlackNode<K, V>, Boolean>( newNode, Boolean.TRUE );

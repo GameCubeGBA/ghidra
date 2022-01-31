@@ -1244,15 +1244,15 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 				existingStruct.doReplaceWith((StructureInternal) dataType, true);
 				return true;
 			}
-			else if (existingDataType instanceof UnionDB) {
-				if (!(dataType instanceof UnionInternal)) {
-					return false;
-				}
-				UnionDB existingUnion = (UnionDB) existingDataType;
-				existingUnion.doReplaceWith((UnionInternal) dataType, true);
-				return true;
-			}
-		}
+            if (existingDataType instanceof UnionDB) {
+                if (!(dataType instanceof UnionInternal)) {
+                    return false;
+                }
+                UnionDB existingUnion = (UnionDB) existingDataType;
+                existingUnion.doReplaceWith((UnionInternal) dataType, true);
+                return true;
+            }
+        }
 		catch (IOException e) {
 			dbError(e);
 		}

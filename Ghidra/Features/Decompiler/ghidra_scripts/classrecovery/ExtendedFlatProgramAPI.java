@@ -584,16 +584,14 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 				return address.getNewAddress(offset32);
 
 			}
-			else if (addressSize == 64) {
+            if (addressSize == 64) {
 
-				long offset64 = getLong(address);
-				return address.getNewAddress(offset64);
+                long offset64 = getLong(address);
+                return address.getNewAddress(offset64);
 
-			}
-			else {
-				return null;
-			}
-		}
+            }
+            return null;
+        }
 		catch (MemoryAccessException e) {
 			return null;
 		}

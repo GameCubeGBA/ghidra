@@ -77,11 +77,11 @@ public class XRefFieldMouseHandler implements FieldMouseHandlerExtension {
 			TextField textField = (TextField) clickedObject;
 			return textField.getText();
 		}
-		else if (clickedObject instanceof FieldElement) {
-			FieldElement fieldElement = (FieldElement) clickedObject;
-			return fieldElement.getText();
-		}
-		return clickedObject.toString();
+        if (clickedObject instanceof FieldElement) {
+            FieldElement fieldElement = (FieldElement) clickedObject;
+            return fieldElement.getText();
+        }
+        return clickedObject.toString();
 	}
 
 	protected Address getFromReferenceAddress(ProgramLocation programLocation) {

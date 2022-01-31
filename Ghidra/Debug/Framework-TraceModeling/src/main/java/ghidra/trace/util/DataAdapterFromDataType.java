@@ -59,12 +59,12 @@ public interface DataAdapterFromDataType extends Data {
 		if (obj instanceof Scalar) {
 			return (Scalar) obj;
 		}
-		else if (obj instanceof Address) {
-			Address addrObj = (Address) obj;
-			long offset = addrObj.getAddressableWordOffset();
-			return new Scalar(addrObj.getAddressSpace().getPointerSize() * 8, offset, false);
-		}
-		return null;
+        if (obj instanceof Address) {
+            Address addrObj = (Address) obj;
+            long offset = addrObj.getAddressableWordOffset();
+            return new Scalar(addrObj.getAddressSpace().getPointerSize() * 8, offset, false);
+        }
+        return null;
 	}
 
 	@Override

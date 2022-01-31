@@ -251,12 +251,12 @@ public class GhidraServer extends UnicastRemoteObject implements GhidraServerHan
 			throw new RemoteException(
 				"Incompatible server interface, a newer Ghidra Server version is required.");
 		}
-		else if (serverInterfaceVersion < INTERFACE_VERSION) {
-			throw new RemoteException(
-				"Incompatible server interface, the minimum supported Ghidra version is " +
-					MIN_GHIDRA_VERSION);
-		}
-	}
+        if (serverInterfaceVersion < INTERFACE_VERSION) {
+            throw new RemoteException(
+                "Incompatible server interface, the minimum supported Ghidra version is " +
+                    MIN_GHIDRA_VERSION);
+        }
+    }
 
 	@Override
 	public RemoteRepositoryServerHandle getRepositoryServer(Subject user, Callback[] authCallbacks)
@@ -648,10 +648,10 @@ public class GhidraServer extends UnicastRemoteObject implements GhidraServerHan
 					displayUsage("Invalid default password expiration");
 					System.exit(-1);
 				}
-				else if (defaultPasswordExpiration == 0) {
-					System.out.println("Default password expiration has been disbaled.");
-				}
-			}
+                if (defaultPasswordExpiration == 0) {
+                    System.out.println("Default password expiration has been disbaled.");
+                }
+            }
 			else if (s.startsWith("-jaas")) {
 				String jaasConfigFileStr;
 				if (s.length() == 5) {

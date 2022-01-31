@@ -262,11 +262,11 @@ public class VS_VERSION_INFO implements StructConverter {
 			short[] arr = reader.readNextShortArray(2);
 			return arr[1] + "." + arr[0];
 		}
-		else if (nElements == 4) {
-			short[] arr = reader.readNextShortArray(4);
-			return arr[1] + "." + arr[0] + "." + arr[3] + "." + arr[2];
-		}
-		return null;
+        if (nElements == 4) {
+            short[] arr = reader.readNextShortArray(4);
+            return arr[1] + "." + arr[0] + "." + arr[3] + "." + arr[2];
+        }
+        return null;
 	}
 
 	static String intArrayToString(BinaryReader reader, int nElements)
@@ -275,10 +275,10 @@ public class VS_VERSION_INFO implements StructConverter {
 			int[] arr = reader.readNextIntArray(2);
 			return arr[1] + "." + arr[0];
 		}
-		else if (nElements == 4) {
-			int[] arr = reader.readNextIntArray(4);
-			return arr[1] + "." + arr[0] + "." + arr[3] + "." + arr[2];
-		}
-		return null;
+        if (nElements == 4) {
+            int[] arr = reader.readNextIntArray(4);
+            return arr[1] + "." + arr[0] + "." + arr[3] + "." + arr[2];
+        }
+        return null;
 	}
 }

@@ -119,27 +119,25 @@ public class Graphics2DWrapper extends Graphics2D {
 			Color c = (Color) alt;
             return getComplementaryColor(c);
 		}
-		else if (alt instanceof GradientPaint) {
-			GradientPaint gp = (GradientPaint) alt;
-			Color alt1 = getComplementaryColor(gp.getColor1());
-			Color alt2 = getComplementaryColor(gp.getColor2());
-            return new GradientPaint(gp.getPoint1(), alt1, gp.getPoint2(), alt2, gp.isCyclic());
-		}
-		else if (alt instanceof LinearGradientPaint) {
+        if (alt instanceof GradientPaint) {
+            GradientPaint gp = (GradientPaint) alt;
+            Color alt1 = getComplementaryColor(gp.getColor1());
+            Color alt2 = getComplementaryColor(gp.getColor2());
+return new GradientPaint(gp.getPoint1(), alt1, gp.getPoint2(), alt2, gp.isCyclic());
+        }
+        if (alt instanceof LinearGradientPaint) {
 
-			LinearGradientPaint gp = (LinearGradientPaint) alt;
-			Color[] colors = gp.getColors();
-			float[] fractions = gp.getFractions();
-			Point2D start = gp.getStartPoint();
-			Point2D end = gp.getEndPoint();
-			CycleMethod cycleMethod = gp.getCycleMethod();
-            return new LinearGradientPaint(start, end, fractions, colors, cycleMethod);
-		}
-		else {
-			// Else case from  setPaint()
-		}
+            LinearGradientPaint gp = (LinearGradientPaint) alt;
+            Color[] colors = gp.getColors();
+            float[] fractions = gp.getFractions();
+            Point2D start = gp.getStartPoint();
+            Point2D end = gp.getEndPoint();
+            CycleMethod cycleMethod = gp.getCycleMethod();
+return new LinearGradientPaint(start, end, fractions, colors, cycleMethod);
+        }
+        // Else case from  setPaint()
 
-		return alt;
+        return alt;
 	}
 
 	@Override

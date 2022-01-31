@@ -36,10 +36,10 @@ public class GenericRefernenceBaseRelocationFixupHandler extends RelocationFixup
 		if (size == 4) {
 			return handleGenerically32(program, relocation, oldImageBase, newImageBase);
 		}
-		else if (size == 8) {
-			return handleGenerically64(program, relocation, oldImageBase, newImageBase);
-		}
-		return false;
+        if (size == 8) {
+            return handleGenerically64(program, relocation, oldImageBase, newImageBase);
+        }
+        return false;
 
 	}
 

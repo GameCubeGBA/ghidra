@@ -67,14 +67,12 @@ public class StackVariableComparator implements Comparator<Object> {
 			}
 			return null;
 		}
-		else if (obj instanceof Integer) {
-			return (Integer) obj;
-		}
-		else {
-			throw new IllegalArgumentException(name + " is unsupported type: " +
-				obj.getClass().getSimpleName());
-		}
-	}
+        if (obj instanceof Integer) {
+            return (Integer) obj;
+        }
+        throw new IllegalArgumentException(name + " is unsupported type: " +
+            obj.getClass().getSimpleName());
+    }
 
 	/**
 	 * Returns a shared instance of a StackVariableComparator.

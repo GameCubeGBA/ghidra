@@ -182,20 +182,20 @@ public class LabelMgrPlugin extends Plugin {
 			LabelFieldLocation lfl = (LabelFieldLocation) location;
 			return lfl.getSymbol();
 		}
-		else if (location instanceof OperandFieldLocation) {
-			VariableOffset variableOffset = ((OperandFieldLocation) location).getVariableOffset();
-			if (variableOffset != null) {
-				Variable var = variableOffset.getVariable();
-				if (var != null) {
-					return var.getSymbol();
-				}
-			}
-			Reference ref = getOperandReference(context);
-			if (ref != null) {
-				return context.getProgram().getSymbolTable().getSymbol(ref);
-			}
-		}
-		return null;
+        if (location instanceof OperandFieldLocation) {
+            VariableOffset variableOffset = ((OperandFieldLocation) location).getVariableOffset();
+            if (variableOffset != null) {
+                Variable var = variableOffset.getVariable();
+                if (var != null) {
+                    return var.getSymbol();
+                }
+            }
+            Reference ref = getOperandReference(context);
+            if (ref != null) {
+                return context.getProgram().getSymbolTable().getSymbol(ref);
+            }
+        }
+        return null;
 	}
 
 	private static boolean isInUnion(Data data) {

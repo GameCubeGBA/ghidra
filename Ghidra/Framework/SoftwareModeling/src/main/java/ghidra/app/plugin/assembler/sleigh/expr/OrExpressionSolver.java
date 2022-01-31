@@ -202,7 +202,7 @@ public class OrExpressionSolver extends AbstractBinaryExpressionSolver<OrExpress
 				hints, description);
 		}
 
-		// Oiy. Try guessing the shift amount, starting at 0
+        // Oiy. Try guessing the shift amount, starting at 0
 		if (hints.contains(DefaultSolverHint.GUESSING_CIRCULAR_SHIFT_AMOUNT)) {
 			throw new SolverException("Already guessing circular shift amount. " +
 				"Try to express a double-shift as a shift by sum.");

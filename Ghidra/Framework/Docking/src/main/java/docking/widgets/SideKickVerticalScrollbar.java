@@ -57,12 +57,12 @@ public class SideKickVerticalScrollbar extends JScrollBar {
 			if (viewport == null) {
 				return delegate.getBlockIncrement(direction);
 			}
-			else if (viewport.getView() instanceof Scrollable) {
-				Scrollable view = (Scrollable) (viewport.getView());
-				Rectangle vr = viewport.getViewRect();
-				return view.getScrollableBlockIncrement(vr, getOrientation(), direction);
-			}
-			return super.getBlockIncrement(direction);
+            if (viewport.getView() instanceof Scrollable) {
+                Scrollable view = (Scrollable) (viewport.getView());
+                Rectangle vr = viewport.getViewRect();
+                return view.getScrollableBlockIncrement(vr, getOrientation(), direction);
+            }
+            return super.getBlockIncrement(direction);
 		}
 	}
 

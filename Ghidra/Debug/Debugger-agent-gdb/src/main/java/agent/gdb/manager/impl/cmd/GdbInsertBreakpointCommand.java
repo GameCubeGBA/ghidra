@@ -75,10 +75,10 @@ public class GdbInsertBreakpointCommand extends AbstractGdbCommandWithThreadId<G
 		if (super.handle(evt, pending)) {
 			return true;
 		}
-		else if (evt instanceof GdbBreakpointCreatedEvent) {
-			pending.claim(evt);
-		}
-		return false;
+        if (evt instanceof GdbBreakpointCreatedEvent) {
+            pending.claim(evt);
+        }
+        return false;
 	}
 
 	@Override

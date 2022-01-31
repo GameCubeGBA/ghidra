@@ -525,12 +525,12 @@ public class GnuDemanglerParser {
 				depth++;
 				continue;
 			}
-			else if (c == '>') {
-				depth--;
-				continue;
-			}
+            if (c == '>') {
+                depth--;
+                continue;
+            }
 
-			if (depth == 0) {
+            if (depth == 0) {
 				buffy.append(c);
 			}
 		}
@@ -1868,13 +1868,13 @@ public class GnuDemanglerParser {
 				if (ch == '(' && depth == 0) {
 					return i;
 				}
-				else if (ch == '>' || ch == ')') {
-					++depth;
-				}
-				else if (ch == '<' || ch == '(') {
-					depth--;
-				}
-			}
+                if (ch == '>' || ch == ')') {
+                    ++depth;
+                }
+                else if (ch == '<' || ch == '(') {
+                    depth--;
+                }
+            }
 			return -1;
 		}
 	}
@@ -2161,13 +2161,13 @@ public class GnuDemanglerParser {
 					depth++;
 					continue;
 				}
-				else if (c == '>') {
-					templateBuffer.append(c);
-					depth--;
-					continue;
-				}
+                if (c == '>') {
+                    templateBuffer.append(c);
+                    depth--;
+                    continue;
+                }
 
-				if (depth == 0) {
+                if (depth == 0) {
 					buffy.append(c);
 				}
 				else {

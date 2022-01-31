@@ -756,10 +756,10 @@ public class ProgramTreePlugin extends ProgramPlugin
 		if (currentProgram == null && treeName.equals(PluginConstants.DEFAULT_TREE_NAME)) {
 			return true;
 		}
-		else if (currentProgram == null) {
-			return false;
-		}
-		return currentProgram.getListing().getRootModule(treeName) != null;
+        if (currentProgram == null) {
+            return false;
+        }
+        return currentProgram.getListing().getRootModule(treeName) != null;
 	}
 
 	private void registerActions() {

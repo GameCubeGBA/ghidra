@@ -67,10 +67,10 @@ public final class Edge implements KeyedObject, Comparable<Edge> {
 		if (this.key() < edge.key()) {
 			return -1;
 		}
-		else if (this.key() > edge.key()) {
-			return +1;
-		}
-		return 0;
+        if (this.key() > edge.key()) {
+            return +1;
+        }
+        return 0;
 	}
 
 	/** Overides equals method by comparing keys.

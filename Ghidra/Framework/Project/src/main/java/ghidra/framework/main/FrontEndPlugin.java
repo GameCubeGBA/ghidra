@@ -437,10 +437,10 @@ public class FrontEndPlugin extends Plugin
 			System.exit(0);
 
 		}
-		else if (!tool.isVisible()) {
-			tool.setVisible(true);
-		}
-	}
+        if (!tool.isVisible()) {
+            tool.setVisible(true);
+        }
+    }
 
 	private boolean closeActiveProject() {
 		if (activeProject == null) {

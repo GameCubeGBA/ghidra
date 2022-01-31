@@ -1313,10 +1313,10 @@ public class EnumEditor1Test extends AbstractGhidraHeadedIntegrationTest {
 		if (editor instanceof Component) {
 			return (Component) editor;
 		}
-		else if (editor instanceof DefaultCellEditor) {
-			return ((DefaultCellEditor) editor).getComponent();
-		}
-		fail("Could not find editor component");
+        if (editor instanceof DefaultCellEditor) {
+            return ((DefaultCellEditor) editor).getComponent();
+        }
+        fail("Could not find editor component");
 		return null;
 	}
 

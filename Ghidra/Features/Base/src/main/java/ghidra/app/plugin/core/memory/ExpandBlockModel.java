@@ -132,11 +132,11 @@ abstract class ExpandBlockModel implements DomainObjectListener {
 			message = "Block size must be greater than " + Long.toHexString(blockSize);
 			return false;
 		}
-		else if (length < 0 || length > Integer.MAX_VALUE) {
-			message = "Expanded block is too large";
-			return false;
-		}
-		return true;
+        if (length < 0 || length > Integer.MAX_VALUE) {
+            message = "Expanded block is too large";
+            return false;
+        }
+        return true;
 	}
 
 	/**

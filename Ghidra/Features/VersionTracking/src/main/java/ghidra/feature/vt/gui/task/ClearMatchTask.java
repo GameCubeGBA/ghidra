@@ -106,15 +106,15 @@ public class ClearMatchTask extends VtTask {
 			}
 			return controller.getCorrelator(source, destination);
 		}
-		else if (type == VTAssociationType.DATA) {
-			Data source = matchInfo.getSourceData();
-			Data destination = matchInfo.getDestinationData();
-			if (source == null || destination == null) {
-				return null;
-			}
-			return controller.getCorrelator(source, destination);
-		}
-		return null;
+        if (type == VTAssociationType.DATA) {
+            Data source = matchInfo.getSourceData();
+            Data destination = matchInfo.getDestinationData();
+            if (source == null || destination == null) {
+                return null;
+            }
+            return controller.getCorrelator(source, destination);
+        }
+        return null;
 	}
 
 	private void maybeUnapply(VTMarkupItem markupItem) throws VersionTrackingApplyException {

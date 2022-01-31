@@ -208,29 +208,29 @@ public class RedBlackKeySet implements ShortKeySet, Serializable {
 			if (key == node.key) {
 				return;
 			}
-			else if (key < node.key) {
-				if (node.left != null) {
-					node = node.left;
-				}
-				else {
-					size++;
-					node.left = new RBNode(key, node);
-					fixAfterInsertion(node.left);
-					return;
-				}
-			}
-			else {
-				if (node.right != null) {
-					node = node.right;
-				}
-				else {
-					size++;
-					node.right = new RBNode(key, node);
-					fixAfterInsertion(node.right);
-					return;
-				}
-			}
-		}
+            if (key < node.key) {
+                if (node.left != null) {
+                    node = node.left;
+                }
+                else {
+                    size++;
+                    node.left = new RBNode(key, node);
+                    fixAfterInsertion(node.left);
+                    return;
+                }
+            }
+            else {
+                if (node.right != null) {
+                    node = node.right;
+                }
+                else {
+                    size++;
+                    node.right = new RBNode(key, node);
+                    fixAfterInsertion(node.right);
+                    return;
+                }
+            }
+        }
 	}
 
 	/**

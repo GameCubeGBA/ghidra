@@ -96,14 +96,14 @@ public class TokenPattern {
 				setRightEllipsis(tok2.getRightEllipsis());
 				return 0;
 			}
-			else if ((tok2.toklist.size() == 0) && (tok2.getLeftEllipsis() == false) &&
-				(tok2.getRightEllipsis() == false)) {
-				toklist = tok1.toklist.copy();
-				setLeftEllipsis(tok1.getLeftEllipsis());
-				setRightEllipsis(tok1.getRightEllipsis());
-				return 0;
-			}
-			// If one of the ellipses is true then the pattern
+            if ((tok2.toklist.size() == 0) && (tok2.getLeftEllipsis() == false) &&
+                (tok2.getRightEllipsis() == false)) {
+                toklist = tok1.toklist.copy();
+                setLeftEllipsis(tok1.getLeftEllipsis());
+                setRightEllipsis(tok1.getRightEllipsis());
+                return 0;
+            }
+            // If one of the ellipses is true then the pattern
 			// still cares about tokens even though none are
 			// specified
 		}
@@ -113,32 +113,32 @@ public class TokenPattern {
 			if (tok2.getRightEllipsis()) {
 				throw new SleighError("Right/left ellipsis", location);
 			}
-			else if (tok2.getLeftEllipsis()) {
-				setLeftEllipsis(true);
-			}
-			else if (tok1.toklist.size() != minsize) {
-				throw new SleighError(String.format("Mismatched pattern sizes -- %d vs %d",
-					tok1.toklist.size(), minsize), location);
-			}
-			else if (tok1.toklist.size() == tok2.toklist.size()) {
-				throw new SleighError("Pattern size cannot vary (missing ... ?)", location);
-			}
-		}
+            if (tok2.getLeftEllipsis()) {
+                setLeftEllipsis(true);
+            }
+            else if (tok1.toklist.size() != minsize) {
+                throw new SleighError(String.format("Mismatched pattern sizes -- %d vs %d",
+                    tok1.toklist.size(), minsize), location);
+            }
+            else if (tok1.toklist.size() == tok2.toklist.size()) {
+                throw new SleighError("Pattern size cannot vary (missing ... ?)", location);
+            }
+        }
 		else if (tok1.getRightEllipsis()) {
 			if (tok2.getLeftEllipsis()) {
 				throw new SleighError("Left/right ellipsis", location);
 			}
-			else if (tok2.getRightEllipsis()) {
-				setRightEllipsis(true);
-			}
-			else if (tok1.toklist.size() != minsize) {
-				throw new SleighError(String.format("Mismatched pattern sizes -- %d vs %d",
-					tok1.toklist.size(), minsize), location);
-			}
-			else if (tok1.toklist.size() == tok2.toklist.size()) {
-				throw new SleighError("Pattern size cannot vary (missing ... ?)", location);
-			}
-		}
+            if (tok2.getRightEllipsis()) {
+                setRightEllipsis(true);
+            }
+            else if (tok1.toklist.size() != minsize) {
+                throw new SleighError(String.format("Mismatched pattern sizes -- %d vs %d",
+                    tok1.toklist.size(), minsize), location);
+            }
+            else if (tok1.toklist.size() == tok2.toklist.size()) {
+                throw new SleighError("Pattern size cannot vary (missing ... ?)", location);
+            }
+        }
 		else {
 			if (tok2.getLeftEllipsis()) {
 				reversedirection = true;
@@ -146,19 +146,19 @@ public class TokenPattern {
 					throw new SleighError(String.format("Mismatched pattern sizes -- %d vs %d",
 						tok2.toklist.size(), minsize), location);
 				}
-				else if (tok1.toklist.size() == tok2.toklist.size()) {
-					throw new SleighError("Pattern size cannot vary (missing ... ?)", location);
-				}
-			}
+                if (tok1.toklist.size() == tok2.toklist.size()) {
+                    throw new SleighError("Pattern size cannot vary (missing ... ?)", location);
+                }
+            }
 			else if (tok2.getRightEllipsis()) {
 				if (tok2.toklist.size() != minsize) {
 					throw new SleighError(String.format("Mismatched pattern sizes -- %d vs %d",
 						tok1.toklist.size(), minsize), location);
 				}
-				else if (tok1.toklist.size() == tok2.toklist.size()) {
-					throw new SleighError("Pattern size cannot vary (missing ... ?)", location);
-				}
-			}
+                if (tok1.toklist.size() == tok2.toklist.size()) {
+                    throw new SleighError("Pattern size cannot vary (missing ... ?)", location);
+                }
+            }
 			else {
 				if (tok2.toklist.size() != tok1.toklist.size()) {
 					throw new SleighError(String.format("Mismatched pattern sizes -- %d vs %d",

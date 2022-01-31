@@ -650,30 +650,30 @@ public class DataAction4Test extends AbstractDataActionTest {
 		Composite structB = (Composite) getContextData().getDataType();
 
 		DataType dt = structB.getComponent(0).getDataType();
-		assertTrue(Composite.class.isInstance(dt));
+		assertTrue(dt instanceof Composite);
 		Composite structA = (Composite) dt;
 
 		dt = structB.getComponent(1).getDataType();
-		assertTrue(Array.class.isInstance(dt));
+		assertTrue(dt instanceof Array);
 
 		Array a = (Array) dt;
-		assertTrue(ByteDataType.class.isInstance(a.getDataType()));
+		assertTrue(a.getDataType() instanceof ByteDataType);
 		assertEquals(16, a.getLength());
 
 		dt = structA.getComponent(0).getDataType();
-		assertTrue(ByteDataType.class.isInstance(dt));
+		assertTrue(dt instanceof ByteDataType);
 
 		dt = structA.getComponent(1).getDataType();
-		assertTrue(FloatDataType.class.isInstance(dt));
+		assertTrue(dt instanceof FloatDataType);
 
 		dt = structA.getComponent(2).getDataType();
-		assertTrue(DefaultDataType.class.isInstance(dt));
+		assertTrue(dt instanceof DefaultDataType);
 
 		dt = structA.getComponent(3).getDataType();
-		assertTrue(Array.class.isInstance(dt));
+		assertTrue(dt instanceof Array);
 
 		a = (Array) dt;
-		assertTrue(ByteDataType.class.isInstance(a.getDataType()));
+		assertTrue(a.getDataType() instanceof ByteDataType);
 		assertEquals(10, a.getLength());
 
 		gotoLocation(0x01006c00);

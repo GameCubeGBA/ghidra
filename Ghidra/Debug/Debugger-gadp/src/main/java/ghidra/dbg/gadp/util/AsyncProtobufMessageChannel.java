@@ -165,10 +165,10 @@ public class AsyncProtobufMessageChannel<S extends GeneratedMessageV3, R extends
 					loop.exit(new EOFException("Channel is closed"));
 					return;
 				}
-				else if (lenread == 0) {
-					rBuf = ByteBufferUtils.upsize(rBuf);
-				}
-				loop.repeat();
+                if (lenread == 0) {
+                    rBuf = ByteBufferUtils.upsize(rBuf);
+                }
+                loop.repeat();
 			}).handle(seq::exit);
 		}).finish();
 	}

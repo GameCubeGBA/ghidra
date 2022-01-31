@@ -46,10 +46,10 @@ public class GdbAttachCommand extends AbstractGdbCommand<Set<GdbThread>> {
 		if (super.handle(evt, pending)) {
 			return true;
 		}
-		else if (evt instanceof GdbThreadCreatedEvent) {
-			pending.claim(evt);
-		}
-		return false;
+        if (evt instanceof GdbThreadCreatedEvent) {
+            pending.claim(evt);
+        }
+        return false;
 	}
 
 	@Override

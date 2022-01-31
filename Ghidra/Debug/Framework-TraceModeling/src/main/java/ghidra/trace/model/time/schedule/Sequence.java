@@ -284,17 +284,13 @@ public class Sequence implements Comparable<Sequence> {
 					if (i + 1 == this.steps.size()) {
 						return CompareResult.REL_LT;
 					}
-					else {
-						return CompareResult.UNREL_LT;
-					}
-				case REL_GT:
+                    return CompareResult.UNREL_LT;
+                case REL_GT:
 					if (i + 1 == that.steps.size()) {
 						return CompareResult.REL_GT;
 					}
-					else {
-						return CompareResult.UNREL_GT;
-					}
-				default: // EQUALS, next step
+                    return CompareResult.UNREL_GT;
+                default: // EQUALS, next step
 			}
 		}
 		if (that.steps.size() > min) {

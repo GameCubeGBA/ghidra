@@ -698,12 +698,12 @@ public abstract class AbstractLibrarySupportLoader extends AbstractProgramLoader
 			if (LibraryLookupTable.hasFileAndPathAndTimeStampMatch(libFile, size)) {
 				return true;// no need to really import it
 			}
-			else if (LibraryLookupTable.libraryLookupTableFileExists(libName, size)) {
-				log.appendMsg("WARNING! Using existing exports file for " + libName +
-					" which may not be an exact match");
-				return true;// pretend it was imported to prevent it from giving up the related imports
-			}
-		}
+            if (LibraryLookupTable.libraryLookupTableFileExists(libName, size)) {
+                log.appendMsg("WARNING! Using existing exports file for " + libName +
+                    " which may not be an exact match");
+                return true;// pretend it was imported to prevent it from giving up the related imports
+            }
+        }
 
 		lib = doLoad(provider, libName, libFolder, libLoadSpec, options, log, consumer, monitor,
 			unprocessedLibs);

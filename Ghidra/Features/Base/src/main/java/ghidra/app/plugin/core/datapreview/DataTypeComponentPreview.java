@@ -109,12 +109,10 @@ class DataTypeComponentPreview implements Preview {
                 if (dtc.getOffset() < that.dtc.getOffset()) {
                     return -1;
                 }
-                else if (dtc.getOffset() > that.dtc.getOffset()) {
+                if (dtc.getOffset() > that.dtc.getOffset()) {
                     return 1;
                 }
-                else {
-                    return 0;
-                }
+                return 0;
             }
             return composite.getName().compareTo(that.composite.getName());
         }

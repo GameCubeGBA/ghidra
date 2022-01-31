@@ -65,10 +65,10 @@ class FromAdapterSharedTable extends FromAdapter {
 		if (table == null) {
 			throw new VersionException("Missing Table: " + OLD_REFS_TABLE_NAME);
 		}
-		else if (table.getSchema().getVersion() != 0) {
-			throw new VersionException(false);
-		}
-	}
+        if (table.getSchema().getVersion() != 0) {
+            throw new VersionException(false);
+        }
+    }
 
 	@Override
 	RefList createRefList(ProgramDB program, DBObjectCache<RefList> cache, Address fromAddr)

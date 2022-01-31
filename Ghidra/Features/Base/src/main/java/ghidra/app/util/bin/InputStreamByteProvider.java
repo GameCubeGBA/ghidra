@@ -87,14 +87,14 @@ public class InputStreamByteProvider implements ByteProvider {
 		if (index < currentIndex) {
 			throw new IOException("Attempted to read byte that was already read.");
 		}
-		else if (index > currentIndex) {
-			currentIndex += inputStream.skip(index - currentIndex);
-			if (currentIndex != index) {
-				throw new IOException("Not enough bytes were skipped.");
-			}
-		}
+        if (index > currentIndex) {
+            currentIndex += inputStream.skip(index - currentIndex);
+            if (currentIndex != index) {
+                throw new IOException("Not enough bytes were skipped.");
+            }
+        }
 
-		int value = inputStream.read();
+        int value = inputStream.read();
 		if (value == -1) {
 			throw new EOFException();
 		}
@@ -107,14 +107,14 @@ public class InputStreamByteProvider implements ByteProvider {
 		if (index < currentIndex) {
 			throw new IOException("Attempted to read bytes that were already read.");
 		}
-		else if (index > currentIndex) {
-			currentIndex += inputStream.skip(index - currentIndex);
-			if (currentIndex != index) {
-				throw new IOException("Not enough bytes were skipped.");
-			}
-		}
+        if (index > currentIndex) {
+            currentIndex += inputStream.skip(index - currentIndex);
+            if (currentIndex != index) {
+                throw new IOException("Not enough bytes were skipped.");
+            }
+        }
 
-		byte[] values = new byte[(int) len];
+        byte[] values = new byte[(int) len];
 		int nRead = inputStream.read(values);
 		if (nRead != len) {
 			throw new EOFException();

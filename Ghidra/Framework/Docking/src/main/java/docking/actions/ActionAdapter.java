@@ -82,13 +82,13 @@ public class ActionAdapter implements Action, PropertyChangeListener {
 		if (dockingAction.getToolBarData() != null) {
 			return dockingAction.getToolBarData().getIcon();
 		}
-		else if (dockingAction.getMenuBarData() != null) {
-			return dockingAction.getMenuBarData().getMenuIcon();
-		}
-		else if (dockingAction.getPopupMenuData() != null) {
-			return dockingAction.getPopupMenuData().getMenuIcon();
-		}
-		return null;
+        if (dockingAction.getMenuBarData() != null) {
+            return dockingAction.getMenuBarData().getMenuIcon();
+        }
+        if (dockingAction.getPopupMenuData() != null) {
+            return dockingAction.getPopupMenuData().getMenuIcon();
+        }
+        return null;
 	}
 
 	@Override

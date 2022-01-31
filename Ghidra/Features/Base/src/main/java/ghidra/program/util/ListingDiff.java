@@ -259,14 +259,14 @@ public class ListingDiff {
 			}
 			return diffOpIndices;
 		}
-		else if (codeUnit1 instanceof Data && codeUnit2 instanceof Data) {
-			Data data1 = (Data) codeUnit1;
-			Data data2 = (Data) codeUnit2;
-			if (isSameData(data1, data2)) {
-				return new int[0]; // No operands differ.
-			}
-		}
-		return getAllIndices(numOperands); // All operands differ.
+        if (codeUnit1 instanceof Data && codeUnit2 instanceof Data) {
+            Data data1 = (Data) codeUnit1;
+            Data data2 = (Data) codeUnit2;
+            if (isSameData(data1, data2)) {
+                return new int[0]; // No operands differ.
+            }
+        }
+        return getAllIndices(numOperands); // All operands differ.
 	}
 
 	/**
