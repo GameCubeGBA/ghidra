@@ -186,8 +186,8 @@ public class FunctionComparisonModel {
 				.filter(f -> f.getProgram().equals(program))
 				.collect(Collectors.toSet());
 
-		sourcesToRemove.stream().forEach(f -> removeFunction(f));
-		targetsToRemove.stream().forEach(f -> removeFunction(f));
+		sourcesToRemove.forEach(f -> removeFunction(f));
+		targetsToRemove.forEach(f -> removeFunction(f));
 	}
 
 	/**

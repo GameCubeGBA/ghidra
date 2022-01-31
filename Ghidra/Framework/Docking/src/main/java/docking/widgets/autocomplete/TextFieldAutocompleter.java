@@ -1014,8 +1014,8 @@ public class TextFieldAutocompleter<T> {
 
 			TextFieldAutocompleter<String> auto =
 				new TextFieldAutocompleter<>(new AutocompletionModel<String>() {
-					Set<String> strings = new HashSet<>(Arrays.asList(new String[] { "Test",
-						"Testing", "Another", "Yet another", "Yet still more" }));
+					Set<String> strings = new HashSet<>(Arrays.asList("Test",
+							"Testing", "Another", "Yet another", "Yet still more"));
 					{
 						for (int i = 0; i < 20; i++) {
 							strings.add("Item " + i);
@@ -1066,8 +1066,8 @@ public class TextFieldAutocompleter<T> {
 
 			AutocompletionModel<String> model = new AutocompletionModel<String>() {
 				Set<String> strings =
-					new HashSet<>(Arrays.asList(new String[] { "Test", "Testing", "Another",
-						"Yet another", "Yet still more", "Yet still even more", "Yetis, yo" }));
+					new HashSet<>(Arrays.asList("Test", "Testing", "Another",
+							"Yet another", "Yet still more", "Yet still even more", "Yetis, yo"));
 
 				@Override
 				public Collection<String> computeCompletions(String text) {

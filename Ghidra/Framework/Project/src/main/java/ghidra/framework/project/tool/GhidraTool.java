@@ -318,12 +318,10 @@ public class GhidraTool extends PluginTool {
 		String[] extNames = state.getStrings(EXTENSIONS_PREFERENCE_NAME, new String[0]);
 
 		// ...and parse the passed-in extension list to get just the names of the extensions to add.
-		List<String> extensionNamesToAdd =
-			newExtensions.stream().map(ext -> ext.getName()).collect(Collectors.toList());
 
 		// Finally add them together and update the preference state.
 		String[] allPreferences = ArrayUtils.addAll(extNames,
-			extensionNamesToAdd.toArray(new String[extensionNamesToAdd.size()]));
+				newExtensions.stream().map(ExtensionDetails::getName).toArray(String[]::new));
 		state.putStrings(EXTENSIONS_PREFERENCE_NAME, allPreferences);
 		dockingWindowManager.putPreferenceState(EXTENSIONS_PREFERENCE_NAME, state);
 	}

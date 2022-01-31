@@ -297,7 +297,7 @@ public class DebuggerModelServiceProxyPlugin extends Plugin
 			StringPropertyMap prop = userData
 					.getStringProperty(getName(), KEY_MOST_RECENT_LAUNCHES, true);
 			Address min = program.getAddressFactory().getDefaultAddressSpace().getMinAddress();
-			prop.add(min, mrl.stream().collect(Collectors.joining(";")));
+			prop.add(min, String.join(";", mrl));
 		}
 	}
 

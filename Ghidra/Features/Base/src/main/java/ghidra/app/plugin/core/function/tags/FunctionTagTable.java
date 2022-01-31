@@ -105,7 +105,7 @@ public class FunctionTagTable extends GhidraTable {
 			if (disable && function != null) {
 				String tagName = rowObject.getName();
 				Set<FunctionTag> tags = function.getTags();
-				enableRow = !tags.stream().anyMatch(t -> t.getName().equals(tagName));
+				enableRow = tags.stream().noneMatch(t -> t.getName().equals(tagName));
 			}
 			c.setEnabled(enableRow);
 

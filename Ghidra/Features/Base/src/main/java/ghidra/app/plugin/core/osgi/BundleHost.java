@@ -345,7 +345,7 @@ public class BundleHost {
 	private String buildExtraSystemPackages() {
 		Set<String> packages = new HashSet<>();
 		OSGiUtils.getPackagesFromClasspath(packages);
-		return packages.stream().collect(Collectors.joining(","));
+		return String.join(",", packages);
 	}
 
 	/**

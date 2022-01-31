@@ -165,16 +165,15 @@ public class FcgExpandingVertexCollection {
 		Set<FcgVertex> existingVertices = newVerticesBySource.keySet();
 
 		//@formatter:off		
-		LinkedHashSet<FcgVertex> sortedVertices = existingVertices
-			.stream()
-			.map(v -> newVerticesBySource.get(v))
-	        .flatMap(set -> set.stream())
-	        .filter(v -> v.getLevel().equals(expandingLevel)) // only include vertices not in graph
-	        .collect(Collectors.toCollection(LinkedHashSet::new)) // unique, sorted by traversal from above
-			;
 		//@formatter:on
 
-		return new ArrayList<>(sortedVertices);
+		// only include vertices not in graph
+		// unique, sorted by traversal from above
+		return existingVertices
+				.stream()
+				.map(v -> newVerticesBySource.get(v))
+				.flatMap(Collection::stream)
+				.filter(v -> v.getLevel().equals(expandingLevel)).distinct().collect(Collectors.toList());
 	}
 
 	/**

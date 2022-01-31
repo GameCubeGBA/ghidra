@@ -51,12 +51,12 @@ public class FunctionComparisonProviderManager implements FunctionComparisonProv
 	@Override
 	public void providerClosed(FunctionComparisonProvider provider) {
 		providers.remove(provider);
-		listeners.stream().forEach(l -> l.componentProviderDeactivated(provider));
+		listeners.forEach(l -> l.componentProviderDeactivated(provider));
 	}
 
 	@Override
 	public void providerOpened(FunctionComparisonProvider provider) {
-		listeners.stream().forEach(l -> l.componentProviderActivated(provider));
+		listeners.forEach(l -> l.componentProviderActivated(provider));
 	}
 
 	/**
@@ -134,7 +134,7 @@ public class FunctionComparisonProviderManager implements FunctionComparisonProv
 	 * @param function the function to remove
 	 */
 	public void removeFunction(Function function) {
-		providers.stream().forEach(p -> p.getModel().removeFunction(function));
+		providers.forEach(p -> p.getModel().removeFunction(function));
 	}
 
 	/**
@@ -176,7 +176,7 @@ public class FunctionComparisonProviderManager implements FunctionComparisonProv
 	 * @param program the program whose function providers need to close
 	 */
 	public void closeProviders(Program program) {
-		providers.stream().forEach(p -> p.programClosed(program));
+		providers.forEach(p -> p.programClosed(program));
 	}
 
 	/**
@@ -185,7 +185,7 @@ public class FunctionComparisonProviderManager implements FunctionComparisonProv
 	 * @param program the program whose functions require removal
 	 */
 	public void removeFunctions(Program program) {
-		providers.stream().forEach(p -> p.removeFunctions(program));
+		providers.forEach(p -> p.removeFunctions(program));
 	}
 
 	/**
@@ -217,7 +217,7 @@ public class FunctionComparisonProviderManager implements FunctionComparisonProv
 			Object source = ev.getSource();
 			if (source instanceof Program) {
 				Program program = (Program) source;
-				providers.stream().forEach(p -> p.programRestored(program));
+				providers.forEach(p -> p.programRestored(program));
 			}
 		}
 	}

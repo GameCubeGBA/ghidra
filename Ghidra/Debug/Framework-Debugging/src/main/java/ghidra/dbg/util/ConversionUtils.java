@@ -62,8 +62,7 @@ public enum ConversionUtils {
 	 */
 	@Deprecated(forRemoval = true)
 	public static TargetStringList addressFactoryToSpaceNameSet(AddressFactory factory) {
-		return Arrays.asList(factory.getAddressSpaces())
-				.stream()
+		return Arrays.stream(factory.getAddressSpaces())
 				// TODO .filter
 				.map(AddressSpace::getName)
 				.collect(Collectors.toCollection(MutableTargetStringList::new));
