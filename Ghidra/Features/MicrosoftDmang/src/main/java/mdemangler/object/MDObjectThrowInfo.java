@@ -21,8 +21,8 @@ import mdemangler.datatype.MDDataType;
 import mdemangler.datatype.MDDataTypeParser;
 
 /**
- * This class represents a MSFT <b><code>ThrowInfo</code></b> symbol.  We have created this
- *  object and the <b><code>MDObjectReserved</code></b> type from which it is derived.  ThrowInfo
+ * This class represents a MSFT <b>{@code ThrowInfo}</b> symbol.  We have created this
+ *  object and the <b>{@code MDObjectReserved}</b> type from which it is derived.  ThrowInfo
  *  seemingly has a structure as seen in the class layout of a 32-bit binary as follows:
  * <pre>
  *       class _s__ThrowInfo	size(16):

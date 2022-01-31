@@ -35,7 +35,7 @@ import ghidra.util.task.TaskMonitor;
 import utilities.util.FileUtilities;
 
 /**
- * <code>PackedDatabase</code> provides a packed form of Database
+ * {@code PackedDatabase} provides a packed form of Database
  * which compresses a single version into a file.  
  * <br>
  * When opening a packed database, a PackedDBHandle is returned 
@@ -736,7 +736,7 @@ public class PackedDatabase extends Database {
 	}
 
 	/**
-	 * <code>PDBBufferFileManager</code> removes the update lock when 
+	 * {@code PDBBufferFileManager} removes the update lock when
 	 * the update has completed.
 	 */
 	private class PDBBufferFileManager extends DBBufferFileManager {

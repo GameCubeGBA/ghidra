@@ -18,7 +18,7 @@ package ghidra.framework.data;
 import db.DBChangeSet;
 
 /**
- * <code>DomainObjectDBChangeSet</code> extends <code>DBChangeSet</code> 
+ * {@code DomainObjectDBChangeSet} extends <code>DBChangeSet</code>
  * providing methods which facilitate transaction synchronization with the domain object's DBHandle.
  */
 public interface DomainObjectDBChangeSet extends DBChangeSet {

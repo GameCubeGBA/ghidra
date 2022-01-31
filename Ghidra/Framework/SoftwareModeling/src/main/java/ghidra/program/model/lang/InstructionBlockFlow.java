@@ -23,20 +23,20 @@ public class InstructionBlockFlow implements Comparable<InstructionBlockFlow> {
 
 	public enum Type { // ordered by disassembly priority
 		/**
-		 * <code>PRIORITY</code> is the highest priority flow start
+		 * {@code PRIORITY} is the highest priority flow start
 		 */
 		PRIORITY,
 		/**
-		 * <code>BRANCH</code> is a normal block branch flow within an InstructionSet 
+		 * {@code BRANCH} is a normal block branch flow within an InstructionSet
 		 */
 		BRANCH,
 		/**
-		 * <code>CALL_FALLTHROUGH</code> is fall-through flow from a CALL instruction
+		 * {@code CALL_FALLTHROUGH} is fall-through flow from a CALL instruction
 		 * which must be deferred until all branch flows are processed.
 		 */
 		CALL_FALLTHROUGH,
 		/**
-		 * <code>CALL</code> is a call flow which always starts a new InstructionSet.
+		 * {@code CALL} is a call flow which always starts a new InstructionSet.
 		 */
 		CALL
 	}

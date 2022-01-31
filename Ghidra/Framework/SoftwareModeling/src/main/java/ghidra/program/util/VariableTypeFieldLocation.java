@@ -23,7 +23,7 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.listing.Variable;
 
 /**
- * The <CODE>VariableTypeFieldLocation</CODE> class provides specific information
+ * The {@code VariableTypeFieldLocation} class provides specific information
  * about the variable type field within a program location.
  */
 

@@ -137,7 +137,7 @@ public abstract class SymbolTreeNode extends GTreeSlowLoadingNode {
 
 	/**
 	 * Returns the comparator used to sort the children of this node.  This node will still 
-	 * be sorted according to its own <code>compareTo</code> method, unless its parent has
+	 * be sorted according to its own {@code compareTo} method, unless its parent has
 	 * overridden this method.
 	 * 
 	 * @return the comparator used to sort this node's children

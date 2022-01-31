@@ -22,7 +22,7 @@ import ghidra.program.model.address.*;
 /**
  * Address map interface add methods need by the program database implementation to manage its address map.
  * NOTE: Objects implementing this interface are not intended for use outside of the
- * <code>ghidra.program.database</code> packages.
+ * {@code ghidra.program.database} packages.
  */
 public interface AddressMap {
 
@@ -68,7 +68,7 @@ public interface AddressMap {
 	 * if it is contained in the list; otherwise, <code>(-(<i>insertion point</i>) - 1)</code>. 
 	 * The <i>insertion point</i> is defined as the point at which the
 	 * addr would be inserted into the list: the index of the first keyRange
-	 * greater than addr, or <code>keyRangeList.size()</code>, if all
+	 * greater than addr, or {@code keyRangeList.size()}, if all
 	 * keyRanges in the list are less than the specified addr.  Note
 	 * that this guarantees that the return value will be &gt;= 0 if
 	 * and only if the addr is found within a keyRange.  
@@ -104,7 +104,7 @@ public interface AddressMap {
 	 * Generates a properly ordered list of database key ranges for a
 	 * a specified address set.  If absolute encodings are requested, 
 	 * only memory addresses will be included.
-	 * @param set address set or null for all addresses.  May not be null if <code>create</code> is true.
+	 * @param set address set or null for all addresses.  May not be null if {@code create} is true.
 	 * @param create true if a new keys may be generated, otherwise returned 
 	 * key-ranges will be limited to those already defined.
 	 * @return "sorted" list of KeyRange objects
@@ -147,7 +147,7 @@ public interface AddressMap {
 	 * Generates a properly ordered list of database key ranges for a
 	 * a specified address set.  If absolute encodings are requested, 
 	 * only memory addresses will be included.
-	 * @param set address set or null for all addresses.  May not be null if <code>create</code> is true.
+	 * @param set address set or null for all addresses.  May not be null if {@code create} is true.
 	 * @param absolute if true, absolute key encodings are returned, otherwise 
 	 * standard/relocatable address key encodings are returned.
 	 * @param create true if a new keys may be generated, otherwise returned 

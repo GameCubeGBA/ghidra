@@ -22,7 +22,7 @@ import ghidra.util.datastruct.IntArrayList;
 import ghidra.util.exception.AssertException;
 
 /**
- * <code>VarRecNode</code> is an implementation of a BTree leaf node
+ * {@code VarRecNode} is an implementation of a BTree leaf node
  * which utilizes long key values and stores variable-length records.
  * <p>
  * This type of node has the following layout within a single DataBuffer 

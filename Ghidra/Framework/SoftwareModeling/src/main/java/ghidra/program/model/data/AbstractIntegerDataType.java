@@ -455,7 +455,7 @@ public abstract class AbstractIntegerDataType extends BuiltIn implements ArraySt
 
 	/**
 	 * An "map" of the first 8 (by size) signed integer data types, where the element at index
-	 * <code>i</code> points to the datatype of size <code>i+1</code>, with additional types with no
+	 * {@code i} points to the datatype of size <code>i+1</code>, with additional types with no
 	 * size restriction appended after the first 8.
 	 *
 	 * @return array of all signed integer types (char and bool types excluded)
@@ -473,7 +473,7 @@ public abstract class AbstractIntegerDataType extends BuiltIn implements ArraySt
 
 	/**
 	 * An "map" of the first 8 (by size) unsigned integer data types, where the element at index
-	 * <code>i</code> points to the datatype of size <code>i+1</code>, with additional types with no
+	 * {@code i} points to the datatype of size <code>i+1</code>, with additional types with no
 	 * size restriction appended after the first 8.
 	 *
 	 * @return array of all unsigned integer types (char and bool types excluded)

@@ -40,10 +40,10 @@ import ghidra.util.exception.AssertException;
  * The primary type of
  * dialog provided herein is the basic option dialog that allows the user to specify the buttons
  * that appear on the dialog.  By default, the given option text will appear as a button(s),
- * followed by a <code>Cancel</code> button (you can call the
+ * followed by a {@code Cancel} button (you can call the
  * {@link #showOptionNoCancelDialog(Component, String, String, String, String, int)} methods if
- * you do not want a <code>Cancel</code> button.  To use this type of dialog you can use the
- * various <b><code>showOptionDialog*</code></b> methods.
+ * you do not want a {@code Cancel} button.  To use this type of dialog you can use the
+ * various <b>{@code showOptionDialog*}</b> methods.
  * </p>
  * <p>
  * Each of the option dialog methods will return a result, which is a number indicating the
@@ -69,8 +69,8 @@ import ghidra.util.exception.AssertException;
  * <h3>Yes/No Dialogs</h3><br>
  * <blockquote>
  * <p>
- * Finally, there are a series of methods that present <code>Yes</code> and <code>No</code> buttons in
- * a dialog.  There are versions that do and do not have a <code>Cancel</code> button.
+ * Finally, there are a series of methods that present {@code Yes} and <code>No</code> buttons in
+ * a dialog.  There are versions that do and do not have a {@code Cancel} button.
  * </p>
  * </blockquote>
  *
@@ -818,8 +818,8 @@ public class OptionDialog extends DialogComponentProvider {
 	/**
 	 * Dialog with only YES/NO options, <b>no CANCEL</b>
 	 * <p>
-	 * The dialog shown by this method will have the <code>No</code> button set as the default button so
-	 * that an Enter key press will trigger a <code>No</code> action.
+	 * The dialog shown by this method will have the {@code No} button set as the default button so
+	 * that an Enter key press will trigger a {@code No} action.
 	 *
 	 * @param parent    The parent component of this dialog. If the given component is
 	 * a frame or dialog, then the component will be used to parent the option dialog.

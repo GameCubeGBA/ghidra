@@ -27,7 +27,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <code>EmulateInstructionStateModifier</code> defines a language specific 
+ * {@code EmulateInstructionStateModifier} defines a language specific
  * handler to assist emulation with adjusting the current execution state,
  * providing support for custom pcodeop's (i.e., CALLOTHER).
  * The implementation of this interface must provide a public constructor which 

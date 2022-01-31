@@ -22,7 +22,7 @@ import ghidra.util.task.TaskMonitor;
 import java.util.*;
 
 /**
- * <CODE>Algorithms</CODE> is a class containing static methods that implement 
+ * {@code Algorithms} is a class containing static methods that implement
  * general algorithms based on objects returned from a data model.
  */
 public class Algorithms {

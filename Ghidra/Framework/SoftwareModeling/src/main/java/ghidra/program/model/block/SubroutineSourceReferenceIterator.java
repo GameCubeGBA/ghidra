@@ -26,7 +26,7 @@ import java.util.List;
 
 /**
  * SubroutineSourceReferenceIterator is a unidirectional iterator over 
- * the source <CODE>CodeBlockReference</CODE>s for a CodeBlock.
+ * the source {@code CodeBlockReference}s for a CodeBlock.
  */
 public class SubroutineSourceReferenceIterator implements CodeBlockReferenceIterator {
     

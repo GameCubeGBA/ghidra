@@ -26,7 +26,7 @@ class StringDiffUtils {
 	/**
 	 * Minimum size used to determine whether a new StringDiff object will be
 	 * created just using a string (no positions)
-	 * in the <code>getDiffs(String, String)</code> method.
+	 * in the {@code getDiffs(String, String)} method.
 	 * @see #getLineDiffs(String, String)
 	 */
 	private static int MINIMUM_DIFF_SIZE = 100;

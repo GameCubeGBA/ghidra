@@ -18,8 +18,8 @@ package mdemangler.object;
 import mdemangler.*;
 
 /**
- * This class represents a MSFT <b><code>__unwindfunclet$</code></b> (prefix) symbol.  We have
- *  created this object and the <b><code>MDObjectReserved</code></b> type from which it is
+ * This class represents a MSFT <b>{@code __unwindfunclet$}</b> (prefix) symbol.  We have
+ *  created this object and the <b>{@code MDObjectReserved}</b> type from which it is
  *  derived.  We do not know much about this object yet.
  *<p>
  * We have seen symbols such as:<pre>

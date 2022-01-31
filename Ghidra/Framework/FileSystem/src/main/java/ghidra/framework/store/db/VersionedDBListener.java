@@ -19,7 +19,7 @@ package ghidra.framework.store.db;
 import java.io.IOException;
 
 /**
- * <code>VersionedDBListener</code> provides listeners the ability to be notified
+ * {@code VersionedDBListener} provides listeners the ability to be notified
  * when changes occur to a versioned database.
  */
 public interface VersionedDBListener {

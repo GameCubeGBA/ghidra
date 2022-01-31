@@ -235,15 +235,15 @@ public class MSDataTypeUtils {
 	}
 
 	/**
-	 * Gets bytes from <code>memory</code> at the indicated <code>startAddress</code>. 
-	 * The <code>length</code> indicates the number of bytes that must be read 
+	 * Gets bytes from {@code memory} at the indicated <code>startAddress</code>.
+	 * The {@code length} indicates the number of bytes that must be read
 	 * from memory.
 	 * @param memory the program memory for obtaining the bytes
 	 * @param startAddress the address to begin reading bytes
 	 * @param length the number of bytes to read
 	 * @return the bytes
-	 * @throws InvalidDataTypeException if the <code>length</code> number of bytes couldn't 
-	 * be read starting at the <code>startAddress</code> in <code>memory</code>.
+	 * @throws InvalidDataTypeException if the {@code length} number of bytes couldn't
+	 * be read starting at the {@code startAddress} in <code>memory</code>.
 	 */
 	public static byte[] getBytes(Memory memory, Address startAddress, int length)
 			throws InvalidDataTypeException {

@@ -24,7 +24,7 @@ import ghidra.program.model.symbol.SymbolType;
 import ghidra.util.HelpLocation;
 
 /**
- * <CODE>RevertThunkFunctionAction</CODE> allows the user to modify the function
+ * {@code RevertThunkFunctionAction} allows the user to modify the function
  * referenced by this function
  */
 class RevertThunkFunctionAction extends ProgramContextAction {

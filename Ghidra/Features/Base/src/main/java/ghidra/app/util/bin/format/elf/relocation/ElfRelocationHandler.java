@@ -33,7 +33,7 @@ import ghidra.util.classfinder.ExtensionPoint;
 import ghidra.util.exception.NotFoundException;
 
 /**
- * <code>ElfRelocationHandler</code> provides the base class for processor specific
+ * {@code ElfRelocationHandler} provides the base class for processor specific
  * ELF relocation handlers.  
  */
 abstract public class ElfRelocationHandler implements ExtensionPoint {

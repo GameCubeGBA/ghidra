@@ -75,7 +75,7 @@ public class AnalysisPriority {
 	 * Defines code analysis as the fourth priority for automatic analysis.
 	 * If your analyzer is looking at RAW CODE, you should general go at or after this
 	 * priority.  Usually this is used in conjunction with analyzers that process new
-	 * instructions <code>AnalyzerType.INSTRUCTIONS</code>.  It is also useful for
+	 * instructions {@code AnalyzerType.INSTRUCTIONS}.  It is also useful for
 	 * those analyzers that depend on code, but want to analyze flow, such as non-returning
 	 * functions, that should happen before functions are widely laid down.  If
 	 * bad flow is not fixed at an early priority, switch stmt recovery, function

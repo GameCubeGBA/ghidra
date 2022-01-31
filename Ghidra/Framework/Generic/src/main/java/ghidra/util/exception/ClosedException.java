@@ -19,7 +19,7 @@ package ghidra.util.exception;
 import java.io.IOException;
 
 /**
- * <code>ClosedException</code> indicates that the underlying resource has been 
+ * {@code ClosedException} indicates that the underlying resource has been
  * closed and read/write operations have failed.
  */
 public class ClosedException extends IOException {

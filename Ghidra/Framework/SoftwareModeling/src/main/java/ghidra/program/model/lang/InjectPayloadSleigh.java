@@ -30,7 +30,7 @@ import ghidra.util.xml.SpecXmlUtils;
 import ghidra.xml.*;
 
 /**
- * <code>InjectPayloadSleigh</code> defines an InjectPayload of p-code which is defined via
+ * {@code InjectPayloadSleigh} defines an InjectPayload of p-code which is defined via
  * a String passed to the sleigh compiler
  */
 public class InjectPayloadSleigh implements InjectPayload {

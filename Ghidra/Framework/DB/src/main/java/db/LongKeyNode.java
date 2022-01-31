@@ -20,7 +20,7 @@ import java.io.IOException;
 import db.buffers.DataBuffer;
 
 /**
- * <code>LongKeyNode</code> is an abstract implementation of a BTree node
+ * {@code LongKeyNode} is an abstract implementation of a BTree node
  * which utilizes long key values.
  */
 abstract class LongKeyNode implements BTreeNode {

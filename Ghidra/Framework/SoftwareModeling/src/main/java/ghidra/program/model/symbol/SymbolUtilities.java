@@ -1057,7 +1057,7 @@ public class SymbolUtilities {
 
 	/**
 	 * Returns a comparator for symbols.  The comparison is based upon the name.  This call
-	 * replaces the former <code>compareTo</code> method on Symbol.  This comparator returned here
+	 * replaces the former {@code compareTo} method on Symbol.  This comparator returned here
 	 * is case-insensitive.
 	 * 
 	 * @return the comparator

@@ -19,7 +19,7 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
 
 /**
- * The <CODE>FunctionNoReturnFieldLocation</CODE> class provides specific information
+ * The {@code FunctionNoReturnFieldLocation} class provides specific information
  * about the Function noreturn field within a program location.
  */
 public class FunctionNoReturnFieldLocation extends FunctionSignatureFieldLocation {

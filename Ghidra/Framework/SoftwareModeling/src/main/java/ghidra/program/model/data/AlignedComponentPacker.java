@@ -18,7 +18,7 @@ package ghidra.program.model.data;
 import ghidra.util.exception.AssertException;
 
 /**
- * <code>AlignedComponentPacker</code> provides component packing support to the 
+ * {@code AlignedComponentPacker} provides component packing support to the
  * {@link AlignedStructurePacker}.
  */
 class AlignedComponentPacker {

@@ -1043,7 +1043,7 @@ public class StringDataInstance {
 	 * @param offsetChars number of characters from the beginning of the string to start the new
 	 *            StringDataInstance.
 	 * @return new {@link StringDataInstance} pointing to a subset of characters, or the
-	 *         <code>this</code> instance if there was an error.
+	 *         {@code this} instance if there was an error.
 	 */
 	public StringDataInstance getCharOffcut(int offsetChars) {
 		return getByteOffcut(getCharOffset(offsetChars));

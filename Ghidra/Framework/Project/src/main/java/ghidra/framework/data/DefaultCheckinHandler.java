@@ -19,7 +19,7 @@ import ghidra.framework.model.DomainFile;
 import ghidra.util.exception.CancelledException;
 
 /**
- * <code>DefaultCheckinHandler</code> provides a simple
+ * {@code DefaultCheckinHandler} provides a simple
  * check-in handler for use with 
  * {@link DomainFile#checkin(CheckinHandler, boolean, ghidra.util.task.TaskMonitor)}
  */

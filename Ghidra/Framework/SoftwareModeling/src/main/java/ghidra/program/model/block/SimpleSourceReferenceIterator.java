@@ -24,9 +24,9 @@ import ghidra.util.task.TaskMonitor;
 import java.util.LinkedList;
 
 /**
- * SimpleSourceReferenceIterator is a unidirectional iterator over the <CODE>CodeBlockReference</CODE>s
- * for a CodeBlock.  It is <B>not</B> failfast, whenever <CODE>hasNext()</CODE>
- * are called it will find if there is a next <CODE>CodeBlockReference</CODE> and acquire
+ * SimpleSourceReferenceIterator is a unidirectional iterator over the {@code CodeBlockReference}s
+ * for a CodeBlock.  It is <B>not</B> failfast, whenever {@code hasNext()}
+ * are called it will find if there is a next {@code CodeBlockReference} and acquire
  * a handle if there is one. If new code units are added to the listing after
  * the iterator is created it will find them as it scans ahead.
  */

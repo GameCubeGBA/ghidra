@@ -666,7 +666,7 @@ public class DisassembledViewPlugin extends ProgramPlugin implements DomainObjec
 		 * by this info.  
 		 * <p>
 		 * Note: If {@link #isValidAddress()} returns false, then this method
-		 * will return <code>-1</code>.
+		 * will return {@code -1}.
 		 * 
 		 * @return the length of the code unit for the address wrapped by this 
 		 *         info. 

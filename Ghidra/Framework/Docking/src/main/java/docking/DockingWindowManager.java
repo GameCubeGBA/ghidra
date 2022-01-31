@@ -220,7 +220,7 @@ public class DockingWindowManager implements PropertyChangeListener, Placeholder
 	}
 
 	/**
-	 * A convenience method for getting the window for <code>component</code> and then calling
+	 * A convenience method for getting the window for {@code component} and then calling
 	 * {@link #getInstanceForWindow(Window)}.
 	 * 
 	 * @param component The component for which to get the associated {@link DockingWindowManager}
@@ -754,7 +754,7 @@ public class DockingWindowManager implements PropertyChangeListener, Placeholder
 	 * <p>
 	 * <br>
 	 * <b>Note: </b> This method will not show the given provider if it has not previously been
-	 * added via <code>addComponent(...)</code>.
+	 * added via {@code addComponent(...)}.
 	 *
 	 * @param provider the provider of the component to be hidden or shown.
 	 * @param visibleState true to show the component, false to hide it.

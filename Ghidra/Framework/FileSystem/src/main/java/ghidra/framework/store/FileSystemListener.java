@@ -16,7 +16,7 @@
 package ghidra.framework.store;
 
 /**
- * <code>FileSystemListener</code> provides a listener the ability 
+ * {@code FileSystemListener} provides a listener the ability
  * to be notified of folder and file changes within a FileSystem.
  */
 public interface FileSystemListener {

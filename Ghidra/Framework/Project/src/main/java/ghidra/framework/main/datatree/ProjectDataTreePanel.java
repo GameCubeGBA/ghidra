@@ -246,8 +246,8 @@ public class ProjectDataTreePanel extends JPanel {
 	/**
 	 * Add the tree selection listener to the data tree. When the
 	 * listener is notified of the selection change, it should
-	 * call <code>getSelectedDomainFolder()</code> and
-	 * <code>getSelectedDomainFile()</code> to get the last selected
+	 * call {@code getSelectedDomainFolder()} and
+	 * {@code getSelectedDomainFile()} to get the last selected
 	 * object.
 	 * @param l listener to add
 	 */

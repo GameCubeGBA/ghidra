@@ -23,8 +23,8 @@ import java.io.IOException;
  * native operating system's file separator.
  * For example, on Windows:
  * <br>
- * <code>File f = new File("c:/temp/foo.txt");</code><br>
- * <code>String path = f.getAbsolutePath();</code><br>
+ * {@code File f = new File("c:/temp/foo.txt");}<br>
+ * {@code String path = f.getAbsolutePath();}<br>
  * In this case, path equals "c:\temp\foo.txt".
  * However using GhidraFile, path would still equal "c:/temp/foo.txt"
  * 

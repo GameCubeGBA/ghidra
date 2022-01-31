@@ -21,7 +21,7 @@ import ghidra.framework.store.LockException;
 import db.TerminatedTransactionException;
 
 /**
- * <code>UndoableDomainObject</code> extends a domain object to provide transaction
+ * {@code UndoableDomainObject} extends a domain object to provide transaction
  * support and the ability to undo and redo changes made within a stack of 
  * recent transactions.  Each transactions may contain many sub-transactions which
  * reflect concurrent changes to the domain object.  If any sub-transaction fails to commit,

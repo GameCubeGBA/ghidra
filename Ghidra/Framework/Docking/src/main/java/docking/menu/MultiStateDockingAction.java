@@ -73,7 +73,7 @@ public abstract class MultiStateDockingAction<T> extends DockingAction {
 
 	/**
 	 * Use this constructor explicitly when this action is used in a toolbar, passing true
-	 * for <code>isToolbarAction</code> (see the javadoc header note).
+	 * for {@code isToolbarAction} (see the javadoc header note).
 	 *
 	 * @param name the action name
 	 * @param owner the owner

@@ -40,7 +40,7 @@ import ghidra.util.layout.*;
 import resources.ResourceManager;
 
 /**
- * <code>BitFieldEditorPanel</code> provides the ability to add or modify bitfields
+ * {@code BitFieldEditorPanel} provides the ability to add or modify bitfields
  * within non-packed structures.
  */
 public class BitFieldEditorPanel extends JPanel {

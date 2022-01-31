@@ -16,7 +16,7 @@
 package db;
 
 /**
- * <code>FixedField</code> provides an abstract implementation of an unsigned fixed-length
+ * {@code FixedField} provides an abstract implementation of an unsigned fixed-length
  * field whose value is specified with a byte-array.  This field behaves similar to a 
  * {@link PrimitiveField} in that a null "state" (see {@link #isNull()}) is supported for 
  * sparse record column use with a zero (0) value.  Unlike a variable-length 

@@ -23,7 +23,7 @@ import java.util.zip.*;
 import db.buffers.*;
 
 /**
- * <code>RemoteInputBlockStreamHandle</code> provides a serializable handle to a
+ * {@code RemoteInputBlockStreamHandle} provides a serializable handle to a
  * remote input block stream. The handle is always instantiated by the server side and
  * passed to the client via remote serialization.
  */
@@ -49,7 +49,7 @@ public class RemoteInputBlockStreamHandle extends RemoteBlockStreamHandle<InputB
 	}
 
 	/**
-	 * <code>ClientInputBlockStream</code> provides the client-side of an
+	 * {@code ClientInputBlockStream} provides the client-side of an
 	 * InputBlockStream which wraps an optionally compressed socket input stream
 	 */
 	private class ClientInputBlockStream implements InputBlockStream {

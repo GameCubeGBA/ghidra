@@ -27,7 +27,7 @@ import ghidra.util.exception.DuplicateFileException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>DBHandle</code> provides access to a PackedDatabase.
+ * {@code DBHandle} provides access to a PackedDatabase.
  */
 public class PackedDBHandle extends DBHandle {
 

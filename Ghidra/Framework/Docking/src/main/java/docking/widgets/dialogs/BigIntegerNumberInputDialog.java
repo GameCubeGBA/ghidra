@@ -35,20 +35,20 @@ import java.math.BigInteger;
  * tool.showDialog() call parameters.</P>
  * <br>To display the dialog call:
  * <pre>
- * <code>
+ * {@code
  *     String entryType = "items";
  *     BigInteger initial = 5; // initial value in text field
  *     BigInteger min = BigInteger.valueOf(1);     // minimum valid value in text field
  *     BigInteger max = BigInteger.valueOf(10);    // maximum valid value in text field
  *
- *     BigIntegerNumberInputDialog provider = 
+ *     BigIntegerNumberInputDialog provider =
  *     	new BigIntegerNumberInputDialog("Title", entryType, initial, min, max);
  *     if (numInputProvider.show()) {
  *     	   // not cancelled
  *     	   BigInteger result = provider.getValue();
  *     	   long longResult = provider.getLongValue();
  *     }
- * </code>
+ * }
  * </pre>
  */
 public class BigIntegerNumberInputDialog extends AbstractNumberInputDialog {

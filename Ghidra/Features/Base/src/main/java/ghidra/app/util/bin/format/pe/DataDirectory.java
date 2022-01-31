@@ -31,8 +31,8 @@ import ghidra.util.exception.DuplicateNameException;
 
 /**
  * An abstract base class to represent the
- * <code>IMAGE_DATA_DIRECTORY</code>
- * data structure defined in <b><code>winnt.h</code></b>.
+ * {@code IMAGE_DATA_DIRECTORY}
+ * data structure defined in <b>{@code winnt.h}</b>.
  * <pre>
  * typedef struct _IMAGE_DATA_DIRECTORY {
  *     DWORD   VirtualAddress;

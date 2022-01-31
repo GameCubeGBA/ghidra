@@ -28,8 +28,8 @@ import ghidra.util.exception.DuplicateNameException;
 
 /**
  * A class to represent the 
- * <code>ImgDelayDescr</code>
- * data structure defined in <b><code>DELAYIMP.H</code></b>.
+ * {@code ImgDelayDescr}
+ * data structure defined in <b>{@code DELAYIMP.H}</b>.
  * <p>
  * <pre>
  * typedef struct ImgDelayDescr {

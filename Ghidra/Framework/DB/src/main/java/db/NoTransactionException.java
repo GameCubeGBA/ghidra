@@ -17,7 +17,7 @@
 package db;
 
 /**
- * <code>NoTransactionException</code> occurs when a database modification is
+ * {@code NoTransactionException} occurs when a database modification is
  * attempted when no transaction exists.
  */
 public class NoTransactionException extends RuntimeException {

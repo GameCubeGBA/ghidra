@@ -26,7 +26,7 @@ import ghidra.program.model.symbol.Symbol;
 import ghidra.util.exception.InvalidInputException;
 
 /**
- * <code>ElfLoadHelper</code> exposes loader methods useful to ElfExtension 
+ * {@code ElfLoadHelper} exposes loader methods useful to ElfExtension
  * implementations.
  */
 public interface ElfLoadHelper {

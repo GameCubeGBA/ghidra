@@ -1162,7 +1162,7 @@ public class GTree extends JPanel implements BusyListener {
 	}
 
 	/**
-	 * Passing a value of <code>false</code> signals to disable the {@link JTree}'s default behavior
+	 * Passing a value of {@code false} signals to disable the {@link JTree}'s default behavior
 	 * of showing handles for leaf nodes until they are opened.
 	 *
 	 * @param enable False to disable the default JTree behavior

@@ -22,7 +22,7 @@ import java.security.NoSuchAlgorithmException;
 import javax.net.ssl.*;
 
 /**
- * <code>GhidraSSLServerSocket</code> facilitates ability to impose client authentication
+ * {@code GhidraSSLServerSocket} facilitates ability to impose client authentication
  * for SSL server sockets used with Ghidra Server RMI connection.
  */
 public class GhidraSSLServerSocket extends ServerSocket {

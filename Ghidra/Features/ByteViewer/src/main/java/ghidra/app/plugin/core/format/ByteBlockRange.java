@@ -62,16 +62,16 @@ public class ByteBlockRange {
 	/**
 	 * Indicates whether some other object is "equal to" this one.
 	 * <p>
-	 * The <tt>equals</tt> method for class <code>Object</code> implements
+	 * The <tt>equals</tt> method for class {@code Object} implements
 	 * the most discriminating possible equivalence relation on objects;
-	 * that is, for any reference values <code>x</code> and <code>y</code>,
-	 * this method returns <code>true</code> if and only if <code>x</code> and
-	 * <code>y</code> refer to the same object (<code>x==y</code> has the
-	 * value <code>true</code>).
+	 * that is, for any reference values {@code x} and <code>y</code>,
+	 * this method returns {@code true} if and only if <code>x</code> and
+	 * {@code y} refer to the same object (<code>x==y</code> has the
+	 * value {@code true}).
 	 *
 	 * @param   obj   the reference object with which to compare.
-	 * @return  <code>true</code> if this object is the same as the obj
-	 *          argument; <code>false</code> otherwise.
+	 * @return  {@code true} if this object is the same as the obj
+	 *          argument; {@code false} otherwise.
 	 * @see     java.lang.Boolean#hashCode()
 	 * @see     java.util.Hashtable
 	 */
@@ -96,7 +96,7 @@ public class ByteBlockRange {
 	/**
 	 * Returns a hash code value for the object. This method is
 	 * supported for the benefit of hashtables such as those provided by
-	 * <code>java.util.Hashtable</code>.
+	 * {@code java.util.Hashtable}.
 	 * <p>
 	 *
 	 * @return  a hash code value for this object.

@@ -20,7 +20,7 @@ import java.io.IOException;
 import db.Field.UnsupportedFieldException;
 
 /**
- * <code>TableRecord</code> manages information about a table.  Each TableRecord 
+ * {@code TableRecord} manages information about a table.  Each TableRecord
  * corresponds to a stored record within the master table.
  */
 class TableRecord implements Comparable<TableRecord> {

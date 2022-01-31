@@ -28,9 +28,9 @@ import ghidra.util.task.TaskMonitor;
  * This algorithm is an implementation of the Cooper, Harvey, Kennedy algorithm.  
  * 
  * <P>The algorithm processes the graph in reverse post-order.  The runtime of 
- * this algorithm is approximately <code>O(V+E*D)</code> per iteration of the loop, where 
+ * this algorithm is approximately {@code O(V+E*D)} per iteration of the loop, where
  * D is the size of the largest dominator set.  The number of iterations is 
- * bound at <code>d(G) + 3</code>, where d(G) is the "loop 
+ * bound at {@code d(G) + 3}, where d(G) is the "loop
  * connectedness" of the graph. 
  * 
  *

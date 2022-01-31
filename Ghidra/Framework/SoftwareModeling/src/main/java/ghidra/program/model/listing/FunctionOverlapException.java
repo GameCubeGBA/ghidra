@@ -19,7 +19,7 @@ package ghidra.program.model.listing;
 import ghidra.util.exception.UsrException;
 
 /**
- * <CODE>FunctionOverlapException</CODE> is thrown in cases where
+ * {@code FunctionOverlapException} is thrown in cases where
  * a function creation or change would result in overlapping functions.
  */
 public class FunctionOverlapException extends UsrException {

@@ -17,8 +17,8 @@
 package generic.cache;
 
 /**
- * A simple interface that can build, lookup or otherwise return a value <code>V</code> for a
- * key <code>K</code>.
+ * A simple interface that can build, lookup or otherwise return a value {@code V} for a
+ * key {@code K}.
  *
  * @param <K> the key used to get a value
  * @param <V> the value returned for the given key

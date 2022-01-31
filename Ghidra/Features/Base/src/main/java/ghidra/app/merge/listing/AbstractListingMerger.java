@@ -34,7 +34,7 @@ import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>AbstractListingMerger</code> is an abstract class that each type of
+ * {@code AbstractListingMerger} is an abstract class that each type of
  * listing merge manager can extend to gain access to commonly needed information
  * such as the programs, the listing merge panel,
  * Diffs for Latest-Original and My-Original and Latest-My, etc.
@@ -80,7 +80,7 @@ abstract class AbstractListingMerger implements ListingMerger, ListingMergeConst
 	/**
 	 * Constructs a generic type of Listing merger. This should be called by any
 	 * listing merger that extends this class. It can be called from the
-	 * constructor as <code>super(listingMergeManager);</code>
+	 * constructor as {@code super(listingMergeManager);}
 	 * @param listingMergeMgr the overall manager for the associated listing merge.
 	 * @param monitor monitor for indicating merge progress to the user and to provide Cancel.
 	 * @throws CancelledException if the user Cancels.
@@ -326,7 +326,7 @@ abstract class AbstractListingMerger implements ListingMerger, ListingMergeConst
 
 	/**
 	 * Updates the progress bar associated with this phase of the merge.
-	 * Before beginning to auto-merge the <code>totalChanges</code> and <code>changeNum</code> must be set.
+	 * Before beginning to auto-merge the {@code totalChanges} and <code>changeNum</code> must be set.
 	 * This method should then be called as changes are made to update the change bar.
 	 * This assumes that each change is equivalent in terms of shown progress.
 	 * @param increment the number of changes completed relative to the total

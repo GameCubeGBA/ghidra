@@ -48,7 +48,7 @@ import ghidra.util.Swing;
  *
  * <P>You can also add a Cancel button, which will return a result of 0 if pressed. Note that this
  * is different than adding an option named "Cancel" which would return a result greater than
- * <code>0</code>, depending on where in the order it was added.
+ * {@code 0}, depending on where in the order it was added.
  *
  * <P><a id="RememberOption"></a>A "Remember Option" can be added to OptionDialog to
  * present the user with a choice for remembering a dialog result and automatically

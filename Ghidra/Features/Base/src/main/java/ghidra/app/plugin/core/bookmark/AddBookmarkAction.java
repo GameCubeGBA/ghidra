@@ -26,7 +26,7 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.util.MarkerLocation;
 
 /**
- * <CODE>AddBookmarkAction</CODE> allows the user to add a Note bookmark at the current location.
+ * {@code AddBookmarkAction} allows the user to add a Note bookmark at the current location.
  */
 class AddBookmarkAction extends DockingAction {
 	/** the plugin associated with this action. */

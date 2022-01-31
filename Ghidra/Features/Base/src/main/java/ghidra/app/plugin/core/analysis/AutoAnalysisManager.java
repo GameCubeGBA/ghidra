@@ -1573,7 +1573,7 @@ public final class AutoAnalysisManager implements DomainObjectListener, DomainOb
 	}
 
 	/**
-	 * <code>AnalysisWorkerCommand</code> facilitates the controlled callback to an AnalysisWorker.
+	 * {@code AnalysisWorkerCommand} facilitates the controlled callback to an AnalysisWorker.
 	 * In a Headed environment a modal task dialog will be used to block user input if the
 	 * worker was scheduled with analyzeChanges==false
 	 */
@@ -1723,7 +1723,7 @@ public final class AutoAnalysisManager implements DomainObjectListener, DomainOb
 		}
 
 		/**
-		 * <code>WorkerBlockerTask</code> provides the means to block user input via a
+		 * {@code WorkerBlockerTask} provides the means to block user input via a
 		 * modal dialog while an analysis worker has either disabled or suspended auto-analysis
 		 * (i.e., ignoring change events).
 		 */

@@ -1191,7 +1191,7 @@ public abstract class CompositeEditorPanel extends JPanel
 		}
 
 		/**
-		 * Calls <code>fireEditingStopped</code> and returns true.
+		 * Calls {@code fireEditingStopped} and returns true.
 		 * @return true
 		 */
 		@Override

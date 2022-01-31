@@ -51,7 +51,7 @@ public class ColorAndStyle {
 
 	/**
 	 * Wraps the given text with HTML markup for each attribute and color defined by this 
-	 * class.  The returned result will <b>not</b> be prepended with <code>&lt;HTML&gt;</code>.
+	 * class.  The returned result will <b>not</b> be prepended with {@code <HTML>}.
 	 * 
 	 * @param text the text to wrap
 	 * @return the wrapped text

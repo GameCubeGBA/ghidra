@@ -21,7 +21,7 @@ import ghidra.framework.store.DataFileHandle;
 import java.io.*;
 
 /**
- * <code>LocalDataFileHandle</code> provides random access to 
+ * {@code LocalDataFileHandle} provides random access to
  * a local File.
  */
 public class LocalDataFileHandle implements DataFileHandle {

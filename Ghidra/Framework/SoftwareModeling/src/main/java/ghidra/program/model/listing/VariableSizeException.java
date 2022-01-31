@@ -19,7 +19,7 @@ package ghidra.program.model.listing;
 import ghidra.util.exception.InvalidInputException;
 
 /**
- * <code>VariableSizeException</code> is thrown when a variable
+ * {@code VariableSizeException} is thrown when a variable
  * data-type exceeds storage constraints.
  */
 public class VariableSizeException extends InvalidInputException {

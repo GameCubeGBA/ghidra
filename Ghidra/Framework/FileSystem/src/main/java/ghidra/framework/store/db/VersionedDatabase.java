@@ -28,7 +28,7 @@ import ghidra.util.exception.*;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>VersionedDatabase</code> corresponds to a versioned database.
+ * {@code VersionedDatabase} corresponds to a versioned database.
  */
 public class VersionedDatabase extends Database {
 	static final Logger log = LogManager.getLogger(VersionedDatabase.class);
@@ -440,7 +440,7 @@ public class VersionedDatabase extends Database {
 	}
 
 	/**
-	 * <code>VerDBBufferFileManager</code> provides buffer file management
+	 * {@code VerDBBufferFileManager} provides buffer file management
 	 * for this versioned database instead of the DBBufferFileManager.
 	 */
 	private class VerDBBufferFileManager implements BufferFileManager {

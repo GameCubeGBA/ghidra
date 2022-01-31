@@ -19,7 +19,7 @@ package ghidra.app.plugin.core.references;
 import ghidra.util.NumericUtilities;
 
 /**
- * <code>ParameterConflictException</code> indicates that the 
+ * {@code ParameterConflictException} indicates that the
  * stack offset conflicts with an existing function parameter.
  */
 class ParameterConflictException extends Exception {

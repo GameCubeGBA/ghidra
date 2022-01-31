@@ -51,7 +51,7 @@ public class TestUtils {
 	 * Sets the instance field by the given name on the given object 
 	 * instance.  
 	 * <p>
-	 * Note: if the field is static, then the <code>ownerInstance</code> field 
+	 * Note: if the field is static, then the {@code ownerInstance} field
 	 * can be the class of the object that contains the variable.
 	 * 
 	 * @param  fieldName The name of the field to retrieve.
@@ -92,7 +92,7 @@ public class TestUtils {
 	 * Gets the instance field by the given name on the given object 
 	 * instance.  The value is a primitive wrapper if it is a primitive type.
 	 * <p>
-	 * Note: if the field is static, then the <code>ownerInstance</code> field 
+	 * Note: if the field is static, then the {@code ownerInstance} field
 	 * can be the class of the object that contains the variable.
 	 * 
 	 * @param  fieldName The name of the field to retrieve.
@@ -169,9 +169,9 @@ public class TestUtils {
 	/**
 	 * Uses reflection to execute the method denoted by the given method
 	 * name.  If any value is returned from the method execution, then it 
-	 * will be returned from this method.  Otherwise, <code>null</code> is returned.
+	 * will be returned from this method.  Otherwise, {@code null} is returned.
 	 * <p>
-	 * Note: if the method is static, then the <code>ownerInstance</code> field 
+	 * Note: if the method is static, then the {@code ownerInstance} field
 	 * can be the class of the object that contains the method.
 	 * 
 	 * @param methodName The name of the method to execute.
@@ -227,18 +227,18 @@ public class TestUtils {
 	/**
 	 * Uses reflection to execute the method denoted by the given method
 	 * name.  If any value is returned from the method execution, then it 
-	 * will be returned from this method.  Otherwise, <code>null</code> is returned.
+	 * will be returned from this method.  Otherwise, {@code null} is returned.
 	 * <p>
-	 * Note: if the method is static, then the <code>ownerInstance</code> field 
+	 * Note: if the method is static, then the {@code ownerInstance} field
 	 * can be the class of the object that contains the method.
 	 * 
 	 * <P>This method is just a convenience for calling 
 	 * {@link #invokeInstanceMethod(String, Object, Class[], Object[])}.  As the following 
 	 * example shows, this method's uses is a bit cleaner:
 	 * <PRE>
-	 *  	// The call below is equivalent to calling: <CODE> System.out.println("Hi")
+	 *  	// The call below is equivalent to calling: {@code System.out.println("Hi")
 	 * 	invokeInstanceMethod("println", System.out, Arrays.asList(String.class), Arrays.asList("Hi"));
-	 * 	</CODE>
+	 * 	}
 	 * </PRE>
 	 * 
 	 * @param methodName The name of the method to execute.
@@ -265,9 +265,9 @@ public class TestUtils {
 	/**
 	 * Uses reflection to execute the method denoted by the given method
 	 * name.  If any value is returned from the method execution, then it 
-	 * will be returned from this method.  Otherwise, <code>null</code> is returned.
+	 * will be returned from this method.  Otherwise, {@code null} is returned.
 	 * <p>
-	 * Note: if the method is static, then the <code>ownerInstance</code> field 
+	 * Note: if the method is static, then the {@code ownerInstance} field
 	 * can be the class of the object that contains the method.
 	 * 
 	 * <P>If the method you are calling takes no parameters, then call 
@@ -280,9 +280,9 @@ public class TestUtils {
 	 * 
 	 * <P>As an example:
 	 * <PRE>
-	 *  	// The call below is equivalent to calling: <CODE> System.out.println("Hi")
+	 *  	// The call below is equivalent to calling: {@code System.out.println("Hi")
 	 * 	invokeInstanceMethod("println", System.out, String.class, "Hi");
-	 * 	</CODE>
+	 * 	}
 	 * </PRE>
 	 * 
 	 * @param methodName The name of the method to execute.
@@ -306,12 +306,12 @@ public class TestUtils {
 	/**
 	 * Uses reflection to execute the method denoted by the given method
 	 * name.  If any value is returned from the method execution, then it 
-	 * will be returned from this method.  Otherwise, <code>null</code> is returned.
+	 * will be returned from this method.  Otherwise, {@code null} is returned.
 	 * <p>
-	 * Note: if the method is static, then the <code>ownerInstance</code> field 
+	 * Note: if the method is static, then the {@code ownerInstance} field
 	 * can be the class of the object that contains the method.
 	 * 
-	 * <P><B>Warning: The exact class of each <CODE>arg</CODE> will be used as the class type
+	 * <P><B>Warning: The exact class of each {@code arg} will be used as the class type
 	 * of the parameter for the method being called.  If the method you are calling takes 
 	 * parameters that do not match exactly the class of the args you wish to use, then 
 	 * call {@link #invokeInstanceMethod(String, Object, List, List)} instead so that you 
@@ -328,13 +328,13 @@ public class TestUtils {
 	 * 
 	 * <P>As an example:
 	 * <PRE>
-	 *  	// The call below is equivalent to calling: <CODE> System.out.println("Hi")
+	 *  	// The call below is equivalent to calling: {@code System.out.println("Hi")
 	 * 	invokeInstanceMethod("println", System.out, "Hi");
-	 * 
+	 *
 	 * 	// This call is equivalent to the one above
 	 * 	invokeInstanceMethod("println", System.out, Arrays.asList(String.class), Arrays.asList("Hi"));
-	 * 	
-	 * 	</CODE>
+	 *
+	 * 	}
 	 * </PRE>
 	 * 
 	 * @param methodName The name of the method to execute.
@@ -459,9 +459,9 @@ public class TestUtils {
 	}
 
 	/**
-	 * Locates the method of the name <code>methodName</code> on the given 
+	 * Locates the method of the name {@code methodName} on the given
 	 * class.  If the given class does not contain the method, then this 
-	 * method will recursively call up <code>containingClass</code>'s 
+	 * method will recursively call up {@code containingClass}'s
 	 * implementation tree looking for a parent implementation of the 
 	 * requested method.
 	 * 

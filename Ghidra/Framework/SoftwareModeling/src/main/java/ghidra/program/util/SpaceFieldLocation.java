@@ -19,7 +19,7 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
 
 /**
- * The <CODE>SpaceFieldLocation</CODE> class contains specific location information
+ * The {@code SpaceFieldLocation} class contains specific location information
  * within the Space field of a CodeUnitLocation object.
  */
 public class SpaceFieldLocation extends CodeUnitLocation {

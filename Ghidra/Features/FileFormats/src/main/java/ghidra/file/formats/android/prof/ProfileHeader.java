@@ -22,7 +22,7 @@ import ghidra.program.model.data.DataType;
 import ghidra.util.exception.DuplicateNameException;
 
 /**
- * <code>
+ * {@code
  * profile_header:
  *	magic (4)
  *	version (4)
@@ -30,7 +30,7 @@ import ghidra.util.exception.DuplicateNameException;
  *	uncompressed_size_of_zipped_data (4)
  *	compressed_data_size (4)
  *	compressed data in 0x78 0x01 format
- * </code>
+ * }
  */
 public class ProfileHeader implements StructConverter {
 	private byte[] magic;

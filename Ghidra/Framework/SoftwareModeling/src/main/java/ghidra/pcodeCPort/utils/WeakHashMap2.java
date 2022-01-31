@@ -20,7 +20,7 @@ import java.lang.ref.WeakReference;
 import java.util.*;
 
 /**
- * A hashtable-based <code>Map</code> implementation with <em>weak values</em>.
+ * A hashtable-based {@code Map} implementation with <em>weak values</em>.
  * 
  * <P>This implementation uses two maps internally, which nearly doubles the memory requirements
  * over a traditional map.
@@ -96,13 +96,13 @@ public class WeakHashMap2<K, V> extends AbstractMap<K, V> {
 	/* -- Constructors -- */
 
 	/**
-	 * Constructs a new, empty <code>WeakHashMap2</code> with the given
+	 * Constructs a new, empty {@code WeakHashMap2} with the given
 	 * initial capacity and the given load factor.
 	 *
 	 * @param  initialCapacity  The initial capacity of the
-	 *                          <code>WeakHashMap2</code>
+	 *                          {@code WeakHashMap2}
 	 *
-	 * @param  loadFactor       The load factor of the <code>WeakHashMap2</code>
+	 * @param  loadFactor       The load factor of the {@code WeakHashMap2}
 	 *
 	 * @throws IllegalArgumentException  If the initial capacity is less than
 	 *                                   zero, or if the load factor is
@@ -114,12 +114,12 @@ public class WeakHashMap2<K, V> extends AbstractMap<K, V> {
 	}
 
 	/**
-	 * Constructs a new, empty <code>WeakHashMap2</code> with the given
+	 * Constructs a new, empty {@code WeakHashMap2} with the given
 	 * initial capacity and the default load factor, which is
-	 * <code>0.75</code>.
+	 * {@code 0.75}.
 	 *
 	 * @param  initialCapacity  The initial capacity of the
-	 *                          <code>WeakHashMap2</code>
+	 *                          {@code WeakHashMap2}
 	 *
 	 * @throws IllegalArgumentException  If the initial capacity is less than
 	 *                                   zero
@@ -130,9 +130,9 @@ public class WeakHashMap2<K, V> extends AbstractMap<K, V> {
 	}
 
 	/**
-	 * Constructs a new, empty <code>WeakHashMap2</code> with the default
+	 * Constructs a new, empty {@code WeakHashMap2} with the default
 	 * initial capacity and the default load factor, which is
-	 * <code>0.75</code>.
+	 * {@code 0.75}.
 	 */
 	public WeakHashMap2() {
 		hash = new HashMap<>();
@@ -140,8 +140,8 @@ public class WeakHashMap2<K, V> extends AbstractMap<K, V> {
 	}
 
 	/**
-	 * Constructs a new <code>WeakHashMap2</code> with the same mappings as the
-	 * specified <tt>Map</tt>.  The <code>WeakHashMap2</code> is created with an
+	 * Constructs a new {@code WeakHashMap2} with the same mappings as the
+	 * specified <tt>Map</tt>.  The {@code WeakHashMap2} is created with an
 	 * initial capacity of twice the number of mappings in the specified map
 	 * or 11 (whichever is greater), and a default load factor, which is
 	 * <tt>0.75</tt>.
@@ -159,7 +159,7 @@ public class WeakHashMap2<K, V> extends AbstractMap<K, V> {
 	/**
 	 * Returns the number of key-value mappings in this map.
 	 * <strong>Note:</strong> <em>In contrast with most implementations of the
-	 * <code>Map</code> interface, the time required by this operation is
+	 * {@code Map} interface, the time required by this operation is
 	 * linear in the size of the map.</em>
 	 */
 	@Override
@@ -168,7 +168,7 @@ public class WeakHashMap2<K, V> extends AbstractMap<K, V> {
 	}
 
 	/**
-	 * Returns <code>true</code> if this map contains no key-value mappings.
+	 * Returns {@code true} if this map contains no key-value mappings.
 	 */
 	@Override
 	public boolean isEmpty() {
@@ -176,7 +176,7 @@ public class WeakHashMap2<K, V> extends AbstractMap<K, V> {
 	}
 
 	/**
-	 * Returns <code>true</code> if this map contains a mapping for the
+	 * Returns {@code true} if this map contains a mapping for the
 	 * specified key.
 	 *
 	 * @param   key   The key whose presence in this map is to be tested
@@ -189,9 +189,9 @@ public class WeakHashMap2<K, V> extends AbstractMap<K, V> {
 	/* -- Lookup and modification operations -- */
 
 	/**
-	 * Returns the value to which this map maps the specified <code>key</code>.
+	 * Returns the value to which this map maps the specified {@code key}.
 	 * If this map does not contain a value for this key, then return
-	 * <code>null</code>.
+	 * {@code null}.
 	 *
 	 * @param  key  The key whose associated value, if any, is to be returned
 	 */
@@ -202,18 +202,18 @@ public class WeakHashMap2<K, V> extends AbstractMap<K, V> {
 	}
 
 	/**
-	 * Updates this map so that the given <code>key</code> maps to the given
-	 * <code>value</code>.  If the map previously contained a mapping for
-	 * <code>key</code> then that mapping is replaced and the previous value is
+	 * Updates this map so that the given {@code key} maps to the given
+	 * {@code value}.  If the map previously contained a mapping for
+	 * {@code key} then that mapping is replaced and the previous value is
 	 * returned.
 	 *
 	 * @param  key    The key that is to be mapped to the given
-	 *                <code>value</code> 
-	 * @param  value  The value to which the given <code>key</code> is to be
+	 *                {@code value}
+	 * @param  value  The value to which the given {@code key} is to be
 	 *                mapped
 	 *
 	 * @return  The previous value to which this key was mapped, or
-	 *          <code>null</code> if if there was no mapping for the key
+	 *          {@code null} if if there was no mapping for the key
 	 */
 	@Override
 	public V put(K key, V value) {
@@ -236,12 +236,12 @@ public class WeakHashMap2<K, V> extends AbstractMap<K, V> {
 	}
 
 	/**
-	 * Removes the mapping for the given <code>key</code> from this map, if
+	 * Removes the mapping for the given {@code key} from this map, if
 	 * present.
 	 *
 	 * @param  key  The key whose mapping is to be removed
 	 *
-	 * @return  The value to which this key was mapped, or <code>null</code> if
+	 * @return  The value to which this key was mapped, or {@code null} if
 	 *          there was no mapping for the key
 	 */
 	@Override
@@ -417,7 +417,7 @@ public class WeakHashMap2<K, V> extends AbstractMap<K, V> {
 	private Set<Map.Entry<K, V>> entrySet = null;
 
 	/**
-	 * Returns a <code>Set</code> view of the mappings in this map.
+	 * Returns a {@code Set} view of the mappings in this map.
 	 */
 	@Override
 	public Set<Map.Entry<K, V>> entrySet() {

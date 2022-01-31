@@ -42,9 +42,9 @@ public class ReflectionUtilities {
 	}
 
 	/**
-	* Locates the field of the name <code>fieldName</code> on the given 
+	* Locates the field of the name {@code fieldName} on the given
 	* class.  If the given class does not contain the field, then this 
-	* method will recursively call up <code>containingClass</code>'s 
+	* method will recursively call up {@code containingClass}'s
 	* implementation tree looking for a parent implementation of the 
 	* requested field.
 	* 
@@ -73,9 +73,9 @@ public class ReflectionUtilities {
 	}
 
 	/**
-	 * Locates the field of the name <code>fieldName</code> on the given 
+	 * Locates the field of the name {@code fieldName} on the given
 	 * class.  If the given class does not contain the field, then this 
-	 * method will recursively call up <code>containingClass</code>'s 
+	 * method will recursively call up {@code containingClass}'s
 	 * implementation tree looking for a parent implementation of the 
 	 * requested field.
 	 * 
@@ -104,9 +104,9 @@ public class ReflectionUtilities {
 	}
 
 	/**
-	 * Locates the method of the name <code>methodName</code> on the given 
+	 * Locates the method of the name {@code methodName} on the given
 	 * class.  If the given class does not contain the method, then this 
-	 * method will recursively call up <code>containingClass</code>'s 
+	 * method will recursively call up {@code containingClass}'s
 	 * implementation tree looking for a parent implementation of the 
 	 * requested method.
 	 * 
@@ -292,9 +292,9 @@ public class ReflectionUtilities {
 	}
 
 	/**
-	 * Uses the given <code>patterns</code> to remove elements from the given stack trace.     
-	 * The current implementation will simply perform a <code>toString()</code> on each element and
-	 * then check to see if that string contains any of the <code>patterns</code>.
+	 * Uses the given {@code patterns} to remove elements from the given stack trace.
+	 * The current implementation will simply perform a {@code toString()} on each element and
+	 * then check to see if that string contains any of the {@code patterns}.
 	 * 
 	 * @param trace the trace to filter
 	 * @param patterns the non-regex patterns used to perform a 
@@ -421,7 +421,7 @@ public class ReflectionUtilities {
 	 * classes.  Further, interface hierarchies are examined before concrete parent extensions.
 	 * <p>
 	 * If the given items have no parents in common, then the result will be a list with
-	 * only <code>Object.class</code>.
+	 * only {@code Object.class}.
 	 * 
 	 * @param list the items to examine
 	 * @return the set of items
@@ -464,7 +464,7 @@ public class ReflectionUtilities {
 	 * classes.  Further, interface hierarchies are examined before concrete parent extensions.
 	 * <p>
 	 * If the given items have no parents in common, then the result will be a list with
-	 * only <code>Object.class</code>.
+	 * only {@code Object.class}.
 	 * 
 	 * @param list the items to examine
 	 * @return the set of items
@@ -541,7 +541,7 @@ public class ReflectionUtilities {
 	 * Returns an order set of all interfaces implemented and classes extended for the entire
 	 * type structure of the given class. 
 	 * <p>
-	 * If <code>Object.class</code> is passed to this method, then it will be returned in the 
+	 * If {@code Object.class} is passed to this method, then it will be returned in the
 	 * result of this method.
 	 * 
 	 * @param c the class to introspect

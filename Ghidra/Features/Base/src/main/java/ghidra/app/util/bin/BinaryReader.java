@@ -261,7 +261,7 @@ public class BinaryReader {
 
 	/**
 	 * Reads the byte at the current index and then increments the current
-	 * index by <code>SIZEOF_BYTE</code>.
+	 * index by {@code SIZEOF_BYTE}.
 	 * @return the byte at the current index
 	 * @exception IOException if an I/O error occurs
 	 */
@@ -273,7 +273,7 @@ public class BinaryReader {
 
 	/**
 	 * Reads the unsigned byte at the current index and then increments the current
-	 * index by <code>SIZEOF_BYTE</code>.
+	 * index by {@code SIZEOF_BYTE}.
 	 * @return the unsigned byte at the current index, as an int
 	 * @exception IOException if an I/O error occurs
 	 */
@@ -283,7 +283,7 @@ public class BinaryReader {
 
 	/**
 	 * Reads the short at the current index and then increments the current
-	 * index by <code>SIZEOF_SHORT</code>.
+	 * index by {@code SIZEOF_SHORT}.
 	 * @return the short at the current index
 	 * @exception IOException if an I/O error occurs
 	 */
@@ -295,7 +295,7 @@ public class BinaryReader {
 
 	/**
 	 * Reads the unsigned short at the current index and then increments the current
-	 * index by <code>SIZEOF_SHORT</code>.
+	 * index by {@code SIZEOF_SHORT}.
 	 * @return the unsigned short at the current index, as an int
 	 * @exception IOException if an I/O error occurs
 	 */
@@ -305,7 +305,7 @@ public class BinaryReader {
 
 	/**
 	 * Reads the integer at the current index and then increments the current
-	 * index by <code>SIZEOF_INT</code>.
+	 * index by {@code SIZEOF_INT}.
 	 * @return the integer at the current index
 	 * @exception IOException if an I/O error occurs
 	 */
@@ -317,7 +317,7 @@ public class BinaryReader {
 
 	/**
 	 * Reads the unsigned integer at the current index and then increments the current
-	 * index by <code>SIZEOF_INT</code>.
+	 * index by {@code SIZEOF_INT}.
 	 * @return the unsigned integer at the current index, as a long
 	 * @exception IOException if an I/O error occurs
 	 */
@@ -327,7 +327,7 @@ public class BinaryReader {
 
 	/**
 	 * Reads the long at the current index and then increments the current
-	 * index by <code>SIZEOF_LONG</code>.
+	 * index by {@code SIZEOF_LONG}.
 	 * @return the long at the current index
 	 * @exception IOException if an I/O error occurs
 	 */
@@ -373,9 +373,9 @@ public class BinaryReader {
 	}
 
 	/**
-	 * Reads an Ascii string of <code>length</code>
+	 * Reads an Ascii string of {@code length}
 	 * characters starting at the current index and then increments the current
-	 * index by <code>length</code>.
+	 * index by {@code length}.
 	 *
 	 * @return the Ascii string at the current index
 	 */
@@ -400,7 +400,7 @@ public class BinaryReader {
 
 	/**
 	 * Reads fixed length UTF-16 Unicode string the current index and then increments the current
-	 * {@link #setPointerIndex(int) pointer index} by <code>length</code> elements (length*2 bytes).
+	 * {@link #setPointerIndex(int) pointer index} by {@code length} elements (length*2 bytes).
 	 *
 	 * @return the UTF-16 Unicode string at the current index
 	 * @exception IOException if an I/O error occurs
@@ -412,9 +412,9 @@ public class BinaryReader {
 	}
 
 	/**
-	 * Reads a byte array of <code>nElements</code>
+	 * Reads a byte array of {@code nElements}
 	 * starting at the current index and then increments the current
-	 * index by <code>SIZEOF_BYTE * nElements</code>.
+	 * index by {@code SIZEOF_BYTE * nElements}.
 	 * @return the byte array starting at the current index
 	 * @exception IOException if an I/O error occurs
 	 */
@@ -425,9 +425,9 @@ public class BinaryReader {
 	}
 
 	/**
-	 * Reads a short array of <code>nElements</code>
+	 * Reads a short array of {@code nElements}
 	 * starting at the current index and then increments the current
-	 * index by <code>SIZEOF_SHORT * nElements</code>.
+	 * index by {@code SIZEOF_SHORT * nElements}.
 	 * @return the short array starting at the current index
 	 * @exception IOException if an I/O error occurs
 	 */
@@ -438,9 +438,9 @@ public class BinaryReader {
 	}
 
 	/**
-	 * Reads an integer array of <code>nElements</code>
+	 * Reads an integer array of {@code nElements}
 	 * starting at the current index and then increments the current
-	 * index by <code>SIZEOF_INT * nElements</code>.
+	 * index by {@code SIZEOF_INT * nElements}.
 	 * @return the integer array starting at the current index
 	 * @exception IOException if an I/O error occurs
 	 */
@@ -451,9 +451,9 @@ public class BinaryReader {
 	}
 
 	/**
-	 * Reads a long array of <code>nElements</code>
+	 * Reads a long array of {@code nElements}
 	 * starting at the current index and then increments the current
-	 * index by <code>SIZEOF_LONG * nElements</code>.
+	 * index by {@code SIZEOF_LONG * nElements}.
 	 * @return the long array starting at the current index
 	 * @exception IOException if an I/O error occurs
 	 */
@@ -466,7 +466,7 @@ public class BinaryReader {
 	////////////////////////////////////////////////////////////////////
 
 	/**
-	 * Reads an Ascii string starting at <code>index</code>, ending
+	 * Reads an Ascii string starting at {@code index}, ending
 	 * at the next character outside the range [32..126] or when
 	 * reaching the end of the underlying ByteProvider.
 	 * <p>
@@ -496,8 +496,8 @@ public class BinaryReader {
 	}
 
 	/**
-	 * Returns an Ascii string of <code>length</code> bytes
-	 * starting at <code>index</code>. This method does not
+	 * Returns an Ascii string of {@code length} bytes
+	 * starting at {@code index}. This method does not
 	 * care about null-terminators.  Leading and trailing spaces
 	 * will be trimmed before the string is returned.
 	 * @param index the index where the Ascii string begins
@@ -512,7 +512,7 @@ public class BinaryReader {
 	}
 
 	/**
-	 * Reads an Ascii string starting at <code>index</code>, ending
+	 * Reads an Ascii string starting at {@code index}, ending
 	 * at the next {@code termChar} character byte or when  reaching the end of
 	 * the underlying ByteProvider.
 	 * <p>
@@ -536,7 +536,7 @@ public class BinaryReader {
 	}
 
 	/**
-	 * Reads an Ascii string starting at <code>index</code>, ending
+	 * Reads an Ascii string starting at {@code index}, ending
 	 * at the next character that is one of the specified {@code termChars} or when
 	 * reaching the end of the underlying ByteProvider.
 	 * <p>
@@ -560,7 +560,7 @@ public class BinaryReader {
 	}
 
 	/**
-	 * Reads an fixed length Ascii string starting at <code>index</code>.
+	 * Reads an fixed length Ascii string starting at {@code index}.
 	 * <p>
 	 * Does NOT trim the string.
 	 * <p>
@@ -576,10 +576,10 @@ public class BinaryReader {
 
 	/**
 	 * Reads a null-terminated UTF-16 Unicode string starting
-	 * at <code>index</code> using the pre-specified
+	 * at {@code index} using the pre-specified
 	 * {@link #setLittleEndian(boolean) endianness}.
 	 * <p>
-	 * The end of the string is denoted by a two-byte (ie. short) <code>null</code> character.
+	 * The end of the string is denoted by a two-byte (ie. short) {@code null} character.
 	 * <p>
 	 * Leading and trailing spaces will be trimmed before the string is returned.
 	 * <p>
@@ -601,8 +601,8 @@ public class BinaryReader {
 	}
 
 	/**
-	 * Reads a fixed length UTF-16 Unicode string of <code>length</code> characters
-	 * starting at <code>index</code>, using the pre-specified
+	 * Reads a fixed length UTF-16 Unicode string of {@code length} characters
+	 * starting at {@code index}, using the pre-specified
 	 * {@link #setLittleEndian(boolean) endianness}.
 	 * <p>
 	 * This method does not care about null-terminators.
@@ -626,7 +626,7 @@ public class BinaryReader {
 	}
 
 	/**
-	 * Returns the signed BYTE at <code>index</code>.
+	 * Returns the signed BYTE at {@code index}.
 	 * @param index the index where the BYTE begins
 	 * @return the signed BYTE
 	 * @exception IOException if an I/O error occurs
@@ -636,7 +636,7 @@ public class BinaryReader {
 	}
 
 	/**
-	 * Returns the unsigned BYTE at <code>index</code>.
+	 * Returns the unsigned BYTE at {@code index}.
 	 * @param index the index where the BYTE begins
 	 * @return the unsigned BYTE as an int
 	 * @exception IOException if an I/O error occurs
@@ -646,7 +646,7 @@ public class BinaryReader {
 	}
 
 	/**
-	 * Returns the signed SHORT at <code>index</code>.
+	 * Returns the signed SHORT at {@code index}.
 	 * @param index the index where the SHORT begins
 	 * @return the signed SHORT
 	 * @exception IOException if an I/O error occurs
@@ -657,7 +657,7 @@ public class BinaryReader {
 	}
 
 	/**
-	 * Returns the unsigned SHORT at <code>index</code>.
+	 * Returns the unsigned SHORT at {@code index}.
 	 * @param index the index where the SHORT begins
 	 * @return the unsigned SHORT as an int
 	 * @exception IOException if an I/O error occurs
@@ -667,7 +667,7 @@ public class BinaryReader {
 	}
 
 	/**
-	 * Returns the signed INTEGER at <code>index</code>.
+	 * Returns the signed INTEGER at {@code index}.
 	 * @param index the index where the INTEGER begins
 	 * @return the signed INTEGER
 	 * @exception IOException if an I/O error occurs
@@ -678,7 +678,7 @@ public class BinaryReader {
 	}
 
 	/**
-	 * Returns the unsigned INTEGER at <code>index</code>.
+	 * Returns the unsigned INTEGER at {@code index}.
 	 * @param index the index where the INTEGER begins
 	 * @return the unsigned INTEGER as a long
 	 * @exception IOException if an I/O error occurs
@@ -688,7 +688,7 @@ public class BinaryReader {
 	}
 
 	/**
-	 * Returns the signed LONG at <code>index</code>.
+	 * Returns the signed LONG at {@code index}.
 	 * @param index the index where the LONG begins
 	 * @return the LONG
 	 * @exception IOException if an I/O error occurs
@@ -727,8 +727,8 @@ public class BinaryReader {
 	}
 
 	/**
-	 * Returns the BYTE array of <code>nElements</code>
-	 * starting at <code>index</code>.
+	 * Returns the BYTE array of {@code nElements}
+	 * starting at {@code index}.
 	 * @param index the index where the BYTE begins
 	 * @param nElements the number of array elements
 	 * @return the BYTE array
@@ -742,8 +742,8 @@ public class BinaryReader {
 	}
 
 	/**
-	 * Returns the SHORT array of <code>nElements</code>
-	 * starting at <code>index</code>.
+	 * Returns the SHORT array of {@code nElements}
+	 * starting at {@code index}.
 	 * @param index the index where the SHORT begins
 	 * @param nElements the number of array elements
 	 * @return the SHORT array
@@ -762,8 +762,8 @@ public class BinaryReader {
 	}
 
 	/**
-	 * Returns the INTEGER array of <code>nElements</code>
-	 * starting at <code>index</code>.
+	 * Returns the INTEGER array of {@code nElements}
+	 * starting at {@code index}.
 	 * @param index the index where the INTEGER begins
 	 * @param nElements the number of array elements
 	 * @return the INTEGER array
@@ -782,8 +782,8 @@ public class BinaryReader {
 	}
 
 	/**
-	 * Returns the LONG array of <code>nElements</code>
-	 * starting at <code>index</code>.
+	 * Returns the LONG array of {@code nElements}
+	 * starting at {@code index}.
 	 * @param index the index where the LONG begins
 	 * @param nElements the number of array elements
 	 * @return the LONG array
@@ -802,8 +802,8 @@ public class BinaryReader {
 	}
 
 	/**
-	 * Returns the Ascii string array of <code>nElements</code>
-	 * starting at <code>index</code>
+	 * Returns the Ascii string array of {@code nElements}
+	 * starting at {@code index}
 	 * @param index the index where the Ascii Strings begin
 	 * @param nElements the number of array elements
 	 * @return the Ascii String array

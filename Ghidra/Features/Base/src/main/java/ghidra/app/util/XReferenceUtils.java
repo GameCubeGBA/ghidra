@@ -38,7 +38,7 @@ public class XReferenceUtils {
 	private final static int ALL_REFS = -1;
 
 	/**
-	 * Returns an array containing the first <b><code>max</code></b>
+	 * Returns an array containing the first <b>{@code max}</b>
 	 * direct xref references to the specified code unit.
 	 *
 	 * @param cu the code unit to generate the xrefs
@@ -57,7 +57,7 @@ public class XReferenceUtils {
 		Address minAddress = cu.getMinAddress();
 		ReferenceIterator it = program.getReferenceManager().getReferencesTo(minAddress);
 		while (it.hasNext()) {
-			if (xrefs.size() - max == 0) {
+			if (xrefs.size() == max) {
 				break;
 			}
 
@@ -103,7 +103,7 @@ public class XReferenceUtils {
 			Address addr = it.next();
 			ReferenceIterator refIter = refMgr.getReferencesTo(addr);
 			while (refIter.hasNext()) {
-				if (offcuts.size() - max == 0) {
+				if (offcuts.size() == max) {
 					break;
 				}
 
@@ -148,9 +148,10 @@ public class XReferenceUtils {
 		Reference[] refs = refMgr.getReferencesTo(var);
 		int total = 0;
 		for (Reference vref : refs) {
-			if (total++ - max == 0) {
+			if (total == max) {
 				break;
 			}
+			total++;
 
 			if (addr.equals(vref.getToAddress())) {
 				xrefs.add(vref);

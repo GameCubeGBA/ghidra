@@ -155,8 +155,8 @@ public abstract class AbstractGTest {
 
 	/**
 	 * Compares the contents of two arrays to determine if they are equal.  The contents must
-	 * match in the same order. If <code>message</code>
-	 * is <code>null</code>, then a generic error message will be printed.
+	 * match in the same order. If {@code message}
+	 * is {@code null}, then a generic error message will be printed.
 	 *
 	 * @param message The message to print upon failure; can be null
 	 * @param expected The expected array.
@@ -174,8 +174,8 @@ public abstract class AbstractGTest {
 
 	/**
 	 * Compares the contents of two arrays to determine if they are equal.  The contents do not have
-	 * to be in the same order.  If <code>message</code>
-	 * is <code>null</code>, then a generic error message will be printed.
+	 * to be in the same order.  If {@code message}
+	 * is {@code null}, then a generic error message will be printed.
 	 *
 	 * @param message The message to print upon failure; can be null
 	 * @param expected The expected array.
@@ -445,7 +445,7 @@ public abstract class AbstractGTest {
 	}
 
 	/**
-	 * Waits for the given condition to return true.  Most of the <code>waitForCondition()</code>
+	 * Waits for the given condition to return true.  Most of the {@code waitForCondition()}
 	 * methods throw an {@link AssertionFailedError} if the timeout period expires.
 	 *  This method allows you to setup a longer wait period by repeatedly calling this method.
 	 *
@@ -527,7 +527,7 @@ public abstract class AbstractGTest {
 
 	/**
 	 * Waits for the value returned by the supplier to be non-null.  If the timeout period
-	 * expires, then null will be returned.   Most of the <code>waitXyz()</code> methods
+	 * expires, then null will be returned.   Most of the {@code waitXyz()} methods
 	 * throw an {@link AssertionFailedError} if the timeout period expires.  This method allows
 	 * you to setup a longer wait period by repeatedly calling this method.
 	 *

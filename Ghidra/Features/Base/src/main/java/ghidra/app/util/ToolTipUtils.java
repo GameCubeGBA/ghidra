@@ -63,7 +63,7 @@ public class ToolTipUtils {
 	}
 
 	/**
-	 * Examines the give <code>dataType</code> and creates a tool tip for it,
+	 * Examines the give {@code dataType} and creates a tool tip for it,
 	 * depending upon its actual class type.
 	 * 
 	 * <P>Note: the text returned here will be truncated as needed for the type of data.  To
@@ -78,7 +78,7 @@ public class ToolTipUtils {
 	}
 
 	/**
-	 * Examines the give <code>dataType</code> and creates a tool tip for it,
+	 * Examines the give {@code dataType} and creates a tool tip for it,
 	 * depending upon its actual class type.
 	 * 
 	 * <P>Note: the text returned here will not be truncated.  This can result in tool tip windows

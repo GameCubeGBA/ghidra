@@ -53,14 +53,14 @@ public class Disassembler implements DisassemblerConflictHandler {
 	private static final int DISASSEMBLE_MEMORY_CACHE_SIZE = 8;
 
 	/**
-	 * <code>MARK_BAD_INSTRUCTION_PROPERTY</code> Program Disassembler property 
+	 * {@code MARK_BAD_INSTRUCTION_PROPERTY} Program Disassembler property
 	 * enables marking of instruction disassembly errors.  Boolean property is defined
 	 * within the Disassembler property list, see {@link Program#DISASSEMBLER_PROPERTIES}.
 	 */
 	public static final String MARK_BAD_INSTRUCTION_PROPERTY = "Mark Bad Disassembly";
 
 	/**
-	 * <code>MARK_UNIMPL_PCODE_PROPERTY</code> Program Disassembler property 
+	 * {@code MARK_UNIMPL_PCODE_PROPERTY} Program Disassembler property
 	 * enables marking of instructions which are missing their pcode implementation.  
 	 * Boolean property is defined within the Disassembler property list, see 
 	 * {@link Program#DISASSEMBLER_PROPERTIES}.
@@ -68,7 +68,7 @@ public class Disassembler implements DisassemblerConflictHandler {
 	public static final String MARK_UNIMPL_PCODE_PROPERTY = "Mark Unimplemented Pcode";
 
 	/**
-	 * <code>RESTRICT_DISASSEMBLY_TO_EXECUTE_MEMORY_PROPERTY</code> Program Disassembler property 
+	 * {@code RESTRICT_DISASSEMBLY_TO_EXECUTE_MEMORY_PROPERTY} Program Disassembler property
 	 * restricts disassembly to executable memory only.  
 	 * Boolean property is defined within the Disassembler property list, see 
 	 * {@link Program#DISASSEMBLER_PROPERTIES}.
@@ -1498,7 +1498,7 @@ public class Disassembler implements DisassemblerConflictHandler {
 	}
 
 	/**
-	 * <code>DisassemblerProgramContext</code> is used as a proxy program context due to the 
+	 * {@code DisassemblerProgramContext} is used as a proxy program context due to the
 	 * delayed nature of laying down instructions and their associated context state.
 	 * This is used to track context not yet committed for use by the DisassemblerContext 
 	 * in place of the true program context. 

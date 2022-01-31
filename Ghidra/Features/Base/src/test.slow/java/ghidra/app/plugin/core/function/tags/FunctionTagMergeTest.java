@@ -43,7 +43,6 @@ import ghidra.program.model.listing.*;
  * 
  * Note that the two mergers mentioned above are always run in sequence, the tag merger
  * running before the listing merger. This sequence is done here for all test.
- * @see #doMerge(int, int)
  * 
  */
 public class FunctionTagMergeTest extends AbstractListingMergeManagerTest {

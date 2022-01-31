@@ -17,7 +17,7 @@
 package ghidra.framework.model;
 
 /**
- * <code>UserData</code> is a marker interface for
+ * {@code UserData} is a marker interface for
  * DomainObjects used to store user-data associated with
  * another DomainObject.
  */

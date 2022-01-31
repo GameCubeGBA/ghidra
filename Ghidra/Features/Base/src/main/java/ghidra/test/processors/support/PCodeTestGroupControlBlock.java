@@ -21,7 +21,7 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.util.CodeUnitInsertionException;
 
 /**
- * <code>PCodeTestGroupControlBlock</code> corresponds to each test group contained within 
+ * {@code PCodeTestGroupControlBlock} corresponds to each test group contained within
  * a binary test file and identified by the GROUP_CONTROL_BLOCK_MAGIC 64-bit character 
  * field value at the start of the data structure.
  */

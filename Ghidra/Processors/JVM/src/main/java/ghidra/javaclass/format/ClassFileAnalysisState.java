@@ -100,9 +100,9 @@ public class ClassFileAnalysisState implements AnalysisState {
 	}
 
 	/**
-	 * Return persistent <code>ClassFileAnalysisState</code> which corresponds to the specified program instance.
+	 * Return persistent {@code ClassFileAnalysisState} which corresponds to the specified program instance.
 	 * @param program
-	 * @return <code>ClassFileAnalysisState</code> for specified program instance
+	 * @return {@code ClassFileAnalysisState} for specified program instance
 	 */
 	public static synchronized ClassFileAnalysisState getState(Program program) throws IOException {
 		ClassFileAnalysisState analysisState =

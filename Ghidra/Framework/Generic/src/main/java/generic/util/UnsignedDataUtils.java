@@ -100,180 +100,180 @@ public class UnsignedDataUtils {
     }
 
     /**
-     * Returns true if <code>i</code> is LESS THAN <code>j</code>.
+     * Returns true if {@code i} is LESS THAN <code>j</code>.
      * 
      * @param i an argument
      * @param j another argument
      * 
-     * @return true if <code>i</code> is less than <code>j</code>
+     * @return true if {@code i} is less than <code>j</code>
      */
     public static boolean unsignedLessThan(byte i, byte j) {
         return comp(LESS_THAN, i, j);
     }
     /**
-     * Returns true if <code>i</code> is LESS THAN or EQUAL TO <code>j</code>.
+     * Returns true if {@code i} is LESS THAN or EQUAL TO <code>j</code>.
      * 
      * @param i an argument
      * @param j another argument
      * 
-     * @return true if <code>i</code> is less than or equal to <code>j</code>
+     * @return true if {@code i} is less than or equal to <code>j</code>
      */
     public static boolean unsignedLessThanOrEqual(byte i, byte j) {
         return comp(LESS_THAN_OR_EQUAL, i, j);
     }
     /**
-     * Returns true if <code>i</code> is GREATER THAN <code>j</code>.
+     * Returns true if {@code i} is GREATER THAN <code>j</code>.
      * 
      * @param i an argument
      * @param j another argument
      * 
-     * @return true if <code>i</code> is greater than <code>j</code>
+     * @return true if {@code i} is greater than <code>j</code>
      */
     public static boolean unsignedGreaterThan(byte i, byte j) {
         return comp(GREATER_THAN, i, j);
     }
     /**
-     * Returns true if <code>i</code> is GREATER THAN or EQUAL TO <code>j</code>.
+     * Returns true if {@code i} is GREATER THAN or EQUAL TO <code>j</code>.
      * 
      * @param i an argument
      * @param j another argument
      * 
-     * @return true if <code>i</code> is greater than or equal to <code>j</code>
+     * @return true if {@code i} is greater than or equal to <code>j</code>
      */
     public static boolean unsignedGreaterThanOrEqual(byte i, byte j) {
         return comp(GREATER_THAN_OR_EQUAL, i, j);
     }
 
     /**
-     * Returns true if <code>i</code> is LESS THAN <code>j</code>.
+     * Returns true if {@code i} is LESS THAN <code>j</code>.
      * 
      * @param i an argument
      * @param j another argument
      * 
-     * @return true if <code>i</code> is less than <code>j</code>
+     * @return true if {@code i} is less than <code>j</code>
      */
     public static boolean unsignedLessThan(short i, short j) {
         return comp(LESS_THAN, i, j);
     }
     /**
-     * Returns true if <code>i</code> is LESS THAN or EQUAL TO <code>j</code>.
+     * Returns true if {@code i} is LESS THAN or EQUAL TO <code>j</code>.
      * 
      * @param i an argument
      * @param j another argument
      * 
-     * @return true if <code>i</code> is less than or equal to <code>j</code>
+     * @return true if {@code i} is less than or equal to <code>j</code>
      */
     public static boolean unsignedLessThanOrEqual(short i, short j) {
         return comp(LESS_THAN_OR_EQUAL, i, j);
     }
     /**
-     * Returns true if <code>i</code> is GREATER THAN <code>j</code>.
+     * Returns true if {@code i} is GREATER THAN <code>j</code>.
      * 
      * @param i an argument
      * @param j another argument
      * 
-     * @return true if <code>i</code> is greater than <code>j</code>
+     * @return true if {@code i} is greater than <code>j</code>
      */
     public static boolean unsignedGreaterThan(short i, short j) {
         return comp(GREATER_THAN, i, j);
     }
     /**
-     * Returns true if <code>i</code> is GREATER THAN or EQUAL TO <code>j</code>.
+     * Returns true if {@code i} is GREATER THAN or EQUAL TO <code>j</code>.
      * 
      * @param i an argument
      * @param j another argument
      * 
-     * @return true if <code>i</code> is greater than or equal to <code>j</code>
+     * @return true if {@code i} is greater than or equal to <code>j</code>
      */
     public static boolean unsignedGreaterThanOrEqual(short i, short j) {
         return comp(GREATER_THAN_OR_EQUAL, i, j);
     }
 
     /**
-     * Returns true if <code>i</code> is LESS THAN <code>j</code>.
+     * Returns true if {@code i} is LESS THAN <code>j</code>.
      * 
      * @param i an argument
      * @param j another argument
      * 
-     * @return true if <code>i</code> is less than <code>j</code>
+     * @return true if {@code i} is less than <code>j</code>
      */
     public static boolean unsignedLessThan(int i, int j) {
         return comp(LESS_THAN, i, j);
     }
     /**
-     * Returns true if <code>i</code> is LESS THAN or EQUAL TO <code>j</code>.
+     * Returns true if {@code i} is LESS THAN or EQUAL TO <code>j</code>.
      * 
      * @param i an argument
      * @param j another argument
      * 
-     * @return true if <code>i</code> is less than or equal to <code>j</code>
+     * @return true if {@code i} is less than or equal to <code>j</code>
      */
     public static boolean unsignedLessThanOrEqual(int i, int j) {
         return comp(LESS_THAN_OR_EQUAL, i, j);
     }
     /**
-     * Returns true if <code>i</code> is GREATER THAN <code>j</code>.
+     * Returns true if {@code i} is GREATER THAN <code>j</code>.
      * 
      * @param i an argument
      * @param j another argument
      * 
-     * @return true if <code>i</code> is greater than <code>j</code>
+     * @return true if {@code i} is greater than <code>j</code>
      */
     public static boolean unsignedGreaterThan(int i, int j) {
         return comp(GREATER_THAN, i, j);
     }
     /**
-     * Returns true if <code>i</code> is GREATER THAN or EQUAL TO <code>j</code>.
+     * Returns true if {@code i} is GREATER THAN or EQUAL TO <code>j</code>.
      * 
      * @param i an argument
      * @param j another argument
      * 
-     * @return true if <code>i</code> is greater than or equal to <code>j</code>
+     * @return true if {@code i} is greater than or equal to <code>j</code>
      */
     public static boolean unsignedGreaterThanOrEqual(int i, int j) {
         return comp(GREATER_THAN_OR_EQUAL, i, j);
     }
 
     /**
-     * Returns true if <code>i</code> is LESS THAN <code>j</code>.
+     * Returns true if {@code i} is LESS THAN <code>j</code>.
      * 
      * @param i an argument
      * @param j another argument
      * 
-     * @return true if <code>i</code> is less than <code>j</code>
+     * @return true if {@code i} is less than <code>j</code>
      */
     public static boolean unsignedLessThan(long i, long j) {
         return comp(LESS_THAN, i, j);
     }
     /**
-     * Returns true if <code>i</code> is LESS THAN or EQUAL TO <code>j</code>.
+     * Returns true if {@code i} is LESS THAN or EQUAL TO <code>j</code>.
      * 
      * @param i an argument
      * @param j another argument
      * 
-     * @return true if <code>i</code> is less than or equal to <code>j</code>
+     * @return true if {@code i} is less than or equal to <code>j</code>
      */
     public static boolean unsignedLessThanOrEqual(long i, long j) {
         return comp(LESS_THAN_OR_EQUAL, i, j);
     }
     /**
-     * Returns true if <code>i</code> is GREATER THAN <code>j</code>.
+     * Returns true if {@code i} is GREATER THAN <code>j</code>.
      * 
      * @param i an argument
      * @param j another argument
      * 
-     * @return return true if <code>i</code> is greater than <code>j</code>
+     * @return return true if {@code i} is greater than <code>j</code>
      */
     public static boolean unsignedGreaterThan(long i, long j) {
         return comp(GREATER_THAN, i, j);
     }
     /**
-     * Returns true if <code>i</code> is GREATER THAN or EQUAL TO <code>j</code>.
+     * Returns true if {@code i} is GREATER THAN or EQUAL TO <code>j</code>.
      * 
      * @param i an argument
      * @param j another argument
      * 
-     * @return return true if <code>i</code> is greater than or equal to <code>j</code>
+     * @return return true if {@code i} is greater than or equal to <code>j</code>
      */
     public static boolean unsignedGreaterThanOrEqual(long i, long j) {
         return comp(GREATER_THAN_OR_EQUAL, i, j);

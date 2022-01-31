@@ -32,8 +32,8 @@ import ghidra.program.util.*;
 import ghidra.util.Msg;
 
 /**
- * <code>CycleGroupAction</code> cycles data through a series of data types
- * defined by a <code>CycleGroup</code>.
+ * {@code CycleGroupAction} cycles data through a series of data types
+ * defined by a {@code CycleGroup}.
  */
 public class CycleGroupAction extends ListingContextAction {
 

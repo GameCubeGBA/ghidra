@@ -17,19 +17,19 @@
 package ghidra.program.model.listing;
 
 /**
- * <code>AutoParameterType</code> defines the various
+ * {@code AutoParameterType} defines the various
  * types of auto-parameters.
  */
 public enum AutoParameterType {
 
 	/**
-	 * <code>THIS</code> corresponds to the object pointer parameter associated
+	 * {@code THIS} corresponds to the object pointer parameter associated
 	 * with a __thiscall calling convention and passed as a hidden parameter
 	 */
 	THIS("this"),
 
 	/**
-	 * <code>RETURN_STORAGE_PTR</code> corresponds to a caller allocated return
+	 * {@code RETURN_STORAGE_PTR} corresponds to a caller allocated return
 	 * storage pointer passed as a hidden parameter
 	 */
 	RETURN_STORAGE_PTR("__return_storage_ptr__");

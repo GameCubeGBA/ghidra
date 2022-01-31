@@ -31,7 +31,7 @@ import ghidra.util.Msg;
  * specify the {@link ApplicationSSLSocketFactory} to leverage the applications
  * default SSLContext.
  * <p>
- * The property <code>jdk.tls.client.protocols</code> should be set to restrict secure
+ * The property {@code jdk.tls.client.protocols} should be set to restrict secure
  * client connections to a specific set of enabled TLS protocols (e.g., TLSv1.2,TLSv1.3).
  * See <A href="https://java.com/en/configure_crypto.html">JDK and JRE Cryptographic Algorithms</A> 
  * for details.
@@ -118,7 +118,7 @@ public class SSLContextInitializer implements ModuleInitializer {
 	}
 
 	/**
-	 * <code>HttpsHostnameVerifier</code> is required by HttpsURLConnection even
+	 * {@code HttpsHostnameVerifier} is required by HttpsURLConnection even
 	 * if it does nothing.  The verify method will only be invoked if the default 
 	 * behavior fails the connection attempt due to a hostname mismatch.
 	 * @see HttpsURLConnection#setHostnameVerifier(HostnameVerifier)

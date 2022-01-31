@@ -26,7 +26,7 @@ import java.io.IOException;
 import db.buffers.*;
 
 /**
- * <code>DBParms</code> manages 4-byte integer parameters associated with a database 
+ * {@code DBParms} manages 4-byte integer parameters associated with a database
  * and stored as the first buffer (ID 0) in the buffer file.  The maximum number of 
  * parameters is determined by the .
  */

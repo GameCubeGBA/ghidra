@@ -37,8 +37,8 @@ public interface DataTypeReferenceFinder extends ExtensionPoint {
 	 * implementation.
 	 * <p>
 	 * Note that this operation is multi-threaded and that results will be delivered as they
-	 * are found via the <code>callback</code>.
-	 *
+	 * are found via the {@code callback}.
+	 * 
 	 * @param program the program to search
 	 * @param dataType the type for which to search
 	 * @param callback the callback to be called when a reference is found
@@ -53,8 +53,8 @@ public interface DataTypeReferenceFinder extends ExtensionPoint {
 	 * in a manner appropriate with the given implementation.
 	 * <p>
 	 * Note that this operation is multi-threaded and that results will be delivered as they
-	 * are found via the <code>callback</code>.
-	 *
+	 * are found via the {@code callback}.
+	 * 
 	 * @param program the program to search
 	 * @param dataType the type containing the field for which to search
 	 * @param fieldName the name of the composite's field for which to search; may be null

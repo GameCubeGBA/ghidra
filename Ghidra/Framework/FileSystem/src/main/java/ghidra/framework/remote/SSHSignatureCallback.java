@@ -28,7 +28,7 @@ import org.bouncycastle.crypto.signers.*;
 import org.bouncycastle.util.Strings;
 
 /**
- * <code>SSHSignatureCallback</code> provides a Callback implementation used
+ * {@code SSHSignatureCallback} provides a Callback implementation used
  * to perform SSH authentication.  This callback is instantiated
  * by the server with a random token which must be signed using the 
  * user's SSH private key.

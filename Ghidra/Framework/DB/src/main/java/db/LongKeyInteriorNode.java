@@ -24,7 +24,7 @@ import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>LongKeyInteriorNode</code> stores a BTree node for use as an interior
+ * {@code LongKeyInteriorNode} stores a BTree node for use as an interior
  * node when searching for Table records within the database.  This type of node
  * has the following layout within a single DataBuffer (field size in bytes):
  * <pre>

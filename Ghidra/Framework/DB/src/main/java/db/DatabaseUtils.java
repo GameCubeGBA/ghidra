@@ -18,7 +18,7 @@ package db;
 import java.io.IOException;
 
 /**
- * <code>DatabaseUtils</code> provides a collection of database related utilities.
+ * {@code DatabaseUtils} provides a collection of database related utilities.
  */
 public class DatabaseUtils {
 

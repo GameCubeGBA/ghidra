@@ -276,7 +276,7 @@ public class OverridePrototypeAction extends AbstractDecompilerAction {
 	}
 
 	/**
-	 * <code>ProtoOverrideDialog</code> provides the ability to edit the
+	 * {@code ProtoOverrideDialog} provides the ability to edit the
 	 * function signature associated with a specific function definition override
 	 * at a sub-function callsite.  
 	 * Use of this editor requires the presence of the tool-based datatype manager service.

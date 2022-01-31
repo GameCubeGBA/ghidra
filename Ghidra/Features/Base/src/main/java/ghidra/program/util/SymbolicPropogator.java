@@ -240,7 +240,7 @@ public class SymbolicPropogator {
 	}
 
 	/**
-	 * <code>Value</code> corresponds to a constant value or register relative value.
+	 * {@code Value} corresponds to a constant value or register relative value.
 	 * @see SymbolicPropogator#getRegisterValue(Address, Register)
 	 */
 	public class Value {
