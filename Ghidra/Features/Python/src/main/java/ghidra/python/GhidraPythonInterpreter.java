@@ -468,7 +468,7 @@ public class GhidraPythonInterpreter extends InteractiveInterpreter {
 			// Return value is (name, argspec, tip_text)
             for (Object o : (List<?>) getCallTipJava.__call__(command, locals)) {
                 String completion_portion = o.toString();
-                if (!completion_portion.equals("")) {
+                if (!completion_portion.isEmpty()) {
                     String[] substrings = completion_portion.split("\n");
                     for (String substring : substrings) {
                         completion_list.add(new CodeCompletion(substring, null, null));

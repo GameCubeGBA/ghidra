@@ -142,7 +142,7 @@ public class GccRttiAnalysisScript extends GhidraScript {
 		}
 
 		String path;
-		if (parent.getName().equals("")) {
+		if (parent.getName().isEmpty()) {
 			path = "/" + categoryName;
 		}
 		else {
