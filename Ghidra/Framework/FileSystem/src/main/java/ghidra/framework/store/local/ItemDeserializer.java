@@ -25,7 +25,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 /**
- * <code>ItemDeserializer</code> facilitates the reading of a compressed data stream
+ * {@code ItemDeserializer} facilitates the reading of a compressed data stream
  * contained within a "packed" file.  A "packed" file contains the following meta-data
  * which is available after construction:
  * <ul>

@@ -25,7 +25,7 @@ import ghidra.app.context.ListingActionContext;
 import ghidra.app.context.ListingContextAction;
 
 /**
- * <CODE>AddLabelAction</CODE> allows the user to add a label.
+ * {@code AddLabelAction} allows the user to add a label.
  */
 class AddLabelAction extends ListingContextAction {
 	private LabelMgrPlugin plugin;

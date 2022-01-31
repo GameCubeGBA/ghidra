@@ -65,9 +65,9 @@ import utility.function.Callback;
  * <P><B><U>Naming Conventions:</U></B>  There are many methods in this class, called from 
  * different threads.   For simplicity, we use the following conventions: 
  * <UL>
- * 	<LI><CODE>fooAsync</CODE> - methods ending in <B>Async</B> indicate that they are to be 
+ * 	<LI>{@code fooAsync} - methods ending in <B>Async</B> indicate that they are to be
  *                              called from a background thread.</LI>
- *  <LI><CODE>fooSwing</CODE> - methods ending in <B>Swing</B> indicate that they are to be 
+ *  <LI>{@code fooSwing} - methods ending in <B>Swing</B> indicate that they are to be
  *                              called from the Swing thread.</LI>                             
  * 	<LI>*All public methods are assumed to be called on the Swing thread</LI>
  * </UL>

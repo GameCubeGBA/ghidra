@@ -35,7 +35,7 @@ import utilities.util.reflection.ReflectionUtilities;
  * @param <ROW_TYPE> The row object class supported by this column
  * @param <COLUMN_TYPE> The column object class supported by this column
  * @param <DATA_SOURCE> The object class type that will be passed to 
- * 						see <code>getValue(ROW_TYPE, Settings, DATA_SOURCE, ServiceProvider)</code>
+ * 						see {@code getValue(ROW_TYPE, Settings, DATA_SOURCE, ServiceProvider)}
  */
 public abstract class AbstractDynamicTableColumn<ROW_TYPE, COLUMN_TYPE, DATA_SOURCE>
 		implements DynamicTableColumn<ROW_TYPE, COLUMN_TYPE, DATA_SOURCE> {

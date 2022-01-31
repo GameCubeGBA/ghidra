@@ -25,7 +25,7 @@ import ghidra.program.model.listing.CodeUnit;
 import ghidra.util.HelpLocation;
 
 /**
- * <CODE>SelectByFlowAction</CODE> allows the user to Select Code By Flowing from
+ * {@code SelectByFlowAction} allows the user to Select Code By Flowing from
  * the current program selection or by location if there is no selection.<BR>
  * Base class for actions in SelectByFlowPlugin.
  */

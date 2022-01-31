@@ -31,7 +31,7 @@ import ghidra.program.model.mem.Memory;
 import ghidra.program.model.scalar.Scalar;
 
 /**
- * <code>AndroidElfRelocationOffset</code> provides a dynamic LEB128 relocation 
+ * {@code AndroidElfRelocationOffset} provides a dynamic LEB128 relocation
  * offset adjustment component for packed Android ELF Relocation Table groups.
  * See {@link AndroidElfRelocationGroup}.  The offset adjustment provided
  * by the LEB128 memory data is added to the associated baseOffset to obtain
@@ -54,7 +54,7 @@ class AndroidElfRelocationOffset extends AbstractLeb128DataType {
 	 * @param relocationOffset the actual relocation offset value assciated with this
 	 * instance (used by {@link #getValue(MemBuffer, Settings, int)} and 
 	 * returned by {@link #getRelocationOffset()}.  This value should equals 
-	 * <code>baseOffset</code> plus decoded value of sleb128 data.
+	 * {@code baseOffset} plus decoded value of sleb128 data.
 	 */
 	AndroidElfRelocationOffset(DataTypeManager dtm, long baseOffset, long relocationOffset) {
 		super("sleb128_offset", true, dtm);

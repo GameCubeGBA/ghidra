@@ -76,7 +76,7 @@ public class FunctionDB extends DatabaseObject implements Function {
 
 	/**
 	 * Use of stack frame to compute parameter ordinals and validate stack offsets
-	 * should not be done while <code>validateEnabled</code> is false.  This may be
+	 * should not be done while {@code validateEnabled} is false.  This may be
 	 * necessary during a language upgrade in which case a dummy compiler-spec
 	 * may be in-use.
 	 */

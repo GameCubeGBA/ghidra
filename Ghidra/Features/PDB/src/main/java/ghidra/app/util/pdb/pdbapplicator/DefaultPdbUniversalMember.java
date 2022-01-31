@@ -22,7 +22,7 @@ import ghidra.program.model.data.DataType;
 import ghidra.util.exception.CancelledException;
 
 /**
- * <code>PdbMember</code> convey PDB member information used for datatype
+ * {@code PdbMember} convey PDB member information used for datatype
  * reconstruction.
  */
 public class DefaultPdbUniversalMember extends PdbMember {

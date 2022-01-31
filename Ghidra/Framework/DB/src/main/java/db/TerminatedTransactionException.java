@@ -17,7 +17,7 @@
 package db;
 
 /**
- * <code>TerminatedTransactionException</code> occurs when a database modification is
+ * {@code TerminatedTransactionException} occurs when a database modification is
  * attempted following the forced/premature termination of an open transaction.
  */
 public class TerminatedTransactionException extends RuntimeException {

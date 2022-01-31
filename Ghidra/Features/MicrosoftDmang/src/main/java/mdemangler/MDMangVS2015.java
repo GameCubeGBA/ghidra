@@ -23,7 +23,7 @@ import mdemangler.object.*;
 import mdemangler.template.MDTemplateArgumentsList;
 
 /**
- * An <b><code>MDMang</code></b> extension that tailors output to Visual Studio 2015 output
+ * An <b>{@code MDMang}</b> extension that tailors output to Visual Studio 2015 output
  *  results.
  */
 public class MDMangVS2015 extends MDMang {

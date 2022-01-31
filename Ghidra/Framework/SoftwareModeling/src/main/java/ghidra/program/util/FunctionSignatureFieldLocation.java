@@ -22,7 +22,7 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
 
 /**
- * The <CODE>FunctionSignatureFieldLocation</CODE> class provides specific information
+ * The {@code FunctionSignatureFieldLocation} class provides specific information
  * about the Function Signature field within a program location.
  */
 

@@ -107,8 +107,8 @@ public class FrameDescriptionEntry extends GccAnalysisClass {
 
 	/**
 	 * Constructor for a frame descriptor entry.
-	 * <br>Note: The <code>create(Address)</code> method must be called after constructing a 
-	 * <code>FrameDescriptionEntry</code> to associate it with an address before any of its 
+	 * <br>Note: The {@code create(Address)} method must be called after constructing a
+	 * {@code FrameDescriptionEntry} to associate it with an address before any of its
 	 * "get..." methods are called.
 	 * 
 	 * @param monitor a status monitor for tracking progress and allowing cancelling when creating

@@ -61,7 +61,7 @@ import utility.function.Callback;
  * <u>Filter Reminder</u><br>
  * The filter text will flash as the table (by default) gains focus.  This is done to remind the
  * user that the data has been filtered.  To change the component that triggers the flashing use
- * {@link #setFocusComponent(Component)}, where the <code>Component</code> parameter is the
+ * {@link #setFocusComponent(Component)}, where the {@code Component} parameter is the
  * component that will trigger focus flashing when it gains focus.  To disable focus flashing,
  * pass in null to {@link #setFocusComponent(Component)}.
  * <p>
@@ -910,7 +910,7 @@ public class GTableFilterPanel<ROW_OBJECT> extends JPanel {
 	 * multiple instances created in the same place will cause them all to share the same key and
 	 * thus to have the same filter settings when they are created initially.
 	 * <p>
-	 * As an example, consider a plugin that creates <code>n</code> providers.  If each provider uses
+	 * As an example, consider a plugin that creates {@code n} providers.  If each provider uses
 	 * a filter panel, then each provider will share the same filter settings when that provider
 	 * is created.  If this is not what you want, then you need to override this method to
 	 * generate a unique key for each provider.

@@ -19,7 +19,7 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
 
 /**
- * The <CODE>FunctionThunkFieldLocation</CODE> class provides specific information
+ * The {@code FunctionThunkFieldLocation} class provides specific information
  * about the Function Thunk field within a program location.
  */
 public class FunctionThunkFieldLocation extends FunctionSignatureFieldLocation {

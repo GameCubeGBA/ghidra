@@ -264,7 +264,7 @@ public class BadgedIcon implements Icon {
 	/**
 	 * Set the 'enabled' appearance of the entire icon.
 	 * Preserves the underlying enablement state of badges, though the entire icon
-	 * looks disabled if <code>setEnabled(true)</code> is called.
+	 * looks disabled if {@code setEnabled(true)} is called.
 	 * @param enabled
 	 */
 	public void setEnabled(boolean enabled) {

@@ -29,7 +29,7 @@ import ghidra.util.exception.*;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>DBHandle</code> provides access to an open database.
+ * {@code DBHandle} provides access to an open database.
  */
 public class DBHandle {
 

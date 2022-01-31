@@ -20,7 +20,7 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressIterator;
 
 /**
- * <CODE>MultiAddressIterator</CODE> is a class for iterating through multiple
+ * {@code MultiAddressIterator} is a class for iterating through multiple
  * address iterators simultaneously. The next() method returns the next address
  * as determined from all the iterators.
  */

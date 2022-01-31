@@ -36,7 +36,7 @@ import ghidra.util.task.TaskMonitor;
 import resources.ResourceManager;
 
 /**
- * <code>DataTypeArchiveContentHandler</code> converts between DataTypeArchive instantiations
+ * {@code DataTypeArchiveContentHandler} converts between DataTypeArchive instantiations
  * and FolderItem storage.  This class also produces the appropriate Icon for 
  * DataTypeArchive files.
  */

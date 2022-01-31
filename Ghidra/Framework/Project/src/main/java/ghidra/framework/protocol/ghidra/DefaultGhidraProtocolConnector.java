@@ -24,7 +24,7 @@ import ghidra.framework.client.NotConnectedException;
 import ghidra.util.Msg;
 
 /**
- * <code>DefaultGhidraProtocolConnector</code> provides support for the
+ * {@code DefaultGhidraProtocolConnector} provides support for the
  * Ghidra URL protocol without extension for accessing the legacy Ghidra Server 
  * over an RMI interface.
  */

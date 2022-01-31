@@ -18,7 +18,7 @@ package db.buffers;
 import ghidra.util.BigEndianDataConverter;
 
 /**
- * <code>BufferFileBlock</code> is used to hold BufferFile blocks 
+ * {@code BufferFileBlock} is used to hold BufferFile blocks
  * for use during block streaming operations.
  * <p>  
  * Block indexes are absolute where 0 corresponds

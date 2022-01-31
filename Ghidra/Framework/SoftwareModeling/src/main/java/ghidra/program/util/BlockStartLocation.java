@@ -22,7 +22,7 @@ import ghidra.program.model.listing.CodeUnit;
 import ghidra.program.model.listing.Program;
 
 /**
- * <CODE>BlockStartLocation</CODE> provides information about the location 
+ * {@code BlockStartLocation} provides information about the location
  * (within a program) of an object that represents the start of a memory block.
  */
 public class BlockStartLocation extends CommentFieldLocation {

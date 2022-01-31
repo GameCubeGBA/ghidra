@@ -42,7 +42,7 @@ public class InputWithChoicesDialog extends DialogComponentProvider {
 	 * can check the value of {@link #isCanceled()} to know whether or not
 	 * the user canceled the operation. To get the user selected value use the
 	 * {@link #getValue()} value(s) entered by the user.  If the user cancelled the operation, then
-	 * null will be returned from <code>getValue()</code>.
+	 * null will be returned from {@code getValue()}.
 	 * <P>
 	 *
 	 * @param dialogTitle used as the name of the dialog's title bar
@@ -72,7 +72,7 @@ public class InputWithChoicesDialog extends DialogComponentProvider {
 	 * can check the value of {@link #isCanceled()} to know whether or not
 	 * the user canceled the operation. To get the user selected value use the
 	 * {@link #getValue()} value(s) entered by the user.  If the user cancelled the operation, then
-	 * null will be returned from <code>getValue()</code>.
+	 * null will be returned from {@code getValue()}.
 	 * <P>
 	 *
 	 * @param dialogTitle used as the name of the dialog's title bar

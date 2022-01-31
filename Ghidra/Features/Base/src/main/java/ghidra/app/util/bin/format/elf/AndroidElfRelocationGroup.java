@@ -29,7 +29,7 @@ import ghidra.program.model.mem.WrappedMemBuffer;
 import ghidra.program.model.scalar.Scalar;
 
 /**
- * <code>AndroidElfRelocationGroup</code> provides a dynamic substructure 
+ * {@code AndroidElfRelocationGroup} provides a dynamic substructure
  * component for relocation groups within a packed Android ELF Relocation Table.
  * See {@link AndroidElfRelocationTableDataType}.
  */

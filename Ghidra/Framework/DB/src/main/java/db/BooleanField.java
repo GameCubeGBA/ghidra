@@ -20,7 +20,7 @@ import java.io.IOException;
 import db.buffers.DataBuffer;
 
 /**
- * <code>BooleanField</code> provides a wrapper for boolean data which is read or
+ * {@code BooleanField} provides a wrapper for boolean data which is read or
  * written to a Record. 
  */
 public final class BooleanField extends PrimitiveField {

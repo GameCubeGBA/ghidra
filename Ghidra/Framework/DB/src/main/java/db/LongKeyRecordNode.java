@@ -23,7 +23,7 @@ import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>LongKeyRecordNode</code> is an abstract implementation of a BTree leaf node
+ * {@code LongKeyRecordNode} is an abstract implementation of a BTree leaf node
  * which utilizes long key values and stores records.
  * <p>
  * This type of node has the following partial layout within a single DataBuffer

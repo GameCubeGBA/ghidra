@@ -87,7 +87,7 @@ import resources.ResourceManager;
  * 	<tr><td>{@link JList}</td><td>{@link GList}</td></tr>
  * 	<tr><td>{@link ListCellRenderer}<br>{@link DefaultListCellRenderer}</td><td>{@link GListCellRenderer}</td></tr>
  * 	<tr><td>{@link TableCellRenderer}</td><td>{@link GTableCellRenderer}</td></tr>
- * 	<tr><td>{@link TreeCellRenderer}<br>{@link DefaultTreeCellRenderer}</td><td>{@link GTreeRenderer}<br><code>DnDTreeCellRenderer</code></td></tr>
+ * 	<tr><td>{@link TreeCellRenderer}<br>{@link DefaultTreeCellRenderer}</td><td>{@link GTreeRenderer}<br>{@code DnDTreeCellRenderer}</td></tr>
  * 	<tr><td>{@link JRadioButton}</td><td>{@link GRadioButton}</td></tr>
  * 	<tr><td>{@link JButton}</td><td>???tbd???</td></tr>
  * </table>
@@ -148,7 +148,7 @@ public class DockingUtils {
 
 	/**
 	 * Checks if the mouseEvent has the "control" key down.  On windows, this is actually
-	 * the <code>control</code> key.  On Mac, it is the <code>command</code> key.
+	 * the {@code control} key.  On Mac, it is the <code>command</code> key.
 	 * 
 	 * @param mouseEvent the event to check 
 	 * @return true if the control key is pressed
@@ -161,7 +161,7 @@ public class DockingUtils {
 
 	/**
 	 * Checks if the mouseEvent has the "control" key down.  On windows, this is actually
-	 * the <code>control</code> key.  On Mac, it is the <code>command</code> key.
+	 * the {@code control} key.  On Mac, it is the <code>command</code> key.
 	 * 
 	 * @param keyEvent the event to check 
 	 * @return true if the control key is pressed
@@ -308,16 +308,16 @@ public class DockingUtils {
 	 * <p>
 	 * <u>Notes</u>
 	 * Historically, to make a component transparent you would call 
-	 * {@link JComponent#setOpaque(boolean)} with a <code>false</code> value.  However, it turns out
-	 * that the definition and the implementation of this method are at odds.  <code>setOpaque(false)</code>
+	 * {@link JComponent#setOpaque(boolean)} with a {@code false} value.  However, it turns out
+	 * that the definition and the implementation of this method are at odds.  {@code setOpaque(false)}
 	 * is meant to signal that some part of the component is transparent, so the parent component
 	 * needs to be painted.  Most LaFs implemented this by not painting the background of the
 	 * component, but used the parent's color instead.  The Nimbus LaF actually honors the 
-	 * contract of <code>setOpaque()</code>, which has the effect of painting the components 
+	 * contract of {@code setOpaque()}, which has the effect of painting the components
 	 * background by default.
 	 * <p>
 	 * This method allows components to achieve transparency when they used to 
-	 * rely on <code>setOpaque(false)</code>.
+	 * rely on {@code setOpaque(false)}.
 	 * 
 	 * @param c the component to be made transparent
 	 */

@@ -316,7 +316,7 @@ public class StringUtilities {
 	}
 
 	/**
-	 * Returns true if the given string starts with <code>prefix</code> ignoring case.
+	 * Returns true if the given string starts with {@code prefix} ignoring case.
 	 * <p>
 	 * Note: This method is equivalent to calling:
 	 * 
@@ -326,7 +326,7 @@ public class StringUtilities {
 	 *
 	 * @param string the string which may contain the prefix
 	 * @param prefix the prefix to test against
-	 * @return true if the given string starts with <code>prefix</code> ignoring case.
+	 * @return true if the given string starts with {@code prefix} ignoring case.
 	 */
 	public static boolean startsWithIgnoreCase(String string, String prefix) {
 		if ((string == null) || (prefix == null)) {
@@ -336,7 +336,7 @@ public class StringUtilities {
 	}
 
 	/**
-	 * Returns true if the given string ends with <code>postfix</code>, ignoring case.
+	 * Returns true if the given string ends with {@code postfix}, ignoring case.
 	 * <p>
 	 * Note: This method is equivalent to calling:
 	 * 
@@ -345,9 +345,9 @@ public class StringUtilities {
 	 * string.regionMatches(true, startOffset, postfix, 0, postfix.length());
 	 * </pre>
 	 *
-	 * @param string the string which may end with <code>postfix</code>
+	 * @param string the string which may end with {@code postfix}
 	 * @param postfix the string for which to test existence
-	 * @return true if the given string ends with <code>postfix</code>, ignoring case.
+	 * @return true if the given string ends with {@code postfix}, ignoring case.
 	 */
 	public static boolean endsWithIgnoreCase(String string, String postfix) {
 		if ((string == null) || (postfix == null)) {
@@ -358,11 +358,11 @@ public class StringUtilities {
 	}
 
 	/**
-	 * Returns true if all the given <code>searches</code> are contained in the given string.
+	 * Returns true if all the given {@code searches} are contained in the given string.
 	 *
 	 * @param toSearch the string to search
 	 * @param searches the strings to find
-	 * @return true if all the given <code>searches</code> are contained in the given string.
+	 * @return true if all the given {@code searches} are contained in the given string.
 	 */
 	public static boolean containsAll(CharSequence toSearch, CharSequence... searches) {
 		if (StringUtils.isEmpty(toSearch) || ArrayUtils.isEmpty(searches)) {
@@ -378,12 +378,12 @@ public class StringUtilities {
 	}
 
 	/**
-	 * Returns true if all the given <code>searches</code> are contained in the given string,
+	 * Returns true if all the given {@code searches} are contained in the given string,
 	 * ignoring case.
 	 *
 	 * @param toSearch the string to search
 	 * @param searches the strings to find
-	 * @return true if all the given <code>searches</code> are contained in the given string.
+	 * @return true if all the given {@code searches} are contained in the given string.
 	 */
 	public static boolean containsAllIgnoreCase(CharSequence toSearch, CharSequence... searches) {
 		if (StringUtils.isEmpty(toSearch)) {
@@ -399,12 +399,12 @@ public class StringUtilities {
 	}
 
 	/**
-	 * Returns true if any of the given <code>searches</code> are contained in the given string,
+	 * Returns true if any of the given {@code searches} are contained in the given string,
 	 * ignoring case.
 	 *
 	 * @param toSearch the string to search
 	 * @param searches the strings to find
-	 * @return true if any of the given <code>searches</code> are contained in the given string.
+	 * @return true if any of the given {@code searches} are contained in the given string.
 	 */
 	public static boolean containsAnyIgnoreCase(CharSequence toSearch, CharSequence... searches) {
 		if (StringUtils.isEmpty(toSearch)) {
@@ -606,10 +606,10 @@ public class StringUtilities {
 	}
 
 	/**
-	 * Splits the given string into lines using <code>\n</code> and then pads each string with the
+	 * Splits the given string into lines using {@code \n} and then pads each string with the
 	 * given pad string. Finally, the updated lines are formed into a single string.
 	 * <p>
-	 * This is useful for constructing complicated <code>toString()</code> representations.
+	 * This is useful for constructing complicated {@code toString()} representations.
 	 *
 	 * @param s the input string
 	 * @param indent the indent string; this will be appended as needed
@@ -849,18 +849,18 @@ public class StringUtilities {
 	}
 
 	/**
-	 * Limits the given string to the given <code>max</code> number of characters. If the string is
+	 * Limits the given string to the given {@code max} number of characters. If the string is
 	 * larger than the given length, then it will be trimmed to fit that length <b>after adding
 	 * ellipses</b>
 	 *
 	 * <p>
-	 * The given <code>max</code> value must be at least 4. This is to ensure that, at a minimum, we
+	 * The given {@code max} value must be at least 4. This is to ensure that, at a minimum, we
 	 * can display the {@value #ELLIPSES} plus one character.
 	 *
 	 * @param original The string to be limited
 	 * @param max The maximum number of characters to display (including ellipses, if trimmed).
 	 * @return the trimmed string
-	 * @throws IllegalArgumentException If the given <code>max</code> value is less than 5.
+	 * @throws IllegalArgumentException If the given {@code max} value is less than 5.
 	 */
 	public static String trim(String original, int max) {
 		int minimum = ELLIPSES.length() + 1; // +1 for at least one char
@@ -883,7 +883,7 @@ public class StringUtilities {
 	}
 
 	/**
-	 * Trims the given string the <code>max</code> number of characters. Ellipses will be added to
+	 * Trims the given string the {@code max} number of characters. Ellipses will be added to
 	 * signal that content was removed. Thus, the actual number of removed characters will be
 	 * <code>(s.length() - max) + {@value StringUtilities#ELLIPSES}</code> length.
 	 *
@@ -891,7 +891,7 @@ public class StringUtilities {
 	 * If the string fits within the max, then the string will be returned.
 	 *
 	 * <p>
-	 * The given <code>max</code> value must be at least 5. This is to ensure that, at a minimum, we
+	 * The given {@code max} value must be at least 5. This is to ensure that, at a minimum, we
 	 * can display the {@value #ELLIPSES} plus one character from the front and back of the string.
 	 *
 	 * @param s the string to trim

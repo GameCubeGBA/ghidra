@@ -162,7 +162,7 @@ public interface Program extends DataTypeManagerDomainObject {
 
 	/**
 	 * Gets the path to the program's executable file.
-	 * For example, <code>C:\Temp\test.exe</code>.
+	 * For example, {@code C:\Temp\test.exe}.
 	 * This will allow plugins to execute the program.
 	 *
 	 * @return String  path to program's exe file
@@ -171,7 +171,7 @@ public interface Program extends DataTypeManagerDomainObject {
 
 	/**
 	 * Sets the path to the program's executable file.
-	 * For example, <code>C:\Temp\test.exe</code>.
+	 * For example, {@code C:\Temp\test.exe}.
 	 *
 	 * @param path  the path to the program's exe
 	 */

@@ -33,7 +33,7 @@ import ghidra.util.*;
 import ghidra.util.exception.AssertException;
 
 /**
- * A default table cell renderer that relies on the <code>toString()</code> method
+ * A default table cell renderer that relies on the {@code toString()} method
  * when rendering the cells of the table.
  */
 public class GTableCellRenderer extends AbstractGCellRenderer implements TableCellRenderer {
@@ -80,7 +80,7 @@ public class GTableCellRenderer extends AbstractGCellRenderer implements TableCe
 	 * column data via a GTableCellRenderingData object, and defers painting to
 	 * {@link #getTableCellRendererComponent(GTableCellRenderingData)}.
 	 * <p>
-	 * This is marked <code>final</code> to redirect subclasses to the enhanced method,
+	 * This is marked {@code final} to redirect subclasses to the enhanced method,
 	 * {@link #getTableCellRendererComponent(GTableCellRenderingData)}.
 	 * <p>
 	 * Throws an AssertException if the table this renderer is used with is not a

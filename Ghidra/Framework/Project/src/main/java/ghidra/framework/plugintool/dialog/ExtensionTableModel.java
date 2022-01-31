@@ -48,7 +48,7 @@ import utilities.util.FileUtilities;
  * 		- Archive directory (hidden)
  * </pre>
  * <p>
- * All columns are for display purposes only, except for the <code>installed</code> column, which 
+ * All columns are for display purposes only, except for the {@code installed} column, which
  * is a checkbox allowing users to install/uninstall a particular extension. 
  * 
  */

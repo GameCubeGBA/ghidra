@@ -19,7 +19,7 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
 
 /**
- * The <CODE>IndentFieldLocation</CODE> class contains specific location information
+ * The {@code IndentFieldLocation} class contains specific location information
  * within the indent field of a CodeUnitLocation object.
  */
 public class IndentFieldLocation extends CodeUnitLocation {

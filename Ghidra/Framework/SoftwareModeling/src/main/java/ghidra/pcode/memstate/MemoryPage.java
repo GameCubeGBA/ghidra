@@ -18,7 +18,7 @@ package ghidra.pcode.memstate;
 import java.util.Arrays;
 
 /**
- * <code>MemoryPage</code> is allows the contents/data of a memory page
+ * {@code MemoryPage} is allows the contents/data of a memory page
  * to be maintained along with an initializedMask.  Each bit within the
  * initializedMask corresponds to a data byte within the page.  A null
  * mask indicates that all data within the page is initialized.  A one-bit

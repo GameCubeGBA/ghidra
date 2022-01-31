@@ -16,7 +16,7 @@
 package ghidra.program.util;
 
 /**
- * The <CODE>ProgramDiffFilter</CODE> is used when determining or working with
+ * The {@code ProgramDiffFilter} is used when determining or working with
  * differences between two programs.
  * It indicates the types of program differences we are interested in.
  * Each difference type can be set to true, indicating interest in
@@ -103,7 +103,7 @@ public class ProgramDiffFilter {
 									  | PROGRAM_CONTEXT_DIFFS;
 	//@formatter:on
 
-    /** <CODE>filterFlags</CODE> holds the actual indicators for each
+    /** {@code filterFlags} holds the actual indicators for each
      *  difference type as a bit setting.
      */
     private int filterFlags = 0;
@@ -202,8 +202,8 @@ public class ProgramDiffFilter {
         return pt;
     }
 
-    /** <CODE>typeToName()</CODE> returns the name of the difference type.
-     *  Only predefined types, as specified in <CODE>ProgramDiffFilter</CODE>,
+    /** {@code typeToName()} returns the name of the difference type.
+     *  Only predefined types, as specified in {@code ProgramDiffFilter},
      *  will return a name. Otherwise, an empty string is returned.
      * @param type the type of difference whose name is wanted.
      * @return the name of the predefined difference type. Otherwise, the empty string.

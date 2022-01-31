@@ -35,8 +35,8 @@ import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * A class to represent the <code>IMAGE_EXPORT_DIRECTORY</code>
- * data structure defined in <b><code>winnt.h</code></b>.
+ * A class to represent the {@code IMAGE_EXPORT_DIRECTORY}
+ * data structure defined in <b>{@code winnt.h}</b>.
  * <pre>
  * typedef struct _IMAGE_EXPORT_DIRECTORY {
  *     DWORD   Characteristics;
@@ -56,7 +56,7 @@ import ghidra.util.task.TaskMonitor;
 public class ExportDataDirectory extends DataDirectory {
 	private final static String NAME = "IMAGE_DIRECTORY_ENTRY_EXPORT";
 	/**
-	 * The size of the <code>IMAGE_EXPORT_DIRECTORY</code> in bytes.
+	 * The size of the {@code IMAGE_EXPORT_DIRECTORY} in bytes.
 	 */
 	public final static int IMAGE_SIZEOF_EXPORT_DIRECTORY = 40;
 

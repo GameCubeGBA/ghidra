@@ -23,8 +23,8 @@ import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <CODE>MultEntSubIterator</CODE> is an implementation of
- * <CODE>CodeBlockIterator</CODE> capable of iterating in
+ * {@code MultEntSubIterator} is an implementation of
+ * {@code CodeBlockIterator} capable of iterating in
  * the forward direction over subroutine code blocks.
  * The iterator supports subroutine models which allow one or
  * more called/source entry points within a subroutine and do not

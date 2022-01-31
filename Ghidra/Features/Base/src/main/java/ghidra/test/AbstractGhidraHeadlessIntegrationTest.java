@@ -138,7 +138,7 @@ public abstract class AbstractGhidraHeadlessIntegrationTest extends AbstractDock
 	/**
 	 * Creates an in-memory program with the given language
 	 * @param name the program name
-	 * @param languageString a language string of the format <code>x86:LE:32:default</code>
+	 * @param languageString a language string of the format {@code x86:LE:32:default}
 	 * @param consumer a consumer for the program
 	 * @return a new program
 	 * @throws Exception if there is any issue creating the language
@@ -155,7 +155,7 @@ public abstract class AbstractGhidraHeadlessIntegrationTest extends AbstractDock
 	/**
 	 * Creates an in-memory program with the given language
 	 * @param name the program name
-	 * @param languageString a language string of the format <code>x86:LE:32:default</code>
+	 * @param languageString a language string of the format {@code x86:LE:32:default}
 	 * @param compilerSpecID the ID
 	 * @param consumer a consumer for the program
 	 * @return a new program

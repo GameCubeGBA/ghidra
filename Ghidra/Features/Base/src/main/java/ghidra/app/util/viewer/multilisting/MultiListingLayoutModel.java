@@ -171,7 +171,7 @@ public class MultiListingLayoutModel implements ListingModelListener, FormatMode
 		 * @param after true to find the address after the given address; false to find the 
 		 * 		  address before the given address
 		 * @return the next address in the given direction; null if there is no next address or if
-		 *         <code>address</code> is null
+		 *         {@code address} is null
 		 */
 		private Address getNextAddress(Address address, boolean after) {
 			Address nextAddress = null; // Next address for this model

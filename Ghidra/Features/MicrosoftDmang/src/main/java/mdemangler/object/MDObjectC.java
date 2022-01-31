@@ -20,7 +20,7 @@ import mdemangler.MDMang;
 import mdemangler.naming.MDFragmentName;
 
 /**
- * This class represents a derivative of an <b><code>MDObject</code></b> which is a C object
+ * This class represents a derivative of an <b>{@code MDObject}</b> which is a C object
  *  (vs. a C++ object).
  */
 public class MDObjectC extends MDObject {

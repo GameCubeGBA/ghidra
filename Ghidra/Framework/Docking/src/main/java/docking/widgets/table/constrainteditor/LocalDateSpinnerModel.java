@@ -38,9 +38,9 @@ public class LocalDateSpinnerModel extends AbstractSpinnerModel {
 	 * @param maxDate maximum value for spinner model. (Can be null)
 	 * @param calendarField specifies the year, month, or day to increment/decrement. One of:
 	 *  <ul>
-	 *    <li><code>Calendar.YEAR</code>
-	 *    <li><code>Calendar.MONTH</code>
-	 *    <li><code>Calendar.DAY_OF_MONTH</code>
+	 *    <li>{@code Calendar.YEAR}
+	 *    <li>{@code Calendar.MONTH}
+	 *    <li>{@code Calendar.DAY_OF_MONTH}
 	 *  </ul>
 	 * <p>
 	 */
@@ -128,9 +128,9 @@ public class LocalDateSpinnerModel extends AbstractSpinnerModel {
 	 *
 	 * @param calendarField one of
 	 *  <ul>
-	 *    <li><code>Calendar.YEAR</code>
-	 *    <li><code>Calendar.MONTH</code>
-	 *    <li><code>Calendar.DAY_OF_MONTH</code>
+	 *    <li>{@code Calendar.YEAR}
+	 *    <li>{@code Calendar.MONTH}
+	 *    <li>{@code Calendar.DAY_OF_MONTH}
 	 *  </ul>
 	 * <p>
 	 *

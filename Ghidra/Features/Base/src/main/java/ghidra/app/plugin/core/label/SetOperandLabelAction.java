@@ -27,7 +27,7 @@ import ghidra.app.context.ListingContextAction;
 import ghidra.program.util.OperandFieldLocation;
 
 /**
- * <CODE>AddLabelAction</CODE> allows the user to add a label.
+ * {@code AddLabelAction} allows the user to add a label.
  */
 class SetOperandLabelAction extends ListingContextAction {
 	private LabelMgrPlugin plugin;

@@ -25,7 +25,7 @@ import ghidra.program.model.listing.CodeUnit;
 import ghidra.program.model.listing.Program;
 
 /**
- * The <CODE>CommentFieldLocation</CODE> class contains specific location information
+ * The {@code CommentFieldLocation} class contains specific location information
  * within the COMMENTS field of a CodeUnitLocation object.
  */
 public class CommentFieldLocation extends CodeUnitLocation {
@@ -47,7 +47,7 @@ public class CommentFieldLocation extends CodeUnitLocation {
 	 * @param row       The index of the string that contains the exact location.
 	 * @param charOffset       The position within the string that specifies the exact location.
 	 * @exception IllegalArgumentException
-	 *                      Thrown if type is not one of the comment values given in <CODE>CodeUnit</CODE>
+	 *                      Thrown if type is not one of the comment values given in {@code CodeUnit}
 	 */
 	public CommentFieldLocation(Program program, Address addr, int[] componentPath,
 			String[] comment, int type, int row, int charOffset) {

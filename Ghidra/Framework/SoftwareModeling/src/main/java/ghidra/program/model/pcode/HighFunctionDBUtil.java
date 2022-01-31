@@ -28,7 +28,7 @@ import ghidra.util.Msg;
 import ghidra.util.exception.*;
 
 /**
- * <code>HighFunctionDBUtil</code> provides various methods for updating the state of a
+ * {@code HighFunctionDBUtil} provides various methods for updating the state of a
  * function contained within a program database.  It is important to note that the decompiler
  * result state (e.g., HighFunction, HighParam, HighLocal, etc.) is not altered by any of
  * these methods.  A new decompiler result will need to be generated to reflect any

@@ -50,7 +50,7 @@ public class LSDACallSiteRecord extends GccAnalysisClass {
 
 	/**
 	 * Constructor for a call site record.
-	 * <br>Note: The <code>create(Address)</code> method must be called after constructing an 
+	 * <br>Note: The {@code create(Address)} method must be called after constructing an
 	 * LSDACallSiteRecord to associate it with an address before any of its "get..." methods are 
 	 * called.
 	 * @param monitor task monitor to see if the user has cancelled analysis.
@@ -199,7 +199,7 @@ public class LSDACallSiteRecord extends GccAnalysisClass {
 	}
 
 	/**
-	 * Get the call site addresses which make up the <code>try</code>.
+	 * Get the call site addresses which make up the {@code try}.
 	 * @return the address range of the call site
 	 */
 	public AddressRange getCallSite() {
@@ -211,7 +211,7 @@ public class LSDACallSiteRecord extends GccAnalysisClass {
 	}
 
 	/**
-	 * Get the landing pad address which indicates the <code>catch</code> for this call site.
+	 * Get the landing pad address which indicates the {@code catch} for this call site.
 	 * @return the landing pad address of the catch.
 	 */
 	public Address getLandingPad() {

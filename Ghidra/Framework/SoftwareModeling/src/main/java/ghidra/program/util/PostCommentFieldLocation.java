@@ -20,7 +20,7 @@ import ghidra.program.model.listing.CodeUnit;
 import ghidra.program.model.listing.Program;
 
 /**
- * The <CODE>EolCommentFieldLocation</CODE> class contains specific location information
+ * The {@code EolCommentFieldLocation} class contains specific location information
  * within the EOL comment field of a CodeUnitLocation object.
  */
 public class PostCommentFieldLocation extends CommentFieldLocation {

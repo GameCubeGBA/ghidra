@@ -659,7 +659,7 @@ public abstract class AbstractActionBuilder<T extends DockingActionIf, C extends
 	 *     return ((FooContext) context).isAwesome();
 	 * });
 	 * </pre>
-	 * But by first calling the builder method <CODE>withContext(FooContext.class)</CODE>, you can 
+	 * But by first calling the builder method {@code withContext(FooContext.class)}, you can
 	 * simply write:
 	 *
 	 * <pre>

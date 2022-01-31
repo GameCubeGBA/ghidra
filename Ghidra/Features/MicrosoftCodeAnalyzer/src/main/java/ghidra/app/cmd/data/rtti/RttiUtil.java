@@ -54,8 +54,8 @@ public class RttiUtil {
 	}
 
 	/**
-	 * Function that will create a symbol based on the <code>rttiSuffix</code>, which is in the 
-	 * class or namespace that is indicated by the <code>demangledType</code> string.
+	 * Function that will create a symbol based on the {@code rttiSuffix}, which is in the
+	 * class or namespace that is indicated by the {@code demangledType} string.
 	 * 
 	 * @param program the program where the symbol is being created
 	 * @param rttiAddress Address of the RTTI datatype 

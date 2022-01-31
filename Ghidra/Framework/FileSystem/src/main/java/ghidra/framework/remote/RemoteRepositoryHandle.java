@@ -24,7 +24,7 @@ import ghidra.framework.store.*;
 import ghidra.util.InvalidNameException;
 
 /**
- * <code>RepositoryHandle</code> provides access to a remote repository via RMI.
+ * {@code RepositoryHandle} provides access to a remote repository via RMI.
  * <p>
  * Methods from {@link RepositoryHandle} <b>must</b> be re-declared here
  * so they may be properly marshalled for remote invocation via RMI.  

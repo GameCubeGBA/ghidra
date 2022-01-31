@@ -65,7 +65,7 @@ public class StringTable {
 	}
 
 	/**
-	 * Returns the string found at <code>offset</code>, or throws an {@link IOException}
+	 * Returns the string found at {@code offset}, or throws an {@link IOException}
 	 * if the offset is out of bounds.
 	 *
 	 * @param offset

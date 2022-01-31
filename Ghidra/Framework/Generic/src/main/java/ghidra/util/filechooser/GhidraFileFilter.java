@@ -44,7 +44,7 @@ public interface GhidraFileFilter {
      * @param  pathname  The abstract pathname to be tested
      * @param  model     The underlying file chooser model
      * 
-     * @return  <code>true</code> if and only if <code>pathname</code>
+     * @return  {@code true} if and only if <code>pathname</code>
      *          should be included
      */
     boolean accept(File pathname, GhidraFileChooserModel model);

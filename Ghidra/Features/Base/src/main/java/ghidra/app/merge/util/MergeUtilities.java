@@ -20,7 +20,7 @@ import ghidra.program.model.address.AddressSet;
 import ghidra.program.model.address.AddressSetView;
 
 /**
- * <code>MergeUtilities</code> provides generic static methods for use by the 
+ * {@code MergeUtilities} provides generic static methods for use by the
  * multi-user program merge managers.
  */
 public class MergeUtilities {

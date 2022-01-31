@@ -24,7 +24,7 @@ import ghidra.program.model.data.*;
 import ghidra.util.*;
 
 /**
- * <code>MIPS_Elf64Relocation</code> provides a MIPS-64 extension implementation
+ * {@code MIPS_Elf64Relocation} provides a MIPS-64 extension implementation
  * for {@link ElfRelocation} which supports the modified ELF-64 relocation entry format
  * utilized.
  */

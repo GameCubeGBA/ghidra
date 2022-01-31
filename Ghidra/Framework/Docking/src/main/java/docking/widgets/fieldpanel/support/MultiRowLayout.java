@@ -302,7 +302,7 @@ public class MultiRowLayout implements Layout {
 	}
 
 	/**
-	  * <CODE>synchronize</CODE> adjusts this layout and the layout passed as a
+	  * {@code synchronize} adjusts this layout and the layout passed as a
 	  * parameter by adding and resizing rows as necessary to make their
 	  * vertical layouts match.
 	  *

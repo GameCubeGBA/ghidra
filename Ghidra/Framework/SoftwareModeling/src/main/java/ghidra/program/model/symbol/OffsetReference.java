@@ -19,7 +19,7 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.mem.MemoryBlock;
 
 /**
- * <code>OffsetReference</code> is a memory reference whose "to" address is
+ * {@code OffsetReference} is a memory reference whose "to" address is
  * computed from a base address plus an offset.
  * <p>
  * NOTE: References into the reserved EXTERNAL block must report {@link #getToAddress()}

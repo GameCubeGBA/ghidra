@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * <code>SynchronizedTransaction</code> represents an atomic undoable operation performed
+ * {@code SynchronizedTransaction} represents an atomic undoable operation performed
  * on a synchronized set of domain objects.
  */
 class SynchronizedTransaction implements Transaction {

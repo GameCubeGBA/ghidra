@@ -26,7 +26,7 @@ import ghidra.program.model.symbol.*;
 import ghidra.util.SystemUtilities;
 
 /**
- * <code>AddressBasedLocation</code> provides the ability to render and compare
+ * {@code AddressBasedLocation} provides the ability to render and compare
  * addresses (e.g., location table column). This may be necessary when working a
  * mixture of address types (e.g., memory, stack, register, variable, external)
  * with the need to render in a meaningful way. Generally, only memory addresses

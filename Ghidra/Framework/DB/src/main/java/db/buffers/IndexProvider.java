@@ -20,7 +20,7 @@ import java.util.Stack;
 
 
 /**
- * <code>IndexProvider</code> maintains the free index list associated
+ * {@code IndexProvider} maintains the free index list associated
  * with a BufferFile.  This provider will exhaust the free index list
  * before allocating new indexes.  This provider relies on the BufferFile
  * growing automatically when buffers having indexes beyond the end-of-file 

@@ -206,18 +206,18 @@ public class ModuleUtilities {
 	/**
 	 * Returns true if the given path is parented by a module root directory.
 	 * <p>
-	 * For example, given a module path of <code>/some/dir/features/cool_module/</code>, then this
+	 * For example, given a module path of {@code /some/dir/features/cool_module/}, then this
 	 * method will return true for these paths:
 	 * <br>
 	 * <br>
-	 * <code>/some/dir/features/cool_module</code><br>
-	 * <code>/some/dir/features/cool_module/some/child/dir</code>
+	 * {@code /some/dir/features/cool_module}<br>
+	 * {@code /some/dir/features/cool_module/some/child/dir}
 	 * <br>
 	 * <br>and false for these paths:
 	 * <br>
 	 * <br> 
-	 * <code>/some/random/path</code><br>
-	 * <code>/some/dir/features/</code>
+	 * {@code /some/random/path}<br>
+	 * {@code /some/dir/features/}
 	 * 
 	 * @param pathName the path name to check
 	 * @return true if the given path is parented by a module root directory.
@@ -231,18 +231,18 @@ public class ModuleUtilities {
 	 * Returns the path of the module containing the given path string, if it is parented by a 
 	 * module root directory.
 	 * <p>
-	 * For example, given a module path of <code>/some/dir/features/cool_module/</code>, then this
+	 * For example, given a module path of {@code /some/dir/features/cool_module/}, then this
 	 * method will return that module path, given these paths:
 	 * <br>
 	 * <br>
-	 * <code>/some/dir/features/cool_module</code><br>
-	 * <code>/some/dir/features/cool_module/some/child/dir</code>
+	 * {@code /some/dir/features/cool_module}<br>
+	 * {@code /some/dir/features/cool_module/some/child/dir}
 	 * <br>
 	 * <br>and null for these paths:
 	 * <br>
 	 * <br> 
-	 * <code>/some/random/path</code><br>
-	 * <code>/some/dir/features/</code>
+	 * {@code /some/random/path}<br>
+	 * {@code /some/dir/features/}
 	 * 
 	 * @param pathName the path name to check
 	 * @return the module root directory; null if the path is not in a module
@@ -274,13 +274,13 @@ public class ModuleUtilities {
 	 * here means a folder that contains a repository folder.  As an example, given a repo 
 	 * structure of:
 	 * 
-	 * <p><code>/userdir/repoRoot/repoDir/.git</code><br>
+	 * <p>{@code /userdir/repoRoot/repoDir/.git}<br>
 	 * 
 	 * <p>then this method, given will produce the following results (input -&gt; output):<br>
 	 * 
-	 * <p><code>/userdir/repoRoot/repoDir/.git -&gt; /userdir/repoRoot</code>
-	 * <br><code>/userdir/repoRoot/repoDir -&gt; /userdir/repoRoot</code>
-	 * <br><code>/userdir/repoRoot -&gt; /userdir/repoRoot</code>
+	 * <p>{@code /userdir/repoRoot/repoDir/.git -> /userdir/repoRoot}
+	 * <br>{@code /userdir/repoRoot/repoDir -> /userdir/repoRoot}
+	 * <br>{@code /userdir/repoRoot -> /userdir/repoRoot}
 	 * 
 	 * 
 	 * @param f the child file of the desired repo
@@ -314,12 +314,12 @@ public class ModuleUtilities {
 	 * Returns a file that is the repository folder containing the given file.  As an example, 
 	 * given a repo structure of:
 	 * 
-	 * <p><code>/userdir/repoRoot/repoDir/.git</code><br>
+	 * <p>{@code /userdir/repoRoot/repoDir/.git}<br>
 	 * 
 	 * <p>then this method, given will produce the following results (input -&gt; output):<br>
 	 * 
-	 * <p><code>/userdir/repoRoot/repoDir/.git -&gt; /userdir/repoRoot/repoDir</code>
-	 * <br><code>/userdir/repoRoot/repoDir -&gt; /userdir/repoRoot/repoDir</code>
+	 * <p>{@code /userdir/repoRoot/repoDir/.git -> /userdir/repoRoot/repoDir}
+	 * <br>{@code /userdir/repoRoot/repoDir -> /userdir/repoRoot/repoDir}
 	 * 
 	 * @param f the child file of the desired repo
 	 * @return a file that is the repo folder of the repository containing the given file; null

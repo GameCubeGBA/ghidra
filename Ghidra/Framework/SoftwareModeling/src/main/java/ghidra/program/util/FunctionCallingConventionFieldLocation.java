@@ -19,7 +19,7 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
 
 /**
- * The <CODE>FunctionCallingConventionFieldLocation</CODE> class provides specific information
+ * The {@code FunctionCallingConventionFieldLocation} class provides specific information
  * about the Function Calling Convention field within a program location.
  */
 public class FunctionCallingConventionFieldLocation extends FunctionSignatureFieldLocation {

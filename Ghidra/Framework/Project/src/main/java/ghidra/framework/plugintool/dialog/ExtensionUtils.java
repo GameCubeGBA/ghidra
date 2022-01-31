@@ -45,7 +45,7 @@ import utility.module.ModuleUtilities;
 /**
  * Utility class for managing Ghidra Extensions. 
  * <p>
- * Extensions are defined as any archive or folder that contains an <code>extension.properties</code>
+ * Extensions are defined as any archive or folder that contains an {@code extension.properties}
  * file. This properties file can contain the following attributes:
  * <ul>
  * <li>name (required)</li>
@@ -56,7 +56,7 @@ import utility.module.ModuleUtilities;
  * 
  *  Extensions may be installed/uninstalled by users at runtime, using the {@link ExtensionTableProvider}. 
  *  Installation consists of unzipping the extension archive to an installation folder, currently 
- *  <code>Ghidra/Extensions</code>. To uninstall, the unpacked folder is simply removed.
+ *  {@code Ghidra/Extensions}. To uninstall, the unpacked folder is simply removed.
  */
 public class ExtensionUtils {
 
@@ -454,7 +454,7 @@ public class ExtensionUtils {
 	}
 
 	/**
-	 * Returns a list of files representing all the <code>extension.properties</code> files found
+	 * Returns a list of files representing all the {@code extension.properties} files found
 	 * under a given directory. This will ONLY search the given directory and its immediate children. 
 	 * The conops are as follows:
 	 * <ul>

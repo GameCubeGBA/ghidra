@@ -23,7 +23,7 @@ import javax.security.auth.callback.Callback;
 import javax.security.auth.login.LoginException;
 
 /**
- * <code>GhidraServerHandle</code> provides access to a remote server.
+ * {@code GhidraServerHandle} provides access to a remote server.
  * This remote interface facilitates user login/authentication, providing
  * a more useful handle to the associated repository server.
  */

@@ -24,7 +24,7 @@ import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>FixedKeyInteriorNode</code> stores a BTree node for use as an interior
+ * {@code FixedKeyInteriorNode} stores a BTree node for use as an interior
  * node when searching for Table records within the database.  This type of node
  * has the following layout within a single DataBuffer (field size in bytes,
  * where 'L' is the fixed length of the fixed-length key as specified by 

@@ -23,7 +23,7 @@ import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>LanguagePostUpgradeInstructionHandler</code> provides an abstract implementation 
+ * {@code LanguagePostUpgradeInstructionHandler} provides an abstract implementation
  * of a post language-upgrade instruction modification handler.  The Simple Language Translator
  * facilitates the specification of such a handler implementation within a language 
  * translator specification file using the <i>post_upgrade_handler</i> element.

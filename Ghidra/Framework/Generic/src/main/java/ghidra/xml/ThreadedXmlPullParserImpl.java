@@ -128,7 +128,7 @@ class ThreadedXmlPullParserImpl extends AbstractXmlPullParser {
 
 	/**
 	 * Returns the value of the attribute of the processing instruction. For
-	 * example, <code>&lt;?program_dtd version="1"?&gt;</code>
+	 * example, {@code <?program_dtd version="1"?>}
 	 * 
 	 * @param piName the name of the processing instruction
 	 * @param attribute the name of the attribute

@@ -29,7 +29,7 @@ import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>ProgramContextMergeManager</code> merges register value changes 
+ * {@code ProgramContextMergeManager} merges register value changes
  * for multi-user program versions. It merges changes for each named register
  * in the program.
  * <br>Note: If a register gets changed that is part of another register that has been set, 
@@ -78,7 +78,7 @@ public class ProgramContextMergeManager implements MergeResolver, ListingMergeCo
 	ProgramMergeFilter mergeFilter;
 
 	/**
-	 * Creates a new <code>ProgramContextMergeManager</code>.
+	 * Creates a new {@code ProgramContextMergeManager}.
 	 * @param resultPgm the program to be updated with the result of the merge.
 	 * This is the program that will actually get checked in.
 	 * @param originalPgm the program that was checked out.

@@ -23,7 +23,7 @@ import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>FixedKeyRecordNode</code> is an abstract implementation of a BTree leaf node
+ * {@code FixedKeyRecordNode} is an abstract implementation of a BTree leaf node
  * which utilizes fixed-length binary key values and stores records.
  * <p>
  * This type of node has the following partial layout within a single DataBuffer 

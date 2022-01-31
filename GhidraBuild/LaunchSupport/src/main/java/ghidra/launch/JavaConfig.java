@@ -86,7 +86,7 @@ public class JavaConfig {
 
 	/**
 	 * Gets the Java configuration's supported Java architecture.  All supported Java 
-	 * configurations must have an architecture of <code>64</code>.
+	 * configurations must have an architecture of {@code 64}.
 	 * 
 	 * @return The Java configuration's supported Java architecture (64).  
 	 */

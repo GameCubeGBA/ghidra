@@ -167,7 +167,7 @@ public class VfTableModel extends AbstractCreateDataTypeModel {
 
 	/**
 	 * Gets the address of the virtual function pointed to by the vf table element at the index 
-	 * specified by <code>tableElementIndex</code>.
+	 * specified by {@code tableElementIndex}.
 	 * @param tableElementIndex index of the vf table element
 	 * @return the virtual function's address or null
 	 */

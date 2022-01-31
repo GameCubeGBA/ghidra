@@ -28,10 +28,10 @@ import java.util.TimerTask;
  * It fires one or more {@code TimerCallback}s at specified
  * intervals. 
  * Setting up a timer
- * involves creating a <code>GhidraSwinglessTimer</code> object,
+ * involves creating a {@code GhidraSwinglessTimer} object,
  * registering one or more TimerCallbacks on it,
  * and starting the timer using
- * the <code>start</code> method.
+ * the {@code start} method.
  *
  */
 public class GhidraSwinglessTimer implements GhidraTimer {

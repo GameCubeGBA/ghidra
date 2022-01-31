@@ -58,7 +58,7 @@ public final class GoToServicePlugin extends ProgramPlugin {
 	private boolean disposed;
 
 	/**
-	 * Creates a new instance of the <CODE>GoToServicePlugin</CODE>
+	 * Creates a new instance of the {@code GoToServicePlugin}
 	 * @param tool the tool
 	 */
 	public GoToServicePlugin(PluginTool tool) {

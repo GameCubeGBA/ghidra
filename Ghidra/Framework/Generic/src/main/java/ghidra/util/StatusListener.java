@@ -16,7 +16,7 @@
 package ghidra.util;
 
 /**
- * <code>StatusListener</code> is a general purpose status listener
+ * {@code StatusListener} is a general purpose status listener
  * responsible for displaying and/or recording status messages
  */
 public interface StatusListener {

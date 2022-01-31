@@ -22,7 +22,7 @@ import mdemangler.template.MDTemplateNameAndArguments;
 
 /**
  * This class parses the mangled string at the current offset to determine and
- *  create the appropriate type of <b><code>MDObject</code></b>.
+ *  create the appropriate type of <b>{@code MDObject}</b>.
  */
 public class MDMangObjectParser {
 
@@ -144,10 +144,10 @@ public class MDMangObjectParser {
 	 *  compiler has generated for code that it generates to fulfill certain needs such as code
 	 *  for C++ internals or exception-handling internals.  This method creates our idea of what
 	 *  the underlying object is that is named by this compiler-reserved symbol.
-	 * @param dmang The <b><code>MDMang</code></b> worker for demangling.
+	 * @param dmang The <b>{@code MDMang}</b> worker for demangling.
 	 * @return MDParsableItem object representing the underlying object that is named
 	 *  by the compiler-reserved symbol.
-	 * @throws MDException Upon <b><code>MDMang</code></b> parsing issues that cause us to fail
+	 * @throws MDException Upon <b>{@code MDMang}</b> parsing issues that cause us to fail
 	 *  processing.
 	 */
 	public static MDParsableItem parseObjectReserved(MDMang dmang) {

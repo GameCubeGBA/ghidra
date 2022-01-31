@@ -26,8 +26,8 @@ import ghidra.graph.GVertex;
  * A vertex that contains properties and state related to a user interface.
  * 
  * <P><U>equals() and hashCode()</U> - The graph API allows for cloning of layouts.  For this 
- * to correctly copy layout locations, each edge must override <code>equals</code> and
- * <code>hashCode</code> in order to properly find edges across graphs.
+ * to correctly copy layout locations, each edge must override {@code equals} and
+ * {@code hashCode} in order to properly find edges across graphs.
  */
 public interface VisualVertex extends GVertex {
 

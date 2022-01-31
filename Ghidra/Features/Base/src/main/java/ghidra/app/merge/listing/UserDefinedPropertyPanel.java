@@ -17,8 +17,8 @@
 package ghidra.app.merge.listing;
 
 /**
- * <code>UserDefinedPropertyPanel</code> adds a checkbox as the southern component
- * of the <code>VerticalChoicesPanel</code>. The check box allows the user to 
+ * {@code UserDefinedPropertyPanel} adds a checkbox as the southern component
+ * of the {@code VerticalChoicesPanel}. The check box allows the user to
  * indicate that they want to select the same option for all conflicts of a 
  * particular property type.
  */

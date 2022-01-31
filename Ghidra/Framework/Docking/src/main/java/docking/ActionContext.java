@@ -28,7 +28,7 @@ import docking.action.DockingActionIf;
  * <b>toolbar buttons and menu items will enable and disable as the user interacts with the system.
  * Further, popup menu items will not be added to popup menus when they report false for 
  * {@link DockingActionIf#isAddToPopup(ActionContext)}; they will appear in the popup, but be 
- * disabled if they report <code>true</code> for the above call, but <code>false</code> for 
+ * disabled if they report {@code true} for the above call, but <code>false</code> for
  * {@link DockingActionIf#isEnabledForContext(ActionContext)}.</b>
  * When the user executes an action, the current context will be passed to the backing 
  * {@link DockingActionIf}.   Ultimately, context serves to control action enablement and to 
@@ -58,7 +58,7 @@ import docking.action.DockingActionIf;
  *                            and {@link DockingActionIf#actionPerformed(ActionContext) execution}.
  *  </li>
  *  <li><b>sourceComponent</b> - this value is the component that is the source of the current 
- *                               context.  Whereas the <code>sourceObject</code> is the actual
+ *                               context.  Whereas the {@code sourceObject} is the actual
  *                               clicked item, this value is the focused/active component and 
  *                               will not change between  
  *                               {@link DockingActionIf#isEnabledForContext(ActionContext) enablement}

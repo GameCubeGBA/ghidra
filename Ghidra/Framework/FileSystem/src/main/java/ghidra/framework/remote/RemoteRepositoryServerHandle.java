@@ -20,7 +20,7 @@ import java.rmi.Remote;
 import java.rmi.server.RemoteObjectInvocationHandler;
 
 /**
- * <code>RepositoryServerHandle</code> provides access to a remote repository server via RMI.
+ * {@code RepositoryServerHandle} provides access to a remote repository server via RMI.
  * <p>
  * Methods from {@link RepositoryServerHandle} <b>must</b> be re-declared here 
  * so they may be properly marshalled for remote invocation via RMI.  

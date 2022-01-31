@@ -169,9 +169,9 @@ public interface Address extends Comparable<Address> {
 	public int getSize();
 
 	/**
-	 * Calculates the displacement between two addresses (<code>this - addr</code>)
+	 * Calculates the displacement between two addresses ({@code this - addr})
 	 *
-	 * @param addr  the Address to subtract from <code>this</code> address
+	 * @param addr  the Address to subtract from {@code this} address
 	 * @return the difference (thisAddress.offset - thatAddress.offset)
 	 * @throws IllegalArgumentException if the two addresses are not in the same address space
 	 */
@@ -320,19 +320,20 @@ public interface Address extends Comparable<Address> {
 	public String toString(boolean showAddressSpace, int minNumDigits);
 
 	/**
-	 * Compares this Address to the specified object. The result is <code>true</code> if and only 
-	 * if the argument is not <code>null</code> and is a <code>Address</code> object that 
-	 * represents the same address as this object. 
+	 * Compares this Address to the specified object. The result is {@code true} if and only
+	 * if the argument is not {@code null} and is an {@code Address} object that represents
+	 * the same address as this object. 
 	 *
-	 * @param o the object to compare this <code>String</code> against.
-	 * @return  <code>true</code> if the <code>Addresses</code>are equal; <code>false</code> 
-	 * otherwise.
+	 * @param   o   the object to compare this {@code String}
+	 *              against.
+	 * @return  {@code true} if the {@code Addresses}are equal;
+	 *          {@code false} otherwise.
 	 */
 	@Override
 	public boolean equals(Object o);
 
 	/**
-	 * Returns a hash code for this Address. The hash code for an <code>Address</code> should be a 
+	 * Returns a hash code for this Address. The hash code for an {@code Address} should be a 
 	 * value such that two Address objects which are equal will return the same hash code. This 
 	 * method should generally return the same value as getLong().
 	 *

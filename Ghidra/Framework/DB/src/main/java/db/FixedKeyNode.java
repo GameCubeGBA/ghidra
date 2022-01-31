@@ -21,7 +21,7 @@ import db.buffers.DataBuffer;
 import ghidra.util.exception.AssertException;
 
 /**
- * <code>FixedKeyNode</code> is an abstract implementation of a BTree node
+ * {@code FixedKeyNode} is an abstract implementation of a BTree node
  * which utilizes fixed-length key values.  
  * <pre>
  *   | NodeType(1) | KeyCount(4) | ...
