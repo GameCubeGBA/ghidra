@@ -513,8 +513,8 @@ public class PackedDatabase extends Database {
 		}
 		int version = bfMgr.getCurrentVersion() + 1; // should be 1 in most situations
 		File file = bfMgr.getBufferFile(version);
+		ItemDeserializer itemDeserializer = null;
         try (OutputStream out = new BufferedOutputStream(new FileOutputStream(file))) {
-            ItemDeserializer itemDeserializer = null;
             Msg.debug(PackedDatabase.class, "Unpacking database " + packedFile + " -> " + file);
             itemDeserializer = new ItemDeserializer(packedFile);
             itemDeserializer.saveItem(out, monitor);

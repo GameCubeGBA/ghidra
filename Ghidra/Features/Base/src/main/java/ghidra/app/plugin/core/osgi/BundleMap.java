@@ -45,7 +45,7 @@ public class BundleMap {
 			bundlesByLocation.put(bundle.getLocationIdentifier(), bundle);
 		}
 		finally {
-			writeLock().unlock();
+			lock.writeLock().unlock();
 		}
 	}
 

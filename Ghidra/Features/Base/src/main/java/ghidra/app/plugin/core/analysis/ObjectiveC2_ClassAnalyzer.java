@@ -60,14 +60,11 @@ public class ObjectiveC2_ClassAnalyzer extends AbstractAnalyzer {
 	/* ************************************************************************** */
 
 	private boolean processObjectiveC2(Program program, TaskMonitor monitor, MessageLog log) {
-		ByteProvider provider =
-			new MemoryByteProvider(program.getMemory(),
-				program.getAddressFactory().getDefaultAddressSpace());
-
-        try (provider) {
+		ObjectiveC2_State state = new ObjectiveC2_State(program, monitor, ObjectiveC2_Constants.CATEGORY_PATH);
+		try (ByteProvider provider = new MemoryByteProvider(program.getMemory(),
+				program.getAddressFactory().getDefaultAddressSpace())) {
             BinaryReader reader = new BinaryReader(provider, !program.getLanguage().isBigEndian());
-            ObjectiveC2_State state =
-                    new ObjectiveC2_State(program, monitor, ObjectiveC2_Constants.CATEGORY_PATH);
+
             processImageInfo(state, reader);
 
             processClassList(state, reader);
@@ -93,7 +90,6 @@ public class ObjectiveC2_ClassAnalyzer extends AbstractAnalyzer {
             return false;
         } finally {
             state.dispose();
-
         }
 		return true;
 	}
