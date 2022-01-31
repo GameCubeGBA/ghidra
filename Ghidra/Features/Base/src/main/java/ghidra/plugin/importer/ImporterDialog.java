@@ -289,7 +289,7 @@ public class ImporterDialog extends DialogComponentProvider {
 	}
 
 	private void showSupportedImportFormats() {
-		String s = LoaderService.getAllLoaderNames().stream().collect(Collectors.joining("\n"));
+		String s = String.join("\n", LoaderService.getAllLoaderNames());
 		MultiLineMessageDialog.showModalMessageDialog(null, "Supported Formats", null, s,
 			MultiLineMessageDialog.PLAIN_MESSAGE);
 	}

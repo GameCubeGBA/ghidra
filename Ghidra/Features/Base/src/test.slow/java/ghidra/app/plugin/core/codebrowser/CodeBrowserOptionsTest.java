@@ -1020,7 +1020,7 @@ public class CodeBrowserOptionsTest extends AbstractGhidraHeadedIntegrationTest 
 
 		if (!missing.isEmpty()) {
 			fail(missing.size() + " Tool Options is missing/invalid help\n" +
-				missing.stream().collect(Collectors.joining("\n")));
+					String.join("\n", missing));
 		}
 	}
 

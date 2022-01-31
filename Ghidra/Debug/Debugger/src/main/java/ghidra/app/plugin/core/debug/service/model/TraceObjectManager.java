@@ -631,7 +631,7 @@ public class TraceObjectManager {
 	}
 
 	public List<TargetBreakpointLocation> collectBreakpoints(TargetThread thread) {
-		return getBreakpoints().stream().collect(Collectors.toList());
+		return new ArrayList<>(getBreakpoints());
 	}
 
 	public void onBreakpointContainers(TargetThread thread,

@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 
 import functioncalls.graph.*;
 import ghidra.graph.VisualGraph;
+import ghidra.graph.viewer.edge.AbstractVisualEdge;
 import ghidra.graph.viewer.layout.*;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
@@ -119,8 +120,7 @@ public class BowTieLayout extends AbstractVisualGraphLayout<FcgVertex, FcgEdge> 
 		//
 		List<FcgEdge> inEdges = new ArrayList<>(g.getInEdges(source));
 		List<FcgVertex> inVertices =
-			inEdges.stream().map(e -> e.getStart()).collect(Collectors.toList());
-		inVertices.sort(Comparator.comparing(FcgVertex::getAddress));
+				inEdges.stream().map(AbstractVisualEdge::getStart).sorted(Comparator.comparing(FcgVertex::getAddress)).collect(Collectors.toList());
 		int row = 0; // first row
 		for (int col = 0; col < inVertices.size(); col++) {
 			FcgVertex v = inVertices.get(col);
