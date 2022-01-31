@@ -663,7 +663,7 @@ public class GhidraScriptComponentProvider extends ComponentProviderAdapter {
 		catch (ClassNotFoundException e) {
 			console.addErrorMessage("", "Unable to locate script class: " + scriptName);
 		}
-		catch (InvocationTargetException e) {
+		catch (InvocationTargetException | NoSuchMethodException e) {
 			console.addErrorMessage("", "Unable to invoke script class: " + scriptName);
 		}
 
