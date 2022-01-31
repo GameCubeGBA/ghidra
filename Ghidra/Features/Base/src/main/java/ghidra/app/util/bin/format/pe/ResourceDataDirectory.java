@@ -666,7 +666,7 @@ public class ResourceDataDirectory extends DataDirectory {
 					String menuString = fixupStringRepForDisplay(
 						data.getComponentAt(offset).getDefaultValueRepresentation());
 					menuString = menuString.replaceAll("\"", "");
-					if (menuString.equals("")) {
+					if (menuString.isEmpty()) {
 						comment.append("-------------------\n");
 					}
 					else {
