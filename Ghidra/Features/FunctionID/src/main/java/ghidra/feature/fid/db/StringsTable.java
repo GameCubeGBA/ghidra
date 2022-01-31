@@ -40,7 +40,7 @@ public class StringsTable {
 			new String[] { "String Value" });
 	// @formatter:on
 
-	static int[] INDEXED_COLUMNS = new int[] { STRING_VALUE_COL };
+	static int[] INDEXED_COLUMNS = { STRING_VALUE_COL };
 
 	Table table;
 	DBObjectCache<StringRecord> stringCache;

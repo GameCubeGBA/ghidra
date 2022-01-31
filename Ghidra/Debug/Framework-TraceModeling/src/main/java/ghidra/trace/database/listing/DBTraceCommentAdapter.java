@@ -48,7 +48,7 @@ import ghidra.util.task.TaskMonitor;
 
 public class DBTraceCommentAdapter
 		extends DBTraceAddressSnapRangePropertyMap<DBTraceCommentEntry, DBTraceCommentEntry> {
-	protected static final String[] EMPTY_STRING_ARRAY = new String[] {};
+	protected static final String[] EMPTY_STRING_ARRAY = {};
 	protected static final int MIN_COMMENT_TYPE = CodeUnit.EOL_COMMENT;
 	protected static final int MAX_COMMENT_TYPE = CodeUnit.REPEATABLE_COMMENT;
 

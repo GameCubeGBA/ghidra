@@ -118,7 +118,7 @@ public class ManualViewerCommandWrappedOption implements CustomOption {
 
 		if (Platform.CURRENT_PLATFORM.getOperatingSystem() == OperatingSystem.WINDOWS) {
 			option.setCommandString(System.getenv("ComSpec"));
-			String[] args = new String[] { "/c", "start" };
+			String[] args = { "/c", "start" };
 			option.setCommandArguments(args);
 			option.setUrlReplacementString(DEFAULT_URL_REPLACEMENT_STRING);
 		}

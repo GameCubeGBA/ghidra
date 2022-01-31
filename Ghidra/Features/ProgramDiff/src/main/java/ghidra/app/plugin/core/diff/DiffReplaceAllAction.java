@@ -25,8 +25,8 @@ public class DiffReplaceAllAction extends DockingAction {
 	private final static String ACTION_NAME = "Set Replace for All Apply Settings";
 	private final static String GROUP_NAME = "DIFF_APPLY_ACTION";
 	private final static String DESCRIPTION = "Change all the difference type apply settings to Replace.";
-	private static String[] popupPath = new String[] { ACTION_NAME };
-	private static String[] menuPath = new String[] { ACTION_NAME };
+	private static String[] popupPath = { ACTION_NAME };
+	private static String[] menuPath = { ACTION_NAME };
 	private DiffApplySettingsProvider provider;
 
 	/**

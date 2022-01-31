@@ -256,7 +256,7 @@ public class MemSearchAsciiTest extends AbstractMemSearchTest {
 		// QueryResults should get displayed
 		// test the marker stuff
 		// create an set of ascii bytes to do this test
-		byte[] b = new byte[] { 'N', 'O', 'T', 'E', 'p', 'a', 'd' };
+		byte[] b = { 'N', 'O', 'T', 'E', 'p', 'a', 'd' };
 
 		int transactionID = program.startTransaction("test");
 		memory.setBytes(addr(0x0100b451), b);

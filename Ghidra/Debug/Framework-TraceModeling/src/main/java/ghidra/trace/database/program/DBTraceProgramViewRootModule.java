@@ -29,7 +29,7 @@ import ghidra.util.LockHold;
 import ghidra.util.exception.*;
 
 public class DBTraceProgramViewRootModule implements ProgramModule {
-	public static final ProgramModule[] EMPTY_MODULE_ARRAY = new ProgramModule[] {};
+	public static final ProgramModule[] EMPTY_MODULE_ARRAY = {};
 
 	protected final DBTraceProgramView program;
 	protected final AbstractDBTraceProgramViewListing listing;

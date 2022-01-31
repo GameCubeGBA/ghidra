@@ -1568,7 +1568,7 @@ abstract class AbstractFunctionMerger implements ListingMergeConstants {
 		if (pgm == null) { // Header info
 			return new String[] { "Option", "Function Return" };
 		}
-		String[] info = new String[] { "", "" };
+		String[] info = { "", "" };
 		String version = "";
 		if (pgm == programs[ORIGINAL]) {
 			version = ORIGINAL_TITLE;
@@ -1593,7 +1593,7 @@ abstract class AbstractFunctionMerger implements ListingMergeConstants {
 		if (pgm == null) { // Header info
 			return new String[] { "Option", "Signature" };
 		}
-		String[] info = new String[] { "", "" };
+		String[] info = { "", "" };
 		String version = "";
 		if (pgm == programs[ORIGINAL]) {
 			version = ORIGINAL_TITLE;
@@ -1666,7 +1666,7 @@ abstract class AbstractFunctionMerger implements ListingMergeConstants {
 		if (option == null) { // Header info
 			return new String[] { "Option", "Storage", "Name", "DataType", "Comment" };
 		}
-		String[] info = new String[] { "", "", "", "", "" };
+		String[] info = { "", "", "", "", "" };
 		info[0] = option;
 		if (var != null) {
 			info[1] = var.getVariableStorage().toString();
@@ -2016,7 +2016,7 @@ abstract class AbstractFunctionMerger implements ListingMergeConstants {
 	}
 
 	protected static final String[] STORAGE_CONFLICT_CHOICES =
-		new String[] { "Latest", "Checked Out" };
+            { "Latest", "Checked Out" };
 
 	protected void mergeVariableStorage(Address entryPt, Pair<List<Variable>, List<Variable>> pair,
 			int currentConflictOption, TaskMonitor monitor) throws CancelledException {
@@ -2026,7 +2026,7 @@ abstract class AbstractFunctionMerger implements ListingMergeConstants {
 	}
 
 	protected static final String[] STORAGE_CONFLICT_HEADINGS =
-		new String[] { "Parameter/First-Use", "Name", "Storage", "Data-Type" };
+            { "Parameter/First-Use", "Name", "Storage", "Data-Type" };
 
 	protected List<String[]> getVariableDetails(List<Variable> list) {
 		List<String[]> tableData = new ArrayList<>();

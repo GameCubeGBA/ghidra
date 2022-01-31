@@ -36,7 +36,7 @@ public class DuplicateAction extends CompositeEditorTableAction {
 	public final static String ACTION_NAME = "Duplicate Component";
 	private final static String GROUP_NAME = COMPONENT_ACTION_GROUP;
 	private final static String DESCRIPTION = "Duplicate the selected component";
-	private final static String[] POPUP_PATH = new String[] { ACTION_NAME };
+	private final static String[] POPUP_PATH = { ACTION_NAME };
 	private final static KeyStroke KEY_STROKE =
 		KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.ALT_DOWN_MASK);
 

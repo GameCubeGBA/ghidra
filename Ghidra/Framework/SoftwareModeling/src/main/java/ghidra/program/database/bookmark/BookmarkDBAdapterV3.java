@@ -37,7 +37,7 @@ public class BookmarkDBAdapterV3 extends BookmarkDBAdapter {
 		new Field[] { LongField.INSTANCE, StringField.INSTANCE, StringField.INSTANCE },
 		new String[] { "Address", "Category", "Comment" });
 
-	static int[] INDEXED_COLUMNS = new int[] { V3_ADDRESS_COL, V3_CATEGORY_COL };
+	static int[] INDEXED_COLUMNS = { V3_ADDRESS_COL, V3_CATEGORY_COL };
 
 	private DBHandle dbHandle;
 	private Table[] tables;

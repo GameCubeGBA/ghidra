@@ -32,9 +32,9 @@ public class ConcurrentTestExceptionHandler implements UncaughtExceptionHandler 
 
 	// Exception messages that we choose to ignore
 	private static final String[] IGNORABLE_ERROR_MESSAGES =
-		new String[] { "DerivedColor$UIResource cannot be cast to", // test machine timing issue
-			"FontUIResource cannot be cast to javax.swing.Painter", // test machine timing issue 
-		};
+            { "DerivedColor$UIResource cannot be cast to", // test machine timing issue
+                "FontUIResource cannot be cast to javax.swing.Painter", // test machine timing issue
+            };
 
 	private static final List<TestExceptionTracker> throwables =
 		Collections.synchronizedList(new ArrayList<>());

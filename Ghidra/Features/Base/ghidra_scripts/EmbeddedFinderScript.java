@@ -34,8 +34,8 @@ public class EmbeddedFinderScript extends GhidraScript {
 
 	@Override
     public void run() throws Exception {
-		byte[] MAGIC_DOS_HEADER = new byte[] { 0x4d, 0x5a };				// M Z
-		byte[] MAGIC_NT_HEADER  = new byte[] { 0x50, 0x45, 0x00, 0x00 };	// P E 0x00 0x00
+		byte[] MAGIC_DOS_HEADER = { 0x4d, 0x5a };				// M Z
+		byte[] MAGIC_NT_HEADER  = { 0x50, 0x45, 0x00, 0x00 };	// P E 0x00 0x00
 
 		List<Address> allFound = new ArrayList<Address>();
 

@@ -29,7 +29,7 @@ public class ObfuscatedFileByteProvider extends FileByteProvider {
 
 	// @formatter:off
 	// copied from ChainedBuffer
-	static final byte[] XOR_MASK_BYTES = new byte[] {
+	static final byte[] XOR_MASK_BYTES = {
 		(byte)0x59, (byte)0xea, (byte)0x67, (byte)0x23, (byte)0xda, (byte)0xb8, (byte)0x00, (byte)0xb8, 
 		(byte)0xc3, (byte)0x48, (byte)0xdd, (byte)0x8b, (byte)0x21, (byte)0xd6, (byte)0x94, (byte)0x78, 
 		(byte)0x35, (byte)0xab, (byte)0x2b, (byte)0x7e, (byte)0xb2, (byte)0x4f, (byte)0x82, (byte)0x4e, 

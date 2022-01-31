@@ -26,7 +26,7 @@ public class AVR8_31_GCC_O3_EmulatorTest extends ProcessorEmulatorTestAdapter {
 	private static final String LANGUAGE_ID = "avr8:LE:16:default";
 	private static final String COMPILER_SPEC_ID = "gcc";
 
-	private static final String[] REG_DUMP_SET = new String[] {};
+	private static final String[] REG_DUMP_SET = {};
 
 	public AVR8_31_GCC_O3_EmulatorTest(String name) throws Exception {
 		super(name, LANGUAGE_ID, COMPILER_SPEC_ID, REG_DUMP_SET);

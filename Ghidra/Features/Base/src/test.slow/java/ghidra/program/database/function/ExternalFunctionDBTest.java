@@ -192,12 +192,12 @@ public class ExternalFunctionDBTest extends AbstractGhidraHeadedIntegrationTest 
 		f.setCustomVariableStorage(true);
 
 		DataType[] dt =
-			new DataType[] { new LongDataType(), new WordDataType(), new Pointer16DataType() };
+                { new LongDataType(), new WordDataType(), new Pointer16DataType() };
 
 		Register[] regs =
-			new Register[] { functionManager.getProgram().getProgramContext().getRegister("r1"),
-				functionManager.getProgram().getProgramContext().getRegister("r0l"),
-				functionManager.getProgram().getProgramContext().getRegister("spl") };
+                { functionManager.getProgram().getProgramContext().getRegister("r1"),
+                    functionManager.getProgram().getProgramContext().getRegister("r0l"),
+                    functionManager.getProgram().getProgramContext().getRegister("spl") };
 
 		LocalVariableImpl regVar = new LocalVariableImpl("TestReg0", 0, dt[0], regs[0], program);
 		regVar.setComment("My Comment0");

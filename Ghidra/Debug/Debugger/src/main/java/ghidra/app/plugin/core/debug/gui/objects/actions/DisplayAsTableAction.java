@@ -30,7 +30,7 @@ public class DisplayAsTableAction extends DisplayAsAction {
 
 	public DisplayAsTableAction(PluginTool tool, String owner, DebuggerObjectsProvider provider) {
 		super("DisplayTable", tool, owner, provider);
-		String[] path = new String[] { "Display as...", "Table" };
+		String[] path = { "Display as...", "Table" };
 		setPopupMenuData(new MenuData(path, ObjectTable.ICON_TABLE));
 		setKeyBindingData(new KeyBindingData(KeyEvent.VK_T, InputEvent.CTRL_DOWN_MASK));
 		setHelpLocation(new HelpLocation(owner, "display_as_table"));

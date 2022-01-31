@@ -541,9 +541,9 @@ public abstract class AbstractDataActionTest extends AbstractGhidraHeadedIntegra
 		}
 		// none of the following code is ever executed with the current FORMAT_TEST_SKIP_LIST
 
-		String[] settingNames = new String[] { "Termination" };
-		String[] terminated = new String[] { "terminated" };
-		String[] unterminated = new String[] { "unterminated" };
+		String[] settingNames = { "Termination" };
+		String[] terminated = { "terminated" };
+		String[] unterminated = { "unterminated" };
 
 		if (insideStruct && !commonStruct) {
 
@@ -827,7 +827,7 @@ public abstract class AbstractDataActionTest extends AbstractGhidraHeadedIntegra
 		boolean settingsAreShared =
 			testDefaultSetting && (!insideStruct || (insideStruct && commonStruct));
 
-		String[] settingNames = new String[] { "Mutability" };
+		String[] settingNames = { "Mutability" };
 
 		useDefaultSettings();
 

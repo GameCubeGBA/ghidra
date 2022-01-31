@@ -90,7 +90,7 @@ public class PreviewTableCellDataTest extends AbstractProgramBasedTest {
 		Address address = addr(TEST_ADDRESS);
 		int[] componentPath = null;
 		String commentText = "Repeatable Comment";
-		String[] comment = new String[] { commentText };
+		String[] comment = { commentText };
 		int row = 0;
 		int charOffset = 0;
 		int commentRow = 0;
@@ -173,7 +173,7 @@ public class PreviewTableCellDataTest extends AbstractProgramBasedTest {
 		assertTrue(applyCmd(program, cmd));
 
 		Address address = addr("f0001307");
-		int[] componentPath = new int[] { 2 }; // second field
+		int[] componentPath = { 2 }; // second field
 		Address refAddr = null;
 		String rep = "\"\",00";
 		int opIndex = 0;
@@ -248,7 +248,7 @@ public class PreviewTableCellDataTest extends AbstractProgramBasedTest {
 		CreateDataCmd cmd = new CreateDataCmd(arrayAddress, true, parentArray);
 		assertTrue(applyCmd(program, cmd));
 
-		int[] componentPath = new int[] { 17 };
+		int[] componentPath = { 17 };
 		String displayText = "int16 0h (int16[4][0][1])";
 		int index = 0;
 		int charOffset = 0;

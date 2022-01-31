@@ -45,7 +45,7 @@ public class ExternalProgramMerger implements MergeResolver, ListingMergeConstan
 //	private static final int CANCELED = ListingMergeManager.CANCELED;
 //	private static final int ASK_USER = ListingMergeManager.ASK_USER;
 
-	private static String[] EXTERNAL_PROGRAM_PHASE = new String[] { "External Programs" };
+	private static String[] EXTERNAL_PROGRAM_PHASE = { "External Programs" };
 	private VerticalChoicesPanel conflictPanel;
 	private int conflictOption;
 	private IDGroup currentIDGroup; // Symbol ID group for the current conflict.
@@ -698,7 +698,7 @@ public class ExternalProgramMerger implements MergeResolver, ListingMergeConstan
 		if (pgm == null) { // Header info
 			return new String[] { "Option", "Name", "Path" };
 		}
-		String[] info = new String[] { "", "", "", };
+		String[] info = { "", "", "", };
 		String version = "";
 		if (pgm == originalPgm) {
 			version = ORIGINAL_TITLE;

@@ -43,7 +43,7 @@ public class DisplayAsGraphAction extends DisplayAsAction {
 
 	public DisplayAsGraphAction(PluginTool tool, String owner, DebuggerObjectsProvider provider) {
 		super("DisplayGraph", tool, owner, provider);
-		String[] path = new String[] { "Display as...", "Graph" };
+		String[] path = { "Display as...", "Graph" };
 		setPopupMenuData(new MenuData(path, ICON_GRAPH));
 		setKeyBindingData(new KeyBindingData(KeyEvent.VK_G, InputEvent.CTRL_DOWN_MASK));
 		setHelpLocation(new HelpLocation(owner, "display_as_graph"));

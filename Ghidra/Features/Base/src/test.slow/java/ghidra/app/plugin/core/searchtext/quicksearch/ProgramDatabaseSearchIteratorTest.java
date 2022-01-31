@@ -189,7 +189,7 @@ public class ProgramDatabaseSearchIteratorTest extends AbstractGhidraHeadedInteg
 		currentAddress = searcher.getNextSignificantAddress(null);
 		int count = 0;
 		Address[] addrs =
-			new Address[] { getAddr(0x100101cL), getAddr(0x100101dL), getAddr(0x100101fL) };
+                { getAddr(0x100101cL), getAddr(0x100101dL), getAddr(0x100101fL) };
 
 		ProgramLocation loc = null;
 		while ((loc = getNextMatch(searcher)) != null) {

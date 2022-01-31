@@ -59,7 +59,7 @@ public class ExportToCAction extends AbstractDecompilerAction {
 	private File getFile(DecompilerPanel decompilerPanel) {
 		File lastUsedFile = readLastUsedFile();
 
-		String[] extensions = new String[] { "h", "c", "cpp" };
+		String[] extensions = { "h", "c", "cpp" };
 		GhidraFileChooser fileChooser = new GhidraFileChooser(decompilerPanel);
 		fileChooser.setFileFilter(new ExtensionFileFilter(extensions, "C/C++ Files"));
 		if (lastUsedFile != null) {

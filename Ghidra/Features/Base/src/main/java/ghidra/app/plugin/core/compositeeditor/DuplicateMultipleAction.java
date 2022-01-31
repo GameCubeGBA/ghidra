@@ -41,7 +41,7 @@ public class DuplicateMultipleAction extends CompositeEditorTableAction {
 	public final static String ACTION_NAME = "Duplicate Multiple of Component";
 	private final static String GROUP_NAME = COMPONENT_ACTION_GROUP;
 	private final static String DESCRIPTION = "Duplicate multiple of the selected component";
-	private final static String[] POPUP_PATH = new String[] { ACTION_NAME };
+	private final static String[] POPUP_PATH = { ACTION_NAME };
 
 	private KeyStroke keyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_M, InputEvent.ALT_DOWN_MASK);
 

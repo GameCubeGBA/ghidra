@@ -145,19 +145,19 @@ public class MergeProgressPanel extends JPanel {
 	public static void main(String[] args) {
 		MergeProgressPanel panel = new MergeProgressPanel();
 
-		String[] MEMORY = new String[] { "Memory" };
-		String[] PROGRAM_TREE = new String[] { "Program Tree" };
-		String[] DATA_TYPES = new String[] { "Data Types" };
-		String[] PROGRAM_CONTEXT = new String[] { "Program Context" };
-		String[] LISTING = new String[] { "Listing" };
-		String[] BYTES = new String[] { "Listing", "Bytes" };
-		String[] CODE_UNITS = new String[] { "Listing", "Code Units" };
-		String[] FUNCTIONS = new String[] { "Listing", "Functions" };
-		String[] SYMBOLS = new String[] { "Listing", "Symbols" };
+		String[] MEMORY = { "Memory" };
+		String[] PROGRAM_TREE = { "Program Tree" };
+		String[] DATA_TYPES = { "Data Types" };
+		String[] PROGRAM_CONTEXT = { "Program Context" };
+		String[] LISTING = { "Listing" };
+		String[] BYTES = { "Listing", "Bytes" };
+		String[] CODE_UNITS = { "Listing", "Code Units" };
+		String[] FUNCTIONS = { "Listing", "Functions" };
+		String[] SYMBOLS = { "Listing", "Symbols" };
 		String[] COMMENTS =
-			new String[] { "Listing", "Comments, References & User Defined Properties" };
-		String[] EXTERNAL_PROGRAM = new String[] { "External Program" };
-		String[] PROPERTY_LIST = new String[] { "Property List" };
+                { "Listing", "Comments, References & User Defined Properties" };
+		String[] EXTERNAL_PROGRAM = { "External Program" };
+		String[] PROPERTY_LIST = { "Property List" };
 
 		panel.addInfo(MEMORY);
 		panel.addInfo(PROGRAM_TREE);

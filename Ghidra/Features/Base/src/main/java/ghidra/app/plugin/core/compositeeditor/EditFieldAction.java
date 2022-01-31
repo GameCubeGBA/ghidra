@@ -33,8 +33,8 @@ public class EditFieldAction extends CompositeEditorTableAction {
 	private final static String DESCRIPTION =
 		"Edit the first editable field of the selected component.";
 	private final static KeyStroke KEY_STROKE = KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0);
-	private static String[] POPUP_PATH = new String[] { ACTION_NAME };
-	private static String[] MENU_PATH = new String[] { ACTION_NAME };
+	private static String[] POPUP_PATH = { ACTION_NAME };
+	private static String[] MENU_PATH = { ACTION_NAME };
 
 	public EditFieldAction(CompositeEditorProvider provider) {
 		super(provider, EDIT_ACTION_PREFIX + ACTION_NAME, GROUP_NAME, POPUP_PATH, MENU_PATH, null);

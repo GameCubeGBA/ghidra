@@ -80,7 +80,7 @@ public class KeyBindingsTest extends AbstractGhidraHeadedIntegrationTest {
 	public void testKeyBindingsDisplay() throws Exception {
 
 		assertEquals(3, model.getColumnCount());
-		String[] ids = new String[] { "Action Name", "KeyBinding", "Plugin Name" };
+		String[] ids = { "Action Name", "KeyBinding", "Plugin Name" };
 		TableColumnModel m = table.getColumnModel();
 		for (int i = 0; i < ids.length; i++) {
 			TableColumn c = m.getColumn(i);

@@ -976,8 +976,8 @@ public class MemoryManagerTest extends AbstractGhidraHeadedIntegrationTest {
 		program.endTransaction(transactionID, true);
 		program.release(this);
 
-		byte[] b = new byte[] { (byte) 0xc0, (byte) 0xd0, (byte) 0xc0, (byte) 0xe0 };
-		byte[] masks = new byte[] { (byte) 0xff, (byte) 0xff, (byte) 0xff, (byte) 0xff };
+		byte[] b = { (byte) 0xc0, (byte) 0xd0, (byte) 0xc0, (byte) 0xe0 };
+		byte[] masks = { (byte) 0xff, (byte) 0xff, (byte) 0xff, (byte) 0xff };
 
 		program = createDefaultProgram("8051", ProgramBuilder._8051, this);
 		space = program.getAddressFactory().getAddressSpace("CODE");

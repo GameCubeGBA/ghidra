@@ -39,7 +39,7 @@ public abstract class PropertyMapDB implements PropertyMap {
 
 	private static final String PROPERTY_TABLE_PREFIX = "Property Map - ";
 
-	protected static final String[] SCHEMA_FIELD_NAMES = new String[] { "Value" };
+	protected static final String[] SCHEMA_FIELD_NAMES = { "Value" };
 	protected static final String[] NO_SCHEMA_FIELD_NAMES = new String[0];
 	protected static final Field[] NO_SCHEMA_FIELDS = new Field[0];
 
@@ -177,7 +177,7 @@ public abstract class PropertyMapDB implements PropertyMap {
 	protected void createTable(Field valueField) throws IOException {
 		if (valueField != null) {
 			// Create default table schema with a value column and an long Address key
-			Field[] fields = new Field[] { valueField };
+			Field[] fields = { valueField };
 			schema = new Schema(0, "Address", fields, SCHEMA_FIELD_NAMES);
 		}
 		else {

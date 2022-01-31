@@ -68,7 +68,7 @@ public enum PluginToolUtils {
 	 */
 	public static PluginTool openInMostRecentOrLaunchedCompatibleTool(PluginTool tool,
 			DomainFile domainFile) {
-		DomainFile[] data = new DomainFile[] { domainFile };
+		DomainFile[] data = { domainFile };
 		PluginTool result = inRunningToolsPreferringActive(tool, pt -> {
 			return pt.acceptDomainFiles(data) ? pt : null;
 		});

@@ -33,7 +33,7 @@ public class DeleteAction extends CompositeEditorTableAction {
 	public final static String ACTION_NAME = "Delete Components";
 	private final static String GROUP_NAME = COMPONENT_ACTION_GROUP;
 	private final static ImageIcon ICON = ResourceManager.loadImage("images/edit-delete.png");
-	private final static String[] popupPath = new String[] { "Delete" };
+	private final static String[] popupPath = { "Delete" };
 	private final static KeyStroke KEY_STROKE = KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0);
 
 	public DeleteAction(CompositeEditorProvider provider) {

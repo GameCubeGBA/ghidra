@@ -1164,8 +1164,8 @@ public class ReferenceManagerTest extends AbstractGhidraHeadedIntegrationTest {
 @Test
     public void testExtEntryIterator() throws Exception {
 		Address[] addrs =
-			new Address[] { addr(0x200), addr(0x300), addr(0x400), addr(0x500), addr(0x600),
-				addr(0x700), addr(0x800), addr(0x900) };
+                { addr(0x200), addr(0x300), addr(0x400), addr(0x500), addr(0x600),
+                    addr(0x700), addr(0x800), addr(0x900) };
     for (Address value : addrs) {
         refMgr.addExternalEntryPointRef(value);
     }

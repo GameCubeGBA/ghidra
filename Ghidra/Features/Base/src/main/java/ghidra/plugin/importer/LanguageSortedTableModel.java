@@ -29,7 +29,7 @@ public class LanguageSortedTableModel extends AbstractSortedTableModel<LanguageC
 	final static int COMPILER_SPEC_COL = 4;
 
 	final static String[] COL_NAMES =
-		new String[] { "Processor", "Variant", "Size", "Endian", "Compiler", };
+            { "Processor", "Variant", "Size", "Endian", "Compiler", };
 
 	private List<LanguageCompilerSpecPair> languageList = new ArrayList<>();
 

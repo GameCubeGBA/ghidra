@@ -32,7 +32,7 @@ import resources.icons.EmptyIcon;
 public class ImagePanel extends JPanel {
 
 	// If this array is changed, ensure compatibility with ImagePanelTest
-	public static final float[] ZOOM_LEVELS = new float[] {
+	public static final float[] ZOOM_LEVELS = {
 		// @formatter:off
 		
 		// shrinking scales

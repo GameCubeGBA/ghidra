@@ -423,7 +423,7 @@ public class VTMatchApplyTest extends AbstractGhidraHeadedIntegrationTest {
 
         SymbolTable symbolTable = destinationProgram.getSymbolTable();
 		Symbol[] newSymbols = symbolTable.getSymbols(labelAddress);
-		Symbol[] expectedSymbols = new Symbol[] {destinationSymbol1};
+		Symbol[] expectedSymbols = {destinationSymbol1};
 		assertTrue("New label does not match the source label",
 			SystemUtilities.isArrayEqual(expectedSymbols, newSymbols));
 
@@ -464,7 +464,7 @@ public class VTMatchApplyTest extends AbstractGhidraHeadedIntegrationTest {
 		Symbol[] newSymbols = symbolTable.getSymbols(destinationLabelAddress);
 
 		// we expect the source symbol and the non-default symbol that was already there
-		Symbol[] expectedSymbols = new Symbol[] {sourceSymbol1};
+		Symbol[] expectedSymbols = {sourceSymbol1};
 		assertTrue("New label does not match the source label",
 			SystemUtilities.isArrayEqual(expectedSymbols, newSymbols));
 
@@ -503,7 +503,7 @@ public class VTMatchApplyTest extends AbstractGhidraHeadedIntegrationTest {
 
         SymbolTable symbolTable = destinationProgram.getSymbolTable();
 		Symbol[] newSymbols = symbolTable.getSymbols(destinationLabelAddress);
-		Symbol[] expectedSymbols = new Symbol[] {sourceSymbol1};
+		Symbol[] expectedSymbols = {sourceSymbol1};
 		assertTrue("New label does not match the source label",
 			SystemUtilities.isArrayEqual(expectedSymbols, newSymbols));
 
@@ -1095,7 +1095,7 @@ public class VTMatchApplyTest extends AbstractGhidraHeadedIntegrationTest {
 		// make sure these symbols are still applied (from earlier)
         SymbolTable symbolTable = destinationProgram.getSymbolTable();
 		Symbol[] newSymbols = symbolTable.getSymbols(labelAddress);
-		Symbol[] expectedSymbols = new Symbol[] {sourceSymbol1};
+		Symbol[] expectedSymbols = {sourceSymbol1};
 		assertTrue("New symbol does not match the source symbol",
 			SystemUtilities.isArrayEqual(expectedSymbols, newSymbols));
 

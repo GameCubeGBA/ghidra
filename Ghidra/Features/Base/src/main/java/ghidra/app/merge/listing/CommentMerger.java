@@ -236,10 +236,10 @@ class CommentMerger extends AbstractListingMerger {
 		conflictPanel.setRowHeader(new String[] { "Option", "Comment" });
 		if (latestComment == null || myComment == null) {
 			String[] latestStrings =
-				new String[] { createButtonText(LATEST_TITLE, programMergeType, latestComment),
-					latestTrunc };
+                    { createButtonText(LATEST_TITLE, programMergeType, latestComment),
+                        latestTrunc };
 			String[] myStrings =
-				new String[] { createButtonText(MY_TITLE, programMergeType, myComment), myTrunc };
+                    { createButtonText(MY_TITLE, programMergeType, myComment), myTrunc };
 			conflictPanel.addRadioButtonRow(latestStrings, LATEST_BUTTON_NAME, KEEP_LATEST,
 				changeListener);
 			conflictPanel.addRadioButtonRow(myStrings, CHECKED_OUT_BUTTON_NAME, KEEP_MY,
@@ -248,10 +248,10 @@ class CommentMerger extends AbstractListingMerger {
 		}
 		else {
 			String[] latestStrings =
-				new String[] { createCheckBoxText(LATEST_TITLE, programMergeType, latestComment),
-					latestTrunc };
+                    { createCheckBoxText(LATEST_TITLE, programMergeType, latestComment),
+                        latestTrunc };
 			String[] myStrings =
-				new String[] { createCheckBoxText(MY_TITLE, programMergeType, myComment), myTrunc };
+                    { createCheckBoxText(MY_TITLE, programMergeType, myComment), myTrunc };
 			conflictPanel.addCheckBoxRow(latestStrings, LATEST_CHECK_BOX_NAME, KEEP_LATEST,
 				changeListener);
 			conflictPanel.addCheckBoxRow(myStrings, CHECKED_OUT_CHECK_BOX_NAME, KEEP_MY,

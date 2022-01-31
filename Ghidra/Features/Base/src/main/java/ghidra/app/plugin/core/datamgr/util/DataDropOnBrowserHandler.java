@@ -31,7 +31,7 @@ import ghidra.program.model.data.DataTypeTransferable;
  */
 public class DataDropOnBrowserHandler implements ProgramDropProvider { 
 	
-	private static final DataFlavor[] ACCEPTABLE_FLAVORS = new DataFlavor[] {
+	private static final DataFlavor[] ACCEPTABLE_FLAVORS = {
 	    DataTypeTransferable.localDataTypeFlavor,
 	    DataTypeTransferable.localBuiltinDataTypeFlavor
 	};

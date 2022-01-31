@@ -224,18 +224,18 @@ public class RepositoryCustomScreenShots extends GhidraScreenShotGenerator {
 		closeAllWindowsAndFrames();
 		final MergeProgressPanel panel = new MergeProgressPanel();
 
-		final String[] MEMORY = new String[] { "Memory" };
-		final String[] PROGRAM_TREE = new String[] { "Program Tree" };
-		final String[] DATA_TYPES = new String[] { "Data Types" };
-		final String[] PROGRAM_CONTEXT = new String[] { "Program Context" };
-		final String[] LISTING = new String[] { "Listing" };
-		final String[] BYTES = new String[] { "Listing", "Bytes & Code Units" };
-		final String[] FUNCTIONS = new String[] { "Listing", "Functions" };
-		final String[] SYMBOLS = new String[] { "Listing", "Symbols" };
-		final String[] COMMENTS = new String[] { "Listing",
+		final String[] MEMORY = { "Memory" };
+		final String[] PROGRAM_TREE = { "Program Tree" };
+		final String[] DATA_TYPES = { "Data Types" };
+		final String[] PROGRAM_CONTEXT = { "Program Context" };
+		final String[] LISTING = { "Listing" };
+		final String[] BYTES = { "Listing", "Bytes & Code Units" };
+		final String[] FUNCTIONS = { "Listing", "Functions" };
+		final String[] SYMBOLS = { "Listing", "Symbols" };
+		final String[] COMMENTS = { "Listing",
 			"Equates, User Defined Properties, References, Bookmarks & Comments" };
-		final String[] EXTERNAL_PROGRAM = new String[] { "External Program" };
-		final String[] PROPERTY_LIST = new String[] { "Property List" };
+		final String[] EXTERNAL_PROGRAM = { "External Program" };
+		final String[] PROPERTY_LIST = { "Property List" };
 
 		panel.addInfo(MEMORY);
 		panel.addInfo(PROGRAM_TREE);

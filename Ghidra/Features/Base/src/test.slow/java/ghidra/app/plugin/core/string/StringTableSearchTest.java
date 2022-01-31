@@ -129,7 +129,7 @@ public class StringTableSearchTest extends AbstractGhidraHeadedIntegrationTest {
 
 		// Create an existing Unicode string to make sure its presence doesn't mess up ASCII-based
 		// NgramUtils. Length must be >= 3.
-		byte[] unicodeBytes = new byte[] { (byte) 0xfd, (byte) 0xff, (byte) 0xfd, (byte) 0xff,
+		byte[] unicodeBytes = { (byte) 0xfd, (byte) 0xff, (byte) 0xfd, (byte) 0xff,
 			(byte) 0xfd, (byte) 0xff, (byte) 0xfd, (byte) 0xff, 0x00, 0x00, 0x00, 0x00 };
 		builder.setBytes("0x405000", unicodeBytes);
 		builder.applyDataType("0x405000", new TerminatedUnicodeDataType(), 1);

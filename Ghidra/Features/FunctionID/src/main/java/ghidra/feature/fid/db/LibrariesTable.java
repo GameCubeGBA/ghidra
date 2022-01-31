@@ -60,7 +60,7 @@ public class LibrariesTable {
 		});
 	// @formatter:on
 
-	static int[] INDEXED_COLUMNS = new int[] { LIBRARY_FAMILY_NAME_COL, LIBRARY_VERSION_COL };
+	static int[] INDEXED_COLUMNS = { LIBRARY_FAMILY_NAME_COL, LIBRARY_VERSION_COL };
 
 	Table table;
 

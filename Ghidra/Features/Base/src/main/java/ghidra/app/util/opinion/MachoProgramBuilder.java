@@ -537,7 +537,7 @@ public class MachoProgramBuilder {
 			return;
 		}
 
-		int[] sectionTypes = new int[] { SectionTypes.S_NON_LAZY_SYMBOL_POINTERS,
+		int[] sectionTypes = { SectionTypes.S_NON_LAZY_SYMBOL_POINTERS,
 			SectionTypes.S_LAZY_SYMBOL_POINTERS, SectionTypes.S_SYMBOL_STUBS };
 
 		List<Section> sections = getSectionsWithTypes(sectionTypes);

@@ -41,8 +41,8 @@ public class FidSearchResultFrame extends JFrame implements FidQueryCloseListene
 	static final int SMALLER_WIDTH = 240;
 
 	static int[] PREFERRED_WIDTHS =
-		new int[] { NAME_WIDTH, HASH_WIDTH, SMALLER_WIDTH, SMALLER_WIDTH, HASH_WIDTH, HASH_WIDTH,
-			SIZE_WIDTH, HASH_WIDTH, SIZE_WIDTH, HASH_WIDTH, SIZE_WIDTH, HASH_WIDTH, MINI_WIDTH };
+            { NAME_WIDTH, HASH_WIDTH, SMALLER_WIDTH, SMALLER_WIDTH, HASH_WIDTH, HASH_WIDTH,
+                SIZE_WIDTH, HASH_WIDTH, SIZE_WIDTH, HASH_WIDTH, SIZE_WIDTH, HASH_WIDTH, MINI_WIDTH };
 
 	private FidService service;
 	private FidQueryService dbService;

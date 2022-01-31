@@ -450,7 +450,7 @@ public class PowerPC64_ElfExtension extends ElfExtension {
 	// upper 3-bits of ElfSymbol st_other identify local vs. global behavior and number of instructions
 	// at which the local function entry is offset from the global entry.  Local function
 	// entry names will be prefixed with a '.'
-	private static int[] PPC64_ABIV2_GLOBAL_ENTRY_OFFSET = new int[] { 0, 0, 1, 2, 4, 8, 16, 0 };
+	private static int[] PPC64_ABIV2_GLOBAL_ENTRY_OFFSET = { 0, 0, 1, 2, 4, 8, 16, 0 };
 
 	@Override
 	public Address evaluateElfSymbol(ElfLoadHelper elfLoadHelper, ElfSymbol elfSymbol,

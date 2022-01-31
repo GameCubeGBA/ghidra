@@ -990,13 +990,13 @@ public class GraphComponent<V extends VisualVertex, E extends VisualEdge<V>, G e
 			int startX = 0;
 			int startY = bottomY - 5; // add some padding
 
-			Color[] colors = new Color[] { backgroundColor, primaryViewer.getBackground() };
+			Color[] colors = { backgroundColor, primaryViewer.getBackground() };
 
 			int backgroundHeight = (stringBounds.height * 3);
 			int backgroundWidth = viewerBounds.width;
             int backgroundY = bottomY - backgroundHeight;
 
-			float[] fractions = new float[] { 0.0f, .95f };
+			float[] fractions = { 0.0f, .95f };
             LinearGradientPaint bottomToTopGradiant = new LinearGradientPaint(
 				new Point(startX, startY), new Point(startX, backgroundY), fractions, colors);
 

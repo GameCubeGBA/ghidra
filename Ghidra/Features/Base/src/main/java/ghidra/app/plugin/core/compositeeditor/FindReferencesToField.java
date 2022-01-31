@@ -31,7 +31,7 @@ public class FindReferencesToField extends CompositeEditorTableAction {
 	public final static String ACTION_NAME = "Find Uses of";
 	private final static String GROUP_NAME = BASIC_ACTION_GROUP;
 	private final static String DESCRIPTION = "Find uses of field in the selected row";
-	private static String[] popupPath = new String[] { ACTION_NAME };
+	private static String[] popupPath = { ACTION_NAME };
 
 	public FindReferencesToField(CompositeEditorProvider provider) {
 		super(provider, EDIT_ACTION_PREFIX + ACTION_NAME, GROUP_NAME, popupPath, null, null);

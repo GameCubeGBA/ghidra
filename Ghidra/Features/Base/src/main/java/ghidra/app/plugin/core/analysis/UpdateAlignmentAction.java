@@ -34,7 +34,7 @@ public class UpdateAlignmentAction extends ToggleDockingAction implements Addres
 		this.alignment = alignment;
 		this.model = model;
 		
-		String[] menuPath = new String[] {"Alignment", Integer.toString(alignment)};
+		String[] menuPath = {"Alignment", Integer.toString(alignment)};
         setPopupMenuData( new MenuData( menuPath ) );
         setMenuBarData( new MenuData( menuPath ) );
 		setEnabled(true);

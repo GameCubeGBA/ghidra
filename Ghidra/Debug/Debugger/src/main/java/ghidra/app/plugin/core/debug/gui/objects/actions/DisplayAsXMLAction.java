@@ -40,7 +40,7 @@ public class DisplayAsXMLAction extends DisplayAsAction {
 
 	public DisplayAsXMLAction(PluginTool tool, String owner, DebuggerObjectsProvider provider) {
 		super("DisplayXml", tool, owner, provider);
-		String[] path = new String[] { "Display as...", "XML" };
+		String[] path = { "Display as...", "XML" };
 		setPopupMenuData(new MenuData(path, ICON_XML));
 		setKeyBindingData(new KeyBindingData(KeyEvent.VK_E, InputEvent.CTRL_DOWN_MASK));
 		setHelpLocation(new HelpLocation(owner, "display_as_xml"));

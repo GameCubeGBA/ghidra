@@ -50,9 +50,9 @@ class RecoveryMgr {
 
 	private BufferMgr bufferMgr;
 
-	private int[] buffersSaved = new int[] { 0, 0 };
-	private int[] buffersIgnored = new int[] { 0, 0 };
-	private int[] buffersRemoved = new int[] { 0, 0 };
+	private int[] buffersSaved = { 0, 0 };
+	private int[] buffersIgnored = { 0, 0 };
+	private int[] buffersRemoved = { 0, 0 };
 
 	/**
 	 * Constructor used to perform recovery.

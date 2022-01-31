@@ -37,7 +37,7 @@ import ghidra.program.util.*;
 class CreateStructureAction extends ListingContextAction {
 
 	private static final String[] CREATE_STRUCTURE_POPUP_MENU =
-		new String[] { "Data", "Create Structure..." };
+            { "Data", "Create Structure..." };
 
 	private DataPlugin plugin;
 	private CreateStructureDialog createStructureDialog;

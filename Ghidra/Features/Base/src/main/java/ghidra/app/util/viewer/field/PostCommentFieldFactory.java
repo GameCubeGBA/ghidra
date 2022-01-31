@@ -406,7 +406,7 @@ public class PostCommentFieldFactory extends FieldFactory {
 				Function function = listing.getFunctionContaining(addr);
 				if (function != null) {
 					if (flagFunctionExits && (flowType.isTerminal())) {
-						String[] str = new String[] {
+						String[] str = {
 							FUN_EXIT_FLAG_LEADER + function.getName() + FUN_EXIT_FLAG_TAIL };
 
 						return getTextField(str, autoComment, proxy, xStart, true);
@@ -415,7 +415,7 @@ public class PostCommentFieldFactory extends FieldFactory {
 			}
 			// Add Jump/Terminator
 			if (flagJMPsRETs && !instr.hasFallthrough()) {
-				String[] str = new String[] { DEFAULT_FLAG_COMMENT };
+				String[] str = { DEFAULT_FLAG_COMMENT };
 				return getTextField(str, autoComment, proxy, xStart, true);
 			}
 		}

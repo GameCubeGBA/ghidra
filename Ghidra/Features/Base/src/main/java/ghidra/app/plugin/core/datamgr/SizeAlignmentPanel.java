@@ -51,7 +51,7 @@ public class SizeAlignmentPanel extends JPanel {
 
 	class SizeAlignmentTableModel extends AbstractTableModel {
 
-		private final String[] columnNames = new String[] { "Size", "Alignment" };
+		private final String[] columnNames = { "Size", "Alignment" };
 		private final int SIZE_COLUMN = 0;
 		private final int ALIGNMENT_COLUMN = 1;
 

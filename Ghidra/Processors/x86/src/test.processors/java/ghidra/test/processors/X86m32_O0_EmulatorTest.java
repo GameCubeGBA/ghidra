@@ -23,7 +23,7 @@ public class X86m32_O0_EmulatorTest extends ProcessorEmulatorTestAdapter {
 	private static final String LANGUAGE_ID = "x86:LE:32:default";
 	private static final String COMPILER_SPEC_ID = "gcc";
 
-	private static final String[] REG_DUMP_SET = new String[] {};
+	private static final String[] REG_DUMP_SET = {};
 
 	public X86m32_O0_EmulatorTest(String name) throws Exception {
 		super(name, LANGUAGE_ID, COMPILER_SPEC_ID, REG_DUMP_SET);

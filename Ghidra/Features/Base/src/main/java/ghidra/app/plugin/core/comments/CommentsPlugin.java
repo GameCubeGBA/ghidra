@@ -48,7 +48,7 @@ import ghidra.util.HelpLocation;
 public class CommentsPlugin extends Plugin implements OptionsChangeListener {
 
 	// Delete Comments Action info
-	private final static String[] DELETE_MENUPATH = new String[] { "Comments", "Delete" };
+	private final static String[] DELETE_MENUPATH = { "Comments", "Delete" };
 
 	private final static String[] HISTORY_MENUPATH = { "Comments", "Show History..." };
 

@@ -216,7 +216,7 @@ public class GhidraScriptTest extends AbstractGhidraHeadedIntegrationTest {
 		GhidraScript script = getScript();
 		Address address = script.toAddr(0x1008010);
 		byte[] values =
-			new byte[] { 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, (byte) 0x88, (byte) 0x99, };
+                { 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, (byte) 0x88, (byte) 0x99, };
 		script.setBytes(address, values);
 		byte[] values2 = script.getBytes(address, values.length);
 		assertEquals(values.length, values2.length);
@@ -546,7 +546,7 @@ public class GhidraScriptTest extends AbstractGhidraHeadedIntegrationTest {
 		final GhidraScript script = getScript();
 		final String[] myChoice = new String[1];
 
-		final String[] choices = new String[] { "one fish", "two fish", "red fish", "blue fish" };
+		final String[] choices = { "one fish", "two fish", "red fish", "blue fish" };
 
 		runSwing(() -> {
 			try {

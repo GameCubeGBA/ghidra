@@ -192,8 +192,8 @@ class SymbolServerTableModel
 		private static final Icon VALID_ICON = Icons.get("images/checkmark_green.gif");
 		private static final Icon INVALID_ICON = Icons.ERROR_ICON;
 
-		private static Icon[] icons = new Icon[] { null, VALID_ICON, INVALID_ICON };
-		private static String[] toolTips = new String[] { null, "Status: Ok", "Status: Failed" };
+		private static Icon[] icons = { null, VALID_ICON, INVALID_ICON };
+		private static String[] toolTips = { null, "Status: Ok", "Status: Failed" };
 
 		EnumIconColumnRenderer<SymbolServerRow.LocationStatus> renderer =
 			new EnumIconColumnRenderer<>(SymbolServerRow.LocationStatus.class, icons, toolTips);
