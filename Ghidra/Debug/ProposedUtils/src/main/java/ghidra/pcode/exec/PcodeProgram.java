@@ -37,20 +37,16 @@ public class PcodeProgram {
 		if (markup) {
 			return htmlSpan("register", reg.toString());
 		}
-		else {
-			return reg.toString();
-		}
-	}
+        return reg.toString();
+    }
 
 	public static String constToString(Varnode cvn, boolean markup) {
 		String display = String.format("%d:%d", cvn.getOffset(), cvn.getSize());
 		if (markup) {
 			return htmlSpan("constant", display);
 		}
-		else {
-			return display;
-		}
-	}
+        return display;
+    }
 
 	public static String uniqueToString(Varnode uvn, boolean markup) {
 		String display = String.format("$U%s:%d",
@@ -58,20 +54,16 @@ public class PcodeProgram {
 		if (markup) {
 			return htmlSpan("unique", display);
 		}
-		else {
-			return display;
-		}
-	}
+        return display;
+    }
 
 	public static String addressToString(Varnode avn, boolean markup) {
 		String display = String.format("%s:%d", avn.getAddress().toString(true), avn.getSize());
 		if (markup) {
 			return htmlSpan("address", display);
 		}
-		else {
-			return display;
-		}
-	}
+        return display;
+    }
 
 	public static String vnToString(Language language, Varnode vn, boolean markup) {
 		Register reg =
@@ -97,10 +89,8 @@ public class PcodeProgram {
 		if (markup) {
 			return htmlSpan("space", display);
 		}
-		else {
-			return display;
-		}
-	}
+        return display;
+    }
 
 	public static String useropToString(Language language, Varnode vn, boolean markup,
 			Map<Integer, String> useropNames) {
@@ -111,19 +101,15 @@ public class PcodeProgram {
 		if (markup) {
 			return htmlSpan("userop", display);
 		}
-		else {
-			return display;
-		}
-	}
+        return display;
+    }
 
 	public static String opCodeToString(Language language, int op, boolean markup) {
 		if (markup) {
 			return htmlSpan("op", PcodeOp.getMnemonic(op));
 		}
-		else {
-			return PcodeOp.getMnemonic(op);
-		}
-	}
+        return PcodeOp.getMnemonic(op);
+    }
 
 	public static String opToString(Language language, PcodeOp op, boolean markup,
 			Map<Integer, String> useropNames) {

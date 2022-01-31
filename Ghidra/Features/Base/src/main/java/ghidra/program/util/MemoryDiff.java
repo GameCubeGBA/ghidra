@@ -161,13 +161,13 @@ public class MemoryDiff {
 		    if (range.contains(address)) {
 		    	return mid;
 		    }
-		    else if (address.compareTo(range.getMinAddress()) < 0) {
-		    	high = mid - 1;
-		    }
-		    else {
-		    	low = mid + 1;
-		    }
-		}
+            if (address.compareTo(range.getMinAddress()) < 0) {
+                high = mid - 1;
+            }
+            else {
+                low = mid + 1;
+            }
+        }
 		return -(low + 1);  // not found.
 	}
 
@@ -198,10 +198,10 @@ public class MemoryDiff {
 		if (block1 == null) {
 			return (block2 == null);
 		}
-		else if (block2 == null) {
-			return false;
-		}
-		if(!block1.getName().equals(block2.getName())) {
+        if (block2 == null) {
+            return false;
+        }
+        if(!block1.getName().equals(block2.getName())) {
 			return false;
 		}
 		if (!block1.getStart().equals(block2.getStart())) {

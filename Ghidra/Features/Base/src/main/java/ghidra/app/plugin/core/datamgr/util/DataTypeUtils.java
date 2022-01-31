@@ -458,15 +458,13 @@ public class DataTypeUtils {
 			return new PointerDataType(copyToNamedBaseDataType(pdt.getDataType(), dtm),
 				pdt.hasLanguageDependantLength() ? -1 : pdt.getLength(), dtm);
 		}
-		else if (dataType instanceof Array) {
-			Array adt = (Array) dataType;
-			return new ArrayDataType(copyToNamedBaseDataType(adt.getDataType(), dtm),
-				adt.getNumElements(), adt.getElementLength(), dtm);
-		}
-		else {
-			return dataType.copy(dtm);
-		}
-	}
+        if (dataType instanceof Array) {
+            Array adt = (Array) dataType;
+            return new ArrayDataType(copyToNamedBaseDataType(adt.getDataType(), dtm),
+                adt.getNumElements(), adt.getElementLength(), dtm);
+        }
+        return dataType.copy(dtm);
+    }
 
 	public static void showUnmodifiableArchiveErrorMessage(Component parent, String title,
 			DataTypeManager dtm) {

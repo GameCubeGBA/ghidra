@@ -131,11 +131,11 @@ public class CascadedDropTarget extends DropTarget {
 		if ( primaryDropTarget == dropTarget ) {
 			return secondaryDropTarget;
 		}
-		else if ( secondaryDropTarget == dropTarget ) {
-			return primaryDropTarget;
-		}
-		
-		if ( primaryDropTarget instanceof CascadedDropTarget ) {
+        if ( secondaryDropTarget == dropTarget ) {
+            return primaryDropTarget;
+        }
+
+        if ( primaryDropTarget instanceof CascadedDropTarget ) {
 			CascadedDropTarget cascadedDropTarget = (CascadedDropTarget) primaryDropTarget;
 			primaryDropTarget = cascadedDropTarget.removeDropTarget( dropTarget );
 		}

@@ -93,15 +93,15 @@ public class SizeAlignmentPanel extends JPanel {
 				if (columnIndex == SIZE_COLUMN) {
 					return size;
 				}
-				else if (columnIndex == ALIGNMENT_COLUMN) {
-					try {
-						return dataOrganization.getSizeAlignment(size);
-					}
-					catch (NoValueException e) {
-						return null;
-					}
-				}
-			}
+                if (columnIndex == ALIGNMENT_COLUMN) {
+                    try {
+                        return dataOrganization.getSizeAlignment(size);
+                    }
+                    catch (NoValueException e) {
+                        return null;
+                    }
+                }
+            }
 			return null;
 		}
 

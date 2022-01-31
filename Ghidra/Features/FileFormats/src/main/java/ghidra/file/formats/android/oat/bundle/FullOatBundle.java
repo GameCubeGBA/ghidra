@@ -254,10 +254,10 @@ public class FullOatBundle implements OatBundle {
 			if (parentFolder.getFolder(baseName + APK) != null) {
 				return parentFolder.getFolder(baseName + APK);//APP_DIR/APP.apk/
 			}
-			else if (parentFolder.getFolder(baseName + JAR) != null) {
-				return parentFolder.getFolder(baseName + JAR);//APP_DIR/APP.jar/
-			}
-		}
+            if (parentFolder.getFolder(baseName + JAR) != null) {
+                return parentFolder.getFolder(baseName + JAR);//APP_DIR/APP.jar/
+            }
+        }
 		return null;
 	}
 
@@ -280,10 +280,10 @@ public class FullOatBundle implements OatBundle {
 			if (parentFolder.getFolder(baseName + APK) != null) {
 				return parentFolder.getFolder(baseName + APK);//APP_DIR/APP.apk/
 			}
-			else if (parentFolder.getFolder(baseName + JAR) != null) {
-				return parentFolder.getFolder(baseName + JAR);//APP_DIR/APP.jar/
-			}
-		}
+            if (parentFolder.getFolder(baseName + JAR) != null) {
+                return parentFolder.getFolder(baseName + JAR);//APP_DIR/APP.jar/
+            }
+        }
 		return null;
 	}
 

@@ -327,17 +327,17 @@ public final class ReferenceUtils {
 		if (dataType instanceof Array) {
 			return getBaseDataType(((Array) dataType).getDataType(), includeTypedefs);
 		}
-		else if (dataType instanceof Pointer) {
-			DataType baseDataType = ((Pointer) dataType).getDataType();
-			if (baseDataType != null) {
-				return getBaseDataType(baseDataType, includeTypedefs);
-			}
-		}
-		else if (includeTypedefs && dataType instanceof TypeDef) {
-			DataType baseDataType = ((TypeDef) dataType).getBaseDataType();
-			return getBaseDataType(baseDataType, includeTypedefs);
-		}
-		return dataType;
+        if (dataType instanceof Pointer) {
+            DataType baseDataType = ((Pointer) dataType).getDataType();
+            if (baseDataType != null) {
+                return getBaseDataType(baseDataType, includeTypedefs);
+            }
+        }
+        else if (includeTypedefs && dataType instanceof TypeDef) {
+            DataType baseDataType = ((TypeDef) dataType).getBaseDataType();
+            return getBaseDataType(baseDataType, includeTypedefs);
+        }
+        return dataType;
 	}
 
 	/**
@@ -404,60 +404,60 @@ public final class ReferenceUtils {
             return createFunctionSignatureFieldLocationDescriptor(
                 (FunctionSignatureFieldLocation) location);
 		}
-		else if (location instanceof MnemonicFieldLocation) {
-			return createMnemonicLocationDescriptor((MnemonicFieldLocation) location);
-		}
-		else if (location instanceof OperandFieldLocation) {
-			return createOperandLocationDescriptor((OperandFieldLocation) location);
-		}
-		else if (location instanceof LabelFieldLocation) {
-			return new LabelLocationDescriptor(location, program);
-		}
-		else if (location instanceof XRefFieldLocation) {
-			return createXRefLocationDescriptor(location);
-		}
-		else if (location instanceof VariableXRefFieldLocation) {
-			return createVariableXRefLocationDescriptor(location);
-		}
-		else if (location instanceof VariableNameFieldLocation) {
-			return new VariableNameLocationDescriptor((VariableNameFieldLocation) location,
-				program);
-		}
-		else if (location instanceof VariableTypeFieldLocation) {
-			return new VariableTypeLocationDescriptor(location, program);
-		}
-		else if (location instanceof AddressFieldLocation) {
-			return new AddressLocationDescriptor(location, program);
-		}
-		else if (location instanceof GenericCompositeDataTypeProgramLocation) {
-			// Note: this 'if' must be before the one below for 'GenericDataTypeProgramLocation',
-			//       as that one is more generic
-			GenericCompositeDataTypeProgramLocation dataTypeLocation =
-				(GenericCompositeDataTypeProgramLocation) location;
-			return new GenericCompositeDataTypeLocationDescriptor(dataTypeLocation, program);
-		}
-		else if (location instanceof GenericDataTypeProgramLocation) {
-			GenericDataTypeProgramLocation dataTypeLocation =
-				(GenericDataTypeProgramLocation) location;
-			DataType dataType = dataTypeLocation.getDataType();
+        if (location instanceof MnemonicFieldLocation) {
+            return createMnemonicLocationDescriptor((MnemonicFieldLocation) location);
+        }
+        if (location instanceof OperandFieldLocation) {
+            return createOperandLocationDescriptor((OperandFieldLocation) location);
+        }
+        if (location instanceof LabelFieldLocation) {
+            return new LabelLocationDescriptor(location, program);
+        }
+        if (location instanceof XRefFieldLocation) {
+            return createXRefLocationDescriptor(location);
+        }
+        if (location instanceof VariableXRefFieldLocation) {
+            return createVariableXRefLocationDescriptor(location);
+        }
+        if (location instanceof VariableNameFieldLocation) {
+            return new VariableNameLocationDescriptor((VariableNameFieldLocation) location,
+                program);
+        }
+        if (location instanceof VariableTypeFieldLocation) {
+            return new VariableTypeLocationDescriptor(location, program);
+        }
+        if (location instanceof AddressFieldLocation) {
+            return new AddressLocationDescriptor(location, program);
+        }
+        if (location instanceof GenericCompositeDataTypeProgramLocation) {
+            // Note: this 'if' must be before the one below for 'GenericDataTypeProgramLocation',
+            //       as that one is more generic
+            GenericCompositeDataTypeProgramLocation dataTypeLocation =
+                (GenericCompositeDataTypeProgramLocation) location;
+            return new GenericCompositeDataTypeLocationDescriptor(dataTypeLocation, program);
+        }
+        if (location instanceof GenericDataTypeProgramLocation) {
+            GenericDataTypeProgramLocation dataTypeLocation =
+                (GenericDataTypeProgramLocation) location;
+            DataType dataType = dataTypeLocation.getDataType();
 
-			if (dataType instanceof FunctionDefinition) {
-				FunctionDefinition functionDefinition = (FunctionDefinition) dataType;
-				return new FunctionDefinitionLocationDescriptor(location, program,
-					functionDefinition);
-			}
-			return new GenericDataTypeLocationDescriptor(location, program, dataType);
-		}
-		else if (location instanceof FieldNameFieldLocation) {
-			FieldNameFieldLocation fieldLocation = (FieldNameFieldLocation) location;
-            return createDataMemberLocationDescriptor(fieldLocation);
-		}
-		// keep this last because some of the above locations extend CodeUnitLocation
-		else if (location instanceof CodeUnitLocation) {
-			return new AddressLocationDescriptor(location, program);
-		}
+            if (dataType instanceof FunctionDefinition) {
+                FunctionDefinition functionDefinition = (FunctionDefinition) dataType;
+                return new FunctionDefinitionLocationDescriptor(location, program,
+                    functionDefinition);
+            }
+            return new GenericDataTypeLocationDescriptor(location, program, dataType);
+        }
+        if (location instanceof FieldNameFieldLocation) {
+            FieldNameFieldLocation fieldLocation = (FieldNameFieldLocation) location;
+return createDataMemberLocationDescriptor(fieldLocation);
+        }
+        // keep this last because some of the above locations extend CodeUnitLocation
+        if (location instanceof CodeUnitLocation) {
+            return new AddressLocationDescriptor(location, program);
+        }
 
-		return null;
+        return null;
 	}
 
 	private static LocationDescriptor createVariableXRefLocationDescriptor(
@@ -483,14 +483,14 @@ public final class ReferenceUtils {
 		if (location instanceof FunctionReturnTypeFieldLocation) {
 			return new FunctionReturnTypeLocationDescriptor(location, program);
 		}
-		else if (location instanceof FunctionParameterFieldLocation) {
-			if (location instanceof FunctionParameterNameFieldLocation) {
-				return new FunctionParameterNameLocationDescriptor(location, program);
-			}
-			return new FunctionParameterTypeLocationDescriptor(location, program);
-		}
+        if (location instanceof FunctionParameterFieldLocation) {
+            if (location instanceof FunctionParameterNameFieldLocation) {
+                return new FunctionParameterNameLocationDescriptor(location, program);
+            }
+            return new FunctionParameterTypeLocationDescriptor(location, program);
+        }
 
-		return new FunctionSignatureFieldLocationDescriptor(location, program);
+        return new FunctionSignatureFieldLocationDescriptor(location, program);
 	}
 
 	private static LocationDescriptor createMnemonicLocationDescriptor(

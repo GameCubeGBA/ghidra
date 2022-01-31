@@ -139,11 +139,11 @@ public class CombinedStringSearcher {
 		if (string1 == null) {  // for this purpose, null are larger than non nulls
 			return 1;
 		}
-		else if (string2 == null) {
-			return -1;
-		}
+        if (string2 == null) {
+            return -1;
+        }
 
-		Address end1 = string1.getEndAddress();
+        Address end1 = string1.getEndAddress();
 		Address start2 = string2.getAddress();
 		if (end1.compareTo(start2) < 0) {
 			return -1;

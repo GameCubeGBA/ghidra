@@ -198,19 +198,17 @@ public abstract class AbstractEditorTest extends AbstractGhidraHeadedIntegration
 		if (composite instanceof Structure) {
 			return "Structure Editor";
 		}
-		else if (composite instanceof Union) {
-			return "Union Editor";
-		}
-		else if (composite instanceof Enum) {
-			return "Enum Editor";
-		}
-		else if (composite instanceof StackFrameDataType) {
-			return "Stack Editor";
-		}
-		else {
-			return "Composite Data Type Editor";
-		}
-	}
+        if (composite instanceof Union) {
+            return "Union Editor";
+        }
+        if (composite instanceof Enum) {
+            return "Enum Editor";
+        }
+        if (composite instanceof StackFrameDataType) {
+            return "Stack Editor";
+        }
+        return "Composite Data Type Editor";
+    }
 
 	protected CycleGroupAction getCycleGroup(DataType dt) {
 		for (CycleGroupAction action : cycles) {
@@ -696,14 +694,14 @@ public abstract class AbstractEditorTest extends AbstractGhidraHeadedIntegration
 		if (editorComponent instanceof JTextField) {
 			return (JTextField) editorComponent;
 		}
-		else if (editorComponent instanceof JPanel) {
-			DataTypeSelectionEditor dataTypeSelectionEditor = getDataTypeSelectionEditor();
-			assertNotNull("Could not find data type editor when attempting to edit a data type",
-				dataTypeSelectionEditor);
-			return dataTypeSelectionEditor.getDropDownTextField();
-		}
+        if (editorComponent instanceof JPanel) {
+            DataTypeSelectionEditor dataTypeSelectionEditor = getDataTypeSelectionEditor();
+            assertNotNull("Could not find data type editor when attempting to edit a data type",
+                dataTypeSelectionEditor);
+            return dataTypeSelectionEditor.getDropDownTextField();
+        }
 
-		return null;
+        return null;
 	}
 
 	protected Component getKeyEventDestination() {

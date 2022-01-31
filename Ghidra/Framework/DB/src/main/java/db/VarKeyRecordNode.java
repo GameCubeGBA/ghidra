@@ -217,13 +217,13 @@ class VarKeyRecordNode extends VarKeyNode implements FieldKeyRecordNode {
 			if (rc == 0) {
 				return i;
 			}
-			else if (rc > 0) {
-				min = i + 1;
-			}
-			else {
-				max = i - 1;
-			}
-		}
+            if (rc > 0) {
+                min = i + 1;
+            }
+            else {
+                max = i - 1;
+            }
+        }
 		return -(min + 1);
 	}
 
@@ -619,13 +619,13 @@ class VarKeyRecordNode extends VarKeyNode implements FieldKeyRecordNode {
 			if (offset == halfway) {
 				return i;
 			}
-			else if (offset < halfway) {
-				max = i - 1;
-			}
-			else {
-				min = i + 1;
-			}
-		}
+            if (offset < halfway) {
+                max = i - 1;
+            }
+            else {
+                min = i + 1;
+            }
+        }
 		return min;
 	}
 

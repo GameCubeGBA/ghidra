@@ -225,11 +225,11 @@ public class DecompilerScriptUtils {
 			return getAssignedAddressFromPcode(constantVarnode);
 
 		}
-		else if (valuePcodeOp.getOpcode() != PcodeOp.PTRSUB) {
-			return null;
-		}
+        if (valuePcodeOp.getOpcode() != PcodeOp.PTRSUB) {
+            return null;
+        }
 
-		// don't need to check isConst bc always is
+        // don't need to check isConst bc always is
 		Varnode constantVarnode = valuePcodeOp.getInput(1);
 		addressOffset = constantVarnode.getOffset();
 		Address possibleAddress = toAddr(addressOffset);

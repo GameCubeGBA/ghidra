@@ -515,10 +515,10 @@ public abstract class AbstractCreateDataTypeModel {
 			}
 			return false;
 		}
-		else if (mapAddress == null) {
-			return false;
-		}
-		Memory memory = getProgram().getMemory();
+        if (mapAddress == null) {
+            return false;
+        }
+        Memory memory = getProgram().getMemory();
 		return memory.getLoadedAndInitializedAddressSet().contains(mapAddress);
 	}
 

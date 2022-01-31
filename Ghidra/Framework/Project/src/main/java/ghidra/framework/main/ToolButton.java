@@ -184,23 +184,23 @@ class ToolButton extends EmptyBorderButton implements Draggable, Droppable {
 						DataTreeDragNDropHandler.localDomainFileFlavor);
 					return containsSupportedDataTypes((List<DomainFile>) draggedData);
 				}
-				else if (element.equals(ToolButtonTransferable.localToolButtonFlavor)) {
-					Object draggedData = e.getTransferable().getTransferData(
-						ToolButtonTransferable.localToolButtonFlavor);
-					ToolButton draggedButton = (ToolButton) draggedData;
-					if (draggedButton != null) {
-						if (draggedButton.associatedRunningTool == associatedRunningTool) {
-							// tool chest -> tool chest is not allowed (both runningTools are null).
-							// runningTool -> same runningTool is not allowed.
-							return false;
-						}
-						return true;
-					}
-				}
-				else if (element.equals(VersionInfoTransferable.localVersionInfoFlavor)) {
-					return true;
-				}
-			}
+                if (element.equals(ToolButtonTransferable.localToolButtonFlavor)) {
+                    Object draggedData = e.getTransferable().getTransferData(
+                        ToolButtonTransferable.localToolButtonFlavor);
+                    ToolButton draggedButton = (ToolButton) draggedData;
+                    if (draggedButton != null) {
+                        if (draggedButton.associatedRunningTool == associatedRunningTool) {
+                            // tool chest -> tool chest is not allowed (both runningTools are null).
+                            // runningTool -> same runningTool is not allowed.
+                            return false;
+                        }
+                        return true;
+                    }
+                }
+                else if (element.equals(VersionInfoTransferable.localVersionInfoFlavor)) {
+                    return true;
+                }
+            }
 		}
 		catch (UnsupportedFlavorException | IOException e1) {
 			// don't care; return false

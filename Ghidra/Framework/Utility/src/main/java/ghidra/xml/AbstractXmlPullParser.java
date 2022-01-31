@@ -165,33 +165,31 @@ public abstract class AbstractXmlPullParser implements XmlPullParser {
 			// so that ship has sailed (no skipping, just return)
 			return 0;
 		}
-		else if (peekLevel == elementLevel) {
-			// the "start" element is the same level as the front of the queue
-			if (element.isStart() && peek.isEnd() && element.getName().equals(peek.getName())) {
-				// hey, the "start" *is* the actual start, and the front of the queue
-				// is the actual end (presumably).  So pop it and return...
-				next();
-				return 1;
-			}
-			// looks like the front of the queue is a sibling.  Don't skip anything,
-			// just return
-			return 0;
-		}
-		else {
-			// the "start" is an ancestor of the front of the queue.  Pop stuff off until
-			// we get past the end element.  Note that this could just fly off the end of the
-			// XML file if you hand in a bogus element (although that can probably happen
-			// all over the place)
-			XmlElement next = next();
-			int count = 1;
-			while (!(next.isEnd() && next.getLevel() == elementLevel && next.getName().equals(
-				elementName))) {
-				next = next();
-				++count;
-			}
-			return count;
-		}
-	}
+        if (peekLevel == elementLevel) {
+            // the "start" element is the same level as the front of the queue
+            if (element.isStart() && peek.isEnd() && element.getName().equals(peek.getName())) {
+                // hey, the "start" *is* the actual start, and the front of the queue
+                // is the actual end (presumably).  So pop it and return...
+                next();
+                return 1;
+            }
+            // looks like the front of the queue is a sibling.  Don't skip anything,
+            // just return
+            return 0;
+        }
+        // the "start" is an ancestor of the front of the queue.  Pop stuff off until
+        // we get past the end element.  Note that this could just fly off the end of the
+        // XML file if you hand in a bogus element (although that can probably happen
+        // all over the place)
+        XmlElement next = next();
+        int count = 1;
+        while (!(next.isEnd() && next.getLevel() == elementLevel && next.getName().equals(
+            elementName))) {
+            next = next();
+            ++count;
+        }
+        return count;
+    }
 
 	public int discardSubTree(String elementName) {
 		XmlElement start = start(elementName);

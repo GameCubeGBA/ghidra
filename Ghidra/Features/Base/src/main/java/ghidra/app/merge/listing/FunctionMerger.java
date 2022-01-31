@@ -1144,18 +1144,18 @@ class FunctionMerger extends AbstractFunctionMerger implements ListingMerger {
 			if (latestIsInvalidThunk && myIsInvalidThunk) {
 				continue;
 			}
-			else if (myIsInvalidThunk) {
-				// The my thunked function is no longer there so can't pick the thunk. Instead keep LATEST function.
-				// We already have the LATEST so do nothing.
-				continue;
-			}
-			else if (latestIsInvalidThunk) {
-				// The latest thunked function is no longer there so can't pick the thunk. Instead keep MY function.
-				ProgramMerge programListingMerge = getProgramListingMerge(KEEP_MY);
-				programListingMerge.mergeFunction(thunkConflictAddress, monitor);
-				continue;
-			}
-			// If we have a thunk function choice then a "Use For All" has already occurred.
+            if (myIsInvalidThunk) {
+                // The my thunked function is no longer there so can't pick the thunk. Instead keep LATEST function.
+                // We already have the LATEST so do nothing.
+                continue;
+            }
+            if (latestIsInvalidThunk) {
+                // The latest thunked function is no longer there so can't pick the thunk. Instead keep MY function.
+                ProgramMerge programListingMerge = getProgramListingMerge(KEEP_MY);
+                programListingMerge.mergeFunction(thunkConflictAddress, monitor);
+                continue;
+            }
+            // If we have a thunk function choice then a "Use For All" has already occurred.
 			if (thunkChoice != ASK_USER) {
 				merge(thunkConflictAddress, thunkChoice, monitor);
 			}
@@ -1583,16 +1583,16 @@ class FunctionMerger extends AbstractFunctionMerger implements ListingMerger {
 		if (pgm == programs[RESULT]) {
 			return RESULT;
 		}
-		else if (pgm == programs[LATEST]) {
-			return LATEST;
-		}
-		else if (pgm == programs[MY]) {
-			return MY;
-		}
-		else if (pgm == programs[ORIGINAL]) {
-			return ORIGINAL;
-		}
-		return -1;
+        if (pgm == programs[LATEST]) {
+            return LATEST;
+        }
+        if (pgm == programs[MY]) {
+            return MY;
+        }
+        if (pgm == programs[ORIGINAL]) {
+            return ORIGINAL;
+        }
+        return -1;
 	}
 
 	/**
@@ -1845,11 +1845,11 @@ class FunctionMerger extends AbstractFunctionMerger implements ListingMerger {
 			}
 			return isEquivalent(thunkedFunction1, thunkedFunction2);
 		}
-		else if (thunkedFunction2 != null) {
-			return false;
-		}
+        if (thunkedFunction2 != null) {
+            return false;
+        }
 
-		// TODO: using isEquivelent seems bad
+        // TODO: using isEquivelent seems bad
 
 		Parameter returnParam1 = function1.getReturn();
 		Parameter returnParam2 = function2.getReturn();

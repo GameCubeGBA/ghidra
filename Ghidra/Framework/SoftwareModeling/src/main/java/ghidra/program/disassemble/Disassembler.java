@@ -852,21 +852,21 @@ public class Disassembler implements DisassemblerConflictHandler {
 				// TODO: EXTERNAL block could be more formal other than by name
 				return; // return empty block without error
 			}
-			else if (!memBlock.isLoaded()) {
-				reason = "non-loaded";
-			}
-			else if (memBlock.isInitialized()) {
-				// assume non-execute restriction was imposed
-				reason = "non-execute";
-			}
-			else if (memBlock.isMapped()) {
-				// Bit/Byte mapped blocks are considered uninitialized by memory manager
-				reason = "mapped";
-			}
-			else {
-				reason = "uninitialized";
-			}
-			String message = "Disassembly not permitted within " + reason + " memory block";
+            if (!memBlock.isLoaded()) {
+                reason = "non-loaded";
+            }
+            else if (memBlock.isInitialized()) {
+                // assume non-execute restriction was imposed
+                reason = "non-execute";
+            }
+            else if (memBlock.isMapped()) {
+                // Bit/Byte mapped blocks are considered uninitialized by memory manager
+                reason = "mapped";
+            }
+            else {
+                reason = "uninitialized";
+            }
+            String message = "Disassembly not permitted within " + reason + " memory block";
 			block.setInstructionMemoryError(startAddr, flowFrom, message);
 		}
 		else {
@@ -901,16 +901,16 @@ public class Disassembler implements DisassemblerConflictHandler {
 						true, true);
 					return;
 				}
-				else if (existingBlockStartInstr.isInDelaySlot() &&
-					!delaySlottedInstructionHasFallthrough(existingBlockStartInstr,
-						existingBlock)) {
-					// Flow into existing delay slot - if delay-slotted instruction does not 
-					// fall-through, we need to resume block after delay slots
-					block = existingBlock;
-					addr = existingBlock.getMaxAddress().next();
-					existingBlockStartInstr = null;
-				}
-			}
+                if (existingBlockStartInstr.isInDelaySlot() &&
+                    !delaySlottedInstructionHasFallthrough(existingBlockStartInstr,
+                        existingBlock)) {
+                    // Flow into existing delay slot - if delay-slotted instruction does not
+                    // fall-through, we need to resume block after delay slots
+                    block = existingBlock;
+                    addr = existingBlock.getMaxAddress().next();
+                    existingBlockStartInstr = null;
+                }
+            }
 		}
 
 		try {

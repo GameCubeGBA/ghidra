@@ -165,13 +165,13 @@ public class EHFunctionInfoModel extends AbstractCreateDataTypeModel {
 		if (isV1) {
 			return size20;
 		}
-		else if (isV2) {
-			return size20 + additional21;
-		}
-		else if (isV3) {
-			return size20 + additional21 + intSize;
-		}
-		return 0;
+        if (isV2) {
+            return size20 + additional21;
+        }
+        if (isV3) {
+            return size20 + additional21 + intSize;
+        }
+        return 0;
 	}
 
 	/**

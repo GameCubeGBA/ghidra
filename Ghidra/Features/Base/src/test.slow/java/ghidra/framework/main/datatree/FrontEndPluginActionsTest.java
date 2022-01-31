@@ -784,10 +784,10 @@ public class FrontEndPluginActionsTest extends AbstractGhidraHeadedIntegrationTe
 		if (editor instanceof Component) {
 			return (Component) editor;
 		}
-		else if (editor instanceof DefaultCellEditor) {
-			return ((DefaultCellEditor) editor).getComponent();
-		}
-		fail("Could not find editor component");
+        if (editor instanceof DefaultCellEditor) {
+            return ((DefaultCellEditor) editor).getComponent();
+        }
+        fail("Could not find editor component");
 		return null;
 	}
 

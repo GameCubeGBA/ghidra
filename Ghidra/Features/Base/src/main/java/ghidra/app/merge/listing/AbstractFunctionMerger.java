@@ -605,10 +605,10 @@ abstract class AbstractFunctionMerger implements ListingMergeConstants {
 				saveFunctionDetailConflict(functions, FUNC_RETURN);
 				return true;
 			}
-			else if (autoMerge) {
-				getMergeMy().mergeFunctionReturn(entry);
-			}
-		}
+            if (autoMerge) {
+                getMergeMy().mergeFunctionReturn(entry);
+            }
+        }
 		return false;
 	}
 
@@ -687,10 +687,10 @@ abstract class AbstractFunctionMerger implements ListingMergeConstants {
 		if (f1 == null) {
 			return (f2 == null);
 		}
-		else if (f2 == null) {
-			return false;
-		}
-		if (f1.hasVarArgs() != f2.hasVarArgs()) {
+        if (f2 == null) {
+            return false;
+        }
+        if (f1.hasVarArgs() != f2.hasVarArgs()) {
 			return false;
 		}
 		Parameter[] f1Parms = f1.getParameters();
@@ -735,11 +735,11 @@ abstract class AbstractFunctionMerger implements ListingMergeConstants {
 		if (f1 == null) {
 			return (f2 == null);
 		}
-		else if (f2 == null) {
-			return false;
-		}
+        if (f2 == null) {
+            return false;
+        }
 
-		Parameter[] f1Parms = f1.getParameters();
+        Parameter[] f1Parms = f1.getParameters();
 		Parameter[] f2Parms = f2.getParameters();
 
 		if (f1.hasCustomVariableStorage() || f2.hasCustomVariableStorage()) {
@@ -1262,16 +1262,14 @@ abstract class AbstractFunctionMerger implements ListingMergeConstants {
 		if ((chosenConflictOption & KEEP_ORIGINAL) != 0) {
 			return getMergeOriginal();
 		}
-		else if ((chosenConflictOption & KEEP_LATEST) != 0) {
-			return getMergeLatest();
-		}
-		else if ((chosenConflictOption & KEEP_MY) != 0) {
-			return getMergeMy();
-		}
-		else {
-			return null;
-		}
-	}
+        if ((chosenConflictOption & KEEP_LATEST) != 0) {
+            return getMergeLatest();
+        }
+        if ((chosenConflictOption & KEEP_MY) != 0) {
+            return getMergeMy();
+        }
+        return null;
+    }
 
 	Address getEntryPoint(Function[] functions, int chosenConflictOption) {
 		Function function = null;

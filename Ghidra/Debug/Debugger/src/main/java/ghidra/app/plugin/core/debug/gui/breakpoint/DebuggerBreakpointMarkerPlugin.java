@@ -196,10 +196,10 @@ public class DebuggerBreakpointMarkerPlugin extends Plugin
 				if (supported.contains(TraceBreakpointKind.SW_EXECUTE)) {
 					return Set.of(TraceBreakpointKind.SW_EXECUTE);
 				}
-				else if (supported.contains(TraceBreakpointKind.HW_EXECUTE)) {
-					return Set.of(TraceBreakpointKind.HW_EXECUTE);
-				}
-				return Set.of();
+                if (supported.contains(TraceBreakpointKind.HW_EXECUTE)) {
+                    return Set.of(TraceBreakpointKind.HW_EXECUTE);
+                }
+                return Set.of();
 			}
 			Data data = (Data) cu;
 			if (!data.isDefined()) {

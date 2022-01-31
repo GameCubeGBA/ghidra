@@ -147,10 +147,8 @@ public class LldbBreakpointInfo {
 		if (info instanceof SBBreakpoint) {
 			return ((SBBreakpoint) info).IsEnabled();
 		}
-		else {
-			return ((SBWatchpoint) info).IsEnabled();
-		}
-	}
+        return ((SBWatchpoint) info).IsEnabled();
+    }
 
 	/**
 	 * Get the number of times the breakpoint has been hit
@@ -161,10 +159,8 @@ public class LldbBreakpointInfo {
 		if (info instanceof SBBreakpoint) {
 			return ((SBBreakpoint) info).GetHitCount();
 		}
-		else {
-			return ((SBWatchpoint) info).GetHitCount();
-		}
-	}
+        return ((SBWatchpoint) info).GetHitCount();
+    }
 
 	/**
 	 * Get a list of resolved addresses
@@ -196,17 +192,13 @@ public class LldbBreakpointInfo {
 		if (info instanceof SBBreakpoint) {
 			return ((SBBreakpoint) info).GetThreadID().intValue();
 		}
-		else {
-			return -1;
-		}
-	}
+        return -1;
+    }
 
 	public long getAddressAsLong() {
 		if (info instanceof SBBreakpoint) {
 			return locations.get(0).GetLoadAddress().longValue();
 		}
-		else {
-			return ((SBWatchpoint) info).GetWatchAddress().longValue();
-		}
-	}
+        return ((SBWatchpoint) info).GetWatchAddress().longValue();
+    }
 }

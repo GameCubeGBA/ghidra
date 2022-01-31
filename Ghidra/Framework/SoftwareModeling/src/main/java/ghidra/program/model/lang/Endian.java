@@ -34,14 +34,12 @@ public enum Endian {
 				(Endian.BIG.toShortString().equalsIgnoreCase(endianess))) {
 				return Endian.BIG;
 			}
-			else if ((Endian.LITTLE.toString().equalsIgnoreCase(endianess)) ||
-				(Endian.LITTLE.toShortString().equalsIgnoreCase(endianess))) {
-				return Endian.LITTLE;
-			}
-			else {
-				return null;
-			}
-		}
+            if ((Endian.LITTLE.toString().equalsIgnoreCase(endianess)) ||
+                (Endian.LITTLE.toShortString().equalsIgnoreCase(endianess))) {
+                return Endian.LITTLE;
+            }
+            return null;
+        }
 		return null;
 	}
 

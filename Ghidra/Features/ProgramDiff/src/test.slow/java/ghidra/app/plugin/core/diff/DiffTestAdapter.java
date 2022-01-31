@@ -736,13 +736,13 @@ public class DiffTestAdapter extends AbstractGhidraHeadedIntegrationTest {
 			if (componentClass.isInstance(element)) {
 				return componentClass.cast(element);
 			}
-			else if (element instanceof Container) {
-				T subComp = getComponentOfType((Container) element, componentClass);
-				if (subComp != null) {
-					return subComp;
-				}
-			}
-		}
+            if (element instanceof Container) {
+                T subComp = getComponentOfType((Container) element, componentClass);
+                if (subComp != null) {
+                    return subComp;
+                }
+            }
+        }
 		return null;
 	}
 

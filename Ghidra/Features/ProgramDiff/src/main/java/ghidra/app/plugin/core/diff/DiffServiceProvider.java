@@ -44,10 +44,10 @@ public class DiffServiceProvider implements ServiceProvider {
 		if (serviceClass == ProgramManager.class) {
 			return serviceClass.cast( diffProgramManager );
 		}
-		else if (serviceClass == GoToService.class) {
-			return serviceClass.cast( diffGoToService );
-		}
-		return serviceProvider.getService(serviceClass);
+        if (serviceClass == GoToService.class) {
+            return serviceClass.cast( diffGoToService );
+        }
+        return serviceProvider.getService(serviceClass);
 	}
 
 	public void removeServiceListener(ServiceListener listener) {

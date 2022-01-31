@@ -540,48 +540,48 @@ public class HTMLUtilities {
 				col = 0;
 				continue;
 			}
-			else if (c == '\n') {
-				buffer.append(c);
-				col = 0;
-				continue;
-			}
-			else if (c == '\t') {
-				int cnt = TAB_SIZE - (col % TAB_SIZE);
-                buffer.append(String.valueOf(HTML_SPACE).repeat(cnt));
-				col = 0;
-				continue;
-			}
-			else if (c == ' ') {
-				buffer.append(HTML_SPACE);
-			}
-			else if (c < ' ') {
-				// Strip other non-printing chars
-				continue;
-			}
-			else if (c > 0x7F) {
-				buffer.append("&#x");
-				buffer.append(Integer.toString(c, 16).toUpperCase());
-				buffer.append(";");
-			}
-			else {
-				switch (c) {
-					case '&':
-						buffer.append("&amp;");
-						break;
-					case '<':
-						buffer.append("&lt;");
-						break;
-					case '>':
-						buffer.append("&gt;");
-						break;
-					case 0x7F:
-						break;
-					default:
-						buffer.append(c);
-						break;
-				}
-			}
-			++col;
+            if (c == '\n') {
+                buffer.append(c);
+                col = 0;
+                continue;
+            }
+            if (c == '\t') {
+                int cnt = TAB_SIZE - (col % TAB_SIZE);
+buffer.append(String.valueOf(HTML_SPACE).repeat(cnt));
+                col = 0;
+                continue;
+            }
+            if (c == ' ') {
+                buffer.append(HTML_SPACE);
+            }
+            else if (c < ' ') {
+                // Strip other non-printing chars
+                continue;
+            }
+            else if (c > 0x7F) {
+                buffer.append("&#x");
+                buffer.append(Integer.toString(c, 16).toUpperCase());
+                buffer.append(";");
+            }
+            else {
+                switch (c) {
+                    case '&':
+                        buffer.append("&amp;");
+                        break;
+                    case '<':
+                        buffer.append("&lt;");
+                        break;
+                    case '>':
+                        buffer.append("&gt;");
+                        break;
+                    case 0x7F:
+                        break;
+                    default:
+                        buffer.append(c);
+                        break;
+                }
+            }
+            ++col;
 		}
 
 		return buffer.toString();

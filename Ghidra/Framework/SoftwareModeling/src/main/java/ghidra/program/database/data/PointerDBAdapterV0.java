@@ -43,11 +43,11 @@ class PointerDBAdapterV0 extends PointerDBAdapter {
 		if (table == null) {
 			throw new VersionException("Missing Table: " + POINTER_TABLE_NAME);
 		}
-		else if (table.getSchema().getVersion() != 0) {
-			throw new VersionException("Expected version 0 for table " + POINTER_TABLE_NAME +
-				" but got " + table.getSchema().getVersion());
-		}
-	}
+        if (table.getSchema().getVersion() != 0) {
+            throw new VersionException("Expected version 0 for table " + POINTER_TABLE_NAME +
+                " but got " + table.getSchema().getVersion());
+        }
+    }
 
 	@Override
 	DBRecord createRecord(long dataTypeID, long categoryID, int length) throws IOException {

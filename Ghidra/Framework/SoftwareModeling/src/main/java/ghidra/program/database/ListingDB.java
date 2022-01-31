@@ -765,10 +765,10 @@ class ListingDB implements Listing {
 		if (data == null) {
 			return inst;
 		}
-		else if (inst == null) {
-			return data;
-		}
-		Address dataAddr = data.getMinAddress();
+        if (inst == null) {
+            return data;
+        }
+        Address dataAddr = data.getMinAddress();
 		Address instAddr = inst.getMinAddress();
 		if (dataAddr.compareTo(instAddr) < 0) {
 			return data;
@@ -786,10 +786,10 @@ class ListingDB implements Listing {
 		if (data == null) {
 			return inst;
 		}
-		else if (inst == null) {
-			return data;
-		}
-		Address dataAddr = data.getMinAddress();
+        if (inst == null) {
+            return data;
+        }
+        Address dataAddr = data.getMinAddress();
 		Address instAddr = inst.getMinAddress();
 		if (dataAddr.compareTo(instAddr) < 0) {
 			return inst;

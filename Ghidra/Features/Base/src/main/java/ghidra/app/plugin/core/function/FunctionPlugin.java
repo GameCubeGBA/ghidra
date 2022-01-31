@@ -468,10 +468,10 @@ public class FunctionPlugin extends Plugin implements DataService {
 			if (cursorIsInSelection) {
 				return true;
 			}
-			else if (program.getListing().getInstructionContaining(addr) != null) {
-				return true;
-			}
-		}
+            if (program.getListing().getInstructionContaining(addr) != null) {
+                return true;
+            }
+        }
 		return false;
 	}
 
@@ -518,17 +518,17 @@ public class FunctionPlugin extends Plugin implements DataService {
 
 			return setVariableDataType(parameter, dataType, promptForConflictRemoval);
 		}
-		else if (location instanceof FunctionSignatureFieldLocation) {
-			SourceType source =
-				(dataType == DataType.DEFAULT) ? SourceType.DEFAULT : SourceType.USER_DEFINED;
-			return tool.execute(
-				new SetReturnDataTypeCmd(function.getEntryPoint(), dataType, source), program);
-		}
-		else if (location instanceof VariableLocation) {
-			Variable variable = ((VariableLocation) location).getVariable();
-			return setVariableDataType(variable, dataType, promptForConflictRemoval);
-		}
-		tool.setStatusInfo("Unsupported function location for data-type");
+        if (location instanceof FunctionSignatureFieldLocation) {
+            SourceType source =
+                (dataType == DataType.DEFAULT) ? SourceType.DEFAULT : SourceType.USER_DEFINED;
+            return tool.execute(
+                new SetReturnDataTypeCmd(function.getEntryPoint(), dataType, source), program);
+        }
+        if (location instanceof VariableLocation) {
+            Variable variable = ((VariableLocation) location).getVariable();
+            return setVariableDataType(variable, dataType, promptForConflictRemoval);
+        }
+        tool.setStatusInfo("Unsupported function location for data-type");
 		return false;
 	}
 

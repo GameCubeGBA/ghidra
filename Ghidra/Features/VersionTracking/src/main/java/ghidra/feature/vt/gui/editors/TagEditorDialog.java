@@ -249,11 +249,11 @@ public class TagEditorDialog extends DialogComponentProvider {
 			if (tagName == null) {
 				return o.tagName == null ? 0 : 1;
 			}
-			else if (o.tagName == null) {
-				return -1;
-			}
+            if (o.tagName == null) {
+                return -1;
+            }
 
-			return tagName.compareToIgnoreCase(o.tagName);
+            return tagName.compareToIgnoreCase(o.tagName);
 		}
 
 		@Override

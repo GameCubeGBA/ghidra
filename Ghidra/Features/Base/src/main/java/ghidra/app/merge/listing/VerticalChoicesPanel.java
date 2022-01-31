@@ -402,10 +402,10 @@ public class VerticalChoicesPanel extends ConflictPanel {
 			if ((comp instanceof MyRadioButton) && (((MyRadioButton) comp).isSelected())) {
 				return true;
 			}
-			else if ((comp instanceof MyCheckBox) && (((MyCheckBox) comp).isSelected())) {
-				return true;
-			}
-		}
+            if ((comp instanceof MyCheckBox) && (((MyCheckBox) comp).isSelected())) {
+                return true;
+            }
+        }
 		return false;
 	}
 

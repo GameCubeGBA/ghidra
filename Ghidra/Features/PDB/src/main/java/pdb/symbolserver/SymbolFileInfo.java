@@ -92,16 +92,16 @@ public class SymbolFileInfo {
 
 				return new SymbolFileInfo(path, new PdbIdentifiers(0, sig, age, null, null));
 			}
-			else if (uniqueSubdir.length() > GUID_HEX_STR_LEN) {
-				String guidString = uniqueSubdir.substring(0, GUID_HEX_STR_LEN);
-				GUID guid = new GUID(guidString);
+            if (uniqueSubdir.length() > GUID_HEX_STR_LEN) {
+                String guidString = uniqueSubdir.substring(0, GUID_HEX_STR_LEN);
+                GUID guid = new GUID(guidString);
 
-				int age = Integer.parseUnsignedInt(uniqueSubdir.substring(GUID_HEX_STR_LEN), 16);
+                int age = Integer.parseUnsignedInt(uniqueSubdir.substring(GUID_HEX_STR_LEN), 16);
 
-				return new SymbolFileInfo(path, new PdbIdentifiers(0, 0, age, guid, null));
-			}
+                return new SymbolFileInfo(path, new PdbIdentifiers(0, 0, age, guid, null));
+            }
 
-		}
+        }
 		catch (IllegalArgumentException e) {
 			// ignore
 		}

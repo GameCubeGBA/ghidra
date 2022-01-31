@@ -259,28 +259,28 @@ public class FunctionGraphOptions extends VisualGraphOptions {
 		if (flowType.isFallthrough()) {
 			return getFallthroughEdgeColor();
 		}
-		else if (flowType.isUnConditional()) {
-			return getUnconditionalJumpEdgeColor();
-		}
-		else if (flowType.isJump()) {
-			return getConditionalJumpEdgeColor();
-		}
+        if (flowType.isUnConditional()) {
+            return getUnconditionalJumpEdgeColor();
+        }
+        if (flowType.isJump()) {
+            return getConditionalJumpEdgeColor();
+        }
 
-		return Color.BLACK;
+        return Color.BLACK;
 	}
 
 	public Color getHighlightColor(FlowType flowType) {
 		if (flowType.isFallthrough()) {
 			return getFallthroughEdgeHighlightColor();
 		}
-		else if (flowType.isUnConditional()) {
-			return getUnconditionalJumpEdgeHighlightColor();
-		}
-		else if (flowType.isJump()) {
-			return getConditionalJumpEdgeHighlightColor();
-		}
+        if (flowType.isUnConditional()) {
+            return getUnconditionalJumpEdgeHighlightColor();
+        }
+        if (flowType.isJump()) {
+            return getConditionalJumpEdgeHighlightColor();
+        }
 
-		return Color.BLACK;
+        return Color.BLACK;
 	}
 
 	public boolean optionChangeRequiresRelayout(String optionName) {

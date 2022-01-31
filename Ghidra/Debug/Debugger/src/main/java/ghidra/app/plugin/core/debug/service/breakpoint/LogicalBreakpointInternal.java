@@ -100,14 +100,12 @@ public interface LogicalBreakpointInternal extends LogicalBreakpoint {
 				return String.format("<enabled %s(%s) at %s in %s>", eBookmark.getTypeString(),
 					eBookmark.getCategory(), eBookmark.getAddress(), program.getName());
 			}
-			else if (dBookmark != null) {
-				return String.format("<disabled %s(%s) at %s in %s>", dBookmark.getTypeString(),
-					dBookmark.getCategory(), dBookmark.getAddress(), program.getName());
-			}
-			else {
-				return String.format("<absent at %s in %s>", address, program.getName());
-			}
-		}
+            if (dBookmark != null) {
+                return String.format("<disabled %s(%s) at %s in %s>", dBookmark.getTypeString(),
+                    dBookmark.getCategory(), dBookmark.getAddress(), program.getName());
+            }
+            return String.format("<absent at %s in %s>", address, program.getName());
+        }
 
 		public ProgramLocation getLocation() {
 			return location;
@@ -141,10 +139,8 @@ public interface LogicalBreakpointInternal extends LogicalBreakpoint {
 			if (dBookmark != null) {
 				return ProgramEnablement.DISABLED;
 			}
-			else {
-				return ProgramEnablement.MISSING;
-			}
-		}
+            return ProgramEnablement.MISSING;
+        }
 
 		public boolean isEmpty() {
 			return eBookmark == null && dBookmark == null;

@@ -130,13 +130,13 @@ public class ObjectTable<R> implements ObjectPane {
 				(clazz.equals(ObjectAttributeRow.class) && !changed.hasElements()))) {
 			return generateRows(changed);
 		}
-		else if (clazz.equals(ObjectElementRow.class) && !changed.hasElements()) {
-			ObjectElementRow match = findMatch(changed);
-			if (match != null) {
-				return updateMatch(match);
-			}
-		}
-		return new ArrayList<>();
+        if (clazz.equals(ObjectElementRow.class) && !changed.hasElements()) {
+            ObjectElementRow match = findMatch(changed);
+            if (match != null) {
+                return updateMatch(match);
+            }
+        }
+        return new ArrayList<>();
 	}
 
 	private List<R> generateRows(ObjectContainer changed) {

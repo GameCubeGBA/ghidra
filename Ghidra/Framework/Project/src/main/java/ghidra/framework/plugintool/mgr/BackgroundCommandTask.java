@@ -121,12 +121,12 @@ class BackgroundCommandTask extends Task implements AbortedTransactionListener {
 				taskMgr.clearTasks(obj);
 				return;
 			}
-			else if (!(t instanceof RollbackException)) {
-				String message =
-					"An unexpected error occurred while processing the command: " + cmd.getName();
-				Msg.showError(this, null, "Command Failure", message, t);
-			}
-		}
+            if (!(t instanceof RollbackException)) {
+                String message =
+                    "An unexpected error occurred while processing the command: " + cmd.getName();
+                Msg.showError(this, null, "Command Failure", message, t);
+            }
+        }
 		finally {
 			TaskUtilities.removeTrackedTask(this);
 			try {

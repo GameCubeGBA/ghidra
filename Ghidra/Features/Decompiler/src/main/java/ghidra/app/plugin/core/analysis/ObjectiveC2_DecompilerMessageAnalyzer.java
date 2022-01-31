@@ -293,11 +293,11 @@ public class ObjectiveC2_DecompilerMessageAnalyzer extends AbstractAnalyzer {
 				}
 				return name;
 			}
-			else if (isSuper2Call(program, input) && !isMethod) {
-				name = getSuperClassName(program, input, function);
-				return name;
-			}
-			Varnode[] inputs = def.getInputs();
+            if (isSuper2Call(program, input) && !isMethod) {
+                name = getSuperClassName(program, input, function);
+                return name;
+            }
+            Varnode[] inputs = def.getInputs();
 
 			if (isObjcCall(program, inputs[0], monitor)) {
 				Symbol objcSymbol = getSymbolFromVarnode(program, inputs[0], monitor);

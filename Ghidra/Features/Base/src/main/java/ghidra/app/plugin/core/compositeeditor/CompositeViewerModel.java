@@ -1045,12 +1045,12 @@ class CompositeViewerModel extends AbstractTableModel implements DataTypeManager
 			if (subCatPath.startsWith(catPath)) {
 				return true;
 			}
-			else if (subDt instanceof Composite) {
-				if (hasSubDtInCategory((Composite) subDt, catPath)) {
-					return true;
-				}
-			}
-		}
+            if (subDt instanceof Composite) {
+                if (hasSubDtInCategory((Composite) subDt, catPath)) {
+                    return true;
+                }
+            }
+        }
 		return false;
 	}
 
@@ -1070,12 +1070,12 @@ class CompositeViewerModel extends AbstractTableModel implements DataTypeManager
 			if (subDtPath.equals(dtPath.getPath())) {
 				return true;
 			}
-			else if (subDt instanceof Composite) {
-				if (hasSubDt((Composite) subDt, dtPath)) {
-					return true;
-				}
-			}
-		}
+            if (subDt instanceof Composite) {
+                if (hasSubDt((Composite) subDt, dtPath)) {
+                    return true;
+                }
+            }
+        }
 		return false;
 	}
 

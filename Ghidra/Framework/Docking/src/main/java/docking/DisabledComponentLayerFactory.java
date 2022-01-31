@@ -61,19 +61,19 @@ public class DisabledComponentLayerFactory {
 			if (comp instanceof AbstractButton) {
 				return UIManager.getColor("Button.background");
 			}
-			else if (comp instanceof JComboBox) {
-				return UIManager.getColor("ComboBox.background");
-			}
-			else if (comp instanceof JMenu) {
-				return UIManager.getColor("Menu.background");
-			}
-			else if (comp instanceof JMenuBar) {
-				return UIManager.getColor("MenuBar.background");
-			}
-			else if (comp instanceof JMenuItem) {
-				return UIManager.getColor("MenuItem.background");
-			}
-			return UIManager.getColor("Panel.background");
+            if (comp instanceof JComboBox) {
+                return UIManager.getColor("ComboBox.background");
+            }
+            if (comp instanceof JMenu) {
+                return UIManager.getColor("Menu.background");
+            }
+            if (comp instanceof JMenuBar) {
+                return UIManager.getColor("MenuBar.background");
+            }
+            if (comp instanceof JMenuItem) {
+                return UIManager.getColor("MenuItem.background");
+            }
+            return UIManager.getColor("Panel.background");
 		}
 
 		@Override
@@ -106,15 +106,15 @@ public class DisabledComponentLayerFactory {
 				if (e instanceof FocusEvent) {
 					return;
 				}
-				else if (e instanceof MouseEvent) {
-					((MouseEvent) e).consume();
-					return;
-				}
-				else if (e instanceof KeyEvent) {
-					((KeyEvent) e).consume();
-					return;
-				}
-			}
+                if (e instanceof MouseEvent) {
+                    ((MouseEvent) e).consume();
+                    return;
+                }
+                if (e instanceof KeyEvent) {
+                    ((KeyEvent) e).consume();
+                    return;
+                }
+            }
 
 			super.eventDispatched(e, layer);
 		}

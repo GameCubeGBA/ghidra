@@ -733,20 +733,20 @@ public class PdbParser {
 		if (kind == PdbKind.STRUCTURE) {
 			return (dt instanceof Structure);
 		}
-		else if (kind == PdbKind.UNION) {
-			return (dt instanceof Union);
-		}
-		return false;
+        if (kind == PdbKind.UNION) {
+            return (dt instanceof Union);
+        }
+        return false;
 	}
 
 	Composite createComposite(PdbKind kind, String name) {
 		if (kind == PdbKind.STRUCTURE) {
 			return createStructure(name, 0);
 		}
-		else if (kind == PdbKind.UNION) {
-			return createUnion(name);
-		}
-		throw new IllegalArgumentException("unsupported kind: " + kind);
+        if (kind == PdbKind.UNION) {
+            return createUnion(name);
+        }
+        throw new IllegalArgumentException("unsupported kind: " + kind);
 	}
 
 	Structure createStructure(String name, int length) {

@@ -161,11 +161,11 @@ public class OperandSymbol extends SpecificSymbol {
 		if (triple instanceof SpecificSymbol) {
 			return ((SpecificSymbol) triple).getVarnode();
 		}
-		else if ((triple != null) &&
-			((triple.getType() == symbol_type.valuemap_symbol) || (triple.getType() == symbol_type.name_symbol))) {
-			return new VarnodeTpl(location, hand, true); // Zero-size symbols
-		}
-		return new VarnodeTpl(location, hand, false); // Possible dynamic handle
+        if ((triple != null) &&
+            ((triple.getType() == symbol_type.valuemap_symbol) || (triple.getType() == symbol_type.name_symbol))) {
+            return new VarnodeTpl(location, hand, true); // Zero-size symbols
+        }
+        return new VarnodeTpl(location, hand, false); // Possible dynamic handle
 	}
 
 	@Override

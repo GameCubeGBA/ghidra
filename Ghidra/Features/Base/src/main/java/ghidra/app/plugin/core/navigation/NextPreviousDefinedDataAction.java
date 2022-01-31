@@ -125,12 +125,12 @@ public class NextPreviousDefinedDataAction extends AbstractNextPreviousAction {
 			if (codeUnit instanceof Instruction) {
 				return codeUnit.getAddress();
 			}
-			else if (codeUnit instanceof Data) {
-				if (!((Data) codeUnit).isDefined()) {
-					return codeUnit.getAddress();
-				}
-			}
-		}
+            if (codeUnit instanceof Data) {
+                if (!((Data) codeUnit).isDefined()) {
+                    return codeUnit.getAddress();
+                }
+            }
+        }
 		return null;
 	}
 

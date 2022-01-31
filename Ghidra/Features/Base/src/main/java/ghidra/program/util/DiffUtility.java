@@ -192,11 +192,11 @@ public class DiffUtility extends SimpleDiffUtility {
 		if (namespace instanceof Library) {
 			return otherProgram.getSymbolTable().createExternalLibrary(namespace.getName(), source);
 		}
-		else if (namespace instanceof GhidraClass) {
-			return otherProgram.getSymbolTable()
-				.createClass(otherParentNamespace, namespace.getName(), source);
-		}
-		return otherProgram.getSymbolTable()
+        if (namespace instanceof GhidraClass) {
+            return otherProgram.getSymbolTable()
+                .createClass(otherParentNamespace, namespace.getName(), source);
+        }
+        return otherProgram.getSymbolTable()
 			.createNameSpace(otherParentNamespace, namespace.getName(), source);
 	}
 
@@ -631,20 +631,20 @@ public class DiffUtility extends SimpleDiffUtility {
 			int offset = ((StackReference) ref).getStackOffset();
 			return "Stack[" + toSignedHexString(offset) + "]";
 		}
-		else if (ref.isOffsetReference()) {
-			OffsetReference oref = (OffsetReference) ref;
-			return toAddr.toString() + " " + "base:" +
-				DiffUtility.getUserToAddressString(program, oref.getBaseAddress()) + " " +
-				"offset:" + DiffUtility.toSignedHexString(oref.getOffset());
+        if (ref.isOffsetReference()) {
+            OffsetReference oref = (OffsetReference) ref;
+            return toAddr.toString() + " " + "base:" +
+                DiffUtility.getUserToAddressString(program, oref.getBaseAddress()) + " " +
+                "offset:" + DiffUtility.toSignedHexString(oref.getOffset());
 
-		}
-		else if (ref.isShiftedReference()) {
-			ShiftedReference sref = (ShiftedReference) ref;
-			return toAddr.toString() + " " + "value:" + sref.getValue() + " " + "<<" +
-				sref.getShift();
-		}
+        }
+        if (ref.isShiftedReference()) {
+            ShiftedReference sref = (ShiftedReference) ref;
+            return toAddr.toString() + " " + "value:" + sref.getValue() + " " + "<<" +
+                sref.getShift();
+        }
 
-		Register reg = program.getRegister(toAddr);
+        Register reg = program.getRegister(toAddr);
 		if (reg != null) {
 			return "register: " + reg.getName();
 		}

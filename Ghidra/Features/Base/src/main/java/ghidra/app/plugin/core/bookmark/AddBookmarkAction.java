@@ -75,9 +75,9 @@ class AddBookmarkAction extends DockingAction {
 		if (MarkerLocation.class.isAssignableFrom(contextObject.getClass())) {
 			return ((MarkerLocation) contextObject).getAddr();
 		}
-		else if (context instanceof ListingActionContext) {
-			return ((ListingActionContext) context).getAddress();
-		}
-		return null;
+        if (context instanceof ListingActionContext) {
+            return ((ListingActionContext) context).getAddress();
+        }
+        return null;
 	}
 }

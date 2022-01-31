@@ -77,12 +77,12 @@ class CompositeDBAdapterV2V4 extends CompositeDBAdapter implements RecordTransla
 		if (version < MIN_READ_ONLY_VERSION) {
 			throw new VersionException(VersionException.OLDER_VERSION, true);
 		}
-		else if (version > VERSION) {
-			String msg = "Expected version " + VERSION + " for table " + COMPOSITE_TABLE_NAME +
-				" but got " + version;
-			throw new VersionException(msg, VersionException.NEWER_VERSION, false);
-		}
-	}
+        if (version > VERSION) {
+            String msg = "Expected version " + VERSION + " for table " + COMPOSITE_TABLE_NAME +
+                " but got " + version;
+            throw new VersionException(msg, VersionException.NEWER_VERSION, false);
+        }
+    }
 
 	@Override
 	int getVersion() {

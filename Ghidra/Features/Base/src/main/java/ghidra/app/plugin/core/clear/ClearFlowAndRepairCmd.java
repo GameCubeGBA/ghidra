@@ -423,14 +423,14 @@ public class ClearFlowAndRepairCmd extends BackgroundCommand {
 					}
 					break;
 				}
-				else if (dataRefAddr == null) {
-					if (addr.equals(ignoreStart) && !refType.isRead() && !refType.isWrite()) {
-						continue;
-					}
-					// Remember single data reference for possible analysis
-					dataRefAddr = ref.getFromAddress();
-				}
-			}
+                if (dataRefAddr == null) {
+                    if (addr.equals(ignoreStart) && !refType.isRead() && !refType.isWrite()) {
+                        continue;
+                    }
+                    // Remember single data reference for possible analysis
+                    dataRefAddr = ref.getFromAddress();
+                }
+            }
 			if (dataRefAddr != null && !disassemblePoints.contains(addr)) {
 				dataRefSet.addRange(dataRefAddr, dataRefAddr);
 			}

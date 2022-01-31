@@ -330,23 +330,23 @@ public class StackEditorModel extends CompositeEditorModel {
 			if (newOffset == oldOffset) {
 				return; // Didn't change offset.
 			}
-			else if (newOffset < oldOffset) {
-				if ((newOffset + compLength) > oldOffset) {
-					// Overlaps beginning of where it used to be.
-					checkLength = oldOffset - newOffset;
-				}
-				// Otherwise new one comes before old (no overlap).
-			}
-			else {
-				if (newOffset < (oldOffset + compLength)) {
-					// Overlaps end of where it used to be.
-					start = oldOffset + compLength;
-					checkLength = newOffset - oldOffset;
-				}
-				// Otherwise new one comes after old (no overlap).
-			}
+            if (newOffset < oldOffset) {
+                if ((newOffset + compLength) > oldOffset) {
+                    // Overlaps beginning of where it used to be.
+                    checkLength = oldOffset - newOffset;
+                }
+                // Otherwise new one comes before old (no overlap).
+            }
+            else {
+                if (newOffset < (oldOffset + compLength)) {
+                    // Overlaps end of where it used to be.
+                    start = oldOffset + compLength;
+                    checkLength = newOffset - oldOffset;
+                }
+                // Otherwise new one comes after old (no overlap).
+            }
 
-			DataTypeComponent existing = sfdt.getComponentAt(start);
+            DataTypeComponent existing = sfdt.getComponentAt(start);
 			if (existing == null) {
 				if ((start + compLength) > sfdt.getMaxOffset()) {
 					throw new InvalidInputException(comp.getDataType().getDisplayName() +

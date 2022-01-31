@@ -49,16 +49,16 @@ public class WrapCallbackIDebugOutputCallbacksWide implements CallbackIDebugOutp
 		if (null == ppvObject) {
 			return new HRESULT(WinError.E_POINTER);
 		}
-		else if (refid.getValue()
-				.equals(IDebugOutputCallbacksWide.IID_IDEBUG_OUTPUT_CALLBACKS_WIDE)) {
-			ppvObject.setValue(this.getPointer());
-			return WinError.S_OK;
-		}
-		else if (refid.getValue().equals(IUnknown.IID_IUNKNOWN)) {
-			ppvObject.setValue(this.getPointer());
-			return WinError.S_OK;
-		}
-		return new HRESULT(WinError.E_NOINTERFACE);
+        if (refid.getValue()
+                .equals(IDebugOutputCallbacksWide.IID_IDEBUG_OUTPUT_CALLBACKS_WIDE)) {
+            ppvObject.setValue(this.getPointer());
+            return WinError.S_OK;
+        }
+        if (refid.getValue().equals(IUnknown.IID_IUNKNOWN)) {
+            ppvObject.setValue(this.getPointer());
+            return WinError.S_OK;
+        }
+        return new HRESULT(WinError.E_NOINTERFACE);
 	}
 
 	@Override

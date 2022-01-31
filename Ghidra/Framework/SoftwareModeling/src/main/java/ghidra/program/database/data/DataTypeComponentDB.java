@@ -294,19 +294,19 @@ class DataTypeComponentDB implements InternalDataTypeComponent {
 		if (myDt instanceof Structure) {
 			return otherDt instanceof Structure;
 		}
-		else if (myDt instanceof Union) {
-			return otherDt instanceof Union;
-		}
-		else if (myDt instanceof Array) {
-			return otherDt instanceof Array;
-		}
-		else if (myDt instanceof Pointer) {
-			return otherDt instanceof Pointer;
-		}
-		else if (myDt instanceof TypeDef) {
-			return otherDt instanceof TypeDef;
-		}
-		return myDt.getClass() == otherDt.getClass();
+        if (myDt instanceof Union) {
+            return otherDt instanceof Union;
+        }
+        if (myDt instanceof Array) {
+            return otherDt instanceof Array;
+        }
+        if (myDt instanceof Pointer) {
+            return otherDt instanceof Pointer;
+        }
+        if (myDt instanceof TypeDef) {
+            return otherDt instanceof TypeDef;
+        }
+        return myDt.getClass() == otherDt.getClass();
 	}
 
 	@Override

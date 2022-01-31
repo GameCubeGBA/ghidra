@@ -145,20 +145,20 @@ public class DataTreeDragNDropHandler implements GTreeDragNDropHandler {
 			// folders that are in the list
 			return removeDuplicates(transferNodes);
 		}
-		else if (flavor == localDomainFileFlavor) {
-			// filter for file nodes and convert each node to its corresponding domainFile
-			return transferNodes.stream()
-					.filter(DomainFileNode.class::isInstance)
-					.map(node -> ((DomainFileNode) node).getDomainFile())
-					.collect(Collectors.toList());
-		}
-		else if (flavor.equals(DataFlavor.stringFlavor)) {
-			// allow users to copy the names of nodes
-			return transferNodes.stream()
-					.map(node -> node.getName())
-					.collect(Collectors.joining("\n"));
-		}
-		throw new AssertException("Called with a flavor that we didn't say we supported");
+        if (flavor == localDomainFileFlavor) {
+            // filter for file nodes and convert each node to its corresponding domainFile
+            return transferNodes.stream()
+                    .filter(DomainFileNode.class::isInstance)
+                    .map(node -> ((DomainFileNode) node).getDomainFile())
+                    .collect(Collectors.toList());
+        }
+        if (flavor.equals(DataFlavor.stringFlavor)) {
+            // allow users to copy the names of nodes
+            return transferNodes.stream()
+                    .map(node -> node.getName())
+                    .collect(Collectors.joining("\n"));
+        }
+        throw new AssertException("Called with a flavor that we didn't say we supported");
 	}
 
 	private List<GTreeNode> removeDuplicates(List<GTreeNode> allNodes) {

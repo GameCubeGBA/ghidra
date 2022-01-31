@@ -416,17 +416,17 @@ class SplitBlockDialog extends DialogComponentProvider {
 			if (start == null) {
 				return false;
 			}
-			else if (start.compareTo(end) > 0) {
-				setStatusText("Start address must not be greater than end");
-				return false;
-			}
-			else if (start.compareTo(block.getStart()) <= 0) {
-				setStatusText("Start address must be greater than original block start (" +
-					block.getStart() + ")");
-				return false;
-			}
+            if (start.compareTo(end) > 0) {
+                setStatusText("Start address must not be greater than end");
+                return false;
+            }
+            if (start.compareTo(block.getStart()) <= 0) {
+                setStatusText("Start address must be greater than original block start (" +
+                    block.getStart() + ")");
+                return false;
+            }
 
-			// change block Two length, blockOneEnd, block One length
+            // change block Two length, blockOneEnd, block One length
 			long length = end.subtract(start) + 1;
 			blockTwoLengthField.setValue(Long.valueOf(length));
 			try {

@@ -88,12 +88,12 @@ public class VendorBootImageFileSystem extends GFileSystemBase {
 				FileAttribute.create(FileAttributeType.COMMENT_ATTR,
 					"This is a ramdisk, it is a GZIP file containing a CPIO archive."));
 		}
-		else if (file == dtbFile) {
-			return FileAttributes.of(
-				FileAttribute.create(FileAttributeType.COMMENT_ATTR,
-					"This is a DTB file. It appears unused at this time."));
-		}
-		return null;
+        if (file == dtbFile) {
+            return FileAttributes.of(
+                FileAttribute.create(FileAttributeType.COMMENT_ATTR,
+                    "This is a DTB file. It appears unused at this time."));
+        }
+        return null;
 	}
 
 	@Override
@@ -104,11 +104,11 @@ public class VendorBootImageFileSystem extends GFileSystemBase {
 			return new ByteProviderWrapper(provider, header.getVendorRamdiskOffset(),
 				Integer.toUnsignedLong(header.getVendorRamdiskSize()), file.getFSRL());
 		}
-		else if (file == dtbFile) {
-			return new ByteProviderWrapper(provider, header.getDtbOffset(),
-				Integer.toUnsignedLong(header.getDtbSize()), file.getFSRL());
-		}
-		return null;
+        if (file == dtbFile) {
+            return new ByteProviderWrapper(provider, header.getDtbOffset(),
+                Integer.toUnsignedLong(header.getDtbSize()), file.getFSRL());
+        }
+        return null;
 	}
 
 }

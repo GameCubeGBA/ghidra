@@ -36,31 +36,27 @@ public interface DirectedIterator<T> {
 		if (range == null) {
 			return Long.MIN_VALUE;
 		}
-		else if (!range.hasLowerBound()) {
-			return Long.MIN_VALUE;
-		}
-		else if (range.lowerBoundType() == BoundType.CLOSED) {
-			return range.lowerEndpoint();
-		}
-		else {
-			return range.lowerEndpoint() + 1;
-		}
-	}
+        if (!range.hasLowerBound()) {
+            return Long.MIN_VALUE;
+        }
+        if (range.lowerBoundType() == BoundType.CLOSED) {
+            return range.lowerEndpoint();
+        }
+        return range.lowerEndpoint() + 1;
+    }
 
 	static long toIteratorMax(Range<Long> range) {
 		if (range == null) {
 			return Long.MAX_VALUE;
 		}
-		else if (!range.hasUpperBound()) {
-			return Long.MAX_VALUE;
-		}
-		else if (range.upperBoundType() == BoundType.CLOSED) {
-			return range.upperEndpoint();
-		}
-		else {
-			return range.upperEndpoint() - 1;
-		}
-	}
+        if (!range.hasUpperBound()) {
+            return Long.MAX_VALUE;
+        }
+        if (range.upperBoundType() == BoundType.CLOSED) {
+            return range.upperEndpoint();
+        }
+        return range.upperEndpoint() - 1;
+    }
 
 	static long clampLowerBound(Range<Long> range, long bound, boolean inclusive) {
 		return Math.max(toIteratorMin(range), inclusive ? bound : bound + 1);

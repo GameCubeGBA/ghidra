@@ -444,11 +444,11 @@ public class MipsPreAnalyzer extends AbstractAnalyzer {
 		if ((str.endsWith("wl") || str.endsWith("wr")) && diff != 3) {
 			return null;
 		}
-		else if ((str.endsWith("dl") || str.endsWith("dr")) && diff != 7) {
-			return null;
-		}
+        if ((str.endsWith("dl") || str.endsWith("dr")) && diff != 7) {
+            return null;
+        }
 
-		// Check base and destination registers
+        // Check base and destination registers
 		if (base1.equals(base2) && (destReg1.equals(destReg2) || destReg2.equals(alternateReg))) {
 			// Match found
 			return curr_inst;

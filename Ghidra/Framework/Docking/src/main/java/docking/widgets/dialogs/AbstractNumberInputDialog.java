@@ -318,13 +318,11 @@ public abstract class AbstractNumberInputDialog extends DialogComponentProvider 
 			// full range
 			return "Enter number of " + type + ": ";
 		}
-		else if (max == Integer.MAX_VALUE) {
-			return "Enter number of " + type + " (minimum is " + min + ") : ";
-		}
-		else {
-			return "Enter number of " + type + " (" + min + ", " + max + ") : ";
-		}
-	}
+        if (max == Integer.MAX_VALUE) {
+            return "Enter number of " + type + " (minimum is " + min + ") : ";
+        }
+        return "Enter number of " + type + " (" + min + ", " + max + ") : ";
+    }
 
 	protected static BigInteger toBig(Integer i) {
 		if (i == null) {

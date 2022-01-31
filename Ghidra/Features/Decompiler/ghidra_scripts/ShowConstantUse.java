@@ -733,21 +733,21 @@ public class ShowConstantUse extends GhidraScript {
 				// then repeat with any calls to this function at whatever the
 				// param is
 			}
-			else if (pcodeOpAST.getOpcode() == PcodeOp.BRANCH) {
-				Address faddr = pcodeOpAST.getInput(0).getAddress();
-				if (funcVarUse == null || faddr == null) {
-					continue;
-				}
-				if (!faddr.equals(funcVarUse.getAddress())) {
-					continue;
-				}
-				Varnode rep = funcVarUse.getRepresentative();
-				if (rep == null) {
-					continue;
-				}
-				followToParam(constUse, defUseList, hfunction, rep, funcList, null);
-			}
-		}
+            if (pcodeOpAST.getOpcode() == PcodeOp.BRANCH) {
+                Address faddr = pcodeOpAST.getInput(0).getAddress();
+                if (funcVarUse == null || faddr == null) {
+                    continue;
+                }
+                if (!faddr.equals(funcVarUse.getAddress())) {
+                    continue;
+                }
+                Varnode rep = funcVarUse.getRepresentative();
+                if (rep == null) {
+                    continue;
+                }
+                followToParam(constUse, defUseList, hfunction, rep, funcList, null);
+            }
+        }
 	}
 
 	private long applyDefUseList(long value, ArrayList<PcodeOp> defUseList)

@@ -511,12 +511,12 @@ public class VTSubToolManager implements VTControllerListener, OptionsChangeList
 				VTPlugin.showBusyToolMessage(sourceTool);
 				return false;
 			}
-			else if (isToolExecutingCommand(destinationTool)) {
-				VTPlugin.showBusyToolMessage(destinationTool);
-				return false;
-			}
+            if (isToolExecutingCommand(destinationTool)) {
+                VTPlugin.showBusyToolMessage(destinationTool);
+                return false;
+            }
 
-			int resp = OptionDialog.showYesNoDialog(tool.getToolFrame(), "Version Tracking",
+            int resp = OptionDialog.showYesNoDialog(tool.getToolFrame(), "Version Tracking",
 				"Closing this tool will terminate the active Version " +
 					"Tracking Session.\nContinue closing tool?");
 
@@ -586,11 +586,11 @@ public class VTSubToolManager implements VTControllerListener, OptionsChangeList
 				}
 				return data.getAddress();
 			}
-			else if (function.isThunk()) {
-				// follow thunk (handle internal/external linkage location)
-				function = function.getThunkedFunction(true);
-			}
-			return function.getEntryPoint();
+            if (function.isThunk()) {
+                // follow thunk (handle internal/external linkage location)
+                function = function.getThunkedFunction(true);
+            }
+            return function.getEntryPoint();
 		}
 
 		private void setTracking(boolean b) {

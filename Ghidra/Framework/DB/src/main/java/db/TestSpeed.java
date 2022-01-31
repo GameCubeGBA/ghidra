@@ -90,13 +90,13 @@ class JavaBinarySearcher {
 			if (k == key) {
 				return i;
 			}
-			else if (k < key) {
-				min = i + 1;
-			}
-			else {
-				max = i - 1;
-			}
-		}
+            if (k < key) {
+                min = i + 1;
+            }
+            else {
+                max = i - 1;
+            }
+        }
 		return -(min+1);
 	}
 	private long getKey(byte[] buf, int i) {
@@ -131,13 +131,13 @@ class JavaBinarySearcher2 {
 			if (k == key) {
 				return i;
 			}
-			else if (k < key) {
-				min = i + 1;
-			}
-			else {
-				max = i - 1;
-			}
-		}
+            if (k < key) {
+                min = i + 1;
+            }
+            else {
+                max = i - 1;
+            }
+        }
 		return -(min+1);
 	}
 	private long getKey(byte[] data, int i) {

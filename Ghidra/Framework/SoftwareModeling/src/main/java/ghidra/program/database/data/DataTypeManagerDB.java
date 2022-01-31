@@ -1002,15 +1002,15 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 				existingStruct.doReplaceWith((StructureInternal) dataType, true);
 				return true;
 			}
-			else if (existingDataType instanceof UnionDB) {
-				if (!(dataType instanceof UnionInternal)) {
-					return false;
-				}
-				UnionDB existingUnion = (UnionDB) existingDataType;
-				existingUnion.doReplaceWith((UnionInternal) dataType, true);
-				return true;
-			}
-		}
+            if (existingDataType instanceof UnionDB) {
+                if (!(dataType instanceof UnionInternal)) {
+                    return false;
+                }
+                UnionDB existingUnion = (UnionDB) existingDataType;
+                existingUnion.doReplaceWith((UnionInternal) dataType, true);
+                return true;
+            }
+        }
 		catch (IOException e) {
 			dbError(e);
 		}
@@ -3029,13 +3029,13 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 		if (value instanceof String) {
 			return updateInstanceSettings(dataAddr, name, (String) value, -1, null);
 		}
-		else if (value instanceof byte[]) {
-			return updateInstanceSettings(dataAddr, name, null, -1, (byte[]) value);
-		}
-		else if (isAllowedNumberType(value)) {
-			return updateInstanceSettings(dataAddr, name, null, ((Number) value).longValue(), null);
-		}
-		throw new IllegalArgumentException(
+        if (value instanceof byte[]) {
+            return updateInstanceSettings(dataAddr, name, null, -1, (byte[]) value);
+        }
+        if (isAllowedNumberType(value)) {
+            return updateInstanceSettings(dataAddr, name, null, ((Number) value).longValue(), null);
+        }
+        throw new IllegalArgumentException(
 			"Unsupportd Settings Value: " + (value == null ? "null" : value.getClass().getName()));
 	}
 

@@ -432,19 +432,13 @@ public interface LogicalBreakpoint {
 				if (secondEn) {
 					return ENABLED;
 				}
-				else {
-					return ENABLED_DISABLED;
-				}
-			}
-			else {
-				if (secondEn) {
-					return DISABLED_ENABLED;
-				}
-				else {
-					return DISABLED;
-				}
-			}
-		}
+                return ENABLED_DISABLED;
+            }
+            if (secondEn) {
+                return DISABLED_ENABLED;
+            }
+            return DISABLED;
+        }
 
 		/**
 		 * Get the "primary" state represented by this logical state

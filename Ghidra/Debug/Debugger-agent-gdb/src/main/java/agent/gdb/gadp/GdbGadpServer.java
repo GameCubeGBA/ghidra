@@ -74,14 +74,12 @@ public interface GdbGadpServer extends AutoCloseable {
 				if ("--gadp-args".equals(a)) {
 					break;
 				}
-				else if ("-h".equals(a) || "--help".equals(a)) {
-					printUsage();
-					System.exit(0);
-				}
-				else {
-					gdbArgs.add(a);
-				}
-			}
+                if ("-h".equals(a) || "--help".equals(a)) {
+                    printUsage();
+                    System.exit(0);
+                }
+                gdbArgs.add(a);
+            }
 			while (ait.hasNext()) {
 				String a = ait.next();
 				if ("-p".equals(a) || "--port".equals(a)) {

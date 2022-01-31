@@ -135,10 +135,10 @@ public class AddressMapDB implements AddressMap {
 					if (offset < 0 && otherOffset >= 0) {
 						return 1;
 					}
-					else if (offset >= 0 && otherOffset < 0) {
-						return -1;
-					}
-				}
+                    if (offset >= 0 && otherOffset < 0) {
+                        return -1;
+                    }
+                }
 				else if (otherOffset < 0) {
 					// wrap normalized otherOffset within space for spaces smaller than 64-bits
 					otherOffset += maxOffset + 1;
@@ -395,11 +395,11 @@ public class AddressMapDB implements AddressMap {
 		if (tIndex != null) {
 			return tIndex;
 		}
-		else if (indexOperation == INDEX_MATCH) {
-			return Integer.MIN_VALUE;
-		}
+        if (indexOperation == INDEX_MATCH) {
+            return Integer.MIN_VALUE;
+        }
 
-		int search = normalize
+        int search = normalize
 				? Arrays.binarySearch(sortedBaseStartAddrs, addr, normalizingAddressComparator)
 				: Arrays.binarySearch(sortedBaseStartAddrs, addr);
 

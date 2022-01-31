@@ -63,11 +63,11 @@ public class ByteProviderPaddedInputStream extends InputStream {
 		if (currentBPOffset < bpEndOffset) {
 			return provider.readByte(currentBPOffset++) & 0xff;
 		}
-		else if (currentBPOffset < bpEndPadOffset) {
-			currentBPOffset++;
-			return 0;
-		}
-		return -1;
+        if (currentBPOffset < bpEndPadOffset) {
+            currentBPOffset++;
+            return 0;
+        }
+        return -1;
 	}
 
 	@Override

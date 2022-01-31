@@ -115,21 +115,21 @@ public final class DyldArchitecture {
 		if ( this == X86 ) {
             return new LanguageCompilerSpecPair( new LanguageID("x86:LE:32:default"), new CompilerSpecID("gcc") );
 		}
-		else if (this == X86_64 || this == X86_64h) {
-			return new LanguageCompilerSpecPair( new LanguageID("x86:LE:64:default"), new CompilerSpecID("gcc") );
-		}
-		else if ( this == POWERPC ) {
-			return new LanguageCompilerSpecPair( new LanguageID("PowerPC:BE:32:default"), new CompilerSpecID("macosx") );
-		}
-		if ( this == ARMV6 ) {
+        if (this == X86_64 || this == X86_64h) {
+            return new LanguageCompilerSpecPair( new LanguageID("x86:LE:64:default"), new CompilerSpecID("gcc") );
+        }
+        if ( this == POWERPC ) {
+            return new LanguageCompilerSpecPair( new LanguageID("PowerPC:BE:32:default"), new CompilerSpecID("macosx") );
+        }
+        if ( this == ARMV6 ) {
 			return new LanguageCompilerSpecPair( new LanguageID("ARM:LE:32:v6"), new CompilerSpecID("default") );
 		}
-		else if ( this == ARMV7 ) {
-			return new LanguageCompilerSpecPair( new LanguageID("ARM:LE:32:v7"), new CompilerSpecID("default"));
-		}
-		else if ( this == ARMV7S ) {//TODO support ARMV7S language....
-			return new LanguageCompilerSpecPair( new LanguageID("ARM:LE:32:v7"), new CompilerSpecID("default"));
-		}
-		throw new LanguageNotFoundException("Unable to locate language for "+this);
+        if ( this == ARMV7 ) {
+            return new LanguageCompilerSpecPair( new LanguageID("ARM:LE:32:v7"), new CompilerSpecID("default"));
+        }
+        if ( this == ARMV7S ) {//TODO support ARMV7S language....
+            return new LanguageCompilerSpecPair( new LanguageID("ARM:LE:32:v7"), new CompilerSpecID("default"));
+        }
+        throw new LanguageNotFoundException("Unable to locate language for "+this);
 	}
 }

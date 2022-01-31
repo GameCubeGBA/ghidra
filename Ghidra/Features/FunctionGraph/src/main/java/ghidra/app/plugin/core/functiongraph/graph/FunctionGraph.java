@@ -494,10 +494,10 @@ public class FunctionGraph extends GroupingVisualGraph<FGVertex, FGEdge> {
 			if (vertex.isEntry()) {
 				return true;
 			}
-			else if (vertexType == FGVertexType.GROUP) {
-				return groupContainsEntry((GroupedFunctionGraphVertex) groupedVertex);
-			}
-		}
+            if (vertexType == FGVertexType.GROUP) {
+                return groupContainsEntry((GroupedFunctionGraphVertex) groupedVertex);
+            }
+        }
 		return false;
 	}
 
@@ -508,10 +508,10 @@ public class FunctionGraph extends GroupingVisualGraph<FGVertex, FGEdge> {
 			if (vertexType.isExit()) {
 				return true;
 			}
-			else if (vertexType == FGVertexType.GROUP) {
-				return groupContainsExit((GroupedFunctionGraphVertex) groupedVertex);
-			}
-		}
+            if (vertexType == FGVertexType.GROUP) {
+                return groupContainsExit((GroupedFunctionGraphVertex) groupedVertex);
+            }
+        }
 		return false;
 	}
 

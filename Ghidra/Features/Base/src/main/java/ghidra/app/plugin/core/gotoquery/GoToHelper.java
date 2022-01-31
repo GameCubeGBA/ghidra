@@ -476,10 +476,10 @@ public class GoToHelper {
 		if (service != null) {
 			return service.getProgram(addr);
 		}
-		else if (currentProgram != null && currentProgram.getMemory().contains(addr)) {
-			return currentProgram;
-		}
-		return null;
+        if (currentProgram != null && currentProgram.getMemory().contains(addr)) {
+            return currentProgram;
+        }
+        return null;
 	}
 
 }

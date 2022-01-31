@@ -1426,12 +1426,10 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 			if (obj instanceof TargetAttachable) {
 				return attacher.attach((TargetAttachable) obj);
 			}
-			else {
-				attachDialog.fetchAndDisplayAttachable();
-				tool.showDialog(attachDialog);
-				return AsyncUtils.NIL;
-			}
-		}, "Couldn't attach");
+            attachDialog.fetchAndDisplayAttachable();
+            tool.showDialog(attachDialog);
+            return AsyncUtils.NIL;
+        }, "Couldn't attach");
 	}
 
 	public void performReattach(ActionContext context) {
@@ -1522,10 +1520,8 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 			if (extendedStep.equals("")) {
 				return s.step(TargetStepKind.EXTENDED);
 			}
-			else {
-				return s.step(Map.of("Command", extendedStep));
-			}
-		}, "Couldn't step extended(" + extendedStep + ")");
+            return s.step(Map.of("Command", extendedStep));
+        }, "Couldn't step extended(" + extendedStep + ")");
 	}
 
 	public void performSetBreakpoint(ActionContext context) {

@@ -1164,11 +1164,11 @@ public final class FileUtilities {
 		if (length < 1000) {
 			return length + "B";
 		}
-		else if (length < 1000000) {
-			return formatter.format((length / 1000f)) + "KB";
-		}
+        if (length < 1000000) {
+            return formatter.format((length / 1000f)) + "KB";
+        }
 
-		return formatter.format((length / 1000000f)) + "MB";
+        return formatter.format((length / 1000000f)) + "MB";
 	}
 
 	/**

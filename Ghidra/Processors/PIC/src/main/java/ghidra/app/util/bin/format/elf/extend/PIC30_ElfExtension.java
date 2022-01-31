@@ -266,14 +266,14 @@ public class PIC30_ElfExtension extends ElfExtension {
 			if (b == null) {
 				throw new NullPointerException();
 			}
-			else if (off < 0 || len < 0 || len > b.length - off) {
-				throw new IndexOutOfBoundsException();
-			}
-			else if (len == 0) {
-				return 0;
-			}
+            if (off < 0 || len < 0 || len > b.length - off) {
+                throw new IndexOutOfBoundsException();
+            }
+            if (len == 0) {
+                return 0;
+            }
 
-			int numRead = -1;
+            int numRead = -1;
 			for (int i = 1; i <= len; i++) {
 				int c = read();
 				if (c == -1) {

@@ -53,20 +53,20 @@ public class ProcessedPNG implements StructConverter {
 					totalLength += chunk.getTotalLength();
 					break;
 				}
-				else if (chunk.getIDString().equals(CrushedPNGConstants.IHDR_STRING)) {
+                if (chunk.getIDString().equals(CrushedPNGConstants.IHDR_STRING)) {
 
-					//Important IHDR chunk
-					totalLength += chunk.getTotalLength();
-					ihdrChunk = new IHDRChunk(chunk);
-					chunks.add(chunk);
-				}
-				else {
+                    //Important IHDR chunk
+                    totalLength += chunk.getTotalLength();
+                    ihdrChunk = new IHDRChunk(chunk);
+                    chunks.add(chunk);
+                }
+                else {
 
-					//Any other chunks
-					totalLength += chunk.getTotalLength();
-					chunks.add(chunk);
-				}
-			}
+                    //Any other chunks
+                    totalLength += chunk.getTotalLength();
+                    chunks.add(chunk);
+                }
+            }
 		}
 		else {
 			throw new IOException("Reader is null");

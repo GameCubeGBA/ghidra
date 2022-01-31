@@ -145,10 +145,10 @@ public class DBTraceDataSettingsAdapter
 			if (stringValue != null) {
 				return stringValue;
 			}
-			else if (bytesValue != null) {
-				return bytesValue;
-			}
-			return longValue;
+            if (bytesValue != null) {
+                return bytesValue;
+            }
+            return longValue;
 		}
 
 		protected void setLifespan(Range<Long> lifespan) {

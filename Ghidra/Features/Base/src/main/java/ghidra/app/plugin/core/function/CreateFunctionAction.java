@@ -232,10 +232,10 @@ class CreateFunctionAction extends ListingContextAction {
 		if (refSymbol != null) {
 			return new CreateThunkFunctionCmd(entry, body, refSymbol);
 		}
-		else if (refAddr != null) {
-			return new CreateThunkFunctionCmd(entry, body, refAddr);
-		}
-		return null;
+        if (refAddr != null) {
+            return new CreateThunkFunctionCmd(entry, body, refAddr);
+        }
+        return null;
 	}
 
 	@Override

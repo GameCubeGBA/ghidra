@@ -36,10 +36,10 @@ public class BookmarkTypeDBAdapterV0 extends BookmarkTypeDBAdapter {
 			if (table == null) {
 				throw new VersionException(true);
 			}
-			else if (table.getSchema().getVersion() != 0) {
-				throw new VersionException(false);
-			}
-		}
+            if (table.getSchema().getVersion() != 0) {
+                throw new VersionException(false);
+            }
+        }
 	}
 
 	@Override

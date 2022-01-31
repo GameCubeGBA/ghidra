@@ -585,10 +585,10 @@ public class DataSettingsDialog extends DialogComponentProvider {
 			if (definition instanceof EnumSettingsDefinition) {
                 return getChoices((EnumSettingsDefinition) definition);
 			}
-			else if (definition instanceof BooleanSettingsDefinition) {
-                return getChoices((BooleanSettingsDefinition) definition);
-			}
-			return "<Unsupported>";
+            if (definition instanceof BooleanSettingsDefinition) {
+return getChoices((BooleanSettingsDefinition) definition);
+            }
+            return "<Unsupported>";
 		}
 
 		boolean useDefault() {
@@ -596,11 +596,11 @@ public class DataSettingsDialog extends DialogComponentProvider {
 				EnumSettingsDefinition def = (EnumSettingsDefinition) definition;
 				return def.getChoice(settings) == def.getChoice(defaultSettings);
 			}
-			else if (definition instanceof BooleanSettingsDefinition) {
-				BooleanSettingsDefinition def = (BooleanSettingsDefinition) definition;
-				return def.getValue(settings) == def.getValue(defaultSettings);
-			}
-			return false;
+            if (definition instanceof BooleanSettingsDefinition) {
+                BooleanSettingsDefinition def = (BooleanSettingsDefinition) definition;
+                return def.getValue(settings) == def.getValue(defaultSettings);
+            }
+            return false;
 		}
 
 		boolean setSettingsChoice(Object value) {
@@ -608,11 +608,11 @@ public class DataSettingsDialog extends DialogComponentProvider {
 				setChoice(value, (EnumSettingsDefinition) definition);
 				return true;
 			}
-			else if (definition instanceof BooleanSettingsDefinition) {
-				setChoice(value, (BooleanSettingsDefinition) definition);
-				return true;
-			}
-			return false;
+            if (definition instanceof BooleanSettingsDefinition) {
+                setChoice(value, (BooleanSettingsDefinition) definition);
+                return true;
+            }
+            return false;
 		}
 
 		void clear(SettingsImpl s) {

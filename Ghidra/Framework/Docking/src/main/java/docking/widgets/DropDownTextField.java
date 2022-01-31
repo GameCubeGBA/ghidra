@@ -199,11 +199,11 @@ public class DropDownTextField<T> extends JTextField implements GComponent {
 				e.consume();
 				return true;
 			}
-			else if (pressed) {
-				// do not return after this call so that the event will continue to be processed
-				fireEditingCancelled();
-			}
-		}
+            if (pressed) {
+                // do not return after this call so that the event will continue to be processed
+                fireEditingCancelled();
+            }
+        }
 
 		return false;
 	}
@@ -228,12 +228,12 @@ public class DropDownTextField<T> extends JTextField implements GComponent {
 				e.consume();
 				return true; // don't let our parent see the event
 			}
-			else if (pressed) {
-				validateChosenItemAgainstText(false);
-				fireEditingStopped();
-			}
+            if (pressed) {
+                validateChosenItemAgainstText(false);
+                fireEditingStopped();
+            }
 
-			// Return false, even though 'consumeEnterKeyPress' is set, so that our
+            // Return false, even though 'consumeEnterKeyPress' is set, so that our
 			// parent can process the event.
 			return false;
 		}

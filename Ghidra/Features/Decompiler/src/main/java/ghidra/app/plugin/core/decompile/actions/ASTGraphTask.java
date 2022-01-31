@@ -399,30 +399,30 @@ public class ASTGraphTask extends Task {
 		if (node.isConstant()) {
 			return "#" + NumericUtilities.toHexString(addr.getOffset(), node.getSize());
 		}
-		else if (node.isUnique()) {
-			return "u_" + Long.toHexString(addr.getOffset());
-		}
-		else if (addr.isRegisterAddress()) {
-			Register r = p.getRegister(addr, node.getSize());
-			if (r == null) {
-				r = p.getRegister(addr);
-			}
-			if (r != null) {
-				return r.getName();
-			}
-		}
-		else if (addr.isStackAddress()) {
-			if (useVarName) {
-				HighVariable var = node.getHigh();
-				if (var != null) {
-					return var.getName();
-				}
-			}
-			return "Stack[" + NumericUtilities.toSignedHexString(addr.getOffset()) + "]";
-		}
-		else if (addr.isMemoryAddress()) {
-			return addr.toString(true);
-		}
-		return node.toString();
+        if (node.isUnique()) {
+            return "u_" + Long.toHexString(addr.getOffset());
+        }
+        if (addr.isRegisterAddress()) {
+            Register r = p.getRegister(addr, node.getSize());
+            if (r == null) {
+                r = p.getRegister(addr);
+            }
+            if (r != null) {
+                return r.getName();
+            }
+        }
+        else if (addr.isStackAddress()) {
+            if (useVarName) {
+                HighVariable var = node.getHigh();
+                if (var != null) {
+                    return var.getName();
+                }
+            }
+            return "Stack[" + NumericUtilities.toSignedHexString(addr.getOffset()) + "]";
+        }
+        else if (addr.isMemoryAddress()) {
+            return addr.toString(true);
+        }
+        return node.toString();
 	}
 }

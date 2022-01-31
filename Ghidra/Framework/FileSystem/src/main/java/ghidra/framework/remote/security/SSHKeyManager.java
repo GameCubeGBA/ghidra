@@ -171,10 +171,10 @@ public class SSHKeyManager {
 				if ("ssh-rsa".equals(pieces[0])) {
 					return RSASHA1Verify.decodeSSHRSAPublicKey(pubkeyBytes);
 				}
-				else if ("ssh-dsa".equals(pieces[0])) {
-					return DSASHA1Verify.decodeSSHDSAPublicKey(pubkeyBytes);
-				}
-			}
+                if ("ssh-dsa".equals(pieces[0])) {
+                    return DSASHA1Verify.decodeSSHDSAPublicKey(pubkeyBytes);
+                }
+            }
 		}
 
 		throw new IOException(

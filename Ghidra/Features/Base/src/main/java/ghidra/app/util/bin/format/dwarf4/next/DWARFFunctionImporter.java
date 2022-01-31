@@ -535,85 +535,85 @@ public class DWARFFunctionImporter {
 			}
 			return null;
 		}
-		else if (exprEvaluator.useUnknownRegister() && exprEvaluator.isRegisterLocation()) {
-			dvar.reg = exprEvaluator.getLastRegister();
-			dvar.type = dwarfDTM.getPtrTo(dvar.type);
+        if (exprEvaluator.useUnknownRegister() && exprEvaluator.isRegisterLocation()) {
+            dvar.reg = exprEvaluator.getLastRegister();
+            dvar.type = dwarfDTM.getPtrTo(dvar.type);
 
-			// TODO: fix this later.  Lie and use lexicalOffset-1 so the GUI correctly shows the first use
-			dvar.offset = dvar.lexicalOffset != -1 ? dvar.lexicalOffset - 1 : -1;
-			return dvar;
-		}
-		else if (exprEvaluator.useUnknownRegister()) {
-			importSummary.varDynamicRegisterError++;
-			if (dfunc != null) {
-				dfunc.localVarErrors = true;
-			}
-			return null;
-		}
-		else if (exprEvaluator.isStackRelative()) {
-			dvar.offset = res;
-			dvar.reg = null;
-			dvar.isStackOffset = true;
-			if (exprEvaluator.isDeref()) {
-				dvar.type = dwarfDTM.getPtrTo(dvar.type);
-			}
-		}
-		else if (exprEvaluator.isRegisterLocation()) {
-			// The DWARF expression evaluated to a simple register.  If we have a mapping
-			// for it in the "processor.dwarf" register mapping file, try to create
-			// a variable, otherwise log the unknown register for later logging.
-			dvar.reg = exprEvaluator.getLastRegister();
-			if (dvar.reg != null) {
-				dvar.offset = -1;
-				if (firstUseAddr != -1) {
-					dvar.offset = findFirstUse(currentProgram, dvar.reg, funcAddr, firstUseAddr);
-				}
-				if ((dvar.type != null) &&
-					(dvar.type.getLength() > dvar.reg.getMinimumByteSize())) {
-					importSummary.varFitError++;
+            // TODO: fix this later.  Lie and use lexicalOffset-1 so the GUI correctly shows the first use
+            dvar.offset = dvar.lexicalOffset != -1 ? dvar.lexicalOffset - 1 : -1;
+            return dvar;
+        }
+        if (exprEvaluator.useUnknownRegister()) {
+            importSummary.varDynamicRegisterError++;
+            if (dfunc != null) {
+                dfunc.localVarErrors = true;
+            }
+            return null;
+        }
+        if (exprEvaluator.isStackRelative()) {
+            dvar.offset = res;
+            dvar.reg = null;
+            dvar.isStackOffset = true;
+            if (exprEvaluator.isDeref()) {
+                dvar.type = dwarfDTM.getPtrTo(dvar.type);
+            }
+        }
+        else if (exprEvaluator.isRegisterLocation()) {
+            // The DWARF expression evaluated to a simple register.  If we have a mapping
+            // for it in the "processor.dwarf" register mapping file, try to create
+            // a variable, otherwise log the unknown register for later logging.
+            dvar.reg = exprEvaluator.getLastRegister();
+            if (dvar.reg != null) {
+                dvar.offset = -1;
+                if (firstUseAddr != -1) {
+                    dvar.offset = findFirstUse(currentProgram, dvar.reg, funcAddr, firstUseAddr);
+                }
+                if ((dvar.type != null) &&
+                    (dvar.type.getLength() > dvar.reg.getMinimumByteSize())) {
+                    importSummary.varFitError++;
 
-					String contextStr = (dfunc != null)
-							? " for function " + dfunc.dni.getName() + "@" + dfunc.address
-							: "";
-					if (diea.getTag() != DWARFTag.DW_TAG_formal_parameter) {
-						Msg.warn(this,
-							"Variable " + dvar.dni.getName() + "[" + dvar.type.getName() +
-								", size=" + dvar.type.getLength() + "]" + contextStr +
-								" can not fit into specified register " + dvar.reg.getName() +
-								", size=" + dvar.reg.getMinimumByteSize() +
-								", skipping.  DWARF DIE: " + diea.getHexOffset());
-						if (dfunc != null) {
-							dfunc.localVarErrors = true;
-						}
-						return null;
-					}
+                    String contextStr = (dfunc != null)
+                            ? " for function " + dfunc.dni.getName() + "@" + dfunc.address
+                            : "";
+                    if (diea.getTag() != DWARFTag.DW_TAG_formal_parameter) {
+                        Msg.warn(this,
+                            "Variable " + dvar.dni.getName() + "[" + dvar.type.getName() +
+                                ", size=" + dvar.type.getLength() + "]" + contextStr +
+                                " can not fit into specified register " + dvar.reg.getName() +
+                                ", size=" + dvar.reg.getMinimumByteSize() +
+                                ", skipping.  DWARF DIE: " + diea.getHexOffset());
+                        if (dfunc != null) {
+                            dfunc.localVarErrors = true;
+                        }
+                        return null;
+                    }
 
-					dvar.type = dwarfDTM.getUndefined1Type();
-				}
-			}
-			else {
-				// The DWARF register did not have a mapping to a Ghidra register, so
-				// log it to be displayed in an error summary at end of import phase.
-				importSummary.unknownRegistersEncountered.add(exprEvaluator.getRawLastRegister());
-				if (dfunc != null) {
-					dfunc.localVarErrors = true;
-				}
-				return null;
-			}
-		}
-		else if (exprEvaluator.getLastRegister() == null) {
-			processStaticVar(res, dvar, diea);
-			return null;// Don't return the variable to be associated with the function
-		}
-		else {
-			Msg.error(this,
-				"LOCAL VAR: " + dvar.dni.getName() + " : " +
-					ghidra.app.util.bin.format.dwarf4.expression.DWARFExpression.exprToString(
-						topLocation.getLocation(), diea) +
-					", DWARF DIE: " + diea.getHexOffset());
-			return null;
-		}
-		return dvar;
+                    dvar.type = dwarfDTM.getUndefined1Type();
+                }
+            }
+            else {
+                // The DWARF register did not have a mapping to a Ghidra register, so
+                // log it to be displayed in an error summary at end of import phase.
+                importSummary.unknownRegistersEncountered.add(exprEvaluator.getRawLastRegister());
+                if (dfunc != null) {
+                    dfunc.localVarErrors = true;
+                }
+                return null;
+            }
+        }
+        else if (exprEvaluator.getLastRegister() == null) {
+            processStaticVar(res, dvar, diea);
+            return null;// Don't return the variable to be associated with the function
+        }
+        else {
+            Msg.error(this,
+                "LOCAL VAR: " + dvar.dni.getName() + " : " +
+                    DWARFExpression.exprToString(
+                        topLocation.getLocation(), diea) +
+                    ", DWARF DIE: " + diea.getHexOffset());
+            return null;
+        }
+        return dvar;
 	}
 
 	private void processStaticVar(long address, DWARFVariable dvar, DIEAggregate diea)

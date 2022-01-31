@@ -267,10 +267,10 @@ public class StringUtilities {
 		if (charSize <= 1) {
 			return toQuotedString(bytes);
 		}
-		else if (charSize > 4) {
-			throw new IllegalArgumentException("unsupported charSize: " + charSize);
-		}
-		int shortage = bytes.length % charSize;
+        if (charSize > 4) {
+            throw new IllegalArgumentException("unsupported charSize: " + charSize);
+        }
+        int shortage = bytes.length % charSize;
 		if (shortage != 0) {
 			byte[] paddedBytes = new byte[bytes.length + shortage];
 			System.arraycopy(bytes, 0, paddedBytes, 0, bytes.length);

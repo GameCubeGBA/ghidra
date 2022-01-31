@@ -40,19 +40,13 @@ public class UniqueRow {
 				if (isWrite) {
 					return READ_WRITE;
 				}
-				else {
-					return READ;
-				}
-			}
-			else {
-				if (isWrite) {
-					return WRITE;
-				}
-				else {
-					return NONE;
-				}
-			}
-		}
+                return READ;
+            }
+            if (isWrite) {
+                return WRITE;
+            }
+            return NONE;
+        }
 	}
 
 	protected final DebuggerPcodeStepperProvider provider;

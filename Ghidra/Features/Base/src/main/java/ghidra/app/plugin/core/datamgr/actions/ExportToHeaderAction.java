@@ -79,7 +79,7 @@ public class ExportToHeaderAction extends DockingAction {
 			CategoryNode categoryNode = (CategoryNode) node;
 			return categoryNode.isEnabled();
 		}
-		else if (node instanceof DataTypeNode) {
+		if (node instanceof DataTypeNode) {
 			return true;
 		}
 		return false;
@@ -125,7 +125,7 @@ public class ExportToHeaderAction extends DockingAction {
 			try {
 				Constructor<?> constructor = clazz.getConstructor(constructorArgumentTypes);
 				Object obj = constructor.newInstance();
-				list.add(AnnotationHandler.class.cast(obj));
+				list.add((AnnotationHandler) obj);
 			}
 			catch (Exception e) {
 				Msg.showError(this, plugin.getTool().getToolFrame(), "Export Data Types",

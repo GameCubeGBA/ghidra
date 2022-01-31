@@ -205,7 +205,7 @@ public class DmgFileReader implements Closeable {
 						uncompressedBytes.toByteArray(), entry.getName());
 					return new FileInputStream(tempDecompressedFile);
 				}
-				else if ( decmpfsHeader.getCompressionType() == DecmpfsCompressionTypes.CMP_Type4 ) {
+				if ( decmpfsHeader.getCompressionType() == DecmpfsCompressionTypes.CMP_Type4 ) {
 
 					return decompressResourceFork( entry, resourceForkStream, (int)decmpfsHeader.getUncompressedSize() );
 				}

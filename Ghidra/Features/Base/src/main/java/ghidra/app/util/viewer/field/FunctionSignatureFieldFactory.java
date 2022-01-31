@@ -262,20 +262,20 @@ public class FunctionSignatureFieldFactory extends FieldFactory {
 			if (thunkedFunction == null) {
 				return unresolvedThunkRefColor;
 			}
-			else if (thunkedFunction.isExternal()) {
-				ExternalLocation externalLocation = thunkedFunction.getExternalLocation();
-				String libName = externalLocation.getLibraryName();
-				if (Library.UNKNOWN.equals(libName)) {
-					return unresolvedThunkRefColor;
-				}
-				ExternalManager externalManager = function.getProgram().getExternalManager();
-				String path = externalManager.getExternalLibraryPath(libName);
-				if (path == null || path.length() == 0) {
-					return unresolvedThunkRefColor;
-				}
-				return resolvedThunkRefColor;
-			}
-		}
+            if (thunkedFunction.isExternal()) {
+                ExternalLocation externalLocation = thunkedFunction.getExternalLocation();
+                String libName = externalLocation.getLibraryName();
+                if (Library.UNKNOWN.equals(libName)) {
+                    return unresolvedThunkRefColor;
+                }
+                ExternalManager externalManager = function.getProgram().getExternalManager();
+                String path = externalManager.getExternalLibraryPath(libName);
+                if (path == null || path.length() == 0) {
+                    return unresolvedThunkRefColor;
+                }
+                return resolvedThunkRefColor;
+            }
+        }
 		return funNameColor;
 	}
 

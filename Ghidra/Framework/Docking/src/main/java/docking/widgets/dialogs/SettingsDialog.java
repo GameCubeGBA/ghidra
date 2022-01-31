@@ -137,11 +137,11 @@ public class SettingsDialog extends DialogComponentProvider {
 				choices.setSelectedValue(def.getChoice(settings));
 				return choices;
 			}
-			else if (definition instanceof BooleanSettingsDefinition) {
-				BooleanSettingsDefinition def = (BooleanSettingsDefinition) definition;
-				return Boolean.valueOf(def.getValue(settings));
-			}
-			return "<Unsupported>";
+            if (definition instanceof BooleanSettingsDefinition) {
+                BooleanSettingsDefinition def = (BooleanSettingsDefinition) definition;
+                return Boolean.valueOf(def.getValue(settings));
+            }
+            return "<Unsupported>";
 		}
 
 		boolean setSettingsChoice(Object value) {
@@ -151,13 +151,13 @@ public class SettingsDialog extends DialogComponentProvider {
 				def.setChoice(settings, choices.getSelectedValueIndex());
 				return true;
 			}
-			else if (definition instanceof BooleanSettingsDefinition) {
-				BooleanSettingsDefinition def = (BooleanSettingsDefinition) definition;
-				def.setValue(settings, ((Boolean) value).booleanValue());
-				return true;
-			}
+            if (definition instanceof BooleanSettingsDefinition) {
+                BooleanSettingsDefinition def = (BooleanSettingsDefinition) definition;
+                def.setValue(settings, ((Boolean) value).booleanValue());
+                return true;
+            }
 
-			return false;
+            return false;
 		}
 
 		void clear(Settings s) {
@@ -299,11 +299,11 @@ public class SettingsDialog extends DialogComponentProvider {
 				initComboBox((StringChoices) value);
 				return comboBox;
 			}
-			else if (value instanceof Boolean) {
-				initCheckBox((Boolean) value);
-				return checkBox;
-			}
-			throw new AssertException(
+            if (value instanceof Boolean) {
+                initCheckBox((Boolean) value);
+                return checkBox;
+            }
+            throw new AssertException(
 				"SettingsEditor: " + value.getClass().getName() + " not supported");
 		}
 

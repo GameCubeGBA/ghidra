@@ -87,10 +87,10 @@ public enum MetaDataType {
 			if (compare < 0) {
 				return bCopy;
 			}
-			else if (compare > 0) {
-				return aCopy;
-			}
-			if (aMeta == MetaDataType.PTR) {
+            if (compare > 0) {
+                return aCopy;
+            }
+            if (aMeta == MetaDataType.PTR) {
 				if (a instanceof TypeDef) {
 					a = ((TypeDef) a).getBaseDataType();
 				}

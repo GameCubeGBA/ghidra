@@ -387,22 +387,22 @@ public class GadpClient extends AbstractDebuggerObjectModel
 			if (exc instanceof NotYetConnectedException) {
 				throw new AssertionError("Connect first, please", exc);
 			}
-			else if (exc instanceof EOFException) {
-				Msg.error(this, "Channel has no data remaining");
-			}
-			else if (exc instanceof ClosedChannelException) {
-				Msg.error(this, "Channel is already closed");
-			}
-			else if (exc instanceof CancelledKeyException) {
-				Msg.error(this, "Channel key is cancelled. Probably closed");
-			}
-			else if (exc instanceof RejectedExecutionException) {
-				Msg.trace(this, "Ignoring rejection", exc);
-			}
-			else {
-				Msg.error(this, "Receive failed for an unknown reason", exc);
-			}
-			channelState.set(ChannelState.CLOSED, DebuggerModelClosedReason.abnormal(exc));
+            if (exc instanceof EOFException) {
+                Msg.error(this, "Channel has no data remaining");
+            }
+            else if (exc instanceof ClosedChannelException) {
+                Msg.error(this, "Channel is already closed");
+            }
+            else if (exc instanceof CancelledKeyException) {
+                Msg.error(this, "Channel key is cancelled. Probably closed");
+            }
+            else if (exc instanceof RejectedExecutionException) {
+                Msg.trace(this, "Ignoring rejection", exc);
+            }
+            else {
+                Msg.error(this, "Receive failed for an unknown reason", exc);
+            }
+            channelState.set(ChannelState.CLOSED, DebuggerModelClosedReason.abnormal(exc));
 			return null;
 		});
 	}

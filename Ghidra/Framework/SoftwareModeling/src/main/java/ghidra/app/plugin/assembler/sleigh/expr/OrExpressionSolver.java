@@ -201,16 +201,16 @@ public class OrExpressionSolver extends AbstractBinaryExpressionSolver<OrExpress
 		if (valValue != null && valShift != null) {
 			throw new AssertionError("Should not have constants when solving special forms");
 		}
-		else if (valValue != null) {
-			return solver.solve(expShift, computeCircShiftG(valValue, size, dir, goal), vals, res,
-				cur, hints, description);
-		}
-		else if (valShift != null) {
-			return solver.solve(expValue, computeCircShiftF(valShift, size, dir, goal), vals, res,
-				cur, hints, description);
-		}
+        if (valValue != null) {
+            return solver.solve(expShift, computeCircShiftG(valValue, size, dir, goal), vals, res,
+                cur, hints, description);
+        }
+        if (valShift != null) {
+            return solver.solve(expValue, computeCircShiftF(valShift, size, dir, goal), vals, res,
+                cur, hints, description);
+        }
 
-		// Oiy. Try guessing the shift amount, starting at 0
+        // Oiy. Try guessing the shift amount, starting at 0
 		if (hints.contains(DefaultSolverHint.GUESSING_CIRCULAR_SHIFT_AMOUNT)) {
 			throw new SolverException("Already guessing circular shift amount. " +
 				"Try to express a double-shift as a shift by sum.");

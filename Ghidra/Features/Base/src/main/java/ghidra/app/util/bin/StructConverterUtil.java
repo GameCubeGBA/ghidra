@@ -133,20 +133,20 @@ public final class StructConverterUtil {
 				throw new RuntimeException(e);
 			}
 		}
-		else if (arrayClazz.equals(int.class)) {
-			try {
-				field.setAccessible(true);
-				int [] array = (int [])field.get(object);
-				int nElements = array.length;
-				DataType arrayDataType = new DWordDataType();
-				return new ArrayDataType(arrayDataType, nElements, arrayDataType.getLength());
-			}
-			catch (Exception e) {
-				throw new RuntimeException(e);
-			}
-		}
+        if (arrayClazz.equals(int.class)) {
+            try {
+                field.setAccessible(true);
+                int [] array = (int [])field.get(object);
+                int nElements = array.length;
+                DataType arrayDataType = new DWordDataType();
+                return new ArrayDataType(arrayDataType, nElements, arrayDataType.getLength());
+            }
+            catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
 
-		throw new RuntimeException("Unsupported array datatype for automatic structure conversion - "+clazz);
+        throw new RuntimeException("Unsupported array datatype for automatic structure conversion - "+clazz);
 	}
 
 	public static String parseName(Class<?> clazz) {

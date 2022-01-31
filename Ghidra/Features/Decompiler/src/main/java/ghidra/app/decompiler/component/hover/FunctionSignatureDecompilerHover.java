@@ -92,21 +92,21 @@ public class FunctionSignatureDecompilerHover extends AbstractConfigurableHover
 			String content = ToolTipUtils.getToolTipText(function, false);
 			return createTooltipComponent(content);
 		}
-		else if (token instanceof ClangVariableToken) {
+        if (token instanceof ClangVariableToken) {
 
-			// Reference to function-address: "x = &foo;" where 'foo' is a function
-			Varnode vn = ((ClangVariableToken) token).getVarnode();
-			Scalar scalar = getScalar(vn);
-			Function function = getFunctionAtAddress(program, scalar);
-			if (function != null) {
-				String content = ToolTipUtils.getToolTipText(function, false);
-				content = content.replaceFirst(HTML,
-					HTML + italic(bold("Reference to Function")) + "<br/><br/>");
-				return createTooltipComponent(content);
-			}
-		}
+            // Reference to function-address: "x = &foo;" where 'foo' is a function
+            Varnode vn = ((ClangVariableToken) token).getVarnode();
+            Scalar scalar = getScalar(vn);
+            Function function = getFunctionAtAddress(program, scalar);
+            if (function != null) {
+                String content = ToolTipUtils.getToolTipText(function, false);
+                content = content.replaceFirst(HTML,
+                    HTML + italic(bold("Reference to Function")) + "<br/><br/>");
+                return createTooltipComponent(content);
+            }
+        }
 
-		return null;
+        return null;
 	}
 
 	private Scalar getScalar(Varnode vn) {

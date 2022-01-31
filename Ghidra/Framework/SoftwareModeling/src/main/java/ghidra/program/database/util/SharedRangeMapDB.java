@@ -141,7 +141,8 @@ public class SharedRangeMapDB {
                     if (rangeKey <= start) {
                         if (max >= end) {
                             return;
-                        } else if (max >= (start - 1)) {
+                        }
+                        if (max >= (start - 1)) {
                             mapTable.deleteRecord(mapKey);
                             consolidateRange(rangeKey, max);
                             start = rangeKey;

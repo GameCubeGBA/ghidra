@@ -135,36 +135,36 @@ public class DWARFLine {
 			throw new UnsupportedOperationException(
 				"Currently does not support retrieving the primary source file.");
 		}
-		else if (index > 0) {
-			// Retrieve the file by index (index starts at 1)
-			DWARFFile file = this.file_names.get(index - 1);
+        if (index > 0) {
+            // Retrieve the file by index (index starts at 1)
+            DWARFFile file = this.file_names.get(index - 1);
 
-			File fileObj = new File(file.getName());
+            File fileObj = new File(file.getName());
 
-			// Check to see if the file is an absolute path and return if so
-			if (fileObj.isAbsolute()) {
-				return file.getName();
-			}
+            // Check to see if the file is an absolute path and return if so
+            if (fileObj.isAbsolute()) {
+                return file.getName();
+            }
 
-			// Otherwise we need to retrieve the directory
-			int diridx = (int) file.getDirectoryIndex();
-			if (diridx == 0) {
-				// Use the compile directory if a directory index of 0 is given
-				if (compileDirectory != null) {
-					return compileDirectory + file.getName();
-				}
-				throw new IllegalArgumentException(
-					"No compile directory was given when one was expected.");
-			}
-			else if (diridx > 0) {
-				// Retrieve and append the directory
-				String directory = this.include_directories.get(diridx - 1);
-				return directory + file.getName();
-			}
-			throw new IndexOutOfBoundsException(
-				"Negative directory index was found: " + Integer.toString(diridx));
-		}
-		throw new IllegalArgumentException(
+            // Otherwise we need to retrieve the directory
+            int diridx = (int) file.getDirectoryIndex();
+            if (diridx == 0) {
+                // Use the compile directory if a directory index of 0 is given
+                if (compileDirectory != null) {
+                    return compileDirectory + file.getName();
+                }
+                throw new IllegalArgumentException(
+                    "No compile directory was given when one was expected.");
+            }
+            if (diridx > 0) {
+                // Retrieve and append the directory
+                String directory = this.include_directories.get(diridx - 1);
+                return directory + file.getName();
+            }
+            throw new IndexOutOfBoundsException(
+                "Negative directory index was found: " + Integer.toString(diridx));
+        }
+        throw new IllegalArgumentException(
 			"Negative file index was given: " + Integer.toString(index));
 	}
 
@@ -180,12 +180,12 @@ public class DWARFLine {
 			throw new UnsupportedOperationException(
 				"Currently does not support retrieving the primary source file.");
 		}
-		else if (index > 0) {
-			// Retrieve the file by index (index starts at 1)
-			DWARFFile file = this.file_names.get(index - 1);
-			return FilenameUtils.getName(file.getName());
-		}
-		throw new IllegalArgumentException(
+        if (index > 0) {
+            // Retrieve the file by index (index starts at 1)
+            DWARFFile file = this.file_names.get(index - 1);
+            return FilenameUtils.getName(file.getName());
+        }
+        throw new IllegalArgumentException(
 			"Negative file index was given: " + Integer.toString(index));
 	}
 

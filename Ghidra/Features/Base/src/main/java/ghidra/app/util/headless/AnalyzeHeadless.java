@@ -366,13 +366,11 @@ public class AnalyzeHeadless implements GhidraLaunchable {
 						"prescript and/or postscript.");
 					System.exit(EXIT_CODE_ERROR);
 				}
-				else {
-					Msg.warn(HeadlessAnalyzer.class,
-						"Neither the -import parameter nor the -process parameter was specified; " +
-							"therefore, the specified prescripts and/or postscripts will be " +
-							"executed without any type of program context.");
-				}
-			}
+                Msg.warn(HeadlessAnalyzer.class,
+                    "Neither the -import parameter nor the -process parameter was specified; " +
+                        "therefore, the specified prescripts and/or postscripts will be " +
+                        "executed without any type of program context.");
+            }
 		}
 
 		if (options.commit) {

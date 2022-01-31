@@ -403,16 +403,16 @@ public strictfp class FloatFormat {
 			}
 			return new BigFloat(frac_size, exp_size, FloatKind.FINITE, sign, frac, 1 - bias);
 		}
-		else if (exp == maxexponent) {
-			if (frac.signum() == 0) { // Floating point infinity
-				return new BigFloat(frac_size, exp_size, FloatKind.INFINITE, sign, BigInteger.ZERO,
-					maxexponent);
-			}
-			return new BigFloat(frac_size, exp_size, FloatKind.QUIET_NAN, sign, BigInteger.ZERO,
-				maxexponent);
-		}
+        if (exp == maxexponent) {
+            if (frac.signum() == 0) { // Floating point infinity
+                return new BigFloat(frac_size, exp_size, FloatKind.INFINITE, sign, BigInteger.ZERO,
+                    maxexponent);
+            }
+            return new BigFloat(frac_size, exp_size, FloatKind.QUIET_NAN, sign, BigInteger.ZERO,
+                maxexponent);
+        }
 
-		if (jbitimplied) {
+        if (jbitimplied) {
 			frac = frac.setBit(frac_size);
 		}
 		return new BigFloat(frac_size, exp_size, FloatKind.FINITE, sign, frac, exp - bias);

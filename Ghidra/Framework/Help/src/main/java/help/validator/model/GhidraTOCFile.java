@@ -124,13 +124,13 @@ public class GhidraTOCFile {
 			return file.addTOCItemReference(
 				new TOCItemReference(parentItem, file.sourceTOCFile, ID, lineNumber));
 		}
-		else if (TOC_ITEM_DEFINITION.equals(typeOfTOCItem)) {
-			String sortPreference = element.getAttribute(TOC_ITEM_SORT_PREFERENCE);
-			return file.addTOCItemDefinition(new TOCItemDefinition(parentItem, file.sourceTOCFile,
-				ID, text, target, sortPreference, lineNumber));
-		}
+        if (TOC_ITEM_DEFINITION.equals(typeOfTOCItem)) {
+            String sortPreference = element.getAttribute(TOC_ITEM_SORT_PREFERENCE);
+            return file.addTOCItemDefinition(new TOCItemDefinition(parentItem, file.sourceTOCFile,
+                ID, text, target, sortPreference, lineNumber));
+        }
 
-		throw new IllegalArgumentException("Unknown TOC type: " + typeOfTOCItem);
+        throw new IllegalArgumentException("Unknown TOC type: " + typeOfTOCItem);
 	}
 
 	private TOCItemDefinition addTOCItemDefinition(TOCItemDefinition definition) {

@@ -153,11 +153,11 @@ public class SortedRangeList implements Iterable<Range> {
 			if (next.min > max) {
 				break;
 			}
-			else if (next.max > max) {
-				next.min = max + 1;
-				break;
-			}
-			it.remove();
+            if (next.max > max) {
+                next.min = max + 1;
+                break;
+            }
+            it.remove();
 		}
 	}
 

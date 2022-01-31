@@ -151,11 +151,11 @@ public class BinaryField extends Field {
 			}
 			return -1;
 		}
-		else if (f.data == null) {
-			return 1;
-		}
+        if (f.data == null) {
+            return 1;
+        }
 
-		int len1 = data.length;
+        int len1 = data.length;
 		int len2 = f.data.length;
 		int offset1 = 0;
 		int offset2 = 0;
@@ -179,11 +179,11 @@ public class BinaryField extends Field {
 			}
 			return -1;
 		}
-		else if (len < 0) {
-			return 1;
-		}
+        if (len < 0) {
+            return 1;
+        }
 
-		return -buffer.unsignedCompareTo(data, offset + 4, len);
+        return -buffer.unsignedCompareTo(data, offset + 4, len);
 	}
 
 	@Override

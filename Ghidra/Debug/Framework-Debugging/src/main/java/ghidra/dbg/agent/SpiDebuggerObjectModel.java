@@ -69,21 +69,17 @@ public interface SpiDebuggerObjectModel extends DebuggerObjectModel {
 				if (path.size() == 1) {
 					return CompletableFuture.completedFuture(c);
 				}
-				else {
-					List<String> p = PathUtils.extend(obj.getPath(), key);
-					throw DebuggerModelTypeException.typeRequired(c, p, TargetObject.class);
-				}
-			}
+                List<String> p = PathUtils.extend(obj.getPath(), key);
+                throw DebuggerModelTypeException.typeRequired(c, p, TargetObject.class);
+            }
 			TargetObject child = (TargetObject) c;
 			if (PathUtils.isLink(obj.getPath(), key, child.getPath()) && !followLinks) {
 				if (path.size() == 1) {
 					return CompletableFuture.completedFuture(c);
 				}
-				else {
-					List<String> p = PathUtils.extend(obj.getPath(), key);
-					throw DebuggerModelTypeException.linkForbidden(child, p);
-				}
-			}
+                List<String> p = PathUtils.extend(obj.getPath(), key);
+                throw DebuggerModelTypeException.linkForbidden(child, p);
+            }
 			List<String> remains = path.subList(1, path.size());
 			return fetchSuccessorValue(child, remains, refresh, followLinks);
 		});

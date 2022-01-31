@@ -191,14 +191,12 @@ public class ConsoleTextPane extends JTextPane implements OptionsChangeListener 
 		if (OUTPUT_ATTRIBUTE_VALUE.equals(attributeSetName)) {
 			return outputAttributeSet;
 		}
-		else if (ERROR_ATTRIBUTE_VALUE.equals(attributeSetName)) {
-			return errorAttributeSet;
-		}
-		else {
-			// we found an attribute type that we do not know about
-			throw new AssertException("Unexpected attribute type for text");
-		}
-	}
+        if (ERROR_ATTRIBUTE_VALUE.equals(attributeSetName)) {
+            return errorAttributeSet;
+        }
+        // we found an attribute type that we do not know about
+        throw new AssertException("Unexpected attribute type for text");
+    }
 
 	private void createAttribtues() {
 		createAttributes(new Font("monospaced", Font.PLAIN, 12));

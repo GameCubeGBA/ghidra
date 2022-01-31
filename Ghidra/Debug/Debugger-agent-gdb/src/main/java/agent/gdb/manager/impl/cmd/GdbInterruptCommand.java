@@ -60,11 +60,11 @@ public class GdbInterruptCommand extends AbstractGdbCommand<Void> {
 		if (super.handle(evt, pending)) {
 			return true;
 		}
-		else if (evt instanceof GdbStoppedEvent) {
-			pending.claim(evt);
-			return true;
-		}
-		return false;
+        if (evt instanceof GdbStoppedEvent) {
+            pending.claim(evt);
+            return true;
+        }
+        return false;
 	}
 
 	@Override

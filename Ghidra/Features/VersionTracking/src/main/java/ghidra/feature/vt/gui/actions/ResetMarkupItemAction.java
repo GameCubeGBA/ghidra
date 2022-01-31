@@ -83,11 +83,11 @@ public class ResetMarkupItemAction extends DockingAction {
 			return controller.getCorrelator(matchInfo.getSourceFunction(),
 				matchInfo.getDestinationFunction());
 		}
-		else if (type == VTAssociationType.DATA) {
-			return controller.getCorrelator(matchInfo.getSourceData(),
-				matchInfo.getDestinationData());
-		}
-		return null;
+        if (type == VTAssociationType.DATA) {
+            return controller.getCorrelator(matchInfo.getSourceData(),
+                matchInfo.getDestinationData());
+        }
+        return null;
 	}
 
 	@Override

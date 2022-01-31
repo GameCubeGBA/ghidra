@@ -172,18 +172,18 @@ public class GGlassPane extends JComponent {
 
 			return ((GGlassPane) glass);
 		}
-		else if (window instanceof JDialog) {
-			JDialog frame = (JDialog) window;
-			Component glass = frame.getGlassPane();
+        if (window instanceof JDialog) {
+            JDialog frame = (JDialog) window;
+            Component glass = frame.getGlassPane();
 
-			if (!(glass instanceof GGlassPane)) {
-				Msg.error(GGlassPane.class, "GGlassPane not installed on window: " + window,
-					new AssertException());
-				return null;
-			}
+            if (!(glass instanceof GGlassPane)) {
+                Msg.error(GGlassPane.class, "GGlassPane not installed on window: " + window,
+                    new AssertException());
+                return null;
+            }
 
-			return ((GGlassPane) glass);
-		}
-		return null;
+            return ((GGlassPane) glass);
+        }
+        return null;
 	}
 }

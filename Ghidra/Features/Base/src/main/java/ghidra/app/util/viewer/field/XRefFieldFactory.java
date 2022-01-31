@@ -642,10 +642,10 @@ public class XRefFieldFactory extends FieldFactory {
 		if (reference.getReferenceType().isRead() && reference.getReferenceType().isWrite()) {
 			AttributedString typeString = new AttributedString("(R", readColor, getMetrics());
 			fullReferenceString = new CompositeAttributedString(
-				new AttributedString[] { fullReferenceString, typeString });
+					fullReferenceString, typeString);
 			typeString = new AttributedString("W)", writeColor, getMetrics());
 			return new CompositeAttributedString(
-				new AttributedString[] { fullReferenceString, typeString });
+					fullReferenceString, typeString);
 		}
 
 		Color displayColor = color;
@@ -662,7 +662,7 @@ public class XRefFieldFactory extends FieldFactory {
 		AttributedString typeString =
 			new AttributedString(getRefTypeDisplayString(reference), displayColor, getMetrics());
 		return new CompositeAttributedString(
-			new AttributedString[] { fullReferenceString, typeString });
+				fullReferenceString, typeString);
 	}
 
 	protected String getPrefix(Program program, Reference reference, Function currentFunction) {
@@ -738,17 +738,17 @@ public class XRefFieldFactory extends FieldFactory {
 			if (refType.isRead() || refType.isIndirect()) {
 				return "(R)";
 			}
-			else if (refType.isWrite()) {
+			if (refType.isWrite()) {
 				return "(W)";
 			}
-			else if (refType.isData()) {
+			if (refType.isData()) {
 				return "(*)";
 			}
 		}
 		if (refType.isCall()) {
 			return "(c)";
 		}
-		else if (refType.isJump()) {
+		if (refType.isJump()) {
 			return "(j)";
 		}
 		return "";

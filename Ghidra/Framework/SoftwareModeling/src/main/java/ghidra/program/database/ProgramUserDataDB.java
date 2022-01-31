@@ -263,10 +263,10 @@ class ProgramUserDataDB extends DomainObjectAdapterDB implements ProgramUserData
 			language = oldLanguage;
 			return new VersionException(true);
 		}
-		else if (language.getVersion() != languageVersion) {
-			throw new LanguageNotFoundException(language.getLanguageID(), languageVersion, 0);
-		}
-		return null;
+        if (language.getVersion() != languageVersion) {
+            throw new LanguageNotFoundException(language.getLanguageID(), languageVersion, 0);
+        }
+        return null;
 	}
 
 	/**

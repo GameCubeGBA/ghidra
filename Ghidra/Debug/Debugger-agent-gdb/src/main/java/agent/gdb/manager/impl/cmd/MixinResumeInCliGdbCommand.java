@@ -43,16 +43,16 @@ public interface MixinResumeInCliGdbCommand<T> extends GdbCommand<T> {
 			pending.claim(evt);
 			return pending.hasAny(GdbRunningEvent.class);
 		}
-		else if (evt instanceof AbstractGdbCompletedCommandEvent) {
-			pending.claim(evt);
-			return true; // Not the expected Completed event 
-		}
-		else if (evt instanceof GdbRunningEvent) {
-			// Event happens no matter which interpreter received the command
-			pending.claim(evt);
-			return pending.hasAny(GdbCommandRunningEvent.class);
-		}
-		return false;
+        if (evt instanceof AbstractGdbCompletedCommandEvent) {
+            pending.claim(evt);
+            return true; // Not the expected Completed event
+        }
+        if (evt instanceof GdbRunningEvent) {
+            // Event happens no matter which interpreter received the command
+            pending.claim(evt);
+            return pending.hasAny(GdbCommandRunningEvent.class);
+        }
+        return false;
 	}
 
 	default void completeOnRunning(GdbPendingCommand<?> pending) {

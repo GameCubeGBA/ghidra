@@ -203,12 +203,12 @@ public class AssemblyConstructorSemantic implements Comparable<AssemblyConstruct
 						sibcons + " forbids " + cons + " by pattern specificity"));
 					return CONTINUE;
 				}
-				else if (comb.bitsEqual(pat)) {
-					// I'm a strict subset, so I will no matter the line number
-					return CONTINUE;
-				}
+                if (comb.bitsEqual(pat)) {
+                    // I'm a strict subset, so I will no matter the line number
+                    return CONTINUE;
+                }
 
-				// Finally, check the line number
+                // Finally, check the line number
 				if (sibcons.getId() < cons.getId()) {
 					forbids.add(
 						sibpat.withDescription(sibcons + " forbids " + cons + " by rule position"));

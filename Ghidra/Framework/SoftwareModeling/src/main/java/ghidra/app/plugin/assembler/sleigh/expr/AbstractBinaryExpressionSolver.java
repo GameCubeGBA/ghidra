@@ -60,19 +60,17 @@ public abstract class AbstractBinaryExpressionSolver<T extends BinaryExpression>
 				MaskedLong cval = compute(lval, rval);
 				return ConstantValueSolver.checkConstAgrees(cval, goal, description);
 			}
-			else if (lval != null) {
-				return solveRightSide(exp.getRight(), lval, goal, vals, res, cur, hints,
-					description);
-			}
-			else if (rval != null) {
-				return solveLeftSide(exp.getLeft(), rval, goal, vals, res, cur, hints, description);
-			}
-			else {
-				// Each solver may provide a strategy for solving expression where both sides are
-				// variable, e.g., two fields being concatenated via OR.
-				return solveTwoSided(exp, goal, vals, res, cur, hints, description);
-			}
-		}
+            if (lval != null) {
+                return solveRightSide(exp.getRight(), lval, goal, vals, res, cur, hints,
+                    description);
+            }
+            if (rval != null) {
+                return solveLeftSide(exp.getLeft(), rval, goal, vals, res, cur, hints, description);
+            }
+            // Each solver may provide a strategy for solving expression where both sides are
+            // variable, e.g., two fields being concatenated via OR.
+            return solveTwoSided(exp, goal, vals, res, cur, hints, description);
+        }
 		catch (NeedsBackfillException e) {
 			throw e;
 		}

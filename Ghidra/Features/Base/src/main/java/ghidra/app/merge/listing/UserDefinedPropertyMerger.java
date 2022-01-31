@@ -197,29 +197,29 @@ class UserDefinedPropertyMerger extends AbstractListingMerger {
 		if (map instanceof VoidPropertyMap) {
 			return ((VoidPropertyMap) map).getNextPropertyAddress(address);
 		}
-		else if (map instanceof ObjectPropertyMap) {
-			return ((ObjectPropertyMap) map).getObject(address);
-		}
-		else if (map instanceof LongPropertyMap) {
-			try {
-				return Long.valueOf(((LongPropertyMap) map).getLong(address));
-			}
-			catch (NoValueException e) {
-				return null;
-			}
-		}
-		else if (map instanceof IntPropertyMap) {
-			try {
-				return Integer.valueOf(((IntPropertyMap) map).getInt(address));
-			}
-			catch (NoValueException e) {
-				return null;
-			}
-		}
-		else if (map instanceof StringPropertyMap) {
-			return ((StringPropertyMap) map).getString(address);
-		}
-		return null;
+        if (map instanceof ObjectPropertyMap) {
+            return ((ObjectPropertyMap) map).getObject(address);
+        }
+        if (map instanceof LongPropertyMap) {
+            try {
+                return Long.valueOf(((LongPropertyMap) map).getLong(address));
+            }
+            catch (NoValueException e) {
+                return null;
+            }
+        }
+        if (map instanceof IntPropertyMap) {
+            try {
+                return Integer.valueOf(((IntPropertyMap) map).getInt(address));
+            }
+            catch (NoValueException e) {
+                return null;
+            }
+        }
+        if (map instanceof StringPropertyMap) {
+            return ((StringPropertyMap) map).getString(address);
+        }
+        return null;
 	}
 
 	/**

@@ -129,10 +129,8 @@ public class LldbModelTargetBreakpointContainerImpl extends LldbModelTargetObjec
 		if (bpt instanceof SBBreakpoint) {
 			return new LldbModelTargetBreakpointSpecImpl(this, bpt);
 		}
-		else {
-			return new LldbModelTargetWatchpointSpecImpl(this, bpt);
-		}
-	}
+        return new LldbModelTargetWatchpointSpecImpl(this, bpt);
+    }
 
 	@Override
 	public CompletableFuture<Void> requestElements(boolean refresh) {

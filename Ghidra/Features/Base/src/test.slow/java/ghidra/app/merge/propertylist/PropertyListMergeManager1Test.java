@@ -654,13 +654,13 @@ public class PropertyListMergeManager1Test extends AbstractMergeTest {
 				((AbstractButton) element).getText().indexOf(partialButtonText) >= 0) {
 				return (AbstractButton) element;
 			}
-			else if ((element instanceof Container) && element.isVisible()) {
-				AbstractButton b = findButton((Container) element, partialButtonText);
-				if (b != null) {
-					return b;
-				}
-			}
-		}
+            if ((element instanceof Container) && element.isVisible()) {
+                AbstractButton b = findButton((Container) element, partialButtonText);
+                if (b != null) {
+                    return b;
+                }
+            }
+        }
 		return null;
 	}
 }

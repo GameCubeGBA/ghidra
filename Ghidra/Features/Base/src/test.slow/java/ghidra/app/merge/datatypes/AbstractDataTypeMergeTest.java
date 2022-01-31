@@ -156,7 +156,7 @@ public abstract class AbstractDataTypeMergeTest extends AbstractMergeTest {
             if (option == DataTypeMergeManager.OPTION_LATEST) {
                 return (JRadioButton) findButton(window, MergeConstants.LATEST_TITLE);
             }
-            else if (option == DataTypeMergeManager.OPTION_MY) {
+            if (option == DataTypeMergeManager.OPTION_MY) {
                 return (JRadioButton) findButton(window, MergeConstants.MY_TITLE);
             }
             return (JRadioButton) findButton(window, MergeConstants.ORIGINAL_TITLE);
@@ -207,13 +207,13 @@ public abstract class AbstractDataTypeMergeTest extends AbstractMergeTest {
 				((AbstractButton) element).getText().indexOf(text) >= 0) {
 				return (AbstractButton) element;
 			}
-			else if ((element instanceof Container) && element.isShowing()) {
-				AbstractButton b = findButton((Container) element, text);
-				if (b != null) {
-					return b;
-				}
-			}
-		}
+            if ((element instanceof Container) && element.isShowing()) {
+                AbstractButton b = findButton((Container) element, text);
+                if (b != null) {
+                    return b;
+                }
+            }
+        }
 		return null;
 	}
 

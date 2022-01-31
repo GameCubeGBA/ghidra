@@ -89,12 +89,12 @@ public class BoundedRangeInputVerifier extends InputVerifier {
             Double double2 = (Double) otherNumber;
             return double1.compareTo( double2 );
         }
-        else if ( number instanceof Long ) {
+        if ( number instanceof Long ) {
             Long long1 = (Long) number;
             Long long2 = (Long) otherNumber;
             return long1.compareTo( long2 );
         }
-        else if ( number instanceof Integer ) {
+        if ( number instanceof Integer ) {
             Long long1 = number.longValue();
             Long long2 = otherNumber.longValue();
             return long1.compareTo( long2 );

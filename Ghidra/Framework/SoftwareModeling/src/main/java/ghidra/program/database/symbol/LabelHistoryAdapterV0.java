@@ -56,10 +56,10 @@ class LabelHistoryAdapterV0 extends LabelHistoryAdapter {
 			if (table == null) {
 				throw new VersionException(true);
 			}
-			else if (table.getSchema().getVersion() != 0) {
-				throw new VersionException(VersionException.NEWER_VERSION, false);
-			}
-		}
+            if (table.getSchema().getVersion() != 0) {
+                throw new VersionException(VersionException.NEWER_VERSION, false);
+            }
+        }
 		userName = SystemUtilities.getUserName();
 	}
 

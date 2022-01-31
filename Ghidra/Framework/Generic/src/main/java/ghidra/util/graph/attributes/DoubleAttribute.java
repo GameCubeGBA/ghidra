@@ -126,20 +126,17 @@ public class DoubleAttribute<T extends KeyedObject> extends Attribute<T> {
 					if ((value1 - value2) < 0) {
 						return -1;
 					}
-					else if ((value1 - value2) > 0) {
-						return +1;
-					}
-					else {
-						if ((object1.key() - object2.key()) < 0) {
-							return -1;
-						}
-						else if ((object1.key() - object2.key()) > 0) {
-							return +1;
-						}
-						else
-							return 0;
-					}
-				}
+                    if ((value1 - value2) > 0) {
+                        return +1;
+                    }
+                    if ((object1.key() - object2.key()) < 0) {
+                        return -1;
+                    }
+                    if ((object1.key() - object2.key()) > 0) {
+                        return +1;
+                    }
+                    return 0;
+                }
 				catch (NoValueException exc2) {
 					//ko1 is ok, ko2 fails.
 					return -1;
@@ -154,12 +151,11 @@ public class DoubleAttribute<T extends KeyedObject> extends Attribute<T> {
 					if ((object1.key() - object2.key()) < 0) {
 						return -1;
 					}
-					else if ((object1.key() - object2.key()) > 0) {
-						return +1;
-					}
-					else
-						return 0;
-				}
+                    if ((object1.key() - object2.key()) > 0) {
+                        return +1;
+                    }
+                    return 0;
+                }
 			}
 		}
 	}

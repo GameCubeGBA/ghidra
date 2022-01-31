@@ -318,10 +318,10 @@ public class RepositoryServerAdapter {
 			if (t instanceof DuplicateFileException) {
 				throw new DuplicateNameException("Repository '" + name + "' already exists");
 			}
-			else if (t instanceof UserAccessException) {
-				throw (UserAccessException) t;
-			}
-			if (recoverConnection(e)) {
+            if (t instanceof UserAccessException) {
+                throw (UserAccessException) t;
+            }
+            if (recoverConnection(e)) {
 				return new RepositoryAdapter(this, name, serverHandle.createRepository(name));
 			}
 			throw e;

@@ -401,11 +401,11 @@ public class ViewportUtility implements Observer {
 		if (row < viewportRowStart) {
 			return row - viewportRowStart;
 		}
-		else if (row > viewportRowEnd) {
-			return row - viewportRowEnd;
-		}
+        if (row > viewportRowEnd) {
+            return row - viewportRowEnd;
+        }
 
-		return 0;
+        return 0;
 	}
 
 	/**

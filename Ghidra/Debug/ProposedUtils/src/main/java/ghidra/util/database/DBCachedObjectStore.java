@@ -88,13 +88,11 @@ public class DBCachedObjectStore<T extends DBAnnotatedObject> implements ErrorHa
 			if (!keyRange.hasUpperBound() || key <= keyRange.upperEndpoint()) {
 				return filter(getBefore(key), keyRange);
 			}
-			else if (keyRange.upperBoundType() == BoundType.CLOSED) {
-				return filter(getAtOrBefore(keyRange.upperEndpoint()), keyRange);
-			}
-			else {
-				return filter(getBefore(keyRange.upperEndpoint()), keyRange);
-			}
-		}
+            if (keyRange.upperBoundType() == BoundType.CLOSED) {
+                return filter(getAtOrBefore(keyRange.upperEndpoint()), keyRange);
+            }
+            return filter(getBefore(keyRange.upperEndpoint()), keyRange);
+        }
 
 		U getAtOrBefore(long key) throws IOException {
 			return fromRecord(table.getRecordAtOrBefore(key));
@@ -104,13 +102,11 @@ public class DBCachedObjectStore<T extends DBAnnotatedObject> implements ErrorHa
 			if (!keyRange.hasUpperBound() || key < keyRange.upperEndpoint()) {
 				return filter(getAtOrBefore(key), keyRange);
 			}
-			else if (keyRange.upperBoundType() == BoundType.CLOSED) {
-				return filter(getAtOrBefore(keyRange.upperEndpoint()), keyRange);
-			}
-			else {
-				return filter(getBefore(keyRange.upperEndpoint()), keyRange);
-			}
-		}
+            if (keyRange.upperBoundType() == BoundType.CLOSED) {
+                return filter(getAtOrBefore(keyRange.upperEndpoint()), keyRange);
+            }
+            return filter(getBefore(keyRange.upperEndpoint()), keyRange);
+        }
 
 		U get(long key) throws IOException {
 			T cached = cache.get(key);
@@ -128,13 +124,11 @@ public class DBCachedObjectStore<T extends DBAnnotatedObject> implements ErrorHa
 			if (!keyRange.hasLowerBound() || key > keyRange.lowerEndpoint()) {
 				return filter(getAtOrAfter(key), keyRange);
 			}
-			else if (keyRange.lowerBoundType() == BoundType.CLOSED) {
-				return filter(getAtOrAfter(keyRange.lowerEndpoint()), keyRange);
-			}
-			else {
-				return filter(getAfter(keyRange.lowerEndpoint()), keyRange);
-			}
-		}
+            if (keyRange.lowerBoundType() == BoundType.CLOSED) {
+                return filter(getAtOrAfter(keyRange.lowerEndpoint()), keyRange);
+            }
+            return filter(getAfter(keyRange.lowerEndpoint()), keyRange);
+        }
 
 		U getAfter(long key) throws IOException {
 			return fromRecord(table.getRecordAfter(key));
@@ -144,13 +138,11 @@ public class DBCachedObjectStore<T extends DBAnnotatedObject> implements ErrorHa
 			if (!keyRange.hasLowerBound() || key >= keyRange.lowerEndpoint()) {
 				return filter(getAfter(key), keyRange);
 			}
-			else if (keyRange.lowerBoundType() == BoundType.CLOSED) {
-				return filter(getAtOrAfter(keyRange.lowerEndpoint()), keyRange);
-			}
-			else {
-				return filter(getAfter(keyRange.lowerEndpoint()), keyRange);
-			}
-		}
+            if (keyRange.lowerBoundType() == BoundType.CLOSED) {
+                return filter(getAtOrAfter(keyRange.lowerEndpoint()), keyRange);
+            }
+            return filter(getAfter(keyRange.lowerEndpoint()), keyRange);
+        }
 
 		abstract U checkAndConvert(Object o);
 
@@ -245,13 +237,11 @@ public class DBCachedObjectStore<T extends DBAnnotatedObject> implements ErrorHa
 			if (!keyRange.hasLowerBound()) {
 				return filter(first(), keyRange);
 			}
-			else if (keyRange.lowerBoundType() == BoundType.CLOSED) {
-				return filter(getAtOrAfter(keyRange.lowerEndpoint()), keyRange);
-			}
-			else {
-				return filter(getAfter(keyRange.lowerEndpoint()), keyRange);
-			}
-		}
+            if (keyRange.lowerBoundType() == BoundType.CLOSED) {
+                return filter(getAtOrAfter(keyRange.lowerEndpoint()), keyRange);
+            }
+            return filter(getAfter(keyRange.lowerEndpoint()), keyRange);
+        }
 
 		U first(Direction direction) throws IOException {
 			if (direction == Direction.FORWARD) {
@@ -275,13 +265,11 @@ public class DBCachedObjectStore<T extends DBAnnotatedObject> implements ErrorHa
 			if (!keyRange.hasUpperBound()) {
 				return filter(last(), keyRange);
 			}
-			else if (keyRange.upperBoundType() == BoundType.CLOSED) {
-				return filter(getAtOrBefore(keyRange.upperEndpoint()), keyRange);
-			}
-			else {
-				return filter(getBefore(keyRange.upperEndpoint()), keyRange);
-			}
-		}
+            if (keyRange.upperBoundType() == BoundType.CLOSED) {
+                return filter(getAtOrBefore(keyRange.upperEndpoint()), keyRange);
+            }
+            return filter(getBefore(keyRange.upperEndpoint()), keyRange);
+        }
 
 		U last(Direction direction) throws IOException {
 			if (direction == Direction.FORWARD) {

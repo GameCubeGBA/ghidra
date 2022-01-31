@@ -720,11 +720,9 @@ public class GdbManagerImpl implements GdbManager {
 			// NB. confirm and pagination are already disabled here
 			return AsyncUtils.NIL;
 		}
-		else {
-			// NB. Don't disable pagination here. MI2 is not paginated.
-			return console("set confirm off", CompletesWithRunning.CANNOT);
-		}
-	}
+        // NB. Don't disable pagination here. MI2 is not paginated.
+        return console("set confirm off", CompletesWithRunning.CANNOT);
+    }
 
 	protected void resync() {
 		AsyncFence fence = new AsyncFence();

@@ -199,13 +199,13 @@ class FixedKeyInteriorNode extends FixedKeyNode implements FieldKeyInteriorNode 
 			if (c == 0) {
 				return i;
 			}
-			else if (c > 0) {
-				min = i + 1;
-			}
-			else {
-				max = i - 1;
-			}
-		}
+            if (c > 0) {
+                min = i + 1;
+            }
+            else {
+                max = i - 1;
+            }
+        }
 		return max;
 	}
 
@@ -221,13 +221,13 @@ class FixedKeyInteriorNode extends FixedKeyNode implements FieldKeyInteriorNode 
 			if (rc == 0) {
 				return i;
 			}
-			else if (rc > 0) {
-				min = i + 1;
-			}
-			else {
-				max = i - 1;
-			}
-		}
+            if (rc > 0) {
+                min = i + 1;
+            }
+            else {
+                max = i - 1;
+            }
+        }
 		return -(min + 1);
 	}
 

@@ -382,25 +382,25 @@ public class DockableComponent extends JPanel implements ContainerListener {
 			DROP_CODE = DropCode.INVALID;
 			return;
 		}
-		else if (p.x < DROP_EDGE_OFFSET) {
-			DROP_CODE = DropCode.LEFT;
-		}
-		else if (p.x > getWidth() - DROP_EDGE_OFFSET) {
-			DROP_CODE = DropCode.RIGHT;
-		}
-		else if (p.y < DROP_EDGE_OFFSET) {
-			DROP_CODE = DropCode.TOP;
-		}
-		else if (p.y > getHeight() - DROP_EDGE_OFFSET) {
-			DROP_CODE = DropCode.BOTTOM;
-		}
-		else if (SOURCE_INFO == placeholder) {
-			DROP_CODE = DropCode.INVALID;
-		}
-		else {
-			DROP_CODE = DropCode.STACK;
-		}
-	}
+        if (p.x < DROP_EDGE_OFFSET) {
+            DROP_CODE = DropCode.LEFT;
+        }
+        else if (p.x > getWidth() - DROP_EDGE_OFFSET) {
+            DROP_CODE = DropCode.RIGHT;
+        }
+        else if (p.y < DROP_EDGE_OFFSET) {
+            DROP_CODE = DropCode.TOP;
+        }
+        else if (p.y > getHeight() - DROP_EDGE_OFFSET) {
+            DROP_CODE = DropCode.BOTTOM;
+        }
+        else if (SOURCE_INFO == placeholder) {
+            DROP_CODE = DropCode.INVALID;
+        }
+        else {
+            DROP_CODE = DropCode.STACK;
+        }
+    }
 
 	void setSelected(boolean selected) {
 		header.setSelected(selected);

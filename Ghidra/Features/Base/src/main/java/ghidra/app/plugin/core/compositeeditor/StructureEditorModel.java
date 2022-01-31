@@ -699,10 +699,10 @@ class StructureEditorModel extends CompEditorModel {
 					}
 					return true;
 				}
-				else if (datatype.getLength() <= numAvailable) {
-					return true;
-				}
-				return false;
+                if (datatype.getLength() <= numAvailable) {
+                    return true;
+                }
+                return false;
 			}
 			return true;
 		}
@@ -827,11 +827,11 @@ class StructureEditorModel extends CompEditorModel {
 		if ((currentIndex >= (numComponents - 1)) && (currentIndex <= numComponents)) {
 			return Integer.MAX_VALUE; // Last component or empty entry immediately after it.
 		}
-		else if (comp == null) {
-			return 0; // No such component. Not at valid edit index.
-		}
+        if (comp == null) {
+            return 0; // No such component. Not at valid edit index.
+        }
 
-		// Otherwise, get size of component and number of Undefined bytes after it.
+        // Otherwise, get size of component and number of Undefined bytes after it.
 		FieldRange range = getSelectedRangeContaining(currentIndex);
 		if (range == null ||
 			range.getStart().getIndex().intValue() == range.getEnd().getIndex().intValue() - 1) {

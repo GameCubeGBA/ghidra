@@ -42,10 +42,10 @@ public class LldbConsoleExecCommand extends AbstractLldbCommand<String> {
 		if (evt instanceof AbstractLldbCompletedCommandEvent && pending.getCommand().equals(this)) {
 			return true;
 		}
-		else if (evt instanceof LldbConsoleOutputEvent && to == Output.CAPTURE) {
-			pending.steal(evt);
-		}
-		return false;
+        if (evt instanceof LldbConsoleOutputEvent && to == Output.CAPTURE) {
+            pending.steal(evt);
+        }
+        return false;
 	}
 
 	@Override

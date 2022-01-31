@@ -1011,12 +1011,10 @@ public class DBTraceFunctionSymbol extends DBTraceNamespaceSymbol
 			if (create) {
 				return new ParameterImpl(param.getName(), pdt.getDataType(), param.getProgram());
 			}
-			else {
-				param.setDataType(pdt.getDataType(), VariableStorage.UNASSIGNED_STORAGE, false,
-					param.getSource());
-				return param;
-			}
-		}
+            param.setDataType(pdt.getDataType(), VariableStorage.UNASSIGNED_STORAGE, false,
+                param.getSource());
+            return param;
+        }
 		catch (InvalidInputException e) {
 			throw new AssertionError(e);
 		}

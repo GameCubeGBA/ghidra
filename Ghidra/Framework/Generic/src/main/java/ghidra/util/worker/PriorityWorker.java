@@ -70,10 +70,10 @@ public class PriorityWorker extends AbstractWorker<PriorityJob> {
 			if (priority1 > priority2) {
 				return 1;
 			}
-			else if (priority1 < priority2) {
-				return -1;
-			}
-			return 0;
+            if (priority1 < priority2) {
+                return -1;
+            }
+            return 0;
 		}
 	}
 }

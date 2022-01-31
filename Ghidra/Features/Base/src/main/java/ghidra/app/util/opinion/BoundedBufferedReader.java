@@ -245,11 +245,12 @@ public class BoundedBufferedReader extends Reader {
 			if ((off < 0) || (off > cbuf.length) || (len < 0)
 					|| ((off + len) > cbuf.length) || ((off + len) < 0)) {
 				throw new IndexOutOfBoundsException();
-			} else if (len == 0) {
-				return 0;
 			}
+            if (len == 0) {
+                return 0;
+            }
 
-			int n = read1(cbuf, off, len);
+            int n = read1(cbuf, off, len);
 			if (n <= 0)
 				return n;
 			while ((n < len) && in.ready()) {

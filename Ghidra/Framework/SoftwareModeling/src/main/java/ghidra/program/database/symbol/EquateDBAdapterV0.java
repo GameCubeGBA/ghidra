@@ -45,10 +45,10 @@ class EquateDBAdapterV0 extends EquateDBAdapter {
 			if (equateTable == null) {
 				throw new VersionException("Missing Table: " + EQUATES_TABLE_NAME);
 			}
-			else if (equateTable.getSchema().getVersion() != 0) {
-				throw new VersionException(VersionException.NEWER_VERSION, false);
-			}
-		}
+            if (equateTable.getSchema().getVersion() != 0) {
+                throw new VersionException(VersionException.NEWER_VERSION, false);
+            }
+        }
 	}
 
 	/**

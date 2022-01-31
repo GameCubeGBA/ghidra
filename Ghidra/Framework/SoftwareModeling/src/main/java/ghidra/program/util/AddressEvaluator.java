@@ -75,10 +75,10 @@ public class AddressEvaluator {
 		if (obj instanceof Address) {
 			return ((Address) obj).getOffset();
 		}
-		else if (obj instanceof Long) {
-			return (Long) obj;
-		}
-		return null;
+        if (obj instanceof Long) {
+            return (Long) obj;
+        }
+        return null;
 	}
 
 	protected static boolean parseToList(String s, AddressFactory af, SymbolTable st,
@@ -456,32 +456,32 @@ public class AddressEvaluator {
 			if ((v1 instanceof Long) && (v2 instanceof Long)) {
 				return ((Long) v1).longValue() + ((Long) v2).longValue();
 			}
-			else if ((v1 instanceof Address) && (v2 instanceof Long)) {
-				return ((Address) v1).addWrap(((Long) v2).longValue());
-			}
-			else if ((v1 instanceof Long) && (v2 instanceof Address)) {
-				return ((Address) v2).addWrap(((Long) v1).longValue());
-			}
-		}
+            if ((v1 instanceof Address) && (v2 instanceof Long)) {
+                return ((Address) v1).addWrap(((Long) v2).longValue());
+            }
+            if ((v1 instanceof Long) && (v2 instanceof Address)) {
+                return ((Address) v2).addWrap(((Long) v1).longValue());
+            }
+        }
 		else if (op == Operator.NOT) {
 			if (v2 instanceof Long) {
 				return ~(((Long) v2).longValue());
 			}
-			else if (v2 instanceof Address) {
-				return ((Address) v2).getNewAddress(~(((Long) v2).longValue()));
-			}
-		}
+            if (v2 instanceof Address) {
+                return ((Address) v2).getNewAddress(~(((Long) v2).longValue()));
+            }
+        }
 		else if (op == Operator.MINUS) {
 			if ((v1 instanceof Long) && (v2 instanceof Long)) {
 				return ((Long) v1).longValue() - ((Long) v2).longValue();
 			}
-			else if ((v1 instanceof Address) && (v2 instanceof Long)) {
-				return ((Address) v1).subtractWrap(((Long) v2).longValue());
-			}
-			else if ((v1 instanceof Address) && (v2 instanceof Address)) {
-				return ((Address) v1).subtract((Address) v2);
-			}
-		}
+            if ((v1 instanceof Address) && (v2 instanceof Long)) {
+                return ((Address) v1).subtractWrap(((Long) v2).longValue());
+            }
+            if ((v1 instanceof Address) && (v2 instanceof Address)) {
+                return ((Address) v1).subtract((Address) v2);
+            }
+        }
 		else if (op == Operator.EQUALS) {
 			Long diff = getDifference(v1, v2);
 			if (diff != null) {
@@ -537,13 +537,13 @@ public class AddressEvaluator {
 		if ((v1 instanceof Address) && (v2 instanceof Long)) {
 			return ((Address) v1).subtractWrap(((Long) v2).longValue()).getOffset();
 		}
-		else if ((v1 instanceof Address) && (v2 instanceof Address)) {
-			return ((Address) v1).subtract((Address) v2);
-		}
-		else if ((v1 instanceof Long) && (v2 instanceof Long)) {
-			return ((Long) v1).longValue() - ((Long) v2).longValue();
-		}
-		return null;
+        if ((v1 instanceof Address) && (v2 instanceof Address)) {
+            return ((Address) v1).subtract((Address) v2);
+        }
+        if ((v1 instanceof Long) && (v2 instanceof Long)) {
+            return ((Long) v1).longValue() - ((Long) v2).longValue();
+        }
+        return null;
 	}
 
 	private static int findMatchingParen(List<Object> list, int index) {

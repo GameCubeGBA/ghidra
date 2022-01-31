@@ -67,10 +67,8 @@ public class TraceAddressSnapSpace implements EuclideanSpace2D<Address, Long> {
 		if (x2.compareTo(x1) > 0) {
 			return UnsignedUtils.unsignedLongToDouble(x2.subtract(x1));
 		}
-		else {
-			return UnsignedUtils.unsignedLongToDouble(x1.subtract(x2));
-		}
-	}
+        return UnsignedUtils.unsignedLongToDouble(x1.subtract(x2));
+    }
 
 	@Override
 	public double distY(Long y1, Long y2) {
@@ -83,10 +81,8 @@ public class TraceAddressSnapSpace implements EuclideanSpace2D<Address, Long> {
 		if (y2 > y1) {
 			return y2 - y1;
 		}
-		else {
-			return y1 - y2;
-		}
-	}
+        return y1 - y2;
+    }
 
 	@Override
 	public Address midX(Address x1, Address x2) {

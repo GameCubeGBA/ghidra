@@ -352,39 +352,39 @@ public class SymbolInspector implements OptionsChangeListener {
 		if (isExternalSymbol(s)) {
 			return getExternalScreenElement(s);
 		}
-		else if (isBadReferenceSymbol(s)) {
-			return OptionsGui.BAD_REF_ADDR;
-		}
-		else if (isOffcutSymbol(s)) {
-			return OptionsGui.XREF_OFFCUT;
-		}
-		else if (isEntryPointSymbol(s)) {
-			return OptionsGui.ENTRY_POINT;
-		}
-		else if (isDeadCodeSymbol(s)) {
-			return OptionsGui.LABELS_UNREFD;
-		}
-		else if (isFunctionSymbol(s)) {
-			return OptionsGui.FUN_NAME;
-		}
-		else if (isVariableSymbol(s)) {
-			if (s.getSymbolType() == SymbolType.PARAMETER) {
-				Function function = (Function) s.getParentNamespace();
-				return function.hasCustomVariableStorage() ? OptionsGui.PARAMETER_CUSTOM
-						: OptionsGui.PARAMETER_DYNAMIC;
-			}
-			return OptionsGui.VARIABLE;
-		}
-		else if (isPrimarySymbol(s)) {
-			return OptionsGui.LABELS_PRIMARY;
-		}
-		else if (isLocalSymbol(s)) {
-			return OptionsGui.LABELS_LOCAL;
-		}
-		else if (isNonPrimarySymbol(s)) {
-			return OptionsGui.LABELS_NON_PRIMARY;
-		}
-		return null;
+        if (isBadReferenceSymbol(s)) {
+            return OptionsGui.BAD_REF_ADDR;
+        }
+        if (isOffcutSymbol(s)) {
+            return OptionsGui.XREF_OFFCUT;
+        }
+        if (isEntryPointSymbol(s)) {
+            return OptionsGui.ENTRY_POINT;
+        }
+        if (isDeadCodeSymbol(s)) {
+            return OptionsGui.LABELS_UNREFD;
+        }
+        if (isFunctionSymbol(s)) {
+            return OptionsGui.FUN_NAME;
+        }
+        if (isVariableSymbol(s)) {
+            if (s.getSymbolType() == SymbolType.PARAMETER) {
+                Function function = (Function) s.getParentNamespace();
+                return function.hasCustomVariableStorage() ? OptionsGui.PARAMETER_CUSTOM
+                        : OptionsGui.PARAMETER_DYNAMIC;
+            }
+            return OptionsGui.VARIABLE;
+        }
+        if (isPrimarySymbol(s)) {
+            return OptionsGui.LABELS_PRIMARY;
+        }
+        if (isLocalSymbol(s)) {
+            return OptionsGui.LABELS_LOCAL;
+        }
+        if (isNonPrimarySymbol(s)) {
+            return OptionsGui.LABELS_NON_PRIMARY;
+        }
+        return null;
 	}
 
 	public Color getOffcutSymbolColor() {

@@ -112,11 +112,11 @@ public class FileWatcher {
 			timestamp = file.lastModified();
 			return false;
 		}
-		else if (timestamp != file.lastModified()) {
-			timestamp = file.lastModified();
-			return true;
-		}
+        if (timestamp != file.lastModified()) {
+            timestamp = file.lastModified();
+            return true;
+        }
 
-		return false;
+        return false;
 	}
 }

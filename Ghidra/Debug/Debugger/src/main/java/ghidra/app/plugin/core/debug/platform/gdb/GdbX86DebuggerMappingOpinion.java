@@ -116,18 +116,14 @@ public class GdbX86DebuggerMappingOpinion implements DebuggerMappingOpinion {
 			if (is64Bit) {
 				return Set.of(new GdbI386X86_64LinuxOffer(process));
 			}
-			else {
-				return Set.of(new GdbI386LinuxOffer(process));
-			}
-		}
-		else if (os.contains("Cygwin")) {
-			if (is64Bit) {
-				return Set.of(new GdbI386X86_64WindowsOffer(process));
-			}
-			else {
-				return Set.of(new GdbI386WindowsOffer(process));
-			}
-		}
-		return Set.of();
+            return Set.of(new GdbI386LinuxOffer(process));
+        }
+        if (os.contains("Cygwin")) {
+            if (is64Bit) {
+                return Set.of(new GdbI386X86_64WindowsOffer(process));
+            }
+            return Set.of(new GdbI386WindowsOffer(process));
+        }
+        return Set.of();
 	}
 }

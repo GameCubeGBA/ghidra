@@ -55,12 +55,12 @@ public class DbgStepCommand extends AbstractDbgCommand<Void> {
 			return evt instanceof DbgCommandErrorEvent ||
 				!pending.findAllOf(DbgRunningEvent.class).isEmpty();
 		}
-		else if (evt instanceof DbgRunningEvent) {
-			// Event happens no matter which interpreter received the command
-			pending.claim(evt);
-			return !pending.findAllOf(AbstractDbgCompletedCommandEvent.class).isEmpty();
-		}
-		return false;
+        if (evt instanceof DbgRunningEvent) {
+            // Event happens no matter which interpreter received the command
+            pending.claim(evt);
+            return !pending.findAllOf(AbstractDbgCompletedCommandEvent.class).isEmpty();
+        }
+        return false;
 	}
 
 	// NB:  Would really prefer to do this through the API, but the API does

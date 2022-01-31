@@ -69,13 +69,11 @@ public class CombinedAddressRangeIterator implements AddressRangeIterator {
 			manager1.getNextRange();
 			return manager2.getNextRange();
 		}
-		else if (maxCompare > 0) {  // second range ends before first range
-			return manager1.severMyHeadAndAdvanceOtherManager(manager2);
-		}
-		else {						// first range ends before second range
-			return manager2.severMyHeadAndAdvanceOtherManager(manager1);
-		}
-	}
+        if (maxCompare > 0) {  // second range ends before first range
+            return manager1.severMyHeadAndAdvanceOtherManager(manager2);
+        }                        // first range ends before second range
+        return manager2.severMyHeadAndAdvanceOtherManager(manager1);
+    }
 
 	private class AddressRangeManager {
 		AddressRangeIterator it;

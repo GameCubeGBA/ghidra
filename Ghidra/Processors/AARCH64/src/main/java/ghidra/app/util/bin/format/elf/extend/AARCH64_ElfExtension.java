@@ -67,16 +67,16 @@ public class AARCH64_ElfExtension extends ElfExtension {
 			elfLoadHelper.setElfSymbolAddress(elfSymbol, address);
 			return null;
 		}
-		else if ("$d".equals(symName) || symName.startsWith("$d.")) {
-			// is data, need to protect as data
-			elfLoadHelper.createUndefinedData(address, (int) elfSymbol.getSize());
+        if ("$d".equals(symName) || symName.startsWith("$d.")) {
+            // is data, need to protect as data
+            elfLoadHelper.createUndefinedData(address, (int) elfSymbol.getSize());
 
-			// do not retain $x symbols in program due to excessive duplicate symbols
-			elfLoadHelper.setElfSymbolAddress(elfSymbol, address);
-			return null;
-		}
+            // do not retain $x symbols in program due to excessive duplicate symbols
+            elfLoadHelper.setElfSymbolAddress(elfSymbol, address);
+            return null;
+        }
 
-		return address;
+        return address;
 	}
 
 }

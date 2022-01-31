@@ -103,28 +103,26 @@ public class ToolTipUtils {
 			if (dataType instanceof TypeDef) {
 				return new TypeDefDataTypeHTMLRepresentation((TypeDef) dataType);
 			}
-			else if (dataType instanceof Composite) {
-				return new CompositeDataTypeHTMLRepresentation((Composite) dataType);
-			}
-			else if (dataType instanceof Enum) {
-				return new EnumDataTypeHTMLRepresentation((Enum) dataType);
-			}
-			else if (dataType instanceof FunctionDefinition) {
-				return new FunctionDataTypeHTMLRepresentation((FunctionDefinition) dataType);
-			}
-			else if (dataType instanceof Pointer) {
-				return new PointerDataTypeHTMLRepresentation((Pointer) dataType);
-			}
-			else if (dataType instanceof Array) {
-				return new ArrayDataTypeHTMLRepresentation((Array) dataType);
-			}
-			else if (dataType instanceof BitFieldDataType) {
-				return new BitFieldDataTypeHTMLRepresentation((BitFieldDataType) dataType);
-			}
-			else {
-				return new DefaultDataTypeHTMLRepresentation(dataType);
-			}
-		}
+            if (dataType instanceof Composite) {
+                return new CompositeDataTypeHTMLRepresentation((Composite) dataType);
+            }
+            if (dataType instanceof Enum) {
+                return new EnumDataTypeHTMLRepresentation((Enum) dataType);
+            }
+            if (dataType instanceof FunctionDefinition) {
+                return new FunctionDataTypeHTMLRepresentation((FunctionDefinition) dataType);
+            }
+            if (dataType instanceof Pointer) {
+                return new PointerDataTypeHTMLRepresentation((Pointer) dataType);
+            }
+            if (dataType instanceof Array) {
+                return new ArrayDataTypeHTMLRepresentation((Array) dataType);
+            }
+            if (dataType instanceof BitFieldDataType) {
+                return new BitFieldDataTypeHTMLRepresentation((BitFieldDataType) dataType);
+            }
+            return new DefaultDataTypeHTMLRepresentation(dataType);
+        }
 
 		return new NullDataTypeHTMLRepresentation();
 	}

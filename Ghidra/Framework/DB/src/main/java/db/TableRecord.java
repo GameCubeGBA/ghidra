@@ -293,10 +293,10 @@ class TableRecord implements Comparable<TableRecord> {
 		if (myKey == otherKey) {
 			return 0;
 		}
-		else if (myKey < otherKey) {
-			return -1;
-		}
-		return 1;
+        if (myKey < otherKey) {
+            return -1;
+        }
+        return 1;
 	}
 
 }

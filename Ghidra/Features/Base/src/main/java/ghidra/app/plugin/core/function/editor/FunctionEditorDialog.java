@@ -906,10 +906,10 @@ public class FunctionEditorDialog extends DialogComponentProvider implements Mod
 				comp.dispatchEvent(convertedMouseEvent);
 				return true;
 			}
-			else if (comp == scroll.getViewport()) {
-				return true;
-			}
-			return false;
+            if (comp == scroll.getViewport()) {
+                return true;
+            }
+            return false;
 		}
 
 		@Override

@@ -458,12 +458,12 @@ public class AddressXML {
 			spc = addrFactory.getConstantSpace();
 			return spc.getAddress(spaceid);
 		}
-		else if (localName.equals("iop")) {
-			int ref = SpecXmlUtils.decodeInt(el.getAttribute("value"));
-			AddressSpace spc = addrFactory.getConstantSpace();
-			return spc.getAddress(ref);
-		}
-		String space = el.getAttribute("space");
+        if (localName.equals("iop")) {
+            int ref = SpecXmlUtils.decodeInt(el.getAttribute("value"));
+            AddressSpace spc = addrFactory.getConstantSpace();
+            return spc.getAddress(ref);
+        }
+        String space = el.getAttribute("space");
 		if (space == null) {
 			return Address.NO_ADDRESS;
 		}
@@ -495,12 +495,12 @@ public class AddressXML {
 			spc = addrFactory.getConstantSpace();
 			return spc.getAddress(spaceid);
 		}
-		else if (localName.equals("iop")) {
-			int ref = SpecXmlUtils.decodeInt(attr.getValue("value"));
-			AddressSpace spc = addrFactory.getConstantSpace();
-			return spc.getAddress(ref);
-		}
-		String space = attr.getValue("space");
+        if (localName.equals("iop")) {
+            int ref = SpecXmlUtils.decodeInt(attr.getValue("value"));
+            AddressSpace spc = addrFactory.getConstantSpace();
+            return spc.getAddress(ref);
+        }
+        String space = attr.getValue("space");
 		if (space == null) {
 			return Address.NO_ADDRESS;
 		}

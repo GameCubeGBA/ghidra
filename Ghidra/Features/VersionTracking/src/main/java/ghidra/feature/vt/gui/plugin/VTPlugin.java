@@ -344,11 +344,11 @@ public class VTPlugin extends Plugin {
 			showBusyToolMessage(sourceTool);
 			return false;
 		}
-		else if (toolManager.isToolExecutingCommand(destinationTool)) {
-			showBusyToolMessage(destinationTool);
-			return false;
-		}
-		return true;
+        if (toolManager.isToolExecutingCommand(destinationTool)) {
+            showBusyToolMessage(destinationTool);
+            return false;
+        }
+        return true;
 	}
 
 	public AddressSetView getSelectionInSourceTool() {

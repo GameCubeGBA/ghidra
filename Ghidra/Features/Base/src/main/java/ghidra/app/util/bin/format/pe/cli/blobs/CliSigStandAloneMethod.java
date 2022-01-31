@@ -130,22 +130,22 @@ public class CliSigStandAloneMethod extends CliAbstractSig {
 			// cdecl
 			return CallingConvention.C;
 		}
-		else if ((flags & STANDALONEMETHODSIG_FLAGS_STDCALL) == STANDALONEMETHODSIG_FLAGS_STDCALL) {
-			// stdcall
-			return CallingConvention.STDCALL;
-		}
-		else if ((flags &
-			STANDALONEMETHODSIG_FLAGS_THISCALL) == STANDALONEMETHODSIG_FLAGS_THISCALL) {
-			// ecx/rcx is this pointer
-			return CallingConvention.THISCALL;
-		}
-		else if ((flags &
-			STANDALONEMETHODSIG_FLAGS_FASTCALL) == STANDALONEMETHODSIG_FLAGS_FASTCALL) {
-			// ecx/rcx and edx/rdx are the first two parameters, standard x64 convention
-			return CallingConvention.FASTCALL;
-		}
+        if ((flags & STANDALONEMETHODSIG_FLAGS_STDCALL) == STANDALONEMETHODSIG_FLAGS_STDCALL) {
+            // stdcall
+            return CallingConvention.STDCALL;
+        }
+        if ((flags &
+            STANDALONEMETHODSIG_FLAGS_THISCALL) == STANDALONEMETHODSIG_FLAGS_THISCALL) {
+            // ecx/rcx is this pointer
+            return CallingConvention.THISCALL;
+        }
+        if ((flags &
+            STANDALONEMETHODSIG_FLAGS_FASTCALL) == STANDALONEMETHODSIG_FLAGS_FASTCALL) {
+            // ecx/rcx and edx/rdx are the first two parameters, standard x64 convention
+            return CallingConvention.FASTCALL;
+        }
 
-		// Managed code call
+        // Managed code call
 		return CallingConvention.MANAGED;
 	}
 

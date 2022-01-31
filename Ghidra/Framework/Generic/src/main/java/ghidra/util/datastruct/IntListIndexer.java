@@ -175,7 +175,7 @@ public class IntListIndexer implements Serializable {
         if (capacity == Integer.MAX_VALUE) {
             return -1;
         }
-        else if (capacity < Integer.MAX_VALUE/2) {
+        if (capacity < Integer.MAX_VALUE/2) {
 
 			newCapacity = capacity * 2;
         }

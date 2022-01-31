@@ -228,14 +228,14 @@ public abstract class LocationDescriptor {
 		if (object instanceof CodeUnit) {
 			return ((CodeUnit) object).getMinAddress();
 		}
-		else if (object instanceof Function) {
-			return ((Function) object).getEntryPoint();
-		}
-		else if (object instanceof Variable) {
-			Variable variable = (Variable) object;
-			return variable.getFunction().getEntryPoint();
-		}
-		return null;
+        if (object instanceof Function) {
+            return ((Function) object).getEntryPoint();
+        }
+        if (object instanceof Variable) {
+            Variable variable = (Variable) object;
+            return variable.getFunction().getEntryPoint();
+        }
+        return null;
 	}
 
 	/**

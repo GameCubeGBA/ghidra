@@ -810,11 +810,11 @@ public class BufferMgr {
 
 			return node;
 		}
-		else if (node.locked) {
-			throw new IOException("Locked buffer: " + id);
-		}
+        if (node.locked) {
+            throw new IOException("Locked buffer: " + id);
+        }
 
-		// if requested, load from disk cache file and add node to memory cache list
+        // if requested, load from disk cache file and add node to memory cache list
 		if (load) {
 			loadCachedNode(node);
 		}

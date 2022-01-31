@@ -103,10 +103,10 @@ public class HexFormatModel implements UniversalDataFormatModel {
 			if (pos <= 3) {
 				return 0;
 			}
-			else if (pos < (2 + unitByteSize * 2)) {
-				return ((pos - 2) / 2);
-			}
-			return unitByteSize - 1;
+            if (pos < (2 + unitByteSize * 2)) {
+                return ((pos - 2) / 2);
+            }
+            return unitByteSize - 1;
 		}
 		if (pos < unitByteSize * 2) {
 			return (pos / 2);
@@ -135,23 +135,19 @@ public class HexFormatModel implements UniversalDataFormatModel {
 			if (pos <= 2) {
 				return 2;
 			}
-			else if (pos < symbolSize) {
-				return pos;
-			}
-			else {
-				return symbolSize - 1;
-			}
-		}
+            if (pos < symbolSize) {
+                return pos;
+            }
+            return symbolSize - 1;
+        }
 		if (pos <= 0) {
 			return 0;
 		}
-		else if (pos < symbolSize) {
-			return pos;
-		}
-		else {
-			return symbolSize - 1;
-		}
-	}
+        if (pos < symbolSize) {
+            return pos;
+        }
+        return symbolSize - 1;
+    }
 
 	/**
 	 * Gets the string representation at the given index in the block.

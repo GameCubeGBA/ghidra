@@ -63,11 +63,11 @@ class BookmarkDBAdapterV1 extends BookmarkDBAdapter {
 		if (table == null) {
 			throw new VersionException("Missing Table: " + BOOKMARK_TABLE_NAME);
 		}
-		else if (table.getSchema().getVersion() != VERSION) {
-			throw new VersionException("Expected version " + VERSION + " for table " +
-				BOOKMARK_TABLE_NAME + " but got " + table.getSchema().getVersion());
-		}
-	}
+        if (table.getSchema().getVersion() != VERSION) {
+            throw new VersionException("Expected version " + VERSION + " for table " +
+                BOOKMARK_TABLE_NAME + " but got " + table.getSchema().getVersion());
+        }
+    }
 
 	@Override
 	AddressSetView getBookmarkAddresses(int typeId) throws IOException {

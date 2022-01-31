@@ -261,14 +261,14 @@ public class FileBytes {
 		if (b == null) {
 			throw new NullPointerException();
 		}
-		else if (off < 0 || length < 0 || length > b.length - off) {
-			throw new IndexOutOfBoundsException();
-		}
-		else if (length == 0) {
-			return 0;
-		}
+        if (off < 0 || length < 0 || length > b.length - off) {
+            throw new IndexOutOfBoundsException();
+        }
+        if (length == 0) {
+            return 0;
+        }
 
-		// adjust size if asking length is more than we have
+        // adjust size if asking length is more than we have
 		length = (int) Math.min(length, size - offset);
 		if (length == 0) {
 			return 0;
@@ -320,11 +320,11 @@ public class FileBytes {
 		if (off < 0 || length < 0 || length > b.length - off) {
 			throw new IndexOutOfBoundsException();
 		}
-		else if (length == 0) {
-			return 0;
-		}
+        if (length == 0) {
+            return 0;
+        }
 
-		// adjust size if asking length is more than we have
+        // adjust size if asking length is more than we have
 		length = (int) Math.min(length, size - offset);
 		if (length == 0) {
 			return 0;

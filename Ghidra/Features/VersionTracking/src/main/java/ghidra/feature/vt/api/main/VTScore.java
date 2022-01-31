@@ -63,10 +63,10 @@ public class VTScore implements Comparable<VTScore> {
 		if (Double.isNaN(log10Score)) {
 			return "0.00";
 		}
-		else if (Double.isInfinite(log10Score)) {
-			return "N/A";
-		}
-		return SCORE_FORMAT.get().format(log10Score);
+        if (Double.isInfinite(log10Score)) {
+            return "N/A";
+        }
+        return SCORE_FORMAT.get().format(log10Score);
 	}
 
 	@Override
@@ -96,10 +96,10 @@ public class VTScore implements Comparable<VTScore> {
 		if (score < o.score) {
 			return -1;
 		}
-		else if (score > o.score) {
-			return 1;
-		}
-		return 0;
+        if (score > o.score) {
+            return 1;
+        }
+        return 0;
 	}
 
 	@Override

@@ -74,21 +74,21 @@ public class NameStringPointersPlus extends GhidraScript {
 					println("~~> " + address.toString() + " ==>is instanceof String");
 					return "sp_" + value;
 				}
-				else if (value instanceof Address) {
-					println("~~> " + address.toString() + " ==>is instanceof Address");
-					// String name = getStringFromPointer((Address) value);
-					String name = data.getLabel();
-					// orig: name = name.substring(0,1) + "p" +
-					// name.substring(1);
-					if (name == null) {
-						return null;
-					}
-					// before: name = name.substring(0,1) + "p" +
-					// name.substring(1);
-					name = "p_" + name;
-					return name;
-				}
-			}
+                if (value instanceof Address) {
+                    println("~~> " + address.toString() + " ==>is instanceof Address");
+                    // String name = getStringFromPointer((Address) value);
+                    String name = data.getLabel();
+                    // orig: name = name.substring(0,1) + "p" +
+                    // name.substring(1);
+                    if (name == null) {
+                        return null;
+                    }
+                    // before: name = name.substring(0,1) + "p" +
+                    // name.substring(1);
+                    name = "p_" + name;
+                    return name;
+                }
+            }
 			// this wasn't a pointer to string. Let's check for function pointer
 			Function func = getFunctionAt(address);
 			if (func != null) {

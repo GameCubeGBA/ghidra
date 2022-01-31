@@ -360,26 +360,26 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 					}
                     return !checkAlreadyInFunctionAbove(program, addr, funcAbove);
 				}
-				else if (name.startsWith("inst")) {
-					// make sure there is an end of function at location to check
-					Instruction instr = program.getListing().getInstructionContaining(addrToCheck);
-                    return instr != null;
-				}
-				else if (name.startsWith("data")) {
-					// make sure there is defined data at location to check
-					Data data = program.getListing().getDefinedDataContaining(addrToCheck);
-                    return data != null;
-				}
-				else if (name.startsWith("def")) {
-					// make sure there is something at location to check
-					Instruction instr = program.getListing().getInstructionContaining(addrToCheck);
-					if (instr != null) {
-                        return !checkAlreadyInFunctionAbove(program, addr);
-                    }
-					Data data = program.getListing().getDefinedDataContaining(addrToCheck);
-                    return data != null;
+                if (name.startsWith("inst")) {
+                    // make sure there is an end of function at location to check
+                    Instruction instr = program.getListing().getInstructionContaining(addrToCheck);
+return instr != null;
                 }
-			}
+                if (name.startsWith("data")) {
+                    // make sure there is defined data at location to check
+                    Data data = program.getListing().getDefinedDataContaining(addrToCheck);
+return data != null;
+                }
+                if (name.startsWith("def")) {
+                    // make sure there is something at location to check
+                    Instruction instr = program.getListing().getInstructionContaining(addrToCheck);
+                    if (instr != null) {
+return !checkAlreadyInFunctionAbove(program, addr);
+}
+                    Data data = program.getListing().getDefinedDataContaining(addrToCheck);
+return data != null;
+}
+            }
 			return true;
 		}
 

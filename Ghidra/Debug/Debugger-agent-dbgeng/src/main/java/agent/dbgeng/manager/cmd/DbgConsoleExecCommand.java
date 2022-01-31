@@ -43,10 +43,10 @@ public class DbgConsoleExecCommand extends AbstractDbgCommand<String> {
 		if (evt instanceof AbstractDbgCompletedCommandEvent && pending.getCommand().equals(this)) {
 			return true;
 		}
-		else if (evt instanceof DbgConsoleOutputEvent && to == Output.CAPTURE) {
-			pending.steal(evt);
-		}
-		return false;
+        if (evt instanceof DbgConsoleOutputEvent && to == Output.CAPTURE) {
+            pending.steal(evt);
+        }
+        return false;
 	}
 
 	@Override

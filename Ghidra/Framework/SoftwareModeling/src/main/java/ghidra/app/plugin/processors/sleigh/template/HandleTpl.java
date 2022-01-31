@@ -137,11 +137,9 @@ public class HandleTpl {
 		if (space.isConstSpace()) {
 			return (int) size.getReal() * 8;
 		}
-		else if (space.getSpaceId() == null) {
-			return 0;
-		}
-		else {
-			return space.getSpaceId().getSize();
-		}
-	}
+        if (space.getSpaceId() == null) {
+            return 0;
+        }
+        return space.getSpaceId().getSize();
+    }
 }

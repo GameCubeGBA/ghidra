@@ -226,15 +226,13 @@ public class DBTraceStack extends DBAnnotatedObject implements TraceStack {
 				return frames.get(level);
 			}
 		}
-		else {
-			try (LockHold hold = LockHold.lock(manager.lock.readLock())) {
-				if (level >= frames.size()) {
-					return null;
-				}
-				return frames.get(level);
-			}
-		}
-	}
+        try (LockHold hold = LockHold.lock(manager.lock.readLock())) {
+            if (level >= frames.size()) {
+                return null;
+            }
+            return frames.get(level);
+        }
+    }
 
 	@Override
 	public List<TraceStackFrame> getFrames() {

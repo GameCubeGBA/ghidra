@@ -229,10 +229,10 @@ public class CParserUtils {
 		if (t instanceof TokenMgrError) {
 			return generateTokenErrorMessage((TokenMgrError) t, functionString);
 		}
-		else if (t instanceof ParseException) {
-			return generateParseExceptionMessage((ParseException) t, functionString);
-		}
-		return null;
+        if (t instanceof ParseException) {
+            return generateParseExceptionMessage((ParseException) t, functionString);
+        }
+        return null;
 	}
 
 	private static String generateTokenErrorMessage(TokenMgrError e, String functionString) {

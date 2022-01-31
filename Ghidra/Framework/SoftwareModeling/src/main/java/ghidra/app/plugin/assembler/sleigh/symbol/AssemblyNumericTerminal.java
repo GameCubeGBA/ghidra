@@ -73,13 +73,11 @@ public class AssemblyNumericTerminal extends AssemblyTerminal {
 		if (col.isEmpty()) {
 			return null;
 		}
-		else if (col.size() == 1) {
-			return col.iterator().next();
-		}
-		else {
-			throw new AssertionError("Multiple results for a numeric terminal?: " + col);
-		}
-	}
+        if (col.size() == 1) {
+            return col.iterator().next();
+        }
+        throw new AssertionError("Multiple results for a numeric terminal?: " + col);
+    }
 
 	@Override
 	public Collection<AssemblyParseNumericToken> match(String buffer, int pos,
@@ -90,13 +88,11 @@ public class AssemblyNumericTerminal extends AssemblyTerminal {
 		if (buffer.charAt(pos) == '+') {
 			return matchLiteral(pos + 1, buffer, pos, false, grammar);
 		}
-		else if (buffer.charAt(pos) == '-') {
-			return matchLiteral(pos + 1, buffer, pos, true, grammar);
-		}
-		else {
-			return match(pos, buffer, grammar, labels);
-		}
-	}
+        if (buffer.charAt(pos) == '-') {
+            return matchLiteral(pos + 1, buffer, pos, true, grammar);
+        }
+        return match(pos, buffer, grammar, labels);
+    }
 
 	/**
 	 * Try to match a sign-less numeric literal, or a program label
@@ -147,13 +143,11 @@ public class AssemblyNumericTerminal extends AssemblyTerminal {
 		if (buffer.regionMatches(s, PREFIX_HEX, 0, PREFIX_HEX.length())) {
 			return matchHex(s + PREFIX_HEX.length(), buffer, pos, neg, grammar);
 		}
-		else if (buffer.regionMatches(s, PREFIX_OCT, 0, PREFIX_OCT.length())) {
-			return matchOct(s + PREFIX_OCT.length(), buffer, pos, neg, grammar);
-		}
-		else {
-			return matchDec(s, buffer, pos, neg, grammar);
-		}
-	}
+        if (buffer.regionMatches(s, PREFIX_OCT, 0, PREFIX_OCT.length())) {
+            return matchOct(s + PREFIX_OCT.length(), buffer, pos, neg, grammar);
+        }
+        return matchDec(s, buffer, pos, neg, grammar);
+    }
 
 	/**
 	 * Construct a numeric token

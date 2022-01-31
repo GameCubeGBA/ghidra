@@ -226,10 +226,10 @@ public class SpecExtension {
 				if (nm.startsWith(Type.CALL_FIXUP.getTagName(), pos)) {
 					return Type.CALL_FIXUP;
 				}
-				else if (nm.startsWith(Type.CALLOTHER_FIXUP.getTagName(), pos)) {
-					return Type.CALLOTHER_FIXUP;
-				}
-				break;
+                if (nm.startsWith(Type.CALLOTHER_FIXUP.getTagName(), pos)) {
+                    return Type.CALLOTHER_FIXUP;
+                }
+                break;
 			case 'p':
 				if (nm.startsWith(Type.PROTOTYPE_MODEL.getTagName(), pos)) {
 					return Type.PROTOTYPE_MODEL;
@@ -452,64 +452,64 @@ public class SpecExtension {
 			}
 			return model;
 		}
-		else if (elName.equals("callfixup")) {
-			String nm = parser.peek().getAttribute("name");
-			PcodeInjectLibrary injectLibrary = cspec.getPcodeInjectLibrary();
-			InjectPayload payload =
-				injectLibrary.allocateInject(optionName, nm, InjectPayload.CALLFIXUP_TYPE);
-			if (!(payload instanceof InjectPayloadSleigh)) {
-				throw new XmlParseException("Cannot use attached name: " + nm);
-			}
-			try {
-				payload.restoreXml(parser, (SleighLanguage) cspec.getLanguage());
-				injectLibrary.parseInject(payload);		// Try to parse the pcode body
-			}
-			catch (XmlParseException ex) {
-				if (!provideDummy) {
-					throw ex;
-				}
-				// The XML parse itself failed, provide a generic placeholder
-				payload = new InjectPayloadCallfixupError(cspec.getLanguage().getAddressFactory(),
-					getFormalName(optionName));
-			}
-			catch (SleighException ex) {
-				if (!provideDummy) {
-					throw ex;
-				}
-				// The pcode body failed to parse, payload metadata, but provide dummy p-code
-				payload = new InjectPayloadCallfixupError(cspec.getLanguage().getAddressFactory(),
-					(InjectPayloadCallfixup) payload);
-			}
-			return payload;
-		}
-		else if (elName.equals("callotherfixup")) {
-			String nm = parser.peek().getAttribute("name");
-			PcodeInjectLibrary injectLibrary = cspec.getPcodeInjectLibrary();
-			InjectPayload payload =
-				injectLibrary.allocateInject(optionName, nm, InjectPayload.CALLOTHERFIXUP_TYPE);
-			if (!(payload instanceof InjectPayloadSleigh)) {
-				throw new XmlParseException("Cannot use attached name: " + nm);
-			}
-			try {
-				payload.restoreXml(parser, (SleighLanguage) cspec.getLanguage());
-				injectLibrary.parseInject(payload);
-			}
-			catch (XmlParseException ex) {
-				if (!provideDummy) {
-					throw ex;
-				}
-				// The XML parse itself failed, provide a generic placeholder
-				payload = new InjectPayloadCallotherError(cspec.getLanguage().getAddressFactory(),
-					getFormalName(optionName));
-			}
-			catch (SleighException ex) {
-				// The p-code parse failed, keep the metadata, but provide dummy p-code
-				payload = new InjectPayloadCallotherError(cspec.getLanguage().getAddressFactory(),
-					(InjectPayloadCallother) payload);
-			}
-			return payload;
-		}
-		throw new XmlParseException("Unknown compiler spec extension: " + elName);
+        if (elName.equals("callfixup")) {
+            String nm = parser.peek().getAttribute("name");
+            PcodeInjectLibrary injectLibrary = cspec.getPcodeInjectLibrary();
+            InjectPayload payload =
+                injectLibrary.allocateInject(optionName, nm, InjectPayload.CALLFIXUP_TYPE);
+            if (!(payload instanceof InjectPayloadSleigh)) {
+                throw new XmlParseException("Cannot use attached name: " + nm);
+            }
+            try {
+                payload.restoreXml(parser, (SleighLanguage) cspec.getLanguage());
+                injectLibrary.parseInject(payload);		// Try to parse the pcode body
+            }
+            catch (XmlParseException ex) {
+                if (!provideDummy) {
+                    throw ex;
+                }
+                // The XML parse itself failed, provide a generic placeholder
+                payload = new InjectPayloadCallfixupError(cspec.getLanguage().getAddressFactory(),
+                    getFormalName(optionName));
+            }
+            catch (SleighException ex) {
+                if (!provideDummy) {
+                    throw ex;
+                }
+                // The pcode body failed to parse, payload metadata, but provide dummy p-code
+                payload = new InjectPayloadCallfixupError(cspec.getLanguage().getAddressFactory(),
+                    (InjectPayloadCallfixup) payload);
+            }
+            return payload;
+        }
+        if (elName.equals("callotherfixup")) {
+            String nm = parser.peek().getAttribute("name");
+            PcodeInjectLibrary injectLibrary = cspec.getPcodeInjectLibrary();
+            InjectPayload payload =
+                injectLibrary.allocateInject(optionName, nm, InjectPayload.CALLOTHERFIXUP_TYPE);
+            if (!(payload instanceof InjectPayloadSleigh)) {
+                throw new XmlParseException("Cannot use attached name: " + nm);
+            }
+            try {
+                payload.restoreXml(parser, (SleighLanguage) cspec.getLanguage());
+                injectLibrary.parseInject(payload);
+            }
+            catch (XmlParseException ex) {
+                if (!provideDummy) {
+                    throw ex;
+                }
+                // The XML parse itself failed, provide a generic placeholder
+                payload = new InjectPayloadCallotherError(cspec.getLanguage().getAddressFactory(),
+                    getFormalName(optionName));
+            }
+            catch (SleighException ex) {
+                // The p-code parse failed, keep the metadata, but provide dummy p-code
+                payload = new InjectPayloadCallotherError(cspec.getLanguage().getAddressFactory(),
+                    (InjectPayloadCallother) payload);
+            }
+            return payload;
+        }
+        throw new XmlParseException("Unknown compiler spec extension: " + elName);
 	}
 
 	/**

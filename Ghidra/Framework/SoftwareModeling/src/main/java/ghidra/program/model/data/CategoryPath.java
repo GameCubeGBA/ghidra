@@ -129,17 +129,17 @@ public class CategoryPath implements Comparable<CategoryPath> {
 			name = "";
 			return;
 		}
-		else if (path.charAt(0) != DELIMITER_CHAR) {
-			throw new IllegalArgumentException("Paths must start with " + DELIMITER_STRING);
-		}
-		else if (endsWithNonEscapedDelimiter(path)) {
-			throw new IllegalArgumentException("Paths must not end with " + DELIMITER_STRING);
-		}
-		else if (path.indexOf(ILLEGAL_STRING) >= 0) {
-			throw new IllegalArgumentException("Paths must have non-empty elements");
-		}
+        if (path.charAt(0) != DELIMITER_CHAR) {
+            throw new IllegalArgumentException("Paths must start with " + DELIMITER_STRING);
+        }
+        if (endsWithNonEscapedDelimiter(path)) {
+            throw new IllegalArgumentException("Paths must not end with " + DELIMITER_STRING);
+        }
+        if (path.indexOf(ILLEGAL_STRING) >= 0) {
+            throw new IllegalArgumentException("Paths must have non-empty elements");
+        }
 
-		int delimiterIndex = findIndexOfLastNonEscapedDelimiter(path);
+        int delimiterIndex = findIndexOfLastNonEscapedDelimiter(path);
 		this.parent = new CategoryPath(path.substring(0, delimiterIndex));
 		this.name = unescapeString(path.substring(delimiterIndex + 1));
 	}

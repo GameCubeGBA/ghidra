@@ -177,10 +177,10 @@ abstract class OperandFieldHelper extends FieldFactory {
 			RowColLocation rcl = btf.dataToScreenLocation(opIndex, column);
 			return new FieldLocation(index, fieldNum, rcl.row(), rcl.col());
 		}
-		else if (bf instanceof ImageFactoryField) {
-			return new FieldLocation(index, fieldNum, 0, 0);
-		}
-		return null;
+        if (bf instanceof ImageFactoryField) {
+            return new FieldLocation(index, fieldNum, 0, 0);
+        }
+        return null;
 	}
 
 	/**
@@ -196,10 +196,10 @@ abstract class OperandFieldHelper extends FieldFactory {
 		if (obj instanceof Instruction) {
 			return getFieldForInstruction((Instruction) obj, proxy, varWidth);
 		}
-		else if (obj instanceof Data) {
-			return getFieldForData((Data) obj, proxy, varWidth);
-		}
-		return null;
+        if (obj instanceof Data) {
+            return getFieldForData((Data) obj, proxy, varWidth);
+        }
+        return null;
 	}
 
 	@Override
@@ -273,55 +273,55 @@ abstract class OperandFieldHelper extends FieldFactory {
 			return new OperandFieldLocation(program, inst.getMinAddress(), variableOffset, refAddr,
 				repStr, opIndex, subOpIndex, translatedLocation.col());
 		}
-		else if (obj instanceof Data) {
-			Data data = (Data) obj;
-			Address refAddr = null;
-			Reference primaryReference =
-				data.getProgram()
-						.getReferenceManager()
-						.getPrimaryReferenceFrom(
-							data.getMinAddress(), 0);
-			Object value = data.getValue();
-			if (primaryReference != null) {
-				refAddr = primaryReference.getToAddress();
-			}
-			else {
-				if (value instanceof Address) {
-					refAddr = (Address) value;
-				}
-			}
+        if (obj instanceof Data) {
+            Data data = (Data) obj;
+            Address refAddr = null;
+            Reference primaryReference =
+                data.getProgram()
+                        .getReferenceManager()
+                        .getPrimaryReferenceFrom(
+                            data.getMinAddress(), 0);
+            Object value = data.getValue();
+            if (primaryReference != null) {
+                refAddr = primaryReference.getToAddress();
+            }
+            else {
+                if (value instanceof Address) {
+                    refAddr = (Address) value;
+                }
+            }
 
-			Program program = data.getProgram();
-			if (value instanceof Scalar) {
-				Scalar scalar = (Scalar) value;
-				Equate equate = program.getEquateTable()
-						.getEquate(data.getMinAddress(), opIndex,
-							scalar.getValue());
-				if (equate != null) {
-					return new EquateOperandFieldLocation(program, data.getMinAddress(), refAddr,
-						equate.getDisplayName(), equate, opIndex, subOpIndex,
-						translatedLocation.col());
-				}
-			}
-			return new OperandFieldLocation(program, data.getMinAddress(), data.getComponentPath(),
-				refAddr, codeUnitFormat.getDataValueRepresentationString(data), 0, col);
-		}
-		return null;
+            Program program = data.getProgram();
+            if (value instanceof Scalar) {
+                Scalar scalar = (Scalar) value;
+                Equate equate = program.getEquateTable()
+                        .getEquate(data.getMinAddress(), opIndex,
+                            scalar.getValue());
+                if (equate != null) {
+                    return new EquateOperandFieldLocation(program, data.getMinAddress(), refAddr,
+                        equate.getDisplayName(), equate, opIndex, subOpIndex,
+                        translatedLocation.col());
+                }
+            }
+            return new OperandFieldLocation(program, data.getMinAddress(), data.getComponentPath(),
+                refAddr, codeUnitFormat.getDataValueRepresentationString(data), 0, col);
+        }
+        return null;
 	}
 
 	private VariableOffset getVariableOffset(Object representation) {
 		if (representation instanceof VariableOffset) {
 			return (VariableOffset) representation;
 		}
-		else if (representation instanceof OperandRepresentationList) {
-			OperandRepresentationList list = (OperandRepresentationList) representation;
-			for (Object innerRepresentation : list) {
-				if (innerRepresentation instanceof VariableOffset) {
-					return (VariableOffset) innerRepresentation;
-				}
-			}
-		}
-		return null;
+        if (representation instanceof OperandRepresentationList) {
+            OperandRepresentationList list = (OperandRepresentationList) representation;
+            for (Object innerRepresentation : list) {
+                if (innerRepresentation instanceof VariableOffset) {
+                    return (VariableOffset) innerRepresentation;
+                }
+            }
+        }
+        return null;
 	}
 
 	private Address getVariableStorageAddress(Instruction inst, OperandRepresentationList opList,
@@ -362,12 +362,12 @@ abstract class OperandFieldHelper extends FieldFactory {
 			return new ImageFactoryField(this, ((DataImage) value).getImageIcon(), proxy,
 				getMetrics(), startX + varWidth, width);
 		}
-		else if (value instanceof Playable) {
-			return new ImageFactoryField(this, ((Playable) value).getImageIcon(), proxy,
-				getMetrics(), startX + varWidth, width);
-		}
+        if (value instanceof Playable) {
+            return new ImageFactoryField(this, ((Playable) value).getImageIcon(), proxy,
+                getMetrics(), startX + varWidth, width);
+        }
 
-		OperandRepresentationList dataValueRepresentation =
+        OperandRepresentationList dataValueRepresentation =
 			codeUnitFormat.getDataValueRepresentation(data);
 		boolean underline =
 			isUnderlined(data, 0, dataValueRepresentation.isPrimaryReferenceHidden());

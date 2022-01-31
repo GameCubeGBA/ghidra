@@ -207,12 +207,12 @@ public class FunctionReachabilityTableModel
 			Address address = function.getEntryPoint();
 			return new ProgramLocation(getProgram(), address);
 		}
-		else if (column == TO_FUNCTION_COLUMN) {
-			Function function = result.getToFunction();
-			Address address = function.getEntryPoint();
-			return new ProgramLocation(getProgram(), address);
-		}
-		return null;
+        if (column == TO_FUNCTION_COLUMN) {
+            Function function = result.getToFunction();
+            Address address = function.getEntryPoint();
+            return new ProgramLocation(getProgram(), address);
+        }
+        return null;
 	}
 
 	@Override

@@ -163,9 +163,8 @@ public class DmgServer {
 		if (entry.isFile()) {
 			return entry.asFile();
 		}
-		else if (entry instanceof FSLink) {
-			int limit = 0;
-			while (limit++ < 10) {
+		if (entry instanceof FSLink) {
+			for (int limit = 0; limit < 10; limit++) {
 				FSLink link = (FSLink) entry;
 
 				FSEntry linkTarget = link.getLinkTarget(
@@ -174,7 +173,7 @@ public class DmgServer {
 				if (linkTarget instanceof FSFile) {
 					return linkTarget.asFile();
 				}
-				else if (linkTarget instanceof FSLink) {
+				if (linkTarget instanceof FSLink) {
 					entry = linkTarget;
 				}
 				else {//anything else just return

@@ -163,10 +163,8 @@ public class GdbModelTargetBreakpointSpec extends
 		if (newInfo.getType().isWatchpoint()) {
 			return updateWptInfo(oldInfo, newInfo, reason);
 		}
-		else {
-			return updateBktpInfo(oldInfo, newInfo, reason);
-		}
-	}
+        return updateBktpInfo(oldInfo, newInfo, reason);
+    }
 
 	protected void updateAttributesFromInfo(String reason) {
 		changeAttributes(List.of(), Map.of(

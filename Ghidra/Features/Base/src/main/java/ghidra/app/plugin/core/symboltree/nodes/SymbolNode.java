@@ -184,26 +184,26 @@ public class SymbolNode extends SymbolTreeNode {
 		if (symbolType.equals(SymbolType.CLASS)) {
 			return new ClassSymbolNode(program, symbol);
 		}
-		else if (symbolType.equals(SymbolType.LABEL)) {
-			return new CodeSymbolNode(program, symbol);
-		}
-		else if (symbolType.equals(SymbolType.FUNCTION)) {
-			return new FunctionSymbolNode(program, symbol);
-		}
-		else if (symbolType.equals(SymbolType.LIBRARY)) {
-			return new LibrarySymbolNode(program, symbol);
-		}
-		else if (symbolType.equals(SymbolType.LOCAL_VAR)) {
-			return new LocalVariableSymbolNode(program, symbol);
-		}
-		else if (symbolType.equals(SymbolType.NAMESPACE)) {
-			return new NamespaceSymbolNode(program, symbol);
-		}
-		else if (symbolType.equals(SymbolType.PARAMETER)) {
-			return new ParameterSymbolNode(program, symbol);
-		}
+        if (symbolType.equals(SymbolType.LABEL)) {
+            return new CodeSymbolNode(program, symbol);
+        }
+        if (symbolType.equals(SymbolType.FUNCTION)) {
+            return new FunctionSymbolNode(program, symbol);
+        }
+        if (symbolType.equals(SymbolType.LIBRARY)) {
+            return new LibrarySymbolNode(program, symbol);
+        }
+        if (symbolType.equals(SymbolType.LOCAL_VAR)) {
+            return new LocalVariableSymbolNode(program, symbol);
+        }
+        if (symbolType.equals(SymbolType.NAMESPACE)) {
+            return new NamespaceSymbolNode(program, symbol);
+        }
+        if (symbolType.equals(SymbolType.PARAMETER)) {
+            return new ParameterSymbolNode(program, symbol);
+        }
 
-		// default
+        // default
 		return new SymbolNode(program, symbol);
 	}
 

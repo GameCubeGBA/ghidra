@@ -1485,11 +1485,11 @@ public class FlatProgramAPI {
 		if (symbols.size() == 1) {
 			return symbols.get(0);
 		}
-		else if (symbols.size() > 1) {
-			throw new IllegalStateException(
-				"There are multiple symbols named " + name + " in namespace " + namespace);
-		}
-		return null;
+        if (symbols.size() > 1) {
+            throw new IllegalStateException(
+                "There are multiple symbols named " + name + " in namespace " + namespace);
+        }
+        return null;
 	}
 
 	/**

@@ -43,10 +43,10 @@ class FromAdapterV0 extends FromAdapter {
 			if (table == null) {
 				throw new VersionException("Missing Table: " + FROM_REFS_TABLE_NAME);
 			}
-			else if (table.getSchema().getVersion() != 0) {
-				throw new VersionException(VersionException.NEWER_VERSION, false);
-			}
-		}
+            if (table.getSchema().getVersion() != 0) {
+                throw new VersionException(VersionException.NEWER_VERSION, false);
+            }
+        }
 	}
 
 	@Override

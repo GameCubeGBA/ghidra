@@ -965,13 +965,13 @@ public class WrappedDbgModel
 		if (value instanceof Short) {
 			return DebugValueType.INT16;
 		}
-		else if (value instanceof Integer) {
-			return DebugValueType.INT32;
-		}
-		else if (value instanceof Long) {
-			return DebugValueType.INT64;
-		}
-		return DebugValueType.INVALID;
+        if (value instanceof Integer) {
+            return DebugValueType.INT32;
+        }
+        if (value instanceof Long) {
+            return DebugValueType.INT64;
+        }
+        return DebugValueType.INVALID;
 	}
 
 	@Override

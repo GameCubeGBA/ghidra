@@ -40,11 +40,11 @@ public class VTMatchTagDBAdapterV0 extends VTMatchTagDBAdapter {
 		if (table == null) {
 			throw new VersionException("Missing Table: " + TABLE_NAME);
 		}
-		else if (table.getSchema().getVersion() != 0) {
-			throw new VersionException("Expected version 0 for table " + TABLE_NAME + " but got " +
-				table.getSchema().getVersion());
-		}
-	}
+        if (table.getSchema().getVersion() != 0) {
+            throw new VersionException("Expected version 0 for table " + TABLE_NAME + " but got " +
+                table.getSchema().getVersion());
+        }
+    }
 
 	@Override
 	public DBRecord insertRecord(String tagName) throws IOException {

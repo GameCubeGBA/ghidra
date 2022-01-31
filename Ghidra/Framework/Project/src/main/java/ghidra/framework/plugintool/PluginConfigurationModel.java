@@ -127,10 +127,10 @@ public class PluginConfigurationModel {
 		if (!someInTool) {
 			return PluginPackageState.NO_PLUGINS_LOADED;
 		}
-		else if (!someNotInTool) {
-			return PluginPackageState.ALL_PLUGINS_LOADED;
-		}
-		return PluginPackageState.SOME_PLUGINS_LOADED;
+        if (!someNotInTool) {
+            return PluginPackageState.ALL_PLUGINS_LOADED;
+        }
+        return PluginPackageState.SOME_PLUGINS_LOADED;
 	}
 
 	public void addPlugin(PluginDescription pluginDescription) {

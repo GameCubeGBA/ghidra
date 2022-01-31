@@ -96,25 +96,25 @@ public class GdbMipsDebuggerMappingOpinion implements DebuggerMappingOpinion {
 		if (arch.startsWith("mips:32")) {
 			return Set.of(new GdbMipsBELinux32DefOffer(process));
 		}
-		else if (arch.startsWith("mips:64")) {
-			return Set.of(new GdbMipsBELinux64DefOffer(process));
-		}
-		else if (arch.startsWith("mips:64_32")) {
-			return Set.of(new GdbMipsBELinux64_32Offer(process));
-		}
-		else if (arch.startsWith("mips:32_R6")) {
-			return Set.of(new GdbMipsBELinux32_R6Offer(process));
-		}
-		else if (arch.startsWith("mips:64_R6")) {
-			return Set.of(new GdbMipsBELinux64_R6Offer(process));
-		}
-		else if (arch.startsWith("mips:32_micro")) {
-			return Set.of(new GdbMipsBELinux32MicroOffer(process));
-		}
-		else if (arch.startsWith("mips")) {
-			return Set.of(new GdbMipsBELinux64DefOffer(process));
-		}
-		return Set.of();
+        if (arch.startsWith("mips:64")) {
+            return Set.of(new GdbMipsBELinux64DefOffer(process));
+        }
+        if (arch.startsWith("mips:64_32")) {
+            return Set.of(new GdbMipsBELinux64_32Offer(process));
+        }
+        if (arch.startsWith("mips:32_R6")) {
+            return Set.of(new GdbMipsBELinux32_R6Offer(process));
+        }
+        if (arch.startsWith("mips:64_R6")) {
+            return Set.of(new GdbMipsBELinux64_R6Offer(process));
+        }
+        if (arch.startsWith("mips:32_micro")) {
+            return Set.of(new GdbMipsBELinux32MicroOffer(process));
+        }
+        if (arch.startsWith("mips")) {
+            return Set.of(new GdbMipsBELinux64DefOffer(process));
+        }
+        return Set.of();
 	}
 
 }

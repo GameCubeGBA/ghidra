@@ -160,9 +160,9 @@ public class ExpiringSwingTimer extends GhidraSwingTimer {
 				stop();
 				return;
 			}
-			else if (isExpired()) {
-				stop();
-			}
-		}
+            if (isExpired()) {
+                stop();
+            }
+        }
 	}
 }

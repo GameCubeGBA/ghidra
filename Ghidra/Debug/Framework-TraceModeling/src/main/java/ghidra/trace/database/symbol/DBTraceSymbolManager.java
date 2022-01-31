@@ -566,10 +566,8 @@ public class DBTraceSymbolManager implements TraceSymbolManager, DBTraceManager 
 		if (ptrSize != dataTypeManager.getDataOrganization().getPointerSize()) {
 			return dataTypeManager.getPointer(formal, ptrSize);
 		}
-		else {
-			return dataTypeManager.getPointer(formal);
-		}
-	}
+        return dataTypeManager.getPointer(formal);
+    }
 
 	protected <T extends AbstractDBTraceSymbolSingleTypeView<?>> T putInMap(T view) {
 		symbolViews.put(view.typeID, view);

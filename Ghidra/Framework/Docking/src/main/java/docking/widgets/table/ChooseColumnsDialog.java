@@ -241,10 +241,10 @@ public class ChooseColumnsDialog extends DialogComponentProvider {
 			if (column == 0) {
 				return selectedMap.get(tableColumn);
 			}
-			else if (column == 1) {
-				return tableColumn.getHeaderValue();
-			}
-			return "<<unknown>>";
+            if (column == 1) {
+                return tableColumn.getHeaderValue();
+            }
+            return "<<unknown>>";
 		}
 
 		@Override
@@ -273,10 +273,10 @@ public class ChooseColumnsDialog extends DialogComponentProvider {
 			if (column == 0) {
 				return "Copy";
 			}
-			else if (column == 1) {
-				return "Column Name";
-			}
-			return "<<unknown>>";
+            if (column == 1) {
+                return "Column Name";
+            }
+            return "<<unknown>>";
 		}
 	}
 }

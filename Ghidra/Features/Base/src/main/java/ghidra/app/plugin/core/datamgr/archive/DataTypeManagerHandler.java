@@ -1388,11 +1388,11 @@ public class DataTypeManagerHandler {
 				undoableDomainObject.forceLock(true, "Save Archive As");
 				return true;
 			}
-			else if (result == OptionDialog.OPTION_TWO) {
-				undoableDomainObject.forceLock(false, "Save Archive As");
-				return true;
-			}
-			return false;
+            if (result == OptionDialog.OPTION_TWO) {
+                undoableDomainObject.forceLock(false, "Save Archive As");
+                return true;
+            }
+            return false;
 		}
 		return true;
 	}
@@ -1407,12 +1407,12 @@ public class DataTypeManagerHandler {
 					dataTreeSaveDialog.setStatusText("Please enter a name");
 					return;
 				}
-				else if (folder == null) {
-					dataTreeSaveDialog.setStatusText("Please select a folder");
-					return;
-				}
+                if (folder == null) {
+                    dataTreeSaveDialog.setStatusText("Please select a folder");
+                    return;
+                }
 
-				DomainFile file = folder.getFile(newName);
+                DomainFile file = folder.getFile(newName);
 				if (file != null && file.isReadOnly()) {
 					dataTreeSaveDialog.setStatusText("Read Only.  Choose new name/folder");
 				}
@@ -1441,12 +1441,12 @@ public class DataTypeManagerHandler {
 					dataTreeCreateDialog.setStatusText("Please enter a name");
 					return;
 				}
-				else if (folder == null) {
-					dataTreeCreateDialog.setStatusText("Please select a folder");
-					return;
-				}
+                if (folder == null) {
+                    dataTreeCreateDialog.setStatusText("Please select a folder");
+                    return;
+                }
 
-				DomainFile file = folder.getFile(newName);
+                DomainFile file = folder.getFile(newName);
 				if (file != null) {
 					dataTreeCreateDialog.setStatusText("Choose a name that doesn't exist.");
 					return;

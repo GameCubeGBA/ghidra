@@ -501,11 +501,11 @@ abstract class AbstractAddressSpace implements AddressSpace {
 			// I'm an overlay, other space is NOT an overlay
 			return 1;
 		}
-		else if (space.isOverlaySpace()) {
-			// I'm NOT an overlay, other space is an overlay
-			return -1;
-		}
-		if (hashcode == space.hashCode() &&
+        if (space.isOverlaySpace()) {
+            // I'm NOT an overlay, other space is an overlay
+            return -1;
+        }
+        if (hashcode == space.hashCode() &&
 			// hashcode factors name and type
 			type == space.getType() && name.equals(space.getName()) &&
 			getClass().equals(space.getClass())) {

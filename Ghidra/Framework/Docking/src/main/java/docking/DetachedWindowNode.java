@@ -106,10 +106,10 @@ class DetachedWindowNode extends WindowNode {
 		if (window instanceof JDialog) {
 			return ((JDialog) window).getTitle();
 		}
-		else if (window instanceof JFrame) {
-			return ((JFrame) window).getTitle();
-		}
-		return "";
+        if (window instanceof JFrame) {
+            return ((JFrame) window).getTitle();
+        }
+        return "";
 	}
 
 	@Override
@@ -180,10 +180,10 @@ class DetachedWindowNode extends WindowNode {
 		if (window instanceof JDialog) {
 			return ((JDialog) window).getRootPane();
 		}
-		else if (window instanceof JFrame) {
-			return ((JFrame) window).getRootPane();
-		}
-		return null;
+        if (window instanceof JFrame) {
+            return ((JFrame) window).getRootPane();
+        }
+        return null;
 	}
 
 	Window getWindow() {
@@ -195,10 +195,10 @@ class DetachedWindowNode extends WindowNode {
 		if (window instanceof JDialog) {
 			return ((JDialog) window).getContentPane();
 		}
-		else if (window instanceof JFrame) {
-			return ((JFrame) window).getContentPane();
-		}
-		return null;
+        if (window instanceof JFrame) {
+            return ((JFrame) window).getContentPane();
+        }
+        return null;
 	}
 
 	@Override

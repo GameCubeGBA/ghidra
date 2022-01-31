@@ -630,19 +630,19 @@ public class Pic18Analyzer extends AbstractAnalyzer {
 		if (instr.getNumOperands() == 0) {
 			return;
 		}
-		else if ("MOVLB".equals(instr.getMnemonicString())) {
-			handleBSRModification(instr);
-		}
-		else {
-			Object[] objs = instr.getOpObjects(0);
-			if (objs.length == 0) {
-				return;
-			}
-			if (bsrReg.equals(objs[0]) || bsrReg.getAddress().equals(objs[0])) {
-				handleBSRModification(instr);
-			}
-		}
-	}
+        if ("MOVLB".equals(instr.getMnemonicString())) {
+            handleBSRModification(instr);
+        }
+        else {
+            Object[] objs = instr.getOpObjects(0);
+            if (objs.length == 0) {
+                return;
+            }
+            if (bsrReg.equals(objs[0]) || bsrReg.getAddress().equals(objs[0])) {
+                handleBSRModification(instr);
+            }
+        }
+    }
 
 	private void handleBSRModification(Instruction instr) {
 		bsrContext.writeValue(instr.getMaxAddress());

@@ -150,17 +150,13 @@ public class TraceSchedule implements Comparable<TraceSchedule> {
 				if (this.pSteps.isNop()) {
 					return CompareResult.REL_LT;
 				}
-				else {
-					return CompareResult.UNREL_LT;
-				}
-			case REL_GT:
+                return CompareResult.UNREL_LT;
+            case REL_GT:
 				if (that.pSteps.isNop()) {
 					return CompareResult.REL_GT;
 				}
-				else {
-					return CompareResult.UNREL_GT;
-				}
-			default: // EQUALS, compare pSteps
+                return CompareResult.UNREL_GT;
+            default: // EQUALS, compare pSteps
 		}
 
 		result = this.pSteps.compareSeq(that.pSteps);

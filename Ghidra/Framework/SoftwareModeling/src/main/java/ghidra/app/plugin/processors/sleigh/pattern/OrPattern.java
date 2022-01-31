@@ -66,9 +66,9 @@ public class OrPattern extends Pattern {
         }
 		if (newlist.size()==0)
 			return new InstructionPattern(false);
-		else if (newlist.size()==1)
-			return (Pattern)newlist.get(0);
-		return new OrPattern(newlist);
+        if (newlist.size()==1)
+            return (Pattern)newlist.get(0);
+        return new OrPattern(newlist);
 	}
 
 	/* (non-Javadoc)

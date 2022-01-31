@@ -278,13 +278,13 @@ public class GdbCValueParser extends AbstractGdbParser {
 				match(RBRACE, false);
 				return result.build();
 			}
-			else if (c == ',') {
-				match(COMMA, false);
-			}
-			else {
-				throw new GdbParseError("} or ,", buf);
-			}
-		}
+            if (c == ',') {
+                match(COMMA, false);
+            }
+            else {
+                throw new GdbParseError("} or ,", buf);
+            }
+        }
 	}
 
 	public GdbArrayValue parseArray() throws GdbParseError {
@@ -318,12 +318,12 @@ public class GdbCValueParser extends AbstractGdbParser {
 				match(RBRACE, false);
 				return result.build();
 			}
-			else if (c == ',') {
-				match(COMMA, false);
-			}
-			else {
-				throw new GdbParseError("} , or <repeats", buf);
-			}
-		}
+            if (c == ',') {
+                match(COMMA, false);
+            }
+            else {
+                throw new GdbParseError("} , or <repeats", buf);
+            }
+        }
 	}
 }

@@ -264,24 +264,24 @@ abstract class DataTypeLocationDescriptor extends LocationDescriptor {
 			return paramName;
 		}
 		// check for pointer names
-		else if (label.endsWith("*") && label.startsWith(paramName)) {
-			// see if we need to chop off some '*'s, as we may have searched for a pointer to a 
-			// pointer and have found a match against a simple pointer and thus the display may 
-			// not match our label
-			if (paramParts.length == 1) {
-				return paramName; // not a full declaration, just the name
-			}
+        if (label.endsWith("*") && label.startsWith(paramName)) {
+            // see if we need to chop off some '*'s, as we may have searched for a pointer to a
+            // pointer and have found a match against a simple pointer and thus the display may
+            // not match our label
+            if (paramParts.length == 1) {
+                return paramName; // not a full declaration, just the name
+            }
 
-			String variableName = paramParts[paramParts.length - 1];
-			int variableNameOffset = parameterDeclaration.indexOf(variableName);
-			if (label.length() > variableNameOffset) {
-				return label.substring(0, variableNameOffset - 1); // -1 for the space before the name
-			}
+            String variableName = paramParts[paramParts.length - 1];
+            int variableNameOffset = parameterDeclaration.indexOf(variableName);
+            if (label.length() > variableNameOffset) {
+                return label.substring(0, variableNameOffset - 1); // -1 for the space before the name
+            }
 
-			return label;
-		}
+            return label;
+        }
 
-		return null;
+        return null;
 	}
 
 	private String getHighlightStringForDataTypeName(String listingDisplayText) {
@@ -294,10 +294,10 @@ abstract class DataTypeLocationDescriptor extends LocationDescriptor {
 		if (dataTypeName.endsWith("*") && dataTypeName.startsWith(listingDisplayText)) {
 			return listingDisplayText;
 		}
-		else if (listingDisplayText.startsWith(dataTypeName) && listingDisplayText.endsWith("*")) {
-			return dataTypeName;
-		}
+        if (listingDisplayText.startsWith(dataTypeName) && listingDisplayText.endsWith("*")) {
+            return dataTypeName;
+        }
 
-		return null;
+        return null;
 	}
 }

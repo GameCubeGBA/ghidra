@@ -353,20 +353,20 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 							}
 							continue;
 						}
-						else if (!protoInstr.getPrototype().equals(inst.getPrototype())) {
+                        if (!protoInstr.getPrototype().equals(inst.getPrototype())) {
 
-							InstructionError.dumpInstructionDifference(protoInstr, inst);
+                            InstructionError.dumpInstructionDifference(protoInstr, inst);
 
-							block.setInconsistentPrototypeConflict(startAddr, flowFrom);
-						}
-						else {
-							// signal block overlap with existing code
-							// TODO: may not want to use conflict mechanism so that original conflict
-							// will be preserved
-							block.setInstructionError(InstructionErrorType.DUPLICATE, startAddr,
-								startAddr, flowFrom, null);
-						}
-						findNextCodeUnit = true;
+                            block.setInconsistentPrototypeConflict(startAddr, flowFrom);
+                        }
+                        else {
+                            // signal block overlap with existing code
+                            // TODO: may not want to use conflict mechanism so that original conflict
+                            // will be preserved
+                            block.setInstructionError(InstructionErrorType.DUPLICATE, startAddr,
+                                startAddr, flowFrom, null);
+                        }
+                        findNextCodeUnit = true;
 						break; // skip remainder of block
 					}
 
@@ -1295,10 +1295,10 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 			if (cu == null) {
 				return getInstructionDB(addr);
 			}
-			else if (cu instanceof InstructionDB) {
-				return (InstructionDB) cu;
-			}
-		}
+            if (cu instanceof InstructionDB) {
+                return (InstructionDB) cu;
+            }
+        }
 		catch (IOException e) {
 			program.dbError(e);
 		}
@@ -1332,12 +1332,12 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 				DBRecord rec = dataAdapter.getRecord(addr);
 				return getDataDB(rec);
 			}
-			else if (cu instanceof Data) {
-				if (((Data) cu).isDefined()) {
-					return (DataDB) cu;
-				}
-			}
-		}
+            if (cu instanceof Data) {
+                if (((Data) cu).isDefined()) {
+                    return (DataDB) cu;
+                }
+            }
+        }
 		catch (IOException e) {
 			program.dbError(e);
 		}
@@ -3183,12 +3183,12 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 				}
                 return new DataDB(this, cache, addr, address, addr, DefaultDataType.dataType);
 			}
-			else if (cu instanceof Data) {
-				if (!((Data) cu).isDefined()) {
-					return (DataDB) cu;
-				}
-			}
-			return null;
+            if (cu instanceof Data) {
+                if (!((Data) cu).isDefined()) {
+                    return (DataDB) cu;
+                }
+            }
+            return null;
 		}
 		finally {
 			lock.release();

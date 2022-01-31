@@ -127,10 +127,10 @@ public interface CompositeInternal extends Composite {
 			if (offset < dtc.getOffset()) {
 				return 1;
 			}
-			else if (offset > dtc.getEndOffset()) {
-				return -1;
-			}
-			return 0;
+            if (offset > dtc.getEndOffset()) {
+                return -1;
+            }
+            return 0;
 		}
 
 	}
@@ -209,10 +209,10 @@ public interface CompositeInternal extends Composite {
 		if (composite instanceof Structure) {
 			return "Structure";
 		}
-		else if (composite instanceof Union) {
-			return "Union";
-		}
-		return "";
+        if (composite instanceof Union) {
+            return "Union";
+        }
+        return "";
 	}
 
 	public static String getAlignmentAndPackingString(Composite composite) {

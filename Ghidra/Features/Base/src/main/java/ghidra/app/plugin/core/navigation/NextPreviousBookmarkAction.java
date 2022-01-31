@@ -165,14 +165,14 @@ public class NextPreviousBookmarkAction extends MultiStateDockingAction<String> 
 			if (bookmarkType.equals(BookmarkType.ALL_TYPES)) {
 				return nextBookmark;
 			}
-			else if (bookmarkType.equals("Custom") &&
-				isNotBuiltInType(address, nextBookmark, nextAddress)) {
-				return nextBookmark;
-			}
-			else if (nextBookmark.getTypeString().equals(bookmarkType)) {
-				return nextBookmark;
-			}
-		}
+            if (bookmarkType.equals("Custom") &&
+                isNotBuiltInType(address, nextBookmark, nextAddress)) {
+                return nextBookmark;
+            }
+            if (nextBookmark.getTypeString().equals(bookmarkType)) {
+                return nextBookmark;
+            }
+        }
 
 		if (!bookmarkIterator.hasNext()) {
 			return null;

@@ -64,10 +64,10 @@ public abstract class CompEditorModel extends CompositeEditorModel {
 		if (viewComposite instanceof Structure) {
 			return "Structure";
 		}
-		else if (viewComposite instanceof Union) {
-			return "Union";
-		}
-		return super.getTypeName();
+        if (viewComposite instanceof Union) {
+            return "Union";
+        }
+        return super.getTypeName();
 	}
 
 	/**
@@ -873,12 +873,12 @@ public abstract class CompEditorModel extends CompositeEditorModel {
 			String msg = "Data type \"" + datatype.getDisplayName() + "\" can't contain itself.";
 			throw new InvalidDataTypeException(msg);
 		}
-		else if (DataTypeUtilities.isSecondPartOfFirst(datatype, viewComposite)) {
-			String msg = "Data type \"" + datatype.getDisplayName() + "\" has \"" +
-				viewComposite.getDisplayName() + "\" within it.";
-			throw new InvalidDataTypeException(msg);
-		}
-	}
+        if (DataTypeUtilities.isSecondPartOfFirst(datatype, viewComposite)) {
+            String msg = "Data type \"" + datatype.getDisplayName() + "\" has \"" +
+                viewComposite.getDisplayName() + "\" within it.";
+            throw new InvalidDataTypeException(msg);
+        }
+    }
 
 	/**
 	 *  Moves the components between the start index (inclusive) and the end

@@ -354,10 +354,10 @@ public class GhidraFileData {
 			if (cause instanceof IOException) {
 				throw (IOException) cause;
 			}
-			else if (cause instanceof VersionException) {
-				throw (VersionException) cause;
-			}
-			throw new IOException(e.getMessage(), e);
+            if (cause instanceof VersionException) {
+                throw (VersionException) cause;
+            }
+            throw new IOException(e.getMessage(), e);
 		}
 		listener.domainFileObjectOpenedForUpdate(domainObj.getDomainFile(), domainObj);
 		return domainObj;
@@ -507,22 +507,22 @@ public class GhidraFileData {
 				}
 				return multiIcon;
 			}
-			else if (folderItem != null) {
-				MultiIcon multiIcon = new MultiIcon(getBaseIcon(item), disabled);
-				if (isReadOnly() && !fileSystem.isReadOnly()) {
-					multiIcon.addIcon(new TranslateIcon(READ_ONLY_ICON, 6, 6));
-				}
-				if (isCheckedOut()) {
-					if (isCheckedOutExclusive()) {
-						multiIcon.addIcon(CHECKED_OUT_EXCLUSIVE_ICON);
-					}
-					else {
-						multiIcon.addIcon(CHECKED_OUT_ICON);
-					}
-				}
-				return multiIcon;
-			}
-		}
+            if (folderItem != null) {
+                MultiIcon multiIcon = new MultiIcon(getBaseIcon(item), disabled);
+                if (isReadOnly() && !fileSystem.isReadOnly()) {
+                    multiIcon.addIcon(new TranslateIcon(READ_ONLY_ICON, 6, 6));
+                }
+                if (isCheckedOut()) {
+                    if (isCheckedOutExclusive()) {
+                        multiIcon.addIcon(CHECKED_OUT_EXCLUSIVE_ICON);
+                    }
+                    else {
+                        multiIcon.addIcon(CHECKED_OUT_ICON);
+                    }
+                }
+                return multiIcon;
+            }
+        }
 		return UNSUPPORTED_FILE_ICON;
 	}
 
@@ -1547,23 +1547,23 @@ public class GhidraFileData {
 					newParent.fileChanged(newName);
 					return newParent.getDomainFile(newName);
 				}
-				else if (versionedFolderItem == null) {
-					if (!isCheckedOut()) {
-						fileSystem.moveItem(parent.getPathname(), name, newParent.getPathname(),
-							newName);
-						folderItem = fileSystem.getItem(newParent.getPathname(), newName);
-					}
-					else {
-						throw new FileInUseException(name + " is checked-out");
-					}
-				}
-				else {
-					versionedFileSystem.moveItem(parent.getPathname(), name,
-						newParent.getPathname(), newName);
-					versionedFolderItem =
-						versionedFileSystem.getItem(newParent.getPathname(), newName);
-				}
-			}
+                if (versionedFolderItem == null) {
+                    if (!isCheckedOut()) {
+                        fileSystem.moveItem(parent.getPathname(), name, newParent.getPathname(),
+                            newName);
+                        folderItem = fileSystem.getItem(newParent.getPathname(), newName);
+                    }
+                    else {
+                        throw new FileInUseException(name + " is checked-out");
+                    }
+                }
+                else {
+                    versionedFileSystem.moveItem(parent.getPathname(), name,
+                        newParent.getPathname(), newName);
+                    versionedFolderItem =
+                        versionedFileSystem.getItem(newParent.getPathname(), newName);
+                }
+            }
 			catch (InvalidNameException e) {
 				throw new AssertException("Unexpected error", e);
 			}

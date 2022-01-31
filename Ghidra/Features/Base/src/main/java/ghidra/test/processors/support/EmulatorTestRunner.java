@@ -339,14 +339,14 @@ public class EmulatorTestRunner {
 					atBreakpoint = true;
 					continue;
 				}
-				else if (executeAddr.equals(breakOnErrorAddr)) {
-					testGroup.testFailed(lastFuncName, errFileName, errLineNum, false, program,
-						executionListener);
-					atBreakpoint = true;
-					continue; // resume from breakpoint
-				}
+                if (executeAddr.equals(breakOnErrorAddr)) {
+                    testGroup.testFailed(lastFuncName, errFileName, errLineNum, false, program,
+                        executionListener);
+                    atBreakpoint = true;
+                    continue; // resume from breakpoint
+                }
 
-				throw new AssertException("Unexpected condition (executeAddr=" + executeAddr + ")");
+                throw new AssertException("Unexpected condition (executeAddr=" + executeAddr + ")");
 			}
 		}
 		finally {

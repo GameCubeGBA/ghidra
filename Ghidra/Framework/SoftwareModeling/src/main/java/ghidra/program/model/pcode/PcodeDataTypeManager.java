@@ -642,20 +642,20 @@ public class PcodeDataTypeManager {
 			resBuf.append("<void/>");
 			return;
 		}
-		else if (type instanceof TypeDef) {
-			resBuf.append("<def");
-			appendNameIdAttributes(resBuf, type);
-			resBuf.append('>');
-			DataType refType = ((TypeDef) type).getDataType();
-			int sz = refType.getLength();
-			if (sz <= 0) {
-				sz = size;
-			}
-			buildTypeRef(resBuf, refType, sz);
-			resBuf.append("</def>");
-			return;
-		}
-		buildTypeInternal(resBuf, type, size);
+        if (type instanceof TypeDef) {
+            resBuf.append("<def");
+            appendNameIdAttributes(resBuf, type);
+            resBuf.append('>');
+            DataType refType = ((TypeDef) type).getDataType();
+            int sz = refType.getLength();
+            if (sz <= 0) {
+                sz = size;
+            }
+            buildTypeRef(resBuf, refType, sz);
+            resBuf.append("</def>");
+            return;
+        }
+        buildTypeInternal(resBuf, type, size);
 	}
 
 	/**

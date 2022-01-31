@@ -460,17 +460,17 @@ public class ProgramDB extends DomainObjectAdapterDB implements Program, ChangeM
 			language = oldLanguage;
 			return new VersionException(true);
 		}
-		else if (language.getVersion() == languageVersion &&
-			language.getMinorVersion() > languageMinorVersion) {
-			// Minor version change - translator not needed (languageUpgradeTranslator is null)
-			return new VersionException(true);
-		}
-		else if (language.getMinorVersion() != languageMinorVersion ||
-			language.getVersion() != languageVersion) {
-			throw new LanguageNotFoundException(language.getLanguageID(), languageVersion,
-				languageMinorVersion);
-		}
-		return null;
+        if (language.getVersion() == languageVersion &&
+            language.getMinorVersion() > languageMinorVersion) {
+            // Minor version change - translator not needed (languageUpgradeTranslator is null)
+            return new VersionException(true);
+        }
+        if (language.getMinorVersion() != languageMinorVersion ||
+            language.getVersion() != languageVersion) {
+            throw new LanguageNotFoundException(language.getLanguageID(), languageVersion,
+                languageMinorVersion);
+        }
+        return null;
 	}
 
 	/**

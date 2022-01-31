@@ -427,25 +427,25 @@ public class ListingHighlightProvider
 			}
 			return text;
 		}
-		else if (var != null && instr != null &&
-			(var.isStackVariable() || var.isMemoryVariable())) {
-			// NOTE: assumed scoped highlight (no option - although we could
-			// reuse reg option)
+        if (var != null && instr != null &&
+            (var.isStackVariable() || var.isMemoryVariable())) {
+            // NOTE: assumed scoped highlight (no option - although we could
+            // reuse reg option)
 
-			if (SystemUtilities.isEqual(currentHighlightString, text)) {
-				// skip setting the scope; middle-mousing the same text signals
-				// to disable the highlight
-				return text;
-			}
+            if (SystemUtilities.isEqual(currentHighlightString, text)) {
+                // skip setting the scope; middle-mousing the same text signals
+                // to disable the highlight
+                return text;
+            }
 
-			// build up scope using references into refVarnode
-			scope = new AddressSet();
-			writeScope = new AddressSet();
-			scope.addRange(instr.getMinAddress(), instr.getMaxAddress());
-			followScope(var, refVarnode, instr);
-		}
+            // build up scope using references into refVarnode
+            scope = new AddressSet();
+            writeScope = new AddressSet();
+            scope.addRange(instr.getMinAddress(), instr.getMaxAddress());
+            followScope(var, refVarnode, instr);
+        }
 
-		if (text == null) {
+        if (text == null) {
 			text = ltf.getText();
 			int pos = ltf.screenLocationToTextOffset(row, col);
 			text = StringUtilities.findWord(text, pos, UNDERSCORE_AND_PERIOD_OK);
