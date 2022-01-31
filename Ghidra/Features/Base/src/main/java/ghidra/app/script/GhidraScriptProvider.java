@@ -17,6 +17,7 @@ package ghidra.app.script;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.InvocationTargetException;
 import java.util.regex.Pattern;
 
 import generic.jar.ResourceFile;
