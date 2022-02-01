@@ -130,7 +130,7 @@ public class DBTrace extends DBCachedDomainObjectAdapter implements Trace, Trace
 	protected TraceAddressFactory baseAddressFactory;
 
 	protected DBTraceChangeSet traceChangeSet;
-	protected boolean recordChanges = false;
+	protected boolean recordChanges;
 
 	protected DBTraceVariableSnapProgramView programView;
 	protected Map<DBTraceVariableSnapProgramView, Void> programViews = new WeakHashMap<>();
