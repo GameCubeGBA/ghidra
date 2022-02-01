@@ -62,9 +62,9 @@ public class EncodedAnnotation implements StructConverter {
 	public DataType toDataType() throws DuplicateNameException, IOException {
 		StringBuilder builder = new StringBuilder();
 		builder.append("encoded_annotation" + "_");
-		builder.append(typeIndexLength + "_");
-		builder.append(sizeLength + "_");
-		builder.append(elements.size() + "_");
+		builder.append(typeIndexLength).append("_");
+		builder.append(sizeLength).append("_");
+		builder.append(elements.size()).append("_");
 
 		Structure structure = new StructureDataType(builder.toString(), 0);
 
@@ -77,7 +77,7 @@ public class EncodedAnnotation implements StructConverter {
 			DataType dataType = element.toDataType();
 			structure.add(dataType, "element" + index, null);
 			++index;
-			builder.append("" + dataType.getName());
+			builder.append("").append(dataType.getName());
 		}
 
 		structure.setCategoryPath(new CategoryPath("/dex/encoded_annotation"));

@@ -74,14 +74,12 @@ public class MemoryBlocksValidator extends VTPreconditionValidator {
 					numMatches++;
 				}
 				else {
-					warnings.append("Block " + destProgName + ":" + blockName +
-						" doesn't match permissions of " + sourceProgName + ":" + blockName + "\n");
+					warnings.append("Block ").append(destProgName).append(":").append(blockName).append(" doesn't match permissions of ").append(sourceProgName).append(":").append(blockName).append("\n");
 					status = ConditionStatus.Warning;
 				}
 			}
 			else {
-				warnings.append("Block " + destProgName + ":" + blockName + " doesn't appear in " +
-					sourceProgName + "\n");
+				warnings.append("Block ").append(destProgName).append(":").append(blockName).append(" doesn't appear in ").append(sourceProgName).append("\n");
 				status = ConditionStatus.Warning;
 			}
 		}
@@ -91,14 +89,12 @@ public class MemoryBlocksValidator extends VTPreconditionValidator {
 				if (sourceNumBlocks > numMatches) {
 					int addl = sourceNumBlocks - numMatches;
 					String plural = addl > 1 ? "s" : "";
-					warnings.append(sourceProgName + " has " + addl + " more block" + plural +
-						" than " + destProgName + " (but the rest match)\n");
+					warnings.append(sourceProgName).append(" has ").append(addl).append(" more block").append(plural).append(" than ").append(destProgName).append(" (but the rest match)\n");
 				}
 				else if (destNumBlocks > numMatches) {
 					int addl = destNumBlocks - numMatches;
 					String plural = addl > 1 ? "s" : "";
-					warnings.append(destProgName + " has " + addl + " more block" + plural +
-						" than " + sourceProgName + " (but the rest match)\n");
+					warnings.append(destProgName).append(" has ").append(addl).append(" more block").append(plural).append(" than ").append(sourceProgName).append(" (but the rest match)\n");
 				}
 			}
 			if (numMatchingNames == numBlocksNeededForPerfectMatch) {

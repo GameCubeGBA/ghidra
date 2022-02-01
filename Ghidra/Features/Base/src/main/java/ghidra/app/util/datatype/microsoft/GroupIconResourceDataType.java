@@ -96,7 +96,7 @@ public class GroupIconResourceDataType extends DynamicDataType {
 			Msg.debug(this, "Error applying GroupIcon Resource Data Type.");
 		}
 
-        return comps.toArray(new DataTypeComponent[comps.size()]);
+        return comps.toArray(new DataTypeComponent[0]);
 	}
 
 	//This is the first thing in a Group Icon Resource

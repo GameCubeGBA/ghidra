@@ -1424,7 +1424,7 @@ public class StringTableSearchTest extends AbstractGhidraHeadedIntegrationTest {
 		int rows = model.getRowCount();
 		int cols = model.getColumnCount();
 		for (int row = 0; row < rows; row++) {
-			buffy.append("row " + row + ": ");
+			buffy.append("row ").append(row).append(": ");
 			for (int col = 0; col < cols; col++) {
 				Object columnValue = getModelValue(model, row, col);
 				buffy.append(columnValue).append(", ");

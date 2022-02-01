@@ -212,7 +212,7 @@ public class PopulateFidDialog extends DialogComponentProvider {
 					"Failed to open FidDb: " + selectedItem.getPath(), e);
 			}
 		}
-		return list.toArray(new LibraryChoice[list.size()]);
+		return list.toArray(new LibraryChoice[0]);
 	}
 
 	private Component buildDomainFolderChooserField() {
@@ -237,7 +237,7 @@ public class PopulateFidDialog extends DialogComponentProvider {
 
 	private Component buildFidCombo() {
 		List<FidFile> fidFileList = FidFileManager.getInstance().getUserAddedFiles();
-		FidFile[] files = fidFileList.toArray(new FidFile[fidFileList.size()]);
+		FidFile[] files = fidFileList.toArray(new FidFile[0]);
 		fidFileComboBox = new GComboBox<>(files);
 		fidFileComboBox.addActionListener(e -> updateLibraryChoices());
 		return fidFileComboBox;

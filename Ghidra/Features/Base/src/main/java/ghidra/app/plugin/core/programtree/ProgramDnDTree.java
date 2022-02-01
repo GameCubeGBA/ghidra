@@ -870,8 +870,7 @@ public class ProgramDnDTree extends DragNDropTree {
 				//domain object change listener will update the tree...
 			}
 			catch (NotEmptyException e) {
-				sb.append(
-					"\n" + node.getName() + " from " + parentModule.getName() + ": Not Empty");
+				sb.append("\n").append(node.getName()).append(" from ").append(parentModule.getName()).append(": Not Empty");
 			}
 		}
 		return changesMade;
@@ -1579,7 +1578,7 @@ public class ProgramDnDTree extends DragNDropTree {
 			throw new RuntimeException("Nothing to drop!");
 		}
 
-		ProgramNode[] dropNodes = list.toArray(new ProgramNode[list.size()]);
+		ProgramNode[] dropNodes = list.toArray(new ProgramNode[0]);
 		dragDropManager.add(targetNode, dropNodes, dropAction, relativeMousePos);
 	}
 

@@ -89,13 +89,13 @@ public class SleighCompileRegressionTest extends AbstractGenericTest {
                         assertTrue("could not delete actual output file " + actualFile,
                                 actualFile.delete());
                     } else {
-                        summary.append("Sleigh compile mismatch for: " + inputFile + "\n");
+                        summary.append("Sleigh compile mismatch for: ").append(inputFile).append("\n");
                     }
                 } else {
-                    summary.append("Sleigh(Java) compile failed for: " + inputFile + "\n");
+                    summary.append("Sleigh(Java) compile failed for: ").append(inputFile).append("\n");
                 }
             } else {
-                summary.append("Sleigh(C) compile failed for: " + inputFile + "\n");
+                summary.append("Sleigh(C) compile failed for: ").append(inputFile).append("\n");
             }
 //            printMemory();
         }

@@ -314,7 +314,7 @@ public class ReflectionUtilities {
 
 			list.add(element);
 		}
-		return list.toArray(new StackTraceElement[list.size()]);
+		return list.toArray(new StackTraceElement[0]);
 
 	}
 
@@ -403,7 +403,7 @@ public class ReflectionUtilities {
 		Set<Entry<Thread, StackTraceElement[]>> entrySet = allStackTraces.entrySet();
 		StringBuilder builder = new StringBuilder();
 		for (Entry<Thread, StackTraceElement[]> entry : entrySet) {
-			builder.append("Thread: " + entry.getKey().getName()).append('\n');
+			builder.append("Thread: ").append(entry.getKey().getName()).append('\n');
 			StackTraceElement[] value = entry.getValue();
 			for (StackTraceElement stackTraceElement : value) {
 				builder.append('\t').append("at ").append(stackTraceElement).append('\n');

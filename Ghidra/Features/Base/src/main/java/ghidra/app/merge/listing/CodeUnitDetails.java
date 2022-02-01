@@ -100,7 +100,7 @@ public abstract class CodeUnitDetails {
 		else {
 			cuRep = cu.toString();
 		}
-		buf.append(indent + addrRangeStr + "    " + cuRep + NEW_LINE);
+		buf.append(indent).append(addrRangeStr).append("    ").append(cuRep).append(NEW_LINE);
 		return buf.toString();
 	}
 
@@ -148,11 +148,11 @@ public abstract class CodeUnitDetails {
 		StringBuilder buf = new StringBuilder();
         for (Reference ref : refs) {
             if (ref.isExternalReference()) {
-                buf.append(indent + "External Reference " + getRefInfo(pgm, ref) + NEW_LINE);
+                buf.append(indent).append("External Reference ").append(getRefInfo(pgm, ref)).append(NEW_LINE);
             } else if (ref.isStackReference()) {
-                buf.append(indent + "Stack Reference " + getRefInfo(pgm, ref) + NEW_LINE);
+                buf.append(indent).append("Stack Reference ").append(getRefInfo(pgm, ref)).append(NEW_LINE);
             } else {
-                buf.append(indent + "Reference " + getRefInfo(pgm, ref) + NEW_LINE);
+                buf.append(indent).append("Reference ").append(getRefInfo(pgm, ref)).append(NEW_LINE);
             }
         }
 		return buf.toString();

@@ -625,7 +625,7 @@ public class DemangledDataType extends DemangledType {
 		if (isEnum) {
 			buffer.append(ENUM + SPACE);
 			if ((enumType != null) && !("int".equals(enumType))) {
-				buffer.append(enumType + SPACE);
+				buffer.append(enumType).append(SPACE);
 			}
 		}
 		if (isClass) {
@@ -667,11 +667,11 @@ public class DemangledDataType extends DemangledType {
 		}
 
 		if (basedName != null) {
-			buffer.append(SPACE + basedName);
+			buffer.append(SPACE).append(basedName);
 		}
 
 		if ((memberScope != null) && (!memberScope.isEmpty())) {
-			buffer.append(SPACE + memberScope + "::");
+			buffer.append(SPACE).append(memberScope).append("::");
 		}
 
 		if (isUnaligned) {

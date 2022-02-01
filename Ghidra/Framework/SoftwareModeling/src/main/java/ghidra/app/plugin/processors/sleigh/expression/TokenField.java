@@ -240,8 +240,8 @@ public class TokenField extends PatternValue {
 		if (bigendian) {
 			sb.append(", bigendian");
 		}
-		sb.append(", bytes " + bytestart + "-" + byteend);
-		sb.append(", shift=" + shift);
+		sb.append(", bytes ").append(bytestart).append("-").append(byteend);
+		sb.append(", shift=").append(shift);
 		sb.append("]");
 		return sb.toString();
 	}

@@ -126,7 +126,7 @@ public class PdbQuery {
 			AbstractMsType typeRecord = pdb.getTypeRecord(recordNumber);
 			String recordString = typeRecord.toString();
 			if (recordString.contains(searchString)) {
-				results.append("Data number " + indexNumber + ":\n");
+				results.append("Data number ").append(indexNumber).append(":\n");
 				results.append(recordString);
 				results.append('\n');
 			}
@@ -165,7 +165,7 @@ public class PdbQuery {
 			AbstractMsType typeRecord = pdb.getTypeRecord(recordNumber);
 			String recordString = typeRecord.toString();
 			if (recordString.contains(searchString)) {
-				results.append("Item number " + indexNumber + ":\n");
+				results.append("Item number ").append(indexNumber).append(":\n");
 				results.append(recordString);
 				results.append('\n');
 			}
@@ -216,7 +216,7 @@ public class PdbQuery {
 					AbstractMsSymbol symbol = entry.getValue();
 					String symbolString = symbol.toString();
 					if (symbolString.contains(searchString)) {
-						results.append("Module " + module + ", Offset " + entry.getKey() + ":\n");
+						results.append("Module ").append(module).append(", Offset ").append(entry.getKey()).append(":\n");
 						results.append(symbolString);
 						results.append('\n');
 					}

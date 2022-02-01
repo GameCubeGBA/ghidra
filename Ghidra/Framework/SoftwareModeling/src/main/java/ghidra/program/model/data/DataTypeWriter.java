@@ -452,11 +452,11 @@ public class DataTypeWriter {
 		String compositeType = composite instanceof Structure ? "struct" : "union";
 
 		StringBuilder sb = new StringBuilder();
-		sb.append(compositeType + " " + composite.getDisplayName() + " {");
+		sb.append(compositeType).append(" ").append(composite.getDisplayName()).append(" {");
 
 		String descrip = composite.getDescription();
 		if (descrip != null && !descrip.isEmpty()) {
-			sb.append(" " + comment(descrip));
+			sb.append(" ").append(comment(descrip));
 		}
 		sb.append(EOL);
 
@@ -493,7 +493,7 @@ public class DataTypeWriter {
 
 		String comment = component.getComment();
 		if (comment != null && !comment.isEmpty()) {
-			sb.append(" " + comment(comment));
+			sb.append(" ").append(comment(comment));
 		}
 		sb.append(EOL);
 	}
@@ -568,7 +568,7 @@ public class DataTypeWriter {
 		if (enumName.startsWith("define_") && enumName.length() > 7 && enumm.getCount() == 1 &&
 			enumm.getLength() == 8) {
 			long val = enumm.getValues()[0];
-			writer.append("#define " + enumName.substring(7) + " " + Long.toString(val));
+			writer.append("#define ").append(enumName.substring(7)).append(" ").append(Long.toString(val));
 			writer.write(EOL);
 			writer.write(EOL);
 			return;

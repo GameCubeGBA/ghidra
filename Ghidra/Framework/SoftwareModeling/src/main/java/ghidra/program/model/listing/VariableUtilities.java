@@ -669,7 +669,7 @@ public class VariableUtilities {
 		maxConflictVarDetails = Math.min(conflicts.size(), maxConflictVarDetails);
 
 		StringBuilder msg = new StringBuilder();
-		msg.append("Variable storage conflict between " + newStorage + " and: ");
+		msg.append("Variable storage conflict between ").append(newStorage).append(" and: ");
 		for (int i = 0; i < maxConflictVarDetails; i++) {
 			if (i != 0) {
 				msg.append(", ");

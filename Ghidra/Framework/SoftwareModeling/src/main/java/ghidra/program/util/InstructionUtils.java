@@ -44,40 +44,34 @@ public class InstructionUtils {
 
 		StringBuilder textBuf = new StringBuilder("Instruction Summary");
 		textBuf.append("\n-------------------");
-		textBuf.append("\nMnemonic          : " + instruction.getMnemonicString());
-		textBuf.append("\nNumber of Operands: " + instruction.getNumOperands());
-		textBuf.append("\nAddress           : " + instruction.getMinAddress().toString(true));
+		textBuf.append("\nMnemonic          : ").append(instruction.getMnemonicString());
+		textBuf.append("\nNumber of Operands: ").append(instruction.getNumOperands());
+		textBuf.append("\nAddress           : ").append(instruction.getMinAddress().toString(true));
 		FlowType flowType = instruction.getFlowType();
-		textBuf.append("\nFlow Type         : " + flowType.toString());
+		textBuf.append("\nFlow Type         : ").append(flowType.toString());
 		FlowOverride flowOverride = instruction.getFlowOverride();
 		if (flowOverride != FlowOverride.NONE && instruction.getPrototype()
 				.getFlowType(instruction.getInstructionContext()) != flowType) {
-			textBuf.append("\n  >>> reflects " + flowOverride + " flow override");
+			textBuf.append("\n  >>> reflects ").append(flowOverride).append(" flow override");
 		}
 		Address fallAddr = instruction.getFallThrough();
-		textBuf.append("\nFallthrough       : " + (fallAddr != null ? fallAddr : "<none>"));
+		textBuf.append("\nFallthrough       : ").append(fallAddr != null ? fallAddr : "<none>");
 		if (instruction.isFallThroughOverridden()) {
 			textBuf.append("\n  >>> reflects fallthrough override");
 		}
-		textBuf.append("\nDelay slot depth  : " + instruction.getDelaySlotDepth() +
-			(instruction.isInDelaySlot() ? " in slot" : ""));
-		textBuf.append(
-			"\nHash              : " + Integer.toHexString(instruction.getPrototype().hashCode()))
+		textBuf.append("\nDelay slot depth  : ").append(instruction.getDelaySlotDepth()).append(instruction.isInDelaySlot() ? " in slot" : "");
+		textBuf.append("\nHash              : ").append(Integer.toHexString(instruction.getPrototype().hashCode()))
 				.append('\n');
 
-		textBuf.append("\nInput Objects:\n" +
-			getString(getFormatedInstructionObjects(instruction, true), true));
-		textBuf.append("\nResult Objects:\n" +
-			getString(getFormatedInstructionObjects(instruction, false), true));
-		textBuf.append(
-			"\nConstructor Line #'s:\n" + getString(debug.getConstructorLineNumbers(), true))
+		textBuf.append("\nInput Objects:\n").append(getString(getFormatedInstructionObjects(instruction, true), true));
+		textBuf.append("\nResult Objects:\n").append(getString(getFormatedInstructionObjects(instruction, false), true));
+		textBuf.append("\nConstructor Line #'s:\n").append(getString(debug.getConstructorLineNumbers(), true))
 				.append('\n');
-		textBuf.append("\nByte Length : " + instruction.getLength());
+		textBuf.append("\nByte Length : ").append(instruction.getLength());
 		try {
-			textBuf.append(
-				"\nInstr Bytes : " + SleighDebugLogger.getFormattedBytes(instruction.getBytes()));
-			textBuf.append("\nMask        : " + debug.getFormattedInstructionMask(-1));
-			textBuf.append("\nMasked Bytes: " + debug.getFormattedMaskedValue(-1)).append('\n');
+			textBuf.append("\nInstr Bytes : ").append(SleighDebugLogger.getFormattedBytes(instruction.getBytes()));
+			textBuf.append("\nMask        : ").append(debug.getFormattedInstructionMask(-1));
+			textBuf.append("\nMasked Bytes: ").append(debug.getFormattedMaskedValue(-1)).append('\n');
 		}
 		catch (MemoryAccessException e) {
 			// ignore
@@ -201,7 +195,7 @@ public class InstructionUtils {
 				String msbStr = StringUtilities.pad(Integer.toString(msb), '0', 2);
 				String leftStr = reg.getName() + "(" + lsbStr + "," + msbStr + ")";
 				leftStr = StringUtilities.pad(leftStr, ' ', -leftStr.length() - pad);
-				buf.append(leftStr + " == 0x" + actual.toString(16));
+				buf.append(leftStr).append(" == 0x").append(actual.toString(16));
 			}
 		}
 		return buf.toString();

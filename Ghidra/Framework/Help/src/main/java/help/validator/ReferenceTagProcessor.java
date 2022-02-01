@@ -86,15 +86,13 @@ public class ReferenceTagProcessor extends TagProcessor {
                                 new HREF(help, file, tagAttributes.get("href"), lineNum));
                     } catch (URISyntaxException e) {
                         errorCount++;
-                        errors.append(
-                                "Malformed Anchor Tag at (line " + lineNum + "): " + htmlFile + EOL);
+                        errors.append("Malformed Anchor Tag at (line ").append(lineNum).append("): ").append(htmlFile).append(EOL);
                     }
                 } else if (tagAttributes.containsKey("name")) {
                     anchorManager.addAnchor(file, tagAttributes.get("name"), lineNum);
                 } else {
                     errorCount++;
-                    errors.append("Bad Anchor Tag - unexpected attribtute (line " + lineNum + "): " +
-                            htmlFile + EOL);
+                    errors.append("Bad Anchor Tag - unexpected attribtute (line ").append(lineNum).append("): ").append(htmlFile).append(EOL);
                 }
                 break;
             case "img":
@@ -104,12 +102,11 @@ public class ReferenceTagProcessor extends TagProcessor {
                                 new IMG(help, file, tagAttributes.get("src"), lineNum));
                     } catch (URISyntaxException e) {
                         errorCount++;
-                        errors.append("Malformed IMG Tag at (line " + lineNum + "): " + htmlFile + EOL);
+                        errors.append("Malformed IMG Tag at (line ").append(lineNum).append("): ").append(htmlFile).append(EOL);
                     }
                 } else {
                     errorCount++;
-                    errors.append("Bad IMG Tag - unexpected attribtute (line " + lineNum + "): " +
-                            htmlFile + EOL);
+                    errors.append("Bad IMG Tag - unexpected attribtute (line ").append(lineNum).append("): ").append(htmlFile).append(EOL);
                 }
                 break;
             case "link":
@@ -169,12 +166,12 @@ public class ReferenceTagProcessor extends TagProcessor {
 
 		if (title == null) {
 			errorCount++;
-			errors.append("Missing TITLE in: " + htmlFile + EOL);
+			errors.append("Missing TITLE in: ").append(htmlFile).append(EOL);
 		}
 
 		if (styleSheets.isEmpty()) {
 			errorCount++;
-			errors.append("Missing Stylesheet in: " + htmlFile + EOL);
+			errors.append("Missing Stylesheet in: ").append(htmlFile).append(EOL);
 		}
 
 		boolean hasDefaultStyleSheet = false;
@@ -187,8 +184,7 @@ public class ReferenceTagProcessor extends TagProcessor {
 
 		if (!hasDefaultStyleSheet) {
 			errorCount++;
-			errors.append("Incorrect stylesheet defined - none match " + defaultStyleSheet +
-				" in file " + htmlFile + EOL);
+			errors.append("Incorrect stylesheet defined - none match ").append(defaultStyleSheet).append(" in file ").append(htmlFile).append(EOL);
 		}
 	}
 

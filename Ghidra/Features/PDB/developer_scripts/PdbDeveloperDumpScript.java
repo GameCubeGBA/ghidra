@@ -80,8 +80,7 @@ public class PdbDeveloperDumpScript extends GhidraScript {
 	}
 
 	private void outputHeaderMessage(BufferedWriter bufferedWriter, String name) throws Exception {
-		bufferedWriter.append(getClass().getSimpleName() + " dump of: " + name +
-			"\nWARNING: FORMAT SUBJECT TO CHANGE WITHOUT NOTICE--DO NOT PARSE\n\n");
+		bufferedWriter.append(getClass().getSimpleName()).append(" dump of: ").append(name).append("\nWARNING: FORMAT SUBJECT TO CHANGE WITHOUT NOTICE--DO NOT PARSE\n\n");
 	}
 
 }

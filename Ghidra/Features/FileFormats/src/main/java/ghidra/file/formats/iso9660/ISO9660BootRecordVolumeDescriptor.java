@@ -61,12 +61,11 @@ public class ISO9660BootRecordVolumeDescriptor extends ISO9660BaseVolume {
 	public String toString() {
 		StringBuilder buff = new StringBuilder();
 
-		buff.append("Type: 0x" + Integer.toHexString(super.getTypeCode()) + " => " +
-			getTypeCodeString() + "\n");
-		buff.append("Identifier: " + new String(super.getIdentifier()).trim() + "\n");
-		buff.append("Version: 0x" + Integer.toHexString(super.getVersion()) + "\n");
-		buff.append("Boot System Identifier: " + new String(bootSystemIdentifier).trim() + "\n");
-		buff.append("Boot Identifier: " + new String(bootIdentifier).trim() + "\n");
+		buff.append("Type: 0x").append(Integer.toHexString(super.getTypeCode())).append(" => ").append(getTypeCodeString()).append("\n");
+		buff.append("Identifier: ").append(new String(super.getIdentifier()).trim()).append("\n");
+		buff.append("Version: 0x").append(Integer.toHexString(super.getVersion())).append("\n");
+		buff.append("Boot System Identifier: ").append(new String(bootSystemIdentifier).trim()).append("\n");
+		buff.append("Boot Identifier: ").append(new String(bootIdentifier).trim()).append("\n");
 
 		return buff.toString();
 	}

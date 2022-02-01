@@ -89,7 +89,7 @@ public class DeveloperDumpMDMangParseInfoScript extends GhidraScript {
 		}
 
 		StringBuilder builder = new StringBuilder();
-		builder.append("\nName: " + name + "\n");
+		builder.append("\nName: ").append(name).append("\n");
 		MDMangParseInfo demangler = new MDMangParseInfo();
 		try {
 			demangler.demangle(name, false);

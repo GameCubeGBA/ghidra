@@ -386,10 +386,9 @@ public class ExportDataDirectory extends DataDirectory {
 	@Override
 	public String toString() {
 		StringBuilder buff = new StringBuilder();
-		buff.append("\t\t" + "Export Directory: [" + super.toString() + "]" + "\n");
+		buff.append("\t\t" + "Export Directory: [").append(super.toString()).append("]").append("\n");
 		for (ExportInfo info : exports) {
-			buff.append("\t\t\t" + "0x" + Long.toHexString(info.getAddress()) + "  " +
-				info.getOrdinal() + "  " + info.getName() + "\n");
+			buff.append("\t\t\t" + "0x").append(Long.toHexString(info.getAddress())).append("  ").append(info.getOrdinal()).append("  ").append(info.getName()).append("\n");
 		}
 		return buff.toString();
 	}

@@ -99,7 +99,7 @@ public class MenuResourceDataType extends DynamicDataType {
 			Msg.error(this, "buffer error: " + e.getMessage(), e);
 		}
 
-        return comps.toArray(new DataTypeComponent[comps.size()]);
+        return comps.toArray(new DataTypeComponent[0]);
 	}
 
 	//adds initial MENUITEM_TEMPLATE_HEADER structure

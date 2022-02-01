@@ -230,7 +230,7 @@ public class TableComponentProvider<T> extends ComponentProviderAdapter
 			buffer.append("    (1 entry)");
 		}
 		else if (n > 1) {
-			buffer.append("    (" + n + " entries)");
+			buffer.append("    (").append(n).append(" entries)");
 		}
 		return buffer.toString();
 	}

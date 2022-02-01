@@ -54,7 +54,7 @@ public class PcodeFrame {
 		StringBuilder sb = new StringBuilder("<p-code frame: index=");
 		sb.append(index);
 		if (branched != -1) {
-			sb.append(" branched=" + branched);
+			sb.append(" branched=").append(branched);
 		}
 		sb.append(" {");
 		for (int i = 0; i < code.size(); i++) {
@@ -69,8 +69,7 @@ public class PcodeFrame {
 				sb.append("   ");
 			}
 			PcodeOp op = code.get(i);
-			sb.append(
-				op.getSeqnum() + ": " + PcodeProgram.opToString(language, op, false, useropNames));
+			sb.append(op.getSeqnum()).append(": ").append(PcodeProgram.opToString(language, op, false, useropNames));
 		}
 		if (index == code.size()) {
 			sb.append("\n *> fall-through");

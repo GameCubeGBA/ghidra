@@ -496,21 +496,17 @@ public class SectionHeader implements StructConverter, ByteArrayConverter {
 		StringBuilder buff = new StringBuilder();
 
 		buff.append("Section Header:" + "\n");
-		buff.append("\t" + "name:                 " + name + "\n");
-		buff.append("\t" + "physicalAddress:      " + Integer.toHexString(physicalAddress) + "\n");
-		buff.append("\t" + "virtualSize:          " + Integer.toHexString(virtualSize) + "\n");
-		buff.append("\t" + "virtualAddress:       " + Integer.toHexString(virtualAddress) + "\n");
-		buff.append("\t" + "sizeOfRawData:        " + Integer.toHexString(sizeOfRawData) + "\n");
-		buff.append("\t" + "pointerToRawData:     " + Integer.toHexString(pointerToRawData) + "\n");
-		buff.append(
-			"\t" + "pointerToRelocations: " + Integer.toHexString(pointerToRelocations) + "\n");
-		buff.append(
-			"\t" + "pointerToLinenumbers: " + Integer.toHexString(pointerToLinenumbers) + "\n");
-		buff.append(
-			"\t" + "numberOfRelocations:  " + Integer.toHexString(numberOfRelocations) + "\n");
-		buff.append(
-			"\t" + "numberOfLinenumbers:  " + Integer.toHexString(numberOfLinenumbers) + "\n");
-		buff.append("\t" + "characteristics:      " + Integer.toHexString(characteristics) + "\n");
+		buff.append("\t" + "name:                 ").append(name).append("\n");
+		buff.append("\t" + "physicalAddress:      ").append(Integer.toHexString(physicalAddress)).append("\n");
+		buff.append("\t" + "virtualSize:          ").append(Integer.toHexString(virtualSize)).append("\n");
+		buff.append("\t" + "virtualAddress:       ").append(Integer.toHexString(virtualAddress)).append("\n");
+		buff.append("\t" + "sizeOfRawData:        ").append(Integer.toHexString(sizeOfRawData)).append("\n");
+		buff.append("\t" + "pointerToRawData:     ").append(Integer.toHexString(pointerToRawData)).append("\n");
+		buff.append("\t" + "pointerToRelocations: ").append(Integer.toHexString(pointerToRelocations)).append("\n");
+		buff.append("\t" + "pointerToLinenumbers: ").append(Integer.toHexString(pointerToLinenumbers)).append("\n");
+		buff.append("\t" + "numberOfRelocations:  ").append(Integer.toHexString(numberOfRelocations)).append("\n");
+		buff.append("\t" + "numberOfLinenumbers:  ").append(Integer.toHexString(numberOfLinenumbers)).append("\n");
+		buff.append("\t" + "characteristics:      ").append(Integer.toHexString(characteristics)).append("\n");
 
 		return buff.toString();
 	}

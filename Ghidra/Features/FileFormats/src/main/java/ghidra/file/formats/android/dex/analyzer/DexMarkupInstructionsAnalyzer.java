@@ -194,7 +194,7 @@ public class DexMarkupInstructionsAnalyzer extends FileFormatAnalyzer {
 			StringTokenizer tokenizer = new StringTokenizer(str, "/");
 			while (tokenizer.hasMoreTokens()) {
 				String token = tokenizer.nextToken();
-				builder.append(token + "::");
+				builder.append(token).append("::");
 			}
 		}
 		builder.append(methodName);

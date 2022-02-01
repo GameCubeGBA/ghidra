@@ -175,7 +175,7 @@ public class CommentUtils {
 			}
 		}
 
-		return new CompositeFieldElement(fields.toArray(new FieldElement[fields.size()]));
+		return new CompositeFieldElement(fields.toArray(new FieldElement[0]));
 	}
 
 	/**

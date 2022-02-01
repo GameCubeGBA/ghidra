@@ -274,7 +274,7 @@ public class VTSessionDB extends DomainObjectAdapterDB implements VTSession, VTC
 				sourceProgram = null;
 			}
 			else {
-				buffer.append("\tUnable to open source program \"" + sourceFile + "\"\n");
+				buffer.append("\tUnable to open source program \"").append(sourceFile).append("\"\n");
 			}
 
 			if (destinationProgram != null) {
@@ -282,7 +282,7 @@ public class VTSessionDB extends DomainObjectAdapterDB implements VTSession, VTC
 				destinationProgram = null;
 			}
 			else {
-				buffer.append("\tUnable to open destination program \"" + destinationFile + "\"\n");
+				buffer.append("\tUnable to open destination program \"").append(destinationFile).append("\"\n");
 			}
 
 			throw new RuntimeException(buffer.toString());

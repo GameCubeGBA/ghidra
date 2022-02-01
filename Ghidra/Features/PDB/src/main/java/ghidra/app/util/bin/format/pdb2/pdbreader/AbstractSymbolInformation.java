@@ -187,7 +187,7 @@ public abstract class AbstractSymbolInformation {
 	 */
 	protected void dumpHashRecords(StringBuilder builder) {
 		builder.append("HashRecords-------------------------------------------------\n");
-		builder.append("numHashRecords: " + hashRecords.size() + "\n");
+		builder.append("numHashRecords: ").append(hashRecords.size()).append("\n");
 		for (SymbolHashRecord record : hashRecords) {
 			builder.append(
 				String.format("0X%08X  0X%04X\n", record.getOffset(), record.getReferenceCount()));

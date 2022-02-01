@@ -61,7 +61,7 @@ public class DumpAllSymbolsDemangledScript extends GhidraScript {
 				name = demangled;
 			}
 
-			bufferedWriter.append(addr + " " + name + "\n");
+			bufferedWriter.append(String.valueOf(addr)).append(" ").append(name).append("\n");
 		}
 		bufferedWriter.close();
 	}

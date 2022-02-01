@@ -363,8 +363,7 @@ public abstract class AbstractVTCorrelatorTest extends AbstractGhidraHeadedInteg
 				if (buffy.length() > 0) {
 					buffy.append(", ");
 				}
-				buffy.append("[src: " + expectedMatch.getSource() + " dst: " +
-					expectedMatch.getDestination() + "]");
+				buffy.append("[src: ").append(expectedMatch.getSource()).append(" dst: ").append(expectedMatch.getDestination()).append("]");
 			}
 		}
 		if (buffy.length() > 0) {

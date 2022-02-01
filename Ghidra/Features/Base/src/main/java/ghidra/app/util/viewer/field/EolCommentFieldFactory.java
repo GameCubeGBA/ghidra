@@ -361,7 +361,7 @@ public class EolCommentFieldFactory extends FieldFactory {
 			elementList.addAll(autoCommentFieldElements);
 		}
 
-		FieldElement[] fieldElements = elementList.toArray(new FieldElement[elementList.size()]);
+		FieldElement[] fieldElements = elementList.toArray(new FieldElement[0]);
 		if (fieldElements.length == 0) {
 			return null;
 		}
@@ -434,7 +434,7 @@ public class EolCommentFieldFactory extends FieldFactory {
 		if (lastComment >= 0) {
 			list.add(comments[lastComment]);
 		}
-		comments = list.toArray(new String[list.size()]);
+		comments = list.toArray(new String[0]);
 		return comments;
 	}
 
@@ -596,7 +596,7 @@ public class EolCommentFieldFactory extends FieldFactory {
 		StringBuilder buf = new StringBuilder(comments[0]);
 
 		for (int i = 1; i < comments.length; i++) {
-			buf.append(separatorChar + comments[i]);
+			buf.append(separatorChar).append(comments[i]);
 		}
 		return buf.toString();
 	}

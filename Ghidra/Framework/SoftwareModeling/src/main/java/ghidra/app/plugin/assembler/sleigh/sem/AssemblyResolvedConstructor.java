@@ -536,15 +536,15 @@ public class AssemblyResolvedConstructor extends AssemblyResolution {
 	protected String childrenToString(String indent) {
 		StringBuilder sb = new StringBuilder();
 		if (super.hasChildren()) {
-			sb.append(super.childrenToString(indent) + "\n");
+			sb.append(super.childrenToString(indent)).append("\n");
 		}
 		for (AssemblyResolvedBackfill bf : backfills) {
 			sb.append(indent);
-			sb.append("backfill: " + bf + "\n");
+			sb.append("backfill: ").append(bf).append("\n");
 		}
 		for (AssemblyResolvedConstructor f : forbids) {
 			sb.append(indent);
-			sb.append("forbidden: " + f + "\n");
+			sb.append("forbidden: ").append(f).append("\n");
 		}
 		return sb.substring(0, sb.length() - 1);
 	}

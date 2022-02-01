@@ -125,7 +125,7 @@ public class AddToSessionTask extends Task {
 				StringBuilder messageBuffer = new StringBuilder(
 					"No matches were found by the following program correlators: ");
 				for (VTProgramCorrelator vtProgramCorrelator : noMatchList) {
-					messageBuffer.append("\n  " + vtProgramCorrelator.getName());
+					messageBuffer.append("\n  ").append(vtProgramCorrelator.getName());
 				}
 				Msg.showInfo(this, null, "Version Tracking: Add To Session",
 					messageBuffer.toString());

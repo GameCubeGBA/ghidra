@@ -308,7 +308,7 @@ class CodeUnitMerger extends AbstractListingMerger {
 				manualSet.add(addRange);
 			}
 		}
-		return list.toArray(new AddressRange[list.size()]);
+		return list.toArray(new AddressRange[0]);
 	}
 
 	/**
@@ -639,33 +639,29 @@ class CodeUnitMerger extends AbstractListingMerger {
 			count++;
 		}
 		if (conflictCodeUnits.intersects(min2, max2)) {
-			conflictBuf.append(
-				getConflictPrefix(conflictBuf) + "code units (including any overrides)");
+			conflictBuf.append(getConflictPrefix(conflictBuf)).append("code units (including any overrides)");
 			count++;
 		}
 		if ((conflictByteCU.intersects(min2, max2)) || (conflictCUByte.intersects(min2, max2))) {
-			conflictBuf.append(
-				getConflictPrefix(conflictBuf) + "byte versus code unit (including any overrides)");
+			conflictBuf.append(getConflictPrefix(conflictBuf)).append("byte versus code unit (including any overrides)");
 			count++;
 		}
 		if ((conflictByteEquate.intersects(min2, max2)) ||
 			(conflictEquateByte.intersects(min2, max2))) {
-			conflictBuf.append(getConflictPrefix(conflictBuf) + "byte versus equate");
+			conflictBuf.append(getConflictPrefix(conflictBuf)).append("byte versus equate");
 			count++;
 		}
 		if ((conflictEquateCU.intersects(min2, max2)) ||
 			(conflictCUEquate.intersects(min2, max2))) {
-			conflictBuf.append(getConflictPrefix(conflictBuf) +
-				"equate versus code unit (including any overrides)");
+			conflictBuf.append(getConflictPrefix(conflictBuf)).append("equate versus code unit (including any overrides)");
 			count++;
 		}
 		if ((conflictRefCU.intersects(min2, max2)) || (conflictCURef.intersects(min2, max2))) {
-			conflictBuf.append(getConflictPrefix(conflictBuf) +
-				"reference versus code unit (including any overrides)");
+			conflictBuf.append(getConflictPrefix(conflictBuf)).append("reference versus code unit (including any overrides)");
 			count++;
 		}
 		if (conflictBuf.length() > 0) {
-			buf.append("Conflicting change" + ((count > 1) ? "s are" : " is") + ": ");
+			buf.append("Conflicting change").append((count > 1) ? "s are" : " is").append(": ");
 			buf.append(conflictBuf);
 			buf.append(".");
 		}

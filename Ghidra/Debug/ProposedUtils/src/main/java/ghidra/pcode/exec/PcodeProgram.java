@@ -196,8 +196,7 @@ public class PcodeProgram {
 	public String toString() {
 		StringBuilder sb = new StringBuilder("<" + getHead() + ":");
 		for (PcodeOp op : code) {
-			sb.append(
-				"\n  " + op.getSeqnum() + ": " + opToString(language, op, false, useropNames));
+			sb.append("\n  ").append(op.getSeqnum()).append(": ").append(opToString(language, op, false, useropNames));
 		}
 		sb.append("\n>");
 		return sb.toString();

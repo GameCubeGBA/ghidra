@@ -132,7 +132,7 @@ public class VdexHeader_12 extends VdexHeader {
 
 	@Override
 	public int[] getDexChecksums() {
-		return ArrayUtils.toPrimitive(checksums.toArray(new Integer[checksums.size()]));
+		return ArrayUtils.toPrimitive(checksums.toArray(new Integer[0]));
 	}
 
 	@Override

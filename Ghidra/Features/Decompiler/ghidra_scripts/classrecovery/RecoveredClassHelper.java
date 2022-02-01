@@ -3119,7 +3119,7 @@ public class RecoveredClassHelper {
                 }
             }
 		}
-		parentStringBuffer.append("class " + classString);
+		parentStringBuffer.append("class ").append(classString);
 		return parentStringBuffer;
 	}
 

@@ -346,7 +346,7 @@ public class CompositeDataTypeHTMLRepresentation extends HTMLDataTypeRepresentat
 			StringBuilder buffer) {
 
 		buffer.append(BR);
-		buffer.append(ALIGNMENT_VALUE_PREFIX + alignmentValueString);
+		buffer.append(ALIGNMENT_VALUE_PREFIX).append(alignmentValueString);
 
 		return buffer;
 	}

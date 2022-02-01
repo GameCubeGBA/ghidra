@@ -156,7 +156,7 @@ public class ListingHighlightProvider
 		if (highlightList.size() < 1) {
 			return NO_HIGHLIGHTS;
 		}
-		return highlightList.toArray(new Highlight[highlightList.size()]);
+		return highlightList.toArray(new Highlight[0]);
 	}
 
 	private boolean isWholeWord(String text, int start, int end) {
@@ -864,7 +864,7 @@ public class ListingHighlightProvider
 			varnodeOffset = 0;
 		}
 
-		return varnodes.toArray(new Varnode[varnodes.size()]);
+		return varnodes.toArray(new Varnode[0]);
 	}
 
 	private void setupHighlightOptions() {

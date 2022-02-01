@@ -242,7 +242,7 @@ public class VerticalChoicesPanel extends ConflictPanel {
 		if (list == null || list.isEmpty()) {
 			return new JComponent[0];
 		}
-        return list.toArray(new JComponent[list.size()]);
+        return list.toArray(new JComponent[0]);
 	}
 
 	private void setRowComponent(JComponent comp, int row, int column, Insets insets) {

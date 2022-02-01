@@ -204,10 +204,10 @@ public class ObjectiveC2_DecompilerMessageAnalyzer extends AbstractAnalyzer {
 		currentMethodName += currentMethodName.contains(":") ? "]" : " ]";
 		String[] split = currentMethodName.split(":");
 		StringBuilder builder = new StringBuilder();
-		builder.append("[" + currentClassName + " " + split[0]);
+		builder.append("[").append(currentClassName).append(" ").append(split[0]);
 		for (int i = 1; i < split.length; i++) {
 			try {
-				builder.append(":" + parameters.get(i - 1) + " ");
+				builder.append(":").append(parameters.get(i - 1)).append(" ");
 			}
 			catch (Exception e) {
 				// Decompiler found less params than the function should really

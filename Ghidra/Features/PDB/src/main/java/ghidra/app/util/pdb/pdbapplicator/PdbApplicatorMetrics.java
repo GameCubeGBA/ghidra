@@ -232,9 +232,7 @@ public class PdbApplicatorMetrics {
 	private String reportNonappliableTypes() {
 		StringBuilder builder = new StringBuilder();
 		for (Class<? extends AbstractMsType> clazz : cannotApplyTypes) {
-			builder.append(
-				"Could not apply one or more instances of an unsupported PDB data type: " +
-					clazz.getSimpleName() + "\n");
+			builder.append("Could not apply one or more instances of an unsupported PDB data type: ").append(clazz.getSimpleName()).append("\n");
 		}
 		return builder.toString();
 	}
@@ -242,7 +240,7 @@ public class PdbApplicatorMetrics {
 	private String reportUnunsualThisPointerTypes() {
 		StringBuilder builder = new StringBuilder();
 		for (Class<? extends AbstractMsType> clazz : unexpectedMemberFunctionThisPointerTypes) {
-			builder.append("Unusual this pointer type: " + clazz.getSimpleName() + "\n");
+			builder.append("Unusual this pointer type: ").append(clazz.getSimpleName()).append("\n");
 		}
 		return builder.toString();
 	}
@@ -250,7 +248,7 @@ public class PdbApplicatorMetrics {
 	private String reportUnunsualThisPointerUnderlyingTypes() {
 		StringBuilder builder = new StringBuilder();
 		for (Class<? extends AbstractMsType> clazz : unexpectedMemberFunctionThisPointerUnderlyingTypes) {
-			builder.append("Unusual this pointer underlying type: " + clazz.getSimpleName() + "\n");
+			builder.append("Unusual this pointer underlying type: ").append(clazz.getSimpleName()).append("\n");
 		}
 		return builder.toString();
 	}
@@ -258,7 +256,7 @@ public class PdbApplicatorMetrics {
 	private String reportUnunsualMemberFunctionContainerTypes() {
 		StringBuilder builder = new StringBuilder();
 		for (Class<? extends AbstractMsType> clazz : unexpectedMemberFunctionContainerTypes) {
-			builder.append("Unusual member function container: " + clazz.getSimpleName() + "\n");
+			builder.append("Unusual member function container: ").append(clazz.getSimpleName()).append("\n");
 		}
 		return builder.toString();
 	}
@@ -266,9 +264,7 @@ public class PdbApplicatorMetrics {
 	private String reportNonappliableSymbols() {
 		StringBuilder builder = new StringBuilder();
 		for (Class<? extends AbstractMsSymbol> clazz : cannotApplySymbols) {
-			builder.append(
-				"Could not apply one or more instances of an unsupported PDB symbol type: " +
-					clazz.getSimpleName() + "\n");
+			builder.append("Could not apply one or more instances of an unsupported PDB symbol type: ").append(clazz.getSimpleName()).append("\n");
 		}
 		return builder.toString();
 	}
@@ -276,8 +272,7 @@ public class PdbApplicatorMetrics {
 	private String reportUnexpectedPublicSymbols() {
 		StringBuilder builder = new StringBuilder();
 		for (Class<? extends AbstractMsSymbol> clazz : unexpectedPublicSymbols) {
-			builder.append("Unexpected one or more instances of PDB public symbol type: " +
-				clazz.getSimpleName() + "\n");
+			builder.append("Unexpected one or more instances of PDB public symbol type: ").append(clazz.getSimpleName()).append("\n");
 		}
 		return builder.toString();
 	}
@@ -285,8 +280,7 @@ public class PdbApplicatorMetrics {
 	private String reportUnexpectedGlobalSymbols() {
 		StringBuilder builder = new StringBuilder();
 		for (Class<? extends AbstractMsSymbol> clazz : unexpectedGlobalSymbols) {
-			builder.append("Unexpected one or more instances of PDB global symbol type: " +
-				clazz.getSimpleName() + "\n");
+			builder.append("Unexpected one or more instances of PDB global symbol type: ").append(clazz.getSimpleName()).append("\n");
 		}
 		return builder.toString();
 	}

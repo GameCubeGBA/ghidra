@@ -399,7 +399,7 @@ public class FieldFormatModel {
                 }
             }
         }
-		return list.toArray(new FieldFactory[list.size()]);
+		return list.toArray(new FieldFactory[0]);
 	}
 
 	public FieldFactory[] getAllFactories() {

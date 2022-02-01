@@ -231,12 +231,10 @@ public class DiffApplyTestAdapter extends DiffTestAdapter {
 		AddressSet unexpectedlySelected = currentSelection.subtract(expectedSelection);
 		StringBuilder buf = new StringBuilder();
 		if (!missingFromSelection.isEmpty()) {
-			buf.append("\nSelection expected the following addresses but they are missing: \n" +
-				missingFromSelection.toString());
+			buf.append("\nSelection expected the following addresses but they are missing: \n").append(missingFromSelection.toString());
 		}
 		if (!unexpectedlySelected.isEmpty()) {
-			buf.append("\nSelection unexpectedly contains the following addresses: \n" +
-				unexpectedlySelected.toString());
+			buf.append("\nSelection unexpectedly contains the following addresses: \n").append(unexpectedlySelected.toString());
 		}
 		if (buf.length() > 0) {
 			String message = buf.toString();
@@ -282,20 +280,20 @@ public class DiffApplyTestAdapter extends DiffTestAdapter {
 		}
 		StringBuilder buf = new StringBuilder();
 		if (!missingList.isEmpty()) {
-			buf.append(type + "s are missing at ");
+			buf.append(type).append("s are missing at ");
 			buf.append(missingList.get(0).toString());
 			int numMissing = missingList.size();
 			for (int index = 1; index < numMissing; index++) {
-				buf.append(", " + missingList.get(index).toString());
+				buf.append(", ").append(missingList.get(index).toString());
 			}
 			buf.append(".\n");
 		}
 		if (!extraList.isEmpty()) {
-			buf.append("Unexpectedly found " + type + "s at ");
+			buf.append("Unexpectedly found ").append(type).append("s at ");
 			buf.append(extraList.get(0).toString());
 			int numMissing = extraList.size();
 			for (int index = 1; index < numMissing; index++) {
-				buf.append(", " + extraList.get(index).toString());
+				buf.append(", ").append(extraList.get(index).toString());
 			}
 			buf.append(".\n");
 		}

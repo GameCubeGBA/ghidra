@@ -49,31 +49,31 @@ public interface DebugAdvanced {
 		public String toString() {
 			StringBuilder sb = new StringBuilder("<DebugThreadBasicInformation:\n");
 			if (exitStatus != null) {
-				sb.append("    exitStatus: " + exitStatus + "\n");
+				sb.append("    exitStatus: ").append(exitStatus).append("\n");
 			}
 			if (priorityClass != null) {
-				sb.append("    priorityClass: " + priorityClass + "\n");
+				sb.append("    priorityClass: ").append(priorityClass).append("\n");
 			}
 			if (priority != null) {
-				sb.append("    priority: " + priority + "\n");
+				sb.append("    priority: ").append(priority).append("\n");
 			}
 			if (createTime != null) {
-				sb.append("    createTime: " + createTime + "\n");
+				sb.append("    createTime: ").append(createTime).append("\n");
 			}
 			if (exitTime != null) {
-				sb.append("    exitTime: " + exitTime + "\n");
+				sb.append("    exitTime: ").append(exitTime).append("\n");
 			}
 			if (kernelTime != null) {
-				sb.append("    kernelTime: " + kernelTime + "\n");
+				sb.append("    kernelTime: ").append(kernelTime).append("\n");
 			}
 			if (userTime != null) {
-				sb.append("    userTime: " + userTime + "\n");
+				sb.append("    userTime: ").append(userTime).append("\n");
 			}
 			if (startOffset != null) {
-				sb.append("    startOffset: " + startOffset + "\n");
+				sb.append("    startOffset: ").append(startOffset).append("\n");
 			}
 			if (affinity != null) {
-				sb.append("    affinity: " + affinity + "\n");
+				sb.append("    affinity: ").append(affinity).append("\n");
 			}
 			sb.append(">");
 			return sb.toString();

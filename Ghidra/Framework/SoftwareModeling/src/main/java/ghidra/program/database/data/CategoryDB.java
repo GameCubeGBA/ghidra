@@ -237,7 +237,7 @@ class CategoryDB extends DatabaseObject implements Category {
 	public Category[] getCategories() {
 		validate(mgr.lock);
 		Collection<CategoryDB> categories = subcategoryMap.values();
-		return categories.toArray(new Category[categories.size()]);
+		return categories.toArray(new Category[0]);
 	}
 
 	/**
@@ -247,7 +247,7 @@ class CategoryDB extends DatabaseObject implements Category {
 	public DataType[] getDataTypes() {
 		validate(mgr.lock);
 		Collection<DataType> dataTypes = dataTypeMap.values();
-		return dataTypes.toArray(new DataType[dataTypes.size()]);
+		return dataTypes.toArray(new DataType[0]);
 	}
 
 	/**

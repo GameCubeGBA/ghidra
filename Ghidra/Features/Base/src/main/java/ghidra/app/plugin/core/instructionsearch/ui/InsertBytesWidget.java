@@ -203,7 +203,7 @@ public class InsertBytesWidget extends DialogComponentProvider implements KeyLis
 			instrStr = instrStr.replaceAll("\\.", "0");
 			comb = comb.substring(instrLen);
 			instrStr = InstructionSearchUtils.addSpaceOnByteBoundary(instrStr, InputMode.BINARY);
-			sb.append(instrStr + "\n");
+			sb.append(instrStr).append("\n");
 		}
 
 		// Set the text and initialize it to binary mode, since that's the format of the data

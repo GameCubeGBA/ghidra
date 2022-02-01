@@ -673,7 +673,7 @@ public class PcodeDataTypeManager {
 		}
 		resBuf.append("<type");
 		SpecXmlUtils.xmlEscapeAttribute(resBuf, "name", type.getDisplayName());
-		resBuf.append(" id=\"0x" + Long.toHexString(progDataTypes.getID(type)) + "\"");
+		resBuf.append(" id=\"0x").append(Long.toHexString(progDataTypes.getID(type))).append("\"");
 		resBuf.append(" metatype=\"struct\" size=\"0\"></type>");
 		return resBuf;
 	}

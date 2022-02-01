@@ -50,8 +50,7 @@ public class RedFlagsValidator extends PostAnalysisValidator {
 			count++;
 		}
 		if (count > 0) {
-			warnings.append(prog.getDomainFile().getName() + " has " + count +
-				" error bookmarks.\n");
+			warnings.append(prog.getDomainFile().getName()).append(" has ").append(count).append(" error bookmarks.\n");
 		}
 		return count;
 	}

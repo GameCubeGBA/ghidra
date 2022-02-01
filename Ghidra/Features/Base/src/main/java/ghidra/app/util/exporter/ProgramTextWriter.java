@@ -408,7 +408,7 @@ class ProgramTextWriter {
 		buffy.append(genFill(options.getStackVarPreNameWidth()));
 
 		if (options.isHTML()) {
-			buffy.append(BEGIN_ANCHOR + toHREF(var) + END_ANCHOR);
+			buffy.append(BEGIN_ANCHOR).append(toHREF(var)).append(END_ANCHOR);
 		}
 
 		String clipName = clip(options.getCommentPrefix() + var.getName(),
@@ -654,7 +654,7 @@ class ProgramTextWriter {
 
 			buffy = new StringBuilder();
 			if (options.isHTML()) {
-				buffy.append(BEGIN_ANCHOR + toHREF(component.getMinAddress()) + END_ANCHOR);
+				buffy.append(BEGIN_ANCHOR).append(toHREF(component.getMinAddress())).append(END_ANCHOR);
 			}
 			processAddress(component.getMinAddress(), fill + STRUCT_PREFIX);
 			processDataFieldName(component);

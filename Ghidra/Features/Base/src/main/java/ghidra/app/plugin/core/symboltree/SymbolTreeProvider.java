@@ -366,12 +366,10 @@ public class SymbolTreeProvider extends ComponentProviderAdapter {
 					++count;
 				}
 				catch (DuplicateNameException e) {
-					sb.append("Parent namespace " + namespace.getName() +
-						" contains namespace named " + symbol.getName() + "\n");
+					sb.append("Parent namespace ").append(namespace.getName()).append(" contains namespace named ").append(symbol.getName()).append("\n");
 				}
 				catch (InvalidInputException | CircularDependencyException e) {
-					sb.append("Could not change parent namespace for " + symbol.getName() + ": " +
-						e.getMessage() + "\n");
+					sb.append("Could not change parent namespace for ").append(symbol.getName()).append(": ").append(e.getMessage()).append("\n");
 				}
 			}
 		}

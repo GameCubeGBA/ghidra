@@ -306,11 +306,10 @@ public class DWARFCompilationUnit {
 	public String toString() {
 		StringBuilder buffer = new StringBuilder();
 		buffer.append("Compilation Unit");
-		buffer.append(" [Start:0x" + Long.toHexString(this.startOffset) + "]");
-		buffer.append(" [Length:0x" + Long.toHexString(this.length) + "]");
-		buffer.append(" [AbbreviationOffset:0x" + Long.toHexString(this.abbreviationOffset) + "]");
-		buffer.append(
-			" [CompileUnit: " + (compUnit != null ? compUnit.toString() : "not present") + "]");
+		buffer.append(" [Start:0x").append(Long.toHexString(this.startOffset)).append("]");
+		buffer.append(" [Length:0x").append(Long.toHexString(this.length)).append("]");
+		buffer.append(" [AbbreviationOffset:0x").append(Long.toHexString(this.abbreviationOffset)).append("]");
+		buffer.append(" [CompileUnit: ").append(compUnit != null ? compUnit.toString() : "not present").append("]");
 		return buffer.toString();
 	}
 

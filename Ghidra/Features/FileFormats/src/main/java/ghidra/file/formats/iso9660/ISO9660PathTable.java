@@ -87,15 +87,13 @@ public class ISO9660PathTable implements StructConverter {
 	public String toString() {
 		StringBuilder buff = new StringBuilder();
 
-		buff.append("Directory Identifier Length: 0x" + Integer.toHexString(dirIdentifierLength) +
-			"\n");
-		buff.append("Extended Attribute Record Length: " +
-			Integer.toHexString(extendedAttributeRecordLength) + "\n");
-		buff.append("Location of Extent (LBA): 0x" + Integer.toHexString(locationOfExtent) + "\n");
-		buff.append("Directory Number: 0x" + Integer.toHexString(directoryNumberPathIndex) + "\n");
-		buff.append("Directory Identifier: " + new String(directoryIdentifier).trim() + "\n");
+		buff.append("Directory Identifier Length: 0x").append(Integer.toHexString(dirIdentifierLength)).append("\n");
+		buff.append("Extended Attribute Record Length: ").append(Integer.toHexString(extendedAttributeRecordLength)).append("\n");
+		buff.append("Location of Extent (LBA): 0x").append(Integer.toHexString(locationOfExtent)).append("\n");
+		buff.append("Directory Number: 0x").append(Integer.toHexString(directoryNumberPathIndex)).append("\n");
+		buff.append("Directory Identifier: ").append(new String(directoryIdentifier).trim()).append("\n");
 		if (paddingFieldPresent) {
-			buff.append("PaddingF ield: 0x" + Integer.toHexString(paddingField) + "\n");
+			buff.append("PaddingF ield: 0x").append(Integer.toHexString(paddingField)).append("\n");
 		}
 
 		return buff.toString();

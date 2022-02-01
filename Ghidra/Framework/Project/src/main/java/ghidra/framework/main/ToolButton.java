@@ -251,7 +251,7 @@ class ToolButton extends EmptyBorderButton implements Draggable, Droppable {
 			@SuppressWarnings("unchecked")
 			// we put the data in
 			List<DomainFile> list = (List<DomainFile>) obj;
-			DomainFile[] domainFiles = list.toArray(new DomainFile[list.size()]);
+			DomainFile[] domainFiles = list.toArray(new DomainFile[0]);
 			openFilesAndOpenToolAsNecessary(domainFiles);
 		}
 		else if (f.equals(VersionInfoTransferable.localVersionInfoFlavor)) {

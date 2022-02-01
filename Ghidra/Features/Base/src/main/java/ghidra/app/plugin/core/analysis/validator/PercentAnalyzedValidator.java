@@ -50,8 +50,7 @@ public class PercentAnalyzedValidator extends PostAnalysisValidator {
 		}
 		if (percent < COVERAGE_THRESHOLD_DEFAULT) {
 			status = ConditionStatus.Warning;
-			warnings.append(program.getDomainFile().getName() +
-				" percent disassembled/defined in executable memory = " + format(percent) + "\n");
+			warnings.append(program.getDomainFile().getName()).append(" percent disassembled/defined in executable memory = ").append(format(percent)).append("\n");
 		}
 		return new ConditionResult(status, warnings.toString());
 	}

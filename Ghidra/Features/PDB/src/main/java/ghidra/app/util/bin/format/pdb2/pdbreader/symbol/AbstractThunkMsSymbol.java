@@ -210,7 +210,7 @@ public abstract class AbstractThunkMsSymbol extends AbstractMsSymbol
 				builder.append(String.format("   " + ordinal + ", Table Entry: %d\n", variant));
 				break;
 			default:
-				builder.append("   " + ordinal + "\n");
+				builder.append("   ").append(ordinal).append("\n");
 				break;
 		}
 	}

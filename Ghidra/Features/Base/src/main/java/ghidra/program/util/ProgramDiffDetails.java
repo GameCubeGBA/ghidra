@@ -685,7 +685,7 @@ public class ProgramDiffDetails {
 				list.add(symbol);
 			}
 		}
-		return list.toArray(new Symbol[list.size()]);
+		return list.toArray(new Symbol[0]);
 	}
 
 	/**
@@ -907,12 +907,7 @@ public class ProgramDiffDetails {
 			fieldName = dtc.getDefaultFieldName();
 		}
 		// TODO: how should we display bitfields?
-		buf.append(indent + "Offset=" + DiffUtility.toSignedHexString(offset) + " " + "Ordinal=" +
-			ordinal + " " + fieldName + " " + actualDt.getMnemonic(actualDt.getDefaultSettings()) +
-			"  " + getCategoryName(actualDt) + " " + "DataTypeSize=" +
-			(actualDt.isZeroLength() ? 0 : actualDt.getLength()) + " " + "ComponentSize=" +
-			dtc.getLength() + " " + ((comment != null) ? comment : "") +
-			" " + newLine);
+		buf.append(indent).append("Offset=").append(DiffUtility.toSignedHexString(offset)).append(" ").append("Ordinal=").append(ordinal).append(" ").append(fieldName).append(" ").append(actualDt.getMnemonic(actualDt.getDefaultSettings())).append("  ").append(getCategoryName(actualDt)).append(" ").append("DataTypeSize=").append(actualDt.isZeroLength() ? 0 : actualDt.getLength()).append(" ").append("ComponentSize=").append(dtc.getLength()).append(" ").append((comment != null) ? comment : "").append(" ").append(newLine);
 		return actualDt;
 	}
 
@@ -962,10 +957,7 @@ public class ProgramDiffDetails {
 						if (fieldName == null) {
 							fieldName = "field" + offset;
 						}
-						buf.append(newIndent + min.add(offset) + " " + dtc.getFieldName() + " " +
-							dtc.getDataType().getName() + " " + "length=" +
-							dtc.getLength() + " " +
-							((comment != null) ? comment : "") + " " + newLine);
+						buf.append(newIndent).append(min.add(offset)).append(" ").append(dtc.getFieldName()).append(" ").append(dtc.getDataType().getName()).append(" ").append("length=").append(dtc.getLength()).append(" ").append((comment != null) ? comment : "").append(" ").append(newLine);
 					}
 				}
 			}
@@ -973,8 +965,7 @@ public class ProgramDiffDetails {
 			linesSoFar++;
 		}
 		if (linesSoFar >= maxVisibleLines) {
-			buf.append(newIndent + "... Too many code unit lines for display, so truncating at " +
-				maxVisibleLines + " lines." + newLine);
+			buf.append(newIndent).append("... Too many code unit lines for display, so truncating at ").append(maxVisibleLines).append(" lines.").append(newLine);
 		}
 		return buf.toString();
 	}
@@ -1023,7 +1014,7 @@ public class ProgramDiffDetails {
 		else {
 			cuRep = cu.toString();
 		}
-		buf.append(indent + addrRangeStr + "    " + cuRep + newLine);
+		buf.append(indent).append(addrRangeStr).append("    ").append(cuRep).append(newLine);
 		return min;
 	}
 
@@ -1095,13 +1086,13 @@ public class ProgramDiffDetails {
 				continue;
 			}
 			if (ref.isExternalReference()) {
-				buf.append(indent2 + "External Reference " + getRefInfo(pgm, ref) + newLine);
+				buf.append(indent2).append("External Reference ").append(getRefInfo(pgm, ref)).append(newLine);
 			}
 			else if (ref.isStackReference()) {
-				buf.append(indent2 + "Stack Reference " + getRefInfo(pgm, ref) + newLine);
+				buf.append(indent2).append("Stack Reference ").append(getRefInfo(pgm, ref)).append(newLine);
 			}
 			else {
-				buf.append(indent2 + "Reference " + getRefInfo(pgm, ref) + newLine);
+				buf.append(indent2).append("Reference ").append(getRefInfo(pgm, ref)).append(newLine);
 			}
 		}
 		if (buf.length() == 0) {
@@ -1141,8 +1132,8 @@ public class ProgramDiffDetails {
 		boolean hasAddr2 = hasAddrDiffs;
 		List<Equate> list1 = et1.getEquates(p1Address, opIndex);
 		List<Equate> list2 = et2.getEquates(p2Address, opIndex);
-		Equate[] eq1 = list1.toArray(new Equate[list1.size()]);
-		Equate[] eq2 = list2.toArray(new Equate[list2.size()]);
+		Equate[] eq1 = list1.toArray(new Equate[0]);
+		Equate[] eq2 = list2.toArray(new Equate[0]);
 		if (!sameEquates(eq1, eq2)) {
 			if (!hasEquateDiffs) {
 				addDiffHeader("Equate");
@@ -1454,7 +1445,7 @@ public class ProgramDiffDetails {
 			strBuilder.append(", ");
 			strBuilder.append(tag.getName());
 			if (tag.getComment() != null && !tag.getComment().isEmpty()) {
-				strBuilder.append("(" + tag.getComment() + ")");
+				strBuilder.append("(").append(tag.getComment()).append(")");
 			}
 		}
 
@@ -1955,9 +1946,9 @@ public class ProgramDiffDetails {
 		ArrayList<Variable> allVarsList = new ArrayList<>(varList1);
 		allVarsList.addAll(varList2);
 
-		Variable[] printVars1 = varList1.toArray(new Variable[varList1.size()]);
-		Variable[] printVars2 = varList2.toArray(new Variable[varList2.size()]);
-		Variable[] combinedVars = allVarsList.toArray(new Variable[allVarsList.size()]);
+		Variable[] printVars1 = varList1.toArray(new Variable[0]);
+		Variable[] printVars2 = varList2.toArray(new Variable[0]);
+		Variable[] combinedVars = allVarsList.toArray(new Variable[0]);
 
 		VariableLayout varLayout = getVariableLayout(combinedVars);
 		printParameters(doc1, printVars1, varLayout, vars1.length);
@@ -2046,9 +2037,9 @@ public class ProgramDiffDetails {
 		ArrayList<Variable> allVarsList = new ArrayList<>(varList1);
 		allVarsList.addAll(varList2);
 
-		Variable[] printVars1 = varList1.toArray(new Variable[varList1.size()]);
-		Variable[] printVars2 = varList2.toArray(new Variable[varList2.size()]);
-		Variable[] combinedVars = allVarsList.toArray(new Variable[allVarsList.size()]);
+		Variable[] printVars1 = varList1.toArray(new Variable[0]);
+		Variable[] printVars2 = varList2.toArray(new Variable[0]);
+		Variable[] combinedVars = allVarsList.toArray(new Variable[0]);
 
 		VariableLayout varLayout = getVariableLayout(combinedVars);
 		printLocals(doc1, printVars1, varLayout, vars1.length);
@@ -2165,7 +2156,7 @@ public class ProgramDiffDetails {
 			while (propNames.hasNext()) {
 				names.add(propNames.next());
 			}
-			String[] names1 = names.toArray(new String[names.size()]);
+			String[] names1 = names.toArray(new String[0]);
 			Arrays.sort(names1);
 
 			String stringProp = null;
@@ -2177,14 +2168,13 @@ public class ProgramDiffDetails {
 					// Handle case where the class for a Saveable property is missing (unsupported).
 					if (cu.getProgram().getListing().getPropertyMap(
 						propertyName) instanceof UnsupportedMapDB) {
-						buf.append(
-							indent2 + propertyName + " is an unsupported property." + newLine);
+						buf.append(indent2).append(propertyName).append(" is an unsupported property.").append(newLine);
 						continue;
 					}
 					// Int property
 					try {
 						intProp = cu.getIntProperty(propertyName);
-						buf.append(indent2 + propertyName + " = " + intProp + newLine);
+						buf.append(indent2).append(propertyName).append(" = ").append(intProp).append(newLine);
 						continue;
 					}
 					catch (NoValueException e) {
@@ -2203,7 +2193,7 @@ public class ProgramDiffDetails {
 						// handle any unrecognized property below after checking all types.
 					}
 					if (stringProp != null) {
-						buf.append(indent2 + propertyName + " = " + stringProp + newLine);
+						buf.append(indent2).append(propertyName).append(" = ").append(stringProp).append(newLine);
 						continue;
 					}
 					// Object property
@@ -2215,7 +2205,7 @@ public class ProgramDiffDetails {
 						// handle any unrecognized property below after checking all types.
 					}
 					if (objProp != null) {
-						buf.append(indent2 + propertyName + ": " + objProp.toString() + newLine);
+						buf.append(indent2).append(propertyName).append(": ").append(objProp.toString()).append(newLine);
 						continue;
 					}
 					// Void property
@@ -2227,13 +2217,12 @@ public class ProgramDiffDetails {
 						// handle any unrecognized property below after checking all types.
 					}
 					if (voidProp) {
-						buf.append(indent2 + propertyName + " is a VoidProperty." + newLine);
+						buf.append(indent2).append(propertyName).append(" is a VoidProperty.").append(newLine);
 						continue;
 					}
 
 					// Unrecognized property
-					buf.append(
-						indent2 + "Unknown property type for " + propertyName + "." + newLine);
+					buf.append(indent2).append("Unknown property type for ").append(propertyName).append(".").append(newLine);
 				}
 			}
 		}

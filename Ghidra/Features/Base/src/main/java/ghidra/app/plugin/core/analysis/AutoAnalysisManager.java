@@ -1267,13 +1267,11 @@ public final class AutoAnalysisManager implements DomainObjectListener, DomainOb
 			if (testLen > spacer.length()) {
 				testLen = spacer.length() - 5;
 			}
-			taskTimesStringBuf.append(
-				"    " + element + spacer.substring(testLen) + secString + "\n");
+			taskTimesStringBuf.append("    ").append(element).append(spacer.substring(testLen)).append(secString).append("\n");
 		}
 
 		taskTimesStringBuf.append("-----------------------------------------------------\n");
-		taskTimesStringBuf.append(
-			"     Total Time   " + (int) (totalTaskTime / 1000.00) + " secs\n");
+		taskTimesStringBuf.append("     Total Time   ").append((int) (totalTaskTime / 1000.00)).append(" secs\n");
 		taskTimesStringBuf.append("-----------------------------------------------------\n");
 
 		return taskTimesStringBuf.toString();

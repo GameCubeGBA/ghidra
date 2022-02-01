@@ -221,7 +221,7 @@ public class DefineTable {
 			}
 			buf.append(" )");
 		}
-		buf.append(" = " + token.toString());
+		buf.append(" = ").append(token.toString());
 		return buf.toString();
 	}
 

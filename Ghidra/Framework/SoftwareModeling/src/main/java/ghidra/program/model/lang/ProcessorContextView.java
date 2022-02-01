@@ -88,8 +88,7 @@ public interface ProcessorContextView {
 				if (buf.length() != 0) {
 					buf.append("\n");
 				}
-				buf.append(indent + reg.getName() + "(" + lsb + "," + msb + ") = 0x" +
-					Long.toHexString(v.longValue()));
+				buf.append(indent).append(reg.getName()).append("(").append(lsb).append(",").append(msb).append(") = 0x").append(Long.toHexString(v.longValue()));
 				if (reg.hasChildren()) {
 					dumpContextValue(childValue, indent + "   ", buf);
 				}

@@ -152,12 +152,11 @@ public class ConflictInfoPanel extends JPanel {
 	}
 
 	private void addCount(StringBuffer buf, long value) {
-		buf.append("<font color=\"#990000\">" + value + "</font>");
+		buf.append("<font color=\"#990000\">").append(value).append("</font>");
 	}
 
 	private void addAddress(StringBuffer buf, Address addr) {
-		buf.append(
-			"<font color=\"#990000\">" + HTMLUtilities.escapeHTML(addr.toString()) + "</font>");
+		buf.append("<font color=\"#990000\">").append(HTMLUtilities.escapeHTML(addr.toString())).append("</font>");
 	}
 
 	private void updateWest() {

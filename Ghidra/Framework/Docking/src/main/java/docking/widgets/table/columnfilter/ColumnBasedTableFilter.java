@@ -238,8 +238,7 @@ public class ColumnBasedTableFilter<R> implements TableFilter<R> {
 		buf.append(filters.get(0).getHtmlRepresentation());
 		buf.append("</td></tr>");
 		for (int i = 1; i < filters.size(); i++) {
-			buf.append("<tr><td style=\"color:gray\"> " + filters.get(i).getLogicOperation() +
-				"&nbsp;</td><td>");
+			buf.append("<tr><td style=\"color:gray\"> ").append(filters.get(i).getLogicOperation()).append("&nbsp;</td><td>");
 			buf.append(filters.get(i).getHtmlRepresentation());
 			buf.append("</td></tr>");
 		}

@@ -213,7 +213,7 @@ public class PublicSymbolInformation extends AbstractSymbolInformation {
 	 */
 	private void dumpAddressMap(StringBuilder builder) {
 		builder.append("AddressMapSymbolOffsets-------------------------------------\n");
-		builder.append("numAddressMapSymbolOffsets: " + addressMapSymbolOffsets.size() + "\n");
+		builder.append("numAddressMapSymbolOffsets: ").append(addressMapSymbolOffsets.size()).append("\n");
 		int num = 0;
 		for (Long val : addressMapSymbolOffsets) {
 			builder.append(String.format("0X%08X: 0X%012X\n", num++, val));
@@ -245,8 +245,7 @@ public class PublicSymbolInformation extends AbstractSymbolInformation {
 	 */
 	private void dumpThunkMap(StringBuilder builder) {
 		builder.append("ThunkMap----------------------------------------------------\n");
-		builder.append(
-			"numThunkTargetOffsetsByTableOffset: " + thunkTargetOffsetsByTableOffset.size() + "\n");
+		builder.append("numThunkTargetOffsetsByTableOffset: ").append(thunkTargetOffsetsByTableOffset.size()).append("\n");
 		for (Map.Entry<Integer, Integer> entry : thunkTargetOffsetsByTableOffset.entrySet()) {
 			builder.append(String.format("0X%08X  0X%08X\n", entry.getKey(), entry.getValue()));
 		}
@@ -277,8 +276,7 @@ public class PublicSymbolInformation extends AbstractSymbolInformation {
 	 */
 	private void dumpSectionMap(StringBuilder builder) {
 		builder.append("SectionMap--------------------------------------------------\n");
-		builder.append(
-			"numAbsoluteOffsetsBySectionNumber: " + absoluteOffsetsBySectionNumber.size() + "\n");
+		builder.append("numAbsoluteOffsetsBySectionNumber: ").append(absoluteOffsetsBySectionNumber.size()).append("\n");
 		for (Map.Entry<Integer, Integer> entry : absoluteOffsetsBySectionNumber.entrySet()) {
 			builder.append(String.format("0X%08X  0X%08X\n", entry.getKey(), entry.getValue()));
 		}

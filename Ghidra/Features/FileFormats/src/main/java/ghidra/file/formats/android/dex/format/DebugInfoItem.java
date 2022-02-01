@@ -95,10 +95,10 @@ public class DebugInfoItem implements StructConverter {
 	public DataType toDataType() throws DuplicateNameException, IOException {
 		StringBuilder builder = new StringBuilder();
 		builder.append("debug_info_item" + "_");
-		builder.append(lineStartLength + "");
-		builder.append(parametersSizeLength + "");
-		builder.append(parametersSize + "");
-		builder.append(stateMachineOpcodes.length + "");
+		builder.append(lineStartLength);
+		builder.append(parametersSizeLength);
+		builder.append(parametersSize);
+		builder.append(stateMachineOpcodes.length);
 
 		Structure structure = new StructureDataType(builder.toString(), 0);
 
@@ -111,7 +111,7 @@ public class DebugInfoItem implements StructConverter {
 			ArrayDataType dataType =
 				new ArrayDataType(BYTE, parameterNamesLengths[i], BYTE.getLength());
 			structure.add(dataType, "parameter_" + i, null);
-			builder.append(dataType.getLength() + "");
+			builder.append(dataType.getLength());
 		}
 
 		ArrayDataType stateMachineArray =
