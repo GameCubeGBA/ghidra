@@ -2425,8 +2425,10 @@ public abstract class GhidraScript extends FlatProgramAPI {
 			return dialog.getValueAsLong();
 		});
 
-        // prevent auto-boxing NullPointerException
-        return Objects.requireNonNullElse(choice, 0);
+		if (choice == null) {
+			return 0; // prevent autoboxing NullPointerException
+		}
+		return choice;
     }
 
 	/**
