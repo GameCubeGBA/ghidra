@@ -96,7 +96,7 @@ public class DWARFRegisterMappingsManager {
 		}
 		if (dwarfSpecFilename.size() > 1) {
 			throw new IOException("Multiple DWARF register mappings found for language " +
-				langDesc.getLanguageID() + ": " + dwarfSpecFilename.toString());
+				langDesc.getLanguageID() + ": " + dwarfSpecFilename);
 		}
 		return dwarfSpecFilename.get(0);
 	}

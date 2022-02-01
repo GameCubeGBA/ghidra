@@ -226,7 +226,7 @@ public class SimpleTextField implements Field {
 			int endCol = highlight.getEnd();
 			int x1 = findX(startCol);
 			int x2 = endCol >= text.length() ? width : findX(endCol);
-			g.fillRect(startX + x1, -getHeightAbove(), x2 - x1, getHeight());
+			g.fillRect(startX + x1, -heightAbove, x2 - x1, getHeight());
 		}
 	}
 
@@ -239,7 +239,7 @@ public class SimpleTextField implements Field {
 				int start = findX(startCol);
 				int end = findX(endCol + 1);
 				g.setColor(c);
-				g.fillRect(startX + start, -getHeightAbove(), end - start, getHeight());
+				g.fillRect(startX + start, -heightAbove, end - start, getHeight());
 			}
 		}
 	}

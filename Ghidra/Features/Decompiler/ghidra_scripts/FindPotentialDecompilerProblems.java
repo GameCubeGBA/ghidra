@@ -202,7 +202,7 @@ public class FindPotentialDecompilerProblems extends GhidraScript {
 				Parameter[] params = calledFunc.getParameters();
 				for (Parameter param : params) {
 					Address addr = param.getMinAddress();
-					if (addr != null && addr.equals(variableAddr)) {
+					if (variableAddr.equals(addr)) {
 						return ref.getToAddress();
 					}
 				}
@@ -422,8 +422,8 @@ public class FindPotentialDecompilerProblems extends GhidraScript {
 
 		@Override
 		public String toString() {
-			return "Issue at:" + getAddress() + "  found: " + getVarName() + "  " +
-				getExplanation() + " at " + getWhyAddr();
+			return "Issue at:" + getAddress() + "  found: " + varName + "  " +
+                    explanation + " at " + getWhyAddr();
 		}
 	}
 

@@ -80,7 +80,7 @@ public class ClangLine {
 			calloutTokens = Collections.emptyList();
 		}
 
-		StringBuilder buffy = new StringBuilder(getLineNumber() + ": ");
+		StringBuilder buffy = new StringBuilder(lineNumber + ": ");
 		for (ClangToken token : tokens) {
 
 			boolean isCallout = calloutTokens.contains(token);

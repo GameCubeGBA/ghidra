@@ -226,10 +226,10 @@ public class Match implements Comparable<Match>
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
 	public int compareTo(Match m) {
-		int val = getThisBeginning().compareTo( m.getThisBeginning() );
+		int val = thisBeginning.compareTo(m.thisBeginning);
 		if( val != 0 )
 			return val;
-		val = getOtherBeginning().compareTo( m.getOtherBeginning() );
+		val = otherBeginning.compareTo(m.otherBeginning);
 		if( val != 0 )
 			return val;		
 		return length() - m.length();

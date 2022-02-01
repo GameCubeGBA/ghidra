@@ -54,15 +54,15 @@ public class BTreeNodeRecord /*implements StructConverter*/ {
 		_descriptor = descriptor;
 
 		if ( descriptor.getKind() == BTreeNodeKinds.kBTLeafNode ) {
-			if ( getType().equals( XattrConstants.DECMPFS_XATTR_NAME ) ) {
-				_decmpfsHeader = new DecmpfsHeader( reader, getRecordLength() );
+			if ( type.equals( XattrConstants.DECMPFS_XATTR_NAME ) ) {
+				_decmpfsHeader = new DecmpfsHeader( reader, recordLength);
 			}
-			else if ( getType().equals( XattrConstants.KAUTH_FILESEC_XATTR_NAME ) ) {
+			else if ( type.equals( XattrConstants.KAUTH_FILESEC_XATTR_NAME ) ) {
 				//TODO
 			}
 		}
 		else if ( descriptor.getKind() == BTreeNodeKinds.kBTIndexNode ) {
-			if ( getType().equals( XattrConstants.DECMPFS_XATTR_NAME ) ) {
+			if ( type.equals( XattrConstants.DECMPFS_XATTR_NAME ) ) {
 				//TODO
 			}
 		}

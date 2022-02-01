@@ -189,7 +189,7 @@ public class XmlTestHelper {
 		if (!file.exists()) {
 			throw new FileNotFoundException("Can not find test program: " + programName);
 		}
-		return getProject().importProgramFast(file);
+		return gp.importProgramFast(file);
 	}
 
 	public static void assertXMLFilesEquals(File expectedXMLFile, File testXMLFile)
@@ -253,7 +253,7 @@ public class XmlTestHelper {
 					testAttrs.remove(expectedAttr.getKey());
 				}
 				if (!testAttrs.isEmpty()) {
-					failWithInfo("Unexpected attributes found: " + testAttrs.keySet().toString(),
+					failWithInfo("Unexpected attributes found: " + testAttrs.keySet(),
 						expectedXMLParser, testXMLParser, expectedElement, testElement,
 						currentPath);
 				}

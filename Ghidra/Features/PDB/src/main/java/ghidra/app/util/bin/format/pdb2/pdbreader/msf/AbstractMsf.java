@@ -323,8 +323,8 @@ public abstract class AbstractMsf implements AutoCloseable {
 	 */
 	protected void deserialize(TaskMonitor monitor)
 			throws IOException, PdbException, CancelledException {
-		byte[] bytes = new byte[getPageSize()];
-		fileReader.read(getHeaderPageNumber(), 0, getPageSize(), bytes, 0);
+		byte[] bytes = new byte[pageSize];
+		fileReader.read(HEADER_PAGE_NUMBER, 0, pageSize, bytes, 0);
 
 		PdbByteReader reader = new PdbByteReader(bytes);
 		reader.setIndex(getPageSizeOffset());

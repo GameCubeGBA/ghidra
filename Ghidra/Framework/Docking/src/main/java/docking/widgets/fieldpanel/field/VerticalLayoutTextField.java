@@ -167,7 +167,7 @@ public class VerticalLayoutTextField implements TextField {
 
 	@Override
 	public String toString() {
-		return getText();
+		return fullText;
 	}
 
 	@Override
@@ -279,7 +279,7 @@ public class VerticalLayoutTextField implements TextField {
 			cursorRow = cursorLoc.row();
 		}
 
-		Highlight[] highlights = hlFactory.getHighlights(this, getText(), cursorTextOffset);
+		Highlight[] highlights = hlFactory.getHighlights(this, fullText, cursorTextOffset);
 		int columns = 0;
 		int n = subFields.size();
 
@@ -496,7 +496,7 @@ public class VerticalLayoutTextField implements TextField {
 	@Override
 	public int screenLocationToTextOffset(int row, int col) {
 		if (row >= subFields.size()) {
-			return getText().length();
+			return fullText.length();
 		}
 		int extraSpace = rowSeparator.length();
 		int len = 0;

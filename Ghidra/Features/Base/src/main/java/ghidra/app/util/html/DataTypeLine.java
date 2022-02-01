@@ -53,7 +53,7 @@ public class DataTypeLine implements ValidatableLine {
 
 	@Override
 	public boolean isDiffColored() {
-		return getTypeColor() != null || getNameColor() != null || getCommentColor() != null;
+		return typeColor != null || nameColor != null || commentColor != null;
 	}
 
 	public String getType() {
@@ -110,9 +110,9 @@ public class DataTypeLine implements ValidatableLine {
 	}
 
 	void setAllColors(Color diffColor) {
-		setNameColor(diffColor);
-		setTypeColor(diffColor);
-		setCommentColor(diffColor);
+		nameColor = diffColor;
+		typeColor = diffColor;
+		commentColor = diffColor;
 	}
 
 	@Override
@@ -122,9 +122,9 @@ public class DataTypeLine implements ValidatableLine {
 		}
 
 		if (otherValidatableLine == null) {
-			setNameColor(invalidColor);
-			setTypeColor(invalidColor);
-			setCommentColor(invalidColor);
+			nameColor = invalidColor;
+			typeColor = invalidColor;
+			commentColor = invalidColor;
 			return;
 		}
 
@@ -138,18 +138,18 @@ public class DataTypeLine implements ValidatableLine {
 		// note: use the other line here, so if it is a special, overridden case, then we will
 		//       benefit from it's 'matches' methods
 		if (!otherLine.matchesName(name)) {
-			setNameColor(invalidColor);
-			otherLine.setNameColor(invalidColor);
+			nameColor = invalidColor;
+			otherLine.nameColor = invalidColor;
 		}
 
 		if (!otherLine.matchesType(type)) {
-			setTypeColor(invalidColor);
-			otherLine.setTypeColor(invalidColor);
+			typeColor = invalidColor;
+			otherLine.typeColor = invalidColor;
 		}
 
 		if (!otherLine.matchesComment(comment)) {
-			setCommentColor(invalidColor);
-			otherLine.setCommentColor(invalidColor);
+			commentColor = invalidColor;
+			otherLine.commentColor = invalidColor;
 		}
 	}
 

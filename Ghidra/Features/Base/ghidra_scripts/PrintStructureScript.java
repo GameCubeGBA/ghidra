@@ -44,7 +44,7 @@ public class PrintStructureScript extends GhidraScript {
 	private void printStructure(DataType dataType) {
 		StringBuilder buffer = new StringBuilder();
 		printStructureRecursively(dataType, buffer, 0);
-		println("\n" + buffer.toString());
+		println("\n" + buffer);
 	}
 
 	private void printStructureRecursively(DataType dataType, StringBuilder buffer, int level) {

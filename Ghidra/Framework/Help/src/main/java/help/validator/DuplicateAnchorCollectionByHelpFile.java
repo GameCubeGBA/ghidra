@@ -60,8 +60,8 @@ public class DuplicateAnchorCollectionByHelpFile implements DuplicateAnchorColle
 
 	@Override
 	public int compareTo(DuplicateAnchorCollectionByHelpFile o) {
-		HelpFile helpFile1 = getHelpFile();
-		HelpFile helpFile2 = o.getHelpFile();
+		HelpFile helpFile1 = helpFile;
+		HelpFile helpFile2 = o.helpFile;
 		Path file1 = helpFile1.getFile();
 		Path file2 = helpFile2.getFile();
 		return file1.compareTo(file2);

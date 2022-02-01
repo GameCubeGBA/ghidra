@@ -70,7 +70,7 @@ public class MzLoader extends AbstractLibrarySupportLoader {
 		DOSHeader dos = ose.getDOSHeader();
 		if (dos.isDosSignature() && !dos.hasNewExeHeader() && !dos.hasPeHeader()) {
 			List<QueryResult> results =
-				QueryOpinionService.query(getName(), "" + dos.e_magic(), null);
+				QueryOpinionService.query(MZ_NAME, "" + dos.e_magic(), null);
 			for (QueryResult result : results) {
 				loadSpecs.add(new LoadSpec(this, 0, result));
 			}

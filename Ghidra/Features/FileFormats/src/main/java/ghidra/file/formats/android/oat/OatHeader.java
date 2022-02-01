@@ -77,7 +77,7 @@ public abstract class OatHeader implements StructConverter {
 		reader.setPointerIndex(getOatDexFilesOffset(reader));
 		for (int i = 0; i < getDexFileCount(); ++i) {
 			oatDexFileList.add(
-				OatDexFileFactory.getOatDexFile(reader, getVersion(), bundle));
+				OatDexFileFactory.getOatDexFile(reader, version, bundle));
 		}
 	}
 

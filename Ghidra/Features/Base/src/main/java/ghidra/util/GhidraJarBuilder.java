@@ -908,7 +908,7 @@ public class GhidraJarBuilder implements GhidraLaunchable {
 		buf.append(invocationName != null ? invocationName : "GhidraJarBuilder");
 		buf.append(
 			" [-output <output file>] [-srczip <src zip output file>] [-bin <compiled classes dir>] [-main <main-class>]\n");
-		System.err.println(buf.toString());
+		System.err.println(buf);
 		System.exit(0);
 	}
 

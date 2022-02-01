@@ -222,7 +222,7 @@ public class GhidraScriptUtil {
 		}
 		catch (IOException e) {
 			Msg.error(GhidraScriptUtil.class,
-				"Failed to find file in system directories: " + file.toString(), e);
+				"Failed to find file in system directories: " + file, e);
 			return true;
 		}
 	}

@@ -403,12 +403,12 @@ public class TaskMonitorComponent extends JPanel implements TaskMonitor {
 	}
 
 	private String createProgressString() {
-		long currentProgress = getProgress();
+		long currentProgress = progress;
 		if (currentProgress <= 0) {
 			return "0%";
 		}
 
-		long maximum = getMaximum();
+		long maximum = maxProgress;
 		if (currentProgress >= maximum) {
 			return "100%";
 		}

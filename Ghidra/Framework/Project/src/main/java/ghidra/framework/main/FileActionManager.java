@@ -302,7 +302,7 @@ class FileActionManager {
 			ProjectManager pm = plugin.getProjectManager();
 			project = pm.openProject(projectLocator, true, false);
 			if (project == null) {
-				status = "Error opening project: " + projectLocator.toString();
+				status = "Error opening project: " + projectLocator;
 			}
 			else {
 				firingProjectOpened = true;
@@ -313,7 +313,7 @@ class FileActionManager {
 			}
 		}
 		catch (NotFoundException nfe) {
-			status = "Project not found for " + projectLocator.toString();
+			status = "Project not found for " + projectLocator;
 			Msg.showInfo(getClass(), tool.getToolFrame(), "Error Opening Project", status);
 		}
 		catch (NotOwnerException e) {
@@ -325,11 +325,11 @@ class FileActionManager {
 				"creating a \"Shared Project\" will allow a group of users to use a shared server-based repository.");
 		}
 		catch (LockException e) {
-			status = "Project is already open for update: " + projectLocator.toString();
+			status = "Project is already open for update: " + projectLocator;
 			Msg.showError(this, null, "Open Project Failed", status);
 		}
 		catch (Exception e) {
-			status = "Error opening project: " + projectLocator.toString();
+			status = "Error opening project: " + projectLocator;
 			Msg.showError(this, null, "Open Project Failed", status, e);
 		}
 		finally {
@@ -596,7 +596,7 @@ class FileActionManager {
 		// give a special confirm message if user is about to
 		// remove the active project
 		StringBuilder confirmMsg = new StringBuilder("Project: ");
-		confirmMsg.append(projectLocator.toString());
+		confirmMsg.append(projectLocator);
 		confirmMsg.append(" ?\n");
 		boolean isActiveProject =
 			(activeProject != null && activeProject.getProjectLocator().equals(projectLocator));

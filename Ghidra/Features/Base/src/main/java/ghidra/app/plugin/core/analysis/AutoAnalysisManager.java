@@ -222,7 +222,7 @@ public final class AutoAnalysisManager implements DomainObjectListener, DomainOb
 		 *then inherit it's properties.
 		 */
 		Options options = program.getOptions(Program.ANALYSIS_PROPERTIES);
-		analyzer.optionsChanged(options.getOptions(analyzer.getName()), getProgram());
+		analyzer.optionsChanged(options.getOptions(analyzer.getName()), program);
 
 		BackgroundCommand cmd = new OneShotAnalysisCommand(analyzer, set, log);
 		schedule(cmd, analyzer.getPriority().priority());

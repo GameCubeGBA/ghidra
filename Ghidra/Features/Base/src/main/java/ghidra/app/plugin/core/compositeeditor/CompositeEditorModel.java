@@ -208,7 +208,7 @@ public abstract class CompositeEditorModel extends CompositeViewerModel implemen
 		int resultLen = resultDt.getLength();
 
 		if (resultDt instanceof Dynamic) {
-			resultLen = DataTypeHelper.requestDtSize(getProvider(), resultDt.getDisplayName(),
+			resultLen = DataTypeHelper.requestDtSize(provider, resultDt.getDisplayName(),
 				lastNumBytes, getMaxAddLength(rowIndex));
 		}
 		else if (resultLen == 0) {
@@ -479,7 +479,7 @@ public abstract class CompositeEditorModel extends CompositeViewerModel implemen
 		int max = getMaxElements();
 		if (isSingleRowSelection()) {
 			if (max != 0) {
-				int initial = getLastNumElements();
+				int initial = lastNumElements;
 				NumberInputDialog numberInputDialog =
 					new NumberInputDialog("elements", ((initial > 0) ? initial : 1), min, max);
 				String helpAnchor = provider.getHelpName() + "_" + "Elements_NumberInputDialog";

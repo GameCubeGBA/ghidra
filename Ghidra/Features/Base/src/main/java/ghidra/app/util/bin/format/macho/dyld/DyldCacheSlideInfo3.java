@@ -111,10 +111,10 @@ public class DyldCacheSlideInfo3 extends DyldCacheSlideInfoCommon {
 		}
 
 		long dataPageStart = dyldCacheMappingInfo.getAddress();
-		long pageSize = getPageSize();
-		long pageStartsCount = getPageStartsCount();
+		long pageSize = page_size;
+		long pageStartsCount = page_starts_count;
 
-		long authValueAdd = getAuthValueAdd();
+		long authValueAdd = auth_value_add;
 
 		short[] pageStarts = getPageStarts();
 

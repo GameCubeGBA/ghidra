@@ -270,7 +270,7 @@ public class PointerDataType extends BuiltIn implements Pointer {
 	public String getDisplayName() {
 		// NOTE: Pointer display name only specifies length if null base type
 		if (displayName == null) {
-			DataType dt = getDataType();
+			DataType dt = referencedDataType;
 			if (dt == null) {
 				displayName = POINTER_NAME;
 				if (length > 0) {
@@ -310,14 +310,14 @@ public class PointerDataType extends BuiltIn implements Pointer {
 			sbuf.append("-bit ");
 		}
 		sbuf.append(POINTER_NAME);
-		DataType dt = getDataType();
+		DataType dt = referencedDataType;
 		if (dt != null) {
 			sbuf.append(" to ");
 			if (dt instanceof Pointer) {
-				sbuf.append(getDataType().getDescription());
+				sbuf.append(referencedDataType.getDescription());
 			}
 			else {
-				sbuf.append(getDataType().getDisplayName());
+				sbuf.append(referencedDataType.getDisplayName());
 			}
 		}
 		return sbuf.toString();
@@ -710,7 +710,7 @@ public class PointerDataType extends BuiltIn implements Pointer {
 
 		isEquivalentActive.set(true);
 		try {
-			return getDataType().isEquivalent(otherDataType);
+			return referencedDataType.isEquivalent(otherDataType);
 		}
 		finally {
 			isEquivalentActive.set(false);
@@ -754,7 +754,7 @@ public class PointerDataType extends BuiltIn implements Pointer {
 
 	@Override
 	public CategoryPath getCategoryPath() {
-		DataType dt = getDataType();
+		DataType dt = referencedDataType;
 		if (dt == null) {
 			return CategoryPath.ROOT;
 		}

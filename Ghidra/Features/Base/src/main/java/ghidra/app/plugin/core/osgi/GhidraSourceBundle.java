@@ -174,11 +174,11 @@ public class GhidraSourceBundle extends GhidraBundle {
 	 * @throws ClassNotFoundException if {@code sourceFile} isn't contained in this bundle
 	 */
 	public String classNameForScript(ResourceFile sourceFile) throws ClassNotFoundException {
-		String relativePath = FileUtilities.relativizePath(getSourceDirectory(), sourceFile);
+		String relativePath = FileUtilities.relativizePath(file, sourceFile);
 		if (relativePath == null) {
 			throw new ClassNotFoundException(
 				String.format("Failed to find script file '%s' in source directory '%s'",
-					sourceFile, getSourceDirectory()));
+					sourceFile, file));
 		}
 		// chop ".java" from the end
 		relativePath = relativePath.substring(0, relativePath.length() - 5);
@@ -344,9 +344,9 @@ public class GhidraSourceBundle extends GhidraBundle {
 			return manifestParser.getCapabilities();
 		}
 
-		int sourceDirLength = getSourceDirectory().getAbsolutePath().length() + 1;
+		int sourceDirLength = file.getAbsolutePath().length() + 1;
 		List<String> packageDirs = new ArrayList<>();
-		findPackageDirs(packageDirs, getSourceDirectory());
+		findPackageDirs(packageDirs, file);
 		StringBuilder sb = new StringBuilder();
 		for (String packageDir : packageDirs) {
 			// skip unnamed package
@@ -580,7 +580,7 @@ public class GhidraSourceBundle extends GhidraBundle {
 		if (newSourceCount == 0) {
 			if (buildErrorsLastTime > 0) {
 				writer.printf("%s hasn't changed, with %d file%s failing in previous build(s):\n",
-					getSourceDirectory().toString(), buildErrorsLastTime,
+					file.toString(), buildErrorsLastTime,
 					buildErrorsLastTime > 1 ? "s" : "");
 				writer.printf("%s\n", getPreviousBuildErrors());
 				writer.flush();
@@ -597,7 +597,7 @@ public class GhidraSourceBundle extends GhidraBundle {
 
 		if (needsCompile) {
 			// if there is a bundle at our locations, uninstall it
-			Bundle osgiBundle = bundleHost.getOSGiBundle(getLocationIdentifier());
+			Bundle osgiBundle = bundleHost.getOSGiBundle(bundleLoc);
 			if (osgiBundle != null) {
 				bundleHost.deactivateSynchronously(osgiBundle);
 			}
@@ -1033,10 +1033,10 @@ public class GhidraSourceBundle extends GhidraBundle {
 		options.add("-d");
 		options.add(binaryDir.toString());
 		options.add("-sourcepath");
-		options.add(getSourceDirectory().toString());
+		options.add(file.toString());
 		options.add("-classpath");
 		options.add(
-			System.getProperty("java.class.path") + File.pathSeparator + binaryDir.toString());
+			System.getProperty("java.class.path") + File.pathSeparator + binaryDir);
 		options.add("-proc:none");
 
 		// clear build errors

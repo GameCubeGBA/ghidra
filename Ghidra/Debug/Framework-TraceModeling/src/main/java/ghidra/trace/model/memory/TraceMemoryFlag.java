@@ -28,7 +28,7 @@ public enum TraceMemoryFlag {
 
 	public static EnumSet<TraceMemoryFlag> fromBits(EnumSet<TraceMemoryFlag> flags, int mask) {
 		for (TraceMemoryFlag f : TraceMemoryFlag.values()) {
-			if ((mask & f.getBits()) != 0) {
+			if ((mask & f.bits) != 0) {
 				flags.add(f);
 			}
 		}
@@ -42,7 +42,7 @@ public enum TraceMemoryFlag {
 	public static byte toBits(Collection<TraceMemoryFlag> flags) {
 		byte bits = 0;
 		for (TraceMemoryFlag f : flags) {
-			bits |= f.getBits();
+			bits |= f.bits;
 		}
 		return bits;
 	}

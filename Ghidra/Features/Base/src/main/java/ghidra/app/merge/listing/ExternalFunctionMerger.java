@@ -1227,7 +1227,7 @@ public class ExternalFunctionMerger extends AbstractFunctionMerger implements Li
 
             try {
                 resultExternalLocation = replaceExternalLocation(resultExternalLocation,
-                        myExternalLocation, getMergeMy(), monitor);
+                        myExternalLocation, mergeMy, monitor);
                 myResolvedSymbols.put(myID, resultID);
                 originalResolvedSymbols.put(originalID, resultID);
             } catch (DuplicateNameException | InvalidInputException e) {
@@ -1466,7 +1466,7 @@ public class ExternalFunctionMerger extends AbstractFunctionMerger implements Li
 				}
 				else {
 					// Auto Merge MY external function changes.
-					replaceFunction(externalLocations[RESULT], externalLocations[MY], getMergeMy(),
+					replaceFunction(externalLocations[RESULT], externalLocations[MY], mergeMy,
 						monitor);
 				}
 			}
@@ -1715,7 +1715,7 @@ public class ExternalFunctionMerger extends AbstractFunctionMerger implements Li
 				// Add the function to the external location.
 				// Change the external Label into a function.
 				Function resultFunction = resultExternalLocation.createFunction();
-				getMergeMy().replaceExternalFunction(resultFunction, myFunction, monitor);
+				mergeMy.replaceExternalFunction(resultFunction, myFunction, monitor);
 			}
 		}
 		// Otherwise Latest and My are equivalent.
@@ -1740,7 +1740,7 @@ public class ExternalFunctionMerger extends AbstractFunctionMerger implements Li
 			throws DuplicateNameException, InvalidInputException, CancelledException {
 
 		ExternalLocation resultExternalLocation =
-			addExternal(myExternalLocation, getMergeMy(), monitor);
+			addExternal(myExternalLocation, mergeMy, monitor);
 		if ((resultExternalLocation != null) &&
 			!resultExternalLocation.getLabel().equals(myExternalLocation.getLabel())) {
 			renamedConflictIDs.add(resultExternalLocation.getSymbol().getID());
@@ -3428,7 +3428,7 @@ public class ExternalFunctionMerger extends AbstractFunctionMerger implements Li
 			}
 			if (myIsFunction && !latestIsFunction) {
 				// Auto Merge MY external function changes.
-				replaceFunction(externalLocations[RESULT], externalLocations[MY], getMergeMy(),
+				replaceFunction(externalLocations[RESULT], externalLocations[MY], mergeMy,
 					monitor);
 			}
 		}
@@ -3668,15 +3668,15 @@ public class ExternalFunctionMerger extends AbstractFunctionMerger implements Li
 		switch (currentChosenOption) {
 			case KEEP_LATEST:
 				replaceFunction(externalLocations[RESULT], externalLocations[LATEST],
-					getMergeLatest(), monitor);
+                        mergeLatest, monitor);
 				break;
 			case KEEP_MY:
-				replaceFunction(externalLocations[RESULT], externalLocations[MY], getMergeMy(),
+				replaceFunction(externalLocations[RESULT], externalLocations[MY], mergeMy,
 					monitor);
 				break;
 			case KEEP_ORIGINAL:
 				replaceFunction(externalLocations[RESULT], externalLocations[ORIGINAL],
-					getMergeOriginal(), monitor);
+                        mergeOriginal, monitor);
 			default:
 				throw new AssertException("Can only merge external detail from Latest or My.");
 		}
@@ -3735,7 +3735,7 @@ public class ExternalFunctionMerger extends AbstractFunctionMerger implements Li
 			latestAddressTranslator.setPair(externalLocations[RESULT].getExternalSpaceAddress(),
 				externalLocations[LATEST].getExternalSpaceAddress());
 			ExternalLocation resultExternalLocation = replaceExternalLocation(
-				externalLocations[RESULT], externalLocations[LATEST], getMergeLatest(), monitor);
+				externalLocations[RESULT], externalLocations[LATEST], mergeLatest, monitor);
 			externalLocations[RESULT] = resultExternalLocation;
 			adjustIDMapsForReplace(externalLocations, LATEST);
 		}
@@ -3760,7 +3760,7 @@ public class ExternalFunctionMerger extends AbstractFunctionMerger implements Li
 			myAddressTranslator.setPair(externalLocations[RESULT].getExternalSpaceAddress(),
 				externalLocations[MY].getExternalSpaceAddress());
 			ExternalLocation resultExternalLocation = replaceExternalLocation(
-				externalLocations[RESULT], externalLocations[MY], getMergeMy(), monitor);
+				externalLocations[RESULT], externalLocations[MY], mergeMy, monitor);
 			externalLocations[RESULT] = resultExternalLocation;
 			adjustIDMapsForReplace(externalLocations, MY);
 		}
@@ -3795,7 +3795,7 @@ public class ExternalFunctionMerger extends AbstractFunctionMerger implements Li
 				externalLocations[ORIGINAL].getExternalSpaceAddress());
 			ExternalLocation resultExternalLocation =
 				replaceExternalLocation(externalLocations[RESULT], externalLocations[ORIGINAL],
-					getMergeOriginal(), monitor);
+                        mergeOriginal, monitor);
 			externalLocations[RESULT] = resultExternalLocation;
 			adjustIDMapsForReplace(externalLocations, ORIGINAL);
 		}

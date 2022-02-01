@@ -394,7 +394,7 @@ public class DefaultTraceRecorder implements TraceRecorder {
 				return null;
 			}
 			TargetObject focus = focusScope.getFocus();
-			if (focus == null || !PathUtils.isAncestor(getTarget().getPath(), focus.getPath())) {
+			if (focus == null || !PathUtils.isAncestor(target.getPath(), focus.getPath())) {
 				return null;
 			}
 			curFocus = focus;
@@ -412,7 +412,7 @@ public class DefaultTraceRecorder implements TraceRecorder {
 			return CompletableFuture
 					.failedFuture(new IllegalArgumentException("Target does not support focus"));
 		}
-		if (!PathUtils.isAncestor(getTarget().getPath(), focus.getPath())) {
+		if (!PathUtils.isAncestor(target.getPath(), focus.getPath())) {
 			return CompletableFuture.failedFuture(new IllegalArgumentException(
 				"Requested focus path is not a successor of the target"));
 		}
@@ -453,7 +453,7 @@ public class DefaultTraceRecorder implements TraceRecorder {
 	}
 
 	public Set<TargetThread> getThreadsView() {
-		return getThreadMap().byTargetThread.keySet();
+		return threadMap.byTargetThread.keySet();
 	}
 
 	// UNUSED?
@@ -463,7 +463,7 @@ public class DefaultTraceRecorder implements TraceRecorder {
 	}
 
 	public DefaultThreadRecorder getThreadRecorder(TraceThread thread) {
-		return (DefaultThreadRecorder) getThreadMap().get(thread);
+		return (DefaultThreadRecorder) threadMap.get(thread);
 	}
 
 	public ManagedThreadRecorder getThreadRecorder(TargetThread thread) {

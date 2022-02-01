@@ -68,7 +68,7 @@ public abstract class AbstractEnumMsType extends AbstractComplexMsType {
 	@Override
 	public void emit(StringBuilder builder, Bind bind) {
 		StringBuilder myBuilder = new StringBuilder();
-		myBuilder.append(getTypeString());
+		myBuilder.append(TYPE_STRING);
 		myBuilder.append(" ");
 		myBuilder.append(name);
 		myBuilder.append("<");

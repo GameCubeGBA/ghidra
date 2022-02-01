@@ -238,14 +238,14 @@ public class DefaultThreadRecorder implements ManagedThreadRecorder {
 	}
 
 	public void threadDestroyed() {
-		String path = getTargetThread().getJoinedPath(".");
+		String path = targetThread.getJoinedPath(".");
 		long snap = recorder.getSnap();
 		recorder.parTx.execute("Thread " + path + " destroyed", () -> {
 			// TODO: Should it be key - 1
 			// Perhaps, since the thread should not exist
 			// But it could imply earlier destruction than actually observed
 			try {
-				getTraceThread().setDestructionSnap(snap);
+				traceThread.setDestructionSnap(snap);
 			}
 			catch (DuplicateNameException e) {
 				throw new AssertionError(e); // Should be shrinking
@@ -287,7 +287,7 @@ public class DefaultThreadRecorder implements ManagedThreadRecorder {
 					}
 				}
 			}
-		}, getTargetThread().getJoinedPath("."));
+		}, targetThread.getJoinedPath("."));
 	}
 
 	@Override
@@ -327,7 +327,7 @@ public class DefaultThreadRecorder implements ManagedThreadRecorder {
 					readAlignedConditionally(key, addr); // NB: Reports errors
 				}
 			}
-		}, getTargetThread().getJoinedPath("."));
+		}, targetThread.getJoinedPath("."));
 	}
 
 	@Override
@@ -488,7 +488,7 @@ public class DefaultThreadRecorder implements ManagedThreadRecorder {
 	}
 
 	protected boolean checkThreadRemoved(TargetObject invalid) {
-		if (getTargetThread() == invalid) {
+		if (targetThread == invalid) {
 			threadDestroyed();
 			return true;
 		}

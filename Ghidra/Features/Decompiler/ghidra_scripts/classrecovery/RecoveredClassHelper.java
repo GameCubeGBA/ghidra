@@ -201,9 +201,8 @@ public class RecoveredClassHelper {
 			Map<Address, Function> vftableRefToFunctionMapping) throws CancelledException {
 
 		Set<Address> keySet = vftableRefToFunctionMapping.keySet();
-        for (Address address : keySet) {
+        for (Address vtableReference : keySet) {
             monitor.checkCanceled();
-            Address vtableReference = address;
             Function function = vftableRefToFunctionMapping.get(vtableReference);
             if (functionToVftableRefsMap.containsKey(function)) {
                 List<Address> referenceList = functionToVftableRefsMap.get(function);
@@ -285,7 +284,7 @@ public class RecoveredClassHelper {
 			// can't just get all that contain vftable because that would get some strings
 			else {
 				String name = vftableSymbol.getName();
-				name = name.substring(1, name.length());
+				name = name.substring(1);
 				if (name.startsWith("vftable")) {
 					vftableSymbolList.add(vftableSymbol);
 				}
@@ -576,9 +575,8 @@ public class RecoveredClassHelper {
 
 		Collections.sort(vftableReferenceList);
 
-        for (Address address : vftableReferenceList) {
+        for (Address vftableRef : vftableReferenceList) {
             monitor.checkCanceled();
-            Address vftableRef = address;
 
             Address vftableAddress = vftableRefToVftableMap.get(vftableRef);
             if (vftableAddress == null) {
@@ -621,9 +619,8 @@ public class RecoveredClassHelper {
 		// make a list of all related class references
 		List<Address> listOfAncestorRefs = new ArrayList<Address>();
 		Set<Address> ancestorRefs = referenceToClassMapForFunction.keySet();
-        for (Address ref : ancestorRefs) {
+        for (Address ancestorRef : ancestorRefs) {
             monitor.checkCanceled();
-            Address ancestorRef = ref;
             RecoveredClass mappedClass = referenceToClassMapForFunction.get(ancestorRef);
             if (classHierarchy.contains(mappedClass)) {
                 listOfAncestorRefs.add(ancestorRef);
@@ -655,11 +652,10 @@ public class RecoveredClassHelper {
 		}
 
 		// iterate through all vftable refs in the function and add it to ref/Parent map
-        for (Address ref : vftableRefs) {
+        for (Address vftableRef : vftableRefs) {
 
             monitor.checkCanceled();
 
-            Address vftableRef = ref;
             Address vftableAddress = extendedFlatAPI.getSingleReferencedAddress(vftableRef);
 
             if (vftableAddress == null) {
@@ -813,9 +809,8 @@ public class RecoveredClassHelper {
 			new ArrayList<RecoveredClass>(recoveredClass.getClassHierarchyMap().keySet());
 
 		// try direct parents first
-        for (RecoveredClass aClass : parentClasses) {
+        for (RecoveredClass parentClass : parentClasses) {
             monitor.checkCanceled();
-            RecoveredClass parentClass = aClass;
             List<Function> constructorDestructorList =
                     new ArrayList<Function>(parentClass.getConstructorList());
             constructorDestructorList.addAll(parentClass.getDestructorList());
@@ -883,9 +878,8 @@ public class RecoveredClassHelper {
 
 		if (!storedPcodeOps.isEmpty()) {
             // figure out if vftable is referenced
-            for (OffsetPcodeOpPair storedPcodeOp : storedPcodeOps) {
+            for (OffsetPcodeOpPair offsetPcodeOpPair : storedPcodeOps) {
                 monitor.checkCanceled();
-                OffsetPcodeOpPair offsetPcodeOpPair = storedPcodeOp;
                 PcodeOp pcodeOp = offsetPcodeOpPair.getPcodeOp();
                 Varnode storedValue = pcodeOp.getInput(2);
                 Address vftableAddress = decompilerUtils.getAssignedAddressFromPcode(storedValue);
@@ -1229,10 +1223,8 @@ public class RecoveredClassHelper {
 	public boolean isClassAnAncestorOfAnyOnList(List<RecoveredClass> recoveredClasses,
 			RecoveredClass possibleAncestor) throws Exception {
 
-        for (RecoveredClass aClass : recoveredClasses) {
+        for (RecoveredClass recoveredClass : recoveredClasses) {
             monitor.checkCanceled();
-            RecoveredClass recoveredClass = aClass;
-
             if (isClassAnAncestor(recoveredClass, possibleAncestor)) {
                 return true;
             }
@@ -1328,8 +1320,6 @@ public class RecoveredClassHelper {
 		childClass.setHasParentClass(true);
 		parentClass.setHasChildClass(true);
 		parentClass.addChildClass(childClass);
-
-		return;
 	}
 
 	/**
@@ -1343,9 +1333,8 @@ public class RecoveredClassHelper {
 
 		List<RecoveredClass> classesWithVFunctions = new ArrayList<RecoveredClass>();
 
-        for (RecoveredClass aClass : recoveredClasses) {
+        for (RecoveredClass recoveredClass : recoveredClasses) {
             monitor.checkCanceled();
-            RecoveredClass recoveredClass = aClass;
             if (recoveredClass.hasVftable()) {
                 classesWithVFunctions.add(recoveredClass);
             }
@@ -1376,11 +1365,10 @@ public class RecoveredClassHelper {
 		List<RecoveredClass> parentClassList =
 			new ArrayList<RecoveredClass>(classHierarchyMap.keySet());
 
-        for (RecoveredClass aClass : parentClassList) {
+        for (RecoveredClass parentClass : parentClassList) {
 
             monitor.checkCanceled();
 
-            RecoveredClass parentClass = aClass;
             if (parentClass.hasVftable()) {
                 parentsWithVFunctions.add(parentClass);
             }
@@ -1407,11 +1395,10 @@ public class RecoveredClassHelper {
 
 		List<RecoveredClass> classHierarchyList = recoveredClass.getClassHierarchy();
 
-        for (RecoveredClass aClass : classHierarchyList) {
+        for (RecoveredClass parentClass : classHierarchyList) {
 
             monitor.checkCanceled();
 
-            RecoveredClass parentClass = aClass;
             if (parentClass.hasVftable()) {
                 ancestorsWithVFunctions.add(parentClass);
             }
@@ -1433,9 +1420,8 @@ public class RecoveredClassHelper {
 
 		List<RecoveredClass> classHierarchy = recoveredClass.getClassHierarchy();
 
-        for (RecoveredClass aClass : classHierarchy) {
+        for (RecoveredClass ancestorClass : classHierarchy) {
             monitor.checkCanceled();
-            RecoveredClass ancestorClass = aClass;
 
             // skip self
             if (ancestorClass.equals(recoveredClass)) {
@@ -1458,9 +1444,8 @@ public class RecoveredClassHelper {
 	public boolean hasNonVirtualFunctionAncestor(RecoveredClass recoveredClass)
 			throws CancelledException {
 		List<RecoveredClass> classHierarchy = recoveredClass.getClassHierarchy();
-        for (RecoveredClass aClass : classHierarchy) {
+        for (RecoveredClass currentClass : classHierarchy) {
             monitor.checkCanceled();
-            RecoveredClass currentClass = aClass;
             if (!currentClass.hasVftable()) {
                 return true;
             }
@@ -1489,9 +1474,8 @@ public class RecoveredClassHelper {
 			List<Function> constructorList =
 				new ArrayList<Function>(currentClass.getConstructorList());
 			constructorList.addAll(currentClass.getInlinedConstructorList());
-            for (Function function : constructorList) {
+            for (Function constructor : constructorList) {
                 monitor.checkCanceled();
-                Function constructor = function;
                 if (!allAncestorConstructors.contains(constructor)) {
                     allAncestorConstructors.add(constructor);
                 }
@@ -1521,9 +1505,8 @@ public class RecoveredClassHelper {
 			List<Function> destructorList =
 				new ArrayList<Function>(parentClass.getDestructorList());
 			destructorList.addAll(parentClass.getInlinedDestructorList());
-            for (Function function : destructorList) {
+            for (Function destructor : destructorList) {
                 monitor.checkCanceled();
-                Function destructor = function;
                 if (!allAncestorDestructors.contains(destructor)) {
                     allAncestorDestructors.add(destructor);
                 }
@@ -1544,16 +1527,14 @@ public class RecoveredClassHelper {
 		List<Function> allDescendantConstructors = new ArrayList<Function>();
 
 		List<RecoveredClass> childClasses = recoveredClass.getChildClasses();
-        for (RecoveredClass aClass : childClasses) {
+        for (RecoveredClass childClass : childClasses) {
             monitor.checkCanceled();
-            RecoveredClass childClass = aClass;
 
             List<Function> constructorList =
                     new ArrayList<Function>(childClass.getConstructorList());
             constructorList.addAll(childClass.getInlinedConstructorList());
-            for (Function function : constructorList) {
+            for (Function constructor : constructorList) {
                 monitor.checkCanceled();
-                Function constructor = function;
                 if (!allDescendantConstructors.contains(constructor)) {
                     allDescendantConstructors.add(constructor);
                 }
@@ -1576,15 +1557,13 @@ public class RecoveredClassHelper {
 		List<Function> allDescendantDestructors = new ArrayList<Function>();
 
 		List<RecoveredClass> childClasses = recoveredClass.getChildClasses();
-        for (RecoveredClass aClass : childClasses) {
+        for (RecoveredClass childClass : childClasses) {
             monitor.checkCanceled();
-            RecoveredClass childClass = aClass;
 
             List<Function> destructorList = new ArrayList<Function>(childClass.getDestructorList());
             destructorList.addAll(childClass.getInlinedDestructorList());
-            for (Function function : destructorList) {
+            for (Function destructor : destructorList) {
                 monitor.checkCanceled();
-                Function destructor = function;
                 if (!allDescendantDestructors.contains(destructor)) {
                     allDescendantDestructors.add(destructor);
                 }
@@ -1759,10 +1738,8 @@ public class RecoveredClassHelper {
 		List<Function> childConstructors = getAllClassConstructors(recoveredClass);
 		List<Function> childDestructors = getAllClassDestructors(recoveredClass);
 
-        for (Function destFunction : constDestFunctions) {
+        for (Function constDestFunction : constDestFunctions) {
             monitor.checkCanceled();
-
-            Function constDestFunction = destFunction;
 
             // based on call order get possible parent constructors for the given function
             List<Function> possibleParentConstructors =
@@ -1816,9 +1793,8 @@ public class RecoveredClassHelper {
 		// once all checks pass, add both the child and parent constructors to their class
 		// constructor list and remove from the indeterminate lists
 		// the addConstructor method processes the offsets and types for the initialized class data
-        for (Function value : constructorKeySet) {
+        for (Function childConstructor : constructorKeySet) {
             monitor.checkCanceled();
-            Function childConstructor = value;
             addConstructorToClass(recoveredClass, childConstructor);
             recoveredClass.removeIndeterminateConstructorOrDestructor(childConstructor);
             Function parentConstructor = childParentConstructorMap.get(childConstructor);
@@ -1827,9 +1803,8 @@ public class RecoveredClassHelper {
         }
 
 		// Do the same for the child/parent destructors
-        for (Function function : destructorKeySet) {
+        for (Function childDestructor : destructorKeySet) {
             monitor.checkCanceled();
-            Function childDestructor = function;
             addDestructorToClass(recoveredClass, childDestructor);
             recoveredClass.removeIndeterminateConstructorOrDestructor(childDestructor);
             Function parentDestructor = childParentDestructorMap.get(childDestructor);
@@ -1977,9 +1952,8 @@ public class RecoveredClassHelper {
 		Collections.sort(offsetList);
 
 		int order = 0;
-        for (Integer integer : offsetList) {
+        for (Integer offset : offsetList) {
             monitor.checkCanceled();
-            Integer offset = integer;
             Address vftableAddress = classOffsetToVftableMap.get(offset);
             recoveredClass.addOrderToVftableMapping(order, vftableAddress);
             order++;
@@ -1994,9 +1968,8 @@ public class RecoveredClassHelper {
 	public void createVftableOrderMap(List<RecoveredClass> recoveredClasses)
 			throws CancelledException {
 
-        for (RecoveredClass aClass : recoveredClasses) {
+        for (RecoveredClass recoveredClass : recoveredClasses) {
             monitor.checkCanceled();
-            RecoveredClass recoveredClass = aClass;
 
             // create a mapping of the order of the vftable to the vftable address and save to class
             createVftableOrderMapping(recoveredClass);
@@ -2016,10 +1989,9 @@ public class RecoveredClassHelper {
 			List<Address> referencesToConstructors) throws CancelledException,
 			InvalidInputException, DuplicateNameException, CircularDependencyException {
 
-        for (Address referencesToConstructor : referencesToConstructors) {
+        for (Address constructorReference : referencesToConstructors) {
             monitor.checkCanceled();
 
-            Address constructorReference = referencesToConstructor;
             RecoveredClass recoveredClass = referenceToClassMap.get(constructorReference);
 
 			Function constructor =
@@ -2060,9 +2032,8 @@ public class RecoveredClassHelper {
 		List<Address> referencesToVftables = new ArrayList<Address>();
 
 		List<Address> referenceAddresses = new ArrayList<Address>(referenceToClassMap.keySet());
-        for (Address referenceAddress : referenceAddresses) {
+        for (Address reference : referenceAddresses) {
             monitor.checkCanceled();
-            Address reference = referenceAddress;
             Address vftableAddress = getVftableAddress(reference);
             if (vftableAddress != null) {
                 referencesToVftables.add(reference);
@@ -2078,9 +2049,8 @@ public class RecoveredClassHelper {
 		int numRefs = referencesToVftables.size();
 		Address lastRef = referencesToVftables.get(numRefs - 1);
 
-        for (Address referencesToVftable : referencesToVftables) {
+        for (Address refToVftable : referencesToVftables) {
             monitor.checkCanceled();
-            Address refToVftable = referencesToVftable;
             RecoveredClass referencedClass = referenceToClassMap.get(refToVftable);
 
             // last reference is the constructor
@@ -2138,9 +2108,8 @@ public class RecoveredClassHelper {
 		int numRefs = referencesToVftables.size();
 		Address lastRef = referencesToVftables.get(numRefs - 1);
 
-        for (Address referencesToVftable : referencesToVftables) {
+        for (Address refToVftable : referencesToVftables) {
             monitor.checkCanceled();
-            Address refToVftable = referencesToVftable;
             RecoveredClass referencedClass = referenceToClassMap.get(refToVftable);
 
             // last reference is the constructor
@@ -2268,9 +2237,8 @@ public class RecoveredClassHelper {
 			throws CancelledException {
 
 		int total = 0;
-        for (RecoveredClass aClass : recoveredClasses) {
+        for (RecoveredClass recoveredClass : recoveredClasses) {
             monitor.checkCanceled();
-            RecoveredClass recoveredClass = aClass;
             List<Function> constructorList = recoveredClass.getConstructorList();
             total += constructorList.size();
         }
@@ -2287,9 +2255,8 @@ public class RecoveredClassHelper {
 			throws CancelledException {
 
 		int total = 0;
-        for (RecoveredClass aClass : recoveredClasses) {
+        for (RecoveredClass recoveredClass : recoveredClasses) {
             monitor.checkCanceled();
-            RecoveredClass recoveredClass = aClass;
 
             int numDestructors = recoveredClass.getDestructorList().size();
             total += numDestructors;
@@ -2307,9 +2274,8 @@ public class RecoveredClassHelper {
 			throws CancelledException {
 
 		int total = 0;
-        for (RecoveredClass aClass : recoveredClasses) {
+        for (RecoveredClass recoveredClass : recoveredClasses) {
             monitor.checkCanceled();
-            RecoveredClass recoveredClass = aClass;
 
             int numInlinedDestructors = recoveredClass.getInlinedDestructorList().size();
             total += numInlinedDestructors;
@@ -2327,9 +2293,8 @@ public class RecoveredClassHelper {
 			throws CancelledException {
 
 		int total = 0;
-        for (RecoveredClass aClass : recoveredClasses) {
+        for (RecoveredClass recoveredClass : recoveredClasses) {
             monitor.checkCanceled();
-            RecoveredClass recoveredClass = aClass;
 
             List<Function> deletingDestructors = recoveredClass.getDeletingDestructors();
             total += deletingDestructors.size();
@@ -2365,9 +2330,8 @@ public class RecoveredClassHelper {
 			throws CancelledException {
 
 		int total = 0;
-        for (RecoveredClass aClass : recoveredClasses) {
+        for (RecoveredClass recoveredClass : recoveredClasses) {
             monitor.checkCanceled();
-            RecoveredClass recoveredClass = aClass;
 
             Function cloneFunction = recoveredClass.getVBaseDestructor();
             if (cloneFunction != null) {
@@ -7039,7 +7003,7 @@ public class RecoveredClassHelper {
 				dataType = new Undefined1DataType();
 			}
 
-			String fieldName = new String();
+			String fieldName = "";
 			String comment = null;
 
 			// if the computed class struct has field name (ie from pdb) use it otherwise create one

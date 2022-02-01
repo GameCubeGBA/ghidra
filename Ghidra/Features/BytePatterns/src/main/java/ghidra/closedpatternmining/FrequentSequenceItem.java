@@ -75,10 +75,10 @@ public class FrequentSequenceItem implements Comparable<FrequentSequenceItem> {
 			return false;
 		}
 		FrequentSequenceItem other = (FrequentSequenceItem) obj;
-		if (!other.getItem().equals(frequentItem)) {
+		if (!other.frequentItem.equals(frequentItem)) {
 			return false;
 		}
-		if (!(other.getSupport() == support)) {
+		if (!(other.support == support)) {
 			return false;
 		}
 		return true;
@@ -120,9 +120,9 @@ public class FrequentSequenceItem implements Comparable<FrequentSequenceItem> {
 	 */
 	@Override
 	public int compareTo(FrequentSequenceItem arg0) {
-		int itemCompare = getItem().compareTo(arg0.getItem());
+		int itemCompare = frequentItem.compareTo(arg0.frequentItem);
 		if (itemCompare == 0) {
-			return support - arg0.getSupport();
+			return support - arg0.support;
 		}
 		return itemCompare;
 	}

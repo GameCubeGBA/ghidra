@@ -132,22 +132,22 @@ class StructureEditorModel extends CompEditorModel {
 
 		DataTypeComponent dtc = getComponent(rowIndex);
 		if (dtc == null) {
-			if (columnIndex == getDataTypeColumn()) {
+			if (columnIndex == DATATYPE) {
 				return null;
 			}
 			return "";
 		}
 
 		String value = null;
-		if (columnIndex == getOffsetColumn()) {
+		if (columnIndex == OFFSET) {
 			int offset = dtc.getOffset();
 			value = showHexNumbers ? getHexString(offset, true) : Integer.toString(offset);
 		}
-		else if (columnIndex == getLengthColumn()) {
+		else if (columnIndex == LENGTH) {
 			int compLen = dtc.getLength();
 			value = showHexNumbers ? getHexString(compLen, true) : Integer.toString(compLen);
 		}
-		else if (columnIndex == getMnemonicColumn()) {
+		else if (columnIndex == MNEMONIC) {
 			DataType dt = dtc.getDataType();
 			value = dt.getMnemonic(dtc.getDefaultSettings());
 			int compLen = dtc.getLength();
@@ -156,15 +156,15 @@ class StructureEditorModel extends CompEditorModel {
 				value = "TooBig: " + value + " needs " + dtLen + " has " + compLen;
 			}
 		}
-		else if (columnIndex == getDataTypeColumn()) {
+		else if (columnIndex == DATATYPE) {
 			DataType dt = dtc.getDataType();
 			int dtLen = dt.getLength();
 			return DataTypeInstance.getDataTypeInstance(dt, (dtLen > 0) ? dtLen : dtc.getLength());
 		}
-		else if (columnIndex == getNameColumn()) {
+		else if (columnIndex == FIELDNAME) {
 			value = dtc.getFieldName();
 		}
-		else if (columnIndex == getCommentColumn()) {
+		else if (columnIndex == COMMENT) {
 			value = dtc.getComment();
 		}
 		else if (columnIndex == ORDINAL) {

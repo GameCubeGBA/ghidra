@@ -806,7 +806,7 @@ public class InstructionDB extends CodeUnitDB implements Instruction, Instructio
 				"Program does not contain referenced instruction: " + instructionAddress);
 		}
 		// Ensure that prototype is same implementation
-		InstructionPrototype otherProto = instr.getPrototype();
+		InstructionPrototype otherProto = instr.proto;
 		if (!otherProto.getClass().equals(proto.getClass())) {
 			throw new UnknownContextException(
 				"Instruction has incompatible prototype at: " + instructionAddress);

@@ -55,7 +55,7 @@ public class DbgBreakpointInfo {
 	 * @param locations the resolved address(es) of this breakpoint
 	 */
 	public DbgBreakpointInfo(DbgBreakpointInfo oldInfo, boolean enabled) {
-		this(oldInfo.getDebugBreakpoint(), oldInfo.getProc(), oldInfo.getEventThread());
+		this(oldInfo.bpt, oldInfo.proc, oldInfo.eventThread);
 		this.enabled = enabled;
 	}
 
@@ -81,7 +81,7 @@ public class DbgBreakpointInfo {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(number, bptType, getFlags(), /*location,*/ enabled, access, getSize(),
+		return Objects.hash(number, bptType, flags, /*location,*/ enabled, access, size,
 			offset, expression);
 	}
 
@@ -111,10 +111,10 @@ public class DbgBreakpointInfo {
 		if (this.number != that.number) {
 			return false;
 		}
-		if (this.getFlags() != that.getFlags()) {
+		if (this.flags != that.flags) {
 			return false;
 		}
-		if (this.getSize() != that.getSize()) {
+		if (this.size != that.size) {
 			return false;
 		}
 		/*if (!Objects.equals(this.location, that.location)) {
@@ -228,7 +228,7 @@ public class DbgBreakpointInfo {
 	 * @return the pending location
 	 */
 	public String getPending() {
-		return getFlags().contains(BreakFlags.DEFERRED) ? "pending" : "";
+		return flags.contains(BreakFlags.DEFERRED) ? "pending" : "";
 	}
 
 	/**
@@ -237,7 +237,7 @@ public class DbgBreakpointInfo {
 	 * @return true if enabled, false otherwise
 	 */
 	public boolean isEnabled() {
-		return getFlags().contains(BreakFlags.ENABLED);
+		return flags.contains(BreakFlags.ENABLED);
 	}
 
 	/**

@@ -75,80 +75,80 @@ public class IntelHexRecord {
 	}
 
 	private void checkLoadOffset() {
-		if (getLoadOffset() < 0) {
+		if (loadOffset < 0) {
 			throw new IllegalArgumentException("loadOffset < 0");
 		}
-		if (getLoadOffset() > 0xffff) {
+		if (loadOffset > 0xffff) {
 			throw new IllegalArgumentException("loadOffset > 0xffff");
 		}
 	}
 
 	private void checkRecordType() {
-		switch (getRecordType()) {
+		switch (recordType) {
 			case DATA_RECORD_TYPE:
 				// valid, no real restrictions
 				break;
 			case END_OF_FILE_RECORD_TYPE:
-				if (getRecordLength() != 0) {
-					throw new IllegalArgumentException("bad length (" + getRecordLength() +
+				if (recordLength != 0) {
+					throw new IllegalArgumentException("bad length (" + recordLength +
 						") for End Of File Record");
 				}
-				if (getLoadOffset() != 0) {
-					throw new IllegalArgumentException("bad load offset (" + getLoadOffset() +
+				if (loadOffset != 0) {
+					throw new IllegalArgumentException("bad load offset (" + loadOffset +
 						") for End Of File Record");
 				}
 				break;
 			case EXTENDED_SEGMENT_ADDRESS_RECORD_TYPE:
-				if (getRecordLength() != 2) {
-					throw new IllegalArgumentException("bad length (" + getRecordLength() +
+				if (recordLength != 2) {
+					throw new IllegalArgumentException("bad length (" + recordLength +
 						") for Extended Segment Address Record");
 				}
-				if (getLoadOffset() != 0) {
-					throw new IllegalArgumentException("bad load offset (" + getLoadOffset() +
+				if (loadOffset != 0) {
+					throw new IllegalArgumentException("bad load offset (" + loadOffset +
 						") for Extended Segment Address Record");
 				}
 				break;
 			case START_SEGMENT_ADDRESS_RECORD:
-				if (getRecordLength() != 4) {
-					throw new IllegalArgumentException("bad length (" + getRecordLength() +
+				if (recordLength != 4) {
+					throw new IllegalArgumentException("bad length (" + recordLength +
 						") for Start Segment Address Record");
 				}
-				if (getLoadOffset() != 0) {
-					throw new IllegalArgumentException("bad load offset (" + getLoadOffset() +
+				if (loadOffset != 0) {
+					throw new IllegalArgumentException("bad load offset (" + loadOffset +
 						") for Start Segment Address Record");
 				}
 				break;
 			case EXTENDED_LINEAR_ADDRESS_RECORD_TYPE:
-				if (getRecordLength() != 2) {
-					throw new IllegalArgumentException("bad length (" + getRecordLength() +
+				if (recordLength != 2) {
+					throw new IllegalArgumentException("bad length (" + recordLength +
 						") for Extended Linear Address Record");
 				}
-				if (getLoadOffset() != 0) {
-					throw new IllegalArgumentException("bad load offset (" + getLoadOffset() +
+				if (loadOffset != 0) {
+					throw new IllegalArgumentException("bad load offset (" + loadOffset +
 						") for Extended Linear Address Record");
 				}
 				break;
 			case START_LINEAR_ADDRESS_RECORD_TYPE:
-				if (getRecordLength() != 4) {
-					throw new IllegalArgumentException("bad length (" + getRecordLength() +
+				if (recordLength != 4) {
+					throw new IllegalArgumentException("bad length (" + recordLength +
 						") for Start Linear Address Record");
 				}
-				if (getLoadOffset() != 0) {
-					throw new IllegalArgumentException("bad load offset (" + getLoadOffset() +
+				if (loadOffset != 0) {
+					throw new IllegalArgumentException("bad load offset (" + loadOffset +
 						") for Start Linear Address Record");
 				}
 				break;
 			default:
-				throw new IllegalArgumentException("illegal record type - " + getRecordType());
+				throw new IllegalArgumentException("illegal record type - " + recordType);
 		}
 	}
 
 	private void checkRecordLength() {
 		// inadvertently checks for < 0 because array size must be positive
-		if (getRecordLength() != data.length) {
+		if (recordLength != data.length) {
 			throw new IllegalArgumentException("recordLength != data.length");
 		}
-		if (getRecordLength() > MAX_RECORD_LENGTH) {
+		if (recordLength > MAX_RECORD_LENGTH) {
 			throw new IllegalArgumentException("recordLength > " + MAX_RECORD_LENGTH);
 		}
 	}
@@ -207,13 +207,13 @@ public class IntelHexRecord {
 
 	public String format() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(String.format(":%02X%04X%02X", getRecordLength(), getLoadOffset(),
-			getRecordType()));
+		sb.append(String.format(":%02X%04X%02X", recordLength, loadOffset,
+                recordType));
 		// warning: careful with that axe, Eugene
         for (byte datum : data) {
             sb.append(String.format("%02X", datum));
         }
-		sb.append(String.format("%02X", getActualChecksum()));
+		sb.append(String.format("%02X", actualChecksum));
 		return sb.toString();
 	}
 

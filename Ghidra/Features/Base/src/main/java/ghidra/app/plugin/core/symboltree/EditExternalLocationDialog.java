@@ -159,7 +159,7 @@ public class EditExternalLocationDialog extends DialogComponentProvider {
 			editName += "::" + locationName;
 		}
 		if (address != null) {
-			editName += " @ " + address.toString();
+			editName += " @ " + address;
 		}
 		return editName;
 	}

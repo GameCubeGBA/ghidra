@@ -151,11 +151,11 @@ public class Section implements StructConverter {
 	 */
 	public InputStream getDataStream(MachHeader header) throws IOException {
 		if (getType() == SectionTypes.S_ZEROFILL) {
-			return new SectionInputStream(getSize(), (byte) 0);
+			return new SectionInputStream(size, (byte) 0);
 		}
-		if (getSectionName().equals(SectionNames.IMPORT_JUMP_TABLE) &&
+		if (sectname.equals(SectionNames.IMPORT_JUMP_TABLE) &&
 			header.getFileType() == MachHeaderFileTypes.MH_EXECUTE) {
-			return new SectionInputStream(getSize(), (byte) 0xf4);
+			return new SectionInputStream(size, (byte) 0xf4);
 		}
 		return reader.getByteProvider().getInputStream(header.getStartIndex() + offset);
 	}

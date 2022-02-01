@@ -580,9 +580,9 @@ public class FunctionGraph extends GroupingVisualGraph<FGVertex, FGEdge> {
 
 		Collection<FGVertex> v = getVertices();
 		Collection<FGEdge> e = getEdges();
-		FunctionGraph newGraph = new FunctionGraph(getFunction(), getSettings(), v, e);
+		FunctionGraph newGraph = new FunctionGraph(function, settings, v, e);
 
-		FGLayout originalLayout = getLayout();
+		FGLayout originalLayout = graphLayout;
 		FGLayout newLayout = originalLayout.cloneLayout(newGraph);
 
 		// setSize() must be called after setGraphLayout() due to callbacks performed when 
@@ -590,7 +590,7 @@ public class FunctionGraph extends GroupingVisualGraph<FGVertex, FGEdge> {
 		newGraph.setGraphLayout(newLayout);
 		newLayout.setSize(originalLayout.getSize());
 
-		newGraph.setOptions(getOptions());
+		newGraph.setOptions(options);
 		return newGraph;
 	}
 

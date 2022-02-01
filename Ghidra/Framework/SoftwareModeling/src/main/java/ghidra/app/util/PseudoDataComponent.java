@@ -137,7 +137,7 @@ class PseudoDataComponent extends PseudoData {
 
 	@Override
 	public int getRootOffset() {
-		return parent.getRootOffset() + getParentOffset();
+		return parent.getRootOffset() + offset;
 	}
 
 	@Override

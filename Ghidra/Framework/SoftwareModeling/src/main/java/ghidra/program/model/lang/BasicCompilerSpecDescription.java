@@ -34,12 +34,12 @@ public class BasicCompilerSpecDescription implements CompilerSpecDescription {
 	}
 
 	public String getSource() {
-		return getCompilerSpecID() + " " + getCompilerSpecName();
+		return id + " " + name;
 	}
 
 	@Override
 	public String toString() {
-		return getCompilerSpecName();
+		return name;
 	}
 
 	@Override

@@ -206,7 +206,7 @@ public class DemangledFunction extends DemangledObject {
 			if (isStatic) {
 				buffer.append("static ");
 			}
-			if (!isTypeCast()) {
+			if (!isTypeCast) {
 				buffer.append(returnType == null ? "" : returnType.getSignature() + " ");
 			}
 		}
@@ -218,7 +218,7 @@ public class DemangledFunction extends DemangledObject {
 		}
 
 		buffer.append(getDemangledName());
-		if (isTypeCast()) {
+		if (isTypeCast) {
 			buffer.append(returnType == null ? "" : " " + returnType.getSignature() + " ");
 		}
 
@@ -247,13 +247,13 @@ public class DemangledFunction extends DemangledObject {
 			buffer.append(partialSig);
 		}
 
-		if (isTrailingConst()) {
+		if (isTrailingConst) {
 			if (buffer.length() > 2) {
 				buffer.append(SPACE);
 			}
 			buffer.append(CONST);
 		}
-		if (isTrailingVolatile()) {
+		if (isTrailingVolatile) {
 			if (buffer.length() > 2) {
 				buffer.append(SPACE);
 			}
@@ -757,7 +757,7 @@ public class DemangledFunction extends DemangledObject {
 		DataType returnDT = func.getReturnType();
 		returnDT = DataTypeUtilities.getBaseDataType(returnDT);
 		if (!(returnDT == null || Undefined.isUndefined(returnDT)) &&
-			this.getReturnType() != null) {
+			this.returnType != null) {
 			return true;
 		}
 

@@ -311,7 +311,7 @@ public class TextFieldLinker {
 				result.append(linkedFields.get(field - 1).sep);
 			}
 			FieldState fs = fieldStates.get(field);
-			result.append(fs.text.substring(0, Math.min(fs.caret, fs.text.length())));
+			result.append(fs.text, 0, Math.min(fs.caret, fs.text.length()));
 			return result.toString();
 		}
 

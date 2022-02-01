@@ -393,7 +393,7 @@ public class DebuggerListingProvider extends CodeViewerProvider {
 
 	@Override
 	public void writeDataState(SaveState saveState) {
-		if (!isMainListing()) {
+		if (!isMainListing) {
 			current.writeDataState(tool, saveState, KEY_DEBUGGER_COORDINATES);
 		}
 		super.writeDataState(saveState);
@@ -401,7 +401,7 @@ public class DebuggerListingProvider extends CodeViewerProvider {
 
 	@Override
 	public void readDataState(SaveState saveState) {
-		if (!isMainListing()) {
+		if (!isMainListing) {
 			DebuggerCoordinates coordinates =
 				DebuggerCoordinates.readDataState(tool, saveState, KEY_DEBUGGER_COORDINATES, true);
 			coordinatesActivated(coordinates);
@@ -516,7 +516,7 @@ public class DebuggerListingProvider extends CodeViewerProvider {
 		createNewStaticTrackingMarker();
 		updateMarkerServiceColorModel();
 
-		if (this.markerService != null && !isMainListing()) {
+		if (this.markerService != null && !isMainListing) {
 			// NOTE: Connected provider marker listener is taken care of by CodeBrowserPlugin
 			this.markerService.addChangeListener(markerChangeListener);
 		}
@@ -559,7 +559,7 @@ public class DebuggerListingProvider extends CodeViewerProvider {
 	}
 
 	public void programOpened(Program program) {
-		if (!isMainListing()) {
+		if (!isMainListing) {
 			return;
 		}
 		DomainFile df = program.getDomainFile();
@@ -949,7 +949,7 @@ public class DebuggerListingProvider extends CodeViewerProvider {
 	}
 
 	public void setFollowsCurrentThread(boolean follows) {
-		if (isMainListing()) {
+		if (isMainListing) {
 			throw new IllegalStateException(
 				"The main dynamic listing always follows the current trace and thread");
 		}

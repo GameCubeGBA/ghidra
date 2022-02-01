@@ -217,7 +217,7 @@ public class DebuggerBlockChooserDialog extends DialogComponentProvider {
 		computeScores(scorer);
 		selectHighestScoringBlock();
 		tool.showDialog(this);
-		return getChosen();
+		return chosen;
 	}
 
 	protected void computeScores(Function<MemoryBlockRow, Double> scorer) {

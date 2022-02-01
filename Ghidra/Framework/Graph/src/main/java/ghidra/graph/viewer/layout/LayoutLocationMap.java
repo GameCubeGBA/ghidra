@@ -319,7 +319,7 @@ public class LayoutLocationMap<V, E> {
 		// Calculate offset locations (y values) from row heights (plus any padding)
 		//
 		int offset = 0;
-		int n = getRowCount();
+		int n = numRows;
 		for (int i = 0; i < n; i++) {
 			monitor.checkCanceled();
 
@@ -341,7 +341,7 @@ public class LayoutLocationMap<V, E> {
 		//
 
 		offset = 0;
-		n = getColumnCount();
+		n = numColumns;
 		for (int i = 0; i < n; i++) {
 			monitor.checkCanceled();
 

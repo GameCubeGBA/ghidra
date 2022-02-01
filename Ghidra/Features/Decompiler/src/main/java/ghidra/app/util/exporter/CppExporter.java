@@ -234,10 +234,10 @@ public class CppExporter extends Exporter {
 		monitor.checkCanceled();
 
 		if (headerWriter != null) {
-			headerWriter.println(headers.toString());
+			headerWriter.println(headers);
 		}
 		if (cFileWriter != null) {
-			cFileWriter.print(bodies.toString());
+			cFileWriter.print(bodies);
 		}
 	}
 

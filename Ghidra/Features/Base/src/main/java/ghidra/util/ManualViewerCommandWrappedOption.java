@@ -119,23 +119,23 @@ public class ManualViewerCommandWrappedOption implements CustomOption {
 		if (Platform.CURRENT_PLATFORM.getOperatingSystem() == OperatingSystem.WINDOWS) {
 			option.setCommandString(System.getenv("ComSpec"));
 			String[] args = { "/c", "start" };
-			option.setCommandArguments(args);
-			option.setUrlReplacementString(DEFAULT_URL_REPLACEMENT_STRING);
+			option.commandArguments = args;
+			option.urlReplacementString = DEFAULT_URL_REPLACEMENT_STRING;
 		}
 		else if (Platform.CURRENT_PLATFORM.getOperatingSystem() == OperatingSystem.LINUX) {
-			option.setCommandString("firefox");
-			option.setCommandArguments(new String[] {});
-			option.setUrlReplacementString(DEFAULT_URL_REPLACEMENT_STRING);
+			option.commandString = "firefox";
+			option.commandArguments = new String[]{};
+			option.urlReplacementString = DEFAULT_URL_REPLACEMENT_STRING;
 		}
 		else if (Platform.CURRENT_PLATFORM.getOperatingSystem() == OperatingSystem.MAC_OS_X) {
-			option.setCommandString("open");
-			option.setCommandArguments(new String[] {});
-			option.setUrlReplacementString(DEFAULT_URL_REPLACEMENT_STRING);
+			option.commandString = "open";
+			option.commandArguments = new String[]{};
+			option.urlReplacementString = DEFAULT_URL_REPLACEMENT_STRING;
 		}
 		else {
-			option.setCommandString("");
-			option.setCommandArguments(new String[] {});
-			option.setUrlReplacementString(DEFAULT_URL_REPLACEMENT_STRING);
+			option.commandString = "";
+			option.commandArguments = new String[]{};
+			option.urlReplacementString = DEFAULT_URL_REPLACEMENT_STRING;
 		}
 
 		return option;

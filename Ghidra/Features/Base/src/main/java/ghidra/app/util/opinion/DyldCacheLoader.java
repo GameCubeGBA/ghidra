@@ -75,7 +75,7 @@ public class DyldCacheLoader extends AbstractLibrarySupportLoader {
 			DyldArchitecture architecture = header.getArchitecture();
 			if (architecture != null) {
 				List<QueryResult> results =
-					QueryOpinionService.query(getName(), architecture.getProcessor(), null);
+					QueryOpinionService.query(DYLD_CACHE_NAME, architecture.getProcessor(), null);
 				for (QueryResult result : results) {
 					loadSpecs.add(new LoadSpec(this, header.getBaseAddress(), result));
 				}

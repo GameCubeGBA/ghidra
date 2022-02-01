@@ -1041,7 +1041,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 				// always local i.e. pointers)
 				resolvedDataType = resolveNoSourceDataType(dataType, currentHandler);
 			}
-			else if (!sourceArchive.getSourceArchiveID().equals(getUniversalID()) &&
+			else if (!sourceArchive.getSourceArchiveID().equals(universalID) &&
 				sourceArchive.getArchiveType() == ArchiveType.PROGRAM) {
 				// dataTypes from a different program don't carry over their identity.
 				resolvedDataType = resolveNoSourceDataType(dataType, currentHandler);
@@ -1959,7 +1959,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 			sourceArchive = resolveSourceArchive(sourceArchive);
 			UniversalID id = sourceArchive == null ? DataTypeManager.LOCAL_ARCHIVE_UNIVERSAL_ID
 					: sourceArchive.getSourceArchiveID();
-			if (id.equals(getUniversalID())) {
+			if (id.equals(universalID)) {
 				id = DataTypeManager.LOCAL_ARCHIVE_UNIVERSAL_ID;
 			}
 			if (id == DataTypeManager.LOCAL_ARCHIVE_UNIVERSAL_ID) {
@@ -2579,7 +2579,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 				// this is a new non-associated dataType, assign it a new universalID
 				id = UniversalIdGenerator.nextID();
 			}
-			else if (!sourceArchive.getSourceArchiveID().equals(getUniversalID())) {
+			else if (!sourceArchive.getSourceArchiveID().equals(universalID)) {
 				// if its not me, use its sourceArchiveID. Otherwise it is local.
 				sourceArchiveIdValue = sourceArchive.getSourceArchiveID().getValue();
 			}
@@ -2797,7 +2797,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 	}
 
 	private void updateLastChangeTime() {
-		SourceArchive mySourceArchive = getSourceArchive(getUniversalID());
+		SourceArchive mySourceArchive = getSourceArchive(universalID);
 		if (mySourceArchive == null) {
 			return;
 		}
@@ -2863,7 +2863,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 
 	@Override
 	public SourceArchive getLocalSourceArchive() {
-		return getSourceArchive(getUniversalID());
+		return getSourceArchive(universalID);
 	}
 
 	private synchronized SourceArchive getSourceArchiveFromCache(UniversalID sourceID) {
@@ -3556,7 +3556,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 
 	@Override
 	public long getLastChangeTimeForMyManager() {
-		SourceArchive archive = getSourceArchive(getUniversalID());
+		SourceArchive archive = getSourceArchive(universalID);
 		if (archive != null) {
 			return archive.getLastSyncTime();
 		}
@@ -3905,7 +3905,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 			// null value indicates isEquivalent in progress between the two
 			// datatypes - perform simplified equivalence check
 			if (cache.contains(key)) {
-				if (dataType.getUniversalID().equals(getUniversalID())) {
+				if (dataType.getUniversalID().equals(universalID)) {
 					return true;
 				}
 				return DataTypeUtilities.equalsIgnoreConflict(dataTypeDB.getPathName(),

@@ -149,7 +149,7 @@ public class StringAndScores {
 	public boolean equals(Object obj) {
 		if (obj instanceof StringAndScores) {
 			StringAndScores other = (StringAndScores) obj;
-			return getOriginalString().equals(other.getOriginalString());
+			return originalString.equals(other.originalString);
 		}
 		return false;
 	}

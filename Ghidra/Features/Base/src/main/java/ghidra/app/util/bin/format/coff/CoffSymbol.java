@@ -146,7 +146,7 @@ public class CoffSymbol implements StructConverter {
 	@Override
 	public String toString() {
 		StringBuilder buffer = new StringBuilder();
-		buffer.append(getName());
+		buffer.append(e_name);
 		buffer.append(' ');
 		buffer.append("Value=0x").append(Long.toHexString(getValue()));
 		buffer.append(' ');

@@ -132,7 +132,7 @@ public abstract class DockingAction implements DockingActionIf {
 
 	@Override
 	public String getFullName() {
-		return getName() + " (" + getOwner() + ")";
+		return name + " (" + owner + ")";
 	}
 
 	@Override
@@ -183,7 +183,7 @@ public abstract class DockingAction implements DockingActionIf {
 		if (enabledPredicate != null) {
 			return enabledPredicate.test(context);
 		}
-		return isEnabled();
+		return isEnabled;
 	}
 
 	@Override
@@ -282,7 +282,7 @@ public abstract class DockingAction implements DockingActionIf {
 	@Override
 	public final JButton createButton() {
 		JButton button = doCreateButton();
-		button.setName(getName());
+		button.setName(name);
 		button.setFocusable(false);
 		Icon icon = toolBarData == null ? null : toolBarData.getIcon();
 		if (icon == null) {
@@ -292,10 +292,10 @@ public abstract class DockingAction implements DockingActionIf {
 		button.setIcon(icon);
 		String tt = getDescription();
 		if (tt == null || tt.isEmpty()) {
-			tt = getName();
+			tt = name;
 		}
 		button.setToolTipText(tt);
-		button.setEnabled(isEnabled());
+		button.setEnabled(isEnabled);
 
 		// Reverting GT-2452 because some buttons need to be able to respond to fast clicking.
 		//button.setMultiClickThreshhold(500); // this prevents 2 callbacks from double-clicks
@@ -367,7 +367,7 @@ public abstract class DockingAction implements DockingActionIf {
 
 	private boolean supportsKeyBinding(KeyBindingData kbData) {
 
-		KeyBindingType type = getKeyBindingType();
+		KeyBindingType type = keyBindingType;
 		if (type.supportsKeyBindings()) {
 			return true;
 		}
@@ -469,13 +469,13 @@ public abstract class DockingAction implements DockingActionIf {
 
 	@Override
 	public String toString() {
-		return getName() + "  (" + getOwner() + ")";
+		return name + "  (" + owner + ")";
 	}
 
 	@Override
 	public String getHelpInfo() {
 		StringBuilder buffer = new StringBuilder();
-		buffer.append("   ACTION:    ").append(getOwner()).append(" - ").append(getName());
+		buffer.append("   ACTION:    ").append(owner).append(" - ").append(name);
 		buffer.append('\n');
 
 		// menu path

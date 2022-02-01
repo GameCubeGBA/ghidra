@@ -165,7 +165,7 @@ public class SymbolNode extends SymbolTreeNode {
 	public GTreeNode findSymbolTreeNode(SymbolNode key, boolean loadChildren,
 			TaskMonitor taskMonitor) {
 
-		Symbol searchSymbol = key.getSymbol();
+		Symbol searchSymbol = key.symbol;
 		if (symbol == searchSymbol) {
 			return this;
 		}

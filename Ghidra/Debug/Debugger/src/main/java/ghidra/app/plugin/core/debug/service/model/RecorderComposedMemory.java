@@ -55,7 +55,7 @@ public class RecorderComposedMemory implements AbstractRecorderMemory {
 
 	protected CompletableFuture<AllRequiredAccess> fetchMemAccessibility(TargetMemory mem) {
 		return DebugModelConventions.trackAccessibility(mem).thenApply(acc -> {
-			acc.addChangeListener(getMemAccListeners().fire);
+			acc.addChangeListener(memAccListeners.fire);
 			return acc;
 		});
 	}

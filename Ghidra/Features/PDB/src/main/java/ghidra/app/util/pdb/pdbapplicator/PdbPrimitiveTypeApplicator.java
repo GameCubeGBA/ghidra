@@ -67,7 +67,7 @@ public class PdbPrimitiveTypeApplicator {
 	}
 
 	DataType resolve(DataType dataType) {
-		return getDataTypeManager().resolve(dataType,
+		return dataTypeManager.resolve(dataType,
 			DataTypeConflictHandler.REPLACE_EMPTY_STRUCTS_OR_RENAME_AND_ADD_HANDLER);
 	}
 
@@ -78,7 +78,7 @@ public class PdbPrimitiveTypeApplicator {
 
 	DataType getVoidType() {
 		if (voidGhidraPrimitive == null) {
-			DataType dataType = new VoidDataType(getDataTypeManager());
+			DataType dataType = new VoidDataType(dataTypeManager);
 			voidGhidraPrimitive = resolve(dataType);
 		}
 		return voidGhidraPrimitive;
@@ -86,7 +86,7 @@ public class PdbPrimitiveTypeApplicator {
 
 	DataType getCharType() {
 		if (charGhidraPrimitive == null) {
-			DataType dataType = new CharDataType(getDataTypeManager());
+			DataType dataType = new CharDataType(dataTypeManager);
 			charGhidraPrimitive = resolve(dataType);
 		}
 		return charGhidraPrimitive;
@@ -94,7 +94,7 @@ public class PdbPrimitiveTypeApplicator {
 
 	DataType getSignedCharType() {
 		if (signedCharGhidraPrimitive == null) {
-			DataType dataType = new SignedCharDataType(getDataTypeManager());
+			DataType dataType = new SignedCharDataType(dataTypeManager);
 			signedCharGhidraPrimitive = resolve(dataType);
 		}
 		return signedCharGhidraPrimitive;
@@ -102,7 +102,7 @@ public class PdbPrimitiveTypeApplicator {
 
 	DataType getUnsignedCharType() {
 		if (unsignedCharGhidraPrimitive == null) {
-			DataType dataType = new UnsignedCharDataType(getDataTypeManager());
+			DataType dataType = new UnsignedCharDataType(dataTypeManager);
 			unsignedCharGhidraPrimitive = resolve(dataType);
 		}
 		return unsignedCharGhidraPrimitive;
@@ -110,16 +110,16 @@ public class PdbPrimitiveTypeApplicator {
 
 	DataType getUnicode16Type() {
 		// For now, we are returning WideChar16 for Unicode16.
-		return new WideChar16DataType(getDataTypeManager());
+		return new WideChar16DataType(dataTypeManager);
 	}
 
 	DataType getUnicode32Type() {
 		// For now, we are returning WideChar32 for Unicode32.
-		return new WideChar32DataType(getDataTypeManager());
+		return new WideChar32DataType(dataTypeManager);
 	}
 
 	WideCharDataType getWideCharType() {
-		return new WideCharDataType(getDataTypeManager());
+		return new WideCharDataType(dataTypeManager);
 	}
 
 	DataType get8BitIntegerType() {
@@ -129,7 +129,7 @@ public class PdbPrimitiveTypeApplicator {
 			return dataType;
 		}
 		DataType type;
-		if (getDataTypeManager().getDataOrganization().getIntegerSize() == 1) {
+		if (dataTypeManager.getDataOrganization().getIntegerSize() == 1) {
 			type = IntegerDataType.dataType;
 		}
 		else {
@@ -147,7 +147,7 @@ public class PdbPrimitiveTypeApplicator {
 			return dataType;
 		}
 		DataType type;
-		if (getDataTypeManager().getDataOrganization().getIntegerSize() == 1) {
+		if (dataTypeManager.getDataOrganization().getIntegerSize() == 1) {
 			type = UnsignedIntegerDataType.dataType;
 		}
 		else {
@@ -165,7 +165,7 @@ public class PdbPrimitiveTypeApplicator {
 			return dataType;
 		}
 		DataType type;
-		if (getDataTypeManager().getDataOrganization().getIntegerSize() == 2) {
+		if (dataTypeManager.getDataOrganization().getIntegerSize() == 2) {
 			type = IntegerDataType.dataType;
 		}
 		else {
@@ -183,7 +183,7 @@ public class PdbPrimitiveTypeApplicator {
 			return dataType;
 		}
 		DataType type;
-		if (getDataTypeManager().getDataOrganization().getIntegerSize() == 2) {
+		if (dataTypeManager.getDataOrganization().getIntegerSize() == 2) {
 			type = UnsignedIntegerDataType.dataType;
 		}
 		else {
@@ -201,7 +201,7 @@ public class PdbPrimitiveTypeApplicator {
 			return dataType;
 		}
 		DataType type;
-		if (getDataTypeManager().getDataOrganization().getShortSize() == 2) {
+		if (dataTypeManager.getDataOrganization().getShortSize() == 2) {
 			type = ShortDataType.dataType;
 		}
 		else {
@@ -219,7 +219,7 @@ public class PdbPrimitiveTypeApplicator {
 			return dataType;
 		}
 		DataType type;
-		if (getDataTypeManager().getDataOrganization().getShortSize() == 2) {
+		if (dataTypeManager.getDataOrganization().getShortSize() == 2) {
 			type = UnsignedShortDataType.dataType;
 		}
 		else {
@@ -237,7 +237,7 @@ public class PdbPrimitiveTypeApplicator {
 			return dataType;
 		}
 		DataType type;
-		if (getDataTypeManager().getDataOrganization().getIntegerSize() == 4) {
+		if (dataTypeManager.getDataOrganization().getIntegerSize() == 4) {
 			type = IntegerDataType.dataType;
 		}
 		else {
@@ -255,7 +255,7 @@ public class PdbPrimitiveTypeApplicator {
 			return dataType;
 		}
 		DataType type;
-		if (getDataTypeManager().getDataOrganization().getIntegerSize() == 4) {
+		if (dataTypeManager.getDataOrganization().getIntegerSize() == 4) {
 			type = UnsignedIntegerDataType.dataType;
 		}
 		else {
@@ -273,7 +273,7 @@ public class PdbPrimitiveTypeApplicator {
 			return dataType;
 		}
 		DataType type;
-		if (getDataTypeManager().getDataOrganization().getLongSize() == 4) {
+		if (dataTypeManager.getDataOrganization().getLongSize() == 4) {
 			type = LongDataType.dataType;
 		}
 		else {
@@ -291,7 +291,7 @@ public class PdbPrimitiveTypeApplicator {
 			return dataType;
 		}
 		DataType type;
-		if (getDataTypeManager().getDataOrganization().getLongSize() == 4) {
+		if (dataTypeManager.getDataOrganization().getLongSize() == 4) {
 			type = UnsignedLongDataType.dataType;
 		}
 		else {
@@ -309,7 +309,7 @@ public class PdbPrimitiveTypeApplicator {
 			return dataType;
 		}
 		DataType type;
-		if (getDataTypeManager().getDataOrganization().getLongSize() == 8) {
+		if (dataTypeManager.getDataOrganization().getLongSize() == 8) {
 			type = LongDataType.dataType;
 		}
 		else {
@@ -327,7 +327,7 @@ public class PdbPrimitiveTypeApplicator {
 			return dataType;
 		}
 		DataType type;
-		if (getDataTypeManager().getDataOrganization().getLongSize() == 8) {
+		if (dataTypeManager.getDataOrganization().getLongSize() == 8) {
 			type = UnsignedLongDataType.dataType;
 		}
 		else {
@@ -345,7 +345,7 @@ public class PdbPrimitiveTypeApplicator {
 			return dataType;
 		}
 		DataType type;
-		if (getDataTypeManager().getDataOrganization().getIntegerSize() == 8) {
+		if (dataTypeManager.getDataOrganization().getIntegerSize() == 8) {
 			type = IntegerDataType.dataType;
 		}
 		else {
@@ -363,7 +363,7 @@ public class PdbPrimitiveTypeApplicator {
 			return dataType;
 		}
 		DataType type;
-		if (getDataTypeManager().getDataOrganization().getIntegerSize() == 8) {
+		if (dataTypeManager.getDataOrganization().getIntegerSize() == 8) {
 			type = UnsignedIntegerDataType.dataType;
 		}
 		else {
@@ -381,7 +381,7 @@ public class PdbPrimitiveTypeApplicator {
 			return dataType;
 		}
 		DataType type;
-		if (getDataTypeManager().getDataOrganization().getLongSize() == 16) {
+		if (dataTypeManager.getDataOrganization().getLongSize() == 16) {
 			type = LongDataType.dataType;
 		}
 		else {
@@ -399,7 +399,7 @@ public class PdbPrimitiveTypeApplicator {
 			return dataType;
 		}
 		DataType type;
-		if (getDataTypeManager().getDataOrganization().getLongSize() == 16) {
+		if (dataTypeManager.getDataOrganization().getLongSize() == 16) {
 			type = UnsignedLongDataType.dataType;
 		}
 		else {
@@ -417,7 +417,7 @@ public class PdbPrimitiveTypeApplicator {
 			return dataType;
 		}
 		DataType type;
-		if (getDataTypeManager().getDataOrganization().getIntegerSize() == 16) {
+		if (dataTypeManager.getDataOrganization().getIntegerSize() == 16) {
 			type = IntegerDataType.dataType;
 		}
 		else {
@@ -435,7 +435,7 @@ public class PdbPrimitiveTypeApplicator {
 			return dataType;
 		}
 		DataType type;
-		if (getDataTypeManager().getDataOrganization().getIntegerSize() == 16) {
+		if (dataTypeManager.getDataOrganization().getIntegerSize() == 16) {
 			type = UnsignedIntegerDataType.dataType;
 		}
 		else {
@@ -471,7 +471,7 @@ public class PdbPrimitiveTypeApplicator {
 			return dataType;
 		}
 		DataType resolved =
-			resolve(AbstractIntegerDataType.getSignedDataType(size, getDataTypeManager()));
+			resolve(AbstractIntegerDataType.getSignedDataType(size, dataTypeManager));
 		integralGhidraPrimitives.put(size, resolved);
 		return resolved;
 	}
@@ -482,7 +482,7 @@ public class PdbPrimitiveTypeApplicator {
 			return dataType;
 		}
 		DataType resolved =
-			resolve(AbstractIntegerDataType.getUnsignedDataType(size, getDataTypeManager()));
+			resolve(AbstractIntegerDataType.getUnsignedDataType(size, dataTypeManager));
 		unsignedIntegralGhidraPrimitives.put(size, resolved);
 		return resolved;
 	}
@@ -529,7 +529,7 @@ public class PdbPrimitiveTypeApplicator {
 		dataType = floatGhidraPrimitives.get(size);
 		DataType resolved;
 		if (dataType == null) {
-			resolved = resolve(AbstractFloatDataType.getFloatDataType(size, getDataTypeManager()));
+			resolved = resolve(AbstractFloatDataType.getFloatDataType(size, dataTypeManager));
 			floatGhidraPrimitives.put(size, resolved);
 			if (resolved instanceof Undefined) { // Not a real type implemented in Ghidra.
 				DataType type = createTypedef(name, resolved);
@@ -581,13 +581,13 @@ public class PdbPrimitiveTypeApplicator {
 				// Case 32 is presumably 32 bits per real/imag. This is 4 bytes each, or 8
 				// bytes total
 				// Use the internal type.
-				dataType = new Complex8DataType(getDataTypeManager());
+				dataType = new Complex8DataType(dataTypeManager);
 				break;
 			case 64:
 				// Case 64 is presumably 64 bits per real/imag. This is 8 bytes each, or 16
 				// bytes total
 				// Use the internal type.
-				dataType = new Complex16DataType(getDataTypeManager());
+				dataType = new Complex16DataType(dataTypeManager);
 				break;
 			case 80:
 				// TODO: Replace with Complex20DataType when it is available.
@@ -597,7 +597,7 @@ public class PdbPrimitiveTypeApplicator {
 				// Case 128 is presumably 128 bits per real/imag. This is 16 bytes each, or 32
 				// bytes total
 				// Use the internal type.
-				dataType = new Complex32DataType(getDataTypeManager());
+				dataType = new Complex32DataType(dataTypeManager);
 				break;
 			default:
 				String message = "Programming error: Complex size not supported" + size;
@@ -640,7 +640,7 @@ public class PdbPrimitiveTypeApplicator {
 			return dataType;
 		}
 		if (size == getBooleanSize()) { // TODO: see TODO inside called method.
-			dataType = new BooleanDataType(getDataTypeManager());
+			dataType = new BooleanDataType(dataTypeManager);
 		}
 		else {
 			dataType = getIntegralType(size);
@@ -662,10 +662,10 @@ public class PdbPrimitiveTypeApplicator {
 	}
 
 	private Pointer getPointerType(int ptrSize, DataType baseType) {
-		if (getDataTypeManager().getDataOrganization().getPointerSize() == ptrSize) {
-			return getDataTypeManager().getPointer(baseType);
+		if (dataTypeManager.getDataOrganization().getPointerSize() == ptrSize) {
+			return dataTypeManager.getPointer(baseType);
 		}
-		return getDataTypeManager().getPointer(baseType, ptrSize);
+		return dataTypeManager.getPointer(baseType, ptrSize);
 	}
 
 	Pointer get16NearPointerType(PrimitiveMsType type, DataType baseType) {

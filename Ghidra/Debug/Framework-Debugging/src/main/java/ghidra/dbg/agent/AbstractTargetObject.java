@@ -239,7 +239,7 @@ public abstract class AbstractTargetObject<P extends TargetObject> implements Sp
 
 	@Override
 	public Object getProtocolID() {
-		return getPath();
+		return path;
 	}
 
 	@Override
@@ -269,7 +269,7 @@ public abstract class AbstractTargetObject<P extends TargetObject> implements Sp
 			Object e = ent.getValue();
 			if (e instanceof InvalidatableTargetObjectIf && e instanceof TargetObject) {
 				InvalidatableTargetObjectIf obj = (InvalidatableTargetObjectIf) e;
-				if (!PathUtils.isElementLink(getPath(), name, obj.getPath())) {
+				if (!PathUtils.isElementLink(path, name, obj.getPath())) {
 					obj.doInvalidateSubtree((TargetObject) e, reason);
 				}
 			}
@@ -282,7 +282,7 @@ public abstract class AbstractTargetObject<P extends TargetObject> implements Sp
 			Object e = ent.getValue();
 			if (e instanceof InvalidatableTargetObjectIf) {
 				InvalidatableTargetObjectIf obj = (InvalidatableTargetObjectIf) e;
-				if (!PathUtils.isElementLink(getPath(), name, obj.getPath())) {
+				if (!PathUtils.isElementLink(path, name, obj.getPath())) {
 					obj.doInvalidateSubtree(branch, reason);
 				}
 			}
@@ -295,7 +295,7 @@ public abstract class AbstractTargetObject<P extends TargetObject> implements Sp
 			Object a = ent.getValue();
 			if (a instanceof InvalidatableTargetObjectIf && a instanceof TargetObject) {
 				InvalidatableTargetObjectIf obj = (InvalidatableTargetObjectIf) a;
-				if (!PathUtils.isLink(getPath(), name, obj.getPath())) {
+				if (!PathUtils.isLink(path, name, obj.getPath())) {
 					obj.doInvalidateSubtree((TargetObject) a, reason);
 				}
 			}
@@ -309,7 +309,7 @@ public abstract class AbstractTargetObject<P extends TargetObject> implements Sp
 			Object a = ent.getValue();
 			if (a instanceof InvalidatableTargetObjectIf) {
 				InvalidatableTargetObjectIf obj = (InvalidatableTargetObjectIf) a;
-				if (!PathUtils.isLink(getPath(), name, obj.getPath())) {
+				if (!PathUtils.isLink(path, name, obj.getPath())) {
 					obj.doInvalidateSubtree(branch, reason);
 				}
 			}

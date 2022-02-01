@@ -76,7 +76,7 @@ public class EHTryBlockModel extends AbstractCreateDataTypeModel {
 		for (int tryBlockOrdinal = 0; tryBlockOrdinal < numEntries; tryBlockOrdinal++) {
 			if (!isValidMap(getCatchHandlerCount(tryBlockOrdinal),
 				getCatchHandlerMapAddress(tryBlockOrdinal))) {
-				throw new InvalidDataTypeException(getName() + " data type at " + getAddress() +
+				throw new InvalidDataTypeException(DATA_TYPE_NAME + " data type at " + getAddress() +
 					" doesn't have a valid catch handler map.");
 			}
 		}

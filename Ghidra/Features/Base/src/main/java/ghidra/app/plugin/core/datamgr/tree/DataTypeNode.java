@@ -184,7 +184,7 @@ public class DataTypeNode extends DataTypeTreeNode {
 
 	@Override
 	public String toString() {
-		return getName();
+		return name;
 	}
 
 	public boolean isFavorite() {

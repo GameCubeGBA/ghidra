@@ -218,7 +218,7 @@ public class FunctionSignatureStringable extends Stringable {
 		buildy.append(getSavableFunctionSignatureSource()).append(DELIMITER);
 		buildy.append(getSavableIsInline()).append(DELIMITER);
 		buildy.append(getSavableHasNoReturn()).append(DELIMITER);
-		buildy.append(getSavableCallingConvention()).append(DELIMITER);
+		buildy.append(callingConventionName).append(DELIMITER);
 		buildy.append(getSavableCallFixup()).append(DELIMITER);
 		buildy.append(originalName).append(DELIMITER);
 		buildy.append(getSavableHasCustomStorage()).append(DELIMITER);

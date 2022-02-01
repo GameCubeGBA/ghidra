@@ -217,7 +217,7 @@ public class ObjectiveC2_Class implements StructConverter {
 		}
 		_state.beenApplied.add(_index);
 
-		Address address = ObjectiveC1_Utilities.toAddress(_state.program, getIndex());
+		Address address = ObjectiveC1_Utilities.toAddress(_state.program, _index);
 		try {
 			ObjectiveC1_Utilities.applyData(_state.program, toDataType(), address);
 		}

@@ -305,7 +305,7 @@ public class GTree extends JPanel implements BusyListener {
 
 		lastFilterTask = new GTreeFilterTask(this, filter);
 
-		if (isFilteringEnabled()) {
+		if (isFilteringEnabled) {
 			worker.schedule(lastFilterTask);
 		}
 	}
@@ -379,7 +379,7 @@ public class GTree extends JPanel implements BusyListener {
 	}
 
 	public List<TreePath> getExpandedPaths() {
-		return getExpandedPaths(getViewRoot());
+		return getExpandedPaths(realViewRootNode);
 	}
 
 	public List<TreePath> getExpandedPaths(GTreeNode node) {
@@ -395,7 +395,7 @@ public class GTree extends JPanel implements BusyListener {
 	}
 
 	public void expandAll() {
-		runTask(new GTreeExpandAllTask(this, getViewRoot()));
+		runTask(new GTreeExpandAllTask(this, realViewRootNode));
 	}
 
 	public void collapseAll(GTreeNode node) {
@@ -591,7 +591,7 @@ public class GTree extends JPanel implements BusyListener {
 	 *         will be a clone of the corresponding model node.
 	 */
 	public GTreeNode getModelNode(GTreeNode node) {
-		return getNodeForPath(getModelRoot(), node.getTreePath());
+		return getNodeForPath(realModelRootNode, node.getTreePath());
 	}
 
 	/**
@@ -605,7 +605,7 @@ public class GTree extends JPanel implements BusyListener {
 	 *         will be a clone of the corresponding model node.
 	 */
 	public GTreeNode getModelNodeForPath(TreePath path) {
-		return getNodeForPath(getModelRoot(), path);
+		return getNodeForPath(realModelRootNode, path);
 	}
 
 	/**
@@ -617,7 +617,7 @@ public class GTree extends JPanel implements BusyListener {
 	 * @return the current node in the displayed (possibly filtered) tree
 	 */
 	public GTreeNode getViewNode(GTreeNode node) {
-		return getNodeForPath(getViewRoot(), node.getTreePath());
+		return getNodeForPath(realViewRootNode, node.getTreePath());
 	}
 
 	/**
@@ -629,7 +629,7 @@ public class GTree extends JPanel implements BusyListener {
 	 * @return the current node in the displayed (possibly filtered) tree
 	 */
 	public GTreeNode getViewNodeForPath(TreePath path) {
-		return getNodeForPath(getViewRoot(), path);
+		return getNodeForPath(realViewRootNode, path);
 	}
 
 	private GTreeNode getNodeForPath(GTreeNode root, TreePath path) {
@@ -1328,7 +1328,7 @@ public class GTree extends JPanel implements BusyListener {
 
 	@Override
 	public String toString() {
-		GTreeNode rootNode = getModelRoot();
+		GTreeNode rootNode = realModelRootNode;
 		if (rootNode == null) {
 			return "GTree - no root node";
 		}
@@ -1345,7 +1345,7 @@ public class GTree extends JPanel implements BusyListener {
 	}
 
 	public void clearSizeCache() {
-		recurseClearSizeCache(getViewRoot());
+		recurseClearSizeCache(realViewRootNode);
 	}
 
 	private void recurseClearSizeCache(GTreeNode node) {

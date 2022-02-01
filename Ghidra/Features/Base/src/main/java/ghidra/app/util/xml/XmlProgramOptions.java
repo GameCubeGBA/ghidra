@@ -106,46 +106,46 @@ public class XmlProgramOptions {
 
 		ArrayList<Option> optionList = new ArrayList<>();
 
-		optionList.add(new Option("Memory Blocks", Boolean.valueOf(isMemoryBlocks())));
-		optionList.add(new Option("Memory Contents", Boolean.valueOf(isMemoryContents())));
+		optionList.add(new Option("Memory Blocks", Boolean.valueOf(memoryBlocks)));
+		optionList.add(new Option("Memory Contents", Boolean.valueOf(memoryContents)));
 		if (isAddToProgram) {
 			optionList.add(new Option("Overwrite Memory Conflicts",
-				Boolean.valueOf(isOverwriteMemoryConflicts())));
+				Boolean.valueOf(overwriteMemoryConflicts)));
 		}
-		optionList.add(new Option("Instructions", Boolean.valueOf(isInstructions())));
-		optionList.add(new Option("Data", Boolean.valueOf(isData())));
+		optionList.add(new Option("Instructions", Boolean.valueOf(instructions)));
+		optionList.add(new Option("Data", Boolean.valueOf(data)));
 		if (isAddToProgram) {
 			optionList.add(
-				new Option("Overwrite Data Conflicts", Boolean.valueOf(isOverwriteDataConflicts())));
+				new Option("Overwrite Data Conflicts", Boolean.valueOf(overwriteDataConflicts)));
 		}
-		optionList.add(new Option("Symbols", Boolean.valueOf(isSymbols())));
+		optionList.add(new Option("Symbols", Boolean.valueOf(symbols)));
 		if (isAddToProgram) {
 			optionList.add(new Option("Overwrite Symbol Conflicts",
-				Boolean.valueOf(isOverwriteSymbolConflicts())));
+				Boolean.valueOf(overwriteSymbolConflicts)));
 		}
-		optionList.add(new Option("Equates", Boolean.valueOf(isEquates())));
-		optionList.add(new Option("Comments", Boolean.valueOf(isComments())));
-		optionList.add(new Option("Properties", Boolean.valueOf(isProperties())));
+		optionList.add(new Option("Equates", Boolean.valueOf(equates)));
+		optionList.add(new Option("Comments", Boolean.valueOf(comments)));
+		optionList.add(new Option("Properties", Boolean.valueOf(properties)));
 		if (isAddToProgram) {
 			optionList.add(new Option("Overwrite Property Conflicts",
-				Boolean.valueOf(isOverwritePropertyConflicts())));
+				Boolean.valueOf(overwritePropertyConflicts)));
 		}
-		optionList.add(new Option("Bookmarks", Boolean.valueOf(isBookmarks())));
+		optionList.add(new Option("Bookmarks", Boolean.valueOf(bookmarks)));
 		if (isAddToProgram) {
 			optionList.add(new Option("Overwrite Bookmark Conflicts",
-				Boolean.valueOf(isOverwriteBookmarkConflicts())));
+				Boolean.valueOf(overwriteBookmarkConflicts)));
 		}
-		optionList.add(new Option("Trees", Boolean.valueOf(isTrees())));
-		optionList.add(new Option("References", Boolean.valueOf(isReferences())));
+		optionList.add(new Option("Trees", Boolean.valueOf(trees)));
+		optionList.add(new Option("References", Boolean.valueOf(references)));
 		if (isAddToProgram) {
 			optionList.add(new Option("Overwrite Reference Conflicts",
-				Boolean.valueOf(isOverwriteReferenceConflicts())));
+				Boolean.valueOf(overwriteReferenceConflicts)));
 		}
-		optionList.add(new Option("Functions", Boolean.valueOf(isFunctions())));
-		optionList.add(new Option("Registers", Boolean.valueOf(isRegisters())));
-		optionList.add(new Option("Relocation Table", Boolean.valueOf(isRelocationTable())));
-		optionList.add(new Option("Entry Points", Boolean.valueOf(isEntryPoints())));
-		optionList.add(new Option("External Libraries", Boolean.valueOf(isExternalLibraries())));
+		optionList.add(new Option("Functions", Boolean.valueOf(functions)));
+		optionList.add(new Option("Registers", Boolean.valueOf(registers)));
+		optionList.add(new Option("Relocation Table", Boolean.valueOf(relocationTable)));
+		optionList.add(new Option("Entry Points", Boolean.valueOf(entryPoints)));
+		optionList.add(new Option("External Libraries", Boolean.valueOf(externalLibraries)));
 
 		return optionList;
 	}

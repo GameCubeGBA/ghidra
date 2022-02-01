@@ -74,7 +74,7 @@ public class FindAudioInProgramScript extends GhidraScript {
                 //If data does not apply correctly then it is not really that kind of data
                 //Or it is bumping into other data
                 catch (Exception e) {
-                    println("Invalid " + dataName + " at " + address.toString());
+                    println("Invalid " + dataName + " at " + address);
                 }
             } else if (data.getMnemonicString().equals(dataName)) {
                 println(dataName + " already applied at " + data.getAddressString(false, true));

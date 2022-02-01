@@ -709,11 +709,11 @@ public class AssemblyResolvedPatterns extends AssemblyResolution {
 					continue;
 				}
 				// Check if the context matches, if not, we can let it pass
-				if (null == f.getContext().combine(forCtx)) {
+				if (null == f.ctx.combine(forCtx)) {
 					continue;
 				}
 				// If the context matches, now check the instruction
-				AssemblyPatternBlock i = f.getInstruction();
+				AssemblyPatternBlock i = f.ins;
 				AssemblyPatternBlock vi =
 					AssemblyPatternBlock.fromBytes(ins.length() - val.length, val);
 				if (null == i.combine(vi)) {

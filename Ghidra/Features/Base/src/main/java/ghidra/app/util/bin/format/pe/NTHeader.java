@@ -210,7 +210,7 @@ public class NTHeader implements StructConverter, OffsetValidator {
 	 * @return the pointer into binary image, 0 if not valid
 	 */
 	public long vaToPointer(long va) {
-		return rvaToPointer(va - getOptionalHeader().getImageBase());
+		return rvaToPointer(va - optionalHeader.getImageBase());
 	}
 
 	/**

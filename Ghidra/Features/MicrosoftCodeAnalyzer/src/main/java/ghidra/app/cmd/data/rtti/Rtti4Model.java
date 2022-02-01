@@ -102,7 +102,7 @@ public class Rtti4Model extends AbstractCreateRttiDataModel {
 		Address rtti0CompAddress = startAddress.add(RTTI_0_PTR_OFFSET);
 		Address rtti0Address = getReferencedAddress(program, rtti0CompAddress);
 		if (rtti0Address == null) {
-			throw new InvalidDataTypeException(getName() + " data type at " + getAddress() +
+			throw new InvalidDataTypeException(DATA_TYPE_NAME + " data type at " + getAddress() +
 				" doesn't refer to a valid location " + rtti0Address + " for the Type Descriptor.");
 		}
 		rtti0Model = new TypeDescriptorModel(program, rtti0Address, validationOptions);
@@ -118,7 +118,7 @@ public class Rtti4Model extends AbstractCreateRttiDataModel {
 		Address rtti3CompAddress = startAddress.add(RTTI_3_PTR_OFFSET);
 		Address rtti3Address = getReferencedAddress(program, rtti3CompAddress);
 		if (rtti3Address == null) {
-			throw new InvalidDataTypeException(getName() + " data type at " + getAddress() +
+			throw new InvalidDataTypeException(DATA_TYPE_NAME + " data type at " + getAddress() +
 				" doesn't refer to a valid location for the Class Hierarchy Descriptor.");
 		}
 		rtti3Model = new Rtti3Model(program, rtti3Address, validationOptions);

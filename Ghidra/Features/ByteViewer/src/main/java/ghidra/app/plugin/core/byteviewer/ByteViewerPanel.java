@@ -1044,7 +1044,7 @@ public class ByteViewerPanel extends JPanel
 
 	protected AddressSetView computeVisibleAddresses(List<AnchoredLayout> layouts) {
 		// Kind of gross, but current component will do
-		ByteViewerComponent component = getCurrentComponent();
+		ByteViewerComponent component = currentView;
 		if (component == null || blockSet == null) {
 			return new AddressSet();
 		}

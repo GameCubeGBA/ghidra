@@ -382,7 +382,7 @@ public class TagEditorDialog extends DialogComponentProvider {
 
 		@Override
 		public int compareTo(VTMatchTag o) {
-			return getName().compareTo(o.getName());
+			return name.compareTo(o.getName());
 		}
 	}
 }

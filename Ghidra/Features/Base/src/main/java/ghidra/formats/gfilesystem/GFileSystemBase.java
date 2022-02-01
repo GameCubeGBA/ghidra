@@ -62,7 +62,7 @@ public abstract class GFileSystemBase implements GFileSystem {
 
 	@Override
 	public String toString() {
-		return "File system " + getType() + " - " + getDescription() + " - " + getName();
+		return "File system " + getType() + " - " + getDescription() + " - " + fileSystemName;
 	}
 
 	@Override

@@ -97,7 +97,7 @@ public class ObjectiveC2_ProtocolList implements StructConverter {
 	}
 
 	public void applyTo(Namespace namespace) throws Exception {
-		Address address = ObjectiveC1_Utilities.toAddress(_state.program, getIndex());
+		Address address = ObjectiveC1_Utilities.toAddress(_state.program, _index);
 		try {
 			ObjectiveC1_Utilities.applyData(_state.program, toDataType(), address);
 		}
@@ -109,7 +109,7 @@ public class ObjectiveC2_ProtocolList implements StructConverter {
 		}
 		catch (Exception e) {}
 
-		for (ObjectiveC2_Protocol protocol : getProtocols()) {
+		for (ObjectiveC2_Protocol protocol : protocols) {
 			protocol.applyTo(namespace);
 		}
 	}

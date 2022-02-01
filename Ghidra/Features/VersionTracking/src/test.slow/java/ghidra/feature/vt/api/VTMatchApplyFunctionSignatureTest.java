@@ -1729,7 +1729,7 @@ public class VTMatchApplyFunctionSignatureTest extends AbstractGhidraHeadedInteg
 		int transaction = -1;
 		try {
 			transaction =
-				program.startTransaction("Test - Setting Language: " + languageID.toString());
+				program.startTransaction("Test - Setting Language: " + languageID);
 			LanguageService languageService = DefaultLanguageService.getLanguageService();
 			Language language = languageService.getLanguage(new LanguageID(languageID));
 			List<CompilerSpecDescription> compatibleCompilerSpecDescriptions =

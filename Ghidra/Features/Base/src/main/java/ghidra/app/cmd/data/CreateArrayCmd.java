@@ -77,7 +77,7 @@ public class CreateArrayCmd implements Command {
 			return false;
 		}
 		catch (RuntimeException e) {
-			msg = "Unexpected error: " + e.toString();
+			msg = "Unexpected error: " + e;
 			Msg.error(this, msg, e);
 			return false;
 		}

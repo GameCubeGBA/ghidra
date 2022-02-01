@@ -1109,7 +1109,7 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
                 // check for a simple internal to the template (ie just one item in it
                 // if that is the case then just keep the original name
                 if (containsSimpleTemplate(classWithSameShortName.getName())) {
-                    classWithSameShortName.addShortenedTemplatedName(new String());
+                    classWithSameShortName.addShortenedTemplatedName("");
                     classesWithSameShortnameIterator.remove();
                     classesToProcess.remove(classWithSameShortName);
                 }

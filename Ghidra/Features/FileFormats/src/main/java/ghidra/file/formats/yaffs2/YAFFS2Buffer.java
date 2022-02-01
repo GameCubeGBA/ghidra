@@ -58,7 +58,7 @@ public class YAFFS2Buffer {
 	}
 
 	public boolean isEOFRecord(byte[] record) {
-		for (int i = 0, sz = getRecordSize(); i < sz; ++i) {
+		for (int i = 0, sz = recordSize; i < sz; ++i) {
 			if (record[i] != 0) {
 				return false;
 			}

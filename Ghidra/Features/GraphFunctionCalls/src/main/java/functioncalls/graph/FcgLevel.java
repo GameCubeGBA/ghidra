@@ -208,7 +208,7 @@ public class FcgLevel implements Comparable<FcgLevel> {
 	@Override
 	public int compareTo(FcgLevel l2) {
 
-		int result = getDirection().compareTo(l2.getDirection());
+		int result = direction.compareTo(l2.direction);
 		if (result != 0) {
 			return result; // compare by direction first In on top; Out on bottom
 		}

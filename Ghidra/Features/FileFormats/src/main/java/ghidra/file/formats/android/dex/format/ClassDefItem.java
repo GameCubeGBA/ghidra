@@ -161,21 +161,21 @@ public class ClassDefItem implements StructConverter {
 		if (index != -1) {
 			builder.append("Class Index: 0x").append(Integer.toHexString(index)).append("\n");
 		}
-		builder.append("Class: ").append(DexUtil.convertTypeIndexToString(header, getClassIndex())).append("\n");
-		builder.append("Class Access Flags:\n").append(AccessFlags.toString(getAccessFlags())).append("\n");
-		builder.append("Superclass: ").append(DexUtil.convertTypeIndexToString(header, getSuperClassIndex())).append("\n");
+		builder.append("Class: ").append(DexUtil.convertTypeIndexToString(header, classIndex)).append("\n");
+		builder.append("Class Access Flags:\n").append(AccessFlags.toString(accessFlags)).append("\n");
+		builder.append("Superclass: ").append(DexUtil.convertTypeIndexToString(header, superClassIndex)).append("\n");
 
-		if (getInterfacesOffset() > 0) {
+		if (interfacesOffset > 0) {
 			builder.append("Interfaces: " + "\n");
-			TypeList interfaces = getInterfaces();
+			TypeList interfaces = _interfaces;
 			for (TypeItem type : interfaces.getItems()) {
 				monitor.checkCanceled();
 				builder.append("\t").append(DexUtil.convertTypeIndexToString(header, type.getType())).append("\n");
 			}
 		}
 
-		if (getSourceFileIndex() > 0) {
-			builder.append("Source File: ").append(DexUtil.convertToString(header, getSourceFileIndex())).append("\n");
+		if (sourceFileIndex > 0) {
+			builder.append("Source File: ").append(DexUtil.convertToString(header, sourceFileIndex)).append("\n");
 		}
 
 		return builder.toString();

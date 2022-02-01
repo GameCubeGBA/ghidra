@@ -2041,7 +2041,7 @@ public class DecompilerClangTest extends AbstractDecompilerTest {
 		Color combinedColor = getCombinedHighlightColor(token);
 		ColorMatcher cm = new ColorMatcher(color, combinedColor);
 		Color actual = token.getHighlight();
-		String tokenString = token.toString() + " at line " + token.getLineParent().getLineNumber();
+		String tokenString = token + " at line " + token.getLineParent().getLineNumber();
 		assertTrue("Token is not highlighted: '" + tokenString + "'" + "\n\texpected: " + cm +
 			"; found: " + toString(actual), cm.matches(actual));
 	}

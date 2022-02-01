@@ -791,7 +791,7 @@ public class FindNoReturnFunctionsAnalyzer extends AbstractAnalyzer {
 
 		@Override
 		public Address getAddress() {
-			return getNoReturnAddr();
+			return addr;
 		}
 
 		public Address getNoReturnAddr() {
@@ -808,7 +808,7 @@ public class FindNoReturnFunctionsAnalyzer extends AbstractAnalyzer {
 
 		@Override
 		public String toString() {
-			return "NoReturn At:" + getAddress() + "  because: " + getExplanation() +
+			return "NoReturn At:" + getAddress() + "  because: " + explanation +
 				(whyAddr != null ? " at " + whyAddr : "");
 		}
 	}

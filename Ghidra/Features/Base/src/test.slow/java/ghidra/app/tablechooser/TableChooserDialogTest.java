@@ -565,7 +565,7 @@ public class TableChooserDialogTest extends AbstractGhidraHeadedIntegrationTest 
 
 		@Override
 		public String toString() {
-			return getAddress().toString();
+			return addr.toString();
 		}
 	}
 
