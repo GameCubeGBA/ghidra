@@ -34,26 +34,6 @@ public class LongArrayList implements List<Long> {
         longs = new long[MIN_SIZE];
     }
 
-	/**
-	 * Creates a new Long ArrayList using the values in the given array
-	 * @param arr array of longs to initialize to.
-	 */
-    public LongArrayList(long [] arr) {
-    	longs = arr;
-    	size = arr.length;
-    }
-    
-    /**
-     * Creates a new LongArrayList that is equivalent to the specified LongArrayList.
-     * It creates a copy of the specified list.
-     * @param list the list to be copied.
-     */
-    public LongArrayList(LongArrayList list) {
-		size = list.size;
-    	longs = new long[Math.max(size, MIN_SIZE)];
-    	System.arraycopy(list.longs, 0, longs, 0, size);
-    }
-
 	public void add(long value) {
 		add(size, value);
 	}
@@ -168,8 +148,7 @@ public class LongArrayList implements List<Long> {
 
     /**
      * Doubles the size of the array.
-     * @param size The new capacity of the array.
-     */
+	 */
     private void growArray() {
     	int len = longs.length;
     	if (len == 0) {
@@ -380,12 +359,7 @@ public class LongArrayList implements List<Long> {
 		}
 
 		public Long[] toArray() {
-			int size = size();
-			Long[] values = new Long[size];
-			for(int i=0;i<size;i++) {
-				values[i] = get(i);
-			}
-			return values;
+			return this.stream().toArray(Long[]::new);
 		}
 
 		public boolean remove(Object value) {
@@ -408,8 +382,8 @@ public class LongArrayList implements List<Long> {
 				if (get(i) == value) {
 					return i;
 				}
-			}		
-			return -1;		
+			}
+			return -1;
 		}
 
 		public boolean addAll(Collection<? extends Long> c) {
@@ -441,7 +415,7 @@ public class LongArrayList implements List<Long> {
 				if (backingList.longs[startIndex+i] == longValue) {
 					return i;
 				}
-			}		
+			}
 			return -1;
 		}
 
@@ -462,7 +436,7 @@ public class LongArrayList implements List<Long> {
 				if (backingList.longs[startIndex+i] == longValue) {
 					return i;
 				}
-			}		
+			}
 			return -1;
 		}
 

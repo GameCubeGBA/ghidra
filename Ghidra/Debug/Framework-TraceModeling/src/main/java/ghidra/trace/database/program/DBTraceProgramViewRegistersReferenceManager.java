@@ -37,7 +37,7 @@ public class DBTraceProgramViewRegistersReferenceManager
 	}
 
 	@Override
-	protected TraceCodeOperations getCodeOperations(boolean createIfAbsent) {
-		return program.trace.getCodeManager().getCodeRegisterSpace(thread, createIfAbsent);
+	protected TraceCodeOperations getCodeOperations() {
+		return program.trace.getCodeManager().getCodeRegisterSpace(thread, false);
 	}
 }

@@ -66,14 +66,6 @@ public class HDMAUtil {
 		return getRootNamespace().getKeyValue("Debugger").getKeyValue("Sessions");//[obj]
 	}
 
-	public ModelObject getProcessOf(DebugHostContext obj) {
-		return getSessionOf(obj).getKeyValue("Processes");//[obj]
-	}
-
-	public ModelObject getThreadOf(DebugHostContext obj) {
-		return getProcessOf(obj).getKeyValue("Threads");//[obj]
-	}
-
 	public VARIANT string2variant(String id) {
 		Integer decode = id == null ? 0 : Integer.decode(id);
 		return new VARIANT(decode);
@@ -166,7 +158,7 @@ public class HDMAUtil {
 					}
 				}
 			}
-			if (found == false) {
+			if (!found) {
 				return null;
 			}
 		}
@@ -186,11 +178,6 @@ public class HDMAUtil {
 	public ModelObject getProcess(ModelObject session, String id) {
 		ModelObject processes = session.getKeyValue("Processes");
 		return processes.getChild(getManager(), string2variant(id));
-	}
-
-	public ModelObject getThread(ModelObject process, String id) {
-		ModelObject threads = process.getKeyValue("Threads");
-		return threads.getChild(getManager(), string2variant(id));
 	}
 
 	public ModelObject getSettings() {
@@ -217,16 +204,6 @@ public class HDMAUtil {
 
 	public ModelObject getCurrentStack() {
 		return getCurrentThread().getKeyValue("Stack");
-	}
-
-	public ModelObject getCurrentFrame() {
-		return getVariables().getKeyValue("curframe");
-	}
-
-	public List<ModelObject> getCurrentModuleList() {
-		ModelObject process = getCurrentProcess();
-		ModelObject modules = process.getKeyValue("Modules");
-		return modules.getElements();
 	}
 
 	public List<DebugModule> getModuleList() {
@@ -258,21 +235,6 @@ public class HDMAUtil {
 		ModelObject process = getProcess(session, id);
 		ModelObject threads = process.getKeyValue("Threads");
 		return threads.getElements();
-	}
-
-	public ModelObject getProcessDescription(String sid, int systemId) {
-		ModelObject session = getSession(sid);
-		return getProcess(session, Integer.toHexString(systemId));
-	}
-
-	public void setCurrentProcess(ModelObject context, String id) {
-		VARIANT v = new VARIANT(id);
-		context.switchTo(getManager(), v);
-	}
-
-	public void setCurrentThread(ModelObject context, String id) {
-		VARIANT v = new VARIANT(id);
-		context.switchTo(getManager(), v);
 	}
 
 	public String getCtlId(ModelObject object) {
