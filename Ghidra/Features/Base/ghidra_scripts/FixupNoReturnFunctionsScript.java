@@ -294,7 +294,7 @@ public class FixupNoReturnFunctionsScript extends GhidraScript {
         };
 	}
 
-	class NoReturnLocations implements AddressableRowObject {
+	static class NoReturnLocations implements AddressableRowObject {
 		private Program program;
 		private Address addr;
 		private Address whyAddr;
@@ -441,8 +441,8 @@ public class FixupNoReturnFunctionsScript extends GhidraScript {
 			}
 			if (suspectNoReturnFunctions.contains(function)) {
 				NoReturnLocations location = new NoReturnLocations(currentProgram,
-					candidateNonReturningFunction.getEntryPoint(), function.getEntryPoint(),
-					"Function possibly nonReturning, and calls a non Returning function");
+                        candidateNonReturningFunction.getEntryPoint(), function.getEntryPoint(),
+                        "Function possibly nonReturning, and calls a non Returning function");
 				dialog.add(location);
 				return true;
 			}
@@ -459,14 +459,14 @@ public class FixupNoReturnFunctionsScript extends GhidraScript {
 			if (funcManager.getFunctionAt(fallThru) != null) {
 
 				NoReturnLocations location = new NoReturnLocations(currentProgram,
-					ref.getToAddress(), ref.getFromAddress(), "Function defined after call");
+                        ref.getToAddress(), ref.getFromAddress(), "Function defined after call");
 				dialog.add(location);
 				return true;
 			}
 			CodeBlock block = blockModel.getFirstCodeBlockContaining(fallThru, monitor);
 			if (block == null) {
 				NoReturnLocations location = new NoReturnLocations(currentProgram,
-					ref.getToAddress(), ref.getFromAddress(), "Bad block after call");
+                        ref.getToAddress(), ref.getFromAddress(), "Bad block after call");
 				dialog.add(location);
 				return true;
 			}
@@ -488,8 +488,8 @@ public class FixupNoReturnFunctionsScript extends GhidraScript {
 							funcManager.getFunctionContaining(reference.getFromAddress());
 						if (callingFunc.equals(function)) {
 							NoReturnLocations location = new NoReturnLocations(currentProgram,
-								ref.getToAddress(), ref.getFromAddress(),
-								"Data Reference from same function after call");
+                                    ref.getToAddress(), ref.getFromAddress(),
+                                    "Data Reference from same function after call");
 							dialog.add(location);
 							return true;
 						}
@@ -497,7 +497,7 @@ public class FixupNoReturnFunctionsScript extends GhidraScript {
 					else {
 						// only consider references after call if the call location is not in a function
 						NoReturnLocations location = new NoReturnLocations(currentProgram,
-							ref.getToAddress(), ref.getFromAddress(), "Data Reference after call");
+                                ref.getToAddress(), ref.getFromAddress(), "Data Reference after call");
 						dialog.add(location);
 						return true;
 					}
@@ -507,7 +507,7 @@ public class FixupNoReturnFunctionsScript extends GhidraScript {
 			Data data = listing.getDefinedDataContaining(fallThru);
 			if (data != null) {
 				NoReturnLocations location = new NoReturnLocations(currentProgram,
-					ref.getToAddress(), ref.getFromAddress(), "Data after call");
+                        ref.getToAddress(), ref.getFromAddress(), "Data after call");
 				dialog.add(location);
 				return true;
 			}
@@ -517,7 +517,7 @@ public class FixupNoReturnFunctionsScript extends GhidraScript {
 				if (!dests.hasNext()) {
 					// NOTE: destination block iterator does not handle data/undefined at fallthru location
 					NoReturnLocations location = new NoReturnLocations(currentProgram,
-						ref.getToAddress(), ref.getFromAddress(), "Falls into data after call");
+                            ref.getToAddress(), ref.getFromAddress(), "Falls into data after call");
 					dialog.add(location);
 					return true;
 				}

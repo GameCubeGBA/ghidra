@@ -667,7 +667,7 @@ public class GhidraTableColumnModelTest extends AbstractGhidraHeadedIntegrationT
 // Inner Classes
 //==================================================================================================
 
-	private class GhidraTableTestColumn extends TableColumn {
+	private static class GhidraTableTestColumn extends TableColumn {
 		private boolean visible;
 
 		GhidraTableTestColumn(int modelIndex) {

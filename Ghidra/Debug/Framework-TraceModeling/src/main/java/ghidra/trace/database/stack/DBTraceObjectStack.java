@@ -37,7 +37,7 @@ import ghidra.util.LockHold;
 
 public class DBTraceObjectStack implements TraceObjectStack, DBTraceObjectInterface {
 
-	protected class StackChangeTranslator extends Translator<TraceStack> {
+	protected static class StackChangeTranslator extends Translator<TraceStack> {
 		protected StackChangeTranslator(DBTraceObject object, TraceStack iface) {
 			super(null, object, iface);
 		}

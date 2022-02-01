@@ -312,7 +312,7 @@ public class MachoProcessBindScript extends GhidraScript {
 		return result;
 	}
 
-	class BindState {
+	static class BindState {
 		int count = 0;
 
 		MachHeader header;

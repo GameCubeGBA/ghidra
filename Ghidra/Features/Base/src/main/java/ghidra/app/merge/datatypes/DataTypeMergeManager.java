@@ -1160,7 +1160,7 @@ public class DataTypeMergeManager implements MergeResolver {
 					fixUpIDSet.add(sourceDtID);
 				}
 				if (bfDt != null &&
-					(resultCompDt == null || !BitFieldDataType.isValidBaseDataType(resultCompDt))) {
+					(!BitFieldDataType.isValidBaseDataType(resultCompDt))) {
 					// use primitive type as fallback (may get fixed-up later)
 					resultCompDt = bfDt.getPrimitiveBaseDataType();
 				}
@@ -1369,7 +1369,7 @@ public class DataTypeMergeManager implements MergeResolver {
 					fixUpIDSet.add(sourceDtID);
 				}
 				if (bfDt != null &&
-					(resultCompDt == null || !BitFieldDataType.isValidBaseDataType(resultCompDt))) {
+					(!BitFieldDataType.isValidBaseDataType(resultCompDt))) {
 					// use primitive type as fallback (may get fixed-up later)
 					resultCompDt = bfDt.getPrimitiveBaseDataType();
 				}
@@ -3354,7 +3354,7 @@ public class DataTypeMergeManager implements MergeResolver {
 	/**
 	 * CleanUpInfo .
 	 */
-	private class CleanUpInfo {
+	private static class CleanUpInfo {
 		long id;
 		Map<MyIdentityHashMap<Long, DataType>, int[]> map; // resolvedDataTypesMap, indexArray
 

@@ -46,14 +46,14 @@ public class MultiTextFilterTreeFilter implements GTreeFilter {
 			// @formatter:off
 			return filters.parallelStream()
 					.map(f -> matches(f, nodeData))
-					.allMatch(m -> m == true);
+					.allMatch(m -> m);
 			// @formatter:on
 		}
 
 		// @formatter:off
 		return filters.parallelStream()
 					.map(f -> matches(f, nodeData))
-					.anyMatch(m -> m == true);
+					.anyMatch(m -> m);
 		// @formatter:on
 	}
 
@@ -66,7 +66,7 @@ public class MultiTextFilterTreeFilter implements GTreeFilter {
 		// @formatter:off
 		return nodeData.parallelStream()
 			.map(data -> filter.matches(data))
-			.anyMatch(r -> r == true);
+			.anyMatch(r -> r);
 		// @formatter:on
 	}
 

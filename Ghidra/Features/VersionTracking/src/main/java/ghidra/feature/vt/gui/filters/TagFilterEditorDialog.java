@@ -162,7 +162,7 @@ public class TagFilterEditorDialog extends DialogComponentProvider implements Ta
 		}
 	}
 
-	private class TagInfo {
+	private static class TagInfo {
 		private boolean isIncluded;
 		private final VTMatchTag tag;
 

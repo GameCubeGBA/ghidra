@@ -389,7 +389,7 @@ public class DiffApplySettingsProvider extends ComponentProviderAdapter {
 		return plugin;
 	}
 
-	class Choice extends JPanel implements Comparable<Choice> {
+	static class Choice extends JPanel implements Comparable<Choice> {
 		private final static long serialVersionUID = 1L;
 		String type;
 		boolean allowMerge;

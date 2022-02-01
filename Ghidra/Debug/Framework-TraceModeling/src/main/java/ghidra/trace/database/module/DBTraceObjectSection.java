@@ -33,7 +33,7 @@ import ghidra.util.LockHold;
 
 public class DBTraceObjectSection implements TraceObjectSection, DBTraceObjectInterface {
 
-	protected class SectionTranslator extends Translator<TraceSection> {
+	protected static class SectionTranslator extends Translator<TraceSection> {
 		protected SectionTranslator(DBTraceObject object, TraceSection iface) {
 			super(TargetSection.RANGE_ATTRIBUTE_NAME, object, iface);
 		}

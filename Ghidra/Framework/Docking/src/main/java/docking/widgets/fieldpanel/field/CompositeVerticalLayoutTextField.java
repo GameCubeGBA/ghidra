@@ -575,7 +575,7 @@ public class CompositeVerticalLayoutTextField implements TextField {
 		return new DefaultRowColLocation(numRows - 1, length);
 	}
 
-	private class FieldRow {
+	private static class FieldRow {
 		private TextField field;
 		private int displayRowOffset;
 		private int yOffset;

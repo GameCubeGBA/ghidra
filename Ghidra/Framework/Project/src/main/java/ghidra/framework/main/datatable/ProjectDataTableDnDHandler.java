@@ -256,7 +256,7 @@ public class ProjectDataTableDnDHandler implements DragSourceListener, DragGestu
 		return list;
 	}
 
-	class DomainFileTransferable implements Transferable {
+	static class DomainFileTransferable implements Transferable {
 		private List<DomainFileInfo> list;
 
 		DomainFileTransferable(List<DomainFileInfo> list) {

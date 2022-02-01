@@ -1487,7 +1487,7 @@ public class CodeUnitFormat {
 	 * representation list and to keep track of whether to process a scalar with
 	 * a zero value.
 	 */
-	private class InstructionScalarInfo {
+	private static class InstructionScalarInfo {
 
 		boolean processZeroScalar = false;
 		int scalarCount = 0;

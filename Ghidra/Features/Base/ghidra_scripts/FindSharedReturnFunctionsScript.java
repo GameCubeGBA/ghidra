@@ -174,7 +174,7 @@ public class FindSharedReturnFunctionsScript extends GhidraScript {
         };
 	}
 
-	class SharedReturnLocations implements AddressableRowObject {
+	static class SharedReturnLocations implements AddressableRowObject {
 		private Program program;
 		private Address addr;
 		private Address whyAddr;
@@ -259,7 +259,7 @@ public class FindSharedReturnFunctionsScript extends GhidraScript {
 				Address jumpFromAddr = ref.getFromAddress();
 				// NOTE: destination block iterator does not handle data/undefined at fallthru location
 				SharedReturnLocations location = new SharedReturnLocations(currentProgram,
-					jumpFromAddr, entry, "Jumps to called location");
+                        jumpFromAddr, entry, "Jumps to called location");
 				tableDialog.add(location);
 				set.addRange(entry, entry);
 			}

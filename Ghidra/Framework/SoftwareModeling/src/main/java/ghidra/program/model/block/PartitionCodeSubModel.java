@@ -473,13 +473,8 @@ public class PartitionCodeSubModel implements SubroutineBlockModel {
 				CodeBlock targetBlock = blockModel.getFirstCodeBlockContaining(targetAddr, monitor);
 				if (targetBlock != null) {
 					entryPts = targetBlock.getStartAddresses();
-					boolean connect = true;
-					for (Address entryPt : entryPts) {
-						if (entryAddrList.contains(entryPt)) { // don't connect to an existing entry point
-							connect = false;
-						}
-					}
-					if (connect) {
+					// don't connect to an existing entry point
+					if (Arrays.stream(entryPts).noneMatch(entryAddrList::contains)) {
 						verticesOfBlock = g.getVerticesHavingReferent(targetBlock);
 						targetVertex = (verticesOfBlock.length != 0) ? verticesOfBlock[0]
 								: new Vertex(targetBlock);

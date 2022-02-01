@@ -166,7 +166,7 @@ public class TagEditorDialog extends DialogComponentProvider {
 // Inner Classes
 //==================================================================================================
 
-	class TagStateListModel extends AbstractListModel<TagState> {
+	static class TagStateListModel extends AbstractListModel<TagState> {
 
 		private List<TagState> data = new ArrayList<TagState>();
 
@@ -367,7 +367,7 @@ public class TagEditorDialog extends DialogComponentProvider {
 
 	}
 
-	private class VTMatchTagImpl implements VTMatchTag {
+	private static class VTMatchTagImpl implements VTMatchTag {
 
 		private final String name;
 

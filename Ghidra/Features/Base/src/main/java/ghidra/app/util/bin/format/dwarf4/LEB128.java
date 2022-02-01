@@ -207,7 +207,7 @@ public class LEB128 {
 		long value = 0;
 		while (true) {
 			nextByte = reader.readNextUnsignedByte();
-			if (shift == 70 || (isSigned == false && shift == 63 && nextByte > 1)) {
+			if (shift == 70 || (!isSigned && shift == 63 && nextByte > 1)) {
 				throw new IOException(
 					"Unsupported LEB128 value, too large to fit in 64bit java long variable");
 			}

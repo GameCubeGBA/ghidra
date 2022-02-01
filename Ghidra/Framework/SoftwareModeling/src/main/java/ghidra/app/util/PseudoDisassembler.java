@@ -714,8 +714,7 @@ public class PseudoDisassembler {
 						for (Address address : flows) {
 							// if jump target is the same as the fallthru
 							// Instructions with delay slots are allowed.
-							if (fallThru != null &&
-                                    address.equals(fallThru) && !instr.getPrototype().hasDelaySlots()) {
+							if (address.equals(fallThru) && !instr.getPrototype().hasDelaySlots()) {
 								return false;
 							}
 							// if this code jumps to an existing function, allow it

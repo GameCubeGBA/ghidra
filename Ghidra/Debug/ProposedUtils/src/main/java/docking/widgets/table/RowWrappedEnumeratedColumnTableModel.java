@@ -66,16 +66,12 @@ public class RowWrappedEnumeratedColumnTableModel<C extends Enum<C> & Enumerated
 		return s.map(this::addRowFor).collect(Collectors.toList());
 	}
 
-	protected synchronized List<R> addRowsFor(Collection<? extends T> c) {
-		return addRowsFor(c.stream());
-	}
-
 	public synchronized R getRow(T t) {
 		return map.get(keyFunc.apply(t));
 	}
 
 	protected synchronized List<R> getRows(Stream<? extends T> s) {
-		return s.map(this::getRow).filter(r -> r != null).collect(Collectors.toList());
+		return s.map(this::getRow).filter(Objects::nonNull).collect(Collectors.toList());
 	}
 
 	protected synchronized List<R> getRows(Collection<? extends T> c) {
@@ -92,10 +88,7 @@ public class RowWrappedEnumeratedColumnTableModel<C extends Enum<C> & Enumerated
 	public synchronized void addAllItems(Collection<? extends T> c) {
 		Stream<? extends T> s = c.stream().filter(t -> {
 			K k = keyFunc.apply(t);
-			if (map.containsKey(k)) {
-				return false;
-			}
-			return true;
+			return !map.containsKey(k);
 		});
 		addAll(addRowsFor(s));
 	}
@@ -131,7 +124,7 @@ public class RowWrappedEnumeratedColumnTableModel<C extends Enum<C> & Enumerated
 
 	public synchronized void deleteAllItems(Collection<T> c) {
 		deleteWith(getRows(c)::contains);
-		map.keySet().removeAll(c.stream().map(keyFunc).collect(Collectors.toList()));
+		c.stream().map(keyFunc).collect(Collectors.toList()).forEach(map.keySet()::remove);
 	}
 
 	public synchronized Map<K, R> getMap() {

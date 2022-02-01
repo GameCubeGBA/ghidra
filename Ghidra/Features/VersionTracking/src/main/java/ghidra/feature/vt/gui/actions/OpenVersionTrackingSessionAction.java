@@ -55,7 +55,7 @@ public class OpenVersionTrackingSessionAction extends DockingAction {
 		}
 	}
 
-	class VTDomainFileFilter implements DomainFileFilter {
+	static class VTDomainFileFilter implements DomainFileFilter {
 		public boolean accept(DomainFile f) {
 			Class<?> c = f.getDomainObjectClass();
 			return VTSession.class.isAssignableFrom(c);

@@ -330,7 +330,7 @@ public class StatusBar extends JPanel {
 		}
 	}
 
-	private class AnimationDelayTimer extends Timer implements ActionListener {
+	private static class AnimationDelayTimer extends Timer implements ActionListener {
 
 		public AnimationDelayTimer() {
 			super(5000, null);

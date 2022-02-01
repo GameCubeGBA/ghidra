@@ -234,7 +234,7 @@ public class TableChooserDialog extends DialogComponentProvider
 		}
 		finally {
 			// Note: the code below this comment needs to happen, even if the monitor is cancelled
-			sharedPending.removeAll(rowObjects);
+			sharedPending::remove.forEach(rowObjects::remove);
 			model.fireTableDataChanged();
 			setStatusText("");
 		}

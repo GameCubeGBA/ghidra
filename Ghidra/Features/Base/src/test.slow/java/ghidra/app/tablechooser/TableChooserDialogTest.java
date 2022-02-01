@@ -605,7 +605,7 @@ public class TableChooserDialogTest extends AbstractGhidraHeadedIntegrationTest 
 		}
 	}
 
-	private class TestAction extends DockingAction {
+	private static class TestAction extends DockingAction {
 
 		private int invoked;
 

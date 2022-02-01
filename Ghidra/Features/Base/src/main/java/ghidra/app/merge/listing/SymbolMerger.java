@@ -771,7 +771,7 @@ class SymbolMerger extends AbstractListingMerger {
 						updateResolveIDs(originalPgm, id, -1);
 						deferredRemoveIDs.remove(id);
 						list.remove(i--);
-						removedSome |= true;
+						removedSome = true;
 						incrementProgress(1);
 					}
 				}
@@ -2910,7 +2910,7 @@ class SymbolMerger extends AbstractListingMerger {
 	/**
 	 * A convenience class that is simply a hash set containing long values.
 	 */
-	private class LongHashSet extends HashSet<Long> {
+	private static class LongHashSet extends HashSet<Long> {
 		private final static long serialVersionUID = 1;
 
 		public boolean add(long l) {

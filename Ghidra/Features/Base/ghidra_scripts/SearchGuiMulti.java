@@ -205,7 +205,7 @@ public class SearchGuiMulti extends SearchBaseExtended {
 
 				if (column == 0) {
 					tableContentsDO[mnemonic][column] =
-						new DataObject(mnemonics.get(mnemonic).textRep, Color.green);
+							new DataObject(mnemonics.get(mnemonic).textRep, Color.green);
 				}
 				else {
 					OperandCase temp = null;
@@ -217,7 +217,7 @@ public class SearchGuiMulti extends SearchBaseExtended {
 					}
 					if (temp != null) {
 						tableContentsDO[mnemonic][column] =
-							new DataObject(temp.textRep, Color.red.brighter());
+								new DataObject(temp.textRep, Color.red.brighter());
 					}
 					else {
 						tableContentsDO[mnemonic][column] = new DataObject("", Color.white);
@@ -334,7 +334,7 @@ public class SearchGuiMulti extends SearchBaseExtended {
 		frame.dispose();
 	}
 
-	private class DataObject {
+	private static class DataObject {
 		private String data;
 		private Color background = Color.white;
 

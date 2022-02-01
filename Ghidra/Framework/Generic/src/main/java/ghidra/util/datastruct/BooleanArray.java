@@ -50,7 +50,7 @@ public class BooleanArray implements Array, Serializable {
         int bitNum = index % 8;
 
         if (byteNum >= bytes.length) {
-            if (value == false) {
+            if (!value) {
                 return;
             }
             adjustArray(Math.max(byteNum+1,bytes.length*2));

@@ -352,6 +352,7 @@ public class ByteSequenceRowObject {
 				for (String bytes : retBytes) {
 					if (bytes == null) {
 						valid = false;
+						break;
 					}
 				}
 				if (valid) {

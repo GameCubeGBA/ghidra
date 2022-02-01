@@ -33,7 +33,7 @@ import ghidra.util.exception.DuplicateNameException;
 
 public class DBTraceObjectThread implements TraceObjectThread, DBTraceObjectInterface {
 
-	protected class ThreadChangeTranslator extends Translator<TraceThread> {
+	protected static class ThreadChangeTranslator extends Translator<TraceThread> {
 		protected ThreadChangeTranslator(DBTraceObject object, TraceThread iface) {
 			super(null, object, iface);
 		}

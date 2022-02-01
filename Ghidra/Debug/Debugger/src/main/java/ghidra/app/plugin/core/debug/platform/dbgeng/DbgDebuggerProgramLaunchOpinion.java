@@ -40,7 +40,7 @@ public class DbgDebuggerProgramLaunchOpinion implements DebuggerProgramLaunchOpi
 
 	}
 
-	protected class InVmDbgengDebuggerProgramLaunchOffer
+	protected static class InVmDbgengDebuggerProgramLaunchOffer
 			extends AbstractDbgDebuggerProgramLaunchOffer {
 		private static final String FACTORY_CLS_NAME =
 			"agent.dbgeng.DbgEngInJvmDebuggerModelFactory";
@@ -61,7 +61,7 @@ public class DbgDebuggerProgramLaunchOpinion implements DebuggerProgramLaunchOpi
 		}
 	}
 
-	protected class GadpDbgengDebuggerProgramLaunchOffer
+	protected static class GadpDbgengDebuggerProgramLaunchOffer
 			extends AbstractDbgDebuggerProgramLaunchOffer {
 		private static final String FACTORY_CLS_NAME =
 			"agent.dbgeng.gadp.DbgEngLocalDebuggerModelFactory";
@@ -82,7 +82,7 @@ public class DbgDebuggerProgramLaunchOpinion implements DebuggerProgramLaunchOpi
 		}
 	}
 
-	protected class InVmDbgmodelDebuggerProgramLaunchOffer
+	protected static class InVmDbgmodelDebuggerProgramLaunchOffer
 			extends AbstractDbgDebuggerProgramLaunchOffer {
 		private static final String FACTORY_CLS_NAME =
 			"agent.dbgmodel.DbgModelInJvmDebuggerModelFactory";
@@ -103,7 +103,7 @@ public class DbgDebuggerProgramLaunchOpinion implements DebuggerProgramLaunchOpi
 		}
 	}
 
-	protected class GadpDbgmodelDebuggerProgramLaunchOffer
+	protected static class GadpDbgmodelDebuggerProgramLaunchOffer
 			extends AbstractDbgDebuggerProgramLaunchOffer {
 		private static final String FACTORY_CLS_NAME =
 			"agent.dbgmodel.gadp.DbgModelLocalDebuggerModelFactory";

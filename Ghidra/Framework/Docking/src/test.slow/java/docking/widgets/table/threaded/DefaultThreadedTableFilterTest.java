@@ -624,7 +624,7 @@ public class DefaultThreadedTableFilterTest extends AbstractThreadedTableTest {
 // Inner Classes
 //==================================================================================================
 
-	private class RawRowValueTableColumn extends AbstractDynamicTableColumnStub<Long, Long> {
+	private static class RawRowValueTableColumn extends AbstractDynamicTableColumnStub<Long, Long> {
 
 		@Override
 		public String getColumnName() {
@@ -638,7 +638,7 @@ public class DefaultThreadedTableFilterTest extends AbstractThreadedTableTest {
 		}
 	}
 
-	private class EmptyCustomFilter implements TableFilter<Long> {
+	private static class EmptyCustomFilter implements TableFilter<Long> {
 
 		@Override
 		public boolean acceptsRow(Long rowObject) {
@@ -683,7 +683,7 @@ public class DefaultThreadedTableFilterTest extends AbstractThreadedTableTest {
 
 	}
 
-	private class EmptyTextFilter implements TextFilter {
+	private static class EmptyTextFilter implements TextFilter {
 
 		@Override
 		public boolean matches(String text) {
@@ -701,7 +701,7 @@ public class DefaultThreadedTableFilterTest extends AbstractThreadedTableTest {
 		}
 	}
 
-	private class AllPassesTableFilter implements TableFilter<Long> {
+	private static class AllPassesTableFilter implements TableFilter<Long> {
 
 		@Override
 		public boolean acceptsRow(Long rowObject) {
@@ -714,7 +714,7 @@ public class DefaultThreadedTableFilterTest extends AbstractThreadedTableTest {
 		}
 	}
 
-	private class PredicateTableFilter implements TableFilter<Long> {
+	private static class PredicateTableFilter implements TableFilter<Long> {
 
 		private Predicate<Long> predicate;
 

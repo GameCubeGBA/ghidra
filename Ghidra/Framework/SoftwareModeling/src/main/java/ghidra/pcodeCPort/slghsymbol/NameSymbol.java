@@ -52,6 +52,7 @@ public class NameSymbol extends ValueSymbol {
 		for (int i = 0; i < nametable.size(); ++i) {
 			if (nametable.get(i) == null) {
 				tableisfilled = false;
+				break;
 			}
 		}
 	}

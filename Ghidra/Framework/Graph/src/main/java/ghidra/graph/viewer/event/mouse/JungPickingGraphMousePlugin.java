@@ -186,7 +186,7 @@ public class JungPickingGraphMousePlugin<V, E> extends AbstractGraphMousePlugin
 
 				vertex = pickSupport.getVertex(layout, ip.getX(), ip.getY());
 				if (vertex != null) {
-					if (pickedVertexState.isPicked(vertex) == false) {
+					if (!pickedVertexState.isPicked(vertex)) {
 						pickedVertexState.clear();
 						pickedVertexState.pick(vertex, true);
 					}
@@ -261,7 +261,7 @@ public class JungPickingGraphMousePlugin<V, E> extends AbstractGraphMousePlugin
 			if (down != null) {
 				Point2D out = e.getPoint();
 
-				if (vertex == null && heyThatsTooClose(down, out, 5) == false) {
+				if (vertex == null && !heyThatsTooClose(down, out, 5)) {
 					pickContainedVertices(vv, down, out, false);
 				}
 			}
@@ -272,7 +272,7 @@ public class JungPickingGraphMousePlugin<V, E> extends AbstractGraphMousePlugin
 			if (down != null) {
 				// check to see if we were dragging (no vertex picked and a large enough rectangle)
 				Point2D out = e.getPoint();
-				if (vertex == null && heyThatsTooClose(down, out, 5) == false) {
+				if (vertex == null && !heyThatsTooClose(down, out, 5)) {
 					pickContainedVertices(vv, down, out, true);
 				}
 			}
@@ -297,7 +297,7 @@ public class JungPickingGraphMousePlugin<V, E> extends AbstractGraphMousePlugin
 	@Override
 	@SuppressWarnings("unchecked")
 	public void mouseDragged(MouseEvent e) {
-		if (locked == false) {
+		if (!locked) {
 			VisualizationViewer<V, E> vv = (VisualizationViewer<V, E>) e.getSource();
 			if (vertex != null) {
 				Point p = e.getPoint();

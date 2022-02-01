@@ -315,7 +315,7 @@ public class FunctionSignatureStringable extends Stringable {
 		String returnTypeID = strings.remove(0); // Return DataType ID with optional MAKE_POINTER_PREFIX
 		String returnStorage = strings.remove(0); // Return Storage
 		returnInfo = new ParameterInfo(returnTypeID, dataTypeManager, Parameter.RETURN_NAME,
-			returnStorage, SourceType.DEFAULT, null);
+                returnStorage, SourceType.DEFAULT, null);
 
 		String parameterStorageString = strings.remove(0); // Parameter Storage
 		// Now pull apart the parameter storage and put it in the list.
@@ -364,7 +364,7 @@ public class FunctionSignatureStringable extends Stringable {
 			}
 
 			parameterInfos.add(new ParameterInfo(dtIDString, dataTypeManager, name, storage, source,
-				decodedComment));
+                    decodedComment));
 		}
 	}
 
@@ -1035,7 +1035,7 @@ public class FunctionSignatureStringable extends Stringable {
 		}
 	}
 
-	private class ParameterInfo {
+	private static class ParameterInfo {
 
 		private final DataType dataType;
 		private final String name;

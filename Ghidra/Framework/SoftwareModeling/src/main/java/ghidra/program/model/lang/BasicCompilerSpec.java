@@ -496,10 +496,10 @@ public class BasicCompilerSpec implements CompilerSpec {
 		evalCalledModel = defaultModel;
 
 		for (PrototypeModel evalmodel : allmodels) {
-			if (evalCurrent != null && evalmodel.getName().equals(evalCurrent)) {
+			if (evalmodel.getName().equals(evalCurrent)) {
 				evalCurrentModel = evalmodel;
 			}
-			if (evalCalled != null && evalmodel.getName().equals(evalCalled)) {
+			if (evalmodel.getName().equals(evalCalled)) {
 				evalCalledModel = evalmodel;
 			}
 		}

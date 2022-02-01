@@ -672,7 +672,7 @@ public class ClangLayoutController implements LayoutModel, LayoutModelListener {
 		}
 	}
 
-	private class FieldNumberColumnPair {
+	private static class FieldNumberColumnPair {
 		private final int fieldNumber;
 		private final int column;
 

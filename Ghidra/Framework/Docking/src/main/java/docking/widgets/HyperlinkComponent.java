@@ -153,7 +153,7 @@ public class HyperlinkComponent extends JPanel {
 // Inner Classes
 //==================================================================================================
 
-	private class NonScrollingCaret extends DefaultCaret {
+	private static class NonScrollingCaret extends DefaultCaret {
 
 		private NonScrollingCaret() {
 			setVisible(false);

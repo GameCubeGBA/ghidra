@@ -1486,7 +1486,7 @@ public abstract class CompositeEditorPanel extends JPanel
 		}
 	}
 
-	class CompositeTable extends GTable {
+	static class CompositeTable extends GTable {
 
 		public CompositeTable(TableModel dm) {
 			super(dm);

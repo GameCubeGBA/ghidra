@@ -223,7 +223,7 @@ public class ProcessorListPlugin extends Plugin implements FrontEndable {
 
 	}
 
-	public class ProcessorListTableModel extends AbstractSortedTableModel<Processor> {
+	public static class ProcessorListTableModel extends AbstractSortedTableModel<Processor> {
 
 		private static final int PROCESSOR_COL = 0;
 

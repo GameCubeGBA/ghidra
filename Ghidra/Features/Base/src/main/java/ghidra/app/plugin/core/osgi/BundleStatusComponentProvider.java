@@ -229,7 +229,7 @@ public class BundleStatusComponentProvider extends ComponentProviderAdapter {
 			anythingCleaned |= bundleHost.getExistingGhidraBundle(status.getFile()).clean();
 			if (!status.getSummary().isEmpty()) {
 				status.setSummary("");
-				anythingCleaned |= true;
+				anythingCleaned = true;
 			}
 		}
 		if (anythingCleaned) {

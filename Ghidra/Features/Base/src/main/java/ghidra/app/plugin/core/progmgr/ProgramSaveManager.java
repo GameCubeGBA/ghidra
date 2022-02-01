@@ -497,7 +497,7 @@ class ProgramSaveManager {
 		}
 	}
 
-	class SaveAsTask extends Task {
+	static class SaveAsTask extends Task {
 
 		private DomainFolder parentFolder;
 		private String newName;

@@ -39,7 +39,7 @@ import ghidra.util.exception.DuplicateNameException;
 
 public class DBTraceObjectModule implements TraceObjectModule, DBTraceObjectInterface {
 
-	protected class ModuleChangeTranslator extends Translator<TraceModule> {
+	protected static class ModuleChangeTranslator extends Translator<TraceModule> {
 		protected ModuleChangeTranslator(DBTraceObject object, TraceModule iface) {
 			super(TargetModule.RANGE_ATTRIBUTE_NAME, object, iface);
 		}

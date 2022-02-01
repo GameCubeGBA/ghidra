@@ -211,7 +211,7 @@ public class NumberRangeInputDialog extends DialogComponentProvider {
 		textField.setText(text);
 	}
 
-	private class MyHintTextField extends HintTextField {
+	private static class MyHintTextField extends HintTextField {
 
 		MyHintTextField(String hintText) {
 			super(hintText);

@@ -128,7 +128,7 @@ public class ArmAggressiveInstructionFinderAnalyzer extends AbstractAnalyzer {
         }
 
 		// get an instruction iterator
-		while (todoSet.isEmpty() == false) {
+		while (!todoSet.isEmpty()) {
 
 			Data data;
 			Address minAddr = todoSet.getMinAddress();

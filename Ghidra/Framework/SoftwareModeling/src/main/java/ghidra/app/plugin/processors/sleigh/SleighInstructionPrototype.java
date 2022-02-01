@@ -1218,10 +1218,8 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 				if (var.equals(element.getOutput())) {
 					isWrite = true;
 				}
-				for (Varnode input : element.getInputs()) {
-					if (var.equals(input)) {
-						isRead = true;
-					}
+				if (Arrays.asList(element.getInputs()).contains(var)) {
+					isRead = true;
 				}
 			}
 		}

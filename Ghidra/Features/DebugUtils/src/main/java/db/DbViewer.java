@@ -97,7 +97,7 @@ public class DbViewer extends JFrame {
 		setJMenuBar(menuBar);
 	}
 
-	private class TableNameComparator implements Comparator<Table> {
+	private static class TableNameComparator implements Comparator<Table> {
 
 		@Override
 		public int compare(Table t1, Table t2) {

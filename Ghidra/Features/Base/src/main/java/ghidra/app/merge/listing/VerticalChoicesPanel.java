@@ -466,7 +466,7 @@ public class VerticalChoicesPanel extends ConflictPanel {
 		return allChoicesAreResolved();
 	}
 
-	private class MyLabel extends GDHtmlLabel {
+	private static class MyLabel extends GDHtmlLabel {
 
 		/**
 		 * @param text the text of this label.

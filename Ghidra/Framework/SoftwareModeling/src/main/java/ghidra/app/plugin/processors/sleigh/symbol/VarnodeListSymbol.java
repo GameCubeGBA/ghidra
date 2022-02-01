@@ -19,10 +19,7 @@
  */
 package ghidra.app.plugin.processors.sleigh.symbol;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.*;
 
 import ghidra.app.plugin.processors.sleigh.Constructor;
 import ghidra.app.plugin.processors.sleigh.FixedHandle;
@@ -50,17 +47,13 @@ public class VarnodeListSymbol extends ValueSymbol {
 	private boolean tableisfilled;
 
 	public Collection<VarnodeSymbol> getVarnodeTable() {
-		return Collections.unmodifiableList(Arrays.asList(varnode_table));
+		return List.of(varnode_table);
 	}
 
 	private void checkTableFill() {
 		long min = getPatternValue().minValue();
 		long max = getPatternValue().maxValue();
-		tableisfilled = (min >= 0) && (max < varnode_table.length);
-        for (VarnodeSymbol varnodeSymbol : varnode_table) {
-            if (varnodeSymbol == null)
-                tableisfilled = false;
-        }
+		tableisfilled = (min >= 0) && (max < varnode_table.length) && Arrays.stream(varnode_table).noneMatch(Objects::isNull);
 	}
 
 	/* (non-Javadoc)

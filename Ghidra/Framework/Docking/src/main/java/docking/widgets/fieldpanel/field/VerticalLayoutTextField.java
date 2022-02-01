@@ -567,7 +567,7 @@ public class VerticalLayoutTextField implements TextField {
 		return 0;
 	}
 
-	private class FieldRow {
+	private static class FieldRow {
 		private TextField field;
 		private int dataRow;
 		private int screenRow;

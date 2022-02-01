@@ -307,7 +307,7 @@ public class ViewStringsProvider extends ComponentProviderAdapter {
 	 * This causes the cell to be displayed as the formatted representation and then when the user
 	 * double clicks to start editing mode, it swaps to non-formatted version.
 	 */
-	private class StringRepCellEditor extends GTableTextCellEditor {
+	private static class StringRepCellEditor extends GTableTextCellEditor {
 
 		private JTextField textField;
 

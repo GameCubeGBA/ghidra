@@ -205,7 +205,7 @@ public class JgtNamedLayout extends AbstractFGLayout {
 		return e -> e.getFlowType().equals(RefType.FALL_THROUGH);
 	}
 
-	private class FGTempGraph extends AbstractBaseGraph<FGVertex, FGEdge> {
+	private static class FGTempGraph extends AbstractBaseGraph<FGVertex, FGEdge> {
 
 		protected FGTempGraph() {
 			super(null, null, DefaultGraphType.directedPseudograph());
@@ -213,7 +213,7 @@ public class JgtNamedLayout extends AbstractFGLayout {
 
 	}
 
-	private class FGEdgeComparator implements Comparator<FGEdge> {
+	private static class FGEdgeComparator implements Comparator<FGEdge> {
 
 		// TODO we can update the edge priority used when layout out the graph, which is what the
 		// generic graphing does.   In order to change edge priorities, we would have to verify 

@@ -370,9 +370,9 @@ class SymbolTableModel extends AddressBasedTableModel<SymbolRowObject> {
 //==================================================================================================
 // Table Column Classes
 //==================================================================================================
-
-	private class NameTableColumn
-			extends AbstractProgramBasedDynamicTableColumn<SymbolRowObject, Symbol> {
+	
+private static class NameTableColumn
+		extends AbstractProgramBasedDynamicTableColumn<SymbolRowObject, Symbol> {
 
 		@Override
 		public String getColumnName() {
@@ -386,7 +386,7 @@ class SymbolTableModel extends AddressBasedTableModel<SymbolRowObject> {
 		}
 	}
 
-	private class PinnedTableColumn
+	private static class PinnedTableColumn
 			extends AbstractProgramBasedDynamicTableColumn<SymbolRowObject, Boolean> {
 
 		private PinnedRenderer renderer = new PinnedRenderer();
@@ -443,7 +443,7 @@ class SymbolTableModel extends AddressBasedTableModel<SymbolRowObject> {
 		}
 	}
 
-	private class SymbolTypeTableColumn
+	private static class SymbolTypeTableColumn
 			extends AbstractProgramBasedDynamicTableColumn<SymbolRowObject, String> {
 
 		@Override
@@ -465,14 +465,14 @@ class SymbolTableModel extends AddressBasedTableModel<SymbolRowObject> {
 		}
 	}
 
-	private class VariableSymbolLocation extends AddressBasedLocation {
+	private static class VariableSymbolLocation extends AddressBasedLocation {
 
 		VariableSymbolLocation(Variable variable) {
 			super(variable.getSymbol().getAddress(), variable.getVariableStorage().toString());
 		}
 	}
 
-	private class DataTypeTableColumn
+	private static class DataTypeTableColumn
 			extends AbstractProgramBasedDynamicTableColumn<SymbolRowObject, String> {
 
 		@Override
@@ -509,7 +509,7 @@ class SymbolTableModel extends AddressBasedTableModel<SymbolRowObject> {
 		}
 	}
 
-	private class NamespaceTableColumn
+	private static class NamespaceTableColumn
 			extends AbstractProgramBasedDynamicTableColumn<SymbolRowObject, String> {
 
 		@Override
@@ -528,7 +528,7 @@ class SymbolTableModel extends AddressBasedTableModel<SymbolRowObject> {
 		}
 	}
 
-	private class SourceTableColumn
+	private static class SourceTableColumn
 			extends AbstractProgramBasedDynamicTableColumn<SymbolRowObject, SourceType> {
 
 		private GColumnRenderer<SourceType> renderer = new AbstractGColumnRenderer<>() {
@@ -568,7 +568,7 @@ class SymbolTableModel extends AddressBasedTableModel<SymbolRowObject> {
 		}
 	}
 
-	private class ReferenceCountTableColumn
+	private static class ReferenceCountTableColumn
 			extends AbstractProgramBasedDynamicTableColumn<SymbolRowObject, Integer> {
 
 		private ReferenceCountRenderer renderer = new ReferenceCountRenderer();
@@ -601,7 +601,7 @@ class SymbolTableModel extends AddressBasedTableModel<SymbolRowObject> {
 		}
 	}
 
-	private class OffcutReferenceCountTableColumn
+	private static class OffcutReferenceCountTableColumn
 			extends AbstractProgramBasedDynamicTableColumn<SymbolRowObject, Integer> {
 
 		private OffcutReferenceCountRenderer renderer = new OffcutReferenceCountRenderer();
@@ -689,7 +689,7 @@ class SymbolTableModel extends AddressBasedTableModel<SymbolRowObject> {
 
 	}
 
-	private class OriginalNameColumn
+	private static class OriginalNameColumn
 			extends AbstractProgramBasedDynamicTableColumn<SymbolRowObject, String> {
 
 		@Override

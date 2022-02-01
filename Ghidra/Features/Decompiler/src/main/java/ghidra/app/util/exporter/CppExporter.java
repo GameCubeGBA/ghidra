@@ -438,7 +438,7 @@ public class CppExporter extends Exporter {
 // Inner Classes
 //==================================================================================================
 
-	private class CPPResult implements Comparable<CPPResult> {
+	private static class CPPResult implements Comparable<CPPResult> {
 
 		private Address address;
 		private String bodyCode;
@@ -517,7 +517,7 @@ public class CppExporter extends Exporter {
 			CodeUnit codeUnitAt = function.getProgram().getListing().getCodeUnitAt(entryPoint);
 			if (codeUnitAt == null || !(codeUnitAt instanceof Instruction)) {
 				return new CPPResult(entryPoint, function.getPrototypeString(false, false) + ';',
-					null);
+                        null);
 			}
 
 			monitor.setMessage("Decompiling " + function.getName());
@@ -530,15 +530,15 @@ public class CppExporter extends Exporter {
 				if (options.isWARNCommentIncluded()) {
 					monitor.incrementProgress(1);
 					return new CPPResult(entryPoint, null,
-						"/*" + EOL + "Unable to decompile '" + function.getName() + "'" + EOL +
-							"Cause: " + errorMessage + EOL + "*/" + EOL);
+                            "/*" + EOL + "Unable to decompile '" + function.getName() + "'" + EOL +
+                                    "Cause: " + errorMessage + EOL + "*/" + EOL);
 				}
 				return null;
 			}
 
 			DecompiledFunction decompiledFunction = dr.getDecompiledFunction();
 			return new CPPResult(entryPoint, decompiledFunction.getSignature(),
-				decompiledFunction.getC());
+                    decompiledFunction.getC());
 		}
 	}
 
@@ -548,7 +548,7 @@ public class CppExporter extends Exporter {
 	 * chunk. So, we wrap a real monitor, overriding the behavior such that initialize() has
 	 * no effect when it is called by the queue.
 	 */
-	private class ChunkingTaskMonitor extends TaskMonitorAdapter {
+	private static class ChunkingTaskMonitor extends TaskMonitorAdapter {
 		private TaskMonitor monitor;
 
 		ChunkingTaskMonitor(TaskMonitor monitor) {

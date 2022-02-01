@@ -59,6 +59,7 @@ public class ValueMapSymbol extends ValueSymbol {
 		for (int i = 0; i < valuetable.size(); ++i) {
 			if (valuetable.get(i) == 0xBADBEEF) {
 				tableisfilled = false;
+				break;
 			}
 		}
 	}

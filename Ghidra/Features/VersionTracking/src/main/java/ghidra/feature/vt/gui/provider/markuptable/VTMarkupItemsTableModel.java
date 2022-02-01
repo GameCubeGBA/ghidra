@@ -628,7 +628,7 @@ public class VTMarkupItemsTableModel extends AddressBasedTableModel<VTMarkupItem
 		}
 	}
 
-	private class SourceValueTableColumn
+	private static class SourceValueTableColumn
 			extends AbstractProgramBasedDynamicTableColumn<VTMarkupItem, Stringable> {
 
 		private MarkupItemValueRenderer renderer;
@@ -663,7 +663,7 @@ public class VTMarkupItemsTableModel extends AddressBasedTableModel<VTMarkupItem
 		}
 	}
 
-	private class DestinationValueTableColumn
+	private static class DestinationValueTableColumn
 			extends AbstractProgramBasedDynamicTableColumn<VTMarkupItem, Stringable> {
 
 		private MarkupItemValueRenderer renderer;
@@ -698,7 +698,7 @@ public class VTMarkupItemsTableModel extends AddressBasedTableModel<VTMarkupItem
 		}
 	}
 
-	private class OriginalDestinationValueTableColumn
+	private static class OriginalDestinationValueTableColumn
 			extends AbstractProgramBasedDynamicTableColumn<VTMarkupItem, Stringable> {
 
 		private MarkupItemValueRenderer renderer;

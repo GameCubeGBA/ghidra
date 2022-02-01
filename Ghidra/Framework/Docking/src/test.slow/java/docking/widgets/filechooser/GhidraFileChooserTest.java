@@ -2815,7 +2815,7 @@ public class GhidraFileChooserTest extends AbstractDockingTest {
 //==================================================================================================	
 
 	/** Simple container class for newly created dirs and files */
-	private class TestFiles {
+	private static class TestFiles {
 		private File parent;
 		private List<File> dirs = new ArrayList<>();
 		private List<File> files = new ArrayList<>();

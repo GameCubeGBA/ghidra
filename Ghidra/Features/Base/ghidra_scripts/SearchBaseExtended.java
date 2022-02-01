@@ -360,7 +360,7 @@ public class SearchBaseExtended extends GhidraScript {
 			else {
 				//apply an empty filter basically ignoring
 				result = buildSingleInstructionMask(privateMnemonics.get(x), localOperands,
-					new SLMaskControl(false, false, false, false));
+						new SLMaskControl(false, false, false, false));
 			}
 
 			if (result.value.length == result.mask.length) {
@@ -459,7 +459,7 @@ public class SearchBaseExtended extends GhidraScript {
 	/*
 	 * Used for storing data about an instructions mnemonic
 	 */
-	public class Case {
+	public static class Case {
 		public Address addr;
 		public byte[] mask;
 		public byte[] value;
@@ -470,7 +470,7 @@ public class SearchBaseExtended extends GhidraScript {
 		public boolean constant = false;
 	}
 
-	private class MaskValueCase {
+	private static class MaskValueCase {
 		public byte[] mask;
 		public byte[] value;
 	}
@@ -479,7 +479,7 @@ public class SearchBaseExtended extends GhidraScript {
 	 * Represents a filter for a single instruction. 
 	 * Controls which portions of the instruction will be used when performing the search through memory.
 	 */
-	public class SLMaskControl {
+	public static class SLMaskControl {
 		boolean useMnemonic = true;
 		boolean useOp1 = false;
 		boolean useOp2 = false;

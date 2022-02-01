@@ -279,6 +279,7 @@ public class ExportToHeaderAction extends DockingAction {
 		for (String element : fileExtensions) {
 			if (path.toLowerCase().endsWith("." + element)) {
 				hasKnownExtension = true;
+				break;
 			}
 		}
 

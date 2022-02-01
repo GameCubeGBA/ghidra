@@ -389,7 +389,7 @@ public class DisassembleCommand extends BackgroundCommand {
 //
 //	}
 
-	private class MyListener implements DisassemblerMessageListener {
+	private static class MyListener implements DisassemblerMessageListener {
 		private TaskMonitor monitor;
 
 		MyListener(TaskMonitor monitor) {

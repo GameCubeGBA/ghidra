@@ -306,7 +306,7 @@ public class ToolScreenShots extends GhidraScreenShotGenerator {
 		return helpTopicDirs;
 	}
 
-	private class DummyBackgroundCommand extends BackgroundCommand {
+	private static class DummyBackgroundCommand extends BackgroundCommand {
 
 		public DummyBackgroundCommand() {
 			super("Dummy", true, true, false);

@@ -606,7 +606,7 @@ public class VarnodeContext implements ProcessorContext {
 		if (spaceVal != null) {
 			spaceVal = spaceVal.not();  // only flip space bits that are non-zero
 		}
-		if (spaceVal != null && BigInteger.ZERO.equals(spaceVal)) {
+		if (BigInteger.ZERO.equals(spaceVal)) {
 			return null;
 		}
 		return spaceVal;
@@ -624,7 +624,7 @@ public class VarnodeContext implements ProcessorContext {
 		if (spaceVal != null) {
 			spaceVal = spaceVal.not();  // only flip space bits that are non-zero
 		}
-		if (spaceVal != null && BigInteger.ZERO.equals(spaceVal)) {
+		if (BigInteger.ZERO.equals(spaceVal)) {
 			return null;
 		}
 		return spaceVal;

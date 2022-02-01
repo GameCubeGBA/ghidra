@@ -141,7 +141,7 @@ class FileByteBlockSet implements ByteBlockSet {
 		return false;
 	}
 
-	private class EditInfo {
+	private static class EditInfo {
 		private int index;
 
 		EditInfo(int index) {

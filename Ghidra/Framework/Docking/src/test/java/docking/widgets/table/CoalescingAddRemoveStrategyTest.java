@@ -320,7 +320,7 @@ public class CoalescingAddRemoveStrategyTest {
 // Inner Classes
 //==================================================================================================	
 
-	private class SpyTableData extends TestTableData<TestRowObject> {
+	private static class SpyTableData extends TestTableData<TestRowObject> {
 
 		private int removeCount;
 		private int insertCount;
@@ -350,7 +350,7 @@ public class CoalescingAddRemoveStrategyTest {
 		}
 	}
 
-	private class TestRowObject {
+	private static class TestRowObject {
 
 		private String name;
 		private long id;
