@@ -43,7 +43,7 @@ public class DBCachedObjectStoreEntrySet<T extends DBAnnotatedObject>
 		this.lock = lock;
 		this.direction = direction;
 
-		this.comparator = Comparator.comparing(Entry::getKey, store.keyComparator());
+		this.comparator = Entry.<Long,?>comparingByKey(store.keyComparator());
 		this.reverseComparator = ComparatorUtils.reversedComparator(comparator);
 	}
 
