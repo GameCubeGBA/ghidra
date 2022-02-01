@@ -1,7 +1,0 @@
-/**
- * Provides classes and interfaces for how the user interacts with Ghidra as an application. Classes
- * in these packages provide the front end to Ghidra, capabiilities for building tools,
- * defining preferences, low-level storage, and
- * project management.
- */
-package ghidra.framework;
