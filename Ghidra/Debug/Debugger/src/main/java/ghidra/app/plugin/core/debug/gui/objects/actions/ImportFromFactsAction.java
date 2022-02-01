@@ -94,8 +94,9 @@ public class ImportFromFactsAction extends ImportExportAsAction {
 
 					Map<String, DummyTargetObject> objMap = new LinkedHashMap<>();
 					Map<String, String> map = maps.get("ObjectPath");
-					for (String key : map.keySet()) {
-						String pathStr = map.get(key);
+					for (Map.Entry<String, String> entry : map.entrySet()) {
+                        String key = entry.getKey();
+                        String pathStr = entry.getValue();
 						String[] split = pathStr.split(ExportAsFactsAction.SPLIT);
 						List<String> path = new ArrayList<>();
                         path.addAll(Arrays.asList(split));
@@ -107,8 +108,9 @@ public class ImportFromFactsAction extends ImportExportAsAction {
 						objMap.put(key, to);
 					}
 					Map<String, String> cmap = maps.get("ObjectChildren");
-					for (String key : cmap.keySet()) {
-						String cid = cmap.get(key);
+					for (Map.Entry<String, String> entry : cmap.entrySet()) {
+                        String key = entry.getKey();
+                        String cid = entry.getValue();
 						String pkey = key.substring(0, key.indexOf(":"));
 						DummyTargetObject to = objMap.get(pkey);
 						DummyTargetObject cto = objMap.get(cid);

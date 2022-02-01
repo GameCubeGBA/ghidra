@@ -839,7 +839,7 @@ public class DataTypeWriter {
 			return getFunctionPointerString((FunctionDefinition) baseReturnType, sb.toString(),
 				returnType, writeEnabled, monitor);
 		}
-		return returnType.getDisplayName() + " " + sb.toString();
+		return returnType.getDisplayName() + " " + sb;
 	}
 
 	private String getParameterListString(FunctionDefinition fd, boolean includeParamNames,

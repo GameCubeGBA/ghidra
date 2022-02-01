@@ -204,8 +204,7 @@ public class ProgramTreePlugin extends ProgramPlugin
 	 */
 	@Override
 	public void dispose() {
-        for (String treeName : providerMap.keySet()) {
-            TreeViewProvider provider = providerMap.get(treeName);
+        for (TreeViewProvider provider : providerMap.values()) {
             deregisterService(ViewProviderService.class, provider);
             provider.dispose();
         }
@@ -350,11 +349,11 @@ public class ProgramTreePlugin extends ProgramPlugin
 		HashMap<String, TreeViewProvider> map = new HashMap<>(providerMap);
 
 		// remove views from the map that are not in the providerList
-        for (String treeName : map.keySet()) {
-            TreeViewProvider provider = map.get(treeName);
+        for (Map.Entry<String, TreeViewProvider> entry : map.entrySet()) {
+            TreeViewProvider provider = entry.getValue();
             if (!providerList.contains(provider)) {
                 deregisterService(ViewProviderService.class, provider);
-                providerMap.remove(treeName);
+                providerMap.remove(entry.getKey());
             }
         }
 	}
@@ -608,8 +607,7 @@ public class ProgramTreePlugin extends ProgramPlugin
 	 * fragment was moved; update all the view maps.
 	 */
 	void fragmentMoved() {
-        for (String treeName : providerMap.keySet()) {
-            TreeViewProvider provider = providerMap.get(treeName);
+        for (TreeViewProvider provider : providerMap.values()) {
             provider.notifyListeners();
         }
 	}

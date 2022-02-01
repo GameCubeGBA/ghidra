@@ -82,7 +82,7 @@ public class EditableListingAddress extends DisplayableListingAddress implements
 			}
 			if (!program.getMemory().contains(selectedAddress)) {
 				throw new InvalidInputException(
-					"\"" + selectedAddress.toString() + "\" is not an address in the program.");
+					"\"" + selectedAddress + "\" is not an address in the program.");
 			}
 			address = selectedAddress;
 			return address;

@@ -32,8 +32,8 @@ public class DbgEventFilterImpl implements DbgEventFilter {
 		this.text = text;
 		this.cmd = cmd;
 		this.arg = arg;
-		this.setExecutionOption(executionOption);
-		this.setContinueOption(continueOption);
+		this.executionOption = executionOption;
+		this.continueOption = continueOption;
 	}
 
 	@Override

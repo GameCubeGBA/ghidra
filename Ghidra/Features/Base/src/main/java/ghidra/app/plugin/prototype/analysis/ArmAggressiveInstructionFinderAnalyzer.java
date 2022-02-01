@@ -278,7 +278,7 @@ public class ArmAggressiveInstructionFinderAnalyzer extends AbstractAnalyzer {
 					}
 
 					// don't allow more than 4 duplicate instructions.
-					if (lastInstr != null && lastInstr.equals(instr)) {
+					if (instr.equals(lastInstr)) {
 						duplicateCount++;
 						if (duplicateCount > 4) {
 							addsInfo = false;

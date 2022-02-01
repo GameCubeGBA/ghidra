@@ -97,9 +97,8 @@ public class PCodeTestCombinedTestResults {
 		Element root = new Element("PCODE_TESTS");
 		root.setAttribute("VERSION", XML_VERSION);
 
-		for (String name : combinedResults.keySet()) {
-			PCodeTestResults testResults = combinedResults.get(name);
-			root.addContent(testResults.saveToXml());
+		for (PCodeTestResults testResults : combinedResults.values()) {
+            root.addContent(testResults.saveToXml());
 		}
 
 		// Store checkout data in temporary file

@@ -178,7 +178,7 @@ public class DWARFCompilationUnit {
 
 			DWARFCompileUnit compUnit =
 				DWARFCompileUnit.read(DIEAggregate.createSingle(compileUnitDIE));
-			cu.setCompileUnit(compUnit);
+			cu.compUnit = compUnit;
 			return cu;
 		}
 		catch (IOException ioe) {

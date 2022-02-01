@@ -177,7 +177,7 @@ public abstract class VtTask extends Task {
 	protected void reportError(Exception e) {
 		String message = e.getMessage();
 		if (message == null) {
-			message = "Unexpected Exception: " + e.toString();
+			message = "Unexpected Exception: " + e;
 		}
 		errors.add(message);
 	}

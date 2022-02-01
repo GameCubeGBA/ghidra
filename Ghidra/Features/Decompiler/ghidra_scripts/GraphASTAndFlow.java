@@ -85,12 +85,12 @@ public class GraphASTAndFlow extends GraphAST {
 			}
 			seenParents.add(parent);
 		}
-		Set<PcodeBlock> keySet = first.keySet();
-		for (PcodeBlock block : keySet) {
-			for (int i = 0; i < block.getInSize(); i++) {
+        for (Map.Entry<PcodeBlock, AttributedVertex> entry : first.entrySet()) {
+            PcodeBlock block = entry.getKey();
+            for (int i = 0; i < block.getInSize(); i++) {
 				PcodeBlock in = block.getIn(i);
 				if (last.containsKey(in)) {
-					AttributedEdge edge = createEdge(last.get(in), first.get(block));
+					AttributedEdge edge = createEdge(last.get(in), entry.getValue());
 					edge.setEdgeType(BETWEEN_BLOCK);
 				}
 			}

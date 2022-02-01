@@ -102,16 +102,16 @@ public class UserManager {
 		}
 
 		log.info("Known Users:");
-        for (String name : userList.keySet()) {
+        for (Map.Entry<String, UserEntry> e : userList.entrySet()) {
             String dnStr = "";
-            UserEntry entry = userList.get(name);
+            UserEntry entry = e.getValue();
             if (entry != null) {
                 X500Principal x500User = entry.x500User;
                 if (x500User != null) {
                     dnStr = " DN={" + x500User.getName() + "}";
                 }
             }
-            log.info("   " + name + dnStr);
+            log.info("   " + e.getKey() + dnStr);
         }
 
 		sshDir = new File(repositoryMgr.getRootDir(), SSH_KEY_FOLDER);

@@ -17,6 +17,7 @@ package ghidradev.ghidraprojectcreator.wizards.pages;
 
 import java.util.*;
 
+import ghidradev.ghidraprojectcreator.utils.GhidraModuleUtils;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
@@ -90,9 +91,10 @@ public class ConfigureGhidraModuleProjectWizardPage extends WizardPage {
 	 */
 	public Set<ModuleTemplateType> getModuleTemplateTypes() {
 		Set<ModuleTemplateType> moduleTemplateTypes = EnumSet.noneOf(ModuleTemplateType.class);
-		for (Button checkboxButton : moduleTemplateCheckboxMap.keySet()) {
-			if (checkboxButton.isEnabled() && checkboxButton.getSelection()) {
-				moduleTemplateTypes.add(moduleTemplateCheckboxMap.get(checkboxButton));
+		for (Map.Entry<Button, ModuleTemplateType> entry : moduleTemplateCheckboxMap.entrySet()) {
+            Button checkboxButton = entry.getKey();
+            if (checkboxButton.isEnabled() && checkboxButton.getSelection()) {
+				moduleTemplateTypes.add(entry.getValue());
 			}
 		}
 		return moduleTemplateTypes;

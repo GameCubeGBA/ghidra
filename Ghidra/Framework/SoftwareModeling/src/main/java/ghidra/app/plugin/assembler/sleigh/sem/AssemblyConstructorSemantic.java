@@ -69,7 +69,7 @@ public class AssemblyConstructorSemantic implements Comparable<AssemblyConstruct
 
 	@Override
 	public String toString() {
-		return cons.toString() + ":" + patterns.toString();
+		return cons.toString() + ":" + patterns;
 	}
 
 	/**

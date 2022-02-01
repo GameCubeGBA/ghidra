@@ -183,7 +183,7 @@ class ToolConnectionImpl implements ToolConnection, ToolListener {
             Element elem = (Element) o;
             String name = elem.getAttributeValue("NAME");
             String state = elem.getAttributeValue("CONNECTED");
-            boolean connected = (state != null && state.equalsIgnoreCase("true"));
+            boolean connected = ("true".equalsIgnoreCase(state));
             connectHt.put(name, (connected ? CONNECTED : DISCONNECTED));
             if (connected && !listenerAdded) {
                 producerTool.addToolListener(this);

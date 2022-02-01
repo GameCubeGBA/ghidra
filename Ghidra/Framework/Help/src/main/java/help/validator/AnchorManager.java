@@ -105,9 +105,8 @@ public class AnchorManager {
 	}
 
 	private void cleanupDuplicateAnchors() {
-		Set<String> keySet = duplicateAnchorsById.keySet();
-		for (String id : keySet) {
-			List<AnchorDefinition> list = duplicateAnchorsById.get(id);
+		for (Map.Entry<String, List<AnchorDefinition>> entry : duplicateAnchorsById.entrySet()) {
+			List<AnchorDefinition> list = entry.getValue();
 			// a line number of < 0 indicates an AnchorDefinition, which is not found in a file
 			list.removeIf(anchorDefinition -> anchorDefinition.getLineNumber() < 0);
 
@@ -115,7 +114,7 @@ public class AnchorManager {
 			// there are not really any duplicate definitions, so cleanup the list
 			if (list.size() == 1) {
 				list.remove(0);
-				duplicateAnchorsById.remove(id);
+				duplicateAnchorsById.remove(entry.getKey());
 			}
 		}
 	}

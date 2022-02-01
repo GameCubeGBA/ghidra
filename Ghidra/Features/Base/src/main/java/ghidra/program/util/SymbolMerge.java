@@ -765,8 +765,9 @@ class SymbolMerge {
 	}
 
 	static void reApplyDuplicateSymbols(Hashtable<Symbol, Symbol> dupSyms) {
-		for (Symbol fromSym : dupSyms.keySet()) {
-			Symbol toSym = dupSyms.get(fromSym);
+		for (Map.Entry<Symbol, Symbol> entry : dupSyms.entrySet()) {
+            Symbol fromSym = entry.getKey();
+            Symbol toSym = entry.getValue();
 			try {
 				toSym.setName(fromSym.getName(), fromSym.getSource());
 				dupSyms.remove(fromSym);
@@ -778,9 +779,9 @@ class SymbolMerge {
 
 	static String getDuplicateSymbolsInfo(Hashtable<Symbol, Symbol> dupSyms) {
 		StringBuilder buf = new StringBuilder();
-		for (Symbol fromSym : dupSyms.keySet()) {
-			Symbol toSym = dupSyms.get(fromSym);
-			String msg = "Symbol '" + fromSym.getName(true) + "' renamed to '" +
+		for (Map.Entry<Symbol, Symbol> entry : dupSyms.entrySet()) {
+			Symbol toSym = entry.getValue();
+			String msg = "Symbol '" + entry.getKey().getName(true) + "' renamed to '" +
 					toSym.getName(true) + "' due to name conflict.\n";
 			buf.append(msg);
 		}

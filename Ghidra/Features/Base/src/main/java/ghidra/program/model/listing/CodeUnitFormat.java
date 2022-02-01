@@ -316,8 +316,9 @@ public class CodeUnitFormat {
 
 		// Handle possible explicit and inferred register references without scalar offset
 		// The corresponding register will be replaced by the associated VariableOffset object.
-		for (Register reg : regIndexMap.keySet()) {
-			VariableOffset varOff = null;
+		for (Map.Entry<Register, Integer> entry : regIndexMap.entrySet()) {
+            Register reg = entry.getKey();
+            VariableOffset varOff = null;
 			if (registersOverlap(referencedRegister, reg)) {
 				varOff = new VariableOffset(primaryRef, referencedVariable);
 				primaryRef = null; // reference consumed
@@ -349,7 +350,7 @@ public class CodeUnitFormat {
 			}
 			if (varOff != null) {
 				varOff.setReplacedElement(reg);
-				representationList.set(regIndexMap.get(reg), varOff);
+				representationList.set(entry.getValue(), varOff);
 			}
 		}
 		return primaryRef == null;

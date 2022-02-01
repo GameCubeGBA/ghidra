@@ -17,10 +17,10 @@ public class JSONToken {
 	 * @param end   the end position in JSON data string
 	 */
 	public JSONToken(JSONType type, int start, int end) {
-		setType(type);
-		setStart(start);
-		setEnd(end);
-		setSize(0);
+		this.type = type;
+		this.start = start;
+		this.end = end;
+		size = 0;
 	}
 	
 	public void setType(JSONType type) {

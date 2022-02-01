@@ -1162,12 +1162,12 @@ class ElfProgramBuilder extends MemorySectionResolver implements ElfLoadHelper {
 	}
 
 	private void allocateUndefinedSymbolData(HashMap<Address, Integer> dataAllocationMap) {
-		for (Address addr : dataAllocationMap.keySet()) {
+		for (Map.Entry<Address, Integer> entry : dataAllocationMap.entrySet()) {
 			// Create undefined data for each data/object symbol
-			Integer symbolSize = dataAllocationMap.get(addr);
+			Integer symbolSize = entry.getValue();
 			if (symbolSize != null) {
 				try {
-					createUndefined(addr, symbolSize);
+					createUndefined(entry.getKey(), symbolSize);
 				}
 				catch (CodeUnitInsertionException e) {
 					// ignore conflicts which can be caused by other markup

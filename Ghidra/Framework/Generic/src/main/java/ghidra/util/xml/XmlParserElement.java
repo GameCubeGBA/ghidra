@@ -61,9 +61,9 @@ public class XmlParserElement {
 		if (!textEquals) {
 			return false;
 		}
-        for (String lname : attrsMap.keySet()) {
-            Object thisValue = this.attrsMap.get(lname);
-            Object thatValue = that.attrsMap.get(lname);
+        for (Map.Entry<String, Object> entry : attrsMap.entrySet()) {
+            Object thisValue = entry.getValue();
+            Object thatValue = that.attrsMap.get(entry.getKey());
             if (thisValue == null && thatValue != null) {
                 return false;
             }

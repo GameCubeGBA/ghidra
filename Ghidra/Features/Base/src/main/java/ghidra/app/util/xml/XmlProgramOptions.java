@@ -170,70 +170,70 @@ public class XmlProgramOptions {
 
             switch (optName) {
                 case "Memory Blocks":
-                    setMemoryBlocks(val);
+                    memoryBlocks = val;
                     break;
                 case "Memory Contents":
-                    setMemoryContents(val);
+                    memoryContents = val;
                     break;
                 case "Overwrite Memory Conflicts":
-                    setOverwriteMemoryConflicts(val);
+                    overwriteMemoryConflicts = val;
                     break;
                 case "Instructions":
-                    setInstructions(val);
+                    instructions = val;
                     break;
                 case "Data":
-                    setData(val);
+                    data = val;
                     break;
                 case "Overwrite Data Conflicts":
-                    setOverwriteDataConflicts(val);
+                    overwriteDataConflicts = val;
                     break;
                 case "Symbols":
-                    setSymbols(val);
+                    symbols = val;
                     break;
                 case "Overwrite Symbol Conflicts":
-                    setOverwriteSymbolConflicts(val);
+                    overwriteSymbolConflicts = val;
                     break;
                 case "Equates":
-                    setEquates(val);
+                    equates = val;
                     break;
                 case "Comments":
-                    setComments(val);
+                    comments = val;
                     break;
                 case "Properties":
-                    setProperties(val);
+                    properties = val;
                     break;
                 case "Overwrite Property Conflicts":
-                    setOverwritePropertyConflicts(val);
+                    overwritePropertyConflicts = val;
                     break;
                 case "Bookmarks":
-                    setBookmarks(val);
+                    bookmarks = val;
                     break;
                 case "Overwrite Bookmark Conflicts":
-                    setOverwriteBookmarkConflicts(val);
+                    overwriteBookmarkConflicts = val;
                     break;
                 case "Trees":
-                    setTrees(val);
+                    trees = val;
                     break;
                 case "References":
-                    setReferences(val);
+                    references = val;
                     break;
                 case "Overwrite Reference Conflicts":
-                    setOverwriteReferenceConflicts(val);
+                    overwriteReferenceConflicts = val;
                     break;
                 case "Functions":
-                    setFunctions(val);
+                    functions = val;
                     break;
                 case "Registers":
-                    setRegisters(val);
+                    registers = val;
                     break;
                 case "Relocation Table":
-                    setRelocationTable(val);
+                    relocationTable = val;
                     break;
                 case "Entry Points":
-                    setEntryPoints(val);
+                    entryPoints = val;
                     break;
                 case "External Libraries":
-                    setExternalLibraries(val);
+                    externalLibraries = val;
                     break;
                 default:
                     throw new OptionException("Unknown option: " + optName);

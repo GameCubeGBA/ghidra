@@ -388,7 +388,7 @@ public class PdbAddressManager {
 		// used after the list has been completely populated, and the NO_ADDRESS marker
 		// was only being used during the method that populated the list to indicate that a
 		// name was not unique for our needs.
-		if (address != null && address.equals(Address.NO_ADDRESS)) {
+		if (Address.NO_ADDRESS.equals(address)) {
 			addressByPreExistingSymbolName.remove(name);
 			return null;
 		}

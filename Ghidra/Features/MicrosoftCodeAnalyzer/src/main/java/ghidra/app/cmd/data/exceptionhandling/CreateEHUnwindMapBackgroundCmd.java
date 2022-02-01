@@ -112,7 +112,7 @@ public class CreateEHUnwindMapBackgroundCmd extends AbstractCreateDataBackground
 				}
 				catch (InvalidInputException e) {
 					String message = "Couldn't create name for unwind action at " +
-						actionAddress.toString() + ".";
+                            actionAddress + ".";
 					handleErrorMessage(program, compAddress, message + " " + e.getMessage(),
 						message);
 					result = false;

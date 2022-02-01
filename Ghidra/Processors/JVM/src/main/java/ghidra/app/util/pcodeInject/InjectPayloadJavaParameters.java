@@ -216,7 +216,7 @@ public class InjectPayloadJavaParameters implements InjectPayload {
 	public void restoreXml(XmlPullParser parser, SleighLanguage language) throws XmlParseException {
 		XmlElement el = parser.start();
 		String injectString = el.getAttribute("inject");
-		if (injectString == null || !injectString.equals("uponentry")) {
+		if (!"uponentry".equals(injectString)) {
 			throw new XmlParseException("Expecting inject=\"uponentry\" attribute");
 		}
 		boolean isDynamic = SpecXmlUtils.decodeBoolean(el.getAttribute("dynamic"));

@@ -47,7 +47,7 @@ public class ListSTL<T> {
 			String value = t == null ? "null" : t.toString();
 			buffy.append( value ).append( EOL );
 		}
-		System.err.println( buffy.toString() );
+		System.err.println(buffy);
 	}
 
 	public IteratorSTL<T> begin() {

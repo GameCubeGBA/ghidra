@@ -53,7 +53,7 @@ public class GTableColumnModel
 		setSelectionModel(new DefaultListSelectionModel());
 		setColumnMargin(1);
 		invalidateWidthCache();
-		setColumnSelectionAllowed(false);
+		columnSelectionAllowed = false;
 		columnModelState = createTableColumnModelState();
 	}
 

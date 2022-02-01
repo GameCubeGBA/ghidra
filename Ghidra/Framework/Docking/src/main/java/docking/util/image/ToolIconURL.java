@@ -306,7 +306,7 @@ public class ToolIconURL implements Comparable<ToolIconURL> {
 			return;
 		}
 
-		setImageLoadingStatus(-1);
+		checkStatus = -1;
 
 		ImageProducer ip = imgIcon.getImage().getSource();
 		ImageConsumer ic = new ToolIconImageConsumer();

@@ -177,7 +177,7 @@ class SymbolTableXmlMgr {
 	private void processSymbol(XmlElement element, XmlPullParser parser, int passNumber) {
 		try {
 			String type = element.getAttribute("TYPE");
-			boolean isLocal = (type != null) && type.equalsIgnoreCase("local");
+			boolean isLocal = "local".equalsIgnoreCase(type);
 
 			String name = element.getAttribute("NAME");
 			boolean isDefaultFunctionName =

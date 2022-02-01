@@ -890,7 +890,7 @@ public class BasicCompilerSpec implements CompilerSpec {
 	private void restorePreferSplit(XmlPullParser parser) throws XmlParseException {
 		XmlElement el = parser.start();
 		String styleString = el.getAttribute("style");
-		if (styleString == null || !styleString.equals("inhalf")) {
+		if (!"inhalf".equals(styleString)) {
 			throw new XmlParseException("Unknown prefersplit strategy");
 		}
 		preferSplit = new ArrayList<>();

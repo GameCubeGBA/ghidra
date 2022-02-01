@@ -87,9 +87,9 @@ public class JdiModelTargetConnectorContainer extends JdiModelTargetObjectImpl {
 	}
 
 	public synchronized JdiModelTargetConnector getTargetConnectorIfPresent(String name) {
-		for (String key : connectorsByName.keySet()) {
-			if (key.contains(name)) {
-				return connectorsByName.get(key);
+		for (Map.Entry<String, JdiModelTargetConnector> entry : connectorsByName.entrySet()) {
+			if (entry.getKey().contains(name)) {
+				return entry.getValue();
 			}
 		}
 		return null;

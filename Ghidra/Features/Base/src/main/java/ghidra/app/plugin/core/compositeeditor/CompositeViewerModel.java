@@ -1412,7 +1412,7 @@ class CompositeViewerModel extends AbstractTableModel implements DataTypeManager
 		if (this.selection.getNumRanges() > 0) {
 			currentRow = this.selection.getFieldRange(0).getStart().getIndex().intValue();
 		}
-		setRow(currentRow);
+		row = currentRow;
 	}
 
 	protected long getCompositeID() {

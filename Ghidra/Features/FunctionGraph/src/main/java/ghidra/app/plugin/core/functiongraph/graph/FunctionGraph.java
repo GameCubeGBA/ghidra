@@ -587,10 +587,10 @@ public class FunctionGraph extends GroupingVisualGraph<FGVertex, FGEdge> {
 
 		// setSize() must be called after setGraphLayout() due to callbacks performed when 
 		// setSize() is called
-		newGraph.setGraphLayout(newLayout);
+		newGraph.graphLayout = newLayout;
 		newLayout.setSize(originalLayout.getSize());
 
-		newGraph.setOptions(options);
+		newGraph.options = options;
 		return newGraph;
 	}
 

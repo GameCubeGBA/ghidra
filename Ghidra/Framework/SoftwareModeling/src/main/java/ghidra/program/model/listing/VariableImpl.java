@@ -554,7 +554,7 @@ abstract class VariableImpl implements Variable {
 		}
 		if (curSize == 0 || curStorage.isUniqueStorage() || curStorage.isHashStorage()) {
 			throw new InvalidInputException(
-				"Current storage can't be resized: " + curStorage.toString());
+				"Current storage can't be resized: " + curStorage);
 		}
 		if (newSize > curSize) {
 			return expandStorage(curStorage, newSize, type);

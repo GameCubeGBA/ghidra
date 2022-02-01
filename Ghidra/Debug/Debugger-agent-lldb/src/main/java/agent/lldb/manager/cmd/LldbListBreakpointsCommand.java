@@ -41,11 +41,11 @@ public class LldbListBreakpointsCommand extends AbstractLldbCommand<Map<String, 
 	public Map<String, Object> complete(LldbPendingCommand<?> pending) {
 		Map<String, Object> breakpoints = manager.getKnownBreakpoints(session);
 		Set<String> cur = breakpoints.keySet();
-		for (String id : updatedBreakpoints.keySet()) {
-			if (cur.contains(id)) {
+		for (Map.Entry<String, Object> entry : updatedBreakpoints.entrySet()) {
+			if (cur.contains(entry.getKey())) {
 				continue; // Do nothing, we're in sync
 			}
-			manager.addBreakpointIfAbsent(session, updatedBreakpoints.get(id));
+			manager.addBreakpointIfAbsent(session, entry.getValue());
 		}
 		for (String id : new ArrayList<>(cur)) {
 			if (updatedBreakpoints.containsKey(id)) {

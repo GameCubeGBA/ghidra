@@ -544,7 +544,7 @@ public abstract class DockingAction implements DockingActionIf {
 
 		KeyStroke keyStroke = getKeyBinding();
 		if (keyStroke != null) {
-			buffer.append("        KEYBINDING:          ").append(keyStroke.toString());
+			buffer.append("        KEYBINDING:          ").append(keyStroke);
 			buffer.append('\n');
 		}
 

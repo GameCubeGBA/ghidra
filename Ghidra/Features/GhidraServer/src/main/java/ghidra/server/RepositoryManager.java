@@ -323,7 +323,7 @@ public class RepositoryManager {
 				tbuf.insert(0, StringUtilities.pad(Integer.toString(hours), '0', 2));
 			}
 		}
-		return tbuf.toString() + " (" + units + ")";
+		return tbuf + " (" + units + ")";
 	}
 
 	/**

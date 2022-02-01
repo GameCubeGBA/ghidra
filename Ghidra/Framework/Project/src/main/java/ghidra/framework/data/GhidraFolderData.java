@@ -598,7 +598,7 @@ class GhidraFolderData {
 						}
 						hadError = true; // tolerate single file error and remove file reference
 						Msg.error(this,
-							"Domain File error on " + fileData.getPathname() + ": " + e.toString());
+							"Domain File error on " + fileData.getPathname() + ": " + e);
 					}
 					fileRemoved(fileName);
 				}

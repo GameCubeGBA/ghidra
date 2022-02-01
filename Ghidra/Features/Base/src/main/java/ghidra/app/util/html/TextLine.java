@@ -89,7 +89,7 @@ public class TextLine implements ValidatableLine {
 		}
 
 		if (otherLine == null) {
-			setTextColor(invalidColor);
+			textColor = invalidColor;
 			return;
 		}
 
@@ -100,8 +100,8 @@ public class TextLine implements ValidatableLine {
 		TextLine textLine = (TextLine) otherLine;
 
 		if (!matches(textLine)) {
-			setTextColor(invalidColor);
-			textLine.setTextColor(invalidColor);
+			textColor = invalidColor;
+			textLine.textColor = invalidColor;
 		}
 	}
 

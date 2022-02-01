@@ -21,6 +21,7 @@ import ghidra.util.table.GhidraTable;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import javax.swing.*;
 import javax.swing.event.TableColumnModelListener;
@@ -176,10 +177,10 @@ class ByteViewerHeader extends JTableHeader implements Scrollable {
 	 */
 	private void recomputeColumnHeaders() {
 
-        for (Component c : components.keySet()) {
+        for (Map.Entry<Component, TableColumn> entry : components.entrySet()) {
 
-            TableColumn col = components.get(c);
-            int width = c.getPreferredSize().width;
+            TableColumn col = entry.getValue();
+            int width = entry.getKey().getPreferredSize().width;
             int index = columnModel.getColumnIndex(col.getIdentifier());
 
             if (index == 0) {

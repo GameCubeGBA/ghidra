@@ -129,7 +129,7 @@ public class JavaHelpFilesBuilder {
         try (PrintWriter out = new LogFileWriter(mapFile)) {
             out.println("<?xml version='1.0' encoding='ISO-8859-1' ?>");
             out.println("<!doctype MAP public \"-//Sun Microsystems Inc.//DTD JavaHelp Map Version 1.0//EN\">");
-            out.println("<!-- Auto-generated on " + (new Date()).toString() + " : Do Not Edit -->");
+            out.println("<!-- Auto-generated on " + (new Date()) + " : Do Not Edit -->");
             out.println("<map version=\"1.0\">");
 
             Collection<AnchorDefinition> anchors = help.getAllAnchorDefinitions();

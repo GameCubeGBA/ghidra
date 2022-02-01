@@ -101,7 +101,7 @@ public class FGProvider extends VisualGraphComponentProvider<FGVertex, FGEdge, F
 		this.plugin = plugin;
 		controller = new FGController(this, plugin);
 
-		setConnected(isConnected);
+		this.isConnected = isConnected;
 		setIcon(FunctionGraphPlugin.ICON);
 		if (!isConnected) {
 			setTransient();

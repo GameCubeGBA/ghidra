@@ -272,12 +272,13 @@ public class ResolveX86orX64LinuxSyscallsScript extends GhidraScript {
 			Program program, TaskMonitor tMonitor) throws CancelledException {
 		Map<Address, Long> addressesToSyscalls = new HashMap<>();
 		Register syscallReg = program.getLanguage().getRegister(syscallRegister);
-		for (Function func : funcsToCalls.keySet()) {
-			Address start = func.getEntryPoint();
+		for (Entry<Function, Set<Address>> entry : funcsToCalls.entrySet()) {
+            Function func = entry.getKey();
+            Address start = func.getEntryPoint();
 			ContextEvaluator eval = new ConstantPropagationContextEvaluator(true);
 			SymbolicPropogator symEval = new SymbolicPropogator(program);
 			symEval.flowConstants(start, func.getBody(), eval, true, tMonitor);
-			for (Address callSite : funcsToCalls.get(func)) {
+			for (Address callSite : entry.getValue()) {
 				Value val = symEval.getRegisterValue(callSite, syscallReg);
 				if (val == null) {
 					createBookmark(callSite, "System Call",

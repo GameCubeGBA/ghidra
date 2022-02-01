@@ -417,8 +417,8 @@ public abstract class HeadlessScript extends GhidraScript {
 			}
 
 			if (isHeadlessScript) {
-				((HeadlessScript) script).setHeadlessInstance(headless);
-				((HeadlessScript) script).setRunningInnerScript(true);
+				((HeadlessScript) script).headless = headless;
+				((HeadlessScript) script).runningInnerScript = true;
 			}
 
 			script.setScriptArgs(scriptArguments);
@@ -438,7 +438,7 @@ public abstract class HeadlessScript extends GhidraScript {
 					resolveContinuationOptionWith(innerScriptOpt);
 				}
 
-				((HeadlessScript) script).setRunningInnerScript(false);
+				((HeadlessScript) script).runningInnerScript = false;
 			}
 
 			return;

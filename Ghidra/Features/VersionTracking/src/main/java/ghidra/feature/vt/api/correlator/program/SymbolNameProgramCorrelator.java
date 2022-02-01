@@ -84,14 +84,15 @@ public class SymbolNameProgramCorrelator extends VTAbstractProgramCorrelator {
 		monitor.initialize(matchScoreMap.size());
 		monitor.setMessage("Adding " + matchScoreMap.size() + " match objects...");
 		count = 0;
-		for (AddressMatch addressMatch : matchScoreMap.keySet()) {
-			monitor.checkCanceled();
+		for (Map.Entry<AddressMatch, Integer> entry : matchScoreMap.entrySet()) {
+            AddressMatch addressMatch = entry.getKey();
+            monitor.checkCanceled();
 			++count;
 			if (count % skipAmount == 0) {
 				monitor.incrementProgress(skipAmount);
 			}
 			VTMatchInfo match = generateMatchFromMatchedSymbol(matchSet, addressMatch.aAddr,
-				addressMatch.bAddr, matchScoreMap.get(addressMatch), addressMatch.matchType);
+				addressMatch.bAddr, entry.getValue(), addressMatch.matchType);
 			matchSet.addMatch(match);
 		}
 	}

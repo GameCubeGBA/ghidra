@@ -822,7 +822,7 @@ public abstract class GhidraScript extends FlatProgramAPI {
 			script.setScriptArgs(scriptArguments);
 
 			if (!potentialPropertiesFileLocs.isEmpty()) {
-				script.setPotentialPropertiesFileLocations(potentialPropertiesFileLocs);
+				script.potentialPropertiesFileLocs = potentialPropertiesFileLocs;
 			}
 
 			if (scriptState == state) {
@@ -1325,9 +1325,9 @@ public abstract class GhidraScript extends FlatProgramAPI {
 		Options options = program.getOptions(Program.ANALYSIS_PROPERTIES);
 
 		StringBuilder errorBuffer = new StringBuilder();
-		for (String analysisOptionName : analysisSettings.keySet()) {
-			String returnString = setAnalysisOption(options, analysisOptionName,
-				analysisSettings.get(analysisOptionName));
+		for (Map.Entry<String, String> entry : analysisSettings.entrySet()) {
+			String returnString = setAnalysisOption(options, entry.getKey(),
+                    entry.getValue());
 
 			if (!returnString.isEmpty()) {
 				errorBuffer.append(returnString);

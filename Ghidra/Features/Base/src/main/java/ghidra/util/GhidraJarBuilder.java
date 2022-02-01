@@ -979,7 +979,7 @@ public class GhidraJarBuilder implements GhidraLaunchable {
 		try {
 			GhidraJarBuilder builder = new GhidraJarBuilder(layout);
 			if (mainClassArg != null) {
-				builder.setMainClass(mainClassArg);
+				builder.mainClass = mainClassArg;
 			}
 			builder.addExcludedFileExtension(".pdf");
 

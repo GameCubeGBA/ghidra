@@ -158,8 +158,9 @@ public class FunctionBitPatternInfo {
 			}
 		}
 
-		for (Address currentAddress : returnsToSizes.keySet()) {
-			adjustedAddress = currentAddress.add(returnsToSizes.get(currentAddress) - 1);
+		for (Map.Entry<Address, Integer> entry : returnsToSizes.entrySet()) {
+            Address currentAddress = entry.getKey();
+            adjustedAddress = currentAddress.add(entry.getValue() - 1);
 			InstructionSequence returnInstructions =
 				getInstructionsAgainstFlow(params.getNumReturnInstructions(), program,
 					currentAddress, listing, func.getBody());

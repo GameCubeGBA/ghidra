@@ -104,7 +104,7 @@ public class DbgModelTargetBreakpointSpecImpl extends DbgModelTargetObjectImpl
 	public void updateInfo(DbgBreakpointInfo oldInfo, DbgBreakpointInfo newInfo, String reason) {
 		synchronized (this) {
 			assert oldInfo == info;
-			setBreakpointInfo(newInfo);
+			info = newInfo;
 		}
 		changeAttributeSet("Refreshed");
 		setEnabled(newInfo.isEnabled(), reason);
@@ -137,7 +137,7 @@ public class DbgModelTargetBreakpointSpecImpl extends DbgModelTargetObjectImpl
 	 */
 	@Override
 	public void setEnabled(boolean enabled, String reason) {
-		setBreakpointEnabled(enabled);
+		this.enabled = enabled;
 		changeAttributes(List.of(), List.of(), Map.of(ENABLED_ATTRIBUTE_NAME, enabled //
 		), reason);
 	}
@@ -166,7 +166,7 @@ public class DbgModelTargetBreakpointSpecImpl extends DbgModelTargetObjectImpl
 	public CompletableFuture<Void> requestElements(boolean refresh) {
 		return getInfo().thenAccept(i -> {
 			synchronized (this) {
-				setBreakpointInfo(i);
+				info = i;
 			}
 			changeAttributeSet("Initialized");
 		});

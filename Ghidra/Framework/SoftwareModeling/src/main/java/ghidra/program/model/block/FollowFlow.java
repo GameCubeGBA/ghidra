@@ -489,7 +489,7 @@ public class FollowFlow {
 		// Don't follow if not following into functions, and fall into a function.
 		if (!followIntoFunction) {
 			nextSymbolAddr = getNextSymbolAddress(nextAddress, nextSymbolAddr);
-			if (nextSymbolAddr != null && nextSymbolAddr.equals(nextAddress)) {
+			if (nextAddress.equals(nextSymbolAddr)) {
 				Symbol symbol = program.getSymbolTable().getPrimarySymbol(nextAddress);
 				if (symbol.getSymbolType() == SymbolType.FUNCTION) {
 					nextAddress = null;

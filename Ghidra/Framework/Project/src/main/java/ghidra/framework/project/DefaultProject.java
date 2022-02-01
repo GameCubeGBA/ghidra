@@ -485,7 +485,7 @@ public class DefaultProject implements Project {
 					sb.append("\n");
 				}
 			}
-			errorMsg = "Invalid XML loading project " + projectLocator + ":\n" + sb.toString();
+			errorMsg = "Invalid XML loading project " + projectLocator + ":\n" + sb;
 			error = e;
 		}
 		catch (NoClassDefFoundError e) {

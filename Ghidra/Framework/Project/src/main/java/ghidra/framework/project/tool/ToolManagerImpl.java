@@ -284,8 +284,7 @@ public class ToolManagerImpl implements ToolManager, PropertyChangeListener {
             WorkspaceImpl ws = (WorkspaceImpl) workspace;
             root.addContent(ws.saveToXml());
         }
-        for (String key : connectMap.keySet()) {
-            ToolConnectionImpl tc = connectMap.get(key);
+        for (ToolConnectionImpl tc : connectMap.values()) {
             root.addContent(tc.saveToXml());
         }
 		// reset the changed state back to "unchanged"
@@ -353,8 +352,7 @@ public class ToolManagerImpl implements ToolManager, PropertyChangeListener {
 	 */
 	public boolean hasChanged() {
 		// check the connections for changes
-        for (String key : connectMap.keySet()) {
-            ToolConnectionImpl tc = connectMap.get(key);
+        for (ToolConnectionImpl tc : connectMap.values()) {
             if (tc.hasChanged()) {
                 return true;
             }
@@ -381,10 +379,8 @@ public class ToolManagerImpl implements ToolManager, PropertyChangeListener {
 	 * @return true if the session was saved
 	 */
 	public boolean saveSessionTools() {
-		Set<String> keySet = namesMap.keySet();
-		for (String toolName : keySet) {
-			List<PluginTool> tools = namesMap.get(toolName);
-			if (tools.size() == 1) {
+        for (List<PluginTool> tools : namesMap.values()) {
+            if (tools.size() == 1) {
 				PluginTool tool = tools.get(0);
 				if (tool.shouldSave()) {
 					toolServices.saveTool(tool);
@@ -442,9 +438,9 @@ public class ToolManagerImpl implements ToolManager, PropertyChangeListener {
 	 * Debug method for printing out the list of connections.
 	 */
 	public void dumpConnectionList() {
-        for (String key : connectMap.keySet()) {
-            ToolConnection tc = connectMap.get(key);
-            Msg.debug(this, key + "==> ");
+        for (Map.Entry<String, ToolConnectionImpl> entry : connectMap.entrySet()) {
+            ToolConnection tc = entry.getValue();
+            Msg.debug(this, entry.getKey() + "==> ");
             String[] events = tc.getEvents();
             for (String event : events) {
                 Msg.debug(this, "\t isConnected for " + event + "? = " + tc.isConnected(event));

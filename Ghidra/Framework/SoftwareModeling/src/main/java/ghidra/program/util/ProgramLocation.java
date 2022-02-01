@@ -307,7 +307,7 @@ public class ProgramLocation implements Comparable<ProgramLocation> {
 		}
 		if (refAddr != null) {
 			buf.append(", refAddr=");
-			buf.append(refAddr.toString());
+			buf.append(refAddr);
 		}
 		if (componentPath != null && componentPath.length != 0) {
 			buf.append(", componentPath=");

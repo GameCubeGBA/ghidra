@@ -202,7 +202,7 @@ public class ObjectNode extends GTreeSlowLoadingNode {  //extends GTreeNode
 			synchronized (oldChildren) {
 				newChildren.forEach(oldChildren::remove);
 				for (GTreeNode node : oldChildren) {
-					setRestructured(true);
+					restructured = true;
 					tree.cleanupOldNode((ObjectNode) node);
 				}
 			}
