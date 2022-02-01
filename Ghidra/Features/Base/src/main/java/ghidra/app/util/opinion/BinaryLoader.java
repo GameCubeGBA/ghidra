@@ -178,21 +178,12 @@ public class BinaryLoader extends AbstractProgramLoader {
                 }
 			}
 			catch (Exception e) {
-				if (e instanceof OptionException) {
-					return e.getMessage();
-				}
 				return "Invalid value for " + optName + " - " + option.getValue();
 			}
 		}
 		if (fileOffset + length > origFileLength) {
 			return "File Offset + Length (0x" + Long.toHexString(fileOffset + length) +
 				") too large; set length to 0x" + Long.toHexString(origFileLength - fileOffset);
-		}
-		if (fileOffset == -1) {
-			return "Invalid file offset specified";
-		}
-		if (length == -1) {
-			return "Invalid length specified";
 		}
 		if (program != null) {
 			if (program.getMemory().intersects(baseAddr, baseAddr.add(length - 1)) && !isOverlay) {
@@ -372,7 +363,6 @@ public class BinaryLoader extends AbstractProgramLoader {
 			Msg.warn(this, "Error determining length", e);
 		}
 		long length = origFileLength;
-		boolean isOverlay = false;
 		String blockName = "";
 		Address baseAddr = null;
 		if (domainObject instanceof Program) {
@@ -385,19 +375,14 @@ public class BinaryLoader extends AbstractProgramLoader {
 				}
 			}
 		}
-
-		long tempLength = origFileLength - fileOffset;
-		long len = Math.min(tempLength, origFileLength);
-		len = Math.min(length, len);
-		length = len;
+		
+		length = Math.min(length, origFileLength - fileOffset);
 		List<Option> list = new ArrayList<Option>();
 
 		if (loadIntoProgram) {
-			list.add(new Option(OPTION_NAME_IS_OVERLAY, isOverlay));
+			list.add(new Option(OPTION_NAME_IS_OVERLAY, false));
 		}
-		else {
-			isOverlay = false;
-		}
+
 		list.add(new Option(OPTION_NAME_BLOCK_NAME, blockName, String.class,
 			Loader.COMMAND_LINE_ARG_PREFIX + "-blockName"));
 		list.add(new Option(OPTION_NAME_BASE_ADDR, baseAddr, Address.class,

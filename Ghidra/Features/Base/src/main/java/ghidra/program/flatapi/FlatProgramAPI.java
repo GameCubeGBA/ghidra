@@ -18,7 +18,6 @@ package ghidra.program.flatapi;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import ghidra.app.cmd.comments.SetCommentCmd;
 import ghidra.app.cmd.disassemble.DisassembleCommand;

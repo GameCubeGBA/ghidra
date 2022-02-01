@@ -32,8 +32,6 @@ import ghidra.program.model.symbol.Namespace;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
-import java.io.IOException;
-
 public class ObjectiveC2_ClassAnalyzer extends AbstractAnalyzer {
 	private static final String NAME = "Objective-C 2 Class";
 	private static final String DESCRIPTION =

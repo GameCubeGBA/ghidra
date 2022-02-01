@@ -76,7 +76,6 @@ public class DebuggerTimePluginScreenShots extends GhidraScreenShotGenerator {
 			snap.setEventThread(thread);
 			snap.setRealTime(fakeClock);
 			snap.setSchedule(TraceSchedule.parse(snap.getKey() - 1 + ":1"));
-			fakeClock += 100;
 		}
 
 		traceManager.openTrace(tb.trace);

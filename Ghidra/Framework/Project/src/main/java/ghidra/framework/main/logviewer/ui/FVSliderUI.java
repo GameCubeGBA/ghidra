@@ -16,7 +16,6 @@
 package ghidra.framework.main.logviewer.ui;
 
 import java.io.IOException;
-import java.util.Iterator;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicSliderUI;
