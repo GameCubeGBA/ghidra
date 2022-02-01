@@ -485,9 +485,9 @@ public class CopyPasteFunctionInfoTest extends AbstractGhidraHeadedIntegrationTe
             if (!name.startsWith("Format Code")) {
                 continue;
             }
-            if (name.indexOf("Show ") >= 0 || name.indexOf("Flag ") >= 0) {
+            if (name.contains("Show ") || name.contains("Flag ")) {
                 fieldOptions2.setBoolean(name, false);
-            } else if (name.indexOf("Lines") >= 0) {
+            } else if (name.contains("Lines")) {
                 fieldOptions2.setInt(name, 0);
             }
         }

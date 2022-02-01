@@ -778,19 +778,19 @@ public class ListingDisplaySearcherTest extends AbstractGhidraHeadedIntegrationT
 		}
 		else if (location instanceof VariableNameFieldLocation) {
 			VariableNameFieldLocation vLoc = (VariableNameFieldLocation) location;
-			assertTrue(vLoc.getName().indexOf(text) >= 0);
+			assertTrue(vLoc.getName().contains(text));
 			assertEquals(0, vLoc.getCharOffset());
 		}
 		else if (location instanceof OperandFieldLocation) {
 			OperandFieldLocation opLoc = ((OperandFieldLocation) location);
-			assertTrue(opLoc.getOperandRepresentation().indexOf(text) >= 0);
+			assertTrue(opLoc.getOperandRepresentation().contains(text));
 		}
 		else if (location instanceof EolCommentFieldLocation) {
 			EolCommentFieldLocation eLoc = (EolCommentFieldLocation) location;
 			assertEquals(CodeUnit.EOL_COMMENT, eLoc.getCommentType());
 			String[] comment = eLoc.getComment();
 			for (String element : comment) {
-				if (element.indexOf(text) >= 0) {
+				if (element.contains(text)) {
 					return;
 				}
 			}
@@ -802,7 +802,7 @@ public class ListingDisplaySearcherTest extends AbstractGhidraHeadedIntegrationT
 			assertEquals(CodeUnit.EOL_COMMENT, eLoc.getCommentType());
 			String[] comment = eLoc.getComment();
 			for (String element : comment) {
-				if (element.indexOf(text) >= 0) {
+				if (element.contains(text)) {
 					return;
 				}
 			}

@@ -46,7 +46,7 @@ public class FindDataTypeScript extends GhidraScript {
 		while (allDataTypes.hasNext()) {
 			DataType dataType = allDataTypes.next();
 			String dataTypeName = dataType.getName();
-			if (dataTypeName.indexOf("COMPLEX") != -1) {
+			if (dataTypeName.contains("COMPLEX")) {
 				println("\tFound match: " + dataType);
 			}
 		}
@@ -61,7 +61,7 @@ public class FindDataTypeScript extends GhidraScript {
 		while (allDataTypes.hasNext()) {
 			DataType dataType = allDataTypes.next();
 			String dataTypeName = dataType.getName();
-			if (dataTypeName.indexOf("sdword") != -1) {
+			if (dataTypeName.contains("sdword")) {
 				println("\tFound match: " + dataType);
 			}
 		}

@@ -256,7 +256,7 @@ public class PowerPC_ElfExtension extends ElfExtension {
 
 		Program program = elfLoadHelper.getProgram();
 		LanguageID langID = program.getLanguageID();
-		if (langID.toString().indexOf(":VLE") < 0) {
+		if (!langID.toString().contains(":VLE")) {
 			return; // non VLE variant
 		}
 

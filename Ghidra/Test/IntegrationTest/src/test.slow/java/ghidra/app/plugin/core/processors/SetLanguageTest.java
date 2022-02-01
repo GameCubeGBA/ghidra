@@ -131,7 +131,7 @@ public class SetLanguageTest extends AbstractGhidraHeadedIntegrationTest {
 		assertNotNull(confirmDlg);
 		MultiLineLabel msgLabel = findComponent(confirmDlg, MultiLineLabel.class);
 		assertNotNull(msgLabel);
-		assertTrue(msgLabel.getLabel().indexOf("Setting the language can not be undone") >= 0);
+		assertTrue(msgLabel.getLabel().contains("Setting the language can not be undone"));
 		assertTrue(msgLabel.getLabel().indexOf("make a copy") > 0);
 
 		pressButtonByText(confirmDlg, "Ok");
@@ -160,7 +160,7 @@ public class SetLanguageTest extends AbstractGhidraHeadedIntegrationTest {
 			assertNotNull(confirmDlg);
 			msgLabel = findComponent(confirmDlg, MultiLineLabel.class);
 			assertNotNull(msgLabel);
-			assertTrue(msgLabel.getLabel().indexOf("Would you like to Save") >= 0);
+			assertTrue(msgLabel.getLabel().contains("Would you like to Save"));
 
 			pressButtonByText(confirmDlg, "Save");
 		}

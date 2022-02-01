@@ -66,7 +66,7 @@ public class RegisterTouchesPerFunction extends GhidraScript
 
         String comment = list.getComment(CodeUnit.PLATE_COMMENT, func.getBody().getMinAddress());
 
-        if (comment != null && comment.indexOf("TOUCHED REGISTER SUMMARY") > -1)
+        if (comment != null && comment.contains("TOUCHED REGISTER SUMMARY"))
             return;
 
         pushPops = new Stack<String>();

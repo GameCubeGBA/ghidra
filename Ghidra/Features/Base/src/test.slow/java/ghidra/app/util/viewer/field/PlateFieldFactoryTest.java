@@ -158,8 +158,8 @@ public class PlateFieldFactoryTest extends AbstractGhidraHeadedIntegrationTest {
 		ListingTextField tf = (ListingTextField) cb.getCurrentField();
 		// did not change the display of the plate comments
 		assertEquals(4, tf.getNumRows());
-		assertTrue(tf.getFieldElement(1, 4).getText().indexOf(plateComments[0]) >= 0);
-		assertTrue(tf.getFieldElement(2, 4).getText().indexOf(plateComments[1]) >= 0);
+		assertTrue(tf.getFieldElement(1, 4).getText().contains(plateComments[0]));
+		assertTrue(tf.getFieldElement(2, 4).getText().contains(plateComments[1]));
 	}
 
 	@Test
@@ -189,7 +189,7 @@ public class PlateFieldFactoryTest extends AbstractGhidraHeadedIntegrationTest {
 		ListingTextField tf = (ListingTextField) cb.getCurrentField();
 		assertEquals(3, tf.getNumRows());
 		String text = tf.getText();
-		assertTrue("Text does not have ellipses: " + text, text.indexOf("... *") != -1);
+		assertTrue("Text does not have ellipses: " + text, text.contains("... *"));
 
 		// check tooltip
 		String fullText = tf.getTextWithLineSeparators();
@@ -232,7 +232,7 @@ public class PlateFieldFactoryTest extends AbstractGhidraHeadedIntegrationTest {
 		assertTrue(cb.goToField(getAddr(0x1001100), PlateFieldFactory.FIELD_NAME, 1, 1));
 		ListingTextField tf = (ListingTextField) cb.getCurrentField();
 		assertEquals(3, tf.getNumRows());
-		assertTrue(tf.getText().indexOf(PlateFieldFactory.DEFAULT_PLATE_COMMENT) >= 0);
+		assertTrue(tf.getText().contains(PlateFieldFactory.DEFAULT_PLATE_COMMENT));
 
 	}
 
@@ -252,7 +252,7 @@ public class PlateFieldFactoryTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(3, tf.getNumRows());
 		assertTrue(cb.goToField(addr, PlateFieldFactory.FIELD_NAME, 1, 1));
 		assertEquals(3, tf.getNumRows());
-		assertTrue(tf.getText().indexOf(PlateFieldFactory.DEAD_CODE_PLATE_COMMENT) >= 0);
+		assertTrue(tf.getText().contains(PlateFieldFactory.DEAD_CODE_PLATE_COMMENT));
 	}
 
 	@Test
@@ -267,7 +267,7 @@ public class PlateFieldFactoryTest extends AbstractGhidraHeadedIntegrationTest {
 		assertTrue(cb.goToField(getAddr(0x1001200), PlateFieldFactory.FIELD_NAME, 1, 1));
 		ListingTextField tf = (ListingTextField) cb.getCurrentField();
 		assertEquals(3, tf.getNumRows());
-		assertTrue(tf.getText().indexOf(PlateFieldFactory.SUBROUTINE_PLATE_COMMENT) >= 0);
+		assertTrue(tf.getText().contains(PlateFieldFactory.SUBROUTINE_PLATE_COMMENT));
 
 	}
 
@@ -629,10 +629,10 @@ public class PlateFieldFactoryTest extends AbstractGhidraHeadedIntegrationTest {
 			if (!name.startsWith("Format Code")) {
 				continue;
 			}
-			if (name.indexOf("Show ") >= 0 || name.indexOf("Flag ") >= 0) {
+			if (name.contains("Show ") || name.contains("Flag ")) {
 				fieldOptions.setBoolean(name, false);
 			}
-			else if (name.indexOf("Lines") >= 0) {
+			else if (name.contains("Lines")) {
 				fieldOptions.setInt(name, 0);
 			}
 		}

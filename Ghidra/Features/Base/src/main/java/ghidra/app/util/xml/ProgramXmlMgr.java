@@ -406,17 +406,17 @@ public class ProgramXmlMgr {
 		if (name == null) {
 			return "Unknown";
 		}
-        if (name.toLowerCase().indexOf("portable executable") >= 0 &&
-            name.toLowerCase().indexOf("(pe)") >= 0) {
+        if (name.toLowerCase().contains("portable executable") &&
+                name.toLowerCase().contains("(pe)")) {
             return PeLoader.PE_NAME;
         }
-        if (name.toLowerCase().indexOf("(elf)") != -1) {
+        if (name.toLowerCase().contains("(elf)")) {
             return ElfLoader.ELF_NAME;
         }
-        if (name.toLowerCase().indexOf("dos executable") >= 0) {
+        if (name.toLowerCase().contains("dos executable")) {
             return MzLoader.MZ_NAME;
         }
-        if (name.toLowerCase().indexOf("new executable") >= 0) {
+        if (name.toLowerCase().contains("new executable")) {
             return NeLoader.NE_NAME;
         }
         return name;

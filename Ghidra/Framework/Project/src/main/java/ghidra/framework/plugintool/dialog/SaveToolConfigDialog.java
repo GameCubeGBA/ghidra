@@ -214,7 +214,7 @@ public class SaveToolConfigDialog extends DialogComponentProvider implements Lis
 			return;
 		}
 
-		if (newName.indexOf(" ") >= 0) {
+		if (newName.contains(" ")) {
 			setStatusText("Name cannot have spaces.");
 			nameField.requestFocus();
 			return;

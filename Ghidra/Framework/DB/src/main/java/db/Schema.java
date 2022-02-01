@@ -81,7 +81,7 @@ public class Schema {
 				isVariableLength = true;
 			}
 			fixedLength += field.length();
-			if (fieldNames[colIndex].indexOf(NAME_SEPARATOR) >= 0) {
+			if (fieldNames[colIndex].contains(NAME_SEPARATOR)) {
 				throw new IllegalArgumentException("field names may not contain ';'");
 			}
 		}

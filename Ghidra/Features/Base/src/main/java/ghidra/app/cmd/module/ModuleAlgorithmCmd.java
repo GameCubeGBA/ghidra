@@ -156,7 +156,7 @@ public class ModuleAlgorithmCmd extends BackgroundCommand {
 				else {
 					module = (ProgramModule) group;
 					String name = module.getName();
-					if (name.indexOf(NEW_MODULE_SUFFIX) < 0) {
+					if (!name.contains(NEW_MODULE_SUFFIX)) {
 						module.setName(module.getName() + NEW_MODULE_SUFFIX);
 					}
 					cbi = baseModel.getCodeBlocksContaining(module.getAddressSet(), monitor);

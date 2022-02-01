@@ -852,7 +852,7 @@ public abstract class AbstractDockingTest extends AbstractGenericTest {
 		Class<?> nodeClass = node.getClass();
 		String className = nodeClass.getName();
 
-		if (className.indexOf("ComponentNode") != -1) {
+		if (className.contains("ComponentNode")) {
 			List<ComponentPlaceholder> infoList = CollectionUtils.asList(
 				(List<?>) getInstanceField("windowPlaceholders", node), ComponentPlaceholder.class);
 			for (ComponentPlaceholder info : infoList) {
@@ -862,11 +862,11 @@ public abstract class AbstractDockingTest extends AbstractGenericTest {
 				}
 			}
 		}
-		else if (className.indexOf("WindowNode") != -1) {
+		else if (className.contains("WindowNode")) {
 			Object childNode = getInstanceField("child", node);
 			return getComponentProviderFromNode(childNode, providerClass);// recurse
 		}
-		else if (className.indexOf("SplitNode") != -1) {
+		else if (className.contains("SplitNode")) {
 			Object leftNode = getInstanceField("child1", node);
 			ComponentProvider leftProvider = getComponentProviderFromNode(leftNode, providerClass);// recurse
 			if (leftProvider != null) {

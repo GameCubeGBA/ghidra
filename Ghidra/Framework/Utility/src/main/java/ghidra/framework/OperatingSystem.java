@@ -37,8 +37,7 @@ public enum OperatingSystem {
 	private static OperatingSystem findCurrentOperatingSystem() {
 		String operatingSystemNameProperty = System.getProperty("os.name");
 		for (OperatingSystem operatingSystem : values()) {
-			if (operatingSystemNameProperty.toLowerCase().indexOf(
-					operatingSystem.operatingSystemName.toLowerCase()) > -1) {
+			if (operatingSystemNameProperty.toLowerCase().contains(operatingSystem.operatingSystemName.toLowerCase())) {
 				return operatingSystem;
 			}
 		}

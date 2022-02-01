@@ -343,7 +343,7 @@ public class ArchiveDialog extends DialogComponentProvider {
 
 			File f = projectLocator.getProjectDir();
 			String filename = f.getAbsolutePath();
-			if (chosenPathname.indexOf(filename) >= 0) {
+			if (chosenPathname.contains(filename)) {
 				Msg.showError(getClass(), null, "Invalid Archive Name",
 					"Output file cannot be inside of Project");
 				continue;

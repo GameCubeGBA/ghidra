@@ -66,7 +66,7 @@ public class ElfScalarOperandAnalyzer extends ScalarOperandAnalyzer {
 					Address gotAddr = instr.getMinAddress().add(scalar.getUnsignedValue());
 					MemoryBlock block = program.getMemory().getBlock(gotAddr);
 					if (block != null) {
-						if (block.getName().indexOf(".got") >= 0) {
+						if (block.getName().contains(".got")) {
 							return false;
 						}
 					}
@@ -76,7 +76,7 @@ public class ElfScalarOperandAnalyzer extends ScalarOperandAnalyzer {
 			}
 			else if (instr.getMnemonicString().equalsIgnoreCase("push")) {
 				MemoryBlock block = program.getMemory().getBlock(instr.getMinAddress());
-				if (block.getName().indexOf(".plt") >= 0) {
+				if (block.getName().contains(".plt")) {
 					return false;
 				}
 			}

@@ -82,7 +82,7 @@ class PowerPCDisassembleAction extends ListingContextAction {
 		Processor proc = lang.getProcessor();
 
 		if (!proc.equals(Processor.findOrPossiblyCreateProcessor("PowerPC")) ||
-			lang.getLanguageID().toString().indexOf(":VLE") < 0) {
+                !lang.getLanguageID().toString().contains(":VLE")) {
 			return false;
 		}
 

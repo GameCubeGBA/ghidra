@@ -133,12 +133,12 @@ public class KeyEntryDialogTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals("", keyEntryField.getText());
 
 		String collisionString = "Actions mapped to";
-		assertTrue(collisionPane.getText().indexOf(collisionString) == -1);
+		assertTrue(!collisionPane.getText().contains(collisionString));
 
 		// 'G' is bound to goto
 		triggerText(keyEntryField, "g");
 
-		assertTrue(collisionPane.getText().indexOf(collisionString) != -1);
+		assertTrue(collisionPane.getText().contains(collisionString));
 
 		// cancel
 		pressDialogCancel();
@@ -147,11 +147,11 @@ public class KeyEntryDialogTest extends AbstractGhidraHeadedIntegrationTest {
 		showDialog(unboundAction);
 
 		assertEquals("", keyEntryField.getText());
-		assertTrue(collisionPane.getText().indexOf(collisionString) == -1);
+		assertTrue(!collisionPane.getText().contains(collisionString));
 
 		triggerText(keyEntryField, "g");
 
-		assertTrue(collisionPane.getText().indexOf(collisionString) != -1);
+		assertTrue(collisionPane.getText().contains(collisionString));
 
 		pressDialogOK();
 
@@ -167,7 +167,7 @@ public class KeyEntryDialogTest extends AbstractGhidraHeadedIntegrationTest {
 
 		assertEquals("", keyEntryField.getText());
 		String reservedString = " is a reserved keystroke";
-		assertTrue(keyEntryDialog.getStatusText().indexOf(reservedString) == -1);
+		assertTrue(!keyEntryDialog.getStatusText().contains(reservedString));
 
 		// test that typing a reserved key does not enter any text in the text field
 		KeyStroke keyBindingKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_F4, 0);

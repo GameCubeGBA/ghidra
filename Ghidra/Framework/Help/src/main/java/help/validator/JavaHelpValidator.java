@@ -275,7 +275,7 @@ public class JavaHelpValidator {
 	}
 
 	private boolean isExcludedPath(String path) {
-		if (path.indexOf("/docs/api/") != -1) {
+		if (path.contains("/docs/api/")) {
 			// exclude all api files
 			return true;
 		}

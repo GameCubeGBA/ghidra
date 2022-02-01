@@ -154,7 +154,7 @@ public class DisassemblerTest extends AbstractGhidraHeadlessIntegrationTest {
 
 		if (text != null) {
 			assertTrue("Expected error bookmark at " + addr + " to contain text: " + text,
-				errMark.getComment().indexOf(text) >= 0);
+                    errMark.getComment().contains(text));
 		}
 
 	}

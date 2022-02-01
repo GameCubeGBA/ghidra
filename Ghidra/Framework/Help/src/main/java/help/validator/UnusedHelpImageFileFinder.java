@@ -105,7 +105,7 @@ public class UnusedHelpImageFileFinder {
 	private static boolean isExcludedImageFile(Path file) {
 		String absolutePath = file.toUri().toString().toLowerCase();
 		// Could be done by subpath examination
-		return absolutePath.indexOf("help/shared/") != -1;
+		return absolutePath.contains("help/shared/");
 	}
 
 	private static Collection<IMG> getReferencedIMGs(
