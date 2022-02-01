@@ -117,7 +117,7 @@ public class XmlWriter {
     	writer.print(name);
 		incompleteLine = true;
     	if (attrs != null) {
-    		writer.print(attrs.toString());
+    		writer.print(attrs);
     	}
     	if (text != null) {
     		writer.print(">");

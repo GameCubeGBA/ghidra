@@ -142,7 +142,7 @@ public class MachoPrelinkFileSystem extends GFileSystemBase implements GFileSyst
 			}
 		}
 
-		if (kernelCacheDirectory != null && kernelCacheDirectory.equals(directory)) {
+		if (directory.equals(kernelCacheDirectory)) {
 			List<Long> list = new ArrayList<>(unnamedMachoFileMap.keySet());
 			Collections.sort(list);
 			for (long offset : list) {
@@ -254,7 +254,7 @@ public class MachoPrelinkFileSystem extends GFileSystemBase implements GFileSyst
 
 		for (MachoPrelinkMap info : map.keySet()) {
 
-			if (monitor.isCancelled()) {
+            if (monitor.isCancelled()) {
 				break;
 			}
 			monitor.incrementProgress(1);
@@ -278,14 +278,15 @@ public class MachoPrelinkFileSystem extends GFileSystemBase implements GFileSyst
 				continue;
 			}
 
-			fileToMachoOffsetMap.put(file, map.get(info));
+			fileToMachoOffsetMap.put(file, entry.getValue());
 		}
 	}
 
 	private void processSystemKext(LanguageService languageService, Program systemProgram,
 			TaskMonitor monitor) throws Exception {
-		for (GFile file : fileToPrelinkInfoMap.keySet()) {
-			if (monitor.isCancelled()) {
+		for (Map.Entry<GFile, PrelinkMap> entry : fileToPrelinkInfoMap.entrySet()) {
+            GFile file = entry.getKey();
+            if (monitor.isCancelled()) {
 				break;
 			}
 
@@ -294,11 +295,7 @@ public class MachoPrelinkFileSystem extends GFileSystemBase implements GFileSyst
 			}
 
 			MachoPrelinkMap prelinkMap = fileToPrelinkInfoMap.get(file);
-			if (prelinkMap == null || prelinkMap.getPrelinkExecutableLoadAddr() == -1) {
 				continue;
-			}
-
-			Address address = systemProgram.getAddressFactory().getDefaultAddressSpace().getAddress(
 				prelinkMap.getPrelinkExecutableLoadAddr());
 
 			ByteProvider systemKextProvider =

@@ -23,6 +23,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.rmi.server.Unreferenced;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 import db.buffers.*;
 import ghidra.framework.remote.*;
@@ -118,15 +119,16 @@ public class RepositoryHandleImpl extends UnicastRemoteObject implements RemoteR
 		try {
 			repository.log(null, "Clearning " + transientCheckouts.size() + " transiet checkouts",
 				currentUser);
-			for (String pathname : transientCheckouts.keySet()) {
-				int index = pathname.lastIndexOf(FileSystem.SEPARATOR_CHAR);
+			for (Map.Entry<String, ItemCheckoutStatus> entry : transientCheckouts.entrySet()) {
+                String pathname = entry.getKey();
+                int index = pathname.lastIndexOf(FileSystem.SEPARATOR_CHAR);
 				String parentPath = FileSystem.SEPARATOR;
 				if (index != 0) {
 					parentPath = pathname.substring(0, index);
 				}
 				String itemName = pathname.substring(index + 1);
 
-				ItemCheckoutStatus transientCheckout = transientCheckouts.get(pathname);
+				ItemCheckoutStatus transientCheckout = entry.getValue();
 
 				// Since dropped transient checkouts could occur in large volume due to headless
 				// processing, don't bother sending notification
@@ -522,7 +524,7 @@ public class RepositoryHandleImpl extends UnicastRemoteObject implements RemoteR
 				}
 				buf.append(user);
 			}
-			throw new FileInUseException(itemName + " in use by: " + buf.toString());
+			throw new FileInUseException(itemName + " in use by: " + buf);
 		}
 	}
 

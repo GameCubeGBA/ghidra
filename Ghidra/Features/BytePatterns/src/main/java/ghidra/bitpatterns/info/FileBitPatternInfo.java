@@ -264,15 +264,15 @@ public class FileBitPatternInfo {
 		}
 
 		FileBitPatternInfo result = new FileBitPatternInfo();
-		result.setFuncBitPatternInfo(funcBitPatternInfoList);
-		result.setGhidraURL(ghidraURL);
-		result.setLanguageID(languageID);
-		result.setNumFirstBytes(numFirstBytes);
-		result.setNumFirstInstructions(numFirstInstructions);
-		result.setNumPreBytes(numPreBytes);
-		result.setNumPreInstructions(numPreInstructions);
-		result.setNumReturnBytes(numReturnBytes);
-		result.setNumReturnInstructions(numReturnInstructions);
+		result.funcBitPatternInfo = funcBitPatternInfoList;
+		result.ghidraURL = ghidraURL;
+		result.languageID = languageID;
+		result.numFirstBytes = numFirstBytes;
+		result.numFirstInstructions = numFirstInstructions;
+		result.numPreBytes = numPreBytes;
+		result.numPreInstructions = numPreInstructions;
+		result.numReturnBytes = numReturnBytes;
+		result.numReturnInstructions = numReturnInstructions;
 
 		return result;
 	}

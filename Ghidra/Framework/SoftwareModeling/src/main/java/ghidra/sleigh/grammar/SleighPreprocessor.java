@@ -111,7 +111,7 @@ public class SleighPreprocessor implements ExpressionEnvironment {
 			log.trace("enter SleighPreprocessor");
 
 			while ((line = in.readLine()) != null) {
-				log.trace("top of while, state: " + this.toString());
+				log.trace("top of while, state: " + this);
 				log.trace("got line: " + line);
 
 				String origLine = line;

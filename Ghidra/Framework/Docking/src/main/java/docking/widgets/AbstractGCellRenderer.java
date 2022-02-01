@@ -63,7 +63,7 @@ public abstract class AbstractGCellRenderer extends GDHtmlLabel {
 		// disable HTML rendering
 		setHTMLRenderingEnabled(false);
 
-		setShouldAlternateRowBackgroundColors(true);
+		instanceAlternateRowColors = true;
 
 		setOpaque(true); // mimic the default table & list cell renderer
 	}

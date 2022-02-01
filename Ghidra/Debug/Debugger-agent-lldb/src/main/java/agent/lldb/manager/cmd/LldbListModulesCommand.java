@@ -35,11 +35,11 @@ public class LldbListModulesCommand extends AbstractLldbCommand<Map<String, SBMo
 	public Map<String, SBModule> complete(LldbPendingCommand<?> pending) {
 		Map<String, SBModule> modules = manager.getKnownModules(session);
 		Set<String> cur = modules.keySet();
-		for (String id : updatedModules.keySet()) {
-			if (cur.contains(id)) {
+		for (Map.Entry<String, SBModule> entry : updatedModules.entrySet()) {
+			if (cur.contains(entry.getKey())) {
 				continue; // Do nothing, we're in sync
 			}
-			manager.addModuleIfAbsent(session, updatedModules.get(id));
+			manager.addModuleIfAbsent(session, entry.getValue());
 		}
 		for (String id : new ArrayList<>(cur)) {
 			if (updatedModules.containsKey(id)) {

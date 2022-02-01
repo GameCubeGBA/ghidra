@@ -357,8 +357,7 @@ public class TreeManager implements ManagerDB {
 	public void addMemoryBlock(String name, AddressRange range) {
 		lock.acquire();
 		try {
-            for (String s : treeMap.keySet()) {
-                ModuleManager m = treeMap.get(s);
+            for (ModuleManager m : treeMap.values()) {
                 m.addMemoryBlock(name, range);
             }
 		}
@@ -375,11 +374,10 @@ public class TreeManager implements ManagerDB {
 			throws CancelledException {
 		lock.acquire();
 		try {
-            for (String s : treeMap.keySet()) {
+            for (ModuleManager m : treeMap.values()) {
                 if (monitor.isCancelled()) {
                     throw new CancelledException();
                 }
-                ModuleManager m = treeMap.get(s);
                 m.removeMemoryBlock(startAddr, endAddr, monitor);
             }
 		}
@@ -520,8 +518,7 @@ public class TreeManager implements ManagerDB {
 			}
 			treeMap.put(treeName, mm);
 		}
-        for (String s : oldTreeMap.keySet()) {
-            ModuleManager mm = oldTreeMap.get(s);
+        for (ModuleManager mm : oldTreeMap.values()) {
             mm.invalidateCache();
         }
 	}
@@ -538,8 +535,7 @@ public class TreeManager implements ManagerDB {
 	}
 
 	public void setProgramName(String oldName, String newName) {
-        for (String s : treeMap.keySet()) {
-            ModuleManager mm = treeMap.get(s);
+        for (ModuleManager mm : treeMap.values()) {
             mm.setProgramName(oldName, newName);
         }
 	}

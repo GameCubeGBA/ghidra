@@ -36,8 +36,8 @@ public class DebugModuleInfo {
 		this.imageFileHandle = imageFileHandle;
 		this.baseOffset = baseOffset;
 		this.moduleSize = moduleSize;
-		this.setModuleName(moduleName);
-		this.setImageName(imageName);
+		this.moduleName = moduleName;
+		this.imageName = imageName;
 		this.checkSum = checkSum;
 		this.timeDateStamp = timeDateStamp; // TODO: Convert to DateTime?
 	}

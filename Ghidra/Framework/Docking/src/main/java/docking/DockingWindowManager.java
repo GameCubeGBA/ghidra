@@ -847,7 +847,7 @@ public class DockingWindowManager implements PropertyChangeListener, Placeholder
 
 		placeholderManager.disposePlaceholders();
 
-		setNextFocusPlaceholder(null);
+		nextFocusedPlaceholder = null;
 		removeInstance(this);
 		root = null;
 		lastActiveWindow = null;
@@ -891,7 +891,7 @@ public class DockingWindowManager implements PropertyChangeListener, Placeholder
 		if (visibleState == placeholder.isShowing()) {
 			if (visibleState) {
 				movePlaceholderToFront(placeholder, shouldEmphasize);
-				setNextFocusPlaceholder(placeholder);
+				nextFocusedPlaceholder = placeholder;
 				scheduleUpdate();
 			}
 			return;
@@ -905,7 +905,7 @@ public class DockingWindowManager implements PropertyChangeListener, Placeholder
 				root.add(placeholder);
 			}
 			if (requestFocus) {
-				setNextFocusPlaceholder(placeholder);
+				nextFocusedPlaceholder = placeholder;
 			}
 		}
 		else {
@@ -1030,7 +1030,7 @@ public class DockingWindowManager implements PropertyChangeListener, Placeholder
 
 		if (bestFocusReplacementPlaceholder != null) {
 			// we've found already a preferred replacement
-			setNextFocusPlaceholder(bestFocusReplacementPlaceholder);
+			nextFocusedPlaceholder = bestFocusReplacementPlaceholder;
 			return;
 		}
 
@@ -1130,7 +1130,7 @@ public class DockingWindowManager implements PropertyChangeListener, Placeholder
 			root.add(source, WindowPosition.RIGHT);
 		}
 
-		setNextFocusPlaceholder(source);
+		nextFocusedPlaceholder = source;
 		scheduleUpdate();
 	}
 
@@ -1219,8 +1219,9 @@ public class DockingWindowManager implements PropertyChangeListener, Placeholder
 
 	private void createActions(Map<String, List<ComponentPlaceholder>> map) {
 		List<ShowComponentAction> actionList = new ArrayList<>();
-		for (String subMenuName : map.keySet()) {
-			List<ComponentPlaceholder> placeholders = map.get(subMenuName);
+		for (Entry<String, List<ComponentPlaceholder>> entry : map.entrySet()) {
+            String subMenuName = entry.getKey();
+            List<ComponentPlaceholder> placeholders = entry.getValue();
 			for (ComponentPlaceholder placeholder : placeholders) {
 				ComponentProvider provider = placeholder.getProvider();
 				boolean isTransient = provider.isTransient();
@@ -1328,7 +1329,7 @@ public class DockingWindowManager implements PropertyChangeListener, Placeholder
 	private synchronized ComponentPlaceholder maybeGetPlaceholderToFocus() {
 		if (nextFocusedPlaceholder != null) {
 			ComponentPlaceholder temp = nextFocusedPlaceholder;
-			setNextFocusPlaceholder(null);
+			nextFocusedPlaceholder = null;
 			return temp;
 		}
 
@@ -1378,7 +1379,7 @@ public class DockingWindowManager implements PropertyChangeListener, Placeholder
 	void restoreFocusOwner(String focusOwner, String focusName) {
 		if (focusOwner == null) {
 			// nothing to restore
-			setNextFocusPlaceholder(getDefaultFocusComponent());
+			nextFocusedPlaceholder = getDefaultFocusComponent();
 			return;
 		}
 
@@ -1395,7 +1396,7 @@ public class DockingWindowManager implements PropertyChangeListener, Placeholder
 			}
 		}
 
-		setNextFocusPlaceholder(focusReplacement);
+		nextFocusedPlaceholder = focusReplacement;
 	}
 
 	private void setFocusedComponent(ComponentPlaceholder placeholder) {
@@ -1457,7 +1458,7 @@ public class DockingWindowManager implements PropertyChangeListener, Placeholder
 		}
 
 		focusedPlaceholder = null;
-		setNextFocusPlaceholder(null);
+		nextFocusedPlaceholder = null;
 	}
 
 	/**

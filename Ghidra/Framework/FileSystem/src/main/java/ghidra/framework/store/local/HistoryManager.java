@@ -319,7 +319,7 @@ class HistoryManager {
 			}
 		}
 		catch (IOException e) {
-			item.log("ERROR! failed to update history file: " + e.toString(), null);
+			item.log("ERROR! failed to update history file: " + e, null);
 		}
 	}
 
@@ -336,7 +336,7 @@ class HistoryManager {
 			out.close();
 		}
 		catch (IOException e) {
-			item.log("ERROR! failed to update history file: " + e.toString(), null);
+			item.log("ERROR! failed to update history file: " + e, null);
 		}
 	}
 

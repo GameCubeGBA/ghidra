@@ -58,7 +58,7 @@ public class DataTypeComponentImpl implements InternalDataTypeComponent, Seriali
 		this.length = length;
 		this.fieldName = fieldName;
 		this.comment = comment;
-		setDataType(dataType);
+		this.dataType = dataType;
 	}
 
 	/**

@@ -651,7 +651,7 @@ public class DefaultCompositeMember extends CompositeMember {
 		structureMemberRangeMap.paintRange(0, memberCopy.getLength() - 1, 0);
 		structureMemberOffsetMap.put(0, memberCopy);
 
-		memberCopy.setParent(this);
+		memberCopy.parent = this;
 
 		if (parent != null) {
 			parent.memberChanged(oldName, this);
@@ -908,7 +908,7 @@ public class DefaultCompositeMember extends CompositeMember {
 			}
 
 			// adjust this member's offset for addition to container
-			member.setOffset(member.memberOffset - conflictMember.getOffset());
+			member.memberOffset = member.memberOffset - conflictMember.getOffset();
 
 			return conflictMember.addMember(member);
 		}
@@ -1107,8 +1107,7 @@ public class DefaultCompositeMember extends CompositeMember {
 		// to multiple components within the actual parent structure so there is not a one-to-one
 		// relationship.
 
-		for (int offset : parent.structureMemberOffsetMap.keySet()) {
-			CompositeMember m = parent.structureMemberOffsetMap.get(offset);
+		for (CompositeMember m : parent.structureMemberOffsetMap.values()) {
 			if (m.getOffset() >= memberOffset && m != this) {
 				list.add(m);
 			}

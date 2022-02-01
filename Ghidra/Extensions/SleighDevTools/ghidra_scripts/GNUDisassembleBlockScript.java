@@ -69,7 +69,7 @@ public class GNUDisassembleBlockScript extends GhidraScript {
 			addr = addr.add(bytes.length);
 		}
 		if (sb.length() != 0) {
-			println("Block Disassembly:\n" + sb.toString());
+			println("Block Disassembly:\n" + sb);
 		}
 
 	}

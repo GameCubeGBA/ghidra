@@ -81,8 +81,8 @@ public class DataOrganizationImpl implements DataOrganization {
 		dataOrganization.setSizeAlignment(4, 4);
 		dataOrganization.setSizeAlignment(8, 4);
 		if (language != null) {
-			dataOrganization.setPointerSize(language.getDefaultSpace().getPointerSize());
-			dataOrganization.setBigEndian(language.isBigEndian());
+			dataOrganization.pointerSize = language.getDefaultSpace().getPointerSize();
+			dataOrganization.bigEndian = language.isBigEndian();
 		}
 		return dataOrganization;
 	}
@@ -633,10 +633,10 @@ public class DataOrganizationImpl implements DataOrganization {
 		}
 		if (!sizeAlignmentMap.isEmpty()) {
 			buffer.append("<size_alignment_map>\n");
-			for (int key : sizeAlignmentMap.keySet()) {
+			for (Map.Entry<Integer, Integer> entry : sizeAlignmentMap.entrySet()) {
 				buffer.append("<entry");
-				int value = sizeAlignmentMap.get(key);
-				SpecXmlUtils.encodeSignedIntegerAttribute(buffer, "size", key);
+				int value = entry.getValue();
+				SpecXmlUtils.encodeSignedIntegerAttribute(buffer, "size", entry.getKey());
 				SpecXmlUtils.encodeSignedIntegerAttribute(buffer, "alignment", value);
 				buffer.append("/>\n");
 			}

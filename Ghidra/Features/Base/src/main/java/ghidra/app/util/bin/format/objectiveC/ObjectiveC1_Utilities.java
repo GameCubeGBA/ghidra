@@ -291,9 +291,9 @@ public final class ObjectiveC1_Utilities {
 		state.monitor.initialize(state.methodMap.size());
 		int progress = 0;
 
-		Set<Address> addresses = state.methodMap.keySet();
-		for (Address address : addresses) {
-			if (state.monitor.isCancelled()) {
+        for (Map.Entry<Address, ObjectiveC_Method> entry : state.methodMap.entrySet()) {
+            Address address = entry.getKey();
+            if (state.monitor.isCancelled()) {
 				break;
 			}
 			state.monitor.setProgress(++progress);
@@ -311,7 +311,7 @@ public final class ObjectiveC1_Utilities {
 			//command = new FunctionStackAnalysisCmd(address, false);
 			//command.applyTo(state.program, state.monitor);
 
-			ObjectiveC_Method method = state.methodMap.get(address);
+			ObjectiveC_Method method = entry.getValue();
 
 			try {
 				state.encodings.processMethodSignature(state.program, address, method.getTypes(),
@@ -329,16 +329,15 @@ public final class ObjectiveC1_Utilities {
 		state.monitor.initialize(state.variableMap.size());
 		int progress = 0;
 
-		Set<Address> addresses = state.variableMap.keySet();
-		for (Address address : addresses) {
+        for (Map.Entry<Address, ObjectiveC2_InstanceVariable> entry : state.variableMap.entrySet()) {
 			if (state.monitor.isCancelled()) {
 				break;
 			}
 			state.monitor.setProgress(++progress);
 
-			ObjectiveC2_InstanceVariable variable = state.variableMap.get(address);
+			ObjectiveC2_InstanceVariable variable = entry.getValue();
 			try {
-				state.encodings.processInstanceVariableSignature(state.program, address,
+				state.encodings.processInstanceVariableSignature(state.program, entry.getKey(),
 					variable.getType(), variable.getSize());
 			}
 			catch (Exception e) {

@@ -103,7 +103,7 @@ class EditRegisterReferencePanel extends EditReferencePanel {
 			if (reg != null) {
 				reg = reg.getBaseRegister();
 				if (!reg.isHidden() && !reg.isProcessorContext() && !reg.isProgramCounter() &&
-					(stackPointer == null || !stackPointer.equals(reg))) {
+					(!reg.equals(stackPointer))) {
 					regSet.add(reg);
 					addChildRegisters(reg, regSet);
 				}

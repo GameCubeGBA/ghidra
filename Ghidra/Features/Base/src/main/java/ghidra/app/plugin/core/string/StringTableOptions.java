@@ -147,19 +147,19 @@ public class StringTableOptions {
 
 	public StringTableOptions copy() {
 		StringTableOptions options = new StringTableOptions();
-		options.setMinStringSize(minStringSize);
-		options.setAddressSet(addressSet);
-		options.setAlignment(alignment);
-		options.setRequirePascal(requirePascal);
-		options.setNullTerminationRequired(nullTerminationRequired);
-		options.setIncludeAllCharSizes(includeAllCharSizes);
-		options.setIncludeConflictingStrings(includeConflictingStrings);
-		options.setIncludeUndefinedStrings(includeUndefinedStrings);
-		options.setIncludeDefinedStrings(includeDefinedStrings);
-		options.setIncludePartiallyDefinedStrings(includePartiallyDefinedStrings);
-		options.setOnlyShowWordStrings(onlyShowWordStrings);
-		options.setWordModelFile(wordModelFile);
-		options.setWordModelInitialized(wordModelInitialized);
+		options.minStringSize = minStringSize;
+		options.addressSet = addressSet;
+		options.alignment = alignment;
+		options.requirePascal = requirePascal;
+		options.nullTerminationRequired = nullTerminationRequired;
+		options.includeAllCharSizes = includeAllCharSizes;
+		options.includeConflictingStrings = includeConflictingStrings;
+		options.includeUndefinedStrings = includeUndefinedStrings;
+		options.includeDefinedStrings = includeDefinedStrings;
+		options.includePartiallyDefinedStrings = includePartiallyDefinedStrings;
+		options.onlyShowWordStrings = onlyShowWordStrings;
+		options.wordModelFile = wordModelFile;
+		options.wordModelInitialized = wordModelInitialized;
 
 		return options;
 	}

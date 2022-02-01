@@ -156,9 +156,10 @@ public class FileIconService {
 			}
 		}
 
-		for (String substr : fileSubstrToIconName.keySet()) {
-			if (fileName.contains(substr)) {
-				return getCachedIcon("####" + substr, fileSubstrToIconName.get(substr), overlays);
+		for (Map.Entry<String, String> entry : fileSubstrToIconName.entrySet()) {
+            String substr = entry.getKey();
+            if (fileName.contains(substr)) {
+				return getCachedIcon("####" + substr, entry.getValue(), overlays);
 			}
 		}
 

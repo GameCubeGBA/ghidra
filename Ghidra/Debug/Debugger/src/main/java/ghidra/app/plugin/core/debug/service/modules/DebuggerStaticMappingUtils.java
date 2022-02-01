@@ -252,15 +252,16 @@ public enum DebuggerStaticMappingUtils {
 				return max;
 			});
 		}
-		for (String name : mins.keySet()) {
-			AddressRange range = clippedRange(from, name, mins.get(name).getOffset(),
+		for (Map.Entry<String, Address> entry : mins.entrySet()) {
+            String name = entry.getKey();
+            AddressRange range = clippedRange(from, name, entry.getValue().getOffset(),
 				maxs.get(name).getOffset());
 			if (range == null) {
 				continue;
 			}
 			try {
 				addMapping(new DefaultTraceLocation(from, null, lifespan, range.getMinAddress()),
-					new ProgramLocation(toProgram, mins.get(name)), range.getLength(),
+					new ProgramLocation(toProgram, entry.getValue()), range.getLength(),
 					truncateExisting);
 			}
 			catch (TraceConflictedMappingException e) {

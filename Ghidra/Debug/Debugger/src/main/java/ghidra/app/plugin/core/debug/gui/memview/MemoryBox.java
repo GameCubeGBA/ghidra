@@ -98,12 +98,12 @@ public class MemoryBox {
 	}
 
 	public void setColor(Color base, int type) {
-		setColor(new Color(base.getRed(), (base.getGreen() + type) % 255, base.getBlue()));
+		color = new Color(base.getRed(), (base.getGreen() + type) % 255, base.getBlue());
 	}
 
 	public void setColor(Color base, int type, int src) {
-		setColor(new Color(base.getRed(), (base.getGreen() + type * 8) % 255,
-			(base.getBlue() + src * 16) % 255));
+		color = new Color(base.getRed(), (base.getGreen() + type * 8) % 255,
+                (base.getBlue() + src * 16) % 255);
 	}
 
 	public int getAddressPixelStart() {

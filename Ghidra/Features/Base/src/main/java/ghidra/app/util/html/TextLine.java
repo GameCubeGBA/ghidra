@@ -87,7 +87,7 @@ public class TextLine implements ValidatableLine {
 		}
 
 		if (otherLine == null) {
-			setTextColor(invalidColor);
+			textColor = invalidColor;
 			return;
 		}
 

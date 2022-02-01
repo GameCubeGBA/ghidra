@@ -33,8 +33,8 @@ public class TokenPattern {
 	private TokenPattern(Location location, Pattern pat) {
 		this.location = location;
 		pattern = pat;
-		setLeftEllipsis(false);
-		setRightEllipsis(false);
+		leftell = false;
+		rightell = false;
 	}
 
 	public void dispose() {
@@ -82,8 +82,8 @@ public class TokenPattern {
 	private int resolveTokens(TokenPattern tok1, TokenPattern tok2) {
 		calls++;
 		boolean reversedirection = false;
-		setLeftEllipsis(false);
-		setRightEllipsis(false);
+		leftell = false;
+		rightell = false;
 		int ressa = 0;
 		int minsize =
                 (tok1.toklist.size() < tok2.toklist.size() ? tok1 : tok2).toklist.size();
@@ -92,15 +92,15 @@ public class TokenPattern {
 			if ((tok1.toklist.size() == 0) && (!tok1.leftell) &&
 				(!tok1.rightell)) {
 				toklist = tok2.toklist.copy();
-				setLeftEllipsis(tok2.leftell);
-				setRightEllipsis(tok2.rightell);
+				leftell = tok2.leftell;
+				rightell = tok2.rightell;
 				return 0;
 			}
             if ((tok2.toklist.size() == 0) && (!tok2.leftell) &&
                 (!tok2.rightell)) {
                 toklist = tok1.toklist.copy();
-                setLeftEllipsis(tok1.leftell);
-                setRightEllipsis(tok1.rightell);
+                leftell = tok1.leftell;
+                rightell = tok1.rightell;
                 return 0;
             }
             // If one of the ellipses is true then the pattern
@@ -114,7 +114,7 @@ public class TokenPattern {
 				throw new SleighError("Right/left ellipsis", location);
 			}
             if (tok2.leftell) {
-                setLeftEllipsis(true);
+                leftell = true;
             }
             else if (tok1.toklist.size() != minsize) {
                 throw new SleighError(String.format("Mismatched pattern sizes -- %d vs %d",
@@ -129,7 +129,7 @@ public class TokenPattern {
 				throw new SleighError("Left/right ellipsis", location);
 			}
             if (tok2.rightell) {
-                setRightEllipsis(true);
+                rightell = true;
             }
             else if (tok1.toklist.size() != minsize) {
                 throw new SleighError(String.format("Mismatched pattern sizes -- %d vs %d",
@@ -311,22 +311,22 @@ public class TokenPattern {
 
 	public TokenPattern(Location location) {
 		this.location = location;
-		setLeftEllipsis(false);
-		setRightEllipsis(false);
+		leftell = false;
+		rightell = false;
 		pattern = new InstructionPattern(true);
 	}
 
 	public TokenPattern(Location location, boolean tf) { // TRUE or FALSE pattern
 		this.location = location;
-		setLeftEllipsis(false);
-		setRightEllipsis(false);
+		leftell = false;
+		rightell = false;
 		pattern = new InstructionPattern(tf);
 	}
 
 	TokenPattern(Location location, Token tok) {
 		this.location = location;
-		setLeftEllipsis(false);
-		setRightEllipsis(false);
+		leftell = false;
+		rightell = false;
 		pattern = new InstructionPattern(true);
 		toklist.push_back(tok);
 	}
@@ -335,8 +335,8 @@ public class TokenPattern {
 	public TokenPattern(Location location, Token tok, long value, int bitstart, int bitend) {
 		this.location = location;
 		toklist.push_back(tok);
-		setLeftEllipsis(false);
-		setRightEllipsis(false);
+		leftell = false;
+		rightell = false;
 		PatternBlock block;
 
 		if (tok.isBigEndian()) {
@@ -350,8 +350,8 @@ public class TokenPattern {
 
 	public TokenPattern(Location location, long value, int startbit, int endbit) { // A basic context pattern
 		this.location = location;
-		setLeftEllipsis(false);
-		setRightEllipsis(false);
+		leftell = false;
+		rightell = false;
 		PatternBlock block;
 		int size = (endbit / 8) + 1;
 
@@ -363,8 +363,8 @@ public class TokenPattern {
 		this.location = location;
 		simplifyPattern(tokpat);
 		toklist = new VectorSTL<Token>(tokpat.toklist);
-		setLeftEllipsis(tokpat.leftell);
-		setRightEllipsis(tokpat.rightell);
+		leftell = tokpat.leftell;
+		rightell = tokpat.rightell;
 	}
 
 	public TokenPattern copyInto(TokenPattern tokpat) {
@@ -372,8 +372,8 @@ public class TokenPattern {
 
 		simplifyPattern(tokpat);
 		toklist = new VectorSTL<Token>(tokpat.toklist);
-		setLeftEllipsis(tokpat.leftell);
-		setRightEllipsis(tokpat.rightell);
+		leftell = tokpat.leftell;
+		rightell = tokpat.rightell;
 		return this;
 	}
 
@@ -408,8 +408,8 @@ public class TokenPattern {
 		TokenPattern res = new TokenPattern(location, (Pattern) null);
 		int sa;
 
-		res.setLeftEllipsis(leftell);
-		res.setRightEllipsis(rightell);
+		res.leftell = leftell;
+		res.rightell = rightell;
 		res.toklist = toklist.copy();
 		if (rightell || tokpat.leftell) { // Check for interior ellipsis
 			if (rightell) {
@@ -421,7 +421,7 @@ public class TokenPattern {
 				if (!alwaysInstructionTrue()) {
 					throw new SleighError("Interior ellipsis in pattern", location);
 				}
-				res.setLeftEllipsis(true);
+				res.leftell = true;
 			}
 			sa = -1;
 		}
@@ -434,7 +434,7 @@ public class TokenPattern {
 			for (iter = tokpat.toklist.begin(); !iter.isEnd(); iter.increment()) {
 				res.toklist.push_back(iter.get());
 			}
-			res.setRightEllipsis(tokpat.rightell);
+			res.rightell = tokpat.rightell;
 		}
 		if (res.rightell && res.leftell) {
 			throw new SleighError("Double ellipsis in pattern", location);
@@ -463,8 +463,8 @@ public class TokenPattern {
 		}
 
 		// Find common subset of tokens and ellipses
-		patres.setLeftEllipsis(leftell || tokpat.leftell);
-		patres.setRightEllipsis(rightell || tokpat.rightell);
+		patres.leftell = leftell || tokpat.leftell;
+		patres.rightell = rightell || tokpat.rightell;
 		int minnum = toklist.size();
 		int maxnum = tokpat.toklist.size();
 		if (maxnum < minnum) {
@@ -483,7 +483,7 @@ public class TokenPattern {
 				}
 			}
 			if (i < maxnum) {
-				patres.setLeftEllipsis(true);
+				patres.leftell = true;
 			}
 		}
 		else {
@@ -497,7 +497,7 @@ public class TokenPattern {
 				}
 			}
 			if (i < maxnum) {
-				patres.setRightEllipsis(true);
+				patres.rightell = true;
 			}
 		}
 

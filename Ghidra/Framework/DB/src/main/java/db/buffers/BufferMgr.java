@@ -2011,7 +2011,7 @@ public class BufferMgr {
 		buf.append(currentCheckpoint);
 		if (sourceFile != null) {
 			buf.append("\n Source file: ");
-			buf.append(sourceFile.toString());
+			buf.append(sourceFile);
 		}
 		buf.append("\n Cache file: ");
 		buf.append(cacheFile.toString());

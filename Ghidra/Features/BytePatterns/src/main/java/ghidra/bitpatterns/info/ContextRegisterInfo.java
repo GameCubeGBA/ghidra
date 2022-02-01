@@ -131,8 +131,8 @@ public class ContextRegisterInfo {
 		String value = ele.getAttributeValue("value");
 
 		ContextRegisterInfo result = new ContextRegisterInfo();
-		result.setContextRegister(contextRegister);
-		result.setValue(value != null ? new BigInteger(value) : null);
+		result.contextRegister = contextRegister;
+		result.value = value != null ? new BigInteger(value) : null;
 
 		return result;
 	}

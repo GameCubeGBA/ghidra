@@ -97,12 +97,12 @@ public class DisplayMethodsAction extends DockingAction {
 			AtomicReference<Map<String, ?>> methods) {
 		consoleService.println("Methods for " + container.getTargetObject().getName() + ":");
 		Map<String, ?> map = methods.get();
-		for (String key : map.keySet()) {
-			Object object = map.get(key);
+		for (Map.Entry<String, ?> entry : map.entrySet()) {
+			Object object = entry.getValue();
 			if (object instanceof TargetObject) {
 				TargetObject to = (TargetObject) object;
 				if (to instanceof TargetMethod) {
-					consoleService.println(key);
+					consoleService.println(entry.getKey());
 				}
 			}
 		}

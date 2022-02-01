@@ -504,7 +504,7 @@ public class FindNoReturnFunctionsAnalyzer extends AbstractAnalyzer {
 		Listing listing = program.getListing();
 		while (fallThru != null) {
 			/* check for a function after this call */
-			if (nextFuncAddr != null && nextFuncAddr.equals(fallThru)) {
+			if (fallThru.equals(nextFuncAddr)) {
 				NoReturnLocations location =
 						new NoReturnLocations(target, fallThru, "Function defined after call");
 				reasonList.add(location);

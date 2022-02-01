@@ -69,7 +69,7 @@ public class BatchImportDialog extends DialogComponentProvider {
 	public static void showAndImport(PluginTool tool, BatchInfo batchInfo, List<FSRL> initialFiles,
 			DomainFolder defaultFolder, ProgramManager programManager) {
 		BatchImportDialog dialog = new BatchImportDialog(batchInfo, defaultFolder);
-		dialog.setProgramManager(programManager);
+		dialog.programManager = programManager;
 		SystemUtilities.runSwingLater(() -> {
 			dialog.build();
 			if (initialFiles != null && !initialFiles.isEmpty()) {
@@ -297,18 +297,18 @@ public class BatchImportDialog extends DialogComponentProvider {
 		outputChoicesPanel.setLayout(new BoxLayout(outputChoicesPanel, BoxLayout.LINE_AXIS));
 
 		GCheckBox stripLeadingCb = new GCheckBox("Strip leading path", stripLeading);
-		stripLeadingCb.addChangeListener(e -> setStripLeading(stripLeadingCb.isSelected()));
+		stripLeadingCb.addChangeListener(e -> stripLeading = stripLeadingCb.isSelected());
 		stripLeadingCb.setToolTipText("The destination folder for imported files will not " +
 			"include the source file's leading path");
 
 		GCheckBox stripContainerCb = new GCheckBox("Strip container paths", stripContainer);
-		stripContainerCb.addChangeListener(e -> setStripContainer(stripContainerCb.isSelected()));
+		stripContainerCb.addChangeListener(e -> stripContainer = stripContainerCb.isSelected());
 		stripContainerCb.setToolTipText(
 			"The destination folder for imported files will not include any source path names");
 
 		GCheckBox openAfterImportCb = new GCheckBox("Open after import", openAfterImporting);
 		openAfterImportCb.addChangeListener(
-			e -> setOpenAfterImporting(openAfterImportCb.isSelected()));
+			e -> openAfterImporting = openAfterImportCb.isSelected());
 		openAfterImportCb.setToolTipText("Open imported binaries in Code Browser");
 
 		outputChoicesPanel.add(stripLeadingCb);

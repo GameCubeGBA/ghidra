@@ -271,7 +271,7 @@ public class DefaultPcodeThread<T> implements PcodeThread<T> {
 
 	@Override
 	public void overrideCounter(Address counter) {
-		setCounter(counter);
+		this.counter = counter;
 		state.setVar(pc,
 			arithmetic.fromConst(counter.getAddressableWordOffset(), pc.getMinimumByteSize()));
 	}
@@ -318,7 +318,7 @@ public class DefaultPcodeThread<T> implements PcodeThread<T> {
 	@Override
 	public void reInitialize() {
 		long offset = arithmetic.toConcrete(state.getVar(pc)).longValue();
-		setCounter(language.getDefaultSpace().getAddress(offset, true));
+		counter = language.getDefaultSpace().getAddress(offset, true);
 
 		if (contextreg != Register.NO_CONTEXT) {
 			try {
