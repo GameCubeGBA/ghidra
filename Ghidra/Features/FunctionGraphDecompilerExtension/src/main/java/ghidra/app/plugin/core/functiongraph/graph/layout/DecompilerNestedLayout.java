@@ -1106,7 +1106,7 @@ public class DecompilerNestedLayout extends AbstractFGLayout {
 		private int edgeOffset;
 		private Map<FGVertex, Vertex2d> cache =
 			LazyMap.lazyMap(new HashMap<>(), v -> new Vertex2d(v, vertexShaper,
-				vertexLayoutLocations, layoutToGridMap, getEdgeOffset()));
+                    vertexLayoutLocations, layoutToGridMap, getEdgeOffset()));
 
 		Vertex2dFactory(VisualGraphVertexShapeTransformer<FGVertex> transformer,
 				Map<FGVertex, Point2D> vertexLayoutLocations,
@@ -1148,7 +1148,7 @@ public class DecompilerNestedLayout extends AbstractFGLayout {
 	 * A class that represents 2D information about the contained vertex, such as location,
 	 * bounds, row and column of the layout grid.
 	 */
-	private class Vertex2d {
+	private static class Vertex2d {
 
 		private FGVertex v;
 		private Row<FGVertex> row;
@@ -1336,7 +1336,7 @@ public class DecompilerNestedLayout extends AbstractFGLayout {
 		}
 	}
 
-	private abstract class DecompilerBlock {
+	private abstract static class DecompilerBlock {
 		protected DecompilerBlock parent;
 		protected PcodeBlock pcodeBlock;
 		private int row;

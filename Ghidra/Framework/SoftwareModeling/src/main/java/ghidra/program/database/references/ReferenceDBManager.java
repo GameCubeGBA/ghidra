@@ -1784,7 +1784,7 @@ public class ReferenceDBManager implements ReferenceManager, ManagerDB, ErrorHan
 		}
 	}
 
-	private class ExtEntryAddressIterator implements AddressIterator {
+	private static class ExtEntryAddressIterator implements AddressIterator {
 
 		private ReferenceIterator iter;
 		private Address currentAddress;
@@ -2041,7 +2041,7 @@ public class ReferenceDBManager implements ReferenceManager, ManagerDB, ErrorHan
 		}
 	}
 
-	private class Scope {
+	private static class Scope {
 
 		int outOfScopeOffset;
 		int firstUseOffset;

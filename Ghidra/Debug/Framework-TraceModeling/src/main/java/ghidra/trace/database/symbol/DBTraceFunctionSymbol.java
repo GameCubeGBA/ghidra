@@ -1646,7 +1646,7 @@ public class DBTraceFunctionSymbol extends DBTraceNamespaceSymbol
 			for (Parameter p : parameters) {
 				if (!p.isAutoParameter()) {
 					oldStorages.put(p, p.getVariableStorage());
-					if (hasCustomVariableStorage == false) {
+					if (!hasCustomVariableStorage) {
 						// Was custom
 						oldFormalTypes.put(p,
 							revertTypeIfIndirect(p.getFormalDataType(), p.getVariableStorage()));

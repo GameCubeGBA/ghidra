@@ -180,7 +180,7 @@ public class ComponentProviderActionsTest extends AbstractGhidraHeadedIntegratio
 		// 
 
 		HasDefaultKeyBindingComponentProvider otherProvider =
-			new HasDefaultKeyBindingComponentProvider(tool);
+                new HasDefaultKeyBindingComponentProvider(tool);
 		otherProvider.setVisible(true);
 
 		showProvider();
@@ -612,7 +612,7 @@ public class ComponentProviderActionsTest extends AbstractGhidraHeadedIntegratio
 		return tool.getOptions(DockingToolConstants.KEY_BINDINGS);
 	}
 
-	private class TestActionsComponentProvider extends ComponentProvider {
+	private static class TestActionsComponentProvider extends ComponentProvider {
 
 		private JComponent component = new JTextField("Hey!");
 
@@ -626,7 +626,7 @@ public class ComponentProviderActionsTest extends AbstractGhidraHeadedIntegratio
 		}
 	}
 
-	private class HasDefaultKeyBindingComponentProvider extends ComponentProvider {
+	private static class HasDefaultKeyBindingComponentProvider extends ComponentProvider {
 		private JComponent component = new JTextField("Hey!");
 
 		HasDefaultKeyBindingComponentProvider(Tool tool) {

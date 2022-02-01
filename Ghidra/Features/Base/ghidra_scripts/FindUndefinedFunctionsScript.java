@@ -92,19 +92,19 @@ public class FindUndefinedFunctionsScript extends GhidraScript {
 		if (processor.equals(Processor.findOrPossiblyCreateProcessor("x86"))) {
 			CompilerSpecID compilerSpecID = currentProgram.getCompilerSpec().getCompilerSpecID();
 			if (compilerSpecID.equals(new CompilerSpecID("windows"))) {
-				return new PatternMatcher[] { new PatternMatcher(new byte[] { (byte) 0x55,
-					(byte) 0x8b, (byte) 0xec }, false), };
+				return new PatternMatcher[] {new PatternMatcher(new byte[]{(byte) 0x55,
+                        (byte) 0x8b, (byte) 0xec}, false), };
 			}
 			if (compilerSpecID.equals(new CompilerSpecID("gcc"))) {
-				return new PatternMatcher[] { new PatternMatcher(new byte[] { (byte) 0x55,
-					(byte) 0x89, (byte) 0xe5 }, false), };
+				return new PatternMatcher[] {new PatternMatcher(new byte[]{(byte) 0x55,
+                        (byte) 0x89, (byte) 0xe5}, false), };
 			}
 		}
 
 		// Endianness OK here?
 		if (processor.equals(Processor.findOrPossiblyCreateProcessor("PowerPC"))) {
-			return new PatternMatcher[] { new PatternMatcher(new byte[] { (byte) 0x7c, (byte) 0x08,
-				(byte) 0x02, (byte) 0xa6 }, false),//
+			return new PatternMatcher[] {new PatternMatcher(new byte[]{(byte) 0x7c, (byte) 0x08,
+                    (byte) 0x02, (byte) 0xa6}, false),//
 			};
 		}
 		if (processor.equals(Processor.findOrPossiblyCreateProcessor("ARM"))) {
@@ -112,20 +112,20 @@ public class FindUndefinedFunctionsScript extends GhidraScript {
 				//new PatternMatcher(new byte[]{(byte)0x00,(byte)0x00,(byte)0x50,(byte)0xe3}, true),//only check 'cmp' at function entry
 				//new PatternMatcher(new byte[]{(byte)0x00,(byte)0x00,(byte)0x51,(byte)0xe3}, true),//only check 'cmp' at function entry
 				//new PatternMatcher(new byte[]{(byte)0x00,(byte)0x00,(byte)0x53,(byte)0xe3}, true),//only check 'cmp' at function entry
-				new PatternMatcher(
-					new byte[] { (byte) 0xf0, (byte) 0x40, (byte) 0x2d, (byte) 0xe9 }, false),//stmdb sp!{r4 r5 r6 r7 lr}
-				new PatternMatcher(
-					new byte[] { (byte) 0xb0, (byte) 0x40, (byte) 0x2d, (byte) 0xe9 }, false),//stmdb sp!{r4 r5 r7 lr}
-				new PatternMatcher(
-					new byte[] { (byte) 0x90, (byte) 0x40, (byte) 0x2d, (byte) 0xe9 }, false),//stmdb sp!{r4 r7 lr}
-				new PatternMatcher(
-					new byte[] { (byte) 0x80, (byte) 0x40, (byte) 0x2d, (byte) 0xe9 }, false),//stmdb sp!{r7 lr}
+                    new PatternMatcher(
+                            new byte[]{(byte) 0xf0, (byte) 0x40, (byte) 0x2d, (byte) 0xe9}, false),//stmdb sp!{r4 r5 r6 r7 lr}
+                    new PatternMatcher(
+                            new byte[]{(byte) 0xb0, (byte) 0x40, (byte) 0x2d, (byte) 0xe9}, false),//stmdb sp!{r4 r5 r7 lr}
+                    new PatternMatcher(
+                            new byte[]{(byte) 0x90, (byte) 0x40, (byte) 0x2d, (byte) 0xe9}, false),//stmdb sp!{r4 r7 lr}
+                    new PatternMatcher(
+                            new byte[]{(byte) 0x80, (byte) 0x40, (byte) 0x2d, (byte) 0xe9}, false),//stmdb sp!{r7 lr}
 			};
 		}
 		throw new RuntimeException("Unsupported language.");
 	}
 
-	private class PatternMatcher {
+	private static class PatternMatcher {
 		byte[] expectedBytes;
 		boolean requiresEntyPoint;
 

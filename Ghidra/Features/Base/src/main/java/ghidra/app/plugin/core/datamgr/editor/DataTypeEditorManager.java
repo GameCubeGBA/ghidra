@@ -518,7 +518,7 @@ public class DataTypeEditorManager
 	private void editFunctionSignature(Category category, FunctionDefinition functionDefinition) {
 		PluginTool tool = plugin.getTool();
 		DTMEditFunctionSignatureDialog editSigDialog = new DTMEditFunctionSignatureDialog(
-			plugin.getTool(), "Edit Function Signature", category, functionDefinition);
+                plugin.getTool(), "Edit Function Signature", category, functionDefinition);
 		editSigDialog.setHelpLocation(
 			new HelpLocation("DataTypeManagerPlugin", "Function_Definition"));
 		tool.showDialog(editSigDialog);
@@ -533,7 +533,7 @@ public class DataTypeEditorManager
 	 * function signature associated with a specific {@link FunctionDefinition}.  
 	 * Use of this editor requires the presence of the tool-based datatype manager service.
 	 */
-	private class DTMEditFunctionSignatureDialog extends AbstractEditFunctionSignatureDialog {
+	private static class DTMEditFunctionSignatureDialog extends AbstractEditFunctionSignatureDialog {
 		private final FunctionDefinition functionDefinition;
 		private final FunctionSignature oldSignature;
 		private final Category category;

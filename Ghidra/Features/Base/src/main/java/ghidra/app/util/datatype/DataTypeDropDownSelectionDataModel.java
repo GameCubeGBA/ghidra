@@ -127,7 +127,7 @@ public class DataTypeDropDownSelectionDataModel implements DropDownTextFieldData
 		return -1; // we only get here when the list is empty
 	}
 
-	private class DataTypeDropDownRenderer extends GListCellRenderer<DataType> {
+	private static class DataTypeDropDownRenderer extends GListCellRenderer<DataType> {
 
 		@Override
 		protected String getItemText(DataType dt) {

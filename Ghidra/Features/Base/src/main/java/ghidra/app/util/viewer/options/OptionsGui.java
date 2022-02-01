@@ -904,7 +904,7 @@ public class OptionsGui extends JPanel {
 					underline, UNDERLINE.getColor());
 				FieldElement field = new TextFieldElement(as, 0, 0);
 				fields[fieldNum] =
-					new ScreenElementTextField(element, startPos, length, field, hlFactory);
+                        new ScreenElementTextField(element, startPos, length, field, hlFactory);
 				fieldNum++;
 				startPos += length;
 				maxWidth = Math.max(maxWidth, startPos);
@@ -919,7 +919,7 @@ public class OptionsGui extends JPanel {
 		}
 	}
 
-	private class ScreenElementTextField extends ClippingTextField {
+	private static class ScreenElementTextField extends ClippingTextField {
 		private ScreenElement screenElement;
 
 		ScreenElementTextField(ScreenElement screenElement, int startX, int length,

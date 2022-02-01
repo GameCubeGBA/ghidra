@@ -499,7 +499,7 @@ public class ClearFlowAndRepairCmd extends BackgroundCommand {
 						continue;
 					}
 					Address ftAddr = instr.getFallThrough();
-					if (ftAddr != null && (ignoreStart == null || !ftAddr.equals(ignoreStart))) {
+					if (ftAddr != null && (!ftAddr.equals(ignoreStart))) {
 //                        alreadyCleared.addRange(ftAddr, addr);
 						disassemblePoints.addRange(ftAddr, ftAddr);
 						if (contextReg != Register.NO_CONTEXT) {

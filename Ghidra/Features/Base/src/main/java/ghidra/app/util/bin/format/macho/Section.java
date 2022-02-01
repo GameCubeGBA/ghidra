@@ -273,7 +273,7 @@ public class Section implements StructConverter {
 		return buffer.toString();
 	}
 
-	private class SectionInputStream extends InputStream {
+	private static class SectionInputStream extends InputStream {
 		long streamSize;
 		byte value;
 		long nRead;

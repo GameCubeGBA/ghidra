@@ -895,7 +895,7 @@ public class FormatManager implements OptionsChangeListener {
 // Inner Classes
 //==================================================================================================
 
-	private class MultipleHighlighterProvider implements HighlightProvider {
+	private static class MultipleHighlighterProvider implements HighlightProvider {
 
 		private List<HighlightProvider> highlightProviders = new CopyOnWriteArrayList<>();
 

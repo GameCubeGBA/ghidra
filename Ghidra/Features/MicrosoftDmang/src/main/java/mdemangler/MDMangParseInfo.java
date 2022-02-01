@@ -24,7 +24,7 @@ import ghidra.util.Msg;
  */
 public class MDMangParseInfo extends MDMang {
 
-	private class MDParseInfo {
+	private static class MDParseInfo {
 		private int startIndex;
 		private int itemDepth;
 		private String itemName;
@@ -58,7 +58,7 @@ public class MDMangParseInfo extends MDMang {
 	@Override // Override might be temporary, depending on how we answer questions in MDMang
 	public void parseInfoPush(int startIndexOffset, String itemName) {
 		MDParseInfo info =
-			new MDParseInfo(iter.getIndex() - startIndexOffset, infoStack.size(), itemName);
+                new MDParseInfo(iter.getIndex() - startIndexOffset, infoStack.size(), itemName);
 		infoStack.push(info);
 		infoList.add(info);
 		parseInfoMangledIndex =
@@ -71,7 +71,7 @@ public class MDMangParseInfo extends MDMang {
 			Integer.max(iter.getIndex() - 1, infoList.get(infoList.size() - 1).getStartIndex());
 		MDParseInfo oldInfo = infoStack.pop();
 		MDParseInfo info =
-			new MDParseInfo(index, infoStack.size(), oldInfo.getItemName() + " -- END");
+                new MDParseInfo(index, infoStack.size(), oldInfo.getItemName() + " -- END");
 		infoList.add(info);
 		parseInfoMangledIndex =
 			doParseInfoSingle(parseInfoBuilder, parseInfoMangledIndex, infoList.size() - 1);

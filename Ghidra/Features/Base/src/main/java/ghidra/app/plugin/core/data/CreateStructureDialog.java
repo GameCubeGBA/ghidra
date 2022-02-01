@@ -573,7 +573,7 @@ public class CreateStructureDialog extends DialogComponentProvider {
 
 	// this class is used instead of a cell renderer so that sorting will
 	// work on the table
-	/*package*/class StructureWrapper {
+	/*package*/static class StructureWrapper {
 		private Structure structure;
 
 		private StructureWrapper(Structure newStructure) {

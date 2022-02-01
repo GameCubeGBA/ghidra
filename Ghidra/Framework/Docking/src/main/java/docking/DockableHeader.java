@@ -336,7 +336,7 @@ public class DockableHeader extends GenericHeader
 // Inner Classes
 //==================================================================================================
 
-	private class DragCursorManager {
+	private static class DragCursorManager {
 
 		void setCursor(DragSourceEvent event, Cursor dragCursor) {
 			DragSourceContext context = event.getDragSourceContext();
@@ -505,7 +505,7 @@ public class DockableHeader extends GenericHeader
 			}
 		}
 
-		private class ComponentPaintInfo {
+		private static class ComponentPaintInfo {
 
 			private Component myComponent;
 			private Image myImage;

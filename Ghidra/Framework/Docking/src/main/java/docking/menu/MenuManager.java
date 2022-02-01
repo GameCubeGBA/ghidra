@@ -430,7 +430,7 @@ public class MenuManager implements ManagedMenuItem {
 		}
 	}
 
-	private class ManagedMenuItemComparator implements Comparator<ManagedMenuItem> {
+	private static class ManagedMenuItemComparator implements Comparator<ManagedMenuItem> {
 
 		private final Comparator<String> groupComparator;
 

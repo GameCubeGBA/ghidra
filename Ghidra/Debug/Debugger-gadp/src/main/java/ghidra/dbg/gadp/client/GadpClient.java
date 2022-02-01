@@ -213,7 +213,7 @@ public class GadpClient extends AbstractDebuggerObjectModel
 		}
 	}
 
-	protected class MessagePairingCache extends AsyncPairingCache<Integer, Gadp.RootMessage> {
+	protected static class MessagePairingCache extends AsyncPairingCache<Integer, Gadp.RootMessage> {
 		protected final AsyncDebouncer<Void> cacheMonitor =
 			new AsyncDebouncer<>(AsyncTimer.DEFAULT_TIMER, 500);
 

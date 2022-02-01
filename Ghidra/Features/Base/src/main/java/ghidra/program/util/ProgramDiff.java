@@ -619,32 +619,32 @@ public class ProgramDiff {
 				monitorMsg = "Checking End of Line Comment Differences";
 				monitor.setMessage(monitorMsg);
 				as = getCommentDiffs(CodeUnit.EOL_COMMENT, addrs,
-					new CommentTypeComparator(program1, program2, CodeUnit.EOL_COMMENT), monitor);
+						new CommentTypeComparator(program1, program2, CodeUnit.EOL_COMMENT), monitor);
 				break;
 			case ProgramDiffFilter.REPEATABLE_COMMENT_DIFFS:
 				monitorMsg = "Checking Repeatable Comment Differences";
 				monitor.setMessage(monitorMsg);
 				as = getCommentDiffs(CodeUnit.REPEATABLE_COMMENT, addrs,
-					new CommentTypeComparator(program1, program2, CodeUnit.REPEATABLE_COMMENT),
+						new CommentTypeComparator(program1, program2, CodeUnit.REPEATABLE_COMMENT),
 					monitor);
 				break;
 			case ProgramDiffFilter.PRE_COMMENT_DIFFS:
 				monitorMsg = "Checking Pre-Comment Differences";
 				monitor.setMessage(monitorMsg);
 				as = getCommentDiffs(CodeUnit.PRE_COMMENT, addrs,
-					new CommentTypeComparator(program1, program2, CodeUnit.PRE_COMMENT), monitor);
+						new CommentTypeComparator(program1, program2, CodeUnit.PRE_COMMENT), monitor);
 				break;
 			case ProgramDiffFilter.POST_COMMENT_DIFFS:
 				monitorMsg = "Checking Post-Comment Differences";
 				monitor.setMessage(monitorMsg);
 				as = getCommentDiffs(CodeUnit.POST_COMMENT, addrs,
-					new CommentTypeComparator(program1, program2, CodeUnit.POST_COMMENT), monitor);
+						new CommentTypeComparator(program1, program2, CodeUnit.POST_COMMENT), monitor);
 				break;
 			case ProgramDiffFilter.PLATE_COMMENT_DIFFS:
 				monitorMsg = "Checking Plate Comment Differences";
 				monitor.setMessage(monitorMsg);
 				as = getCommentDiffs(CodeUnit.PLATE_COMMENT, addrs,
-					new CommentTypeComparator(program1, program2, CodeUnit.PLATE_COMMENT), monitor);
+						new CommentTypeComparator(program1, program2, CodeUnit.PLATE_COMMENT), monitor);
 				break;
 			case ProgramDiffFilter.REFERENCE_DIFFS:
 				monitorMsg = "Checking Reference Differences";
@@ -899,32 +899,32 @@ public class ProgramDiff {
 				monitorMsg = "Checking End of Line Comment Differences";
 				monitor.setMessage(monitorMsg);
 				as = getCommentDiffs(CodeUnit.EOL_COMMENT, checkAddressSet,
-					new CommentTypeComparator(program1, program2, CodeUnit.EOL_COMMENT), monitor);
+						new CommentTypeComparator(program1, program2, CodeUnit.EOL_COMMENT), monitor);
 				break;
 			case ProgramDiffFilter.REPEATABLE_COMMENT_DIFFS:
 				monitorMsg = "Checking Repeatable Comment Differences";
 				monitor.setMessage(monitorMsg);
 				as = getCommentDiffs(CodeUnit.REPEATABLE_COMMENT, checkAddressSet,
-					new CommentTypeComparator(program1, program2, CodeUnit.REPEATABLE_COMMENT),
+						new CommentTypeComparator(program1, program2, CodeUnit.REPEATABLE_COMMENT),
 					monitor);
 				break;
 			case ProgramDiffFilter.PRE_COMMENT_DIFFS:
 				monitorMsg = "Checking Pre-Comment Differences";
 				monitor.setMessage(monitorMsg);
 				as = getCommentDiffs(CodeUnit.PRE_COMMENT, checkAddressSet,
-					new CommentTypeComparator(program1, program2, CodeUnit.PRE_COMMENT), monitor);
+						new CommentTypeComparator(program1, program2, CodeUnit.PRE_COMMENT), monitor);
 				break;
 			case ProgramDiffFilter.POST_COMMENT_DIFFS:
 				monitorMsg = "Checking Post-Comment Differences";
 				monitor.setMessage(monitorMsg);
 				as = getCommentDiffs(CodeUnit.POST_COMMENT, checkAddressSet,
-					new CommentTypeComparator(program1, program2, CodeUnit.POST_COMMENT), monitor);
+						new CommentTypeComparator(program1, program2, CodeUnit.POST_COMMENT), monitor);
 				break;
 			case ProgramDiffFilter.PLATE_COMMENT_DIFFS:
 				monitorMsg = "Checking Plate Comment Differences";
 				monitor.setMessage(monitorMsg);
 				as = getCommentDiffs(CodeUnit.PLATE_COMMENT, checkAddressSet,
-					new CommentTypeComparator(program1, program2, CodeUnit.PLATE_COMMENT), monitor);
+						new CommentTypeComparator(program1, program2, CodeUnit.PLATE_COMMENT), monitor);
 				break;
 			case ProgramDiffFilter.REFERENCE_DIFFS:
 				monitorMsg = "Checking Reference Differences";
@@ -2035,7 +2035,7 @@ public class ProgramDiff {
 
 	/** Used to compare the bookmarks in two programs.
 	 */
-	private class BookmarksComparator extends ProgramDiffComparatorImpl {
+	private static class BookmarksComparator extends ProgramDiffComparatorImpl {
 		/** The first program's bookmark manager. */
 		BookmarkManager bm1;
 		/** The second program's bookmark manager. */
@@ -2403,7 +2403,7 @@ public class ProgramDiff {
 
 	/** Used to compare the functions in two programs.
 	 */
-	private class FunctionComparator extends ProgramDiffComparatorImpl {
+	private static class FunctionComparator extends ProgramDiffComparatorImpl {
 		/** Constructor
 		 * @param program1 the first program
 		 * @param program2 the second program
@@ -2482,7 +2482,7 @@ public class ProgramDiff {
 	 * isSame should compare the desired property of the two code units to determine
 	 * if it is equal in each.
 	 */
-	private abstract class CodeUnitComparator extends ProgramDiffComparatorImpl {
+	private abstract static class CodeUnitComparator extends ProgramDiffComparatorImpl {
 		/** Generic constructor for comparing program differences.
 		 * @param program1 the first program
 		 * @param program2 the second program
@@ -2541,7 +2541,7 @@ public class ProgramDiff {
 
 	/** Used to compare the comments of a particular type in two programs.
 	 */
-	private class CommentTypeComparator extends ProgramDiffComparatorImpl {
+	private static class CommentTypeComparator extends ProgramDiffComparatorImpl {
 		/**
 		 * the type of comment to compare
 		 * <br>CodeUnit.PLATE_COMMENT
@@ -3250,7 +3250,7 @@ public class ProgramDiff {
 
 	}
 
-	private class SymbolNameComparator implements Comparator<Symbol> {
+	private static class SymbolNameComparator implements Comparator<Symbol> {
 		SymbolNameComparator() {
 		}
 

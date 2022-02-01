@@ -95,10 +95,10 @@ public class SetEquateScript extends GhidraScript {
 			}
 		}
 		// checks to see if the scalar value was found and informs user
-		if (scalarFound == false && userScalarFound == false) {
+		if (!scalarFound && !userScalarFound) {
 			println("No scalar values were found.");
 		}
-		else if (scalarFound == true && userScalarFound == false) {
+		else if (scalarFound && !userScalarFound) {
 			println("No " + scalarValue + " values were found");
 		}
 	}

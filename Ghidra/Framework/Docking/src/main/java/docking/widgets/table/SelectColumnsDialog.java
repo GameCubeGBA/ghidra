@@ -196,7 +196,7 @@ public class SelectColumnsDialog extends DialogComponentProvider {
 		}
 	}
 
-	private class TableColumnWrapper {
+	private static class TableColumnWrapper {
 		private final TableColumn column;
 		private final TableModel model;
 

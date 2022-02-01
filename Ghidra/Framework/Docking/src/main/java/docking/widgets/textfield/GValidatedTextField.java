@@ -145,6 +145,7 @@ public class GValidatedTextField extends JTextField {
 				for (TextValidator v : validators) {
 					if (v instanceof LongValidator) {
 						hasLongValidator = true;
+						break;
 					}
 				}
 			}

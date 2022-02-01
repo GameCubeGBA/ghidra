@@ -3656,7 +3656,7 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 					catch (AddressOutOfBoundsException e) {
 						// nextAddr will be null
 					}
-					if (nextAddr == null || !addr.equals(nextAddr)) {
+					if (!addr.equals(nextAddr)) {
 						codeSet.addRange(minAddr, maxAddr);
 						minAddr = addr;
 					}

@@ -383,7 +383,7 @@ public final class ApplicationKeyManagerFactory {
 	 * {@link ApplicationKeyManagerFactory#init()} method is called to open the keystore
 	 * (which may require a password prompt) and establish the underlying X509KeyManager.
 	 */
-	private class ApplicationKeyManager extends X509ExtendedKeyManager {
+	private static class ApplicationKeyManager extends X509ExtendedKeyManager {
 
 		private X509KeyManager wrappedKeyManager;
 		private String keystorePath;

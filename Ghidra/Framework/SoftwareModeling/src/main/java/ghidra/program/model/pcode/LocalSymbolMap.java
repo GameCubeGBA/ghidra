@@ -553,7 +553,7 @@ public class LocalSymbolMap {
 	/**
 	 * Hashing keys for Local variables
 	 */
-	class MappedVarKey {
+    static class MappedVarKey {
 		private Address addr;
 		private Address pcaddr;
 

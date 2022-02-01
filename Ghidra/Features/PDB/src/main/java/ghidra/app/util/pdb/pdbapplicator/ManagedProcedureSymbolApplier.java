@@ -192,7 +192,7 @@ public class ManagedProcedureSymbolApplier extends MsSymbolApplier {
 		}
 
 		boolean functionSuccess = applyFunction(monitor);
-		if (functionSuccess == false) {
+		if (!functionSuccess) {
 			return false;
 		}
 //		registerChangeCalculator = new RegisterChangeCalculator(procedureSymbol, function, monitor);

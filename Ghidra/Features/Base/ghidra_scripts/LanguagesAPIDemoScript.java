@@ -50,7 +50,7 @@ public class LanguagesAPIDemoScript extends GhidraScript {
 	 * effectively a NOP (no PCode ops), it will still generate exactly one callback, where op is
 	 * null.
 	 */
-	class DumpPcodeOps implements PcodeOpEntryVisitor {
+    static class DumpPcodeOps implements PcodeOpEntryVisitor {
 		@Override
 		public int visit(SubtableSymbol subtable, DisjointPattern pattern, Constructor cons,
 				OpTpl op) {

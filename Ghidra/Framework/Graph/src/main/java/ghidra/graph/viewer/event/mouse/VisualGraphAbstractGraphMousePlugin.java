@@ -116,7 +116,7 @@ public abstract class VisualGraphAbstractGraphMousePlugin<V extends VisualVertex
 			return false;
 		}
 
-		if (pickedVertexState.isPicked(vertex) == false) {
+		if (!pickedVertexState.isPicked(vertex)) {
 			pickedVertexState.clear();
 			pickedVertexState.pick(vertex, true);
 		}
@@ -130,7 +130,7 @@ public abstract class VisualGraphAbstractGraphMousePlugin<V extends VisualVertex
 			return false;
 		}
 
-		if (pickedVertexState.isPicked(edge) == false) {
+		if (!pickedVertexState.isPicked(edge)) {
 			pickedVertexState.clear();
 			pickedVertexState.pick(edge, true);
 		}

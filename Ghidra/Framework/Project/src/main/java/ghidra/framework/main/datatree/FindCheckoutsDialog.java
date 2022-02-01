@@ -130,7 +130,7 @@ public class FindCheckoutsDialog extends DialogComponentProvider {
 			getFileList(), null, true);
 	}
 
-	private class MyCellRenderer extends GTableCellRenderer {
+	private static class MyCellRenderer extends GTableCellRenderer {
 
 		@Override
 		public Component getTableCellRendererComponent(GTableCellRenderingData data) {

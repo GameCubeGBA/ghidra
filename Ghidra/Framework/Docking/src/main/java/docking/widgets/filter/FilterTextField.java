@@ -368,7 +368,7 @@ public class FilterTextField extends JPanel {
 // Inner Classes
 //==================================================================================================
 
-	private class TraversalKeyListener implements KeyListener {
+	private static class TraversalKeyListener implements KeyListener {
 		private final Component component;
 
 		private TraversalKeyListener(Component component) {

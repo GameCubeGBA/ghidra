@@ -532,7 +532,7 @@ public abstract class AbstractTypeProgramInterface implements TPI {
 		}
 	}
 
-	private abstract class TiOff implements Comparable<TiOff> {
+	private abstract static class TiOff implements Comparable<TiOff> {
 		// Note that these should be unsigned 32-bit values from MSFT perspective, but we
 		// are falsely limiting them to signed (thus 31 bits).
 		protected int typeIndex;

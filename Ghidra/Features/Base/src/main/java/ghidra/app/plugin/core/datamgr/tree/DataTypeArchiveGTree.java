@@ -244,7 +244,7 @@ public class DataTypeArchiveGTree extends GTree {
 // Inner Classes
 //==================================================================================================	
 
-	private class DataTypeTransformer extends DefaultGTreeDataTransformer {
+	private static class DataTypeTransformer extends DefaultGTreeDataTransformer {
 
 		@Override
 		public List<String> transform(GTreeNode node) {

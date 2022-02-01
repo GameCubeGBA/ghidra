@@ -113,7 +113,7 @@ public class GraphAST extends GhidraScript {
 
 		// Install a handler so the selection/location will map
 		graphDisplay.setGraphDisplayListener(
-			new ASTGraphDisplayListener(tool, graphDisplay, high, func.getProgram()));
+                new ASTGraphDisplayListener(tool, graphDisplay, high, func.getProgram()));
 	}
 
 	private void buildAST() throws DecompileException {
@@ -259,7 +259,7 @@ public class GraphAST extends GhidraScript {
         return high.getPcodeOps();
 	}
 
-	class ASTGraphDisplayListener extends AddressBasedGraphDisplayListener {
+	static class ASTGraphDisplayListener extends AddressBasedGraphDisplayListener {
 
 		HighFunction highfunc;
 

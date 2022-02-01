@@ -41,11 +41,7 @@ public class ValueMapSymbol extends ValueSymbol {
 	private void checkTableFill() {
 		long min = getPatternValue().minValue();
 		long max = getPatternValue().maxValue();
-		tableisfilled = (min >= 0) && (max < valuetable.length);
-		for (long element : valuetable) {
-			if (element == 0xBADBEEF)
-				tableisfilled = false;
-		}
+		tableisfilled = (min >= 0) && (max < valuetable.length) && Arrays.stream(valuetable).noneMatch(element -> element == 0xBADBEEF);
 	}
 
 	/* (non-Javadoc)

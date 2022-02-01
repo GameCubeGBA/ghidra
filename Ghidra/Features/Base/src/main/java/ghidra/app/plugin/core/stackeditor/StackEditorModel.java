@@ -530,7 +530,7 @@ public class StackEditorModel extends CompositeEditorModel {
 		}
 	}
 
-	private class XYPair {
+	private static class XYPair {
 		int x;
 		int y;
 

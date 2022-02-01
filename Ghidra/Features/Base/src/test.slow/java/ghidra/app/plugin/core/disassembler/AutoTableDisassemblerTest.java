@@ -786,7 +786,7 @@ public class AutoTableDisassemblerTest extends AbstractGhidraHeadedIntegrationTe
 		runSwing(() -> table.setRowSelectionInterval(rowStart, rowEnd));
 	}
 
-	private class TestTaskListener implements TrackedTaskListener {
+	private static class TestTaskListener implements TrackedTaskListener {
 
 		private AtomicInteger started = new AtomicInteger();
 

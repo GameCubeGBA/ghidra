@@ -64,7 +64,7 @@ public class SymbolTypeFilter extends CheckBoxBasedAncillaryFilter<VTMatch> {
 // Inner Classes
 //==================================================================================================
 
-	private class SymbolTypeCheckBoxInfo extends CheckBoxInfo<VTMatch> {
+	private static class SymbolTypeCheckBoxInfo extends CheckBoxInfo<VTMatch> {
 
 		private SourceType sourceType;
 
@@ -109,7 +109,7 @@ public class SymbolTypeFilter extends CheckBoxBasedAncillaryFilter<VTMatch> {
 		}
 	}
 
-	private class NullSymbolCheckBoxInfo extends CheckBoxInfo<VTMatch> {
+	private static class NullSymbolCheckBoxInfo extends CheckBoxInfo<VTMatch> {
 
 		NullSymbolCheckBoxInfo(JCheckBox checkBox) {
 			super(checkBox);

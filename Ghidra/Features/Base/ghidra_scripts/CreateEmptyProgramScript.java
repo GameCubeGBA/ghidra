@@ -56,7 +56,7 @@ public class CreateEmptyProgramScript extends GhidraScript {
 		}
 	}
 
-	private class NewLanguageDialog extends DialogComponentProvider {
+	private static class NewLanguageDialog extends DialogComponentProvider {
 		private NewLanguagePanel panel;
 		private boolean isOK;
 

@@ -334,7 +334,7 @@ class ExtensionTableModel extends ThreadedTableModel<ExtensionDetails, List<Exte
 	/**
 	 * Table column for displaying the extension installation status.
 	 */
-	private class ExtensionInstalledColumn
+	private static class ExtensionInstalledColumn
 			extends AbstractDynamicTableColumn<ExtensionDetails, Boolean, List<ExtensionDetails>> {
 
 		@Override
@@ -357,7 +357,7 @@ class ExtensionTableModel extends ThreadedTableModel<ExtensionDetails, List<Exte
 	/**
 	 * Table column for displaying the extension installation directory.
 	 */
-	private class ExtensionInstallationDirColumn
+	private static class ExtensionInstallationDirColumn
 			extends AbstractDynamicTableColumn<ExtensionDetails, String, List<ExtensionDetails>> {
 
 		@Override
@@ -380,7 +380,7 @@ class ExtensionTableModel extends ThreadedTableModel<ExtensionDetails, List<Exte
 	/**
 	 * Table column for displaying the extension archive file.
 	 */
-	private class ExtensionArchiveFileColumn
+	private static class ExtensionArchiveFileColumn
 			extends AbstractDynamicTableColumn<ExtensionDetails, String, List<ExtensionDetails>> {
 
 		@Override

@@ -48,7 +48,7 @@ public class GRepaintManager extends RepaintManager {
 		return imageWrapper;
 	}
 
-	private class VolatileImageWrapper extends VolatileImage {
+	private static class VolatileImageWrapper extends VolatileImage {
 
 		private Graphics2DWrapper wrapper = new Graphics2DWrapper();
 		private VolatileImage image = this;

@@ -714,7 +714,7 @@ return getChoices((BooleanSettingsDefinition) definition);
 		}
 	}
 
-	class SettingsEditor extends AbstractCellEditor implements TableCellEditor {
+	static class SettingsEditor extends AbstractCellEditor implements TableCellEditor {
 
 		final static int ENUM = 0;
 		final static int BOOLEAN = 1;

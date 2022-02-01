@@ -173,7 +173,7 @@ public class VTMatchAcceptTest extends AbstractGhidraHeadedIntegrationTest {
 		return data;
 	}
 
-	private class DomainObjectListenerRecorder implements DomainObjectListener {
+	private static class DomainObjectListenerRecorder implements DomainObjectListener {
 
 		List<DomainObjectChangedEvent> events = new ArrayList<DomainObjectChangedEvent>();
 

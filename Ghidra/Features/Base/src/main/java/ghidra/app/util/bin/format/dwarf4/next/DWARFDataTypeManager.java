@@ -247,7 +247,7 @@ public class DWARFDataTypeManager {
 
 	public <T extends DataType> T getSpecificDataType(DIEAggregate diea, Class<T> dataTypeClazz) {
 		DataType dt = getDataType(diea, null);
-		if (dt != null && dataTypeClazz != null && dataTypeClazz.isInstance(dt)) {
+		if (dataTypeClazz != null && dataTypeClazz.isInstance(dt)) {
 			return dataTypeClazz.cast(dt);
 		}
 		return null;

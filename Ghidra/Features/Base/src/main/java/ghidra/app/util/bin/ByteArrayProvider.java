@@ -121,7 +121,7 @@ public class ByteArrayProvider implements ByteProvider {
 	 */
 	private void assertValidIndex(long index, boolean inclusiveMax) throws IOException {
 		if (index < 0 || index > srcBytes.length ||
-			(inclusiveMax == false && index == srcBytes.length)) {
+			(!inclusiveMax && index == srcBytes.length)) {
 			throw new IOException(
 				"Invalid position, index: " + index + ", max is: " + srcBytes.length);
 		}

@@ -59,6 +59,7 @@ public class HelpMissingScreenShotReportGenerator {
 		for (String arg : args) {
 			if (arg.equalsIgnoreCase(DEBUG_OPTION)) {
 				debugEnabled = true;
+				break;
 			}
 		}
 
@@ -635,7 +636,7 @@ public class HelpMissingScreenShotReportGenerator {
 // Inner Classes
 //==================================================================================================
 
-	private class HelpTestFile implements Comparable<HelpTestFile> {
+	private static class HelpTestFile implements Comparable<HelpTestFile> {
 		private String filename;
 		private HelpModuleLocation helpDir;
 		private Path filePath;

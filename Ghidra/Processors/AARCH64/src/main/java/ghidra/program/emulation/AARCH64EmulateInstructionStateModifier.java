@@ -257,7 +257,7 @@ public class AARCH64EmulateInstructionStateModifier extends EmulateInstructionSt
 	// Vm: value to operate on
 	// size: size of lanes to add
 
-	private abstract class SIMD_OP1 implements OpBehaviorOther {
+	private abstract static class SIMD_OP1 implements OpBehaviorOther {
 
 		protected abstract long op1(long x, int esize);
 
@@ -397,7 +397,7 @@ public class AARCH64EmulateInstructionStateModifier extends EmulateInstructionSt
 	//
 	// The class be extended with an op1e method
 
-	private abstract class SIMD_OP1E implements OpBehaviorOther {
+	private abstract static class SIMD_OP1E implements OpBehaviorOther {
 
 		protected abstract long op1e(long x, int s_size, int d_size);
 
@@ -524,7 +524,7 @@ public class AARCH64EmulateInstructionStateModifier extends EmulateInstructionSt
 	// esize: optional size of lanes to add, of omitted, Vn is a
 	//       constant operand to each lane of Vm (of that size)
 
-	private abstract class SIMD_OP2 implements OpBehaviorOther {
+	private abstract static class SIMD_OP2 implements OpBehaviorOther {
 
 		protected abstract long op2(long x, long y, int esize);
 
@@ -674,7 +674,7 @@ public class AARCH64EmulateInstructionStateModifier extends EmulateInstructionSt
 	// Vn1, Vn2: op (optional Vn2 to concatenate)
 	// iesize: size of input lanes to add
 
-	private abstract class SIPD_OP2 implements OpBehaviorOther {
+	private abstract static class SIPD_OP2 implements OpBehaviorOther {
 
 		protected abstract long op2(long x, long y, int iesize, int oesize);
 
@@ -868,7 +868,7 @@ public class AARCH64EmulateInstructionStateModifier extends EmulateInstructionSt
 	// offset = optional integer to specify the lane (0 = least significant)
 	//          to copy the value. if not specified, then all lanes are copied
 
-	private class SIMD_COPY implements OpBehaviorOther {
+	private static class SIMD_COPY implements OpBehaviorOther {
 
 		@Override
 		public void evaluate(Emulate emu, Varnode outputVarnode, Varnode[] inputs) {
@@ -952,7 +952,7 @@ public class AARCH64EmulateInstructionStateModifier extends EmulateInstructionSt
 	// Vn, Vm: multiplicands
 
 	@SuppressWarnings("unused")
-	private class MP_INT_EQUAL implements OpBehaviorOther {
+	private static class MP_INT_EQUAL implements OpBehaviorOther {
 
 		@Override
 		public void evaluate(Emulate emu, Varnode outputVarnode, Varnode[] inputs) {
@@ -991,7 +991,7 @@ public class AARCH64EmulateInstructionStateModifier extends EmulateInstructionSt
 		protected long op1e(long x, int s_size, int d_size) { return x & getmask(d_size); }
 	}
 
-	private class MP_INT_ABS implements OpBehaviorOther {
+	private static class MP_INT_ABS implements OpBehaviorOther {
 
 		@Override
 		public void evaluate(Emulate emu, Varnode outputVarnode, Varnode[] inputs) {
@@ -1045,7 +1045,7 @@ public class AARCH64EmulateInstructionStateModifier extends EmulateInstructionSt
 	// Vn: value to bitwise negate
 
 	@SuppressWarnings("unused")
-	private class MP_INT_NEGATE implements OpBehaviorOther {
+	private static class MP_INT_NEGATE implements OpBehaviorOther {
 
 		@Override
 		public void evaluate(Emulate emu, Varnode outputVarnode, Varnode[] inputs) {
@@ -1091,7 +1091,7 @@ public class AARCH64EmulateInstructionStateModifier extends EmulateInstructionSt
 	// Vn, Vm: values to bitwise and together
 
 	@SuppressWarnings("unused")
-	private class MP_INT_AND implements OpBehaviorOther {
+	private static class MP_INT_AND implements OpBehaviorOther {
 
 		@Override
 		public void evaluate(Emulate emu, Varnode outputVarnode, Varnode[] inputs) {
@@ -1142,7 +1142,7 @@ public class AARCH64EmulateInstructionStateModifier extends EmulateInstructionSt
 	// Vn: value to shift
 	// shift: amount to shift
 
-	private class MP_INT_RIGHT implements OpBehaviorOther {
+	private static class MP_INT_RIGHT implements OpBehaviorOther {
 
 		@Override
 		public void evaluate(Emulate emu, Varnode outputVarnode, Varnode[] inputs) {
@@ -1183,7 +1183,7 @@ public class AARCH64EmulateInstructionStateModifier extends EmulateInstructionSt
 	// Vd: destination varnode
 	// Vn, Vm: multiplicands
 
-	private class MP_INT_MULT implements OpBehaviorOther {
+	private static class MP_INT_MULT implements OpBehaviorOther {
 
 		@Override
 		public void evaluate(Emulate emu, Varnode outputVarnode, Varnode[] inputs) {
@@ -1213,7 +1213,7 @@ public class AARCH64EmulateInstructionStateModifier extends EmulateInstructionSt
 	// Vd: destination varnode
 	// Vn, Vm: multiplicands
 
-	private class MP_INT_UMULT implements OpBehaviorOther {
+	private static class MP_INT_UMULT implements OpBehaviorOther {
 
 		@Override
 		public void evaluate(Emulate emu, Varnode outputVarnode, Varnode[] inputs) {
@@ -1489,7 +1489,7 @@ public class AARCH64EmulateInstructionStateModifier extends EmulateInstructionSt
 	// Vn = simd register
 	// offset = the element to extract (0 = least significant)
 
-	private class SIMD_PIECE implements OpBehaviorOther {
+	private static class SIMD_PIECE implements OpBehaviorOther {
 
 		@Override
 		public void evaluate(Emulate emu, Varnode outputVarnode, Varnode[] inputs) {
@@ -1551,7 +1551,7 @@ public class AARCH64EmulateInstructionStateModifier extends EmulateInstructionSt
 	// Vn, Vm = source varnodes
 
 	@SuppressWarnings("unused")
-	private class a64_CONCAT implements OpBehaviorOther {
+	private static class a64_CONCAT implements OpBehaviorOther {
 
 		@Override
 		public void evaluate(Emulate emu, Varnode outputVarnode, Varnode[] inputs) {
@@ -1601,7 +1601,7 @@ public class AARCH64EmulateInstructionStateModifier extends EmulateInstructionSt
 	// Vn2, Vn3, Vn4: additional table varnodes
 	// Vm: index varnode (8 or 16 bytes, same as Vd)
 
-	private class a64_TBL implements OpBehaviorOther {
+	private static class a64_TBL implements OpBehaviorOther {
 
 		@Override
 		public void evaluate(Emulate emu, Varnode outputVarnode, Varnode[] inputs) {

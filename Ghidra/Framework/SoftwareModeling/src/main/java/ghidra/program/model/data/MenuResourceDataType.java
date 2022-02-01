@@ -85,7 +85,7 @@ public class MenuResourceDataType extends DynamicDataType {
 				tempOffset = addMenuItemTemplate(mbIn, comps, tempOffset, option);
 				//last item in a menu
 				if (option == MF_END) {
-					if (lastMenuItem == true) {
+					if (lastMenuItem) {
 						lastItem = true;
 					}
 				}

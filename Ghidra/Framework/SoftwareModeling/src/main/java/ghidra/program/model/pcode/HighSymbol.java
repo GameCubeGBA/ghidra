@@ -412,22 +412,22 @@ public class HighSymbol {
 		}
 		typelock = false;
 		String typelockstr = symel.getAttribute("typelock");
-		if ((typelockstr != null) && (SpecXmlUtils.decodeBoolean(typelockstr))) {
+		if ((SpecXmlUtils.decodeBoolean(typelockstr))) {
 			typelock = true;
 		}
 		namelock = false;
 		String namelockstr = symel.getAttribute("namelock");
-		if ((namelockstr != null) && (SpecXmlUtils.decodeBoolean(namelockstr))) {
+		if ((SpecXmlUtils.decodeBoolean(namelockstr))) {
 			namelock = true;
 		}
 		isThis = false;
 		String thisstring = symel.getAttribute("thisptr");
-		if ((thisstring != null) && (SpecXmlUtils.decodeBoolean(thisstring))) {
+		if ((SpecXmlUtils.decodeBoolean(thisstring))) {
 			isThis = true;
 		}
 		isHidden = false;
 		String hiddenstring = symel.getAttribute("hiddenretparm");
-		if ((hiddenstring != null) && (SpecXmlUtils.decodeBoolean(hiddenstring))) {
+		if ((SpecXmlUtils.decodeBoolean(hiddenstring))) {
 			isHidden = true;
 		}
 //		isolate = false;

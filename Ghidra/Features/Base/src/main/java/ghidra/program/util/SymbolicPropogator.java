@@ -258,7 +258,7 @@ public class SymbolicPropogator {
 	 * {@code Value} corresponds to a constant value or register relative value.
 	 * @see SymbolicPropogator#getRegisterValue(Address, Register)
 	 */
-	public class Value {
+	public static class Value {
 		final Register relativeRegister;
 		final long value;
 
@@ -369,7 +369,7 @@ public class SymbolicPropogator {
 		context.flowEnd(addr);
 	}
 
-	protected class SavedFlowState {
+	protected static class SavedFlowState {
 		Address source;
 		Address destination;
 		boolean continueAfterHittingFlow;
@@ -562,7 +562,7 @@ public class SymbolicPropogator {
 						if (!instrFlow.isCall()) {
 							for (Address flow : flows) {
 								contextStack.push(new SavedFlowState(vContext, minInstrAddress,
-									flow, continueAfterHittingFlow));
+										flow, continueAfterHittingFlow));
 							}
 						}
 						else if (flows.length > 1) {
@@ -572,7 +572,7 @@ public class SymbolicPropogator {
 								RefType referenceType = flowRef.getReferenceType();
 								if (referenceType.isComputed() && referenceType.isJump()) {
 									contextStack.push(new SavedFlowState(vContext, minInstrAddress,
-										flowRef.getToAddress(), continueAfterHittingFlow));
+											flowRef.getToAddress(), continueAfterHittingFlow));
 								}
 							}
 						}
@@ -608,7 +608,7 @@ public class SymbolicPropogator {
 				nextAddr = null;
 				if (retAddr != null) {
 					contextStack.push(new SavedFlowState(vContext, minInstrAddress, retAddr,
-						continueAfterHittingFlow));
+							continueAfterHittingFlow));
 					fallThru = null;
 				}
 
@@ -618,7 +618,7 @@ public class SymbolicPropogator {
 
 						// put it lowest on the stack to do later!
 						contextStack.push(new SavedFlowState(vContext, minInstrAddress, fallThru,
-							!callCouldCauseBadStackDepth));
+								!callCouldCauseBadStackDepth));
 					}
 					else if (fallThru.compareTo(maxAddr) < 0) {
 						// this isn't a normal fallthru, must break it up
@@ -626,7 +626,7 @@ public class SymbolicPropogator {
 						vContext.mergeToFutureFlowState(minInstrAddress, fallThru);
 
 						contextStack.push(
-							new SavedFlowState(vContext, minInstrAddress, fallThru, false));
+								new SavedFlowState(vContext, minInstrAddress, fallThru, false));
 					}
 					else {
 						// no need to store future flow state, will continue on the fall-thru flow

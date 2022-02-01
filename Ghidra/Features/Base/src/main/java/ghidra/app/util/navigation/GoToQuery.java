@@ -634,7 +634,7 @@ public class GoToQuery {
 		}
 	}
 
-	private class DummyGoToServiceListener implements GoToServiceListener {
+	private static class DummyGoToServiceListener implements GoToServiceListener {
 		@Override
 		public void gotoCompleted(String queryString, boolean foundResults) {
 			// stubbed

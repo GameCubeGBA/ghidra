@@ -2817,7 +2817,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 		}
 	}
 
-	private class NameComparator implements Comparator<DataType> {
+	private static class NameComparator implements Comparator<DataType> {
 		/**
 		 * Compares its two arguments for order. Returns a negative integer, zero, or a
 		 * positive integer as the first argument is less than, equal to, or greater

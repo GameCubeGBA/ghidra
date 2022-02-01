@@ -156,7 +156,7 @@ class LocationReferencesTableModel extends AddressBasedTableModel<LocationRefere
 		}
 	}
 
-	private class ContextCellRenderer extends AbstractGhidraColumnRenderer<LocationReference> {
+	private static class ContextCellRenderer extends AbstractGhidraColumnRenderer<LocationReference> {
 
 		private static final String OFFCUT_STRING = "<< OFFCUT >>";
 

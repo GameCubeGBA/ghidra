@@ -389,11 +389,11 @@ public class AddEditDialog extends DialogComponentProvider {
 		if (functionSymbol != null) {
 			if (symbol != null && symbol.equals(functionSymbol)) {
 				namespaceChoices.setSelectedItem(
-					new NamespaceWrapper(functionSymbol.getParentNamespace()));
+                        new NamespaceWrapper(functionSymbol.getParentNamespace()));
 			}
 			else if (functionSymbol.getSource() == SourceType.DEFAULT) {
 				namespaceChoices.setSelectedItem(
-					new NamespaceWrapper(functionSymbol.getParentNamespace()));
+                        new NamespaceWrapper(functionSymbol.getParentNamespace()));
 			}
 			else { // there is a function at the current address
 				namespaceChoices.setSelectedItem(new NamespaceWrapper(localNamespace));
@@ -409,7 +409,7 @@ public class AddEditDialog extends DialogComponentProvider {
 			else { // not in a function
 				if (symbol != null) { // editing a label
 					namespaceChoices.setSelectedItem(
-						new NamespaceWrapper(symbol.getParentNamespace()));
+                            new NamespaceWrapper(symbol.getParentNamespace()));
 				}
 				else {
 					// use the global namespace and *not* the lowest-level namespace
@@ -604,7 +604,7 @@ public class AddEditDialog extends DialogComponentProvider {
 		throw new AssertException("Using an uneditable JComboBox - this class must be updated.");
 	}
 
-	public class NamespaceWrapper {
+	public static class NamespaceWrapper {
 		private Namespace namespace;
 
 		public NamespaceWrapper(Namespace namespace) {

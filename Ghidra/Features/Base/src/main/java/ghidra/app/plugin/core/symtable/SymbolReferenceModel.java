@@ -402,7 +402,7 @@ public class SymbolReferenceModel extends AddressBasedTableModel<Reference> {
 			return accessRenderer;
 		}
 
-		private class AccessCellRenderer extends AbstractGhidraColumnRenderer<RefType> {
+		private static class AccessCellRenderer extends AbstractGhidraColumnRenderer<RefType> {
 
 			@Override
 			public Component getTableCellRendererComponent(GTableCellRenderingData data) {

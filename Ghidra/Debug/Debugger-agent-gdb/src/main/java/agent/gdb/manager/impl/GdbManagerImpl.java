@@ -152,7 +152,7 @@ public class GdbManagerImpl implements GdbManager {
 		}
 	}
 
-	class PtyInfoDialogThread extends Thread {
+	static class PtyInfoDialogThread extends Thread {
 		private final JOptionPane pane;
 		private final JDialog dialog;
 		final CompletableFuture<Integer> result = new CompletableFuture<>();

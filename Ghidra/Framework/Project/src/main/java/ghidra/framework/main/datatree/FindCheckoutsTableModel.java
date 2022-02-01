@@ -141,7 +141,7 @@ class FindCheckoutsTableModel extends ThreadedTableModelStub<CheckoutInfo> {
 // Inner Classes
 //==================================================================================================	
 
-	private class NameTableColumn extends AbstractDynamicTableColumnStub<CheckoutInfo, String> {
+	private static class NameTableColumn extends AbstractDynamicTableColumnStub<CheckoutInfo, String> {
 
 		@Override
 		public String getColumnName() {
@@ -160,7 +160,7 @@ class FindCheckoutsTableModel extends ThreadedTableModelStub<CheckoutInfo> {
 		}
 	}
 
-	private class PathTableColumn extends AbstractDynamicTableColumnStub<CheckoutInfo, String> {
+	private static class PathTableColumn extends AbstractDynamicTableColumnStub<CheckoutInfo, String> {
 
 		@Override
 		public String getColumnName() {
@@ -179,7 +179,7 @@ class FindCheckoutsTableModel extends ThreadedTableModelStub<CheckoutInfo> {
 		}
 	}
 
-	private class CheckoutDateTableColumn
+	private static class CheckoutDateTableColumn
 			extends AbstractDynamicTableColumnStub<CheckoutInfo, Date> {
 
 		@Override
@@ -199,7 +199,7 @@ class FindCheckoutsTableModel extends ThreadedTableModelStub<CheckoutInfo> {
 		}
 	}
 
-	private class VersionTableColumn extends AbstractDynamicTableColumnStub<CheckoutInfo, Integer> {
+	private static class VersionTableColumn extends AbstractDynamicTableColumnStub<CheckoutInfo, Integer> {
 
 		@Override
 		public String getColumnName() {

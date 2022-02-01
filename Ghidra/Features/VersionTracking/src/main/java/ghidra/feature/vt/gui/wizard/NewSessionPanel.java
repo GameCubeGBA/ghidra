@@ -498,7 +498,7 @@ public class NewSessionPanel extends AbstractMageJPanel<VTWizardStateKey> {
 	}
 
 	// simple object to track a domain file and its program
-	private class ProgramInfo {
+	private static class ProgramInfo {
 
 		private Program program;
 		private DomainFile file;

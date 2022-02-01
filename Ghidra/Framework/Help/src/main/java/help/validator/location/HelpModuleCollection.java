@@ -348,7 +348,7 @@ public class HelpModuleCollection implements TOCItemProvider {
 //==================================================================================================
 
 	/** A class that wraps a Path and allows map lookup for paths from different file systems */
-	private class PathKey {
+	private static class PathKey {
 		private String path;
 
 		PathKey(Path p) {

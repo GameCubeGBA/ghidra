@@ -101,7 +101,7 @@ public class ArmSymbolAnalyzer extends AbstractAnalyzer {
 
 	private void updateEntryPoint(Program program, Address address, Address newAddress) {
 		SymbolTable symbolTable = program.getSymbolTable();
-		if (symbolTable.isExternalEntryPoint(address) == true) {
+		if (symbolTable.isExternalEntryPoint(address)) {
 			// Remove old entry point and add new one
 			symbolTable.removeExternalEntryPoint(address);
 			symbolTable.addExternalEntryPoint(newAddress);

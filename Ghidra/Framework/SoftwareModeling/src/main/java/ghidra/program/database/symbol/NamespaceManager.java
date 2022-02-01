@@ -348,7 +348,7 @@ public class NamespaceManager implements ManagerDB {
 		}
 	}
 
-	private class NamespaceHolder {
+	private static class NamespaceHolder {
 		long namespaceID;
 		AddressRange range;
 

@@ -1873,7 +1873,7 @@ public class ProgramDiffDetails {
 		}
 	}
 
-	private class VariableLayout {
+	private static class VariableLayout {
 		int dtLen;
 		int offsetLen;
 		int firstUseLen;

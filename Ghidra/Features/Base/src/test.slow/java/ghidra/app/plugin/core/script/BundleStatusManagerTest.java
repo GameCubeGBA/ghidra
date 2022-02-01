@@ -403,7 +403,7 @@ public class BundleStatusManagerTest extends AbstractGhidraScriptMgrPluginTest {
 	/**
 	 * A {@link BundleHostListener} to help serialize bundle operations. 
 	 */
-	private class TestBundleHostListener implements BundleHostListener {
+	private static class TestBundleHostListener implements BundleHostListener {
 		CountDownLatch activationLatch;
 		CountDownLatch disablementLatch;
 

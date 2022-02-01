@@ -70,14 +70,14 @@ public class MultiTextFilterTableFilter<ROW_OBJECT> implements TableFilter<ROW_O
 			// @formatter:off
 			return filters.parallelStream()
 				.map(f -> matches(f, columnData))
-				.allMatch(m -> m == true);
+				.allMatch(m -> m);
 			// @formatter:on
 
 		}
 		// @formatter:off
 		return filters.parallelStream()
 				.map(f -> matches(f, columnData))
-				.anyMatch(m -> m == true);
+				.anyMatch(m -> m);
 		// @formatter:on
 	}
 
@@ -85,7 +85,7 @@ public class MultiTextFilterTableFilter<ROW_OBJECT> implements TableFilter<ROW_O
 		// @formatter:off
 		return columnData.parallelStream()
 			.map(data -> filter.matches(data))
-			.anyMatch(r -> r == true);
+			.anyMatch(r -> r);
 		// @formatter:on
 	}
 

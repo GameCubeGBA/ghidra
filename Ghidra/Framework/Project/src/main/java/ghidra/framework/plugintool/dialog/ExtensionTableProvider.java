@@ -268,7 +268,7 @@ public class ExtensionTableProvider extends DialogComponentProvider {
 	 * files that are Ghidra Extensions (zip files with an extension.properties
 	 * file) or folders.
 	 */
-	private class ExtensionFileFilter implements GhidraFileFilter {
+	private static class ExtensionFileFilter implements GhidraFileFilter {
 		@Override
 		public String getDescription() {
 			return "Ghidra Extension";

@@ -802,7 +802,7 @@ public class GhidraJarBuilder implements GhidraLaunchable {
 
 	}
 
-	private class Zip {
+	private static class Zip {
 		private ZipOutputStream zipOut;
 		private TaskMonitor monitor;
 

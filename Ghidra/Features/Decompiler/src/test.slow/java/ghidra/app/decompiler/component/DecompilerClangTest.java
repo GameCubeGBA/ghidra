@@ -2332,7 +2332,7 @@ public class DecompilerClangTest extends AbstractDecompilerTest {
 		}
 	}
 
-	private class SpyCTokenHighlightMatcher implements CTokenHighlightMatcher {
+	private static class SpyCTokenHighlightMatcher implements CTokenHighlightMatcher {
 
 		private CTokenHighlightMatcher delegate;
 		private Map<ClangToken, Color> highlightsByToken = new HashMap<>();

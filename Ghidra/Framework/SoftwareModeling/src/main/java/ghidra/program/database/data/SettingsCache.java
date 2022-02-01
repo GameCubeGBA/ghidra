@@ -23,7 +23,7 @@ import ghidra.util.datastruct.FixedSizeHashMap;
 class SettingsCache {
 	private static final int CACHE_SIZE = 200;
 
-	class AddressNamePair {
+	static class AddressNamePair {
 		Address address;
 		String name;
 

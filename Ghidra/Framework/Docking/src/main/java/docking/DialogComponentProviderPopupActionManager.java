@@ -107,7 +107,7 @@ public class DialogComponentProviderPopupActionManager {
 // Inner Classes
 //==================================================================================================
 
-	private class PopupMenuHandler extends MenuHandler {
+	private static class PopupMenuHandler extends MenuHandler {
 		private final ActionContext actionContext;
 
 		public PopupMenuHandler(ActionContext context) {

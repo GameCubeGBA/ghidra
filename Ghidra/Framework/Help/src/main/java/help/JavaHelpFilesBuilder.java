@@ -186,7 +186,7 @@ public class JavaHelpFilesBuilder {
 // Inner Classes
 //==================================================================================================    
 
-	private class LogFileWriter extends PrintWriter {
+	private static class LogFileWriter extends PrintWriter {
 		private final Path file;
 
 		LogFileWriter(Path logFile) throws IOException {
