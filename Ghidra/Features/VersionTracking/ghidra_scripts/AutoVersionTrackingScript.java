@@ -17,7 +17,6 @@
 // data and and then save the session.
 //@category Examples.Version Tracking
 
-import java.util.Iterator;
 import java.util.List;
 
 import ghidra.app.script.GhidraScript;

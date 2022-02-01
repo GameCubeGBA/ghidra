@@ -16,7 +16,6 @@
 package ghidra.app.plugin.core.overview;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import javax.swing.SwingUtilities;
 

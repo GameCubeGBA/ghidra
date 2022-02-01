@@ -15,7 +15,6 @@
  */
 package ghidra.program.model.data;
 
-import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Map;
 import java.util.TreeMap;

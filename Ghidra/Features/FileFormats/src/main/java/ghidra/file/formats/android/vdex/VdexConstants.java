@@ -15,8 +15,6 @@
  */
 package ghidra.file.formats.android.vdex;
 
-import java.io.IOException;
-
 import ghidra.app.util.bin.ByteProvider;
 import ghidra.app.util.bin.MemoryByteProvider;
 import ghidra.program.model.address.Address;

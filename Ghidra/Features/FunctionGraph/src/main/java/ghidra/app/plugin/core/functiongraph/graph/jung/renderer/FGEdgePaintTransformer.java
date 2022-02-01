@@ -15,7 +15,6 @@
  */
 package ghidra.app.plugin.core.functiongraph.graph.jung.renderer;
 
-import java.awt.Color;
 import java.awt.Paint;
 
 import com.google.common.base.Function;

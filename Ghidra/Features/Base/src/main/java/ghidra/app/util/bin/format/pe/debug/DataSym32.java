@@ -44,7 +44,7 @@ class DataSym32 extends DebugSymbol {
         this.section   = reader.readShort(ptr); ptr += BinaryReader.SIZEOF_SHORT;
         this.typeIndex = reader.readShort(ptr); ptr += BinaryReader.SIZEOF_SHORT;
         this.nameChar  = reader.readByte (ptr); ptr += BinaryReader.SIZEOF_BYTE;
-        this.name      = reader.readAsciiString(ptr); ptr += name.length();
+        this.name      = reader.readAsciiString(ptr);
     }
 
     int getTypeIndex() {

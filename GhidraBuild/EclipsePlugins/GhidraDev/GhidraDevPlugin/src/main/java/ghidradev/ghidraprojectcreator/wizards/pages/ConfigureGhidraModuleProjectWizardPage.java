@@ -17,7 +17,6 @@ package ghidradev.ghidraprojectcreator.wizards.pages;
 
 import java.util.*;
 
-import ghidradev.ghidraprojectcreator.utils.GhidraModuleUtils;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;

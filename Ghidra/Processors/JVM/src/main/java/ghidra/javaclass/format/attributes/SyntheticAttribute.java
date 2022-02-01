@@ -18,7 +18,6 @@ package ghidra.javaclass.format.attributes;
 
 import ghidra.app.util.bin.BinaryReader;
 import ghidra.program.model.data.DataType;
-import ghidra.program.model.data.StructureDataType;
 import ghidra.util.exception.DuplicateNameException;
 
 import java.io.IOException;

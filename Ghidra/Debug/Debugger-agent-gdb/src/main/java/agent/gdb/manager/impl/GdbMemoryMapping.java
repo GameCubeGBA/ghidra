@@ -16,7 +16,6 @@
 package agent.gdb.manager.impl;
 
 import java.math.BigInteger;
-import java.util.Objects;
 
 public class GdbMemoryMapping {
 	private final BigInteger start;

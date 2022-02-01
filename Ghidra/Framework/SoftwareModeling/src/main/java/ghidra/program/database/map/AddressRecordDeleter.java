@@ -16,7 +16,6 @@
 package ghidra.program.database.map;
 
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.List;
 
 import db.*;

@@ -21,7 +21,6 @@ import generic.stl.VectorSTL;
 import ghidra.pcodeCPort.context.ParserWalker;
 
 import java.io.PrintStream;
-import java.util.Iterator;
 import java.util.List;
 
 import org.jdom.Element;

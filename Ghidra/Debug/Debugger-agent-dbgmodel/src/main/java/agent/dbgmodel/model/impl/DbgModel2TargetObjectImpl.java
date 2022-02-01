@@ -18,7 +18,6 @@ package agent.dbgmodel.model.impl;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.CompletableFuture;
-import java.util.stream.Collectors;
 
 import agent.dbgeng.manager.DbgEventsListener;
 import agent.dbgeng.manager.DbgStateListener;
