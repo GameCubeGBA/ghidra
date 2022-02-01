@@ -734,7 +734,7 @@ public class ReferencesPlugin extends Plugin {
 				oldExtLoc.getExternalSpaceAddress()).hasNext() &&
 				OptionDialog.YES_OPTION == OptionDialog.showYesNoDialog(tool.getActiveWindow(),
 					"Delete Unused External Location?",
-					"Remove unused external location symbol '" + oldExtLoc.toString() + "'?")) {
+					"Remove unused external location symbol '" + oldExtLoc + "'?")) {
 				deleteExternalLocation(p, oldExtLoc);
 
 				if (!p.getExternalManager().getExternalLocations(oldExtName).hasNext() &&

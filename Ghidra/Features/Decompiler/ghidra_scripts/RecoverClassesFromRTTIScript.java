@@ -370,7 +370,7 @@ public class RecoverClassesFromRTTIScript extends GhidraScript {
 		if (defaultPointerSize != 4 && defaultPointerSize != 8) {
 			return ("This script only works on 32 or 64 bit programs");
 		}
-		return new String();
+		return "";
 	}
 
 	private void analyzeProgramChanges(AddressSetView beforeChanges) throws Exception {
@@ -930,7 +930,7 @@ public class RecoverClassesFromRTTIScript extends GhidraScript {
         for (RecoveredClass value : recoveredClasses) {
             monitor.checkCanceled();
             RecoveredClass recoveredClass = value;
-            String printString = new String("\n" + recoveredClass.getName() + "\n");
+            String printString = "\n" + recoveredClass.getName() + "\n";
             if (recoveredClass.hasParentClass()) {
                 List<RecoveredClass> parentList = recoveredClass.getParentList();
                 for (RecoveredClass aClass : parentList) {
@@ -964,7 +964,7 @@ public class RecoverClassesFromRTTIScript extends GhidraScript {
 
                 StringBuffer stringBuffer = new StringBuffer();
 
-                wholeBuffer.append(getSimpleClassHierarchyString(stringBuffer, recoveredClass).toString()).append("\r\n\r\n");
+                wholeBuffer.append(getSimpleClassHierarchyString(stringBuffer, recoveredClass)).append("\r\n\r\n");
             }
         }
 		println(wholeBuffer.toString());
@@ -988,7 +988,7 @@ public class RecoverClassesFromRTTIScript extends GhidraScript {
             RecoveredClass recoveredClass = aClass;
             if (!recoveredClass.hasChildClass()) {
                 StringBuffer stringBuffer = new StringBuffer();
-                wholeBuffer.append(getSimpleClassHierarchyString(stringBuffer, recoveredClass).toString()).append("\r\n");
+                wholeBuffer.append(getSimpleClassHierarchyString(stringBuffer, recoveredClass)).append("\r\n");
             }
         }
 		out.append(wholeBuffer);
@@ -1371,7 +1371,7 @@ public class RecoverClassesFromRTTIScript extends GhidraScript {
 			decompilerUtils.getFunctionSignatureString(function, includeReturn);
 
 		if (functionSignatureString != null) {
-			stringBuffer = stringBuffer.append(functionSignatureString.toString());
+			stringBuffer = stringBuffer.append(functionSignatureString);
 			return stringBuffer.toString();
 		}
 

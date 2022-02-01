@@ -135,10 +135,10 @@ public class DebugMisc implements StructConverter {
 	 */
 	@Override
 	public String toString() {
-		if (getDataType() == DebugMisc.IMAGE_DEBUG_MISC_EXENAME) {
-			return "Misc Debug Information: " + getActualData();
+		if (dataType == DebugMisc.IMAGE_DEBUG_MISC_EXENAME) {
+			return "Misc Debug Information: " + actualData;
 		}
-		return "Unknown Misc Debug Information Type: " + getDataType();
+		return "Unknown Misc Debug Information Type: " + dataType;
 	}
 
 	/**
@@ -160,7 +160,7 @@ public class DebugMisc implements StructConverter {
 		struct.add(DWORD, "Length", "total length of record, rounded to four byte multiple");
 		struct.add(BYTE, "Unicode", "TRUE if data is unicode string");
 		struct.add(new ArrayDataType(BYTE, 3, 1), "Reserved[3]", null);
-		if (isUnicode()) {
+		if (unicode) {
 			struct.add(new UnicodeDataType(), length - 12, "Data[]", "Actual data");
 		}
 		else {

@@ -57,7 +57,7 @@ abstract class AbstractDwarfEHDecoder implements DwarfEHDecoder {
 
 	@Override
 	public String toString() {
-		String repr = getDataFormat() + " | " + getDataApplicationMode();
+		String repr = getDataFormat() + " | " + appMode;
 		if (isIndirect) {
 			repr += " | " + DwarfEHDataApplicationMode.DW_EH_PE_indirect;
 		}

@@ -84,7 +84,7 @@ public class MDArrayReferencedType extends MDModifierType {
 			dmang.insertString(builder, "(");
 			dmang.appendString(builder, ")");
 		}
-		dmang.appendString(builder, getArrayString());
+		dmang.appendString(builder, arrayString);
 		// refDataType.insert(builder);
 		refType.insert(builder);
 	}

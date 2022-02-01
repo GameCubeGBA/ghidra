@@ -801,15 +801,14 @@ public class AssemblyPatternBlock implements Comparable<AssemblyPatternBlock> {
 	public int getSpecificity() {
 		int result = 0;
 		for (byte element : mask) {
-			result += Integer.bitCount(0xff & element);
+			result += Integer.bitCount(element & 0xff);
 		}
 		return result;
 	}
 
 	public int countPossibleVals() {
 		int count0 = 0;
-		for (byte element : mask) {
-			byte m = element;
+		for (byte m : mask) {
 			for (int j = 0; j < 8; j++) {
 				if ((m & 0x80) == 0) {
 					count0++;

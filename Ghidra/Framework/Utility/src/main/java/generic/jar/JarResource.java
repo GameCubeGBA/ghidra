@@ -49,7 +49,7 @@ public class JarResource implements Resource {
 			path = path.substring(1);
 		}
 		if (path.isEmpty()) {
-			myName = parent.getName();
+			myName = parent.name;
 			myNode = parent.node;
 			myPath = parent.path;
 		}

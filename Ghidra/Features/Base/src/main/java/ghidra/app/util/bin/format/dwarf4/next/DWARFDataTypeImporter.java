@@ -202,7 +202,7 @@ public class DWARFDataTypeImporter {
 				result = makeDataTypeForFunctionDefinition(diea, false);
 				break;
 			default:
-				Msg.warn(this, "Unsupported datatype in die: " + diea.toString());
+				Msg.warn(this, "Unsupported datatype in die: " + diea);
 		}
 		trackRecursion(diea.getOffset(), -1);
 
@@ -1147,7 +1147,7 @@ public class DWARFDataTypeImporter {
 		DIEAggregate type = diea.getTypeRef();
 		DIEAggregate containingType = diea.getContainingTypeRef();
 		if (type == null || containingType == null) {
-			Msg.error(this, "No type info for ptr_to_member: " + diea.toString());
+			Msg.error(this, "No type info for ptr_to_member: " + diea);
 			return null;
 		}
 

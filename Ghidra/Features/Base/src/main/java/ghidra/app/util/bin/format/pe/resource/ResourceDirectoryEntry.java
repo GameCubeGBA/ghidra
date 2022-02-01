@@ -145,7 +145,7 @@ public class ResourceDirectoryEntry implements StructConverter {
 				List<ResourceInfo> entryResources = entry.getResources(level + 1);
 				for (ResourceInfo info : entryResources) {
 					resources.add(info);
-					info.setName(toString() + "_" + info.getName());
+					info.setName(this + "_" + info.getName());
 					if (!isNameEntry) {
 						if (level == 0) {
 							info.setTypeID(id);

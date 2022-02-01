@@ -142,7 +142,7 @@ public class ObjectTable<R> implements ObjectPane {
 	private List<R> generateRows(ObjectContainer changed) {
 		List<R> list = new ArrayList<>();
 		for (ObjectContainer child : changed.getCurrentChildren()) {
-			if (child.isVisible() || !getContainer().getProvider().isHideIntrinsics()) {
+			if (child.isVisible() || !container.getProvider().isHideIntrinsics()) {
 				TargetObject to = child.getTargetObject();
 				try {
 					R r = clazz

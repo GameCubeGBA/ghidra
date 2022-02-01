@@ -230,7 +230,7 @@ public class ClangToken implements ClangNode {
 	}
 
 	static public ClangToken buildSpacer(ClangNode par, int indent, String indentStr) {
-		String spacing = new String();
+		String spacing = "";
 		for (int i = 0; i < indent; ++i) {
 			spacing += indentStr;
 		}

@@ -178,7 +178,7 @@ public class LSDAActionRecord extends GccAnalysisClass {
 	 * exception for this try.
 	 */
 	public LSDAActionRecord getNextAction() {
-		Address recAddr = getNextActionAddress();
+		Address recAddr = nextActionAddress;
 		if (lsdaActionTable.getAddress().equals(recAddr)) {
 			return null;
 		}
@@ -187,7 +187,7 @@ public class LSDAActionRecord extends GccAnalysisClass {
 		}
 
 		for (LSDAActionRecord rec : lsdaActionTable.getActionRecords()) {
-			if (rec.getAddress().equals(recAddr)) {
+			if (rec.recordAddress.equals(recAddr)) {
 				return rec;
 			}
 		}

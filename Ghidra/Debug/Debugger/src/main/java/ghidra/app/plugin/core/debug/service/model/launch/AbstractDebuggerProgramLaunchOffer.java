@@ -261,7 +261,7 @@ public abstract class AbstractDebuggerProgramLaunchOffer implements DebuggerProg
 
 	protected CompletableFuture<DebuggerObjectModel> connect(boolean prompt) {
 		DebuggerModelService service = tool.getService(DebuggerModelService.class);
-		DebuggerModelFactory factory = getModelFactory();
+		DebuggerModelFactory factory = this.factory;
 		if (prompt) {
 			return service.showConnectDialog(factory);
 		}

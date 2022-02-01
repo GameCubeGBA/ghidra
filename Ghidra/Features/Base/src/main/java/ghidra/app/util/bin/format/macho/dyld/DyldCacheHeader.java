@@ -712,7 +712,7 @@ public class DyldCacheHeader implements StructConverter {
 		monitor.setMessage("Marking up DYLD header...");
 		monitor.initialize(1);
 		try {
-			DataUtilities.createData(program, space.getAddress(getBaseAddress()), toDataType(), -1,
+			DataUtilities.createData(program, space.getAddress(baseAddress), toDataType(), -1,
 				false, DataUtilities.ClearDataMode.CHECK_FOR_SPACE);
 			monitor.incrementProgress(1);
 		}

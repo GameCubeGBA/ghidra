@@ -170,7 +170,7 @@ public class OverlayAddressSpace extends AbstractAddressSpace {
 
 	@Override
 	public Address getOverlayAddress(Address addr) {
-		if (getOverlayedSpace().equals(addr.getAddressSpace())) {
+		if (originalSpace.equals(addr.getAddressSpace())) {
 			if (contains(addr.getOffset())) {
 				return new GenericAddress(this, addr.getOffset());
 			}

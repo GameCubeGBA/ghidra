@@ -77,7 +77,7 @@ public class FileArchive implements Archive {
 			return 1;
 		}
 		if (archive instanceof FileArchive) {
-			return getName().compareToIgnoreCase(archive.getName());
+			return name.compareToIgnoreCase(archive.getName());
 		}
 		return -1; // File Archives appear between ProjectArchives and InvalidFileArchives.
 	}
@@ -283,7 +283,7 @@ public class FileArchive implements Archive {
 			return;
 		}
 
-		if (saveAsFile.equals(getFile())) {
+		if (saveAsFile.equals(archiveFile)) {
 			save();
 		}
 		else {

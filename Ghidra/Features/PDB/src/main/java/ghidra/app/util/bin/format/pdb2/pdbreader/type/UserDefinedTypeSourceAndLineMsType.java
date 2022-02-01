@@ -74,7 +74,7 @@ public class UserDefinedTypeSourceAndLineMsType extends AbstractMsType {
 	 */
 	public String getSourceFileName() {
 		StringIdMsType stringIdType =
-			pdb.getTypeRecord(getSourceFileNameStringIdRecordNumber(), StringIdMsType.class);
+			pdb.getTypeRecord(sourceFileNameStringIdRecordNumber, StringIdMsType.class);
 		if (stringIdType == null) {
 			return null;
 		}

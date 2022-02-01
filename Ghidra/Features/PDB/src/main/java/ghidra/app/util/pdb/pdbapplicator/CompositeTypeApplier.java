@@ -69,7 +69,7 @@ public class CompositeTypeApplier extends AbstractComplexTypeApplier {
 
 	CppCompositeType getClassType() {
 		if (definitionApplier != null) {
-			return ((CompositeTypeApplier) definitionApplier).getClassTypeInternal();
+			return ((CompositeTypeApplier) definitionApplier).classType;
 		}
 		return classType;
 	}
@@ -91,7 +91,7 @@ public class CompositeTypeApplier extends AbstractComplexTypeApplier {
 		AbstractComplexTypeApplier alternativeApplier = getAlternativeTypeApplier();
 		if (alternativeApplier != null) {
 			dataType = alternativeApplier.getDataTypeInternal();
-			classType = ((CompositeTypeApplier) alternativeApplier).getClassTypeInternal();
+			classType = ((CompositeTypeApplier) alternativeApplier).classType;
 		}
 		if (dataType != null) {
 			return;

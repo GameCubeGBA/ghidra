@@ -98,7 +98,7 @@ public class UndefinedFunction implements Function {
 			return false;
 		}
 
-		if (!SystemUtilities.isEqual(getBody(), otherFunc.getBody())) {
+		if (!SystemUtilities.isEqual(body, otherFunc.body)) {
 			return false;
 		}
 		return true;
@@ -333,7 +333,7 @@ public class UndefinedFunction implements Function {
 			return new ReturnParameterImpl(dt,
 				(dt instanceof VoidDataType) ? VariableStorage.VOID_STORAGE
 						: VariableStorage.UNASSIGNED_STORAGE,
-				getProgram());
+                    p);
 		}
 		catch (InvalidInputException e) {
 			throw new AssertException(e);

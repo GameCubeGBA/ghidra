@@ -71,7 +71,7 @@ public class DebugShape<V, E> implements Paintable {
 		}
 
 		Color originalColor = g.getColor();
-		g.setColor(getColor());
+		g.setColor(color);
 
 		g.draw(shape);
 

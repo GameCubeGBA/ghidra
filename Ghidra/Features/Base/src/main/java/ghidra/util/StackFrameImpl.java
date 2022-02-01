@@ -99,7 +99,7 @@ class StackFrameImpl implements StackFrame {
 
 	@Override
 	public Variable[] getLocals() {
-		if (getParameterOffset() >= 0) {
+		if (paramStart >= 0) {
 			return getNegativeVariables();
 		}
 		return getPositiveVariables();
@@ -108,7 +108,7 @@ class StackFrameImpl implements StackFrame {
 	@Override
 	public Variable[] getParameters() {
 
-		return (getParameterOffset() >= 0) ? getPositiveVariables() : getNegativeVariables();
+		return (paramStart >= 0) ? getPositiveVariables() : getNegativeVariables();
 	}
 
 	@Override
@@ -144,9 +144,9 @@ class StackFrameImpl implements StackFrame {
 	@Override
 	public int getParameterSize() {
 		if (growsNegative()) {
-			return getPositiveSize() - getParameterOffset();
+			return getPositiveSize() - paramStart;
 		}
-		return getNegativeSize() + getParameterOffset();
+		return getNegativeSize() + paramStart;
 	}
 
 	/**
@@ -228,7 +228,7 @@ class StackFrameImpl implements StackFrame {
 	 * @return the negative portion size
 	 */
 	private int getNegativeSize() {
-		int paramStart = getParameterOffset();
+		int paramStart = this.paramStart;
 		if (variables.isEmpty()) {
 			return (growsNegative() ? 0 : -paramStart);
 		}
@@ -247,7 +247,7 @@ class StackFrameImpl implements StackFrame {
 	 * @return the positive portion size
 	 */
 	private int getPositiveSize() {
-		int paramStart = getParameterOffset();
+		int paramStart = this.paramStart;
 		if (variables.isEmpty()) {
 			return (growsNegative() ? paramStart : 0);
 		}
@@ -280,7 +280,7 @@ class StackFrameImpl implements StackFrame {
 				continue;
 			}
 			int start = var.getStackOffset();
-			if (start >= 0 || start > getParameterOffset()) {
+			if (start >= 0 || start > paramStart) {
 				break;
 			}
 		}

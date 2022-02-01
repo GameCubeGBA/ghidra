@@ -59,7 +59,7 @@ public class GenerateMaskedBitStringScript extends GhidraScript {
 
 	private String createMaskedBitString(byte[] values, byte[] masks) {
 
-		String bitString = new String();
+		String bitString = "";
 
 		//check that value and mask lengths are equal
 		if (values.length != masks.length) {

@@ -53,7 +53,7 @@ public class SelectFromListDialog<T> extends DialogComponentProvider {
 		SelectFromListDialog<T> dialog =
 			new SelectFromListDialog<>(title, prompt, list, toStringFunc);
 		SystemUtilities.runSwingNow(() -> dialog.doSelect());
-		return dialog.actionComplete ? dialog.getSelectedObject() : null;
+		return dialog.actionComplete ? dialog.selectedObject : null;
 	}
 
 	private boolean actionComplete = false;

@@ -227,7 +227,7 @@ public class SegmentCommand extends LoadCommand {
 				Address addr = baseAddress.getNewAddress(getStartIndex());
 				DataType segmentDT = toDataType();
 				api.createData(addr, segmentDT);
-				api.setPlateComment(addr, getSegmentName());
+				api.setPlateComment(addr, segname);
 
 				Address sectionAddress = addr.add(segmentDT.getLength());
 				for (Section section : sections) {
@@ -281,6 +281,6 @@ public class SegmentCommand extends LoadCommand {
 
 	@Override
 	public String toString() {
-		return getSegmentName();
+		return segname;
 	}
 }

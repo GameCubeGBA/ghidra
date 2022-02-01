@@ -254,7 +254,7 @@ public class AddressTable {
 		Listing listing = program.getListing();
 		int totalLen = (len * addrSize + skipAmount);
 		if (createIndex) {
-			totalLen += getIndexLength();
+			totalLen += indexLen;
 		}
 		if (!listing.isUndefined(currentAddress, currentAddress.addWrap(totalLen - 1))) {
 			for (int k = 0; k < totalLen; k++) {
@@ -309,7 +309,7 @@ public class AddressTable {
 		Listing listing = program.getListing();
 
 		int tableSize = getNumberAddressEntries();
-		Address tableAddr = getTopAddress();
+		Address tableAddr = topAddress;
 
 		ArrayList<AddLabelCmd> switchLabelList = new ArrayList<>();
 		AddLabelCmd tableNameLabel = null;
@@ -319,7 +319,7 @@ public class AddressTable {
 
 		String comment = null;
 		String caseName = "case_0x";
-		if (isNegativeTable()) {
+		if (negativeTable) {
 			tableName = "neg_" + tableName;
 			caseName = "case_n0x";
 			comment = "This table is a negative switch table,\r\nit indexes from the bottom";
@@ -468,7 +468,7 @@ public class AddressTable {
 		}
 
 		// create the index array if this table has one
-		if (getIndexLength() > 0) {
+		if (indexLen > 0) {
 			createTableIndex(program);
 		}
 
@@ -536,7 +536,7 @@ public class AddressTable {
 	public void labelTable(Program program, Instruction start_inst,
 			ArrayList<AddLabelCmd> switchLabelList, AddLabelCmd tableNameLabel) {
 		// check if the table is already labeled
-		Symbol[] syms = program.getSymbolTable().getSymbols(getTopAddress());
+		Symbol[] syms = program.getSymbolTable().getSymbols(topAddress);
 		for (Symbol sym : syms) {
 			if (sym.getName(false).startsWith(tableNameLabel.getLabelName())) {
 				return;
@@ -594,9 +594,9 @@ public class AddressTable {
 		}
 
 		// label the index array if this table has one
-		if (getIndexLength() > 0) {
+		if (indexLen > 0) {
 			AddLabelCmd lcmd =
-				new AddLabelCmd(getTopIndexAddress(), "switchIndex", true, SourceType.ANALYSIS);
+				new AddLabelCmd(topIndexAddress, "switchIndex", true, SourceType.ANALYSIS);
 			switchLabelList.add(lcmd);
 		}
 
@@ -684,11 +684,11 @@ public class AddressTable {
 		Listing listing = program.getListing();
 
 		// make the index array of bytes if there is one
-		if (getTopIndexAddress() != null) {
+		if (topIndexAddress != null) {
 			ByteDataType bdt = new ByteDataType();
-			ArrayDataType arraydt = new ArrayDataType(bdt, getIndexLength(), bdt.getLength());
+			ArrayDataType arraydt = new ArrayDataType(bdt, indexLen, bdt.getLength());
 			try {
-				listing.createData(getTopIndexAddress(), arraydt, getIndexLength());
+				listing.createData(topIndexAddress, arraydt, indexLen);
 			}
 			catch (CodeUnitInsertionException e) {
 			}
@@ -894,12 +894,12 @@ public class AddressTable {
 //				}
 //			}
 			// Label table index if there is one
-			if (getTopIndexAddress() != null) {
+			if (topIndexAddress != null) {
 				Symbol indexSym;
 
-				indexSym = symbolTable.getPrimarySymbol(getTopIndexAddress());
+				indexSym = symbolTable.getPrimarySymbol(topIndexAddress);
 				if (indexSym == null || indexSym.isDynamic()) {
-					symbolTable.createLabel(getTopIndexAddress(), getIndexName(offset),
+					symbolTable.createLabel(topIndexAddress, getIndexName(offset),
 						SourceType.ANALYSIS);
 				}
 				else {

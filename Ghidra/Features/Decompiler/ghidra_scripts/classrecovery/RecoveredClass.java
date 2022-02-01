@@ -89,7 +89,7 @@ public class RecoveredClass {
 	private boolean hasExistingClassStructure = false;
 	private Function vbaseDestructor = null;
 
-	private String shortenedTemplateName = new String();
+	private String shortenedTemplateName = "";
 
 	private static final int NONE = -1;
 
@@ -154,7 +154,7 @@ public class RecoveredClass {
 
 	public void addVftableAddress(Address address) {
 		vftableAddresses.add(address);
-		setHasVftable(true);
+		hasVftable = true;
 	}
 
 	public List<Address> getVftableAddresses() {
@@ -206,7 +206,7 @@ public class RecoveredClass {
 		Address address = classOffsetToVftableMap.get(offset);
 		if (!address.equals(vftableAddress)) {
 			throw new Exception(name + " trying to add different vftable address (old: " +
-				vftableAddress.toString() + " new: " + address.toString() + ")  to same offset " +
+				vftableAddress.toString() + " new: " + address + ")  to same offset " +
 				offset);
 		}
 

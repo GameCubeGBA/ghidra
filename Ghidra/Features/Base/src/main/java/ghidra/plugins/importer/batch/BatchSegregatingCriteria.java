@@ -80,7 +80,7 @@ public class BatchSegregatingCriteria {
 	@Override
 	public String toString() {
 		return "[ext: " + (fileExt != null ? fileExt : "") + ", loader: " + loader +
-			", load specs: " + groupLoadSpecs.toString() + "]";
+			", load specs: " + groupLoadSpecs + "]";
 	}
 
 	@Override

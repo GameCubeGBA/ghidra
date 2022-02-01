@@ -261,7 +261,7 @@ class DataTypeComponentDB implements InternalDataTypeComponent {
 		DataType myDt = getDataType();
 		DataType otherDt = dtc.getDataType();
 
-		if (offset != dtc.getOffset() || getLength() != dtc.getLength() ||
+		if (offset != dtc.getOffset() || length != dtc.getLength() ||
 			ordinal != dtc.getOrdinal() ||
 			!SystemUtilities.isEqual(getFieldName(), dtc.getFieldName()) ||
 			!SystemUtilities.isEqual(getComment(), dtc.getComment())) {
@@ -308,7 +308,7 @@ class DataTypeComponentDB implements InternalDataTypeComponent {
 		}
 
 		// Component lengths need only be checked for dynamic types
-		if (getLength() != dtc.getLength() && (myDt instanceof Dynamic)) {
+		if (length != dtc.getLength() && (myDt instanceof Dynamic)) {
 			return false;
 		}
 

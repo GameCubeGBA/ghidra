@@ -226,7 +226,7 @@ public class ExternalReferencesProvider extends ComponentProviderAdapter {
 		if (buf.length() > 0) {
 			Msg.showError(this, mainPanel, "Delete Failure",
 				"The following external reference names could not be deleted\n" +
-					"because they contain external locations:\n" + buf.toString());
+					"because they contain external locations:\n" + buf);
 		}
 	}
 

@@ -48,10 +48,10 @@ public class GhidraFolder implements DomainFolder {
 		this.parent = parent;
 		this.name = name;
 
-		this.fileManager = parent.getProjectFileManager();
-		this.fileSystem = parent.getLocalFileSystem();
-		this.versionedFileSystem = parent.getVersionedFileSystem();
-		this.listener = parent.getChangeListener();
+		this.fileManager = parent.fileManager;
+		this.fileSystem = parent.fileSystem;
+		this.versionedFileSystem = parent.versionedFileSystem;
+		this.listener = parent.listener;
 	}
 
 	LocalFileSystem getLocalFileSystem() {
@@ -194,7 +194,7 @@ public class GhidraFolder implements DomainFolder {
 
 	@Override
 	public boolean isInWritableProject() {
-		return !getProjectData().getLocalFileSystem().isReadOnly();
+		return !fileManager.getLocalFileSystem().isReadOnly();
 	}
 
 	@Override

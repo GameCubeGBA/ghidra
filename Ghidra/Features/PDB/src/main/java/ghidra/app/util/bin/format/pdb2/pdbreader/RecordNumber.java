@@ -116,7 +116,7 @@ abstract public class RecordNumber {
 
 	@Override
 	public String toString() {
-		return String.format("%s[%d]", getCategory().name(), getNumber());
+		return String.format("%s[%d]", getCategory().name(), number);
 	}
 
 	@Override

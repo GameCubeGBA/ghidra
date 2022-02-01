@@ -152,7 +152,7 @@ public class TypedefDataType extends GenericDataType implements TypeDef {
 			if (!hasSameTypeDefSettings(td)) {
 				return false;
 			}
-			return DataTypeUtilities.isSameOrEquivalentDataType(getDataType(), td.getDataType());
+			return DataTypeUtilities.isSameOrEquivalentDataType(dataType, td.getDataType());
 		}
 		return false;
 	}
@@ -375,7 +375,7 @@ public class TypedefDataType extends GenericDataType implements TypeDef {
 
 	@Override
 	public boolean dependsOn(DataType dt) {
-		DataType myDt = getDataType();
+		DataType myDt = dataType;
 		return (myDt == dt || myDt.dependsOn(dt));
 	}
 

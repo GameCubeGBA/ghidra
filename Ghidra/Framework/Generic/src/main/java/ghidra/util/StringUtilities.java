@@ -920,9 +920,9 @@ public class StringUtilities {
 		}
 
 		StringBuilder buffy = new StringBuilder();
-		buffy.append(s.substring(0, lhsSize));
+		buffy.append(s, 0, lhsSize);
 		buffy.append(ELLIPSES);
-		buffy.append(s.substring(len - rhsSize, len));
+		buffy.append(s, len - rhsSize, len);
 
 		return buffy.toString();
 	}

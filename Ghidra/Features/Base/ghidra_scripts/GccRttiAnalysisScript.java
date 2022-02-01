@@ -112,7 +112,7 @@ public class GccRttiAnalysisScript extends GhidraScript {
 			boolean insideBrackets = false;
 			int numOpenedBrackets = 0;
 			int index = 0;
-			String newCategoryName = new String();
+			String newCategoryName = "";
 			while (index < categoryName.length()) {
 				monitor.checkCanceled();
 
@@ -722,7 +722,7 @@ public class GccRttiAnalysisScript extends GhidraScript {
 		Address typeinfoAddress = findNextTypeinfoRef(vtableAddress);
 		if (typeinfoAddress == null) {
 			println(vtableNamespace.getName() + " vtable has no typeinfo ref after vtable at " +
-				vtableAddress.toString());
+                    vtableAddress);
 			return;
 		}
 

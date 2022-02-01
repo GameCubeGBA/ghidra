@@ -309,7 +309,7 @@ public class CreateThunkFunctionCmd extends BackgroundCommand {
 				CreateThunkFunctionCmd extThunkCmd =
 					new CreateThunkFunctionCmd(referencedFunctionAddr, false);
 				if (extThunkCmd.applyTo(program)) {
-					f = extThunkCmd.getThunkFunction();
+					f = extThunkCmd.thunkFunction;
 				}
 			}
 		}
@@ -389,7 +389,7 @@ public class CreateThunkFunctionCmd extends BackgroundCommand {
 			return extLoc.getFunction();
 		}
 
-		Msg.debug(this, "Converting external location to a function: " + extLoc.toString());
+		Msg.debug(this, "Converting external location to a function: " + extLoc);
 		return extLoc.createFunction();
 	}
 

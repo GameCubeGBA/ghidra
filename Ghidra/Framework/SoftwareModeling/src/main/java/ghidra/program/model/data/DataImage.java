@@ -50,7 +50,7 @@ public abstract class DataImage {
 		if (description != null) {
 			return description;
 		}
-		return new String("DataImage@" + Integer.toHexString(hashCode()));
+		return "DataImage@" + Integer.toHexString(hashCode());
 	}
 
 }

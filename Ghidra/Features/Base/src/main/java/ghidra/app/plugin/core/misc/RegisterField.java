@@ -108,7 +108,7 @@ public class RegisterField extends JTextField {
         }
 
         /// if the value is no longer valid, then clear the value
-        if ( !isValidValue( getValue() ) ) {
+        if ( !isValidValue(currentValue) ) {
             doSetValue( null );
         }
     }

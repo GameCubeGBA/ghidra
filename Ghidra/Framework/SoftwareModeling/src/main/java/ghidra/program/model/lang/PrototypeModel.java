@@ -792,6 +792,6 @@ public class PrototypeModel {
 
 	@Override
 	public String toString() {
-		return getName();
+		return name;
 	}
 }

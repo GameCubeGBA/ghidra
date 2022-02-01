@@ -360,7 +360,7 @@ public class DiffController {
 	}
 
 	private void recomputeDiffs(TaskMonitor monitor) throws ProgramConflictException {
-		recomputeDiffs(getLimitedAddressSet(), monitor);
+		recomputeDiffs(p1LimitSet, monitor);
 	}
 
 	private void recomputeDiffs(AddressSetView newLimitSet, TaskMonitor monitor)

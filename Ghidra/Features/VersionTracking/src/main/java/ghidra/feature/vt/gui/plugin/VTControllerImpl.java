@@ -241,7 +241,7 @@ public class VTControllerImpl
 
 	@Override
 	public VTMarkupItem getCurrentMarkupForLocation(ProgramLocation location, Program program) {
-		MatchInfo matchInfo = getMatchInfo();
+		MatchInfo matchInfo = currentMatchInfo;
 		if (matchInfo == null) {
 			return null;
 		}

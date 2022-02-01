@@ -240,7 +240,7 @@ abstract class SubMemoryBlock implements Comparable<SubMemoryBlock> {
 
 	@Override
 	public int compareTo(SubMemoryBlock o) {
-		long result = getStartingOffset() - o.getStartingOffset();
+		long result = subBlockOffset - o.subBlockOffset;
 		if (result == 0) {
 			return 0;
 		}

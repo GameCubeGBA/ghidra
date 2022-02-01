@@ -230,7 +230,7 @@ public class DBTrace extends DBCachedDomainObjectAdapter implements Trace, Trace
 		}
 		if (baseAddressFactory.getAddressSpace(as.getSpaceID()) != as) {
 			throw new IllegalArgumentException(
-				"AddressSpace '" + as + "' is not in this trace (language=" + getBaseLanguage() +
+				"AddressSpace '" + as + "' is not in this trace (language=" + baseLanguage +
 					")");
 		}
 	}

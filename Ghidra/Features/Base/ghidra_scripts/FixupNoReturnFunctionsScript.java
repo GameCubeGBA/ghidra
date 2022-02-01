@@ -140,7 +140,7 @@ public class FixupNoReturnFunctionsScript extends GhidraScript {
 			@Override
 			public String getColumnValue(AddressableRowObject rowObject) {
 				NoReturnLocations noReturnLocations = (NoReturnLocations) rowObject;
-				return noReturnLocations.getStatus().toString();
+				return noReturnLocations.getStatus();
 			}
 		};
 
@@ -323,7 +323,7 @@ public class FixupNoReturnFunctionsScript extends GhidraScript {
 
 		@Override
 		public Address getAddress() {
-			return getNoReturnAddr();
+			return addr;
 		}
 
 		public Address getNoReturnAddr() {
@@ -355,8 +355,8 @@ public class FixupNoReturnFunctionsScript extends GhidraScript {
 
 		@Override
 		public String toString() {
-			return "NoReturn At:" + getAddress() + "  because: " + getExplanation() + " at " +
-				getWhyAddr();
+			return "NoReturn At:" + getAddress() + "  because: " + explanation + " at " +
+                    whyAddr;
 		}
 	}
 

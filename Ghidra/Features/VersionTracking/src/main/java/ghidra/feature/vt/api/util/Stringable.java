@@ -177,14 +177,14 @@ public abstract class Stringable implements ExtensionPoint, DisplayStringProvide
 			}
 		}
 		if (i > startIndex) {
-			buffer.append(unencodedComment.substring(startIndex, i));
+			buffer.append(unencodedComment, startIndex, i);
 		}
 		return buffer.toString();
 	}
 
 	private static int saveSubStringAndEscapedCharacter(String comment, StringBuffer buffer,
 			int startIndex, int endIndex, char escapedChar) {
-		buffer.append(comment.substring(startIndex, endIndex));
+		buffer.append(comment, startIndex, endIndex);
 		buffer.append('\\');
 		buffer.append(escapedChar);
 		startIndex = endIndex + 1;
@@ -206,7 +206,7 @@ public abstract class Stringable implements ExtensionPoint, DisplayStringProvide
 		int startIndex = 0;
 		int index = encodedComment.indexOf('\\', startIndex);
 		while (index != -1) {
-			buffer.append(encodedComment.substring(startIndex, index));
+			buffer.append(encodedComment, startIndex, index);
 			char charAt = encodedComment.charAt(++index);
 			switch (charAt) {
 				case 't':

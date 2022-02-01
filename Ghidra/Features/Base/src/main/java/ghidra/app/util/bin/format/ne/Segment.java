@@ -230,9 +230,9 @@ public class Segment {
      * @return the bytes the comprise this segment
      */
     public byte [] getBytes() throws IOException {
-        int   offset_int = getOffsetShiftAligned();
-        int   length_int = Conv.shortToInt(getLength());
-        int minalloc_int = Conv.shortToInt(getMinAllocSize());
+        int   offset_int = offsetAlign;
+        int   length_int = Conv.shortToInt(length);
+        int minalloc_int = Conv.shortToInt(minAllocSize);
 
         if (minalloc_int == 0) minalloc_int = 0x10000;
 

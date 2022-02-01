@@ -369,7 +369,7 @@ class GhidraScriptTableModel extends GDynamicColumnTableModel<ResourceFile, Obje
 				else {
 					String keybindingText = "";
 					if (!info.keystroke.isEmpty()) {
-						keybindingText = ": " + info.toString();
+						keybindingText = ": " + info;
 					}
 
 					if (info.hasAction) {

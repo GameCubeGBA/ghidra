@@ -65,7 +65,7 @@ public class TestAnalyzer extends AbstractAnalyzer {
 				}
 
 				program.getListing().setComment(currentAddress, CodeUnit.PLATE_COMMENT,
-					"Address = " + currentAddress.toString());
+					"Address = " + currentAddress);
 				currentAddress = currentAddress.add(data.getLength());
 
 			}

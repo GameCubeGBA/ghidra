@@ -158,7 +158,7 @@ abstract public class Exporter implements ExtensionPoint {
 
 	@Override
 	final public String toString() {
-		return getName();
+		return name;
 	}
 
 }

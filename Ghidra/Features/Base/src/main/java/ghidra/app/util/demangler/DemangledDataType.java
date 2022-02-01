@@ -137,18 +137,18 @@ public class DemangledDataType extends DemangledType {
 				baseType = ((TypeDef) dt).getBaseDataType();
 			}
 
-			if (isStruct()) {
+			if (isStruct) {
 				if (baseType == null || !(baseType instanceof Structure)) {
 					// Fill it with nonsense
 					dt = createPlaceHolderStructure(name, getNamespace());
 				}
 			}
-			else if (isUnion()) {
+			else if (isUnion) {
 				if (baseType == null || !(baseType instanceof Union)) {
 					dt = new UnionDataType(getDemanglerCategoryPath(name, getNamespace()), name);
 				}
 			}
-			else if (isEnum()) {
+			else if (isEnum) {
 				if (baseType == null || !(baseType instanceof Enum)) {
 
 					if (enumType == null || INT.equals(enumType) || UNSIGNED_INT.equals(enumType)) {
@@ -176,7 +176,7 @@ public class DemangledDataType extends DemangledType {
 					}
 				}
 			}
-			else if (isClass() || name.equals(STRING)) {
+			else if (isClass || name.equals(STRING)) {
 				if (baseType == null || !(baseType instanceof Structure)) {
 					// try creating empty structures for unknown types instead.
 					dt = createPlaceHolderStructure(name, getNamespace());
@@ -186,7 +186,7 @@ public class DemangledDataType extends DemangledType {
 
 				// I don't know what this is
 				// If it isn't pointed to, or isn't a referent, then assume typedef.
-				if (!(isReference() || isPointer())) { // Unknown type
+				if (!(isReference || isPointer())) { // Unknown type
 					dt = new TypedefDataType(getDemanglerCategoryPath(name, getNamespace()), name,
 						new DWordDataType());
 				}
@@ -198,8 +198,8 @@ public class DemangledDataType extends DemangledType {
 
 		}
 
-		int numPointers = getPointerLevels();
-		if (isReference()) {
+		int numPointers = pointerLevels;
+		if (isReference) {
 			numPointers++;
 		}
 
@@ -219,7 +219,7 @@ public class DemangledDataType extends DemangledType {
 			dt = VoidDataType.dataType;
 		}
 		else if (CHAR.equals(name)) {
-			if (isUnsigned()) {
+			if (isUnsigned) {
 				dt = UnsignedCharDataType.dataType;
 			}
 			else {
@@ -227,7 +227,7 @@ public class DemangledDataType extends DemangledType {
 			}
 		}
 		else if (SHORT.equals(name)) {
-			if (isUnsigned()) {
+			if (isUnsigned) {
 				dt = UnsignedShortDataType.dataType;
 			}
 			else {
@@ -235,7 +235,7 @@ public class DemangledDataType extends DemangledType {
 			}
 		}
 		else if (INT.equals(name)) {
-			if (isUnsigned()) {
+			if (isUnsigned) {
 				dt = UnsignedIntegerDataType.dataType;
 			}
 			else {
@@ -243,7 +243,7 @@ public class DemangledDataType extends DemangledType {
 			}
 		}
 		else if (LONG.equals(name)) {
-			if (isUnsigned()) {
+			if (isUnsigned) {
 				dt = UnsignedLongDataType.dataType;
 			}
 			else {
@@ -251,7 +251,7 @@ public class DemangledDataType extends DemangledType {
 			}
 		}
 		else if (LONG_LONG.equals(name)) {
-			if (isUnsigned()) {
+			if (isUnsigned) {
 				dt = UnsignedLongLongDataType.dataType;
 			}
 			else {
@@ -274,7 +274,7 @@ public class DemangledDataType extends DemangledType {
 			dt = LongDoubleDataType.dataType;
 		}
 		else if (INT8.equals(name)) {
-			if (isUnsigned()) {
+			if (isUnsigned) {
 				dt = new TypedefDataType("__uint8",
 					AbstractIntegerDataType.getUnsignedDataType(1, dataTypeManager));
 			}
@@ -284,7 +284,7 @@ public class DemangledDataType extends DemangledType {
 			}
 		}
 		else if (INT16.equals(name)) {
-			if (isUnsigned()) {
+			if (isUnsigned) {
 				dt = new TypedefDataType("__uint16",
 					AbstractIntegerDataType.getUnsignedDataType(2, dataTypeManager));
 			}
@@ -294,7 +294,7 @@ public class DemangledDataType extends DemangledType {
 			}
 		}
 		else if (INT32.equals(name)) {
-			if (isUnsigned()) {
+			if (isUnsigned) {
 				dt = new TypedefDataType("__uint32",
 					AbstractIntegerDataType.getUnsignedDataType(4, dataTypeManager));
 			}
@@ -304,7 +304,7 @@ public class DemangledDataType extends DemangledType {
 			}
 		}
 		else if (INT64.equals(name)) {
-			if (isUnsigned()) {
+			if (isUnsigned) {
 				dt = new TypedefDataType("__uint64",
 					AbstractIntegerDataType.getUnsignedDataType(8, dataTypeManager));
 			}
@@ -314,7 +314,7 @@ public class DemangledDataType extends DemangledType {
 			}
 		}
 		else if (INT128.equals(name)) {
-			if (isUnsigned()) {
+			if (isUnsigned) {
 				dt = new TypedefDataType("__uint128",
 					AbstractIntegerDataType.getUnsignedDataType(16, dataTypeManager));
 			}

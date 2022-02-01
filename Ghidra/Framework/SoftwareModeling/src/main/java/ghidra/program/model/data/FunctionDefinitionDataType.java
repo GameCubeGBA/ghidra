@@ -337,7 +337,7 @@ public class FunctionDefinitionDataType extends GenericDataType implements Funct
 			// avoid creating circular dependency
 			newDt = DataType.DEFAULT;
 		}
-		DataType retType = getReturnType();
+		DataType retType = returnType;
 		if (oldDt == retType) {
 			try {
 				setReturnType(newDt);

@@ -69,7 +69,7 @@ public class GhidraScriptProperties {
 		}
 		else {
 			Msg.warn(this,
-				"The path '" + scriptLocation.toString() + "' is not a valid directory.");
+				"The path '" + scriptLocation + "' is not a valid directory.");
 		}
 	}
 
@@ -109,7 +109,7 @@ public class GhidraScriptProperties {
 
 		Msg.info(this, "Reading script properties file: " + file.getAbsolutePath());
 		if (!file.isFile()) {
-			Msg.warn(this, ".properties file '" + file.toString() + "' is not a valid file.");
+			Msg.warn(this, ".properties file '" + file + "' is not a valid file.");
 			return;
 		}
 
@@ -133,7 +133,7 @@ public class GhidraScriptProperties {
 			}
 		}
 		catch (FileNotFoundException fnfe) {
-			throw new IOException("Could not find .properties file '" + file.toString() + "'");
+			throw new IOException("Could not find .properties file '" + file + "'");
 		}
 	}
 

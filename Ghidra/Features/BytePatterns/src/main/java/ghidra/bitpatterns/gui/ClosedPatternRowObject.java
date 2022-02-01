@@ -172,7 +172,7 @@ public class ClosedPatternRowObject {
 		for (FrequentSequence seq : closedSeqs) {
 			ClosedPatternRowObject rowObject = createClosedPatternRowObject(seq.getSequence(),
 				seq.getSupport(), totalNumSeqs, useBinary, length, type, cRegFilter);
-			if (rowObject.getNumFixedBits() >= minFixedBits) {
+			if (rowObject.fixedBits >= minFixedBits) {
 				rowObjects.add(rowObject);
 			}
 		}

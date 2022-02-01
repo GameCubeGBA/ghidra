@@ -31,7 +31,7 @@ public class CodeUnitContainer {
 
 	@Override
 	public String toString() {
-		return getCodeUnit().toString() + " @ " + getCodeUnit().getAddressString(false, true);
+		return codeUnit.toString() + " @ " + codeUnit.getAddressString(false, true);
 	}
 
 	public CodeUnit getCodeUnit() {

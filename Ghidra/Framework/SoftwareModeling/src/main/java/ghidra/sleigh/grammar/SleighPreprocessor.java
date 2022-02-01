@@ -379,7 +379,7 @@ public class SleighPreprocessor implements ExpressionEnvironment {
 				throw new PreprocessorException("unknown variable: " + variable, file.getName(),
 					lineno, overallLineno, line);
 			}
-			sb.append(input.substring(0, m.start(1)));
+			sb.append(input, 0, m.start(1));
 			if (!beCompatible) {
 				sb.append("\b");
 				sb.append(m.group());

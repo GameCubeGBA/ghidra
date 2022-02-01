@@ -115,7 +115,7 @@ public class FileSetEntryCommand extends LoadCommand {
 				Address addr = baseAddress.getNewAddress(getStartIndex());
 				DataType fileSetEntryDT = toDataType();
 				api.createData(addr, fileSetEntryDT);
-				api.setPlateComment(addr, getFileSetEntryName());
+				api.setPlateComment(addr, entryName);
 			}
 		}
 		catch (Exception e) {
@@ -125,6 +125,6 @@ public class FileSetEntryCommand extends LoadCommand {
 
 	@Override
 	public String toString() {
-		return getFileSetEntryName();
+		return entryName;
 	}
 }

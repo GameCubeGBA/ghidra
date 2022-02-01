@@ -146,9 +146,9 @@ public class MemoryBox {
 	}
 
 	public void render(Graphics g, boolean vertical) {
-		int x = vertical ? getTimePixelStart() : getAddressPixelStart();
+		int x = vertical ? pixTstart : pixAstart;
 		int w = vertical ? getTimePixelWidth() : getAddressPixelWidth();
-		int y = vertical ? getAddressPixelStart() : getTimePixelStart();
+		int y = vertical ? pixAstart : pixTstart;
 		int h = vertical ? getAddressPixelWidth() : getTimePixelWidth();
 		g.setColor(Color.BLACK);
 		g.fillRect(x - 1, y - 1, w + 2, h + 2);
@@ -157,9 +157,9 @@ public class MemoryBox {
 	}
 
 	public void renderBA(Graphics g, boolean vertical, int sz) {
-		int x = vertical ? 0 : getAddressPixelStart();
+		int x = vertical ? 0 : pixAstart;
 		int w = vertical ? sz : getAddressPixelWidth();
-		int y = vertical ? getAddressPixelStart() : 0;
+		int y = vertical ? pixAstart : 0;
 		int h = vertical ? getAddressPixelWidth() : sz;
 		g.setColor(Color.BLACK);
 		g.fillRect(x - 1, y - 1, w + 2, h + 2);
@@ -168,9 +168,9 @@ public class MemoryBox {
 	}
 
 	public void renderBT(Graphics g, boolean vertical, int sz, int bound) {
-		int x = vertical ? getTimePixelStart() : 0;
+		int x = vertical ? pixTstart : 0;
 		int w = vertical ? 1 : sz;
-		int y = vertical ? 0 : getTimePixelStart();
+		int y = vertical ? 0 : pixTstart;
 		int h = vertical ? sz : 1;
 		g.setColor(Color.BLACK);
 		g.fillRect(x - 1, y - 1, w + 2, h + 2);
@@ -239,11 +239,11 @@ public class MemoryBox {
 
 	public Map<String, Object> getAttributeMap() {
 		Map<String, Object> map = new HashMap<>();
-		map.put("Id", getId());
-		map.put("StartAddr", getStartAddress());
-		map.put("StopAddr", getStopAddress());
-		map.put("StartTime", getStartTime());
-		map.put("StopTIme", getStopTime());
+		map.put("Id", id);
+		map.put("StartAddr", startAddr);
+		map.put("StopAddr", stopAddr);
+		map.put("StartTime", startTime);
+		map.put("StopTIme", stopTime);
 		return map;
 	}
 }

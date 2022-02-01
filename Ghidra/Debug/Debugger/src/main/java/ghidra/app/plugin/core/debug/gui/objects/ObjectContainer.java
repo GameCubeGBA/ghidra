@@ -59,17 +59,17 @@ public class ObjectContainer implements Comparable<ObjectContainer> {
 	}
 
 	public static ObjectContainer clone(ObjectContainer container) {
-		ObjectContainer nc = new ObjectContainer(container.getTargetObject(), container.linkKey);
-		nc.rebuildContainers(container.getElementMap(), container.getAttributeMap());
-		nc.propagateProvider(container.getProvider());
+		ObjectContainer nc = new ObjectContainer(container.targetObject, container.linkKey);
+		nc.rebuildContainers(container.elementMap, container.attributeMap);
+		nc.propagateProvider(container.provider);
 		return nc;
 	}
 
 	public void updateUsing(ObjectContainer container) {
 		attributeMap.clear();
-		attributeMap.putAll(container.getAttributeMap());
+		attributeMap.putAll(container.attributeMap);
 		elementMap.clear();
-		elementMap.putAll(container.getElementMap());
+		elementMap.putAll(container.elementMap);
 		targetObject = container.targetObject;
 	}
 
@@ -327,11 +327,11 @@ public class ObjectContainer implements Comparable<ObjectContainer> {
 
 	public ObjectContainer getSubContainer(TargetObject object) {
 		for (ObjectContainer c1 : currentChildren) {
-			if (c1.getTargetObject().equals(object)) {
+			if (c1.targetObject.equals(object)) {
 				return c1;
 			}
-			for (ObjectContainer c2 : c1.getCurrentChildren()) {
-				if (c2.getTargetObject().equals(object)) {
+			for (ObjectContainer c2 : c1.currentChildren) {
+				if (c2.targetObject.equals(object)) {
 					return c2;
 				}
 			}
@@ -382,7 +382,7 @@ public class ObjectContainer implements Comparable<ObjectContainer> {
 			name = name.replaceAll("/", "_");
 		}
 		Element result = new Element(name);
-		for (ObjectContainer child : getCurrentChildren()) {
+		for (ObjectContainer child : currentChildren) {
 			String key = child.getShortName();
 			if (elementMap.containsKey(key)) {
 				result.addContent(child.toXml());

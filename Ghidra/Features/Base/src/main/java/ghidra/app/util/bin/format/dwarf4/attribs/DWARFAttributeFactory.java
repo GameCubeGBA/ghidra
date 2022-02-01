@@ -161,7 +161,7 @@ public class DWARFAttributeFactory {
 				return new DWARFIndirectAttribute(value, formValue);
 			default:
 		}
-		throw new IllegalArgumentException("Unknown DWARF Form: " + form.toString());
+		throw new IllegalArgumentException("Unknown DWARF Form: " + form);
 	}
 
 }

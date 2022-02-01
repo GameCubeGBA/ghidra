@@ -187,7 +187,7 @@ public class DebugDataDirectory extends DataDirectory {
 			return;
 		}
 		DebugDataDirectory templateDDD = (DebugDataDirectory) template.getNTHeader().getOptionalHeader().getDataDirectories()[OptionalHeader.IMAGE_DIRECTORY_ENTRY_DEBUG];
-		DebugDirectory [] templateDD = templateDDD.getParser().getDebugDirectories();
+		DebugDirectory [] templateDD = templateDDD.parser.getDebugDirectories();
 		DebugDirectory [] dd = parser.getDebugDirectories();
 		for (int i = 0; i < dd.length; i++) {
 			dd[i].writeHeader(raf, dc);

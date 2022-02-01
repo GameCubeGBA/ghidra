@@ -810,10 +810,10 @@ public class MDCVMod extends MDParsableItem {
 		String annotation = "";
 		switch (modType) {
 			case pointer:
-				if (isCLIProperty()) { // highest precedence, even if isGC is set.
+				if (isCLIProperty) { // highest precedence, even if isGC is set.
 					annotation = PERCENT;
 				}
-				else if (isGC()) {
+				else if (isGC) {
 					annotation = CARROT;
 				}
 				else {
@@ -821,10 +821,10 @@ public class MDCVMod extends MDParsableItem {
 				}
 				break;
 			case reference:
-				if (isCLIProperty()) { // highest precedence, even if isGC is set.
+				if (isCLIProperty) { // highest precedence, even if isGC is set.
 					annotation = PERCENT;
 				}
-				else if (isGC()) {
+				else if (isGC) {
 					annotation = PERCENT;
 				}
 				else {
@@ -832,10 +832,10 @@ public class MDCVMod extends MDParsableItem {
 				}
 				break;
 			case refref:
-				if (isCLIProperty()) { // highest precedence, even if isGC is set.
+				if (isCLIProperty) { // highest precedence, even if isGC is set.
 					annotation = PERCENT;
 				}
-				else if (isGC()) {
+				else if (isGC) {
 					annotation = PERCENT;
 				}
 				else {
@@ -848,7 +848,7 @@ public class MDCVMod extends MDParsableItem {
 			case other:
 			case plain:
 			default:
-				if (isCLIProperty()) {
+				if (isCLIProperty) {
 					annotation = PERCENT;
 					// dmang.insertSpacedString(builder, annotation);
 				}

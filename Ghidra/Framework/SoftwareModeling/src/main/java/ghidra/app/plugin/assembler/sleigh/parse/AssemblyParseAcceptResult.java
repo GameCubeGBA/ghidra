@@ -51,6 +51,6 @@ public class AssemblyParseAcceptResult extends AssemblyParseResult {
 	public String toString() {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		tree.print(new PrintStream(baos));
-		return new String(baos.toByteArray());
+		return baos.toString();
 	}
 }

@@ -113,7 +113,7 @@ public class ObjectNode extends GTreeSlowLoadingNode {  //extends GTreeNode
 
 	@Override
 	public String getDisplayText() {
-		return getContainer().getDecoratedName();
+		return container.getDecoratedName();
 	}
 
 	@Override

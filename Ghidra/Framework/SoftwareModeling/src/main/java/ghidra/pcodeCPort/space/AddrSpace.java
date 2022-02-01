@@ -280,7 +280,7 @@ public class AddrSpace {
 	public void saveXmlAttributes(PrintStream s, long offset) { // Save address
 		// as XML
 		// attributes
-		XmlUtils.a_v(s, "space", getName()); // Just append the proper
+		XmlUtils.a_v(s, "space", name); // Just append the proper
 		// attributes
 		s.append(' ');
 		s.append("offset=\"");
@@ -293,7 +293,7 @@ public class AddrSpace {
 		// as
 		// XML
 		// attributes
-		XmlUtils.a_v(s, "space", getName()); // Just append the proper
+		XmlUtils.a_v(s, "space", name); // Just append the proper
 		// attributes
 		s.append(" offset=\"");
 		printOffset(s, offset);
@@ -321,7 +321,7 @@ public class AddrSpace {
 	public void printOffset(PrintStream s, long offset) { // Print the offset as
 		// hexidecimal value
 		s.append("0x");
-		int addrSize = getAddrSize();
+		int addrSize = addressSize;
 		int padLength = 2 * addrSize;
 		String longString = Long.toHexString(offset);
 		for (int i = 0; i < padLength - longString.length(); i++) {
@@ -332,7 +332,7 @@ public class AddrSpace {
 
 	public int printRaw(PrintStream s, long offset) { // Debug form for raw dumps.
 		// Return expected size
-		int expectsize = getTrans().getDefaultSize();
+		int expectsize = trans.getDefaultSize();
 
 		printOffset(s, offset >>> scale);
 		if (wordsize > 1) {
@@ -352,7 +352,7 @@ public class AddrSpace {
 
 	public String toString(long offset) {
 		StringBuilder s = new StringBuilder();
-		int addrSize = getAddrSize();
+		int addrSize = addressSize;
 		int padLength = 2 * addrSize;
 		String longString = Long.toHexString(offset >>> scale);
 		s.append("0".repeat(padLength - longString.length()));
@@ -371,10 +371,10 @@ public class AddrSpace {
 		long offset;
 		StringTokenizer tokenizzy = new StringTokenizer(s, ":+");
 		String frontpart = tokenizzy.nextToken();
-		size.set(getAddrSize());
+		size.set(addressSize);
 
 		try {
-			VarnodeData point = getTrans().getRegister(frontpart);
+			VarnodeData point = trans.getRegister(frontpart);
 			offset = point.offset;
 			size.set(point.size);
 			return offset;

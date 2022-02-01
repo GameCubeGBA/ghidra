@@ -252,7 +252,7 @@ public class ScalarSearchProvider extends ComponentProviderAdapter {
 	private void createActions() {
 
 		tool.addLocalAction(this, new MakeProgramSelectionAction(plugin, scalarTable));
-		tool.addLocalAction(this, new SelectionNavigationAction(plugin, getTable()));
+		tool.addLocalAction(this, new SelectionNavigationAction(plugin, scalarTable));
 
 		GhidraTable table = threadedTablePanel.getTable();
 		tool.addLocalAction(this, new DeleteTableRowAction(table, plugin.getName()));

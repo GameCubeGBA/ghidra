@@ -476,7 +476,7 @@ public class SectionHeader implements StructConverter, ByteArrayConverter {
 
 	@Override
 	public byte[] toBytes(DataConverter dc) throws IOException {
-		return reader.readByteArray(getPointerToRawData(), getSizeOfRawData());
+		return reader.readByteArray(getPointerToRawData(), sizeOfRawData);
 	}
 
 	/**
@@ -580,7 +580,7 @@ public class SectionHeader implements StructConverter, ByteArrayConverter {
 	public void writeBytes(RandomAccessFile raf, int rafIndex, DataConverter dc, MemoryBlock block,
 			boolean useBlockBytes) throws IOException, MemoryAccessException {
 
-		if (getSizeOfRawData() == 0) {
+		if (sizeOfRawData == 0) {
 			return;
 		}
 
@@ -597,7 +597,7 @@ public class SectionHeader implements StructConverter, ByteArrayConverter {
 			raf.write(toBytes(dc));
 		}
 
-		int padLength = getSizeOfRawData() - getVirtualSize();
+		int padLength = sizeOfRawData - getVirtualSize();
 		if (padLength > 0) {
 			raf.write(new byte[padLength]);
 		}

@@ -209,15 +209,15 @@ public class BitmapResource {
 	 * @return computed image data size for single line
 	 */
 	private int getBytesPerLine() {
-		int lineLen = getWidth() * getBitCount();
+		int lineLen = width * bitCount;
 
-		if (getBitCount() == 1) {
+		if (bitCount == 1) {
 			lineLen = lineLen / 8;
 		}
-		else if (getBitCount() == 4) {
+		else if (bitCount == 4) {
 			lineLen = (lineLen + 4) / 8;
 		}
-		else if (getBitCount() == 24) {
+		else if (bitCount == 24) {
 			lineLen = lineLen / 8;
 		}
 		else {
@@ -338,7 +338,7 @@ public class BitmapResource {
 		ColorModel colorModel =
 			new ComponentColorModel(cs, nBits, true, false, Transparency.TRANSLUCENT,
 				DataBuffer.TYPE_BYTE);
-		int w = getWidth();
+		int w = width;
 		int h = getHeight();
 		WritableRaster raster =
 			Raster.createInterleavedRaster(DataBuffer.TYPE_BYTE, w, h, w * 4, 4, bOffs, null);
@@ -365,7 +365,7 @@ public class BitmapResource {
 		ColorModel colorModel =
 			new ComponentColorModel(cs, nBits, false, false, Transparency.OPAQUE,
 				DataBuffer.TYPE_BYTE);
-		int w = getWidth();
+		int w = width;
 		int h = getHeight();
 		WritableRaster raster =
 			Raster.createInterleavedRaster(DataBuffer.TYPE_BYTE, w, h, w * 3, 3, bOffs, null);
@@ -392,7 +392,7 @@ public class BitmapResource {
 
 		// create the image
 		BufferedImage image =
-			new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_BYTE_INDEXED, model);
+			new BufferedImage(width, getHeight(), BufferedImage.TYPE_BYTE_INDEXED, model);
 		byte[] dbuf = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
 		getPixelData(buf, dbuf);
 		return new BitmapDataImage(image);
@@ -410,7 +410,7 @@ public class BitmapResource {
 
 		// create the image
 		BufferedImage image =
-			new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_BYTE_BINARY, model);
+			new BufferedImage(width, getHeight(), BufferedImage.TYPE_BYTE_BINARY, model);
 		byte[] dbuf = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
 		getPixelData(buf, dbuf);
 		return new BitmapDataImage(image);
@@ -426,7 +426,7 @@ public class BitmapResource {
 		// create the image
 
 		BufferedImage image =
-			new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_BYTE_BINARY);
+			new BufferedImage(width, getHeight(), BufferedImage.TYPE_BYTE_BINARY);
 		byte[] dbuf = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
 		getPixelData(buf, dbuf);
 		return new BitmapDataImage(image);
@@ -520,7 +520,7 @@ public class BitmapResource {
 		byte[] decompressedData = null;
 
 		int h = getHeight();
-		int w = getWidth();
+		int w = width;
 
 		int maxBufferOffset = offset + maxCompressedDataLength;
 

@@ -441,7 +441,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 	public int getDelaySlotDepth(InstructionContext context) {
 		int delayInstrCnt = 0;
 		int byteCnt = 0;
-		int offset = getLength();
+		int offset = length;
 		if (delaySlotByteCnt == 1) {
 			return 1;
 		}
@@ -452,7 +452,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 				MemBuffer delaymem = new WrappedMemBuffer(context.getMemBuffer(), offset);
 				SleighInstructionPrototype proto =
 					(SleighInstructionPrototype) language.parse(delaymem, roContext, true);
-				int len = proto.getLength();
+				int len = proto.length;
 				offset += len;
 				byteCnt += len;
 				++delayInstrCnt;
@@ -546,11 +546,11 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 	@Override
 	public int getFallThroughOffset(InstructionContext context) {
 		if (delaySlotByteCnt <= 0) {
-			return getLength();
+			return length;
 		}
 
 		try {
-			int offset = getLength();
+			int offset = length;
 			int bytecount = 0;
 			ReadOnlyProcessorContext roContext =
 				new ReadOnlyProcessorContext(context.getProcessorContext());
@@ -558,7 +558,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 				MemBuffer delaymem = new WrappedMemBuffer(context.getMemBuffer(), offset);
 				SleighInstructionPrototype proto =
 					(SleighInstructionPrototype) language.parse(delaymem, roContext, true);
-				int len = proto.getLength();
+				int len = proto.length;
 				offset += len;
 				bytecount += len;
 			}
@@ -566,7 +566,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 			return offset;
 		}
 		catch (Exception e) {
-			return getLength();
+			return length;
 		}
 	}
 
@@ -964,14 +964,14 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 	public PcodeOp[] getPcode(InstructionContext context, PcodeOverride override) {
 		try {
 			SleighParserContext protoContext = (SleighParserContext) context.getParserContext();
-			int fallOffset = getLength();
+			int fallOffset = length;
 			if (delaySlotByteCnt > 0) {
 				int bytecount = 0;
 				do {
 					Address addr = context.getAddress().add(fallOffset);
 					SleighParserContext delay =
 						(SleighParserContext) context.getParserContext(addr);
-					int len = delay.getPrototype().getLength();
+					int len = delay.getPrototype().length;
 					fallOffset += len;
 					bytecount += len;
 				}
@@ -1002,7 +1002,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 
 	@Override
 	public PackedBytes getPcodePacked(InstructionContext context, PcodeOverride override) {
-		int fallOffset = getLength();
+		int fallOffset = length;
 		try {
 			SleighParserContext protoContext = (SleighParserContext) context.getParserContext();
 			if (delaySlotByteCnt > 0) {
@@ -1011,7 +1011,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 					Address addr = context.getAddress().add(fallOffset);
 					SleighParserContext delay =
 						(SleighParserContext) context.getParserContext(addr);
-					int len = delay.getPrototype().getLength();
+					int len = delay.getPrototype().length;
 					fallOffset += len;
 					bytecount += len;
 				}

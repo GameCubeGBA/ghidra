@@ -125,7 +125,7 @@ public abstract class RenameTask {
 			program.endTransaction(tx, commit);
 
 			if (commit) {
-				provider.tokenRenamed(tokenAtCursor, getNewName());
+				provider.tokenRenamed(tokenAtCursor, newName);
 			}
 		}
 

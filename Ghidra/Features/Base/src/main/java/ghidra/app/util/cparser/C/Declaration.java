@@ -34,7 +34,7 @@ public class Declaration {
 
 	public Declaration(Declaration dec) {
 		this();
-		this.dt = dec.getDataType();
+		this.dt = dec.dt;
 	}
 
 	public Declaration(Declaration dec, String name) throws ParseException {
@@ -42,7 +42,7 @@ public class Declaration {
 		if (dec == null) {
 			throw new ParseException("Undefined data type \"" + name + "\"");
 		}
-		this.dt = dec.getDataType();
+		this.dt = dec.dt;
 		this.name = name;
 	}
 

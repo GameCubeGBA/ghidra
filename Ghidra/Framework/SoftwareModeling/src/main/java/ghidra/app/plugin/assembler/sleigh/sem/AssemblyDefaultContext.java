@@ -105,7 +105,7 @@ public class AssemblyDefaultContext implements DisassemblerContext, DefaultProgr
 	 * @return the value as a pattern block for assembly
 	 */
 	public AssemblyPatternBlock getDefaultAt(Address addr) {
-		return new AssemblyDefaultContext(lang, addr).getDefault();
+		return new AssemblyDefaultContext(lang, addr).defctx;
 	}
 
 	@Override

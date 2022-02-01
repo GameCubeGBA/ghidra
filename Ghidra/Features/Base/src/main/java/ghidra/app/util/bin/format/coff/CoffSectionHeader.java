@@ -364,7 +364,7 @@ public class CoffSectionHeader implements StructConverter {
 	@Override
 	public String toString() {
 		StringBuilder buffer = new StringBuilder();
-		buffer.append(getName());
+		buffer.append(s_name);
 		buffer.append(' ');
 		buffer.append("PhysAddr:0x").append(Integer.toHexString(s_paddr));
 		buffer.append(' ');

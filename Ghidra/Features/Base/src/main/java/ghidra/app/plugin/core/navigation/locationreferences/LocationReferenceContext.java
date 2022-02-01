@@ -102,7 +102,7 @@ public class LocationReferenceContext {
 		for (Part part : parts) {
 			buffy.append(part.getHtmlText());
 		}
-		return HTMLUtilities.HTML + buffy.toString();
+		return HTMLUtilities.HTML + buffy;
 	}
 
 	/**

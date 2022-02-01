@@ -65,7 +65,7 @@ public enum OatClassStatusEnum_L_M_N implements OatClassStatusEnum {
 	@Override
 	public OatClassStatusEnum get(short value) {
 		for (OatClassStatusEnum_L_M_N valueX : values()) {
-			if (valueX.getValue() == value) {
+			if (valueX.value == value) {
 				return valueX;
 			}
 		}
@@ -76,7 +76,7 @@ public enum OatClassStatusEnum_L_M_N implements OatClassStatusEnum {
 	public DataType toDataType() throws DuplicateNameException, IOException {
 		EnumDataType enumDataType = new EnumDataType(OatClassStatusEnum_L_M_N.class.getSimpleName(), 2);
 		for (OatClassStatusEnum_L_M_N valueX : values()) {
-			enumDataType.add(valueX.name(), valueX.getValue());
+			enumDataType.add(valueX.name(), valueX.value);
 		}
 		enumDataType.setCategoryPath(new CategoryPath("/oat"));
 		return enumDataType;

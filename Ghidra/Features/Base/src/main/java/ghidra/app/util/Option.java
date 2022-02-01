@@ -200,7 +200,7 @@ public class Option {
 				else {
 					if (addressFactory == null) {
 						throw new RuntimeException("Attempted to use Address type option (" +
-							getName() + ") without specifying Address Factory");
+                                name + ") without specifying Address Factory");
 					}
 					newAddr = addressFactory.getDefaultAddressSpace().getAddress(str);
 				}

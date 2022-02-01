@@ -331,7 +331,7 @@ public class PcodeBlock {
 			if (leaf == null) {
 				return -1;
 			}
-			leaf = leaf.getParent();
+			leaf = leaf.parent;
 			depth += 1;
 		}
 		return depth;

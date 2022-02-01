@@ -2205,7 +2205,7 @@ public class ProgramDiffDetails {
 						// handle any unrecognized property below after checking all types.
 					}
 					if (objProp != null) {
-						buf.append(indent2).append(propertyName).append(": ").append(objProp.toString()).append(newLine);
+						buf.append(indent2).append(propertyName).append(": ").append(objProp).append(newLine);
 						continue;
 					}
 					// Void property

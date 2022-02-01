@@ -172,7 +172,7 @@ public class ObjectiveC2_Category implements StructConverter {
 	}
 
 	public void applyTo() throws Exception {
-		Address address = ObjectiveC1_Utilities.toAddress(_state.program, getIndex());
+		Address address = ObjectiveC1_Utilities.toAddress(_state.program, _index);
 
 		try {
 			ObjectiveC1_Utilities.applyData(_state.program, toDataType(), address);
@@ -181,7 +181,7 @@ public class ObjectiveC2_Category implements StructConverter {
 
 		try {
 			Namespace categoryNamespace = ObjectiveC1_Utilities.createNamespace(_state.program, ObjectiveC1_Constants.NAMESPACE, ObjectiveC2_Category.NAME);
-			ObjectiveC1_Utilities.createSymbol(_state.program, categoryNamespace, getName(), address);
+			ObjectiveC1_Utilities.createSymbol(_state.program, categoryNamespace, name, address);
 		}
 		catch (Exception e) {}
 

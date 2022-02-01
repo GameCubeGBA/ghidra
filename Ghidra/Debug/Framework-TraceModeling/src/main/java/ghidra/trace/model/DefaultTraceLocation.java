@@ -105,7 +105,7 @@ public class DefaultTraceLocation implements TraceLocation {
 		if (result != 0) {
 			return result;
 		}
-		result = DBTraceUtils.compareRanges(this.getLifespan(), that.getLifespan());
+		result = DBTraceUtils.compareRanges(this.lifespan, that.getLifespan());
 		if (result != 0) {
 			return result;
 		}
