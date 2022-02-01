@@ -210,7 +210,7 @@ public class EnumDataType extends GenericDataType implements Enum {
 	public DataType copy(DataTypeManager dtm) {
 		EnumDataType enumDataType =
 			new EnumDataType(getCategoryPath(), getName(), length, dtm);
-		enumDataType.setDescription(getDescription());
+		enumDataType.description = getDescription();
 		enumDataType.replaceWith(this);
 		return enumDataType;
 	}
@@ -223,7 +223,7 @@ public class EnumDataType extends GenericDataType implements Enum {
 		EnumDataType enumDataType =
 			new EnumDataType(getCategoryPath(), getName(), length, getUniversalID(),
 				getSourceArchive(), getLastChangeTime(), getLastChangeTimeInSourceArchive(), dtm);
-		enumDataType.setDescription(description);
+		enumDataType.description = description;
 		enumDataType.replaceWith(this);
 		return enumDataType;
 	}

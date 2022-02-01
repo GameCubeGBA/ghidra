@@ -177,7 +177,7 @@ public class ProjectDataPasteAction extends ProjectDataCopyCutBaseAction {
 				String action = isCutOperation ? "moved" : "copied";
 
 				Msg.showWarn(getClass(), tree, title,
-					"The following file(s) could not be " + action + ":\n" + sb.toString());
+					"The following file(s) could not be " + action + ":\n" + sb);
 			}
 		}
 	}

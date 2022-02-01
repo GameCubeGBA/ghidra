@@ -288,14 +288,14 @@ public class PropagateExternalParametersAnalyzer extends AbstractAnalyzer {
             }
 
             String paramName = paramInfo.getName();
-            String symbolName = paramName + "_" + referencedAddress.toString();
+            String symbolName = paramName + "_" + referencedAddress;
 
             addSymbol(symbolTable, referencedAddress, symbolName);
 
             String paramText = paramName + " parameter of " + paramInfo.getCalledFunctionName();
             String newComment = paramText + "\n";
             Msg.trace(this, "External Function Call at " + paramAddress + " : " + paramText +
-                    " at " + referencedAddress.toString());
+                    " at " + referencedAddress);
 
             createComment(referencedAddress, newComment, paramInfo);
 

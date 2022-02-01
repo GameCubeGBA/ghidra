@@ -279,10 +279,11 @@ public class DyldCacheDylibExtractor {
 		 * @throws NotFoundException If there was no corresponding DYLIB offset
 		 */
 		private long getPackedOffset(long fileOffset) throws NotFoundException {
-			for (SegmentCommand segment : packedStarts.keySet()) {
-				if (fileOffset >= segment.getFileOffset() &&
+			for (Map.Entry<SegmentCommand, Integer> entry : packedStarts.entrySet()) {
+                SegmentCommand segment = entry.getKey();
+                if (fileOffset >= segment.getFileOffset() &&
 					fileOffset < segment.getFileOffset() + segment.getFileSize()) {
-					return fileOffset - segment.getFileOffset() + packedStarts.get(segment);
+					return fileOffset - segment.getFileOffset() + entry.getValue();
 				}
 			}
 			throw new NotFoundException(

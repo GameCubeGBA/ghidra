@@ -5436,13 +5436,13 @@ public class RecoveredClassHelper {
 			return virtualParentStructures;
 		}
 
-		for (RecoveredClass parentClass : parentClasses) {
+		for (Map.Entry<RecoveredClass, Boolean> entry : parentToBaseTypeMap.entrySet()) {
 
 			monitor.checkCanceled();
 
-			Boolean isVirtualParent = parentToBaseTypeMap.get(parentClass);
+			Boolean isVirtualParent = entry.getValue();
 			if (isVirtualParent) {
-				Structure parentStructure = getClassStructureFromDataTypeManager(parentClass);
+				Structure parentStructure = getClassStructureFromDataTypeManager(entry.getKey());
 				if (parentStructure != null) {
 					virtualParentStructures.add(parentStructure);
 				}
@@ -8146,12 +8146,12 @@ public class RecoveredClassHelper {
 		// iterate over the set of offsets to vftables and either add to undefined area or overwrite
 		// the parent class structures with the class vftable pointer then replace the rest of the
 		// parent structure with its internal components
-		for (Integer offset : classVftableOffsets) {
+		for (Map.Entry<Integer, Address> entry : classOffsetToVftableMap.entrySet()) {
 			monitor.checkCanceled();
 
-			Address vftableAddress = classOffsetToVftableMap.get(offset);
+			Address vftableAddress = entry.getValue();
 
-			int vftableOffset = offset.intValue();
+			int vftableOffset = entry.getKey().intValue();
 
 			DataType classVftablePointer = vfPointerDataTypes.get(vftableAddress);
 

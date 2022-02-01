@@ -101,9 +101,9 @@ public class AboutDomainObjectUtils {
 		}
 		addInfo(aboutPanel, "Readonly:", Boolean.toString(domainFile.isReadOnly()));
 
-        for (String key : metadata.keySet()) {
-            String value = metadata.get(key);
-            addInfo(aboutPanel, key + ":", value);
+        for (Map.Entry<String, String> entry : metadata.entrySet()) {
+            String value = entry.getValue();
+            addInfo(aboutPanel, entry.getKey() + ":", value);
         }
 
 		if (additionalInfo != null && !additionalInfo.isEmpty()) {

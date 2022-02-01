@@ -987,13 +987,13 @@ public class ProgramMerge implements PropertyVisitor {
 	 *
 	 */
 	void reApplyDuplicateEquates() {
-		for (String conflictName : dupEquates.keySet()) {
-			DupEquate dupEquate = dupEquates.get(conflictName);
+		for (Map.Entry<String, DupEquate> entry : dupEquates.entrySet()) {
+			DupEquate dupEquate = entry.getValue();
 			Equate equate = dupEquate.equate;
 			String desiredName = dupEquate.preferredName;
 			try {
 				equate.renameEquate(desiredName);
-				dupEquates.remove(conflictName);
+				dupEquates.remove(entry.getKey());
 			}
 			catch (DuplicateNameException e) {
 				continue; // Leaves it in the hashtable
@@ -1020,12 +1020,12 @@ public class ProgramMerge implements PropertyVisitor {
 	 */
 	String getDuplicateEquatesInfo() {
 		StringBuilder buf = new StringBuilder();
-		for (String conflictName : dupEquates.keySet()) {
-			DupEquate dupEquate = dupEquates.get(conflictName);
+		for (Map.Entry<String, DupEquate> entry : dupEquates.entrySet()) {
+			DupEquate dupEquate = entry.getValue();
 			Equate equate = dupEquate.equate;
 			String desiredName = dupEquate.preferredName;
 			String msg = "Equate '" + desiredName + "' with value of " + equate.getValue() +
-				" renamed to '" + conflictName + "' due to merge conflict.\n";
+				" renamed to '" + entry.getKey() + "' due to merge conflict.\n";
 			buf.append(msg);
 		}
 		return buf.toString();
@@ -1149,12 +1149,13 @@ public class ProgramMerge implements PropertyVisitor {
 		}
 		// Add the references that aren't there yet and those that weren't the same.
 
-		for (Reference originRef : originToResultMap.keySet()) {
-			// Leave fall-through as they are, so the code unit merge can handle them.
+		for (Map.Entry<Reference, Reference> entry : originToResultMap.entrySet()) {
+            Reference originRef = entry.getKey();
+            // Leave fall-through as they are, so the code unit merge can handle them.
 			if (originRef.getReferenceType().isFallthrough()) {
 				continue;
 			}
-			Reference resultRef = originToResultMap.get(originRef);
+			Reference resultRef = entry.getValue();
 			replaceReference(resultRef, originRef);
 		}
 	}
@@ -1230,8 +1231,9 @@ public class ProgramMerge implements PropertyVisitor {
 			originToResultMap.put(origRef, resultRef);
 		}
 		// Add the references that aren't there yet and those that weren't the same.
-		for (Reference originRef : originToResultMap.keySet()) {
-			Reference resultRef = originToResultMap.get(originRef);
+		for (Map.Entry<Reference, Reference> entry : originToResultMap.entrySet()) {
+            Reference originRef = entry.getKey();
+            Reference resultRef = entry.getValue();
 			// Leave fallthroughs as they are, so the code unit merge can handle them.
 			if (originRef.getReferenceType().isFallthrough()) {
 				continue;
@@ -1263,9 +1265,9 @@ public class ProgramMerge implements PropertyVisitor {
 			}
 		}
 		// Add the references that aren't there yet and those that weren't the same.
-		for (Reference originRef : resultsToKeep.keySet()) {
-			Reference resultRef = resultsToKeep.get(originRef);
-			replaceReference(resultRef, originRef);
+		for (Map.Entry<Reference, Reference> entry : resultsToKeep.entrySet()) {
+			Reference resultRef = entry.getValue();
+			replaceReference(resultRef, entry.getKey());
 		}
 	}
 

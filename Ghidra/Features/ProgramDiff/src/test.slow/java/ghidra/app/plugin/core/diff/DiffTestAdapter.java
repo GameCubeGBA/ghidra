@@ -1114,10 +1114,10 @@ public class DiffTestAdapter extends AbstractGhidraHeadedIntegrationTest {
 		AddressSet unexpectedlySelected = currentSelection.subtract(expectedSelection);
 		StringBuilder buf = new StringBuilder();
 		if (!missingFromSelection.isEmpty()) {
-			buf.append("\nSelection expected the following addresses but they are missing: \n").append(missingFromSelection.toString());
+			buf.append("\nSelection expected the following addresses but they are missing: \n").append(missingFromSelection);
 		}
 		if (!unexpectedlySelected.isEmpty()) {
-			buf.append("\nSelection unexpectedly contains the following addresses: \n").append(unexpectedlySelected.toString());
+			buf.append("\nSelection unexpectedly contains the following addresses: \n").append(unexpectedlySelected);
 		}
 		if (buf.length() > 0) {
 			String message = buf.toString();

@@ -868,7 +868,7 @@ public class StringDataInstance {
 					break;
 			}
 		}
-		return prefix + strBuf.toString();
+		return prefix + strBuf;
 	}
 
 	private byte[] getOriginalBytes(boolean isByteToStringCharEquiv, int charOffset, int codePoint,
@@ -1001,7 +1001,7 @@ public class StringDataInstance {
 			}
 			i += Character.charCount(codePoint);
 		}
-		return prefixStr + buffer.toString();
+		return prefixStr + buffer;
 	}
 
 	public String getOffcutLabelString(String prefixStr, String abbrevPrefixStr, String defaultStr,

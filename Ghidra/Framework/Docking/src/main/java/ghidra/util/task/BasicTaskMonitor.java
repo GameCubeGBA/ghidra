@@ -57,7 +57,7 @@ class BasicTaskMonitor implements TaskMonitor {
 
 	@Override
 	public void incrementProgress(long incrementAmount) {
-		setProgress(progress + incrementAmount);
+		progress = progress + incrementAmount;
 	}
 
 	@Override
@@ -95,8 +95,8 @@ class BasicTaskMonitor implements TaskMonitor {
 	@Override
 	public void initialize(long maxValue) {
 		setMaximum(maxValue);
-		setProgress(0);
-		setIndeterminate(false);
+		progress = 0;
+		isIndeterminate = false;
 	}
 
 	@Override

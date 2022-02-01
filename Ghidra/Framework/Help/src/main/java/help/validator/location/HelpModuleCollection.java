@@ -108,7 +108,7 @@ public class HelpModuleCollection implements TOCItemProvider {
 			throw new IllegalArgumentException(
 				"Required TOC file does not exist.  " + "You must create a TOC_Source.xml file, " +
 					"even if it is an empty template, or provide a pre-built TOC.  " +
-					"Help directories: " + locations.toString());
+					"Help directories: " + locations);
 		}
 	}
 

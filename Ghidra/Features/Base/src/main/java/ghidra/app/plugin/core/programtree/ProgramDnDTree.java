@@ -248,7 +248,7 @@ public class ProgramDnDTree extends DragNDropTree {
 			ProgramModule rm = listing.getRootModule(treeName);
 			if (rm != null) {
 				ProgramModule oldRootModule = root.getModule();
-				if (oldRootModule == null || !oldRootModule.equals(rm)) {
+				if (!rm.equals(oldRootModule)) {
 
 					createRootNode(program);
 				}
@@ -936,7 +936,7 @@ public class ProgramDnDTree extends DragNDropTree {
 					for (int k = 0; k < nchild; k++) {
 						ProgramNode child = (ProgramNode) node.getChildAt(k);
 						Group childGroup = child.getGroup();
-						if (childGroup != null && childGroup.equals(group)) {
+						if (group.equals(childGroup)) {
 							alreadyAdded = true;
 							break;
 						}

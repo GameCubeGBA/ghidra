@@ -33,7 +33,7 @@ public class EmulateMemoryStateBuffer implements MemBuffer {
 
 	public EmulateMemoryStateBuffer(MemoryState memState, Address addr) {
 		this.memState = memState;
-		setAddress(addr);
+		address = addr;
 	}
 
 	public void setAddress(Address addr) {

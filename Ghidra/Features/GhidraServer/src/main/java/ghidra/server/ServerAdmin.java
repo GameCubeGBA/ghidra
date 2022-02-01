@@ -222,7 +222,7 @@ public class ServerAdmin implements GhidraLaunchable {
 			}
 		}
 
-		if (cmdList.size() != 0) {
+		if (!cmdList.isEmpty()) {
 			try {
 				CommandProcessor.writeCommands(cmdList, cmdDir);
 			}

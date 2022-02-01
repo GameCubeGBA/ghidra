@@ -114,9 +114,9 @@ class ListingDisplaySearchAddressIterator {
 	}
 
 	private Address maybePushIteratorsForward() {
-		Set<SearchAddressIterator> keys = lastAddressMap.keySet();
-		for (SearchAddressIterator iterator : keys) {
-			Address current = lastAddressMap.get(iterator);
+        for (Map.Entry<SearchAddressIterator, Address> entry : lastAddressMap.entrySet()) {
+            SearchAddressIterator iterator = entry.getKey();
+            Address current = entry.getValue();
 			if (isGreaterThanLastAddress(current)) {
 				continue; // last value for this iterator is still good--don't move forward
 			}

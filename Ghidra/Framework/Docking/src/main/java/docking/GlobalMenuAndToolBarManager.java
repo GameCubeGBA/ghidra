@@ -55,10 +55,11 @@ public class GlobalMenuAndToolBarManager implements DockingWindowListener {
 	}
 
 	public void addAction(DockingActionIf action) {
-		for (WindowNode node : windowToActionManagerMap.keySet()) {
-			Set<Class<?>> contextTypes = node.getContextTypes();
+		for (Map.Entry<WindowNode, WindowActionManager> entry : windowToActionManagerMap.entrySet()) {
+            WindowNode node = entry.getKey();
+            Set<Class<?>> contextTypes = node.getContextTypes();
 			if (action.shouldAddToWindow(node instanceof RootNode, contextTypes)) {
-				WindowActionManager windowActionManager = windowToActionManagerMap.get(node);
+				WindowActionManager windowActionManager = entry.getValue();
 				windowActionManager.addAction(action);
 			}
 		}
@@ -176,12 +177,13 @@ public class GlobalMenuAndToolBarManager implements DockingWindowListener {
 		Set<DockingActionIf> focusedWindowActions = getWindowActions(focusedWindowNode);
 
 		ActionContext globalContext = windowManager.getDefaultToolContext();
-		for (WindowNode windowNode : windowToActionManagerMap.keySet()) {
-			if (windowNode == focusedWindowNode) {
+		for (Map.Entry<WindowNode, WindowActionManager> entry : windowToActionManagerMap.entrySet()) {
+            WindowNode windowNode = entry.getKey();
+            if (windowNode == focusedWindowNode) {
 				continue; // the focused window will be called after this loop later
 			}
 
-			WindowActionManager actionManager = windowToActionManagerMap.get(windowNode);
+			WindowActionManager actionManager = entry.getValue();
 			ActionContext localContext = getContext(windowNode);
 			actionManager.contextChanged(globalContext, localContext, focusedWindowActions);
 		}

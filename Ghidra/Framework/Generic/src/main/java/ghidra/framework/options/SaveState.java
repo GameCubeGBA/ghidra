@@ -510,8 +510,9 @@ public class SaveState {
 	 */
 	public Element saveToXml() {
 		Element root = new Element(saveStateName);
-        for (String key : map.keySet()) {
-            Object value = map.get(key);
+        for (Map.Entry<String, Object> entry : map.entrySet()) {
+            String key = entry.getKey();
+            Object value = entry.getValue();
             Element elem = null;
             if (value instanceof Element) {
                 elem = createElementFromElement(key, (Element) value);
@@ -623,8 +624,9 @@ public class SaveState {
 		JsonObject types = new JsonObject();
 		JsonObject values = new JsonObject();
 		JsonObject enumClasses = new JsonObject();
-        for (String key : map.keySet()) {
-            Object value = map.get(key);
+        for (Map.Entry<String, Object> entry : map.entrySet()) {
+            String key = entry.getKey();
+            Object value = entry.getValue();
             if (value == null) {
                 types.addProperty(key, "null");
                 values.addProperty(key, "null");

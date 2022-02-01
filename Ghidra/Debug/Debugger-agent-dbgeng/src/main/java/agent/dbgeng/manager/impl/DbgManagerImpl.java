@@ -176,10 +176,10 @@ public class DbgManagerImpl implements DbgManager {
 				throw new IllegalArgumentException("There is no process with id " + id);
 			}
 			Set<DebugThreadId> toRemove = new HashSet<>();
-			for (DebugThreadId tid : threads.keySet()) {
-				DbgThreadImpl thread = threads.get(tid);
+			for (Map.Entry<DebugThreadId, DbgThreadImpl> entry : threads.entrySet()) {
+				DbgThreadImpl thread = entry.getValue();
 				if (thread.getProcess().getId().equals(id)) {
-					toRemove.add(tid);
+					toRemove.add(entry.getKey());
 				}
 			}
 			for (DebugThreadId tid : toRemove) {
@@ -1353,7 +1353,7 @@ public class DbgManagerImpl implements DbgManager {
 	}
 
 	public CompletableFuture<?> attachKernel(Map<String, ?> args) {
-		setKernelMode(true);
+		kernelMode = true;
 		return execute(new DbgAttachKernelCommand(this, args));
 	}
 
@@ -1521,7 +1521,7 @@ public class DbgManagerImpl implements DbgManager {
 			//String prompt = command.isEmpty() ? DbgModelTargetInterpreter.DBG_PROMPT : ">>>";
 			//getEventListeners().fire.promptChanged(prompt);
 			continuation.complete(command);
-			setContinuation(null);
+			continuation = null;
 			return AsyncUtils.NIL;
 		}
 		return execute(

@@ -119,7 +119,7 @@ public abstract class CachingSwingWorker<T> implements CachingLoader<T> {
 
 		value = waitForValue(swingWorker);
 		worker = null;
-		setCachedValue(value);
+		cachedValue = value;
 		return value;
 	}
 

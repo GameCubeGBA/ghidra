@@ -108,7 +108,7 @@ public class TableColumnModelState implements SortListener {
 		// model has been loaded by then.
 		DockingWindowManager.registerComponentLoadedListener(table, (windowManager, provider) -> {
 			if (!enabled) {
-				setEnabled(true);
+				enabled = true;
 				restoreState();
 			}
 		});

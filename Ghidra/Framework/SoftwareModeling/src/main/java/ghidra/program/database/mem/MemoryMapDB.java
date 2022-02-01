@@ -1924,7 +1924,7 @@ public class MemoryMapDB implements Memory, ManagerDB, LiveMemoryListener {
 				"Invalid memory address for block: " + start.toString(true));
 		}
 		AddressSpace mySpace = addrMap.getAddressFactory().getAddressSpace(space.getName());
-		if (mySpace == null || !mySpace.equals(space)) {
+		if (!space.equals(mySpace)) {
 			throw new IllegalArgumentException(
 				"Block may not be created with unrecognized address space");
 		}

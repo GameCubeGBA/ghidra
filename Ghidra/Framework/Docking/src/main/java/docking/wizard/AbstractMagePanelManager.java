@@ -104,7 +104,7 @@ public abstract class AbstractMagePanelManager<T> implements PanelManager {
 		for (MagePanel<T> panel : getPanels()) {
 			panel.initialize();
 		}
-		setCurrentIndex(-1);
+		currentIndex = -1;
 		panelPath.clear();
 		statusMessage = null;
 		initializeHook();
@@ -192,7 +192,7 @@ public abstract class AbstractMagePanelManager<T> implements PanelManager {
 			MagePanel<T> panel = panels.get(0);
 			panel.getPanelDisplayabilityAndUpdateState(state);
 			panel.enterPanel(state);
-			setCurrentIndex(0);
+			currentIndex = 0;
 			return panel;
 		}
 		finally {
@@ -215,7 +215,7 @@ public abstract class AbstractMagePanelManager<T> implements PanelManager {
 			if (displayability == WizardPanelDisplayability.MUST_BE_DISPLAYED ||
 				displayability == WizardPanelDisplayability.CAN_BE_DISPLAYED) {
 				panel.enterPanel(state);
-				setCurrentIndex(index);
+				currentIndex = index;
 				return panel;
 			}
 			++index;
@@ -280,7 +280,7 @@ public abstract class AbstractMagePanelManager<T> implements PanelManager {
 			int previousIndex = panelPath.pop();
 			MagePanel<T> panel = getPanels().get(previousIndex);
 			panel.enterPanel(state);
-			setCurrentIndex(previousIndex);
+			currentIndex = previousIndex;
 			return panel;
 		}
 		return null;

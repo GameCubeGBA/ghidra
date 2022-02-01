@@ -70,9 +70,9 @@ public class ComplexityDepthModularizationCmd extends AbstractModularizationCmd 
 		for (int i = 0; i <= maxLevel; i++) {
 			levelList.add(new ArrayList<CodeBlockVertex>());
 		}
-		for (CodeBlockVertex v : levelMap.keySet()) {
-			int reverseLevel = maxLevel - levelMap.get(v);
-			levelList.get(reverseLevel).add(v);
+		for (Map.Entry<CodeBlockVertex, Integer> entry : levelMap.entrySet()) {
+			int reverseLevel = maxLevel - entry.getValue();
+			levelList.get(reverseLevel).add(entry.getKey());
 		}
 		for (List<CodeBlockVertex> list : levelList) {
 			Collections.sort(list);

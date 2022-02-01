@@ -592,9 +592,9 @@ class RecoveryFile {
 		recoveryFile.clearParameters();
 
 		// Restore recovery parameters
-        for (String name : recoveryProps.keySet()) {
+        for (Map.Entry<String, Integer> entry : recoveryProps.entrySet()) {
             recoveryFile.setParameter(
-                    name, recoveryProps.get(name).intValue());
+                    entry.getKey(), entry.getValue().intValue());
         }
 	}
 

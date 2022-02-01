@@ -64,7 +64,7 @@ public class RenameStructMembers extends GhidraScript {
 
                 // rename matching component
                 String fieldName = dtc.getFieldName();
-                if ((fieldName != null) && (fieldName.equals(curName))) {
+                if (curName.equals(fieldName)) {
                     println(s.getName() + "::" + fieldName);
                     dtc.setFieldName(newName);
                     memberCount = memberCount + 1;

@@ -765,7 +765,7 @@ public class DynamicHash {
 					DynamicHash dynamicHash = new DynamicHash(op, i);
 					tmp[count] = dynamicHash.getHash();
 					if (tmp[count] != 0) {
-						count += 1;
+						count ++;
 					}
 				}
 			}

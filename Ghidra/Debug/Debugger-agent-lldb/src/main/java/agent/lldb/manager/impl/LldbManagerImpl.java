@@ -1457,7 +1457,7 @@ public class LldbManagerImpl implements LldbManager {
 	}
 
 	public CompletableFuture<?> attachKernel(Map<String, ?> args) {
-		setKernelMode(true);
+		kernelMode = true;
 		return execute(new LldbAttachKernelCommand(this, args));
 	}
 
@@ -1572,7 +1572,7 @@ public class LldbManagerImpl implements LldbManager {
 			String prompt = command.isEmpty() ? LldbModelTargetInterpreter.LLDB_PROMPT : ">>>";
 			listenersEvent.fire.promptChanged(prompt);
 			continuation.complete(command);
-			setContinuation(null);
+			continuation = null;
 			return AsyncUtils.NIL;
 		}
 		return execute(

@@ -387,7 +387,7 @@ public class AddEditDialog extends DialogComponentProvider {
 
 		// functions and labels in functions will use the local namespace
 		if (functionSymbol != null) {
-			if (symbol != null && symbol.equals(functionSymbol)) {
+			if (functionSymbol.equals(symbol)) {
 				namespaceChoices.setSelectedItem(
                         new NamespaceWrapper(functionSymbol.getParentNamespace()));
 			}

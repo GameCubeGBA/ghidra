@@ -259,7 +259,7 @@ public class HeadlessOptions {
 	 */
 	public void setScriptDirectories(String paths) {
 		String[] pathArray = paths.split(";");
-		setScriptDirectories(Arrays.asList(pathArray));
+		scriptPaths = Arrays.asList(pathArray);
 	}
 
 	/**
@@ -300,7 +300,7 @@ public class HeadlessOptions {
 	 */
 	public void setPropertiesFileDirectories(String paths) {
 		String[] pathArray = paths.split(";");
-		setPropertiesFileDirectories(Arrays.asList(pathArray));
+		propertiesFileStrPaths = Arrays.asList(pathArray);
 	}
 
 	/**

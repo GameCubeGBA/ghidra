@@ -104,11 +104,10 @@ public class ContextRegisterFilterInputDialog extends InputDialogComponentProvid
 			return null;
 		}
 		ContextRegisterFilter registerFilter = new ContextRegisterFilter();
-		for (String currentRegister : regsToBoxes.keySet()) {
-			BigInteger value = ((RegisterValueWrapper) regsToBoxes.get(
-				currentRegister).getSelectedItem()).getValue();
+		for (Map.Entry<String, GhidraComboBox<RegisterValueWrapper>> entry : regsToBoxes.entrySet()) {
+			BigInteger value = ((RegisterValueWrapper) entry.getValue().getSelectedItem()).getValue();
 			if (value != null) {
-				registerFilter.addRegAndValueToFilter(currentRegister, value);
+				registerFilter.addRegAndValueToFilter(entry.getKey(), value);
 			}
 		}
 		return registerFilter;

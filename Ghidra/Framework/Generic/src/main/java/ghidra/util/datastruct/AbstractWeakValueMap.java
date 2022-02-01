@@ -112,10 +112,10 @@ public abstract class AbstractWeakValueMap<K, V> implements Map<K, V> {
 
 	@Override
 	public void putAll(Map<? extends K, ? extends V> map) {
-        for (K key : map.keySet()) {
-            V value = map.get(key);
+        for (Entry<? extends K, ? extends V> entry : map.entrySet()) {
+            V value = entry.getValue();
             if (value != null) {
-                put(key, value);
+                put(entry.getKey(), value);
             }
         }
 	}

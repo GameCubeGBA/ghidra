@@ -195,7 +195,7 @@ public class MachoProcessBindScript extends GhidraScript {
 			}
 			buffer.append( (char) ( b & 0xff ) );
 		}
-		System.out.println( buffer.toString() );
+		System.out.println(buffer);
 		return buffer.toString();
 	}
 

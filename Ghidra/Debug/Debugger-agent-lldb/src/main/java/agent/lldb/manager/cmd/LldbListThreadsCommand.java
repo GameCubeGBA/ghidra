@@ -36,11 +36,11 @@ public class LldbListThreadsCommand extends AbstractLldbCommand<Map<String, SBTh
 	public Map<String, SBThread> complete(LldbPendingCommand<?> pending) {
 		Map<String, SBThread> threads = manager.getKnownThreads(process);
 		Set<String> cur = threads.keySet();
-		for (String id : updatedThreadIds.keySet()) {
-			if (cur.contains(id)) {
+		for (Map.Entry<String, SBThread> entry : updatedThreadIds.entrySet()) {
+			if (cur.contains(entry.getKey())) {
 				continue; // Do nothing, we're in sync
 			}
-			manager.addThreadIfAbsent(process, updatedThreadIds.get(id));
+			manager.addThreadIfAbsent(process, entry.getValue());
 		}
 		for (String id : new ArrayList<>(cur)) {
 			if (updatedThreadIds.containsKey(id)) {

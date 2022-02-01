@@ -384,9 +384,9 @@ public class ToolPluginOptionsTest extends AbstractGhidraHeadedIntegrationTest {
 	private List<String> getDiffs(Map<String, Object> initialValues,
 			Map<String, Object> latestValues) {
 		List<String> diffs = new ArrayList<>();
-		Set<String> keySet = initialValues.keySet();
-		for (String key : keySet) {
-			Object value = initialValues.get(key);
+        for (Map.Entry<String, Object> entry : initialValues.entrySet()) {
+            String key = entry.getKey();
+            Object value = entry.getValue();
 			Object newValue = latestValues.get(key);
 			if (!value.equals(newValue)) {
 				diffs.add(key + " - old:" + value + " - new:" + newValue);

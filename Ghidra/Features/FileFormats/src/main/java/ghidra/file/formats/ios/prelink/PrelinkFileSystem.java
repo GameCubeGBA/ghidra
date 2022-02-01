@@ -153,7 +153,7 @@ public class PrelinkFileSystem extends GFileSystemBase implements GFileSystemPro
 			}
 		}
 
-		if (kernelCacheDirectory != null && kernelCacheDirectory.equals(directory)) {
+		if (directory.equals(kernelCacheDirectory)) {
 			List<Long> list = new ArrayList<>(unnamedMachoFileMap.keySet());
 			Collections.sort(list);
 			for (long offset : list) {
@@ -261,9 +261,10 @@ public class PrelinkFileSystem extends GFileSystemBase implements GFileSystemPro
 		BidiMap<PrelinkMap, Long> map = MachoPrelinkUtils.matchPrelinkToMachoHeaderOffsets(provider,
 			prelinkList, machoHeaderOffsets, monitor);
 
-		for (PrelinkMap info : map.keySet()) {
+		for (Map.Entry<PrelinkMap, Long> entry : map.entrySet()) {
+            PrelinkMap info = entry.getKey();
 
-			if (monitor.isCancelled()) {
+            if (monitor.isCancelled()) {
 				break;
 			}
 			monitor.incrementProgress(1);
@@ -287,14 +288,15 @@ public class PrelinkFileSystem extends GFileSystemBase implements GFileSystemPro
 				continue;
 			}
 
-			fileToMachoOffsetMap.put(file, map.get(info));
+			fileToMachoOffsetMap.put(file, entry.getValue());
 		}
 	}
 
 	private void processSystemKext(LanguageService languageService, Program systemProgram,
 			TaskMonitor monitor) throws Exception {
-		for (GFile file : fileToPrelinkInfoMap.keySet()) {
-			if (monitor.isCancelled()) {
+		for (Map.Entry<GFile, PrelinkMap> entry : fileToPrelinkInfoMap.entrySet()) {
+            GFile file = entry.getKey();
+            if (monitor.isCancelled()) {
 				break;
 			}
 
@@ -302,7 +304,7 @@ public class PrelinkFileSystem extends GFileSystemBase implements GFileSystemPro
 				continue;
 			}
 
-			PrelinkMap prelinkMap = fileToPrelinkInfoMap.get(file);
+			PrelinkMap prelinkMap = entry.getValue();
 			if (prelinkMap == null || prelinkMap.getPrelinkExecutableLoadAddr() == -1) {
 				continue;
 			}

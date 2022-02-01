@@ -394,10 +394,10 @@ public class HistoryList<T> {
 			}
 
 			if (i == historyIndex) {
-				buffy.append('[').append(t.toString()).append(']');
+				buffy.append('[').append(t).append(']');
 			}
 			else {
-				buffy.append(t.toString());
+				buffy.append(t);
 			}
 
 			if (i != historyStack.size() - 1) {
@@ -407,7 +407,7 @@ public class HistoryList<T> {
 
 		//@formatter:off
 		return "{\n" +
-			key + buffy.toString() + "\n" + 
+			key + buffy + "\n" +
 		"}";
 		//@formatter:on				
 	}

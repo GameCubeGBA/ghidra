@@ -296,7 +296,7 @@ public class AddressMapImpl {
 				OverlayAddressSpace oldOverlaySpace =
 					((ObsoleteOverlaySpace) space).getOriginalSpace();
 				AddressSpace curSpace = addrFactory.getAddressSpace(oldOverlaySpace.getName());
-				if (curSpace != null && curSpace.equals(oldOverlaySpace)) {
+				if (oldOverlaySpace.equals(curSpace)) {
 					remapSpaces.put(space.getName(), (OverlayAddressSpace) curSpace);
 					iter.remove();
 				}
@@ -304,7 +304,7 @@ public class AddressMapImpl {
 			else if (space instanceof OverlayAddressSpace) {
 				// check for removed space
 				AddressSpace curSpace = addrFactory.getAddressSpace(space.getName());
-				if (curSpace == null || !curSpace.equals(space)) {
+				if (!space.equals(curSpace)) {
 					ObsoleteOverlaySpace obsoleteSpace =
 						new ObsoleteOverlaySpace((OverlayAddressSpace) space);
 					remapSpaces.put(space.getName(), obsoleteSpace);
