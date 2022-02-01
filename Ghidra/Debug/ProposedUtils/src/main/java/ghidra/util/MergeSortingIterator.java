@@ -113,7 +113,7 @@ public class MergeSortingIterator<T> implements PeekableIterator<T> {
 			Map<L, ? extends Iterator<? extends T>> iterMap, Comparator<T> comparator) {
 		Collection<LabeledIterator<L, T>> iterators =
 			Collections2.transform(iterMap.entrySet(), LabeledIterator::create);
-		Comparator<Entry<L, T>> comp = Comparator.comparing(Entry::getValue, comparator);
+		Comparator<Entry<L, T>> comp = Entry.comparingByValue(comparator);
 		return new MergeSortingIterator<Map.Entry<L, T>>(iterators, comp);
 	}
 

@@ -451,7 +451,7 @@ public class ExternalReferencesProvider extends ComponentProviderAdapter {
 				// there are lots of empty path values. 
 				Comparator<ExternalNamesRow> c1 =
                         Comparator.comparing(r -> Objects.requireNonNullElse(r.getPath(), ""));
-				return c1.thenComparing(Comparator.comparing(ExternalNamesRow::getName));
+				return c1.thenComparing(ExternalNamesRow::getName);
 			}
 			return super.createSortComparator(columnIndex);
 		}
