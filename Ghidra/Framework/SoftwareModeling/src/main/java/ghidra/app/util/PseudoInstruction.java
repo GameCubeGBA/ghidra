@@ -22,6 +22,7 @@ package ghidra.app.util;
 
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Objects;
 
 import ghidra.program.model.address.*;
 import ghidra.program.model.lang.*;
@@ -486,12 +487,7 @@ public class PseudoInstruction extends PseudoCodeUnit implements Instruction, In
 		if (SystemUtilities.isEqual(addr, getDefaultFallThrough())) {
 			fallThroughOverride = null;
 		}
-		else if (addr == null) {
-			fallThroughOverride = Address.NO_ADDRESS;
-		}
-		else {
-			fallThroughOverride = addr;
-		}
+		else fallThroughOverride = Objects.requireNonNullElse(addr, Address.NO_ADDRESS);
 	}
 
 	@Override

@@ -1132,9 +1132,7 @@ public final class FileUtilities {
 	public static List<String> pathToParts(String path) {
 		String[] parts = path.split("\\\\|/");
 		List<String> list = new ArrayList<>(parts.length);
-		for (String part : parts) {
-			list.add(part);
-		}
+        list.addAll(Arrays.asList(parts));
 		return list;
 	}
 

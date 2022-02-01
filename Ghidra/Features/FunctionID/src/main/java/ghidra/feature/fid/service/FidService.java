@@ -66,12 +66,8 @@ public class FidService {
 			try {
 				InstructionSkipper skipper = clazz.getConstructor().newInstance();
 				Processor processor = skipper.getApplicableProcessor();
-				List<InstructionSkipper> list = skippers.get(processor);
-				if (list == null) {
-					list = new ArrayList<>();
-					skippers.put(processor, list);
-				}
-				list.add(skipper);
+                List<InstructionSkipper> list = skippers.computeIfAbsent(processor, k -> new ArrayList<>());
+                list.add(skipper);
 			}
 			catch (InstantiationException | InvocationTargetException | NoSuchMethodException | IllegalAccessException e) {
 				// we tried

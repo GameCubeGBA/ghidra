@@ -128,9 +128,7 @@ public class LayoutLocationMap<V, E> {
 	public Collection<Column> columns() {
 		List<Column> result = new ArrayList<>();
 		Collection<Column> values = columnsByIndex.values();
-		for (Column column : values) {
-			result.add(column);
-		}
+        result.addAll(values);
 		return result;
 	}
 
@@ -142,9 +140,7 @@ public class LayoutLocationMap<V, E> {
 	public Collection<Row<V>> rows() {
 		List<Row<V>> results = new ArrayList<>();
 		Collection<Row<V>> values = rowsByIndex.values();
-		for (Row<V> row : values) {
-			results.add(row);
-		}
+        results.addAll(values);
 		return results;
 	}
 

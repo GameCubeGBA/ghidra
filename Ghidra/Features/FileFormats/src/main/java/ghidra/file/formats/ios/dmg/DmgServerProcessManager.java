@@ -66,13 +66,9 @@ class DmgServerProcessManager implements Closeable {
 		this.file = file;
 		this.logPrefix = logPrefix;
 
-		dmgServerMemoryMB = readDMGServerMemoryConfigValue(1024);
+		dmgServerMemoryMB = readDMGServerMemoryConfigValue();
 		cmdThread = new Thread(this::processManagerLoop, "DMG client/server command loop");
 		cmdThread.start();
-	}
-
-	public void setDMGServerMemoryMB(int mb) {
-		this.dmgServerMemoryMB = mb;
 	}
 
 	@Override
@@ -276,19 +272,19 @@ class DmgServerProcessManager implements Closeable {
 		return builder.toString();
 	}
 
-	private int readDMGServerMemoryConfigValue(int defaultValue) {
+	private int readDMGServerMemoryConfigValue() {
 		ResourceFile dmgModule = Application.getModuleRootDir(DMG_MODULE_NAME);
 		ResourceFile serverMemoryCfgFile = new ResourceFile(dmgModule, "data/server_memory.cfg");
 		try {
 			List<String> lines = FileUtilities.getLines(serverMemoryCfgFile);
             return (!lines.isEmpty())
                     ? Math.max(Integer.parseInt(lines.get(0)), MIN_DMG_SERVER_MEMORY_MB)
-                    : defaultValue;
+                    : 1024;
 		}
 		catch (NumberFormatException | IOException e) {
 			// ignore
 		}
-		return defaultValue;
+		return 1024;
 	}
 
 	private String[] buildEnvironmentVariables() {

@@ -84,25 +84,13 @@ public class QueryOpinionService {
 
 	static void addQuery(String loader, String primary, String secondary,
 			LanguageCompilerSpecQuery query) {
-		Map<String, Map<String, Set<QueryResult>>> loadersByName = DATABASE.get(loader);
-		if (loadersByName == null) {
-			loadersByName = new HashMap<>();
-			DATABASE.put(loader, loadersByName);
-		}
+        Map<String, Map<String, Set<QueryResult>>> loadersByName = DATABASE.computeIfAbsent(loader, k -> new HashMap<>());
 
-		Map<String, Set<QueryResult>> loaders = loadersByName.get(primary);
-		if (loaders == null) {
-			loaders = new HashMap<>();
-			loadersByName.put(primary, loaders);
-		}
+        Map<String, Set<QueryResult>> loaders = loadersByName.computeIfAbsent(primary, k -> new HashMap<>());
 
-		Set<QueryResult> specs = loaders.get(secondary);
-		if (specs == null) {
-			specs = new HashSet<>();
-			loaders.put(secondary, specs);
-		}
+        Set<QueryResult> specs = loaders.computeIfAbsent(secondary, k -> new HashSet<>());
 
-		LanguageCompilerSpecQuery broadQuery = new LanguageCompilerSpecQuery(query.processor,
+        LanguageCompilerSpecQuery broadQuery = new LanguageCompilerSpecQuery(query.processor,
 			query.endian, query.size, query.variant, null);
 		List<LanguageCompilerSpecPair> pairs =
 			languageService.getLanguageCompilerSpecPairs(broadQuery);

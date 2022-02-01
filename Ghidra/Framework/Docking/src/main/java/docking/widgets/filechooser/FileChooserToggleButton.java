@@ -19,6 +19,7 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.util.Objects;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -138,12 +139,7 @@ public class FileChooserToggleButton extends JToggleButton {
 		}
 		
 	    private void restoreBorder() {
-	        if ( defaultBorder != null ) {
-                setBorder(defaultBorder);
-            }           
-            else {
-                setBorder( NO_BORDER );
-            }
+			setBorder(Objects.requireNonNullElse(defaultBorder, NO_BORDER));
 	    }
 	}	
 }

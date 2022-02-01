@@ -998,8 +998,7 @@ public class StringUtilities {
 		int inputLength = str.length();
 		int index = 0;
 		while (index < inputLength) {
-			String subOfInput = (index + 2 <= inputLength) ? str.substring(index, index + 2)
-					: str.substring(index, inputLength);
+			String subOfInput = str.substring(index, index + 2 <= inputLength ? index + 2 : inputLength);
 			Character escapeChar = escapeStringToControlMap.get(subOfInput);
 			if (escapeChar != null) {
 				builder.append(escapeChar);

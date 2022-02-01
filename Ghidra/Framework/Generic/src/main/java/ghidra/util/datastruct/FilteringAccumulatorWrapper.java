@@ -60,11 +60,7 @@ public class FilteringAccumulatorWrapper<T> implements Accumulator<T> {
 
 	@Override
 	public void addAll(Collection<T> collection) {
-		collection.forEach(t -> {
-			if (passesFilter(t)) {
-				accumulator.add(t);
-			}
-		});
+		collection.stream().filter(this::passesFilter).forEach(t -> accumulator.add(t));
 	}
 
 	@Override

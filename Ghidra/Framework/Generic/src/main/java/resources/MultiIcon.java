@@ -17,6 +17,7 @@ package resources;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 import javax.swing.Icon;
@@ -62,9 +63,7 @@ public class MultiIcon implements Icon {
 	 */
 	public MultiIcon(Icon baseIcon, Icon... icons) {
 		this(baseIcon, false);
-		for (Icon icon : icons) {
-			iconList.add(icon);
-		}
+        iconList.addAll(Arrays.asList(icons));
 	}
 
 	/**

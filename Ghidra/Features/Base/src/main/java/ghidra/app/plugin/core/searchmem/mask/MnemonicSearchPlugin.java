@@ -216,7 +216,7 @@ public class MnemonicSearchPlugin extends Plugin {
 	 */
 	private String createMaskedBitString(byte[] values, byte[] masks) {
 
-		String bitString = new String();
+		String bitString = "";
 
 		//check that value and mask lengths are equal
 		if (values.length != masks.length) {
@@ -227,16 +227,16 @@ public class MnemonicSearchPlugin extends Plugin {
 		for (int i = 0; i < values.length; i++) {
 			for (int j = 0; j < 8; j++) {
 				if (((masks[i] >> (7 - j)) & 1) == 0) {
-					bitString = bitString.concat(".");
+					bitString = bitString + ".";
 				}
 				else if (((values[i] >> (7 - j)) & 1) == 0) {
-					bitString = bitString.concat("0");
+					bitString = bitString + "0";
 				}
 				else {
-					bitString = bitString.concat("1");
+					bitString = bitString + "1";
 				}
 			}
-			bitString = bitString.concat(" ");
+			bitString = bitString + " ";
 		}
 
 		return bitString;

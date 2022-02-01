@@ -41,12 +41,7 @@ public class QueryOpinionServiceHandler {
             this.primary = (primary == null ? fullQuery.primary : primary);
             this.secondary = (secondary == null ? fullQuery.secondary
                     : secondary);
-            this.query = new LanguageCompilerSpecQuery(query.processor == null ? fullQuery.query.processor
-                    : query.processor, query.endian == null ? fullQuery.query.endian
-                    : query.endian, query.size == null ? fullQuery.query.size
-                    : query.size, query.variant == null ? fullQuery.query.variant
-                    : query.variant, query.compilerSpecID == null ? fullQuery.query.compilerSpecID
-                    : query.compilerSpecID
+            this.query = new LanguageCompilerSpecQuery((query.processor == null ? fullQuery.query : query).processor, (query.endian == null ? fullQuery.query : query).endian, (query.size == null ? fullQuery.query : query).size, (query.variant == null ? fullQuery.query : query).variant, (query.compilerSpecID == null ? fullQuery.query : query).compilerSpecID
 
             );
         }

@@ -256,12 +256,8 @@ class DetachedWindowNode extends WindowNode {
 			new HashMap<>();
 		for (ComponentPlaceholder placeholder : placeholders) {
 			String providerName = placeholder.getProvider().getName();
-			List<ComponentPlaceholder> list = providerNameToPlacholdersMap.get(providerName);
-			if (list == null) {
-				list = new ArrayList<>();
-				providerNameToPlacholdersMap.put(providerName, list);
-			}
-			list.add(placeholder);
+            List<ComponentPlaceholder> list = providerNameToPlacholdersMap.computeIfAbsent(providerName, k -> new ArrayList<>());
+            list.add(placeholder);
 		}
 
 		//

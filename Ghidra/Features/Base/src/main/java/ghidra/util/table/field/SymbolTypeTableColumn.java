@@ -39,8 +39,7 @@ public class SymbolTypeTableColumn
 
 		if (rowObject instanceof VariableLocation) {
 			VariableLocation varLoc = (VariableLocation) rowObject;
-			return varLoc.isParameter() ? SymbolType.PARAMETER.toString()
-					: SymbolType.LOCAL_VAR.toString();
+			return (varLoc.isParameter() ? SymbolType.PARAMETER : SymbolType.LOCAL_VAR).toString();
 		}
 
 		SymbolTable symbolTable = program.getSymbolTable();

@@ -17,6 +17,7 @@ package docking.widgets.dialogs;
 
 import java.awt.BorderLayout;
 import java.math.BigInteger;
+import java.util.Objects;
 
 import javax.swing.*;
 
@@ -283,12 +284,7 @@ public abstract class AbstractNumberInputDialog extends DialogComponentProvider 
 		BigInteger value = numberInputField.getValue();
 		if (value == null) {
 			setOkEnabled(false);
-			if (defaultMessage != null) {
-				setStatusText(defaultMessage);
-			}
-			else {
-				setStatusText("Enter a value between " + min + " and " + max);
-			}
+			setStatusText(Objects.requireNonNullElseGet(defaultMessage, () -> "Enter a value between " + min + " and " + max));
 			return;
 		}
 		setOkEnabled(checkInput());

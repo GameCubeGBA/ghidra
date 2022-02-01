@@ -42,8 +42,7 @@ public class LcsHintLoadSpecChooser implements LoadSpecChooser {
 	public LcsHintLoadSpecChooser(Language language, CompilerSpec compilerSpec) {
 		this.languageID = language.getLanguageID();
 		this.compilerSpecID =
-			(compilerSpec == null) ? language.getDefaultCompilerSpec().getCompilerSpecID()
-					: compilerSpec.getCompilerSpecID();
+                (compilerSpec == null ? language.getDefaultCompilerSpec() : compilerSpec).getCompilerSpecID();
 	}
 
 	@Override

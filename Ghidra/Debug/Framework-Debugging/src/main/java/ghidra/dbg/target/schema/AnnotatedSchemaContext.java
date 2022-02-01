@@ -301,8 +301,7 @@ public class AnnotatedSchemaContext extends DefaultSchemaContext {
 	}
 
 	protected String attributeNameFromBean(String beanName, boolean isBool) {
-		beanName = isBool ? StringUtils.removeStartIgnoreCase(beanName, "is")
-				: StringUtils.removeStartIgnoreCase(beanName, "get");
+		beanName = StringUtils.removeStartIgnoreCase(beanName, isBool ? "is" : "get");
 		if (beanName.isEmpty()) {
 			throw new IllegalArgumentException("Attribute getter must have a name");
 		}

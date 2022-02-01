@@ -41,7 +41,7 @@ public class NameSymbol extends ValueSymbol {
 	private boolean tableisfilled;
 
 	public List<String> getNameTable() {
-		return Collections.unmodifiableList(Arrays.asList(nametable));
+		return List.of(nametable);
 	}
 
 	private void checkTableFill() {

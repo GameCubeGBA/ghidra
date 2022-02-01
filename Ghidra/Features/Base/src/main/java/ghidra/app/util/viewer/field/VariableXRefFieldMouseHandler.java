@@ -15,6 +15,7 @@
  */
 package ghidra.app.util.viewer.field;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -78,9 +79,7 @@ public class VariableXRefFieldMouseHandler extends XRefFieldMouseHandler {
 		Program program = var.getFunction().getProgram();
 		ReferenceManager refMgr = program.getReferenceManager();
 		Reference[] refs = refMgr.getReferencesTo(var);
-		for (Reference vref : refs) {
-			results.add(vref);
-		}
+        results.addAll(Arrays.asList(refs));
 		return results;
 	}
 }

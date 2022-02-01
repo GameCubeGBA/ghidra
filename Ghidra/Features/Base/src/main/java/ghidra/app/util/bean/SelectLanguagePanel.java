@@ -331,7 +331,7 @@ public class SelectLanguagePanel extends JPanel {
 				}
 				else if (f.startsWith("\"")) {
 					filterType = STARTS_WITH_FILTER;
-					filter = f.substring(1, f.length());
+					filter = f.substring(1);
 				}
 				else if (f.endsWith("\"")) {
 					filterType = ENDS_WITH_FILTER;

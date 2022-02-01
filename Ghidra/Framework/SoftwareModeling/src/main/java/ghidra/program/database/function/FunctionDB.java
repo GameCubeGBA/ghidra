@@ -532,8 +532,7 @@ public class FunctionDB extends DatabaseObject implements Function {
 
 			StringBuilder buf = new StringBuilder();
 			ReturnParameterDB rtn = getReturn();
-			buf.append(formalSignature ? rtn.getFormalDataType().getDisplayName()
-					: rtn.getDataType().getDisplayName());
+			buf.append((formalSignature ? rtn.getFormalDataType() : rtn.getDataType()).getDisplayName());
 			buf.append(" ");
 			if (includeCallingConvention) {
 				String callingConvention = getRealCallingConventionName();
@@ -2784,9 +2783,7 @@ public class FunctionDB extends DatabaseObject implements Function {
 			Address address = addressIterator.next();
 			Reference[] referencesFrom = referenceManager.getReferencesFrom(address);
 			if (referencesFrom != null) {
-				for (Reference reference : referencesFrom) {
-					set.add(reference);
-				}
+                set.addAll(Arrays.asList(referencesFrom));
 			}
 		}
 		return set;

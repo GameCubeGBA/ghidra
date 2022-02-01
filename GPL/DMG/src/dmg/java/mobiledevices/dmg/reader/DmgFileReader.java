@@ -231,9 +231,7 @@ public class DmgFileReader implements Closeable {
 
 		byte [] sizeBytes = new byte[ 4 ];
 		input.read( sizeBytes );
-		int size = sizeBytes[ 0 ] == 0 ? 
-							bedc.getInt( sizeBytes ) : 
-							ledc.getInt( sizeBytes );
+		int size = (sizeBytes[0] == 0 ? bedc : ledc).getInt( sizeBytes );
 
 		byte [] flagsBytes = new byte[ 4 ];
 		input.read( flagsBytes );

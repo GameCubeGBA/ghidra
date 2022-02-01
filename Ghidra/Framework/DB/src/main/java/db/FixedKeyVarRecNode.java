@@ -119,7 +119,7 @@ class FixedKeyVarRecNode extends FixedKeyRecordNode {
 	 * @param state indirect storage used (true) or not used (false)
 	 */
 	private void enableIndirectStorage(int index, boolean state) {
-		buffer.putByte(indirectOptionBaseOffset + (index * entrySize), state ? (byte) 1 : (byte) 0);
+		buffer.putByte(indirectOptionBaseOffset + (index * entrySize), (byte) (state ? 1 : 0));
 	}
 
 	/**

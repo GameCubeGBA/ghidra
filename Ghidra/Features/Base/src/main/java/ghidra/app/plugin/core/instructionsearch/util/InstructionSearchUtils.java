@@ -524,7 +524,7 @@ public class InstructionSearchUtils {
 		if (binStr.length() < 8) {
 			int diff = 8 - binStr.length();
 			for (int i = 0; i < diff; i++) {
-				retString = "0".concat(retString);
+				retString = "0" + retString;
 			}
 		}
 

@@ -671,7 +671,7 @@ public class GhidraScriptTest extends AbstractGhidraHeadedIntegrationTest {
 
 		final GhidraScript script = getScript();
 
-		List<Object> values = Arrays.asList(new JPanel(), new String());
+		List<Object> values = Arrays.asList(new JPanel(), "");
 		List<String> labels = Arrays.asList("Panel", "String");
 
 		AtomicReference<List<Object>> ref = new AtomicReference<>();

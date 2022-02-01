@@ -17,6 +17,8 @@ package mdemangler.naming;
 
 import mdemangler.*;
 
+import java.util.Objects;
+
 /**
  * This class represents one component of a namespace qualification (see
  * MDQualification).
@@ -69,12 +71,7 @@ public class MDQualifier extends MDParsableItem {
 		else if (nameQ != null) {
 			dmang.insertString(builder, nameQ);
 		}
-		else if (nameC != null) {
-			dmang.insertString(builder, nameC);
-		}
-		else {
-			dmang.insertString(builder, UNKNOWN_NAMESPACE);
-		}
+		else dmang.insertString(builder, Objects.requireNonNullElse(nameC, UNKNOWN_NAMESPACE));
 	}
 
 	@Override

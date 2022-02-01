@@ -778,9 +778,7 @@ class DataDB extends CodeUnitDB implements Data {
 		while (iter.hasNext()) {
 			Address fromAddress = iter.next();
 			Reference[] refs = refMgr.getReferencesFrom(fromAddress);
-			for (Reference element : refs) {
-				list.add(element);
-			}
+            list.addAll(Arrays.asList(refs));
 		}
 		return list.toArray(new Reference[0]);
 	}

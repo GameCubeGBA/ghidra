@@ -1126,7 +1126,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 	private List<NodeDepthInfo> getNodesByDepth(boolean incoming, boolean filtered) {
 		List<NodeDepthInfo> list = new ArrayList<>();
 		GTreeNode root =
-			incoming ? getRootNode(incomingTree, filtered) : getRootNode(outgoingTree, filtered);
+                getRootNode(incoming ? incomingTree : outgoingTree, filtered);
 		accumulateNodeDepths(list, root, 0);
 		Collections.sort(list);
 		return list;

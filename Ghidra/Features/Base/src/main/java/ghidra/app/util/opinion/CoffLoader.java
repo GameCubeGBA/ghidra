@@ -576,13 +576,7 @@ public class CoffLoader extends AbstractLibrarySupportLoader {
 			int size = section.getSize(language);
 			if (physicalAddress == 0) {
 				String name = section.getName();
-				Integer s = zeroSectionSizes.get(name);
-				if (s == null) {
-					zeroSectionSizes.put(name, size);
-				}
-				else {
-					zeroSectionSizes.put(name, s + size);
-				}
+                zeroSectionSizes.merge(name, size, Integer::sum);
 				totalSize += size;
 			}
 			else {

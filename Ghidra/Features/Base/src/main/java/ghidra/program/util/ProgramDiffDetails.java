@@ -867,7 +867,7 @@ public class ProgramDiffDetails {
 			StringBuffer buf2, String newIndent) {
 		DataTypeComponent[] compDt1 = dt1.getComponents();
 		DataTypeComponent[] compDt2 = dt2.getComponents();
-		int min = (compDt1.length <= compDt2.length) ? compDt1.length : compDt2.length;
+		int min = (compDt1.length <= compDt2.length ? compDt1 : compDt2).length;
 		int i = 0;
 		for (; i < min; i++) {
 			compareDataTypeComponents(compDt1[i], compDt2[i], buf1, buf2, newIndent);

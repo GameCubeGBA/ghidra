@@ -1821,7 +1821,7 @@ public abstract class GhidraScript extends FlatProgramAPI {
 	private String join(String... input) {
 
 		char separator = ' ';
-		StringBuilder buffy = new StringBuilder("");
+		StringBuilder buffy = new StringBuilder();
 		for (String s : input) {
 			if (s != null) {
 				buffy.append(s.trim()).append(separator);
@@ -2348,11 +2348,9 @@ public abstract class GhidraScript extends FlatProgramAPI {
             return dialog.getValueAsInt();
 		});
 
-		if (choice == null) {
-			return 0; // prevent autoboxing NullPointerException
-		}
-		return choice;
-	}
+        // prevent autoboxing NullPointerException
+        return Objects.requireNonNullElse(choice, 0);
+    }
 
 	/**
 	 * Parses a long from a string.
@@ -2427,11 +2425,9 @@ public abstract class GhidraScript extends FlatProgramAPI {
 			return dialog.getValueAsLong();
 		});
 
-		if (choice == null) {
-			return 0; // prevent auto-boxing NullPointerException
-		}
-		return choice;
-	}
+        // prevent auto-boxing NullPointerException
+        return Objects.requireNonNullElse(choice, 0);
+    }
 
 	/**
 	 * Parses an address from a string.
@@ -2788,12 +2784,10 @@ public abstract class GhidraScript extends FlatProgramAPI {
 			return dialog.getValueAsDouble();
 		});
 
-		if (choice == null) {
-			return 0D; // prevent autoboxing NullPointerException
-		}
+        // prevent autoboxing NullPointerException
+        return Objects.requireNonNullElse(choice, 0D);
 
-		return choice;
-	}
+    }
 
 	/**
 	 * Returns a String, using the String input parameters for guidance. The actual behavior of
@@ -3664,12 +3658,8 @@ public abstract class GhidraScript extends FlatProgramAPI {
 	}
 
 	private Map<Class<?>, Object> getScriptMap(String title, String message) {
-		Map<Class<?>, Object> scriptMap = askMap.get(title + message);
-		if (scriptMap == null) {
-			scriptMap = new HashMap<>();
-			askMap.put(title + message, scriptMap);
-		}
-		return scriptMap;
+        Map<Class<?>, Object> scriptMap = askMap.computeIfAbsent(title + message, k -> new HashMap<>());
+        return scriptMap;
 	}
 
 	private static String zeropad(String s, int len) {

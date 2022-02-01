@@ -47,12 +47,8 @@ class LSHMultiHash<P> {
 	synchronized void add(DominantPair<P, LSHCosineVectorAccum> entry) {
 		int[] hashes = hashes(entry.second);
 		for (int ii = 0; ii < hashes.length; ++ii) {
-			HashSet<DominantPair<P, LSHCosineVectorAccum>> list = maps[ii].get(hashes[ii]);
-			if (list == null) {
-				list = new HashSet<>();
-				maps[ii].put(hashes[ii], list);
-			}
-			list.add(entry);
+            HashSet<DominantPair<P, LSHCosineVectorAccum>> list = maps[ii].computeIfAbsent(hashes[ii], k -> new HashSet<>());
+            list.add(entry);
 		}
 	}
 
@@ -71,12 +67,8 @@ class LSHMultiHash<P> {
 			}
 			int[] hashes = hashes(entry.second);
 			for (int ii = 0; ii < hashes.length; ++ii) {
-				HashSet<DominantPair<P, LSHCosineVectorAccum>> list = maps[ii].get(hashes[ii]);
-				if (list == null) {
-					list = new HashSet<>();
-					maps[ii].put(hashes[ii], list);
-				}
-				list.add(entry);
+                HashSet<DominantPair<P, LSHCosineVectorAccum>> list = maps[ii].computeIfAbsent(hashes[ii], k -> new HashSet<>());
+                list.add(entry);
 			}
 		}
 	}
@@ -95,12 +87,8 @@ class LSHMultiHash<P> {
 			}
 			int[] hashes = hashes(entry.getValue());
 			for (int ii = 0; ii < hashes.length; ++ii) {
-				HashSet<DominantPair<P, LSHCosineVectorAccum>> list = maps[ii].get(hashes[ii]);
-				if (list == null) {
-					list = new HashSet<>();
-					maps[ii].put(hashes[ii], list);
-				}
-				list.add(
+                HashSet<DominantPair<P, LSHCosineVectorAccum>> list = maps[ii].computeIfAbsent(hashes[ii], k -> new HashSet<>());
+                list.add(
 					new DominantPair<>(entry.getKey(), entry.getValue()));
 			}
 		}

@@ -107,6 +107,7 @@ public abstract class AbstractJavaAnalyzer implements Analyzer {
 				for (byte b : bytes) {
 					if (b < ' ' || b > '~') {
 						isAscii = false;
+						break;
 					}
 				}
 				if (isAscii && bytes.length > 1) {

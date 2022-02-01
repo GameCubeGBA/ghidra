@@ -798,7 +798,7 @@ public class BitFieldEditorPanel extends JPanel {
 			mwe.consume();
 			SpinnerNumberModel m = (SpinnerNumberModel) getModel();
 			Long value =
-				mwe.getUnitsToScroll() > 0 ? (Long) m.getPreviousValue() : (Long) m.getNextValue();
+                    (Long) (mwe.getUnitsToScroll() > 0 ? m.getPreviousValue() : m.getNextValue());
 			if (value != null) {
 				setValue(value);
 			}

@@ -18,6 +18,7 @@ package ghidra.app.util.viewer.field;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -582,9 +583,7 @@ public class PlateFieldFactoryTest extends AbstractGhidraHeadedIntegrationTest {
 		List<TableComponentProvider<?>> providers = new ArrayList<>();
 		runSwing(() -> {
 			TableComponentProvider<?>[] managedComponents = plugin.getManagedComponents();
-			for (TableComponentProvider<?> tableComponentProvider : managedComponents) {
-				providers.add(tableComponentProvider);
-			}
+            providers.addAll(Arrays.asList(managedComponents));
 		});
 		return providers;
 	}

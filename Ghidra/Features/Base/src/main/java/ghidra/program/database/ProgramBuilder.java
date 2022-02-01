@@ -406,7 +406,7 @@ public class ProgramBuilder {
 		tx(() -> {
 			MemoryBlock block = program.getMemory().getBlock(address);
 			if (block == null) {
-				createMemory("Block_" + stringAddress.toString().replace(':', '_'), stringAddress,
+				createMemory("Block_" + stringAddress.replace(':', '_'), stringAddress,
 					bytes.length);
 			}
 

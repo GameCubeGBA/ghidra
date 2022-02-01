@@ -3057,7 +3057,7 @@ public class ExternalMergerAddTest extends AbstractExternalMergerTest {
 
 		List<Symbol> symbols = resultProgram.getSymbolTable().getSymbols(label, externalLibrary);
 		assertEquals(2, symbols.size());
-		Symbol otherSymbol = symbols.get(0) == namespaceSymbol ? symbols.get(1) : symbols.get(0);
+		Symbol otherSymbol = symbols.get(symbols.get(0) == namespaceSymbol ? 1 : 0);
 		Object object = otherSymbol.getObject();
 		assertTrue(object instanceof ExternalLocation);
 		ExternalLocation locationFoo = (ExternalLocation) object;

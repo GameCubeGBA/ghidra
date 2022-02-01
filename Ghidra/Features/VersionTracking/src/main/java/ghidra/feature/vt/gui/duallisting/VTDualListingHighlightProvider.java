@@ -110,13 +110,9 @@ public class VTDualListingHighlightProvider implements HighlightProvider {
 			return;
 		}
 
-		HashMap<VTMarkupType, VTMarkupItem> typeMap = map.get(address);
-		if (typeMap == null) {
-			typeMap = new HashMap<VTMarkupType, VTMarkupItem>();
-			map.put(address, typeMap);
-		}
+        HashMap<VTMarkupType, VTMarkupItem> typeMap = map.computeIfAbsent(address, k -> new HashMap<VTMarkupType, VTMarkupItem>());
 
-		typeMap.put(markupType, markupItem);
+        typeMap.put(markupType, markupItem);
 	}
 
 	@Override
@@ -205,9 +201,7 @@ public class VTDualListingHighlightProvider implements HighlightProvider {
 
 		List<Highlight> highlightList = new ArrayList<Highlight>();
 
-		for (Highlight highlight : highlights) {
-			highlightList.add(highlight);
-		}
+        highlightList.addAll(Arrays.asList(highlights));
 
 		highlightList.addAll(getListingHighlights(text, obj, fieldFactoryClass, cursorTextOffset));
 
@@ -557,8 +551,7 @@ public class VTDualListingHighlightProvider implements HighlightProvider {
 		VTMarkupItem markupItem = typeMap.get(FunctionNameMarkupType.INSTANCE);
 		if (markupItem != null) {
 			FunctionNameStringable value =
-				(isSource || markupItem.canUnapply()) ? (FunctionNameStringable) markupItem.getSourceValue()
-						: (FunctionNameStringable) markupItem.getOriginalDestinationValue();
+					(FunctionNameStringable) (isSource || markupItem.canUnapply() ? markupItem.getSourceValue() : markupItem.getOriginalDestinationValue());
 			if (value != null) {
 				int parameterStart = text.indexOf("(");
 				if (parameterStart < 0) {

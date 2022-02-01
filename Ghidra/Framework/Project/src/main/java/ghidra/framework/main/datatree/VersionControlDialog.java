@@ -189,8 +189,7 @@ public class VersionControlDialog extends DialogComponentProvider {
 	 * @param filename the name of the file currently to be added, whose comment we need.
 	 */
 	public void setCurrentFileName(String filename) {
-		String description = addToVersionControl ? "Add comments to describe " + filename + "."
-				: "Add comments to describe changes to " + filename + ".";
+		String description = (addToVersionControl ? "Add comments to describe " : "Add comments to describe changes to ") + filename + ".";
 		descriptionLabel.setText(description);
 	}
 }

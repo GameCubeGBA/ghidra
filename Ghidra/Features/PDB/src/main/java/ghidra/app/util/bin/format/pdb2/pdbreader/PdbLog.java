@@ -71,7 +71,7 @@ public class PdbLog {
 		Object[] varArgs = new Object[suppliers.length];
 		for (int i = 0; i < suppliers.length; i++) {
 			Supplier<String> supplier = suppliers[i];
-			String var = supplier.get().toString();
+			String var = supplier.get();
 			varArgs[i] = var;
 		}
 		try {

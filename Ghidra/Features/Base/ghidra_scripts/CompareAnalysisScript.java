@@ -387,9 +387,9 @@ public class CompareAnalysisScript extends GhidraScript {
 
 	boolean isString(String mnemonic) {
 
-		if (mnemonic.equals(new String("ds")) || mnemonic.equals(new String("unicode")) ||
-			mnemonic.equals(new String("p_unicode")) || mnemonic.equals(new String("p_string")) ||
-			mnemonic.equals(new String("p_string255")) || mnemonic.equals(new String("mbcs"))) {
+		if (mnemonic.equals("ds") || mnemonic.equals("unicode") ||
+			mnemonic.equals("p_unicode") || mnemonic.equals("p_string") ||
+			mnemonic.equals("p_string255") || mnemonic.equals("mbcs")) {
 
 			return true;
 		}

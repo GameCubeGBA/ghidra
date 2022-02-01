@@ -117,14 +117,14 @@ public class GccRttiAnalysisScript extends GhidraScript {
 				monitor.checkCanceled();
 
 				if (categoryName.substring(index).startsWith("::") && !insideBrackets) {
-					newCategoryName = newCategoryName.concat("/");
+					newCategoryName = newCategoryName + "/";
 					index += 2;
 					continue;
 				}
 
 				String character = categoryName.substring(index, index + 1);
 
-				newCategoryName = newCategoryName.concat(character);
+				newCategoryName = newCategoryName + character;
 				index++;
 
 				if (character.equals("<")) {

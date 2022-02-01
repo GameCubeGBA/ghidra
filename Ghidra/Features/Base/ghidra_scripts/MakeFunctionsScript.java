@@ -42,8 +42,8 @@ public class MakeFunctionsScript extends GhidraScript {
 		}
 		String textBytes = "";
         for (byte functionByte : functionBytes) {
-            textBytes = textBytes.concat(toHexString(functionByte, true, false));
-            textBytes = textBytes.concat(" ");
+            textBytes = textBytes + toHexString(functionByte, true, false);
+            textBytes = textBytes + " ";
         }
 		println("Searching for " + textBytes + ". . .");
 

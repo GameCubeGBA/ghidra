@@ -66,9 +66,7 @@ public class LldbModelTargetBreakpointSpecImpl extends LldbModelTargetAbstractXp
 	protected TargetBreakpointKindSet computeKinds(Object from) {
 		if (from instanceof SBBreakpoint) {
 			SBBreakpoint bpt = (SBBreakpoint) from;
-			return bpt.IsHardware() ? 
-				TargetBreakpointKindSet.of(TargetBreakpointKind.HW_EXECUTE) : 
-				TargetBreakpointKindSet.of(TargetBreakpointKind.SW_EXECUTE);
+			return TargetBreakpointKindSet.of(bpt.IsHardware() ? TargetBreakpointKind.HW_EXECUTE : TargetBreakpointKind.SW_EXECUTE);
 		}
 		return TargetBreakpointKindSet.of();
 	}

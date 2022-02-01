@@ -287,9 +287,8 @@ class ReorderManager {
         
         // first add drop fragment or module
         //  to target's parent
-        ProgramModule targetParentModule = 
-            (targetParent != null) ? targetParent.getModule() :
-                                            destNode.getModule();
+        ProgramModule targetParentModule =
+                (targetParent != null ? targetParent : destNode).getModule();
 
         ProgramFragment dropFragment = dropNode.getFragment();
         ProgramModule dropModule = dropNode.getModule();

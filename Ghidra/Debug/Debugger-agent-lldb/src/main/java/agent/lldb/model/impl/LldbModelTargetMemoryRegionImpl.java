@@ -87,8 +87,7 @@ public class LldbModelTargetMemoryRegionImpl extends LldbModelTargetObjectImpl
 		AddressSpace addressSpace = getModel().getAddressSpace("ram");
 		Address min = addressSpace.getAddress(s.GetRegionBase().longValue());
 		Address max = addressSpace.getAddress(s.GetRegionEnd().longValue() - 1);
-		return max.getOffset() > min.getOffset() ? new AddressRangeImpl(min, max)
-				: new AddressRangeImpl(min, min);
+		return new AddressRangeImpl(min, max.getOffset() > min.getOffset() ? max : min);
 	}
 
 	@Override

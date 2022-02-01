@@ -494,12 +494,8 @@ class ReferenceMerger extends AbstractListingMerger {
 
 	private void addToRefsHash(Address address, Reference ref,
 			HashMap<Address, ArrayList<Reference>> refsHash) {
-		ArrayList<Reference> refsList = refsHash.get(address);
-		if (refsList == null) {
-			refsList = new ArrayList<>();
-			refsHash.put(address, refsList);
-		}
-		if (!refsList.contains(ref)) {
+        ArrayList<Reference> refsList = refsHash.computeIfAbsent(address, k -> new ArrayList<>());
+        if (!refsList.contains(ref)) {
 			refsList.add(ref);
 		}
 	}
@@ -559,12 +555,8 @@ return false;
 	}
 
 	private void saveTypeConflict(Address address, int opIndex) {
-		ArrayList<Integer> opIndexes = typeConflicts.get(address);
-		if (opIndexes == null) {
-			opIndexes = new ArrayList<>();
-			typeConflicts.put(address, opIndexes);
-		}
-		opIndexes.add(Integer.valueOf(opIndex));
+        ArrayList<Integer> opIndexes = typeConflicts.computeIfAbsent(address, k -> new ArrayList<>());
+        opIndexes.add(Integer.valueOf(opIndex));
 		conflictSet.addRange(address, address);
 	}
 
@@ -587,12 +579,8 @@ return false;
 	}
 
 	private void savePrimaryConflict(Address address, int opIndex) {
-		ArrayList<Integer> opIndexes = primaryConflicts.get(address);
-		if (opIndexes == null) {
-			opIndexes = new ArrayList<>();
-			primaryConflicts.put(address, opIndexes);
-		}
-		opIndexes.add(Integer.valueOf(opIndex));
+        ArrayList<Integer> opIndexes = primaryConflicts.computeIfAbsent(address, k -> new ArrayList<>());
+        opIndexes.add(Integer.valueOf(opIndex));
 		conflictSet.addRange(address, address);
 	}
 

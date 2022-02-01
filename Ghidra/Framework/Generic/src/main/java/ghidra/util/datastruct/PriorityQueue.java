@@ -38,12 +38,8 @@ public class PriorityQueue<T> {
 	 */
 	public void add(T obj, int priority) {
 		Integer key = Integer.valueOf(priority);
-		LinkedList<T> list = tree.get(key);
-		if (list == null) {
-			list = new LinkedList<T>();
-			tree.put(key, list);
-		}
-		list.addLast(obj);
+        LinkedList<T> list = tree.computeIfAbsent(key, k -> new LinkedList<T>());
+        list.addLast(obj);
 		size++;	
 	}
 	

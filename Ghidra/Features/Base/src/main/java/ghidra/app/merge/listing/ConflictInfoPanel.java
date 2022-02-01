@@ -117,8 +117,7 @@ public class ConflictInfoPanel extends JPanel {
 		StringBuilder buf = new StringBuilder();
 		buf.append("Register: ");
 		buf.append(ConflictUtility.getEmphasizeString(registerName));
-		buf.append("");
-		return buf.toString();
+        return buf.toString();
 	}
 
 	/**

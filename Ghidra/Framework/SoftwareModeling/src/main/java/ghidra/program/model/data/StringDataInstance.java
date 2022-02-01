@@ -676,11 +676,8 @@ public class StringDataInstance {
 			return getAdjustedCharsetInfo(new byte[] {});
 		}
 		byte[] stringBytes = convertPaddedToUnpadded(getStringBytes());
-		if (stringBytes == null) {
-			return getAdjustedCharsetInfo(new byte[] {});
-		}
-		return getAdjustedCharsetInfo(stringBytes);
-	}
+        return getAdjustedCharsetInfo(Objects.requireNonNullElseGet(stringBytes, () -> new byte[]{}));
+    }
 
 	private AdjustedCharsetInfo getAdjustedCharsetInfo(byte[] bytes) {
 		AdjustedCharsetInfo result = new AdjustedCharsetInfo(charsetName);

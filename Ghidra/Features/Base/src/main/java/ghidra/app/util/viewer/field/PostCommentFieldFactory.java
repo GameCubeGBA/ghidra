@@ -227,12 +227,7 @@ public class PostCommentFieldFactory extends FieldFactory {
 					comments.addFirst("-- WARNING: additional CALLOTHER ops present");
 				}
 				String outputWarningString = overrideData.getOutputWarningString();
-				if (outputWarningString != null) {
-					comments.addFirst(outputWarningString);
-				}
-				else {
-					comments.addFirst(callOtherCallOverrideComment);
-				}
+                comments.addFirst(Objects.requireNonNullElse(outputWarningString, callOtherCallOverrideComment));
 			}
 			else {
 				overrideData = getOverrideCommentData(instr, RefType.CALLOTHER_OVERRIDE_JUMP,
@@ -246,12 +241,7 @@ public class PostCommentFieldFactory extends FieldFactory {
 						comments.addFirst("-- WARNING: additional CALLOTHER ops present");
 					}
 					String outputWarningString = overrideData.getOutputWarningString();
-					if (outputWarningString != null) {
-						comments.addFirst(outputWarningString);
-					}
-					else {
-						comments.addFirst(callOtherJumpOverrideComment);
-					}
+                    comments.addFirst(Objects.requireNonNullElse(outputWarningString, callOtherJumpOverrideComment));
 				}
 			}
 		}

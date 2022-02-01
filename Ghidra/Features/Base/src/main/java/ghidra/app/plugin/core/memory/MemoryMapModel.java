@@ -97,9 +97,7 @@ class MemoryMapModel extends AbstractSortedTableModel<MemoryBlock> {
 		// Get all the memory blocks
 		Memory mem = program.getMemory();
 		MemoryBlock[] blocks = mem.getBlocks();
-		for (MemoryBlock block : blocks) {
-			memList.add(block);
-		}
+        memList.addAll(Arrays.asList(blocks));
 		fireTableDataChanged();
 	}
 

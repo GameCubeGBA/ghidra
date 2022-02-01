@@ -389,9 +389,7 @@ public abstract class ProcessorEmulatorTestAdapter extends TestCase implements E
 
 	protected final void setIgnoredBlocks(String... blockNames) {
 		ignoredBlocks = new HashSet<>();
-		for (String name : blockNames) {
-			ignoredBlocks.add(name);
-		}
+        ignoredBlocks.addAll(Arrays.asList(blockNames));
 	}
 
 	private AddressSetView getRestrictedSearchSet(Program program) {
@@ -1274,7 +1272,7 @@ public abstract class ProcessorEmulatorTestAdapter extends TestCase implements E
 				continue;
 			}
 			Symbol s =
-				SymbolUtilities.getExpectedLabelOrFunctionSymbol(program, name, m -> m.toString()); // error ignored
+				SymbolUtilities.getExpectedLabelOrFunctionSymbol(program, name, m -> m); // error ignored
 			if (s != null) {
 				return s;
 			}

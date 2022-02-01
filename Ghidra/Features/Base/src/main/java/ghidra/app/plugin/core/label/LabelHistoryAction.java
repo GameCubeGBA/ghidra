@@ -28,6 +28,7 @@ import ghidra.util.Msg;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import docking.action.KeyBindingData;
@@ -76,9 +77,7 @@ public class LabelHistoryAction extends ListingContextAction {
 	private List<LabelHistory> getHistoryList(Program program, Address addr) {
 		List<LabelHistory> list = new ArrayList<LabelHistory>();
 		LabelHistory[] history = program.getSymbolTable().getLabelHistory(addr);
-        for (LabelHistory labelHistory : history) {
-            list.add(labelHistory);
-        }
+        list.addAll(Arrays.asList(history));
 		return list;
 	}
 
