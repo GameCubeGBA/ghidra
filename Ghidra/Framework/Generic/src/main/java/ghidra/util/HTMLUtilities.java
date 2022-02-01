@@ -214,7 +214,7 @@ public class HTMLUtilities {
 	 */
 	public static String spaces(int num) {
 		StringBuilder buf = new StringBuilder(HTML_SPACE.length() * num);
-        buf.append(String.valueOf(HTML_SPACE).repeat(num));
+        buf.append(HTML_SPACE.repeat(num));
 		return buf.toString();
 	}
 

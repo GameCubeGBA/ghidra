@@ -156,14 +156,14 @@ class DataTypePanel extends JPanel {
 	private void insertAlignment(Composite composite) {
 		StringBuilder alignmentBuffer = new StringBuilder();
 		alignmentBuffer.append("Alignment: ");
-		alignmentBuffer.append(Integer.toString(composite.getAlignment()));
+		alignmentBuffer.append(composite.getAlignment());
 		insertString(alignmentBuffer + "\n", sourceAttrSet);
 	}
 
 	private void insertLength(Composite composite) {
 		StringBuilder lengthBuffer = new StringBuilder();
 		lengthBuffer.append("Length: ");
-		lengthBuffer.append(Integer.toString(composite.getLength()));
+		lengthBuffer.append(composite.getLength());
 		insertString(lengthBuffer + "\n", sourceAttrSet);
 	}
 
@@ -182,7 +182,7 @@ class DataTypePanel extends JPanel {
 			!((Composite) dtc.getParent()).isPackingEnabled()) {
 			BitFieldDataType bfDt = (BitFieldDataType) dt;
 			buffer.append("(");
-			buffer.append(Integer.toString(bfDt.getBitOffset()));
+			buffer.append(bfDt.getBitOffset());
 			buffer.append(")");
 		}
 		return buffer.toString();

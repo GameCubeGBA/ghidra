@@ -68,7 +68,7 @@ class FidHashQuadImpl implements FidHashQuad {
 		sb.append(" FH: ");
 		sb.append(Long.toHexString(fullHash));
 		sb.append(" (");
-		sb.append(Short.toString(codeUnitSize));
+		sb.append(codeUnitSize);
 
 		sb.append(") +");
 		sb.append(specificHashAdditionalSize);

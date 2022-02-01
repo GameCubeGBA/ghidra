@@ -214,7 +214,7 @@ class PointerDB extends DataTypeDB implements Pointer {
 			checkIsValid();
 			StringBuilder sbuf = new StringBuilder();
 			if (!hasLanguageDependantLength()) {
-				sbuf.append(Integer.toString(getLength() * 8));
+				sbuf.append(getLength() * 8);
 				sbuf.append("-bit ");
 			}
 			sbuf.append(PointerDataType.POINTER_NAME);

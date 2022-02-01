@@ -275,7 +275,7 @@ public class LEB128 {
 		if (value < Integer.MIN_VALUE || value > Integer.MAX_VALUE) {
 			throw new IOException(
 				"LEB128 value out of range for java 32 bit signed int: " +
-					Long.toString(value));
+                        value);
 		}
 	}
 

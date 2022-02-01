@@ -72,7 +72,7 @@ public class ElfRelocationContext {
 		long symbolIndex = relocation.getSymbolIndex();
 		if (symbolIndex < 0 || symbolIndex >= symbols.length) {
 			ElfRelocationHandler.markAsUnhandled(program, relocationAddress, relocation.getType(),
-				symbolIndex, "index " + Long.toString(symbolIndex), getLog());
+				symbolIndex, "index " + symbolIndex, getLog());
 			return;
 		}
 		ElfSymbol sym = symbols[(int) symbolIndex];

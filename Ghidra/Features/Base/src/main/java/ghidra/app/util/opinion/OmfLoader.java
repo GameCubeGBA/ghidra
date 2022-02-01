@@ -252,7 +252,7 @@ public class OmfLoader extends AbstractLibrarySupportLoader {
 							// case 11: // 48-bit pointer (16-bit base:32-bit offset)
 							default:
 								log.appendMsg("Unsupported relocation type " +
-									Integer.toString(state.locationType) + " at 0x" +
+                                        state.locationType + " at 0x" +
 									Long.toHexString(state.locAddress.getOffset()));
 								break;
 						}

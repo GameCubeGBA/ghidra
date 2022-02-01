@@ -784,7 +784,7 @@ public class FunctionGraphPluginScreenShots extends AbstractFunctionGraphTest {
 				action.getAllActionStates();
 			for (ActionState<Class<? extends FGLayoutProvider>> state : states) {
 				Class<? extends FGLayoutProvider> layoutClass = state.getUserData();
-				if (layoutClass.getSimpleName().equals("DecompilerNestedLayoutProvider")) {
+				if ("DecompilerNestedLayoutProvider".equals(layoutClass.getSimpleName())) {
 					action.setCurrentActionState(state);
 					return;
 				}

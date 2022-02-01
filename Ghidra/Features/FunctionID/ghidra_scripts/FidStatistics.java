@@ -153,7 +153,7 @@ public class FidStatistics extends GhidraScript {
 			buf.append(str);
 			indent(buf, str);
 			str =
-				'(' + Integer.toString(matchUniquely) + ',' + Integer.toString(matchMultiply) + ')';
+				'(' + Integer.toString(matchUniquely) + ',' + matchMultiply + ')';
 			buf.append(str);
 			indent(buf, str);
 			str = Integer.toString(nameMatched);

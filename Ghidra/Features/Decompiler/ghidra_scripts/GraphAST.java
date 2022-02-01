@@ -136,17 +136,17 @@ public class GraphAST extends GhidraScript {
 		String id;
 		if (op != null) {
 			id = op.getSeqnum().getTarget().toString(true) + " v " +
-				Integer.toString(vn.getUniqueId());
+                    vn.getUniqueId();
 		}
 		else {
-			id = "i v " + Integer.toString(vn.getUniqueId());
+			id = "i v " + vn.getUniqueId();
 		}
 		return id;
 	}
 
 	private String getOpKey(PcodeOpAST op) {
 		SequenceNumber sq = op.getSeqnum();
-        return sq.getTarget().toString(true) + " o " + Integer.toString(op.getSeqnum().getTime());
+        return sq.getTarget().toString(true) + " o " + op.getSeqnum().getTime();
 	}
 
 	protected AttributedVertex createVarnodeVertex(VarnodeAST vn) {

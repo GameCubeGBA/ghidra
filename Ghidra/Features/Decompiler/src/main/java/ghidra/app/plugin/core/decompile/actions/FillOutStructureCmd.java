@@ -531,7 +531,7 @@ public class FillOutStructureCmd extends BackgroundCommand {
 		String newClassBase = "AutoClass";
 		String newClassName = "";
 		for (int i = 1; i < 1000; ++i) {
-			newClassName = newClassBase + Integer.toString(i);
+			newClassName = newClassBase + i;
 			if (symbolTable.getSymbols(newClassName, rootNamespace).isEmpty()) {
 				break;
 			}

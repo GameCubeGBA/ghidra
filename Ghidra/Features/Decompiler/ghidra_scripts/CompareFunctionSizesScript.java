@@ -137,9 +137,9 @@ public class CompareFunctionSizesScript extends GhidraScript {
 			StringBuilder sb = new StringBuilder();
 			sb.append(func.getName());
 			sb.append(" instructions: ");
-			sb.append(Integer.toString(numInstructions));
+			sb.append(numInstructions);
 			sb.append(", high ops: ");
-			sb.append(Integer.toString(numHighOps));
+			sb.append(numHighOps);
 			return sb.toString();
 		}
 

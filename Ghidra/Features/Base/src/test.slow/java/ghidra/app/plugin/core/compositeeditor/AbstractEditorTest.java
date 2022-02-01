@@ -272,7 +272,7 @@ public abstract class AbstractEditorTest extends AbstractGhidraHeadedIntegration
 	private String arrayToString(int[] values) {
 		StringBuilder buf = new StringBuilder();
 		for (int value : values) {
-			buf.append(Integer.toString(value)).append(", ");
+			buf.append(value).append(", ");
 		}
 		if (values.length > 0) {
 			int len = buf.length();

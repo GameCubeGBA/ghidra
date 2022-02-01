@@ -190,7 +190,7 @@ public class VariableOffset {
 						name.insert(0, '*');
 					}
 					name.append('[');
-					name.append(Integer.toString(index));
+					name.append(index);
 					name.append(']');
 					intOff -= index * elementLen;
 					dt = a.getDataType();

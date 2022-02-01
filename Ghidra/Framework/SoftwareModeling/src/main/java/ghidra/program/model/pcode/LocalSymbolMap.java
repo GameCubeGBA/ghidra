@@ -129,7 +129,7 @@ public class LocalSymbolMap {
 		}
 		DataType baseDataType = baseSymbol.getDataType();
 		for (int index = 1;; ++index) {
-			String nextName = baseName + '$' + Integer.toString(index);
+			String nextName = baseName + '$' + index;
 			HighSymbol nextSymbol = nameMap.get(nextName);
 			if (nextSymbol == null || !nextSymbol.isTypeLocked() || nextSymbol.isParameter() ||
 				(baseSymbol instanceof EquateSymbol)) {

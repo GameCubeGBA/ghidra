@@ -858,7 +858,7 @@ public class GTree extends JPanel implements BusyListener {
 		if (childIndices != null) {
 			buf.append("indices [ ");
 			for (int index : childIndices) {
-				buf.append(Integer.toString(index)).append(", ");
+				buf.append(index).append(", ");
 			}
 			buf.append("]\n\t");
 		}

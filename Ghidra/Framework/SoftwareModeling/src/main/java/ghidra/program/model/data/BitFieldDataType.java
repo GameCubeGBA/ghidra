@@ -334,14 +334,14 @@ public class BitFieldDataType extends AbstractDataType {
 	@Override
 	public String getDescription() {
 		StringBuilder sbuf = new StringBuilder();
-		sbuf.append(Integer.toString(effectiveBitSize));
+		sbuf.append(effectiveBitSize);
 		sbuf.append("-bit ");
 		DataType dt = baseDataType;
 		sbuf.append(dt.getDisplayName());
 		sbuf.append(" bitfield");
 		if (effectiveBitSize != bitSize) {
 			sbuf.append(" (declared as ");
-			sbuf.append(Integer.toString(bitSize));
+			sbuf.append(bitSize);
 			sbuf.append("-bits)");
 		}
 		return sbuf.toString();

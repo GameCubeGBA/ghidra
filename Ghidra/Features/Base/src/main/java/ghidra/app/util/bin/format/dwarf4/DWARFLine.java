@@ -162,10 +162,10 @@ public class DWARFLine {
                 return directory + file.getName();
             }
             throw new IndexOutOfBoundsException(
-                "Negative directory index was found: " + Integer.toString(diridx));
+                "Negative directory index was found: " + diridx);
         }
         throw new IllegalArgumentException(
-			"Negative file index was given: " + Integer.toString(index));
+			"Negative file index was given: " + index);
 	}
 
 	/**
@@ -186,7 +186,7 @@ public class DWARFLine {
             return FilenameUtils.getName(file.getName());
         }
         throw new IllegalArgumentException(
-			"Negative file index was given: " + Integer.toString(index));
+			"Negative file index was given: " + index);
 	}
 
 	@Override

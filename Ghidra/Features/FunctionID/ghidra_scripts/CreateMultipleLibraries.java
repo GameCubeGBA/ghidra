@@ -348,7 +348,7 @@ public class CreateMultipleLibraries extends GhidraScript {
 
 		rootFolder =
 			askProjectFolder("Select root folder containing all libraries (at a depth of " +
-				Integer.toString(MASTER_DEPTH) + "):");
+                    MASTER_DEPTH + "):");
 
 		try {
 			commonSymbolsFile = askFile("Common symbols file (optional):", "OK");

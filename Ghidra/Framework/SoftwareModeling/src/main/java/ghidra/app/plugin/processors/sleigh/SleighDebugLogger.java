@@ -241,7 +241,7 @@ public class SleighDebugLogger {
 			name = tableName;
 		}
 
-		list.add(name + "(" + ct.getSourceFile() + ":" + Integer.toString(ct.getLineno()) + ")");
+		list.add(name + "(" + ct.getSourceFile() + ":" + ct.getLineno() + ")");
 
 		int flowthruindex = ct.getFlowthruIndex();
 		if (flowthruindex != -1) {

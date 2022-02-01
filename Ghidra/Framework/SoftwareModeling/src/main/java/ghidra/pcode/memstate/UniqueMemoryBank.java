@@ -244,7 +244,7 @@ public class UniqueMemoryBank extends MemoryBank {
 		//ensure that the provided index is valid
 		private void validateIndex(int index) {
 			if (index < 0 || index > 7) {
-				throw new LowlevelError("Invalid index: " + Integer.toString(index));
+				throw new LowlevelError("Invalid index: " + index);
 			}
 			return;
 		}

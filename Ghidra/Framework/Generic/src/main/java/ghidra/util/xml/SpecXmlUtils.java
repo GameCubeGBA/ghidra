@@ -104,7 +104,7 @@ public class SpecXmlUtils {
 		buf.append(' ');
 		buf.append(nm);
 		buf.append("=\"");
-		buf.append(Double.toString(val));
+		buf.append(val);
 		buf.append('\"');
 	}
 	

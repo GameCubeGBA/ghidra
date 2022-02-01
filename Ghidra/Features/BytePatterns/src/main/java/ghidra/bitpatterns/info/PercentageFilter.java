@@ -50,7 +50,7 @@ public class PercentageFilter implements GTreeFilter {
 
 	@Override
 	public String toString() {
-		return "Percentage: " + Double.toString(percentage);
+		return "Percentage: " + percentage;
 	}
 
 	@Override

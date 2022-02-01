@@ -197,7 +197,7 @@ public class ASTGraphTask extends Task {
 	private AttributedVertex getOpVertex(AttributedGraph graph, PcodeOpAST op,
 			TaskMonitor monitor) {
 
-		String key = "O_" + Integer.toString(op.getSeqnum().getTime());
+		String key = "O_" + op.getSeqnum().getTime();
 		AttributedVertex vertex = graph.getVertex(key);
 
 		if (vertex == null) {

@@ -333,7 +333,7 @@ public class HighFunctionDBUtil {
 			}
 			mergeArray.add(currentVar);
 			index += 1;
-			String newName = baseName + '$' + Integer.toString(index);
+			String newName = baseName + '$' + index;
 			currentVar = nameMap.get(newName);
 		}
 		Variable[] res;
@@ -558,7 +558,7 @@ public class HighFunctionDBUtil {
 					renameVar = var;
 					var.setName(curName, source);
 					index += 1;
-					curName = name + '$' + Integer.toString(index);
+					curName = name + '$' + index;
 				}
 			}
 			catch (DuplicateNameException e) {

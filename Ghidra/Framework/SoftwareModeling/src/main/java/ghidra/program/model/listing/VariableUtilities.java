@@ -678,7 +678,7 @@ public class VariableUtilities {
 		}
 		if (maxConflictVarDetails < conflicts.size()) {
 			msg.append(" ... {");
-			msg.append(Integer.toString(conflicts.size() - maxConflictVarDetails));
+			msg.append(conflicts.size() - maxConflictVarDetails);
 			msg.append(" more}");
 		}
 		throw new VariableSizeException(msg.toString(), true);
