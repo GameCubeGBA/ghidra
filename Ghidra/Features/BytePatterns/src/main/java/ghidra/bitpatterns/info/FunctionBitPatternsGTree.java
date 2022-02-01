@@ -96,7 +96,7 @@ public class FunctionBitPatternsGTree extends GTree {
 
 				keyBuilder.append(currentSeq.getInstructions()[level]);
 				keyBuilder.append(":");
-				keyBuilder.append(Integer.toString(currentSeq.getSizes()[level]));
+				keyBuilder.append(currentSeq.getSizes()[level]);
 				String key = keyBuilder.toString();
 
 				//make sure there is a map keys -> nodes for the current node

@@ -242,7 +242,7 @@ public class DWARFRegisterMappingsManager {
 				int baseGhidraRegNum = Integer.parseInt(m.group(2));
 				for (int autoIncNum = 0; autoIncNum < autoincCount; autoIncNum++) {
 					String autoIncRegName =
-						baseGhidraRegName + Integer.toString(baseGhidraRegNum + autoIncNum);
+						baseGhidraRegName + (baseGhidraRegNum + autoIncNum);
 					Register autoIncReg = lang.getRegister(autoIncRegName);
 					if (autoIncReg == null) {
 						throw new IOException("Unknown Ghidra auto-increment register: " +

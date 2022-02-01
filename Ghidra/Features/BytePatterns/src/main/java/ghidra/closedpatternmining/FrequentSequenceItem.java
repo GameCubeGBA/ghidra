@@ -88,7 +88,7 @@ public class FrequentSequenceItem implements Comparable<FrequentSequenceItem> {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("support (number of sequences containing the item): ");
-		sb.append(Integer.toString(support));
+		sb.append(support);
 		sb.append(", ");
 		sb.append(frequentItem.toString());
 		sb.append("\n");

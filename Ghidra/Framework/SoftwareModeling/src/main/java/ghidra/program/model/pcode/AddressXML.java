@@ -92,7 +92,7 @@ public class AddressXML {
 		int sizesum = 0;
 		int pos = 0;
 		for (;;) {
-			String attrName = "piece" + Integer.toString(pos + 1);
+			String attrName = "piece" + (pos + 1);
 			String attrVal = el.getAttribute(attrName);
 			if (attrVal == null) {
 				break;
@@ -623,7 +623,7 @@ public class AddressXML {
 		long off = addr.getUnsignedOffset();
 		buf.append(Long.toHexString(off));
 		buf.append(':');
-		buf.append(Integer.toString(size));
+		buf.append(size);
 	}
 
 	/**
@@ -650,7 +650,7 @@ public class AddressXML {
 		int piece = 0;
 		for (Varnode vn : varnodes) {
 			buf.append(" piece");
-			buf.append(Integer.toString(++piece));
+			buf.append(++piece);
 			buf.append("=\"");
 			buildVarnodePiece(buf, vn.getAddress(), vn.getSize());
 			buf.append("\"");

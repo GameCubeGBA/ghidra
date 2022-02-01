@@ -82,7 +82,7 @@ public class ArrayMethods {
 			multianewarrayOpArgs = new String[MAX_PCODE_OP_ARGS];
 			multianewarrayOpArgs[0] = CLASS_NAME;
 			for (int i = 1; i < MAX_PCODE_OP_ARGS; ++i){
-				multianewarrayOpArgs[i] = DIMENSION + Integer.toString(i);
+				multianewarrayOpArgs[i] = DIMENSION + i;
 			}
 		}
 		else {
@@ -90,7 +90,7 @@ public class ArrayMethods {
 			multianewarrayOpArgs = new String[dimensions + 1];
 			multianewarrayOpArgs[0] = CLASS_NAME;
 			for (int i = 1; i < dimensions + 1; ++i){
-				multianewarrayOpArgs[i] = DIMENSION + Integer.toString(i);
+				multianewarrayOpArgs[i] = DIMENSION + i;
 			}
 		}
 		pCode.emitAssignVarnodeFromPcodeOpCall(ARRAY_REF, 4, MULTIANEWARRAY, CLASS_NAME, "dim1",
@@ -100,7 +100,7 @@ public class ArrayMethods {
 
 		//consume any additional arguments
 		for (int i = MAX_PCODE_OP_ARGS; i <= dimensions; ++i){
-			String[] args = {ARRAY_REF, DIMENSION + Integer.toString(i)};
+			String[] args = {ARRAY_REF, DIMENSION + i};
 			pCode.emitVoidPcodeOpCall(PROCESS_ADDITIONAL_DIMENSIONS, args);
 		}
 

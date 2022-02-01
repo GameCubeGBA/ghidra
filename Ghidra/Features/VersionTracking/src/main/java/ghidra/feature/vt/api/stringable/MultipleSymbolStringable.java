@@ -310,7 +310,7 @@ public class MultipleSymbolStringable extends Stringable {
 		void convertToString(StringBuilder builder) {
 			builder.append(symbolName).append(DELIMITER);
 			builder.append(sourceType.name()).append(DELIMITER);
-			builder.append(Boolean.toString(isDynamic)).append(DELIMITER);
+			builder.append(isDynamic).append(DELIMITER);
 			for (NamespaceInfo info : namespaceInfos) {
 				builder.append(info.name).append(DELIMITER);
 				builder.append(info.symbolType.getID()).append(DELIMITER);

@@ -209,7 +209,7 @@ public class VectorRegisterPspecTest extends AbstractGenericTest {
 	private String[] getPowerPCVectorRegisterNames() {
 		String[] vectorRegs = new String[64];
 		for (int i = 0; i < 64; i++) {
-			vectorRegs[i] = "vs" + Integer.toString(i);
+			vectorRegs[i] = "vs" + i;
 		}
 		return vectorRegs;
 	}
@@ -217,10 +217,10 @@ public class VectorRegisterPspecTest extends AbstractGenericTest {
 	private String[] getIntelVectorRegisterNames() {
 		String[] vectorRegs = new String[32];
 		for (int i = 0; i < 16; i++) {
-			vectorRegs[i] = "YMM" + Integer.toString(i);
+			vectorRegs[i] = "YMM" + i;
 		}
 		for (int i = 16; i < 32; i++) {
-			vectorRegs[i] = "XMM" + Integer.toString(i - 16);
+			vectorRegs[i] = "XMM" + (i - 16);
 		}
 		return vectorRegs;
 	}
@@ -228,10 +228,10 @@ public class VectorRegisterPspecTest extends AbstractGenericTest {
 	private String[] getAarch64VectorRegisterNames() {
 		String[] vectorRegs = new String[64];
 		for (int i = 0; i < 32; i++) {
-			vectorRegs[i] = "z" + Integer.toString(i);
+			vectorRegs[i] = "z" + i;
 		}
 		for (int i = 0; i < 32; i++) {
-			vectorRegs[i + 32] = "q" + Integer.toString(i);
+			vectorRegs[i + 32] = "q" + i;
 		}
 		return vectorRegs;
 	}
@@ -239,7 +239,7 @@ public class VectorRegisterPspecTest extends AbstractGenericTest {
 	private String[] getArmVectorRegisterNames() {
 		String[] vectorRegs = new String[16];
 		for (int i = 0; i < 16; i++) {
-			vectorRegs[i] = "q" + Integer.toString(i);
+			vectorRegs[i] = "q" + i;
 		}
 		return vectorRegs;
 	}

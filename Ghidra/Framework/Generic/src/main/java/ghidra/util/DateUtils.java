@@ -375,15 +375,15 @@ public class DateUtils {
 		}
 		StringBuilder sb = new StringBuilder();
 		if (days > 0) {
-			sb.append(Long.toString(days)).append(" days, ");
+			sb.append(days).append(" days, ");
 		}
 		if (sb.length() > 0 || hours > 0) {
-			sb.append(Integer.toString(hours)).append(" hours, ");
+			sb.append(hours).append(" hours, ");
 		}
 		if (sb.length() > 0 || minutes > 0) {
-			sb.append(Integer.toString(minutes)).append(" mins, ");
+			sb.append(minutes).append(" mins, ");
 		}
-		sb.append(Integer.toString(seconds)).append(" secs");
+		sb.append(seconds).append(" secs");
 
 		return sb.toString();
 	}

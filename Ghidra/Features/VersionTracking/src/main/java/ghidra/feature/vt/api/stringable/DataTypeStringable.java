@@ -55,8 +55,8 @@ public class DataTypeStringable extends Stringable {
 
 	@Override
 	protected String doConvertToString(Program program) {
-		return Long.toString(managerUniversalID) + DELIMITER + Long.toString(dataTypeID) +
-			DELIMITER + dataTypeName + DELIMITER + Integer.toString(length);
+		return managerUniversalID + DELIMITER + dataTypeID +
+			DELIMITER + dataTypeName + DELIMITER + length;
 	}
 
 	@Override

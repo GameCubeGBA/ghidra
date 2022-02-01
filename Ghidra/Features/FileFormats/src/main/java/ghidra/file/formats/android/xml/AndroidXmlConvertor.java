@@ -155,11 +155,11 @@ public class AndroidXmlConvertor {
 			return data == 0 ? "false" : "true";
 		}
 		if (type == TypedValue.TYPE_DIMENSION) {
-			return Float.toString(complexToFloat(data)) +
+			return complexToFloat(data) +
 				DIMENSION_UNITS[data & TypedValue.COMPLEX_UNIT_MASK];
 		}
 		if (type == TypedValue.TYPE_FRACTION) {
-			return Float.toString(complexToFloat(data)) +
+			return complexToFloat(data) +
 				FRACTION_UNITS[data & TypedValue.COMPLEX_UNIT_MASK];
 		}
 		if (type >= TypedValue.TYPE_FIRST_COLOR_INT && type <= TypedValue.TYPE_LAST_COLOR_INT) {

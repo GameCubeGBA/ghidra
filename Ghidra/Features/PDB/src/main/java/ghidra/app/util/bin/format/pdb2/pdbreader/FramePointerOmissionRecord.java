@@ -204,9 +204,9 @@ public class FramePointerOmissionRecord {
 		writer.write(String.format("sizeOfParametersInDwords: 0X%08X\n", sizeOfParametersInDwords));
 		writer.write(String.format("numFunctionPrologBytes: 0X%04X\n", numFunctionPrologBytes));
 		writer.write(String.format("hasStructuredExceptionHandling: %s\n",
-			Boolean.toString(hasStructuredExceptionHandling)));
+                hasStructuredExceptionHandling));
 		writer.write(
-			String.format("EBPAllocatedAndUsed: %s\n", Boolean.toString(ebpAllocatedAndUsed)));
+			String.format("EBPAllocatedAndUsed: %s\n", ebpAllocatedAndUsed));
 		writer.write(String.format("reserved: 0X%01X\n", reserved));
 		writer.write(String.format("frameType: %s\n", frameType.toString()));
 		writer.write("End FramePointerOmissionRecord------------------------------\n");

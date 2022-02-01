@@ -716,7 +716,7 @@ public class JavaAnalyzer extends AbstractJavaAnalyzer implements AnalysisWorker
 		}
 		List<DataType> explicitParams = DescriptorDecoder.getDataTypeList(descriptor, dtManager);
 		for (int i = 0, max = explicitParams.size(); i < max; ++i) {
-			ParameterImpl currentParam = new ParameterImpl("param" + Integer.toString(i + 1),
+			ParameterImpl currentParam = new ParameterImpl("param" + (i + 1),
 				explicitParams.get(i), function.getProgram());
 			params.add(currentParam);
 		}

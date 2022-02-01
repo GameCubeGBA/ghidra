@@ -336,7 +336,7 @@ public class ExportDataDirectory extends DataDirectory {
 				}
 
 				String cmt = "0x" + Integer.toHexString(entryPointRVA) + "  " +
-					Integer.toString(i + base) + "  " + lname;
+                        (i + base) + "  " + lname;
 
 				boolean forwarded = false;
 

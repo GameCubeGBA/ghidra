@@ -280,7 +280,7 @@ public class FileSystemIndexHelper<METADATATYPE> {
 
 	private String makeUniqueFilename(boolean wasNameCollision, String filename, long fileIndex) {
 		return wasNameCollision
-				? filename + "[" + Long.toString(fileIndex) + "]"
+				? filename + "[" + fileIndex + "]"
 				: filename;
 	}
 

@@ -402,16 +402,14 @@ public class ISO9660Analyzer extends AbstractAnalyzer {
 
 		//Enumeration over the indexes of the path tables in the table
 
-		Set<Integer> pathTableIndexes = pathTableMap.keySet();
-
-        for (int pathTableIndex : pathTableIndexes) {
+        for (Map.Entry<Integer, Short> entry : pathTableMap.entrySet()) {
 
             //Index of current path table
             //Logical block size of current path table
-            short logicalBlockSize = pathTableMap.get(pathTableIndex);
+            short logicalBlockSize = entry.getValue();
 
             //Calculate address from logical index
-            int pathAddress = logicalBlockSize * pathTableIndex;
+            int pathAddress = logicalBlockSize * entry.getKey();
 
             //Move reader to the path table address
             reader.setPointerIndex(pathAddress);

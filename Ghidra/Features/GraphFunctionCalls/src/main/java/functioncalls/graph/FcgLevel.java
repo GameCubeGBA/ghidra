@@ -163,7 +163,7 @@ public class FcgLevel implements Comparable<FcgLevel> {
 
 	@Override
 	public String toString() {
-		return direction + " - row " + Integer.toString(getRelativeRow());
+		return direction + " - row " + getRelativeRow();
 	}
 
 	@Override

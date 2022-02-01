@@ -100,7 +100,7 @@ public class AbstractVersionControlActionTest extends AbstractGhidraHeadedIntegr
 		frontEnd.checkout((DomainFileNode) node);
 	}
 
-	protected void clearSelectionPaths() throws Exception {
+	protected void clearSelectionPaths() {
 		frontEnd.clearTreeSelection();
 	}
 
@@ -152,7 +152,7 @@ public class AbstractVersionControlActionTest extends AbstractGhidraHeadedIntegr
 		waitForSwing();
 		Set<DockingActionIf> dialogActions = dialog.getActions();
 		for (DockingActionIf action : dialogActions) {
-			if (action.getName().equals("Delete Version")) {
+			if ("Delete Version".equals(action.getName())) {
 				return action;
 			}
 		}

@@ -1217,7 +1217,7 @@ public class ProgramDiffDetails {
 		else {
 			String name = equate.getName();
 			long eqValue = equate.getValue();
-			String value = Long.toString(eqValue) + (" or 0x" + Long.toHexString(eqValue));
+			String value = eqValue + (" or 0x" + Long.toHexString(eqValue));
 
 			addColorText(name);
 			addText(getSpaces(nameLength - name.length()));

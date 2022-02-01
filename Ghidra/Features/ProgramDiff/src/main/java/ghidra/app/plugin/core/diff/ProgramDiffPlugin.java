@@ -1700,7 +1700,7 @@ public class ProgramDiffPlugin extends ProgramPlugin
 		for (int i = 0; i < rangeCount && p2DiffIter.hasNext(); i++) {
 			AddressRange range = p2DiffIter.next();
 			if (range.contains(p2CodeUnitAddress)) {
-				return "Diff address range " + Integer.toString(i + 1) + " of " + rangeCount + ".";
+				return "Diff address range " + (i + 1) + " of " + rangeCount + ".";
 			}
 		}
 		return null;

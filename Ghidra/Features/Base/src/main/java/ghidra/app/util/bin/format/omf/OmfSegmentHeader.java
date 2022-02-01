@@ -62,7 +62,7 @@ public class OmfSegmentHeader extends OmfRecord {
 		else {
 			segmentName = "EXTRA_";
 		}
-		segmentName = segmentName+Integer.toString(num);
+		segmentName = segmentName+ num;
 		if (datatype == 1) {
 			// Treat as a text segment
 			className = "TEXT";

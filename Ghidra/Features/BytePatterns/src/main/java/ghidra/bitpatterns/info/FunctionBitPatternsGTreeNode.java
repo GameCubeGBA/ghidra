@@ -123,7 +123,7 @@ public class FunctionBitPatternsGTreeNode extends GTreeNode {
 		StringBuilder sb = new StringBuilder();
 		sb.append(count);
 		sb.append(" (");
-		sb.append(Double.toString(((Math.round(percentage * 10) * 1.0) / 10)));
+		sb.append((Math.round(percentage * 10) * 1.0) / 10);
 		sb.append("%)");
         return sb.toString();
 	}

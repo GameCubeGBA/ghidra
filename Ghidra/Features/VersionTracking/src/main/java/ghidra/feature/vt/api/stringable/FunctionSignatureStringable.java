@@ -226,7 +226,7 @@ public class FunctionSignatureStringable extends Stringable {
 		buildy.append(getSavableReturnStorage()).append(DELIMITER);
 		buildy.append(getSavableParameterStorage()).append(DELIMITER);
 		buildy.append(getSavableVarArgs()).append(DELIMITER);
-		buildy.append(Boolean.toString(isThisCall)).append(DELIMITER);
+		buildy.append(isThisCall).append(DELIMITER);
 		buildy.append(saveParameterInfos());
 		return buildy.toString();
 	}

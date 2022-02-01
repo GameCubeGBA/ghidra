@@ -190,7 +190,7 @@ public interface CompositeInternal extends Composite {
 			if (dataType instanceof BitFieldDataType) {
 				BitFieldDataType bfDt = (BitFieldDataType) dataType;
 				buffer.append("(");
-				buffer.append(Integer.toString(bfDt.getBitOffset()));
+				buffer.append(bfDt.getBitOffset());
 				buffer.append(")");
 			}
 			buffer.append(pad).append(dtc.getLength());
