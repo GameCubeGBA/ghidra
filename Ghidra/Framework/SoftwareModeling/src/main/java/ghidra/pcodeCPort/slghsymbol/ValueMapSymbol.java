@@ -53,9 +53,7 @@ public class ValueMapSymbol extends ValueSymbol {
 
 	private void checkTableFill() {
 		// Check if all possible entries in the table have been filled
-		long min = patval.minValue();
-		long max = patval.maxValue();
-		tableisfilled = (min >= 0) && (max < valuetable.size());
+		tableisfilled = (patval.minValue() >= 0) && (patval.minValue() < valuetable.size());
 		for (int i = 0; i < valuetable.size(); ++i) {
 			if (valuetable.get(i) == 0xBADBEEF) {
 				tableisfilled = false;
