@@ -21,7 +21,6 @@ import java.awt.Component;
 import java.awt.Window;
 import java.util.List;
 
-import javax.swing.JComponent;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 

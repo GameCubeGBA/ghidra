@@ -17,7 +17,6 @@ package ghidra.program.model.lang;
 
 import java.io.*;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import org.antlr.runtime.*;
 import org.antlr.runtime.tree.CommonTreeNodeStream;

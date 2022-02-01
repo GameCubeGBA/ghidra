@@ -23,7 +23,6 @@ package ghidra.program.model.pcode;
 
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.ListIterator;
 
 import ghidra.program.model.address.Address;
 

@@ -24,7 +24,6 @@ import ghidra.pcodeCPort.utils.MutableLong;
 import ghidra.pcodeCPort.utils.Utils;
 
 import java.io.PrintStream;
-import java.util.Iterator;
 import java.util.List;
 
 import org.jdom.Element;

@@ -25,7 +25,6 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.data.*;
 import ghidra.program.model.listing.Program;
 import ghidra.program.model.mem.MemBuffer;
-import ghidra.program.model.scalar.Scalar;
 
 /**
  * Model for exception handling information about the IpToStateMapEntry data type and its 

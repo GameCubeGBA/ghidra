@@ -16,7 +16,6 @@
 package agent.gdb.manager.impl;
 
 import java.math.BigInteger;
-import java.util.Objects;
 
 /**
  * The abstraction for a line of output from {@code info proc mappings}

@@ -23,7 +23,6 @@
 
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import ghidra.app.cmd.label.AddLabelCmd;
 import ghidra.app.plugin.core.analysis.ConstantPropagationContextEvaluator;
