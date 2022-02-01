@@ -113,7 +113,7 @@ public class AndroidXmlConvertor {
 					}
 				}
 
-				out.print(buffer.toString());
+				out.print(buffer);
 			}
 			out.println();
 		}

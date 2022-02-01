@@ -223,7 +223,7 @@ public class DWARFDataTypeManager {
 			}
 			catch (IOException | DWARFExpressionException e) {
 				Msg.error(this, "Problem while retrieving data type in DIE " + diea.getOffset(), e);
-				Msg.error(this, "DIE info: " + diea.toString());
+				Msg.error(this, "DIE info: " + diea);
 			}
 		}
 		return (result != null) ? result : defaultValue;
@@ -575,7 +575,7 @@ public class DWARFDataTypeManager {
 				// try to continue with the next compunit.
 				Msg.error(this,
 					"Error when processing DWARF information for DIE " + diea.getHexOffset(), th);
-				Msg.info(this, "DIE info:\n" + diea.toString());
+				Msg.info(this, "DIE info:\n" + diea);
 			}
 		}
 
@@ -661,7 +661,7 @@ public class DWARFDataTypeManager {
 				// try to continue with the next compunit.
 				Msg.error(this,
 					"Error when processing DWARF information for DIE " + diea.getHexOffset(), th);
-				Msg.info(this, "DIE info:\n" + diea.toString());
+				Msg.info(this, "DIE info:\n" + diea);
 			}
 		}
 

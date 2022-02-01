@@ -296,7 +296,7 @@ public class RecoveredClassHelper {
 			// can't just get all that contain vftable because that would get some strings
 			else {
 				String name = vftableSymbol.getName();
-				name = name.substring(1, name.length());
+				name = name.substring(1);
 				if (name.startsWith("vftable")) {
 					vftableSymbolList.add(vftableSymbol);
 				}
@@ -2221,8 +2221,8 @@ public class RecoveredClassHelper {
                 calledFunction = calledFunction.getThunkedFunction(true);
             }
 
-            if (getAllConstructors().contains(calledFunction) ||
-                    getAllInlinedConstructors().contains(calledFunction)) {
+            if (allConstructors.contains(calledFunction) ||
+                    allInlinedConstructors.contains(calledFunction)) {
                 return true;
             }
         }
@@ -2253,8 +2253,8 @@ public class RecoveredClassHelper {
                 calledFunction = calledFunction.getThunkedFunction(true);
             }
 
-            if (getAllDestructors().contains(calledFunction) ||
-                    getAllInlinedDestructors().contains(calledFunction)) {
+            if (allDestructors.contains(calledFunction) ||
+                    allInlinedDestructors.contains(calledFunction)) {
                 return true;
             }
         }
@@ -4098,7 +4098,7 @@ public class RecoveredClassHelper {
                 continue;
             }
 
-            if (!getAllConstructors().contains(calledFunction)) {
+            if (!allConstructors.contains(calledFunction)) {
                 return true;
             }
 
@@ -4124,7 +4124,7 @@ public class RecoveredClassHelper {
             RecoveredClass recoveredClass = aClass;
 
             List<Function> allOtherConstructors =
-                    new ArrayList<Function>(getAllConstructors());
+                    new ArrayList<Function>(allConstructors);
             allOtherConstructors.removeAll(recoveredClass.getConstructorList());
 
             // iterate through the vtable functions
@@ -4229,7 +4229,7 @@ public class RecoveredClassHelper {
                 continue;
             }
             // skip any constructor or destructors that are called first
-            if (getAllConstructorsAndDestructors().contains(firstCalledFunction)) {
+            if (allConstructorsAndDestructors.contains(firstCalledFunction)) {
                 continue;
             }
 
@@ -4250,7 +4250,7 @@ public class RecoveredClassHelper {
 
 		Integer numOccurances = functionOccuranceMap.get(probableOperatorNewFunction);
 		if (functionOccuranceMap.get(probableOperatorNewFunction) < MIN_OPERATOR_NEW_REFS) {
-			Msg.debug(this, probableOperatorNewFunction.toString() +
+			Msg.debug(this, probableOperatorNewFunction +
 				" is a possible operator_new function but has less than the defined minimum number " +
 				"of matching calls " + numOccurances);
 
@@ -5703,7 +5703,7 @@ public class RecoveredClassHelper {
                                 .contains(
                                         firstCalledFunction) &&
                         secondCalledFunction.equals(operator_delete) &&
-                        !getAllConstructorsAndDestructors().contains(vFunction)) {
+                        !allConstructorsAndDestructors.contains(vFunction)) {
                     recoveredClass.addDeletingDestructor(vFunction);
                     recoveredClass.setVBaseDestructor(firstCalledFunction);
                 }
@@ -5990,14 +5990,14 @@ public class RecoveredClassHelper {
                             continue;
                         }
 
-                        if (getAllConstructors().contains(function) ||
-                                getAllInlinedConstructors().contains(function)) {
+                        if (allConstructors.contains(function) ||
+                                allInlinedConstructors.contains(function)) {
                             isConstructor = true;
                             continue;
                         }
 
-                        if (getAllDestructors().contains(function) ||
-                                getAllInlinedDestructors().contains(function)) {
+                        if (allDestructors.contains(function) ||
+                                allInlinedDestructors.contains(function)) {
                             isDestructor = true;
                             continue;
                         }
@@ -6450,7 +6450,7 @@ public class RecoveredClassHelper {
 		// if the first function on the vftable IS ALSO on the class constructor/destructor list
 		// then it is a deleting destructor with and inline destructor and we need to 
 		// determine if the inline is the class or parent/grandparent class destructor
-		if (getAllConstructorsAndDestructors().contains(firstVftableFunction)) {
+		if (allConstructorsAndDestructors.contains(firstVftableFunction)) {
 
 			recoveredClass.addDeletingDestructor(firstVftableFunction);
 			recoveredClass.removeFromConstructorDestructorList(firstVftableFunction);
@@ -6892,7 +6892,7 @@ public class RecoveredClassHelper {
 				dataType = new Undefined1DataType();
 			}
 
-			String fieldName = new String();
+			String fieldName = "";
 			String comment = null;
 
 			// if the computed class struct has field name (ie from pdb) use it otherwise create one 

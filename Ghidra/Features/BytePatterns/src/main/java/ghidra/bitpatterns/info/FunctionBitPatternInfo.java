@@ -345,10 +345,10 @@ public class FunctionBitPatternInfo {
 		sb.append("\n");
 		if (preInst != null) {
 			sb.append("preInstructions: ");
-			sb.append(preInst.toString());
+			sb.append(preInst);
 		}
 		sb.append("\nAddress: ");
-		sb.append(address.toString());
+		sb.append(address);
 		sb.append("\nfirstInstructions: ");
 		sb.append(firstInst.toString());
 		sb.append("\nfirstBytes: ");
@@ -539,14 +539,14 @@ public class FunctionBitPatternInfo {
 		}
 		
 		FunctionBitPatternInfo result = new FunctionBitPatternInfo();
-		result.setPreBytes(preBytes);
-		result.setFirstBytes(firstBytes);
-		result.setAddress(address);
-		result.setReturnBytes(returnBytes);
-		result.setFirstInst(firstInst);
-		result.setPreInst(preInst);
-		result.setReturnInst(returnInst);
-		result.setContextRegisters(contextRegisters);
+		result.preBytes = preBytes;
+		result.firstBytes = firstBytes;
+		result.address = address;
+		result.returnBytes = returnBytes;
+		result.firstInst = firstInst;
+		result.preInst = preInst;
+		result.returnInst = returnInst;
+		result.contextRegisters = contextRegisters;
 
 		return result;
 	}

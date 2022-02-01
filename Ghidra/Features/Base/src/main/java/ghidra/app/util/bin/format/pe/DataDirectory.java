@@ -221,7 +221,7 @@ public abstract class DataDirectory implements StructConverter, PeMarkupable {
 	 * @return true if this data directory is contained inside of a section
 	 */
 	boolean isContainedInSection() {
-		return rvaToPointer() != getVirtualAddress();
+		return rvaToPointer() != virtualAddress;
 	}
 
 	/**
@@ -252,9 +252,9 @@ public abstract class DataDirectory implements StructConverter, PeMarkupable {
 		if (virtualAddress == 0) {
 			return -1;
 		}
-		int ptr = ntHeader.rvaToPointer(getVirtualAddress());
+		int ptr = ntHeader.rvaToPointer(virtualAddress);
 		if (ptr < 0) {
-			Msg.error(this, "Invalid file index for " + Integer.toHexString(getVirtualAddress()));
+			Msg.error(this, "Invalid file index for " + Integer.toHexString(virtualAddress));
 		}
 		return ptr;
 	}

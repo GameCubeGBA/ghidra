@@ -93,9 +93,9 @@ public class DbgModelTargetMemoryRegionImpl extends DbgModelTargetObjectImpl
 			DISPLAY_ATTRIBUTE_NAME, computeDisplay(region), //
 			MEMORY_ATTRIBUTE_NAME, memory, //
 			RANGE_ATTRIBUTE_NAME, doGetRange(section), //
-			READABLE_ATTRIBUTE_NAME, isReadable(), //
-			WRITABLE_ATTRIBUTE_NAME, isWritable(), //
-			EXECUTABLE_ATTRIBUTE_NAME, isExecutable() //
+			READABLE_ATTRIBUTE_NAME, isRead, //
+			WRITABLE_ATTRIBUTE_NAME, isWrite, //
+			EXECUTABLE_ATTRIBUTE_NAME, isExec //
 		), "Initialized");
 
 		AddressSpace space = getModel().getAddressSpace("ram");

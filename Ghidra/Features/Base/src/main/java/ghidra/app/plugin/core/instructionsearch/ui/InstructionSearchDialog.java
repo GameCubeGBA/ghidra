@@ -133,16 +133,16 @@ public class InstructionSearchDialog extends DialogComponentProvider implements 
 	public void loadInstructions(ProgramSelection selection, InstructionSearchPlugin plugin)
 			throws InvalidInputException {
 
-		if (selection == null && getMessagePanel() != null) {
-			getMessagePanel().setMessageText(
+		if (selection == null && messagePanel != null) {
+			messagePanel.setMessageText(
 				"Select instructions from the listing (and hit reload) to populate the table.",
 				Color.BLUE);
 		}
 
 		if (selection != null && plugin.isSelectionValid(selection, this)) {
 
-			if (getControlPanel() != null) {
-				getControlPanel().getRangeWidget().updateSearchRangeBySelection();
+			if (controlPanel != null) {
+				controlPanel.getRangeWidget().updateSearchRangeBySelection();
 			}
 
 			// Load the instructions, but note that we only allow a single selection range.  If
@@ -165,7 +165,7 @@ public class InstructionSearchDialog extends DialogComponentProvider implements 
 		}
 
 		try {
-			getSearchData().load(currentProgram, selection.getFirstRange());
+			searchData.load(currentProgram, selection.getFirstRange());
 		}
 		catch (InvalidInputException e) {
 			Msg.error(this, "Error loading new search data", e);
@@ -257,7 +257,7 @@ public class InstructionSearchDialog extends DialogComponentProvider implements 
 	 * Clears out all instructions in the dialog.
 	 */
 	public void clear() {
-		getSearchData().clearAndReload();
+		searchData.clearAndReload();
 	}
 
 	/**

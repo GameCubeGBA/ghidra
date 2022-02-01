@@ -119,7 +119,7 @@ public final class XCoffOptionalHeader implements StructConverter {
 		buffer.append("data_start = ").append(o_data_start).append(NL);
 		buffer.append("o_toc      = ").append(o_toc).append(NL);
 		buffer.append("o_snentry  = ").append(o_snentry).append(NL);
-		buffer.append("o_sntext   = ").append(getSectionNumberForText()).append(NL);
+		buffer.append("o_sntext   = ").append(o_sntext).append(NL);
 		buffer.append("o_sndata   = ").append(o_sndata).append(NL);
 		buffer.append("o_sntoc    = ").append(o_sntoc).append(NL);
 		buffer.append("o_snloader = ").append(o_snloader).append(NL);

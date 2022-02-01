@@ -82,7 +82,7 @@ public class TypeDescriptorModel extends AbstractCreateDataTypeModel {
 		// Can't create the data type since don't know its size without a null terminated name.
 		if (getDataTypeLength() <= 0) {
 			throw new InvalidDataTypeException(
-				getName() + " @ " + getAddress() + " can't determine a null terminated type name.");
+				DATA_TYPE_NAME + " @ " + getAddress() + " can't determine a null terminated type name.");
 		}
 	}
 
@@ -122,7 +122,7 @@ public class TypeDescriptorModel extends AbstractCreateDataTypeModel {
 		try {
 			Address vfTableAddress = getVFTableAddress();
 			if (vfTableAddress == null || !loadedAndInitializedSet.contains(vfTableAddress)) {
-				String message = getName() + " data type at " + getAddress() +
+				String message = DATA_TYPE_NAME + " data type at " + getAddress() +
 					" doesn't point to a vfTable address in a loaded and initialized memory block.";
 				throw new InvalidDataTypeException(message);
 			}
@@ -140,12 +140,12 @@ public class TypeDescriptorModel extends AbstractCreateDataTypeModel {
 			Address spareDataAddress = getSpareDataAddress();
 			if (spareDataAddress != null && spareDataAddress.getOffset() != 0L &&
 				!loadedAndInitializedSet.contains(spareDataAddress)) {
-				throw new InvalidDataTypeException(getName() + " data type at " + getAddress() +
+				throw new InvalidDataTypeException(DATA_TYPE_NAME + " data type at " + getAddress() +
 					" doesn't point to a spare data address in a loaded and initialized memory block.");
 			}
 		}
 		catch (AddressOutOfBoundsException e1) {
-			throw new InvalidDataTypeException(getName() + " data type at " + getAddress() +
+			throw new InvalidDataTypeException(DATA_TYPE_NAME + " data type at " + getAddress() +
 				" doesn't have a valid reference to spare data.");
 		}
 	}
@@ -159,12 +159,12 @@ public class TypeDescriptorModel extends AbstractCreateDataTypeModel {
 		String typeName = doGetTypeName();
 		if (typeName == null) {
 			throw new InvalidDataTypeException(
-				getName() + " data type at " + getAddress() + " doesn't have a valid type name.");
+				DATA_TYPE_NAME + " data type at " + getAddress() + " doesn't have a valid type name.");
 		}
 		int nameLength = typeName.length();
 		if (nameLength == 0) {
 			throw new InvalidDataTypeException(
-				getName() + " data type at " + getAddress() + " doesn't have a valid type name.");
+				DATA_TYPE_NAME + " data type at " + getAddress() + " doesn't have a valid type name.");
 		}
 
 		int lengthWithoutAlignPadding = getNameOffset(program) + nameLength;
@@ -176,14 +176,14 @@ public class TypeDescriptorModel extends AbstractCreateDataTypeModel {
 			MSDataTypeUtils.getBytes(memory, typeDescriptorAddress, paddedLength);
 		}
 		catch (InvalidDataTypeException e) {
-			String paddingErrorMessage = getName() + " data type at " + getAddress() +
+			String paddingErrorMessage = DATA_TYPE_NAME + " data type at " + getAddress() +
 				" doesn't have valid alignment after the vftable name.";
 			throw new InvalidDataTypeException(e.getMessage() + "\n" + paddingErrorMessage);
 		}
 
 		if (containsWhitespace(typeName)) {
 			throw new InvalidDataTypeException(
-				getName() + " data type at " + getAddress() + " doesn't have a valid type name.");
+				DATA_TYPE_NAME + " data type at " + getAddress() + " doesn't have a valid type name.");
 		}
 	}
 
@@ -415,7 +415,7 @@ public class TypeDescriptorModel extends AbstractCreateDataTypeModel {
 		}
 		String typeName = doGetTypeName(); // Can return null.
 		if (typeName == null) {
-			throw new InvalidDataTypeException("Can't determine type name for " + getName() +
+			throw new InvalidDataTypeException("Can't determine type name for " + DATA_TYPE_NAME +
 				" data type at " + getAddress() + ".");
 		}
 		return typeName;
@@ -577,7 +577,7 @@ public class TypeDescriptorModel extends AbstractCreateDataTypeModel {
 
 		Address vfTableAddress = getVFTableAddress();
 		if (expectedVFTableAddress != null && !expectedVFTableAddress.equals(vfTableAddress)) {
-			String message = getName() + " data type at " + getAddress() +
+			String message = DATA_TYPE_NAME + " data type at " + getAddress() +
 				" wouldn't have expected vfTable address of " + expectedVFTableAddress + ".";
 			throw new InvalidDataTypeException(message);
 		}

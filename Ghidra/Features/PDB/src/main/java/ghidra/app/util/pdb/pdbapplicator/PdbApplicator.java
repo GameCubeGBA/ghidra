@@ -330,7 +330,7 @@ public class PdbApplicator {
 			registerNameToRegisterMapper = new PdbRegisterNameToProgramRegisterMapper(program);
 		}
 		else {
-			vbtManager = new VbtManager(getDataTypeManager());
+			vbtManager = new VbtManager(dataTypeManager);
 		}
 
 		symbolApplierParser = new SymbolApplierFactory(this);
@@ -792,7 +792,7 @@ public class PdbApplicator {
 	//==============================================================================================
 	//==============================================================================================
 	DataType resolve(DataType dataType) {
-		DataType resolved = getDataTypeManager().resolve(dataType,
+		DataType resolved = dataTypeManager.resolve(dataType,
 			DataTypeConflictHandler.REPLACE_EMPTY_STRUCTS_OR_RENAME_AND_ADD_HANDLER);
 		resolveCount++;
 		return resolved;
@@ -1283,7 +1283,7 @@ public class PdbApplicator {
 		}
 		catch (PdbException e) {
 			// skipping symbol
-			Msg.info(this, "Error applying symbol to program: " + e.toString());
+			Msg.info(this, "Error applying symbol to program: " + e);
 		}
 	}
 
@@ -1360,7 +1360,7 @@ public class PdbApplicator {
 		}
 		catch (InvalidInputException | DuplicateNameException e) {
 			log.appendMsg(
-				"PDB Warning: Unable to create class namespace due to exception: " + e.toString() +
+				"PDB Warning: Unable to create class namespace due to exception: " + e +
 					"; Namespace: " + parentNamespace.getName(true) + Namespace.DELIMITER + name);
 		}
 	}
@@ -1480,7 +1480,7 @@ public class PdbApplicator {
 			if (isMangled() && !PdbApplicator.isMangled(newName)) {
 				return true;
 			}
-			if (isNewSymbol()) {
+			if (isNewSymbol) {
 				return false;
 			}
 			return false;
@@ -1584,7 +1584,7 @@ public class PdbApplicator {
 		}
 		catch (InvalidInputException e) {
 			log.appendMsg("PDB Warning: Unable to create symbol at " + address +
-				" due to exception: " + e.toString() + "; symbolPathName: " + symbolPathString);
+				" due to exception: " + e + "; symbolPathName: " + symbolPathString);
 		}
 		return symbol;
 	}

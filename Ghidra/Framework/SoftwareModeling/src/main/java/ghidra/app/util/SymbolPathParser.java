@@ -134,7 +134,7 @@ public class SymbolPathParser {
 				}
 			}
 		}
-		list.add(name.substring(startIndex, name.length()));
+		list.add(name.substring(startIndex));
 
 		return list;
 	}

@@ -312,7 +312,7 @@ public class ProgramNode extends DefaultMutableTreeNode {
 		}
 		for (int i = 0; i < getChildCount(); i++) {
 			ProgramNode child = (ProgramNode) getChildAt(i);
-			if (child.isInView()) {
+			if (child.isInView) {
 				return true;
 			}
 			if (child.getAllowsChildren()) {
@@ -367,7 +367,7 @@ public class ProgramNode extends DefaultMutableTreeNode {
 			int nchild = getChildCount();
 			for (int i = 0; i < nchild; i++) {
 				ProgramNode c = (ProgramNode) getChildAt(i);
-				if (c.getName().equals(childName)) {
+				if (c.name.equals(childName)) {
 					return c;
 				}
 			}

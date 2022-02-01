@@ -184,7 +184,7 @@ public class MemviewPanel extends JPanel implements MouseListener, MouseMotionLi
 			return;
 
 		boxList = new ArrayList<MemoryBox>();
-		Collection<MemoryBox> boxes = getBoxes();
+		Collection<MemoryBox> boxes = blist;
 		if (boxes == null) {
 			return;
 		}

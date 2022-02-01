@@ -203,7 +203,7 @@ public class SetRegisterValueDialog extends DialogComponentProvider {
 				rangeData[i++] = start.toString();
 			}
 			else {
-				rangeData[i++] = start.toString() + " - " + end.toString();
+				rangeData[i++] = start + " - " + end.toString();
 			}
 		}
 		addressRangeList.setListData(rangeData);

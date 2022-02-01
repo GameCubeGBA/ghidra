@@ -839,7 +839,7 @@ public class StackEditorModel extends CompositeEditorModel {
 
 		if (stackFrameDataType.setName(rowIndex, newName)) {
 			updateAndCheckChangeState();
-			fireTableCellUpdated(rowIndex, getNameColumn());
+			fireTableCellUpdated(rowIndex, NAME);
 			notifyCompositeChanged();
 		}
 	}
@@ -930,7 +930,7 @@ public class StackEditorModel extends CompositeEditorModel {
 			if (!isValidName() || !hasChanges()) {
 				return false;
 			}
-			StackFrame original = getOriginalStack();
+			StackFrame original = originalStack;
 			Function function = original.getFunction();
 			StackFrameDataType edited = getEditorStack();
 
@@ -1123,7 +1123,7 @@ public class StackEditorModel extends CompositeEditorModel {
 		int transID = startTransaction("Apply Data Type \"" + dt.getName() + "\"");
 		try {
 			fieldEdited(DataTypeInstance.getDataTypeInstance(dt, dtLength), index,
-				getDataTypeColumn());
+                    DATATYPE);
 			setRelOffsetSelection(offsetSelection);
 		}
 		finally {

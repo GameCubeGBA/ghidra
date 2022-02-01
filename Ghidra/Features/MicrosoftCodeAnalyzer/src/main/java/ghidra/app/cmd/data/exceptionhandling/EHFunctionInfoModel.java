@@ -100,7 +100,7 @@ public class EHFunctionInfoModel extends AbstractCreateDataTypeModel {
 		// Can't create the data type since don't know its size without a valid magic number.
 		if (!hasValidMagicNum()) {
 			throw new InvalidDataTypeException(
-				getName() + " @ " + getAddress() + " doesn't have a valid magic number.");
+				DATA_TYPE_NAME + " @ " + getAddress() + " doesn't have a valid magic number.");
 		}
 	}
 
@@ -185,24 +185,24 @@ public class EHFunctionInfoModel extends AbstractCreateDataTypeModel {
 	protected void validateModelSpecificInfo() throws InvalidDataTypeException {
 		if (!hasValidMagicNum()) {
 			throw new InvalidDataTypeException(
-				getName() + " data type must contain a valid magic number, but doesn't at " +
+				DATA_TYPE_NAME + " data type must contain a valid magic number, but doesn't at " +
 					getAddress() + ".");
 		}
 		// Does at least one of our maps have a count.
 		if ((getUnwindCount() == 0) && (getTryBlockCount() == 0) && (getIPToStateCount() == 0)) {
-			throw new InvalidDataTypeException(getName() + " data type doesn't have any map data.");
+			throw new InvalidDataTypeException(DATA_TYPE_NAME + " data type doesn't have any map data.");
 		}
 		// Are the pointers or displacements to valid addresses.
 		if (!isValidMap(getUnwindCount(), getUnwindMapAddress())) {
 			throw new InvalidDataTypeException(
-				getName() + " data type at " + getAddress() + " doesn't have a valid unwind map.");
+				DATA_TYPE_NAME + " data type at " + getAddress() + " doesn't have a valid unwind map.");
 		}
 		if (!isValidMap(getTryBlockCount(), getTryBlockMapAddress())) {
-			throw new InvalidDataTypeException(getName() + " data type at " + getAddress() +
+			throw new InvalidDataTypeException(DATA_TYPE_NAME + " data type at " + getAddress() +
 				" doesn't have a valid try block map.");
 		}
 		if (!isValidMap(getIPToStateCount(), getIPToStateMapAddress())) {
-			throw new InvalidDataTypeException(getName() + " data type at " + getAddress() +
+			throw new InvalidDataTypeException(DATA_TYPE_NAME + " data type at " + getAddress() +
 				" doesn't have a valid IP to state map.");
 		}
 		if (isV2 || isV3) {
@@ -214,7 +214,7 @@ public class EHFunctionInfoModel extends AbstractCreateDataTypeModel {
 				throw new AssertException(e); // Shouldn't occur unless bug in this class's code.
 			}
 			if (esTypeListAddress != null && !isValidMap(1, esTypeListAddress)) {
-				throw new InvalidDataTypeException(getName() + " data type at " + getAddress() +
+				throw new InvalidDataTypeException(DATA_TYPE_NAME + " data type at " + getAddress() +
 					" doesn't have a valid type list reference.");
 			}
 		}
@@ -263,7 +263,7 @@ public class EHFunctionInfoModel extends AbstractCreateDataTypeModel {
 		if (referenceAddress != null) {
 			MemoryBlock block = memory.getBlock(referenceAddress);
 			if (funcInfoBlock != block) {
-				throw new InvalidDataTypeException(getName() + " data type at " + getAddress() +
+				throw new InvalidDataTypeException(DATA_TYPE_NAME + " data type at " + getAddress() +
 					" has a " + componentName +
 					" component that refers to an address that is in a different memory block.");
 			}
@@ -298,7 +298,7 @@ public class EHFunctionInfoModel extends AbstractCreateDataTypeModel {
 			DataTypeManager dataTypeManager = program.getDataTypeManager();
 			CategoryPath categoryPath = new CategoryPath(CATEGORY_PATH);
 			StructureDataType struct =
-				getAlignedPack4Structure(dataTypeManager, categoryPath, getStructureName());
+				getAlignedPack4Structure(dataTypeManager, categoryPath, STRUCTURE_NAME);
 
 			// Add the components.
 			DataType compDt;
@@ -373,7 +373,7 @@ public class EHFunctionInfoModel extends AbstractCreateDataTypeModel {
 				struct.add(compDt, "EHFlags", null);
 			}
 
-            dataType = new TypedefDataType(categoryPath, getName(), struct, dataTypeManager);
+            dataType = new TypedefDataType(categoryPath, DATA_TYPE_NAME, struct, dataTypeManager);
 		}
 
 		return MSDataTypeUtils.getMatchingDataType(program, dataType);
@@ -736,7 +736,7 @@ public class EHFunctionInfoModel extends AbstractCreateDataTypeModel {
 		buffer.append(INDENT + "bbtFlags: " + "0x").append(Long.toHexString(bbtFlags)).append(NEW_LINE);
 		DataType dt = getDataType();
 		if (dt != null) {
-			buffer.append(NEW_LINE).append(dt.toString()).append(NEW_LINE);
+			buffer.append(NEW_LINE).append(dt).append(NEW_LINE);
 			if (dt instanceof TypeDef) {
 				DataType baseDataType = ((TypeDef) dt).getBaseDataType();
 				buffer.append(NEW_LINE).append(baseDataType.toString()).append(NEW_LINE);

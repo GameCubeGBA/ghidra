@@ -356,9 +356,9 @@ public class ElfSymbol implements ByteArrayConverter {
 	 * @return true if this is an external symbol
 	 */
 	public boolean isExternal() {
-		return (isGlobal() || isWeak()) && getValue() == 0 && getSize() == 0 &&
+		return (isGlobal() || isWeak()) && st_value == 0 && st_size == 0 &&
 			getType() == STT_NOTYPE &&
-			getSectionHeaderIndex() == ElfSectionHeaderConstants.SHT_NULL;
+			st_shndx == ElfSectionHeaderConstants.SHT_NULL;
 	}
 
 	/**

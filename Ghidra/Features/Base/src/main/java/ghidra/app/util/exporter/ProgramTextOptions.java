@@ -244,20 +244,20 @@ class ProgramTextOptions {
 	}
 
 	void writeConfigState(SaveState saveState) {
-		saveState.putInt("ADDR_WIDTH", getAddrWidth());
-		saveState.putInt("BYTES_WIDTH", getBytesWidth());
-		saveState.putInt("LABEL_WIDTH", getLabelWidth());
-		saveState.putInt("PREMNEMONIC_WIDTH", getPreMnemonicWidth());
-		saveState.putInt("MNEMONIC_WIDTH", getMnemonicWidth());
-		saveState.putInt("OPERAND_WIDTH", getOperandWidth());
-		saveState.putInt("EOL_WIDTH", getEolWidth());
-		saveState.putInt("REF_WIDTH", getRefWidth());
-		saveState.putInt("DATA_FIELD_NAME_WIDTH", getDataFieldNameWidth());
+		saveState.putInt("ADDR_WIDTH", addrWidth);
+		saveState.putInt("BYTES_WIDTH", bytesWidth);
+		saveState.putInt("LABEL_WIDTH", labelWidth);
+		saveState.putInt("PREMNEMONIC_WIDTH", preMnemonicWidth);
+		saveState.putInt("MNEMONIC_WIDTH", mnemonicWidth);
+		saveState.putInt("OPERAND_WIDTH", operandWidth);
+		saveState.putInt("EOL_WIDTH", eolWidth);
+		saveState.putInt("REF_WIDTH", refWidth);
+		saveState.putInt("DATA_FIELD_NAME_WIDTH", dataFieldNameWidth);
 
-		saveState.putString("LABEL_SUFFIX", getLabelSuffix());
-		saveState.putString("COMMENT_PREFIX", getCommentPrefix());
+		saveState.putString("LABEL_SUFFIX", labelSuffix);
+		saveState.putString("COMMENT_PREFIX", commentPrefix);
 
-		saveState.putBoolean("INCLUDE_BLOCKNAMES", isShowBlockNameInOperands());
+		saveState.putBoolean("INCLUDE_BLOCKNAMES", showBlockNameInOperands);
 	}
 
 	void readConfigState(SaveState saveState) {

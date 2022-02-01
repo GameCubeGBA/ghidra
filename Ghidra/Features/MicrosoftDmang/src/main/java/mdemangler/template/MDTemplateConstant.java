@@ -77,11 +77,11 @@ public class MDTemplateConstant extends MDParsableItem {
 						b.parse();
 						if (aStr.charAt(0) == '-') {
 							name = "-";
-							aStr = aStr.substring(1, aStr.length());
+							aStr = aStr.substring(1);
 						}
 						name += aStr.charAt(0) + ".";
 						if (aStr.length() > 1) {
-							name += aStr.substring(1, aStr.length());
+							name += aStr.substring(1);
 						}
 						name += "e" + b;
 						break;

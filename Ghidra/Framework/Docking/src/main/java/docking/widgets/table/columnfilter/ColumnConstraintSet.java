@@ -105,7 +105,7 @@ public class ColumnConstraintSet<R, T> {
 	 * @return  the name of the column whose values will be tested by this filter.
 	 */
 	public String getColumnName() {
-		return model.getColumnName(getColumnModelIndex());
+		return model.getColumnName(columnIndex);
 	}
 
 	/**

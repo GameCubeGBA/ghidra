@@ -219,7 +219,7 @@ public class SaveToolConfigDialogTest extends AbstractGhidraHeadedIntegrationTes
 
 		ToolIconURL selectedIcon = (ToolIconURL) iconList.getSelectedValue();
 		assertNotNull(selectedIcon);
-		assertTrue(selectedIcon.getIcon().toString().endsWith(destFile.getName().toString()));
+		assertTrue(selectedIcon.getIcon().toString().endsWith(destFile.getName()));
 
 		String lastDirPreference =
 			Preferences.getProperty(SaveToolConfigDialog.LAST_ICON_DIRECTORY);

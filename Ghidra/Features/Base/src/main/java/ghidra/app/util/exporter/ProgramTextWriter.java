@@ -307,14 +307,14 @@ class ProgramTextWriter {
 							eolcmt = clip(eolcmt, options.getEolWidth(), true, true);
 						}
 						buffy.append(eolcmt);
-						writer.println(buffy.toString());
+						writer.println(buffy);
 						buffy = new StringBuilder();
 					}
 				}
 			}
 
 			if (buffy.length() > 0) {
-				writer.println(buffy.toString());
+				writer.println(buffy);
 			}
 			buffy = new StringBuilder();
 
@@ -377,7 +377,7 @@ class ProgramTextWriter {
 		buffy.append(" -> ");
 		processAddress(bytesRemovedRangeEnd, null);
 		buffy.append(" [UNDEFINED BYTES REMOVED]");
-		writer.print(buffy.toString());
+		writer.print(buffy);
 
 		if (options.isHTML()) {
 			writer.print("</FONT>");
@@ -743,7 +743,7 @@ class ProgramTextWriter {
 	private void processSpace(int type) {
 		for (int x = 0; x < type; x++) {
 			buffy = new StringBuilder();
-			writer.println(buffy.toString());
+			writer.println(buffy);
 		}
 	}
 
@@ -754,6 +754,6 @@ class ProgramTextWriter {
 		}
 		buffy.append(options.getCommentPrefix());
 		buffy.append(what);
-		writer.println(buffy.toString());
+		writer.println(buffy);
 	}
 }

@@ -787,7 +787,7 @@ public class DBTraceObject extends DBAnnotatedObject implements TraceObject {
 			Class<I> ifClass) {
 		Class<? extends TargetObject> targetIf = TraceObjectInterfaceUtils.toTargetIf(ifClass);
 		// This is a sort of meet-in-the-middle. The type search must originate from the root
-		PathMatcher matcher = getManager().getRootSchema().searchFor(targetIf, false);
+		PathMatcher matcher = manager.getRootSchema().searchFor(targetIf, false);
 		return getAncestors(span, matcher).map(p -> p.getFirstParent(this).queryInterface(ifClass));
 	}
 
@@ -796,7 +796,7 @@ public class DBTraceObject extends DBAnnotatedObject implements TraceObject {
 			Range<Long> span, Class<I> ifClass) {
 		Class<? extends TargetObject> targetIf = TraceObjectInterfaceUtils.toTargetIf(ifClass);
 		// This is a sort of meet-in-the-middle. The type search must originate from the root
-		PathMatcher matcher = getManager().getRootSchema().searchFor(targetIf, false);
+		PathMatcher matcher = manager.getRootSchema().searchFor(targetIf, false);
 		List<String> parentPath = getCanonicalPath().getKeyList();
 		if (!matcher.ancestorMatches(parentPath, false)) {
 			return Stream.of();

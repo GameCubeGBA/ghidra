@@ -239,7 +239,7 @@ public class PartitionCodeSubModel implements SubroutineBlockModel {
 		}
 
 		// Check for fall-through condition
-		Instruction inst = getListing().getInstructionBefore(start);
+		Instruction inst = listing.getInstructionBefore(start);
 		if (inst != null) {
 			Address a = inst.getFallThrough();
 			if (start.equals(a)) {

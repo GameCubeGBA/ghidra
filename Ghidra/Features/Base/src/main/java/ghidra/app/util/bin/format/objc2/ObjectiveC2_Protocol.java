@@ -219,7 +219,7 @@ public class ObjectiveC2_Protocol implements StructConverter {
 	}
 
 	public void applyTo(Namespace namespace) throws Exception {
-		Address address = ObjectiveC1_Utilities.toAddress(_state.program, getIndex());
+		Address address = ObjectiveC1_Utilities.toAddress(_state.program, _index);
 		try {
 			ObjectiveC1_Utilities.applyData(_state.program, toDataType(), address);
 		}
@@ -230,7 +230,7 @@ public class ObjectiveC2_Protocol implements StructConverter {
 			Namespace protocolNamespace =
 				ObjectiveC1_Utilities.createNamespace(_state.program,
 					ObjectiveC1_Constants.NAMESPACE, ObjectiveC2_Protocol.NAME);
-			ObjectiveC1_Utilities.createSymbol(_state.program, protocolNamespace, getName(),
+			ObjectiveC1_Utilities.createSymbol(_state.program, protocolNamespace, name,
 				address);
 		}
 		catch (Exception e) {

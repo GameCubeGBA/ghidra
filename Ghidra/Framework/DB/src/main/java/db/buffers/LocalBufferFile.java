@@ -264,7 +264,7 @@ public class LocalBufferFile implements BufferFile {
 	public static DataBuffer peek(File file, int bufferIndex) throws IOException {
 		LocalBufferFile bf = new LocalBufferFile(file, false);
 		try {
-			DataBuffer buf = new DataBuffer(bf.getBufferSize());
+			DataBuffer buf = new DataBuffer(bf.bufferSize);
 			bf.get(buf, bufferIndex);
 			return buf;
 		}
@@ -942,7 +942,7 @@ public class LocalBufferFile implements BufferFile {
 		boolean success = false;
 		try {
 			copyFile(this, destBf, null, monitor);
-			destBf.setFileId(fileId);
+			destBf.fileId = fileId;
 			destBf.close();
 			success = true;
 		}

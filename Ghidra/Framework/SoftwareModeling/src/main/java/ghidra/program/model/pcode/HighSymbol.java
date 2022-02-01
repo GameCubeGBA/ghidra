@@ -233,7 +233,7 @@ public class HighSymbol {
 		if (pcaddr == null) {
 			return 0;
 		}
-		return (int) pcaddr.subtract(getHighFunction().getFunction().getEntryPoint());
+		return (int) pcaddr.subtract(function.getFunction().getEntryPoint());
 	}
 
 	/**
@@ -378,7 +378,7 @@ public class HighSymbol {
 		if (isVolatile) {
 			SpecXmlUtils.encodeBooleanAttribute(buf, "volatile", true);
 		}
-		if (isIsolated()) {
+		if (typelock) {
 			SpecXmlUtils.encodeBooleanAttribute(buf, "merge", false);
 		}
 		if (isThis) {

@@ -128,7 +128,7 @@ public class DecompilerValidator extends PostAnalysisValidator {
 
 	@Override
 	public String toString() {
-		return getName();
+		return NAME;
 	}
 
 //==================================================================================================

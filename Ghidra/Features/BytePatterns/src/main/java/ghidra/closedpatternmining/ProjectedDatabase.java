@@ -67,14 +67,14 @@ public class ProjectedDatabase {
 	 * @param extendingItem item to extend by
 	 */
 	public ProjectedDatabase(ProjectedDatabase projDatabase, SequenceItem extendingItem) {
-		List<SequenceItem> initialList = projDatabase.getPrefix();
+		List<SequenceItem> initialList = projDatabase.prefixSequence;
 		SequenceItem lastItem = initialList.get(initialList.size() - 1);
 		if (lastItem.getIndex() >= extendingItem.getIndex()) {
 			throw new IllegalArgumentException(
 				"extending item must be after all items of the prefixSequence of projDatabase!");
 		}
 
-		database = projDatabase.getDatabase();
+		database = projDatabase.database;
 
 		prefixSequence = new ArrayList<>(initialList);
 		prefixSequence.add(extendingItem);
@@ -84,7 +84,7 @@ public class ProjectedDatabase {
 		support = 0;
 		int indexToCheck = extendingItem.getIndex();
 		String symbolToFind = extendingItem.getSymbol();
-		for (ProjectedSequenceInfo projSeq : projDatabase.getProjectedInfo()) {
+		for (ProjectedSequenceInfo projSeq : projDatabase.projectedInfo) {
 			Sequence sequence = sequences.get(projSeq.getSequenceIndex());
 			String seqAsString = sequence.getSequenceAsString();
 			if (seqAsString.substring(indexToCheck, indexToCheck + 1).equals(symbolToFind)) {

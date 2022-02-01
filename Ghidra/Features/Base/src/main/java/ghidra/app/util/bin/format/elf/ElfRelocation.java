@@ -374,10 +374,10 @@ public class ElfRelocation implements ByteArrayConverter, StructConverter {
 
 	@Override
 	public String toString() {
-		String str = "Offset: 0x" + Long.toHexString(getOffset()) + " - Type: 0x" +
+		String str = "Offset: 0x" + Long.toHexString(r_offset) + " - Type: 0x" +
 			Long.toHexString(getType()) + " - Symbol: 0x" + Long.toHexString(getSymbolIndex());
 		if (hasAddend) {
-			str += " - Addend: 0x" + Long.toHexString(getAddend());
+			str += " - Addend: 0x" + Long.toHexString(r_addend);
 		}
 		return str;
 	}

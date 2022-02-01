@@ -620,7 +620,7 @@ public class StackFrameDataType extends BiDirectionDataType {
 	 */
 	public String getDefaultName(DataTypeComponent element) {
 		int offset = element.getOffset();
-		int paramBaseOffset = getParameterOffset();
+		int paramBaseOffset = splitOffset;
 		boolean isLocal = growsNegative ? (offset < paramBaseOffset) : (offset >= paramBaseOffset);
 		if (isLocal) {
 			return SymbolUtilities.getDefaultLocalName(function.getProgram(), offset, 0);

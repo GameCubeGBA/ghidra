@@ -187,7 +187,7 @@ public class DWARFCompilationUnit {
 					cuNumber + " at offset " + startOffset + " (0x" +
 					Long.toHexString(startOffset) + "), skipping entire compilation unit",
 				ioe);
-			debugInfoBR.setPointerIndex(cu.getEndOffset());
+			debugInfoBR.setPointerIndex(cu.endOffset);
 			return null;
 		}
 	}
@@ -341,14 +341,14 @@ public class DWARFCompilationUnit {
 			throws IOException, DWARFException, CancelledException {
 
 		BinaryReader br = dwarfProgram.getDebugInfo();
-		br.setPointerIndex(getFirstDIEOffset());
+		br.setPointerIndex(firstDIEOffset);
 
 		Deque<DebugInfoEntry> parentStack = new ArrayDeque<>();
 
 		DebugInfoEntry parent = null;
 		DebugInfoEntry die;
 		DebugInfoEntry unexpectedTerminator = null;
-		while ((br.getPointerIndex() < getEndOffset()) &&
+		while ((br.getPointerIndex() < endOffset) &&
 			(die = DebugInfoEntry.read(br, this, dwarfProgram.getAttributeFactory())) != null) {
 
 			monitor.checkCanceled();
@@ -373,7 +373,7 @@ public class DWARFCompilationUnit {
 				die.setParent(parent);
 			}
 			else {
-				if (die.getOffset() != getFirstDIEOffset()) {
+				if (die.getOffset() != firstDIEOffset) {
 					throw new DWARFException(
 						"Unexpected root level DIE at " + Long.toHexString(die.getOffset()));
 				}

@@ -1320,7 +1320,7 @@ public class DialogComponentProvider
 
 	@Override
 	public String toString() {
-		return getTitle();
+		return title;
 	}
 
 //==================================================================================================

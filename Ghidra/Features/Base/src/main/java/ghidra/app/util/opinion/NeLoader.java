@@ -70,7 +70,7 @@ public class NeLoader extends AbstractLibrarySupportLoader {
 		NewExecutable ne = new NewExecutable(RethrowContinuesFactory.INSTANCE, provider, null);
 		WindowsHeader wh = ne.getWindowsHeader();
 		if (wh != null) {
-			List<QueryResult> results = QueryOpinionService.query(getName(),
+			List<QueryResult> results = QueryOpinionService.query(NE_NAME,
 				"" + wh.getInformationBlock().getMagicNumber(), null);
 			for (QueryResult result : results) {
 				loadSpecs.add(new LoadSpec(this, 0, result));

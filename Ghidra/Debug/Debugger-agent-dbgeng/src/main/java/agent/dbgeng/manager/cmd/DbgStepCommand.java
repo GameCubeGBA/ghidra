@@ -88,7 +88,7 @@ public class DbgStepCommand extends AbstractDbgCommand<Void> {
 			//control.setExecutionStatus(DebugStatus.STEP_BRANCH);
 		}
 		else if (suffix == ExecSuffix.EXTENDED) {
-			cmd = getLastCommand();
+			cmd = lastCommand;
 		}
 		DbgThreadImpl eventThread = manager.getEventThread();
 		if (eventThread != null && eventThread.getId().equals(id)) {

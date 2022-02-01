@@ -329,7 +329,7 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
                         Msg.debug(this,
                                 "Special typeinfo reference is not equal to one of the three special " +
                                         "type infos. Cannot process typeinfo struct at " +
-                                        typeinfoAddress.toString());
+                                        typeinfoAddress);
                     }
                     continue;
                 }
@@ -340,7 +340,7 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
                         Msg.debug(this,
                                 "Special typeinfo reference is not equal to one of the three special " +
                                         "type infos. Cannot process typeinfo struct at " +
-                                        typeinfoAddress.toString());
+                                        typeinfoAddress);
                     }
                     continue;
                 }
@@ -781,7 +781,7 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 		if (typeinfoAddress == null) {
 			if (DEBUG) {
 				Msg.debug(this, vtableNamespace.getName() +
-					" vtable has no typeinfo ref after vtable at " + vtableAddress.toString());
+					" vtable has no typeinfo ref after vtable at " + vtableAddress);
 			}
 			return;
 		}
@@ -1505,7 +1505,7 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 
 		if (classNamespace == null) {
 			Msg.debug(this,
-				typeinfoAddress.toString() +
+				typeinfoAddress +
 					"Could not create a class namespace for demangled namespace string " +
 					namespaceString);
 			return null;
@@ -1970,7 +1970,7 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 			throw new IllegalArgumentException("Could not process vmi class " +
 				recoveredClass.getName() +
 				" because getting the number of bases from the vmi typeinfo structure at address " +
-				typeinfoAddress.toString());
+                    typeinfoAddress);
 		}
 
 		if (numBaseClasses > 1) {
@@ -2001,7 +2001,7 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 			RecoveredClass parentClass = getParentClassFromParentTypeInfoRef(parentRefAddress);
 			if (parentClass == null) {
 				throw new Exception("Could not get parent class number " + (i + 1) +
-					" from typeinfo struct at " + typeinfoAddress.toString());
+					" from typeinfo struct at " + typeinfoAddress);
 			}
 
 			if (DEBUG) {
@@ -2287,7 +2287,7 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
             Address typeinfoAddress = findNextTypeinfoRef(vtableAddress);
             if (typeinfoAddress == null) {
                 if (DEBUG) {
-                    Msg.debug(this, vtableAddress.toString() + " " + vtableNamespace.getName() +
+                    Msg.debug(this, vtableAddress + " " + vtableNamespace.getName() +
                             " vtable has no typeinfo ref");
                 }
                 continue;

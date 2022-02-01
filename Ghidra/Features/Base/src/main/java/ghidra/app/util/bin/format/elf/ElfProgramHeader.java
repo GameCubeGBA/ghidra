@@ -339,7 +339,7 @@ public class ElfProgramHeader
 		if (p_type != ElfProgramHeaderConstants.PT_LOAD || p_filesz == 0 || p_memsz == 0) {
 			throw new UnsupportedOperationException("virtualAddress not loaded by this segment");
 		}
-		if (getMemorySize() != getAdjustedMemorySize()) {
+		if (p_memsz != getAdjustedMemorySize()) {
 			// TODO: unsure if we will encounter this situation 
 			throw new UnsupportedOperationException("unsupported use of filtered load segment");
 		}

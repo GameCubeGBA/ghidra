@@ -95,8 +95,8 @@ class MemReferenceDB extends ReferenceDB {
 					toAddr.equals(memRef.getToAddress()) && opIndex == memRef.getOperandIndex() &&
 					symbolID == memRef.getSymbolID() && isPrimary == memRef.isPrimary() &&
 					sourceType == memRef.getSource() && refType == memRef.getReferenceType() &&
-					isShiftedReference() == memRef.isShiftedReference() &&
-					isOffsetReference() == memRef.isOffsetReference();
+					isShifted == memRef.isShifted &&
+					isOffset == memRef.isOffset;
 			}
 			Address compatibleFromAddr =
 				SimpleDiffUtility.getCompatibleAddress(program, fromAddr, memRef.program);
@@ -107,8 +107,8 @@ class MemReferenceDB extends ReferenceDB {
 				sourceType != memRef.sourceType || refType != memRef.getReferenceType() ||
 				toAddr.getOffset() != memRef.toAddr.getOffset() ||
 				isPrimary != memRef.isPrimary() ||
-				isShiftedReference() != memRef.isShiftedReference() ||
-				isOffsetReference() != memRef.isOffsetReference()) {
+				isShifted != memRef.isShifted ||
+				isOffset != memRef.isOffset) {
 				return false;
 			}
 			return true;
@@ -119,8 +119,8 @@ class MemReferenceDB extends ReferenceDB {
                 opIndex == ref.getOperandIndex() && symbolID == ref.getSymbolID() &&
                 isPrimary == ref.isPrimary() && sourceType == ref.getSource() &&
                 refType == ref.getReferenceType() &&
-                isShiftedReference() == ref.isShiftedReference() &&
-                isOffsetReference() == ref.isOffsetReference();
+                isShifted == ref.isShiftedReference() &&
+                isOffset == ref.isOffsetReference();
         }
         return false;
 

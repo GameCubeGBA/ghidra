@@ -238,7 +238,7 @@ public class DBTraceFunctionSymbol extends DBTraceNamespaceSymbol
 		DBTraceBookmarkType errType =
 			manager.trace.getBookmarkManager().getOrDefineBookmarkType(BookmarkType.ERROR);
 		manager.trace.getBookmarkManager()
-				.addBookmark(getLifespan(), entryPoint, errType,
+				.addBookmark(lifespan, entryPoint, errType,
 					"Bad Variables Removed", "Removed " + badns.size() + " bad variables");
 		for (AbstractDBTraceVariableSymbol s : badns) {
 			s.delete();
@@ -1501,7 +1501,7 @@ public class DBTraceFunctionSymbol extends DBTraceNamespaceSymbol
 			if (oldBody.equals(newBody)) {
 				return;
 			}
-			manager.functions.assertNotOverlapping(this, getEntryPoint(), getLifespan(), newBody);
+			manager.functions.assertNotOverlapping(this, getEntryPoint(), lifespan, newBody);
 			for (DBTraceLabelSymbol label : manager.labels.getChildren(this)) {
 				if (!newBody.contains(label.getAddress())) {
 					label.delete();

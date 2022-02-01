@@ -276,7 +276,7 @@ public class FSRL {
 			if (parentContainer == null) {
 				throw new IOException(
 					"Unknown requested FSRL parent, requested depth " + nestedDepth + ", only " +
-						getNestingDepth() + " available in " + this.toString());
+						getNestingDepth() + " available in " + this);
 			}
 			current = parentContainer;
 		}
@@ -342,7 +342,7 @@ public class FSRL {
 	 * @return new FSRL instance
 	 */
 	public FSRL withPath(FSRL copyPath) {
-		return new FSRL(getFS(), copyPath.getPath(), copyPath.getMD5());
+		return new FSRL(getFS(), copyPath.getPath(), copyPath.md5);
 	}
 
 	/**
@@ -474,10 +474,10 @@ public class FSRL {
 		}
 		String s = toString();
 		return s.equals(fsrlStr) ||
-			(getMD5() != null && s.startsWith(fsrlStr) &&
+			(md5 != null && s.startsWith(fsrlStr) &&
 				s.substring(fsrlStr.length()).startsWith("?MD5=") &&
 				s.length() == fsrlStr.length() + 37) ||
-			(getMD5() == null && fsrlStr.startsWith(s) &&
+			(md5 == null && fsrlStr.startsWith(s) &&
 				fsrlStr.substring(s.length()).startsWith("?MD5=") &&
 				fsrlStr.length() == s.length() + 37);
 	}

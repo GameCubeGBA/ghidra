@@ -1453,7 +1453,7 @@ public abstract class AbstractDataActionTest extends AbstractGhidraHeadedIntegra
 		}
 		catch (Throwable t) {
 			t.printStackTrace();
-			Assert.fail("Action '" + name + "' failed: " + t.toString());
+			Assert.fail("Action '" + name + "' failed: " + t);
 		}
 
 	}

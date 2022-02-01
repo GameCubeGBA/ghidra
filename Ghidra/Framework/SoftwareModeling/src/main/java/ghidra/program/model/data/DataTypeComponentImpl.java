@@ -82,7 +82,7 @@ public class DataTypeComponentImpl implements InternalDataTypeComponent, Seriali
 	@Override
 	public boolean isZeroBitFieldComponent() {
 		if (isBitFieldComponent()) {
-			BitFieldDataType bitField = (BitFieldDataType) getDataType();
+			BitFieldDataType bitField = (BitFieldDataType) dataType;
 			return bitField.getBitSize() == 0;
 		}
 		return false;
@@ -250,13 +250,13 @@ public class DataTypeComponentImpl implements InternalDataTypeComponent, Seriali
 			return false;
 		}
 		DataTypeComponent dtc = (DataTypeComponent) obj;
-		DataType myDt = getDataType();
+		DataType myDt = dataType;
 		DataType otherDt = dtc.getDataType();
 
-		if (offset != dtc.getOffset() || getLength() != dtc.getLength() ||
+		if (offset != dtc.getOffset() || length != dtc.getLength() ||
 			ordinal != dtc.getOrdinal() ||
 			!SystemUtilities.isEqual(getFieldName(), dtc.getFieldName()) ||
-			!SystemUtilities.isEqual(getComment(), dtc.getComment())) {
+			!SystemUtilities.isEqual(comment, dtc.getComment())) {
 			return false;
 		}
 		if (!(myDt instanceof Pointer)) {
@@ -288,7 +288,7 @@ public class DataTypeComponentImpl implements InternalDataTypeComponent, Seriali
 
 	@Override
 	public boolean isEquivalent(DataTypeComponent dtc) {
-		DataType myDt = getDataType();
+		DataType myDt = dataType;
 		DataType otherDt = dtc.getDataType();
 		DataType myParent = getParent();
 		boolean aligned =
@@ -296,12 +296,12 @@ public class DataTypeComponentImpl implements InternalDataTypeComponent, Seriali
 		// Components don't need to have matching offset when they are aligned
 		if ((!aligned && (offset != dtc.getOffset())) ||
 			!SystemUtilities.isEqual(getFieldName(), dtc.getFieldName()) ||
-			!SystemUtilities.isEqual(getComment(), dtc.getComment())) {
+			!SystemUtilities.isEqual(comment, dtc.getComment())) {
 			return false;
 		}
 
 		// Component lengths need only be checked for dynamic types
-		if (getLength() != dtc.getLength() && (myDt instanceof Dynamic)) {
+		if (length != dtc.getLength() && (myDt instanceof Dynamic)) {
 			return false;
 		}
 

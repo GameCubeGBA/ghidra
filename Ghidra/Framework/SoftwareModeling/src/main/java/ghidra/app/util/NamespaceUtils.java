@@ -66,7 +66,7 @@ public class NamespaceUtils {
 	 * @return namespace path excluding any library name
 	 */
 	public static String getNamespacePathWithoutLibrary(Namespace namespace) {
-		String str = new String();
+		String str = "";
 		while (namespace != null && !(namespace instanceof GlobalNamespace) &&
 			!(namespace instanceof Library)) {
 			str = namespace.getName() + Namespace.DELIMITER + str;

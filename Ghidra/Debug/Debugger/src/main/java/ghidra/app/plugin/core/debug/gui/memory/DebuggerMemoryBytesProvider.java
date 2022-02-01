@@ -256,7 +256,7 @@ public class DebuggerMemoryBytesProvider extends ProgramByteViewerComponentProvi
 	protected void createActions() {
 		initTraits();
 
-		if (!isMainViewer()) {
+		if (!isMainViewer) {
 			actionFollowsCurrentThread = new FollowsCurrentThreadAction();
 		}
 
@@ -326,7 +326,7 @@ public class DebuggerMemoryBytesProvider extends ProgramByteViewerComponentProvi
 	}
 
 	public void setFollowsCurrentThread(boolean follows) {
-		if (isMainViewer()) {
+		if (isMainViewer) {
 			throw new IllegalStateException(
 				"The main memory bytes viewer always follows the current trace and thread");
 		}
@@ -397,7 +397,7 @@ public class DebuggerMemoryBytesProvider extends ProgramByteViewerComponentProvi
 		CONFIG_STATE_HANDLER.readConfigState(this, saveState);
 		trackingTrait.readConfigState(saveState);
 
-		if (isMainViewer()) {
+		if (isMainViewer) {
 			followsCurrentThread = true;
 		}
 		else {
@@ -409,7 +409,7 @@ public class DebuggerMemoryBytesProvider extends ProgramByteViewerComponentProvi
 
 	@Override
 	protected void writeDataState(SaveState saveState) {
-		if (!isMainViewer()) {
+		if (!isMainViewer) {
 			current.writeDataState(tool, saveState, KEY_DEBUGGER_COORDINATES);
 		}
 		super.writeDataState(saveState);
@@ -417,7 +417,7 @@ public class DebuggerMemoryBytesProvider extends ProgramByteViewerComponentProvi
 
 	@Override
 	protected void readDataState(SaveState saveState) {
-		if (!isMainViewer()) {
+		if (!isMainViewer) {
 			DebuggerCoordinates coordinates =
 				DebuggerCoordinates.readDataState(tool, saveState, KEY_DEBUGGER_COORDINATES, true);
 			coordinatesActivated(coordinates);

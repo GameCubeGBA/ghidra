@@ -110,7 +110,7 @@ public class ElfLoader extends AbstractLibrarySupportLoader {
 				ElfHeader.createElfHeader(RethrowContinuesFactory.INSTANCE, provider, null);
 			// TODO: Why do we convey image base to loader ?  This will be managed by each loader !
 			List<QueryResult> results =
-				QueryOpinionService.query(getName(), elf.getMachineName(), elf.getFlags());
+				QueryOpinionService.query(ELF_NAME, elf.getMachineName(), elf.getFlags());
 			for (QueryResult result : results) {
 				boolean add = true;
 				// Some languages are defined with sizes smaller than 32

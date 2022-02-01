@@ -223,7 +223,7 @@ class DataComponent extends DataDB {
 	 */
 	@Override
 	public int getRootOffset() {
-		return parent.getRootOffset() + getParentOffset();
+		return parent.getRootOffset() + offset;
 	}
 
 	/**

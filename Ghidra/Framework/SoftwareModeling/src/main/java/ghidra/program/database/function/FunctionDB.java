@@ -197,7 +197,7 @@ public class FunctionDB extends DatabaseObject implements Function {
 	public ExternalLocation getExternalLocation() {
 		if (isExternal()) {
 			ExternalManagerDB extMgr = (ExternalManagerDB) program.getExternalManager();
-			return extMgr.getExternalLocation(getSymbol());
+			return extMgr.getExternalLocation(functionSymbol);
 		}
 		return null;
 	}
@@ -1026,7 +1026,7 @@ public class FunctionDB extends DatabaseObject implements Function {
 	 * @return variables array with 'this' auto-param adjusted if needed
 	 */
 	private Variable[] adjustThunkThisParameter(Variable[] variables) {
-		Symbol s = getSymbol();
+		Symbol s = functionSymbol;
 		if (s.getParentNamespace().getID() == Namespace.GLOBAL_NAMESPACE_ID) {
 			return variables;
 		}
@@ -1045,7 +1045,7 @@ public class FunctionDB extends DatabaseObject implements Function {
 	 * @return variables array with 'this' auto-param adjusted if needed
 	 */
 	private Parameter[] adjustThunkThisParameter(Parameter[] parameters) {
-		Symbol s = getSymbol();
+		Symbol s = functionSymbol;
 		if (s.getParentNamespace().getID() == Namespace.GLOBAL_NAMESPACE_ID) {
 			return parameters;
 		}
@@ -1070,7 +1070,7 @@ public class FunctionDB extends DatabaseObject implements Function {
 		if (!parameter.isAutoParameter()) {
 			return parameter;
 		}
-		Symbol s = getSymbol();
+		Symbol s = functionSymbol;
 		if (s.getParentNamespace().getID() == Namespace.GLOBAL_NAMESPACE_ID) {
 			return parameter;
 		}
@@ -2514,7 +2514,7 @@ public class FunctionDB extends DatabaseObject implements Function {
 		if (name == null || name.equals(Function.UNKNOWN_CALLING_CONVENTION_STRING)) {
 			return null;
 		}
-		FunctionManager functionMgr = getFunctionManager();
+		FunctionManager functionMgr = manager;
 		if (name.equals(Function.DEFAULT_CALLING_CONVENTION_STRING)) {
 			return functionMgr.getDefaultCallingConvention();
 		}
@@ -2794,7 +2794,7 @@ public class FunctionDB extends DatabaseObject implements Function {
 			// Get a list of all tag records that map to our function.
 			FunctionTagManagerDB tagManager =
 				(FunctionTagManagerDB) manager.getFunctionTagManager();
-			tags = tagManager.getFunctionTagsByFunctionID(getID());
+			tags = tagManager.getFunctionTagsByFunctionID(key);
 		}
 		catch (IOException e) {
 			manager.dbError(e);
@@ -2819,8 +2819,8 @@ public class FunctionDB extends DatabaseObject implements Function {
 				tag = tagManager.createFunctionTag(name, "");
 			}
 
-			if (!tagManager.isTagApplied(getID(), tag.getId())) {
-				tagManager.applyFunctionTag(getID(), tag.getId());
+			if (!tagManager.isTagApplied(key, tag.getId())) {
+				tagManager.applyFunctionTag(key, tag.getId());
 
 				Address addr = getEntryPoint();
 				program.setChanged(ChangeManager.DOCR_TAG_ADDED_TO_FUNCTION, addr, addr, tag, tag);
@@ -2852,7 +2852,7 @@ public class FunctionDB extends DatabaseObject implements Function {
 
 			FunctionTagManagerDB tagManager =
 				(FunctionTagManagerDB) manager.getFunctionTagManager();
-			boolean removed = tagManager.removeFunctionTag(getID(), tag.getId());
+			boolean removed = tagManager.removeFunctionTag(key, tag.getId());
 
 			if (removed) {
 				Address addr = getEntryPoint();

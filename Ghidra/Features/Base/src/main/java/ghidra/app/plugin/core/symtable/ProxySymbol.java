@@ -45,7 +45,7 @@ class ProxySymbol implements Symbol {
 
 		// this class is only ever equal if the id matches
 		Symbol s = (Symbol) obj;
-		if (getID() == s.getID()) {
+		if (id == s.getID()) {
 			return true;
 		}
 		return false;

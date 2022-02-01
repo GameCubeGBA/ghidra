@@ -423,7 +423,7 @@ public class Register implements java.io.Serializable, Comparable<Register> {
 		if (baseMask == null) {
 			synchronized (this) {
 				Register base = getBaseRegister();
-				int byteLength = (base.getBitLength() + 7) / 8;
+				int byteLength = (base.bitLength + 7) / 8;
 				byte[] newBaseMask = new byte[byteLength];
 				int endBit = leastSigBitInBaseRegister + bitLength - 1;
 				for (int i = leastSigBitInBaseRegister; i <= endBit; i++) {
@@ -543,12 +543,12 @@ public class Register implements java.io.Serializable, Comparable<Register> {
 	void addLaneSize(int laneSizeInBytes) {
 		if ((8 * numBytes) != bitLength) {
 			throw new UnsupportedOperationException(
-				"Register " + getName() + " does not support lanes");
+				"Register " + name + " does not support lanes");
 		}
 		if (laneSizeInBytes <= 0 || laneSizeInBytes >= numBytes ||
 			(numBytes % laneSizeInBytes) != 0) {
 			throw new IllegalArgumentException(
-				"Invalid lane size: " + laneSizeInBytes + " for register " + getName());
+				"Invalid lane size: " + laneSizeInBytes + " for register " + name);
 		}
 		if (laneSizes == null) {
 			laneSizes = new TreeSet<>();

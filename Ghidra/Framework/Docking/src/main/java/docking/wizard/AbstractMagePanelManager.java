@@ -111,7 +111,7 @@ public abstract class AbstractMagePanelManager<T> implements PanelManager {
 	}
 
 	protected final MagePanel<T> getCurrentPanel() {
-		int index = getCurrentIndex();
+		int index = currentIndex;
 		List<MagePanel<T>> panelList = getPanels();
 		if (index < 0 || index >= panelList.size()) {
 			return null;
@@ -128,7 +128,7 @@ public abstract class AbstractMagePanelManager<T> implements PanelManager {
 			currentPanel.updateStateObjectWithPanelInfo(pretendState);
 		}
 		MagePanel<T> panel = null;
-		int index = getCurrentIndex() + 1;
+		int index = currentIndex + 1;
 		while (index < getPanels().size()) {
 			panel = getPanels().get(index);
 			WizardPanelDisplayability displayability =
@@ -156,7 +156,7 @@ public abstract class AbstractMagePanelManager<T> implements PanelManager {
 			currentPanel.updateStateObjectWithPanelInfo(pretendState);
 		}
 		MagePanel<T> panel = null;
-		int index = getCurrentIndex() + 1;
+		int index = currentIndex + 1;
 		while (index < getPanels().size()) {
 			panel = getPanels().get(index);
 			WizardPanelDisplayability displayability =
@@ -204,10 +204,10 @@ public abstract class AbstractMagePanelManager<T> implements PanelManager {
 		MagePanel<T> currentPanel = getCurrentPanel();
 		if (currentPanel != null) {
 			currentPanel.leavePanel(state);
-			panelPath.push(getCurrentIndex());
+			panelPath.push(currentIndex);
 		}
 		MagePanel<T> panel = null;
-		int index = getCurrentIndex() + 1;
+		int index = currentIndex + 1;
 		while (index < getPanels().size()) {
 			panel = getPanels().get(index);
 			WizardPanelDisplayability displayability =
@@ -290,13 +290,13 @@ public abstract class AbstractMagePanelManager<T> implements PanelManager {
 
 	@Override
 	public final void finish() throws IllegalPanelStateException {
-		getWizardManager().disableNavigation();
+		wizardManager.disableNavigation();
 		MagePanel<T> currentPanel = getCurrentPanel();
 		if (currentPanel != null) {
 			currentPanel.leavePanel(state);
 		}
 		MagePanel<T> panel = null;
-		int index = getCurrentIndex() + 1;
+		int index = currentIndex + 1;
 		while (index < getPanels().size()) {
 			panel = getPanels().get(index);
 			panel.getPanelDisplayabilityAndUpdateState(state);

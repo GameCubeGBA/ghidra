@@ -252,7 +252,7 @@ public class SymbolFileInfo {
 	 */
 	public boolean isExactMatch(SymbolFileInfo other) {
 		return getUniqueName().equalsIgnoreCase(other.getUniqueName()) &&
-			pdbIdentifiers.getAge() == other.getIdentifiers().getAge();
+			pdbIdentifiers.getAge() == other.pdbIdentifiers.getAge();
 	}
 
 	/**
@@ -261,13 +261,13 @@ public class SymbolFileInfo {
 	 * @return String description
 	 */
 	public String getDescription() {
-		return getName() + ", " + getIdentifiers();
+		return getName() + ", " + pdbIdentifiers;
 	}
 
 	@Override
 	public String toString() {
 		return String.format("SymbolFileInfo: [ pdb: %s, uid: %s]", getName(),
-			getIdentifiers().toString());
+			pdbIdentifiers.toString());
 	}
 
 	@Override

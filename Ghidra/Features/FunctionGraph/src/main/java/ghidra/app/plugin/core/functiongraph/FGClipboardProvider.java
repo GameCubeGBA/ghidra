@@ -82,7 +82,7 @@ public class FGClipboardProvider extends CodeBrowserClipboardProvider {
 				}
 			}
 
-			return createStringTransferable(g.getBuffer().toString());
+			return createStringTransferable(g.getBuffer());
 		}
 		catch (Exception e) {
 			String message = "Copy failed: " + ExceptionUtils.getMessage(e);

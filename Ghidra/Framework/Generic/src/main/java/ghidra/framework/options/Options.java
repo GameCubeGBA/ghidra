@@ -27,7 +27,7 @@ import ghidra.util.HelpLocation;
 
 public interface Options {
 	public static final char DELIMITER = '.';
-	public final static String DELIMITER_STRING = new String(new char[] { DELIMITER });
+	public final static String DELIMITER_STRING = String.valueOf(DELIMITER);
 	public final static String ILLEGAL_DELIMITER = DELIMITER_STRING + DELIMITER_STRING;
 
 	/**

@@ -1106,7 +1106,7 @@ public class DecompilerNestedLayout extends AbstractFGLayout {
 		private int edgeOffset;
 		private Map<FGVertex, Vertex2d> cache =
 			LazyMap.lazyMap(new HashMap<>(), v -> new Vertex2d(v, vertexShaper,
-                    vertexLayoutLocations, layoutToGridMap, getEdgeOffset()));
+                    vertexLayoutLocations, layoutToGridMap, edgeOffset));
 
 		Vertex2dFactory(VisualGraphVertexShapeTransformer<FGVertex> transformer,
 				Map<FGVertex, Point2D> vertexLayoutLocations,

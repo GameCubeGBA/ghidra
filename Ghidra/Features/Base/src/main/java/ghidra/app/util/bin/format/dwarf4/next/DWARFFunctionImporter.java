@@ -152,7 +152,7 @@ public class DWARFFunctionImporter {
 			catch (Throwable th) {
 				Msg.error(this,
 					"Error when processing DWARF information for DIE " + diea.getHexOffset(), th);
-				Msg.info(this, "DIE info:\n" + diea.toString());
+				Msg.info(this, "DIE info:\n" + diea);
 			}
 		}
 		logImportErrorSummary();
@@ -327,7 +327,7 @@ public class DWARFFunctionImporter {
 				Msg.error(this,
 					"Failed to get function signature information, leaving undefined: " +
 						gfunc.getName() + "@" + gfunc.getEntryPoint());
-				Msg.debug(this, "DIE info: " + diea.toString());
+				Msg.debug(this, "DIE info: " + diea);
 				return;
 			}
 
@@ -450,7 +450,7 @@ public class DWARFFunctionImporter {
 			return new ParameterImpl(name, dt, currentProgram);
 		}
 		catch (InvalidInputException e) {
-			Msg.debug(this, "Failed to create parameter for " + diea.toString());
+			Msg.debug(this, "Failed to create parameter for " + diea);
 		}
 		return null;
 	}
@@ -1442,7 +1442,7 @@ public class DWARFFunctionImporter {
 		}
 		if (hasConflict) {
 			appendComment(func.getEntryPoint().add(dvar.lexicalOffset), CodeUnit.EOL_COMMENT,
-				"Scope for omitted local variable " + var.toString() + " starts here", "; ");
+				"Scope for omitted local variable " + var + " starts here", "; ");
 			return;
 		}
 

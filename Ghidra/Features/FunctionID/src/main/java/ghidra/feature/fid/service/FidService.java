@@ -118,7 +118,7 @@ public class FidService {
 
 	public FidHashQuad hashFunction(Function function) throws MemoryAccessException {
 		List<CodeUnit> codeUnits = generator.calculateExtent(function);
-		if (codeUnits.size() < getShortHashCodeUnitLength()) {
+		if (codeUnits.size() < SHORT_HASH_CODE_UNIT_LENGTH) {
 			return null;
 		}
 
@@ -156,7 +156,7 @@ public class FidService {
 			float scoreThreshold) throws VersionException, IOException {
 		FidHasher fidHasher = getHasher(program);
         return new FidProgramSeeker(fidQueryService, program, fidHasher,
-            getShortHashCodeUnitLength(), getMediumHashCodeUnitLengthLimit(), scoreThreshold);
+                SHORT_HASH_CODE_UNIT_LENGTH, MEDIUM_HASH_CODE_UNIT_LENGTH, scoreThreshold);
 	}
 
 	/**

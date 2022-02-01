@@ -63,7 +63,7 @@ public class CodeBlockVertex implements Comparable<CodeBlockVertex> {
 
 	@Override
 	public String toString() {
-		return getName();
+		return name;
 	}
 
 	@Override

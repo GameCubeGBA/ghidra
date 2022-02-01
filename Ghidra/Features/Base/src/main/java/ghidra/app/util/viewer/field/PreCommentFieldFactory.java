@@ -357,7 +357,7 @@ public class PreCommentFieldFactory extends FieldFactory {
 		}
 
 		return new String[] { "Zero-length Component: " + lastZeroLengthComponent.getDataType().getName() + " " +
-				flexName.toString() };
+                flexName};
 	}
 
 	private ListingTextField getTextField(String[] comments, String[] autoComment,

@@ -75,11 +75,11 @@ public class FBPK_Partition implements StructConverter {
 	}
 
 	public boolean isDirectory() {
-		return getType() == FBPK_Constants.PARTITION_TYPE_DIRECTORY;
+		return type == FBPK_Constants.PARTITION_TYPE_DIRECTORY;
 	}
 
 	public boolean isFile() {
-		return getType() == FBPK_Constants.PARTITION_TYPE_FILE;
+		return type == FBPK_Constants.PARTITION_TYPE_FILE;
 	}
 
 	public int getUnknown1() {

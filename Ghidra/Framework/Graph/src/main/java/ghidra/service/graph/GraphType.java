@@ -134,7 +134,7 @@ public class GraphType {
 	}
 
 	public String getOptionsName() {
-		return getName() + " Graph Type";
+		return name + " Graph Type";
 	}
 
 }

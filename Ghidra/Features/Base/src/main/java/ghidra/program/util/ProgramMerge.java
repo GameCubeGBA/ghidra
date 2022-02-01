@@ -3724,7 +3724,7 @@ public class ProgramMerge implements PropertyVisitor {
 				else if (books2.length > 1) {
 					throw new AssertException("Error in program '" + resultProgram.getName() +
 						"'- Shouldn't be multiple notes at a single address. Address=" +
-						originAddress.toString());
+                            originAddress);
 				}
 			}
 			else {

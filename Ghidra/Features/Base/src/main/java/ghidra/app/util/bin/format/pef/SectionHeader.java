@@ -117,7 +117,7 @@ public class SectionHeader implements StructConverter {
 			throw new IOException("Attempt to unpack a section that is not packed.");
 		}
 		try (InputStream input = getData()) {
-			byte[] data = new byte[getUnpackedLength()];
+			byte[] data = new byte[unpackedLength];
 			int index = 0;
 			while (index < data.length) {
 				if (monitor.isCancelled()) {

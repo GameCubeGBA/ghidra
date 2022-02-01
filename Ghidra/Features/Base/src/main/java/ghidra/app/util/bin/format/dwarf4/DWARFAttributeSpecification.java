@@ -68,7 +68,7 @@ public class DWARFAttributeSpecification {
 
 	@Override
 	public String toString() {
-		return DWARFUtil.toString(DWARFAttribute.class, getAttribute()) + "->" + getAttributeForm();
+		return DWARFUtil.toString(DWARFAttribute.class, attribute) + "->" + attributeForm;
 	}
 
 	@Override

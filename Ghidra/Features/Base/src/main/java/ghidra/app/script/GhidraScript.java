@@ -590,7 +590,7 @@ public abstract class GhidraScript extends FlatProgramAPI {
 					if (isRunningHeadless()) {
 						Msg.error(this,
 							"Server Connect Error: Server repository connection failed: " +
-								repository + ", Exception: " + e.toString());
+								repository + ", Exception: " + e);
 					}
 					else {
 						PluginTool tool = state.getTool();

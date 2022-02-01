@@ -139,7 +139,7 @@ public abstract class CliAbstractStream implements StructConverter, PeMarkupable
 	public static Address getStreamMarkupAddress(Program program, boolean isBinary,
 			TaskMonitor monitor, MessageLog log, NTHeader ntHeader, CliAbstractStream stream,
 			int streamIndex) {
-		CliStreamHeader streamHeader = stream.getStreamHeader();
+		CliStreamHeader streamHeader = stream.header;
 		return PeUtils.getMarkupAddress(program, isBinary, ntHeader,
 			streamHeader.getMetadataRoot().getRva() + streamHeader.getOffset() + streamIndex);
 	}

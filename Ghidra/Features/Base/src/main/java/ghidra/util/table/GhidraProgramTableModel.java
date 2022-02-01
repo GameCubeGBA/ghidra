@@ -52,7 +52,7 @@ public abstract class GhidraProgramTableModel<ROW_TYPE>
 	 * @return the program
 	 */
 	protected Program getProgramForRow(ROW_TYPE t) {
-		return getProgram();
+		return program;
 	}
 
 	@Override
@@ -62,6 +62,6 @@ public abstract class GhidraProgramTableModel<ROW_TYPE>
 
 	@Override
 	public Program getDataSource() {
-		return getProgram();
+		return program;
 	}
 }

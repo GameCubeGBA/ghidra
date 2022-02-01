@@ -495,7 +495,7 @@ public class DynamicHash {
         for (Varnode tmpvn : vnlist) {
             dhash.clear();
             dhash.calcHash(tmpvn, method);
-            if (dhash.getHash() == h) {
+            if (dhash.hash == h) {
                 vnlist2.add(tmpvn);
             }
         }
@@ -628,7 +628,7 @@ public class DynamicHash {
 						tmp = newtmp;
 					}
 					DynamicHash dynamicHash = new DynamicHash(op,i);
-					tmp[count] = dynamicHash.getHash();
+					tmp[count] = dynamicHash.hash;
 					if (tmp[count] != 0) {
 						count += 1;
 					}

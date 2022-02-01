@@ -75,7 +75,7 @@ public class TaskScheduler implements Runnable {
 	 * Blocks until the current task completes.
 	 */
 	public void waitForCurrentTask() {
-		Thread t = getCurrentThread();
+		Thread t = taskThread;
 		if (t != null) {
 			try {
 				t.join();

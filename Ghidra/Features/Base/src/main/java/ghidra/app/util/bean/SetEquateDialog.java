@@ -665,7 +665,7 @@ public class SetEquateDialog extends DialogComponentProvider {
 			if (!getOuterType().equals(other.getOuterType())) {
 				return false;
 			}
-			if (enoom == null || !enoom.isEquivalent(other.getEnumDataType())) {
+			if (enoom == null || !enoom.isEquivalent(other.enoom)) {
 				return false;
 			}
 			if (!Objects.equals(entryName, other.entryName)) {
