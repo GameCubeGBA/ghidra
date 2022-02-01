@@ -1272,7 +1272,7 @@ public abstract class ProcessorEmulatorTestAdapter extends TestCase implements E
 				continue;
 			}
 			Symbol s =
-				SymbolUtilities.getExpectedLabelOrFunctionSymbol(program, name, m -> m); // error ignored
+				SymbolUtilities.getExpectedLabelOrFunctionSymbol(program, name, m -> m.toString()); // error ignored
 			if (s != null) {
 				return s;
 			}
