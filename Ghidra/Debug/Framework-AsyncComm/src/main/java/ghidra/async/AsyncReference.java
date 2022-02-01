@@ -204,7 +204,7 @@ public class AsyncReference<T, C> {
 		List<TriConsumer<? super T, ? super T, ? super C>> volatileListeners;
 		CompletableFuture<T> promise;
 		CompletableFuture<Void> waiter;
-		List<WaitUntilFuture<T>> untils = new ArrayList<>();
+		List<WaitUntilFuture<T>> untils;
 		T oldVal;
 		synchronized (this) {
 			oldVal = this.val;
@@ -239,7 +239,7 @@ public class AsyncReference<T, C> {
 		List<TriConsumer<? super T, ? super T, ? super C>> volatileListeners;
 		CompletableFuture<T> promise;
 		CompletableFuture<Void> waiter;
-		List<WaitUntilFuture<T>> untils = new ArrayList<>();
+		List<WaitUntilFuture<T>> untils;
 		T newVal;
 		T oldVal;
 		synchronized (this) {

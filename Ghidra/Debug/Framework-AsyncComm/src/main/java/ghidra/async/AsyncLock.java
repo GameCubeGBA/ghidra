@@ -168,7 +168,7 @@ public class AsyncLock {
 		public void release() {
 			debug(this + ".release()");
 			CompletableFuture<Hold> next;
-			Hold oldHold = null;
+			Hold oldHold;
 			synchronized (AsyncLock.this) {
 				oldHold = curHold.get();
 				if (this != oldHold) {
@@ -239,7 +239,7 @@ public class AsyncLock {
 	 */
 	public CompletableFuture<Hold> acquire(Hold reentry) {
 		debug(".acquire(" + reentry + ")");
-		Hold strongHold = null;
+		Hold strongHold;
 		synchronized (this) {
 			if (disposalReason != null) {
 				return CompletableFuture.failedFuture(disposalReason);
