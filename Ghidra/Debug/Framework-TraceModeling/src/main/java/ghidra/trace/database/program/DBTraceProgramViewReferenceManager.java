@@ -29,7 +29,7 @@ public class DBTraceProgramViewReferenceManager extends AbstractDBTraceProgramVi
 	}
 
 	@Override
-	protected TraceCodeOperations getCodeOperations(boolean createIfAbsent) {
+	protected TraceCodeOperations getCodeOperations() {
 		return program.trace.getCodeManager();
 	}
 }

@@ -41,29 +41,9 @@ public class TextLayoutGraphics extends Graphics2D {
 
 	private List<TextInfo> textInfos = new ArrayList<>();
 
-	private Comparator<TextInfo> pointComparator = (o1, o2) -> {
+	private Comparator<TextInfo> pointComparator = Comparator.comparingInt((TextInfo o) -> o.point.y).thenComparingInt(o -> o.point.x);
 
-        int diff = o1.point.y - o2.point.y;
-		if (diff != 0) {
-			return diff;
-		}
-
-		diff = o1.point.x - o2.point.x;
-
-		return diff;
-	};
-
-	private Comparator<TextInfo> rowComparator = (o1, o2) -> {
-
-        int diff = o1.row - o2.row;
-		if (diff != 0) {
-			return diff;
-		}
-
-		diff = o1.point.x - o2.point.x;
-
-		return diff;
-	};
+	private Comparator<TextInfo> rowComparator = Comparator.comparingInt((TextInfo o) -> o.row).thenComparingInt(o -> o.point.x);
 
 	private static FontMetrics createFontMetrics(Font font) {
 		BufferedImage image = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB_PRE);

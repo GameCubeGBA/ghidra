@@ -50,14 +50,14 @@ public abstract class AbstractDBTraceProgramViewReferenceManager implements Refe
 	public AbstractDBTraceProgramViewReferenceManager(DBTraceProgramView program) {
 		this.program = program;
 		this.refs = getReferenceOperations(false);
-		this.code = getCodeOperations(false);
+		this.code = getCodeOperations();
 
 		this.refsManager = program.trace.getReferenceManager();
 	}
 
 	protected abstract TraceReferenceOperations getReferenceOperations(boolean createIfAbsent);
 
-	protected abstract TraceCodeOperations getCodeOperations(boolean createIfAbsent);
+	protected abstract TraceCodeOperations getCodeOperations();
 
 	private TraceReferenceOperations refs(boolean createIfAbsent) {
 		if (refs == null) {
@@ -66,15 +66,15 @@ public abstract class AbstractDBTraceProgramViewReferenceManager implements Refe
 		return refs;
 	}
 
-	private TraceCodeOperations code(boolean createIfAbsent) {
+	private TraceCodeOperations code() {
 		if (code == null) {
-			code = getCodeOperations(createIfAbsent);
+			code = getCodeOperations();
 		}
 		return code;
 	}
 
 	protected Range<Long> chooseLifespan(Address fromAddr) {
-		TraceCodeUnit unit = code(false) == null
+		TraceCodeUnit unit = code() == null
 				? null
 				: code.codeUnits().getAt(program.snap, fromAddr);
 		return unit == null ? Range.atLeast(program.snap) : unit.getLifespan();
@@ -236,10 +236,8 @@ public abstract class AbstractDBTraceProgramViewReferenceManager implements Refe
 	}
 
 	@SuppressWarnings("ComparatorCombinators")
-	protected Comparator<Reference> getReferenceFromComparator(boolean forward) {
-		return forward
-				? (r1, r2) -> r1.getFromAddress().compareTo(r2.getFromAddress())
-				: (r1, r2) -> -r1.getFromAddress().compareTo(r2.getFromAddress());
+	protected Comparator<Reference> getReferenceFromComparator() {
+		return (r1, r2) -> r1.getFromAddress().compareTo(r2.getFromAddress());
 	}
 
 	protected Iterator<Reference> getReferenceIteratorForSnap(long snap, Address startAddr) {
@@ -256,7 +254,7 @@ public abstract class AbstractDBTraceProgramViewReferenceManager implements Refe
 		// TODO: This will fail to occlude on equal (src,dst,opIndex) keys
 		return new ReferenceIteratorAdapter(
 			program.viewport.mergedIterator(s -> getReferenceIteratorForSnap(s, startAddr),
-				getReferenceFromComparator(true)));
+				getReferenceFromComparator()));
 	}
 
 	@Override
