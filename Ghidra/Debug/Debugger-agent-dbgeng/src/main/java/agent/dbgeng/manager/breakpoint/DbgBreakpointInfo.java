@@ -33,7 +33,7 @@ public class DbgBreakpointInfo {
 	private BreakDataParameters parameters =
 		new BreakDataParameters(1, BitmaskSet.of(BreakAccess.EXECUTE));
 	private BitmaskSet<BreakAccess> access;
-	private int size = 1;
+	private int size;
 
 	private final long number;
 	private boolean enabled;

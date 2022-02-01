@@ -210,9 +210,7 @@ public class TraceObjectListener implements DebuggerModelListener {
 			Msg.error(this, "Could not search for focus scope", e);
 			return null;
 		}));
-		return fence.ready().thenApply(__ -> {
-			return result;
-		});
+		return fence.ready().thenApply(__ -> result);
 	}
 
 	public void dispose() {
