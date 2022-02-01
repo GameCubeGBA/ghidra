@@ -49,7 +49,7 @@ public class Handler extends URLStreamHandler {
 
 		String pkgs = System.getProperty("java.protocol.handler.pkgs");
 		if (pkgs != null) {
-			if (pkgs.indexOf(MY_PARENT_PACKAGE) >= 0) {
+			if (pkgs.contains(MY_PARENT_PACKAGE)) {
 				return; // avoid multiple registrations
 			}
 			pkgs = pkgs + "|" + MY_PARENT_PACKAGE;

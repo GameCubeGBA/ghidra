@@ -56,7 +56,7 @@ public class GhidraScriptMgrPlugin2Test extends AbstractGhidraScriptMgrPluginTes
 
 		String consoleText = getConsoleText();
 		assertTrue("ConsoleText was \"" + consoleText + "\".",
-			consoleText.indexOf("> Hello World") >= 0);
+                consoleText.contains("> Hello World"));
 
 	}
 
@@ -66,9 +66,9 @@ public class GhidraScriptMgrPlugin2Test extends AbstractGhidraScriptMgrPluginTes
 
 		String output = runScriptAndGetOutput(innerScriptFile);
 
-		assertTrue("Inner class output not found", output.indexOf("I am an inner class") != -1);
+		assertTrue("Inner class output not found", output.contains("I am an inner class"));
 		assertTrue("External class output not found",
-			output.indexOf("I am an external class") != -1);
+                output.contains("I am an external class"));
 	}
 
 	@Test

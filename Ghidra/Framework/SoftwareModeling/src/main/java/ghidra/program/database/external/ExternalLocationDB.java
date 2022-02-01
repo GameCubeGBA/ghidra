@@ -193,7 +193,7 @@ public class ExternalLocationDB implements ExternalLocation {
 		if (label == null) {
 			setName(getLibrary(), null, SourceType.DEFAULT);
 		}
-		else if (label.indexOf(Namespace.DELIMITER) < 0) {
+		else if (!label.contains(Namespace.DELIMITER)) {
 			// if label does not include namespace keep current namespace
 			setName(symbol.getParentNamespace(), label, source);
 		}

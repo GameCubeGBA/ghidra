@@ -84,7 +84,7 @@ public class StatusBarTest extends AbstractDockingTest {
 		String tooltipText = statusBar.getToolTipText();
 
 		assertTrue("The tooltip text was not updated with the current " + "status message.",
-			(tooltipText.indexOf(testText1) > -1));
+			(tooltipText.contains(testText1)));
 
 		testFrame.setVisible(true);
 
@@ -94,9 +94,9 @@ public class StatusBarTest extends AbstractDockingTest {
 
 		// get the tooltip text and make sure that both messages are presented
 		assertTrue("The tooltip text was not updated with the current " + "status message.",
-			(tooltipText.indexOf(testText1) > -1));
+			(tooltipText.contains(testText1)));
 		assertTrue("The tooltip text was not updated with the current " + "status message.",
-			(tooltipText.indexOf(testText2) > -1));
+			(tooltipText.contains(testText2)));
 	}
 
 	private void addAndRemoveStatusItems() {

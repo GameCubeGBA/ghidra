@@ -33,8 +33,8 @@ public class MicrosoftDemangler implements Demangler {
 	@Override
 	public boolean canDemangle(Program program) {
 		String executableFormat = program.getExecutableFormat();
-		return executableFormat != null && (executableFormat.indexOf(PeLoader.PE_NAME) != -1 ||
-			executableFormat.indexOf(MSCoffLoader.MSCOFF_NAME) != -1);
+		return executableFormat != null && (executableFormat.contains(PeLoader.PE_NAME) ||
+                executableFormat.contains(MSCoffLoader.MSCOFF_NAME));
 	}
 
 	@Override

@@ -162,7 +162,7 @@ public class LocalFileChooserModel implements GhidraFileChooserModel {
 		catch (Exception e) {
 			//Windows expects the A drive to exist; if it does not exist, an exception results.  Ignore it
 		}
-		if (fsvSTD == null || fsvSTD.toLowerCase().indexOf("removable") != -1) {
+		if (fsvSTD == null || fsvSTD.toLowerCase().contains("removable")) {
 			return "Removable Disk (" + root.getAbsolutePath() + ")";
 		}
 

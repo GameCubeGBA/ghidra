@@ -114,7 +114,7 @@ public class DexMarkupDataAnalyzer extends FileFormatAnalyzer {
 			if (component.getReferencesFrom().length > 0) {
 				continue;
 			}
-			if (component.getFieldName().toLowerCase().indexOf("offset") != -1) {
+			if (component.getFieldName().toLowerCase().contains("offset")) {
 				Scalar scalar = component.getScalar(0);
 				if (scalar.getUnsignedValue() < headerLength) {// skip low number points into dex header
 					continue;

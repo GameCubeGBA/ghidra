@@ -238,7 +238,7 @@ public class CodeBrowserOptionsTest extends AbstractGhidraHeadedIntegrationTest 
 		cb.updateNow();
 		btf = (ListingTextField) cb.getCurrentField();
 		s = btf.getText();
-		assertTrue(s.indexOf(":") < 0);
+		assertTrue(!s.contains(":"));
 
 		afowo.setMinimumHexDigits(4);
 		options.setCustomOption(names.get(0), afowo);

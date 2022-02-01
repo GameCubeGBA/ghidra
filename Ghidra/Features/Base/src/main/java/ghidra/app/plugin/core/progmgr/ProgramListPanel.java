@@ -200,7 +200,7 @@ class ProgramListPanel extends JPanel {
 			for (Iterator<Program> iterator = allDataList.iterator(); iterator.hasNext();) {
 				Program program = iterator.next();
 				String programString = multiTabPlugin.getStringUsedInList(program).toLowerCase();
-				if (programString.indexOf(lowerCaseFilterText) < 0) {
+				if (!programString.contains(lowerCaseFilterText)) {
 					iterator.remove();
 				}
 			}

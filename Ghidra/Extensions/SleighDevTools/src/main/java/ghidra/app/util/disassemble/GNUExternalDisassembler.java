@@ -647,7 +647,7 @@ public class GNUExternalDisassembler implements ExternalDisassembler {
 		do {
 			instructionLine = buffReader.readLine();
 			if (!error && instructionLine != null && !instructionLine.equals(ENDING_STRING) &&
-				(instructionLine.indexOf(ADDRESS_OUT_OF_BOUNDS) < 0) &&
+				(!instructionLine.contains(ADDRESS_OUT_OF_BOUNDS)) &&
 				!instructionLine.startsWith("Usage:") && !instructionLine.startsWith("Debug:")) {
 
 				String instructionMetadataLine = buffReader.readLine();

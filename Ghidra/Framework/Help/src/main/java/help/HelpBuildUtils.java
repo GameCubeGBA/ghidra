@@ -201,7 +201,7 @@ public class HelpBuildUtils {
 		currentPosition = matchStart + fullMatch.length();
 
 		String fullHREFText = matcher.group(1);
-		if (fullHREFText.indexOf(SHARED_DIRECTORY) != -1) {
+		if (fullHREFText.contains(SHARED_DIRECTORY)) {
 			return null; // already fixed; nothing to do
 		}
 

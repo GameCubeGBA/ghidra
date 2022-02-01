@@ -57,7 +57,7 @@ public class AllTextFilter<T> extends AbstractTextFilter<T> {
 				String displayString = displayable.getDisplayString();
 				if (displayString != null) {
 					displayString = displayString.toLowerCase();
-					if (displayString.indexOf(filterText) != -1) {
+					if (displayString.contains(filterText)) {
 						return true;
 					}
 				}
@@ -65,7 +65,7 @@ public class AllTextFilter<T> extends AbstractTextFilter<T> {
 
 			if (isJavaDisplayableAsString(value)) {
 				String displayString = value.toString().toLowerCase();
-				if (displayString.indexOf(filterText) != -1) {
+				if (displayString.contains(filterText)) {
 					return true;
 				}
 			}

@@ -46,14 +46,14 @@ public class GhidraScriptMgrPlugin1Test extends AbstractGhidraScriptMgrPluginTes
 		String fullOutput = runSelectedScript(initialScriptName);
 		String expectedOutput = "Hello World";
 		assertTrue("Script did not run - output: " + fullOutput,
-			fullOutput.indexOf(expectedOutput) != -1);
+                fullOutput.contains(expectedOutput));
 
 		//
 		// Run the script again
 		//
 		assertRunLastActionEnabled(true);
 		fullOutput = runLastScript(initialScriptName);
-		assertTrue("Did not rerun last run script", fullOutput.indexOf(expectedOutput) != -1);
+		assertTrue("Did not rerun last run script", fullOutput.contains(expectedOutput));
 
 		//
 		// Now select and run another script
@@ -63,14 +63,14 @@ public class GhidraScriptMgrPlugin1Test extends AbstractGhidraScriptMgrPluginTes
 		fullOutput = runSelectedScript(secondScriptName);
 		expectedOutput = "jumped over the";
 		assertTrue("Script did not run - output: " + fullOutput,
-			fullOutput.indexOf(expectedOutput) != -1);
+                fullOutput.contains(expectedOutput));
 
 		//
 		// Run the script again
 		//
 		assertRunLastActionEnabled(true);
 		fullOutput = runLastScript(secondScriptName);
-		assertTrue("Did not rerun last run script", fullOutput.indexOf(expectedOutput) != -1);
+		assertTrue("Did not rerun last run script", fullOutput.contains(expectedOutput));
 	}
 
 	@Test
@@ -84,7 +84,7 @@ public class GhidraScriptMgrPlugin1Test extends AbstractGhidraScriptMgrPluginTes
 		String fullOutput = runSelectedScript(scriptName);
 		String expectedOutput = "Hello World";
 		assertTrue("Script did not run - output: " + fullOutput,
-			fullOutput.indexOf(expectedOutput) != -1);
+                fullOutput.contains(expectedOutput));
 
 		selectScript("PrintStructureScript.java");// note: this script will error out
 
@@ -92,7 +92,7 @@ public class GhidraScriptMgrPlugin1Test extends AbstractGhidraScriptMgrPluginTes
 		// Run the script again
 		//
 		fullOutput = runLastScript(scriptName);
-		assertTrue("Did not rerun last run script", fullOutput.indexOf(expectedOutput) != -1);
+		assertTrue("Did not rerun last run script", fullOutput.contains(expectedOutput));
 	}
 
 	@Test
@@ -105,7 +105,7 @@ public class GhidraScriptMgrPlugin1Test extends AbstractGhidraScriptMgrPluginTes
 		String fullOutput = runSelectedScript(scriptName);
 		String expectedOutput = "Hello World";
 		assertTrue("Script did not run - output: " + fullOutput,
-			fullOutput.indexOf(expectedOutput) != -1);
+                fullOutput.contains(expectedOutput));
 
 		closeScriptProvider();
 
@@ -113,7 +113,7 @@ public class GhidraScriptMgrPlugin1Test extends AbstractGhidraScriptMgrPluginTes
 		// Run the script again
 		//
 		fullOutput = runLastScript(scriptName);
-		assertTrue("Did not rerun last run script", fullOutput.indexOf(expectedOutput) != -1);
+		assertTrue("Did not rerun last run script", fullOutput.contains(expectedOutput));
 	}
 
 	@Test

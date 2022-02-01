@@ -126,7 +126,7 @@ public class Log4jDevelopmentPatternConverter extends LogEventPatternConverter {
 		//
 		// Don't print out locations for stack traces, as they already have that info		
 		//
-		if (stackString.indexOf(PRINT_STACK_TRACE_METHOD_NAME) >= 0) {
+		if (stackString.contains(PRINT_STACK_TRACE_METHOD_NAME)) {
 			return EMPTY_STRING;
 		}
 

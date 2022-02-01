@@ -100,7 +100,7 @@ public class ArrayDataTypeHTMLRepresentation extends HTMLDataTypeRepresentation 
 
 			buffy.append(baseHTML);
 
-			if (baseHTML.indexOf(LENGTH_PREFIX) < 0) {
+			if (!baseHTML.contains(LENGTH_PREFIX)) {
 				addDataTypeLengthAndAlignment(baseDataType, buffy);
 			}
 		}

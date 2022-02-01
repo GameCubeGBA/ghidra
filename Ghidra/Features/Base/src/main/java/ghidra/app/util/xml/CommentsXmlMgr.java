@@ -160,7 +160,7 @@ class CommentsXmlMgr {
 				if (currCmt == null || currCmt.isEmpty()) {
 					cu.setComment(commentType, comments);
 				}
-				else if (currCmt.indexOf(comments) < 0) {
+				else if (!currCmt.contains(comments)) {
 					log.appendMsg("Merged " + typeStr + " comment at " + addr);
 					cu.setComment(commentType, currCmt + "\n\n" + comments);
 				}

@@ -51,7 +51,7 @@ class MarkupItemValueTextFilter extends AbstractTextFilter<VTMarkupItem> {
 		Stringable sourceValue = adapter.getSourceValue();
 		if (sourceValue != null) {
 			String sourceValueText = sourceValue.getDisplayString();
-			if (sourceValueText.toLowerCase().indexOf(filterText.toLowerCase()) != -1) {
+			if (sourceValueText.toLowerCase().contains(filterText.toLowerCase())) {
 				return true;
 			}
 		}
@@ -59,7 +59,7 @@ class MarkupItemValueTextFilter extends AbstractTextFilter<VTMarkupItem> {
 		Stringable destinationValue = adapter.getOriginalDestinationValue();
 		if (destinationValue != null) {
 			String destinationValueText = sourceValue.getDisplayString();
-			if (destinationValueText.toLowerCase().indexOf(filterText.toLowerCase()) != -1) {
+			if (destinationValueText.toLowerCase().contains(filterText.toLowerCase())) {
 				return true;
 			}
 		}
