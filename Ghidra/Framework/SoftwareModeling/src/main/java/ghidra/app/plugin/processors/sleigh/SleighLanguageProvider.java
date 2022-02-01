@@ -294,12 +294,8 @@ public class SleighLanguageProvider implements LanguageProvider {
 				String name = externalName.getAttribute("name");
 
 				if (tool != null && name != null && !tool.isEmpty() && !name.isEmpty()) {
-					List<String> nameList = externalNameMap.get(tool);
-					if (nameList == null) {
-						nameList = new ArrayList<String>();
-						externalNameMap.put(tool, nameList);
-					}
-					nameList.add(name);
+                    List<String> nameList = externalNameMap.computeIfAbsent(tool, k -> new ArrayList<String>());
+                    nameList.add(name);
 				}
 				parser.end(externalName);
 			}

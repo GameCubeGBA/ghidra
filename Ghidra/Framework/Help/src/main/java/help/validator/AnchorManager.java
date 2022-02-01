@@ -79,13 +79,6 @@ public class AnchorManager {
 		return anchorsByHelpPath;
 	}
 
-	public AnchorDefinition getAnchorForHelpPath(String path) {
-		if (path == null) {
-			return null;
-		}
-		return anchorsByHelpPath.get(path);
-	}
-
 	public void addAnchorRef(HREF href) {
 		anchorRefs.add(href);
 	}
@@ -121,7 +114,7 @@ public class AnchorManager {
 			// if there is only one item left in the list after removing the definitions, then
 			// there are not really any duplicate definitions, so cleanup the list
 			if (list.size() == 1) {
-				list.clear();
+				list.remove(0);
 				duplicateAnchorsById.remove(id);
 			}
 		}

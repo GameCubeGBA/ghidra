@@ -78,12 +78,7 @@ public class GoToQuery {
 		this.fromAddress = fromAddr;
 		this.monitor = monitor;
 
-		if (listener != null) {
-			this.listener = listener;
-		}
-		else {
-			this.listener = new DummyGoToServiceListener();
-		}
+        this.listener = Objects.requireNonNullElseGet(listener, DummyGoToServiceListener::new);
 
 		programs = getAllPrograms();
 		tableModelListener = new GoToQueryThreadedTableModelListener();

@@ -498,8 +498,7 @@ public class DbgModel2TargetRootImpl extends DbgModel2DefaultTargetModelRoot
 		DebugSystemObjects so = getManager().getSystemObjects();
 		List<String> objpath = new ArrayList<>();
 		DebugSessionId sid = so.getCurrentSystemId();
-		String skey = sid.id < 0 ? PathUtils.makeKey("0x0")
-				: PathUtils.makeKey("0x" + Integer.toHexString(sid.id));
+		String skey = PathUtils.makeKey(sid.id < 0 ? "0x0" : "0x" + Integer.toHexString(sid.id));
 		if (obj instanceof DbgSession) {
 			DbgSession session = (DbgSession) obj;
 			skey = PathUtils.makeKey("0x" + Long.toHexString(session.getId().id));

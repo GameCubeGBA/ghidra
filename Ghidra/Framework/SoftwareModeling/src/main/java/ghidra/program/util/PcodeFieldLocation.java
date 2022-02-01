@@ -80,9 +80,7 @@ public class PcodeFieldLocation extends ProgramLocation {
 
 		String[] strings = obj.getStrings("_PCODE_STRINGS", new String[0]);
 		pcodeStrings = new ArrayList<String>(strings.length);
-		for (String string : strings) {
-			pcodeStrings.add(string);
-		}
+        pcodeStrings.addAll(Arrays.asList(strings));
 	}
 
 	@Override

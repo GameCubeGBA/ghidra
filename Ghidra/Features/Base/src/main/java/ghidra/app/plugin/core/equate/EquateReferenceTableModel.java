@@ -95,8 +95,7 @@ class EquateReferenceTableModel extends GDynamicColumnTableModel<EquateReference
 		}
 
 		// @formatter:off
-		Arrays.asList(currentEquate.getReferences())
-			.forEach(r -> referenceList.add(r));
+        referenceList.addAll(Arrays.asList(currentEquate.getReferences()));
 		// @formatter:on
 
 		fireTableDataChanged();

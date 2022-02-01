@@ -671,12 +671,8 @@ public class MarkerManager implements MarkerService {
 			for (Iterator<MarkerSetImpl> iterator = fromList.iterator(); iterator.hasNext();) {
 				MarkerSetImpl markerSetImpl = iterator.next();
 				String name = markerSetImpl.getName();
-				List<MarkerSetImpl> subList = nameToManagerMap.get(name);
-				if (subList == null) {
-					subList = new ArrayList<>();
-					nameToManagerMap.put(name, subList);
-				}
-				subList.add(markerSetImpl);
+                List<MarkerSetImpl> subList = nameToManagerMap.computeIfAbsent(name, k -> new ArrayList<>());
+                subList.add(markerSetImpl);
 				iterator.remove();
 			}
 

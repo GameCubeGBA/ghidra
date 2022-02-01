@@ -309,7 +309,7 @@ public abstract class AbstractMagePanelManager<T> implements PanelManager {
 
 	protected final List<MagePanel<T>> getPanels() {
 		if (panels == null) {
-			panels = Collections.unmodifiableList(new ArrayList<MagePanel<T>>(createPanels()));
+			panels = List.copyOf(createPanels());
 			for (MagePanel<T> magePanel : this.panels) {
 				magePanel.addDependencies(this.state);
 			}

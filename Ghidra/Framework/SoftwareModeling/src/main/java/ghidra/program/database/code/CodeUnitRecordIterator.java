@@ -102,7 +102,7 @@ class CodeUnitRecordIterator implements CodeUnitIterator {
 			else {
 				int c = nextInst.getMinAddress().compareTo(nextData.getMinAddress());
 				c = forward ? c : -c;
-				nextDefined = (c < 0) ? (CodeUnit) nextInst : (CodeUnit) nextData;
+				nextDefined = (CodeUnit) (c < 0 ? nextInst : nextData);
 			}
 			if (nextDefined != null && !nextDefined.contains(nextAddr)) {
 				nextDefined = null;

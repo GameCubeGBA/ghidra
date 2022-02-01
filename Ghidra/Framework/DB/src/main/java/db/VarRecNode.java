@@ -117,7 +117,7 @@ class VarRecNode extends LongKeyRecordNode {
 	 * @param state indirect storage used (true) or not used (false)
 	 */
 	private void enableIndirectStorage(int index, boolean state) {
-		buffer.putByte(IND_OPTION_BASE_OFFSET + (index * ENTRY_SIZE), state ? (byte) 1 : (byte) 0);
+		buffer.putByte(IND_OPTION_BASE_OFFSET + (index * ENTRY_SIZE), (byte) (state ? 1 : 0));
 	}
 
 	/**

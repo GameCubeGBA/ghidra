@@ -92,8 +92,7 @@ public class ProjectInfoDialog extends DialogComponentProvider {
 		connectionButton.setContentAreaFilled(false);
 		connectionButton.setSelected(isConnected);
 		connectionButton.setBorder(
-			isConnected ? BorderFactory.createBevelBorder(BevelBorder.LOWERED)
-					: BorderFactory.createBevelBorder(BevelBorder.RAISED));
+                BorderFactory.createBevelBorder(isConnected ? BevelBorder.LOWERED : BevelBorder.RAISED));
 		updateConnectButtonToolTip();
 		if (isConnected) {
 			try {
@@ -257,8 +256,7 @@ public class ProjectInfoDialog extends DialogComponentProvider {
 		connectionButton.setContentAreaFilled(false);
 		connectionButton.setSelected(isConnected);
 		connectionButton.setBorder(
-			isConnected ? BorderFactory.createBevelBorder(BevelBorder.LOWERED)
-					: BorderFactory.createBevelBorder(BevelBorder.RAISED));
+                BorderFactory.createBevelBorder(isConnected ? BevelBorder.LOWERED : BevelBorder.RAISED));
 		updateConnectButtonToolTip();
 		HelpService help = Help.getHelpService();
 		help.registerHelp(connectionButton,

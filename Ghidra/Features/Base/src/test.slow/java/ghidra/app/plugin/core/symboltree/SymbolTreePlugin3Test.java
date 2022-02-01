@@ -194,9 +194,7 @@ public class SymbolTreePlugin3Test extends AbstractGhidraHeadedIntegrationTest {
 			GTreeNode... dragNode) {
 		final GTreeDragNDropHandler dragNDropHandler = util.getTree().getDragNDropHandler();
 		List<GTreeNode> dropList = new ArrayList<>();
-		for (GTreeNode gTreeNode : dragNode) {
-			dropList.add(gTreeNode);
-		}
+        dropList.addAll(Arrays.asList(dragNode));
 
 		final Transferable transferable = new GTreeNodeTransferable(dragNDropHandler, dropList);
 

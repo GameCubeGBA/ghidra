@@ -2300,9 +2300,7 @@ public class DecompilerClangTest extends AbstractDecompilerTest {
 
 		ColorMatcher(Color... colors) {
 			// note: we allow null
-			for (Color c : colors) {
-				myColors.add(c);
-			}
+            myColors.addAll(Arrays.asList(colors));
 		}
 
 		ColorMatcher with(Color c) {

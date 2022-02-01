@@ -99,9 +99,7 @@ public class GHelpBuilder {
 
 	private HelpModuleCollection collectAllHelp() {
 		List<File> allHelp = new ArrayList<File>(helpInputDirectories);
-		for (File file : dependencyHelpPaths) {
-			allHelp.add(file);
-		}
+        allHelp.addAll(dependencyHelpPaths);
 		return HelpModuleCollection.fromFiles(allHelp);
 	}
 

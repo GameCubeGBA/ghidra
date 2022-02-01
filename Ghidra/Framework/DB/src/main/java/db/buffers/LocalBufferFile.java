@@ -322,9 +322,8 @@ public class LocalBufferFile implements BufferFile {
 	@Override
 	public String[] getParameterNames() {
 		ArrayList<String> list = new ArrayList<>();
-		Enumeration<String> it = userParms.keys();
-		while (it.hasMoreElements()) {
-			list.add(it.nextElement());
+		for (String s : userParms.keySet()) {
+			list.add(s);
 		}
 		String[] names = new String[list.size()];
 		list.toArray(names);

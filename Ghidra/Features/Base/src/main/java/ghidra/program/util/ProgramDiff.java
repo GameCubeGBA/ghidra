@@ -311,8 +311,8 @@ public class ProgramDiff {
 			diff.restrictAddressSet = new AddressSet(this.restrictAddressSet);
 			diff.pdf = this.pdf;
 			diff.diffAddrSets = new Hashtable<>(this.diffAddrSets);
-			for (Enumeration<Integer> enu = diff.diffAddrSets.keys(); enu.hasMoreElements();) {
-				Integer key = enu.nextElement();
+			for (Iterator<Integer> iterator = diff.diffAddrSets.keySet().iterator(); iterator.hasNext();) {
+				Integer key = iterator.next();
 				AddressSet addrSet = diff.diffAddrSets.get(key);
 				diff.diffAddrSets.put(key, new AddressSet(addrSet));
 			}
@@ -321,7 +321,7 @@ public class ProgramDiff {
 			diff.diffsToReturn = new AddressSet(this.diffsToReturn);
 			diff.filterChanged = this.filterChanged;
 			diff.sameProgramContext = this.sameProgramContext;
-			diff.warnings = (this.warnings == null) ? null : new String(this.warnings);
+			diff.warnings = (this.warnings == null) ? null : this.warnings;
 		}
 		catch (ProgramConflictException exc) {
 			Msg.error(this, "Unexpected Exception: " + exc.getMessage(), exc);
@@ -1341,9 +1341,7 @@ public class ProgramDiff {
 		Arrays.sort(types1, BOOKMARK_TYPE_COMPARATOR);
 		Arrays.sort(types2, BOOKMARK_TYPE_COMPARATOR);
 		ArrayList<BookmarkType> list = new ArrayList<>();
-		for (BookmarkType element : types1) {
-			list.add(element);
-		}
+        list.addAll(Arrays.asList(types1));
 
 		for (BookmarkType element : types2) {
 			boolean found = false;
@@ -1729,8 +1727,7 @@ public class ProgramDiff {
 			}
 //			if (++i == DISPLAY_GRANULARITY) {
 			monitor.setMessage(
-				monitorMsg + ": " + (move1 ? a1.getMinAddress().toString(showAddressSpace)
-						: a2.getMinAddress().toString(showAddressSpace)));
+				monitorMsg + ": " + ((move1 ? a1 : a2).getMinAddress().toString(showAddressSpace)));
 //				i = 0;
 //			}
 			if (move1) {

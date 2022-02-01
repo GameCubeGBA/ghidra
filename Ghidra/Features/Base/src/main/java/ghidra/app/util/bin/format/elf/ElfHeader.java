@@ -851,8 +851,7 @@ public class ElfHeader implements StructConverter, Writeable {
 			// Use dynamic symbol hash table DT_HASH or DT_GNU_HASH to determine symbol table count/length
 			boolean useGnuHash = dynamicTable.containsDynamicValue(ElfDynamicType.DT_GNU_HASH);
 			long hashTableAddr =
-				useGnuHash ? dynamicTable.getDynamicValue(ElfDynamicType.DT_GNU_HASH)
-						: dynamicTable.getDynamicValue(ElfDynamicType.DT_HASH);
+                    dynamicTable.getDynamicValue(useGnuHash ? ElfDynamicType.DT_GNU_HASH : ElfDynamicType.DT_HASH);
 			hashTableAddr = adjustAddressForPrelink(hashTableAddr);
 
 			ElfProgramHeader symbolTableLoadHeader = getProgramLoadHeaderContaining(tableAddr);

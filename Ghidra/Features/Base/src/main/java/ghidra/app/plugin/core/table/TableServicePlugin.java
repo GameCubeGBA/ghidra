@@ -179,12 +179,8 @@ public class TableServicePlugin extends ProgramPlugin
 	}
 
 	private void addProvider(Program program, TableComponentProvider<?> provider) {
-		List<TableComponentProvider<?>> list = programMap.get(program);
-		if (list == null) {
-			list = new ArrayList<>();
-			programMap.put(program, list);
-		}
-		list.add(provider);
+        List<TableComponentProvider<?>> list = programMap.computeIfAbsent(program, k -> new ArrayList<>());
+        list.add(provider);
 	}
 
 	void remove(TableComponentProvider<?> provider) {

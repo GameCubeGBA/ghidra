@@ -88,7 +88,7 @@ interface InternalTraceObjectValue extends TraceObjectValue {
 				return keep;
 			}
 			for (InternalTraceObjectValue k : kept) {
-				if (Objects.equals(value, k.getValue()) && Objects.equals(range, k.getLifespan())) {
+				if (value.equals(k.getValue()) && Objects.equals(range, k.getLifespan())) {
 					kept.remove(k);
 					return k;
 				}

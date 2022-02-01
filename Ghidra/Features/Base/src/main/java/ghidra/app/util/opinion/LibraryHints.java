@@ -45,21 +45,13 @@ class LibraryHints {
 	}
 
 	private void add(int ordinal, Attribute attr) {
-		List<Attribute> list = ordinalAttributeMap.get(ordinal);
-		if (list == null) {
-			list = new ArrayList<Attribute>();
-			ordinalAttributeMap.put(ordinal, list);
-		}
-		list.add(attr);
+        List<Attribute> list = ordinalAttributeMap.computeIfAbsent(ordinal, k -> new ArrayList<Attribute>());
+        list.add(attr);
 	}
 
 	private void add(String name, Attribute attr) {
-		List<Attribute> list = nameAttributeMap.get(name);
-		if (list == null) {
-			list = new ArrayList<Attribute>();
-			nameAttributeMap.put(name, list);
-		}
-		list.add(attr);
+        List<Attribute> list = nameAttributeMap.computeIfAbsent(name, k -> new ArrayList<Attribute>());
+        list.add(attr);
 	}
 
 	private void loadMap(List<Attribute> list, HashMap<String, Attribute> map) {

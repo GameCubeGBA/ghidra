@@ -273,7 +273,7 @@ public class ElfRelocation implements ByteArrayConverter, StructConverter {
 	 * @return the symbol index
 	 */
 	public int getSymbolIndex() {
-		return (int) (is32bit ? (r_info >> 8) : (r_info >> 32));
+		return (int) ((r_info >> (is32bit ? 8 : 32)));
 	}
 
 	/**
@@ -287,7 +287,7 @@ public class ElfRelocation implements ByteArrayConverter, StructConverter {
 	 * @return type of relocation to apply
 	 */
 	public int getType() {
-		return (int) (is32bit ? (r_info & Conv.BYTE_MASK) : (r_info & Conv.INT_MASK));
+		return (int) ((r_info & (is32bit ? Conv.BYTE_MASK : Conv.INT_MASK)));
 	}
 
 	/**

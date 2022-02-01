@@ -612,8 +612,7 @@ public class AddressMapDB implements AddressMap {
 	 * @return
 	 */
 	private long truncateStackOffset(long offset, AddressSpace stackSpace) {
-		return offset < 0 ? stackSpace.getMinAddress().getOffset()
-				: stackSpace.getMaxAddress().getOffset();
+		return (offset < 0 ? stackSpace.getMinAddress() : stackSpace.getMaxAddress()).getOffset();
 	}
 
 	@Override

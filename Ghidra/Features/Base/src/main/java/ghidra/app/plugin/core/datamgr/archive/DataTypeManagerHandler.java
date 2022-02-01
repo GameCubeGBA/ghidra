@@ -895,9 +895,7 @@ public class DataTypeManagerHandler {
 
 		List<String> recentMenuList = new ArrayList<>();
 		Collection<String> recentlyOpenedArchives = plugin.getRecentlyOpenedArchives();
-		for (String file : recentlyOpenedArchives) {
-			recentMenuList.add(file);
-		}
+        recentMenuList.addAll(recentlyOpenedArchives);
 		saveState.putStrings(RECENT_NAMES, getSaveableArchiveNames(recentMenuList));
 
 		// update the initialArchives list so that future checks on that list do not trigger a 
@@ -948,9 +946,7 @@ public class DataTypeManagerHandler {
 			}
 		}
 
-		for (String filename : savedFilenames) {
-			initiallyOpenedFileArchiveNames.add(filename);
-		}
+        initiallyOpenedFileArchiveNames.addAll(Arrays.asList(savedFilenames));
 		userOpenedFileArchiveNames = new HashSet<>();
 		knownOpenFileArchiveNames = new HashSet<>();
 	}

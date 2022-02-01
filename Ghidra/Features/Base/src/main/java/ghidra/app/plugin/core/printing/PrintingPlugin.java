@@ -229,8 +229,7 @@ public class PrintingPlugin extends ProgramPlugin {
 					BigInteger pageStartIndex = null;
 					BigInteger lastIndex = null;
 					int currentPageHt = 0;
-					long indexCount = (termIndex == null) ? lm.getNumIndexes().longValue()
-							: termIndex.subtract(startIndex).longValue();
+					long indexCount = (termIndex == null ? lm.getNumIndexes() : termIndex.subtract(startIndex)).longValue();
 
 					monitor.initialize(indexCount);
 					monitor.setMessage("Printing...");

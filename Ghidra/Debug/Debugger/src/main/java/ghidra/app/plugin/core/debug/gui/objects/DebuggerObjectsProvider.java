@@ -809,9 +809,7 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 	public ObjectContainer getParent(ObjectContainer container) {
 		List<String> path = container.getTargetObject().getPath();
 		List<String> ppath = new ArrayList<String>();
-		for (String link : path) {
-			ppath.add(link);
-		}
+        ppath.addAll(path);
 		if (path.isEmpty()) {
 			return null;
 		}
@@ -1372,9 +1370,7 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 			obj = root.getTargetObject();
 		}
 		if (!isLocalOnly()) {
-			DebugModelConventions.suitable(cls, obj).thenCompose(t -> {
-				return func.apply(t);
-			}).exceptionally(DebuggerResources.showError(getComponent(), errorMsg));
+			DebugModelConventions.suitable(cls, obj).thenCompose(func).exceptionally(DebuggerResources.showError(getComponent(), errorMsg));
 		}
 		else {
 			T t = cls.cast(obj);

@@ -60,7 +60,7 @@ public class BytesFieldLocation extends CodeUnitLocation {
 		if (cu instanceof Data) {
 			Data data = (Data) cu;
 			Data subData = data.getPrimitiveAt((int) addr.subtract(data.getAddress()));
-			return subData != null ? subData.getComponentPath() : data.getComponentPath();
+			return (subData != null ? subData : data).getComponentPath();
 		}
 		return null;
 	}

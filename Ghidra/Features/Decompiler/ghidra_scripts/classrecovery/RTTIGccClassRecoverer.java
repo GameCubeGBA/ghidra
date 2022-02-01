@@ -2747,10 +2747,7 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 			}
 			numLoops++;
 
-            Iterator<RecoveredClass> recoveredClassIterator = recoveredClasses.iterator();
-			while (recoveredClassIterator.hasNext()) {
-
-				RecoveredClass recoveredClass = recoveredClassIterator.next();
+			for (RecoveredClass recoveredClass : recoveredClasses) {
 
 				monitor.checkCanceled();
 				if (!listOfClasses.contains(recoveredClass)) {

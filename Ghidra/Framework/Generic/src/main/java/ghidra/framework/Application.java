@@ -749,9 +749,7 @@ public final class Application {
 	 */
 	public static Map<String, String> getApplicationSourceRevisions() {
 		HashMap<String, String> revMap = null;
-		Enumeration<Object> keys = app.layout.getApplicationProperties().keys();
-		while (keys.hasMoreElements()) {
-			Object key = keys.nextElement();
+		for (Object key : app.layout.getApplicationProperties().keySet()) {
 			if (!(key instanceof String)) {
 				continue;
 			}

@@ -22,7 +22,6 @@ import ghidra.program.model.lang.Register;
 import ghidra.program.model.listing.*;
 import ghidra.program.model.mem.MemoryAccessException;
 import ghidra.program.model.scalar.Scalar;
-import ghidra.program.util.ListingAddressCorrelation;
 import ghidra.util.Msg;
 
 import java.util.ArrayList;

@@ -256,13 +256,9 @@ public abstract class ThreadedTableModel<ROW_OBJECT, DATA_SOURCE>
 			return getColumnValueForRow(rowObject, columnIndex);
 		}
 
-		Map<Integer, Object> columnMap = cachedColumnValues.get(rowObject);
-		if (columnMap == null) {
-			columnMap = new HashMap<>();
-			cachedColumnValues.put(rowObject, columnMap);
-		}
+        Map<Integer, Object> columnMap = cachedColumnValues.computeIfAbsent(rowObject, k -> new HashMap<>());
 
-		Object columnValueForRow = columnMap.get(columnIndex);
+        Object columnValueForRow = columnMap.get(columnIndex);
 		if (columnValueForRow == null) {
 			columnValueForRow = getColumnValueForRow(rowObject, columnIndex);
 			columnMap.put(columnIndex, columnValueForRow);

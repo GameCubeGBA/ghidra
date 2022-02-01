@@ -273,10 +273,10 @@ abstract class AbstractPeDebugLoader extends AbstractLibrarySupportLoader {
 						return;
 					}
 					if (offsets[j] == 0) {
-						System.out.println("");
+						System.out.println();
 					}
 					if (offsets[j] == 1) {
-						System.out.println("");
+						System.out.println();
 					}
 					if (offsets[j] > 0) {
 						addLineComment(addr.add(Conv.intToLong(offsets[j])),
@@ -461,32 +461,16 @@ abstract class AbstractPeDebugLoader extends AbstractLibrarySupportLoader {
 		StringBuffer buffer = null;
 		switch (type) {
 			case CodeUnit.PLATE_COMMENT:
-				buffer = plateCommentMap.get(address);
-				if (buffer == null) {
-					buffer = new StringBuffer();
-					plateCommentMap.put(address, buffer);
-				}
+				buffer = plateCommentMap.computeIfAbsent(address, k -> new StringBuffer());
 				break;
 			case CodeUnit.PRE_COMMENT:
-				buffer = preCommentMap.get(address);
-				if (buffer == null) {
-					buffer = new StringBuffer();
-					preCommentMap.put(address, buffer);
-				}
+				buffer = preCommentMap.computeIfAbsent(address, k -> new StringBuffer());
 				break;
 			case CodeUnit.POST_COMMENT:
-				buffer = postCommentMap.get(address);
-				if (buffer == null) {
-					buffer = new StringBuffer();
-					postCommentMap.put(address, buffer);
-				}
+				buffer = postCommentMap.computeIfAbsent(address, k -> new StringBuffer());
 				break;
 			case CodeUnit.EOL_COMMENT:
-				buffer = eolCommentMap.get(address);
-				if (buffer == null) {
-					buffer = new StringBuffer();
-					eolCommentMap.put(address, buffer);
-				}
+				buffer = eolCommentMap.computeIfAbsent(address, k -> new StringBuffer());
 				break;
 		}
 		if (buffer != null) {

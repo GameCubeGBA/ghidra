@@ -35,7 +35,7 @@ public class ClassFinder {
 	static final Logger log = LogManager.getLogger(ClassFinder.class);
 
 	private static List<Class<?>> FILTER_CLASSES =
-		Collections.unmodifiableList(Arrays.asList(ExtensionPoint.class));
+            List.of(ExtensionPoint.class);
 
 	private Set<ClassDir> classDirs = new HashSet<>();
 	private Set<ClassJar> classJars = new HashSet<>();

@@ -195,14 +195,6 @@ public class TestProgramManager {
 		}
 	}
 
-	public void removeAllConsumersExcept(Program p, Object consumer) {
-		p.getConsumerList().forEach(c -> {
-			if (c != consumer) {
-				p.release(c);
-			}
-		});
-	}
-
 	/**
 	 * Copies the specified program zip file to the JUnit test project's root folder. <b>This
 	 * means that the program will appear in the FrontEndTool as part of the project.</b>  That is

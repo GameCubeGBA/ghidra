@@ -41,7 +41,7 @@ class RichProductIdLoader {
 
 			File userFile = Application.getUserSettingsDirectory().getParentFile();
 			String userFilePath =
-				userFile.getAbsolutePath().concat(File.separator).concat("rich_ids.xml");
+					userFile.getAbsolutePath() + File.separator + "rich_ids.xml";
 
 			ResourceFile user = new ResourceFile(new File(userFilePath));
 

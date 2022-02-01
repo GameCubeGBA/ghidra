@@ -633,8 +633,7 @@ class FunctionMerger extends AbstractFunctionMerger implements ListingMerger {
 	@Override
 	protected void saveFunctionDetailConflict(Function[] functions, int type) {
 		Address entry = (functions[LATEST] != null) ? functions[LATEST].getEntryPoint()
-				: ((functions[MY] != null) ? functions[MY].getEntryPoint()
-						: functions[ORIGINAL].getEntryPoint());
+				: (functions[functions[MY] != null ? MY : ORIGINAL].getEntryPoint());
 		// If something else has set bits, we want to retain those, so get them.
 		int bits = 0;
 		try {

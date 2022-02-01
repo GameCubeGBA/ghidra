@@ -72,7 +72,7 @@ public class DBTraceObjectValPath implements TraceObjectValPath {
 		for (int i = 1; i < arr.length; i++) {
 			arr[i] = entryList.get(i - 1);
 		}
-		return new DBTraceObjectValPath(Collections.unmodifiableList(Arrays.asList(arr)));
+		return new DBTraceObjectValPath(List.of(arr));
 	}
 
 	public DBTraceObjectValPath append(TraceObjectValue entry) {
@@ -81,7 +81,7 @@ public class DBTraceObjectValPath implements TraceObjectValPath {
 			arr[i] = entryList.get(i);
 		}
 		arr[arr.length - 1] = (InternalTraceObjectValue) entry;
-		return new DBTraceObjectValPath(Collections.unmodifiableList(Arrays.asList(arr)));
+		return new DBTraceObjectValPath(List.of(arr));
 	}
 
 	@Override

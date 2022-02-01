@@ -263,7 +263,7 @@ public class ColumnConstraintSet<R, T> {
 		if (model != other.model) {
 			return false;
 		}
-		return Objects.equals(constraints, other.constraints);
+		return constraints.equals(other.constraints);
 	}
 
 	@Override

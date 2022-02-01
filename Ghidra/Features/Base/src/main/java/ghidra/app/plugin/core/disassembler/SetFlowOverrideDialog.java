@@ -26,6 +26,8 @@ import ghidra.program.model.listing.*;
 import ghidra.program.model.symbol.FlowType;
 import ghidra.program.util.ProgramSelection;
 
+import java.util.Objects;
+
 class SetFlowOverrideDialog extends DialogComponentProvider {
 
 	private static final String DEFAULT_CHOICE = "-DEFAULT-";
@@ -133,12 +135,7 @@ class SetFlowOverrideDialog extends DialogComponentProvider {
 		}
 
 		FlowOverride flowOverride = instruction != null ? instruction.getFlowOverride() : null;
-		if (flowOverride == null) {
-			flowOverrideComboBox.setSelectedItem(DEFAULT_CHOICE);
-		}
-		else {
-			flowOverrideComboBox.setSelectedItem(flowOverride);
-		}
+        flowOverrideComboBox.setSelectedItem(Objects.requireNonNullElse(flowOverride, DEFAULT_CHOICE));
 
 		panel.add(new GLabel("Instruction Flow:"));
 		panel.add(flowOverrideComboBox);

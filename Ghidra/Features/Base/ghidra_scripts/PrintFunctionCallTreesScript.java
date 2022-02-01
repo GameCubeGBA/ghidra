@@ -120,9 +120,7 @@ public class PrintFunctionCallTreesScript extends GhidraScript {
 			Address address = addressIterator.next();
 			Reference[] referencesFrom = referenceManager.getReferencesFrom(address);
 			if (referencesFrom != null) {
-				for (Reference reference : referencesFrom) {
-					set.add(reference);
-				}
+                set.addAll(Arrays.asList(referencesFrom));
 			}
 		}
 		return set;

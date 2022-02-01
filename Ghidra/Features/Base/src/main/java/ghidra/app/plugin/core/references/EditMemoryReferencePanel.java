@@ -462,12 +462,8 @@ class EditMemoryReferencePanel extends EditReferencePanel {
 	}
 
 	private void addHistoryAddress(Program program, Address addr) {
-		List<Address> list = addrHistoryMap.get(program);
-		if (list == null) {
-			list = new ArrayList<>();
-			addrHistoryMap.put(program, list);
-		}
-		list.remove(addr);
+        List<Address> list = addrHistoryMap.computeIfAbsent(program, k -> new ArrayList<>());
+        list.remove(addr);
 		list.add(0, addr);
 		if (list.size() > MAX_HISTORY_LENGTH) {
 			list.remove(MAX_HISTORY_LENGTH);

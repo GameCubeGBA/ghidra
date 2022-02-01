@@ -175,7 +175,7 @@ public class DefaultGraphRenderer implements GraphRenderer {
 			return VertexShape.STAR.getShape();
 		}
 		VertexShape vertexShape = options.getVertexShape(vertex);
-		return vertexShape != null ? vertexShape.getShape() : VertexShape.RECTANGLE.getShape();
+		return (vertexShape != null ? vertexShape : VertexShape.RECTANGLE).getShape();
 	}
 
 	private Position getJungraphTPosition(GraphLabelPosition labelPosition) {

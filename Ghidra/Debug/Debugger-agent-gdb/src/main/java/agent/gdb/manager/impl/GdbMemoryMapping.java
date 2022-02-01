@@ -33,7 +33,7 @@ public class GdbMemoryMapping {
 		this.offset = offset;
 		this.objfile = objfile;
 
-		assert Objects.equals(start.add(size), end);
+		assert start.add(size).equals(end);
 	}
 
 	public BigInteger getStart() {

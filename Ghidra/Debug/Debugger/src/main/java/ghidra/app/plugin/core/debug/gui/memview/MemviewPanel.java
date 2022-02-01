@@ -157,8 +157,8 @@ public class MemviewPanel extends JPanel implements MouseListener, MouseMotionLi
 	}
 
 	void initViews() {
-		setSize(new Dimension(vertical ? times.size() : addresses.size(),
-			vertical ? addresses.size() : times.size()));
+		setSize(new Dimension((vertical ? times : addresses).size(),
+				(vertical ? addresses : times).size()));
 		this.amap = new MemviewMap(addresses.size(), addresses.size());
 		this.tmap = new MemviewMap(times.size(), times.size());
 	}
@@ -192,9 +192,9 @@ public class MemviewPanel extends JPanel implements MouseListener, MouseMotionLi
 			if (box == null)
 				continue;
 
-			int bound = vertical ? getHeight() - 1 : getWidth() - 1;
+			int bound = (vertical ? getHeight() : getWidth()) - 1;
 			box.setAddressBounds(amap, bound);
-			bound = vertical ? getWidth() - 1 : getHeight() - 1;
+			bound = (vertical ? getWidth() : getHeight()) - 1;
 			box.setTimeBounds(tmap, bound);
 
 			boxList.add(box);
@@ -453,13 +453,13 @@ public class MemviewPanel extends JPanel implements MouseListener, MouseMotionLi
 	public long getAddr(int x, int y) {
 		if (amap == null)
 			return 0;
-		return vertical ? amap.getOffset(y) : amap.getOffset(x);
+		return amap.getOffset(vertical ? y : x);
 	}
 
 	public long getTick(int x, int y) {
 		if (tmap == null)
 			return 0;
-		return vertical ? tmap.getOffset(x) : tmap.getOffset(y);
+		return tmap.getOffset(vertical ? x : y);
 	}
 
 	public String getTagForAddr(long addr) {

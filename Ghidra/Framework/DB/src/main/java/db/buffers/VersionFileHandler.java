@@ -248,9 +248,7 @@ public class VersionFileHandler {
 	 */
 	String[] getOldParameterNames() {
 		ArrayList<String> list = new ArrayList<String>();
-		Enumeration<String> it = origParms.keys();
-		while (it.hasMoreElements()) {
-			String name = it.nextElement();
+		for (String name : origParms.keySet()) {
 			list.add(name);
 		}
 		String[] names = new String[list.size()];

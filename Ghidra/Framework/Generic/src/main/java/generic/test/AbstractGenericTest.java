@@ -262,9 +262,7 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 		}
 
 		Window[] windows = Window.getWindows();
-		for (Window window : windows) {
-			set.add(window);
-		}
+		set.addAll(Arrays.asList(windows));
 
 		return set;
 	}
@@ -272,9 +270,7 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 	private static List<Window> getAllWindows(Window parent) {
 		List<Window> list = new ArrayList<>();
 		list.add(parent);
-		for (Window w : parent.getOwnedWindows()) {
-			list.add(w);
-		}
+		list.addAll(Arrays.asList(parent.getOwnedWindows()));
 		return list;
 	}
 

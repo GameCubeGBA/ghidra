@@ -112,7 +112,7 @@ public class Constructor implements Comparable<Constructor> {
 	}
 
 	public List<ContextChange> getContextChanges() {
-		return Collections.unmodifiableList(Arrays.asList(context));
+		return List.of(context);
 	}
 
 	public String print(ParserWalker walker) throws MemoryAccessException {

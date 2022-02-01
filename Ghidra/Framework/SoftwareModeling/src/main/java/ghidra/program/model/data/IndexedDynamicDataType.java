@@ -145,7 +145,7 @@ public abstract class IndexedDynamicDataType extends DynamicDataType {
 		long index = getIndex(memory, start.add(indexOffset)) & mask;
 		Integer structIndex = null;
 		if (keys.length == 1) {
-			structIndex = (index == keys[0]) ? Integer.valueOf(0) : Integer.valueOf(1);
+			structIndex = Integer.valueOf(index == keys[0] ? 0 : 1);
 		}
 		else {
 			structIndex = table.get(Long.valueOf(index));

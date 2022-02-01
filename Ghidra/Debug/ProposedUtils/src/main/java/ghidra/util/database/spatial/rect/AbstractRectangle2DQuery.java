@@ -192,7 +192,7 @@ public abstract class AbstractRectangle2DQuery< //
 	public Q and(Q query) {
 		NS ir1 = r1.intersection(query.r1);
 		NS ir2 = r2.intersection(query.r2);
-		return create(ir1, ir2, query.direction != null ? query.direction : this.direction);
+		return create(ir1, ir2, (query.direction != null ? query : this).direction);
 	}
 
 	public Rectangle2DDirection getDirection() {

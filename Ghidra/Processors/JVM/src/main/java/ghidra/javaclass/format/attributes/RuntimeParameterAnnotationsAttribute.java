@@ -128,9 +128,7 @@ public class RuntimeParameterAnnotationsAttribute extends AbstractAttributeInfo 
 
 	@Override
 	public DataType toDataType() throws DuplicateNameException, IOException {
-		String name = _isVisible
-				? "RuntimeVisibleParameterAnnotations_attribute" + "|" + numberOfParameters + "|"
-				: "RuntimeInvisibleParameterAnnotations_attribute" + "|" + numberOfParameters + "|";
+		String name = (_isVisible ? "RuntimeVisibleParameterAnnotations_attribute" : "RuntimeInvisibleParameterAnnotations_attribute") + "|" + numberOfParameters + "|";
 
 		StructureDataType structure = getBaseStructure(name);
 		structure.add(BYTE, "num_parameters", null);

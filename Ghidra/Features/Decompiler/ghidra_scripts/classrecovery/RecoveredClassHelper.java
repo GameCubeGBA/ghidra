@@ -177,9 +177,7 @@ public class RecoveredClassHelper {
 	}
 
 	public void updateVftableToClassMap(Address vftableAddress, RecoveredClass recoveredClass) {
-		if (vftableToClassMap.get(vftableAddress) == null) {
-			vftableToClassMap.put(vftableAddress, recoveredClass);
-		}
+        vftableToClassMap.putIfAbsent(vftableAddress, recoveredClass);
 	}
 
 	public RecoveredClass getVftableClass(Address vftableAddress) {
@@ -435,9 +433,7 @@ public class RecoveredClassHelper {
 
 	public void updateFunctionToStorePcodeOpsMap(Function function,
 			List<OffsetPcodeOpPair> offsetPcodeOpPairs) {
-		if (functionToStorePcodeOps.get(function) == null) {
-			functionToStorePcodeOps.put(function, offsetPcodeOpPairs);
-		}
+        functionToStorePcodeOps.putIfAbsent(function, offsetPcodeOpPairs);
 	}
 
 	public List<OffsetPcodeOpPair> getStorePcodeOpPairs(Function function) {
@@ -446,9 +442,7 @@ public class RecoveredClassHelper {
 
 	public void updateFunctionToLoadPcodeOpsMap(Function function,
 			List<OffsetPcodeOpPair> offsetPcodeOpPairs) {
-		if (functionToLoadPcodeOps.get(function) == null) {
-			functionToLoadPcodeOps.put(function, offsetPcodeOpPairs);
-		}
+        functionToLoadPcodeOps.putIfAbsent(function, offsetPcodeOpPairs);
 	}
 
 	public List<OffsetPcodeOpPair> getLoadPcodeOpPairs(Function function) {
@@ -3112,9 +3106,9 @@ public class RecoveredClassHelper {
 
                     Boolean isVirtualParent = parentToBaseTypeMap.get(ancestor);
                     if (isVirtualParent != null && isVirtualParent) {
-                        classString = classString.concat(" : virtual " + ancestor.getName());
+                        classString = classString + " : virtual " + ancestor.getName();
                     } else {
-                        classString = classString.concat(" : " + ancestor.getName());
+                        classString = classString + " : " + ancestor.getName();
                     }
                 }
             }

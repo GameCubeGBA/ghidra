@@ -201,9 +201,7 @@ public class DWARFExpressionOpCodes {
 	public static final Set<Integer> UNSUPPORTED_OPCODES = new HashSet<>();
 
 	static {
-		for (int opcode : UNSUPPORTED_OPCODES) {
-			UNSUPPORTED_OPCODES.add(opcode);
-		}
+        UNSUPPORTED_OPCODES.addAll(UNSUPPORTED_OPCODES);
 	}
 
 	/**

@@ -69,7 +69,7 @@ public final class BooleanField extends PrimitiveField {
 	 */
 	BooleanField(boolean b, boolean immutable) {
 		super(immutable);
-		value = b ? (byte) 1 : (byte) 0;
+		value = (byte) (b ? 1 : 0);
 	}
 
 	@Override
@@ -80,7 +80,7 @@ public final class BooleanField extends PrimitiveField {
 	@Override
 	public void setBooleanValue(boolean b) {
 		updatingPrimitiveValue();
-		this.value = b ? (byte) 1 : (byte) 0;
+		this.value = (byte) (b ? 1 : 0);
 	}
 
 	@Override

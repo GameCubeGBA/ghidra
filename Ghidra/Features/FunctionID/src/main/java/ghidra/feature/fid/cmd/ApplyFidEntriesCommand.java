@@ -361,12 +361,8 @@ public class ApplyFidEntriesCommand extends BackgroundCommand {
 		for (String functionName : unusedNames) {
 			monitor.checkCanceled();
 			addSymbolToFunction(function, functionName);
-			List<Address> list = multiMatchNames.get(functionName);
-			if (list == null) {
-				list = new LinkedList<Address>();
-				multiMatchNames.put(functionName, list);
-			}
-			list.add(addr);
+            List<Address> list = multiMatchNames.computeIfAbsent(functionName, k -> new LinkedList<Address>());
+            list.add(addr);
 		}
 
 		if (unusedNames.size() > 1) {

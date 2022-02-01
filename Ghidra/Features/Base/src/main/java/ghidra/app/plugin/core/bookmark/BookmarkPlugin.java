@@ -625,9 +625,7 @@ public class BookmarkPlugin extends ProgramPlugin
 				types.add(type);
 			}
 			else {
-                for (String s : bookmarkNavigators.keySet()) {
-                    types.add(s);
-                }
+                types.addAll(bookmarkNavigators.keySet());
 			}
 			updateMgr.update();
 		}

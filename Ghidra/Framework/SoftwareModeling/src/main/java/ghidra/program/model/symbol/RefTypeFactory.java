@@ -15,6 +15,7 @@
  */
 package ghidra.program.model.symbol;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.NoSuchElementException;
 
@@ -95,9 +96,7 @@ public class RefTypeFactory {
 
 	private static HashSet<RefType> validMemRefTypes = new HashSet<>();
 	static {
-		for (RefType rt : memoryRefTypes) {
-			validMemRefTypes.add(rt);
-		}
+        validMemRefTypes.addAll(Arrays.asList(memoryRefTypes));
 	}
 
 	private static RefType[] stackRefTypes =

@@ -146,7 +146,7 @@ public class YaraGhidraGUIScript extends GhidraScript {
 
 			String curByte =
 				instrStr.length() >= 8 ? instrStr.substring(i, i + 8) : instrStr.substring(i);
-			String nibble1 = curByte.length() >= 4 ? curByte.substring(0, 4) : curByte.substring(0);
+			String nibble1 = curByte.length() >= 4 ? curByte.substring(0, 4) : curByte;
 			String nibble2 = curByte.length() >= 8 ? curByte.substring(4, 8)
 					: curByte.length() >= 4 ? curByte.substring(4) : "";
 

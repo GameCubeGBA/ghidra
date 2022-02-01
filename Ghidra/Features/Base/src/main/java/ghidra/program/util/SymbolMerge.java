@@ -765,28 +765,23 @@ class SymbolMerge {
 	}
 
 	static void reApplyDuplicateSymbols(Hashtable<Symbol, Symbol> dupSyms) {
-		Enumeration<Symbol> keys = dupSyms.keys();
-		while (keys.hasMoreElements()) {
-			Symbol fromSym = keys.nextElement();
+		for (Symbol fromSym : dupSyms.keySet()) {
 			Symbol toSym = dupSyms.get(fromSym);
 			try {
 				toSym.setName(fromSym.getName(), fromSym.getSource());
 				dupSyms.remove(fromSym);
-			}
-			catch (DuplicateNameException | InvalidInputException e) {
+			} catch (DuplicateNameException | InvalidInputException e) {
 				continue; // Leaves it in the hashtable
 			}
-        }
+		}
 	}
 
 	static String getDuplicateSymbolsInfo(Hashtable<Symbol, Symbol> dupSyms) {
 		StringBuilder buf = new StringBuilder();
-		Enumeration<Symbol> keys = dupSyms.keys();
-		while (keys.hasMoreElements()) {
-			Symbol fromSym = keys.nextElement();
+		for (Symbol fromSym : dupSyms.keySet()) {
 			Symbol toSym = dupSyms.get(fromSym);
 			String msg = "Symbol '" + fromSym.getName(true) + "' renamed to '" +
-				toSym.getName(true) + "' due to name conflict.\n";
+					toSym.getName(true) + "' due to name conflict.\n";
 			buf.append(msg);
 		}
 		return buf.toString();

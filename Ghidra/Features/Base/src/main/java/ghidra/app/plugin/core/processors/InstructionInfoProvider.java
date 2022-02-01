@@ -332,7 +332,7 @@ class InstructionInfoProvider extends ComponentProviderAdapter implements Domain
 			if (outStr.length() != 0) {
 				outStr.append(", ");
 			}
-			outStr.append(str.toString());
+			outStr.append(str);
 		}
 		return outStr.toString();
 	}
