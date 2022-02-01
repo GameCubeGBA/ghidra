@@ -283,7 +283,7 @@ public class GuidUtil {
 
 		guidString += " v";
 		versionData[0] = (bytes[17] << 8) + bytes[16];
-		guidString += Integer.toString(versionData[0]) + ".";
+		guidString += versionData[0] + ".";
 		versionData[1] = (bytes[19] << 8) + bytes[18];
 		guidString += Integer.toString(versionData[1]);
 

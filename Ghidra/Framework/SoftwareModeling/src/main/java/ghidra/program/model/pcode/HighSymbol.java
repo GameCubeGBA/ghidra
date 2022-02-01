@@ -461,7 +461,7 @@ public class HighSymbol {
 
 		if (categoryIndex >= 0 && name.startsWith("$$undef")) {
 			// use default parameter name
-			name = "param_" + Integer.toString(categoryIndex + 1);
+			name = "param_" + (categoryIndex + 1);
 		}
 
 		while (parser.peek().isStart()) {

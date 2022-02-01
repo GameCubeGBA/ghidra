@@ -129,7 +129,7 @@ public class DomainFolderChangesDisplayPlugin extends Plugin
 	@Override
 	public void domainFileStatusChanged(DomainFile file, boolean fileIDset) {
 		provider.addText("domainFileStatusChanged: " + file.getPathname() + ", fileIDset=" +
-			Boolean.toString(fileIDset));
+                fileIDset);
 	}
 
 	@Override

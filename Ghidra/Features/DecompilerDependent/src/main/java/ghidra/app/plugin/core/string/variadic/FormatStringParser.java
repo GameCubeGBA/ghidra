@@ -858,7 +858,7 @@ public class FormatStringParser {
 	private String extendLengthModifier(String lengthModifier, char nextChar) {
 		if ((lengthModifier.equals("h") && nextChar == 'h') ||
 			(lengthModifier.equals("l") && nextChar == 'l')) {
-			return lengthModifier + Character.toString(nextChar);
+			return lengthModifier + nextChar;
 		}
 		return null;
 	}

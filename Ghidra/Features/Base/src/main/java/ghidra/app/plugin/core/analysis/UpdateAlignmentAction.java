@@ -29,7 +29,7 @@ public class UpdateAlignmentAction extends ToggleDockingAction implements Addres
 	FindReferencesTableModel model;
 
 	public UpdateAlignmentAction(Plugin plugin, FindReferencesTableModel model, int alignment) {
-		super("UpdateAlignmentAction"+Integer.toString(alignment), plugin.getName());
+		super("UpdateAlignmentAction"+ alignment, plugin.getName());
 		this.plugin = plugin;
 		this.alignment = alignment;
 		this.model = model;

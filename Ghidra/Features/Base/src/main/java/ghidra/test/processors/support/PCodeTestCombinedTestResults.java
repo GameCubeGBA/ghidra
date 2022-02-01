@@ -375,7 +375,7 @@ public class PCodeTestCombinedTestResults {
 			w.print("<font color=\"gray\">-</font>");
 		}
 		else {
-			w.print("<font color=\"" + color + "\">" + Integer.toString(count) + "</font>");
+			w.print("<font color=\"" + color + "\">" + count + "</font>");
 		}
 	}
 

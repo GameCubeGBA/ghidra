@@ -381,7 +381,7 @@ public class DWARFUtil {
 		if (die.getTag() == DWARFTag.DW_TAG_lexical_block ||
 			die.getTag() == DWARFTag.DW_TAG_inlined_subroutine) {
 			return getLexicalBlockNameWorker(die.getParent()) + "_" +
-				Integer.toString(getMyPositionInParent(die));
+                    getMyPositionInParent(die);
 		}
 		return "";
 	}

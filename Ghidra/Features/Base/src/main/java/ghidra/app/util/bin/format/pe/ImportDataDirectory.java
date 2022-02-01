@@ -317,7 +317,7 @@ public class ImportDataDirectory extends DataDirectory {
 
 				StringBuilder cmt = new StringBuilder();
 				if (ordinal != -1) {
-					cmt.append(Long.toString(ordinal)).append("  ");
+					cmt.append(ordinal).append("  ");
 				}
 				if (boundName != null) {
 					cmt.append(boundName).append("  ");

@@ -105,11 +105,11 @@ public class LocalVariableInfo extends LocalVariableImpl {
 
 		StringBuilder buffy = new StringBuilder();
 		buffy.append(getClass().getSimpleName()).append(Stringable.DELIMITER);
-		buffy.append(Long.toString(dataTypeMananger.getUniversalID().getValue())).append(
+		buffy.append(dataTypeMananger.getUniversalID().getValue()).append(
 			Stringable.DELIMITER);
-		buffy.append(Long.toString(dataTypeMananger.getID(dt))).append(Stringable.DELIMITER);
+		buffy.append(dataTypeMananger.getID(dt)).append(Stringable.DELIMITER);
 		buffy.append(dt.getName()).append(Stringable.DELIMITER);
-		buffy.append(Integer.toString(getFirstUseOffset())).append(Stringable.DELIMITER);
+		buffy.append(getFirstUseOffset()).append(Stringable.DELIMITER);
 		buffy.append(getName()).append(Stringable.DELIMITER);
 		buffy.append(getSource().name()).append(Stringable.DELIMITER);
 		buffy.append(getComment()).append(Stringable.DELIMITER);

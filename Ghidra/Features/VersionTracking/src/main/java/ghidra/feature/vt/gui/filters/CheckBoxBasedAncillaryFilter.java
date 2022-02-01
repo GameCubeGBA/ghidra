@@ -212,7 +212,7 @@ public abstract class CheckBoxBasedAncillaryFilter<T> extends AncillaryFilter<T>
 		for (CheckBoxInfo<T> info : checkBoxInfos) {
 			JCheckBox checkBox = info.getCheckBox();
 			String text = checkBox.getText();
-			values[i++] = text + ":" + Boolean.toString(checkBox.isSelected());
+			values[i++] = text + ":" + checkBox.isSelected();
 		}
 
 		String key = getStateKey();

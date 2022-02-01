@@ -320,7 +320,7 @@ public class ProgramLocation implements Comparable<ProgramLocation> {
 				if (i != 0) {
 					buf.append(':');
 				}
-				buf.append(Integer.toString(componentPath[i]));
+				buf.append(componentPath[i]);
 			}
 		}
 		buf.append(", row=");

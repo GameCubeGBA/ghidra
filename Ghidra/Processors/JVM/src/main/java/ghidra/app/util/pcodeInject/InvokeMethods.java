@@ -134,19 +134,19 @@ public class InvokeMethods {
 		for (int i = categories.size() - 1; i >= 0; --i) {
 			switch (categories.get(i)) {
 				case CAT_1:
-					pCode.emitPopCat1Value(PARAMETER + Integer.toString(i));
+					pCode.emitPopCat1Value(PARAMETER + i);
 					totalSize -= 4;
 					pCode.emitWriteToMemory(PARAM_SPACE, 4,
-						Integer.toString(totalSize) + ":4", PARAMETER + Integer.toString(i));
+                            totalSize + ":4", PARAMETER + i);
 					break;
 				case CAT_2:
-					pCode.emitPopCat1Value(PARAMETER + Integer.toString(i));
+					pCode.emitPopCat1Value(PARAMETER + i);
 					pCode.emitWriteToMemory(PARAM_SPACE, 4,
-						Integer.toString(totalSize - 8) + ":4", PARAMETER + Integer.toString(i));
-					pCode.emitPopCat1Value(PARAMETER_PART2 + Integer.toString(i));
+                            totalSize - 8 + ":4", PARAMETER + i);
+					pCode.emitPopCat1Value(PARAMETER_PART2 + i);
 					pCode.emitWriteToMemory(PARAM_SPACE, 4,
-						Integer.toString(totalSize - 4) + ":4",
-						PARAMETER_PART2 + Integer.toString(i));
+                            totalSize - 4 + ":4",
+						PARAMETER_PART2 + i);
 					totalSize -= 8;
 					break;
 				default:
@@ -158,7 +158,7 @@ public class InvokeMethods {
 			pCode.emitPopCat1Value(THIS);
 			totalSize -= 4;
 			pCode.emitWriteToMemory(PARAM_SPACE, 4,
-				Integer.toString(totalSize) + ":4", THIS);
+                    totalSize + ":4", THIS);
 
 		}
 	}

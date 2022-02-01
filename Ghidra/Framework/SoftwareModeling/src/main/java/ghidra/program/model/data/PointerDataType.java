@@ -306,7 +306,7 @@ public class PointerDataType extends BuiltIn implements Pointer {
 	public String getDescription() {
 		StringBuilder sbuf = new StringBuilder();
 		if (length > 0) {
-			sbuf.append(Integer.toString(8 * length));
+			sbuf.append(8 * length);
 			sbuf.append("-bit ");
 		}
 		sbuf.append(POINTER_NAME);

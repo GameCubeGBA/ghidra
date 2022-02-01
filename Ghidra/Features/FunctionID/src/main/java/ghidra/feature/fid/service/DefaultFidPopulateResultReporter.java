@@ -61,7 +61,7 @@ public class DefaultFidPopulateResultReporter implements FidPopulateResultReport
 
 		buffer.append("Most referenced functions by name:\n");
 		for (FidPopulateResult.Count count : result.getMaxChildReferences()) {
-			buffer.append(Integer.toString(count.count));
+			buffer.append(count.count);
 			buffer.append("  ");
 			buffer.append(count.name);
 			buffer.append('\n');

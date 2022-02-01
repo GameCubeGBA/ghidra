@@ -1455,7 +1455,7 @@ public class DWARFFunctionImporter {
 			String baseName = var.getName();
 			while (!monitor.isCancelled()) {
 				try {
-					var.setName(baseName + "_" + Integer.toString(count), SourceType.IMPORTED);
+					var.setName(baseName + "_" + count, SourceType.IMPORTED);
 					func.addLocalVariable(var, SourceType.IMPORTED);
 				}
 				catch (DuplicateNameException e1) {

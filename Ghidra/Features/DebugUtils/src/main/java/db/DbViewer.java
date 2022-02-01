@@ -167,7 +167,7 @@ public class DbViewer extends JFrame {
 		String[] names = new String[tables.length];
 		for (int i = 0; i < names.length; i++) {
 			names[i] =
-				tables[i].getName() + " (" + Integer.toString(tables[i].getRecordCount()) + ")";
+				tables[i].getName() + " (" + tables[i].getRecordCount() + ")";
 		}
 		combo = new GComboBox<>(names);
 		combo.addActionListener(new ActionListener() {
@@ -210,21 +210,21 @@ public class DbViewer extends JFrame {
 		panel.add(scroll, BorderLayout.CENTER);
 
 		TableStatistics[] stats = getStats(table);
-		String recCnt = "Records: " + Integer.toString(table.getRecordCount());
+		String recCnt = "Records: " + table.getRecordCount();
 		String intNodeCnt = "";
 		String recNodeCnt = "";
 		String chainBufCnt = "";
 		String size = "";
 		if (stats != null) {
-			intNodeCnt = "Interior Nodes: " + Integer.toString(stats[0].interiorNodeCnt);
-			recNodeCnt = "Record Nodes: " + Integer.toString(stats[0].recordNodeCnt);
-			chainBufCnt = "Chained Buffers: " + Integer.toString(stats[0].chainedBufferCnt);
-			size = "Size (KB): " + Integer.toString(stats[0].size / 1024);
+			intNodeCnt = "Interior Nodes: " + stats[0].interiorNodeCnt;
+			recNodeCnt = "Record Nodes: " + stats[0].recordNodeCnt;
+			chainBufCnt = "Chained Buffers: " + stats[0].chainedBufferCnt;
+			size = "Size (KB): " + stats[0].size / 1024;
 			if (stats.length > 1) {
-				intNodeCnt += " / " + Integer.toString(stats[1].interiorNodeCnt);
-				recNodeCnt += " / " + Integer.toString(stats[1].recordNodeCnt);
-				chainBufCnt += " / " + Integer.toString(stats[1].chainedBufferCnt);
-				size += " / " + Integer.toString(stats[1].size / 1024);
+				intNodeCnt += " / " + stats[1].interiorNodeCnt;
+				recNodeCnt += " / " + stats[1].recordNodeCnt;
+				chainBufCnt += " / " + stats[1].chainedBufferCnt;
+				size += " / " + stats[1].size / 1024;
 			}
 		}
 		JLabel statsLabel = new GDLabel(

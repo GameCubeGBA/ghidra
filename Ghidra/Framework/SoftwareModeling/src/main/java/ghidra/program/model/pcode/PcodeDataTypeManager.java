@@ -1132,11 +1132,11 @@ public class PcodeDataTypeManager {
 			buf.append("<type name=\"");
 			buf.append(typeMap.name);
 			buf.append("\" size=\"");
-			buf.append(Integer.toString(typeMap.dt.getLength()));
+			buf.append(typeMap.dt.getLength());
 			buf.append('\"');
 			buf.append(typeMap.metatype);
 			buf.append(" id=\"");					// Encode special id ( <0 for builtins )
-			buf.append(Long.toString(typeMap.id));
+			buf.append(typeMap.id);
 			buf.append("\"/>\n");
 		}
 

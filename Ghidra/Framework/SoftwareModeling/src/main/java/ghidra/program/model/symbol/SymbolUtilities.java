@@ -494,7 +494,7 @@ public class SymbolUtilities {
 		// If there is a label at the CodeUnit start, then we want to be based upon that, except
 		// in special cases, like String data
 		//
-		String offcutText = PLUS + Integer.toString(offcutOffset);
+		String offcutText = PLUS + offcutOffset;
 		Symbol symbol = data.getPrimarySymbol();
 		if (symbol != null && !symbol.isDynamic()) {
 			return symbol.getName() + offcutText;
@@ -541,7 +541,7 @@ public class SymbolUtilities {
 
 	private static String getDyanmicOffcutInstructionName(Instruction instruction,
 			Address codeUnitAddress, long diff) {
-		String offcutText = PLUS + Long.toString(diff);
+		String offcutText = PLUS + diff;
 
 		//
 		// If there is a label at the CodeUnit start, then we want to be based upon that, except
@@ -688,7 +688,7 @@ public class SymbolUtilities {
 				: Function.DEFAULT_LOCAL_PREFIX) +
 			Integer.toHexString(stackOffset);
 		if (firstUseOffset != 0) {
-			name += UNDERSCORE + Integer.toString(firstUseOffset);
+			name += UNDERSCORE + firstUseOffset;
 		}
 		return name;
 	}
@@ -703,7 +703,7 @@ public class SymbolUtilities {
 				name += Long.toHexString(hash);
 			}
 			else {
-				name += UNDERSCORE + Integer.toString(firstUseOffset);
+				name += UNDERSCORE + firstUseOffset;
 			}
 			return name;
 		}
@@ -735,7 +735,7 @@ public class SymbolUtilities {
 		}
 		if (firstUseOffset != 0) {
 			buffy.append('_');
-			buffy.append(Integer.toString(firstUseOffset));
+			buffy.append(firstUseOffset);
 		}
 		return buffy.toString();
 	}

@@ -277,7 +277,7 @@ public class JumpTable {
 		HighFunction.createLabelSymbol(symtab, opAddress, "switch", space, SourceType.USER_DEFINED,
 			false);
 		for (int i = 0; i < destlist.length; ++i) {
-			String nm = "case_" + Integer.toString(i);
+			String nm = "case_" + i;
 			HighFunction.createLabelSymbol(symtab, destlist[i], nm, space, SourceType.USER_DEFINED,
 				false);
 		}

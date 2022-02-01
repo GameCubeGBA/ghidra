@@ -229,7 +229,7 @@ class EquateTableModel extends GDynamicColumnTableModel<Equate, Object> {
 				// @formatter:off
 				sb.append(Long.toHexString(t))
 				.append(" ")
-				.append(Long.toString(t));
+				.append(t);
 				// @formatter:on
 				return sb.toString();
 			}

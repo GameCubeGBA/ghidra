@@ -483,7 +483,7 @@ public class DWARFProgram implements Closeable {
 					continue;
 				}
 				DWARFNameInfo parentDNI = getName(commonParent);
-				memberName = parentDNI.getName() + "_" + Integer.toString(positionInParent);
+				memberName = parentDNI.getName() + "_" + positionInParent;
 			}
 			if (result.length() > 0) {
 				result.append("_");

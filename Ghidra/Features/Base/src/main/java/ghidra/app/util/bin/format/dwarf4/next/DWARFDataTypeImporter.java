@@ -515,7 +515,7 @@ public class DWARFDataTypeImporter {
 		long origStructSize = structSize;
 		if (isStructTooBigForGhidra(structSize)) {
 			Msg.error(this, "Large DWARF structure encountered, substituting empty struct for " +
-				dni + ", size: " + Long.toString(structSize) + " at DIE " + diea.getHexOffset());
+				dni + ", size: " + structSize + " at DIE " + diea.getHexOffset());
 			structSize = 0;
 		}
 		boolean isUnion = diea.getTag() == DWARFTag.DW_TAG_union_type;
@@ -550,7 +550,7 @@ public class DWARFDataTypeImporter {
 
 		if (isStructTooBigForGhidra(origStructSize)) {
 			DWARFUtil.appendDescription(struct,
-				"Structure oversize error, original size: " + Long.toString(origStructSize), "\n");
+				"Structure oversize error, original size: " + origStructSize, "\n");
 		}
 
 		return result;

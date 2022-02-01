@@ -215,16 +215,16 @@ public class EvaluateVTMatch extends GhidraScript {
 		
 		public void reportResults(GhidraScript script,String msg) {
 			script.println(msg);
-			script.println("  False positive = " + Double.toString(falsepositive));
-			script.println("  False negative = " + Double.toString(falsenegative));
-			script.println("  Total reported matches = " + Integer.toString(totalmatches));
-			script.println("  Possible valid matches = " + Integer.toString(possiblematches));
-			script.println("  Empty body matches = " + Integer.toString(emptybodymatches));
-			script.println("  Non-conflicting valid matches = " + Integer.toString(matchdiscovered));
-			script.println("  Mismatches = " + Integer.toString(mismatch));
-			script.println("  Conflicting valid matches = " + Integer.toString(conflicts));
-			script.println("  Source unmatchable functions = " + Integer.toString(othersrcfuncs));
-			script.println("  Destination unmatchable functions = " + Integer.toString(otherdestfuncs));			
+			script.println("  False positive = " + falsepositive);
+			script.println("  False negative = " + falsenegative);
+			script.println("  Total reported matches = " + totalmatches);
+			script.println("  Possible valid matches = " + possiblematches);
+			script.println("  Empty body matches = " + emptybodymatches);
+			script.println("  Non-conflicting valid matches = " + matchdiscovered);
+			script.println("  Mismatches = " + mismatch);
+			script.println("  Conflicting valid matches = " + conflicts);
+			script.println("  Source unmatchable functions = " + othersrcfuncs);
+			script.println("  Destination unmatchable functions = " + otherdestfuncs);
 		}
 		
 		public void reportFalseNegatives(GhidraScript script,boolean sourceSide,int max) {

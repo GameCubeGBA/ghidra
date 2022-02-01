@@ -766,7 +766,7 @@ public class VariableStorage implements Comparable<VariableStorage> {
 			}
 			strBuilder.append(v.getAddress().toString(true));
 			strBuilder.append(":");
-			strBuilder.append(Integer.toString(v.getSize()));
+			strBuilder.append(v.getSize());
 		}
 		return strBuilder.toString();
 	}
