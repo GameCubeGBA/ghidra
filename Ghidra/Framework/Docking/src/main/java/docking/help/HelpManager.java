@@ -686,7 +686,7 @@ public class HelpManager implements HelpService {
 
 		boolean isHelpDescriptor = false;
 		StringBuilder buffy = new StringBuilder();
-		buffy.append("HELP OBJECT: " + helpObj.getClass().getName());
+		buffy.append("HELP OBJECT: ").append(helpObj.getClass().getName());
 		buffy.append("\n");
 		if (helpObj instanceof HelpDescriptor) {
 			HelpDescriptor helpDescriptor = (HelpDescriptor) helpObj;
@@ -695,18 +695,18 @@ public class HelpManager implements HelpService {
 		}
 		else if (helpObj instanceof JButton) {
 			JButton button = (JButton) helpObj;
-			buffy.append("   BUTTON: " + button.getText());
+			buffy.append("   BUTTON: ").append(button.getText());
 			buffy.append("\n");
 			Component c = button;
 			while (c != null && !(c instanceof Window)) {
 				c = c.getParent();
 			}
 			if (c instanceof Dialog) {
-				buffy.append("   DIALOG: " + ((Dialog) c).getTitle());
+				buffy.append("   DIALOG: ").append(((Dialog) c).getTitle());
 				buffy.append("\n");
 			}
 			if (c instanceof Frame) {
-				buffy.append("   FRAME: " + ((Frame) c).getTitle());
+				buffy.append("   FRAME: ").append(((Frame) c).getTitle());
 				buffy.append("\n");
 			}
 		}
@@ -735,7 +735,7 @@ public class HelpManager implements HelpService {
 				String inception = helpLoc.getInceptionInformation();
 				if (inception != null) {
 					buffy.append("\n   \n");
-					buffy.append("   CREATED AT: " + inception);
+					buffy.append("   CREATED AT: ").append(inception);
 					buffy.append("\n   ");
 				}
 			}

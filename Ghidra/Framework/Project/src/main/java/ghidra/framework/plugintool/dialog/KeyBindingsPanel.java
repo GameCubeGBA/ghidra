@@ -515,7 +515,7 @@ public class KeyBindingsPanel extends JPanel {
 		}
 		if (!list.isEmpty()) {
 			StringBuilder sb = new StringBuilder();
-			sb.append("Actions mapped to key " + ksName + ":\n");
+			sb.append("Actions mapped to key ").append(ksName).append(":\n");
 			for (int i = 0; i < list.size(); i++) {
 				sb.append("  ");
 				sb.append(list.get(i));

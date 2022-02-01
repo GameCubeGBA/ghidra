@@ -60,10 +60,9 @@ public class ISO9660BaseVolume implements StructConverter {
 	public String toString() {
 		StringBuilder buff = new StringBuilder();
 
-		buff.append("Type Code: 0x" + Integer.toHexString(typeCode) + " => " + getTypeCodeString() +
-			"\n");
-		buff.append("Standard Identifier: " + new String(identifier).trim() + "\n");
-		buff.append("Version: 0x" + Integer.toHexString(version) + "\n");
+		buff.append("Type Code: 0x").append(Integer.toHexString(typeCode)).append(" => ").append(getTypeCodeString()).append("\n");
+		buff.append("Standard Identifier: ").append(new String(identifier).trim()).append("\n");
+		buff.append("Version: 0x").append(Integer.toHexString(version)).append("\n");
 
 		return buff.toString();
 	}

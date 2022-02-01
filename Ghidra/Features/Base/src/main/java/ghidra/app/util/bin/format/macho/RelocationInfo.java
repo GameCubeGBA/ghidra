@@ -137,19 +137,19 @@ public class RelocationInfo implements StructConverter {
 	@Override
 	public String toString() {
 		StringBuilder buffer = new StringBuilder();
-		buffer.append("Address:      " + Long.toHexString(r_address));
+		buffer.append("Address:      ").append(Long.toHexString(r_address));
 		buffer.append('\n');
-		buffer.append("Value:        " + Integer.toHexString(r_value));
+		buffer.append("Value:        ").append(Integer.toHexString(r_value));
 		buffer.append('\n');
-		buffer.append("Scattered:    " + isScattered());
+		buffer.append("Scattered:    ").append(isScattered());
 		buffer.append('\n');
-		buffer.append("PC Relocated: " + isPcRelocated());
+		buffer.append("PC Relocated: ").append(isPcRelocated());
 		buffer.append('\n');
-		buffer.append("Length:       " + Integer.toHexString(r_length) + getLengthString());
+		buffer.append("Length:       ").append(Integer.toHexString(r_length)).append(getLengthString());
 		buffer.append('\n');
-		buffer.append("External:     " + isExternal());
+		buffer.append("External:     ").append(isExternal());
 		buffer.append('\n');
-		buffer.append("Type:         " + Integer.toHexString(r_type));
+		buffer.append("Type:         ").append(Integer.toHexString(r_type));
 		buffer.append('\n');
 		return buffer.toString();
 	}

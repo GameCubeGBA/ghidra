@@ -592,7 +592,7 @@ public abstract class BiDirectionDataType extends StructureDataType
 
 	@Override
 	public DataTypeComponent[] getDefinedComponents() {
-		return components.toArray(new DataTypeComponent[components.size()]);
+		return components.toArray(new DataTypeComponent[0]);
 	}
 
 	@Override

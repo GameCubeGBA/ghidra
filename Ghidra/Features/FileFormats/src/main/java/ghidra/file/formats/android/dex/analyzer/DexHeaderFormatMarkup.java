@@ -208,19 +208,17 @@ public class DexHeaderFormatMarkup {
 		String methodSignature =
 			DexUtil.convertPrototypeIndexToString(header, methodID.getProtoIndex());
 		StringBuilder commentBuilder = new StringBuilder();
-		commentBuilder.append(item.toString(header, -1, monitor) + "\n");
-		commentBuilder.append("Method Signature: " + methodSignature + "\n");
+		commentBuilder.append(item.toString(header, -1, monitor)).append("\n");
+		commentBuilder.append("Method Signature: ").append(methodSignature).append("\n");
 		commentBuilder.append("Method Access Flags:\n");
-		commentBuilder.append(AccessFlags.toString(encodedMethod.getAccessFlags()) + "\n");
+		commentBuilder.append(AccessFlags.toString(encodedMethod.getAccessFlags())).append("\n");
 		if (codeItem != null) {
-			commentBuilder.append("Method Register Size: " + codeItem.getRegistersSize() + "\n");
-			commentBuilder.append("Method Incoming Size: " + codeItem.getIncomingSize() + "\n");
-			commentBuilder.append("Method Outgoing Size: " + codeItem.getOutgoingSize() + "\n");
-			commentBuilder.append("Method Debug Info Offset: 0x" +
-				Integer.toHexString(codeItem.getDebugInfoOffset()) + "\n");
+			commentBuilder.append("Method Register Size: ").append(codeItem.getRegistersSize()).append("\n");
+			commentBuilder.append("Method Incoming Size: ").append(codeItem.getIncomingSize()).append("\n");
+			commentBuilder.append("Method Outgoing Size: ").append(codeItem.getOutgoingSize()).append("\n");
+			commentBuilder.append("Method Debug Info Offset: 0x").append(Integer.toHexString(codeItem.getDebugInfoOffset())).append("\n");
 		}
-		commentBuilder
-				.append("Method ID Offset: 0x" + Long.toHexString(methodID.getFileOffset()) + "\n");
+		commentBuilder.append("Method ID Offset: 0x").append(Long.toHexString(methodID.getFileOffset())).append("\n");
 		api.setPlateComment(methodAddress, commentBuilder.toString());
 	}
 
@@ -436,8 +434,7 @@ public class DexHeaderFormatMarkup {
 				staticAddress.add(staticDataType.getLength() - 1));
 
 			StringBuilder builder = new StringBuilder();
-			builder.append("Class: " +
-				DexUtil.convertTypeIndexToString(header, item.getClassIndex()) + "\n\n");
+			builder.append("Class: ").append(DexUtil.convertTypeIndexToString(header, item.getClassIndex())).append("\n\n");
 			builder.append("Static Values:" + "\n");
 			builder.append(
 				NumericUtilities.convertBytesToString(staticValues.getArray().getValues(), " "));
@@ -464,13 +461,12 @@ public class DexHeaderFormatMarkup {
 				classDataAddress.add(classDataDataType.getLength() - 1));
 
 			StringBuilder builder = new StringBuilder();
-			builder.append("Class: " +
-				DexUtil.convertTypeIndexToString(header, item.getClassIndex()) + "\n\n");
+			builder.append("Class: ").append(DexUtil.convertTypeIndexToString(header, item.getClassIndex())).append("\n\n");
 
-			builder.append("Static Fields:   " + classDataItem.getStaticFieldsSize() + "\n");
-			builder.append("Instance Fields: " + classDataItem.getInstanceFieldsSize() + "\n");
-			builder.append("Direct Methods:  " + classDataItem.getDirectMethodsSize() + "\n");
-			builder.append("Virtual Methods: " + classDataItem.getVirtualMethodsSize() + "\n");
+			builder.append("Static Fields:   ").append(classDataItem.getStaticFieldsSize()).append("\n");
+			builder.append("Instance Fields: ").append(classDataItem.getInstanceFieldsSize()).append("\n");
+			builder.append("Direct Methods:  ").append(classDataItem.getDirectMethodsSize()).append("\n");
+			builder.append("Virtual Methods: ").append(classDataItem.getVirtualMethodsSize()).append("\n");
 
 			processEncodedFields(header, classDataItem.getStaticFields(), monitor);
 			processEncodedFields(header, classDataItem.getInstancesFields(), monitor);
@@ -501,8 +497,8 @@ public class DexHeaderFormatMarkup {
 			FieldIDItem fieldID = header.getFields().get(index);
 
 			StringBuilder builder = new StringBuilder();
-			builder.append(DexUtil.convertToString(header, fieldID.getNameIndex()) + "\n");
-			builder.append(AccessFlags.toString(field.getAccessFlags()) + "\n");
+			builder.append(DexUtil.convertToString(header, fieldID.getNameIndex())).append("\n");
+			builder.append(AccessFlags.toString(field.getAccessFlags())).append("\n");
 			builder.append("\n");
 
 			Address address = baseAddress.add(field.getFileOffset());
@@ -525,12 +521,11 @@ public class DexHeaderFormatMarkup {
             MethodIDItem methodID = header.getMethods().get(method.getMethodIndex());
 
             StringBuilder builder = new StringBuilder();
-            builder.append(
-                    "Method Name: " + DexUtil.convertToString(header, methodID.getNameIndex()) + "\n");
-            builder.append("Method Offset: 0x" + Long.toHexString(methodID.getFileOffset()) + "\n");
+            builder.append("Method Name: ").append(DexUtil.convertToString(header, methodID.getNameIndex())).append("\n");
+            builder.append("Method Offset: 0x").append(Long.toHexString(methodID.getFileOffset())).append("\n");
             builder.append("Method Flags:\n");
-            builder.append(AccessFlags.toString(method.getAccessFlags()) + "\n");
-            builder.append("Code Offset: 0x" + Integer.toHexString(method.getCodeOffset()) + "\n");
+            builder.append(AccessFlags.toString(method.getAccessFlags())).append("\n");
+            builder.append("Code Offset: 0x").append(Integer.toHexString(method.getCodeOffset())).append("\n");
             builder.append("\n");
 
             Address address = baseAddress.add(method.getFileOffset());
@@ -554,26 +549,20 @@ public class DexHeaderFormatMarkup {
 			CodeItem codeItem = method.getCodeItem();
 
 			StringBuilder builder = new StringBuilder();
-			builder.append(DexUtil.convertTypeIndexToString(header, item.getClassIndex()) + " " +
-				DexUtil.convertToString(header, methodID.getNameIndex()) + "\n");
+			builder.append(DexUtil.convertTypeIndexToString(header, item.getClassIndex())).append(" ").append(DexUtil.convertToString(header, methodID.getNameIndex())).append("\n");
 
 			if (codeItem != null) {
 				builder.append("\n");
-				builder.append("Instruction Bytes: 0x" +
-					Integer.toHexString(codeItem.getInstructionBytes().length) + "\n");
-				builder.append(
-					"Registers Size: 0x" + Integer.toHexString(codeItem.getRegistersSize()) + "\n");
-				builder.append(
-					"Incoming Size: 0x" + Integer.toHexString(codeItem.getIncomingSize()) + "\n");
-				builder.append(
-					"Outgoing Size: 0x" + Integer.toHexString(codeItem.getOutgoingSize()) + "\n");
-				builder.append(
-					"Tries Size: 0x" + Integer.toHexString(codeItem.getTriesSize()) + "\n");
+				builder.append("Instruction Bytes: 0x").append(Integer.toHexString(codeItem.getInstructionBytes().length)).append("\n");
+				builder.append("Registers Size: 0x").append(Integer.toHexString(codeItem.getRegistersSize())).append("\n");
+				builder.append("Incoming Size: 0x").append(Integer.toHexString(codeItem.getIncomingSize())).append("\n");
+				builder.append("Outgoing Size: 0x").append(Integer.toHexString(codeItem.getOutgoingSize())).append("\n");
+				builder.append("Tries Size: 0x").append(Integer.toHexString(codeItem.getTriesSize())).append("\n");
 			}
 
 			if (codeItem instanceof CDexCodeItem) {
 				CDexCodeItem cdexCodeItem = (CDexCodeItem) codeItem;
-				builder.append("\n" + (cdexCodeItem.hasPreHeader() ? "PREHEADER" : ""));
+				builder.append("\n").append(cdexCodeItem.hasPreHeader() ? "PREHEADER" : "");
 			}
 
 			api.setPlateComment(codeAddress, builder.toString());
@@ -732,13 +721,11 @@ public class DexHeaderFormatMarkup {
 				interfaceAddress.add(interfaceDataType.getLength() - 1));
 
 			StringBuilder builder = new StringBuilder();
-			builder.append("Class: " +
-				DexUtil.convertTypeIndexToString(header, item.getClassIndex()) + "\n\n");
+			builder.append("Class: ").append(DexUtil.convertTypeIndexToString(header, item.getClassIndex())).append("\n\n");
 			builder.append("Implements:" + "\n");
 			for (TypeItem interfaceItem : interfaces.getItems()) {
 				monitor.checkCanceled();
-				builder.append("\t" +
-					DexUtil.convertTypeIndexToString(header, interfaceItem.getType()) + "\n");
+				builder.append("\t").append(DexUtil.convertTypeIndexToString(header, interfaceItem.getType())).append("\n");
 			}
 			api.setPlateComment(interfaceAddress, builder.toString());
 		}
@@ -778,12 +765,10 @@ public class DexHeaderFormatMarkup {
 			fragmentManager.methodsAddressSet.add(address, address.add(dataType.getLength() - 1));
 
 			StringBuilder builder = new StringBuilder();
-			builder.append("Method Index: 0x" + Integer.toHexString(methodIndex) + "\n");
-			builder.append(
-				"Class: " + DexUtil.convertTypeIndexToString(header, item.getClassIndex()) + "\n");
-			builder.append("Prototype: " +
-				DexUtil.convertPrototypeIndexToString(header, item.getProtoIndex()) + "\n");
-			builder.append("Name: " + DexUtil.convertToString(header, item.getNameIndex()) + "\n");
+			builder.append("Method Index: 0x").append(Integer.toHexString(methodIndex)).append("\n");
+			builder.append("Class: ").append(DexUtil.convertTypeIndexToString(header, item.getClassIndex())).append("\n");
+			builder.append("Prototype: ").append(DexUtil.convertPrototypeIndexToString(header, item.getProtoIndex())).append("\n");
+			builder.append("Name: ").append(DexUtil.convertToString(header, item.getNameIndex())).append("\n");
 
 			api.setPlateComment(address, builder.toString());
 
@@ -832,12 +817,10 @@ public class DexHeaderFormatMarkup {
 			fragmentManager.fieldsAddressSet.add(address, address.add(dataType.getLength() - 1));
 
 			StringBuilder builder = new StringBuilder();
-			builder.append("Field Index: 0x" + Integer.toHexString(index) + "\n");
-			builder.append(
-				"Class: " + DexUtil.convertTypeIndexToString(header, item.getClassIndex()) + "\n");
-			builder.append(
-				"Type: " + DexUtil.convertTypeIndexToString(header, item.getTypeIndex()) + "\n");
-			builder.append("Name: " + DexUtil.convertToString(header, item.getNameIndex()) + "\n");
+			builder.append("Field Index: 0x").append(Integer.toHexString(index)).append("\n");
+			builder.append("Class: ").append(DexUtil.convertTypeIndexToString(header, item.getClassIndex())).append("\n");
+			builder.append("Type: ").append(DexUtil.convertTypeIndexToString(header, item.getTypeIndex())).append("\n");
+			builder.append("Name: ").append(DexUtil.convertToString(header, item.getNameIndex())).append("\n");
 			api.setPlateComment(address, builder.toString());
 
 			++index;
@@ -863,19 +846,16 @@ public class DexHeaderFormatMarkup {
 				address.add(dataType.getLength() - 1));
 
 			StringBuilder builder = new StringBuilder();
-			builder.append("Prototype Index: 0x" + Integer.toHexString(index) + "\n");
-			builder.append(
-				"Shorty: " + DexUtil.convertToString(header, item.getShortyIndex()) + "\n");
-			builder.append("Return Type: " +
-				DexUtil.convertTypeIndexToString(header, item.getReturnTypeIndex()) + "\n");
+			builder.append("Prototype Index: 0x").append(Integer.toHexString(index)).append("\n");
+			builder.append("Shorty: ").append(DexUtil.convertToString(header, item.getShortyIndex())).append("\n");
+			builder.append("Return Type: ").append(DexUtil.convertTypeIndexToString(header, item.getReturnTypeIndex())).append("\n");
 
 			if (item.getParametersOffset() > 0) {
 				builder.append("Parameters: " + "\n");
 				TypeList parameters = item.getParameters();
 				for (TypeItem parameter : parameters.getItems()) {
 					monitor.checkCanceled();
-					builder.append(
-						DexUtil.convertTypeIndexToString(header, parameter.getType()) + " ");
+					builder.append(DexUtil.convertTypeIndexToString(header, parameter.getType())).append(" ");
 				}
 
 				DataType parametersDT = parameters.toDataType();
@@ -885,7 +865,7 @@ public class DexHeaderFormatMarkup {
 
 				api.createData(parametersAddress, parametersDT);
 
-				builder.append("\nParameters Address: " + parametersAddress);
+				builder.append("\nParameters Address: ").append(parametersAddress);
 				builder.append("\n");
 
 				// add reference to the "parametersOffset" field
@@ -916,9 +896,8 @@ public class DexHeaderFormatMarkup {
 			fragmentManager.typesAddressSet.add(address, address.add(dataType.getLength() - 1));
 
 			StringBuilder builder = new StringBuilder();
-			builder.append("Type Index: 0x" + Integer.toHexString(index) + "\n");
-			builder.append(
-				"\t" + "->" + DexUtil.convertToString(header, item.getDescriptorIndex()));
+			builder.append("Type Index: 0x").append(Integer.toHexString(index)).append("\n");
+			builder.append("\t" + "->").append(DexUtil.convertToString(header, item.getDescriptorIndex()));
 			api.setPlateComment(address, builder.toString());
 			++index;
 
@@ -945,7 +924,7 @@ public class DexHeaderFormatMarkup {
 		StringBuilder builder = new StringBuilder();
 		for (MapItem item : header.getMapList().getItems()) {
 			monitor.checkCanceled();
-			builder.append(MapItemTypeCodes.toString(item.getType()) + "\n");
+			builder.append(MapItemTypeCodes.toString(item.getType())).append("\n");
 		}
 		api.setPlateComment(mapListAddress, builder.toString());
 	}

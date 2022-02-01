@@ -1523,9 +1523,7 @@ public class VTMatchApplyFunctionSignatureTest extends AbstractGhidraHeadedInteg
 		StringBuilder buffer = new StringBuilder();
 		int index = 0;
 		for (VTMarkupItem vtMarkupItem : individualItems) {
-			buffer.append(
-				"\nmarkupItem(" + (index++) + ") status = " + vtMarkupItem.getStatus().toString() +
-					"  " + vtMarkupItem.getMarkupType().getDisplayName() + ".");
+			buffer.append("\nmarkupItem(").append(index++).append(") status = ").append(vtMarkupItem.getStatus().toString()).append("  ").append(vtMarkupItem.getMarkupType().getDisplayName()).append(".");
 		}
 		return buffer.toString();
 	}

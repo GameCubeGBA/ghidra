@@ -172,8 +172,7 @@ public abstract class AbstractFollowFlowTest extends AbstractGhidraHeadedIntegra
 			StringBuilder buf = new StringBuilder();
 			AddressRangeIterator ranges = getAddressRanges();
 			for (AddressRange addressRange : ranges) {
-				buf.append("\n[" + addressRange.getMinAddress() + " - " +
-					addressRange.getMaxAddress() + "]");
+				buf.append("\n[").append(addressRange.getMinAddress()).append(" - ").append(addressRange.getMaxAddress()).append("]");
 			}
 			return buf.toString();
 		}

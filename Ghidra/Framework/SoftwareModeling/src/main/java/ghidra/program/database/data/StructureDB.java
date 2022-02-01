@@ -1197,7 +1197,7 @@ class StructureDB extends CompositeDB implements StructureInternal {
 		lock.acquire();
 		try {
 			checkIsValid();
-			return components.toArray(new DataTypeComponentDB[components.size()]);
+			return components.toArray(new DataTypeComponentDB[0]);
 		}
 		finally {
 			lock.release();

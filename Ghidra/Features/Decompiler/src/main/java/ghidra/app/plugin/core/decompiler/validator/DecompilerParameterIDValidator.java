@@ -41,9 +41,7 @@ public class DecompilerParameterIDValidator extends PostAnalysisValidator {
 		number = checkNumberAnalyzed(program, monitor);
 		if (number < MIN_NUM_FUNCS_DEFAULT) {
 			status = ConditionStatus.Warning;
-			warnings.append(program.getDomainFile().getName() +
-				" number of functions with signatures from the decompiler parameter id analyzer = " +
-				number + "\n");
+			warnings.append(program.getDomainFile().getName()).append(" number of functions with signatures from the decompiler parameter id analyzer = ").append(number).append("\n");
 		}
 		return new ConditionResult(status, warnings.toString());
 	}

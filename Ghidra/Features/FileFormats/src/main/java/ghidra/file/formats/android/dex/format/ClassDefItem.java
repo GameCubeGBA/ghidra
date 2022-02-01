@@ -159,27 +159,23 @@ public class ClassDefItem implements StructConverter {
 			throws CancelledException {
 		StringBuilder builder = new StringBuilder();
 		if (index != -1) {
-			builder.append("Class Index: 0x" + Integer.toHexString(index) + "\n");
+			builder.append("Class Index: 0x").append(Integer.toHexString(index)).append("\n");
 		}
-		builder.append(
-			"Class: " + DexUtil.convertTypeIndexToString(header, getClassIndex()) + "\n");
-		builder.append("Class Access Flags:\n" + AccessFlags.toString(getAccessFlags()) + "\n");
-		builder.append(
-			"Superclass: " + DexUtil.convertTypeIndexToString(header, getSuperClassIndex()) + "\n");
+		builder.append("Class: ").append(DexUtil.convertTypeIndexToString(header, getClassIndex())).append("\n");
+		builder.append("Class Access Flags:\n").append(AccessFlags.toString(getAccessFlags())).append("\n");
+		builder.append("Superclass: ").append(DexUtil.convertTypeIndexToString(header, getSuperClassIndex())).append("\n");
 
 		if (getInterfacesOffset() > 0) {
 			builder.append("Interfaces: " + "\n");
 			TypeList interfaces = getInterfaces();
 			for (TypeItem type : interfaces.getItems()) {
 				monitor.checkCanceled();
-				builder.append(
-					"\t" + DexUtil.convertTypeIndexToString(header, type.getType()) + "\n");
+				builder.append("\t").append(DexUtil.convertTypeIndexToString(header, type.getType())).append("\n");
 			}
 		}
 
 		if (getSourceFileIndex() > 0) {
-			builder.append(
-				"Source File: " + DexUtil.convertToString(header, getSourceFileIndex()) + "\n");
+			builder.append("Source File: ").append(DexUtil.convertToString(header, getSourceFileIndex())).append("\n");
 		}
 
 		return builder.toString();

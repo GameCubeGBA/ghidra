@@ -224,8 +224,7 @@ public class GhidraPythonInterpreter extends InteractiveInterpreter {
 					StringBuilder dbgCmds = new StringBuilder();
 					dbgCmds.append("import pydevd;");
 					dbgCmds.append("pydevd.threadingCurrentThread().__pydevd_main_thread = True;");
-					dbgCmds.append("pydevd.settrace(host=\"" + localhost.getHostName() +
-						"\", port=" + PyDevUtils.PYDEV_REMOTE_DEBUGGER_PORT + ", suspend=False);");
+					dbgCmds.append("pydevd.settrace(host=\"").append(localhost.getHostName()).append("\", port=").append(PyDevUtils.PYDEV_REMOTE_DEBUGGER_PORT).append(", suspend=False);");
 					exec(dbgCmds.toString());
 					Msg.info(this, "Connected to a python debugger.");
 				}

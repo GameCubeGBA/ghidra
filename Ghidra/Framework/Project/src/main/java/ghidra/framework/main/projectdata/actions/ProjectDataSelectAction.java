@@ -54,7 +54,7 @@ public class ProjectDataSelectAction extends ProjectTreeAction {
 	private void selectAllChildren(DataTree tree, GTreeNode node) {
 		List<TreePath> paths = new ArrayList<TreePath>();
 		getAllTreePaths(node, paths);
-		tree.setSelectionPaths(paths.toArray(new TreePath[paths.size()]));
+		tree.setSelectionPaths(paths.toArray(new TreePath[0]));
 	}
 
 	/**

@@ -48,12 +48,8 @@ public class NumberOfFunctionsValidator extends VTPreconditionValidator {
 			float percent = (float) diff / (float) max;
 			if (percent > threshold) {
 				status = ConditionStatus.Warning;
-				warnings.append(sourceProgram.getDomainFile().getName() + " and " +
-					destinationProgram.getDomainFile().getName() + " have " + numSource + " and " +
-					numDest + " functions respectively," + "\n");
-				warnings.append("which is a " + format(percent) +
-					" percent difference, greater than the threshold of " + format(threshold) +
-					"\n");
+				warnings.append(sourceProgram.getDomainFile().getName()).append(" and ").append(destinationProgram.getDomainFile().getName()).append(" have ").append(numSource).append(" and ").append(numDest).append(" functions respectively,").append("\n");
+				warnings.append("which is a ").append(format(percent)).append(" percent difference, greater than the threshold of ").append(format(threshold)).append("\n");
 			}
 		}
 		return new ConditionResult(status, warnings.toString());

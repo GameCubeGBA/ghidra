@@ -840,7 +840,7 @@ public class IndexedLocalFileSystem extends LocalFileSystem {
 					fileList.add(name);
 				}
 			}
-			return fileList.toArray(new String[fileList.size()]);
+			return fileList.toArray(new String[0]);
 		}
 		catch (NotFoundException e) {
 			throw new FileNotFoundException("Folder not found: " + folderPath);
@@ -874,7 +874,7 @@ public class IndexedLocalFileSystem extends LocalFileSystem {
 		try {
 			Folder folder = getFolder(folderPath, GetFolderOption.READ_ONLY);
 			Set<String> nameSet = folder.folders.keySet();
-			return nameSet.toArray(new String[nameSet.size()]);
+			return nameSet.toArray(new String[0]);
 		}
 		catch (NotFoundException e) {
 			throw new FileNotFoundException("Folder not found: " + folderPath);

@@ -255,12 +255,7 @@ public class LongArrayList implements List<Long> {
 	}
 
 	public boolean containsAll(Collection<?> c) {
-        for (Object o : c) {
-            if (!contains(o)) {
-                return false;
-            }
-        }
-		return true;
+		return c.stream().allMatch(this::contains);
 	}
 
 	public boolean isEmpty() {
@@ -374,8 +369,8 @@ public class LongArrayList implements List<Long> {
 		}
 
 		public void clear() {
-			for(int i=startIndex;i<endIndex;i++) {
-				backingList.remove(startIndex);
+			if (endIndex > startIndex) {
+				backingList.subList(startIndex, endIndex).clear();
 			}
 			endIndex = startIndex;
 		}
@@ -434,12 +429,7 @@ public class LongArrayList implements List<Long> {
 		}
 
 		public boolean containsAll(Collection<?> c) {
-            for (Object o : c) {
-                if (!contains(o)) {
-                    return false;
-                }
-            }
-			return true;
+			return c.stream().allMatch(this::contains);
 		}
 
 		public int indexOf(Object value) {

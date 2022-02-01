@@ -114,9 +114,9 @@ public class PrelinkMap {
             Object value = map.get(key);
             if (value instanceof Long) {
                 long longValue = (Long) value;
-                buffer.append(key + '=' + "0x" + Long.toHexString(longValue) + '\n');
+                buffer.append(key).append('=').append("0x").append(Long.toHexString(longValue)).append('\n');
             } else {
-                buffer.append(key + '=' + value + '\n');
+                buffer.append(key).append('=').append(value).append('\n');
             }
         }
 		return buffer.toString();

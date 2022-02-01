@@ -246,16 +246,15 @@ public class Section implements StructConverter {
 	@Override
 	public String toString() {
 		StringBuilder buffer = new StringBuilder();
-		buffer.append("      Name: " + sectname + '\n');
-		buffer.append("   Address: 0x" + Long.toHexString(addr) + '\n');
-		buffer.append("    Length: 0x" + Long.toHexString(size) + '\n');
-		buffer.append("      Type: 0x" + Integer.toHexString(getType()) + " (" +
-			SectionTypes.getTypeName(getType()) + ")" + '\n');
-		buffer.append("    Offset: 0x" + Long.toHexString(offset) + '\n');
+		buffer.append("      Name: ").append(sectname).append('\n');
+		buffer.append("   Address: 0x").append(Long.toHexString(addr)).append('\n');
+		buffer.append("    Length: 0x").append(Long.toHexString(size)).append('\n');
+		buffer.append("      Type: 0x").append(Integer.toHexString(getType())).append(" (").append(SectionTypes.getTypeName(getType())).append(")").append('\n');
+		buffer.append("    Offset: 0x").append(Long.toHexString(offset)).append('\n');
 		List<String> attrs = SectionAttributes.getAttributeNames(getAttributes());
-		buffer.append("Attributes: " + Integer.toHexString(getAttributes()) + '\n');
+		buffer.append("Attributes: ").append(Integer.toHexString(getAttributes())).append('\n');
 		for (String attr : attrs) {
-			buffer.append("            " + attr + '\n');
+			buffer.append("            ").append(attr).append('\n');
 		}
 		return buffer.toString();
 	}

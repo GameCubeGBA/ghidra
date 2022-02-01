@@ -50,14 +50,14 @@ public class AnnotationItem implements StructConverter {
 
 		StringBuilder builder = new StringBuilder();
 		builder.append("annotation_item" + "_");
-		builder.append(visibility + "_");
+		builder.append(visibility).append("_");
 		builder.append(annotationDataType.getName());
 
 		Structure structure = new StructureDataType(builder.toString(), 0);
 		structure.add(BYTE, "visibility", null);
 		structure.add(annotationDataType, "annotation", null);
 
-		builder.append(structure.getLength() + "_");
+		builder.append(structure.getLength()).append("_");
 
 		structure.setCategoryPath(new CategoryPath("/dex/annotation_item"));
 		try {

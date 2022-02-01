@@ -109,8 +109,7 @@ public class MultipleLabelsRenderer extends AbstractGhidraColumnRenderer<Symbol[
 			// Set up the tooltip information.
 			String displayString = type.getDisplayString();
 			StringBuilder buffer = new StringBuilder();
-			buffer.append("Has " + labelCount + " " + displayString +
-				" labels. Labels can also be viewed using the dual listing of Markup Items.");
+			buffer.append("Has ").append(labelCount).append(" ").append(displayString).append(" labels. Labels can also be viewed using the dual listing of Markup Items.");
 			buffer.append("\n");
 			int displayCount = 0;
 			for (Symbol symbol : symbols) {
@@ -119,7 +118,7 @@ public class MultipleLabelsRenderer extends AbstractGhidraColumnRenderer<Symbol[
 					buffer.append("\n...");
 					break;
 				}
-				buffer.append("\n" + symbol.getName());
+				buffer.append("\n").append(symbol.getName());
 			}
 			String text = buffer.toString();
 			String htmlString = HTMLUtilities.toWrappedHTML(text);
@@ -144,8 +143,7 @@ public class MultipleLabelsRenderer extends AbstractGhidraColumnRenderer<Symbol[
 			// Set up the tooltip information.
 			String displayString = type.getDisplayString();
 			StringBuilder buffer = new StringBuilder();
-			buffer.append("Has " + labelCount + " " + displayString +
-				" labels. Labels can also be viewed using the dual listing of Markup Items.");
+			buffer.append("Has ").append(labelCount).append(" ").append(displayString).append(" labels. Labels can also be viewed using the dual listing of Markup Items.");
 			buffer.append("\n");
 			int displayCount = 0;
 			for (Symbol symbol : symbols) {
@@ -154,7 +152,7 @@ public class MultipleLabelsRenderer extends AbstractGhidraColumnRenderer<Symbol[
 					buffer.append("\n...");
 					break;
 				}
-				buffer.append("\n" + symbol.getName());
+				buffer.append("\n").append(symbol.getName());
 			}
 			String text = buffer.toString();
 			return labelCount + " " + text;

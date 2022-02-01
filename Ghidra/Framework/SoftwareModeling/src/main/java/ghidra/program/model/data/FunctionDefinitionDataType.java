@@ -105,7 +105,7 @@ public class FunctionDefinitionDataType extends GenericDataType implements Funct
 			}
 			paramList.add(getParameterDefinition(parameter, formalSignature, ordinalAdjustment));
 		}
-		params = paramList.toArray(new ParameterDefinition[paramList.size()]);
+		params = paramList.toArray(new ParameterDefinition[0]);
 
 		hasVarArgs = function.hasVarArgs();
 

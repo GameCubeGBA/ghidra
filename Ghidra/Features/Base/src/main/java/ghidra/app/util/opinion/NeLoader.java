@@ -193,35 +193,26 @@ public class NeLoader extends AbstractLibrarySupportLoader {
 
 		StringBuilder buffer = new StringBuilder();
 
-		buffer.append("Title:  " + nrnt.getTitle() + "\n");
+		buffer.append("Title:  ").append(nrnt.getTitle()).append("\n");
 		buffer.append("Format: " + "New Executable (NE) Windows" + "\n");
-		buffer.append("CRC:    " + Conv.toHexString(ib.getChecksum()) + "\n");
+		buffer.append("CRC:    ").append(Conv.toHexString(ib.getChecksum())).append("\n");
 		buffer.append("\n");
-		buffer.append(
-			"Program Entry Point (CS:IP):   " + Conv.toHexString(ib.getEntryPointSegment()) + ":" +
-				Conv.toHexString(ib.getEntryPointOffset()) + "\n");
-		buffer.append(
-			"Initial Stack Pointer (SS:SP): " + Conv.toHexString(ib.getStackPointerSegment()) +
-				":" + Conv.toHexString(ib.getStackPointerOffset()) + "\n");
-		buffer.append("Auto Data Segment Index:       " +
-			Conv.toHexString(ib.getAutomaticDataSegment()) + "\n");
-		buffer.append(
-			"Initial Heap Size:             " + Conv.toHexString(ib.getInitialHeapSize()) + "\n");
-		buffer.append(
-			"Initial Stack Size:            " + Conv.toHexString(ib.getInitialStackSize()) + "\n");
-		buffer.append(
-			"Minimum Code Swap Size:        " + Conv.toHexString(ib.getMinCodeSwapSize()) + "\n");
+		buffer.append("Program Entry Point (CS:IP):   ").append(Conv.toHexString(ib.getEntryPointSegment())).append(":").append(Conv.toHexString(ib.getEntryPointOffset())).append("\n");
+		buffer.append("Initial Stack Pointer (SS:SP): ").append(Conv.toHexString(ib.getStackPointerSegment())).append(":").append(Conv.toHexString(ib.getStackPointerOffset())).append("\n");
+		buffer.append("Auto Data Segment Index:       ").append(Conv.toHexString(ib.getAutomaticDataSegment())).append("\n");
+		buffer.append("Initial Heap Size:             ").append(Conv.toHexString(ib.getInitialHeapSize())).append("\n");
+		buffer.append("Initial Stack Size:            ").append(Conv.toHexString(ib.getInitialStackSize())).append("\n");
+		buffer.append("Minimum Code Swap Size:        ").append(Conv.toHexString(ib.getMinCodeSwapSize())).append("\n");
 		buffer.append("\n");
-		buffer.append("Linker Version:  " + ib.getVersion() + "." + ib.getRevision() + "\n");
-		buffer.append("Target OS:       " + ib.getTargetOpSysAsString() + "\n");
-		buffer.append("Windows Version: " + (ib.getExpectedWindowsVersion() >> 8) + "." +
-			(ib.getExpectedWindowsVersion() & 0xff) + "\n");
+		buffer.append("Linker Version:  ").append(ib.getVersion()).append(".").append(ib.getRevision()).append("\n");
+		buffer.append("Target OS:       ").append(ib.getTargetOpSysAsString()).append("\n");
+		buffer.append("Windows Version: ").append(ib.getExpectedWindowsVersion() >> 8).append(".").append(ib.getExpectedWindowsVersion() & 0xff).append("\n");
 		buffer.append("\n");
-		buffer.append("Program Flags:     " + Conv.toHexString(ib.getProgramFlags()) + "\n");
+		buffer.append("Program Flags:     ").append(Conv.toHexString(ib.getProgramFlags())).append("\n");
 		buffer.append(ib.getProgramFlagsAsString());
-		buffer.append("Application Flags: " + Conv.toHexString(ib.getApplicationFlags()) + "\n");
+		buffer.append("Application Flags: ").append(Conv.toHexString(ib.getApplicationFlags())).append("\n");
 		buffer.append(ib.getApplicationFlagsAsString());
-		buffer.append("Other Flags:       " + Conv.toHexString(ib.getOtherFlags()) + "\n");
+		buffer.append("Other Flags:       ").append(Conv.toHexString(ib.getOtherFlags())).append("\n");
 		buffer.append(ib.getOtherFlagsAsString());
 
 		firstCU.setComment(CodeUnit.PLATE_COMMENT, buffer.toString());
@@ -266,23 +257,20 @@ public class NeLoader extends AbstractLibrarySupportLoader {
 				}
 
 				StringBuilder buff = new StringBuilder();
-				buff.append("Segment:    " + (i + 1) + "\n");
-				buff.append(
-					"Offset:     " + Conv.toHexString(segments[i].getOffsetShiftAligned()) + "\n");
-				buff.append("Length:     " + Conv.toHexString(segments[i].getLength()) + "\n");
-				buff.append(
-					"Min Alloc:  " + Conv.toHexString(segments[i].getMinAllocSize()) + "\n");
-				buff.append("Flags:      " + Conv.toHexString(segments[i].getFlagword()) + "\n");
-				buff.append(TAB + (segments[i].isCode() ? "Code" : "Data") + "\n");
+				buff.append("Segment:    ").append(i + 1).append("\n");
+				buff.append("Offset:     ").append(Conv.toHexString(segments[i].getOffsetShiftAligned())).append("\n");
+				buff.append("Length:     ").append(Conv.toHexString(segments[i].getLength())).append("\n");
+				buff.append("Min Alloc:  ").append(Conv.toHexString(segments[i].getMinAllocSize())).append("\n");
+				buff.append("Flags:      ").append(Conv.toHexString(segments[i].getFlagword())).append("\n");
+				buff.append(TAB).append(segments[i].isCode() ? "Code" : "Data").append("\n");
 				buff.append((segments[i].isDiscardable() ? TAB + "Discardable" + "\n" : ""));
 				buff.append((segments[i].isExecuteOnly() ? TAB + "Execute Only" + "\n" : ""));
 				buff.append((segments[i].isLoaded() ? TAB + "Loaded" + "\n" : ""));
 				buff.append(
 					(segments[i].isLoaderAllocated() ? TAB + "LoaderAllocated" + "\n" : ""));
-				buff.append(TAB + (segments[i].isMoveable() ? "Moveable" : "Fixed") + "\n");
-				buff.append(TAB + (segments[i].isPreload() ? "Preload" : "LoadOnCall") + "\n");
-				buff.append(TAB +
-					(segments[i].isPure() ? "Pure (Shareable)" : "Impure (Non-shareable)") + "\n");
+				buff.append(TAB).append(segments[i].isMoveable() ? "Moveable" : "Fixed").append("\n");
+				buff.append(TAB).append(segments[i].isPreload() ? "Preload" : "LoadOnCall").append("\n");
+				buff.append(TAB).append(segments[i].isPure() ? "Pure (Shareable)" : "Impure (Non-shareable)").append("\n");
 				buff.append((segments[i].isReadOnly() ? TAB + "Read Only" + "\n" : ""));
 				buff.append((segments[i].is32bit() ? TAB + "Use 32 Bit" + "\n" : ""));
 				CodeUnit cu = program.getListing().getCodeUnitAt(addr);
@@ -336,13 +324,10 @@ public class NeLoader extends AbstractLibrarySupportLoader {
 
 				//create a comment to describe this resource...
 				StringBuilder buf = new StringBuilder();
-				buf.append("Resource Type:  " + Conv.toHexString(type.getTypeID()) + " (" + type +
-					")" + "\n");
-				buf.append(
-					"File Length:    " + Conv.toHexString(resource.getFileLengthShifted()) + "\n");
-				buf.append(
-					"File Offset:    " + Conv.toHexString(resource.getFileOffsetShifted()) + "\n");
-				buf.append("Attributes:     " + Conv.toHexString(resource.getFlagword()) + " (");
+				buf.append("Resource Type:  ").append(Conv.toHexString(type.getTypeID())).append(" (").append(type).append(")").append("\n");
+				buf.append("File Length:    ").append(Conv.toHexString(resource.getFileLengthShifted())).append("\n");
+				buf.append("File Offset:    ").append(Conv.toHexString(resource.getFileOffsetShifted())).append("\n");
+				buf.append("Attributes:     ").append(Conv.toHexString(resource.getFlagword())).append(" (");
 				if (resource.isMoveable()) {
 					buf.append("Moveable");
 				}
@@ -353,9 +338,9 @@ public class NeLoader extends AbstractLibrarySupportLoader {
 					buf.append(",Pure");
 				}
 				buf.append(")" + "\n");
-				buf.append("Resource ID:    " + resource + "\n");
-				buf.append("Handle:         " + Conv.toHexString(resource.getHandle()) + "\n");
-				buf.append("Usage:          " + Conv.toHexString(resource.getUsage()) + "\n");
+				buf.append("Resource ID:    ").append(resource).append("\n");
+				buf.append("Handle:         ").append(Conv.toHexString(resource.getHandle())).append("\n");
+				buf.append("Usage:          ").append(Conv.toHexString(resource.getUsage())).append("\n");
 				CodeUnit cu = listing.getCodeUnitAt(addr);
 				if (cu != null) {
 					cu.setComment(CodeUnit.PRE_COMMENT, buf.toString());

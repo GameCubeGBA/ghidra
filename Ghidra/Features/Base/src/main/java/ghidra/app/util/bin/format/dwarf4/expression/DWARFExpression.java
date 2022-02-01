@@ -235,12 +235,10 @@ public class DWARFExpression {
 				if (opcode >= DWARFExpressionOpCodes.DW_OP_lo_user &&
 					opcode <= DWARFExpressionOpCodes.DW_OP_hi_user) {
 					int relOpCode = opcode - DWARFExpressionOpCodes.DW_OP_lo_user;
-					sb.append(
-						DWARFExpressionOpCodes.toString(DWARFExpressionOpCodes.DW_OP_lo_user) +
-							"+" + relOpCode + "[" + opcode + "]");
+					sb.append(DWARFExpressionOpCodes.toString(DWARFExpressionOpCodes.DW_OP_lo_user)).append("+").append(relOpCode).append("[").append(opcode).append("]");
 				}
 				else {
-					sb.append("DW_OP_UNKNOWN[" + opcode + "]");
+					sb.append("DW_OP_UNKNOWN[").append(opcode).append("]");
 				}
 			}
 			for (int operandIndex = 0; operandIndex < op.operands.length; operandIndex++) {

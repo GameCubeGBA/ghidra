@@ -35,16 +35,16 @@ public class DefaultFidPopulateResultReporter implements FidPopulateResultReport
 
 		StringBuilder buffer = new StringBuilder();
 
-		buffer.append(result.getTotalAttempted() + " total functions visited");
+		buffer.append(result.getTotalAttempted()).append(" total functions visited");
 		buffer.append("\n");
-		buffer.append(result.getTotalAdded() + " total functions added");
+		buffer.append(result.getTotalAdded()).append(" total functions added");
 		buffer.append("\n");
-		buffer.append(result.getTotalExcluded() + " total functions excluded");
+		buffer.append(result.getTotalExcluded()).append(" total functions excluded");
 		buffer.append("\n");
 		buffer.append("Breakdown of exclusions:");
 		for (Entry<Disposition, Integer> entry : result.getFailures().entrySet()) {
 			if (entry.getKey() != Disposition.INCLUDED) {
-				buffer.append("    " + entry.getKey() + ": " + entry.getValue());
+				buffer.append("    ").append(entry.getKey()).append(": ").append(entry.getValue());
 				buffer.append("\n");
 			}
 		}

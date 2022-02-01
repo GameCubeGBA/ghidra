@@ -437,10 +437,10 @@ public class LoadConfigDirectory implements StructConverter {
 		@Override
 		public String toString() {
 			StringBuilder sb = new StringBuilder();
-			sb.append("flags=0x" + Integer.toHexString(Conv.shortToInt(flags)));
-			sb.append(", catalog=0x" + Integer.toHexString(Conv.shortToInt(catalog)));
-			sb.append(", catalogOffset=0x" + Integer.toHexString(catalogOffset));
-			sb.append(", reserved=0x" + Integer.toHexString(reserved));
+			sb.append("flags=0x").append(Integer.toHexString(Conv.shortToInt(flags)));
+			sb.append(", catalog=0x").append(Integer.toHexString(Conv.shortToInt(catalog)));
+			sb.append(", catalogOffset=0x").append(Integer.toHexString(catalogOffset));
+			sb.append(", reserved=0x").append(Integer.toHexString(reserved));
 			return sb.toString();
 		}
 

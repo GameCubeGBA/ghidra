@@ -256,7 +256,7 @@ public abstract class SymbolDB extends DatabaseObject implements Symbol {
 			ArrayList<String> list = new ArrayList<>();
 			fillListWithNamespacePath(getParentNamespace(), list);
 			list.add(getName());
-            return list.toArray(new String[list.size()]);
+            return list.toArray(new String[0]);
 		}
 		finally {
 			lock.release();

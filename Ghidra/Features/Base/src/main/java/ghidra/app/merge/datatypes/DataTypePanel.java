@@ -370,7 +370,7 @@ class DataTypePanel extends JPanel {
 			String name = vars[i].getDataType().getDisplayName();
 			name = pad(name, maxLength);
 
-			sb.append("    " + name + " " + vars[i].getName());
+			sb.append("    ").append(name).append(" ").append(vars[i].getName());
 			if ((i < vars.length - 1) || (vars.length > 0 && hasVarArgs)) {
 				sb.append(",");
 			}

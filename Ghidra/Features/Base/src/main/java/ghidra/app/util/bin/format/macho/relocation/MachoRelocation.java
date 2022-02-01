@@ -238,7 +238,7 @@ public class MachoRelocation {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(String.format("Symbol: %s, Section: %s\n", targetSymbol, targetSection));
-		sb.append(relocationInfo + "\n");
+		sb.append(relocationInfo).append("\n");
 
 		if (relocationInfoExtra != null) {
 			sb.append(

@@ -265,7 +265,7 @@ public class FunctionManagerDB implements FunctionManager {
 				namedList.add(model);
 			}
 		}
-		return namedList.toArray(new PrototypeModel[namedList.size()]);
+		return namedList.toArray(new PrototypeModel[0]);
 	}
 
 	/**

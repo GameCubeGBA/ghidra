@@ -163,13 +163,12 @@ public interface CompositeInternal extends Composite {
 	 */
 	public static String toString(Composite composite) {
 		StringBuilder stringBuffer = new StringBuilder();
-		stringBuffer.append(composite.getPathName() + "\n");
-		stringBuffer.append(getAlignmentAndPackingString(composite) + "\n");
-		stringBuffer.append(getTypeName(composite) + " " + composite.getDisplayName() + " {\n");
+		stringBuffer.append(composite.getPathName()).append("\n");
+		stringBuffer.append(getAlignmentAndPackingString(composite)).append("\n");
+		stringBuffer.append(getTypeName(composite)).append(" ").append(composite.getDisplayName()).append(" {\n");
 		dumpComponents(composite, stringBuffer, "   ");
 		stringBuffer.append("}\n");
-		stringBuffer.append("Size = " + composite.getLength() + "   Actual Alignment = " +
-			composite.getAlignment() + "\n");
+		stringBuffer.append("Size = ").append(composite.getLength()).append("   Actual Alignment = ").append(composite.getAlignment()).append("\n");
 		return stringBuffer.toString();
 	}
 
@@ -186,21 +185,21 @@ public interface CompositeInternal extends Composite {
 			DataType dataType = dtc.getDataType();
 //			buffer.append(pad + dtc.getOrdinal());
 //			buffer.append(") ");
-			buffer.append(pad + dtc.getOffset());
-			buffer.append(pad + dataType.getName());
+			buffer.append(pad).append(dtc.getOffset());
+			buffer.append(pad).append(dataType.getName());
 			if (dataType instanceof BitFieldDataType) {
 				BitFieldDataType bfDt = (BitFieldDataType) dataType;
 				buffer.append("(");
 				buffer.append(Integer.toString(bfDt.getBitOffset()));
 				buffer.append(")");
 			}
-			buffer.append(pad + dtc.getLength());
-			buffer.append(pad + dtc.getFieldName());
+			buffer.append(pad).append(dtc.getLength());
+			buffer.append(pad).append(dtc.getFieldName());
 			String comment = dtc.getComment();
 			if (comment == null) {
 				comment = "";
 			}
-			buffer.append(pad + "\"" + comment + "\"");
+			buffer.append(pad).append("\"").append(comment).append("\"");
 			buffer.append("\n");
 		}
 	}

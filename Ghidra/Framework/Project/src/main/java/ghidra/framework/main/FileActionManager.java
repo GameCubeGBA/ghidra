@@ -370,8 +370,7 @@ class FileActionManager {
 				String title = "Exit Ghidra";
 				StringBuilder buf = new StringBuilder();
 				UndoableDomainObject udo = (UndoableDomainObject) objs[lastIndex];
-				buf.append("The File " + files.get(lastIndex).getPathname() +
-					" is currently being modified by the\n");
+				buf.append("The File ").append(files.get(lastIndex).getPathname()).append(" is currently being modified by the\n");
 				buf.append("the following actions:\n \n");
 				Transaction t = udo.getCurrentTransaction();
 				List<String> list = t.getOpenSubTransactions();

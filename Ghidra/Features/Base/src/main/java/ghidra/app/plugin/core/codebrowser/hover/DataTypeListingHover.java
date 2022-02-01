@@ -182,8 +182,7 @@ public class DataTypeListingHover extends AbstractConfigurableHover implements L
 			UniversalID id = equate.getEnumUUID();
 			Enum enoom = (Enum) dtm.findDataTypeForID(id);
 			if (enoom != null) {
-				hoverInfo.append("<html>Equate value: " + equate.getDisplayValue() + "<hr>" +
-					ToolTipUtils.getHTMLRepresentation(enoom).getHTMLContentString() + "</html>");
+				hoverInfo.append("<html>Equate value: ").append(equate.getDisplayValue()).append("<hr>").append(ToolTipUtils.getHTMLRepresentation(enoom).getHTMLContentString()).append("</html>");
 			}
 		}
 		else {

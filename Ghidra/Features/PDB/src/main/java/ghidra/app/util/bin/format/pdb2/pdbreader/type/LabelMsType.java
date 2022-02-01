@@ -67,8 +67,7 @@ public class LabelMsType extends AbstractMsType {
 	@Override
 	public void emit(StringBuilder builder, Bind bind) {
 		// There is no documented API.
-		builder.append("<<" + getClass().getSimpleName() + (isNear() ? " near" : "") +
-			(isFar() ? " far" : "") + ">>");
+		builder.append("<<").append(getClass().getSimpleName()).append(isNear() ? " near" : "").append(isFar() ? " far" : "").append(">>");
 	}
 
 }

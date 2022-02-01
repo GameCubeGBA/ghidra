@@ -107,16 +107,14 @@ public class InstructionAnnotation extends AbstractParsableItem {
 	@Override
 	public void emit(StringBuilder builder) {
 		if (instructionCode == Opcode.CHANGE_CODE_LENGTH_AND_CODE_OFFSET) {
-			builder.append(
-				"  " + instructionCode + String.format(" %x %x", parameter1, parameter2));
+			builder.append("  ").append(instructionCode).append(String.format(" %x %x", parameter1, parameter2));
 		}
 		else if (instructionCode == Opcode.CHANGE_CODE_OFFSET_AND_LINE_OFFSET) {
 			// CodeDelta is lower 4 bits, SourceDelta rest of the bits.
-			builder.append("  " + instructionCode +
-				String.format(" %x %x", (parameter1 >> 4) & 0x0fffffff, parameter1 & 0x0f));
+			builder.append("  ").append(instructionCode).append(String.format(" %x %x", (parameter1 >> 4) & 0x0fffffff, parameter1 & 0x0f));
 		}
 		else {
-			builder.append("  " + instructionCode + String.format(" %x", (int) parameter1));
+			builder.append("  ").append(instructionCode).append(String.format(" %x", (int) parameter1));
 		}
 	}
 

@@ -59,7 +59,7 @@ public class DefaultSchemaContext implements SchemaContext {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		for (TargetObjectSchema s : schemas.values()) {
-			sb.append(s + "\n");
+			sb.append(s).append("\n");
 		}
 		return sb.toString();
 	}

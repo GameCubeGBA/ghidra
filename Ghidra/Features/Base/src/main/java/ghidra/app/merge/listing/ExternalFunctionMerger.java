@@ -2928,8 +2928,7 @@ public class ExternalFunctionMerger extends AbstractFunctionMerger implements Li
 			panel.setTitle("External Data Type");
 			StringBuilder buf = new StringBuilder();
 			if (removeString != null) {
-				buf.append("External data type was removed in " + removeString +
-					" and changed in " + changeString + " /nfor ");
+				buf.append("External data type was removed in ").append(removeString).append(" and changed in ").append(changeString).append(" /nfor ");
 				buf.append(getExternalName(externalLocations, ORIGINAL, true));
 				buf.append(".");
 			}
@@ -4248,7 +4247,7 @@ public class ExternalFunctionMerger extends AbstractFunctionMerger implements Li
 		while (iter.hasNext()) {
 			long id = iter.next().longValue();
 			Symbol s = symbolTables[RESULT].getSymbol(id);
-			buf.append(s.getName(true) + "\n");
+			buf.append(s.getName(true)).append("\n");
 		}
 		if (hasSome) {
 			buf.append("\n");

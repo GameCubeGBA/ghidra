@@ -866,7 +866,7 @@ public class MemoryMapDB implements Memory, ManagerDB, LiveMemoryListener {
 	public MemoryBlock[] getBlocks() {
 		lock.acquire();
 		try {
-			return blocks.toArray(new MemoryBlock[blocks.size()]);
+			return blocks.toArray(new MemoryBlock[0]);
 		}
 		finally {
 			lock.release();

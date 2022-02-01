@@ -81,7 +81,7 @@ public class TransientProjectManager {
 		// TODO: server handles may be shared with non-transient projects
 
 		TransientProjectData[] projectDataArray =
-			repositoryMap.values().toArray(new TransientProjectData[repositoryMap.size()]);
+			repositoryMap.values().toArray(new TransientProjectData[0]);
 		for (TransientProjectData projectData : projectDataArray) {
 			projectData.forcedDispose();
 		}

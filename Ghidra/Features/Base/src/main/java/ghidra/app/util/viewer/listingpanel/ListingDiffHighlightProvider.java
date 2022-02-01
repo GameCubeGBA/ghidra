@@ -98,7 +98,7 @@ public class ListingDiffHighlightProvider implements HighlightProvider {
 				int endIndex = (int) (maxByteIndex * NUM_CHARACTERS_PER_BYTE) + 1;
 				highlights.add(new Highlight(startIndex, endIndex, byteDiffsBackgroundColor));
 			}
-			return highlights.toArray(new Highlight[highlights.size()]);
+			return highlights.toArray(new Highlight[0]);
 		}
 		return EMPTY_HIGHLIGHT;
 	}
@@ -163,7 +163,7 @@ public class ListingDiffHighlightProvider implements HighlightProvider {
 				highlights.add(new Highlight(pairs[diffOpIndex].start, pairs[diffOpIndex].end,
 					operandDiffsBackgroundColor));
 			}
-			return highlights.toArray(new Highlight[highlights.size()]);
+			return highlights.toArray(new Highlight[0]);
 		}
 		return EMPTY_HIGHLIGHT;
 	}
@@ -217,7 +217,7 @@ public class ListingDiffHighlightProvider implements HighlightProvider {
 			// Move start to the beginning of the next operand.
 			start = separatorIndex + separator.length();
 		}
-		return list.toArray(new Pair[list.size()]);
+		return list.toArray(new Pair[0]);
 	}
 
 	private Highlight[] entireTextHighlight(String text, int cursorTextOffset, Color color) {

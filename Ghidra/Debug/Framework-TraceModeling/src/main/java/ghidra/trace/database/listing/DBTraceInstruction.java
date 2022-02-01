@@ -365,7 +365,7 @@ public class DBTraceInstruction extends AbstractDBTraceCodeUnit<DBTraceInstructi
 				return EMPTY_ADDRESS_ARRAY;
 			}
 
-			return list.toArray(new Address[list.size()]);
+			return list.toArray(new Address[0]);
 		}
 	}
 
@@ -386,7 +386,7 @@ public class DBTraceInstruction extends AbstractDBTraceCodeUnit<DBTraceInstructi
 			if (hostFlows.isEmpty()) {
 				return EMPTY_ADDRESS_ARRAY;
 			}
-			return hostFlows.toArray(new Address[hostFlows.size()]);
+			return hostFlows.toArray(new Address[0]);
 		}
 	}
 

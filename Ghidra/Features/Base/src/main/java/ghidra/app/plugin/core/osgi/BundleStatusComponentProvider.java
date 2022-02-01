@@ -389,7 +389,7 @@ public class BundleStatusComponentProvider extends ComponentProviderAdapter {
 			if (!systemBundles.isEmpty()) {
 				StringBuilder buff = new StringBuilder();
 				for (GhidraBundle bundle : systemBundles) {
-					buff.append(Path.toPathString(bundle.getFile()) + "\n");
+					buff.append(Path.toPathString(bundle.getFile())).append("\n");
 				}
 				Msg.showWarn(this, BundleStatusComponentProvider.this.getComponent(),
 					"Unabled to remove", "System bundles cannot be removed:\n" + buff.toString());

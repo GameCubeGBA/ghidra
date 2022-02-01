@@ -356,7 +356,7 @@ public class ParseDialogTest extends AbstractGhidraHeadedIntegrationTest {
 			line = line.trim();
 			if (line.startsWith("-") || (line.isEmpty() && buffy.length() > 0)) {
 				// this is a compiler directive
-				buffy.append(line + "\n");
+				buffy.append(line).append("\n");
 			}
 			else if (!line.isEmpty()) {
 				File f = new File(line);

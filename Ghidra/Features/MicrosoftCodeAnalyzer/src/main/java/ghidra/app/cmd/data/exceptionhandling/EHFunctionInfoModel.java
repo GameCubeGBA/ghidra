@@ -727,19 +727,19 @@ public class EHFunctionInfoModel extends AbstractCreateDataTypeModel {
 	public String toString() {
 		StringBuilder buffer = new StringBuilder();
 		buffer.append("EHFunctionInfo" + NEW_LINE);
-		buffer.append(INDENT + "Program: " + getProgram().getDomainFile().getPathname() + NEW_LINE);
-		buffer.append(INDENT + "Address: " + getAddress().toString(true) + NEW_LINE);
-		buffer.append(INDENT + "fitsInSingleMemoryBlock: " + fitsInSingleMemoryBlock() + NEW_LINE);
-		buffer.append(INDENT + "isRelative: " + isRelative() + NEW_LINE);
-		buffer.append(INDENT + "defaultPointerSize: " + getDefaultPointerSize() + NEW_LINE);
-		buffer.append(INDENT + "magicNum: " + "0x" + Long.toHexString(magicNum) + NEW_LINE);
-		buffer.append(INDENT + "bbtFlags: " + "0x" + Long.toHexString(bbtFlags) + NEW_LINE);
+		buffer.append(INDENT + "Program: ").append(getProgram().getDomainFile().getPathname()).append(NEW_LINE);
+		buffer.append(INDENT + "Address: ").append(getAddress().toString(true)).append(NEW_LINE);
+		buffer.append(INDENT + "fitsInSingleMemoryBlock: ").append(fitsInSingleMemoryBlock()).append(NEW_LINE);
+		buffer.append(INDENT + "isRelative: ").append(isRelative()).append(NEW_LINE);
+		buffer.append(INDENT + "defaultPointerSize: ").append(getDefaultPointerSize()).append(NEW_LINE);
+		buffer.append(INDENT + "magicNum: " + "0x").append(Long.toHexString(magicNum)).append(NEW_LINE);
+		buffer.append(INDENT + "bbtFlags: " + "0x").append(Long.toHexString(bbtFlags)).append(NEW_LINE);
 		DataType dt = getDataType();
 		if (dt != null) {
-			buffer.append(NEW_LINE + dt.toString() + NEW_LINE);
+			buffer.append(NEW_LINE).append(dt.toString()).append(NEW_LINE);
 			if (dt instanceof TypeDef) {
 				DataType baseDataType = ((TypeDef) dt).getBaseDataType();
-				buffer.append(NEW_LINE + baseDataType.toString() + NEW_LINE);
+				buffer.append(NEW_LINE).append(baseDataType.toString()).append(NEW_LINE);
 			}
 		}
 		return buffer.toString();

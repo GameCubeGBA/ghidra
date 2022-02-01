@@ -144,8 +144,7 @@ public class ProjectDataPasteAction extends ProjectDataCopyCutBaseAction {
 			if (tnode.getParent() != null && isCutOperation && !destNode.equals(tnode)) {
 				if (destNode == tnode.getParent()) {
 					removeNodeFromList = true;
-					sb.append(
-						"File " + tnode.getName() + " already exists at " + tnode.getParent());
+					sb.append("File ").append(tnode.getName()).append(" already exists at ").append(tnode.getParent());
 				}
 				else if (tnode instanceof DomainFolderNode) {
 					if (destNode.isAncestor(tnode)) {
@@ -156,7 +155,7 @@ public class ProjectDataPasteAction extends ProjectDataCopyCutBaseAction {
 			else if (tnode.getParent() == null || destNode == tnode) {
 				removeNodeFromList = true;
 				if (destNode == tnode) {
-					sb.append("Cannot paste file to itself: " + destNode.getName());
+					sb.append("Cannot paste file to itself: ").append(destNode.getName());
 				}
 			}
 			if (removeNodeFromList) {

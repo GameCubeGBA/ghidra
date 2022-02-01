@@ -103,11 +103,11 @@ public class ExternalConflictInfoPanel extends JPanel {
 	}
 
 	private void addCount(StringBuffer buf, int value) {
-		buf.append("<font color=\"#990000\">" + value + "</font>");
+		buf.append("<font color=\"#990000\">").append(value).append("</font>");
 	}
 
 	private void addName(StringBuffer buf, String name) {
-		buf.append("<font color=\"#990000\">" + name + "</font>");
+		buf.append("<font color=\"#990000\">").append(name).append("</font>");
 	}
 
 	private void updateWest() {

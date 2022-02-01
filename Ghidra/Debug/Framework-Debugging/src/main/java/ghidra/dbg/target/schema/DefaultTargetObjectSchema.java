@@ -229,13 +229,13 @@ public class DefaultTargetObjectSchema
 			sb.append(" ");
 		}
 		sb.append("]\n" + INDENT);
-		sb.append("elements(resync " + elementResync + ") = ");
+		sb.append("elements(resync ").append(elementResync).append(") = ");
 		sb.append(elementSchemas);
-		sb.append(" default " + defaultElementSchema);
+		sb.append(" default ").append(defaultElementSchema);
 		sb.append("\n" + INDENT);
-		sb.append("attributes(resync " + attributeResync + ") = ");
+		sb.append("attributes(resync ").append(attributeResync).append(") = ");
 		sb.append(attributeSchemas);
-		sb.append(" default " + defaultAttributeSchema);
+		sb.append(" default ").append(defaultAttributeSchema);
 		sb.append("\n}");
 	}
 

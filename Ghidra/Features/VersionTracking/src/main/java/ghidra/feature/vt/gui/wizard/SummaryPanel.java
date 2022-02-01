@@ -120,7 +120,7 @@ public class SummaryPanel extends AbstractMageJPanel<VTWizardStateKey> {
 			for (VTProgramCorrelatorFactory correlatorFactory : correlators) {
 				correlatorName = correlatorFactory.getName();
 
-				label.append(correlatorLabel + "Program Correlator:");
+				label.append(correlatorLabel).append("Program Correlator:");
 				summary.append(correlatorName == null ? "(null)" : correlatorName);
 				label.append("<br>");
 				summary.append("<br>");

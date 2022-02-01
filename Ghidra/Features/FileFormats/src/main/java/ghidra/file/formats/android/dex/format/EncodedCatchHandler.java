@@ -79,8 +79,7 @@ public class EncodedCatchHandler implements StructConverter {
 	@Override
 	public DataType toDataType() throws DuplicateNameException, IOException {
 		StringBuilder builder = new StringBuilder();
-		builder.append("encoded_catch_handler_" + sizeLength + "_" + catchAllAddressLength + "_" +
-			handlers.size());
+		builder.append("encoded_catch_handler_").append(sizeLength).append("_").append(catchAllAddressLength).append("_").append(handlers.size());
 		Structure structure = new StructureDataType(builder.toString(), 0);
 		structure.add(new ArrayDataType(BYTE, sizeLength, BYTE.getLength()), "size", null);
 		int index = 0;

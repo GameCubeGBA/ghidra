@@ -141,9 +141,10 @@ public class AssemblySentential<NT extends AssemblyNonTerminal>
 			if (buffer.isEmpty()) {
 				return Collections.singleton(new WhiteSpaceParseToken(grammar, this, ""));
 			}
-			int b = pos;
-			while (b < buffer.length() && Character.isWhitespace(buffer.charAt(b))) {
-				b++;
+			int b;
+			for (b = pos; b < buffer.length(); b++) {
+				if (!Character.isWhitespace(buffer.charAt(b)))
+					break;
 			}
 			if (b == pos) {
 				if (pos == buffer.length()) {

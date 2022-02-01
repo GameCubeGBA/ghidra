@@ -340,12 +340,12 @@ class FSBActionManager {
 			"<html><table><tr><td>Supported File Systems</td><td>Supported Loaders</td></tr>\n");
 		sb.append("<tr valign='top'><td><ul>");
 		for (String fileSystemName : fsService.getAllFilesystemNames()) {
-			sb.append("<li>" + fileSystemName + "\n");
+			sb.append("<li>").append(fileSystemName).append("\n");
 		}
 
 		sb.append("</ul></td><td><ul>");
 		for (String loaderName : LoaderService.getAllLoaderNames()) {
-			sb.append("<li>" + loaderName + "\n");
+			sb.append("<li>").append(loaderName).append("\n");
 		}
 		sb.append("</ul></td></tr></table>");
 

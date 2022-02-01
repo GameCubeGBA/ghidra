@@ -290,13 +290,13 @@ public class MachHeader implements StructConverter {
 
 	public String getDescription() {//TODO
 		StringBuilder buffer = new StringBuilder();
-		buffer.append("Magic: 0x" + Integer.toHexString(magic));
+		buffer.append("Magic: 0x").append(Integer.toHexString(magic));
 		buffer.append('\n');
-		buffer.append("CPU Type: " + CpuTypes.getProcessor(cpuType, cpuSubType).toString());
+		buffer.append("CPU Type: ").append(CpuTypes.getProcessor(cpuType, cpuSubType).toString());
 		buffer.append('\n');
-		buffer.append("File Type: " + MachHeaderFileTypes.getFileTypeName(fileType));
+		buffer.append("File Type: ").append(MachHeaderFileTypes.getFileTypeName(fileType));
 		buffer.append('\n');
-		buffer.append("Flags: 0x" + Integer.toBinaryString(flags));
+		buffer.append("Flags: 0x").append(Integer.toBinaryString(flags));
 		buffer.append('\n');
 		buffer.append(MachHeaderFlags.getFlags(flags));
 		buffer.append('\n');

@@ -75,7 +75,7 @@ public class HTMLElement extends ArrayList<Object> {
 				sb.append(HTMLUtilities.friendlyEncodeHTML(obj.toString()));
 			}
 		}
-		sb.append("</" + name + ">");
+		sb.append("</").append(name).append(">");
 		return sb.toString();
 	}
 

@@ -139,14 +139,14 @@ public class BoundImportDescriptor implements StructConverter, ByteArrayConverte
 	@Override
     public String toString() {
 		StringBuilder buffer = new StringBuilder();
-		buffer.append("TimeStamp:"+Integer.toHexString(timeDateStamp)+",");
-		buffer.append("OffsetModuleName:"+Integer.toHexString(Conv.shortToInt(offsetModuleName))+"["+moduleName+"]"+",");
-		buffer.append("NumberOfModuleForwarderRefs:"+Integer.toHexString(Conv.shortToInt(numberOfModuleForwarderRefs)));
+		buffer.append("TimeStamp:").append(Integer.toHexString(timeDateStamp)).append(",");
+		buffer.append("OffsetModuleName:").append(Integer.toHexString(Conv.shortToInt(offsetModuleName))).append("[").append(moduleName).append("]").append(",");
+		buffer.append("NumberOfModuleForwarderRefs:").append(Integer.toHexString(Conv.shortToInt(numberOfModuleForwarderRefs)));
 		buffer.append("\n");
         for (BoundImportForwarderRef ref : forwarders) {
-            buffer.append("\t" + "TimeStamp:" + Integer.toHexString(ref.getTimeDateStamp()) + ",");
-            buffer.append("\t" + "OffsetModuleName:" + Integer.toHexString(Conv.shortToInt(ref.getOffsetModuleName())) + "[" + ref.getModuleName() + "]" + ",");
-            buffer.append("\t" + "Reserved:" + Integer.toHexString(Conv.shortToInt(ref.getReserved())));
+            buffer.append("\t" + "TimeStamp:").append(Integer.toHexString(ref.getTimeDateStamp())).append(",");
+            buffer.append("\t" + "OffsetModuleName:").append(Integer.toHexString(Conv.shortToInt(ref.getOffsetModuleName()))).append("[").append(ref.getModuleName()).append("]").append(",");
+            buffer.append("\t" + "Reserved:").append(Integer.toHexString(Conv.shortToInt(ref.getReserved())));
             buffer.append("\n");
         }
 		return buffer.toString();

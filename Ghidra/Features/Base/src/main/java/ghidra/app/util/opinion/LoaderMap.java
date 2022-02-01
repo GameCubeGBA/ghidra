@@ -30,7 +30,7 @@ public class LoaderMap extends TreeMap<Loader, Collection<LoadSpec>> {
 		StringBuilder sb = new StringBuilder();
 		for (Loader loader : keySet()) {
 			Collection<LoadSpec> loadSpecs = get(loader);
-			sb.append(loader.getName() + " - " + loadSpecs.size() + " load specs\n");
+			sb.append(loader.getName()).append(" - ").append(loadSpecs.size()).append(" load specs\n");
 		}
 		return sb.toString();
 	}

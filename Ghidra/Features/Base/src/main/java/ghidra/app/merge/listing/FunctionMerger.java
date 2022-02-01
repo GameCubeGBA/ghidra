@@ -1262,8 +1262,7 @@ class FunctionMerger extends AbstractFunctionMerger implements ListingMerger {
 			ConflictUtility.addAddress(buf, addr);
 			buf.append(" overlaps with different function(s) in other program.");
 			buf.append("<br>");
-			buf.append("The overlap address set is " +
-				ConflictUtility.getEmphasizeString(resolveSet.toString()) + ".");
+			buf.append("The overlap address set is ").append(ConflictUtility.getEmphasizeString(resolveSet.toString())).append(".");
 			panel.setHeader(buf.toString());
 			ChangeListener changeListener =
 				new FunctionOverlapConflictChangeListener(FUNC_OVERLAP, addr, panel, monitor);

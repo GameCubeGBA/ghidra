@@ -79,7 +79,7 @@ public class JavaHelpFilesBuilder {
 		catch (IOException e) {
 			hasErrors = true;
 			shortErrorDescription.append("Unexpected error generating map file!\n");
-			errorLog.append("Failed to generate " + mapOutputFilename + ": ");
+			errorLog.append("Failed to generate ").append(mapOutputFilename).append(": ");
 			errorLog.append(e.getMessage());
 			errorLog.println();
 		}
@@ -90,7 +90,7 @@ public class JavaHelpFilesBuilder {
 		catch (IOException e) {
 			hasErrors = true;
 			shortErrorDescription.append("Unexpected error writing TOC file!\n");
-			errorLog.append("Failed to generate " + tocOutputFilename + ": ");
+			errorLog.append("Failed to generate ").append(tocOutputFilename).append(": ");
 			errorLog.append(e.getMessage());
 			errorLog.println();
 		}

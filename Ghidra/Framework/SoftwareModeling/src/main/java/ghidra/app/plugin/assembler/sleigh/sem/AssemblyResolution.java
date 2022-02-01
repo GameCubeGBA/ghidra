@@ -264,7 +264,7 @@ public abstract class AssemblyResolution implements Comparable<AssemblyResolutio
 	protected String childrenToString(String indent) {
 		StringBuilder sb = new StringBuilder();
 		for (AssemblyResolution child : children) {
-			sb.append(child.toString(indent) + "\n");
+			sb.append(child.toString(indent)).append("\n");
 		}
 		return sb.substring(0, sb.length() - 1);
 	}

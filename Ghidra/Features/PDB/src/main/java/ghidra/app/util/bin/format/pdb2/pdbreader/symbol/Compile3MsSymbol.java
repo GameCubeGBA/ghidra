@@ -274,25 +274,18 @@ public class Compile3MsSymbol extends AbstractMsSymbol {
 		builder.append("\n   Target Processor: ");
 		builder.append(processor.toString());
 
-		builder.append(
-			"\n   Compiled for edit and continue: " + (compiledForEditAndContinue ? "yes" : "no"));
-		builder.append(
-			"\n   Compiled withoug debugging info: " + (notCompiledWithDebugInfo ? "yes" : "no"));
-		builder.append(
-			"\n   Compiled with LTCG: " + (compiledWithLinkTimeCodeGeneration ? "yes" : "no"));
-		builder.append(
-			"\n   Compiled with /bzalign: " + (compiledWithBzalignNoDataAlign ? "yes" : "no"));
-		builder.append("\n   Managed code present: " + (managedCodeDataPresent ? "yes" : "no"));
-		builder.append(
-			"\n   Compiled with /GS: " + (compiledWithGsBufferSecurityChecks ? "yes" : "no"));
-		builder.append("\n   Compiled with /hotpatch: " + (compiledWithHotPatch ? "yes" : "no"));
-		builder.append("\n   Converted by CVTCIL: " + (convertedWithCvtcil ? "yes" : "no"));
-		builder.append("\n   Microsoft Intermediate Language Module: " +
-			(microsoftIntermediateLanguageNetModule ? "yes" : "no"));
-		builder.append("\n   Compiled with /sdl: " + (compiledWithSdl ? "yes" : "no"));
-		builder.append("\n   Compiled with Profile Guided Optimization (PGO): " +
-			(compiledWithLtcgPgoOrPgu ? "yes" : "no"));
-		builder.append("\n   .EXP module: " + (dotExpModule ? "yes" : "no"));
+		builder.append("\n   Compiled for edit and continue: ").append(compiledForEditAndContinue ? "yes" : "no");
+		builder.append("\n   Compiled withoug debugging info: ").append(notCompiledWithDebugInfo ? "yes" : "no");
+		builder.append("\n   Compiled with LTCG: ").append(compiledWithLinkTimeCodeGeneration ? "yes" : "no");
+		builder.append("\n   Compiled with /bzalign: ").append(compiledWithBzalignNoDataAlign ? "yes" : "no");
+		builder.append("\n   Managed code present: ").append(managedCodeDataPresent ? "yes" : "no");
+		builder.append("\n   Compiled with /GS: ").append(compiledWithGsBufferSecurityChecks ? "yes" : "no");
+		builder.append("\n   Compiled with /hotpatch: ").append(compiledWithHotPatch ? "yes" : "no");
+		builder.append("\n   Converted by CVTCIL: ").append(convertedWithCvtcil ? "yes" : "no");
+		builder.append("\n   Microsoft Intermediate Language Module: ").append(microsoftIntermediateLanguageNetModule ? "yes" : "no");
+		builder.append("\n   Compiled with /sdl: ").append(compiledWithSdl ? "yes" : "no");
+		builder.append("\n   Compiled with Profile Guided Optimization (PGO): ").append(compiledWithLtcgPgoOrPgu ? "yes" : "no");
+		builder.append("\n   .EXP module: ").append(dotExpModule ? "yes" : "no");
 
 		builder.append(
 			String.format("\n   Frontend Version: Major = %d, Minor = %d, Build = %d, QFE = %d",
@@ -302,7 +295,7 @@ public class Compile3MsSymbol extends AbstractMsSymbol {
 			String.format("\n   Backend Version: Major = %d, Minor = %d, Build = %d, QFE = %d",
 				backEndMajorVersionNumber, backEndMinorVersionNumber, backEndBuildVersionNumber,
 				backEndQuickFixEngineeringVersionNumber));
-		builder.append("\n   Version String:" + compilerVersionString);
+		builder.append("\n   Version String:").append(compilerVersionString);
 		builder.append("\n");
 	}
 
