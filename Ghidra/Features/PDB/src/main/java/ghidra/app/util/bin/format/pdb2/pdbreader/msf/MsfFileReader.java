@@ -100,9 +100,8 @@ class MsfFileReader implements AutoCloseable {
 			throw new IOException("Invalid MSF configuration");
 		}
 
-		int numBytesRead = 0;
 		file.seek(fileOffset);
-		numBytesRead = file.read(bytes, bytesOffset, numToRead);
+		int numBytesRead = file.read(bytes, bytesOffset, numToRead);
 
 		if (numBytesRead != numToRead) {
 			throw new IOException("Could not read required bytes from MSF");
