@@ -86,12 +86,8 @@ public class WizardState<T> implements Cloneable {
 	 * to be cleared.
 	 */
 	public void addDependency(T dependent, T predecessor) {
-		Set<T> dependents = dependentMap.get( predecessor );
-		if (dependents == null) {
-			dependents = new HashSet<T>();
-			dependentMap.put( predecessor, dependents );
-		}
-		dependents.add(dependent);
+        Set<T> dependents = dependentMap.computeIfAbsent(predecessor, k -> new HashSet<T>());
+        dependents.add(dependent);
 	}
 
 	private void clearDependents(T key) {

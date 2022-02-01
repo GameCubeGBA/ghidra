@@ -136,10 +136,6 @@ public abstract class AbstractDBTraceProgramViewListing implements TraceProgramV
 		return doCreateUndefinedUnit(address);
 	}
 
-	protected TraceData orUndefData(TraceData data, Address address) {
-		return (TraceData) orUndef(data, address);
-	}
-
 	protected TraceData reqUndef(TraceCodeUnit cu, Address address) {
 		if (cu != null) {
 			return null;
@@ -156,9 +152,7 @@ public abstract class AbstractDBTraceProgramViewListing implements TraceProgramV
 
 	@SuppressWarnings("ComparatorCombinators")
 	protected Comparator<CodeUnit> getUnitComparator(boolean forward) {
-		return forward
-				? (u1, u2) -> u1.getMinAddress().compareTo(u2.getMinAddress())
-				: (u1, u2) -> -u1.getMinAddress().compareTo(u2.getMinAddress());
+		return (u1, u2) -> forward ? u1.getMinAddress().compareTo(u2.getMinAddress()) : -u1.getMinAddress().compareTo(u2.getMinAddress());
 	}
 
 	protected <T extends TraceCodeUnit> Iterator<T> getTopCodeIterator(

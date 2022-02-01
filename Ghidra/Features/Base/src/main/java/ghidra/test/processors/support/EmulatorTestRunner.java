@@ -179,12 +179,8 @@ public class EmulatorTestRunner {
 	 */
 	public void addDumpPoint(Address breakAddr, Address dumpAddr, int dumpSize, int elementSize,
 			DumpFormat elementFormat, String comment) {
-		List<DumpPoint> list = dumpPointMap.get(breakAddr);
-		if (list == null) {
-			list = new ArrayList<>();
-			dumpPointMap.put(breakAddr, list);
-		}
-		list.add(new AddressDumpPoint(breakAddr, dumpAddr, dumpSize, elementSize, elementFormat,
+        List<DumpPoint> list = dumpPointMap.computeIfAbsent(breakAddr, k -> new ArrayList<>());
+        list.add(new AddressDumpPoint(breakAddr, dumpAddr, dumpSize, elementSize, elementFormat,
 			comment));
 	}
 
@@ -203,12 +199,8 @@ public class EmulatorTestRunner {
 	public void addDumpPoint(Address breakAddr, Register dumpAddrReg, int relativeOffset,
 			AddressSpace dumpAddrSpace, int dumpSize, int elementSize, DumpFormat elementFormat,
 			String comment) {
-		List<DumpPoint> list = dumpPointMap.get(breakAddr);
-		if (list == null) {
-			list = new ArrayList<>();
-			dumpPointMap.put(breakAddr, list);
-		}
-		list.add(new RegisterRelativeDumpPoint(breakAddr, dumpAddrReg, relativeOffset,
+        List<DumpPoint> list = dumpPointMap.computeIfAbsent(breakAddr, k -> new ArrayList<>());
+        list.add(new RegisterRelativeDumpPoint(breakAddr, dumpAddrReg, relativeOffset,
 			dumpAddrSpace, dumpSize, elementSize, elementFormat, comment));
 	}
 

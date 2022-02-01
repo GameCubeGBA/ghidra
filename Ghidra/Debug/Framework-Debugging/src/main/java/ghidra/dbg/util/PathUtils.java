@@ -496,7 +496,7 @@ public enum PathUtils {
 		if (ancestor.size() > successor.size()) {
 			return false;
 		}
-		return Objects.equals(ancestor, successor.subList(0, ancestor.size()));
+		return ancestor.equals(successor.subList(0, ancestor.size()));
 	}
 
 	/**

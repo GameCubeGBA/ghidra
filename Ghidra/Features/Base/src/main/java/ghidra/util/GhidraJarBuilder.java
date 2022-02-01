@@ -239,7 +239,7 @@ public class GhidraJarBuilder implements GhidraLaunchable {
 			else if (isJavaFile(file)) {
 				String path = getPathFromRoot(rootPath, file);
 				// replace .java with .class
-				path = path.substring(0, path.length() - 5).concat(".class");
+				path = path.substring(0, path.length() - 5) + ".class";
 				jar.addToModuleTree(path, module);
 			}
 		}

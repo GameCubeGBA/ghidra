@@ -26,12 +26,8 @@ public class NavigatableRegistry {
 
 	public static void registerNavigatable(PluginTool tool, Navigatable navigatable) {
 		navigatableMap.put(navigatable.getInstanceID(), navigatable);
-		List<Navigatable> list = toolMap.get(tool);
-		if (list == null) {
-			list = new ArrayList<Navigatable>();
-			toolMap.put(tool, list);
-		}
-		list.add(navigatable);
+        List<Navigatable> list = toolMap.computeIfAbsent(tool, k -> new ArrayList<Navigatable>());
+        list.add(navigatable);
 	}
 
 	public static void unregisterNavigatable(PluginTool tool, Navigatable navigatable) {

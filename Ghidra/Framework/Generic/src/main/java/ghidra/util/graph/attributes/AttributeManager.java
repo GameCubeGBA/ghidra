@@ -20,7 +20,6 @@ import ghidra.util.Msg;
 import ghidra.util.graph.KeyIndexableSet;
 import ghidra.util.graph.KeyedObject;
 
-import java.util.Enumeration;
 import java.util.Hashtable;
 
 /** Class which creates and keeps track of attributes defined 
@@ -127,18 +126,14 @@ public class AttributeManager<T extends KeyedObject>
       return names;
   }
   
-  /** Clears all of the attributes managed by this AttributeManager 
+  /** Clears all the attributes managed by this AttributeManager
    * while leaving the attributes defined.
    */
-  @SuppressWarnings("unchecked")
-public void clear()
+  public void clear()
   {
-  	Enumeration<?> enu = definedAttributes.elements();
-  	while( enu.hasMoreElements() )
-  	{
-  		Attribute<T> attr = (Attribute<T>) enu.nextElement();
-  		attr.clear();
-  	}
+      for (Attribute<T> attr : definedAttributes.values()) {
+          attr.clear();
+      }
   }
 
 }

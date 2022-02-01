@@ -27,11 +27,11 @@ public class OpBehaviorPopcount extends UnaryOpBehavior {
 
 	@Override
 	public long evaluateUnary(int sizeout, int sizein, long val) {
-		val = (val & 0x5555555555555555L) + ((val >>> 1) & 0x5555555555555555L);
-		val = (val & 0x3333333333333333L) + ((val >>> 2) & 0x3333333333333333L);
-		val = (val & 0x0f0f0f0f0f0f0f0fL) + ((val >>> 4) & 0x0f0f0f0f0f0f0f0fL);
-		val = (val & 0x00ff00ff00ff00ffL) + ((val >>> 8) & 0x00ff00ff00ff00ffL);
-		val = (val & 0x0000ffff0000ffffL) + ((val >>> 16) & 0x0000ffff0000ffffL);
+		val = (val + (val >>> 1)) & 0x5555555555555555L;
+		val = (val + (val >>> 2)) & 0x3333333333333333L;
+		val = (val + (val >>> 4)) & 0x0f0f0f0f0f0f0f0fL;
+		val = (val + (val >>> 8)) & 0x00ff00ff00ff00ffL;
+		val = (val + (val >>> 16)) & 0x0000ffff0000ffffL;
 		int res = (int) (val & 0xff);
 		res += (int) ((val >> 32) & 0xff);
 		return res;

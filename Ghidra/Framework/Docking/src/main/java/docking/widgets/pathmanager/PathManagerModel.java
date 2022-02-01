@@ -19,6 +19,7 @@ package docking.widgets.pathmanager;
 import generic.util.Path;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
@@ -74,9 +75,7 @@ class PathManagerModel extends AbstractTableModel {
 	void setPaths(Path[] pathsArr) {
 		paths.clear();
 		paths = new ArrayList<Path>();
-        for (Path path : pathsArr) {
-            paths.add(path);
-        }
+        paths.addAll(Arrays.asList(pathsArr));
 		fireTableDataChanged();
 	}
 

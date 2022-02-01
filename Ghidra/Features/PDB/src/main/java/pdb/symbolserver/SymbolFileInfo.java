@@ -288,7 +288,7 @@ public class SymbolFileInfo {
 		}
 		SymbolFileInfo other = (SymbolFileInfo) obj;
 		return Objects.equals(pdbIdentifiers, other.pdbIdentifiers) &&
-			Objects.equals(pdbPath, other.pdbPath);
+                pdbPath.equals(other.pdbPath);
 	}
 
 }

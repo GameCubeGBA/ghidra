@@ -407,13 +407,9 @@ public class HelpMissingScreenShotReportGenerator {
 			errorMessage("Unable to load image: " + img, e);
 		}
 
-		Set<IMG> set = untestedImages.get(topic);
-		if (set == null) {
-			set = new TreeSet<IMG>();
-			untestedImages.put(topic, set);
-		}
+        Set<IMG> set = untestedImages.computeIfAbsent(topic, k -> new TreeSet<IMG>());
 
-		set.add(img);
+        set.add(img);
 	}
 
 	private void validateScreenShotTests() {
@@ -703,7 +699,7 @@ public class HelpMissingScreenShotReportGenerator {
 				return true; // direct match!
 			}
 
-			return imageName.toLowerCase().equals(imgName.toLowerCase());
+			return imageName.equalsIgnoreCase(imgName);
 		}
 
 		String getImageName() {

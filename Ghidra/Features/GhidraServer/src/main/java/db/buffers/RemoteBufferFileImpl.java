@@ -81,20 +81,12 @@ public class RemoteBufferFileImpl extends UnicastRemoteObject
 
 	private static synchronized void addInstance(RemoteBufferFileImpl rbf) {
 		// Keep a list of RemoteBufferFileImpl's for each owner
-		List<RemoteBufferFileImpl> list = instanceOwnerMap.get(rbf.owner);
-		if (list == null) {
-			list = new ArrayList<>();
-			instanceOwnerMap.put(rbf.owner, list);
-		}
-		list.add(rbf);
+        List<RemoteBufferFileImpl> list = instanceOwnerMap.computeIfAbsent(rbf.owner, k -> new ArrayList<>());
+        list.add(rbf);
 
 		String filePathKey = getFilePathKey(rbf);
-		list = instancePathMap.get(filePathKey);
-		if (list == null) {
-			list = new ArrayList<>();
-			instancePathMap.put(filePathKey, list);
-		}
-		list.add(rbf);
+        list = instancePathMap.computeIfAbsent(filePathKey, k -> new ArrayList<>());
+        list.add(rbf);
 		rbf.owner.fireOpenFileCountChanged();
 	}
 

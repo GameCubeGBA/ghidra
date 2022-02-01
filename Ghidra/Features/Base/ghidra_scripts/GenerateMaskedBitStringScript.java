@@ -71,16 +71,16 @@ public class GenerateMaskedBitStringScript extends GhidraScript {
 		for (int i = 0; i < values.length; i++) {
 			for (int j = 0; j < 8; j++) {
 				if (((masks[i] >> (7 - j)) & 1) == 0) {
-					bitString = bitString.concat(".");
+					bitString = bitString + ".";
 				}
 				else if (((values[i] >> (7 - j)) & 1) == 0) {
-					bitString = bitString.concat("0");
+					bitString = bitString + "0";
 				}
 				else {
-					bitString = bitString.concat("1");
+					bitString = bitString + "1";
 				}
 			}
-			bitString = bitString.concat(" ");
+			bitString = bitString + " ";
 		}
 		println(bitString);
 		return bitString;

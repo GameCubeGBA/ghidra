@@ -281,11 +281,10 @@ public class GhidraSourceBundle extends GhidraBundle {
 	 * @return deduped requirements
 	 */
 	private Map<String, BundleRequirement> getComputedReqs() {
-		Map<String, BundleRequirement> dedupedReqs = new HashMap<>();
-		sourceFileToRequirements.values()
+		Map<String, BundleRequirement> dedupedReqs = sourceFileToRequirements.values()
 				.stream()
 				.flatMap(List::stream)
-				.forEach(r -> dedupedReqs.putIfAbsent(r.toString(), r));
+				.collect(toMap(Object::toString, r -> r, (a, b) -> a));
 
 		return dedupedReqs;
 	}

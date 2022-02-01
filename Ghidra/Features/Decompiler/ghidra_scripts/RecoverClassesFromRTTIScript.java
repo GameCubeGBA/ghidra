@@ -907,7 +907,7 @@ public class RecoverClassesFromRTTIScript extends GhidraScript {
                 for (RecoveredClass aClass : parentList) {
                     monitor.checkCanceled();
                     RecoveredClass parent = aClass;
-                    printString = printString.concat("\t" + parent.getName() + "\n");
+                    printString = printString + "\t" + parent.getName() + "\n";
                 }
             }
             println(printString);

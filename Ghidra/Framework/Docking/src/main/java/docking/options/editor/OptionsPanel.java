@@ -405,15 +405,11 @@ public class OptionsPanel extends JPanel {
 
 		private void addOptionDetails(CustomOptionsEditor editor, List<String> results) {
 			String[] optionNames = editor.getOptionNames();
-			for (String string : optionNames) {
-				results.add(string);
-			}
+            results.addAll(Arrays.asList(optionNames));
 
 			String[] descriptions = editor.getOptionDescriptions();
 			if (descriptions != null) {
-				for (String string : descriptions) {
-					results.add(string);
-				}
+                results.addAll(Arrays.asList(descriptions));
 			}
 		}
 	}

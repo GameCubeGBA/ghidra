@@ -17,6 +17,7 @@ package docking.menu;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import javax.swing.JButton;
 
@@ -57,12 +58,7 @@ public class MultiActionDockingAction extends DockingAction
 	}
 
 	public void setActions(List<DockingActionIf> actionList) {
-		if (actionList == null) {
-			this.actionList = Collections.emptyList();
-		}
-		else {
-			this.actionList = actionList;
-		}
+        this.actionList = Objects.requireNonNullElse(actionList, Collections.emptyList());
 	}
 
 	@Override

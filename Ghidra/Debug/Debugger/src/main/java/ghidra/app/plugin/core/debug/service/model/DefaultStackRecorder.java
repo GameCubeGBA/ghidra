@@ -124,7 +124,7 @@ public class DefaultStackRecorder implements ManagedStackRecorder {
 				synchronized (stack) {
 					frame = stack.get(index);
 				}
-				if (!Objects.equals(p, frame)) {
+				if (!p.equals(frame)) {
 					return 0;
 				}
 				return index;

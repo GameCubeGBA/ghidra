@@ -63,9 +63,7 @@ class PluginManager {
 	DomainFile[] getData() {
 		List<DomainFile> list = new ArrayList<>();
 		for (Plugin plugin : pluginList) {
-			for (DomainFile file : plugin.getData()) {
-				list.add(file);
-			}
+            list.addAll(Arrays.asList(plugin.getData()));
 		}
 		DomainFile[] data = new DomainFile[list.size()];
 		return list.toArray(data);
@@ -74,9 +72,7 @@ class PluginManager {
 	Class<?>[] getSupportedDataTypes() {
 		Set<Class<?>> set = new HashSet<>();
 		for (Plugin plugin : pluginList) {
-			for (Class<?> element : plugin.getSupportedDataTypes()) {
-				set.add(element);
-			}
+            set.addAll(Arrays.asList(plugin.getSupportedDataTypes()));
 		}
 		Class<?>[] cl = new Class[set.size()];
 		return set.toArray(cl);
@@ -260,8 +256,7 @@ class PluginManager {
 		boolean isOld = isOldToolConfig(root);
 		List<String> classNames =
 			isOld ? getPLuginClassNamesFromOldXml(root) : getPluginClassNamesToLoad(root);
-		Map<String, SaveState> map = isOld ? getPluginSavedStates(root, "PLUGIN")
-				: getPluginSavedStates(root, "PLUGIN_STATE");
+		Map<String, SaveState> map = getPluginSavedStates(root, isOld ? "PLUGIN" : "PLUGIN_STATE");
 
 		PluginException pe = null;
 		try {

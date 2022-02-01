@@ -136,12 +136,8 @@ public class LanguageTranslatorFactory {
 	private void addToMap(HashMap<LanguageID, List<LanguageTranslator>> map,
 			LanguageTranslator translator, boolean sorted) {
 		LanguageID fromLanguageID = translator.getOldLanguageID();
-		List<LanguageTranslator> list = map.get(fromLanguageID);
-		if (list == null) {
-			list = new ArrayList<>();
-			map.put(fromLanguageID, list);
-		}
-		int index = list.size();
+        List<LanguageTranslator> list = map.computeIfAbsent(fromLanguageID, k -> new ArrayList<>());
+        int index = list.size();
 		if (sorted) {
 			index = Collections.binarySearch(list, translator.getOldVersion(),
 				TRANSLATOR_VERSION_COMPARATOR);

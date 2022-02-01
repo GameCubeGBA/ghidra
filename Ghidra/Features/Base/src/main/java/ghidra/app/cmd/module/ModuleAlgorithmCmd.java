@@ -330,7 +330,7 @@ public class ModuleAlgorithmCmd extends BackgroundCommand {
 
 		boolean done = false;
 		int index = 0;
-		String baseName = new String(newName);
+		String baseName = newName;
 		String name = baseName;
 		while (!done) {
 			try {

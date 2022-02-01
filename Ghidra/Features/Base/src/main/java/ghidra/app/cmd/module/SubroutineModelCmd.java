@@ -215,7 +215,7 @@ public class SubroutineModelCmd extends BackgroundCommand {
 		int index = 0;
 		//String baseName = block.getName();
 		//String name = baseName;
-		String baseName = new String(nodeName);
+		String baseName = nodeName;
 		String name = baseName;
 		while (!done) {
 			try {

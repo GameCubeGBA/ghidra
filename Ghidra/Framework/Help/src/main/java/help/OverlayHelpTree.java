@@ -105,13 +105,9 @@ public class OverlayHelpTree {
 	private void doAddTOCIItem(TOCItem item) {
 		TOCItem parent = item.getParent();
 		String parentID = parent == null ? null : parent.getIDAttribute();
-		Set<TOCItem> set = parentToChildrenMap.get(parentID);
-		if (set == null) {
-			set = new LinkedHashSet<TOCItem>();
-			parentToChildrenMap.put(parentID, set);
-		}
+        Set<TOCItem> set = parentToChildrenMap.computeIfAbsent(parentID, k -> new LinkedHashSet<TOCItem>());
 
-		set.add(item);
+        set.add(item);
 	}
 
 	public void printTreeForID(Path outputFile, String sourceFileID) throws IOException {

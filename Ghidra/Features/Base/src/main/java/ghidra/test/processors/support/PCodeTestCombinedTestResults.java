@@ -250,13 +250,9 @@ public class PCodeTestCombinedTestResults {
 					groupName = groupTestName.substring(0, index);
 				}
 
-				Set<NamedTestColumn> set = allTestNamesMap.get(groupName);
-				if (set == null) {
-					set = new HashSet<>();
-					allTestNamesMap.put(groupName, set);
-				}
+                Set<NamedTestColumn> set = allTestNamesMap.computeIfAbsent(groupName, k -> new HashSet<>());
 
-				NamedTestColumn namedTestColumn = namedTestColumnMap.get(groupTestName);
+                NamedTestColumn namedTestColumn = namedTestColumnMap.get(groupTestName);
 				if (namedTestColumn == null) {
 					namedTestColumn = new NamedTestColumn(groupTestName);
 					namedTestColumnMap.put(groupTestName, namedTestColumn);

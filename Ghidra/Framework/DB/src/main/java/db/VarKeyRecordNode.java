@@ -510,7 +510,7 @@ class VarKeyRecordNode extends VarKeyNode implements FieldKeyRecordNode {
 	 */
 	private void enableIndirectStorage(int index, boolean state) {
 		buffer.putByte(HEADER_SIZE + OFFSET_SIZE + (index * ENTRY_SIZE),
-			state ? (byte) 1 : (byte) 0);
+                (byte) (state ? 1 : 0));
 	}
 
 	/**

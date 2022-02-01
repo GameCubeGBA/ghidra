@@ -685,8 +685,7 @@ public class FrontEndPlugin extends Plugin
 		connectionButton.setContentAreaFilled(false);
 		connectionButton.setSelected(isConnected);
 		connectionButton.setBorder(
-			isConnected ? BorderFactory.createBevelBorder(BevelBorder.LOWERED)
-					: BorderFactory.createBevelBorder(BevelBorder.RAISED));
+                BorderFactory.createBevelBorder(isConnected ? BevelBorder.LOWERED : BevelBorder.RAISED));
 		connectionIconPanel.add(connectionButton);
 		if (isConnected) {
 

@@ -92,7 +92,7 @@ class InMemoryFunctionTag implements FunctionTag {
 		}
 
 		FunctionTag other = (FunctionTag) obj;
-		if (!Objects.equals(comment, other.getComment())) {
+		if (!comment.equals(other.getComment())) {
 			return false;
 		}
 

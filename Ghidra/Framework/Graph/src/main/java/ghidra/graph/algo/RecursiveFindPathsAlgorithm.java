@@ -142,12 +142,8 @@ public class RecursiveFindPathsAlgorithm<V, E extends GEdge<V>>
 	}
 
 	private void blockBackEdge(V u, V v) {
-		Set<V> set = blockedBackEdgesMap.get(u);
-		if (set == null) {
-			set = new HashSet<>();
-			blockedBackEdgesMap.put(u, set);
-		}
-		set.add(v);
+        Set<V> set = blockedBackEdgesMap.computeIfAbsent(u, k -> new HashSet<>());
+        set.add(v);
 		setStatus(v, STATUS.BLOCKED);
 	}
 

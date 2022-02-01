@@ -54,7 +54,7 @@ public class GdbStackFrameImpl implements GdbStackFrame {
 	@Override
 	public String toString() {
 		String strAddr = addr == null ? "<null>" : addr.toString(16);
-		String strFunc = func == null ? "<null>" : func.toString();
+		String strFunc = func == null ? "<null>" : func;
 		return "<GdbStackFrame: level=" + level + ",addr=0x" + strAddr + ",func='" + strFunc + "'>";
 	}
 

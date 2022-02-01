@@ -339,11 +339,7 @@ public class TestEnv {
 	}
 
 	private void removeAllConsumersExceptTool(Program p, PluginTool t) {
-		p.getConsumerList().forEach(c -> {
-			if (c != t) {
-				p.release(c);
-			}
-		});
+		p.getConsumerList().stream().filter(c -> c != t).forEach(p::release);
 	}
 
 	@Deprecated // use DockingTestCase.waitForWindow(String title) instead

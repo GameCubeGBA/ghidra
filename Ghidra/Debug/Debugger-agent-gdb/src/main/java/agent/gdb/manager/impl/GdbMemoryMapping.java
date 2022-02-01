@@ -49,7 +49,7 @@ public class GdbMemoryMapping {
 		this.flags = flags;
 		this.objfile = objfile;
 
-		assert Objects.equals(start.add(size), end);
+		assert start.add(size).equals(end);
 	}
 
 	/**

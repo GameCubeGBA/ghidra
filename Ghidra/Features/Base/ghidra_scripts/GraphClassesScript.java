@@ -46,7 +46,7 @@ public class GraphClassesScript extends GhidraScript {
 
 		DataTypeManager dataTypeManager = currentProgram.getDataTypeManager();
 
-		String path = new String("ClassDataTypes");
+		String path = "ClassDataTypes";
 		CategoryPath dataTypePath = new CategoryPath(CategoryPath.ROOT, path);
 
 		Category category = dataTypeManager.getCategory(dataTypePath);
@@ -248,10 +248,10 @@ public class GraphClassesScript extends GhidraScript {
 	private int getIndexOfFirstSingleColon(String string) {
 
 		// replace all :: with something else so can isolate :'s 
-		String testString = new String(string);
+		String testString = string;
 		testString = testString.replace("::", "xx");
 
-		return testString.indexOf(":", 0);
+		return testString.indexOf(":");
 
 	}
 

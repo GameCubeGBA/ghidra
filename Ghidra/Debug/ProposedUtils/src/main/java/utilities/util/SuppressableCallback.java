@@ -183,7 +183,7 @@ public class SuppressableCallback<T> {
 	 */
 	public <R> R invokeWithTop(Function<T, R> callback) {
 		ListWithView<T> s = stack.get();
-		return s.isEmpty() ? callback.apply(null) : callback.apply(s.get(0));
+		return callback.apply(s.isEmpty() ? null : s.get(0));
 	}
 
 	/**

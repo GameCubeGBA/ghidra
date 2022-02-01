@@ -218,12 +218,7 @@ public class CompositeTypeApplier extends AbstractComplexTypeApplier {
 		else if (dependee instanceof CompositeTypeApplier) {
 			CompositeTypeApplier defApplier =
 				((CompositeTypeApplier) dependee).getDefinitionApplier(CompositeTypeApplier.class);
-			if (defApplier != null) {
-				applicator.addApplierDependency(this, defApplier);
-			}
-			else {
-				applicator.addApplierDependency(this, dependee);
-			}
+			applicator.addApplierDependency(this, Objects.requireNonNullElse(defApplier, dependee));
 			setDeferred();
 		}
 		// TODO: evaluate this and make changes... this work might be being taken care of in

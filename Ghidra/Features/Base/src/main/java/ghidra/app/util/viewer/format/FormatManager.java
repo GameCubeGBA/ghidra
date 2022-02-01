@@ -16,6 +16,7 @@
 package ghidra.app.util.viewer.format;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -916,9 +917,7 @@ public class FormatManager implements OptionsChangeListener {
 				HighlightProvider provider = highlightProviders.get(i);
 				Highlight[] highlights =
 					provider.getHighlights(text, obj, fieldFactoryClass, cursorTextOffset);
-				for (Highlight highlight : highlights) {
-					list.add(highlight);
-				}
+                list.addAll(Arrays.asList(highlights));
 			}
 
 			return list.toArray(new Highlight[0]);

@@ -253,10 +253,7 @@ public class NewSymbolFilter implements SymbolFilter {
 
 	Element saveToXml() {
 		Element root = new Element(XML_NAME);
-		filterMap.values().forEach(filter -> {
-			Element filterElement = filter.saveToXml();
-			root.addContent(filterElement);
-		});
+		filterMap.values().stream().map(Filter::saveToXml).forEach(root::addContent);
 		return root;
 	}
 

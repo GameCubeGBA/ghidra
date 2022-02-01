@@ -812,12 +812,8 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 				Enum enumDt = (Enum) type;
 				long[] values = enumDt.getValues();
 				for (long value : values) {
-					Set<String> namesForValue = map.get(value);
-					if (namesForValue == null) {
-						namesForValue = new HashSet<>();
-						map.put(value, namesForValue);
-					}
-					namesForValue.add(enumDt.getName(value));
+                    Set<String> namesForValue = map.computeIfAbsent(value, k -> new HashSet<>());
+                    namesForValue.add(enumDt.getName(value));
 				}
 			}
 		}

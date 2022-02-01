@@ -107,8 +107,7 @@ public class AllFunctionsPanel extends JPanel {
 
 		String tagNames = tags.stream()
 				.map(t -> t.getName())
-				.collect(Collectors.joining(" or "))
-				.toString();
+				.collect(Collectors.joining(" or "));
 
 		titleLabel.setText("Functions With Tag: " + tagNames);
 		model.setTags(tags);

@@ -389,7 +389,7 @@ public class OptionsGui extends JPanel {
 				int index, boolean isSelected, boolean cellHasFocus) {
 			setText(value);
 			Font origFont = fontNameField.getFont();
-			setFont(new Font(value.toString(), origFont.getStyle(), origFont.getSize()));
+			setFont(new Font(value, origFont.getStyle(), origFont.getSize()));
 
 			setBackground(isSelected ? SELECTED_COLOR : Color.white);
 			setForeground(isSelected ? Color.white : Color.black);

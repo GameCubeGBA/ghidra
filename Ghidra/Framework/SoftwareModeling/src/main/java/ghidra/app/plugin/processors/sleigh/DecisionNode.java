@@ -259,8 +259,8 @@ public class DecisionNode {
 		childlist.toArray(children);
 		parser.end(el);
 
-		unmodifiablePatternList = Collections.unmodifiableList(Arrays.asList(patternlist));
-		unmodifiableConstructorList = Collections.unmodifiableList(Arrays.asList(constructlist));
-		unmodifiableChildren = Collections.unmodifiableList(Arrays.asList(children));
+		unmodifiablePatternList = List.of(patternlist);
+		unmodifiableConstructorList = List.of(constructlist);
+		unmodifiableChildren = List.of(children);
 	}
 }

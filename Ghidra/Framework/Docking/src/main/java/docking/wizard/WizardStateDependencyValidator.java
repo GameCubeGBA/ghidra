@@ -36,12 +36,8 @@ public class WizardStateDependencyValidator<T> {
 	public void addDependency(T dependent, T predecessor) {
 		dependentSet.add(dependent);
 		if (predecessor != null) {
-			Set<T> dependents = dependentMap.get( predecessor );
-			if (dependents == null) {
-				dependents = new HashSet<T>();
-				dependentMap.put( predecessor, dependents );
-			}
-			dependents.add(dependent);
+            Set<T> dependents = dependentMap.computeIfAbsent(predecessor, k -> new HashSet<T>());
+            dependents.add(dependent);
 		}
 	}
 	

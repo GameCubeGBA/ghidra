@@ -182,7 +182,7 @@ public class ImportDataDirectory extends DataDirectory {
 			throws MemoryAccessException {
 		DataType dt = null;
 		if (isBinary) {
-			dt = ntHeader.getOptionalHeader().is64bit() ? (DataType) QWORD : (DataType) DWORD;
+			dt = (DataType) (ntHeader.getOptionalHeader().is64bit() ? QWORD : DWORD);
 		}
 		else {
 			dt = PointerDataType.getPointer(null, -1);
@@ -208,7 +208,7 @@ public class ImportDataDirectory extends DataDirectory {
 			dt = PointerDataType.getPointer(null, program.getMinAddress().getPointerSize());
 		}
 		else {
-			dt = ntHeader.getOptionalHeader().is64bit() ? (DataType) QWORD : (DataType) DWORD;
+			dt = (DataType) (ntHeader.getOptionalHeader().is64bit() ? QWORD : DWORD);
 		}
 		PeUtils.createData(program, thunkAddress, dt, log);
 	}

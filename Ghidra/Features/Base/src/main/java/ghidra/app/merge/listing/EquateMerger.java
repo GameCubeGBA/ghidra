@@ -232,12 +232,8 @@ class EquateMerger extends AbstractListingMerger {
 	 * @param scalar the scalar value of the conflict.
 	 */
 	private void saveConflict(Address address, int opIndex, Scalar scalar) {
-		ArrayList<EquateConflict> list = conflicts.get(address);
-		if (list == null) {
-			list = new ArrayList<>(1);
-			conflicts.put(address, list);
-		}
-		list.add(new EquateConflict(address, opIndex, scalar));
+        ArrayList<EquateConflict> list = conflicts.computeIfAbsent(address, k -> new ArrayList<>(1));
+        list.add(new EquateConflict(address, opIndex, scalar));
 		conflictSet.addRange(address, address);
 	}
 

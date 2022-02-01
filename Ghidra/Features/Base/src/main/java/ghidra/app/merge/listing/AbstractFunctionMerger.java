@@ -404,8 +404,7 @@ abstract class AbstractFunctionMerger implements ListingMergeConstants {
 			throws CancelledException {
 		monitor.checkCanceled();
 		boolean isExternalFunction = (functions[LATEST] != null) ? functions[LATEST].isExternal()
-				: ((functions[MY] != null) ? functions[MY].isExternal()
-						: functions[ORIGINAL].isExternal());
+				: (functions[functions[MY] != null ? MY : ORIGINAL].isExternal());
 
 		int functionConflictFlags = 0;
 
@@ -506,8 +505,7 @@ abstract class AbstractFunctionMerger implements ListingMergeConstants {
 			throws CancelledException {
 		monitor.checkCanceled();
 		Address entry = (functions[LATEST] != null) ? functions[LATEST].getEntryPoint()
-				: ((functions[MY] != null) ? functions[MY].getEntryPoint()
-						: functions[ORIGINAL].getEntryPoint());
+				: (functions[functions[MY] != null ? MY : ORIGINAL].getEntryPoint());
 		boolean latestChangedParamSig = !isSameParamSig(functions[ORIGINAL], functions[LATEST]);
 		boolean myChangedParamSig = !isSameParamSig(functions[ORIGINAL], functions[MY]);
 		boolean latestChangedParamInfo = !isSameParamInfo(functions[ORIGINAL], functions[LATEST]);
@@ -556,8 +554,7 @@ abstract class AbstractFunctionMerger implements ListingMergeConstants {
 	protected boolean determineReturnConflict(Function[] functions, boolean autoMerge,
 			TaskMonitor monitor) {
 		Address entry = (functions[LATEST] != null) ? functions[LATEST].getEntryPoint()
-				: ((functions[MY] != null) ? functions[MY].getEntryPoint()
-						: functions[ORIGINAL].getEntryPoint());
+				: (functions[functions[MY] != null ? MY : ORIGINAL].getEntryPoint());
 
 		try {
 			int conflicts = funcConflicts.get(entry);
@@ -616,8 +613,7 @@ abstract class AbstractFunctionMerger implements ListingMergeConstants {
 			boolean autoMerge, TaskMonitor monitor) {
 		ArrayList<ParamInfoConflict> paramConflictList = null;
 		Address entry = (functions[LATEST] != null) ? functions[LATEST].getEntryPoint()
-				: ((functions[MY] != null) ? functions[MY].getEntryPoint()
-						: functions[ORIGINAL].getEntryPoint());
+				: (functions[functions[MY] != null ? MY : ORIGINAL].getEntryPoint());
 
 		// TODO: How should we deal with auto-params which are immutable ??
 		// assume we are only here is LATEST and MY have "same" sig/storage which for 
@@ -1061,8 +1057,7 @@ abstract class AbstractFunctionMerger implements ListingMergeConstants {
 		monitor.checkCanceled();
 		ArrayList<LocalVariableConflict> varConflictList = null;
 		Address entry = (functions[LATEST] != null) ? functions[LATEST].getEntryPoint()
-				: ((functions[MY] != null) ? functions[MY].getEntryPoint()
-						: functions[ORIGINAL].getEntryPoint());
+				: (functions[functions[MY] != null ? MY : ORIGINAL].getEntryPoint());
 		Variable[] origLocals =
 			(functions[ORIGINAL] != null) ? functions[ORIGINAL].getLocalVariables()
 					: new Variable[0];

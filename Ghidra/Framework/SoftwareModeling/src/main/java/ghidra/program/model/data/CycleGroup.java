@@ -30,11 +30,7 @@ public class CycleGroup {
 	public static final List<CycleGroup> ALL_CYCLE_GROUPS = createCycleGroups();
 
 	private static List<CycleGroup> createCycleGroups() {
-		List<CycleGroup> list = new ArrayList<>();
-		list.add(BYTE_CYCLE_GROUP);
-		list.add(FLOAT_CYCLE_GROUP);
-		list.add(STRING_CYCLE_GROUP);
-		return Collections.unmodifiableList(list);
+        return List.of(BYTE_CYCLE_GROUP, FLOAT_CYCLE_GROUP, STRING_CYCLE_GROUP);
 	}
 
 	private String name;
