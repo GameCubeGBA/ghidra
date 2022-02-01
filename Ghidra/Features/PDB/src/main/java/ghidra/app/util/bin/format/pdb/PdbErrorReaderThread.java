@@ -46,7 +46,7 @@ class PdbErrorReaderThread extends Thread {
 	@Override
 	public void run() {
 		try (BufferedReader reader = new BufferedReader(new InputStreamReader(err))) {
-			String line = null;
+			String line;
 			while ((line = reader.readLine()) != null) {
 				errbuf.append(line);
 				errbuf.append('\n');

@@ -258,7 +258,7 @@ public class DBTraceCodeSpace implements TraceCodeSpace, DBTraceSpaceBased {
 			}
 			if (unit instanceof DBTraceData) {
 				DBTraceData dataUnit = (DBTraceData) unit;
-				boolean reApply = false;
+				boolean reApply;
 				DataType dataType = dataUnit.getDataType();
 				if (dataType instanceof Dynamic) {
 					Dynamic ddt = (Dynamic) dataType;

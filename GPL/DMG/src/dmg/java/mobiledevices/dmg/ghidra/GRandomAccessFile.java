@@ -141,7 +141,6 @@ public class GRandomAccessFile {
 			if (pos < bufferFileStartIndex || pos >= bufferFileStartIndex + BUFFER_SIZE) {
 				// not in either, gotta get a new one
 				buffer = EMPTY;
-				bufferOffset = 0;
 				bufferFileStartIndex = pos;
 			}
 		}
@@ -187,8 +186,8 @@ public class GRandomAccessFile {
 	 * is available.
 	 * 
 	 * @param      b     the buffer into which the data is read.
-	 * @param      off   the start offset of the data.
-	 * @param      len   the maximum number of bytes read.
+	 * @param      offset   the start offset of the data.
+	 * @param      length   the maximum number of bytes read.
 	 * @return     the total number of bytes read into the buffer, or
 	 *             {@code -1} if there is no more data because the end of
 	 *             the file has been reached.

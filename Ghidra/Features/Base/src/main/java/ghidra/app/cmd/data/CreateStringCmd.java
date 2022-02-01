@@ -30,7 +30,7 @@ import ghidra.program.model.util.CodeUnitInsertionException;
 public class CreateStringCmd implements Command {
 	private final Address addr;
 	private final AbstractStringDataType stringDataType;
-	private int length = -1;
+	private int length;
 	private ClearDataMode clearMode;
 	private String msg;
 

@@ -518,11 +518,9 @@ public class DbgManagerImpl implements DbgManager {
 			state.set(newState, evt.getCause());
 		}
 
-		boolean cmdFinished = false;
 		List<DbgPendingCommand<?>> toRemove = new ArrayList<DbgPendingCommand<?>>();
 		for (DbgPendingCommand<?> pcmd : activeCmds) {
-			cmdFinished = pcmd.handle(evt);
-			if (cmdFinished) {
+			if (pcmd.handle(evt)) {
 				pcmd.finish();
 				toRemove.add(pcmd);
 			}
