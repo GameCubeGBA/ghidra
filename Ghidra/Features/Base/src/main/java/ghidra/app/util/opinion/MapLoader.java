@@ -93,7 +93,7 @@ public class MapLoader extends AbstractLibrarySupportLoader {
 						break;
 					}
 				}
-				else if (line.indexOf("Publics by Value") != -1) {
+				else if (line.contains("Publics by Value")) {
 					hasExports = true;
 				}
 			}

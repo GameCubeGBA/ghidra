@@ -672,8 +672,8 @@ public class DataTypeWriter {
 		}
 		boolean containsIntegralModifier = false;
 		for (String modifier : INTEGRAL_MODIFIERS) {
-			if (typedefName.indexOf(modifier + " ") >= 0 ||
-				typedefName.indexOf(" " + modifier) >= 0) {
+			if (typedefName.contains(modifier + " ") ||
+                    typedefName.contains(" " + modifier)) {
 				return true;
 			}
 		}

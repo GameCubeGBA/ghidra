@@ -938,7 +938,7 @@ public class StringUtilities {
 	 * @return The updated string.
 	 */
 	public static String fixMultipleAsterisks(String value) {
-		if (value.indexOf("**") < 0) {
+		if (!value.contains("**")) {
 			return value;
 		}
 

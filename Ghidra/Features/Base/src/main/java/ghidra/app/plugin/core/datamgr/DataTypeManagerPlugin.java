@@ -434,7 +434,7 @@ public class DataTypeManagerPlugin extends ProgramPlugin
 				.findFilesByExtensionInApplication(FileDataTypeManager.SUFFIX)) {
 			Path path = new Path(archiveFile);
 			String absoluteFilePath = path.getPathAsString();
-			if (absoluteFilePath.indexOf("data/typeinfo") < 0) {
+			if (!absoluteFilePath.contains("data/typeinfo")) {
 				continue;
 			}
 			RecentlyOpenedArchiveAction action = new RecentlyOpenedArchiveAction(this,

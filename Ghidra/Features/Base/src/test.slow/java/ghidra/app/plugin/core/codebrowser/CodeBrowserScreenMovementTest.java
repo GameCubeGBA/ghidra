@@ -799,9 +799,9 @@ public class CodeBrowserScreenMovementTest extends AbstractProgramBasedTest {
             if (!name.startsWith("Format Code")) {
                 continue;
             }
-            if (name.indexOf("Show ") >= 0 || name.indexOf("Flag ") >= 0) {
+            if (name.contains("Show ") || name.contains("Flag ")) {
                 fieldOptions.setBoolean(name, false);
-            } else if (name.indexOf("Lines") >= 0) {
+            } else if (name.contains("Lines")) {
                 fieldOptions.setInt(name, 0);
             }
         }

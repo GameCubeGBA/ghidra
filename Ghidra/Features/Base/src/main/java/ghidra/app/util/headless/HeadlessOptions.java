@@ -164,7 +164,7 @@ public class HeadlessOptions {
 	public void setRunScriptsNoImport(boolean runScriptsOnly, String filename) {
 		if (filename != null) {
 			filename = filename.trim();
-			if (filename.indexOf("/") >= 0) {
+			if (filename.contains("/")) {
 				throw new IllegalArgumentException("invalid filename specified");
 			}
 		}
