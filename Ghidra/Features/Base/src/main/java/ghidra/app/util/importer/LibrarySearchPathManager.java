@@ -86,14 +86,12 @@ public class LibrarySearchPathManager {
 	/**
 	 * Adds the specified path to the end of the path search list.
 	 * @param path the path to add
-	 * @return true if the path was appended, false if the path was a duplicate
 	 */
-	public static boolean addPath(String path) {
+	public static void addPath(String path) {
 		if (pathList.contains(path)) {
-			return false;
+			return;
 		}
 		pathList.add(path);
-		return true;
 	}
 
 	/**
@@ -107,18 +105,6 @@ public class LibrarySearchPathManager {
 		}
 		pathList.add(index, path);
 		return true;
-	}
-
-	/**
-	 * Removes the path from the path search list.
-	 * @param path the path the remove
-	 * @return true if the path was removed, false if the path did not exist
-	 */
-	public static boolean removePath(String path) {
-		if (path.equals(CURRENT_DIRECTORY)) {
-			return false;
-		}
-		return pathList.remove(path);
 	}
 
 	/**
