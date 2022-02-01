@@ -182,7 +182,7 @@ public class ApplyFidEntriesCommand extends BackgroundCommand {
 			}
 		}
 		if (iterator.hasNext()) {
-			buffer.append("  " + nameAnalysis.numNames() + " names - too many to list\n");
+			buffer.append("  ").append(nameAnalysis.numNames()).append(" names - too many to list\n");
 		}
 
 		return buffer.toString();
@@ -211,7 +211,7 @@ public class ApplyFidEntriesCommand extends BackgroundCommand {
 			}
 		}
 		else {
-			buffer.append(nameAnalysis.numLibraries() + " - too many to list");
+			buffer.append(nameAnalysis.numLibraries()).append(" - too many to list");
 		}
 
 		return buffer.toString();

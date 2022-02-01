@@ -667,7 +667,7 @@ public class Constructor {
 	// for use in error messages
 	public void printInfo(PrintStream s) {
 		s.append("table \"").append(parent.getName());
-		s.append("\" constructor " + detailedName() + "from " + location);
+		s.append("\" constructor ").append(detailedName()).append("from ").append(String.valueOf(location));
 	}
 
 	@Override

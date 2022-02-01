@@ -504,8 +504,7 @@ public class DataTypeMergeManager implements MergeResolver {
 				DataTypeManager dtm = info.getDataTypeManager();
 				DataType dt = dtm.getDataType(info.id);
 				DataType compDt = dtm.getDataType(info.compID);
-				sb.append("  Data type name " + dt.getName() + ", component " +
-					compDt.getDisplayName() + "\n");
+				sb.append("  Data type name ").append(dt.getName()).append(", component ").append(compDt.getDisplayName()).append("\n");
 			}
 			showMessage("Unresolved Data Types and Components", sb.toString());
 		}

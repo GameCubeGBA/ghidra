@@ -439,7 +439,7 @@ public class DemangledFunction extends DemangledObject {
 		FunctionDefinitionDataType signature = new FunctionDefinitionDataType(function, true);
 
 		List<ParameterDefinitionImpl> args = convertMangledToParamDef(program);
-		signature.setArguments(args.toArray(new ParameterDefinition[args.size()]));
+		signature.setArguments(args.toArray(new ParameterDefinition[0]));
 		if (hasVarArgs()) {
 			signature.setVarArgs(true);
 		}

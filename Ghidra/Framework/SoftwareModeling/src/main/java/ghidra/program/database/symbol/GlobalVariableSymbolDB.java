@@ -99,7 +99,7 @@ public class GlobalVariableSymbolDB extends VariableSymbolDB {
 			}
 			else {
 				Address addr = v.getAddress();
-				buffy.append(addr.getAddressSpace().getName() + Long.toHexString(addr.getOffset()));
+				buffy.append(addr.getAddressSpace().getName()).append(Long.toHexString(addr.getOffset()));
 			}
 		}
 		return buffy.toString();

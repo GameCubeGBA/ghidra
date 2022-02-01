@@ -95,16 +95,16 @@ public class FunctionComparisonProvider extends ComponentProviderAdapter
 		StringBuilder buff = new StringBuilder();
 		buff.append("FunctionComparisonProvider\n");
 		buff.append("Name: ");
-		buff.append(getName() + "\n");
+		buff.append(getName()).append("\n");
 		buff.append("Tab Text: ");
-		buff.append(getTabText() + "\n");
+		buff.append(getTabText()).append("\n");
 		Function leftFunction = functionComparisonPanel.getLeftFunction();
 		String leftName = (leftFunction != null) ? leftFunction.getName() : "No Function";
-		buff.append("Function 1: " + leftName + "\n");
+		buff.append("Function 1: ").append(leftName).append("\n");
 		Function rightFunction = functionComparisonPanel.getRightFunction();
 		String rightName = (rightFunction != null) ? rightFunction.getName() : "No Function";
-		buff.append("Function 2: " + rightName + "\n");
-		buff.append("tool = " + tool + "\n");
+		buff.append("Function 2: ").append(rightName).append("\n");
+		buff.append("tool = ").append(tool).append("\n");
 		return buff.toString();
 	}
 

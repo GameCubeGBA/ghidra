@@ -116,11 +116,11 @@ public class MemoryTypeProgramLocationBasedTableColumn
 
 			if (block.isVolatile()) {
 				buffy.append("<b>V</b>");
-				tooltipBuffy.append("<image src=\"" + onIcon.getDescription() + "\">");
+				tooltipBuffy.append("<image src=\"").append(onIcon.getDescription()).append("\">");
 			}
 			else {
 				buffy.append(HTMLUtilities.colorString(disabledColor, "V"));
-				tooltipBuffy.append("<image src=\"" + offIcon.getDescription() + "\">");
+				tooltipBuffy.append("<image src=\"").append(offIcon.getDescription()).append("\">");
 			}
 
 			tooltipBuffy.append(HTMLUtilities.spaces(2)).append("Volatile<br>");
@@ -131,11 +131,11 @@ public class MemoryTypeProgramLocationBasedTableColumn
 
 			if (block.isExecute()) {
 				buffy.append("<b>E</b>");
-				tooltipBuffy.append("<image src=\"" + onIcon.getDescription() + "\">");
+				tooltipBuffy.append("<image src=\"").append(onIcon.getDescription()).append("\">");
 			}
 			else {
 				buffy.append(HTMLUtilities.colorString(disabledColor, "E"));
-				tooltipBuffy.append("<image src=\"" + offIcon.getDescription() + "\">");
+				tooltipBuffy.append("<image src=\"").append(offIcon.getDescription()).append("\">");
 			}
 			tooltipBuffy.append(HTMLUtilities.spaces(2)).append("Execute<br>");
 		}
@@ -145,11 +145,11 @@ public class MemoryTypeProgramLocationBasedTableColumn
 
 			if (block.isWrite()) {
 				buffy.append("<b>W</b>");
-				tooltipBuffy.append("<image src=\"" + onIcon.getDescription() + "\">");
+				tooltipBuffy.append("<image src=\"").append(onIcon.getDescription()).append("\">");
 			}
 			else {
 				buffy.append(HTMLUtilities.colorString(disabledColor, "W"));
-				tooltipBuffy.append("<image src=\"" + offIcon.getDescription() + "\">");
+				tooltipBuffy.append("<image src=\"").append(offIcon.getDescription()).append("\">");
 			}
 			tooltipBuffy.append(HTMLUtilities.spaces(2)).append("Write<br>");
 		}
@@ -159,11 +159,11 @@ public class MemoryTypeProgramLocationBasedTableColumn
 
 			if (block.isRead()) {
 				buffy.append("<b>R</b>");
-				tooltipBuffy.append("<image src=\"" + onIcon.getDescription() + "\">");
+				tooltipBuffy.append("<image src=\"").append(onIcon.getDescription()).append("\">");
 			}
 			else {
 				buffy.append(HTMLUtilities.colorString(disabledColor, "R"));
-				tooltipBuffy.append("<image src=\"" + offIcon.getDescription() + "\">");
+				tooltipBuffy.append("<image src=\"").append(offIcon.getDescription()).append("\">");
 			}
 			tooltipBuffy.append(HTMLUtilities.spaces(2)).append("Read<br>");
 		}

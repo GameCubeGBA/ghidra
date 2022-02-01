@@ -222,7 +222,7 @@ class EquateMerger extends AbstractListingMerger {
 				}
 			}
 		}
-		return list.toArray(new Scalar[list.size()]);
+		return list.toArray(new Scalar[0]);
 	}
 
 	/**

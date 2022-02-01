@@ -143,10 +143,10 @@ public class DecompilerScriptUtils {
 		FunctionPrototype functionPrototype = highFunction.getFunctionPrototype();
 
 		if (includeReturn) {
-			stringBuffer.append(functionPrototype.getReturnType().getDisplayName() + " ");
+			stringBuffer.append(functionPrototype.getReturnType().getDisplayName()).append(" ");
 		}
 
-		stringBuffer.append(function.getName() + "(");
+		stringBuffer.append(function.getName()).append("(");
 		ParameterDefinition[] parameterDefinitions = functionPrototype.getParameterDefinitions();
 
 		if (parameterDefinitions == null) {
@@ -162,7 +162,7 @@ public class DecompilerScriptUtils {
 					continue;
 				}
 
-				stringBuffer.append(param.getDataType().getDisplayName() + " " + param.getName());
+				stringBuffer.append(param.getDataType().getDisplayName()).append(" ").append(param.getName());
 
 				if (i == paramCount) {
 					stringBuffer.append(");");

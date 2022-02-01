@@ -150,23 +150,20 @@ public class C11Lines {
 	String dump() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Lines-------------------------------------------------------\n");
-		builder.append("cFile: " + cFile + " cSeg: " + cSeg + "\n");
+		builder.append("cFile: ").append(cFile).append(" cSeg: ").append(cSeg).append("\n");
 		for (int i = 0; i < cFile; i++) {
-			builder.append("baseSrcFile[" + i + "]: " + baseSrcFile.get(i) + "\n");
+			builder.append("baseSrcFile[").append(i).append("]: ").append(baseSrcFile.get(i)).append("\n");
 		}
 		for (int i = 0; i < cSeg; i++) {
-			builder.append(i + ": start:" + startEnd.get(i).getStart() + " end: " +
-				startEnd.get(i).getEnd() + " seg: " + seg.get(i) + "\n");
+			builder.append(i).append(": start:").append(startEnd.get(i).getStart()).append(" end: ").append(startEnd.get(i).getEnd()).append(" seg: ").append(seg.get(i)).append("\n");
 		}
 		for (int i = 0; i < cFile; i++) {
-			builder.append(
-				"  file[" + i + "]: cSeg: " + ccSegs.get(i) + " name: " + names.get(i) + "\n");
+			builder.append("  file[").append(i).append("]: cSeg: ").append(ccSegs.get(i)).append(" name: ").append(names.get(i)).append("\n");
 			List<Integer> myBaseSrcLn = baseSrcLines.get(i);
 			List<StartEnd> myStartEnds = startEnds.get(i);
 			for (int j = 0; j < ccSegs.get(i); j++) {
 				StartEnd se = myStartEnds.get(j);
-				builder.append("  " + j + ": baseSrcLn: " + myBaseSrcLn.get(j) + " start: " +
-					se.getStart() + " end: " + se.getEnd() + "\n");
+				builder.append("  ").append(j).append(": baseSrcLn: ").append(myBaseSrcLn.get(j)).append(" start: ").append(se.getStart()).append(" end: ").append(se.getEnd()).append("\n");
 			}
 			List<Integer> segNums = segmentNumbers.get(i);
 			List<List<Long>> fileSegOffsets = offsets.get(i);
@@ -174,10 +171,9 @@ public class C11Lines {
 			for (int j = 0; j < fileSegOffsets.size(); j++) {
 				List<Long> segOffsets = fileSegOffsets.get(j);
 				List<Integer> segLineNums = fileSegLineNums.get(j);
-				builder.append("  seg[" + j + "]: Seg: " + segNums.get(j) + " cPair: " +
-					segOffsets.size() + "\n");
+				builder.append("  seg[").append(j).append("]: Seg: ").append(segNums.get(j)).append(" cPair: ").append(segOffsets.size()).append("\n");
 				for (int k = 0; k < segOffsets.size(); k++) {
-					builder.append("  " + segLineNums.get(k) + ":" + segOffsets.get(k) + "\n");
+					builder.append("  ").append(segLineNums.get(k)).append(":").append(segOffsets.get(k)).append("\n");
 				}
 			}
 		}

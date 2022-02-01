@@ -921,7 +921,7 @@ public class FormatManager implements OptionsChangeListener {
 				}
 			}
 
-			return list.toArray(new Highlight[list.size()]);
+			return list.toArray(new Highlight[0]);
 		}
 
 		List<HighlightProvider> getHighlightProviders() {

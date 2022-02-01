@@ -432,7 +432,7 @@ public class ListingPanel extends JPanel implements FieldMouseListener, FieldLoc
 	public void addButtonPressedListener(ButtonPressedListener listener) {
 		List<ButtonPressedListener> list = new ArrayList<>(Arrays.asList(buttonListeners));
 		list.add(listener);
-		buttonListeners = list.toArray(new ButtonPressedListener[list.size()]);
+		buttonListeners = list.toArray(new ButtonPressedListener[0]);
 	}
 
 	/**
@@ -443,7 +443,7 @@ public class ListingPanel extends JPanel implements FieldMouseListener, FieldLoc
 	public void removeButtonPressedListener(ButtonPressedListener listener) {
 		List<ButtonPressedListener> list = new ArrayList<>(Arrays.asList(buttonListeners));
 		list.remove(listener);
-		buttonListeners = list.toArray(new ButtonPressedListener[list.size()]);
+		buttonListeners = list.toArray(new ButtonPressedListener[0]);
 	}
 
 	/**

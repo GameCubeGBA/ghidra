@@ -200,7 +200,7 @@ class ReferenceLineDispenser extends AbstractLineDispenser {
 			//does memory contain this address? if so, then hyperlink it
 			boolean isInMem = memory.contains(all[i]);
 			if (isHTML && isInMem) {
-				buf.append("<A HREF=\"#" + getUniqueAddressString(all[i]) + "\">");
+				buf.append("<A HREF=\"#").append(getUniqueAddressString(all[i])).append("\">");
 			}
 			buf.append(all[i].toString());
 			if (isHTML && isInMem) {

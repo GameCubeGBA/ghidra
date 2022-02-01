@@ -106,7 +106,7 @@ class PluginManager {
 				badList.add(className);
 			}
 		}
-		Plugin[] pluginArray = list.toArray(new Plugin[list.size()]);
+		Plugin[] pluginArray = list.toArray(new Plugin[0]);
 		try {
 			addPlugins(pluginArray);
 		}
@@ -157,9 +157,9 @@ class PluginManager {
 		if (!unresolvedDependencySet.isEmpty()) {
 			for (Class<?> dependency : unresolvedDependencySet) {
 				PluginException cause = dependencyProblemResults.get(dependency);
-				errMsg.append("Unresolved dependency: " + dependency.getName() + "\n");
+				errMsg.append("Unresolved dependency: ").append(dependency.getName()).append("\n");
 				if (cause != null) {
-					errMsg.append("Reason: " + cause.getMessage() + "\n");
+					errMsg.append("Reason: ").append(cause.getMessage()).append("\n");
 				}
 				errMsg.append("\n");
 				report.addCause(new PluginException("Unresolved dependency: " + dependency, cause));
@@ -178,7 +178,7 @@ class PluginManager {
 			}
 			catch (Throwable t) {
 				Msg.error(this, "Unexpected Exception: " + t.getMessage(), t);
-				errMsg.append("Initializing " + p.getName() + " failed: " + t + "\n");
+				errMsg.append("Initializing ").append(p.getName()).append(" failed: ").append(t).append("\n");
 				report.addCause(t);
 
 				badList.add(p); // remove plugin from the tool
@@ -509,7 +509,7 @@ class PluginManager {
 			p.readConfigState(ss);
 		}
 		catch (Exception e) {
-			errMsg.append("Problem restoring plugin state for: " + p.getName()).append("\n\n");
+			errMsg.append("Problem restoring plugin state for: ").append(p.getName()).append("\n\n");
 			errMsg.append(e.getClass().getName()).append(": ").append(e.getMessage()).append('\n');
 			StackTraceElement[] st = e.getStackTrace();
 			int depth = Math.min(5, st.length); // only show the important stuff (magic guess)

@@ -244,7 +244,7 @@ public interface DBTraceCodeUnitAdapter extends TraceCodeUnit, MemBufferAdapter 
 						.labelsAndFunctions()
 						.getAt(getStartSnap(), getThread(),
 							getAddress(), true);
-			return at.toArray(new TraceSymbol[at.size()]);
+			return at.toArray(new TraceSymbol[0]);
 		}
 	}
 
@@ -364,7 +364,7 @@ public interface DBTraceCodeUnitAdapter extends TraceCodeUnit, MemBufferAdapter 
 	default DBTraceReference[] getOperandReferences(int index) {
 		Collection<? extends TraceReference> refs =
 			getTrace().getReferenceManager().getReferencesFrom(getStartSnap(), getAddress(), index);
-		return refs.toArray(new DBTraceReference[refs.size()]);
+		return refs.toArray(new DBTraceReference[0]);
 	}
 
 	@Override
@@ -378,7 +378,7 @@ public interface DBTraceCodeUnitAdapter extends TraceCodeUnit, MemBufferAdapter 
 	default DBTraceReference[] getReferencesFrom() {
 		Collection<? extends TraceReference> refs =
 			getTrace().getReferenceManager().getReferencesFrom(getStartSnap(), getAddress());
-		return refs.toArray(new DBTraceReference[refs.size()]);
+		return refs.toArray(new DBTraceReference[0]);
 	}
 
 	@Override

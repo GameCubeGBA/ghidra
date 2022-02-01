@@ -172,7 +172,7 @@ class MultiProgramManager implements DomainObjectListener, TransactionListener {
 				.map(info -> info.program)
 				.filter(program -> program != currentProgram)
 				.collect(Collectors.toList());
-		return list.toArray(new Program[list.size()]);
+		return list.toArray(new Program[0]);
 	}
 
 	Program[] getAllPrograms() {

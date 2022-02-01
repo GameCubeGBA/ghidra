@@ -196,53 +196,39 @@ public class ISO9660VolumeDescriptor extends ISO9660BaseVolume {
 	public String toString() {
 		StringBuilder buff = new StringBuilder();
 
-		buff.append("Type Code: 0x" + Integer.toHexString(super.getTypeCode()) + " => " +
-			getTypeCodeString() + "\n");
-		buff.append("Standard Identifier: " + new String(super.getIdentifier()).trim() + "\n");
-		buff.append("Version: 0x" + Integer.toHexString(super.getVersion()) + "\n");
-		buff.append("Unused: 0x" + Integer.toHexString(unused) + "\n");
-		buff.append("System Identifier: " + new String(systemIdentifier).trim() + "\n");
-		buff.append("Volume Identifier: " + new String(volumeIdentifier).trim() + "\n");
-		buff.append("Unused Field: 0x" + Long.toHexString(unused2) + "\n");
-		buff.append("Volume Space Size: 0x" + Integer.toHexString(getVolumeSpaceSizeLE()) + "\n");
-		buff.append("Unused: " + new String(unused3).trim() + "\n");
-		buff.append("Volume Set Size: 0x" + Integer.toHexString(getVolumeSetSizeLE()) + "\n");
-		buff.append("Volume Sequence Number: 0x" + Integer.toHexString(getVolumeSeqNumberLE()) +
-			"\n");
-		buff.append("Logical Block Size: 0x" + Integer.toHexString(getLogicalBlockSizeLE()) + "\n");
-		buff.append("Path Table Size: 0x" + Integer.toHexString(getPathTableSizeLE()) + "\n");
-		buff.append("LBA Location of Type-L Path Table: 0x" +
-			Integer.toHexString(typeLPathTableLocation) + "\n");
-		buff.append("LBA Location of Optional Type-L Path Table: 0x" +
-			Integer.toHexString(optionalTypeLPathTableLocation) + "\n");
-		buff.append("LBA Location of Type-M Path Table: 0x" +
-			Integer.toHexString(typeMPathTableLocation) + "\n");
-		buff.append("LBA Location of Optional Type-M Path Table: 0x" +
-			Integer.toHexString(optionalTypeMPathTableLocation) + "\n");
-		buff.append("Calculated Location of Type-L Path Table: 0x" +
-			Integer.toHexString(typeLPathTableLocation * getLogicalBlockSizeLE()) + "\n");
-		buff.append("Calculated Location of Type-M Path Table: 0x" +
-			Integer.toHexString(typeMPathTableLocation * getLogicalBlockSizeBE()) + "\n");
-		buff.append("Directory Entry for Root Directory: \n" + directoryEntry.toString() + "\n");
-		buff.append("Volume Set Identifier: " + new String(volumeSetIdentifier).trim() + "\n");
-		buff.append("Publisher Identifier: " + new String(publisherIdentifier).trim() + "\n");
-		buff.append("Data Preparer Identifier: " + new String(dataPreparerIdentifier).trim() + "\n");
-		buff.append("Application Identifier: " + new String(applicationIdentifier).trim() + "\n");
-		buff.append("Copyright File Identifier: " + new String(copyrightFileIdentifier).trim() +
-			"\n");
-		buff.append("Abstract File Identifier: " + new String(abstractFileIdentifier).trim() + "\n");
-		buff.append("Biliographic File Identifier: " + new String(bibliographicFileIdentifier) +
-			"\n");
-		buff.append("Volume Creation Date/Time: " + createDateTimeString(volumeCreationDateTime) +
-			"\n");
-		buff.append("Volume Modification Date/Time: " + createDateTimeString(volumeModifyDateTime) +
-			"\n");
-		buff.append("Volume Expiration Date/Time: " + createDateTimeString(volumeCreationDateTime) +
-			"\n");
-		buff.append("Volume Effective Date/Time: " + createDateTimeString(volumeEffectiveDateTime) +
-			"\n");
-		buff.append("File Structure Version: 0x" + Integer.toHexString(fileStructureVersion) + "\n");
-		buff.append("Unused: 0x" + Integer.toHexString(unused4) + "\n");
+		buff.append("Type Code: 0x").append(Integer.toHexString(super.getTypeCode())).append(" => ").append(getTypeCodeString()).append("\n");
+		buff.append("Standard Identifier: ").append(new String(super.getIdentifier()).trim()).append("\n");
+		buff.append("Version: 0x").append(Integer.toHexString(super.getVersion())).append("\n");
+		buff.append("Unused: 0x").append(Integer.toHexString(unused)).append("\n");
+		buff.append("System Identifier: ").append(new String(systemIdentifier).trim()).append("\n");
+		buff.append("Volume Identifier: ").append(new String(volumeIdentifier).trim()).append("\n");
+		buff.append("Unused Field: 0x").append(Long.toHexString(unused2)).append("\n");
+		buff.append("Volume Space Size: 0x").append(Integer.toHexString(getVolumeSpaceSizeLE())).append("\n");
+		buff.append("Unused: ").append(new String(unused3).trim()).append("\n");
+		buff.append("Volume Set Size: 0x").append(Integer.toHexString(getVolumeSetSizeLE())).append("\n");
+		buff.append("Volume Sequence Number: 0x").append(Integer.toHexString(getVolumeSeqNumberLE())).append("\n");
+		buff.append("Logical Block Size: 0x").append(Integer.toHexString(getLogicalBlockSizeLE())).append("\n");
+		buff.append("Path Table Size: 0x").append(Integer.toHexString(getPathTableSizeLE())).append("\n");
+		buff.append("LBA Location of Type-L Path Table: 0x").append(Integer.toHexString(typeLPathTableLocation)).append("\n");
+		buff.append("LBA Location of Optional Type-L Path Table: 0x").append(Integer.toHexString(optionalTypeLPathTableLocation)).append("\n");
+		buff.append("LBA Location of Type-M Path Table: 0x").append(Integer.toHexString(typeMPathTableLocation)).append("\n");
+		buff.append("LBA Location of Optional Type-M Path Table: 0x").append(Integer.toHexString(optionalTypeMPathTableLocation)).append("\n");
+		buff.append("Calculated Location of Type-L Path Table: 0x").append(Integer.toHexString(typeLPathTableLocation * getLogicalBlockSizeLE())).append("\n");
+		buff.append("Calculated Location of Type-M Path Table: 0x").append(Integer.toHexString(typeMPathTableLocation * getLogicalBlockSizeBE())).append("\n");
+		buff.append("Directory Entry for Root Directory: \n").append(directoryEntry.toString()).append("\n");
+		buff.append("Volume Set Identifier: ").append(new String(volumeSetIdentifier).trim()).append("\n");
+		buff.append("Publisher Identifier: ").append(new String(publisherIdentifier).trim()).append("\n");
+		buff.append("Data Preparer Identifier: ").append(new String(dataPreparerIdentifier).trim()).append("\n");
+		buff.append("Application Identifier: ").append(new String(applicationIdentifier).trim()).append("\n");
+		buff.append("Copyright File Identifier: ").append(new String(copyrightFileIdentifier).trim()).append("\n");
+		buff.append("Abstract File Identifier: ").append(new String(abstractFileIdentifier).trim()).append("\n");
+		buff.append("Biliographic File Identifier: ").append(new String(bibliographicFileIdentifier)).append("\n");
+		buff.append("Volume Creation Date/Time: ").append(createDateTimeString(volumeCreationDateTime)).append("\n");
+		buff.append("Volume Modification Date/Time: ").append(createDateTimeString(volumeModifyDateTime)).append("\n");
+		buff.append("Volume Expiration Date/Time: ").append(createDateTimeString(volumeCreationDateTime)).append("\n");
+		buff.append("Volume Effective Date/Time: ").append(createDateTimeString(volumeEffectiveDateTime)).append("\n");
+		buff.append("File Structure Version: 0x").append(Integer.toHexString(fileStructureVersion)).append("\n");
+		buff.append("Unused: 0x").append(Integer.toHexString(unused4)).append("\n");
 
 		return buff.toString();
 	}

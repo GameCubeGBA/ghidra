@@ -707,7 +707,7 @@ class SymbolMerger extends AbstractListingMerger {
 		while (iter.hasNext()) {
 			long id = iter.next().longValue();
 			Symbol s = resultSymTab.getSymbol(id);
-			buf.append(s.getName(true) + "\n");
+			buf.append(s.getName(true)).append("\n");
 		}
 		if (hasSome) {
 			buf.append("\n");
@@ -725,7 +725,7 @@ class SymbolMerger extends AbstractListingMerger {
 		while (iter.hasNext()) {
 			long id = iter.next().longValue();
 			Symbol s = resultSymTab.getSymbol(id);
-			buf.append(s.getName(true) + "\n");
+			buf.append(s.getName(true)).append("\n");
 		}
 		if (hasSome) {
 			buf.append("\n");

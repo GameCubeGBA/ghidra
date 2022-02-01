@@ -220,7 +220,7 @@ public abstract class AbstractDBTraceProgramViewReferenceManager implements Refe
 	@Override
 	public Reference[] getFlowReferencesFrom(Address addr) {
 		Collection<Reference> result = collect(s -> refs.getFlowReferencesFrom(s, addr));
-		return result.toArray(new Reference[result.size()]);
+		return result.toArray(new Reference[0]);
 	}
 
 	@Override
@@ -244,9 +244,7 @@ public abstract class AbstractDBTraceProgramViewReferenceManager implements Refe
 	protected Iterator<Reference> getReferenceIteratorForSnap(long snap, Address startAddr) {
 		AddressIterator addresses =
 			refs.getReferenceSources(Range.singleton(snap)).getAddresses(startAddr, true);
-		return NestedIterator.start(addresses, a -> {
-			return refs.getReferencesFrom(snap, a).iterator();
-		});
+		return NestedIterator.start(addresses, a -> refs.getReferencesFrom(snap, a).iterator());
 	}
 
 	@Override
@@ -271,13 +269,13 @@ public abstract class AbstractDBTraceProgramViewReferenceManager implements Refe
 	@Override
 	public Reference[] getReferencesFrom(Address addr) {
 		Collection<Reference> result = collect(s -> refs.getReferencesFrom(s, addr));
-		return result.toArray(new Reference[result.size()]);
+		return result.toArray(new Reference[0]);
 	}
 
 	@Override
 	public Reference[] getReferencesFrom(Address fromAddr, int opIndex) {
 		Collection<Reference> result = collect(s -> refs.getReferencesFrom(s, fromAddr, opIndex));
-		return result.toArray(new Reference[result.size()]);
+		return result.toArray(new Reference[0]);
 	}
 
 	@Override

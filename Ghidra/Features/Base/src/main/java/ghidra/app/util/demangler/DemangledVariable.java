@@ -107,7 +107,7 @@ public class DemangledVariable extends DemangledObject {
 		}
 
 		if ((memberScope != null) && (!memberScope.isEmpty())) {
-			datatypeBuffer.append(spacer).append(memberScope + "::");
+			datatypeBuffer.append(spacer).append(memberScope).append("::");
 			spacer = SPACE;
 		}
 

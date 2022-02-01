@@ -133,23 +133,19 @@ public class ISO9660Directory implements StructConverter {
 	public String toString() {
 		StringBuilder buff = new StringBuilder();
 
-		buff.append("Directory Record Length: 0x" + Integer.toHexString(directoryRecordLength) +
-			"\n");
-		buff.append("Extended Attribute Record Length: 0x" +
-			Integer.toHexString(extendedAttributeRecordLen) + "\n");
-		buff.append("Extent Location: 0x" + Integer.toHexString(getLocationOfExtentLE()) + "\n");
-		buff.append("Data Length: 0x" + Integer.toHexString(getDataLengthLE()) + "\n");
-		buff.append("Recording Date/Time: " + createDateTimeString(recordingDateTime) + "\n");
-		buff.append(getFileFlagString() + "\n");
-		buff.append("File Unit Size Interleaved Mode: 0x" + Integer.toHexString(fileUnitSize) +
-			"\n");
-		buff.append("Interleave Gap Size: 0x" + Integer.toHexString(interleaveGapSize) + "\n");
-		buff.append("Volume Sequence Number: 0x" +
-			Integer.toHexString(getVolumeSequenceNumberLE()) + "\n");
-		buff.append("Length of File Identifier: 0x" + Integer.toHexString(fileIdentLength) + "\n");
-		buff.append("File Identifier: " + new String(fileIdentifier).trim() + "\n");
+		buff.append("Directory Record Length: 0x").append(Integer.toHexString(directoryRecordLength)).append("\n");
+		buff.append("Extended Attribute Record Length: 0x").append(Integer.toHexString(extendedAttributeRecordLen)).append("\n");
+		buff.append("Extent Location: 0x").append(Integer.toHexString(getLocationOfExtentLE())).append("\n");
+		buff.append("Data Length: 0x").append(Integer.toHexString(getDataLengthLE())).append("\n");
+		buff.append("Recording Date/Time: ").append(createDateTimeString(recordingDateTime)).append("\n");
+		buff.append(getFileFlagString()).append("\n");
+		buff.append("File Unit Size Interleaved Mode: 0x").append(Integer.toHexString(fileUnitSize)).append("\n");
+		buff.append("Interleave Gap Size: 0x").append(Integer.toHexString(interleaveGapSize)).append("\n");
+		buff.append("Volume Sequence Number: 0x").append(Integer.toHexString(getVolumeSequenceNumberLE())).append("\n");
+		buff.append("Length of File Identifier: 0x").append(Integer.toHexString(fileIdentLength)).append("\n");
+		buff.append("File Identifier: ").append(new String(fileIdentifier).trim()).append("\n");
 		if (paddingFieldPresent) {
-			buff.append("Padding Field: 0x" + Integer.toHexString(paddingField) + "\n");
+			buff.append("Padding Field: 0x").append(Integer.toHexString(paddingField)).append("\n");
 		}
 
 		return buff.toString();

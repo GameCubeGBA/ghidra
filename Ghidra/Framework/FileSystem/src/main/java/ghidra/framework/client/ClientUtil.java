@@ -269,8 +269,7 @@ public class ClientUtil {
 
 		final StringBuilder sb = new StringBuilder();
 		if (mustRetry) {
-			sb.append("The " + operation +
-				" may have failed due to a lost connection with the Ghidra Server.\n");
+			sb.append("The ").append(operation).append(" may have failed due to a lost connection with the Ghidra Server.\n");
 			sb.append(
 				"You may have to retry the operation after you have reconnected to the server.");
 		}

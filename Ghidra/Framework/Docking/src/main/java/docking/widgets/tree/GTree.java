@@ -426,7 +426,7 @@ public class GTree extends JPanel implements BusyListener {
 	}
 
 	public void expandPaths(List<TreePath> pathsList) {
-		TreePath[] treePaths = pathsList.toArray(new TreePath[pathsList.size()]);
+		TreePath[] treePaths = pathsList.toArray(new TreePath[0]);
 		expandPaths(treePaths);
 	}
 
@@ -459,7 +459,7 @@ public class GTree extends JPanel implements BusyListener {
 	}
 
 	public void setSelectionPaths(List<TreePath> pathsList) {
-		TreePath[] treePaths = pathsList.toArray(new TreePath[pathsList.size()]);
+		TreePath[] treePaths = pathsList.toArray(new TreePath[0]);
 		setSelectionPaths(treePaths, EventOrigin.API_GENERATED);
 	}
 
@@ -858,7 +858,7 @@ public class GTree extends JPanel implements BusyListener {
 		if (path != null) {
 			for (Object object : path) {
 				GTreeNode node = (GTreeNode) object;
-				buf.append(node.getName() + "(" + node.hashCode() + ")");
+				buf.append(node.getName()).append("(").append(node.hashCode()).append(")");
 				buf.append(",");
 			}
 		}
@@ -867,7 +867,7 @@ public class GTree extends JPanel implements BusyListener {
 		if (childIndices != null) {
 			buf.append("indices [ ");
 			for (int index : childIndices) {
-				buf.append(Integer.toString(index) + ", ");
+				buf.append(Integer.toString(index)).append(", ");
 			}
 			buf.append("]\n\t");
 		}
@@ -876,7 +876,7 @@ public class GTree extends JPanel implements BusyListener {
 			buf.append("children [ ");
 			for (Object child : children) {
 				GTreeNode node = (GTreeNode) child;
-				buf.append(node.getName() + "(" + node.hashCode() + "), ");
+				buf.append(node.getName()).append("(").append(node.hashCode()).append("), ");
 			}
 			buf.append("]");
 		}

@@ -461,7 +461,7 @@ public class JavaAnalyzer extends AbstractJavaAnalyzer implements AnalysisWorker
 
 		int argNum = 0;
 		for (int i = 0; i < bootstrapMethods[bootstrapIndex].getNumberOfBootstrapArguments(); i++) {
-			sb.append("  static arg " + argNum++ + ": ");
+			sb.append("  static arg ").append(argNum++).append(": ");
 			appendLoadableInfo(sb, constantPool,
 				bootstrapMethods[bootstrapIndex].getBootstrapArgumentsEntry(i));
 			if (argNum < bootstrapMethods[bootstrapIndex].getNumberOfBootstrapArguments()) {
@@ -496,7 +496,7 @@ public class JavaAnalyzer extends AbstractJavaAnalyzer implements AnalysisWorker
 				(ConstantPoolClassInfo) constantPool[methodRef.getClassIndex()];
 			ConstantPoolUtf8Info utf8 =
 				(ConstantPoolUtf8Info) constantPool[classRef.getNameIndex()];
-			sb.append(utf8.getString() + ".");
+			sb.append(utf8.getString()).append(".");
 			ConstantPoolNameAndTypeInfo nameAndType =
 				(ConstantPoolNameAndTypeInfo) constantPool[methodRef.getNameAndTypeIndex()];
 			utf8 = (ConstantPoolUtf8Info) constantPool[nameAndType.getNameIndex()];
@@ -509,7 +509,7 @@ public class JavaAnalyzer extends AbstractJavaAnalyzer implements AnalysisWorker
 				(ConstantPoolClassInfo) constantPool[mrInfo.getClassIndex()];
 			ConstantPoolUtf8Info utf8 =
 				(ConstantPoolUtf8Info) constantPool[classRef.getNameIndex()];
-			sb.append(utf8.getString() + ".");
+			sb.append(utf8.getString()).append(".");
 			ConstantPoolNameAndTypeInfo nameAndType =
 				(ConstantPoolNameAndTypeInfo) constantPool[mrInfo.getNameAndTypeIndex()];
 			utf8 = (ConstantPoolUtf8Info) constantPool[nameAndType.getNameIndex()];
@@ -621,8 +621,8 @@ public class JavaAnalyzer extends AbstractJavaAnalyzer implements AnalysisWorker
 			Address methodAddress = toCpAddr(program, methodInfo.getOffset());
 
 			StringBuilder buffer = new StringBuilder();
-			buffer.append("MethodName = " + methodName.getString() + "\n");
-			buffer.append("MethodDescriptor = " + methodDescriptor.getString() + "\n");
+			buffer.append("MethodName = ").append(methodName.getString()).append("\n");
+			buffer.append("MethodDescriptor = ").append(methodDescriptor.getString()).append("\n");
 
 			CodeAttribute codeAttribute = methodInfo.getCodeAttribute();
 
@@ -640,7 +640,7 @@ public class JavaAnalyzer extends AbstractJavaAnalyzer implements AnalysisWorker
 						ConstantPoolUtf8Info name =
 							(ConstantPoolUtf8Info) constantPool[localVariable.getNameIndex()];
 						String comment = "local: name = " + name + " type = " + descriptor;
-						buffer.append("\t" + comment + "\n");
+						buffer.append("\t").append(comment).append("\n");
 						Address localVariableAddress =
 							toCpAddr(program, localVariableTableOffset + offsetInTable);
 						setEolComment(program, localVariableAddress, comment);
@@ -756,7 +756,7 @@ public class JavaAnalyzer extends AbstractJavaAnalyzer implements AnalysisWorker
 
 		for (MethodsInfoAccessFlags f : MethodsInfoAccessFlags.values()) {
 			if ((flags & f.getValue()) != 0) {
-				sb.append("  " + f.name() + "\n");
+				sb.append("  ").append(f.name()).append("\n");
 			}
 		}
 

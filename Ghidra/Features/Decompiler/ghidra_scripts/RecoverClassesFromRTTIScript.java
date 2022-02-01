@@ -935,9 +935,7 @@ public class RecoverClassesFromRTTIScript extends GhidraScript {
 
                 StringBuffer stringBuffer = new StringBuffer();
 
-                wholeBuffer.append(
-                        getSimpleClassHierarchyString(stringBuffer, recoveredClass).toString() +
-                                "\r\n\r\n");
+                wholeBuffer.append(getSimpleClassHierarchyString(stringBuffer, recoveredClass).toString()).append("\r\n\r\n");
             }
         }
 		println(wholeBuffer.toString());
@@ -961,9 +959,7 @@ public class RecoverClassesFromRTTIScript extends GhidraScript {
             RecoveredClass recoveredClass = aClass;
             if (!recoveredClass.hasChildClass()) {
                 StringBuffer stringBuffer = new StringBuffer();
-                wholeBuffer.append(
-                        getSimpleClassHierarchyString(stringBuffer, recoveredClass).toString() +
-                                "\r\n");
+                wholeBuffer.append(getSimpleClassHierarchyString(stringBuffer, recoveredClass).toString()).append("\r\n");
             }
         }
 		out.append(wholeBuffer);
@@ -1126,7 +1122,7 @@ public class RecoverClassesFromRTTIScript extends GhidraScript {
 		stringBuffer.append("\r\n");
 		stringBuffer.append("\r\n");
 
-		stringBuffer.append("*** Recovered Class:  " + recoveredClass.getName() + "  ***\r\n");
+		stringBuffer.append("*** Recovered Class:  ").append(recoveredClass.getName()).append("  ***\r\n");
 		stringBuffer.append("\r\n");
 
 		// print parent classes
@@ -1136,7 +1132,7 @@ public class RecoverClassesFromRTTIScript extends GhidraScript {
             for (RecoveredClass aClass : keySet) {
                 monitor.checkCanceled();
                 RecoveredClass parent = aClass;
-                stringBuffer.append("\t" + parent.getName() + "\r\n");
+                stringBuffer.append("\t").append(parent.getName()).append("\r\n");
             }
 		}
 
@@ -1147,7 +1143,7 @@ public class RecoverClassesFromRTTIScript extends GhidraScript {
 			List<RecoveredClass> childClasses = recoveredClass.getChildClasses();
             for (RecoveredClass childClass : childClasses) {
                 monitor.checkCanceled();
-                stringBuffer.append("\t" + childClass.getName() + "\r\n");
+                stringBuffer.append("\t").append(childClass.getName()).append("\r\n");
             }
 
 		}
@@ -1169,7 +1165,7 @@ public class RecoverClassesFromRTTIScript extends GhidraScript {
 		stringBuffer.append("\r\n");
 		stringBuffer.append("\r\n");
 
-		stringBuffer.append("*** Recovered Class:  " + recoveredClass.getName() + "  ***\r\n");
+		stringBuffer.append("*** Recovered Class:  ").append(recoveredClass.getName()).append("  ***\r\n");
 		stringBuffer.append("\r\n");
 
 		// print parent classes
@@ -1192,11 +1188,9 @@ public class RecoverClassesFromRTTIScript extends GhidraScript {
 
                     Boolean isVirtualParent = parentToBaseTypeMap.get(ancestor);
                     if (isVirtualParent != null && isVirtualParent) {
-                        stringBuffer.append(
-                                "\t virtual " + ancestor.getName() + "\r\n");
+                        stringBuffer.append("\t virtual ").append(ancestor.getName()).append("\r\n");
                     } else {
-                        stringBuffer.append(
-                                "\t" + ancestor.getName() + "\r\n");
+                        stringBuffer.append("\t").append(ancestor.getName()).append("\r\n");
                     }
                 }
             }
@@ -1213,7 +1207,7 @@ public class RecoverClassesFromRTTIScript extends GhidraScript {
 			List<RecoveredClass> childClasses = recoveredClass.getChildClasses();
             for (RecoveredClass childClass : childClasses) {
                 monitor.checkCanceled();
-                stringBuffer.append("\t" + childClass.getName() + "\r\n");
+                stringBuffer.append("\t").append(childClass.getName()).append("\r\n");
             }
 
 		}
@@ -1354,10 +1348,10 @@ public class RecoverClassesFromRTTIScript extends GhidraScript {
 
 		// if can't get it from decompiler then use the listing one
 		if (includeReturn) {
-			stringBuffer.append(function.getReturnType().getDisplayName() + " ");
+			stringBuffer.append(function.getReturnType().getDisplayName()).append(" ");
 		}
 
-		stringBuffer.append(function.getName() + "(");
+		stringBuffer.append(function.getName()).append("(");
 		int paramCount = function.getParameterCount();
 		int autoParamCount = function.getAutoParameterCount();
 		if (paramCount - autoParamCount <= 0) {
@@ -1367,7 +1361,7 @@ public class RecoverClassesFromRTTIScript extends GhidraScript {
 			for (int i = autoParamCount - 1; i < paramCount; i++) {
 				monitor.checkCanceled();
 				Parameter param = function.getParameter(i);
-				stringBuffer.append(param.getDataType().getDisplayName() + " " + param.getName());
+				stringBuffer.append(param.getDataType().getDisplayName()).append(" ").append(param.getName());
 				if (i == paramCount) {
 					stringBuffer.append(");");
 				}

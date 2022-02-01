@@ -275,7 +275,7 @@ class ParseDialog extends DialogComponentProvider {
 				line = line.trim();
 				if (line.startsWith("-") || (line.isEmpty() && sb.length() > 0)) {
 					// this is a compiler directive
-					sb.append(line + "\n");
+					sb.append(line).append("\n");
 				}
 				else if (!line.isEmpty()) {
 					File f = new File(line);

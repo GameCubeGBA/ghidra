@@ -618,8 +618,7 @@ public class ProgramMerge implements PropertyVisitor {
 					performMergeData((Data) originCodeUnit, byteDiffs, mergeDataBytes);
 				}
 				catch (CodeUnitInsertionException e) {
-					infoMsg.append("Diff/Merge can't apply data from " +
-						originCodeUnit.getMinAddress() + ". " + e.getMessage());
+					infoMsg.append("Diff/Merge can't apply data from ").append(originCodeUnit.getMinAddress()).append(". ").append(e.getMessage());
 				}
 			}
 		}
@@ -697,8 +696,7 @@ public class ProgramMerge implements PropertyVisitor {
 		boolean initializedBytes = (resultBlock != null) ? resultBlock.isInitialized() : false;
 
 		if (!initializedBytes) {
-			infoMsg.append("Diff/Merge can't apply instruction from " + originMin + " to " +
-				resultMin + " since it needs initialized memory");
+			infoMsg.append("Diff/Merge can't apply instruction from ").append(originMin).append(" to ").append(resultMin).append(" since it needs initialized memory");
 			return;
 		}
 
@@ -1002,8 +1000,7 @@ public class ProgramMerge implements PropertyVisitor {
 			}
 			catch (InvalidInputException e) {
 				Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-				errorMsg.append("InvalidInputException re-applying duplicate equates: " +
-					e.getMessage() + "\n");
+				errorMsg.append("InvalidInputException re-applying duplicate equates: ").append(e.getMessage()).append("\n");
 			}
 		}
 	}
@@ -1334,13 +1331,11 @@ public class ProgramMerge implements PropertyVisitor {
 		}
 		catch (InvalidInputException e) {
 			Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-			errorMsg.append(
-				"InvalidInputException updating external location: " + e.getMessage() + "\n");
+			errorMsg.append("InvalidInputException updating external location: ").append(e.getMessage()).append("\n");
 		}
 		catch (DuplicateNameException e) {
 			Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-			errorMsg.append(
-				"DuplicateNameException updating external location: " + e.getMessage() + "\n");
+			errorMsg.append("DuplicateNameException updating external location: ").append(e.getMessage()).append("\n");
 		}
 	}
 
@@ -1412,13 +1407,11 @@ public class ProgramMerge implements PropertyVisitor {
 					}
 					catch (DuplicateNameException e) {
 						Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-						errorMsg.append(
-							"DuplicateNameException adding reference: " + e.getMessage() + "\n");
+						errorMsg.append("DuplicateNameException adding reference: ").append(e.getMessage()).append("\n");
 					}
 					catch (InvalidInputException e) {
 						Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-						errorMsg.append(
-							"InvalidInputException adding reference: " + e.getMessage() + "\n");
+						errorMsg.append("InvalidInputException adding reference: ").append(e.getMessage()).append("\n");
 					}
 				}
 			}
@@ -1939,14 +1932,12 @@ public class ProgramMerge implements PropertyVisitor {
 				}
 				catch (InvalidInputException e) {
 					Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-					errorMsg.append("InvalidInputException re-applying duplicate symbols: " +
-						e.getMessage() + "\n");
+					errorMsg.append("InvalidInputException re-applying duplicate symbols: ").append(e.getMessage()).append("\n");
 				}
 			}
 			catch (NoValueException e) {
 				Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-				errorMsg.append(
-					"NoValueException re-applying duplicate symbols: " + e.getMessage() + "\n");
+				errorMsg.append("NoValueException re-applying duplicate symbols: ").append(e.getMessage()).append("\n");
 			}
 		}
 	}
@@ -1970,8 +1961,7 @@ public class ProgramMerge implements PropertyVisitor {
 			}
 			catch (NoValueException e) {
 				Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-				errorMsg.append(
-					"NoValueException getting duplicate symbol info: " + e.getMessage() + "\n");
+				errorMsg.append("NoValueException getting duplicate symbol info: ").append(e.getMessage()).append("\n");
 			}
 		}
 //		Enumeration keys = dupSyms.keys();
@@ -2314,12 +2304,11 @@ public class ProgramMerge implements PropertyVisitor {
 					String msg = "Return storage forced to UNASSIGNED for " + f1.getName(true) +
 						":\n    " + e.getMessage();
 					Msg.error(this, msg);
-					errorMsg.append(msg + "\n");
+					errorMsg.append(msg).append("\n");
 				}
 			}
 			catch (InvalidInputException e) {
-				errorMsg.append("Failed to replace function return for " + f1.getName() + ": " +
-					e.getMessage());
+				errorMsg.append("Failed to replace function return for ").append(f1.getName()).append(": ").append(e.getMessage());
 			}
 		}
 	}
@@ -2382,8 +2371,7 @@ public class ProgramMerge implements PropertyVisitor {
 					try {
 						function.setName(newName, source);
 						if (i > 0) {
-							infoMsg.append("Function '" + name + "' was merged as '" + newName +
-								"' @ address " + entry.toString() + ".\n");
+							infoMsg.append("Function '").append(name).append("' was merged as '").append(newName).append("' @ address ").append(entry.toString()).append(".\n");
 						}
 						return true;
 					}
@@ -2391,13 +2379,11 @@ public class ProgramMerge implements PropertyVisitor {
 						continue;
 					}
 					catch (InvalidInputException e) {
-						errorMsg.append(
-							"Address = " + entry.toString() + ": " + e.getMessage() + "\n");
+						errorMsg.append("Address = ").append(entry.toString()).append(": ").append(e.getMessage()).append("\n");
 						return false;
 					}
 				}
-				errorMsg.append("Function '" + origName + "' couldn't be renamed to '" + name +
-					"' @ address " + entry.toString() + ".\n");
+				errorMsg.append("Function '").append(origName).append("' couldn't be renamed to '").append(name).append("' @ address ").append(entry.toString()).append(".\n");
 				return false;
 			}
 		}
@@ -2568,8 +2554,7 @@ public class ProgramMerge implements PropertyVisitor {
 					f1.setCallingConvention(name2);
 				}
 				catch (InvalidInputException e) {
-					errorMsg.append("InvalidInputException replacing calling convention: " +
-						e.getMessage() + "\n");
+					errorMsg.append("InvalidInputException replacing calling convention: ").append(e.getMessage()).append("\n");
 				}
 			}
 		}
@@ -2685,14 +2670,14 @@ public class ProgramMerge implements PropertyVisitor {
 		}
 		catch (DuplicateNameException e) {
 			Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-			errorMsg.append("Can't replace parameters for function " + toFunc.getName(true));
-			errorMsg.append(e.getMessage() + "\n");
+			errorMsg.append("Can't replace parameters for function ").append(toFunc.getName(true));
+			errorMsg.append(e.getMessage()).append("\n");
 			return;
 		}
 		catch (InvalidInputException e) {
 			Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-			errorMsg.append("Can't replace return/parameters for function " + toFunc.getName(true));
-			errorMsg.append(e.getMessage() + "\n");
+			errorMsg.append("Can't replace return/parameters for function ").append(toFunc.getName(true));
+			errorMsg.append(e.getMessage()).append("\n");
 			return;
 		}
 
@@ -2842,15 +2827,12 @@ public class ProgramMerge implements PropertyVisitor {
 			Address resultThunkedEntryPoint =
 				originToResultTranslator.getAddress(thunkedEntryPoint);
 			if (resultThunkedEntryPoint == null) {
-				errorMsg.append("Can't replace thunk function @ " + originEntryPoint + ". " +
-					"Can't determine equivalent thunked function entry point address " +
-					"for thunked function @ " + thunkedEntryPoint + ".\n");
+				errorMsg.append("Can't replace thunk function @ ").append(originEntryPoint).append(". ").append("Can't determine equivalent thunked function entry point address ").append("for thunked function @ ").append(thunkedEntryPoint).append(".\n");
 				return null;
 			}
 			Function resultThunkedFunction = resultListing.getFunctionAt(resultThunkedEntryPoint);
 			if (resultThunkedFunction == null) {
-				errorMsg.append("Can't replace thunk function @ " + originEntryPoint +
-					". No function at pointed to address " + thunkedEntryPoint + ".\n");
+				errorMsg.append("Can't replace thunk function @ ").append(originEntryPoint).append(". No function at pointed to address ").append(thunkedEntryPoint).append(".\n");
 				return null;
 			}
 		}
@@ -2861,8 +2843,7 @@ public class ProgramMerge implements PropertyVisitor {
 
 		// Check for function body overlap conflict.
 		if (ProgramMerge.overlapsOtherFunctions(originToResultTranslator, originFunction)) {
-			errorMsg.append("Can't replace function @ " + originEntryPoint +
-				". It would overlap another function.\n");
+			errorMsg.append("Can't replace function @ ").append(originEntryPoint).append(". It would overlap another function.\n");
 			return null;
 		}
 
@@ -2896,7 +2877,7 @@ public class ProgramMerge implements PropertyVisitor {
 					catch (InvalidInputException | IllegalArgumentException e) {
 						String errorMessage = "Error creating function \"" + originName + "\" at " +
 							originEntryPoint.toString(true) + ".\n  ";
-						errorMsg.append(errorMessage + e.getMessage());
+						errorMsg.append(errorMessage).append(e.getMessage());
 						return null;
 					}
 					/* createFunction appears to throw an IllegalArgumentException
@@ -2906,7 +2887,7 @@ public class ProgramMerge implements PropertyVisitor {
                 }
 			}
 			catch (OverlappingFunctionException e) {
-				errorMsg.append("Address = " + resultEntryPoint + ": " + e.getMessage() + "\n");
+				errorMsg.append("Address = ").append(resultEntryPoint).append(": ").append(e.getMessage()).append("\n");
 				return null;
 			}
 		}
@@ -2921,9 +2902,7 @@ public class ProgramMerge implements PropertyVisitor {
 				DiffUtility.getFunction(originThunkedFunction, resultProgram);
 			if (originThunkedFunctionInResult == null) {
 				// No matching function to thunk to.
-				errorMsg.append(
-					"Thunked function not found at " + originThunkedFunction.getEntryPoint() +
-						" for function at " + originFunction.getEntryPoint() + ".\n");
+				errorMsg.append("Thunked function not found at ").append(originThunkedFunction.getEntryPoint()).append(" for function at ").append(originFunction.getEntryPoint()).append(".\n");
 				return null;
 			}
 			Function currentThunkedFunction = newResultFunction.getThunkedFunction(false);
@@ -2954,7 +2933,7 @@ public class ProgramMerge implements PropertyVisitor {
 		}
 		catch (DuplicateNameException | InvalidInputException e) {
 			// should not occur
-			errorMsg.append("Address = " + resultEntryPoint + ": " + e.getMessage() + "\n");
+			errorMsg.append("Address = ").append(resultEntryPoint).append(": ").append(e.getMessage()).append("\n");
 		}
 
         StackFrame originFrame = originFunction.getStackFrame();
@@ -3015,8 +2994,7 @@ public class ProgramMerge implements PropertyVisitor {
 			toFunction.setCallingConvention(fromFunction.getCallingConventionName());
 		}
 		catch (InvalidInputException e) {
-			errorMsg.append(
-				"Address = " + toFunction.getEntryPoint() + ": " + e.getMessage() + "\n");
+			errorMsg.append("Address = ").append(toFunction.getEntryPoint()).append(": ").append(e.getMessage()).append("\n");
 		}
 		StackFrame newToFrame = toFunction.getStackFrame();
 		try {
@@ -3034,8 +3012,7 @@ public class ProgramMerge implements PropertyVisitor {
 		}
 		catch (InvalidInputException e) {
 			Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-			errorMsg.append(
-				"InvalidInputException replacing external function: " + e.getMessage() + "\n");
+			errorMsg.append("InvalidInputException replacing external function: ").append(e.getMessage()).append("\n");
 		}
 
 		if (newToFrame.getLocalSize() != originFrame.getLocalSize()) {
@@ -3083,8 +3060,7 @@ public class ProgramMerge implements PropertyVisitor {
 			// If we run into the name already in toFunc on a different variable
 			// then temp rename it so we can proceed.
 			if (renameVarUniquely(nameSpaceSymbol, nameSpaceSymbol.getSource()) == null) {
-				errorMsg.append("Can't replace parameters due to name conflict: " +
-					nameSpaceSymbol.getName(true) + "\n");
+				errorMsg.append("Can't replace parameters due to name conflict: ").append(nameSpaceSymbol.getName(true)).append("\n");
 				return false;
 			}
 			String msg = "Renamed symbol '" + name + "' in function '" + toFunc.getName() +
@@ -3170,8 +3146,8 @@ public class ProgramMerge implements PropertyVisitor {
 		}
 		catch (InvalidInputException | DuplicateNameException e) {
 			Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-			errorMsg.append("Can't replace variable " + fromVar.getSymbol().getName(true) + "\n");
-			errorMsg.append(e.getMessage() + "\n");
+			errorMsg.append("Can't replace variable ").append(fromVar.getSymbol().getName(true)).append("\n");
+			errorMsg.append(e.getMessage()).append("\n");
 			return null;
 		}
         return toVar;
@@ -3184,8 +3160,7 @@ public class ProgramMerge implements PropertyVisitor {
 			// If we run into the name already in toFunc on a different variable
 			// then temp rename it so we can proceed.
 			if (renameVarUniquely(nameSpaceSymbol, nameSpaceSymbol.getSource()) == null) {
-				errorMsg.append("Can't replace variable due to name conflict: " +
-					nameSpaceSymbol.getName(true) + "\n");
+				errorMsg.append("Can't replace variable due to name conflict: ").append(nameSpaceSymbol.getName(true)).append("\n");
 				return false;
 			}
 			String msg = "Renamed symbol '" + name + "' in function '" + toFunc.getName() +
@@ -3289,13 +3264,12 @@ public class ProgramMerge implements PropertyVisitor {
 						String msg = "Auto-parameter name may not be modified, " +
 							p1.getFunction().getName(true) + ":" + p1.getName();
 						Msg.error(this, msg);
-						errorMsg.append(msg + "\n");
+						errorMsg.append(msg).append("\n");
 					}
 					else {
 						p1.setName(newName, source);
 						if (i > 0) {
-							infoMsg.append("Parameter '" + fromName + "' was merged as '" +
-								newName + "' in function " + f1.getName() + ".\n");
+							infoMsg.append("Parameter '").append(fromName).append("' was merged as '").append(newName).append("' in function ").append(f1.getName()).append(".\n");
 						}
 					}
 					return;
@@ -3337,7 +3311,7 @@ public class ProgramMerge implements PropertyVisitor {
 						String msg = "Auto-parameter datatype may not be modified, " +
 							p1.getFunction().getName(true) + ":" + p1.getName();
 						Msg.error(this, msg);
-						errorMsg.append(msg + "\n");
+						errorMsg.append(msg).append("\n");
 					}
 					else {
 						DataType dt = p2.getDataType();
@@ -3358,7 +3332,7 @@ public class ProgramMerge implements PropertyVisitor {
 						p1.getFunction().getName(true) + ":" + p1.getName() + ":\n    " +
 						e.getMessage();
 					Msg.error(this, msg);
-					errorMsg.append(msg + "\n");
+					errorMsg.append(msg).append("\n");
 				}
 			}
 			catch (InvalidInputException e) {
@@ -3366,7 +3340,7 @@ public class ProgramMerge implements PropertyVisitor {
 					"Can't replace parameter datatype for " + p1.getFunction().getName(true) + ":" +
 						p1.getName() + ":\n    " + e.getMessage();
 				Msg.error(this, msg);
-				errorMsg.append(msg + "\n");
+				errorMsg.append(msg).append("\n");
 			}
 		}
 	}
@@ -3393,7 +3367,7 @@ public class ProgramMerge implements PropertyVisitor {
 				String msg = "Auto-parameter comment may not be modified, " +
 					p1.getFunction().getName(true) + ":" + p1.getName();
 				Msg.error(this, msg);
-				errorMsg.append(msg + "\n");
+				errorMsg.append(msg).append("\n");
 			}
 			else {
 				p1.setComment(p2.getComment());
@@ -3436,13 +3410,11 @@ public class ProgramMerge implements PropertyVisitor {
 				}
 				catch (DuplicateNameException e) {
 					Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-					errorMsg.append("DuplicateNameException replacing function variable: " +
-						e.getMessage() + "\n");
+					errorMsg.append("DuplicateNameException replacing function variable: ").append(e.getMessage()).append("\n");
 				}
 				catch (InvalidInputException e) {
 					Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-					errorMsg.append("InvalidInputException replacing function variable: " +
-						e.getMessage() + "\n");
+					errorMsg.append("InvalidInputException replacing function variable: ").append(e.getMessage()).append("\n");
 				}
 			}
 		}
@@ -3540,8 +3512,7 @@ public class ProgramMerge implements PropertyVisitor {
 					try {
 						toVar.setName(newName, source);
 						if (i > 0) {
-							infoMsg.append("Variable '" + fromName + "' was merged as '" + newName +
-								"' in function " + f1.getName() + ".\n");
+							infoMsg.append("Variable '").append(fromName).append("' was merged as '").append(newName).append("' in function ").append(f1.getName()).append(".\n");
 						}
 						return;
 					}

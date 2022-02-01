@@ -376,8 +376,7 @@ class ProgramSaveManager {
                 buf.append(s);
             }
 			buf.append("\n \n");
-			buf.append("WARNING! The above task(s) should be cancelled before attempting a " +
-				actionName + ".\n");
+			buf.append("WARNING! The above task(s) should be cancelled before attempting a ").append(actionName).append(".\n");
 			buf.append("Only proceed if unable to cancel them.\n \n");
 			buf.append(
 				"If you continue, all changes made by these tasks, as well as any other overlapping task,\n");

@@ -97,7 +97,7 @@ public class AttributedToolTipInfo extends ToolTipInfo<Attributed> {
 		buf.append(vertex.getName());
 		if (vertexType != null) {
 			buf.append("<br>");
-			buf.append("Type: &nbsp;" + vertexType);
+			buf.append("Type: &nbsp;").append(vertexType);
 		}
 		buf.append("</H4>");
 
@@ -108,7 +108,7 @@ public class AttributedToolTipInfo extends ToolTipInfo<Attributed> {
 		String edgeType = edge.getEdgeType();
 		if (edgeType != null) {
 			buf.append("<H4>");
-			buf.append("Type: &nbsp;" + edgeType);
+			buf.append("Type: &nbsp;").append(edgeType);
 			buf.append("</H4>");
 		}
 		addAttributes(buf, AttributedEdge.EDGE_TYPE_KEY);

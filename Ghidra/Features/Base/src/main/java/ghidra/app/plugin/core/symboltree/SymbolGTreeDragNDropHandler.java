@@ -177,7 +177,7 @@ public class SymbolGTreeDragNDropHandler implements GTreeDragNDropHandler {
 				flavorSet.add(flavor);
 			}
 		}
-		return flavorSet.toArray(new DataFlavor[flavorSet.size()]);
+		return flavorSet.toArray(new DataFlavor[0]);
 	}
 
 	@Override

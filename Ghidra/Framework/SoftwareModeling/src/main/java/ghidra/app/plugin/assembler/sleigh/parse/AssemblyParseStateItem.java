@@ -150,11 +150,11 @@ public class AssemblyParseStateItem implements Comparable<AssemblyParseStateItem
 		AssemblySentential<?> proc = rhs.sub(pos, rhs.size());
 		StringBuilder sb = new StringBuilder(prod.getIndex() + ". " + prod.getLHS() + " => ");
 		if (!prec.isEmpty()) {
-			sb.append(prec + " ");
+			sb.append(prec).append(" ");
 		}
 		sb.append("*");
 		if (!proc.isEmpty()) {
-			sb.append(" " + proc);
+			sb.append(" ").append(proc);
 		}
 		return sb.toString();
 	}

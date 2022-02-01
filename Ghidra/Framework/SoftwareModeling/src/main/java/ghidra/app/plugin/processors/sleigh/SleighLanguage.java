@@ -1539,8 +1539,7 @@ public class SleighLanguage implements Language {
 			else {
 				type = "varnode_sym_head";
 			}
-			s.append("<" + type + " name=\"" + sym.getName() + "\" id=\"0x" +
-				Integer.toHexString(i) + "\" scope=\"0x0\"/>\n");
+			s.append("<").append(type).append(" name=\"").append(sym.getName()).append("\" id=\"0x").append(Integer.toHexString(i)).append("\" scope=\"0x0\"/>\n");
 		}
 
 		// Now save the content of each symbol
@@ -1548,16 +1547,12 @@ public class SleighLanguage implements Language {
 			Symbol sym = symList.get(i);
 			if (sym instanceof UseropSymbol) {
 				UseropSymbol opSym = (UseropSymbol) sym;
-				s.append("<userop name=\"" + sym.getName() + "\" id=\"0x" + Integer.toHexString(i) +
-					"\" scope=\"0x0\" index=\"" + opSym.getIndex() + "\"/>\n");
+				s.append("<userop name=\"").append(sym.getName()).append("\" id=\"0x").append(Integer.toHexString(i)).append("\" scope=\"0x0\" index=\"").append(opSym.getIndex()).append("\"/>\n");
 			}
 			else {
 				VarnodeSymbol vnSym = (VarnodeSymbol) sym;
 				VarnodeData vn = vnSym.getFixedVarnode();
-				s.append(
-					"<varnode_sym name=\"" + sym.getName() + "\" id=\"0x" + Integer.toHexString(i) +
-						"\" scope=\"0x0\" space=\"" + vn.space.getName() + "\" offset=\"0x" +
-						Long.toHexString(vn.offset) + "\" size=\"" + vn.size + "\"/>\n");
+				s.append("<varnode_sym name=\"").append(sym.getName()).append("\" id=\"0x").append(Integer.toHexString(i)).append("\" scope=\"0x0\" space=\"").append(vn.space.getName()).append("\" offset=\"0x").append(Long.toHexString(vn.offset)).append("\" size=\"").append(vn.size).append("\"/>\n");
 			}
 		}
 		s.append("</symbol_table>\n");

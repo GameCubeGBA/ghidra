@@ -502,7 +502,7 @@ public class ListingDiff {
 	}
 
 	private void outputAddressSet(StringBuffer buffer, String title, AddressSet addressSet) {
-		buffer.append(title + ":\n");
+		buffer.append(title).append(":\n");
 		int i = 0;
 		for (AddressRange addressRange : addressSet) {
 			buffer.append(addressRange.toString());

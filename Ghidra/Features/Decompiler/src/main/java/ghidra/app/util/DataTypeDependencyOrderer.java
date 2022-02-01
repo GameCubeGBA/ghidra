@@ -182,35 +182,28 @@ public class DataTypeDependencyOrderer {
 	 */
 	private String dumpDebug() {
 		StringBuilder res = new StringBuilder();
-		res.append("\nDepend Size\n  orderedDependentsList: " + orderedDependentsList.size() +
-			"\n  whoIDependOn: " + whoIDependOn.size() + "\n  whoDependsOnMe: " +
-			whoDependsOnMe.size() + "\n\n");
+		res.append("\nDepend Size\n  orderedDependentsList: ").append(orderedDependentsList.size()).append("\n  whoIDependOn: ").append(whoIDependOn.size()).append("\n  whoDependsOnMe: ").append(whoDependsOnMe.size()).append("\n\n");
 		if (!orderedDependentsList.isEmpty()) {
 			for (DataType dt : orderedDependentsList) {
-				res.append(
-					"Ordered Dependents: " + dt.getName() + " " + dt.getClass().getName() + "\n");
+				res.append("Ordered Dependents: ").append(dt.getName()).append(" ").append(dt.getClass().getName()).append("\n");
 			}
 			res.append("\n");
 		}
 
 		if (!whoDependsOnMe.isEmpty()) {
 			for (Entry entry : whoDependsOnMe.keySet()) {
-				res.append("WhoDependsOnMe Me: " + entry.dataType.getName() + " " +
-					entry.dataType.getClass().getName() + "\n");
+				res.append("WhoDependsOnMe Me: ").append(entry.dataType.getName()).append(" ").append(entry.dataType.getClass().getName()).append("\n");
 				for (Entry dentry : whoDependsOnMe.get(entry)) {
-					res.append("              Dep: <-- " + dentry.dataType.getName() + " " +
-						dentry.dataType.getClass().getName() + "\n");
+					res.append("              Dep: <-- ").append(dentry.dataType.getName()).append(" ").append(dentry.dataType.getClass().getName()).append("\n");
 				}
 			}
 			res.append("\n");
 		}
 		if (!whoIDependOn.isEmpty()) {
 			for (Entry entry : whoIDependOn.keySet()) {
-				res.append("WhoIDependOn I: " + entry.dataType.getName() + " " +
-					entry.dataType.getClass().getName() + "\n");
+				res.append("WhoIDependOn I: ").append(entry.dataType.getName()).append(" ").append(entry.dataType.getClass().getName()).append("\n");
 				for (Entry dentry : whoIDependOn.get(entry)) {
-					res.append("            Sup: --> " + dentry.dataType.getName() + " " +
-						dentry.dataType.getClass().getName() + "\n");
+					res.append("            Sup: --> ").append(dentry.dataType.getName()).append(" ").append(dentry.dataType.getClass().getName()).append("\n");
 				}
 			}
 		}

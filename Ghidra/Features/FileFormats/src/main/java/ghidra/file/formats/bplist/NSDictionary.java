@@ -103,8 +103,7 @@ public class NSDictionary extends NSObject {
 		StringBuilder builder = new StringBuilder();
 		builder.append("NSDictionary {");
 		for (int i = 0; i < keys.size(); ++i) {
-			builder.append("{0x" + Integer.toHexString(keys.get(i)) + ",0x" +
-				Integer.toHexString(values.get(i)) + "}");
+			builder.append("{0x").append(Integer.toHexString(keys.get(i))).append(",0x").append(Integer.toHexString(values.get(i))).append("}");
 		}
 		builder.append("}");
 		return builder.toString();

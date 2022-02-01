@@ -464,7 +464,7 @@ public class ExecuteDiffDialog extends DialogComponentProvider {
 			return "Entire Program";
 		}
 		for (AddressRange range : addrs) {
-			addrStr.append(range.toString() + "\n");
+			addrStr.append(range.toString()).append("\n");
 		}
 		return addrStr.toString();
 	}

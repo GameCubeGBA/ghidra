@@ -491,7 +491,7 @@ public class VTExactSymbolMatch2Test extends AbstractGhidraHeadedIntegrationTest
 		if (matches.isEmpty()) {
 			return null;
 		}
-		VTMatch[] matchesArray = matches.toArray(new VTMatch[matches.size()]);
+		VTMatch[] matchesArray = matches.toArray(new VTMatch[0]);
 		assertEquals(1, matchesArray.length);
 		VTMatch vtMatch = matchesArray[0];
 		waitForSwing();

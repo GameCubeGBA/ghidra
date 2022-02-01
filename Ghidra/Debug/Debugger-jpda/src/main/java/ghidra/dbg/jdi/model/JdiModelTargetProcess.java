@@ -77,7 +77,7 @@ public class JdiModelTargetProcess extends JdiModelTargetObjectImpl
 			return super.getDisplay();
 		}
 		StringBuilder sb = new StringBuilder();
-		sb.append("Process " + process.pid());
+		sb.append("Process ").append(process.pid());
 		sb.append(" alive=");
 		sb.append(process.isAlive());
 		return sb.toString();

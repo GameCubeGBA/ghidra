@@ -167,7 +167,7 @@ public abstract class VtTask extends Task {
 		for (String error : errors) {
 			buf.append(error).append("<br>");
 			if (++errorCount > MAX_ERRORS) {
-				buf.append("...and " + (errors.size() - errorCount) + " more!");
+				buf.append("...and ").append(errors.size() - errorCount).append(" more!");
 				break;
 			}
 		}

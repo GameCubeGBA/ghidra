@@ -177,7 +177,7 @@ public class FunctionSignatureStringable extends Stringable {
 				buf.append("  CustomStorage: ");
 				VariableStorage returnVariableStorage =
 					VariableStorage.deserialize(program, returnInfo.storage);
-				buf.append(returnVariableStorage.toString() + " ");
+				buf.append(returnVariableStorage.toString()).append(" ");
 				buf.append("(");
 				int numParams = parameterInfos.size();
 				for (int i = 0; i < numParams; i++) {
@@ -200,7 +200,7 @@ public class FunctionSignatureStringable extends Stringable {
 			}
 		}
 		if (callFixup != null) {
-			buf.append(" " + callFixup);
+			buf.append(" ").append(callFixup);
 		}
 
 		return buf.toString();

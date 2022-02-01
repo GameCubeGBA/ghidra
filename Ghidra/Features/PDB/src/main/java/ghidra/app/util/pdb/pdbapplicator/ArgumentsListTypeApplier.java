@@ -168,7 +168,7 @@ public class ArgumentsListTypeApplier extends MsTypeApplier {
 			}
 		}
 		functionDefinition.setArguments(parameterDefinitionList.toArray(
-			new ParameterDefinition[parameterDefinitionList.size()]));
+                new ParameterDefinition[0]));
 	}
 
 //	/**

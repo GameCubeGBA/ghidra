@@ -296,7 +296,7 @@ public class DisassembledViewPlugin extends ProgramPlugin implements DomainObjec
 			}
 		}
 
-		return infoList.toArray(new DisassembledAddressInfo[infoList.size()]);
+		return infoList.toArray(new DisassembledAddressInfo[0]);
 	}
 
 	/**

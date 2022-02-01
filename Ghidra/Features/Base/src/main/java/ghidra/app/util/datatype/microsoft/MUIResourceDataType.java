@@ -88,7 +88,7 @@ public class MUIResourceDataType extends DynamicDataType {
 		else {
 			Msg.debug(this, "Not an MUI resource data type at " + mbIn.getAddress());
 		}
-        return comps.toArray(new DataTypeComponent[comps.size()]);
+        return comps.toArray(new DataTypeComponent[0]);
 	}
 
 	private StructureDataType MUIStructureHeader() {

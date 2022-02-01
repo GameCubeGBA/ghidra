@@ -94,7 +94,7 @@ public class SourceFileIndexer {
 		for (int i = 0; i < leastUnusedIndex; ++i) {
 			s.append("<sourcefile name=\"");
 			XmlUtils.xml_escape(s, filenameToIndex.inverse().get(i));
-			s.append("\" index=\"" + i + "\"/>\n");
+			s.append("\" index=\"").append(String.valueOf(i)).append("\"/>\n");
 		}
 		s.append("</sourcefiles>\n");
 	}

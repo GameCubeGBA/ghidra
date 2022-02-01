@@ -77,7 +77,7 @@ public class SplitExtensibleFirmwareInterfaceScript extends GhidraScript {
 					"EFI Target found: " + processorString + " at 0x" +
 						Integer.toHexString(offset) + " with alignment " + alignment;
 				monitor.setMessage(message);
-				messages.append(message + "\n");
+				messages.append(message).append("\n");
 				println(message);
 
 				byte[] targetBytes = reader.readByteArray(offset, size);

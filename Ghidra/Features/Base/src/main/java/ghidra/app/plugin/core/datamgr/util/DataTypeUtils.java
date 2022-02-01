@@ -144,7 +144,7 @@ public class DataTypeUtils {
 		list.add(new DataTypeIconWrapper(Structure.class, structureIcon,
 			ResourceManager.getDisabledIcon((ImageIcon) structureIcon)));
 
-		dataTypeIconWrappers = list.toArray(new DataTypeIconWrapper[list.size()]);
+		dataTypeIconWrappers = list.toArray(new DataTypeIconWrapper[0]);
 	}
 
 	/**

@@ -253,7 +253,7 @@ public final class ObjectiveC1_Utilities {
 		StringBuilder buffer = new StringBuilder();
 		buffer.append(methodType.getIndicator());
 		buffer.append(' ');
-		buffer.append('(' + signature.getReturnType().getDisplayName() + ')');
+		buffer.append('(').append(signature.getReturnType().getDisplayName()).append(')');
 		buffer.append(' ');
 		ParameterDefinition[] arguments = signature.getArguments();
 		int argumentIndex = 2;//skip ID and SEL
@@ -272,8 +272,8 @@ public final class ObjectiveC1_Utilities {
 			buffer.append(token);
 			if (argumentIndex < arguments.length) {
 				buffer.append(':');
-				buffer.append('(' + arguments[argumentIndex].getDataType().getDisplayName() + ')');
-				buffer.append("arg" + argumentIndex);
+				buffer.append('(').append(arguments[argumentIndex].getDataType().getDisplayName()).append(')');
+				buffer.append("arg").append(argumentIndex);
 				++argumentIndex;
 				if (argumentIndex < arguments.length) {
 					buffer.append(' ');

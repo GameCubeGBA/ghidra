@@ -270,7 +270,7 @@ public class MDObjectCPP extends MDObject {
 		@Override
 		public void insert(StringBuilder builder) {
 			// We have made up the output format.  Nothing is sacrosanct about this output.
-			builder.append("`" + hashString + "'");
+			builder.append("`").append(hashString).append("'");
 		}
 	}
 
