@@ -169,8 +169,8 @@ class RegisterMergeManager implements ListingMergeConstants {
 			return; //This method only needs to be called once.
 		}
 		RegisterConflicts rc =
-			new RegisterConflicts(registerName, originalContext, latestContext, myContext,
-				resultContext);
+				new RegisterConflicts(registerName, originalContext, latestContext, myContext,
+						resultContext);
 		Memory resultMem = resultPgm.getMemory();
 		AddressSetView myDiffs =
 			rc.getRegisterDifferences(registerName, originalContext, myContext, mySet, monitor);
@@ -417,7 +417,7 @@ class RegisterMergeManager implements ListingMergeConstants {
 		return info;
 	}
 
-	private class RegisterConflicts {
+	private static class RegisterConflicts {
 
 		String conflictRegisterName;
 		ProgramContext conflictOriginalContext;

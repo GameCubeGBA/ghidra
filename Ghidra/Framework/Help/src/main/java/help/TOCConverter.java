@@ -199,7 +199,7 @@ public class TOCConverter {
 		return tempFile;
 	}
 
-	private class TOCItem {
+	private static class TOCItem {
 		private String text;
 		private String target;
 

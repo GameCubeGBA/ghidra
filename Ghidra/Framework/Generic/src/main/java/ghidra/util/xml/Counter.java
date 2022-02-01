@@ -52,7 +52,7 @@ class Counter {
 		count.increment();
 	}
 
-	private class Count {
+	private static class Count {
 		int count = 0;
 		void increment() {
 			count++;

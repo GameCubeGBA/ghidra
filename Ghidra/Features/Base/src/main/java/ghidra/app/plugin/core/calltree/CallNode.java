@@ -121,7 +121,7 @@ public abstract class CallNode extends GTreeSlowLoadingNode {
 
 	}
 
-	protected class CallNodeComparator implements Comparator<GTreeNode> {
+	protected static class CallNodeComparator implements Comparator<GTreeNode> {
 		@Override
 		public int compare(GTreeNode o1, GTreeNode o2) {
 			return ((CallNode) o1).getSourceAddress().compareTo(((CallNode) o2).getSourceAddress());

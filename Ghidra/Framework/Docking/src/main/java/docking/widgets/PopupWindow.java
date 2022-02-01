@@ -316,7 +316,7 @@ public class PopupWindow {
 	/** Paints shapes used by this class (useful for debugging) */
 	@SuppressWarnings("unused")
 	// enabled as needed
-	private class ShapeDebugPainter implements GGlassPanePainter {
+	private static class ShapeDebugPainter implements GGlassPanePainter {
 
 		private MouseEvent sourceEvent;
 		private Rectangle bounds;

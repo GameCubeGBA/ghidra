@@ -79,7 +79,7 @@ public class HTMLElement extends ArrayList<Object> {
 		return sb.toString();
 	}
 
-	private class HTMLContent {
+	private static class HTMLContent {
 		private String content;
 
 		HTMLContent(String content) {

@@ -551,7 +551,7 @@ public class GHelpBroker extends DefaultHelpBroker {
 // Inner Classes
 //==================================================================================================
 
-	private class StarShape extends Path2D.Float {
+	private static class StarShape extends Path2D.Float {
 
 		StarShape(Point location) {
 			this(5, location, 1, .3);// reasonable star qualities
@@ -629,7 +629,7 @@ public class GHelpBroker extends DefaultHelpBroker {
 		}
 	}
 
-	private class LocationHintPainter implements AnimationPainter {
+	private static class LocationHintPainter implements AnimationPainter {
 
 		private Color color = new Color(100, 100, 255, 100);
 		private Shape paintShape;

@@ -72,22 +72,20 @@ public class CreateToolTest extends AbstractGhidraHeadedIntegrationTest {
 	 * the requirement to create a new empty tool
 	 */
 	@Test
-	public void testCreateTool() throws Exception {
+	public void testCreateTool() {
 
 		boolean verified = false;
-		runSwing(new Runnable() {
-			@Override
-			public void run() {
-				tool = ProjectTestUtils.getTool(project, null);
-			}
+		runSwing(() -> {
+			tool = ProjectTestUtils.getTool(project, null);
 		});
 		try {
 			// verify the tool is actually running before declaring success
 			ToolManager tm = project.getToolManager();
 			PluginTool[] runningTools = tm.getRunningTools();
-			for (int t = 0; !verified && t < runningTools.length; t++) {
-				if (runningTools[t].equals(tool)) {
+			for (PluginTool runningTool : runningTools) {
+				if (runningTool.equals(tool)) {
 					verified = true;
+					break;
 				}
 			}
 		}

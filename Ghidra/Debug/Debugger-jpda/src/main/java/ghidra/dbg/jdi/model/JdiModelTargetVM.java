@@ -337,7 +337,7 @@ public class JdiModelTargetVM extends JdiModelTargetObjectImpl implements //
 		String name = "VM(" + JdiModelTargetProcess.getUniqueId(vm.process()) + ") ";
 		Info info = vm.process().info();
 		Optional<String[]> arguments = info.arguments();
-		if (!arguments.isEmpty()) {
+		if (arguments.isPresent()) {
 			String[] args = arguments.get();
 			for (String arg : args) {
 				if (!arg.startsWith("-")) {

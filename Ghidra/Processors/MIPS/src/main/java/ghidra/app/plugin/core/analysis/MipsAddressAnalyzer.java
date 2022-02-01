@@ -400,7 +400,7 @@ public class MipsAddressAnalyzer extends ConstantPropagationAnalyzer {
 					//          But then it won't matter, because the function won't depend on the registers value.
 					if (instr.getFlowType().isComputed()) {
 						Register reg = instr.getRegister(0);
-						if (reg != null && t9.equals(reg) && assumeT9EntryAddress) {
+						if (t9.equals(reg) && assumeT9EntryAddress) {
 							BigInteger val = context.getValue(reg, false);
 							if (val != null) {
 								try {

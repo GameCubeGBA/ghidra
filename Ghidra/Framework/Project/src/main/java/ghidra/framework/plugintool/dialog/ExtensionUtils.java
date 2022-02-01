@@ -589,7 +589,7 @@ public class ExtensionUtils {
 					}
 				}
 
-				if (installed.get() == false) {
+				if (!installed.get()) {
 					Msg.showError(null, null, "Installation Error", "Error installing extension [" +
 						file.getName() + "]." + " " + e.getExceptionType());
 				}

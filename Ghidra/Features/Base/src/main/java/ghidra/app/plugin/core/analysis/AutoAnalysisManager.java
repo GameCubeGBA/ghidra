@@ -1455,7 +1455,7 @@ public final class AutoAnalysisManager implements DomainObjectListener, DomainOb
 // Inner Classes
 //==================================================================================================
 
-	private class JointTaskMonitor implements TaskMonitor {
+	private static class JointTaskMonitor implements TaskMonitor {
 
 		private TaskMonitor primaryMonitor;
 		private TaskMonitor secondaryMonitor;

@@ -942,7 +942,7 @@ public class VTMarkupItemsTableProvider extends ComponentProviderAdapter
 		}
 	}
 
-	private class MarkupItemThreadedTablePanel extends GhidraThreadedTablePanel<VTMarkupItem> {
+	private static class MarkupItemThreadedTablePanel extends GhidraThreadedTablePanel<VTMarkupItem> {
 		MarkupItemThreadedTablePanel(ThreadedTableModel<VTMarkupItem, ?> model) {
 			super(model);
 		}

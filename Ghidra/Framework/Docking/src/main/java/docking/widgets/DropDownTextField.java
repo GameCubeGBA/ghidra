@@ -947,7 +947,7 @@ public class DropDownTextField<T> extends JTextField implements GComponent {
 		}
 	}
 
-	private class NoSelectionAllowedListSelectionModel extends DefaultListSelectionModel {
+	private static class NoSelectionAllowedListSelectionModel extends DefaultListSelectionModel {
 
 		@Override
 		public void setSelectionMode(int selectionMode) {

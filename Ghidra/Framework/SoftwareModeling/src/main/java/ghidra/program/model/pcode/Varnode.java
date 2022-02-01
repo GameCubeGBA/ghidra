@@ -379,19 +379,19 @@ public class Varnode {
 				factory.setMergeGroup(vn, val);
 			}
 			attrstring = el.getAttribute("persists");
-			if ((attrstring != null) && (SpecXmlUtils.decodeBoolean(attrstring))) {
+			if ((SpecXmlUtils.decodeBoolean(attrstring))) {
 				factory.setPersistent(vn, true);
 			}
 			attrstring = el.getAttribute("addrtied");
-			if ((attrstring != null) && (SpecXmlUtils.decodeBoolean(attrstring))) {
+			if ((SpecXmlUtils.decodeBoolean(attrstring))) {
 				factory.setAddrTied(vn, true);
 			}
 			attrstring = el.getAttribute("unaff");
-			if ((attrstring != null) && (SpecXmlUtils.decodeBoolean(attrstring))) {
+			if ((SpecXmlUtils.decodeBoolean(attrstring))) {
 				factory.setUnaffected(vn, true);
 			}
 			attrstring = el.getAttribute("input");
-			if ((attrstring != null) && (SpecXmlUtils.decodeBoolean(attrstring))) {
+			if ((SpecXmlUtils.decodeBoolean(attrstring))) {
 				vn = factory.setInput(vn, true);
 			}
 			return vn;

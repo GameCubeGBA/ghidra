@@ -149,7 +149,7 @@ public class DataTypeDependencyOrderer {
 	 * @return  pair of arrayLists--one of composites and one complete list of dependents
 	 */
 	public Pair<ArrayList<DataType>, ArrayList<DataType>> getAcyclicDependencyLists() {
-		if (processed == false) {
+		if (!processed) {
 			processDependencyLists();
 		}
 		return new Pair<>(compositeList, orderedDependentsList);
@@ -160,7 +160,7 @@ public class DataTypeDependencyOrderer {
 	 * @return  An arrayList of Composite
 	 */
 	public ArrayList<DataType> getCompositeList() {
-		if (processed == false) {
+		if (!processed) {
 			processDependencyLists();
 		}
 		return compositeList;
@@ -171,7 +171,7 @@ public class DataTypeDependencyOrderer {
 	 * @return  An ArrayList of dependents.
 	 */
 	public ArrayList<DataType> getDependencyList() {
-		if (processed == false) {
+		if (!processed) {
 			processDependencyLists();
 		}
 		return orderedDependentsList;

@@ -276,7 +276,7 @@ public class InputDialog extends DialogComponentProvider {
 		return inputValues;
 	}
 
-	private class MyTextField extends JTextField {
+	private static class MyTextField extends JTextField {
 
 		MyTextField(String str) {
 			super(str, 20);

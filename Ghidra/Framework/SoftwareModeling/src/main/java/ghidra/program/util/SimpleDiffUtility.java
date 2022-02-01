@@ -625,8 +625,8 @@ public class SimpleDiffUtility {
 				if (targetAddr != null) {
 					ExternalLocation otherExtLoc = otherExtMgr.getExternalLocation(otherSym);
 					Address otherAddr = otherExtLoc.getAddress();
-					if (otherAddr != null && targetAddr.equals(otherAddr) &&
-						originalNamesDontConflict(extLoc, otherExtLoc)) {
+					if (targetAddr.equals(otherAddr) &&
+                            originalNamesDontConflict(extLoc, otherExtLoc)) {
 						addIt = true;
 					}
 				}

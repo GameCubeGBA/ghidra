@@ -1487,7 +1487,7 @@ public class GTree extends JPanel implements BusyListener {
 		}
 	}
 
-	private class GTreeMouseListenerDelegate extends JTreeMouseListenerDelegate {
+	private static class GTreeMouseListenerDelegate extends JTreeMouseListenerDelegate {
 		private final GTree gTree;
 
 		GTreeMouseListenerDelegate(JTree jTree, GTree gTree) {

@@ -25,7 +25,7 @@ import agent.lldb.model.impl.LldbModelImpl;
 import ghidra.dbg.gadp.server.AbstractGadpServer;
 
 public class LldbGadpServerImpl implements LldbGadpServer {
-	public class GadpSide extends AbstractGadpServer {
+	public static class GadpSide extends AbstractGadpServer {
 		public GadpSide(AbstractLldbModel model, SocketAddress addr)
 				throws IOException {
 			super(model, addr);

@@ -42,7 +42,7 @@ import ghidra.util.exception.DuplicateNameException;
 public class DBTraceObjectBreakpointLocation
 		implements TraceObjectBreakpointLocation, DBTraceObjectInterface {
 
-	protected class BreakpointChangeTranslator extends Translator<TraceBreakpoint> {
+	protected static class BreakpointChangeTranslator extends Translator<TraceBreakpoint> {
 		protected BreakpointChangeTranslator(DBTraceObject object, TraceBreakpoint iface) {
 			super(KEY_RANGE, object, iface);
 		}

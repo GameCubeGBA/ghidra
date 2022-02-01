@@ -1229,7 +1229,7 @@ public class AddressSet implements AddressSetView {
 		return successor;
 	}
 
-	private class AddressRangeIteratorAdapter implements AddressRangeIterator {
+	private static class AddressRangeIteratorAdapter implements AddressRangeIterator {
 
 		private Iterator<RedBlackEntry<Address, Address>> iterator;
 

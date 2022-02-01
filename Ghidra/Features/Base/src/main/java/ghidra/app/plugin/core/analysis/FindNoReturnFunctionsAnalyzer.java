@@ -381,7 +381,7 @@ public class FindNoReturnFunctionsAnalyzer extends AbstractAnalyzer {
 					// if function only calls non-returning functions
 					if (targetOnlyCallsNoReturn(cp, target, noReturnSet)) {
 						NoReturnLocations location =
-							new NoReturnLocations(target, null, "Calls only non-returing function");
+								new NoReturnLocations(target, null, "Calls only non-returing function");
 						reasonList.add(location);
 						noReturnSet.add(target);
 						continue;
@@ -506,7 +506,7 @@ public class FindNoReturnFunctionsAnalyzer extends AbstractAnalyzer {
 			/* check for a function after this call */
 			if (nextFuncAddr != null && nextFuncAddr.equals(fallThru)) {
 				NoReturnLocations location =
-					new NoReturnLocations(target, fallThru, "Function defined after call");
+						new NoReturnLocations(target, fallThru, "Function defined after call");
 				reasonList.add(location);
 				return true;
 			}
@@ -514,7 +514,7 @@ public class FindNoReturnFunctionsAnalyzer extends AbstractAnalyzer {
 			CodeUnit cu = listing.getCodeUnitAt(fallThru);
 			if (cu == null || cu instanceof Data) {
 				NoReturnLocations location = new NoReturnLocations(target, callInst.getMinAddress(),
-					"Falls into data after call");
+						"Falls into data after call");
 				reasonList.add(location);
 				return true;
 			}
@@ -523,7 +523,7 @@ public class FindNoReturnFunctionsAnalyzer extends AbstractAnalyzer {
 			/* check for codeblock containing a function */
 			if (nextFuncAddr != null && cu.contains(nextFuncAddr)) {
 				NoReturnLocations location = new NoReturnLocations(target, fallThru,
-					"Function defined in instruction after call");
+						"Function defined in instruction after call");
 				reasonList.add(location);
 				return true;
 			}
@@ -537,7 +537,7 @@ public class FindNoReturnFunctionsAnalyzer extends AbstractAnalyzer {
 			Data data = listing.getDefinedDataAt(fallThru);
 			if (data != null) {
 				NoReturnLocations location =
-					new NoReturnLocations(target, fallThru, "Data after call");
+						new NoReturnLocations(target, fallThru, "Data after call");
 				reasonList.add(location);
 				return true;
 			}
@@ -583,8 +583,8 @@ public class FindNoReturnFunctionsAnalyzer extends AbstractAnalyzer {
 							funcManager.getFunctionContaining(reference.getFromAddress());
 						if (callingFunc.equals(function)) {
 							NoReturnLocations location =
-								new NoReturnLocations(calledAddr, reference.getToAddress(),
-									"Data Reference from same function after call");
+									new NoReturnLocations(calledAddr, reference.getToAddress(),
+											"Data Reference from same function after call");
 							reasonList.add(location);
 							return true;
 						}
@@ -592,14 +592,14 @@ public class FindNoReturnFunctionsAnalyzer extends AbstractAnalyzer {
 					else {
 						// only consider references after call if the call location is not in a function
 						NoReturnLocations location = new NoReturnLocations(calledAddr,
-							reference.getToAddress(), "Data Reference after call");
+								reference.getToAddress(), "Data Reference after call");
 						reasonList.add(location);
 						return true;
 					}
 				}
 				if (refType.isCall()) {
 					NoReturnLocations location = new NoReturnLocations(calledAddr,
-						reference.getToAddress(), "Call Reference after call");
+							reference.getToAddress(), "Call Reference after call");
 					reasonList.add(location);
 					return true;
 				}
@@ -776,7 +776,7 @@ public class FindNoReturnFunctionsAnalyzer extends AbstractAnalyzer {
 
 	}
 
-	class NoReturnLocations implements AddressableRowObject {
+	static class NoReturnLocations implements AddressableRowObject {
 		private Address addr;
 		private Address whyAddr;
 		private String explanation;

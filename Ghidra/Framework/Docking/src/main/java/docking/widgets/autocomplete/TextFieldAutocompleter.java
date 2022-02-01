@@ -121,7 +121,7 @@ public class TextFieldAutocompleter<T> {
 	private boolean pendingTextUpdate;
 	private SwingUpdateManager updateManager = new SwingUpdateManager(DEFAULT_UPDATE_DELAY,
 		DEFAULT_MAX_UPDATE_DELAY, "Auto Completion Update Manager " + this.getClass(), () -> {
-			if (pendingTextUpdate == false) {
+			if (!pendingTextUpdate) {
 				return; // not sure if this can happen
 			}
 			doUpdateDisplayContents();

@@ -75,7 +75,7 @@ public class CombinedAddressRangeIterator implements AddressRangeIterator {
         return manager2.severMyHeadAndAdvanceOtherManager(manager1);
     }
 
-	private class AddressRangeManager {
+	private static class AddressRangeManager {
 		AddressRangeIterator it;
 		AddressRangeImpl range;
 

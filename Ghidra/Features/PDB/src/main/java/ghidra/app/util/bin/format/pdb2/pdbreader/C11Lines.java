@@ -181,7 +181,7 @@ public class C11Lines {
 		return builder.toString();
 	}
 
-	private class StartEnd {
+	private static class StartEnd {
 		private long start; // unsigned long
 		private long end; // unsigned long
 

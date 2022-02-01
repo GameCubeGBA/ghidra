@@ -303,7 +303,7 @@ public class MultiFunctionComparisonPanel extends FunctionComparisonPanel {
 	 * Cell renderer for combo boxes that changes the default display to show
 	 * both the function name and the program it comes from
 	 */
-	private class FunctionListCellRenderer extends DefaultListCellRenderer {
+	private static class FunctionListCellRenderer extends DefaultListCellRenderer {
 
 		@Override
 		public Component getListCellRendererComponent(JList<?> list, Object value, int index,

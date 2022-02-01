@@ -84,7 +84,7 @@ public class DynamicHash {
 	 * in the sub-graph.  The edge can either be from an input Varnode to the PcodeOp
 	 * that reads it, or from a PcodeOp to the Varnode it defines.
 	 */
-	private class ToOpEdge implements Comparable<ToOpEdge> {
+	private static class ToOpEdge implements Comparable<ToOpEdge> {
 		private PcodeOp op;
 		private int slot;			// slot containing varnode we are coming from
 

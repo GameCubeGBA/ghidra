@@ -374,7 +374,7 @@ public abstract class AbstractSortedTableModel<T> extends AbstractGTableModel<T>
 	 */
 	protected Comparator<T> createSortComparator(int columnIndex) {
 		return new RowBasedColumnComparator<>(this, columnIndex, new DefaultColumnComparator(),
-			new StringBasedBackupRowToColumnComparator());
+                new StringBasedBackupRowToColumnComparator());
 	}
 
 	private Comparator<T> createLastResortComparator(ComparatorLink parentChain) {
@@ -513,7 +513,7 @@ public abstract class AbstractSortedTableModel<T> extends AbstractGTableModel<T>
 		}
 	}
 
-	private class StringBasedBackupRowToColumnComparator implements Comparator<Object> {
+	private static class StringBasedBackupRowToColumnComparator implements Comparator<Object> {
 
 		@Override
 		public int compare(Object c1, Object c2) {

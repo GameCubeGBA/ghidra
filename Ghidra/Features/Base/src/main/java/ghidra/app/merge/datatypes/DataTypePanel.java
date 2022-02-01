@@ -251,7 +251,7 @@ class DataTypePanel extends JPanel {
 		insertLength(comp);
 	}
 
-	private class EnumEntry implements Comparable<EnumEntry> {
+	private static class EnumEntry implements Comparable<EnumEntry> {
 
 		private final String name;
 		private final long value;

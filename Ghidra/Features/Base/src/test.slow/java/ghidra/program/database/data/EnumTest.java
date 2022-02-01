@@ -379,7 +379,7 @@ public class EnumTest extends AbstractGhidraHeadedIntegrationTest {
 		waitForCondition(() -> listener.getCount() == count);
 	}
 
-	private class DomainObjListener implements DomainObjectListener {
+	private static class DomainObjListener implements DomainObjectListener {
 		private int count;
 
 		@Override

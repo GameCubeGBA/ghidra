@@ -139,7 +139,7 @@ public class EditMarkupAddressAction extends DockingAction {
 // Inner Classes    
 //==================================================================================================
 
-	private class DialogProvider extends DialogComponentProvider implements
+	private static class DialogProvider extends DialogComponentProvider implements
 			AddressEditorPanelListener {
 
 		private EditableAddress editableAddress;

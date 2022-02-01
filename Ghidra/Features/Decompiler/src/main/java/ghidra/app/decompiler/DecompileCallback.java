@@ -1407,7 +1407,7 @@ public class DecompileCallback {
 // Inner Classes
 //==================================================================================================	
 
-	private class NameListHandler extends DefaultHandler {
+	private static class NameListHandler extends DefaultHandler {
 		private ArrayList<String> res;
 		private StringBuilder curbuffer;
 

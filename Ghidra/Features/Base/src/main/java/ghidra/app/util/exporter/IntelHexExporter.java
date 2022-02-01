@@ -125,7 +125,7 @@ public class IntelHexExporter extends Exporter {
 	 * <p>
 	 * Input may be specified in either decimal or hex.
 	 */
-	private class BoundedIntegerVerifier extends InputVerifier {
+	private static class BoundedIntegerVerifier extends InputVerifier {
 
 		@Override
 		public boolean verify(JComponent input) {
@@ -303,7 +303,7 @@ public class IntelHexExporter extends Exporter {
 			setLayout(new BorderLayout());
 
 			input = new HintTextField(Integer.toString(recordSize), false,
-				new BoundedIntegerVerifier());
+					new BoundedIntegerVerifier());
 			dropCb = new GCheckBox("Align To Record Size");
 
 			input.setText(Integer.toString(recordSize));

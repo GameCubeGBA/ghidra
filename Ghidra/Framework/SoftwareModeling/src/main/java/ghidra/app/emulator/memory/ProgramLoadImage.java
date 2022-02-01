@@ -48,7 +48,7 @@ public class ProgramLoadImage {
 
 	private AddressSetView addMappedInitializedMemory(MemoryBlock mappedBlock) {
 		MemoryBlockSourceInfo sourceInfo = mappedBlock.getSourceInfos().get(0); // mapped block has exactly 1 mapped source
-		if (!sourceInfo.getMappedRange().isPresent()) {
+		if (sourceInfo.getMappedRange().isEmpty()) {
 			throw new AssertException("Mapped block did not have mapped range!");
 		}
 		AddressRange mappedRange = sourceInfo.getMappedRange().get();

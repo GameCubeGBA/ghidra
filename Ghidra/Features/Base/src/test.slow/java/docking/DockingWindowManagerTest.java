@@ -597,7 +597,7 @@ public class DockingWindowManagerTest extends AbstractDockingTest {
 		}
 	}
 
-	class MyProvider extends ComponentProviderAdapter {
+	static class MyProvider extends ComponentProviderAdapter {
 		JLabel label = new GDLabel();
 
 		public MyProvider(String owner, String name, String group, String title,

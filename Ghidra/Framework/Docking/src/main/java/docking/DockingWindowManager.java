@@ -2374,7 +2374,7 @@ public class DockingWindowManager implements PropertyChangeListener, Placeholder
 	 * placeholder is activated too frequently, this class will emphasize that window, under the
 	 * assumption that the user doesn't see the window.
 	 */
-	private class ActivatedInfo {
+	private static class ActivatedInfo {
 
 		private long lastCalledTimestamp;
 		private ComponentPlaceholder lastActivatedPlaceholder;

@@ -156,7 +156,7 @@ public class StringsAnalyzer extends AbstractAnalyzer {
 	}
 
 	private static Alignment[] alignmentChoices =
-            { Alignment.ALIGN_1, Alignment.ALIGN_2, Alignment.ALIGN_4 };
+            Alignment.values();
 	private static Alignment START_ALIGNMENT_DEFAULT_VALUE = Alignment.ALIGN_1;
 	private static int END_ALIGNMENT_DEFAULT_VALUE = 4;
 	private static final MinStringLen MINIMUM_STRING_LENGTH_DEFAULT_VALUE = MinStringLen.LEN_5;

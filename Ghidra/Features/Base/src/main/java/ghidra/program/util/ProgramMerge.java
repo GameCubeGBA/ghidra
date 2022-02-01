@@ -1005,7 +1005,7 @@ public class ProgramMerge implements PropertyVisitor {
 		}
 	}
 
-	private class DupEquate {
+	private static class DupEquate {
 		Equate equate;
 		String preferredName;
 
@@ -2203,7 +2203,7 @@ public class ProgramMerge implements PropertyVisitor {
 		return false;
 	}
 
-	class FunctionAddressIterator implements AddressIterator {
+	static class FunctionAddressIterator implements AddressIterator {
 		FunctionIterator functionIterator;
 
 		FunctionAddressIterator(FunctionIterator funcIter) {

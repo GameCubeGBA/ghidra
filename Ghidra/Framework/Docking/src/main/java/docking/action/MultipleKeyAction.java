@@ -336,7 +336,7 @@ public class MultipleKeyAction extends DockingKeyBindingAction {
 		return buildy.toString();
 	}
 
-	private class ActionData {
+	private static class ActionData {
 		DockingActionIf action;
 		ComponentProvider provider;
 

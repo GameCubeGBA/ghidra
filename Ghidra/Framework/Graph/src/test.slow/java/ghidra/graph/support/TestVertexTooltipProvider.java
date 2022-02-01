@@ -91,7 +91,7 @@ public class TestVertexTooltipProvider
 		public String getTooltipAsText();
 	}
 
-	public class SpyTooltipText implements SpyTooltip {
+	public static class SpyTooltipText implements SpyTooltip {
 
 		private String text;
 
@@ -106,7 +106,7 @@ public class TestVertexTooltipProvider
 
 	}
 
-	public class SpyTooltipLabel extends GDHtmlLabel implements SpyTooltip {
+	public static class SpyTooltipLabel extends GDHtmlLabel implements SpyTooltip {
 
 		SpyTooltipLabel(String text) {
 			setText(text);

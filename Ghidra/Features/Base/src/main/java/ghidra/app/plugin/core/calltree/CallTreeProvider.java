@@ -1105,7 +1105,7 @@ public class CallTreeProvider extends ComponentProviderAdapter implements Domain
 		return false;
 	}
 
-	private class UpdateFunctionNodeTask extends GTreeTask {
+	private static class UpdateFunctionNodeTask extends GTreeTask {
 
 		private Function function;
 
@@ -1252,7 +1252,7 @@ public class CallTreeProvider extends ComponentProviderAdapter implements Domain
 // Inner Classes
 //==================================================================================================
 
-	private class ExpandToDepthTask extends GTreeExpandAllTask {
+	private static class ExpandToDepthTask extends GTreeExpandAllTask {
 
 		private int maxDepth;
 
@@ -1282,7 +1282,7 @@ public class CallTreeProvider extends ComponentProviderAdapter implements Domain
 		}
 	}
 
-	private class PendingRootNode extends GTreeNode {
+	private static class PendingRootNode extends GTreeNode {
 
 		@Override
 		public Icon getIcon(boolean expanded) {
@@ -1305,7 +1305,7 @@ public class CallTreeProvider extends ComponentProviderAdapter implements Domain
 		}
 	}
 
-	private class EmptyRootNode extends GTreeNode {
+	private static class EmptyRootNode extends GTreeNode {
 
 		@Override
 		public Icon getIcon(boolean expanded) {

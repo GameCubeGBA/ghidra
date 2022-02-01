@@ -146,7 +146,7 @@ class MaskGenerator {
 
 			// Builds case to store the operands mask and value
 			OperandMaskValue opMaskValue = new OperandMaskValue(mask, value,
-				instruction.getDefaultOperandRepresentation(i - 1));
+                    instruction.getDefaultOperandRepresentation(i - 1));
 
 			// Determines if the given operand is a constant value. If it is 
 			// a constant then proper flag is set.
@@ -299,7 +299,7 @@ class MaskGenerator {
 	/**
 	 * 
 	 */
-	private class MnemonicMaskValue extends MaskValue {
+	private static class MnemonicMaskValue extends MaskValue {
 
 		/**
 		 * 
@@ -315,7 +315,7 @@ class MaskGenerator {
 	/**
 	 * 
 	 */
-	private class OperandMaskValue extends MaskValue {
+	private static class OperandMaskValue extends MaskValue {
 		private boolean constant = false;
 
 		/**

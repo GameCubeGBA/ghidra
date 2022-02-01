@@ -218,7 +218,7 @@ class DmgServerProcessManager implements Closeable {
 		return cmd.results;
 	}
 
-	private class Cmd {
+	private static class Cmd {
 		static final int UNKNOWN_RESPONSE_COUNT = Integer.MIN_VALUE;
 		String cmdStr;
 		int expectedResponseCount;

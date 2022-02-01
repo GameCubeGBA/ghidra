@@ -537,7 +537,7 @@ class MemoryMapModel extends AbstractSortedTableModel<MemoryBlock> {
 		return new MemoryMapComparator(columnIndex);
 	}
 
-	private class MemoryMapComparator implements Comparator<MemoryBlock> {
+	private static class MemoryMapComparator implements Comparator<MemoryBlock> {
 		private final int sortColumn;
 
 		public MemoryMapComparator(int sortColumn) {

@@ -80,7 +80,7 @@ import ghidra.util.task.TaskMonitor;
 public class DebuggerStaticMappingServicePlugin extends Plugin
 		implements DebuggerStaticMappingService, DomainFolderChangeAdapter {
 
-	protected class MappingEntry {
+	protected static class MappingEntry {
 		private final TraceStaticMapping mapping;
 
 		private Program program;

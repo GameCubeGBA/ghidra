@@ -282,7 +282,7 @@ public class Numeric {
 	 * Below can considered to be temporary classes to contain information pertaining to their
 	 * type.
 	 */
-	private abstract class AbstractNumericOther {
+	private abstract static class AbstractNumericOther {
 		private byte[] bytes;
 
 		AbstractNumericOther(PdbByteReader reader, int num) throws PdbException {

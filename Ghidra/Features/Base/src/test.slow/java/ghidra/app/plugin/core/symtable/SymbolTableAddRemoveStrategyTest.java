@@ -322,7 +322,7 @@ public class SymbolTableAddRemoveStrategyTest {
 // Inner Classes
 //==================================================================================================	
 
-	private class SpyTableData extends TestTableData<Symbol> {
+	private static class SpyTableData extends TestTableData<Symbol> {
 
 		private int removeCount;
 		private int insertCount;
@@ -352,7 +352,7 @@ public class SymbolTableAddRemoveStrategyTest {
 		}
 	}
 
-	private class TestSymbol extends ProxySymbol {
+	private static class TestSymbol extends ProxySymbol {
 
 		private String name;
 

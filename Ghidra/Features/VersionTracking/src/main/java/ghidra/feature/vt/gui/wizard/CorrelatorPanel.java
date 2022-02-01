@@ -189,7 +189,7 @@ public class CorrelatorPanel extends AbstractMageJPanel<VTWizardStateKey> implem
 // Inner Classes
 //==================================================================================================
 
-	private class PreviouslyRunColumnRenderer extends GTableCellRenderer {
+	private static class PreviouslyRunColumnRenderer extends GTableCellRenderer {
 
 		PreviouslyRunColumnRenderer() {
 			setHorizontalAlignment(SwingConstants.CENTER);

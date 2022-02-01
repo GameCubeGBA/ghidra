@@ -1895,7 +1895,7 @@ public class GhidraFileChooser extends DialogComponentProvider
 // Inner Classes
 //==================================================================================================
 
-	private abstract class FileChooserJob extends Job {
+	private abstract static class FileChooserJob extends Job {
 
 		@Override
 		public void run(TaskMonitor monitor) {
@@ -2042,7 +2042,7 @@ public class GhidraFileChooser extends DialogComponentProvider
 	}
 
 	// a custom button group that allows us to deselect buttons, which Java's does not
-	private class UnselectableButtonGroup extends ButtonGroup {
+	private static class UnselectableButtonGroup extends ButtonGroup {
 
 		private ButtonModel overriddenSelection = null;
 
@@ -2113,7 +2113,7 @@ public class GhidraFileChooser extends DialogComponentProvider
 	 * 
 	 * <P>The methods on the class are synchronized to ensure thread visibility.
 	 */
-	private class FileList {
+	private static class FileList {
 
 		private List<File> files = new ArrayList<>();
 
@@ -2157,7 +2157,7 @@ public class GhidraFileChooser extends DialogComponentProvider
 	/**
 	 * Container class to manage history entries for a directory and any selected file
 	 */
-	private class HistoryEntry {
+	private static class HistoryEntry {
 		private File parentDir;
 		private File selectedFile;
 

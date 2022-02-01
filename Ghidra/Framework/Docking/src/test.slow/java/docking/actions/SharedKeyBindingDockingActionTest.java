@@ -373,7 +373,7 @@ public class SharedKeyBindingDockingActionTest extends AbstractDockingTest {
 
 		TestNonSharedAction action1 = new TestNonSharedAction(OWNER_1, DEFAULT_KS_1);
 		TestNonSharedAction action1Copy =
-			new TestNonSharedAction(OWNER_1, DEFAULT_KS_DIFFERENT_THAN_1);
+                new TestNonSharedAction(OWNER_1, DEFAULT_KS_DIFFERENT_THAN_1);
 
 		tool.addAction(action1);
 		tool.addAction(action1Copy);
@@ -492,7 +492,7 @@ public class SharedKeyBindingDockingActionTest extends AbstractDockingTest {
 // Inner Classes
 //==================================================================================================
 
-	private class SharedNameAction extends DockingAction {
+	private static class SharedNameAction extends DockingAction {
 
 		public SharedNameAction(String owner, KeyStroke ks) {
 			super(SHARED_NAME, owner, KeyBindingType.SHARED);
@@ -505,7 +505,7 @@ public class SharedKeyBindingDockingActionTest extends AbstractDockingTest {
 		}
 	}
 
-	private class TestNonSharedAction extends DockingAction {
+	private static class TestNonSharedAction extends DockingAction {
 
 		public TestNonSharedAction(String owner, KeyStroke ks) {
 			super(NON_SHARED_NAME, owner, KeyBindingType.INDIVIDUAL);

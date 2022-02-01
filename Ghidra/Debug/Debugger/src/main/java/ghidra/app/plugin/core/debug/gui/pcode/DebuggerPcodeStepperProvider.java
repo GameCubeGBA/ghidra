@@ -294,7 +294,7 @@ public class DebuggerPcodeStepperProvider extends ComponentProviderAdapter {
 		}
 	}
 
-	class UniqueRefCellRenderer extends AbstractGColumnRenderer<RefType> {
+	static class UniqueRefCellRenderer extends AbstractGColumnRenderer<RefType> {
 		@Override
 		public Component getTableCellRendererComponent(GTableCellRenderingData data) {
 			super.getTableCellRendererComponent(data);

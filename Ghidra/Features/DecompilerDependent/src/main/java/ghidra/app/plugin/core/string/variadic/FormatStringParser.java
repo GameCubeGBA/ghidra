@@ -890,7 +890,7 @@ public class FormatStringParser {
 		return i;
 	}
 
-	private class FormatParsingData {
+	private static class FormatParsingData {
 
 		private String conversionSpecifier = null;
 		private String lengthModifier = null;

@@ -838,7 +838,7 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 		plugin.fireObjectUpdated(object);
 	}
 
-	class ObjectActionContext extends ActionContext {
+	static class ObjectActionContext extends ActionContext {
 
 		private DebuggerObjectsProvider provider;
 

@@ -400,10 +400,8 @@ public abstract class Translate implements BasicSpaceProvider {
 						throw new LowlevelError("OTHER space must be assigned index 1");
 					}
 				}
-				for (AddrSpace space : baselist) {
-					if (space.getName().equals(spc.getName())) {
-						duplicatedefine = true;
-					}
+				if (baselist.stream().anyMatch(space -> space.getName().equals(spc.getName()))) {
+					duplicatedefine = true;
 				}
 				break;
 		}

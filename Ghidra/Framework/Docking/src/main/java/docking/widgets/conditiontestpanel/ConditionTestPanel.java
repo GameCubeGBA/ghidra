@@ -269,7 +269,7 @@ public class ConditionTestPanel extends JPanel {
 // Inner Classes
 //==================================================================================================
 
-	private class ScrollableLabel extends GDHtmlLabel implements Scrollable {
+	private static class ScrollableLabel extends GDHtmlLabel implements Scrollable {
 
 		@Override
 		public Dimension getPreferredScrollableViewportSize() {
@@ -300,7 +300,7 @@ public class ConditionTestPanel extends JPanel {
 
 	}
 
-	private class OverallProgressBar extends JPanel {
+	private static class OverallProgressBar extends JPanel {
 		private Color color;
 		private int maxProgress;
 		private int progress;

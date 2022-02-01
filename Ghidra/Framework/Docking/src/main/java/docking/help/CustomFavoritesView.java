@@ -160,7 +160,7 @@ public class CustomFavoritesView extends FavoritesView {
 		}
 	}
 
-	class CustomFavoritesCellRenderer extends BasicFavoritesCellRenderer {
+	static class CustomFavoritesCellRenderer extends BasicFavoritesCellRenderer {
 
 		private final HelpModel helpModel;
 

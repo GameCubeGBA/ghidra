@@ -722,7 +722,7 @@ public class CoffLoader extends AbstractLibrarySupportLoader {
 		return COFF_NAME;
 	}
 
-	class CoffPair {
+	static class CoffPair {
 		public long offset;
 		public long size;
 

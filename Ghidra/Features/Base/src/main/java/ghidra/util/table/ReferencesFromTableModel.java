@@ -90,7 +90,7 @@ public class ReferencesFromTableModel extends AddressBasedTableModel<ReferenceEn
 		}
 	}
 
-	private class ReferenceTypeTableCellRenderer
+	private static class ReferenceTypeTableCellRenderer
 			extends AbstractGColumnRenderer<ReferenceEndpoint> {
 
 		// " << OFFCUT >>"

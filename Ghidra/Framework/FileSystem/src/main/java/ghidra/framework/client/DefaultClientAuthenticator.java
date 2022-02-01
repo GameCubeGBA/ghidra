@@ -46,7 +46,7 @@ public class DefaultClientAuthenticator extends PopupKeyStorePasswordProvider
 			}
 			PasswordCallback passCb = new PasswordCallback(prompt, false);
 			ServerPasswordPrompt pp = new ServerPasswordPrompt("Connection Authentication",
-				"Server", getRequestingHost(), nameCb, passCb, null, null, null);
+                    "Server", getRequestingHost(), nameCb, passCb, null, null, null);
 			SystemUtilities.runSwingNow(pp);
 			if (pp.okWasPressed()) {
 				return new PasswordAuthentication(nameCb != null ? nameCb.getName() : null,
@@ -77,7 +77,7 @@ public class DefaultClientAuthenticator extends PopupKeyStorePasswordProvider
 			NameCallback nameCb, PasswordCallback passCb, ChoiceCallback choiceCb,
 			AnonymousCallback anonymousCb, String loginError) {
 		ServerPasswordPrompt pp = new ServerPasswordPrompt(title, serverType, serverName, nameCb,
-			passCb, choiceCb, anonymousCb, loginError);
+                passCb, choiceCb, anonymousCb, loginError);
 		SystemUtilities.runSwingNow(pp);
 		return pp.okWasPressed();
 	}
@@ -103,7 +103,7 @@ public class DefaultClientAuthenticator extends PopupKeyStorePasswordProvider
 		}
 	}
 
-	private class ServerPasswordPrompt implements Runnable {
+	private static class ServerPasswordPrompt implements Runnable {
 
 		private static final String NAME_PREFERENCE = "PasswordPrompt.Name";
 		private static final String CHOICE_PREFERENCE = "PasswordPrompt.Choice";

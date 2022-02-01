@@ -80,7 +80,7 @@ public class CompareFunctionSizesScript extends GhidraScript {
 		callback.dispose();
 	}
 
-	class CompareFunctionSizesScriptConfigurer implements DecompileConfigurer {
+	static class CompareFunctionSizesScriptConfigurer implements DecompileConfigurer {
 		private Program p;
 
 		public CompareFunctionSizesScriptConfigurer(Program prog) {
@@ -161,7 +161,7 @@ public class CompareFunctionSizesScript extends GhidraScript {
 		void clear();
 	}
 
-	class TableEntryList implements RowEntries {
+	static class TableEntryList implements RowEntries {
 
 		private TableChooserDialog tDialog;
 

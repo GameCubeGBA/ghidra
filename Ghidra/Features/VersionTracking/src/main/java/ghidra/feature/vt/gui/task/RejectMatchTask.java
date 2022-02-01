@@ -15,14 +15,16 @@
  */
 package ghidra.feature.vt.gui.task;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import ghidra.feature.vt.api.main.*;
+import ghidra.feature.vt.api.main.VTAssociation;
+import ghidra.feature.vt.api.main.VTAssociationStatus;
+import ghidra.feature.vt.api.main.VTMatch;
+import ghidra.feature.vt.api.main.VTSession;
 import ghidra.feature.vt.api.util.VTAssociationStatusException;
 import ghidra.util.exception.AssertException;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
+
+import java.util.List;
 
 public class RejectMatchTask extends VtTask {
 
@@ -60,17 +62,5 @@ public class RejectMatchTask extends VtTask {
 		}
 
 		monitor.setProgress(matches.size());
-	}
-
-//==================================================================================================
-// Inner Classes
-//==================================================================================================
-
-	private class ErrorStatus {
-		private List<Exception> exceptions = new ArrayList<>();
-
-		boolean hasErrors() {
-			return !exceptions.isEmpty();
-		}
 	}
 }

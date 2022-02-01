@@ -119,7 +119,7 @@ public class ConstraintFilterPanel extends JPanel {
 		constraintComboBox.addActionListener(constraintComboBoxListener);
 	}
 
-	private class ConstraintComboBoxCellRenderer extends GListCellRenderer<ColumnConstraint<?>> {
+	private static class ConstraintComboBoxCellRenderer extends GListCellRenderer<ColumnConstraint<?>> {
 
 		@Override
 		protected String getItemText(ColumnConstraint<?> value) {

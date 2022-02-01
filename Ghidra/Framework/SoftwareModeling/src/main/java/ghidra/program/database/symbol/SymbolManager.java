@@ -322,7 +322,7 @@ public class SymbolManager implements SymbolTable, ManagerDB {
 
 				long dataTypeId = rec.getLongValue(SymbolDatabaseAdapter.SYMBOL_DATATYPE_COL);
 
-				if (curVarAddr == null || !addr.equals(curVarAddr) || dataTypeId != curDataTypeId) {
+				if (!addr.equals(curVarAddr) || dataTypeId != curDataTypeId) {
 
 					curVarAddr = addr;
 					curDataTypeId = rec.getLongValue(SymbolDatabaseAdapter.SYMBOL_DATATYPE_COL);
@@ -1608,7 +1608,7 @@ public class SymbolManager implements SymbolTable, ManagerDB {
 		}
 	}
 
-	private class SingleSymbolIterator implements SymbolIterator {
+	private static class SingleSymbolIterator implements SymbolIterator {
 
 		Symbol sym;
 
@@ -1786,7 +1786,7 @@ public class SymbolManager implements SymbolTable, ManagerDB {
 		}
 	}
 
-	private class SymbolQueryIterator implements SymbolIterator {
+	private static class SymbolQueryIterator implements SymbolIterator {
 		private SymbolIterator it;
 		private Symbol nextMatch;
 		private Pattern pattern;

@@ -500,7 +500,7 @@ public class VariousChoicesPanel extends ConflictPanel {
 		return !rows.isEmpty();
 	}
 
-	private class MyLabel extends GLabel {
+	private static class MyLabel extends GLabel {
 
 		/**
 		 * @param text the text of this label.

@@ -585,7 +585,7 @@ public class ProgramBigListingModel implements ListingModel, FormatModelListener
 		return addressSet;
 	}
 
-	private class LayoutCache {
+	private static class LayoutCache {
 
 		private LRUMap<Address, Layout> cache = new LRUMap<>(10);
 		private LRUMap<Address, Layout> gapCache = new LRUMap<>(10);

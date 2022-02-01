@@ -504,7 +504,7 @@ public class CommentsDialog extends DialogComponentProvider implements KeyListen
 		}
 	}
 
-	class AnnotationAdapterWrapper implements Comparable<AnnotationAdapterWrapper> {
+	static class AnnotationAdapterWrapper implements Comparable<AnnotationAdapterWrapper> {
 		private AnnotatedStringHandler handler;
 
 		public AnnotationAdapterWrapper(AnnotatedStringHandler handler) {

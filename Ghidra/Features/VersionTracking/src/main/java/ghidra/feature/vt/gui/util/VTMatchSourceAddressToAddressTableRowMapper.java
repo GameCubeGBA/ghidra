@@ -36,7 +36,7 @@ public class VTMatchSourceAddressToAddressTableRowMapper extends
 			ProgramLocationTableColumn<Address, COLUMN_TYPE> programColumn =
 				(ProgramLocationTableColumn<Address, COLUMN_TYPE>) sourceColumn;
 			return new VTMatchSourceWrappedMappedProgramLocationTableColumn<COLUMN_TYPE>(this,
-				programColumn);
+                    programColumn);
 		}
 
 		return new VTMatchSourceWrappedMappedTableColumn<COLUMN_TYPE>(this, sourceColumn);
@@ -48,7 +48,7 @@ public class VTMatchSourceAddressToAddressTableRowMapper extends
 		return association.getSourceAddress();
 	}
 
-	private class VTMatchSourceWrappedMappedProgramLocationTableColumn<COLUMN_TYPE> extends
+	private static class VTMatchSourceWrappedMappedProgramLocationTableColumn<COLUMN_TYPE> extends
 			MappedProgramLocationTableColumn<VTMatch, Address, COLUMN_TYPE> {
 
 		public VTMatchSourceWrappedMappedProgramLocationTableColumn(
@@ -73,7 +73,7 @@ public class VTMatchSourceAddressToAddressTableRowMapper extends
 		}
 	}
 
-	private class VTMatchSourceWrappedMappedTableColumn<COLUMN_TYPE> extends
+	private static class VTMatchSourceWrappedMappedTableColumn<COLUMN_TYPE> extends
 			MappedTableColumn<VTMatch, Address, COLUMN_TYPE, Program> {
 
 		public VTMatchSourceWrappedMappedTableColumn(

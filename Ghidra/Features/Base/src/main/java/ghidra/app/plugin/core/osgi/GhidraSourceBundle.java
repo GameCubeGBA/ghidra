@@ -619,7 +619,7 @@ public class GhidraSourceBundle extends GhidraBundle {
 		boolean anythingChanged = false;
 		if (!buildErrors.isEmpty()) {
 			buildErrors.clear();
-			anythingChanged |= true;
+			anythingChanged = true;
 		}
 
 		try {

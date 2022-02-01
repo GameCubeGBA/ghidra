@@ -16,6 +16,7 @@
 package ghidra.app.plugin.core.decompile.actions;
 
 import java.io.*;
+import java.util.Arrays;
 
 import javax.swing.ImageIcon;
 
@@ -72,15 +73,9 @@ public class ExportToCAction extends AbstractDecompilerAction {
 
 		saveLastUsedFileFile(file);
 
-		boolean hasExtension = false;
 		String path = file.getAbsolutePath();
-		for (String element : extensions) {
-			if (path.toLowerCase().endsWith("." + element)) {
-				hasExtension = true;
-			}
-		}
 
-		if (!hasExtension) {
+		if (Arrays.stream(extensions).noneMatch(element -> path.toLowerCase().endsWith("." + element))) {
 			file = new File(path + ".c");
 		}
 		return file;
