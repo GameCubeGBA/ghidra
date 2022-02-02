@@ -461,7 +461,8 @@ public class FileHeader implements StructConverter {
 				(DebugCOFFSymbolAux.IMAGE_SIZEOF_AUX_SYMBOL * symbol.getNumberOfAuxSymbols());
 
 			int numberOfAuxSymbols = symbol.getNumberOfAuxSymbols();
-			i += numberOfAuxSymbols > 0 ? numberOfAuxSymbols : 0;
+			if (numberOfAuxSymbols > 0)
+				i += numberOfAuxSymbols;
 
 			symbols.add(symbol);
 		}
