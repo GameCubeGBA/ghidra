@@ -440,7 +440,8 @@ public class FileHeader implements StructConverter {
 			symbolTableOffset += DebugCOFFSymbol.IMAGE_SIZEOF_SYMBOL;
 			symbolTableOffset += DebugCOFFSymbolAux.IMAGE_SIZEOF_AUX_SYMBOL * numberOfAuxSymbols;
 
-			i += numberOfAuxSymbols > 0 ? numberOfAuxSymbols : 0;
+			if (numberOfAuxSymbols > 0)
+				i += numberOfAuxSymbols;
 
 			symbols.add(symbol);
 		}
