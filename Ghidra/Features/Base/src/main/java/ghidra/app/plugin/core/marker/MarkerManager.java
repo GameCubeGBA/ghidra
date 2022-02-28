@@ -603,7 +603,7 @@ public class MarkerManager implements MarkerService {
 					}
 					if (lines.size() >= MAX_TOOLTIP_LINES) {
 						lines.add("...");
-						return lines;
+						break;
 					}
 				}
 			}
