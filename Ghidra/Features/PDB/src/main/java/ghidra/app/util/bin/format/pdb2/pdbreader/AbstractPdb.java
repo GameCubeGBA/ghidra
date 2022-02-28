@@ -350,8 +350,6 @@ public abstract class AbstractPdb implements AutoCloseable {
 				case ITEM:
 					// Switch to type (we have no evidence or documentation for this to happen).
 					return RecordNumber.typeRecordNumber(newNumber);
-				default:
-					break;
 			}
 		}
 		return recordNumber;

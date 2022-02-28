@@ -254,8 +254,7 @@ public class JsonDoclet implements Doclet {
 				case RESOURCE_VARIABLE:
 				case STATIC_INIT:
 				case TYPE_PARAMETER:
-				default:
-					break;
+                    break;
 			}
 		}
 

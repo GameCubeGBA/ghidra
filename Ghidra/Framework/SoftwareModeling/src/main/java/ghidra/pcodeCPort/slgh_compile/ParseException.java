@@ -121,8 +121,8 @@ public String getMessage() {
           if (maxSize < expectedTokenSequence.length) {
               maxSize = expectedTokenSequence.length;
           }
-          for (int j = 0; j < expectedTokenSequence.length; j++) {
-              expected.append(tokenImage[expectedTokenSequence[j]]).append(" ");
+          for (int i : expectedTokenSequence) {
+              expected.append(tokenImage[i]).append(" ");
           }
           if (expectedTokenSequence[expectedTokenSequence.length - 1] != 0) {
               expected.append("...");

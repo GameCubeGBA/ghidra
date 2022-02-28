@@ -908,9 +908,7 @@ public class PdbReaderMetrics {
 				break;
 			// TODO: for consideration... has implications...
 			//case SYMBOL:
-			default:
-				break;
-		}
+        }
 		// Separate switch because local recordNumber might have changed by fixupTypeIndex.
 		switch (recordNumber.getCategory()) {
 			case TYPE:
@@ -926,9 +924,7 @@ public class PdbReaderMetrics {
 					//witnessPrimitive(recordNumber.getNumber());
 				}
 				break;
-			default:
-				break;
-		}
+        }
 	}
 
 	private void witnessDataRecordNumberHighBitSet() {

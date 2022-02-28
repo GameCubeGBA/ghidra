@@ -173,8 +173,7 @@ public class PatternEvaluationStats {
 				break;
 			case PRE_PATTERN_HIT:
 				incNumPrePatternHit();
-			default:
-				break;
+                break;
 		}
 	}
 

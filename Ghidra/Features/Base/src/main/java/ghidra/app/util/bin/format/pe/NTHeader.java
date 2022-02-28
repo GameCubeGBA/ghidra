@@ -145,8 +145,7 @@ public class NTHeader implements StructConverter, OffsetValidator {
 				case MEMORY:
 					return rva;
 				case FILE:
-				default:
-					if (rva >= sectionVA && rva < sectionVA + rawSize) {
+                    if (rva >= sectionVA && rva < sectionVA + rawSize) {
 						return rva + rawPtr - sectionVA;
 					}
 					break;
