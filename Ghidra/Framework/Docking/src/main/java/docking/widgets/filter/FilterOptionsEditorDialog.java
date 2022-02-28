@@ -209,8 +209,7 @@ public class FilterOptionsEditorDialog extends DialogComponentProvider {
 					regularExpressionButton.setSelected(true);
 					break;
 				case CONTAINS:
-				default:
-					containsButton.setSelected(true);
+                    containsButton.setSelected(true);
 					break;
 			}
 

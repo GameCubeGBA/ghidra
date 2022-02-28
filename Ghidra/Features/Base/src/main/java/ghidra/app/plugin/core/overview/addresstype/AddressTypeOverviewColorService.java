@@ -231,10 +231,8 @@ public class AddressTypeOverviewColorService
 			case UNINITIALIZED:
 				options.setColor("Uninitialized Color", newColor);
 				break;
-			default:
-				break;
 
-		}
+        }
 	}
 
 	private boolean isInFunction(Address address) {

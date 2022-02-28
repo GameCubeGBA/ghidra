@@ -311,11 +311,10 @@ public class ProgramDiff {
 			diff.restrictAddressSet = new AddressSet(this.restrictAddressSet);
 			diff.pdf = this.pdf;
 			diff.diffAddrSets = new Hashtable<>(this.diffAddrSets);
-			for (Iterator<Integer> iterator = diff.diffAddrSets.keySet().iterator(); iterator.hasNext();) {
-				Integer key = iterator.next();
-				AddressSet addrSet = diff.diffAddrSets.get(key);
-				diff.diffAddrSets.put(key, new AddressSet(addrSet));
-			}
+            for (Integer key : diff.diffAddrSets.keySet()) {
+                AddressSet addrSet = diff.diffAddrSets.get(key);
+                diff.diffAddrSets.put(key, new AddressSet(addrSet));
+            }
 			diff.cancelled = this.cancelled;
 			diff.currentDiffs = new AddressSet(this.currentDiffs);
 			diff.diffsToReturn = new AddressSet(this.diffsToReturn);

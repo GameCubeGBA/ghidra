@@ -877,8 +877,7 @@ public class FunctionSignatureStringable extends Stringable {
 						// Always replace since defaults get handled by "if" before this "switch".
 						break;
 					case EXCLUDE:
-					default:
-						continue;
+                        continue;
 				}
 			}
 

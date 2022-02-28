@@ -435,11 +435,7 @@ public class ExternalFunctionMerger extends AbstractFunctionMerger implements Li
 			case THUNK_CONFLICT:
 				thunkChoice = choiceForFunctionConflict;
 				break;
-			default:
-				Msg.showError(this, listingMergePanel, "Unrecognized External Conflict Type",
-					"Unrecognized indicator (" + externalConflictType +
-						") for external conflict type to merge.");
-		}
+        }
 	}
 
 	@Override

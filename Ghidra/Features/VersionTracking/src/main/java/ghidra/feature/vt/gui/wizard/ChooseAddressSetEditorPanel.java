@@ -109,8 +109,7 @@ public class ChooseAddressSetEditorPanel extends JPanel {
 				choseMyRanges();
 				break;
 			case ENTIRE_PROGRAM:
-			default:
-				entireProgramButton.setSelected(true);
+                entireProgramButton.setSelected(true);
 				choseEntireProgram();
 				break;
 		}

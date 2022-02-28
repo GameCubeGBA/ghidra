@@ -610,11 +610,7 @@ class SymbolMerger extends AbstractListingMerger {
 			case RENAME_SYMBOL_CONFLICT:
 				renameSymbolChoice = choiceForSymbolConflict;
 				break;
-			default:
-				Msg.showError(this, listingMergePanel, "Unrecognized Symbol Conflict Type",
-					"Unrecognized indicator (" + symbolConflictType +
-						") for symbol conflict type to merge.");
-		}
+        }
 	}
 
 	/* (non-Javadoc)

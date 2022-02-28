@@ -85,10 +85,8 @@ public class FidPopulateResult {
 			case NO_DEFINED_SYMBOL:
 				numNoDefinedSymbol += 1;
 				break; // Fall-thru to put in extreme list
-			default:
-				break;
 
-		}
+        }
 		extremeFailureMap.put(new Location(domainFile, functionName, functionEntryPoint),
 			disposition);
 	}

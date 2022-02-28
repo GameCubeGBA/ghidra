@@ -1316,9 +1316,8 @@ public abstract class GhidraScript extends FlatProgramAPI {
 				case ENUM_TYPE:
 					propertyValue = options.getObject(propertyName, null);
 					break;
-				default:
-					// Do nothing
-			}
+                // Do nothing
+            }
 
 			if (propertyValue != null) {
 				availableOptions.put(propertyName, propertyValue.toString());
@@ -1459,8 +1458,7 @@ public abstract class GhidraScript extends FlatProgramAPI {
 						"Not allowed to change settings usings strings for type: " + optionType;
 
 				case NO_TYPE:
-				default:
-					changeFailedMessage += "The option could not be found for this program.";
+                    changeFailedMessage += "The option could not be found for this program.";
 			}
 
 		}
