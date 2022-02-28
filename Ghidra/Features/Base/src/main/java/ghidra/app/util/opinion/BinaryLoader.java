@@ -354,15 +354,14 @@ public class BinaryLoader extends AbstractProgramLoader {
 	@Override
 	public List<Option> getDefaultOptions(ByteProvider provider, LoadSpec loadSpec,
 			DomainObject domainObject, boolean loadIntoProgram) {
-		long fileOffset = 0;
-		long origFileLength = -1;
+		long origFileLength;
 		try {
 			origFileLength = provider.length();
 		}
 		catch (IOException e) {
+			origFileLength = -1;
 			Msg.warn(this, "Error determining length", e);
 		}
-		long length = origFileLength;
 		String blockName = "";
 		Address baseAddr = null;
 		if (domainObject instanceof Program) {
@@ -375,8 +374,7 @@ public class BinaryLoader extends AbstractProgramLoader {
 				}
 			}
 		}
-		
-		length = Math.min(length, origFileLength - fileOffset);
+
 		List<Option> list = new ArrayList<Option>();
 
 		if (loadIntoProgram) {
@@ -387,9 +385,9 @@ public class BinaryLoader extends AbstractProgramLoader {
 			Loader.COMMAND_LINE_ARG_PREFIX + "-blockName"));
 		list.add(new Option(OPTION_NAME_BASE_ADDR, baseAddr, Address.class,
 			Loader.COMMAND_LINE_ARG_PREFIX + "-baseAddr"));
-		list.add(new Option(OPTION_NAME_FILE_OFFSET, new HexLong(fileOffset), HexLong.class,
+		list.add(new Option(OPTION_NAME_FILE_OFFSET, new HexLong(0), HexLong.class,
 			Loader.COMMAND_LINE_ARG_PREFIX + "-fileOffset"));
-		list.add(new Option(OPTION_NAME_LEN, new HexLong(length), HexLong.class,
+		list.add(new Option(OPTION_NAME_LEN, new HexLong(origFileLength), HexLong.class,
 			Loader.COMMAND_LINE_ARG_PREFIX + "-length"));
 
 		list.addAll(super.getDefaultOptions(provider, loadSpec, domainObject, loadIntoProgram));
