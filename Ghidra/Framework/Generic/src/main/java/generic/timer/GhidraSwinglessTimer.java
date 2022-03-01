@@ -82,13 +82,6 @@ public class GhidraSwinglessTimer implements GhidraTimer {
 	private TimerTask timerTask;
 
 	/**
-	 * Creates a new repeating timer with a initial delay of 100ms and a continual delay of 100ms. 
-	 */
-	public GhidraSwinglessTimer() {
-		this(100, null);
-	}
-	
-	/**
 	 * Creates a new repeating timer with a initial and continual delay with the given delay. 
 	 * @param delay the delay to use for the first and subsequent timer callbacks.
 	 * @param callback the callback the be called with the timer fires.
