@@ -127,9 +127,9 @@ public class PKIAuthenticationModule implements AuthenticationModule {
 			}
 
 			boolean usingSelfSignedCert =
-				ApplicationKeyManagerFactory.usingGeneratedSelfSignedCertificate();
+					ApplicationKeyManagerFactory.usingGeneratedSelfSignedCertificate();
 			if (!ApplicationKeyManagerUtils.isMySignature(usingSelfSignedCert ? null : authorities,
-				token, sigCb.getServerSignature())) {
+					token, sigCb.getServerSignature())) {
 				throw new FailedLoginException("Invalid Signature callback");
 			}
 
@@ -139,7 +139,7 @@ public class PKIAuthenticationModule implements AuthenticationModule {
 			}
 
 			ApplicationKeyManagerUtils.validateClient(certChain,
-				ApplicationKeyManagerUtils.RSA_TYPE);
+					ApplicationKeyManagerUtils.RSA_TYPE);
 
 			byte[] sigBytes = sigCb.getSignature();
 			if (sigBytes != null) {
@@ -153,7 +153,7 @@ public class PKIAuthenticationModule implements AuthenticationModule {
 			}
 
 			String dnUsername =
-				userMgr.getUserByDistinguishedName(certChain[0].getSubjectX500Principal());
+					userMgr.getUserByDistinguishedName(certChain[0].getSubjectX500Principal());
 			if (dnUsername != null) {
 				return dnUsername;
 			}
@@ -167,27 +167,25 @@ public class PKIAuthenticationModule implements AuthenticationModule {
 					}
 					log.log(Level.WARN, "Know user's DN not found (" + username + ") ");
 					username = UserManager.ANONYMOUS_USERNAME;
-				}
-				else { // if (!certChain[0].getSubjectX500Principal().equals(dn.asX500Principal())) {
+				} else { // if (!certChain[0].getSubjectX500Principal().equals(dn.asX500Principal())) {
 					userMgr.logUnknownDN(username, certChain[0].getSubjectX500Principal());
 					if (!anonymousAllowed) {
 						throw new FailedLoginException(
-							"Expected distinguished name: " + x500User.getName());
+								"Expected distinguished name: " + x500User.getName());
 					}
 					username = UserManager.ANONYMOUS_USERNAME;
 				}
-			}
-			else {
+			} else {
 				if (!anonymousAllowed) {
 					throw new FailedLoginException("Unknown user: " + username);
 				}
 				username = UserManager.ANONYMOUS_USERNAME;
 			}
 
-			if (UserManager.ANONYMOUS_USERNAME.equals(username)) {
-				RepositoryManager.log(null, null, "Anonymous access allowed for: " +
+			// We have anonymous access
+
+			RepositoryManager.log(null, null, "Anonymous access allowed for: " +
 					certChain[0].getSubjectX500Principal().toString(), user.getName());
-			}
 
 		}
 		catch (LoginException e) {

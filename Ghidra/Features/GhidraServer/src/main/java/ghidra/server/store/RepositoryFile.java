@@ -425,9 +425,7 @@ public class RepositoryFile {
 	}
 
 	/**
-	 * Reaquire associated folder item following a folder move or name change.
-	 * @param newName items new name (which may be unchanged if path change was
-	 * the result of a moved or renamed folder).
+	 * Require associated folder item following a folder move or name change.
 	 */
 	void pathChanged() {
 		synchronized (fileSystem) {
