@@ -167,11 +167,10 @@ public class SSHKeyManager {
 		try (BufferedReader r = new BufferedReader(new FileReader(sshPublicKeyFile))) {
 			String line;
 			while ((line = r.readLine()) != null) {
-				if (!line.startsWith("ssh-")) {
-					continue;
+				if (line.startsWith("ssh-")) {
+					keyLine = line;
+					break;
 				}
-				keyLine = line;
-				break;
 			}
 		}
 
