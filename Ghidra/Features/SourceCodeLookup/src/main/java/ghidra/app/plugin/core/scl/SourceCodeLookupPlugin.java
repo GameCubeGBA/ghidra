@@ -125,13 +125,14 @@ public class SourceCodeLookupPlugin extends ProgramPlugin {
 		while (true) {
 			EclipseConnection connection = service.connectToEclipse(port);
 			Socket clientSocket = connection.getSocket();
+			if (clientSocket == null) {
+				handleUnableToConnect(connection);
+				return;
+			}
+
             try (clientSocket; BufferedReader input =
                     new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                  PrintStream output = new PrintStream(clientSocket.getOutputStream())) {
-                if (clientSocket == null) {
-                    handleUnableToConnect(connection);
-                    return;
-                }
 
                 output.print(symbolText + "\n");
                 output.flush();
