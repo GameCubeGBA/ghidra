@@ -541,13 +541,13 @@ public abstract class AbstractFunctionGraphTest extends AbstractGhidraHeadedInte
 	protected void waitForBusyRunManager(FGController controller) {
 		FGModel model = controller.getModel();
 
-		long start = System.nanoTime();
+//		long start = System.nanoTime();
 		waitForSwing();
 		RunManager runManager = (RunManager) TestUtils.getInstanceField("runManager", model);
 
 		waitForCondition(() -> !runManager.isInProgress());
-		long end = System.nanoTime();
-		long total = end - start;
+//		long end = System.nanoTime();
+//		long total = end - start;
 //		Msg.debug(this,
 //			"Run manager wait time: " + TimeUnit.MILLISECONDS.convert(total, TimeUnit.NANOSECONDS));
 	}
