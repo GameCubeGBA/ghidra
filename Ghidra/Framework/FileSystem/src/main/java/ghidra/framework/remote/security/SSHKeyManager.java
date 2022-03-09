@@ -112,7 +112,7 @@ public class SSHKeyManager {
 					}
 					checkKeyFormat = false;
 				}
-				if (!keyBuf.isEmpty()) {
+				if (keyBuf.length() == 0) {
 					keyBuf.append('\n');
 				}
 				keyBuf.append(line);
