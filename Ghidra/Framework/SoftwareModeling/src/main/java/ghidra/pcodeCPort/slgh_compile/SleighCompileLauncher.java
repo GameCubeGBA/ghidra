@@ -111,74 +111,76 @@ public class SleighCompileLauncher implements GhidraLaunchable {
 			if (args[i].charAt(0) != '-') {
 				break;
 			}
-            if (args[i].charAt(1) == 'i') {
-                // inject options from file specified by next argument
-                args = injectOptionsFromFile(args, ++i);
-                if (args == null) {
-                    return 1;
-                }
-            }
-            else if (args[i].charAt(1) == 'D') {
-                String preproc = args[i].substring(2);
-                int pos = preproc.indexOf('=');
-                if (pos == -1) {
-                    Msg.error(SleighCompile.class, "Bad sleigh option: " + args[i]);
-                    return 1;
-                }
-                String name = preproc.substring(0, pos);
-                String value = preproc.substring(pos + 1);
-                preprocs.put(name, value); // Preprocessor macro definitions
-            }
-            else if (args[i].charAt(1) == 'd') {
-                String moduleName = args[i].substring(2);
-                ResourceFile module = Application.getModuleRootDir(moduleName);
-                if (module == null || !module.isDirectory()) {
-                    Msg.error(SleighCompile.class,
-                        "Failed to resolve module reference: " + args[i]);
-                    return 1;
-                }
-                Msg.debug(SleighCompile.class,
-                    "Sleigh resolved module: " + moduleName + "=" + module.getAbsolutePath());
-                preprocs.put(moduleName, module.getAbsolutePath()); // Preprocessor macro definitions
-            }
-            else if (args[i].charAt(1) == 'u') {
-                unnecessaryPcodeWarning = true;
-            }
-            else if (args[i].charAt(1) == 't') {
-                deadTempWarning = true;
-            }
-            else if (args[i].charAt(1) == 'e') {
-                enforceLocalKeyWord = true;
-            }
-            else if (args[i].charAt(1) == 'f') {
-                unusedFieldWarning = true;
-            }
-            else if (args[i].charAt(1) == 'l') {
-                lenientConflict = false;
-            }
-            else if (args[i].charAt(1) == 'c') {
-                allCollisionWarning = true;
-            }
-            else if (args[i].charAt(1) == 'n') {
-                allNopWarning = true;
-            }
-            else if (args[i].charAt(1) == 'a') {
-                allMode = true;
-            }
-            else if (args[i].charAt(1) == 'o') {
-                largeTemporaryWarning = true;
-            }
-            else if (args[i].charAt(1) == 's') {
-                caseSensitiveRegisterNames = true;
-            }
-            else if (args[i].charAt(1) == 'x') {
-                SleighCompile.yydebug = true; // Debug option
-            }
-            else {
-                Msg.error(SleighCompile.class, "Unknown option: " + args[i]);
-                return 1;
-            }
-        }
+			switch (args[i].charAt(1)) {
+				case 'i':
+					args = injectOptionsFromFile(args, ++i);
+					if (args == null) {
+						return 1;
+					}
+					break;
+				case 'D': {
+					String preproc = args[i].substring(2);
+					int pos = preproc.indexOf('=');
+					if (pos == -1) {
+						Msg.error(SleighCompile.class, "Bad sleigh option: " + args[i]);
+						return 1;
+					}
+					String name = preproc.substring(0, pos);
+					String value = preproc.substring(pos + 1);
+					preprocs.put(name, value); // Preprocessor macro definitions
+					break;
+				}
+				case 'd': {
+					String moduleName = args[i].substring(2);
+					ResourceFile module = Application.getModuleRootDir(moduleName);
+					if (module == null || !module.isDirectory()) {
+						Msg.error(SleighCompile.class,
+								"Failed to resolve module reference: " + args[i]);
+						return 1;
+					}
+					Msg.debug(SleighCompile.class,
+							"Sleigh resolved module: " + moduleName + "=" + module.getAbsolutePath());
+					preprocs.put(moduleName, module.getAbsolutePath()); // Preprocessor macro definitions
+					break;
+				}
+				case 'u':
+					unnecessaryPcodeWarning = true;
+					break;
+				case 't':
+					deadTempWarning = true;
+					break;
+				case 'e':
+					enforceLocalKeyWord = true;
+					break;
+				case 'f':
+					unusedFieldWarning = true;
+					break;
+				case 'l':
+					lenientConflict = false;
+					break;
+				case 'c':
+					allCollisionWarning = true;
+					break;
+				case 'n':
+					allNopWarning = true;
+					break;
+				case 'a':
+					allMode = true;
+					break;
+				case 'o':
+					largeTemporaryWarning = true;
+					break;
+				case 's':
+					caseSensitiveRegisterNames = true;
+					break;
+				case 'x':
+					SleighCompile.yydebug = true; // Debug option
+					break;
+				default:
+					Msg.error(SleighCompile.class, "Unknown option: " + args[i]);
+					return 1;
+			}
+		}
 
 		if (i < args.length - 2) {
 			Msg.error(SleighCompile.class, "Too many parameters");
@@ -220,14 +222,21 @@ public class SleighCompileLauncher implements GhidraLaunchable {
 					++totalSuccesses;
 				}
 			}
-			System.out.println(totalSuccesses + " languages successfully compiled");
+			if (totalSuccesses == 1)
+				System.out.println("1 language successfully compiled");
+			else
+				System.out.println(totalSuccesses + " languages successfully compiled");
 			if (totalFailures != 0) {
 				for (String path : failures) {
 					System.out.println(path + " failed to compile");
 				}
-				System.out.println(totalFailures + " languages total failed to compile");
+				if (totalSuccesses == 1)
+					System.out.println("1 language failed to compile");
+				else
+					System.out.println(totalFailures + " languages total failed to compile");
+				return -totalFailures;
 			}
-			return -totalFailures;
+			return 0;
 		}
 
 		// single file compile
