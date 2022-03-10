@@ -85,9 +85,9 @@ public class GRandomAccessFile {
 
 	@Override
 	protected void finalize() {
-		if (open) {
-			//TODO Msg.warn(this, "FAIL TO CLOSE " + file);
-		}
+		// if (open) {
+		// 	TODO Msg.warn(this, "FAIL TO CLOSE " + file);
+		// }
 	}
 
 	/**
