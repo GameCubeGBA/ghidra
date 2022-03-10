@@ -4,6 +4,7 @@
 package mobiledevices.dmg.ghidra;
 
 import java.io.*;
+import java.util.Arrays;
 
 /**
  * Instances of this class support both reading and writing to a 
@@ -286,7 +287,7 @@ public class GRandomAccessFile {
 
 	private void swapInLast() throws IOException {
 		checkOpen();
-		if (buffer == EMPTY) {
+		if (Arrays.equals(buffer, EMPTY)) {
 			return;
 		}
 		// swap em and return
