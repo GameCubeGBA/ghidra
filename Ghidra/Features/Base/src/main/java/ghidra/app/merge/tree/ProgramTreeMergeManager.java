@@ -256,7 +256,7 @@ public class ProgramTreeMergeManager implements MergeResolver {
 		String userName = SystemUtilities.getUserName();
 		baseName = baseName + "." + userName;
 		String name = baseName;
-		while (true) {
+		for (;;) {
 			if (currentListing.getRootModule(name) == null) {
 				return name;
 			}

@@ -1641,7 +1641,7 @@ public class DataTypeMergeManager implements MergeResolver {
 			baseName = newName.substring(0, index);
 		}
 		int oneUpNumber = 0;
-		while (true) {
+		for (;;) {
 			try {
 
 				if (newParent.getCategory(newName) == null) {
@@ -1672,7 +1672,7 @@ public class DataTypeMergeManager implements MergeResolver {
 			baseName = newName.substring(0, index);
 		}
 		int oneUpNumber = 0;
-		while (true) {
+		for (;;) {
 			try {
 				category.setName(name);
 				return;
@@ -1704,7 +1704,7 @@ public class DataTypeMergeManager implements MergeResolver {
 			baseName = newName.substring(0, index);
 		}
 		int oneUpNumber = 0;
-		while (true) {
+		for (;;) {
 			try {
 				dt.setName(newName);
 				return;

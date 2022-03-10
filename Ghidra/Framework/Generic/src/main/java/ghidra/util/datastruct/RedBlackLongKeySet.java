@@ -196,7 +196,7 @@ public class RedBlackLongKeySet implements Serializable {
         }
         RBNode node = root;
 
-        while (true) {
+        for (;;) {
 
             if (key == node.key) {
                 return;

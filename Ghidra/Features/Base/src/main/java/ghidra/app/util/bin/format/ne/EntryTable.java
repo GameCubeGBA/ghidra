@@ -40,7 +40,7 @@ public class EntryTable {
         reader.setPointerIndex(Conv.shortToInt(index));
 
         ArrayList<EntryTableBundle> list = new ArrayList<EntryTableBundle>();
-        while (true) {
+        for (;;) {
             EntryTableBundle etb = new EntryTableBundle(reader);
             if (etb.getCount() == 0) break;
             list.add(etb);

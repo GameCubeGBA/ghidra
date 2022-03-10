@@ -1414,7 +1414,7 @@ d_prefix (struct d_info *di)
 {
   struct demangle_component *ret = NULL;
 
-  while (1)
+  for (;;)
     {
       char peek;
       enum demangle_component_type comb_type;
@@ -1581,7 +1581,7 @@ d_number (struct d_info *di)
     }
 
   ret = 0;
-  while (1)
+  for (;;)
     {
       if (! IS_DIGIT (peek))
 	{
@@ -1750,7 +1750,7 @@ d_operator_name (struct d_info *di)
 		   / sizeof (cplus_demangle_operators[0]))
 		  - 1);
 
-      while (1)
+      for (;;)
 	{
 	  int i;
 	  const struct demangle_operator_info *p;
@@ -2612,7 +2612,7 @@ d_parmlist (struct d_info *di)
 
   tl = NULL;
   ptl = &tl;
-  while (1)
+  for (;;)
     {
       struct demangle_component *type;
 
@@ -2870,7 +2870,7 @@ d_template_args (struct d_info *di)
 
   al = NULL;
   pal = &al;
-  while (1)
+  for (;;)
     {
       struct demangle_component *a;
 
@@ -2942,7 +2942,7 @@ d_exprlist (struct d_info *di, char terminator)
       return d_make_comp (di, DEMANGLE_COMPONENT_ARGLIST, NULL, NULL);
     }
 
-  while (1)
+  for (;;)
     {
       struct demangle_component *arg = d_expression (di);
       if (arg == NULL)

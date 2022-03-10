@@ -292,7 +292,7 @@ class RecoveryFile {
 
 		int nextMapEntryOffset = FIRST_ENTRY_OFFSET;
 
-		while (true) {
+		for (;;) {
 			if (nextMapEntryOffset > maxOffset) {
 				// Get next map buffer
 				thisIndex = mapBuffer.getInt(NEXT_BUFFER_INDEX_OFFSET);
@@ -387,7 +387,7 @@ class RecoveryFile {
 		int offset = FIRST_ENTRY_OFFSET;
 		int entryIx = 0;
 
-		while (true) {
+		for (;;) {
 			if (offset > maxOffset) {
 				// Get next list buffer
 				thisIndex = listBuffer.getInt(NEXT_BUFFER_INDEX_OFFSET);

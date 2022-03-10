@@ -85,7 +85,7 @@ public class IDFLookup {
 	private void insertHash(int hash,int count) {
 		IDFEntry entry;
 		int val = hash & mask;
-		for(;;) {
+		for (;;) {
 			entry = hashtable[val];
 			if (entry.count == 0xffffffff)		// An empty slot
 				break;

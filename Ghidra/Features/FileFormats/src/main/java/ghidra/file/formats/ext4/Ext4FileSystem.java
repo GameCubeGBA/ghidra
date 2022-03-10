@@ -232,7 +232,7 @@ public class Ext4FileSystem implements GFileSystem {
 		int lookupCount = 0;
 		GFile currentFile = file;
 		StringBuilder symlinkDebugPath = new StringBuilder();
-		while (true) {
+		for (;;) {
 			if (lookupCount++ > MAX_SYMLINK_LOOKUP_COUNT) {
 				throw new IOException(
 					"Symlink too long: " + file.getPath() + ", " + symlinkDebugPath);

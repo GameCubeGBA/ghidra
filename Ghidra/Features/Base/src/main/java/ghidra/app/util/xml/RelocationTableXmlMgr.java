@@ -47,7 +47,7 @@ class RelocationTableXmlMgr {
 		AddressFactory factory = program.getAddressFactory();
 
 		XmlElement element = parser.next();
-		while (true) {
+		for (;;) {
 			if (monitor.isCancelled()) {
 				throw new CancelledException();
 			}

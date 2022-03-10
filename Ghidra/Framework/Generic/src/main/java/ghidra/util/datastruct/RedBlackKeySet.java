@@ -203,7 +203,7 @@ public class RedBlackKeySet implements ShortKeySet, Serializable {
 		}
 		RBNode node = root;
 
-		while (true) {
+		for (;;) {
 
 			if (key == node.key) {
 				return;

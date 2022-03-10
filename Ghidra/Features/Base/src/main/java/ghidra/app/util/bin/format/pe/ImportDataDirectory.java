@@ -265,7 +265,7 @@ public class ImportDataDirectory extends DataDirectory {
 			int iatptr = ntHeader.rvaToPointer(id.getFirstThunk());
 
 			int nextPosToCreateExternalRef = 0;
-			while (true) {
+			for (;;) {
 				if (!ntHeader.checkPointer(intptr)) {
 					Msg.error(this, "Invalid file index " + Integer.toHexString(intptr));
 					break;

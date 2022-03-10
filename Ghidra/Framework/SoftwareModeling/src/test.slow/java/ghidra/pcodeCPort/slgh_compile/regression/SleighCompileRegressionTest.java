@@ -177,7 +177,7 @@ public class SleighCompileRegressionTest extends AbstractGenericTest {
 			new PushbackEntireLine(new BufferedReader(new FileReader(targetFile)));
 		int actualLineNumber = 1;
 		int targetLineNumber = 1;
-		while (true) {
+		for (;;) {
 			try {
 				if (currentLangBadCount >= 100) {
 					ok = itsOK("WAY TOO MANY DIFFERENCES, BAILING", false);

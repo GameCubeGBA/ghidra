@@ -41,7 +41,7 @@ public class Lock {
 	public synchronized void acquire() {
 		Thread currThread = Thread.currentThread();
 
-		while (true) {
+		for (;;) {
 			if (owner == null) {
 				lockAquireCount = 1;
 				owner = currThread;

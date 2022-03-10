@@ -37,7 +37,7 @@ public abstract class PairingIteratorMerger<T, L extends T, R extends T>
 	}
 
 	protected void findNext() {
-		while (true) {
+		for (;;) {
 			if (nextL == null) {
 				if (!left.hasNext()) {
 					return;

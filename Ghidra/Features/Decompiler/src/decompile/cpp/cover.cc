@@ -274,7 +274,7 @@ int4 Cover::intersect(const Cover &op2) const
   iter = cover.begin();
   iter2 = op2.cover.begin();
 
-  for(;;) {
+  for (;;) {
     if (iter == cover.end()) return res;
     if (iter2 == op2.cover.end()) return res;
 
@@ -313,7 +313,7 @@ void Cover::intersectList(vector<int4> &listout,const Cover &op2,int4 level) con
   iter = cover.begin();
   iter2 = op2.cover.begin();
 
-  for(;;) {
+  for (;;) {
     if (iter == cover.end()) return;
     if (iter2 == op2.cover.end()) return;
 

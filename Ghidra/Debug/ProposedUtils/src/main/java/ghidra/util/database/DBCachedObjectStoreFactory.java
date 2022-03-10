@@ -627,7 +627,7 @@ public class DBCachedObjectStoreFactory {
 			PrimitiveCodec<Object> codec =
 				(PrimitiveCodec<Object>) getPrimitiveCodec(value.getClass());
 			ByteBuffer buf = ByteBuffer.allocate(1024);
-			while (true) {
+			for (;;) {
 				try {
 					buf.clear();
 					buf.put(codec.getSelector());

@@ -44,7 +44,7 @@ public class ImportMSLibs extends GhidraScript {
 		ArrayList<File> directories = new ArrayList<File>();
 
 		// ALL .LIB files under this directory will be inspected/imported as Win COFF
-		while (true) {
+		for (;;) {
 			try {
 				File directory =
 					askDirectory("Add a top-level import directory (cancel to quit)", "Add");

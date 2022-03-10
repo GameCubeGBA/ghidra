@@ -170,7 +170,7 @@ void RuleLexer::initKeywords(void)
 int4 RuleLexer::nextToken(void)
 
 {
-  for(;;) {
+  for (;;) {
     int4 mychar = next(0);
     switch(mychar) {
     case '(':

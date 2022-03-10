@@ -169,7 +169,7 @@ public class TextEditorComponentProvider extends ComponentProviderAdapter {
 
 	private String loadTextFile(BufferedReader reader) throws IOException {
 		StringBuilder buffer = new StringBuilder();
-		while (true) {
+		for (;;) {
 			String line = reader.readLine();
 			if (line == null) {
 				break;

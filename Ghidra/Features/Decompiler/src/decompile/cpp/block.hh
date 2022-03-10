@@ -581,7 +581,7 @@ public:
 ///
 /// Overflow syntax refers to the situation where there is a proper BlockWhileDo structure but
 /// the conditional block is too long or complicated to emit as a single conditional expression.
-/// An alternate `while(true) { }` form is used instead.
+/// An alternate `while (true) { }` form is used instead.
 ///
 /// If an iterator op is provided, the block will be printed using \e for loop syntax,
 /// `for(i=0;i<10;++i)` where an \e initializer statement and \e iterator statement are

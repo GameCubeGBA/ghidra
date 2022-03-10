@@ -251,7 +251,7 @@ public class ServerAdmin implements GhidraLaunchable {
 		char[] pwd1 = null;
 		char[] pwd2 = null;
 		try {
-			while (true) {
+			for (;;) {
 				System.out.println("Enter password for user '" + userSID + "'");
 				pwd1 = getPassword("New password: ", true);
 				pwd2 = getPassword("Retype new password: ", false);
@@ -297,7 +297,7 @@ public class ServerAdmin implements GhidraLaunchable {
 
 				System.out.print(prompt);
 
-				while (true) {
+				for (;;) {
 					c = System.in.read();
 					if (c <= 0 || c == '\n') {
 						break;

@@ -765,7 +765,7 @@ public class DBTestUtils {
 		BinaryField lastBf = bf;
 		int cnt = 0;
 		try {
-			while (true) {
+			for (;;) {
 				bf = increment(bf, maxLen);
 //				System.out.println(bf.toString());
 				if (bf.compareTo(lastBf) <= 0) {
@@ -784,7 +784,7 @@ public class DBTestUtils {
 		System.out.println("Decrementing...");
 		cnt = 0;
 		try {
-			while (true) {
+			for (;;) {
 				bf = decrement(bf, maxLen);
 //				System.out.println(bf.toString());
 				if (bf.compareTo(lastBf) >= 0) {

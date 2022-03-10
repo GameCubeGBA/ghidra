@@ -720,7 +720,7 @@ public class TextFieldAutocompleter<T> {
 			throw new IllegalArgumentException("Given field is not attached");
 		}
 		Set<String> visited = new HashSet<>();
-		while (true) {
+		for (;;) {
 			String before = getPrefix(field);
 			if (!visited.add(before)) {
 				return;

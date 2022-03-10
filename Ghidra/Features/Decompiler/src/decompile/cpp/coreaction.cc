@@ -379,7 +379,7 @@ int4 ActionStackPtrFlow::repair(Funcdata &data,AddrSpace *id,Varnode *spcbasein,
   BlockBasic *curblock = loadop->getParent();
   list<PcodeOp *>::iterator begiter = curblock->beginOp();
   list<PcodeOp *>::iterator iter = loadop->getBasicIter();
-  for(;;) {
+  for (;;) {
     if (iter == begiter) {
       if (curblock->sizeIn() != 1) return 0; // Can trace back to next basic block if only one path
       curblock = (BlockBasic *)curblock->getIn(0);
@@ -769,7 +769,7 @@ PcodeOp *ActionMultiCse::findMatch(BlockBasic *bl,PcodeOp *target,Varnode *in)
 {
   list<PcodeOp *>::iterator iter = bl->beginOp();
 
-  for(;;) {
+  for (;;) {
     PcodeOp *op = *iter;
     ++iter;
     if (op == target)		// Caught up with target, nothing else before it
@@ -1947,7 +1947,7 @@ uint4 ActionLikelyTrash::countMarks(PcodeOp *op)
   uint4 res = 0;
   for(int4 i=0;i<op->numInput();++i) {
     Varnode *vn = op->getIn(i);
-    for(;;) {
+    for (;;) {
       if (vn->isMark()) {
 	res += 1;
 	break;

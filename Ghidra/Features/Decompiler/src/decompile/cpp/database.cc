@@ -3104,7 +3104,7 @@ Scope *Database::resolveScopeFromSymbolName(const string &fullname,const string 
   
   string::size_type mark = 0;
   string::size_type endmark;
-  for(;;) {
+  for (;;) {
     endmark = fullname.find(delim,mark);
     if (endmark == string::npos) break;
     string scopename = fullname.substr(mark,endmark-mark);
@@ -3139,7 +3139,7 @@ Scope *Database::findCreateScopeFromSymbolName(const string &fullname,const stri
 
   string::size_type mark = 0;
   string::size_type endmark;
-  for(;;) {
+  for (;;) {
     endmark = fullname.find(delim,mark);
     if (endmark == string::npos) break;
     string scopename = fullname.substr(mark,endmark-mark);

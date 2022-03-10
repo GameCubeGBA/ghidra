@@ -71,7 +71,7 @@ public class MultiAddressIteratorTest extends AbstractGenericTest {
 
 		// Forward tests
 		boolean forward = true;
-		while (true) {
+		for (;;) {
 			ai = multiSet.getAddresses(forward);
 			iter = new MultiAddressIterator(
 				new AddressIterator[] { as1.getAddresses(forward), as2.getAddresses(forward) },
@@ -124,7 +124,7 @@ public class MultiAddressIteratorTest extends AbstractGenericTest {
 
 		// Forward tests
 		boolean forward = true;
-		while (true) {
+		for (;;) {
 			ai = multiSet.getAddresses(forward);
 			iter = new MultiAddressIterator(
 				new AddressIterator[] { as1.getAddresses(forward), as2.getAddresses(forward) },
@@ -171,7 +171,7 @@ public class MultiAddressIteratorTest extends AbstractGenericTest {
 
 		// Forward tests
 		boolean forward = true;
-		while (true) {
+		for (;;) {
 			ai = multiSet.getAddresses(forward);
 			iter = new MultiAddressIterator(new AddressIterator[] { as1.getAddresses(forward),
 				as2.getAddresses(forward), as3.getAddresses(forward) }, forward);
@@ -266,7 +266,7 @@ public class MultiAddressIteratorTest extends AbstractGenericTest {
 
 		// Forward tests
 		boolean forward = true;
-		while (true) {
+		for (;;) {
 			ai = multiSet.getAddresses(forward);
 			iter = new MultiAddressIterator(new AddressIterator[] { as1.getAddresses(forward),
 				as2.getAddresses(forward), as3.getAddresses(forward) }, forward);

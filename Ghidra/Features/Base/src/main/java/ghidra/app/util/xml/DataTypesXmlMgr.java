@@ -84,7 +84,7 @@ public class DataTypesXmlMgr {
 		BuiltInDataTypeManager builtInMgr = BuiltInDataTypeManager.getDataTypeManager();
 		try {
 			dtParser = new DtParser(dataManager);
-			while (true) {
+			for (;;) {
 				if (monitor.isCancelled()) {
 					throw new CancelledException();
 				}
@@ -99,7 +99,7 @@ public class DataTypesXmlMgr {
 				}
 			}
 
-			while (true) {
+			for (;;) {
 				if (monitor.isCancelled()) {
 					throw new CancelledException();
 				}

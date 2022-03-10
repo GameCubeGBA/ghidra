@@ -539,7 +539,7 @@ void FlowInfo::fallthru(void)
   bool startbasic = true;
   bool fallthruflag;
   
-  for(;;) {
+  for (;;) {
     curaddr = addrlist.back();
     addrlist.pop_back();
     fallthruflag = processInstruction(curaddr,startbasic);

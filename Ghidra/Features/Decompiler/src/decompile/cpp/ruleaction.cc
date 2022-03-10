@@ -3354,7 +3354,7 @@ int4 RuleShift2Mult::applyOp(PcodeOp *op,Funcdata &data)
     return 0;
   arithop = op->getIn(0)->getDef();
   desc = vn->beginDescend();
-  for(;;) {
+  for (;;) {
     if (arithop != (PcodeOp *)0) {
       opc = arithop->code();
       if ((opc==CPUI_INT_ADD)||(opc==CPUI_INT_SUB)||(opc==CPUI_INT_MULT)) {
@@ -6406,7 +6406,7 @@ Varnode *RulePushPtr::buildVarnodeOut(Varnode *vn,PcodeOp *op,Funcdata &data)
 void RulePushPtr::collectDuplicateNeeds(vector<PcodeOp *> &reslist,Varnode *vn)
 
 {
-  for(;;) {
+  for (;;) {
     if (!vn->isWritten()) return;
     if (vn->isAutoLive()) return;
     if (vn->loneDescend() == (PcodeOp *)0) return;	// Already has multiple descendants
@@ -6488,7 +6488,7 @@ int4 RulePushPtr::applyOp(PcodeOp *op,Funcdata &data)
   if (vn->loneDescend() == (PcodeOp *)0)
     collectDuplicateNeeds(duplicateList, vnadd2);
 
-  for(;;) {
+  for (;;) {
     list<PcodeOp *>::const_iterator iter = vn->beginDescend();
     if (iter == vn->endDescend()) break;
     PcodeOp *decop = *iter;
@@ -9084,7 +9084,7 @@ Varnode *RulePopcountBoolXor::getBooleanResult(Varnode *vn,int4 bitPos,int4 &con
   Varnode *vn0;
   Varnode *vn1;
   int4 sa;
-  for(;;) {
+  for (;;) {
     if (vn->isConstant()) {
       constRes = (vn->getOffset() >> bitPos) & 1;
       return (Varnode *)0;
@@ -9174,7 +9174,7 @@ bool RulePiecePathology::isPathology(Varnode *vn,Funcdata &data)
   int4 pos = 0;
   int4 slot = 0;
   bool res = false;
-  for(;;) {
+  for (;;) {
     if (vn->isInput() && !vn->isPersist()) {
       res = true;
       break;

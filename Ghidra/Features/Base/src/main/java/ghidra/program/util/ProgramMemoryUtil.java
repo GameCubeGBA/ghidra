@@ -672,7 +672,7 @@ public class ProgramMemoryUtil {
 			Address start = block.getStart();
 			Address end = block.getEnd();
 			Address found = null;
-			while (true) {
+			for (;;) {
 				monitor.checkCanceled();
 
 				found = memory.findBytes(start, end, bytePattern, maskBytes, true, monitor);
@@ -707,7 +707,7 @@ public class ProgramMemoryUtil {
 
 			Address start = memBlock.getStart();
 			Address end = memBlock.getEnd();
-			while (true) {
+			for (;;) {
 				monitor.checkCanceled();
 
 				Address found = memory.findBytes(start, end, bytePattern, maskBytes, true, monitor);

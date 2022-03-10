@@ -373,7 +373,7 @@ public class GdbMiParser extends AbstractGdbParser {
 			throw new GdbParseError("\"", buf);
 		}
 		buf.get(); // consume "
-		while (true) {
+		for (;;) {
 			char c = buf.get();
 			if (c == '"') {
 				break;

@@ -27,7 +27,7 @@ public class IterateInstructionsScript extends GhidraScript {
 
 		Instruction instruction = getFirstInstruction();
 
-		while (true) {
+		for (;;) {
 
 			if (monitor.isCancelled()) {
 				break;

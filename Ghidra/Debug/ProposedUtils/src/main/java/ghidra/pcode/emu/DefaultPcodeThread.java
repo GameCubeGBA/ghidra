@@ -364,7 +364,7 @@ public class DefaultPcodeThread<T> implements PcodeThread<T> {
 		if (frame != null) {
 			finishInstruction();
 		}
-		while (true) {
+		for (;;) {
 			stepInstruction();
 		}
 	}

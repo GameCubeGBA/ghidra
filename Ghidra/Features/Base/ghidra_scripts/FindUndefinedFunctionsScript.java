@@ -52,7 +52,7 @@ public class FindUndefinedFunctionsScript extends GhidraScript {
 
 		for (PatternMatcher expectedPattern : expectedPatterns) {
 			Address address = currentProgram.getMinAddress();
-			while (true) {
+			for (;;) {
 				if (monitor.isCancelled()) {
 					break;
 				}

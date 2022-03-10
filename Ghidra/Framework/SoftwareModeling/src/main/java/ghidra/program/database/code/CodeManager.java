@@ -1619,7 +1619,7 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 				Address nextInstEndAddr = null;
 				Address nextDataEndAddr = null;
 
-				while (true) {
+				for (;;) {
 
 					if (nextInstAddr == null && instIter.hasNext()) {
 						DBRecord nextInstRec = instIter.next();

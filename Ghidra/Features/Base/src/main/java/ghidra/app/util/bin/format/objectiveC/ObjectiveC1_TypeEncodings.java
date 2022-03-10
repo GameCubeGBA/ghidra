@@ -435,7 +435,7 @@ public final class ObjectiveC1_TypeEncodings {
 
 		int totalBits = 0;
 
-		while (true) {
+		for (;;) {
 			String name = parseQuotedName(buffer);
 			if (buffer.charAt(0) != _C_BFLD) {
 				reinsertName(buffer, name);

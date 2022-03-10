@@ -173,7 +173,7 @@ public class HeadlessClientAuthenticator implements ClientAuthenticator {
 
 				System.out.print(passwordPrompt);
 
-				while (true) {
+				for (;;) {
 					c = System.in.read();
 					if (c <= 0 || (Character.isWhitespace((char) c) && c != ' ')) {
 						break;

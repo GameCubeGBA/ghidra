@@ -333,7 +333,7 @@ public class ArchivePlugin extends Plugin implements FrontEndOnly, ProjectListen
 		}
 		File archiveFile = new File(archivePathName);
         try (FileInputStream fileIn = new FileInputStream(archiveFile); JarInputStream jarIn = new JarInputStream(fileIn)) {
-            while (true) {
+            for (;;) {
                 ZipEntry zipEntry = jarIn.getNextEntry();
                 if (zipEntry == null) {
                     break;

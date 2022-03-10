@@ -147,7 +147,7 @@ public class RttiUtil {
 		int tableSize = 0;
 		Address currentVfPointerAddress = vfTableBaseAddress;
 		int defaultPointerSize = program.getDefaultPointerSize();
-		while (true) {
+		for (;;) {
 			Address referencedAddress = getAbsoluteAddress(program, currentVfPointerAddress);
 			if (referencedAddress == null) {
 				break; // Cannot get a virtual function address.

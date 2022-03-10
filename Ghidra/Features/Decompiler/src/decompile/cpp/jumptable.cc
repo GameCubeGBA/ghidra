@@ -1014,7 +1014,7 @@ void JumpBasic::analyzeGuards(BlockBasic *bl,int4 pathout)
     }
     else {
       pathout = -1;		// Make sure not to use pathout next time around
-      for(;;) {
+      for (;;) {
 	if (bl->sizeIn() != 1) return; // Assume only 1 path to switch
 	prevbl = (BlockBasic *)bl->getIn(0);
 	if (prevbl->sizeOut() != 1) break; // Is it possible to deviate from switch path in this block

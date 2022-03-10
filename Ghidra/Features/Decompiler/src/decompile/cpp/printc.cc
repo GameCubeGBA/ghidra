@@ -117,7 +117,7 @@ PrintC::PrintC(Architecture *g,const string &nm) : PrintLanguage(g,nm)
 void PrintC::buildTypeStack(const Datatype *ct,vector<const Datatype *> &typestack)
 
 {
-  for(;;) {
+  for (;;) {
     typestack.push_back(ct);
     if (ct->getName().size() != 0)	// This can be a base type
       break;
@@ -290,7 +290,7 @@ void PrintC::pushTypeEnd(const Datatype *ct)
   pushMod();
   setMod(force_dec);
   
-  for(;;) {
+  for (;;) {
     if (ct->getName().size() != 0)	// This is the base type
       break;
     if (ct->getMetatype()==TYPE_PTR)

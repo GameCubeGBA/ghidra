@@ -543,7 +543,7 @@ public class BitmapResource {
 			}
 			int readOffset = offset;
 			try {
-				while (true) {
+				for (;;) {
 					if (readOffset >= maxBufferOffset) {
 						throw new MemoryAccessException(
 							"Bitmap resource decompression exceeded memory constraint at " +
@@ -615,7 +615,7 @@ public class BitmapResource {
 			}
 			int readOffset = offset;
 			try {
-				while (true) {
+				for (;;) {
 					if (readOffset >= maxBufferOffset) {
 						throw new MemoryAccessException(
 							"Bitmap resource decompression exceeded memory constraint at " +

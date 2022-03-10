@@ -159,7 +159,7 @@ public class RedBlackTree<K extends Comparable<K>, V> implements Iterable<RedBla
 		}
 
 		RedBlackEntry<K, V> node = root;
-		while (true) {
+		for (;;) {
 			int comp = key.compareTo(node.key);
 			if (comp == 0) {
 				return node;

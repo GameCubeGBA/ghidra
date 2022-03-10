@@ -2069,7 +2069,7 @@ void SleighCompile::checkLocalCollisions(void)
   int4 collisionCount = 0;
   SubtableSymbol *sym = root; // Start with the instruction table
   int4 i = -1;
-  for(;;) {
+  for (;;) {
     int4 numconst = sym->getNumConstructors();
     for(int4 j=0;j<numconst;++j) {
       if (!checkLocalExports(sym->getConstructor(j)))
@@ -3206,7 +3206,7 @@ bool SleighCompile::finalizeSections(Constructor *big,SectionVector *vec)
   int4 i=-1;
   string sectionstring = "   Main section: ";
   int4 max = vec->getMaxId();
-  for(;;) {
+  for (;;) {
     string errstring;
 
     errstring = checkSymbols(cur.scope); // Check labels in the section's scope
@@ -3405,7 +3405,7 @@ void SleighCompile::checkUniqueAllocation(void)
   int4 secsize = sections.size(); // This is the upper bound for section numbers
   SubtableSymbol *sym = root; // Start with the instruction table
   int4 i = -1;
-  for(;;) {
+  for (;;) {
     int4 numconst = sym->getNumConstructors();
     for(int4 j=0;j<numconst;++j) {
       Constructor *ct = sym->getConstructor(j);
@@ -3584,7 +3584,7 @@ static int4 run_xml(const string &filein,SleighCompile &compiler)
   s.close();
 
   Element *el = doc->getRoot();
-  for(;;) {
+  for (;;) {
     const List &list(el->getChildren());
     List::const_iterator iter;
     for(iter=list.begin();iter!=list.end();++iter) {

@@ -90,7 +90,7 @@ public class GadpClientTest implements AsyncTestUtils {
 			long start = System.currentTimeMillis();
 			Msg.debug(this, "Expecting: " + msg);
 
-			while (true) {
+			for (;;) {
 				try {
 					//dumpBuffer(inbuf);
 					Gadp.RootMessage recv =

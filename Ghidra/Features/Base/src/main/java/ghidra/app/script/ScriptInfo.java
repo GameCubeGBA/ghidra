@@ -195,7 +195,7 @@ public class ScriptInfo {
 			new BufferedReader(new InputStreamReader(sourceFile.getInputStream()))) {
 			StringBuilder buffer = new StringBuilder();
 			boolean hitAtSign = false;
-			while (true) {
+			for (;;) {
 				String line = reader.readLine();
 				if (line == null) {
 					break;

@@ -103,7 +103,7 @@ public class DbgModelTest extends AbstractGhidraHeadlessIntegrationTest {
 
 			int count = 0;
 			try {
-				while (true) {
+				for (;;) {
 					count++;
 				}
 			}

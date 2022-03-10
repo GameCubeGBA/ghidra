@@ -773,7 +773,7 @@ public final class AutoAnalysisManager implements DomainObjectListener, DomainOb
 			if (printTaskTimes) {
 				clearTimedTasks();
 			}
-			while (true) {
+			for (;;) {
 				Program p = program; // program may get cleared by domain object change event
 				if (p == null || p.hasTerminatedTransaction()) {
 					monitor.cancel();

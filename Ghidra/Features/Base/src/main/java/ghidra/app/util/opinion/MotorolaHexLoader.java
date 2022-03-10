@@ -399,7 +399,7 @@ public class MotorolaHexLoader extends AbstractProgramLoader {
 
 				name = blockName;
 				int count = 0;
-				while (true) {
+				for (;;) {
 					try {
 						MemoryBlockUtils.createInitializedBlock(program, isOverlay, blockName,
 							start, new ByteArrayInputStream(data), data.length, "",

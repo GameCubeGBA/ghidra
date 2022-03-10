@@ -296,7 +296,7 @@ public class TreeValueSortedMap<K, V> extends AbstractMap<K, V> implements Value
 			}
 			Node cur = this;
 			int i = index;
-			while (true) {
+			for (;;) {
 				if (i < 0) {
 					throw new AssertionError("INTERNAL: sizeLeft values inconsistent");
 				}
@@ -334,7 +334,7 @@ public class TreeValueSortedMap<K, V> extends AbstractMap<K, V> implements Value
 		 */
 		void insert(Node item) {
 			Node cur = this;
-			while (true) {
+			for (;;) {
 				int c = comparator.compare(item.val, cur.val);
 				if (c < 0) {
 					cur.sizeLeft++;
@@ -486,7 +486,7 @@ public class TreeValueSortedMap<K, V> extends AbstractMap<K, V> implements Value
 			Node cur = this;
 			Node eq = null;
 			int c;
-			while (true) {
+			for (;;) {
 				c = comparator.compare(value, cur.val);
 				if (c == 0) {
 					eq = cur;

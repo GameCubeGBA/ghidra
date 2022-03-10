@@ -232,7 +232,7 @@ public class TestProgramManager {
 		name = name.substring(0, name.indexOf("."));
 
 		int oneUp = 0;
-		while (true) {
+		for (;;) {
 			try {
 				DomainFile df = folder.createFile(name, gzf, TaskMonitor.DUMMY);
 				AbstractGenericTest.waitForPostedSwingRunnables();

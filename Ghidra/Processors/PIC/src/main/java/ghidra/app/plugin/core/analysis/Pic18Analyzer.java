@@ -314,7 +314,7 @@ public class Pic18Analyzer extends AbstractAnalyzer {
 
 	private Vertex getOptimalSource(DirectedGraph graph, Vertex v) {
 		Vertex optimalVertex = v;
-		while (true) {
+		for (;;) {
 			boolean hasFallFromVertex = false;
 			for (Edge edge : graph.getIncomingEdges(optimalVertex)) {
 				if (isFallThroughEdge(edge)) {

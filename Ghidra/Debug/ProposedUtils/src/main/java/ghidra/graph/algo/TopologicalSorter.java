@@ -74,7 +74,7 @@ public class TopologicalSorter<V, E extends GEdge<V>> {
 		if (requireTotal) {
 			checkTotal();
 		}
-		while (true) {
+		for (;;) {
 			V n = unmarked.peek();
 			if (n == null) { // Will also cause future calls to sort() to short-circuit :)
 				return list;

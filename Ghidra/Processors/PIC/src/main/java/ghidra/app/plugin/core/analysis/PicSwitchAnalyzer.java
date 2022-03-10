@@ -176,7 +176,7 @@ public class PicSwitchAnalyzer extends AbstractAnalyzer {
 		AddressSet casePoints = new AddressSet();
 
 		Address caseAddr = instrAddr.add(2);
-		while (true) {
+		for (;;) {
 			if (caseSize > 0) {
 				caseAddr = caseAddr.add(caseSize);
 			}

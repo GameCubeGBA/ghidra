@@ -448,7 +448,7 @@ public enum DebugModelConventions {
 				 * ConcurrentModificationException, even if removal is via the iterator...
 				 */
 				List<String> path = object.getPath();
-				while (true) {
+				for (;;) {
 					Entry<List<String>, TargetObject> ent = objects.ceilingEntry(path);
 					if (ent == null || !PathUtils.isAncestor(path, ent.getKey())) {
 						break;

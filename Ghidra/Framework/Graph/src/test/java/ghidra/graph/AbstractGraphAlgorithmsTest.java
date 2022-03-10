@@ -62,7 +62,7 @@ public abstract class AbstractGraphAlgorithmsTest extends AbstractGenericTest {
 
 		Thread t = new Thread(() -> {
 
-			while (true) {
+			for (;;) {
 
 				sleep(1000);
 				printMemory();

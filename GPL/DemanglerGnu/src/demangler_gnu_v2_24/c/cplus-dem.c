@@ -912,7 +912,7 @@ ada_demangle (const char *mangled, int option ATTRIBUTE_UNUSED)
   
   d = demangled;
   p = mangled;
-  while (1)
+  for (;;)
     {
       /* An entity names is expected.  */
       if (ISLOWER (*p))
@@ -2373,7 +2373,7 @@ demangle_arm_hp_template (struct work_stuff *work, const char **mangled,
       work->options |= DMGL_PARAMS;
 
       string_append (declp, "<");
-      while (1)
+      for (;;)
         {
           string_delete (&arg);
           switch (**mangled)

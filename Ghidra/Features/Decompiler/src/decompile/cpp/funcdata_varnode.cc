@@ -1379,7 +1379,7 @@ void Funcdata::splitUses(Varnode *vn)
   if (iter == vn->descend.end()) return; // No descendants at all
   useop = *iter++;
   if (iter == vn->descend.end()) return; // Only one descendant
-  for(;;) {
+  for (;;) {
     slot = useop->getSlot(vn);		// Get first descendant
     newop = newOp(op->numInput(),op->getAddr());
     newvn = newVarnode(vn->getSize(),vn->getAddr(),vn->getType());

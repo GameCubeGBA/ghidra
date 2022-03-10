@@ -280,7 +280,7 @@ Address CodeDataAnalysis::disassembleBlock(const Address &addr,const Address &en
     lastaddr = endaddr;
     hardend = true;
   }
-  for(;;) {
+  for (;;) {
     disengine.disassemble(curaddr,disresult);
     codevec.emplace_back();
     if (!disresult.success) {
@@ -514,7 +514,7 @@ bool CodeDataAnalysis::repairJump(const Address &addr,int4 max)
 
   iter = codeunit.lower_bound(addr);
   if (iter == codeunit.end()) return false;
-  for(;;) {
+  for (;;) {
     count += 1;
     if (count >=max) return false;
     while ((*iter).first < curaddr) {

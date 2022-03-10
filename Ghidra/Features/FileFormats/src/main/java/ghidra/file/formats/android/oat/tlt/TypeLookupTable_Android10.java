@@ -41,7 +41,7 @@ public class TypeLookupTable_Android10 extends TypeLookupTable {
 		entries_ = reader.readNextInt();
 		owns_entries_ = reader.readNextInt();
 
-		while (true) {
+		for (;;) {
 			TypeLookupTableEntry entry = new TypeLookupTableEntry_Android10(reader);
 			entryList.add(entry);
 			if (entry.isEmpty()) {

@@ -122,7 +122,7 @@ public class VersionControlUndoHijackAction extends VersionControlAction {
 	private String getKeepName(DomainFolder parent, String name) {
 		int oneUp = 1;
 		String keepName = name + ".keep";
-		while (true) {
+		for (;;) {
 			DomainFile df = parent.getFile(keepName);
 			if (df != null) {
 				keepName = name + ".keep" + oneUp;

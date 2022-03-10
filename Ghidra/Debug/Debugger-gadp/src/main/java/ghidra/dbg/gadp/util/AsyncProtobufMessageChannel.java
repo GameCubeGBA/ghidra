@@ -111,7 +111,7 @@ public class AsyncProtobufMessageChannel<S extends GeneratedMessageV3, R extends
 		}
 		AtomicInteger len = new AtomicInteger();
 		return wLock.with(TypeSpec.INT, null).then((own, seq) -> {
-			while (true) {
+			for (;;) {
 				try {
 					wBuf.clear();
 					marshall(msg, wBuf);

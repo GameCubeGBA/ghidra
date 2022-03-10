@@ -89,7 +89,7 @@ class DmgServerProcessManager implements Closeable {
 	}
 
 	private void processManagerLoop() {
-		while (true) {
+		for (;;) {
 			if (cmdCount == 0) {
 				Msg.debug(this, "Starting new DMG server process");
 			}
@@ -363,7 +363,7 @@ class DmgServerProcessManager implements Closeable {
 	private void startReaderThread(BufferedReader reader) {
 		new Thread(() -> {
 			try {
-				while (true) {
+				for (;;) {
 					String line = reader.readLine();
 					if (line == null) {
 						break;

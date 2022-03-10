@@ -212,7 +212,7 @@ public class DefaultTraceTimeViewport implements TraceTimeViewport {
 	}
 
 	protected static TraceSnapshot locateMostRecentFork(TraceTimeManager timeManager, long from) {
-		while (true) {
+		for (;;) {
 			TraceSnapshot prev = timeManager.getMostRecentSnapshot(from);
 			if (prev == null) {
 				return null;
@@ -249,7 +249,7 @@ public class DefaultTraceTimeViewport implements TraceTimeViewport {
 	 */
 	protected static void collectForkRanges(TraceTimeManager timeManager, long curSnap,
 			RangeSet<Long> spanSet, List<Range<Long>> ordered) {
-		while (true) {
+		for (;;) {
 			TraceSnapshot fork = locateMostRecentFork(timeManager, curSnap);
 			long prevSnap = fork == null ? Long.MIN_VALUE : fork.getKey();
 			if (!addSnapRange(prevSnap, curSnap, spanSet, ordered)) {

@@ -115,7 +115,7 @@ Varnode *ConditionMarker::findMatch(PcodeOp *op)
 
   matchflip = op->isBooleanFlip();
   
-  for(;;) {
+  for (;;) {
     if (curvn->isMark()) return curvn;
     bool popstate = true;
     if (curvn->isWritten()) {
@@ -795,7 +795,7 @@ bool ConditionalExecution::trial(BlockBasic *ib)
   BlockBasic *postb_block_copy;
   bool directsplit_copy;
 
-  for(;;) {
+  for (;;) {
     if (!directsplit) return true;
     // Save off the data for current iblock
     cbranch_copy = cbranch;

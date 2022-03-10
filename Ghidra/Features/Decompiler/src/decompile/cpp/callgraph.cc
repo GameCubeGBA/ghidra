@@ -326,7 +326,7 @@ CallGraphNode *CallGraph::initLeafWalk(void)
   cycleStructure();
   if (seeds.empty()) return (CallGraphNode *)0;
   CallGraphNode *node = seeds[0];
-  for(;;) {
+  for (;;) {
     CallGraphNode *pushnode = pushPossible(node,0);
     if (pushnode == (CallGraphNode *)0)
       break;
@@ -341,7 +341,7 @@ CallGraphNode *CallGraph::nextLeaf(CallGraphNode *node)
   int4 outslot;
   node = popPossible(node,outslot);
   outslot += 1;
-  for(;;) {
+  for (;;) {
     CallGraphNode *pushnode = pushPossible(node,outslot);
     if (pushnode == (CallGraphNode *)0)
       break;

@@ -554,7 +554,7 @@ int4 ActionRestartGroup::apply(Funcdata &data)
   int4 res;
 
   if (curstart == -1) return 0;	// Already completed
-  for(;;) {
+  for (;;) {
     res = ActionGroup::apply(data);
     if (res != 0) return res;
     if (!data.hasRestartPending()) {

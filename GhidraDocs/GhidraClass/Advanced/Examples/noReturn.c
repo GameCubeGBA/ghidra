@@ -22,7 +22,7 @@ void printInput(unsigned long, unsigned long);
 void printInputThenLoop(unsigned long, unsigned long);
 
 void __attribute__((noreturn)) loopForever(int x)  {
-    for(;;){
+    for (;;){
         printf("x: %d\n",x);
     }
 }

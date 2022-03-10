@@ -143,7 +143,7 @@ public class DIEAMonitoredIterator {
 
 		@Override
 		public boolean hasNext() {
-			while (true) {
+			for (;;) {
 				if (aggregateIterator == null) {
 					if (cuIterator.hasNext()) {
 						cu = cuIterator.next();

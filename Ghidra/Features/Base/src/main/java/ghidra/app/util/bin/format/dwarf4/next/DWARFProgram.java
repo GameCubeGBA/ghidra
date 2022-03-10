@@ -905,7 +905,7 @@ public class DWARFProgram implements Closeable {
 		// Loop until the we don't find any more redirections in the offset2HeadMap.
 		// This loop isn't endless because the lastmost DIE read will always
 		// point to itself, ending the loop.
-		while (true) {
+		for (;;) {
 			DebugInfoEntry tmp = offsetMap2Head.get(die.getOffset());
 			if (tmp == die) {
 				return die;

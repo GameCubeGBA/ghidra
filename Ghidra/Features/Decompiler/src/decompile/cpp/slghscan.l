@@ -198,7 +198,7 @@ void expand_preprocmacros(string &str)
   if (pos == string::npos)
     return;
   string res;
-  for(;;) {
+  for (;;) {
     if (pos == string::npos) {
       res += str.substr(lastpos);
       str = res;

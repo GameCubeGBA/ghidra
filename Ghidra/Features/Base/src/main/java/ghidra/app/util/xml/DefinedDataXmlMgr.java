@@ -53,7 +53,7 @@ class DefinedDataXmlMgr {
 
 			XmlElement element = parser.next(); // consume DATA start
 
-			while (true) {
+			for (;;) {
 				if (monitor.isCancelled()) {
 					throw new CancelledException();
 				}

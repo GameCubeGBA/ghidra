@@ -52,7 +52,7 @@ public class AsciiToBinaryScript extends GhidraScript {
 		BufferedReader in = new BufferedReader(new FileReader(inAsciiFile));
 		OutputStream out = new FileOutputStream(outBinaryFile);
 
-		while (true) {
+		for (;;) {
 			if (monitor.isCancelled()) {
 				break;
 			}

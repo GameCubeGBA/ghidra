@@ -69,7 +69,7 @@ public class FunctionStartsCommand extends LinkEditDataCommand {
 		reader.setPointerIndex(getDataOffset());
 
 		List<Long> offsets = new ArrayList<>();
-		while (true) {
+		for (;;) {
 			long offset = LEB128.readAsLong(reader, false);
 			if (offset == 0) {
 				break;

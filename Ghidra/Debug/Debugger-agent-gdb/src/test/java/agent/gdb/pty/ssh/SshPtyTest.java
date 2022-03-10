@@ -61,7 +61,7 @@ public class SshPtyTest extends AbstractGhidraHeadedIntegrationTest {
 		public void run() {
 			byte[] buf = new byte[1024];
 			try {
-				while (true) {
+				for (;;) {
 					int len = in.read(buf);
 					if (len <= 0) {
 						break;

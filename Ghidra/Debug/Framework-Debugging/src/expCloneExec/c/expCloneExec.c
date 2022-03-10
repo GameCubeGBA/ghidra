@@ -27,7 +27,7 @@ void* work(void* param) {
 
 int main() {
     pthread_create(&thread, NULL, work, (void*)1);
-    while (1) {
+    for (;;) {
         sleep(10);
     }
 }

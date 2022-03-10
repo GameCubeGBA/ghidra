@@ -122,7 +122,7 @@ public class SourceCodeLookupPlugin extends ProgramPlugin {
 				true, null);
 			return;
 		}
-		while (true) {
+		for (;;) {
 			EclipseConnection connection = service.connectToEclipse(port);
 			Socket clientSocket = connection.getSocket();
 			if (clientSocket == null) {

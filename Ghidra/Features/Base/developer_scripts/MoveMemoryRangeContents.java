@@ -116,7 +116,7 @@ public class MoveMemoryRangeContents extends GhidraScript {
 		int len = length;
 		Address srcAddr = srcStart;
 		Address destAddr = destStart;
-		while (true) {
+		for (;;) {
 			monitor.checkCanceled();
 			int cnt = program.getMemory().getBytes(srcAddr, bytes, 0, Math.min(len, bytes.length));
 			currentProgram.getMemory().setBytes(destAddr, bytes, 0, cnt);

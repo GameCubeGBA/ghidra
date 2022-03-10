@@ -944,7 +944,7 @@ public class ElfHeader implements StructConverter, Writeable {
 
 		++maxSymbolIndex;
 		long chainOffset = bucketOffset + (4 * chainIndex); // chains immediately follow buckets
-		while (true) {
+		for (;;) {
 			int chainValue = reader.readInt(chainOffset);
 			if ((chainValue & 1) != 0) {
 				break;

@@ -88,7 +88,7 @@ public class OatExecAnalyzer extends FileFormatAnalyzer {
 		monitor.setProgress(0);
 		monitor.setMaximum(oatLastWordSymbol.getAddress().subtract(address));
 		try {
-			while (true) {
+			for (;;) {
 				monitor.checkCanceled();
 				monitor.setProgress(address.subtract(oatExecSymbol.getAddress()));
 

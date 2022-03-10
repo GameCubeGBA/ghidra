@@ -92,7 +92,7 @@ public class BaseRelocationDataDirectory extends DataDirectory implements ByteAr
 
         List<BaseRelocation> relocsList = new ArrayList<BaseRelocation>();
 
-        while (true) {
+        for (;;) {
             if (addr >= stop) break;
 
 			BaseRelocation br = new BaseRelocation(reader, addr);
