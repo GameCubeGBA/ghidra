@@ -130,30 +130,38 @@ public class SourceCodeLookupPlugin extends ProgramPlugin {
 				return;
 			}
 
-            try (clientSocket; BufferedReader input =
-                    new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                 PrintStream output = new PrintStream(clientSocket.getOutputStream())) {
+			try (BufferedReader input =
+				new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+					PrintStream output = new PrintStream(clientSocket.getOutputStream())) {
 
-                output.print(symbolText + "\n");
-                output.flush();
+				output.print(symbolText + "\n");
+				output.flush();
 
-                String reply = input.readLine();
-                Msg.debug(this, reply);
-                tool.setStatusInfo(reply);
+				String reply = input.readLine();
+				Msg.debug(this, reply);
+				tool.setStatusInfo(reply);
 
-                if (symbolText.startsWith("_")) {
-                    symbolText = symbolText.substring(1);
-                } else {
-                    break;
-                }
-            } catch (IOException e) {
-                // shouldn't happen
-                Msg.showError(this, null, "Unexpected Exception",
-                        "Unexpected exception " + "connecting to source lookup editor", e);
-                return;
-            }
-            // Nothing to do
-        }
+				if (!symbolText.startsWith("_")) {
+					break;
+				}
+				
+				symbolText = symbolText.substring(1);
+			}
+			catch (IOException e) {
+				// shouldn't happen
+				Msg.showError(this, null, "Unexpected Exception",
+					"Unexpected exception " + "connecting to source lookup editor", e);
+				return;
+			}
+			finally {
+				try {
+					clientSocket.close();
+				}
+				catch (IOException e) {
+					// Nothing to do
+				}
+			}
+		}
 	}
 
 	private String getSymbolText() {
