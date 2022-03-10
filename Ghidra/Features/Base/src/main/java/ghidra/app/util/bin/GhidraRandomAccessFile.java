@@ -16,6 +16,7 @@
 package ghidra.app.util.bin;
 
 import java.io.*;
+import java.util.Arrays;
 
 import ghidra.util.Msg;
 
@@ -306,7 +307,7 @@ public class GhidraRandomAccessFile implements AutoCloseable {
 
 	private void swapInLast() throws IOException {
 		checkOpen();
-		if (buffer == EMPTY) {
+		if (Arrays.equals(buffer, EMPTY)) {
 			return;
 		}
 		// swap em and return
