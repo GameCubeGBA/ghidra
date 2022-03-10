@@ -90,11 +90,6 @@ public class DebuggerTimeProvider extends ComponentProviderAdapter {
 	}
 
 	@Override
-	public void addLocalAction(DockingActionIf action) {
-		super.addLocalAction(action);
-	}
-
-	@Override
 	public JComponent getComponent() {
 		return mainPanel;
 	}
