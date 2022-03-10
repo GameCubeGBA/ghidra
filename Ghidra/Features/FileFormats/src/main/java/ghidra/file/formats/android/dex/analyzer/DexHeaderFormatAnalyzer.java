@@ -70,12 +70,7 @@ public class DexHeaderFormatAnalyzer extends FileFormatAnalyzer {
 		return DexConstants.isDexFile(provider) || CDexConstants.isCDEX(program);
 	}
 
-	@Override
-	public AnalyzerType getAnalysisType() {
-		return AnalyzerType.BYTE_ANALYZER;
-	}
-
-	@Override
+    @Override
 	public boolean getDefaultEnablement(Program program) {
 		return true;
 	}

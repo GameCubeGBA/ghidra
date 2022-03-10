@@ -43,13 +43,7 @@ public class MarkupTypeTestStub extends VTMarkupType {
 
 	}
 
-	@Override
-	public Address validateDestinationAddress(VTAssociation association, Address sourceAddress,
-			Address suggestedDestinationAddress) {
-		return suggestedDestinationAddress;
-	}
-
-	@Override
+    @Override
 	public void unapplyMarkup(VTMarkupItem markupItem) throws VersionTrackingApplyException {
 		// no-op
 	}

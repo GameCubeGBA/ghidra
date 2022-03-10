@@ -39,12 +39,4 @@ public class NullOutputStream extends OutputStream {
 		// nada
 	}
 
-	public void flush() throws IOException {
-		// nada
-	}
-
-	public void close() throws IOException {
-		// nada
-	}
-
 }

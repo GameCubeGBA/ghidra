@@ -45,12 +45,7 @@ public class EmptyLayout extends AbstractVisualGraphLayout<FGVertex, FGEdge> imp
 		// stub	
 	}
 
-	@Override
-	public void reset() {
-		// stub
-	}
-
-	@Override
+    @Override
 	public BasicEdgeRenderer<FGVertex, FGEdge> getEdgeRenderer() {
 		return new ArticulatedEdgeRenderer<>();
 	}
@@ -85,12 +80,7 @@ public class EmptyLayout extends AbstractVisualGraphLayout<FGVertex, FGEdge> imp
 		return (FGLayout) super.cloneLayout(newGraph);
 	}
 
-	@Override
-	public boolean usesEdgeArticulations() {
-		return false;
-	}
-
-	@Override
+    @Override
 	public void setLocation(FGVertex v, Point2D location, ChangeType changeType) {
 		// stub
 	}

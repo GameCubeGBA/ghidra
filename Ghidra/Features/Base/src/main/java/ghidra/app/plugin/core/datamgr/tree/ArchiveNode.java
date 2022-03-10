@@ -108,12 +108,7 @@ public class ArchiveNode extends CategoryNode {
 		return null;
 	}
 
-	@Override
-	public boolean isLeaf() {
-		return false;
-	}
-
-	@Override
+    @Override
 	public boolean isEditable() {
 		return false;
 	}

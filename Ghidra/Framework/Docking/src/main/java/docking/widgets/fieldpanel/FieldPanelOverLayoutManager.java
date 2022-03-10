@@ -236,7 +236,7 @@ public class FieldPanelOverLayoutManager implements LayoutManager2 {
 	@Override
 	public void layoutContainer(Container parent) {
 		if (!parent.equals(fieldpane)) {
-			throw new IllegalArgumentException("" + parent);
+			throw new IllegalArgumentException(String.valueOf(parent));
 		}
 		trickMapComponents();
 	}

@@ -426,8 +426,8 @@ abstract class CompositeViewerModel extends AbstractTableModel
 	 * @return the offset in pixels of the component field.
 	 */
 	int getFieldOffset(int columnIndex) {
-		return ((columnIndex < 0 || columnIndex >= getColumnCount()) ? 0
-				: columnOffsets[columnIndex]);
+		return ((columnIndex >= 0 && columnIndex < getColumnCount()) ? columnOffsets[columnIndex]
+				: 0);
 	}
 
 	/**

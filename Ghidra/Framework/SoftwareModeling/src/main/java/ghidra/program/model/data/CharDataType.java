@@ -130,12 +130,7 @@ public class CharDataType extends AbstractIntegerDataType implements DataTypeWit
 		}
 	}
 
-	@Override
-	public boolean isEncodable() {
-		return true;
-	}
-
-	@Override
+    @Override
 	public byte[] encodeValue(Object value, MemBuffer buf, Settings settings, int length)
 			throws DataTypeEncodeException {
 		return encodeCharacterValue(value, buf, settings);

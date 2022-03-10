@@ -423,7 +423,7 @@ public class FunctionGraph extends GroupingVisualGraph<FGVertex, FGEdge> {
 		}
 
 		if (didRemove) {
-			notifyVerticesOfGroupAssociation(Arrays.asList(vertex), null);
+			notifyVerticesOfGroupAssociation(List.of(vertex), null);
 		}
 	}
 

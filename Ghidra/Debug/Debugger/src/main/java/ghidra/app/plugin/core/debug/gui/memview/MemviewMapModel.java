@@ -135,15 +135,7 @@ class MemviewMapModel extends AbstractSortedTableModel<MemoryBox> {
 		return String.class;
 	}
 
-	/**
-	 *  Return whether this column is editable.
-	 */
-	@Override
-	public boolean isCellEditable(int rowIndex, int columnIndex) {
-		return false;
-	}
-
-	/**
+    /**
 	 * Returns the number of records managed by the data source object. A
 	 * <B>JTable</B> uses this method to determine how many rows it
 	 * should create and display.  This method should be quick, as it

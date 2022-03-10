@@ -100,19 +100,7 @@ public class BowTieLayout extends AbstractVisualGraphLayout<FcgVertex, FcgEdge> 
 		return layoutFunctionCallGraph((FunctionCallGraph) g);
 	}
 
-	@Override
-	public LayoutPositions<FcgVertex, FcgEdge> calculateLocations(VisualGraph<FcgVertex, FcgEdge> g,
-			TaskMonitor taskMonitor) {
-
-        // TODO put x offset manipulation here...
-		//          -if the number of vertices in each row is not the same odd/even as the 
-		//           largest row, then slide the x values for each vertex in the row left or 
-		//           right as needed
-
-		return super.calculateLocations(g, taskMonitor);
-	}
-
-	private GridLocationMap<FcgVertex, FcgEdge> layoutFunctionCallGraph(FunctionCallGraph g) {
+    private GridLocationMap<FcgVertex, FcgEdge> layoutFunctionCallGraph(FunctionCallGraph g) {
 
 		GridLocationMap<FcgVertex, FcgEdge> grid = new GridLocationMap<>();
 

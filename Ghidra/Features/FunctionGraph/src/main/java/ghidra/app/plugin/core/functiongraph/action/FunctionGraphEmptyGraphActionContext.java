@@ -26,8 +26,4 @@ public class FunctionGraphEmptyGraphActionContext extends ProgramActionContext
 		super(functionGraphProvider, functionGraphProvider.getProgram());
 	}
 
-	@Override
-	public boolean shouldShowSatelliteActions() {
-		return true;
-	}
 }

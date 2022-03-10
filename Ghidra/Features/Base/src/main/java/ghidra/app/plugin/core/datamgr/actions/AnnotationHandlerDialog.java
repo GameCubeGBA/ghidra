@@ -52,12 +52,7 @@ class AnnotationHandlerDialog extends DialogComponentProvider {
 
 	}
 
-	@Override
-	protected void cancelCallback() {
-		close();
-	}
-
-	@Override
+    @Override
 	protected void okCallback() {
 		Object[] objs = handlerComboBox.getSelectedObjects();
 		if (objs != null && objs.length > 0) {

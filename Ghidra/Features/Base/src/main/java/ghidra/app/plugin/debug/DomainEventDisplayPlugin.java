@@ -147,11 +147,11 @@ public class DomainEventDisplayPlugin extends Plugin implements DomainObjectList
 				ProgramChangeRecord record = (ProgramChangeRecord) docr;
 
 				try {
-					start = "" + record.getStart();
-					end = "" + record.getEnd();
-					oldValue = "" + record.getOldValue();
-					newValue = "" + record.getNewValue();
-					affectedObj = "" + record.getObject();
+					start = String.valueOf(record.getStart());
+					end = String.valueOf(record.getEnd());
+					oldValue = String.valueOf(record.getOldValue());
+					newValue = String.valueOf(record.getNewValue());
+					affectedObj = String.valueOf(record.getObject());
 				}
 				catch (Exception e) {
 					s = dateStr + getEventName(eventType) + " (" + eventType +

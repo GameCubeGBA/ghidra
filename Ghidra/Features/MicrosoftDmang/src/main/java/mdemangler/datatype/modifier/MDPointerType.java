@@ -30,13 +30,7 @@ public class MDPointerType extends MDModifierType {
 		cvMod.setPointerType();
 	}
 
-	@Override
-	protected void parseInternal() throws MDException {
-		// cvMod.setPointerType();
-		super.parseInternal();
-	}
-
-	@Override
+    @Override
 	protected MDDataType parseReferencedType() throws MDException {
 		return MDDataTypeParser.parseBasicDataType(dmang, false);
 	}

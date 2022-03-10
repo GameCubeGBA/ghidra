@@ -112,14 +112,7 @@ public class DefaultDataType extends DataTypeImpl {
 		return this;
 	}
 
-	/**
-	 * @see ghidra.program.model.data.DataType#dataTypeSizeChanged(ghidra.program.model.data.DataType)
-	 */
-	@Override
-	public void dataTypeSizeChanged(DataType dt) {
-	}
-
-	/**
+    /**
 	 * @see ghidra.program.model.data.DataType#isEquivalent(ghidra.program.model.data.DataType)
 	 */
 	@Override
@@ -127,58 +120,14 @@ public class DefaultDataType extends DataTypeImpl {
 		return dt == this;
 	}
 
-	/**
-	 * @see ghidra.program.model.data.DataType#setCategoryPath(ghidra.program.model.data.CategoryPath)
-	 */
-	@Override
-	public void setCategoryPath(CategoryPath path) throws DuplicateNameException {
-	}
-
-	/**
+    /**
 	 * @see ghidra.program.model.data.DataType#setName(java.lang.String)
 	 */
 	@Override
 	public void setName(String name) {
 	}
 
-	/**
-	 * @see ghidra.program.model.data.DataType#setNameAndCategory(ghidra.program.model.data.CategoryPath, java.lang.String)
-	 */
-	@Override
-	public void setNameAndCategory(CategoryPath path, String name)
-			throws InvalidNameException, DuplicateNameException {
-	}
-
-	/**
-	 * @see ghidra.program.model.data.DataType#dataTypeDeleted(ghidra.program.model.data.DataType)
-	 */
-	@Override
-	public void dataTypeDeleted(DataType dt) {
-	}
-
-	/**
-	 * @see ghidra.program.model.data.DataType#dataTypeNameChanged(ghidra.program.model.data.DataType, java.lang.String)
-	 */
-	@Override
-	public void dataTypeNameChanged(DataType dt, String oldName) {
-	}
-
-	/**
-	 * @see ghidra.program.model.data.DataType#dataTypeReplaced(ghidra.program.model.data.DataType, ghidra.program.model.data.DataType)
-	 */
-	@Override
-	public void dataTypeReplaced(DataType oldDt, DataType newDt) {
-	}
-
-	/**
-	 * @see ghidra.program.model.data.DataType#dependsOn(ghidra.program.model.data.DataType)
-	 */
-	@Override
-	public boolean dependsOn(DataType dt) {
-		return false;
-	}
-
-	/**
+    /**
 	 * @see ghidra.program.model.data.DataType#addParent(ghidra.program.model.data.DataType)
 	 */
 	@Override

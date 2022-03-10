@@ -85,7 +85,7 @@ public class TableSelectionDialog<T> extends DialogComponentProvider {
 		}
 
 		T selectedRowObject = gFilterTable.getSelectedRowObject();
-		selectedItems = Arrays.asList(selectedRowObject);
+		selectedItems = List.of(selectedRowObject);
 		close();
 	}
 

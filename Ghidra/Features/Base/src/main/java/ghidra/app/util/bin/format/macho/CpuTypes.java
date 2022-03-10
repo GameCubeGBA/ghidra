@@ -95,9 +95,9 @@ public final class CpuTypes {
 	public static String getMagicString(int cpuType, int cpuSubtype) {
 		switch (cpuType) {
 			case CPU_TYPE_ARM:        
-				return ""+cpuType+"."+cpuSubtype;
+				return cpuType + "." + cpuSubtype;
 		}
-		return ""+cpuType;
+		return String.valueOf(cpuType);
 	}
 	
 }

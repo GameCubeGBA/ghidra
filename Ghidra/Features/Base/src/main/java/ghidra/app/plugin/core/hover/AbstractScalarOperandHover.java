@@ -246,7 +246,7 @@ public abstract class AbstractScalarOperandHover extends AbstractConfigurableHov
 	}
 
 	private static void addReprRow(StringBuilder sb, String typeName, String repr) {
-		addReprRow(sb, typeName, Arrays.asList(repr));
+		addReprRow(sb, typeName, List.of(repr));
 	}
 
 	private static void addReprRow(StringBuilder sb, String typeName, Iterable<String> reprs) {

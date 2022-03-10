@@ -1717,12 +1717,7 @@ public class StructureDataType extends CompositeDataTypeImpl implements Structur
 
 	}
 
-	@Override
-	public boolean dependsOn(DataType dt) {
-		return false;
-	}
-
-	@Override
+    @Override
 	public void deleteAll() {
 		for (DataTypeComponentImpl dtc : components) {
 			dtc.getDataType().removeParent(this);

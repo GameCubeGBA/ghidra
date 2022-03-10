@@ -37,12 +37,7 @@ public class TestGDynamicColumnTableModel extends GDynamicColumnTableModel<DirDa
 		return "Test";
 	}
 
-	@Override
-	public boolean isSortable(int columnIndex) {
-		return true;
-	}
-
-	@Override
+    @Override
 	public List<DirData> getModelData() {
 		return data;
 	}

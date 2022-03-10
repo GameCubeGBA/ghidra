@@ -477,12 +477,8 @@ public class TracePcodeEmulatorTest extends AbstractGhidraHeadlessIntegrationTes
 		try (ToyDBTraceBuilder tb = new ToyDBTraceBuilder("Test", "x86:LE:64:default")) {
 			final StringBuilder dumped = new StringBuilder();
 			SleighUseropLibrary<byte[]> library = new AnnotatedSleighUseropLibrary<byte[]>() {
-				@Override
-				protected Lookup getMethodLookup() {
-					return MethodHandles.lookup();
-				}
 
-				@SleighUserop
+                @SleighUserop
 				public void hexdump(byte[] in) {
 					dumped.append(NumericUtilities.convertBytesToString(in));
 				}
@@ -520,12 +516,8 @@ public class TracePcodeEmulatorTest extends AbstractGhidraHeadlessIntegrationTes
 		try (ToyDBTraceBuilder tb = new ToyDBTraceBuilder("Test", "x86:LE:64:default")) {
 			final StringBuilder dumped = new StringBuilder();
 			SleighUseropLibrary<byte[]> library = new AnnotatedSleighUseropLibrary<byte[]>() {
-				@Override
-				protected Lookup getMethodLookup() {
-					return MethodHandles.lookup();
-				}
 
-				@SleighUserop
+                @SleighUserop
 				public void hexdump(byte[] in) {
 					dumped.append(NumericUtilities.convertBytesToString(in));
 				}

@@ -108,15 +108,4 @@ public class FunctionReachabilityPlugin extends ProgramPlugin {
 		providers.remove(provider);
 	}
 
-	@Override
-	protected void locationChanged(ProgramLocation loc) {
-		// TODO if we add 'incoming location' following, then select all paths containing location
-		super.locationChanged(loc);
-	}
-
-	@Override
-	protected void selectionChanged(ProgramSelection sel) {
-		// TODO if we add 'incoming location' following, then select all paths containing selection		
-		super.selectionChanged(sel);
-	}
 }

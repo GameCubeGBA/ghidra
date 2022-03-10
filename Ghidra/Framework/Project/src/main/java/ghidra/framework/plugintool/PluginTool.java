@@ -1430,12 +1430,7 @@ public abstract class PluginTool extends AbstractDockingTool {
 		return winMgr.getActiveWindow();
 	}
 
-	@Override
-	public ComponentProvider getActiveComponentProvider() {
-		return winMgr.getActiveComponentProvider();
-	}
-
-	public void refreshKeybindings() {
+    public void refreshKeybindings() {
 		toolActions.restoreKeyBindings();
 	}
 

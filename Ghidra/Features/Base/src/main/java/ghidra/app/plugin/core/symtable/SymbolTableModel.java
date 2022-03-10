@@ -182,12 +182,7 @@ class SymbolTableModel extends AddressBasedTableModel<Symbol> {
 		}
 	}
 
-	@Override
-	public boolean isSortable(int columnIndex) {
-		return true;
-	}
-
-	@Override
+    @Override
 	public boolean isCellEditable(int key, int columnIndex) {
 		return columnIndex == LABEL_COL;
 	}

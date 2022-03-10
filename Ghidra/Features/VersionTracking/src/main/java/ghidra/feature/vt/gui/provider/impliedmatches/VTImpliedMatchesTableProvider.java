@@ -138,12 +138,7 @@ public class VTImpliedMatchesTableProvider extends ComponentProviderAdapter
 		return component;
 	}
 
-	@Override
-	public void componentHidden() {
-		// matchSelected() and sessionChanged() check isVisible before responding.
-	}
-
-	@Override
+    @Override
 	public void componentShown() {
 		impliedMatchTableModel.sessionChanged();
 	}

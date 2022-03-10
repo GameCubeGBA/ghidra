@@ -150,9 +150,9 @@ public class CoffFileHeader implements StructConverter {
 	 */
 	public String getMachineName() {
 		if (isCoffLevelOneOrTwo()) {
-			return "" + f_target_id;
+			return String.valueOf(f_target_id);
 		}
-		return "" + f_magic;
+		return String.valueOf(f_magic);
 	}
 
 	public short getMachine() {

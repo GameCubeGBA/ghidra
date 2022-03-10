@@ -448,14 +448,14 @@ class ComponentNode extends Node {
 				}
 			}
 		}
-		root.setAttribute("TOP_INFO", "" + topIndex);
+		root.setAttribute("TOP_INFO", String.valueOf(topIndex));
         for (ComponentPlaceholder placeholder : windowPlaceholders) {
 
             Element elem = new Element("COMPONENT_INFO");
             elem.setAttribute("NAME", placeholder.getName());
             elem.setAttribute("OWNER", placeholder.getOwner());
             elem.setAttribute("TITLE", placeholder.getTitle());
-            elem.setAttribute("ACTIVE", "" + placeholder.isShowing());
+            elem.setAttribute("ACTIVE", String.valueOf(placeholder.isShowing()));
             elem.setAttribute("GROUP", placeholder.getGroup());
             elem.setAttribute("INSTANCE_ID", Long.toString(placeholder.getInstanceID()));
             root.addContent(elem);

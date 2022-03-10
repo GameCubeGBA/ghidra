@@ -144,11 +144,7 @@ public abstract class RepeatedDynamicDataType extends DynamicDataType {
 		return "";
 	}
 
-	public String getMnemonic(Settings settings) {
-		return name;
-	}
-
-	private boolean moreComponents(Memory memory, Address loc) {
+    private boolean moreComponents(Memory memory, Address loc) {
 		long test = 0;
 		try {
 			switch (terminatorSize) {

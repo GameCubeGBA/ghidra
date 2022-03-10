@@ -43,15 +43,4 @@ public class ToyAnalyzer extends ConstantPropagationAnalyzer {
 		return program.getLanguage().getProcessor() == PROCESSOR;
 	}
 
-	@Override
-	public AddressSetView analyzeLocation(final Program program, Address start, AddressSetView set,
-			final TaskMonitor monitor) throws CancelledException {
-		return super.analyzeLocation(program, start, set, monitor);
-	}
-
-	@Override
-	public void optionsChanged(Options options, Program program) {
-		super.optionsChanged(options, program);
-	}
-
 }

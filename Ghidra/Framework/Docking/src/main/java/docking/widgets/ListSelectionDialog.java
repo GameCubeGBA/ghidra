@@ -177,12 +177,7 @@ public class ListSelectionDialog<T> extends DialogComponentProvider {
 			return String.class;
 		}
 
-		@Override
-		public boolean isCellEditable(int rowIndex, int columnIndex) {
-			return false;
-		}
-
-		@Override
+        @Override
 		public List<T> getModelData() {
 			return data;
 		}

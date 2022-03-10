@@ -138,15 +138,7 @@ public class ColorEditor extends PropertyEditorSupport {
 		return color;
 	}
 
-	/**
-	 * Return true which this editor can paint its property value.
-	 */
-	@Override
-	public boolean isPaintable() {
-		return false;
-	}
-
-	/**
+    /**
 	 * Paint a representation of the value into a given area of screen
 	 * real estate.  Note that the propertyEditor is responsible for doing
 	 * its own clipping so that it fits into the given rectangle.

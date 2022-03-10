@@ -160,9 +160,4 @@ public abstract class AbstractLeb128DataType extends BuiltIn implements Dynamic 
 		return ByteDataType.dataType;
 	}
 
-	@Override
-	public boolean canSpecifyLength() {
-		return false;
-	}
-
 }

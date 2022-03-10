@@ -84,7 +84,7 @@ public class FunctionResultStateStackAnalysisCmd extends BackgroundCommand {
 			monitor.setProgress(++count);
 
 			Symbol funName = program.getSymbolTable().getPrimarySymbol(origEntry);
-			String msg = (funName == null ? "" + origEntry : funName.getName());
+			String msg = (funName == null ? String.valueOf(origEntry) : funName.getName());
 			monitor.setMessage("Stack " + msg);
 
 			try {

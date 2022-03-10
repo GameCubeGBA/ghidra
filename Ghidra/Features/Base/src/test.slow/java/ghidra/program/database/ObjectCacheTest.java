@@ -19,6 +19,7 @@ import static org.junit.Assert.*;
 
 import java.util.Arrays;
 import java.util.ConcurrentModificationException;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -87,7 +88,7 @@ public class ObjectCacheTest extends AbstractGhidraHeadedIntegrationTest {
 			getTestObj(i);
 		}
 		assertEquals(10, cache.size());
-		cache.delete(Arrays.asList(new KeyRange(4, 6)));
+		cache.delete(List.of(new KeyRange(4, 6)));
 		assertEquals(7, cache.size());
 	}
 
@@ -97,7 +98,7 @@ public class ObjectCacheTest extends AbstractGhidraHeadedIntegrationTest {
 			getTestObj(i);
 		}
 		assertEquals(10, cache.size());
-		cache.delete(Arrays.asList(new KeyRange(2, 100)));
+		cache.delete(List.of(new KeyRange(2, 100)));
 		assertEquals(2, cache.size());
 	}
 

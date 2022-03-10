@@ -88,7 +88,7 @@ public class CrushedPNGFileSystem extends GFileSystemBase {
 
 	@Override
 	public List<GFile> getListing(GFile directory) throws IOException {
-		return (directory == null || directory.equals(root)) ? Arrays.asList(pngGFile)
+		return (directory == null || directory.equals(root)) ? List.of(pngGFile)
 				: Collections.emptyList();
 	}
 

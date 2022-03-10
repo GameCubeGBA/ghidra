@@ -2270,17 +2270,17 @@ public class ProgramDB extends DomainObjectAdapterDB implements Program, ChangeM
 		metadata.put("Compiler ID", compilerSpecID.getIdAsString());
 		metadata.put("Processor", language.getProcessor().toString());
 		metadata.put("Endian", memoryManager.isBigEndian() ? "Big" : "Little");
-		metadata.put("Address Size", "" + addressFactory.getDefaultAddressSpace().getSize());
+		metadata.put("Address Size", String.valueOf(addressFactory.getDefaultAddressSpace().getSize()));
 		metadata.put("Minimum Address", getString(getMinAddress()));
 		metadata.put("Maximum Address", getString(getMaxAddress()));
-		metadata.put("# of Bytes", "" + getNumberOfBytes());
-		metadata.put("# of Memory Blocks", "" + memoryManager.getBlocks().length);
-		metadata.put("# of Instructions", "" + listing.getNumInstructions());
-		metadata.put("# of Defined Data", "" + listing.getNumDefinedData());
-		metadata.put("# of Functions", "" + getFunctionManager().getFunctionCount());
-		metadata.put("# of Symbols", "" + getSymbolTable().getNumSymbols());
-		metadata.put("# of Data Types", "" + getDataTypeManager().getDataTypeCount(true));
-		metadata.put("# of Data Type Categories", "" + getDataTypeManager().getCategoryCount());
+		metadata.put("# of Bytes", getNumberOfBytes());
+		metadata.put("# of Memory Blocks", String.valueOf(memoryManager.getBlocks().length));
+		metadata.put("# of Instructions", String.valueOf(listing.getNumInstructions()));
+		metadata.put("# of Defined Data", String.valueOf(listing.getNumDefinedData()));
+		metadata.put("# of Functions", String.valueOf(getFunctionManager().getFunctionCount()));
+		metadata.put("# of Symbols", String.valueOf(getSymbolTable().getNumSymbols()));
+		metadata.put("# of Data Types", String.valueOf(getDataTypeManager().getDataTypeCount(true)));
+		metadata.put("# of Data Type Categories", String.valueOf(getDataTypeManager().getCategoryCount()));
 
 		Options propList = getOptions(Program.PROGRAM_INFO);
 		List<String> propNames = propList.getOptionNames();
@@ -2310,7 +2310,7 @@ public class ProgramDB extends DomainObjectAdapterDB implements Program, ChangeM
 		for (MemoryBlock block : blocks) {
 			size += block.getSize();
 		}
-		return "" + size;
+		return String.valueOf(size);
 	}
 
 	@Override

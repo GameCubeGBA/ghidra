@@ -94,12 +94,7 @@ public class JdiModelTargetLocation extends JdiModelTargetObjectImpl {
 		return CompletableFuture.completedFuture(null);
 	}
 
-	@Override
-	public CompletableFuture<Void> init() {
-		return CompletableFuture.completedFuture(null);
-	}
-
-	@Override
+    @Override
 	public String getDisplay() {
 		return location == null ? super.getDisplay()
 				: location + " [" + Long.toHexString(address.getOffset()) + "]";

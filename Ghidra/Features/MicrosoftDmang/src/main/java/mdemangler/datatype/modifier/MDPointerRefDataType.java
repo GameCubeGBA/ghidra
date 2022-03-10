@@ -45,10 +45,6 @@ public class MDPointerRefDataType extends MDModifierType {
 		return MDDataTypeParser.parseBasicDataType(dmang, false);
 	}
 
-	@Override
-	protected void parseInternal() throws MDException {
-		super.parseInternal();
-	}
 }
 
 /******************************************************************************/

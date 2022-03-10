@@ -117,7 +117,7 @@ public class SymbolAnnotatedStringHandler implements AnnotatedStringHandler {
 			SymbolTable symbolTable = program.getSymbolTable();
 			Symbol symbol = symbolTable.getPrimarySymbol(address);
 			if (symbol != null) {
-				return Arrays.asList(symbol);
+				return List.of(symbol);
 			}
 		}
 

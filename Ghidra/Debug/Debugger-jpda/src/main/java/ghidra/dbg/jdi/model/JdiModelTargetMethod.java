@@ -164,12 +164,7 @@ public class JdiModelTargetMethod extends JdiModelTargetObjectImpl {
 		return CompletableFuture.completedFuture(null);
 	}
 
-	@Override
-	public CompletableFuture<Void> init() {
-		return CompletableFuture.completedFuture(null);
-	}
-
-	@Override
+    @Override
 	public String getDisplay() {
 		return method == null ? super.getDisplay() : method.name();
 	}

@@ -2802,7 +2802,7 @@ class SymbolMerger extends AbstractListingMerger {
 			info[2] = s.getParentNamespace().getSymbol().getName();
 			info[3] = s.getAddress().toString();
 			info[4] = s.getSymbolType().toString();
-			info[5] = "" + s.isPrimary();
+			info[5] = String.valueOf(s.isPrimary());
 			info[6] = s.getSource().toString();
 		}
 		return info;

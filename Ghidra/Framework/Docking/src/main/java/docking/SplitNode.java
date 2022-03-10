@@ -159,9 +159,9 @@ class SplitNode extends Node {
 			//dividerPosition = 0.5f;
 		}
 
-		root.setAttribute("WIDTH", "" + splitPaneSize.width);
-		root.setAttribute("HEIGHT", "" + splitPaneSize.height);
-		root.setAttribute("DIVIDER_LOCATION", "" + Math.round(dividerPosition * 1000));
+		root.setAttribute("WIDTH", String.valueOf(splitPaneSize.width));
+		root.setAttribute("HEIGHT", String.valueOf(splitPaneSize.height));
+		root.setAttribute("DIVIDER_LOCATION", String.valueOf(Math.round(dividerPosition * 1000)));
 		root.setAttribute("ORIENTATION", isHorizontal ? "HORIZONTAL" : "VERTICAL");
 		root.addContent(child1.saveToXML());
 		root.addContent(child2.saveToXML());

@@ -301,11 +301,6 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 	}
 
 	@Override
-	public void addLocalAction(DockingActionIf action) {
-		super.addLocalAction(action);
-	}
-
-	@Override
 	public ObjectActionContext getActionContext(MouseEvent event) {
 		return new ObjectActionContext(this);
 	}
@@ -996,7 +991,7 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 
 		new ActionBuilder("Quick Launch", plugin.getName())
 			.keyBinding("Q")
-			.toolBarGroup(DebuggerResources.GROUP_TARGET, "" + groupTargetIndex)
+			.toolBarGroup(DebuggerResources.GROUP_TARGET, String.valueOf(groupTargetIndex))
 			.toolBarIcon(AbstractQuickLaunchAction.ICON)
 			.helpLocation(AbstractQuickLaunchAction.help(plugin))
 			.enabledWhen(ctx -> hasModelAndProgram())
@@ -1841,11 +1836,6 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 		public void focusChanged(TargetObject object, TargetObject focused) {
 			plugin.setFocus(object, focused);
 			plugin.getTool().contextChanged(DebuggerObjectsProvider.this);
-		}
-
-		@Override
-		public void memoryUpdated(TargetObject memory, Address address, byte[] data) {
-			//System.err.println("memoryUpdated");
 		}
 
 		@Override

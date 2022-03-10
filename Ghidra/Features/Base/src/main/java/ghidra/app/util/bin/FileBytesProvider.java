@@ -135,10 +135,6 @@ public class FileBytesProvider implements ByteProvider {
 			offset = initialOffset;
 		}
 
-		@Override
-		public void close() throws IOException {
-			// not applicable
-		}
-	}
+    }
 
 }

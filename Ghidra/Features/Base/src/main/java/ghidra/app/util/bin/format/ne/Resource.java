@@ -162,7 +162,7 @@ public class Resource {
 	public String toString() {
 		//if MSB is set, then resourceID is a unique id of this resource...
 		if ((resourceID & 0x8000) != 0) {
-			return "" + (resourceID & 0x7fff);
+			return String.valueOf(resourceID & 0x7fff);
 		}
 		//if the MSB is not set, then resourceID is an 
 		//index to a resource name relative to the 

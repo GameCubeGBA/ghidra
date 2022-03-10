@@ -121,12 +121,7 @@ class EditMemoryReferencePanel extends EditReferencePanel {
 				}
 			}
 
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				super.mouseReleased(e);
-			}
-		});
+        });
 		addrHistoryButton.setText(null);
 		addrHistoryButton.setMargin(new Insets(0, 0, 0, 0));
 		addrHistoryButton.setFocusable(false);
@@ -548,11 +543,7 @@ class EditMemoryReferencePanel extends EditReferencePanel {
 				toggleAddressHistoryPopup();
 			}
 
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// Ignore
-			}
-		});
+        });
 		displayTable.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseMoved(MouseEvent e) {

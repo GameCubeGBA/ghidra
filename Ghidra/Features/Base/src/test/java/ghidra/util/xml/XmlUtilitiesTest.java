@@ -81,7 +81,7 @@ public class XmlUtilitiesTest extends AbstractGenericTest {
 		// Test each character to ensure it can be added to an XML element attribute
 		// and successfully outputted as a xml document.
 		for (char ch = 1; ch != 0; ch++) {
-			if (!XmlUtilities.hasInvalidXMLCharacters("" + ch)) {
+			if (!XmlUtilities.hasInvalidXMLCharacters(String.valueOf(ch))) {
 				testCharAsAttrValue(ch);
 			}
 		}
@@ -89,7 +89,7 @@ public class XmlUtilitiesTest extends AbstractGenericTest {
 
 	private static void testCharAsAttrValue(char ch) {
 		Element node = new Element("node");
-		node.setAttribute("attr", "" + ch);
+		node.setAttribute("attr", String.valueOf(ch));
 
 		@SuppressWarnings("unused")
 		String tmp = XmlUtilities.toString(node);

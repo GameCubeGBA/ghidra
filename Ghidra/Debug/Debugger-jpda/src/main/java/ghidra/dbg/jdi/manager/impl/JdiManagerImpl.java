@@ -185,7 +185,7 @@ public class JdiManagerImpl implements JdiManager {
 		}
 		if (cx instanceof AttachingConnector) {
 			if (arguments.containsKey("pid")) {
-				arguments.get("pid").setValue("" + Integer.decode(args.get(0)));
+				arguments.get("pid").setValue(String.valueOf(Integer.decode(args.get(0))));
 			}
 			else {
 				if (args.size() == 2) {

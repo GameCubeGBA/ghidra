@@ -69,7 +69,7 @@ public class ConstantPoolLongInfo extends AbstractConstantPoolInfoJava {
 
 	@Override
 	public String toString() {
-		return "" + getValue();
+		return String.valueOf(getValue());
 	}
 
 	@Override

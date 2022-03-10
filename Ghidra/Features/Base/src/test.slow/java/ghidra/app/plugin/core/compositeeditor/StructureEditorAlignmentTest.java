@@ -285,7 +285,7 @@ public class StructureEditorAlignmentTest extends AbstractStructureEditorTest {
 		JTextField minAlignField =
 			(JTextField) getInstanceField("explicitAlignTextField", editorPanel);
 		assertNotNull(minAlignField);
-		assertEquals("" + minAlignment, minAlignField.getText());
+		assertEquals(String.valueOf(minAlignment), minAlignField.getText());
 
 		assertEquals(false, structureModel.viewComposite.isDefaultAligned());
 		assertEquals(false, structureModel.viewComposite.isMachineAligned());
@@ -813,9 +813,9 @@ public class StructureEditorAlignmentTest extends AbstractStructureEditorTest {
 	private void checkRow(int rowIndex, int offset, int length, String mnemonic, DataType dataType,
 			String name, String comment) {
 		assertTrue(dataType.isEquivalent(structureModel.getComponent(rowIndex).getDataType()));
-		assertEquals("" + offset,
+		assertEquals(String.valueOf(offset),
 			structureModel.getValueAt(rowIndex, structureModel.getOffsetColumn()));
-		assertEquals("" + length,
+		assertEquals(String.valueOf(length),
 			structureModel.getValueAt(rowIndex, structureModel.getLengthColumn()));
 		assertEquals(mnemonic,
 			structureModel.getValueAt(rowIndex, structureModel.getMnemonicColumn()));

@@ -80,12 +80,7 @@ public class JdiModelTargetSection extends JdiModelTargetObjectImpl implements /
 		return CompletableFuture.completedFuture(null);
 	}
 
-	@Override
-	public CompletableFuture<Void> init() {
-		return CompletableFuture.completedFuture(null);
-	}
-
-	@Override
+    @Override
 	public String getDisplay() {
 		if (method == null)
 			return "NULL";

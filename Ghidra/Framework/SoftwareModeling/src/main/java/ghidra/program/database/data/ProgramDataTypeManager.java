@@ -207,12 +207,7 @@ public class ProgramDataTypeManager extends ProgramBasedDataTypeManagerDB
 			oldPath.getParent(), category);
 	}
 
-	@Override
-	protected void favoritesChanged(DataType dataType, boolean isFavorite) {
-		super.favoritesChanged(dataType, isFavorite);
-	}
-
-	@Override
+    @Override
 	protected void replaceDataTypeIDs(long oldDataTypeID, long newDataTypeID) {
 		if (oldDataTypeID == newDataTypeID) {
 			return;

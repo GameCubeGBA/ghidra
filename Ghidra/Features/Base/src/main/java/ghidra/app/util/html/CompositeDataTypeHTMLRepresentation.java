@@ -100,7 +100,7 @@ public class CompositeDataTypeHTMLRepresentation extends HTMLDataTypeRepresentat
 	}
 
 	protected TextLine buildAlignmentValueText(Composite composite) {
-		return new TextLine("" + composite.getAlignment());
+		return new TextLine(String.valueOf(composite.getAlignment()));
 	}
 
 	private List<ValidatableLine> buildContent(Composite comp) {

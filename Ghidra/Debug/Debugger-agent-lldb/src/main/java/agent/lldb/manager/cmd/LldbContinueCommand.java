@@ -48,19 +48,7 @@ return !pending.findAllOf(AbstractLldbCompletedCommandEvent.class).isEmpty();
         return false;
 	}
 
-	@Override
-	public Void complete(LldbPendingCommand<?> pending) {
-		/*
-		DebugProcessInfo info = created.getInfo();
-		DebugThreadInfo tinfo = info.initialThreadInfo;
-		DebugSystemObjects so = manager.getSystemObjects();
-		DebugThreadId tid = so.getThreadIdByHandle(tinfo.handle);
-		return manager.getThread(tid);
-		*/
-		return null;
-	}
-	
-	@Override
+    @Override
 	public void invoke() {
 		SBError res = process.Continue();
 		if (!res.Success()) {

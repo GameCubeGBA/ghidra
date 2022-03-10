@@ -3232,7 +3232,7 @@ class ElfProgramBuilder extends MemorySectionResolver implements ElfLoadHelper {
 	}
 
 	private String pad(int value) {
-		return StringUtilities.pad("" + value, ' ', 4);
+		return StringUtilities.pad(String.valueOf(value), ' ', 4);
 	}
 
 	private Data createUndefined(Address addr, int size) throws CodeUnitInsertionException {

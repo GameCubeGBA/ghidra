@@ -1253,7 +1253,7 @@ public final class AutoAnalysisManager implements DomainObjectListener, DomainOb
 			long taskTime = getTaskTime(timedTasks, element);
 			double totalTime = taskTime / 1000.00;
 
-			String partTime = (((int) (totalTime * 1000.0)) % 1000) + "";
+			String partTime = String.valueOf(((int) (totalTime * 1000.0)) % 1000);
 			String secString =
 				((int) totalTime) + "." + "000".substring(partTime.length()) + partTime + " secs";
 			int testLen = element.length() + secString.length();

@@ -75,12 +75,7 @@ class DirectoryTableModel extends AbstractSortedTableModel<File> {
 		return files == null ? 0 : files.length;
 	}
 
-	@Override
-	public boolean isCellEditable(int row, int column) {
-		return false;
-	}
-
-	@Override
+    @Override
 	public int getColumnCount() {
 		return 3;
 	}
@@ -132,13 +127,7 @@ class DirectoryTableModel extends AbstractSortedTableModel<File> {
 		return Arrays.asList(files);
 	}
 
-	@Override
-	// overridden to provide access in this package
-	protected int getIndexForRowObject(File rowObject) {
-		return super.getIndexForRowObject(rowObject);
-	}
-
-	@Override
+    @Override
 	public void setValueAt(Object aValue, int row, int column) {
 		if (row < 0 || row >= files.length) {
 			return;

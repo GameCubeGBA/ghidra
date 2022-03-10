@@ -90,15 +90,7 @@ public class ClearDialog extends DialogComponentProvider {
 		plugin.clear(opts, context);
 	}
 
-	/**
-	 * Gets called when the user clicks on the Cancel Action for the dialog.
-	 */
-	@Override
-	protected void cancelCallback() {
-		close();
-	}
-
-	/**
+    /**
 	 * Create the main panel.
 	 */
 	private void create() {

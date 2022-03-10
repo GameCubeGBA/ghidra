@@ -58,12 +58,7 @@ public class ReverseMapIteratorSTL<K, V> extends MapIteratorSTL<K, V> {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
-    public void insert(Pair<K, V> value) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
+    @Override
     public boolean isBegin() {
 		return node == tree.getLast();
 	}

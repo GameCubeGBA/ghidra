@@ -52,10 +52,4 @@ public abstract class AbstractPublic16Or3216MsSymbol extends AbstractPublicMsSym
 		return ((DataSymbolInternals) internals).getName();
 	}
 
-	@Override
-	public void emit(StringBuilder builder) {
-		builder.append(getSymbolTypeName());
-		internals.emit(builder);
-	}
-
 }

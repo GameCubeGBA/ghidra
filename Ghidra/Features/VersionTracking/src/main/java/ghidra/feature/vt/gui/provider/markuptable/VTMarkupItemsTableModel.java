@@ -253,14 +253,7 @@ public class VTMarkupItemsTableModel extends AddressBasedTableModel<VTMarkupItem
 			throw new UnsupportedOperationException();
 		}
 
-		@Override
-		public boolean equals(Object obj) {
-			// For now we don't support equals(); if this filter gets re-created, 
-			// then the table must be re-filtered.  If we decide to implement this method, then 
-			// we must also implement equals() on the filters used by this filter.
-			return this == obj;
-		}
-	}
+    }
 
 	// column for selecting/editing?
 

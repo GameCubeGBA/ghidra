@@ -92,12 +92,7 @@ public abstract class BuiltIn extends DataTypeImpl implements BuiltInDataType {
 		return getClass() == dt.getClass();
 	}
 
-	@Override
-	public void dataTypeSizeChanged(DataType dt) {
-		// Default implementation does nothing.
-	}
-
-	@Override
+    @Override
 	public final void setCategoryPath(CategoryPath path) throws DuplicateNameException {
 		// Default implementation does nothing.
 	}
@@ -123,22 +118,7 @@ public abstract class BuiltIn extends DataTypeImpl implements BuiltInDataType {
 		// Default implementation does nothing.
 	}
 
-	@Override
-	public void dataTypeNameChanged(DataType dt, String oldName) {
-		// Default implementation does nothing.
-	}
-
-	@Override
-	public void dataTypeReplaced(DataType oldDt, DataType newDt) {
-		// Default implementation does nothing.
-	}
-
-	@Override
-	public void dataTypeDeleted(DataType dt) {
-		// Default implementation does nothing.
-	}
-
-//	/* (non-Javadoc)
+    //	/* (non-Javadoc)
 //	 * @see ghidra.program.model.data.BuiltInDataType#clone(ghidra.program.model.data.DataTypeManager)
 //	 */
 //	public BuiltInDataType clone(DataTypeManager dataManager) {
@@ -147,12 +127,7 @@ public abstract class BuiltIn extends DataTypeImpl implements BuiltInDataType {
 //		return dt;
 //	}
 
-	@Override
-	public boolean dependsOn(DataType dt) {
-		return false;
-	}
-
-	@Override
+    @Override
 	public UniversalID getUniversalID() {
 		return null;
 	}

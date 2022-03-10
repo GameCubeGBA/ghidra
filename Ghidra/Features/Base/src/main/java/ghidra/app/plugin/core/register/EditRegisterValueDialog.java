@@ -143,12 +143,7 @@ class EditRegisterValueDialog extends DialogComponentProvider {
 		close();
 	}
 
-	@Override
-	protected void cancelCallback() {
-		close();
-	}
-
-	public boolean wasCancelled() {
+    public boolean wasCancelled() {
 		return wasCancelled;
 	}
 

@@ -35,8 +35,4 @@ public class DataOperandReferenceAnalyzer extends OperandReferenceAnalyzer {
 		setPriority(AnalysisPriority.REFERENCE_ANALYSIS.after().after());
 	}
 
-	@Override
-	protected void createFunctions(Program program, AddressSet functionStarts) {
-		// don't ever create a function from a data pointer
-	}
 }

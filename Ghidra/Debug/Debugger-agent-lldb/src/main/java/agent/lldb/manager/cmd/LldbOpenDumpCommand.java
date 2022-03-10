@@ -49,12 +49,7 @@ public class LldbOpenDumpCommand extends AbstractLldbCommand<SBThread> {
 		return completed && (created != null);
 	}
 
-	@Override
-	public SBThread complete(LldbPendingCommand<?> pending) {
-		return null;
-	}
-
-	@Override
+    @Override
 	public void invoke() {
 
 		String f = (String) args.get("TraceOrDump");

@@ -62,12 +62,7 @@ public class PcRelative31AddressDataType extends BuiltIn {
 		return new PcRelative31AddressDataType(dtm);
 	}
 
-	@Override
-	public String getMnemonic(Settings settings) {
-		return name;
-	}
-
-	@Override
+    @Override
 	public int getLength() {
 		return 4;
 	}

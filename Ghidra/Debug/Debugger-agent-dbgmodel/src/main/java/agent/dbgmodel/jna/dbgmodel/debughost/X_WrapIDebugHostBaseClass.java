@@ -33,9 +33,4 @@ public class X_WrapIDebugHostBaseClass extends WrapIDebugHostBaseClass
 		super(pvInstance);
 	}
 
-	@Override
-	public HRESULT GetOffset(ULONGLONGByReference offset) {
-		return _invokeHR(VTIndices.GET_OFFSET, getPointer(), offset);
-	}
-
 }

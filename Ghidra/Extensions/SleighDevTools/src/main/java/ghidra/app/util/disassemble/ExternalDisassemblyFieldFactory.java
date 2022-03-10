@@ -62,13 +62,7 @@ public class ExternalDisassemblyFieldFactory extends FieldFactory {
 		super(FIELD_NAME, model, hlProvider, displayOptions, fieldOptions);
 	}
 
-	@Override
-	public void fieldOptionsChanged(Options options, String optionName, Object oldValue,
-			Object newValue) {
-		// have no options
-	}
-
-	@Override
+    @Override
 	public boolean acceptsType(int category, Class<?> proxyObjectClass) {
 		return (category == FieldFormatModel.INSTRUCTION_OR_DATA);
 	}

@@ -32,12 +32,7 @@ public class ArtHeader_NougatMR2Pixel extends ArtHeader_Nougat {
 		super(reader);
 	}
 
-	@Override
-	public int getArtMethodCountForVersion() {
-		return ImageMethod_Nougat.kImageMethodsCount.ordinal();
-	}
-
-	@Override
+    @Override
 	public DataType toDataType() throws DuplicateNameException, IOException {
 		Structure structure = (Structure) super.toDataType();
 		try {

@@ -308,9 +308,4 @@ public class DiffApplyTestAdapter extends DiffTestAdapter {
 		assertEquals(new ProgramSelection(addrSet), cb.getCurrentSelection());
 	}
 
-	@Override
-	void setDiffSelection(final AddressSetView addrSet) {
-		runSwing(() -> diffPlugin.setProgram2Selection(new ProgramSelection(addrSet)), true);
-	}
-
 }

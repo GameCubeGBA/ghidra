@@ -325,12 +325,7 @@ public class TimelinePanel<T, N extends Number & Comparable<N>> extends JPanel {
 			setFocusable(true);
 		}
 
-		@Override
-		public boolean isOpaque() {
-			return super.isOpaque();
-		}
-
-		public void setViewRange(Range<Double> viewRange) {
+        public void setViewRange(Range<Double> viewRange) {
 			this.viewRange = viewRange;
 			invalidate();
 		}

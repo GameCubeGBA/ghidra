@@ -228,12 +228,7 @@ public class EnumDataType extends GenericDataType implements Enum {
 		return enumDataType;
 	}
 
-	@Override
-	public String getMnemonic(Settings settings) {
-		return name;
-	}
-
-	@Override
+    @Override
 	public int getLength() {
 		return length;
 	}

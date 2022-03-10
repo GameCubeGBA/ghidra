@@ -57,7 +57,7 @@ public class SaveableInt  implements Saveable {
 	
 	@Override
     public String toString() {
-		return ""+i;
+		return String.valueOf(i);
 	}
 	@Override
     public boolean equals(Object obj) {

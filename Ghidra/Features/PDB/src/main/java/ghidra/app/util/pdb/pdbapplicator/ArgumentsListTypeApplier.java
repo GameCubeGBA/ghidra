@@ -41,13 +41,7 @@ public class ArgumentsListTypeApplier extends MsTypeApplier {
 		super(applicator, msType);
 	}
 
-	//==============================================================================================
-	@Override
-	void deferredApply() throws PdbException, CancelledException {
-		// Do nothing... Just need dependency tie of each argument to function.
-	}
-
-	//==============================================================================================
+    //==============================================================================================
 	// TODO: would be nice if we did not have to implement this method.  Want the applyTo() below.
 	@Override
 	void apply() throws PdbException, CancelledException {

@@ -73,15 +73,7 @@ class FallThroughDialog extends DialogComponentProvider implements ChangeListene
 		model.execute();
 	}
 
-	/**
-	 * @see ghidra.util.bean.GhidraDialog#cancelCallback()
-	 */
-	@Override
-	protected void cancelCallback() {
-		close();
-	}
-
-	/**
+    /**
 	 * @see ghidra.util.bean.GhidraDialog#okCallback()
 	 */
 	@Override

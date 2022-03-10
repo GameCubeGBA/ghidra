@@ -93,12 +93,7 @@ public class VTRelatedMatchTableModel extends AddressBasedTableModel<VTRelatedMa
 		super.reload();
 	}
 
-	@Override
-	public boolean isCellEditable(int rowIndex, int columnIndex) {
-		return false;
-	}
-
-//==================================================================================================
+    //==================================================================================================
 // Inner Classes
 //==================================================================================================   
 

@@ -47,17 +47,7 @@ public class InvalidArchiveNode extends ArchiveNode {
 			HTMLUtilities.escapeHTML(archive.getName());
 	}
 
-	@Override
-	public String getName() {
-		return archive.getName();
-	}
-
-	@Override
-	public boolean canCut() {
-		return false;
-	}
-
-	@Override
+    @Override
 	public boolean canPaste(List<GTreeNode> pastedNodes) {
 		return false;
 	}
@@ -67,23 +57,13 @@ public class InvalidArchiveNode extends ArchiveNode {
 		return null;
 	}
 
-	@Override
-	public boolean isCut() {
-		return false;
-	}
-
-	@Override
+    @Override
 	public boolean canDelete() {
 		return false;
 	}
 
 	@Override
 	public void setNodeCut(boolean isCut) {
-	}
-
-	@Override
-	public Archive getArchive() {
-		return archive;
 	}
 
 }

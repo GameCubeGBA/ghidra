@@ -762,9 +762,4 @@ public class StructureEditorUnlockedCellEdit2Test
 		assertEquals(350, model.getLength());
 	}
 
-	@Override
-	protected void setText(String s) {
-		JTextField tf = getActiveEditorTextField();
-		setText(tf, s);
-	}
 }

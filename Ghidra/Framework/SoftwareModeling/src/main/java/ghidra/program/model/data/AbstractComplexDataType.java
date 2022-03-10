@@ -77,11 +77,6 @@ public abstract class AbstractComplexDataType extends BuiltIn {
 	}
 
 	@Override
-	public String getMnemonic(Settings settings) {
-		return name;
-	}
-
-	@Override
 	public int getLength() {
 		return floatType.getLength() * 2;
 	}

@@ -332,7 +332,7 @@ public class DebuggerCopyActionsPluginTest extends AbstractGhidraHeadedDebuggerG
 		waitForSwing();
 
 		MemoryBlock text2 =
-			Unique.assertOne(Arrays.asList(program.getMemory().getBlock(".text_2")));
+			Unique.assertOne(List.of(program.getMemory().getBlock(".text_2")));
 		assertNotEquals(block, text2);
 		assertTrue(text2.isOverlay());
 	}

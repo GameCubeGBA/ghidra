@@ -47,12 +47,7 @@ public class OutgoingCallsRootNode extends OutgoingCallNode {
 		return "Outgoing References - " + name;
 	}
 
-	@Override
-	public boolean isLeaf() {
-		return false;
-	}
-
-	@Override
+    @Override
 	public String getToolTip() {
 		return null;
 	}

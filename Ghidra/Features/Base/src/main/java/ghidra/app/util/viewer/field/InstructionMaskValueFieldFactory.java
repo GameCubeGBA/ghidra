@@ -59,13 +59,7 @@ public class InstructionMaskValueFieldFactory extends FieldFactory {
 		super(FIELD_NAME, model, hsProvider, displayOptions, fieldOptions);
 	}
 
-	@Override
-	public void fieldOptionsChanged(Options options, String optionName, Object oldValue,
-			Object newValue) {
-		// stub
-	}
-
-	/**
+    /**
 	 * Returns the FactoryField for the given object at index index.
 	 * @param varWidth the amount of variable width spacing for any fields
 	 * before this one.

@@ -40,12 +40,7 @@ public class TOCItemExternal extends TOCItem {
 		return false;
 	}
 
-	@Override
-	public String generateTOCItemTag(LinkDatabase linkDatabase, boolean isInlineTag, int indentLevel) {
-		return super.generateTOCItemTag(linkDatabase, isInlineTag, indentLevel);
-	}
-
-	@Override
+    @Override
 	public String toString() {
 		//@formatter:off
 		return "<tocitem id=\"" + getIDAttribute() + "\"\n\t\t" +

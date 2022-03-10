@@ -50,12 +50,7 @@ class LabelLocationDescriptor extends LocationDescriptor {
 		homeAddress = labelLocation.getAddress();
 	}
 
-	@Override
-	public String getTypeName() {
-		return label;
-	}
-
-	@Override
+    @Override
 	protected void doGetReferences(Accumulator<LocationReference> accumulator, TaskMonitor monitor)
 			throws CancelledException {
 		ReferenceUtils.getReferences(accumulator, programLocation, monitor);

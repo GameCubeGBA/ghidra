@@ -32,9 +32,4 @@ public class AbstractDbgCompletedCommandEvent extends AbstractDbgEvent<String> {
 
 	}
 
-	public DbgState newState() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

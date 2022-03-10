@@ -501,7 +501,7 @@ public abstract class HTMLDataTypeRepresentation {
 //==================================================================================================
 
 	protected HTMLDataTypeRepresentationDiffInput getDiffInput(ValidatableLine line) {
-		return new HTMLDataTypeRepresentationDiffInput(this, Arrays.asList(line));
+		return new HTMLDataTypeRepresentationDiffInput(this, List.of(line));
 	}
 
 	protected HTMLDataTypeRepresentationDiffInput getDiffInput(List<ValidatableLine> lines) {

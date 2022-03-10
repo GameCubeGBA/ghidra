@@ -172,7 +172,7 @@ public class AddressTableDialog extends DialogComponentProvider {
 		if (PseudoDisassembler.hasLowBitCodeModeInAddrValues(plugin.getProgram())) {
 			align = 1;
 		}
-		alignField.setText("" + align);
+		alignField.setText(String.valueOf(align));
 
 		skipLabel = new GDLabel("Skip Length: ");
 		skipField = new JTextField(5);
@@ -506,11 +506,6 @@ public class AddressTableDialog extends DialogComponentProvider {
 	public void taskCompleted(Task task) {
 		super.taskCompleted(task);
 		searchComplete();
-	}
-
-	@Override
-	protected void cancelCurrentTask() {
-		super.cancelCurrentTask();
 	}
 
 	private void createAction() {

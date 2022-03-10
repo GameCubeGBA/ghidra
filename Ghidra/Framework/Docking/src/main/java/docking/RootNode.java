@@ -154,7 +154,7 @@ class RootNode extends WindowNode {
 
 	@Override
 	List<Node> getChildren() {
-		return Arrays.asList(child);
+		return List.of(child);
 	}
 
 	@Override
@@ -415,11 +415,11 @@ class RootNode extends WindowNode {
 		Element root = new Element(ROOT_NODE_ELEMENT_NAME);
 		JFrame frame = windowWrapper.getParentFrame();
 		Rectangle r = frame.getBounds();
-		root.setAttribute("X_POS", "" + r.x);
-		root.setAttribute("Y_POS", "" + r.y);
-		root.setAttribute("WIDTH", "" + r.width);
-		root.setAttribute("HEIGHT", "" + r.height);
-		root.setAttribute("EX_STATE", "" + frame.getExtendedState());
+		root.setAttribute("X_POS", String.valueOf(r.x));
+		root.setAttribute("Y_POS", String.valueOf(r.y));
+		root.setAttribute("WIDTH", String.valueOf(r.width));
+		root.setAttribute("HEIGHT", String.valueOf(r.height));
+		root.setAttribute("EX_STATE", String.valueOf(frame.getExtendedState()));
 		if (child != null) {
 			root.addContent(child.saveToXML());
 		}

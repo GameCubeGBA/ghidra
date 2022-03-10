@@ -35,13 +35,7 @@ public abstract class AbstractModelForLldbInterpreterTest
 		obtainTarget();
 	}
 
-	@Override
-	protected List<String> seedPath() {
-		return List.of();
-		//return PathUtils.parse("Sessions[1]");
-	}
-
-	@Override
+    @Override
 	public List<String> getExpectedInterpreterPath() {
 		return PathUtils.parse("Sessions[1]");
 	}

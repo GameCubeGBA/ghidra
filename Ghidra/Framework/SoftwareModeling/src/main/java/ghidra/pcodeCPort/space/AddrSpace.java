@@ -206,13 +206,7 @@ public class AddrSpace {
 		return null;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		// we have purposely chosen identity equals!
-		return this == obj;
-	}
-
-	public int compareTo(AddrSpace base) {
+    public int compareTo(AddrSpace base) {
 		return index - base.index;
 	}
 

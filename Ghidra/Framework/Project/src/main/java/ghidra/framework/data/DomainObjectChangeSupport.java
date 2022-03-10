@@ -166,7 +166,7 @@ class DomainObjectChangeSupport {
 
 		Runnable errorTask = () -> {
 			List<DomainObjectChangeRecord> records =
-				Arrays.asList(new DomainObjectChangeRecord(DomainObject.DO_OBJECT_ERROR, null, t));
+                    List.of(new DomainObjectChangeRecord(DomainObject.DO_OBJECT_ERROR, null, t));
 			DomainObjectChangedEvent ev = new DomainObjectChangedEvent(src, records);
 			for (DomainObjectListener l : listenersCopy) {
 				try {

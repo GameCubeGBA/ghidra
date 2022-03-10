@@ -113,32 +113,7 @@ public class JdiModelTargetVMContainer extends JdiModelTargetObjectImpl
 		tgtVM.threads.threadExited(thread);
 	}
 
-	@Override
-	public void libraryLoaded(VirtualMachine vm, String name, JdiCause cause) {
-		/*
-		JdiModelTargetVM vm = getTargetInferior(inf);
-		JdiModelTargetModule module = vm.modules.libraryLoaded(name);
-		parent.getListeners()
-				.fire(TargetEventScopeListener.class)
-				.event(parent, null, TargetEventType.MODULE_LOADED,
-					"Library " + name + " loaded", List.of(module));
-					*/
-	}
-
-	@Override
-	public void libraryUnloaded(VirtualMachine vm, String name, JdiCause cause) {
-		/*
-		JdiModelTargetVM vm = getTargetInferior(inf);
-		JdiModelTargetModule module = vm.modules.getTargetModuleIfPresent(name);
-		parent.getListeners()
-				.fire(TargetEventScopeListener.class)
-				.event(parent, null, TargetEventType.MODULE_UNLOADED,
-					"Library " + name + " unloaded", List.of(module));
-		vm.modules.libraryUnloaded(name);
-		*/
-	}
-
-	private void updateUsingVMs(Map<String, VirtualMachine> byName) {
+    private void updateUsingVMs(Map<String, VirtualMachine> byName) {
 		List<JdiModelTargetVM> vms;
 		synchronized (this) {
 			vms = byName.values().stream().map(this::getTargetVM).collect(Collectors.toList());

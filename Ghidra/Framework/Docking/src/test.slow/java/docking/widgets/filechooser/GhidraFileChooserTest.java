@@ -1505,7 +1505,7 @@ public class GhidraFileChooserTest extends AbstractDockingTest {
 			isEnabled);
 
 		File file = files.get(files.size() - 1).getParentFile();
-		selectFiles(Arrays.asList(file));
+		selectFiles(List.of(file));
 		waitForChooser();
 
 		context = createDirListContext();

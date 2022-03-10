@@ -148,23 +148,7 @@ public class KitchenSinkPlugin extends ProgramPlugin {
         JOptionPane.showMessageDialog(null,message,"Hello World",
                                       JOptionPane.INFORMATION_MESSAGE);
     }
-    
-  	/**
-	 * If your plugin maintains configuration state, you must save that state information
-     * to the SaveState object in this method.  For example, the Code Browser can be configured
-     * to show fields in different colors.  This is the method where that type
-     * information is saved.
-	 */
-    @Override
-    public void writeConfigState(SaveState saveState) {
-    }
-	/**
-	 * If your plugin maintains configuration state, this is where you read it
-     * back in.
-	 */
-    @Override
-    public void readConfigState(SaveState saveState) {
-    }
+
 }
 
 

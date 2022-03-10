@@ -41,14 +41,4 @@ class BinaryDataBuffer extends DataBuffer {
 		super(size);
 	}
 
-	/**
-	 * Get the byte storage array associated with this buffer.
-	 * 
-	 * @return byte storage array.
-	 */
-	@Override
-    protected byte[] getData() {
-		return data;
-	}
-
 }

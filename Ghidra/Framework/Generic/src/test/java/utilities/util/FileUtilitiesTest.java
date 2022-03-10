@@ -199,12 +199,12 @@ public class FileUtilitiesTest {
 	public void copyFile_ResourceFile_To_ResourceFile() throws Exception {
 
 		File from = File.createTempFile("from.file", ".txt");
-		FileUtilities.writeLinesToFile(from, Arrays.asList("From file contents"));
+		FileUtilities.writeLinesToFile(from, List.of("From file contents"));
 		from.deleteOnExit();
 
 		File to = File.createTempFile("to.file", ".txt");
 		to.deleteOnExit();
-		FileUtilities.writeLinesToFile(to, Arrays.asList("To file contents"));
+		FileUtilities.writeLinesToFile(to, List.of("To file contents"));
 
 		FileUtilities.copyFile(new ResourceFile(from), new ResourceFile(to), null);
 

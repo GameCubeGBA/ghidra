@@ -29,7 +29,7 @@ public class MutableInt {
 	
 	@Override
 	public String toString() {
-	    return "" + value;
+	    return String.valueOf(value);
 	}
 	
 	public void increment() {

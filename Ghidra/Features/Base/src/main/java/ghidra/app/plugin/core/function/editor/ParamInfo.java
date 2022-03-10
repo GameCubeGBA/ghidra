@@ -53,12 +53,7 @@ public class ParamInfo {
 		this.ordinal = ordinal;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		return this == obj;
-	}
-
-	@Override
+    @Override
 	public int hashCode() {
 		return getName().hashCode();
 	}

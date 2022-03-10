@@ -50,17 +50,7 @@ public abstract class AbstractGhidraHeadedIntegrationTest
 		setErrorGUIEnabled(true);
 	}
 
-	@Override
-	protected ApplicationLayout createApplicationLayout() {
-		try {
-			return new GhidraTestApplicationLayout(new File(getTestDirectoryPath()));
-		}
-		catch (IOException e) {
-			throw new AssertException(e);
-		}
-	}
-
-	@Override
+    @Override
 	protected ApplicationConfiguration createApplicationConfiguration() {
 		GhidraApplicationConfiguration config = new GhidraApplicationConfiguration();
 		config.setShowSplashScreen(false);

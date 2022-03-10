@@ -152,16 +152,7 @@ public class SaveDataDialog extends DialogComponentProvider {
 		}
 	}
 
-	/**
-	 * Gets called when the user clicks on the Cancel Action for the dialog.
-	 */
-	@Override
-	protected void cancelCallback() {
-		close();
-
-	}
-
-	/**
+    /**
 	 * Create the panel for this dialog.
 	 */
 	private JPanel createPanel() {

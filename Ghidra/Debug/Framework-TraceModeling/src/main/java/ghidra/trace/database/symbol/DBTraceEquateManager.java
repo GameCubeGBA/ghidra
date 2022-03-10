@@ -67,12 +67,7 @@ public class DBTraceEquateManager
 		loadSpaces();
 	}
 
-	@Override
-	public void dbError(IOException e) {
-		trace.dbError(e);
-	}
-
-	@Override
+    @Override
 	public void invalidateCache(boolean all) {
 		try (LockHold hold = LockHold.lock(lock.writeLock())) {
 			equateStore.invalidateCache();

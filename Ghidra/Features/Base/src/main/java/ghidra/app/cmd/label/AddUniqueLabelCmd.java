@@ -67,7 +67,7 @@ public class AddUniqueLabelCmd implements Command {
 				errorMsg = "You must enter a valid label name";
 			}
 			else {
-				errorMsg = "" + name + " is not a valid label name";
+				errorMsg = name + " is not a valid label name";
 			}
 		}
 		catch (Exception e) {

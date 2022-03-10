@@ -544,13 +544,7 @@ public class EnumEditorProvider extends ComponentProviderAdapter
 			editorPanel.updateCategoryField(getCategoryText());
 		}
 
-		@Override
-		public void categoryRemoved(DataTypeManager dtm, CategoryPath path) {
-			// should never get this callback, as we should first have gotten a 
-			// dataTypeRemoved(), which will dispose this editor
-		}
-
-		@Override
+        @Override
 		public void dataTypeChanged(DataTypeManager dtm, DataTypePath path) {
 			if (!isMyCategory(path)) {
 				return;

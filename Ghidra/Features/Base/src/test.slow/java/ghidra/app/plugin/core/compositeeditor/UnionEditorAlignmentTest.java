@@ -240,7 +240,7 @@ public class UnionEditorAlignmentTest extends AbstractUnionEditorTest {
 		assertEquals(true, byValueButton.isSelected());
 		JTextField minAlignField =
 			(JTextField) findComponentByName(getPanel(), "Explicit Alignment Value");
-		assertEquals("" + minAlignment, minAlignField.getText());
+		assertEquals(String.valueOf(minAlignment), minAlignField.getText());
 
 		assertEquals(false, unionModel.viewComposite.isDefaultAligned());
 		assertEquals(false, unionModel.viewComposite.isMachineAligned());
@@ -636,7 +636,7 @@ public class UnionEditorAlignmentTest extends AbstractUnionEditorTest {
 	private void checkRow(int rowIndex, int length, String mnemonic, DataType dataType, String name,
 			String comment) {
 		assertTrue(dataType.isEquivalent(unionModel.getComponent(rowIndex).getDataType()));
-		assertEquals("" + length, unionModel.getValueAt(rowIndex, unionModel.getLengthColumn()));
+		assertEquals(String.valueOf(length), unionModel.getValueAt(rowIndex, unionModel.getLengthColumn()));
 		assertEquals(mnemonic, unionModel.getValueAt(rowIndex, unionModel.getMnemonicColumn()));
 		assertEquals(name, unionModel.getValueAt(rowIndex, unionModel.getNameColumn()));
 		assertEquals(comment, unionModel.getValueAt(rowIndex, unionModel.getCommentColumn()));

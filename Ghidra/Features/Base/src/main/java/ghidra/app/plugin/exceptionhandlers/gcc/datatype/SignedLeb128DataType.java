@@ -50,12 +50,7 @@ public class SignedLeb128DataType extends AbstractLeb128DataType {
 		return new SignedLeb128DataType(dtm);
 	}
 
-	@Override
-	public String getMnemonic(Settings settings) {
-		return name;
-	}
-
-	@Override
+    @Override
 	public String getDescription() {
 		return "Signed Dwarf LEB128-Encoded Number";
 	}

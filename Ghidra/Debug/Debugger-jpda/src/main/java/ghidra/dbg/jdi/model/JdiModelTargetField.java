@@ -103,12 +103,7 @@ public class JdiModelTargetField extends JdiModelTargetObjectImpl {
 		return CompletableFuture.completedFuture(null);
 	}
 
-	@Override
-	public CompletableFuture<Void> init() {
-		return CompletableFuture.completedFuture(null);
-	}
-
-	@Override
+    @Override
 	public String getDisplay() {
 		return field == null ? super.getDisplay() : field.name();
 	}

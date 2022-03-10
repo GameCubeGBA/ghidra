@@ -153,7 +153,7 @@ class ToolConnectionImpl implements ToolConnection, ToolListener {
 		Element root = new Element("CONNECTION");
 		root.setAttribute("PRODUCER", producerTool.getName());
 		root.setAttribute("CONSUMER", consumerTool.getName());
-		root.setAttribute("LISTENER_ADDED", "" + listenerAdded);
+		root.setAttribute("LISTENER_ADDED", String.valueOf(listenerAdded));
 		String[] keys = connectHt.getKeys();
 		for (String key : keys) {
 			Element elem = new Element("EVENT");

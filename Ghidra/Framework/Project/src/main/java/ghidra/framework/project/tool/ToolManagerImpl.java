@@ -674,7 +674,7 @@ public class ToolManagerImpl implements ToolManager, PropertyChangeListener {
 		}
 
 		int n = Integer.parseInt(instanceName);
-		return "" + (n + 1);
+		return String.valueOf(n + 1);
 	}
 
 	PluginTool createEmptyTool() {

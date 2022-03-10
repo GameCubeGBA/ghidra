@@ -104,7 +104,7 @@ public class MultipleLabelsRenderer extends AbstractGhidraColumnRenderer<Symbol[
 		int labelCount = symbols.length;
 		if (labelCount > 1) {
 			renderer.setIcon(MULTIPLE_LABELS_ICON);
-			renderer.setText("" + labelCount);
+			renderer.setText(String.valueOf(labelCount));
 
 			// Set up the tooltip information.
 			String displayString = type.getDisplayString();

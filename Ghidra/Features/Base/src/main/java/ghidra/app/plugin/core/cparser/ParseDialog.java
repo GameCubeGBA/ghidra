@@ -132,12 +132,7 @@ class ParseDialog extends DialogComponentProvider {
 		}
 	}
 
-	@Override
-	protected TaskScheduler getTaskScheduler() {
-		return super.getTaskScheduler();
-	}
-
-	protected JPanel buildMainPanel() {
+    protected JPanel buildMainPanel() {
 		mainPanel = new JPanel(new BorderLayout(10, 5));
 
 		comboModel = new DefaultComboBoxModel<>();

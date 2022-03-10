@@ -128,7 +128,7 @@ class MemSearchDialog extends DialogComponentProvider {
 	}
 
 	void setAlignment(int alignment) {
-		alignField.setText("" + alignment);
+		alignField.setText(String.valueOf(alignment));
 	}
 
 	public void setSearchText(String maskedString) {

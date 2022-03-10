@@ -97,15 +97,7 @@ class CheckoutsTableModel extends AbstractSortedTableModel<ItemCheckoutStatus> {
 		return columnNames[column];
 	}
 
-	/* (non Javadoc)
-	 * @see javax.swing.table.TableModel#isCellEditable(int, int)
-	 */
-	@Override
-	public boolean isCellEditable(int rowIndex, int columnIndex) {
-		return false;
-	}
-
-	/**
+    /**
 	 * @param statuses
 	 */
 	void refresh(ItemCheckoutStatus[] status) {

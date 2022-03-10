@@ -146,17 +146,7 @@ public class MipsSymbolAnalyzer extends AbstractAnalyzer {
 		return true;
 	}
 
-	@Override
-	public void analysisEnded(Program program) {
-		// After run once, set analyzer off in analyzer options
-
-		/*
-		options options = program.getPropertyList("Analyzers");
-		options.setValue(name, false);
-		*/
-	}
-
-	@Override
+    @Override
 	public boolean canAnalyze(Program program) {
 		// Check language
 		return (program.getLanguage().getProcessor().equals(

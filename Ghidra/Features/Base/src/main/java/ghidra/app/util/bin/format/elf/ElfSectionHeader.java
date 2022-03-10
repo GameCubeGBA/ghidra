@@ -379,9 +379,7 @@ public class ElfSectionHeader implements StructConverter, Writeable, MemoryLoada
 	 */
 	@Override
 	public String toString() {
-		return name + " - " + "0x" + Long.toHexString(sh_addr) + ":0x" +
-			Long.toHexString(sh_addr + sh_size - 1) + " - 0x" + Long.toHexString(sh_size) + " " +
-			" - 0x" + Long.toHexString(sh_offset) + "";
+		return name + " - " + "0x" + Long.toHexString(sh_addr) + ":0x" + Long.toHexString(sh_addr + sh_size - 1) + " - 0x" + Long.toHexString(sh_size) + " " + " - 0x" + Long.toHexString(sh_offset);
 	}
 
 	/**

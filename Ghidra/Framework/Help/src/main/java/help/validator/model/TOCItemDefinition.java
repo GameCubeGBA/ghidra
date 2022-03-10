@@ -43,34 +43,7 @@ public class TOCItemDefinition extends TOCItem {
 		return false;
 	}
 
-	@Override
-	public String generateTOCItemTag(LinkDatabase linkDatabase, boolean isInlineTag,
-			int indentLevel) {
-
-		return super.generateTOCItemTag(linkDatabase, isInlineTag, indentLevel);
-
-// This code allows us to comment out definitions with unresolved paths.  We are not using it 
-// now because the build will fail if there are unresolved links and *they are not excluded*        
-/*        
-if ( getTargetAttribute() == null ) {
-    return super.generateTOCItemTag( linkDatabase, isInlineTag, indentLevel );
-}
-
-String ID = linkDatabase.getIDForLink( getTargetAttribute() );
-if( ID != null ) {
-    return super.generateTOCItemTag( linkDatabase, isInlineTag, indentLevel );
-}
-
-String indent = INDENTS[indentLevel];
-
-StringBuilder buildy = new StringBuilder();
-buildy.append( indent ).append( "<!-- WARNING: Unresolved definition target (cannot find ID for target)\n" );
-buildy.append( indent ).append( '\t' ).append( generateXMLString() ).append( "\n" );
-buildy.append( indent ).append( "-->");
-return buildy.toString();*/
-	}
-
-//
+    //
 //	private String generateXMLString() {
 //		if (getTargetAttribute() == null) {
 //			return "<" + GhidraTOCFile.TOC_ITEM_DEFINITION + " id=\"" + getIDAttribute() +

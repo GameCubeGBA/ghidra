@@ -125,36 +125,6 @@ public class MDType extends MDParsableItem {
 //	}
 //
 
-//	public void setConst() {
-//		isConst = true;
-//	}
-//
-//	public void clearConst() {
-//		isConst = false;
-//	}
-//
-//	public boolean isConst() {
-//		return isConst;
-//	}
-//
-//	public void setVolatile() {
-//		isVolatile = true;
-//	}
-//
-//	public void clearVolatile() {
-//		isVolatile = false;
-//	}
-//
-//	public boolean isVolatile() {
-//		return isVolatile;
-//	}
-//
-	@Override
-	public void insert(StringBuilder builder) {
-//		dmang.appendString(builder, nameModifier);
-//		based.insert(builder);
-	}
-
 //	public void insertAccessModifiers(StringBuilder builder) {
 //		StringBuilder modifiersBuilder = new StringBuilder();
 //		//Items to be added to the right-hand side
