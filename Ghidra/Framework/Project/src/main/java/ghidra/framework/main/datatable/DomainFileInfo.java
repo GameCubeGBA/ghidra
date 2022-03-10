@@ -46,7 +46,7 @@ public class DomainFileInfo {
 		}
 		else if (domainFile.isVersioned()) {
 			int versionNumber = domainFile.getVersion();
-			String versionStr = "" + versionNumber;
+			String versionStr = String.valueOf(versionNumber);
 
 			if (versionNumber < 0) {
 				versionStr = "?";
@@ -54,7 +54,7 @@ public class DomainFileInfo {
 
 			if (domainFile.isCheckedOut()) {
 				int latestVersionNumber = domainFile.getLatestVersion();
-				String latestVersionStr = "" + latestVersionNumber;
+				String latestVersionStr = String.valueOf(latestVersionNumber);
 				if (latestVersionNumber <= 0) {
 					latestVersionStr = "?";
 				}

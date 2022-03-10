@@ -103,25 +103,4 @@ public class StackPieceDataType extends DataTypeImpl {
 		return false;
 	}
 
-	@Override
-	public void dataTypeSizeChanged(DataType dt) {
-	}
-
-	@Override
-	public void dataTypeDeleted(DataType dt) {
-	}
-
-	@Override
-	public void dataTypeReplaced(DataType oldDt, DataType newDt) {
-	}
-
-	@Override
-	public void dataTypeNameChanged(DataType dt, String oldName) {
-	}
-
-	@Override
-	public boolean dependsOn(DataType dt) {
-		return false;
-	}
-
 }

@@ -17,6 +17,7 @@ package docking.widgets.table.constraint.provider;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 import docking.widgets.table.constraint.*;
 
@@ -27,7 +28,7 @@ public class BooleanMatchColumnConstraintProvider implements ColumnConstraintPro
 
 	@Override
 	public Collection<ColumnConstraint<?>> getColumnConstraints() {
-		return Arrays.asList(new BooleanMatchColumnConstraint(Boolean.TRUE));
+		return List.of(new BooleanMatchColumnConstraint(Boolean.TRUE));
 	}
 
 }

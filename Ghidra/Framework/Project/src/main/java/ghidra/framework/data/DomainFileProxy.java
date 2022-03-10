@@ -237,12 +237,7 @@ public class DomainFileProxy implements DomainFile {
 		return super.hashCode();
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		return obj == this;
-	}
-
-	public boolean isUsedBy(Object consumer) {
+    public boolean isUsedBy(Object consumer) {
 		DomainObjectAdapter dobj = getDomainObject();
 		if (dobj != null) {
 			return dobj.isUsedBy(consumer);

@@ -92,19 +92,19 @@ public class DmgServer {
 						case "get_listing": {
 							String path = parseLine(line);
 							List<FSEntry> listing = dmgFileReader.getListing(path);
-							sendResponse("" + listing.size());//write total number of children
+							sendResponse(String.valueOf(listing.size()));//write total number of children
 							for (FSEntry childEntry : listing) {
 								// send 3 responses: name, isfolder boolean, file length
 								writeln(childEntry.getName());//write name of each child
-								sendResponses("" + childEntry.isFolder(),
-									"" + dmgFileReader.getLength(childEntry));
+								sendResponses(String.valueOf(childEntry.isFolder()),
+                                        String.valueOf(dmgFileReader.getLength(childEntry)));
 							}
 						}
 							break;
 						case "get_info": {
 							String path = parseLine(line);
 							List<String> infoList = dmgFileReader.getInfo(path);
-							sendResponse("" + infoList.size());//write total number of info lines
+							sendResponse(String.valueOf(infoList.size()));//write total number of info lines
 							for (String info : infoList) {
 								sendResponse(info);//write each info line
 							}

@@ -135,9 +135,4 @@ public class FunctionSignatureSourceFieldFactory extends FieldFactory {
 		return OptionsGui.SEPARATOR.getDefaultColor();
 	}
 
-	@Override
-	public void fieldOptionsChanged(Options options, String optionName, Object oldValue,
-			Object newValue) {
-		// don't care
-	}
 }

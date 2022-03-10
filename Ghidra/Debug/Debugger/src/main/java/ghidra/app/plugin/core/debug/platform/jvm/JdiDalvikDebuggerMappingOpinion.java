@@ -36,16 +36,7 @@ public class JdiDalvikDebuggerMappingOpinion implements DebuggerMappingOpinion {
 			super(target, langID, csId, extraRegNames);
 		}
 
-		@Override
-		protected DebuggerMemoryMapper createMemoryMapper(TargetMemory memory) {
-			return new DefaultDebuggerMemoryMapper(language, memory.getModel());
-		}
-
-		@Override
-		protected DebuggerRegisterMapper createRegisterMapper(TargetRegisterContainer registers) {
-			return new DefaultDebuggerRegisterMapper(cSpec, registers, false);
-		}
-	}
+    }
 
 	protected static class DalvikDebuggerMappingOffer extends DefaultDebuggerMappingOffer {
 		public DalvikDebuggerMappingOffer(TargetProcess process) {

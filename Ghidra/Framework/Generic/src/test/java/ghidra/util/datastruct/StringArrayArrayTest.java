@@ -73,12 +73,12 @@ public class StringArrayArrayTest extends AbstractGenericTest {
         StringArrayArray saa = new StringArrayArray();
 
         for(int i=0;i<1000;i++) {
-            saa.put(i,new String[]{""+i,"1","2","3"});
+            saa.put(i,new String[]{String.valueOf(i),"1","2","3"});
         }
         for(int i=0;i<1000;i++) {
             String[] s = saa.get(i);
             assertEquals(4, s.length);
-            assertEquals(""+i, s[0]);
+            assertEquals(String.valueOf(i), s[0]);
             assertEquals("1", s[1]);
         }
         

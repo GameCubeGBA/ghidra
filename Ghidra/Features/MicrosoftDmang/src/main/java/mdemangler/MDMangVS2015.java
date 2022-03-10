@@ -102,12 +102,7 @@ public class MDMangVS2015 extends MDMang {
 		return true;
 	}
 
-	@Override
-	public boolean processQualCAsSpecialFragment() {
-		return false;
-	}
-
-	@Override
+    @Override
 	public MDObjectCPP getEmbeddedObject(MDObjectCPP obj) {
 		return obj.getEmbeddedObject();
 	}

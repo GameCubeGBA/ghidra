@@ -36,18 +36,18 @@ public class AssemblyFixedNumericTerminal extends AssemblyNumericTerminal {
 	 * @param val the value to accept
 	 */
 	public AssemblyFixedNumericTerminal(long val) {
-		super("" + val, 0, null);
+		super(String.valueOf(val), 0, null);
 		this.val = val;
 	}
 
 	@Override
 	public String toString() {
-		return "" + val;
+		return String.valueOf(val);
 	}
 
 	@Override
 	public Collection<String> getSuggestions(String got, AssemblyNumericSymbols symbols) {
-		return Collections.singleton("" + val);
+		return Collections.singleton(String.valueOf(val));
 	}
 
 	@Override

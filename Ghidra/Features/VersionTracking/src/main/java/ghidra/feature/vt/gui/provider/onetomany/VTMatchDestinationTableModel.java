@@ -62,14 +62,7 @@ public class VTMatchDestinationTableModel extends VTMatchOneToManyTableModel {
 		return descriptor;
 	}
 
-	@Override
-	public Address getAddress(int row) {
-		VTMatch match = getRowObject(row);
-		VTAssociation association = match.getAssociation();
-		return association.getSourceAddress();
-	}
-
-	@Override
+    @Override
 	protected void doLoad(Accumulator<VTMatch> accumulator, TaskMonitor monitor)
 			throws CancelledException {
 		VTAssociationManager associationManager = session.getAssociationManager();

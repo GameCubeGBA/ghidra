@@ -416,19 +416,7 @@ public class DebuggerListingPlugin extends AbstractCodeBrowserPlugin<DebuggerLis
 		return new Object[] {};
 	}
 
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * @see #getTransientState()
-	 */
-	@Override
-	public void restoreTransientState(Object objectState) {
-		/*try (Suppression supp = cbGoTo.suppress(null)) {
-			super.restoreTransientState(objectState);
-		}*/
-	}
-
-	@Override
+    @Override
 	public void writeDataState(SaveState saveState) {
 		SaveState connectedProviderState = new SaveState();
 		connectedProvider.writeDataState(connectedProviderState);

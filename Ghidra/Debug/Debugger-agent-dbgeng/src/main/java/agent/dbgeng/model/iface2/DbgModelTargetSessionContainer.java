@@ -21,12 +21,7 @@ import agent.dbgeng.manager.*;
 public interface DbgModelTargetSessionContainer
 		extends DbgModelTargetObject, DbgEventsListenerAdapter {
 
-	@Override
-	public default void sessionAdded(DbgSession session, DbgCause cause) {
-		//refresh();
-	}
-
-	@Override
+    @Override
 	public void sessionRemoved(DebugSessionId sessionId, DbgCause cause);
 
 	public DbgModelTargetSession getTargetSession(DbgSession session);

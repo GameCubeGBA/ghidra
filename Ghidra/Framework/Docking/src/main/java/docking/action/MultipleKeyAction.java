@@ -81,20 +81,7 @@ public class MultipleKeyAction extends DockingKeyBindingAction {
 		}
 	}
 
-	/**
-	 * Returns the enabled state of the {@code Action}. When enabled,
-	 * any component associated with this object is active and
-	 * able to fire this object's {@code actionPerformed} method.
-	 *
-	 * @return true if this {@code Action} is enabled
-	 */
-	@Override
-	public boolean isEnabled() {
-		// always return true so we can report the status message when all actions are disabled
-		return true;
-	}
-
-	/**
+    /**
 	 * Enables or disables the action.  This affects all uses of the action.  Note that for popups, 
 	 * this affects whether or not the option is "grayed out", not whether the action is added
 	 * to the popup.
@@ -237,12 +224,7 @@ public class MultipleKeyAction extends DockingKeyBindingAction {
 		return actionData.supportsDefaultToolContext() && isValidAndEnabled(actionData, context);
 	}
 
-	@Override
-	public boolean isReservedKeybindingPrecedence() {
-		return false; // MultipleKeyActions can never be reserved 
-	}
-
-	@Override
+    @Override
 	public KeyBindingPrecedence getKeyBindingPrecedence() {
 		return geValidKeyBindingPrecedence(null);
 	}

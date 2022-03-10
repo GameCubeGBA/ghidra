@@ -37,7 +37,7 @@ public class ConvertToSignedDecimalAction extends AbstractConvertAction {
 
 	@Override
 	protected String convertToString(Program program, Scalar scalar, boolean isData) {
-		return "" + scalar.getSignedValue();
+		return String.valueOf(scalar.getSignedValue());
 	}
 
 	@Override

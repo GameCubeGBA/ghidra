@@ -98,11 +98,7 @@ public class DebuggerModelServiceTest extends AbstractGhidraHeadedDebuggerGUITes
 			delegate.elementRemoved(element);
 		}
 
-		@Override
-		public void elementModified(E element) {
-			// Not tested here
-		}
-	}
+    }
 
 	@Mocked
 	CollectionChangeDelegate<DebuggerModelFactory> factoryChangeListener;
@@ -541,12 +537,7 @@ public class DebuggerModelServiceTest extends AbstractGhidraHeadedDebuggerGUITes
 					futureModel.complete(element);
 				}
 
-				@Override
-				public void elementModified(DebuggerObjectModel element) {
-					// Don't care
-				}
-
-				@Override
+                @Override
 				public void elementRemoved(DebuggerObjectModel element) {
 					fail();
 				}

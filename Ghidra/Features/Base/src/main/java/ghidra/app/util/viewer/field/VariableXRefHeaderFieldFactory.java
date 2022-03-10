@@ -161,20 +161,7 @@ public class VariableXRefHeaderFieldFactory extends VariableXRefFieldFactory {
 		return null;
 	}
 
-	/*
-	 *  (non-Javadoc)
-	 * @see ghidra.app.util.viewer.field.FieldFactory#acceptsType(int, java.lang.Class)
-	 */
-	@Override
-	public boolean acceptsType(int category, Class<?> proxyObjectClass) {
-		if (!Variable.class.isAssignableFrom(proxyObjectClass)) {
-			return false;
-		}
-		return (category == FieldFormatModel.FUNCTION_VARS);
-
-	}
-
-	@Override
+    @Override
 	public FieldFactory newInstance(FieldFormatModel formatModel, HighlightProvider provider,
 			ToolOptions displayOptions, ToolOptions fieldOptions) {
 		return new VariableXRefHeaderFieldFactory(formatModel, provider, displayOptions,

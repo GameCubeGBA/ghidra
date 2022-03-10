@@ -1388,7 +1388,7 @@ public class SymbolManagerTest extends AbstractGhidraHeadedIntegrationTest {
 		int count = 1;
 		while (it.hasNext()) {
 			Symbol sym = it.next();
-			assertEquals("" + count, sym.getName());
+			assertEquals(String.valueOf(count), sym.getName());
 			count++;
 		}
 		assertEquals(6, count);

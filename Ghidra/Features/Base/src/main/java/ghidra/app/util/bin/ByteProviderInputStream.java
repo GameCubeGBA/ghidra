@@ -79,12 +79,7 @@ public class ByteProviderInputStream extends InputStream {
 		this.currentPosition = startPosition;
 	}
 
-	@Override
-	public void close() throws IOException {
-		// nothing to do here
-	}
-
-	@Override
+    @Override
 	public int available() throws IOException {
 		return (int) Math.min(provider.length() - currentPosition, Integer.MAX_VALUE);
 	}

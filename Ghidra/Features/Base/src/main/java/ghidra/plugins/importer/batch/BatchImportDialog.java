@@ -460,7 +460,7 @@ public class BatchImportDialog extends DialogComponentProvider {
 				comboBox.removeAllItems();
 
 				BatchGroup rowVal = tableModel.getRowObject(row);
-				comboBox.addItem("" + rowVal.size() + " files...");
+				comboBox.addItem(rowVal.size() + " files...");
 
 				for (BatchLoadConfig batchLoadConfig : rowVal.getBatchLoadConfig()) {
 					comboBox.addItem(batchLoadConfig.getPreferredFileName());

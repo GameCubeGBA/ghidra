@@ -74,13 +74,8 @@ class ProjectAccessDialog extends DialogComponentProvider {
 			setCancelButtonText("Close");
 		}
 	}
-	
-	@Override
-	protected void cancelCallback() {
-		close();
-	}
 
-	@Override
+    @Override
 	protected void okCallback() {
 		String statusMessage = null;
 		try {

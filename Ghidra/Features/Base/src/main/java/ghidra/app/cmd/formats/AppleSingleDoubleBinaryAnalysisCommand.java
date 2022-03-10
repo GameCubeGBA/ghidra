@@ -223,7 +223,7 @@ public class AppleSingleDoubleBinaryAnalysisCommand extends FlatProgramAPI
 			createData(entryAddress, entryDT);
 			createFragment(module, type.getTypeAsString() + hack(), entryAddress,
 				entryDT.getLength());
-			String name = "" + (id++);
+			String name = String.valueOf(id++);
 			if (entry.getName() != null) {
 				name += " - " + entry.getName();
 			}
@@ -278,7 +278,7 @@ public class AppleSingleDoubleBinaryAnalysisCommand extends FlatProgramAPI
 			createData(address, new DWordDataType());
 			setEOLComment(address, "Data Length");
 			int length = getInt(address);
-			createFragment(module, "" + (id++), address, length + 4);//add 4 bytes for the DWORD
+			createFragment(module, String.valueOf(id++), address, length + 4);//add 4 bytes for the DWORD
 			size += length + 4;//add 4 bytes for the DWORD
 			address = address.add(length + 4);
 		}

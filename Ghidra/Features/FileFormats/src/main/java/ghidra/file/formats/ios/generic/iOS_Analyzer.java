@@ -109,12 +109,7 @@ public class iOS_Analyzer extends FileFormatAnalyzer {
 		return false;
 	}
 
-	@Override
-	public AnalyzerType getAnalysisType() {
-		return AnalyzerType.BYTE_ANALYZER;
-	}
-
-	@Override
+    @Override
 	public boolean getDefaultEnablement(Program program) {
 		return canAnalyze(program);
 	}
@@ -129,12 +124,7 @@ public class iOS_Analyzer extends FileFormatAnalyzer {
 		return "iOS Analyzer for iBoot, LLB, iBSS, and iBEC files";
 	}
 
-	@Override
-	public AnalysisPriority getPriority() {
-		return AnalysisPriority.FORMAT_ANALYSIS;
-	}
-
-	@Override
+    @Override
 	public boolean isPrototype() {
 		return false;
 	}

@@ -94,25 +94,8 @@ public class MDMangGenericize extends MDMang {
 	// Use getAndIncrement(), with or without the prior use of peek() to add a
 	// character to
 	// genericizeString.
-	/**
-	 * Increments the current index by one and returns the character at the new
-	 * index. If the resulting index is greater or equal to the end index, the
-	 * current index is reset to the end index and a value of DONE is returned.
-	 * NOTE: For this extended class, we are not modifying the behavior of this
-	 * method, but want to caution against its use, except for when desiring the
-	 * specific behavior of not having the returned character added to the
-	 * genericizedString. Suggested use is to use peek() and next() when not
-	 * wanting to add the character, but to use getAndIncrement() when wanting
-	 * to add the character.
-	 *
-	 * @return the character at the new position or DONE
-	 */
-	@Override
-	public char next() {
-		return super.next();
-	}
 
-	/**
+    /**
 	 * Returns the character at the current index and then increments the index
 	 * by one. If the resulting index is greater or equal to the end index, the
 	 * current index is reset to the end index and a value of DONE is returned.

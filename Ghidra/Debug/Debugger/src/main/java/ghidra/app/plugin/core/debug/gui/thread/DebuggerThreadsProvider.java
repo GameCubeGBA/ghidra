@@ -516,12 +516,7 @@ public class DebuggerThreadsProvider extends ComponentProviderAdapter {
 		threadTable.getTableHeader().repaint();
 	}
 
-	@Override
-	public void addLocalAction(DockingActionIf action) {
-		super.addLocalAction(action);
-	}
-
-	@Override
+    @Override
 	public ActionContext getActionContext(MouseEvent event) {
 		if (myActionContext == null) {
 			return super.getActionContext(event);
@@ -598,10 +593,7 @@ public class DebuggerThreadsProvider extends ComponentProviderAdapter {
 				setTraceTabActionContext(e);
 			}
 
-			@Override
-			public void mouseReleased(MouseEvent e) {
-			}
-		});
+        });
 		mainPanel.add(traceTabs, BorderLayout.NORTH);
 
 		TableColumnModel columnModel = threadTable.getColumnModel();

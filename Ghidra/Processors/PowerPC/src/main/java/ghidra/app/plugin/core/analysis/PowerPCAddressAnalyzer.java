@@ -155,12 +155,7 @@ public class PowerPCAddressAnalyzer extends ConstantPropagationAnalyzer {
 		ConstantPropagationContextEvaluator eval =
 			new ConstantPropagationContextEvaluator(trustWriteMemOption) {
 
-				@Override
-				public boolean evaluateContextBefore(VarnodeContext context, Instruction instr) {
-					return false;
-				}
-
-				@Override
+                @Override
 				public boolean evaluateContext(VarnodeContext context, Instruction instr) {
 					if (markupDualInstructionOption) {
 						markupDualInstructions(context, instr);
@@ -298,18 +293,7 @@ public class PowerPCAddressAnalyzer extends ConstantPropagationAnalyzer {
 					return null;
 				}
 
-				@Override
-				public boolean followFalseConditionalBranches() {
-					return true;
-				}
-
-				@Override
-				public boolean evaluateSymbolicReference(VarnodeContext context, Instruction instr,
-						Address address) {
-					return false;
-				}
-
-				@Override
+                @Override
 				public boolean allowAccess(VarnodeContext context, Address addr) {
 					return trustWriteMemOption;
 				}

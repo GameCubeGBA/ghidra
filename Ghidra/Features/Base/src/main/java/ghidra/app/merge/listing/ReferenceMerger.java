@@ -1252,8 +1252,8 @@ return false;
 			}
 			info[4] = DiffUtility.getUserToAddressString(pgm, toAddress);
 			info[5] = DiffUtility.getUserToSymbolString(pgm, ref);
-			info[6] = "" + ref.isPrimary();
-			info[7] = "" + ref.getSource().toString();
+			info[6] = String.valueOf(ref.isPrimary());
+			info[7] = ref.getSource().toString();
 		}
 		return info;
 	}

@@ -54,7 +54,7 @@ public class EncodedTypeAddressPair implements StructConverter {
 	 * Makes names unique to prevent ".conflicts".
 	 */
 	String getDataTypeIdString() {
-		return typeIndexLength + "" + addressLength;
+		return typeIndexLength + String.valueOf(addressLength);
 	}
 
 	@Override

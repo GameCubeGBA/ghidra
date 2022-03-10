@@ -46,15 +46,7 @@ public class DisassembledByteSequenceTableModel extends ByteSequenceTableModel {
 		this.rowObjects = rowObjects;
 	}
 
-	@Override
-	protected void doLoad(Accumulator<ByteSequenceRowObject> accumulator, TaskMonitor monitor)
-			throws CancelledException {
-		if (rowObjects != null) {
-			accumulator.addAll(rowObjects);
-		}
-	}
-
-	@Override
+    @Override
 	protected TableColumnDescriptor<ByteSequenceRowObject> createTableColumnDescriptor() {
 		TableColumnDescriptor<ByteSequenceRowObject> descriptor =
 			new TableColumnDescriptor<ByteSequenceRowObject>();

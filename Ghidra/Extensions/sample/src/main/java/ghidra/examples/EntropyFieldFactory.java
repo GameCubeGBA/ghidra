@@ -87,7 +87,7 @@ public class EntropyFieldFactory extends FieldFactory {
 			return null;
 		}
 
-		String str = "" + (int) ((entropy / 8.0) * 100);
+		String str = String.valueOf((int) ((entropy / 8.0) * 100));
 		AttributedString text = new AttributedString(str, color, getMetrics());
 
 		FieldElement fieldElement = new TextFieldElement(text, 0, 0);

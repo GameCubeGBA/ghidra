@@ -76,15 +76,7 @@ public class ConflictDialog extends DialogComponentProvider {
 		close();
 	}
 
-	/* (non-Javadoc)
-	 * @see ghidra.util.bean.GhidraDialog#cancelCallback()
-	 */
-	@Override
-	protected void cancelCallback() {
-		close();
-	}
-
-	int getSelectedOption() {
+    int getSelectedOption() {
 		return selectedOption;
 	}
 

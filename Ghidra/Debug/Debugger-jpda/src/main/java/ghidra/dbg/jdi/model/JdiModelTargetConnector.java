@@ -78,12 +78,7 @@ public class JdiModelTargetConnector extends JdiModelTargetObjectImpl
 		), "Initialized");
 	}
 
-	@Override
-	public CompletableFuture<Void> init() {
-		return CompletableFuture.completedFuture(null);
-	}
-
-	@Override
+    @Override
 	public String getDisplay() {
 		return cx == null ? super.getDisplay() : cx.name();
 	}

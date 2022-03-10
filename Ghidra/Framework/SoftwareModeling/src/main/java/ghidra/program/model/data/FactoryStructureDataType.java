@@ -89,8 +89,7 @@ public abstract class FactoryStructureDataType extends BuiltIn implements Factor
 		CategoryPath path = CategoryPath.ROOT;
 		try {
 			path =
-				new CategoryPath(new CategoryPath(CategoryPath.ROOT, getName()), "" +
-					buf.getAddress());
+				new CategoryPath(new CategoryPath(CategoryPath.ROOT, getName()), String.valueOf(buf.getAddress()));
 		}
 		catch (Exception e) {
 		}

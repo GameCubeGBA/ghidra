@@ -33,7 +33,7 @@ public class AsyncUtilsTest {
 		List<Integer> list = Arrays.asList(new Integer[] { 1, 2, 4, 3 });
 		List<String> res = new ArrayList<>();
 		each(TypeSpec.VOID, list.iterator(), (e, seq) -> {
-			append("" + e, res).handle(seq::repeat);
+			append(String.valueOf(e), res).handle(seq::repeat);
 		}).get(1000, TimeUnit.MILLISECONDS);
 
 		List<String> exp = Arrays.asList(new String[] { "1", "2", "4", "3" });

@@ -48,11 +48,7 @@ public class LargestSubDebuggerRegisterMapperTest extends AbstractGhidraHeadedDe
 			return new LargestSubDebuggerRegisterMapper(cSpec, registers, false);
 		}
 
-		@Override
-		protected DebuggerMemoryMapper createMemoryMapper(TargetMemory memory) {
-			return new DefaultDebuggerMemoryMapper(language, memory.getModel());
-		}
-	}
+    }
 
 	@Before
 	public void setUpMapperTest() throws Throwable {

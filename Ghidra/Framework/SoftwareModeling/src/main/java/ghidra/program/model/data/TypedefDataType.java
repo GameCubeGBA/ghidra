@@ -184,12 +184,7 @@ public class TypedefDataType extends GenericDataType implements TypeDef {
 		return false;
 	}
 
-	@Override
-	public String getMnemonic(Settings settings) {
-		return name;
-	}
-
-	@Override
+    @Override
 	public DataType getDataType() {
 		return dataType;
 	}
@@ -395,12 +390,7 @@ public class TypedefDataType extends GenericDataType implements TypeDef {
 		}
 	}
 
-	@Override
-	public void dataTypeNameChanged(DataType dt, String oldName) {
-		// ignored
-	}
-
-	@Override
+    @Override
 	public boolean dependsOn(DataType dt) {
 		DataType myDt = dataType;
 		return (myDt == dt || myDt.dependsOn(dt));

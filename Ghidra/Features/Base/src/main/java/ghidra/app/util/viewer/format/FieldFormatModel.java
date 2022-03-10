@@ -300,8 +300,8 @@ public class FieldFormatModel {
                 } else {
                     colElem.setAttribute("NAME", ff.getFieldName());
                 }
-                colElem.setAttribute("WIDTH", "" + ff.getWidth());
-                colElem.setAttribute("ENABLED", "" + ff.isEnabled());
+                colElem.setAttribute("WIDTH", String.valueOf(ff.getWidth()));
+                colElem.setAttribute("ENABLED", String.valueOf(ff.isEnabled()));
 
                 rowElem.addContent(colElem);
             }

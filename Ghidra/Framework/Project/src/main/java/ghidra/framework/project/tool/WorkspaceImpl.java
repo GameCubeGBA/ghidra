@@ -129,7 +129,7 @@ class WorkspaceImpl implements Workspace {
 
 		Element root = new Element("WORKSPACE");
 		root.setAttribute("NAME", name);
-		root.setAttribute("ACTIVE", "" + isActive);
+		root.setAttribute("ACTIVE", String.valueOf(isActive));
 
 		for (PluginTool tool : runningTools) {
 			Element elem = new Element("RUNNING_TOOL");

@@ -980,12 +980,7 @@ public class TreeValueSortedMap<K, V> extends AbstractMap<K, V> implements Value
 			throw new UnsupportedOperationException();
 		}
 
-		@Override
-		public boolean add(K e) {
-			throw new UnsupportedOperationException();
-		}
-
-		@Override
+        @Override
 		public boolean addAll(Collection<? extends K> c) {
 			throw new UnsupportedOperationException();
 		}
@@ -1218,12 +1213,7 @@ public class TreeValueSortedMap<K, V> extends AbstractMap<K, V> implements Value
 			throw new UnsupportedOperationException();
 		}
 
-		@Override
-		public boolean add(V e) {
-			throw new UnsupportedOperationException();
-		}
-
-		@Override
+        @Override
 		public boolean addAll(Collection<? extends V> c) {
 			throw new UnsupportedOperationException();
 		}

@@ -28,12 +28,7 @@ public class MDGuard extends MDTypeInfo {
 		mdtype = new MDType(dmang);
 	}
 
-	@Override
-	public void insert(StringBuilder builder) {
-		super.insert(builder);
-	}
-
-	@Override
+    @Override
 	protected void parseInternal() throws MDException {
 		MDEncodedNumber guardNumber = new MDEncodedNumber(dmang);
 		guardNumber.parse();

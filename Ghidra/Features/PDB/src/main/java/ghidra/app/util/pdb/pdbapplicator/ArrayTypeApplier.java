@@ -46,12 +46,7 @@ public class ArrayTypeApplier extends MsTypeApplier {
 		return isFlexibleArray;
 	}
 
-	@Override
-	void deferredApply() throws PdbException, CancelledException {
-		// No work done here.  Just deferring resolve.
-	}
-
-	//==============================================================================================
+    //==============================================================================================
 	@Override
 	BigInteger getSize() {
 		return ((AbstractArrayMsType) msType).getSize();

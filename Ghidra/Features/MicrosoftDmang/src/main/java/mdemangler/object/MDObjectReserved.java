@@ -29,12 +29,7 @@ public class MDObjectReserved extends MDObject {
 		super(dmang);
 	}
 
-	@Override
-	public void insert(StringBuilder builder) {
-		super.insert(builder);
-	}
-
-	@Override
+    @Override
 	protected void parseInternal() throws MDException {
 		//Go to end of string.
 		dmang.increment(dmang.getMangledSymbol().length() - dmang.getIndex());

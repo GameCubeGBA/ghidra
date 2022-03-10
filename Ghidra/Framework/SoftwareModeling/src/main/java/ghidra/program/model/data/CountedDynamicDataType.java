@@ -137,15 +137,7 @@ public abstract class CountedDynamicDataType extends DynamicDataType {
 		return "";
 	}
 
-	/* (non-Javadoc)
-	 * @see ghidra.program.model.data.DataType#getMnemonic(ghidra.program.model.data.Settings)
-	 */
-	@Override
-	public String getMnemonic(Settings settings) {
-		return name;
-	}
-
-	/**
+    /**
 	 * Extract the size of the data type from the given location in memory
 	 * 
 	 * @param memory the memory to get the size from

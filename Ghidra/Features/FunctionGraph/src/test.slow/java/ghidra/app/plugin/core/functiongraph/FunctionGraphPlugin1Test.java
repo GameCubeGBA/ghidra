@@ -783,7 +783,7 @@ public class FunctionGraphPlugin1Test extends AbstractFunctionGraphTest {
 
 		for (Address a : addresses) {
 			assertFalse("Vertex address should not be in the history list: " + a + ".\nHistory: " +
-				actualAddresses + "\nNavigated vertices: " + Arrays.asList(addresses),
+				actualAddresses + "\nNavigated vertices: " + List.of(addresses),
 				actualAddresses.contains(a));
 		}
 	}

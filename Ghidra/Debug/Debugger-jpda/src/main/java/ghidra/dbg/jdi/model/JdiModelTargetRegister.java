@@ -64,12 +64,7 @@ public class JdiModelTargetRegister extends JdiModelTargetObjectImpl implements 
 		return CompletableFuture.completedFuture(null);
 	}
 
-	@Override
-	public CompletableFuture<Void> init() {
-		return CompletableFuture.completedFuture(null);
-	}
-
-	@Override
+    @Override
 	public String getDisplay() {
 		if (name == null) {
 			return super.getDisplay();

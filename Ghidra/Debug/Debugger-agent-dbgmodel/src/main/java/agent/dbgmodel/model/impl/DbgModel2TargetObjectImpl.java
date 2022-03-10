@@ -402,12 +402,7 @@ public class DbgModel2TargetObjectImpl extends DefaultTargetObject<TargetObject,
 		});
 	}
 
-	@Override
-	public void removeListener(DebuggerModelListener l) {
-		listeners.remove(l);
-	}
-
-	@Override
+    @Override
 	public DbgModelTargetSession getParentSession() {
 		if (this instanceof DbgModelTargetSession) {
 			return (DbgModelTargetSession) this;

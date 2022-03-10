@@ -297,7 +297,7 @@ public class TextFieldLinker {
 		 */
 		public String getTextBeforeCursor(int field) {
 			if (field == -1) {
-				throw new IllegalArgumentException("" + field);
+				throw new IllegalArgumentException(String.valueOf(field));
 			}
 			StringBuilder result = new StringBuilder();
 			for (int i = 0; i < field; i++) {
@@ -808,7 +808,7 @@ public class TextFieldLinker {
 	public String getTextBeforeCursor(JTextField where) {
 		int i = findField(where);
 		if (i == -1) {
-			throw new IllegalArgumentException("" + where);
+			throw new IllegalArgumentException(String.valueOf(where));
 		}
 		return state.getTextBeforeCursor(i);
 	}
@@ -905,7 +905,7 @@ public class TextFieldLinker {
 				}
 				break;
 			default:
-				throw new IllegalArgumentException("" + ev);
+				throw new IllegalArgumentException(String.valueOf(ev));
 		}
 	}
 

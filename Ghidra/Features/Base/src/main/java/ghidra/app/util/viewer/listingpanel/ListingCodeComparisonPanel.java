@@ -933,27 +933,7 @@ public class ListingCodeComparisonPanel
 		setFunctions(leftFunction, rightFunction);
 	}
 
-	/**
-	 * Gets the function loaded in the left listing panel.
-	 * 
-	 * @return the function or null
-	 */
-	@Override
-	public Function getLeftFunction() {
-		return functions[LEFT];
-	}
-
-	/**
-	 * Gets the function loaded in the right listing panel.
-	 * 
-	 * @return the function or null
-	 */
-	@Override
-	public Function getRightFunction() {
-		return functions[RIGHT];
-	}
-
-	private void setFunctions(Function leftFunction, Function rightFunction) {
+    private void setFunctions(Function leftFunction, Function rightFunction) {
 
 		if (leftFunction != functions[LEFT] || rightFunction != functions[RIGHT]) {
 			clearMarkers();
@@ -1935,27 +1915,7 @@ public class ListingCodeComparisonPanel
 		return programs[currProgramIndex];
 	}
 
-	/**
-	 * Gets the program in the left listing panel.
-	 * 
-	 * @return the left program or null
-	 */
-	@Override
-	public Program getLeftProgram() {
-		return programs[LEFT];
-	}
-
-	/**
-	 * Gets the program in the right listing panel.
-	 * 
-	 * @return the right program or null
-	 */
-	@Override
-	public Program getRightProgram() {
-		return programs[RIGHT];
-	}
-
-	/**
+    /**
 	 * Gets the addresses in the left listing panel.
 	 * 
 	 * @return the addresses
@@ -2550,27 +2510,7 @@ public class ListingCodeComparisonPanel
 		}
 	}
 
-	/**
-	 * Gets the data loaded in the left listing panel.
-	 * 
-	 * @return the data or null
-	 */
-	@Override
-	public Data getLeftData() {
-		return data[LEFT];
-	}
-
-	/**
-	 * Gets the data loaded in the right listing panel.
-	 * 
-	 * @return the data or null
-	 */
-	@Override
-	public Data getRightData() {
-		return data[RIGHT];
-	}
-
-	@Override
+    @Override
 	public Class<? extends CodeComparisonPanel<ListingComparisonFieldPanelCoordinator>> getPanelThisSupersedes() {
 		return null; // Doesn't supersede any other panel.
 	}

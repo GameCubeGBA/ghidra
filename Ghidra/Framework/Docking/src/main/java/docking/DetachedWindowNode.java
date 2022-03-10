@@ -124,7 +124,7 @@ class DetachedWindowNode extends WindowNode {
 
 	@Override
 	List<Node> getChildren() {
-		return Arrays.asList(child);
+		return List.of(child);
 	}
 
 	/**
@@ -530,10 +530,10 @@ class DetachedWindowNode extends WindowNode {
 		}
 
 		Element root = new Element("WINDOW_NODE");
-		root.setAttribute("X_POS", "" + bounds.x);
-		root.setAttribute("Y_POS", "" + bounds.y);
-		root.setAttribute("WIDTH", "" + bounds.width);
-		root.setAttribute("HEIGHT", "" + bounds.height);
+		root.setAttribute("X_POS", String.valueOf(bounds.x));
+		root.setAttribute("Y_POS", String.valueOf(bounds.y));
+		root.setAttribute("WIDTH", String.valueOf(bounds.width));
+		root.setAttribute("HEIGHT", String.valueOf(bounds.height));
 		root.addContent(child.saveToXML());
 		return root;
 

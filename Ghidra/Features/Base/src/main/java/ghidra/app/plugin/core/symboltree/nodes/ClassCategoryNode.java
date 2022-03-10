@@ -50,12 +50,7 @@ public class ClassCategoryNode extends SymbolCategoryNode {
 		return "Symbols for Classes";
 	}
 
-	@Override
-	public DataFlavor getNodeDataFlavor() {
-		return null;
-	}
-
-	@Override
+    @Override
 	public SymbolNode symbolAdded(Symbol symbol) {
 		if (!isLoaded()) {
 			return null;

@@ -27,19 +27,7 @@ public abstract class AbstractLaunchGdbCommand extends AbstractGdbCommand<GdbThr
 		super(manager);
 	}
 
-	@Override
-	public Interpreter getInterpreter() {
-		//return getInterpreter(manager);
-
-		/**
-		 * A lot of good event-handling logic is factored in the Mixin interface. However, errors
-		 * from CLI commands are catastrophically mishandled or just missed entirely, so we will
-		 * still use MI2 for these.
-		 */
-		return Interpreter.MI2;
-	}
-
-	@Override
+    @Override
 	public boolean handle(GdbEvent<?> evt, GdbPendingCommand<?> pending) {
 		evt = checkErrorViaCli(evt);
 		if (evt instanceof GdbThreadCreatedEvent) {

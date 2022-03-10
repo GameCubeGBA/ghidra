@@ -136,7 +136,7 @@ public class ProgramTreePlugin3Test extends AbstractProgramTreePluginTest {
 		ProgramNode sscanfNode = funcNode.getChild("sscanf");
 		AddressSet fragSet = new AddressSet(sscanfNode.getFragment());
 
-		dragNodes_Move(node, Arrays.asList(sscanfNode));
+		dragNodes_Move(node, List.of(sscanfNode));
 
 		expandNode(root);
 
@@ -292,7 +292,7 @@ public class ProgramTreePlugin3Test extends AbstractProgramTreePluginTest {
 		visitNode(subrNode);
 		setSelectionPath(subrNode.getTreePath());
 
-		dragNodes_Move(subrNode, Arrays.asList(dataNode));
+		dragNodes_Move(subrNode, List.of(dataNode));
 
 		ProgramNode[] nodes = findNodes(".data");
 		for (ProgramNode element : nodes) {
@@ -322,7 +322,7 @@ public class ProgramTreePlugin3Test extends AbstractProgramTreePluginTest {
 		// drag functions to external references
 		setSelectionPath(extNode.getTreePath());
 
-		dragNodes_Move(extNode, Arrays.asList(funcNode));
+		dragNodes_Move(extNode, List.of(funcNode));
 
 		ProgramNode[] nodes = findNodes("Functions");
 		for (ProgramNode element : nodes) {
@@ -374,7 +374,7 @@ public class ProgramTreePlugin3Test extends AbstractProgramTreePluginTest {
 		// drag Test to testl
 		ProgramNode n = testNode;
 		ProgramNode tgtNode = fnode;
-		dragNodes_Move(tgtNode, Arrays.asList(n));
+		dragNodes_Move(tgtNode, List.of(n));
 
 		waitForSwing();
 
@@ -458,7 +458,7 @@ public class ProgramTreePlugin3Test extends AbstractProgramTreePluginTest {
 		setSelectionPath(dllsNode.getTreePath());
 
 		ProgramNode dragNode = dataNode;
-		dragNodes_Move(dllsNode, Arrays.asList(dragNode));
+		dragNodes_Move(dllsNode, List.of(dragNode));
 
 		// first occurrence of DLLs should have icon for descendant in view
 		ProgramNode[] nodes = findNodes("DLLs");
@@ -491,7 +491,7 @@ public class ProgramTreePlugin3Test extends AbstractProgramTreePluginTest {
 		visitNode(subrNode);
 
 		// drag .debug_data to Subroutines
-		dragNodes_Move(subrNode, Arrays.asList(debugNode));
+		dragNodes_Move(subrNode, List.of(debugNode));
 
 		assertTrue(plugin.getView().contains(set));
 		expandNode(subrNode);
@@ -636,7 +636,7 @@ public class ProgramTreePlugin3Test extends AbstractProgramTreePluginTest {
 		int origCount = dllsNode.getChildCount();
 		setSelectionPath(dllsNode.getTreePath());
 
-		dragNodes_Copy(dllsNode, Arrays.asList(textNode));
+		dragNodes_Copy(dllsNode, List.of(textNode));
 
 		expandNode(dllsNode);
 		ProgramNode child = (ProgramNode) dllsNode.getChildAt(dllsNode.getChildCount() - 1);
@@ -686,7 +686,7 @@ public class ProgramTreePlugin3Test extends AbstractProgramTreePluginTest {
 
 		// drag/copy Functions to DLLs
 		ProgramNode tgtNode = destNode;
-		dragNodes_Copy(tgtNode, Arrays.asList(dragNode));
+		dragNodes_Copy(tgtNode, List.of(dragNode));
 
 		assertEquals(childCount + 1, destNode.getChildCount());
 		ProgramNode node = (ProgramNode) destNode.getChildAt(childCount);
@@ -737,7 +737,7 @@ public class ProgramTreePlugin3Test extends AbstractProgramTreePluginTest {
 		ProgramNode funcNode = root.getChild("Functions");
 		setSelectionPath(funcNode.getTreePath());
 
-		dragNodes_Copy(funcNode, Arrays.asList(stringsNode));
+		dragNodes_Copy(funcNode, List.of(stringsNode));
 
 		// Strings, L should be expanded
 
@@ -767,7 +767,7 @@ public class ProgramTreePlugin3Test extends AbstractProgramTreePluginTest {
 		setSelectionPath(funcNode.getTreePath());
 
 		// drag/copy Strings to Functions
-		dragNodes_Copy(funcNode, Arrays.asList(stringsNode));
+		dragNodes_Copy(funcNode, List.of(stringsNode));
 
 		// Functions should remain collapsed
 		assertTrue(tree.isCollapsed(funcNode.getTreePath()));
@@ -792,7 +792,7 @@ public class ProgramTreePlugin3Test extends AbstractProgramTreePluginTest {
 		expandPath(funcNode.getTreePath());
 		setSelectionPath(funcNode.getTreePath());
 
-		dragNodes_Copy(funcNode, Arrays.asList(stringsNode));
+		dragNodes_Copy(funcNode, List.of(stringsNode));
 
 		ProgramNode snode = funcNode.getChild("Strings");
 		assertTrue(tree.isCollapsed(snode.getTreePath()));
@@ -818,7 +818,7 @@ public class ProgramTreePlugin3Test extends AbstractProgramTreePluginTest {
 		collapsePath(funcNode.getTreePath());
 		setSelectionPath(funcNode.getTreePath());
 
-		dragNodes_Move(funcNode, Arrays.asList(stringsNode));
+		dragNodes_Move(funcNode, List.of(stringsNode));
 
 		assertTrue(tree.isCollapsed(funcNode.getTreePath()));
 	}
@@ -838,7 +838,7 @@ public class ProgramTreePlugin3Test extends AbstractProgramTreePluginTest {
 		ProgramNode subrNode = root.getChild("Subroutines");
 
 		// drag/copy doStuff to Subroutines
-		dragNodes_Copy(subrNode, Arrays.asList(funcNode));
+		dragNodes_Copy(subrNode, List.of(funcNode));
 
 		// verify the view is not affected
 		assertTrue(plugin.getView().hasSameAddresses(funcNode.getModule().getAddressSet()));
@@ -864,7 +864,7 @@ public class ProgramTreePlugin3Test extends AbstractProgramTreePluginTest {
 		ProgramNode subrNode = root.getChild("Subroutines");
 
 		// copy to Subroutines
-		dragNodes_Copy(subrNode, Arrays.asList(funcNode));
+		dragNodes_Copy(subrNode, List.of(funcNode));
 
 		// verify the view is not affected
 		assertTrue(plugin.getView().hasSameAddresses(funcNode.getModule().getAddressSet()));
@@ -892,7 +892,7 @@ public class ProgramTreePlugin3Test extends AbstractProgramTreePluginTest {
 
 		setSelectionPath(subrNode.getTreePath());
 
-		dragNodes_Move(funcNode, Arrays.asList(subrNode));
+		dragNodes_Move(funcNode, List.of(subrNode));
 
 		assertTrue(plugin.getView().hasSameAddresses(funcNode.getModule().getAddressSet()));
 		undo();

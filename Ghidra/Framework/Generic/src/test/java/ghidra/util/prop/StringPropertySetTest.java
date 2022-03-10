@@ -38,7 +38,7 @@ public class StringPropertySetTest extends AbstractGenericTest {
 	@Test
 	public void testGetSize() {
 		for (int i = 0; i < 1000; i++) {
-			ps.putString(10000 * i, "" + i);
+			ps.putString(10000 * i, String.valueOf(i));
 
 		}
 		assertEquals(1000, ps.getSize());
@@ -47,14 +47,14 @@ public class StringPropertySetTest extends AbstractGenericTest {
 	@Test
 	public void testGetProperty() {
 		for (int i = 0; i < 1000; i++) {
-			ps.putString(10000 * i, "" + i);
+			ps.putString(10000 * i, String.valueOf(i));
 
 		}
 
 		assertEquals("" + 0, ps.getString(0));
 		assertEquals("" + 50, ps.getString(500000));
 		for (int i = 0; i < 1000; i++) {
-			assertEquals("" + i, ps.getString(10000 * i));
+			assertEquals(String.valueOf(i), ps.getString(10000 * i));
 		}
 
 		assertNull(ps.getString(1));
@@ -64,7 +64,7 @@ public class StringPropertySetTest extends AbstractGenericTest {
 	@Test
 	public void testPropertyIndex() throws NoSuchIndexException {
 		for (int i = 0; i < 1000; i++) {
-			ps.putString(10000 * i, "" + i);
+			ps.putString(10000 * i, String.valueOf(i));
 
 		}
 
@@ -88,7 +88,7 @@ public class StringPropertySetTest extends AbstractGenericTest {
 	@Test
 	public void testPropertyIndex2() throws NoSuchIndexException {
 		for (int i = 0; i < 10000; i++) {
-			ps.putString(3 * i, "" + i);
+			ps.putString(3 * i, String.valueOf(i));
 		}
 		assertEquals(10000, ps.getSize());
 
@@ -111,7 +111,7 @@ public class StringPropertySetTest extends AbstractGenericTest {
 	@Test
 	public void testPropertyIndex3() throws NoSuchIndexException {
 		for (int i = 0; i < 10000; i++) {
-			ps.putString(i, "" + i);
+			ps.putString(i, String.valueOf(i));
 		}
 		assertEquals(10000, ps.getSize());
 
@@ -134,7 +134,7 @@ public class StringPropertySetTest extends AbstractGenericTest {
 	@Test
 	public void testIterator() {
 		for (int i = 0; i < 1000; i++) {
-			ps.putString(100 * i, "" + i);
+			ps.putString(100 * i, String.valueOf(i));
 		}
 		LongIterator it = ps.getPropertyIterator();
 		int i = 0;
@@ -149,7 +149,7 @@ public class StringPropertySetTest extends AbstractGenericTest {
 	@Test
 	public void testIterator2() {
 		for (int i = 0; i < 10000; i++) {
-			ps.putString(i, "" + i);
+			ps.putString(i, String.valueOf(i));
 		}
 		LongIterator it = ps.getPropertyIterator();
 		int i = 0;
@@ -164,7 +164,7 @@ public class StringPropertySetTest extends AbstractGenericTest {
 	@Test
 	public void testSerialization() throws Exception {
 		for (int i = 0; i < 10000; i++) {
-			ps.putString(i, "" + i);
+			ps.putString(i, String.valueOf(i));
 		}
 
 		File tmpFile = createTempFile("StringPropertySetTest", ".ser");
@@ -201,7 +201,7 @@ public class StringPropertySetTest extends AbstractGenericTest {
 		}
 
 		for (int i = 0; i < 10000; i++) {
-			assertEquals("" + i, ps.getString(i));
+			assertEquals(String.valueOf(i), ps.getString(i));
 		}
 
 	}//end doTest()

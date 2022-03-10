@@ -125,7 +125,7 @@ public class VTMatchAcceptTest extends AbstractGhidraHeadedIntegrationTest {
 		addLabel("Bob", sourceAddress, sourceProgram);
 
 		VTMatch match = createMatchSetWithOneDataMatch(session, sourceAddress, destinationAddress);
-		AcceptMatchTask task = new AcceptMatchTask(controller, Arrays.asList(match));
+		AcceptMatchTask task = new AcceptMatchTask(controller, List.of(match));
 		runTask(task);
 
 		VTAssociationStatus status = match.getAssociation().getStatus();

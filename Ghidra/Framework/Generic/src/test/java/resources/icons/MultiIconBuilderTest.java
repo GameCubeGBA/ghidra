@@ -65,7 +65,7 @@ public class MultiIconBuilderTest {
 				new MultiIconBuilder(makeQuandrantIcon(32, 32, Color.gray, Color.white))
 						.addText("Abcfg", font, Color.red, quad)
 						.build();
-			JOptionPane.showMessageDialog(null, "" + quad + " aligned", "Icon text overlay test",
+			JOptionPane.showMessageDialog(null, quad + " aligned", "Icon text overlay test",
 				JOptionPane.OK_OPTION, icon);
 		}
 	}
@@ -76,7 +76,7 @@ public class MultiIconBuilderTest {
 			ImageIcon icon = new MultiIconBuilder(makeEmptyIcon(32, 32, Color.gray))
 					.addIcon(makeEmptyIcon(8, 8, Color.red), 8, 8, quad)
 					.build();
-			JOptionPane.showMessageDialog(null, "" + quad + " aligned", "Icon_icon overlay test",
+			JOptionPane.showMessageDialog(null, quad + " aligned", "Icon_icon overlay test",
 				JOptionPane.OK_OPTION, icon);
 		}
 	}
@@ -87,7 +87,7 @@ public class MultiIconBuilderTest {
 			ImageIcon icon = new MultiIconBuilder(makeEmptyIcon(32, 32, Color.gray))
 					.addIcon(makeQuandrantIcon(32, 32, Color.red, Color.black), 14, 14, quad)
 					.build();
-			JOptionPane.showMessageDialog(null, "" + quad + " aligned",
+			JOptionPane.showMessageDialog(null, quad + " aligned",
 				"Scaled icon_icon overlay test",
 				JOptionPane.OK_OPTION, icon);
 		}

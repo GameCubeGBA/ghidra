@@ -54,12 +54,7 @@ class AndroidElfRelocationData extends AbstractLeb128DataType {
 		throw new UnsupportedOperationException("may not be cloned");
 	}
 
-	@Override
-	public String getMnemonic(Settings settings) {
-		return name;
-	}
-
-	@Override
+    @Override
 	public String getDescription() {
 		return "Android Packed Relocation Data for ELF";
 	}

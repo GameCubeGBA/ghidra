@@ -32,12 +32,7 @@ public class ArtHeader_OreoMR1 extends ArtHeader_Oreo {
 		super(reader);
 	}
 
-	@Override
-	public int getArtMethodCountForVersion() {
-		return ImageMethod_Oreo.kImageMethodsCount.ordinal();
-	}
-
-	@Override
+    @Override
 	public DataType toDataType() throws DuplicateNameException, IOException {
 		Structure structure = (Structure) super.toDataType();
 		try {

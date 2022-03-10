@@ -41,12 +41,7 @@ public class iOS_KextStubFixupAnalyzer extends FileFormatAnalyzer {
 		return "iOS Kext STUB Section Fixup";
 	}
 
-	@Override
-	public AnalyzerType getAnalysisType() {
-		return AnalyzerType.BYTE_ANALYZER;
-	}
-
-	@Override
+    @Override
 	public boolean getDefaultEnablement(Program program) {
 		return false;//isKext( program );
 	}

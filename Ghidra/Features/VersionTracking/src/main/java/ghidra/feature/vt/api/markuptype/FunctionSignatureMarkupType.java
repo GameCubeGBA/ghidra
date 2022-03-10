@@ -303,9 +303,4 @@ public class FunctionSignatureMarkupType extends FunctionEntryPointBasedAbstract
 		return SystemUtilities.isEqual(sourceStringable, destinationStringable);
 	}
 
-	@Override
-	public boolean conflictsWithOtherMarkup(MarkupItemImpl markupItem,
-			Collection<VTMarkupItem> markupItems) {
-		return false;
-	}
 }

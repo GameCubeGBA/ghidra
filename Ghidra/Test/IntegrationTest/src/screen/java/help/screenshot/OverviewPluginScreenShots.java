@@ -108,8 +108,8 @@ public class OverviewPluginScreenShots extends GhidraScreenShotGenerator {
 
 		char[] pChars = Character.toChars(0x1d45d);
 		char[] iChars = Character.toChars(0x1d456);
-		String mathyP = "" + pChars[0] + pChars[1];
-		String mathyI = "" + iChars[0] + iChars[1];
+		String mathyP = String.valueOf(pChars[0]) + pChars[1];
+		String mathyI = String.valueOf(iChars[0]) + iChars[1];
 
 		String sum = "\u2211";
 		String sumTop = " 255";

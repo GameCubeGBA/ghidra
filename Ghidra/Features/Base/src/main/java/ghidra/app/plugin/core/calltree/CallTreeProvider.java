@@ -423,12 +423,8 @@ public class CallTreeProvider extends ComponentProviderAdapter implements Domain
 		//
 		navigateIncomingToggleAction =
 			new ToggleDockingAction("Navigation Incoming Location Changes", plugin.getName()) {
-				@Override
-				public void actionPerformed(ActionContext context) {
-					// handled later as we receive events
-				}
 
-				@Override
+                @Override
 				public void setSelected(boolean newValue) {
 					super.setSelected(newValue);
 

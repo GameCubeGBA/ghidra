@@ -102,13 +102,7 @@ public class PIC30_ElfExtension extends ElfExtension {
 		return "_PIC30";
 	}
 
-	@Override
-	public void processElf(ElfLoadHelper elfLoadHelper, TaskMonitor monitor)
-			throws CancelledException {
-		// TODO: Create mapped blocks
-	}
-
-	@Override
+    @Override
 	public AddressSpace getPreferredSegmentAddressSpace(ElfLoadHelper elfLoadHelper,
 			ElfProgramHeader elfProgramHeader) {
 		Language language = elfLoadHelper.getProgram().getLanguage();

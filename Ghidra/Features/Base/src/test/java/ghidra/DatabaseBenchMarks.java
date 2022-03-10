@@ -195,6 +195,6 @@ class TestTimer {
 
 	void end() {
 		long end = System.currentTimeMillis();
-		System.out.println("" + (end - start) / 1000.0 + " seconds");
+		System.out.println((end - start) / 1000.0 + " seconds");
 	}
 }

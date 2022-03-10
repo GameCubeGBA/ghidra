@@ -110,7 +110,7 @@ public class AutoAnalysisPlugin extends Plugin implements AutoAnalysisManagerLis
 			new ActionBuilder("Auto Analyze", getName())
 					.supportsDefaultToolContext(true)
 					.menuPath("&Analysis", "&Auto Analyze...")
-					.menuGroup(ANALYZE_GROUP_NAME, "" + subGroupIndex++)
+					.menuGroup(ANALYZE_GROUP_NAME, String.valueOf(subGroupIndex++))
 					.keyBinding("A")
 					.validContextWhen(ac -> {
 						updateActionName(ac);
@@ -122,7 +122,7 @@ public class AutoAnalysisPlugin extends Plugin implements AutoAnalysisManagerLis
 		new ActionBuilder("Analyze All Open", getName())
 					.supportsDefaultToolContext(true)
 					.menuPath("&Analysis", "Analyze All &Open...")
-					.menuGroup(ANALYZE_GROUP_NAME, "" + subGroupIndex++)
+					.menuGroup(ANALYZE_GROUP_NAME, String.valueOf(subGroupIndex++))
 					.onAction(c -> analyzeAllCallback())
 					.validContextWhen(ac -> ac instanceof ListingActionContext)
 					.buildAndInstall(tool);

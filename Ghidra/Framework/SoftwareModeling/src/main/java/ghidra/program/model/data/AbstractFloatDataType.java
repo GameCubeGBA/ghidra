@@ -38,16 +38,7 @@ public abstract class AbstractFloatDataType extends BuiltIn {
 		super(null, name, dtm);
 	}
 
-	/**
-	 * 
-	 * @see ghidra.program.model.data.DataType#getMnemonic(Settings)
-	 */
-	@Override
-	public String getMnemonic(Settings settings) {
-		return name;
-	}
-
-	/**
+    /**
 	 * 
 	 * @see ghidra.program.model.data.DataType#getDescription()
 	 */

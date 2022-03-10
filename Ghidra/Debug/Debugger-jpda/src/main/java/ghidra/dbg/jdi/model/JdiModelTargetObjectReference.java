@@ -116,12 +116,7 @@ public class JdiModelTargetObjectReference extends JdiModelTargetValue {
 		return CompletableFuture.completedFuture(null);
 	}
 
-	@Override
-	public CompletableFuture<Void> init() {
-		return CompletableFuture.completedFuture(null);
-	}
-
-	@Override
+    @Override
 	public String getDisplay() {
 		return objref == null ? super.getDisplay() : objref.toString();
 	}

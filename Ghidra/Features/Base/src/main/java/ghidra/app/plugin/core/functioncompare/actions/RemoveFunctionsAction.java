@@ -19,6 +19,7 @@ import java.awt.Component;
 import java.awt.event.InputEvent;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 import javax.swing.Icon;
 import javax.swing.JComboBox;
@@ -94,7 +95,7 @@ public class RemoveFunctionsAction extends DockingAction {
 		JComboBox<Function> focusedComponent =
 			((MultiFunctionComparisonPanel) provider.getComponent()).getFocusedComponent();
 		Function selectedFunction = (Function) focusedComponent.getSelectedItem();
-		provider.removeFunctions(new HashSet<>(Arrays.asList(selectedFunction)));
+		provider.removeFunctions(new HashSet<>(List.of(selectedFunction)));
 		provider.contextChanged();
 	}
 }

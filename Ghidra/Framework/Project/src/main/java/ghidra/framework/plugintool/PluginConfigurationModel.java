@@ -136,7 +136,7 @@ public class PluginConfigurationModel {
 	public void addPlugin(PluginDescription pluginDescription) {
 		try {
 			String name = pluginDescription.getPluginClass().getName();
-			pluginInstaller.addPlugins(Arrays.asList(name));
+			pluginInstaller.addPlugins(List.of(name));
 		}
 		catch (PluginException e) {
 			Msg.showError(this, null, "Error Loading Plugin", e.getMessage(), e);
@@ -198,7 +198,7 @@ public class PluginConfigurationModel {
 	public void removePlugin(PluginDescription pluginDescription) {
 		Plugin plugin = loadedPluginMap.get(pluginDescription);
 		if (plugin != null) {
-			pluginInstaller.removePlugins(Arrays.asList(plugin));
+			pluginInstaller.removePlugins(List.of(plugin));
 		}
 		initLoadedPlugins();
 		listener.call();

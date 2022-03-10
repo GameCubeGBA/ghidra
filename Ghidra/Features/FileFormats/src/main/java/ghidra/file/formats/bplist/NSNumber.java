@@ -113,16 +113,16 @@ public class NSNumber extends NSObject {
 	public String toString() {
 		switch ( type ) {
 			case BOOLEAN: {
-				return "" + booleanValue( );
+				return String.valueOf(booleanValue());
 			}
 			case REAL: {
-				return "" + doubleValue( );
+				return String.valueOf(doubleValue());
 			}
 			case BYTE:
 			case SHORT:
 			case INTEGER:
 			case LONG: {
-				return "" + longValue( );
+				return String.valueOf(longValue());
 			}
 		}
 		throw new RuntimeException( );

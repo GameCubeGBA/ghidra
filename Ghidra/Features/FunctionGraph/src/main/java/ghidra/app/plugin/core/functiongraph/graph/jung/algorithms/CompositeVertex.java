@@ -44,7 +44,7 @@ public class CompositeVertex<V, E> {
     }
 
     public CompositeVertex(V vertex) {
-        this(Arrays.asList(vertex), new ArrayList<CompositeVertex<V, E>>(0));
+        this(List.of(vertex), new ArrayList<CompositeVertex<V, E>>(0));
     }
 
     public CompositeVertex(Collection<CompositeVertex<V, E>> nestedComposites) {

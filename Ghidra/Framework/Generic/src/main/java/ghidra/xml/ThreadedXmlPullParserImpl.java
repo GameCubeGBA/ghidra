@@ -339,13 +339,7 @@ class ThreadedXmlPullParserImpl extends AbstractXmlPullParser {
 			this.errorHandler = errorHandler;
 		}
 
-		@Override
-		public InputSource resolveEntity(String publicId, String systemId)
-				throws SAXException, IOException {
-			return null;
-		}
-
-		@Override
+        @Override
 		public void error(SAXParseException e) throws SAXException {
 			if (errorHandler == null) {
 				return;

@@ -113,7 +113,7 @@ class MemoryMapDBAdapterV2 extends MemoryMapDBAdapter {
 
 			SubMemoryBlock subBlock = getSubBlock(bufID, subBlockRecord, type, overlayAddr);
 
-			blocks.add(new MemoryBlockDB(this, blockRecord, Arrays.asList(subBlock)));
+			blocks.add(new MemoryBlockDB(this, blockRecord, List.of(subBlock)));
 
 		}
 		Collections.sort(blocks);

@@ -103,11 +103,7 @@ public class ChangedFilesDialog extends DialogComponentProvider {
 		}
 	}
 
-	@Override
-    protected void cancelCallback() {
-		close();
-	}
-	/**
+    /**
 	 * Task to save files.
 	 */
 	private class SaveTask extends Task {

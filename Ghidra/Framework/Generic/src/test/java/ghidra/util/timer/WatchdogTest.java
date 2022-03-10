@@ -37,7 +37,7 @@ public class WatchdogTest extends AbstractGTest {
 
 		Thread testThread = Thread.currentThread();
 		try (Watchdog watchDog = new Watchdog(watchdogTimeoutMS, () -> {
-			Msg.trace(this, "" + System.currentTimeMillis() + ": Interrupting the test thread...");
+			Msg.trace(this, System.currentTimeMillis() + ": Interrupting the test thread...");
 			inerruptedFlag.set(true);
 			testThread.interrupt();
 		})) {
@@ -51,8 +51,7 @@ public class WatchdogTest extends AbstractGTest {
 					fail(System.currentTimeMillis() + ": Watchdog did not fire");
 				}
 				catch (InterruptedException e) {
-					assertTrue("" + System.currentTimeMillis() +
-						": Sleep was interrupted, but not by watchdog", inerruptedFlag.get());
+					assertTrue(System.currentTimeMillis() + ": Sleep was interrupted, but not by watchdog", inerruptedFlag.get());
 					long elapsed = System.currentTimeMillis() - start;
 					Msg.trace(this, System.currentTimeMillis() + ": Watchdog fired in: " + elapsed +
 						"ms, max target is: " + watchdogMaxIntrMS + "ms");

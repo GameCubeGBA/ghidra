@@ -65,14 +65,6 @@ abstract class CommentDialog extends DialogComponentProvider {
     /////////////////////////////////////////////
 
     /**
-     * Callback for the cancel button.
-     */
-    @Override
-    protected void cancelCallback() {
-        close();
-    }
-
-    /**
      * Callback for the OK button.
      */
     @Override

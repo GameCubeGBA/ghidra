@@ -354,11 +354,11 @@ public class RestrictedValueSortedMap<K, V> implements ValueSortedMap<K, V> {
 		@Override
 		public Entry<K, V> get(int index) {
 			if (index < 0) {
-				throw new IndexOutOfBoundsException("" + index);
+				throw new IndexOutOfBoundsException(String.valueOf(index));
 			}
 			Entry<K, V> ent = inBoundsOrNull(wrapped.entrySet().get(getLowestIndex() + index));
 			if (ent == null) {
-				throw new IndexOutOfBoundsException("" + index);
+				throw new IndexOutOfBoundsException(String.valueOf(index));
 			}
 			return ent;
 		}
@@ -640,11 +640,11 @@ public class RestrictedValueSortedMap<K, V> implements ValueSortedMap<K, V> {
 		@Override
 		public K get(int index) {
 			if (index < 0) {
-				throw new IndexOutOfBoundsException("" + index);
+				throw new IndexOutOfBoundsException(String.valueOf(index));
 			}
 			Entry<K, V> ent = inBoundsOrNull(wrapped.entrySet().get(getLowestIndex() + index));
 			if (ent == null) {
-				throw new IndexOutOfBoundsException("" + index);
+				throw new IndexOutOfBoundsException(String.valueOf(index));
 			}
 			return ent.getKey();
 		}
@@ -914,11 +914,11 @@ public class RestrictedValueSortedMap<K, V> implements ValueSortedMap<K, V> {
 		@Override
 		public V get(int index) {
 			if (index < 0) {
-				throw new IndexOutOfBoundsException("" + index);
+				throw new IndexOutOfBoundsException(String.valueOf(index));
 			}
 			Entry<K, V> ent = inBoundsOrNull(wrapped.entrySet().get(getLowestIndex() + index));
 			if (ent == null) {
-				throw new IndexOutOfBoundsException("" + index);
+				throw new IndexOutOfBoundsException(String.valueOf(index));
 			}
 			return ent.getValue();
 		}

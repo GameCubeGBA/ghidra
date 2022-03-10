@@ -109,17 +109,7 @@ public abstract class AbstractDockingTest extends AbstractGenericTest {
 		ConcurrentTestExceptionHandler.disable();
 	}
 
-	@Override
-	protected ApplicationLayout createApplicationLayout() {
-		try {
-			return new GhidraTestApplicationLayout(new File(getTestDirectoryPath()));
-		}
-		catch (IOException e) {
-			throw new AssertException(e);
-		}
-	}
-
-	@Override
+    @Override
 	protected ApplicationConfiguration createApplicationConfiguration() {
 		DockingApplicationConfiguration config = new DockingApplicationConfiguration();
 		config.setShowSplashScreen(false);

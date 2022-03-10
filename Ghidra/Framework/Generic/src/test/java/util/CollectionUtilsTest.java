@@ -230,9 +230,9 @@ public class CollectionUtilsTest {
 
 		List<String> original = Arrays.asList("One", "Two", "Three", "Four");
 		Collection<String> a = Arrays.asList(original.get(0), original.get(1));
-		Collection<String> b = Arrays.asList(original.get(2));
+		Collection<String> b = List.of(original.get(2));
 		Collection<String> c = Collections.emptyList();
-		Collection<String> d = Arrays.asList(original.get(3));
+		Collection<String> d = List.of(original.get(3));
 		Iterable<String> iterable = CollectionUtils.asIterable(a, b, c, d);
 
 		List<String> result = new ArrayList<>();
@@ -362,9 +362,9 @@ public class CollectionUtilsTest {
 
 		List<String> original = Arrays.asList("One", "Two", "Three", "Four");
 		Collection<String> a = Arrays.asList(original.get(0), original.get(1));
-		Collection<String> b = Arrays.asList(original.get(2));
+		Collection<String> b = List.of(original.get(2));
 		Collection<String> c = Collections.emptyList();
-		Collection<String> d = Arrays.asList(original.get(3));
+		Collection<String> d = List.of(original.get(3));
 		Stream<String> stream = CollectionUtils.asStream(a, b, c, d);
 		List<String> result = stream.collect(Collectors.toList());
 		assertEquals(original, result);

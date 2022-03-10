@@ -243,12 +243,7 @@ public class TextFieldAutocompleter<T> {
 			content.setCursor(null);
 		}
 
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			// Blank
-		}
-
-		@Override
+        @Override
 		public void mouseDragged(MouseEvent e) {
 			if (grabbedRegion == 0) {
 				return;

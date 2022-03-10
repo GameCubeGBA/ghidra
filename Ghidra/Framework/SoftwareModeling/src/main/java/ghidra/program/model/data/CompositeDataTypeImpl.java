@@ -72,12 +72,7 @@ public abstract class CompositeDataTypeImpl extends GenericDataType implements C
 		return minimumAlignment;
 	}
 
-	@Override
-	public void dataTypeNameChanged(DataType dt, String oldName) {
-		// ignored
-	}
-
-	/**
+    /**
 	 * Get the preferred length for a new component. For Unions and internally
 	 * aligned structures the preferred component length for a fixed-length dataType
 	 * will be the length of that dataType. Otherwise the length returned will be no

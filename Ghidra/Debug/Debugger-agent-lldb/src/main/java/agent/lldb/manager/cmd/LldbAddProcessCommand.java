@@ -27,10 +27,4 @@ public class LldbAddProcessCommand extends AbstractLldbCommand<SBProcess> {
 		super(manager);
 	}
 
-	@Override
-	public SBProcess complete(LldbPendingCommand<?> pending) {
-		// Not apparent this is needed
-		return null;
-	}
-
 }

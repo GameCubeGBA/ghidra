@@ -92,19 +92,10 @@ class ReverseVectorIterator<T> extends VectorIterator<T> {
 		ReverseVectorIterator<?> other = (ReverseVectorIterator)obj;
 		return data == other.data && index == other.index;
 	}
-	@Override
-	public int hashCode() {
-		return data.hashCode();
-	}
-	
-	@Override
+
+    @Override
     public IteratorSTL<T> copy() {
 		return new ReverseVectorIterator<T>(data, index);
-	}
-	
-	@Override
-    public int getIndex() {
-		return index;
 	}
 
 

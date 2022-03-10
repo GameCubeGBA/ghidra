@@ -22,12 +22,8 @@ public enum CollectionUtils {
 	;
 
 	public abstract static class AbstractImmutableList<T> extends AbstractList<T> {
-		@Override
-		public void add(int index, T element) {
-			throw new UnsupportedOperationException();
-		}
 
-		@Override
+        @Override
 		public boolean add(T e) {
 			throw new UnsupportedOperationException();
 		}
@@ -94,12 +90,8 @@ public enum CollectionUtils {
 	}
 
 	public abstract static class AbstractImmutableSet<T> extends AbstractSet<T> {
-		@Override
-		public boolean add(T e) {
-			throw new UnsupportedOperationException();
-		}
 
-		@Override
+        @Override
 		public boolean addAll(Collection<? extends T> c) {
 			throw new UnsupportedOperationException();
 		}

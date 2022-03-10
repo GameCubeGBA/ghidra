@@ -389,16 +389,7 @@ public class ProgramMultiUserMergeManager extends MergeManager {
 		return mergePanel;
 	}
 
-	/**
-	 * Determines if the modal merge tool is currently displayed on the screen.
-	 * @return true if the merge tool is displayed.
-	 */
-	@Override
-	public boolean isMergeToolVisible() {
-		return mergeToolIsVisible;
-	}
-
-	/**
+    /**
 	 * Determines if the four program Listing merge panel is currently displayed in the merge tool.
 	 * @return true if the Listing merge panel is displayed.
 	 */

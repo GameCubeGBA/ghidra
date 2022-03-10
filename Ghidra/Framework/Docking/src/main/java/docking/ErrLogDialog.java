@@ -202,12 +202,7 @@ public class ErrLogDialog extends AbstractErrDialog {
 		detailsPane.selectFirstError();
 	}
 
-	@Override
-	protected void cancelCallback() {
-		close();
-	}
-
-	@Override
+    @Override
 	protected void okCallback() {
 		cancelCallback();
 	}

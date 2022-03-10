@@ -127,7 +127,7 @@ public class SingleFileSystemIndexHelper {
 			throw new IOException("Invalid state, index already closed");
 		}
 		if (directory == null || rootDir.equals(directory)) {
-			return Arrays.asList(payloadFile);
+			return List.of(payloadFile);
 		}
 		return Collections.emptyList();
 	}

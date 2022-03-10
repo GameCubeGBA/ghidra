@@ -39,12 +39,7 @@ public abstract class AbstractModelForDbgengBreakpointsTest
 		return this;
 	}
 
-	@Override
-	protected List<String> seedPath() {
-		return List.of();
-	}
-
-	@Override
+    @Override
 	public DebuggerTestSpecimen getLaunchSpecimen() {
 		return WindowsSpecimen.PRINT;
 	}

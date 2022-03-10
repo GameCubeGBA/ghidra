@@ -124,15 +124,7 @@ public class ExecuteDiffDialog extends DialogComponentProvider {
 		close();
 	}
 
-	/**
-	 * @see ghidra.util.bean.GhidraDialog#cancelCallback()
-	 */
-	@Override
-	protected void cancelCallback() {
-		close();
-	}
-
-	JPanel createDiffSettingsPanel() {
+    JPanel createDiffSettingsPanel() {
 		ProgramDiffFilter diff = new ProgramDiffFilter();
 		JPanel panel = new JPanel(new BorderLayout());
 		JPanel settingsPanel = new JPanel();

@@ -131,12 +131,7 @@ public class ByteViewerPanel extends JPanel
 		return new Dimension(width, height);
 	}
 
-	@Override
-	protected void paintComponent(Graphics g) {
-		super.paintComponent(g);
-	}
-
-	// TableColumnModelListener interface methods
+    // TableColumnModelListener interface methods
 	@Override
 	public void columnAdded(TableColumnModelEvent e) {
 		// no-op

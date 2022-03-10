@@ -276,32 +276,7 @@ public class SymbolTreeRootNode extends SymbolCategoryNode {
 		return program == null;
 	}
 
-	@Override
-	public boolean canCut() {
-		return false;
-	}
-
-	@Override
-	public boolean canPaste(List<GTreeNode> pastedNodes) {
-		return false;
-	}
-
-	@Override
-	public DataFlavor getNodeDataFlavor() {
-		return null;
-	}
-
-	@Override
-	public boolean isCut() {
-		return false;
-	}
-
-	@Override
-	public boolean isModifiable() {
-		return false;
-	}
-
-	@Override
+    @Override
 	public void setNodeCut(boolean isCut) {
 		throw new UnsupportedOperationException("Cannot cut the symbol tree root node");
 	}

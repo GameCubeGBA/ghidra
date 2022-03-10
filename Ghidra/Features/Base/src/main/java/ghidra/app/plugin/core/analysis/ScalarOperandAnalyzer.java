@@ -406,8 +406,4 @@ public class ScalarOperandAnalyzer extends AbstractAnalyzer {
 			options.getBoolean(OPTION_NAME_RELOCATION_GUIDE, relocationGuideEnabled);
 	}
 
-	@Override
-	public void analysisEnded(Program program) {
-		// Do nothing
-	}
 }

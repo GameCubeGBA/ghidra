@@ -144,7 +144,7 @@ public class JdiExperimentsTest {
 				.findFirst()
 				.orElse(null);
 		Map<String, Argument> args = procConn.defaultArguments();
-		args.get("pid").setValue("" + hwProc.pid());
+		args.get("pid").setValue(String.valueOf(hwProc.pid()));
 		VirtualMachine vm = procConn.attach(args);
 
 		for (Event evt : vm.eventQueue().remove(1000)) {

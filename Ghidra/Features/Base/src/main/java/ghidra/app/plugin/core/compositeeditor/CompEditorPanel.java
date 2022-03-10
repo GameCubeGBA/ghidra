@@ -570,7 +570,7 @@ public class CompEditorPanel extends CompositeEditorPanel {
 		infoPanel.add(actualAlignmentPanel, gridBagConstraints);
 
 		actualAlignmentValueTextField = new JTextField(8);
-		actualAlignmentValueTextField.setText("" + ((CompEditorModel) model).getActualAlignment());
+		actualAlignmentValueTextField.setText(String.valueOf(((CompEditorModel) model).getActualAlignment()));
 		actualAlignmentValueTextField.setToolTipText(actualAlignmentToolTip);
 		actualAlignmentValueTextField.setEditable(false);
 		if (helpManager != null) {
@@ -1194,19 +1194,6 @@ public class CompEditorPanel extends CompositeEditorPanel {
 			if (actionChanged || setRow || setDtiRow) {
 				table.repaint();
 			}
-		}
-	}
-
-	/**
-	 * Called from the DropTgtAdapter to revert any feedback changes back to
-	 * normal.
-	 */
-	@Override
-	public void undoDragUnderFeedback() {
-		synchronized (table) {
-			dndTableCellRenderer.setRowForFeedback(-1);
-			dndDtiCellRenderer.setRowForFeedback(-1);
-			table.repaint();
 		}
 	}
 

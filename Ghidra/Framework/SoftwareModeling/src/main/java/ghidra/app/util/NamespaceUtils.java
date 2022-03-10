@@ -176,7 +176,7 @@ public class NamespaceUtils {
 			root = program.getGlobalNamespace();
 		}
 
-		List<Namespace> parents = Arrays.asList(root);
+		List<Namespace> parents = List.of(root);
 		for (String name : namespaceNames) {
             parents = getMatchingNamespaces(name, parents, program);
 		}

@@ -549,8 +549,8 @@ public class DataTypeArchiveDB extends DomainObjectAdapterDB
 
 		metadata.clear();
 		metadata.put("Data Type Archive Name", getName());
-		metadata.put("# of Data Types", "" + getDataTypeManager().getDataTypeCount(true));
-		metadata.put("# of Data Type Categories", "" + getDataTypeManager().getCategoryCount());
+		metadata.put("# of Data Types", String.valueOf(getDataTypeManager().getDataTypeCount(true)));
+		metadata.put("# of Data Type Categories", String.valueOf(getDataTypeManager().getCategoryCount()));
 
 		Options propList = getOptions(Program.PROGRAM_INFO);
 		List<String> propNames = propList.getOptionNames();

@@ -182,12 +182,7 @@ public class DBTraceModuleManager
 			m -> m.getModulesIntersecting(lifespan, range), Set.of());
 	}
 
-	@Override
-	public ReadWriteLock getLock() {
-		return lock;
-	}
-
-	@Override
+    @Override
 	public Collection<? extends TraceSection> getSectionsAt(long snap, Address address) {
 		if (trace.getObjectManager().hasSchema()) {
 			return trace.getObjectManager()

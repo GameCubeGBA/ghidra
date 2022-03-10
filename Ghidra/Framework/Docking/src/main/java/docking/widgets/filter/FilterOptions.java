@@ -138,7 +138,7 @@ public class FilterOptions {
 		boolean multiterm = Boolean.parseBoolean(element.getAttributeValue("MULTITERM"));
 		String delimiterCharacterStr = element.getAttributeValue("TERM_DELIMITER");
 		if (delimiterCharacterStr == null) {
-			delimiterCharacterStr = "" + DEFAULT_DELIMITER;
+			delimiterCharacterStr = String.valueOf(DEFAULT_DELIMITER);
 		}
 
 		boolean andMode = Boolean.parseBoolean(element.getAttributeValue("AND_EVAL_MODE", "True"));
@@ -164,7 +164,7 @@ public class FilterOptions {
 		xmlElement.setAttribute("INVERTED", Boolean.toString(inverted));
 
 		xmlElement.setAttribute("MULTITERM", Boolean.toString(multiTerm));
-		xmlElement.setAttribute("TERM_DELIMITER", "" + delimitingCharacter);
+		xmlElement.setAttribute("TERM_DELIMITER", String.valueOf(delimitingCharacter));
 
 		xmlElement.setAttribute("AND_EVAL_MODE",
 			Boolean.toString(evalMode == MultitermEvaluationMode.AND));

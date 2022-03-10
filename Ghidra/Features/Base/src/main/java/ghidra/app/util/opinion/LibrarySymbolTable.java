@@ -482,9 +482,9 @@ class LibrarySymbolTable {
         for (LibraryExportedSymbol sym : exportList) {
             Element export = new Element("EXPORT");
 
-            export.setAttribute("ORDINAL", sym.getOrdinal() + "");
+            export.setAttribute("ORDINAL", String.valueOf(sym.getOrdinal()));
             export.setAttribute("NAME", sym.getName() == null ? "" : sym.getName());
-            export.setAttribute("PURGE", sym.getPurge() + "");
+            export.setAttribute("PURGE", String.valueOf(sym.getPurge()));
             export.setAttribute("COMMENT", sym.getComment() == null ? "" : sym.getComment());
 
             if (sym.hasNoReturn()) {

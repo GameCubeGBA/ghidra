@@ -1860,7 +1860,7 @@ public class ProgramDiffDetails {
 	}
 
 	private void addParameterSize(StyledDocument doc, StackFrame frame) {
-		addFrameInfo(doc, "Size of Parameter Portion: ", "" + frame.getParameterSize());
+		addFrameInfo(doc, "Size of Parameter Portion: ", String.valueOf(frame.getParameterSize()));
 	}
 
 	private void addParameterSize(StyledDocument doc1, StyledDocument doc2, StackFrame frame1,
@@ -1868,8 +1868,8 @@ public class ProgramDiffDetails {
 		int size1 = frame1.getParameterSize();
 		int size2 = frame2.getParameterSize();
 		if (size1 != size2) {
-			addFrameInfo(doc1, "Size of Parameter Portion: ", "" + size1);
-			addFrameInfo(doc2, "Size of Parameter Portion: ", "" + size2);
+			addFrameInfo(doc1, "Size of Parameter Portion: ", String.valueOf(size1));
+			addFrameInfo(doc2, "Size of Parameter Portion: ", String.valueOf(size2));
 		}
 	}
 
@@ -2096,7 +2096,7 @@ public class ProgramDiffDetails {
 			String offset = var.getVariableStorage().toString();
 			String firstUse = DiffUtility.toSignedHexString(var.getFirstUseOffset());
 			String name = var.getName();
-			String size = "" + var.getLength();
+			String size = String.valueOf(var.getLength());
 			String source = var.getSource().toString();
 			String comment = var.getComment();
 

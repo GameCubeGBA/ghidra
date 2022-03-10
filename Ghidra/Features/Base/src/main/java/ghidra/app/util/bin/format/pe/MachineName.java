@@ -28,6 +28,6 @@ class MachineName {
 	}
 
 	static String getName(int machine) {
-		return "" + machine;
+		return String.valueOf(machine);
 	}
 }

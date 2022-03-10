@@ -56,12 +56,8 @@ public class GTableHeader extends JTableHeader {
 		ToolTipManager.sharedInstance().registerComponent(this);
 
 		addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// no-op
-			}
 
-			@Override
+            @Override
 			public void mouseExited(MouseEvent e) {
 				if (!isHelpEnabled()) {
 					return;

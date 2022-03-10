@@ -218,7 +218,7 @@ public class ImporterUtilities {
 				monitor);
 		}
 		else if (choice == 2) {
-			BatchImportDialog.showAndImport(tool, null, Arrays.asList(fullFsrl), destinationFolder,
+			BatchImportDialog.showAndImport(tool, null, List.of(fullFsrl), destinationFolder,
 				programManager);
 		}
 		else if (choice == 3) {
@@ -311,7 +311,7 @@ public class ImporterUtilities {
 					doFSImportHelper((GFileSystemProgramProvider) refdFile.fsRef.getFilesystem(),
 						gfile, destFolder, consumer, monitor);
 				if (program != null) {
-					doPostImportProcessing(tool, programManager, fsrl, Arrays.asList(program),
+					doPostImportProcessing(tool, programManager, fsrl, List.of(program),
 						consumer, "", monitor);
 				}
 			}

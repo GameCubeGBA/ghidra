@@ -35,13 +35,7 @@ public class MDReferenceType extends MDModifierType {
 		cvMod.setReferenceType(); // TODO: where should this go? remove constructor? 
 	}
 
-	@Override
-	protected void parseInternal() throws MDException {
-		// cvMod.setReferenceType();
-		super.parseInternal();
-	}
-
-	@Override
+    @Override
 	protected MDDataType parseReferencedType() throws MDException {
 		return MDDataTypeParser.parseBasicDataType(dmang, false);
 	}

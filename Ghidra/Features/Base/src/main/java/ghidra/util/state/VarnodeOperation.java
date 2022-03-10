@@ -148,12 +148,7 @@ public class VarnodeOperation extends Varnode {
 		return false;
 	}
 
-	@Override
-	public boolean isAddrTied() {
-		return false;
-	}
-
-	@Override
+    @Override
 	public boolean isConstant() {
 		return false;
 	}
@@ -163,27 +158,12 @@ public class VarnodeOperation extends Varnode {
 		return false;
 	}
 
-	@Override
-	public boolean isInput() {
-		return false;
-	}
-
-	@Override
-	public boolean isPersistent() {
-		return false;
-	}
-
-	@Override
+    @Override
 	public boolean isRegister() {
 		return false;
 	}
 
-	@Override
-	public boolean isUnaffected() {
-		return false;
-	}
-
-	@Override
+    @Override
 	public boolean isUnique() {
 		return false;
 	}

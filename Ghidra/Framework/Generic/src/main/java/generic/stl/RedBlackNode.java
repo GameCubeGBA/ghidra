@@ -39,7 +39,7 @@ public class RedBlackNode<K, V> {
     
     @Override
     public String toString() {
-        return "" + value;
+        return String.valueOf(value);
     }
     
 	public V getValue() {

@@ -71,12 +71,7 @@ public class StackEditorProvider extends CompositeEditorProvider implements Doma
 		return function.getName() + " (" + pgm.getDomainFile().getName() + ")";
 	}
 
-	@Override
-	protected Plugin getPlugin() {
-		return plugin;
-	}
-
-	@Override
+    @Override
 	public String getName() {
 		return "Stack Editor";
 	}
@@ -133,12 +128,7 @@ public class StackEditorProvider extends CompositeEditorProvider implements Doma
 		return editorStack.getFunction();
 	}
 
-	@Override
-	public boolean isEditing(DataTypePath functionPath) {
-		return getDtPath().equals(functionPath);
-	}
-
-	/**
+    /**
 	 * Gets the program associated with the stack frame being edited.
 	 */
 	protected Program getProgram() {
@@ -150,12 +140,7 @@ public class StackEditorProvider extends CompositeEditorProvider implements Doma
 		return stackModel;
 	}
 
-	@Override
-	protected CompositeEditorTableAction[] getActions() {
-		return actionMgr.getAllActions();
-	}
-
-	@Override
+    @Override
 	public void domainObjectRestored(DataTypeManagerDomainObject domainObject) {
 		refreshName();
 		editorPanel.domainObjectRestored(domainObject);

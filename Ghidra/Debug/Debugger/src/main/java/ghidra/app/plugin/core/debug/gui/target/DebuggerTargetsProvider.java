@@ -190,12 +190,7 @@ public class DebuggerTargetsProvider extends ComponentProviderAdapter {
 		myActionContext = new DebuggerModelActionContext(this, null, tree);
 	}
 
-	@Override
-	public void addLocalAction(DockingActionIf action) {
-		super.addLocalAction(action);
-	}
-
-	private void createActions() {
+    private void createActions() {
 		actionConnect = new ConnectAction();
 		actionDisconnect = new DisconnectAction();
 		actionDisconnectAll = DisconnectAllAction.builder(plugin, plugin)

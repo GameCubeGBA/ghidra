@@ -194,12 +194,7 @@ public class FunctionReachabilityTableModel
 		reload();
 	}
 
-	@Override
-	public Program getDataSource() {
-		return program;
-	}
-
-	@Override
+    @Override
 	public ProgramLocation getProgramLocation(int row, int column) {
 		FunctionReachabilityResult result = getRowObject(row);
 		if (column == FROM_FUNCTION_COLUMN) {

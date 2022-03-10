@@ -35,8 +35,4 @@ public class DbgEvaluateCommand extends AbstractDbgCommand<String> {
 		return result;
 	}
 
-	@Override
-	public void invoke() {
-		// TODO: do something with expression to get result
-	}
 }

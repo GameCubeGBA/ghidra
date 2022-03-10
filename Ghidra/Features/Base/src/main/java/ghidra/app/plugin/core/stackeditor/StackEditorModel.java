@@ -1245,19 +1245,7 @@ public class StackEditorModel extends CompositeEditorModel {
 		return super.getOriginalDataTypeManager();
 	}
 
-	@Override
-	protected void fixupOriginalPath(Composite composite) {
-		// This is to allow the stack editor panel to have access.
-		super.fixupOriginalPath(composite);
-	}
-
-	@Override
-	protected long getCompositeID() {
-		// This is to allow the stack editor panel to have access.
-		return super.getCompositeID();
-	}
-
-	protected void refresh() {
+    protected void refresh() {
 		if (isLoaded()) {
 			OffsetPairs offsetSelection = getRelOffsetSelection();
 			refreshComponents();

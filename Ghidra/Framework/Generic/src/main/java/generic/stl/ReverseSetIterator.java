@@ -78,9 +78,5 @@ public class ReverseSetIterator<T> extends SetIterator<T> {
 		ReverseSetIterator<?> other = (ReverseSetIterator)obj;
 		return tree == other.tree && node == other.node;
 	}
-	@Override
-	public int hashCode() {
-		return tree.hashCode();
-	}
 
 }

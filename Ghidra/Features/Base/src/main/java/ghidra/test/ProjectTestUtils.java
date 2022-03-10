@@ -37,7 +37,7 @@ import ghidra.util.exception.*;
 public class ProjectTestUtils {
 
 	/** Names that can be ignored when deleting files during cleanup */
-	private static Set<String> ignoredDeleteNames = new HashSet<>(Arrays.asList("application.log"));
+	private static Set<String> ignoredDeleteNames = new HashSet<>(List.of("application.log"));
 
 	/**
 	 * Open the project for the given directory and name.

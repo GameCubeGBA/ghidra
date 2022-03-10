@@ -109,12 +109,7 @@ public class Img4FileSystem extends GFileSystemBase {
 		}
 	}
 
-	@Override
-	public void close() throws IOException {
-		super.close();
-	}
-
-	@Override
+    @Override
 	public ByteProvider getByteProvider(GFile file, TaskMonitor monitor)
 			throws IOException, CancelledException {
 		if (dataFileList.contains(file)) {

@@ -141,13 +141,7 @@ public class WindowsResourceReferenceAnalyzer extends AbstractAnalyzer {
 		return new PrintWriter(System.out);
 	}
 
-	@Override
-	public boolean removed(Program program, AddressSetView set, TaskMonitor monitor, MessageLog log)
-			throws CancelledException {
-		return false;
-	}
-
-	@Override
+    @Override
 	public void registerOptions(Options options, Program program) {
 		options.registerOption(OPTION_NAME_CREATE_BOOKMARKS, createBookmarksEnabled, null,
 			OPTION_DESCRIPTION_CREATE_BOOKMARKS);

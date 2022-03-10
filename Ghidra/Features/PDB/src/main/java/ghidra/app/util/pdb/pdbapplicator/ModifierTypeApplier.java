@@ -38,13 +38,7 @@ public class ModifierTypeApplier extends MsTypeApplier {
 		super(applicator, msType);
 	}
 
-	//==============================================================================================
-	@Override
-	void deferredApply() throws PdbException, CancelledException {
-		// Do nothing.  Already applied.  Just needs late resolve
-	}
-
-	//==============================================================================================
+    //==============================================================================================
 	@Override
 	BigInteger getSize() {
 		if (modifiedTypeApplier == null) {

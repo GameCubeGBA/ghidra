@@ -37,12 +37,7 @@ public class EditDataTypeAction extends AbstractDecompilerAction {
 		setPopupMenuData(new MenuData(new String[] { "Edit Data Type" }, "Decompile"));
 	}
 
-	@Override
-	public boolean isValidContext(ActionContext context) {
-		return (context instanceof DecompilerActionContext);
-	}
-
-	private boolean hasCustomEditorForBaseDataType(PluginTool tool, DataType dataType) {
+    private boolean hasCustomEditorForBaseDataType(PluginTool tool, DataType dataType) {
 		DataType baseDataType = DataTypeUtils.getBaseDataType(dataType);
 		final DataTypeManagerService service = tool.getService(DataTypeManagerService.class);
 		return baseDataType != null && service.isEditable(baseDataType);

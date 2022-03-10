@@ -72,10 +72,4 @@ public abstract class AbstractPublic32MsSymbol extends AbstractPublicMsSymbol {
 		return ((PublicSymbolInternals32) internals).isMicrosoftIntermediateLanguage();
 	}
 
-	@Override
-	public void emit(StringBuilder builder) {
-		builder.append(getSymbolTypeName());
-		internals.emit(builder);
-	}
-
 }

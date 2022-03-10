@@ -38,13 +38,7 @@ public abstract class MatchesPatternTextFilter extends AbstractPatternTextFilter
 		return pattern.matcher(text).matches();
 	}
 
-	@Override
-	public int hashCode() {
-		// not meant to put in hashing structures; the data for equals may change over time
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
+    @Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;

@@ -105,8 +105,4 @@ public class UniversalBinaryFileSystem extends GFileSystemBase {
 			file.getFSRL());
 	}
 
-	@Override
-	public void close() throws IOException {
-		super.close();
-	}
 }

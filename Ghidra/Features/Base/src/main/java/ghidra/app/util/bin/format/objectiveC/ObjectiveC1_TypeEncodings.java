@@ -505,7 +505,7 @@ public final class ObjectiveC1_TypeEncodings {
 			return getUniqueAnonymousTypeName(type);
 		}
 
-		int endCompositePos = buffer.indexOf("" + endCompositeChar);
+		int endCompositePos = buffer.indexOf(String.valueOf(endCompositeChar));
 		int equalPos = buffer.indexOf("=");
 
 		if (equalPos >= 0 && equalPos < endCompositePos) {

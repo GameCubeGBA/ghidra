@@ -618,12 +618,7 @@ public class DataTypePreviewPlugin extends ProgramPlugin {
 			return "Datatype Preview";
 		}
 
-		@Override
-		public boolean isCellEditable(int row, int column) {
-			return false;
-		}
-
-		@Override
+        @Override
 		public String getColumnName(int col) {
 			if (col == NAME_COL) {
 				return "Name";

@@ -79,17 +79,7 @@ public class VariableHeightPanel extends JPanel implements Scrollable {
 		});
 	}
 
-	@Override
-	public void setBounds(int x, int y, int width, int height) {
-		super.setBounds(x, y, width, height);
-	}
-
-	@Override
-	public void setBounds(Rectangle r) {
-		super.setBounds(r);
-	}
-
-	/**
+    /**
 	 * This method is in place because the clients of this panel are not the ones that 
 	 * construct this panel and thus cannot create the desired type of layout at construction time.
 	 * <b>This method has no effect if this panel was constructed with {@code pack} set to

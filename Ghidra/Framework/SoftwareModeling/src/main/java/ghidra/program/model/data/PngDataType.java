@@ -57,12 +57,7 @@ public class PngDataType extends BuiltIn implements Dynamic, Resource {
 		return -1;
 	}
 
-	@Override
-	public boolean canSpecifyLength() {
-		return false;
-	}
-
-	@Override
+    @Override
 	public DataType clone(DataTypeManager dtm) {
 		if (dtm == getDataTypeManager()) {
 			return this;

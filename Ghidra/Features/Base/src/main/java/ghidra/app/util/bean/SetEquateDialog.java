@@ -542,12 +542,7 @@ public class SetEquateDialog extends DialogComponentProvider {
 		return (Enum) dataTypeManager.findDataTypeForID(id);
 	}
 
-	@Override
-	protected void cancelCallback() {
-		close();
-	}
-
-	@Override
+    @Override
 	public void dispose() {
 		suggestedEquatesTable.dispose();
 		filterPanel.dispose();

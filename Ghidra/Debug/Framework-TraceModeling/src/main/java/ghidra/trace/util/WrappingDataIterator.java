@@ -27,12 +27,7 @@ public class WrappingDataIterator implements DataIterator {
 		this.it = it;
 	}
 
-	@Override
-	public Iterator<Data> iterator() {
-		return this;
-	}
-
-	@Override
+    @Override
 	public boolean hasNext() {
 		return it.hasNext();
 	}

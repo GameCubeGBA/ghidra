@@ -137,28 +137,7 @@ public class MissingBuiltInDataType extends DataTypeImpl implements Dynamic {
 		return clone(dtm);
 	}
 
-	@Override
-	public void dataTypeDeleted(DataType dt) {
-	}
-
-	@Override
-	public void dataTypeNameChanged(DataType dt, String oldName) {
-	}
-
-	@Override
-	public void dataTypeReplaced(DataType oldDt, DataType newDt) {
-	}
-
-	@Override
-	public void dataTypeSizeChanged(DataType dt) {
-	}
-
-	@Override
-	public boolean dependsOn(DataType dt) {
-		return false;
-	}
-
-	@Override
+    @Override
 	public boolean isEquivalent(DataType dt) {
 		if (dt == null) {
 			return false;
@@ -173,20 +152,7 @@ public class MissingBuiltInDataType extends DataTypeImpl implements Dynamic {
 			((MissingBuiltInDataType) dt).missingBuiltInClassPath);
 	}
 
-	@Override
-	public void setCategoryPath(CategoryPath path) throws DuplicateNameException {
-	}
-
-	@Override
-	public void setName(String name) throws InvalidNameException {
-	}
-
-	@Override
-	public void setNameAndCategory(CategoryPath path, String name)
-			throws InvalidNameException, DuplicateNameException {
-	}
-
-	@Override
+    @Override
 	public long getLastChangeTime() {
 		return NO_SOURCE_SYNC_TIME;
 	}

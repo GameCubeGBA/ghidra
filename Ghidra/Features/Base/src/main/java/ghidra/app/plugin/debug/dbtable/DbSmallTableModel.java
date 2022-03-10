@@ -118,12 +118,7 @@ public class DbSmallTableModel extends AbstractSortedTableModel<DBRecord> {
 		return table.getRecordCount();
 	}
 
-	@Override
-	public boolean isCellEditable(int rowIndex, int columnIndex) {
-		return false;
-	}
-
-	@Override
+    @Override
 	public Object getColumnValueForRow(DBRecord rec, int columnIndex) {
 		if (columnIndex == 0) { // key column
 			return columns.get(columnIndex).getKeyValue(rec);

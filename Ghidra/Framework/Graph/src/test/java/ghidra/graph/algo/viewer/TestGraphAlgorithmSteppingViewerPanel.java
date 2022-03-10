@@ -281,12 +281,7 @@ public class TestGraphAlgorithmSteppingViewerPanel<V, E extends GEdge<V>> extend
 			return (VisualGraph<AlgorithmTestSteppingVertex<V>, AlgorithmTestSteppingEdge<V>>) getGraph();
 		}
 
-		@Override
-		protected boolean isCondensedLayout() {
-			return false;
-		}
-
-		@Override
+        @Override
 		protected GridLocationMap<AlgorithmTestSteppingVertex<V>, AlgorithmTestSteppingEdge<V>> performInitialGridLayout(
 				VisualGraph<AlgorithmTestSteppingVertex<V>, AlgorithmTestSteppingEdge<V>> g)
 				throws CancelledException {

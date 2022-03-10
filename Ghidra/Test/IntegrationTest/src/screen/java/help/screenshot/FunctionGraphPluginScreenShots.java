@@ -576,7 +576,7 @@ public class FunctionGraphPluginScreenShots extends AbstractFunctionGraphTest {
 	private void cropVertices(FGVertex... vertices) {
 
 		FGPrimaryViewer viewer = getPrimaryGraphViewer();
-		List<FGVertex> list = Arrays.asList(vertices);
+		List<FGVertex> list = List.of(vertices);
 		Rectangle bounds = GraphViewerUtils.getBoundsForVerticesInLayoutSpace(viewer, list);
 		bounds = GraphViewerUtils.translateRectangleFromLayoutSpaceToViewSpace(viewer, bounds);
 
@@ -763,7 +763,7 @@ public class FunctionGraphPluginScreenShots extends AbstractFunctionGraphTest {
 	}
 
 	private void pickVertices(FGVertex... vertices) {
-		pickVertices(new HashSet<>(Arrays.asList(vertices)));
+		pickVertices(new HashSet<>(List.of(vertices)));
 	}
 
 	private JComponent getComponent(final FGVertex vertex) {

@@ -127,8 +127,8 @@ public class TipOfTheDayPlugin extends Plugin implements FrontEndOnly {
 	}
 
 	private void writePreferences(int tipIndex, boolean showTips) {
-		Preferences.setProperty(TIP_INDEX, "" + tipIndex);
-		Preferences.setProperty(SHOW_TIPS, "" + showTips);
+		Preferences.setProperty(TIP_INDEX, String.valueOf(tipIndex));
+		Preferences.setProperty(SHOW_TIPS, String.valueOf(showTips));
 		Preferences.store();
 	}
 }

@@ -281,12 +281,7 @@ public abstract class BiDirectionDataType extends StructureDataType
 		return offset;
 	}
 
-	@Override
-	public int getNumComponents() {
-		return numComponents;
-	}
-
-	@Override
+    @Override
 	public DataTypeComponentImpl insertAtOffset(int offset, DataType dataType, int length,
 			String newName, String comment) throws IllegalArgumentException {
 		if (offset < splitOffset - negativeLength || offset >= splitOffset + positiveLength) {
@@ -590,12 +585,7 @@ public abstract class BiDirectionDataType extends StructureDataType
 			"BiDirectionDataType.dataTypeReplaced() not implemented.");
 	}
 
-	@Override
-	public DataTypeComponent[] getDefinedComponents() {
-		return components.toArray(new DataTypeComponent[0]);
-	}
-
-	@Override
+    @Override
 	public DataTypeComponent[] getComponents() {
 		DataTypeComponent[] comps = new DataTypeComponent[numComponents];
 		for (int i = 0; i < comps.length; i++) {

@@ -36,7 +36,7 @@ public class ConvertToUnsignedDecimalAction extends AbstractConvertAction {
 
 	@Override
 	protected String convertToString(Program program, Scalar scalar, boolean isData) {
-		return "" + scalar.getUnsignedValue();
+		return String.valueOf(scalar.getUnsignedValue());
 	}
 
 	@Override

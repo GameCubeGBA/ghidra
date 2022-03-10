@@ -98,13 +98,7 @@ public abstract class AbstractMemSearchTest extends AbstractProgramBasedTest {
 		selectRadioButton("Binary");
 	}
 
-	@Override
-	@After
-	public void tearDown() throws Exception {
-		env.dispose();
-	}
-
-	@Override
+    @Override
 	protected Program getProgram() throws Exception {
 		return buildProgram();
 	}

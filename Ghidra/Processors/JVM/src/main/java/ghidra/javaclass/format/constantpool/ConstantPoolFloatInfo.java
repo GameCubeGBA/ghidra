@@ -82,7 +82,7 @@ public class ConstantPoolFloatInfo extends AbstractConstantPoolInfoJava {
 
 	@Override
 	public String toString() {
-		return "" + getValue();
+		return String.valueOf(getValue());
 	}
 
 	@Override

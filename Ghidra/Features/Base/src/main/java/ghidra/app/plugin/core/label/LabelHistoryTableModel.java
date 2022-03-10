@@ -99,15 +99,7 @@ class LabelHistoryTableModel extends AbstractSortedTableModel<LabelHistory> {
 		return columnNames[column];
 	}
 
-	/* (non Javadoc)
-	 * @see javax.swing.table.TableModel#isCellEditable(int, int)
-	 */
-	@Override
-	public boolean isCellEditable(int rowIndex, int columnIndex) {
-		return false;
-	}
-
-	int getDefaultSortColumn() {
+    int getDefaultSortColumn() {
 		if (showAddress) {
 			return ADDRESS_COL;
 		}

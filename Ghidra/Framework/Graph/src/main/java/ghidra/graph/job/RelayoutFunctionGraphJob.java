@@ -52,17 +52,7 @@ public class RelayoutFunctionGraphJob<V extends VisualVertex, E extends VisualEd
 		return newAnimator;
 	}
 
-	@Override
-	protected void finished() {
-		super.finished();
-
-// TODO it is jarring to re-fit the graph if the user was zoomed in.  I'm torn on what the right
-//		thing to do is
-//		FunctionGraphView view = controller.getView();
-//		FunctionGraphUtils.fitGraphToViewerNow(view.getPrimaryGraphViewer(), true);
-	}
-
-	@Override
+    @Override
 	protected void initializeVertexLocations() {
 		//
 		// this may be the same as the current locations, or they may be updated, depending upon

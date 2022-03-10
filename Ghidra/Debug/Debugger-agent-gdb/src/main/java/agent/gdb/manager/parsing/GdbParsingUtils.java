@@ -50,7 +50,7 @@ public enum GdbParsingUtils {
 				buf.position(buf.position() + length);
 				return result;
 			}
-			throw new GdbParseError("" + pat, buf);
+			throw new GdbParseError(String.valueOf(pat), buf);
 		}
 
 		/**

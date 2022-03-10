@@ -222,7 +222,7 @@ public abstract class DefaultVisualGraph<V extends VisualVertex,
 		boolean added = super.addVertex(v);
 		if (added) {
 			initializeLocation(v);
-			verticesAdded(Arrays.asList(v));
+			verticesAdded(List.of(v));
 		}
 
 		return added;
@@ -232,7 +232,7 @@ public abstract class DefaultVisualGraph<V extends VisualVertex,
 	public boolean addEdge(E edge, Pair<? extends V> endpoints, EdgeType edgeType) {
 		boolean added = super.addEdge(edge, endpoints, edgeType);
 		if (added) {
-			fireEdgesAdded(Arrays.asList(edge));
+			fireEdgesAdded(List.of(edge));
 		}
 		return added;
 	}
@@ -241,7 +241,7 @@ public abstract class DefaultVisualGraph<V extends VisualVertex,
 	public boolean removeVertex(V v) {
 		boolean removed = super.removeVertex(v);
 		if (removed) {
-			verticesRemoved(Arrays.asList(v));
+			verticesRemoved(List.of(v));
 		}
 		return removed;
 	}
@@ -262,7 +262,7 @@ public abstract class DefaultVisualGraph<V extends VisualVertex,
 	public boolean removeEdge(E edge) {
 		boolean removed = super.removeEdge(edge);
 		if (removed) {
-			fireEdgesRemoved(Arrays.asList(edge));
+			fireEdgesRemoved(List.of(edge));
 		}
 		return removed;
 	}

@@ -65,15 +65,7 @@ public class Undefined8DataType extends Undefined {
 		return "Undefined Quad Word";
 	}
 
-	/**
-	 * 
-	 * @see ghidra.program.model.data.DataType#getMnemonic(Settings)
-	 */
-	public String getMnemonic(Settings settings) {
-		return name;
-	}
-
-	private long getValue(MemBuffer buf) throws MemoryAccessException {
+    private long getValue(MemBuffer buf) throws MemoryAccessException {
 		return buf.getLong(0);
 	}
 

@@ -52,12 +52,7 @@ public class JdiModelTargetModule extends JdiModelTargetObjectReference {
 		), "Initialized");
 	}
 
-	@Override
-	public CompletableFuture<Void> init() {
-		return CompletableFuture.completedFuture(null);
-	}
-
-	@Override
+    @Override
 	public String getDisplay() {
 		return module == null ? super.getDisplay() : getUniqueId(module);
 	}
