@@ -71,6 +71,11 @@ public class StackEditorProvider extends CompositeEditorProvider implements Doma
 		return function.getName() + " (" + pgm.getDomainFile().getName() + ")";
 	}
 
+	@Override
+	protected Plugin getPlugin() {
+		return plugin;
+	}
+	
     @Override
 	public String getName() {
 		return "Stack Editor";
