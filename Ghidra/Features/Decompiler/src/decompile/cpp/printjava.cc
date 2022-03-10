@@ -75,7 +75,7 @@ void PrintJava::pushTypeStart(const Datatype *ct,bool noident)
 
 {
   int4 arrayCount = 0;
-  for(;;) {
+  for (;;) {
     if (ct->getMetatype() == TYPE_PTR) {
       if (isArrayType(ct))
 	arrayCount += 1;

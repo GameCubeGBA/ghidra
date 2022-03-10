@@ -287,7 +287,7 @@ public class RecoverySnapshotMgrPlugin extends Plugin
 
 			ArrayList<DomainFile> unhandledList = new ArrayList<>();
 			DomainFile df = null;
-			while (true) {
+			for (;;) {
 				synchronized (RecoverySnapshotMgrPlugin.this) {
 					if (pendingSnapshotSet.isEmpty()) {
 						break;

@@ -107,7 +107,7 @@ public class CachedAddressSetView implements AddressSetView {
 			known.add(minAddress, min);
 		}
 		AddressRangeIterator rangesForward = delegate.getAddressRanges(min, true);
-		while (true) {
+		for (;;) {
 			if (!rangesForward.hasNext()) {
 				known.add(min, maxAddress);
 				break;

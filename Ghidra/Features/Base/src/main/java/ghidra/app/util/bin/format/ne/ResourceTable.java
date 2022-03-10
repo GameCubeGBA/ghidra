@@ -49,7 +49,7 @@ public class ResourceTable {
         alignmentShiftCount = reader.readNextShort();
 
         ArrayList<ResourceType> typeList = new ArrayList<ResourceType>();
-        while (true) {
+        for (;;) {
             ResourceType rt = new ResourceType(reader, this);
             if (rt.getTypeID() == 0) break;
             typeList.add(rt);
@@ -58,7 +58,7 @@ public class ResourceTable {
         typeList.toArray(types);
 
         ArrayList<ResourceName> nameList = new ArrayList<ResourceName>();
-        while (true) {
+        for (;;) {
             ResourceName rn = new ResourceName(reader);
             if (rn.getLength() == 0) break;
             nameList.add(rn);

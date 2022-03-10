@@ -345,7 +345,7 @@ class VersionFile {
 		}
 		nextMapEntryOffset = FIRST_ENTRY_OFFSET;
 		
-		while (true) {
+		for (;;) {
 			if (nextMapEntryOffset > maxOffset) {
 				// Get next map buffer
 				mapIndex = lastMapBuffer.getInt(NEXT_BUFFER_INDEX_OFFSET);
@@ -431,7 +431,7 @@ class VersionFile {
 		int offset = FIRST_ENTRY_OFFSET;
 		int entryIx = 0;
 		
-		while (true) {
+		for (;;) {
 			if (offset > maxOffset) {
 				// Get next list buffer
 				listIndex = listBuffer.getInt(NEXT_BUFFER_INDEX_OFFSET);

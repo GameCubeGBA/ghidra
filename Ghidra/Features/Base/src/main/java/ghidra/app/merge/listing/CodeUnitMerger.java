@@ -449,7 +449,7 @@ class CodeUnitMerger extends AbstractListingMerger {
 	private Instruction findLastDelaySlot(Instruction instr) {
 		Instruction lastInstr = instr;
 		try {
-			while (true) {
+			for (;;) {
 				Address nextAddr = lastInstr.getMaxAddress().addNoWrap(1);
 				Instruction checkInstr = instr.getProgram().getListing().getInstructionAt(nextAddr);
 				if (checkInstr == null || !checkInstr.isInDelaySlot()) {

@@ -3483,7 +3483,7 @@ void mainloop(IfaceStatus *status)
 
 {
   IfaceDecompData *dcp = (IfaceDecompData *)status->getData("decompile");
-  for(;;) {
+  for (;;) {
     while(!status->isStreamFinished()) {
       status->writePrompt();
       status->optr->flush();

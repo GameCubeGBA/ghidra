@@ -288,7 +288,7 @@ public class BoundedBufferedReader extends Reader {
 			ensureOpen();
 			boolean omitLF = ignoreLF || skipLF;
 
-			while (true) {
+			for (;;) {
 
 				if (nextChar >= nChars)
 					fill();

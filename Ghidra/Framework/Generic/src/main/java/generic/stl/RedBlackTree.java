@@ -198,7 +198,7 @@ public class RedBlackTree<K,V> {
         }
         RedBlackNode<K,V> node = root;
 
-        while (true) {
+        for (;;) {
         	int comp = comparator.compare(key, node.key);
             if (comp == 0 && !allowDuplicateKeys) {
                 node.value = value;

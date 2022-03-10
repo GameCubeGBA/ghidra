@@ -62,7 +62,7 @@ public class BinaryToAsciiScript extends GhidraScript {
 		byte [] buffer = new byte[4096];
 
 		int bytesWritten = 0;
-		while (true) {
+		for (;;) {
 			if (monitor.isCancelled()) {
 				break;
 			}

@@ -93,7 +93,7 @@ public class ProgramMappedMemory {
 			throw new LowlevelError(
 				"Illegal memory write request: " + addr + ", length=" + size + " bytes");
 		}
-		while (true) {
+		for (;;) {
 			int chunkSize = remaining;
 			AddressRangeIterator it = initializedAddressSet.getAddressRanges(nextAddr, true);
 			AddressRange range = it.hasNext() ? it.next() : null;
@@ -173,7 +173,7 @@ public class ProgramMappedMemory {
 			throw new LowlevelError(
 				"Illegal memory read request: " + addr + ", length=" + size + " bytes");
 		}
-		while (true) {
+		for (;;) {
 			int chunkSize = remaining;
 
 			///

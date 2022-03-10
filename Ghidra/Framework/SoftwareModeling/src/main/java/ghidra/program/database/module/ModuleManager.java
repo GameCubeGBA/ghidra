@@ -325,7 +325,7 @@ class ModuleManager {
 		String newFragmentName = baseName;
 		long counter = 0;
 
-		while (true) {
+		for (;;) {
 			try {
 				return (FragmentDB) root.createFragment(newFragmentName);
 			}

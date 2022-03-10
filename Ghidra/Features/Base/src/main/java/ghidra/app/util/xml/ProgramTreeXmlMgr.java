@@ -138,7 +138,7 @@ class ProgramTreeXmlMgr {
 				// unique "one-up" name
 				//
 				int oneUp = 1;
-				while (true) {
+				for (;;) {
 					try {
 						root = listing.createRootModule(treeName + "(" + oneUp + ")");
 						break; // we located a unique name...

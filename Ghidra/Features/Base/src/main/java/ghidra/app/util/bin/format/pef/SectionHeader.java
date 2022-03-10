@@ -223,7 +223,7 @@ public class SectionHeader implements StructConverter {
 
 	private int unpackNextValue(InputStream input) throws IOException {
 		int unpacked = 0;
-		while (true) {
+		for (;;) {
 			unpacked <<= 7;
 			int value = input.read();
 			unpacked += (value & 0x7f);

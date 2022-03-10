@@ -467,7 +467,7 @@ public class GBinaryReader {
      */
     public String readAsciiString(long index) throws IOException {
         StringBuilder buffer = new StringBuilder();
-        while (true) {
+        for (;;) {
             byte b = provider.readByte(index++);
             if ((b >= 32) && (b <= 126)) {
                 buffer.append((char)b);

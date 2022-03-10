@@ -623,7 +623,7 @@ public class ThreadedTableTest extends AbstractThreadedTableTest {
 
 		int expectedIndex = 0;
         try (BufferedReader actualReader = new BufferedReader(new FileReader(actualFile))) {
-            while (true) {
+            for (;;) {
                 String line = actualReader.readLine();
                 if (line == null) {
                     break;

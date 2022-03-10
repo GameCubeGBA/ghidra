@@ -142,7 +142,7 @@ public abstract class MemorySectionResolver {
 			int preferredIndex) {
 		String sectionName = section.getSectionName();
 		int index = preferredIndex;
-		while (true) {
+		for (;;) {
 			String name = sectionName;
 			if (index >= 0) {
 				name += "." + index;

@@ -853,7 +853,7 @@ public class DbgEngTest extends AbstractGhidraHeadlessIntegrationTest {
 
 			cb.lastReg = null;
 			//while (cb.lastReg == null) {
-			while (true) {
+			for (;;) {
 				if (cb.currentThread != 0) {
 					client.getControl().execute("~* r rip");
 				}

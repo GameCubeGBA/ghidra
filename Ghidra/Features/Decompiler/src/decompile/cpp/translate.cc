@@ -163,7 +163,7 @@ bool JoinRecord::operator<(const JoinRecord &op2) const
     return (unified.size < op2.unified.size);
   // Lexigraphic sort on pieces
   int4 i=0;
-  for(;;) {
+  for (;;) {
     if (pieces.size()==i) {
       return (op2.pieces.size()>i); // If more pieces in op2, it is bigger (return true), if same number this==op2, return false
     }

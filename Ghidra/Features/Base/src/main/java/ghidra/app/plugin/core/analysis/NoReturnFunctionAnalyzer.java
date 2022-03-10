@@ -187,7 +187,7 @@ public class NoReturnFunctionAnalyzer extends AbstractAnalyzer {
 		for (ResourceFile file : files) {
 
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
-                while (true) {
+                for (;;) {
                     String line = reader.readLine();
                     if (line == null) {
                         break;

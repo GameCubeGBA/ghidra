@@ -114,7 +114,7 @@ public class DelayImportDescriptor implements StructConverter {
 			thunkPtr = ntHeader.vaToPointer(ptr);
 		}
 
-		while (true) {
+		for (;;) {
 			if (!ntHeader.checkPointer(thunkPtr)) {
 				Msg.error(this, "Invalid thunkPtr for "+Long.toHexString(ptr));
 				return null;

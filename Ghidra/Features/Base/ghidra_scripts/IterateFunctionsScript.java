@@ -41,7 +41,7 @@ public class IterateFunctionsScript extends GhidraScript {
 		Function function = getFirstFunction();
 
 		int count = 0;
-		while (true) {
+		for (;;) {
 
 			if (monitor.isCancelled()) {
 				break;
@@ -68,7 +68,7 @@ public class IterateFunctionsScript extends GhidraScript {
 		Function function = getLastFunction();
 
 		int count = 0;
-		while (true) {
+		for (;;) {
 
 			if (monitor.isCancelled()) {
 				break;

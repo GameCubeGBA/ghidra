@@ -166,7 +166,7 @@ public class ProgramAddressFactory extends DefaultAddressFactory {
 			return baseOverlayName;
 		}
 		int index = 1;
-		while (true) {
+		for (;;) {
 			String revisedName = baseOverlayName + "." + index++;
 			if (getAddressSpace(revisedName) == null) {
 				return revisedName;

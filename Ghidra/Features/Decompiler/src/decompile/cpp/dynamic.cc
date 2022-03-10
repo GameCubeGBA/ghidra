@@ -107,7 +107,7 @@ void DynamicHash::buildVnUp(const Varnode *vn)
   
 {
   const PcodeOp *op;
-  for(;;) {
+  for (;;) {
     if (!vn->isWritten()) return;
     op = vn->getDef();
     if (transtable[op->code()] != 0) break; // Do not ignore this operation

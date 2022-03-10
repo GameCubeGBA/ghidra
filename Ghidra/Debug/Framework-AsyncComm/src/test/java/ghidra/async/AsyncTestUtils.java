@@ -32,7 +32,7 @@ public interface AsyncTestUtils {
 		// Do this instead of plain ol' .get(time), to ease debugging
 		// When suspended in .get(time), you can't introspect much, otherwise
 		long started = System.currentTimeMillis();
-		while (true) {
+		for (;;) {
 			try {
 				return future.get(100, TimeUnit.MILLISECONDS);
 			}

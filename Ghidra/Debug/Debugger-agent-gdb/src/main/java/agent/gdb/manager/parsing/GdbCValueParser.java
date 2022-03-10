@@ -267,7 +267,7 @@ public class GdbCValueParser extends AbstractGdbParser {
 
 	public GdbCompositeValue parseCompositeAfterOpen() throws GdbParseError {
 		GdbCompositeValue.Builder result = GdbCompositeValue.builder();
-		while (true) {
+		for (;;) {
 			String id = match(ID, true);
 			match(EQUALS, true);
 			GdbCValue val = parseValue();
@@ -299,7 +299,7 @@ public class GdbCValueParser extends AbstractGdbParser {
 
 	public GdbArrayValue parseArrayAfterOpen() throws GdbParseError {
 		GdbArrayValue.Builder result = GdbArrayValue.builder();
-		while (true) {
+		for (;;) {
 			GdbCValue val = parseValue();
 			result.add(val);
 

@@ -21,7 +21,7 @@ public final class GFileUtilityMethods {
         try (OutputStream outputStream = new FileOutputStream(tempOutputFile)) {
             int nWritten = 0;
             byte[] buffer = new byte[8192];
-            while (true) {
+            for (;;) {
                 int nRead = inputStream.read(buffer);
                 if (nRead == -1) {
                     break;

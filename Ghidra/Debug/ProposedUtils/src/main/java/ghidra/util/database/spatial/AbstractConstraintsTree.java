@@ -336,7 +336,7 @@ public abstract class AbstractConstraintsTree< //
 			}
 
 			private DR findNext() {
-				while (true) {
+				for (;;) {
 					DBTreeRecord<?, ? extends NS> rec = queue.poll();
 					if (rec == null) {
 						return null;

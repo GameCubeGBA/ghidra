@@ -33,7 +33,7 @@ public class ResidentNameTable {
         reader.setPointerIndex(Conv.shortToInt(index));
 
         ArrayList<LengthStringOrdinalSet> list = new ArrayList<LengthStringOrdinalSet>();
-        while (true) {
+        for (;;) {
             LengthStringOrdinalSet lsos = new LengthStringOrdinalSet(reader);
             if (lsos.getLength() == 0) break;
             list.add(lsos);

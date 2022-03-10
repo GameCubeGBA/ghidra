@@ -65,7 +65,7 @@ int4 ArchitectureGhidra::readToAnyBurst(istream &s)
 {
   int4 c;
 
-  for(;;) {
+  for (;;) {
     do {
       c = s.get();
     } while(c>0);

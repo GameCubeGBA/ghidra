@@ -89,7 +89,7 @@ void GhidraTranslate::getUserOpNames(vector<string> &res) const
 
 {
   int4 i=0;
-  for(;;) {
+  for (;;) {
     string nm = glb->getUserOpName(i);	// Ask for the next user-defined operator
     if (nm.size()==0) break;
     res.push_back(nm);

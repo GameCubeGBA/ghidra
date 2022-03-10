@@ -198,7 +198,7 @@ public class JavaSourceFile {
 		// start looking backwards until we hit an equals or semicolon
 		line = getLine(--currentLineNumber);
 		text = line.getText();
-		while (true) {
+		for (;;) {
 			equalsMatcher.scanLine(text);
 			if (equalsMatcher.foundToken()) {
 				return line; // an assignment means the start of a line
@@ -311,13 +311,12 @@ public class JavaSourceFile {
 	}
 
 	private JavaSourceLine findNextNonBlankLine(int lineNumber) {
-		do {
+		for (;;) {
 			JavaSourceLine line = getLine(lineNumber++);
 			if (!line.getText().trim().isEmpty()) {
 				return line;
 			}
 		}
-		while (true);
 	}
 
 	public JavaSourceLine getLine(int oneBasedLineNumber) {

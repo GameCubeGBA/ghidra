@@ -232,7 +232,7 @@ public class LaunchSupport {
 
 		File javaHomeDir = null;
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-		while (true) {
+		for (;;) {
 			boolean supportsDialog =
 				!GraphicsEnvironment.isHeadless() && !(javaFinder instanceof MacJavaFinder);
 			System.out.print("Enter path to " + javaName + " home directory");

@@ -712,7 +712,7 @@ FlowBlock *FlowBlock::findCommonBlock(FlowBlock *bl1,FlowBlock *bl2)
   common = (FlowBlock *)0;
   b1 = bl1;
   b2 = bl2;
-  for(;;) {
+  for (;;) {
     if (b2 == (FlowBlock *)0) {
       while(b1 != (FlowBlock *)0) {
 	if (b1->isMark()) {

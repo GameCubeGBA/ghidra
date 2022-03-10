@@ -282,7 +282,7 @@ public class EmulatorTestRunner {
 				safetyTimer.setRepeats(false);
 				safetyTimer.start();
 			}
-			while (true) {
+			for (;;) {
 				callOtherCount = 0;
 
 				boolean success;
@@ -415,7 +415,7 @@ public class EmulatorTestRunner {
 		emu.addMemoryAccessFilter(memoryFilter);
 		try {
 
-			while (true) {
+			for (;;) {
 				if (!emuHelper.step(TaskMonitor.DUMMY)) {
 					lastError = emuHelper.getLastError();
 

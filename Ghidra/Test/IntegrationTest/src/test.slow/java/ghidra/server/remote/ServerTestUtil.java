@@ -225,7 +225,7 @@ public class ServerTestUtil {
 
 		try {
 			int i = 0;
-			while (true) {
+			for (;;) {
 				++i;
 				ClientUtil.getRepositoryServer(LOCALHOST, 0, true);
 				if ((i % 10) == 0) {

@@ -60,7 +60,7 @@ int main(int argc, char ** argv) {
     goodbye();
     bob(42, 2.18, 'x');
     printf("mypow: %f\n", mypow(2,3));
-    while (1) {
+    for (;;) {
         printf("looper=%d\n", ++looper);
         sleep(5);
     }

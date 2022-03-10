@@ -652,7 +652,7 @@ public class Repository implements FileSystemListener, RepositoryLogger {
 		boolean allowAnonymous = false;
 		try (BufferedReader reader = new BufferedReader(new FileReader(userAccessFile))) {
 			String line = "";
-			while (true) {
+			for (;;) {
 				line = reader.readLine();
 				if (line == null) {
 					break;

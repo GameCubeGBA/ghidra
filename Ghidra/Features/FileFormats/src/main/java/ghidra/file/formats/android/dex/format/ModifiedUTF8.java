@@ -29,7 +29,7 @@ public final class ModifiedUTF8 {
 	public final static String decode(InputStream in, char[] out)
 			throws UTFDataFormatException, IOException {
 		int s = 0;
-		while (true) {
+		for (;;) {
 			char a = (char) (in.read() & 0xff);
 			if (a == 0) {
 				return new String(out, 0, s);

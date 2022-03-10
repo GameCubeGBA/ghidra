@@ -333,7 +333,7 @@ public abstract class PCodeTestAbstractControlBlock {
 
 			Msg.info(this, "Loading FunctionInfo array at " + functionInfoAddress);
 
-			while (true) {
+			for (;;) {
 				// Read function table
 				memBuffer.setPosition(functionInfoAddress);
 

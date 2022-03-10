@@ -346,7 +346,7 @@ string FileManage::discoverGhidraRoot(const char *argv0)
   int skiplevel = 0;
   bool isAbs = isAbsolutePath(cur);
 
-  for(;;) {
+  for (;;) {
     int sizebefore = cur.size();
     splitPath(cur,cur,base);
     if (cur.size() == sizebefore) break;
@@ -363,7 +363,7 @@ string FileManage::discoverGhidraRoot(const char *argv0)
     FileManage curdir;
     curdir.addCurrentDir();
     cur = curdir.pathlist[0];
-    for(;;) {
+    for (;;) {
       int sizebefore = cur.size();
       splitPath(cur,cur,base);
       if (cur.size() == sizebefore) break;

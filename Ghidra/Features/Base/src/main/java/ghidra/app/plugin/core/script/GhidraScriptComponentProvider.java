@@ -398,7 +398,7 @@ public class GhidraScriptComponentProvider extends ComponentProviderAdapter {
 		try (PrintWriter writer = new PrintWriter(temp.getOutputStream())) {
 			try (BufferedReader reader =
 				new BufferedReader(new InputStreamReader(sourceScript.getInputStream()))) {
-				while (true) {
+				for (;;) {
 					String line = reader.readLine();
 					if (line == null) {
 						break;

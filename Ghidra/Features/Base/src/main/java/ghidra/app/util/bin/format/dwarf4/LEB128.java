@@ -205,7 +205,7 @@ public class LEB128 {
 		int nextByte = 0;
 		int shift = 0;
 		long value = 0;
-		while (true) {
+		for (;;) {
 			nextByte = reader.readNextUnsignedByte();
 			if (shift == 70 || (!isSigned && shift == 63 && nextByte > 1)) {
 				throw new IOException(

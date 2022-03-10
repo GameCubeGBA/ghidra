@@ -1169,7 +1169,7 @@ bool ConstraintOr::step(UnifyState &state)
   }
   else
     cur = getConstraint(stateind);
-  for(;;) {
+  for (;;) {
     if (cur->step(state)) return true;
     if (!traverse->step()) break;
     stateind = traverse->getState();

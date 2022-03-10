@@ -135,7 +135,7 @@ public class OverlappingObjectIterator<L, R> extends AbstractPeekableIterator<Pa
 			}
 			nextR = right.next();
 		}
-		while (true) {
+		for (;;) {
 			if (leftRanger.getMaxAddress(nextL).compareTo(rightRanger.getMinAddress(nextR)) < 0) {
 				if (!left.hasNext()) {
 					nextL = null;

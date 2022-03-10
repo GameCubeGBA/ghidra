@@ -523,7 +523,7 @@ public class SymbolManager implements SymbolTable, ManagerDB {
 			return null;
 		}
 		SymbolDB symbol = (SymbolDB) namespace.getSymbol();
-		while (true) {
+		for (;;) {
 			if (symbol.getSymbolType() == SymbolType.FUNCTION) {
 				return symbol;
 			}

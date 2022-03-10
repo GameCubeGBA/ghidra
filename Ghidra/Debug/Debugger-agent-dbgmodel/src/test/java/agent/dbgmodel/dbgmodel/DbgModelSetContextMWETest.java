@@ -313,7 +313,7 @@ public class DbgModelSetContextMWETest extends AbstractGhidraHeadlessIntegration
 			cb.dumpFrame0ViaDX();
 
 			BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-			while (true) {
+			for (;;) {
 				System.err.print(control.getPromptText());
 				//control.prompt(BitmaskSet.of(), "Hello?>");
 				String cmd = in.readLine();

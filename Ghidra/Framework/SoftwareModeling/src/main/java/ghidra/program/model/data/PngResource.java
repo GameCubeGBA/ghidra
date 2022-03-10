@@ -44,7 +44,7 @@ class PngResource {
 		int chunkCount = 0;
 		byte[] type = new byte[4];
 		int saveOffset = bufOffset;
-		while (true) {
+		for (;;) {
 			try {
 				int len = readInt();
 				if (len < 0 || len > MAX_CHUNK_SIZE) {

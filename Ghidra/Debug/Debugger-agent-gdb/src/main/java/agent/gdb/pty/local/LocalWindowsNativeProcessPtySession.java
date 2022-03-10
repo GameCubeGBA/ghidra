@@ -42,7 +42,7 @@ public class LocalWindowsNativeProcessPtySession implements PtySession {
 
 	@Override
 	public int waitExited() throws InterruptedException {
-		while (true) {
+		for (;;) {
 			switch (Kernel32.INSTANCE.WaitForSingleObject(processHandle.getNative(), -1)) {
 				case Kernel32.WAIT_OBJECT_0:
 				case Kernel32.WAIT_ABANDONED:

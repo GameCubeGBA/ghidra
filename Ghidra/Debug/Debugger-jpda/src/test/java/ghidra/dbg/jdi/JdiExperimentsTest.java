@@ -241,7 +241,7 @@ public class JdiExperimentsTest {
 
 		vm.resume();
 
-		untilHw: while (true) {
+		untilHw: for (;;) {
 			for (Event evt : vm.eventQueue().remove(1000)) {
 				Msg.debug(this, "Event: " + evt);
 				if (evt instanceof ClassPrepareEvent) {

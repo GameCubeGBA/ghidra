@@ -524,7 +524,7 @@ inline Address EmulatePcodeCache::getExecuteAddress(void) const
     breaktable.registerAddressCallback(Address(trans.getDefaultCodeSpace(),0x1D00130),&putscallback);
 
     AssemblyRaw assememit;
-    for(;;) {
+    for (;;) {
       Address addr = emulator.getExecuteAddress();
       trans.printAssembly(assememit,addr);
       emulator.executeInstruction();

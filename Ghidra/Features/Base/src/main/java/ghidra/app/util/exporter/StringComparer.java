@@ -30,7 +30,7 @@ public class StringComparer {
 
 		try (BufferedReader reader = new BufferedReader(new FileReader(actualFile))) {
 			int excess = 0;
-			while (true) {
+			for (;;) {
 				String actualLine = reader.readLine();
 				if (actualLine == null) {
 					break;

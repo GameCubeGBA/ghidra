@@ -23,7 +23,7 @@ static void iterateEnumMembers(IDiaSymbol& symbol) {
 	if (pEnum == NULL) {
 		return;
 	}
-	while (1) {
+	for (;;) {
 		if (pEnum->Next( 1, &pMember, &celt ) != S_OK ) {
 			break;
 		}
@@ -76,7 +76,7 @@ static void iterateMembers(IDiaSymbol& symbol) {
 	if (pEnum == NULL) {
 		return;
 	}
-	while (1) {
+	for (;;) {
 		CComPtr<IDiaSymbol> pMember;
 		if (pEnum->Next(1, &pMember, &celt) != S_OK ) {
 			break;
@@ -103,7 +103,7 @@ void iterateDataTypes(PDBApiContext& ctx) {
 		return;
 	}
 	printf("%S<datatypes>\n", indent(4).c_str());
-	while (1) {
+	for (;;) {
 		CComPtr<IDiaSymbol> pSymbol;
 
 		if ( pEnum->Next(1, &pSymbol, &celt) != S_OK ) {

@@ -257,7 +257,7 @@ ada_demangle (const char *mangled, int option ATTRIBUTE_UNUSED)
   
   d = demangled;
   p = mangled;
-  while (1)
+  for (;;)
     {
       /* An entity names is expected.  */
       if (ISLOWER (*p))

@@ -131,7 +131,7 @@ int main_exp00(int argc, char** argv) {
 
 	ULONG64 ul64MatchHandle = 0;
 	CHECK_RC(ok, EXIT, pSymbols3->StartSymbolMatch("*", &ul64MatchHandle));
-	while (true) {
+	for (;;) {
 		char aBuffer[1024] = { 0 };
 		ULONG64 ul64Offset = 0;
 		CHECK_RC(ok, FINISH, pSymbols3->GetNextSymbolMatch(ul64MatchHandle, aBuffer, sizeof(aBuffer), NULL, &ul64Offset));

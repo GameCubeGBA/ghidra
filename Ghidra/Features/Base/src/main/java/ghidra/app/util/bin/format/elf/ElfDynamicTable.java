@@ -54,7 +54,7 @@ public class ElfDynamicTable implements ElfFileSection {
 		reader.setPointerIndex(fileOffset);
 
 		// Collect set of all _DYNAMIC array tags specified in .dynamic section
-		while (true) {
+		for (;;) {
 			ElfDynamic dyn = new ElfDynamic(reader, header);
 			dynamics.add(dyn);
 			if (dyn.getTag() == ElfDynamicType.DT_NULL.value) {

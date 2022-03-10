@@ -76,7 +76,7 @@ public class DmgServer {
 			try (GByteProvider provider = new GByteProvider(openFile);
 					DmgFileReader dmgFileReader = new DmgFileReader(provider);) {
 				dmgFileReader.open();
-				while (true) {
+				for (;;) {
 					String line = inputReader.readLine();
 					if (line == null) {
 						break;

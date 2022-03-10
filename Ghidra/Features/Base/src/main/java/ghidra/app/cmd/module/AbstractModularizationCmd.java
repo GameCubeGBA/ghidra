@@ -265,7 +265,7 @@ public abstract class AbstractModularizationCmd extends BackgroundCommand {
 
 	protected ProgramModule createModule(ProgramModule parent, String moduleName) {
 		int index = 0;
-		while (true) {
+		for (;;) {
 			try {
 				return parent.createModule(moduleName);
 			}
@@ -279,7 +279,7 @@ public abstract class AbstractModularizationCmd extends BackgroundCommand {
 	private void setModuleName(ProgramModule module, String name) {
 		String attemptedName = name;
 		int count = 0;
-		while (true) {
+		for (;;) {
 			try {
 				module.setName(attemptedName);
 				return;

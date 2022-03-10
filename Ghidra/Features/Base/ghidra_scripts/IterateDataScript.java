@@ -27,7 +27,7 @@ public class IterateDataScript extends GhidraScript {
 
 		Data data = getFirstData();
 
-		while (true) {
+		for (;;) {
 
 			if (monitor.isCancelled()) {
 				break;

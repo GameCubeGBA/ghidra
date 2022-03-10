@@ -116,7 +116,7 @@ public class BoundImportDataDirectory extends DataDirectory {
         }
 
         List<BoundImportDescriptor> descriptorsList = new ArrayList<BoundImportDescriptor>();
-        while (true) {
+        for (;;) {
         	if (ptr < 0) { 
             	Msg.error(this, "Invalid file index "+ptr);
             	break;

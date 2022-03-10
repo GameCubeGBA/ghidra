@@ -50,7 +50,7 @@ class ExtEntryPointXmlMgr {
 	 */
 	void read(XmlPullParser parser, TaskMonitor monitor) throws AddressFormatException, CancelledException { 
 		XmlElement element = parser.next();
-		while (true) {
+		for (;;) {
 			if (monitor.isCancelled()) {
 				throw new CancelledException();	
 			}

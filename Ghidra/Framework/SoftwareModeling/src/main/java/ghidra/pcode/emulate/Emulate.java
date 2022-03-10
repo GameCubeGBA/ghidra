@@ -749,7 +749,7 @@ public class Emulate {
     breaktable.registerAddressCallback(Address(trans.getDefaultSpace(),0x1D00130),&putscallback);
 
     AssemblyRaw assememit;
-    for(;;) {
+    for (;;) {
       Address addr = emulator.getExecuteAddress();
       trans.printAssembly(assememit,addr);
       emulator.executeInstruction();

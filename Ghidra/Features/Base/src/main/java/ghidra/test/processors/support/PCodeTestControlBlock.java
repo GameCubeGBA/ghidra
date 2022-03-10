@@ -256,7 +256,7 @@ public class PCodeTestControlBlock extends PCodeTestAbstractControlBlock {
 		testGroups = new ArrayList<>();
 
 		AddressSet set = new AddressSet(restrictedSet);
-		while (true) {
+		for (;;) {
 
 			Address startOfControlBlock = findBytes(memory, set, groupStructMagicBytes);
 			if (startOfControlBlock == null) {

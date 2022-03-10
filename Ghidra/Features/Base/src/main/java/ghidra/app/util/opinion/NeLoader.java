@@ -610,7 +610,7 @@ public class NeLoader extends AbstractLibrarySupportLoader {
 
 				int relocType = reloc.getType();
 
-				do {
+				for (;;) {
 					SegmentedAddress address = space.getAddress(segment, offset);
 					try {
 						byte[] bytes = new byte[SegmentRelocation.TYPE_LENGTHS[relocType]];
@@ -633,7 +633,6 @@ public class NeLoader extends AbstractLibrarySupportLoader {
 						break;
 					}
 				}
-				while (true);
 			}
 		}
 	}

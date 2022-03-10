@@ -38,7 +38,7 @@ public class BTreeNodeDescriptor /*implements StructConverter*/ {
 	protected void readRecordOffsets(GBinaryReader reader, long nodeStartIndex,
 			BTreeHeaderRecord header) throws IOException {
 		long position = nodeStartIndex + header.getNodeSize() - 2;
-		while (true) {
+		for (;;) {
 			short recordOffset = reader.readShort(position);
 			if (recordOffset == 0) {
 				break;

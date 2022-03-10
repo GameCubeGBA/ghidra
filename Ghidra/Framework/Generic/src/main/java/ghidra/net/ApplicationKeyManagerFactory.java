@@ -286,7 +286,7 @@ public final class ApplicationKeyManagerFactory {
 
 		int tryCount = 0;
 
-		while (true) {
+		for (;;) {
 			char[] password = new char[0];
 			char[] oldPassword = null;
 			try {

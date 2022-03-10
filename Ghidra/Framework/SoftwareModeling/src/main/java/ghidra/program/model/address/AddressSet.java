@@ -837,7 +837,7 @@ public class AddressSet implements AddressSetView {
 
 		AddressRange thisRange = thisIt.next();
 		AddressRange thatRange = thatIt.next();
-		while (true) {
+		for (;;) {
 			if (thisRange.intersects(thatRange)) {
 				AddressRange intersection = thisRange.intersect(thatRange);
 				set.add(intersection);

@@ -522,7 +522,7 @@ public class FidStatistics extends GhidraScript {
 	private LinkedList<DomainFile> buildDomainFileList()
 			throws CancelledException, VersionException, IOException {
 		ArrayList<DomainFolder> folders = new ArrayList<DomainFolder>();
-		while (true) {
+		for (;;) {
 			monitor.checkCanceled();
 			try {
 				DomainFolder folder =

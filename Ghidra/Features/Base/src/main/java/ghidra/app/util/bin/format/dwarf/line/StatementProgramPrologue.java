@@ -54,7 +54,7 @@ public class StatementProgramPrologue {
 		opcodeBase                 = reader.readNextByte();
 		standardOpcodeLengths      = reader.readNextByteArray(opcodeBase - 1);
 
-		while (true) {
+		for (;;) {
 			String dir = reader.readNextAsciiString();
 			if (dir.isEmpty()) {
 				break;
@@ -62,7 +62,7 @@ public class StatementProgramPrologue {
 			includeDirectories.add(dir);
 		}
 
-		while (true) {
+		for (;;) {
 			FileEntry entry = new FileEntry(reader);
 			if (entry.getFileName().isEmpty()) {
 				break;

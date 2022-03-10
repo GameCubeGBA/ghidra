@@ -168,7 +168,7 @@ public class FindImagesScript extends GhidraScript {
             if (block.isInitialized()) {
                 Address start = block.getStart();
                 Address found = null;
-                while (true) {
+                for (;;) {
                     if (monitor.isCancelled()) {
                         break;
                     }

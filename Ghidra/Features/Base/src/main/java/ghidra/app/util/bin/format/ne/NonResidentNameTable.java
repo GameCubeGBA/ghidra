@@ -40,7 +40,7 @@ public class NonResidentNameTable {
         reader.setPointerIndex(index);
 
         ArrayList<LengthStringOrdinalSet> list = new ArrayList<LengthStringOrdinalSet>();
-        while (true) {
+        for (;;) {
             LengthStringOrdinalSet lsos = new LengthStringOrdinalSet(reader);
             if (lsos.getLength() == 0) break;
             if (lsos.getOrdinal() == 0) {

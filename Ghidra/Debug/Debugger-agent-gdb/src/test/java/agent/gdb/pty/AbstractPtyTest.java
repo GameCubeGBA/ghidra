@@ -23,7 +23,7 @@ public class AbstractPtyTest {
 	public Thread pump(InputStream is, OutputStream os) {
 		Thread t = new Thread(() -> {
 			byte[] buf = new byte[1];
-			while (true) {
+			for (;;) {
 				int len;
 				try {
 					len = is.read(buf);
@@ -55,7 +55,7 @@ public class AbstractPtyTest {
 
 	public Thread runExitCheck(int expected, PtySession session) {
 		Thread exitCheck = new Thread(() -> {
-			while (true) {
+			for (;;) {
 				try {
 					assertEquals("Early exit with wrong code", expected,
 						session.waitExited());

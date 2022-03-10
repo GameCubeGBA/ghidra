@@ -368,7 +368,7 @@ public class StringRenderParser {
 	public ByteBuffer parse(CharBuffer in)
 			throws StringParseException, MalformedInputException, UnmappableCharacterException {
 		int bufSize = in.remaining() * 2; // We don't know the charset, yet.
-		while (true) {
+		for (;;) {
 			ByteBuffer out = ByteBuffer.allocate(bufSize)
 					.order(endian == Endian.BIG ? ByteOrder.BIG_ENDIAN : ByteOrder.LITTLE_ENDIAN);
 			int pos = in.position();

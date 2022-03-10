@@ -297,7 +297,7 @@ public class PreCommentFieldFactory extends FieldFactory {
 		}
 
 		DataTypeComponent lastDtc = null;
-		while (true) {
+		for (;;) {
 			DataType dt = data.getDataType();
 
 			if (dt instanceof Structure) {

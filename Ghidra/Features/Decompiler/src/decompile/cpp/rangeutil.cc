@@ -2153,7 +2153,7 @@ void ValueSetSolver::applyConstraints(Varnode *vn,int4 type,const CircleRange &r
       else
 	curBlock = curBlock->getIn(slot);	// MULTIEQUAL input is really only from one in-block
     }
-    for(;;) {
+    for (;;) {
       if (curBlock == trueBlock) {
 	if (trueIsRestricted)
 	  generateTrueEquation(outVn, op, slot, type, range);
@@ -2189,7 +2189,7 @@ void ValueSetSolver::constraintsFromPath(int4 type,CircleRange &lift,Varnode *st
     startVn = lift.pullBack(startVn->getDef(),&constVn,false);
     if (startVn == (Varnode *)0) return;	// Couldn't pull all the way back to our value set
   }
-  for(;;) {
+  for (;;) {
     Varnode *constVn;
     applyConstraints(endVn,type,lift,cbranch);
     if (!endVn->isWritten()) break;
@@ -2316,7 +2316,7 @@ bool ValueSetSolver::checkRelativeConstant(Varnode *vn,int4 &typeCode,uintb &val
 
 {
   value = 0;
-  for(;;) {
+  for (;;) {
     if (vn->isMark()) {
       ValueSet *valueSet = vn->getValueSet();
       if (valueSet->typeCode != 0) {
@@ -2549,7 +2549,7 @@ void ValueSetSolver::solve(int4 max,Widener &widener)
 	curSet = curSet->next;
       }
       else {
-	for(;;) {
+	for (;;) {
 	  if (curComponent->isDirty) {
 	    curComponent->isDirty = false;
 	    curSet = curComponent->startNode;

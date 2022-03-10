@@ -898,7 +898,7 @@ public class LocalManagedBufferFile extends LocalBufferFile implements ManagedBu
 				int cnt = srcFile.getIndexCount();
 				maxIndex = cnt - 1;
 				for (curIndex = 0; curIndex < cnt; curIndex++) {
-					while (true) {
+					for (;;) {
 						synchronized (preSaveLock) {
 							// Check for canceled task
 							checkPreSaveMonitor();

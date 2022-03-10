@@ -195,7 +195,7 @@ public abstract class CachingSwingWorker<T> implements CachingLoader<T> {
 
 	private T waitForValue(SwingWorker<T, Object> swingWorker) {
 		T newValue = null;
-		while (true) {
+		for (;;) {
 			try {
 				// java swing worker blocks on get() until worker completes.
 				newValue = swingWorker.get();

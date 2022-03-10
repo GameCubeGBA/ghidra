@@ -34,7 +34,7 @@ public class TraceViewportSpanIterator extends AbstractPeekableIterator<Range<Lo
 	}
 
 	protected TraceSnapshot locateMostRecentFork(long from) {
-		while (true) {
+		for (;;) {
 			TraceSnapshot prev = timeManager.getMostRecentSnapshot(from);
 			if (prev == null) {
 				return null;

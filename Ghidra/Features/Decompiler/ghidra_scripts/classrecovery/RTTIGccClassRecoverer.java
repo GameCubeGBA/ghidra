@@ -1321,7 +1321,7 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 
 		int offset = 0;
 		int numLongs = 0;
-		while (true) {
+		for (;;) {
 
 			Address address = vtableAddress.add(offset);
 

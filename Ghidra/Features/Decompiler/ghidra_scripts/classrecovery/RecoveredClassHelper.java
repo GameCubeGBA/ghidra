@@ -8129,7 +8129,7 @@ public class RecoveredClassHelper {
 			// otherwise, within the range from top of containing component to the end of where the
 			// vftable it to replace, clear component(s) or replace structure(s) with internal
 			// components and loop until can replace with the vftable pointer
-			while (true) {
+			for (;;) {
 
 				monitor.checkCanceled();
 

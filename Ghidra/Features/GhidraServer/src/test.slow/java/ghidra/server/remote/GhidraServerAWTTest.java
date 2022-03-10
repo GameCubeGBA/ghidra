@@ -70,7 +70,7 @@ public class GhidraServerAWTTest extends AbstractGenericTest {
 			// previous check
 			eventReaderThread = new Thread(() -> {
 				try {
-					while (true) {
+					for (;;) {
 						repoHandle.getEvents();
 						Msg.info(this, "Reading repo events to keep server happy :)");
 						Thread.sleep(500);

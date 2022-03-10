@@ -74,7 +74,7 @@ public class UnionAddressRangeIterator extends AbstractPeekableIterator<AddressR
 		AddressRange peek = mit.peek();
 		Address min = peek.getMinAddress();
 		Address max = peek.getMaxAddress();
-		while (true) {
+		for (;;) {
 			mit.next();
 			if (!mit.hasNext()) {
 				break;
