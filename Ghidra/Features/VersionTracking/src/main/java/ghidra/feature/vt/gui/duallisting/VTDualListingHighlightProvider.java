@@ -220,7 +220,7 @@ public class VTDualListingHighlightProvider implements HighlightProvider {
 
 	private Color getMarkupBackgroundColor(int cursorTextOffset, VTMarkupItem vtMarkupItem,
 			int startIndex, int endIndex) {
-		Color highlightColor = null;
+		Color highlightColor;
 		Address sourceAddress = vtMarkupItem.getSourceAddress();
 		Address destinationAddress = vtMarkupItem.getDestinationAddress();
 		VTMarkupItemStatus status = vtMarkupItem.getStatus();
@@ -424,7 +424,7 @@ public class VTDualListingHighlightProvider implements HighlightProvider {
 	}
 
 	private Highlight[] getFunctionSignatureHighlights(String text, Object obj, int cursorTextOffset) {
-		Function function = null;
+		Function function;
 		if (obj instanceof Function) {
 			function = (Function) obj;
 		}

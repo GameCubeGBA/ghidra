@@ -93,7 +93,7 @@ public class StructureFactoryTest extends AbstractGhidraHeadedIntegrationTest {
 		// data length <= 0
 		long startOffset = UNDEFINED_AREA;
 		long offset = startOffset;
-		int structureLength = (int) (offset - startOffset);
+		int structureLength;
 		Address structureAddress = addr(startOffset);
 
 		try {

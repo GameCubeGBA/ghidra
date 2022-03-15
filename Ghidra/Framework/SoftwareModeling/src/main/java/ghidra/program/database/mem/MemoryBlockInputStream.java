@@ -26,7 +26,7 @@ import ghidra.program.model.mem.MemoryAccessException;
 class MemoryBlockInputStream extends InputStream {
 	private long index = 0;
 	private long resetIndex = 0;
-	private long numBytes = 0;
+	private long numBytes;
 	MemoryBlockDB block;
 
 	/**

@@ -25,7 +25,7 @@ public class GRandomAccessFile {
 	private byte[] lastbuffer = EMPTY;
 	private long lastbufferOffset = 0;
 	private long lastbufferFileStartIndex = 0;
-	private boolean open = false;
+	private boolean open;
 
 	private void checkOpen() throws IOException {
 		if (!open) {

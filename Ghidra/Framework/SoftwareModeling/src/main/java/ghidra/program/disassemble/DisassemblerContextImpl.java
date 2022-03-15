@@ -276,7 +276,7 @@ public class DisassemblerContextImpl implements DisassemblerContext {
 		RegisterValue nextContextRegisterValue = programContext.getFlowValue(contextRegisterValue); // strip non-flowing context
 
 		// combine in any contextRegisterValue from the future flow state.
-		RegisterValue futureContextRegisterValue = null;
+		RegisterValue futureContextRegisterValue;
 		
 		// get next context value within flow, combining current, future, previously stored and default context values
 		Map<Register, RegisterValue> futureStateMap = getFutureRegisterStateMap(fromAddr, destAddr, false);
@@ -406,7 +406,7 @@ public class DisassemblerContextImpl implements DisassemblerContext {
 		if (fromAddr == Address.NO_ADDRESS) {
 			Map<Address, Map<Register, RegisterValue>> futureRegisterStateMap = noAddressFutureRegisterStateMap;
 			
-			Map<Register, RegisterValue> futureStateMap = null;
+			Map<Register, RegisterValue> futureStateMap;
 			if (remove) {
 				futureStateMap = futureRegisterStateMap.remove(destAddr);
 			} else {
@@ -490,7 +490,7 @@ public class DisassemblerContextImpl implements DisassemblerContext {
 		RegisterValue nextContextRegisterValue = programContext.getFlowValue(contextValue); // strip non-flowing context
 
 		// combine in any contextRegisterValue from the future flow state.
-		RegisterValue futureContextRegisterValue = null;
+		RegisterValue futureContextRegisterValue;
 		if (futureStateMap != null) {
 			futureContextRegisterValue = futureStateMap.remove(contextRegister);
 			nextContextRegisterValue =

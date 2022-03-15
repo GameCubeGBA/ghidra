@@ -108,7 +108,7 @@ public class CliStreamStrings extends CliAbstractStream {
 			return null;
 		}
 
-		int stringLength = 0;
+		int stringLength;
 		int stringLengthIndex = Collections.binarySearch(stringIndexes, index);
 		if (stringLengthIndex >= 0) {
 			stringLength = stringSizes.get(stringLengthIndex);

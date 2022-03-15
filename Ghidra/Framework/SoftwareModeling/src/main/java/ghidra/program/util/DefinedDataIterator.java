@@ -160,7 +160,7 @@ public class DefinedDataIterator implements DataIterator {
 	}
 
 	private DataIterator currentIt() {
-		DataIterator it = null;
+		DataIterator it;
 		while ((it = itStack.peekLast()) != null && !it.hasNext()) {
 			itStack.removeLast();
 		}
@@ -168,7 +168,7 @@ public class DefinedDataIterator implements DataIterator {
 	}
 
 	private void findNext() {
-		DataIterator it = null;
+		DataIterator it;
 		while ((it = currentIt()) != null) {
 			Data data = it.next();
 			DataType dt = data.getBaseDataType();

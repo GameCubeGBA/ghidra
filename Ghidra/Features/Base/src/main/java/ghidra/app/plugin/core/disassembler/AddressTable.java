@@ -52,7 +52,7 @@ public class AddressTable {
 	private int indexLen;
 	private int skipAmount;
 	private boolean negativeTable = false;
-	private int addrSize = 4;
+	private int addrSize;
 	private boolean shiftedAddr;
 
 	/**
@@ -312,7 +312,7 @@ public class AddressTable {
 		Address tableAddr = topAddress;
 
 		ArrayList<AddLabelCmd> switchLabelList = new ArrayList<>();
-		AddLabelCmd tableNameLabel = null;
+		AddLabelCmd tableNameLabel;
 
 		FlowType ftype = start_inst.getFlowType();
 		String tableName = (ftype.isCall() ? "callTable" : "switchTable");
@@ -545,7 +545,7 @@ public class AddressTable {
 
 		long tableNumber = 0;
 		boolean needTableNumber = false;
-		boolean succeed = false;
+		boolean succeed;
 		String oldName = tableNameLabel.getLabelName();
 		Namespace space = null;
 		// not putting switch into functions anymore
@@ -1228,8 +1228,7 @@ public class AddressTable {
 
 		Address[] tableElements = new Address[count];
 		arrayElements.subList(0, count).toArray(tableElements);
-		arrayElements = null;
-		// Warning: arrayElements is no longer valid after this!
+        // Warning: arrayElements is no longer valid after this!
 
 		// Don't check if the table is too large
 		// TODO: This is not statistically correct.

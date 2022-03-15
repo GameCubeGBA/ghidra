@@ -160,7 +160,7 @@ public class AbstractVisualVertexRenderer<V extends VisualVertex, E extends Visu
 	protected Shape getCompactShape(RenderContext<V, E> rc, Layout<V, E> layout, V vertex) {
 
 		Function<? super V, Shape> vertexShaper = rc.getVertexShapeTransformer();
-		Shape shape = null;
+		Shape shape;
 		if (vertexShaper instanceof VisualGraphVertexShapeTransformer) {
 			@SuppressWarnings("unchecked")
 			VisualGraphVertexShapeTransformer<V> vgShaper =
@@ -187,7 +187,7 @@ public class AbstractVisualVertexRenderer<V extends VisualVertex, E extends Visu
 	 */
 	public Shape getFullShape(RenderContext<V, E> rc, Layout<V, E> layout, V vertex) {
 		Function<? super V, Shape> vertexShaper = rc.getVertexShapeTransformer();
-		Shape shape = null;
+		Shape shape;
 		if (vertexShaper instanceof VisualGraphVertexShapeTransformer) {
 			@SuppressWarnings("unchecked")
 			VisualGraphVertexShapeTransformer<V> vgShaper =

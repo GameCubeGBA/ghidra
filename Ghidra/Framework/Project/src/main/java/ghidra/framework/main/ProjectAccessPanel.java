@@ -285,7 +285,7 @@ public class ProjectAccessPanel extends AbstractWizardJPanel {
 		 * Updates the 'remove' button state based on the selections in the user access panel.
 		 */
 		private void updateRemoveButtonState() {
-			boolean enabled = false;
+			boolean enabled;
 
 			List<String> selectedUserNames = userAccessPanel.getSelectedUsers();
 

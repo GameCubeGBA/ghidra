@@ -270,7 +270,7 @@ public class FunctionNameMarkupItemTest extends AbstractVTMarkupItemTest {
 			addExternalFunction(destinationProgram, "Modify Destination Program", "oranges");
 
 		// Make a duplicate named external function.
-		Function duplicateApplesFunction = null;
+		Function duplicateApplesFunction;
 		int txId = destinationProgram.startTransaction("Modify Destination Program");
 		boolean commit = false;
 		try {

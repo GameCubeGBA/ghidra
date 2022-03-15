@@ -588,10 +588,8 @@ public class StringDataInstance {
 		int minValid;
 		switch (stringLayout) {
 			case PASCAL_255:
-				minValid = SIZEOF_PASCAL255_STR_LEN_FIELD;
-			case PASCAL_64k:
-				minValid = SIZEOF_PASCAL64k_STR_LEN_FIELD;
-			default:
+            case PASCAL_64k:
+            default:
 				minValid = 0;
 		}
 		return offcutBytes >= minValid && offcutBytes < length;

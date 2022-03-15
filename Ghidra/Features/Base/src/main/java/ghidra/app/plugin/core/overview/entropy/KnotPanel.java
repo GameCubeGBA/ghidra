@@ -104,7 +104,6 @@ public class KnotPanel extends JPanel implements ComponentListener {
             }
 
             // reset the font
-            currentMetrics = metrics;
         }
 
 	}

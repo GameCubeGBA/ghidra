@@ -64,7 +64,7 @@ public class AVR32_ElfRelocationHandler extends ElfRelocationHandler {
 		int oldValue = memory.getInt(relocationAddress);
 
 		if (elf.e_machine() == ElfConstants.EM_AVR32) {
-			int newValueShiftToAligntoUpper = 0;
+			int newValueShiftToAligntoUpper;
 			switch (type) {
 				case AVR32_ElfRelocationConstants.R_AVR32_NONE:
 					break;
@@ -128,9 +128,9 @@ public class AVR32_ElfRelocationHandler extends ElfRelocationHandler {
 
 							StringBuilder newSectionTypeBuff = new StringBuilder();
 							newSectionTypeBuff.append("Constant Pool ");
-							boolean isReadable = true;
-							boolean isWritable = true;
-							boolean isExecutable = true;
+							boolean isReadable;
+							boolean isWritable;
+							boolean isExecutable;
 
 							if (currElfSymbolInfoType == ElfSymbol.STT_OBJECT) {
 								isReadable = true;

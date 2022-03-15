@@ -410,7 +410,7 @@ public class NeLoader extends AbstractLibrarySupportLoader {
 			String moduleName = names[i].getString();
 			String[] callnames = mod2proclist[i];
 			for (String callname : callnames) {
-				Function refFunction = null;
+				Function refFunction;
 				try {
 					ExternalLocation loc;
 					loc = externalManager.addExtFunction(moduleName, callname, null,

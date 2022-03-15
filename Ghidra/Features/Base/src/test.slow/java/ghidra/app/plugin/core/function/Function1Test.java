@@ -1307,7 +1307,7 @@ public class Function1Test extends AbstractGhidraHeadedIntegrationTest {
 	private void exerciseThunkPassThru(Function thunkedFunc, Function thunk) throws Exception {
 		String origThunkedName = thunkedFunc.getName();
 		String origThunkName = thunk.getName();
-		String finalName = null;
+		String finalName;
 		int txId = program.startTransaction("Add params");
 		try {
 

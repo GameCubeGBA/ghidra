@@ -594,7 +594,7 @@ public class StackFrameDataType extends BiDirectionDataType {
 			throw new ArrayIndexOutOfBoundsException(offset);
 		}
 
-		int nextOffset = offset;
+		int nextOffset;
 		int index = Collections.binarySearch(components, Integer.valueOf(offset), offsetComparator);
 		if (index >= 0) {
 			index++;

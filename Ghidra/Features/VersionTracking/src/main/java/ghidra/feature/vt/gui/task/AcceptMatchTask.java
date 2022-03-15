@@ -42,8 +42,8 @@ public class AcceptMatchTask extends VtTask {
 
 	protected final VTController controller;
 	private final List<VTMatch> matches;
-	private boolean doApplyFunctionNames = true;
-	private boolean doApplyDataNames = true;
+	private boolean doApplyFunctionNames;
+	private boolean doApplyDataNames;
 
 	public AcceptMatchTask(VTController controller, List<VTMatch> matches) {
 		super("Accept Matches", controller.getSession());

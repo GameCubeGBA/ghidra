@@ -457,7 +457,7 @@ public class FollowFlow {
 	private void followInstruction(Stack<CodeUnit> instructionStack, AddressSet flowAddressSet,
 			Instruction currentInstr) {
 
-		Address nextAddress = null;
+		Address nextAddress;
 
 		/*****************
 		 * Follow Flows  *
@@ -528,7 +528,7 @@ public class FollowFlow {
 			}
 		}
 
-		Address fromAddress = null; // The from address
+		Address fromAddress; // The from address
 
 		/*************************
 		 * Follow Flows Backward *
@@ -581,7 +581,7 @@ public class FollowFlow {
 			Stack<CodeUnit> codeUnitStack, AddressSet flowAddressSet) {
 
 		Instruction instruction = currentInstruction;
-		boolean inDelaySlot = false;
+		boolean inDelaySlot;
 		List<Instruction> list = new ArrayList<Instruction>();
 		int alignment = program.getLanguage().getInstructionAlignment();
 		if (alignment < 1) {
@@ -642,7 +642,7 @@ public class FollowFlow {
 	 * @return boolean true if this flow type should be followed.
 	 */
 	private boolean shouldFollowFlow(FlowType currentFlowType) {
-		boolean shouldFollowFlow = true;
+		boolean shouldFollowFlow;
 		// Determine whether or not to follow this particular flow.
 		if ((!followAllFlow) &&
 			((currentFlowType.equals(RefType.COMPUTED_CALL) && !followComputedCall) ||

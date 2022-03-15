@@ -332,7 +332,7 @@ public class DBFixedKeyTableTest extends AbstractGenericTest {
 	 */
 	private void iterateFixedKeyRecords(boolean testStoredDB, int recordCnt, long keyIncrement,
 			int varDataSize) throws IOException {
-		DBRecord[] recs = null;
+		DBRecord[] recs;
 		if (keyIncrement == 0) {
 			recs = createRandomFixedKeyTableRecords(null, recordCnt, varDataSize);
 		}
@@ -567,7 +567,7 @@ public class DBFixedKeyTableTest extends AbstractGenericTest {
 	 */
 	private void iterateFixedKeys(boolean testStoredDB, int recordCnt, long keyIncrement,
 			int varDataSize) throws IOException {
-		DBRecord[] recs = null;
+		DBRecord[] recs;
 		if (keyIncrement == 0) {
 			recs = createRandomFixedKeyTableRecords(null, recordCnt, varDataSize);
 		}

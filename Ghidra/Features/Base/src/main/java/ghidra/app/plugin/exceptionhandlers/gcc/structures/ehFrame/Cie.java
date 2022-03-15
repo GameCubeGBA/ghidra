@@ -338,8 +338,8 @@ public class Cie extends GccAnalysisClass {
 		 */
 		String comment = "(CIE) Return Address Register Column";
 
-		int encodedLen = 0;
-		DataType encodedDt = null;
+		int encodedLen;
+		DataType encodedDt;
 		if (version == (byte) 1) {
 			returnAddrRegister = GccAnalysisUtils.readByte(program, addr);
 			encodedDt = new ByteDataType();
@@ -432,7 +432,7 @@ public class Cie extends GccAnalysisClass {
 	 * @throws MemoryAccessException if memory for the CIE couldn't be read.
 	 */
 	private Address processInitialInstructions(Address addr) throws MemoryAccessException {
-		CreateArrayCmd arrayCmd = null;
+		CreateArrayCmd arrayCmd;
 
 		// Create initial instructions array with remaining bytes
 		initialInstructionCount = intLength - curSize;

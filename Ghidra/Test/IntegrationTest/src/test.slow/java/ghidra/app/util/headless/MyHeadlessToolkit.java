@@ -163,7 +163,7 @@ public class MyHeadlessToolkit extends Toolkit {
 	}
 
 	private void getRealToolkit() {
-			Class<?> cls = null;
+			Class<?> cls;
             try {
             	try {
                 	cls = Class.forName(preferredToolkit);

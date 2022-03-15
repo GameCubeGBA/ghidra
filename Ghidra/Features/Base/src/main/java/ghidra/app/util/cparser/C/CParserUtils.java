@@ -168,7 +168,7 @@ public class CParserUtils {
 		String replacedText =
 			signatureParts[0] + " " + getTempName(signatureParts[1].length()) + signatureParts[2];
 
-		DataType dt = null;
+		DataType dt;
 		try {
 			// parse the signature
 			dt = parser.parse(replacedText + ";");

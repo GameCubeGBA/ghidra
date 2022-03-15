@@ -127,7 +127,7 @@ public abstract class AbstractMagePanelManager<T> implements PanelManager {
 		if (currentPanel != null) {
 			currentPanel.updateStateObjectWithPanelInfo(pretendState);
 		}
-		MagePanel<T> panel = null;
+		MagePanel<T> panel;
 		int index = currentIndex + 1;
 		while (index < getPanels().size()) {
 			panel = getPanels().get(index);
@@ -155,7 +155,7 @@ public abstract class AbstractMagePanelManager<T> implements PanelManager {
 		if (currentPanel != null) {
 			currentPanel.updateStateObjectWithPanelInfo(pretendState);
 		}
-		MagePanel<T> panel = null;
+		MagePanel<T> panel;
 		int index = currentIndex + 1;
 		while (index < getPanels().size()) {
 			panel = getPanels().get(index);
@@ -206,7 +206,7 @@ public abstract class AbstractMagePanelManager<T> implements PanelManager {
 			currentPanel.leavePanel(state);
 			panelPath.push(currentIndex);
 		}
-		MagePanel<T> panel = null;
+		MagePanel<T> panel;
 		int index = currentIndex + 1;
 		while (index < getPanels().size()) {
 			panel = getPanels().get(index);
@@ -295,7 +295,7 @@ public abstract class AbstractMagePanelManager<T> implements PanelManager {
 		if (currentPanel != null) {
 			currentPanel.leavePanel(state);
 		}
-		MagePanel<T> panel = null;
+		MagePanel<T> panel;
 		int index = currentIndex + 1;
 		while (index < getPanels().size()) {
 			panel = getPanels().get(index);

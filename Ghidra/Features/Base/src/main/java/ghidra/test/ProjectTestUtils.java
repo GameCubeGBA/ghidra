@@ -228,7 +228,7 @@ public class ProjectTestUtils {
 		// use the first one for the testing
 		Workspace activeWorkspace = workspaces[0];
 
-		PluginTool tool = null;
+		PluginTool tool;
 		if (toolName == null) {
 			// create a new empty tool
 			tool = activeWorkspace.createTool();

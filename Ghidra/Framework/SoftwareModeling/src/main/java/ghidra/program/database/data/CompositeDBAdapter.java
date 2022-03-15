@@ -142,7 +142,7 @@ abstract class CompositeDBAdapter {
 
 		DBHandle tmpHandle = new DBHandle();
 		long id = tmpHandle.startTransaction();
-		CompositeDBAdapter tmpAdapter = null;
+		CompositeDBAdapter tmpAdapter;
 		try {
 			tmpAdapter = new CompositeDBAdapterV5V6(tmpHandle, DBConstants.CREATE);
 			RecordIterator it = oldAdapter.getRecords();

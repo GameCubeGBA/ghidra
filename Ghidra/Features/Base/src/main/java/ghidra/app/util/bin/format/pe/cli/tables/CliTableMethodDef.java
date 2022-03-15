@@ -67,7 +67,7 @@ public class CliTableMethodDef extends CliAbstractTable {
 		private int paramIndex;
 
 		private static final int NEXT_ROW_PARAM_INIT_VALUE = -1;
-		private int nextRowParamIndex = NEXT_ROW_PARAM_INIT_VALUE;
+		private int nextRowParamIndex;
 
 		private static final int METHODIMPLATTRIBUTES_CODETYPE_IL = 0x00;
 		private static final int METHODIMPLATTRIBUTES_CODETYPE_NATIVE = 0x01;
@@ -244,7 +244,7 @@ public class CliTableMethodDef extends CliAbstractTable {
 
 			Address addr = PeUtils.getMarkupAddress(program, isBinary, ntHeader, methodRow.RVA);
 			Address startAddr = addr;
-			Address endAddr = addr;
+			Address endAddr;
 
 			if (methodRow.isPInvokeImpl() && methodRow.isNative()) {
 				endAddr = startAddr.add(CLITABLEMETHODDEF_PINVOKE_JUMP_LENGTH - 1);
@@ -319,7 +319,7 @@ public class CliTableMethodDef extends CliAbstractTable {
 			ParameterImpl staticParameter = null;
 			if (methodRow.isStatic() && paramCount > 0) {
 				CliParam staticParam = paramTypes[0];
-				String paramName = "";
+				String paramName;
 
 				// Walk the path from the ELEMENT_TYPE_PTR to the ELEMENT_TYPE_VALUETYPE
 				if (staticParam.getType() instanceof CliTypePtr) {

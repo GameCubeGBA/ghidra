@@ -48,7 +48,7 @@ public class BookmarkDBManager implements BookmarkManager, ErrorHandler, Manager
 	private BookmarkDBAdapter bookmarkAdapter;
 	private DBObjectCache<BookmarkDB> cache;
 
-	private boolean upgrade = false;
+	private boolean upgrade;
 
 	private Map<String, BookmarkType> typesByName = new TreeMap<>();
 	private ObjectArray typesArray = new ObjectArray();
@@ -495,7 +495,7 @@ public class BookmarkDBManager implements BookmarkManager, ErrorHandler, Manager
 	public Bookmark[] getBookmarks(Address address, String type) {
 		lock.acquire();
 		try {
-			Bookmark[] bookmarks = null;
+			Bookmark[] bookmarks;
 			List<Bookmark> list = new ArrayList<>();
 			BookmarkType bmt = getBookmarkType(type);
 			if (bmt != null && bmt.hasBookmarks()) {

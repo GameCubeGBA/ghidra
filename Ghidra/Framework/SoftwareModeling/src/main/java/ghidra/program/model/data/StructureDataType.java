@@ -157,7 +157,7 @@ public class StructureDataType extends CompositeDataTypeImpl implements Structur
 		int index = Collections.binarySearch(components, Integer.valueOf(offset),
 			OffsetComparator.INSTANCE);
 		if (index >= 0) {
-			DataTypeComponent dtc = components.get(index);
+			DataTypeComponent dtc;
 			index = backupToFirstComponentContainingOffset(index, offset);
 			dtc = components.get(index);
 			return dtc;
@@ -178,7 +178,7 @@ public class StructureDataType extends CompositeDataTypeImpl implements Structur
 			OffsetComparator.INSTANCE);
 		if (index >= 0) {
 			// return first matching defined component containing offset
-			DataTypeComponent dtc = components.get(index);
+			DataTypeComponent dtc;
 			index = indexOfFirstNonZeroLenComponentContainingOffset(index, offset);
 			dtc = components.get(index);
 			if (dtc.getLength() != 0) {
@@ -207,7 +207,7 @@ public class StructureDataType extends CompositeDataTypeImpl implements Structur
 		boolean hasSizedComponent = false;
 		if (index >= 0) {
 			// collect matching defined components containing offset
-			DataTypeComponentImpl dtc = components.get(index);
+			DataTypeComponentImpl dtc;
 			index = backupToFirstComponentContainingOffset(index, offset);
 			while (index < components.size()) {
 				dtc = components.get(index);
@@ -441,7 +441,7 @@ public class StructureDataType extends CompositeDataTypeImpl implements Structur
 			return components.get(index);
 		}
 		// assume non-packed DEFAULT
-		int offset = 0;
+		int offset;
 		index = -index - 1;
 		if (index == 0) {
 			offset = ordinal;
@@ -1479,7 +1479,7 @@ public class StructureDataType extends CompositeDataTypeImpl implements Structur
 
 		LinkedList<DataTypeComponentImpl> replacedComponents = new LinkedList<>();
 
-		DataTypeComponentImpl origDtc = null;
+		DataTypeComponentImpl origDtc;
 		int index = Collections.binarySearch(components, Integer.valueOf(offset),
 			OffsetComparator.INSTANCE);
 		if (index >= 0) {
@@ -1704,7 +1704,7 @@ public class StructureDataType extends CompositeDataTypeImpl implements Structur
 		}
 		int idx = Collections.binarySearch(components, Integer.valueOf(index),
 			OrdinalComparator.INSTANCE);
-		DataTypeComponent dtc = null;
+		DataTypeComponent dtc;
 		if (idx < 0) {
 			idx = -idx - 1;
 			if (idx >= components.size()) {

@@ -53,7 +53,7 @@ public class CompositeTestUtils {
 		int len = expectedDump.length();
 		int expectedLine = 1;
 		int expectedCol = 0;
-		int index = 0;
+		int index;
 		boolean mismatch = false;
 
 		for (index = 0; index < len; index++) {

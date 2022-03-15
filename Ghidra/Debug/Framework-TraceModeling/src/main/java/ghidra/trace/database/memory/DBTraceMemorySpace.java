@@ -478,7 +478,7 @@ public class DBTraceMemorySpace implements Unfinished, TraceMemorySpace, DBTrace
 	}
 
 	protected DBTraceMemoryBlockEntry findMostRecentBlockEntry(OffsetSnap loc, boolean inclusive) {
-		DBTraceMemoryBlockEntry ent = null;
+		DBTraceMemoryBlockEntry ent;
 		Iterator<DBTraceMemoryBlockEntry> it;
 		if (!inclusive) {
 			loc = new OffsetSnap(loc.offset, loc.snap - 1);

@@ -93,7 +93,7 @@ public abstract class AddressPreviewTableModel extends AddressBasedTableModel<Ad
 		AddressSet addressSet = new AddressSet();
 		for (int element : rows) {
 			Address minAddr = getAddress(element);
-			Address maxAddr = minAddr;
+			Address maxAddr;
 			try {
 				maxAddr = minAddr.addNoWrap(addOn);
 				addressSet.addRange(minAddr, maxAddr);

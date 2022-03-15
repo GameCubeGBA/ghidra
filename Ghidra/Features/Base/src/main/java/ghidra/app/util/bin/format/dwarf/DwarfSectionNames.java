@@ -23,7 +23,7 @@ public final class DwarfSectionNames {
 	private final static String MACHO_PREFIX = "__";
 	private final static String   ELF_PREFIX = ".";
 
-	private String prefix = "";
+	private String prefix;
 
 	/**
 	 * Creates a new Dwarf Section Names for the specific program.

@@ -298,7 +298,7 @@ public class BytesFieldFactory extends FieldFactory {
 			return null;
 		}
 
-		int alignSize = 0;
+		int alignSize;
 		int ordinal = data.getComponentIndex();
 		if (ordinal == (struct.getNumComponents() - 1)) {
 			alignSize = (int) (parent.getMaxAddress().subtract(data.getMaxAddress()));

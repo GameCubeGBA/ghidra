@@ -74,7 +74,7 @@ public class OatHeaderAnalyzer extends FileFormatAnalyzer {
 			return false;
 		}
 
-		OatHeader oatHeader = null;
+		OatHeader oatHeader;
 		try {
 			oatHeader = OatHeaderFactory.newOatHeader(reader);
 
@@ -114,8 +114,7 @@ public class OatHeaderAnalyzer extends FileFormatAnalyzer {
 			throw e;
 		}
 		finally {
-			oatHeader = null;
-		}
+        }
 		return true;
 	}
 

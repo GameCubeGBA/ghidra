@@ -28,7 +28,7 @@ import ghidra.util.Msg;
 public abstract class ObjectiveC_MethodList implements StructConverter {
 	private String _className;
 	protected ObjectiveC1_State _state;
-	protected long _index = -1;
+	protected long _index;
 
 	protected List<ObjectiveC_Method> methods = new ArrayList<ObjectiveC_Method>();
 

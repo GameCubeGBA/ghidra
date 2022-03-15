@@ -52,8 +52,8 @@ public class ImportBatchTask extends Task {
 
 	private BatchInfo batchInfo;
 	private DomainFolder destFolder;
-	private boolean stripLeadingPath = true;
-	private boolean stripAllContainerPath = false;
+	private boolean stripLeadingPath;
+	private boolean stripAllContainerPath;
 	private ProgramManager programManager;
 	private int totalObjsImported;
 	private int totalAppsImported;

@@ -96,7 +96,7 @@ class PathnameTableModel extends AbstractTableModel {
 			return;
 		}
 		String path = pathList.remove(index);
-		int newIndex=0;
+		int newIndex;
 		if (index == 0) {
 			// place it last in the list
 			pathList.add(path);

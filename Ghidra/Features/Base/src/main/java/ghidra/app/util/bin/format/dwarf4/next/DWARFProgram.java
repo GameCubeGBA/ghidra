@@ -122,7 +122,7 @@ public class DWARFProgram implements Closeable {
 	private int maxDNICacheSize = 50;
 	private FixedSizeHashMap<Long, DWARFNameInfo> dniCache =
 		new FixedSizeHashMap<>(100, maxDNICacheSize);
-	private int nameLengthCutoffSize = DEFAULT_NAME_LENGTH_CUTOFF;
+	private int nameLengthCutoffSize;
 
 	private Map<DWARFAttributeSpecification, DWARFAttributeSpecification> attributeSpecIntern =
 		new HashMap<>();

@@ -552,7 +552,7 @@ public class ResultsState {
 			return true; // flow instructions do not have output
 		}
 
-		Varnode result = null;
+		Varnode result;
 		if (pcodeOp.getOpcode() == PcodeOp.LOAD) {
 			result = simplifyLoad(pcodeOp, values, currentState, monitor);
 		}
@@ -1485,7 +1485,7 @@ public class ResultsState {
 
 		int outerOpcode = outerPcodeOp.getOpcode();
 		long shift = getUnsignedOffset(outerInputValues[1], outerInputValues[1].getSize());
-		long combinedShift = 0;
+		long combinedShift;
 		if (outerOpcode == PcodeOp.INT_RIGHT) {
 			combinedShift = -shift;
 		}

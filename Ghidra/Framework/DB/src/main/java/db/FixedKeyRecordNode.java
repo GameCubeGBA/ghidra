@@ -493,7 +493,7 @@ abstract class FixedKeyRecordNode extends FixedKeyNode implements FieldKeyRecord
 	 */
 	static FixedKeyRecordNode createRecordNode(NodeMgr nodeMgr) throws IOException {
 		Schema schema = nodeMgr.getTableSchema();
-		FixedKeyRecordNode node = null;
+		FixedKeyRecordNode node;
 		if (schema.isVariableLength()) {
 			node = new FixedKeyVarRecNode(nodeMgr, -1, -1);
 		}

@@ -119,7 +119,7 @@ public class ModuleAlgorithmCmd extends BackgroundCommand {
 			return true; // ignore this because the program has changed since this command was
 		}                // scheduled
 
-		SubroutineBlockModel partitioningModel = null;
+		SubroutineBlockModel partitioningModel;
 		if (partitioningModelName == null) {
 			partitioningModel =
 				(SubroutineBlockModel) blockModelService.getActiveSubroutineModel(program);
@@ -146,8 +146,8 @@ public class ModuleAlgorithmCmd extends BackgroundCommand {
 		}
 
 		try {
-			CodeBlockIterator cbi = null;
-			ProgramModule module = null;
+			CodeBlockIterator cbi;
+			ProgramModule module;
 			if (group instanceof ProgramModule) {
 				if (group.equals(root)) {
 					cbi = baseModel.getCodeBlocks(monitor);

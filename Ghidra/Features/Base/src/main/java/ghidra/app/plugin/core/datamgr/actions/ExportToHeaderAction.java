@@ -133,7 +133,7 @@ public class ExportToHeaderAction extends DockingAction {
 			}
 		}
 
-		AnnotationHandler handler = null;
+		AnnotationHandler handler;
 		if (!list.isEmpty()) {
 			list.add(0, new DefaultAnnotationHandler());
 			AnnotationHandlerDialog dlg = new AnnotationHandlerDialog(list);

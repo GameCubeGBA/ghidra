@@ -118,8 +118,8 @@ public abstract class CreateStructureVariableAction extends DockingAction {
 
 	@Override
 	public void actionPerformed(ActionContext context) {
-		ProgramLocation location = null;
-		Program program = null;
+		ProgramLocation location;
+		Program program;
 		if (context instanceof DecompilerActionContext) {
 			DecompilerActionContext decompilerActionContext = (DecompilerActionContext) context;
 			if (decompilerActionContext.isDecompiling()) {

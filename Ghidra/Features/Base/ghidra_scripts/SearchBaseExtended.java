@@ -90,7 +90,7 @@ public class SearchBaseExtended extends GhidraScript {
 
 		try {
 			//Builds object that is used to extract all the instructions masks and values
-			SleighDebugLogger logger = null;
+			SleighDebugLogger logger;
 
 			//Grabs the AddressRange for the first continuous selection of instructions
 			AddressRange addrRange = currentSelection.getFirstRange();

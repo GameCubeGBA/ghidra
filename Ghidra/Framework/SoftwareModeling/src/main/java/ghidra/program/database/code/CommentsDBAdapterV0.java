@@ -144,7 +144,7 @@ class CommentsDBAdapterV0 extends CommentsDBAdapter {
 	@Override
 	public RecordIterator getRecords(Address start, Address end, boolean atStart)
 			throws IOException {
-		RecordIterator it = null;
+		RecordIterator it;
 		if (atStart) {
 			it = new AddressKeyRecordIterator(commentTable, addrMap, start, end, start, true);
 		}

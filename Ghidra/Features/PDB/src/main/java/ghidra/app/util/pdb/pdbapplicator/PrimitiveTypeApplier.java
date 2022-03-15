@@ -51,7 +51,7 @@ public class PrimitiveTypeApplier extends MsTypeApplier {
 	}
 
 	private DataType applyPrimitiveMsType(PrimitiveMsType type) {
-		DataType primitiveDataType = null;
+		DataType primitiveDataType;
 //		String name = type.getName();
 //
 //		DataTypeManager applicatorDataTypeManager = applicator.getDataTypeManager();

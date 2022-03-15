@@ -209,7 +209,7 @@ public class RttiUtil {
 	 */
 	private static class CommonRTTIMatchCounter implements TerminatingConsumer<Address> {
 		int matchingAddrCount = 0;
-		int defaultPointerSize = 4;
+		int defaultPointerSize;
 		boolean terminationRequest = false;
 		Address commonVftableAddress = null;
 		Program program;

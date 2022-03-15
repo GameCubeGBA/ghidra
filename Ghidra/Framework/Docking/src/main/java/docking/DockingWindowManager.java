@@ -615,8 +615,7 @@ public class DockingWindowManager implements PropertyChangeListener, Placeholder
 
 		String title = provider.getTitle();
 		if (title == null) {
-			title = "";
-		}
+        }
 
 		ComponentPlaceholder placeholder = getActivePlaceholder(provider);
 		if (placeholder == null) {

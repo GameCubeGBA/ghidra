@@ -402,7 +402,7 @@ public class DbgEngTest extends AbstractGhidraHeadlessIntegrationTest {
 
 			List<DebugMemoryBasicInformation> collected1 = new ArrayList<>();
 			try {
-				long last = 0;
+				long last;
 				long offset = 0;
 				do {
 					System.out.print(Long.toHexString(offset) + ": ");
@@ -471,8 +471,8 @@ public class DbgEngTest extends AbstractGhidraHeadlessIntegrationTest {
 
 			for (DebugMemoryBasicInformation info : client.getDataSpaces().iterateVirtual(0)) {
 				if (info.state != PageState.FREE) {
-					DebugModule mod = null;
-					String name = "[NONE]";
+					DebugModule mod;
+					String name;
 					try {
 						mod = client.getSymbols().getModuleByOffset(info.baseAddress, 0);
 						name = mod.getName(DebugModuleName.IMAGE);

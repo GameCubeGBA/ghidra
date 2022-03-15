@@ -293,7 +293,7 @@ class FixedKeyVarRecNode extends FixedKeyRecordNode {
 		if (useIndirect) {
 			// Store record in chained buffers
 			len = 4;
-			ChainedBuffer chainedBuffer = null;
+			ChainedBuffer chainedBuffer;
 			if (wasIndirect) {
 				chainedBuffer = new ChainedBuffer(nodeMgr.getBufferMgr(), buffer.getInt(offset));
 				chainedBuffer.setSize(record.length(), false);

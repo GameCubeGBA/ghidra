@@ -27,7 +27,7 @@ public class MacroBuilder extends PcodeBuilder {
 	private SleighCompile slgh;
 	private Location location;
 	private boolean haserror = false;
-	private VectorSTL<OpTpl> outvec = null;
+	private VectorSTL<OpTpl> outvec;
 	private VectorSTL<HandleTpl> params = new VectorSTL<HandleTpl>();
 
 	public MacroBuilder(SleighCompile sl,Location loc,VectorSTL<OpTpl> ovec, int lbcnt) {

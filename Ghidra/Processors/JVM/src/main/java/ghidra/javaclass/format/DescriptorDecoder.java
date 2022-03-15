@@ -320,7 +320,7 @@ public class DescriptorDecoder {
 	public static DataType getPointerType(String descriptor, DataTypeManager dtManager) {
 		int lastBracket = descriptor.lastIndexOf("[");
 		String baseTypeOfArray = descriptor.substring(lastBracket + 1, lastBracket + 2);
-		DataType baseType = null;
+		DataType baseType;
 		switch (baseTypeOfArray.charAt(0)) {
 			case BASE_TYPE_BYTE:
 				baseType = ArrayMethods.getArrayBaseType(JavaClassConstants.T_BYTE, dtManager);
@@ -476,8 +476,8 @@ public class DescriptorDecoder {
 	 */
 	public static String getDescriptorForInvoke(int offset,
 			AbstractConstantPoolInfoJava[] constantPool, JavaInvocationType type) {
-		String descriptor = null;
-		int name_and_type_index = 0;
+		String descriptor;
+		int name_and_type_index;
 		switch (type) {
 			case INVOKE_DYNAMIC:
 				ConstantPoolInvokeDynamicInfo dynamicInfo =

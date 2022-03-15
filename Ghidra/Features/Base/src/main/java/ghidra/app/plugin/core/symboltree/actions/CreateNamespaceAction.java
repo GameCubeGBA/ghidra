@@ -104,7 +104,7 @@ public class CreateNamespaceAction extends SymbolTreeContextAction {
 
 	private String createNamespace(Program program, Namespace parent) {
 
-		String namespaceName = "NewNamespace";
+		String namespaceName;
 		int transactionID = program.startTransaction("Create Namespace");
 		try {
 			SymbolTable symbolTable = program.getSymbolTable();

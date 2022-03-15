@@ -55,7 +55,7 @@ public final class GTableToCSV {
 	final static void writeCSV(PrintWriter writer, GTable table,
 			List<Integer> columns, TaskMonitor monitor) {
 
-		List<TableColumn> tableColumns = null;
+		List<TableColumn> tableColumns;
 		if (columns.isEmpty()) {
 			tableColumns = getVisibleColumnsInOrder(table, monitor);
 		}

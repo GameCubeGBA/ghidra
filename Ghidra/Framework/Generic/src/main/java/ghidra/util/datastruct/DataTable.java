@@ -66,7 +66,7 @@ public class DataTable implements Serializable {
         if (col >= dataColumns.length) {
             growTable(col+1);
         }
-        BooleanArray ba = null;
+        BooleanArray ba;
         if (dataColumns[col] == null) {
             ba = new BooleanArray();
             dataColumns[col] = ba;
@@ -98,7 +98,7 @@ public class DataTable implements Serializable {
         if (col >= dataColumns.length) {
             growTable(col+1);
         }
-        ByteArray ba = null;
+        ByteArray ba;
         if (dataColumns[col] == null) {
             ba = new ByteArray();
             dataColumns[col] = ba;
@@ -130,7 +130,7 @@ public class DataTable implements Serializable {
         if (col >= dataColumns.length) {
             growTable(col+1);
         }
-        ShortArray sa = null;
+        ShortArray sa;
         if (dataColumns[col] == null) {
             sa = new ShortArray();
             dataColumns[col] = sa;
@@ -162,7 +162,7 @@ public class DataTable implements Serializable {
         if (col >= dataColumns.length) {
             growTable(col+1);
         }
-        IntArray ia = null;
+        IntArray ia;
         if (dataColumns[col] == null) {
             ia = new IntArray();
             dataColumns[col] = ia;
@@ -194,7 +194,7 @@ public class DataTable implements Serializable {
         if (col >= dataColumns.length) {
             growTable(col+1);
         }
-        LongArray la = null;
+        LongArray la;
         if (dataColumns[col] == null) {
             la = new LongArray();
             dataColumns[col] = la;
@@ -216,7 +216,7 @@ public class DataTable implements Serializable {
         if (col >= dataColumns.length) {
             growTable(col+1);
         }
-        DoubleArray da = null;
+        DoubleArray da;
         if (dataColumns[col] == null) {
             da = new DoubleArray();
             dataColumns[col] = da;
@@ -238,7 +238,7 @@ public class DataTable implements Serializable {
         if (col >= dataColumns.length) {
             growTable(col+1);
         }
-        FloatArray fa = null;
+        FloatArray fa;
         if (dataColumns[col] == null) {
             fa = new FloatArray();
             dataColumns[col] = fa;
@@ -290,7 +290,7 @@ public class DataTable implements Serializable {
         if (col >= dataColumns.length) {
             growTable(col+1);
         }
-        StringArray sa = null;
+        StringArray sa;
         if (dataColumns[col] == null) {
             sa = new StringArray();
             dataColumns[col] = sa;
@@ -311,7 +311,7 @@ public class DataTable implements Serializable {
         if (col >= dataColumns.length) {
             growTable(col+1);
         }
-        ObjectArray oa = null;
+        ObjectArray oa;
         if (dataColumns[col] == null) {
             oa = new ObjectArray();
             dataColumns[col] = oa;
@@ -354,7 +354,7 @@ public class DataTable implements Serializable {
         if (col >= dataColumns.length) {
             growTable(col+1);
         }
-        ByteArrayArray baa = null;
+        ByteArrayArray baa;
         if (dataColumns[col] == null) {
             baa = new ByteArrayArray();
             dataColumns[col] = baa;
@@ -386,7 +386,7 @@ public class DataTable implements Serializable {
         if (col >= dataColumns.length) {
             growTable(col+1);
         }
-        ShortArrayArray saa = null;
+        ShortArrayArray saa;
         if (dataColumns[col] == null) {
             saa = new ShortArrayArray();
             dataColumns[col] = saa;
@@ -417,7 +417,7 @@ public class DataTable implements Serializable {
         if (col >= dataColumns.length) {
             growTable(col+1);
         }
-        IntArrayArray iaa = null;
+        IntArrayArray iaa;
         if (dataColumns[col] == null) {
             iaa = new IntArrayArray();
             dataColumns[col] = iaa;
@@ -439,7 +439,7 @@ public class DataTable implements Serializable {
         if (col >= dataColumns.length) {
             growTable(col+1);
         }
-        FloatArrayArray faa = null;
+        FloatArrayArray faa;
         if (dataColumns[col] == null) {
             faa = new FloatArrayArray();
             dataColumns[col] = faa;
@@ -461,7 +461,7 @@ public class DataTable implements Serializable {
         if (col >= dataColumns.length) {
             growTable(col+1);
         }
-        DoubleArrayArray daa = null;
+        DoubleArrayArray daa;
         if (dataColumns[col] == null) {
             daa = new DoubleArrayArray();
             dataColumns[col] = daa;
@@ -499,7 +499,7 @@ public class DataTable implements Serializable {
         if (col >= dataColumns.length) {
             growTable(col+1);
         }
-        LongArrayArray laa = null;
+        LongArrayArray laa;
         if (dataColumns[col] == null) {
             laa = new LongArrayArray();
             dataColumns[col] = laa;
@@ -552,7 +552,7 @@ public class DataTable implements Serializable {
         if (col >= dataColumns.length) {
             growTable(col+1);
         }
-        StringArrayArray saa = null;
+        StringArrayArray saa;
         if (dataColumns[col] == null) {
             saa = new StringArrayArray();
             dataColumns[col] = saa;

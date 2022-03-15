@@ -117,7 +117,7 @@ public class FdeTable {
 	 */
 	public void create(Address addr, DwarfEHDecoder decoder, long fdeTableCnt)
 			throws MemoryAccessException, ExceptionHandlerFrameException {
-		CreateStructureCmd dataCmd = null;
+		CreateStructureCmd dataCmd;
 		long curFdeTableCnt = 0;
 
 		if (addr == null || decoder == null) {

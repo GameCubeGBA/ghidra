@@ -258,7 +258,7 @@ class PasteManager {
 			return false;
 		}
 
-		boolean pasteOK = false;
+		boolean pasteOK;
 		try {
 			if (module != null) {
 				pasteOK = pasteModule(destNode, nodeToPaste, targetModule, module);

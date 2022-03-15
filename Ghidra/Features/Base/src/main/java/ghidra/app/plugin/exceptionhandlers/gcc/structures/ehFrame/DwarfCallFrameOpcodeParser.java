@@ -118,13 +118,11 @@ public class DwarfCallFrameOpcodeParser {
 				switch (opcode) {
 
 					case DW_CFA_advance_loc:
-						primaryOpcode = true;
 
-						sb.append("DW_CFA_advance_loc delta[").append(exOpcodeOrParam).append("]");
+                        sb.append("DW_CFA_advance_loc delta[").append(exOpcodeOrParam).append("]");
 						break;
 					case DW_CFA_offset:
-						primaryOpcode = true;
-						operand1 = GccAnalysisUtils.readULEB128(program, curr);
+                        operand1 = GccAnalysisUtils.readULEB128(program, curr);
 						operand1Len = GccAnalysisUtils.getULEB128Length(program, curr);
 
 						curr = curr.add(operand1Len);
@@ -132,8 +130,7 @@ public class DwarfCallFrameOpcodeParser {
 						sb.append("DW_CFA_offset reg[").append(exOpcodeOrParam).append("] ").append(operand1);
 						break;
 					case DW_CFA_restore:
-						primaryOpcode = true;
-						sb.append("DW_CFA_restore reg[").append(exOpcodeOrParam).append("]");
+                        sb.append("DW_CFA_restore reg[").append(exOpcodeOrParam).append("]");
 						break;
 				}
 			}
@@ -142,8 +139,7 @@ public class DwarfCallFrameOpcodeParser {
 
 					//  case DW_CFA_extended:
 					case DW_CFA_nop:
-						primaryOpcode = true;
-						sb.append("DW_CFA_nop");
+                        sb.append("DW_CFA_nop");
 						break;
 
 					case DW_CFA_set_loc:

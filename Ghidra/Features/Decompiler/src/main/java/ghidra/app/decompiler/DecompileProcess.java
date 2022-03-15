@@ -438,7 +438,7 @@ public class DecompileProcess {
 		callback = cback;
 
 		setup();
-		String restring = null;
+		String restring;
 		try {
 			write(command_start);
 			writeString("registerProgram");
@@ -469,7 +469,7 @@ public class DecompileProcess {
 		// Once a program is deregistered, the process is never
 		// used again
 		statusGood = false;
-		String restring = null;
+		String restring;
 		write(command_start);
 		writeString("deregisterProgram");
 		writeString(Integer.toString(archId));
@@ -491,7 +491,7 @@ public class DecompileProcess {
 		if (!statusGood) {
 			throw new IOException(command + " called on bad process");
 		}
-		LimitedByteBuffer resbuf = null;
+		LimitedByteBuffer resbuf;
 		try {
 			write(command_start);
 			writeString(command);
@@ -525,7 +525,7 @@ public class DecompileProcess {
 			throw new IOException(command + " called on bad process");
 		}
 
-		LimitedByteBuffer resbuf = null;
+		LimitedByteBuffer resbuf;
 		int validatedTimeoutMs = getTimeoutMs(timeoutSecs);
 		GTimerMonitor timerMonitor = GTimer.scheduleRunnable(validatedTimeoutMs, timeoutRunnable);
 
@@ -572,7 +572,7 @@ public class DecompileProcess {
 		if (!statusGood) {
 			throw new IOException(command + " called on bad process");
 		}
-		LimitedByteBuffer resbuf = null;
+		LimitedByteBuffer resbuf;
 		try {
 			write(command_start);
 			writeString(command);
@@ -606,7 +606,7 @@ public class DecompileProcess {
 		if (!statusGood) {
 			throw new IOException(command + " called on bad process");
 		}
-		LimitedByteBuffer resbuf = null;
+		LimitedByteBuffer resbuf;
 		try {
 			write(command_start);
 			writeString(command);

@@ -300,7 +300,7 @@ public class OmfLoader extends AbstractLibrarySupportLoader {
 
 			//		if (segment.hasIteratedData() && segment.hasEnumeratedData())
 			//			throw new IOException("OMF segment has both iterated and enumerated data blocks");
-			MemoryBlock block = null;
+			MemoryBlock block;
 
 			final long segmentSize = segment.getSegmentLength();
 
@@ -361,7 +361,7 @@ public class OmfLoader extends AbstractLibrarySupportLoader {
 		}
 
 		// Always Align the fake External Address Space
-		Address externAddress = null;
+		Address externAddress;
 		long newOffset = (maxAddr.getOffset() + 0x1000) & 0xfffffffffffff000L;
 		externAddress = maxAddr.getNewAddress(newOffset);
 		return externAddress;
@@ -389,7 +389,7 @@ public class OmfLoader extends AbstractLibrarySupportLoader {
 			if (monitor.isCancelled()) {
 				break;
 			}
-			Address addrBase = null;
+			Address addrBase;
 			if (symbolrec.getSegmentIndex() != 0) {
 				// TODO: What does it mean if both the segment and group index are non-zero?
 				//     Is the segment index group relative?
@@ -483,7 +483,7 @@ public class OmfLoader extends AbstractLibrarySupportLoader {
 				if (monitor.isCancelled()) {
 					break;
 				}
-				Address address = null;
+				Address address;
 				if (symbol.getSegmentRef() != 0) { // Look for special Borland segment symbols
 					OmfSegmentHeader segment =
 						header.getExtraSegments().get(symbol.getSegmentRef() - 1);

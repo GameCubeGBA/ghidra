@@ -467,7 +467,7 @@ public class EquatePlugin extends Plugin {
 
 		// Now get an iterator for the selected region (or the single address if that's
 		// the case
-		CodeUnitIterator iter = null;
+		CodeUnitIterator iter;
 
 		// Get the selected region.  If this is null, then we're just operating on a single address,
 		// which is fine.

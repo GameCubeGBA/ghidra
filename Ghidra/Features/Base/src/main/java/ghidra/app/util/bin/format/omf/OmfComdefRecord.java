@@ -32,7 +32,7 @@ public class OmfComdefRecord extends OmfExternalSymbol {
 			String name = OmfRecord.readString(reader);
 			int typeIndex = OmfRecord.readIndex(reader);
 			byte dataType = reader.readNextByte();
-			int byteLength=0;
+			int byteLength;
 			if (dataType == 0x61) {		// FAR data, reads numElements and elSize
 				int numElements = readCommunalLength(reader);
 				int elSize = readCommunalLength(reader);

@@ -112,7 +112,7 @@ public class MarkupWallaceSrcScript extends GhidraScript {
 
 		
 		//create the Class "Gadget" to put most function symbols in
-		Namespace namespace = null;
+		Namespace namespace;
 		namespace = symbolTable.getNamespace("Gadget", null);
 		if(namespace == null) {
 			 namespace = symbolTable.createClass(null, "Gadget", SourceType.USER_DEFINED);

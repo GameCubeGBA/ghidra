@@ -32,7 +32,7 @@ public class Column {
 	public int width = -1;
 
 	/** The grid index of this column (0, 1...n) for the number of columns */
-	public int index = Integer.MAX_VALUE;
+	public int index;
 
 	public Column(int index) {
 		this.index = index;

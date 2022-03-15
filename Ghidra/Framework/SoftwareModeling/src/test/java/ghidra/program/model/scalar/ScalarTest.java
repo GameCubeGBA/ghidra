@@ -28,7 +28,7 @@ public class ScalarTest extends AbstractGenericTest {
 
 	@Test
 	public void testScalar64() {
-		Scalar s = null;
+		Scalar s;
 
 		s = new Scalar(64, -1, true);
 		Assert.assertEquals("0xffffffffffffffff", s.toString(16, true, false, "0x", ""));
@@ -86,7 +86,7 @@ public class ScalarTest extends AbstractGenericTest {
 	@Test
 	public void testScalar8() {
 
-		Scalar s = null;
+		Scalar s;
 
 		s = new Scalar(8, -1, true);
 		Assert.assertEquals("0xff", s.toString(16, true, false, "0x", ""));

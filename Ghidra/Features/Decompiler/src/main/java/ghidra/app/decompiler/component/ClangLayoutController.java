@@ -432,7 +432,7 @@ public class ClangLayoutController implements LayoutModel, LayoutModelListener {
 	public SearchLocation findNextTokenForSearchRegex(String searchString,
 			FieldLocation currentLocation, boolean forwardSearch) {
 
-		Pattern pattern = null;
+		Pattern pattern;
 		try {
 			pattern = Pattern.compile(searchString, Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
 		}

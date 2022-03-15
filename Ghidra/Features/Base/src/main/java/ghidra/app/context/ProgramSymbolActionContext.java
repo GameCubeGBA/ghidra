@@ -24,7 +24,7 @@ import ghidra.program.model.symbol.Symbol;
 
 public class ProgramSymbolActionContext extends ProgramActionContext {
 
-	private List<Symbol> symbols = new ArrayList<Symbol>();
+	private List<Symbol> symbols;
 
 	public ProgramSymbolActionContext(ComponentProvider provider, Program program,
 			List<Symbol> symbols, Component sourceComponent) {

@@ -284,7 +284,7 @@ public class MzLoader extends AbstractLibrarySupportLoader {
 					continue;
 				}
 
-				int numBytes = 0;
+				int numBytes;
 				if ((i + 1) < segStartList.size()) {
 					SegmentedAddress end = (SegmentedAddress) segStartList.get(i + 1);
 					int nextLoc = ((end.getSegment() << 4) - csStartEffective) + dataStart;

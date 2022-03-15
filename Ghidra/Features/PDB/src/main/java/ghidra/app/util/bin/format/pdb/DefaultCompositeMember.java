@@ -327,7 +327,7 @@ public class DefaultCompositeMember extends CompositeMember {
 		Composite composite = (Composite) memberDataType;
 		Composite copy = (Composite) composite.copy(dataTypeManager);
 
-		int pack = 0;
+		int pack;
 		copy.setToDefaultPacking();
 
 		boolean alignOK = isGoodAlignment(copy, preferredSize);
@@ -623,12 +623,10 @@ public class DefaultCompositeMember extends CompositeMember {
 					deferredBitFieldMember = memberCopy;
 					memberCopy = padding;
 					bitfieldDt = (PdbBitField) memberCopy.memberDataType;
-					bitOffset = bitfieldDt.getBitOffsetWithinBase();
-				}
+                }
 				else if (bitOffset < 0) {
 					// TODO: assumes little-endian, add support for big-endian
-					bitOffset = 0;
-				}
+                }
 				insertMinimalStructureBitfield(nestedStructure, 0, memberCopy.memberName,
 					bitfieldDt, memberCopy.getMemberComment());
 			}
@@ -829,12 +827,10 @@ public class DefaultCompositeMember extends CompositeMember {
 						deferredBitFieldMember = member;
 						member = padding;
 						bitfieldDt = (PdbBitField) member.memberDataType;
-						bitOffset = bitfieldDt.getBitOffsetWithinBase();
-					}
+                    }
 					else if (bitOffset < 0) {
 						// TODO: assumes little-endian, add support for big-endian
-						bitOffset = 0;
-					}
+                    }
 					insertMinimalStructureBitfield((Structure) memberDataType, member.memberOffset,
                             member.memberName, bitfieldDt, member.getMemberComment());
 				}
@@ -884,8 +880,7 @@ public class DefaultCompositeMember extends CompositeMember {
 					deferredBitFieldMember = member;
 					member = padding;
 					bitfieldDt = (PdbBitField) member.memberDataType;
-					bitOffset = bitfieldDt.getBitOffsetWithinBase();
-				}
+                }
 				else if (bitOffset < 0) {
 					// TODO: assumes little-endian, add support for big-endian
 					bitOffset = bfGroup.getConsumedBits();

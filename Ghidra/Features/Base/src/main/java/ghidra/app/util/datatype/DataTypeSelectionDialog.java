@@ -38,7 +38,7 @@ public class DataTypeSelectionDialog extends DialogComponentProvider {
 	private DataTypeSelectionEditor editor;
 	private PluginTool pluginTool;
 	private DataType userChoice;
-	private int maxSize = -1;
+	private int maxSize;
 	private DataTypeManager dtm;
 	private final AllowedDataTypes allowedTypes;
 

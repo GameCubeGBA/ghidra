@@ -53,10 +53,10 @@ public class InfiniteProgressPanel extends JComponent implements MouseListener {
     private static final int DEFAULT_FADEIN_DELAY = 300;
     
     protected String text = DEFAULT_MESSAGE_TEXT;
-    protected int fadeDelay = DEFAULT_FADEIN_DELAY;
-    protected float shield = DEFAULT_SHIELD;    
-    protected int barsCount = DEFAULT_NUMBER_OF_BARS;
-    protected int fps = DEFAULT_FRAMES_PER_SECOND;
+    protected int fadeDelay;
+    protected float shield;
+    protected int barsCount;
+    protected int fps;
     protected RenderingHints hints;
     protected Area[] ticker;
     
@@ -206,8 +206,8 @@ for ( Area element : ticker ) {
     }
 }        
         
-        int channel = 0;
-        int blue = 255;
+        int channel;
+        int blue;
         Color textColor = Color.BLACK;
         for ( int i = 0; i < ticker.length; i++ ) {
             

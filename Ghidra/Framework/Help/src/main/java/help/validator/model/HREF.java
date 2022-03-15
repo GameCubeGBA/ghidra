@@ -167,7 +167,7 @@ public class HREF implements Comparable<HREF> {
 	@Override
 	public String toString() {
 
-		String source = null;
+		String source;
 		Path sourcePath = HelpBuildUtils.relativizeWithHelpTopics(sourceFile);
 		if (sourcePath == null) {
 			// not in 'help/topics'; relativize to the repo name

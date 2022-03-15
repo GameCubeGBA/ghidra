@@ -227,7 +227,7 @@ public class ImporterUtilities {
 
 		Window parent = tool.getActiveWindow();
 		FileSystemBrowserService fsbService = tool.getService(FileSystemBrowserService.class);
-		int choice = 0; // cancelled
+		int choice; // cancelled
 		if (fsbService == null) {
 
 			//@formatter:off

@@ -82,7 +82,7 @@ public class DexExceptionHandlersAnalyzer extends FileFormatAnalyzer {
 			throws Exception {
 		AddressSet set = new AddressSet();
 
-		DexHeader header = null;
+		DexHeader header;
 
 		DexAnalysisState analysisState = DexAnalysisState.getState(program);
 		header = analysisState.getHeader();

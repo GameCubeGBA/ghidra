@@ -547,7 +547,7 @@ public class DecompileDebug {
 	}
 
 	private void dumpDatabases(OutputStream debugStream) throws IOException {
-		Namespace scopename = null;
+		Namespace scopename;
 		ArrayList<Namespace> spaceList = orderNamespaces();
 		debugStream.write("<db scodeidbyname=\"false\">\n".getBytes());
 		for (Namespace element : spaceList) {

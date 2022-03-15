@@ -53,7 +53,7 @@ public abstract class Database {
 	protected int currentVersion;
 	protected long lastModified;
 
-	protected boolean isVersioned = false;
+	protected boolean isVersioned;
 	protected boolean isCheckOutCopy = false;
 	protected boolean updateAllowed = true;
 	protected BufferFileManager bfMgr;

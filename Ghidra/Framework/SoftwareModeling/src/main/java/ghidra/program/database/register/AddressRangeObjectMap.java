@@ -379,7 +379,7 @@ public class AddressRangeObjectMap<T> {
 	}
 
 	class RestrictedIndexRangeIterator implements AddressRangeIterator {
-		private int pos = 0;
+		private int pos;
 		private Address end;
 		private AddressRange nextRange;
 

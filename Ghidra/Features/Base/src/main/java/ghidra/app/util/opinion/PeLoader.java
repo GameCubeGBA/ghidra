@@ -1024,9 +1024,9 @@ public class PeLoader extends AbstractPeDebugLoader {
 
 		public static CompilerEnum getOpinion(PortableExecutable pe, ByteProvider provider)
 				throws IOException {
-			CompilerEnum compilerType = CompilerEnum.Unknown;
-			CompilerEnum offsetChoice = CompilerEnum.Unknown;
-			CompilerEnum asmChoice = CompilerEnum.Unknown;
+			CompilerEnum compilerType;
+			CompilerEnum offsetChoice;
+			CompilerEnum asmChoice;
 			CompilerEnum errStringChoice = CompilerEnum.Unknown;
 			BinaryReader br = new BinaryReader(provider, true);
 

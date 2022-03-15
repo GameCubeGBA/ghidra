@@ -238,7 +238,7 @@ class ProgramTreePanel extends JPanel implements ChangeListener {
 	 */
 	private void create(String treeName) {
 		setLayout(new BorderLayout());
-		ProgramNode root = null;
+		ProgramNode root;
 
 		root = new ProgramNode(null, "No Program");
 

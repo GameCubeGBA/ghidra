@@ -784,7 +784,7 @@ class FGActionManager {
 				@Override
 				public void actionPerformed(ActionContext context) {
 
-					AddressSet addresses = null;
+					AddressSet addresses;
 					Collection<FGVertex> selectedVertices = controller.getSelectedVertices();
 					if (!selectedVertices.isEmpty()) {
 						addresses = getAddressesForVertices(selectedVertices);

@@ -518,7 +518,7 @@ public class PowerPCAddressAnalyzer extends ConstantPropagationAnalyzer {
 				continue;
 			}
 
-			CodeBlock bl = null;
+			CodeBlock bl;
 			try {
 				bl = model.getFirstCodeBlockContaining(loc, monitor);
 			}

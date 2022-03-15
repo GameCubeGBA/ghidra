@@ -684,7 +684,7 @@ class VarKeyRecordNode extends VarKeyNode implements FieldKeyRecordNode {
 		if (useIndirect) {
 			// Store record in chained buffers
 			len = 4;
-			ChainedBuffer chainedBuffer = null;
+			ChainedBuffer chainedBuffer;
 			if (wasIndirect) {
 				chainedBuffer =
 					new ChainedBuffer(nodeMgr.getBufferMgr(), buffer.getInt(offset + keyLen));

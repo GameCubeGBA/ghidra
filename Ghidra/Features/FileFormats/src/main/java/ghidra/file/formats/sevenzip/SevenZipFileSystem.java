@@ -206,7 +206,7 @@ public class SevenZipFileSystem implements GFileSystem {
 		
 		try (CryptoSession cryptoSession = fsService.newCryptoSession()) {
 			List<ISimpleInArchiveItem> encryptedItems = getEncryptedItemsWithoutPasswords();
-			ISimpleInArchiveItem encryptedItem = null;
+			ISimpleInArchiveItem encryptedItem;
 			while ((encryptedItem = getFirstItemWithoutPassword(encryptedItems)) != null &&
 				!monitor.isCancelled()) {
 				GFile gFile = fsIndexHelper.getFileByIndex(encryptedItem.getItemIndex());

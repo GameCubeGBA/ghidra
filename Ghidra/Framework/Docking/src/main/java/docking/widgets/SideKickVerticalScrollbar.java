@@ -264,7 +264,7 @@ public class SideKickVerticalScrollbar extends JScrollBar {
 			Dimension size = parent.getSize();
 			Component sideKick = parent.getComponent(0);
 			int height = size.height;
-			int y = 0;
+			int y;
 			Component[] components = delegate.getComponents();
 			if (components.length == 2) {
 				Component topButton = delegate.getComponent(1);

@@ -54,7 +54,7 @@ class ProjectJarWriter extends JarWriter {
 			return false;
 		}
 
-		FileInputStream in = null;
+		FileInputStream in;
 		try {
 			in = new FileInputStream(baseFile);
 		}
@@ -63,7 +63,7 @@ class ProjectJarWriter extends JarWriter {
 			return false;
 		}
 		byte[] bytes = new byte[4096];
-		int numRead = 0;
+		int numRead;
 		//Create a zip entry and write it out along with its data.
 		String name = baseFile.getName();
 		if (name.equals(PROPERTIES_FILE_NAME)) {

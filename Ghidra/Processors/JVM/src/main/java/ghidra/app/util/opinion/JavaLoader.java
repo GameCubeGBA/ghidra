@@ -125,7 +125,7 @@ public class JavaLoader extends AbstractLibrarySupportLoader {
 
 	private void createMethodLookupMemoryBlock(Program program, TaskMonitor monitor) {
 		Address address = toAddr(program, JavaClassUtil.LOOKUP_ADDRESS);
-		MemoryBlock block = null;
+		MemoryBlock block;
 		Memory memory = program.getMemory();
 		try {
 			block = memory.createInitializedBlock("method_lookup", address,

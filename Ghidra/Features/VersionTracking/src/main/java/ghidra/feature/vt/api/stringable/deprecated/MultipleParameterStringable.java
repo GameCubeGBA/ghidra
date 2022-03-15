@@ -27,7 +27,7 @@ public class MultipleParameterStringable extends Stringable {
 
 	private static final String CUSTOM_DELIMITER = "\n";
 
-	private List<ParameterStringable> parameterStringables = new ArrayList<ParameterStringable>();
+	private List<ParameterStringable> parameterStringables;
 
 	public MultipleParameterStringable() {
 		this(null);

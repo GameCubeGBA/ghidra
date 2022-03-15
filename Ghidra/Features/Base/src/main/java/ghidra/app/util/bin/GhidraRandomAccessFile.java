@@ -39,7 +39,7 @@ public class GhidraRandomAccessFile implements AutoCloseable {
 	private byte[] lastbuffer = EMPTY;
 	private long lastbufferOffset = 0;
 	private long lastbufferFileStartIndex = 0;
-	private boolean open = false;
+	private boolean open;
 
 	private void checkOpen() throws IOException {
 		if (!open) {
@@ -157,8 +157,7 @@ public class GhidraRandomAccessFile implements AutoCloseable {
 			if (pos < bufferFileStartIndex || pos >= bufferFileStartIndex + BUFFER_SIZE) {
 				// not in either, gotta get a new one
 				buffer = EMPTY;
-				bufferOffset = 0;
-				bufferFileStartIndex = pos;
+                bufferFileStartIndex = pos;
 			}
 		}
 		bufferOffset = pos - bufferFileStartIndex;

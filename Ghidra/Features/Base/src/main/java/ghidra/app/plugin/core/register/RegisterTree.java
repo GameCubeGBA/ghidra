@@ -65,7 +65,7 @@ public class RegisterTree extends GTree {
 	void setProgram(Program program) {
 		cancelWork();
 		this.program = program;
-		Register[] registers = null;
+		Register[] registers;
 		if (program != null) {
 			registers =
 				isFiltered ? program.getProgramContext().getRegistersWithValues()

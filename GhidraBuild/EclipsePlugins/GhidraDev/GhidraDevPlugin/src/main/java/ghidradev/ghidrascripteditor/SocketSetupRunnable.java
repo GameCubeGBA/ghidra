@@ -27,7 +27,7 @@ import org.eclipse.swt.widgets.Display;
  */
 public class SocketSetupRunnable implements Runnable {
 
-	private ServerSocket serverSocket = null;
+	private ServerSocket serverSocket;
 
 	/**
 	 * Creates a new runnable.

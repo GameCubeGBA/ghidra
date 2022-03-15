@@ -280,7 +280,7 @@ public class HelpManager implements HelpService {
 	}
 
 	private ID createHelpID(String helpIDString) {
-		BadIDException helpException = null;
+		BadIDException helpException;
 
 		try {
 			return ID.create(helpIDString, mainHS);
@@ -334,7 +334,7 @@ public class HelpManager implements HelpService {
 
 	private URL getURLForHelpLocation(HelpLocation helpLocation) {
 		String helpId = helpLocation.getHelpId();
-		ID id = null;
+		ID id;
 		try {
 			id = createHelpID(helpId);
 		}

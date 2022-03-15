@@ -58,7 +58,7 @@ public class SH_ElfRelocationHandler extends ElfRelocationHandler {
 		Address symbolAddr = elfRelocationContext.getSymbolAddress(sym);
 		int symbolValue = (int) elfRelocationContext.getSymbolValue(sym);
 
-		int newValue = 0;
+		int newValue;
 		int oldValue;
 
 		switch (type) {

@@ -180,8 +180,7 @@ public class VerticalChoicesPanel extends ConflictPanel {
             for (JComponent headerComp : headerComps) {
                 rowPanel.remove(headerComp);
             }
-			headerComps = null;
-			if (rowComps.isEmpty()) {
+            if (rowComps.isEmpty()) {
 				rowComps.add(0, new ArrayList<JComponent>());
 			}
 			else {

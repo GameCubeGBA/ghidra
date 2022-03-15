@@ -253,8 +253,8 @@ public class ByteSequenceRowObject {
 					continue;
 				}
 				numTotalSeqs++;
-				String totalBytes = null;
-				int totalBytesLen = 0;
+				String totalBytes;
+				int totalBytesLen;
 				String bytes = null;
 				String disassembly = null;
 				switch (pathFilter.getInstructionType()) {

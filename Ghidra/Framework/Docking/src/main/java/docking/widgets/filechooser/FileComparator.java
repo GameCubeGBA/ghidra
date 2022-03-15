@@ -30,7 +30,7 @@ class FileComparator implements Comparator<File> {
 	final static int SORT_BY_TIME = 3333;
 
 	private GhidraFileChooserModel model;
-	private int sortBy = SORT_BY_NAME;
+	private int sortBy;
 
 	FileComparator(GhidraFileChooserModel model) {
 		this(model, SORT_BY_NAME);

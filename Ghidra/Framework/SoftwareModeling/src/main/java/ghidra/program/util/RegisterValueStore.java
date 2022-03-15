@@ -53,7 +53,7 @@ public class RegisterValueStore {
 	// greatly reduce efficiency.  The cache must be flushed externally prior to closing the
 	// current database transaction. 
 	//
-	private boolean rangeWriteCacheEnabled = false;
+	private boolean rangeWriteCacheEnabled;
 	private RegisterValue rangeWriteCacheValue;
 	private Address rangeWriteCacheMin;
 	private Address rangeWriteCacheMax;

@@ -244,7 +244,7 @@ public class TypeDefDataTypeHTMLRepresentation extends HTMLDataTypeRepresentatio
 
 			// This text should already be encoded and already trimmed
 			TextLine line = (TextLine) iterator.next();
-			String bodyLine = line.getText();
+			String bodyLine;
 			bodyLine = wrapStringInColor(line.getText(), line.getTextColor());
 			buffy.append(bodyLine);
 		}

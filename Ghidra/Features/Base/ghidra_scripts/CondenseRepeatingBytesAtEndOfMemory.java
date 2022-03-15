@@ -48,7 +48,7 @@ public class CondenseRepeatingBytesAtEndOfMemory extends GhidraScript {
 		Listing listing = currentProgram.getListing();
 		
 
-		Address currentAddr = currentAddress;        
+		Address currentAddr;
 		
 		boolean isInitializedBlock = memoryBlock.isInitialized();
 		if(isInitializedBlock){
@@ -57,7 +57,7 @@ public class CondenseRepeatingBytesAtEndOfMemory extends GhidraScript {
 			byte repeatingByte = currentProgram.getMemory().getByte(currentAddr);
 			
 		
-			MemoryBlock currentMemoryBlock = null;		
+			MemoryBlock currentMemoryBlock;
 		
 			
 			// search for next repeatedByte from the end of memory

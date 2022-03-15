@@ -89,7 +89,6 @@ public abstract class IndexedDynamicDataType extends DynamicDataType {
 			table.put(Long.valueOf(keys[i]), Integer.valueOf(i));
 		}
 		if (mask == 0) {
-			mask = 0xFFFFFFFF;
 		}
 	}
 
@@ -143,7 +142,7 @@ public abstract class IndexedDynamicDataType extends DynamicDataType {
 
 		// Find index
 		long index = getIndex(memory, start.add(indexOffset)) & mask;
-		Integer structIndex = null;
+		Integer structIndex;
 		if (keys.length == 1) {
 			structIndex = Integer.valueOf(index == keys[0] ? 0 : 1);
 		}
@@ -161,7 +160,7 @@ public abstract class IndexedDynamicDataType extends DynamicDataType {
 			Msg.error(this, "ERROR in " + name + " at " + start);
 			return null;
 		}
-		DataTypeComponent[] comps = null;
+		DataTypeComponent[] comps;
 		if (data.getDescription().equalsIgnoreCase(NULL_BODY_DESCRIPTION)) {
 			comps = new DataTypeComponent[1];
 		}

@@ -31,7 +31,7 @@ public class FcgEdgePaintTransformer implements Function<FcgEdge, Paint> {
 	private Color directColor;
 	private Color indirectColor;
 
-	private Color[] directColorWithAlpha = new Color[10];
+	private Color[] directColorWithAlpha;
 
 	// only one color for now; may have more; these should be changeable via graph options
 	public FcgEdgePaintTransformer(Color directColor, Color indirectColor) {

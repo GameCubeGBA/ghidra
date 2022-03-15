@@ -187,8 +187,7 @@ class GhidraFolderData {
 					versionedFileSystem.renameFolder(parentPath, name, newName);
 				}
 				catch (IOException e) {
-					sendEvent = false;
-					if (folderExists) {
+                    if (folderExists) {
 						fileSystem.renameFolder(parentPath, newName, name);
 					}
 					throw e;
@@ -406,8 +405,7 @@ class GhidraFolderData {
 				}
 				folderDataCache.remove(folderName);
 				folderData.dispose();
-				folderData = null;
-			}
+            }
 			if (visited) {
 				folderData = addFolderData(folderName);
 				if (folderData == null) {
@@ -1035,8 +1033,7 @@ class GhidraFolderData {
 							newParent.getPathname());
 					}
 					catch (IOException e) {
-						sendEvent = false;
-						if (folderExists) {
+                        if (folderExists) {
 							fileSystem.moveFolder(newParent.getPathname(), name,
 								parent.getPathname());
 						}

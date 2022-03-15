@@ -38,7 +38,7 @@ public class ColumnFilterDialogModel<R> {
 
 	private RowObjectFilterModel<R> tableModel;
 
-	private List<ColumnFilterData<?>> allFilters = new ArrayList<>();
+	private List<ColumnFilterData<?>> allFilters;
 	private List<DialogFilterRow> filterRows = new ArrayList<>();
 
 	private WeakSet<TableFilterDialogModelListener> listeners =

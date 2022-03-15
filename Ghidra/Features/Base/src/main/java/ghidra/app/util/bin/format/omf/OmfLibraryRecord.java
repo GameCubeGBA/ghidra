@@ -76,7 +76,7 @@ public class OmfLibraryRecord extends OmfRecord {
 	}
 	
 	public static OmfLibraryRecord parse(BinaryReader reader,TaskMonitor monitor) throws IOException {
-		OmfLibraryRecord res = null;
+		OmfLibraryRecord res;
 		byte type = reader.peekNextByte();
 		if (type != (byte)0xF0)
 			throw new IOException("Not an OMF Library record");

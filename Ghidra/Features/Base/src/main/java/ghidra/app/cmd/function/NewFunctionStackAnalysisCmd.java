@@ -46,10 +46,10 @@ public class NewFunctionStackAnalysisCmd extends BackgroundCommand {
 
 	private AddressSet entryPoints = new AddressSet();
 	private Program program;
-	private boolean forceProcessing = false;
+	private boolean forceProcessing;
 	private boolean dontCreateNewVariables = false;
-	private boolean doParams = false;
-	private boolean doLocals = false;
+	private boolean doParams;
+	private boolean doLocals;
 	private Register stackReg;
 	private int purge = 0;
 
@@ -404,7 +404,7 @@ public class NewFunctionStackAnalysisCmd extends BackgroundCommand {
 
 		int sortedVarCnt = sortedVariables.size();
 
-		int index = 0;
+		int index;
 		for (index = 0; index < sortedVarCnt; ++index) {
 			Variable var = sortedVariables.get(index);
 			if (growsNegative && (var instanceof Parameter)) {

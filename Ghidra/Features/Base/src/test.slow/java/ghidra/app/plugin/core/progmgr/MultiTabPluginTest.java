@@ -500,7 +500,7 @@ public class MultiTabPluginTest extends AbstractGhidraHeadedIntegrationTest {
 		System.out.println("available width: " + panelWidth);
 
 		// size label
-		int totalWidth = 0;
+		int totalWidth;
 		JComponent listLabel = (JComponent) getInstanceField("showHiddenListLabel", panel);
 		System.out.println("label width: " + listLabel.getWidth());
 		totalWidth = listLabel.getWidth();

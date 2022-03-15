@@ -405,7 +405,6 @@ public class StructureEditorLockedCellEditTest extends AbstractStructureEditorTe
 		assertNotNull(dialog);
 		assertEquals("Enter Number", dialog.getTitle());
 		okInput(dialog, 14);
-		dialog = null;
 		waitUntilDialogProviderGone(NumberInputDialog.class, 2000);
 
 		assertNotEditingField();
@@ -430,7 +429,7 @@ public class StructureEditorLockedCellEditTest extends AbstractStructureEditorTe
 		String name = function.getName();
 		FunctionDefinitionDataType functionDefinitionDataType =
 			new FunctionDefinitionDataType(function, true);
-		FunctionDefinition functionDefinition = null;
+		FunctionDefinition functionDefinition;
 		boolean commit = false;
 		txId = program.startTransaction("Modify Program");
 		try {

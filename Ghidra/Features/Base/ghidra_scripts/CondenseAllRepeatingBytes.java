@@ -60,7 +60,7 @@ public class CondenseAllRepeatingBytes extends GhidraScript {
 			}
 			int repeatLen = minRepeatLen;
 			// get iterator over all undefined of current memory block
-			MemoryBlock currentMemoryBlock = null;
+			MemoryBlock currentMemoryBlock;
 			Address start = memoryBlock.getStart();
 			boolean sameMemoryBlock = true;
 			

@@ -210,7 +210,7 @@ public class ProjectInfoDialog extends DialogComponentProvider {
 	private JPanel buildRepositoryInfoPanel() {
 
 		String serverName = "";
-		ServerInfo info = null;
+		ServerInfo info;
 		String repositoryName = "";
 		String portNumberStr = "";
 		boolean isConnected = false;

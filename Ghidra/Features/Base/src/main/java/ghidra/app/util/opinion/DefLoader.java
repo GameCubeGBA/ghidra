@@ -40,7 +40,7 @@ public class DefLoader extends AbstractLibrarySupportLoader {
 		try (InputStream inputStream = provider.getInputStream(0)) {
 			boolean hasExports = false;
 			BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-			String line = null;
+			String line;
 			while ((line = reader.readLine()) != null) {
 				if (line.startsWith(";") || line.isEmpty()) {// comment
 					continue;

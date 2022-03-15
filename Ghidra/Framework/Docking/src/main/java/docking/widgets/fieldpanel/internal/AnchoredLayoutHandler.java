@@ -59,7 +59,7 @@ public class AnchoredLayoutHandler {
 		if (layouts.isEmpty()) {
 			return new ArrayList<>();
 		}
-		int scrollAmount = 0;
+		int scrollAmount;
 		AnchoredLayout layout = layouts.getFirst();
 		BigInteger index = layout.getIndex();
 		int yPos = layout.getYPos();

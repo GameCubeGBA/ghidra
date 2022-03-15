@@ -62,7 +62,7 @@ public class SleighCompileLauncher implements GhidraLaunchable {
 	public static int runMain(String[] args)
 			throws JDOMException, IOException, RecognitionException {
 		int retval;
-		String filein = null;
+		String filein;
 		String fileout = null;
 		Map<String, String> preprocs = new HashMap<>();
 

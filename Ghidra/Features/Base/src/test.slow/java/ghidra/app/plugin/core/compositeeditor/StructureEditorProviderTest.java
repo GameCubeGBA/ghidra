@@ -146,7 +146,6 @@ public class StructureEditorProviderTest extends AbstractStructureEditorTest {
 			assertNotNull(dialog);
 			pressButton(dialog, "No");
 			dialog.dispose();
-			dialog = null;
 			assertTrue(!complexStructure.isEquivalent(model.viewComposite));
 
 			// Redo the apply
@@ -156,11 +155,9 @@ public class StructureEditorProviderTest extends AbstractStructureEditorTest {
 			assertNotNull(dialog);
 			pressButton(dialog, "No");
 			dialog.dispose();
-			dialog = null;
 			assertTrue(!complexStructure.isEquivalent(model.viewComposite));
 		}
 		finally {
-			dialog = null;
 			program.removeListener(restoreListener);
 		}
 	}
@@ -180,7 +177,7 @@ public class StructureEditorProviderTest extends AbstractStructureEditorTest {
 
 			// Add the s1 data type so that we can undo its add.
 			boolean commit = true;
-			Structure s1Struct = null;
+			Structure s1Struct;
 			startTransaction("Structure Editor Test Initialization");
 			try {
 				s1Struct =
@@ -227,7 +224,6 @@ public class StructureEditorProviderTest extends AbstractStructureEditorTest {
 			assertTrue(!isProviderShown(tool.getToolFrame(), "Structure Editor", mySubTitle));
 		}
 		finally {
-			dialog = null;
 			program.removeListener(restoreListener);
 		}
 	}
@@ -249,7 +245,7 @@ public class StructureEditorProviderTest extends AbstractStructureEditorTest {
 
 			// Add the s1 data type so that we can undo its add.
 			boolean commit = true;
-			Structure s1Struct = null;
+			Structure s1Struct;
 			startTransaction("Structure Editor Test Initialization");
 			try {
 				s1Struct =
@@ -298,7 +294,6 @@ public class StructureEditorProviderTest extends AbstractStructureEditorTest {
 			assertTrue(!isProviderShown(tool.getToolFrame(), "Structure Editor", mySubTitle));
 		}
 		finally {
-			dialog = null;
 			program.removeListener(restoreListener);
 		}
 	}
@@ -318,7 +313,7 @@ public class StructureEditorProviderTest extends AbstractStructureEditorTest {
 
 			// Add the data type so that we can undo its add.
 			boolean commit = true;
-			Structure pgmMyStruct = null;
+			Structure pgmMyStruct;
 			startTransaction("Structure Editor Test Initialization");
 			try {
 				pgmMyStruct = (Structure) pgmTestCat.addDataType(myStruct,
@@ -358,7 +353,6 @@ public class StructureEditorProviderTest extends AbstractStructureEditorTest {
 			assertNotNull(dialog);
 			pressButton(dialog, "Yes");
 			dialog.dispose();
-			dialog = null;
 			assertTrue(emptyStructure.isEquivalent(model.viewComposite));
 
 			// Verify the editor provider is reloaded.
@@ -366,7 +360,6 @@ public class StructureEditorProviderTest extends AbstractStructureEditorTest {
 				isProviderShown(tool.getToolFrame(), "Structure Editor", "emptyStructure (Test)"));
 		}
 		finally {
-			dialog = null;
 			program.removeListener(restoreListener);
 		}
 	}
@@ -386,7 +379,7 @@ public class StructureEditorProviderTest extends AbstractStructureEditorTest {
 
 			// Add the data type so that we can undo its add.
 			boolean commit = true;
-			Structure pgmMyStruct = null;
+			Structure pgmMyStruct;
 			startTransaction("Structure Editor Test Initialization");
 			try {
 				pgmMyStruct = (Structure) pgmTestCat.addDataType(myStruct,
@@ -425,7 +418,6 @@ public class StructureEditorProviderTest extends AbstractStructureEditorTest {
 			assertNotNull(dialog);
 			pressButton(dialog, "No");
 			dialog.dispose();
-			dialog = null;
 			assertTrue(!emptyStructure.isEquivalent(model.viewComposite));
 
 			// Verify the editor provider is still on screen.
@@ -433,7 +425,6 @@ public class StructureEditorProviderTest extends AbstractStructureEditorTest {
 				isProviderShown(tool.getToolFrame(), "Structure Editor", "emptyStructure (Test)"));
 		}
 		finally {
-			dialog = null;
 			program.removeListener(restoreListener);
 		}
 	}
@@ -525,7 +516,6 @@ public class StructureEditorProviderTest extends AbstractStructureEditorTest {
 		assertNotNull(dialog);
 		pressButton(dialog, "Yes");
 		dialog.dispose();
-		dialog = null;
 		assertTrue(!tool.isVisible(provider));
 		assertTrue(complexStructure.isEquivalent(newDt));
 		assertTrue(!complexStructure.isEquivalent(oldDt));
@@ -560,7 +550,6 @@ public class StructureEditorProviderTest extends AbstractStructureEditorTest {
 		assertNotNull(dialog);
 		pressButton(dialog, "No");
 		dialog.dispose();
-		dialog = null;
 		assertTrue(!tool.isVisible(provider));
 		assertTrue(!complexStructure.isEquivalent(newDt));
 		assertTrue(complexStructure.isEquivalent(oldDt));
@@ -594,7 +583,6 @@ public class StructureEditorProviderTest extends AbstractStructureEditorTest {
 		assertNotNull(dialog);
 		pressButton(dialog, "Cancel");
 		dialog.dispose();
-		dialog = null;
 		assertTrue(tool.isVisible(provider));
 		assertTrue(!complexStructure.isEquivalent(model.viewComposite));
 		assertTrue(newDt.isEquivalent(model.viewComposite));

@@ -105,7 +105,7 @@ public class OldFunctionManager implements ErrorHandler {
 		Address entryPt = oldFunc.getEntryPoint();
 		SymbolTable symTable = program.getSymbolTable();
 		Symbol s = symTable.getPrimarySymbol(entryPt);
-		String baseName = null;
+		String baseName;
 		if (s != null && s.getSource() != SourceType.DEFAULT) {
 			baseName = s.getName();
 			s.delete();

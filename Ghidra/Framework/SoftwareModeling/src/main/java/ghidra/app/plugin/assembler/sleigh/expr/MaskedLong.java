@@ -1026,7 +1026,7 @@ public class MaskedLong implements Comparable<MaskedLong> {
 		if (-1 == max) {
 			return true; // Every long, signed or unsigned fits
 		}
-		long min = 0;
+		long min;
 		if (signed) {
 			max >>>= 1;
 			min = ~max;

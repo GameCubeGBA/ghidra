@@ -307,7 +307,7 @@ public class GhidraFileData {
 			TaskMonitor monitor) throws VersionException, IOException, CancelledException {
 		FolderItem myFolderItem;
 		ContentHandler ch;
-		DomainObjectAdapter domainObj = null;
+		DomainObjectAdapter domainObj;
 		synchronized (fileSystem) {
 			if (fileSystem.isReadOnly()) {
 				return getReadOnlyDomainObject(consumer, DomainFile.DEFAULT_VERSION, monitor);
@@ -315,8 +315,7 @@ public class GhidraFileData {
 			domainObj = getOpenedDomainObject();
 			if (domainObj != null) {
 				if (!domainObj.addConsumer(consumer)) {
-					domainObj = null;
-					fileManager.clearDomainObject(getPathname());
+                    fileManager.clearDomainObject(getPathname());
 				}
 				else {
 					return domainObj;
@@ -390,7 +389,7 @@ public class GhidraFileData {
 	DomainObject getImmutableDomainObject(Object consumer, int version, TaskMonitor monitor)
 			throws VersionException, IOException, CancelledException {
 		synchronized (fileSystem) {
-			DomainObjectAdapter obj = null;
+			DomainObjectAdapter obj;
 			if (versionedFolderItem == null ||
 				(version == DomainFile.DEFAULT_VERSION && folderItem != null) || isHijacked()) {
 				ContentHandler ch =
@@ -713,7 +712,7 @@ public class GhidraFileData {
 
 	void addToVersionControl(String comment, boolean keepCheckedOut, TaskMonitor monitor)
 			throws IOException, CancelledException {
-		DomainObjectAdapter oldDomainObj = null;
+		DomainObjectAdapter oldDomainObj;
 		synchronized (fileSystem) {
 			if (!isVersionControlSupported()) {
 				throw new AssertException("file type does supported version control");
@@ -907,7 +906,7 @@ public class GhidraFileData {
 
 		monitor.checkCanceled();
 		monitor.setMessage("Initiating Check In for " + name);
-		boolean success = false;
+		boolean success;
 		LocalManagedBufferFile srcFile = null;
 		ManagedBufferFile checkinFile = null;
 
@@ -1083,7 +1082,7 @@ public class GhidraFileData {
 				}
 			}
 
-			DomainObjectAdapter oldDomainObj = null;
+			DomainObjectAdapter oldDomainObj;
 
 			FolderItem oldLocalItem = null;
 			boolean keepCheckedOut = checkinHandler.keepCheckedOut();
@@ -1485,7 +1484,7 @@ public class GhidraFileData {
 				Msg.info(this, "Merge completed for " + name);
 			}
 
-			DomainObjectAdapter oldDomainObj = null;
+			DomainObjectAdapter oldDomainObj;
 
 			// TODO: Develop way to re-use and re-init domain object instead of a switch-a-roo approach
 

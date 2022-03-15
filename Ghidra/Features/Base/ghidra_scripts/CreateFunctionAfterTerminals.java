@@ -47,8 +47,7 @@ public class CreateFunctionAfterTerminals extends GhidraScript {
 		// Log what we did
 		Address histAddr = currentProgram.getMemory().getMinAddress();
 		String tmpString = "\nScript: CreateFunctionAfterTerminals()";
-		tmpString = "   Found  " + numTried + " locations.  Created " + numCreated + " functions.";
-	}
+    }
 
 	protected Function createFunctionNear(Address addr) throws Exception {
 		PartitionCodeSubModel partitionBlockModel = new PartitionCodeSubModel(currentProgram);

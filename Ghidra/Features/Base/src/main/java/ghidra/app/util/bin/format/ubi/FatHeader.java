@@ -65,7 +65,7 @@ public class FatHeader {
 				new ByteProviderWrapper(provider, fatarch.getOffset(), fatarch.getSize());
 
 			// It could be a Mach-O or a COFF archive
-			CoffArchiveHeader caf = null;
+			CoffArchiveHeader caf;
 			try {
 				caf = CoffArchiveHeader.read(wrapper, TaskMonitor.DUMMY);
 			}

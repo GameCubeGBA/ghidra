@@ -83,7 +83,7 @@ public class SubroutineMatchSet extends ArrayList<SubroutineMatch> {
 //	}
 
 	public int getLength(Address addr, CodeBlockModel model) {
-		int length = 0;
+		int length;
 		try {
 			CodeBlock block = model.getCodeBlockAt(addr, null);
 			length = (int) block.getNumAddresses();

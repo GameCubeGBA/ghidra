@@ -423,7 +423,7 @@ public class MyProgramChangesDisplayPlugin extends ProgramPlugin implements Doma
 
 			monitor.checkCanceled(); // plugin was shut down while we were scheduled
 
-			ProgramChangeSet changes = null;
+			ProgramChangeSet changes;
 			try {
 				changes = (ProgramChangeSet) domainFile.getChangesByOthersSinceCheckout();
 			}

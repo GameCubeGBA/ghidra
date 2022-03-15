@@ -149,7 +149,7 @@ public class PdbAddressManager {
 		if (segment < 0) {
 			return BAD_ADDRESS;
 		}
-		Long relativeVirtualAddress = null;
+		Long relativeVirtualAddress;
 		if (imageSectionHeaders != null) {
 			if (segment > imageSectionHeaders.size() + 1) {
 				return BAD_ADDRESS;

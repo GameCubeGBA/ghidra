@@ -104,7 +104,7 @@ public class DelayImportDescriptor implements StructConverter {
 			return thunkList;
 		}
 
-		long thunkPtr = 0;
+		long thunkPtr;
 		int offset = 0;
 
 		if (isUsingRVA()) {
@@ -136,7 +136,7 @@ public class DelayImportDescriptor implements StructConverter {
 				funcName = SymbolUtilities.ORDINAL_PREFIX + thunk.getOrdinal();
 			}
 			else {
-				long ibnPtr = 0;
+				long ibnPtr;
 				if (isUsingRVA()) {
 					ibnPtr = ntHeader.rvaToPointer(thunk.getAddressOfData());
 				}
@@ -189,8 +189,7 @@ public class DelayImportDescriptor implements StructConverter {
 		pUnloadIAT = reader.readInt(index) & Conv.INT_MASK;
 		index += BinaryReader.SIZEOF_INT;
 		dwTimeStamp = reader.readInt(index);
-		index += BinaryReader.SIZEOF_INT;
-	}
+    }
 
 	/**
 	 * Returns true if the "using relative virtual address" is flag is set

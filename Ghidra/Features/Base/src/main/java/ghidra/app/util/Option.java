@@ -193,7 +193,7 @@ public class Option {
 		else if (Address.class.isAssignableFrom(getValueClass())) {
 			try {
 				Address origAddr = (Address) getValue();
-				Address newAddr = null;
+				Address newAddr;
 				if (origAddr != null) {
 					newAddr = origAddr.getAddress(str);
 				}

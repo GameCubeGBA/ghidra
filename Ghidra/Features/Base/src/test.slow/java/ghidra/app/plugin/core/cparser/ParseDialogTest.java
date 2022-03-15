@@ -351,7 +351,7 @@ public class ParseDialogTest extends AbstractGhidraHeadedIntegrationTest {
 		Msg.debug(this, "Reading parse profile file: " + profileFile.getAbsolutePath());
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(profileFile.getInputStream()));
-		String line = null;
+		String line;
 		while ((line = br.readLine()) != null) {
 			line = line.trim();
 			if (line.startsWith("-") || (line.isEmpty() && buffy.length() > 0)) {

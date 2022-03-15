@@ -237,8 +237,7 @@ public class ProgramContextMergeManager implements MergeResolver, ListingMergeCo
 			}
 		}
 		finally {
-			monitor = null;
-		}
+        }
 		mergeManager.setCompleted(PROGRAM_CONTEXT_PHASE);
 	}
 

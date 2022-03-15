@@ -38,7 +38,7 @@ public class HexIntegerFormatter extends IntegerFormatter {
 
 	@Override
 	public Object stringToValue(String text) throws ParseException {
-		Long asLong = null;
+		Long asLong;
 		try {
 			asLong = NumericUtilities.parseHexLong(text);
 		}

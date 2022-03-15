@@ -115,7 +115,7 @@ public class ApplicationUtilities {
 		if (repoConfigFile.isFile()) {
 			try (BufferedReader reader =
 				new BufferedReader(new FileReader(repoConfigFile.getFile(false)))) {
-				String line = null;
+				String line;
 				while ((line = reader.readLine()) != null) {
 					line = line.trim();
 					if (line.isEmpty() || line.startsWith("#")) {

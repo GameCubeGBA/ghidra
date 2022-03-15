@@ -111,7 +111,7 @@ public class DragSrcAdapter implements DragSourceListener {
         int dropOp = e.getDropAction();
         int targetAction = e.getTargetActions();
         int action = dropOp & targetAction;
-        Cursor c = null;
+        Cursor c;
 
         if (action == DnDConstants.ACTION_NONE) {
             // drop not possible

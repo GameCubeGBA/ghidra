@@ -123,7 +123,7 @@ public class TypeParser {
 
 		pdb.getPdbReaderMetrics().witnessDataTypeId(dataTypeId);
 
-		AbstractMsType type = null;
+		AbstractMsType type;
 		switch (dataTypeId) {
 			// 0x0000 block
 			case Modifier16MsType.PDB_ID:

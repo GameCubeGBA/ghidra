@@ -83,7 +83,7 @@ public class BadgedIcon implements Icon {
 	private static double BADGE_VSCALE_FACTOR = .75;
 
 	// if the icon hasn't changed, this will help in painting...
-	private Icon cachedThis = null;
+	private Icon cachedThis;
 
 	private Icon base;
 
@@ -166,7 +166,7 @@ public class BadgedIcon implements Icon {
 	 * @return a reference to this object
 	 */
 	public BadgedIcon setBadge(Icon badge, BadgePosition position) {
-		MultiIcon multi = null;
+		MultiIcon multi;
 		if (badge == null) {
 			badge = getEmptyIcon(width, height, enabled);
 		}

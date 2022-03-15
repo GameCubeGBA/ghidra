@@ -285,7 +285,6 @@ public class UnionEditorCellEditTest extends AbstractUnionEditorTest {
 		dialog = waitForDialogComponent(NumberInputDialog.class);
 		assertNotNull(dialog);
 		okInput(dialog, 15);
-		dialog = null;
 		waitUntilDialogProviderGone(NumberInputDialog.class, 2000);
 
 		assertNotEditingField();
@@ -312,7 +311,7 @@ public class UnionEditorCellEditTest extends AbstractUnionEditorTest {
 		String name = function.getName();
 		FunctionDefinitionDataType functionDefinitionDataType =
 			new FunctionDefinitionDataType(function, true);
-		FunctionDefinition functionDefinition = null;
+		FunctionDefinition functionDefinition;
 		boolean commit = false;
 		txId = program.startTransaction("Modify Program");
 		try {

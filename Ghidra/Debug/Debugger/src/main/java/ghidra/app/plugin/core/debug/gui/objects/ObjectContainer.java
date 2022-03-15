@@ -36,7 +36,7 @@ public class ObjectContainer implements Comparable<ObjectContainer> {
 	private boolean immutable;
 	private boolean visible = true;
 	private boolean isSubscribed = false;
-	private boolean isLink = false;
+	private boolean isLink;
 	private boolean useSort = true;
 	private String treePath;
 	public String linkKey;

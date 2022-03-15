@@ -109,7 +109,7 @@ public class VariableCommentFieldFactory extends AbstractVariableFieldFactory {
 			int tmp = 0;
 			for (int i = 0; i <= row; ++i) {
 				String str = btf.getFieldElement(i, 0).getText();
-				int len = 0;
+				int len;
 				if (i < row) {
 					len = str.length();
 				}

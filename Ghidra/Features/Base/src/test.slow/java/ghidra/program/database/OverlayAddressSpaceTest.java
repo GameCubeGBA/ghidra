@@ -268,7 +268,7 @@ public class OverlayAddressSpaceTest extends AbstractGhidraHeadedIntegrationTest
 		int origBlockCount = program.getMemory().getBlocks().length;
 
 		int transactionID = program.startTransaction(testName.getMethodName());
-		MemoryBlock overlayBlock1 = null;
+		MemoryBlock overlayBlock1;
 		try {
 			overlayBlock1 = program.getMemory().createInitializedBlock(".overlay1",
 				af.getAddress("1000"), 0x100, (byte) 0x11, TaskMonitor.DUMMY, true);
@@ -301,9 +301,9 @@ public class OverlayAddressSpaceTest extends AbstractGhidraHeadedIntegrationTest
 		assertEquals(origSpaceCount + 1, af.getNumAddressSpaces());
 
 		transactionID = program.startTransaction(testName.getMethodName());
-		MemoryBlock overlayBlock2 = null;
-		MemoryBlock overlayBlock3 = null;
-		MemoryBlock overlayBlock4 = null;
+		MemoryBlock overlayBlock2;
+		MemoryBlock overlayBlock3;
+		MemoryBlock overlayBlock4;
 		try {
 			overlayBlock2 = program.getMemory().createInitializedBlock(".overlay2",
 				af.getAddress("2000"), 0x200, (byte) 0x22, TaskMonitor.DUMMY, true);

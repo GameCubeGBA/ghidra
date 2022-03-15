@@ -217,8 +217,8 @@ public abstract class AbstractReferenceHover extends AbstractConfigurableHover {
 			return null;
 		}
 
-		ExternalLocation extLoc = null;
-		Function extFunc = null;
+		ExternalLocation extLoc;
+		Function extFunc;
 		Object obj = s.getObject();
 		if (obj instanceof Function) {
 			extFunc = (Function) obj;

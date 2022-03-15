@@ -662,8 +662,7 @@ public abstract class PopupWindowPlacer {
 			intersection = rectangle.intersection(context);
 			area = intersection.width * intersection.height;
 			if (area < bestArea) {
-				bestArea = area;
-				bestRectangle = rectangle;
+                bestRectangle = rectangle;
 			}
 
 			return bestRectangle;

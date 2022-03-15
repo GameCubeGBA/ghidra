@@ -84,7 +84,7 @@ public abstract class AbstractDecompilerAction extends DockingAction {
 	 * @return the matching symbol or null if no symbol exists
 	 */
 	private static HighSymbol findHighSymbol(Address addr, HighFunction highFunction) {
-		HighSymbol highSymbol = null;
+		HighSymbol highSymbol;
 		if (addr.isStackAddress()) {
 			LocalSymbolMap lsym = highFunction.getLocalSymbolMap();
 			highSymbol = lsym.findLocal(addr, null);
@@ -108,7 +108,7 @@ public abstract class AbstractDecompilerAction extends DockingAction {
 			return null;
 		}
 		HighVariable variable = token.getHighVariable();
-		HighSymbol highSymbol = null;
+		HighSymbol highSymbol;
 		if (variable == null) {
 			// Token may be from a variable reference, in which case we have to dig to find the actual symbol
 			Function function = highFunction.getFunction();

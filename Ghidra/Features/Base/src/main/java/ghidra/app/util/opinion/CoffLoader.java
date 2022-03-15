@@ -264,7 +264,7 @@ public class CoffLoader extends AbstractLibrarySupportLoader {
 				continue;
 			}
  */
-			Address address = null;
+			Address address;
 			try {
 				short sectionNum = symbol.getSectionNumber();
 				if (sectionNum == 0) {//external symbols
@@ -285,7 +285,7 @@ public class CoffLoader extends AbstractLibrarySupportLoader {
 						" - from section " + sectionNum);
 				}
 				else {
-					CoffSectionHeader section = null;
+					CoffSectionHeader section;
 					if (sectionNum == -1) { // absolute symbols
 						// usually corresponds to IO or memory registers
 						address = CoffSectionHeader.getAddress(program.getLanguage(),
@@ -308,22 +308,18 @@ public class CoffLoader extends AbstractLibrarySupportLoader {
 					String symName = symbol.getName();
 					switch (symbol.getStorageClass()) {
 						case CoffSymbolStorageClass.C_BLOCK:
-							symName = "BLOCK_" + symName;
-							break;
+                            break;
 						case CoffSymbolStorageClass.C_FCN:
 							// these are .bf, .lf and .ef dummy symbols
 							// skip them because their values don't
 							// translate into anything in Ghidra
 							continue;
 						case CoffSymbolStorageClass.C_EOS:
-							symName = "EOS_" + symName;
-							break;
+                            break;
 						case CoffSymbolStorageClass.C_FILE:
-							symName = "FILE_" + symName;
-							break;
+                            break;
 						case CoffSymbolStorageClass.C_LINE:
-							symName = "LINE_" + symName;
-							break;
+                            break;
 
 						default:
 					}
@@ -411,7 +407,7 @@ public class CoffLoader extends AbstractLibrarySupportLoader {
 		}
 
 		// Always Align the fake External Address Space
-		Address externAddress = null;
+		Address externAddress;
 		long newOffset = maxAddr.getOffset() % getPointerSizeAligned(space);
 		newOffset = (getPointerSizeAligned(space) - newOffset);
 		newOffset += 0x1000;
@@ -459,7 +455,7 @@ public class CoffLoader extends AbstractLibrarySupportLoader {
 				break;
 			}
 
-			MemoryBlock block = null;
+			MemoryBlock block;
 
 			final int sectionSize = section.getSize(language);
 

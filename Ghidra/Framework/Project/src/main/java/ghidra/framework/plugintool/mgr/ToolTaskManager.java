@@ -112,7 +112,7 @@ public class ToolTaskManager implements Runnable {
 		}
 
 		tool.clearStatusInfo();
-		boolean success = false;
+		boolean success;
 		isExecuting = true;
 		try {
 			if (obj instanceof UndoableDomainObject) {

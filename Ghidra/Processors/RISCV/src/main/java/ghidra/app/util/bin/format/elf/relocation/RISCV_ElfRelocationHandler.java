@@ -82,10 +82,10 @@ public class RISCV_ElfRelocationHandler extends ElfRelocationHandler {
 			break;
 		}
 
-		long value64 = 0;
-		int value32 = 0;
-		short value16 = 0;
-		byte value8 = 0;
+		long value64;
+		int value32;
+		short value16;
+		byte value8;
 
 		switch (type) {
 		case RISCV_ElfRelocationConstants.R_RISCV_32:

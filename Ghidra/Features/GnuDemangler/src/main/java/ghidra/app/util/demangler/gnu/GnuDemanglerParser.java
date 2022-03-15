@@ -1806,7 +1806,7 @@ public class GnuDemanglerParser {
 
 	private class ParameterLocator {
 		int paramStart = -1;
-		int paramEnd = -1;
+		int paramEnd;
 		private String text;
 
 		ParameterLocator(String text) {

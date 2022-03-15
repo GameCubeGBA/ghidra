@@ -436,9 +436,8 @@ public class StructureEditorNotifiedTest extends AbstractStructureEditorTest {
 		assertNotNull(dialog);
 		pressButtonByText(dialog, "Yes");
 		dialog.dispose();
-		dialog = null;
 
-		assertEquals(((Structure) origCopy).getNumComponents(), model.getNumComponents());
+        assertEquals(((Structure) origCopy).getNumComponents(), model.getNumComponents());
 		assertTrue(origCopy.isEquivalent(model.viewComposite));
 	}
 
@@ -461,9 +460,8 @@ public class StructureEditorNotifiedTest extends AbstractStructureEditorTest {
 		assertNotNull(dialog);
 		pressButtonByText(dialog, "No");
 		dialog.dispose();
-		dialog = null;
 
-		assertEquals(((Structure) viewCopy).getNumComponents(), model.getNumComponents());
+        assertEquals(((Structure) viewCopy).getNumComponents(), model.getNumComponents());
 		assertTrue(viewCopy.isEquivalent(model.viewComposite));
 	}
 
@@ -698,9 +696,8 @@ public class StructureEditorNotifiedTest extends AbstractStructureEditorTest {
 		assertNotNull(dialog);
 		pressButtonByText(dialog, "Yes");
 		dialog.dispose();
-		dialog = null;
 
-		assertEquals(((Structure) origCopy).getNumComponents(), model.getNumComponents());
+        assertEquals(((Structure) origCopy).getNumComponents(), model.getNumComponents());
 		assertTrue(origCopy.isEquivalent(model.viewComposite));
 	}
 

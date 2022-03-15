@@ -194,7 +194,7 @@ public class SSHAuthenticationModule {
 			throw new FailedLoginException("Stale SSH Signature callback");
 		}
 
-		boolean isValid = false;
+		boolean isValid;
 		try {
 			boolean usingSelfSignedCert =
 				ApplicationKeyManagerFactory.usingGeneratedSelfSignedCertificate();

@@ -164,7 +164,7 @@ class FunctionComparisonData {
 	}
 
 	public String toString() {
-		String str = "";
+		String str;
 
 		if (function != null) {
 			str = function.getName();

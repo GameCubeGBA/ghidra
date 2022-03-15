@@ -35,7 +35,7 @@ public class VersionHistoryDialog extends DialogComponentProvider implements Pro
 
 	private VersionHistoryPanel versionPanel;
 	private MyFolderListener listener = new MyFolderListener();
-	private List<DockingActionIf> popupActions = Collections.emptyList();
+	private List<DockingActionIf> popupActions;
 
 	public VersionHistoryDialog(DomainFile domainFile) {
 

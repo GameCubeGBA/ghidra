@@ -78,7 +78,7 @@ public class EHFunctionInfoModel extends AbstractCreateDataTypeModel {
 
 	private void init() {
 
-		int field0 = 0;
+		int field0;
 		try {
 			field0 = getMemBuffer().getInt(0); // Can throw MemoryAccessException
 		}

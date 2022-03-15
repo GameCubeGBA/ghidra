@@ -27,7 +27,7 @@ import ghidra.util.exception.DuplicateNameException;
 public class ObjectiveC2_Implementation implements StructConverter {
 	private boolean _is32bit;
 	private long _index;
-	private boolean _isSmall = false;
+	private boolean _isSmall;
 
 	private long imp;
 

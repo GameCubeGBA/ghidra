@@ -44,7 +44,7 @@ public class LldbModelTargetStackFrameRegisterImpl
 		return PathUtils.makeKey(indexRegister(register));
 	}
 
-	String value = "";
+	String value;
 
 	public LldbModelTargetStackFrameRegisterImpl(LldbModelTargetStackFrameRegisterBankImpl bank,
 			SBValue register) {

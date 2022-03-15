@@ -175,7 +175,7 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 
 	private Address findSpecialVtable(String namespace, String name) throws CancelledException {
 
-		Address vtableAddress = null;
+		Address vtableAddress;
 
 		Symbol symbolInNamespaces = getSymbolInNamespaces(namespace, name, VTABLE_LABEL);
 
@@ -435,7 +435,7 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 	 */
 	private void processVtables() throws Exception {
 
-		List<Symbol> listOfVtableSymbols = new ArrayList<Symbol>();
+		List<Symbol> listOfVtableSymbols;
 
 		// if dwarf loaded then get vtables using symbols
 		if (!isDwarfLoaded) {
@@ -2432,7 +2432,7 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 			monitor.checkCanceled();
 
 			RecoveredClass recoveredClass = recoveredClassIterator.next();
-			List<RecoveredClass> classHierarchyList = new ArrayList<RecoveredClass>();
+			List<RecoveredClass> classHierarchyList;
 
 			// no parent case
 			if (nonInheritedGccClasses.contains(recoveredClass)) {
@@ -2455,7 +2455,7 @@ public class RTTIGccClassRecoverer extends RTTIClassRecoverer {
 			monitor.checkCanceled();
 
 			RecoveredClass recoveredClass = recoveredClassIterator.next();
-			List<RecoveredClass> classHierarchyList = new ArrayList<RecoveredClass>();
+			List<RecoveredClass> classHierarchyList;
 
 			// once all the non and single inheritance ones are created, create the multi ones
 			// case where there is multi-inheritance somewhere in the chain

@@ -796,7 +796,7 @@ public class CodeUnitIteratorTest extends AbstractGhidraHeadedIntegrationTest {
 			listing.getCodeUnitIterator(CodeUnit.COMMENT_PROPERTY, addr(0), true);
 
 		int n = 0;
-		Address expectedAddr = null;
+		Address expectedAddr;
 		while (iter.hasNext()) {
 			CodeUnit cu = iter.next();
 			expectedAddr = addr(n + 10);
@@ -831,7 +831,7 @@ public class CodeUnitIteratorTest extends AbstractGhidraHeadedIntegrationTest {
 		CodeUnitIterator iter = ((ProgramDB) program).getCodeManager().getCommentCodeUnitIterator(
 			CodeUnit.PLATE_COMMENT, mem);
 		int n = 0;
-		Address expectedAddr = null;
+		Address expectedAddr;
 		while (iter.hasNext()) {
 			CodeUnit cu = iter.next();
 			if (n < 20) {
@@ -901,7 +901,7 @@ public class CodeUnitIteratorTest extends AbstractGhidraHeadedIntegrationTest {
 		endTransaction();
 		CodeUnitIterator iter = listing.getCodeUnitIterator("Numbers", addr(0), true);
 		int n = 0;
-		Address expectedAddr = null;
+		Address expectedAddr;
 		while (iter.hasNext()) {
 			CodeUnit cu = iter.next();
 			assertEquals(n, cu.getIntProperty("Numbers"));

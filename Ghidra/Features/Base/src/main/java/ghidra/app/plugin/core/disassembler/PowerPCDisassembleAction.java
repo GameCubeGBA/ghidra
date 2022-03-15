@@ -33,7 +33,7 @@ import ghidra.util.HelpLocation;
 
 class PowerPCDisassembleAction extends ListingContextAction {
 	private DisassemblerPlugin plugin;
-	private boolean disassemblePPC = false;
+	private boolean disassemblePPC;
 	String groupName;
 
 	public PowerPCDisassembleAction(DisassemblerPlugin plugin, String groupName,

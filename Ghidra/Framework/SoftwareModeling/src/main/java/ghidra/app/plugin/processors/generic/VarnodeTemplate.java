@@ -41,7 +41,7 @@ public class VarnodeTemplate implements Serializable {
 	private ConstantTemplate offset;
 	private ConstantTemplate size;
 //	private OpTemplate def; // Defining op (if there is one)	
-	private boolean oneuse = false;
+	private boolean oneuse;
 
 	public VarnodeTemplate(
 		ConstantTemplate space,

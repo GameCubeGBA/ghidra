@@ -326,7 +326,7 @@ class SelectBlockDialog extends DialogComponentProvider {
 			}
 		}
 
-		Address toAddress = null;
+		Address toAddress;
 		try {
 			toAddress = startAddress.subtract(length);
 		}
@@ -348,7 +348,7 @@ class SelectBlockDialog extends DialogComponentProvider {
 			}
 		}
 
-		Address toAddress = null;
+		Address toAddress;
 		try {
 			toAddress = startAddress.add(length);
 		}

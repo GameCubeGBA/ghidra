@@ -88,8 +88,7 @@ public class StructureEditorUnlockedDnD2Test extends AbstractStructureEditorTest
 		dialog = env.waitForDialogComponent(NumberInputDialog.class, 1000);
 		assertNotNull(dialog);
 		okInput(dialog, 25);
-		dialog = null;
-		waitUntilDialogProviderGone(NumberInputDialog.class, 2000);
+        waitUntilDialogProviderGone(NumberInputDialog.class, 2000);
 		assertEquals(4, model.getNumComponents());
 		assertTrue(getDataType(3).isEquivalent(dt4));
 		assertEquals(25, model.getComponent(3).getLength());

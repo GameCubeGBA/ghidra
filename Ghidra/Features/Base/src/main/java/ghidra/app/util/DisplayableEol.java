@@ -47,11 +47,11 @@ public class DisplayableEol {
 	public static final int MY_AUTOMATIC = 3;
 	private CodeUnit codeUnit;
 	private Object[][] displayCommentArrays = { null, null, null, null };
-	private boolean alwaysShowRepeatable = false;
-	private boolean alwaysShowRefRepeats = false;
-	private boolean alwaysShowAutomatic = false;
+	private boolean alwaysShowRepeatable;
+	private boolean alwaysShowRefRepeats;
+	private boolean alwaysShowAutomatic;
 	private boolean showAutomaticFunctions;
-	private boolean operandsFollowPointerRefs = false;
+	private boolean operandsFollowPointerRefs;
 	private int maxDisplayLines;
 	private int totalCommentsFound;
 

@@ -179,7 +179,7 @@ public class DockingDialog extends JDialog implements HelpDescriptor {
 	}
 
 	private String getKey() {
-		Object scopeObject = null;
+		Object scopeObject;
 		if (component.getUseSharedLocation()) {
 			scopeObject = owningWindowManager;
 		}

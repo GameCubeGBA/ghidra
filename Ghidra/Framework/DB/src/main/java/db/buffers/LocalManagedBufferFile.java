@@ -431,7 +431,7 @@ public class LocalManagedBufferFile extends LocalBufferFile implements ManagedBu
 		if (isClosed() || isReadOnly())
 			return false;
 
-		boolean success = false;
+		boolean success;
 		try {
 			success = super.delete();
 			if (versionOutFile != null) {

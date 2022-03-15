@@ -110,7 +110,7 @@ public class ParallelDecompiler {
 
 		queue.addAll(functions);
 
-		Collection<QResult<Function, R>> qResults = null;
+		Collection<QResult<Function, R>> qResults;
 		try {
 			qResults = queue.waitForResults();
 		}

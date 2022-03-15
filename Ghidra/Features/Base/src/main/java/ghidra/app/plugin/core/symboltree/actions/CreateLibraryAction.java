@@ -87,7 +87,7 @@ public class CreateLibraryAction extends SymbolTreeContextAction {
 
 	private String createExternalLibrary(Program program, Namespace parent) {
 
-		String importName = "NewLibrary";
+		String importName;
 		int transactionID = program.startTransaction("Create Library");
 		try {
 			SymbolTable symbolTable = program.getSymbolTable();

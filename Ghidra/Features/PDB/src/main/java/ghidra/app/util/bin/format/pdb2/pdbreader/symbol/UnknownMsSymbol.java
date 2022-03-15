@@ -24,7 +24,7 @@ import ghidra.app.util.bin.format.pdb2.pdbreader.PdbByteReader;
  */
 public class UnknownMsSymbol extends AbstractUnknownMsSymbol {
 
-	private int unknownPdbId = 0;
+	private int unknownPdbId;
 	private byte[] data;
 
 	/**

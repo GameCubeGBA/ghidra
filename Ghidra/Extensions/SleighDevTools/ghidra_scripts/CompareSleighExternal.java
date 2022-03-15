@@ -78,7 +78,7 @@ public class CompareSleighExternal extends GhidraScript {
 			
 			str = str.toLowerCase();
 			
-			PseudoInstruction pinst = null;
+			PseudoInstruction pinst;
 			try {
 				pinst = pseudoDisassembler.disassemble(addr);
 			} catch (UnknownInstructionException e) {
@@ -123,10 +123,10 @@ public class CompareSleighExternal extends GhidraScript {
 				String extOp = getExtOpStr(str, start, sepEnd);
 				start = sepEnd + 1;
 				
-				String valStr = null;
+				String valStr;
 				
 				// TODO: could remove all characters, making sure none are left!
-				int loc = 0;
+				int loc;
 				boolean subRegList = false;
 				List<Object> opObjList = pinst.getDefaultOperandRepresentationList(opIndex);
 				for (Object object : opObjList) {
@@ -282,7 +282,7 @@ public class CompareSleighExternal extends GhidraScript {
 	}
 
 	private String getExtOpStr(String str, int start, int sepEnd) {
-		String opS = null;
+		String opS;
 		if (start == -1) {
 			return "";
 		}

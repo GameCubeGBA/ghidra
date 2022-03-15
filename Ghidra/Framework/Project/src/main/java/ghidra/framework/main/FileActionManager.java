@@ -291,7 +291,7 @@ class FileActionManager {
 	 */
 	final boolean doOpenProject(ProjectLocator projectLocator) {
 		String status = "Opened project: " + projectLocator.getName();
-		Project project = null;
+		Project project;
 		boolean openStatus = false;
 		try {
 			// first close the active project (if there is one)

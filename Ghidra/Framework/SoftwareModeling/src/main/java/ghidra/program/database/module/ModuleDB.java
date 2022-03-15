@@ -400,8 +400,8 @@ class ModuleDB extends DatabaseObject implements ProgramModule {
 			for (int i = 0; i < list.size(); i++) {
 				DBRecord rec = list.get(i);
 				long childID = rec.getLongValue(TreeManager.CHILD_ID_COL);
-				String childName = null;
-				DBRecord childRec = null;
+				String childName;
+				DBRecord childRec;
 				if (childID < 0) {
 					childRec = adapter.getFragmentRecord(-childID);
 					childName = childRec.getString(TreeManager.FRAGMENT_NAME_COL);
@@ -504,8 +504,8 @@ class ModuleDB extends DatabaseObject implements ProgramModule {
 	@Override
 	public void reparent(String name, ProgramModule oldParent) throws NotFoundException {
 
-		Group group = null;
-		ProgramFragment f = null;
+		Group group;
+		ProgramFragment f;
 
 		lock.acquire();
 		try {
@@ -671,7 +671,7 @@ class ModuleDB extends DatabaseObject implements ProgramModule {
 			throws IOException {
 
 		adapter.removeParentChildRecord(pcRec.getKey());
-		String name = null;
+		String name;
 		boolean success = true;
 		if (isFragment) {
 			DBRecord fragRec = adapter.getFragmentRecord(childID);

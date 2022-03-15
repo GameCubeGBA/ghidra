@@ -297,7 +297,7 @@ public class ListingModelAdapter implements LayoutModel, ListingModelListener {
 			return addr != null ? new ProgramLocation(model.getProgram(), addr) : null;
 		}
 
-		ListingField bf = null;
+		ListingField bf;
 
 		if (floc.getFieldNum() >= layout.getNumFields()) {
 			bf = (ListingField) layout.getField(0);

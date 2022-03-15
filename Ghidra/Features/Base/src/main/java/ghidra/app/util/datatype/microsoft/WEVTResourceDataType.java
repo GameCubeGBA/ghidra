@@ -242,9 +242,8 @@ public class WEVTResourceDataType extends DynamicDataType {
 		ArrayDataType unknown32bit =
 			new ArrayDataType(DWordDataType.dataType, numUnknownValues / 4, 4);
 		struct.add(unknown32bit, numUnknownValues, "Unknown 32-bit values", "");
-		tempOffset += numUnknownValues;
 
-		return struct;
+        return struct;
 	}
 
 	private StructureDataType createProviderElementDescriptorStructure(MemBuffer memBuffer,
@@ -266,7 +265,7 @@ public class WEVTResourceDataType extends DynamicDataType {
 	private StructureDataType createKeywordStructure(MemBuffer memBuffer, int tempOffset)
 			throws MemoryAccessException {
 
-		int keyworddefinitions = 0;
+		int keyworddefinitions;
 		ArrayList<Integer> keywordDataOffsets = new ArrayList<Integer>();
 
 		if (!checkMagic(keywSig, memBuffer, tempOffset)) {
@@ -309,8 +308,7 @@ public class WEVTResourceDataType extends DynamicDataType {
 		Address dataOffsetAddress = memBuffer.getAddress().add(dataOffset);
 		struct.add(DWordDataType.dataType, 4, "Data offset", "Data offset address: " +
 			dataOffsetAddress.toString());
-		tempOffset += 4;
-		return struct;
+        return struct;
 	}
 
 	private StructureDataType createKeywordDataStructure(MemBuffer memBuffer, int tempOffset)
@@ -321,15 +319,14 @@ public class WEVTResourceDataType extends DynamicDataType {
 		int size = memBuffer.getInt(tempOffset);
 
 		struct.add(UnicodeDataType.dataType, size - 4, "keyword data", "");
-		tempOffset += size; //includes int and string
-		return struct;
+        return struct;
 	}
 
 	private StructureDataType createLevelStructure(MemBuffer memBuffer, int tempOffset)
 			throws MemoryAccessException {
 
 		ArrayList<Integer> leveloffsets = new ArrayList<Integer>();
-		int leveldefinitions = 0;
+		int leveldefinitions;
 
 		if (!checkMagic(levlSig, memBuffer, tempOffset)) {
 			throw new AssertException(
@@ -371,8 +368,7 @@ public class WEVTResourceDataType extends DynamicDataType {
 		struct.add(DWordDataType.dataType, 4, "Data offset",
 			"Level Data Address: " + levelDataAddr.toString());
 
-		tempOffset += 4;
-		return struct;
+        return struct;
 	}
 
 	private StructureDataType createLevelDataStructure(MemBuffer memBuffer, int tempOffset)
@@ -383,14 +379,13 @@ public class WEVTResourceDataType extends DynamicDataType {
 		int size = memBuffer.getInt(tempOffset);
 
 		struct.add(UnicodeDataType.dataType, size - 4, "data", "");
-		tempOffset += size; //includes int and string
-		return struct;
+        return struct;
 	}
 
 	private StructureDataType createMapsDefStructure(MemBuffer memBuffer, int tempOffset)
 			throws MemoryAccessException {
 
-		int numMapDefs = 0;
+		int numMapDefs;
 		ArrayList<Integer> mapsDefsOffsets = new ArrayList<Integer>();
 		ArrayList<Integer> mapStringDataOffsets = new ArrayList<Integer>(); //offsets of map strings
 
@@ -444,7 +439,7 @@ public class WEVTResourceDataType extends DynamicDataType {
 	private StructureDataType createValueMapDefStructure(MemBuffer memBuffer, int tempOffset,
 			ArrayList<Integer> mapStringDataOffsets) throws MemoryAccessException {
 
-		int numVMAPEntries = 0;
+		int numVMAPEntries;
 		StructureDataType struct = new StructureDataType("Value Map Definition", 0);
 
 		struct.add(StringDataType.dataType, 4, "Signature", "VMAP");
@@ -491,17 +486,14 @@ public class WEVTResourceDataType extends DynamicDataType {
 		ArrayDataType unknown = new ArrayDataType(ByteDataType.dataType, size - 8, 1);
 		struct.add(unknown.getDataType(), size - 8, "Rest of BMAP structure", "Unknown format");
 
-		tempOffset += (size - 8);
-
-		return struct;
+        return struct;
 	}
 
 	private StructureDataType createValueMapEntryStructure(MemBuffer memBuffer, int tempOffset) {
 		StructureDataType struct = new StructureDataType("Value Map Entry", 0);
 		struct.add(DWordDataType.dataType, 4, "Identifier", "");
 		struct.add(DWordDataType.dataType, 4, "Message-table identifier", "");
-		tempOffset += 8;
-		return struct;
+        return struct;
 	}
 
 	private StructureDataType createMapStringStructure(MemBuffer memBuffer, int tempOffset)
@@ -512,9 +504,8 @@ public class WEVTResourceDataType extends DynamicDataType {
 
 		int size = memBuffer.getInt(tempOffset);
 		struct.add(UnicodeDataType.dataType, size - 4, "Map String", "");
-		tempOffset += size;
 
-		return struct;
+        return struct;
 	}
 
 	private StructureDataType createChannelStruct(MemBuffer memBuffer, int tempOffset)
@@ -578,8 +569,7 @@ public class WEVTResourceDataType extends DynamicDataType {
 
 		struct.add(DWordDataType.dataType, 4, "Unknown", "");
 		struct.add(DWordDataType.dataType, 4, "Message-table identifier", "");
-		tempOffset += 8;
-		return struct;
+        return struct;
 	}
 
 	private StructureDataType createChannelDataStructure(MemBuffer memBuffer, int tempOffset)
@@ -638,7 +628,7 @@ public class WEVTResourceDataType extends DynamicDataType {
 	private StructureDataType createEventDefinitionStructure(MemBuffer memBuffer, int tempOffset,
 			ArrayList<Integer> unknownDwordsOffsetList, ArrayList<Integer> numUnknownDwordsList)
 			throws MemoryAccessException {
-		String offsetString = "";
+		String offsetString;
 		StructureDataType struct = new StructureDataType("Event Definitions", 0);
 		struct.add(WordDataType.dataType, 2, "Identifier", "");
 		tempOffset += 2;
@@ -687,8 +677,7 @@ public class WEVTResourceDataType extends DynamicDataType {
 		struct.add(DWordDataType.dataType, 4, "Offset to Dwords in Next Section", offsetString);
 		tempOffset += 4;
 		struct.add(DWordDataType.dataType, 4, "Unknown (Flags)", "");
-		tempOffset += 4;
-		return struct;
+        return struct;
 	}
 
 	private String getOffsetAddressString(int offset, MemBuffer memBuffer) {
@@ -745,8 +734,7 @@ public class WEVTResourceDataType extends DynamicDataType {
 		struct.add(DWordDataType.dataType, 4, "Data offset", "Data Opcode Address: " +
 			opcodeDataAddr.toString());
 
-		tempOffset += 4;
-		return struct;
+        return struct;
 	}
 
 	private StructureDataType createOpcodeDataStructure(MemBuffer memBuffer, int tempOffset)
@@ -756,8 +744,7 @@ public class WEVTResourceDataType extends DynamicDataType {
 
 		int size = memBuffer.getInt(tempOffset);
 		struct.add(UnicodeDataType.dataType, size - 4, "Opcode Data String", "");
-		tempOffset += size;
-		return struct;
+        return struct;
 	}
 
 	private StructureDataType createTaskStructure(MemBuffer memBuffer, int tempOffset)
@@ -814,9 +801,7 @@ public class WEVTResourceDataType extends DynamicDataType {
 		struct.add(DWordDataType.dataType, 4, "Data offset", "Data offset address: " +
 			dataOffsetAddr.toString());
 
-		tempOffset += 4;
-
-		return struct;
+        return struct;
 	}
 
 	private StructureDataType createTaskDataStructure(MemBuffer memBuffer, int tempOffset)
@@ -827,8 +812,7 @@ public class WEVTResourceDataType extends DynamicDataType {
 		int size = memBuffer.getInt(tempOffset);
 
 		struct.add(UnicodeDataType.dataType, size - 4, "Task Data", "");
-		tempOffset += size;
-		return struct;
+        return struct;
 	}
 
 	private StructureDataType createTemplateTableStructure(MemBuffer memBuffer, int tempOffset)
@@ -898,9 +882,8 @@ public class WEVTResourceDataType extends DynamicDataType {
 		int bxmlLen = instanceVariablesOffset - tempOffset;
 		ArrayDataType binaryXMLArray = new ArrayDataType(ByteDataType.dataType, bxmlLen, 1);
 		struct.add(binaryXMLArray.getDataType(), bxmlLen, "Binary XML", "");
-		tempOffset += bxmlLen;
 
-		tempOffset = instanceVariablesOffset;
+        tempOffset = instanceVariablesOffset;
 
 		ArrayList<Integer> instanceNamesOffsetList = new ArrayList<Integer>();
 		for (int i = 0; i < numVariableDescriptors; i++) {
@@ -937,9 +920,8 @@ public class WEVTResourceDataType extends DynamicDataType {
 		Address namesOffsetAddr = memBuffer.getAddress().add(offset);
 		struct.add(DWordDataType.dataType, 4, "Template instance variable name offset",
 			"Address Offset: " + namesOffsetAddr.toString());
-		tempOffset += 4;
 
-		return struct;
+        return struct;
 
 	}
 
@@ -972,7 +954,7 @@ public class WEVTResourceDataType extends DynamicDataType {
 	private int processProviderElement(byte[] sigBytes, MemBuffer memBuffer, int tempOffset,
 			List<DataTypeComponent> comps) throws MemoryAccessException {
 
-		int newOffset = -1;
+		int newOffset;
 		if (Arrays.equals(sigBytes, keywSig)) {
 			StructureDataType struct = createKeywordStructure(memBuffer, tempOffset);
 			newOffset =

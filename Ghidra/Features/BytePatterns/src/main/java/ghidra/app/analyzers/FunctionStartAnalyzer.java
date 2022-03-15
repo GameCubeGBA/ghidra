@@ -695,7 +695,7 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 			return rootState;
 		}
 
-		ArrayList<Pattern> patternlist = new ArrayList<>();
+		ArrayList<Pattern> patternlist;
 		try {
 			ProgramDecisionTree patternDecisionTree = getPatternDecisionTree();
 			ResourceFile[] fileList = Patterns.findPatternFiles(program, patternDecisionTree);

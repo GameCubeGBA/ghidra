@@ -1454,7 +1454,7 @@ public abstract class CompositeEditorPanel extends JPanel
 			if ((clickCount < 2) || (e.getButton() != MouseEvent.BUTTON1)) {
 				return;
 			}
-			String status = null;
+			String status;
 			if (model.isCellEditable(row, modelColumn)) {
 				return;
 			}

@@ -95,7 +95,7 @@ abstract class EnumValueDBAdapter implements RecordTranslator {
 
 		DBHandle tmpHandle = new DBHandle();
 		long id = tmpHandle.startTransaction();
-		EnumValueDBAdapter tmpAdapter = null;
+		EnumValueDBAdapter tmpAdapter;
 		try {
 			tmpAdapter = new EnumValueDBAdapterV1(tmpHandle, true);
 			RecordIterator it = oldAdapter.getRecords();

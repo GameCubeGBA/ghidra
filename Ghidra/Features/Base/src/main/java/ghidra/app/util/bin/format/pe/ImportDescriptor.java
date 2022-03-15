@@ -251,9 +251,8 @@ public class ImportDescriptor implements StructConverter, ByteArrayConverter {
 		pos += BinaryReader.SIZEOF_INT;
 
 		dc.getBytes(firstThunk, bytes, pos);
-		pos += BinaryReader.SIZEOF_INT;
 
-		return bytes;
+        return bytes;
 	}
 
 	/**

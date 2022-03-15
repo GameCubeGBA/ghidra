@@ -184,8 +184,8 @@ public class SimilarSymbolNameProgramCorrelator extends VTAbstractProgramCorrela
 			Set<DominantPair<Symbol, LSHCosineVectorAccum>> neighbors, double threshold,
 			TaskMonitor monitor) {
 		List<VTMatchInfo> result = new ArrayList<VTMatchInfo>();
-		int sourceLength = 0;
-		int destinationLength = 0;
+		int sourceLength;
+		int destinationLength;
 
 		Address destinationAddress = destinationSymbol.getAddress();
 		FunctionManager destinationFunctionManager = getDestinationProgram().getFunctionManager();

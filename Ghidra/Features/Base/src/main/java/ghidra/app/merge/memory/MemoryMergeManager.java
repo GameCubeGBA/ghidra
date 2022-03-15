@@ -355,10 +355,10 @@ public class MemoryMergeManager implements MergeResolver {
 	}
 
 	private void handleConflict(ConflictInfo info) throws CancelledException {
-		String latestStr = null;
-		String myStr = null;
-		String origStr = null;
-		String title = null;
+		String latestStr;
+		String myStr;
+		String origStr;
+		String title;
 		String panelID = MemoryMergePanel.CONFLICT_PANEL_ID;
 
 		if (info.nameConflict) {

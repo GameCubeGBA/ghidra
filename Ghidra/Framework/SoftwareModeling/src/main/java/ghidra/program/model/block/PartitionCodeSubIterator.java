@@ -29,10 +29,10 @@ import java.util.LinkedList;
  */
 class PartitionCodeSubIterator implements CodeBlockIterator {
 
-	private Listing listing = null;
+	private Listing listing;
 	// at any given time nextSub will either be null or hold the
 	// next block to be returned by next()
-	private CodeBlock nextSub = null;
+	private CodeBlock nextSub;
 
 	private InstructionIterator instIter;
 
@@ -42,7 +42,7 @@ class PartitionCodeSubIterator implements CodeBlockIterator {
 	// Available block stack
 	private LinkedList<CodeBlock> blockList = new LinkedList<CodeBlock>();
 
-	private PartitionCodeSubModel model = null;
+	private PartitionCodeSubModel model;
 	private TaskMonitor monitor;
 
 	/**

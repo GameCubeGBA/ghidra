@@ -785,8 +785,7 @@ public class FunctionManagerDB implements FunctionManager {
 		VariableStorage[] paramStorage =
 			callingConvention.getStorageLocations(program, types, true);
 // TODO: Only handles a single auto-param insertion (could be more auto-params)
-		index = (paramStorage.length == types.length) ? 1 : 2; // May have inserted extra parameter
-		if ((paramStorage.length - 1) != types.length) {
+        if ((paramStorage.length - 1) != types.length) {
 			return paramStorage[0];
 		}
 		for (int i = 0; i < currentParams.length; ++i) {
@@ -1419,7 +1418,7 @@ public class FunctionManagerDB implements FunctionManager {
 	}
 
 	FunctionDB getThunkedFunction(FunctionDB function) {
-		DBRecord rec = null;
+		DBRecord rec;
 		try {
 			rec = thunkAdapter.getThunkRecord(function.getKey());
 			if (rec != null) {

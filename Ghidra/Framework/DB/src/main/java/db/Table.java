@@ -39,7 +39,7 @@ public class Table {
 
 	private NodeMgr nodeMgr;
 
-	private int rootBufferId = -1;
+	private int rootBufferId;
 	private int recordCount;
 	private long maximumKey;
 
@@ -642,7 +642,7 @@ public class Table {
 			if (rootBufferId < 0) {
 				return false;
 			}
-			boolean result = false;
+			boolean result;
 			try {
 				LongKeyRecordNode leaf = nodeMgr.getLongKeyNode(rootBufferId).getLeafNode(key);
 				result = leaf.getKeyIndex(key) >= 0;
@@ -668,7 +668,7 @@ public class Table {
 			if (rootBufferId < 0) {
 				return false;
 			}
-			boolean result = false;
+			boolean result;
 			try {
 				FieldKeyRecordNode leaf = getFieldKeyNode(rootBufferId).getLeafNode(key);
 				result = leaf.getKeyIndex(key) >= 0;
@@ -960,7 +960,7 @@ public class Table {
 
 			// Establish root node
 			++modCount;
-			LongKeyNode rootNode = null;
+			LongKeyNode rootNode;
 			if (rootBufferId < 0) {
 				rootNode = LongKeyRecordNode.createRecordNode(nodeMgr, schema);
 			}
@@ -1009,7 +1009,7 @@ public class Table {
 
 			// Establish root node
 			++modCount;
-			FieldKeyNode rootNode = null;
+			FieldKeyNode rootNode;
 			if (rootBufferId < 0) {
 				rootNode = schema.useFixedKeyNodes() ? FixedKeyRecordNode.createRecordNode(nodeMgr)
 						: new VarKeyRecordNode(nodeMgr, schema.getKeyFieldType());
@@ -1170,7 +1170,7 @@ public class Table {
 				try {
 					// Handle partial first leaf where leftmost key is not deleted
 					int index = leaf.getKeyIndex(startKey);
-					long lastKey = 0;
+					long lastKey;
 					if (index < 0) {
 						index = -index - 1;
 					}
@@ -1297,7 +1297,7 @@ public class Table {
 				try {
 					// Handle partial first leaf where leftmost key is not deleted
 					int index = leaf.getKeyIndex(startKey);
-					Field lastKey = null;
+					Field lastKey;
 					if (index < 0) {
 						index = -index - 1;
 					}
@@ -3146,7 +3146,7 @@ public class Table {
 			}
 
 			try {
-				LongKeyRecordNode leaf = null;
+				LongKeyRecordNode leaf;
 				LongKeyNode rootNode = nodeMgr.getLongKeyNode(rootBufferId);
 
 				leaf = rootNode.getLeafNode(targetKey);

@@ -265,7 +265,7 @@ class ParseDialog extends DialogComponentProvider {
 		try {
 			BufferedReader br =
 				new BufferedReader(new InputStreamReader(item.file.getInputStream()));
-			String line = null;
+			String line;
 			while ((line = br.readLine()) != null) {
 				line = line.trim();
 				if (line.startsWith("-") || (line.isEmpty() && sb.length() > 0)) {

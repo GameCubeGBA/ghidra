@@ -39,7 +39,7 @@ public class EditBytesScript extends GhidraScript {
 		byte[] newBytes = null;
 		Address endAddr = null;
 		Address activeAddr = null;
-		Address codeEnd = null;
+		Address codeEnd;
 		boolean containedInBlock = false;
 
 		while (!containedInBlock) {
@@ -61,7 +61,7 @@ public class EditBytesScript extends GhidraScript {
 		AddressSet addrSet = new AddressSet(activeAddr, endAddr);
 		CodeUnitIterator iter = currentProgram.getListing().getCodeUnits(addrSet, true);
 
-		AddressSet codeAddrSet = null;
+		AddressSet codeAddrSet;
 
 		TreeMap<Address, DataType> addrToDataTypeMap = new TreeMap<>();
 		TreeMap<Address, AddressSet> addrToCodeMap = new TreeMap<>();

@@ -100,7 +100,7 @@ public abstract class OmfRecord {
 	}
 	
 	public static OmfRecord readRecord(BinaryReader reader) throws IOException, OmfException {
-		OmfRecord res = null;
+		OmfRecord res;
 		byte type = reader.peekNextByte();
 		type &= 0xfe;	// Mask off the least significant bit
 		switch(type) {

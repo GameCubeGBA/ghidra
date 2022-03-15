@@ -194,7 +194,7 @@ public class GnuDemanglerNativeProcess {
 		}
 
 		InputStream err = process.getErrorStream();
-		String error = null;
+		String error;
 		try {
 			List<String> errorLines = IOUtils.readLines(err, Charset.defaultCharset());
 			error = StringUtils.join(errorLines, '\n');

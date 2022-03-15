@@ -136,7 +136,7 @@ public class AutoVersionTrackingTask extends Task {
 
 		SubTaskMonitor monitor = new SubTaskMonitor(realMonitor);
 
-		boolean hasApplyErrors = false;
+		boolean hasApplyErrors;
 		sourceAddressSet = sourceProgram.getMemory().getLoadedAndInitializedAddressSet();
 		destinationAddressSet = destinationProgram.getMemory().getLoadedAndInitializedAddressSet();
 

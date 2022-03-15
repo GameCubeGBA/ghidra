@@ -62,7 +62,7 @@ public class FunctionPurgeFieldFactory extends FieldFactory {
 		}
 		Function func = (Function) obj;
 
-		String stringDepth = "UNK";
+		String stringDepth;
 		int depth = func.getStackPurgeSize();
 		switch (depth) {
 			case Function.INVALID_STACK_DEPTH_CHANGE:

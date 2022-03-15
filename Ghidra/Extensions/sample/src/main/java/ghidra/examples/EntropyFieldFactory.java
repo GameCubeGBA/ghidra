@@ -70,8 +70,8 @@ public class EntropyFieldFactory extends FieldFactory {
 		}
 		CodeUnit cu = (CodeUnit) obj;
 
-		byte[] bytes = null;
-		double entropy = 0.0;
+		byte[] bytes;
+		double entropy;
 		try {
 			bytes = new byte[256];
 			int num = cu.getProgram().getMemory().getBytes(cu.getAddress(), bytes);

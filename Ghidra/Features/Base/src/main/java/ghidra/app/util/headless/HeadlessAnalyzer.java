@@ -853,7 +853,7 @@ public class HeadlessAnalyzer {
 		HeadlessContinuationOption retOption = continueOption;
 
 		boolean scriptSuccess;
-		boolean isHeadlessScript = false;
+		boolean isHeadlessScript;
 		String scriptName = "";
 		GhidraScript currScript;
 
@@ -1219,8 +1219,7 @@ public class HeadlessAnalyzer {
 			if (program != null) {
 				AutoAnalysisManager.getAnalysisManager(program).dispose();
 				program.release(this);
-				program = null;
-			}
+            }
 
 			if (!readOnlyFile) { // can't change anything if read-only file
 
@@ -1337,7 +1336,7 @@ public class HeadlessAnalyzer {
 			filenamePattern = createFilenamePattern(options.domainFileNameToProcess);
 		}
 
-		boolean filesProcessed = false;
+		boolean filesProcessed;
 		if (filenamePattern == null && options.domainFileNameToProcess != null) {
 			// assume domainFileNameToProcess was a specific filename and not a pattern
 			filesProcessed = processFolderNoImport(domFolder, options.domainFileNameToProcess);
@@ -1493,9 +1492,9 @@ public class HeadlessAnalyzer {
 		Program program = null;
 
 		try {
-			String dfName = null;
+			String dfName;
 			DomainFile df = null;
-			DomainFolder domainFolder = null;
+			DomainFolder domainFolder;
 			try {
 				// Gets parent folder for import (creates path if doesn't exist)
 				domainFolder = getDomainFolder(folderPath, false);
@@ -1516,8 +1515,7 @@ public class HeadlessAnalyzer {
 					if (df != null && !checkOverwrite(df)) {
 						return false;
 					}
-					df = null;
-				}
+                }
 
 				program = loadProgram(file);
 				if (program == null) {
@@ -1619,8 +1617,7 @@ public class HeadlessAnalyzer {
 			// call dispose() in the finally() block above.
 			if (program != null) {
 				program.release(this);
-				program = null;
-			}
+            }
 		}
 	}
 
@@ -1628,7 +1625,7 @@ public class HeadlessAnalyzer {
 			DuplicateNameException, CancelledException, IOException {
 
 		MessageLog messageLog = new MessageLog();
-		Program program = null;
+		Program program;
 
 		// NOTE: we must pass a null DomainFolder to the AutoImporter so as not to
 		// allow the DomainFile to be saved at this point.  DomainFile should be 

@@ -162,7 +162,7 @@ public class RepositoryFileUpgradeScript extends GhidraScript {
 			return false;
 		}
 
-		boolean upgraded = false;
+		boolean upgraded;
 		try {
 			upgraded = upgradeProgram(df);
 		}

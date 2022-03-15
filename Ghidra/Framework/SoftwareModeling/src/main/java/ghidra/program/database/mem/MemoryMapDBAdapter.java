@@ -126,7 +126,7 @@ abstract class MemoryMapDBAdapter {
 			MemoryMapDBAdapter newAdapter =
 				new MemoryMapDBAdapterV3(handle, memMap, Memory.GBYTE, true);
 			for (MemoryBlockDB block : blocks) {
-				MemoryBlock newBlock = null;
+				MemoryBlock newBlock;
 				if (block.isInitialized()) {
 					DBBuffer buf = block.getBuffer();
 					newBlock = newAdapter.createInitializedBlock(block.getName(), block.getStart(),

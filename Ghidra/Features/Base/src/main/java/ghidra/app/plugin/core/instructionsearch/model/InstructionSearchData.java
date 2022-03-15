@@ -435,7 +435,7 @@ public class InstructionSearchData extends Observable {
 		// byte value of the code unit; the mask is filled with -1's.
 		byte[] mask = new byte[cuSize];
 		Arrays.fill(mask, (byte) -1);
-		byte[] value = null;
+		byte[] value;
 		try {
 			value = codeUnit.getBytes();
 		}

@@ -76,7 +76,7 @@ public class IntelHexLoader extends AbstractProgramLoader {
 
 	@Override
 	public String validateOptions(ByteProvider provider, LoadSpec loadSpec, List<Option> options, Program program) {
-		Address baseAddr = null;
+		Address baseAddr;
 
 		for (Option option : options) {
 			String optName = option.getName();
@@ -181,7 +181,7 @@ public class IntelHexLoader extends AbstractProgramLoader {
 		if (baseAddr == null) {
 			baseAddr = prog.getAddressFactory().getDefaultAddressSpace().getAddress(0);
 		}
-		boolean success = false;
+		boolean success;
 		try {
 			processIntelHex(provider, options, log, prog, monitor);
 			success = true;
@@ -207,7 +207,7 @@ public class IntelHexLoader extends AbstractProgramLoader {
 			blockName = generateBlockName(program, isOverlay, baseAddr.getAddressSpace());
 		}
 
-		String line = null;
+		String line;
 		int lineNum = 0;
 		IntelHexMemImage memImage =
 			new IntelHexMemImage(program.getAddressFactory().getDefaultAddressSpace(), baseAddr);
@@ -293,8 +293,7 @@ public class IntelHexLoader extends AbstractProgramLoader {
 			list.add(new Option(OPTION_NAME_BLOCK_NAME, blockName));
 		}
 		else {
-			isOverlay = false;
-		}
+        }
 		if (baseAddr == null) {
 			list.add(new Option(OPTION_NAME_BASE_ADDRESS, Address.class));
 		}

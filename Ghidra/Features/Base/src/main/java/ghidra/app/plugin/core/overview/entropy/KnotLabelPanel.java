@@ -22,7 +22,7 @@ import javax.swing.JPanel;
 
 public class KnotLabelPanel extends JPanel {
 	private static final Font FONT = new Font("Times New Roman", Font.BOLD, 16);
-	private int topBottomMargin = 10;
+	private int topBottomMargin;
 	private Palette palette;
 
 	public KnotLabelPanel(int topBottomMargin) {

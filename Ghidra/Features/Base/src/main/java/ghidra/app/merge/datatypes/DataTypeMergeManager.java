@@ -282,7 +282,7 @@ public class DataTypeMergeManager implements MergeResolver {
 	private void updateSourceArchive(long id) {
 		UniversalID universalID = new UniversalID(id);
 		SourceArchive resultSourceArchive = dtms[RESULT].getSourceArchive(universalID);
-		SourceArchive sourceArchive = null;
+		SourceArchive sourceArchive;
 		int optionToUse = (sourceArchiveChoice == ASK_USER) ? conflictOption : sourceArchiveChoice;
 		switch (optionToUse) {
             case OPTION_MY:
@@ -2942,9 +2942,8 @@ public class DataTypeMergeManager implements MergeResolver {
 		resultDtCombinedList.addAll(resultDtAddList);
 		// Changed this to use combined list so that add conflicts don't get discarded.
 		dtConflictList.retainAll(resultDtCombinedList);
-		resultDtCombinedList = null;
 
-		eliminateFakeConflicts();
+        eliminateFakeConflicts();
 
 		origDtConflictList = new ArrayList<>(dtConflictList);
 

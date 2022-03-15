@@ -75,7 +75,7 @@ public class FieldPanel extends JPanel
 	private List<FieldSelectionListener> selectionListeners = new ArrayList<>();
 	private List<FieldSelectionListener> highlightListeners = new ArrayList<>();
 	private List<FieldSelectionListener> liveSelectionListeners = new ArrayList<>();
-	private List<AnchoredLayout> layouts = new ArrayList<>();
+	private List<AnchoredLayout> layouts;
 
 	private int currentViewXpos;
 

@@ -408,8 +408,8 @@ class ToolConnectionPanel extends JPanel implements ListSelectionListener {
 		GridBagLayout gbl = new GridBagLayout();
 		panel.setLayout(gbl);
 
-		JComponent[] row1 = null;
-		JComponent[] row2 = null;
+		JComponent[] row1;
+		JComponent[] row2;
 
 		JLabel producerLabel = new GDLabel("Event Producer:");
 		JLabel consumerLabel = new GDLabel("Event Consumer:");
@@ -421,7 +421,7 @@ class ToolConnectionPanel extends JPanel implements ListSelectionListener {
 		row1 = c1;
 		row2 = c2;
 
-		GridBagConstraints gbc = null;
+		GridBagConstraints gbc;
 
 		for (int i = 0; i < row1.length; i++) {
 

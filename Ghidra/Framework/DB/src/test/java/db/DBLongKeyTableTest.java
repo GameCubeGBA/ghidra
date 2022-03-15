@@ -318,7 +318,7 @@ public class DBLongKeyTableTest extends AbstractGenericTest {
 	 */
 	private void iterateLongKeyRecords(boolean testStoredDB, int recordCnt, long keyIncrement,
 			int varDataSize) throws IOException {
-		DBRecord[] recs = null;
+		DBRecord[] recs;
 		if (keyIncrement == 0) {
 			recs = createRandomLongKeyTableRecords(null, recordCnt, varDataSize);
 		}
@@ -547,7 +547,7 @@ public class DBLongKeyTableTest extends AbstractGenericTest {
 	 */
 	private void iterateLongKeys(boolean testStoredDB, int recordCnt, long keyIncrement,
 			int varDataSize) throws IOException {
-		DBRecord[] recs = null;
+		DBRecord[] recs;
 		if (keyIncrement == 0) {
 			recs = createRandomLongKeyTableRecords(null, recordCnt, varDataSize);
 		}

@@ -61,7 +61,7 @@ public class ChangeToolDataTest extends AbstractGhidraHeadedIntegrationTest {
 	@Test
 	public void testChangeToolData() throws Exception {
 
-		DomainFile[] data = null;
+		DomainFile[] data;
 
 		//
 		// setup the running tool

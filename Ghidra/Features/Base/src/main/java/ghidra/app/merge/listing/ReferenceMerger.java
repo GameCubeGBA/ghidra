@@ -1279,7 +1279,7 @@ return false;
 
 	private void resolveRemoveVsChange(Reference ref, int chosenConflictOption) {
 		Reference resultRef = DiffUtility.getReference(originalPgm, ref, resultPgm);
-		long resultSymID = -1;
+		long resultSymID;
 		if ((chosenConflictOption & KEEP_LATEST) != 0) {
 			Reference latestRef = DiffUtility.getReference(originalPgm, ref, latestPgm);
 			if (ref != null && ref.getReferenceType().isFallthrough()) {

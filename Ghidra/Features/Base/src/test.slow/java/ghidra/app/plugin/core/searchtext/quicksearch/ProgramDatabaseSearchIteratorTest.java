@@ -191,7 +191,7 @@ public class ProgramDatabaseSearchIteratorTest extends AbstractGhidraHeadedInteg
 		Address[] addrs =
                 { getAddr(0x100101cL), getAddr(0x100101dL), getAddr(0x100101fL) };
 
-		ProgramLocation loc = null;
+		ProgramLocation loc;
 		while ((loc = getNextMatch(searcher)) != null) {
 			assertEquals(addrs[count], loc.getAddress());
 			++count;
@@ -541,7 +541,7 @@ public class ProgramDatabaseSearchIteratorTest extends AbstractGhidraHeadedInteg
 		ArrayList<ProgramLocation> list = new ArrayList<>();
 		Searcher ts = new ProgramDatabaseSearcher(pluginTool, searchProgram, startLoc, set, options,
 			taskMonitor);
-		ProgramLocation loc = null;
+		ProgramLocation loc;
 		while ((loc = ts.search()) != null) {
 			list.add(loc);
 			++count;

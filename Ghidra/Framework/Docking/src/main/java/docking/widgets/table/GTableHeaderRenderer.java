@@ -122,7 +122,7 @@ public class GTableHeaderRenderer extends JPanel implements TableCellRenderer {
 			boolean hasFocus, int row, int column) {
 
 		isPaintingPrimarySortColumn = false; // reset
-		Icon icon = null;
+		Icon icon;
 		String text = (value == null) ? "" : value.toString();
 
 		JTableHeader header = table.getTableHeader();

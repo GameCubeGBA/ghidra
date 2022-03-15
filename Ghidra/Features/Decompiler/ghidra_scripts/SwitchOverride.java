@@ -102,7 +102,7 @@ public class SwitchOverride extends GhidraScript {
 	@Override
 	public void run() throws Exception {
 		ArrayList<Address> destlist = new ArrayList<Address>();
-		Address branchind = null;
+		Address branchind;
 		
 		if (currentSelection != null && !currentSelection.isEmpty()) {
 			branchind = collectSelectedJumpData(currentProgram.getListing(),currentSelection,destlist);

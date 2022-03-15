@@ -105,8 +105,8 @@ public class IntegerAttribute<T extends KeyedObject> extends Attribute<T> {
 	class IntegerComparator implements Comparator<KeyedObject> {
 		@Override
 		public int compare(KeyedObject object1, KeyedObject object2) {
-            int value1 = 0;
-			int value2 = 0;
+            int value1;
+			int value2;
 			try {
 				value1 = getValue(object1);
 				try {

@@ -1063,9 +1063,7 @@ public class RStarTreeMapTest {
 			obj.map.reduce(IntRectQuery.enclosed(rect(1, 6, 6, 6))).orderedValues());
 		assertEquals(expected, actual);
 
-		expected = List.of("Point(6,6)", "Point(5,6)", "Point(4,6)", "Point(3,6)", "Point(2,6)",
-			"Point(1,6)");
-		actual = new ArrayList<>(obj.map.reduce(IntRectQuery.enclosed(rect(1, 6, 6, 6))
+        actual = new ArrayList<>(obj.map.reduce(IntRectQuery.enclosed(rect(1, 6, 6, 6))
 				.starting(
 					Rectangle2DDirection.RIGHTMOST))
 				.orderedValues());

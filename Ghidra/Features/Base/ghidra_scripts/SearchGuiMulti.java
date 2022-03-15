@@ -208,7 +208,7 @@ public class SearchGuiMulti extends SearchBaseExtended {
 							new DataObject(mnemonics.get(mnemonic).textRep, Color.green);
 				}
 				else {
-					OperandCase temp = null;
+					OperandCase temp;
 					try {
 						temp = ops.get(column - 1).get(mnemonics.get(mnemonic));
 					}
@@ -336,7 +336,7 @@ public class SearchGuiMulti extends SearchBaseExtended {
 
 	private static class DataObject {
 		private String data;
-		private Color background = Color.white;
+		private Color background;
 
 		public DataObject(String data, Color color) {
 			this.data = data;

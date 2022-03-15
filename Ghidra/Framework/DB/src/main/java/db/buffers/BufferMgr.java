@@ -1493,7 +1493,7 @@ public class BufferMgr {
 					monitor.setProgress(id);
 
 					// Check for cached buffer
-					BufferNode node = null;
+					BufferNode node;
 					boolean writeBuffer = false;
 
 					/*
@@ -1772,7 +1772,7 @@ public class BufferMgr {
 
 				boolean oldCancelState = monitor.isCancelEnabled();
 
-				ManagedBufferFile outFile = null;
+				ManagedBufferFile outFile;
 				monitor.setMessage("Waiting for pre-save to complete...");
 				if (sourceFile instanceof LocalManagedBufferFile) {
 					// Use monitor for local saves

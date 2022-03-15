@@ -31,7 +31,7 @@ public abstract class Task implements MonitoredRunnable {
 
 	private boolean hasProgress;
 	private boolean isModal;
-	protected boolean waitForTaskCompleted = false;
+	protected boolean waitForTaskCompleted;
 	private Set<TaskListener> listeners = new HashSet<>();
 	protected TaskMonitor taskMonitor = TaskMonitor.DUMMY;
 

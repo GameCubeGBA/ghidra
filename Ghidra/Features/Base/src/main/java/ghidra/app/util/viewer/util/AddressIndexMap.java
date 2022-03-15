@@ -143,7 +143,7 @@ public class AddressIndexMap {
 			index.compareTo(numAddresses) >= 0) {
 			return null;
 		}
-		int arrIndex = 0;
+		int arrIndex;
 
 		int compareTo = index.compareTo(minIndex);
 		if (compareTo == 0) {

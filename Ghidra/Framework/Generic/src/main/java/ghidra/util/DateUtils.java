@@ -371,8 +371,7 @@ public class DateUtils {
 		}
 		if (millis >= MS_PER_SEC) {
 			seconds = (int) (millis / MS_PER_SEC);
-			millis = millis % MS_PER_SEC;
-		}
+        }
 		StringBuilder sb = new StringBuilder();
 		if (days > 0) {
 			sb.append(days).append(" days, ");

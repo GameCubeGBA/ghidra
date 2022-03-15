@@ -412,7 +412,7 @@ class OldStackFrameDB implements StackFrame {
 		}
 		int length = variables.size();
 		// find the end of the negatives
-		int index = 0;
+		int index;
 		for (index = 0; index < length; index++) {
 			Variable var = variables.get(index);
             if (var.getStackOffset() >= 0 || var.getStackOffset() > paramStart) {
@@ -447,7 +447,7 @@ class OldStackFrameDB implements StackFrame {
 		}
 		int length = variables.size();
 		// find the end of the negatives
-		int index = 0;
+		int index;
 		for (index = 0; index < length; index++) {
 			Variable var = variables.get(index);
 			int stackOffset = var.getStackOffset();
@@ -473,7 +473,7 @@ class OldStackFrameDB implements StackFrame {
 		}
 		int length = variables.size();
 		// find the end of the negatives
-		int index = 0;
+		int index;
 		for (index = 0; index < length; index++) {
 			Variable var = variables.get(index);
 			int stackOffset = var.getStackOffset();
@@ -500,7 +500,7 @@ class OldStackFrameDB implements StackFrame {
 		}
 		int length = variables.size();
 		// find the end of the negatives
-		int index = 0;
+		int index;
 		for (index = 0; index < length; index++) {
 			Variable var = variables.get(index);
 			int stackOffset = var.getStackOffset();

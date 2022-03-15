@@ -1080,7 +1080,7 @@ class FunctionMerger extends AbstractFunctionMerger implements ListingMerger {
 			if (askUser && mergeManager != null) {
 				for (LocalVariableConflict localVariableConflict : localVarConflicts) {
 					monitor.checkCanceled();
-					ConflictPanel choicesPanel = null;
+					ConflictPanel choicesPanel;
 					if ((localVariableConflict.varConflicts & VAR_REMOVED) != 0) {
 						currentConflictType = FunctionConflictType.REMOVED_LOCAL_VARIABLE_CONFLICT;
 						// If we have a remove local variable choice then a "Use For All" has already occurred.
@@ -1344,7 +1344,7 @@ class FunctionMerger extends AbstractFunctionMerger implements ListingMerger {
 		if (resultFunction == null) {
 			return;
 		}
-		ProgramMerge pgmMerge = null;
+		ProgramMerge pgmMerge;
 		if ((chosenConflictOption & KEEP_LATEST) != 0) {
 			pgmMerge = listingMergeManager.mergeLatest;
 		}

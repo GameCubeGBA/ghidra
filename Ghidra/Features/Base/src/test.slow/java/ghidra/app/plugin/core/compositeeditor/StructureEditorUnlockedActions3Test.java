@@ -48,8 +48,7 @@ public class StructureEditorUnlockedActions3Test
 		dialog = waitForDialogComponent(NumberInputDialog.class);
 		assertNotNull(dialog);
 		okInput(dialog, 2);
-		dialog = null;
-		waitUntilDialogProviderGone(NumberInputDialog.class, 2000);
+        waitUntilDialogProviderGone(NumberInputDialog.class, 2000);
 
 		assertEquals(num - 2, model.getNumComponents());
 		checkSelection(new int[] { 2 });
@@ -77,8 +76,7 @@ public class StructureEditorUnlockedActions3Test
 		dialog = waitForDialogComponent(NumberInputDialog.class);
 		assertNotNull(dialog);
 		okInput(dialog, 2);
-		dialog = null;
-		waitUntilDialogProviderGone(NumberInputDialog.class, 2000);
+        waitUntilDialogProviderGone(NumberInputDialog.class, 2000);
 		waitForBusyTool(tool); // the 'Duplicate Multiple' action uses a task
 
 		num += 2;

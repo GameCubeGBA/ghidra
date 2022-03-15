@@ -50,8 +50,8 @@ public class BlockGraphTask extends Task {
 	protected static final String PROGRESS_DIALOG_TITLE = "Graphing Program";
 	protected static final String INIT_PROGRESS_MSG = "Graphing Program...";
 
-	private boolean graphEntryPointNexus = false;
-	private boolean showCode = false;
+	private boolean graphEntryPointNexus;
+	private boolean showCode;
 	private int codeLimitPerBlock = 10;
 
 	private ColorizingService colorizingService;

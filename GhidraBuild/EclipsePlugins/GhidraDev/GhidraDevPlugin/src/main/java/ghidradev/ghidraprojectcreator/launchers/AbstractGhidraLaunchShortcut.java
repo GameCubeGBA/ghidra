@@ -85,7 +85,7 @@ public abstract class AbstractGhidraLaunchShortcut implements ILaunchShortcut {
 		String launchConfigName = javaProject.getProject().getName() + launchConfigNameSuffix;
 		try {
 			ILaunchConfiguration lc = GhidraLaunchUtils.getLaunchConfig(launchConfigName);
-			ILaunchConfigurationWorkingCopy wc = null;
+			ILaunchConfigurationWorkingCopy wc;
 			if (lc == null) {
 				wc = GhidraLaunchUtils.createLaunchConfig(javaProject, launchConfigTypeId,
 					launchConfigName, null);

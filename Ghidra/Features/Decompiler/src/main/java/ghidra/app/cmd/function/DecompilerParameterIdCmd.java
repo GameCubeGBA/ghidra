@@ -192,7 +192,7 @@ public class DecompilerParameterIdCmd extends BackgroundCommand {
 		}
 
 		try {
-			DecompileResults decompRes = null;
+			DecompileResults decompRes;
 			if (monitor.isCancelled()) {
 				return;
 			}

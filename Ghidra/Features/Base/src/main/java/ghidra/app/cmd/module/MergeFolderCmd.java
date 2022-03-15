@@ -73,7 +73,7 @@ public class MergeFolderCmd implements Command {
 
             String name = group.getName();
             ProgramModule m = listing.getModule(treeName, name);
-            ProgramFragment f = null;
+            ProgramFragment f;
             try {
                 if (m != null && parentModule.contains(m)) {
                     module.removeChild(name);

@@ -371,8 +371,7 @@ public class StackEditorActions2Test extends AbstractStackEditorTest {
 		assertNotNull(dialog);
 		assertEquals("Enter Number", dialog.getTitle());
 		okInput(dialog, 4);
-		dialog = null;
-		waitUntilDialogProviderGone(NumberInputDialog.class, 2000);
+        waitUntilDialogProviderGone(NumberInputDialog.class, 2000);
 		assertEquals("", model.getStatus());
 		assertEquals(17, model.getNumComponents());
 		assertTrue(((Array) getDataType(1)).getDataType().isEquivalent(dt1));
@@ -403,8 +402,7 @@ public class StackEditorActions2Test extends AbstractStackEditorTest {
 		assertEquals("Value must be between 1 and 1", dialog.getStatusText());
 		assertEquals("Enter Number", dialog.getTitle());
 		okInput(dialog, 1);
-		dialog = null;
-		waitUntilDialogProviderGone(NumberInputDialog.class, 2000);
+        waitUntilDialogProviderGone(NumberInputDialog.class, 2000);
 		assertEquals("", model.getStatus());
 		assertEquals(num, model.getNumComponents());
 		assertTrue(((Array) getDataType(0)).getDataType().isEquivalent(dt0));
@@ -430,8 +428,7 @@ public class StackEditorActions2Test extends AbstractStackEditorTest {
 		assertNotNull(dialog);
 		cancelInput(dialog);
 		assertEquals("", model.getStatus());
-		dialog = null;
-		assertEquals(20, model.getNumComponents());
+        assertEquals(20, model.getNumComponents());
 		assertTrue(getDataType(1).isEquivalent(DataType.DEFAULT));
 		assertEquals(1, getDataType(1).getLength());
 		assertEquals(1, model.getComponent(1).getLength());

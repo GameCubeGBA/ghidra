@@ -41,8 +41,8 @@ public class CreateFunctionCmd extends BackgroundCommand {
 	private String name;
 	private Function newFunc;
 	private SourceType source;
-	private boolean findEntryPoint = false;
-	private boolean recreateFunction = false;
+	private boolean findEntryPoint;
+	private boolean recreateFunction;
 	private List<Address> referringThunkAddresses;
 
 	/**
@@ -590,7 +590,7 @@ public class CreateFunctionCmd extends BackgroundCommand {
 	 */
 	public static AddressSetView getFunctionBody(TaskMonitor monitor, Program program,
 			Address entry) throws CancelledException {
-		CodeBlock block = null;
+		CodeBlock block;
 
 		PartitionCodeSubModel model = new PartitionCodeSubModel(program);
 		//				MultEntSubModel model = new MultEntSubModel(program);

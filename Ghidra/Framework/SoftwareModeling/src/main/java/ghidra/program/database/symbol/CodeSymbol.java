@@ -176,7 +176,7 @@ public class CodeSymbol extends SymbolDB {
 			if (address.isExternalAddress()) { // can't set primary on external locations
 				return false;
 			}
-			SymbolDB oldPrimarySymbol = null;
+			SymbolDB oldPrimarySymbol;
 			checkDeleted();
 			if (isPrimary()) {
 				return false; // already primary

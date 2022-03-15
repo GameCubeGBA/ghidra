@@ -505,7 +505,7 @@ class CodeUnitMerger extends AbstractListingMerger {
 	}
 
 	private int getSelectedOption(ConflictPanel conflictPanel2) {
-		int option = 0;
+		int option;
 		int choice = conflictPanel2.getUseForAllChoice();
 		switch (choice) {
 			case 1:
@@ -695,7 +695,7 @@ class CodeUnitMerger extends AbstractListingMerger {
 
 	private void merge(Address minAddress, Address maxAddress, int chosenConflictOption,
 			TaskMonitor monitor) throws MemoryAccessException, CancelledException {
-		ProgramMerge pm = null;
+		ProgramMerge pm;
 		switch (chosenConflictOption) {
 			case KEEP_LATEST:
 				pm = mergeLatest;

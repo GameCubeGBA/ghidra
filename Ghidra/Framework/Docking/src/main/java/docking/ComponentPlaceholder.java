@@ -53,7 +53,7 @@ public class ComponentPlaceholder {
 	private boolean disposed = false;
 
 	/** Set to a default value if this class' provider is not duplicatable; a unique value otherwise */
-	private long instanceID = 0;
+	private long instanceID;
 
 	ComponentPlaceholder(ComponentProvider provider) {
 		this.componentProvider = provider;

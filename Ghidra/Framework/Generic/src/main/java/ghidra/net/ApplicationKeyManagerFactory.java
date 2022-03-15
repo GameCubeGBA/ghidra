@@ -363,8 +363,7 @@ public final class ApplicationKeyManagerFactory {
 	private static void disposePassword(char[] password) {
 		if (password != null) {
 			Arrays.fill(password, (char) 0);
-			password = null;
-		}
+        }
 	}
 
 	private static IOException getIOException(Exception e) {
@@ -592,8 +591,7 @@ public final class ApplicationKeyManagerFactory {
 			finally {
 				if (keystoreData != null) {
 					keystoreData.dispose();
-					keystoreData = null;
-				}
+                }
 			}
 			return false;
 		}

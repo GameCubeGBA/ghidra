@@ -52,7 +52,7 @@ class MemoryMapDBAdapterV2 extends MemoryMapDBAdapter {
 	private DBHandle handle;
 	private MemoryMapDB memMap;
 
-	private List<MemoryBlockDB> blocks = new ArrayList<>();
+	private List<MemoryBlockDB> blocks;
 
 //  The following schema definition documents the schema used in version 2  	
 //	

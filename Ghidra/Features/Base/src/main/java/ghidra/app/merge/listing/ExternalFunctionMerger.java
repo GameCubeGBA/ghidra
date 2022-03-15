@@ -1764,7 +1764,7 @@ public class ExternalFunctionMerger extends AbstractFunctionMerger implements Li
 			sourceType = SourceType.IMPORTED;
 		}
 
-		ExternalLocation resultExternalLocation = null;
+		ExternalLocation resultExternalLocation;
 		// Add External Function
 
 		if (externalLocation.isFunction()) {
@@ -2789,7 +2789,7 @@ public class ExternalFunctionMerger extends AbstractFunctionMerger implements Li
 	private VariousChoicesPanel createExternalDetailConflictPanel(
 			final ExternalLocation[] locations, Address myEntryPoint, final TaskMonitor monitor) {
 
-		int conflicts = 0;
+		int conflicts;
 		try {
 			conflicts = externalDetailConflicts.get(myEntryPoint);
 		}
@@ -3642,7 +3642,7 @@ public class ExternalFunctionMerger extends AbstractFunctionMerger implements Li
 	protected void mergeBasicExternalDetail(int type, ExternalLocation[] externalLocations,
 			int currentChosenOption, TaskMonitor monitor) throws CancelledException {
 
-		ExternalLocation externalLocation = null;
+		ExternalLocation externalLocation;
 		switch (currentChosenOption) {
 			case KEEP_LATEST:
 				externalLocation = externalLocations[LATEST];
@@ -4157,7 +4157,7 @@ public class ExternalFunctionMerger extends AbstractFunctionMerger implements Li
 		String[] info = { "", "", "", "", "", "", "" };
 
 		String versionName = RESULT_TITLE;
-		String externalName = "";
+		String externalName;
 		String externalType = "label";
 		String actionString = "Keep";
 		ExternalLocation externalLocation = null;

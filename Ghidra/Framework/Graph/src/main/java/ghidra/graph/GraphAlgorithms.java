@@ -177,7 +177,7 @@ public class GraphAlgorithms {
 	public static <V, E extends GEdge<V>> Set<E> getEdgesFrom(GDirectedGraph<V, E> g,
 			Collection<V> vertices, boolean topDown) {
 
-		GraphNavigator<V, E> navigator = null;
+		GraphNavigator<V, E> navigator;
 		if (topDown) {
 			navigator = GraphNavigator.topDownNavigator();
 		}

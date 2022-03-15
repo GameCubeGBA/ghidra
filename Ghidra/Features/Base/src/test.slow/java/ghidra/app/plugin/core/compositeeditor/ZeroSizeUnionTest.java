@@ -152,8 +152,8 @@ public class ZeroSizeUnionTest extends AbstractUnionEditorTest {
 		outerUnionImpl.add(new QWordDataType());// component 4
 		outerUnionImpl = (Union) CommonTestData.category.addDataType(outerUnionImpl, null);
 
-		Union innerUnion = null;
-		Union outerUnion = null;
+		Union innerUnion;
+		Union outerUnion;
 
 		try {
 			txId = program.startTransaction("Change DataType");
@@ -246,8 +246,8 @@ public class ZeroSizeUnionTest extends AbstractUnionEditorTest {
 		outerUnionImpl.add(new QWordDataType());// component 4
 		outerUnionImpl = (Union) CommonTestData.category.addDataType(outerUnionImpl, null);
 
-		Union innerUnion = null;
-		Union outerUnion = null;
+		Union innerUnion;
+		Union outerUnion;
 
 		try {
 			txId = program.startTransaction("Change DataType");
@@ -338,8 +338,8 @@ public class ZeroSizeUnionTest extends AbstractUnionEditorTest {
 		TypeDef innerTypedefImpl = new TypedefDataType("innerUnionTypedef", innerUnionImpl);
 		innerTypedefImpl = (TypeDef) CommonTestData.category.addDataType(innerTypedefImpl, null);
 
-		Union innerUnion = null;
-		TypeDef innerTypedef = null;
+		Union innerUnion;
+		TypeDef innerTypedef;
 
 		try {
 			txId = program.startTransaction("Change DataType");
@@ -430,8 +430,8 @@ public class ZeroSizeUnionTest extends AbstractUnionEditorTest {
 		Array innerArrayImpl = new ArrayDataType(innerUnionImpl, 5, 5);
 		innerArrayImpl = (Array) CommonTestData.category.addDataType(innerArrayImpl, null);
 
-		Union innerUnion = null;
-		Array innerArray = null;
+		Union innerUnion;
+		Array innerArray;
 
 		try {
 			txId = program.startTransaction("Change DataType");

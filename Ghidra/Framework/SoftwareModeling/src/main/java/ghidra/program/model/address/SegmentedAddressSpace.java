@@ -252,7 +252,7 @@ public class SegmentedAddressSpace extends GenericAddressSpace {
 
 	private SegmentedAddress parseSegmented(String segStr, String offStr)
 			throws AddressFormatException {
-		int seg = -1;
+		int seg;
 		try {
 			seg = (int) parseString(segStr);
 		}
@@ -260,7 +260,7 @@ public class SegmentedAddressSpace extends GenericAddressSpace {
 			return null;
 		}
 
-		int off = -1;
+		int off;
 		try {
 			off = (int) parseString(offStr);
 		}

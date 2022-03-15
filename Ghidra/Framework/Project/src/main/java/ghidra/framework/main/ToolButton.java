@@ -295,14 +295,14 @@ class ToolButton extends EmptyBorderButton implements Draggable, Droppable {
 
 	private void addFromToolButton(ToolButton toolButton) {
 		plugin.setToolButtonTransferable(null);
-		PluginTool tool = null;
+		PluginTool tool;
 		if (associatedRunningTool != null && toolButton.associatedRunningTool != null) {
 			final PluginTool t2 = toolButton.associatedRunningTool;
 			SwingUtilities.invokeLater(() -> connectTools(associatedRunningTool, t2));
 			return;
 		}
 
-		boolean accepted = false;
+		boolean accepted;
 		if (toolButton.associatedRunningTool == null) {
 			tool = plugin.getActiveWorkspace().runTool(toolButton.template);
 			accepted = tool.acceptDomainFiles(associatedRunningTool.getDomainFiles());

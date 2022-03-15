@@ -619,7 +619,7 @@ public class DebuggerCopyIntoProgramDialog extends DialogComponentProvider {
 		if (taken.add(desired)) {
 			return desired;
 		}
-		String candidate = desired;
+		String candidate;
 		for (int i = 2;; i++) {
 			candidate = desired + "_" + i;
 			if (taken.add(candidate)) {

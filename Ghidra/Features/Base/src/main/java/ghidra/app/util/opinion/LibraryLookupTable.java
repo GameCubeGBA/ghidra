@@ -122,7 +122,7 @@ public class LibraryLookupTable {
 
 	public synchronized static ResourceFile createFile(Program program, boolean overwrite,
 			boolean inSystem, TaskMonitor monitor) throws IOException, CancelledException {
-		ResourceFile file = null;
+		ResourceFile file;
 		int size = program.getLanguage().getLanguageDescription().getSize();
 
 		if (inSystem) {

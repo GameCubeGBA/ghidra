@@ -286,7 +286,7 @@ public class RecoverySnapshotMgrPlugin extends Plugin
 		public void run() {
 
 			ArrayList<DomainFile> unhandledList = new ArrayList<>();
-			DomainFile df = null;
+			DomainFile df;
 			for (;;) {
 				synchronized (RecoverySnapshotMgrPlugin.this) {
 					if (pendingSnapshotSet.isEmpty()) {
@@ -295,7 +295,7 @@ public class RecoverySnapshotMgrPlugin extends Plugin
 					df = pendingSnapshotSet.first();
 					pendingSnapshotSet.remove(df);
 				}
-				boolean completed = false;
+				boolean completed;
 				try {
 					completed = df.takeRecoverySnapshot();
 				}

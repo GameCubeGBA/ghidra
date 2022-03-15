@@ -42,7 +42,7 @@ public class MakeStackRefs extends GhidraScript {
 		int reg = 1;
 
 		// get stack offset for variable
-		int stkOffset = 0;
+		int stkOffset;
 		try {
 			stkOffset = Integer.parseInt(askString("Stack Offset", "Stack offset (hex):"), 16);
 		}

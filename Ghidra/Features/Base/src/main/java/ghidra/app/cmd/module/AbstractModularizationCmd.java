@@ -67,8 +67,7 @@ public abstract class AbstractModularizationCmd extends BackgroundCommand {
 		monitor.setIndeterminate(true);
 		ProgramModule rootModule = program.getListing().getRootModule(treeName);
 		selectedGroup = groupPath.getGroup(program, treeName);
-		processEntireProgram = selectedGroup.equals(rootModule);
-		destinationModule =
+        destinationModule =
 			selectedGroup instanceof ProgramModule ? (ProgramModule) selectedGroup : rootModule;
 		processEntireProgram = selectedGroup.equals(rootModule);
 		validAddresses = getAddressesForGroup();

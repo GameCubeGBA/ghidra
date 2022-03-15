@@ -49,7 +49,7 @@ public class Emulator {
 	private boolean emuHalt = true;
 	private boolean isExecuting = false;
 
-	private boolean writeBack = false;
+	private boolean writeBack;
 	private int pageSize;				// The preferred page size for a paged memory state
 
 	private String pcName;

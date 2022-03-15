@@ -632,8 +632,7 @@ public class DataTreeDialog extends DialogComponentProvider
 				model.addElement(name);
 			}
 		}
-		map = null;
-	}
+    }
 
 	public void findAndSelect(String s) {
 		treePanel.findAndSelect(s);

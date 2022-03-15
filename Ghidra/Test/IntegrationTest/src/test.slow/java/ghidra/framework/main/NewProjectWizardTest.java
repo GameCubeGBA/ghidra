@@ -57,7 +57,7 @@ public class NewProjectWizardTest extends AbstractGhidraHeadedIntegrationTest {
 	private static String LOCALHOST = createLocalHostString();
 
 	private static String createLocalHostString() {
-		String localHostString = null;
+		String localHostString;
 		try {
 			localHostString = InetAddress.getLocalHost().getHostName();
 		}

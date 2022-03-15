@@ -487,7 +487,7 @@ class Row {
 		ArrayList<Field> temp = new ArrayList<>(20);
 		int varWidth = 0;
         for (FieldFactory ff : fields) {
-            ListingField f = null;
+            ListingField f;
             try {
                 f = ff.getField(proxy, varWidth);
             } catch (Throwable t) {

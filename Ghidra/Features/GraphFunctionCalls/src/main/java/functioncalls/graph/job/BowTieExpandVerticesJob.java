@@ -217,7 +217,7 @@ public class BowTieExpandVerticesJob extends AbstractGraphTransitionJob<FcgVerte
 		double newRowHeight = getHeight(allLevelVertices);
 		double newRowX = existingCenterX - (newRowWidth / 2);
 
-		double newRowY = 0;
+		double newRowY;
 		if (newVertexCollection.isIncoming()) {
 			newRowY = existingY - newRowHeight - heightPadding;
 		}

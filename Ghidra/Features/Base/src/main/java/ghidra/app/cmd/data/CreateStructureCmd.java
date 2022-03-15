@@ -112,7 +112,7 @@ public class CreateStructureCmd extends AbstractCreateStructureCmd{
             endAddress );
         listing.clearCodeUnits( getStructureAddress(), endAddress, false );
            
-        Data data = null;
+        Data data;
         try{
             listing.createData(getStructureAddress(), localStructure, 
                 localStructure.getLength());

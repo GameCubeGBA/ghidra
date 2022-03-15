@@ -316,7 +316,7 @@ public class MultiInstructionMemReference extends GhidraScript {
 				AddressRange addressRange = riter.next();
 
 				curInstrloc = addressRange.getMinAddress();
-				AddressSet body = null;
+				AddressSet body;
 				Address start = curInstrloc;
 
 				Function curFunc =

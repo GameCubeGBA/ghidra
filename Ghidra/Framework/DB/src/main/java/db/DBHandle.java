@@ -650,7 +650,7 @@ public class DBHandle {
 		}
 
 		long txId = startTransaction();
-		boolean addedTx = false;
+		boolean addedTx;
 		try {
 			// About to create copy of existing file - assign new databaseId
 			if (bufferMgr.getSourceFile() != null) {

@@ -651,7 +651,7 @@ public class BookmarkPlugin extends ProgramPlugin
 		@Override
 		public void run() {
 			Program myProgram = program;
-			Set<String> myTypes = null;
+			Set<String> myTypes;
 			synchronized (this) {
 				if (types.isEmpty()) {
 					// the program has been changed or closed

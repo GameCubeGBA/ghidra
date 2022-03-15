@@ -61,7 +61,7 @@ public class SPARC_ElfRelocationHandler extends ElfRelocationHandler {
 		long symbolValue = elfRelocationContext.getSymbolValue(sym);
 
 		int oldValue = memory.getInt(relocationAddress);
-		int newValue = 0;
+		int newValue;
 
 		switch (type) {
 			case SPARC_ElfRelocationConstants.R_SPARC_DISP32:

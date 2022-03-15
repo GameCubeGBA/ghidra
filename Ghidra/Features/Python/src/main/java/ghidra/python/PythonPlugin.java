@@ -348,7 +348,7 @@ public class PythonPlugin extends ProgramPlugin
 	 * Support for cancelling execution using a TaskMonitor.
 	 */
     static class PythonInteractiveTaskMonitor extends TaskMonitorAdapter {
-		private PrintWriter output = null;
+		private PrintWriter output;
 
 		public PythonInteractiveTaskMonitor(PrintWriter stdOut) {
 			output = stdOut;

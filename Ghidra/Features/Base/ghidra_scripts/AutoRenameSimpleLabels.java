@@ -68,7 +68,7 @@ public class AutoRenameSimpleLabels extends GhidraScript {
 				continue;
 			}
 			FlowType flow = inst.getFlowType();
-			String operand = " ";
+			String operand;
 			try {
 				operand = inst.getDefaultOperandRepresentation(0);
 			}

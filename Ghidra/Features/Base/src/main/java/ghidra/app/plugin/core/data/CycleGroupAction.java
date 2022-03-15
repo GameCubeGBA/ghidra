@@ -83,8 +83,8 @@ public class CycleGroupAction extends ListingContextAction {
 
 		// Handle selection case
 		if (selection != null && !selection.isEmpty()) {
-			BackgroundCommand cmd = null;
-			DataType dt = null;
+			BackgroundCommand cmd;
+			DataType dt;
 			Address addr = selection.getMinAddress();
 			Data data = listing.getDataContaining(addr);
 			InteriorSelection intSel = selection.getInteriorSelection();

@@ -162,7 +162,7 @@ public abstract class AbstractThreadedTableTest extends AbstractDockingTest {
 		TableSortState sortState = getSortState(sortedModel);
 		record("sortByClick() - initial sort state: " + sortState);
 
-		int currentSortColunn = -1;
+		int currentSortColunn;
 		boolean isAscending = true;
 		boolean checkSortDirection = false;
 		if (!sortState.isUnsorted()) {

@@ -1510,7 +1510,7 @@ public class ClipboardPluginTest extends AbstractGhidraHeadedIntegrationTest {
 
 		//b090db777880db774893db77
 		// expecting a bytes string of the format: b0 90 db 77 78 80 db 77 48 93 db 77
-		String[] bytes = null;
+		String[] bytes;
 		if (clipboardContents.contains(" ")) {
 			bytes = clipboardContents.split("\\s");
 		}

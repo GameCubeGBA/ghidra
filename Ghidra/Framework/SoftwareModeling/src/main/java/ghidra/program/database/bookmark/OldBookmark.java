@@ -125,7 +125,7 @@ public class OldBookmark implements Saveable {
 			return false;
 		}
 		OldBookmark bookmark = (OldBookmark) obj;
-		boolean addrsEqual = false;
+		boolean addrsEqual;
 		if (addr == null || bookmark.addr == null) {
 			if (!addrString.equals(bookmark.addrString)) {
 				return false;

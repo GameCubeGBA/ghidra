@@ -85,7 +85,7 @@ public class GlobalSymbolMap {
 		if (symbol == null) {
 			return null;
 		}
-		HighSymbol highSym = null;
+		HighSymbol highSym;
 		if (symbol instanceof CodeSymbol) {
 			if (dataType == null) {
 				Object dataObj = symbol.getObject();

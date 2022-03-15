@@ -192,7 +192,7 @@ public class ImageIconWrapper extends ImageIcon implements FileBasedIcon {
 	private byte[] loadBytesFromURL(URL url) {
 		try (InputStream is = url.openStream()) {
 			ByteArrayOutputStream os = new ByteArrayOutputStream();
-			int length = 0;
+			int length;
 			byte[] buf = new byte[1024];
 			while ((length = is.read(buf)) > 0) {
 				os.write(buf, 0, length);

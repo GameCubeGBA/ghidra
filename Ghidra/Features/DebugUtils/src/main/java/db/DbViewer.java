@@ -197,7 +197,7 @@ public class DbViewer extends JFrame {
 
 	private JPanel createSouthPanel(Table table) {
 		JPanel panel = new JPanel(new BorderLayout());
-		TableModel model = null;
+		TableModel model;
 		if (table.getRecordCount() <= 10000) {
 			model = new DbSmallTableModel(table);
 		}

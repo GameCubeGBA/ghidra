@@ -40,8 +40,8 @@ import ghidra.util.Msg;
 class CreateFunctionAction extends ListingContextAction {
 	/** the plugin associated with this action. */
 	FunctionPlugin funcPlugin;
-	boolean allowExisting = false;
-	boolean createThunk = false;
+	boolean allowExisting;
+	boolean createThunk;
 
 	/**
 	 * Creates a new action with the given name and associated to the given
@@ -102,7 +102,7 @@ class CreateFunctionAction extends ListingContextAction {
 	 */
 	@Override
 	public void actionPerformed(ListingActionContext context) {
-		Address entry = null;
+		Address entry;
 		AddressSetView body = null;
 
 		if (context.hasSelection()) {

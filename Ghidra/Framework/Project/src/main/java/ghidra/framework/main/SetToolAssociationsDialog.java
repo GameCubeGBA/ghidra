@@ -300,7 +300,7 @@ class SetToolAssociationsDialog extends DialogComponentProvider {
 
 			renderer.setForeground(Color.LIGHT_GRAY);
 
-			Icon icon = null;
+			Icon icon;
 			if (template.getName().equals(info.getAssociatedToolName())) {
 				icon = ResourceManager.getDisabledIcon(template.getIcon());
 			}

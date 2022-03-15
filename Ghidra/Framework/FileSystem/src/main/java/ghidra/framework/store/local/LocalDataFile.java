@@ -83,7 +83,7 @@ public class LocalDataFile extends LocalFolderItem implements DataFileItem {
 			boolean success = false;
 			byte[] buffer = new byte[IO_BUFFER_SIZE];
             try (FileOutputStream out = new FileOutputStream(dataFile)) {
-                int cnt = 0;
+                int cnt;
                 while ((cnt = istream.read(buffer)) >= 0) {
                     out.write(buffer, 0, cnt);
                 }

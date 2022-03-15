@@ -25,7 +25,7 @@ import java.io.IOException;
  */
 public class SingleResourceData {
 	private int length;
-	private byte [] data = new byte[0];
+	private byte [] data;
 
 	public SingleResourceData(BinaryReader reader) throws IOException {
 		length = reader.readNextInt();

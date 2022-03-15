@@ -72,7 +72,7 @@ public class PropagateExternalParametersScript extends GhidraScript {
                 if ((refs.length > 0) && (refs[0].isMemoryReference())) {
                     Address dataAddress = refs[0].getToAddress();
 
-                    DataType dt = null;
+                    DataType dt;
                     dt = ppi.getDataType();
                     Data data = getDataAt(dataAddress);
                     boolean isString = false;
@@ -189,8 +189,8 @@ public class PropagateExternalParametersScript extends GhidraScript {
 		FunctionManager functionManager = currentProgram.getFunctionManager();
 		Reference[] opref = cu.getReferencesFrom();
 
-		Address toAddr = null;
-		Function f = null;
+		Address toAddr;
+		Function f;
 		int numParams = 0;
 		if (opref.length != 0) {
 			toAddr = opref[0].getToAddress();

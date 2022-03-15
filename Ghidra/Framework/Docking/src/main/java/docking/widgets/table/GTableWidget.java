@@ -150,7 +150,7 @@ public class GTableWidget<T> extends JPanel {
 	}
 
 	public void setData(Collection<T> data) {
-		List<T> list = null;
+		List<T> list;
 		if (data instanceof List) {
 			list = (List<T>) data;
 		}

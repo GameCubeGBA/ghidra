@@ -452,7 +452,7 @@ public class ArmAnalyzer extends ConstantPropagationAnalyzer {
 		SimpleBlockModel model = new SimpleBlockModel(program);
 		while (iter.hasNext() && !monitor.isCancelled()) {
 			Address loc = iter.next();
-			CodeBlock bl = null;
+			CodeBlock bl;
 			try {
 				bl = model.getFirstCodeBlockContaining(loc, monitor);
 			}

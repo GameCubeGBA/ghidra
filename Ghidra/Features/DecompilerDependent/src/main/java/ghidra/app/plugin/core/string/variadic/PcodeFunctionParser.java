@@ -101,7 +101,7 @@ public class PcodeFunctionParser {
 		Varnode[] inputs = ast.getInputs();
 		for (int i = 1; i < inputs.length; i++) {
 			Varnode v = inputs[i];
-			Data data = null;
+			Data data;
 			Address ramSpaceAddress = convertAddressToRamSpace(v.getAddress());
 			if (addressToCandidateData.containsKey(ramSpaceAddress)) {
 				data = addressToCandidateData.get(ramSpaceAddress);

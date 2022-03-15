@@ -46,17 +46,17 @@ public class SingleEntSubIterator implements CodeBlockIterator {
 
 	// at any given time nextSub will either be null or hold the
 	// next block to be returned by next()
-	private CodeBlock nextSub = null;
+	private CodeBlock nextSub;
 
 	// address range set specified for iterator
-	private AddressSetView addrSet = null;
+	private AddressSetView addrSet;
 
-	private OverlapCodeSubModel model = null;
+	private OverlapCodeSubModel model;
 
 	// create holder for model-P subs that came from model-M subs with multiple entry points
 	private LinkedList<CodeBlock> subList = new LinkedList<CodeBlock>();
 
-	private CodeBlockIterator modelMIter = null;
+	private CodeBlockIterator modelMIter;
 	private TaskMonitor monitor;
 
 	/**

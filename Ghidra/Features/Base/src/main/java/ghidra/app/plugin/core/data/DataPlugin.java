@@ -384,7 +384,7 @@ public class DataPlugin extends Plugin implements DataService {
 			return true;
 		}
 
-		Address end = null;
+		Address end;
 		try {
 			end = start.addNoWrap(newSize - 1);
 		}
@@ -744,8 +744,7 @@ public class DataPlugin extends Plugin implements DataService {
 
 		tool.showDialog(dialog);
 		dialog.dispose();
-		dialog = null;
-	}
+    }
 
 	/**
 	 * Callback for edit data type action

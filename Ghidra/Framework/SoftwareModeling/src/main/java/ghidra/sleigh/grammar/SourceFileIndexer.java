@@ -105,7 +105,7 @@ public class SourceFileIndexer {
 	 */
 	public void restoreXml(XmlPullParser parser) {
 		XmlElement elem = parser.start("sourcefiles");
-		XmlElement subElem = null;
+		XmlElement subElem;
 		while ((subElem = parser.softStart("sourcefile")) != null) {
 			String filename = subElem.getAttribute("name");
 			Integer index = Integer.parseInt(subElem.getAttribute("index"));

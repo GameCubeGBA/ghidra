@@ -745,11 +745,11 @@ public class ProgramDiffDetails {
 	 * @return the string with the label name and attributes.
 	 */
 	private void addDisplayLabel(Symbol symbol, int nameLength, int typeLength, int sourceLength) {
-		String name = "";
-		String type = "";
+		String name;
+		String type;
 		String primary = getSpaces(7);
-		String source = "";
-		String namespace = "";
+		String source;
+		String namespace;
 		String yes = getSpaces(2) + "yes" + getSpaces(2);
 		String separatorSpaces = getSpaces(2);
 
@@ -955,8 +955,7 @@ public class ProgramDiffDetails {
 						String comment = dtc.getComment();
 						String fieldName = dtc.getFieldName();
 						if (fieldName == null) {
-							fieldName = "field" + offset;
-						}
+                        }
 						buf.append(newIndent).append(min.add(offset)).append(" ").append(dtc.getFieldName()).append(" ").append(dtc.getDataType().getName()).append(" ").append("length=").append(dtc.getLength()).append(" ").append((comment != null) ? comment : "").append(" ").append(newLine);
 					}
 				}
@@ -1416,8 +1415,7 @@ public class ProgramDiffDetails {
 			addColorText(doc2, getTagInfo(func2Tags));
 			addText(doc2, newLine);
 
-			hasTagDiffs = true;
-		}
+        }
 
 		hasTagDiffs = false;
 	}
@@ -2160,7 +2158,7 @@ public class ProgramDiffDetails {
 			Arrays.sort(names1);
 
 			String stringProp = null;
-			int intProp = -1;
+			int intProp;
 			Object objProp = null;
 			boolean voidProp = false;
 			for (String propertyName : names1) {

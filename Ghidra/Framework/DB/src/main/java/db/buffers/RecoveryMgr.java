@@ -300,8 +300,7 @@ class RecoveryMgr {
 			}
 			catch (InterruptedException e) {
 			}
-			t = (new Date()).getTime();
-		}
+        }
 
 		boolean success = false;
 		try {

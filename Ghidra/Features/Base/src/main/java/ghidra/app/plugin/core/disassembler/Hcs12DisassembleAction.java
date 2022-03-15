@@ -33,7 +33,7 @@ import ghidra.util.HelpLocation;
 
 class Hcs12DisassembleAction extends ListingContextAction {
 	private DisassemblerPlugin plugin;
-	private boolean disassembleXgate = false;
+	private boolean disassembleXgate;
 
 	public Hcs12DisassembleAction(DisassemblerPlugin plugin, String groupName, boolean disassembleXgate) {
 		super("Disassemble " + (disassembleXgate ? "HCS12" : "XGate"), plugin.getName());

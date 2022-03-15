@@ -500,7 +500,7 @@ class ConsistencyChecker {
 	}
 
 	private int recoverSize(ConstTpl sizeconst, Constructor ct) {
-		int size = 0, handindex;
+		int size, handindex;
 		OperandSymbol opsym;
 		SubtableSymbol tabsym;
 		IteratorSTL<Pair<SubtableSymbol, Integer>> iter;

@@ -279,7 +279,7 @@ public class PdbParser {
 	private String[] getCommandLineArray(boolean noValidation) throws PdbException {
 
 		File pdbExeFile;
-		String pdbExe = null;
+		String pdbExe;
 		try {
 			pdbExeFile = Application.getOSFile(PDB_EXE);
 			pdbExe = pdbExeFile.getAbsolutePath();
@@ -537,7 +537,7 @@ public class PdbParser {
 	 * @throws IOException If an I/O error occurs
 	 */
 	private void processPdbContents(boolean skipValidation) throws PdbException, IOException {
-		InputStream in = null;
+		InputStream in;
 
 		if (!isXML) {
 			String[] cmd = getCommandLineArray(skipValidation);

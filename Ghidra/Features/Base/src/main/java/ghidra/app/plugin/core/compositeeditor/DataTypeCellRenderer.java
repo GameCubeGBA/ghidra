@@ -44,7 +44,7 @@ public class DataTypeCellRenderer extends GTableCellRenderer {
 		String dtString = "";
 		String tooltipText = null;
 		boolean useRed = false;
-		DataType dt = null;
+		DataType dt;
 
 		if (value instanceof DataTypeInstance) {
 			dt = ((DataTypeInstance) value).getDataType();

@@ -706,7 +706,7 @@ public class GNUExternalDisassembler implements ExternalDisassembler {
 
 	private String formatHexString(byte byteToFix) {
 		String byteString = "";
-		String singleByte = "";
+		String singleByte;
 		if (byteToFix < 0) {
 			singleByte = Integer.toHexString(byteToFix + 256);
 		}
@@ -778,7 +778,7 @@ public class GNUExternalDisassembler implements ExternalDisassembler {
 
         try (Reader mapFileReader = new InputStreamReader(mapFile.getInputStream())) {
             BufferedReader reader = new BufferedReader(mapFileReader);
-            String line = null;
+            String line;
             while ((line = reader.readLine()) != null) {
                 if (line.startsWith("//") || line.isEmpty()) {
                     continue;

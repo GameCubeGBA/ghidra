@@ -40,7 +40,7 @@ public class MemoryBytePatternSearcher {
 
 	ArrayList<Pattern> patternList;
 
-	private String searchName = "";
+	private String searchName;
 
 	private boolean doExecutableBlocksOnly = false;  // only search executable blocks
 

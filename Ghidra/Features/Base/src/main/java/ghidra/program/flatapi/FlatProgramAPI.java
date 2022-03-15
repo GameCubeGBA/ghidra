@@ -850,7 +850,7 @@ public class FlatProgramAPI {
 	 *  if the text was not found
 	 */
 	public final Address find(String text) {
-		Address addr = null;
+		Address addr;
 
 		monitor.setMessage("Searching plate comments...");
 		addr = findComment(CodeUnit.PLATE_COMMENT, text);

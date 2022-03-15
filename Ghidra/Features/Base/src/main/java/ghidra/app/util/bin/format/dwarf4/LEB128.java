@@ -202,7 +202,7 @@ public class LEB128 {
 	 * 64 bit int 
 	 */
 	public static long readAsLong(BinaryReader reader, boolean isSigned) throws IOException {
-		int nextByte = 0;
+		int nextByte;
 		int shift = 0;
 		long value = 0;
 		for (;;) {

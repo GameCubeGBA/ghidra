@@ -44,7 +44,7 @@ public class Callout {
 		double yDistance = cSize.height * 4 * distanceFactor * distanceFactor;
 
 		// only pad if the callout leaves the bounds of the parent image
-		int padding = 0;
+		int padding;
 		Rectangle cBounds = calloutInfo.getBounds();
 		Point cLoc = cBounds.getLocation();
 		if (yDistance > cLoc.y) {
@@ -361,7 +361,7 @@ public class Callout {
 		r.width += 2 * offset;
 		r.height += 2 * offset;
 
-		Image compImage = null;
+		Image compImage;
 		try {
 			Robot robot = new Robot();
 			compImage = robot.createScreenCapture(r);

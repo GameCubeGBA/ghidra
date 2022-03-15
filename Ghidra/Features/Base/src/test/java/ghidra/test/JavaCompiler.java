@@ -98,7 +98,7 @@ public class JavaCompiler {
 
 		@Override
 		public void run() {
-			String line = null;
+			String line;
 			try {
 				while ((line = shellOutput.readLine()) != null) {
 					System.out.println(line);

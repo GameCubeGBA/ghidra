@@ -78,8 +78,7 @@ public class StructureEditorUnlockedActions4Test
 		dialog = waitForDialogComponent(NumberInputDialog.class);
 		assertNotNull(dialog);
 		okInput(dialog, 3);
-		dialog = null;
-		waitUntilDialogProviderGone(NumberInputDialog.class, 2000);
+        waitUntilDialogProviderGone(NumberInputDialog.class, 2000);
 		assertEquals(num - 4, model.getNumComponents());
 		assertTrue(((Array) getDataType(5)).getDataType().isEquivalent(dt5));
 		assertEquals(6, getDataType(5).getLength());

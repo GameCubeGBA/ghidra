@@ -51,7 +51,7 @@ public abstract class AbstractGCellRenderer extends GDHtmlLabel {
 	protected Font boldFont;
 	protected int dropRow = -1;
 
-	private boolean instanceAlternateRowColors = true;
+	private boolean instanceAlternateRowColors;
 
 	public AbstractGCellRenderer() {
 		noFocusBorder = BorderFactory.createEmptyBorder(0, 5, 0, 5);

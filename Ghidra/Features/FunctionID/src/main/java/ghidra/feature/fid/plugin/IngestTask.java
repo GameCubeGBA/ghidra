@@ -66,7 +66,7 @@ public class IngestTask extends Task {
 	@Override
 	public void run(TaskMonitor monitor) {
 
-		FidDB fidDb = null;
+		FidDB fidDb;
 		try {
 			fidDb = fidFile.getFidDB(true);
 		}

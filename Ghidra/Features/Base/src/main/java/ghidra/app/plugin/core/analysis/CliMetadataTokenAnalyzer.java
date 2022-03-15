@@ -78,7 +78,7 @@ public class CliMetadataTokenAnalyzer extends AbstractAnalyzer {
 		ByteProvider bytes = new MemoryByteProvider(program.getMemory(), metadataRootAddr);
 		BinaryReader reader = new BinaryReader(bytes, !program.getLanguage().isBigEndian());
 
-		boolean success = false;
+		boolean success;
 		try {
 			CliMetadataRoot metadataRoot = new CliMetadataRoot(reader, 0);
 			metadataRoot.parse();

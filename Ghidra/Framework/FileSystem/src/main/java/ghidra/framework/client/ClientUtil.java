@@ -149,7 +149,7 @@ public class ClientUtil {
 	 */
 	public static void clearRepositoryAdapter(String host, int port) throws IOException {
 		host = host.trim().toLowerCase();
-		String hostAddr = host;
+		String hostAddr;
 		try {
 			hostAddr = InetNameLookup.getCanonicalHostName(host);
 		}
@@ -329,7 +329,7 @@ public class ClientUtil {
 		getClientAuthenticator();
 		boolean allowLoginRetry = (clientAuthenticator instanceof DefaultClientAuthenticator);
 
-		RemoteRepositoryServerHandle hdl = null;
+		RemoteRepositoryServerHandle hdl;
 		ServerConnectTask connectTask = new ServerConnectTask(server, allowLoginRetry);
 		if (SystemUtilities.isInHeadlessMode()) {
 			connectTask.run(TaskMonitor.DUMMY); // headless - can't cancel

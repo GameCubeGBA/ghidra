@@ -1057,7 +1057,7 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 
 		// add a memory block
 		int transactionID = program.startTransaction("test");
-		MemoryBlock block = null;
+		MemoryBlock block;
 		try {
 			block = memory.createInitializedBlock(".test", getAddr(0), 500, (byte) 0,
 				TaskMonitor.DUMMY, false);
@@ -1474,7 +1474,7 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 	public void testSaveRestoreState() throws Exception {
 		env.showTool();
 		addViews();
-		ByteViewerComponent c = panel.getCurrentComponent();
+		ByteViewerComponent c;
 
 		final FieldLocation loc = getFieldLocation(getAddr(0x0100100b));
 		SwingUtilities.invokeAndWait(() -> {

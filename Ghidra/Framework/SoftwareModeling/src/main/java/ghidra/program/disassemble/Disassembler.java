@@ -115,8 +115,8 @@ public class Disassembler implements DisassemblerConflictHandler {
 
 	protected BookmarkManager bmMgr;
 	//private boolean restrictToExecuteMemory = false;
-	protected boolean doMarkBadInstructions = true;
-	private boolean doMarkUnimplPcode = true;
+	protected boolean doMarkBadInstructions;
+	private boolean doMarkUnimplPcode;
 	private int instructionSetSizeLimit = INSTRUCTION_SET_SIZE_LIMIT;
 
 	private boolean followFlow = false;
@@ -474,7 +474,7 @@ public class Disassembler implements DisassemblerConflictHandler {
 
 				Data data = listing.getUndefinedDataAt(nextAddr);
 				if (data == null) {
-					AddressSetView undefinedRanges = null;
+					AddressSetView undefinedRanges;
 					try {
 						undefinedRanges =
 							program.getListing().getUndefinedRanges(todoSubset, true, monitor);

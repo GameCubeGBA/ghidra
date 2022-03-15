@@ -46,7 +46,7 @@ public class CompositeGhidraTableCellRenderer extends GhidraTableCellRenderer {
 		boolean isSelected = data.isSelected();
 		boolean hasFocus = data.hasFocus();
 
-		Component rendererComponent = null;
+		Component rendererComponent;
 		TableCellRenderer cellRenderer = getCellRenderer(table, row, column);
 		if (cellRenderer != null) {
 			rendererComponent =

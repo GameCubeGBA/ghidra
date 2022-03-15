@@ -34,7 +34,7 @@ public class MultiRowLayout implements Layout {
 	private int heightAbove;
 	private int heightBelow;
 	private int primaryOffset = -1;
-	private int indexSize = 1;
+	private int indexSize;
 
 	/**
 	 * Constructs a new MultiRowLayout with a single layout row.

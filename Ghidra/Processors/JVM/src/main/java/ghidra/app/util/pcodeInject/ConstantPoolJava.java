@@ -29,7 +29,7 @@ public class ConstantPoolJava extends ConstantPool {
 	public static final String CPOOL_OP = "cpool";
 	private ClassFileJava classFile;
 	private AbstractConstantPoolInfoJava[] constantPool;
-	private DataTypeManager dtManager = null;
+	private DataTypeManager dtManager;
 
 	//the following constants must agree with the definitions in JVM.slaspec
 	public static final String CPOOL_ANEWARRAY = "0";
@@ -332,8 +332,8 @@ public class ConstantPoolJava extends ConstantPool {
 	private void setTypeNameInfo(AbstractConstantPoolInfoJava poolRef, Record res) {
 		int name_index = ((ConstantPoolClassInfo) poolRef).getNameIndex();
 		String fullyQualifiedName = ((ConstantPoolUtf8Info) constantPool[name_index]).getString();
-		String[] parts = null;
-		StringBuilder sb = null;
+		String[] parts;
+		StringBuilder sb;
 		if (fullyQualifiedName.startsWith("[")) {
 			//TODO: how to get instanceof X to display, where X is an array type?
 			//need to decide how to handle multidimensional arrays

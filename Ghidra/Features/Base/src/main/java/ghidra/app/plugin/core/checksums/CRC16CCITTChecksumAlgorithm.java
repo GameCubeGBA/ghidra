@@ -59,7 +59,7 @@ public class CRC16CCITTChecksumAlgorithm extends ChecksumAlgorithm {
 	 */
 	public void updateChecksum(Memory memory, AddressSetView addrSet, TaskMonitor monitor,
 			boolean onesComp, boolean twosComp) throws MemoryAccessException, CancelledException {
-		int entry = 0;
+		int entry;
 		int[] ccitt_table = new int[256];
 		for (int i = 0; i < 256; i++) {
 			if (monitor.isCancelled()) {
@@ -88,7 +88,7 @@ public class CRC16CCITTChecksumAlgorithm extends ChecksumAlgorithm {
 				throw new CancelledException();
 			}
 			byte b = it.next();
-			int value = 0;
+			int value;
 			if (b < 0) {
 				value = b + 256;
 			}

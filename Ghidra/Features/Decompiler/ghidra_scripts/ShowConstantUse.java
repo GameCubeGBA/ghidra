@@ -379,7 +379,7 @@ public class ShowConstantUse extends GhidraScript {
 	 * @return the varnode
 	 */
 	private Varnode getVarnodeLocation() {
-		Varnode var = null;
+		Varnode var;
 
 		if (currentLocation instanceof DecompilerLocation) {
 			DecompilerLocation dloc;
@@ -427,7 +427,7 @@ public class ShowConstantUse extends GhidraScript {
 	}
 
 	private HighSymbol computeVariableLocation(Program currProgram, ProgramLocation location) {
-		HighSymbol highVar = null;
+		HighSymbol highVar;
 		Address storageAddress = null;
 
 		// make sure what we are over can be mapped to decompiler
@@ -586,7 +586,7 @@ public class ShowConstantUse extends GhidraScript {
 		if (f == null) {
 			return constUse;
 		}
-		Varnode pvnode = null;
+		Varnode pvnode;
 		Parameter parm = f.getParameter(paramIndex);
 		if (parm == null) {
 			this.popup(
@@ -962,7 +962,7 @@ public class ShowConstantUse extends GhidraScript {
 			HashSet<SequenceNumber> doneSet) {
 		Address loc = hvar.getRepresentative().getAddress();
 		PcodeOp def = hvar.getRepresentative().getDef();
-		SequenceNumber seqnum = null;
+		SequenceNumber seqnum;
 		if (def != null) {
 			seqnum = def.getSeqnum();
 			if (doneSet.contains(seqnum)) {

@@ -245,7 +245,7 @@ public class BinaryCodedField extends BinaryField {
 	 * @param strings String array
 	 */
 	public BinaryCodedField(String[] strings) {
-		BinaryDataBuffer buffer = null;
+		BinaryDataBuffer buffer;
 		if (strings != null) {
 			int len = 2;
             for (String s : strings) {

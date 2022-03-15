@@ -223,8 +223,7 @@ public class SleighLanguageProvider implements LanguageProvider {
 			variant = languageEnter.getAttribute("variant");
 			String text = languageEnter.getAttribute("version");
 			String[] versionPieces = text.split("\\.");
-			version = 1;
-			minorVersion = 0;
+            minorVersion = 0;
 			try {
 				version = SpecXmlUtils.decodeInt(versionPieces[0]);
 				if (versionPieces.length > 1) {

@@ -39,10 +39,10 @@ import java.util.Stack;
 public class FunctionStackAnalysisCmd extends BackgroundCommand {
 	private AddressSet entryPoints = new AddressSet();
 	private Program program;
-	private boolean forceProcessing = false;
+	private boolean forceProcessing;
 	private boolean dontCreateNewVariables = false;
-	private boolean doParams = false;
-	private boolean doLocals = false;
+	private boolean doParams;
+	private boolean doLocals;
 
 	static String DEFAULT_FUNCTION_COMMENT = " FUNCTION";
 

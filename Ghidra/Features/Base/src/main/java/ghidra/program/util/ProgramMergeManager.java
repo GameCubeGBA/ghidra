@@ -665,7 +665,7 @@ public class ProgramMergeManager {
 
 	void mergeTypeOfComments(AddressSetView p1AddressSet, int mergeCommentType, int applyType,
 			TaskMonitor monitor) throws CancelledException {
-		int diffType = 0;
+		int diffType;
 		switch (mergeCommentType) {
 			case ProgramMergeFilter.PLATE_COMMENTS:
 				diffType = ProgramDiffFilter.PLATE_COMMENT_DIFFS;

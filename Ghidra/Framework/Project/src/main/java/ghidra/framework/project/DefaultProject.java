@@ -406,8 +406,8 @@ public class DefaultProject implements Project {
 	public void restore() {
 		// if there is a saved project, restore it
 		File saveFile = new File(fileMgr.getProjectDir(), PROJECT_STATE);
-		String errorMsg = null;
-		Throwable error = null;
+		String errorMsg;
+		Throwable error;
 		try {
 			if (!saveFile.exists()) {
 				initializeNewProject();

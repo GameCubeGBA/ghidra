@@ -239,7 +239,7 @@ public class DBIndexedTableTest extends AbstractGenericTest {
 
 	private void updateRecordsIterator(boolean testStoredDB, int schemaType, int recordCnt,
 			long keyIncrement, int varDataSize) throws IOException {
-		DBRecord[] recs = null;
+		DBRecord[] recs;
 		if (keyIncrement == 0) {
 			recs = createRandomTableRecords(schemaType, recordCnt, varDataSize);
 		}
@@ -270,7 +270,7 @@ public class DBIndexedTableTest extends AbstractGenericTest {
 		// Random update
 		long txId = dbh.startTransaction();
 		Random random = new Random(1);
-		int updateCnt = recordCnt / 4;// update 1/4th of the records
+		int updateCnt;// update 1/4th of the records
 		int varFldUpdate = 0;
 		updateCnt = 206;
 		for (int i = 0; i < updateCnt; i++) {
@@ -411,7 +411,7 @@ public class DBIndexedTableTest extends AbstractGenericTest {
 	private void iterateRecords(boolean testStoredDB, int schemaType, int recordCnt,
 			long keyIncrement, int varDataSize, boolean doUndoRedo) throws IOException {
 
-		DBRecord[] recs = null;
+		DBRecord[] recs;
 		if (keyIncrement == 0) {
 			recs = createRandomTableRecords(schemaType, recordCnt, varDataSize);
 		}
@@ -456,7 +456,6 @@ public class DBIndexedTableTest extends AbstractGenericTest {
 			assertEquals(recordCnt, recIx);
 
 			// Backward iteration (default iterator with no start)
-			recIx = 0;
 			iter = table.indexIterator(colIx);
 			assertTrue(!iter.hasPrevious());
 
@@ -870,7 +869,7 @@ public class DBIndexedTableTest extends AbstractGenericTest {
 	private void deleteIteratedRecords(int recordCnt, int testColIx, long keyIncrement,
 			int varDataSize) throws IOException {
 
-		DBRecord[] recs = null;
+		DBRecord[] recs;
 		if (keyIncrement == 0) {
 			recs = createRandomTableRecords(DBTestUtils.ALL_TYPES, recordCnt, varDataSize);
 		}
@@ -938,7 +937,7 @@ public class DBIndexedTableTest extends AbstractGenericTest {
 	private void deleteIteratedIndexFields(int recordCnt, int testColIx, long keyIncrement,
 			int varDataSize) throws Exception {
 
-		DBRecord[] recs = null;
+		DBRecord[] recs;
 		if (keyIncrement == 0) {
 			recs = createRandomTableRecords(DBTestUtils.ALL_TYPES, recordCnt, varDataSize);
 		}
@@ -1156,7 +1155,7 @@ public class DBIndexedTableTest extends AbstractGenericTest {
 	@Test
 	public void testRecordIteratorExtents() throws IOException {
 
-		DBRecord[] recs = null;
+		DBRecord[] recs;
 		recs = createOrderedRecordRange(DBTestUtils.SINGLE_SHORT, 30, 2, 1);
 		Table table = dbh.getTable(table1Name);
 		assertEquals(recs.length, table.getRecordCount());

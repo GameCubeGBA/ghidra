@@ -459,7 +459,7 @@ public class GHelpBroker extends DefaultHelpBroker {
 
 		WindowPresentation windowPresentation = getWindowPresentation();
 		Window helpWindow = windowPresentation.getHelpWindow();
-		Container contentPane = null;
+		Container contentPane;
 		if (helpWindow instanceof JDialog) {
 			contentPane = ((JDialog) helpWindow).getContentPane();
 		}

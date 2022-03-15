@@ -450,7 +450,7 @@ class GhidraScriptActionManager {
 
 		private void launchJavadoc() {
 			URI uri = entryFile.toURI();
-			URL url = null;
+			URL url;
 			try {
 				url = uri.toURL();
 			}
@@ -477,7 +477,7 @@ class GhidraScriptActionManager {
 			mkdirs(file); // make sure the output path exists
 			FileOutputStream ouputStream = new FileOutputStream(file);
 			byte[] buffer = new byte[1024];
-			int bytesRead = -1;
+			int bytesRead;
 			while ((bytesRead = inputStream.read(buffer)) != -1) {
 				ouputStream.write(buffer, 0, bytesRead);
 			}

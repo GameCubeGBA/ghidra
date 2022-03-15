@@ -416,8 +416,7 @@ public class ElfDefaultGotPltMarkup {
 				else {
 					program.setImageBase(newImageBase, true);
 					log("Setting Image base to: " + newImageBase);
-					imageBaseAlreadySet = true;
-				}
+                }
 			}
 		}
 		catch (Exception e) {

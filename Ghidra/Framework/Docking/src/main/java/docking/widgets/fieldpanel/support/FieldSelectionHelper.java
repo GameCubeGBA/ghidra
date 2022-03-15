@@ -109,7 +109,7 @@ public class FieldSelectionHelper {
 		StringBuilder buffy = new StringBuilder();
 		for (BigInteger i = startIndex; i.compareTo(endIndex) <= 0; i = i.add(BigInteger.ONE)) {
 			Layout layout = panel.getLayoutModel().getLayout(i);
-			String text = null;
+			String text;
 			if (i.equals(startIndex)) {
 				if (i.equals(endIndex)) {
 					// only one index, use the end values

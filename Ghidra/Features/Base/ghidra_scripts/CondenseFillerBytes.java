@@ -32,7 +32,7 @@ public class CondenseFillerBytes extends GhidraScript {
 	public void run() throws Exception {
 		listing = currentProgram.getListing();
 		memory = currentProgram.getMemory();
-		String filler = null;
+		String filler;
 
 		AddressSet possibleAddrSet = new AddressSet();
 

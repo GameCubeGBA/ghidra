@@ -160,7 +160,7 @@ public class MachoPrelinkProgramBuilder extends MachoProgramBuilder {
 
 			// Determine the starting address of the PRELINK Mach-O's
 			long prelinkStart = MachoPrelinkUtils.getPrelinkStartAddr(machoHeader);
-			Address prelinkStartAddr = null;
+			Address prelinkStartAddr;
 			if (prelinkStart == 0) {
 				// Probably iOS 12, which doesn't define a proper __PRELINK_TEXT segment.
 				// Assume the file offset is the same as the offset from image base.
@@ -241,8 +241,8 @@ public class MachoPrelinkProgramBuilder extends MachoProgramBuilder {
 			return Collections.emptyList();
 		}
 
-		Address threadSectionStart = null;
-		Address threadSectionEnd = null;
+		Address threadSectionStart;
+		Address threadSectionEnd;
 		threadSectionStart = space.getAddress(threadStarts.getAddress());
 		threadSectionEnd = threadSectionStart.add(threadStarts.getSize() - 1);
 
@@ -495,7 +495,7 @@ public class MachoPrelinkProgramBuilder extends MachoProgramBuilder {
 			// this is a pointer, but is good now
 		}
 
-		long fixedPointerValue = 0;
+		long fixedPointerValue;
 		long fixedPointerType = 0;
 
 		// Pointer checked value

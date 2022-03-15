@@ -46,7 +46,7 @@ public class CliStreamMetadata extends CliAbstractStream {
 	private long valid;
 	private long sorted;
 	private HashMap<CliTypeTable, Integer> rows;
-	private ArrayList<CliAbstractTable> tables = new ArrayList<>();
+	private ArrayList<CliAbstractTable> tables;
 
 	private CliStreamGuid guidStream;
 	private CliStreamUserStrings userStringsStream;

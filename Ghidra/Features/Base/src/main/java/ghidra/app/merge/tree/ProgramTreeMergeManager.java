@@ -430,7 +430,7 @@ public class ProgramTreeMergeManager implements MergeResolver {
 	private void createModule(ProgramModule parent, String name, ProgramModule sourceModule,
 			ArrayList<String> fragmentNameList) {
 
-		ProgramModule m = null;
+		ProgramModule m;
 		try {
 			m = parent.createModule(name);
 		}
@@ -457,7 +457,7 @@ public class ProgramTreeMergeManager implements MergeResolver {
 		if (!fragmentNameList.contains(name)) {
 			fragmentNameList.add(name);
 		}
-		ProgramFragment newFrag = null;
+		ProgramFragment newFrag;
 		try {
 			newFrag = parent.createFragment(name);
 			newFrag.setComment(sourceFrag.getComment());

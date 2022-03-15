@@ -725,7 +725,7 @@ public class ThreadedTableTest extends AbstractThreadedTableTest {
 				comp2 = ((String) comp2).toLowerCase();
 			}
 
-			boolean result = false;
+			boolean result;
 			if (columnState.isAscending()) {
 				result = comp1.compareTo(comp2) <= 0;
 			}

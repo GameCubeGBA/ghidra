@@ -444,8 +444,7 @@ public class PCodeTestCombinedTestResults {
 			int diff =
 				totalAsserts - (testResults.summaryPassCount + testResults.summaryCallOtherCount);
 			if (diff > 0) {
-				failCount = diff;
-			}
+            }
 		}
 		else if ((testResults.summaryPassCount != 0) && (failCount == 0) &&
 			(testResults.summaryCallOtherCount == 0)) {

@@ -43,7 +43,7 @@ class PngResource {
 	private void scanContents() throws InvalidDataTypeException {
 		int chunkCount = 0;
 		byte[] type = new byte[4];
-		int saveOffset = bufOffset;
+		int saveOffset;
 		for (;;) {
 			try {
 				int len = readInt();

@@ -281,8 +281,7 @@ public class Ext4Inode implements StructConverter {
 		if (bytesRemaining > 0) {
 			copyLen = Math.min(bytesRemaining, eaSystemData.length);
 			System.arraycopy(eaSystemData, 0, result, bytesCopied, copyLen);
-			bytesCopied += copyLen;
-			bytesRemaining -= copyLen;
+            bytesRemaining -= copyLen;
 		}
 		if (bytesRemaining != 0) {
 			throw new IOException("Unable to read inline data");

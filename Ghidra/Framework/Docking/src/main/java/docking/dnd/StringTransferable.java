@@ -20,7 +20,7 @@ import java.io.IOException;
 
 public class StringTransferable implements Transferable {
 
-	private String data = null;
+	private String data;
 	private DataFlavor[] flavors = { DataFlavor.stringFlavor };
 
 	public StringTransferable(String data) {

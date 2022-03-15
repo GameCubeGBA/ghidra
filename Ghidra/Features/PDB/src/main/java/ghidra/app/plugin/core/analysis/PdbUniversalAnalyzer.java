@@ -154,7 +154,7 @@ public class PdbUniversalAnalyzer extends AbstractAnalyzer {
 			return true;
 		}
 
-		File pdbFile = null;
+		File pdbFile;
 		if (doForceLoad && forceLoadFile != null) {
 			if (!forceLoadFile.isFile()) {
 				logFailure("Force-load PDB file does not exist: " + forceLoadFile, log);

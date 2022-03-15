@@ -53,7 +53,7 @@ public class DockableHeader extends GenericHeader
 	private DockableComponent dockComp;
 
 	private DragCursorManager dragCursorManager = createDragCursorManager();
-	private DragSource dragSource = null;
+	private DragSource dragSource;
 	private boolean isDocking;
 
 	private Animator focusAnimator;
@@ -365,7 +365,7 @@ public class DockableHeader extends GenericHeader
 		void setCursor(DragSourceEvent event, Cursor dragCursor) {
 			ComponentPlaceholder placeholder = DockableComponent.DRAGGED_OVER_INFO;
 
-			Component mousedComponent = null;
+			Component mousedComponent;
 			if (placeholder == null) {
 				// Must not be over any component; This can happen when over a split pane 
 				// resize area or outside of the window
@@ -558,9 +558,8 @@ public class DockableHeader extends GenericHeader
 				Rectangle componentBounds = component.getBounds();
 				componentBounds = SwingUtilities.convertRectangle(component.getParent(),
 					componentBounds, glassPane);
-				othersBounds = componentBounds;
 
-				othersBounds = new Rectangle();
+                othersBounds = new Rectangle();
 			}
 
 			g2d.fillRect(othersBounds.x, othersBounds.y, othersBounds.width, othersBounds.height);

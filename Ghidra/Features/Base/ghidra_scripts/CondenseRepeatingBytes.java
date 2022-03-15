@@ -56,8 +56,7 @@ public class CondenseRepeatingBytes extends GhidraScript {
 			sameMemoryBlock = true;
 		}
 		else{
-			sameMemoryBlock = false;
-			return;
+            return;
 		}
 		
 		boolean noCollisions = true;

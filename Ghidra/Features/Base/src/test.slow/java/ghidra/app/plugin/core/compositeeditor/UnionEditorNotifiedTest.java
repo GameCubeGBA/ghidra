@@ -250,15 +250,13 @@ public class UnionEditorNotifiedTest extends AbstractUnionEditorTest {
 			assertNotNull(dialog);
 			pressButtonByText(dialog, "Yes");
 			dialog.dispose();
-			dialog = null;
 
-			waitForSwing();
+            waitForSwing();
 			assertEquals(((Union) origCopy).getNumComponents(), model.getNumComponents());
 			assertTrue(origCopy.isEquivalent(model.viewComposite));
 		}
 		finally {
-			dialog = null;
-			cleanup();
+            cleanup();
 		}
 	}
 
@@ -287,14 +285,12 @@ public class UnionEditorNotifiedTest extends AbstractUnionEditorTest {
 			assertNotNull(dialog);
 			pressButtonByText(dialog, "No");
 			dialog.dispose();
-			dialog = null;
 
-			assertEquals(((Union) viewCopy).getNumComponents(), model.getNumComponents());
+            assertEquals(((Union) viewCopy).getNumComponents(), model.getNumComponents());
 			assertTrue(viewCopy.isEquivalent(model.viewComposite));
 		}
 		finally {
-			dialog = null;
-			cleanup();
+            cleanup();
 		}
 	}
 
@@ -609,14 +605,12 @@ public class UnionEditorNotifiedTest extends AbstractUnionEditorTest {
 			assertNotNull(dialog);
 			pressButtonByText(dialog, "Yes");
 			dialog.dispose();
-			dialog = null;
 
-			assertEquals(((Union) origCopy).getNumComponents(), model.getNumComponents());
+            assertEquals(((Union) origCopy).getNumComponents(), model.getNumComponents());
 			assertTrue(origCopy.isEquivalent(model.viewComposite));
 		}
 		finally {
-			dialog = null;
-			cleanup();
+            cleanup();
 		}
 	}
 
@@ -650,14 +644,12 @@ public class UnionEditorNotifiedTest extends AbstractUnionEditorTest {
 			assertNotNull(dialog);
 			pressButtonByText(dialog, "No");
 			dialog.dispose();
-			dialog = null;
 
-			assertEquals(((Union) viewCopy).getNumComponents(), model.getNumComponents());
+            assertEquals(((Union) viewCopy).getNumComponents(), model.getNumComponents());
 			assertTrue(viewCopy.isEquivalent(model.viewComposite));
 		}
 		finally {
-			dialog = null;
-			cleanup();
+            cleanup();
 		}
 	}
 

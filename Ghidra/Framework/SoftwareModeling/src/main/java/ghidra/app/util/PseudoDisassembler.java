@@ -55,13 +55,13 @@ public class PseudoDisassembler {
 
 	private static final int DEFAULT_MAX_INSTRUCTIONS = 4000;
 
-	Program program = null;
+	Program program;
 
-	private ProgramContext programContext = null;
+	private ProgramContext programContext;
 
-	private Language language = null;
+	private Language language;
 
-	private Memory memory = null;
+	private Memory memory;
 
 	private int pointerSize;
 
@@ -148,7 +148,7 @@ public class PseudoDisassembler {
 			return null;
 		}
 
-		InstructionPrototype prototype = null;
+		InstructionPrototype prototype;
 
 		try {
 			prototype = language.parse(memBuffer, disassemblerContext, isInDelaySlot);
@@ -224,7 +224,7 @@ public class PseudoDisassembler {
 			return null;
 		}
 
-		InstructionPrototype prototype = null;
+		InstructionPrototype prototype;
 		disassemblerContext.flowStart(addr);
 		prototype = language.parse(memBuffer, disassemblerContext, false);
 

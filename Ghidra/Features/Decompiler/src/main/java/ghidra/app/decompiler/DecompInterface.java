@@ -184,7 +184,7 @@ public class DecompInterface {
 	private static String fileToString(ResourceFile file) throws IOException {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
             StringBuilder buffer = new StringBuilder();
-            String line = null;
+            String line;
             while ((line = reader.readLine()) != null) {
                 buffer.append(line);
             }
@@ -631,7 +631,7 @@ public class DecompInterface {
 		if (monitor != null) {
 			monitor.addCancelledListener(monitorListener);
 		}
-		LimitedByteBuffer res = null;
+		LimitedByteBuffer res;
 		BlockGraph resgraph = null;
 		try {
 			StringWriter writer = new StringWriter();

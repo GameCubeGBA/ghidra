@@ -24,7 +24,7 @@ import java.io.IOException;
  */
 public class ImageTransferable implements Transferable {
 
-	private Image data = null;
+	private Image data;
 	private final DataFlavor[] flavors = { DataFlavor.imageFlavor };
 
 	public ImageTransferable(Image img) {

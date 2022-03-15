@@ -265,7 +265,7 @@ public class RemoteBufferFileImpl extends UnicastRemoteObject
 
 	@Override
 	public boolean delete() throws IOException {
-		boolean rc = false;
+		boolean rc;
 		try {
 			rc = bufferFile.delete();
 		}

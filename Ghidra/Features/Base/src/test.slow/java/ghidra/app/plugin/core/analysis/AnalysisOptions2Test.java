@@ -366,7 +366,7 @@ public class AnalysisOptions2Test extends AbstractGhidraHeadedIntegrationTest {
 
 	private int getRowForAnalyzer(String name, TableModel model) {
 		int rowCount = model.getRowCount();
-		int row = 0;
+		int row;
 		for (row = 0; row < rowCount; row++) {
 			String rowName = (String) model.getValueAt(row, 1);
 			if (name.equals(rowName)) {

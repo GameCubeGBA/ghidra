@@ -143,7 +143,7 @@ public class ProgramMappingService {
 	 * 			{@link #createAssociation(FSRL, DomainFile)} and friends.
 	 */
 	public static DomainFile getCachedDomainFileFor(FSRL fsrl) {
-		String path = null;
+		String path;
 		synchronized (fsrlToProjectPathMap) {
 			path = fsrlToProjectPathMap.get(fsrl);
 			if (path == null && fsrl.getMD5() != null) {

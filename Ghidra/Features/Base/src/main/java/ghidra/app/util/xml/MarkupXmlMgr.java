@@ -219,7 +219,7 @@ class MarkupXmlMgr {
 
 			RefType refType = getDefaultRefType(fromAddr, toAddr, opIndex);
 
-			Command cmd = null;
+			Command cmd;
 			if (baseAddr != null) {
 				long offset = toAddr.subtract(baseAddr);
 				cmd = new AddOffsetMemRefCmd(fromAddr, toAddr, false, refType,
@@ -415,7 +415,7 @@ class MarkupXmlMgr {
 				}
 			}
 
-			long value = 0;
+			long value;
 			if (element.hasAttribute("VALUE")) {
 				value = XmlUtilities.parseLong(element.getAttribute("VALUE"));
 				Scalar matchingScalar = null;

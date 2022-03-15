@@ -325,7 +325,7 @@ public class CreateMultipleLibraries extends GhidraScript {
 	protected void run() throws Exception {
 		pathelement = new String[MASTER_DEPTH + 1];
 		service = new FidService();
-		File askFile = null;
+		File askFile;
 
 		try {
 			askFile = askFile("Duplicate Results File", "OK");

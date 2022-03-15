@@ -127,7 +127,7 @@ public class PcodeDataTypeManager {
 	 * @return the data-type object or null if no matching data-type exists
 	 */
 	public DataType findBaseType(String nm, String idstr) {
-		long id = 0;
+		long id;
 		if (idstr != null) {
 			id = SpecXmlUtils.decodeLong(idstr);
 			if (id > 0) {
@@ -1051,7 +1051,7 @@ public class PcodeDataTypeManager {
 		// Set "char" datatype
 		DataType charDataType = new CharDataType(progDataTypes);
 
-		String charMetatype = null;
+		String charMetatype;
 		if (charDataType instanceof CharDataType && ((CharDataType) charDataType).isSigned()) {
 			charMetatype = " metatype=\"int\"";
 		}

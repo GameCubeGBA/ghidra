@@ -1540,7 +1540,7 @@ public class ProgramDiffPlugin extends ProgramPlugin
 				OptionDialog.ERROR_MESSAGE);
 			return false;
 		}
-		ProgramMemoryComparator programMemoryComparator = null;
+		ProgramMemoryComparator programMemoryComparator;
 		try {
 
 			programMemoryComparator = new ProgramMemoryComparator(currentProgram, newProgram);

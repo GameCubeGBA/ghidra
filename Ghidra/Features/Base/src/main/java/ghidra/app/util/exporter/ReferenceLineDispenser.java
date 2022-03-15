@@ -111,7 +111,7 @@ class ReferenceLineDispenser extends AbstractLineDispenser {
 	////////////////////////////////////////////////////////////////////
 
 	private Address[] getForwardRefs(CodeUnit cu) {
-		boolean showRefs = false;
+		boolean showRefs;
 
 		Address cuAddr = cu.getMinAddress();
 		Reference[] monRefs = cu.getMnemonicReferences();

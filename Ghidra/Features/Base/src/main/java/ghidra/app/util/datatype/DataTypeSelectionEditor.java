@@ -352,7 +352,7 @@ public class DataTypeSelectionEditor extends AbstractCellEditor {
 		}
 
 		// we will create new pointer and array types by default
-		DataType newDataType = null;
+		DataType newDataType;
 		DataTypeParser parser = new DataTypeParser(dataTypeManager, dataTypeManager,
 			dataTypeManagerService, allowedDataTypes);
 		try {

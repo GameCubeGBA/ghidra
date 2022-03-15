@@ -63,7 +63,7 @@ class MemoryMapProvider extends ComponentProviderAdapter {
 	private DockingAction deleteAction;
 	private DockingAction setBaseAction;
 
-	private MemoryMapPlugin plugin = null;
+	private MemoryMapPlugin plugin;
 
 	private final static String ADD_IMAGE = "images/Plus.png";
 	private final static String MOVE_IMAGE = "images/move.png";
@@ -305,7 +305,7 @@ class MemoryMapProvider extends ComponentProviderAdapter {
 
 	private void enableOptions(ListSelectionModel lsm) {
 		// find out how many items are selected.
-		int numSelected = 0;
+		int numSelected;
 		if (lsm == null || lsm.isSelectionEmpty()) {
 			numSelected = 0;
 		}

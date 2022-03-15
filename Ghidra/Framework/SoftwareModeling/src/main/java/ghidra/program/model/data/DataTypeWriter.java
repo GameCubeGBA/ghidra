@@ -51,7 +51,7 @@ public class DataTypeWriter {
 	private DataTypeManager dtm;
 	private DataOrganization dataOrganization;
 	private AnnotationHandler annotator;
-	private boolean cppStyleComments = false;
+	private boolean cppStyleComments;
 
 	/**
 	 * Constructs a new instance of this class using the given writer. The default annotation
@@ -393,7 +393,6 @@ public class DataTypeWriter {
 			if (containsComposite(other, composite)) {
 				list.remove(index);
 				list.add(i, composite);
-				composite = null;
 				return true;
 			}
 		}

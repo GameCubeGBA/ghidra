@@ -56,14 +56,12 @@ public class StackEditorActions1Test extends AbstractStackEditorTest {
 		assertNotNull(dialog);
 		okInput(dialog, 3);
 		assertEquals("", model.getStatus());
-		dialog = null;
-		waitUntilDialogProviderGone(NumberInputDialog.class, 2000);
+        waitUntilDialogProviderGone(NumberInputDialog.class, 2000);
 		invoke(arrayAction, false);
 		dialog = waitForDialogComponent(NumberInputDialog.class);
 		assertNotNull(dialog);
 		okInput(dialog, 2);
-		dialog = null;
-		waitUntilDialogProviderGone(NumberInputDialog.class, 2000);
+        waitUntilDialogProviderGone(NumberInputDialog.class, 2000);
 		assertEquals("", model.getStatus());
 		assertEquals(21, model.getNumComponents());
 		assertEquals("byte[2][3]", getDataType(1).getName());

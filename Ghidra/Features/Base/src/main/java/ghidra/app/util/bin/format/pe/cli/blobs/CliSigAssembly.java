@@ -23,7 +23,7 @@ import ghidra.program.model.data.*;
 import ghidra.util.Msg;
 
 public class CliSigAssembly extends CliAbstractSig {
-	byte[] sha1Hash = new byte[CLISIGASSEMBLY_SHA1_LENGTH];
+	byte[] sha1Hash;
 	int bitLength;
 	int publicExponent;
 	byte[] publicKeySignature;

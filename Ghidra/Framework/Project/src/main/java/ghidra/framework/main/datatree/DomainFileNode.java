@@ -218,7 +218,7 @@ public class DomainFileNode extends GTreeNode implements Cuttable {
 	}
 
 	private void setToolTipText() {
-		String newToolTipText = toolTipText;
+		String newToolTipText;
 		if (domainFile.isInWritableProject() && domainFile.isHijacked()) {
 			newToolTipText = "Hijacked file should be deleted or renamed";
 		}

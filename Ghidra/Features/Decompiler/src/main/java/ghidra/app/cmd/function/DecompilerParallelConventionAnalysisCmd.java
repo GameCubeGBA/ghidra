@@ -148,7 +148,7 @@ public class DecompilerParallelConventionAnalysisCmd extends BackgroundCommand {
 		SourceType signatureSource = f.getSignatureSource();
 
 		try {
-			DecompileResults decompRes = null;
+			DecompileResults decompRes;
 			if (monitor.isCancelled()) {
 				return;
 			}

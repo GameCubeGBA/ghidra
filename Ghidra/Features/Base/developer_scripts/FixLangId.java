@@ -99,7 +99,7 @@ public class FixLangId extends GhidraScript {
 			return false;
 		}
 		String langId = record.getString(0);
-		LanguageDescription desc = null;
+		LanguageDescription desc;
 		List<LanguageDescription> descriptions =
 			DefaultLanguageService.getLanguageService().getLanguageDescriptions(true);
 		List<String> choices = new ArrayList<>(descriptions.size());
@@ -165,7 +165,7 @@ public class FixLangId extends GhidraScript {
 
 		Class<?> objectClass =
 			(ownerInstance instanceof Class) ? (Class<?>) ownerInstance : ownerInstance.getClass();
-		Object result = null;
+		Object result;
 		try {
 			// get the field from the class object 
 			Field field = locateFieldObjectOnClass(fieldName, objectClass);

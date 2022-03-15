@@ -258,7 +258,7 @@ public class DecompileCallback {
 	}
 
 	public PackedBytes getPcodePacked(String addrstring) {
-		Address addr = null;
+		Address addr;
 		try {
 			addr = AddressXML.readXML(addrstring, addrfactory);
 			if (overlaySpace != null) {
@@ -752,7 +752,7 @@ public class DecompileCallback {
 		}
 		try {
 
-			Function func = null;
+			Function func;
 			if (cachedFunction != null && cachedFunction.getEntryPoint().equals(addr)) {
 				func = cachedFunction;
 			}
@@ -1325,9 +1325,9 @@ public class DecompileCallback {
 		}
 		Data data = program.getListing().getDataContaining(addr);
 		Settings settings = SettingsImpl.NO_SETTINGS;
-		AbstractStringDataType dataType = null;
+		AbstractStringDataType dataType;
 		StringDataInstance stringInstance = null;
-		int length = 0;
+		int length;
 		if (data != null) {
 			if (data.getDataType() instanceof AbstractStringDataType) {
 				// There is already a string here.  Use its configuration to

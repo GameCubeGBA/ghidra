@@ -72,7 +72,7 @@ public abstract class AbstractLeb128DataType extends BuiltIn implements Dynamic 
 		byte[] data = new byte[maxLength];
 		int availBytes = buf.getBytes(data, 0);
 		int numRead = 0;
-		byte curByte = 0;
+		byte curByte;
 		while ((numRead < availBytes) && (numRead < data.length)) {
 			curByte = data[numRead];
 			numRead++;
@@ -91,7 +91,7 @@ public abstract class AbstractLeb128DataType extends BuiltIn implements Dynamic 
 		}
 		int numRead = 0;
 		int shift = 0;
-		byte curByte = 0;
+		byte curByte;
 		long val = 0;
 
 		if (data.length >= 1) {

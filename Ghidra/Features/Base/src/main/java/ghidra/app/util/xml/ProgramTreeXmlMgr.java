@@ -128,7 +128,7 @@ class ProgramTreeXmlMgr {
 		treeName = treeElement.getAttribute("NAME");
 		fragmentNameList = new ArrayList<String>();
 
-		ProgramModule root = null;
+		ProgramModule root;
 		try {
 			try {
 				root = listing.createRootModule(treeName);
@@ -187,7 +187,7 @@ class ProgramTreeXmlMgr {
 	private void processModule(XmlElement element, XmlPullParser parser) {
 		String name = element.getAttribute("NAME");
 		ProgramModule parent = moduleStack.peek();
-		ProgramModule newModule = null;
+		ProgramModule newModule;
 		try {
 			try {
 				newModule = parent.createModule(name);
@@ -212,7 +212,7 @@ class ProgramTreeXmlMgr {
 			fragmentNameList.add(name);
 		}
 		ProgramModule parent = moduleStack.peek();
-		ProgramFragment frag = null;
+		ProgramFragment frag;
 		try {
 			frag = parent.createFragment(name);
 		}

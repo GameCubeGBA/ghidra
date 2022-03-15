@@ -38,7 +38,7 @@ import ghidra.util.exception.*;
 
 public class VarnodeContext implements ProcessorContext {
 
-	public Address BAD_ADDRESS = null;
+	public Address BAD_ADDRESS;
 
 	public static final int BAD_SPACE_ID_VALUE = 0xffff;
 
@@ -73,7 +73,7 @@ public class VarnodeContext implements ProcessorContext {
 
 	protected boolean hitDest = false;
 
-	protected AddressFactory addrFactory = null;
+	protected AddressFactory addrFactory;
 
 	protected ProgramContext programContext;
 	protected Address currentAddress;
@@ -254,7 +254,7 @@ public class VarnodeContext implements ProcessorContext {
 			program.getCompilerSpec().getDefaultCallingConvention();
 
 		if (targetFunc != null) {
-			Varnode[] varnodes = null;
+			Varnode[] varnodes;
 			if (targetFunc.hasCustomVariableStorage()) {
 				Parameter retStorage = targetFunc.getReturn();
 				varnodes = retStorage.getVariableStorage().getVarnodes();
@@ -382,7 +382,7 @@ public class VarnodeContext implements ProcessorContext {
 		if (varnode.isConstant()) {
 			return varnode;
 		}
-		Varnode rvnode = null;
+		Varnode rvnode;
 		if (varnode.isUnique()) {
 			rvnode = tempUniqueVals.get(varnode);
 		}
@@ -518,7 +518,7 @@ public class VarnodeContext implements ProcessorContext {
 			}
 			int size = varnode.getSize();
 			try {
-				long value = 0;
+				long value;
 				switch (size) {
 					case 1:
 						value = this.program.getMemory().getByte(addr) & 0xff;
@@ -665,7 +665,7 @@ public class VarnodeContext implements ProcessorContext {
 		}
 
 		AddressSpace spc = addrFactory.getAddressSpace(spaceID);
-		Address addr = null;
+		Address addr;
 
 		if (spaceID == BAD_SPACE_ID_VALUE || spc == null ||
 			spc.equals(BAD_ADDRESS.getAddressSpace())) {
@@ -946,7 +946,7 @@ public class VarnodeContext implements ProcessorContext {
 	public Varnode getVarnode(Varnode space, Varnode offset, int size, ContextEvaluator evaluator)
 			throws NotFoundException {
 		int spaceID = offset.getSpace();
-		long valbase = 0;
+		long valbase;
 		if (isRegister(offset)) {
 			Register reg = trans.getRegister(offset);
 			if (reg == null) {
@@ -990,7 +990,7 @@ public class VarnodeContext implements ProcessorContext {
 	 */
 	public Varnode getRegisterVarnodeValue(Register reg, Address fromAddr, Address toAddr,
 			boolean signed) {
-		Varnode rvnode = null;
+		Varnode rvnode;
 
 		if (reg == null) {
 			return null;
@@ -1065,7 +1065,7 @@ public class VarnodeContext implements ProcessorContext {
 	 */
 	public void copy(Varnode out, Varnode in, boolean mustClearAll, ContextEvaluator evaluator)
 			throws NotFoundException {
-		Varnode val1 = null;
+		Varnode val1;
 		if (!in.isRegister() || !out.isRegister()) {
 			// normal case easy get value, put value
 			val1 = getValue(in, evaluator);
@@ -1202,7 +1202,7 @@ public class VarnodeContext implements ProcessorContext {
 			val2 = swap;
 		}
 		int spaceID = val1.getSpace();
-		long valbase = 0;
+		long valbase;
 		if (isRegister(val1)) {
 			Register reg = trans.getRegister(val1);
 			if (reg == null) {
@@ -1294,7 +1294,7 @@ public class VarnodeContext implements ProcessorContext {
 			return createVarnode(0, addrFactory.getConstantSpace().getSpaceID(), val1.getSize());
 		}
 		int spaceID = val1.getSpace();
-		long valbase = 0;
+		long valbase;
 		if (val1.isConstant()) {
 			valbase = val1.getOffset();
 		}
@@ -1526,7 +1526,7 @@ class OffsetAddressFactory extends DefaultAddressFactory {
 	}
 
 	public AddressSpace createNewOffsetSpace(String name) {
-		AddressSpace space = null;
+		AddressSpace space;
 		try {
 			space = new GenericAddressSpace(name, this.getConstantSpace().getSize(),
 				AddressSpace.TYPE_SYMBOL, getNextUniqueID());

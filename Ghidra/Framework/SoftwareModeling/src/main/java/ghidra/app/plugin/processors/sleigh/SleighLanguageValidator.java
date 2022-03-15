@@ -94,7 +94,7 @@ public class SleighLanguageValidator {
 
 	public SleighLanguageValidator(int type) {
 		verifierType = type;
-		ResourceFile schemaFile = null;
+		ResourceFile schemaFile;
 		switch (type) {
 			case CSPEC_TYPE:
 			case CSPECTAG_TYPE:
@@ -204,7 +204,7 @@ public class SleighLanguageValidator {
 				fileToValidate + " is not properly case dependent: " + result.getMessage());
 		}
 
-		Verifier verifier = null;
+		Verifier verifier;
 		try {
 			verifier = getVerifier(relaxSchemaFile);
 		}

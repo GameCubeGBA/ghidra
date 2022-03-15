@@ -209,7 +209,7 @@ public final class FileUtilities {
 		int bufRemaining = expectedLength;
 
 		int bytesCopied = 0;
-		int bytesRead = 0;
+		int bytesRead;
 		while (bufRemaining > 0 &&
 			(bytesRead = inputStream.read(buf, bytesCopied, bufRemaining)) > 0) {
 			bytesCopied += bytesRead;
@@ -327,7 +327,7 @@ public final class FileUtilities {
 		if (createDir(dir)) {
 			return true;
 		}
-		File canonFile = null;
+		File canonFile;
 		try {
 			canonFile = dir.getCanonicalFile();
 		}
@@ -658,7 +658,7 @@ public final class FileUtilities {
 		}
 
 		// Copy file contents
-		int bytesRead = 0;
+		int bytesRead;
 		while ((bytesRead = in.read(buffer)) >= 0) {
 			out.write(buffer, 0, bytesRead);
 			totalBytesCopied += bytesRead;

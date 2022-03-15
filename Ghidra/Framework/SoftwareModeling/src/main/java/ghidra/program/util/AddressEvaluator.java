@@ -86,7 +86,7 @@ public class AddressEvaluator {
 		StringTokenizer parser = new StringTokenizer(s, TOKEN_CHARS, true);
 		String lookahead = null;
 		while (lookahead != null || parser.hasMoreTokens()) {
-			String tok = null;
+			String tok;
 			if (lookahead != null) {
 				tok = lookahead;
 				lookahead = null;
@@ -197,7 +197,7 @@ public class AddressEvaluator {
 		boolean isBigEndian = p.getMemory().isBigEndian();
 
 		int ptrSize = p.getDefaultPointerSize();
-		int index = 0;
+		int index;
 		long offset = 0;
 
 		// Make sure correct # of bytes were passed

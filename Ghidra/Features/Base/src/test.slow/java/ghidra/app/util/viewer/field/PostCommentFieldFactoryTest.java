@@ -331,7 +331,7 @@ public class PostCommentFieldFactoryTest extends AbstractGhidraHeadedIntegration
 		//test overriding a conditional jump to an unconditional jump
 		//using a RefType.JUMP_OVERRIDE_UNCONDITIONAL reference
 		ReferenceManager refManager = program.getReferenceManager();
-		Reference ref1 = null;
+		Reference ref1;
 		int transactionID = program.startTransaction("add_primary_jump_ref");
 		try {
 			ref1 = refManager.addMemoryReference(addr("1003000"), addr("1003006"),
@@ -361,7 +361,7 @@ public class PostCommentFieldFactoryTest extends AbstractGhidraHeadedIntegration
 		//test that adding a second ref of the same type and setting it to primary
 		//yields a new post comment
 		transactionID = program.startTransaction("add_second_jump_ref");
-		Reference ref2 = null;
+		Reference ref2;
 		try {
 			ref2 = refManager.addMemoryReference(addr("1003000"), addr("1003008"),
 				RefType.JUMP_OVERRIDE_UNCONDITIONAL, SourceType.ANALYSIS, Reference.MNEMONIC);
@@ -441,7 +441,7 @@ public class PostCommentFieldFactoryTest extends AbstractGhidraHeadedIntegration
 		//test that a primary RefType.CALL_OVERRIDE_UNCONDITIONAL reference on an indirect call
 		//causes a post comment indicating that the call destination has been overridden
 		ReferenceManager refManager = program.getReferenceManager();
-		Reference ref1 = null;
+		Reference ref1;
 		int transactionID = program.startTransaction("override indirect call");
 		try {
 			ref1 = refManager.addMemoryReference(addr("1004000"), addr("1003000"),
@@ -470,7 +470,7 @@ public class PostCommentFieldFactoryTest extends AbstractGhidraHeadedIntegration
 		//test that adding a second ref of the same type and setting it to primary
 		//yields a new post comment
 		transactionID = program.startTransaction("add_second_ref");
-		Reference ref2 = null;
+		Reference ref2;
 		try {
 			ref2 = refManager.addMemoryReference(addr("1004000"), addr("1001000"),
 				RefType.CALL_OVERRIDE_UNCONDITIONAL, SourceType.ANALYSIS, Reference.MNEMONIC);
@@ -548,7 +548,7 @@ public class PostCommentFieldFactoryTest extends AbstractGhidraHeadedIntegration
 		ReferenceManager refManager = program.getReferenceManager();
 		Reference defaultRef = refManager.getPrimaryReferenceFrom(addr("1005000"), 0);
 		assertNotNull(defaultRef);
-		Reference callOverride = null;
+		Reference callOverride;
 		int transactionID = program.startTransaction("add_overriding_callother_jump_ref");
 		try {
 			callOverride = refManager.addMemoryReference(addr("1005000"), addr("1003000"),
@@ -587,7 +587,7 @@ public class PostCommentFieldFactoryTest extends AbstractGhidraHeadedIntegration
 		//test that adding a second ref of the same type and setting it to primary
 		//yields a new post comment
 		transactionID = program.startTransaction("add_second_ref");
-		Reference ref2 = null;
+		Reference ref2;
 		try {
 			ref2 = refManager.addMemoryReference(addr("1005000"), addr("1001000"),
 				RefType.CALL_OVERRIDE_UNCONDITIONAL, SourceType.ANALYSIS, Reference.MNEMONIC);
@@ -666,7 +666,7 @@ public class PostCommentFieldFactoryTest extends AbstractGhidraHeadedIntegration
 		ReferenceManager refManager = program.getReferenceManager();
 		Reference defaultRef = refManager.getPrimaryReferenceFrom(addr("1006000"), 0);
 		assertNotNull(defaultRef);
-		Reference callOverrideMnemonic = null;
+		Reference callOverrideMnemonic;
 		int transactionID =
 			program.startTransaction("turn_off_existing_primary_ref_and_create_override_ref");
 		try {
@@ -682,7 +682,7 @@ public class PostCommentFieldFactoryTest extends AbstractGhidraHeadedIntegration
 		assertTrue(cb.goToField(addr("1006000"), PostCommentFieldFactory.FIELD_NAME, 0, 1));
 		ListingTextField tf = (ListingTextField) cb.getCurrentField();
 		assertEquals("-- Call Destination Override: jump_override (01003000)", tf.getText());
-		Reference callOverrideOperand0 = null;
+		Reference callOverrideOperand0;
 		transactionID = program.startTransaction("set_operand_ref_primary");
 		try {
 			callOverrideOperand0 = refManager.addMemoryReference(addr("1006000"), addr("1005020"),
@@ -724,7 +724,7 @@ public class PostCommentFieldFactoryTest extends AbstractGhidraHeadedIntegration
 		ReferenceManager refManager = program.getReferenceManager();
 		Reference defaultRef = refManager.getPrimaryReferenceFrom(addr("1007000"), 0);
 		assertNotNull(defaultRef);
-		Reference callOverrideMnemonic = null;
+		Reference callOverrideMnemonic;
 		int transactionID = program.startTransaction("override_without_changing_dest");
 		try {
 			refManager.setPrimary(defaultRef, false);
@@ -1019,7 +1019,7 @@ public class PostCommentFieldFactoryTest extends AbstractGhidraHeadedIntegration
 		//verify CALLOTHER_OVERRIDE_CALL warning
 		int transactionID = program.startTransaction("call_warning");
 		ReferenceManager refManager = program.getReferenceManager();
-		Reference ref = null;
+		Reference ref;
 		try {
 			ref = refManager.addMemoryReference(addr("100e000"), addr("100e020"),
 				RefType.CALLOTHER_OVERRIDE_CALL, SourceType.ANALYSIS, 0);

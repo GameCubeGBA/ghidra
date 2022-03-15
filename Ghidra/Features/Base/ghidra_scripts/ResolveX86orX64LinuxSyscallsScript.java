@@ -218,7 +218,7 @@ public class ResolveX86orX64LinuxSyscallsScript extends GhidraScript {
 		}
 		try (FileReader fReader = new FileReader(rFile.getFile(false));
 				BufferedReader bReader = new BufferedReader(fReader)) {
-			String line = null;
+			String line;
 			while ((line = bReader.readLine()) != null) {
 				//lines starting with # are comments
 				if (!line.startsWith("#")) {

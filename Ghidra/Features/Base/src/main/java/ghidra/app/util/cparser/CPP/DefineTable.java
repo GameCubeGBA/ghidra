@@ -100,7 +100,7 @@ public class DefineTable {
 	public void put(String string, PPToken val) {
 		defs.put(string, val);
 		Hashtable findTable = lookupTable;
-		Character chObj = null;
+		Character chObj;
 
 		int pos = 0;
 		int len = string.length();
@@ -162,7 +162,7 @@ public class DefineTable {
 	public PPToken remove(String string) {
 		PPToken token = defs.remove(string);
 		Hashtable findTable = lookupTable;
-		Character chObj = null;
+		Character chObj;
 
 		int pos = 0;
 		int len = string.length();
@@ -339,7 +339,7 @@ public class DefineTable {
 	}
 
 	int replace(StringBuffer buf, String currKey, int fromIndex, ArrayList<String> sublist) {
-		String replacementString = null;
+		String replacementString;
 
 		if (sublist == null) {
 			sublist = new ArrayList<String>();
@@ -631,7 +631,7 @@ public class DefineTable {
 			// strip off any casting/parentheses
 			strValue = stripCast(strValue);
 
-			long value = 0;
+			long value;
 			Long lvalue = getCValue(strValue);
 
 			if (lvalue == null) {

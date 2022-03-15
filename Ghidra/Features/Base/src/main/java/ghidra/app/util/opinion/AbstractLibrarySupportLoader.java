@@ -379,8 +379,7 @@ public abstract class AbstractLibrarySupportLoader extends AbstractProgramLoader
 			program.endTransaction(transactionID, success);
 			if (!success) {
 				program.release(consumer);
-				program = null;
-			}
+            }
 		}
 	}
 
@@ -684,7 +683,7 @@ public abstract class AbstractLibrarySupportLoader extends AbstractProgramLoader
 			Object consumer, Set<String> unprocessedLibs, List<Program> programList,
 			TaskMonitor monitor) throws CancelledException, IOException {
 
-		Program lib = null;
+		Program lib;
 		int size = loadSpec.getLanguageCompilerSpec().getLanguageDescription().getSize();
 
 		LoadSpec libLoadSpec = getLoadSpec(loadSpec, provider);

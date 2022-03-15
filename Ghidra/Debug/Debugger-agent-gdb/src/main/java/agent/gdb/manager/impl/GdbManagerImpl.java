@@ -1015,7 +1015,7 @@ public class GdbManagerImpl implements GdbManager {
 			mi2Prompt.set(true, null);
 		}
 		else {
-			GdbEvent<?> evt = null;
+			GdbEvent<?> evt;
 			try {
 				while (line.startsWith("^C")) {
 					Msg.info(this, "Got ^C");

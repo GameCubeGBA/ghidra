@@ -697,7 +697,7 @@ public class AARCH64EmulateInstructionStateModifier extends EmulateInstructionSt
 
 			Varnode p1Varnode = inputs[1];
 			int isize = p1Varnode.getSize();
-			Varnode p2Varnode = null;
+			Varnode p2Varnode;
 			if (numArgs == 3) {
 				p2Varnode = inputs[2];
 				isize += p2Varnode.getSize();

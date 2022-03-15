@@ -102,8 +102,7 @@ public class BitmapResourceDataType extends DynamicDataType implements Resource 
 		addComponents(buf, bmr, comps);
 		DataTypeComponent[] compsArray = new DataTypeComponent[comps.size()];
 		comps.toArray(compsArray);
-		comps = null;
-		return compsArray;
+        return compsArray;
 	}
 
 	protected final synchronized int addComp(DataType dataType, int length, String fieldName,

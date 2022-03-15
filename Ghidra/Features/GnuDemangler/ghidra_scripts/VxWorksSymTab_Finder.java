@@ -92,11 +92,11 @@ public class VxWorksSymTab_Finder extends GhidraScript {
 	//------------------------------------------------------------------------
 	private static class VxSymbol {
 
-		StructureDataType dt = null;
-		int nameOffset = 0;
-		int locOffset = 0;
-		int typeOffset = 0;
-		int length = 0;
+		StructureDataType dt;
+		int nameOffset;
+		int locOffset;
+		int typeOffset;
+		int length;
 
 		public VxSymbol(StructureDataType struct) {
 			dt = struct;
@@ -170,7 +170,7 @@ public class VxWorksSymTab_Finder extends GhidraScript {
 		// Define a SYMBOL data type (try to put most common first).
 		// Each SYMBOL data type must include at least 3 fields named
 		// symNameOff, symLocOff, and symType.
-		StructureDataType dt = null;
+		StructureDataType dt;
 		switch (type) {
 			case 0:
 

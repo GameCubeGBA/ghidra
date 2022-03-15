@@ -37,8 +37,8 @@ import java.util.List;
 public class SharedReturnAnalysisCmd extends BackgroundCommand {
 
 	private AddressSetView set;
-	private boolean assumeContiguousFunctions = false;
-	private boolean considerConditionalBranches = false;
+	private boolean assumeContiguousFunctions;
+	private boolean considerConditionalBranches;
 
 	/**
 	 * Constructor

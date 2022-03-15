@@ -99,7 +99,7 @@ class EclipseConnectorTask extends Task {
 		// Launch Eclipse
 		monitor.setIndeterminate(true);
 		monitor.setMessage("Launching Eclipse...");
-		Process process = null;
+		Process process;
 		try {
 			ProcessBuilder processBuilder = createEclipseProcessBuilder(eclipseExecutableFile,
 				eclipseService.getEclipseWorkspaceDir());

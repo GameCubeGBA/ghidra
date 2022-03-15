@@ -1058,8 +1058,7 @@ public class FunctionSignatureStringable extends Stringable {
 			this.source = source;
 			this.comment = comment;
 			if (comment != null && comment.trim().isEmpty()) {
-				comment = null;
-			}
+            }
 		}
 
 		private ParameterInfo(String serializedDataTypeID, DataTypeManager dtMgr, String name,
@@ -1085,8 +1084,7 @@ public class FunctionSignatureStringable extends Stringable {
 			this.source = source;
 			this.comment = comment;
 			if (comment != null && comment.trim().isEmpty()) {
-				comment = null;
-			}
+            }
 		}
 
 		boolean isEquivalent(ParameterInfo other) {

@@ -40,7 +40,7 @@ public class FFsBeGoneScript extends GhidraScript {
 		addr = currentProgram.getMemory().getMinAddress();
 		advance();
 		while (addr != null && !monitor.isCancelled()) {
-			byte byt = 0;
+			byte byt;
 			try {
 				byt = currentProgram.getMemory().getByte(addr);
 			}

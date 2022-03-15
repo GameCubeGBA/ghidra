@@ -155,8 +155,8 @@ public class ZeroSizeStructureTest extends AbstractStructureEditorTest {
 		outerStructureImpl =
 			(Structure) CommonTestData.category.addDataType(outerStructureImpl, null);
 
-		Structure innerStructure = null;
-		Structure outerStructure = null;
+		Structure innerStructure;
+		Structure outerStructure;
 
 		try {
 			txId = program.startTransaction("Change DataType");
@@ -251,8 +251,8 @@ public class ZeroSizeStructureTest extends AbstractStructureEditorTest {
 		outerStructureImpl =
 			(Structure) CommonTestData.category.addDataType(outerStructureImpl, null);
 
-		Structure innerStructure = null;
-		Structure outerStructure = null;
+		Structure innerStructure;
+		Structure outerStructure;
 
 		try {
 			txId = program.startTransaction("Change DataType");
@@ -345,8 +345,8 @@ public class ZeroSizeStructureTest extends AbstractStructureEditorTest {
 		TypeDef innerTypedefImpl = new TypedefDataType("innerStructureTypedef", innerStructureImpl);
 		innerTypedefImpl = (TypeDef) CommonTestData.category.addDataType(innerTypedefImpl, null);
 
-		Structure innerStructure = null;
-		TypeDef innerTypedef = null;
+		Structure innerStructure;
+		TypeDef innerTypedef;
 
 		try {
 			txId = program.startTransaction("Change DataType");
@@ -444,8 +444,8 @@ public class ZeroSizeStructureTest extends AbstractStructureEditorTest {
 		Array innerArrayImpl = new ArrayDataType(innerStructureImpl, 5, 2);
 		innerArrayImpl = (Array) CommonTestData.category.addDataType(innerArrayImpl, null);
 
-		Structure innerStructure = null;
-		Array innerArray = null;
+		Structure innerStructure;
+		Array innerArray;
 
 		try {
 			txId = program.startTransaction("Change DataType");

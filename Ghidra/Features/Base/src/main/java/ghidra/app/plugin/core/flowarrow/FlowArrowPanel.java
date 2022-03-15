@@ -307,7 +307,7 @@ class FlowArrowPanel extends JPanel {
 
 			long length = range.getLength();
 			long offset = Math.round(length * percentComplete);
-			Address current = null;
+			Address current;
 			if (start.compareTo(end) > 0) {
 				// backwards
 				current = start.subtract(offset);

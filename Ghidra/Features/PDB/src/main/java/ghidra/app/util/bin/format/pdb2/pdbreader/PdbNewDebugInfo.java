@@ -323,8 +323,7 @@ public class PdbNewDebugInfo extends PdbDebugInfo {
 			editAndContinueNameList.add(name);
 			//long hashVal = (name == null) ? 0 : hasher.hash(name, 0xffffffffL);
 			long hashVal = (name.isEmpty()) ? 0 : hasher.hash(name, 0xffffffffL);
-			hashVal %= tableSize;
-			//TODO: what to do with hashVal???
+            //TODO: what to do with hashVal???
 			//System.out.println(offset + ": " + name + " " + hashVal);
 		}
 		int numRealEntries = substreamReader.parseInt();

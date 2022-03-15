@@ -68,7 +68,7 @@ public class FileSystemInfoRec {
 		}
 
 		Class<? extends GFileSystemFactory<?>> factoryClass = fsi.factory();
-		GFileSystemFactory<?> factory = null;
+		GFileSystemFactory<?> factory;
 		try {
 			Constructor<? extends GFileSystemFactory<?>> ctor = factoryClass.getConstructor();
 			factory = ctor.newInstance();

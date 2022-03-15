@@ -204,7 +204,7 @@ class DataTypePanel extends JPanel {
 			comment = "";
 		}
 		offsetWidth += 2; // factor in 0x prefix
-		String offsetStr = "";
+		String offsetStr;
 		if (offsetWidth > 0) {
 			offsetStr = "0x" + Integer.toHexString(dtc.getOffset());
 			offsetStr = StringUtilities.pad(offsetStr, ' ', offsetWidth - offsetStr.length());

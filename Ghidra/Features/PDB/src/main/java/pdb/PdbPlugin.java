@@ -165,7 +165,7 @@ public class PdbPlugin extends Plugin {
             }
         }
 		catch (Exception e) {
-			String message = null;
+			String message;
 			if (e instanceof InvocationTargetException && e.getCause() != null) {
 				message =
 					Objects.requireNonNullElse(e.getCause().getMessage(), e.getCause().toString());

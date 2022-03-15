@@ -418,7 +418,7 @@ public class ProjectFileManager implements ProjectData {
 		// NOTE: we can't distinguish between files represented in both file counts so we will 
 		// return the larger of the two counts obtained.
 
-		int privateFileCnt = -1;
+		int privateFileCnt;
 		try {
 			privateFileCnt = fileSystem.getItemCount();
 		}

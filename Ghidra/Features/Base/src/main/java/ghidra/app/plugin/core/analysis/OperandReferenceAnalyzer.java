@@ -741,7 +741,7 @@ public class OperandReferenceAnalyzer extends AbstractAnalyzer {
 
 //		 look for a negative offset table
 		AddressTable lastGoodTable = null;
-		Address negAddr = null;
+		Address negAddr;
 		int i;
 		for (i = 0; i < MAX_NEG_ENTRIES; i++) {
 			try {

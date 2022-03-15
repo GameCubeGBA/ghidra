@@ -20,9 +20,9 @@ package ghidra.app.plugin.core.instructionsearch.model;
  */
 public class MaskSettings {
 
-	private boolean maskAddresses = false;
-	private boolean maskOperands = false;
-	private boolean maskScalars = false;
+	private boolean maskAddresses;
+	private boolean maskOperands;
+	private boolean maskScalars;
 
 
 	/**

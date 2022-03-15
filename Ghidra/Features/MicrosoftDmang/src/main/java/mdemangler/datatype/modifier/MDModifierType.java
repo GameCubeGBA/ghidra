@@ -37,7 +37,7 @@ public class MDModifierType extends MDDataType {
 	private boolean isVolatile; // 20161011: put back in
 
 	protected MDManagedProperty managedProperty = null;
-	protected MDCVMod cvMod = null; // 20170505 late->remove this?
+	protected MDCVMod cvMod; // 20170505 late->remove this?
 
 	protected Boolean hasCVMod = true; // 20160329
 	protected MDType refType;

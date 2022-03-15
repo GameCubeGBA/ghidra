@@ -66,7 +66,7 @@ public class XmlUtils {
 	    	return 0;
 	    }
 	    
-	    BigInteger bi = null;
+	    BigInteger bi;
 	    if ( intString.startsWith( "0x" ) ) {
 	        bi = new BigInteger( intString.substring( 2 ), 16 );
 	    }
@@ -90,7 +90,7 @@ public class XmlUtils {
 	    	return 0;
 	    }
 	    
-	    BigInteger bi = null;
+	    BigInteger bi;
 	    if ( longString.startsWith( "0x" ) ) {
 	        bi = new BigInteger( longString.substring( 2 ), 16 );
 	    }

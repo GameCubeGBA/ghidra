@@ -176,7 +176,7 @@ class ProgramUserDataDB extends DomainObjectAdapterDB implements ProgramUserData
 			// check DB version and read name, languageName, languageVersion and languageMinorVersion
 			VersionException dbVersionExc = initializeDatabase();
 
-			VersionException languageVersionExc = null;
+			VersionException languageVersionExc;
 			try {
 				language = DefaultLanguageService.getLanguageService().getLanguage(languageID);
 				languageVersionExc = checkLanguageVersion();
