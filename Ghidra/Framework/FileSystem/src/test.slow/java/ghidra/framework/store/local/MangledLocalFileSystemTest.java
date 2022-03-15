@@ -38,8 +38,7 @@ public class MangledLocalFileSystemTest extends AbstractLocalFileSystemTest {
 
 		testFilePaths();
 
-		List<String> names = new ArrayList<String>();
-        names.addAll(Arrays.asList(fs.getItemNames("/a/x/bbb")));
+        List<String> names = new ArrayList<String>(Arrays.asList(fs.getItemNames("/a/x/bbb")));
 
 		((MangledLocalFileSystem) fs).convertToIndexedLocalFileSystem();
 

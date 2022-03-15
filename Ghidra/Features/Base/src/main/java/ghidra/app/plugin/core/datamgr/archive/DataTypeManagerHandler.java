@@ -893,9 +893,8 @@ public class DataTypeManagerHandler {
 		}
 		saveState.putStrings(ARCHIVE_NAMES, getSaveableArchiveNames(openNameList));
 
-		List<String> recentMenuList = new ArrayList<>();
-		Collection<String> recentlyOpenedArchives = plugin.getRecentlyOpenedArchives();
-        recentMenuList.addAll(recentlyOpenedArchives);
+        Collection<String> recentlyOpenedArchives = plugin.getRecentlyOpenedArchives();
+        List<String> recentMenuList = new ArrayList<>(recentlyOpenedArchives);
 		saveState.putStrings(RECENT_NAMES, getSaveableArchiveNames(recentMenuList));
 
 		// update the initialArchives list so that future checks on that list do not trigger a

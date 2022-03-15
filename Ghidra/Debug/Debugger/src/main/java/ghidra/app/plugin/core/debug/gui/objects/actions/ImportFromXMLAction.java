@@ -80,9 +80,8 @@ public class ImportFromXMLAction extends ImportExportAsAction {
 					SAXBuilder sax = XmlUtilities.createSecureSAXBuilder(false, false);
 					Element root = sax.build(is).getRootElement();
 
-					List<String> path = new ArrayList<>();
-					Attribute pathStr = root.getAttribute("Path");
-                    path.addAll(Arrays.asList(pathStr.getValue().split("\\.")));
+                    Attribute pathStr = root.getAttribute("Path");
+                    List<String> path = new ArrayList<>(Arrays.asList(pathStr.getValue().split("\\.")));
 					DummyTargetObject to = xmlToObject(p, root, path);
 					ObjectContainer c = p.getRoot();
 					c.setTargetObject(to);

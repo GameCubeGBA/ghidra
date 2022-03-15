@@ -95,8 +95,7 @@ public class FileDropDownSelectionDataModel implements DropDownTextFieldDataMode
 		if (files == null) {
 			return Collections.emptyList();
 		}
-		List<File> list = new ArrayList<>();
-        list.addAll(Arrays.asList(files));
+        List<File> list = new ArrayList<>(Arrays.asList(files));
 
 		list.sort(sortComparator);
 

@@ -654,10 +654,9 @@ public class FunctionTagPluginTest extends AbstractGhidraHeadedIntegrationTest {
 			return null;
 		}
 
-		Set<FunctionTag> tagSet = new HashSet<>();
-		Collection<FunctionTag> tags;
+        Collection<FunctionTag> tags;
 		tags = function.getTags();
-        tagSet.addAll(tags);
+        Set<FunctionTag> tagSet = new HashSet<>(tags);
 
 		return tagSet;
 	}

@@ -233,8 +233,7 @@ public class BookmarkProvider extends ComponentProviderAdapter {
 	public void writeConfigState(SaveState saveState) {
 		// save the selected filters
 		Collection<String> allTypes = model.getAllTypes();
-		List<String> showingTypes = new ArrayList<>();
-        showingTypes.addAll(allTypes);
+        List<String> showingTypes = new ArrayList<>(allTypes);
 
 		String[] strings = showingTypes.toArray(new String[0]);
 		saveState.putStrings(BOOKMARK_TYPES_ELEMENT_NAME, strings);

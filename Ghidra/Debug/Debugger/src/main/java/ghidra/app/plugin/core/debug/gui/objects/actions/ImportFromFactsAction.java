@@ -98,8 +98,7 @@ public class ImportFromFactsAction extends ImportExportAsAction {
                         String key = entry.getKey();
                         String pathStr = entry.getValue();
 						String[] split = pathStr.split(ExportAsFactsAction.SPLIT);
-						List<String> path = new ArrayList<>();
-                        path.addAll(Arrays.asList(split));
+                        List<String> path = new ArrayList<>(Arrays.asList(split));
 						String name = maps.get("ObjectName").get(key);
 						String value = maps.get("ObjectValue").get(key);
 						String kind = maps.get("ObjectType").get(key);

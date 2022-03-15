@@ -38,14 +38,14 @@ public class ImportBatchTaskTest {
 		FSRL target = FSRL.fromString(mkFSRL(targetDepth));
 		System.out.println("--------------------------------------------------------------");
 		System.out.println("Testing: target depth " + targetDepth + ", src depth: " + srcDepth);
-		System.out.println(String.format("%20s  %20s [%s] = %20s", src, target, "FF",
-			ImportBatchTask.fsrlToPath(target, src, false, false)));
-		System.out.println(String.format("%20s  %20s [%s] = %20s", src, target, "TF",
-			ImportBatchTask.fsrlToPath(target, src, true, false)));
-		System.out.println(String.format("%20s  %20s [%s] = %20s", src, target, "FT",
-			ImportBatchTask.fsrlToPath(target, src, false, true)));
-		System.out.println(String.format("%20s  %20s [%s] = %20s", src, target, "TT",
-			ImportBatchTask.fsrlToPath(target, src, true, true)));
+		System.out.printf("%20s  %20s [%s] = %20s%n", src, target, "FF",
+			ImportBatchTask.fsrlToPath(target, src, false, false));
+		System.out.printf("%20s  %20s [%s] = %20s%n", src, target, "TF",
+			ImportBatchTask.fsrlToPath(target, src, true, false));
+		System.out.printf("%20s  %20s [%s] = %20s%n", src, target, "FT",
+			ImportBatchTask.fsrlToPath(target, src, false, true));
+		System.out.printf("%20s  %20s [%s] = %20s%n", src, target, "TT",
+			ImportBatchTask.fsrlToPath(target, src, true, true));
 		System.out.println("--------------------------------------------------------------");
 	}
 

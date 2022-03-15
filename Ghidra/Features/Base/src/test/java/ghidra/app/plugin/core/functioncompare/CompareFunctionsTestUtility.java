@@ -68,8 +68,7 @@ public class CompareFunctionsTestUtility {
 	 * @return a set of functions
 	 */
 	public static Set<Function> getFunctionsAsSet(Function... functions) {
-		Set<Function> set = new HashSet<>();
-		set.addAll(Arrays.asList(functions));
+        Set<Function> set = new HashSet<>(Arrays.asList(functions));
 		return set;
 	}
 

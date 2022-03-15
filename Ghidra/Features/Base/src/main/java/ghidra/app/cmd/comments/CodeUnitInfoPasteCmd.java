@@ -354,8 +354,7 @@ public class CodeUnitInfoPasteCmd implements Command {
 	 */
 	private String[] appendComment(String[] comment1, String[] comment2) {
 		// first check for duplicate comments
-		ArrayList<String> list = new ArrayList<String>();
-        list.addAll(Arrays.asList(comment2));
+        ArrayList<String> list = new ArrayList<String>(Arrays.asList(comment2));
         for (String s : comment1) {
             for (int j = 0; j < list.size(); j++) {
                 if (s.equals(list.get(j))) {

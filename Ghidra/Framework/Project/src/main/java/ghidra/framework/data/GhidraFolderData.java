@@ -502,8 +502,7 @@ class GhidraFolderData {
 			}
 		}
 
-		HashSet<String> oldSet = new HashSet<>();
-        oldSet.addAll(folderList);
+        HashSet<String> oldSet = new HashSet<>(folderList);
 		HashSet<String> oldSetClone = new HashSet<>(oldSet);
 		// find deleted folders
 		oldSet.removeAll(newSet);
@@ -574,8 +573,7 @@ class GhidraFolderData {
 			}
 		}
 
-		HashSet<String> oldSet = new HashSet<>();
-        oldSet.addAll(fileList);
+        HashSet<String> oldSet = new HashSet<>(fileList);
 		HashSet<String> oldSetClone = new HashSet<>(oldSet);
 
 		// find deleted files
