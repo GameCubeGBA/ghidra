@@ -306,7 +306,7 @@ public class AssemblyDualTextField {
 
 		@Override
 		protected Dimension getDefaultCompletionWindowDimension() {
-			int width = 0;
+			int width;
 			if (assembly.isVisible()) {
 				width = assembly.getWidth();
 			}

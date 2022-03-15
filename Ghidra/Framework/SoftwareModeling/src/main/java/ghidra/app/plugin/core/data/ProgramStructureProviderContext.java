@@ -27,7 +27,7 @@ import java.util.ArrayList;
 public class ProgramStructureProviderContext implements DataTypeProviderContext {
 	Program program;
 	Address addr;
-	Structure struct = null;
+	Structure struct;
 	int myoffset;
 
 	public ProgramStructureProviderContext(Program program, ProgramLocation loc) {

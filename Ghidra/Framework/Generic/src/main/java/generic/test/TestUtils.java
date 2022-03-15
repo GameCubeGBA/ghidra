@@ -114,7 +114,7 @@ public class TestUtils {
 
 		Class<?> objectClass =
 			(ownerInstance instanceof Class) ? (Class<?>) ownerInstance : ownerInstance.getClass();
-		Object result = null;
+		Object result;
 		try {
 			// get the field from the class object 
 			Field field = ReflectionUtilities.locateFieldObjectOnClass(fieldName, objectClass);
@@ -197,7 +197,7 @@ public class TestUtils {
 
 		Class<?> objectClass =
 			(ownerInstance instanceof Class) ? (Class<?>) ownerInstance : ownerInstance.getClass();
-		Object result = null;
+		Object result;
 
 		try {
 
@@ -406,7 +406,7 @@ public class TestUtils {
 	public static Object invokeConstructor(Class<?> containingClass, Class<?>[] parameterTypes,
 			Object[] args) throws RuntimeException {
 
-		Object result = null;
+		Object result;
 
 		try {
 			Constructor<?> constructor = locateConstructorOnClass(containingClass, parameterTypes);
@@ -497,7 +497,7 @@ public class TestUtils {
 		Class<?> objectClass =
 			(ownerInstance instanceof Class) ? (Class<?>) ownerInstance : ownerInstance.getClass();
 
-		Object result = null;
+		Object result;
 		try {
 			// get the field from the class object 
 			Field field = locateFieldByTypeOnClass(classType, objectClass);

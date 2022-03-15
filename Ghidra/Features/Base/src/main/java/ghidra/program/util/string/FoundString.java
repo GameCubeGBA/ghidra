@@ -28,7 +28,7 @@ public class FoundString implements Comparable<FoundString> {
 	private Address address;
 	private int length;
 	private DataType stringDataType;
-	private DefinedState definedState = DefinedState.NOT_DEFINED;
+	private DefinedState definedState;
 
 	public FoundString(Address address, int length, DataType stringDataType) {
 		this(address, length, stringDataType, DefinedState.NOT_DEFINED);

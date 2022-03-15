@@ -363,10 +363,10 @@ public class DataTypeDiffBuilder {
 	private static void padSmaller(DiffLines leftDestination, DiffLines rightDestination) {
 
 		// for the bigger list, we need to pad, for the other, we don't need the empty rows        
-		DiffLines smallerList = null;
-		DiffLines largerList = null;
+		DiffLines smallerList;
+		DiffLines largerList;
 
-		int sizeDifference = 0;
+		int sizeDifference;
 		int length = Math.min(leftDestination.size(), rightDestination.size());
 		if (leftDestination.size() == length) {
 			smallerList = leftDestination;

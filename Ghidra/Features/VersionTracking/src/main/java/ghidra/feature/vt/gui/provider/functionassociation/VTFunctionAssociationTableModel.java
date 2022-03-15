@@ -123,7 +123,7 @@ class VTFunctionAssociationTableModel extends AddressBasedTableModel<VTFunctionR
 	private FunctionAssociationInfo getInitializedFunctionInfo(Function function) {
 		VTSession session = controller.getSession();
 		VTAssociationManager associationManager = session.getAssociationManager();
-		Collection<VTAssociation> associations = null;
+		Collection<VTAssociation> associations;
 		if (isSourceProgram) {
 			associations =
 				associationManager.getRelatedAssociationsBySourceAddress(function.getEntryPoint());
@@ -155,7 +155,7 @@ class VTFunctionAssociationTableModel extends AddressBasedTableModel<VTFunctionR
 	}
 
 	void associationChanged(VTAssociation association) {
-		Address address = null;
+		Address address;
 		if (isSourceProgram) {
 			address = association.getSourceAddress();
 		}
@@ -179,7 +179,7 @@ class VTFunctionAssociationTableModel extends AddressBasedTableModel<VTFunctionR
 
 	void matchAdded(VTMatch match) {
 		VTAssociation association = match.getAssociation();
-		Address address = null;
+		Address address;
 		if (isSourceProgram) {
 			address = association.getSourceAddress();
 		}
@@ -216,7 +216,7 @@ class VTFunctionAssociationTableModel extends AddressBasedTableModel<VTFunctionR
 	}
 
 	void matchRemoved(DeletedMatch match) {
-		Address address = null;
+		Address address;
 		if (isSourceProgram) {
 			address = match.getSourceAddress();
 		}
@@ -355,7 +355,7 @@ class VTFunctionAssociationTableModel extends AddressBasedTableModel<VTFunctionR
 		for (VTAssociation association : associations) {
 			monitor.checkCanceled();
 			monitor.incrementProgress(1);
-			Address functionAddress = null;
+			Address functionAddress;
 			if (isSourceProgram) {
 				functionAddress = association.getSourceAddress();
 			}

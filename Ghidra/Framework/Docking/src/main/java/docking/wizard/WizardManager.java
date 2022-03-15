@@ -134,7 +134,7 @@ public class WizardManager extends DialogComponentProvider implements WizardPane
 	public void showWizard(Component parent) {
 		panelMgr.initialize();
 
-		WizardPanel nextPanel = null;
+		WizardPanel nextPanel;
 		try {
 			nextPanel = panelMgr.getNextPanel();
 			if (nextPanel == null) {

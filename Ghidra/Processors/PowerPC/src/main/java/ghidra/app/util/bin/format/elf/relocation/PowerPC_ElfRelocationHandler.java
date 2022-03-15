@@ -81,7 +81,7 @@ public class PowerPC_ElfRelocationHandler extends ElfRelocationHandler {
 		String symbolName = sym.getNameAsString();
 
 		int oldValue = memory.getInt(relocationAddress);
-		int newValue = 0;
+		int newValue;
 
 		switch (type) {
 			case PowerPC_ElfRelocationConstants.R_PPC_COPY:

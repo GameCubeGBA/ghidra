@@ -54,7 +54,7 @@ class ComputedTableOffset {
 	 */
 	static ComputedTableOffset getComputedTableOffset(Varnode v) {
 		long factor;
-		Varnode indexValue = null;
+		Varnode indexValue;
 		if (v instanceof VarnodeOperation) {
 			VarnodeOperation computedTableOffsetOperation = (VarnodeOperation)v;
 			int opcode = computedTableOffsetOperation.getPCodeOp().getOpcode();

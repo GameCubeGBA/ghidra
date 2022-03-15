@@ -150,10 +150,10 @@ public class MipsPreAnalyzer extends AbstractAnalyzer {
 	}
 
 	private boolean checkPossiblePairInstruction(Program program, Address addr) {
-		int primeOpcode = 0;
+		int primeOpcode;
 
 		try {
-			byte b = 0;
+			byte b;
 			// LE binary has primary op-code at different location
 			if (!program.getLanguage().isBigEndian()) {
 				// set addr to location of primary op-code for LE binary

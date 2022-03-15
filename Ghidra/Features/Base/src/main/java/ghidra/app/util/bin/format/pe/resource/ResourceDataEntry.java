@@ -49,7 +49,7 @@ public class ResourceDataEntry implements StructConverter {
         offsetToData = reader.readInt(index);
         size         = reader.readInt(index += BinaryReader.SIZEOF_INT);
         codePage     = reader.readInt(index += BinaryReader.SIZEOF_INT);
-        reserved     = reader.readInt(index += BinaryReader.SIZEOF_INT);
+        reserved     = reader.readInt(index + BinaryReader.SIZEOF_INT);
     }
 	/**
 	 * Returns the offset, relative to the beginning of the resource

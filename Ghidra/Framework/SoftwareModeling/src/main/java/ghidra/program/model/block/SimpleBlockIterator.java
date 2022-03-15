@@ -28,18 +28,18 @@ import ghidra.util.task.TaskMonitor;
  * @see SimpleBlockModel
  */
 public class SimpleBlockIterator implements CodeBlockIterator {
-	private Listing listing = null;
+	private Listing listing;
 	// at any given time nextBlock will either be null or hold the
 	// next block to be returned by next()
-	private CodeBlock nextBlock = null;
+	private CodeBlock nextBlock;
 	// the next block to be found will always be the first one to
 	// occur strictly after nextAddr
-	private Address nextAddr = null;
+	private Address nextAddr;
 	// set by iterators with an address range set restriction
-	private AddressSetView addrSet = null;
+	private AddressSetView addrSet;
 	// set by iterators with an address range set restriction
-	private AddressRangeIterator rangeIter = null;
-	private SimpleBlockModel model = null;
+	private AddressRangeIterator rangeIter;
+	private SimpleBlockModel model;
 	private TaskMonitor monitor;
 
 	/**

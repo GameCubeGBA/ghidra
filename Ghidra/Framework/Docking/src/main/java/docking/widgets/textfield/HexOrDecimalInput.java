@@ -76,8 +76,7 @@ public class HexOrDecimalInput extends JTextField {
 
 	public void setValue(Long newValue) {
 		if (!allowsNegative && newValue != null && newValue.longValue() < 0) {
-			currentValue = null;
-		}
+        }
 		currentValue = newValue;
 		updateText();
 	}
@@ -158,7 +157,7 @@ public class HexOrDecimalInput extends JTextField {
 		}
 
 		boolean isNegative = false;
-		long value = 0;
+		long value;
 		if (text.startsWith("-")) {
 			isNegative = true;
 			text = text.substring(1);

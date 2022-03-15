@@ -275,8 +275,7 @@ public class FilterDialog extends DialogComponentProvider {
 		filter = new NewSymbolFilter(model.getFilter());
 		initCheckBoxes();
 		tool.showDialog(this, provider);
-		model = null;
-	}
+    }
 
 	private void update() {
 		updateStatus();

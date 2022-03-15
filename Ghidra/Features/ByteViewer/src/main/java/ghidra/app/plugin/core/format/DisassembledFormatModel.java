@@ -99,7 +99,7 @@ public class DisassembledFormatModel implements ProgramDataFormatModel {
 
 		String addrStr = block.getLocationRepresentation(index);
 
-		String str = null;
+		String str;
 
 		if (listing != null) {
 			// Make sure that the given address is not a part of an Instruction or

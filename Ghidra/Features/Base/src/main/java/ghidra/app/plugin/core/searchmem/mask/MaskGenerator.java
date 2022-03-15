@@ -156,7 +156,7 @@ class MaskGenerator {
 				opMaskValue.setConstant(true);
 			}
 
-			LinkedHashMap<MaskValue, OperandMaskValue> mnemonicToOpMap = null;
+			LinkedHashMap<MaskValue, OperandMaskValue> mnemonicToOpMap;
 
 			// Do a check on the size of the instruction map (ops).  The size of ops must be 
 			// equal to the max number of operands across all instructions.  ie: if we have an 

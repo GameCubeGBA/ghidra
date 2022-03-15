@@ -537,7 +537,7 @@ abstract class LongKeyRecordNode extends LongKeyNode implements RecordNode {
 	 * @throws IOException thrown if IO error occurs
 	 */
 	static LongKeyRecordNode createRecordNode(NodeMgr nodeMgr, Schema schema) throws IOException {
-		LongKeyRecordNode node = null;
+		LongKeyRecordNode node;
 		if (schema.isVariableLength()) {
 			node = new VarRecNode(nodeMgr, -1, -1);
 		}

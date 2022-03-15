@@ -277,7 +277,7 @@ public class TestProgramManager {
 
 	private ProgramDB openProgram(String progName, PrivateDatabase db) throws Exception {
 
-		ProgramDB program = null;
+		ProgramDB program;
 		DBHandle dbh = null;
 		boolean success = false;
 		try {
@@ -357,7 +357,7 @@ public class TestProgramManager {
 		LanguageService languageService = DefaultLanguageService.getLanguageService();
 		ProgramXmlMgr mgr = new ProgramXmlMgr(xml);
 		ProgramInfo info = mgr.getProgramInfo();
-		Language language = null;
+		Language language;
 		try {
 			language = languageService.getLanguage(info.languageID);
 		}

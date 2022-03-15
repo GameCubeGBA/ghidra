@@ -206,7 +206,7 @@ public class FrameDescriptionEntry extends GccAnalysisClass {
 
 		intPtr = (int) GccAnalysisUtils.readDWord(program, addr);
 
-		Address cieAddr = Address.NO_ADDRESS;
+		Address cieAddr;
 
 		if (isInDebugFrame(addr)) {
 

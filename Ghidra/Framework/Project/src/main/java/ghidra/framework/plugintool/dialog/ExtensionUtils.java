@@ -392,8 +392,7 @@ public class ExtensionUtils {
 					// Note: We have a PathUtilties method for this, but this package cannot access it and
 					// i don't want to add a dependency just for this case.
 					String path = entry.getName();
-					path = path.replace('\\', '/');
-					int separatorCount = StringUtils.countMatches(entry.getName(), '/');
+                    int separatorCount = StringUtils.countMatches(entry.getName(), '/');
 					if (separatorCount == 1) {
 						if (entry.getName().endsWith(PROPERTIES_FILE_NAME)) {
 							return true;

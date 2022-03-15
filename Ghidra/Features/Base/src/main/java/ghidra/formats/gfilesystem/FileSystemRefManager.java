@@ -77,7 +77,7 @@ public class FileSystemRefManager {
 	 */
 	public FileSystemRef create() {
 
-		FileSystemRef ref = null;
+		FileSystemRef ref;
 		synchronized (this) {
 			if (fs.isClosed()) {
 				throw new IllegalArgumentException("File system already closed: " + fs);

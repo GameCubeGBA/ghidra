@@ -62,7 +62,7 @@ abstract class ArrayDBAdapter {
 
 		DBHandle tmpHandle = new DBHandle();
 		long id = tmpHandle.startTransaction();
-		ArrayDBAdapter tmpAdapter = null;
+		ArrayDBAdapter tmpAdapter;
 		try {
 			tmpAdapter = new ArrayDBAdapterV1(tmpHandle, true);
 			RecordIterator it = oldAdapter.getRecords();

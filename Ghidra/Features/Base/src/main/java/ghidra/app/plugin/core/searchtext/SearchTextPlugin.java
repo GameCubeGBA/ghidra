@@ -240,7 +240,7 @@ public class SearchTextPlugin extends ProgramPlugin implements OptionsChangeList
 	void next() {
 		Program program = navigatable.getProgram();
 		ProgramLocation location = getStartLocation();
-		Searcher textSearcher = null;
+		Searcher textSearcher;
 		SearchOptions searchOptions = searchDialog.getSearchOptions();
 		AddressSetView addressSet = getAddressSet(navigatable, searchOptions);
 
@@ -276,7 +276,7 @@ public class SearchTextPlugin extends ProgramPlugin implements OptionsChangeList
 		AddressSetView view = getSearchAllAddresses(program, selection);
 
 		waitingForSearchAll = true;
-		GhidraProgramTableModel<ProgramLocation> ttModel = null;
+		GhidraProgramTableModel<ProgramLocation> ttModel;
 		if (options.isProgramDatabaseSearch()) {
 			ttModel = new ProgramDatabaseSearchTableModel(tool, program, view, options);
 		}
@@ -476,7 +476,7 @@ public class SearchTextPlugin extends ProgramPlugin implements OptionsChangeList
 		Address address = location.getAddress();
 		Listing listing = context.getProgram().getListing();
 		CodeUnit codeUnit = listing.getCodeUnitAt(address);
-		boolean isInstruction = false;
+		boolean isInstruction;
 		if (textSelection != null) {
 			if (codeUnit != null) {
 				if (codeUnit instanceof Instruction) {

@@ -61,9 +61,9 @@ public class InstructionTable extends AbstractInstructionTable {
 	private int selectedColumn = -1;
 
 	// Widget that is displayed if the user selects the manual entry button on the toolbar.
-	private InsertBytesWidget insertBytesWidget = null;
+	private InsertBytesWidget insertBytesWidget;
 
-	InstructionSearchPlugin plugin = null;
+	InstructionSearchPlugin plugin;
 
 	/**
 	 * Constructor

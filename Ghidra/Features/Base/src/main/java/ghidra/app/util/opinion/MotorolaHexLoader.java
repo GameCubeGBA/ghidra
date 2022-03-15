@@ -94,7 +94,7 @@ public class MotorolaHexLoader extends AbstractProgramLoader {
 	@Override
 	public String validateOptions(ByteProvider provider, LoadSpec loadSpec, List<Option> options,
 			Program program) {
-		Address baseAddr = null;
+		Address baseAddr;
 
 		for (Option option : options) {
 			String optName = option.getName();
@@ -199,7 +199,7 @@ public class MotorolaHexLoader extends AbstractProgramLoader {
 		if (baseAddr == null) {
 			baseAddr = prog.getAddressFactory().getDefaultAddressSpace().getAddress(0);
 		}
-		boolean success = false;
+		boolean success;
 		try {
 			processMotorolaHex(provider, options, prog, baseAddr, monitor);
 			success = true;
@@ -378,8 +378,7 @@ public class MotorolaHexLoader extends AbstractProgramLoader {
 				// is the checksum OK?
 				try {
 					temp = getByte(line, index);
-					index += 2;
-				}
+                }
 				catch (IndexOutOfBoundsException exc) {
 					String msg = provider.getName() + ", line: " + lineNum + " line length problem";
 					skipline = 1;
@@ -397,8 +396,7 @@ public class MotorolaHexLoader extends AbstractProgramLoader {
 				String name = baseAddr.getAddressSpace().getName();
 				Address start = baseAddr.add(startAddress);
 
-				name = blockName;
-				int count = 0;
+                int count = 0;
 				for (;;) {
 					try {
 						MemoryBlockUtils.createInitializedBlock(program, isOverlay, blockName,
@@ -412,8 +410,7 @@ public class MotorolaHexLoader extends AbstractProgramLoader {
 							throw e;
 						}
 						++count;
-						name = blockName + "_" + count;
-					}
+                    }
 				}
 			}
 		}
@@ -454,8 +451,7 @@ public class MotorolaHexLoader extends AbstractProgramLoader {
 			list.add(new Option(OPTION_NAME_BLOCK_NAME, blockName));
 		}
 		else {
-			isOverlay = false;
-		}
+        }
 		if (baseAddr == null) {
 			list.add(new Option(OPTION_NAME_BASE_ADDRESS, Address.class));
 		}

@@ -752,7 +752,7 @@ public class ExternalProgramMerger implements MergeResolver, ListingMergeConstan
 	 * @throws CancelledException if the user cancels the merge.
 	 */
 	private void merge(IDGroup idGroup, int chosenConflictOption, TaskMonitor monitor) {
-		Program fromPgm = null;
+		Program fromPgm;
 		switch (chosenConflictOption) {
 			case KEEP_LATEST:
 				fromPgm = latestPgm;

@@ -114,7 +114,7 @@ abstract class AbstractFunctionMerger implements ListingMergeConstants {
 	protected StringBuffer infoBuf;
 
 	protected ProgramMultiUserMergeManager mergeManager;
-	protected Program[] programs = new Program[4];
+	protected Program[] programs;
 	protected FunctionManager[] functionManagers = new FunctionManager[4];
 
 	protected ListingMergeManager listingMergeManager;
@@ -861,8 +861,8 @@ abstract class AbstractFunctionMerger implements ListingMergeConstants {
 
 	protected void mergeParameter(int type, Function[] functions, int ordinal,
 			int currentConflictOption, TaskMonitor monitor) {
-		ProgramMerge programMerge = null;
-		Address entryPoint = null;
+		ProgramMerge programMerge;
+		Address entryPoint;
 		if ((currentConflictOption & KEEP_ORIGINAL) != 0) {
 			programMerge = getMergeOriginal();
 			entryPoint = (functions[ORIGINAL] != null) ? functions[ORIGINAL].getEntryPoint() : null;
@@ -1334,8 +1334,8 @@ abstract class AbstractFunctionMerger implements ListingMergeConstants {
 		if (functions[RESULT] == null) {
 			return;
 		}
-		ProgramMerge pgmMerge = null;
-		Address currentAddress = null;
+		ProgramMerge pgmMerge;
+		Address currentAddress;
 		if ((chosenConflictOption & KEEP_LATEST) != 0) {
 			pgmMerge = getMergeLatest();
 			currentAddress = functions[LATEST].getEntryPoint();
@@ -2112,7 +2112,7 @@ abstract class AbstractFunctionMerger implements ListingMergeConstants {
 
 		VariousChoicesPanel panel = getEmptyVariousPanel();
 
-		int conflictCount = 0;
+		int conflictCount;
 		try {
 			conflictCount = funcConflicts.get(myEntryPoint);
 		}

@@ -59,7 +59,7 @@ import ghidra.util.exception.CancelledException;
 public abstract class CachingSwingWorker<T> implements CachingLoader<T> {
 	private String name;
 	private int taskDialogDelay = 500;
-	private boolean hasProgress = true;
+	private boolean hasProgress;
 	private T cachedValue;
 	private SwingWorkerImpl worker;
 	private WorkerTaskMonitor taskMonitor = new WorkerTaskMonitor();

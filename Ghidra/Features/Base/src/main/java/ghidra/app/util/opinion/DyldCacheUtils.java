@@ -70,7 +70,7 @@ public class DyldCacheUtils {
 		if (provider == null) {
 			return false;
 		}
-		byte[] bytes = new byte[DyldArchitecture.DYLD_V1_SIGNATURE_LEN];
+		byte[] bytes;
 		try {
 			bytes = provider.readBytes(0, DyldArchitecture.DYLD_V1_SIGNATURE_LEN);
 		}

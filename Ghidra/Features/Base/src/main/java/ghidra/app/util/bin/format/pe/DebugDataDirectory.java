@@ -129,7 +129,7 @@ public class DebugDataDirectory extends DataDirectory {
     private Address getDataAddress(DebugDirectory dd, boolean isBinary,
 						AddressSpace space, NTHeader ntHeader) {
 
-		long ptr = 0;
+		long ptr;
 		if (isBinary) {
 			ptr = dd.getPointerToRawData();
 	        if (ptr != 0 && !ntHeader.checkPointer(ptr)) {

@@ -497,7 +497,7 @@ class StructureEditorModel extends CompEditorModel {
 		int startRowIndex = range.getStart().getIndex().intValue();
 		int endRowIndex = range.getEnd().getIndex().intValue() - 1;
 		int numSelected = endRowIndex - startRowIndex + 1;
-		boolean moved = false;
+		boolean moved;
 		int newIndex = startRowIndex - 1;
 		moved = shiftComponentsUp(startRowIndex, endRowIndex);
 		if (moved) {
@@ -521,7 +521,7 @@ class StructureEditorModel extends CompEditorModel {
 		int startIndex = range.getStart().getIndex().intValue();
 		int endIndex = range.getEnd().getIndex().intValue() - 1;
 		int numSelected = endIndex - startIndex + 1;
-		boolean moved = false;
+		boolean moved;
 		int newIndex = startIndex + 1;
 		moved = shiftComponentsDown(startIndex, endIndex);
 		if (moved) {
@@ -940,9 +940,9 @@ class StructureEditorModel extends CompEditorModel {
 			String comment) throws InvalidDataTypeException {
 		checkIsAllowableDataType(dataType);
 		try {
-			DataTypeComponent dtc = null;
+			DataTypeComponent dtc;
 			boolean isSelected = selection.containsEntirely(BigInteger.valueOf(rowIndex));
-			int diffLen = 0;
+			int diffLen;
 			int componentOrdinal = convertRowToOrdinal(rowIndex);
 
 			// FreeForm editing mode (showing Undefined Bytes).

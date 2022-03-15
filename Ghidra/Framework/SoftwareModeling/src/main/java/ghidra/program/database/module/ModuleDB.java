@@ -436,8 +436,8 @@ class ModuleDB extends DatabaseObject implements ProgramModule {
 			for (int i = 0; i < list.size(); i++) {
 				DBRecord rec = list.get(i);
 				long childID = rec.getLongValue(ParentChildDBAdapter.CHILD_ID_COL);
-				String childName = null;
-				DBRecord childRec = null;
+				String childName;
+				DBRecord childRec;
 				if (childID < 0) {
 					childRec = fragmentAdapter.getFragmentRecord(-childID);
 					childName = childRec.getString(FragmentDBAdapter.FRAGMENT_NAME_COL);
@@ -542,8 +542,8 @@ class ModuleDB extends DatabaseObject implements ProgramModule {
 	@Override
 	public void reparent(String name, ProgramModule oldParent) throws NotFoundException {
 
-		Group group = null;
-		ProgramFragment f = null;
+		Group group;
+		ProgramFragment f;
 
 		lock.acquire();
 		try {
@@ -717,7 +717,7 @@ class ModuleDB extends DatabaseObject implements ProgramModule {
 		parentChildAdapter.removeParentChildRecord(pcRec.getKey());
 		updateChildCount(-1);
 
-		String name = null;
+		String name;
 		boolean success = true;
 		if (isFragment) {
 			DBRecord fragRec = fragmentAdapter.getFragmentRecord(childID);

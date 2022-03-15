@@ -29,7 +29,7 @@ import ghidradev.ghidrasymbollookup.utils.CdtUtils;
 
 public class SocketSetupRunnable implements Runnable {
 
-	private ServerSocket serverSocket = null;
+	private ServerSocket serverSocket;
 	private OpenDeclarations openDeclsDialog;
 	private IProject project;
 	private boolean isInitialized;

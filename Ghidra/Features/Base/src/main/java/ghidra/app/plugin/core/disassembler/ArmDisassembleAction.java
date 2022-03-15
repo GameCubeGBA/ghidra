@@ -32,7 +32,7 @@ import ghidra.program.model.listing.Program;
 
 class ArmDisassembleAction extends ListingContextAction {
 	private DisassemblerPlugin plugin;
-	private boolean disassembleThumb = false;
+	private boolean disassembleThumb;
 
 	public ArmDisassembleAction(DisassemblerPlugin plugin, String groupName, boolean disassembleThumb) {
 		super("Disassemble " + (disassembleThumb ? "Thumb" : "Arm"), plugin.getName());

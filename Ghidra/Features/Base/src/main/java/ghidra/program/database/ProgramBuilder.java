@@ -558,7 +558,7 @@ public class ProgramBuilder {
 			AddressSet body = new AddressSet(entryPoint, endAddress);
 			FunctionManager functionManager = program.getFunctionManager();
 
-			Function function = null;
+			Function function;
 			if (namespace == null) {
 				function = functionManager.createFunction(
 					name, entryPoint, body, SourceType.USER_DEFINED);

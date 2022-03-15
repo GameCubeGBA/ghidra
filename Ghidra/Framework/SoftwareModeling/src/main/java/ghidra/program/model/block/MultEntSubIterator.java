@@ -32,15 +32,15 @@ import ghidra.util.task.TaskMonitor;
  */
 class MultEntSubIterator implements CodeBlockIterator {
 
-	private Listing listing = null;
+	private Listing listing;
 
 	// The next subroutine block to be returned
-	private CodeBlock nextSub = null;
+	private CodeBlock nextSub;
 
 	// Addresses to iterate over
-	private AddressSet addrSet = null;
+	private AddressSet addrSet;
 
-	private MultEntSubModel model = null;
+	private MultEntSubModel model;
 	private TaskMonitor monitor;
 
 	/**

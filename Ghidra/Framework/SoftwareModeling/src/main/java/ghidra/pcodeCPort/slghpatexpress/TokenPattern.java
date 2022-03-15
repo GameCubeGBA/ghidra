@@ -258,7 +258,7 @@ public class TokenPattern {
 	public static PatternBlock buildLittleBlock(int size, int bitstart, int bitend, long value) {
 		int startbit, endbit;
 
-		PatternBlock block = null;
+		PatternBlock block;
 
 		// we need to convert a bit range specified on a little endian token where the
 		// bit indices label the least sig bit as 0 into a bit range on big endian bytes

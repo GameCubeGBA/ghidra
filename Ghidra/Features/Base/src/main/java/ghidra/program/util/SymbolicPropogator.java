@@ -188,7 +188,7 @@ public class SymbolicPropogator {
 			}
 		}
 
-		AddressSet bodyDone = null;
+		AddressSet bodyDone;
 		try {
 			bodyDone = flowConstants(startAddr, restrictSet, eval, context, monitor);
 		}
@@ -541,8 +541,7 @@ public class SymbolicPropogator {
 					if (flows != null && flows.length > 0) {
 						// if already hit another flow, don't continue past any type of branching instruction
 						if (hitOtherFlow) {
-							nextAddr = null;
-							break;
+                            break;
 						}
 						if (!instrFlow.isCall()) {
 							for (Address flow : flows) {
@@ -616,8 +615,7 @@ public class SymbolicPropogator {
 					else {
 						// no need to store future flow state, will continue on the fall-thru flow
 						nextAddr = fallThru;
-						fallThru = null;
-					}
+                    }
 					// Used to break if there were any references to a place.  This will miss some references.
 					// Just follow fallthru for now.  Later we can follow if the context is different.
 					// else if (!program.getReferenceManager().hasReferencesTo(fallThru)) {
@@ -657,7 +655,7 @@ public class SymbolicPropogator {
 				lastFullHashCode = -1;
 			}
 			else {
-				int instrByteHashCode = -1;
+				int instrByteHashCode;
 				try {
 					instrByteHashCode = Arrays.hashCode(instr.getBytes());
 				}
@@ -772,7 +770,7 @@ public class SymbolicPropogator {
 
 		int mustClearAllUntil_PcodeIndex = -1;
 		// flag won't get set until there is something to clear
-		boolean mustClearAll = false;
+		boolean mustClearAll;
 		// if inject pcode, don't want to do any store pcode ops for the injected code
 		boolean injected = false;
 
@@ -903,8 +901,7 @@ public class SymbolicPropogator {
 
 							}
 							catch (NotFoundException e) {
-								val1 = null;
-							}
+                            }
 						}
 						else {
 							// CALL will always provide address
@@ -1017,7 +1014,7 @@ public class SymbolicPropogator {
 							vContext.mergeToFutureFlowState(minInstrAddress, in[0].getAddress());
 						}
 
-						Varnode condition = null;
+						Varnode condition;
 						try {
 							condition = vContext.getValue(in[1], null);
 						}
@@ -2053,7 +2050,7 @@ public class SymbolicPropogator {
 	private VariableStorage getReturnLocationStorage(Function func) {
 		// get the function containing the instruction if can
 		//    if not, just use default
-		VariableStorage returnLoc = null;
+		VariableStorage returnLoc;
 		int pointerSize = program.getDefaultPointerSize();
 		PrototypeModel conv = null;
 		if (func != null) {
@@ -2469,8 +2466,7 @@ public class SymbolicPropogator {
 				Address opAddr = instruction.getAddress(i);
 				if (opAddr != null && opAddr.getAddressableWordOffset() == wordOffset) {
 					opIndex = i;
-					foundExactValue = true;
-					break;
+                    break;
 				}
 			}
 			// markup the program counter for any flow
@@ -2484,15 +2480,13 @@ public class SymbolicPropogator {
 					// value for pointer can differ by 1 bit, which is sometimes ignored for flow
 					if (checkOffByOne(reg, wordOffset)) {
 						opIndex = i;
-						foundExactValue = true;
-						if (refType.isFlow()) {
+                        if (refType.isFlow()) {
 							break;
 						}
 					}
 					if (checkOffByOne(reg.getParentRegister(), wordOffset)) {
 						opIndex = i;
-						foundExactValue = true;
-						if (refType.isFlow()) {
+                        if (refType.isFlow()) {
 							break;
 						}
 					}
@@ -2504,8 +2498,7 @@ public class SymbolicPropogator {
 				// sort of a hack, for memory that is not byte addressable
 				if (val == wordOffset || val == (wordOffset >> 1)) {
 					opIndex = i;
-					foundExactValue = true;
-					break;
+                    break;
 				}
 			}
 			if ((opType & OperandType.DYNAMIC) != 0) {
@@ -2522,7 +2515,6 @@ public class SymbolicPropogator {
                             if (val == wordOffset || val == (wordOffset >> 1) ||
                                     (val + baseRegVal) == wordOffset) {
                                 opIndex = i;
-                                foundExactValue = true;
                                 break;
                             }
                             val = ((Scalar) obj).getSignedValue();
@@ -2544,8 +2536,7 @@ public class SymbolicPropogator {
                     }
 					if (offset_residue_neg == 0 || offset_residue_pos == 0) {
 						opIndex = i;
-						foundExactValue = true;
-						break;
+                        break;
 					}
 					if (opIndex == Reference.MNEMONIC && i == (numOperands - 1)) {
 						opIndex = i;

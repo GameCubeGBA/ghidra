@@ -434,8 +434,8 @@ public class PathManager {
 		if (disabledPath != null && disabledPath.isEmpty()) {
 			disabledPath = null;
 		}
-		String[] enabledPaths = null;
-		String[] disabledPaths = null;
+		String[] enabledPaths;
+		String[] disabledPaths;
 		if (defaultEnablePaths != null && enablePath == null && disabledPath == null) {
 			return defaultEnablePaths;
 		}

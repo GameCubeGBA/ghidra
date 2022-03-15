@@ -826,7 +826,7 @@ public class KeyBindingUtils {
 			return null;
 		}
 
-		InputStream inputStream = null;
+		InputStream inputStream;
 
 		try {
 			inputStream = new BufferedInputStream(new FileInputStream(selectedFile));
@@ -851,7 +851,7 @@ public class KeyBindingUtils {
 			return null;
 		}
 
-		OutputStream outputStream = null;
+		OutputStream outputStream;
 
 		try {
 			outputStream = new BufferedOutputStream(new FileOutputStream(selectedFile));

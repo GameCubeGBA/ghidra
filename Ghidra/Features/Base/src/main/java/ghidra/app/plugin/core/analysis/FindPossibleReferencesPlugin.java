@@ -225,7 +225,7 @@ public class FindPossibleReferencesPlugin extends Plugin {
                 }
             }
         }
-		FindReferencesTableModel model = null;
+		FindReferencesTableModel model;
 
 		model = new FindReferencesTableModel(fromSet, tool, currentProgram);
 

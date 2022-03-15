@@ -253,7 +253,7 @@ public class TypeDescriptorModel extends AbstractCreateDataTypeModel {
 	 */
 	private static boolean hasVFPointer(Program program) {
 
-		Address typeInfoVftableAddress = null;
+		Address typeInfoVftableAddress;
 		try {
 			typeInfoVftableAddress = RttiUtil.findTypeInfoVftableAddress(program, TaskMonitor.DUMMY);
 		}

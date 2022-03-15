@@ -33,9 +33,9 @@ public class LldbAttachCommand extends AbstractLldbCommand<Set<SBThread>> {
 	private LldbProcessCreatedEvent created = null;
 	private boolean completed = false;
 	private String key;
-	private int keyType = 0;
-	private boolean wait = true;
-	private boolean async = false;
+	private int keyType;
+	private boolean wait;
+	private boolean async;
 
 	public LldbAttachCommand(LldbManagerImpl manager, String key) {
 		this(manager, key, true, false);

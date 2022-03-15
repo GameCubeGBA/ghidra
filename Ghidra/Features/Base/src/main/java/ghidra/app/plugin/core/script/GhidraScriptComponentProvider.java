@@ -1121,7 +1121,7 @@ public class GhidraScriptComponentProvider extends ComponentProviderAdapter {
 
 	@Override
 	public ActionContext getActionContext(MouseEvent event) {
-		Object source = scriptTable;
+		Object source;
 		if (event != null) {
 			source = event.getSource();
 			if (source instanceof JViewport) {

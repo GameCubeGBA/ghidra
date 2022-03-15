@@ -47,7 +47,7 @@ class NextPreviousDataTypeAction extends MultiActionDockingAction {
 		this.provider = provider;
 		this.isNext = isNext;
 
-		Icon icon = null;
+		Icon icon;
 		if (isNext) {
 			icon = Icons.RIGHT_ALTERNATE_ICON;
 		}

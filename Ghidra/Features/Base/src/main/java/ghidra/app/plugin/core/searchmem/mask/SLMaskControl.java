@@ -22,8 +22,8 @@ package ghidra.app.plugin.core.searchmem.mask;
  */
 class SLMaskControl {
 	
-	private boolean useOps = false;
-	private boolean useConst = false;
+	private boolean useOps;
+	private boolean useConst;
 
 	/**
 	 * Constructor. 

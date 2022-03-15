@@ -82,7 +82,7 @@ class CodeUnitRecordIterator implements CodeUnitIterator {
 
 	private void findNext() {
 		while (nextAddr != null && nextCu == null) {
-			CodeUnit nextDefined = null;
+			CodeUnit nextDefined;
 
 			if (nextInst == null) {
 				nextDefined = nextData;

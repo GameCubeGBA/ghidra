@@ -364,7 +364,7 @@ public class GhidraScriptRealProgramTest extends AbstractGhidraHeadedIntegration
 	public void testCreateData() throws Exception {
 		GhidraScript script = getScript();
 		Address address = script.toAddr(0x0100750e);
-		Data data = null;
+		Data data;
 
 		data = script.createByte(address);
 		assertNotNull(data);

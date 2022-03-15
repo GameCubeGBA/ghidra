@@ -534,7 +534,7 @@ public class PartitionCodeSubModel implements SubroutineBlockModel {
                     for (Vertex child : children) {
                         // check to see if child has already been labeled
                         //  if not, give it label of current source
-                        int sourceValue = 0;
+                        int sourceValue;
                         try {
                             sourceValue = sourceNumber.getValue(child);
                             if (sourceValue == i + 1) { // there's a cycle -- need to break out

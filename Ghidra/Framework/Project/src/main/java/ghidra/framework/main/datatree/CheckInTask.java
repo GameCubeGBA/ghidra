@@ -78,7 +78,7 @@ public class CheckInTask extends VersionControlTask implements CheckinHandler {
 		myMonitor.setMessage("Examining selected file(s)");
 //		checkFilesInUse();
 
-		String currentName = null;
+		String currentName;
 		String currentContentType = null;
 		try {
 			for (int i = 0; i < list.size() && actionID != VersionControlDialog.CANCEL; i++) {

@@ -68,7 +68,7 @@ class TreeDragSrcAdapter extends DragSrcAdapter {
 	 * @return cursor that is appropriate for the given action and relative mouse position
 	 */
 	Cursor getCursor(int action, int relativeMousePos) {
-		Cursor c = null;
+		Cursor c;
 		if ((action & DnDConstants.ACTION_LINK) == DnDConstants.ACTION_LINK) {
 			return super.getDropOkCursor(action);
 		}

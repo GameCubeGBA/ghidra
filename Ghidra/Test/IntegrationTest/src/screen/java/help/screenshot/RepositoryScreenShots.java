@@ -2623,8 +2623,7 @@ public class RepositoryScreenShots extends AbstractListingMergeManagerTest {
 		waitForMergeCompletion();
 
 		myTestArchive.release(this);
-		myTestArchiveDF = null;
-	}
+    }
 
 //==================================================================================================
 // Private Methods

@@ -123,7 +123,7 @@ public abstract class BiDirectionDataType extends StructureDataType
 		if (index >= 0) {
 			return components.get(index);
 		}
-		int ordinal = 0;
+		int ordinal;
 		index = -index - 1;
 		int prevIndex = index - 1;
 		if (prevIndex < 0) {
@@ -428,7 +428,7 @@ public abstract class BiDirectionDataType extends StructureDataType
 		}
 		DataTypeComponent dtc = getComponentAt(offset);
 		int numDefinedComponents = components.size();
-		int definedIndex = 0;
+		int definedIndex;
 		if (dtc == null) {
 			if (offset == positiveLength) {
 				definedIndex = numDefinedComponents;

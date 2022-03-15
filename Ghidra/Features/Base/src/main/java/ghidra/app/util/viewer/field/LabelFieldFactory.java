@@ -237,7 +237,7 @@ public class LabelFieldFactory extends FieldFactory {
 			return SymbolUtilities.getDynamicOffcutName(offcutAddress);
 		}
 
-		String offcutSymbolText = null;
+		String offcutSymbolText;
 		if (!offcutSymbol.isDynamic()) {
 			// the formatter doesn't change dynamic labels
 			offcutSymbolText = codeUnitFormat.getOffcutLabelString(offcutAddress, cu);

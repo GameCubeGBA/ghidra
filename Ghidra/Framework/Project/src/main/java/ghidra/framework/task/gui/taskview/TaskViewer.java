@@ -343,7 +343,7 @@ public class TaskViewer {
 
 	private class InitializeRunnable implements Runnable {
 		private GTaskGroup currentGroup;
-		private List<GScheduledTask> scheduledTasks = new ArrayList<GScheduledTask>();
+		private List<GScheduledTask> scheduledTasks;
 		private List<GScheduledTask> delayedTasks;
 		private GScheduledTask runningTask;
 		private List<TaskGroupScheduledRunnable> groupRunnables;

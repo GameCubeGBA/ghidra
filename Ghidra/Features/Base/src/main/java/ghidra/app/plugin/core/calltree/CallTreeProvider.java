@@ -607,7 +607,7 @@ public class CallTreeProvider extends ComponentProviderAdapter implements Domain
 					TreePath[] selectionPaths = gTree.getSelectionPaths();
 					CallNode callNode = (CallNode) selectionPaths[0].getLastPathComponent();
 
-					ProgramLocation location = null;
+					ProgramLocation location;
 					if (gTree == incomingTree) {
 						location = new ProgramLocation(currentProgram, callNode.getSourceAddress());
 
@@ -676,7 +676,7 @@ public class CallTreeProvider extends ComponentProviderAdapter implements Domain
 		AddressSet set = new AddressSet();
 		for (TreePath path : paths) {
 			CallNode callNode = (CallNode) path.getLastPathComponent();
-			Address address = null;
+			Address address;
 			if (selectSource) {
 				address = callNode.getSourceAddress();
 			}
@@ -935,7 +935,7 @@ public class CallTreeProvider extends ComponentProviderAdapter implements Domain
 	}
 
 	private void updateIncomingReferencs(Function function) {
-		GTreeNode rootNode = null;
+		GTreeNode rootNode;
 		if (function == null) {
 			rootNode = new EmptyRootNode();
 		}
@@ -947,7 +947,7 @@ public class CallTreeProvider extends ComponentProviderAdapter implements Domain
 	}
 
 	private void updateOutgoingReferences(Function function) {
-		GTreeNode rootNode = null;
+		GTreeNode rootNode;
 		if (function == null) {
 			rootNode = new EmptyRootNode();
 		}

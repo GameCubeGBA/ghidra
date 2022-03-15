@@ -90,7 +90,7 @@ public class ExceptionHandlerFrameHeader {
 	 * @throws MemoryAccessException if the memory needed for this frame header isn't in the program.
 	 */
 	public void create(Address addr) throws MemoryAccessException, AddressOutOfBoundsException {
-		CreateStructureCmd dataCmd = null;
+		CreateStructureCmd dataCmd;
 		
 		if (addr == null || monitor.isCancelled()) {
 			return;

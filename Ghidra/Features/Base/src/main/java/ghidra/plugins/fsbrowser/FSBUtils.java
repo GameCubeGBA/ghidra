@@ -45,7 +45,7 @@ public class FSBUtils {
 	 * CodeBrowser ProgramManager service.
 	 */
 	public static ProgramManager getProgramManager(PluginTool tool, boolean allowUserPrompt) {
-		PluginTool pmTool = null;
+		PluginTool pmTool;
 		ProgramManager pm = tool.getService(ProgramManager.class);
 		if (pm != null) {
 			pmTool = tool;

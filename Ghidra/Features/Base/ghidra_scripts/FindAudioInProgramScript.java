@@ -101,7 +101,7 @@ public class FindAudioInProgramScript extends GhidraScript {
         for (MemoryBlock block : blocks) {
             if (block.isInitialized()) {
                 Address start = block.getStart();
-                Address found = null;
+                Address found;
                 for (;;) {
                     if (monitor.isCancelled()) {
                         break;

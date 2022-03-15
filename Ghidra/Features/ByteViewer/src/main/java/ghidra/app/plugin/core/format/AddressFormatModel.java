@@ -125,7 +125,7 @@ public class AddressFormatModel implements ProgramDataFormatModel {
 		int size = a.getAddressSpace().getSize();
 		int nbytes = size / 8;
 		try {
-			long value = 0;
+			long value;
 			switch (nbytes) {
 				case 8:
 					value = memory.getLong(a);

@@ -1239,7 +1239,7 @@ class ProgramTreeActionManager implements ClipboardOwner {
 	// the cast is safe, since we checked the flavor
 	private boolean isPasteOk(ProgramNode destNode) {
 
-		boolean isCutOperation = false;
+		boolean isCutOperation;
 		Clipboard systemClipboard = GClipboard.getSystemClipboard();
 		if (!systemClipboard.isDataFlavorAvailable(TreeTransferable.localTreeNodeFlavor)) {
 			return false;

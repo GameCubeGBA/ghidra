@@ -107,9 +107,9 @@ public class StringAttribute<T extends KeyedObject> extends Attribute<T> {
 	class StringComparator implements Comparator<KeyedObject> {
 		@Override
 		public int compare(KeyedObject object1, KeyedObject object2) {
-            int returnValue = 0;
-			String value1 = null;
-			String value2 = null;
+            int returnValue;
+			String value1;
+			String value2;
 			value1 = getValue(object1); //}catch( NoValueException exc ){value1 = null;}
 			value2 = getValue(object2); //} catch( NoValueException exc){value2 = null;}
 

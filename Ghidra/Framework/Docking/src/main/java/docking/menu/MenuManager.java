@@ -34,7 +34,7 @@ public class MenuManager implements ManagedMenuItem {
 
 	private String name;
 	private final String[] menuPath;
-	private char mnemonicKey = '\0';
+	private char mnemonicKey;
 	private int level;
 	private boolean usePopupPath;
 	private MenuHandler menuHandler;

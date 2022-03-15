@@ -130,7 +130,7 @@ public class PluginUtils {
 			}
 			String pluginLocation = location.getPath();
 			for (File jar : jarFiles) {
-				URL jarUrl = null;
+				URL jarUrl;
 				try {
 					jarUrl = jar.toURI().toURL();
 					if (pluginLocation.contains(jarUrl.getPath())) {

@@ -29,7 +29,7 @@ public class MenuData {
 
 	private String[] menuPath;
 	private Icon icon;
-	private int mnemonic = NO_MNEMONIC;
+	private int mnemonic;
 	private String menuGroup;
 	private String parentMenuGroup;
 

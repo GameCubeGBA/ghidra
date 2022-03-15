@@ -244,7 +244,7 @@ public class LockFile {
 	}
 
 	private String getLockOwner(boolean includeId) {
-		String owner = null;
+		String owner;
         try (FileInputStream fin = new FileInputStream(lockFile)) {
             byte[] bytes = new byte[32];
             int cnt = fin.read(bytes);

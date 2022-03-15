@@ -422,7 +422,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 		if (!hasCrossBuilds) {
 			return flowType;
 		}
-		int flags = 0;
+		int flags;
 		try {
 			flags = gatherFlags(0, context, -1);
 		}
@@ -755,7 +755,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 			return null;
 		}
 
-		FixedHandle hand = null;
+		FixedHandle hand;
 		SleighParserContext protoContext;
 		try {
 			protoContext = (SleighParserContext) context.getParserContext();
@@ -850,7 +850,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 
 	@Override
 	public Object[] getInputObjects(InstructionContext context) {
-		PcodeOp[] pcode = null;
+		PcodeOp[] pcode;
 		try {
 			pcode = getPcode(context, null);
 		}
@@ -908,7 +908,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 
 	@Override
 	public Object[] getResultObjects(InstructionContext context) {
-		PcodeOp[] pcode = null;
+		PcodeOp[] pcode;
 		try {
 			pcode = getPcode(context, null);
 		}

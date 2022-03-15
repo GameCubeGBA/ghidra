@@ -505,7 +505,7 @@ public abstract class AbstractGhidraScriptMgrPluginTest
 			name = name.substring(name.length() - 50);
 		}
 
-		File scriptDir = null;
+		File scriptDir;
 		if (pkg != null) {
 			scriptDir = new File(GhidraScriptUtil.USER_SCRIPTS_DIR + "/" + pkg.replace(".", "/"));
 			scriptDir.mkdirs();
@@ -778,7 +778,7 @@ public abstract class AbstractGhidraScriptMgrPluginTest
 		BufferedReader reader = new BufferedReader(new InputStreamReader(script.getInputStream()));
 		StringBuilder stringBuilder = new StringBuilder();
 
-		String line = null;
+		String line;
 		while ((line = reader.readLine()) != null) {
 			stringBuilder.append(line).append('\n');
 		}

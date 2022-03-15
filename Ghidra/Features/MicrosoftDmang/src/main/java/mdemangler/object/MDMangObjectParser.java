@@ -29,7 +29,7 @@ public class MDMangObjectParser {
 	public static MDParsableItem determineItemAndParse(MDMang dmang) throws MDException {
 		boolean retry = false;
 		MDException firstException = null;
-		MDParsableItem myItem = null;
+		MDParsableItem myItem;
 		int index = dmang.getIndex();
 		try {
 			myItem = parseDefaultStandard(dmang);

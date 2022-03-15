@@ -97,7 +97,7 @@ public class MessageDigestFidHasher implements FidHasher {
 		int callCount = 0;
 		int codeUnitIndex = -1;
 		Iterator<CodeUnit> codeUnitIterator = extent.iterator();
-		CodeUnit codeUnit = null;
+		CodeUnit codeUnit;
 
 		while (codeUnitIterator.hasNext()) {
 			codeUnit = codeUnitIterator.next();

@@ -1002,7 +1002,7 @@ public class EnumEditor1Test extends AbstractGhidraHeadedIntegrationTest {
 	private Category renameCategory(Enum enummDt) throws Exception {
 		DataTypeManager dtm = enummDt.getDataTypeManager();
 
-		Category category = null;
+		Category category;
 		int txID = program.startTransaction("Test Create Category");
 		try {
 			category = dtm.getCategory(enummDt.getCategoryPath());
@@ -1022,7 +1022,7 @@ public class EnumEditor1Test extends AbstractGhidraHeadedIntegrationTest {
 
 		DataTypeManager dtm = enummDt.getDataTypeManager();
 
-		Category category = null;
+		Category category;
 		int txID = program.startTransaction("Test Create Category");
 		try {
 			Category newCategory = dtm.createCategory(new CategoryPath("/Test/Category"));

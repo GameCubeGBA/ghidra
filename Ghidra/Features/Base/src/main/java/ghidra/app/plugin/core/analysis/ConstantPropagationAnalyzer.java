@@ -91,7 +91,7 @@ public class ConstantPropagationAnalyzer extends AbstractAnalyzer {
 	protected boolean followConditional = false;
 
 	final static HashSet<String> handledProcessors = new HashSet<String>();
-	protected String processorName = "Basic";
+	protected String processorName;
 	protected AddressSetView EMPTY_ADDRESS_SET = new AddressSet();
 
 	public ConstantPropagationAnalyzer() {

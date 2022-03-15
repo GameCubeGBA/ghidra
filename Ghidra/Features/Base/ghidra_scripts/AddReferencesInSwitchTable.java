@@ -45,8 +45,8 @@ public class AddReferencesInSwitchTable extends GhidraScript {
     	Address startAddr = currentAddress;
     	Address pc = startAddr.add(4);
     	
-    	Address prevAddr = null;
-    	int diff = 0;
+    	Address prevAddr;
+    	int diff;
   	    	
     	// Get data iterator
     	DataIterator dataIter = listing.getDefinedData(startAddr, true);

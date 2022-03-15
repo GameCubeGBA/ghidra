@@ -590,7 +590,7 @@ public class ProgramDB extends DomainObjectAdapterDB implements Program, ChangeM
 
 	@Override
 	public String getCompiler() {
-		String compiler = null;
+		String compiler;
 		Options pl = getOptions(PROGRAM_INFO);
 		compiler = pl.getString(COMPILER, UNKNOWN);
 		return compiler == null ? UNKNOWN : compiler;
@@ -615,7 +615,7 @@ public class ProgramDB extends DomainObjectAdapterDB implements Program, ChangeM
 
 	@Override
 	public String getExecutablePath() {
-		String path = null;
+		String path;
 		Options pl = getOptions(PROGRAM_INFO);
 		path = pl.getString(EXECUTABLE_PATH, UNKNOWN);
 		return path == null ? UNKNOWN : path;

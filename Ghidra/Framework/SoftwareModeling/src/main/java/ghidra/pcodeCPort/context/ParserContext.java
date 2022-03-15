@@ -267,7 +267,7 @@ public class ParserContext {
 		IteratorSTL<ContextSet> iter;
 		for (iter = contextcommit.begin(); !iter.isEnd(); iter.increment()) {
 			TripleSymbol sym = iter.get().sym;
-			Address addr = null;
+			Address addr;
 			if (sym.getType() == symbol_type.operand_symbol) {
 				// The value for an OperandSymbol is probabably already
 				// calculated, we just need to find the right

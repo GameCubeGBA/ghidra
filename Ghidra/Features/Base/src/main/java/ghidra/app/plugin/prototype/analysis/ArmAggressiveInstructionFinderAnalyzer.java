@@ -210,7 +210,7 @@ public class ArmAggressiveInstructionFinderAnalyzer extends AbstractAnalyzer {
 	private boolean doValidStart(Address entry, TaskMonitor monitor) {
 		// try the mode of the last instruction above this place
 
-		BigInteger curValue = null;
+		BigInteger curValue;
 		PseudoDisassemblerContext pseudoContext =
 			new PseudoDisassemblerContext(curProgram.getProgramContext());
 

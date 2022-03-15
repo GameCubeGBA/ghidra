@@ -52,7 +52,7 @@ public class ColumnSortState {
 
 	private int columnModelIndex;
 	private SortDirection sortDirection;
-	private int sortOrder_OneBased = -1;
+	private int sortOrder_OneBased;
 
 	ColumnSortState(int columnModelIndex, SortDirection sortDirection, int sortOrder) {
 		if (columnModelIndex < 0) {

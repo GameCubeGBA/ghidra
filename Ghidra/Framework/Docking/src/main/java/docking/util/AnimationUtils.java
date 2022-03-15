@@ -1110,12 +1110,10 @@ public final class AnimationUtils {
 			// Shake code
 			// 
 			if (lastDirection > 0) {
-				lastDirection = -.01;
-				lastDirection = -.01 * emphasis;
+                lastDirection = -.01 * emphasis;
 			}
 			else {
-				lastDirection = .01;
-				lastDirection = .01 * emphasis;
+                lastDirection = .01 * emphasis;
 			}
 
 			g2d.rotate(lastDirection, emphasizedBounds.getCenterX(), emphasizedBounds.getCenterY());

@@ -103,7 +103,7 @@ public class ProgramMerge1Test extends AbstractGhidraHeadedIntegrationTest {
 	 */
 	@Test
 	public void testCompareDifferentAddressSpaces() throws Exception {
-		Program p3 = null;
+		Program p3;
 		try {
 			ProgramBuilder programBuilder3 = new ProgramBuilder("program3", ProgramBuilder._8051);
 			p3 = programBuilder3.getProgram();

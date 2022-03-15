@@ -121,7 +121,7 @@ public abstract class HTMLDataTypeRepresentation {
 	}
 
 	protected static String getDataTypeLengthString(DataType dt) {
-		String lengthString = null;
+		String lengthString;
 		if (dt == null) {
 			lengthString = "<i>Unknown</i>";
 		}

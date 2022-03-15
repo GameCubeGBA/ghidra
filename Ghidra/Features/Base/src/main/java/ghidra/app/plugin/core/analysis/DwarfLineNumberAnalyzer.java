@@ -134,7 +134,7 @@ public class DwarfLineNumberAnalyzer extends AbstractAnalyzer {
         if (ElfLoader.ELF_NAME.equals(program.getExecutableFormat())) {
             // We now load the .debug section as an overlay block, no need for the
             // original file
-            MemoryBlock block = null;
+            MemoryBlock block;
             block = program.getMemory().getBlock(sectionNames.SECTION_NAME_LINE());
             if (block != null) {
                 return new MemoryByteProvider(program.getMemory(), block.getStart());
@@ -155,7 +155,7 @@ public class DwarfLineNumberAnalyzer extends AbstractAnalyzer {
 	private boolean hasDebugInfo(Program program) {
 		DwarfSectionNames sectionNames = new DwarfSectionNames(program);
 
-		MemoryBlock block = null;
+		MemoryBlock block;
 		block = program.getMemory().getBlock(sectionNames.SECTION_NAME_LINE());
 
 		return block != null;

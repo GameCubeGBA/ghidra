@@ -242,7 +242,7 @@ class MemSearchDialog extends DialogComponentProvider {
 	}
 
 	private void nextPreviousCallback(boolean forward) {
-		int alignment = 1;
+		int alignment;
 		try {
 			alignment = getAlignment();
 		}
@@ -269,7 +269,7 @@ class MemSearchDialog extends DialogComponentProvider {
 	}
 
 	private void allCallback() {
-		int alignment = 1;
+		int alignment;
 		try {
 			alignment = getAlignment();
 		}
@@ -683,7 +683,7 @@ class MemSearchDialog extends DialogComponentProvider {
 
 	public int getAlignment() throws InvalidInputException {
 		String alignStr = alignField.getText();
-		int len = 0;
+		int len;
 		try {
 			Integer ilen = Integer.decode(alignStr);
 			len = ilen.intValue();

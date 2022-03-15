@@ -550,7 +550,7 @@ public class FunctionBitPatternsMainProvider extends ComponentProviderAdapter
 			PatternType type = tree.getType();
 			InstructionSequenceTreePathFilter pathFilter =
 				new InstructionSequenceTreePathFilter(path, type);
-			ContextRegisterFilter cRegFilter = null;
+			ContextRegisterFilter cRegFilter;
 			switch (type) {
 				case FIRST:
 					cRegFilter = firstInstPanel.getContextRegisterFilter();

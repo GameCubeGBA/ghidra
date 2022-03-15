@@ -69,7 +69,7 @@ public class DwarfEncodingModeDataType extends BuiltIn {
 
 	@Override
 	public Object getValue(MemBuffer buf, Settings settings, int length) {
-		int mode = -1;
+		int mode;
 		try {
 			mode = buf.getByte(0) & 0xFF;
 		}

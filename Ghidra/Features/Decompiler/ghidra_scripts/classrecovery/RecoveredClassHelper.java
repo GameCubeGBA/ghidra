@@ -1081,7 +1081,7 @@ public class RecoveredClassHelper {
 				.addAll(getVariableThatStoresVftablePointer(highFunction, firstVftableReference));
 		Iterator<HighVariable> highVariableIterator = highVariables.iterator();
 
-		Address vftableAddress = null;
+		Address vftableAddress;
 		while (highVariableIterator.hasNext()) {
 
 			HighVariable highVariable = highVariableIterator.next();
@@ -4078,7 +4078,7 @@ public class RecoveredClassHelper {
 
 		CategoryPath classPath = recoveredClass.getClassPath();
 
-		Structure vftableStruct = null;
+		Structure vftableStruct;
 
 		Map<Integer, Address> orderToVftableMap = recoveredClass.getOrderToVftableMap();
 
@@ -4133,11 +4133,11 @@ public class RecoveredClassHelper {
 		Structure classStruct;
 		if (recoveredClass.hasExistingClassStructure()) {
 			Structure computedClassDataStructure = recoveredClass.getExistingClassStructure();
-			int structLen = 0;
+			int structLen;
 			if (computedClassDataStructure != null) {
 				structLen = computedClassDataStructure.getLength();
 				int mod = structLen % defaultPointerSize;
-				int alignment = 0;
+				int alignment;
 				if (mod != 0) {
 					alignment = defaultPointerSize - mod;
 					structLen += alignment;
@@ -4190,7 +4190,7 @@ public class RecoveredClassHelper {
 
 		//create function definition for each virtual function and put in vftable structure and
 		// data subfolder
-		CategoryPath classPath = recoveredClass.getClassPath();
+		CategoryPath classPath;
 
 		List<Address> vftableAddresses = recoveredClass.getVftableAddresses();
 
@@ -5225,7 +5225,7 @@ public class RecoveredClassHelper {
 	public int addAlignment(int len) {
 
 		int mod = len % defaultPointerSize;
-		int alignment = 0;
+		int alignment;
 		if (mod != 0) {
 			alignment = defaultPointerSize - mod;
 			len += alignment;
@@ -5465,7 +5465,7 @@ public class RecoveredClassHelper {
 
 				ParameterDefinition[] params =
 					decompilerUtils.getParametersFromDecompiler(indeterminateFunction);
-				int numberParams = 0;
+				int numberParams;
 
                 if (params == null) {
                     numberParams = indeterminateFunction.getParameterCount();
@@ -5982,7 +5982,7 @@ public class RecoveredClassHelper {
 	 */
 	public void findFunctionsUsingAtexit() throws CancelledException, InvalidInputException {
 
-		Function atexitFunction = null;
+		Function atexitFunction;
 		List<Function> atexitFunctions = extendedFlatAPI.getGlobalFunctions("_atexit");
 		if (atexitFunctions.size() != 1) {
 			return;
@@ -7003,7 +7003,7 @@ public class RecoveredClassHelper {
 				dataType = new Undefined1DataType();
 			}
 
-			String fieldName = "";
+			String fieldName;
 			String comment = null;
 
 			// if the computed class struct has field name (ie from pdb) use it otherwise create one

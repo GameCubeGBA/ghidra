@@ -55,8 +55,7 @@ class ProgramTextWriter {
 
 		this.options = options;
 		// Exit if options are INVALID
-		int len = options.getAddrWidth() + options.getBytesWidth() + options.getPreMnemonicWidth() +
-			options.getMnemonicWidth() + options.getOperandWidth() + options.getEolWidth();
+		int len;
 
 		this.program = program;
 		this.listing = program.getListing();
@@ -151,7 +150,7 @@ class ProgramTextWriter {
 				currentFunction != null && currentFunction.getEntryPoint().equals(currentAddress);
 
 			//// Plate Property ////////////////////////////////////////////
-			boolean cuHasPlate = false;
+			boolean cuHasPlate;
 			if (options.isShowProperties()) {
 				String[] plate = currentCodeUnit.getCommentAsArray(CodeUnit.PLATE_COMMENT);
 				cuHasPlate = plate != null && plate.length > 0;
@@ -421,7 +420,7 @@ class ProgramTextWriter {
 		buffy.append(clipDataTypeName);
 		buffy.append(genFill(options.getStackVarDataTypeWidth() - clipDataTypeName.length()));
 
-		String offsetStr = "";
+		String offsetStr;
 		if (var.isStackVariable()) {
 			int offset = var.getStackOffset();
 			offsetStr =
@@ -701,7 +700,7 @@ class ProgramTextWriter {
 			return;
 		}
 
-		int x = 0, before = 2, after = 0, len = 0;
+		int x, before = 2, after, len;
 		int width = options.getPreMnemonicWidth() + options.getMnemonicWidth() +
 			options.getOperandWidth() + options.getEolWidth();
 

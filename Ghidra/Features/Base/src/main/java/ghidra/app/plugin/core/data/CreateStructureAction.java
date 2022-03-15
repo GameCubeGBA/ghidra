@@ -108,7 +108,7 @@ class CreateStructureAction extends ListingContextAction {
 		Address newStructureAddress = from.getAddress();
 		int[] fromPath = from.getComponentPath();
 		int[] toPath = to.getComponentPath();
-		Structure tempStructure = null;
+		Structure tempStructure;
 		try {
 			tempStructure = StructureFactory.createStructureDataTypeInStrucuture(program,
 				newStructureAddress, fromPath, toPath);
@@ -157,7 +157,7 @@ class CreateStructureAction extends ListingContextAction {
 
 		// create a temporary structure to compare with the data types
 		// in the current sytem
-		Structure tempStructure = null;
+		Structure tempStructure;
 		try {
 			tempStructure = StructureFactory.createStructureDataType(program, structureAddress,
 				structureLength);

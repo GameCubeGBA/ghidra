@@ -197,7 +197,7 @@ public class PostCommentFieldFactory extends FieldFactory {
 
 		if (pCodeOverride.hasPotentialOverride()) {
 			PcodeOp[] pcodeOps = instr.getPcode();
-			OverrideCommentData overrideData = null;
+			OverrideCommentData overrideData;
 			if (pCodeOverride.getPrimaryCallReference() == null) {
 				overrideData = getOverrideCommentData(instr, RefType.CALL_OVERRIDE_UNCONDITIONAL,
 					pcodeOps, pCodeOverride);
@@ -667,7 +667,7 @@ public class PostCommentFieldFactory extends FieldFactory {
 		private Address overridingRef;
 		private String overriddenCallOther;
 		private boolean hasMultipleCallOthers;
-		private String outputWarningString = null;
+		private String outputWarningString;
 
 		OverrideCommentData(Address overridingRef, String overriddenCallOther,
 				boolean multipleCallOthers, String outputWarningString) {

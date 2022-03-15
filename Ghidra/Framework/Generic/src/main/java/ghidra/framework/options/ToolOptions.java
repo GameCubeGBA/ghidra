@@ -194,7 +194,7 @@ public class ToolOptions extends AbstractOptions {
 				}
 
 				SaveState ss = new SaveState(WRAPPED_OPTION_NAME);
-				Element elem = null;
+				Element elem;
 				if (value == null) {
 					// Handle the null case ourselves, not using the wrapped option (and when
 					// reading from xml) so the logic does not need to be in each wrapped option
@@ -229,7 +229,7 @@ public class ToolOptions extends AbstractOptions {
 
 	private WrappedOption wrapOption(Option option) {
 
-		Object value = null;
+		Object value;
 		value = option.getCurrentValue();
 		if (value == null) {
 			value = option.getDefaultValue();

@@ -129,7 +129,7 @@ public class EclipseMessageUtils {
 	 * @return The displayed message.
 	 */
 	public static String showWizardErrorDialog(Shell wizardShell, InvocationTargetException e) {
-		String message = null;
+		String message;
 		Throwable cause = e.getCause();
 		if (cause != null) {
 			message = cause.getClass().getSimpleName();

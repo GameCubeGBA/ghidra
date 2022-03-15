@@ -43,7 +43,7 @@ public class SymbolApplierFactory {
 			applicator.appendLogMsg("PDB Warning: No AbstractMsSymbol");
 			return null;
 		}
-		MsSymbolApplier applier = null;
+		MsSymbolApplier applier;
 
 		switch (symbol.getPdbId()) {
 //				// 0x0000 block

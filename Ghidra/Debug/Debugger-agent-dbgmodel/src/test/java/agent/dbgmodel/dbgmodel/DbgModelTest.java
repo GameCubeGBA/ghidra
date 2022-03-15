@@ -946,8 +946,8 @@ public class DbgModelTest extends AbstractGhidraHeadlessIntegrationTest {
 
 			for (DebugMemoryBasicInformation info : client.getDataSpaces().iterateVirtual(0)) {
 				if (info.state != PageState.FREE) {
-					DebugModule mod = null;
-					String name = "[NONE]";
+					DebugModule mod;
+					String name;
 					try {
 						mod = client.getSymbols().getModuleByOffset(info.baseAddress, 0);
 						name = mod.getName(DebugModuleName.IMAGE);

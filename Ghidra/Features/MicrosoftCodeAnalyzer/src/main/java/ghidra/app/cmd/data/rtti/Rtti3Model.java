@@ -233,7 +233,7 @@ public class Rtti3Model extends AbstractCreateRttiDataModel {
 		Memory memory = program.getMemory();
 
 		Address rtti1CountAddress = rtti3Address.add(NUM_BASES_OFFSET);
-		int rtti1Count = 0;
+		int rtti1Count;
 		try {
 			rtti1Count =
 				(int) new Scalar(32, memory.getInt(rtti1CountAddress, memory.isBigEndian()))

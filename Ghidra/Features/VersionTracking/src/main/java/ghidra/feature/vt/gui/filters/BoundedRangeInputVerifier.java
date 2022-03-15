@@ -65,7 +65,7 @@ public class BoundedRangeInputVerifier extends InputVerifier {
             // 
             // Second, don't let any value through that crosses our other field's range
             // 
-            boolean result = false;
+            boolean result;
             Number otherNumber = (Number) otherField.getValue();
             if ( isOtherFieldUpperRange ) {
                 // make sure our value is below the upper range value

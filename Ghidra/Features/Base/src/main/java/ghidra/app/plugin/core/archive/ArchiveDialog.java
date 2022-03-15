@@ -123,9 +123,8 @@ public class ArchiveDialog extends DialogComponentProvider {
 		gbc.gridy = 0;
 		gbl.setConstraints(archiveField, gbc);
 		outerPanel.add(archiveField);
-		gbc.gridy = 1;
 
-		gbc.weightx = 0.0;
+        gbc.weightx = 0.0;
 
 		// add the browse buttons
 		//

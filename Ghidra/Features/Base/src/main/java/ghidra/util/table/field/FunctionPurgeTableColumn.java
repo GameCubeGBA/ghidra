@@ -39,7 +39,7 @@ public class FunctionPurgeTableColumn extends ProgramBasedDynamicTableColumnExte
 	@Override
     public String getValue(Function rowObject, Settings settings, Program pgm, 
 	        ServiceProvider serviceProvider) throws IllegalArgumentException {
-        String stringDepth = "UNK";
+        String stringDepth;
 		int depth = rowObject.getStackPurgeSize();
 		switch (depth) {
 		case Function.INVALID_STACK_DEPTH_CHANGE:

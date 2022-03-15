@@ -250,8 +250,7 @@ public class StructureEditorLockedActions2Test extends AbstractStructureEditorLo
 		dialog = getDialogComponent(NumberInputDialog.class);
 		assertNotNull(dialog);
 		okInput(dialog, 2);
-		dialog = null;
-		waitUntilDialogProviderGone(NumberInputDialog.class, 2000);
+        waitUntilDialogProviderGone(NumberInputDialog.class, 2000);
 		waitForBusyTool(tool); // the 'Duplicate Multiple' action uses a task
 
 		assertEquals(num - 2, getModel().getNumComponents());

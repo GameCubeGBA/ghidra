@@ -252,7 +252,7 @@ public class MultiTabPanel extends JPanel {
 		labelPanel.setBackground(backgroundColor);
 		iconLabel.setBackground(backgroundColor);
 
-		TabPanel tabPanel = null;
+		TabPanel tabPanel;
 		if (isSelected) {
 			tabPanel =
 				new SelectedPanel(backgroundColor, program, nameLabel, labelPanel, iconLabel);
@@ -843,7 +843,7 @@ public class MultiTabPanel extends JPanel {
 	}
 
 	private List<Program> getProgramList(boolean getVisiblePrograms) {
-		List<JPanel> panelList = null;
+		List<JPanel> panelList;
 		if (getVisiblePrograms) {
 			panelList = new ArrayList<>(visibleTabList);
 		}

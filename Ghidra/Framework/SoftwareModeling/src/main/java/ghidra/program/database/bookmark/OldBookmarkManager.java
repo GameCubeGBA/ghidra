@@ -98,7 +98,7 @@ class OldBookmarkManager {
 
 	private ObjectPropertyMap getMap(String type, boolean create) {
 		String property = getPropertyName(type);
-		ObjectPropertyMap map = null;
+		ObjectPropertyMap map;
 		map = propertyMgr.getObjectPropertyMap(property);
 		if (map == null) {
 			if (create) {

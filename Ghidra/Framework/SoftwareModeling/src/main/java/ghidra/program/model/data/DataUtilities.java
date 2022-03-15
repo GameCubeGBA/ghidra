@@ -313,8 +313,8 @@ public final class DataUtilities {
 			DataTypeInstance dti, ClearDataMode clearMode) throws CodeUnitInsertionException {
 		// NOTE: method not invoked when clearMode == ClearDataMode.CLEAR_SINGLE_DATA
 		Listing listing = program.getListing();
-		Address end = null;
-		Address newEnd = null;
+		Address end;
+		Address newEnd;
 		try {
 			end = addr.addNoWrap(existingDataLen - 1);
 			newEnd = addr.addNoWrap(dti.getLength() - 1);

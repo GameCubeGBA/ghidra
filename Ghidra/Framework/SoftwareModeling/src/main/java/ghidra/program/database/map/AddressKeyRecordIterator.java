@@ -33,7 +33,7 @@ public class AddressKeyRecordIterator implements RecordIterator {
 
 	private List<KeyRange> keyRangeList;
 	private RecordIterator it;
-	private int keyRangeIndex = -1;
+	private int keyRangeIndex;
 
 	/**
 	 * Construcs a new AddressKeyRecordIterator that iterates over all records in ascending order.

@@ -37,8 +37,8 @@ public class GenericHeader extends JPanel {
 	private static final Color FOCUS_START_COLOR = new Color(30, 30, 150);
 	private static final int MINIMUM_TITLE_SIZE = 80;
 
-	private Color nonFocusColor = NON_FOCUS_START_COLOR;
-	private Color focusColor = FOCUS_START_COLOR;
+	private Color nonFocusColor;
+	private Color focusColor;
 
 	protected Component component;
 	protected DockableToolBarManager toolBarMgr;

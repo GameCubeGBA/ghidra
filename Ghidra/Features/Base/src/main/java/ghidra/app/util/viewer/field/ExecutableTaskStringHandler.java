@@ -127,11 +127,11 @@ public class ExecutableTaskStringHandler implements AnnotatedStringHandler {
 			ProcessBuilder processBuilder = new ProcessBuilder(command);
 			processBuilder = processBuilder.redirectErrorStream(true);
 
-			IOThread ioThread = null;
+			IOThread ioThread;
 			StringBuilder buffer = new StringBuilder();
 			int exitValue = 1;
 			InputStream inputStream = null;
-			Process process = null;
+			Process process;
 			String executableName = command.get(0);
 			try {
 				Msg.info(this, "Launching process: " + executableName);
@@ -177,7 +177,7 @@ public class ExecutableTaskStringHandler implements AnnotatedStringHandler {
 
 		@Override
 		public void run() {
-			String line = null;
+			String line;
 			try {
 				while ((line = shellOutput.readLine()) != null) {
 					buffer.append(line).append('\n');

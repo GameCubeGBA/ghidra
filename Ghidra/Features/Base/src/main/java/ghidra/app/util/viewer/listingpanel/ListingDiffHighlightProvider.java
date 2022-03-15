@@ -184,7 +184,7 @@ public class ListingDiffHighlightProvider implements HighlightProvider {
 		int opIndex = 0;
 		int textLength = text.length();
 		int start = 0; // Start index in the text for the current operand.
-		int separatorIndex = -1;
+		int separatorIndex;
 		// Need to get the separator between each of the operands because it can be something
 		// other than a comma. The index for the operands is 0 based.
 		// Calling getSeparator(opIndex) gets the separator that comes before the indicated operand.

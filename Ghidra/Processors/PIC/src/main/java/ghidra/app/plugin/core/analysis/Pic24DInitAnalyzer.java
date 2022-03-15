@@ -122,7 +122,7 @@ public class Pic24DInitAnalyzer extends AbstractAnalyzer {
 				Data arrayData = null;
 				long fmt = format.getValue();
 				if (fmt != 0) {
-					int flexArrayLen = 0;
+					int flexArrayLen;
 					if (fmt == 1) { // 2-bytes consumed per 4-byte ROM location
 						flexArrayLen = (int)(4 * ((len.getValue() + 1) / 2));
 					}

@@ -300,7 +300,7 @@ public class TestFGLayoutProvider extends FGLayoutProvider {
 					articulations.add(new Point2D.Double(x1, y1));
 
 					double x2 = x1;
-					double y2 = vertexBottom + offsetFromVertex;
+					double y2;
 					y2 = end.getY();
 					articulations.add(new Point2D.Double(x2, y2));
 

@@ -56,7 +56,7 @@ public class TreeValueSortedMap<K, V> extends AbstractMap<K, V> implements Value
 	 * An iterator of the entries
 	 */
 	protected class EntryListIterator implements ListIterator<Entry<K, V>> {
-		private boolean atEnd = false;
+		private boolean atEnd;
 		private Node next;
 		private Node cur;
 

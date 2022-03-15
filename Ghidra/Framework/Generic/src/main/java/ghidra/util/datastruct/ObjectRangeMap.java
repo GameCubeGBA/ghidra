@@ -289,7 +289,7 @@ public class ObjectRangeMap <T> {
 
 	
 	class RestrictedIndexRangeIterator implements IndexRangeIterator {
-		private int pos = 0;
+		private int pos;
 		private long end;
 		private IndexRange nextRange;
 

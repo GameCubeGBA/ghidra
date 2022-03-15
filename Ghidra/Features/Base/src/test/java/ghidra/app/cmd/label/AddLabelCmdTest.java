@@ -124,7 +124,7 @@ public class AddLabelCmdTest extends AbstractGenericTest {
 	public void testAddNamespaceLabelAtFunction() throws Exception {
 
 		Function function = getTestFunction();
-		Namespace ns = null;
+		Namespace ns;
 		int transactionID = notepad.startTransaction("test");
 		try {
 			function.setName("joe", SourceType.ANALYSIS);// in the global namespace

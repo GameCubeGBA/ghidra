@@ -239,7 +239,7 @@ public abstract class ConvertConstantAction extends AbstractDecompilerAction {
 			return new ConvertConstantTask(convertVn, convertIsSigned);
 		}
 
-		ConvertConstantTask task = null;
+		ConvertConstantTask task;
 
 		String equateName = getEquateName(convertVn.getOffset(), convertVn.getSize(),
 			convertIsSigned, context.getProgram());

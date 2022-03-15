@@ -402,7 +402,7 @@ public class PackedDatabaseTest extends AbstractGenericTest {
 		File tmpFile2 = createTempFile(getName() + "2", ".gbf");
 		tmpFile2.delete();
 
-		BufferFile bf = null;
+		BufferFile bf;
 
 		dbh = (PackedDBHandle) db.open(TaskMonitor.DUMMY);
 

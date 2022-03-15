@@ -57,7 +57,7 @@ class DataTypeArchiveDBChangeSet implements DataTypeArchiveChangeSet, DomainObje
 	private LinkedList<MyChangeDiff> redoList = new LinkedList<MyChangeDiff>();
 
 	private boolean inTransaction;
-	private int numUndos = 4;
+	private int numUndos;
 
 	/**
 	 * Construct a new DataTypeArchiveChangeSet.

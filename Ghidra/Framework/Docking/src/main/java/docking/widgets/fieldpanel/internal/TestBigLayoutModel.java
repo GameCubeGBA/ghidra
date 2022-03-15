@@ -37,7 +37,7 @@ public class TestBigLayoutModel implements LayoutModel {
 
 	FontMetrics fm;
 	//	BigInteger numIndexes = BigInteger.valueOf(1000000000000000L);
-	BigInteger numIndexes = BigInteger.valueOf(55);
+	BigInteger numIndexes;
 	private final String name;
 	private int startBigSizes = 0;
 	private int endBigSizes = -1;

@@ -22,7 +22,7 @@ import java.util.List;
 import docking.widgets.table.AbstractSortedTableModel;
 
 public class TestDataModel extends AbstractSortedTableModel<DirData> {
-	List<DirData> data = new ArrayList<>();
+	List<DirData> data;
 
 	public TestDataModel() throws IOException {
 		this("dirlist.txt");

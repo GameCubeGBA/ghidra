@@ -215,7 +215,7 @@ public class DisassembleAtPcDebuggerBot implements DebuggerBot {
 
 		protected void disassembleRegPcVal(TraceThread thread, int frameLevel, long pcSnap,
 				long memSnap) {
-			TraceData pcUnit = null;
+			TraceData pcUnit;
 			try (UndoableTransaction tid =
 				UndoableTransaction.start(trace, "Disassemble: PC is code pointer", true)) {
 				TraceCodeRegisterSpace regCode =

@@ -34,7 +34,7 @@ public class DWARFCompileUnit {
 	private final DWARFIdentifierCase identifier_case;
 	private final boolean hasDWO;
 
-	private DWARFLine line = null;
+	private DWARFLine line;
 
 	public static DWARFCompileUnit read(DIEAggregate diea)
 			throws IOException, DWARFException {

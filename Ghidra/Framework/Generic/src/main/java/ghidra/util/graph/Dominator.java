@@ -379,7 +379,7 @@ public class Dominator extends DirectedGraph //implements Weighted
 
 	// gets the type of a vertex
 	public String getType(KeyedObject o) {
-		String type = null;
+		String type;
 
 		type = vertexType.getValue(o);
 

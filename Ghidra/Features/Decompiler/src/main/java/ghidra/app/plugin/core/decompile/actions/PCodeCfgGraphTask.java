@@ -334,7 +334,7 @@ public class PCodeCfgGraphTask extends Task {
 		vertex.setAttribute(CODE_ATTRIBUTE, buf.toString());
 
 		// Establish vertex type
-		String vertexType = BODY;
+		String vertexType;
 		if (basicBlk.getInSize() == 0) {
 			vertexType = ENTRY;
 		}

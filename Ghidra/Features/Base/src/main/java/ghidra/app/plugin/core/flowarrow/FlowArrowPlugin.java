@@ -366,7 +366,7 @@ public class FlowArrowPlugin extends Plugin implements MarginProvider, OptionsCh
 		// Find overlapping arrows and compute depth
 		for (FlowArrow arrow : flowArrows) {
 
-			List<FlowArrow> sameDepth = null;
+			List<FlowArrow> sameDepth;
 
 			// If we have not already assigned a depth to this FlowArrow object
 			if (arrow.depth == -1) {

@@ -33,7 +33,7 @@ public class ImpliedMatchAssociationHook implements AssociationHook, VTControlle
 	private VTSession session;
 	private final VTController controller;
 
-	private boolean autoCreateImpliedMatches = true;
+	private boolean autoCreateImpliedMatches;
 
 	public ImpliedMatchAssociationHook(VTController controller) {
 		this.controller = controller;

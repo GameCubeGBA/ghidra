@@ -233,7 +233,7 @@ public class DWARFFunctionImporter {
 		dfunc.isExternal = diea.getBool(DWARFAttribute.DW_AT_external, false);
 
 		// Retrieve the frame base if it exists
-		DWARFLocation frameLoc = null;
+		DWARFLocation frameLoc;
 		if (diea.hasAttribute(DWARFAttribute.DW_AT_frame_base)) {
 			List<DWARFLocation> frameBase = diea.getAsLocation(DWARFAttribute.DW_AT_frame_base);
 			// get the framebase register, find where the frame is finally set
@@ -695,7 +695,7 @@ public class DWARFFunctionImporter {
 		DWARFNameInfo dni = prog.getName(diea);
 
 		String name = dni.getName();
-		Number lowPC = null;
+		Number lowPC;
 		boolean disjoint = false;
 
 		// TODO: Do we need to setup the correct frame base based on the
@@ -737,8 +737,8 @@ public class DWARFFunctionImporter {
 			return;
 		}
 
-		Number lowPC = null;
-		Number highPC = null;
+		Number lowPC;
+		Number highPC;
 
 		// Process low and high pc if it exists
 		if (diea.hasAttribute(DW_AT_low_pc) && diea.hasAttribute(DW_AT_high_pc)) {
@@ -1071,7 +1071,7 @@ public class DWARFFunctionImporter {
 	 */
 	private void moveIntoFragment(String name, Address start, Address end, String fileName) {
 		if (fileName != null) {
-			ProgramModule module = null;
+			ProgramModule module;
 			int index = rootModule.getIndex(fileName);
 			if (index == -1) {
 				try {
@@ -1089,7 +1089,7 @@ public class DWARFFunctionImporter {
 			}
 			if (module != null) {
 				try {
-					ProgramFragment frag = null;
+					ProgramFragment frag;
 					index = module.getIndex(name);
 					if (index == -1) {
 						frag = module.createFragment(name);

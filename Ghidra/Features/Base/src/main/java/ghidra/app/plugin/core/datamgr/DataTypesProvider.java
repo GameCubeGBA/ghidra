@@ -482,7 +482,7 @@ public class DataTypesProvider extends ComponentProviderAdapter {
 	private DataType locateDataType(HyperlinkEvent event) {
 		String href = event.getDescription();
 
-		DataTypeUrl url = null;
+		DataTypeUrl url;
 		try {
 			url = new DataTypeUrl(href);
 		}
@@ -500,7 +500,7 @@ public class DataTypesProvider extends ComponentProviderAdapter {
 		}
 
 		TreePath path = archiveGTree.getSelectionPath();
-		GTreeNode node = null;
+		GTreeNode node;
 		if (path == null) {
 			if (lastPreviewNode == null) {
 				return; // never shown a preview--nothing to update

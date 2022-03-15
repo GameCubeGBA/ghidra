@@ -86,8 +86,8 @@ public class SummaryPanel extends AbstractMageJPanel<VTWizardStateKey> {
 		label.append("<br>");
 		summary.append("<br>");
 
-		String sourceProgramName = null;
-		String destinationProgramName = null;
+		String sourceProgramName;
+		String destinationProgramName;
 
 		DomainFile sourceProgram = (DomainFile) state.get(VTWizardStateKey.SOURCE_PROGRAM_FILE);
 		sourceProgramName = sourceProgram.getName();
@@ -113,7 +113,7 @@ public class SummaryPanel extends AbstractMageJPanel<VTWizardStateKey> {
 		summary.append("<br>");
 
 		String correlatorLabel = "";
-		String correlatorName = null;
+		String correlatorName;
 
 		List<VTProgramCorrelatorFactory> correlators = getCorrelators(state);
 		if (correlators != null) {

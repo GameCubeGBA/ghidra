@@ -37,7 +37,7 @@ import ghidra.util.task.TaskMonitor;
  */
 public class FunctionResultStateStackAnalysisCmd extends BackgroundCommand {
 	private AddressSet entryPoints = new AddressSet();
-	private boolean forceProcessing = false;
+	private boolean forceProcessing;
 	private boolean dontCreateNewVariables = false;
 
 	/**
@@ -118,7 +118,7 @@ public class FunctionResultStateStackAnalysisCmd extends BackgroundCommand {
 		if (f == null) {
 			return false;
 		}
-		int depthChange = 0;
+		int depthChange;
 
 		// Perform depth search of all functions reached by this function.
 		// Any function that has not had its stack analyzed is added to a list.

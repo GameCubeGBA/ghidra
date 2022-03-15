@@ -78,7 +78,7 @@ public class Hcs12DisassembleCommand extends DisassembleCommand {
 
 		// get the XGATE mode register and set accordingly
 		Register xgmodeReg = program.getProgramContext().getRegister("XGATE");
-		RegisterValue xgmodeValue = null;
+		RegisterValue xgmodeValue;
 
 		// if doing xgate, and have no XGmode reg, no way to do disassemble in xgate
 		if (xgmodeReg == null) {

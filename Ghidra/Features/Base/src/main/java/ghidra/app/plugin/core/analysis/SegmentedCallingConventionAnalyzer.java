@@ -50,7 +50,7 @@ public class SegmentedCallingConventionAnalyzer extends AbstractAnalyzer {
 		if (mnemonic.startsWith("ret")) {
 			String convention = null;
 			//Scalar purge = instr.getScalar(0);
-			int b = 0;
+			int b;
 			try {
 				b = program.getMemory().getByte(instr.getMinAddress()) & 0xff;
 			}

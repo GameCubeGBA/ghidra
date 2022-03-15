@@ -229,7 +229,7 @@ public class XmlLoader extends AbstractProgramLoader {
 			final MessageLog log, Program prog, TaskMonitor monitor,
 			final boolean isAddToProgram) throws IOException {
 		MessageLog mgrLog = null;
-		boolean success = false;
+		boolean success;
 		try {
 			XmlProgramOptions xmlOptions = new XmlProgramOptions();
 			xmlOptions.setOptions(options);

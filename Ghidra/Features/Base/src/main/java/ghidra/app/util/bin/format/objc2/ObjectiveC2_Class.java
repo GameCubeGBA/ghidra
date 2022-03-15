@@ -107,7 +107,7 @@ public class ObjectiveC2_Class implements StructConverter {
 	}
 
 	private void readData(BinaryReader reader) throws IOException {
-		long index = 0;
+		long index;
 		try {
 			index = ObjectiveC1_Utilities.readNextIndex(reader, _state.is32bit);
 		}
@@ -146,7 +146,7 @@ public class ObjectiveC2_Class implements StructConverter {
 	}
 
 	private void readSuperClass(BinaryReader reader) throws IOException {
-		long index = 0;
+		long index;
 		try {
 			index = ObjectiveC1_Utilities.readNextIndex(reader, _state.is32bit);
 		}
@@ -169,7 +169,7 @@ public class ObjectiveC2_Class implements StructConverter {
 	}
 
 	private void readISA(BinaryReader reader) throws IOException {
-		long index = 0;
+		long index;
 		try {
 			index = ObjectiveC2_Utilities.readNextIndex(reader, _state.is32bit);
 		}

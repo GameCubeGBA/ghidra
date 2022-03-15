@@ -215,7 +215,7 @@ public class GHelpSet extends HelpSet {
 
 		private URL createRawURL(String id) {
 
-			URL url = null;
+			URL url;
 			try {
 				url = new URL(id);
 			}

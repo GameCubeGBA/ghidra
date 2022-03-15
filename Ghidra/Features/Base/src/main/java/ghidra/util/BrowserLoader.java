@@ -129,7 +129,7 @@ public class BrowserLoader {
 
 		String[] processCommands = generateCommandArguments(url, fileURL, option);
 
-		Process p = null;
+		Process p;
 		try {
 			p = Runtime.getRuntime().exec(processCommands);
 		}

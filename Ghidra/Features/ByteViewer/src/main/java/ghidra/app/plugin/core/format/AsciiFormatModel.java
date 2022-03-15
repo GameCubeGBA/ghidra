@@ -83,7 +83,7 @@ public class AsciiFormatModel implements UniversalDataFormatModel {
 			throws ByteBlockAccessException {
 
 		byte b = block.getByte(index);
-		String str = null;
+		String str;
 		if (b < 0x20 || b == 0x7f) {
 			str = ".";
 		}

@@ -825,8 +825,7 @@ public class ModelObjectImpl implements ModelObjectInternal {
 				kind = SymbolKind.SYMBOL_FIELD;
 				break;
 			case TYPE_POINTER:
-				kind = SymbolKind.SYMBOL_BASE_CLASS;
-				try {
+                try {
 					ModelObject dereference = this.dereference();
 					return dereference.getRawValueMap();
 				}

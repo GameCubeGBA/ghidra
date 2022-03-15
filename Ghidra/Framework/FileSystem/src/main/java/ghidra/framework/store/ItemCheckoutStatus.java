@@ -249,7 +249,7 @@ public class ItemCheckoutStatus implements java.io.Serializable {
 	 * @return project location path
 	 */
 	public static String getProjectPath(String projectPath, boolean isTransient) {
-		String hostname = "";
+		String hostname;
 		try {
 			hostname = InetAddress.getLocalHost().getHostName() + "::";
 		}

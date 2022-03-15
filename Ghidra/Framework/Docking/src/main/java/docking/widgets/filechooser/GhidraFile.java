@@ -32,7 +32,7 @@ import java.io.IOException;
 public class GhidraFile extends File {
 	private static final long serialVersionUID = 1L;
 
-	private char nativeSeparator = separatorChar;
+	private char nativeSeparator;
 
     /**
      * Construct a new GhidraFile.

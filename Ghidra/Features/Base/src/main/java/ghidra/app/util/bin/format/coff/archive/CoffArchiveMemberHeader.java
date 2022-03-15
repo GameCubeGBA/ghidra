@@ -214,8 +214,8 @@ public class CoffArchiveMemberHeader implements StructConverter {
 	private String groupId;
 	private String mode;
 	private long size;
-	private long payloadOffset = -1;
-	private long memberOffset = -1;
+	private long payloadOffset;
+	private long memberOffset;
 
 	public CoffArchiveMemberHeader(String name, long date, String userId, String groupId,
 			String mode, long size, long payloadOffset, long memberOffset) {

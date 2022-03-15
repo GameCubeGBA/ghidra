@@ -96,7 +96,7 @@ class ProgramDBChangeSet implements ProgramChangeSet, DomainObjectDBChangeSet {
 	private LinkedList<ChangeDiff> redoList = new LinkedList<ChangeDiff>();
 
 	private boolean inTransaction;
-	private int numUndos = 4;
+	private int numUndos;
 
 	private AddressMap addrMap;
 

@@ -102,7 +102,7 @@ public class CreateDefaultReferenceAction extends ListingContextAction {
 
 		ProgramLocation loc = context.getLocation();
 		if (loc instanceof OperandFieldLocation) {
-			OperandFieldLocation opLoc = (OperandFieldLocation) context.getLocation();
+			OperandFieldLocation opLoc;
 			this.context = context;
 
 			Program program = context.getProgram();

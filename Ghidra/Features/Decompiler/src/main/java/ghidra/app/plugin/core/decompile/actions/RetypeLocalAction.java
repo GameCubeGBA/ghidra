@@ -157,7 +157,7 @@ public class RetypeLocalAction extends AbstractDecompilerAction {
 		PluginTool tool = context.getTool();
 		ClangToken tokenAtCursor = context.getTokenAtCursor();
 
-		DataType dataType = null;
+		DataType dataType;
 		HighSymbol highSymbol = findHighSymbolFromToken(tokenAtCursor, context.getHighFunction());
 		if (highSymbol == null) {
 			return;

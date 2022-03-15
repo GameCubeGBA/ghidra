@@ -78,7 +78,7 @@ class AnalyzeAllOpenProgramsTask extends Task {
 
 		monitor.initialize(programs.size());
 
-		List<Program> validPrograms = null;
+		List<Program> validPrograms;
 		AnalysisOptions prototypeAnalysisOptions = null;
 		Options options = tool.getOptions(GhidraOptions.CATEGORY_AUTO_ANALYSIS);
 		boolean showDialog = options.getBoolean("Show Analysis Options", true);

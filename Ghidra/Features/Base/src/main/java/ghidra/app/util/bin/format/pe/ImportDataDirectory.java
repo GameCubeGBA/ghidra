@@ -180,7 +180,7 @@ public class ImportDataDirectory extends DataDirectory {
 
 	private void markupIAT(int iatptr, boolean isBinary, Program program, MessageLog log)
 			throws MemoryAccessException {
-		DataType dt = null;
+		DataType dt;
 		if (isBinary) {
 			dt = (DataType) (ntHeader.getOptionalHeader().is64bit() ? QWORD : DWORD);
 		}
@@ -203,7 +203,7 @@ public class ImportDataDirectory extends DataDirectory {
 		Address thunkAddress = space.getAddress(thunkAddr);
 		setEolComment(program, thunkAddress, thunk.getStructName());
 
-		DataType dt = null;
+		DataType dt;
 		if (intptr == iatptr && !isBinary) {
 			dt = PointerDataType.getPointer(null, program.getMinAddress().getPointerSize());
 		}
@@ -293,8 +293,8 @@ public class ImportDataDirectory extends DataDirectory {
 				int addr = id.getFirstThunk() + nextPosToCreateExternalRef;
 				nextPosToCreateExternalRef += intThunk.getStructSize();
 
-				String boundName = null;
-				long ordinal = -1;
+				String boundName;
+				long ordinal;
 
 				if (intThunk.isOrdinal()) {
 					ordinal = intThunk.getOrdinal();

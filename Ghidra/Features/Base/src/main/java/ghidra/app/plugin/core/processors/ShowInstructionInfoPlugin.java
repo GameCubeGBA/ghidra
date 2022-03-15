@@ -168,7 +168,7 @@ public class ShowInstructionInfoPlugin extends ProgramPlugin {
 
 	void showProcessorManual(ProgramActionContext context) {
 		Language lang = currentProgram.getLanguage();
-		File wrapperFile = null;
+		File wrapperFile;
 		try {
 			URL fileURL = getValidUrl(context, lang);
 			if (fileURL == null) {
@@ -459,7 +459,7 @@ public class ShowInstructionInfoPlugin extends ProgramPlugin {
 }
 
 class ShowInfoAction extends ListingContextAction {
-	ShowInstructionInfoPlugin plugin = null;
+	ShowInstructionInfoPlugin plugin;
 
 	public ShowInfoAction(ShowInstructionInfoPlugin plugin) {
 
@@ -481,7 +481,7 @@ class ShowInfoAction extends ListingContextAction {
  * Action class for displaying the processor manual (PDF file)
  */
 class ShowProcessorManualAction extends ProgramContextAction {
-	private ShowInstructionInfoPlugin plugin = null;
+	private ShowInstructionInfoPlugin plugin;
 
 	public ShowProcessorManualAction(ShowInstructionInfoPlugin plugin) {
 		super("Show Processor Manual", plugin.getName());

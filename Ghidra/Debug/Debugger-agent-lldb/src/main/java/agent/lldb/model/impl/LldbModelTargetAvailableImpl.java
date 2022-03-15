@@ -72,7 +72,7 @@ public class LldbModelTargetAvailableImpl extends LldbModelTargetObjectImpl
 	@Override
 	public String getDisplay() {
 		Long p = Long.decode(pid);
-		String pidstr = "";
+		String pidstr;
 		if (base == 16) {
 			pidstr = "0x" + Long.toHexString(p);
 		} else {

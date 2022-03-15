@@ -105,7 +105,7 @@ public class SaveImageAction extends ImagePanelDockingAction {
 
 	@Override
 	public void actionPerformed(ActionContext context) {
-		File file = null;
+		File file;
 		Image image = imagePanel.getImage();
 
 		file = getExportFile();

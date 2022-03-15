@@ -95,7 +95,7 @@ public class CleanupMergeDatabasesScript extends GhidraScript {
 
 		Class<?> objectClass =
 			(ownerInstance instanceof Class) ? (Class<?>) ownerInstance : ownerInstance.getClass();
-		Object result = null;
+		Object result;
 
 		try {
 

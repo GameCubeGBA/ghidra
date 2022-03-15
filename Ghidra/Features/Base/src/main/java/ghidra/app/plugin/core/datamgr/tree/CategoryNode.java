@@ -261,8 +261,7 @@ public class CategoryNode extends DataTypeTreeNode {
 		catch (InvalidNameException exc) {
 			String msg = exc.getMessage();
 			if (msg == null) {
-				msg = "Invalid name specified: " + newValue;
-			}
+            }
 			Msg.showError(getClass(), null, "Invalid name specified", exc.getMessage());
 		}
 		finally {

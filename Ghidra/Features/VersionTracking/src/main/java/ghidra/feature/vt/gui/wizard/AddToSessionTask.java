@@ -46,7 +46,7 @@ public class AddToSessionTask extends Task {
 
 	@Override
 	public void run(TaskMonitor monitor) {
-		VTSession session = null;
+		VTSession session;
 		session = controller.getSession();
 
 		Program sourceProgram = session.getSourceProgram();

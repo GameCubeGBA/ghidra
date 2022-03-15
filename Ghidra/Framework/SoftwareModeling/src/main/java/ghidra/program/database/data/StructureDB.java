@@ -740,7 +740,7 @@ class StructureDB extends CompositeDB implements StructureInternal {
 			if (idx >= 0) {
 				return components.get(idx);
 			}
-			int offset = 0;
+			int offset;
 			idx = -idx - 1;
 			if (idx == 0) {
 				offset = ordinal;
@@ -1059,7 +1059,7 @@ class StructureDB extends CompositeDB implements StructureInternal {
 			int index = Collections.binarySearch(components, Integer.valueOf(offset),
 				OffsetComparator.INSTANCE);
 			if (index >= 0) {
-				DataTypeComponent dtc = components.get(index);
+				DataTypeComponent dtc;
 				index = backupToFirstComponentContainingOffset(index, offset);
 				dtc = components.get(index);
 				return dtc;
@@ -1088,7 +1088,7 @@ class StructureDB extends CompositeDB implements StructureInternal {
 					OffsetComparator.INSTANCE);
 			if (index >= 0) {
 				// return first matching defined component containing offset
-				DataTypeComponent dtc = components.get(index);
+				DataTypeComponent dtc;
 				index = indexOfFirstNonZeroLenComponentContainingOffset(index, offset);
 				dtc = components.get(index);
 				if (dtc.getLength() != 0) {
@@ -1123,7 +1123,7 @@ class StructureDB extends CompositeDB implements StructureInternal {
 			boolean hasSizedComponent = false;
 			if (index >= 0) {
 				// collect matching defined components containing offset
-				DataTypeComponentDB dtc = components.get(index);
+				DataTypeComponentDB dtc;
 				index = backupToFirstComponentContainingOffset(index, offset);
 				while (index < components.size()) {
 					dtc = components.get(index);
@@ -1441,7 +1441,7 @@ class StructureDB extends CompositeDB implements StructureInternal {
 
 			LinkedList<DataTypeComponentDB> replacedComponents = new LinkedList<>();
 
-			DataTypeComponentDB origDtc = null;
+			DataTypeComponentDB origDtc;
 			int index = Collections.binarySearch(components, Integer.valueOf(offset),
 				OffsetComparator.INSTANCE);
 			if (index >= 0) {
@@ -2125,7 +2125,7 @@ class StructureDB extends CompositeDB implements StructureInternal {
 		}
 		int idx = Collections.binarySearch(components, Integer.valueOf(ordinal),
 			OrdinalComparator.INSTANCE);
-		DataTypeComponentDB dtc = null;
+		DataTypeComponentDB dtc;
 		if (idx < 0) {
 			idx = -idx - 1;
 			if (idx >= components.size()) {

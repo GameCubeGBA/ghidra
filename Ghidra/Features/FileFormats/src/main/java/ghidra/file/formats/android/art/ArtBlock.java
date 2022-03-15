@@ -29,7 +29,7 @@ import ghidra.util.exception.DuplicateNameException;
  */
 public class ArtBlock implements StructConverter, ArtCompression {
 
-	private ArtStorageMode storage_mode_ = ArtStorageMode.kDefaultStorageMode;
+	private ArtStorageMode storage_mode_;
 	private int data_offset_;
 	private int data_size_;
 	private int image_offset_;

@@ -562,7 +562,7 @@ public class LldbManagerImpl implements LldbManager {
 			state.set(newState, evt.getCause());
 		}
 
-		boolean cmdFinished = false;
+		boolean cmdFinished;
 		List<LldbPendingCommand<?>> toRemove = new ArrayList<LldbPendingCommand<?>>();
 		for (LldbPendingCommand<?> pcmd : activeCmds) {
 			cmdFinished = pcmd.handle(evt);

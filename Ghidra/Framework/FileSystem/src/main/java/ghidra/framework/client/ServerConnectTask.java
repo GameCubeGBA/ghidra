@@ -159,7 +159,7 @@ class ServerConnectTask extends Task {
 	public static GhidraServerHandle getGhidraServerHandle(ServerInfo server, TaskMonitor monitor)
 			throws IOException, CancelledException {
 
-		GhidraServerHandle gsh = null;
+		GhidraServerHandle gsh;
 		boolean canCancel = monitor.isCancelEnabled(); // original state
 		try {
 			// Test SSL Handshake to ensure that user is able to decrypt keystore.

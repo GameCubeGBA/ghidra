@@ -149,7 +149,7 @@ public class DebugCOFFSymbolAux implements StructConverter {
             fncAryFunctionPointerToNextFunction = reader.readInt(index + BinaryReader.SIZEOF_INT);
             fncAryArrayDimension                = reader.readShortArray(index, 4); index += (4 * BinaryReader.SIZEOF_SHORT);
 
-            tvIndex = reader.readShort(index); index += BinaryReader.SIZEOF_SHORT;
+            tvIndex = reader.readShort(index);
         }
 
 
@@ -216,7 +216,7 @@ public class DebugCOFFSymbolAux implements StructConverter {
             numberOfLinenumbers = reader.readShort(index); index += BinaryReader.SIZEOF_SHORT;
             checkSum            = reader.readInt  (index); index += BinaryReader.SIZEOF_INT;
             number              = reader.readShort(index); index += BinaryReader.SIZEOF_SHORT;
-            selection           = reader.readByte (index); index += BinaryReader.SIZEOF_BYTE;
+            selection           = reader.readByte (index);
         }
 
         int getLength() {

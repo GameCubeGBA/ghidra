@@ -1009,7 +1009,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 		DataTypeConflictHandler originalHandler = null;
 		boolean isEquivalenceCacheOwner = activateEquivalenceCache();
 		boolean isResolveCacheOwner = activateResolveCache();
-		DataType resolvedDataType = null;
+		DataType resolvedDataType;
 		try {
 			originalHandler = currentHandler;
 
@@ -1115,8 +1115,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 			// should get recomputed during packing when used within aligned structure
 			int effectiveBitSize = Math.min(bitSize, baseLengthBits);
 			bitOffset = getDataOrganization().isBigEndian() ? baseLengthBits - effectiveBitSize : 0;
-			storageSize = baseLength;
-		}
+        }
 		try {
 			return new BitFieldDBDataType(resolvedBaseDt, bitSize, bitOffset);
 		}
@@ -2067,7 +2066,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 		int tableID = getTableID(dataTypeID);
 
 		try {
-			DataType dt = null;
+			DataType dt;
 			switch (tableID) {
 				case BUILT_IN:
 					boolean status = builtinAdapter.removeRecord(dataTypeID);
@@ -2584,7 +2583,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 				sourceArchiveIdValue = sourceArchive.getSourceArchiveID().getValue();
 			}
 
-			DataType newDataType = null;
+			DataType newDataType;
 			if (dt instanceof Array) {
 				Array array = (Array) dt;
 				newDataType = createArray(array.getDataType(), array.getNumElements(),
@@ -3275,7 +3274,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 	 */
 	static long createKey(int tableID, long tableKey) {
 		long key = (long) tableID << DATA_TYPE_KIND_SHIFT;
-		return key |= tableKey;
+		return key | tableKey;
 	}
 
 	void addParentChildRecord(long parentID, long childID) {

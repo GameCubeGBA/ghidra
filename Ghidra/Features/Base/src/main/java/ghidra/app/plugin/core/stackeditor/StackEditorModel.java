@@ -979,7 +979,7 @@ public class StackEditorModel extends CompositeEditorModel {
 			}
 
 			for (Variable sv : newVars) {
-				Variable newSv = null;
+				Variable newSv;
 				try {
 					DataType dt = dtm.resolve(sv.getDataType(), null);
 					Variable var = original.getVariableContaining(sv.getStackOffset());
@@ -1297,7 +1297,7 @@ public class StackEditorModel extends CompositeEditorModel {
 	public DataTypeInstance validateComponentDataType(int index, String dtString)
 			throws CancelledException, UsrException {
 		DataType dt = null;
-		String dtName = "";
+		String dtName;
 		dtString = DataTypeHelper.stripWhiteSpace(dtString);
 		if (index < getNumComponents()) {
 			DataTypeComponent element = viewComposite.getComponent(index);

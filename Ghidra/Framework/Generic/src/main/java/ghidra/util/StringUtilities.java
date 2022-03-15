@@ -542,7 +542,7 @@ public class StringUtilities {
 	 * @return an array of lines; an empty array if the given value is null or empty
 	 */
 	public static String[] toLines(String s, boolean preserveTokens) {
-		String[] lines = null;
+		String[] lines;
 		if (preserveTokens) {
 			lines = StringUtils.splitPreserveAllTokens(s, '\n');
 		}
@@ -1070,7 +1070,7 @@ public class StringUtilities {
 	public static String convertControlCharsToEscapeSequences(String str) {
 		StringBuilder builder = new StringBuilder();
 		int strLength = str.length();
-		int charCount = 1;
+		int charCount;
 		for (int i = 0; i < strLength; i += charCount) {
 			int codePoint = str.codePointAt(i);
 			charCount = Character.charCount(codePoint);

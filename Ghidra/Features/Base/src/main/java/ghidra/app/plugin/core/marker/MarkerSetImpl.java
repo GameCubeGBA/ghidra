@@ -45,7 +45,7 @@ abstract class MarkerSetImpl implements MarkerSet {
 
 	private String name;
 	protected String description;
-	protected int priority = 0;
+	protected int priority;
 	protected boolean active = true;
 
 	protected AddressSetCollection markers;

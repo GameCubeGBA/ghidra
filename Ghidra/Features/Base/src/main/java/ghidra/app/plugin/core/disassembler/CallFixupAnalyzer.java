@@ -199,7 +199,7 @@ public class CallFixupAnalyzer extends AbstractAnalyzer {
 
 	private String getCallFixupNameForFunction(Map<String, String> targetFixupMap,
 			Function function) {
-		String fixupName = null;
+		String fixupName;
 
 		String funcName = function.getName();
 

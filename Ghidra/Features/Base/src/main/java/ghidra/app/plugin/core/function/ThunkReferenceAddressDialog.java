@@ -212,7 +212,7 @@ public class ThunkReferenceAddressDialog extends DialogComponentProvider {
 			// ignore
 		}
 
-		Symbol candidateSymbol2 = null;
+		Symbol candidateSymbol2;
 		if (namespace == null) {
 			// look for original external symbols not indexed by symbol table
 			try {

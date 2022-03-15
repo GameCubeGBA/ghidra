@@ -43,7 +43,7 @@ public class MemoryBufferImpl implements MutableMemBuffer {
 	private int startAddrIndex = 0;
 	private int minOffset = 0;
 	private int maxOffset = -1;
-	private int threshold = 0;
+	private int threshold;
 
 	/**
 	 * Construct a new MemoryBufferImpl

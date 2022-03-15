@@ -45,7 +45,7 @@ public class VfTableModel extends AbstractCreateDataTypeModel {
 	private Program lastProgram;
 	private DataType lastDataType;
 	private int lastElementCount = NO_LAST_COUNT;
-	private int elementCount = 0;
+	private int elementCount;
 
 	/**
 	 * Creates the model for the vf table data.

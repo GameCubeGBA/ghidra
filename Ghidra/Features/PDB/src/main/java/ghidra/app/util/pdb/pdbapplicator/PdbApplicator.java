@@ -1639,8 +1639,7 @@ public class PdbApplicator {
 		else if (!plate.endsWith("\n")) {
 			plate += '\n';
 		}
-		plate += comment;
-		SetCommentCmd.createComment(program, address, comment, CodeUnit.PLATE_COMMENT);
+        SetCommentCmd.createComment(program, address, comment, CodeUnit.PLATE_COMMENT);
 		return true;
 	}
 

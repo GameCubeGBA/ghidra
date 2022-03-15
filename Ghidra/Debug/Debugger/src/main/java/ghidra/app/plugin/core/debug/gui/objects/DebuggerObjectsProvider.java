@@ -215,7 +215,7 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 	protected Runnable repeatLastSet = () -> {
 	};
 
-	private boolean asTree = true;
+	private boolean asTree;
 	private MyObjectListener listener = new MyObjectListener();
 
 	public DebuggerMethodInvocationDialog configDialog;
@@ -770,7 +770,7 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 			TargetObject to = (TargetObject) val;
 			List<String> path = to.getPath();
 			boolean isLink = PathUtils.isLink(parent.getPath(), xkey, path);
-			boolean isMethod = false;
+			boolean isMethod;
 			isMethod = to instanceof TargetMethod;
 			if (!(val instanceof DummyTargetObject) && !isMethod) {
 				return new ObjectContainer(to, isLink ? xkey : null);

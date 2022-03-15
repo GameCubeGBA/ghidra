@@ -62,8 +62,7 @@ public class GTreeExpandPathsTask extends GTreeTask {
 				return;
 			}
 			allChildren = node.getChildren();
-			parent = node;
-		}
+        }
 	}
 
 	private GTreeNode findNode(List<GTreeNode> children, GTreeNode node) {

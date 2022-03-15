@@ -73,7 +73,7 @@ class ArchiveTask extends Task {
 	 * @throws IOException
 	 */
 	private boolean writeProject(TaskMonitor monitor) throws IOException {
-		boolean ok = false;
+		boolean ok;
 
 		JarOutputStream jarOut = new JarOutputStream(new FileOutputStream(jarFile));
 		// exclude the lock files on programs

@@ -242,7 +242,7 @@ public class VTMarkupItemsTableProvider extends ComponentProviderAdapter
 
 					ListingCodeComparisonPanel dualListingPanel =
 						functionComparisonPanel.getDualListingPanel();
-					VTMarkupItem markupItem = null;
+					VTMarkupItem markupItem;
 					if (table.getSelectedRowCount() == 1) {
 						// we get out the model here in case it has been wrapped by one of the filters
 						RowObjectTableModel<VTMarkupItem> model =

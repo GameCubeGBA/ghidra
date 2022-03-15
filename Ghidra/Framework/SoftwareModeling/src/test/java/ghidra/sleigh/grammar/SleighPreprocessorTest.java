@@ -77,8 +77,8 @@ public class SleighPreprocessorTest extends AbstractGenericTest {
 			BufferedReader target = new BufferedReader(new FileReader(targetFile));
 
 			int lineno = 1;
-			String actualLine = null;
-			String targetLine = null;
+			String actualLine;
+			String targetLine;
 
 			do {
 				debug("line number " + lineno);

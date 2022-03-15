@@ -392,7 +392,7 @@ class DetachedWindowNode extends WindowNode {
 	}
 
 	private JDialog createDialog(RootNode root) {
-		JDialog newWindow = null;
+		JDialog newWindow;
 		if (root.isModal()) {
 			newWindow = new JDialog(root.getModalDialog(), generateTitle());
 		}

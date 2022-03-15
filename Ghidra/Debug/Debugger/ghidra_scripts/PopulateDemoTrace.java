@@ -283,7 +283,7 @@ public class PopulateDemoTrace extends GhidraScript {
 		int stack1offset = 0;
 		int stack2offset = 0;
 		int pc1 = 0;
-		int pc2 = 0;
+		int pc2;
 
 		/**
 		 * For clarity, I will add each tick to the trace in its own transaction. The

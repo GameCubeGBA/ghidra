@@ -263,8 +263,7 @@ public class CodeUnitFormat {
 		// This corresponds to what we will refer to as Extended Reference Markup"
 		if (performExtendedMarkup(instr, primaryRef, referencedVariable, representationList)) {
 			primaryRef = null;
-			referencedVariable = null;
-		}
+        }
 
 		return new OperandRepresentationList(representationList, primaryRef != null);
 	}

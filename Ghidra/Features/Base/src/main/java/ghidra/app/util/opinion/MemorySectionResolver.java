@@ -527,8 +527,7 @@ public abstract class MemorySectionResolver {
 					fileOffset = addSectionRange(section, targetMinPhysicalAddr,
 						physicalRangeMinAddr.subtract(1),
 						fileOffset, rangeList);
-					targetMinPhysicalAddr = physicalRangeMinAddr;
-				}
+                }
 
 				// Handle overlap/conflict region
 				fileOffset = reconcileSectionRangeOverlap(section, physicalRangeMinAddr,

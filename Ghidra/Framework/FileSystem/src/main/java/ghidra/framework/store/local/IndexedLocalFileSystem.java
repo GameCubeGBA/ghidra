@@ -264,7 +264,7 @@ public class IndexedLocalFileSystem extends LocalFileSystem {
 			throw new IOException("Unexpected attempt to write index for read-only filesystem");
 		}
 
-		MessageDigest messageDigest = null;
+		MessageDigest messageDigest;
 		try {
 			messageDigest = MessageDigest.getInstance("MD5");
 		}
@@ -434,7 +434,7 @@ public class IndexedLocalFileSystem extends LocalFileSystem {
 		// TODO: current implementation does not attempt to avoid concurrent read/write
 		// access to index/journal files
 
-		MessageDigest messageDigest = null;
+		MessageDigest messageDigest;
 		try {
 			messageDigest = MessageDigest.getInstance("MD5");
 		}
@@ -1741,7 +1741,7 @@ public class IndexedLocalFileSystem extends LocalFileSystem {
 
 		private static final long serialVersionUID = 1L;
 
-		boolean canUpgrade = false;
+		boolean canUpgrade;
 
 		IndexVersionException(String msg, boolean canUpgrade) {
 			super(msg);

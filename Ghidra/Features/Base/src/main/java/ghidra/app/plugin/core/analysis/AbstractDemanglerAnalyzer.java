@@ -220,7 +220,7 @@ public abstract class AbstractDemanglerAnalyzer extends AbstractAnalyzer {
 	protected DemangledObject demangle(String mangled, Address address, DemanglerOptions options,
 			MessageLog log) {
 
-		DemangledObject demangled = null;
+		DemangledObject demangled;
 		try {
 			demangled = doDemangle(mangled, options, log);
 		}

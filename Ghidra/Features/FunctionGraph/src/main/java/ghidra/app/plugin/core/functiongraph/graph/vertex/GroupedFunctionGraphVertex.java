@@ -49,7 +49,7 @@ public class GroupedFunctionGraphVertex extends AbstractFunctionGraphVertex {
 	 * values allow us to restore the vertices to the place from whence they came (even though 
 	 * the locations may be irrelevant).
 	 */
-	private Map<FGVertex, Point2D> preGroupingVertexLocations = new HashMap<>();
+	private Map<FGVertex, Point2D> preGroupingVertexLocations;
 
 	private boolean doHashCode = true;
 	private int hashCode;

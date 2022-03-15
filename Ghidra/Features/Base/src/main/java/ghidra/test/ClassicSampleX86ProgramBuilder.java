@@ -318,7 +318,7 @@ public class ClassicSampleX86ProgramBuilder extends ProgramBuilder {
 				"33 c0 83 7d fc 02 0f 95 c0 5f 5e 5b c9 c2 04 00");
 
 		FunctionManager fm = getProgram().getFunctionManager();
-		Function function = null;
+		Function function;
 		if (disableAnalysis) {
 			function = createFunction("0x01002239");
 		}

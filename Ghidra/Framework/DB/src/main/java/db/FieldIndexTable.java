@@ -480,7 +480,7 @@ public class FieldIndexTable extends IndexTable {
 					? indexKeyType.newIndexField(maxValue, primaryKeyType.getMaxValue())
 					: null;
 
-			IndexField start = null;
+			IndexField start;
 			if (after && startValue == null && maxValue == null) {
 				indexIterator = indexTable.fieldKeyIterator(min, max, !after);
 				if (indexIterator.hasNext()) {

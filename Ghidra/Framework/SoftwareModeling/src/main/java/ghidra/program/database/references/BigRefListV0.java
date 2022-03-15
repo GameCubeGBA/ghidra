@@ -209,7 +209,7 @@ class BigRefListV0 extends RefList {
 
 		SourceType source = flags.getSource();
 
-		long offsetOrShift = 0;
+		long offsetOrShift;
 
 		if (flags.hasSymbolID()) {
 			symbolID = rec.getLongValue(SYMBOL_ID_COL);

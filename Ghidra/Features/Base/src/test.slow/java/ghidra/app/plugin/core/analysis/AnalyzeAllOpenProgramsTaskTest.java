@@ -359,7 +359,7 @@ public class AnalyzeAllOpenProgramsTaskTest extends AbstractGhidraHeadedIntegrat
 		AnalysisPanel panel = (AnalysisPanel) getInstanceField("panel", dialog);
 		final TableModel model = (TableModel) getInstanceField("model", panel);
 		int rowCount = model.getRowCount();
-		int row = 0;
+		int row;
 		for (row = 0; row < rowCount; row++) {
 			String rowName = (String) model.getValueAt(row, 1);
 			if (name.equals(rowName)) {

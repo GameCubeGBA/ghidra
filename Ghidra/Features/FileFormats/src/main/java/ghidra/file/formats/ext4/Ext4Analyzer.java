@@ -132,7 +132,7 @@ public class Ext4Analyzer extends FileFormatAnalyzer {
 			}
 			long offset = inodeTableBlockOffset * blockSize;
 			reader.setPointerIndex(offset);
-			Address address = null;
+			Address address;
 			try {
 				address = toAddr(program, offset);
 			} catch (Exception e ) {
@@ -268,7 +268,7 @@ public class Ext4Analyzer extends FileFormatAnalyzer {
 
 	private int getSuperBlockStart(BinaryReader reader) {
 		try {
-			int padding = -1;
+			int padding;
 			int padStart = 0;
 			boolean isPadding = false;
 			while( padStart < 1024 ) {

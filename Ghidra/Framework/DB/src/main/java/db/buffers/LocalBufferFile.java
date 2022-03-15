@@ -857,7 +857,7 @@ public class LocalBufferFile implements BufferFile {
 			return false;
 		}
 
-		boolean success = false;
+		boolean success;
 		try {
 			try {
 				raf.close();

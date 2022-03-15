@@ -663,7 +663,7 @@ public class DecompilerPanel extends JPanel implements FieldMouseListener, Field
 	}
 
 	void setSelection(ProgramSelection selection) {
-		FieldSelection fieldSelection = null;
+		FieldSelection fieldSelection;
 		if (selection == null || selection.isEmpty()) {
 			fieldSelection = new FieldSelection();
 		}
@@ -1249,7 +1249,7 @@ public class DecompilerPanel extends JPanel implements FieldMouseListener, Field
 
 			int length = Math.abs(endLine - startLine);
 			long offset = Math.round(length * percentComplete);
-			int current = 0;
+			int current;
 			if (startLine > endLine) {
 				// backwards
 				current = (int) (startLine - offset);

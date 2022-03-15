@@ -269,8 +269,7 @@ public class ListingMergeManager implements MergeResolver, ListingMergeConstants
 			}
 		}
 		finally {
-			monitor = null;
-		}
+        }
 		mergeManager.setCompleted(LISTING_PHASE);
 	}
 
@@ -294,9 +293,8 @@ public class ListingMergeManager implements MergeResolver, ListingMergeConstants
 		int progressMin = 0;
 		int progressMax = 100;
 		externalFunctionMerger.autoMerge(progressMin, progressMax, monitor);
-		progressMin = progressMax;
 
-		mergeManager.showProgressIcon(false);
+        mergeManager.showProgressIcon(false);
 
 		externalFunctionMerger.mergeConflicts(conflictOption, conflictInfoPanel, monitor);
 

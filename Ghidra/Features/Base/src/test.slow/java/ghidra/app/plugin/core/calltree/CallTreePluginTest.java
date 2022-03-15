@@ -928,7 +928,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 
 		SetFunctionNameCmd cmd =
 			new SetFunctionNameCmd(function.getEntryPoint(), newName, SourceType.USER_DEFINED);
-		boolean result = false;
+		boolean result;
 
 		int txID = program.startTransaction("Test - Create Function");
 		try {

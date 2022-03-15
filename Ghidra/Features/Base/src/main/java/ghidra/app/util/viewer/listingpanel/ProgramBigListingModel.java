@@ -196,8 +196,7 @@ public class ProgramBigListingModel implements ListingModel, FormatModelListener
 					format.addLayouts(list, 0, new DataProxy(this, program, d));
 				}
 			}
-			dataList = null;
-		}
+        }
 
 		if (!list.isEmpty()) {
 			return new MultiRowLayout(list.toArray(new RowLayout[0]), indexSize);

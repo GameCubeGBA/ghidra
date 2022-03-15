@@ -73,8 +73,7 @@ class AddressMapDBAdapterV1 extends AddressMapDBAdapter {
 			if (deleted || space == null) {
 				String deletedName = "Deleted_" + spaceName;
 				if (segment != 0) {
-					spaceName += "_" + segment;
-				}
+                }
 				GenericAddressSpace sp = new GenericAddressSpace(deletedName, 32,
 					AddressSpace.TYPE_DELETED, (int) rec.getKey());
 				sp.setShowSpaceName(true);

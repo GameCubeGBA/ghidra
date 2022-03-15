@@ -177,8 +177,7 @@ public class StructureEditorLockedActions3Test extends AbstractStructureEditorLo
 		dialog = waitForDialogComponent(NumberInputDialog.class);
 		assertNotNull(dialog);
 		okInput(dialog, 8);
-		dialog = null;
-		waitUntilDialogProviderGone(NumberInputDialog.class, 2000);
+        waitUntilDialogProviderGone(NumberInputDialog.class, 2000);
 		assertEquals(29, getModel().getLength());
 		assertEquals(8, getModel().getNumComponents());
 		assertTrue(getDataType(4).isEquivalent(dt));

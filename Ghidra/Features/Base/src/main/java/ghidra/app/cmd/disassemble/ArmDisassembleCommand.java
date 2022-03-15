@@ -78,7 +78,7 @@ public class ArmDisassembleCommand extends DisassembleCommand {
 
 		// get the TMode register and set accordingly
 		Register tmodeReg = program.getProgramContext().getRegister("TMode");
-		RegisterValue tmodeValue = null;
+		RegisterValue tmodeValue;
 
 		// if doing thumb, and have no Tmode reg, no way to do disassemble in thumb
 		if (tmodeReg == null) {

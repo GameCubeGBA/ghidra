@@ -79,7 +79,7 @@ public class DataTypeNode extends DataTypeTreeNode {
 			return DataTypeUtils.getFavoriteIcon(isCut);
 		}
 
-		Icon icon = null;
+		Icon icon;
 		if (dataType instanceof BuiltInDataType) {
 			icon = DataTypeUtils.getBuiltInIcon(isCut);
 		}
@@ -145,7 +145,6 @@ public class DataTypeNode extends DataTypeTreeNode {
 		catch (InvalidNameException exc) {
 			String msg = exc.getMessage();
 			if (msg == null) {
-				msg = "Invalid name specified: " + newValue;
 			}
 			Msg.showError(getClass(), null, "Invalid Name Specified", exc.getMessage());
 		}

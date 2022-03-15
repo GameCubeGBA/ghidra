@@ -151,7 +151,7 @@ public class ProgramMemoryUtil {
 	private static void copyByteRange(Memory toMem, Memory fromMem, AddressRange range)
 			throws MemoryAccessException {
 		// Copy the bytes for this range
-		int length = 0;
+		int length;
 		Address writeAddress = range.getMinAddress();
 		for (long len = range.getLength(); len > 0; len -= length) {
 			length = (int) Math.min(len, Integer.MAX_VALUE);
@@ -315,8 +315,8 @@ public class ProgramMemoryUtil {
 				continue;
 			}
 
-			long addrLong = 0;
-			long addrLongShifted = 0;
+			long addrLong;
+			long addrLongShifted;
 			try {
 				if (toAddress instanceof SegmentedAddress) {
 					short offsetShort = memory.getShort(a);
@@ -671,7 +671,7 @@ public class ProgramMemoryUtil {
 
 			Address start = block.getStart();
 			Address end = block.getEnd();
-			Address found = null;
+			Address found;
 			for (;;) {
 				monitor.checkCanceled();
 

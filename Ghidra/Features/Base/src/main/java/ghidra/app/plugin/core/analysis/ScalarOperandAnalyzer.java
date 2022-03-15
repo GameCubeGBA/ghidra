@@ -204,7 +204,7 @@ public class ScalarOperandAnalyzer extends AbstractAnalyzer {
 
 	boolean addReference(Program program, Instruction instr, int opIndex, AddressSpace space,
 			Scalar scalar) {
-		Address addr = null;
+		Address addr;
 		if (space.isOverlaySpace()) {   // don't do this into overlay spaces.
 			return false;
 		}
@@ -301,7 +301,7 @@ public class ScalarOperandAnalyzer extends AbstractAnalyzer {
 		AddressTable lastGoodTable = null;
 		int i;
 		for (i = 0; i < MAX_NEG_ENTRIES; i++) {
-			Address negAddr = null;
+			Address negAddr;
 			try {
 				negAddr = addr.subtractNoWrap((entryLen + 3) * entryLen);
 			}

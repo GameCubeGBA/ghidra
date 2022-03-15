@@ -476,7 +476,7 @@ public abstract class VisualEdgeRenderer<V extends VisualVertex, E extends Visua
 	 */
 	public Shape getFullShape(RenderContext<V, E> rc, Layout<V, E> layout, V vertex) {
 		Function<? super V, Shape> vertexShaper = rc.getVertexShapeTransformer();
-		Shape shape = null;
+		Shape shape;
 		if (vertexShaper instanceof VisualGraphVertexShapeTransformer) {
 			@SuppressWarnings("unchecked")
 			VisualGraphVertexShapeTransformer<V> vgShaper =
@@ -504,7 +504,7 @@ public abstract class VisualEdgeRenderer<V extends VisualVertex, E extends Visua
 	protected Shape getCompactShape(RenderContext<V, E> rc, Layout<V, E> layout, V vertex) {
 
 		Function<? super V, Shape> vertexShaper = rc.getVertexShapeTransformer();
-		Shape shape = null;
+		Shape shape;
 		if (vertexShaper instanceof VisualGraphVertexShapeTransformer) {
 			@SuppressWarnings("unchecked")
 			VisualGraphVertexShapeTransformer<V> vgShaper =

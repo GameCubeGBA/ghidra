@@ -344,7 +344,7 @@ public class ProgramMerge implements PropertyVisitor {
 			throws MemoryAccessException {
 
 		// Copy the bytes for this range
-		int length = 0;
+		int length;
 		Address fromWriteAddress = fromAddressRange.getMinAddress();
 		for (long len = fromAddressRange.getLength(); len > 0; len -= length) {
 			length = (int) Math.min(len, Integer.MAX_VALUE);
@@ -1545,7 +1545,7 @@ public class ProgramMerge implements PropertyVisitor {
 			return;
 		}
 
-		String typeStr = "Unknown";
+		String typeStr;
 		int cuCommentType;
 		switch (type) {
 			case ProgramMergeFilter.PLATE_COMMENTS:

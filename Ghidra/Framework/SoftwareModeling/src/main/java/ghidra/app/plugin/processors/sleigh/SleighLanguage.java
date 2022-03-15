@@ -394,7 +394,7 @@ public class SleighLanguage implements Language {
 			}
 		}
 
-		SleighInstructionPrototype res = null;
+		SleighInstructionPrototype res;
 
 		try {
 			SleighInstructionPrototype newProto =

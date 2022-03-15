@@ -58,8 +58,8 @@ class StringDiffUtils {
 			return new StringDiff[] { StringDiff.allTextReplaced(s2) };
 		}
 
-		int aIndex = 0;
-		int bIndex = 0;
+		int aIndex;
+		int bIndex;
 		int aLastIndex = 0;
 		int bLastIndex = 0;
 		List<StringDiff> results = new LinkedList<>();

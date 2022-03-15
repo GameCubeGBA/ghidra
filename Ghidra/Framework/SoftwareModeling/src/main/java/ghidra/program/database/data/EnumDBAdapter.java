@@ -103,7 +103,7 @@ abstract class EnumDBAdapter {
 
 		DBHandle tmpHandle = new DBHandle();
 		long id = tmpHandle.startTransaction();
-		EnumDBAdapter tmpAdapter = null;
+		EnumDBAdapter tmpAdapter;
 		try {
 			tmpAdapter = new EnumDBAdapterV1(tmpHandle, true);
 			RecordIterator it = oldAdapter.getRecords();

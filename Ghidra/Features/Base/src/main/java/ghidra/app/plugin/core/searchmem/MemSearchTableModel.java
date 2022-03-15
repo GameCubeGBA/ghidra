@@ -32,7 +32,7 @@ public class MemSearchTableModel extends AddressBasedTableModel<MemSearchResult>
 	private Address startAddress;
 	private MemorySearchAlgorithm algorithm;
 
-	private int selectionSize = 1;
+	private int selectionSize;
 
 	MemSearchTableModel(ServiceProvider serviceProvider, int selectionSize, Program program,
 			SearchInfo searchInfo, Address searchStartAddress, ProgramSelection programSelection) {
@@ -81,7 +81,7 @@ public class MemSearchTableModel extends AddressBasedTableModel<MemSearchResult>
 		AddressSet addressSet = new AddressSet();
 		for (int element : rows) {
 			Address minAddr = getAddress(element);
-			Address maxAddr = minAddr;
+			Address maxAddr;
 			try {
 				maxAddr = minAddr.addNoWrap(addOn);
 				addressSet.addRange(minAddr, maxAddr);

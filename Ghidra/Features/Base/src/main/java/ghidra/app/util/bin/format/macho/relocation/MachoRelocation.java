@@ -257,7 +257,7 @@ public class MachoRelocation {
 	 * @return The relocation's target {@link Symbol}, or null if one was not found
 	 */
 	private Symbol findTargetSymbol(RelocationInfo relocInfo) {
-		Symbol sym = null;
+		Symbol sym;
 		NList nlist = machoHeader.getFirstLoadCommand(SymbolTableCommand.class)
 				.getSymbolAt(relocInfo.getValue());
 		Address addr = space.getAddress(nlist.getValue());

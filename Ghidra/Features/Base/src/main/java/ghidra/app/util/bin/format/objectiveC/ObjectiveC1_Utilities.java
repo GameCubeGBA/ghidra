@@ -300,7 +300,7 @@ public final class ObjectiveC1_Utilities {
 
 			ObjectiveC1_Utilities.setThumbBit(state, address);
 
-			BackgroundCommand command = null;
+			BackgroundCommand command;
 
 			command = new DisassembleCommand(address, null, true);
 			command.applyTo(state.program, state.monitor);

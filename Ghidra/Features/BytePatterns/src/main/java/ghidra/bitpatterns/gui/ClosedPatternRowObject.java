@@ -50,7 +50,7 @@ public class ClosedPatternRowObject {
 
 	private PatternInfoRowObject getPatternInfo(String minedString, boolean isBinary,
 			PatternType type, ContextRegisterFilter cRegFilter) {
-		DittedBitSequence seq = null;
+		DittedBitSequence seq;
 		if (isBinary) {
 			seq = getDittedBitSequenceBinary(minedString);
 		}
@@ -155,7 +155,7 @@ public class ClosedPatternRowObject {
 
 		int minSupport = (int) (database.getTotalNumSeqs() * minPercentage);
 		ClosedSequenceMiner miner = new ClosedSequenceMiner(database, minSupport);
-		Set<FrequentSequence> closedSeqs = null;
+		Set<FrequentSequence> closedSeqs;
 		//for testing
 		if (parent == null) {
 			closedSeqs = miner.mineClosedSequences(TaskMonitor.DUMMY);

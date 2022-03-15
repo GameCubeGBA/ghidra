@@ -104,7 +104,7 @@ public class TOCConverter {
 		PrintWriter out = new PrintWriter(new FileOutputStream(outFilename));
 		BufferedReader reader = new BufferedReader(new FileReader(sourceFilename));
 
-		String line = null;
+		String line;
 		while ((line = reader.readLine()) != null) {
 			if (line.indexOf(TOCITEM) > 0) {
 				TOCItem item = parseLine(line);
@@ -178,7 +178,7 @@ public class TOCConverter {
 		PrintWriter out = new PrintWriter(new FileOutputStream(tempFile));
 		BufferedReader reader = new BufferedReader(new FileReader(sourceFilename));
 		boolean endLineFound = true;
-		String line = null;
+		String line;
 		while ((line = reader.readLine()) != null) {
 			if (line.startsWith("<!DOCTYPE")) {
 				if (line.endsWith(">")) {

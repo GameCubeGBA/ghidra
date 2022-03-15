@@ -114,7 +114,7 @@ class DnDTreeCellRenderer extends DefaultTreeCellRenderer {
 		ProgramNode node = (ProgramNode) value;
 
 		Group group = node.getGroup();
-		Icon icon = null;
+		Icon icon;
 		boolean isInView = node.isInView();
 
 		if (group == null && !node.isRoot()) {
@@ -172,7 +172,7 @@ class DnDTreeCellRenderer extends DefaultTreeCellRenderer {
 	}
 
 	private Icon getFolderIcon(boolean expanded, boolean leaf, ProgramNode node, boolean isInView) {
-		Icon icon = null;
+		Icon icon;
 		if (leaf && node.isRoot()) {
 			if (isInView) {
 				icon = iconMap.get(VIEWED_CLOSED_FOLDER);
@@ -209,7 +209,7 @@ class DnDTreeCellRenderer extends DefaultTreeCellRenderer {
 	}
 
 	private Icon processDeletedNode(boolean expanded, ProgramNode node, boolean isInView) {
-		Icon icon = null;
+		Icon icon;
 		if (expanded) {
 			if (isInView) {
 				icon = iconMap.get(DISABLED_VIEWED_OPEN_FOLDER);
@@ -235,7 +235,7 @@ class DnDTreeCellRenderer extends DefaultTreeCellRenderer {
 	}
 
 	private Icon processLeafNode(ProgramNode node, boolean isInView) {
-		Icon icon = null;
+		Icon icon;
 		// empty module
 		if (node.isDeleted()) {
 			if (isInView) {

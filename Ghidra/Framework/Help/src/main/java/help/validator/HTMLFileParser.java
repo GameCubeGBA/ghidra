@@ -110,7 +110,7 @@ public class HTMLFileParser {
 	private static TagBlock getTagBody(LineNumberReader rdr, Line line) throws IOException {
 
 		String tagBody = "";
-		int tagEnd = -1;
+		int tagEnd;
 		while ((tagEnd = line.indexOf('>')) < 0) {
 			tagBody += line.text + " ";
 			String nextLineText = rdr.readLine();

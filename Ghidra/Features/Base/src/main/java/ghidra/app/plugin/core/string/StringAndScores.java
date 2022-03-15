@@ -26,7 +26,7 @@ import ghidra.util.Msg;
  */
 public class StringAndScores {
 
-	private String originalString = "", scoredString = "";
+	private String originalString, scoredString;
 	private int[] asciiCodesForString;
 	private volatile double ngramScore, scoreThreshold;
 

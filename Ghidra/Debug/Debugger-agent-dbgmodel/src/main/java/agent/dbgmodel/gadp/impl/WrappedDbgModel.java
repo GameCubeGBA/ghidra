@@ -502,7 +502,7 @@ public class WrappedDbgModel
 	// SYSTEM OBJECT INTERFACE
 
 	public List<DebugThreadId> getThreadIds() {
-		List<DebugThreadId> ids = null;
+		List<DebugThreadId> ids;
 		/*
 		if (USE_CLIENT) {
 			System.err.println("getThreadIds");
@@ -925,7 +925,7 @@ public class WrappedDbgModel
 	}
 
 	public byte[] encodeAsBytes(ModelObject register) {
-		DebugValue dv = null;
+		DebugValue dv;
 		Object value = register.getValue();
 		if (value instanceof Short) {
 			Short lval = (Short) value;

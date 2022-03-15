@@ -143,7 +143,7 @@ public class RelocationManager implements RelocationTable, ManagerDB {
 
 	@Override
 	public Relocation getRelocationAfter(Address addr) {
-		RecordIterator ri = null;
+		RecordIterator ri;
 		try {
 			ri = adapter.iterator(addr);
 			if (ri.hasNext()) {

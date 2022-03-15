@@ -520,7 +520,7 @@ public abstract class ProcessorEmulatorTestAdapter extends TestCase implements E
 				"Class has no public constructor TestCase(String name)", null);
 		}
 
-		ProcessorEmulatorTestAdapter instance = null;
+		ProcessorEmulatorTestAdapter instance;
 		try {
 			instance = (ProcessorEmulatorTestAdapter) constructor.newInstance((String) null);
 		}
@@ -1833,7 +1833,7 @@ public abstract class ProcessorEmulatorTestAdapter extends TestCase implements E
 
 		testControlBlocks = new ArrayList<>();
 
-		List<PCodeTestFile> testFiles = null;
+		List<PCodeTestFile> testFiles;
 
 		Msg.info(this, "Locating " + processorDesignator + " P-Code test binaries in: " +
 			resourcesTestDataDir);
@@ -1853,7 +1853,7 @@ public abstract class ProcessorEmulatorTestAdapter extends TestCase implements E
 			Program program = null;
 			boolean usingCachedGZF = false;
 			try {
-				File absoluteGzfFilePath = null;
+				File absoluteGzfFilePath;
 				boolean analyze = false; // if true program will be analyzed and cached
 				if (fileReferencePath.endsWith(GZF_FILE_EXT)) {
 					// TODO: this does not benefit from TestEnv DB cache

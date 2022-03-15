@@ -61,7 +61,7 @@ public class BoundImportForwarderRef implements StructConverter, ByteArrayConver
 			throws IOException {
         timeDateStamp    = reader.readInt  (readerIndex); readerIndex += BinaryReader.SIZEOF_INT;
         offsetModuleName = reader.readShort(readerIndex); readerIndex += BinaryReader.SIZEOF_SHORT;
-        reserved         = reader.readShort(readerIndex); readerIndex += BinaryReader.SIZEOF_SHORT;
+        reserved         = reader.readShort(readerIndex);
         if (offsetModuleName < 0) {
         	Msg.error(this, "Invalid offsetModuleName "+Integer.toHexString(offsetModuleName));
         	return;
@@ -81,8 +81,7 @@ public class BoundImportForwarderRef implements StructConverter, ByteArrayConver
 		dc.getBytes(offsetModuleName, bytes, pos);
 		pos += BinaryReader.SIZEOF_SHORT;
 		dc.getBytes(reserved, bytes, pos);
-		pos += BinaryReader.SIZEOF_SHORT;
-		return bytes;
+        return bytes;
 	}
 
 	/**

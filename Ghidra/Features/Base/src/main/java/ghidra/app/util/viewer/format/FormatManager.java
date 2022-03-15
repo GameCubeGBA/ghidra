@@ -63,7 +63,7 @@ public class FormatManager implements OptionsChangeListener {
 	private FieldFactory[] factorys;
 	private ToolOptions fieldOptions;
 	private ToolOptions displayOptions;
-	private boolean initialized = false;
+	private boolean initialized;
 	private MultipleHighlighterProvider highlightProvider;
 	private ServiceProvider serviceProvider;
 	private int arrayValuesPerLine = 1;

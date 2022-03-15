@@ -62,8 +62,7 @@ class BatchProjectDestinationPanel extends JPanel {
 		savePanel.setLayout(gbl);
 
 		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.anchor = GridBagConstraints.NORTH;
-		gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.insets.top = 0;
 		gbc.insets.left = 0;
 		gbc.insets.right = 0;

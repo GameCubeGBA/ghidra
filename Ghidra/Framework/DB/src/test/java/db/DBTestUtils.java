@@ -638,7 +638,7 @@ public class DBTestUtils {
 	}
 
 	static byte getRandomByte(byte min, byte max) {
-		byte value = 0;
+		byte value;
 		do {
 			value = (byte) random.nextInt();
 		}
@@ -647,7 +647,7 @@ public class DBTestUtils {
 	}
 
 	static short getRandomShort(short min, short max) {
-		short value = 0;
+		short value;
 		do {
 			value = (short) random.nextInt();
 		}
@@ -656,7 +656,7 @@ public class DBTestUtils {
 	}
 
 	static int getRandomInt(int min, int max) {
-		int value = 0;
+		int value;
 		do {
 			value = random.nextInt();
 		}
@@ -665,7 +665,7 @@ public class DBTestUtils {
 	}
 
 	static long getRandomLong(long min, long max) {
-		long value = 0;
+		long value;
 		do {
 			value = random.nextLong();
 		}

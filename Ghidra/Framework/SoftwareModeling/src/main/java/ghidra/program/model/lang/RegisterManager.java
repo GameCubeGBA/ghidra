@@ -22,7 +22,7 @@ import ghidra.program.model.address.*;
 public class RegisterManager {
 
 	private List<Register> registers;
-	private Map<String, Register> registerNameMap = new HashMap<String, Register>(); // include aliases and case-variations
+	private Map<String, Register> registerNameMap; // include aliases and case-variations
 
 	private List<String> registerNames; // alphabetical sorted list, excludes aliases
 	private List<Register> contextRegisters;

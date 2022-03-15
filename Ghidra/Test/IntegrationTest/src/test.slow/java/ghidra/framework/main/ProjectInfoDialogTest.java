@@ -77,7 +77,7 @@ public class ProjectInfoDialogTest extends AbstractGhidraHeadedIntegrationTest {
 
 		showViewProjectInfoDialog();
 
-		RepositoryAdapter rep = null;
+		RepositoryAdapter rep;
 		try {
 			// this can throw a NotConnectedException
 			System.err.println(getClass().getName() + "\tstarting server...");

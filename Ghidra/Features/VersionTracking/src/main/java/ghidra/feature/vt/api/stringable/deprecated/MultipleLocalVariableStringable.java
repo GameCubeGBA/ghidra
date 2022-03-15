@@ -26,7 +26,7 @@ public class MultipleLocalVariableStringable extends Stringable {
     
     private static final String CUSTOM_DELIMITER = "\n";
     
-    private List<Stringable> localVariableStringables = new ArrayList<Stringable>();    
+    private List<Stringable> localVariableStringables;
 
     public MultipleLocalVariableStringable() {
         this( null );

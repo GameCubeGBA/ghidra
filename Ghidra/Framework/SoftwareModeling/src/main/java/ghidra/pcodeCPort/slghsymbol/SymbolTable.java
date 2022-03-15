@@ -383,7 +383,7 @@ public class SymbolTable {
 		VectorSTL<SleighSymbol> newsymbol = new VectorSTL<SleighSymbol>();
 
 		// First renumber the scopes
-		SymbolScope scope = null;
+		SymbolScope scope;
 		for (int i = 0; i < table.size(); ++i) {
 			scope = table.get(i);
 			if (scope != null) {
@@ -392,7 +392,7 @@ public class SymbolTable {
 			}
 		}
 		// Now renumber the symbols
-		SleighSymbol sym = null;
+		SleighSymbol sym;
 		for (int i = 0; i < symbollist.size(); ++i) {
 			sym = symbollist.get(i);
 			if (sym != null) {

@@ -38,7 +38,7 @@ public class DisassembleCommand extends BackgroundCommand {
 	private AddressSetView restrictedSet;
 	private AddressSetView exectuableSet;
 	private AddressSet disassembledAddrs;
-	private boolean followFlow = true;
+	private boolean followFlow;
 	private boolean enableAnalysis = true;
 	private DisassemblerContextImpl seedContext;
 	private RegisterValue initialContextValue;

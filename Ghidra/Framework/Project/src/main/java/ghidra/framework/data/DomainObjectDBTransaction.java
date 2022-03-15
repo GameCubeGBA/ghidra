@@ -140,7 +140,7 @@ class DomainObjectDBTransaction implements Transaction {
 	}
 
 	void endEntry(int transactionID, boolean commit) {
-		TransactionEntry entry = null;
+		TransactionEntry entry;
 		try {
 			entry = list.get(transactionID - baseId);
 		}

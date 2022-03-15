@@ -168,7 +168,7 @@ System.out.println("Time to build ResultState = " + t + " msec.");
 		Msg.debug(this, "Switch class: " + s.getClass().getName());
 		
 		Varnode indexValue = s.getIndexValue();
-		Varnode indexValueVarnode = indexValue;	// index value storage container
+		Varnode indexValueVarnode;	// index value storage container
 		SequenceNumber indexValueAssignedAt = null;
 		Msg.debug(this, "Switch index expression: " + indexValue);
 		if (indexValue instanceof VarnodeOperation) {

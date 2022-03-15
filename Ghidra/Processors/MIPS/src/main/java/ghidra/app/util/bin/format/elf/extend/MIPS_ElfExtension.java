@@ -384,7 +384,7 @@ public class MIPS_ElfExtension extends ElfExtension {
 		int mipsMode = elfSymbol.getOther() & 0xf0;
 		long symVal = address.getOffset();
 
-		boolean enableISA = false;
+		boolean enableISA;
 		if ((symVal & 1) != 0) {
 			// Detect 16-bit MIPS code when symbol value bit-0 is set
 			enableISA = true;

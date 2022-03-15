@@ -106,7 +106,7 @@ public class FindRunsOfPointersScript extends GhidraScript {
 		// print out results
 		println("Table address      Dist bet ptrs     Num ptrs       Ref found");
         for (Table ptrTable : tableArray) {
-            String refString = "";
+            String refString;
             if (ptrTable.getRef() != null) {
                 refString = " at " + ptrTable.getRef().toString();
                 println("    " + ptrTable.getTopAddr().toString() + "             " +
@@ -169,7 +169,7 @@ public class FindRunsOfPointersScript extends GhidraScript {
 	byte[] turnAddressIntoBytes(Address addr) {
 //		 turn addresses into bytes
 
-		byte[] addressBytes = new byte[4]; // only 32-bit for now - change later to add 64 bit
+		byte[] addressBytes; // only 32-bit for now - change later to add 64 bit
 		// This is the correct way to do turn a long into an address
 		long addrLong = addr.getOffset();
 

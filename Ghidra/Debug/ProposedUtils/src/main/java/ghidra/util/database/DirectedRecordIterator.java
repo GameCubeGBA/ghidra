@@ -40,7 +40,7 @@ public interface DirectedRecordIterator extends DirectedIterator<DBRecord> {
 			DBRecord next = findFirst();
 
 			private DBRecord findFirst() throws IOException {
-				DBRecord r = null;
+				DBRecord r;
 				while (it.hasNext()) {
 					r = it.next();
 					if (r.getFieldValue(columnIndex).equals(exclude)) {

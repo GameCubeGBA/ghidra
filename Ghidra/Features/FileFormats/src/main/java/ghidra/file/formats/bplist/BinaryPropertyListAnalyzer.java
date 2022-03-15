@@ -101,7 +101,7 @@ public class BinaryPropertyListAnalyzer extends FileFormatAnalyzer {
 
 	private void markupOffsetTable(Program program, BinaryPropertyListTrailer trailer,
 			Address baseAddress, TaskMonitor monitor) throws Exception {
-		DataType offsetDataType = null;
+		DataType offsetDataType;
 		if (trailer.getOffsetSize() == 1) {
 			offsetDataType = new ByteDataType();
 		}

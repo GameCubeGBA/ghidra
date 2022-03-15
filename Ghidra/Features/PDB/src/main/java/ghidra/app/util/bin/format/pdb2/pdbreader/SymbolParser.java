@@ -71,7 +71,7 @@ public class SymbolParser {
 
 		pdb.getPdbReaderMetrics().witnessSymbolTypeId(symbolTypeId);
 
-		AbstractMsSymbol symbol = null;
+		AbstractMsSymbol symbol;
 		switch (symbolTypeId) {
 			// 0x0000 block
 			case CompileFlagsMsSymbol.PDB_ID:

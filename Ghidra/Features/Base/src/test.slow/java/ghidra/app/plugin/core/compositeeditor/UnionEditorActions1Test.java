@@ -287,8 +287,7 @@ public class UnionEditorActions1Test extends AbstractUnionEditorTest {
 		dialog = waitForDialogComponent(NumberInputDialog.class);
 		assertNotNull(dialog);
 		okInput(dialog, 7);
-		dialog = null;
-		waitUntilDialogProviderGone(NumberInputDialog.class, 2000);
+        waitUntilDialogProviderGone(NumberInputDialog.class, 2000);
 		assertEquals(7, model.getLength());
 		assertEquals(1, model.getNumComponents());
 		assertTrue(getDataType(0).isEquivalent(dt));
@@ -381,8 +380,7 @@ public class UnionEditorActions1Test extends AbstractUnionEditorTest {
 		dialog = waitForDialogComponent(NumberInputDialog.class);
 		assertNotNull(dialog);
 		cancelInput(dialog);
-		dialog = null;
-		assertEquals(num, model.getNumComponents());
+        assertEquals(num, model.getNumComponents());
 		assertEquals(1, getLength(2));
 		checkSelection(new int[] { 2 });
 		assertEquals(getDataType(1), dt1);
@@ -672,8 +670,7 @@ public class UnionEditorActions1Test extends AbstractUnionEditorTest {
 		dialog = waitForDialogComponent(NumberInputDialog.class);
 		assertNotNull(dialog);
 		cancelInput(dialog);
-		dialog = null;
-		assertEquals(num, model.getNumComponents());
+        assertEquals(num, model.getNumComponents());
 		assertTrue(getDataType(3).isEquivalent(dt3));
 		assertEquals(dt3.getLength(), model.getComponent(3).getLength());
 	}

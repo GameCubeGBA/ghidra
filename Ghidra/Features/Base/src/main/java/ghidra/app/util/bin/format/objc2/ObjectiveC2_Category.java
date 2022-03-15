@@ -185,7 +185,7 @@ public class ObjectiveC2_Category implements StructConverter {
 		}
 		catch (Exception e) {}
 
-		String string = null;
+		String string;
 		try {
 			string = cls.getData().getName()+'_'+name+'_';
 		}

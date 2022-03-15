@@ -301,8 +301,7 @@ public class FunctionGraphGroupVertices1Test extends AbstractFunctionGraphTest {
 
 		waitForAnimation();// the re-grouping may be using animation, which runs after the graph is loaded
 		functionGraph = graphData.getFunctionGraph();
-		graph = functionGraph;
-		FGVertex vertex = functionGraph.getVertexForAddress(secondMinAddress);
+        FGVertex vertex = functionGraph.getVertexForAddress(secondMinAddress);
 		assertTrue(vertex instanceof GroupedFunctionGraphVertex);
 		assertEquals(secondMaxAddress, vertex.getAddresses().getMaxAddress());
 		outerGroupedVertex = (GroupedFunctionGraphVertex) vertex;
@@ -419,8 +418,7 @@ public class FunctionGraphGroupVertices1Test extends AbstractFunctionGraphTest {
 
 		waitForAnimation();// the re-grouping may be using animation, which runs after the graph is loaded
 		functionGraph = graphData.getFunctionGraph();
-		graph = functionGraph;
-		FGVertex vertex = functionGraph.getVertexForAddress(minAddress);
+        FGVertex vertex = functionGraph.getVertexForAddress(minAddress);
 		assertTrue(vertex instanceof GroupedFunctionGraphVertex);
 		assertEquals(maxAddress, vertex.getAddresses().getMaxAddress());
 

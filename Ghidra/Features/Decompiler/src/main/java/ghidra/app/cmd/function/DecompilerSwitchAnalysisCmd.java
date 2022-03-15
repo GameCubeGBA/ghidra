@@ -338,7 +338,7 @@ public class DecompilerSwitchAnalysisCmd extends BackgroundCommand {
 				usingPointers = true;
 			}
 		}
-		DataType fulldt = null;
+		DataType fulldt;
 
 		if (num > 1 && useArraysForSwitchTables) {
 			fulldt = new ArrayDataType(entrydt, num, size);

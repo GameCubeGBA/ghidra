@@ -625,7 +625,7 @@ public abstract class CompEditorModel extends CompositeEditorModel {
 	 */
 	@Override
 	public DataTypeComponent add(int rowIndex, DataType dt, int dtLength) throws UsrException {
-		DataTypeComponent dtc = null;
+		DataTypeComponent dtc;
 		if (rowIndex < getNumComponents()) {
 			FieldRange range = getSelectedRangeContaining(rowIndex);
 			if ((range == null) ||
@@ -943,7 +943,7 @@ public abstract class CompEditorModel extends CompositeEditorModel {
 		int startIndex = range.getStart().getIndex().intValue();
 		int endIndex = range.getEnd().getIndex().intValue() - 1;
 		int numSelected = endIndex - startIndex + 1;
-		boolean moved = false;
+		boolean moved;
 		int newIndex = startIndex - 1;
 		moved = shiftComponentsUp(startIndex, endIndex);
 		if (moved) {
@@ -967,7 +967,7 @@ public abstract class CompEditorModel extends CompositeEditorModel {
 		int startIndex = range.getStart().getIndex().intValue();
 		int endIndex = range.getEnd().getIndex().intValue() - 1;
 		int numSelected = endIndex - startIndex + 1;
-		boolean moved = false;
+		boolean moved;
 		int newIndex = startIndex + 1;
 		moved = shiftComponentsDown(startIndex, endIndex);
 		if (moved) {
@@ -1172,7 +1172,7 @@ public abstract class CompEditorModel extends CompositeEditorModel {
 			// Get the current data type at the index.
 			DataTypeComponent comp = viewComposite.getComponent(rowIndex);
 			DataType dt = comp.getDataType();
-			int compLength = 0;
+			int compLength;
 			// A single undefined byte.
 			if (dt == DataType.DEFAULT) {
 				compLength = comp.getLength();

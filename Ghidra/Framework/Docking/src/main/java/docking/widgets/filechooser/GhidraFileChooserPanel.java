@@ -60,7 +60,7 @@ public class GhidraFileChooserPanel extends JPanel implements Droppable {
 	private String propertyName;
 	private String defaultFileName;
 	private boolean createBorder;
-	private int mode = OUTPUT_MODE;
+	private int mode;
 	private GhidraFileChooserPanelListener listener;
 	private DropTarget dropTarget;
 	private DropTgtAdapter dropTargetAdapter;

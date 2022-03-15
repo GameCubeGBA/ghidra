@@ -66,7 +66,7 @@ public class AARCH64_ElfRelocationHandler extends ElfRelocationHandler {
 
 		Address symbolAddr = elfRelocationContext.getSymbolAddress(sym);
 		long symbolValue = elfRelocationContext.getSymbolValue(sym);
-		long newValue = 0;
+		long newValue;
 
 		switch (type) {
 			// .xword: (S+A)

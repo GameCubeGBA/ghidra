@@ -42,7 +42,7 @@ public class VtShapeMsType extends AbstractMsType {
 	public VtShapeMsType(AbstractPdb pdb, PdbByteReader reader) throws PdbException {
 		super(pdb, reader);
 		count = reader.parseUnsignedShortVal();
-		int byteVal = 0;
+		int byteVal;
 		int value;
 		VtShapeDescriptorMsProperty descriptor;
 		// It seems that the upper nibble of the the byte is first and the lower nibble is

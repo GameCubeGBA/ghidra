@@ -33,7 +33,7 @@ import ghidra.util.HelpLocation;
 class MipsDisassembleAction extends ListingContextAction {
 
 	private DisassemblerPlugin plugin;
-	private boolean disassembleMIPS16 = false;
+	private boolean disassembleMIPS16;
 	String groupName;
 
 	public MipsDisassembleAction(DisassemblerPlugin plugin, String groupName,
@@ -70,7 +70,7 @@ class MipsDisassembleAction extends ListingContextAction {
 		// Prior to returning, we are resetting the menu action to match that of the language ID.
 		// this could not be done up in the constructor since the program has not been set yet.
 
-		String alternateMips = null;
+		String alternateMips;
 
 		String langName =
 			context.getProgram().getLanguage().getLanguageDescription().getLanguageID().getIdAsString();

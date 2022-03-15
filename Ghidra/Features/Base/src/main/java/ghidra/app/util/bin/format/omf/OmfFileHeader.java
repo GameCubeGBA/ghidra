@@ -148,7 +148,6 @@ public class OmfFileHeader extends OmfRecord {
 		OmfSegmentHeader segment;
 		if ((index & 0x4000)!=0) {
 			subindex = index & 0x3fff;
-			index = 1;
 			segment = createOrFindBorlandSegment(subindex, 1);
 		}
 		else {
@@ -174,7 +173,7 @@ public class OmfFileHeader extends OmfRecord {
 	 * @throws OmfException if the index is malformed
 	 */
 	public OmfSegmentHeader resolveSegment(int index) throws OmfException {
-		int subindex = -1;
+		int subindex;
 		OmfSegmentHeader res;
 		if ((index & 0x4000)!=0) {
 			subindex = index & 0x3fff;

@@ -117,8 +117,8 @@ public class DoubleAttribute<T extends KeyedObject> extends Attribute<T> {
 		/** Compares two Objects. See java.util.Comparator */
 		@Override
 		public int compare(KeyedObject object1, KeyedObject object2) {
-            double value1 = 0;
-			double value2 = 0;
+            double value1;
+			double value2;
 			try {
 				value1 = getValue(object1);
 				try {

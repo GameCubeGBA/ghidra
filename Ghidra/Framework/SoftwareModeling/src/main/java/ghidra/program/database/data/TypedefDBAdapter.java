@@ -103,7 +103,7 @@ abstract class TypedefDBAdapter {
 
 		DBHandle tmpHandle = new DBHandle();
 		long id = tmpHandle.startTransaction();
-		TypedefDBAdapter tmpAdapter = null;
+		TypedefDBAdapter tmpAdapter;
 		try {
 			tmpAdapter = new TypedefDBAdapterV2(tmpHandle, true);
 			RecordIterator it = oldAdapter.getRecords();

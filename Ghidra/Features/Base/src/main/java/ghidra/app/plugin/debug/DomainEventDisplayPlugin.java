@@ -139,7 +139,7 @@ public class DomainEventDisplayPlugin extends Plugin implements DomainObjectList
 			String newValue = null;
 			String affectedObj = null;
 			String dateStr = new Date() + ": ";
-			int eventType = 0;
+			int eventType;
 
 			DomainObjectChangeRecord docr = event.getChangeRecord(i);
 			eventType = docr.getEventType();

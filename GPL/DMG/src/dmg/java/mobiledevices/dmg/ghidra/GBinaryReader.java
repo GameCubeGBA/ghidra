@@ -507,7 +507,7 @@ public class GBinaryReader {
      */
     public String readUnicodeString(long index) throws IOException {
         StringBuilder buffer = new StringBuilder();
-		char c = 0;
+		char c;
 		int i = 0;
         while (i < length()) {
             c  = (char)((provider.readByte(index++) & 0xff));
@@ -532,7 +532,7 @@ public class GBinaryReader {
      */
     public String readUnicodeString(long index, int length) throws IOException {
         StringBuilder buffer = new StringBuilder();
-        char c = 0;
+        char c;
         for (int i = 0 ; i < length*2 ; i+=2) {
             c  = (char)((provider.readByte(index++) & 0xff));
             c += (char)((provider.readByte(index++) & 0xff) << 8);

@@ -222,7 +222,7 @@ public class PropagateX86ConstantReferences extends GhidraScript {
 			SimpleBlockModel model = new SimpleBlockModel(currentProgram);
 			while (iter.hasNext() && !monitor.isCancelled()) {
 				Address loc = iter.next();
-				CodeBlock bl = null;
+				CodeBlock bl;
 				try {
 					bl = model.getFirstCodeBlockContaining(loc, monitor);
 				}
@@ -280,7 +280,7 @@ public class PropagateX86ConstantReferences extends GhidraScript {
 	}
 
 	private void labelTable(Program program, Address loc, ArrayList<Address> targets) {
-		Namespace space = null;
+		Namespace space;
 
 		Instruction start_inst = program.getListing().getInstructionAt(loc);
 

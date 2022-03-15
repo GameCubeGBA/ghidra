@@ -355,8 +355,8 @@ class FidServiceLibraryIngest {
 				name = function.getSymbol().getName();
 			}
 
-			FidHashQuad hashQuad = null;
-			FunctionRow functionRow = null;
+			FidHashQuad hashQuad;
+			FunctionRow functionRow;
 
 			if (function.isThunk()) {
 				if (name != null) {

@@ -1224,7 +1224,7 @@ public class FunctionDBTest extends AbstractGhidraHeadedIntegrationTest
 		f.setCustomVariableStorage(true);
 
 		ByteDataType bdt = new ByteDataType();
-		TypeDef td = null;
+		TypeDef td;
 
 		captureChangeEvent(ChangeManager.DOCR_FUNCTION_CHANGED,
 			ChangeManager.FUNCTION_CHANGED_PARAMETERS);

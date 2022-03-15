@@ -68,8 +68,7 @@ class S_PROCREF extends DebugSymbol {
 					break;
 			}
 
-			ptr += paddingLen;
-		} 
+        }
 	}
 
 	public int getModule() {

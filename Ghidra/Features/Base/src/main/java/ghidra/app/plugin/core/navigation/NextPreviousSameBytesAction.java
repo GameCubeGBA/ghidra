@@ -93,7 +93,7 @@ public class NextPreviousSameBytesAction extends AbstractNextPreviousAction {
 
 	private Address getNextPreviousDifferentByteValueAddress(TaskMonitor monitor, Program program,
 			Address address, boolean forward) throws CancelledException {
-		byte value = 0;
+		byte value;
 		try {
 			value = program.getMemory().getByte(address);
 		}

@@ -63,7 +63,7 @@ public class ApplyDataArchiveAnalyzer extends AbstractAnalyzer {
 			if (monitor.isCancelled()) {
 				break;
 			}
-			DataTypeManager dtm = null;
+			DataTypeManager dtm;
 			try {
 				dtm = service.openDataTypeArchive(archiveName);
 				if (dtm == null) {

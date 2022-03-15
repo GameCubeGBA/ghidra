@@ -65,7 +65,7 @@ public class ISO9660Analyzer extends AbstractAnalyzer {
 
 	private Offset checkSignatures(Program program) {
 		int magicLen = ISO9660Constants.MAGIC_BYTES.length;
-		byte[] signatureArray = new byte[magicLen];
+		byte[] signatureArray;
 
 		try {
 			Options options = program.getOptions("Program Information");
@@ -349,8 +349,8 @@ public class ISO9660Analyzer extends AbstractAnalyzer {
 		//new directories in that level. The first two are always
 		//the 'self' directory and the parent directory
 		if (directoryList.size() > 2) {
-			ISO9660Directory selfDir = null;
-			ISO9660Directory parentDir = null;
+			ISO9660Directory selfDir;
+			ISO9660Directory parentDir;
 
 			// The 'self' describing directory entry
 			selfDir = directoryList.remove(0);

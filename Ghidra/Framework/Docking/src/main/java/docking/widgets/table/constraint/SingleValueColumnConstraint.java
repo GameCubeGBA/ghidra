@@ -35,7 +35,7 @@ public abstract class SingleValueColumnConstraint<T> implements ColumnConstraint
 	 * date-based constraints.
 	 */
 	protected final String name;
-	private T constraintValue = null;
+	private T constraintValue;
 	protected EditorProvider<T> editorProvider;
 	private String group;
 

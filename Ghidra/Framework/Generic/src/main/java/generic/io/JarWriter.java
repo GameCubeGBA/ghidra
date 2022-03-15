@@ -58,7 +58,7 @@ public class JarWriter {
 			return false;
 		}
 
-		FileInputStream in = null;
+		FileInputStream in;
 		try {
 			in = new FileInputStream(baseFile);
 		}
@@ -91,7 +91,7 @@ public class JarWriter {
 	public boolean outputEntry(String path, long time, InputStream in, TaskMonitor monitor) {
 
 		byte[] bytes = new byte[4096];
-		int numRead = 0;
+		int numRead;
 
 		//Create a zip entry and write it out along with its data.
 		ZipEntry entry = new ZipEntry(path);
@@ -134,7 +134,7 @@ public class JarWriter {
 	public boolean outputRecursively(File baseFile, String jarPath, TaskMonitor monitor) {
 
 		boolean succeeded = true;
-		File[] subFiles = new File[0];
+		File[] subFiles;
 
 		if (baseFile.isDirectory()) {
 			subFiles = baseFile.listFiles();

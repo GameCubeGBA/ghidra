@@ -107,7 +107,7 @@ abstract class BookmarkDBAdapter {
 
 		DBHandle tmpHandle = new DBHandle();
 		long id = tmpHandle.startTransaction();
-		BookmarkDBAdapter tmpAdapter = null;
+		BookmarkDBAdapter tmpAdapter;
 		try {
 			tmpAdapter = new BookmarkDBAdapterV3(tmpHandle, true, typeIds, addrMap);
             for (int k : typeIds) {

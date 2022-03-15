@@ -32,7 +32,7 @@ public class ObjectiveC2_PropertyList implements StructConverter {
 	public final static String NAME = "objc_property_list";
 
 	private ObjectiveC2_State _state;
-	private long _index = -1;
+	private long _index;
 
 	private int entsize;
 	private int count;

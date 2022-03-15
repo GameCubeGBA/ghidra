@@ -84,7 +84,7 @@ public class PackedDatabaseCache {
 
 	public static synchronized PackedDatabaseCache getCache() throws IOException {
 		if (cache == null) {
-			File cacheDir = null;
+			File cacheDir;
 			String dirpath = System.getProperty(CACHE_DIR_PROPERTY);
 			if (dirpath != null) {
 				cacheDir = new File(dirpath);

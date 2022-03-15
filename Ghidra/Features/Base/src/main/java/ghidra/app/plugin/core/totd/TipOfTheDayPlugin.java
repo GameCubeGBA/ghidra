@@ -69,7 +69,7 @@ public class TipOfTheDayPlugin extends Plugin implements FrontEndOnly {
 		action.setHelpLocation(new HelpLocation(ToolConstants.TOOL_HELP_TOPIC, "Tip_of_the_day"));
 		tool.addAction(action);
 
-		List<String> tips = null;
+		List<String> tips;
 		try {
 			tips = loadTips();
 		}

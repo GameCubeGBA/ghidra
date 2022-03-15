@@ -101,7 +101,7 @@ abstract class FunctionParameterAdapter {
 
 		DBHandle tmpHandle = new DBHandle();
 		long id = tmpHandle.startTransaction();
-		FunctionParameterAdapter tmpAdapter = null;
+		FunctionParameterAdapter tmpAdapter;
 		try {
 			tmpAdapter = new FunctionParameterAdapterV1(tmpHandle, true);
 			RecordIterator it = oldAdapter.getRecords();

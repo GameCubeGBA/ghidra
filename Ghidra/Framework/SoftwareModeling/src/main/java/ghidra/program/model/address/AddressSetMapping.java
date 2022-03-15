@@ -80,8 +80,7 @@ public class AddressSetMapping {
 		// than the the current range of indexes, if so just move to the next range.
 		if (index == currentRangeEnd + 1) {
 			currentRangeIndex++;
-			currentRange = ranges.get(currentRangeIndex);
-		}
+        }
 		// otherwise we must do a binary search to find the correct address range for the
 		// given index.
 		else {

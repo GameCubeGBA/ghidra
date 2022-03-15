@@ -352,7 +352,7 @@ public class SaveStateTest extends AbstractGenericTest {
 
 		// persist the state
 		File saveFileTemp = null;
-		Element root = null;
+		Element root;
 		try {
 			saveFileTemp = createTempFile("xmlTest");
 			Element element = ss.saveToXml();

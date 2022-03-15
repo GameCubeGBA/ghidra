@@ -155,7 +155,7 @@ public class EnumValueConstraintEditorTest extends AbstractDockingTest {
 
 	@Test
 	public void testReset() {
-		EnumColumnConstraint<TestEnum> newConstraint = null;
+		EnumColumnConstraint<TestEnum> newConstraint;
 		setEditorValue("{Value1,Value2,Value3,Value4,Value5,Value6}");
 
 		newConstraint = getEditorValue();
@@ -184,7 +184,7 @@ public class EnumValueConstraintEditorTest extends AbstractDockingTest {
 
 	@Test
 	public void testCheckboxToggleOne() {
-		EnumColumnConstraint<TestEnum> newConstraint = null;
+		EnumColumnConstraint<TestEnum> newConstraint;
 
 		Component component = runSwing(() -> editor.getInlineComponent());
 		assertTrue(component instanceof Container);

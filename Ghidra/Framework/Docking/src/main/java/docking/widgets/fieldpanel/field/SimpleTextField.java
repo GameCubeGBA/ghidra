@@ -176,7 +176,7 @@ public class SimpleTextField implements Field {
 	 */
 	@Override
 	public int getX(int row, int col) {
-		int x = 0;
+		int x;
 		if (col < text.length()) {
 			x = metrics.stringWidth(text.substring(0, col));
 		}

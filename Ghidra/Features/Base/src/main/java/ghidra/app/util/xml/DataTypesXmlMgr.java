@@ -184,7 +184,7 @@ public class DataTypesXmlMgr {
 		XmlElement element = root.getStartElement();
 		String name = element.getAttribute("NAME");
 		CategoryPath path = getCategoryPath(element);
-		FunctionDefinition fd = null;
+		FunctionDefinition fd;
 
 		if (firstPass) {
 			fd = new FunctionDefinitionDataType(path, name);
@@ -295,7 +295,7 @@ public class DataTypesXmlMgr {
 		XmlElement element = root.getStartElement();
 		String name = element.getAttribute("NAME");
 		CategoryPath path = getCategoryPath(element);
-		Structure struct = null;
+		Structure struct;
 		boolean isVariableLength = false;
 		if (element.hasAttribute("VARIABLE_LENGTH")) {
 			isVariableLength = XmlUtilities.parseBoolean(element.getAttribute("VARIABLE_LENGTH"));
@@ -325,7 +325,7 @@ public class DataTypesXmlMgr {
 		XmlElement element = root.getStartElement();
 		String name = element.getAttribute("NAME");
 		CategoryPath path = getCategoryPath(element);
-		Union union = null;
+		Union union;
 		if (firstPass) {
 			String comment = getRegularComment(root);
 			union = new UnionDataType(path, name);
@@ -390,7 +390,7 @@ public class DataTypesXmlMgr {
 				// NOTE: Size consistency checking was removed since some types are filled-out
 				// lazily and may not have there ultimate size at this point.
 
-				DataTypeComponent member = null;
+				DataTypeComponent member;
 				if (isVariableLength && offset >= struct.getLength()) {
 					member = struct.add(memberDT, dtSize, memberName, memberComment);
 				}

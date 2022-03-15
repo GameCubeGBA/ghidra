@@ -41,7 +41,7 @@ public class VisualEdgeArrowRenderingSupport<V extends VisualVertex, E extends V
 
 		GeneralPath path = new GeneralPath(edgeShape);
 		double[] seg = new double[6];
-		Point2D p1 = null;
+		Point2D p1;
 		Point2D p2 = null;
 		AffineTransform at = new AffineTransform();
 

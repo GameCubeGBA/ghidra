@@ -298,7 +298,7 @@ public class Pic12Analyzer extends AbstractAnalyzer {
 		}
 
 		Address addr;
-		Register reg = null;
+		Register reg;
 		if (objs[0] instanceof Register) {
 			reg = ((Register) objs[0]);
 			addr = reg.getAddress();

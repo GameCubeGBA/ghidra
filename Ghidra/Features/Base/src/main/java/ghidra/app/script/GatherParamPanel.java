@@ -59,9 +59,9 @@ public class GatherParamPanel extends JPanel {
 	}
 
 	public void addParameterRegardless(String key, String label, int type, Object defaultValue) {
-		Component displayComponent = null;
+		Component displayComponent;
 		if (type == FILE || type == DIRECTORY) {
-			String titleString = null;
+			String titleString;
 			if (type == DIRECTORY) {
 				titleString = "SELECT DIRECTORY";
 			}

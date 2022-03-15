@@ -198,7 +198,7 @@ public class RenameLabelCmd implements Command {
 		}
 
 		SymbolTable st = program.getSymbolTable();
-		Symbol s = null;
+		Symbol s;
 		if (oldName != null) {
 			s = st.getSymbol(oldName, addr, currentNamespace);
 		}

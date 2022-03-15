@@ -53,7 +53,7 @@ class CodeXmlMgr implements DisassemblerMessageListener {
 			throws CancelledException {
 		monitor.setMessage("Exporting Code Blocks....");
 
-		InstructionIterator it = null;
+		InstructionIterator it;
 		if (set == null) {
 			it = program.getListing().getInstructions(true);
 		}

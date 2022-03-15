@@ -1004,9 +1004,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 	@Test
 	public void testSource9a() throws Exception {
 		mangled = "?PrintCountsAndBytes_e2@@$$FYMXP$02EA_WPE$AAVEncoding@Text@System@@@Z"; //Has Rank 2
-		msTruth =
-			"void __clrcall PrintCountsAndBytes_e2(cli::array<System::Text::_WPE$AAVEncoding ,2>^)";
-//		mdtruth =
+        //		mdtruth =
 //			"void __clrcall PrintCountsAndBytes_e2(cli::array<wchar_t ,2>^ __ptr64,class System::Text::Encoding ^ __ptr64)";
 		mdTruth =
 			"void __clrcall PrintCountsAndBytes_e2(cli::array<wchar_t ,2>^,class System::Text::Encoding ^ __ptr64)";
@@ -1028,9 +1026,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 	@Test
 	public void testSource9c() throws Exception {
 		mangled = "?PrintCountsAndBytes_e2@@$$FYMXP$02EA_WPE$AAVEncoding@Text@System@@@Z"; //Has Rank 2
-		msTruth =
-			"void __clrcall PrintCountsAndBytes(cli::array<System::Text::_WPE$AAVEncoding ,2>^)";
-//		mdtruth =
+        //		mdtruth =
 //			"void __clrcall PrintCountsAndBytes_e2(cli::array<wchar_t ,2>^ __ptr64,class System::Text::Encoding ^ __ptr64)";
 		mdTruth =
 			"void __clrcall PrintCountsAndBytes_e2(cli::array<wchar_t ,2>^,class System::Text::Encoding ^ __ptr64)";
@@ -1042,8 +1038,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 	@Test
 	public void testSource9d() throws Exception {
 		mangled = "?name0@@$$FYMXP$01EA_WPE$AAVname1@name2@name3@@@Z";
-		msTruth = "void __clrcall name0(cli::array<name3::name2::_WPE$AAVname1 >^)";
-		//mdtruth = "void __clrcall name0(cli::array<wchar_t >^ __ptr64,class name3::name2::name1 ^ __ptr64)";
+        //mdtruth = "void __clrcall name0(cli::array<wchar_t >^ __ptr64,class name3::name2::name1 ^ __ptr64)";
 		mdTruth = "void __clrcall name0(cli::array<wchar_t >^,class name3::name2::name1 ^ __ptr64)";
 		//TODO: Create MDMangVS2015 Specialization for this problem and then remove "mstruth = mdtruth"
 		msTruth = mdTruth;
@@ -1053,9 +1048,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 	@Test
 	public void testSource9e() throws Exception {
 		mangled = "?name0@@$$FYMXQ$02EAP6AXXZPE$AAVname1@name2@name3@@@Z"; //Has Rank 2 with function pointer
-		msTruth =
-			"void __clrcall name0(cli::array<void (__cdecl*,2>^)(int),class name3::name2::name1 ^ __ptr64)"; //MS has (<(>)) order
-		//mdtruth = "void __clrcall name0(cli::array<void (__cdecl*)(void) ,2>^ __ptr64 const,class name3::name2::name1 ^ __ptr64)";
+        //mdtruth = "void __clrcall name0(cli::array<void (__cdecl*)(void) ,2>^ __ptr64 const,class name3::name2::name1 ^ __ptr64)";
 		mdTruth =
 			"void __clrcall name0(cli::array<void (__cdecl*)(void) ,2>^,class name3::name2::name1 ^ __ptr64)";
 		// From Actual Forward Source: "void PrintCountsAndBytes_e4( array<void (__cdecl *)(void),ARANK>^const chars, Encoding^ enc )"
@@ -1069,8 +1062,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 	@Test
 	public void testCLI_1a() throws Exception {
 		mangled = "??0name0@name1@name2@name3@name4@@$$FQE$AAM@P$01EAE@Z";
-		msTruth = "GARBAGE";
-		//mdtruth = "public: __clrcall name4::name3::name2::name1::name0::name0(cli::array<unsigned char >^ __ptr64) __ptr64";
+        //mdtruth = "public: __clrcall name4::name3::name2::name1::name0::name0(cli::array<unsigned char >^ __ptr64) __ptr64";
 		mdTruth =
 			"public: __clrcall name4::name3::name2::name1::name0::name0(cli::array<unsigned char >^) __ptr64";
 		//TODO: Create MDMangVS2015 Specialization for this problem and then remove "mstruth = mdtruth"
@@ -1082,8 +1074,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 	@Test
 	public void testCLI_1b() throws Exception {
 		mangled = "?name0@name1@name2@name3@@$$FSMP$01EAEVname4@name5@@PE$AAVname6@5@1P$01EAEHH@Z";
-		msTruth = "public: static cli::array<name5::EVname4 >^"; //GARBAGE
-		//TODO: CREATE mstruth output (dispatcher) and fix mstruth back to original
+        //TODO: CREATE mstruth output (dispatcher) and fix mstruth back to original
 		msTruth = "public: static cli::array<unsigned char >^"; //(This truth is based on what I think MSFT intends to output, if it didn't have the 'E' EIF modifiers.
 //		mdtruth =
 //			"public: static cli::array<unsigned char __clrcall name3::name2::name1::name0(class name5::name4,class name5::name6 ^ __ptr64,class name5::name6 ^ __ptr64,cli::array<unsigned char >^,int,int) >^ __ptr64";
@@ -1115,9 +1106,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 	@Test
 	public void testCLI_1c() throws Exception {
 		mangled = "??0name0@name1@@$$FQE$AAM@P$01EAE0@Z";
-		msTruth =
-			"public: __clrcall name1::name0::name0(cli::array< ?? :: ?? ::Z::E0 >^, ?? ) __ptr64 throw( ?? )";
-		mdTruth =
+        mdTruth =
 			"public: __clrcall name1::name0::name0(cli::array<unsigned char >^,cli::array<unsigned char >^) __ptr64";
 		//TODO: Create MDMangVS2015 Specialization for this problem and then remove "mstruth = mdtruth"
 		msTruth = mdTruth;
@@ -1128,9 +1117,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 	@Test
 	public void testCLI_1d() throws Exception {
 		mangled = "?name0@name1@@$$FSM_NP$01EAE@Z";
-		msTruth =
-			"public: static bool __clrcall name1::name0(cli::array< ?? :: ?? ::Z::E >^, ?? ) throw( ?? )";
-		mdTruth = "public: static bool __clrcall name1::name0(cli::array<unsigned char >^)";
+        mdTruth = "public: static bool __clrcall name1::name0(cli::array<unsigned char >^)";
 		//TODO: Create MDMangVS2015 Specialization for this problem and then remove "mstruth = mdtruth"
 		msTruth = mdTruth;
 		demangleAndTest();
@@ -3317,10 +3304,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 	//real symbol: $D
 	@Test
 	public void testSpecialTemplateParameters_dollarD() throws Exception {
-		mangled = "??0?$name0@$D0Uname1@@@name2@@QEAA@XZ";
-		msTruth =
-			"public: __cdecl name2::name0<`template-parameter1',struct name1>::name0<`template-parameter1',struct name1>(void) __ptr64";
-		mangled = "??0?$allocator@$D0U_GUID@@@std@@QEAA@XZ";
+        mangled = "??0?$allocator@$D0U_GUID@@@std@@QEAA@XZ";
 		msTruth =
 			"public: __cdecl std::allocator<`template-parameter1',struct _GUID>::allocator<`template-parameter1',struct _GUID>(void) __ptr64";
 		mdTruth = msTruth;
@@ -4753,10 +4737,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 	//modified real symbol
 	@Test
 	public void testSpecialNames_R0a() throws Exception {
-		mangled = "??_R0?PAVname0@name1@@@0HB";
-		msTruth =
-			"private: static int const class name1::name0 const volatile __based() `RTTI Type Descriptor'";
-		mangled = "??_R0?PAVCOleException@xyz@@@0HB";
+        mangled = "??_R0?PAVCOleException@xyz@@@0HB";
 		msTruth =
 			"private: static int const class xyz::COleException const volatile __based() `RTTI Type Descriptor'";
 		mdTruth = msTruth;
@@ -5026,8 +5007,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 	public void testFragmentStart_a() throws Exception {
 //		//Not standard C??, but begins with standard __mep; Non begin with question mark.  Can be found using bindump /symbols, but undname doesn't work on these.
 		mangled = "__mep@??_EArray@@$$FQAEPAXI@Z";
-		msTruth = "__mep@??_EArray@@$$FQAEPAXI@Z";
-		dbTruth =
+        dbTruth =
 			"[MEP] public: void * __thiscall Array::`vector deleting destructor'(unsigned int)";
 		mdTruth = dbTruth;
 		//TODO: Create MDMangVS2015 Specialization for this problem and then remove "mstruth = mdtruth"
@@ -5038,8 +5018,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 	@Test
 	public void testFragmentStart_b() throws Exception {
 		mangled = "__t2m@??_EArray@@QAEPAXI@Z";
-		msTruth = "__t2m@??_EArray@@QAEPAXI@Z";
-		dbTruth =
+        dbTruth =
 			"[T2M] public: void * __thiscall Array::`vector deleting destructor'(unsigned int)";
 		mdTruth = dbTruth;
 		//TODO: Create MDMangVS2015 Specialization for this problem and then remove "mstruth = mdtruth"
@@ -5050,8 +5029,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 	@Test
 	public void testFragmentStart_c() throws Exception {
 		mangled = "__mep@?main@@$$HYAHHQAPAD@Z";
-		msTruth = "__mep@?main@@$$HYAHHQAPAD@Z";
-		dbTruth = "[MEP] int __cdecl main(int,char * * const)";
+        dbTruth = "[MEP] int __cdecl main(int,char * * const)";
 		mdTruth = dbTruth;
 		//TODO: Create MDMangVS2015 Specialization for this problem and then remove "mstruth = mdtruth"
 		msTruth = mdTruth;
@@ -5061,8 +5039,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 	@Test
 	public void testFragmentStart_d() throws Exception {
 		mangled = "__t2m@??0Array@@QAE@ABVJunk@@@Z";
-		msTruth = "__t2m@??0Array@@QAE@ABVJunk@@@Z";
-		dbTruth = "[T2M] public: __thiscall Array::Array(class Junk const &)";
+        dbTruth = "[T2M] public: __thiscall Array::Array(class Junk const &)";
 		mdTruth = dbTruth;
 		//TODO: Create MDMangVS2015 Specialization for this problem and then remove "mstruth = mdtruth"
 		msTruth = mdTruth;
@@ -5072,8 +5049,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 	@Test
 	public void testFragmentStart_e() throws Exception {
 		mangled = "__mep@??0Array@@$$FQAE@ABVJunk@@@Z";
-		msTruth = "__mep@??0Array@@$$FQAE@ABVJunk@@@Z";
-		dbTruth = "[MEP] public: __thiscall Array::Array(class Junk const &)";
+        dbTruth = "[MEP] public: __thiscall Array::Array(class Junk const &)";
 		mdTruth = dbTruth;
 		//TODO: Create MDMangVS2015 Specialization for this problem and then remove "mstruth = mdtruth"
 		msTruth = mdTruth;
@@ -5083,8 +5059,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 	@Test
 	public void testFragmentStart_f() throws Exception {
 		mangled = "__t2m@??0Array@@QAE@ABVGunk@@@Z";
-		msTruth = "__t2m@??0Array@@QAE@ABVGunk@@@Z";
-		dbTruth = "[T2M] public: __thiscall Array::Array(class Gunk const &)";
+        dbTruth = "[T2M] public: __thiscall Array::Array(class Gunk const &)";
 		mdTruth = dbTruth;
 		//TODO: Create MDMangVS2015 Specialization for this problem and then remove "mstruth = mdtruth"
 		msTruth = mdTruth;
@@ -5094,8 +5069,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 	@Test
 	public void testFragmentStart_g() throws Exception {
 		mangled = "__mep@??0Array@@$$FQAE@ABVGunk@@@Z";
-		msTruth = "__mep@??0Array@@$$FQAE@ABVGunk@@@Z";
-		dbTruth = "[MEP] public: __thiscall Array::Array(class Gunk const &)";
+        dbTruth = "[MEP] public: __thiscall Array::Array(class Gunk const &)";
 		mdTruth = dbTruth;
 		//TODO: Create MDMangVS2015 Specialization for this problem and then remove "mstruth = mdtruth"
 		msTruth = mdTruth;
@@ -5105,8 +5079,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 	@Test
 	public void testFragmentStart_h() throws Exception {
 		mangled = "__t2m@??BArray@@QAE?AVJunk@@XZ";
-		msTruth = "__t2m@??BArray@@QAE?AVJunk@@XZ";
-		dbTruth = "[T2M] public: __thiscall Array::operator class Junk(void)";
+        dbTruth = "[T2M] public: __thiscall Array::operator class Junk(void)";
 		mdTruth = dbTruth;
 		//TODO: Create MDMangVS2015 Specialization for this problem and then remove "mstruth = mdtruth"
 		msTruth = mdTruth;
@@ -5116,8 +5089,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 	@Test
 	public void testFragmentStart_i() throws Exception {
 		mangled = "__mep@??BArray@@$$FQAE?AVJunk@@XZ";
-		msTruth = "__mep@??BArray@@$$FQAE?AVJunk@@XZ";
-		dbTruth = "[MEP] public: __thiscall Array::operator class Junk(void)";
+        dbTruth = "[MEP] public: __thiscall Array::operator class Junk(void)";
 		mdTruth = dbTruth;
 		//TODO: Create MDMangVS2015 Specialization for this problem and then remove "mstruth = mdtruth"
 		msTruth = mdTruth;
@@ -5127,8 +5099,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 	@Test
 	public void testFragmentStart_j() throws Exception {
 		mangled = "__t2m@??CArray@@QAEPAVJunk@@XZ";
-		msTruth = "__t2m@??CArray@@QAEPAVJunk@@XZ";
-		dbTruth = "[T2M] public: class Junk * __thiscall Array::operator->(void)";
+        dbTruth = "[T2M] public: class Junk * __thiscall Array::operator->(void)";
 		mdTruth = dbTruth;
 		//TODO: Create MDMangVS2015 Specialization for this problem and then remove "mstruth = mdtruth"
 		msTruth = mdTruth;
@@ -5138,8 +5109,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 	@Test
 	public void testFragmentStart_k() throws Exception {
 		mangled = "__mep@??CArray@@$$FQAEPAVJunk@@XZ";
-		msTruth = "__mep@??CArray@@$$FQAEPAVJunk@@XZ";
-		dbTruth = "[MEP] public: class Junk * __thiscall Array::operator->(void)";
+        dbTruth = "[MEP] public: class Junk * __thiscall Array::operator->(void)";
 		mdTruth = dbTruth;
 		//TODO: Create MDMangVS2015 Specialization for this problem and then remove "mstruth = mdtruth"
 		msTruth = mdTruth;
@@ -7431,9 +7401,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 	@Test
 	public void testDollarDollar_9() throws Exception {
 		mangled = "?PrintCountsAndBytes_e2@@$$FYMXP$02EA_WPE$AAVEncoding@Text@System@@@Z"; //Has Rank 2
-		msTruth =
-			"void __clrcall PrintCountsAndBytes(cli::array<System::Text::_WPE$AAVEncoding ,2>^)";
-//		mdtruth =
+        //		mdtruth =
 //			"void __clrcall PrintCountsAndBytes_e2(cli::array<wchar_t ,2>^ __ptr64,class System::Text::Encoding ^ __ptr64)";
 		mdTruth =
 			"void __clrcall PrintCountsAndBytes_e2(cli::array<wchar_t ,2>^,class System::Text::Encoding ^ __ptr64)";
@@ -8055,9 +8023,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 	@Test
 	public void testManagedProperties_And_DollarDollar_Debug_In_Progress_br() throws Exception {
 		mangled = "?PrintCountsAndBytes_e2@@$$FYMXP$02EA_WPE$AAVEncoding@Text@System@@@Z"; //Has Rank 2
-		msTruth =
-			"void __clrcall PrintCountsAndBytes(cli::array<System::Text::_WPE$AAVEncoding ,2>^)"; //MSFT undname does not include __ptr64 on cli::array<>
-//		mdtruth =
+        //		mdtruth =
 //			"void __clrcall PrintCountsAndBytes_e2(cli::array<wchar_t ,2>^ __ptr64,class System::Text::Encoding ^ __ptr64)";
 		mdTruth =
 			"void __clrcall PrintCountsAndBytes_e2(cli::array<wchar_t ,2>^,class System::Text::Encoding ^ __ptr64)";
@@ -8495,8 +8461,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 	@Test
 	public void testManagedProperties_CliArray_QuestionModifier() throws Exception {
 		mangled = "?var@@3?E$2AAHA";
-		msTruth = "int ,49>^";
-		mdTruth = "";
+        mdTruth = "";
 		//TODO: Create MDMangVS2015 Specialization for this problem and then remove "mstruth = mdtruth"
 		msTruth = mdTruth;
 		demangleAndTest();
@@ -8820,8 +8785,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 	@Test
 	public void testManagedProperties_DollarC_NoE_DollarModifier() throws Exception {
 		mangled = "?var@@3$$CHA";
-		msTruth = " ?? const volatile ?? var";
-		mdTruth = "";
+        mdTruth = "";
 		//TODO: Create MDMangVS2015 Specialization for this problem and then remove "mstruth = mdtruth"
 		msTruth = mdTruth;
 		demangleAndTest();
@@ -8839,8 +8803,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 	@Test
 	public void testManagedProperties_DollarB_NoE_WithCVA_DollarModifier() throws Exception {
 		mangled = "?var@@3$$BAHA";
-		msTruth = " ?? ::HA ?? var";
-		mdTruth = "";
+        mdTruth = "";
 		//TODO: Create MDMangVS2015 Specialization for this problem and then remove "mstruth = mdtruth"
 		msTruth = mdTruth;
 		demangleAndTest();
@@ -9091,8 +9054,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 	@Test
 	public void testManagedProperties_Pointer_DollarT_WithCVA() throws Exception {
 		mangled = "?var@@3P$TA";
-		msTruth = " ?? ,593>^ ?? ";
-		mdTruth = "";
+        mdTruth = "";
 		//TODO: Create MDMangVS2015 Specialization for this problem and then remove "mstruth = mdtruth"
 		msTruth = mdTruth;
 		demangleAndTest();
@@ -9101,8 +9063,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 	@Test
 	public void testManagedProperties_Reference_DollarT_WithCVA() throws Exception {
 		mangled = "?var@@3A$TA";
-		msTruth = " ?? ,593>^ ?? ";
-		mdTruth = "";
+        mdTruth = "";
 		//TODO: Create MDMangVS2015 Specialization for this problem and then remove "mstruth = mdtruth"
 		msTruth = mdTruth;
 		demangleAndTest();
@@ -9111,8 +9072,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 	@Test
 	public void testManagedProperties_QuestionModifier_DollarT_WithCVA() throws Exception {
 		mangled = "?var@@3?$TA";
-		msTruth = " ?? ,593>^ ?? ";
-		mdTruth = "";
+        mdTruth = "";
 		//TODO: Create MDMangVS2015 Specialization for this problem and then remove "mstruth = mdtruth"
 		msTruth = mdTruth;
 		demangleAndTest();
@@ -9302,8 +9262,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 			throws Exception {
 		//TODO: CREATE mstruth output (dispatcher)
 		mangled = "?vp4@@3PEIF$02APAP$AAPAP$02AHA";
-		msTruth = "cli::array<cli::array<int ,2>^";
-		mdTruth = "cli::array<cli::array<int ,2>^ * ^ * ,2>^ vp4";
+        mdTruth = "cli::array<cli::array<int ,2>^ * ^ * ,2>^ vp4";
 		//TODO: Create MDMangVS2015 Specialization for this problem and then remove "mstruth = mdtruth"
 		msTruth = mdTruth;
 		demangleAndTest();
@@ -9647,8 +9606,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 	public void testManagedProperties_And_DollarDollar_Debug_In_Progress_moremoremore2_variation032()
 			throws Exception {
 		mangled = "?vp4@@3P$02AXA"; //test like pin_ptr<void> shows as void *
-		msTruth = "void ,2>^";
-		mdTruth = "cli::array<void ,2>^"; //Not sure if we should do this or not
+        mdTruth = "cli::array<void ,2>^"; //Not sure if we should do this or not
 		//TODO: Create MDMangVS2015 Specialization for this problem and then remove "mstruth = mdtruth"
 		msTruth = mdTruth;
 		demangleAndTest();
@@ -9660,8 +9618,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 	public void testManagedProperties_And_DollarDollar_Debug_In_Progress_moremoremore2_variation033()
 			throws Exception {
 		mangled = "?vp4@@3P$02AXA"; //test like pin_ptr<void> shows as void *
-		msTruth = "void >^";
-		mdTruth = "cli::array<void >^"; //Not sure if we should do this or not
+        mdTruth = "cli::array<void >^"; //Not sure if we should do this or not
 		//TODO: Create MDMangVS2015 Specialization for this problem and then remove "mstruth = mdtruth"
 		msTruth = mdTruth;
 		demangleAndTest();
@@ -9860,8 +9817,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 		//NEW HAND-MADE
 		mangled = "?FN@@QEAM@BE$AAVCL@@@Z";
 		msTruth = "public: __clrcall FN(class CL % __ptr64 volatile) __ptr64";
-		mdTruth = msTruth;
-		mdTruth = msTruth;
+        mdTruth = msTruth;
 		demangleAndTest();
 	}
 
@@ -11167,8 +11123,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 	@Test
 	public void test_e304_breakdown_analysis_000() throws Exception {
 		mangled = "?name0@?$name1@P$AAVname2@name3@@";
-		msTruth = "unknown"; //" ?? ?? :: ?? ::blah"
-		mdTruth = "name1<class name3::name2 ^>::name0"; //???
+        mdTruth = "name1<class name3::name2 ^>::name0"; //???
 		//TODO: Create MDMangVS2015 Specialization for this problem and then remove "mstruth = mdtruth"
 		msTruth = mdTruth;
 		demangleAndTest();
@@ -11208,9 +11163,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 	@Test
 	public void testGDTSD304_a_breakdown_analysis_005() throws Exception {
 		mangled = "??$name8@P$AAVname2@name3@@U?$name9@P$AAVname2@name3@@@name10@@@x@Platform@@";
-		msTruth =
-			" ?? Platform::x::name8<class name3::name2 ^,struct name10::name9<class name3::name2 ^> >";
-		mdTruth =
+        mdTruth =
 			"Platform::x::name8<class name3::name2 ^,struct name10::name9<class name3::name2 ^> >";
 		//TODO: Create MDMangVS2015 Specialization for this problem and then remove "mstruth = mdtruth"
 		msTruth = mdTruth;
@@ -11232,8 +11185,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 	@Test
 	public void testGDTSD304_a_breakdown_analysis_007() throws Exception {
 		mangled = "??$name1@P$AAVname2@name3@@@";
-		msTruth = " ?? name1<class name3::name2 ^>";
-		mdTruth = "name1<class name3::name2 ^>";
+        mdTruth = "name1<class name3::name2 ^>";
 		//TODO: Create MDMangVS2015 Specialization for this problem and then remove "mstruth = mdtruth"
 		msTruth = mdTruth;
 		demangleAndTest();
@@ -11243,8 +11195,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 	@Test
 	public void testGDTSD304_a_breakdown_analysis_008() throws Exception {
 		mangled = "?__abi_name4@?Q?$name1@P$AAVname2@name3@@@name5@name6@name7@@";
-		msTruth = " ?? ?? ::[name7::name6::name5::name1<class name3::name2 ^>]::__abi_name4";
-		mdTruth = "[name7::name6::name5::name1<class name3::name2 ^>]::__abi_name4";
+        mdTruth = "[name7::name6::name5::name1<class name3::name2 ^>]::__abi_name4";
 		//TODO: Create MDMangVS2015 Specialization for this problem and then remove "mstruth = mdtruth"
 		msTruth = mdTruth;
 		demangleAndTest();
@@ -11254,8 +11205,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 	@Test
 	public void testGDTSD304_a_breakdown_analysis_009() throws Exception {
 		mangled = "??$name8@P$AAVname2@name3@@U?$name9@P$AAVname2@name3@@@name10@@@";
-		msTruth = " ?? name8<class name3::name2 ^,struct name10::name9<class name3::name2 ^> >";
-		mdTruth = "name8<class name3::name2 ^,struct name10::name9<class name3::name2 ^> >";
+        mdTruth = "name8<class name3::name2 ^,struct name10::name9<class name3::name2 ^> >";
 		//TODO: Create MDMangVS2015 Specialization for this problem and then remove "mstruth = mdtruth"
 		msTruth = mdTruth;
 		demangleAndTest();
@@ -13409,8 +13359,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 
 	@Test
 	public void testEmail20170118_RTTI0_DatatypeString_mod1() throws Exception {
-		mangled = ".?AV?$name1@Vname2@@Uname3@name4@@@name4@@";
-		//Removed the "." at the front end, replace "A" with a name "xxx@@3" and gave "A" terminating "const" to complete a valid symbol.
+        //Removed the "." at the front end, replace "A" with a name "xxx@@3" and gave "A" terminating "const" to complete a valid symbol.
 		mangled = "?name0@@3V?$name1@Vname2@@Uname3@name4@@@name4@@A";
 		mdTruth = "class name4::name1<class name2,struct name4::name3> name0";
 		msTruth = mdTruth;
@@ -14331,8 +14280,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 	@Test
 	public void testBracketObject_unep_1() throws Exception {
 		mangled = "__unep@?fnpro@testAccessLevel@@$$FIEAAHH@Z";
-		msTruth = "__unep@?fnpro@testAccessLevel@@$$FIEAAHH@Z";
-		mdTruth = "[UNEP] protected: int __cdecl testAccessLevel::fnpro(int) __ptr64";
+        mdTruth = "[UNEP] protected: int __cdecl testAccessLevel::fnpro(int) __ptr64";
 		msTruth = mdTruth;
 		demangleAndTest();
 	}

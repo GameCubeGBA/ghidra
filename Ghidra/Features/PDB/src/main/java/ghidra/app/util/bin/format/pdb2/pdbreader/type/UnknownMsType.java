@@ -24,7 +24,7 @@ import ghidra.app.util.bin.format.pdb2.pdbreader.PdbByteReader;
  */
 public class UnknownMsType extends AbstractMsType {
 
-	private int unknownPdbId = 0;
+	private int unknownPdbId;
 	private byte[] data;
 
 	/**

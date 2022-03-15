@@ -149,8 +149,7 @@ public class MDFuzzyFit {
 			} catch (Exception mde) {
 				// Ignore for now
 				int a = 1;
-				a = a + 1;
-			}
+            }
         }
 
 		return bestOffset;
@@ -177,8 +176,7 @@ public class MDFuzzyFit {
 			} catch (Exception mde) {
 				// Ignore for now
 				int a = 1;
-				a = a + 1;
-			}
+            }
         }
 
 		return bestOffset;

@@ -38,7 +38,7 @@ import mdemangler.datatype.MDDataType;
  */
 public class MDBaseTestConfiguration {
 	// Output options
-	protected boolean quiet = false;
+	protected boolean quiet;
 	protected boolean verboseOutput = true;
 
 	// Internal variables

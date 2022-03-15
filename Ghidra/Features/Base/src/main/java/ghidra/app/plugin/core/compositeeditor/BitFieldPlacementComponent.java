@@ -1236,9 +1236,7 @@ public class BitFieldPlacementComponent extends JPanel implements Scrollable {
 			this.rightEndType = rightEndType;
 			this.conflict = conflict;
 			if (conflict != null) {
-				leftEndType = conflict.leftEndType;
-				rightEndType = conflict.rightEndType;
-			}
+            }
 		}
 
 		private boolean isAddBitField() {

@@ -228,8 +228,7 @@ public class AddressTableAnalyzer extends AbstractAnalyzer {
 
 				// jump the address iterator by the size of the table entry
 				int tableByteLen = tableEntry.getByteLength(0, tableLen - 1, false);
-				addrCount += tableByteLen;
-				addrIter = skipBytes(addrIter, addrSet, start, tableByteLen);
+                addrIter = skipBytes(addrIter, addrSet, start, tableByteLen);
 				try {
 					maxAddr = maxAddr.addNoWrap(tableByteLen - 1);
 				}

@@ -116,7 +116,7 @@ public class EnumTypeApplier extends AbstractComplexTypeApplier {
 	}
 
 	private MsTypeApplier getUnderlyingTypeApplier() {
-		MsTypeApplier under = null;
+		MsTypeApplier under;
 		MsTypeApplier applier = (definitionApplier != null) ? definitionApplier : this;
 		RecordNumber underlyingRecordNumber =
 			((AbstractEnumMsType) applier.getMsType()).getUnderlyingRecordNumber();

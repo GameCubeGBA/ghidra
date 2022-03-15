@@ -108,7 +108,7 @@ public abstract class AbstractFunctionGraphTest extends AbstractGhidraHeadedInte
 		FGController controller = getFunctionGraphController();
 		FunctionGraphOptions options = controller.getFunctionGraphOptions();
 
-		ViewRestoreOption restoreOption = null;
+		ViewRestoreOption restoreOption;
 		if (zoomedOut) {
 			restoreOption = ViewRestoreOption.START_FULLY_ZOOMED_OUT;
 		}

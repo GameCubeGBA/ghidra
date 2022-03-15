@@ -258,7 +258,7 @@ public class DexHeaderFormatMarkup {
 			}
 		}
 
-		Variable returnVar = null;//default to UndefinedDataType of appropriate size
+		Variable returnVar;//default to UndefinedDataType of appropriate size
 		List<Variable> paramList = new ArrayList<>();
 
 		int prototypeIndex = Short.toUnsignedInt(methodID.getProtoIndex());

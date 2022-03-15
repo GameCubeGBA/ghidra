@@ -227,7 +227,7 @@ public class DyldChainedPtr {
 
 	public static long getTarget(DyldChainType ptrFormat, long chainValue) {
 
-		long target = 0;
+		long target;
 		if (isBound(ptrFormat, chainValue)) {
 			return -1;
 		}

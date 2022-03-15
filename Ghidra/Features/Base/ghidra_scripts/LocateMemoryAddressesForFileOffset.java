@@ -59,7 +59,7 @@ public class LocateMemoryAddressesForFileOffset extends GhidraScript {
 			throws CancelledException, NumberFormatException, IllegalArgumentException {
 		String userFileOffset =
 			askString("File offset", "Please provide a hexadecimal file offset");
-		long myFileOffset = 0;
+		long myFileOffset;
 		myFileOffset = Long.parseLong(userFileOffset, 16);
 		if (myFileOffset < 0) {
 			throw new IllegalArgumentException(

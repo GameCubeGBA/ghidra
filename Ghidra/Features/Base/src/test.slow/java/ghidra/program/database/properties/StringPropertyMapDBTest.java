@@ -98,7 +98,7 @@ public class StringPropertyMapDBTest extends AbstractGhidraHeadlessIntegrationTe
 	@Test
 	public void testAdd() throws Exception {
 		createPropertyMap("TEST");
-		Table propertyTable = null;
+		Table propertyTable;
 
 		String[] strs = new String[20];
 		for (int i = 0; i < 20; i++) {

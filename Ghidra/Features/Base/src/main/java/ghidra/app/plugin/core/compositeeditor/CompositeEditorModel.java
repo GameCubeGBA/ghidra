@@ -581,7 +581,7 @@ public abstract class CompositeEditorModel extends CompositeViewerModel implemen
 		if (oldDesc == null) {
 			oldDesc = "";
 		}
-		boolean noCompChanges = false;
+		boolean noCompChanges;
 		if (oldComposite != null) {
 			noCompChanges = (viewComposite.isEquivalent(oldComposite) &&
 				hasSameComponentSettings(viewComposite, oldComposite) &&
@@ -793,8 +793,8 @@ public abstract class CompositeEditorModel extends CompositeViewerModel implemen
 			throw new UsrException("Single row selection needed to cycle data types.");
 		}
 
-		DataType startDataType = null;
-		DataType dataType = null;
+		DataType startDataType;
+		DataType dataType;
 		int currentIndex = getMinIndexSelected();
 
 		DataTypeComponent dtc = getComponent(currentIndex);
@@ -1152,7 +1152,7 @@ public abstract class CompositeEditorModel extends CompositeViewerModel implemen
 	public DataTypeInstance validateComponentDataType(int rowIndex, String dtString)
 			throws UsrException {
 		DataType dt = null;
-		String dtName = "";
+		String dtName;
 		dtString = DataTypeHelper.stripWhiteSpace(dtString);
 		DataTypeComponent element = getComponent(rowIndex);
 		if (element != null) {
@@ -1164,7 +1164,7 @@ public abstract class CompositeEditorModel extends CompositeViewerModel implemen
 			}
 		}
 
-		int newLength = 0;
+		int newLength;
 		DataTypeManager originalDTM = getOriginalDataTypeManager();
 		DataType newDt = DataTypeHelper.parseDataType(rowIndex, dtString, this, originalDTM,
 			provider.dtmService);

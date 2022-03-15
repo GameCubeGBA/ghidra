@@ -116,8 +116,7 @@ class AndroidElfRelocationGroup extends DynamicDataType {
 
 			if (groupedByDelta && groupedByInfo && (!groupHasAddend || groupedByAddend)) {
 				// no individual relocation entry data
-				relocOffset += (groupSize - 1) * groupOffsetDelta;
-			}
+            }
 			else {
 				for (int i = 0; i < groupSize; i++) {
 					if (groupedByDelta) {

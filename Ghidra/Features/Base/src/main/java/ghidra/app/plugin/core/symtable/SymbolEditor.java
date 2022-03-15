@@ -23,7 +23,7 @@ import ghidra.program.model.symbol.Symbol;
 
 class SymbolEditor extends DefaultCellEditor {
 
-	private JTextField symbolField = null;
+	private JTextField symbolField;
 
 	SymbolEditor() {
 		super(new JTextField());

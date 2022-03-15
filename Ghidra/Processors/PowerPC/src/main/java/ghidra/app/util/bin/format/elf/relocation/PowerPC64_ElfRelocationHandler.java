@@ -71,7 +71,7 @@ public class PowerPC64_ElfRelocationHandler extends ElfRelocationHandler {
 		long symbolValue = elfRelocationContext.getSymbolValue(sym);
 
 		int oldValue = memory.getInt(relocationAddress);
-		int newValue = 0;
+		int newValue;
 
 		// IMPORTANT NOTE:
 		//   Handling of Object modules (*.o) is currently problematic since relocations

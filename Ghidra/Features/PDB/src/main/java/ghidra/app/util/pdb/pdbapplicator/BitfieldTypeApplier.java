@@ -67,7 +67,7 @@ public class BitfieldTypeApplier extends MsTypeApplier {
 		}
 		DataType baseDataType = elementTypeApplier.getDataType();
 
-		DataType bitFieldDataType = null;
+		DataType bitFieldDataType;
 		try {
 			bitFieldDataType = new Pdb2BitField(baseDataType.clone(applicator.getDataTypeManager()),
                     type.getBitLength(), type.getBitPosition());

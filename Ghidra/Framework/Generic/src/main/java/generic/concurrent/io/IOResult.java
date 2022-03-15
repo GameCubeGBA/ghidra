@@ -64,7 +64,7 @@ public class IOResult implements Runnable {
 
 	@Override
 	public void run() {
-		String line = null;
+		String line;
 
 		try {
 			while ((line = commandOutput.readLine()) != null) {

@@ -45,7 +45,7 @@ public class StructureEditorUnlockedDnD3Test extends AbstractStructureEditorTest
 
 	@Test
 	public void testDragNDropInsertDifferentTypes() throws Exception {
-		NumberInputDialog dialog = null;
+		NumberInputDialog dialog;
 		init(emptyStructure, pgmRootCat);
 		DataType dt;
 
@@ -84,7 +84,6 @@ public class StructureEditorUnlockedDnD3Test extends AbstractStructureEditorTest
 		dialog = env.waitForDialogComponent(NumberInputDialog.class, 1000);
 		assertNotNull(dialog);
 		okInput(dialog, 25);
-		dialog = null;
 		waitUntilDialogProviderGone(NumberInputDialog.class, 2000);
 		assertEquals(4, model.getNumComponents());
 		assertTrue(getDataType(0).isEquivalent(dt4));

@@ -981,7 +981,7 @@ public class ProgramDiff {
 		Address max = limitedRange.getMaxAddress();
 		Address addr = min;
 		Address addr2 = SimpleDiffUtility.getCompatibleAddress(program1, addr, program2);
-		Address endAddr = max;
+		Address endAddr;
 		int addressSize = min.getAddressSpace().getAddressableUnitSize();
 		// There may be multiple blocks that make up the range in each memory.
 		do {
@@ -1040,8 +1040,7 @@ public class ProgramDiff {
 					}
 				}
 				if (!same) {
-					same = true;
-					differences.addRange(start, addr.addWrap(nBytes - 1));
+                    differences.addRange(start, addr.addWrap(nBytes - 1));
 				}
 				monitor.setProgress(monitor.getProgress() + (nBytes / addressSize));
 				monitor.setMessage(monitorMsg + ": " + addr.toString(showAddressSpace));
@@ -3003,8 +3002,8 @@ public class ProgramDiff {
 		public boolean isSame(Object obj1, Object obj2) {
 			CodeUnit cu1 = (CodeUnit) obj1;
 			CodeUnit cu2 = (CodeUnit) obj2;
-			Object p1 = null;
-			Object p2 = null;
+			Object p1;
+			Object p2;
 			p1 = getProperty(cu1, propertyName);
 			p2 = getProperty(cu2, propertyName);
 			return SystemUtilities.isEqual(p1, p2);
@@ -3111,7 +3110,7 @@ public class ProgramDiff {
 
 	static boolean equivalentInstructionPrototypes(Instruction i1, Instruction i2) {
 		// Can't compare prototypes if languages are not the exact same language
-		boolean samePrototypes = false;
+		boolean samePrototypes;
 		if (i1.getPrototype().getLanguage().equals(i2.getPrototype().getLanguage())) {
 			samePrototypes = i1.getPrototype().equals(i2.getPrototype());
 		}

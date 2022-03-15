@@ -118,8 +118,7 @@ public class UnionEditorProviderTest extends AbstractUnionEditorTest {
 			assertNotNull(dialog);
 			pressButton(dialog, "No");
 			dialog.dispose();
-			dialog = null;
-			assertFalse(complexUnion.isEquivalent(model.viewComposite));
+            assertFalse(complexUnion.isEquivalent(model.viewComposite));
 
 			// Redo the apply
 			redo(program, false);
@@ -129,12 +128,10 @@ public class UnionEditorProviderTest extends AbstractUnionEditorTest {
 			assertNotNull(dialog);
 			pressButton(dialog, "No");
 			dialog.dispose();
-			dialog = null;
-			assertFalse(complexUnion.isEquivalent(model.viewComposite));
+            assertFalse(complexUnion.isEquivalent(model.viewComposite));
 		}
 		finally {
-			dialog = null;
-			program.removeListener(restoreListener);
+            program.removeListener(restoreListener);
 			cleanup();
 		}
 	}
@@ -224,8 +221,7 @@ public class UnionEditorProviderTest extends AbstractUnionEditorTest {
 		assertNotNull(dialog);
 		pressButton(dialog, "Yes");
 		dialog.dispose();
-		dialog = null;
-		provider = null;
+        provider = null;
 		assertFalse(tool.isVisible(provider));
 		assertTrue(complexUnion.isEquivalent(newDt));
 		assertFalse(complexUnion.isEquivalent(oldDt));
@@ -261,8 +257,7 @@ public class UnionEditorProviderTest extends AbstractUnionEditorTest {
 		assertNotNull(dialog);
 		pressButton(dialog, "Yes");
 		dialog.dispose();
-		dialog = null;
-		assertFalse(tool.isVisible(provider));
+        assertFalse(tool.isVisible(provider));
 		assertTrue(complexUnion.isEquivalent(newDt));
 		assertFalse(complexUnion.isEquivalent(oldDt));
 	}
@@ -294,8 +289,7 @@ public class UnionEditorProviderTest extends AbstractUnionEditorTest {
 		assertNotNull(dialog);
 		pressButton(dialog, "Cancel");
 		dialog.dispose();
-		dialog = null;
-		assertTrue(tool.isVisible(provider));
+        assertTrue(tool.isVisible(provider));
 		assertFalse(complexUnion.isEquivalent(model.viewComposite));
 		assertTrue(newDt.isEquivalent(model.viewComposite));
 	}

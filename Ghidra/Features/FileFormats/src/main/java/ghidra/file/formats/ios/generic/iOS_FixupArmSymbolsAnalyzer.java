@@ -85,7 +85,7 @@ public class iOS_FixupArmSymbolsAnalyzer extends AbstractAnalyzer {
 			return false;
 		}
 
-		Address address = null;
+		Address address;
 		try {
 			address = minAddress.add(0x200);
 		}

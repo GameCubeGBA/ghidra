@@ -214,7 +214,7 @@ public class CustomFavoritesView extends FavoritesView {
 				return item.getURL();
 			}
 
-			ID newID = null;
+			ID newID;
 			try {
 				newID = ID.create(target, helpSet);
 			}

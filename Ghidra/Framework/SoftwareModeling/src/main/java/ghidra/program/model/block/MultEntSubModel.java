@@ -155,7 +155,7 @@ public class MultEntSubModel implements SubroutineBlockModel {
 			}
 
 			// get the next address to process
-			Address a = null;
+			Address a;
 			a = todoList.removeFirst();
 
 			// Get basic block at the specified address

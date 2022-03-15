@@ -129,7 +129,7 @@ public class CreatePdbXmlFilesScript extends GhidraScript {
 
 		BufferedReader reader =
 			new BufferedReader(new InputStreamReader(currentProcess.getErrorStream()));
-		String line = null;
+		String line;
 
 		while ((line = reader.readLine()) != null) {
 			strBuilder.append(line);

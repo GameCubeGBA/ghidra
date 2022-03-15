@@ -340,7 +340,7 @@ public class HelpBuildUtils {
 		InputStreamReader isr = new InputStreamReader(Files.newInputStream(helpFile));
         try (BufferedReader reader = new BufferedReader(isr)) {
             StringBuilder buffy = new StringBuilder();
-            String line = null;
+            String line;
             while ((line = reader.readLine()) != null) {
                 buffy.append(line).append('\n');
             }

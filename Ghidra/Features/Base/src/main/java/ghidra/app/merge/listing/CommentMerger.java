@@ -320,8 +320,7 @@ class CommentMerger extends AbstractListingMerger {
 		if ((chosenConflictOption & KEEP_MY) != 0) {
 			listingMergeMgr.mergeMy.mergeComment(new AddressSet(addr),
 				programMergeFilterCommentType, both, monitor);
-			both = true;
-		}
+        }
 	}
 
 	private int getCodeUnitCommentType(int programMergeCommentType) {

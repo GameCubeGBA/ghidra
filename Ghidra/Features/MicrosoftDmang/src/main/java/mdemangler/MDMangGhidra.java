@@ -129,7 +129,7 @@ public class MDMangGhidra extends MDMang {
 	}
 
 	private DemangledObject processObjectReserved(MDObjectReserved objectReserved) {
-		DemangledObject object = null;
+		DemangledObject object;
 		if (objectReserved.getClass().equals(MDObjectReserved.class)) {
 			//Testing if the class is not a derived class of MDObjectReserved;
 			// In other words, is it exactly a MDObjectReserved?

@@ -45,8 +45,8 @@ public class MemoryBlocksValidator extends VTPreconditionValidator {
 		int sourceNumBlocks = sourceBlocks.length;
 		int destNumBlocks = destBlocks.length;
 
-		int numBlocksToCompare = 0;
-		int numBlocksNeededForPerfectMatch = 0;
+		int numBlocksToCompare;
+		int numBlocksNeededForPerfectMatch;
 
 		if (sourceNumBlocks >= destNumBlocks) {
 			numBlocksToCompare = destNumBlocks;

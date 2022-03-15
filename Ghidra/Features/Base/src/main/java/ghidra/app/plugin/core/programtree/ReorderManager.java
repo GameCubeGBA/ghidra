@@ -204,10 +204,10 @@ class ReorderManager {
 
 		boolean didReorder = false;
 		
-		int index = 0;
+		int index;
 		ProgramNode parentNode = (ProgramNode)destNode.getParent();
 		ProgramModule dropParentModule = dropNode.getParentModule();
-		ProgramModule targetModule = destNode.getModule();
+		ProgramModule targetModule;
 			
 		if (parentNode.equals(dropNode.getParent())) {
 			didReorder = true;
@@ -282,7 +282,7 @@ class ReorderManager {
                       int targetIndex, int dropAction) 
         throws NotFoundException, CircularDependencyException,
                 DuplicateGroupException{
-        Group group = null;
+        Group group;
         ProgramNode targetParent = (ProgramNode)destNode.getParent();
         
         // first add drop fragment or module

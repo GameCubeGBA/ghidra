@@ -694,7 +694,7 @@ class VarKeyInteriorNode extends VarKeyNode implements FieldKeyInteriorNode {
 			return deleteChild(rightKey);
 		}
 
-		boolean balanced = false;
+		boolean balanced;
 		int halfKeySpace = (leftKeySpace + rightKeySpace) / 2;
 		if (halfKeySpace < leftKeySpace) {
 			// Attempt to move some keys to the right node

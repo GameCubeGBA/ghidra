@@ -242,7 +242,7 @@ public class SelectByFlowPlugin extends Plugin implements OptionsChangeListener 
 	void performSelection(TaskMonitor monitor, NavigatableActionContext context, int selectionType,
 			AddressSet addressSet) {
 		Program program = context.getProgram();
-		AddressSet selectionAddressSet = null;
+		AddressSet selectionAddressSet;
 		if (monitor == null) {
 			monitor = TaskMonitor.DUMMY;
 		}

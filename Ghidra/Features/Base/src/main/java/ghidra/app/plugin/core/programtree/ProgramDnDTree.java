@@ -1120,7 +1120,7 @@ public class ProgramDnDTree extends DragNDropTree {
 			}
 			Point popupPoint = event != null ? event.getPoint() : null;
 			int nselected = getSelectionCount();
-			TreePath selPath = null;
+			TreePath selPath;
 			if (popupPoint != null) {
 				selPath = getPathForLocation((int) popupPoint.getX(), (int) popupPoint.getY());
 			}
@@ -1501,7 +1501,7 @@ public class ProgramDnDTree extends DragNDropTree {
 			name = getNewFragmentName();
 		}
 		ProgramModule destModule = destNode.getModule();
-		ProgramFragment newFrag = null;
+		ProgramFragment newFrag;
 		try {
 			newFrag = destModule.createFragment(name);
 			moveRanges(newFrag, view);
@@ -1626,7 +1626,7 @@ public class ProgramDnDTree extends DragNDropTree {
 			// Node has not been fully populated, so it wasn't found,
 			// so find the first path we have
 			//
-			GroupPath parentgp = null;
+			GroupPath parentgp;
 			parentgp = gp.getParentPath();
 			while (parentgp != null) {
 

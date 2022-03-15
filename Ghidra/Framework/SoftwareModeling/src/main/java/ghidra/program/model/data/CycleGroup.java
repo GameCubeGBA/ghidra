@@ -181,7 +181,7 @@ public class CycleGroup {
 
 		DataType dataType = currentDataType;
 
-		Pointer ptr = null;
+		Pointer ptr;
 		if (stackPointers && dataType instanceof Pointer) {
 			ptr = (Pointer) dataType;
 			dataType = getNextDataType(ptr.getDataType(), true);

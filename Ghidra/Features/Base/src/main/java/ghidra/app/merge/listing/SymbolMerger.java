@@ -276,7 +276,7 @@ class SymbolMerger extends AbstractListingMerger {
 		if (srcNamespace.equals(srcGlobalNs)) {
 			return resultPgm.getGlobalNamespace();
 		}
-		Namespace resolvedNamespace = null;
+		Namespace resolvedNamespace;
 		SymbolTable resolveSymTab = resultPgm.getSymbolTable();
 		Symbol srcNsSymbol = srcNamespace.getSymbol();
 		long srcNsID = srcNsSymbol.getID();
@@ -672,9 +672,7 @@ class SymbolMerger extends AbstractListingMerger {
 				continue;
 			}
 		}
-		symbolKeys = null;
-		resolvedSymbols = null;
-	}
+    }
 
 	private void cleanupIdArrays() {
 		latestRemoveIDs = null;

@@ -117,7 +117,7 @@ public class DropShadow {
 
 		int shadowRgb = shadowColor.getRGB() & 0x00ffffff;
 		int[] aHistory = new int[shadowSize];
-		int historyIdx = 0;
+		int historyIdx;
 		int aSum;
 
 		int[] dataBuffer = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();

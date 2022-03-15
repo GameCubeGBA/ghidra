@@ -95,7 +95,7 @@ class AlignedComponentPacker {
 		if (lastComponent == null) {
 			return 0;
 		}
-		int offset = 0;
+		int offset;
 		if (groupOffset >= 0 && lastComponent.isBitFieldComponent() &&
 			bitFieldPacking.useMSConvention()) {
 			// skip beyond unused bits based upon allocation size

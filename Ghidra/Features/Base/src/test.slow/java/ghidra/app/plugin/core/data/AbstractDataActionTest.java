@@ -997,7 +997,7 @@ public abstract class AbstractDataActionTest extends AbstractGhidraHeadedIntegra
 		StringBuilder strBuf = new StringBuilder(bytes.length + 2);
 		boolean bytemode = true;
 		for (int index = 0; index < bytes.length; index += 2) {
-			char c = 0;
+			char c;
 			if (program.getLanguage().isBigEndian()) {
 				c = (char) ((bytes[index + 1] & 0xff) | ((bytes[index] << 8) & 0xff00));
 			}
@@ -1204,8 +1204,7 @@ public abstract class AbstractDataActionTest extends AbstractGhidraHeadedIntegra
 			// Data actions not available if selection contains instructions
 			if (program.getListing().getInstructions(sel, true).hasNext()) {
 				data = null;
-				useSelection = false;
-			}
+            }
 		}
 		else if (data != null) {
 

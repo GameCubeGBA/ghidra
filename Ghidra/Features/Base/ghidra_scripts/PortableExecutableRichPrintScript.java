@@ -43,7 +43,7 @@ public class PortableExecutableRichPrintScript extends GhidraScript {
 		ByteProvider provider =
 			new MemoryByteProvider(currentProgram.getMemory(), currentProgram.getImageBase());
 
-		PortableExecutable pe = null;
+		PortableExecutable pe;
 
 		try {
 			pe = new PortableExecutable(provider, SectionLayout.MEMORY, false, false);

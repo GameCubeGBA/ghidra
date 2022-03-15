@@ -193,7 +193,7 @@ public class ColorizingPlugin extends ProgramPlugin implements DomainObjectListe
 					return;
 				}
 
-				Command command = null;
+				Command command;
 				ProgramSelection selection = listingContext.getSelection();
 				if (selection != null && !selection.isEmpty()) {
 					command = new SetColorCommand(color, service, selection);

@@ -86,7 +86,7 @@ public class MnemonicFieldMouseHandler implements FieldMouseHandlerExtension {
 			SymbolTable st = codeUnit.getProgram().getSymbolTable();
 			Symbol symbol = st.getSymbol(refs[0]);
 
-			ProgramLocation loc = null;
+			ProgramLocation loc;
 			if (symbol != null) {
 				loc = symbol.getProgramLocation();
 			}

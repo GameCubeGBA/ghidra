@@ -49,8 +49,7 @@ public class StructureEditorUnlockedCellEdit1Test
 		NumberInputDialog dialog = waitForDialogComponent(NumberInputDialog.class);
 		assertNotNull(dialog);
 		okInput(dialog, newStringComponentSize);
-		dialog = null;
-		waitUntilDialogProviderGone(NumberInputDialog.class, 2000);
+        waitUntilDialogProviderGone(NumberInputDialog.class, 2000);
 
 		assertNotEditingField();
 		assertEquals(1, model.getNumSelectedRows());
@@ -85,8 +84,7 @@ public class StructureEditorUnlockedCellEdit1Test
 		NumberInputDialog dialog = waitForDialogComponent(NumberInputDialog.class);
 		assertNotNull(dialog);
 		okInput(dialog, newStringComponentSize);
-		dialog = null;
-		waitUntilDialogProviderGone(NumberInputDialog.class, 2000);
+        waitUntilDialogProviderGone(NumberInputDialog.class, 2000);
 
 		assertNotEditingField();
 		assertEquals(1, model.getNumSelectedRows());
@@ -120,8 +118,7 @@ public class StructureEditorUnlockedCellEdit1Test
 		NumberInputDialog dialog = waitForDialogComponent(NumberInputDialog.class);
 		assertNotNull(dialog);
 		okInput(dialog, newStringComponentSize);
-		dialog = null;
-		waitUntilDialogProviderGone(NumberInputDialog.class, 2000);
+        waitUntilDialogProviderGone(NumberInputDialog.class, 2000);
 
 		assertNotEditingField();
 		assertEquals(1, model.getNumSelectedRows());
@@ -152,8 +149,7 @@ public class StructureEditorUnlockedCellEdit1Test
 		NumberInputDialog dialog = waitForDialogComponent(NumberInputDialog.class);
 		assertNotNull(dialog);
 		okInput(dialog, 15);
-		dialog = null;
-		waitUntilDialogProviderGone(NumberInputDialog.class, 2000);
+        waitUntilDialogProviderGone(NumberInputDialog.class, 2000);
 
 		assertNotEditingField();
 		assertEquals(1, model.getNumSelectedRows());

@@ -81,7 +81,7 @@ public class DataTypeDecompilerHover extends AbstractConfigurableHover
 			return null;
 		}
 
-		String toolTipText = null;
+		String toolTipText;
 		if (token instanceof ClangFieldToken) {
 			toolTipText = createFieldToolTipText((ClangFieldToken) token, dt);
 		}

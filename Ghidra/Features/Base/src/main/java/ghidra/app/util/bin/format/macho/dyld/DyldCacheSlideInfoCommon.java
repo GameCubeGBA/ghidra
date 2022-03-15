@@ -58,7 +58,7 @@ public abstract class DyldCacheSlideInfoCommon implements StructConverter {
 		if (slideInfoOffset == 0) {
 			return null;
 		}
-		DyldCacheSlideInfoCommon returnedSlideInfo = null;
+		DyldCacheSlideInfoCommon returnedSlideInfo;
 
 		monitor.setMessage("Parsing DYLD slide info...");
 		monitor.initialize(1);

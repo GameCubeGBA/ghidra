@@ -74,7 +74,7 @@ public class ArrayMethods {
 
 
 		//emit the call to multianewarrayOp
-		String[] multianewarrayOpArgs = null;
+		String[] multianewarrayOpArgs;
 
 		//if clause: more dimension arguments than will fit in a call to multianewarrayOp
 		//-1 since the first argument will be a reference to the class name
@@ -135,7 +135,7 @@ public class ArrayMethods {
 		}
 	}
 	public static DataType getArrayBaseType(int i, DataTypeManager dtManager) {
-		String primitiveType = null;
+		String primitiveType;
 		switch(i){
 			case JavaClassConstants.T_BOOLEAN:
 				primitiveType = "Z";

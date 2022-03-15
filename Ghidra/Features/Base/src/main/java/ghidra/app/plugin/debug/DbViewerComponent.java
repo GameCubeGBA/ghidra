@@ -212,7 +212,7 @@ class DbViewerComponent extends JPanel {
 
 	private JPanel createSouthPanel(Table table) {
 		JPanel panel = new JPanel(new BorderLayout());
-		TableModel model = null;
+		TableModel model;
 		GTable gTable = new GTable();
 		if (table.getRecordCount() <= 10000) {
 			model = new DbSmallTableModel(table);

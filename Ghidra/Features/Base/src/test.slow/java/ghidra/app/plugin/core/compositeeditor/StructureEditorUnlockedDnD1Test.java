@@ -59,8 +59,7 @@ public class StructureEditorUnlockedDnD1Test extends AbstractStructureEditorTest
 		finally {
 			if (dialog != null) {
 				cancelInput(dialog);
-				dialog = null;
-			}
+            }
 		}
 	}
 }

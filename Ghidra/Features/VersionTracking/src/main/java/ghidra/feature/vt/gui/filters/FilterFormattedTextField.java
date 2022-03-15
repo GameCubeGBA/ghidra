@@ -40,7 +40,7 @@ public class FilterFormattedTextField extends JFormattedTextField {
 
 	private Set<FilterStatusListener> listeners = new HashSet<FilterStatusListener>();
 
-	private FilterEditingStatus currentStatus = NONE;
+	private FilterEditingStatus currentStatus;
 	private final Object defaultValue;
 	private final String defaultText;
 	private boolean isError;

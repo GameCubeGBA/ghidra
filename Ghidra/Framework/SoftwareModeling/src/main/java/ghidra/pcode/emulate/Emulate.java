@@ -302,7 +302,7 @@ public class Emulate {
 
 	public void executeConditionalBranch(PcodeOpRaw op) {
 		Varnode condVar = op.getInput(1);
-		boolean takeBranch = false;
+		boolean takeBranch;
 		if (condVar.getSize() > 8) {
 			takeBranch = !memstate.getBigInteger(condVar, false).equals(BigInteger.ZERO);
 		}

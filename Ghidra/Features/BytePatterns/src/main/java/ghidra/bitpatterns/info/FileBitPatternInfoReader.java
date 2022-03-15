@@ -182,7 +182,7 @@ public class FileBitPatternInfoReader {
 		}
 		numFiles++;
 
-		FileBitPatternInfo fileInfo = null;
+		FileBitPatternInfo fileInfo;
 		try {
 			fileInfo = FileBitPatternInfo.fromXmlFile(dataFile);
 		}

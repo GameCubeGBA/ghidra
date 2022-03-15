@@ -101,7 +101,7 @@ abstract class SourceArchiveAdapter {
 
 		DBHandle tmpHandle = new DBHandle();
 		long id = tmpHandle.startTransaction();
-		SourceArchiveAdapter tmpAdapter = null;
+		SourceArchiveAdapter tmpAdapter;
 		try {
 			tmpAdapter = new SourceArchiveAdapterV0(tmpHandle, true);
 			Iterator<DBRecord> it = oldAdapter.getRecords().iterator();

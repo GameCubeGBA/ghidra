@@ -385,7 +385,7 @@ class EditPluginPathDialog extends DialogComponentProvider {
 			}
 		}
 		else {
-			int newIndex = -1;
+			int newIndex;
 			int selIndex = pluginPathsList.getSelectedIndex();
 			int size = listModel.size();
 			String path = listModel.remove(selIndex);

@@ -49,7 +49,7 @@ public abstract class AbstractInstructionTable extends GhidraTable {
 	 * {@link InstructionTableDataObject} instances constitute the contents of
 	 * the table. This array is effectively the table data model.
 	 */
-	protected InstructionTableDataObject[][] tableContentsDO = null;
+	protected InstructionTableDataObject[][] tableContentsDO;
 
 	protected int numColumns;
 	protected Object[] columnNames;

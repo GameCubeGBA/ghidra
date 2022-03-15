@@ -256,7 +256,7 @@ class SplitBlockDialog extends DialogComponentProvider {
 
 		private boolean blockOneLengthChanged() {
 
-			int length = 0;
+			int length;
 			try {
 				length = getLength();
 			}
@@ -287,7 +287,7 @@ class SplitBlockDialog extends DialogComponentProvider {
 
 		private boolean blockTwoLengthChanged() {
 
-			int length = 0;
+			int length;
 			try {
 				length = getLength();
 			}
@@ -352,7 +352,7 @@ class SplitBlockDialog extends DialogComponentProvider {
 
 		private boolean blockOneEndChanged() {
 			Address start = block.getStart();
-			Address end = null;
+			Address end;
 			try {
 				end = getAddress();
 			}
@@ -372,7 +372,7 @@ class SplitBlockDialog extends DialogComponentProvider {
 				return false;
 			}
 			// change block One length and blockTwoStart, blockTwoLength
-			long length = 0;
+			long length;
 			try {
 				length = end.subtract(start) + 1;
 			}
@@ -404,7 +404,7 @@ class SplitBlockDialog extends DialogComponentProvider {
 		}
 
 		private boolean blockTwoStartChanged() {
-			Address start = null;
+			Address start;
 			try {
 				start = getAddress();
 			}

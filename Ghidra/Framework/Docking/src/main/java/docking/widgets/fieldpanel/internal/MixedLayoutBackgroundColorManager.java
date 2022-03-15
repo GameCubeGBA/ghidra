@@ -72,7 +72,7 @@ public class MixedLayoutBackgroundColorManager implements LayoutBackgroundColorM
 	}
 
 	public Color getPaddingColor(int padIndex) {
-		Color paddingColor = null;
+		Color paddingColor;
 		if (padIndex == 0) {
 			paddingColor = leftBorderColor;
 		}

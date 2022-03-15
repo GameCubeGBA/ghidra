@@ -50,7 +50,7 @@ public class CrushedPNGFileSystem extends GFileSystemBase {
 	@Override
 	public boolean isValid(TaskMonitor monitor) throws IOException {
 		int signatureLength = CrushedPNGConstants.SIGNATURE_BYTES.length;
-		byte[] signatureArray = new byte[signatureLength];
+		byte[] signatureArray;
 		signatureArray = provider.readBytes(0, signatureLength);
 
 		if (Arrays.equals(signatureArray, CrushedPNGConstants.SIGNATURE_BYTES)) {

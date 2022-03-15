@@ -200,7 +200,7 @@ public class DisassemblerPlugin extends Plugin {
 		ProgramSelection currentSelection = context.getSelection();
 		ProgramLocation currentLocation = context.getLocation();
 		Program currentProgram = context.getProgram();
-		DisassembleCommand cmd = null;
+		DisassembleCommand cmd;
 
 		if ((currentSelection != null) && (!currentSelection.isEmpty())) {
 			cmd = new DisassembleCommand(currentSelection, currentSelection, true);
@@ -217,7 +217,7 @@ public class DisassemblerPlugin extends Plugin {
 		ProgramLocation currentLocation = context.getLocation();
 		Program currentProgram = context.getProgram();
 
-		DisassembleCommand cmd = null;
+		DisassembleCommand cmd;
 
 		if ((currentSelection != null) && (!currentSelection.isEmpty())) {
 			cmd = new DisassembleCommand(currentSelection, currentSelection, false);

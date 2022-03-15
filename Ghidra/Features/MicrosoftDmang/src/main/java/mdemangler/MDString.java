@@ -171,7 +171,7 @@ public class MDString extends MDParsableItem {
 	}
 
 	private byte parseByte() throws MDException {
-		byte b = 0;
+		byte b;
 		char c = dmang.getAndIncrement();
 		if (Character.isLetter(c) || Character.isDigit(c) || c == '_' || c == '$') {
 			b = (byte) c;
@@ -265,7 +265,7 @@ public class MDString extends MDParsableItem {
 		long crc;
 
 		private long reflectBits(long val) {
-			int i = 0;
+			int i;
 			long newVal = 0L;
 			for (i = 0; i < 32; i++) {
 				newVal >>= 1;

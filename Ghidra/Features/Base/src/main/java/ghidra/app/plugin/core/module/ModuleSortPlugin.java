@@ -206,8 +206,8 @@ public class ModuleSortPlugin extends ProgramPlugin {
 		@Override
 		public int compare(Group g1, Group g2) {
 			if (sortType == SORT_BY_ADDRESS) {
-				Address addr1 = null;
-				Address addr2 = null;
+				Address addr1;
+				Address addr2;
 				if (g1 instanceof ProgramFragment) {
 					addr1 = ((ProgramFragment) g1).getMinAddress();
 				}

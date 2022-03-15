@@ -58,7 +58,7 @@ public class OatExecAnalyzer extends FileFormatAnalyzer {
 	@Override
 	public boolean analyze(Program program, AddressSetView set, TaskMonitor monitor, MessageLog log)
 			throws Exception {
-		OatHeader header = null;
+		OatHeader header;
 		try {
 			BinaryReader reader = OatUtilities.getBinaryReader(program);
 			header = OatHeaderFactory.newOatHeader(reader);

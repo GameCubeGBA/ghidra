@@ -514,7 +514,7 @@ public class Pic17c7xxAnalyzer extends AbstractAnalyzer {
 		}
 
 		Address addr;
-		Register reg = null;
+		Register reg;
 		if (objs[0] instanceof Register) {
 			return ((Register) objs[0]).getName();
 		}

@@ -218,8 +218,7 @@ public class GThreadedTablePanel<T> extends JPanel {
 	private void doShowLoadingProgressPanel() {
 		if (loadedComponent != null) {
 			remove(loadedComponent);
-			loadedComponent = null;
-		}
+        }
 
 		loadedComponent = loadingProgressMonitor;
 		add(loadedComponent, BorderLayout.SOUTH);
@@ -233,8 +232,7 @@ public class GThreadedTablePanel<T> extends JPanel {
 	private void doShowNonLoadingProgressPanel() {
 		if (loadedComponent != null) {
 			remove(loadedComponent);
-			loadedComponent = null;
-		}
+        }
 
 		loadedComponent = defaultMonitor;
 		add(loadedComponent, BorderLayout.SOUTH);

@@ -390,7 +390,7 @@ public abstract class HeadlessScript extends GhidraScript {
 	public void runScript(String scriptName, String[] scriptArguments, GhidraState scriptState)
 			throws Exception {
 
-		boolean isHeadlessScript = false;
+		boolean isHeadlessScript;
 
 		if (scriptSetOption != null) {
 			resolveContinuationOptionWith(scriptSetOption);

@@ -27,7 +27,7 @@ public final class DataRefType extends RefType {
 	protected static final int WRITEX   =  2;
 	protected static final int INDX     =  4;
 
-	private int      access = 0;
+	private int      access;
 	
 	/**
 	 * Constructs a DataRefType with the given type.

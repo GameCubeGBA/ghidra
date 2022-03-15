@@ -103,7 +103,7 @@ public class FillOutStructureCmd extends BackgroundCommand {
 
 		int transaction = currentProgram.startTransaction("Fill Out Structure Variable");
 		try {
-			HighVariable var = null;
+			HighVariable var;
 
 			if (!(currentLocation instanceof DecompilerLocation)) {
 				// if we don't have one, make one, and map variable to a varnode
@@ -348,7 +348,7 @@ public class FillOutStructureCmd extends BackgroundCommand {
 			return null;
 		}
 		DecompInterface decomplib = setUpDecompiler();
-		HighVariable highVar = null;
+		HighVariable highVar;
 
 		// call decompiler to get syntax tree
 		try {

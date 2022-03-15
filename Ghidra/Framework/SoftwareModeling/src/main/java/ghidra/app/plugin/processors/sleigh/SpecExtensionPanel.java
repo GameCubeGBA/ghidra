@@ -440,7 +440,7 @@ public class SpecExtensionPanel extends JPanel {
 		FileReader inputReader = new FileReader(file);
         try (BufferedReader reader = new BufferedReader(inputReader)) {
             StringBuilder buffer = new StringBuilder();
-            String line = null;
+            String line;
             while ((line = reader.readLine()) != null) {
                 buffer.append(line);
                 buffer.append('\n');
@@ -484,7 +484,7 @@ public class SpecExtensionPanel extends JPanel {
 			return;
 		}
 		String document;
-		DocInfo docInfo = null;
+		DocInfo docInfo;
 		Exception errMessage = null;
 		try {
 			document = fileToString(file).trim();
@@ -542,7 +542,7 @@ public class SpecExtensionPanel extends JPanel {
 		PcodeInjectLibrary injectLibrary = compilerSpec.getPcodeInjectLibrary();
 		InjectPayload payload;
 		PrototypeModel model;
-		String resultString = null;
+		String resultString;
 		if (element.status == Status.CORE) {
 			StringBuilder buffer = new StringBuilder();
 			switch (element.type) {
@@ -605,7 +605,7 @@ public class SpecExtensionPanel extends JPanel {
 			errMessage = "Unable to  build document for " + compilerElement.name;
 		}
 		else {
-			FileWriter writer = null;
+			FileWriter writer;
 			try {
 				writer = new FileWriter(outputFile);
 				writer.write(exportString);

@@ -373,7 +373,7 @@ class VersionFile {
 		
 		int freeListIndex = vfIndexProvider.allocateIndex();
 		int thisIndex = freeListIndex;
-		int nextIndex = -1;
+		int nextIndex;
 
 		int maxOffset = bufferSize - FREE_LIST_ENTRY_SIZE;
 		

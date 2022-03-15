@@ -58,7 +58,7 @@ public class SelectBackRefsAction extends NavigatableContextAction {
 	 */
 	@Override
     public void actionPerformed(NavigatableActionContext context) {
-		AddressSetView addressSet = null;
+		AddressSetView addressSet;
 		
 		if (context.hasSelection()) {
 			addressSet = context.getSelection();

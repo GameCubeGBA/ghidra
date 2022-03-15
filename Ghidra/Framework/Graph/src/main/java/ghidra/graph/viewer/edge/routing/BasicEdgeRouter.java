@@ -32,7 +32,7 @@ import ghidra.graph.viewer.VisualVertex;
 public class BasicEdgeRouter<V extends VisualVertex, E extends VisualEdge<V>> {
 
 	protected VisualizationServer<V, E> viewer;
-	protected Collection<E> edges = null;
+	protected Collection<E> edges;
 
 	public BasicEdgeRouter(VisualizationServer<V, E> viewer, Collection<E> edges) {
 		this.viewer = viewer;

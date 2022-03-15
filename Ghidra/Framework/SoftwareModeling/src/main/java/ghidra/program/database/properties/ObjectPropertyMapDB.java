@@ -63,7 +63,7 @@ public class ObjectPropertyMapDB extends PropertyMapDB implements ObjectProperty
 		super(dbHandle, errHandler, changeMgr, addrMap, name);
 		this.saveableObjectClass = saveableObjectClass;
 		this.supportsPrivate = supportsPrivate;
-		Saveable tokenInstance = null;
+		Saveable tokenInstance;
 		try {
 			if (saveableObjectClass == GenericSaveable.class) {
 				tokenInstance = new GenericSaveable(null, null);

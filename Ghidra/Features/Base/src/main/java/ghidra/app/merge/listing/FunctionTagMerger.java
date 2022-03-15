@@ -221,7 +221,7 @@ public class FunctionTagMerger implements MergeResolver, ListingMergeConstants {
 	 * @throws CancelledException
 	 */
 	private void merge(int chosenConflictOption, TaskMonitor monitor) throws CancelledException {
-		Program fromPgm = null;
+		Program fromPgm;
 		switch (chosenConflictOption) {
 			case KEEP_LATEST:
 				fromPgm = latestProgram;

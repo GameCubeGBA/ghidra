@@ -104,7 +104,7 @@ public class HttpUtil {
 	public static String getFile(String httpUrlString, Properties httpRequestProperties,
 			boolean allowRedirect, File destFile) throws MalformedURLException, IOException {
 
-		HttpURLConnection connection = null;
+		HttpURLConnection connection;
 		InputStream content = null;
 		try {
 

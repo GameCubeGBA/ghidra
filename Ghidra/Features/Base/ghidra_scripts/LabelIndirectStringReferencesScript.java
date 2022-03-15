@@ -67,7 +67,7 @@ public class LabelIndirectStringReferencesScript extends GhidraScript {
 		println("Number of strings found: " + strAddrSet.size());
 
         for (Address strAddr : strAddrSet) {
-            List<Address> allRefAddrs = new ArrayList<Address>();
+            List<Address> allRefAddrs;
             allRefAddrs = findAllReferences(strAddr, monitor);
 
             // Loop through refs to see which that have references to them (ie a label there)

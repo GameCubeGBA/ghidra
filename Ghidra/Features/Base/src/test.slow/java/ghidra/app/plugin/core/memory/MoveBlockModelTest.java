@@ -221,7 +221,7 @@ public class MoveBlockModelTest extends AbstractGhidraHeadedIntegrationTest
 	public void testMoveOverlayBlock() throws Exception {
 		// create an overlay block
 		int transactionID = notepad.startTransaction("test");
-		MemoryBlock memBlock = null;
+		MemoryBlock memBlock;
 		try {
 			memBlock = notepad.getMemory().createInitializedBlock("overlay",
 				getNotepadAddr(0x01001000), 0x1000, (byte) 0xa, null, true);

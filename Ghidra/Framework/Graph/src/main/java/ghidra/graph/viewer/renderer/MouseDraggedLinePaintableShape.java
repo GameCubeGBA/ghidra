@@ -69,8 +69,7 @@ public class MouseDraggedLinePaintableShape extends PaintableShape {
 
 			useControl = !useControl;
 
-			p1 = p2;
-			p2 = p3;
+            p2 = p3;
 		}
 
 		for (int i = points.size() - 1; i >= 0; i--) {

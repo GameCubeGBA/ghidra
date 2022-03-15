@@ -290,7 +290,7 @@ public class DisassembledViewPluginTest extends AbstractGhidraHeadedIntegrationT
 	 * @return A new color that is different than the one given.
 	 */
 	public Color deriveNewColor(Color originalColor) {
-		Color newColor = null;
+		Color newColor;
 
 		if (originalColor == Color.BLACK) {
 			newColor = originalColor.brighter();

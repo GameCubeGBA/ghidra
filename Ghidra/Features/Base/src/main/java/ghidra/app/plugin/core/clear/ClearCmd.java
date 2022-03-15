@@ -34,7 +34,7 @@ public class ClearCmd extends BackgroundCommand {
 
 	private AddressSetView view;
 	private ClearOptions options;
-	private boolean sendIndividualEvents = false;
+	private boolean sendIndividualEvents;
 
 	/**
 	 * A convenience constructor to clear a single code unit.

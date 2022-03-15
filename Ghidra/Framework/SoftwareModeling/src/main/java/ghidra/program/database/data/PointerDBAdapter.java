@@ -71,7 +71,7 @@ abstract class PointerDBAdapter implements RecordTranslator {
 
 		DBHandle tmpHandle = new DBHandle();
 		long id = tmpHandle.startTransaction();
-		PointerDBAdapter tmpAdapter = null;
+		PointerDBAdapter tmpAdapter;
 		try {
 			tmpAdapter = new PointerDBAdapterV2(tmpHandle, true);
 			RecordIterator it = oldAdapter.getRecords();

@@ -50,7 +50,7 @@ public class LabelDirectFunctionReferencesScript extends GhidraScript {
 
 		List<Function> funcSet = new ArrayList<>();
 		List<Address> resultSet = new ArrayList<>();
-		List<Address> refs = new ArrayList<>();
+		List<Address> refs;
 
 		FunctionIterator funcIter = listing.getFunctions(true);
 		while (funcIter.hasNext() && !monitor.isCancelled()) {

@@ -44,7 +44,7 @@ public class LocalDateTextField {
 	private LocalDate minimum;
 	private LocalDate maximum;
 
-	private DateTimeFormatter dateFormat = null;
+	private DateTimeFormatter dateFormat;
 
 	private List<ChangeListener> listeners = new ArrayList<>();
 

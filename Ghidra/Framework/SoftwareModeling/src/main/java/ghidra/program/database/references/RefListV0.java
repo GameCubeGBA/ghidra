@@ -297,7 +297,7 @@ class RefListV0 extends RefList {
 	synchronized boolean removeRef(Address deleteAddr, int opIndex) throws IOException {
 		ReferenceDB[] result = new ReferenceDB[1];
 		int pos = 0;
-		int newPos = 0;
+		int newPos;
 		for (int i = 0; i < numRefs; i++) {
 			newPos = decode(refData, pos, result);
 			if (result[0].getOperandIndex() == opIndex) {
@@ -359,7 +359,7 @@ class RefListV0 extends RefList {
 
 		Reference[] result = new Reference[1];
 		int pos = 0;
-		int newPos = 0;
+		int newPos;
 		for (int i = 0; i < numRefs; i++) {
 			newPos = decode(refData, pos, result);
 			Reference r = result[0];
@@ -403,7 +403,7 @@ class RefListV0 extends RefList {
 
 		Reference[] result = new Reference[1];
 		int pos = 0;
-		int newPos = 0;
+		int newPos;
 		for (int i = 0; i < numRefs; i++) {
 			newPos = decode(refData, pos, result);
 			Reference r = result[0];
@@ -459,7 +459,7 @@ class RefListV0 extends RefList {
 		}
 		Reference[] result = new Reference[1];
 		int pos = 0;
-		int newPos = 0;
+		int newPos;
 		for (int i = 0; i < numRefs; i++) {
 			newPos = decode(refData, pos, result);
 			Reference ref = result[0];
@@ -562,7 +562,7 @@ class RefListV0 extends RefList {
 
 		SourceType source = flags.getSource();
 
-		long offsetOrShift = 0;
+		long offsetOrShift;
 
 		if (flags.hasSymbolID()) {
 			symbolID = getLong(data, offset);

@@ -350,7 +350,7 @@ public class StructureEditorAlignmentTest extends AbstractStructureEditorTest {
 		String name = function.getName();
 		FunctionDefinitionDataType functionDefinitionDataType =
 			new FunctionDefinitionDataType(function, true);
-		FunctionDefinition functionDefinition = null;
+		FunctionDefinition functionDefinition;
 		boolean commit = false;
 		txId = program.startTransaction("Modify Program");
 		try {

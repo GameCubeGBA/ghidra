@@ -36,8 +36,8 @@ public class FileIDFactory {
 			Thread.sleep(2);
 		} catch (InterruptedException e1) {
 		}
-		int uniquePort = 0;
-		byte[] addrBytes = null;
+		int uniquePort;
+		byte[] addrBytes;
 		ServerSocket serverSocket = null;
 		try {
 			StringBuilder buf = new StringBuilder();

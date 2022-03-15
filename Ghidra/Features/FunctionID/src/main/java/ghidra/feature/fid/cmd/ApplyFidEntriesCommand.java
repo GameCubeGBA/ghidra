@@ -111,8 +111,8 @@ public class ApplyFidEntriesCommand extends BackgroundCommand {
 
 	private void processMatches(FidSearchResult result, Program program, TaskMonitor monitor)
 			throws CancelledException {
-		String bookmarkContents = null;
-		String plateCommentContents = null;
+		String bookmarkContents;
+		String plateCommentContents;
 
 		if (result.matches.isEmpty()) {
 			// nothing to do - eliminate functions above might have removed all possibilities

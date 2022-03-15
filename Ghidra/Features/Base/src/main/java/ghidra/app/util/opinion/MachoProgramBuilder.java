@@ -956,7 +956,7 @@ public class MachoProgramBuilder {
 	 */
 	protected Address setupHeaderAddr(Collection<SegmentCommand> segments)
 			throws AddressOverflowException {
-		Address headerAddr = null;
+		Address headerAddr;
 		long lowestFileOffset = Long.MAX_VALUE;
 
 		// Check to see if the header resides in an existing segment.  If it does, we know its

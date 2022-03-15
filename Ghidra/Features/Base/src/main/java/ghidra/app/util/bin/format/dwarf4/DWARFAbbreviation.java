@@ -69,7 +69,7 @@ public class DWARFAbbreviation
 		Map<Integer, DWARFAbbreviation> result = new HashMap<>();
 
 		// Read all abbreviations for this compilation unit and add to a map
-		DWARFAbbreviation abbrev = null;
+		DWARFAbbreviation abbrev;
 		while ((abbrev = DWARFAbbreviation.read(reader, prog, monitor)) != null) {
 			monitor.checkCanceled();
 			result.put(abbrev.abbreviationCode, abbrev);

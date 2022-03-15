@@ -159,8 +159,7 @@ public class ArrayTypeApplier extends MsTypeApplier {
 			Msg.warn(this, msg);
 			// bad calculation.  Underlying type does not evenly fit into array total size.
 			underlyingDataType = Undefined1DataType.dataType;
-			longUnderlyingSize = 1L;
-			longNumElements = longArraySize;
+            longNumElements = longArraySize;
 		}
 
 		int numElements = (int) longNumElements;

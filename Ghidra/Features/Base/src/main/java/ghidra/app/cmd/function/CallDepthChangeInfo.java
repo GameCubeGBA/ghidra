@@ -348,7 +348,7 @@ public class CallDepthChangeInfo {
 					Varnode input = op.getInput(0);
 					// if we know the processor context, find the value
 					if (procContext != null && input.isRegister()) {
-						Register reg = null;
+						Register reg;
 						reg = trans.getRegister(input);
 						if (procContext.hasValue(reg)) {
 							long value = procContext.getValue(reg, true).longValue();
@@ -385,7 +385,7 @@ public class CallDepthChangeInfo {
 			return false;
 		}
 
-		Register reg = null;
+		Register reg;
 		reg = trans.getRegister(output);
 
 		// is this register the stack pointer
@@ -528,7 +528,7 @@ public class CallDepthChangeInfo {
 				FlowType ftype = instr.getFlowType();
 				if (possiblePurge && ftype.isTerminal()) {
 					if (instr.getMnemonicString().compareToIgnoreCase("ret") == 0) {
-						int tempPurge = 0;
+						int tempPurge;
 						Scalar scalar = instr.getScalar(0);
 						if (scalar != null) {
 							tempPurge = (int) scalar.getSignedValue();

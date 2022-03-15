@@ -111,7 +111,7 @@ public class SubroutineModelCmd extends BackgroundCommand {
 			return true; // ignore this because the program has changed since this command was
 		}                // scheduled
 
-		SubroutineBlockModel subModel = null;
+		SubroutineBlockModel subModel;
 		if (modelName == null) {
 			subModel = (SubroutineBlockModel) blockModelService.getActiveSubroutineModel(program);
 		}
@@ -135,8 +135,8 @@ public class SubroutineModelCmd extends BackgroundCommand {
 		}
 
 		try {
-			CodeBlockIterator cbi = null;
-			ProgramModule module = null;
+			CodeBlockIterator cbi;
+			ProgramModule module;
 			if (group instanceof ProgramModule) {
 				if (group.equals(root)) {
 					cbi = subModel.getCodeBlocks(monitor);

@@ -57,7 +57,7 @@ public class InsertBytesWidget extends DialogComponentProvider implements KeyLis
 	// set of instructions.
 	private PseudoDisassembler disassembler;
 
-	private InstructionSearchDialog dialog = null;
+	private InstructionSearchDialog dialog;
 
 	private Program program;
 

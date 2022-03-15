@@ -82,7 +82,7 @@ class MemoryMapManager {
 		Listing listing = program.getListing();
 		String[] treeNames = listing.getTreeNames();
 		for (String treeName : treeNames) {
-			boolean duplicate = false;
+			boolean duplicate;
 			int index = 0;
 
 			ProgramFragment frag = listing.getFragment(treeName, start);
@@ -214,7 +214,7 @@ class MemoryMapManager {
 			}
 		}
 
-		int option = -1;
+		int option;
 
 		option = OptionDialog.showOptionDialog(plugin.getMemoryMapProvider().getComponent(),
 			"Delete Memory Block?", msg, "Yes", OptionDialog.QUESTION_MESSAGE);

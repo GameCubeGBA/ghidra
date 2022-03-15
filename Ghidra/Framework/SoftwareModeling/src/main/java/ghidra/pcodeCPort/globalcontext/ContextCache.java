@@ -22,9 +22,9 @@ import ghidra.pcodeCPort.utils.*;
 
 public class ContextCache {
 
-    private ContextDatabase database = null;
+    private ContextDatabase database;
     private boolean allowset;
-    private AddrSpace curspace = null;
+    private AddrSpace curspace;
     private long first;
     private long last;
     private int[] context; // Cached context

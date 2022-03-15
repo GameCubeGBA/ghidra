@@ -303,7 +303,7 @@ public class CreateStructureDialog extends DialogComponentProvider {
 			// Get the structures from the DataTypeManagers of the
 			// DataTypeManagerService
 			DataTypeManagerService service = pluginTool.getService(DataTypeManagerService.class);
-			DataTypeManager[] dataTypeManagers = null;
+			DataTypeManager[] dataTypeManagers;
 
 			if (service != null) {
 				dataTypeManagers = service.getDataTypeManagers();
@@ -555,7 +555,7 @@ public class CreateStructureDialog extends DialogComponentProvider {
 			return;
 		}
 
-		String message = null;
+		String message;
 		if (creatingNew) {
 			message = NEW_STRUCTURE_STATUS_PREFIX;
 		}

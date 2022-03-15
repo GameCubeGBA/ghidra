@@ -750,7 +750,7 @@ class SymbolMerge {
 		// Set the primary symbol.
 		Symbol fromPrimary = fromSymbolTable.getPrimarySymbol(address);
 		if (fromPrimary != null) {
-			Symbol newToPrimary = null;
+			Symbol newToPrimary;
 			try {
 				long newToPrimaryID = conflictSymbolIDMap.get(fromPrimary.getID());
 				newToPrimary = toSymbolTable.getSymbol(newToPrimaryID);

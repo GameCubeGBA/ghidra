@@ -399,8 +399,7 @@ public class JSONParser {
 			rv = l;
 			break;
 		case JSMN_PRIMITIVE:
-			i = tp.start;
-			switch(s[tp.start]){
+            switch(s[tp.start]){
 			case 't':
                 case 'f':
                     Msg.error(this, "what is this? "+tstr);

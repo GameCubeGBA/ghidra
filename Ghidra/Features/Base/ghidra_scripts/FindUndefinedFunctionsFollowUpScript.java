@@ -152,7 +152,7 @@ public class FindUndefinedFunctionsFollowUpScript extends GhidraScript {
 		// is undefined dword at specified address a valid instruction?
 
 		PseudoDisassembler pdis = new PseudoDisassembler(currentProgram);
-		PseudoInstruction pi = null;
+		PseudoInstruction pi;
 
 		try {
 			pi = pdis.disassemble(a);

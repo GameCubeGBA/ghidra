@@ -273,7 +273,7 @@ public class GccRttiAnalysisScript extends GhidraScript {
 
 	private Address findSpecialVtable(String namespace, String name) throws CancelledException {
 
-		Address vtableAddress = null;
+		Address vtableAddress;
 
 		Symbol symbolInNamespaces = getSymbolInNamespaces(namespace, name, VTABLE_LABEL);
 

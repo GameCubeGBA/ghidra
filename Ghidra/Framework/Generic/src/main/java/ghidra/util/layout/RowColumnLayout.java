@@ -76,8 +76,8 @@ public class RowColumnLayout implements LayoutManager {
 		int n = parent.getComponentCount();
 		computeComponentSize(parent);
 
-		int numRows = 1;
-		int numCols = 1;
+		int numRows;
+		int numCols;
 
 		if (orientation == ROW) {
 			int width = Math.max(maxSize - insets.left - insets.right, compWidth);
@@ -122,8 +122,8 @@ public class RowColumnLayout implements LayoutManager {
 		int parentWidth = d.width - insets.left - insets.right;
 		int parentHeight = d.height - insets.top - insets.bottom;
 
-		int numRows = 1;
-		int numCols = 1;
+		int numRows;
+		int numCols;
 		if (orientation == ROW) {
 			numCols = (parentWidth + hgap) / (compWidth + hgap);
 			if (numCols < 1) {

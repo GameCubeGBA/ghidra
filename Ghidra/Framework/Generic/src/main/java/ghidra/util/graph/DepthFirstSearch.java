@@ -67,10 +67,10 @@ public class DepthFirstSearch {
 		treeEdges = new ArrayList<>(graph.numEdges() / 5);
 		Vertex v;
 		Edge e;
-		Set<Edge> edges = null;
+		Set<Edge> edges;
 		Object o;
 		Iterator<Edge> edgeIter;
-		boolean done = true;
+		boolean done;
 
 		Vertex[] seeds = initialSeeds;
 

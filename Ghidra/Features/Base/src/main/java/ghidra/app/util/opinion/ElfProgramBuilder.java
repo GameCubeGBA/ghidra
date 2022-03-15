@@ -342,7 +342,7 @@ class ElfProgramBuilder extends MemorySectionResolver implements ElfLoadHelper {
 		}
 		try {
 			AddressSpace defaultSpace = getDefaultAddressSpace();
-			Address imageBase = null;
+			Address imageBase;
 
 			String imageBaseStr = ElfLoaderOptionsFactory.getImageBaseOption(options);
 			if (imageBaseStr == null) {
@@ -512,7 +512,7 @@ class ElfProgramBuilder extends MemorySectionResolver implements ElfLoadHelper {
 			}
 			if (cu != null) {
 
-				String comment = null;
+				String comment;
 
 				comment = symbols[index].getNameAsString();
 				if (comment == null) {
@@ -770,7 +770,7 @@ class ElfProgramBuilder extends MemorySectionResolver implements ElfLoadHelper {
 
 			monitor.checkCanceled();
 
-			Address relocTableAddr = null;
+			Address relocTableAddr;
 
 			ElfSectionHeader section = relocationTable.getTableSectionHeader();
 			if (section != null) {
@@ -1388,7 +1388,7 @@ class ElfProgramBuilder extends MemorySectionResolver implements ElfLoadHelper {
 		for (ElfSymbolTable elfSymbolTable : symbolTables) {
 			monitor.checkCanceled();
 
-			Address symbolTableAddr = null;
+			Address symbolTableAddr;
 
 			ElfSectionHeader symbolTableSection = elfSymbolTable.getTableSectionHeader();
 			if (symbolTableSection != null) {
@@ -2000,7 +2000,7 @@ class ElfProgramBuilder extends MemorySectionResolver implements ElfLoadHelper {
 			return f;
 		}
 
-		ExternalLocation extLoc = null;
+		ExternalLocation extLoc;
 		try {
 			extLoc = program.getExternalManager()
 					.addExtFunction(Library.UNKNOWN, name, null, SourceType.IMPORTED);
@@ -2347,7 +2347,7 @@ class ElfProgramBuilder extends MemorySectionResolver implements ElfLoadHelper {
 	private void markupSymbolTable(Address symbolTableAddr, ElfSymbolTable symbolTable,
 			TaskMonitor monitor) {
 
-		Data array = null;
+		Data array;
 		try {
 			array = listing.createData(symbolTableAddr, symbolTable.toDataType());
 		}
@@ -2374,7 +2374,7 @@ class ElfProgramBuilder extends MemorySectionResolver implements ElfLoadHelper {
 
 		// Assume default space for pointers
 
-		Address dynamicTableAddress = null;
+		Address dynamicTableAddress;
 		try {
 			ElfDynamicTable dynamicTable = elf.getDynamicTable();
 			if (dynamicTable == null) {
@@ -2487,7 +2487,7 @@ class ElfProgramBuilder extends MemorySectionResolver implements ElfLoadHelper {
 		for (ElfStringTable stringTable : stringTables) {
 			monitor.checkCanceled();
 
-			Address stringTableAddr = null;
+			Address stringTableAddr;
 
 			ElfSectionHeader section = stringTable.getTableSectionHeader();
 			if (section != null) {

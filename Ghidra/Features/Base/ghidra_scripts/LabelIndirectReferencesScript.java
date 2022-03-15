@@ -65,7 +65,7 @@ public class LabelIndirectReferencesScript extends GhidraScript {
 		println("Number of data items with user symbols found: " + dataAddrSet.size());
 
         for (Address dataAddr : dataAddrSet) {
-            List<Address> allRefAddrs = new ArrayList<Address>();
+            List<Address> allRefAddrs;
             allRefAddrs = findAllReferences(dataAddr, monitor);
             if (allRefAddrs == null) {
                 println("User cancelled script");

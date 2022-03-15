@@ -340,7 +340,7 @@ public class RowLayout implements Layout {
 
 	@Override
 	public int getScrollableUnitIncrement(int topOfScreen, int direction) {
-		int max = 0;
+		int max;
 		if (direction > 0) { // if scrolling down
 			if (topOfScreen < heightAbove - maxHeightAbove) {
 				return heightAbove - maxHeightAbove - topOfScreen;

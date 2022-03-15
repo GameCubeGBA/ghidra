@@ -116,8 +116,8 @@ public class ObjectiveC2_DecompilerMessageAnalyzer extends AbstractAnalyzer {
 	}
 
 	private void inspectFunction(Program program, DecompileResults results, TaskMonitor monitor) {
-		String currentClassName = null;
-		String currentMethodName = null;
+		String currentClassName;
+		String currentMethodName;
 
 		HighFunction highFunction = results.getHighFunction();
 		if (highFunction == null) {
@@ -315,7 +315,6 @@ public class ObjectiveC2_DecompilerMessageAnalyzer extends AbstractAnalyzer {
 				else {
 					inputs = new Varnode[] { inputs[classIndex] };
 				}
-				numInputs = 1;
 			}
 
 			int index = getIndexOfAddress(inputs);
@@ -524,7 +523,7 @@ public class ObjectiveC2_DecompilerMessageAnalyzer extends AbstractAnalyzer {
 		// Either a pointer to a string, or a protocol structure
 		String name = null;
 		Data data = program.getListing().getDataAt(address);
-		Address nameAddress = null;
+		Address nameAddress;
 		if (data.isPointer()) {
 			Object value = data.getValue();
 			nameAddress = (Address) value;
@@ -629,7 +628,7 @@ public class ObjectiveC2_DecompilerMessageAnalyzer extends AbstractAnalyzer {
 	}
 
 	private String getFixupMethodName(Program program, Address address) {
-		String name = null;
+		String name;
 		Data fixupData = program.getListing().getDataAt(address);
 		Data messageNamePointer = fixupData.getComponent(1);
 		Object messageNameAddress = messageNamePointer.getValue();

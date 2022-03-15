@@ -159,7 +159,7 @@ public class VTMatchAcceptTest extends AbstractGhidraHeadedIntegrationTest {
 			throws CodeUnitInsertionException {
 
 		Listing listing = program.getListing();
-		Data data = null;
+		Data data;
 		boolean commit = false;
 		int transaction = program.startTransaction("Test - Set Data");
 		try {

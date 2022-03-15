@@ -517,7 +517,7 @@ public class ElfSymbol implements ByteArrayConverter {
 	public byte[] toBytes(DataConverter dc) {
 		// FIXME! BUG!! Symbols can exist without a dynamic table !!
 		ElfDynamicTable dynamic = header.getDynamicTable();
-		int syment = 0;
+		int syment;
 		try {
 			syment = (int) dynamic.getDynamicValue(ElfDynamicType.DT_SYMENT);
 		}

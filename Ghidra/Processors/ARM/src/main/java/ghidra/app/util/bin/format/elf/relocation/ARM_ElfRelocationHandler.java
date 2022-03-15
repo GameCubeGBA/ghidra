@@ -78,7 +78,7 @@ public class ARM_ElfRelocationHandler extends ElfRelocationHandler {
 		Address symbolAddr = elfRelocationContext.getSymbolAddress(sym);
 		long symbolValue = elfRelocationContext.getSymbolValue(sym);
 
-		int newValue = 0;
+		int newValue;
 
 		switch (type) {
 			case ARM_ElfRelocationConstants.R_ARM_PC24: { // Target class: ARM Instruction

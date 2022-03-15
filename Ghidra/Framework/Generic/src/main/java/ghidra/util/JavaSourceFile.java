@@ -46,7 +46,7 @@ public class JavaSourceFile {
 
             String newline = System.getProperty("line.separator");
             int lineNumber = 0;
-            String line = null;
+            String line;
             while ((line = reader.readLine()) != null) {
                 linesList.add(new JavaSourceLine(line + newline, ++lineNumber));
             }

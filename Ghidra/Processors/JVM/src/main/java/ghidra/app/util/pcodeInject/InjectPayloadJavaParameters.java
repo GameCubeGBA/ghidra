@@ -168,8 +168,8 @@ public class InjectPayloadJavaParameters implements InjectPayload {
 		copy.setOutput(LVA);
 		resOps[seqNum++] = copy;
 
-		Varnode tempLocation = null;
-		Varnode increment = null;
+		Varnode tempLocation;
+		Varnode increment;
 
 		for (JavaComputationalCategory cat : paramCategories) {
 			if (cat == JavaComputationalCategory.CAT_1) {

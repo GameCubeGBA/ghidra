@@ -1991,9 +1991,8 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 			cache.delete(addrMap.getKeyRanges(addr, endAddr, false));
 
 			data = getDataDB(record);
-			baseDt = data.getBaseDataType();
 
-			if (dataType instanceof Composite || dataType instanceof Array ||
+            if (dataType instanceof Composite || dataType instanceof Array ||
 				dataType instanceof Dynamic) {
 				compositeMgr.add(addr);
 				program.setChanged(ChangeManager.DOCR_COMPOSITE_ADDED, addr, endAddr, null, null);
@@ -2744,8 +2743,8 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 	Address getDefinedAddressAfter(Address address) {
 		lock.acquire();
 		try {
-			DBRecord dataRec = null;
-			DBRecord instRec = null;
+			DBRecord dataRec;
+			DBRecord instRec;
 			try {
 				dataRec = dataAdapter.getRecordAfter(address);
 				instRec = instAdapter.getRecordAfter(address);

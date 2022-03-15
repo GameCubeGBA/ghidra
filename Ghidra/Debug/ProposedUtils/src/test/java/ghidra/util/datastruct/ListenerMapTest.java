@@ -164,8 +164,7 @@ public class ListenerMapTest {
 		listeners.fire.event("EventA");
 		assertEquals("EventA", ar1.get());
 
-		d1 = null; // Trash the only strong reference
-		System.gc();
+        System.gc();
 
 		listeners.fire.event("EventB");
 		assertEquals("EventA", ar1.get());

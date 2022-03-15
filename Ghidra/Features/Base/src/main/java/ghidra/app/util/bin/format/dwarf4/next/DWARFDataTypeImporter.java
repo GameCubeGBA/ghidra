@@ -1053,8 +1053,7 @@ public class DWARFDataTypeImporter {
 					// is unknown.  64bit 0xffffff...s and 32bit 0xffff..s will
 					// be forced to 0.
 					if (upperBound == 0xFF_FF_FF_FFL /* ie. max uint32 */ || upperBound == -1) {
-						upperBound = 0;
-					}
+                    }
 					else {
 						numElements = upperBound + 1;
 					}

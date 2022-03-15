@@ -108,7 +108,7 @@ public class ObjectPropertyMapDBTest extends AbstractGhidraHeadedIntegrationTest
 	@Test
 	public void testAdd() throws Exception {
 		createPropertyMap("TEST");
-		Table propertyTable = null;
+		Table propertyTable;
 
 		TestSaveable[] objs = new TestSaveable[20];
 		for (int i = 0; i < 20; i++) {

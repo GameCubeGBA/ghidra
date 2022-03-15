@@ -95,7 +95,7 @@ public class ItemSerializer {
 			byte[] buffer = new byte[IO_BUFFER_SIZE];
 
 			// Copy file contents
-			int cnt = 0;
+			int cnt;
 			while ((cnt = content.read(buffer)) > 0) {
 				itemOut.write(buffer, 0, cnt);
 				lengthWritten += cnt;

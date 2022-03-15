@@ -240,8 +240,7 @@ public class SymbolNode extends SymbolTreeNode {
 		catch (InvalidInputException exc) {
 			String msg = exc.getMessage();
 			if (msg == null) {
-				msg = "Invalid name specified: " + newValue;
-			}
+            }
 			Msg.showError(getClass(), null, "Invalid Name Specified", exc.getMessage());
 		}
 		catch (CircularDependencyException e) {

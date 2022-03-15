@@ -23,7 +23,7 @@ class LibraryExportedSymbol {
 
 	private String libName;
 	private int memsize;
-	private int ordinal = -1;
+	private int ordinal;
 	private String symbolName;
 	private String fowardLibraryName;
 	private String fowardSymbolName;

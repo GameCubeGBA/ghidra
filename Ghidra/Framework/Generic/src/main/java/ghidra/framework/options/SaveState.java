@@ -513,7 +513,7 @@ public class SaveState {
         for (Map.Entry<String, Object> entry : map.entrySet()) {
             String key = entry.getKey();
             Object value = entry.getValue();
-            Element elem = null;
+            Element elem;
             if (value instanceof Element) {
                 elem = createElementFromElement(key, (Element) value);
             } else if (value instanceof Byte) {

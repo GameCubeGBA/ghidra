@@ -182,7 +182,7 @@ public class Path implements Comparable<Path> {
 	 * @return the path as a ResourceFile.
 	 */
 	public static ResourceFile fromPathString(String path) {
-		ResourceFile resourceFile = null;
+		ResourceFile resourceFile;
 		if (path.startsWith(GHIDRA_HOME)) {
 			resourceFile = resolveGhidraHome(path);
 		}

@@ -815,7 +815,7 @@ public class ListingHighlightProvider
 		DataType dt = variable.getDataType();
 
 		int varnodeOffset = 0;
-		int varnodeSize = 0;
+		int varnodeSize;
 
 		if (dt instanceof TypeDef) {
 			dt = ((TypeDef) dt).getBaseDataType();

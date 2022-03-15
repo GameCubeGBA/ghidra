@@ -95,8 +95,7 @@ public class GProgressBar extends JPanel {
 		}
 		this.progress = progress;
 		if (progress > this.max) {
-			progress = max;
-		}
+        }
 		startUpdateTimer();
 	}
 

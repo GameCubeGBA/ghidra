@@ -1563,7 +1563,7 @@ public abstract class AbstractDockingTest extends AbstractGenericTest {
 		for (int i = 0; i < string.length(); i++) {
 			char c = string.charAt(i);
 			int mods = 0;
-			int keyCode = 0;
+			int keyCode;
 
 			if (Character.isLetter(c)) {
 				if (Character.isUpperCase(c)) {

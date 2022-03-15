@@ -1401,7 +1401,7 @@ public class RTTIWindowsClassRecoverer extends RTTIClassRecoverer {
                 int vdisp = api.getInt(baseClassDescriptorAddress.add(16));
 
                 if (vbaseStructure.getComponentAt(vdisp) == null) {
-                    String classFieldName = "";
+                    String classFieldName;
                     if (USE_SHORT_TEMPLATE_NAMES_IN_STRUCTURE_FIELDS &&
                             !baseClass.getShortenedTemplateName().isEmpty()) {
                         classFieldName = baseClass.getShortenedTemplateName();
@@ -1614,7 +1614,7 @@ public class RTTIWindowsClassRecoverer extends RTTIClassRecoverer {
                 continue;
             }
 
-            List<RecoveredClass> ancestorsAllowedToMap = new ArrayList<RecoveredClass>();
+            List<RecoveredClass> ancestorsAllowedToMap;
 
             List<RecoveredClass> ancestorsWithoutVfunctions =
                     getAncestorsWithoutVfunctions(recoveredClass);
@@ -2162,7 +2162,7 @@ public class RTTIWindowsClassRecoverer extends RTTIClassRecoverer {
 			createEmptyVfTableStructs(recoveredClass);
 
 		// create current class structure and add pointer to vftable, all parent member data strutures, and class member data structure
-		Structure classStruct = null;
+		Structure classStruct;
 
 		classStruct = createClassStructureUsingRTTI(recoveredClass,
 			vfPointerDataTypes);
@@ -2253,7 +2253,7 @@ public class RTTIWindowsClassRecoverer extends RTTIClassRecoverer {
 				addVbtableToClassStructure(recoveredClass, classStructureDataType, false);
 		}
 
-		int baseClassOffset = 0;
+		int baseClassOffset;
 		int numPointers = baseClassArrayData.getNumComponents();
 
 		for (int i = 0; i < numPointers; ++i) {
@@ -2460,7 +2460,7 @@ public class RTTIWindowsClassRecoverer extends RTTIClassRecoverer {
 
 		Data baseClassArrayData = getBaseClassArray(recoveredClass);
 
-		int baseClassOffset = 0;
+		int baseClassOffset;
 		int numPointers = baseClassArrayData.getNumComponents();
 
 		for (int i = 0; i < numPointers; ++i) {

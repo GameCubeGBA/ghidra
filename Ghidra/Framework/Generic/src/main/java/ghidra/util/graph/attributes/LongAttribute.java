@@ -105,8 +105,8 @@ public class LongAttribute<T extends KeyedObject> extends Attribute<T> {
 	class LongComparator implements Comparator<KeyedObject> {
 		@Override
 		public int compare(KeyedObject object1, KeyedObject object2) {
-            long value1 = 0;
-			long value2 = 0;
+            long value1;
+			long value2;
 			try {
 				value1 = getValue(object1);
 				try {

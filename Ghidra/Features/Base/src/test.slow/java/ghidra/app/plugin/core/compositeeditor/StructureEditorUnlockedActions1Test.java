@@ -50,8 +50,7 @@ public class StructureEditorUnlockedActions1Test
 		dialog = waitForDialogComponent(NumberInputDialog.class);
 		assertNotNull(dialog);
 		okInput(dialog, 2);
-		dialog = null;
-		waitUntilDialogProviderGone(NumberInputDialog.class, 2000);
+        waitUntilDialogProviderGone(NumberInputDialog.class, 2000);
 		assertEquals(num, model.getNumComponents());
 		assertEquals(2, getLength(2));
 		checkSelection(new int[] { 2 });
@@ -64,8 +63,7 @@ public class StructureEditorUnlockedActions1Test
 		dialog = waitForDialogComponent(NumberInputDialog.class);
 		assertNotNull(dialog);
 		okInput(dialog, 2);
-		dialog = null;
-		waitUntilDialogProviderGone(NumberInputDialog.class, 2000);
+        waitUntilDialogProviderGone(NumberInputDialog.class, 2000);
 		assertEquals(num, model.getNumComponents());
 		assertEquals(2, getLength(2));
 		checkSelection(new int[] { 2 });

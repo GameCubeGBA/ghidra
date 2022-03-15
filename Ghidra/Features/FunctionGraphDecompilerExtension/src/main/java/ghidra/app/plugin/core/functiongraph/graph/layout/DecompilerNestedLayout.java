@@ -125,7 +125,7 @@ public class DecompilerNestedLayout extends AbstractFGLayout {
 	protected GridLocationMap<FGVertex, FGEdge> performInitialGridLayout(
 			VisualGraph<FGVertex, FGEdge> jungGraph) throws CancelledException {
 
-		BlockGraph outgraph = null;
+		BlockGraph outgraph;
 		DecompileOptions decompilerOptions = new DecompileOptions();
 		DecompInterface ifc = new DecompInterface();
 		try {

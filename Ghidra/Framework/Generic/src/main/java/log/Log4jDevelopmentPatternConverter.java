@@ -116,7 +116,7 @@ public class Log4jDevelopmentPatternConverter extends LogEventPatternConverter {
 
 		// Get the full string for easy string checking; must be synchronized, since the logger
 		// is used by multiple threads
-		String stackString = null;
+		String stackString;
 		synchronized (stringWriter) {
 			throwable.printStackTrace(printWriter);
 			stackString = stringWriter.toString();

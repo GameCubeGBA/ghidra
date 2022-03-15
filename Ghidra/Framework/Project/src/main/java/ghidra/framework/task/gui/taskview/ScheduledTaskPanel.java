@@ -24,7 +24,7 @@ import ghidra.framework.task.gui.GProgressBar;
 
 public class ScheduledTaskPanel extends JPanel {
 	private int scrollOffset = 0;
-	private int indention = 0;
+	private int indention;
 	private GProgressBar progressBar;
 	private JLabel label;
 	private ScheduledElementLayout layout;

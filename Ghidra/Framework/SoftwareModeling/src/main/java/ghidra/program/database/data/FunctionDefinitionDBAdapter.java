@@ -119,7 +119,7 @@ abstract class FunctionDefinitionDBAdapter {
 
 		DBHandle tmpHandle = new DBHandle();
 		long id = tmpHandle.startTransaction();
-		FunctionDefinitionDBAdapter tmpAdapter = null;
+		FunctionDefinitionDBAdapter tmpAdapter;
 		try {
 			tmpAdapter = new FunctionDefinitionDBAdapterV1(tmpHandle, true);
 			RecordIterator it = oldAdapter.getRecords();

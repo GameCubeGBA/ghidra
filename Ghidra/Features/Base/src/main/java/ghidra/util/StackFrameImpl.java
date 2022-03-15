@@ -272,7 +272,7 @@ class StackFrameImpl implements StackFrame {
 		}
 		int length = variables.size();
 		// find the end of the negatives
-		int index = 0;
+		int index;
 		for (index = 0; index < length; index++) {
 			Variable var = variables.get(index);
 			if (var.getDataType().isDeleted()) {
@@ -323,7 +323,7 @@ class StackFrameImpl implements StackFrame {
 		}
 		int length = variables.size();
 		// find the end of the negatives
-		int index = 0;
+		int index;
 		for (index = 0; index < length; index++) {
 			Variable var = variables.get(index);
 			if (var.getDataType().isDeleted()) {
@@ -353,7 +353,7 @@ class StackFrameImpl implements StackFrame {
 		}
 		int length = variables.size();
 		// find the end of the negatives
-		int index = 0;
+		int index;
 		for (index = 0; index < length; index++) {
 			Variable var = variables.get(index);
 			if (var.getDataType().isDeleted()) {
@@ -384,7 +384,7 @@ class StackFrameImpl implements StackFrame {
 		}
 		int length = variables.size();
 		// find the end of the negatives
-		int index = 0;
+		int index;
 		for (index = 0; index < length; index++) {
 			Variable var = variables.get(index);
 			if (var.getDataType().isDeleted()) {

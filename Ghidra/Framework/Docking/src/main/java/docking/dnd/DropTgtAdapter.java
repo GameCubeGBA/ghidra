@@ -123,7 +123,7 @@ public class DropTgtAdapter implements DropTargetListener {
 		// The source listener receives this action in dragDropEnd().
 		// If the action is DnDConstants.ACTION_COPY_OR_MOVE, then the source receives the MOVE.
 		e.acceptDrop(e.getDropAction());
-		Object data = null;
+		Object data;
 
 		try {
 			data = t.getTransferData(dropFlavors[flavorIndex]);

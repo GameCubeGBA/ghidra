@@ -139,7 +139,7 @@ public class ServerTestUtil {
 
 		@Override
 		public void run() {
-			String line = null;
+			String line;
 			try {
 				while (!isDisposed && (line = shellOutput.readLine()) != null) {
 					if (line.contains("Address already in use")) {
@@ -324,7 +324,7 @@ public class ServerTestUtil {
 	}
 
 	private static void unpackArchive(ZipInputStream zip, File parentDir) throws IOException {
-		ZipEntry entry = null;
+		ZipEntry entry;
 		while ((entry = zip.getNextEntry()) != null) {
 			String name = entry.getName();
 			//System.out.println("Unpack: " + name);

@@ -331,7 +331,7 @@ public class DBVarKeyTableTest extends AbstractGenericTest {
 	 */
 	private void iterateVarKeyRecords(boolean testStoredDB, int recordCnt, long keyIncrement,
 			int varDataSize) throws IOException {
-		DBRecord[] recs = null;
+		DBRecord[] recs;
 		if (keyIncrement == 0) {
 			recs = createRandomVarKeyTableRecords(null, recordCnt, varDataSize);
 		}
@@ -515,7 +515,7 @@ public class DBVarKeyTableTest extends AbstractGenericTest {
 	 */
 	private void iterateVarKeys(boolean testStoredDB, int recordCnt, long keyIncrement,
 			int varDataSize) throws IOException {
-		DBRecord[] recs = null;
+		DBRecord[] recs;
 		if (keyIncrement == 0) {
 			recs = createRandomVarKeyTableRecords(null, recordCnt, varDataSize);
 		}

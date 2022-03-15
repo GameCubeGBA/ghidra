@@ -91,7 +91,7 @@ public class AddressMapDB implements AddressMap {
 	private AddressFactory addrFactory;
 	private boolean readOnly;
 	private AddressMap oldAddrMap;
-	private boolean useOldAddrMap = false;
+	private boolean useOldAddrMap;
 	private AddressSpace defaultAddrSpace;
 	private AddressMapDBAdapter adapter;
 	private Address[] baseAddrs; // these are normalized addrs

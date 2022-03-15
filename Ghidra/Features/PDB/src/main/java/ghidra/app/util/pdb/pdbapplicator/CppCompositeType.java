@@ -1153,7 +1153,7 @@ public class CppCompositeType {
 			List<VirtualLayoutBaseClass> virtualBases, boolean allVbtFound, TaskMonitor monitor)
 			throws PdbException, CancelledException {
 		String accumulatedComment = "";
-		int memberOffset = startOffset;
+		int memberOffset;
 		List<VirtualLayoutBaseClass> orderedBases = new ArrayList<>();
 		List<Integer> offsets = new ArrayList<>();
 		if (!orderVirtualBases(orderedBases, offsets, virtualBases, monitor)) {
@@ -1182,8 +1182,7 @@ public class CppCompositeType {
 				ClassPdbMember virtualClassPdbMember =
 					new ClassPdbMember("", baseDataType, false, memberOffset, accumulatedComment);
 				pdbMembers.add(virtualClassPdbMember);
-				memberOffset += virtualBaseLength;
-				accumulatedComment = "";
+                accumulatedComment = "";
 			}
 			else {
 				String comment = "(Virtual Base (empty) " +

@@ -140,8 +140,7 @@ public class DemangledVariable extends DemangledObject {
 
 		if (hasName) {
 			datatypeBuffer.append(spacer);
-			spacer = EMPTY_STRING;
-			datatypeBuffer.append(getName());
+            datatypeBuffer.append(getName());
 		}
 
 		if (datatype instanceof DemangledFunctionPointer) {
