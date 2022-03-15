@@ -22,7 +22,6 @@ import java.util.*;
 import org.junit.*;
 
 import ghidra.util.exception.CancelledException;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public class CaseInsensitiveByteTrieTest {
 

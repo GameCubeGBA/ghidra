@@ -17,7 +17,6 @@ package ghidra.app.plugin.core.functioncompare.actions;
 
 import java.awt.Component;
 import java.awt.event.InputEvent;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 

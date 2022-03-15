@@ -27,7 +27,6 @@ import db.buffers.BufferFile;
 import db.buffers.LocalBufferFile;
 import generic.jar.ResourceFile;
 import generic.test.AbstractGenericTest;
-import ghidra.util.task.TaskMonitorAdapter;
 import utilities.util.FileUtilities;
 
 public class PackedDatabaseTest extends AbstractGenericTest {

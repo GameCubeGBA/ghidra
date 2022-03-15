@@ -16,10 +16,6 @@
 package ghidra.program.emulation;
 
 import ghidra.pcode.emulate.EmulateInstructionStateModifier;
-import ghidra.pcode.error.LowlevelError;
-import ghidra.program.model.address.Address;
-import ghidra.program.model.lang.RegisterValue;
-import ghidra.program.model.pcode.PcodeOp;
 import ghidra.pcode.emulate.Emulate;
 
 public class RISCVEmulateInstructionStateModifier extends EmulateInstructionStateModifier {

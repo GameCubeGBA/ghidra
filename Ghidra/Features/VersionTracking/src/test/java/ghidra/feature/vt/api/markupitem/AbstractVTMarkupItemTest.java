@@ -37,7 +37,6 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressSet;
 import ghidra.test.*;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public abstract class AbstractVTMarkupItemTest extends AbstractGhidraHeadedIntegrationTest {
 

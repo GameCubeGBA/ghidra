@@ -17,8 +17,6 @@ package ghidra.pcode.exec.trace;
 
 import static org.junit.Assert.*;
 
-import java.lang.invoke.MethodHandles;
-import java.lang.invoke.MethodHandles.Lookup;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.util.*;

@@ -19,7 +19,6 @@ import java.util.List;
 
 import ghidra.app.cmd.disassemble.DisassembleCommand;
 import ghidra.app.services.AnalysisPriority;
-import ghidra.app.services.AnalyzerType;
 import ghidra.app.util.bin.ByteProvider;
 import ghidra.app.util.bin.MemoryByteProvider;
 import ghidra.app.util.importer.MessageLog;

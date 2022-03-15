@@ -17,8 +17,6 @@ package agent.dbgmodel.jna.dbgmodel.debughost;
 
 import com.sun.jna.Pointer;
 import com.sun.jna.Structure;
-import com.sun.jna.platform.win32.WinDef.ULONGLONGByReference;
-import com.sun.jna.platform.win32.WinNT.HRESULT;
 
 public class X_WrapIDebugHostBaseClass extends WrapIDebugHostBaseClass
 		implements X_IDebugHostBaseClass {

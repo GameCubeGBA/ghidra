@@ -33,7 +33,6 @@ import ghidra.feature.vt.api.util.VersionTrackingApplyException;
 import ghidra.program.model.address.Address;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 import mockit.Mocked;
 import mockit.Verifications;
 

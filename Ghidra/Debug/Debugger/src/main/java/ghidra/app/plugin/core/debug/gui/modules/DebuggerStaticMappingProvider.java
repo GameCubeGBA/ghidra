@@ -31,7 +31,6 @@ import com.google.common.collect.Range;
 
 import docking.ActionContext;
 import docking.action.DockingAction;
-import docking.action.DockingActionIf;
 import docking.widgets.table.CustomToStringCellRenderer;
 import docking.widgets.table.DefaultEnumeratedColumnTableModel.EnumeratedTableColumn;
 import docking.widgets.table.GTable;

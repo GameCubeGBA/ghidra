@@ -17,8 +17,6 @@ package ghidra.file.formats.ios.img3.tag;
 
 import ghidra.app.util.bin.BinaryReader;
 import ghidra.file.formats.ios.img3.AbstractImg3Tag;
-import ghidra.program.model.data.DataType;
-import ghidra.util.exception.DuplicateNameException;
 
 import java.io.IOException;
 

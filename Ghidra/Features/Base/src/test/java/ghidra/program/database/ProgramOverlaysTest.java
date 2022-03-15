@@ -27,7 +27,6 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.mem.Memory;
 import ghidra.program.model.mem.MemoryBlock;
 import ghidra.program.model.symbol.*;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public class ProgramOverlaysTest extends AbstractGenericTest {
 

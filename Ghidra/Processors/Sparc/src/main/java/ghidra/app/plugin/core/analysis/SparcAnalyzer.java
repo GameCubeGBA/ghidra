@@ -22,7 +22,6 @@ import ghidra.program.model.lang.Processor;
 import ghidra.program.model.lang.Register;
 import ghidra.program.model.listing.*;
 import ghidra.program.model.symbol.FlowType;
-import ghidra.program.model.symbol.Reference;
 import ghidra.program.util.*;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;

@@ -21,6 +21,8 @@ import ghidra.app.plugin.core.debug.service.model.launch.*;
 import ghidra.app.services.DebuggerModelService;
 import ghidra.dbg.DebuggerModelFactory;
 import ghidra.dbg.util.PathUtils;
+import ghidra.dbg.target.TargetLauncher.TargetCmdLineLauncher;
+import ghidra.dbg.target.TargetMethod.ParameterDescription;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.program.model.listing.Program;
 

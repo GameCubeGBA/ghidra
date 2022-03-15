@@ -19,7 +19,6 @@ import ghidra.app.services.AbstractAnalyzer;
 import ghidra.app.services.AnalyzerType;
 import ghidra.app.util.bin.*;
 import ghidra.app.util.importer.MessageLog;
-import ghidra.framework.options.Options;
 import ghidra.program.model.address.*;
 import ghidra.program.model.data.DataType;
 import ghidra.program.model.listing.*;

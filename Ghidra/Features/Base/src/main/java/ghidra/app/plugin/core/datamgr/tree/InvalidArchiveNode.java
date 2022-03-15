@@ -18,7 +18,6 @@ package ghidra.app.plugin.core.datamgr.tree;
 import java.util.List;
 
 import docking.widgets.tree.GTreeNode;
-import ghidra.app.plugin.core.datamgr.archive.Archive;
 import ghidra.app.plugin.core.datamgr.archive.InvalidFileArchive;
 import ghidra.program.model.data.ArchiveType;
 import ghidra.util.HTMLUtilities;

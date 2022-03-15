@@ -15,7 +15,6 @@
  */
 package ghidra.app.plugin.exceptionhandlers.gcc.datatype;
 
-import ghidra.docking.settings.Settings;
 import ghidra.program.model.data.DataType;
 import ghidra.program.model.data.DataTypeManager;
 

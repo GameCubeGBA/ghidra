@@ -18,8 +18,6 @@ package ghidra.app.plugin.core.analysis;
 
 import ghidra.app.services.AnalysisPriority;
 import ghidra.app.services.AnalyzerType;
-import ghidra.program.model.address.AddressSet;
-import ghidra.program.model.listing.Program;
 
 /**
  * Check operand references to memory locations looking for

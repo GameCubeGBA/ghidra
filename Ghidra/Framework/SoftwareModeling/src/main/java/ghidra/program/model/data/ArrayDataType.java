@@ -19,8 +19,6 @@ import ghidra.docking.settings.Settings;
 import ghidra.docking.settings.SettingsDefinition;
 import ghidra.program.database.data.DataTypeUtilities;
 import ghidra.program.model.mem.MemBuffer;
-import ghidra.util.InvalidNameException;
-import ghidra.util.exception.DuplicateNameException;
 
 /**
  * Basic implementation of the Array interface.

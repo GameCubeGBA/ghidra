@@ -22,8 +22,6 @@ import java.util.Random;
 import org.junit.Before;
 import org.junit.Test;
 
-import ghidra.util.task.TaskMonitorAdapter;
-
 public class FNV1a64MessageDigestTest {
 
 	private MessageDigest digest;

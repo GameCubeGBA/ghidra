@@ -21,7 +21,6 @@ import static org.junit.Assert.*;
 
 import java.io.*;
 import java.nio.charset.Charset;
-import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;

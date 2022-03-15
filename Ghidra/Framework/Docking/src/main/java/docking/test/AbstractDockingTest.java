@@ -51,7 +51,6 @@ import docking.widgets.tree.GTreeNode;
 import generic.test.AbstractGenericTest;
 import generic.test.ConcurrentTestExceptionHandler;
 import generic.util.image.ImageUtils;
-import ghidra.GhidraTestApplicationLayout;
 import ghidra.framework.ApplicationConfiguration;
 import ghidra.util.*;
 import ghidra.util.exception.AssertException;
@@ -60,7 +59,6 @@ import ghidra.util.worker.Worker;
 import junit.framework.AssertionFailedError;
 import sun.awt.AppContext;
 import util.CollectionUtils;
-import utility.application.ApplicationLayout;
 
 public abstract class AbstractDockingTest extends AbstractGenericTest {
 

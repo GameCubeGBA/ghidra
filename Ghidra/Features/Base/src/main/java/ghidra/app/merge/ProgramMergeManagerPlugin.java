@@ -28,8 +28,6 @@ import ghidra.program.model.listing.Program;
 import java.awt.Component;
 import java.net.URL;
 
-import javax.swing.JComponent;
-
 /**
  * Plugin that provides a merge component provider.
  * 

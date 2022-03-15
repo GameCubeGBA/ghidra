@@ -31,7 +31,6 @@ import agent.dbgmodel.jna.dbgmodel.DbgModelNative.ModelObjectKind;
 import agent.dbgmodel.jna.dbgmodel.DbgModelNative.TypeKind;
 import agent.dbgmodel.manager.DbgManager2Impl;
 import ghidra.async.AsyncUtils;
-import ghidra.dbg.DebuggerModelListener;
 import ghidra.dbg.agent.DefaultTargetObject;
 import ghidra.dbg.target.*;
 import ghidra.dbg.target.TargetBreakpointSpec.TargetBreakpointKind;

@@ -15,8 +15,6 @@
  */
 package ghidra.program.model.util;
 
-import static ghidra.util.task.TaskMonitor.DUMMY;
-
 import java.util.*;
 
 import org.junit.Assert;

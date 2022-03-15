@@ -31,7 +31,6 @@ import ghidra.program.model.listing.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.Msg;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public abstract class AbstractCorrelatorTest extends AbstractGhidraHeadedIntegrationTest {
 

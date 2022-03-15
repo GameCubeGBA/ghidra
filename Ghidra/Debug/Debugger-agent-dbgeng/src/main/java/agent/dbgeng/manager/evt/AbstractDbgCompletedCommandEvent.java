@@ -15,8 +15,6 @@
  */
 package agent.dbgeng.manager.evt;
 
-import agent.dbgeng.manager.DbgState;
-
 public class AbstractDbgCompletedCommandEvent extends AbstractDbgEvent<String> {
 
 	public AbstractDbgCompletedCommandEvent(String message) {
