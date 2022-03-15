@@ -21,7 +21,6 @@ import docking.widgets.table.TableColumnDescriptor;
 import ghidra.feature.vt.api.main.*;
 import ghidra.feature.vt.gui.plugin.VTController;
 import ghidra.feature.vt.gui.util.AbstractVTMatchTableModel;
-import ghidra.program.model.address.Address;
 import ghidra.util.datastruct.Accumulator;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;

@@ -18,9 +18,7 @@ package ghidra.program.model.data;
 import ghidra.app.plugin.core.datamgr.archive.BuiltInSourceArchive;
 import ghidra.docking.settings.Settings;
 import ghidra.program.model.mem.MemBuffer;
-import ghidra.util.InvalidNameException;
 import ghidra.util.classfinder.ClassSearcher;
-import ghidra.util.exception.DuplicateNameException;
 
 /**
  * Provides an implementation of a data type that stands-in for a missing Built-In data type.

@@ -18,14 +18,11 @@ package ghidra.test;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 import docking.DialogComponentProvider;
 import docking.action.DockingActionIf;
 import docking.widgets.fieldpanel.FieldPanel;
-import ghidra.GhidraTestApplicationLayout;
 import ghidra.app.plugin.core.codebrowser.CodeBrowserPlugin;
 import ghidra.framework.ApplicationConfiguration;
 import ghidra.framework.GhidraApplicationConfiguration;
@@ -35,9 +32,7 @@ import ghidra.framework.plugintool.PluginTool;
 import ghidra.framework.plugintool.util.PluginException;
 import ghidra.program.model.listing.Program;
 import ghidra.util.TaskUtilities;
-import ghidra.util.exception.AssertException;
 import junit.framework.AssertionFailedError;
-import utility.application.ApplicationLayout;
 
 public abstract class AbstractGhidraHeadedIntegrationTest
 		extends AbstractGhidraHeadlessIntegrationTest {

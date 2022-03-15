@@ -15,13 +15,8 @@
  */
 package ghidra.app.plugin.core.analysis;
 
-import ghidra.framework.options.Options;
-import ghidra.program.model.address.Address;
-import ghidra.program.model.address.AddressSetView;
 import ghidra.program.model.lang.Processor;
 import ghidra.program.model.listing.Program;
-import ghidra.util.exception.CancelledException;
-import ghidra.util.task.TaskMonitor;
 
 /**
  * Analyzer for Toy Processor

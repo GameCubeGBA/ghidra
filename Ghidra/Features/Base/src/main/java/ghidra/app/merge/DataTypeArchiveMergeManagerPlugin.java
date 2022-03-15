@@ -24,8 +24,6 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.DataTypeArchive;
 import ghidra.program.model.listing.Program;
 
-import javax.swing.JComponent;
-
 /**
  * Plugin that provides a merge component provider for data type archives.
  */

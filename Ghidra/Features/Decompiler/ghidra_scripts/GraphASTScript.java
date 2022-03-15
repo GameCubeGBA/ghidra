@@ -16,7 +16,6 @@
 //Decompile the function at the cursor, then build data-flow graph (AST)
 //@category PCode
 
-import ghidra.app.decompiler.*;
 import ghidra.app.plugin.core.decompile.actions.PCodeDfgGraphTask;
 import ghidra.app.script.GhidraScript;
 import ghidra.app.services.GraphDisplayBroker;

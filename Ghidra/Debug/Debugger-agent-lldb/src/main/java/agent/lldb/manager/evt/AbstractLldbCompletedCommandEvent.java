@@ -15,8 +15,6 @@
  */
 package agent.lldb.manager.evt;
 
-import SWIG.StateType;
-
 public class AbstractLldbCompletedCommandEvent extends AbstractLldbEvent<String> {
 
 	public AbstractLldbCompletedCommandEvent(String message) {

@@ -27,7 +27,6 @@ import ghidra.feature.vt.api.main.VTMarkupItem;
 import ghidra.feature.vt.api.main.VTMarkupItemStatus;
 import ghidra.util.exception.AssertException;
 import ghidra.util.table.column.AbstractGhidraColumnRenderer;
-import resources.ResourceManager;
 
 /**
  * Renderer for the status of a {@link VTMarkupItem}

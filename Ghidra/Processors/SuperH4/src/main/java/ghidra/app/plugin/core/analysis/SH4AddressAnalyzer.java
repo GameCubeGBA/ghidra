@@ -17,7 +17,6 @@ package ghidra.app.plugin.core.analysis;
 
 import java.math.BigInteger;
 
-import ghidra.app.util.importer.MessageLog;
 import ghidra.framework.options.Options;
 import ghidra.program.disassemble.Disassembler;
 import ghidra.program.model.address.*;

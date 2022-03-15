@@ -31,7 +31,6 @@ import ghidra.feature.vt.db.VTBaseTestCase;
 import ghidra.feature.vt.db.VTTestUtils;
 import ghidra.program.model.address.Address;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public class VTMarkupItemResetTest extends VTBaseTestCase {
 

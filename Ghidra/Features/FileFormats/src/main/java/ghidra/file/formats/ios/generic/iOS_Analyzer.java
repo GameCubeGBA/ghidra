@@ -16,8 +16,6 @@
 package ghidra.file.formats.ios.generic;
 
 import ghidra.app.plugin.core.analysis.AutoAnalysisManager;
-import ghidra.app.services.AnalysisPriority;
-import ghidra.app.services.AnalyzerType;
 import ghidra.app.util.importer.MessageLog;
 import ghidra.file.analyzers.FileFormatAnalyzer;
 import ghidra.program.disassemble.Disassembler;

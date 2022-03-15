@@ -24,7 +24,6 @@ import java.util.*;
 import org.junit.BeforeClass;
 
 import docking.test.AbstractDockingTest;
-import ghidra.GhidraTestApplicationLayout;
 import ghidra.app.events.ProgramLocationPluginEvent;
 import ghidra.app.events.ProgramSelectionPluginEvent;
 import ghidra.app.plugin.core.codebrowser.CodeBrowserPlugin;
@@ -46,7 +45,6 @@ import ghidra.program.model.symbol.Symbol;
 import ghidra.program.util.*;
 import ghidra.util.Msg;
 import ghidra.util.classfinder.ClassSearcher;
-import ghidra.util.exception.AssertException;
 import ghidra.util.exception.RollbackException;
 import junit.framework.AssertionFailedError;
 import utility.application.ApplicationLayout;
@@ -391,9 +389,10 @@ public abstract class AbstractGhidraHeadlessIntegrationTest extends AbstractDock
 
 	public AddressSet toAddressSet(List<Address> addrs) {
 		AddressSet set = new AddressSet();
-		for (Address addr : addrs) {
-			set.add(addr);
-		}
+		set.addAll(addrs);
+		// for (Address addr : addrs) {
+		// 	set.add(addr);
+		// }
 		return set;
 	}
 
@@ -405,9 +404,10 @@ public abstract class AbstractGhidraHeadlessIntegrationTest extends AbstractDock
 
 	public AddressSet toAddressSet(AddressRange... ranges) {
 		AddressSet set = new AddressSet();
-		for (AddressRange range : ranges) {
-			set.add(range);
-		}
+		set.addAll(ranges);
+		// for (AddressRange range : ranges) {
+		// 	set.add(range);
+		// }
 		return set;
 	}
 

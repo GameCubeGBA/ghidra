@@ -15,7 +15,6 @@
  */
 package docking.widgets.table.constraint.provider;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 

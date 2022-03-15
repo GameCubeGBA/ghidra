@@ -18,8 +18,6 @@ package ghidra.app.util.bin.format.pe.rich;
 import ghidra.docking.settings.Settings;
 import ghidra.program.model.data.*;
 import ghidra.program.model.mem.MemBuffer;
-import ghidra.util.InvalidNameException;
-import ghidra.util.exception.DuplicateNameException;
 
 class RichObjectCountDataType extends DataTypeImpl {
 

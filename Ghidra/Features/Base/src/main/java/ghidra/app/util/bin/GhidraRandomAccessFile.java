@@ -16,7 +16,6 @@
 package ghidra.app.util.bin;
 
 import java.io.*;
-import java.util.Arrays;
 
 import ghidra.util.Msg;
 

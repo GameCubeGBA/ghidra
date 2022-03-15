@@ -32,7 +32,6 @@ import ghidra.feature.vt.api.main.*;
 import ghidra.feature.vt.api.markupitem.MarkupTypeTestStub;
 import ghidra.program.model.address.Address;
 import ghidra.util.exception.CancelledException;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public class UnappliedMarkupItemStorageDBTest extends VTBaseTestCase {
 

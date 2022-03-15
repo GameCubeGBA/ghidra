@@ -19,8 +19,6 @@ import ghidra.docking.settings.Settings;
 import ghidra.program.model.mem.MemBuffer;
 import ghidra.program.model.mem.MemoryAccessException;
 import ghidra.program.model.scalar.Scalar;
-import ghidra.util.InvalidNameException;
-import ghidra.util.exception.DuplicateNameException;
 
 /**
  * Provides an implementation of a byte that has not been defined yet as a

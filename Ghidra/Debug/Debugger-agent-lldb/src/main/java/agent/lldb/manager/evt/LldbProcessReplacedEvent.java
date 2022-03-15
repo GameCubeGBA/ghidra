@@ -15,7 +15,6 @@
  */
 package agent.lldb.manager.evt;
 
-import SWIG.StateType;
 import agent.lldb.lldb.DebugProcessInfo;
 
 public class LldbProcessReplacedEvent extends AbstractLldbEvent<DebugProcessInfo> {

@@ -15,7 +15,6 @@
  */
 package ghidra.app.plugin.core.decompile.actions;
 
-import docking.ActionContext;
 import docking.action.MenuData;
 import ghidra.app.decompiler.component.DecompilerUtils;
 import ghidra.app.plugin.core.datamgr.util.DataTypeUtils;

@@ -15,7 +15,6 @@
  */
 package agent.gdb.manager.evt;
 
-import agent.gdb.manager.GdbState;
 import agent.gdb.manager.parsing.GdbMiParser.GdbMiFieldList;
 import agent.gdb.manager.parsing.GdbParsingUtils.GdbParseError;
 

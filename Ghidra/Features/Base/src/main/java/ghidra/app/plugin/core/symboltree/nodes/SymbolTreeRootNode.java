@@ -17,7 +17,6 @@ package ghidra.app.plugin.core.symboltree.nodes;
 
 import static ghidra.program.model.symbol.SymbolType.*;
 
-import java.awt.datatransfer.DataFlavor;
 import java.util.*;
 
 import javax.swing.Icon;

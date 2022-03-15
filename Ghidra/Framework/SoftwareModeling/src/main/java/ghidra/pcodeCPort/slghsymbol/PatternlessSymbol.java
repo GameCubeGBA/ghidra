@@ -16,13 +16,8 @@
  */
 package ghidra.pcodeCPort.slghsymbol;
 
-import ghidra.pcodeCPort.sleighbase.*;
 import ghidra.pcodeCPort.slghpatexpress.*;
 import ghidra.sleigh.grammar.Location;
-
-import java.io.PrintStream;
-
-import org.jdom.Element;
 
 
 // Behaves like constant 0 pattern

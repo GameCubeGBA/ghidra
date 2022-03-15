@@ -22,10 +22,7 @@ import docking.widgets.table.TableColumnDescriptor;
 import ghidra.bitpatterns.info.ByteSequenceRowObject;
 import ghidra.docking.settings.Settings;
 import ghidra.framework.plugintool.ServiceProvider;
-import ghidra.util.datastruct.Accumulator;
-import ghidra.util.exception.CancelledException;
 import ghidra.util.table.column.GColumnRenderer;
-import ghidra.util.task.TaskMonitor;
 
 /**
  * This class extends {@link ByteSequenceTableModel} to add a column displaying

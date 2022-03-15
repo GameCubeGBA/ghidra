@@ -20,7 +20,6 @@ import static org.junit.Assert.*;
 import org.junit.Assert;
 import org.junit.Test;
 
-import ghidra.app.cmd.disassemble.DisassembleCommand;
 import ghidra.app.cmd.function.CreateFunctionCmd;
 import ghidra.app.cmd.function.FunctionStackAnalysisCmd;
 import ghidra.program.database.ProgramDB;
@@ -28,7 +27,6 @@ import ghidra.program.database.ProgramModifierListener;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressSet;
 import ghidra.program.model.listing.Function;
-import ghidra.program.model.listing.Program;
 import ghidra.program.model.symbol.*;
 
 /**

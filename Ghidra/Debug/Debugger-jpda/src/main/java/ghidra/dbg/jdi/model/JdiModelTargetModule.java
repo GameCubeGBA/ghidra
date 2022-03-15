@@ -17,7 +17,6 @@ package ghidra.dbg.jdi.model;
 
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CompletableFuture;
 
 import com.sun.jdi.ModuleReference;
 

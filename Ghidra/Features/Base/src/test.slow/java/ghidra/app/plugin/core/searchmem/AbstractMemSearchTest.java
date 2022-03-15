@@ -27,7 +27,6 @@ import java.util.stream.Collectors;
 import javax.swing.*;
 
 import org.apache.commons.collections4.IteratorUtils;
-import org.junit.After;
 
 import docking.action.DockingActionIf;
 import docking.test.AbstractDockingTest;

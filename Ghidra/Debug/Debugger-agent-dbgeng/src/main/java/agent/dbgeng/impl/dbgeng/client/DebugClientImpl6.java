@@ -15,7 +15,6 @@
  */
 package agent.dbgeng.impl.dbgeng.client;
 
-import agent.dbgeng.dbgeng.DebugEventCallbacks;
 import agent.dbgeng.jna.dbgeng.client.IDebugClient6;
 
 public class DebugClientImpl6 extends DebugClientImpl5 {

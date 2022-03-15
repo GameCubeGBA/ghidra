@@ -25,9 +25,6 @@ import docking.widgets.tree.GTreeNode;
 import ghidra.app.plugin.core.symboltree.SymbolCategory;
 import ghidra.program.model.listing.Program;
 import ghidra.program.model.symbol.Symbol;
-import ghidra.program.model.symbol.SymbolType;
-import ghidra.util.exception.CancelledException;
-import ghidra.util.task.TaskMonitor;
 import resources.ResourceManager;
 
 public class LabelCategoryNode extends SymbolCategoryNode {

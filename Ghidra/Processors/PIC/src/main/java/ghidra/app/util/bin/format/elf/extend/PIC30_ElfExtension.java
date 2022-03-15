@@ -22,8 +22,6 @@ import ghidra.app.util.bin.format.elf.*;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressSpace;
 import ghidra.program.model.lang.Language;
-import ghidra.util.exception.CancelledException;
-import ghidra.util.task.TaskMonitor;
 
 public class PIC30_ElfExtension extends ElfExtension {
 

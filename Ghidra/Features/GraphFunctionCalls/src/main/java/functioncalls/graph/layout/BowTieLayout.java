@@ -21,7 +21,6 @@ import functioncalls.graph.FunctionCallGraph;
 import ghidra.graph.VisualGraph;
 import ghidra.graph.viewer.edge.AbstractVisualEdge;
 import ghidra.graph.viewer.layout.*;
-import ghidra.util.task.TaskMonitor;
 
 import java.awt.*;
 import java.awt.geom.Point2D;

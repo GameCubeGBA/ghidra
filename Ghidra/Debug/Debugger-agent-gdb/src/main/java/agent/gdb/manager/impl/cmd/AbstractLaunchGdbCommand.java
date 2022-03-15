@@ -18,7 +18,6 @@ package agent.gdb.manager.impl.cmd;
 import agent.gdb.manager.GdbThread;
 import agent.gdb.manager.evt.*;
 import agent.gdb.manager.impl.*;
-import agent.gdb.manager.impl.GdbManagerImpl.Interpreter;
 
 public abstract class AbstractLaunchGdbCommand extends AbstractGdbCommand<GdbThread>
 		implements MixinResumeInCliGdbCommand<GdbThread> {

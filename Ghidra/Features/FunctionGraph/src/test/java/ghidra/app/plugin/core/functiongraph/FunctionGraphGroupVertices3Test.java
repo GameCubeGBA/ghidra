@@ -17,15 +17,9 @@ package ghidra.app.plugin.core.functiongraph;
 
 import static org.junit.Assert.*;
 
-import java.util.Collection;
-import java.util.Set;
-
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.uci.ics.jung.graph.Graph;
-import ghidra.app.plugin.core.functiongraph.graph.FGEdge;
-import ghidra.app.plugin.core.functiongraph.graph.FunctionGraph;
 import ghidra.app.plugin.core.functiongraph.graph.vertex.FGVertex;
 import ghidra.app.plugin.core.functiongraph.graph.vertex.GroupedFunctionGraphVertex;
 import ghidra.app.plugin.core.functiongraph.mvc.*;

@@ -20,8 +20,6 @@ import static org.junit.Assert.*;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
-import javax.swing.JTextField;
-
 import org.junit.Test;
 
 import generic.test.ConcurrentTestExceptionHandler;
