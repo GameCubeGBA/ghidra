@@ -286,7 +286,7 @@ public class GRandomAccessFile {
 
 	private void swapInLast() throws IOException {
 		checkOpen();
-		if (buffer.length == 0) { {
+		if (buffer.length == 0) {
 			return;
 		}
 		// swap em and return
