@@ -1332,8 +1332,7 @@ public class ClipboardPluginTest extends AbstractGhidraHeadedIntegrationTest {
 		byte[] memoryBytes = new byte[resultBytes.length];
 		// 4) Verify the bytes don't contain the non-ascii text.
 		memory.getBytes(address, memoryBytes, 0, resultBytes.length);
-		assertTrue("The expected bytes were not pasted in the ByteViewer.",
-			Arrays.equals(resultBytes, memoryBytes));
+		assertArrayEquals("The expected bytes were not pasted in the ByteViewer.", resultBytes, memoryBytes);
 	}
 
 //==================================================================================================
