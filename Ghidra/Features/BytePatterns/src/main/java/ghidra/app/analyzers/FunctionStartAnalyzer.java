@@ -46,15 +46,15 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 	private static final String FUNCTION_START_SEARCH = "Function Start Search";
 	protected static final String NAME = FUNCTION_START_SEARCH;
 	private static final String DESCRIPTION =
-		"Search for architecture specific byte patterns: typically starts of functions";
+			"Search for architecture specific byte patterns: typically starts of functions";
 	private static final String PRE_FUNCTION_MATCH_PROPERTY_NAME = "PreFunctionMatch";
 	private final static String OPTION_NAME_DATABLOCKS = "Search Data Blocks";
 	private static final String OPTION_DESCRIPTION_DATABLOCKS =
-		"Search for byte patterns in blocks that are not executable";
+			"Search for byte patterns in blocks that are not executable";
 	private final static boolean OPTION_DEFAULT_DATABLOCKS = false;
 	private final static String OPTION_NAME_BOOKMARKS = "Bookmark Functions";
 	private final static String OPTION_DESCRIPTION_BOOKMARKS =
-		"Place a bookmark at functions that were discovered by a pattern";
+			"Place a bookmark at functions that were discovered by a pattern";
 	private final static boolean OPTION_DEFAULT_BOOKMARKS = false;
 
 	private static ProgramDecisionTree patternDecisitionTree;
@@ -102,10 +102,11 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 	}
 
 	/**
-	 * Sets the {@link SequenceSearchState}. Use this method when you've created a 
+	 * Sets the {@link SequenceSearchState}. Use this method when you've created a
 	 * {@link SequenceSearchState} that you want to apply to the program. If you don't set
 	 * the state explicitly, Ghidra will create one from the appropriate pattern file in
 	 * {@link SequenceSearchState#initialize}
+	 *
 	 * @param explicit
 	 */
 	public void setExplicitState(SequenceSearchState explicit) {
@@ -169,8 +170,7 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 						disassemResult.add(addr); // Schedule for disassembly
 						codeLocations.add(addr);
 					}
-				}
-				else {
+				} else {
 					codeLocations.add(addr);
 				}
 			}
@@ -227,13 +227,12 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 			if (validcode != 0) {
 				PseudoDisassembler pseudoDisassembler = new PseudoDisassembler(program);
 				PseudoDisassemblerContext pcont =
-					new PseudoDisassemblerContext(program.getProgramContext());
+						new PseudoDisassemblerContext(program.getProgramContext());
 				setDisassemblerContext(program, pcont);
 				boolean isvalid = false;
 				if (validcode == -1) {
 					isvalid = pseudoDisassembler.checkValidSubroutine(addr, pcont, true, true);
-				}
-				else {
+				} else {
 					pseudoDisassembler.setMaxInstructions(validcode);
 					isvalid = pseudoDisassembler.checkValidSubroutine(addr, pcont, true, false);
 				}
@@ -244,7 +243,7 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 		}
 
 		protected void applyActionToSet(Program program, Address addr, AddressSet resultSet,
-				Match match) {
+										Match match) {
 
 			if ((addr.getOffset() % program.getLanguage().getInstructionAlignment()) != 0) {
 				return; // addr is not properly aligned
@@ -263,16 +262,14 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 						resultSet.add(addr); // Schedule for a function start
 						bookmarkAction(program, addr, match);
 					}
-				}
-				else { // An instruction
+				} else { // An instruction
 					if (func == null) { // Instruction but not in a function body
 						// do a little more checking, Could addr already be in a function, or part of other code flow?
 						if (!checkAlreadyInFunctionAbove(program, addr)) {
 							resultSet.add(addr); // Schedule for a function start
 							bookmarkAction(program, addr, match);
 						}
-					}
-					else {
+					} else {
 						// Presumably this is already marked as a function start so we don't have to do anything.
 						// We could check that this is in fact the function entry point and if not, set a bookmark
 					}
@@ -287,7 +284,7 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 
 			if (func != null && isThunk && !func.isThunk()) {
 				CreateThunkFunctionCmd createThunkFunctionCmd =
-					new CreateThunkFunctionCmd(addr, false);
+						new CreateThunkFunctionCmd(addr, false);
 				createThunkFunctionCmd.applyTo(program);
 			}
 
@@ -298,7 +295,7 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 				if (setFunctionLabel(program, addr, labelStr) && func != null) {
 					// kick analysis manager since by naming it, we may have changed the nature of a function
 					AutoAnalysisManager analysisManager =
-						AutoAnalysisManager.getAnalysisManager(program);
+							AutoAnalysisManager.getAnalysisManager(program);
 					analysisManager.functionDefined(new AddressSet(addr));
 				}
 			}
@@ -319,8 +316,7 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 				}
 				sym = symTable.createLabel(addr, labelStr, null, SourceType.ANALYSIS);
 				createdSym = true;
-			}
-			catch (InvalidInputException e) {
+			} catch (InvalidInputException e) {
 				// should not happen, unless there are bad characters in the name
 			}
 			if (sym != null) {
@@ -358,28 +354,37 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 					if (funcAbove == null) {
 						return false;
 					}
-                    return !checkAlreadyInFunctionAbove(program, addr, funcAbove);
+					if (checkAlreadyInFunctionAbove(program, addr, funcAbove)) {
+						return false;
+					}
+				} else if (name.startsWith("inst")) {
+					// make sure there is an end of function at location to check
+					Instruction instr = program.getListing().getInstructionContaining(addrToCheck);
+					if (instr == null) {
+						return false;
+					}
+				} else if (name.startsWith("data")) {
+					// make sure there is defined data at location to check
+					Data data = program.getListing().getDefinedDataContaining(addrToCheck);
+					if (data == null) {
+						return false;
+					}
+				} else if (name.startsWith("def")) {
+					// make sure there is something at location to check
+					Instruction instr = program.getListing().getInstructionContaining(addrToCheck);
+					if (instr != null) {
+						if (checkAlreadyInFunctionAbove(program, addr)) {
+							return false;
+						}
+						return true;
+					}
+					Data data = program.getListing().getDefinedDataContaining(addrToCheck);
+					if (data != null) {
+						return true;
+					}
+					return false;
 				}
-                if (name.startsWith("inst")) {
-                    // make sure there is an end of function at location to check
-                    Instruction instr = program.getListing().getInstructionContaining(addrToCheck);
-return instr != null;
-                }
-                if (name.startsWith("data")) {
-                    // make sure there is defined data at location to check
-                    Data data = program.getListing().getDefinedDataContaining(addrToCheck);
-return data != null;
-                }
-                if (name.startsWith("def")) {
-                    // make sure there is something at location to check
-                    Instruction instr = program.getListing().getInstructionContaining(addrToCheck);
-                    if (instr != null) {
-return !checkAlreadyInFunctionAbove(program, addr);
-}
-                    Data data = program.getListing().getDefinedDataContaining(addrToCheck);
-return data != null;
-}
-            }
+			}
 			return true;
 		}
 
@@ -393,7 +398,7 @@ return data != null;
 			Function funcAbove = getFunctionAbove(program, addr);
 			return checkAlreadyInFunctionAbove(program, addr, funcAbove);
 		}
-		
+
 		/*
 		 * Check if in a function above
 		 * return true if already in function above, false otherwise even if in another function
@@ -419,12 +424,12 @@ return data != null;
 			}
 			// check for references to this function, address
 			ReferenceIterator referencesTo =
-				program.getReferenceManager().getReferencesTo(addr);
+					program.getReferenceManager().getReferencesTo(addr);
 			for (Reference reference : referencesTo) {
 				// someone flows to or reads/writes this location, shouldn't be a start
 				RefType referenceType = reference.getReferenceType();
 				if (referenceType.isData() &&
-					!(referenceType.isRead() || referenceType.isWrite())) {
+						!(referenceType.isRead() || referenceType.isWrite())) {
 					continue;
 				}
 				// any other reference to here is bad, since a function or other flow should
@@ -434,13 +439,14 @@ return data != null;
 
 			return false;
 		}
-		
+
 		/**
 		 * Get an existing function right above the addr.
+		 *
 		 * @param program program to check
-		 * @param addr address to check
+		 * @param addr    address to check
 		 * @return true if there is an existing function above addr
-		 */				
+		 */
 		private Function getFunctionAbove(Program program, Address addr) {
 			// make sure there is an end of function before this one, and addr is not in the function
 			Function func = null;
@@ -456,7 +462,7 @@ return data != null;
 			if (setbookmark) {
 				BookmarkManager bookmarkManager = program.getBookmarkManager();
 				bookmarkManager.setBookmark(addr, BookmarkType.ANALYSIS, getName(),
-					"Match pattern " + match.getSequenceIndex());
+						"Match pattern " + match.getSequenceIndex());
 			}
 		}
 
@@ -472,19 +478,15 @@ return data != null;
 				afterName = el.getAttribute("after");
 				if (afterName.startsWith("func")) {
 					hasCodeConstraints = true;
-				}
-				else if (afterName.startsWith("inst")) {
+				} else if (afterName.startsWith("inst")) {
 					hasCodeConstraints = true;
-				}
-				else if (afterName.startsWith("data")) {
+				} else if (afterName.startsWith("data")) {
 					hasDataConstraints = true;
-				}
-				else if (afterName.startsWith("def")) {
+				} else if (afterName.startsWith("def")) {
 					hasCodeConstraints = hasDataConstraints = true;
-				}
-				else {
+				} else {
 					Msg.error(this,
-						"funcstart pattern attribute 'after' must be one of 'function', 'instruction', 'data', 'defined'");
+							"funcstart pattern attribute 'after' must be one of 'function', 'instruction', 'data', 'defined'");
 				}
 			}
 			if (el.hasAttribute("validcode")) {
@@ -492,16 +494,13 @@ return data != null;
 				String validcodeStr = el.getAttribute("validcode");
 				if (validcodeStr.equals("0") || validcodeStr.equals("false")) {
 					validcode = 0;
-				}
-				else if (validcodeStr.equalsIgnoreCase("true") ||
-					validcodeStr.equalsIgnoreCase("subroutine")) { // must be a valid subroutine
+				} else if (validcodeStr.equalsIgnoreCase("true") ||
+						validcodeStr.equalsIgnoreCase("subroutine")) { // must be a valid subroutine
 					validcode = -1;
-				}
-				else if (validcodeStr.equalsIgnoreCase("function")) { // must be at a defined subroutine
+				} else if (validcodeStr.equalsIgnoreCase("function")) { // must be at a defined subroutine
 					validFunction = true;
 					hasFunctionStartConstraints = true;
-				}
-				else { // must have <N> valid instruction run
+				} else { // must have <N> valid instruction run
 					validcode = Integer.parseInt(validcodeStr);
 				}
 			}
@@ -532,7 +531,7 @@ return data != null;
 			if (setbookmark) {
 				BookmarkManager bookmarkManager = program.getBookmarkManager();
 				bookmarkManager.setBookmark(addr, BookmarkType.ANALYSIS, "Possible " + getName(),
-					"Match pattern " + match.getSequenceIndex());
+						"Match pattern " + match.getSequenceIndex());
 			}
 		}
 
@@ -566,8 +565,7 @@ return data != null;
 					if (((Data) cu).isDefined()) {
 						return;
 					}
-				}
-				else {
+				} else {
 					return;
 				}
 			}
@@ -611,129 +609,56 @@ return data != null;
 			return potentialMatchAddressSetPropertyMap;
 		}
 		potentialMatchAddressSetPropertyMap =
-			program.getAddressSetPropertyMap(PRE_FUNCTION_MATCH_PROPERTY_NAME);
+				program.getAddressSetPropertyMap(PRE_FUNCTION_MATCH_PROPERTY_NAME);
 		if (potentialMatchAddressSetPropertyMap != null) {
 			return potentialMatchAddressSetPropertyMap;
 		}
 
 		try {
 			potentialMatchAddressSetPropertyMap =
-				program.createAddressSetPropertyMap(PRE_FUNCTION_MATCH_PROPERTY_NAME);
-		}
-		catch (DuplicateNameException e) {
+					program.createAddressSetPropertyMap(PRE_FUNCTION_MATCH_PROPERTY_NAME);
+		} catch (DuplicateNameException e) {
 			throw new AssertException(
-				"Can't get DuplicateNameException since we tried to get it first");
+					"Can't get DuplicateNameException since we tried to get it first");
 		}
 
 		return potentialMatchAddressSetPropertyMap;
 	}
 
-	@Override
-	public boolean added(Program program, AddressSetView set, TaskMonitor monitor, MessageLog log)
-			throws CancelledException {
+	public boolean added(Program addedProgram, AddressSetView addedSet,
+						 TaskMonitor addedMonitor, MessageLog addedLog) throws CancelledException {
+		AddressIterator addresses = addedSet.getAddresses(true);
+		while (addresses.hasNext() && !addedMonitor.isCancelled()) {
+			Address address = addresses.next();
 
-		SequenceSearchState root = initialize(program);
-		if (root == null) {
-			String message = "Could not initialize a search state.";
-			log.appendMsg(getName(), message);
-			log.setStatus(message);
-
-			return false;
-		}
-
-		boolean doExecutableBlocksOnly = checkForExecuteBlock(program) && executableBlocksOnly;
-
-		// clear out any previous potential matches, because we are re-looking at these places
-		//   this will keep cruft from accumulating in the property map.
-		getOrCreatePotentialMatchPropertyMap(program).remove(set);
-
-		MemoryBytePatternSearcher patternSearcher;
-		patternSearcher = new MemoryBytePatternSearcher("Function Starts", root) {
-
-			@Override
-			public void preMatchApply(MatchAction[] actions, Address addr) {
-				contextValueList = null; // make sure, only context from these actions used
+			// if there are any conditional references, then this can't be a function start
+			if (hasConditionalReferences(addedProgram, address)) {
+				continue;
 			}
 
-			@Override
-			public void postMatchApply(MatchAction[] actions, Address addr) {
-				// Actions might have set context, check if postcondition failed first
-				if (!postreqFailedResult.contains(addr)) {
-					setCurrentContext(program, addr);
+			Function funcAt =
+					addedProgram.getFunctionManager().getFunctionContaining(address);
+			if (funcAt != null) {
+				if (funcAt.getEntryPoint().equals(address)) {
+					continue;
 				}
-				// get rid of the context list.
-				contextValueList = null;
+				BookmarkManager bookmarkManager = addedProgram.getBookmarkManager();
+				bookmarkManager.setBookmark(address, BookmarkType.ANALYSIS,
+						getName() + " Overlap",
+						"Function exists at probable good function start");
+				continue;
 			}
-		};
-		patternSearcher.setSearchExecutableOnly(doExecutableBlocksOnly);
-
-		patternSearcher.search(program, set, monitor);
-
-		AutoAnalysisManager analysisManager = AutoAnalysisManager.getAnalysisManager(program);
-		if (!disassemResult.isEmpty()) {
-			analysisManager.disassemble(disassemResult);
-		}
-		analysisManager.setProtectedLocations(codeLocations);
-
-		if (!potentialFuncResult.isEmpty()) {
-			// could be a pattern that said this is a function start, so it isn't potentially anymore
-			potentialFuncResult = potentialFuncResult.subtract(funcResult);
-
-			// kick off a later analyzer to create the functions after all the fallout
-			//       it should check that the function is not already part of another function
-			analysisManager.scheduleOneTimeAnalysis(new AnalyzerAdapter(
-				FUNCTION_START_SEARCH + " delayed", AnalysisPriority.DATA_ANALYSIS.after()) {
-				@Override
-				public boolean added(Program addedProgram, AddressSetView addedSet,
-						TaskMonitor addedMonitor, MessageLog addedLog) throws CancelledException {
-					AddressIterator addresses = addedSet.getAddresses(true);
-					
-					outerloop:
-					while (addresses.hasNext() && !addedMonitor.isCancelled()) {
-						Address address = addresses.next();
-						// if there are any conditional references, then this can't be a function start
-						ReferenceIterator referencesTo =
-							addedProgram.getReferenceManager().getReferencesTo(address);
-						while (referencesTo.hasNext()) {
-							Reference reference = referencesTo.next();
-							if (reference.getReferenceType().isConditional()) {
-								continue outerloop;
-							}
-						}
-						Function funcAt =
-							addedProgram.getFunctionManager().getFunctionContaining(address);
-						if (funcAt != null) {
-							if (funcAt.getEntryPoint().equals(address)) {
-								continue;
-							}
-							BookmarkManager bookmarkManager = addedProgram.getBookmarkManager();
-							bookmarkManager.setBookmark(address, BookmarkType.ANALYSIS,
-								getName() + " Overlap",
-								"Function exists at probable good function start");
-							continue;
-						}
-						new CreateFunctionCmd(address, false).applyTo(addedProgram, addedMonitor);
-					}
-					return true;
-				}
-			}, potentialFuncResult);
-		}
-
-		if (!funcResult.isEmpty()) {
-			// pattern said this is a functions start, kick of creation later
-			analysisManager.createFunction(funcResult, false);
+			new CreateFunctionCmd(address, false).applyTo(addedProgram, addedMonitor);
 		}
 		return true;
 	}
 
-	/**
-	 * @return true - if there are any blocks marked executable
-	 */
-	private boolean checkForExecuteBlock(Program program) {
-		MemoryBlock[] blocks = program.getMemory().getBlocks();
-
-		for (MemoryBlock block : blocks) {
-			if (block.isExecute()) {
+	private boolean hasConditionalReferences(Program addedProgram, Address address) {
+		ReferenceIterator refsTo =
+				addedProgram.getReferenceManager().getReferencesTo(address);
+		while (refsTo.hasNext()) {
+			Reference reference = refsTo.next();
+			if (reference.getReferenceType().isConditional()) {
 				return true;
 			}
 		}
@@ -743,10 +668,10 @@ return data != null;
 	@Override
 	public void registerOptions(Options options, Program program) {
 		options.registerOption(OPTION_NAME_DATABLOCKS, OPTION_DEFAULT_DATABLOCKS, null,
-			OPTION_DESCRIPTION_DATABLOCKS);
+				OPTION_DESCRIPTION_DATABLOCKS);
 
 		options.registerOption(OPTION_NAME_BOOKMARKS, setbookmark, null,
-			OPTION_DESCRIPTION_BOOKMARKS);
+				OPTION_DESCRIPTION_BOOKMARKS);
 
 	}
 
@@ -783,8 +708,7 @@ return data != null;
 			ProgramDecisionTree patternDecisionTree = getPatternDecisionTree();
 			ResourceFile[] fileList = Patterns.findPatternFiles(program, patternDecisionTree);
 			patternlist = readPatterns(fileList, program);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			Msg.error(this, "Couldn't load pattern files", e);
 			return null;
 		}
@@ -804,8 +728,7 @@ return data != null;
 		for (ResourceFile element : filelist) {
 			try {
 				Pattern.readPatterns(element, patlist, this);
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				Msg.error(this, "Pattern file error (" + element.getAbsolutePath() + ")", e);
 				success = false;
 			}
@@ -827,8 +750,9 @@ return data != null;
                 return new CodeBoundaryAction();
             case "setcontext":
                 return new ContextAction();
+			default:
+				return null;
         }
-		return null;
 	}
 
 	@Override
