@@ -213,7 +213,7 @@ public class GhidraRandomAccessFile implements AutoCloseable {
 	public int read(byte[] b, int offset, int length) throws IOException {
 		checkOpen();
 		int readLen = length;
-		do {
+		for (;;) {
 			int blocklength = readLen;
 			if (readLen > (BUFFER_SIZE - bufferOffset)) {
 				blocklength = (BUFFER_SIZE - (int) bufferOffset);
@@ -225,12 +225,11 @@ public class GhidraRandomAccessFile implements AutoCloseable {
 			System.arraycopy(buffer, (int) bufferOffset, b, offset, blocklength);
 			readLen -= blocklength;
 			offset += blocklength;
-			if (readLen > 0) {
-				seek(this.bufferFileStartIndex + bufferOffset + blocklength);
+			if (readLen <= 0) {
+				return length;
 			}
+			seek(this.bufferFileStartIndex + bufferOffset + blocklength);
 		}
-		while (readLen > 0);
-		return length;
 	}
 
 	/**
