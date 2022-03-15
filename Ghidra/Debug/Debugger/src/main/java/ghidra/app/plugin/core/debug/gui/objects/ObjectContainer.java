@@ -177,8 +177,7 @@ public class ObjectContainer implements Comparable<ObjectContainer> {
 	public void augmentElements(Collection<String> elementsRemoved,
 			Map<String, ? extends TargetObject> elementsAdded) {
 		Set<ObjectContainer> result = new TreeSet<ObjectContainer>();
-		Map<String, Object> newAdds = new HashMap<>();
-        newAdds.putAll(elementsAdded);
+        Map<String, Object> newAdds = new HashMap<>(elementsAdded);
 		boolean structureChanged = false;
 		synchronized (elementMap) {
 			for (ObjectContainer child : currentChildren) {
@@ -223,8 +222,7 @@ public class ObjectContainer implements Comparable<ObjectContainer> {
 	public void augmentAttributes(Collection<String> attributesRemoved,
 			Map<String, ?> attributesAdded) {
 		Set<ObjectContainer> result = new TreeSet<ObjectContainer>();
-		Map<String, Object> newAdds = new HashMap<>();
-        newAdds.putAll(attributesAdded);
+        Map<String, Object> newAdds = new HashMap<>(attributesAdded);
 		boolean structureChanged = false;
 		synchronized (attributeMap) {
 			for (ObjectContainer child : currentChildren) {

@@ -38,8 +38,7 @@ public class IndexedLocalFileSystemTest extends AbstractLocalFileSystemTest {
 
 		testFilePaths();
 
-		List<String> names = new ArrayList<>();
-        names.addAll(Arrays.asList(fs.getItemNames("/a/x/bbb")));
+        List<String> names = new ArrayList<>(Arrays.asList(fs.getItemNames("/a/x/bbb")));
 
 		// re-instantiate file-system (index will not have been rewritten)
 		// journal will be replayed to build memory-based index
@@ -69,8 +68,7 @@ public class IndexedLocalFileSystemTest extends AbstractLocalFileSystemTest {
 
 		testFilePaths();
 
-		List<String> names = new ArrayList<>();
-        names.addAll(Arrays.asList(fs.getItemNames("/a/x/bbb")));
+        List<String> names = new ArrayList<>(Arrays.asList(fs.getItemNames("/a/x/bbb")));
 
 		fs.dispose();
 

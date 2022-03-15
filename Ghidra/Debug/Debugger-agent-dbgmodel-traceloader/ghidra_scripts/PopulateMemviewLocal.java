@@ -224,8 +224,7 @@ public class PopulateMemviewLocal extends GhidraScript {
 		 */
 		//manager.openTrace(trace);
 		//manager.activateTrace(trace);
-		List<MemoryBox> boxList = new ArrayList<>();
-        boxList.addAll(boxes.values());
+        List<MemoryBox> boxList = new ArrayList<>(boxes.values());
 		Swing.runIfSwingOrRunLater(() -> {
 			memview.setBoxes(boxList);
 			memview.setProgram(currentProgram);

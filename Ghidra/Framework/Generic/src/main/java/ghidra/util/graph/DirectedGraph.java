@@ -479,9 +479,8 @@ public class DirectedGraph {
 	public Vector<Vertex> getEntryPoints() {
 
 		Vertex[] sources = this.vertices().getSources();
-		Set<Vertex> entryPointSet = new TreeSet<>();
-		Vector<Vertex> entryPoints = new Vector<>(sources.length);
-        entryPointSet.addAll(Arrays.asList(sources));
+        Vector<Vertex> entryPoints = new Vector<>(sources.length);
+        Set<Vertex> entryPointSet = new TreeSet<>(Arrays.asList(sources));
 		Set<Vertex> descendantsOfSources = this.getDescendants(sources);
 		Set<Vertex> nonDescendants = this.vertices().toSet();
 		nonDescendants.removeAll(descendantsOfSources);

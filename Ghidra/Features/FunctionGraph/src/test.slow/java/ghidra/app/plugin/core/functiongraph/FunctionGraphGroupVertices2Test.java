@@ -116,8 +116,7 @@ public class FunctionGraphGroupVertices2Test extends AbstractFunctionGraphTest {
 		assertArraysEqualUnordered("The grouped vertices are not the same in the cloned graph", v1,
 			v2);
 
-		Set<FGEdge> clonedUngroupedEdges = new HashSet<>();
-		clonedUngroupedEdges.addAll(clonedGroupVertex.getUngroupedEdges());
+        Set<FGEdge> clonedUngroupedEdges = new HashSet<>(clonedGroupVertex.getUngroupedEdges());
 		assertFalse("Cloned vertex does not have any edges", clonedUngroupedEdges.isEmpty());
 
 		ungroup(clonedGroupVertex);

@@ -92,8 +92,7 @@ public class FileSearcher {
 	 * @param recursiveSearch - Determine whether to Search recursively or not
 	 */
 	private static final void locateFilesFromDirRoot(File [] currDirArray, List<String> currFileTypeExtList, List<File> currFilesFromSearchList, boolean recursiveSearch){
-		List<File> currDirRootList = new ArrayList<File>();
-		currDirRootList.addAll( Arrays.asList( currDirArray ) );
+        List<File> currDirRootList = new ArrayList<File>(Arrays.asList(currDirArray));
 		//No Sanity Checks needed as this is a private member and used internally...
 		for(File currFile : currDirRootList){
 			if(currFile.isDirectory()){
