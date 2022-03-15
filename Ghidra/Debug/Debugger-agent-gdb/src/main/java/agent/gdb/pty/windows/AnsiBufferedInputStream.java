@@ -75,10 +75,8 @@ public class AnsiBufferedInputStream extends InputStream {
 
 	@Override
 	public int read(byte[] b, int off, int len) throws IOException {
-		if (!lineBaked.hasRemaining()) {
-			if (readUntilBaked() < 0) {
+		if (!lineBaked.hasRemaining() && readUntilBaked() < 0) {
 				return -1;
-			}
 		}
 		int read = Math.min(lineBaked.remaining(), len);
 		lineBaked.get(b, off, read);
@@ -101,15 +99,6 @@ public class AnsiBufferedInputStream extends InputStream {
 			return -1;
 		}
 		return lineBaked.remaining();
-	}
-
-	protected void printDebugChar(byte c) {
-		if (0x20 <= c && c <= 0x7f) {
-			System.err.print(new String(new byte[] { c }));
-		}
-		else {
-			System.err.print(String.format("<%02x>", c & 0xff));
-		}
 	}
 
 	protected int processNext() throws IOException {
@@ -206,26 +195,20 @@ public class AnsiBufferedInputStream extends InputStream {
 	}
 
 	protected void processEsc(byte c) {
-		switch (c) {
-			case '[':
-				mode = Mode.CSI;
-				break;
-			case ']':
-				mode = Mode.OSC;
-				break;
-			default:
-				throw new AssertionError("Saw 'ESC " + c + "' at " + countIn);
+		if (c == '[') {
+			mode = Mode.CSI;
+		} else if (c == ']') {
+			mode = Mode.OSC;
+		} else {
+			throw new AssertionError("Saw 'ESC " + c + "' at " + countIn);
 		}
 	}
 
 	protected void processCsi(byte c) {
-		switch (c) {
-			default:
-				processCsiParamOrCommand(c);
-				break;
-			case '?':
-				mode = Mode.CSI_Q;
-				break;
+		if (c == '?') {
+			mode = Mode.CSI_Q;
+		} else {
+			processCsiParamOrCommand(c);
 		}
 	}
 
@@ -275,80 +258,63 @@ public class AnsiBufferedInputStream extends InputStream {
 
 	protected void processCsiQ(byte c) {
 		String buf;
-		switch (c) {
-			default:
-				escBuf.put(c);
-				break;
-			case 'h':
-				buf = readAndClearEscBuf();
-				if ("12".equals(buf)) {
-					execTextCursorEnableBlinking();
-					escBuf.clear();
-					mode = Mode.CHARS;
-				}
-				else if ("25".equals(buf)) {
-					execTextCursorEnableModeShow();
-					escBuf.clear();
-					mode = Mode.CHARS;
-				}
-				else {
-					throw new AssertionError();
-				}
-				break;
-			case 'l':
-				buf = readAndClearEscBuf();
-				if ("12".equals(buf)) {
-					execTextCursorDisableBlinking();
-					escBuf.clear();
-					mode = Mode.CHARS;
-				}
-				else if ("25".equals(buf)) {
-					execTextCursorDisableModeShow();
-					escBuf.clear();
-					mode = Mode.CHARS;
-				}
-				break;
+		if (c == 'h') {
+			buf = readAndClearEscBuf();
+			if ("12".equals(buf)) {
+				execTextCursorEnableBlinking();
+				escBuf.clear();
+				mode = Mode.CHARS;
+			} else if ("25".equals(buf)) {
+				execTextCursorEnableModeShow();
+				escBuf.clear();
+				mode = Mode.CHARS;
+			} else {
+				throw new AssertionError();
+			}
+		} else if (c == 'l') {
+			buf = readAndClearEscBuf();
+			if ("12".equals(buf)) {
+				execTextCursorDisableBlinking();
+				escBuf.clear();
+				mode = Mode.CHARS;
+			} else if ("25".equals(buf)) {
+				execTextCursorDisableModeShow();
+				escBuf.clear();
+				mode = Mode.CHARS;
+			}
+		} else {
+			escBuf.put(c);
 		}
 	}
 
 	protected void processOsc(byte c) {
-		switch (c) {
-			default:
-				escBuf.put(c);
-				break;
-			case ';':
-				if (Set.of("0", "2").contains(readAndClearEscBuf())) {
-					mode = Mode.WINDOW_TITLE;
-					escBuf.clear();
-					break;
-				}
-				throw new AssertionError();
+		if (c != ';') {
+			escBuf.put(c);
+		} else if (!Set.of("0", "2").contains(readAndClearEscBuf())) {
+			throw new AssertionError();
+		} else {
+			mode = Mode.WINDOW_TITLE;
+			escBuf.clear();
 		}
 	}
 
 	protected void processWindowTitle(byte c) {
-		switch (c) {
-			default:
-				titleBuf.put(c);
-				break;
-			case 0x07: // bell, even though MSDN says longer form preferred
-				execSetWindowTitle();
-				mode = Mode.CHARS;
-				break;
-			case 0x1b:
-				mode = Mode.WINDOW_TITLE_ESC;
-				break;
+		if (c == 0x07) { // bell, even though MSDN says longer form preferred
+			execSetWindowTitle();
+			mode = Mode.CHARS;
+		} else if (c == 0x1b) {
+			mode = Mode.WINDOW_TITLE_ESC;
+		} else {
+			titleBuf.put(c);
 		}
 	}
 
 	protected void processWindowTitleEsc(byte c) {
-		switch (c) {
-			case '\\':
-				execSetWindowTitle();
-				mode = Mode.CHARS;
-				break;
-			default:
-				throw new AssertionError("Saw <ST> ... ESC " + c + " at " + countIn);
+		if (c == '\\') {
+			execSetWindowTitle();
+			mode = Mode.CHARS;
+		} else {
+			throw new AssertionError("Saw <ST> ... ESC " + c + " at " + countIn);
 		}
 	}
 
@@ -365,8 +331,7 @@ public class AnsiBufferedInputStream extends InputStream {
 
 	protected int parseNumericBuffer() {
 		String numeric = readAndClearEscBuf();
-		int result = Integer.parseInt(numeric);
-		return result;
+		return Integer.parseInt(numeric);
 	}
 
 	protected int[] parseNumericListBuffer() {

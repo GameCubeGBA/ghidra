@@ -15,16 +15,7 @@
  */
 package ghidra.app.plugin.core.debug.gui.time;
 
-import static ghidra.app.plugin.core.debug.gui.DebuggerResources.*;
-
-import java.awt.event.MouseEvent;
-import java.lang.invoke.MethodHandles;
-import java.util.Objects;
-
-import javax.swing.JComponent;
-
 import docking.ActionContext;
-import docking.action.DockingActionIf;
 import docking.action.ToggleDockingAction;
 import ghidra.app.plugin.core.debug.DebuggerCoordinates;
 import ghidra.app.plugin.core.debug.DebuggerPluginPackage;
@@ -32,10 +23,19 @@ import ghidra.app.plugin.core.debug.gui.DebuggerResources;
 import ghidra.app.plugin.core.debug.gui.DebuggerSnapActionContext;
 import ghidra.app.services.DebuggerTraceManagerService;
 import ghidra.framework.options.SaveState;
-import ghidra.framework.plugintool.*;
+import ghidra.framework.plugintool.AutoConfigState;
+import ghidra.framework.plugintool.AutoService;
 import ghidra.framework.plugintool.AutoService.Wiring;
+import ghidra.framework.plugintool.ComponentProviderAdapter;
 import ghidra.framework.plugintool.annotation.AutoConfigStateField;
 import ghidra.framework.plugintool.annotation.AutoServiceConsumed;
+
+import javax.swing.*;
+import java.awt.event.MouseEvent;
+import java.lang.invoke.MethodHandles;
+import java.util.Objects;
+
+import static ghidra.app.plugin.core.debug.gui.DebuggerResources.*;
 
 public class DebuggerTimeProvider extends ComponentProviderAdapter {
 	private static final AutoConfigState.ClassHandler<DebuggerTimeProvider> CONFIG_STATE_HANDLER =
