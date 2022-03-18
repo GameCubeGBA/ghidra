@@ -154,12 +154,7 @@ public class DecisionNode {
 	}
 
 	private static final Comparator<Constructor> debugInstructionComparator =
-		new Comparator<Constructor>() {
-			@Override
-			public int compare(Constructor c1, Constructor c2) {
-				return c1.getLineno() - c2.getLineno();
-			}
-		};
+            (c1, c2) -> c1.getLineno() - c2.getLineno();
 
 	private void dumpDecendentConstructors(List<Constructor> clist) {
 		if (bitsize == 0) { // The node is terminal

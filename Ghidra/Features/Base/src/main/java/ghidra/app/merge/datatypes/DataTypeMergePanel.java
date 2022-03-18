@@ -105,15 +105,12 @@ class DataTypeMergePanel extends JPanel {
 	private void create() {
 
 		buttonGroup = new ButtonGroup();
-		ItemListener listener = new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				if (e.getStateChange() == ItemEvent.SELECTED) {
-					mergeManager.clearStatusText();
-					mergeManager.setApplyEnabled(true);
-				}
-			}
-		};
+		ItemListener listener = e -> {
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                mergeManager.clearStatusText();
+                mergeManager.setApplyEnabled(true);
+            }
+        };
 
 		latestRB = new GRadioButton(MergeConstants.LATEST_TITLE);
 		latestRB.setName(LATEST_BUTTON_NAME);

@@ -33,12 +33,7 @@ public class GTreeClearSelectionTask extends GTreeTask {
 
 	@Override
 	public void run(TaskMonitor monitor) throws CancelledException {
-		runOnSwingThread(new Runnable() {
-			@Override
-			public void run() {
-				jTree.clearSelection();
-			}
-		});
+		runOnSwingThread(() -> jTree.clearSelection());
 	}
 
 }

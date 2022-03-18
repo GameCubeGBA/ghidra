@@ -17,6 +17,7 @@ package ghidra.app.plugin.assembler.sleigh;
 
 import java.util.*;
 
+import ghidra.app.plugin.languages.sleigh.VisitorResults;
 import org.apache.commons.collections4.MultiValuedMap;
 import org.apache.commons.collections4.multimap.HashSetValuedHashMap;
 

@@ -77,24 +77,19 @@ public class FileWatcher {
 			return;
 		}
 
-		future = executor.scheduleAtFixedRate(new Runnable() {
+		future = executor.scheduleAtFixedRate(() -> {
 
-			@Override
-			public void run() {
-
-				// Always check for cancel here.  When the user closes the window we call cancel
-				// on the service, but that doesn't actually cancel the task, it just ensures
-				// that any call to isCancelled returns true.
-				if (future.isCancelled()) {
-					return;
-				}
-				if (isFileUpdated(file)) {
-					FVEvent updateEvt = new FVEvent(EventType.FILE_CHANGED, null);
-					eventListener.send(updateEvt);
-				}
-			}
-
-		}, POLLING_DELAY_SEC, POLLING_INTERVAL_SEC, TimeUnit.SECONDS);
+            // Always check for cancel here.  When the user closes the window we call cancel
+            // on the service, but that doesn't actually cancel the task, it just ensures
+            // that any call to isCancelled returns true.
+            if (future.isCancelled()) {
+                return;
+            }
+            if (isFileUpdated(file)) {
+                FVEvent updateEvt = new FVEvent(EventType.FILE_CHANGED, null);
+                eventListener.send(updateEvt);
+            }
+        }, POLLING_DELAY_SEC, POLLING_INTERVAL_SEC, TimeUnit.SECONDS);
 	}
 
 	/**

@@ -86,18 +86,8 @@ public class ProcessorStateDialog extends DialogComponentProvider {
 		group.add(decimalButton);
 		radioPanel.add(hexButton);
 		radioPanel.add(decimalButton);
-		hexButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setRadix(16);
-			}
-		});
-		decimalButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setRadix(10);
-			}
-		});
+		hexButton.addActionListener(e -> setRadix(16));
+		decimalButton.addActionListener(e -> setRadix(10));
 
 		addWorkPanel(mainPanel);
 		setHelpLocation(new HelpLocation("DisassemblerPlugin", "ProcessorOptions"));

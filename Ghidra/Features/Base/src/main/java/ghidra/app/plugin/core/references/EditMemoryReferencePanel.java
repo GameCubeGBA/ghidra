@@ -83,13 +83,10 @@ class EditMemoryReferencePanel extends EditReferencePanel {
 
 	@Override
 	public void requestFocus() {
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				// do later to override the default later nature of focus
-				toAddressField.requestFocus();
-			}
-		});
+		SwingUtilities.invokeLater(() -> {
+            // do later to override the default later nature of focus
+            toAddressField.requestFocus();
+        });
 	}
 
 	private void buildPanel() {
@@ -97,12 +94,7 @@ class EditMemoryReferencePanel extends EditReferencePanel {
 
 		offsetCheckbox = new GCheckBox("Offset:");
 		offsetCheckbox.setHorizontalAlignment(SwingConstants.RIGHT);
-		offsetCheckbox.addChangeListener(new ChangeListener() {
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				enableOffsetField(offsetCheckbox.isSelected());
-			}
-		});
+		offsetCheckbox.addChangeListener(e -> enableOffsetField(offsetCheckbox.isSelected()));
 		offsetField = new JTextField();
 
 		addrLabel = new GDLabel("Base Address:");

@@ -260,28 +260,25 @@ public class ConstantPropagationAnalyzer extends AbstractAnalyzer {
 		monitor.setMessage("Analyzing functions...");
 		monitor.setMaximum(locations.size());
 
-		QCallback<Address, AddressSetView> callback = new QCallback<Address, AddressSetView>() {
-			@Override
-			public AddressSetView process(Address loc, TaskMonitor taskMonitor) {
-				synchronized (analyzedSet) {
-					if (analyzedSet.contains(loc)) {
-						taskMonitor.incrementProgress(1);
-						return EMPTY_ADDRESS_SET;
-					}
-				}
-
-				try {
-					AddressSetView result = analyzeLocation(program, loc, null, taskMonitor);
-					synchronized (analyzedSet) {
-						analyzedSet.add(result);
-					}
-
+		QCallback<Address, AddressSetView> callback = (loc, taskMonitor) -> {
+			synchronized (analyzedSet) {
+				if (analyzedSet.contains(loc)) {
 					taskMonitor.incrementProgress(1);
-					return result;
+					return EMPTY_ADDRESS_SET;
 				}
-				catch (CancelledException e) {
-					return null; // monitor was cancelled
+			}
+
+			try {
+				AddressSetView result = analyzeLocation(program, loc, null, taskMonitor);
+				synchronized (analyzedSet) {
+					analyzedSet.add(result);
 				}
+
+				taskMonitor.incrementProgress(1);
+				return result;
+			}
+			catch (CancelledException e) {
+				return null; // monitor was cancelled
 			}
 		};
 

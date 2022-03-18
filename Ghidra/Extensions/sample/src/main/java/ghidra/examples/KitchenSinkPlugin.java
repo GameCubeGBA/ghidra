@@ -75,11 +75,7 @@ public class KitchenSinkPlugin extends ProgramPlugin {
 
     private void setupServices() {
     	registerServiceProvided(HelloWorldService.class,
-        	new HelloWorldService() {
-	            public void sayHello() {
-    	            announce("Hello");
-        	    }
-        	});
+                () -> announce("Hello"));
     }
 
     private void setupActions() {

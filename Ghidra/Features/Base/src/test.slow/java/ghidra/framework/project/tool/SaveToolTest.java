@@ -61,12 +61,9 @@ public class SaveToolTest extends AbstractGhidraHeadedIntegrationTest {
 		toolChest.remove(TOOL_NAME);
 
 		// create a new running tool
-		runSwing(new Runnable() {
-			@Override
-			public void run() {
-				runningTool = ProjectTestUtils.getTool(project, null);
-			}
-		});
+		runSwing(() -> {
+            runningTool = ProjectTestUtils.getTool(project, null);
+        });
 
 		ToolTemplate toolTemplate = null;
 		try {
@@ -91,12 +88,7 @@ public class SaveToolTest extends AbstractGhidraHeadedIntegrationTest {
 				"duplicate name.", !TOOL_NAME.equals(toolTemplate.getName()));
 		}
 		finally {
-			runSwing(new Runnable() {
-				@Override
-				public void run() {
-					runningTool.close();
-				}
-			});
+			runSwing(() -> runningTool.close());
 
 			toolChest.remove(TOOL_NAME);
 			ProjectTestUtils.deleteTool(project, TOOL_NAME);

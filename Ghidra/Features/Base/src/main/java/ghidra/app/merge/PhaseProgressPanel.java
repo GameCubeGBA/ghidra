@@ -105,12 +105,7 @@ public class PhaseProgressPanel extends JPanel {
 		doSetMessage(DEFAULT_INFO);
 
 		// Sets up the timer for updating the GUI.
-		updateTimer = new Timer(250, new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				update();
-			}
-		});
+		updateTimer = new Timer(250, e -> update());
 	}
 
 	// Method for use by the timer to update the progress bar or message.

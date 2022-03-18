@@ -130,19 +130,16 @@ class ApplyDiffCommand extends BackgroundCommand implements AnalysisWorker {
 				plugin.getTool().setStatusInfo(statusMsg);
 				plugin.setTaskInProgress(false);
 
-				Runnable r = new Runnable() {
-					@Override
-					public void run() {
-						plugin.adjustDiffDisplay();
-						plugin.firePluginEvent(new ProgramSelectionPluginEvent(plugin.getName(),
-							plugin.getCurrentSelection(), plugin.getCurrentProgram()));
-						plugin.programLocationChanged(origLocation, null);
-						if (applyMsg != null && !applyMsg.isEmpty()) {
-							ReadTextDialog detailsDialog = new ReadTextDialog(title, applyMsg);
-							plugin.getTool().showDialog(detailsDialog, plugin.getListingPanel());
-						}
-					}
-				};
+				Runnable r = () -> {
+                    plugin.adjustDiffDisplay();
+                    plugin.firePluginEvent(new ProgramSelectionPluginEvent(plugin.getName(),
+                        plugin.getCurrentSelection(), plugin.getCurrentProgram()));
+                    plugin.programLocationChanged(origLocation, null);
+                    if (applyMsg != null && !applyMsg.isEmpty()) {
+                        ReadTextDialog detailsDialog = new ReadTextDialog(title, applyMsg);
+                        plugin.getTool().showDialog(detailsDialog, plugin.getListingPanel());
+                    }
+                };
 //				// The events were disabled while doing apply Diff. Now re-enable them by firing object restored event.
 //				((DomainObjectAdapter)currentProgram).fireEvent(new DomainObjectChangeRecord(
 //									DomainObject.DO_OBJECT_RESTORED));

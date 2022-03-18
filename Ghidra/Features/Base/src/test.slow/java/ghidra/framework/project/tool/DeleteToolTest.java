@@ -65,12 +65,9 @@ public class DeleteToolTest extends AbstractGhidraHeadedIntegrationTest {
 		toolChest.remove(TOOL_NAME);
 
 		// create a new running tool
-		runSwing(new Runnable() {
-			@Override
-			public void run() {
-				runningTool = ProjectTestUtils.getTool(project, null);
-			}
-		});
+		runSwing(() -> {
+            runningTool = ProjectTestUtils.getTool(project, null);
+        });
 		try {
 			runningTool.setToolName(TOOL_NAME);
 
@@ -97,12 +94,7 @@ public class DeleteToolTest extends AbstractGhidraHeadedIntegrationTest {
 			}
 		}
 		finally {
-			runSwing(new Runnable() {
-				@Override
-				public void run() {
-					runningTool.close();
-				}
-			});
+			runSwing(() -> runningTool.close());
 		}
 	}
 

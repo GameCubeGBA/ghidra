@@ -81,13 +81,10 @@ public class DecompileProcess {
 		exepath = new String[] { path };
 //		exepath = new String[] { "/usr/bin/valgrind", "--tool=memcheck", "--leak-check=yes", "--track-origins=yes", "--error-limit=no", "--log-file=/tmp/decompvalgrindout%p.txt", path };
 
-		timeoutRunnable = new Runnable() {
-			@Override
-			public void run() {
-				dispose();
-				disposestate = DisposeState.DISPOSED_ON_TIMEOUT;
-			}
-		};
+		timeoutRunnable = () -> {
+            dispose();
+            disposestate = DisposeState.DISPOSED_ON_TIMEOUT;
+        };
 	}
 
 	public void dispose() {

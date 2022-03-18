@@ -311,12 +311,7 @@ public final class ApplicationKeyManagerUtils {
 
 		LoadStoreParameter loadStoreParameter = null;
 		if (keyFile != null && keyFile.exists()) {
-			loadStoreParameter = new LoadStoreParameter() {
-				@Override
-				public ProtectionParameter getProtectionParameter() {
-					return pp;
-				}
-			};
+			loadStoreParameter = () -> pp;
 		}
 
 		try {

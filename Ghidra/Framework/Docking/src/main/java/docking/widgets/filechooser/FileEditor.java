@@ -100,12 +100,7 @@ class FileEditor extends AbstractCellEditor implements TableCellEditor {
 			// make sure the name field gets the focus, not the container
 			@Override
 			public void requestFocus() {
-				SwingUtilities.invokeLater(new Runnable() {
-					@Override
-					public void run() {
-						nameField.requestFocus();
-					}
-				});
+				SwingUtilities.invokeLater(() -> nameField.requestFocus());
 			}
 		};
 

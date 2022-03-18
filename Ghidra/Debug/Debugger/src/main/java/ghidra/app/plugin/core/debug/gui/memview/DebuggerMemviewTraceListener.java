@@ -207,12 +207,7 @@ public class DebuggerMemviewTraceListener extends TraceDomainObjectListener {
 		setCoordinates(coordinates);
 		Trace trace = coordinates.getTrace();
 		if (trace != null) {
-			Swing.runLater(new Runnable() {
-				@Override
-				public void run() {
-					processTrace(trace);
-				}
-			});
+			Swing.runLater(() -> processTrace(trace));
 		}
 		else {
 			provider.reset();

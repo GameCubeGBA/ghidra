@@ -64,16 +64,14 @@ public class FileChooserToggleButton extends JToggleButton {
 		addMouseListener(new ButtonMouseListener());
 		
 		// works in conjunction with the mouse listener to properly set the border
-		addChangeListener( new ChangeListener() {
-            public void stateChanged( ChangeEvent e ) {
-                if ( isSelected() ) {
-                    setBorder( LOWERED_BORDER );
-                }
-                else {                    
-                    setBorder( NO_BORDER );
-                }
-            }		    
-		} );
+		addChangeListener(e -> {
+            if ( isSelected() ) {
+                setBorder( LOWERED_BORDER );
+            }
+            else {
+                setBorder( NO_BORDER );
+            }
+        });
 		
 		setFocusable( false ); // this prevents the focus box from being drawn over the button
 	}

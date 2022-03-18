@@ -48,14 +48,11 @@ public class PropertyText extends JTextField {
 		editor = pe;
 		getDocument().addDocumentListener(new UpdateDocumentListener());
 
-		editor.addPropertyChangeListener(new PropertyChangeListener() {
-			@Override
-			public void propertyChange(PropertyChangeEvent evt) {
-				if (!isEditing) {
-					setText(editor.getAsText());
-				}
-			}
-		});
+		editor.addPropertyChangeListener(evt -> {
+            if (!isEditing) {
+                setText(editor.getAsText());
+            }
+        });
 	}
 
 //==================================================================================================

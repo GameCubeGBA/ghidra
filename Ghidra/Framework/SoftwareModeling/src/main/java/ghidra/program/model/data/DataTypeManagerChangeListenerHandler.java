@@ -55,14 +55,11 @@ public class DataTypeManagerChangeListenerHandler implements DataTypeManagerChan
 		if (listenerList.isEmpty()) {
 			return;
 		}
-		Runnable r = new Runnable() {
-			@Override
-			public void run() {
-				for (DataTypeManagerChangeListener listener : listenerList) {
-					listener.categoryAdded(dtm, path);
-				}
-			}
-		};
+		Runnable r = () -> {
+            for (DataTypeManagerChangeListener listener : listenerList) {
+                listener.categoryAdded(dtm, path);
+            }
+        };
 		invokeRunnable(r);
 	}
 
@@ -72,14 +69,11 @@ public class DataTypeManagerChangeListenerHandler implements DataTypeManagerChan
 		if (listenerList.isEmpty()) {
 			return;
 		}
-		Runnable r = new Runnable() {
-			@Override
-			public void run() {
-				for (DataTypeManagerChangeListener listener : listenerList) {
-					listener.categoryMoved(dtm, oldPath, newPath);
-				}
-			}
-		};
+		Runnable r = () -> {
+            for (DataTypeManagerChangeListener listener : listenerList) {
+                listener.categoryMoved(dtm, oldPath, newPath);
+            }
+        };
 		invokeRunnable(r);
 	}
 
@@ -88,14 +82,11 @@ public class DataTypeManagerChangeListenerHandler implements DataTypeManagerChan
 		if (listenerList.isEmpty()) {
 			return;
 		}
-		Runnable r = new Runnable() {
-			@Override
-			public void run() {
-				for (DataTypeManagerChangeListener listener : listenerList) {
-					listener.categoryRemoved(dtm, path);
-				}
-			}
-		};
+		Runnable r = () -> {
+            for (DataTypeManagerChangeListener listener : listenerList) {
+                listener.categoryRemoved(dtm, path);
+            }
+        };
 		invokeRunnable(r);
 	}
 
@@ -106,14 +97,11 @@ public class DataTypeManagerChangeListenerHandler implements DataTypeManagerChan
 		if (listenerList.isEmpty()) {
 			return;
 		}
-		Runnable r = new Runnable() {
-			@Override
-			public void run() {
-				for (DataTypeManagerChangeListener listener : listenerList) {
-					listener.categoryRenamed(dtm, oldPath, newPath);
-				}
-			}
-		};
+		Runnable r = () -> {
+            for (DataTypeManagerChangeListener listener : listenerList) {
+                listener.categoryRenamed(dtm, oldPath, newPath);
+            }
+        };
 		invokeRunnable(r);
 	}
 
@@ -123,14 +111,11 @@ public class DataTypeManagerChangeListenerHandler implements DataTypeManagerChan
 		if (listenerList.isEmpty()) {
 			return;
 		}
-		Runnable r = new Runnable() {
-			@Override
-			public void run() {
-				for (DataTypeManagerChangeListener listener : listenerList) {
-					listener.dataTypeAdded(dtm, path);
-				}
-			}
-		};
+		Runnable r = () -> {
+            for (DataTypeManagerChangeListener listener : listenerList) {
+                listener.dataTypeAdded(dtm, path);
+            }
+        };
 		invokeRunnable(r);
 	}
 
@@ -140,14 +125,11 @@ public class DataTypeManagerChangeListenerHandler implements DataTypeManagerChan
 		if (listenerList.isEmpty()) {
 			return;
 		}
-		Runnable r = new Runnable() {
-			@Override
-			public void run() {
-				for (DataTypeManagerChangeListener listener : listenerList) {
-					listener.dataTypeChanged(dtm, path);
-				}
-			}
-		};
+		Runnable r = () -> {
+            for (DataTypeManagerChangeListener listener : listenerList) {
+                listener.dataTypeChanged(dtm, path);
+            }
+        };
 		invokeRunnable(r);
 	}
 
@@ -158,14 +140,11 @@ public class DataTypeManagerChangeListenerHandler implements DataTypeManagerChan
 		if (listenerList.isEmpty()) {
 			return;
 		}
-		Runnable r = new Runnable() {
-			@Override
-			public void run() {
-				for (DataTypeManagerChangeListener listener : listenerList) {
-					listener.dataTypeMoved(dtm, oldPath, newPath);
-				}
-			}
-		};
+		Runnable r = () -> {
+            for (DataTypeManagerChangeListener listener : listenerList) {
+                listener.dataTypeMoved(dtm, oldPath, newPath);
+            }
+        };
 		invokeRunnable(r);
 	}
 
@@ -175,14 +154,11 @@ public class DataTypeManagerChangeListenerHandler implements DataTypeManagerChan
 		if (listenerList.isEmpty()) {
 			return;
 		}
-		Runnable r = new Runnable() {
-			@Override
-			public void run() {
-				for (DataTypeManagerChangeListener listener : listenerList) {
-					listener.dataTypeRemoved(dtm, path);
-				}
-			}
-		};
+		Runnable r = () -> {
+            for (DataTypeManagerChangeListener listener : listenerList) {
+                listener.dataTypeRemoved(dtm, path);
+            }
+        };
 		invokeRunnable(r);
 	}
 
@@ -193,15 +169,12 @@ public class DataTypeManagerChangeListenerHandler implements DataTypeManagerChan
 		if (listenerList.isEmpty()) {
 			return;
 		}
-		Runnable r = new Runnable() {
-			@Override
-			public void run() {
-				for (DataTypeManagerChangeListener listener : listenerList) {
-					listener.dataTypeRenamed(dtm, oldPath, newPath);
-					listener.favoritesChanged(dtm, oldPath, false);
-				}
-			}
-		};
+		Runnable r = () -> {
+            for (DataTypeManagerChangeListener listener : listenerList) {
+                listener.dataTypeRenamed(dtm, oldPath, newPath);
+                listener.favoritesChanged(dtm, oldPath, false);
+            }
+        };
 		invokeRunnable(r);
 	}
 
@@ -226,14 +199,11 @@ public class DataTypeManagerChangeListenerHandler implements DataTypeManagerChan
 		if (listenerList.isEmpty()) {
 			return;
 		}
-		Runnable r = new Runnable() {
-			@Override
-			public void run() {
-				for (DataTypeManagerChangeListener listener : listenerList) {
-					listener.dataTypeReplaced(dtm, oldPath, newPath, newDataType);
-				}
-			}
-		};
+		Runnable r = () -> {
+            for (DataTypeManagerChangeListener listener : listenerList) {
+                listener.dataTypeReplaced(dtm, oldPath, newPath, newDataType);
+            }
+        };
 		invokeRunnable(r);
 	}
 
@@ -243,14 +213,11 @@ public class DataTypeManagerChangeListenerHandler implements DataTypeManagerChan
 		if (listenerList.isEmpty()) {
 			return;
 		}
-		Runnable r = new Runnable() {
-			@Override
-			public void run() {
-				for (DataTypeManagerChangeListener listener : listenerList) {
-					listener.favoritesChanged(dtm, path, isFavorite);
-				}
-			}
-		};
+		Runnable r = () -> {
+            for (DataTypeManagerChangeListener listener : listenerList) {
+                listener.favoritesChanged(dtm, path, isFavorite);
+            }
+        };
 		invokeRunnable(r);
 	}
 
@@ -261,14 +228,11 @@ public class DataTypeManagerChangeListenerHandler implements DataTypeManagerChan
 		if (listenerList.isEmpty()) {
 			return;
 		}
-		Runnable r = new Runnable() {
-			@Override
-			public void run() {
-				for (DataTypeManagerChangeListener listener : listenerList) {
-					listener.sourceArchiveChanged(dataTypeManager, dataTypeSource);
-				}
-			}
-		};
+		Runnable r = () -> {
+            for (DataTypeManagerChangeListener listener : listenerList) {
+                listener.sourceArchiveChanged(dataTypeManager, dataTypeSource);
+            }
+        };
 		invokeRunnable(r);
 	}
 
@@ -279,14 +243,11 @@ public class DataTypeManagerChangeListenerHandler implements DataTypeManagerChan
 		if (listenerList.isEmpty()) {
 			return;
 		}
-		Runnable r = new Runnable() {
-			@Override
-			public void run() {
-				for (DataTypeManagerChangeListener listener : listenerList) {
-					listener.sourceArchiveAdded(dataTypeManager, dataTypeSource);
-				}
-			}
-		};
+		Runnable r = () -> {
+            for (DataTypeManagerChangeListener listener : listenerList) {
+                listener.sourceArchiveAdded(dataTypeManager, dataTypeSource);
+            }
+        };
 		invokeRunnable(r);
 	}
 }

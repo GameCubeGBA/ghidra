@@ -2060,27 +2060,21 @@ class SymbolMerger extends AbstractListingMerger {
 					showResolveInfo();
 				}
 			};
-			SwingUtilities.invokeAndWait(new Runnable() {
-				@Override
-				public void run() {
-					getConflictPanel(conflictType, changeListener);
-					if (conflictPanel != null) {
-						listingPanel.setBottomComponent(conflictPanel);
-					}
-					else {
-						listingPanel.setBottomComponent(emptyConflictPanel);
-					}
-				}
-			});
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					listingPanel.clearAllBackgrounds();
-					if (SymbolMerger.this.currentBackgroundSet != null) {
-						listingPanel.paintAllBackgrounds(SymbolMerger.this.currentBackgroundSet);
-					}
-				}
-			});
+			SwingUtilities.invokeAndWait(() -> {
+                getConflictPanel(conflictType, changeListener);
+                if (conflictPanel != null) {
+                    listingPanel.setBottomComponent(conflictPanel);
+                }
+                else {
+                    listingPanel.setBottomComponent(emptyConflictPanel);
+                }
+            });
+			SwingUtilities.invokeLater(() -> {
+                listingPanel.clearAllBackgrounds();
+                if (SymbolMerger.this.currentBackgroundSet != null) {
+                    listingPanel.paintAllBackgrounds(SymbolMerger.this.currentBackgroundSet);
+                }
+            });
 		}
 		catch (InterruptedException | InvocationTargetException e) {
 			Msg.error(this, "Couldn't display Symbol Merger conflict panel. " + e.getMessage());

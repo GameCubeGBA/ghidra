@@ -232,22 +232,19 @@ public class AssemblyParser {
 
 		// Copy the translations tables NT columns as GOTOs
 		// Also, copy the T columns as SHIFTs
-		table.forEach(new Consumer<TableEntry<Integer>>() {
-			@Override
-			public void accept(TableEntry<Integer> ent) {
-				if (ent.getSym() instanceof AssemblyNonTerminal) {
-					AssemblyNonTerminal nt = (AssemblyNonTerminal) ent.getSym();
-					actions.putGoto(ent.getState(), nt, ent.getValue());
-				}
-				else if (ent.getSym() instanceof AssemblyTerminal) {
-					AssemblyTerminal t = (AssemblyTerminal) ent.getSym();
-					actions.putShift(ent.getState(), t, ent.getValue());
-				}
-				else {
-					throw new AssertionError("INTERNAL: symbols must be T or NT");
-				}
-			}
-		});
+		table.forEach(ent -> {
+            if (ent.getSym() instanceof AssemblyNonTerminal) {
+                AssemblyNonTerminal nt = (AssemblyNonTerminal) ent.getSym();
+                actions.putGoto(ent.getState(), nt, ent.getValue());
+            }
+            else if (ent.getSym() instanceof AssemblyTerminal) {
+                AssemblyTerminal t = (AssemblyTerminal) ent.getSym();
+                actions.putShift(ent.getState(), t, ent.getValue());
+            }
+            else {
+                throw new AssertionError("INTERNAL: symbols must be T or NT");
+            }
+        });
 
 		// Merge rules from same general rule, ending in same state
 		mergers =

@@ -123,20 +123,10 @@ public class LaunchErrorDialog extends JDialog {
 		JPanel buttonPanel = new JPanel();
 
 		JButton editButton = new JButton("Edit Settings");
-		editButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				editCallback();
-			}
-		});
+		editButton.addActionListener(e -> editCallback());
 
 		JButton cancelButton = new JButton("Cancel");
-		cancelButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				cancelCallback();
-			}
-		});
+		cancelButton.addActionListener(e -> cancelCallback());
 
 		buttonPanel.add(editButton);
 		buttonPanel.add(Box.createHorizontalStrut(5));

@@ -438,16 +438,13 @@ public class MemoryMergeManager implements MergeResolver {
 	private void showMergePanel(final String panelID, final String title, final String latestStr,
 			final String myStr, final String origStr) {
 		try {
-			SwingUtilities.invokeAndWait(new Runnable() {
-				@Override
-				public void run() {
-					if (mergePanel == null) {
-						mergePanel = new MemoryMergePanel(mergeManager, conflictCount);
-					}
-					mergePanel.setConflictInfo(currentConflictIndex, panelID, title, latestStr,
-						myStr, origStr);
-				}
-			});
+			SwingUtilities.invokeAndWait(() -> {
+                if (mergePanel == null) {
+                    mergePanel = new MemoryMergePanel(mergeManager, conflictCount);
+                }
+                mergePanel.setConflictInfo(currentConflictIndex, panelID, title, latestStr,
+                    myStr, origStr);
+            });
 		}
 		catch (InterruptedException | InvocationTargetException e) {
 			Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);

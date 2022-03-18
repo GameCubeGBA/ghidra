@@ -152,12 +152,7 @@ class SelectProjectPanel extends AbstractWizardJPanel {
 		JLabel projectNameLabel = new GDLabel("Project Name:", SwingConstants.RIGHT);
 		projectNameField = new JTextField(25);
 		projectNameField.setName("Project Name");
-		projectNameField.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setProjectFile();
-			}
-		});
+		projectNameField.addActionListener(e -> setProjectFile());
 
 		docListener = new DocumentListener() {
 			@Override
@@ -179,12 +174,7 @@ class SelectProjectPanel extends AbstractWizardJPanel {
 		directoryField.getDocument().addDocumentListener(docListener);
 
 		browseButton = ButtonPanelFactory.createButton(ButtonPanelFactory.BROWSE_TYPE);
-		browseButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				displayFileChooser();
-			}
-		});
+		browseButton.addActionListener(e -> displayFileChooser());
 
 //		sharedProjectCB = new GCheckBox("Project can be Shared with Others"); 
 //		sharedProjectCB.addItemListener(new ItemListener() {

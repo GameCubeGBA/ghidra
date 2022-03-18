@@ -89,14 +89,11 @@ class BlockConflictPanel extends JPanel {
 
 		group = new ButtonGroup();
 
-		ItemListener itemListener = new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				if (e.getStateChange() == ItemEvent.SELECTED) {
-					listener.stateChanged(null);
-				}
-			}
-		};
+		ItemListener itemListener = e -> {
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                listener.stateChanged(null);
+            }
+        };
 
 		latestRB = new GRadioButton("Latest");
 		latestRB.setName(MemoryMergePanel.LATEST_BUTTON_NAME);

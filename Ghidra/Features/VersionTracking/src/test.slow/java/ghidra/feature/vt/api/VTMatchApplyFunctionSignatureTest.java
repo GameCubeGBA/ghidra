@@ -89,12 +89,7 @@ public class VTMatchApplyFunctionSignatureTest extends AbstractGhidraHeadedInteg
 			VTSessionDB.createVTSession(testName.getMethodName() + " - Test Match Set Manager",
 				sourceProgram, destinationProgram, this);
 
-		runSwing(new Runnable() {
-			@Override
-			public void run() {
-				controller.openVersionTrackingSession(session);
-			}
-		});
+		runSwing(() -> controller.openVersionTrackingSession(session));
 
 		setAllOptionsToDoNothing();
 
@@ -597,24 +592,14 @@ public class VTMatchApplyFunctionSignatureTest extends AbstractGhidraHeadedInteg
 	public void testApplyMatch_ReplaceSignatureAndCallingConventionDifferentLanguageFailUsingNameMatch()
 			throws Exception {
 
-		runSwing(new Runnable() {
-			@Override
-			public void run() {
-				controller.closeCurrentSessionIgnoringChanges();
-			}
-		});
+		runSwing(() -> controller.closeCurrentSessionIgnoringChanges());
 
 		env.release(destinationProgram);
 		destinationProgram = createToyDestinationProgram();// env.getProgram("helloProgram"); // get a program without cdecl
 		session =
 			VTSessionDB.createVTSession(testName.getMethodName() + " - Test Match Set Manager",
 				sourceProgram, destinationProgram, this);
-		runSwing(new Runnable() {
-			@Override
-			public void run() {
-				controller.openVersionTrackingSession(session);
-			}
-		});
+		runSwing(() -> controller.openVersionTrackingSession(session));
 
 		useMatch("0x00401040", "0x00010938");
 
@@ -1550,13 +1535,10 @@ public class VTMatchApplyFunctionSignatureTest extends AbstractGhidraHeadedInteg
 		final String[] sourceStringBox = new String[1];
 		final String[] destinationStringBox = new String[1];
 
-		runSwing(new Runnable() {
-			@Override
-			public void run() {
-				sourceStringBox[0] = sourceFunction.getPrototypeString(false, false);
-				destinationStringBox[0] = destinationFunction.getPrototypeString(false, false);
-			}
-		});
+		runSwing(() -> {
+            sourceStringBox[0] = sourceFunction.getPrototypeString(false, false);
+            destinationStringBox[0] = destinationFunction.getPrototypeString(false, false);
+        });
 
 		assertEquals(expectedSourceSignature, sourceStringBox[0]);
 		assertEquals(expectedDestinationSignature, destinationStringBox[0]);

@@ -86,12 +86,9 @@ public class RecoveryFileTest extends AbstractGenericTest {
 		boolean success = false;
 		try {
 
-			LocalBufferFile bf = PrivateDatabase.createDatabase(testDir, new DBFileListener() {
-				@Override
-				public void versionCreated(Database db, int version) {
+			LocalBufferFile bf = PrivateDatabase.createDatabase(testDir, (db, version) -> {
 
-				}
-			}, BUFFER_SIZE);
+            }, BUFFER_SIZE);
 
 			bufferMgr = new BufferMgr(BUFFER_SIZE, 16 * 1024, 4);
 

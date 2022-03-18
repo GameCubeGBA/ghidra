@@ -710,12 +710,7 @@ public class TextFieldLinker {
 	 * Schedule a state synchronization.
 	 */
 	protected void syncStateLater() {
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				doSyncState();
-			}
-		});
+		SwingUtilities.invokeLater(() -> doSyncState());
 	}
 
 	/**

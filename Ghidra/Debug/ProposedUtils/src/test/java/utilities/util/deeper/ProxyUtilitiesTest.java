@@ -63,12 +63,7 @@ public class ProxyUtilitiesTest {
 
 	@Test
 	public void testComposeOnDelegate() {
-		ExtRootIf composed = ProxyUtilities.composeOnDelegate(ExtRootIf.class, new ExtRootIf() {
-			@Override
-			public String getCommonThing() {
-				return "Hello, World!";
-			}
-		}, List.of(ExtAFeatureIf.class, ExtBFeatureIf.class), MethodHandles.lookup());
+		ExtRootIf composed = ProxyUtilities.composeOnDelegate(ExtRootIf.class, () -> "Hello, World!", List.of(ExtAFeatureIf.class, ExtBFeatureIf.class), MethodHandles.lookup());
 		assertEquals("Hello, World!", composed.getCommonThing());
 		AFeatureIf a = (AFeatureIf) composed;
 		assertEquals("A: Hello, World!", a.prependA());
@@ -78,12 +73,7 @@ public class ProxyUtilitiesTest {
 
 	@Test
 	public void testComposedOnDelegatePolymorphic() {
-		ExtRootIf composed = ProxyUtilities.composeOnDelegate(ExtRootIf.class, new ExtRootIf() {
-			@Override
-			public String getCommonThing() {
-				return "Hello, World!";
-			}
-		}, List.of(ExtAFeatureIf.class), MethodHandles.lookup());
+		ExtRootIf composed = ProxyUtilities.composeOnDelegate(ExtRootIf.class, () -> "Hello, World!", List.of(ExtAFeatureIf.class), MethodHandles.lookup());
 		assertEquals("Hello, World!", composed.getCommonThing());
 		AFeatureIf a = (AFeatureIf) composed;
 		assertEquals("A: Hello, World!", a.prependA());

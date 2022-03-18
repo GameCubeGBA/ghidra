@@ -841,13 +841,8 @@ public class DBTraceProgramView implements TraceProgramView {
 
 		protected static <T> Iterable<Pair<Entry<AddressRange, T>, Entry<AddressRange, T>>> iter(
 				Iterable<Entry<AddressRange, T>> left, Iterable<Entry<AddressRange, T>> right) {
-			return new Iterable<>() {
-				@Override
-				public Iterator<Pair<Entry<AddressRange, T>, Entry<AddressRange, T>>> iterator() {
-					return new OverlappingAddressRangeKeyIteratorMerger<>(left.iterator(),
-						right.iterator());
-				}
-			};
+			return () -> new OverlappingAddressRangeKeyIteratorMerger<>(left.iterator(),
+                right.iterator());
 		}
 
 		public OverlappingAddressRangeKeyIteratorMerger(Iterator<Entry<AddressRange, T>> left,

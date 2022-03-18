@@ -439,37 +439,29 @@ class UserDefinedPropertyMerger extends AbstractListingMerger {
 		this.propertyName = userDefinedPropertyName;
 		this.currentAddress = addr;
 		try {
-			final ChangeListener changeListener = new ChangeListener() {
-				public void stateChanged(ChangeEvent e) {
-					conflictOption = conflictPanel.getSelectedOptions();
-					if (conflictOption == ASK_USER) {
-						if (mergeManager != null) {
-							mergeManager.setApplyEnabled(false);
-						}
-						return;
-					}
-					if (mergeManager != null) {
-						mergeManager.clearStatusText();
-					}
-					merge(UserDefinedPropertyMerger.this.propertyName,
-						UserDefinedPropertyMerger.this.currentAddress, conflictOption);
-					if (mergeManager != null) {
-						mergeManager.setApplyEnabled(true);
-					}
-				}
-			};
-			SwingUtilities.invokeAndWait(new Runnable() {
-				public void run() {
-					setupConflictsPanel(listingPanel, UserDefinedPropertyMerger.this.propertyName,
-						UserDefinedPropertyMerger.this.currentAddress, changeListener);
-				}
-			});
-			SwingUtilities.invokeLater(new Runnable() {
-				public void run() {
-					listingPanel.clearAllBackgrounds();
-					listingPanel.paintAllBackgrounds(new AddressSet(addr, addr));
-				}
-			});
+			final ChangeListener changeListener = e -> {
+                conflictOption = conflictPanel.getSelectedOptions();
+                if (conflictOption == ASK_USER) {
+                    if (mergeManager != null) {
+                        mergeManager.setApplyEnabled(false);
+                    }
+                    return;
+                }
+                if (mergeManager != null) {
+                    mergeManager.clearStatusText();
+                }
+                merge(UserDefinedPropertyMerger.this.propertyName,
+                    UserDefinedPropertyMerger.this.currentAddress, conflictOption);
+                if (mergeManager != null) {
+                    mergeManager.setApplyEnabled(true);
+                }
+            };
+			SwingUtilities.invokeAndWait(() -> setupConflictsPanel(listingPanel, UserDefinedPropertyMerger.this.propertyName,
+                UserDefinedPropertyMerger.this.currentAddress, changeListener));
+			SwingUtilities.invokeLater(() -> {
+                listingPanel.clearAllBackgrounds();
+                listingPanel.paintAllBackgrounds(new AddressSet(addr, addr));
+            });
 		}
 		catch (InterruptedException | InvocationTargetException e) {
 		}

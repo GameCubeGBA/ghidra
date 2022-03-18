@@ -70,24 +70,15 @@ public class TaskViewer {
 
 		buildComponent();
 		taskListener = new TaskViewerTaskListener();
-		updateComponentsRunnable = new Runnable() {
-			@Override
-			public void run() {
-				while (!runnableQueue.isEmpty()) {
-					Runnable runnable = runnableQueue.poll();
-					runnable.run();
-				}
-				updateComponent();
-			}
-		};
+		updateComponentsRunnable = () -> {
+            while (!runnableQueue.isEmpty()) {
+                Runnable runnable = runnableQueue.poll();
+                runnable.run();
+            }
+            updateComponent();
+        };
 		updateManager = new SwingUpdateManager(MIN_DELAY, MAX_DELAY, updateComponentsRunnable);
-		animationRunnable = new Runnable() {
-
-			@Override
-			public void run() {
-				startScrollingAwayAnimation(0);
-			}
-		};
+		animationRunnable = () -> startScrollingAwayAnimation(0);
 
 		completedTimingTarget = new TimingTargetAdapter() {
 			@Override
@@ -331,13 +322,10 @@ public class TaskViewer {
 
 		@Override
 		public void suspendedStateChanged(boolean isSuspended) {
-			SystemUtilities.runSwingLater(new Runnable() {
-				@Override
-				public void run() {
-					layeredPane.invalidate();
-					layeredPane.repaint();
-				}
-			});
+			SystemUtilities.runSwingLater(() -> {
+                layeredPane.invalidate();
+                layeredPane.repaint();
+            });
 		}
 	}
 

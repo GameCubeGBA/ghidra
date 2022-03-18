@@ -49,12 +49,7 @@ public class CreateToolTest extends AbstractGhidraHeadedIntegrationTest {
 	}
 
 	private void closeTool(final PluginTool theTool) {
-		executeOnSwingWithoutBlocking(new Runnable() {
-			@Override
-			public void run() {
-				theTool.close();
-			}
-		});
+		executeOnSwingWithoutBlocking(() -> theTool.close());
 
 		// this handles the save changes dialog and potential analysis dialogs
 		closeAllWindows();

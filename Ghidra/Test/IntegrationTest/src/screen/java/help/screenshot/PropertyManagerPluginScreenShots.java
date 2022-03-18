@@ -57,13 +57,7 @@ public class PropertyManagerPluginScreenShots extends GhidraScreenShotGenerator 
 		PropertyManagerProvider provider = getProvider(PropertyManagerProvider.class);
 		goToListing(0x00401082);
 		final JTable table = (JTable) getInstanceField("table", provider);
-		runSwing(new Runnable() {
-
-			@Override
-			public void run() {
-				table.setRowSelectionInterval(0, 0);
-			}
-		});
+		runSwing((Runnable) () -> table.setRowSelectionInterval(0, 0));
 	}
 
 @Test

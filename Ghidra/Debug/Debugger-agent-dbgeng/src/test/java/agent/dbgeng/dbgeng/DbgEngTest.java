@@ -87,13 +87,10 @@ public class DbgEngTest extends AbstractGhidraHeadlessIntegrationTest {
 	@Test
 	public void testPrintln() {
 		CompletableFuture<String> cb = new CompletableFuture<>();
-		client.setOutputCallbacks(new DebugOutputCallbacks() {
-			@Override
-			public void output(int mask, String text) {
-				System.out.print(text);
-				cb.complete(text);
-			}
-		});
+		client.setOutputCallbacks((mask, text) -> {
+            System.out.print(text);
+            cb.complete(text);
+        });
 		control.outln("Hello, World!");
 		String back = cb.getNow(null);
 		// NOTE: I'd like to be precise wrt/ new lines, but it seems to vary with version.
@@ -249,15 +246,12 @@ public class DbgEngTest extends AbstractGhidraHeadlessIntegrationTest {
 					return DebugStatus.BREAK;
 				}
 			});
-			client.setOutputCallbacks(new DebugOutputCallbacks() {
-				@Override
-				public void output(int mask, String text) {
-					System.out.print(text);
-					if (outputCapture != null) {
-						outputCapture.append(text);
-					}
-				}
-			});
+			client.setOutputCallbacks((mask, text) -> {
+                System.out.print(text);
+                if (outputCapture != null) {
+                    outputCapture.append(text);
+                }
+            });
 
 			Msg.debug(this, "Starting " + cmdLine + " with client " + client);
 			control.execute(".create " + cmdLine);
@@ -637,13 +631,10 @@ public class DbgEngTest extends AbstractGhidraHeadlessIntegrationTest {
 		// or condition to indicate when all threads have been discovered.
 		String specimen =
 			Application.getOSFile("sctldbgeng", "expCreateThreadSpin.exe").getCanonicalPath();
-		client.setOutputCallbacks(new DebugOutputCallbacks() {
-			@Override
-			public void output(int mask, String text) {
-				System.out.print(text);
-				System.out.flush();
-			}
-		});
+		client.setOutputCallbacks((mask, text) -> {
+            System.out.print(text);
+            System.out.flush();
+        });
 		client.setEventCallbacks(new DebugEventCallbacksAdapter() {
 			@Override
 			public DebugStatus breakpoint(DebugBreakpoint bp) {

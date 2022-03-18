@@ -59,24 +59,14 @@ public interface FileSystemProbeConflictResolver {
 	 * Conflict handler that chooses the first filesystem in the list.
 	 */
 	public static final FileSystemProbeConflictResolver CHOOSEFIRST =
-		new FileSystemProbeConflictResolver() {
-			@Override
-			public FileSystemInfoRec chooseFSIR(List<FileSystemInfoRec> factories) {
-				return factories.get(0);
-			}
-		};
+            factories -> factories.get(0);
 
 	/**
 	 * Conflict handler that allows the user to pick the filesystem to use from a GUI list.
 	 * <p>
 	 */
 	public static FileSystemProbeConflictResolver GUI_PICKER =
-		new FileSystemProbeConflictResolver() {
-			@Override
-			public FileSystemInfoRec chooseFSIR(List<FileSystemInfoRec> factories) {
-				return SelectFromListDialog.selectFromList(factories, "Select filesystem",
-					"Select a filesystem from list", FileSystemInfoRec::getDescription);
-			}
-		};
+            factories -> SelectFromListDialog.selectFromList(factories, "Select filesystem",
+                "Select a filesystem from list", FileSystemInfoRec::getDescription);
 
 }

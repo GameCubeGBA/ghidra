@@ -96,12 +96,7 @@ public class ServerInfoComponent extends JPanel {
 		JLabel nameLabel = new GDLabel("Server Name:", SwingConstants.RIGHT);
 		nameField = new JTextField(20);
 		nameField.setName("Server Name");
-		nameField.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				nameField.transferFocus();
-			}
-		});
+		nameField.addActionListener(e -> nameField.transferFocus());
 		nameDocListener = new DocumentListener() {
 			@Override
 			public void changedUpdate(DocumentEvent e) {
@@ -125,12 +120,7 @@ public class ServerInfoComponent extends JPanel {
 		portNumberField.setName("Port Number");
 
 		portNumberField.setText(Integer.toString(GhidraServerHandle.DEFAULT_PORT));
-		portNumberField.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				portNumberField.transferFocus();
-			}
-		});
+		portNumberField.addActionListener(e -> portNumberField.transferFocus());
 
 		portDocListener = new DocumentListener() {
 			@Override

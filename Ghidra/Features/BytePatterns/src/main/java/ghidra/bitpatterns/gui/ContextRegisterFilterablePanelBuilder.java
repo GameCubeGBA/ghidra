@@ -92,30 +92,20 @@ public abstract class ContextRegisterFilterablePanelBuilder {
 
 		applyButton = new JButton(APPLY_BUTTON_TEXT);
 		buttonPanel.add(applyButton);
-		applyButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				ContextRegisterFilterInputDialog filterDialog =
-					new ContextRegisterFilterInputDialog("Set Context Register Filter", extent,
-						mainPanel);
-				registerFilter = filterDialog.getFilter();
-				if (registerFilter == null) {
-					return;
-				}
-				applyFilterAction();
-			}
-		});
+		applyButton.addActionListener(e -> {
+            ContextRegisterFilterInputDialog filterDialog =
+                new ContextRegisterFilterInputDialog("Set Context Register Filter", extent,
+                    mainPanel);
+            registerFilter = filterDialog.getFilter();
+            if (registerFilter == null) {
+                return;
+            }
+            applyFilterAction();
+        });
 
 		clearButton = new JButton(CLEAR_BUTTON_TEXT);
 		buttonPanel.add(clearButton);
-		clearButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				clearFilterAction();
-			}
-
-		});
+		clearButton.addActionListener(e -> clearFilterAction());
 		return buttonPanel;
 	}
 

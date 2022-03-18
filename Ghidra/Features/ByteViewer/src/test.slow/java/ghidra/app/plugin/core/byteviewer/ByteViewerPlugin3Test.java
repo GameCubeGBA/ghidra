@@ -122,13 +122,10 @@ public class ByteViewerPlugin3Test extends AbstractGhidraHeadedIntegrationTest {
 
 		// make a selection in the Code Browser
 		Point startPoint = c.getCursorPoint();
-		SwingUtilities.invokeAndWait(new Runnable() {
-			@Override
-			public void run() {
-				FieldLocation loc = getFieldLocation(getAddr(0x010010bc));
-				c.setCursorPosition(loc.getIndex(), loc.getFieldNum(), loc.getRow(), loc.getCol());
-			}
-		});
+		SwingUtilities.invokeAndWait(() -> {
+            FieldLocation loc = getFieldLocation(getAddr(0x010010bc));
+            c.setCursorPosition(loc.getIndex(), loc.getFieldNum(), loc.getRow(), loc.getCol());
+        });
 		Point endPoint = c.getCursorPoint();
 
 		dragMouse(c, 1, startPoint.x, startPoint.y, endPoint.x, endPoint.y, 0);
@@ -199,11 +196,6 @@ public class ByteViewerPlugin3Test extends AbstractGhidraHeadedIntegrationTest {
 	}
 
 	private void showComponent(final boolean visible) throws Exception {
-		SwingUtilities.invokeAndWait(new Runnable() {
-			@Override
-			public void run() {
-				tool.showComponentProvider(plugin.getProvider(), visible);
-			}
-		});
+		SwingUtilities.invokeAndWait(() -> tool.showComponentProvider(plugin.getProvider(), visible));
 	}
 }

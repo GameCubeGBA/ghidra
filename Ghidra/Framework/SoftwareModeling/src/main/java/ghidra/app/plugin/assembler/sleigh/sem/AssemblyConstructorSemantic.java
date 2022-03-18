@@ -24,6 +24,7 @@ import ghidra.app.plugin.assembler.sleigh.grammars.AssemblyProduction;
 import ghidra.app.plugin.assembler.sleigh.util.DbgTimer;
 import ghidra.app.plugin.languages.sleigh.SleighLanguages;
 import ghidra.app.plugin.languages.sleigh.SubtableEntryVisitor;
+import ghidra.app.plugin.languages.sleigh.VisitorResults;
 import ghidra.app.plugin.processors.sleigh.*;
 import ghidra.app.plugin.processors.sleigh.pattern.DisjointPattern;
 import ghidra.app.plugin.processors.sleigh.symbol.SubtableSymbol;
@@ -32,7 +33,8 @@ import ghidra.app.plugin.processors.sleigh.symbol.SubtableSymbol;
  * Describes a SLEIGH constructor semantic
  * 
  * <p>
- * These are collected and associated with productions in the grammar based on the given
+ * These are collected and associated with productions in the grammar based on
+ * the given
  * constructor's print pieces.
  */
 public class AssemblyConstructorSemantic implements Comparable<AssemblyConstructorSemantic> {
@@ -51,9 +53,10 @@ public class AssemblyConstructorSemantic implements Comparable<AssemblyConstruct
 	/**
 	 * Build a new SLEIGH constructor semantic
 	 * 
-	 * @param cons the SLEIGH constructor
-	 * @param indices the indices of RHS non-terminals in the associated production that represent
-	 *            an operand in the SLEIGH constructor
+	 * @param cons    the SLEIGH constructor
+	 * @param indices the indices of RHS non-terminals in the associated production
+	 *                that represent
+	 *                an operand in the SLEIGH constructor
 	 */
 	public AssemblyConstructorSemantic(Constructor cons, List<Integer> indices) {
 		this.cons = cons;
@@ -71,7 +74,7 @@ public class AssemblyConstructorSemantic implements Comparable<AssemblyConstruct
 	 */
 	public void addPattern(DisjointPattern pat) {
 		addPattern(AssemblyResolution.fromPattern(pat, cons.getMinimumLength(),
-			"Generated constructor pattern " + getLocation(), cons));
+				"Generated constructor pattern " + getLocation(), cons));
 	}
 
 	/**
@@ -154,8 +157,10 @@ public class AssemblyConstructorSemantic implements Comparable<AssemblyConstruct
 	 * Get an iterator over the operand indices
 	 * 
 	 * <p>
-	 * If this iterator is advanced for each non-terminal, while simultaneously iterating over the
-	 * RHS of the associated production, then this will identify the corresponding operand index for
+	 * If this iterator is advanced for each non-terminal, while simultaneously
+	 * iterating over the
+	 * RHS of the associated production, then this will identify the corresponding
+	 * operand index for
 	 * each non-terminal
 	 * 
 	 * @return the iterator
@@ -165,12 +170,13 @@ public class AssemblyConstructorSemantic implements Comparable<AssemblyConstruct
 	}
 
 	/**
-	 * Initialize upatterns with an unmodifiable copy of patterns, with forbidden patterns added
+	 * Initialize upatterns with an unmodifiable copy of patterns, with forbidden
+	 * patterns added
 	 */
 	protected void computeAllForbids() {
 		if (upatterns != null) {
 			throw new IllegalStateException(
-				"Already computed all forbidden patterns for this constructor");
+					"Already computed all forbidden patterns for this constructor");
 		}
 		Set<AssemblyResolvedPatterns> result = new HashSet<>();
 		for (AssemblyResolvedPatterns pat : patterns) {
@@ -207,13 +213,11 @@ public class AssemblyConstructorSemantic implements Comparable<AssemblyConstruct
 		Set<AssemblyResolvedPatterns> forbids = new HashSet<>();
 		SubtableSymbol parent = cons.getParent();
 
-		SleighLanguages.traverseConstructors(parent, new SubtableEntryVisitor() {
-			@Override
-			public int visit(DisjointPattern sibDP, Constructor sibcons) {
-				// Do not forbid myself.
-				if (sibcons == cons) {
-					return CONTINUE;
-				}
+		SleighLanguages.traverseConstructors(parent, (sibDP, sibcons) -> {
+            // Do not forbid myself.
+            if (sibcons == cons) {
+                return VisitorResults.CONTINUE;
+            }
 
 				/**
 				 * I had misunderstood the precedence rules originally.
@@ -270,10 +274,9 @@ public class AssemblyConstructorSemantic implements Comparable<AssemblyConstruct
 					return CONTINUE;
 				}
 
-				// I guess, I have the more-specific pattern, or I appear higher... 
-				return CONTINUE;
-			}
-		});
+            // I guess, I have the more-specific pattern, or I appear higher...
+            return VisitorResults.CONTINUE;
+        });
 
 		return pat.withForbids(forbids);
 	}
@@ -315,10 +318,11 @@ public class AssemblyConstructorSemantic implements Comparable<AssemblyConstruct
 				MaskedLong reqval = res.readContextOp(cop);
 				if (reqval.equals(MaskedLong.UNKS)) {
 					DBG.println("Doesn't affect a current requirement");
-					continue; // this context change does not satisfy any requirement
-				}
-				DBG.println("'read' " + reqval);
+					contin
 
+			DBG.println("'read' " + reqval
+
+	
 				// Remove the requirement that we just read before trying to solve
 				res = res.maskOut(cop);
 				DBG.println("Masked out: " + res.lineToString());

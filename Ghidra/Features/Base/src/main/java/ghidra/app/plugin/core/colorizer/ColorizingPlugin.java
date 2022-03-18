@@ -80,12 +80,7 @@ public class ColorizingPlugin extends ProgramPlugin implements DomainObjectListe
 	private NextColorRangeAction nextAction;
 	private PreviousColorRangeAction previousAction;
 
-	private SwingUpdateManager updateManager = new SwingUpdateManager(1000, new Runnable() {
-		@Override
-		public void run() {
-			doUpdate();
-		}
-	});
+	private SwingUpdateManager updateManager = new SwingUpdateManager(1000, () -> doUpdate());
 
 	public ColorizingPlugin(PluginTool tool) {
 		super(tool, true, true);

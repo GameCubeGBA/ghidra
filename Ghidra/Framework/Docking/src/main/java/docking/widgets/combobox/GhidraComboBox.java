@@ -113,12 +113,7 @@ public class GhidraComboBox<E> extends JComboBox<E> implements GComponent {
 		Object object = getEditor().getEditorComponent();
 		if (object instanceof JTextField) {
 			JTextField textField = (JTextField) object;
-			textField.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					notifyActionListeners(e);
-				}
-			});
+			textField.addActionListener(e -> notifyActionListeners(e));
 			textField.setDocument(new InterceptedInputDocument());
 			textField.getDocument().addDocumentListener(new DocumentListener() {
 				@Override
