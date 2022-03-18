@@ -20,6 +20,7 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.io.PrintWriter;
 import java.lang.invoke.MethodHandles;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.CompletableFuture;
@@ -1546,8 +1547,7 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 		GhidraScript script;
 		try {
 			script = provider.getScriptInstance(sourceFile, writer);
-		}
-		catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
 			Msg.error(this, e.getMessage());
 			return;
 		}
