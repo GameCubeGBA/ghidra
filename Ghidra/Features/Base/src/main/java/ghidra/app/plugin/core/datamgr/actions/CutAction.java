@@ -49,13 +49,11 @@ public class CutAction extends DockingAction {
 			InputEvent.CTRL_DOWN_MASK), KeyBindingPrecedence.ActionMapLevel));
 		setEnabled(true);
 
-		clipboardOwner = new ClipboardOwner() {
-			public void lostOwnership(Clipboard currentClipboard, Transferable transferable) {
-				GTreeNodeTransferable gtTransferable = (GTreeNodeTransferable) transferable;
-				List<GTreeNode> nodeList = gtTransferable.getAllData();
-				setNodesCut(nodeList, false);
-			}
-		};
+		clipboardOwner = (currentClipboard, transferable) -> {
+            GTreeNodeTransferable gtTransferable = (GTreeNodeTransferable) transferable;
+            List<GTreeNode> nodeList = gtTransferable.getAllData();
+            setNodesCut(nodeList, false);
+        };
 	}
 
 	@Override

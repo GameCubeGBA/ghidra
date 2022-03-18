@@ -86,13 +86,10 @@ public class SleighLanguages {
 		public int visit(final SubtableSymbol subtable, final DisjointPattern pattern,
 				final Constructor cons) {
 			final AtomicBoolean atLeastOne = new AtomicBoolean(false);
-			int result = new SleighPcodeTraversal(cons).traverse(new OnlyPcodeOpEntryVisitor() {
-				@Override
-				public int visit(OpTpl op) {
-					atLeastOne.set(true);
-					return visitor.visit(subtable, pattern, cons, op);
-				}
-			});
+			int result = new SleighPcodeTraversal(cons).traverse(op -> {
+                atLeastOne.set(true);
+                return visitor.visit(subtable, pattern, cons, op);
+            });
 			if (!atLeastOne.get()) {
 				visitor.visit(subtable, pattern, cons, null);
 			}

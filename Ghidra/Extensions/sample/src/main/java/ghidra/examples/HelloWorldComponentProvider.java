@@ -151,13 +151,7 @@ public class HelloWorldComponentProvider extends ComponentProviderAdapter {
 			super(name);
 			setBorder(BorderFactory.createEmptyBorder(10, 5, 10, 5));
 
-			addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					announce("Hello World");
-				}
-			});
+			addActionListener(e -> announce("Hello World"));
 		}
 	}
 }

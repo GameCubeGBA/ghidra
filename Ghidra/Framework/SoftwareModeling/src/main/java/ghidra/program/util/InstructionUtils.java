@@ -97,18 +97,15 @@ public class InstructionUtils {
 		return getFormattedRegisterValueBits(instr.getRegisterValue(contextReg), indent);
 	}
 
-	private static Comparator<String> OBJSTRING_COMPARATOR = new Comparator<String>() {
-		@Override
-		public int compare(String o1, String o2) {
-			// registers first (they do not have colons)
-			boolean isRegister1 = o1.indexOf(':') < 0;
-			boolean isRegister2 = o2.indexOf(':') < 0;
-			if (isRegister1 != isRegister2) {
-				return isRegister1 ? -1 : 1;
-			}
-			return o1.compareTo(o2);
-		}
-	};
+	private static Comparator<String> OBJSTRING_COMPARATOR = (o1, o2) -> {
+        // registers first (they do not have colons)
+        boolean isRegister1 = o1.indexOf(':') < 0;
+        boolean isRegister2 = o2.indexOf(':') < 0;
+        if (isRegister1 != isRegister2) {
+            return isRegister1 ? -1 : 1;
+        }
+        return o1.compareTo(o2);
+    };
 
 	/**
 	 * Format instruction input or result objects

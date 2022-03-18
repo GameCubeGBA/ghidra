@@ -44,9 +44,7 @@ public class AddressInput extends JPanel {
 	private JTextField spaceField;
 
 	private static final Comparator<AddressSpace> ADDRESS_SPACE_SORT_COMPARATOR =
-		new Comparator<>() {
-			@Override
-			public int compare(AddressSpace s1, AddressSpace s2) {
+			(s1, s2) -> {
 				if (s1.isOverlaySpace()) {
 					if (!s2.isOverlaySpace()) {
 						return 1;
@@ -56,8 +54,7 @@ public class AddressInput extends JPanel {
 					return -1;
 				}
 				return s1.getName().compareTo(s2.getName());
-			}
-		};
+			};
 
 	/**
 	 * Constructor for AddressInput.
@@ -90,12 +87,7 @@ public class AddressInput extends JPanel {
 			}
 		});
 
-		combo.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ev) {
-				stateChanged();
-			}
-		});
+		combo.addActionListener(ev -> stateChanged());
 	}
 
 	/**

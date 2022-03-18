@@ -110,10 +110,6 @@ public class GImageConverter {
 
 		final Icon icon = image.toPNG();
 
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				JOptionPane.showMessageDialog(null, icon, "icon", JOptionPane.INFORMATION_MESSAGE);
-			}
-		});
+		SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(null, icon, "icon", JOptionPane.INFORMATION_MESSAGE));
 	}
 }

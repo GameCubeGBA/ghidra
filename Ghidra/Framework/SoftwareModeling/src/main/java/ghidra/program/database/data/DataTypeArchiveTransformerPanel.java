@@ -87,17 +87,14 @@ public class DataTypeArchiveTransformerPanel extends JPanel {
 		gbc.gridx = 2;
 		gbc.gridwidth = 1;
 		JButton oldBrowseButton = new JButton(DOT_DOT_DOT);
-		oldBrowseButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setCursor(WAIT_CURSOR);
-				File file = chooseFile("Choose old data type archive");
-				setCursor(NORM_CURSOR);
-				if (file != null) {
-					oldFileTextField.setText(file.getAbsolutePath());
-				}
-			}
-		});
+		oldBrowseButton.addActionListener(e -> {
+            setCursor(WAIT_CURSOR);
+            File file = chooseFile("Choose old data type archive");
+            setCursor(NORM_CURSOR);
+            if (file != null) {
+                oldFileTextField.setText(file.getAbsolutePath());
+            }
+        });
 		Font font = oldBrowseButton.getFont();
 		oldBrowseButton.setFont(new Font(font.getName(), Font.BOLD, font.getSize()));
 		filePanel.add(oldBrowseButton, gbc);
@@ -126,17 +123,14 @@ public class DataTypeArchiveTransformerPanel extends JPanel {
 		gbc.gridx = 2;
 		gbc.gridwidth = 1;
 		JButton newBrowseButton = new JButton(DOT_DOT_DOT);
-		newBrowseButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setCursor(WAIT_CURSOR);
-				File file = chooseFile("Choose new data type archive");
-				setCursor(NORM_CURSOR);
-				if (file != null) {
-					newFileTextField.setText(file.getAbsolutePath());
-				}
-			}
-		});
+		newBrowseButton.addActionListener(e -> {
+            setCursor(WAIT_CURSOR);
+            File file = chooseFile("Choose new data type archive");
+            setCursor(NORM_CURSOR);
+            if (file != null) {
+                newFileTextField.setText(file.getAbsolutePath());
+            }
+        });
 		Font font = newBrowseButton.getFont();
 		newBrowseButton.setFont(new Font(font.getName(), Font.BOLD, font.getSize()));
 		filePanel.add(newBrowseButton, gbc);
@@ -159,17 +153,14 @@ public class DataTypeArchiveTransformerPanel extends JPanel {
 		gbc.gridx = 2;
 		gbc.gridwidth = 1;
 		JButton destinationBrowseButton = new JButton(DOT_DOT_DOT);
-		destinationBrowseButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setCursor(WAIT_CURSOR);
-				File file = chooseFile("Choose destination file");
-				setCursor(NORM_CURSOR);
-				if (file != null) {
-					destinationFileTextField.setText(file.getAbsolutePath());
-				}
-			}
-		});
+		destinationBrowseButton.addActionListener(e -> {
+            setCursor(WAIT_CURSOR);
+            File file = chooseFile("Choose destination file");
+            setCursor(NORM_CURSOR);
+            if (file != null) {
+                destinationFileTextField.setText(file.getAbsolutePath());
+            }
+        });
 		Font font = destinationBrowseButton.getFont();
 		destinationBrowseButton.setFont(new Font(font.getName(), Font.BOLD, font.getSize()));
 		filePanel.add(destinationBrowseButton, gbc);

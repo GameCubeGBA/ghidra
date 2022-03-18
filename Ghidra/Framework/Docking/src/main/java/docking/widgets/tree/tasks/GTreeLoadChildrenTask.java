@@ -39,12 +39,7 @@ public class GTreeLoadChildrenTask extends GTreeTask {
 		}
 		catch (CancelledException e) {
 			if (!tree.isDisposed()) {
-				runOnSwingThread(new Runnable() {
-					@Override
-					public void run() {
-						tree.collapseAll(tree.getViewRoot());
-					}
-				});
+				runOnSwingThread(() -> tree.collapseAll(tree.getViewRoot()));
 			}
 			node.unloadChildren();
 		}

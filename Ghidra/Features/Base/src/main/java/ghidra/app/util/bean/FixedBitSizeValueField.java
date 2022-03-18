@@ -63,12 +63,7 @@ public class FixedBitSizeValueField extends JPanel {
 			buttonPanel.add(menuButton, BorderLayout.EAST);
 			add(buttonPanel, BorderLayout.EAST);
 			menuButton.setFocusable(false);
-			menuButton.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					showPopup();
-				}
-			});
+			menuButton.addActionListener(e -> showPopup());
 
 		}
 		add(valueField, BorderLayout.CENTER);
@@ -134,13 +129,10 @@ public class FixedBitSizeValueField extends JPanel {
 	}
 
 	protected void createPopup() {
-		ActionListener actionListener = new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				JCheckBoxMenuItem item = (JCheckBoxMenuItem)e.getSource();
-				menuActivated(item);
-			}
-		};
+		ActionListener actionListener = e -> {
+            JCheckBoxMenuItem item = (JCheckBoxMenuItem)e.getSource();
+            menuActivated(item);
+        };
 
 		popupMenu = new JPopupMenu();
 		menuItems.add(new JCheckBoxMenuItem("Hex, Unsigned"));

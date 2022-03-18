@@ -50,16 +50,13 @@ public class ObjectTable<R> implements ObjectPane {
 		this.clazz = clazz;
 		this.model = model;
 
-		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				if (e.getValueIsAdjusting()) {
-					return;
-				}
-				DebuggerObjectsProvider provider = container.getProvider();
-				provider.getTool().contextChanged(provider);
-			}
-		});
+		table.getSelectionModel().addListSelectionListener(e -> {
+            if (e.getValueIsAdjusting()) {
+                return;
+            }
+            DebuggerObjectsProvider provider = container.getProvider();
+            provider.getTool().contextChanged(provider);
+        });
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

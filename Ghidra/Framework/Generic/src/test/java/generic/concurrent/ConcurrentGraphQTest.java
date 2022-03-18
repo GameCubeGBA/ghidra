@@ -75,18 +75,14 @@ public class ConcurrentGraphQTest extends AbstractGenericTest {
 		AbstractDependencyGraph<String> savedGraph = graph.copy();
 
 		GThreadPool pool = GThreadPool.getPrivateThreadPool("ConcurrentGraphQ Test");
-		QRunnable<String> runnable = new QRunnable<>() {
-
-			@Override
-			public void run(String item, TaskMonitor monitor) throws Exception {
+		QRunnable<String> runnable = (item, monitor) -> {
 //				System.out.println("Processing item " + item + " in thread" +
 //					Thread.currentThread().getName());
 //				sleep(1000);
-				synchronized (completionOrder) {
-					completionOrder.add(item);
-				}
-			}
-		};
+            synchronized (completionOrder) {
+                completionOrder.add(item);
+            }
+        };
 
 		ConcurrentGraphQ<String> queue = new ConcurrentGraphQ<>(runnable, graph, pool, null);
 		queue.execute();

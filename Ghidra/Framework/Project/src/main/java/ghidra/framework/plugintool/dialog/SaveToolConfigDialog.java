@@ -76,12 +76,7 @@ public class SaveToolConfigDialog extends DialogComponentProvider implements Lis
 		addWorkPanel(buildMainPanel());
 
 		saveButton = new JButton("Save");
-		saveButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ev) {
-				save();
-			}
-		});
+		saveButton.addActionListener(ev -> save());
 		addButton(saveButton);
 		addCancelButton();
 
@@ -187,12 +182,7 @@ public class SaveToolConfigDialog extends DialogComponentProvider implements Lis
 
 	private void addListeners() {
 
-		nameField.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				save();
-			}
-		});
+		nameField.addActionListener(e -> save());
 		nameField.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -328,17 +318,14 @@ public class SaveToolConfigDialog extends DialogComponentProvider implements Lis
 	 */
 	private void addIconPanelListeners() {
 
-		iconField.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				String filename = iconField.getText();
-				if (filename.isEmpty()) {
-					setStatusText("Please enter a filename for the icon.");
-					return;
-				}
-				setPicture(new ToolIconURL(filename));
-			}
-		});
+		iconField.addActionListener(e -> {
+            String filename = iconField.getText();
+            if (filename.isEmpty()) {
+                setStatusText("Please enter a filename for the icon.");
+                return;
+            }
+            setPicture(new ToolIconURL(filename));
+        });
 
 		iconField.addKeyListener(new KeyAdapter() {
 			@Override
@@ -373,12 +360,7 @@ public class SaveToolConfigDialog extends DialogComponentProvider implements Lis
 		};
 		iconField.getDocument().addDocumentListener(dl);
 
-		browseButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				browseForIcons();
-			}
-		});
+		browseButton.addActionListener(e -> browseForIcons());
 
 	}
 

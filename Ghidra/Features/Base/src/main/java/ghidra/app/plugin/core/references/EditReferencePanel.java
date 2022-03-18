@@ -90,12 +90,10 @@ abstract class EditReferencePanel extends JPanel {
 	 */
 	@Override
     public void requestFocus() {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				KeyboardFocusManager kfm = KeyboardFocusManager.getCurrentKeyboardFocusManager();
-				kfm.focusNextComponent(EditReferencePanel.this);
-			}
-		});
+		SwingUtilities.invokeLater(() -> {
+            KeyboardFocusManager kfm = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+            kfm.focusNextComponent(EditReferencePanel.this);
+        });
 	}
 
 	/**

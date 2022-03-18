@@ -57,16 +57,13 @@ public class NewTestApp extends JPanel {
 		container.add(button, BorderLayout.SOUTH);
 		frame.setSize(400, 600);
 		frame.setVisible(true);
-		button.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				TreePath selectionPath = tree.getSelectionPath();
-				if (selectionPath != null) {
-					GTreeNode node = (GTreeNode) selectionPath.getLastPathComponent();
-					tree.collapseAll(node);
-				}
-			}
-		});
+		button.addActionListener(e -> {
+            TreePath selectionPath = tree.getSelectionPath();
+            if (selectionPath != null) {
+                GTreeNode node = (GTreeNode) selectionPath.getLastPathComponent();
+                tree.collapseAll(node);
+            }
+        });
 
 	}
 

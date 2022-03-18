@@ -575,41 +575,35 @@ class CodeUnitMerger extends AbstractListingMerger {
 					}
 				}
 			};
-			SwingUtilities.invokeAndWait(new Runnable() {
-				@Override
-				public void run() {
-					if (conflictPanel != null) {
-						conflictPanel.clear();
-					}
-					else {
-						conflictPanel = new VariousChoicesPanel();
-						currentConflictPanel = conflictPanel;
-						conflictPanel.setTitle("Code Unit");
-					}
-					String text = getConflictString(minAddress, maxAddress);
-					conflictPanel.setHeader(text);
+			SwingUtilities.invokeAndWait(() -> {
+                if (conflictPanel != null) {
+                    conflictPanel.clear();
+                }
+                else {
+                    conflictPanel = new VariousChoicesPanel();
+                    currentConflictPanel = conflictPanel;
+                    conflictPanel.setTitle("Code Unit");
+                }
+                String text = getConflictString(minAddress, maxAddress);
+                conflictPanel.setHeader(text);
 
-					String latest = "'" + LATEST_TITLE + "' version";
-					String my = "'" + MY_TITLE + "' version";
-					String original = "'" + ORIGINAL_TITLE + "' version";
-					conflictPanel.addSingleChoice("Use Code Unit From: ",
-						new String[] { latest, my, original }, changeListener);
+                String latest = "'" + LATEST_TITLE + "' version";
+                String my = "'" + MY_TITLE + "' version";
+                String original = "'" + ORIGINAL_TITLE + "' version";
+                conflictPanel.addSingleChoice("Use Code Unit From: ",
+                    new String[] { latest, my, original }, changeListener);
 
-					boolean useForAll = (conflictChoice != ASK_USER);
-					conflictPanel.setUseForAll(useForAll);
-					conflictPanel.setConflictType("Byte / Code Unit");
+                boolean useForAll = (conflictChoice != ASK_USER);
+                conflictPanel.setUseForAll(useForAll);
+                conflictPanel.setConflictType("Byte / Code Unit");
 
-					listingPanel.setBottomComponent(conflictPanel);
-				}
-			});
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					listingPanel.clearAllBackgrounds();
-					listingPanel.paintAllBackgrounds(
-						resultAddressFactory.getAddressSet(minAddress, maxAddress));
-				}
-			});
+                listingPanel.setBottomComponent(conflictPanel);
+            });
+			SwingUtilities.invokeLater(() -> {
+                listingPanel.clearAllBackgrounds();
+                listingPanel.paintAllBackgrounds(
+                    resultAddressFactory.getAddressSet(minAddress, maxAddress));
+            });
 		}
 		catch (InterruptedException | InvocationTargetException e) {
 		}

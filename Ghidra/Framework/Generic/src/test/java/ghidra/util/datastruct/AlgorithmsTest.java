@@ -29,18 +29,15 @@ public class AlgorithmsTest extends AbstractGenericTest {
 
 	public AlgorithmsTest() {
 		super();
-		comparator = new Comparator<Long>() {
-			@Override
-			public int compare(Long a, Long b) {
-				if (a < b) {
-					return -1;
-				}
-				else if (a > b) {
-					return 1;
-				}
-				return 0;
-			}
-		};
+		comparator = (a, b) -> {
+            if (a < b) {
+                return -1;
+            }
+            else if (a > b) {
+                return 1;
+            }
+            return 0;
+        };
 
 	}
 

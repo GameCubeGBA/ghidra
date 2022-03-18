@@ -159,35 +159,29 @@ public class AddressMapDB implements AddressMap {
 	 * Comparator used to identify if an addr occurs before or after the 
 	 * start of a key range.
 	 */
-	private Comparator<Object> addressInsertionKeyRangeComparator = new Comparator<Object>() {
-		@Override
-		public int compare(Object keyRangeObj, Object addrObj) {
-			KeyRange range = (KeyRange) keyRangeObj;
-			Address addr = (Address) addrObj;
+	private Comparator<Object> addressInsertionKeyRangeComparator = (keyRangeObj, addrObj) -> {
+        KeyRange range = (KeyRange) keyRangeObj;
+        Address addr = (Address) addrObj;
 
-			Address min = decodeAddress(range.minKey);
-			if (min.compareTo(addr) > 0) {
-				return 1;
-			}
+        Address min = decodeAddress(range.minKey);
+        if (min.compareTo(addr) > 0) {
+            return 1;
+        }
 
-			Address max = decodeAddress(range.maxKey);
-			if (max.compareTo(addr) < 0) {
-				return -1;
-			}
-			return 0;
-		}
-	};
-	private static Comparator<Object> ADDRESS_RANGE_COMPARATOR = new Comparator<Object>() {
-		@Override
-		public int compare(Object o1, Object o2) {
-			AddressRange range = (AddressRange) o1;
-			Address addr = (Address) o2;
-			if (range.contains(addr)) {
-				return 0;
-			}
-			return range.getMinAddress().compareTo(addr);
-		}
-	};
+        Address max = decodeAddress(range.maxKey);
+        if (max.compareTo(addr) < 0) {
+            return -1;
+        }
+        return 0;
+    };
+	private static Comparator<Object> ADDRESS_RANGE_COMPARATOR = (o1, o2) -> {
+        AddressRange range = (AddressRange) o1;
+        Address addr = (Address) o2;
+        if (range.contains(addr)) {
+            return 0;
+        }
+        return range.getMinAddress().compareTo(addr);
+    };
 
 	/**
 	 * Constructs a new AddressMapDB object

@@ -174,18 +174,15 @@ public class BufferedSwingRunnerTest extends AbstractGenericTest {
 		CountDownLatch endLatch = new CountDownLatch(1);
 		AtomicBoolean exception = new AtomicBoolean();
 
-		runSwing(new Runnable() {
-			@Override
-			public void run() {
-				startLatch.countDown();
-				try {
-					endLatch.await(10, TimeUnit.SECONDS);
-				}
-				catch (InterruptedException e) {
-					exception.set(true);
-				}
-			}
-		}, false);
+		runSwing(() -> {
+            startLatch.countDown();
+            try {
+                endLatch.await(10, TimeUnit.SECONDS);
+            }
+            catch (InterruptedException e) {
+                exception.set(true);
+            }
+        }, false);
 
 		// This will cause the swing thread to block until we countdown the end latch
 		startLatch.await(10, TimeUnit.SECONDS);

@@ -74,16 +74,13 @@ public class GTreeExpandAllTask extends GTreeTask {
 	}
 
 	private void expandPath(final TreePath treePath, final TaskMonitor monitor) {
-		runOnSwingThread(new Runnable() {
-			@Override
-			public void run() {
-				if (monitor.isCancelled()) {
-					return; // we can be cancelled while waiting for Swing to run us
-				}
+		runOnSwingThread(() -> {
+            if (monitor.isCancelled()) {
+                return; // we can be cancelled while waiting for Swing to run us
+            }
 
-				jTree.expandPath(treePath);
-			}
-		});
+            jTree.expandPath(treePath);
+        });
 	}
 
 }

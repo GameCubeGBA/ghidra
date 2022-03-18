@@ -110,12 +110,9 @@ public class FunctionEditorDialogTest extends AbstractGhidraHeadedIntegrationTes
 	}
 
 	private void finishEditing(final TableCellEditor cellEditor) {
-		runSwing(new Runnable() {
-			@Override
-			public void run() {
-				cellEditor.stopCellEditing();
-			}
-		});
+		runSwing(() -> {
+            cellEditor.stopCellEditing();
+        });
 		waitForSwing();
 	}
 

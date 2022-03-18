@@ -30,12 +30,7 @@ import utility.function.ExceptionalFunction;
 public class GdbCValueParser extends AbstractGdbParser {
 	@FunctionalInterface
     public interface GdbCValue {
-		public GdbCValue EMPTY = new GdbCValue() {
-			@Override
-			public boolean isEmpty() {
-				return true;
-			}
-		};
+		public GdbCValue EMPTY = () -> true;
 
 		boolean isEmpty();
 

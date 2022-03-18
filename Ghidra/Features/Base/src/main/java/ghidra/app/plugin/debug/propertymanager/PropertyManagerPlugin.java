@@ -81,13 +81,11 @@ public class PropertyManagerPlugin extends ProgramPlugin implements DomainObject
 		markerService = tool.getService(MarkerService.class);
 
 
-		updateTimer = new Timer(500, new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (propertyViewProvider != null && propertyViewProvider.isVisible()) {
-					propertyViewProvider.refresh();
-				}
-			}
-		});
+		updateTimer = new Timer(500, e -> {
+            if (propertyViewProvider != null && propertyViewProvider.isVisible()) {
+                propertyViewProvider.refresh();
+            }
+        });
 		updateTimer.setRepeats(false);
 	}
 

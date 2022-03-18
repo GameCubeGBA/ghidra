@@ -76,20 +76,10 @@ public class ChooseColumnsDialog extends DialogComponentProvider {
 
 		JPanel buttonPanel = new JPanel();
 		JButton selectAllButton = new JButton("Select All");
-		selectAllButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setAllSelected(true);
-			}
-		});
+		selectAllButton.addActionListener(e -> setAllSelected(true));
 
 		JButton deselectAllButton = new JButton("Deselect All");
-		deselectAllButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setAllSelected(false);
-			}
-		});
+		deselectAllButton.addActionListener(e -> setAllSelected(false));
 
 		buttonPanel.add(selectAllButton);
 		buttonPanel.add(deselectAllButton);

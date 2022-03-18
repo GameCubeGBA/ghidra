@@ -331,22 +331,12 @@ public class ExecuteDiffDialog extends DialogComponentProvider {
 	}
 
 	private void createSelectAllButton() {
-		selectAllButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setSelectAll(true);
-			}
-		});
+		selectAllButton.addActionListener(e -> setSelectAll(true));
 		selectAllButton.setMnemonic('S');
 	}
 
 	private void createDeselectAllButton() {
-		deselectAllButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setSelectAll(false);
-			}
-		});
+		deselectAllButton.addActionListener(e -> setSelectAll(false));
 		deselectAllButton.setMnemonic('D');
 	}
 

@@ -70,11 +70,7 @@ public class FilterFormattedTextField extends JFormattedTextField {
 			}
 		});
 
-		addPropertyChangeListener("value", new PropertyChangeListener() {
-			public void propertyChange(PropertyChangeEvent evt) {
-				editingFinished();
-			}
-		});
+		addPropertyChangeListener("value", evt -> editingFinished());
 	}
 
 	public void disableFocusEventProcessing() {

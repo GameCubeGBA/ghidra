@@ -105,8 +105,7 @@ public class AcceptMatchTask extends VtTask {
 				if (doApplyFunctionNames) {
 					applyFunctionNames(match, monitor);
 				}
-			}
-			else if (doApplyDataNames) {
+			} else if (doApplyDataNames) {
 				applyDataNames(match, monitor);
 			}
 

@@ -36,16 +36,13 @@ public class CompletedTaskListModel extends GTaskListModel<GTaskResultInfo> {
 	CompletedTaskListModel(GTaskManager taskMgr) {
 		this.taskManager = taskMgr;
 		taskListener = new CompletedPanelTaskListener();
-		updateManager = new SwingUpdateManager(MIN_DELAY, MAX_DELAY, new Runnable() {
-			@Override
-			public void run() {
+		updateManager = new SwingUpdateManager(MIN_DELAY, MAX_DELAY, () -> {
 
-				while (!runnableQueue.isEmpty()) {
-					Runnable runnable = runnableQueue.poll();
-					runnable.run();
-				}
-			}
-		});
+            while (!runnableQueue.isEmpty()) {
+                Runnable runnable = runnableQueue.poll();
+                runnable.run();
+            }
+        });
 
 		taskMgr.addTaskListener(taskListener);
 	}

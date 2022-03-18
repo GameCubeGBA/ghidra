@@ -47,12 +47,7 @@ public abstract class GTreeBulkTask extends GTreeTask {
 	}
 
 	private void enableFilter(final boolean enable) {
-		SystemUtilities.runSwingNow(new Runnable() {
-			@Override
-			public void run() {
-				tree.setFilteringEnabled(enable);
-			}
-		});
+		SystemUtilities.runSwingNow(() -> tree.setFilteringEnabled(enable));
 	}
 
 	/**

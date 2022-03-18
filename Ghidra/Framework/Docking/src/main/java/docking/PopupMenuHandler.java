@@ -51,19 +51,16 @@ public class PopupMenuHandler extends MenuHandler {
 		actionContext.setEventClickModifiers(event.getModifiers());
 		
 		// this gives the UI some time to repaint before executing the action
-        SwingUtilities.invokeLater( new Runnable() {
-            @Override
-			public void run() {
-            	windowManager.setStatusText("");
-            	if (action.isEnabledForContext(actionContext)) {
-            		if (action instanceof ToggleDockingActionIf) {
-            			ToggleDockingActionIf toggleAction = ((ToggleDockingActionIf)action);
-            			toggleAction.setSelected(!toggleAction.isSelected());
-            		}
-            		action.actionPerformed(actionContext);
-            	}
+        SwingUtilities.invokeLater(() -> {
+            windowManager.setStatusText("");
+            if (action.isEnabledForContext(actionContext)) {
+                if (action instanceof ToggleDockingActionIf) {
+                    ToggleDockingActionIf toggleAction = ((ToggleDockingActionIf)action);
+                    toggleAction.setSelected(!toggleAction.isSelected());
+                }
+                action.actionPerformed(actionContext);
             }
-        } );
+        });
 	}
 
 

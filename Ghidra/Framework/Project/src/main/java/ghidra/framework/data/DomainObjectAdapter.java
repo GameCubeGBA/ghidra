@@ -40,12 +40,7 @@ public abstract class DomainObjectAdapter implements DomainObject {
 	private static Class<?> defaultDomainObjClass; // Domain object implementation mapped to unknown content type
 	private static HashMap<String, ContentHandler> contentHandlerTypeMap; // maps content-type string to handler
 	private static HashMap<Class<?>, ContentHandler> contentHandlerClassMap; // maps domain object class to handler
-	private static ChangeListener contentHandlerUpdateListener = new ChangeListener() {
-		@Override
-		public void stateChanged(ChangeEvent e) {
-			getContentHandlers();
-		}
-	};
+	private static ChangeListener contentHandlerUpdateListener = e -> getContentHandlers();
 
 	protected String name;
 	private DomainFile domainFile;

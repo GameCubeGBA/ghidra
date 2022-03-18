@@ -43,12 +43,7 @@ public class FunctionPluginScreenShots extends GhidraScreenShotGenerator {
 		final StorageAddressEditorDialog dialog =
 			new StorageAddressEditorDialog(program, dtService, parameter, 0);
 
-		runSwing(new Runnable() {
-			@Override
-			public void run() {
-				tool.showDialog(dialog);
-			}
-		}, false);
+		runSwing((Runnable) () -> tool.showDialog(dialog), false);
 
 		captureDialog(600, 400);
 	}
@@ -67,12 +62,7 @@ public class FunctionPluginScreenShots extends GhidraScreenShotGenerator {
 		final NumberInputDialog dialog = new NumberInputDialog("Set Stack Depth Change at 0x401482",
 			"Stack Depth Change", 5, Integer.MIN_VALUE, Integer.MAX_VALUE, false);
 
-		runSwing(new Runnable() {
-			@Override
-			public void run() {
-				tool.showDialog(dialog);
-			}
-		}, false);
+		runSwing((Runnable) () -> tool.showDialog(dialog), false);
 		captureDialog();
 
 	}

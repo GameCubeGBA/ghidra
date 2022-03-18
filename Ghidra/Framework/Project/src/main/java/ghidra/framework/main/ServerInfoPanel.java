@@ -103,14 +103,12 @@ public class ServerInfoPanel extends AbstractWizardJPanel {
 
 	private void buildMainPanel() {
 		serverInfoComponent = new ServerInfoComponent();
-		serverInfoComponent.setChangeListener(new ChangeListener() {
-			public void stateChanged(ChangeEvent e) {
-				WizardManager wm = panelManager.getWizardManager();
-				if (wm.getCurrentWizardPanel() != null) {
-					wm.validityChanged();
-				}
-			}
-		});
+		serverInfoComponent.setChangeListener(e -> {
+            WizardManager wm = panelManager.getWizardManager();
+            if (wm.getCurrentWizardPanel() != null) {
+                wm.validityChanged();
+            }
+        });
 		add(serverInfoComponent, BorderLayout.CENTER);
 	}
 }

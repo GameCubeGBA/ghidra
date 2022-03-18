@@ -297,12 +297,7 @@ public class LocalSymbolMap {
 		parser.end(el);
 	}
 
-	private static final Comparator<HighSymbol> PARAM_SYMBOL_SLOT_COMPARATOR = new Comparator<>() {
-		@Override
-		public int compare(HighSymbol sym1, HighSymbol sym2) {
-			return sym1.getCategoryIndex() - sym2.getCategoryIndex();
-		}
-	};
+	private static final Comparator<HighSymbol> PARAM_SYMBOL_SLOT_COMPARATOR = (sym1, sym2) -> sym1.getCategoryIndex() - sym2.getCategoryIndex();
 
 	/**
 	 * Add mapped symbols to this LocalVariableMap, by parsing the &lt;symbollist&gt; and &lt;mapsym&gt; tags.

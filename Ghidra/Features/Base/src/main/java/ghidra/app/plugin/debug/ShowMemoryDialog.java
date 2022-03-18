@@ -42,17 +42,14 @@ class ShowMemoryDialog extends DialogComponentProvider {
 		addWorkPanel(createWorkPanel());
 		plugin.getTool().showDialog(this);
 		final DecimalFormat df = new DecimalFormat();
-		timer = new Timer(2000, new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Runtime runtime = Runtime.getRuntime();
-				maxMem.setText(df.format(runtime.maxMemory() / 1000) + "K");
-				totalMem.setText(df.format(runtime.totalMemory() / 1000) + "K");
-				freeMem.setText(df.format(runtime.freeMemory() / 1000) + "K");
-				usedMem.setText(
-					df.format((runtime.totalMemory() - runtime.freeMemory()) / 1000) + "K");
-			}
-		});
+		timer = new Timer(2000, e -> {
+            Runtime runtime = Runtime.getRuntime();
+            maxMem.setText(df.format(runtime.maxMemory() / 1000) + "K");
+            totalMem.setText(df.format(runtime.totalMemory() / 1000) + "K");
+            freeMem.setText(df.format(runtime.freeMemory() / 1000) + "K");
+            usedMem.setText(
+                df.format((runtime.totalMemory() - runtime.freeMemory()) / 1000) + "K");
+        });
 		timer.start();
 	}
 

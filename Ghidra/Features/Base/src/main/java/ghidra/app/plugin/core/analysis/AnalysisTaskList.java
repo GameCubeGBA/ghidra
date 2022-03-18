@@ -37,19 +37,17 @@ public class AnalysisTaskList {
 	private String name;
 
 	private static Comparator<AnalysisScheduler> priorityComparator =
-		new Comparator<AnalysisScheduler>() {
-			public int compare(AnalysisScheduler as1, AnalysisScheduler as2) {
-				Analyzer a1 = as1.getAnalyzer();
-				Analyzer a2 = as2.getAnalyzer();
-				int c = a1.getPriority().priority() - a2.getPriority().priority();
-				if (c == 0) {
-					// Keep ordering deterministic since same
-					// priority could be used by multiple analyzers
-					c = a1.getName().compareTo(a2.getName());
-				}
-				return c;
-			}
-		};
+            (as1, as2) -> {
+                Analyzer a1 = as1.getAnalyzer();
+                Analyzer a2 = as2.getAnalyzer();
+                int c = a1.getPriority().priority() - a2.getPriority().priority();
+                if (c == 0) {
+                    // Keep ordering deterministic since same
+                    // priority could be used by multiple analyzers
+                    c = a1.getName().compareTo(a2.getName());
+                }
+                return c;
+            };
 
 	public AnalysisTaskList(AutoAnalysisManager analysisMgr, String name) {
 		tasks = new CopyOnWriteArrayList<AnalysisScheduler>();

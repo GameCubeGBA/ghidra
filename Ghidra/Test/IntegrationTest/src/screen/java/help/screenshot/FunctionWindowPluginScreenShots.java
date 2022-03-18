@@ -40,29 +40,26 @@ public class FunctionWindowPluginScreenShots extends GhidraScreenShotGenerator {
 		// note: these values are rough values found by trial-and-error
 		FunctionWindowProvider provider = getProvider(FunctionWindowProvider.class);
 		final GTable table = (GTable) getInstanceField("functionTable", provider);
-		runSwing(new Runnable() {
-			@Override
-			public void run() {
-				TableColumnModel columnModel = table.getColumnModel();
-				int columnCount = columnModel.getColumnCount();
-				for (int i = 0; i < columnCount; i++) {
-					TableColumn column = columnModel.getColumn(i);
-					Object headerValue = column.getHeaderValue();
-					if ("Name".equals(headerValue)) {
-						column.setPreferredWidth(85);
-					}
-					else if ("Location".equals(headerValue)) {
-						column.setPreferredWidth(70);
-					}
-					else if ("Function Signature".equals(headerValue)) {
-						column.setPreferredWidth(400);
-					}
-					else if ("Function Size".equals(headerValue)) {
-						column.setPreferredWidth(25);
-					}
-				}
-			}
-		});
+		runSwing((Runnable) () -> {
+            TableColumnModel columnModel = table.getColumnModel();
+            int columnCount = columnModel.getColumnCount();
+            for (int i = 0; i < columnCount; i++) {
+                TableColumn column = columnModel.getColumn(i);
+                Object headerValue = column.getHeaderValue();
+                if ("Name".equals(headerValue)) {
+                    column.setPreferredWidth(85);
+                }
+                else if ("Location".equals(headerValue)) {
+                    column.setPreferredWidth(70);
+                }
+                else if ("Function Signature".equals(headerValue)) {
+                    column.setPreferredWidth(400);
+                }
+                else if ("Function Size".equals(headerValue)) {
+                    column.setPreferredWidth(25);
+                }
+            }
+        });
 
 	}
 }

@@ -60,25 +60,14 @@ public class SelectBlockPluginScreenShots extends GhidraScreenShotGenerator {
 
 	private void clickButton(final JRadioButton button) {
 
-		runSwing(new Runnable() {
-
-			@Override
-			public void run() {
-				button.setSelected(true);
-
-			}
-		});
+		runSwing((Runnable) () -> button.setSelected(true));
 	}
 
 	private void enableTextField(final JTextField field) {
 
-		runSwing(new Runnable() {
-
-			@Override
-			public void run() {
-				field.setEditable(true);
-				field.setEnabled(true);
-			}
-		});
+		runSwing((Runnable) () -> {
+            field.setEditable(true);
+            field.setEnabled(true);
+        });
 	}
 }

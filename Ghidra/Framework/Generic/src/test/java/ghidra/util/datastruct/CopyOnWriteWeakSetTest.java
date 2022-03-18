@@ -60,20 +60,17 @@ public class CopyOnWriteWeakSetTest extends AbstractGenericTest {
 		}
 
 		final AtomicReference<Throwable> exception = new AtomicReference<Throwable>();
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					for (Listener listener : set) {
-						listener.doIt();
-					}
-				}
-				catch (Throwable t) {
-					exception.set(t);
-				}
-				finishedLatch.countDown();
-			}
-		}).start();
+		new Thread(() -> {
+            try {
+                for (Listener listener : set) {
+                    listener.doIt();
+                }
+            }
+            catch (Throwable t) {
+                exception.set(t);
+            }
+            finishedLatch.countDown();
+        }).start();
 
 		latchListener.waitForStart();
 
@@ -113,20 +110,17 @@ public class CopyOnWriteWeakSetTest extends AbstractGenericTest {
 		}
 
 		final AtomicReference<Throwable> exception = new AtomicReference<Throwable>();
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					for (Listener l : set) {
-						l.doIt();
-					}
-				}
-				catch (Throwable t) {
-					exception.set(t);
-				}
-				finishedLatch.countDown();
-			}
-		}).start();
+		new Thread(() -> {
+            try {
+                for (Listener l : set) {
+                    l.doIt();
+                }
+            }
+            catch (Throwable t) {
+                exception.set(t);
+            }
+            finishedLatch.countDown();
+        }).start();
 
 		latchListener.waitForStart();
 
@@ -164,20 +158,17 @@ public class CopyOnWriteWeakSetTest extends AbstractGenericTest {
 		}
 
 		final AtomicReference<Throwable> exception = new AtomicReference<Throwable>();
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					for (Listener listener : set) {
-						listener.doIt();
-					}
-				}
-				catch (Throwable t) {
-					exception.set(t);
-				}
-				finishedLatch.countDown();
-			}
-		}).start();
+		new Thread(() -> {
+            try {
+                for (Listener listener : set) {
+                    listener.doIt();
+                }
+            }
+            catch (Throwable t) {
+                exception.set(t);
+            }
+            finishedLatch.countDown();
+        }).start();
 
 		latchListener.waitForStart();
 

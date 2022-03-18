@@ -98,42 +98,36 @@ public class TagEditorDialog extends DialogComponentProvider {
 		});
 
 		final JButton deleteButton = new JButton("Delete");
-		deleteButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				List<TagState> selectedValues = list.getSelectedValuesList();
-				for (TagState state : selectedValues) {
-					Action action = state.getAction();
-					if (action == UNMODIFIED) {
-						// mark for deletion, but don't actually delete yet
-						state.setAction(DELETE);
-					}
-					else if (action == ADD) {
-						// just remove tags added by the user
-						listModel.removeElement(state);
-					}
-				}
-				list.repaint();
-			}
-		});
+		deleteButton.addActionListener(e -> {
+            List<TagState> selectedValues = list.getSelectedValuesList();
+            for (TagState state : selectedValues) {
+                Action action = state.getAction();
+                if (action == UNMODIFIED) {
+                    // mark for deletion, but don't actually delete yet
+                    state.setAction(DELETE);
+                }
+                else if (action == ADD) {
+                    // just remove tags added by the user
+                    listModel.removeElement(state);
+                }
+            }
+            list.repaint();
+        });
 		deleteButton.setEnabled(false);
 
-		list.addListSelectionListener(new ListSelectionListener() {
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				if (e.getValueIsAdjusting()) {
-					return;
-				}
+		list.addListSelectionListener(e -> {
+            if (e.getValueIsAdjusting()) {
+                return;
+            }
 
-				int[] selectedIndices = list.getSelectedIndices();
-				if (selectedIndices == null || selectedIndices.length == 0) {
-					deleteButton.setEnabled(false);
-				}
-				else {
-					deleteButton.setEnabled(true);
-				}
-			}
-		});
+            int[] selectedIndices = list.getSelectedIndices();
+            if (selectedIndices == null || selectedIndices.length == 0) {
+                deleteButton.setEnabled(false);
+            }
+            else {
+                deleteButton.setEnabled(true);
+            }
+        });
 
 		JPanel editPanel = new JPanel();
 		editPanel.add(addButton);

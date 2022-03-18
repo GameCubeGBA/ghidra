@@ -30,11 +30,7 @@ class DockingWindowsContextSensitiveHelpListener {
     
     private DockingWindowsContextSensitiveHelpListener() {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        AWTEventListener listener = new AWTEventListener() {            
-            public void eventDispatched( AWTEvent event ) {
-                DockingWindowManager.setMouseOverObject( event.getSource() );
-            }
-        }; 
+        AWTEventListener listener = event -> DockingWindowManager.setMouseOverObject( event.getSource() );
         toolkit.addAWTEventListener( listener, AWTEvent.MOUSE_MOTION_EVENT_MASK );
     }
 

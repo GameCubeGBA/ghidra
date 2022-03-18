@@ -122,30 +122,10 @@ public class GTaskManagerPanel extends JPanel {
 		JButton stepButton = new JButton("Step");
 		JButton clearButton = new JButton("Clear All");
 
-		pauseButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				pause();
-			}
-		});
-		resumeButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				resume();
-			}
-		});
-		stepButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				step();
-			}
-		});
-		clearButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				clear();
-			}
-		});
+		pauseButton.addActionListener(e -> pause());
+		resumeButton.addActionListener(e -> resume());
+		stepButton.addActionListener(e -> step());
+		clearButton.addActionListener(e -> clear());
 
 		panel.add(pauseButton);
 		panel.add(stepButton);

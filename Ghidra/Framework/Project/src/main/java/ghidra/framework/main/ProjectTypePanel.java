@@ -50,12 +50,7 @@ class ProjectTypePanel extends AbstractWizardJPanel {
 	private void buildPanel() {
 		JPanel innerPanel = new JPanel(new VerticalLayout(10));
 		innerPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-		ItemListener listener = new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				panelManager.getWizardManager().validityChanged();
-			}
-		};
+		ItemListener listener = e -> panelManager.getWizardManager().validityChanged();
 
 		nonSharedRB = new GRadioButton("Non-Shared Project", true);
 		nonSharedRB.addItemListener(listener);

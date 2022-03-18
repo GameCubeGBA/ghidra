@@ -72,12 +72,7 @@ public class LabelHistoryInputDialog extends DialogComponentProvider {
 
 		inputField = new JTextField(25);
 		setFocusComponent(inputField);
-		inputField.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				okCallback();
-			}
-		});
+		inputField.addActionListener(e -> okCallback());
 		inputField.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
 			public void changedUpdate(DocumentEvent e) {

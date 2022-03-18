@@ -57,13 +57,7 @@ public class BlockMap {
 	}
 
 	private static void sortList(ArrayList<PcodeBlock> list) {
-		Comparator<PcodeBlock> comp = new Comparator<PcodeBlock>() {
-
-			@Override
-			public int compare(PcodeBlock o1, PcodeBlock o2) {
-				return o1.index - o2.index;
-			}
-		};
+		Comparator<PcodeBlock> comp = (o1, o2) -> o1.index - o2.index;
 		list.sort(comp);
 	}
 

@@ -67,25 +67,22 @@ public abstract class RenameTask {
 	 * @return true unless the user canceled
 	 */
 	private boolean showDialog(boolean oldNameIsCancel) {
-		InputDialogListener listener = new InputDialogListener() {
-			@Override
-			public boolean inputIsValid(InputDialog dialog) {
-				String name = dialog.getValue();
-				if (StringUtils.isBlank(name)) {
-					dialog.setStatusText("Cannot have empty name");
-					return false;
-				}
-				if (name.equals(oldName)) {		// No change to name
-					newName = name;
-					return true;				// but valid (ends up being equivalent to cancel
-				}
-				boolean res = isValid(name);
-				if (!res) {
-					dialog.setStatusText(errorMsg);
-				}
-				return res;
-			}
-		};
+		InputDialogListener listener = dialog -> {
+            String name = dialog.getValue();
+            if (StringUtils.isBlank(name)) {
+                dialog.setStatusText("Cannot have empty name");
+                return false;
+            }
+            if (name.equals(oldName)) {		// No change to name
+                newName = name;
+                return true;				// but valid (ends up being equivalent to cancel
+            }
+            boolean res = isValid(name);
+            if (!res) {
+                dialog.setStatusText(errorMsg);
+            }
+            return res;
+        };
 
 		String label = "Rename " + oldName + ":";
 		InputDialog renameVarDialog = new InputDialog(getTransactionName(),

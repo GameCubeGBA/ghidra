@@ -19,12 +19,9 @@ package ghidra.app.plugin.core.diff;
 @FunctionalInterface
 public interface DiffTaskListener {
 
-	public static DiffTaskListener NULL_LISTENER = new DiffTaskListener() {
-		@Override
-		public void taskInProgress(boolean inProgress) {
-			// no-op
-		}
-	};
+	public static DiffTaskListener NULL_LISTENER = inProgress -> {
+        // no-op
+    };
 
 	public void taskInProgress(boolean inProgress);
 }

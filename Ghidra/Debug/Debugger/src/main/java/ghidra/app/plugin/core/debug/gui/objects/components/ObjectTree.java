@@ -118,17 +118,13 @@ public class ObjectTree implements ObjectPane {
 			}
 		});
 		tree.setCellRenderer(new ObjectTreeCellRenderer(root.getProvider()));
-		tree.setDataTransformer(new FilterTransformer<GTreeNode>() {
-
-			@Override
-			public List<String> transform(GTreeNode t) {
-				if (t instanceof ObjectNode) {
-					ObjectNode node = (ObjectNode) t;
-					return List.of(node.getContainer().getDecoratedName());
-				}
-				return null;
-			}
-		});
+		tree.setDataTransformer(t -> {
+            if (t instanceof ObjectNode) {
+                ObjectNode node = (ObjectNode) t;
+                return List.of(node.getContainer().getDecoratedName());
+            }
+            return null;
+        });
 		tree.addTreeExpansionListener(new TreeExpansionListener() {
 
 			@Override

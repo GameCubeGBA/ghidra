@@ -35,25 +35,19 @@ public class VTWizardUtils {
 		DomainFile df;
 	}
 
-	public static final DomainFileFilter VT_SESSION_FILTER = new DomainFileFilter() {
-		@Override
-		public boolean accept(DomainFile df) {
-			if (VTSessionContentHandler.CONTENT_TYPE.equals(df.getContentType())) {
-				return true;
-			}
-			return false;
-		}
-	};
+	public static final DomainFileFilter VT_SESSION_FILTER = df -> {
+        if (VTSessionContentHandler.CONTENT_TYPE.equals(df.getContentType())) {
+            return true;
+        }
+        return false;
+    };
 
-	public static final DomainFileFilter PROGRAM_FILTER = new DomainFileFilter() {
-		@Override
-		public boolean accept(DomainFile df) {
-			if (ProgramDB.CONTENT_TYPE.equals(df.getContentType())) {
-				return true;
-			}
-			return false;
-		}
-	};
+	public static final DomainFileFilter PROGRAM_FILTER = df -> {
+        if (ProgramDB.CONTENT_TYPE.equals(df.getContentType())) {
+            return true;
+        }
+        return false;
+    };
 
 	static DomainFile chooseDomainFile(Component parent, String domainIdentifier,
 			DomainFileFilter filter, DomainFile fileToSelect) {
@@ -62,16 +56,13 @@ public class VTWizardUtils {
 				: new DataTreeDialog(parent, "Choose " + domainIdentifier, DataTreeDialog.OPEN,
 					filter);
 		final DomainFileBox box = new DomainFileBox();
-		dataTreeDialog.addOkActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				box.df = dataTreeDialog.getDomainFile();
-				if (box.df == null) {
-					return;
-				}
-				dataTreeDialog.close();
-			}
-		});
+		dataTreeDialog.addOkActionListener(e -> {
+            box.df = dataTreeDialog.getDomainFile();
+            if (box.df == null) {
+                return;
+            }
+            dataTreeDialog.close();
+        });
 		dataTreeDialog.selectDomainFile(fileToSelect);
 		dataTreeDialog.showComponent();
 		return box.df;

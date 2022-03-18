@@ -26,9 +26,7 @@ public interface DisassemblerMessageListener {
 	/**
 	 * Ignores all messages from the disassembler.
 	 */
-    public final static DisassemblerMessageListener IGNORE = new DisassemblerMessageListener() {
-        public void disassembleMessageReported(String msg) {//don't care...
-        }
+    public final static DisassemblerMessageListener IGNORE = msg -> {//don't care...
     };
 
     /**

@@ -91,19 +91,16 @@ class ExpandBlockDialog extends DialogComponentProvider implements ChangeListene
 	@Override
 	protected void okCallback() {
 
-		Runnable doExpand = new Runnable() {
-			@Override
-			public void run() {
-				if (model.execute()) {
-					close();
-				}
-				else {
-					setStatusText(model.getMessage());
-					setOkEnabled(false);
-				}
-				rootPanel.setCursor(Cursor.getDefaultCursor());
-			}
-		};
+		Runnable doExpand = () -> {
+            if (model.execute()) {
+                close();
+            }
+            else {
+                setStatusText(model.getMessage());
+                setOkEnabled(false);
+            }
+            rootPanel.setCursor(Cursor.getDefaultCursor());
+        };
 
 		rootPanel.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 		SwingUtilities.invokeLater(doExpand);
@@ -165,12 +162,7 @@ class ExpandBlockDialog extends DialogComponentProvider implements ChangeListene
 		endAddressInput.addChangeListener(new AddressChangeListener());
 		lengthField.setChangeListener(new LengthChangeListener());
 
-		ActionListener al = new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setStatusText("");
-			}
-		};
+		ActionListener al = e -> setStatusText("");
 		startField.addActionListener(al);
 		endField.addActionListener(al);
 		lengthField.addActionListener(al);
