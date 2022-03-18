@@ -41,15 +41,15 @@ CopySpec yajswCopySpec = copySpec {
 
 	// First check if the file is in the dependencies repo.  If not, check in the bin repo.
 	def yajswZipTree = depsFile.exists() ? zipTree(depsFile) : zipTree(binRepoFile)
-
+	
 	from(yajswZipTree) {
-		include "lib/core/**"
-		include "lib/extended/**"
-		include "templates/**"
-		include "*.jar"
-		include "doc/**"
-		include "LICENSE.txt"
-		include "yajsw.policy.txt"
+		include "${yajswRelease}/lib/core/**"
+		include "${yajswRelease}/lib/extended/**"
+		include "${yajswRelease}/templates/**"
+		include "${yajswRelease}/*.jar"
+		include "${yajswRelease}/doc/**"
+		include "${yajswRelease}/LICENSE.txt"
+		include "${yajswRelease}/yajsw.policy.txt"
 	}
 }
 // Unpack YAJSW archive into build/data for development use
