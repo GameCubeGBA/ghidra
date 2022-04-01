@@ -24,7 +24,6 @@ import ghidra.app.plugin.assembler.sleigh.grammars.AssemblyProduction;
 import ghidra.app.plugin.assembler.sleigh.util.DbgTimer;
 import ghidra.app.plugin.languages.sleigh.SleighLanguages;
 import ghidra.app.plugin.languages.sleigh.SubtableEntryVisitor;
-import ghidra.app.plugin.languages.sleigh.VisitorResults;
 import ghidra.app.plugin.processors.sleigh.*;
 import ghidra.app.plugin.processors.sleigh.pattern.DisjointPattern;
 import ghidra.app.plugin.processors.sleigh.symbol.SubtableSymbol;
@@ -216,7 +215,7 @@ public class AssemblyConstructorSemantic implements Comparable<AssemblyConstruct
 		SleighLanguages.traverseConstructors(parent, (sibDP, sibcons) -> {
             // Do not forbid myself.
             if (sibcons == cons) {
-                return VisitorResults.CONTINUE;
+                return CONTINUE;
             }
 
 				/**
@@ -275,7 +274,7 @@ public class AssemblyConstructorSemantic implements Comparable<AssemblyConstruct
 				}
 
             // I guess, I have the more-specific pattern, or I appear higher...
-            return VisitorResults.CONTINUE;
+            return CONTINUE;
         });
 
 		return pat.withForbids(forbids);
