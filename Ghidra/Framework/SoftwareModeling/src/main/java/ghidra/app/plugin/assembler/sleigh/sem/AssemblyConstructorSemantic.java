@@ -24,6 +24,7 @@ import ghidra.app.plugin.assembler.sleigh.grammars.AssemblyProduction;
 import ghidra.app.plugin.assembler.sleigh.util.DbgTimer;
 import ghidra.app.plugin.languages.sleigh.SleighLanguages;
 import ghidra.app.plugin.languages.sleigh.SubtableEntryVisitor;
+import ghidra.app.plugin.languages.sleigh.VisitorResults;
 import ghidra.app.plugin.processors.sleigh.*;
 import ghidra.app.plugin.processors.sleigh.pattern.DisjointPattern;
 import ghidra.app.plugin.processors.sleigh.symbol.SubtableSymbol;
@@ -215,7 +216,7 @@ public class AssemblyConstructorSemantic implements Comparable<AssemblyConstruct
 		SleighLanguages.traverseConstructors(parent, (sibDP, sibcons) -> {
             // Do not forbid myself.
             if (sibcons == cons) {
-                return CONTINUE;
+                return VisitorResults.CONTINUE;
             }
 
 				/**
@@ -246,7 +247,7 @@ public class AssemblyConstructorSemantic implements Comparable<AssemblyConstruct
 					sibcons.getMinimumLength(), "For specialization check", sibcons);
 				AssemblyResolvedPatterns comb = pat.combine(sibpat);
 				if (null == comb) {
-					return CONTINUE;
+					return VisitorResults.CONTINUE;
 				}
 
 				// OK, they overlap. Let's see if its a strict subset
@@ -254,27 +255,27 @@ public class AssemblyConstructorSemantic implements Comparable<AssemblyConstruct
 					// My sibling is a strict subset, so it will win the overlap
 					forbids.add(sibpat.withDescription(getLocation(sibcons) + " forbids " +
 						getLocation(cons) + " by pattern specificity"));
-					return CONTINUE;
+					return VisitorResults.CONTINUE;
 				}
 				else if (comb.bitsEqual(pat)) {
 					// I'm a strict subset, so I will win the overlap
-					return CONTINUE;
+					return VisitorResults.CONTINUE;
 				}
 
 				// We can't apply the line number rule unless the sibling's context is an overset
 				if (!comb.ctx.equals(pat.ctx)) {
-					return CONTINUE;
+					return VisitorResults.CONTINUE;
 				}
 
                 // Finally, check the line number
 				if (sibcons.getId() < cons.getId()) {
 					forbids.add(sibpat.withDescription(getLocation(sibcons) + " forbids " +
 						getLocation(cons) + " by rule position"));
-					return CONTINUE;
+					return VisitorResults.CONTINUE;
 				}
 
             // I guess, I have the more-specific pattern, or I appear higher...
-            return CONTINUE;
+            return VisitorResults.CONTINUE;
         });
 
 		return pat.withForbids(forbids);
