@@ -396,10 +396,9 @@ public abstract class AbstractGhidraHeadlessIntegrationTest extends AbstractDock
 
 	public AddressSet toAddressSet(List<Address> addrs) {
 		AddressSet set = new AddressSet();
-		set.addAll(addrs);
-		// for (Address addr : addrs) {
-		// 	set.add(addr);
-		// }
+		for (Address addr : addrs) {
+			set.add(addr);
+		}
 		return set;
 	}
 
@@ -411,10 +410,9 @@ public abstract class AbstractGhidraHeadlessIntegrationTest extends AbstractDock
 
 	public AddressSet toAddressSet(AddressRange... ranges) {
 		AddressSet set = new AddressSet();
-		set.addAll(ranges);
-		// for (AddressRange range : ranges) {
-		// 	set.add(range);
-		// }
+		for (AddressRange range : ranges) {
+			set.add(range);
+		}
 		return set;
 	}
 
