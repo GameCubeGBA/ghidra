@@ -318,10 +318,9 @@ public class AssemblyConstructorSemantic implements Comparable<AssemblyConstruct
 				MaskedLong reqval = res.readContextOp(cop);
 				if (reqval.equals(MaskedLong.UNKS)) {
 					DBG.println("Doesn't affect a current requirement");
-					contin
-
-			DBG.println("'read' " + reqval
-
+					continue; // this context change does not satisfy any requirement
+				}
+				DBG.println("'read' " + reqval);
 	
 				// Remove the requirement that we just read before trying to solve
 				res = res.maskOut(cop);
