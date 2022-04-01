@@ -4,9 +4,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -31,7 +31,7 @@ dependencies {
 	api project(":FileSystem")
 	api project(":DB")
 	api project(":Generic")
-	
+
 	runGhidraServer project
 }
 
@@ -63,8 +63,8 @@ task yajswDevUnpack(type:Copy) {
 /*********************************************************************************
  * CLASSPATH FRAGMENT FILE: Production
  *
- * This task creates a file, 'GhidraServer/build/classpath.fragment', 
- * which contains all classpath info necessary for running the server in 
+ * This task creates a file, 'GhidraServer/build/classpath.fragment',
+ * which contains all classpath info necessary for running the server in
  * production mode.
  *
  * The basic conops is this:
@@ -77,18 +77,18 @@ task yajswDevUnpack(type:Copy) {
  *********************************************************************************/
 task generateGhidraServerClasspath {
 	description "Generate a configuration fragment for the Ghidra Server's classpath (release)"
-		
+
 	File outfile = file("${buildDir}/classpath.frag")
 	outputs.file outfile
-	
+
 	// Force the task to be executed every time by setting to false.
 	outputs.upToDateWhen { false }
-	
-	doLast {		
+
+	doLast {
 		outfile.parentFile.mkdirs()
 		outfile.withPrintWriter { out ->
 			int idx = 0
-			configurations.runGhidraServer.each { jarFile ->	
+			configurations.runGhidraServer.each { jarFile ->
 				File distPath = file("/")
 				String resPath
 				for (Configuration conf : project.getConfigurations()) {
@@ -97,7 +97,7 @@ task generateGhidraServerClasspath {
 						out.println("wrapper.java.classpath.${++idx}=\${ghidra_home}/${resPath}")
 						break
 					}
-				}						
+				}
 			}
 		}
 	}
@@ -108,7 +108,7 @@ task generateGhidraServerClasspath {
  * path of this project.
  *
  * Note that we use 'this.project' to reference the GhidraServer project - this is because
- * inside the closure, 'project' refers to the root project, while 'this' refers to 
+ * inside the closure, 'project' refers to the root project, while 'this' refers to
  * GhidraServer.
  */
 rootProject.assembleDistribution { 
