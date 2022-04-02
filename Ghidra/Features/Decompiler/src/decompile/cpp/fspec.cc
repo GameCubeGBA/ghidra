@@ -3893,7 +3893,7 @@ void FuncProto::updateAllTypes(const vector<string> &namelist,const vector<Datat
          continue;       // increment i but not j
       }
       store->setInput(i-1,namelist[j],pieces[i]);
-      j = j + 1;
+      j++;
     }
   }
   catch(ParamUnassignedError &err) {
