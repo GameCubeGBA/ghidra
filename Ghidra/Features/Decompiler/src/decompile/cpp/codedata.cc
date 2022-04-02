@@ -687,9 +687,7 @@ void CodeDataAnalysis::runModel(void)
     moresections = loadimage->getNextSection(secinfo);
     Address endaddr = secinfo.address + secinfo.size;
     if (secinfo.size == 0) continue;
-    if (lastaddr.isInvalid())
-      lastaddr = endaddr;
-    else if (lastaddr < endaddr)
+    if (lastaddr.isInvalid() || lastaddr < endaddr)
       lastaddr = endaddr;
 
     if ((secinfo.flags & (LoadImageSection::unalloc|LoadImageSection::noload))==0) {
@@ -742,13 +740,14 @@ void IfcCodeDataTarget::execute(istream &s)
   loadbfd->getImportTable(irec);
   int4 i;
   for(i=0;i<irec.size();++i) {
-    if (irec[i].funcname == token) break;
+    if (irec[i].funcname == token)
+    {
+      codedata->addTarget(irec[i].funcname,irec[i].thunkaddress,(uint4)1);
+      return;
+    }
   }
-  if (i==irec.size())
-    *status->fileoptr << "Unable to find reference to call " << token << endl;
-  else {
-    codedata->addTarget(irec[i].funcname,irec[i].thunkaddress,(uint4)1);
-  }
+
+  *status->fileoptr << "Unable to find reference to call " << token << endl;
 }
 
 void IfcCodeDataRun::execute(istream &s)
