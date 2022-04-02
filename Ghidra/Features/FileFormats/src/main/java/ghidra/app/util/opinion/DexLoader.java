@@ -132,10 +132,8 @@ public class DexLoader extends AbstractLibrarySupportLoader {
 
 	protected void createMethods(Program program, DexHeader header, ClassDefItem item,
 			List<EncodedMethod> methods, TaskMonitor monitor, MessageLog log) throws Exception {
-        for (EncodedMethod method : methods) {
+        for (EncodedMethod encodedMethod : methods) {
             monitor.checkCanceled();
-
-            EncodedMethod encodedMethod = method;
 
             CodeItem codeItem = encodedMethod.getCodeItem();
 

@@ -202,9 +202,8 @@ public abstract class ArtImageSections {
 			Address address =
 				program.getMinAddress().getNewAddress(header.getImageBegin() + section.getOffset());
 
-            for (ArtField artField : fieldList) {
+            for (ArtField field : fieldList) {
                 monitor.checkCanceled();
-                ArtField field = artField;
                 DataType dataType = field.toDataType();
                 program.getListing().createData(address, dataType);
 
@@ -221,9 +220,8 @@ public abstract class ArtImageSections {
 		if (section.getSize() > 0) {
 			Address address =
 				program.getMinAddress().getNewAddress(header.getImageBegin() + section.getOffset());
-            for (ArtFieldGroup artFieldGroup : fieldGroupList) {
+            for (ArtFieldGroup fieldGroup : fieldGroupList) {
                 monitor.checkCanceled();
-                ArtFieldGroup fieldGroup = artFieldGroup;
                 DataType dataType = fieldGroup.toDataType();
                 program.getListing().createData(address, dataType);
                 if (fieldGroup.getFieldCount() > 0) {
@@ -253,10 +251,9 @@ public abstract class ArtImageSections {
 		if (section.getSize() > 0) {
 			Address address =
 				program.getMinAddress().getNewAddress(header.getImageBegin() + section.getOffset());
-            for (ArtMethod artMethod : methodList) {
+            for (ArtMethod method : methodList) {
                 monitor.checkCanceled();
 
-                ArtMethod method = artMethod;
                 DataType dataType = method.toDataType();
                 program.getListing().createData(address, dataType);
                 String comment =
@@ -272,10 +269,9 @@ public abstract class ArtImageSections {
 		if (section.getSize() > 0) {
 			Address address =
 				program.getMinAddress().getNewAddress(header.getImageBegin() + section.getOffset());
-            for (ArtMethodGroup artMethodGroup : methodGroupList) {
+            for (ArtMethodGroup methodGroup : methodGroupList) {
                 monitor.checkCanceled();
 
-                ArtMethodGroup methodGroup = artMethodGroup;
                 DataType dataType = methodGroup.toDataType();
                 program.getListing().createData(address, dataType);
                 if (methodGroup.getMethodCount() > 0) {

@@ -507,11 +507,10 @@ public class GccRttiAnalysisScript extends GhidraScript {
 		StructureDataType baseClassTypeInfoStructure =
 			createBaseClassTypeInfoStructure(classTypeInfoStructure);
 
-        for (Symbol symbol : typeinfoSymbols) {
+        for (Symbol typeinfoSymbol : typeinfoSymbols) {
 
             monitor.checkCanceled();
 
-            Symbol typeinfoSymbol = symbol;
             Address typeinfoAddress = typeinfoSymbol.getAddress();
 
             // skip the typeinfo symbols from the three special typeinfos
@@ -682,11 +681,10 @@ public class GccRttiAnalysisScript extends GhidraScript {
 		List<Symbol> listOfVtableSymbols = getListOfSymbolsInAddressSet(
 			currentProgram.getAddressFactory().getAddressSet(), VTABLE_LABEL, false);
 
-        for (Symbol listOfVtableSymbol : listOfVtableSymbols) {
+        for (Symbol vtableSymbol : listOfVtableSymbols) {
 
             monitor.checkCanceled();
 
-            Symbol vtableSymbol = listOfVtableSymbol;
             Namespace vtableNamespace = vtableSymbol.getParentNamespace();
             Address vtableAddress = vtableSymbol.getAddress();
 

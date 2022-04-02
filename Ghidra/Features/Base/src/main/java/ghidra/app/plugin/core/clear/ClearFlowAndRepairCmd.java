@@ -188,9 +188,8 @@ public class ClearFlowAndRepairCmd extends BackgroundCommand {
 			if (clearData && clearLabels) {
 				// Clear dereferenced symbols
 				SymbolTable symTable = program.getSymbolTable();
-                for (Address ptrDestination : ptrDestinations) {
+                for (Address addr : ptrDestinations) {
                     monitor.checkCanceled();
-                    Address addr = ptrDestination;
                     Symbol[] syms = symTable.getSymbols(addr);
                     for (Symbol sym : syms) {
                         if (sym.getSource() == SourceType.DEFAULT) {
@@ -579,9 +578,8 @@ public class ClearFlowAndRepairCmd extends BackgroundCommand {
 				}
 			}
 
-            for (Address start : starts) {
+            for (Address entry : starts) {
                 monitor.checkCanceled();
-                Address entry = start;
                 CreateFunctionCmd cmd = new CreateFunctionCmd(entry);
                 cmd.applyTo(program, monitor);
             }
@@ -716,9 +714,8 @@ public class ClearFlowAndRepairCmd extends BackgroundCommand {
 
 		ReferenceManager refMgr = program.getReferenceManager();
 		FunctionManager functionManager = program.getFunctionManager();
-        for (BlockVertex blockVertex : vertexMap.values()) {
+        for (BlockVertex v : vertexMap.values()) {
             monitor.checkCanceled();
-            BlockVertex v = blockVertex;
             if (v == startVertex || v.srcVertices.isEmpty()) {
                 continue;
             }

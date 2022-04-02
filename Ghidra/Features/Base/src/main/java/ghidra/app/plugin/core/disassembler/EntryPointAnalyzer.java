@@ -262,9 +262,8 @@ public class EntryPointAnalyzer extends AbstractAnalyzer {
 		pdis.setRespectExecuteFlag(respectExecuteFlags);
 		Listing listing = program.getListing();
 		for (Iterator<Address> laterIter = doLaterSet.iterator(); laterIter.hasNext();) {
-			Address entry = laterIter.next();
-
 			monitor.checkCanceled();
+			Address entry = laterIter.next();
 
 			if (!listing.isUndefined(entry, entry)) {
 				laterIter.remove();
@@ -298,11 +297,11 @@ public class EntryPointAnalyzer extends AbstractAnalyzer {
 
 		Iterator<Address> iter = doNowSet.iterator();
 		while (iter.hasNext()) {
-			Address entry = iter.next();
 
 			monitor.setProgress(count++);
 
 			monitor.checkCanceled();
+			Address entry = iter.next();
 
 			// already disassembled
 			if (!listing.isUndefined(entry, entry)) {
