@@ -212,6 +212,7 @@ DST16_0_4: dest_Direct16_0_4		is dest_Direct16_0_4 & reg_Direct16_0_4W {export r
 SRC8_8_4: src_Direct16_8_4		is src_Direct16_8_4 & src_Direct_lo {export src_Direct_lo;}
 DST8_0_4: reg_Direct16_0_4		is reg_Direct16_0_4 & dest_Direct_lo {export dest_Direct_lo;}
 
+define pcodeop bcd_add; # Binary coded decimal (BCD) addition
 ####################################
 # Status Register (SR) Map
 ####################################
