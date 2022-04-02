@@ -114,11 +114,9 @@ public class DexExceptionHandlersAnalyzer extends FileFormatAnalyzer {
 		monitor.setMaximum(methods.size());
 		monitor.setProgress(0);
 
-        for (EncodedMethod encodedMethod : methods) {
+        for (EncodedMethod method : methods) {
             monitor.checkCanceled();
             monitor.incrementProgress(1);
-
-            EncodedMethod method = encodedMethod;
 
             Address codeAddress = baseAddress.add(method.getCodeOffset());
 
