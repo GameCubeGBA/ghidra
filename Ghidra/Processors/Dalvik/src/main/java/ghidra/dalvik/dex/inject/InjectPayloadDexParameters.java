@@ -144,8 +144,7 @@ public class InjectPayloadDexParameters implements InjectPayload {
 			PcodeOp op = new PcodeOp(con.baseAddr, i, PcodeOp.COPY);
 			op.setInput(new Varnode(fromAddr, 4), 0);
 			op.setOutput(new Varnode(toAddr, 4));
-			resOps[i] = op;
-			i += 1;
+			resOps[i++] = op;
 		}
 		if (parameters != null) {
 			for (TypeItem parameterTypeItem : parameters.getItems()) {
