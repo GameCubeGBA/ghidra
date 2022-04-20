@@ -616,7 +616,7 @@ public class SleighCompile extends SleighBase {
 			if (noplist.size() == 1)
 				Msg.warn(SleighCompile.class, "1 NOP constructor found");
 			else
-			Msg.warn(SleighCompile.class, noplist.size() + " NOP constructors found");
+				Msg.warn(SleighCompile.class, noplist.size() + " NOP constructors found");
 
 			if (!warnallnops) {
 				Msg.warn(SleighCompile.class, "Use -n switch to list each individually");
