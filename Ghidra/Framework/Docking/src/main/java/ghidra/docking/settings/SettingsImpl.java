@@ -73,7 +73,7 @@ public class SettingsImpl implements Settings, Serializable {
 		this();
 		if (settings != null) {
 			String[] names = settings.getNames();
-			for (String name : names)
+			for (String name : names) {
 				map.put(name, settings.getValue(name));
 			}
 			defaultSettings = settings.getDefaultSettings();
