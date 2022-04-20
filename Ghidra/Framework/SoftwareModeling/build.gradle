@@ -51,7 +51,7 @@ dependencies {
 	antlr "org.antlr:antlr:3.5.2"
 	// need to add in the antlr dependencies for when we build from flat jar dirs
 	antlr "org.antlr:antlr-runtime:3.5.2"
-	antlr "org.antlr:ST4:4.3.1"
+	antlr "org.antlr:ST4:4.3.2"
 }	
 
 def genSrcDir = 'generated-src/antlr/main'

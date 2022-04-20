@@ -80,9 +80,9 @@ ext.deps = [
 		destination: file("${DEPS_DIR}/GhidraServer")
 	],
 	[
-		name: 'PyDev 9.2.0.zip',
-		url: 'https://sourceforge.net/projects/pydev/files/pydev/PyDev%209.2.0/PyDev%209.2.0.zip',
-		sha256: '77fdea05c53a6c62ee0ac774c146dc46317117e5d58f82afd4780afdceb87571',
+		name: 'PyDev 9.3.0.zip',
+		url: 'https://sourceforge.net/projects/pydev/files/pydev/PyDev%209.3.0/PyDev%209.3.0.zip',
+		sha256: '45398edf2adb56078a80bc88a919941578f0c0b363efbdd011bfd158a99b112e',
 		destination: file("${DEPS_DIR}/GhidraDev")
 	],
 	[

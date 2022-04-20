@@ -33,7 +33,7 @@ dependencies {
 	api ':dex-reader-api:2.0'
 	api ':dex-translator:2.0'
 
-	api 'org.ow2.asm:asm:9.2'
+	api 'org.ow2.asm:asm:9.3'
 
 	api 'net.sf.sevenzipjbinding:sevenzipjbinding:16.02-2.01'
 	api ':AXMLPrinter2'
