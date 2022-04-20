@@ -606,7 +606,7 @@ public class SleighCompile extends SleighBase {
 	}
 
 	private void checkNops() {
-		if (noplist.isEmpty())
+		if (noplist.size() == 0)
 			return;
 			if (warnallnops) {
 				IteratorSTL<String> iter;
