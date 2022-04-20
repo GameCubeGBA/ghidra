@@ -345,9 +345,9 @@ public class GhidraSourceBundle extends GhidraBundle {
 			return manifestParser.getCapabilities();
 		}
 
-		int sourceDirLength = file.getAbsolutePath().length() + 1;
+		int sourceDirLength = getSourceDirectory().getAbsolutePath().length() + 1;
 		List<String> packageDirs = new ArrayList<>();
-		findPackageDirs(packageDirs, file);
+		findPackageDirs(packageDirs, getSourceDirectory());
 		StringBuilder sb = new StringBuilder();
 		for (String packageDir : packageDirs) {
 			// skip unnamed package
@@ -581,7 +581,7 @@ public class GhidraSourceBundle extends GhidraBundle {
 		if (newSourceCount == 0) {
 			if (buildErrorsLastTime > 0) {
 				writer.printf("%s hasn't changed, with %d file%s failing in previous build(s):\n",
-					file.toString(), buildErrorsLastTime,
+					getSourceDirectory().toString(), buildErrorsLastTime,
 					buildErrorsLastTime > 1 ? "s" : "");
 				writer.printf("%s\n", getPreviousBuildErrors());
 				writer.flush();
@@ -598,7 +598,7 @@ public class GhidraSourceBundle extends GhidraBundle {
 
 		if (needsCompile) {
 			// if there is a bundle at our locations, uninstall it
-			Bundle osgiBundle = bundleHost.getOSGiBundle(bundleLoc);
+			Bundle osgiBundle = bundleHost.getOSGiBundle(getLocationIdentifier());
 			if (osgiBundle != null) {
 				bundleHost.deactivateSynchronously(osgiBundle);
 			}
@@ -860,35 +860,28 @@ public class GhidraSourceBundle extends GhidraBundle {
 			throws OSGiException, IOException {
 		// no manifest, so create one with bndtools
 		Analyzer analyzer = new Analyzer();
+		analyzer.setJar(new Jar(binaryDir.toFile())); // give bnd the contents
+		analyzer.setProperty("Bundle-SymbolicName",
+			GhidraSourceBundle.sourceDirHash(getSourceDirectory()));
+		analyzer.setProperty("Bundle-Version", GENERATED_VERSION);
 
 		if (importPackageValues.isEmpty()) {
 			analyzer.setProperty("Import-Package", "*");
-		} else {
-			// constrain analyzed imports according to what's declared in @importpackage
-			// tags
+		}
+		else {
+			// constrain analyzed imports according to what's declared in @importpackage tags
 			analyzer.setProperty("Import-Package",
-					importPackageValues.stream().collect(Collectors.joining(",")) + ",*");
+				importPackageValues.stream().collect(Collectors.joining(",")) + ",*");
 		}
 
-		String activatorClassName = null;
-		try {
-			for (Clazz clazz : analyzer.getClassspace().values()) {
-				if (clazz.is(QUERY.IMPLEMENTS,
-						new Instruction("org.osgi.framework.BundleActivator"), analyzer)) {
-					System.err.printf("found BundleActivator class %s\n", clazz);
-					activatorClassName = clazz.toString();
-				}
-			}
-		} catch (Exception e) {
-			summary.print("failed bnd analysis");
-			throw new OSGiException("failed to query classes while searching for activator", e);
-		}
+		analyzer.setProperty("Export-Package", "!*.private.*,!*.internal.*,*");
 
 		try {
 			Manifest manifest;
 			try {
 				manifest = analyzer.calcManifest();
-			} catch (Exception e) {
+			}
+			catch (Exception e) {
 				summary.print("Bad manifest");
 				throw new OSGiException("Failed to calculate manifest by analyzing code", e);
 			}
@@ -902,7 +895,8 @@ public class GhidraSourceBundle extends GhidraBundle {
 			try (OutputStream out = Files.newOutputStream(binaryManifest)) {
 				manifest.write(out);
 			}
-		} finally {
+		}
+		finally {
 			analyzer.close();
 		}
 		return summary.getValue();
