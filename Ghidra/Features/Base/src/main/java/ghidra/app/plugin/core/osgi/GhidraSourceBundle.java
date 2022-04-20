@@ -174,6 +174,7 @@ public class GhidraSourceBundle extends GhidraBundle {
 	 * @throws ClassNotFoundException if {@code sourceFile} isn't contained in this bundle
 	 */
 	public String classNameForScript(ResourceFile sourceFile) throws ClassNotFoundException {
+		ResourceFile file = getSourceDirectory();
 		String relativePath = FileUtilities.relativizePath(file, sourceFile);
 		if (relativePath == null) {
 			throw new ClassNotFoundException(

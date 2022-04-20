@@ -84,7 +84,6 @@ public class DbgLoader extends AbstractPeDebugLoader {
 
 		try (RandomAccessByteProvider provider2 = new RandomAccessByteProvider(parentFile))
 		{
-			provider2 = new RandomAccessByteProvider(parentFile);
 			PortableExecutable parentPE = new PortableExecutable(provider2, SectionLayout.FILE);
 			Address imageBase = prog.getImageBase();
 			Map<SectionHeader, Address> sectionToAddress = new HashMap<>();
