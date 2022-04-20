@@ -606,7 +606,8 @@ public class SleighCompile extends SleighBase {
 	}
 
 	private void checkNops() {
-		if (noplist.size() > 0) {
+		if (noplist.isEmpty())
+			return;
 			if (warnallnops) {
 				IteratorSTL<String> iter;
 				for (iter = noplist.begin(); !iter.isEnd(); iter.increment()) {
@@ -621,7 +622,6 @@ public class SleighCompile extends SleighBase {
 			if (!warnallnops) {
 				Msg.warn(SleighCompile.class, "Use -n switch to list each individually");
 			}
-		}
 	}
 
 	private void checkCaseSensitivity() {
