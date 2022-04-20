@@ -213,10 +213,9 @@ public class SettingsImpl implements Settings, Serializable {
 	@Override
 	public String[] getNames() {
 		String[] names = new String[map.size()];
-		Iterator<String> it = map.keySet().iterator();
 		int i = 0;
-		while (it.hasNext()) {
-			names[i++] = it.next();
+		for (String name : map.keySet()) {
+			names[i++] = name;
 		}
 		return names;
 	}
