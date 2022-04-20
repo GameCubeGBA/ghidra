@@ -97,6 +97,7 @@ public class DbgLoader extends AbstractPeDebugLoader {
 			processDebug(debug.getParser(), parentPE.getNTHeader(), sectionToAddress, prog,
 				monitor);
 		}
+	}
 
 	@Override
 	public String getName() {
