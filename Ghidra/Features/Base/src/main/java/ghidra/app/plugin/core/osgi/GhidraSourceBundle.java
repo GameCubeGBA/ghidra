@@ -1034,7 +1034,7 @@ public class GhidraSourceBundle extends GhidraBundle {
 		options.add("-d");
 		options.add(binaryDir.toString());
 		options.add("-sourcepath");
-		options.add(file.toString());
+		options.add(getSourceDirectory().toString());
 		options.add("-classpath");
 		options.add(
 			System.getProperty("java.class.path") + File.pathSeparator + binaryDir);
