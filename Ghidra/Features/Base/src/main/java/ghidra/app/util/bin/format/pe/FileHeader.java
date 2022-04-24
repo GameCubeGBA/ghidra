@@ -424,6 +424,7 @@ public class FileHeader implements StructConverter {
 		}
 
 		long oldIndex = reader.getPointerIndex();
+		long stringTableOffset = getStringTableOffset();
 
 		for (int i = 0; i < numberOfSymbols; ++i) {
 			if (symbolTableOffset < 0 || symbolTableOffset >= reader.length()) {
