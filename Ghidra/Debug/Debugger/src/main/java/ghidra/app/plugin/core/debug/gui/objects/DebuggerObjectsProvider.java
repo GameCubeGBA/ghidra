@@ -1263,9 +1263,6 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 			.onAction(ctx -> performNavigate(ctx))
 			.enabled(false)
 			.buildAndInstallLocal(this);
-		
-		groupTargetIndex++;
-
 	
 		displayAsTreeAction = new DisplayAsTreeAction(tool, plugin.getName(), this);
 		displayAsTableAction = new DisplayAsTableAction(tool, plugin.getName(), this);
