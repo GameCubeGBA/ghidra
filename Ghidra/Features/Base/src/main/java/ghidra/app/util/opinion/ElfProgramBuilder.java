@@ -1424,7 +1424,7 @@ class ElfProgramBuilder extends MemorySectionResolver implements ElfLoadHelper {
 						new ObfuscatedFileByteProvider(tmpFile, null, AccessMode.READ)) {
 
 						GenericFactory factory = MessageLogContinuesFactory.create(log);
-						ElfHeader minidebugElf = ElfHeader.createElfHeader(factory, debugDataBP);
+						ElfHeader minidebugElf = ElfHeader.createElfHeader(factory, debugDataBP, null);
 						minidebugElf.parse();
 
 						ElfSymbolTable[] minidebugSymbolTables = minidebugElf.getSymbolTables();
