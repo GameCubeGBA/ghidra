@@ -983,7 +983,7 @@ define pcodeop DataCacheInvalidate;
 
 # =======================================================================
 
-# PowerISA II: 4.3.1 Instruction Cache Instructions
+# PowerISA II: 4.3.3 Instruction Cache Instructions
 # CMT: Instruction Cache Block Touch [Category: Embedded]
 # FORM: X-form
 # binutils: 476.d: 308: 7c a8 48 2c     icbt    5,r8,r9
@@ -1190,7 +1190,7 @@ define pcodeop waitOp;
 
 # =======================================================================
 
-# PowerISA II: 4.3.1 System Linkage Instructions
+# PowerISA II: 4.3.3 System Linkage Instructions
 # CMT: Return From Guest Interrupt [Category:Embedded.Hypervisor]
 # FORM: XL-form
 # binutils: e500mc.d:   0:      4c 00 00 4e     rfdi

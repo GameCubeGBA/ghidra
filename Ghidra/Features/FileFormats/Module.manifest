@@ -1,7 +1,7 @@
-MODULE FILE LICENSE: lib/dex-ir-2.0.jar Apache License 2.0
-MODULE FILE LICENSE: lib/dex-reader-2.0.jar Apache License 2.0
-MODULE FILE LICENSE: lib/dex-reader-api-2.0.jar Apache License 2.0
-MODULE FILE LICENSE: lib/dex-translator-2.0.jar Apache License 2.0
+MODULE FILE LICENSE: lib/dex-ir-2.1.jar Apache License 2.0
+MODULE FILE LICENSE: lib/dex-reader-2.1.jar Apache License 2.0
+MODULE FILE LICENSE: lib/dex-reader-api-2.1.jar Apache License 2.0
+MODULE FILE LICENSE: lib/dex-translator-2.1.jar Apache License 2.0
 MODULE FILE LICENSE: lib/asm-9.2.jar INRIA License
 MODULE FILE LICENSE: lib/sevenzipjbinding-16.02-2.01.jar LGPL 2.1
 MODULE FILE LICENSE: lib/sevenzipjbinding-all-platforms-16.02-2.01.jar LGPL 2.1

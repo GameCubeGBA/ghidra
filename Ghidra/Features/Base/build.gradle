@@ -46,7 +46,7 @@ dependencies {
 	api project(':DB')
 	api project(':Help')
 
-	api 'org.apache.felix:org.apache.felix.framework:7.0.3'
+	api 'org.apache.felix:org.apache.felix.framework:7.0.5'
 	api 'com.github.rotty3000:phidias:0.3.7'
 	api 'biz.aQute.bnd:biz.aQute.bndlib:6.1.0'
 	api 'org.slf4j:slf4j-api:1.7.33'
@@ -54,7 +54,7 @@ dependencies {
 	runtimeOnly "org.slf4j:slf4j-nop:1.7.33"
 	
 	// use this if you want slf4j log messages sent to log4j
-	//	runtimeOnly "org.apache.logging.log4j:log4j-slf4j-impl:2.17.1" 
+	//	runtimeOnly "org.apache.logging.log4j:log4j-slf4j-impl:2.17.2" 
 	
    	compileOnly "junit:junit:4.13.2"
 	
@@ -64,7 +64,7 @@ dependencies {
 	testImplementation project(path: ':Project', configuration: 'testArtifacts')
 	testImplementation project(path: ':SoftwareModeling', configuration: 'testArtifacts')
 	
-	javacc 'net.java.dev.javacc:javacc:7.0.10'
+	javacc 'net.java.dev.javacc:javacc:7.0.11'
 }
 
 

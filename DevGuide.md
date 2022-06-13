@@ -56,7 +56,7 @@ You may not need all of these, depending on which portions you are building or d
 * AXMLPrinter2
     - https://code.google.com/archive/p/android4me/downloads
 * Yet Another Java Service Wrapper. We use version 13.01 - Only to build Ghidra package.
-    - https://sourceforge.net/projects/yajsw/files/yajsw/yajsw-beta-13.01/
+    - https://sourceforge.net/projects/yajsw/files/yajsw/yajsw-stable-13.03/
 * Eclipse PDE - Environment for developing the GhidraDev plugin.
     - https://www.eclipse.org/pde/
 * Eclipse CDT. We build against version 8.6.0 - Build dependency for the GhidraDev plugin.
@@ -114,15 +114,15 @@ The Gradle task to be executed, in this case _init_, is unimportant. The point i
 the `fetchDependencies.gradle` script. If it ran correctly you will have a new `~/git/ghidra/dependencies/` 
 directory populated with the following files:
  * flatRepo/AXMLPrinter2.jar
- * flatRepo/dex-ir-2.0.jar
- * flatRepo/dex-reader-2.0.jar
- * flatRepo/dex-reader-api-2.0.jar
- * flatRepo/dex-tools-2.0.jar
- * flatRepo/dex-translator-2.0.jar
- * flatRepo/dex-writer-2.0.jar
+ * flatRepo/dex-ir-2.1.jar
+ * flatRepo/dex-reader-2.1.jar
+ * flatRepo/dex-reader-api-2.1.jar
+ * flatRepo/dex2jar-2.1.jar
+ * flatRepo/dex-translator-2.1.jar
+ * flatRepo/dex-writer-2.1.jar
  * GhidraDev/cdt-8.6.0.zip
  * GhidraDev/PyDev 6.3.1.zip
- * GhidraServer/yajsw-beta-13.01.zip
+ * GhidraServer/yajsw-stable-13.03.zip
  * fidb/*.fidb
 
 If you see these, congrats! Skip to [building](#building-ghidra) or [developing](#developing-ghidra). If not, continue with manual download 
@@ -142,13 +142,13 @@ mkdir ~/git/ghidra/dependencies/GhidraDev
 
 #### Get Dependencies for FileFormats:
 
-Download `dex-tools-2.0.zip` from the dex2jar project's releases page on GitHub.
+Download `dex2jar-2.0.zip` from the dex2jar project's releases page on GitHub.
 Unpack the `dex-*.jar` files from the `lib` directory to `~/git/ghidra/dependencies/flatRepo`:
 
 ```bash
 cd ~/Downloads   # Or wherever
-curl -OL https://github.com/pxb1988/dex2jar/releases/download/2.0/dex-tools-2.0.zip
-unzip dex-tools-2.0.zip
+curl -OL https://github.com/pxb1988/dex2jar/releases/download/2.0/dex2jar-2.0.zip
+unzip dex2jar-2.0.zip
 cp dex2jar-2.0/lib/dex-*.jar ~/git/ghidra/dependencies/flatRepo/
 
 ```
@@ -164,13 +164,13 @@ curl -OL https://storage.googleapis.com/google-code-archive-downloads/v2/code.go
 #### Get Dependencies for GhidraServer
 
 Building the GhidraServer requires "Yet another Java service wrapper" (yajsw) version 13.01.
-Download `yajsw-beta-13.01.zip` from their project on www.sourceforge.net, and place it in:
+Download `yajsw-stable-13.03.zip` from their project on www.sourceforge.net, and place it in:
 `~/git/ghidra/dependencies/GhidraServer/`:
 
 ```bash
 cd ~/Downloads   # Or wherever
-curl -OL https://sourceforge.net/projects/yajsw/files/yajsw/yajsw-beta-13.01/yajsw-beta-13.01.zip
-cp ~/Downloads/yajsw-beta-13.01.zip ~/git/ghidra/dependencies/GhidraServer/
+curl -OL https://sourceforge.net/projects/yajsw/files/yajsw/yajsw-stable-13.03/yajsw-stable-13.03.zip
+cp ~/Downloads/yajsw-stable-13.03.zip ~/git/ghidra/dependencies/GhidraServer/
 ```
 
 #### Get Dependencies for GhidraDev
