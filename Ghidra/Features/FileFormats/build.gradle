@@ -28,10 +28,10 @@ dependencies {
 	api project(':Recognizers')
 	api project(':PDB')
 	
-	api ':dex-ir:2.0'
-	api ':dex-reader:2.0'
-	api ':dex-reader-api:2.0'
-	api ':dex-translator:2.0'
+	api ':dex-ir:2.1'
+	api ':dex-reader:2.1'
+	api ':dex-reader-api:2.1'
+	api ':dex-translator:2.1'
 
 	api 'org.ow2.asm:asm:9.3'
 

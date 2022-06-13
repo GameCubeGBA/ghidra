@@ -114,12 +114,12 @@ The Gradle task to be executed, in this case _init_, is unimportant. The point i
 the `fetchDependencies.gradle` script. If it ran correctly you will have a new `~/git/ghidra/dependencies/`
 directory populated with the following files:
  * flatRepo/AXMLPrinter2.jar
- * flatRepo/dex-ir-2.0.jar
- * flatRepo/dex-reader-2.0.jar
- * flatRepo/dex-reader-api-2.0.jar
- * flatRepo/dex-tools-2.0.jar
- * flatRepo/dex-translator-2.0.jar
- * flatRepo/dex-writer-2.0.jar
+ * flatRepo/dex-ir-2.1.jar
+ * flatRepo/dex-reader-2.1.jar
+ * flatRepo/dex-reader-api-2.1.jar
+ * flatRepo/dex2jar-2.1.jar
+ * flatRepo/dex-translator-2.1.jar
+ * flatRepo/dex-writer-2.1.jar
  * GhidraDev/cdt-8.6.0.zip
  * GhidraDev/PyDev 6.3.1.zip
  * GhidraServer/yajsw-stable-13.03.zip
@@ -142,13 +142,13 @@ mkdir ~/git/ghidra/dependencies/GhidraDev
 
 #### Get Dependencies for FileFormats:
 
-Download `dex-tools-2.0.zip` from the dex2jar project's releases page on GitHub.
+Download `dex2jar-2.0.zip` from the dex2jar project's releases page on GitHub.
 Unpack the `dex-*.jar` files from the `lib` directory to `~/git/ghidra/dependencies/flatRepo`:
 
 ```bash
 cd ~/Downloads   # Or wherever
-curl -OL https://github.com/pxb1988/dex2jar/releases/download/2.0/dex-tools-2.0.zip
-unzip dex-tools-2.0.zip
+curl -OL https://github.com/pxb1988/dex2jar/releases/download/2.0/dex2jar-2.0.zip
+unzip dex2jar-2.0.zip
 cp dex2jar-2.0/lib/dex-*.jar ~/git/ghidra/dependencies/flatRepo/
 
 ```
