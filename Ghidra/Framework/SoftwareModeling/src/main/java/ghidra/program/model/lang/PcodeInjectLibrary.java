@@ -132,18 +132,16 @@ public class PcodeInjectLibrary {
 		if (name == null) {
 			return null;
 		}
-		if (type == InjectPayload.CALLFIXUP_TYPE) {
-			return callFixupMap.get(name);
-		}
-		else if (type == InjectPayload.CALLOTHERFIXUP_TYPE) {
-			return callOtherFixupMap.get(name);
-		}
-		else if (type == InjectPayload.CALLMECHANISM_TYPE) {
-			return callMechFixupMap.get(name);
-		}
-		else if (type == InjectPayload.EXECUTABLEPCODE_TYPE) {
-			return exePcodeMap.get(name);
-		}
+        switch (type) {
+            case InjectPayload.CALLFIXUP_TYPE:
+                return callFixupMap.get(name);
+            case InjectPayload.CALLOTHERFIXUP_TYPE:
+                return callOtherFixupMap.get(name);
+            case InjectPayload.CALLMECHANISM_TYPE:
+                return callMechFixupMap.get(name);
+            case InjectPayload.EXECUTABLEPCODE_TYPE:
+                return exePcodeMap.get(name);
+        }
 		return null;
 	}
 

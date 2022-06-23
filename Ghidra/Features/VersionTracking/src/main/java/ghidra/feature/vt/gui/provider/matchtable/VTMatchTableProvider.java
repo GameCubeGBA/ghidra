@@ -493,27 +493,31 @@ public class VTMatchTableProvider extends ComponentProviderAdapter
 			DomainObjectChangeRecord doRecord = ev.getChangeRecord(i);
 			int eventType = doRecord.getEventType();
 
-			if (eventType == VTChangeManager.DOCR_VT_ASSOCIATION_STATUS_CHANGED ||
-				eventType == VTChangeManager.DOCR_VT_ASSOCIATION_MARKUP_STATUS_CHANGED) {
+            switch (eventType) {
+                case VTChangeManager.DOCR_VT_ASSOCIATION_STATUS_CHANGED:
+                case VTChangeManager.DOCR_VT_ASSOCIATION_MARKUP_STATUS_CHANGED:
 
-				updateWithoutFullReload();
-				matchesContextChanged = true;
-				saveComplexSelectionUpdate();
-			}
-			else if (eventType == VTChangeManager.DOCR_VT_MATCH_TAG_CHANGED) {
-				updateWithoutFullReload();
-				matchesContextChanged = true;
-			}
-			else if (eventType == VTChangeManager.DOCR_VT_MATCH_ADDED) {
-				VersionTrackingChangeRecord vtRecord = (VersionTrackingChangeRecord) doRecord;
-				matchesTableModel.addObject((VTMatch) vtRecord.getNewValue());
-				matchesContextChanged = true;
-			}
-			else if (eventType == VTChangeManager.DOCR_VT_MATCH_DELETED) {
-				VersionTrackingChangeRecord vtRecord = (VersionTrackingChangeRecord) doRecord;
-				matchesTableModel.removeObject((VTMatch) vtRecord.getObject());
-				matchesContextChanged = true;
-			}
+                    updateWithoutFullReload();
+                    matchesContextChanged = true;
+                    saveComplexSelectionUpdate();
+                    break;
+                case VTChangeManager.DOCR_VT_MATCH_TAG_CHANGED:
+                    updateWithoutFullReload();
+                    matchesContextChanged = true;
+                    break;
+                case VTChangeManager.DOCR_VT_MATCH_ADDED: {
+                    VersionTrackingChangeRecord vtRecord = (VersionTrackingChangeRecord) doRecord;
+                    matchesTableModel.addObject((VTMatch) vtRecord.getNewValue());
+                    matchesContextChanged = true;
+                    break;
+                }
+                case VTChangeManager.DOCR_VT_MATCH_DELETED: {
+                    VersionTrackingChangeRecord vtRecord = (VersionTrackingChangeRecord) doRecord;
+                    matchesTableModel.removeObject((VTMatch) vtRecord.getObject());
+                    matchesContextChanged = true;
+                    break;
+                }
+            }
 		}
 
 		if (matchesContextChanged) {

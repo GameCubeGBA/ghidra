@@ -290,21 +290,23 @@ public class DecompileProcess {
 								getBytes();						// getBytes
 								break;
 							case 'C':
-								if (name.equals("getComments")) {
-									getComments();
-								}
-								else if (name.equals("getCallFixup")) {
-									getPcodeInject(InjectPayload.CALLFIXUP_TYPE);
-								}
-								else if (name.equals("getCallotherFixup")) {
-									getPcodeInject(InjectPayload.CALLOTHERFIXUP_TYPE);
-								}
-								else if (name.equals("getCallMech")) {
-									getPcodeInject(InjectPayload.CALLMECHANISM_TYPE);
-								}
-								else {
-									getCPoolRef();
-								}
+                                switch (name) {
+                                    case "getComments":
+                                        getComments();
+                                        break;
+                                    case "getCallFixup":
+                                        getPcodeInject(InjectPayload.CALLFIXUP_TYPE);
+                                        break;
+                                    case "getCallotherFixup":
+                                        getPcodeInject(InjectPayload.CALLOTHERFIXUP_TYPE);
+                                        break;
+                                    case "getCallMech":
+                                        getPcodeInject(InjectPayload.CALLMECHANISM_TYPE);
+                                        break;
+                                    default:
+                                        getCPoolRef();
+                                        break;
+                                }
 								break;
 							case 'E':
 								getExternalRefXML();			// getExternalRefXML

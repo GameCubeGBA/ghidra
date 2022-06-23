@@ -136,164 +136,160 @@ public class SaveState {
 			String name = elem.getAttributeValue(NAME);
 			String type = elem.getAttributeValue(TYPE);
 			String value = elem.getAttributeValue(VALUE);
-			if (tag.equals("XML")) {
-				map.put(name, elem.getChildren().get(0));
-			}
-			else if (tag.equals("BYTES")) {
-				if (value != null) {
-					map.put(name, NumericUtilities.convertStringToBytes(value));
-				}
-			}
-			else if (tag.equals(STATE)) {
-				try {
-					if (type == null) {
-						// skip this element
-					}
-					else if (type.equals("byte")) {
-						map.put(name, Byte.valueOf(value));
-					}
-					else if (type.equals("short")) {
-						map.put(name, Short.valueOf(value));
-					}
-					else if (type.equals("int")) {
-						map.put(name, Integer.valueOf(value));
-					}
-					else if (type.equals("long")) {
-						map.put(name, Long.valueOf(value));
-					}
-					else if (type.equals("float")) {
-						map.put(name, Float.valueOf(value));
-					}
-					else if (type.equals("double")) {
-						map.put(name, Double.valueOf(value));
-					}
-					else if (type.equals("boolean")) {
-						map.put(name, Boolean.valueOf(value));
-					}
-					else if (type.equals("string")) {
-						String encodedValue = elem.getAttributeValue("ENCODED_VALUE");
-						if (value == null && encodedValue != null) {
-							byte[] strBytes = NumericUtilities.convertStringToBytes(encodedValue);
-							value = new String(strBytes, StandardCharsets.UTF_8);
-						}
-						map.put(name, value);
-					}
-					else if (type.equals("Color")) {
-						map.put(name, new Color(Integer.valueOf(value)));
-					}
-					else if (type.equals("Date")) {
-						map.put(name, DATE_FORMAT.parse(value));
-					}
-					else if (type.equals("File")) {
-						map.put(name, new File(value));
-					}
-					else if (type.equals("KeyStroke")) {
-						map.put(name, KeyStroke.getKeyStroke(value));
-					}
-					else if (type.equals("Font")) {
-						map.put(name, Font.decode(value));
-					}
-				}
-				catch (Exception e) {
-					Msg.warn(this, "Error processing primitive value in saveState", e);
-				}
-			}
-			else if (tag.equals("ARRAY")) {
-				if (type == null) {
-					continue;
-				}
+            switch (tag) {
+                case "XML":
+                    map.put(name, elem.getChildren().get(0));
+                    break;
+                case "BYTES":
+                    if (value != null) {
+                        map.put(name, NumericUtilities.convertStringToBytes(value));
+                    }
+                    break;
+                case STATE:
+                    try {
+                        if (type == null) {
+                            // skip this element
+                        } else if (type.equals("byte")) {
+                            map.put(name, Byte.valueOf(value));
+                        } else if (type.equals("short")) {
+                            map.put(name, Short.valueOf(value));
+                        } else if (type.equals("int")) {
+                            map.put(name, Integer.valueOf(value));
+                        } else if (type.equals("long")) {
+                            map.put(name, Long.valueOf(value));
+                        } else if (type.equals("float")) {
+                            map.put(name, Float.valueOf(value));
+                        } else if (type.equals("double")) {
+                            map.put(name, Double.valueOf(value));
+                        } else if (type.equals("boolean")) {
+                            map.put(name, Boolean.valueOf(value));
+                        } else if (type.equals("string")) {
+                            String encodedValue = elem.getAttributeValue("ENCODED_VALUE");
+                            if (value == null && encodedValue != null) {
+                                byte[] strBytes = NumericUtilities.convertStringToBytes(encodedValue);
+                                value = new String(strBytes, StandardCharsets.UTF_8);
+                            }
+                            map.put(name, value);
+                        } else if (type.equals("Color")) {
+                            map.put(name, new Color(Integer.valueOf(value)));
+                        } else if (type.equals("Date")) {
+                            map.put(name, DATE_FORMAT.parse(value));
+                        } else if (type.equals("File")) {
+                            map.put(name, new File(value));
+                        } else if (type.equals("KeyStroke")) {
+                            map.put(name, KeyStroke.getKeyStroke(value));
+                        } else if (type.equals("Font")) {
+                            map.put(name, Font.decode(value));
+                        }
+                    } catch (Exception e) {
+                        Msg.warn(this, "Error processing primitive value in saveState", e);
+                    }
+                    break;
+                case "ARRAY":
+                    if (type == null) {
+                        continue;
+                    }
 
-				try {
-					List<?> list = elem.getChildren(ARRAY_ELEMENT_NAME);
-					Iterator<?> it = list.iterator();
-					int i = 0;
-					if (type.equals("short")) {
-						short[] vals = new short[list.size()];
-						while (it.hasNext()) {
-							Element e = (Element) it.next();
-							vals[i++] = Short.parseShort(e.getAttributeValue(VALUE));
-						}
-						map.put(name, vals);
-					}
-					else if (type.equals("int")) {
-						int[] vals = new int[list.size()];
-						while (it.hasNext()) {
-							Element e = (Element) it.next();
-							vals[i++] = Integer.parseInt(e.getAttributeValue(VALUE));
-						}
-						map.put(name, vals);
-					}
-					else if (type.equals("long")) {
-						long[] vals = new long[list.size()];
-						while (it.hasNext()) {
-							Element e = (Element) it.next();
-							vals[i++] = Long.parseLong(e.getAttributeValue(VALUE));
-						}
-						map.put(name, vals);
-					}
-					else if (type.equals("float")) {
-						float[] vals = new float[list.size()];
-						while (it.hasNext()) {
-							Element e = (Element) it.next();
-							vals[i++] = Float.parseFloat(e.getAttributeValue(VALUE));
-						}
-						map.put(name, vals);
-					}
-					else if (type.equals("double")) {
-						double[] vals = new double[list.size()];
-						while (it.hasNext()) {
-							Element e = (Element) it.next();
-							vals[i++] = Double.parseDouble(e.getAttributeValue(VALUE));
-						}
-						map.put(name, vals);
-					}
-					else if (type.equals("boolean")) {
-						boolean[] vals = new boolean[list.size()];
-						while (it.hasNext()) {
-							Element e = (Element) it.next();
-							vals[i++] =
-								Boolean.valueOf(e.getAttributeValue(VALUE)).booleanValue();
-						}
-						map.put(name, vals);
-					}
-					else if (type.equals("string")) {
-						String[] vals = new String[list.size()];
-						while (it.hasNext()) {
-							Element e = (Element) it.next();
-							vals[i++] = e.getAttributeValue(VALUE);
-						}
-						map.put(name, vals);
-					}
-				}
-				catch (Exception exc) {
-					Msg.warn(this, "Error processing array value in saveState", exc);
-				}
-			}
-			else if (tag.equals("ENUM")) {
-				if (type == null) {
-					continue;
-				}
-				if (type.equals("stringenum")) {
-					// skip it, string enums are no longer supported
-					continue;
-				}
-				if (type.equals("enum")) {
-					String className = elem.getAttributeValue("CLASS");
-					Enum<?> e = getEnumValue(className, value);
-					if (e != null) {
-						map.put(name, e);
-					}
-				}
-			}
-			else if (tag.equals(SAVE_STATE)) {
-				Element element = (Element) elem.getChildren().get(0);
-				if (element != null) {
-					map.put(name, new SaveState(element));
-				}
-			}
-			else if (tag.equals("NULL")) {
-				map.put(name, null);
-			}
+                    try {
+                        List<?> list = elem.getChildren(ARRAY_ELEMENT_NAME);
+                        Iterator<?> it = list.iterator();
+                        int i = 0;
+                        switch (type) {
+                            case "short": {
+                                short[] vals = new short[list.size()];
+                                while (it.hasNext()) {
+                                    Element e = (Element) it.next();
+                                    vals[i++] = Short.parseShort(e.getAttributeValue(VALUE));
+                                }
+                                map.put(name, vals);
+                                break;
+                            }
+                            case "int": {
+                                int[] vals = new int[list.size()];
+                                while (it.hasNext()) {
+                                    Element e = (Element) it.next();
+                                    vals[i++] = Integer.parseInt(e.getAttributeValue(VALUE));
+                                }
+                                map.put(name, vals);
+                                break;
+                            }
+                            case "long": {
+                                long[] vals = new long[list.size()];
+                                while (it.hasNext()) {
+                                    Element e = (Element) it.next();
+                                    vals[i++] = Long.parseLong(e.getAttributeValue(VALUE));
+                                }
+                                map.put(name, vals);
+                                break;
+                            }
+                            case "float": {
+                                float[] vals = new float[list.size()];
+                                while (it.hasNext()) {
+                                    Element e = (Element) it.next();
+                                    vals[i++] = Float.parseFloat(e.getAttributeValue(VALUE));
+                                }
+                                map.put(name, vals);
+                                break;
+                            }
+                            case "double": {
+                                double[] vals = new double[list.size()];
+                                while (it.hasNext()) {
+                                    Element e = (Element) it.next();
+                                    vals[i++] = Double.parseDouble(e.getAttributeValue(VALUE));
+                                }
+                                map.put(name, vals);
+                                break;
+                            }
+                            case "boolean": {
+                                boolean[] vals = new boolean[list.size()];
+                                while (it.hasNext()) {
+                                    Element e = (Element) it.next();
+                                    vals[i++] =
+                                            Boolean.valueOf(e.getAttributeValue(VALUE)).booleanValue();
+                                }
+                                map.put(name, vals);
+                                break;
+                            }
+                            case "string": {
+                                String[] vals = new String[list.size()];
+                                while (it.hasNext()) {
+                                    Element e = (Element) it.next();
+                                    vals[i++] = e.getAttributeValue(VALUE);
+                                }
+                                map.put(name, vals);
+                                break;
+                            }
+                        }
+                    } catch (Exception exc) {
+                        Msg.warn(this, "Error processing array value in saveState", exc);
+                    }
+                    break;
+                case "ENUM":
+                    if (type == null) {
+                        continue;
+                    }
+                    if (type.equals("stringenum")) {
+                        // skip it, string enums are no longer supported
+                        continue;
+                    }
+                    if (type.equals("enum")) {
+                        String className = elem.getAttributeValue("CLASS");
+                        Enum<?> e = getEnumValue(className, value);
+                        if (e != null) {
+                            map.put(name, e);
+                        }
+                    }
+                    break;
+                case SAVE_STATE:
+                    Element element = (Element) elem.getChildren().get(0);
+                    if (element != null) {
+                        map.put(name, new SaveState(element));
+                    }
+                    break;
+                case "NULL":
+                    map.put(name, null);
+                    break;
+            }
 		}
 	}
 

@@ -248,7 +248,7 @@ public class ArmAnalyzer extends ConstantPropagationAnalyzer {
 			}
 
 			public void initForCase(Long assume) {
-				assumeValue = Long.valueOf(assume);
+				assumeValue = assume;
 				hitTheGuard = false;
 			}
 

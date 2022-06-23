@@ -227,18 +227,20 @@ public class VersionHistoryPanel extends JPanel implements Draggable {
 			column.setHeaderRenderer(headRenderer);
 			column.setCellRenderer(cellRenderer);
 			String name = (String) column.getIdentifier();
-			if (name.equals(VersionHistoryTableModel.VERSION)) {
-				column.setPreferredWidth(80);
-			}
-			else if (name.equals(VersionHistoryTableModel.DATE)) {
-				column.setPreferredWidth(210);
-			}
-			else if (name.equals(VersionHistoryTableModel.COMMENTS)) {
-				column.setPreferredWidth(250);
-			}
-			else if (name.equals(VersionHistoryTableModel.USER)) {
-				column.setPreferredWidth(125);
-			}
+            switch (name) {
+                case VersionHistoryTableModel.VERSION:
+                    column.setPreferredWidth(80);
+                    break;
+                case VersionHistoryTableModel.DATE:
+                    column.setPreferredWidth(210);
+                    break;
+                case VersionHistoryTableModel.COMMENTS:
+                    column.setPreferredWidth(250);
+                    break;
+                case VersionHistoryTableModel.USER:
+                    column.setPreferredWidth(125);
+                    break;
+            }
 		}
 	}
 

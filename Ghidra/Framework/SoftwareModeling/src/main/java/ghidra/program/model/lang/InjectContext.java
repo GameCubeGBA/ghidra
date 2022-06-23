@@ -45,40 +45,45 @@ public class InjectContext {
 		@Override
 		public void startElement(String uri, String localName, String rawName, Attributes attr)
 				throws SAXException {
-			if (rawName.equals("context")) {
-				state = 1;
-			}
-			else if (rawName.equals("input")) {
-				inputlist = new ArrayList<>();
-				state = 3;
-			}
-			else if (rawName.equals("output")) {
-				output = new ArrayList<>();
-				state = 4;
-			}
-			else if (rawName.equals("addr")) {
-				curaddr = AddressXML.readXML(rawName, attr, addrFactory);
-				if (state == 1) {
-					baseAddr = curaddr;
-					state = 2;
-				}
-				else if (state == 2) {
-					callAddr = curaddr;
-				}
-				else if (state == 3) {
-					int size = SpecXmlUtils.decodeInt(attr.getValue("size"));
-					Varnode vn = new Varnode(curaddr, size);
-					inputlist.add(vn);
-				}
-				else if (state == 4) {
-					int size = SpecXmlUtils.decodeInt(attr.getValue("size"));
-					Varnode vn = new Varnode(curaddr, size);
-					output.add(vn);
-				}
-			}
-			else {
-				throw new SAXException("Unrecognized inject tag: " + rawName);
-			}
+            switch (rawName) {
+                case "context":
+                    state = 1;
+                    break;
+                case "input":
+                    inputlist = new ArrayList<>();
+                    state = 3;
+                    break;
+                case "output":
+                    output = new ArrayList<>();
+                    state = 4;
+                    break;
+                case "addr":
+                    curaddr = AddressXML.readXML(rawName, attr, addrFactory);
+                    switch (state) {
+                        case 1:
+                            baseAddr = curaddr;
+                            state = 2;
+                            break;
+                        case 2:
+                            callAddr = curaddr;
+                            break;
+                        case 3: {
+                            int size = SpecXmlUtils.decodeInt(attr.getValue("size"));
+                            Varnode vn = new Varnode(curaddr, size);
+                            inputlist.add(vn);
+                            break;
+                        }
+                        case 4: {
+                            int size = SpecXmlUtils.decodeInt(attr.getValue("size"));
+                            Varnode vn = new Varnode(curaddr, size);
+                            output.add(vn);
+                            break;
+                        }
+                    }
+                    break;
+                default:
+                    throw new SAXException("Unrecognized inject tag: " + rawName);
+            }
 
 		}
 	}

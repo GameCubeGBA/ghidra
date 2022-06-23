@@ -76,30 +76,32 @@ class ProgramListener implements DomainObjectListener {
 			ProgramChangeRecord record = (ProgramChangeRecord) rec;
 			int eventType = rec.getEventType();
 
-			if (eventType == ChangeManager.DOCR_TREE_RENAMED) {
-				plugin.treeRenamed((String) record.getOldValue(), (String) record.getNewValue());
-			}
-			else if (eventType == ChangeManager.DOCR_GROUP_ADDED) {
-				processGroupAdded(record);
-			}
-			else if (eventType == ChangeManager.DOCR_GROUP_REMOVED) {
-				processGroupRemoved(record);
-			}
-			else if (eventType == ChangeManager.DOCR_GROUP_RENAMED) {
-				processGroupRenamed(record);
-			}
-			else if (eventType == ChangeManager.DOCR_MODULE_REORDERED) {
-				processModuleReordered(record);
-			}
-			else if (eventType == ChangeManager.DOCR_GROUP_REPARENTED) {
-				processGroupReparented(record);
-			}
-			else if (eventType == ChangeManager.DOCR_FRAGMENT_MOVED) {
-				plugin.fragmentMoved();
-			}
-			else if (eventType == ChangeManager.DOCR_MEMORY_BLOCKS_JOINED) {
-				viewChanged |= processBlockJoined(record);
-			}
+            switch (eventType) {
+                case ChangeManager.DOCR_TREE_RENAMED:
+                    plugin.treeRenamed((String) record.getOldValue(), (String) record.getNewValue());
+                    break;
+                case ChangeManager.DOCR_GROUP_ADDED:
+                    processGroupAdded(record);
+                    break;
+                case ChangeManager.DOCR_GROUP_REMOVED:
+                    processGroupRemoved(record);
+                    break;
+                case ChangeManager.DOCR_GROUP_RENAMED:
+                    processGroupRenamed(record);
+                    break;
+                case ChangeManager.DOCR_MODULE_REORDERED:
+                    processModuleReordered(record);
+                    break;
+                case ChangeManager.DOCR_GROUP_REPARENTED:
+                    processGroupReparented(record);
+                    break;
+                case ChangeManager.DOCR_FRAGMENT_MOVED:
+                    plugin.fragmentMoved();
+                    break;
+                case ChangeManager.DOCR_MEMORY_BLOCKS_JOINED:
+                    viewChanged |= processBlockJoined(record);
+                    break;
+            }
 
 			if (viewChanged) {
 				tree.fireTreeViewChanged();

@@ -156,22 +156,22 @@ public class ElfLoaderOptionsFactory {
 		}
 		for (Option option : options) {
 			String name = option.getName();
-			if (name.equals(PERFORM_RELOCATIONS_NAME)) {
-				if (!Boolean.class.isAssignableFrom(option.getValueClass())) {
-					return "Invalid type for option: " + name + " - " + option.getValueClass();
-				}
-			}
-			else if (name.equals(INCLUDE_OTHER_BLOCKS)) {
-				if (!Boolean.class.isAssignableFrom(option.getValueClass())) {
-					return "Invalid type for option: " + name + " - " + option.getValueClass();
-				}
-			}
-			else if (name.equals(IMAGE_BASE_OPTION_NAME)) {
-				return validateAddressSpaceOffsetOption(option, language.getDefaultSpace());
-			}
-			else if (name.equals(IMAGE_DATA_IMAGE_BASE_OPTION_NAME)) {
-				return validateAddressSpaceOffsetOption(option, language.getDefaultDataSpace());
-			}
+            switch (name) {
+                case PERFORM_RELOCATIONS_NAME:
+                    if (!Boolean.class.isAssignableFrom(option.getValueClass())) {
+                        return "Invalid type for option: " + name + " - " + option.getValueClass();
+                    }
+                    break;
+                case INCLUDE_OTHER_BLOCKS:
+                    if (!Boolean.class.isAssignableFrom(option.getValueClass())) {
+                        return "Invalid type for option: " + name + " - " + option.getValueClass();
+                    }
+                    break;
+                case IMAGE_BASE_OPTION_NAME:
+                    return validateAddressSpaceOffsetOption(option, language.getDefaultSpace());
+                case IMAGE_DATA_IMAGE_BASE_OPTION_NAME:
+                    return validateAddressSpaceOffsetOption(option, language.getDefaultDataSpace());
+            }
 		}
 		return null;
 	}

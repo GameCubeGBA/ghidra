@@ -132,85 +132,92 @@ public class SectionHeader implements StructConverter {
 					count = unpackNextValue(input);
 				}
 				PackedDataOpcodes opcode = PackedDataOpcodes.get(value >> 5);
-				if (opcode == PackedDataOpcodes.kPEFPkDataZero) {
-					index += count;
-				}
-				else if (opcode == PackedDataOpcodes.kPEFPkDataBlock) {
-					byte[] rawData = new byte[count];
-					int nRead = input.read(rawData);
-					if (nRead != count) {
-						throw new IllegalStateException(
-							"Unable to read enough bytes for " + opcode);
-					}
-					System.arraycopy(rawData, 0, data, index, rawData.length);
-					index += rawData.length;
-				}
-				else if (opcode == PackedDataOpcodes.kPEFPkDataRepeat) {
-					int repeatCount = unpackNextValue(input);
-					byte[] rawData = new byte[count];
-					int nRead = input.read(rawData);
-					if (nRead != rawData.length) {
-						throw new IllegalStateException(
-							"Unable to read enough bytes for " + opcode);
-					}
-					for (int i = 0; i < repeatCount - 1; ++i) {
-						System.arraycopy(rawData, 0, data, index, rawData.length);
-						index += rawData.length;
-					}
-				}
-				else if (opcode == PackedDataOpcodes.kPEFPkDataRepeatBlock) {
-					int commonSize = count;
-					int customSize = unpackNextValue(input);
-					int repeatCount = unpackNextValue(input);
+                switch (opcode) {
+                    case kPEFPkDataZero:
+                        index += count;
+                        break;
+                    case kPEFPkDataBlock: {
+                        byte[] rawData = new byte[count];
+                        int nRead = input.read(rawData);
+                        if (nRead != count) {
+                            throw new IllegalStateException(
+                                    "Unable to read enough bytes for " + opcode);
+                        }
+                        System.arraycopy(rawData, 0, data, index, rawData.length);
+                        index += rawData.length;
+                        break;
+                    }
+                    case kPEFPkDataRepeat: {
+                        int repeatCount = unpackNextValue(input);
+                        byte[] rawData = new byte[count];
+                        int nRead = input.read(rawData);
+                        if (nRead != rawData.length) {
+                            throw new IllegalStateException(
+                                    "Unable to read enough bytes for " + opcode);
+                        }
+                        for (int i = 0; i < repeatCount - 1; ++i) {
+                            System.arraycopy(rawData, 0, data, index, rawData.length);
+                            index += rawData.length;
+                        }
+                        break;
+                    }
+                    case kPEFPkDataRepeatBlock: {
+                        int commonSize = count;
+                        int customSize = unpackNextValue(input);
+                        int repeatCount = unpackNextValue(input);
 
-					byte[] commonData = new byte[commonSize];
-					int nCommonRead = input.read(commonData);
-					if (nCommonRead != commonData.length) {
-						throw new IllegalStateException(
-							"Unable to read enough common data bytes for " + opcode);
-					}
+                        byte[] commonData = new byte[commonSize];
+                        int nCommonRead = input.read(commonData);
+                        if (nCommonRead != commonData.length) {
+                            throw new IllegalStateException(
+                                    "Unable to read enough common data bytes for " + opcode);
+                        }
 
-					for (int i = 0; i < repeatCount; ++i) {
-						System.arraycopy(commonData, 0, data, index, commonData.length);
-						index += commonData.length;
+                        for (int i = 0; i < repeatCount; ++i) {
+                            System.arraycopy(commonData, 0, data, index, commonData.length);
+                            index += commonData.length;
 
-						byte[] customData = new byte[customSize];
-						int nCustomRead = input.read(customData);
-						if (nCustomRead != customData.length) {
-							throw new IllegalStateException(
-								"Unable to read enough custom data bytes for " + opcode);
-						}
-						System.arraycopy(customData, 0, data, index, customData.length);
-						index += customData.length;
-					}
+                            byte[] customData = new byte[customSize];
+                            int nCustomRead = input.read(customData);
+                            if (nCustomRead != customData.length) {
+                                throw new IllegalStateException(
+                                        "Unable to read enough custom data bytes for " + opcode);
+                            }
+                            System.arraycopy(customData, 0, data, index, customData.length);
+                            index += customData.length;
+                        }
 
-					//a final common data pattern is added at end...
-					System.arraycopy(commonData, 0, data, index, commonData.length);
-					index += commonData.length;
-				}
-				else if (opcode == PackedDataOpcodes.kPEFPkDataRepeatZero) {
-					int commonSize = count;
-					int customSize = unpackNextValue(input);
-					int repeatCount = unpackNextValue(input);
+                        //a final common data pattern is added at end...
+                        System.arraycopy(commonData, 0, data, index, commonData.length);
+                        index += commonData.length;
+                        break;
+                    }
+                    case kPEFPkDataRepeatZero: {
+                        int commonSize = count;
+                        int customSize = unpackNextValue(input);
+                        int repeatCount = unpackNextValue(input);
 
-					for (int i = 0; i < repeatCount; ++i) {
-						index += commonSize;//skip common size of zero bytes...
+                        for (int i = 0; i < repeatCount; ++i) {
+                            index += commonSize;//skip common size of zero bytes...
 
-						byte[] customData = new byte[customSize];
-						int nCustomRead = input.read(customData);
-						if (nCustomRead != customData.length) {
-							throw new IllegalStateException(
-								"Unable to read enough custom data bytes for " + opcode);
-						}
-						System.arraycopy(customData, 0, data, index, customData.length);
-						index += customData.length;
-					}
+                            byte[] customData = new byte[customSize];
+                            int nCustomRead = input.read(customData);
+                            if (nCustomRead != customData.length) {
+                                throw new IllegalStateException(
+                                        "Unable to read enough custom data bytes for " + opcode);
+                            }
+                            System.arraycopy(customData, 0, data, index, customData.length);
+                            index += customData.length;
+                        }
 
-					index += commonSize;//a final common size of zero bytes...
-				}
-				else {
-					Msg.error(this, "Unrecognized packed data opcode: " + opcode);
-				}
+                        index += commonSize;//a final common size of zero bytes...
+
+                        break;
+                    }
+                    default:
+                        Msg.error(this, "Unrecognized packed data opcode: " + opcode);
+                        break;
+                }
 			}
 			return data;
 		}

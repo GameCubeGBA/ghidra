@@ -443,7 +443,7 @@ public class FrontEndPluginScreenShots extends GhidraScreenShotGenerator {
 		runSwing(() -> {
 			SaveDataDialog dialog = new SaveDataDialog(tool);
 
-			dialog.showDialog(Arrays.asList(new DomainFile[] { program.getDomainFile() }));
+			dialog.showDialog(List.of(new DomainFile[]{program.getDomainFile()}));
 		}, false);
 
 		captureDialog();

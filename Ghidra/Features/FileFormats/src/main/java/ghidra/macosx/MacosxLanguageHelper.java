@@ -44,40 +44,41 @@ public final class MacosxLanguageHelper {
         String variant = "default";
         CompilerSpecID compilerSpecID = new CompilerSpecID( "default" );
 
-        if ( cpuType == CpuTypes.CPU_TYPE_ARM ) {
-            processor = ARM;
-            endian = Endian.LITTLE;
-            if ( cpuSubType == CpuSubTypes.CPU_SUBTYPE_ARM_V6 ) {
-                variant = "v6";
-            }
-            else if ( cpuSubType == CpuSubTypes.CPU_SUBTYPE_ARM_V7  ||
-            		  cpuSubType == CpuSubTypes.CPU_SUBTYPE_ARM_V7F ||
-            		  cpuSubType == CpuSubTypes.CPU_SUBTYPE_ARM_V7S ||
-            		  cpuSubType == CpuSubTypes.CPU_SUBTYPE_ARM_V7K ||
-            		  cpuSubType == CpuSubTypes.CPU_SUBTYPE_ARM_ALL ) {
-                variant = "v7";
-            }
+        switch (cpuType) {
+            case CpuTypes.CPU_TYPE_ARM:
+                processor = ARM;
+                endian = Endian.LITTLE;
+                if (cpuSubType == CpuSubTypes.CPU_SUBTYPE_ARM_V6) {
+                    variant = "v6";
+                } else if (cpuSubType == CpuSubTypes.CPU_SUBTYPE_ARM_V7 ||
+                        cpuSubType == CpuSubTypes.CPU_SUBTYPE_ARM_V7F ||
+                        cpuSubType == CpuSubTypes.CPU_SUBTYPE_ARM_V7S ||
+                        cpuSubType == CpuSubTypes.CPU_SUBTYPE_ARM_V7K ||
+                        cpuSubType == CpuSubTypes.CPU_SUBTYPE_ARM_ALL) {
+                    variant = "v7";
+                }
+                break;
+            case CpuTypes.CPU_TYPE_X86:
+            case CpuTypes.CPU_TYPE_X86_64:
+                processor = x86;
+                endian = Endian.LITTLE;
+                size = cpuType == CpuTypes.CPU_TYPE_X86_64 ? 64 : 32;
+                compilerSpecID = new CompilerSpecID("gcc");
+                break;
+            case CpuTypes.CPU_TYPE_POWERPC:
+            case CpuTypes.CPU_TYPE_POWERPC64:
+                processor = PowerPC;
+                endian = Endian.BIG;
+                size = cpuType == CpuTypes.CPU_TYPE_POWERPC64 ? 64 : 32;
+                compilerSpecID = new CompilerSpecID("macosx");
+                break;
+            case CpuTypes.CPU_TYPE_ARM_64:
+                processor = ARM64;
+                endian = Endian.LITTLE;
+                size = 64;
+                variant = "v8A";
+                break;
         }
-        else if ( cpuType == CpuTypes.CPU_TYPE_X86 || 
-        		  cpuType == CpuTypes.CPU_TYPE_X86_64 ) {
-            processor = x86;
-            endian = Endian.LITTLE;
-            size = cpuType == CpuTypes.CPU_TYPE_X86_64 ? 64 : 32;
-            compilerSpecID = new CompilerSpecID( "gcc" );
-        }
-        else if ( cpuType == CpuTypes.CPU_TYPE_POWERPC || 
-        		  cpuType == CpuTypes.CPU_TYPE_POWERPC64 ) {
-            processor = PowerPC;
-            endian = Endian.BIG;
-            size = cpuType == CpuTypes.CPU_TYPE_POWERPC64 ? 64 : 32;
-            compilerSpecID = new CompilerSpecID( "macosx" );
-        }
-        else if ( cpuType == CpuTypes.CPU_TYPE_ARM_64) {
-          processor = ARM64;
-          endian = Endian.LITTLE;
-          size = 64;
-          variant = "v8A";
-      }
 
         LanguageCompilerSpecQuery query = new LanguageCompilerSpecQuery( processor, endian, size, variant, compilerSpecID );
 

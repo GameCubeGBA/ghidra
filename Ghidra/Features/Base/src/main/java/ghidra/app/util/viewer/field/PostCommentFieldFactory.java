@@ -340,27 +340,29 @@ public class PostCommentFieldFactory extends FieldFactory {
 	public void fieldOptionsChanged(Options options, String optionName, Object oldValue,
 			Object newValue) {
 
-		if (optionName.equals(FLAG_FUNCTION_EXIT_OPTION)) {
-			flagFunctionExits = ((Boolean) newValue).booleanValue();
-			model.update();
-		}
-		else if (optionName.equals(FLAG_TERMINATOR_OPTION)) {
-			flagJMPsRETs = ((Boolean) newValue).booleanValue();
-			model.update();
-		}
-		else if (optionName.equals(LINES_AFTER_BLOCKS_OPTION)) {
-			nLinesAfterBlocks = ((Integer) newValue).intValue();
-			if (nLinesAfterBlocks < 0) {
-				nLinesAfterBlocks = 0;
-			}
-			model.update();
-		}
-		else if (optionName.equals(ENABLE_WORD_WRAP_MSG)) {
-			isWordWrap = ((Boolean) newValue).booleanValue();
-		}
-		else if (optionName.equals(ENABLE_ALWAYS_SHOW_AUTOMATIC_MSG)) {
-			alwaysShowAutomatic = ((Boolean) newValue).booleanValue();
-		}
+        switch (optionName) {
+            case FLAG_FUNCTION_EXIT_OPTION:
+                flagFunctionExits = ((Boolean) newValue).booleanValue();
+                model.update();
+                break;
+            case FLAG_TERMINATOR_OPTION:
+                flagJMPsRETs = ((Boolean) newValue).booleanValue();
+                model.update();
+                break;
+            case LINES_AFTER_BLOCKS_OPTION:
+                nLinesAfterBlocks = ((Integer) newValue).intValue();
+                if (nLinesAfterBlocks < 0) {
+                    nLinesAfterBlocks = 0;
+                }
+                model.update();
+                break;
+            case ENABLE_WORD_WRAP_MSG:
+                isWordWrap = ((Boolean) newValue).booleanValue();
+                break;
+            case ENABLE_ALWAYS_SHOW_AUTOMATIC_MSG:
+                alwaysShowAutomatic = ((Boolean) newValue).booleanValue();
+                break;
+        }
 	}
 
 	@Override

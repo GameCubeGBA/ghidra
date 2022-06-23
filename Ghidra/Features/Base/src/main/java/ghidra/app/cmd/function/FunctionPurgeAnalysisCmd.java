@@ -189,18 +189,20 @@ public class FunctionPurgeAnalysisCmd extends BackgroundCommand {
 		PrototypeModel model = null;
 		try {
 			byte val = purgeInstruction.getBytes()[0];
-			if (val == (byte) 0xc3) {
-				model = nearFarModels[CDECL_NEAR];
-			}
-			else if (val == (byte) 0xcb) {
-				model = nearFarModels[CDECL_FAR];
-			}
-			else if (val == (byte) 0xc2) {
-				model = nearFarModels[STDCALL_NEAR];
-			}
-			else if (val == (byte) 0xca) {
-				model = nearFarModels[STDCALL_FAR];
-			}
+            switch (val) {
+                case (byte) 0xc3:
+                    model = nearFarModels[CDECL_NEAR];
+                    break;
+                case (byte) 0xcb:
+                    model = nearFarModels[CDECL_FAR];
+                    break;
+                case (byte) 0xc2:
+                    model = nearFarModels[STDCALL_NEAR];
+                    break;
+                case (byte) 0xca:
+                    model = nearFarModels[STDCALL_FAR];
+                    break;
+            }
 		}
 		catch (MemoryAccessException e) {
 			return;

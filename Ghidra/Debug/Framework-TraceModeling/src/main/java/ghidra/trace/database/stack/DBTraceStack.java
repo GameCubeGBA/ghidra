@@ -199,9 +199,7 @@ public class DBTraceStack extends DBAnnotatedObject implements TraceStack {
 			else {
 				List<DBTraceStackFrame> toAdd =
 					Arrays.asList(new DBTraceStackFrame[depth - curDepth]);
-				for (int i = 0; i < toAdd.size(); i++) {
-					toAdd.set(i, manager.createFrame(this));
-				}
+				toAdd.replaceAll(ignored -> manager.createFrame(this));
 				if (atInner) {
 					frames.addAll(0, toAdd);
 					doUpdateFrameDepths(0, frames.size());

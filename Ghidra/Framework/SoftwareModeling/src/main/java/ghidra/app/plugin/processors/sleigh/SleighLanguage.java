@@ -635,219 +635,229 @@ public class SleighLanguage implements Language {
 		XmlElement el = parser.start("processor_spec");
 		while (parser.peek().isStart()) {
 			String elName = parser.peek().getName();
-			if (elName.equals("properties")) {
-				XmlElement subel = parser.start();
-				while (!parser.peek().isEnd()) {
-					XmlElement next = parser.start("property");
-					String key = next.getAttribute("key");
-					String value = next.getAttribute("value");
-					properties.put(key, value);
-					parser.end(next);
-				}
-				parser.end(subel);
-			}
-			else if (elName.equals("programcounter")) {
-				XmlElement subel = parser.start();
-				setProgramCounter(subel.getAttribute("register"));
-				parser.end(subel);
-			}
-			else if (elName.equals("data_space")) {
-				XmlElement subel = parser.start();
-				setDefaultDataSpace(subel.getAttribute("space"));
-				String overrideString = subel.getAttribute("ptr_wordsize");
-				if (overrideString != null) {
-					int val = SpecXmlUtils.decodeInt(overrideString);
-					if (val <= 0 || val >= 32) {
-						throw new SleighException("Bad ptr_wordsize attribute");
-					}
-					defaultPointerWordSize = val;
-				}
-				parser.end(subel);
-			}
-			else if (elName.equals("context_data")) {
-				XmlElement subel = parser.start();
-				while (!parser.peek().isEnd()) {
-					XmlElement next = parser.start();
-					boolean isContext = next.getName().equals("context_set");
-					Pair<Address, Address> range = parseRange(next);
-					while (parser.peek().getName().equals("set")) {
-						XmlElement set = parser.start();
-						String name = set.getAttribute("name");
-						String sValue = set.getAttribute("val");
-						int radix = 10;
-						if (sValue.startsWith("0x") || sValue.startsWith("0X")) {
-							sValue = sValue.substring(2);
-							radix = 16;
-						}
-						BigInteger val;
-						try {
-							val = new BigInteger(sValue, radix);
-						}
-						catch (Exception e) {
-							val = BigInteger.valueOf(0);
-						}
-						Register reg = registerBuilder.getRegister(name);
-						boolean test;
-						if (isContext) {
-							test = reg == null || !reg.isProcessorContext();
-						}
-						else {
-							test = reg == null || reg.isProcessorContext();
-						}
-						if (test) {
-							throw new SleighException("Bad register name: " + name);
-						}
-						addContextSetting(reg, val, range.first, range.second);
-						// skip the end tag
-						parser.end(set);
-					}
-					// skip the end tag
-					parser.end(next);
-				}
-				parser.end(subel);
-			}
-			else if (elName.equals("volatile")) {
-				XmlElement subel = parser.start();
-				while (!parser.peek().getName().equals("volatile")) {
-					XmlElement next = parser.start();
-					if (next.getName().equals("register")) {
-						throw new SleighException("no support for volatile registers yet");
-					}
-					Pair<Address, Address> range = parseRange(next);
-					if (volatileAddresses == null) {
-						volatileAddresses = new AddressSet();
-					}
-					volatileAddresses.addRange(range.first, range.second);
-					// skip the end tag
-					parser.end(next);
-				}
-				parser.end(subel);
-			}
-			else if (elName.equals("jumpassist")) {
-				XmlElement subel = parser.start();
-				String source = "pspec: " + getLanguageID().getIdAsString();
-				String name = subel.getAttribute("name");
-				while (parser.peek().isStart()) {
-					InjectPayloadSleigh payload = new InjectPayloadJumpAssist(name, source);
-					payload.restoreXml(parser, this);
-					addAdditionInject(payload);
-				}
-				parser.end(subel);
-			}
-			else if (elName.equals("register_data")) {
-				XmlElement subel = parser.start();
-				while (parser.peek().getName().equals("register")) {
-					XmlElement reg = parser.start();
-					String registerName = reg.getAttribute("name");
-					String registerRename = reg.getAttribute("rename");
-					String registerAlias = reg.getAttribute("alias");
-					String groupName = reg.getAttribute("group");
-					boolean isHidden = SpecXmlUtils.decodeBoolean(reg.getAttribute("hidden"));
-					if (registerRename != null) {
-						if (!registerBuilder.renameRegister(registerName, registerRename)) {
-							throw new SleighException(
-								"error renaming " + registerName + " to " + registerRename);
-						}
-						registerName = registerRename;
-					}
+            switch (elName) {
+                case "properties": {
+                    XmlElement subel = parser.start();
+                    while (!parser.peek().isEnd()) {
+                        XmlElement next = parser.start("property");
+                        String key = next.getAttribute("key");
+                        String value = next.getAttribute("value");
+                        properties.put(key, value);
+                        parser.end(next);
+                    }
+                    parser.end(subel);
+                    break;
+                }
+                case "programcounter": {
+                    XmlElement subel = parser.start();
+                    setProgramCounter(subel.getAttribute("register"));
+                    parser.end(subel);
+                    break;
+                }
+                case "data_space": {
+                    XmlElement subel = parser.start();
+                    setDefaultDataSpace(subel.getAttribute("space"));
+                    String overrideString = subel.getAttribute("ptr_wordsize");
+                    if (overrideString != null) {
+                        int val = SpecXmlUtils.decodeInt(overrideString);
+                        if (val <= 0 || val >= 32) {
+                            throw new SleighException("Bad ptr_wordsize attribute");
+                        }
+                        defaultPointerWordSize = val;
+                    }
+                    parser.end(subel);
+                    break;
+                }
+                case "context_data": {
+                    XmlElement subel = parser.start();
+                    while (!parser.peek().isEnd()) {
+                        XmlElement next = parser.start();
+                        boolean isContext = next.getName().equals("context_set");
+                        Pair<Address, Address> range = parseRange(next);
+                        while (parser.peek().getName().equals("set")) {
+                            XmlElement set = parser.start();
+                            String name = set.getAttribute("name");
+                            String sValue = set.getAttribute("val");
+                            int radix = 10;
+                            if (sValue.startsWith("0x") || sValue.startsWith("0X")) {
+                                sValue = sValue.substring(2);
+                                radix = 16;
+                            }
+                            BigInteger val;
+                            try {
+                                val = new BigInteger(sValue, radix);
+                            } catch (Exception e) {
+                                val = BigInteger.valueOf(0);
+                            }
+                            Register reg = registerBuilder.getRegister(name);
+                            boolean test;
+                            if (isContext) {
+                                test = reg == null || !reg.isProcessorContext();
+                            } else {
+                                test = reg == null || reg.isProcessorContext();
+                            }
+                            if (test) {
+                                throw new SleighException("Bad register name: " + name);
+                            }
+                            addContextSetting(reg, val, range.first, range.second);
+                            // skip the end tag
+                            parser.end(set);
+                        }
+                        // skip the end tag
+                        parser.end(next);
+                    }
+                    parser.end(subel);
+                    break;
+                }
+                case "volatile": {
+                    XmlElement subel = parser.start();
+                    while (!parser.peek().getName().equals("volatile")) {
+                        XmlElement next = parser.start();
+                        if (next.getName().equals("register")) {
+                            throw new SleighException("no support for volatile registers yet");
+                        }
+                        Pair<Address, Address> range = parseRange(next);
+                        if (volatileAddresses == null) {
+                            volatileAddresses = new AddressSet();
+                        }
+                        volatileAddresses.addRange(range.first, range.second);
+                        // skip the end tag
+                        parser.end(next);
+                    }
+                    parser.end(subel);
+                    break;
+                }
+                case "jumpassist": {
+                    XmlElement subel = parser.start();
+                    String source = "pspec: " + getLanguageID().getIdAsString();
+                    String name = subel.getAttribute("name");
+                    while (parser.peek().isStart()) {
+                        InjectPayloadSleigh payload = new InjectPayloadJumpAssist(name, source);
+                        payload.restoreXml(parser, this);
+                        addAdditionInject(payload);
+                    }
+                    parser.end(subel);
+                    break;
+                }
+                case "register_data": {
+                    XmlElement subel = parser.start();
+                    while (parser.peek().getName().equals("register")) {
+                        XmlElement reg = parser.start();
+                        String registerName = reg.getAttribute("name");
+                        String registerRename = reg.getAttribute("rename");
+                        String registerAlias = reg.getAttribute("alias");
+                        String groupName = reg.getAttribute("group");
+                        boolean isHidden = SpecXmlUtils.decodeBoolean(reg.getAttribute("hidden"));
+                        if (registerRename != null) {
+                            if (!registerBuilder.renameRegister(registerName, registerRename)) {
+                                throw new SleighException(
+                                        "error renaming " + registerName + " to " + registerRename);
+                            }
+                            registerName = registerRename;
+                        }
 
-					Register register = registerBuilder.getRegister(registerName);
-					if (register != null) {
-						if (!registerDataSet.add(registerName)) {
-							Msg.error(this, "duplicate register " + registerName + ": " +
-								description.getSpecFile());
-						}
-						if (registerAlias != null) {
-							registerBuilder.addAlias(registerName, registerAlias);
-						}
-						if (groupName != null) {
-							registerBuilder.setGroup(registerName, groupName);
-						}
-						if (isHidden) {
-							registerBuilder.setFlag(registerName, Register.TYPE_HIDDEN);
-						}
-						String sizes = reg.getAttribute("vector_lane_sizes");
-						if (sizes != null) {
-							String[] lanes = sizes.split(",");
-							for (String lane : lanes) {
-								int laneSize = SpecXmlUtils.decodeInt(lane.trim());
-								registerBuilder.addLaneSize(registerName, laneSize);
-							}
-						}
-					}
-					else {
-						Msg.error(this,
-							"unknown register " + registerName + ": " + description.getSpecFile());
-					}
-					// skip the end tag
-					parser.end(reg);
-				}
-				parser.end(subel);
-			}
-			else if (elName.equals("default_symbols")) {
-				XmlElement subel = parser.start();
-				while (parser.peek().getName().equals("symbol")) {
-					XmlElement symbol = parser.start();
-					String labelName = symbol.getAttribute("name");
-					String addressString = symbol.getAttribute("address");
-					String typeString = symbol.getAttribute("type");
-					ProcessorSymbolType type = ProcessorSymbolType.getType(typeString);
-					boolean isEntry = SpecXmlUtils.decodeBoolean(symbol.getAttribute("entry"));
-					Address address = addressFactory.getAddress(addressString);
-					if (address == null) {
-						Msg.error(this, "invalid symbol address \"" + addressString + "\": " +
-							description.getSpecFile());
-					}
-					else {
-						AddressLabelInfo info = new AddressLabelInfo(address, labelName, false,
-							null, SourceType.IMPORTED, isEntry, type);
-						defaultSymbols.add(info);
-					}
-					// skip the end tag
-					parser.end(symbol);
-				}
-				parser.end(subel);
-			}
-			else if (elName.equals("default_memory_blocks")) {
-				XmlElement subel = parser.start();
-				List<MemoryBlockDefinition> list = new ArrayList<>();
-				while (parser.peek().getName().equals("memory_block")) {
-					XmlElement mblock = parser.start();
-					list.add(new MemoryBlockDefinition(mblock));
-					// skip the end tag
-					parser.end(mblock);
-				}
-				parser.end(subel);
-				defaultMemoryBlocks = new MemoryBlockDefinition[list.size()];
-				list.toArray(defaultMemoryBlocks);
-			}
-			else if (elName.equals("incidentalcopy")) {
-				XmlElement subel = parser.start();
-				while (parser.peek().isStart()) {
-					parser.discardSubTree();
-				}
-				parser.end(subel);
-			}
-			else if (elName.equals("inferptrbounds")) {
-				XmlElement subel = parser.start();
-				while (parser.peek().isStart()) {
-					parser.discardSubTree();
-				}
-				parser.end(subel);
-			}
-			else if (elName.equals("segmentop")) {
-				String source = "pspec: " + getLanguageID().getIdAsString();
-				InjectPayloadSleigh payload = new InjectPayloadSegment(source);
-				payload.restoreXml(parser, this);
-				addAdditionInject(payload);
-			}
-			else if (elName.equals("segmented_address")) {
-				XmlElement subel = parser.start();
-				parser.end(subel);
-			}
-			else {
-				throw new XmlParseException("Unknown pspec tag: " + elName);
-			}
+                        Register register = registerBuilder.getRegister(registerName);
+                        if (register != null) {
+                            if (!registerDataSet.add(registerName)) {
+                                Msg.error(this, "duplicate register " + registerName + ": " +
+                                        description.getSpecFile());
+                            }
+                            if (registerAlias != null) {
+                                registerBuilder.addAlias(registerName, registerAlias);
+                            }
+                            if (groupName != null) {
+                                registerBuilder.setGroup(registerName, groupName);
+                            }
+                            if (isHidden) {
+                                registerBuilder.setFlag(registerName, Register.TYPE_HIDDEN);
+                            }
+                            String sizes = reg.getAttribute("vector_lane_sizes");
+                            if (sizes != null) {
+                                String[] lanes = sizes.split(",");
+                                for (String lane : lanes) {
+                                    int laneSize = SpecXmlUtils.decodeInt(lane.trim());
+                                    registerBuilder.addLaneSize(registerName, laneSize);
+                                }
+                            }
+                        } else {
+                            Msg.error(this,
+                                    "unknown register " + registerName + ": " + description.getSpecFile());
+                        }
+                        // skip the end tag
+                        parser.end(reg);
+                    }
+                    parser.end(subel);
+                    break;
+                }
+                case "default_symbols": {
+                    XmlElement subel = parser.start();
+                    while (parser.peek().getName().equals("symbol")) {
+                        XmlElement symbol = parser.start();
+                        String labelName = symbol.getAttribute("name");
+                        String addressString = symbol.getAttribute("address");
+                        String typeString = symbol.getAttribute("type");
+                        ProcessorSymbolType type = ProcessorSymbolType.getType(typeString);
+                        boolean isEntry = SpecXmlUtils.decodeBoolean(symbol.getAttribute("entry"));
+                        Address address = addressFactory.getAddress(addressString);
+                        if (address == null) {
+                            Msg.error(this, "invalid symbol address \"" + addressString + "\": " +
+                                    description.getSpecFile());
+                        } else {
+                            AddressLabelInfo info = new AddressLabelInfo(address, labelName, false,
+                                    null, SourceType.IMPORTED, isEntry, type);
+                            defaultSymbols.add(info);
+                        }
+                        // skip the end tag
+                        parser.end(symbol);
+                    }
+                    parser.end(subel);
+                    break;
+                }
+                case "default_memory_blocks": {
+                    XmlElement subel = parser.start();
+                    List<MemoryBlockDefinition> list = new ArrayList<>();
+                    while (parser.peek().getName().equals("memory_block")) {
+                        XmlElement mblock = parser.start();
+                        list.add(new MemoryBlockDefinition(mblock));
+                        // skip the end tag
+                        parser.end(mblock);
+                    }
+                    parser.end(subel);
+                    defaultMemoryBlocks = new MemoryBlockDefinition[list.size()];
+                    list.toArray(defaultMemoryBlocks);
+                    break;
+                }
+                case "incidentalcopy": {
+                    XmlElement subel = parser.start();
+                    while (parser.peek().isStart()) {
+                        parser.discardSubTree();
+                    }
+                    parser.end(subel);
+                    break;
+                }
+                case "inferptrbounds": {
+                    XmlElement subel = parser.start();
+                    while (parser.peek().isStart()) {
+                        parser.discardSubTree();
+                    }
+                    parser.end(subel);
+                    break;
+                }
+                case "segmentop": {
+                    String source = "pspec: " + getLanguageID().getIdAsString();
+                    InjectPayloadSleigh payload = new InjectPayloadSegment(source);
+                    payload.restoreXml(parser, this);
+                    addAdditionInject(payload);
+                    break;
+                }
+                case "segmented_address": {
+                    XmlElement subel = parser.start();
+                    parser.end(subel);
+                    break;
+                }
+                default:
+                    throw new XmlParseException("Unknown pspec tag: " + elName);
+            }
 		}
 		parser.end(el);
 	}

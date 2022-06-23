@@ -197,20 +197,22 @@ public class PreCommentFieldFactory extends FieldFactory {
 	public void fieldOptionsChanged(Options options, String optionName, Object oldValue,
 			Object newValue) {
 
-		if (optionName.equals(FLAG_FUNCTION_ENTRY_OPTION)) {
-			flagFunctionEntry = ((Boolean) newValue).booleanValue();
-			model.update();
-		}
-		else if (optionName.equals(FLAG_SUBROUTINE_ENTRY_OPTION)) {
-			flagSubroutineEntry = ((Boolean) newValue).booleanValue();
-			model.update();
-		}
-		else if (optionName.equals(ENABLE_WORD_WRAP_MSG)) {
-			isWordWrap = ((Boolean) newValue).booleanValue();
-		}
-		else if (optionName.equals(ENABLE_ALWAYS_SHOW_AUTOMATIC_MSG)) {
-			alwaysShowAutomatic = ((Boolean) newValue).booleanValue();
-		}
+        switch (optionName) {
+            case FLAG_FUNCTION_ENTRY_OPTION:
+                flagFunctionEntry = ((Boolean) newValue).booleanValue();
+                model.update();
+                break;
+            case FLAG_SUBROUTINE_ENTRY_OPTION:
+                flagSubroutineEntry = ((Boolean) newValue).booleanValue();
+                model.update();
+                break;
+            case ENABLE_WORD_WRAP_MSG:
+                isWordWrap = ((Boolean) newValue).booleanValue();
+                break;
+            case ENABLE_ALWAYS_SHOW_AUTOMATIC_MSG:
+                alwaysShowAutomatic = ((Boolean) newValue).booleanValue();
+                break;
+        }
 	}
 
 	private String[] getInstructionAutoComments(Instruction instr) {

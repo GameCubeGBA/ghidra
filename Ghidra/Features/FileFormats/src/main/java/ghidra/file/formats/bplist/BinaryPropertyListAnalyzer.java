@@ -105,21 +105,22 @@ public class BinaryPropertyListAnalyzer extends FileFormatAnalyzer {
 	private void markupOffsetTable(Program program, BinaryPropertyListTrailer trailer,
 			Address baseAddress, TaskMonitor monitor) throws Exception {
 		DataType offsetDataType = null;
-		if (trailer.getOffsetSize() == 1) {
-			offsetDataType = new ByteDataType();
-		}
-		else if (trailer.getOffsetSize() == 2) {
-			offsetDataType = new WordDataType();
-		}
-		else if (trailer.getOffsetSize() == 4) {
-			offsetDataType = new DWordDataType();
-		}
-		else if (trailer.getOffsetSize() == 8) {
-			offsetDataType = new QWordDataType();
-		}
-		else {
-			throw new RuntimeException("unexpected offset table element size");
-		}
+        switch (trailer.getOffsetSize()) {
+            case 1:
+                offsetDataType = new ByteDataType();
+                break;
+            case 2:
+                offsetDataType = new WordDataType();
+                break;
+            case 4:
+                offsetDataType = new DWordDataType();
+                break;
+            case 8:
+                offsetDataType = new QWordDataType();
+                break;
+            default:
+                throw new RuntimeException("unexpected offset table element size");
+        }
 		Address offsetTableAddress = baseAddress.add(trailer.getOffsetTableOffset());
 		Address end = offsetTableAddress.add(trailer.getObjectCount() * offsetDataType.getLength());
 		ArrayDataType datatype =

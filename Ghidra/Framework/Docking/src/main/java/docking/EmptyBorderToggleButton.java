@@ -106,18 +106,20 @@ public class EmptyBorderToggleButton extends EmptyBorderButton {
 
 	protected void doPropertyChange(PropertyChangeEvent e) {
 		String name = e.getPropertyName();
-		if (name.equals("enabled")) {
-			setEnabled(((Boolean) e.getNewValue()).booleanValue());
-		}
-		else if (name.equals(Action.SHORT_DESCRIPTION)) {
-			setToolTipText((String) e.getNewValue());
-		}
-		else if (name.equals(Action.SMALL_ICON)) {
-			setIcon((Icon) e.getNewValue());
-		}
-		else if (name.equals("CheckBoxState")) {
-			updateBorder();
-		}
+        switch (name) {
+            case "enabled":
+                setEnabled(((Boolean) e.getNewValue()).booleanValue());
+                break;
+            case Action.SHORT_DESCRIPTION:
+                setToolTipText((String) e.getNewValue());
+                break;
+            case Action.SMALL_ICON:
+                setIcon((Icon) e.getNewValue());
+                break;
+            case "CheckBoxState":
+                updateBorder();
+                break;
+        }
 	}
 
 	@Override

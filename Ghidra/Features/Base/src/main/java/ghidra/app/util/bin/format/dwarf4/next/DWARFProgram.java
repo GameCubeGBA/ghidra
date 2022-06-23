@@ -465,9 +465,7 @@ public class DWARFProgram implements Closeable {
 	}
 
 	private List<String> ensureSafeNameLengths(List<String> strs) {
-		for (int i = 0; i < strs.size(); i++) {
-			strs.set(i, ensureSafeNameLength(strs.get(i)));
-		}
+		strs.replaceAll(this::ensureSafeNameLength);
 		return strs;
 	}
 

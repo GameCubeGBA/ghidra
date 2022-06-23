@@ -704,35 +704,40 @@ public class VTFunctionAssociationProvider extends ComponentProviderAdapter
 		for (int i = 0; i < ev.numRecords(); i++) {
 			DomainObjectChangeRecord doRecord = ev.getChangeRecord(i);
 			int eventType = doRecord.getEventType();
-			if (eventType == DOCR_VT_MATCH_ADDED) {
-				VersionTrackingChangeRecord vtRecord = (VersionTrackingChangeRecord) doRecord;
-				VTMatch match = (VTMatch) vtRecord.getNewValue();
-				sourceFunctionsModel.matchAdded(match);
-				destinationFunctionsModel.matchAdded(match);
-				contextChanged = true;
-			}
-			else if (eventType == DOCR_VT_MATCH_DELETED) {
-				VersionTrackingChangeRecord vtRecord = (VersionTrackingChangeRecord) doRecord;
-				DeletedMatch deletedMatch = (DeletedMatch) vtRecord.getOldValue();
-				sourceFunctionsModel.matchRemoved(deletedMatch);
-				destinationFunctionsModel.matchRemoved(deletedMatch);
-				contextChanged = true;
-			}
-			else if (eventType == DOCR_VT_ASSOCIATION_STATUS_CHANGED) {
-				VersionTrackingChangeRecord vtRecord = (VersionTrackingChangeRecord) doRecord;
-				VTAssociation association = (VTAssociation) vtRecord.getObject();
-				sourceFunctionsModel.associationChanged(association);
-				destinationFunctionsModel.associationChanged(association);
-				contextChanged = true;
-			}
-			else if (eventType == ChangeManager.DOCR_FUNCTION_ADDED) {
-				functionAdded((ProgramChangeRecord) doRecord);
-				contextChanged = true;
-			}
-			else if (eventType == ChangeManager.DOCR_FUNCTION_REMOVED) {
-				functionRemoved((ProgramChangeRecord) doRecord);
-				contextChanged = true;
-			}
+            switch (eventType) {
+                case DOCR_VT_MATCH_ADDED: {
+                    VersionTrackingChangeRecord vtRecord = (VersionTrackingChangeRecord) doRecord;
+                    VTMatch match = (VTMatch) vtRecord.getNewValue();
+                    sourceFunctionsModel.matchAdded(match);
+                    destinationFunctionsModel.matchAdded(match);
+                    contextChanged = true;
+                    break;
+                }
+                case DOCR_VT_MATCH_DELETED: {
+                    VersionTrackingChangeRecord vtRecord = (VersionTrackingChangeRecord) doRecord;
+                    DeletedMatch deletedMatch = (DeletedMatch) vtRecord.getOldValue();
+                    sourceFunctionsModel.matchRemoved(deletedMatch);
+                    destinationFunctionsModel.matchRemoved(deletedMatch);
+                    contextChanged = true;
+                    break;
+                }
+                case DOCR_VT_ASSOCIATION_STATUS_CHANGED: {
+                    VersionTrackingChangeRecord vtRecord = (VersionTrackingChangeRecord) doRecord;
+                    VTAssociation association = (VTAssociation) vtRecord.getObject();
+                    sourceFunctionsModel.associationChanged(association);
+                    destinationFunctionsModel.associationChanged(association);
+                    contextChanged = true;
+                    break;
+                }
+                case ChangeManager.DOCR_FUNCTION_ADDED:
+                    functionAdded((ProgramChangeRecord) doRecord);
+                    contextChanged = true;
+                    break;
+                case ChangeManager.DOCR_FUNCTION_REMOVED:
+                    functionRemoved((ProgramChangeRecord) doRecord);
+                    contextChanged = true;
+                    break;
+            }
 		}
 
 		if (contextChanged) {

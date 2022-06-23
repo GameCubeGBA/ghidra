@@ -460,8 +460,8 @@ public class DebuggerEmulationServicePlugin extends Plugin implements DebuggerEm
 				List<CacheKey> toRemove = eldest.stream()
 						.filter(k -> k.trace == evt.getTrace())
 						.collect(Collectors.toList());
-				cache.keySet().removeAll(toRemove);
-				eldest.removeAll(toRemove);
+				toRemove.forEach(cache.keySet()::remove);
+				toRemove.forEach(eldest::remove);
 				assert cache.size() == eldest.size();
 			}
 		}

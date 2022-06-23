@@ -179,30 +179,32 @@ public class EolCommentFieldFactory extends FieldFactory {
 	@Override
 	public void fieldOptionsChanged(Options options, String optionName, Object oldValue,
 			Object newValue) {
-		if (optionName.equals(MAX_DISPLAY_LINES_MSG)) {
-			setMaximumLinesToDisplay(((Integer) newValue).intValue(), options);
-		}
-		else if (optionName.equals(ENABLE_WORD_WRAP_MSG)) {
-			isWordWrap = ((Boolean) newValue).booleanValue();
-		}
-		else if (optionName.equals(ENABLE_SHOW_SEMICOLON_MSG)) {
-			showSemicolon = ((Boolean) newValue).booleanValue();
-		}
-		else if (optionName.equals(ENABLE_ALWAYS_SHOW_REPEATABLE_MSG)) {
-			alwaysShowRepeatable = ((Boolean) newValue).booleanValue();
-		}
-		else if (optionName.equals(ENABLE_ALWAYS_SHOW_REF_REPEATABLE_MSG)) {
-			alwaysShowRefRepeatables = ((Boolean) newValue).booleanValue();
-		}
-		else if (optionName.equals(ENABLE_ALWAYS_SHOW_AUTOMATIC_MSG)) {
-			alwaysShowAutomatic = ((Boolean) newValue).booleanValue();
-		}
-		else if (optionName.equals(USE_ABBREVIATED_AUTOMITIC_COMMENT_MSG)) {
-			useAbbreviatedAutomatic = ((Boolean) newValue).booleanValue();
-		}
-		else if (optionName.equals(ENABLE_PREPEND_REF_ADDRESS_MSG)) {
-			prependRefAddress = ((Boolean) newValue).booleanValue();
-		}
+        switch (optionName) {
+            case MAX_DISPLAY_LINES_MSG:
+                setMaximumLinesToDisplay(((Integer) newValue).intValue(), options);
+                break;
+            case ENABLE_WORD_WRAP_MSG:
+                isWordWrap = ((Boolean) newValue).booleanValue();
+                break;
+            case ENABLE_SHOW_SEMICOLON_MSG:
+                showSemicolon = ((Boolean) newValue).booleanValue();
+                break;
+            case ENABLE_ALWAYS_SHOW_REPEATABLE_MSG:
+                alwaysShowRepeatable = ((Boolean) newValue).booleanValue();
+                break;
+            case ENABLE_ALWAYS_SHOW_REF_REPEATABLE_MSG:
+                alwaysShowRefRepeatables = ((Boolean) newValue).booleanValue();
+                break;
+            case ENABLE_ALWAYS_SHOW_AUTOMATIC_MSG:
+                alwaysShowAutomatic = ((Boolean) newValue).booleanValue();
+                break;
+            case USE_ABBREVIATED_AUTOMITIC_COMMENT_MSG:
+                useAbbreviatedAutomatic = ((Boolean) newValue).booleanValue();
+                break;
+            case ENABLE_PREPEND_REF_ADDRESS_MSG:
+                prependRefAddress = ((Boolean) newValue).booleanValue();
+                break;
+        }
 	}
 
 	@Override

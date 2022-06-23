@@ -75,21 +75,23 @@ public class DbgStepCommand extends AbstractDbgCommand<Void> {
 		String cmd = "";
 		String prefix = id == null ? "" : "~" + id.id + " ";
 		DebugControl control = manager.getControl();
-		if (suffix.equals(ExecSuffix.STEP_INSTRUCTION)) {
-			cmd = "t";
-			//control.setExecutionStatus(DebugStatus.STEP_INTO);
-		}
-		else if (suffix.equals(ExecSuffix.NEXT_INSTRUCTION)) {
-			cmd = "p";
-			//control.setExecutionStatus(DebugStatus.STEP_OVER);
-		}
-		else if (suffix.equals(ExecSuffix.FINISH)) {
-			cmd = "gu";
-			//control.setExecutionStatus(DebugStatus.STEP_BRANCH);
-		}
-		else if (suffix.equals(ExecSuffix.EXTENDED)) {
-			cmd = getLastCommand();
-		}
+        switch (suffix) {
+            case STEP_INSTRUCTION:
+                cmd = "t";
+                //control.setExecutionStatus(DebugStatus.STEP_INTO);
+                break;
+            case NEXT_INSTRUCTION:
+                cmd = "p";
+                //control.setExecutionStatus(DebugStatus.STEP_OVER);
+                break;
+            case FINISH:
+                cmd = "gu";
+                //control.setExecutionStatus(DebugStatus.STEP_BRANCH);
+                break;
+            case EXTENDED:
+                cmd = getLastCommand();
+                break;
+        }
 		DbgThreadImpl eventThread = manager.getEventThread();
 		if (eventThread != null && eventThread.getId().equals(id)) {
 			control.execute(cmd);

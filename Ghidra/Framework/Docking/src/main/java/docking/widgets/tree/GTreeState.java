@@ -146,12 +146,8 @@ public class GTreeState {
 	}
 
 	public void updateStateForMovedNodes() {
-		for (int i = 0; i < expandedPaths.size(); i++) {
-			expandedPaths.set(i, updatePathForMovedNode(expandedPaths.get(i)));
-		}
-		for (int i = 0; i < selectionPaths.size(); i++) {
-			selectionPaths.set(i, updatePathForMovedNode(selectionPaths.get(i)));
-		}
+		expandedPaths.replaceAll(this::updatePathForMovedNode);
+		selectionPaths.replaceAll(this::updatePathForMovedNode);
 	}
 
 	public boolean isEmpty() {

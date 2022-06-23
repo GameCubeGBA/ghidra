@@ -753,20 +753,21 @@ public class ListingHighlightProvider
 		for (int i = pcode.length - 1; i >= 0; i--) {
 			if (vn.equals(pcode[i].getOutput())) {
 				int opcode = pcode[i].getOpcode();
-				if (opcode == PcodeOp.INT_XOR) {
-					if (pcode[i].getInput(0).equals(pcode[i].getInput(1))) {
-						return true;
-					}
-				}
-				else if (opcode == PcodeOp.INT_ZEXT || opcode == PcodeOp.INT_SEXT) {
-					return true;
-				}
-				else if (opcode == PcodeOp.LOAD) {
-					return true;
-				}
-				else if (opcode == PcodeOp.COPY) {
-					vn = pcode[i].getInput(0);
-				}
+                switch (opcode) {
+                    case PcodeOp.INT_XOR:
+                        if (pcode[i].getInput(0).equals(pcode[i].getInput(1))) {
+                            return true;
+                        }
+                        break;
+                    case PcodeOp.INT_ZEXT:
+                    case PcodeOp.INT_SEXT:
+                        return true;
+                    case PcodeOp.LOAD:
+                        return true;
+                    case PcodeOp.COPY:
+                        vn = pcode[i].getInput(0);
+                        break;
+                }
 			}
 		}
 
@@ -921,27 +922,29 @@ public class ListingHighlightProvider
 	public void optionsChanged(ToolOptions options, String optionName, Object oldValue,
 			Object newValue) {
 
-		if (optionName.equals(DISPLAY_HIGHLIGHT_NAME)) {
-			displayHighlight = ((Boolean) newValue).booleanValue();
-			if (!displayHighlight) {
-				clearHighlight();
-			}
-		}
-		else if (optionName.equals(HIGHLIGHT_COLOR_NAME)) {
-			textMatchingHighlightColor = (Color) newValue;
-		}
-		else if (optionName.equals(SCOPED_WRITE_HIGHLIGHT_COLOR)) {
-			scopeWriteHighlightColor = (Color) newValue;
-		}
-		else if (optionName.equals(SCOPED_READ_HIGHLIGHT_COLOR)) {
-			scopeReadHighlightColor = (Color) newValue;
-		}
-		else if (optionName.equals(CURSOR_HIGHLIGHT_BUTTON_NAME)) {
-			CURSOR_MOUSE_BUTTON_NAMES mouseButton = (CURSOR_MOUSE_BUTTON_NAMES) newValue;
-			highlightButtonOption = mouseButton.getMouseEventID();
-		}
-		else if (optionName.equals(SCOPE_REGISTER_OPERAND)) {
-			scopeRegisterHighlight = ((Boolean) newValue).booleanValue();
-		}
+        switch (optionName) {
+            case DISPLAY_HIGHLIGHT_NAME:
+                displayHighlight = ((Boolean) newValue).booleanValue();
+                if (!displayHighlight) {
+                    clearHighlight();
+                }
+                break;
+            case HIGHLIGHT_COLOR_NAME:
+                textMatchingHighlightColor = (Color) newValue;
+                break;
+            case SCOPED_WRITE_HIGHLIGHT_COLOR:
+                scopeWriteHighlightColor = (Color) newValue;
+                break;
+            case SCOPED_READ_HIGHLIGHT_COLOR:
+                scopeReadHighlightColor = (Color) newValue;
+                break;
+            case CURSOR_HIGHLIGHT_BUTTON_NAME:
+                CURSOR_MOUSE_BUTTON_NAMES mouseButton = (CURSOR_MOUSE_BUTTON_NAMES) newValue;
+                highlightButtonOption = mouseButton.getMouseEventID();
+                break;
+            case SCOPE_REGISTER_OPERAND:
+                scopeRegisterHighlight = ((Boolean) newValue).booleanValue();
+                break;
+        }
 	}
 }

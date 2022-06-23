@@ -552,47 +552,48 @@ public class PrototypeModel {
 		while (parser.peek().isStart()) {
 			XmlElement subel = parser.peek();
 			String elName = subel.getName();
-			if (elName.equals("input")) {
-				inputParams.restoreXml(parser, cspec);
-			}
-			else if (elName.equals("output")) {
-				outputParams.restoreXml(parser, cspec);
-			}
-			else if (elName.equals("pcode")) {
-				XmlElement el = parser.peek();
-				String source = "Compiler spec=" + cspec.getCompilerSpecID().getIdAsString();
-				if (el.getAttribute("inject").equals("uponentry")) {
-					hasUponEntry = true;
-				}
-				else {
-					hasUponReturn = true;
-				}
-				cspec.getPcodeInjectLibrary()
-						.restoreXmlInject(source, getInjectName(), InjectPayload.CALLMECHANISM_TYPE,
-							parser);
-			}
-			else if (elName.equals("unaffected")) {
-				unaffected = readVarnodes(parser, cspec);
-			}
-			else if (elName.equals("killedbycall")) {
-				killedbycall = readVarnodes(parser, cspec);
-			}
-			else if (elName.equals("returnaddress")) {
-				returnaddress = readVarnodes(parser, cspec);
-			}
-			else if (elName.equals("likelytrash")) {
-				likelytrash = readVarnodes(parser, cspec);
-			}
-			else if (elName.equals("localrange")) {
-				localRange = readAddressSet(parser, cspec);
-			}
-			else if (elName.equals("paramrange")) {
-				paramRange = readAddressSet(parser, cspec);
-			}
-			else {
-				subel = parser.start();
-				parser.discardSubTree(subel);
-			}
+            switch (elName) {
+                case "input":
+                    inputParams.restoreXml(parser, cspec);
+                    break;
+                case "output":
+                    outputParams.restoreXml(parser, cspec);
+                    break;
+                case "pcode":
+                    XmlElement el = parser.peek();
+                    String source = "Compiler spec=" + cspec.getCompilerSpecID().getIdAsString();
+                    if (el.getAttribute("inject").equals("uponentry")) {
+                        hasUponEntry = true;
+                    } else {
+                        hasUponReturn = true;
+                    }
+                    cspec.getPcodeInjectLibrary()
+                            .restoreXmlInject(source, getInjectName(), InjectPayload.CALLMECHANISM_TYPE,
+                                    parser);
+                    break;
+                case "unaffected":
+                    unaffected = readVarnodes(parser, cspec);
+                    break;
+                case "killedbycall":
+                    killedbycall = readVarnodes(parser, cspec);
+                    break;
+                case "returnaddress":
+                    returnaddress = readVarnodes(parser, cspec);
+                    break;
+                case "likelytrash":
+                    likelytrash = readVarnodes(parser, cspec);
+                    break;
+                case "localrange":
+                    localRange = readAddressSet(parser, cspec);
+                    break;
+                case "paramrange":
+                    paramRange = readAddressSet(parser, cspec);
+                    break;
+                default:
+                    subel = parser.start();
+                    parser.discardSubTree(subel);
+                    break;
+            }
 		}
 		parser.end(protoElement);
 	}

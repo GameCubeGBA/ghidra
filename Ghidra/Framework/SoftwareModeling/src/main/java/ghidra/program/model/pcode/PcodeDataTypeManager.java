@@ -188,57 +188,60 @@ public class PcodeDataTypeManager {
 			}
 			String meta = el.getAttribute("metatype");
 			DataType restype = null;
-			if (meta.equals("ptr")) {
-				int size = SpecXmlUtils.decodeInt(el.getAttribute("size"));
-				if (parser.peek().isStart()) {
-					DataType dt = readXMLDataType(parser);
-					boolean useDefaultSize = (size == dataOrganization.getPointerSize() ||
-						size > PointerDataType.MAX_POINTER_SIZE_BYTES);
-					restype = new PointerDataType(dt, useDefaultSize ? -1 : size, progDataTypes);
-				}
-			}
-			else if (meta.equals("array")) {
-				int arrsize = SpecXmlUtils.decodeInt(el.getAttribute("arraysize"));
-				if (parser.peek().isStart()) {
-					DataType dt = readXMLDataType(parser);
-					if (dt == null || dt.getLength() == 0) {
-						dt = DataType.DEFAULT;
-					}
-					restype = new ArrayDataType(dt, arrsize, dt.getLength(), progDataTypes);
-				}
-			}
-			else if (meta.equals("spacebase")) {				// Typically the type of "the whole stack"
-				parser.discardSubTree();  // get rid of unused "addr" element
-				return voidDt;
-			}
-			else if (meta.equals("struct")) {
-				// we now can reach here with the decompiler inventing structures, apparently
-				// this is a band-aid so that we don't blow up
-				// just make an undefined data type of the appropriate size
-				int size = SpecXmlUtils.decodeInt(el.getAttribute("size"));
-				return Undefined.getUndefinedDataType(size);
-				// OLD COMMENT:
-				// Structures should always be named so we should never reach here
-				// if all the structures are contained in ghidra. I should probably add the
-				// parsing here so the decompiler can pass new structures into ghidra
-			}
-			else if (meta.equals("int")) {
-				int size = SpecXmlUtils.decodeInt(el.getAttribute("size"));
-				return AbstractIntegerDataType.getSignedDataType(size, progDataTypes);
-			}
-			else if (meta.equals("uint")) {
-				int size = SpecXmlUtils.decodeInt(el.getAttribute("size"));
-				return AbstractIntegerDataType.getUnsignedDataType(size, progDataTypes);
-			}
-			else if (meta.equals("float")) {
-				int size = SpecXmlUtils.decodeInt(el.getAttribute("size"));
-				return AbstractFloatDataType.getFloatDataType(size, progDataTypes);
-			}
-			else {	// We typically reach here if the decompiler invents a new type
-					// probably an unknown with a non-standard size
-				int size = SpecXmlUtils.decodeInt(el.getAttribute("size"));
-				return Undefined.getUndefinedDataType(size).clone(progDataTypes);
-			}
+            switch (meta) {
+                case "ptr": {
+                    int size = SpecXmlUtils.decodeInt(el.getAttribute("size"));
+                    if (parser.peek().isStart()) {
+                        DataType dt = readXMLDataType(parser);
+                        boolean useDefaultSize = (size == dataOrganization.getPointerSize() ||
+                                size > PointerDataType.MAX_POINTER_SIZE_BYTES);
+                        restype = new PointerDataType(dt, useDefaultSize ? -1 : size, progDataTypes);
+                    }
+                    break;
+                }
+                case "array":
+                    int arrsize = SpecXmlUtils.decodeInt(el.getAttribute("arraysize"));
+                    if (parser.peek().isStart()) {
+                        DataType dt = readXMLDataType(parser);
+                        if (dt == null || dt.getLength() == 0) {
+                            dt = DataType.DEFAULT;
+                        }
+                        restype = new ArrayDataType(dt, arrsize, dt.getLength(), progDataTypes);
+                    }
+                    break;
+                case "spacebase":                // Typically the type of "the whole stack"
+                    parser.discardSubTree();  // get rid of unused "addr" element
+
+                    return voidDt;
+                case "struct": {
+                    // we now can reach here with the decompiler inventing structures, apparently
+                    // this is a band-aid so that we don't blow up
+                    // just make an undefined data type of the appropriate size
+                    int size = SpecXmlUtils.decodeInt(el.getAttribute("size"));
+                    return Undefined.getUndefinedDataType(size);
+                    // OLD COMMENT:
+                    // Structures should always be named so we should never reach here
+                    // if all the structures are contained in ghidra. I should probably add the
+                    // parsing here so the decompiler can pass new structures into ghidra
+                }
+                case "int": {
+                    int size = SpecXmlUtils.decodeInt(el.getAttribute("size"));
+                    return AbstractIntegerDataType.getSignedDataType(size, progDataTypes);
+                }
+                case "uint": {
+                    int size = SpecXmlUtils.decodeInt(el.getAttribute("size"));
+                    return AbstractIntegerDataType.getUnsignedDataType(size, progDataTypes);
+                }
+                case "float": {
+                    int size = SpecXmlUtils.decodeInt(el.getAttribute("size"));
+                    return AbstractFloatDataType.getFloatDataType(size, progDataTypes);
+                }
+                default: {    // We typically reach here if the decompiler invents a new type
+                    // probably an unknown with a non-standard size
+                    int size = SpecXmlUtils.decodeInt(el.getAttribute("size"));
+                    return Undefined.getUndefinedDataType(size).clone(progDataTypes);
+                }
+            }
 			if (restype == null) {
 				throw new PcodeXMLException("Unable to resolve DataType");
 			}

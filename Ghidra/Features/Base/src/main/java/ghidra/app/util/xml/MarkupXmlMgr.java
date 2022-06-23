@@ -73,32 +73,33 @@ class MarkupXmlMgr {
 				throw new CancelledException();
 			}
 			String tagName = element.getName().toUpperCase();
-			if (tagName.equals("MEMORY_REFERENCE")) {
-				processMemoryReference(element, overwrite);
-			}
-			else if (tagName.equals("STACK_REFERENCE")) {
-				if (isFunctions && !ignoreStackReferences) {
-					processStackReference(element, overwrite);
-				}
-			}
-			else if (tagName.equals("EXT_LIBRARY_REFERENCE")) {
-				if (isExtLibs) {
-					processExtLibraryReference(element, overwrite);
-				}
-			}
-			else if (tagName.equals("EQUATE_REFERENCE")) {
-				processEquateReference(element, overwrite);
-			}
-			else if (tagName.equals("MANUAL_OPERAND")) {
-				// Not yet supported
-			}
-			else if (tagName.equals("MANUAL_INSTRUCTION")) {
-				// Not yet supported
-			}
-			else {
-				throw new SAXParseException("Unexpected XML tag: " + tagName, null, null,
-					parser.getLineNumber(), parser.getColumnNumber());
-			}
+            switch (tagName) {
+                case "MEMORY_REFERENCE":
+                    processMemoryReference(element, overwrite);
+                    break;
+                case "STACK_REFERENCE":
+                    if (isFunctions && !ignoreStackReferences) {
+                        processStackReference(element, overwrite);
+                    }
+                    break;
+                case "EXT_LIBRARY_REFERENCE":
+                    if (isExtLibs) {
+                        processExtLibraryReference(element, overwrite);
+                    }
+                    break;
+                case "EQUATE_REFERENCE":
+                    processEquateReference(element, overwrite);
+                    break;
+                case "MANUAL_OPERAND":
+                    // Not yet supported
+                    break;
+                case "MANUAL_INSTRUCTION":
+                    // Not yet supported
+                    break;
+                default:
+                    throw new SAXParseException("Unexpected XML tag: " + tagName, null, null,
+                            parser.getLineNumber(), parser.getColumnNumber());
+            }
 
 			// read end of tag
 			element = parser.next();
