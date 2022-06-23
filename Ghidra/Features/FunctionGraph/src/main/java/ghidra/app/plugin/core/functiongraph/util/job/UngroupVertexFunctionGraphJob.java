@@ -215,7 +215,7 @@ public class UngroupVertexFunctionGraphJob extends AbstractGroupingFunctionGraph
 
 		// make sure the original vertex is in the graph (it may have been grouped)
 		FunctionGraph fg = getFunctionGraph();
-		List<FGVertex> ignore = Arrays.asList(groupVertex);
+		List<FGVertex> ignore = Collections.singletonList(groupVertex);
 		vertex = fg.findMatchingVertex(vertex, ignore);
 		TransitionPoints transtionPoint = transitionPoints.get(vertex);
 		if (transtionPoint != null) {

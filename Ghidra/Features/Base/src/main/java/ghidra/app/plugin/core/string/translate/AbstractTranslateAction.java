@@ -93,7 +93,7 @@ public abstract class AbstractTranslateAction extends DockingAction {
 		if (data == null || !StringDataInstance.isString(data)) {
 			return Collections.emptyList();
 		}
-		return Arrays.asList(context.getLocation());
+		return Collections.singletonList(context.getLocation());
 	}
 
 	protected List<ProgramLocation> getStringLocations(DataLocationListContext context) {

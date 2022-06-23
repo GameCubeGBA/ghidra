@@ -524,7 +524,7 @@ public class RemoveFunctions extends GhidraScript {
 		String askChoice = null;
 		try {
 			askChoice = askChoice("RemoveFunctions script", "Choose FID database: ",
-				Arrays.asList(nameArray), nameArray[0]);
+                    List.of(nameArray), nameArray[0]);
 		}
 		catch (CancelledException ex) {
 			runSearch();

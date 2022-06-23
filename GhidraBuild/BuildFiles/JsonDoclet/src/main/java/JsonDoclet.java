@@ -84,7 +84,7 @@ public class JsonDoclet implements Doclet {
 
 			@Override
 			public List<String> getNames() {
-				return Arrays.asList("-d");
+				return List.of("-d");
 			}
 
 			@Override

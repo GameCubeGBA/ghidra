@@ -38,8 +38,8 @@ public class GetAndSetAnalysisOptionsScript extends GhidraScript {
 		println("\n==> Resetting some options to their default values <==");
 		resetAnalysisOptions(
 			currentProgram,
-			Arrays.asList(new String[] { "ASCII Strings.Minimum string length",
-				"Decompiler Parameter ID.Prototype Evaluation" }));
+                List.of(new String[]{"ASCII Strings.Minimum string length",
+                        "Decompiler Parameter ID.Prototype Evaluation"}));
 
 		println("\n==> Resetting all options <==");
 		resetAllAnalysisOptions(currentProgram);

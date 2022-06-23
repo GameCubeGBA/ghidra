@@ -56,8 +56,7 @@ public class GuidUtil {
 	private static String ARCHIVE_DIR = "msvcrt";
 	private static String ARCHIVE_DIR_PARENT = "typeinfo/win32";
 	private static boolean initialized = false;
-	private static GuidType[] guidTypes = new GuidType[] { GuidType.CLSID, GuidType.IID,
-		GuidType.GUID, GuidType.SYNTAX };
+	private static GuidType[] guidTypes = GuidType.values();
 	private static Hashtable<GuidType, Hashtable<String, GuidInfo>> idTables;
 
 	private final static void initialize() {

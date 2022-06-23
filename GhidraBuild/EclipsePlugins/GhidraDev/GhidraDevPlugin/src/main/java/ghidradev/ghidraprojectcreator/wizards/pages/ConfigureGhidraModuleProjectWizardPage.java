@@ -90,7 +90,7 @@ public class ConfigureGhidraModuleProjectWizardPage extends WizardPage {
 	 * @return The selected module template types.
 	 */
 	public Set<ModuleTemplateType> getModuleTemplateTypes() {
-		Set<ModuleTemplateType> moduleTemplateTypes = new HashSet<>();
+		Set<ModuleTemplateType> moduleTemplateTypes = EnumSet.noneOf(ModuleTemplateType.class);
 		for (Map.Entry<Button, ModuleTemplateType> entry : moduleTemplateCheckboxMap.entrySet()) {
             Button checkboxButton = entry.getKey();
             if (checkboxButton.isEnabled() && checkboxButton.getSelection()) {

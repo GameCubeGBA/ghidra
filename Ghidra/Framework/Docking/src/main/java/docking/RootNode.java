@@ -156,7 +156,7 @@ class RootNode extends WindowNode {
 
 	@Override
 	List<Node> getChildren() {
-		return Arrays.asList(child);
+		return Collections.singletonList(child);
 	}
 
 	@Override

@@ -489,7 +489,7 @@ public class DefaultThreadedTableFilterTest extends AbstractThreadedTableTest {
 
 		// the row objects are Long values that are 0-based one-up index values
 		RowFilterTransformer<Long> transformer = value -> {
-			List<String> result = Arrays.asList(Long.toString(value));
+			List<String> result = List.of(Long.toString(value));
 			return result;
 		};
 

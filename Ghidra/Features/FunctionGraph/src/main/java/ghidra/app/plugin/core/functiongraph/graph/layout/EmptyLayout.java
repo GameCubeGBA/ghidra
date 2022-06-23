@@ -15,22 +15,24 @@
  */
 package ghidra.app.plugin.core.functiongraph.graph.layout;
 
-import java.awt.Shape;
-import java.awt.geom.Point2D;
-
-import com.google.common.base.Function;
-
 import edu.uci.ics.jung.visualization.renderers.BasicEdgeRenderer;
 import ghidra.app.plugin.core.functiongraph.graph.FGEdge;
 import ghidra.app.plugin.core.functiongraph.graph.FunctionGraph;
 import ghidra.app.plugin.core.functiongraph.graph.vertex.FGVertex;
 import ghidra.graph.VisualGraph;
-import ghidra.graph.viewer.layout.*;
+import ghidra.graph.viewer.layout.AbstractVisualGraphLayout;
+import ghidra.graph.viewer.layout.GridLocationMap;
+import ghidra.graph.viewer.layout.LayoutListener;
 import ghidra.graph.viewer.layout.LayoutListener.ChangeType;
+import ghidra.graph.viewer.layout.LayoutPositions;
 import ghidra.graph.viewer.renderer.ArticulatedEdgeRenderer;
 import ghidra.graph.viewer.shape.ArticulatedEdgeTransformer;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
+
+import java.awt.*;
+import java.awt.geom.Point2D;
+import java.util.function.Function;
 
 public class EmptyLayout extends AbstractVisualGraphLayout<FGVertex, FGEdge> implements FGLayout {
 
@@ -56,8 +58,8 @@ public class EmptyLayout extends AbstractVisualGraphLayout<FGVertex, FGEdge> imp
 	}
 
 	@Override
-	public Function<FGEdge, Shape> getEdgeShapeTransformer() {
-		return new ArticulatedEdgeTransformer<>();
+	public Function<E, Shape> getEdgeShapeTransformer() {
+		return new ArticulatedEdgeTransformer<V,E>();
 	}
 
 	@Override

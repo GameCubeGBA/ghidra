@@ -91,7 +91,7 @@ public class GhidraApplicationLayout extends ApplicationLayout {
 
 		// Application root directories
 		applicationRootDirs =
-			Arrays.asList(new ResourceFile(this.applicationInstallationDir, "Ghidra"));
+                List.of(new ResourceFile(this.applicationInstallationDir, "Ghidra"));
 
 		// Application properties
 		applicationProperties = new ApplicationProperties(applicationRootDirs);

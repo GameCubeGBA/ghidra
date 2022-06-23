@@ -94,7 +94,7 @@ public class IngestTask extends Task {
 			monitor.setMessage("Populating library...");
 			FidPopulateResult result = fidService.createNewLibraryFromPrograms(fidDb,
 				libraryFamilyName, libraryVersion, libraryVariant, programs, null, languageId,
-				libraryRecord == null ? null : Arrays.asList(libraryRecord), commonSymbols,
+				libraryRecord == null ? null : List.of(libraryRecord), commonSymbols,
 				monitor);
 			reporter.report(result);
 			fidDb.saveDatabase("Saving", monitor);

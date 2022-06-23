@@ -618,7 +618,7 @@ public class GdbManagerImpl implements GdbManager {
 	@Override
 	public void start(String gdbCmd, String... args) throws IOException {
 		List<String> fullargs = new ArrayList<>();
-		fullargs.addAll(Arrays.asList(gdbCmd));
+		fullargs.addAll(Collections.singletonList(gdbCmd));
 		fullargs.addAll(Arrays.asList(args));
 
 		state.set(GdbState.STARTING, Causes.UNCLAIMED);

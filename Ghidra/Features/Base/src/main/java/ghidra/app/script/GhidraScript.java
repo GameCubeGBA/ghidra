@@ -1853,7 +1853,7 @@ public abstract class GhidraScript extends FlatProgramAPI {
 			String unquoted = s.substring(1, s.length() - 1);
 			return Arrays.asList(unquoted.split(";"));
 		}
-		return Arrays.asList(s);
+		return List.of(s);
 	}
 
 	/**

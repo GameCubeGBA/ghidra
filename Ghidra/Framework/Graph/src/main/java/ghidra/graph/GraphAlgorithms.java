@@ -164,7 +164,7 @@ public class GraphAlgorithms {
 	public static <V, E extends GEdge<V>> Set<E> getEdgesFrom(GDirectedGraph<V, E> g, V v,
 			boolean topDown) {
 
-		List<V> list = Arrays.asList(v);
+		List<V> list = Collections.singletonList(v);
 		Set<E> edges = getEdgesFrom(g, list, topDown);
 		return edges;
 	}

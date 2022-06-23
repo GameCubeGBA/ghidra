@@ -371,7 +371,7 @@ public abstract class FilteringVisualGraph<V extends VisualVertex, E extends Vis
 	public boolean removeEdge(E e) {
 		boolean removed = super.removeEdge(e);
 
-		List<E> asList = Arrays.asList(e);
+		List<E> asList = Collections.singletonList(e);
 		if (removed) {
 			fireEdgesRemoved(asList);
 		}

@@ -19,6 +19,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.sql.Date;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -59,28 +60,28 @@ public class AnyObjectTableModelTest {
 
 	public void testStringValue() {
 		model = new AnyObjectTableModel<>("Test", TestClass.class, "getName");
-		model.setModelData(Arrays.asList(new TestClass("Bob", 12, new Date(0))));
+		model.setModelData(List.of(new TestClass("Bob", 12, new Date(0))));
 		Object valueAt = model.getValueAt(0, 0);
 		assertEquals("Bob", valueAt);
 	}
 
 	public void testPrimitiveValue() {
 		model = new AnyObjectTableModel<>("Test", TestClass.class, "getA");
-		model.setModelData(Arrays.asList(new TestClass("Bob", 12, new Date(0))));
+		model.setModelData(List.of(new TestClass("Bob", 12, new Date(0))));
 		Object valueAt = model.getValueAt(0, 0);
 		assertEquals(12, valueAt);
 	}
 
 	public void testDateObject() {
 		model = new AnyObjectTableModel<>("Test", TestClass.class, "getDate");
-		model.setModelData(Arrays.asList(new TestClass("Bob", 12, new Date(0))));
+		model.setModelData(List.of(new TestClass("Bob", 12, new Date(0))));
 		Object valueAt = model.getValueAt(0, 0);
 		assertEquals(new Date(0), valueAt);
 	}
 
 	public void testValueClass() {
 		model = new AnyObjectTableModel<>("Test", TestClass.class, "getDate");
-		model.setModelData(Arrays.asList(new TestClass("Bob", 12, new Date(0))));
+		model.setModelData(List.of(new TestClass("Bob", 12, new Date(0))));
 		Class<?> columnClass = model.getColumnClass(0);
 		assertEquals(Date.class, columnClass);
 

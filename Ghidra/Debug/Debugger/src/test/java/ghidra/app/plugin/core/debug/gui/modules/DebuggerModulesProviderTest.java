@@ -89,7 +89,7 @@ public class DebuggerModulesProviderTest extends AbstractGhidraHeadedDebuggerGUI
 			DBTraceMemoryManager manager = tb.trace.getMemoryManager();
 			for (TraceModule module : tb.trace.getModuleManager().getAllModules()) {
 				for (TraceSection section : module.getSections()) {
-					Set<TraceMemoryFlag> flags = new HashSet<>();
+					Set<TraceMemoryFlag> flags = EnumSet.noneOf(TraceMemoryFlag.class);
 					flags.add(TraceMemoryFlag.READ);
 					if (".text".equals(section.getName())) {
 						flags.add(TraceMemoryFlag.EXECUTE);

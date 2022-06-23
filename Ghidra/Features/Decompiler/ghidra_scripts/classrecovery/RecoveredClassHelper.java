@@ -7315,7 +7315,7 @@ public class RecoveredClassHelper {
 
 		// add any thunk addresses to the list
 		List<Address> functionAddresses =
-			new ArrayList<Address>(Arrays.asList(functionThunkAddresses));
+			new ArrayList<Address>(Collections.singletonList(functionThunkAddresses));
 		// add the function itself to the list
 		functionAddresses.add(function.getEntryPoint());
 

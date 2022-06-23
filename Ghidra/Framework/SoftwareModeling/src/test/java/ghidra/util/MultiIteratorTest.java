@@ -38,7 +38,7 @@ public class MultiIteratorTest extends AbstractGenericTest {
 	public void testSingleIterator_Forward() {
 		PeekableIterator<Integer> peekable = new NumberPeekableIterator(1, 2, 3);
 
-		List<PeekableIterator<Integer>> list = Arrays.asList(peekable);
+		List<PeekableIterator<Integer>> list = List.of(peekable);
 		MultiIterator<Integer> iterator = new MultiIterator<>(list, true);
 
 		assertTrue(iterator.hasNext());
@@ -54,7 +54,7 @@ public class MultiIteratorTest extends AbstractGenericTest {
 	public void testSingleIterator_Backward() {
 		PeekableIterator<Integer> peekable = new NumberPeekableIterator(3, 2, 1);
 
-		List<PeekableIterator<Integer>> list = Arrays.asList(peekable);
+		List<PeekableIterator<Integer>> list = List.of(peekable);
 		MultiIterator<Integer> iterator = new MultiIterator<>(list, false);
 
 		assertTrue(iterator.hasNext());
@@ -134,7 +134,7 @@ public class MultiIteratorTest extends AbstractGenericTest {
 	public void testMultipleIterators_DuplicateValues() {
 		PeekableIterator<Integer> peekable1 = new NumberPeekableIterator(1, 2, 2, 2, 3);
 
-		List<PeekableIterator<Integer>> list = Arrays.asList(peekable1);
+		List<PeekableIterator<Integer>> list = List.of(peekable1);
 		MultiIterator<Integer> iterator = new MultiIterator<>(list, true);
 
 		assertTrue(iterator.hasNext());
@@ -184,7 +184,7 @@ public class MultiIteratorTest extends AbstractGenericTest {
 	public void testSingleIterator_HasNextManyTimes_Forward() {
 		PeekableIterator<Integer> peekable = new NumberPeekableIterator(1, 2, 3);
 
-		List<PeekableIterator<Integer>> list = Arrays.asList(peekable);
+		List<PeekableIterator<Integer>> list = List.of(peekable);
 		MultiIterator<Integer> iterator = new MultiIterator<>(list, true);
 
 		iterator.hasNext();
@@ -205,7 +205,7 @@ public class MultiIteratorTest extends AbstractGenericTest {
 	public void testSingleIterator_HasNextManyTimes_Backward() {
 		PeekableIterator<Integer> peekable = new NumberPeekableIterator(3, 2, 1);
 
-		List<PeekableIterator<Integer>> list = Arrays.asList(peekable);
+		List<PeekableIterator<Integer>> list = List.of(peekable);
 		MultiIterator<Integer> iterator = new MultiIterator<>(list, false);
 
 		iterator.hasNext();
@@ -226,7 +226,7 @@ public class MultiIteratorTest extends AbstractGenericTest {
 	public void testNextManyTimesWithoutCallingHasNext_Fowrard() {
 		PeekableIterator<Integer> peekable = new NumberPeekableIterator(1, 2, 3);
 
-		List<PeekableIterator<Integer>> list = Arrays.asList(peekable);
+		List<PeekableIterator<Integer>> list = List.of(peekable);
 		MultiIterator<Integer> iterator = new MultiIterator<>(list, true);
 
 		iterator.next(); // 1
@@ -239,7 +239,7 @@ public class MultiIteratorTest extends AbstractGenericTest {
 	public void testNextManyTimesWithoutCallingHasNext_Backward() {
 		PeekableIterator<Integer> peekable = new NumberPeekableIterator(3, 2, 1);
 
-		List<PeekableIterator<Integer>> list = Arrays.asList(peekable);
+		List<PeekableIterator<Integer>> list = List.of(peekable);
 		MultiIterator<Integer> iterator = new MultiIterator<>(list, false);
 
 		iterator.next(); // 3
@@ -257,7 +257,7 @@ public class MultiIteratorTest extends AbstractGenericTest {
 
 		PeekableIterator<TestItem> peekable =
 			new WrappingPeekableIterator<>(data.iterator());
-		List<PeekableIterator<TestItem>> list = Arrays.asList(peekable);
+		List<PeekableIterator<TestItem>> list = List.of(peekable);
 
 		MultiIterator<TestItem> iterator = new MultiIterator<>(list, true);
 		try {
@@ -288,7 +288,7 @@ public class MultiIteratorTest extends AbstractGenericTest {
 
 		PeekableIterator<TestItem> peekable =
 			new WrappingPeekableIterator<>(data.iterator());
-		List<PeekableIterator<TestItem>> list = Arrays.asList(peekable);
+		List<PeekableIterator<TestItem>> list = List.of(peekable);
 
 		MultiIterator<TestItem> iterator = new MultiIterator<>(list, false);
 		try {
@@ -314,7 +314,7 @@ public class MultiIteratorTest extends AbstractGenericTest {
 	public void testSingleItemIterator() {
 		PeekableIterator<Integer> peekable = new NumberPeekableIterator(1);
 
-		List<PeekableIterator<Integer>> list = Arrays.asList(peekable);
+		List<PeekableIterator<Integer>> list = List.of(peekable);
 		MultiIterator<Integer> iterator = new MultiIterator<>(list, true);
 
 		iterator.next(); // 1 

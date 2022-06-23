@@ -18,6 +18,7 @@ package ghidra.app.plugin.core.debug.gui.copying;
 import static org.junit.Assert.*;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -341,7 +342,7 @@ public class DebuggerCopyActionsPluginTest extends AbstractGhidraHeadedDebuggerG
 		waitForSwing();
 
 		MemoryBlock text2 =
-			Unique.assertOne(Arrays.asList(program.getMemory().getBlock(".text_2")));
+			Unique.assertOne(Collections.singletonList(program.getMemory().getBlock(".text_2")));
 		assertNotEquals(block, text2);
 		assertTrue(text2.isOverlay());
 	}

@@ -91,7 +91,7 @@ public class KernelFileSystem extends GFileSystemBase {
 	@Override
 	public List<GFile> getListing(GFile directory) throws IOException {
 		return (directory == null || directory.equals(root)) && (compressedKernelFile != null)
-				? Arrays.asList(compressedKernelFile)
+				? List.of(compressedKernelFile)
 				: Collections.emptyList();
 	}
 

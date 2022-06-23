@@ -382,7 +382,7 @@ public class CollectionUtils {
 	 * @return an iterable over the given iterator
 	 */
 	public static <T> Iterable<T> asIterable(T t) {
-		return Arrays.asList(t);
+		return Collections.singletonList(t);
 	}
 
 	/**

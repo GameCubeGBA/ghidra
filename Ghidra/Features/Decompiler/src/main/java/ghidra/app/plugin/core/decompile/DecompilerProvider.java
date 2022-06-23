@@ -466,7 +466,7 @@ public class DecompilerProvider extends NavigatableComponentProviderAdapter
 		List<ClangLine> lines = decompilerPanel.getLines();
 		ClangLine line = lines.get(cursor.getRow());
 		ClangToken tokenAtCursor = decompilerPanel.getTokenAtCursor();
-		List<ClangToken> tokens = Arrays.asList(tokenAtCursor);
+		List<ClangToken> tokens = Collections.singletonList(tokenAtCursor);
 		String string = line.toDebugString(tokens);
 		return string;
 	}

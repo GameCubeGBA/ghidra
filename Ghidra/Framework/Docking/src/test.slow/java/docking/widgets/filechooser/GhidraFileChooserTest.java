@@ -28,10 +28,8 @@ import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.io.*;
 import java.nio.file.*;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 import java.util.List;
-import java.util.Queue;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
@@ -1505,7 +1503,7 @@ public class GhidraFileChooserTest extends AbstractDockingTest {
 			isEnabled);
 
 		File file = files.get(files.size() - 1).getParentFile();
-		selectFiles(Arrays.asList(file));
+		selectFiles(Collections.singletonList(file));
 		waitForChooser();
 
 		context = createDirListContext();

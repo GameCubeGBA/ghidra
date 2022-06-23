@@ -18,6 +18,7 @@ package docking.widgets.dialogs;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.*;
@@ -85,7 +86,7 @@ public class TableSelectionDialog<T> extends DialogComponentProvider {
 		}
 
 		T selectedRowObject = gFilterTable.getSelectedRowObject();
-		selectedItems = Arrays.asList(selectedRowObject);
+		selectedItems = Collections.singletonList(selectedRowObject);
 		close();
 	}
 

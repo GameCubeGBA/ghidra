@@ -112,8 +112,8 @@ public class AnalyzeAllOpenProgramsTaskTest extends AbstractGhidraHeadedIntegrat
 
 		waitForTasks();
 
-		Collection<Program> expectedAnalyzed = Arrays.asList(notepad);
-		Collection<Program> expectedIgnored = Arrays.asList(winhello);
+		Collection<Program> expectedAnalyzed = Collections.singletonList(notepad);
+		Collection<Program> expectedIgnored = Collections.singletonList(winhello);
 
 		assertProgramsAnalyzed(spy, expectedAnalyzed);
 		assertProgramsIgnored(spy, expectedIgnored);
@@ -198,7 +198,7 @@ public class AnalyzeAllOpenProgramsTaskTest extends AbstractGhidraHeadedIntegrat
 		waitForTasks();
 
 		Collection<Program> expectedAnalyzed = Arrays.asList(notepad, winhello);
-		Collection<Program> expectedIgnored = Arrays.asList(p6502);
+		Collection<Program> expectedIgnored = Collections.singletonList(p6502);
 
 		assertProgramsAnalyzed(spy, expectedAnalyzed);
 		assertProgramsIgnored(spy, expectedIgnored);

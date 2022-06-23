@@ -15,22 +15,15 @@
  */
 package ghidra.graph.viewer.layout;
 
-import java.awt.*;
-import java.awt.geom.Point2D;
-import java.util.*;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.stream.Collectors;
-
-import com.google.common.base.Function;
-
 import edu.uci.ics.jung.algorithms.layout.AbstractLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.visualization.renderers.BasicEdgeRenderer;
 import edu.uci.ics.jung.visualization.renderers.Renderer.EdgeLabel;
 import ghidra.graph.VisualGraph;
-import ghidra.graph.viewer.*;
+import ghidra.graph.viewer.GraphViewerUtils;
+import ghidra.graph.viewer.VisualEdge;
+import ghidra.graph.viewer.VisualVertex;
 import ghidra.graph.viewer.layout.LayoutListener.ChangeType;
 import ghidra.graph.viewer.renderer.ArticulatedEdgeRenderer;
 import ghidra.graph.viewer.shape.ArticulatedEdgeTransformer;
@@ -39,6 +32,14 @@ import ghidra.util.datastruct.WeakDataStructureFactory;
 import ghidra.util.datastruct.WeakSet;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
+
+import java.awt.*;
+import java.awt.geom.Point2D;
+import java.util.List;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * A base layout that marries the Visual Graph and Jung layout interfaces.   This class allows
@@ -437,7 +438,7 @@ public abstract class AbstractVisualGraphLayout<V extends VisualVertex,
 	}
 
 	private Rectangle getTotalGraphSize(Map<V, Point2D> vertexLocationMap,
-			com.google.common.base.Function<V, Shape> vertexShapeTransformer) {
+										Function<V, Shape> vertexShapeTransformer) {
 
 		// note: do not include edges in the size of the graph at this point, as some layouts use
 		//       custom edge routing after this method is called
@@ -456,13 +457,13 @@ public abstract class AbstractVisualGraphLayout<V extends VisualVertex,
 		if (!usesEdgeArticulations()) {
 
 			Rectangle bounds =
-				GraphViewerUtils.getBoundsForVerticesInLayoutSpace(vertices, vertexToBounds);
+				GraphViewerUtils.getBoundsForVerticesInLayoutSpace(vertices, vertexToBounds::apply);
 			return bounds;
 		}
 
 		Function<E, List<Point2D>> edgeToArticulations = e -> Collections.emptyList();
 		Rectangle bounds = GraphViewerUtils.getTotalGraphSizeInLayoutSpace(vertices, edges,
-			vertexToBounds, edgeToArticulations);
+				vertexToBounds::apply, edgeToArticulations::apply);
 		return bounds;
 	}
 

@@ -266,7 +266,7 @@ public abstract class AbstractGTest {
 		Set<T> expectedSet = new HashSet<>(collection);
 		Set<T> actualSet = new HashSet<>(asList);
 
-		expectedSet.removeAll(asList);
+		asList.forEach(expectedSet::remove);
 		actualSet.removeAll(collection);
 
 		if (!actualSet.isEmpty()) {

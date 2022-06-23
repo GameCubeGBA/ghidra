@@ -48,7 +48,7 @@ public class FieldUtils {
 
 		FieldElement originalFieldElement = fieldElement.replaceAll(WHITE_SPACE, ' ');
 		if (originalFieldElement.getStringWidth() <= width) {
-			return Arrays.asList(originalFieldElement);
+			return List.of(originalFieldElement);
 		}
 
 		List<FieldElement> lines = new ArrayList<>();
@@ -81,7 +81,7 @@ public class FieldUtils {
 		}
 		FieldElement originalFieldElement = fieldElement.replaceAll(WHITE_SPACE, ' ');
 		if (originalFieldElement.getStringWidth() <= width) {
-			return Arrays.asList(originalFieldElement);
+			return List.of(originalFieldElement);
 		}
 
 		List<FieldElement> lines = new ArrayList<>();

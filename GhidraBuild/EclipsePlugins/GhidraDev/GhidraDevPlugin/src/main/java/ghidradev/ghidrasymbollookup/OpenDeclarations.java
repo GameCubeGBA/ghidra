@@ -79,14 +79,14 @@ public class OpenDeclarations {
 			EclipseMessageUtils.info("Found \"" + bindings.length + "\" bindings for symbol");
 			for (IIndexBinding binding : bindings) {
 				IIndexName[] names = index.findNames(binding, IIndex.FIND_DEFINITIONS);
-                indexNames.addAll(Arrays.asList(names));
+                indexNames.addAll(Collections.singletonList(names));
 			}
 
 			if (indexNames.size() == 0) {
 				EclipseMessageUtils.info("Found no definitions, looking for declarations...");
 				for (IIndexBinding binding : bindings) {
 					IIndexName[] names = index.findNames(binding, IIndex.FIND_DECLARATIONS);
-                    indexNames.addAll(Arrays.asList(names));
+                    indexNames.addAll(Collections.singletonList(names));
 				}
 			}
 			if (indexNames.size() == 1) {

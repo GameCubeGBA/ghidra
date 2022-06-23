@@ -265,7 +265,7 @@ public class CondenseFillerBytesAnalyzerTest extends AbstractGenericTest {
 		String pattern = "90";
 		builder.setBytes(addr, pattern);
 
-		return Arrays.asList(new FillerFunction(f1, 1));
+		return List.of(new FillerFunction(f1, 1));
 	}
 
 	private String createAndInstallFillerPattern_SinglePattern() throws Exception {

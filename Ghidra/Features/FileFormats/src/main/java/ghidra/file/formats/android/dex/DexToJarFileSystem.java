@@ -63,7 +63,7 @@ public class DexToJarFileSystem extends GFileSystemBase {
 
 	@Override
 	public List<GFile> getListing(GFile directory) throws IOException {
-		return (directory == null || directory.equals(root)) ? Arrays.asList(jarFile)
+		return (directory == null || directory.equals(root)) ? Collections.singletonList(jarFile)
 				: Collections.emptyList();
 	}
 

@@ -117,7 +117,7 @@ public class LZ4ArchiveFileSystem extends GFileSystemBase {
 	@Override
 	public List<GFile> getListing(GFile directory) throws IOException {
 		return (directory == null || directory.equals(root)) && (decompressedLZ4File != null)
-				? Arrays.asList(decompressedLZ4File)
+				? List.of(decompressedLZ4File)
 				: Collections.emptyList();
 	}
 }

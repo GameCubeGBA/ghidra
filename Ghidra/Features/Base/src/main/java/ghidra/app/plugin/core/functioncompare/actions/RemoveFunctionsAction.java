@@ -18,6 +18,7 @@ package ghidra.app.plugin.core.functioncompare.actions;
 import java.awt.Component;
 import java.awt.event.InputEvent;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 
 import javax.swing.Icon;
@@ -94,7 +95,7 @@ public class RemoveFunctionsAction extends DockingAction {
 		JComboBox<Function> focusedComponent =
 			((MultiFunctionComparisonPanel) provider.getComponent()).getFocusedComponent();
 		Function selectedFunction = (Function) focusedComponent.getSelectedItem();
-		provider.removeFunctions(new HashSet<>(Arrays.asList(selectedFunction)));
+		provider.removeFunctions(new HashSet<>(Collections.singletonList(selectedFunction)));
 		provider.contextChanged();
 	}
 }
