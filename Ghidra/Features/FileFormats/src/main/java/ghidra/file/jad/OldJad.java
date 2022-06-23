@@ -149,7 +149,7 @@ class OldJad {
 
 	private String readStdinMessagesFromProcess(Process process, TaskMonitor monitor)
 			throws IOException {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		byte[] bytes = new byte[0x1000];
 		InputStream inputStream = process.getInputStream();
 		while (!monitor.isCancelled()) {
@@ -164,7 +164,7 @@ class OldJad {
 
 	private String readStderrMessagesFromProcess(Process process, TaskMonitor monitor)
 			throws IOException {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		byte[] bytes = new byte[0x1000];
 		InputStream processErrorStream = process.getErrorStream();
 		while (!monitor.isCancelled()) {

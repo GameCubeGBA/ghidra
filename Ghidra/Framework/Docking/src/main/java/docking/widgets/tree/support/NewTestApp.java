@@ -262,7 +262,7 @@ class DragNDropHandler implements GTreeDragNDropHandler {
 			return fileList;
 		}
 		else if (flavor.equals(DataFlavor.stringFlavor)) {
-			StringBuffer buf = new StringBuffer();
+			StringBuilder buf = new StringBuilder();
 			Iterator<?> it = dragUserData.iterator();
 			while (it.hasNext()) {
 				buf.append(it.next().toString());

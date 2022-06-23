@@ -231,42 +231,6 @@ public class ProgramMergeFilter {
 		}
 	}
 
-	/** validatePredefinedType determines whether or not the indicated type
-	 * of filter item is a valid predefined type.
-	 * Valid types are: BYTES, INSTRUCTIONS, DATA,
-	 * SYMBOLS, PRIMARY_SYMBOL, COMMENTS, PROGRAM_CONTEXT, PROPERTIES, BOOKMARKS, FUNCTIONS, ALL.
-	 *
-	 * @param type the type of difference to look for between the programs.
-	 * @return true if this is a pre-defined merge type.
-	 */
-	public boolean validatePredefinedType(int type) {
-		switch (type) {
-			case PROGRAM_CONTEXT:
-			case BYTES:
-			case INSTRUCTIONS:
-			case DATA:
-			case SYMBOLS:
-			case PRIMARY_SYMBOL:
-			case REFERENCES:
-			case PLATE_COMMENTS:
-			case PRE_COMMENTS:
-			case EOL_COMMENTS:
-			case REPEATABLE_COMMENTS:
-			case POST_COMMENTS:
-			case BOOKMARKS:
-			case PROPERTIES:
-			case FUNCTIONS:
-			case FUNCTION_TAGS:
-			case EQUATES:
-			case CODE_UNITS:
-			case COMMENTS:
-			case ALL:
-				return true;
-			default:
-				return false;
-		}
-	}
-
 	/**
 	 * Determines if at least one of the filter types is set to REPLACE or MERGE.
 	 * @return true if at least one type is set.
@@ -394,7 +358,7 @@ public class ProgramMergeFilter {
 	 */
 	@Override
 	public String toString() {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		buf.append("ProgramMergeFilter:\n");
 		int[] types = getPrimaryTypes();
 		for (int type : types) {

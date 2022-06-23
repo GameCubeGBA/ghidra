@@ -116,7 +116,7 @@ public class ProgramDiffDetails {
 
 	private static String getIndentString(int indentCount) {
 		int indentChars = indentCount * INDENT_SIZE;
-		StringBuffer buf = new StringBuffer(indentChars);
+		StringBuilder buf = new StringBuilder(indentChars);
 		for (int i = 0; i < indentChars; i++) {
 			buf.append(' ');
 		}
@@ -1091,7 +1091,7 @@ public class ProgramDiffDetails {
 	}
 
 	private String getProgramRefDetails(Program pgm, Reference[] refs, Program otherProgram) {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		for (Reference ref : refs) {
 			Reference otherRef = DiffUtility.getReference(pgm, ref, otherProgram);
 			if ((otherRef != null) &&
@@ -2162,7 +2162,7 @@ public class ProgramDiffDetails {
 	}
 
 	private String getUserPropertyInfo(CodeUnit cu) {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		if (cu != null) {
 			Iterator<String> propNames = cu.propertyNames();
 			ArrayList<String> names = new ArrayList<>();
@@ -2422,7 +2422,7 @@ public class ProgramDiffDetails {
 		if (numSpaces <= 0) {
 			return "";
 		}
-		StringBuffer buf = new StringBuffer(numSpaces);
+		StringBuilder buf = new StringBuilder(numSpaces);
 		for (int i = 0; i < numSpaces; i++) {
 			buf.append(" ");
 		}

@@ -443,7 +443,7 @@ public class CParserPlugin extends ProgramPlugin {
 		while (toker.hasMoreTokens()) {
 			String val = toker.nextToken();
 			val = val.trim();
-			StringBuffer arg = new StringBuffer();
+			StringBuilder arg = new StringBuilder();
 			boolean parseQuote = false;
 			int index = 0;
 			while (index < val.length()) {

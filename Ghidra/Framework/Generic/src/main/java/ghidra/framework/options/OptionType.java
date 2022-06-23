@@ -303,7 +303,7 @@ public enum OptionType {
 			String fontName = font.getFamily();
 			int style = font.getStyle();
 			int size = font.getSize();
-			StringBuffer buf = new StringBuffer();
+			StringBuilder buf = new StringBuilder();
 			buf.append(fontName);
 			buf.append("-");
 			buf.append(STYLES[style]);

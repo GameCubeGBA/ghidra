@@ -59,7 +59,7 @@ public class PropertyFileTest extends AbstractGenericTest {
 		pf.putInt("TestInt", 1234);
 		pf.putLong("TestLong", 0x12345678);
 
-		StringBuffer sb = new StringBuffer("Line1\nLine2\n\"Ugly\" & Special <Values>; ");
+		StringBuilder sb = new StringBuilder("Line1\nLine2\n\"Ugly\" & Special <Values>; ");
 		for (int i = 1; i < 35; i++) {
 			sb.append((char) i);
 		}

@@ -64,7 +64,7 @@ public enum MethodsInfoAccessFlags {
 	 * @return a text representation of the access flags.
 	 */
 	public static String toString(int access) {
-		StringBuffer stringBuffer = new StringBuffer();
+		StringBuilder stringBuffer = new StringBuilder();
 		if ((access & ACC_PUBLIC.value) == ACC_PUBLIC.value) {
 			stringBuffer.append("public ");
 		}

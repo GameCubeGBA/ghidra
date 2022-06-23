@@ -154,7 +154,7 @@ public class DataSettingsDialog extends DialogComponentProvider {
 		if (selection != null) {
 			return "Common Settings for Selected Data";
 		}
-		StringBuffer nameBuf = new StringBuffer();
+		StringBuilder nameBuf = new StringBuilder();
 		if (data == null) {
 			nameBuf.append("Default ");
 		}

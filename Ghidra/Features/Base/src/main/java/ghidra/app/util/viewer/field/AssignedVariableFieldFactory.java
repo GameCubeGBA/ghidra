@@ -96,7 +96,7 @@ public class AssignedVariableFieldFactory extends FieldFactory {
 				int firstUseOffset = var.getFirstUseOffset();
 				if (firstUseOffset != 0 && firstUseOffset >= minOffset &&
 					firstUseOffset <= maxOffset) {
-					StringBuffer buf = new StringBuffer("assign ");
+					StringBuilder buf = new StringBuilder("assign ");
 					buf.append(var.getVariableStorage().toString());
 					buf.append(" = ");
 					buf.append(var.getName());

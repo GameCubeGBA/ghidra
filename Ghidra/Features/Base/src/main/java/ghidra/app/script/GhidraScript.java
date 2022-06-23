@@ -1324,7 +1324,7 @@ public abstract class GhidraScript extends FlatProgramAPI {
 
 		Options options = program.getOptions(Program.ANALYSIS_PROPERTIES);
 
-		StringBuffer errorBuffer = new StringBuffer();
+		StringBuilder errorBuffer = new StringBuilder();
 		for (Map.Entry<String, String> entry : analysisSettings.entrySet()) {
 			String returnString = setAnalysisOption(options, entry.getKey(),
                     entry.getValue());
@@ -3773,7 +3773,7 @@ public abstract class GhidraScript extends FlatProgramAPI {
 		if (s == null) {
 			s = "";
 		}
-		StringBuffer buffer = new StringBuffer(s);
+		StringBuilder buffer = new StringBuilder(s);
 		int zerosNeeded = len - s.length();
 		for (int i = 0; i < zerosNeeded; ++i) {
 			buffer.insert(0, '0');

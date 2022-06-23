@@ -72,7 +72,7 @@ public class MenuGroupMap {
 	}
 
 	private static String getMenuPathKey(String[] menuPath) {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		for (String element : menuPath) {
 			buf.append("/");
 			buf.append(element);

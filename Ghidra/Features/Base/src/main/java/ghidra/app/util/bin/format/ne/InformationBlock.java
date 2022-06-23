@@ -333,7 +333,7 @@ public class InformationBlock {
 	 * @return a string representation of the other flags
 	 */
 	public String getOtherFlagsAsString() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		if ((ne_flagsothers & OTHER_FLAGS_GANGLOAD_AREA) != 0) {
 			buffer.append(TAB + "Gangload Area" + "\n");
 		}
@@ -559,7 +559,7 @@ public class InformationBlock {
 	 * @return a string representation of the application flags
 	 */
 	public String getApplicationFlagsAsString() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		byte application_type = (byte) (ne_flags_app & 0x03);
 		if (application_type == FLAGS_APP_FULL_SCREEN) {
 			buffer.append(TAB + "Full Screen" + "\n");
@@ -591,7 +591,7 @@ public class InformationBlock {
 	 * @return a string representation of the program flags
 	 */
 	public String getProgramFlagsAsString() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		if ((ne_flags_prog & FLAGS_PROG_80286) != 0) {
 			buffer.append(TAB + "80286" + "\n");
 		}

@@ -77,7 +77,7 @@ public class GConv {
     }
 
     public static String toString(byte [] array) {
-    	StringBuffer buffer = new StringBuffer();
+    	StringBuilder buffer = new StringBuilder();
     	for (byte b : array) {
 			buffer.append((char)b);
 		}
@@ -125,7 +125,7 @@ public class GConv {
      */
     public static String zeropad(String s, int len) {
         if (s == null) s = "";
-        StringBuffer buffer = new StringBuffer(s);
+        StringBuilder buffer = new StringBuilder(s);
         int zerosNeeded = len - s.length();
         for (int i = 0 ; i < zerosNeeded ; ++i) {
             buffer.insert(0, '0');

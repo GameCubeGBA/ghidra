@@ -37,7 +37,7 @@ public class IterateInstructionsScript extends GhidraScript {
 				break;
 			}
 
-			StringBuffer buffer = new StringBuffer();
+			StringBuilder buffer = new StringBuilder();
 
 			buffer.append(instruction.getMinAddress());
 			buffer.append(' ');

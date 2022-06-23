@@ -787,7 +787,7 @@ class SymbolMerge {
 	}
 
 	static String getDuplicateSymbolsInfo(Hashtable<Symbol, Symbol> dupSyms) {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		Enumeration<Symbol> keys = dupSyms.keys();
 		while (keys.hasMoreElements()) {
 			Symbol fromSym = keys.nextElement();

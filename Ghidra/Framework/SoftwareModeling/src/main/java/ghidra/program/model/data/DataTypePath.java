@@ -84,7 +84,7 @@ public class DataTypePath {
 	 * @return the full path
 	 */
 	public String getPath() {
-		StringBuffer buf = new StringBuffer(categoryPath.getPath());
+		StringBuilder buf = new StringBuilder(categoryPath.getPath());
 		if (buf.charAt(buf.length() - 1) != CategoryPath.DELIMITER_CHAR) {
 			buf.append(CategoryPath.DELIMITER_CHAR);
 		}

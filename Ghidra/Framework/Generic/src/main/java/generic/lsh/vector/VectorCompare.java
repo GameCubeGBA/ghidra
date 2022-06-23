@@ -52,7 +52,7 @@ public class VectorCompare {
 
 	@Override
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		buffer.append("\nVectorCompare: ");
 		buffer.append("\n  Result of the dot product     = " + dotproduct);
 		buffer.append("\n  # of hashes in first vector   = " + acount);

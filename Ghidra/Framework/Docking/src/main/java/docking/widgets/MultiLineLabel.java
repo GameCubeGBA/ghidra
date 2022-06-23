@@ -167,7 +167,7 @@ public class MultiLineLabel extends JPanel {
 	 * Get the label text.
 	 */
 	public String getLabel() {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < lines.length; i++) {
 			sb.append(lines[i]);
 			if (i < lines.length - 1) {

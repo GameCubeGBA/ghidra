@@ -421,7 +421,7 @@ public class BlockGraphTask extends Task {
 		SymbolIterator it = program.getSymbolTable().getSymbolsAsIterator(bb.getMinAddress());
 		int count = 0;
 		if (it.hasNext()) {
-			StringBuffer buf = new StringBuffer();
+			StringBuilder buf = new StringBuilder();
 			for (Symbol symbol : it) {
 				if (count != 0) {
 					buf.append('\n');

@@ -264,7 +264,7 @@ public final class ObjectiveC1_Utilities {
 		int colonCount = StringUtilities.countOccurrences(signature.getName(), ':');
 
 		StringTokenizer tokenizer = new StringTokenizer(signature.getName(), ":");
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		buffer.append(methodType.getIndicator());
 		buffer.append(' ');
 		buffer.append('(' + signature.getReturnType().getDisplayName() + ')');

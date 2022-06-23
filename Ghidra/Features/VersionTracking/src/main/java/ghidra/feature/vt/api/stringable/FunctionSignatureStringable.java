@@ -118,7 +118,7 @@ public class FunctionSignatureStringable extends Stringable {
 		if (signatureString != null) {
 			return signatureString;
 		}
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		buf.append(returnInfo.dataType.getDisplayName());
 		buf.append(" ");
 
@@ -170,7 +170,7 @@ public class FunctionSignatureStringable extends Stringable {
 		if (returnInfo == null) {
 			return "undefined " + SHORT_NAME + "()";
 		}
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		buf.append(getSignatureDisplayString());
 		if (hasCustomStorage && (program != null)) {
 			try {

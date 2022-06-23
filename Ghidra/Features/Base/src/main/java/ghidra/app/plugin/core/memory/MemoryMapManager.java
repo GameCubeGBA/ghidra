@@ -189,7 +189,7 @@ class MemoryMapManager {
 			return;
 		}
 
-		StringBuffer blockNames = new StringBuffer();
+		StringBuilder blockNames = new StringBuilder();
 		AddressSet set = new AddressSet();
 		for (int i = 0; i < blocks.size(); i++) {
 			MemoryBlock block = blocks.get(i);

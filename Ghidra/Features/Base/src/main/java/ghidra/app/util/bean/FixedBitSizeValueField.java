@@ -288,7 +288,7 @@ public class FixedBitSizeValueField extends JPanel {
 		}
 		String maxValueString = maxUnsignedValue.toString(radix);
 		if (maxValueString.length() > valueString.length()) {
-			StringBuffer buf = new StringBuffer();
+			StringBuilder buf = new StringBuilder();
 			int n = maxValueString.length() - valueString.length();
 			for(int i=0;i<n;i++) {
 				buf.append("0");

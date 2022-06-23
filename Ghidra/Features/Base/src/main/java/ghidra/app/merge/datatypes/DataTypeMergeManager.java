@@ -497,7 +497,7 @@ public class DataTypeMergeManager implements MergeResolver {
 		cleanUpDataTypes();
 
 		if (fixUpList.size() > 0) {
-			StringBuffer sb = new StringBuffer();
+			StringBuilder sb = new StringBuilder();
 			sb.append("The following data types are unresolved:\n");
 			for (FixUpInfo info : fixUpList) {
 				DataTypeManager dtm = info.getDataTypeManager();

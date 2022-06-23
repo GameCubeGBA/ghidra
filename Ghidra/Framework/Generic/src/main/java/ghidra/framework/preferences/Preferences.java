@@ -373,7 +373,7 @@ public class Preferences {
 			return;
 		}
 
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < paths.length; i++) {
 			sb.append(paths[i]);
 			if (i < paths.length - 1) {

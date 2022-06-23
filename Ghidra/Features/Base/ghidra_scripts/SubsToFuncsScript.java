@@ -33,7 +33,7 @@ public class SubsToFuncsScript extends GhidraScript {
 	public void run() throws Exception {
 		BlockModelService blockModelService = state.getTool().getService(BlockModelService.class);
 		Listing listing = currentProgram.getListing();
-		StringBuffer errorBuf = new StringBuffer();
+		StringBuilder errorBuf = new StringBuilder();
 		CodeBlockModel cbm = blockModelService.getActiveSubroutineModel();
 		AddressSetView addrset =
 			currentSelection == null ? (AddressSetView) currentProgram.getMemory()

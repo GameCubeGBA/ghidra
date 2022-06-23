@@ -410,7 +410,7 @@ public class RepositoryManager {
 	}
 
 	public static void log(String repositoryName, String path, String msg, String user) {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		if (repositoryName != null) {
 			buf.append("[");
 			buf.append(repositoryName);

@@ -729,7 +729,7 @@ public class EHFunctionInfoModel extends AbstractCreateDataTypeModel {
 	 */
 	@Override
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		buffer.append("EHFunctionInfo" + NEW_LINE);
 		buffer.append(INDENT + "Program: " + getProgram().getDomainFile().getPathname() + NEW_LINE);
 		buffer.append(INDENT + "Address: " + getAddress().toString(true) + NEW_LINE);

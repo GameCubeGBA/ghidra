@@ -379,7 +379,7 @@ public class Scalar implements Comparable<Scalar> {
 		}
 
 		String b;
-		StringBuffer buf = new StringBuffer(32);
+		StringBuilder buf = new StringBuilder(32);
 		if (bitLength == 64 && !signed) {
 			b = getBigInteger().toString(radix);
 		}

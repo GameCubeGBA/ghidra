@@ -517,7 +517,7 @@ public class RepositoryHandleImpl extends UnicastRemoteObject implements RemoteR
 			RemoteBufferFileImpl.getOpenFileUsers(repository.getName(),
 				getPathname(parentPath, itemName));
 		if (openFileUsers != null) {
-			StringBuffer buf = new StringBuffer("");
+			StringBuilder buf = new StringBuilder("");
 			for (String user : openFileUsers) {
 				if (buf.length() != 0) {
 					buf.append(", ");
@@ -706,7 +706,7 @@ public class RepositoryHandleImpl extends UnicastRemoteObject implements RemoteR
 	}
 
 	private static String getPathname(String parentPath, String itemName) {
-		StringBuffer path = new StringBuffer(parentPath);
+		StringBuilder path = new StringBuilder(parentPath);
 		if (path.charAt(path.length() - 1) != FileSystem.SEPARATOR_CHAR) {
 			path.append(FileSystem.SEPARATOR_CHAR);
 		}

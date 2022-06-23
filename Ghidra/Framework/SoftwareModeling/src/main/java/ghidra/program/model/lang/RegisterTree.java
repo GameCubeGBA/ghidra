@@ -188,7 +188,7 @@ public class RegisterTree implements Comparable<RegisterTree> {
 	 */
 	@Override
 	public String toString() {
-		StringBuffer buffer = new StringBuffer(name);
+		StringBuilder buffer = new StringBuilder(name);
 		buffer.append('[');
 		for (RegisterTree child : children) {
 			buffer.append(child.toString());

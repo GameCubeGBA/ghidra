@@ -100,7 +100,7 @@ public class ParameterInfo extends ParameterImpl {
 		DataTypeManager dataTypeMananger = getProgram().getDataTypeManager();
 		DataType dt = getDataType();
 
-		StringBuffer buffy = new StringBuffer();
+		StringBuilder buffy = new StringBuilder();
 		buffy.append(getClass().getSimpleName()).append(Stringable.DELIMITER);
 		buffy.append(Long.toString(dataTypeMananger.getUniversalID().getValue())).append(
 			Stringable.DELIMITER);

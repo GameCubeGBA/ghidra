@@ -35,7 +35,7 @@ public class ClangLine {
 	}
 
 	public String getIndentString() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		for (int i = 0; i < indent_level; i++) {
 			buffer.append(PrettyPrinter.INDENT_STRING);
 		}

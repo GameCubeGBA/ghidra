@@ -258,7 +258,7 @@ public class TableTest extends AbstractGenericTest {
 //    }
 	private String getRandomSizeString(int max) {
 		int size = (int) (Math.random() * max);
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		for (int i = 0; i < size; i++) {
 			buf.append(' ');
 		}

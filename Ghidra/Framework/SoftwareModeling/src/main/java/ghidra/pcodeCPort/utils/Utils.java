@@ -207,7 +207,7 @@ public class Utils {
 			return decodedString;
 		}
 
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		int missingLength = padLength - decodedString.length();
 		for ( int i = 0; i < missingLength; i++ ) {
 			buffer.append( "0" );

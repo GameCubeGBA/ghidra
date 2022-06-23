@@ -191,7 +191,7 @@ public class DWARFLine {
 
 	@Override
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		buffer.append("Line Entry");
 		buffer.append(" Include Directories: [");
 		for (String dir : this.include_directories) {
@@ -260,7 +260,7 @@ public class DWARFLine {
 
 		@Override
 		public String toString() {
-			StringBuffer buffer = new StringBuffer();
+			StringBuilder buffer = new StringBuilder();
 			buffer.append("Filename: ");
 			buffer.append(this.name);
 			buffer.append(" Length: ");

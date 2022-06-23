@@ -441,7 +441,7 @@ public class TableColumnModelState implements SortListener {
 		TableModel tableModel = table.getModel();
 
 		int columnCount = getDefaultColumnCount();
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		buffer.append(getTableModelName());
 		buffer.append(":");
 		for (int i = 0; i < columnCount; i++) {

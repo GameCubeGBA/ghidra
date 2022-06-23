@@ -144,7 +144,7 @@ public final class NamingUtilities {
 	 */
 	public static String mangle(String name) {
 		int len = name.length();
-		StringBuffer buf = new StringBuffer(2 * len);
+		StringBuilder buf = new StringBuilder(2 * len);
 
 		for (int i = 0; i < len; i++) {
 			char c = name.charAt(i);
@@ -173,7 +173,7 @@ public final class NamingUtilities {
 	 */
 	public static String demangle(String mangledName) {
 		int len = mangledName.length();
-		StringBuffer buf = new StringBuffer(len);
+		StringBuilder buf = new StringBuilder(len);
 		boolean foundMangle = false;
 
 		for (int i = 0; i < len; i++) {

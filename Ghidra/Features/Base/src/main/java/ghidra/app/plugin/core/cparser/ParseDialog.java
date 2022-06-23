@@ -265,7 +265,7 @@ class ParseDialog extends DialogComponentProvider {
 		tableModel.removeTableModelListener(tableListener);
 		ComboBoxItem item = (ComboBoxItem) comboBox.getSelectedItem();
 
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		ArrayList<String> pathList = new ArrayList<>();
 		try {
 			BufferedReader br =

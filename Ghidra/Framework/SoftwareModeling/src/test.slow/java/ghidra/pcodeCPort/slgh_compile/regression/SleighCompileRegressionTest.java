@@ -64,7 +64,7 @@ public class SleighCompileRegressionTest extends AbstractGenericTest {
 	@Test
 	public void testExternal() throws Exception {
 
-		StringBuffer summary = new StringBuffer();
+		StringBuilder summary = new StringBuilder();
 
 		LoggingInitialization.initializeLoggingSystem();
 		List<ResourceFile> inputs = getSlaspecFiles();

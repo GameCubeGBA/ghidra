@@ -475,7 +475,7 @@ public class PackedDatabaseCache {
 		}
 
 		String getMapEntry() {
-			StringBuffer buf = new StringBuffer();
+			StringBuilder buf = new StringBuilder();
 			buf.append(packedDbFilePath);
 			buf.append(MAP_SEPARATOR);
 			buf.append(dbDir.getName());

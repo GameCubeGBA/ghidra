@@ -118,7 +118,7 @@ class TransactionMonitor extends JComponent implements TransactionListener {
 	public String getToolTipText() {
 		if (lastTx != null) {
 			List<String> list = lastTx.getOpenSubTransactions();
-			StringBuffer tip = new StringBuffer();
+			StringBuilder tip = new StringBuilder();
 			Iterator<String> iter = list.iterator();
 			while (iter.hasNext()) {
 				if (tip.length() != 0) {

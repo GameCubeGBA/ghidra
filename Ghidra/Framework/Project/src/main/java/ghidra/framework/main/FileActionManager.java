@@ -368,7 +368,7 @@ class FileActionManager {
 			}
 			if (!objs[lastIndex].lock(null)) {
 				String title = "Exit Ghidra";
-				StringBuffer buf = new StringBuffer();
+				StringBuilder buf = new StringBuilder();
 				UndoableDomainObject udo = (UndoableDomainObject) objs[lastIndex];
 				buf.append("The File " + files.get(lastIndex).getPathname() +
 					" is currently being modified by the\n");
@@ -597,7 +597,7 @@ class FileActionManager {
 
 		// give a special confirm message if user is about to
 		// remove the active project
-		StringBuffer confirmMsg = new StringBuffer("Project: ");
+		StringBuilder confirmMsg = new StringBuilder("Project: ");
 		confirmMsg.append(projectLocator.toString());
 		confirmMsg.append(" ?\n");
 		boolean isActiveProject =
@@ -685,7 +685,7 @@ class FileActionManager {
 			return true;
 		}
 
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append("The following files are Read-Only and cannot be\n" +
 			" saved 'As Is.' You must do a manual 'Save As' for these\n" + " files: \n \n");
 

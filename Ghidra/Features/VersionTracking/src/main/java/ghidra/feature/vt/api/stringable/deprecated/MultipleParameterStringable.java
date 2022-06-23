@@ -43,7 +43,7 @@ public class MultipleParameterStringable extends Stringable {
 
 	@Override
 	protected String doConvertToString(Program program) {
-		StringBuffer buffy = new StringBuffer();
+		StringBuilder buffy = new StringBuilder();
 
 		for (Stringable stringable : parameterStringables) {
 			buffy.append(Stringable.getString(stringable, program)).append(CUSTOM_DELIMITER);
@@ -104,7 +104,7 @@ public class MultipleParameterStringable extends Stringable {
 
 	@Override
 	public String getDisplayString() {
-		StringBuffer buffy = new StringBuffer();
+		StringBuilder buffy = new StringBuilder();
 		for (Stringable stringable : parameterStringables) {
 			buffy.append(stringable.getDisplayString()).append('\n');
 		}

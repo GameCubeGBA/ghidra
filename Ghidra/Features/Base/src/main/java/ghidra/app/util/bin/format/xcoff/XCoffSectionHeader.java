@@ -79,7 +79,7 @@ public final class XCoffSectionHeader implements StructConverter {
 
 	@Override
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		buffer.append("SECTION HEADER VALUES").append(NL);
 		buffer.append(new String(s_name)).append(NL);
 		buffer.append("s_paddr = ").append(s_paddr).append(NL);

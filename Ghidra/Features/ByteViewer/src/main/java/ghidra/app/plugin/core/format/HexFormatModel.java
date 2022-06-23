@@ -164,13 +164,13 @@ public class HexFormatModel implements UniversalDataFormatModel {
 	public String getDataRepresentation(ByteBlock block, BigInteger index)
 			throws ByteBlockAccessException {
 
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		//System.out.println("representation: = " + block.getLocationRepresentation(index)+ ", index = " + index);
 		if (prefixEnabled) {
 			sb.append("0x");
 		}
 
-		StringBuffer strBuff = new StringBuffer();
+		StringBuilder strBuff = new StringBuilder();
 		BigInteger byteIndex = index;
 		boolean qflag = false;
 		for (int idx = 0; idx < unitByteSize; idx++) {
@@ -210,7 +210,7 @@ public class HexFormatModel implements UniversalDataFormatModel {
 			throws ByteBlockAccessException {
 
 		int n;
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 
 		System.out.println("representation: = " + block.getLocationRepresentation(index) +
 			", index = " + index);
@@ -295,7 +295,7 @@ public class HexFormatModel implements UniversalDataFormatModel {
 	// *** private methods ***
 	/////////////////////////////////////////////////////////////////
 	private String adjust(String value) {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		int strLen = value.length();
 
 		if (strLen > 2) {

@@ -245,7 +245,7 @@ public class BytesFieldFactory extends FieldFactory {
 
 	private int buildAttributedByteValues(FieldElement[] aStrings, int pos, byte[] bytes, int size,
 			int residual, Color c, boolean addDelimToLastGroup) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		int groupSize = byteGroupSize - residual;
 		int tempGroupSize = 0;
 		for (int i = 0; i < size; ++i) {
@@ -270,7 +270,7 @@ public class BytesFieldFactory extends FieldFactory {
 				AttributedString as = new AttributedString(buffer.toString(), c, getMetrics());
 				aStrings[pos] = new TextFieldElement(as, pos, 0);
 				pos++;
-				buffer = new StringBuffer();
+				buffer = new StringBuilder();
 			}
 		}
 		// append incomplete byte group...

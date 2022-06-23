@@ -736,7 +736,7 @@ public abstract class AbstractOptions implements Options {
 	 */
 	private static boolean containsUnquotedText(String stringToSearch, String textToLocate) {
 
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		boolean inQuotes = false;
 		for (int i = 0; i < stringToSearch.length(); i++) {
 			char c = stringToSearch.charAt(i);

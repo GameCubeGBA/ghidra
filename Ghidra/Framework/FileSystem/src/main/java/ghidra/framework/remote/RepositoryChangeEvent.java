@@ -73,7 +73,7 @@ public class RepositoryChangeEvent implements Serializable {
 	@Override
 	public String toString() {
 		if (type >= 0 && type <= LAST_TYPE) {
-			StringBuffer buf = new StringBuffer();
+			StringBuilder buf = new StringBuilder();
 			buf.append("<");
 			buf.append(TYPES[type]);
 			buf.append(",parentPath=");

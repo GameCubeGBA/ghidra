@@ -352,7 +352,7 @@ public class SymbolTreeProvider extends ComponentProviderAdapter {
 
 	public int reparentSymbols(Namespace namespace, List<Symbol> symbolList) {
 		int count = 0;
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		int transactionID = program.startTransaction("Change Parent Namespaces");
 		try {
 			for (Symbol symbol : symbolList) {

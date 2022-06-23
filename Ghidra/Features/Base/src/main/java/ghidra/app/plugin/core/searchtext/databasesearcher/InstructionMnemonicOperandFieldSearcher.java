@@ -151,7 +151,7 @@ public class InstructionMnemonicOperandFieldSearcher extends ProgramDatabaseFiel
 		if (opStrings.length == 0) {
 			return mnemonicString;
 		}
-		StringBuffer buf = new StringBuffer(mnemonicString);
+		StringBuilder buf = new StringBuilder(mnemonicString);
 		buf.append(' ');
 		for (String string : opStrings) {
 			buf.append(string);

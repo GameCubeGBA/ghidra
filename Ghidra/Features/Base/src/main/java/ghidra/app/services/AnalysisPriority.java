@@ -186,7 +186,7 @@ public class AnalysisPriority {
 
 	@Override
 	public String toString() {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		if (name != null) {
 			buf.append("[").append(name).append("]  ");
 		}

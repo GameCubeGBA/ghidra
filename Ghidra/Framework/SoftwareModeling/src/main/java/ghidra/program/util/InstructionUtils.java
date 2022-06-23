@@ -42,7 +42,7 @@ public class InstructionUtils {
 			return null;
 		}
 
-		StringBuffer textBuf = new StringBuffer("Instruction Summary");
+		StringBuilder textBuf = new StringBuilder("Instruction Summary");
 		textBuf.append("\n-------------------");
 		textBuf.append("\nMnemonic          : " + instruction.getMnemonicString());
 		textBuf.append("\nNumber of Operands: " + instruction.getNumOperands());
@@ -215,7 +215,7 @@ public class InstructionUtils {
 		if (strs == null) {
 			return "-none-";
 		}
-		StringBuffer outStr = new StringBuffer();
+		StringBuilder outStr = new StringBuilder();
 		for (String str : strs) {
 			if (outStr.length() != 0) {
 				outStr.append(", ");
@@ -230,7 +230,7 @@ public class InstructionUtils {
 			String[] strs = list != null ? new String[list.size()] : null;
 			return getString(strs, false);
 		}
-		StringBuffer strBuf = new StringBuffer("   ");
+		StringBuilder strBuf = new StringBuilder("   ");
 		if (list == null) {
 			strBuf.append("-none-");
 			return strBuf.toString();

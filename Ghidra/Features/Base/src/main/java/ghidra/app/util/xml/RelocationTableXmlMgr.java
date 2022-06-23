@@ -109,7 +109,7 @@ class RelocationTableXmlMgr {
 		if (values == null || values.length == 0) {
 			return "";
 		}
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		for (long v : values) {
 			if (buf.length() != 0) {
 				buf.append(',');
@@ -123,7 +123,7 @@ class RelocationTableXmlMgr {
 		if (values == null || values.length == 0) {
 			return null;
 		}
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		for (byte v : values) {
 			if (buf.length() != 0) {
 				buf.append(',');

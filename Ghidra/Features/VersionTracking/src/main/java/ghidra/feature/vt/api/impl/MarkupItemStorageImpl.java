@@ -136,7 +136,7 @@ public class MarkupItemStorageImpl implements MarkupItemStorage {
 
 	@Override
 	public String toString() {
-		StringBuffer buffy = new StringBuffer();
+		StringBuilder buffy = new StringBuilder();
 		buffy.append('\n').append(getClass().getSimpleName()).append('\n');
 		buffy.append('\t').append("Source Address          = ").append(sourceAddress).append('\n');
 		buffy.append('\t').append("Markup Type             = ").append(markupType).append('\n');

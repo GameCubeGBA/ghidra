@@ -130,7 +130,7 @@ public class InstructionMaskValueFieldFactory extends FieldFactory {
 	}
 
 	private String getFormattedBytes(byte[] value) {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		for (int i = 0; i < value.length; i++) {
 			String byteStr = StringUtilities.pad(Integer.toBinaryString(value[i] & 0xff), '0', 8);
 			buf.append(byteStr);

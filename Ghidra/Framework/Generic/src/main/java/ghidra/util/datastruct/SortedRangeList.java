@@ -344,7 +344,7 @@ public class SortedRangeList implements Iterable<Range> {
 	 */
 	@Override
 	public String toString() {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		Iterator<Range> it = getRanges();
 		if (it.hasNext()) {
 			Range r = it.next();

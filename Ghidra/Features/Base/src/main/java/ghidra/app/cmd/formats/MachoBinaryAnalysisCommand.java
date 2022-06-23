@@ -155,7 +155,7 @@ public class MachoBinaryAnalysisCommand extends FlatProgramAPI
 	}
 
 	private void setHeaderComment(MachHeader header, Address machAddress) {
-		StringBuffer comments = new StringBuffer();
+		StringBuilder comments = new StringBuilder();
 		comments.append("File type: ");
 		comments.append(MachHeaderFileTypes.getFileTypeName(header.getFileType()));
 		comments.append('\n');

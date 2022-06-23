@@ -229,7 +229,7 @@ public class DiffApplyTestAdapter extends DiffTestAdapter {
 		ProgramSelection currentSelection = cb.getCurrentSelection();
 		AddressSet missingFromSelection = expectedSelection.subtract(currentSelection);
 		AddressSet unexpectedlySelected = currentSelection.subtract(expectedSelection);
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		if (!missingFromSelection.isEmpty()) {
 			buf.append("\nSelection expected the following addresses but they are missing: \n" +
 				missingFromSelection.toString());
@@ -280,7 +280,7 @@ public class DiffApplyTestAdapter extends DiffTestAdapter {
 			extraList.add(actualAddresses[actualIndex]);
 			actualIndex++;
 		}
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		if (!missingList.isEmpty()) {
 			buf.append(type + "s are missing at ");
 			buf.append(missingList.get(0).toString());

@@ -428,7 +428,7 @@ public class ProjectInfoDialog extends DialogComponentProvider {
 		wm.showWizard(getComponent());
 		RepositoryAdapter rep = panelManager.getProjectRepository();
 		if (rep != null) {
-			StringBuffer confirmMsg = new StringBuffer();
+			StringBuilder confirmMsg = new StringBuilder();
 			confirmMsg.append("All version history on your files will be\n" +
 				"lost after your project is converted.\n" +
 				"Do you want to convert your project?\n");

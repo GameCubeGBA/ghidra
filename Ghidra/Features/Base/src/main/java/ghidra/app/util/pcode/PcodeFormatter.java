@@ -141,7 +141,7 @@ public class PcodeFormatter {
 	public String toString(Program program, OpTpl[] pcodeOpTemplates) {
 
 		boolean indent = hasLabel(pcodeOpTemplates);
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		for (int i = 0; i < pcodeOpTemplates.length; i++) {
 			if (maxDisplayLines > 0 && i >= maxDisplayLines) {
 				break;

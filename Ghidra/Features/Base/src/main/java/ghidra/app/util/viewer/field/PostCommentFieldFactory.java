@@ -548,7 +548,7 @@ public class PostCommentFieldFactory extends FieldFactory {
 			return;
 		}
 		// Initialize dashed separator lines
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < 80; i++) {
 			sb.append("-");
 		}

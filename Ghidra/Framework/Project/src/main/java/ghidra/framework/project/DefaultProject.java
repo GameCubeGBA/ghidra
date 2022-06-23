@@ -479,7 +479,7 @@ public class DefaultProject implements Project {
 			if (msg == null) {
 				msg = e.toString();
 			}
-			StringBuffer sb = new StringBuffer();
+			StringBuilder sb = new StringBuilder();
 			StringTokenizer st = new StringTokenizer(msg, ":");
 			while (st.hasMoreTokens()) {
 				sb.append(st.nextToken());

@@ -220,7 +220,7 @@ public final class NumericUtilities {
 	 * @param value the long value to convert
 	 */
 	public final static String toSignedHexString(long value) {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		if (value < 0) {
 			buf.append("-");
 		}

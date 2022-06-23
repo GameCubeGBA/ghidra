@@ -33,7 +33,7 @@ public interface InternalDataTypeComponent extends DataTypeComponent {
 	void update(int ordinal, int offset, int length);
 
 	public static String toString(DataTypeComponent c) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		buffer.append("  " + c.getOrdinal());
 		buffer.append("  " + c.getOffset());
 		buffer.append("  " + c.getDataType().getName());

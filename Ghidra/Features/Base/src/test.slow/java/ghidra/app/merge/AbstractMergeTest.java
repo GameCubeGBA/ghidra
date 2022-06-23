@@ -190,7 +190,7 @@ public abstract class AbstractMergeTest extends AbstractGhidraHeadedIntegrationT
 			return;
 		}
 		ArrayList<String> list = tx.getOpenSubTransactions();
-		StringBuffer tip = new StringBuffer();
+		StringBuilder tip = new StringBuilder();
 		Iterator<String> iter = list.iterator();
 		while (iter.hasNext()) {
 			if (tip.length() != 0) {

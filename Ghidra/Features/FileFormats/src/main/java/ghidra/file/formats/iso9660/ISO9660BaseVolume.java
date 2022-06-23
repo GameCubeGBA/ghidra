@@ -58,7 +58,7 @@ public class ISO9660BaseVolume implements StructConverter {
 	 */
 	@Override
 	public String toString() {
-		StringBuffer buff = new StringBuffer();
+		StringBuilder buff = new StringBuilder();
 
 		buff.append("Type Code: 0x" + Integer.toHexString(typeCode) + " => " + getTypeCodeString() +
 			"\n");

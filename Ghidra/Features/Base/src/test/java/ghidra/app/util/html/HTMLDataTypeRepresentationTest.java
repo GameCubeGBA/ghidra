@@ -1462,7 +1462,7 @@ public class HTMLDataTypeRepresentationTest extends AbstractGenericTest {
 		JPanel rightPanel = new JPanel(new BorderLayout());
 		String rightHtml = right.getHTMLString();
 		System.err.println("Right HTML: " + rightHtml);
-		StringBuffer buffy1 = new StringBuffer(rightHtml);
+		StringBuilder buffy1 = new StringBuilder(rightHtml);
 		JLabel rightLabel = new GDHtmlLabel();
 		rightLabel.setOpaque(true);
 		rightLabel.setBackground(Color.WHITE);
@@ -1472,7 +1472,7 @@ public class HTMLDataTypeRepresentationTest extends AbstractGenericTest {
 		JPanel leftPanel = new JPanel(new BorderLayout());
 		String leftHtml = left.getHTMLString();
 		System.err.println("Left HTML: " + leftHtml);
-		StringBuffer buffy2 = new StringBuffer(leftHtml);
+		StringBuilder buffy2 = new StringBuilder(leftHtml);
 		JLabel leftLabel = new GDHtmlLabel();
 		leftLabel.setOpaque(true);
 		leftLabel.setBackground(Color.WHITE);

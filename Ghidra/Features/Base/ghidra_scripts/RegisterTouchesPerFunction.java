@@ -132,7 +132,7 @@ public class RegisterTouchesPerFunction extends GhidraScript
             }
         }
 
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         if (comment != null) {
         	buffer.append(comment);
         	buffer.append("\r\n");

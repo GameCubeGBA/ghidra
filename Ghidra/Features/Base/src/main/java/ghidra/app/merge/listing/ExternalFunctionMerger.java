@@ -2763,7 +2763,7 @@ public class ExternalFunctionMerger extends AbstractFunctionMerger implements Li
 
 		runSwing(() -> {
 			panel.setTitle("External Add");
-			StringBuffer buf = new StringBuffer();
+			StringBuilder buf = new StringBuilder();
 			buf.append(LATEST_TITLE + " external '");
 			String latestName = getExternalName(externalLocations, LATEST, true);
 			buf.append(ConflictUtility.getEmphasizeString(latestName));
@@ -2799,7 +2799,7 @@ public class ExternalFunctionMerger extends AbstractFunctionMerger implements Li
 
 		runSwing(() -> {
 			panel.setTitle("External Remove");
-			StringBuffer buf = new StringBuffer();
+			StringBuilder buf = new StringBuilder();
 			buf.append("One external was removed and the other changed for ");
 			buf.append(getExternalName(externalLocations, ORIGINAL, true));
 			buf.append(".");
@@ -2951,7 +2951,7 @@ public class ExternalFunctionMerger extends AbstractFunctionMerger implements Li
 
 		runSwing(() -> {
 			panel.setTitle("External Data Type");
-			StringBuffer buf = new StringBuffer();
+			StringBuilder buf = new StringBuilder();
 			if (removeString != null) {
 				buf.append("External data type was removed in " + removeString +
 					" and changed in " + changeString + " /nfor ");

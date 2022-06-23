@@ -79,7 +79,7 @@ public class PrettyPrinter {
 	 * @return a string of readable C code
 	 */
 	public DecompiledFunction print(boolean removeInvalidChars) {
-		StringBuffer buff = new StringBuffer();
+		StringBuilder buff = new StringBuilder();
 
 		for (ClangLine line : lines) {
 			buff.append(line.getIndentString());

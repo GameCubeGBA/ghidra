@@ -115,7 +115,7 @@ public class AskDialog<T> extends DialogComponentProvider {
 			bounds.y = location.y;
 		}
 
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		buffer.append(bounds.x).append(":");
 		buffer.append(bounds.y).append(":");
 		buffer.append(bounds.width).append(":");

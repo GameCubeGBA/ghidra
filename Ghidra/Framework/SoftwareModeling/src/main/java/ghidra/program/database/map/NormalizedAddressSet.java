@@ -572,7 +572,7 @@ public class NormalizedAddressSet implements AddressSetView {
 			return ("[empty]\n");
 		}
 
-		StringBuffer str = new StringBuffer();
+		StringBuilder str = new StringBuilder();
 		for (AddressRange range : this) {
 			str.append(range);
 			str.append(" ");

@@ -149,7 +149,7 @@ public class OverridePrototypeAction extends AbstractDecompilerAction {
 			}
 		}
 
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 
 		Varnode vn = op.getOutput();
 		DataType dt = null;

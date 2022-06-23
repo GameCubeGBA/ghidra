@@ -1257,7 +1257,7 @@ public class AutoAnalysisManager implements DomainObjectListener, DomainObjectCl
 	 */
 	public String getTaskTimesString() {
 
-		StringBuffer taskTimesStringBuf = new StringBuffer();
+		StringBuilder taskTimesStringBuf = new StringBuilder();
 
 		String spacer = "                                                     ";
 

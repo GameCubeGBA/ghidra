@@ -937,7 +937,7 @@ public class AddressTable {
 
 	private String getByteCodeString(DumbMemBufferImpl memBuf, Object object, Object object2,
 			int length) {
-		StringBuffer bytes = new StringBuffer();
+		StringBuilder bytes = new StringBuilder();
 
 		for (int ii = 0; ii < length; ii++) {
 			if (ii != 0) {

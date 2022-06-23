@@ -147,7 +147,7 @@ public class VTAssociationMarkupStatus implements Comparable<VTAssociationMarkup
 	 * @return  a description of this status, detailing the various status values.
 	 */
 	public String getDescription() {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		if (hasUnexaminedMarkup()) {
 			buf.append("Has one or more unexamined markup items.\n");
 		}

@@ -1349,7 +1349,7 @@ public class IndexedLocalFileSystem extends LocalFileSystem {
 
 		@Override
 		public String toString() {
-			StringBuffer buf = new StringBuffer();
+			StringBuilder buf = new StringBuilder();
 			String path = getPathname();
 			Folder p = parent;
 			while (p != null) {

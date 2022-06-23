@@ -726,7 +726,7 @@ public class ResourceDataDirectory extends DataDirectory {
 
 	@Override
 	public String toString() {
-		StringBuffer buff = new StringBuffer();
+		StringBuilder buff = new StringBuilder();
 		if (hasParsed) {
 			buff.append("\t\t" + "Resource Directory: [" + super.toString() + "]" + "\n");
 			List<ResourceInfo> resources = getResources();

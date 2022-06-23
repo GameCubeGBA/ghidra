@@ -135,7 +135,7 @@ public class ProjectDataPasteAction extends ProjectDataCopyCutBaseAction {
 		boolean listChanged = removeDecendantsFromList(list);
 
 		boolean resetClipboard = false;
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 
 		for (int i = 0; i < list.size(); i++) {
 			GTreeNode tnode = list.get(i);

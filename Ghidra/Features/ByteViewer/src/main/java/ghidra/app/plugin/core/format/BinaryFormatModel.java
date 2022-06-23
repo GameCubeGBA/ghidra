@@ -183,7 +183,7 @@ public class BinaryFormatModel implements UniversalDataFormatModel {
 	// *** private methods ***
 	/////////////////////////////////////////////////////////////////
 	private String pad(String value) {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		int len = symbolSize - value.length();
 
 		for (int i = 0; i < len; i++) {

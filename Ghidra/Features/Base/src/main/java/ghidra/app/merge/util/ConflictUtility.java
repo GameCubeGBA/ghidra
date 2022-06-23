@@ -87,7 +87,7 @@ public class ConflictUtility {
 	 * @return the string representing that many spaces in HTML.
 	 */
 	public static String spaces(int num) {
-		StringBuffer buf = new StringBuffer(6 * num);
+		StringBuilder buf = new StringBuilder(6 * num);
 		for (int i = 0; i < num; i++) {
 			buf.append("&nbsp;");
 		}
@@ -216,7 +216,7 @@ public class ConflictUtility {
 	 */
 	private static String replaceNewLines(String text) {
 		int length = text.length();
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		int start = 0;
 		while (start < length) {
 			int index = text.indexOf('\n', start);

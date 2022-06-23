@@ -1022,7 +1022,7 @@ public class ProgramMerge implements PropertyVisitor {
 	 *
 	 */
 	String getDuplicateEquatesInfo() {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		for (Map.Entry<String, DupEquate> entry : dupEquates.entrySet()) {
 			DupEquate dupEquate = entry.getValue();
 			Equate equate = dupEquate.equate;
@@ -1959,7 +1959,7 @@ public class ProgramMerge implements PropertyVisitor {
 	 *
 	 */
 	String getDuplicateSymbolsInfo() {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		SymbolTable origSymTab = originProgram.getSymbolTable();
 		SymbolTable resultSymTab = resultProgram.getSymbolTable();
 		long[] fromSymbolIDs = conflictSymbolIDMap.getKeys();

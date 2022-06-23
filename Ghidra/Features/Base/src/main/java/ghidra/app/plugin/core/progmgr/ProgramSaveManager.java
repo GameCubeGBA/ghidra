@@ -402,7 +402,7 @@ class ProgramSaveManager {
 	private boolean getSaveAsLock(Program program) {
 		if (!program.lock(null)) {
 			String title = "Save Program As (Busy)";
-			StringBuffer buf = new StringBuffer();
+			StringBuilder buf = new StringBuilder();
 			buf.append(
 				"The Program is currently being modified by the following actions/tasks:\n ");
 			Transaction t = program.getCurrentTransaction();

@@ -303,7 +303,7 @@ public class CreateNamespacesCmdTest extends AbstractGenericTest {
 	}
 
 	private String createNamespaceStringFromArray(String[] namespaceNames) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 
 		for (int i = 0; i < namespaceNames.length; i++) {
 			buffer.append(namespaceNames[i]);

@@ -137,7 +137,7 @@ public class TOCConverter {
 	}
 
 	private String getPadString(String line) {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < line.length(); i++) {
 			if (line.charAt(i) == ' ') {
 				sb.append(' ');

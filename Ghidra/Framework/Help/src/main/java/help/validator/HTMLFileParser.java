@@ -182,7 +182,7 @@ public class HTMLFileParser {
 		}
 
 		LinkedHashMap<String, String> map = new LinkedHashMap<>();
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		String attr = null;
 		TagProcessingState mode = LOOKING_FOR_NEXT_ATTR;
 		char term = 0;
@@ -217,12 +217,12 @@ public class HTMLFileParser {
 						break;
 					}
 					if (c == '"' || c == '\'') {
-						buf = new StringBuffer();
+						buf = new StringBuilder();
 						mode = READING_VALUE;
 						term = c;
 						break;
 					}
-					buf = new StringBuffer();
+					buf = new StringBuilder();
 					buf.append(c);
 					mode = READING_VALUE;
 					term = 0;
@@ -241,7 +241,7 @@ public class HTMLFileParser {
 					if (c == ' ' || c == '\t') {
 						continue;
 					}
-					buf = new StringBuffer();
+					buf = new StringBuilder();
 					buf.append(c);
 					mode = READING_ATTR;
 			}
@@ -259,7 +259,7 @@ public class HTMLFileParser {
 
 		tagProcessor.processTag(tagType, map, file, lineNum);
 
-		buf = new StringBuffer();
+		buf = new StringBuilder();
 		buf.append('<');
 		buf.append(tagType);
 		Iterator<String> iter = map.keySet().iterator();

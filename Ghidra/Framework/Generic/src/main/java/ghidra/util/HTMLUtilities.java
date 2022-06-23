@@ -384,7 +384,7 @@ public class HTMLUtilities {
 
 		Pattern p = Pattern.compile("<!-- LINK CONTENT=\"(.*?)\" -->");
 
-		StringBuffer buffy = new StringBuffer();
+		StringBuilder buffy = new StringBuilder();
 		Matcher matcher = p.matcher(text);
 		while (matcher.find()) {
 			String content = matcher.group(1);

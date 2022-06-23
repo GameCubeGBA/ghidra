@@ -278,7 +278,7 @@ public class AbstractCreateDataTypeModelTest extends AbstractGenericTest {
 			throw new IllegalArgumentException("Value exceeds 8 hex digits.");
 		}
 		int leadingZeros = 8 - length;
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		for (int i = 0; i < leadingZeros; i++) {
 			buf.append('0');
 		}
@@ -308,7 +308,7 @@ public class AbstractCreateDataTypeModelTest extends AbstractGenericTest {
 				"hexAddress can't be more than " + numHexDigits + " digits.");
 		}
 		int missingZeros = numHexDigits - hexLength;
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		for (int i = 0; i < missingZeros; i++) {
 			buf.append('0');
 		}
@@ -330,7 +330,7 @@ public class AbstractCreateDataTypeModelTest extends AbstractGenericTest {
 		if (hexDigits.length() % 2 == 1) {
 			hexDigits = "0" + hexDigits;
 		}
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		int numPairs = hexDigits.length() / 2;
 		for (int i = numPairs - 1; i >= 0; i--) {
 			int beginIndex = i * 2;

@@ -150,7 +150,7 @@ public class MemoryBlockDiff {
 	 * Gets a string representation of the types of memory differences for this MemoryBlockDiff.
 	 */
 	public String getDifferencesAsString() {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		if((diffFlags & NAME) != 0) {
 			buf.append("Name ");
 		}

@@ -121,7 +121,7 @@ public class CompositeAttributedString extends AttributedString {
 	@Override
 	public String getText() {
 		if (fullText == null) {
-			StringBuffer buffer = new StringBuffer();
+			StringBuilder buffer = new StringBuilder();
 			for (AttributedString attributedString : attributedStrings) {
 				buffer.append(attributedString.getText());
 			}

@@ -256,7 +256,7 @@ public class PseudoInstruction extends PseudoCodeUnit implements Instruction, In
 		if (opList == null) {
 			return "<UNSUPPORTED>";
 		}
-		StringBuffer strBuf = new StringBuffer();
+		StringBuilder strBuf = new StringBuilder();
 		for (Object opElem : opList) {
 			if (opElem instanceof Address) {
 				Address opAddr = (Address) opElem;
@@ -451,7 +451,7 @@ public class PseudoInstruction extends PseudoCodeUnit implements Instruction, In
 
 	@Override
 	public String toString() {
-		StringBuffer stringBuffer = new StringBuffer();
+		StringBuilder stringBuffer = new StringBuilder();
 		stringBuffer.append(getMnemonicString());
 
 		int n = getNumOperands();

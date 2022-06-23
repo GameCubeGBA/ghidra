@@ -138,7 +138,7 @@ public class Annotation {
 	}
 
 	private String[] parseAnnotationText(String theAnnotationText) {
-		StringBuffer buffer = new StringBuffer(theAnnotationText);
+		StringBuilder buffer = new StringBuilder(theAnnotationText);
 
 		// strip off the brackets
 		buffer.delete(0, 2); // remove '{' and '@'

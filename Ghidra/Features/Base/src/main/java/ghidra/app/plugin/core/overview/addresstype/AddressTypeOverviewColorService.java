@@ -88,7 +88,7 @@ public class AddressTypeOverviewColorService
 			return "";
 		}
 		AddressType addressType = getAddressType(address);
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		buffer.append("<b>");
 		buffer.append(HTMLUtilities.escapeHTML(getName()));
 		buffer.append("</b>\n");

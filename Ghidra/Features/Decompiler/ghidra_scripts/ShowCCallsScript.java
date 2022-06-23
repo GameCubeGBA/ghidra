@@ -223,7 +223,7 @@ public class ShowCCallsScript extends GhidraScript {
     }
 
 	public String toString(ClangStatement node) {
-	    StringBuffer buffer = new StringBuffer();
+	    StringBuilder buffer = new StringBuilder();
 		int open=-1;
         for (int j = 0; j < node.numChildren(); j++) {
 	        ClangNode subNode = node.Child(j);

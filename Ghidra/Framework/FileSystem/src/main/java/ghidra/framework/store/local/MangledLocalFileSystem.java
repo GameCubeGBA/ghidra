@@ -382,7 +382,7 @@ public class MangledLocalFileSystem extends LocalFileSystem {
 	 */
 	private String toSystemDependantSeparator(String path) {
 		int n = path.length();
-		StringBuffer sb = new StringBuffer(n - 1);
+		StringBuilder sb = new StringBuilder(n - 1);
 		for (int i = 1; i < n; i++) {
 			char c = path.charAt(i);
 			c = (c == SEPARATOR_CHAR) ? File.separatorChar : c;

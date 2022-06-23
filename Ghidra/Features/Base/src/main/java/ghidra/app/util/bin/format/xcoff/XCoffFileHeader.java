@@ -109,7 +109,7 @@ public class XCoffFileHeader implements StructConverter {
 
 	@Override
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		buffer.append("FILE HEADER VALUES").append(NL);
 		buffer.append("f_magic  = ").append(f_magic).append(NL);
 		buffer.append("f_nscns  = ").append(f_nscns).append(NL);

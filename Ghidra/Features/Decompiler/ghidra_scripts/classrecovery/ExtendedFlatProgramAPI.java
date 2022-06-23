@@ -1353,7 +1353,7 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 		if (s == null) {
 			s = "";
 		}
-		StringBuffer buffer = new StringBuffer(s);
+		StringBuilder buffer = new StringBuilder(s);
 		int zerosNeeded = len - s.length();
 		for (int i = 0; i < zerosNeeded; ++i) {
 			buffer.insert(0, '0');

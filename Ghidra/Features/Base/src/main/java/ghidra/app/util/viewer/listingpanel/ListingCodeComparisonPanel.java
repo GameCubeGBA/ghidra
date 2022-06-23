@@ -1382,7 +1382,7 @@ public class ListingCodeComparisonPanel
 		if (function == null) {
 			return "none";
 		}
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		String padStr = HTMLUtilities.spaces(4);
 		buf.append(padStr);
 
@@ -1412,7 +1412,7 @@ public class ListingCodeComparisonPanel
 		if (currentData == null) {
 			return "none";
 		}
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		String padStr = HTMLUtilities.spaces(4);
 		buf.append(padStr);
 
@@ -1447,7 +1447,7 @@ public class ListingCodeComparisonPanel
 		if (program == null) {
 			return "none";
 		}
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		String padStr = HTMLUtilities.spaces(4);
 		buf.append(padStr);
 		String programStr = HTMLUtilities.friendlyEncodeHTML(program.getDomainFile().getPathname());

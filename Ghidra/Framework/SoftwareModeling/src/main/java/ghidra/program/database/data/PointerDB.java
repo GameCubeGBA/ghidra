@@ -212,7 +212,7 @@ class PointerDB extends DataTypeDB implements Pointer {
 		lock.acquire();
 		try {
 			checkIsValid();
-			StringBuffer sbuf = new StringBuffer();
+			StringBuilder sbuf = new StringBuilder();
 			if (!hasLanguageDependantLength()) {
 				sbuf.append(Integer.toString(getLength() * 8));
 				sbuf.append("-bit ");

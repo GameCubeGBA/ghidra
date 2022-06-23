@@ -2592,7 +2592,7 @@ public class RecoveredClassHelper {
 	private boolean hasVbaseDestructor(RecoveredClass recoveredClass) throws CancelledException {
 		Function vBaseDestructor = recoveredClass.getVBaseDestructor();
 
-		StringBuffer string = new StringBuffer();
+		StringBuilder string = new StringBuilder();
 		string.append(recoveredClass.getName());
 
 		if (vBaseDestructor == null) {

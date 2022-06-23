@@ -153,7 +153,7 @@ public class ClangTokenGroup implements ClangNode, Iterable<ClangNode> {
 	@Override
 	public String toString() {
 		String lastTokenStr = null;
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		Iterator<ClangNode> iter = tokgroup.iterator();
 		while (iter.hasNext()) {
 			ClangNode node = iter.next();

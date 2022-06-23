@@ -178,7 +178,7 @@ public class CFStringAnalyzer extends AbstractAnalyzer {
 	}
 
 	private String makeComment(String cFString) {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		for (int i = 0; i < cFString.length(); i++) {
 			char c = cFString.charAt(i);
 			switch (c) {
@@ -209,7 +209,7 @@ public class CFStringAnalyzer extends AbstractAnalyzer {
 			return CF_STRING_LABEL_PREFIX + "\"\"";
 		}
 
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 
 // don't use 's', since we are creating a label for a structure and not for a string
 //		buf.append('s');
