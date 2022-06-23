@@ -62,7 +62,7 @@ import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.Msg;
 import ghidra.util.data.DataTypeParser.AllowedDataTypes;
-import ghidra.util.task.TaskMonitorAdapter;
+import ghidra.util.task.TaskMonitor;
 import mockit.Mock;
 import mockit.MockUp;
 

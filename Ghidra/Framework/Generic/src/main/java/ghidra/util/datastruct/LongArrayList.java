@@ -168,8 +168,7 @@ public class LongArrayList implements List<Long> {
 
     /**
      * Doubles the size of the array.
-     * @param size The new capacity of the array.
-     */
+	 */
     private void growArray() {
     	int len = longs.length;
     	if (len == 0) {
@@ -376,8 +375,8 @@ public class LongArrayList implements List<Long> {
 		}
 
 		public void clear() {
-			for(int i=startIndex;i<endIndex;i++) {
-				backingList.remove(startIndex);
+			if (endIndex > startIndex) {
+				backingList.subList(startIndex, endIndex).clear();
 			}
 			endIndex = startIndex;
 		}

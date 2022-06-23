@@ -26,7 +26,6 @@ import org.junit.*;
 
 import generic.test.AbstractGenericTest;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public class ConcurrentQTest extends AbstractGenericTest {
 

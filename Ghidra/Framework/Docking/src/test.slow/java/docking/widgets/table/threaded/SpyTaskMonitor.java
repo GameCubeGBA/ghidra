@@ -20,7 +20,7 @@ import java.util.*;
 import org.junit.Assert;
 
 import ghidra.docking.spy.SpyEventRecorder;
-import ghidra.util.task.TaskMonitorAdapter;
+import ghidra.util.task.TaskMonitor;
 
 public class SpyTaskMonitor extends TaskMonitorAdapter {
 	private List<String> messages = new ArrayList<>();

@@ -39,7 +39,6 @@ import ghidra.program.model.listing.Program;
 import ghidra.test.*;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public class AutoAnalysisWorkerTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -134,7 +133,7 @@ public class AutoAnalysisWorkerTest extends AbstractGhidraHeadedIntegrationTest 
 		schedule(mgr, new SetTestPropertyCommand("p1", 500), 10);
 
 		try {
-			mgr.scheduleWorker(worker, null, false, TaskMonitorAdapter.DUMMY_MONITOR);
+			mgr.scheduleWorker(worker, null, false, TaskMonitor.DUMMY);
 		}
 		catch (Exception e) {
 			failWithException("Unexpected exception", e);
@@ -158,7 +157,7 @@ public class AutoAnalysisWorkerTest extends AbstractGhidraHeadedIntegrationTest 
 		schedule(mgr, new SetTestPropertyCommand("p1", 500), 10);
 
 		try {
-			mgr.scheduleWorker(worker, null, true, TaskMonitorAdapter.DUMMY_MONITOR);
+			mgr.scheduleWorker(worker, null, true, TaskMonitor.DUMMY);
 		}
 		catch (Exception e) {
 			failWithException("Unexpected exception", e);
@@ -284,7 +283,7 @@ public class AutoAnalysisWorkerTest extends AbstractGhidraHeadedIntegrationTest 
 
 		Runnable r = () -> {
 			try {
-				mgr.scheduleWorker(worker, null, false, TaskMonitorAdapter.DUMMY_MONITOR);
+				mgr.scheduleWorker(worker, null, false, TaskMonitor.DUMMY);
 				Assert.fail("Expected UnsupportedOperationException");
 			}
 			catch (UnsupportedOperationException e1) {
@@ -468,7 +467,7 @@ public class AutoAnalysisWorkerTest extends AbstractGhidraHeadedIntegrationTest 
 			AutoAnalysisManager mgr = AutoAnalysisManager.getAnalysisManager((Program) obj);
 			try {
 				return mgr.scheduleWorker(worker, null, analyzeChanges,
-					TaskMonitorAdapter.DUMMY_MONITOR);
+					TaskMonitor.DUMMY);
 			}
 			catch (Exception e) {
 				error = e;

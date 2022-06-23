@@ -28,7 +28,6 @@ import ghidra.program.model.data.Enum;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.InvalidNameException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  * Test the database Category implementation.
@@ -218,7 +217,7 @@ public class CategoryTest extends AbstractGhidraHeadedIntegrationTest {
 		cat5.addDataType(s2, DataTypeConflictHandler.DEFAULT_HANDLER);
 
 		// move c4 to c5
-		cat5.moveCategory(cat4, TaskMonitorAdapter.DUMMY_MONITOR);
+		cat5.moveCategory(cat4, TaskMonitor.DUMMY);
 		waitForPostedSwingRunnables();
 
 		assertEquals(new CategoryPath("/c1/c2/c5/c4"), cat4.getCategoryPath());
@@ -243,7 +242,7 @@ public class CategoryTest extends AbstractGhidraHeadedIntegrationTest {
 		Category c1 = root.createCategory("c1");
 		Category c2 = c1.createCategory("c2");
 
-		c2.moveCategory(myCat, TaskMonitorAdapter.DUMMY_MONITOR);
+		c2.moveCategory(myCat, TaskMonitor.DUMMY);
 
 		Category[] cats = c2.getCategories();
 		assertEquals(1, cats.length);
