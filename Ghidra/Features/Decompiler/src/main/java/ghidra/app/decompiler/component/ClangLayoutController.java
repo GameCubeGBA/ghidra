@@ -140,12 +140,6 @@ public class ClangLayoutController implements LayoutModel, LayoutModelListener {
 		}
 	}
 
-	public void layoutChanged() {
-		for (LayoutModelListener listener : listeners) {
-			listener.dataChanged(BigInteger.ZERO, numIndexes);
-		}
-	}
-
 	@Override
 	public BigInteger getIndexAfter(BigInteger index) {
 		BigInteger nextIndex = index.add(BigInteger.ONE);
@@ -161,10 +155,6 @@ public class ClangLayoutController implements LayoutModel, LayoutModelListener {
 			return null;
 		}
 		return index.subtract(BigInteger.ONE);
-	}
-
-	public int getIndexBefore(int index) {
-		return index - 1;
 	}
 
 	public ClangTokenGroup getRoot() {
@@ -432,7 +422,7 @@ public class ClangLayoutController implements LayoutModel, LayoutModelListener {
 	public SearchLocation findNextTokenForSearchRegex(String searchString,
 			FieldLocation currentLocation, boolean forwardSearch) {
 
-		Pattern pattern = null;
+		Pattern pattern;
 		try {
 			pattern = Pattern.compile(searchString, Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
 		}
@@ -576,21 +566,6 @@ public class ClangLayoutController implements LayoutModel, LayoutModelListener {
 // End Search Related Methods
 //==================================================================================================
 
-	ClangToken getTokenForLocation(FieldLocation fieldLocation) {
-		int row = fieldLocation.getIndex().intValue();
-		ClangTextField field = (ClangTextField) fieldList[row];
-		return field.getToken(fieldLocation);
-	}
-
-	public void locationChanged(FieldLocation loc, Field field, Color locationColor,
-			Color parenColor) {
-		// Highlighting is now handled through the decompiler panel's highlight controller.
-	}
-
-	public boolean changePending() {
-		return false;
-	}
-
 	@Override
 	public void flushChanges() {
 		// nothing to do
@@ -605,7 +580,7 @@ public class ClangLayoutController implements LayoutModel, LayoutModelListener {
 
 		private LineNumberFieldElement(int lineNumber, int lineCount, FontMetrics fontMetrics) {
 			super(ClangToken.buildSpacer(null, 0, ""), createAttributedLineNumberString(lineNumber,
-				lineCount, FOREGROUND_COLOR, fontMetrics), 0);
+				lineCount, fontMetrics), 0);
 			uniformWidth = calculateUniformStringWidth(fontMetrics);
 		}
 
@@ -627,9 +602,9 @@ public class ClangLayoutController implements LayoutModel, LayoutModelListener {
 		}
 
 		private static AttributedString createAttributedLineNumberString(int lineNumber,
-				int lineCount, Color foregroundColor, FontMetrics fontMetrics) {
+																		 int lineCount, FontMetrics fontMetrics) {
 			return new AttributedString(createLineNumberString(lineNumber, lineCount),
-				foregroundColor, fontMetrics);
+					LineNumberFieldElement.FOREGROUND_COLOR, fontMetrics);
 		}
 
 		static int getFieldWidth(FontMetrics fontMetrics, int lineCnt) {
@@ -646,7 +621,7 @@ public class ClangLayoutController implements LayoutModel, LayoutModelListener {
 
 		private static int getLargestCharacterWidth(FontMetrics fontMetrics) {
 			// use the biggest number char (since that's what we paint in this object)
-			// for determining the a space to use as a guide
+			// for determining the space to use as a guide
 			return fontMetrics.stringWidth("9");
 		}
 
@@ -674,7 +649,7 @@ public class ClangLayoutController implements LayoutModel, LayoutModelListener {
 		}
 	}
 
-	private class FieldNumberColumnPair {
+	private static class FieldNumberColumnPair {
 		private final int fieldNumber;
 		private final int column;
 

@@ -77,9 +77,9 @@ public class TestFGLayoutProvider extends FGLayoutProvider {
 		}
 
 		@Override
-		protected Point2D getVertexLocation(FGVertex v, Column col, Row<FGVertex> row,
+		protected Point2D getVertexLocation(Column col, Row<FGVertex> row,
 				Rectangle bounds) {
-			return getCenteredVertexLocation(v, col, row, bounds);
+			return getCenteredVertexLocation(col, row, bounds);
 		}
 
 		@Override

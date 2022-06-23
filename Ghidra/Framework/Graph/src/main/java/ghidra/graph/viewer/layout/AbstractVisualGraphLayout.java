@@ -15,6 +15,8 @@
  */
 package ghidra.graph.viewer.layout;
 
+import com.google.common.base.Function;
+
 import edu.uci.ics.jung.algorithms.layout.AbstractLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.Graph;
@@ -38,7 +40,6 @@ import java.awt.geom.Point2D;
 import java.util.List;
 import java.util.*;
 import java.util.Map.Entry;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -63,7 +64,7 @@ import java.util.stream.Collectors;
  * are aligned with the column's x-position.   You can override
  * {@link #getVertexLocation(VisualVertex, Column, Row, Rectangle)} in order to center the
  * vertex within its column
- * {@link #getCenteredVertexLocation(VisualVertex, Column, Row, Rectangle)}.  Also note though
+ * {@link #getCenteredVertexLocation(Column, Row}.  Also note though
  * that if your layout returns true for {@link #isCondensedLayout()},
  * then the centering will be condensed and slightly off.
  *
@@ -204,8 +205,7 @@ public abstract class AbstractVisualGraphLayout<V extends VisualVertex,
 		try {
 			monitor = taskMonitor;
 			gridLocations = performInitialGridLayout(g);
-			LayoutPositions<V, E> positions = positionInLayoutSpaceFromGrid(g, gridLocations);
-			return positions;
+			return positionInLayoutSpaceFromGrid(g, gridLocations);
 		}
 		catch (CancelledException ce) {
 			return LayoutPositions.createEmptyPositions();
@@ -324,7 +324,7 @@ public abstract class AbstractVisualGraphLayout<V extends VisualVertex,
 		//
 		if (isCondensed) {
 			List<Row<V>> rows = gridLocations.rows();
-			condenseVertices(rows, vertexLayoutLocations, transformer, centerX, centerY);
+			condenseVertices(rows, vertexLayoutLocations, transformer, centerX);
 		}
 
 		Map<E, List<Point2D>> edgeLayoutArticulations =
@@ -361,13 +361,13 @@ public abstract class AbstractVisualGraphLayout<V extends VisualVertex,
 
 			Shape shape = transformer.apply(vertex);
 			Rectangle bounds = shape.getBounds();
-			Point2D location = getVertexLocation(vertex, column, row, bounds);
+			Point2D location = getVertexLocation(column, row, bounds);
 			newLocations.put(vertex, location);
 		}
 		return newLocations;
 	}
 
-	protected Point2D getVertexLocation(V v, Column col, Row<V> row, Rectangle bounds) {
+	protected Point2D getVertexLocation(Column col, Row<V> row, Rectangle bounds) {
 		int x = col.x - bounds.x;
 		int y = row.y - bounds.y;
 		return new Point2D.Double(x, y);
@@ -376,13 +376,12 @@ public abstract class AbstractVisualGraphLayout<V extends VisualVertex,
 	/**
 	 * Returns a location for the given vertex that is centered within its cell
 	 *
-	 * @param v the vertex
 	 * @param col the vertex's column in the grid
 	 * @param row the vertex's row in the grid
 	 * @param bounds the bounds of the vertex in the layout space
 	 * @return the centered location
 	 */
-	protected Point2D getCenteredVertexLocation(V v, Column col, Row<V> row, Rectangle bounds) {
+	protected Point2D getCenteredVertexLocation(Column col, Row<V> row, Rectangle bounds) {
 		//
 		// Move x over to compensate for vertex painting.   Edges are drawn from the center of the
 		// vertex.  Thus, if you have vertices with two different widths, then the edge between
@@ -426,17 +425,6 @@ public abstract class AbstractVisualGraphLayout<V extends VisualVertex,
 		return new Point2D.Double(col.x, row.y);
 	}
 
-	protected Point2D getCenteredEdgeLocation(Column col, Row<V> row) {
-		//
-		// half-height offsets the articulation points, which keeps long edge lines from
-		// overlapping as much
-		//
-		boolean isCondensed = isCondensedLayout();
-		int x = col.x + (col.getPaddedWidth(isCondensed) >> 1);
-		int y = row.y + (row.getPaddedHeight(isCondensed) >> 1);
-		return new Point2D.Double(x, y);
-	}
-
 	private Rectangle getTotalGraphSize(Map<V, Point2D> vertexLocationMap,
 										Function<V, Shape> vertexShapeTransformer) {
 
@@ -457,18 +445,18 @@ public abstract class AbstractVisualGraphLayout<V extends VisualVertex,
 		if (!usesEdgeArticulations()) {
 
 			Rectangle bounds =
-				GraphViewerUtils.getBoundsForVerticesInLayoutSpace(vertices, vertexToBounds::apply);
+				GraphViewerUtils.getBoundsForVerticesInLayoutSpace(vertices, vertexToBounds);
 			return bounds;
 		}
 
 		Function<E, List<Point2D>> edgeToArticulations = e -> Collections.emptyList();
 		Rectangle bounds = GraphViewerUtils.getTotalGraphSizeInLayoutSpace(vertices, edges,
-				vertexToBounds::apply, edgeToArticulations::apply);
+				vertexToBounds, edgeToArticulations);
 		return bounds;
 	}
 
 	protected void condenseVertices(List<Row<V>> rows, Map<V, Point2D> newLocations,
-			VisualGraphVertexShapeTransformer<V> transformer, double centerX, double centerY) {
+			VisualGraphVertexShapeTransformer<V> transformer, double centerX) {
 
 		//
 		// Note: we move the articulations and vertices closer together on the x-axis.  We do
@@ -533,7 +521,7 @@ public abstract class AbstractVisualGraphLayout<V extends VisualVertex,
 			VisualGraphVertexShapeTransformer<V> transformer) {
 
 		for (Row<V> row : rows) {
-			Integer columnCount = row.getColumnCount();
+			int columnCount = row.getColumnCount();
 			int moveLeftStartIndex = columnCount >> 1; // start in the middle
 			int moveRightStartIndex = Math.min(moveLeftStartIndex + 1, columnCount - 1);
 
@@ -681,8 +669,7 @@ public abstract class AbstractVisualGraphLayout<V extends VisualVertex,
 		// The neighbors do not touch, but sometimes this is because our 'vertex' has been
 		// moved to far past the 'otherVertex'.  So, we also have to check the x values.
 
-		boolean crossed = moveRight ? p1.x < p2.x : p1.x > p2.x;
-		return crossed;
+		return moveRight ? p1.x < p2.x : p1.x > p2.x;
 	}
 //==================================================================================================
 // Listener Stuff

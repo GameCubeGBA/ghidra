@@ -113,10 +113,10 @@ public interface VisualGraphLayout<V extends VisualVertex,
 	public BasicEdgeRenderer<V, E> getEdgeRenderer();
 
 	/**
-	 * Returns an optional edge shape transformer.  This is used to create shapes for each edge.
-	 * 
-	 * @return an optional edge shape transformer
-	 */
+     * Returns an optional edge shape transformer.  This is used to create shapes for each edge.
+     *
+     * @return an optional edge shape transformer
+     */
 	public Function<E, Shape> getEdgeShapeTransformer();
 
 	/**

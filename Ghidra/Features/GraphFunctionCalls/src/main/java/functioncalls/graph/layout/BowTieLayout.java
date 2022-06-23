@@ -63,9 +63,9 @@ public class BowTieLayout extends AbstractVisualGraphLayout<FcgVertex, FcgEdge> 
 	}
 
 	@Override
-	protected Point2D getVertexLocation(FcgVertex v, Column col, Row<FcgVertex> row,
+	protected Point2D getVertexLocation(Column col, Row<FcgVertex> row,
 			Rectangle bounds) {
-		return getCenteredVertexLocation(v, col, row, bounds);
+		return getCenteredVertexLocation(col, row, bounds);
 	}
 
 	@Override

@@ -17,6 +17,7 @@ package ghidra.app.plugin.core.functiongraph.graph.layout.jungrapht;
 
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
+import java.awt.Rectangle;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -56,9 +57,9 @@ public class JgtNamedLayout extends AbstractFGLayout {
 	}
 
 	@Override
-	protected Point2D getVertexLocation(FGVertex v, Column col, Row<FGVertex> row,
-			java.awt.Rectangle bounds) {
-		return getCenteredVertexLocation(v, col, row, bounds);
+	protected Point2D getVertexLocation(Column col, Row<FGVertex> row,
+			Rectangle bounds) {
+		return getCenteredVertexLocation(col, row, bounds);
 	}
 
 	@Override
