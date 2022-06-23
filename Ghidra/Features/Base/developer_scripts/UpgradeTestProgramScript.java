@@ -25,6 +25,8 @@ import ghidra.util.task.TaskMonitor;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.attribute.BasicFileAttributes;
 
 import db.DBConstants;
 import db.DBHandle;
@@ -65,13 +67,14 @@ public class UpgradeTestProgramScript extends GhidraScript {
 		}
 
 		for (File f : dir.listFiles()) {
-			if (f.isFile() && f.getName().endsWith(".gzf")) {
+			BasicFileAttributes basicFileAttributes = Files.readAttributes(f.toPath(), BasicFileAttributes.class);
+			if (basicFileAttributes.isRegularFile() && f.getName().endsWith(".gzf")) {
 				Msg.info(this, "Processing " + f.getName() + " ...");
 				if (upgradeProgramArchive(f)) {
 					Msg.info(this, "   program upgraded!");
 				}
 			}
-			else if (f.isDirectory()) {
+			else if (basicFileAttributes.isDirectory()) {
 				upgradeDir(f);
 			}
 		}

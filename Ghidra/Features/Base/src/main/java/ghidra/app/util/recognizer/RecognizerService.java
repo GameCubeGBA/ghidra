@@ -30,9 +30,7 @@ public class RecognizerService {
 	public static List<Recognizer> getAllRecognizers() {
 		List<Recognizer> results = new ArrayList<Recognizer>();
 		List<Recognizer> allRecognizers = getAllRecognizersHelper();
-		for (Recognizer Recognizer : allRecognizers) {
-			results.add(Recognizer);
-		}
+        results.addAll(allRecognizers);
 		Collections.sort(results, DESCENDING);
 		return results;
 	}

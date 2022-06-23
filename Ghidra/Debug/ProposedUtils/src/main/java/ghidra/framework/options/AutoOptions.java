@@ -202,7 +202,7 @@ public interface AutoOptions {
 			return null;
 		}
 		String anchor = annot.anchor();
-		if ("".equals(anchor)) {
+		if (anchor != null && anchor.isEmpty()) {
 			anchor = null;
 		}
 		String topic =

@@ -1942,9 +1942,7 @@ public class GhidraFileChooserTest extends AbstractDockingTest {
 		Arrays.sort(files, (f1, f2) -> f1.getName().compareTo(f2.getName()));
 
 		List<File> result = new ArrayList<>();
-		for (int i = 0; i < count; i++) {
-			result.add(files[i]);
-		}
+        result.addAll(Arrays.asList(files).subList(0, count));
 		return result;
 	}
 

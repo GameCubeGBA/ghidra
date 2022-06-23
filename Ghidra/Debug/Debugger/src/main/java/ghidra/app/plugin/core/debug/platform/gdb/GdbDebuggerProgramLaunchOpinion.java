@@ -120,7 +120,7 @@ public class GdbDebuggerProgramLaunchOpinion implements DebuggerProgramLaunchOpi
 	public Collection<DebuggerProgramLaunchOffer> getOffers(Program program, PluginTool tool,
 			DebuggerModelService service) {
 		String exe = program.getExecutablePath();
-		if (exe == null || "".equals(exe.trim())) {
+		if (exe == null || exe.trim().isEmpty()) {
 			return List.of();
 		}
 		List<DebuggerProgramLaunchOffer> offers = new ArrayList<>();

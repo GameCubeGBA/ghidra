@@ -90,7 +90,7 @@ public class TagEditorDialog extends DialogComponentProvider {
 				String tagName =
 					OptionDialog.showInputSingleLineDialog(getComponent(), "Create Tag",
 						"Enter tag name: ", "");
-				if (tagName == null || "".equals(tagName.trim())) {
+				if (tagName == null || tagName.trim().isEmpty()) {
 					return null;
 				}
 				return new TagState(tagName, new VTMatchTagImpl(tagName), ADD);

@@ -96,7 +96,7 @@ public interface PathPredicates {
 
 	static boolean anyMatches(Set<String> pats, String key) {
 		for (String pat : pats) {
-			if ("".equals(pat)) {
+			if (pat != null && pat.isEmpty()) {
 				return true;
 			}
 			if (key.equals(pat)) {

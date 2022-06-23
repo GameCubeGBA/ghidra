@@ -17,6 +17,7 @@ package ghidra.formats.gfilesystem;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -114,7 +115,8 @@ public class LocalFileSystemSub implements GFileSystem, GFileHashProvider {
 		String relPath = FSUtilities.normalizeNativePath(directory.getPath());
 
 		for (File f : localFiles) {
-			if (!(f.isFile() || f.isDirectory())) {
+			BasicFileAttributes basicFileAttributes = Files.readAttributes(f.toPath(), BasicFileAttributes.class);
+			if (!(basicFileAttributes.isRegularFile() || basicFileAttributes.isDirectory())) {
 				// skip non-file things
 				continue;
 			}

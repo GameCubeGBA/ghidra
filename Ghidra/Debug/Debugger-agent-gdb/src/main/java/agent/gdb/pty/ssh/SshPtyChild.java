@@ -88,7 +88,7 @@ public class SshPtyChild extends SshPtyEndpoint implements PtyChild {
 	public String nullSession() throws IOException {
 		if (name == null) {
 			this.name = getTtyNameAndStartNullSession();
-			if ("".equals(name)) {
+			if (name.isEmpty()) {
 				throw new IOException("Could not determine child remote tty name");
 			}
 		}

@@ -40,7 +40,7 @@ public class NewLanguagePanel extends JPanel {
 	private JLabel formatLabel;
 
 	private void setDescriptionLabelText(String text) {
-		if (text == null || "".equals(text)) {
+		if (text == null || text.isEmpty()) {
 			text = " ";
 		}
 		descriptionLabel.setText(text);

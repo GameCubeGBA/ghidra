@@ -370,7 +370,7 @@ public abstract class AbstractVTCorrelatorTest extends AbstractGhidraHeadedInteg
 			}
 		}
 		if (buffy.length() > 0) {
-			return "The following matches were " + type + ": " + buffy.toString();
+			return "The following matches were " + type + ": " + buffy;
 		}
 		return "No " + type + " matches!";
 	}

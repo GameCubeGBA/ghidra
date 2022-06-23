@@ -200,7 +200,7 @@ public class GdbThreadImpl implements GdbThread {
 		return execute(new GdbListRegisterNamesCommand(manager, id)).thenCompose(names -> {
 			for (int i = 0; i < names.size(); i++) {
 				String n = names.get(i);
-				if ("".equals(n)) {
+				if (n != null && n.isEmpty()) {
 					continue;
 				}
 				namesByNumber.put(i, n);

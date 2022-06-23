@@ -627,11 +627,8 @@ public class BookmarkPlugin extends ProgramPlugin
 				types.add(type);
 			}
 			else {
-				Iterator<String> it = bookmarkNavigators.keySet().iterator();
-				while (it.hasNext()) {
-					types.add(it.next());
-				}
-			}
+                types.addAll(bookmarkNavigators.keySet());
+            }
 			updateMgr.update();
 		}
 

@@ -16,6 +16,7 @@
 package ghidra.program.database.data;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import ghidra.docking.settings.Settings;
@@ -79,9 +80,7 @@ class TypedefSettings implements Settings {
 	public String[] getNames() {
 		List<String> list = new ArrayList<String>();
 		String[] instNames = instanceSettings.getNames();
-		for (int i = 0; i < instNames.length; i++) {
-			list.add(instNames[i]);
-		}
+        list.addAll(Arrays.asList(instNames));
 		String[] defNames = defaultSettings.getNames();
 		for (int i = 0; i < defNames.length; i++) {
 			if (!list.contains(defNames[i])) {

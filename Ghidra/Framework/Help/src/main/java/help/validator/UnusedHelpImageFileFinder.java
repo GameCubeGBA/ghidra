@@ -233,9 +233,7 @@ public class UnusedHelpImageFileFinder {
 				}
 
 				// each entry should be just one value, but handle multiple paths anyway
-				for (String p : paths.split(File.pathSeparator)) {
-					moduleHelpPaths.add(p);
-				}
+                moduleHelpPaths.addAll(Arrays.asList(paths.split(File.pathSeparator)));
 			}
 		}
 

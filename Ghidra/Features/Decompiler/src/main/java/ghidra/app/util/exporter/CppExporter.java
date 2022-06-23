@@ -525,7 +525,7 @@ public class CppExporter extends Exporter {
 			DecompileResults dr =
 				decompiler.decompileFunction(function, options.getDefaultTimeout(), monitor);
 			String errorMessage = dr.getErrorMessage();
-			if (!"".equals(errorMessage)) {
+			if (errorMessage == null || !errorMessage.isEmpty()) {
 				Msg.warn(CppExporter.this, "Error decompiling: " + errorMessage);
 				if (options.isWARNCommentIncluded()) {
 					monitor.incrementProgress(1);

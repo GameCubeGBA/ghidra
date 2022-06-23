@@ -20,6 +20,7 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
@@ -38,9 +39,7 @@ public class MangledLocalFileSystemTest extends AbstractLocalFileSystemTest {
 		testFilePaths();
 
 		List<String> names = new ArrayList<String>();
-		for (String itemName : fs.getItemNames("/a/x/bbb")) {
-			names.add(itemName);
-		}
+        names.addAll(Arrays.asList(fs.getItemNames("/a/x/bbb")));
 
 		((MangledLocalFileSystem) fs).convertToIndexedLocalFileSystem();
 

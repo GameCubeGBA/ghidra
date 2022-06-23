@@ -131,9 +131,7 @@ public class DijkstraShortestPathsAlgorithmTest {
 		Set<Deque<TestEdge>> result = new HashSet<>();
 		for (TestEdge[] path : paths) {
 			Deque<TestEdge> p = new LinkedList<>();
-			for (TestEdge e : path) {
-				p.add(e);
-			}
+            p.addAll(Arrays.asList(path));
 			result.add(p);
 		}
 		return result;

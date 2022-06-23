@@ -39,7 +39,7 @@ public class DbgModelTargetRegisterImpl extends DbgModelTargetObjectImpl
 
 	protected static String indexRegister(DbgRegister register) {
 		String name = register.getName();
-		if ("".equals(name)) {
+		if (name != null && name.isEmpty()) {
 			return "UNNAMED," + register.getNumber();
 		}
 		return name;

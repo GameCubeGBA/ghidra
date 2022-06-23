@@ -19,6 +19,7 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -81,9 +82,7 @@ public class ImportFromXMLAction extends ImportExportAsAction {
 
 					List<String> path = new ArrayList<>();
 					Attribute pathStr = root.getAttribute("Path");
-					for (String s : pathStr.getValue().split("\\.")) {
-						path.add(s);
-					}
+                    path.addAll(Arrays.asList(pathStr.getValue().split("\\.")));
 					DummyTargetObject to = xmlToObject(p, root, path);
 					ObjectContainer c = p.getRoot();
 					c.setTargetObject(to);

@@ -41,7 +41,7 @@ public class CompilerSpecID implements Comparable<CompilerSpecID> {
 		if (id == null) {
 			throw new IllegalArgumentException("id == null not allowed");
 		}
-		if ("".equals(id)) {
+		if (id.isEmpty()) {
 			throw new IllegalArgumentException("empty id not allowed");
 		}
 		return id;

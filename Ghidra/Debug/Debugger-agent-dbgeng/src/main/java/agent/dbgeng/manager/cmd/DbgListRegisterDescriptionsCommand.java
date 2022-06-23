@@ -40,9 +40,7 @@ public class DbgListRegisterDescriptionsCommand
 		DebugRegisters registers = manager.getRegisters();
 		Set<DebugRegisterDescription> descs = registers.getAllDescriptions();
 		list = new ArrayList<DebugRegisterDescription>();
-		for (DebugRegisterDescription desc : descs) {
-			list.add(desc);
-		}
+        list.addAll(descs);
 	}
 
 }

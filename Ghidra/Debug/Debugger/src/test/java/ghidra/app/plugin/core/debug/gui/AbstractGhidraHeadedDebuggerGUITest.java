@@ -265,16 +265,20 @@ public abstract class AbstractGhidraHeadedDebuggerGUITest
 	}
 
 	protected static Set<String> getMenuElementsText(MenuElement menu) {
-		Set<String> result = new HashSet<>();
-		for (MenuElement sub : menu.getSubElements()) {
-			Component comp = sub.getComponent();
-			if (comp instanceof JPopupMenu) {
-				return getMenuElementsText(sub);
+		getMenuElementsText:
+		while (true) {
+			Set<String> result = new HashSet<>();
+			for (MenuElement sub : menu.getSubElements()) {
+				Component comp = sub.getComponent();
+				if (comp instanceof JPopupMenu) {
+					menu = sub;
+					continue getMenuElementsText;
+				}
+				JMenuItem item = (JMenuItem) sub.getComponent();
+				result.add(item.getText());
 			}
-			JMenuItem item = (JMenuItem) sub.getComponent();
-			result.add(item.getText());
+			return result;
 		}
-		return result;
 	}
 
 	protected static Set<String> getMenuElementsText() {

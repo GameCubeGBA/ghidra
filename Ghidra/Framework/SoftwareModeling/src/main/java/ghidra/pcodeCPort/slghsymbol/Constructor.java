@@ -273,7 +273,7 @@ public class Constructor {
 		}
 		else {
 			String push = printpiece.pop_back() + syn;
-			if ("".equals(push)) {
+			if (push.isEmpty()) {
 				push = " ";
 			}
 			printpiece.push_back(push);

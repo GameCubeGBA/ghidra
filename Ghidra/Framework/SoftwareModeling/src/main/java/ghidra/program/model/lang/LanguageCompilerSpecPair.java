@@ -42,10 +42,10 @@ public final class LanguageCompilerSpecPair implements Comparable<LanguageCompil
 		if (compilerSpecID == null) {
 			throw new IllegalArgumentException("compilerSpecID == null not allowed");
 		}
-		if ("".equals(languageID)) {
+		if (languageID.isEmpty()) {
 			throw new IllegalArgumentException("empty languageID not allowed");
 		}
-		if ("".equals(compilerSpecID)) {
+		if (compilerSpecID.isEmpty()) {
 			throw new IllegalArgumentException("empty compilerSpecID not allowed");
 		}
 		this.languageID = new LanguageID(languageID);

@@ -996,7 +996,7 @@ public class StringDataInstance {
 			}
 			i += Character.charCount(codePoint);
 		}
-		return prefixStr + buffer.toString();
+		return prefixStr + buffer;
 	}
 
 	public String getOffcutLabelString(String prefixStr, String abbrevPrefixStr, String defaultStr,

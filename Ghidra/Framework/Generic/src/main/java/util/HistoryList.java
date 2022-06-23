@@ -409,7 +409,7 @@ public class HistoryList<T> {
 
 		//@formatter:off
 		return "{\n" +
-			key + buffy.toString() + "\n" + 
+			key + buffy + "\n" +
 		"}";
 		//@formatter:on				
 	}

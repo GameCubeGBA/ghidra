@@ -76,7 +76,7 @@ public class DBTraceParameterSymbol extends AbstractDBTraceVariableSymbol
 	@Override
 	protected Pair<String, SourceType> validateNameAndSource(String newName, SourceType newSource)
 			throws InvalidInputException {
-		if (newSource == SourceType.DEFAULT || newName == null || "".equals(newName) ||
+		if (newSource == SourceType.DEFAULT || newName == null || newName.isEmpty() ||
 			SymbolUtilities.isDefaultParameterName(newName)) {
 			return new ImmutablePair<>("", SourceType.DEFAULT);
 		}

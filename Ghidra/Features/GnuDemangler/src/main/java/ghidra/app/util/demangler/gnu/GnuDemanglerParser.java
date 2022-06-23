@@ -725,7 +725,7 @@ public class GnuDemanglerParser {
 		}
 
 		// this handles the case where the demangled template has an empty argument
-		if ("".equals(parameter.trim())) {
+		if (parameter.trim().isEmpty()) {
 			return new DemangledDataType(mangledSource, demangledSource, "missing_argument");
 		}
 

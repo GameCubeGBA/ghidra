@@ -808,9 +808,7 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 	public ObjectContainer getParent(ObjectContainer container) {
 		List<String> path = container.getTargetObject().getPath();
 		List<String> ppath = new ArrayList<String>();
-		for (String link : path) {
-			ppath.add(link);
-		}
+        ppath.addAll(path);
 		if (path.size() == 0) {
 			return null;
 		}
@@ -1516,7 +1514,7 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 
 	public void performStepLast(ActionContext context) {
 		performAction(context, false, TargetSteppable.class, s -> {
-			if (extendedStep.equals("")) {
+			if (extendedStep.isEmpty()) {
 				return s.step(TargetStepKind.EXTENDED);
 			}
 			else {

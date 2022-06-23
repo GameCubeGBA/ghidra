@@ -480,7 +480,7 @@ public class HelpManager implements HelpService {
 			buffy.append("                ").append(loc.getInceptionInformation()).append('\n');
 		}
 
-		new Throwable("Bad Help Locations Found!\n" + buffy.toString()).printStackTrace();
+		new Throwable("Bad Help Locations Found!\n" + buffy).printStackTrace();
 	}
 
 	public Map<Object, HelpLocation> getInvalidHelpLocations(TaskMonitor monitor)

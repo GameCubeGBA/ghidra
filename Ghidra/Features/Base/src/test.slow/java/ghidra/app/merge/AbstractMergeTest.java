@@ -199,7 +199,7 @@ public abstract class AbstractMergeTest extends AbstractGhidraHeadedIntegrationT
 			tip.append(iter.next());
 		}
 		Msg.error(this, prefix + "Test Case " + testName.getMethodName() +
-			" : ERROR: Transactions still exist!  " + tip.toString());
+			" : ERROR: Transactions still exist!  " + tip);
 	}
 
 	protected <T extends Component> T getMergePanel(Class<T> desiredClass) {

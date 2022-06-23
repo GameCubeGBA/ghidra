@@ -207,14 +207,10 @@ public class DBTraceFunctionSymbol extends DBTraceNamespaceSymbol
 		}
 		locals = new ArrayList<>();
 		params = new ArrayList<>();
-		for (DBTraceLocalVariableSymbol lVar : manager.localVars.getChildren(this)) {
-			// TODO: Check for bad variables / bad storage
-			locals.add(lVar);
-		}
-		for (DBTraceParameterSymbol pVar : manager.parameters.getChildren(this)) {
-			// TODO: Bad?
-			params.add(pVar);
-		}
+        // TODO: Check for bad variables / bad storage
+        locals.addAll(manager.localVars.getChildren(this));
+        // TODO: Bad?
+        params.addAll(manager.parameters.getChildren(this));
 		// TODO: What is a bad variable?
 		locals.sort(VariableUtilities::compare);
 		params.sort(Comparator.comparing(DBTraceParameterSymbol::getOrdinal));
@@ -846,7 +842,7 @@ public class DBTraceFunctionSymbol extends DBTraceNamespaceSymbol
 						manager.trace.setChanged(
 							new TraceChangeRecord<>(TraceSymbolChangeType.CHANGED, getSpace(), p));
 					}
-					if (!"".equals(varName)) {
+					if (!varName.isEmpty()) {
 						p.setName(varName, paramSource);
 					}
 					p.doSetStorageAndDataType(storage, var.getDataType());

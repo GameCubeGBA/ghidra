@@ -18,6 +18,7 @@ package docking.widgets.pathmanager;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
@@ -38,9 +39,7 @@ class PathnameTableModel extends AbstractTableModel {
 		this.isEditable = isEditable;
 		pathList = new ArrayList<String>();
 		if (paths != null) {
-			for (int i=0; i<paths.length; i++) {
-				pathList.add(paths[i]);
-			}
+            pathList.addAll(Arrays.asList(paths));
 		}
 	}
 

@@ -32,7 +32,7 @@ public class LanguageID implements Comparable<LanguageID> {
 		if (id == null) {
 			throw new IllegalArgumentException("id == null not allowed");
 		}
-		if ("".equals(id)) {
+		if (id.isEmpty()) {
 			throw new IllegalArgumentException("empty id not allowed");
 		}
 		this.id = id;

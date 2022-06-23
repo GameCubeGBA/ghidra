@@ -353,7 +353,7 @@ public abstract class AbstractAddressRangeFilter<T> extends AncillaryFilter<T>
 
 	private boolean isAddressInRange(Address address) {
 		String text = lowerAddressRangeTextField.getText();
-		if (text == null || "".equals(text.trim())) {
+		if (text == null || text.trim().isEmpty()) {
 			return true; // temporary transition; we will be called again
 		}
 
@@ -364,7 +364,7 @@ public abstract class AbstractAddressRangeFilter<T> extends AncillaryFilter<T>
 		}
 
 		text = upperAddressRangeTextField.getText();
-		if (text == null || "".equals(text)) {
+		if (text == null || text.isEmpty()) {
 			return true; // temporary transition; we will be called again
 		}
 

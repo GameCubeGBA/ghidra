@@ -185,9 +185,7 @@ public abstract class AbstractGraphAlgorithmsTest extends AbstractGenericTest {
 
 	protected Set<TestV> set(TestV... vertices) {
 		HashSet<TestV> set = new HashSet<>();
-		for (TestV v : vertices) {
-			set.add(v);
-		}
+        set.addAll(Arrays.asList(vertices));
 		return set;
 	}
 

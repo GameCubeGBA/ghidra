@@ -187,9 +187,7 @@ public class CompositeEditorActionManager {
 	 */
 	public void setEditorActions(CompositeEditorTableAction[] actions) {
 		editorActions.clear();
-		for (CompositeEditorTableAction action : actions) {
-			editorActions.add(action);
-		}
+        editorActions.addAll(Arrays.asList(actions));
 	}
 
 	private void setFavoritesActions(List<DataType> favorites) {

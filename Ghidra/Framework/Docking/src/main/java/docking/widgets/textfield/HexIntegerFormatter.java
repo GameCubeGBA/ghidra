@@ -58,7 +58,7 @@ public class HexIntegerFormatter extends IntegerFormatter {
 	@Override
 	public String valueToString(Object value) throws ParseException {
 		String valueString = super.valueToString(value);
-		if ("".equals(valueString)) {
+		if (valueString != null && valueString.isEmpty()) {
 			return valueString;
 		}
 		return Long.toHexString(Long.valueOf(valueString));

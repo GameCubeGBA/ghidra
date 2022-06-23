@@ -345,9 +345,7 @@ public abstract class AbstractLocalFileSystemTest extends AbstractGenericTest {
 		byte[] dataBytes = data.getBytes();
 
 		List<String> names = new ArrayList<>();
-		for (String itemName : fs.getItemNames("/")) {
-			names.add(itemName);
-		}
+        names.addAll(Arrays.asList(fs.getItemNames("/")));
 
 		fs.dispose();
 		fs = LocalFileSystem.getLocalFileSystem(projectDir.getAbsolutePath(), false, false, false,

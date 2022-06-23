@@ -323,9 +323,7 @@ public class DirectedGraph {
 		Set<Vertex> descendants = new HashSet<Vertex>(2 * seedVertices.length);
 		Set<Vertex> pending = new HashSet<Vertex>(seedVertices.length);
 		Set<Vertex> newlyPending = new HashSet<Vertex>(seedVertices.length);
-		for (Vertex seedVertice : seedVertices) {
-			pending.add(seedVertice);
-		}
+        pending.addAll(Arrays.asList(seedVertices));
 
 		while (!pending.isEmpty()) {
 			Iterator<Vertex> iter = pending.iterator();
@@ -477,9 +475,7 @@ public class DirectedGraph {
 		Vertex[] sources = this.vertices().getSources();
 		Set<Vertex> entryPointSet = new TreeSet<Vertex>();
 		Vector<Vertex> entryPoints = new Vector<Vertex>(sources.length);
-		for (Vertex source : sources) {
-			entryPointSet.add(source);
-		}
+        entryPointSet.addAll(Arrays.asList(sources));
 		Set<Vertex> descendantsOfSources = this.getDescendants(sources);
 		Set<Vertex> nonDescendants = this.vertices().toSet();
 		nonDescendants.removeAll(descendantsOfSources);

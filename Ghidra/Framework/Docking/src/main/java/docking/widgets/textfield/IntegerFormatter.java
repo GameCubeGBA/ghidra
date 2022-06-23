@@ -120,7 +120,7 @@ public class IntegerFormatter extends NumberFormatter {
 				return false;
 			}
 
-			if ("".equals(text)) {
+			if (text.isEmpty()) {
 				return true;
 			}
 

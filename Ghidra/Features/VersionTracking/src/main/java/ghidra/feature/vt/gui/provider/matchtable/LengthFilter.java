@@ -102,7 +102,7 @@ public class LengthFilter extends Filter<VTMatch> {
 	@Override
 	public boolean passesFilter(VTMatch t) {
 		String text = textField.getText();
-		if (text == null || "".equals(text.trim())) {
+		if (text == null || text.trim().isEmpty()) {
 			return true; // temporary transition; we will be called again
 		}
 

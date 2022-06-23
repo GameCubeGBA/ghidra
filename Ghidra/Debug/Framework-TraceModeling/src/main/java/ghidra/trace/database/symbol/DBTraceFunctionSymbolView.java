@@ -114,7 +114,7 @@ public class DBTraceFunctionSymbolView
 		else {
 			DBTraceSymbolManager.assertValidName(name);
 		}
-		if (!"".equals(name) && source == SourceType.DEFAULT) {
+		if (!name.isEmpty() && source == SourceType.DEFAULT) {
 			throw new IllegalArgumentException(
 				"Cannot create DEFAULT function with non-default name");
 		}

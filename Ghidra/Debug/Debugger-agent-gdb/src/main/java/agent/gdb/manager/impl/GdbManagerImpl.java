@@ -960,7 +960,7 @@ public class GdbManagerImpl implements GdbManager {
 			processEvent(GdbConsoleOutputEvent.fromCli(line));
 			return;
 		}
-		if ("".equals(line.trim())) {
+		if (line.trim().isEmpty()) {
 			return;
 		}
 		//Msg.debug(this, "processing: " + channel + ": " + line);

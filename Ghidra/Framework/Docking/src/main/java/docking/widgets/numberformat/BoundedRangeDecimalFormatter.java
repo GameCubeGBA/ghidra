@@ -106,7 +106,7 @@ class BoundedRangeDecimalFormatter extends NumberFormatter {
 		}
 
 		private boolean isValidText(String text) {
-			if (".".equals(text) || "".equals(text)) {
+			if (".".equals(text) || text != null && text.isEmpty()) {
 				return true; // special case, let the decimal through
 			}
 			

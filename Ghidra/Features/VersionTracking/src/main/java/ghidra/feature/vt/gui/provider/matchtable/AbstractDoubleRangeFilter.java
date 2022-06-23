@@ -158,12 +158,12 @@ public abstract class AbstractDoubleRangeFilter<T> extends Filter<T>
 		}
 
 		String lowerBoundText = lowerBoundField.getText();
-		if (lowerBoundText == null || "".equals(lowerBoundText.trim())) {
+		if (lowerBoundText == null || lowerBoundText.trim().isEmpty()) {
 			return true; // temporary transition; we will be called again
 		}
 
 		String upperBoundText = upperBoundField.getText();
-		if (upperBoundText == null || "".equals(upperBoundText)) {
+		if (upperBoundText == null || upperBoundText.isEmpty()) {
 			return true; // temporary transition; we will be called again
 		}
 

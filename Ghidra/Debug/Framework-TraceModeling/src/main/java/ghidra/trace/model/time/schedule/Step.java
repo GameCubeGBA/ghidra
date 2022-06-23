@@ -37,7 +37,7 @@ public interface Step extends Comparable<Step> {
 	 * @throws IllegalArgumentException if the specification is of the wrong form
 	 */
 	static Step parse(String stepSpec) {
-		if ("".equals(stepSpec)) {
+		if (stepSpec != null && stepSpec.isEmpty()) {
 			return nop();
 		}
 		String[] parts = stepSpec.split("-");

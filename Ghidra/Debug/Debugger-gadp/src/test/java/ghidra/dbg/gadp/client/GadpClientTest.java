@@ -312,7 +312,7 @@ public class GadpClientTest implements AsyncTestUtils {
 
 	protected void dumpBuffer(ByteBuffer buf) {
 		for (byte b : buf.array()) {
-			System.err.print(String.format("%02x", b));
+			System.err.printf("%02x", b);
 		}
 		System.err.println();
 		for (int i = 0; i < buf.position(); i++) {

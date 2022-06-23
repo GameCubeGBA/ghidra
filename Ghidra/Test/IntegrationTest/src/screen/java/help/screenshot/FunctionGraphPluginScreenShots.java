@@ -754,9 +754,7 @@ public class FunctionGraphPluginScreenShots extends AbstractFunctionGraphTest {
 
 	private DialogComponentProvider showGroupTextDialog(FGVertex... vertices) {
 		HashSet<FGVertex> set = new HashSet<>();
-		for (FGVertex v : vertices) {
-			set.add(v);
-		}
+		Collections.addAll(set, vertices);
 
 		pickVertices(set);
 

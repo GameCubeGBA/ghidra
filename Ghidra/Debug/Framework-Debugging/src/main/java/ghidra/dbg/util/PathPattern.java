@@ -63,7 +63,7 @@ public class PathPattern implements PathPredicates {
 	}
 
 	public static boolean isWildcard(String pat) {
-		return "[]".equals(pat) || "".equals(pat);
+		return "[]".equals(pat) || pat != null && pat.isEmpty();
 	}
 
 	public static boolean keyMatches(String pat, String key) {
@@ -73,7 +73,7 @@ public class PathPattern implements PathPredicates {
 		if ("[]".equals(pat) && PathUtils.isIndex(key)) {
 			return true;
 		}
-		if ("".equals(pat) && PathUtils.isName(key)) {
+		if (pat != null && pat.isEmpty() && PathUtils.isName(key)) {
 			return true;
 		}
 		return false;
