@@ -40,11 +40,11 @@ public class LldbListProcessesCommand extends AbstractLldbCommand<Map<String, SB
 	public Map<String, SBProcess> complete(LldbPendingCommand<?> pending) {
 		Map<String, SBProcess> allProcesses = manager.getKnownProcesses(session);
 		Set<String> cur = allProcesses.keySet();
-		for (String id : updatedProcesses.keySet()) {
-			if (cur.contains(id)) {
+		for (Map.Entry<String, SBProcess> entry : updatedProcesses.entrySet()) {
+			if (cur.contains(entry.getKey())) {
 				continue; // Do nothing, we're in sync
 			}
-			manager.addProcessIfAbsent(session, updatedProcesses.get(id));
+			manager.addProcessIfAbsent(session, entry.getValue());
 		}
 		String sessionId = DebugClient.getId(session);
 		for (String id : new ArrayList<>(cur)) {

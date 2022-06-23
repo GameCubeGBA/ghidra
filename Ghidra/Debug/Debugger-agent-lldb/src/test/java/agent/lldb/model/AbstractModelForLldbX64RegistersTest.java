@@ -119,14 +119,15 @@ public abstract class AbstractModelForLldbX64RegistersTest
 		Map<String, byte[]> exp = getRegisterWrites();
 		Map<String, byte[]> read = new HashMap<>();
 		for (TargetRegisterBank bank : banks.values()) {
-			for (String name : exp.keySet()) {
-				Map<List<String>, TargetRegister> regs = m.findAll(TargetRegister.class,
+			for (Entry<String, byte[]> entry : exp.entrySet()) {
+                String name = entry.getKey();
+                Map<List<String>, TargetRegister> regs = m.findAll(TargetRegister.class,
 					bank.getPath(), pred -> pred.applyIndices(name), false);
 				for (TargetRegister reg : regs.values()) {
 					byte[] bytes = waitOn(bank.readRegister(reg));
 					read.put(name, bytes);
 					expectRegisterObjectValue(bank, name, bytes);
-					assertEquals(exp.get(name).length, bytes.length);
+					assertEquals(entry.getValue().length, bytes.length);
 				}
 			}
 		}
@@ -147,17 +148,18 @@ public abstract class AbstractModelForLldbX64RegistersTest
 		Map<String, byte[]> write = getRegisterWrites();
 		Map<String, byte[]> read = new HashMap<>();
 		for (TargetRegisterBank bank : banks.values()) {
-			for (String name : write.keySet()) {
-				Map<List<String>, TargetRegister> regs = m.findAll(TargetRegister.class,
+			for (Entry<String, byte[]> entry : write.entrySet()) {
+                String name = entry.getKey();
+                Map<List<String>, TargetRegister> regs = m.findAll(TargetRegister.class,
 					bank.getPath(), pred -> pred.applyIndices(name), false);
 				for (TargetRegister reg : regs.values()) {
-					waitOn(bank.writeRegister(reg, write.get(name)));
+					waitOn(bank.writeRegister(reg, entry.getValue()));
 
 					// NB. This only really tests the cache, if applicable. A scenario checks for efficacy.
 					byte[] bytes = waitOn(bank.readRegister(reg));
 					read.put(name, bytes);
 					expectRegisterObjectValue(bank, name, bytes);
-					assertArrayEquals(write.get(name), bytes);
+					assertArrayEquals(entry.getValue(), bytes);
 				}
 			}
 		}

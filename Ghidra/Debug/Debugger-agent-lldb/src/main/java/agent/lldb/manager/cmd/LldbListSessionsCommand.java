@@ -38,11 +38,11 @@ public class LldbListSessionsCommand extends AbstractLldbCommand<Map<String, SBT
 	public Map<String, SBTarget> complete(LldbPendingCommand<?> pending) {
 		Map<String, SBTarget> allSessions = manager.getKnownSessions();
 		Set<String> cur = allSessions.keySet();
-		for (String id : updatedSessions.keySet()) {
-			if (cur.contains(id)) {
+		for (Map.Entry<String, SBTarget> entry : updatedSessions.entrySet()) {
+			if (cur.contains(entry.getKey())) {
 				continue; // Do nothing, we're in sync
 			}
-			manager.addSessionIfAbsent(updatedSessions.get(id));
+			manager.addSessionIfAbsent(entry.getValue());
 		}
 		for (String id : new ArrayList<>(cur)) {
 			if (updatedSessions.containsKey(id)) {

@@ -370,9 +370,9 @@ public class DataTypeMergeManager implements MergeResolver {
 	}
 
 	private void fixupDirtyFlags() {
-		for (UniversalID sourceID : dirtyMap.keySet()) {
-			boolean isDirty = dirtyMap.get(sourceID).booleanValue();
-			SourceArchive sourceArchive = dtms[RESULT].getSourceArchive(sourceID);
+		for (Map.Entry<UniversalID, Boolean> entry : dirtyMap.entrySet()) {
+			boolean isDirty = entry.getValue().booleanValue();
+			SourceArchive sourceArchive = dtms[RESULT].getSourceArchive(entry.getKey());
 			if (sourceArchive.isDirty() != isDirty) {
 				sourceArchive.setDirtyFlag(isDirty);
 			}

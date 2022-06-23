@@ -1325,9 +1325,9 @@ public abstract class GhidraScript extends FlatProgramAPI {
 		Options options = program.getOptions(Program.ANALYSIS_PROPERTIES);
 
 		StringBuffer errorBuffer = new StringBuffer();
-		for (String analysisOptionName : analysisSettings.keySet()) {
-			String returnString = setAnalysisOption(options, analysisOptionName,
-				analysisSettings.get(analysisOptionName));
+		for (Map.Entry<String, String> entry : analysisSettings.entrySet()) {
+			String returnString = setAnalysisOption(options, entry.getKey(),
+                    entry.getValue());
 
 			if (returnString.length() > 0) {
 				errorBuffer.append(returnString);

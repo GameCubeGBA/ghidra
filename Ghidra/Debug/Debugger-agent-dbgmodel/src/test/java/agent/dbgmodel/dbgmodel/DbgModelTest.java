@@ -466,10 +466,10 @@ public class DbgModelTest extends AbstractGhidraHeadlessIntegrationTest {
 			ModelObject currentThread = util.getCurrentThread();
 			ModelObject registers = currentThread.getKeyValue("Registers").getKeyValue("User");
 			Map<String, ModelObject> map = registers.getKeyValueMap();
-			for (String key : map.keySet()) {
-				ModelObject mo = map.get(key);
+			for (Map.Entry<String, ModelObject> entry : map.entrySet()) {
+				ModelObject mo = entry.getValue();
 				Object value = mo.getValue();
-				System.out.println(key + ":" + Long.toHexString(Long.parseLong(value.toString())));
+				System.out.println(entry.getKey() + ":" + Long.toHexString(Long.parseLong(value.toString())));
 			}
 		}
 	}
@@ -740,9 +740,9 @@ public class DbgModelTest extends AbstractGhidraHeadlessIntegrationTest {
 			for (ModelObject child : children) {
 				System.out.println(child);
 				Map<String, ModelObject> map = child.getKeyValueMap();
-				for (String key : map.keySet()) {
-					ModelObject value = map.get(key);
-					System.out.println(key + ":" + value);
+				for (Map.Entry<String, ModelObject> entry : map.entrySet()) {
+					ModelObject value = entry.getValue();
+					System.out.println(entry.getKey() + ":" + value);
 					if (value.getKind().equals(ModelObjectKind.OBJECT_PROPERTY_ACCESSOR)) {
 						Unknown v = (Unknown) value.getIntrinsicValue();
 						System.out.println(v);

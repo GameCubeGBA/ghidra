@@ -202,8 +202,9 @@ public class ObjectContainer implements Comparable<ObjectContainer> {
 				}
 				result.add(child);
 			}
-			for (String key : elementsAdded.keySet()) {
-				TargetObject val = elementsAdded.get(key);
+			for (Entry<String, ? extends TargetObject> entry : elementsAdded.entrySet()) {
+                String key = entry.getKey();
+                TargetObject val = entry.getValue();
 				ObjectContainer child =
 					DebuggerObjectsProvider.buildContainerFromObject(targetObject, key, val, false);
 				elementMap.put(key, val);
@@ -244,8 +245,9 @@ public class ObjectContainer implements Comparable<ObjectContainer> {
 				}
 				result.add(child);
 			}
-			for (String key : newAdds.keySet()) {
-				Object val = newAdds.get(key);
+			for (Entry<String, Object> entry : newAdds.entrySet()) {
+                String key = entry.getKey();
+                Object val = entry.getValue();
 				ObjectContainer child =
 					DebuggerObjectsProvider.buildContainerFromObject(targetObject, key, val, true);
 				if (child != null) {
@@ -306,9 +308,9 @@ public class ObjectContainer implements Comparable<ObjectContainer> {
 			}
 		}
 		if (added != null) {
-			for (String key : added.keySet()) {
-				Object object = added.get(key);
-				map.put(key, object);
+			for (Entry<String, ?> entry : added.entrySet()) {
+				Object object = entry.getValue();
+				map.put(entry.getKey(), object);
 			}
 		}
 		return map;

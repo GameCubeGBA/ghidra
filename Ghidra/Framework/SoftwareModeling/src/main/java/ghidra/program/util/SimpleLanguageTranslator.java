@@ -88,14 +88,15 @@ class SimpleLanguageTranslator extends LanguageTranslatorAdapter {
 			StringBuffer errBuf = new StringBuffer();
 			ArrayList<AddressSpace> oldSpaces =
 				new ArrayList<AddressSpace>(Arrays.asList(oldFactory.getPhysicalSpaces()));
-			for (String name : spaceNameMap.keySet()) {
-				AddressSpace space = oldFactory.getAddressSpace(name);
+			for (Map.Entry<String, String> entry : spaceNameMap.entrySet()) {
+                String name = entry.getKey();
+                AddressSpace space = oldFactory.getAddressSpace(name);
 				oldSpaces.remove(space);
 				if (space == null) {
 					errBuf.append("  Mapped address space not found (from): " + name + "\r\n");
 					continue;
 				}
-				String newName = spaceNameMap.get(name);
+				String newName = entry.getValue();
 				if (newName == null) {
 					if (oldFactory.getDefaultAddressSpace() == space) {
 						errBuf.append("  Default space must be mapped: " + name + "\r\n");

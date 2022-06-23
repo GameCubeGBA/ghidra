@@ -167,20 +167,20 @@ public class ToolOptions extends AbstractOptions {
 	}
 
 	private void writeNonWrappedOptions(boolean includeDefaultBindings, SaveState saveState) {
-		for (String optionName : valueMap.keySet()) {
-			Option optionValue = valueMap.get(optionName);
+		for (Map.Entry<String, Option> entry : valueMap.entrySet()) {
+			Option optionValue = entry.getValue();
 			if (includeDefaultBindings || !optionValue.isDefault()) {
 				Object value = optionValue.getValue(null);
 				if (isSupportedBySaveState(value)) {
-					saveState.putObject(optionName, value);
+					saveState.putObject(entry.getKey(), value);
 				}
 			}
 		}
 	}
 
 	private void writeWrappedOptions(boolean includeDefaultBindings, Element root) {
-		for (String optionName : valueMap.keySet()) {
-			Option option = valueMap.get(optionName);
+		for (Map.Entry<String, Option> entry : valueMap.entrySet()) {
+			Option option = entry.getValue();
 			if (includeDefaultBindings || !option.isDefault()) {
 
 				Object value = option.getCurrentValue();
@@ -208,7 +208,7 @@ public class ToolOptions extends AbstractOptions {
 					elem = ss.saveToXml();
 				}
 
-				elem.setAttribute(NAME_ATTRIBUTE, optionName);
+				elem.setAttribute(NAME_ATTRIBUTE, entry.getKey());
 				elem.setAttribute(CLASS_ATTRIBUTE, wrappedOption.getClass().getName());
 				root.addContent(elem);
 			}
@@ -361,23 +361,21 @@ public class ToolOptions extends AbstractOptions {
 			return;
 		}
 
-		Set<String> keySet = valueMap.keySet();
-		for (String propertyName : keySet) {
-			Option optionState = valueMap.get(propertyName);
+        for (Map.Entry<String, Option> entry : valueMap.entrySet()) {
+			Option optionState = entry.getValue();
 			if (optionState.isRegistered()) {
 				continue;
 			}
-			Msg.warn(this, "Unregistered property \"" + propertyName + "\" in Options \"" + name +
+			Msg.warn(this, "Unregistered property \"" + entry.getKey() + "\" in Options \"" + name +
 				"\"\n     " + optionState.getInceptionInformation());
 		}
 	}
 
 	public void registerOptions(ToolOptions oldOptions) {
-		Set<String> optionNameSet = oldOptions.valueMap.keySet();
-		for (String optionName : optionNameSet) {
-			Option option = oldOptions.valueMap.get(optionName);
+        for (Map.Entry<String, Option> entry : oldOptions.valueMap.entrySet()) {
+			Option option = entry.getValue();
 			if (option.isRegistered()) {
-				registerOption(optionName, option.getOptionType(), option.getDefaultValue(),
+				registerOption(entry.getKey(), option.getOptionType(), option.getDefaultValue(),
 					option.getHelpLocation(), option.getDescription());
 			}
 		}

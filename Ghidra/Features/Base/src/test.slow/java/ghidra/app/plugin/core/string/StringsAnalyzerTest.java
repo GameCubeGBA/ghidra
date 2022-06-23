@@ -269,8 +269,8 @@ public class StringsAnalyzerTest extends AbstractGhidraHeadedIntegrationTest {
 		}
 
 		HashMap<String, String> bytes = (HashMap<String, String>) programBytesMap.get(programName);
-		for (String startAddr : bytes.keySet()) {
-			builder.setBytes(startAddr, bytes.get(startAddr), disassemble);
+		for (Map.Entry<String, String> entry : bytes.entrySet()) {
+			builder.setBytes(entry.getKey(), entry.getValue(), disassemble);
 		}
 
 		testProgram = builder.getProgram();
@@ -320,8 +320,9 @@ public class StringsAnalyzerTest extends AbstractGhidraHeadedIntegrationTest {
 		String type, actualValue, toMatch;
 
 		// Verify that each expected string is there
-		for (Address strAddr : addressToValueMap.keySet()) {
-			toMatch = "u\"" + addressToValueMap.get(strAddr) + "\"";
+		for (Map.Entry<Address, String> entry : addressToValueMap.entrySet()) {
+            Address strAddr = entry.getKey();
+            toMatch = "u\"" + entry.getValue() + "\"";
 
 			data = listing.getDefinedDataAt(strAddr);
 			assertNotNull(data);
@@ -595,8 +596,8 @@ public class StringsAnalyzerTest extends AbstractGhidraHeadedIntegrationTest {
 		Data dataHere;
 
 		// Verify none of these strings exist prior to running the Strings Analyzer
-		for (String candidateStr : stringToAddr.keySet()) {
-			dataHere = listing.getDefinedDataAt(stringToAddr.get(candidateStr));
+		for (Address address : stringToAddr.values()) {
+			dataHere = listing.getDefinedDataAt(address);
 			assertNull(dataHere);
 		}
 
@@ -614,9 +615,9 @@ public class StringsAnalyzerTest extends AbstractGhidraHeadedIntegrationTest {
 		analyzer.setStringEndAlignment(1);
 		analyzer.added(testProgram, null, monitor, manager.getMessageLog());
 
-		for (String candidateStr : stringToAddr.keySet()) {
-			dataHere = listing.getDefinedDataAt(stringToAddr.get(candidateStr));
-			assertNull("Did not expect to find '" + candidateStr +
+		for (Map.Entry<String, Address> entry : stringToAddr.entrySet()) {
+			dataHere = listing.getDefinedDataAt(entry.getValue());
+			assertNull("Did not expect to find '" + entry.getKey() +
 				"' when min string length is set to " + strSizes.get(strSizes.size() - 1) + 1,
 				dataHere);
 		}
@@ -1292,8 +1293,9 @@ public class StringsAnalyzerTest extends AbstractGhidraHeadedIntegrationTest {
 		String type, actualValue, toMatch;
 
 		// Verify that each expected string is there and padded to expected pad length
-		for (Address strAddr : addressToValueMap.keySet()) {
-			toMatch = "\"" + addressToValueMap.get(strAddr);
+		for (Map.Entry<Address, String> entry : addressToValueMap.entrySet()) {
+            Address strAddr = entry.getKey();
+            toMatch = "\"" + entry.getValue();
 
 			data = listing.getDefinedDataAt(strAddr);
 			assertNotNull(data);

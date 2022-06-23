@@ -53,9 +53,10 @@ public class DbgListAttributesCommand extends AbstractDbgCommand<Map<String, ?>>
 			updatedAttributes = new TreeMap<>(TargetObjectKeyComparator.ATTRIBUTE);
 			Map<String, ModelObject> map = access.getAttributes(path);
 			Map<String, ?> existingAttributes = targetObject.getCachedAttributes();
-			for (String key : map.keySet()) {
-				DbgModel2TargetProxy proxyAttribute;
-				ModelObject obj = map.get(key);
+			for (Map.Entry<String, ModelObject> entry : map.entrySet()) {
+                String key = entry.getKey();
+                DbgModel2TargetProxy proxyAttribute;
+				ModelObject obj = entry.getValue();
 				String atKey = obj.getSearchKey();
 				Object object = existingAttributes.get(atKey);
 				if (object != null && (object instanceof DbgModelTargetObject)) {

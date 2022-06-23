@@ -169,8 +169,9 @@ public class QueryOpinionService {
 
 		// Check for primary attribute strings that have a list of comma separated primary values.
 		// For example, MIPS can have the primary (e_machine) value 8 or 10.
-		for (String primaryKeyOriginal : loadersByName.keySet()) {
-			if (primaryKeyOriginal == null) {
+		for (Map.Entry<String, Map<String, Set<QueryResult>>> entry : loadersByName.entrySet()) {
+            String primaryKeyOriginal = entry.getKey();
+            if (primaryKeyOriginal == null) {
 				continue; // TODO why would we all a null key???
 			}
 
@@ -180,7 +181,7 @@ public class QueryOpinionService {
 			String[] tokens = primaryKeyCleaned.split(",");
 			for (String token : tokens) {
 				if (token.equals(primaryKey)) {
-					return loadersByName.get(primaryKeyOriginal);
+					return entry.getValue();
 				}
 			}
 		}

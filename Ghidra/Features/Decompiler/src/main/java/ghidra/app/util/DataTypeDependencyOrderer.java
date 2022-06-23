@@ -195,10 +195,11 @@ public class DataTypeDependencyOrderer {
 		}
 		res.append("\n");
 		if (!whoDependsOnMe.isEmpty()) {
-			for (Entry entry : whoDependsOnMe.keySet()) {
-				res.append("WhoDependsOnMe Me: " + entry.dataType.getName() + " " +
+			for (Map.Entry<Entry, Set<Entry>> e : whoDependsOnMe.entrySet()) {
+                Entry entry = e.getKey();
+                res.append("WhoDependsOnMe Me: " + entry.dataType.getName() + " " +
 					entry.dataType.getClass().getName() + "\n");
-				for (Entry dentry : whoDependsOnMe.get(entry)) {
+				for (Entry dentry : e.getValue()) {
 					res.append("              Dep: <-- " + dentry.dataType.getName() + " " +
 						dentry.dataType.getClass().getName() + "\n");
 				}
@@ -206,10 +207,11 @@ public class DataTypeDependencyOrderer {
 		}
 		res.append("\n");
 		if (!whoIDependOn.isEmpty()) {
-			for (Entry entry : whoIDependOn.keySet()) {
-				res.append("WhoIDependOn I: " + entry.dataType.getName() + " " +
+			for (Map.Entry<Entry, Set<Entry>> e : whoIDependOn.entrySet()) {
+                Entry entry = e.getKey();
+                res.append("WhoIDependOn I: " + entry.dataType.getName() + " " +
 					entry.dataType.getClass().getName() + "\n");
-				for (Entry dentry : whoIDependOn.get(entry)) {
+				for (Entry dentry : e.getValue()) {
 					res.append("            Sup: --> " + dentry.dataType.getName() + " " +
 						dentry.dataType.getClass().getName() + "\n");
 				}

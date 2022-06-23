@@ -391,10 +391,8 @@ public class ToolManagerImpl implements ToolManager, PropertyChangeListener {
 	 * @return true if the session was saved
 	 */
 	public boolean saveSessionTools() {
-		Set<String> keySet = namesMap.keySet();
-		for (String toolName : keySet) {
-			List<PluginTool> tools = namesMap.get(toolName);
-			if (tools.size() == 1) {
+        for (List<PluginTool> tools : namesMap.values()) {
+            if (tools.size() == 1) {
 				PluginTool tool = tools.get(0);
 				if (tool.shouldSave()) {
 					toolServices.saveTool(tool);

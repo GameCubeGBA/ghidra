@@ -485,10 +485,10 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 		if (pane != null) {
 			if (key != null) {
 				List<ObjectContainer> containers = new ArrayList<>();
-				for (String path : targetMap.keySet()) {
-					if (path.endsWith(key)) {
+				for (Entry<String, ObjectContainer> entry : targetMap.entrySet()) {
+					if (entry.getKey().endsWith(key)) {
 						synchronized (targetMap) {
-							ObjectContainer container = targetMap.get(path);
+							ObjectContainer container = entry.getValue();
 							containers.add(container);
 						}
 					}
@@ -730,8 +730,9 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 			return result;
 		}
 		synchronized (objectMap) {
-			for (String key : objectMap.keySet()) {
-				Object object = objectMap.get(key);
+			for (Entry<String, ?> entry : objectMap.entrySet()) {
+                String key = entry.getKey();
+                Object object = entry.getValue();
 				if (object == null) {
 					System.err.println("null object for " + key);
 					continue;
@@ -1676,14 +1677,12 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 		@Override
 		public void registersUpdated(TargetObject bank, Map<String, byte[]> updates) {
 			Map<String, ? extends TargetObject> cachedElements = bank.getCachedElements();
-			for (String key : cachedElements.keySet()) {
-				TargetObject ref = cachedElements.get(key);
-				displayChanged(ref, "registersUpdated");
+			for (TargetObject ref : cachedElements.values()) {
+                displayChanged(ref, "registersUpdated");
 			}
 			Map<String, ?> cachedAttributes = bank.getCachedAttributes();
-			for (String key : cachedAttributes.keySet()) {
-				Object obj = cachedAttributes.get(key);
-				if (obj instanceof TargetObject) {
+			for (Object obj : cachedAttributes.values()) {
+                if (obj instanceof TargetObject) {
 					displayChanged((TargetObject) obj, "registersUpdated");
 				}
 			}
