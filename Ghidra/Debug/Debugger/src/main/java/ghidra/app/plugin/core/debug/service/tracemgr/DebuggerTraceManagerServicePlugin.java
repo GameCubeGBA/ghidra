@@ -386,8 +386,7 @@ public class DebuggerTraceManagerServicePlugin extends Plugin
 			return false;
 		}
 
-		List<DomainFile> toOpen = Arrays.asList(data)
-				.stream()
+		List<DomainFile> toOpen = Arrays.stream(data)
 				.filter(f -> Trace.class.isAssignableFrom(f.getDomainObjectClass()))
 				.collect(Collectors.toList());
 		Collection<Trace> openTraces = openTraces(toOpen);

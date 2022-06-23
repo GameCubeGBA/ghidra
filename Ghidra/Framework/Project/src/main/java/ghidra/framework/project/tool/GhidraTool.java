@@ -288,12 +288,7 @@ public class GhidraTool extends PluginTool {
 
 			// Now see if any extensions are in the current preferences that are NOT in the installed extensions
 			// list. Those are the ones we need to remove.
-			for (Iterator<String> i = preferenceExtensionNames.iterator(); i.hasNext();) {
-				String extName = i.next();
-				if (!installedExtensionNames.contains(extName)) {
-					i.remove();
-				}
-			}
+			preferenceExtensionNames.removeIf(extName -> !installedExtensionNames.contains(extName));
 
 			// Finally, put the new extension list in the preferences object
 			state.putStrings(EXTENSIONS_PREFERENCE_NAME,

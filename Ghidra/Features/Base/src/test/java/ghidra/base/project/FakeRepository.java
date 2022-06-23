@@ -131,7 +131,7 @@ public class FakeRepository {
 	 * and you wish each file system sharing this repo to update.
 	 */
 	public void refresh() {
-		projectsByUser.values().stream().forEach(p -> p.refresh());
+		projectsByUser.values().forEach(p -> p.refresh());
 	}
 
 	/**

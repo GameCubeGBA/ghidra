@@ -328,13 +328,7 @@ public class TreeValueSortedMapTest {
 		for (int i = 0; i < 10; i++) {
 			queue.put("Element" + i, i);
 		}
-		Iterator<Integer> vit = queue.values().iterator();
-		while (vit.hasNext()) {
-			int val = vit.next();
-			if (val % 2 == 1) {
-				vit.remove();
-			}
-		}
+        queue.values().removeIf(val -> val % 2 == 1);
 
 		for (int val : queue.values()) {
 			assertEquals(0, val % 2);

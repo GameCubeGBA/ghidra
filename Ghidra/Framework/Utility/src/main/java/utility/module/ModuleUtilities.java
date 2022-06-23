@@ -349,9 +349,9 @@ public class ModuleUtilities {
 	 */
 	public static boolean isExternalModule(GModule module, ApplicationLayout layout) {
 		File moduleRootDir = module.getModuleRoot().getFile(false);
-		return !layout.getApplicationRootDirs()
+		return layout.getApplicationRootDirs()
 				.stream()
 				.map(dir -> dir.getParentFile().getFile(false))
-				.anyMatch(dir -> FileUtilities.isPathContainedWithin(dir, moduleRootDir));
+				.noneMatch(dir -> FileUtilities.isPathContainedWithin(dir, moduleRootDir));
 	}
 }

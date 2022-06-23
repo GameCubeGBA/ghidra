@@ -852,7 +852,7 @@ public class GhidraSourceBundle extends GhidraBundle {
 		if (!importPackageValues.isEmpty()) {
 			// constrain analyzed imports according to what's declared in @importpackage tags
 			analyzer.setProperty("Import-Package",
-				importPackageValues.stream().collect(Collectors.joining(",")) + ",*");
+				String.join(",", importPackageValues) + ",*");
 		}
 		else {
 			analyzer.setProperty("Import-Package", "*");

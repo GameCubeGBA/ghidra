@@ -165,12 +165,7 @@ public class VarnodeAST extends Varnode {
 	}
 
 	public void removeDescendant(PcodeOp op) {
-		ListIterator<PcodeOp> iter = descend.listIterator();
-		while (iter.hasNext()) {
-			if (op == iter.next()) {
-				iter.remove();
-			}
-		}
+		descend.removeIf(pcodeOp -> op == pcodeOp);
 	}
 
 	/**

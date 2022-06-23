@@ -18,6 +18,7 @@ package agent.gdb.manager.breakpoint;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * The type of GDB breakpoint
@@ -57,7 +58,7 @@ public enum GdbBreakpointType {
 	OTHER("<OTHER>", false);
 
 	public static final Map<String, GdbBreakpointType> BY_NAME =
-		List.of(values()).stream().collect(Collectors.toMap(v -> v.getName(), v -> v));
+		Stream.of(values()).collect(Collectors.toMap(v -> v.getName(), v -> v));
 
 	/**
 	 * Parse a type from a GDB/MI breakpoint information block

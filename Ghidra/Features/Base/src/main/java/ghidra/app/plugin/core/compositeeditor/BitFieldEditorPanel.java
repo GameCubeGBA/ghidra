@@ -15,15 +15,6 @@
  */
 package ghidra.app.plugin.core.compositeeditor;
 
-import java.awt.*;
-import java.awt.event.*;
-
-import javax.swing.*;
-import javax.swing.event.CellEditorListener;
-import javax.swing.event.ChangeEvent;
-
-import com.google.common.base.Predicate;
-
 import docking.ActionContext;
 import docking.widgets.DropDownSelectionTextField;
 import docking.widgets.OptionDialog;
@@ -33,11 +24,21 @@ import ghidra.app.plugin.core.compositeeditor.BitFieldPlacementComponent.BitFiel
 import ghidra.app.services.DataTypeManagerService;
 import ghidra.app.util.datatype.DataTypeSelectionEditor;
 import ghidra.app.util.datatype.NavigationDirection;
-import ghidra.program.model.data.*;
 import ghidra.program.model.data.Composite;
+import ghidra.program.model.data.*;
 import ghidra.util.data.DataTypeParser.AllowedDataTypes;
-import ghidra.util.layout.*;
+import ghidra.util.layout.HorizontalLayout;
+import ghidra.util.layout.PairLayout;
+import ghidra.util.layout.TwoColumnPairLayout;
+import ghidra.util.layout.VerticalLayout;
 import resources.ResourceManager;
+
+import javax.swing.*;
+import javax.swing.event.CellEditorListener;
+import javax.swing.event.ChangeEvent;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.function.Predicate;
 
 /**
  * <code>BitFieldEditorPanel</code> provides the ability to add or modify bitfields
@@ -77,7 +78,7 @@ public class BitFieldEditorPanel extends JPanel {
 	private boolean updating = false;
 
 	BitFieldEditorPanel(Composite composite, DataTypeManagerService dtmService,
-			Predicate<DataType> dataTypeValidator) {
+						Predicate<DataType> dataTypeValidator) {
 		super();
 		this.composite = composite;
 
@@ -90,7 +91,7 @@ public class BitFieldEditorPanel extends JPanel {
 		setFocusTraversalKeysEnabled(true);
 
 		this.dtmService = dtmService;
-		this.dataTypeValidator = dataTypeValidator;
+		this.dataTypeValidator = dataTypeValidator::test;
 
 		setBorder(BorderFactory.createEmptyBorder(5, 5, 0, 5));
 
@@ -486,7 +487,7 @@ public class BitFieldEditorPanel extends JPanel {
 		}
 		if (isValid) {
 			DataType dt = dtChoiceEditor.getCellEditorValueAsDataType();
-			if (!dataTypeValidator.apply(baseDataType)) {
+			if (!dataTypeValidator.test(baseDataType)) {
 				setStatus("Valid bitfield base datatype entry required");
 				isValid = false;
 			}
@@ -496,7 +497,7 @@ public class BitFieldEditorPanel extends JPanel {
 			}
 		}
 		else {
-			dataTypeValidator.apply(null); // affects button enablement
+			dataTypeValidator.test(null); // affects button enablement
 		}
 		return isValid;
 	}
@@ -569,7 +570,7 @@ public class BitFieldEditorPanel extends JPanel {
 		updating = true;
 		try {
 			baseDataType = initialBaseDataType;
-			dataTypeValidator.apply(baseDataType);
+			dataTypeValidator.test(baseDataType);
 			dtChoiceEditor.setCellEditorValue(initialBaseDataType);
 			fieldNameTextField.setText(initialFieldName);
 			fieldCommentTextField.setText(initialComment);

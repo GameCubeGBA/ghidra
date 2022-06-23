@@ -111,11 +111,11 @@ public class LibrarySearchPathManager {
 	 * @return true if the path was appended, false if the path was a duplicate
 	 */
 	public static boolean addPath(String path) {
-		if (pathList.indexOf(path) == -1) {
-			pathList.add(path);
-			return true;
+		if (pathList.contains(path)) {
+			return false;
 		}
-		return false;
+		pathList.add(path);
+		return true;
 	}
 
 	/**
@@ -124,11 +124,11 @@ public class LibrarySearchPathManager {
 	 * @return true if the path was appended, false if the path was a duplicate
 	 */
 	public static boolean addPathAt(int index, String path) {
-		if (pathList.indexOf(path) == -1) {
-			pathList.add(index, path);
-			return true;
+		if (pathList.contains(path)) {
+			return false;
 		}
-		return false;
+		pathList.add(index, path);
+		return true;
 	}
 
 	/**
