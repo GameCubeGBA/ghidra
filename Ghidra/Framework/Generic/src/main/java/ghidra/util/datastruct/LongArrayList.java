@@ -193,9 +193,9 @@ public class LongArrayList implements List<Long> {
 	public void reverse() {
 		int half = size / 2;
 		for (int i = 0, j = size - 1 ; i < half ; ++i, --j) {
-			long tmp = longs[i] ;
-			longs[i] = longs[j];
-			longs[j] = tmp;
+			longs[i] ^= longs[j];
+			longs[j] = longs[i];
+			longs[i] ^= longs[j];
 		}
 	}
 
@@ -254,9 +254,8 @@ public class LongArrayList implements List<Long> {
 	}
 
 	public boolean containsAll(Collection<?> c) {
-		Iterator<?> it = c.iterator();
-		while(it.hasNext()) {
-			if (!contains(it.next())) {
+		for (Object o : c) {
+			if (!contains(o)) {
 				return false;
 			}
 		}
@@ -294,9 +293,8 @@ public class LongArrayList implements List<Long> {
 
 	public boolean removeAll(Collection<?> c) {
 		boolean changed = false;
-		Iterator<?> it = c.iterator();
-		while(it.hasNext()) {
-			if (remove(it.next())) {
+		for (Object o : c) {
+			if (remove(o)) {
 				changed = true;
 			}
 		}
@@ -435,9 +433,8 @@ public class LongArrayList implements List<Long> {
 		}
 
 		public boolean containsAll(Collection<?> c) {
-			Iterator<?> it = c.iterator();
-			while(it.hasNext()) {
-				if (!contains(it.next())) {
+			for (Object o : c) {
+				if (!contains(o)) {
 					return false;
 				}
 			}
@@ -488,9 +485,8 @@ public class LongArrayList implements List<Long> {
 
 		public boolean removeAll(Collection<?> c) {
 			boolean changed = false;
-			Iterator<?> it = c.iterator();
-			while(it.hasNext()) {
-				if (remove(it.next())) {
+			for (Object o : c) {
+				if (remove(o)) {
 					changed = true;
 				}
 			}
