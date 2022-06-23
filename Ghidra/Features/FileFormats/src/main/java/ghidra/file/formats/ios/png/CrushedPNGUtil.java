@@ -145,12 +145,8 @@ public class CrushedPNGUtil {
 
 						//Gather ID and data together to calculate CRC32
 						byte[] idat = new byte[CrushedPNGConstants.IDAT_CHUNK.length + dataLength];
-						for (int i = 0; i < CrushedPNGConstants.IDAT_CHUNK.length; i++) {
-							idat[i] = CrushedPNGConstants.IDAT_CHUNK[i];
-						}
-						for (int i = 0; i < dataLength; i++) {
-							idat[CrushedPNGConstants.IDAT_CHUNK.length + i] = repackArray[i];
-						}
+                        System.arraycopy(CrushedPNGConstants.IDAT_CHUNK, 0, idat, 0, CrushedPNGConstants.IDAT_CHUNK.length);
+                        System.arraycopy(repackArray, 0, idat, CrushedPNGConstants.IDAT_CHUNK.length + 0, dataLength);
 
 						//Write the chunk data
 						outputStream.write(idat);
@@ -562,9 +558,7 @@ public class CrushedPNGUtil {
 		byte[] fixedIdatData = new byte[idatData.length + 2];
 		fixedIdatData[0] = ZLIB.ZLIB_COMPRESSION_DEFAULT[0];
 		fixedIdatData[1] = ZLIB.ZLIB_COMPRESSION_DEFAULT[1];
-		for (int i = 0; i < idatData.length; i++) {
-			fixedIdatData[i + 2] = idatData[i];
-		}
+        System.arraycopy(idatData, 0, fixedIdatData, 2, idatData.length);
 		return fixedIdatData;
 	}
 

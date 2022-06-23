@@ -388,9 +388,7 @@ public class AssemblyPatternBlock implements Comparable<AssemblyPatternBlock> {
 		byte[] cmsk = new byte[buflen]; // To check for conflicts;
 
 		int diff = this.offset - newOffset;
-		for (int i = 0; i < this.mask.length; i++) {
-			cmsk[diff + i] = this.mask[i];
-		}
+		System.arraycopy(this.mask, 0, cmsk, diff + 0, this.mask.length);
 		diff = that.offset - newOffset;
 		for (int i = 0; i < that.mask.length; i++) {
 			cmsk[diff + i] &= that.mask[i];

@@ -189,9 +189,7 @@ public class WeightFactory {
 			res[i] = idfweight[i] / scaleSqrt;
 		}
 
-		for (int i = 0; i < tfweight.length; ++i) {
-			res[i + idfweight.length] = tfweight[i];
-		}
+        System.arraycopy(tfweight, 0, res, 0 + idfweight.length, tfweight.length);
 
 		res[numrows - 7] = weightnorm * scale;
 		res[numrows - 6] = probflip0;
@@ -224,9 +222,7 @@ public class WeightFactory {
 		for (int i = 0; i < idfweight.length; ++i) {
 			idfweight[i] = weightArray[i] * sqrtScale;
 		}
-		for (int i = 0; i < tfweight.length; ++i) {
-			tfweight[i] = weightArray[i + idfweight.length];
-		}
+        System.arraycopy(weightArray, 0 + idfweight.length, tfweight, 0, tfweight.length);
 		updateNorms();
 	}
 

@@ -797,7 +797,7 @@ public class TimelinePanel<T, N extends Number & Comparable<N>> extends JPanel {
 				.filter(ent -> cls.isInstance(ent.getValue()))
 				.forEach(ent -> sorted.put(ent.getKey(), cls.cast(ent.getValue())));
 		for (Entry<Object, C> ent : sorted.entrySet()) {
-			System.out.println(String.format("%s=%s", ent.getKey(), fmt.apply(ent.getValue())));
+			System.out.printf("%s=%s%n", ent.getKey(), fmt.apply(ent.getValue()));
 		}
 	}
 

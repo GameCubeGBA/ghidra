@@ -316,10 +316,8 @@ public class ProgramCompilerSpec extends BasicCompilerSpec {
 
 		if (defaultnum > 0) {
 			String tmp = evalChoices[defaultnum];
-			for (int i = defaultnum; i > 0; --i) {
-				// Push everybody down to make room for default at top
-				evalChoices[i] = evalChoices[i - 1];
-			}
+            // Push everybody down to make room for default at top
+            System.arraycopy(evalChoices, 0, evalChoices, 1, defaultnum);
 			evalChoices[0] = tmp;
 		}
 		return evalChoices;

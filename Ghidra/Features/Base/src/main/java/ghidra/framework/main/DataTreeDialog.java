@@ -622,9 +622,7 @@ public class DataTreeDialog extends DialogComponentProvider
 		projectLocators = new ProjectLocator[views.length + 1];
 		// make the current project the first in the list
 		projectLocators[0] = project.getProjectLocator();
-		for (int i = 0; i < views.length; i++) {
-			projectLocators[i + 1] = views[i];
-		}
+        System.arraycopy(views, 0, projectLocators, 1, views.length);
 
 		// populate the combo box
 		DefaultComboBoxModel<String> model =

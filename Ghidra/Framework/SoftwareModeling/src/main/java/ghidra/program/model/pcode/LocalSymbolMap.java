@@ -102,9 +102,7 @@ public class LocalSymbolMap {
 		if (highSymbol.isParameter()) {
 			int index = highSymbol.getCategoryIndex();
 			HighSymbol[] newArray = new HighSymbol[paramSymbols.length - 1];
-			for (int i = 0; i < index; ++i) {
-				newArray[i] = paramSymbols[i];
-			}
+            if (index >= 0) System.arraycopy(paramSymbols, 0, newArray, 0, index);
 			for (int i = index + 1; i < paramSymbols.length; ++i) {
 				HighSymbol paramSym = paramSymbols[i];
 				newArray[i - 1] = paramSym;

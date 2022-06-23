@@ -319,7 +319,7 @@ public class BundleHost {
 	}
 
 	void dumpLoadedBundles() {
-		System.err.printf("=== Bundles ===\n");
+		System.err.print("=== Bundles ===\n");
 		for (Bundle bundle : frameworkBundleContext.getBundles()) {
 			System.err.printf("%s: %s: %s: %s\n", bundle.getBundleId(), bundle.getSymbolicName(),
 				bundle.getState(), bundle.getVersion());

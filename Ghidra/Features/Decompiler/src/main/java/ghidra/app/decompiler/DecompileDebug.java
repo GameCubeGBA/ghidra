@@ -83,15 +83,11 @@ public class DecompileDebug {
 			for (int i = 0; i < 16; ++i) {
 				val[i] = 0;
 			}
-			for (int i = 0; i < len; ++i) {
-				val[min + i] = v[off + i];
-			}
+			if (len >= 0) System.arraycopy(v, off + 0, val, min + 0, len);
 		}
 
 		public void merge(ByteChunk op2) {
-			for (int i = op2.min; i < op2.max; ++i) {
-				val[i] = op2.val[i];
-			}
+			if (op2.max - op2.min >= 0) System.arraycopy(op2.val, op2.min, val, op2.min, op2.max - op2.min);
 			if (op2.min < min) {
 				min = op2.min;
 			}
@@ -440,9 +436,7 @@ public class DecompileDebug {
 			else {
 				lastbuf = new int[buf.length];
 			}
-			for (int i = 0; i < buf.length; ++i) {
-				lastbuf[i] = buf[i];
-			}
+			System.arraycopy(buf, 0, lastbuf, 0, buf.length);
 
 			stringBuf.append("<context_pointset");
 			AddressXML.appendAttributes(stringBuf, addr);
