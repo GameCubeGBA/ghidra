@@ -21,8 +21,7 @@ import java.awt.*;
 import java.awt.geom.Point2D;
 import java.util.Collection;
 import java.util.Objects;
-
-import com.google.common.base.Function;
+import java.util.function.Function;
 
 import edu.uci.ics.jung.visualization.*;
 import ghidra.graph.VisualGraph;

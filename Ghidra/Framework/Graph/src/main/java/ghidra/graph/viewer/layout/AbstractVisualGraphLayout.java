@@ -15,8 +15,6 @@
  */
 package ghidra.graph.viewer.layout;
 
-import com.google.common.base.Function;
-
 import edu.uci.ics.jung.algorithms.layout.AbstractLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.Graph;
@@ -40,6 +38,7 @@ import java.awt.geom.Point2D;
 import java.util.List;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -426,14 +425,14 @@ public abstract class AbstractVisualGraphLayout<V extends VisualVertex,
 	}
 
 	private Rectangle getTotalGraphSize(Map<V, Point2D> vertexLocationMap,
-										Function<V, Shape> vertexShapeTransformer) {
+										java.util.function.Function<V, Shape> vertexShapeTransformer) {
 
 		// note: do not include edges in the size of the graph at this point, as some layouts use
 		//       custom edge routing after this method is called
 		Set<V> vertices = vertexLocationMap.keySet();
 		Set<E> edges = Collections.emptySet();
 
-		Function<V, Rectangle> vertexToBounds = v -> {
+		java.util.function.Function<V, Rectangle> vertexToBounds = v -> {
 
 			Shape s = vertexShapeTransformer.apply(v);
 			Rectangle bounds = s.getBounds();
@@ -449,7 +448,7 @@ public abstract class AbstractVisualGraphLayout<V extends VisualVertex,
 			return bounds;
 		}
 
-		Function<E, List<Point2D>> edgeToArticulations = e -> Collections.emptyList();
+		java.util.function.Function<E, List<Point2D>> edgeToArticulations = e -> Collections.emptyList();
 		Rectangle bounds = GraphViewerUtils.getTotalGraphSizeInLayoutSpace(vertices, edges,
 				vertexToBounds, edgeToArticulations);
 		return bounds;

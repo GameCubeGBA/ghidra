@@ -18,8 +18,7 @@ package ghidra.graph.viewer.renderer;
 import java.awt.Color;
 import java.awt.geom.Point2D;
 import java.util.*;
-
-import com.google.common.base.Function;
+import java.util.function.Function;
 
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.visualization.*;

@@ -17,8 +17,7 @@ package ghidra.graph.viewer.layout;
 
 import java.awt.Shape;
 import java.awt.geom.Point2D;
-
-import com.google.common.base.Function;
+import java.util.function.Function;
 
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.visualization.renderers.BasicEdgeRenderer;

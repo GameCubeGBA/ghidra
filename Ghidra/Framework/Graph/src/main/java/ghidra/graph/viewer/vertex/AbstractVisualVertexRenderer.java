@@ -20,8 +20,7 @@ import static ghidra.graph.viewer.GraphViewerUtils.INTERACTION_ZOOM_THRESHOLD;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
-
-import com.google.common.base.Function;
+import java.util.function.Function;
 
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.visualization.*;
@@ -186,7 +185,7 @@ public class AbstractVisualVertexRenderer<V extends VisualVertex, E extends Visu
 	 * @see VertexShapeProvider#getFullShape()
 	 */
 	public Shape getFullShape(RenderContext<V, E> rc, Layout<V, E> layout, V vertex) {
-		Function<? super V, Shape> vertexShaper = rc.getVertexShapeTransformer();
+		java.util.function.Function<? super V, Shape> vertexShaper = rc.getVertexShapeTransformer();
 		Shape shape = null;
 		if (vertexShaper instanceof VisualGraphVertexShapeTransformer) {
 			@SuppressWarnings("unchecked")

@@ -19,8 +19,7 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 import java.util.Map.Entry;
-
-import com.google.common.base.Function;
+import java.util.function.Function;
 
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
@@ -49,7 +48,7 @@ public class LayoutLocationMap<V, E> {
 	private GridLocationMap<V, E> gridLocations;
 
 	public LayoutLocationMap(GridLocationMap<V, E> gridLocations, Function<V, Shape> transformer,
-			boolean isCondensed, TaskMonitor monitor) throws CancelledException {
+                             boolean isCondensed, TaskMonitor monitor) throws CancelledException {
 		this.isCondensed = isCondensed;
 		this.gridLocations = gridLocations;
 
@@ -286,8 +285,8 @@ public class LayoutLocationMap<V, E> {
 		return minMax;
 	}
 
-	private void initializeLayoutLocations(Function<V, Shape> transformer, Collection<V> vertices,
-			TaskMonitor monitor) throws CancelledException {
+	private void initializeLayoutLocations(java.util.function.Function<V, Shape> transformer, Collection<V> vertices,
+                                           TaskMonitor monitor) throws CancelledException {
 
 		// create this class's rows from the grid
 		List<Row<V>> gridRows = gridLocations.rows();

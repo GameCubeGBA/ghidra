@@ -209,8 +209,8 @@ public class FGComponent extends GraphComponent<FGVertex, FGEdge, FunctionGraph>
 			pickedVertexState, Color.YELLOW, START_COLOR, END_COLOR));
 
 		// edge label rendering
-		com.google.common.base.Function<FGEdge, String> edgeLabelTransformer = e -> e.getLabel();
-		renderContext.setEdgeLabelTransformer(edgeLabelTransformer);
+		java.util.function.Function<FGEdge, String> edgeLabelTransformer = e -> e.getLabel();
+		renderContext.setEdgeLabelTransformer(edgeLabelTransformer::apply);
 
 		// note: this label renderer is the stamp for the label; we use another edge label 
 		//       renderer inside of the VisualGraphRenderer
@@ -301,8 +301,8 @@ public class FGComponent extends GraphComponent<FGVertex, FGEdge, FunctionGraph>
 
 		// just make the entire vertex visible
 		RenderContext<FGVertex, FGEdge> renderContext = primaryViewer.getRenderContext();
-		com.google.common.base.Function<? super FGVertex, Shape> transformer =
-			renderContext.getVertexShapeTransformer();
+		java.util.function.Function<? super FGVertex, Shape> transformer =
+                renderContext.getVertexShapeTransformer();
 		Shape shape = transformer.apply(vertex);
 		Rectangle bounds = shape.getBounds();
 		viewUpdater.ensureVertexAreaVisible(vertex, bounds, null);

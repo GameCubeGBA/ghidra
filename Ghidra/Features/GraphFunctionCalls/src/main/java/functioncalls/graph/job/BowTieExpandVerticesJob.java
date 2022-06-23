@@ -20,8 +20,7 @@ import java.awt.Shape;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.*;
-
-import com.google.common.base.Function;
+import java.util.function.Function;
 
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.visualization.RenderContext;
@@ -314,7 +313,7 @@ public class BowTieExpandVerticesJob extends AbstractGraphTransitionJob<FcgVerte
 
 	private Rectangle getBounds(List<FcgVertex> vertices) {
 		RenderContext<FcgVertex, FcgEdge> renderContext = viewer.getRenderContext();
-		Function<? super FcgVertex, Shape> shaper = renderContext.getVertexShapeTransformer();
+		java.util.function.Function<? super FcgVertex, Shape> shaper = renderContext.getVertexShapeTransformer();
 
 		Layout<FcgVertex, FcgEdge> layout = viewer.getGraphLayout();
 
@@ -340,7 +339,7 @@ public class BowTieExpandVerticesJob extends AbstractGraphTransitionJob<FcgVerte
 	private int getWidth(List<FcgVertex> vertices, int widthPadding) {
 
 		RenderContext<FcgVertex, FcgEdge> renderContext = viewer.getRenderContext();
-		Function<? super FcgVertex, Shape> shaper = renderContext.getVertexShapeTransformer();
+		java.util.function.Function<? super FcgVertex, Shape> shaper = renderContext.getVertexShapeTransformer();
 
 		int width = 0;
 		for (FcgVertex v : vertices) {
@@ -353,7 +352,7 @@ public class BowTieExpandVerticesJob extends AbstractGraphTransitionJob<FcgVerte
 	private int getHeight(List<FcgVertex> vertices) {
 
 		RenderContext<FcgVertex, FcgEdge> renderContext = viewer.getRenderContext();
-		Function<? super FcgVertex, Shape> shaper = renderContext.getVertexShapeTransformer();
+		java.util.function.Function<? super FcgVertex, Shape> shaper = renderContext.getVertexShapeTransformer();
 
 		int height = 0;
 		for (FcgVertex v : vertices) {

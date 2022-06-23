@@ -182,7 +182,7 @@ public class JungWrappingVisualGraphLayoutAdapter<V extends VisualVertex,
 	}
 
 	@Override
-	public Function<E, Shape> getEdgeShapeTransformer() {
+	public java.util.function.Function<E, Shape> getEdgeShapeTransformer() {
 		return edgeShapeTransformer;
 	}
 

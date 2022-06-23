@@ -16,8 +16,6 @@
 package ghidra.app.plugin.core.functiongraph.graph.layout;
 
 
-import com.google.common.base.Function;
-
 import edu.uci.ics.jung.visualization.renderers.BasicEdgeRenderer;
 import ghidra.app.plugin.core.functiongraph.graph.FGEdge;
 import ghidra.app.plugin.core.functiongraph.graph.FunctionGraph;
@@ -35,6 +33,7 @@ import ghidra.util.task.TaskMonitor;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
+import java.util.function.Function;
 
 public class EmptyLayout extends AbstractVisualGraphLayout<FGVertex, FGEdge> implements FGLayout {
 

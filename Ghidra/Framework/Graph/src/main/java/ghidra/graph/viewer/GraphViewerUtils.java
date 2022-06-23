@@ -21,8 +21,7 @@ import java.awt.geom.*;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
-
-import com.google.common.base.Function;
+import java.util.function.Function;
 
 import edu.uci.ics.jung.algorithms.layout.*;
 import edu.uci.ics.jung.graph.Graph;
@@ -694,7 +693,7 @@ public class GraphViewerUtils {
 			// code in the utils class.  We do this so that our hit detection matches our rendering.
 			//
 			Function<? super V, Shape> vertexShapeTransformer =
-				renderContext.getVertexShapeTransformer();
+                    renderContext.getVertexShapeTransformer();
 			Shape vertexShape = getVertexShapeForEdge(endVertex, vertexShapeTransformer);
 			return createHollowEgdeLoopInGraphSpace(vertexShape, startX, startY);
 		}
@@ -719,7 +718,7 @@ public class GraphViewerUtils {
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	private static <V> Shape getVertexShapeForEdge(V v, Function<? super V, Shape> vertexShaper) {
+	private static <V> Shape getVertexShapeForEdge(V v, java.util.function.Function<? super V, Shape> vertexShaper) {
 		if (vertexShaper instanceof VisualGraphVertexShapeTransformer) {
 			if (v instanceof VisualVertex) {
 				VisualVertex vv = (VisualVertex) v;
@@ -842,26 +841,26 @@ public class GraphViewerUtils {
 		Collection<V> vertices = theGraph.getVertices();
 		Collection<E> edges = theGraph.getEdges();
 
-		Function<V, Rectangle> vertexToBounds = createVertexToBoundsTransformer(viewer);
+		java.util.function.Function<V, Rectangle> vertexToBounds = createVertexToBoundsTransformer(viewer);
 
 		if (!layoutUsesEdgeArticulations(layout)) {
 			Rectangle bounds = getBoundsForVerticesInLayoutSpace(vertices, vertexToBounds);
 			return bounds;
 		}
 
-		Function<E, List<Point2D>> edgeToArticulations = e -> e.getArticulationPoints();
+		java.util.function.Function<E, List<Point2D>> edgeToArticulations = e -> e.getArticulationPoints();
 		return getTotalGraphSizeInLayoutSpace(vertices, edges, vertexToBounds, edgeToArticulations);
 	}
 
 	//@formatter:off
-	private static <V extends VisualVertex, E extends VisualEdge<V>> Function<V, Rectangle> 
+	private static <V extends VisualVertex, E extends VisualEdge<V>> java.util.function.Function<V, Rectangle>
 		createVertexToBoundsTransformer(VisualizationServer<V, E> viewer) {
 	//@formatter:on
 
 		RenderContext<V, E> context = viewer.getRenderContext();
-		Function<? super V, Shape> shapeTransformer = context.getVertexShapeTransformer();
+		java.util.function.Function<? super V, Shape> shapeTransformer = context.getVertexShapeTransformer();
 		Layout<V, E> layout = viewer.getGraphLayout();
-		Function<V, Rectangle> transformer = v -> {
+		java.util.function.Function<V, Rectangle> transformer = v -> {
 
 			Shape s = shapeTransformer.apply(v);
 			Rectangle bounds = s.getBounds();
@@ -877,10 +876,10 @@ public class GraphViewerUtils {
 	//@formatter:off
 	public static <V extends VisualVertex, E extends VisualEdge<V>> 
 			Rectangle getTotalGraphSizeInLayoutSpace(
-												Collection<V> vertices,
-												Collection<E> edges,
-												Function<V, Rectangle> vertexToBounds,
-											    Function<E, List<Point2D>> edgeToArticulations) {
+            Collection<V> vertices,
+            Collection<E> edges,
+            java.util.function.Function<V, Rectangle> vertexToBounds,
+            java.util.function.Function<E, List<Point2D>> edgeToArticulations) {
 	//@formatter:on
 
 		Rectangle vertexBounds = getBoundsForVerticesInLayoutSpace(vertices, vertexToBounds);
@@ -926,9 +925,9 @@ public class GraphViewerUtils {
 
 		Layout<V, E> layout = viewer.getGraphLayout();
 		RenderContext<V, E> renderContext = viewer.getRenderContext();
-		Function<? super V, Shape> shapeTransformer = renderContext.getVertexShapeTransformer();
+		java.util.function.Function<? super V, Shape> shapeTransformer = renderContext.getVertexShapeTransformer();
 
-		Function<V, Rectangle> transformer = v -> {
+		java.util.function.Function<V, Rectangle> transformer = v -> {
 
 			Shape shape = shapeTransformer.apply(v);
 			Rectangle bounds = shape.getBounds();
@@ -948,7 +947,7 @@ public class GraphViewerUtils {
 	 * @return the bounds
 	 */
 	public static <V, E> Rectangle getBoundsForVerticesInLayoutSpace(Collection<V> vertices,
-			Function<V, Rectangle> vertexToBounds) {
+                                                                     java.util.function.Function<V, Rectangle> vertexToBounds) {
 
 		if (vertices.isEmpty()) {
 			throw new IllegalStateException("No vertices for which to find bounds!");

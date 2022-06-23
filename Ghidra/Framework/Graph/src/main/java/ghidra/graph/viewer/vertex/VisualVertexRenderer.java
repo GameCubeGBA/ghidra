@@ -18,8 +18,7 @@ package ghidra.graph.viewer.vertex;
 import static ghidra.graph.viewer.GraphViewerUtils.*;
 
 import java.awt.*;
-
-import com.google.common.base.Function;
+import java.util.function.Function;
 
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.Graph;

@@ -19,10 +19,9 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.Point2D;
 import java.util.*;
+import java.util.function.Function;
 
 import javax.swing.*;
-
-import com.google.common.base.Function;
 
 import docking.DockingUtils;
 import docking.DockingWindowManager;
@@ -272,7 +271,7 @@ public class GraphComponent<V extends VisualVertex, E extends VisualEdge<V>, G e
 		// the layout defines the shape of the edge (this gives the layout flexibility in how
 		// to render its shape)
 		Function<E, Shape> edgeTransformer = layout.getEdgeShapeTransformer();
-		renderContext.setEdgeShapeTransformer(edgeTransformer);
+		renderContext.setEdgeShapeTransformer(edgeTransformer::apply);
 
 		renderContext.setArrowPlacementTolerance(5.0f);
 
@@ -322,8 +321,8 @@ public class GraphComponent<V extends VisualVertex, E extends VisualEdge<V>, G e
 		renderer.setEdgeRenderer(new VisualGraphEdgeSatelliteRenderer<>(
 			(VisualEdgeRenderer<V, E>) layout.getEdgeRenderer()));
 
-		Function<E, Shape> edgeTransformer = layout.getEdgeShapeTransformer();
-		renderContext.setEdgeShapeTransformer(edgeTransformer);
+		java.util.function.Function<E, Shape> edgeTransformer = layout.getEdgeShapeTransformer();
+		renderContext.setEdgeShapeTransformer(edgeTransformer::apply);
 
 		renderContext.setVertexShapeTransformer(new VisualGraphVertexShapeTransformer<>());
 

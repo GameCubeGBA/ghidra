@@ -18,8 +18,8 @@ package ghidra.graph.graphs;
 import static util.CollectionUtils.asList;
 
 import java.util.*;
+import java.util.function.Predicate;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterators;
 
 import edu.uci.ics.jung.graph.util.EdgeType;
@@ -118,16 +118,16 @@ public abstract class FilteringVisualGraph<V extends VisualVertex, E extends Vis
 		Predicate<? super V> isFiltered = v -> {
 			return !containsVertex(v) && completeGraph.containsVertex(v);
 		};
-		return Iterators.filter(getAllVertices(), isFiltered);
+		return Iterators.filter(getAllVertices(), isFiltered::test);
 	}
 
 	public Iterator<E> getFilteredEdges() {
 
 		// an edge is 'filtered' if it is in the complete graph, but not in the current graph
-		Predicate<? super E> isFiltered = e -> {
+		java.util.function.Predicate<? super E> isFiltered = e -> {
 			return !containsEdge(e) && completeGraph.containsEdge(e);
 		};
-		return Iterators.filter(getAllEdges(), isFiltered);
+		return Iterators.filter(getAllEdges(), isFiltered::test);
 	}
 
 	public Iterator<V> getUnfilteredVertices() {
