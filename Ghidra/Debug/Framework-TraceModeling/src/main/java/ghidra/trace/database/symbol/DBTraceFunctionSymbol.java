@@ -1455,7 +1455,7 @@ public class DBTraceFunctionSymbol extends DBTraceNamespaceSymbol
 			List<Parameter> result = new ArrayList<>();
 			collect(result, autoParams, filter);
 			collect(result, params, filter);
-			return result.toArray(new Parameter[result.size()]);
+			return result.toArray(new Parameter[0]);
 		}
 	}
 
@@ -1473,7 +1473,7 @@ public class DBTraceFunctionSymbol extends DBTraceNamespaceSymbol
 			doLoadVariables();
 			List<Variable> result = new ArrayList<>();
 			collect(result, locals, filter);
-			return result.toArray(new TraceLocalVariableSymbol[result.size()]);
+			return result.toArray(new TraceLocalVariableSymbol[0]);
 		}
 	}
 
@@ -1488,7 +1488,7 @@ public class DBTraceFunctionSymbol extends DBTraceNamespaceSymbol
 			collect(result, autoParams, filter);
 			collect(result, params, filter);
 			collect(result, locals, filter);
-			return result.toArray(new Variable[result.size()]);
+			return result.toArray(new Variable[0]);
 		}
 	}
 
@@ -1854,7 +1854,7 @@ public class DBTraceFunctionSymbol extends DBTraceNamespaceSymbol
 			for (DBTraceFunctionSymbol thunk : manager.functionsByThunked.get(getKey())) {
 				result.add(thunk.entryPoint);
 			}
-			return result.toArray(new Address[result.size()]);
+			return result.toArray(new Address[0]);
 		}
 	}
 

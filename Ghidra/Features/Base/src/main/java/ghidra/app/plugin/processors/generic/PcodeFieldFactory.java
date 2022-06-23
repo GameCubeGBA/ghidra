@@ -95,7 +95,7 @@ public class PcodeFieldFactory extends FieldFactory {
 		}
 
 		if (elements.size() > 0) {
-			FieldElement[] textElements = elements.toArray(new FieldElement[elements.size()]);
+			FieldElement[] textElements = elements.toArray(new FieldElement[0]);
 			return ListingTextField.createMultilineTextField(this, proxy, textElements,
 				startX + varWidth, width, Integer.MAX_VALUE, hlProvider);
 		}

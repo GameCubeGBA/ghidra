@@ -402,7 +402,7 @@ public class GTree extends JPanel implements BusyListener {
 	}
 
 	public void expandPaths(List<TreePath> pathsList) {
-		TreePath[] treePaths = pathsList.toArray(new TreePath[pathsList.size()]);
+		TreePath[] treePaths = pathsList.toArray(new TreePath[0]);
 		expandPaths(treePaths);
 	}
 
@@ -435,7 +435,7 @@ public class GTree extends JPanel implements BusyListener {
 	}
 
 	public void setSelectionPaths(List<TreePath> pathsList) {
-		TreePath[] treePaths = pathsList.toArray(new TreePath[pathsList.size()]);
+		TreePath[] treePaths = pathsList.toArray(new TreePath[0]);
 		setSelectionPaths(treePaths, EventOrigin.API_GENERATED);
 	}
 

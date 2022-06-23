@@ -56,7 +56,7 @@ public class SchemaBuilder {
 
 	public Schema build() {
 		return new Schema(version, keyFieldClass, keyFieldName,
-			fieldClasses.toArray(new Class[fieldClasses.size()]),
-			fieldNames.toArray(new String[fieldNames.size()]));
+			fieldClasses.toArray(new Class[0]),
+			fieldNames.toArray(new String[0]));
 	}
 }

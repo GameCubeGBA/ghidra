@@ -989,9 +989,7 @@ public class RecoverClassesFromRTTIScript extends GhidraScript {
 
 				StringBuffer stringBuffer = new StringBuffer();
 
-				wholeBuffer.append(
-					getSimpleClassHierarchyString(stringBuffer, recoveredClass).toString() +
-						"\r\n\r\n");
+				wholeBuffer.append(getSimpleClassHierarchyString(stringBuffer, recoveredClass)).append("\r\n\r\n");
 			}
 		}
 		println(wholeBuffer.toString());
@@ -1017,9 +1015,7 @@ public class RecoverClassesFromRTTIScript extends GhidraScript {
 			RecoveredClass recoveredClass = recoveredClassIterator.next();
 			if (!recoveredClass.hasChildClass()) {
 				StringBuffer stringBuffer = new StringBuffer();
-				wholeBuffer.append(
-					getSimpleClassHierarchyString(stringBuffer, recoveredClass).toString() +
-						"\r\n");
+				wholeBuffer.append(getSimpleClassHierarchyString(stringBuffer, recoveredClass)).append("\r\n");
 			}
 		}
 		out.append(wholeBuffer);

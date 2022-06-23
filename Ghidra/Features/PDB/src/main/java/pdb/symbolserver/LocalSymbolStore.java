@@ -16,6 +16,8 @@
 package pdb.symbolserver;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
 
 import org.apache.commons.io.FilenameUtils;
@@ -325,11 +327,12 @@ public class LocalSymbolStore extends AbstractSymbolServer implements SymbolStor
 		String relativeDestinationFilename = getUniqueFileDir(symbolFileInfo) + filename;
 		File destinationFile = new File(rootDir, relativeDestinationFilename);
 		FileUtilities.checkedMkdirs(destinationFile.getParentFile());
-		if (destinationFile.isFile()) {
+		BasicFileAttributes readAttributes = Files.readAttributes(destinationFile.toPath(), BasicFileAttributes.class);
+		if (readAttributes.isRegularFile()) {
 			Msg.info(this, logPrefix() + ": File already exists: " + destinationFile);
 			return relativeDestinationFilename;
 		}
-		if (destinationFile.isDirectory()) {
+		if (readAttributes.isDirectory()) {
 			Msg.error(this, logPrefix() + ": File's location already exists and is a directory: " +
 				destinationFile);
 			Msg.error(this, logPrefix() + ": Possible symbol storage directory misconfiguration!");

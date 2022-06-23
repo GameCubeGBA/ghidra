@@ -694,7 +694,7 @@ public class FollowFlow {
 				}
 			}
 		}
-		return list.toArray(new Address[list.size()]);
+		return list.toArray(new Address[0]);
 	}
 
 	/**
@@ -742,7 +742,7 @@ public class FollowFlow {
 				}
 			}
 		}
-		return list.toArray(new Address[list.size()]);
+		return list.toArray(new Address[0]);
 	}
 
 	/**

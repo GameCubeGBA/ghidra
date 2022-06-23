@@ -172,7 +172,7 @@ class ListingDisplaySearcher implements Searcher {
 				searchAddresses, options.isForward());
 			iterators.add(new LabelSearchAddressIterator(labels));
 		}
-		return iterators.toArray(new AddressIterator[iterators.size()]);
+		return iterators.toArray(new AddressIterator[0]);
 	}
 
 	/**

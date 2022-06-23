@@ -19,6 +19,8 @@ package generic.util;
 import ghidra.util.exception.AssertException;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -36,11 +38,12 @@ public class ArchiveBuilder {
 	}
 
 	public void addFile(String path, File file) throws IOException {
-		if (!file.isFile()) {
+		BasicFileAttributes readAttributes = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
+		if (!readAttributes.isRegularFile()) {
 			throw new AssertException("Attempted to write a directory to the jar file");
 		}
 
-		long modifiedTime = file.lastModified();
+		long modifiedTime = readAttributes.lastModifiedTime().toMillis();
 
 		ZipEntry entry = new ZipEntry(path);
 		entry.setTime(modifiedTime);

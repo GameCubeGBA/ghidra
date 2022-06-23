@@ -156,7 +156,7 @@ public class DBTraceFunctionSymbolTest extends AbstractGhidraHeadlessIntegration
 			regs.add(b.trace.getBaseLanguage().getRegister(rn));
 		}
 		return new VariableStorage(b.trace.getFixedProgramView(0),
-			regs.toArray(new Register[regs.size()]));
+			regs.toArray(new Register[0]));
 	}
 
 	protected VariableStorage createStackStorage(int offset, int size)

@@ -360,7 +360,7 @@ public class Preferences {
 			return new String[0];
 		}
 
-		return list.toArray(new String[list.size()]);
+		return list.toArray(new String[0]);
 	}
 
 	/**

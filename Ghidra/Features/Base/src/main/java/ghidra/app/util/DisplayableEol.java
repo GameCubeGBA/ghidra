@@ -114,7 +114,7 @@ public class DisplayableEol {
 				list.add(element);
 			}
 		}
-		return list.toArray(new Reference[list.size()]);
+		return list.toArray(new Reference[0]);
 	}
 
 	/**
@@ -528,7 +528,7 @@ public class DisplayableEol {
 			}
 		}
 
-		return set.toArray(new RefRepeatComment[set.size()]);
+		return set.toArray(new RefRepeatComment[0]);
 	}
 
 	private String[] getComment(Listing listing, Address address) {
@@ -580,7 +580,7 @@ public class DisplayableEol {
 			list.addAll(Arrays.asList((String[]) displayCommentArrays[MY_AUTOMATIC]));
 		}
 
-		return list.toArray(new String[list.size()]);
+		return list.toArray(new String[0]);
 	}
 
 	/**
@@ -616,7 +616,7 @@ public class DisplayableEol {
 			String[] refRepeatComments = refRepeatComment.getCommentLines();
 			stringList.addAll(Arrays.asList(refRepeatComments));
 		}
-		return stringList.toArray(new String[stringList.size()]);
+		return stringList.toArray(new String[0]);
 	}
 
 	/**

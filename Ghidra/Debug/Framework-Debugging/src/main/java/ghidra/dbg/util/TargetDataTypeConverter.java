@@ -371,7 +371,7 @@ public class TargetDataTypeConverter {
 			}
 
 			private void procArgs(Void __) {
-				type.setArguments(args.values().toArray(new ParameterDefinitionImpl[args.size()]));
+				type.setArguments(args.values().toArray(new ParameterDefinitionImpl[0]));
 				completeTwo();
 			}
 		};

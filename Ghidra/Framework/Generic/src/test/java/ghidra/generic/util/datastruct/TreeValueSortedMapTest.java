@@ -209,7 +209,7 @@ public class TreeValueSortedMapTest {
 		}
 		checkConsistent(queue);
 
-		String[] shuffled = all.toArray(new String[all.size()]);
+		String[] shuffled = all.toArray(new String[0]);
 		for (int i = 0; i < shuffled.length; i++) {
 			ArrayUtils.swap(shuffled, i, i + rand.nextInt(shuffled.length - i));
 		}

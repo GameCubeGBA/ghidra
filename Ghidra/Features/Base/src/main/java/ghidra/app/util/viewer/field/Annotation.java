@@ -167,7 +167,7 @@ public class Annotation {
 		}
 
 		// split on whitespace
-		return tokens.toArray(new String[tokens.size()]);
+		return tokens.toArray(new String[0]);
 	}
 
 	private void grabTokens(List<String> tokenContainer, String content) {

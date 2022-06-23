@@ -211,7 +211,7 @@ public class VTDualListingHighlightProvider implements HighlightProvider {
 
 		highlightList.addAll(getListingHighlights(text, obj, fieldFactoryClass, cursorTextOffset));
 
-		return highlightList.toArray(new Highlight[highlightList.size()]);
+		return highlightList.toArray(new Highlight[0]);
 	}
 
 	private Collection<? extends Highlight> getListingHighlights(String text, Object obj,
@@ -426,7 +426,7 @@ public class VTDualListingHighlightProvider implements HighlightProvider {
 				getBothStringHighlights(text, cursorTextOffset, highlightList, markupItem);
 			}
 		}
-		return highlightList.toArray(new Highlight[highlightList.size()]);
+		return highlightList.toArray(new Highlight[0]);
 	}
 
 	private Highlight[] getFunctionSignatureHighlights(String text, Object obj, int cursorTextOffset) {
@@ -469,7 +469,7 @@ public class VTDualListingHighlightProvider implements HighlightProvider {
 //			// Check if the text is in the Parameter Names.
 //			addParameterNamesHighlight(text, cursorTextOffset, typeMap, highlightList);
 
-			return highlightList.toArray(new Highlight[highlightList.size()]);
+			return highlightList.toArray(new Highlight[0]);
 		}
 		return new Highlight[0];
 	}
@@ -496,7 +496,7 @@ public class VTDualListingHighlightProvider implements HighlightProvider {
 			Highlight highlight = new Highlight(0, text.length() - 1, highlightColor);
 			highlightList.add(highlight);
 
-			return highlightList.toArray(new Highlight[highlightList.size()]);
+			return highlightList.toArray(new Highlight[0]);
 		}
 		return new Highlight[0];
 	}
@@ -845,7 +845,7 @@ public class VTDualListingHighlightProvider implements HighlightProvider {
 				}
 			}
 		}
-		return highlightList.toArray(new Highlight[highlightList.size()]);
+		return highlightList.toArray(new Highlight[0]);
 	}
 
 	private boolean isCorrectFunction(Variable variable, VTMarkupItem markupItem) {
@@ -926,7 +926,7 @@ public class VTDualListingHighlightProvider implements HighlightProvider {
 						getMarkupBackgroundColor(cursorTextOffset, markupItem, startIndex, endIndex);
 					Highlight highlight = new Highlight(startIndex, endIndex, highlightColor);
 					highlightList.add(highlight);
-					return highlightList.toArray(new Highlight[highlightList.size()]);
+					return highlightList.toArray(new Highlight[0]);
 				}
 			}
 		}
@@ -970,7 +970,7 @@ public class VTDualListingHighlightProvider implements HighlightProvider {
 						highlightList.add(highlight);
 					}
 				}
-				return highlightList.toArray(new Highlight[highlightList.size()]);
+				return highlightList.toArray(new Highlight[0]);
 			}
 		}
 		return new Highlight[0];

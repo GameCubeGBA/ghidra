@@ -163,7 +163,7 @@ public class DynamicSortedTreeSetTest {
 		}
 		checkConsistent(queue, comp);
 
-		TestElem[] shuffled = all.toArray(new TestElem[all.size()]);
+		TestElem[] shuffled = all.toArray(new TestElem[0]);
 		for (int i = 0; i < shuffled.length; i++) {
 			ArrayUtils.swap(shuffled, i, i + rand.nextInt(shuffled.length - i));
 		}

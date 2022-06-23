@@ -94,7 +94,7 @@ public class TestDummyDomainFolder implements DomainFolder {
 
 	@Override
 	public synchronized DomainFolder[] getFolders() {
-		return subFolders.toArray(new DomainFolder[subFolders.size()]);
+		return subFolders.toArray(new DomainFolder[0]);
 	}
 
 	@Override
@@ -114,7 +114,7 @@ public class TestDummyDomainFolder implements DomainFolder {
 
 	@Override
 	public synchronized DomainFile[] getFiles() {
-		return files.toArray(new DomainFile[files.size()]);
+		return files.toArray(new DomainFile[0]);
 	}
 
 	@Override

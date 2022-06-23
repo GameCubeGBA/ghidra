@@ -170,7 +170,7 @@ public class BrowserLoader {
 			argumentList.add(new File(fileURL.getFile()).getAbsolutePath());
 		}
 
-		return argumentList.toArray(new String[argumentList.size()]);
+		return argumentList.toArray(new String[0]);
 	}
 
 //==================================================================================================

@@ -414,7 +414,7 @@ public abstract class AbstractFunctionSignatureMarkupTest
 		VTMatchSet vtMatchSet = matchSets.get(2);
 		assertNotNull(vtMatchSet);
 		Collection<VTMatch> matches = vtMatchSet.getMatches(source, destination);
-		VTMatch[] matchesArray = matches.toArray(new VTMatch[matches.size()]);
+		VTMatch[] matchesArray = matches.toArray(new VTMatch[0]);
 		assertTrue(matchesArray.length > 0);
 		VTMatch vtMatch = matchesArray[0];
 		return vtMatch;

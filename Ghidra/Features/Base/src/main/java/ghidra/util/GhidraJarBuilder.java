@@ -16,7 +16,9 @@
 package ghidra.util;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
 import java.util.jar.*;
 import java.util.regex.Pattern;
@@ -731,14 +733,15 @@ public class GhidraJarBuilder implements GhidraLaunchable {
 						file.getAbsolutePath());
 			}
 
-			if (!file.isFile()) {
+			BasicFileAttributes readAttributes = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
+			if (!readAttributes.isRegularFile()) {
 				throw new AssertException(
 					"Attempted to write a directory to the jar! File = " + file.getAbsolutePath());
 			}
 
 			jarPath = jarPath.replaceAll("\\\\", "/"); // handle windows separators
 
-			long modifiedTime = file.lastModified();
+			long modifiedTime = readAttributes.lastModifiedTime().toMillis();
 			addToModuleTree(jarPath, module);
 			if (extensionPointSuffixPattern.matcher(jarPath).matches()) {
 				try (FileInputStream inStream = new FileInputStream(file)) {
@@ -841,13 +844,14 @@ public class GhidraJarBuilder implements GhidraLaunchable {
 		 * Outputs an individual file to the jar.
 		 */
 		public void addFile(String zipPath, File file) throws IOException, CancelledException {
-			if (!file.isFile()) {
+			BasicFileAttributes readAttributes = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
+			if (!readAttributes.isRegularFile()) {
 				throw new AssertException("Attempted to write a directory to the jar file");
 			}
 
 			zipPath = zipPath.replaceAll("\\\\", "/"); // handle windows separators
 
-			long modifiedTime = file.lastModified();
+			long modifiedTime = readAttributes.lastModifiedTime().toMillis();
 
 			ZipEntry entry = new ZipEntry(zipPath);
 			entry.setTime(modifiedTime);

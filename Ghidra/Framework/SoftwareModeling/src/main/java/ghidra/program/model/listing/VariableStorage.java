@@ -123,7 +123,7 @@ public class VariableStorage implements Comparable<VariableStorage> {
 	 */
 	public VariableStorage(Program program, List<Varnode> varnodes) throws InvalidInputException {
 		this.program = program;
-		this.varnodes = varnodes.toArray(new Varnode[varnodes.size()]);
+		this.varnodes = varnodes.toArray(new Varnode[0]);
 		checkVarnodes();
 	}
 

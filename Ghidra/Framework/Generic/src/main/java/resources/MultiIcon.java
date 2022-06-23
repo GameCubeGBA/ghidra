@@ -155,7 +155,7 @@ public class MultiIcon implements Icon {
 	 * Return array of Icons that were added to this MultIcon.
 	 */
 	public Icon[] getIcons() {
-		return iconList.toArray(new Icon[iconList.size()]);
+		return iconList.toArray(new Icon[0]);
 	}
 
 	@Override

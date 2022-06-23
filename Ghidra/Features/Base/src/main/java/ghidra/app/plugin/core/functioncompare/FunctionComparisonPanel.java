@@ -512,7 +512,7 @@ public class FunctionComparisonPanel extends JPanel implements ChangeListener {
 				dockingActionList.add(dockingAction);
 			}
 		}
-		return dockingActionList.toArray(new DockingAction[dockingActionList.size()]);
+		return dockingActionList.toArray(new DockingAction[0]);
 	}
 
 	/**

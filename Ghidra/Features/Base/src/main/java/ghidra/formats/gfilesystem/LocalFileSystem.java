@@ -19,6 +19,7 @@ import static ghidra.formats.gfilesystem.fileinfo.FileAttributeType.*;
 
 import java.io.*;
 import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
 
 import org.apache.commons.collections4.map.ReferenceMap;
@@ -224,8 +225,9 @@ public class LocalFileSystem implements GFileSystem, GFileHashProvider {
 	@Override
 	public GFileImpl lookup(String path) throws IOException {
 		File f = new File(path);
+		BasicFileAttributes readAttributes = Files.readAttributes(f.toPath(), BasicFileAttributes.class);
 		GFileImpl gf = GFileImpl.fromPathString(this, FilenameUtils.separatorsToUnix(f.getPath()),
-			null, f.isDirectory(), f.length());
+			null, readAttributes.isDirectory(), readAttributes.size());
 		return gf;
 	}
 
@@ -272,11 +274,12 @@ public class LocalFileSystem implements GFileSystem, GFileHashProvider {
 	synchronized String getMD5Hash(FSRL fsrl, boolean required, TaskMonitor monitor)
 			throws CancelledException, IOException {
 		File f = getLocalFile(fsrl);
-		if ( !f.isFile() ) {
+		BasicFileAttributes readAttributes = Files.readAttributes(f.toPath(), BasicFileAttributes.class);
+		if ( !readAttributes.isRegularFile()) {
 			return null;
 		}
 		
-		FileFingerprintRec fileFingerprintRec = new FileFingerprintRec(f.getPath(), f.lastModified(), f.length());
+		FileFingerprintRec fileFingerprintRec = new FileFingerprintRec(f.getPath(), readAttributes.lastModifiedTime().toMillis(), readAttributes.size());
 		String md5 = fileFingerprintToMD5Map.get(fileFingerprintRec);
 		if (md5 == null && required) {
 			md5 = FSUtilities.getFileMD5(f, monitor);

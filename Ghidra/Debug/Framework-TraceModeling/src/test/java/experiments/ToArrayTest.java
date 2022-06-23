@@ -50,7 +50,7 @@ public class ToArrayTest {
 			System.out.print("    toArray(new String[n]): ");
 			System.out.println(time(i, n -> {
 				for (int j = 0; j < n; j++) {
-					col.toArray(new String[col.size()]);
+					col.toArray(new String[0]);
 				}
 			}) + "ms");
 		}

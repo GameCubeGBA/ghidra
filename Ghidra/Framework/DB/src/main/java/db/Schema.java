@@ -273,7 +273,7 @@ public class Schema {
 			}
 			fixedLength += f.length();
 		}
-		fields = fieldList.toArray(new Field[fieldList.size()]);
+		fields = fieldList.toArray(new Field[0]);
 
 		while (index < encodedFieldTypes.length) {
 			int extensionType = encodedFieldTypes[index++];
@@ -325,7 +325,7 @@ public class Schema {
 				columnIndexes.add((int) encodedFieldTypes[index++]);
 				++consumed;
 			}
-			Integer[] sparseColumns = columnIndexes.toArray(new Integer[columnIndexes.size()]);
+			Integer[] sparseColumns = columnIndexes.toArray(new Integer[0]);
 			initializeSparseColumnSet(sparseColumns);
 			return consumed;
 		}

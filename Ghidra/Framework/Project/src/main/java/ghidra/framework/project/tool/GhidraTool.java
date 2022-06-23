@@ -297,7 +297,7 @@ public class GhidraTool extends PluginTool {
 
 			// Finally, put the new extension list in the preferences object
 			state.putStrings(EXTENSIONS_PREFERENCE_NAME,
-				preferenceExtensionNames.toArray(new String[preferenceExtensionNames.size()]));
+				preferenceExtensionNames.toArray(new String[0]));
 			dockingWindowManager.putPreferenceState(EXTENSIONS_PREFERENCE_NAME, state);
 		}
 		catch (ExtensionException e) {
@@ -329,7 +329,7 @@ public class GhidraTool extends PluginTool {
 
 		// Finally add them together and update the preference state.
 		String[] allPreferences = ArrayUtils.addAll(extNames,
-			extensionNamesToAdd.toArray(new String[extensionNamesToAdd.size()]));
+			extensionNamesToAdd.toArray(new String[0]));
 		state.putStrings(EXTENSIONS_PREFERENCE_NAME, allPreferences);
 		dockingWindowManager.putPreferenceState(EXTENSIONS_PREFERENCE_NAME, state);
 	}

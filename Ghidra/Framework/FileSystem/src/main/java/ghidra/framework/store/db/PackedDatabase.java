@@ -16,6 +16,8 @@
 package ghidra.framework.store.db;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Date;
 import java.util.Random;
 
@@ -857,7 +859,8 @@ public class PackedDatabase extends Database {
 
 		for (File tempDb : tempDbs) {
 			try {
-				if (tempDb.isDirectory() && tempDb.lastModified() <= lastWeek) {
+				BasicFileAttributes basicFileAttributes = Files.readAttributes(tempDb.toPath(), BasicFileAttributes.class);
+				if (basicFileAttributes.isDirectory() && basicFileAttributes.lastModifiedTime().toMillis() <= lastWeek) {
 					if (FileUtilities.deleteDir(tempDb)) {
 						Msg.info(PackedDatabase.class, "Removed temporary database: " + tempDb);
 					}

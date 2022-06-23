@@ -303,7 +303,7 @@ public class SleighCompileLauncher implements GhidraLaunchable {
 		for (int i = index + 1; i < args.length; i++) {
 			list.add(args[i]);
 		}
-		return list.toArray(new String[list.size()]);
+		return list.toArray(new String[0]);
 	}
 
 }
