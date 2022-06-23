@@ -112,13 +112,7 @@ public class GhidraJarBuilder implements GhidraLaunchable {
 	}
 
 	public void removeAllProcessorModules() {
-		Iterator<ApplicationModule> it = includedModules.iterator();
-		while (it.hasNext()) {
-			ApplicationModule module = it.next();
-			if (module.isProcessor()) {
-				it.remove();
-			}
-		}
+		includedModules.removeIf(ApplicationModule::isProcessor);
 	}
 
 	public List<ApplicationModule> getExcludedModules() {

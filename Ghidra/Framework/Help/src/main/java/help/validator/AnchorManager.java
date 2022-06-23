@@ -114,13 +114,8 @@ public class AnchorManager {
 	private void cleanupDuplicateAnchors() {
         for (Map.Entry<String, List<AnchorDefinition>> entry : duplicateAnchorsById.entrySet()) {
 			List<AnchorDefinition> list = entry.getValue();
-			for (Iterator<AnchorDefinition> iterator = list.iterator(); iterator.hasNext();) {
-				AnchorDefinition anchorDefinition = iterator.next();
-				if (anchorDefinition.getLineNumber() < 0) {
-					// a line number of < 0 indicates an AnchorDefinition, which is not found in a file
-					iterator.remove();
-				}
-			}
+			// a line number of < 0 indicates an AnchorDefinition, which is not found in a file
+			list.removeIf(anchorDefinition -> anchorDefinition.getLineNumber() < 0);
 
 			// if there is only one item left in the list after removing the definitions, then
 			// there are not really any duplicate definitions, so cleanup the list

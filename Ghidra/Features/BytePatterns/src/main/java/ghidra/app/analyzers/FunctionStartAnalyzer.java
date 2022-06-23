@@ -853,17 +853,15 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 
 	@Override
 	public MatchAction getMatchActionByName(String nm) {
-		if (nm.equals("funcstart")) {
-			return new FunctionStartAction();
-		}
-		else if (nm.equals("possiblefuncstart")) {
-			return new PossibleFunctionStartAction();
-		}
-		else if (nm.equals("codeboundary")) {
-			return new CodeBoundaryAction();
-		}
-		else if (nm.equals("setcontext")) {
-			return new ContextAction();
+		switch (nm) {
+			case "funcstart":
+				return new FunctionStartAction();
+			case "possiblefuncstart":
+				return new PossibleFunctionStartAction();
+			case "codeboundary":
+				return new CodeBoundaryAction();
+			case "setcontext":
+				return new ContextAction();
 		}
 		return null;
 	}

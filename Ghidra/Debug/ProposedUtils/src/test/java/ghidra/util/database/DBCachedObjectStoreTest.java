@@ -921,16 +921,14 @@ public class DBCachedObjectStoreTest {
 		populateStore(-3, -1, 1, 3);
 
 		List<Long> list = new ArrayList<>(map.subMap(-2L, true, 2L, true)
-				.entrySet()
+				.keySet()
 				.stream()
-				.map(Entry::getKey)
 				.collect(Collectors.toList()));
 		assertEquals(List.of(-1L, 1L), list);
 
 		List<Long> rList = new ArrayList<>(rMap.subMap(2L, true, -2L, true)
-				.entrySet()
+				.keySet()
 				.stream()
-				.map(Entry::getKey)
 				.collect(Collectors.toList()));
 		assertEquals(List.of(1L, -1L), rList);
 	}

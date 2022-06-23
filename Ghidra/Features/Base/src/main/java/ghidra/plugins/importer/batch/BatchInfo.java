@@ -159,13 +159,7 @@ public class BatchInfo {
 			}
 		}
 
-		for (Iterator<UserAddedSourceInfo> iterator =
-			userAddedSources.iterator(); iterator.hasNext();) {
-			UserAddedSourceInfo uasi = iterator.next();
-			if (uasi.getFSRL().equals(fsrl)) {
-				iterator.remove();
-			}
-		}
+		userAddedSources.removeIf(uasi -> uasi.getFSRL().equals(fsrl));
 		userAddedFSRLs.remove(fsrl);
 	}
 

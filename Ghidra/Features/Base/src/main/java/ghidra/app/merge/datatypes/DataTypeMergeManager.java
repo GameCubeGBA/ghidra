@@ -1085,20 +1085,14 @@ public class DataTypeMergeManager implements MergeResolver {
 		if (!fixUpIDSet.remove(sourceDtID)) {
 			return;
 		}
-		Iterator<FixUpInfo> iter = fixUpList.iterator();
-		while (iter.hasNext()) {
-			FixUpInfo info = iter.next();
-			if (info.id == sourceDtID) {
-				iter.remove();
-			}
-		}
+		fixUpList.removeIf(info -> info.id == sourceDtID);
 	}
 
 	private void updateStructure(long sourceDtID, Structure sourceDt, Structure destStruct,
 			Map<Long, DataType> resolvedDataTypes) {
 
 		// NOTE: it is possible for the same destStruct to be updated more than once;
-		// therefor we must cleanup any previous obsolete fixups
+		// therefore we must cleanup any previous obsolete fixups
 		removeFixUps(sourceDtID);
 
 		// Get an empty destination structure that is the correct size.

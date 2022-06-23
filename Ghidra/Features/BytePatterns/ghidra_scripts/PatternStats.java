@@ -354,17 +354,15 @@ public class PatternStats extends GhidraScript implements PatternFactory {
 
 	@Override
 	public MatchAction getMatchActionByName(String nm) {
-		if (nm.equals("funcstart")) {
-			return functionStart;
-		}
-		else if (nm.equals("possiblefuncstart")) {
-			return possibleFunctionStart;
-		}
-		else if (nm.equals("codeboundary")) {
-			return codeBoundary;
-		}
-		else if (nm.equals("setcontext")) {
-			return context;
+		switch (nm) {
+			case "funcstart":
+				return functionStart;
+			case "possiblefuncstart":
+				return possibleFunctionStart;
+			case "codeboundary":
+				return codeBoundary;
+			case "setcontext":
+				return context;
 		}
 		return null;
 	}

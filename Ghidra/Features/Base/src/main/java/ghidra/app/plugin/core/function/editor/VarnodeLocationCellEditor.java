@@ -175,12 +175,7 @@ class VarnodeLocationCellEditor extends AbstractCellEditor implements TableCellE
 
 		List<Register> validItems = new ArrayList<>(programContext.getRegisters());
 
-		for (Iterator<Register> iter = validItems.iterator(); iter.hasNext();) {
-			Register register = iter.next();
-			if (register.isProcessorContext() || register.isHidden()) {
-				iter.remove();
-			}
-		}
+		validItems.removeIf(register -> register.isProcessorContext() || register.isHidden());
 
 		Collections.sort(validItems, registerWrapperComparator);
 		Register[] registers = validItems.toArray(new Register[0]);

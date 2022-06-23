@@ -190,12 +190,7 @@ public class BatchGroup {
 	 * @param fsrl {@link FSRL} of a container.
 	 */
 	public void removeDescendantsOf(FSRL fsrl) {
-		for (Iterator<BatchLoadConfig> iterator = batchLoadConfigs.iterator(); iterator.hasNext();) {
-			BatchLoadConfig ai = iterator.next();
-			if (ai.fsrl.isEquivalent(fsrl) || ai.fsrl.isDescendantOf(fsrl)) {
-				iterator.remove();
-			}
-		}
+		batchLoadConfigs.removeIf(ai -> ai.fsrl.isEquivalent(fsrl) || ai.fsrl.isDescendantOf(fsrl));
 	}
 
 	@Override

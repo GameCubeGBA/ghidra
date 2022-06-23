@@ -920,21 +920,11 @@ public class GhidraFileChooser extends DialogComponentProvider
 		}
 
 		if (fileSelectionMode == GhidraFileChooserMode.DIRECTORIES_ONLY) {
-			for (Iterator<File> iterator = listCopy.iterator(); iterator.hasNext();) {
-				File file = iterator.next();
-				if (!isDirectory(file)) {
-					iterator.remove();
-				}
-			}
+			listCopy.removeIf(file -> !isDirectory(file));
 		}
 		// must be files only
 		else {
-			for (Iterator<File> iterator = listCopy.iterator(); iterator.hasNext();) {
-				File file = iterator.next();
-				if (isDirectory(file)) {
-					iterator.remove();
-				}
-			}
+			listCopy.removeIf(this::isDirectory);
 		}
 		return listCopy;
 	}

@@ -845,13 +845,7 @@ public class DebuggerStaticMappingServicePlugin extends Plugin
 				return;
 			}
 			// NB. The URL may have changed, so can't use that as key
-			for (Iterator<InfoPerProgram> it =
-				trackedProgramInfo.values().iterator(); it.hasNext();) {
-				InfoPerProgram info = it.next();
-				if (info.program == program) {
-					it.remove();
-				}
-			}
+			trackedProgramInfo.values().removeIf(info -> info.program == program);
 			for (InfoPerTrace info : trackedTraceInfo.values()) {
 				if (info.programClosed(program)) {
 					traceAffected(info.trace);
