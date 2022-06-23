@@ -1371,9 +1371,7 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 			obj = root.getTargetObject();
 		}
 		if (!isLocalOnly()) {
-			DebugModelConventions.findSuitable(cls, obj).thenCompose(t -> {
-				return func.apply(t);
-			}).exceptionally(DebuggerResources.showError(getComponent(), errorMsg));
+			DebugModelConventions.findSuitable(cls, obj).thenCompose(func).exceptionally(DebuggerResources.showError(getComponent(), errorMsg));
 		}
 		else {
 			T t = cls.cast(obj);
