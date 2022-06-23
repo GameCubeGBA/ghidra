@@ -397,41 +397,44 @@ public class DataTypeParser {
 
 	private DataType findDataType(DataTypeManager dtm, String baseName, CategoryPath category,
 			List<DataType> list) {
+        while (true) {
 
-		DataTypeManager builtInDTM = BuiltInDataTypeManager.getDataTypeManager();
-		if (dtm == null) {
-			// no DTM specified--try the built-ins
-			return findDataType(builtInDTM, baseName, category, list);
-		}
+            DataTypeManager builtInDTM = BuiltInDataTypeManager.getDataTypeManager();
+            if (dtm == null) {
+                // no DTM specified--try the built-ins
+                dtm = builtInDTM;
+                continue;
+            }
 
-		if (category != null) {
-			DataType dt = dtm.getDataType(category, baseName);
-			if (dt != null) {
-				list.add(dt);
-				return dt;
-			}
-		}
-		else {
+            if (category != null) {
+                DataType dt = dtm.getDataType(category, baseName);
+                if (dt != null) {
+                    list.add(dt);
+                    return dt;
+                }
+            } else {
 
-			// handle C primitives (e.g.  long long, unsigned long int, etc.)
-			DataType dataType = DataTypeUtilities.getCPrimitiveDataType(baseName);
-			if (dataType != null) {
-				return dataType.clone(dtm);
-			}
+                // handle C primitives (e.g.  long long, unsigned long int, etc.)
+                DataType dataType = DataTypeUtilities.getCPrimitiveDataType(baseName);
+                if (dataType != null) {
+                    return dataType.clone(dtm);
+                }
 
-			dtm.findDataTypes(baseName, list);
-			if (list.size() == 1) {
-				return list.get(0);
-			}
-		}
+                dtm.findDataTypes(baseName, list);
+                if (list.size() == 1) {
+                    return list.get(0);
+                }
+            }
 
-		// nothing found--try the built-ins if we haven't yet
-		if (list.isEmpty() && dtm != builtInDTM) {
-			return findDataType(builtInDTM, baseName, category, list);
-		}
+            // nothing found--try the built-ins if we haven't yet
+            if (list.isEmpty() && dtm != builtInDTM) {
+                dtm = builtInDTM;
+                continue;
+            }
 
-		return null;
-	}
+            return null;
+        }
+    }
 
 	// ultimately, if one of the types is from the program or the builtin types, *and* the rest of
 	// the data types are equivalent to that one, then this method returns that data type

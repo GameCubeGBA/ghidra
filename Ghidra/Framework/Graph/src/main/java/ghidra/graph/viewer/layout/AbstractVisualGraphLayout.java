@@ -562,28 +562,35 @@ public abstract class AbstractVisualGraphLayout<V extends VisualVertex,
 	}
 
 	private V getLeftVertex(Row<V> row, int index) {
-		if (index == 0) {
-			return null; // already leftmost
-		}
+        while (true) {
+            if (index == 0) {
+                return null; // already leftmost
+            }
 
-		V vertex = row.getVertex(index - 1);
-		if (vertex == null) {
-			return getLeftVertex(row, index - 1); // get the next leftmost vertex
-		}
-		return vertex;
-	}
+            V vertex = row.getVertex(index - 1);
+            if (vertex == null) {
+                // get the next leftmost vertex
+                index = index - 1;
+                continue;
+            }
+            return vertex;
+        }
+    }
 
 	private V getRightVertex(Row<V> row, int index) {
-		if (index == row.getColumnCount() - 1) {
-			return null; // already rightmost
-		}
+        while (true) {
+            if (index == row.getColumnCount() - 1) {
+                return null; // already rightmost
+            }
 
-		V vertex = row.getVertex(index + 1);
-		if (vertex == null) {
-			return getRightVertex(row, index + 1);
-		}
-		return vertex;
-	}
+            V vertex = row.getVertex(index + 1);
+            if (vertex == null) {
+                index = index + 1;
+                continue;
+            }
+            return vertex;
+        }
+    }
 
 	private void moveLeftIfOverlaps(Map<V, Point2D> vertexLocations,
 			VisualGraphVertexShapeTransformer<V> xform, V vertex, V rightVertex) {

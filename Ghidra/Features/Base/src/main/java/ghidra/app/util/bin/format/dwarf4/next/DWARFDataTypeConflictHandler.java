@@ -367,18 +367,22 @@ class DWARFDataTypeConflictHandler extends DataTypeConflictHandler {
 	 */
 	private ConflictResult doRelaxedCompare(DataType addedDataType, DataType existingDataType,
 			Set<Long> visitedDataTypes) {
+        while (true) {
 
-		// unwrap typedefs, possibly asymmetrically. (ie. only unwrap added vs.
-		// existing)
-		if (addedDataType instanceof TypeDef) {
-			return doRelaxedCompare(((TypeDef) addedDataType).getBaseDataType(), existingDataType, visitedDataTypes);
-		}
-		if (existingDataType instanceof TypeDef) {
-			return doRelaxedCompare(addedDataType, ((TypeDef) existingDataType).getBaseDataType(), visitedDataTypes);
-		}
+            // unwrap typedefs, possibly asymmetrically. (ie. only unwrap added vs.
+            // existing)
+            if (addedDataType instanceof TypeDef) {
+                addedDataType = ((TypeDef) addedDataType).getBaseDataType();
+                continue;
+            }
+            if (existingDataType instanceof TypeDef) {
+                existingDataType = ((TypeDef) existingDataType).getBaseDataType();
+                continue;
+            }
 
-		return doStrictCompare(addedDataType, existingDataType, visitedDataTypes);
-	}
+            return doStrictCompare(addedDataType, existingDataType, visitedDataTypes);
+        }
+    }
 
 	private long getDTPairKey(DataType dataType1, DataType dataType2) {
 		return ((long) System.identityHashCode(dataType1) << 32)

@@ -51,13 +51,16 @@ public class DefaultDataTypeHTMLRepresentation extends HTMLDataTypeRepresentatio
 	}
 
 	private String getArrayDescription(Array array) {
-		DataType baseDataType = array.getDataType();
-		if (baseDataType instanceof Array) {
-			return getArrayDescription((Array) baseDataType);
-		}
+        while (true) {
+            DataType baseDataType = array.getDataType();
+            if (baseDataType instanceof Array) {
+                array = (Array) baseDataType;
+                continue;
+            }
 
-		return "Array of " + baseDataType.getName();
-	}
+            return "Array of " + baseDataType.getName();
+        }
+    }
 
 	private TextLine buildFooter(DataType dataType) {
 		int length = dataType.getLength();

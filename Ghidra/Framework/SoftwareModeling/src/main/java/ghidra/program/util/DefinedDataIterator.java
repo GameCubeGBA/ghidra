@@ -188,40 +188,41 @@ public class DefinedDataIterator implements DataIterator {
 	}
 
 	private boolean recursiveMatchesDataTypePredicate(DataType dt) {
-		if (matchesDataTypePredicate(dt)) {
-			return true;
-		}
-		if (dt instanceof Array) {
-			Array arrayDT = (Array) dt;
-			DataType elementDT = arrayDT.getDataType();
-			return recursiveMatchesDataTypePredicate(elementDT);
-		}
-		else if (dt instanceof Structure) {
-			// handle Structures and general Composite's separately so
-			// we can focus on just the defined elements of a structure
-			Structure comp = (Structure) dt;
-			for (DataTypeComponent dtc : comp.getDefinedComponents()) {
-				if (recursiveMatchesDataTypePredicate(dtc.getDataType())) {
-					return true;
-				}
-			}
-			return false;
-		}
-		else if (dt instanceof Composite) {
-			Composite comp = (Composite) dt;
-			for (DataTypeComponent dtc : comp.getComponents()) {
-				if (recursiveMatchesDataTypePredicate(dtc.getDataType())) {
-					return true;
-				}
-			}
-			return false;
-		}
-		else if (dt instanceof TypeDef) {
-			TypeDef tdDT = (TypeDef) dt;
-			return recursiveMatchesDataTypePredicate(tdDT.getBaseDataType());
-		}
-		return false;
-	}
+        while (true) {
+            if (matchesDataTypePredicate(dt)) {
+                return true;
+            }
+            if (dt instanceof Array) {
+                Array arrayDT = (Array) dt;
+                DataType elementDT = arrayDT.getDataType();
+                dt = elementDT;
+                continue;
+            } else if (dt instanceof Structure) {
+                // handle Structures and general Composite's separately so
+                // we can focus on just the defined elements of a structure
+                Structure comp = (Structure) dt;
+                for (DataTypeComponent dtc : comp.getDefinedComponents()) {
+                    if (recursiveMatchesDataTypePredicate(dtc.getDataType())) {
+                        return true;
+                    }
+                }
+                return false;
+            } else if (dt instanceof Composite) {
+                Composite comp = (Composite) dt;
+                for (DataTypeComponent dtc : comp.getComponents()) {
+                    if (recursiveMatchesDataTypePredicate(dtc.getDataType())) {
+                        return true;
+                    }
+                }
+                return false;
+            } else if (dt instanceof TypeDef) {
+                TypeDef tdDT = (TypeDef) dt;
+                dt = tdDT.getBaseDataType();
+                continue;
+            }
+            return false;
+        }
+    }
 
 	private boolean matchesDataTypePredicate(DataType dt) {
 		return dataTypePredicate == null || dataTypePredicate.test(dt);

@@ -207,18 +207,22 @@ public interface DBTraceDefinedDataAdapter extends DBTraceDataAdapter {
 
 	@Override
 	default DBTraceDefinedDataAdapter getPrimitiveAt(int offset) {
-		// We may write to the cache
-		try (LockHold hold = LockHold.lock(getTrace().getReadWriteLock().writeLock())) {
-			if (offset < 0 || offset >= getLength()) {
-				return null;
-			}
-			DBTraceDefinedDataAdapter component = getComponentAt(offset);
-			if (component == null || component == this) {
-				return this;
-			}
-			return component.getPrimitiveAt(offset - component.getParentOffset());
-		}
-	}
+        DBTraceDefinedDataAdapter result = this;
+        while (true) {
+            // We may write to the cache
+            try (LockHold hold = LockHold.lock(result.getTrace().getReadWriteLock().writeLock())) {
+                if (offset < 0 || offset >= result.getLength()) {
+                    return null;
+                }
+                DBTraceDefinedDataAdapter component = result.getComponentAt(offset);
+                if (component == null || component == result) {
+                    return result;
+                }
+                offset = offset - component.getParentOffset();
+                result = component;
+            }
+        }
+    }
 
 	default DBTraceDefinedDataAdapter doGetComponent(int[] componentPath, int level) {
 		if (componentPath == null || level >= componentPath.length) {

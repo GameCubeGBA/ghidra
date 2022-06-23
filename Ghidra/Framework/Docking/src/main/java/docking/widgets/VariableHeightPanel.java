@@ -41,15 +41,17 @@ public class VariableHeightPanel extends JPanel implements Scrollable {
 	 * @return The highest-level parent of component.
 	 */
 	private static Component getRootComponent(Component component) {
-		if (component instanceof Window) {
-			return component;
-		}
-		Container parent = component.getParent();
-		if (parent == null) {
-			return component;
-		}
-		return getRootComponent(parent);
-	}
+        while (true) {
+            if (component instanceof Window) {
+                return component;
+            }
+            Container parent = component.getParent();
+            if (parent == null) {
+                return component;
+            }
+            component = parent;
+        }
+    }
 
 	/**
 	 * 

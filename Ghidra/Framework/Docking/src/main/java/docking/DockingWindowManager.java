@@ -1559,18 +1559,22 @@ public class DockingWindowManager implements PropertyChangeListener, Placeholder
 	}
 
 	private DockableComponent getDockableComponent(Component comp) {
-		while (comp != null) {
-			if (comp instanceof DockableComponent) {
-				return (DockableComponent) comp;
-			}
-			if (comp instanceof EditWindow) {
-				return getDockableComponent(((EditWindow) comp).getAssociatedComponent());
-			}
-			comp = comp.getParent();
-		}
+        getDockableComponent:
+        while (true) {
+            while (comp != null) {
+                if (comp instanceof DockableComponent) {
+                    return (DockableComponent) comp;
+                }
+                if (comp instanceof EditWindow) {
+                    comp = ((EditWindow) comp).getAssociatedComponent();
+                    continue getDockableComponent;
+                }
+                comp = comp.getParent();
+            }
 
-		return null;
-	}
+            return null;
+        }
+    }
 
 	private Element savePreferencesToXML() {
 		Element toolPreferencesElement = new Element(TOOL_PREFERENCES_XML_NAME);

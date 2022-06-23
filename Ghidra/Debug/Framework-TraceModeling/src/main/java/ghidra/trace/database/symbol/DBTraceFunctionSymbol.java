@@ -322,17 +322,21 @@ public class DBTraceFunctionSymbol extends DBTraceNamespaceSymbol
 
 	@Override
 	public String getName() {
-		if (getSource() == SourceType.DEFAULT) {
-			if (thunked != null) {
-				if (thunked.getSource() == SourceType.DEFAULT && thunked.thunked == null) {
-					return "thunk_" + thunked.getName();
-				}
-				return thunked.getName();
-			}
-			return SymbolUtilities.getDefaultFunctionName(entryPoint);
-		}
-		return super.getName();
-	}
+        DBTraceFunctionSymbol other = this;
+        while (true) {
+            if (other.getSource() == SourceType.DEFAULT) {
+                if (other.thunked != null) {
+                    if (other.thunked.getSource() == SourceType.DEFAULT && other.thunked.thunked == null) {
+                        return "thunk_" + other.thunked.getName();
+                    }
+                    other = other.thunked;
+                    continue;
+                }
+                return SymbolUtilities.getDefaultFunctionName(other.entryPoint);
+            }
+            return other.getName();
+        }
+    }
 
 	@Override
 	public Address getAddress() {
@@ -360,13 +364,17 @@ public class DBTraceFunctionSymbol extends DBTraceNamespaceSymbol
 
 	@Override
 	public String getCallFixup() {
-		try (LockHold hold = LockHold.lock(manager.lock.readLock())) {
-			if (thunked != null) {
-				return thunked.getCallFixup();
-			}
-			return callFixup;
-		}
-	}
+        DBTraceFunctionSymbol other = this;
+        while (true) {
+            try (LockHold hold = LockHold.lock(other.manager.lock.readLock())) {
+                if (other.thunked != null) {
+                    other = other.thunked;
+                    continue;
+                }
+                return other.callFixup;
+            }
+        }
+    }
 
 	public String getComment(int commentType) {
 		return manager.trace.getCommentAdapter().getComment(startSnap, entryPoint, commentType);
@@ -429,14 +437,18 @@ public class DBTraceFunctionSymbol extends DBTraceNamespaceSymbol
 
 	@Override
 	public DBTraceParameterSymbol getReturn() {
-		try (LockHold hold = LockHold.lock(manager.lock.readLock())) {
-			if (thunked != null) {
-				return thunked.getReturn();
-			}
-			doLoadVariables();
-			return ret;
-		}
-	}
+        DBTraceFunctionSymbol other = this;
+        while (true) {
+            try (LockHold hold = LockHold.lock(other.manager.lock.readLock())) {
+                if (other.thunked != null) {
+                    other = other.thunked;
+                    continue;
+                }
+                other.doLoadVariables();
+                return other.ret;
+            }
+        }
+    }
 
 	@Override
 	public void setReturn(DataType type, VariableStorage storage, SourceType source)
@@ -527,22 +539,26 @@ public class DBTraceFunctionSymbol extends DBTraceNamespaceSymbol
 
 	@Override
 	public SourceType getSignatureSource() {
-		try (LockHold hold = LockHold.lock(manager.lock.readLock())) {
-			if (thunked != null) {
-				return thunked.getSignatureSource();
-			}
-			// Force DEFAULT if any param has unassigned storage
-			if (!getReturn().isValid()) {
-				return SourceType.DEFAULT;
-			}
-			for (Parameter param : getParameters()) {
-				if (!param.isValid()) {
-					return SourceType.DEFAULT;
-				}
-			}
-			return signatureSource;
-		}
-	}
+        DBTraceFunctionSymbol other = this;
+        while (true) {
+            try (LockHold hold = LockHold.lock(other.manager.lock.readLock())) {
+                if (other.thunked != null) {
+                    other = other.thunked;
+                    continue;
+                }
+                // Force DEFAULT if any param has unassigned storage
+                if (!other.getReturn().isValid()) {
+                    return SourceType.DEFAULT;
+                }
+                for (Parameter param : other.getParameters()) {
+                    if (!param.isValid()) {
+                        return SourceType.DEFAULT;
+                    }
+                }
+                return other.signatureSource;
+            }
+        }
+    }
 
 	@Override
 	public void setSignatureSource(SourceType signatureSource) {
@@ -558,23 +574,31 @@ public class DBTraceFunctionSymbol extends DBTraceNamespaceSymbol
 
 	@Override
 	public StackFrame getStackFrame() {
-		try (LockHold hold = LockHold.lock(manager.lock.readLock())) {
-			if (thunked != null) {
-				return thunked.getStackFrame();
-			}
-			return frame;
-		}
-	}
+        DBTraceFunctionSymbol other = this;
+        while (true) {
+            try (LockHold hold = LockHold.lock(other.manager.lock.readLock())) {
+                if (other.thunked != null) {
+                    other = other.thunked;
+                    continue;
+                }
+                return other.frame;
+            }
+        }
+    }
 
 	@Override
 	public int getStackPurgeSize() {
-		try (LockHold hold = LockHold.lock(manager.lock.readLock())) {
-			if (thunked != null) {
-				return thunked.getStackPurgeSize();
-			}
-			return stackPurge;
-		}
-	}
+        DBTraceFunctionSymbol other = this;
+        while (true) {
+            try (LockHold hold = LockHold.lock(other.manager.lock.readLock())) {
+                if (other.thunked != null) {
+                    other = other.thunked;
+                    continue;
+                }
+                return other.stackPurge;
+            }
+        }
+    }
 
 	@Override
 	public Set<FunctionTag> getTags() {
@@ -651,13 +675,17 @@ public class DBTraceFunctionSymbol extends DBTraceNamespaceSymbol
 
 	@Override
 	public boolean isStackPurgeSizeValid() {
-		try (LockHold hold = LockHold.lock(manager.lock.readLock())) {
-			if (thunked != null) {
-				return thunked.isStackPurgeSizeValid();
-			}
-			return stackPurge < 1 << 24;
-		}
-	}
+        DBTraceFunctionSymbol other = this;
+        while (true) {
+            try (LockHold hold = LockHold.lock(other.manager.lock.readLock())) {
+                if (other.thunked != null) {
+                    other = other.thunked;
+                    continue;
+                }
+                return other.stackPurge < 1 << 24;
+            }
+        }
+    }
 
 	protected Variable resolveVariable(Variable var, boolean voidOK, boolean useUnassignedStorage)
 			throws InvalidInputException {
@@ -763,115 +791,116 @@ public class DBTraceFunctionSymbol extends DBTraceNamespaceSymbol
 	@Override
 	public DBTraceParameterSymbol insertParameter(int ordinal, Variable var, SourceType source)
 			throws DuplicateNameException, InvalidInputException {
-		try (LockHold hold = LockHold.lock(manager.lock.writeLock())) {
-			if (thunked != null) {
-				return thunked.insertParameter(ordinal, var, source);
-			}
-			doLoadVariables();
-			doPurgeBadVariables();
+        DBTraceFunctionSymbol other = this;
+        while (true) {
+            try (LockHold hold = LockHold.lock(other.manager.lock.writeLock())) {
+                if (other.thunked != null) {
+                    other = other.thunked;
+                    continue;
+                }
+                other.doLoadVariables();
+                other.doPurgeBadVariables();
 
-			int autoCnt = autoParams == null ? 0 : autoParams.size();
+                int autoCnt = other.autoParams == null ? 0 : other.autoParams.size();
 
-			int index = ordinal - autoCnt;
-			if (index < 0 || index > params.size()) {
-				throw new IndexOutOfBoundsException("Ordinal value must be in [" + autoCnt + ".." +
-					(params.size() + autoCnt) + "]: " + ordinal);
-			}
-			assertNotUniqueSpace(var);
+                int index = ordinal - autoCnt;
+                if (index < 0 || index > other.params.size()) {
+                    throw new IndexOutOfBoundsException("Ordinal value must be in [" + autoCnt + ".." +
+                            (other.params.size() + autoCnt) + "]: " + ordinal);
+                }
+                other.assertNotUniqueSpace(var);
 
-			boolean hasCustomStorage = hasCustomVariableStorage();
-			if (hasCustomStorage) {
-				if (var.hasStackStorage()) {
-					int stackOffset = (int) var.getLastStorageVarnode().getOffset();
-					if (!frame.isParameterOffset(stackOffset)) {
-						throw new InvalidInputException(
-							"Variable contains invalid stack parameter offset: " + var.getName() +
-								" offset " + stackOffset);
-					}
-				}
-			}
+                boolean hasCustomStorage = other.hasCustomVariableStorage();
+                if (hasCustomStorage) {
+                    if (var.hasStackStorage()) {
+                        int stackOffset = (int) var.getLastStorageVarnode().getOffset();
+                        if (!other.frame.isParameterOffset(stackOffset)) {
+                            throw new InvalidInputException(
+                                    "Variable contains invalid stack parameter offset: " + var.getName() +
+                                            " offset " + stackOffset);
+                        }
+                    }
+                }
 
-			var = resolveVariable(var, false, !hasCustomStorage);
+                var = other.resolveVariable(var, false, !hasCustomStorage);
 
-			String varName = var.getName();
-			SourceType paramSource = source;
-			// NOTE null and 0-length checks in isDefaultParameterName
-			if (paramSource == SourceType.DEFAULT ||
-				SymbolUtilities.isDefaultParameterName(varName)) {
-				varName = "";
-				paramSource = SourceType.DEFAULT;
-			}
+                String varName = var.getName();
+                SourceType paramSource = source;
+                // NOTE null and 0-length checks in isDefaultParameterName
+                if (paramSource == SourceType.DEFAULT ||
+                        SymbolUtilities.isDefaultParameterName(varName)) {
+                    varName = "";
+                    paramSource = SourceType.DEFAULT;
+                }
 
-			VariableStorage storage = var.getVariableStorage();
-			if (!hasCustomStorage) {
-				storage = VariableStorage.UNASSIGNED_STORAGE;
-			}
-			else if (storage.isAutoStorage()) {
-				storage = new VariableStorage(getProgram(), storage.getVarnodes());
-			}
+                VariableStorage storage = var.getVariableStorage();
+                if (!hasCustomStorage) {
+                    storage = VariableStorage.UNASSIGNED_STORAGE;
+                } else if (storage.isAutoStorage()) {
+                    storage = new VariableStorage(other.getProgram(), storage.getVarnodes());
+                }
 
-			try {
-				// Check for overlapping parameter in storage
-				DBTraceParameterSymbol p = null;
-				if (storage != VariableStorage.UNASSIGNED_STORAGE) {
-					for (DBTraceParameterSymbol oldParam : params) {
-						if (oldParam.getVariableStorage().intersects(storage)) {
-							p = oldParam;
-							break;
-						}
-						VariableUtilities.checkVariableConflict(this, (p != null ? p : var),
-							storage, true);
-					}
-				}
-				if (p != null) {
-					// storage has been specified
-					// move and update existing parameter
-					if (index >= params.size()) {
-						index = params.size() - 1;
-					}
-					Msg.warn(this, "Inserting overlapping parameter for function " + this + " at " +
-						p.getVariableStorage() + " - Replacing existing parameter!");
-					if (p.getOrdinal() - autoCnt != index) {
-						if (p != params.remove(p.getOrdinal() - autoCnt)) {
-							throw new AssertionError("Inconsistent function parameter cache");
-						}
+                try {
+                    // Check for overlapping parameter in storage
+                    DBTraceParameterSymbol p = null;
+                    if (storage != VariableStorage.UNASSIGNED_STORAGE) {
+                        for (DBTraceParameterSymbol oldParam : other.params) {
+                            if (oldParam.getVariableStorage().intersects(storage)) {
+                                p = oldParam;
+                                break;
+                            }
+                            VariableUtilities.checkVariableConflict(other, (p != null ? p : var),
+                                    storage, true);
+                        }
+                    }
+                    if (p != null) {
+                        // storage has been specified
+                        // move and update existing parameter
+                        if (index >= other.params.size()) {
+                            index = other.params.size() - 1;
+                        }
+                        Msg.warn(other, "Inserting overlapping parameter for function " + other + " at " +
+                                p.getVariableStorage() + " - Replacing existing parameter!");
+                        if (p.getOrdinal() - autoCnt != index) {
+                            if (p != other.params.remove(p.getOrdinal() - autoCnt)) {
+                                throw new AssertionError("Inconsistent function parameter cache");
+                            }
 
-						params.add(index, p);
-						doUpdateParametersAndReturn();
+                            other.params.add(index, p);
+                            other.doUpdateParametersAndReturn();
 
-						manager.trace.setChanged(
-							new TraceChangeRecord<>(TraceSymbolChangeType.CHANGED, getSpace(), p));
-					}
-					if (!varName.isEmpty()) {
-						p.setName(varName, paramSource);
-					}
-					p.doSetStorageAndDataType(storage, var.getDataType());
-				}
-				else {
-					// create a new parameter
-					if (index > params.size()) {
-						index = params.size();
-					}
-					// NOTE: Removed ordinal modifications. Will be done in doUpdateParams...
-					p = manager.parameterStore.create();
-					p.set(varName, this, var.getDataType(), storage, ordinal, paramSource);
-					params.add(index, p);
-					doUpdateParametersAndReturn();
+                            other.manager.trace.setChanged(
+                                    new TraceChangeRecord<>(TraceSymbolChangeType.CHANGED, other.getSpace(), p));
+                        }
+                        if (!varName.isEmpty()) {
+                            p.setName(varName, paramSource);
+                        }
+                        p.doSetStorageAndDataType(storage, var.getDataType());
+                    } else {
+                        // create a new parameter
+                        if (index > other.params.size()) {
+                            index = other.params.size();
+                        }
+                        // NOTE: Removed ordinal modifications. Will be done in doUpdateParams...
+                        p = other.manager.parameterStore.create();
+                        p.set(varName, other, var.getDataType(), storage, ordinal, paramSource);
+                        other.params.add(index, p);
+                        other.doUpdateParametersAndReturn();
 
-					manager.trace.setChanged(
-						new TraceChangeRecord<>(TraceSymbolChangeType.ADDED, getSpace(), p));
-				}
-				if (var.getComment() != null) {
-					p.setComment(var.getComment());
-				}
-				doUpdateSignatureSourceAfterVariableChange(source, p.getDataType());
-				return p;
-			}
-			finally {
-				frame.invalidate();
-			}
-		}
-	}
+                        other.manager.trace.setChanged(
+                                new TraceChangeRecord<>(TraceSymbolChangeType.ADDED, other.getSpace(), p));
+                    }
+                    if (var.getComment() != null) {
+                        p.setComment(var.getComment());
+                    }
+                    other.doUpdateSignatureSourceAfterVariableChange(source, p.getDataType());
+                    return p;
+                } finally {
+                    other.frame.invalidate();
+                }
+            }
+        }
+    }
 
 	@Override
 	public void replaceParameters(List<? extends Variable> newParams, FunctionUpdateType updateType,
@@ -1241,117 +1270,122 @@ public class DBTraceFunctionSymbol extends DBTraceNamespaceSymbol
 
 	@Override
 	public Parameter moveParameter(int fromOrdinal, int toOrdinal) throws InvalidInputException {
-		if (toOrdinal < 0) {
-			throw new InvalidInputException("destination ordinal cannot be negative");
-		}
-		try (LockHold hold = LockHold.lock(manager.lock.writeLock())) {
-			if (thunked != null) {
-				return thunked.moveParameter(fromOrdinal, toOrdinal);
-			}
-			doLoadVariables();
+        DBTraceFunctionSymbol other = this;
+        while (true) {
+            if (toOrdinal < 0) {
+                throw new InvalidInputException("destination ordinal cannot be negative");
+            }
+            try (LockHold hold = LockHold.lock(other.manager.lock.writeLock())) {
+                if (other.thunked != null) {
+                    other = other.thunked;
+                    continue;
+                }
+                other.doLoadVariables();
 
-			if (fromOrdinal < 0) {
-				return null;
-			}
-			int autoCnt = autoParams == null ? 0 : autoParams.size();
-			if (fromOrdinal < autoCnt || toOrdinal < autoCnt) {
-				throw new InvalidInputException(
-					"Neither source nor destination ordinal can be within auto-parameters");
-			}
-			int fromIndex = fromOrdinal - autoCnt;
-			int toIndex = toOrdinal - autoCnt;
-			if (fromIndex > params.size()) {
-				return null;
-			}
-			DBTraceParameterSymbol param = params.get(fromIndex);
-			if (toIndex == fromIndex) {
-				return param;
-			}
-			params.remove(fromIndex);
-			if (toIndex >= params.size()) {
-				params.add(param);
-			}
-			else {
-				params.add(toIndex, param);
-			}
-			doUpdateParametersAndReturn();
-			frame.invalidate();
+                if (fromOrdinal < 0) {
+                    return null;
+                }
+                int autoCnt = other.autoParams == null ? 0 : other.autoParams.size();
+                if (fromOrdinal < autoCnt || toOrdinal < autoCnt) {
+                    throw new InvalidInputException(
+                            "Neither source nor destination ordinal can be within auto-parameters");
+                }
+                int fromIndex = fromOrdinal - autoCnt;
+                int toIndex = toOrdinal - autoCnt;
+                if (fromIndex > other.params.size()) {
+                    return null;
+                }
+                DBTraceParameterSymbol param = other.params.get(fromIndex);
+                if (toIndex == fromIndex) {
+                    return param;
+                }
+                other.params.remove(fromIndex);
+                if (toIndex >= other.params.size()) {
+                    other.params.add(param);
+                } else {
+                    other.params.add(toIndex, param);
+                }
+                other.doUpdateParametersAndReturn();
+                other.frame.invalidate();
 
-			manager.trace.setChanged(new TraceChangeRecord<>(
-				TraceFunctionChangeType.CHANGED_PARAMETERS, getSpace(), this));
-			return param;
-		}
-	}
+                other.manager.trace.setChanged(new TraceChangeRecord<>(
+                        TraceFunctionChangeType.CHANGED_PARAMETERS, other.getSpace(), other));
+                return param;
+            }
+        }
+    }
 
 	@Override
 	public DBTraceLocalVariableSymbol addLocalVariable(Variable var, SourceType source)
 			throws DuplicateNameException, InvalidInputException {
-		try (LockHold hold = LockHold.lock(manager.lock.writeLock())) {
-			if (thunked != null) {
-				return thunked.addLocalVariable(var, source);
-			}
-			doLoadVariables();
-			doPurgeBadVariables();
+        DBTraceFunctionSymbol other = this;
+        while (true) {
+            try (LockHold hold = LockHold.lock(other.manager.lock.writeLock())) {
+                if (other.thunked != null) {
+                    other = other.thunked;
+                    continue;
+                }
+                other.doLoadVariables();
+                other.doPurgeBadVariables();
 
-			var = resolveVariable(var, false, false);
+                var = other.resolveVariable(var, false, false);
 
-			VariableStorage storage = var.getVariableStorage();
-			int firstUseOffset = var.getFirstUseOffset();
-			if (var.hasStackStorage() && firstUseOffset != 0) {
-				Msg.warn(this, "Stack variable first-use offset forced to 0 for function " + this +
-					" at " + storage);
-				firstUseOffset = 0;
-			}
+                VariableStorage storage = var.getVariableStorage();
+                int firstUseOffset = var.getFirstUseOffset();
+                if (var.hasStackStorage() && firstUseOffset != 0) {
+                    Msg.warn(other, "Stack variable first-use offset forced to 0 for function " + other +
+                            " at " + storage);
+                    firstUseOffset = 0;
+                }
 
-			String varName = var.getName();
-			// NOTE null and 0-length checks are in isDefaultLocalName
-			// NOTE: This is meant to be isDefaultParameterName
-			// The parameter names are protected for all variables
-			if (SymbolUtilities.isDefaultParameterName(varName)) {
-				varName = DEFAULT_LOCAL_PREFIX;
-				source = SourceType.DEFAULT;
-			}
+                String varName = var.getName();
+                // NOTE null and 0-length checks are in isDefaultLocalName
+                // NOTE: This is meant to be isDefaultParameterName
+                // The parameter names are protected for all variables
+                if (SymbolUtilities.isDefaultParameterName(varName)) {
+                    varName = other.DEFAULT_LOCAL_PREFIX;
+                    source = SourceType.DEFAULT;
+                }
 
-			// Check for duplicate storage address
-			DBTraceLocalVariableSymbol lv = null;
-			for (DBTraceLocalVariableSymbol oldLocal : locals) {
-				if (oldLocal.getFirstUseOffset() == firstUseOffset &&
-					oldLocal.getVariableStorage().intersects(storage)) {
-					lv = oldLocal;
-					break;
-				}
-			}
+                // Check for duplicate storage address
+                DBTraceLocalVariableSymbol lv = null;
+                for (DBTraceLocalVariableSymbol oldLocal : other.locals) {
+                    if (oldLocal.getFirstUseOffset() == firstUseOffset &&
+                            oldLocal.getVariableStorage().intersects(storage)) {
+                        lv = oldLocal;
+                        break;
+                    }
+                }
 
-			try {
-				// TODO: validate enabled?
-				VariableUtilities.checkVariableConflict(this, (lv != null ? lv : var), storage,
-					true);
-				if (lv != null) {
-					// Update existing local
-					Msg.warn(this, "Adding overlapping local variable for function " + this +
-						" at " + lv.getVariableStorage() + " - Modifying existing variable!");
-					if (!DEFAULT_LOCAL_PREFIX.equals(name)) {
-						lv.setName(varName, source);
-					}
-					lv.doSetStorageAndDataType(storage, var.getDataType());
-				}
-				else {
-					// Create new local
-					lv = manager.localVarStore.create();
-					lv.set(varName, this, var.getDataType(), storage, firstUseOffset, source);
-					locals.add(lv);
-					locals.sort(VariableUtilities::compare);
-				}
-				if (var.getComment() != null) {
-					lv.setComment(var.getComment());
-				}
-				return lv;
-			}
-			finally {
-				frame.invalidate();
-			}
-		}
-	}
+                try {
+                    // TODO: validate enabled?
+                    VariableUtilities.checkVariableConflict(other, (lv != null ? lv : var), storage,
+                            true);
+                    if (lv != null) {
+                        // Update existing local
+                        Msg.warn(other, "Adding overlapping local variable for function " + other +
+                                " at " + lv.getVariableStorage() + " - Modifying existing variable!");
+                        if (!other.DEFAULT_LOCAL_PREFIX.equals(other.name)) {
+                            lv.setName(varName, source);
+                        }
+                        lv.doSetStorageAndDataType(storage, var.getDataType());
+                    } else {
+                        // Create new local
+                        lv = other.manager.localVarStore.create();
+                        lv.set(varName, other, var.getDataType(), storage, firstUseOffset, source);
+                        other.locals.add(lv);
+                        other.locals.sort(VariableUtilities::compare);
+                    }
+                    if (var.getComment() != null) {
+                        lv.setComment(var.getComment());
+                    }
+                    return lv;
+                } finally {
+                    other.frame.invalidate();
+                }
+            }
+        }
+    }
 
 	@Override
 	public void removeVariable(Variable var) {
@@ -1374,54 +1408,66 @@ public class DBTraceFunctionSymbol extends DBTraceNamespaceSymbol
 
 	@Override
 	public Parameter getParameter(int ordinal) {
-		try (LockHold hold = LockHold.lock(manager.lock.readLock())) {
-			if (thunked != null) {
-				return thunked.getParameter(ordinal);
-			}
-			doLoadVariables();
-			if (ordinal == Parameter.RETURN_ORIDINAL) {
-				return ret;
-			}
-			if (autoParams != null) {
-				if (ordinal < autoParams.size()) {
-					return autoParams.get(ordinal);
-				}
-				ordinal -= autoParams.size();
-			}
-			if (ordinal < params.size()) {
-				return params.get(ordinal);
-			}
-			return null;
-		}
-	}
+        DBTraceFunctionSymbol other = this;
+        while (true) {
+            try (LockHold hold = LockHold.lock(other.manager.lock.readLock())) {
+                if (other.thunked != null) {
+                    other = other.thunked;
+                    continue;
+                }
+                other.doLoadVariables();
+                if (ordinal == Parameter.RETURN_ORIDINAL) {
+                    return other.ret;
+                }
+                if (other.autoParams != null) {
+                    if (ordinal < other.autoParams.size()) {
+                        return other.autoParams.get(ordinal);
+                    }
+                    ordinal -= other.autoParams.size();
+                }
+                if (ordinal < other.params.size()) {
+                    return other.params.get(ordinal);
+                }
+                return null;
+            }
+        }
+    }
 
 	@Override
 	public int getParameterCount() {
-		try (LockHold hold = LockHold.lock(manager.lock.readLock())) {
-			if (thunked != null) {
-				return thunked.getParameterCount();
-			}
-			doLoadVariables();
-			if (autoParams != null) {
-				return autoParams.size() + params.size();
-			}
-			return params.size();
-		}
-	}
+        DBTraceFunctionSymbol other = this;
+        while (true) {
+            try (LockHold hold = LockHold.lock(other.manager.lock.readLock())) {
+                if (other.thunked != null) {
+                    other = other.thunked;
+                    continue;
+                }
+                other.doLoadVariables();
+                if (other.autoParams != null) {
+                    return other.autoParams.size() + other.params.size();
+                }
+                return other.params.size();
+            }
+        }
+    }
 
 	@Override
 	public int getAutoParameterCount() {
-		try (LockHold hold = LockHold.lock(manager.lock.readLock())) {
-			if (thunked != null) {
-				return thunked.getAutoParameterCount();
-			}
-			doLoadVariables();
-			if (autoParams != null) {
-				return autoParams.size();
-			}
-			return 0;
-		}
-	}
+        DBTraceFunctionSymbol other = this;
+        while (true) {
+            try (LockHold hold = LockHold.lock(other.manager.lock.readLock())) {
+                if (other.thunked != null) {
+                    other = other.thunked;
+                    continue;
+                }
+                other.doLoadVariables();
+                if (other.autoParams != null) {
+                    return other.autoParams.size();
+                }
+                return 0;
+            }
+        }
+    }
 
 	@Override
 	public Parameter[] getParameters() {
@@ -1443,17 +1489,21 @@ public class DBTraceFunctionSymbol extends DBTraceNamespaceSymbol
 
 	@Override
 	public Parameter[] getParameters(VariableFilter filter) {
-		try (LockHold hold = LockHold.lock(manager.lock.readLock())) {
-			if (thunked != null) {
-				return thunked.getParameters(filter);
-			}
-			doLoadVariables();
-			List<Parameter> result = new ArrayList<>();
-			collect(result, autoParams, filter);
-			collect(result, params, filter);
-			return result.toArray(new Parameter[0]);
-		}
-	}
+        DBTraceFunctionSymbol other = this;
+        while (true) {
+            try (LockHold hold = LockHold.lock(other.manager.lock.readLock())) {
+                if (other.thunked != null) {
+                    other = other.thunked;
+                    continue;
+                }
+                other.doLoadVariables();
+                List<Parameter> result = new ArrayList<>();
+                other.collect(result, autoParams, filter);
+                other.collect(result, params, filter);
+                return result.toArray(new Parameter[0]);
+            }
+        }
+    }
 
 	@Override
 	public TraceLocalVariableSymbol[] getLocalVariables() {
@@ -1462,16 +1512,20 @@ public class DBTraceFunctionSymbol extends DBTraceNamespaceSymbol
 
 	@Override
 	public TraceLocalVariableSymbol[] getLocalVariables(VariableFilter filter) {
-		try (LockHold hold = LockHold.lock(manager.lock.readLock())) {
-			if (thunked != null) {
-				return thunked.getLocalVariables(filter);
-			}
-			doLoadVariables();
-			List<Variable> result = new ArrayList<>();
-			collect(result, locals, filter);
-			return result.toArray(new TraceLocalVariableSymbol[0]);
-		}
-	}
+        DBTraceFunctionSymbol other = this;
+        while (true) {
+            try (LockHold hold = LockHold.lock(other.manager.lock.readLock())) {
+                if (other.thunked != null) {
+                    other = other.thunked;
+                    continue;
+                }
+                other.doLoadVariables();
+                List<Variable> result = new ArrayList<>();
+                other.collect(result, locals, filter);
+                return result.toArray(new TraceLocalVariableSymbol[0]);
+            }
+        }
+    }
 
 	@Override
 	public Variable[] getVariables(VariableFilter filter) {
@@ -1521,13 +1575,17 @@ public class DBTraceFunctionSymbol extends DBTraceNamespaceSymbol
 	}
 
 	protected byte getFlags() {
-		try (LockHold hold = LockHold.lock(manager.lock.readLock())) {
-			if (thunked != null) {
-				return thunked.getFlags();
-			}
-			return flags;
-		}
-	}
+        DBTraceFunctionSymbol other = this;
+        while (true) {
+            try (LockHold hold = LockHold.lock(other.manager.lock.readLock())) {
+                if (other.thunked != null) {
+                    other = other.thunked;
+                    continue;
+                }
+                return other.flags;
+            }
+        }
+    }
 
 	protected void orFlags(byte with) {
 		try (LockHold hold = LockHold.lock(manager.lock.writeLock())) {
@@ -1832,16 +1890,20 @@ public class DBTraceFunctionSymbol extends DBTraceNamespaceSymbol
 
 	@Override
 	public DBTraceFunctionSymbol getThunkedFunction(boolean recursive) {
-		try (LockHold hold = LockHold.lock(manager.lock.readLock())) {
-			if (recursive) {
-				if (thunked != null) {
-					return thunked.getThunkedFunction(recursive);
-				}
-				return this;
-			}
-			return thunked;
-		}
-	}
+        DBTraceFunctionSymbol result = this;
+        while (true) {
+            try (LockHold hold = LockHold.lock(result.manager.lock.readLock())) {
+                if (recursive) {
+                    if (result.thunked != null) {
+                        result = result.thunked;
+                        continue;
+                    }
+                    return result;
+                }
+                return result.thunked;
+            }
+        }
+    }
 
 	@Override
 	public Address[] getFunctionThunkAddresses() {

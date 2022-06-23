@@ -134,36 +134,39 @@ class GhidraFolderData {
 	 * @return folder data or null if not found or lazy=true and not yet discovered
 	 */
 	GhidraFolderData getFolderPathData(String folderPath, boolean lazy) {
-		if (parent == null) {
-			if (folderPath.startsWith(FileSystem.SEPARATOR)) {
-				folderPath = folderPath.substring(FileSystem.SEPARATOR.length());
-			}
-		}
-		else if (folderPath.startsWith(FileSystem.SEPARATOR)) {
-			return fileManager.getRootFolderData().getFolderPathData(folderPath, lazy);
-		}
-		if (folderPath.length() == 0) {
-			return this;
-		}
-		int index = folderPath.indexOf(FileSystem.SEPARATOR);
-		String nextPath = "";
-		String nextName = folderPath;
-		if (index > 0) {
-			nextPath = folderPath.substring(index + 1);
-			nextName = folderPath.substring(0, index);
-		}
-		else if (index == 0) {
-			throw new IllegalArgumentException("Invalid path specified with double separator");
-		}
-		GhidraFolderData folderData = getFolderData(nextName, lazy);
-		if (folderData == null) {
-			return null;
-		}
-		if (nextPath.length() == 0) {
-			return folderData;
-		}
-		return folderData.getFolderPathData(nextPath, lazy);
-	}
+        GhidraFolderData result = this;
+        while (true) {
+            if (result.parent == null) {
+                if (folderPath.startsWith(FileSystem.SEPARATOR)) {
+                    folderPath = folderPath.substring(FileSystem.SEPARATOR.length());
+                }
+            } else if (folderPath.startsWith(FileSystem.SEPARATOR)) {
+                result = result.fileManager.getRootFolderData();
+                continue;
+            }
+            if (folderPath.length() == 0) {
+                return result;
+            }
+            int index = folderPath.indexOf(FileSystem.SEPARATOR);
+            String nextPath = "";
+            String nextName = folderPath;
+            if (index > 0) {
+                nextPath = folderPath.substring(index + 1);
+                nextName = folderPath.substring(0, index);
+            } else if (index == 0) {
+                throw new IllegalArgumentException("Invalid path specified with double separator");
+            }
+            GhidraFolderData folderData = result.getFolderData(nextName, lazy);
+            if (folderData == null) {
+                return null;
+            }
+            if (nextPath.length() == 0) {
+                return folderData;
+            }
+            folderPath = nextPath;
+            result = folderData;
+        }
+    }
 
 	String getName() {
 		return name;

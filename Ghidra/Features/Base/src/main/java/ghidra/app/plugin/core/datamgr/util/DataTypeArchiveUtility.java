@@ -77,34 +77,36 @@ public class DataTypeArchiveUtility {
 	 * @return existing resource file or null if not found
 	 */
 	public static ResourceFile findArchiveFile(String archiveName) {
-		if (!archiveName.endsWith(FileDataTypeManager.SUFFIX)) {
-			archiveName = archiveName + FileDataTypeManager.SUFFIX;
-		}
-		archiveName = archiveName.replace('\\', '/');
-		if (archiveName.indexOf(':') >= 0 || archiveName.charAt(0) == '/') {
-			return null;
-		}
-		if (archiveName.startsWith(RELATIVE_PATH_PREFIX)) {
-			archiveName = archiveName.substring(RELATIVE_PATH_PREFIX.length());
-		}
-		else {
-			archiveName = "/" + archiveName; // ensure we match on whole path element name
-		}
-		// relative path starts with "/"
-		for (ResourceFile file : GHIDRA_ARCHIVES.values()) {
-			String path = file.getAbsolutePath().replace('\\', '/');
-			// NOTE: existence check added to facilitate testing
-			if (path.endsWith(archiveName) && file.exists()) {
-				return file;
-			}
-		}
-		// Note: recursion could blow-out if circular archive re-mapping defined (maps should be defined properly)
-		String remappedRelativePath = getRemappedArchiveName(archiveName.substring(1));
-		if (remappedRelativePath != null) {
-			return findArchiveFile(remappedRelativePath);
-		}
-		return null;
-	}
+        while (true) {
+            if (!archiveName.endsWith(FileDataTypeManager.SUFFIX)) {
+                archiveName = archiveName + FileDataTypeManager.SUFFIX;
+            }
+            archiveName = archiveName.replace('\\', '/');
+            if (archiveName.indexOf(':') >= 0 || archiveName.charAt(0) == '/') {
+                return null;
+            }
+            if (archiveName.startsWith(RELATIVE_PATH_PREFIX)) {
+                archiveName = archiveName.substring(RELATIVE_PATH_PREFIX.length());
+            } else {
+                archiveName = "/" + archiveName; // ensure we match on whole path element name
+            }
+            // relative path starts with "/"
+            for (ResourceFile file : GHIDRA_ARCHIVES.values()) {
+                String path = file.getAbsolutePath().replace('\\', '/');
+                // NOTE: existence check added to facilitate testing
+                if (path.endsWith(archiveName) && file.exists()) {
+                    return file;
+                }
+            }
+            // Note: recursion could blow-out if circular archive re-mapping defined (maps should be defined properly)
+            String remappedRelativePath = getRemappedArchiveName(archiveName.substring(1));
+            if (remappedRelativePath != null) {
+                archiveName = remappedRelativePath;
+                continue;
+            }
+            return null;
+        }
+    }
 
 	/**
 	 * get a list of known applicable .GDT archives for the given program.

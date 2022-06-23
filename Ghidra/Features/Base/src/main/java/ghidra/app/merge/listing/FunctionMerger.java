@@ -1826,94 +1826,96 @@ class FunctionMerger extends AbstractFunctionMerger implements ListingMerger {
 	}
 
 	private boolean isEquivalent(Function function1, Function function2) {
-		if (function1 == function2) {
-			return true;
-		}
-		if (function1 == null || function2 == null) {
-			return false;
-		}
+        while (true) {
+            if (function1 == function2) {
+                return true;
+            }
+            if (function1 == null || function2 == null) {
+                return false;
+            }
 
-		if (!function1.getName().equals(function2.getName())) {
-			return false;
-		}
-		if (function1.isExternal()) {
-			if (!SystemUtilities.isEqual(function1.getExternalLocation(),
-				function2.getExternalLocation())) {
-				return false;
-			}
-		}
-		else if (function2.isExternal()) {
-			return false;
-		}
-		if (!function1.getEntryPoint().equals(function2.getEntryPoint())) {
-			return false;
-		}
+            if (!function1.getName().equals(function2.getName())) {
+                return false;
+            }
+            if (function1.isExternal()) {
+                if (!SystemUtilities.isEqual(function1.getExternalLocation(),
+                        function2.getExternalLocation())) {
+                    return false;
+                }
+            } else if (function2.isExternal()) {
+                return false;
+            }
+            if (!function1.getEntryPoint().equals(function2.getEntryPoint())) {
+                return false;
+            }
 
-		if (!SystemUtilities.isEqual(function1.getBody(), function2.getBody())) {
-			return false;
-		}
+            if (!SystemUtilities.isEqual(function1.getBody(), function2.getBody())) {
+                return false;
+            }
 
-		Function thunkedFunction1 = function1.getThunkedFunction(false);
-		Function thunkedFunction2 = function2.getThunkedFunction(false);
-		if (thunkedFunction1 != null) {
-			if (thunkedFunction2 == null) {
-				return false;
-			}
-			if (thunkedFunction1.isExternal() != thunkedFunction2.isExternal()) {
-				return false;
-			}
-			if (!thunkedFunction1.isExternal()) {
-				return thunkedFunction1.getEntryPoint().equals(thunkedFunction2.getEntryPoint());
-			}
-			return isEquivalent(thunkedFunction1, thunkedFunction2);
-		}
-		else if (thunkedFunction1 != null) {
-			return false;
-		}
+            Function thunkedFunction1 = function1.getThunkedFunction(false);
+            Function thunkedFunction2 = function2.getThunkedFunction(false);
+            if (thunkedFunction1 != null) {
+                if (thunkedFunction2 == null) {
+                    return false;
+                }
+                if (thunkedFunction1.isExternal() != thunkedFunction2.isExternal()) {
+                    return false;
+                }
+                if (!thunkedFunction1.isExternal()) {
+                    return thunkedFunction1.getEntryPoint().equals(thunkedFunction2.getEntryPoint());
+                }
+                function2 = thunkedFunction2;
+                function1 = thunkedFunction1;
+                continue;
+            } else if (thunkedFunction1 != null) {
+                return false;
+            }
 
-		// TODO: using isEquivelent seems bad
+            // TODO: using isEquivelent seems bad
 
-		Parameter returnParam1 = function1.getReturn();
-		Parameter returnParam2 = function2.getReturn();
-		if (!returnParam1.equals(returnParam2)) {
-			return false;
-		}
+            Parameter returnParam1 = function1.getReturn();
+            Parameter returnParam2 = function2.getReturn();
+            if (!returnParam1.equals(returnParam2)) {
+                return false;
+            }
 
-		if (function1.getStackPurgeSize() != function2.getStackPurgeSize()) {
-			return false;
-		}
-		if (function1.getStackFrame().getReturnAddressOffset() != function2.getStackFrame()
-				.getReturnAddressOffset()) {
-			return false;
-		}
-		if (!function1.getCallingConventionName().equals(function2.getCallingConventionName())) {
-			return false;
-		}
-		if (function1.hasVarArgs() != function2.hasVarArgs()) {
-			return false;
-		}
-		if (function1.isInline() != function2.isInline()) {
-			return false;
-		}
-		if (function1.hasNoReturn() != function2.hasNoReturn()) {
-			return false;
-		}
-		if (function1.hasCustomVariableStorage() != function2.hasCustomVariableStorage()) {
-			return false;
-		}
-		if (function1.getSignatureSource() != function2.getSignatureSource()) {
-			return false;
-		}
+            if (function1.getStackPurgeSize() != function2.getStackPurgeSize()) {
+                return false;
+            }
+            if (function1.getStackFrame().getReturnAddressOffset() != function2.getStackFrame()
+                    .getReturnAddressOffset()) {
+                return false;
+            }
+            if (!function1.getCallingConventionName().equals(function2.getCallingConventionName())) {
+                return false;
+            }
+            if (function1.hasVarArgs() != function2.hasVarArgs()) {
+                return false;
+            }
+            if (function1.isInline() != function2.isInline()) {
+                return false;
+            }
+            if (function1.hasNoReturn() != function2.hasNoReturn()) {
+                return false;
+            }
+            if (function1.hasCustomVariableStorage() != function2.hasCustomVariableStorage()) {
+                return false;
+            }
+            if (function1.getSignatureSource() != function2.getSignatureSource()) {
+                return false;
+            }
 
-		if (!VariableUtilities.equivalentVariableArrays(function1.getParameters(),
-			function2.getParameters())) {
-			return false;
-		}
-		if (!VariableUtilities.equivalentVariableArrays(function1.getLocalVariables(),
-			function2.getLocalVariables())) {
-			return false;
-		}
-		return true;
+            if (!VariableUtilities.equivalentVariableArrays(function1.getParameters(),
+                    function2.getParameters())) {
+                return false;
+            }
+            if (!VariableUtilities.equivalentVariableArrays(function1.getLocalVariables(),
+                    function2.getLocalVariables())) {
+                return false;
+            }
+            return true;
 
-	}
+        }
+    }
 }

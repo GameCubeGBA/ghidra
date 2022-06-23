@@ -524,11 +524,15 @@ public class DefaultCompositeMember extends CompositeMember {
 	}
 
 	private String getOutermostDataTypeName() {
-		if (parent != null) {
-			return parent.getOutermostDataTypeName();
-		}
-		return getDataTypeName();
-	}
+        DefaultCompositeMember other = this;
+        while (true) {
+            if (other.parent != null) {
+                other = other.parent;
+                continue;
+            }
+            return other.getDataTypeName();
+        }
+    }
 
 	private boolean transformIntoUnionContainer() {
 
@@ -812,111 +816,111 @@ public class DefaultCompositeMember extends CompositeMember {
 	}
 
 	private boolean addStructureMember(DefaultCompositeMember member) {
-		try {
-			// check for conflict within structure container deferred  
-			int conflictOffset = structureMemberRangeMap.getValue(member.memberOffset);
-			if (conflictOffset < 0) {
+        DefaultCompositeMember other = this;
+        while (true) {
+            try {
+                // check for conflict within structure container deferred
+                int conflictOffset = other.structureMemberRangeMap.getValue(member.memberOffset);
+                if (conflictOffset < 0) {
 
-				DefaultCompositeMember deferredBitFieldMember = null;
+                    DefaultCompositeMember deferredBitFieldMember = null;
 
-				if (member.isBitFieldMember()) {
+                    if (member.isBitFieldMember()) {
 
-					PdbBitField bitfieldDt = (PdbBitField) member.memberDataType;
+                        PdbBitField bitfieldDt = (PdbBitField) member.memberDataType;
 
-					int bitOffset = bitfieldDt.getBitOffsetWithinBase();
-					DefaultCompositeMember padding = getPaddingBitField(null, member);
-					if (padding != null) {
-						deferredBitFieldMember = member;
-						member = padding;
-						bitfieldDt = (PdbBitField) member.memberDataType;
-						bitOffset = bitfieldDt.getBitOffsetWithinBase();
-					}
-					else if (bitOffset < 0) {
-						// TODO: assumes little-endian, add support for big-endian
-						bitOffset = 0;
-					}
-					insertMinimalStructureBitfield((Structure) memberDataType, member.memberOffset,
-						member.getName(), bitfieldDt, member.getMemberComment());
-				}
-				else {
-					((Structure) memberDataType).insertAtOffset(member.memberOffset,
-						member.memberDataType, member.getLength(), member.memberName,
-						member.getMemberComment());
-				}
+                        int bitOffset = bitfieldDt.getBitOffsetWithinBase();
+                        DefaultCompositeMember padding = other.getPaddingBitField(null, member);
+                        if (padding != null) {
+                            deferredBitFieldMember = member;
+                            member = padding;
+                            bitfieldDt = (PdbBitField) member.memberDataType;
+                            bitOffset = bitfieldDt.getBitOffsetWithinBase();
+                        } else if (bitOffset < 0) {
+                            // TODO: assumes little-endian, add support for big-endian
+                            bitOffset = 0;
+                        }
+                        other.insertMinimalStructureBitfield((Structure) memberDataType, member.memberOffset,
+                                member.getName(), bitfieldDt, member.getMemberComment());
+                    } else {
+                        ((Structure) other.memberDataType).insertAtOffset(member.memberOffset,
+                                member.memberDataType, member.getLength(), member.memberName,
+                                member.getMemberComment());
+                    }
 
-				member.parent = this;
-				structureMemberOffsetMap.put(member.memberOffset, member);
-				structureMemberRangeMap.paintRange(member.memberOffset,
-					member.memberOffset + member.getLength() - 1, member.memberOffset);
+                    member.parent = other;
+                    other.structureMemberOffsetMap.put(member.memberOffset, member);
+                    other.structureMemberRangeMap.paintRange(member.memberOffset,
+                            member.memberOffset + member.getLength() - 1, member.memberOffset);
 
-				if (deferredBitFieldMember != null) {
-					return addStructureMember(deferredBitFieldMember);
-				}
+                    if (deferredBitFieldMember != null) {
+                        member = deferredBitFieldMember;
+                        continue;
+                    }
 
-				if (parent != null) {
-					parent.sizeChanged(this);
-				}
+                    if (other.parent != null) {
+                        other.parent.sizeChanged(other);
+                    }
 
-				return true;
-			}
+                    return true;
+                }
 
-			CompositeMember conflictMember = structureMemberOffsetMap.get(conflictOffset);
+                CompositeMember conflictMember = other.structureMemberOffsetMap.get(conflictOffset);
 
-			if (isRelatedBitField(conflictOffset, member)) {
+                if (other.isRelatedBitField(conflictOffset, member)) {
 
-				BitFieldGroupCompositeMember bfGroup;
-				if (conflictMember instanceof BitFieldGroupCompositeMember) {
-					bfGroup = (BitFieldGroupCompositeMember) conflictMember;
-				}
-				else {
-					bfGroup = new BitFieldGroupCompositeMember();
-					bfGroup.addToGroup(conflictMember);
-					structureMemberOffsetMap.put(bfGroup.getOffset(), bfGroup);
-				}
+                    BitFieldGroupCompositeMember bfGroup;
+                    if (conflictMember instanceof BitFieldGroupCompositeMember) {
+                        bfGroup = (BitFieldGroupCompositeMember) conflictMember;
+                    } else {
+                        bfGroup = new BitFieldGroupCompositeMember();
+                        bfGroup.addToGroup(conflictMember);
+                        other.structureMemberOffsetMap.put(bfGroup.getOffset(), bfGroup);
+                    }
 
-				DefaultCompositeMember deferredBitFieldMember = null;
+                    DefaultCompositeMember deferredBitFieldMember = null;
 
-				PdbBitField bitfieldDt = (PdbBitField) member.memberDataType;
+                    PdbBitField bitfieldDt = (PdbBitField) member.memberDataType;
 
-				int bitOffset = bitfieldDt.getBitOffsetWithinBase();
-				DefaultCompositeMember padding = getPaddingBitField(bfGroup, member);
-				if (padding != null) {
-					deferredBitFieldMember = member;
-					member = padding;
-					bitfieldDt = (PdbBitField) member.memberDataType;
-					bitOffset = bitfieldDt.getBitOffsetWithinBase();
-				}
-				else if (bitOffset < 0) {
-					// TODO: assumes little-endian, add support for big-endian
-					bitOffset = bfGroup.getConsumedBits();
-				}
+                    int bitOffset = bitfieldDt.getBitOffsetWithinBase();
+                    DefaultCompositeMember padding = other.getPaddingBitField(bfGroup, member);
+                    if (padding != null) {
+                        deferredBitFieldMember = member;
+                        member = padding;
+                        bitfieldDt = (PdbBitField) member.memberDataType;
+                        bitOffset = bitfieldDt.getBitOffsetWithinBase();
+                    } else if (bitOffset < 0) {
+                        // TODO: assumes little-endian, add support for big-endian
+                        bitOffset = bfGroup.getConsumedBits();
+                    }
 
-				// Error if member and conflict member do not have same offset and type length.
-				// This assumes bit-field packing does not mix type size together as does gcc
-				bfGroup.addToGroup(member);
+                    // Error if member and conflict member do not have same offset and type length.
+                    // This assumes bit-field packing does not mix type size together as does gcc
+                    bfGroup.addToGroup(member);
 
-				insertMinimalStructureBitfield((Structure) memberDataType, member.memberOffset,
-					member.getName(), bitfieldDt, member.getMemberComment());
+                    other.insertMinimalStructureBitfield((Structure) memberDataType, member.memberOffset,
+                            member.getName(), bitfieldDt, member.getMemberComment());
 
-				member.parent = this;
+                    member.parent = other;
 
-				if (deferredBitFieldMember != null) {
-					return addStructureMember(deferredBitFieldMember);
-				}
+                    if (deferredBitFieldMember != null) {
+                        member = deferredBitFieldMember;
+                        continue;
+                    }
 
-				return true;
-			}
+                    return true;
+                }
 
-			// adjust this member's offset for addition to container
-			member.setOffset(member.getOffset() - conflictMember.getOffset());
+                // adjust this member's offset for addition to container
+                member.setOffset(member.getOffset() - conflictMember.getOffset());
 
-			return conflictMember.addMember(member);
-		}
-		catch (InvalidDataTypeException e) {
-			Msg.error(this, "PDB failed to add bitfield: " + e.getMessage());
-			return false;
-		}
-	}
+                return conflictMember.addMember(member);
+            } catch (InvalidDataTypeException e) {
+                Msg.error(other, "PDB failed to add bitfield: " + e.getMessage());
+                return false;
+            }
+        }
+    }
 
 	private boolean addUnionMember(DefaultCompositeMember member) {
 

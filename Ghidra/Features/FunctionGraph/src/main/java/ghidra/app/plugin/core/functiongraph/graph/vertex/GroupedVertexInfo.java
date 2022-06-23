@@ -118,12 +118,15 @@ class GroupedVertexInfo extends VertexInfo {
 	}
 
 	private String encodeColor(Color color) {
-		if (color == null) {
-			return encodeColor(FunctionGraphOptions.DEFAULT_GROUP_BACKGROUND_COLOR);
-		}
-		return color.getRed() + "," + color.getGreen() + "," + color.getBlue() + "," +
-			color.getAlpha();
-	}
+        while (true) {
+            if (color == null) {
+                color = FunctionGraphOptions.DEFAULT_GROUP_BACKGROUND_COLOR;
+                continue;
+            }
+            return color.getRed() + "," + color.getGreen() + "," + color.getBlue() + "," +
+                    color.getAlpha();
+        }
+    }
 
 	@Override
 	Element toXML() {

@@ -419,22 +419,25 @@ public class WindowUtilities {
 
 	private static Dialog findYoungestChildDialogOfParentDialog(Dialog parentDialog,
 			List<Dialog> openModalDialogs) {
+        findYoungestChildDialogOfParentDialog:
+        while (true) {
 
-		if (parentDialog == null) {
-			return null;
-		}
+            if (parentDialog == null) {
+                return null;
+            }
 
-		for (Dialog potentialChildDialog : openModalDialogs) {
-			if (parentDialog == potentialChildDialog) {
-				continue;
-			}
-			if (SwingUtilities.isDescendingFrom(potentialChildDialog, parentDialog)) {
-				return findYoungestChildDialogOfParentDialog(potentialChildDialog,
-					openModalDialogs);
-			}
-		}
-		return parentDialog;
-	}
+            for (Dialog potentialChildDialog : openModalDialogs) {
+                if (parentDialog == potentialChildDialog) {
+                    continue;
+                }
+                if (SwingUtilities.isDescendingFrom(potentialChildDialog, parentDialog)) {
+                    parentDialog = potentialChildDialog;
+                    continue findYoungestChildDialogOfParentDialog;
+                }
+            }
+            return parentDialog;
+        }
+    }
 
 	private static Dialog pickAModalDialog(List<Dialog> openModalDialogs) {
 		// We can just guess here.  We shall use the last one in the list, as usually the most

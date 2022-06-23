@@ -312,47 +312,50 @@ abstract class LongKeyRecordNode extends LongKeyNode implements RecordNode {
 	 * @throws IOException thrown if IO error occurs
 	 */
 	LongKeyNode putRecord(DBRecord record, Table table) throws IOException {
+        LongKeyRecordNode other = this;
+        while (true) {
 
-		long key = record.getKey();
-		int index = getKeyIndex(key);
+            long key = record.getKey();
+            int index = other.getKeyIndex(key);
 
-		// Handle record update case
-		if (index >= 0) {
-			if (table != null) {
-				// update index tables associated with table
-				table.updatedRecord(getRecord(table.getSchema(), index), record);
-			}
-			LongKeyNode newRoot = updateRecord(index, record);
-			return newRoot;
-		}
+            // Handle record update case
+            if (index >= 0) {
+                if (table != null) {
+                    // update index tables associated with table
+                    table.updatedRecord(other.getRecord(table.getSchema(), index), record);
+                }
+                LongKeyNode newRoot = other.updateRecord(index, record);
+                return newRoot;
+            }
 
-		// Handle new record - see if we have room in this leaf
-		index = -index - 1;
-		if (insertRecord(index, record)) {
-			if (index == 0 && parent != null) {
-				parent.keyChanged(getKey(1), key);
-			}
-			if (table != null) {
-				// update index tables associated with table
-				table.insertedRecord(record);
-			}
-			return getRoot();
-		}
+            // Handle new record - see if we have room in this leaf
+            index = -index - 1;
+            if (other.insertRecord(index, record)) {
+                if (index == 0 && other.parent != null) {
+                    other.parent.keyChanged(other.getKey(1), key);
+                }
+                if (table != null) {
+                    // update index tables associated with table
+                    table.insertedRecord(record);
+                }
+                return other.getRoot();
+            }
 
-		// Special Case - append new leaf to right
-		if (index == keyCount) {
-			LongKeyNode newRoot = appendNewLeaf(record);
-			if (table != null) {
-				// update index tables associated with table
-				table.insertedRecord(record);
-			}
-			return newRoot;
-		}
+            // Special Case - append new leaf to right
+            if (index == other.keyCount) {
+                LongKeyNode newRoot = other.appendNewLeaf(record);
+                if (table != null) {
+                    // update index tables associated with table
+                    table.insertedRecord(record);
+                }
+                return newRoot;
+            }
 
-		// Split leaf and complete insertion
-		LongKeyRecordNode leaf = split().getLeafNode(key);
-		return leaf.putRecord(record, table);
-	}
+            // Split leaf and complete insertion
+            LongKeyRecordNode leaf = other.split().getLeafNode(key);
+            other = leaf;
+        }
+    }
 
 	/**
 	 * Append a new leaf and insert the specified record.

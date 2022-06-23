@@ -61,41 +61,45 @@ public class AnnotatedSchemaContext extends DefaultSchemaContext {
 	}
 
 	static Stream<Class<?>> resolveUpperBounds(Class<? extends TargetObject> cls, Type type) {
-		if (type == null) {
-			return Stream.empty();
-		}
-		if (type instanceof Class<?>) {
-			return Stream.of((Class<?>) type);
-		}
-		if (type instanceof ParameterizedType) {
-			ParameterizedType pt = (ParameterizedType) type;
-			return resolveUpperBounds(cls, pt.getRawType());
-		}
-		if (type instanceof WildcardType) {
-			WildcardType wt = (WildcardType) type;
-			return Stream.of(TypeUtils.getImplicitUpperBounds(wt))
-					.flatMap(t -> resolveUpperBounds(cls, t));
-		}
-		if (type instanceof TypeVariable) {
-			TypeVariable<?> tv = (TypeVariable<?>) type;
-			Object decl = tv.getGenericDeclaration();
-			if (decl instanceof Class<?>) {
-				Class<?> declCls = (Class<?>) decl;
-				Map<TypeVariable<?>, Type> args = TypeUtils.getTypeArguments(cls, declCls);
-				Type argTv = args.get(tv);
-				if (argTv != null) {
-					return resolveUpperBounds(cls, argTv);
-				}
-			}
-			return Stream.of(TypeUtils.getImplicitBounds(tv))
-					.flatMap(t -> resolveUpperBounds(cls, t));
-		}
-		/**
-		 * NB. This method is always called with a type taken from "T extends TargetObject" So, an
-		 * array should never be possible.
-		 */
-		throw new AssertionError("Cannot handle type: " + type);
-	}
+        while (true) {
+            if (type == null) {
+                return Stream.empty();
+            }
+            if (type instanceof Class<?>) {
+                return Stream.of((Class<?>) type);
+            }
+            if (type instanceof ParameterizedType) {
+                ParameterizedType pt = (ParameterizedType) type;
+                type = pt.getRawType();
+                continue;
+            }
+            if (type instanceof WildcardType) {
+                WildcardType wt = (WildcardType) type;
+                return Stream.of(TypeUtils.getImplicitUpperBounds(wt))
+                        .flatMap(t -> resolveUpperBounds(cls, t));
+            }
+            if (type instanceof TypeVariable) {
+                TypeVariable<?> tv = (TypeVariable<?>) type;
+                Object decl = tv.getGenericDeclaration();
+                if (decl instanceof Class<?>) {
+                    Class<?> declCls = (Class<?>) decl;
+                    Map<TypeVariable<?>, Type> args = TypeUtils.getTypeArguments(cls, declCls);
+                    Type argTv = args.get(tv);
+                    if (argTv != null) {
+                        type = argTv;
+                        continue;
+                    }
+                }
+                return Stream.of(TypeUtils.getImplicitBounds(tv))
+                        .flatMap(t -> resolveUpperBounds(cls, t));
+            }
+            /**
+             * NB. This method is always called with a type taken from "T extends TargetObject" So, an
+             * array should never be possible.
+             */
+            throw new AssertionError("Cannot handle type: " + type);
+        }
+    }
 
 	static Set<Class<? extends TargetObject>> getBoundsOfFetchElements(
 			Class<? extends TargetObject> cls) {

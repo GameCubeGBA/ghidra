@@ -157,20 +157,23 @@ class DetachedWindowNode extends WindowNode {
 	}
 
 	private Frame getFrameForWindow(Window coolWindow) {
-		if (coolWindow == null) {
-			return null;
-		}
-		if (coolWindow instanceof Frame) {
-			return (Frame) coolWindow;
-		}
+        while (true) {
+            if (coolWindow == null) {
+                return null;
+            }
+            if (coolWindow instanceof Frame) {
+                return (Frame) coolWindow;
+            }
 
-		Container windowParent = coolWindow.getParent();
-		if ((windowParent instanceof Window)) {
-			return getFrameForWindow((Window) windowParent);
-		}
+            Container windowParent = coolWindow.getParent();
+            if ((windowParent instanceof Window)) {
+                coolWindow = (Window) windowParent;
+                continue;
+            }
 
-		return null;
-	}
+            return null;
+        }
+    }
 
 	/**
 	 * Returns the root pane if window has been created, otherwise null

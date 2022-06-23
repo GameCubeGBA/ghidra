@@ -110,18 +110,19 @@ public class GnuDemanglerNativeProcess {
 	}
 
 	private String demangle(String mangled, boolean restart) throws IOException {
-		try {
-			return doDemangle(mangled);
-		}
-		catch (IOException e) {
-			dispose();
-			if (!restart) {
-				throw new IOException("Demangler process is not running.", e);
-			}
-			createProcess();
-			return demangle(mangled, false);
-		}
-	}
+        while (true) {
+            try {
+                return doDemangle(mangled);
+            } catch (IOException e) {
+                dispose();
+                if (!restart) {
+                    throw new IOException("Demangler process is not running.", e);
+                }
+                createProcess();
+                restart = false;
+            }
+        }
+    }
 
 	private String doDemangle(String mangled) throws IOException {
 		writer.println(mangled);

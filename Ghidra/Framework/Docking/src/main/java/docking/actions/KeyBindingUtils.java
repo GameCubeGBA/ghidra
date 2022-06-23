@@ -875,52 +875,56 @@ public class KeyBindingUtils {
 
 	// prompts the user for a file location from which to read key binding data
 	private static InputStream getInputStreamForFile(File startingDir) {
-		File selectedFile = getFileFromUser(startingDir);
+        while (true) {
+            File selectedFile = getFileFromUser(startingDir);
 
-		if (selectedFile == null) {
-			return null;
-		}
+            if (selectedFile == null) {
+                return null;
+            }
 
-		InputStream inputStream = null;
+            InputStream inputStream = null;
 
-		try {
-			inputStream = new BufferedInputStream(new FileInputStream(selectedFile));
-		}
-		catch (FileNotFoundException fnfe) {
-			// show warning and prompt again for the file chooser
-			Msg.showError(log, null, "File Not Found",
-				"Cannot find file " + selectedFile.getAbsolutePath(), fnfe);
+            try {
+                inputStream = new BufferedInputStream(new FileInputStream(selectedFile));
+            } catch (FileNotFoundException fnfe) {
+                // show warning and prompt again for the file chooser
+                Msg.showError(log, null, "File Not Found",
+                        "Cannot find file " + selectedFile.getAbsolutePath(), fnfe);
 
-			return getInputStreamForFile(selectedFile);
-		}
+                startingDir = selectedFile;
+                continue;
+            }
 
-		return inputStream;
-	}
+            return inputStream;
+        }
+    }
 
 	// prompts the user for a file location to which key binding data will
 	// be written
 	private static OutputStream getOutputStreamForFile(File startingDir) {
-		File selectedFile = getFileFromUser(startingDir);
+        while (true) {
+            File selectedFile = getFileFromUser(startingDir);
 
-		if (selectedFile == null) {
-			return null;
-		}
+            if (selectedFile == null) {
+                return null;
+            }
 
-		OutputStream outputStream = null;
+            OutputStream outputStream = null;
 
-		try {
-			outputStream = new BufferedOutputStream(new FileOutputStream(selectedFile));
-		}
-		catch (FileNotFoundException fnfe) {
-			// show warning and prompt again for the file chooser
-			Msg.showError(log, null, "File Not Found",
-				"Cannot find file " + selectedFile.getAbsolutePath(), fnfe);
+            try {
+                outputStream = new BufferedOutputStream(new FileOutputStream(selectedFile));
+            } catch (FileNotFoundException fnfe) {
+                // show warning and prompt again for the file chooser
+                Msg.showError(log, null, "File Not Found",
+                        "Cannot find file " + selectedFile.getAbsolutePath(), fnfe);
 
-			return getOutputStreamForFile(selectedFile);
-		}
+                startingDir = selectedFile;
+                continue;
+            }
 
-		return outputStream;
-	}
+            return outputStream;
+        }
+    }
 
 	private static File getStartingDir() {
 		String lastDirectoryPath = Preferences.getProperty(LAST_KEY_BINDING_EXPORT_DIRECTORY);

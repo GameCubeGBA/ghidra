@@ -217,16 +217,19 @@ public class ToolIconURL implements Comparable<ToolIconURL> {
 	}
 
 	private ImageIcon getImageIcon(String name) {
-		ImageIcon image = ResourceManager.loadImage(name);
-		ImageIcon defaultIcon = ResourceManager.getDefaultIcon();
-		if (image == defaultIcon) {
-			if (!name.startsWith("images")) {
-				return getImageIcon("images/" + name);
-			}
-			return null;
-		}
-		return image;
-	}
+        while (true) {
+            ImageIcon image = ResourceManager.loadImage(name);
+            ImageIcon defaultIcon = ResourceManager.getDefaultIcon();
+            if (image == defaultIcon) {
+                if (!name.startsWith("images")) {
+                    name = "images/" + name;
+                    continue;
+                }
+                return null;
+            }
+            return image;
+        }
+    }
 
 	/**
 	 * Returns true if the Icon is an animated image.

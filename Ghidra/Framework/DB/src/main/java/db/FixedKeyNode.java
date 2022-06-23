@@ -102,11 +102,15 @@ abstract class FixedKeyNode implements FieldKeyNode {
 	 * @return root node
 	 */
 	FixedKeyNode getRoot() {
-		if (parent != null) {
-			return parent.getRoot();
-		}
-		return this;
-	}
+        FixedKeyNode result = this;
+        while (true) {
+            if (result.parent != null) {
+                result = result.parent;
+                continue;
+            }
+            return result;
+        }
+    }
 
 	@Override
 	public int getKeyCount() {

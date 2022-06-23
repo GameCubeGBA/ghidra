@@ -70,11 +70,14 @@ public class PEUtil {
 	}
 
 	static DataType getActualType(DataType dataType) {
-		if (dataType instanceof TypeDef) {
-			return getActualType(((TypeDef) dataType).getDataType());
-		}
-		return dataType;
-	}
+        while (true) {
+            if (dataType instanceof TypeDef) {
+                dataType = ((TypeDef) dataType).getDataType();
+                continue;
+            }
+            return dataType;
+        }
+    }
 
 	static boolean isValidPointer(Program program, Address addr) {
 		Memory memory = program.getMemory();

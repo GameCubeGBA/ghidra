@@ -2540,71 +2540,75 @@ class ElfProgramBuilder extends MemorySectionResolver implements ElfLoadHelper {
 
 	@Override
 	public Address findLoadAddress(MemoryLoadable section, long byteOffsetWithinSection) {
+        while (true) {
 
-		if (section == null) {
-			return null;
-		}
+            if (section == null) {
+                return null;
+            }
 
-		List<AddressRange> resolvedLoadAddresses = getResolvedLoadAddresses(section);
-		if (resolvedLoadAddresses == null) {
+            List<AddressRange> resolvedLoadAddresses = getResolvedLoadAddresses(section);
+            if (resolvedLoadAddresses == null) {
 
-			// assume loaded segment/section superseded by PT_LOAD segment or allocated section
+                // assume loaded segment/section superseded by PT_LOAD segment or allocated section
 
 // TODO: Watch out for negative long addresses !!!!!!
 
-			if (section instanceof ElfProgramHeader) {
-				ElfProgramHeader programHeader = (ElfProgramHeader) section;
+                if (section instanceof ElfProgramHeader) {
+                    ElfProgramHeader programHeader = (ElfProgramHeader) section;
 // FIXME! Inconsistent in use of VirtualAddress which is generally an addressable word offset - not byte offset
-				long offsetAddr = programHeader.getVirtualAddress() + byteOffsetWithinSection;
+                    long offsetAddr = programHeader.getVirtualAddress() + byteOffsetWithinSection;
 
-				if (programHeader.getType() != ElfProgramHeaderConstants.PT_LOAD) {
-					// Check for PT_LOAD segment which may contain requested segment
-					ElfProgramHeader loadHeader = elf.getProgramLoadHeaderContaining(offsetAddr);
-					if (loadHeader != null) {
-						return findLoadAddress(loadHeader,
-							offsetAddr - loadHeader.getVirtualAddress());
-					}
-				}
+                    if (programHeader.getType() != ElfProgramHeaderConstants.PT_LOAD) {
+                        // Check for PT_LOAD segment which may contain requested segment
+                        ElfProgramHeader loadHeader = elf.getProgramLoadHeaderContaining(offsetAddr);
+                        if (loadHeader != null) {
+                            byteOffsetWithinSection = offsetAddr - loadHeader.getVirtualAddress();
+                            section = loadHeader;
+                            continue;
+                        }
+                    }
 
-				// PT_LOAD segment must have been superseded by section load
-				ElfSectionHeader sectionHeader = elf.getSectionLoadHeaderContaining(offsetAddr);
-				if (sectionHeader != null) {
-					return findLoadAddress(sectionHeader, offsetAddr - sectionHeader.getAddress());
-				}
-			}
-			else if (section instanceof ElfSectionHeader) {
-				ElfSectionHeader s = (ElfSectionHeader) section;
-				if (s.isAlloc()) {
-					return getSectionLoadAddress(s);
-				}
-			}
+                    // PT_LOAD segment must have been superseded by section load
+                    ElfSectionHeader sectionHeader = elf.getSectionLoadHeaderContaining(offsetAddr);
+                    if (sectionHeader != null) {
+                        byteOffsetWithinSection = offsetAddr - sectionHeader.getAddress();
+                        section = sectionHeader;
+                        continue;
+                    }
+                } else if (section instanceof ElfSectionHeader) {
+                    ElfSectionHeader s = (ElfSectionHeader) section;
+                    if (s.isAlloc()) {
+                        return getSectionLoadAddress(s);
+                    }
+                }
 
-			return null; // failed to locate
-		}
+                return null; // failed to locate
+            }
 
-		long offset = byteOffsetWithinSection; // track byte offset within section
-		AddressRange containingRange = null;
-		for (AddressRange range : resolvedLoadAddresses) {
-			long rangeLength = range.getLength();
-			if (offset < rangeLength) {
-				containingRange = range;
-				break;
-			}
-			offset -= rangeLength;
-		}
-		if (containingRange == null) {
-			if (!resolvedLoadAddresses.isEmpty()) {
-				// Not contained within loaded bytes - compute relative to block start.
-				// Always return non-overlay address
-				return resolvedLoadAddresses.get(0)
-						.getMinAddress()
-						.add(byteOffsetWithinSection)
-						.getPhysicalAddress();
-			}
-			return null;
-		}
-		return containingRange.getMinAddress().add(offset);
-	}
+            long offset = byteOffsetWithinSection; // track byte offset within section
+            AddressRange containingRange = null;
+            for (AddressRange range : resolvedLoadAddresses) {
+                long rangeLength = range.getLength();
+                if (offset < rangeLength) {
+                    containingRange = range;
+                    break;
+                }
+                offset -= rangeLength;
+            }
+            if (containingRange == null) {
+                if (!resolvedLoadAddresses.isEmpty()) {
+                    // Not contained within loaded bytes - compute relative to block start.
+                    // Always return non-overlay address
+                    return resolvedLoadAddresses.get(0)
+                            .getMinAddress()
+                            .add(byteOffsetWithinSection)
+                            .getPhysicalAddress();
+                }
+                return null;
+            }
+            return containingRange.getMinAddress().add(offset);
+        }
+    }
 
 	/**
 	 * Locate an Elf file header/structure within loaded memory based upon its file offset.

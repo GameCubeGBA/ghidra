@@ -1209,21 +1209,23 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 		}
 
 		protected String getCauseExceptionMessage(Throwable t) {
-			if (t == null) {
-				return "<No Exception Message>";
-			}
+            while (true) {
+                if (t == null) {
+                    return "<No Exception Message>";
+                }
 
-			if (t instanceof AssertionError) {
-				return t.getMessage();
-			}
+                if (t instanceof AssertionError) {
+                    return t.getMessage();
+                }
 
-			String message = t.getMessage();
-			if (message != null) {
-				return message;
-			}
+                String message = t.getMessage();
+                if (message != null) {
+                    return message;
+                }
 
-			return getCauseExceptionMessage(t.getCause());
-		}
+                t = t.getCause();
+            }
+        }
 
 		private void run() {
 

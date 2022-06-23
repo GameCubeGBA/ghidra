@@ -869,35 +869,39 @@ public abstract class AbstractDockingTest extends AbstractGenericTest {
 	 */
 	private static ComponentProvider getComponentProviderFromNode(Object node,
 			Class<? extends ComponentProvider> providerClass) {
-		Class<?> nodeClass = node.getClass();
-		String className = nodeClass.getName();
+		while (true) {
+			Class<?> nodeClass = node.getClass();
+			String className = nodeClass.getName();
 
-		if (className.indexOf("ComponentNode") != -1) {
-			List<ComponentPlaceholder> infoList = CollectionUtils.asList(
-				(List<?>) getInstanceField("windowPlaceholders", node), ComponentPlaceholder.class);
-			for (ComponentPlaceholder info : infoList) {
-				ComponentProvider provider = info.getProvider();
-				if ((provider != null) && providerClass.isAssignableFrom(provider.getClass())) {
-					return provider;
+			if (className.indexOf("ComponentNode") != -1) {
+				List<ComponentPlaceholder> infoList = CollectionUtils.asList(
+						(List<?>) getInstanceField("windowPlaceholders", node), ComponentPlaceholder.class);
+				for (ComponentPlaceholder info : infoList) {
+					ComponentProvider provider = info.getProvider();
+					if ((provider != null) && providerClass.isAssignableFrom(provider.getClass())) {
+						return provider;
+					}
 				}
-			}
-		}
-		else if (className.indexOf("WindowNode") != -1) {
-			Object childNode = getInstanceField("child", node);
-			return getComponentProviderFromNode(childNode, providerClass);// recurse
-		}
-		else if (className.indexOf("SplitNode") != -1) {
-			Object leftNode = getInstanceField("child1", node);
-			ComponentProvider leftProvider = getComponentProviderFromNode(leftNode, providerClass);// recurse
-			if (leftProvider != null) {
-				return leftProvider;
+			} else if (className.indexOf("WindowNode") != -1) {
+				Object childNode = getInstanceField("child", node);
+				// recurse
+				node = childNode;
+				continue;
+			} else if (className.indexOf("SplitNode") != -1) {
+				Object leftNode = getInstanceField("child1", node);
+				ComponentProvider leftProvider = getComponentProviderFromNode(leftNode, providerClass);// recurse
+				if (leftProvider != null) {
+					return leftProvider;
+				}
+
+				Object rightNode = getInstanceField("child2", node);
+				// recurse
+				node = rightNode;
+				continue;
 			}
 
-			Object rightNode = getInstanceField("child2", node);
-			return getComponentProviderFromNode(rightNode, providerClass);// recurse
+			return null;
 		}
-
-		return null;
 	}
 
 	/**

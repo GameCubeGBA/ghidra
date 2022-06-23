@@ -139,12 +139,15 @@ public class ProgramNode extends DefaultMutableTreeNode {
 	}
 
 	public JTree getTree() {
-		if (isRoot()) {
-			return tree;
-		}
-		ProgramNode root = (ProgramNode) getRoot();
-		return root.getTree();
-	}
+        ProgramNode other = this;
+        while (true) {
+            if (other.isRoot()) {
+                return other.tree;
+            }
+            ProgramNode root = (ProgramNode) other.getRoot();
+            other = root;
+        }
+    }
 
 	/**
 	 * Get the name for this node.

@@ -78,10 +78,15 @@ abstract class LongKeyNode implements BTreeNode {
 	 * @return root node
 	 */
 	LongKeyNode getRoot() {
-		if (parent != null)
-			return parent.getRoot();
-		return this;
-	}
+        LongKeyNode result = this;
+        while (true) {
+            if (result.parent != null) {
+                result = result.parent;
+                continue;
+            }
+            return result;
+        }
+    }
 
 	@Override
 	public int getKeyCount() {

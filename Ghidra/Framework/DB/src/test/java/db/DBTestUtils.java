@@ -273,27 +273,27 @@ public class DBTestUtils {
 	 */
 	static DBRecord createLongKeyRecord(Table table, boolean randomKey, int varDataSize,
 			boolean doInsert) throws IOException, DuplicateKeyException {
-		long key;
-		if (randomKey) {
-			key = random.nextLong();
-		}
-		else {
-			key = table.getMaxKey() + 1;
-		}
-		try {
-			DBRecord rec = createRecord(table, key, varDataSize, doInsert);
-			if (!randomKey) {
-				Assert.assertEquals(rec.getKey(), table.getMaxKey());
-			}
-			return rec;
-		}
-		catch (DuplicateKeyException dke) {
-			if (randomKey) {
-				return createLongKeyRecord(table, randomKey, varDataSize, doInsert);
-			}
-			throw dke;
-		}
-	}
+        while (true) {
+            long key;
+            if (randomKey) {
+                key = random.nextLong();
+            } else {
+                key = table.getMaxKey() + 1;
+            }
+            try {
+                DBRecord rec = createRecord(table, key, varDataSize, doInsert);
+                if (!randomKey) {
+                    Assert.assertEquals(rec.getKey(), table.getMaxKey());
+                }
+                return rec;
+            } catch (DuplicateKeyException dke) {
+                if (randomKey) {
+                    continue;
+                }
+                throw dke;
+            }
+        }
+    }
 
 	/**
 	 * Create a new random-FixedField-keyed record.
@@ -306,21 +306,22 @@ public class DBTestUtils {
 	 */
 	static DBRecord createFixedKeyRecord(Table table, int varDataSize, boolean doInsert)
 			throws IOException, DuplicateKeyException {
-		int keyLength = 10;
-		byte[] bytes = new byte[keyLength];
-		random.nextBytes(bytes);
-		Field key = fixedKeyType.newField();
-		key.setBinaryData(bytes);
+        while (true) {
+            int keyLength = 10;
+            byte[] bytes = new byte[keyLength];
+            random.nextBytes(bytes);
+            Field key = fixedKeyType.newField();
+            key.setBinaryData(bytes);
 
-		try {
-			DBRecord rec = createRecord(table, key, varDataSize, doInsert);
-			Assert.assertEquals(key, rec.getKeyField());
-			return rec;
-		}
-		catch (DuplicateKeyException dke) {
-			return createFixedKeyRecord(table, varDataSize, doInsert);
-		}
-	}
+            try {
+                DBRecord rec = createRecord(table, key, varDataSize, doInsert);
+                Assert.assertEquals(key, rec.getKeyField());
+                return rec;
+            } catch (DuplicateKeyException dke) {
+
+            }
+        }
+    }
 
 	/**
 	 * Create a new random-BinaryField-keyed record.
@@ -334,22 +335,23 @@ public class DBTestUtils {
 	 */
 	static DBRecord createBinaryKeyRecord(Table table, int maxKeyLength, int varDataSize,
 			boolean doInsert) throws IOException, DuplicateKeyException {
-		int keyLength =
-			(maxKeyLength < 0) ? -maxKeyLength : DBTestUtils.getRandomKeyLength(maxKeyLength);
-		byte[] bytes = new byte[keyLength];
-		random.nextBytes(bytes);
-		Field key = varKeyType.newField();
-		key.setBinaryData(bytes);
+        while (true) {
+            int keyLength =
+                    (maxKeyLength < 0) ? -maxKeyLength : DBTestUtils.getRandomKeyLength(maxKeyLength);
+            byte[] bytes = new byte[keyLength];
+            random.nextBytes(bytes);
+            Field key = varKeyType.newField();
+            key.setBinaryData(bytes);
 
-		try {
-			DBRecord rec = createRecord(table, key, varDataSize, doInsert);
-			Assert.assertEquals(key, rec.getKeyField());
-			return rec;
-		}
-		catch (DuplicateKeyException dke) {
-			return createBinaryKeyRecord(table, maxKeyLength, varDataSize, doInsert);
-		}
-	}
+            try {
+                DBRecord rec = createRecord(table, key, varDataSize, doInsert);
+                Assert.assertEquals(key, rec.getKeyField());
+                return rec;
+            } catch (DuplicateKeyException dke) {
+
+            }
+        }
+    }
 
 	/**
 	 * Create a new record.

@@ -326,15 +326,17 @@ public class ModuleUtilities {
 	 *         if the given file is not under a repo directory
 	 */
 	public static File findRepo(File f) {
-		if (f == null) {
-			return null;
-		}
-		File testGit = new File(f, ".git");
-		if (testGit.exists()) {
-			return f;
-		}
-		return findRepo(f.getParentFile());
-	}
+        while (true) {
+            if (f == null) {
+                return null;
+            }
+            File testGit = new File(f, ".git");
+            if (testGit.exists()) {
+                return f;
+            }
+            f = f.getParentFile();
+        }
+    }
 
 	/**
 	 * Checks to see if the given {@link GModule module} is external to the Ghidra installation

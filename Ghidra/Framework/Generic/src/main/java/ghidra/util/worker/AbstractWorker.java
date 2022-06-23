@@ -161,30 +161,33 @@ public abstract class AbstractWorker<T extends Job> {
 	}
 
 	private static <K> boolean canSquashException(Throwable t, boolean isCancelled) {
-		//
-		// We have a policy of ignoring DB closed exceptions when a task has already
-		// been cancelled, as this can happen when shutting down Ghidra.
-		//
-		if (!isCancelled) {
-			return false;
-		}
+        while (true) {
+            //
+            // We have a policy of ignoring DB closed exceptions when a task has already
+            // been cancelled, as this can happen when shutting down Ghidra.
+            //
+            if (!isCancelled) {
+                return false;
+            }
 
-		if (t instanceof CancelledException) {
-			return true;
-		}
+            if (t instanceof CancelledException) {
+                return true;
+            }
 
-		if (t instanceof ClosedException) {
-			return true;
-		}
+            if (t instanceof ClosedException) {
+                return true;
+            }
 
-		// sometimes ClosedExceptions are wrapped in RuntimeExceptions
-		Throwable cause = t.getCause();
-		if (cause != null) {
-			return canSquashException(cause, isCancelled);
-		}
+            // sometimes ClosedExceptions are wrapped in RuntimeExceptions
+            Throwable cause = t.getCause();
+            if (cause != null) {
+                t = cause;
+                continue;
+            }
 
-		return false;
-	}
+            return false;
+        }
+    }
 
 	/**
 	 * Schedules the job for execution.  Jobs will be processed in priority order.  The

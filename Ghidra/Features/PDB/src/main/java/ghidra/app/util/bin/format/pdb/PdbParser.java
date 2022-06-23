@@ -930,31 +930,36 @@ public class PdbParser {
 	 * "ioinfo * *"   "ioinfo[64] *"
 	 */
 	private boolean isEquivalent2(DataType datatype1, DataType datatype2) {
+        while (true) {
 
-		if (datatype1 == datatype2) {
-			return true;
-		}
+            if (datatype1 == datatype2) {
+                return true;
+            }
 
-		if (datatype1 == null || datatype2 == null) {
-			return false;
-		}
+            if (datatype1 == null || datatype2 == null) {
+                return false;
+            }
 
-		if (datatype1 instanceof Array) {
-			Array array1 = (Array) datatype1;
-			if (datatype2 instanceof Array) {
-				Array array2 = (Array) datatype2;
-				return isEquivalent2(array1.getDataType(), array2.getDataType());
-			}
-		}
-		else if (datatype1 instanceof Pointer) {
-			Pointer pointer1 = (Pointer) datatype1;
-			if (datatype2 instanceof Array) {
-				Array array2 = (Array) datatype2;
-				return isEquivalent2(pointer1.getDataType(), array2.getDataType());
-			}
-		}
-		return datatype1.isEquivalent(datatype2);
-	}
+            if (datatype1 instanceof Array) {
+                Array array1 = (Array) datatype1;
+                if (datatype2 instanceof Array) {
+                    Array array2 = (Array) datatype2;
+                    datatype2 = array2.getDataType();
+                    datatype1 = array1.getDataType();
+                    continue;
+                }
+            } else if (datatype1 instanceof Pointer) {
+                Pointer pointer1 = (Pointer) datatype1;
+                if (datatype2 instanceof Array) {
+                    Array array2 = (Array) datatype2;
+                    datatype2 = array2.getDataType();
+                    datatype1 = pointer1.getDataType();
+                    continue;
+                }
+            }
+            return datatype1.isEquivalent(datatype2);
+        }
+    }
 
 	boolean createSymbol(Address address, String symbolPathString, boolean forcePrimary,
 			MessageLog log) {

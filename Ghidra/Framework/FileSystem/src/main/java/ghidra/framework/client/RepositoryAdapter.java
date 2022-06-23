@@ -284,41 +284,43 @@ public class RepositoryAdapter implements RemoteAdapterListener {
 	 * @see ghidra.framework.remote.RemoteRepositoryHandle#getUser()
 	 */
 	public User getUser() throws IOException {
-		synchronized (serverAdapter) {
-			checkRepository();
-			try {
-				if (user == null) {
-					user = repository.getUser();
-				}
-				return user;
-			}
-			catch (NotConnectedException | RemoteException e) {
-				if (recoverConnection(e)) {
-					return getUser();
-				}
-				throw e;
-			}
-		}
-	}
+        while (true) {
+            synchronized (serverAdapter) {
+                checkRepository();
+                try {
+                    if (user == null) {
+                        user = repository.getUser();
+                    }
+                    return user;
+                } catch (NotConnectedException | RemoteException e) {
+                    if (recoverConnection(e)) {
+                        continue;
+                    }
+                    throw e;
+                }
+            }
+        }
+    }
 
 	/**
 	 * @return true if anonymous access allowed by this repository
 	 * @throws IOException
 	 */
 	public boolean anonymousAccessAllowed() throws IOException {
-		synchronized (serverAdapter) {
-			checkRepository();
-			try {
-				return repository.anonymousAccessAllowed();
-			}
-			catch (NotConnectedException | RemoteException e) {
-				if (recoverConnection(e)) {
-					return anonymousAccessAllowed();
-				}
-				throw e;
-			}
-		}
-	}
+        while (true) {
+            synchronized (serverAdapter) {
+                checkRepository();
+                try {
+                    return repository.anonymousAccessAllowed();
+                } catch (NotConnectedException | RemoteException e) {
+                    if (recoverConnection(e)) {
+                        continue;
+                    }
+                    throw e;
+                }
+            }
+        }
+    }
 
 	/**
 	 * Returns list of repository users.

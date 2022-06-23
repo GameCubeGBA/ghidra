@@ -577,23 +577,32 @@ class LongKeyInteriorNode extends LongKeyNode implements InteriorNode {
 	}
 
 	public boolean isLeftmostKey(long key) {
-		if (getIdIndex(key) == 0) {
-			if (parent != null) {
-				return parent.isLeftmostKey(key);
-			}
-			return true;
-		}
-		return false;
-	}
+        LongKeyInteriorNode other = this;
+        while (true) {
+            if (other.getIdIndex(key) == 0) {
+                if (other.parent != null) {
+                    other = other.parent;
+                    continue;
+                }
+                return true;
+            }
+            return false;
+        }
+    }
 
 	public boolean isRightmostKey(long key) {
-		if (getIdIndex(key) == (keyCount - 1)) {
-			if (parent != null) {
-				return parent.isRightmostKey(getKey(0));
-			}
-			return true;
-		}
-		return false;
-	}
+        LongKeyInteriorNode other = this;
+        while (true) {
+            if (other.getIdIndex(key) == (other.keyCount - 1)) {
+                if (other.parent != null) {
+                    key = getKey(0);
+                    other = other.parent;
+                    continue;
+                }
+                return true;
+            }
+            return false;
+        }
+    }
 
 }

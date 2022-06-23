@@ -588,23 +588,32 @@ class FixedKeyInteriorNode extends FixedKeyNode implements FieldKeyInteriorNode 
 	}
 
 	boolean isLeftmostKey(Field key) {
-		if (getIdIndex(key) == 0) {
-			if (parent != null) {
-				return parent.isLeftmostKey(key);
-			}
-			return true;
-		}
-		return false;
-	}
+        FixedKeyInteriorNode other = this;
+        while (true) {
+            if (other.getIdIndex(key) == 0) {
+                if (other.parent != null) {
+                    other = other.parent;
+                    continue;
+                }
+                return true;
+            }
+            return false;
+        }
+    }
 
 	boolean isRightmostKey(Field key) {
-		if (getIdIndex(key) == (keyCount - 1)) {
-			if (parent != null) {
-				return parent.isRightmostKey(getKeyField(0));
-			}
-			return true;
-		}
-		return false;
-	}
+        FixedKeyInteriorNode other = this;
+        while (true) {
+            if (other.getIdIndex(key) == (other.keyCount - 1)) {
+                if (other.parent != null) {
+                    key = getKeyField(0);
+                    other = other.parent;
+                    continue;
+                }
+                return true;
+            }
+            return false;
+        }
+    }
 
 }

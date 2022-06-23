@@ -2263,24 +2263,26 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 	}
 
 	private Address adjustStartForDelaySlot(Address addr) {
-		CodeUnit cu = getCodeUnitContaining(addr);
-		if (cu == null) {
-			return addr;
-		}
-		if (cu instanceof Instruction) {
-			Instruction instr = (Instruction) cu;
-			if (instr.isInDelaySlot()) {
-				try {
-					Address previousAddr = instr.getMinAddress().subtractNoWrap(1);
-					return adjustStartForDelaySlot(previousAddr);
-				}
-				catch (AddressOverflowException e) {
-					// ignore
-				}
-			}
-		}
-		return cu.getMinAddress();
-	}
+        while (true) {
+            CodeUnit cu = getCodeUnitContaining(addr);
+            if (cu == null) {
+                return addr;
+            }
+            if (cu instanceof Instruction) {
+                Instruction instr = (Instruction) cu;
+                if (instr.isInDelaySlot()) {
+                    try {
+                        Address previousAddr = instr.getMinAddress().subtractNoWrap(1);
+                        addr = previousAddr;
+                        continue;
+                    } catch (AddressOverflowException e) {
+                        // ignore
+                    }
+                }
+            }
+            return cu.getMinAddress();
+        }
+    }
 
 	private Address adjustEndForDelaySlot(Address addr) {
 		CodeUnit cu = getCodeUnitContaining(addr);

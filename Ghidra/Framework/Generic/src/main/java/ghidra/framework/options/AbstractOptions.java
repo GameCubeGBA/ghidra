@@ -212,24 +212,28 @@ public abstract class AbstractOptions implements Options {
 	}
 
 	public synchronized Option getOption(String optionName, OptionType type, Object defaultValue) {
-		validateOptionName(optionName);
-		if (aliasMap.containsKey(optionName)) {
-			AliasBinding binding = aliasMap.get(optionName);
-			return binding.options.getOption(binding.path, type, defaultValue);
-		}
-		Option option = valueMap.get(optionName);
-		if (option == null) {
-			option = createUnregisteredOption(optionName, type, defaultValue);
-			if (option.getOptionType() != OptionType.NO_TYPE) {
-				valueMap.put(optionName, option);
-			}
-		}
-		else if (type != OptionType.NO_TYPE && type != option.getOptionType()) {
-			throw new IllegalStateException(
-				"Expected option type: " + type + ", but was type: " + option.getOptionType());
-		}
-		return option;
-	}
+        AbstractOptions other = this;
+        while (true) {
+            other.validateOptionName(optionName);
+            if (other.aliasMap.containsKey(optionName)) {
+                AliasBinding binding = other.aliasMap.get(optionName);
+                optionName = binding.path;
+                other = binding.options;
+                continue;
+            }
+            Option option = other.valueMap.get(optionName);
+            if (option == null) {
+                option = other.createUnregisteredOption(optionName, type, defaultValue);
+                if (option.getOptionType() != OptionType.NO_TYPE) {
+                    other.valueMap.put(optionName, option);
+                }
+            } else if (type != OptionType.NO_TYPE && type != option.getOptionType()) {
+                throw new IllegalStateException(
+                        "Expected option type: " + type + ", but was type: " + option.getOptionType());
+            }
+            return option;
+        }
+    }
 
 	@Override
 	public void putObject(String optionName, Object newValue) {

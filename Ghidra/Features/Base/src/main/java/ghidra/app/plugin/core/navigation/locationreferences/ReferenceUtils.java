@@ -337,21 +337,24 @@ public final class ReferenceUtils {
 	 * @see #getBaseDataType(DataType)
 	 */
 	public static DataType getBaseDataType(DataType dataType, boolean includeTypedefs) {
-		if (dataType instanceof Array) {
-			return getBaseDataType(((Array) dataType).getDataType(), includeTypedefs);
-		}
-		else if (dataType instanceof Pointer) {
-			DataType baseDataType = ((Pointer) dataType).getDataType();
-			if (baseDataType != null) {
-				return getBaseDataType(baseDataType, includeTypedefs);
-			}
-		}
-		else if (includeTypedefs && dataType instanceof TypeDef) {
-			DataType baseDataType = ((TypeDef) dataType).getBaseDataType();
-			return getBaseDataType(baseDataType, includeTypedefs);
-		}
-		return dataType;
-	}
+        while (true) {
+            if (dataType instanceof Array) {
+                dataType = ((Array) dataType).getDataType();
+                continue;
+            } else if (dataType instanceof Pointer) {
+                DataType baseDataType = ((Pointer) dataType).getDataType();
+                if (baseDataType != null) {
+                    dataType = baseDataType;
+                    continue;
+                }
+            } else if (includeTypedefs && dataType instanceof TypeDef) {
+                DataType baseDataType = ((TypeDef) dataType).getBaseDataType();
+                dataType = baseDataType;
+                continue;
+            }
+            return dataType;
+        }
+    }
 
 	/**
 	 * Gets all variables for the given function including all parameters and local variables.
@@ -798,29 +801,33 @@ public final class ReferenceUtils {
 	 * field (the parent must be a Composite).
 	 */
 	private static DataType findLeafDataType(DataType parent, Stack<String> path) {
+        findLeafDataType:
+        while (true) {
 
-		DataType baseParent = getBaseDataType(parent, true);
-		if (path.isEmpty()) {
-			return baseParent; // this must be the one
-		}
+            DataType baseParent = getBaseDataType(parent, true);
+            if (path.isEmpty()) {
+                return baseParent; // this must be the one
+            }
 
-		if (!(baseParent instanceof Composite)) {
-			return null;
-		}
+            if (!(baseParent instanceof Composite)) {
+                return null;
+            }
 
-		Composite composite = (Composite) baseParent;
-		DataTypeComponent[] components = composite.getDefinedComponents();
-		String name = path.pop();
-		for (DataTypeComponent component : components) {
-			if (component.getFieldName().equals(name)) {
-				// found match--keep looking
-				DataType newParent = component.getDataType();
-				return findLeafDataType(newParent, path);
-			}
-		}
+            Composite composite = (Composite) baseParent;
+            DataTypeComponent[] components = composite.getDefinedComponents();
+            String name = path.pop();
+            for (DataTypeComponent component : components) {
+                if (component.getFieldName().equals(name)) {
+                    // found match--keep looking
+                    DataType newParent = component.getDataType();
+                    parent = newParent;
+                    continue findLeafDataType;
+                }
+            }
 
-		return null;
-	}
+            return null;
+        }
+    }
 
 	private static LocationDescriptor createOperandLocationDescriptor(
 			OperandFieldLocation location) {

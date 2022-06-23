@@ -44,15 +44,18 @@ public class DBTraceDefinedDataView extends AbstractBaseDBTraceDefinedUnitsView<
 	}
 
 	protected boolean isFunctionDefinition(DataType dt) {
-		if (dt instanceof FunctionDefinition) {
-			return true;
-		}
-		if (dt instanceof TypeDef) {
-			TypeDef typeDef = (TypeDef) dt;
-			return isFunctionDefinition(typeDef.getBaseDataType());
-		}
-		return false;
-	}
+        while (true) {
+            if (dt instanceof FunctionDefinition) {
+                return true;
+            }
+            if (dt instanceof TypeDef) {
+                TypeDef typeDef = (TypeDef) dt;
+                dt = typeDef.getBaseDataType();
+                continue;
+            }
+            return false;
+        }
+    }
 
 	@Override
 	// TODO: Probably add language parameter....

@@ -412,28 +412,33 @@ public class TraceSchedule implements Comparable<TraceSchedule> {
 	}
 
 	protected TraceSchedule doSteppedBackward(Trace trace, long tickCount, Set<Long> visited) {
-		if (!visited.add(snap)) {
-			return null;
-		}
-		long excess = tickCount - totalTickCount() - totalPatchCount();
-		if (excess > 0) {
-			if (trace == null) {
-				return null;
-			}
-			TraceSnapshot source = trace.getTimeManager().getSnapshot(snap, false);
-			if (source == null) {
-				return null;
-			}
-			TraceSchedule rec = source.getSchedule();
-			if (rec == null) {
-				return null;
-			}
-			return rec.doSteppedBackward(trace, excess, visited);
-		}
-		Sequence steps = this.steps.clone();
-		steps.rewind(tickCount);
-		return new TraceSchedule(snap, steps, new Sequence());
-	}
+        TraceSchedule result = this;
+        while (true) {
+            if (!visited.add(result.snap)) {
+                return null;
+            }
+            long excess = tickCount - result.totalTickCount() - result.totalPatchCount();
+            if (excess > 0) {
+                if (trace == null) {
+                    return null;
+                }
+                TraceSnapshot source = trace.getTimeManager().getSnapshot(result.snap, false);
+                if (source == null) {
+                    return null;
+                }
+                TraceSchedule rec = source.getSchedule();
+                if (rec == null) {
+                    return null;
+                }
+                tickCount = excess;
+                result = rec;
+                continue;
+            }
+            Sequence steps = result.steps.clone();
+            steps.rewind(tickCount);
+            return new TraceSchedule(result.snap, steps, new Sequence());
+        }
+    }
 
 	/**
 	 * Returns the equivalent of executing count instructions (and all p-code operations) less than

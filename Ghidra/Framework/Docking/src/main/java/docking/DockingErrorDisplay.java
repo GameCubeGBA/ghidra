@@ -185,14 +185,16 @@ public class DockingErrorDisplay implements ErrorDisplay {
 	}
 
 	private boolean containsMultipleCauses(Throwable throwable) {
-		if (throwable == null) {
-			return false;
-		}
+        while (true) {
+            if (throwable == null) {
+                return false;
+            }
 
-		if (throwable instanceof MultipleCauses) {
-			return true;
-		}
+            if (throwable instanceof MultipleCauses) {
+                return true;
+            }
 
-		return containsMultipleCauses(throwable.getCause());
-	}
+            throwable = throwable.getCause();
+        }
+    }
 }

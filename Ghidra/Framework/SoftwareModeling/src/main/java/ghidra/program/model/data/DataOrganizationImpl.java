@@ -471,44 +471,49 @@ public class DataOrganizationImpl implements DataOrganization {
 
 	@Override
 	public int getAlignment(DataType dataType) {
-		int dtSize = dataType.getLength();
-		if (dataType instanceof Dynamic || dataType instanceof FactoryDataType || dtSize <= 0) {
-			return 1;
-		}
-		// Typedef is aligned the same as its underlying data type is aligned.
-		if (dataType instanceof TypeDef) {
-			return getAlignment(((TypeDef) dataType).getBaseDataType());
-		}
-		// Array alignment is the alignment of its element data type.
-		if (dataType instanceof Array) {
-			DataType elementDt = ((Array) dataType).getDataType();
-			return getAlignment(elementDt);
-		}
-		// Structure's or Union's alignment is a multiple of the least common multiple of
-		// the components. It can also be adjusted by packing and alignment attributes.
-		if (dataType instanceof Composite) {
-			// IMPORTANT: composites are now responsible for computing their own alignment !!
-			return ((Composite) dataType).getAlignment();
-		}
-		// Bit field alignment must be determined within the context of the containing structure.
-		// See AlignedStructurePacker.
-		if (dataType instanceof BitFieldDataType) {
-			BitFieldDataType bitfieldDt = (BitFieldDataType) dataType;
-			return getAlignment(bitfieldDt.getBaseDataType());
-		}
-		// Otherwise get the alignment based on the size.
-		if (sizeAlignmentMap.containsKey(dtSize)) {
-			int sizeAlignment = sizeAlignmentMap.get(dtSize);
-			return ((absoluteMaxAlignment == 0) || (sizeAlignment < absoluteMaxAlignment))
-					? sizeAlignment
-					: absoluteMaxAlignment;
-		}
-		if (dataType instanceof Pointer) {
-			return getDefaultPointerAlignment();
-		}
-		// Otherwise just assume the default alignment.
-		return getDefaultAlignment();
-	}
+        while (true) {
+            int dtSize = dataType.getLength();
+            if (dataType instanceof Dynamic || dataType instanceof FactoryDataType || dtSize <= 0) {
+                return 1;
+            }
+            // Typedef is aligned the same as its underlying data type is aligned.
+            if (dataType instanceof TypeDef) {
+                dataType = ((TypeDef) dataType).getBaseDataType();
+                continue;
+            }
+            // Array alignment is the alignment of its element data type.
+            if (dataType instanceof Array) {
+                DataType elementDt = ((Array) dataType).getDataType();
+                dataType = elementDt;
+                continue;
+            }
+            // Structure's or Union's alignment is a multiple of the least common multiple of
+            // the components. It can also be adjusted by packing and alignment attributes.
+            if (dataType instanceof Composite) {
+                // IMPORTANT: composites are now responsible for computing their own alignment !!
+                return ((Composite) dataType).getAlignment();
+            }
+            // Bit field alignment must be determined within the context of the containing structure.
+            // See AlignedStructurePacker.
+            if (dataType instanceof BitFieldDataType) {
+                BitFieldDataType bitfieldDt = (BitFieldDataType) dataType;
+                dataType = bitfieldDt.getBaseDataType();
+                continue;
+            }
+            // Otherwise get the alignment based on the size.
+            if (sizeAlignmentMap.containsKey(dtSize)) {
+                int sizeAlignment = sizeAlignmentMap.get(dtSize);
+                return ((absoluteMaxAlignment == 0) || (sizeAlignment < absoluteMaxAlignment))
+                        ? sizeAlignment
+                        : absoluteMaxAlignment;
+            }
+            if (dataType instanceof Pointer) {
+                return getDefaultPointerAlignment();
+            }
+            // Otherwise just assume the default alignment.
+            return getDefaultAlignment();
+        }
+    }
 	
 	/**
 	 * Determines the first offset that is equal to or greater than the minimum offset which 

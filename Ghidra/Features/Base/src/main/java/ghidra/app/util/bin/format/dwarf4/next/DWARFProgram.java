@@ -296,109 +296,111 @@ public class DWARFProgram implements Closeable {
 	 * @return never null
 	 */
 	private DWARFNameInfo getDWARFNameInfo(DIEAggregate diea, DWARFNameInfo localRootDNI) {
+        while (true) {
 
-		DWARFNameInfo parentDNI = localRootDNI;
+            DWARFNameInfo parentDNI = localRootDNI;
 
-		DIEAggregate declParent = diea.getDeclParent();
-		if ((declParent != null) && declParent.getTag() != DWARFTag.DW_TAG_compile_unit) {
-			parentDNI = lookupDNIByOffset(declParent.getOffset());
-			if (parentDNI == null) {
-				parentDNI = getDWARFNameInfo(declParent, localRootDNI);
-				if (parentDNI != null) {
-					cacheDNIByOffset(declParent.getOffset(), parentDNI);
-				}
-			}
-		}
+            DIEAggregate declParent = diea.getDeclParent();
+            if ((declParent != null) && declParent.getTag() != DWARFTag.DW_TAG_compile_unit) {
+                parentDNI = lookupDNIByOffset(declParent.getOffset());
+                if (parentDNI == null) {
+                    parentDNI = getDWARFNameInfo(declParent, localRootDNI);
+                    if (parentDNI != null) {
+                        cacheDNIByOffset(declParent.getOffset(), parentDNI);
+                    }
+                }
+            }
 
-		String name = getEntryName(diea);
+            String name = getEntryName(diea);
 
-		// Mangled names can occur in linkage attributes or in the regular name attribute.
-		if (name != null && name.contains("_Z") /* mangler start seq */ && !name.startsWith(
-			"_GLOBAL_") /* compiler generated, don't demangle as they tend to conflict with existing names */) {
-			List<String> nestings = ensureSafeNameLengths(DWARFUtil.parseMangledNestings(name));
-			if (!nestings.isEmpty()) {
-				name = nestings.remove(nestings.size() - 1);
-				if (parentDNI == localRootDNI && !nestings.isEmpty()) {
-					parentDNI = DWARFNameInfo.fromList(localRootDNI, nestings);
-				}
-			}
-		}
+            // Mangled names can occur in linkage attributes or in the regular name attribute.
+            if (name != null && name.contains("_Z") /* mangler start seq */ && !name.startsWith(
+                    "_GLOBAL_") /* compiler generated, don't demangle as they tend to conflict with existing names */) {
+                List<String> nestings = ensureSafeNameLengths(DWARFUtil.parseMangledNestings(name));
+                if (!nestings.isEmpty()) {
+                    name = nestings.remove(nestings.size() - 1);
+                    if (parentDNI == localRootDNI && !nestings.isEmpty()) {
+                        parentDNI = DWARFNameInfo.fromList(localRootDNI, nestings);
+                    }
+                }
+            }
 
-		// If namespace info got squashed due to compiler/linker flags, try to
-		// dig it up from the mangled linkage info that might be present in our children.
-		if (localRootDNI.equals(parentDNI)) {
-			List<String> nestings = DWARFUtil.findLinkageNameInChildren(diea.getHeadFragment());
-			if (!nestings.isEmpty()) {
-				nestings.remove(nestings.size() - 1);
-				parentDNI = DWARFNameInfo.fromList(localRootDNI, nestings);
-			}
-		}
+            // If namespace info got squashed due to compiler/linker flags, try to
+            // dig it up from the mangled linkage info that might be present in our children.
+            if (localRootDNI.equals(parentDNI)) {
+                List<String> nestings = DWARFUtil.findLinkageNameInChildren(diea.getHeadFragment());
+                if (!nestings.isEmpty()) {
+                    nestings.remove(nestings.size() - 1);
+                    parentDNI = DWARFNameInfo.fromList(localRootDNI, nestings);
+                }
+            }
 
-		if (name == null) {
-			// check to see if there is a single inbound typedef that we can
-			// steal its name.
-			DIEAggregate referringTypedef = DWARFUtil.getReferringTypedef(diea);
-			if (referringTypedef != null) {
-				return getDWARFNameInfo(referringTypedef, localRootDNI);
-			}
-		}
+            if (name == null) {
+                // check to see if there is a single inbound typedef that we can
+                // steal its name.
+                DIEAggregate referringTypedef = DWARFUtil.getReferringTypedef(diea);
+                if (referringTypedef != null) {
+                    diea = referringTypedef;
+                    continue;
+                }
+            }
 
-		boolean isAnon = false;
-		if (name == null) {
-			switch (diea.getTag()) {
-				case DWARFTag.DW_TAG_base_type:
-					name = getAnonBaseTypeName(diea);
-					isAnon = true;
-					break;
-				case DWARFTag.DW_TAG_enumeration_type:
-					name = getAnonEnumName(diea);
-					isAnon = true;
-					break;
-				case DWARFTag.DW_TAG_subroutine_type:
-					// unnamed subroutines (C func ptrs)
-					// See {@link #isAnonSubroutine(DataType)}
-					name = "anon_subr";
-					isAnon = true;
-					break;
-				case DWARFTag.DW_TAG_lexical_block:
-					name = DWARFUtil.getLexicalBlockName(diea);
-					break;
-				case DWARFTag.DW_TAG_formal_parameter:
-					name = "param_" + DWARFUtil.getMyPositionInParent(diea.getHeadFragment());
-					isAnon = true;
-					break;
-				case DWARFTag.DW_TAG_subprogram:
-				case DWARFTag.DW_TAG_inlined_subroutine:
-					if (declParent != null && declParent.isStructureType() &&
-						diea.getBool(DWARFAttribute.DW_AT_artificial, false)) {
-						name = parentDNI.getName();
-					}
-					else {
-						name = "anon_func";
-						isAnon = true;
-					}
-					break;
-				default:
-					if (declParent != null && declParent.isNameSpaceContainer()) {
-						name = DWARFUtil.getAnonNameForMeFromParentContext2(diea);
-					}
-					break;
-			}
-		}
+            boolean isAnon = false;
+            if (name == null) {
+                switch (diea.getTag()) {
+                    case DWARFTag.DW_TAG_base_type:
+                        name = getAnonBaseTypeName(diea);
+                        isAnon = true;
+                        break;
+                    case DWARFTag.DW_TAG_enumeration_type:
+                        name = getAnonEnumName(diea);
+                        isAnon = true;
+                        break;
+                    case DWARFTag.DW_TAG_subroutine_type:
+                        // unnamed subroutines (C func ptrs)
+                        // See {@link #isAnonSubroutine(DataType)}
+                        name = "anon_subr";
+                        isAnon = true;
+                        break;
+                    case DWARFTag.DW_TAG_lexical_block:
+                        name = DWARFUtil.getLexicalBlockName(diea);
+                        break;
+                    case DWARFTag.DW_TAG_formal_parameter:
+                        name = "param_" + DWARFUtil.getMyPositionInParent(diea.getHeadFragment());
+                        isAnon = true;
+                        break;
+                    case DWARFTag.DW_TAG_subprogram:
+                    case DWARFTag.DW_TAG_inlined_subroutine:
+                        if (declParent != null && declParent.isStructureType() &&
+                                diea.getBool(DWARFAttribute.DW_AT_artificial, false)) {
+                            name = parentDNI.getName();
+                        } else {
+                            name = "anon_func";
+                            isAnon = true;
+                        }
+                        break;
+                    default:
+                        if (declParent != null && declParent.isNameSpaceContainer()) {
+                            name = DWARFUtil.getAnonNameForMeFromParentContext2(diea);
+                        }
+                        break;
+                }
+            }
 
-		// Name was not found
-		if (isAnonDWARFName(name)) {
-			name = createAnonName("anon_" + DWARFUtil.getContainerTypeName(diea), diea);
-			isAnon = true;
-		}
+            // Name was not found
+            if (isAnonDWARFName(name)) {
+                name = createAnonName("anon_" + DWARFUtil.getContainerTypeName(diea), diea);
+                isAnon = true;
+            }
 
-		String origName = isAnon ? null : name;
-		String workingName = ensureSafeNameLength(name);
+            String origName = isAnon ? null : name;
+            String workingName = ensureSafeNameLength(name);
 
-		DWARFNameInfo result =
-			parentDNI.createChild(origName, workingName, DWARFUtil.getSymbolTypeFromDIE(diea));
-		return result;
-	}
+            DWARFNameInfo result =
+                    parentDNI.createChild(origName, workingName, DWARFUtil.getSymbolTypeFromDIE(diea));
+            return result;
+        }
+    }
 
 	private String getAnonBaseTypeName(DIEAggregate diea) {
 		try {

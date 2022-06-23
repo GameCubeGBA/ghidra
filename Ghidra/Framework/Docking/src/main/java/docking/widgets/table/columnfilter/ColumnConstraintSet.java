@@ -226,16 +226,18 @@ public class ColumnConstraintSet<R, T> {
 	 * @return true if this is a String constraint or something that is converted to a string constraint.
 	 */
 	private static boolean isStringBasedConstraint(ColumnConstraint<?> constraint) {
+        while (true) {
 
-		if (constraint instanceof MappedColumnConstraint) {
+            if (constraint instanceof MappedColumnConstraint) {
 
-			constraint = ((MappedColumnConstraint<?, ?>) constraint).getDelegate();
+                constraint = ((MappedColumnConstraint<?, ?>) constraint).getDelegate();
 
-			return isStringBasedConstraint(constraint);
-		}
+                continue;
+            }
 
-		return constraint.getColumnType().equals(String.class);
-	}
+            return constraint.getColumnType().equals(String.class);
+        }
+    }
 
 	@Override
 	public int hashCode() {

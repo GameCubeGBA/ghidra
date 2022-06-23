@@ -204,42 +204,44 @@ public class DecompilerScriptUtils {
 	}
 
 	public Address getAssignedAddressFromPcode(Varnode storedValue) {
+        while (true) {
 
-		long addressOffset;
-		if (storedValue.isConstant()) {
-			addressOffset = storedValue.getOffset();
-			Address possibleAddress = toAddr(addressOffset);
-			if (possibleAddress == null || !program.getMemory().contains(possibleAddress)) {
-				return null;
-			}
-			return possibleAddress;
-		}
+            long addressOffset;
+            if (storedValue.isConstant()) {
+                addressOffset = storedValue.getOffset();
+                Address possibleAddress = toAddr(addressOffset);
+                if (possibleAddress == null || !program.getMemory().contains(possibleAddress)) {
+                    return null;
+                }
+                return possibleAddress;
+            }
 
-		PcodeOp valuePcodeOp = storedValue.getDef();
+            PcodeOp valuePcodeOp = storedValue.getDef();
 
-		if (valuePcodeOp == null) {
-			return null;
-		}
+            if (valuePcodeOp == null) {
+                return null;
+            }
 
-		if (valuePcodeOp.getOpcode() == PcodeOp.CAST || valuePcodeOp.getOpcode() == PcodeOp.COPY) {
+            if (valuePcodeOp.getOpcode() == PcodeOp.CAST || valuePcodeOp.getOpcode() == PcodeOp.COPY) {
 
-			Varnode constantVarnode = valuePcodeOp.getInput(0);
-			return getAssignedAddressFromPcode(constantVarnode);
+                Varnode constantVarnode = valuePcodeOp.getInput(0);
+                storedValue = constantVarnode;
+                continue;
 
-		}
-		else if (valuePcodeOp.getOpcode() != PcodeOp.PTRSUB) {
-			return null;
-		}
+            } else if (valuePcodeOp.getOpcode() != PcodeOp.PTRSUB) {
+                return null;
+            }
 
-		// don't need to check isConst bc always is
-		Varnode constantVarnode = valuePcodeOp.getInput(1);
-		addressOffset = constantVarnode.getOffset();
-		Address possibleAddress = toAddr(addressOffset);
-		if (possibleAddress == null || !program.getMemory().contains(possibleAddress)) {
-			return null;
-		}
-		return possibleAddress;
-	}
+            // don't need to check isConst bc always is
+            Varnode constantVarnode = valuePcodeOp.getInput(1);
+            addressOffset = constantVarnode.getOffset();
+            Address possibleAddress = toAddr(addressOffset);
+            if (possibleAddress == null || !program.getMemory().contains(possibleAddress)) {
+                return null;
+            }
+            return possibleAddress;
+        }
+    }
 
 	/**
 	 * Method to get the called address from the given CALL pcodeOp's input Varnode 

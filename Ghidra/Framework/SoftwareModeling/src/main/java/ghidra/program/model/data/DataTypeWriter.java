@@ -794,55 +794,59 @@ public class DataTypeWriter {
 	private String getFunctionPointerString(FunctionDefinition fd, String name,
 			DataType functionPointerArrayType, boolean writeEnabled, TaskMonitor monitor)
 			throws IOException, CancelledException {
+        while (true) {
 
-		DataType originalType = functionPointerArrayType;
+            DataType originalType = functionPointerArrayType;
 
-		StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder();
 
-		DataType returnType = fd.getReturnType();
-		if (writeEnabled) {
-			write(returnType, monitor);
-		}
+            DataType returnType = fd.getReturnType();
+            if (writeEnabled) {
+                write(returnType, monitor);
+            }
 
-		sb.append("(");
-		String arrayDecorations = "";
-		if (functionPointerArrayType instanceof Array) {
-			Array a = (Array) functionPointerArrayType;
-			functionPointerArrayType = getArrayBaseType(a);
-			arrayDecorations = getArrayDimensions(a);
-		}
-		if (functionPointerArrayType instanceof Pointer) {
-			Pointer p = (Pointer) functionPointerArrayType;
-			for (int i = 0; i < getPointerDepth(p); i++) {
-				sb.append('*');
-			}
-			if (name != null) {
-				sb.append(' ');
-			}
-			functionPointerArrayType = getPointerBaseDataType(p);
-		}
-		if (!(functionPointerArrayType instanceof FunctionDefinition)) {
-			writer.append(
-				comment("Attempting output of invalid function pointer type declaration: " +
-					originalType.getDisplayName()));
-		}
-		if (name != null) {
-			sb.append(name);
-		}
-		if (arrayDecorations.length() != 0) {
-			sb.append(arrayDecorations);
-		}
-		sb.append(")");
-		sb.append(getParameterListString(fd, false, writeEnabled, monitor));
+            sb.append("(");
+            String arrayDecorations = "";
+            if (functionPointerArrayType instanceof Array) {
+                Array a = (Array) functionPointerArrayType;
+                functionPointerArrayType = getArrayBaseType(a);
+                arrayDecorations = getArrayDimensions(a);
+            }
+            if (functionPointerArrayType instanceof Pointer) {
+                Pointer p = (Pointer) functionPointerArrayType;
+                for (int i = 0; i < getPointerDepth(p); i++) {
+                    sb.append('*');
+                }
+                if (name != null) {
+                    sb.append(' ');
+                }
+                functionPointerArrayType = getPointerBaseDataType(p);
+            }
+            if (!(functionPointerArrayType instanceof FunctionDefinition)) {
+                writer.append(
+                        comment("Attempting output of invalid function pointer type declaration: " +
+                                originalType.getDisplayName()));
+            }
+            if (name != null) {
+                sb.append(name);
+            }
+            if (arrayDecorations.length() != 0) {
+                sb.append(arrayDecorations);
+            }
+            sb.append(")");
+            sb.append(getParameterListString(fd, false, writeEnabled, monitor));
 
-		DataType baseReturnType = getBaseDataType(returnType);
-		if (baseReturnType instanceof FunctionDefinition) {
-			// nest with function return type
-			return getFunctionPointerString((FunctionDefinition) baseReturnType, sb.toString(),
-				returnType, writeEnabled, monitor);
-		}
-		return returnType.getDisplayName() + " " + sb;
-	}
+            DataType baseReturnType = getBaseDataType(returnType);
+            if (baseReturnType instanceof FunctionDefinition) {
+                // nest with function return type
+                functionPointerArrayType = returnType;
+                name = sb.toString();
+                fd = (FunctionDefinition) baseReturnType;
+                continue;
+            }
+            return returnType.getDisplayName() + " " + sb;
+        }
+    }
 
 	private String getParameterListString(FunctionDefinition fd, boolean includeParamNames,
 			boolean writeEnabled, TaskMonitor monitor) throws IOException, CancelledException {

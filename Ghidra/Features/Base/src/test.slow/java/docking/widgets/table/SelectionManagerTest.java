@@ -471,20 +471,22 @@ public class SelectionManagerTest extends AbstractGhidraHeadedIntegrationTest {
 
 	private int getOtherNonDuplicateRowIndex(int dup1Index,
 			AbstractSortedTableModel<StringRowObject> tableModel) {
-		int otherRow = dup1Index;
-		while (otherRow == dup1Index) {
-			otherRow = getRandomInt(0, table.getRowCount() - 1);
-		}
+        while (true) {
+            int otherRow = dup1Index;
+            while (otherRow == dup1Index) {
+                otherRow = getRandomInt(0, table.getRowCount() - 1);
+            }
 
-		StringRowObject currentRowObject = tableModel.getRowObject(dup1Index);
-		StringRowObject newRowObject = tableModel.getRowObject(otherRow);
-		if (currentRowObject.equals(newRowObject)) {
-			// try again--we want the new index to be for a row that is NOT a duplicate
-			return getOtherNonDuplicateRowIndex(dup1Index, tableModel);
-		}
+            StringRowObject currentRowObject = tableModel.getRowObject(dup1Index);
+            StringRowObject newRowObject = tableModel.getRowObject(otherRow);
+            if (currentRowObject.equals(newRowObject)) {
+                // try again--we want the new index to be for a row that is NOT a duplicate
+                continue;
+            }
 
-		return otherRow;
-	}
+            return otherRow;
+        }
+    }
 
 	private void changeSort() {
 		AbstractSortedTableModel<?> abstractModel = (AbstractSortedTableModel<?>) table.getModel();

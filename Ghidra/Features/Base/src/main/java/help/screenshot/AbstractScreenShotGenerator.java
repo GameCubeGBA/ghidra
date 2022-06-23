@@ -1686,22 +1686,25 @@ public abstract class AbstractScreenShotGenerator extends AbstractGhidraHeadedIn
 	}
 
 	private Object findNode(Object node, Class<? extends ComponentProvider> providerClass) {
-		if ("SplitNode".equals(node.getClass().getSimpleName())) {
-			Object child1 = getInstanceField("child1", node);
-			Object resultNode = findNode(child1, providerClass);
-			if (resultNode != null) {
-				return resultNode;
+		while (true) {
+			if ("SplitNode".equals(node.getClass().getSimpleName())) {
+				Object child1 = getInstanceField("child1", node);
+				Object resultNode = findNode(child1, providerClass);
+				if (resultNode != null) {
+					return resultNode;
+				}
+				Object child2 = getInstanceField("child2", node);
+				node = child2;
+				continue;
 			}
-			Object child2 = getInstanceField("child2", node);
-			return findNode(child2, providerClass);
+			// else must be comonentNode, see if it is the one we want
+			Object placeHolder = getInstanceField("top", node);
+			Object componentProvider = getInstanceField("componentProvider", placeHolder);
+			if (componentProvider != null && componentProvider.getClass() == providerClass) {
+				return node;
+			}
+			return null;
 		}
-		// else must be comonentNode, see if it is the one we want
-		Object placeHolder = getInstanceField("top", node);
-		Object componentProvider = getInstanceField("componentProvider", placeHolder);
-		if (componentProvider != null && componentProvider.getClass() == providerClass) {
-			return node;
-		}
-		return null;
 	}
 
 	public <T extends JComponent> T findChildWithType(Container node, Class<T> cls,

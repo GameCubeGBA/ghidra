@@ -76,17 +76,19 @@ public class DataTypeTreeDeleteTask extends Task {
 	}
 
 	private boolean containsAncestor(Set<GTreeNode> nodeSet, GTreeNode node) {
-		GTreeNode parent = node.getParent();
-		if (parent == null) {
-			return false;
-		}
+        while (true) {
+            GTreeNode parent = node.getParent();
+            if (parent == null) {
+                return false;
+            }
 
-		if (nodeSet.contains(parent)) {
-			return true;
-		}
+            if (nodeSet.contains(parent)) {
+                return true;
+            }
 
-		return containsAncestor(nodeSet, parent);
-	}
+            node = parent;
+        }
+    }
 
 	@Override
 	public void run(TaskMonitor monitor) {

@@ -193,16 +193,20 @@ public abstract class PopupWindowPlacer {
 	 */
 	public Rectangle getPlacement(Dimension toBePlaced, Rectangle innerBounds,
 			Rectangle outerBounds) {
-		Rectangle myPlacement = getMyPlacement(toBePlaced, innerBounds, outerBounds);
-		//Msg.info(this, debugDump(myPlacement));
-		if (myPlacement != null) {
-			return myPlacement;
-		}
-		if (next != null) {
-			return next.getPlacement(toBePlaced, innerBounds, outerBounds);
-		}
-		return null;
-	}
+        PopupWindowPlacer other = this;
+        while (true) {
+            Rectangle myPlacement = other.getMyPlacement(toBePlaced, innerBounds, outerBounds);
+            //Msg.info(this, debugDump(myPlacement));
+            if (myPlacement != null) {
+                return myPlacement;
+            }
+            if (other.next != null) {
+                other = other.next;
+                continue;
+            }
+            return null;
+        }
+    }
 
 	protected abstract Rectangle getMyPlacement(Dimension toBePlaced, Rectangle innerBounds,
 			Rectangle outerBounds);

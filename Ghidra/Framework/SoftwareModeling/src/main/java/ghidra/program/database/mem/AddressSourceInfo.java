@@ -60,15 +60,19 @@ public class AddressSourceInfo {
 	 * associated address.
 	 */
 	public long getFileOffset() {
-		if (mappedInfo != null) {
-			return mappedInfo.getFileOffset();
-		}
+        AddressSourceInfo other = this;
+        while (true) {
+            if (other.mappedInfo != null) {
+                other = other.mappedInfo;
+                continue;
+            }
 
-		if (fileBytes != null) {
-			return sourceInfo.getFileBytesOffset(address) + fileBytes.getFileOffset();
-		}
-		return -1;
-	}
+            if (other.fileBytes != null) {
+                return other.sourceInfo.getFileBytesOffset(other.address) + other.fileBytes.getFileOffset();
+            }
+            return -1;
+        }
+    }
 
 	/**
 	 * Returns the filename of the originally imported file that provided the byte value for the
@@ -77,14 +81,18 @@ public class AddressSourceInfo {
 	 * associated address or null if there is no source information for this location.
 	 */
 	public String getFileName() {
-		if (mappedInfo != null) {
-			return mappedInfo.getFileName();
-		}
-		if (fileBytes != null) {
-			return fileBytes.getFilename();
-		}
-		return null;
-	}
+        AddressSourceInfo other = this;
+        while (true) {
+            if (other.mappedInfo != null) {
+                other = other.mappedInfo;
+                continue;
+            }
+            if (other.fileBytes != null) {
+                return other.fileBytes.getFilename();
+            }
+            return null;
+        }
+    }
 
 	/**
 	 * Returns the original byte value from the imported file that provided the byte value for the
@@ -94,14 +102,18 @@ public class AddressSourceInfo {
 	 * @throws IOException if an io error occurs reading the program database.
 	 */
 	public byte getOriginalValue() throws IOException {
-		if (mappedInfo != null) {
-			return mappedInfo.getOriginalValue();
-		}
-		if (fileBytes != null) {
-			return fileBytes.getOriginalByte(getFileOffset());
-		}
-		return 0;
-	}
+        AddressSourceInfo other = this;
+        while (true) {
+            if (other.mappedInfo != null) {
+                other = other.mappedInfo;
+                continue;
+            }
+            if (other.fileBytes != null) {
+                return other.fileBytes.getOriginalByte(other.getFileOffset());
+            }
+            return 0;
+        }
+    }
 
 	/**
 	 * Returns the {@link MemoryBlockSourceInfo} for the region surround this info's location.

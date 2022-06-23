@@ -316,19 +316,15 @@ public class TableData<ROW_OBJECT> implements Iterable<ROW_OBJECT> {
 		if (other == null) {
 			return source != null;
 		}
-
 		if (other.ID == ID) {
 			return false; // we are the same data; we are related
 		}
-
 		if (source == null) {
 			return true;
 		}
-
 		// see if our parent is the different
 		return source.isUnrelatedTo(other);
 	}
-
 	/**
 	 * Returns the ID of this table data.   It is possible that two data instances of this class
 	 * that have the same ID are considered to be the same data.
@@ -344,11 +340,14 @@ public class TableData<ROW_OBJECT> implements Iterable<ROW_OBJECT> {
 	 * @return the root dataset for this data and all its ancestors.
 	 */
 	TableData<ROW_OBJECT> getRootData() {
-		if (source == null) {
-			return this;
-		}
-		return source.getRootData();
-	}
+        TableData result = this;
+        while (true) {
+            if (result.source == null) {
+                return result;
+            }
+            result = result.source;
+        }
+    }
 
 	@Override
 	public Iterator<ROW_OBJECT> iterator() {

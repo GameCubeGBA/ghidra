@@ -1029,26 +1029,29 @@ public class ExternalFunctionMerger extends AbstractFunctionMerger implements Li
 	}
 
 	private boolean equivalentNamespaces(Namespace namespace1, Namespace namespace2) {
-		if (namespace1 == null) {
-			return (namespace2 == null);
-		}
-		if (namespace1.getID() == Namespace.GLOBAL_NAMESPACE_ID) {
-			return (namespace2.getID() == Namespace.GLOBAL_NAMESPACE_ID);
-		}
-		String name1 = namespace1.getName();
-		String name2 = namespace2.getName();
-		if (!SystemUtilities.isEqual(name1, name2)) {
-			return false;
-		}
-		SymbolType symbolType1 = namespace1.getSymbol().getSymbolType();
-		SymbolType symbolType2 = namespace2.getSymbol().getSymbolType();
-		if (!SystemUtilities.isEqual(symbolType1, symbolType2)) {
-			return false;
-		}
-		Namespace parent1 = namespace1.getParentNamespace();
-		Namespace parent2 = namespace2.getParentNamespace();
-		return equivalentNamespaces(parent1, parent2);
-	}
+        while (true) {
+            if (namespace1 == null) {
+                return (namespace2 == null);
+            }
+            if (namespace1.getID() == Namespace.GLOBAL_NAMESPACE_ID) {
+                return (namespace2.getID() == Namespace.GLOBAL_NAMESPACE_ID);
+            }
+            String name1 = namespace1.getName();
+            String name2 = namespace2.getName();
+            if (!SystemUtilities.isEqual(name1, name2)) {
+                return false;
+            }
+            SymbolType symbolType1 = namespace1.getSymbol().getSymbolType();
+            SymbolType symbolType2 = namespace2.getSymbol().getSymbolType();
+            if (!SystemUtilities.isEqual(symbolType1, symbolType2)) {
+                return false;
+            }
+            Namespace parent1 = namespace1.getParentNamespace();
+            Namespace parent2 = namespace2.getParentNamespace();
+            namespace2 = parent2;
+            namespace1 = parent1;
+        }
+    }
 
 	private boolean equivalentExternals(ExternalLocation externalLocation1,
 			ExternalLocation externalLocation2) {

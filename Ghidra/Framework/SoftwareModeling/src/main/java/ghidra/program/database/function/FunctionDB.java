@@ -358,19 +358,22 @@ public class FunctionDB extends DatabaseObject implements Function {
 
 	@Override
 	public ReturnParameterDB getReturn() {
-		manager.lock.acquire();
-		try {
-			checkIsValid();
-			if (thunkedFunction != null) {
-				return thunkedFunction.getReturn();
-			}
-			loadVariables();
-			return returnParam;
-		}
-		finally {
-			manager.lock.release();
-		}
-	}
+        FunctionDB other = this;
+        while (true) {
+            other.manager.lock.acquire();
+            try {
+                other.checkIsValid();
+                if (other.thunkedFunction != null) {
+                    other = other.thunkedFunction;
+                    continue;
+                }
+                other.loadVariables();
+                return other.returnParam;
+            } finally {
+                other.manager.lock.release();
+            }
+        }
+    }
 
 	@Override
 	public void setReturn(DataType type, VariableStorage storage, SourceType source)
@@ -626,18 +629,21 @@ public class FunctionDB extends DatabaseObject implements Function {
 
 	@Override
 	public int getStackPurgeSize() {
-		manager.lock.acquire();
-		try {
-			checkIsValid();
-			if (thunkedFunction != null) {
-				return thunkedFunction.getStackPurgeSize();
-			}
-			return rec.getIntValue(FunctionAdapter.STACK_PURGE_COL);
-		}
-		finally {
-			manager.lock.release();
-		}
-	}
+        FunctionDB other = this;
+        while (true) {
+            other.manager.lock.acquire();
+            try {
+                other.checkIsValid();
+                if (other.thunkedFunction != null) {
+                    other = other.thunkedFunction;
+                    continue;
+                }
+                return other.rec.getIntValue(FunctionAdapter.STACK_PURGE_COL);
+            } finally {
+                other.manager.lock.release();
+            }
+        }
+    }
 
 	@Override
 	public void setStackPurgeSize(int change) {
@@ -670,21 +676,24 @@ public class FunctionDB extends DatabaseObject implements Function {
 
 	@Override
 	public boolean isStackPurgeSizeValid() {
-		manager.lock.acquire();
-		try {
-			checkIsValid();
-			if (thunkedFunction != null) {
-				return thunkedFunction.isStackPurgeSizeValid();
-			}
-			if (getStackPurgeSize() > 0xffffff) {
-				return false;
-			}
-			return true;
-		}
-		finally {
-			manager.lock.release();
-		}
-	}
+        FunctionDB other = this;
+        while (true) {
+            other.manager.lock.acquire();
+            try {
+                other.checkIsValid();
+                if (other.thunkedFunction != null) {
+                    other = other.thunkedFunction;
+                    continue;
+                }
+                if (other.getStackPurgeSize() > 0xffffff) {
+                    return false;
+                }
+                return true;
+            } finally {
+                other.manager.lock.release();
+            }
+        }
+    }
 
 	@Override
 	public long getID() {
@@ -928,82 +937,83 @@ public class FunctionDB extends DatabaseObject implements Function {
 	@Override
 	public VariableDB addLocalVariable(Variable var, SourceType source)
 			throws DuplicateNameException, InvalidInputException {
-		manager.lock.acquire();
-		try {
-			startUpdate();
-			checkDeleted();
-			if (thunkedFunction != null) {
-				return thunkedFunction.addLocalVariable(var, source);
-			}
-			loadVariables();
-			purgeBadVariables();
+        FunctionDB other = this;
+        while (true) {
+            other.manager.lock.acquire();
+            try {
+                other.startUpdate();
+                other.checkDeleted();
+                if (other.thunkedFunction != null) {
+                    other = other.thunkedFunction;
+                    continue;
+                }
+                other.loadVariables();
+                other.purgeBadVariables();
 
-			var = getResolvedVariable(var, false, false);
+                var = other.getResolvedVariable(var, false, false);
 
-			String name = var.getName();
-			if (name == null || name.length() == 0 ||
-				SymbolUtilities.isDefaultParameterName(name)) {
-				name = DEFAULT_LOCAL_PREFIX;
-				source = SourceType.DEFAULT;
-			}
+                String name = var.getName();
+                if (name == null || name.length() == 0 ||
+                        SymbolUtilities.isDefaultParameterName(name)) {
+                    name = other.DEFAULT_LOCAL_PREFIX;
+                    source = SourceType.DEFAULT;
+                }
 
-			VariableStorage storage = var.getVariableStorage();
-			int firstUseOffset = var.getFirstUseOffset();
-			if (var.hasStackStorage() && firstUseOffset != 0) {
-				Msg.info(this, "WARNING! Stack variable firstUseOffset forced to 0 for function " +
-					this + " at " + storage);
-				firstUseOffset = 0;
-			}
+                VariableStorage storage = var.getVariableStorage();
+                int firstUseOffset = var.getFirstUseOffset();
+                if (var.hasStackStorage() && firstUseOffset != 0) {
+                    Msg.info(other, "WARNING! Stack variable firstUseOffset forced to 0 for function " +
+                            other + " at " + storage);
+                    firstUseOffset = 0;
+                }
 
-			// Check for duplicate storage address
-			VariableDB v = null;
-			for (VariableDB oldVar : locals) {
-				if (oldVar.getFirstUseOffset() == firstUseOffset &&
-					oldVar.getVariableStorage().intersects(storage)) {
-					v = oldVar;
-					break;
-				}
-			}
+                // Check for duplicate storage address
+                VariableDB v = null;
+                for (VariableDB oldVar : other.locals) {
+                    if (oldVar.getFirstUseOffset() == firstUseOffset &&
+                            oldVar.getVariableStorage().intersects(storage)) {
+                        v = oldVar;
+                        break;
+                    }
+                }
 
-			try {
-				if (validateEnabled) {
-					VariableUtilities.checkVariableConflict(this, (v != null ? v : var), storage,
-						true);
-				}
-				if (v != null) {
-					// update existing variable
-					Msg.info(this, "WARNING! Adding overlapping local variable for function " +
-						this + " at " + v.getVariableStorage() + " - Modifying existing variable!");
-					if (!DEFAULT_LOCAL_PREFIX.equals(name)) {
-						v.setName(name, source);
-					}
-					v.setStorageAndDataType(storage, var.getDataType());
-				}
-				else {
-					SymbolManager symbolMgr = (SymbolManager) program.getSymbolTable();
-					VariableSymbolDB s = symbolMgr.createVariableSymbol(name, this,
-						SymbolType.LOCAL_VAR, firstUseOffset, storage, source);
-					s.setStorageAndDataType(storage, var.getDataType());
-					v = new LocalVariableDB(this, s);
-					locals.add(v);
-					Collections.sort(locals);
-					symbolMap.put(v.symbol, v);
-				}
-				if (var.getComment() != null) {
-					v.symbol.setSymbolStringData(var.getComment());
-				}
-				manager.functionChanged(this, 0);
-				return v;
-			}
-			finally {
-				frame.setInvalid();
-			}
-		}
-		finally {
-			endUpdate();
-			manager.lock.release();
-		}
-	}
+                try {
+                    if (other.validateEnabled) {
+                        VariableUtilities.checkVariableConflict(other, (v != null ? v : var), storage,
+                                true);
+                    }
+                    if (v != null) {
+                        // update existing variable
+                        Msg.info(other, "WARNING! Adding overlapping local variable for function " +
+                                other + " at " + v.getVariableStorage() + " - Modifying existing variable!");
+                        if (!other.DEFAULT_LOCAL_PREFIX.equals(name)) {
+                            v.setName(name, source);
+                        }
+                        v.setStorageAndDataType(storage, var.getDataType());
+                    } else {
+                        SymbolManager symbolMgr = (SymbolManager) other.program.getSymbolTable();
+                        VariableSymbolDB s = symbolMgr.createVariableSymbol(name, other,
+                                SymbolType.LOCAL_VAR, firstUseOffset, storage, source);
+                        s.setStorageAndDataType(storage, var.getDataType());
+                        v = new LocalVariableDB(other, s);
+                        other.locals.add(v);
+                        Collections.sort(other.locals);
+                        other.symbolMap.put(v.symbol, v);
+                    }
+                    if (var.getComment() != null) {
+                        v.symbol.setSymbolStringData(var.getComment());
+                    }
+                    other.manager.functionChanged(other, 0);
+                    return v;
+                } finally {
+                    other.frame.setInvalid();
+                }
+            } finally {
+                other.endUpdate();
+                other.manager.lock.release();
+            }
+        }
+    }
 
 	private static class ThunkVariableFilter implements VariableFilter {
 		private VariableFilter otherFilter;
@@ -1199,23 +1209,26 @@ public class FunctionDB extends DatabaseObject implements Function {
 
 	@Override
 	public int getParameterCount() {
-		manager.lock.acquire();
-		try {
-			checkIsValid();
-			if (thunkedFunction != null) {
-				return thunkedFunction.getParameterCount();
-			}
-			loadVariables();
-			int count = params.size();
-			if (autoParams != null) {
-				count += autoParams.size();
-			}
-			return count;
-		}
-		finally {
-			manager.lock.release();
-		}
-	}
+        FunctionDB other = this;
+        while (true) {
+            other.manager.lock.acquire();
+            try {
+                other.checkIsValid();
+                if (other.thunkedFunction != null) {
+                    other = other.thunkedFunction;
+                    continue;
+                }
+                other.loadVariables();
+                int count = other.params.size();
+                if (other.autoParams != null) {
+                    count += other.autoParams.size();
+                }
+                return count;
+            } finally {
+                other.manager.lock.release();
+            }
+        }
+    }
 
 	@Override
 	public int getAutoParameterCount() {
@@ -1529,23 +1542,26 @@ public class FunctionDB extends DatabaseObject implements Function {
 	@Override
 	public Parameter addParameter(Variable var, SourceType source)
 			throws DuplicateNameException, InvalidInputException {
-		manager.lock.acquire();
-		try {
-			startUpdate();
-			checkDeleted();
-			if (thunkedFunction != null) {
-				return thunkedFunction.addParameter(var, source);
-			}
-			loadVariables();
-			purgeBadVariables();
+        FunctionDB other = this;
+        while (true) {
+            other.manager.lock.acquire();
+            try {
+                other.startUpdate();
+                other.checkDeleted();
+                if (other.thunkedFunction != null) {
+                    other = other.thunkedFunction;
+                    continue;
+                }
+                other.loadVariables();
+                other.purgeBadVariables();
 
-			return insertParameter(getParameterCount(), var, source);
-		}
-		finally {
-			endUpdate();
-			manager.lock.release();
-		}
-	}
+                return other.insertParameter(getParameterCount(), var, source);
+            } finally {
+                other.endUpdate();
+                other.manager.lock.release();
+            }
+        }
+    }
 
 	/**
 	 * @see ghidra.program.model.listing.Function#insertParameter(int, ghidra.program.model.listing.Variable, ghidra.program.model.symbol.SourceType)
@@ -1553,145 +1569,145 @@ public class FunctionDB extends DatabaseObject implements Function {
 	@Override
 	public ParameterDB insertParameter(int ordinal, Variable var, SourceType source)
 			throws DuplicateNameException, InvalidInputException {
+        FunctionDB other = this;
+        while (true) {
 
-		manager.lock.acquire();
-		try {
-			startUpdate();
-			checkDeleted();
-			if (thunkedFunction != null) {
-				return thunkedFunction.insertParameter(ordinal, var, source);
-			}
-			loadVariables();
-			purgeBadVariables();
+            other.manager.lock.acquire();
+            try {
+                other.startUpdate();
+                other.checkDeleted();
+                if (other.thunkedFunction != null) {
+                    other = other.thunkedFunction;
+                    continue;
+                }
+                other.loadVariables();
+                other.purgeBadVariables();
 
-			int autoCnt = 0;
-			if (autoParams != null) {
-				autoCnt = autoParams.size();
-				if (ordinal < autoCnt) {
-					throw new InvalidInputException(
-						"Parameter may not be inserted before auto-parameter");
-				}
-			}
+                int autoCnt = 0;
+                if (other.autoParams != null) {
+                    autoCnt = other.autoParams.size();
+                    if (ordinal < autoCnt) {
+                        throw new InvalidInputException(
+                                "Parameter may not be inserted before auto-parameter");
+                    }
+                }
 
-			ordinal -= autoCnt;
-			if (ordinal < 0 || ordinal > params.size()) {
-				throw new IndexOutOfBoundsException("Ordinal value must be " + autoCnt +
-					" <= ordinal < " + (params.size() + autoCnt) + ": " + (ordinal + autoCnt));
-			}
+                ordinal -= autoCnt;
+                if (ordinal < 0 || ordinal > other.params.size()) {
+                    throw new IndexOutOfBoundsException("Ordinal value must be " + autoCnt +
+                            " <= ordinal < " + (other.params.size() + autoCnt) + ": " + (ordinal + autoCnt));
+                }
 
-			if (var.isUniqueVariable()) {
-				throw new IllegalArgumentException(
-					"Invalid parameter specified: UniqueVariable not allowed");
-			}
+                if (var.isUniqueVariable()) {
+                    throw new IllegalArgumentException(
+                            "Invalid parameter specified: UniqueVariable not allowed");
+                }
 
-			boolean hasCustomStorage = hasCustomVariableStorage();
-			if (hasCustomStorage) {
-				if (validateEnabled && var.hasStackStorage()) {
-					int stackOffset = (int) var.getLastStorageVarnode().getOffset();
-					if (!frame.isParameterOffset(stackOffset)) {
-						throw new InvalidInputException(
-							"Variable contains invalid stack parameter offset: " + var.getName() +
-								"  offset " + stackOffset);
-					}
-				}
-			}
+                boolean hasCustomStorage = other.hasCustomVariableStorage();
+                if (hasCustomStorage) {
+                    if (other.validateEnabled && var.hasStackStorage()) {
+                        int stackOffset = (int) var.getLastStorageVarnode().getOffset();
+                        if (!other.frame.isParameterOffset(stackOffset)) {
+                            throw new InvalidInputException(
+                                    "Variable contains invalid stack parameter offset: " + var.getName() +
+                                            "  offset " + stackOffset);
+                        }
+                    }
+                }
 
-			var = getResolvedVariable(var, false, !hasCustomStorage);
+                var = other.getResolvedVariable(var, false, !hasCustomStorage);
 
-			String name = var.getName();
-			SourceType paramSource = source;
-			if (name == null || name.length() == 0 || paramSource == SourceType.DEFAULT ||
-				SymbolUtilities.isDefaultParameterName(name)) {
-				name = DEFAULT_PARAM_PREFIX;
-				paramSource = SourceType.DEFAULT;
-			}
+                String name = var.getName();
+                SourceType paramSource = source;
+                if (name == null || name.length() == 0 || paramSource == SourceType.DEFAULT ||
+                        SymbolUtilities.isDefaultParameterName(name)) {
+                    name = other.DEFAULT_PARAM_PREFIX;
+                    paramSource = SourceType.DEFAULT;
+                }
 
-			VariableStorage storage = var.getVariableStorage();
-			if (!hasCustomStorage) {
-				storage = VariableStorage.UNASSIGNED_STORAGE;
-			}
-			else if (storage.isAutoStorage()) {
-				storage = new VariableStorage(program, storage.getVarnodes());
-			}
+                VariableStorage storage = var.getVariableStorage();
+                if (!hasCustomStorage) {
+                    storage = VariableStorage.UNASSIGNED_STORAGE;
+                } else if (storage.isAutoStorage()) {
+                    storage = new VariableStorage(other.program, storage.getVarnodes());
+                }
 
-			try {
+                try {
 
-				// Check for duplicate storage address
-				ParameterDB p = null;
-				if (storage != VariableStorage.UNASSIGNED_STORAGE) {
-					for (ParameterDB oldParam : params) {
-						if (oldParam.getVariableStorage().intersects(storage)) {
-							p = oldParam;
-							break;
-						}
-					}
-					if (validateEnabled) {
-						VariableUtilities.checkVariableConflict(this, (p != null ? p : var),
-							storage, true);
-					}
-				}
-				if (p != null) {
-					// storage has been specified
-					// move and update existing parameter
-					if (ordinal >= params.size()) {
-						ordinal = params.size() - 1;
-					}
-					Msg.info(this, "WARNING! Inserting overlapping parameter for function " + this +
-						" at " + p.getVariableStorage() + " - Replacing existing parameter!");
-					if (p.getOrdinal() != ordinal) {
-						if (p != params.remove(p.getOrdinal())) {
-							throw new AssertException("Inconsistent function parameter cache");
-						}
+                    // Check for duplicate storage address
+                    ParameterDB p = null;
+                    if (storage != VariableStorage.UNASSIGNED_STORAGE) {
+                        for (ParameterDB oldParam : other.params) {
+                            if (oldParam.getVariableStorage().intersects(storage)) {
+                                p = oldParam;
+                                break;
+                            }
+                        }
+                        if (other.validateEnabled) {
+                            VariableUtilities.checkVariableConflict(other, (p != null ? p : var),
+                                    storage, true);
+                        }
+                    }
+                    if (p != null) {
+                        // storage has been specified
+                        // move and update existing parameter
+                        if (ordinal >= other.params.size()) {
+                            ordinal = other.params.size() - 1;
+                        }
+                        Msg.info(other, "WARNING! Inserting overlapping parameter for function " + other +
+                                " at " + p.getVariableStorage() + " - Replacing existing parameter!");
+                        if (p.getOrdinal() != ordinal) {
+                            if (p != other.params.remove(p.getOrdinal())) {
+                                throw new AssertException("Inconsistent function parameter cache");
+                            }
 
-						params.add(ordinal, p);
-						updateParametersAndReturn();
-						manager.functionChanged(this, ChangeManager.FUNCTION_CHANGED_PARAMETERS);
-					}
-					if (!DEFAULT_PARAM_PREFIX.equals(name)) {
-						p.setName(name, paramSource);
-					}
-					p.setStorageAndDataType(storage, var.getDataType());
-				}
-				else {
-					// create new parameter
-					if (ordinal > params.size()) {
-						ordinal = params.size();
-					}
-					if (ordinal != params.size()) {
-						// shift params to make room for inserted param
-						for (ParameterDB param : params) {
-							int paramOrdinal = param.getOrdinal();
-							if (paramOrdinal >= ordinal) {
-								param.setOrdinal(paramOrdinal + 1);
-							}
-						}
-					}
-					SymbolManager symbolMgr = (SymbolManager) program.getSymbolTable();
-					VariableSymbolDB s = symbolMgr.createVariableSymbol(name, this,
-						SymbolType.PARAMETER, ordinal, storage, paramSource);
-					s.setStorageAndDataType(storage, var.getDataType());
-					p = new ParameterDB(this, s);
+                            other.params.add(ordinal, p);
+                            other.updateParametersAndReturn();
+                            other.manager.functionChanged(other, ChangeManager.FUNCTION_CHANGED_PARAMETERS);
+                        }
+                        if (!other.DEFAULT_PARAM_PREFIX.equals(name)) {
+                            p.setName(name, paramSource);
+                        }
+                        p.setStorageAndDataType(storage, var.getDataType());
+                    } else {
+                        // create new parameter
+                        if (ordinal > other.params.size()) {
+                            ordinal = other.params.size();
+                        }
+                        if (ordinal != other.params.size()) {
+                            // shift params to make room for inserted param
+                            for (ParameterDB param : other.params) {
+                                int paramOrdinal = param.getOrdinal();
+                                if (paramOrdinal >= ordinal) {
+                                    param.setOrdinal(paramOrdinal + 1);
+                                }
+                            }
+                        }
+                        SymbolManager symbolMgr = (SymbolManager) other.program.getSymbolTable();
+                        VariableSymbolDB s = symbolMgr.createVariableSymbol(name, other,
+                                SymbolType.PARAMETER, ordinal, storage, paramSource);
+                        s.setStorageAndDataType(storage, var.getDataType());
+                        p = new ParameterDB(other, s);
 
-					params.add(ordinal, p);
-					updateParametersAndReturn();
-					symbolMap.put(p.symbol, p);
-					manager.functionChanged(this, ChangeManager.FUNCTION_CHANGED_PARAMETERS);
-				}
-				if (var.getComment() != null) {
-					p.symbol.setSymbolStringData(var.getComment());
-				}
-				updateSignatureSourceAfterVariableChange(source, p.getDataType());
-				return p;
-			}
-			finally {
-				frame.setInvalid();
-			}
-		}
-		finally {
-			endUpdate();
-			manager.lock.release();
-		}
-	}
+                        other.params.add(ordinal, p);
+                        other.updateParametersAndReturn();
+                        other.symbolMap.put(p.symbol, p);
+                        other.manager.functionChanged(other, ChangeManager.FUNCTION_CHANGED_PARAMETERS);
+                    }
+                    if (var.getComment() != null) {
+                        p.symbol.setSymbolStringData(var.getComment());
+                    }
+                    other.updateSignatureSourceAfterVariableChange(source, p.getDataType());
+                    return p;
+                } finally {
+                    other.frame.setInvalid();
+                }
+            } finally {
+                other.endUpdate();
+                other.manager.lock.release();
+            }
+        }
+    }
 
 	@Override
 	public void removeVariable(Variable variable) {
@@ -1908,56 +1924,58 @@ public class FunctionDB extends DatabaseObject implements Function {
 	 */
 	@Override
 	public Parameter moveParameter(int fromOrdinal, int toOrdinal) throws InvalidInputException {
-		if (toOrdinal < 0) {
-			throw new InvalidInputException("invalid toOrdinal specified: " + toOrdinal);
-		}
-		manager.lock.acquire();
-		try {
-			startUpdate();
-			checkDeleted();
-			if (thunkedFunction != null) {
-				return thunkedFunction.moveParameter(fromOrdinal, toOrdinal);
-			}
-			loadVariables();
+        FunctionDB other = this;
+        while (true) {
+            if (toOrdinal < 0) {
+                throw new InvalidInputException("invalid toOrdinal specified: " + toOrdinal);
+            }
+            other.manager.lock.acquire();
+            try {
+                other.startUpdate();
+                other.checkDeleted();
+                if (other.thunkedFunction != null) {
+                    other = other.thunkedFunction;
+                    continue;
+                }
+                other.loadVariables();
 
-			int autoCnt = 0;
-			if (autoParams != null) {
-				autoCnt = autoParams.size();
-				if (fromOrdinal < autoCnt) {
-					throw new InvalidInputException("Auto-parameter may not be moved");
-				}
-				if (toOrdinal < autoCnt) {
-					throw new InvalidInputException(
-						"Parameter may not be moved before an auto-parameter");
-				}
-			}
+                int autoCnt = 0;
+                if (other.autoParams != null) {
+                    autoCnt = other.autoParams.size();
+                    if (fromOrdinal < autoCnt) {
+                        throw new InvalidInputException("Auto-parameter may not be moved");
+                    }
+                    if (toOrdinal < autoCnt) {
+                        throw new InvalidInputException(
+                                "Parameter may not be moved before an auto-parameter");
+                    }
+                }
 
-			fromOrdinal -= autoCnt;
-			toOrdinal -= autoCnt;
+                fromOrdinal -= autoCnt;
+                toOrdinal -= autoCnt;
 
-			if (fromOrdinal < 0 || fromOrdinal >= params.size()) {
-				return null;
-			}
-			ParameterDB param = params.get(fromOrdinal);
-			if (param.getOrdinal() == toOrdinal) {
-				return param;
-			}
-			params.remove(fromOrdinal);
-			if (toOrdinal >= params.size()) {
-				params.add(param);
-			}
-			else {
-				params.add(toOrdinal, param);
-			}
-			updateParametersAndReturn();
-			manager.functionChanged(this, ChangeManager.FUNCTION_CHANGED_PARAMETERS);
-			return param;
-		}
-		finally {
-			endUpdate();
-			manager.lock.release();
-		}
-	}
+                if (fromOrdinal < 0 || fromOrdinal >= other.params.size()) {
+                    return null;
+                }
+                ParameterDB param = other.params.get(fromOrdinal);
+                if (param.getOrdinal() == toOrdinal) {
+                    return param;
+                }
+                other.params.remove(fromOrdinal);
+                if (toOrdinal >= other.params.size()) {
+                    other.params.add(param);
+                } else {
+                    other.params.add(toOrdinal, param);
+                }
+                other.updateParametersAndReturn();
+                other.manager.functionChanged(other, ChangeManager.FUNCTION_CHANGED_PARAMETERS);
+                return param;
+            } finally {
+                other.endUpdate();
+                other.manager.lock.release();
+            }
+        }
+    }
 
 //	int getLocalSize() {
 //		manager.lock.acquire();
@@ -2397,19 +2415,22 @@ public class FunctionDB extends DatabaseObject implements Function {
 	 * @return true if the indicated flag is set
 	 */
 	private boolean isFunctionFlagSet(byte functionFlagIndicator) {
-		manager.lock.acquire();
-		try {
-			checkIsValid();
-			if (thunkedFunction != null) {
-				return thunkedFunction.isFunctionFlagSet(functionFlagIndicator);
-			}
-			byte flags = rec.getByteValue(FunctionAdapter.FUNCTION_FLAGS_COL);
-			return ((flags & functionFlagIndicator) != 0);
-		}
-		finally {
-			manager.lock.release();
-		}
-	}
+        FunctionDB other = this;
+        while (true) {
+            other.manager.lock.acquire();
+            try {
+                other.checkIsValid();
+                if (other.thunkedFunction != null) {
+                    other = other.thunkedFunction;
+                    continue;
+                }
+                byte flags = other.rec.getByteValue(FunctionAdapter.FUNCTION_FLAGS_COL);
+                return ((flags & functionFlagIndicator) != 0);
+            } finally {
+                other.manager.lock.release();
+            }
+        }
+    }
 
 	/**
 	 * Sets the indicated function flag to true or false.
@@ -2443,29 +2464,32 @@ public class FunctionDB extends DatabaseObject implements Function {
 
 	@Override
 	public SourceType getSignatureSource() {
-		manager.lock.acquire();
-		try {
-			checkIsValid();
-			if (thunkedFunction != null) {
-				return thunkedFunction.getSignatureSource();
-			}
+        FunctionDB other = this;
+        while (true) {
+            other.manager.lock.acquire();
+            try {
+                other.checkIsValid();
+                if (other.thunkedFunction != null) {
+                    other = other.thunkedFunction;
+                    continue;
+                }
 
-			// Force DEFAULT source if any param has unassigned storage
-			if (!getReturn().isValid()) {
-				return SourceType.DEFAULT;
-			}
-			for (Parameter param : getParameters()) {
-				if (!param.isValid()) {
-					return SourceType.DEFAULT;
-				}
-			}
+                // Force DEFAULT source if any param has unassigned storage
+                if (!other.getReturn().isValid()) {
+                    return SourceType.DEFAULT;
+                }
+                for (Parameter param : other.getParameters()) {
+                    if (!param.isValid()) {
+                        return SourceType.DEFAULT;
+                    }
+                }
 
-			return getStoredSignatureSource();
-		}
-		finally {
-			manager.lock.release();
-		}
-	}
+                return other.getStoredSignatureSource();
+            } finally {
+                other.manager.lock.release();
+            }
+        }
+    }
 
 	SourceType getStoredSignatureSource() {
 		byte flags = rec.getByteValue(FunctionAdapter.FUNCTION_FLAGS_COL);
@@ -2529,42 +2553,49 @@ public class FunctionDB extends DatabaseObject implements Function {
 	 */
 	@Override
 	public String getCallingConventionName() {
-		manager.lock.acquire();
-		try {
-			if (!checkIsValid()) {
-				return null;
-			}
-			if (thunkedFunction != null) {
-				return thunkedFunction.getCallingConventionName();
-			}
-			byte callingConventionID = rec.getByteValue(FunctionAdapter.CALLING_CONVENTION_ID_COL);
-			if (callingConventionID == CallingConventionDBAdapter.UNKNOWN_CALLING_CONVENTION_ID) {
-				return Function.UNKNOWN_CALLING_CONVENTION_STRING;
-			}
-			if (callingConventionID == CallingConventionDBAdapter.DEFAULT_CALLING_CONVENTION_ID) {
-				return Function.DEFAULT_CALLING_CONVENTION_STRING;
-			}
-			String name = manager.getCallingConventionName(callingConventionID);
-			return name != null ? name : UNKNOWN_CALLING_CONVENTION_STRING;
-		}
-		finally {
-			manager.lock.release();
-		}
-	}
+        FunctionDB other = this;
+        while (true) {
+            other.manager.lock.acquire();
+            try {
+                if (!other.checkIsValid()) {
+                    return null;
+                }
+                if (other.thunkedFunction != null) {
+                    other = other.thunkedFunction;
+                    continue;
+                }
+                byte callingConventionID = other.rec.getByteValue(FunctionAdapter.CALLING_CONVENTION_ID_COL);
+                if (callingConventionID == CallingConventionDBAdapter.UNKNOWN_CALLING_CONVENTION_ID) {
+                    return Function.UNKNOWN_CALLING_CONVENTION_STRING;
+                }
+                if (callingConventionID == CallingConventionDBAdapter.DEFAULT_CALLING_CONVENTION_ID) {
+                    return Function.DEFAULT_CALLING_CONVENTION_STRING;
+                }
+                String name = other.manager.getCallingConventionName(callingConventionID);
+                return name != null ? name : other.UNKNOWN_CALLING_CONVENTION_STRING;
+            } finally {
+                other.manager.lock.release();
+            }
+        }
+    }
 
 	private String getRealCallingConventionName() {
-		if (thunkedFunction != null) {
-			return thunkedFunction.getRealCallingConventionName();
-		}
-		String name = null;
-		byte callingConventionID = rec.getByteValue(FunctionAdapter.CALLING_CONVENTION_ID_COL);
-		if (callingConventionID != CallingConventionDBAdapter.UNKNOWN_CALLING_CONVENTION_ID &&
-			callingConventionID != CallingConventionDBAdapter.DEFAULT_CALLING_CONVENTION_ID) {
-			name = manager.getCallingConventionName(callingConventionID);
-		}
-		// null returned for unknown or default calling convention
-		return name;
-	}
+        FunctionDB other = this;
+        while (true) {
+            if (other.thunkedFunction != null) {
+                other = other.thunkedFunction;
+                continue;
+            }
+            String name = null;
+            byte callingConventionID = other.rec.getByteValue(FunctionAdapter.CALLING_CONVENTION_ID_COL);
+            if (callingConventionID != CallingConventionDBAdapter.UNKNOWN_CALLING_CONVENTION_ID &&
+                    callingConventionID != CallingConventionDBAdapter.DEFAULT_CALLING_CONVENTION_ID) {
+                name = other.manager.getCallingConventionName(callingConventionID);
+            }
+            // null returned for unknown or default calling convention
+            return name;
+        }
+    }
 
 	private PrototypeModel getDefaultCallingConvention() {
 		CompilerSpec compilerSpec = getProgram().getCompilerSpec();
@@ -2669,22 +2700,25 @@ public class FunctionDB extends DatabaseObject implements Function {
 
 	@Override
 	public String getCallFixup() {
-		manager.lock.acquire();
-		try {
-			checkIsValid();
-			if (thunkedFunction != null) {
-				return thunkedFunction.getCallFixup();
-			}
-			StringPropertyMap callFixupMap = manager.getCallFixupMap(false);
-			if (callFixupMap == null) {
-				return null;
-			}
-			return callFixupMap.getString(entryPoint);
-		}
-		finally {
-			manager.lock.release();
-		}
-	}
+        FunctionDB other = this;
+        while (true) {
+            other.manager.lock.acquire();
+            try {
+                other.checkIsValid();
+                if (other.thunkedFunction != null) {
+                    other = other.thunkedFunction;
+                    continue;
+                }
+                StringPropertyMap callFixupMap = other.manager.getCallFixupMap(false);
+                if (callFixupMap == null) {
+                    return null;
+                }
+                return callFixupMap.getString(other.entryPoint);
+            } finally {
+                other.manager.lock.release();
+            }
+        }
+    }
 
 	@Override
 	public void setCallFixup(String name) {

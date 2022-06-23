@@ -58,11 +58,15 @@ public class MappedTableColumn<ROW_TYPE, EXPECTED_ROW_TYPE, COLUMN_TYPE, DATA_SO
 	 * @return the class of the column that this mapper wraps
 	 */
 	public Class<?> getMappedColumnClass() {
-		if (tableColumn instanceof MappedTableColumn) {
-			return ((MappedTableColumn<?, ?, ?, ?>) tableColumn).getMappedColumnClass();
-		}
-		return tableColumn.getClass();
-	}
+        MappedTableColumn other = this;
+        while (true) {
+            if (other.tableColumn instanceof MappedTableColumn) {
+                other = ((MappedTableColumn<?, ?, ?, ?>) other.tableColumn);
+                continue;
+            }
+            return other.tableColumn.getClass();
+        }
+    }
 
 	@Override
 	public Class<COLUMN_TYPE> getColumnClass() {

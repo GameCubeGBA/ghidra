@@ -923,36 +923,38 @@ public class DWARFFunctionImporter {
 	}
 
 	private boolean isDataTypeCompatibleWithExistingData(DataType dataType, Address address) {
-		if (DataUtilities.isUndefinedRange(currentProgram, address,
-			address.add(dataType.getLength() - 1))) {
-			return true;
-		}
+        while (true) {
+            if (DataUtilities.isUndefinedRange(currentProgram, address,
+                    address.add(dataType.getLength() - 1))) {
+                return true;
+            }
 
-		if (dataType instanceof Array) {
-			return isArrayDataTypeCompatibleWithExistingData((Array) dataType, address);
-		}
-		if (dataType instanceof Pointer) {
-			return isPointerDataTypeCompatibleWithExistingData((Pointer) dataType, address);
-		}
-		if (dataType instanceof Structure) {
-			return isStructDataTypeCompatibleWithExistingData((Structure) dataType, address);
-		}
-		if (dataType instanceof TypeDef) {
-			return isDataTypeCompatibleWithExistingData(((TypeDef) dataType).getBaseDataType(),
-				address);
-		}
-		if (dataType instanceof Enum) {
-			return isEnumDataTypeCompatibleWithExistingData((Enum) dataType, address);
-		}
+            if (dataType instanceof Array) {
+                return isArrayDataTypeCompatibleWithExistingData((Array) dataType, address);
+            }
+            if (dataType instanceof Pointer) {
+                return isPointerDataTypeCompatibleWithExistingData((Pointer) dataType, address);
+            }
+            if (dataType instanceof Structure) {
+                return isStructDataTypeCompatibleWithExistingData((Structure) dataType, address);
+            }
+            if (dataType instanceof TypeDef) {
+                dataType = ((TypeDef) dataType).getBaseDataType();
+                continue;
+            }
+            if (dataType instanceof Enum) {
+                return isEnumDataTypeCompatibleWithExistingData((Enum) dataType, address);
+            }
 
-		if (dataType instanceof CharDataType || dataType instanceof StringDataType ||
-			dataType instanceof IntegerDataType || dataType instanceof UnsignedIntegerDataType ||
-			dataType instanceof BooleanDataType) {
-			return isSimpleDataTypeCompatibleWithExistingData(dataType, address);
-		}
+            if (dataType instanceof CharDataType || dataType instanceof StringDataType ||
+                    dataType instanceof IntegerDataType || dataType instanceof UnsignedIntegerDataType ||
+                    dataType instanceof BooleanDataType) {
+                return isSimpleDataTypeCompatibleWithExistingData(dataType, address);
+            }
 
-		return false;
-	}
+            return false;
+        }
+    }
 
 	private Data createVariable(Address address, DataType dataType, DWARFNameInfo dni) {
 		try {

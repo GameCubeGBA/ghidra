@@ -296,25 +296,27 @@ public class PackedDatabase extends Database {
 	 * @return true if read-only lock exists+
 	 */
 	public static boolean isReadOnlyPDBDirectory(ResourceFile directory) {
-		File dir = directory.getFile(false);
-		if (dir == null) {
-			return true;
-		}
-		File readOnlyLockFile = new File(dir, READ_ONLY_DIRECTORY_LOCK_FILE);
-		if (!readOnlyLockFile.isFile()) {
-			try {
-				ResourceFile parentFile = directory.getParentFile();
-				if (parentFile == null) {
-					return false;
-				}
-				return isReadOnlyPDBDirectory(parentFile);
-			}
-			catch (SecurityException e) {
-				// return true
-			}
-		}
-		return true;
-	}
+        while (true) {
+            File dir = directory.getFile(false);
+            if (dir == null) {
+                return true;
+            }
+            File readOnlyLockFile = new File(dir, READ_ONLY_DIRECTORY_LOCK_FILE);
+            if (!readOnlyLockFile.isFile()) {
+                try {
+                    ResourceFile parentFile = directory.getParentFile();
+                    if (parentFile == null) {
+                        return false;
+                    }
+                    directory = parentFile;
+                    continue;
+                } catch (SecurityException e) {
+                    // return true
+                }
+            }
+            return true;
+        }
+    }
 
 	@Override
 	protected void finalize() throws Throwable {

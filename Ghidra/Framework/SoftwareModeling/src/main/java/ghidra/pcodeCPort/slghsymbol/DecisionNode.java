@@ -357,25 +357,27 @@ public class DecisionNode {
 	}
 
 	Constructor resolve(ParserWalker pos) {
-		if (bitsize == 0) { // The node is terminal
-			IteratorSTL<Pair<DisjointPattern, Constructor>> iter;
-			for (iter = list.begin(); !iter.isEnd(); iter.increment()) {
-				if (iter.get().first.isMatch(pos)) {
-					return iter.get().second;
-				}
-			}
-			throw new BadDataError(pos.getAddr().getShortcut() + pos.getAddr().toString() +
-				": Unable to resolve constructor");
-		}
-		int val;
-		if (contextdecision) {
-			val = pos.getContextBits(startbit, bitsize);
-		}
-		else {
-			val = pos.getInstructionBits(startbit, bitsize);
-		}
-		return children.get(val).resolve(pos);
-	}
+        DecisionNode other = this;
+        while (true) {
+            if (other.bitsize == 0) { // The node is terminal
+                IteratorSTL<Pair<DisjointPattern, Constructor>> iter;
+                for (iter = other.list.begin(); !iter.isEnd(); iter.increment()) {
+                    if (iter.get().first.isMatch(pos)) {
+                        return iter.get().second;
+                    }
+                }
+                throw new BadDataError(pos.getAddr().getShortcut() + pos.getAddr().toString() +
+                        ": Unable to resolve constructor");
+            }
+            int val;
+            if (other.contextdecision) {
+                val = pos.getContextBits(other.startbit, other.bitsize);
+            } else {
+                val = pos.getInstructionBits(other.startbit, other.bitsize);
+            }
+            other = other.children.get(val);
+        }
+    }
 
 	void saveXml(PrintStream s) {
 		s.append("<decision");

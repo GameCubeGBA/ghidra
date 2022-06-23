@@ -136,21 +136,24 @@ public abstract class DecompilerReference {
 	}
 
 	public static DataType getBaseType(DataType dt) {
-		if (dt instanceof Array) {
-			return getBaseType(((Array) dt).getDataType());
-		}
-		else if (dt instanceof Pointer) {
-			DataType baseDataType = ((Pointer) dt).getDataType();
-			if (baseDataType != null) {
-				return getBaseType(baseDataType);
-			}
-		}
-		else if (dt instanceof TypeDef) {
-			DataType baseDataType = ((TypeDef) dt).getBaseDataType();
-			return getBaseType(baseDataType);
-		}
-		return dt;
-	}
+        while (true) {
+            if (dt instanceof Array) {
+                dt = ((Array) dt).getDataType();
+                continue;
+            } else if (dt instanceof Pointer) {
+                DataType baseDataType = ((Pointer) dt).getDataType();
+                if (baseDataType != null) {
+                    dt = baseDataType;
+                    continue;
+                }
+            } else if (dt instanceof TypeDef) {
+                DataType baseDataType = ((TypeDef) dt).getBaseDataType();
+                dt = baseDataType;
+                continue;
+            }
+            return dt;
+        }
+    }
 
 	public static DataType getFieldDataType(ClangFieldToken field) {
 		DataType fieldDt = field.getDataType();

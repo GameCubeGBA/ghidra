@@ -918,39 +918,47 @@ public class ContextState {
 	}
 
 	private Varnode getByte(String frameMapName, long offset) {
-		HashMap<Long, Varnode> frameMap = getFrameMap(frameMapName, false);
-		if (frameMap != null) {
-			Varnode v = frameMap.get(offset);
-			if (v != null) {
-				return v;
-			}
-		}
-		if (previousState != null) {
-			return previousState.getByte(frameMapName, offset);
-		}
-		return null;
-	}
+        ContextState other = this;
+        while (true) {
+            HashMap<Long, Varnode> frameMap = other.getFrameMap(frameMapName, false);
+            if (frameMap != null) {
+                Varnode v = frameMap.get(offset);
+                if (v != null) {
+                    return v;
+                }
+            }
+            if (other.previousState != null) {
+                other = other.previousState;
+                continue;
+            }
+            return null;
+        }
+    }
 
 	private Varnode getByte(Address address) throws MemoryAccessException {
-		Varnode value = memoryMap.get(address);
-		if (value != null) {
-			return value;
-		}
-		if (previousState != null) {
-			return previousState.getByte(address);
-		}
-		if (address.isMemoryAddress()) {
-			if (memory == null) {
-				throw new MemoryAccessException("No memory found for " + address);
-			}
-			MemoryBlock block = memory.getBlock(address);
-			if (block != null && block.isInitialized() && !block.isVolatile()) {
-				byte val = block.getByte(address);
-				return new MemoryByteVarnode(val);
-			}
-		}
-		return null;
-	}
+        ContextState other = this;
+        while (true) {
+            Varnode value = other.memoryMap.get(address);
+            if (value != null) {
+                return value;
+            }
+            if (other.previousState != null) {
+                other = other.previousState;
+                continue;
+            }
+            if (address.isMemoryAddress()) {
+                if (other.memory == null) {
+                    throw new MemoryAccessException("No memory found for " + address);
+                }
+                MemoryBlock block = other.memory.getBlock(address);
+                if (block != null && block.isInitialized() && !block.isVolatile()) {
+                    byte val = block.getByte(address);
+                    return new MemoryByteVarnode(val);
+                }
+            }
+            return null;
+        }
+    }
 
 	/**
 	 * MemoryByteVarnode provides an indication that this

@@ -490,32 +490,38 @@ public class FunctionGraph extends GroupingVisualGraph<FGVertex, FGEdge> {
 	}
 
 	private boolean groupContainsEntry(GroupedFunctionGraphVertex vertex) {
-		Set<FGVertex> groupVertices = vertex.getVertices();
-		for (FGVertex groupedVertex : groupVertices) {
-			FGVertexType vertexType = groupedVertex.getVertexType();
-			if (vertex.isEntry()) {
-				return true;
-			}
-			else if (vertexType == FGVertexType.GROUP) {
-				return groupContainsEntry((GroupedFunctionGraphVertex) groupedVertex);
-			}
-		}
-		return false;
-	}
+        groupContainsEntry:
+        while (true) {
+            Set<FGVertex> groupVertices = vertex.getVertices();
+            for (FGVertex groupedVertex : groupVertices) {
+                FGVertexType vertexType = groupedVertex.getVertexType();
+                if (vertex.isEntry()) {
+                    return true;
+                } else if (vertexType == FGVertexType.GROUP) {
+                    vertex = (GroupedFunctionGraphVertex) groupedVertex;
+                    continue groupContainsEntry;
+                }
+            }
+            return false;
+        }
+    }
 
 	private boolean groupContainsExit(GroupedFunctionGraphVertex vertex) {
-		Set<FGVertex> groupVertices = vertex.getVertices();
-		for (FGVertex groupedVertex : groupVertices) {
-			FGVertexType vertexType = groupedVertex.getVertexType();
-			if (vertexType.isExit()) {
-				return true;
-			}
-			else if (vertexType == FGVertexType.GROUP) {
-				return groupContainsExit((GroupedFunctionGraphVertex) groupedVertex);
-			}
-		}
-		return false;
-	}
+        groupContainsExit:
+        while (true) {
+            Set<FGVertex> groupVertices = vertex.getVertices();
+            for (FGVertex groupedVertex : groupVertices) {
+                FGVertexType vertexType = groupedVertex.getVertexType();
+                if (vertexType.isExit()) {
+                    return true;
+                } else if (vertexType == FGVertexType.GROUP) {
+                    vertex = (GroupedFunctionGraphVertex) groupedVertex;
+                    continue groupContainsExit;
+                }
+            }
+            return false;
+        }
+    }
 
 	public Set<FGVertex> getExitPoints() {
 		HashSet<FGVertex> result = new LinkedHashSet<>();

@@ -278,29 +278,33 @@ public class DisassemblerPlugin extends Plugin {
 
 	boolean checkDisassemblyEnabled(ListingActionContext context, Address address,
 			boolean followPtr) {
-		ProgramSelection currentSelection = context.getSelection();
-		Program currentProgram = context.getProgram();
-		if ((currentSelection != null) && (!currentSelection.isEmpty())) {
-			return true;
-		}
+        while (true) {
+            ProgramSelection currentSelection = context.getSelection();
+            Program currentProgram = context.getProgram();
+            if ((currentSelection != null) && (!currentSelection.isEmpty())) {
+                return true;
+            }
 
-		Listing listing = currentProgram.getListing();
+            Listing listing = currentProgram.getListing();
 
-		if (listing.getInstructionContaining(address) != null) {
-			return false;
-		}
-		Data data = listing.getDefinedDataContaining(address);
-		if (data != null) {
-			if (followPtr && data.isPointer()) {
-				Address ptrAddr = data.getAddress(0);
-				if (ptrAddr != null) {
-					return checkDisassemblyEnabled(context, ptrAddr, false);
-				}
-			}
-			return false;
-		}
-		return currentProgram.getMemory().contains(address);
-	}
+            if (listing.getInstructionContaining(address) != null) {
+                return false;
+            }
+            Data data = listing.getDefinedDataContaining(address);
+            if (data != null) {
+                if (followPtr && data.isPointer()) {
+                    Address ptrAddr = data.getAddress(0);
+                    if (ptrAddr != null) {
+                        followPtr = false;
+                        address = ptrAddr;
+                        continue;
+                    }
+                }
+                return false;
+            }
+            return currentProgram.getMemory().contains(address);
+        }
+    }
 
 	public void setDefaultContext(ListingActionContext context) {
 		Program contextProgram = context.getProgram();

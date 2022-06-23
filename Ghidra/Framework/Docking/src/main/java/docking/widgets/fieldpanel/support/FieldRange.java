@@ -119,14 +119,19 @@ public class FieldRange implements Comparable<FieldRange> {
 	}
 
 	public boolean canMerge(FieldRange newRange) {
-		if (compareTo(newRange) > 0) {
-			return newRange.canMerge(this);
-		}
-		if (end.compareTo(newRange.start) < 0) {
-			return false;
-		}
-		return true;
-	}
+        FieldRange other = this;
+        while (true) {
+            if (other.compareTo(newRange) > 0) {
+                newRange = this;
+                other = newRange;
+                continue;
+            }
+            if (other.end.compareTo(newRange.start) < 0) {
+                return false;
+            }
+            return true;
+        }
+    }
 
 	public void merge(FieldRange newRange) {
 		if (!canMerge(newRange)) {
@@ -145,11 +150,16 @@ public class FieldRange implements Comparable<FieldRange> {
 	}
 
 	public boolean intersects(FieldRange range) {
-		if (compareTo(range) > 0) {
-			return range.intersects(this);
-		}
-		return end.compareTo(range.start) > 0;
-	}
+        FieldRange other = this;
+        while (true) {
+            if (other.compareTo(range) > 0) {
+                range = this;
+                other = range;
+                continue;
+            }
+            return other.end.compareTo(range.start) > 0;
+        }
+    }
 
 	public FieldRange intersect(FieldRange range) {
 		FieldLocation maxStart = start.compareTo(range.start) >= 0 ? start : range.start;

@@ -165,21 +165,23 @@ public class ReflectionUtilities {
 	 * @return field which corresponds to type classType or null
 	 */
 	public static Field locateFieldByTypeOnClass(Class<?> classType, Class<?> containingClass) {
-		Field[] declaredFields = containingClass.getDeclaredFields();
-		for (Field field : declaredFields) {
-			Class<?> fieldClass = field.getType();
-			if (fieldClass == classType) {
-				return field;
-			}
-		}
+        while (true) {
+            Field[] declaredFields = containingClass.getDeclaredFields();
+            for (Field field : declaredFields) {
+                Class<?> fieldClass = field.getType();
+                if (fieldClass == classType) {
+                    return field;
+                }
+            }
 
-		// try our parent
-		Class<?> parentClass = containingClass.getSuperclass();
-		if (parentClass == null) {
-			return null;
-		}
-		return locateFieldByTypeOnClass(classType, parentClass);
-	}
+            // try our parent
+            Class<?> parentClass = containingClass.getSuperclass();
+            if (parentClass == null) {
+                return null;
+            }
+            containingClass = parentClass;
+        }
+    }
 
 	/**
 	 * Returns the class name of the entry in the stack that comes before all references to the
@@ -691,27 +693,30 @@ public class ReflectionUtilities {
 	}
 
 	private static Class<?> getClass(Type type) {
+        while (true) {
 
-		if (type instanceof Class) {
-			return (Class<?>) type;
-		}
+            if (type instanceof Class) {
+                return (Class<?>) type;
+            }
 
-		if (type instanceof ParameterizedType) {
-			return getClass(((ParameterizedType) type).getRawType());
-		}
+            if (type instanceof ParameterizedType) {
+                type = ((ParameterizedType) type).getRawType();
+                continue;
+            }
 
-		if (type instanceof GenericArrayType) {
-			GenericArrayType arrayType = (GenericArrayType) type;
-			Type componentType = arrayType.getGenericComponentType();
-			Class<?> componentClass = getClass(componentType);
-			if (componentClass != null) {
-				return Array.newInstance(componentClass, 0).getClass();
-			}
-			return null;
-		}
+            if (type instanceof GenericArrayType) {
+                GenericArrayType arrayType = (GenericArrayType) type;
+                Type componentType = arrayType.getGenericComponentType();
+                Class<?> componentClass = getClass(componentType);
+                if (componentClass != null) {
+                    return Array.newInstance(componentClass, 0).getClass();
+                }
+                return null;
+            }
 
-		return null;
-	}
+            return null;
+        }
+    }
 
 	private static List<Class<?>> resolveBaseClassTypeArguments(Map<Type, Type> resolvedTypes,
 			Type[] genericTypeArguments) {

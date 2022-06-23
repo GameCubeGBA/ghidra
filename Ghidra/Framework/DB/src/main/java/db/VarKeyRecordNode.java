@@ -297,44 +297,47 @@ class VarKeyRecordNode extends VarKeyNode implements FieldKeyRecordNode {
 
 	@Override
 	public VarKeyNode putRecord(DBRecord record, Table table) throws IOException {
+        VarKeyRecordNode other = this;
+        while (true) {
 
-		Field key = record.getKeyField();
-		int index = getKeyIndex(key);
+            Field key = record.getKeyField();
+            int index = other.getKeyIndex(key);
 
-		// Handle record update case
-		if (index >= 0) {
-			if (table != null) {
-				table.updatedRecord(getRecord(table.getSchema(), index), record);
-			}
-			VarKeyNode newRoot = updateRecord(index, record);
-			return newRoot;
-		}
+            // Handle record update case
+            if (index >= 0) {
+                if (table != null) {
+                    table.updatedRecord(other.getRecord(table.getSchema(), index), record);
+                }
+                VarKeyNode newRoot = other.updateRecord(index, record);
+                return newRoot;
+            }
 
-		// Handle new record - see if we have room in this leaf
-		index = -index - 1;
-		if (insertRecord(index, record)) {
-			if (index == 0 && parent != null) {
-				parent.keyChanged(getKeyField(1), key, this);
-			}
-			if (table != null) {
-				table.insertedRecord(record);
-			}
-			return getRoot();
-		}
+            // Handle new record - see if we have room in this leaf
+            index = -index - 1;
+            if (other.insertRecord(index, record)) {
+                if (index == 0 && other.parent != null) {
+                    other.parent.keyChanged(other.getKeyField(1), key, other);
+                }
+                if (table != null) {
+                    table.insertedRecord(record);
+                }
+                return other.getRoot();
+            }
 
-		// Special Case - append new leaf to right
-		if (index == keyCount) {
-			VarKeyNode newRoot = appendNewLeaf(record);
-			if (table != null) {
-				table.insertedRecord(record);
-			}
-			return newRoot;
-		}
+            // Special Case - append new leaf to right
+            if (index == other.keyCount) {
+                VarKeyNode newRoot = other.appendNewLeaf(record);
+                if (table != null) {
+                    table.insertedRecord(record);
+                }
+                return newRoot;
+            }
 
-		// Split leaf and complete insertion
-		VarKeyRecordNode leaf = split().getLeafNode(key);
-		return leaf.putRecord(record, table);
-	}
+            // Split leaf and complete insertion
+            VarKeyRecordNode leaf = other.split().getLeafNode(key);
+            other = leaf;
+        }
+    }
 
 	/**
 	 * Append a new leaf and insert the specified record.

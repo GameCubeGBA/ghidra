@@ -525,312 +525,295 @@ public class MDMangGhidra extends MDMang {
 	// PointerObject?)
 	private DemangledDataType processDataType(DemangledDataType resultDataType,
 			MDDataType datatype) {
-		if (resultDataType == null) {
-			resultDataType =
-				new DemangledDataType(mangledSource, demangledSource, getDataTypeName(datatype));
-		}
-		if (datatype.isSpecifiedSigned()) {
-			// Returns true if default signed or specified signed. TODO: There is no place to
-			// capture default signed versus specified signed (i.e., there are three types of
-			// char: default signed, specified signed, and unsigned)
-			resultDataType.setSigned();
-		}
-		if (datatype.isUnsigned()) {
-			resultDataType.setUnsigned();
-		}
+        while (true) {
+            if (resultDataType == null) {
+                resultDataType =
+                        new DemangledDataType(mangledSource, demangledSource, getDataTypeName(datatype));
+            }
+            if (datatype.isSpecifiedSigned()) {
+                // Returns true if default signed or specified signed. TODO: There is no place to
+                // capture default signed versus specified signed (i.e., there are three types of
+                // char: default signed, specified signed, and unsigned)
+                resultDataType.setSigned();
+            }
+            if (datatype.isUnsigned()) {
+                resultDataType.setUnsigned();
+            }
 
-		// Bunch of else-ifs for exclusive types
-		if (datatype instanceof MDModifierType) {
-			MDModifierType modifierType = (MDModifierType) datatype;
-			// if (modifierType.isBased()) {
-			// resultDataType.set___();
-			// modifierType.getCVMod().getBasedName();
-			// }
-			if (modifierType.isConst()) {
-				resultDataType.setConst();
-			}
-			if (modifierType.isVolatile()) {
-				resultDataType.setVolatile();
-			}
-			if (modifierType.isPointer64()) {
-				resultDataType.setPointer64();
-			}
-			if (modifierType.isRestrict()) {
-				resultDataType.setRestrict();
-			}
-			if (modifierType.isUnaligned()) {
-				resultDataType.setUnaligned();
-			}
-			resultDataType.setBasedName(modifierType.getBasedName());
-			// if (modifierType.isMember()) {
-			resultDataType.setMemberScope(modifierType.getMemberScope());
-			// }
-			// TODO: fix. Following is a kludge because DemangledObject has no  DemangledReference
-			// with corresponding referencedType.
-			if (modifierType instanceof MDArrayBasicType) {
-				resultDataType.setArray(1);
-				if ((modifierType.getReferencedType() instanceof MDFunctionType)) {
-					// MDType ref = modifierType.getReferencedType();
-					// TODO: A demangled function reference is needed here.
-					// DemangledFunction function = new
-					// DemangledFunction(objectCPP.getQualifiedName().getBasicName().toString());
-					// function.setNamespace(processNamespace(objectCPP.getQualifiedName()));
-					// //resultObject = function;
-					// return processFunction(ref, resultDataType);
-				}
-				else if (modifierType.getReferencedType() instanceof MDDataType) {
-					return processDataType(resultDataType,
-						(MDDataType) modifierType.getReferencedType());
-				}
-				else {
-					// Empty for now--placeholder for possible future logic.
-				}
-			}
-			else if (modifierType instanceof MDPointerType) {
-				if ((modifierType.getReferencedType() instanceof MDFunctionType)) {
-					// TODO---------what are we returning... need to work on called routine.
-					DemangledFunctionPointer fp =
-						processDemangledFunctionPointer((MDPointerType) modifierType);
-					// TODO: fix. Following is a kludge because DemangledObject  has no
-					// DemangledPointer with corresponding referencedType.
-					for (int i = 0; i < resultDataType.getPointerLevels(); i++) {
-						fp.incrementPointerLevels();
-					}
-					if (resultDataType.isConst()) {
-						fp.setConst();
-					}
-					if (resultDataType.isVolatile()) {
-						fp.setVolatile();
-					}
-					if (resultDataType.isPointer64()) {
-						fp.setPointer64();
-					}
-					return fp;
-				}
-				// modifierType.getArrayString();
-				// resultDataType.setArray();
-				//Processing the referenced type (for Ghidra, and then setting attributes on it)
-				processDataType(resultDataType, (MDDataType) modifierType.getReferencedType());
-				resultDataType.incrementPointerLevels();
-				if (modifierType.getCVMod().isConst()) {
-					resultDataType.setConst();
-				}
-				if (modifierType.getCVMod().isVolatile()) {
-					resultDataType.setVolatile();
-				}
-				if (modifierType.getCVMod().isPointer64()) {
-					resultDataType.setPointer64();
-				}
-				return resultDataType;
-			}
-			// TODO: fix. Following is a kludge because DemangledObject has no
-			// DemangledReference
-			// with corresponding referencedType.
-			else if (modifierType instanceof MDReferenceType) {
-				// TODO---------what are we returning... need to work on called
-				// routine.
-				if ((modifierType.getReferencedType() instanceof MDFunctionType)) {
-					DemangledFunctionReference fr = processDemangledFunctionReference(modifierType);
-					// TODO: fix. Following is a kludge because DemangledObject has no
-					// DemangledPointer with corresponding referencedType.
-					for (int i = 0; i < resultDataType.getPointerLevels(); i++) {
-						fr.incrementPointerLevels();
-					}
-					if (resultDataType.isConst()) {
-						fr.setConst();
-					}
-					if (resultDataType.isVolatile()) {
-						fr.setVolatile();
-					}
-					if (resultDataType.isPointer64()) {
-						fr.setPointer64();
-					}
-					return fr;
-				}
-				//Processing the referenced type (for Ghidra, and then setting attributes on it)
-				processDataType(resultDataType, (MDDataType) modifierType.getReferencedType());
-				resultDataType.setReference(); // Not sure if we should do/use this.
-				if (modifierType.getCVMod().isConst()) {
-					resultDataType.setConst();
-				}
-				if (modifierType.getCVMod().isVolatile()) {
-					resultDataType.setVolatile();
-				}
-				if (modifierType.getCVMod().isPointer64()) {
-					resultDataType.setPointer64();
-				}
-				return resultDataType;
-			}
-			// TODO: fix. Following is a kludge because DemangledObject has no DemangledReference
-			// with corresponding referencedType.
-			else if (modifierType instanceof MDFunctionIndirectType) {
-				// TODO---------what are we returning... need to work on called routine.
-				DemangledFunctionIndirect fd =
-					processDemangledFunctionIndirect((MDFunctionIndirectType) modifierType);
-				for (int i = 0; i < resultDataType.getPointerLevels(); i++) {
-					fd.incrementPointerLevels();
-				}
-				if (resultDataType.isConst()) {
-					fd.setConst();
-				}
-				if (resultDataType.isVolatile()) {
-					fd.setVolatile();
-				}
-				if (resultDataType.isPointer64()) {
-					fd.setPointer64();
-				}
-				return fd;
-			}
-			else if (modifierType instanceof MDPointerRefDataType) {
-				resultDataType.setName(getDataTypeName(datatype));
-				// Not sure if this is the correct thing to do for MDPointerRefDataType, but we
-				// are just going to assign the referred-to type:
-				//Processing the referenced type (for Ghidra, and then setting attributes on it)
-				return processDataType(resultDataType,
-					(MDDataType) modifierType.getReferencedType());
-			}
-			else if (modifierType instanceof MDDataReferenceType) {
-				// Not sure if this is the correct thing to do for MDDataReferenceType, but we
-				// are just going to assign the referred-to type:
-				//Processing the referenced type (for Ghidra, and then setting attributes on it)
-				processDataType(resultDataType, (MDDataType) modifierType.getReferencedType());
-				if (modifierType.getCVMod().isConst()) {
-					resultDataType.setConst();
-				}
-				if (modifierType.getCVMod().isVolatile()) {
-					resultDataType.setVolatile();
-				}
-				return resultDataType;
-			}
-			else if (modifierType instanceof MDDataRefRefType) {
-				if ((modifierType.getReferencedType() instanceof MDFunctionType)) {
-					resultDataType.setName(getDataTypeName(datatype));
-					// TODO---------what are we returning... need to work on called routine.
-					DemangledFunctionReference fr = processDemangledFunctionReference(modifierType);
-					// TODO: fix. Following is a kludge because DemangledObject has no
-					// DemangledPointer with corresponding referencedType.
-					for (int i = 0; i < resultDataType.getPointerLevels(); i++) {
-						fr.incrementPointerLevels();
-					}
-					if (resultDataType.isConst()) {
-						fr.setConst();
-					}
-					if (resultDataType.isVolatile()) {
-						fr.setVolatile();
-					}
-					if (resultDataType.isPointer64()) {
-						fr.setPointer64();
-					}
-					return fr;
-				}
-				//Processing the referenced type (for Ghidra, and then setting attributes on it)
-				processDataType(resultDataType, (MDDataType) modifierType.getReferencedType());
-				resultDataType.setReference(); // Not sure if we should do/use this.
-				if (modifierType.getCVMod().isConst()) {
-					resultDataType.setConst();
-				}
-				if (modifierType.getCVMod().isVolatile()) {
-					resultDataType.setVolatile();
-				}
-				if (modifierType.getCVMod().isPointer64()) {
-					resultDataType.setPointer64();
-				}
-				return resultDataType;
-			}
-			else if (modifierType instanceof MDStdNullPtrType) {
-				resultDataType.setName(datatype.toString());
-			}
-			else {
-				// not pointer, reference, or array type
-				if ((modifierType.getReferencedType() instanceof MDFunctionType)) {
-					// TODO---------what are we returning... need to work on called routine.
-					DemangledFunctionIndirect fx = processDemangledFunctionQuestion(modifierType);
-					// TODO: fix. Following is a kludge because DemangledObject has no
-					// DemangledPointer with corresponding referencedType.
-					if (resultDataType.isConst()) {
-						fx.setConst();
-					}
-					if (resultDataType.isVolatile()) {
-						fx.setVolatile();
-					}
-					if (resultDataType.isPointer64()) {
-						fx.setPointer64();
-					}
-					return fx;
-				}
-				// resultDataType.incrementPointerLevels();//Not sure if we should do/use this.
-				DemangledDataType dataType =
-					processDataType(resultDataType, (MDDataType) modifierType.getReferencedType());
-				if (modifierType.getCVMod().isConst()) {
-					resultDataType.setConst();
-				}
-				if (modifierType.getCVMod().isVolatile()) {
-					resultDataType.setVolatile();
-				}
-				if (modifierType.getCVMod().isPointer64()) {
-					resultDataType.setPointer64();
-				}
-				return dataType;
-			}
-		}
-		else if (datatype instanceof MDComplexType) {
-			MDComplexType complexType = (MDComplexType) datatype;
-			// Hope this is correct... will return "class" or other
-			resultDataType.setName(complexType.getNamespace().getName());
-			// TODO: setNamespace() wants a "DemangledType" for a namespace.
-			// Two problems:
-			// 1) we don't have an appropriate method to use
-			// 2) not sure DemangledType is appropriate; in MDComplexType we have an
-			// MDQualification--not an MDQualifiedName
-			resultDataType.setNamespace(processNamespace(complexType.getNamespace()));
+            // Bunch of else-ifs for exclusive types
+            if (datatype instanceof MDModifierType) {
+                MDModifierType modifierType = (MDModifierType) datatype;
+                // if (modifierType.isBased()) {
+                // resultDataType.set___();
+                // modifierType.getCVMod().getBasedName();
+                // }
+                if (modifierType.isConst()) {
+                    resultDataType.setConst();
+                }
+                if (modifierType.isVolatile()) {
+                    resultDataType.setVolatile();
+                }
+                if (modifierType.isPointer64()) {
+                    resultDataType.setPointer64();
+                }
+                if (modifierType.isRestrict()) {
+                    resultDataType.setRestrict();
+                }
+                if (modifierType.isUnaligned()) {
+                    resultDataType.setUnaligned();
+                }
+                resultDataType.setBasedName(modifierType.getBasedName());
+                // if (modifierType.isMember()) {
+                resultDataType.setMemberScope(modifierType.getMemberScope());
+                // }
+                // TODO: fix. Following is a kludge because DemangledObject has no  DemangledReference
+                // with corresponding referencedType.
+                if (modifierType instanceof MDArrayBasicType) {
+                    resultDataType.setArray(1);
+                    if ((modifierType.getReferencedType() instanceof MDFunctionType)) {
+                        // MDType ref = modifierType.getReferencedType();
+                        // TODO: A demangled function reference is needed here.
+                        // DemangledFunction function = new
+                        // DemangledFunction(objectCPP.getQualifiedName().getBasicName().toString());
+                        // function.setNamespace(processNamespace(objectCPP.getQualifiedName()));
+                        // //resultObject = function;
+                        // return processFunction(ref, resultDataType);
+                    } else if (modifierType.getReferencedType() instanceof MDDataType) {
+                        datatype = (MDDataType) modifierType.getReferencedType();
+                        continue;
+                    }
+                    // Empty for now--placeholder for possible future logic.
+                } else if (modifierType instanceof MDPointerType) {
+                    if ((modifierType.getReferencedType() instanceof MDFunctionType)) {
+                        // TODO---------what are we returning... need to work on called routine.
+                        DemangledFunctionPointer fp =
+                                processDemangledFunctionPointer((MDPointerType) modifierType);
+                        // TODO: fix. Following is a kludge because DemangledObject  has no
+                        // DemangledPointer with corresponding referencedType.
+                        for (int i = 0; i < resultDataType.getPointerLevels(); i++) {
+                            fp.incrementPointerLevels();
+                        }
+                        if (resultDataType.isConst()) {
+                            fp.setConst();
+                        }
+                        if (resultDataType.isVolatile()) {
+                            fp.setVolatile();
+                        }
+                        if (resultDataType.isPointer64()) {
+                            fp.setPointer64();
+                        }
+                        return fp;
+                    }
+                    // modifierType.getArrayString();
+                    // resultDataType.setArray();
+                    //Processing the referenced type (for Ghidra, and then setting attributes on it)
+                    processDataType(resultDataType, (MDDataType) modifierType.getReferencedType());
+                    resultDataType.incrementPointerLevels();
+                    if (modifierType.getCVMod().isConst()) {
+                        resultDataType.setConst();
+                    }
+                    if (modifierType.getCVMod().isVolatile()) {
+                        resultDataType.setVolatile();
+                    }
+                    if (modifierType.getCVMod().isPointer64()) {
+                        resultDataType.setPointer64();
+                    }
+                    return resultDataType;
+                }
+                // TODO: fix. Following is a kludge because DemangledObject has no
+                // DemangledReference
+                // with corresponding referencedType.
+                else if (modifierType instanceof MDReferenceType) {
+                    // TODO---------what are we returning... need to work on called
+                    // routine.
+                    if ((modifierType.getReferencedType() instanceof MDFunctionType)) {
+                        DemangledFunctionReference fr = processDemangledFunctionReference(modifierType);
+                        // TODO: fix. Following is a kludge because DemangledObject has no
+                        // DemangledPointer with corresponding referencedType.
+                        for (int i = 0; i < resultDataType.getPointerLevels(); i++) {
+                            fr.incrementPointerLevels();
+                        }
+                        if (resultDataType.isConst()) {
+                            fr.setConst();
+                        }
+                        if (resultDataType.isVolatile()) {
+                            fr.setVolatile();
+                        }
+                        if (resultDataType.isPointer64()) {
+                            fr.setPointer64();
+                        }
+                        return fr;
+                    }
+                    //Processing the referenced type (for Ghidra, and then setting attributes on it)
+                    processDataType(resultDataType, (MDDataType) modifierType.getReferencedType());
+                    resultDataType.setReference(); // Not sure if we should do/use this.
+                    if (modifierType.getCVMod().isConst()) {
+                        resultDataType.setConst();
+                    }
+                    if (modifierType.getCVMod().isVolatile()) {
+                        resultDataType.setVolatile();
+                    }
+                    if (modifierType.getCVMod().isPointer64()) {
+                        resultDataType.setPointer64();
+                    }
+                    return resultDataType;
+                }
+                // TODO: fix. Following is a kludge because DemangledObject has no DemangledReference
+                // with corresponding referencedType.
+                else if (modifierType instanceof MDFunctionIndirectType) {
+                    // TODO---------what are we returning... need to work on called routine.
+                    DemangledFunctionIndirect fd =
+                            processDemangledFunctionIndirect((MDFunctionIndirectType) modifierType);
+                    for (int i = 0; i < resultDataType.getPointerLevels(); i++) {
+                        fd.incrementPointerLevels();
+                    }
+                    if (resultDataType.isConst()) {
+                        fd.setConst();
+                    }
+                    if (resultDataType.isVolatile()) {
+                        fd.setVolatile();
+                    }
+                    if (resultDataType.isPointer64()) {
+                        fd.setPointer64();
+                    }
+                    return fd;
+                } else if (modifierType instanceof MDPointerRefDataType) {
+                    resultDataType.setName(getDataTypeName(datatype));
+                    // Not sure if this is the correct thing to do for MDPointerRefDataType, but we
+                    // are just going to assign the referred-to type:
+                    //Processing the referenced type (for Ghidra, and then setting attributes on it)
+                    datatype = (MDDataType) modifierType.getReferencedType();
+                    continue;
+                } else if (modifierType instanceof MDDataReferenceType) {
+                    // Not sure if this is the correct thing to do for MDDataReferenceType, but we
+                    // are just going to assign the referred-to type:
+                    //Processing the referenced type (for Ghidra, and then setting attributes on it)
+                    processDataType(resultDataType, (MDDataType) modifierType.getReferencedType());
+                    if (modifierType.getCVMod().isConst()) {
+                        resultDataType.setConst();
+                    }
+                    if (modifierType.getCVMod().isVolatile()) {
+                        resultDataType.setVolatile();
+                    }
+                    return resultDataType;
+                } else if (modifierType instanceof MDDataRefRefType) {
+                    if ((modifierType.getReferencedType() instanceof MDFunctionType)) {
+                        resultDataType.setName(getDataTypeName(datatype));
+                        // TODO---------what are we returning... need to work on called routine.
+                        DemangledFunctionReference fr = processDemangledFunctionReference(modifierType);
+                        // TODO: fix. Following is a kludge because DemangledObject has no
+                        // DemangledPointer with corresponding referencedType.
+                        for (int i = 0; i < resultDataType.getPointerLevels(); i++) {
+                            fr.incrementPointerLevels();
+                        }
+                        if (resultDataType.isConst()) {
+                            fr.setConst();
+                        }
+                        if (resultDataType.isVolatile()) {
+                            fr.setVolatile();
+                        }
+                        if (resultDataType.isPointer64()) {
+                            fr.setPointer64();
+                        }
+                        return fr;
+                    }
+                    //Processing the referenced type (for Ghidra, and then setting attributes on it)
+                    processDataType(resultDataType, (MDDataType) modifierType.getReferencedType());
+                    resultDataType.setReference(); // Not sure if we should do/use this.
+                    if (modifierType.getCVMod().isConst()) {
+                        resultDataType.setConst();
+                    }
+                    if (modifierType.getCVMod().isVolatile()) {
+                        resultDataType.setVolatile();
+                    }
+                    if (modifierType.getCVMod().isPointer64()) {
+                        resultDataType.setPointer64();
+                    }
+                    return resultDataType;
+                } else if (modifierType instanceof MDStdNullPtrType) {
+                    resultDataType.setName(datatype.toString());
+                } else {
+                    // not pointer, reference, or array type
+                    if ((modifierType.getReferencedType() instanceof MDFunctionType)) {
+                        // TODO---------what are we returning... need to work on called routine.
+                        DemangledFunctionIndirect fx = processDemangledFunctionQuestion(modifierType);
+                        // TODO: fix. Following is a kludge because DemangledObject has no
+                        // DemangledPointer with corresponding referencedType.
+                        if (resultDataType.isConst()) {
+                            fx.setConst();
+                        }
+                        if (resultDataType.isVolatile()) {
+                            fx.setVolatile();
+                        }
+                        if (resultDataType.isPointer64()) {
+                            fx.setPointer64();
+                        }
+                        return fx;
+                    }
+                    // resultDataType.incrementPointerLevels();//Not sure if we should do/use this.
+                    DemangledDataType dataType =
+                            processDataType(resultDataType, (MDDataType) modifierType.getReferencedType());
+                    if (modifierType.getCVMod().isConst()) {
+                        resultDataType.setConst();
+                    }
+                    if (modifierType.getCVMod().isVolatile()) {
+                        resultDataType.setVolatile();
+                    }
+                    if (modifierType.getCVMod().isPointer64()) {
+                        resultDataType.setPointer64();
+                    }
+                    return dataType;
+                }
+            } else if (datatype instanceof MDComplexType) {
+                MDComplexType complexType = (MDComplexType) datatype;
+                // Hope this is correct... will return "class" or other
+                resultDataType.setName(complexType.getNamespace().getName());
+                // TODO: setNamespace() wants a "DemangledType" for a namespace.
+                // Two problems:
+                // 1) we don't have an appropriate method to use
+                // 2) not sure DemangledType is appropriate; in MDComplexType we have an
+                // MDQualification--not an MDQualifiedName
+                resultDataType.setNamespace(processNamespace(complexType.getNamespace()));
 
-			// Bunch of else-ifs for exclusive types
-			if (datatype instanceof MDEnumType) {
-				resultDataType.setEnum();
-				// Put in underlying type (for sizing too).
-				MDEnumType enumType = (MDEnumType) datatype;
-				resultDataType.setEnumType(enumType.getUnderlyingFullTypeName());
-			}
-			else if (datatype instanceof MDClassType) {
-				resultDataType.setClass();
-			}
-			else if (datatype instanceof MDStructType) {
-				resultDataType.setStruct();
-			}
-			else if (datatype instanceof MDUnionType) {
-				resultDataType.setUnion();
-			}
-			else if (datatype instanceof MDCoclassType) {
-				resultDataType.setCoclass();
-			}
-			else if (datatype instanceof MDCointerfaceType) {
-				resultDataType.setCointerface();
-			}
-		}
-		else if (datatype instanceof MDReferenceType) {
-			resultDataType.setReference();
-		}
-		else if (datatype instanceof MDArrayBasicType) {
-			resultDataType.setArray(1);
-		}
-		else if (datatype instanceof MDVarArgsType) {
-			resultDataType.setVarArgs();
-		}
-		else {
-			// MDDataType
-			// TODO MDW64Type needs repeated reference type parsing, just as modifier types need
-			// them.
-			resultDataType.setName(getDataTypeName(datatype));
-		}
-		// TODO: No place to indicate a general pointer--we can indicate Pointer64
-		// TODO: Not sure if anything fits this: resultDataType.setComplex();
-		// TODO: resultDataType.setTemplate(); //TODO: Not sure templates are data types
-		// according to how MSFT demangles them.
-		// TODO: resultDataType.setTemplate(null); //TODO: Not sure templates are data types
-		// according to how MSFT demangles them.
+                // Bunch of else-ifs for exclusive types
+                if (datatype instanceof MDEnumType) {
+                    resultDataType.setEnum();
+                    // Put in underlying type (for sizing too).
+                    MDEnumType enumType = (MDEnumType) datatype;
+                    resultDataType.setEnumType(enumType.getUnderlyingFullTypeName());
+                } else if (datatype instanceof MDClassType) {
+                    resultDataType.setClass();
+                } else if (datatype instanceof MDStructType) {
+                    resultDataType.setStruct();
+                } else if (datatype instanceof MDUnionType) {
+                    resultDataType.setUnion();
+                } else if (datatype instanceof MDCoclassType) {
+                    resultDataType.setCoclass();
+                } else if (datatype instanceof MDCointerfaceType) {
+                    resultDataType.setCointerface();
+                }
+            } else if (datatype instanceof MDReferenceType) {
+                resultDataType.setReference();
+            } else if (datatype instanceof MDArrayBasicType) {
+                resultDataType.setArray(1);
+            } else if (datatype instanceof MDVarArgsType) {
+                resultDataType.setVarArgs();
+            } else {
+                // MDDataType
+                // TODO MDW64Type needs repeated reference type parsing, just as modifier types need
+                // them.
+                resultDataType.setName(getDataTypeName(datatype));
+            }
+            // TODO: No place to indicate a general pointer--we can indicate Pointer64
+            // TODO: Not sure if anything fits this: resultDataType.setComplex();
+            // TODO: resultDataType.setTemplate(); //TODO: Not sure templates are data types
+            // according to how MSFT demangles them.
+            // TODO: resultDataType.setTemplate(null); //TODO: Not sure templates are data types
+            // according to how MSFT demangles them.
 
-		return resultDataType;
-	}
+            return resultDataType;
+        }
+    }
 
 	/**
 	 * Returns either a formal type name or a representative type name to fill into a

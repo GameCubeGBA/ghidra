@@ -79,11 +79,15 @@ class DataTypeComponentPreview implements Preview {
     }
 
 	public DataType getDataType() {
-	    if (parentPreview != null) {
-	        return parentPreview.getDataType();
-	    }
-	    return composite;
-	}
+        DataTypeComponentPreview other = this;
+        while (true) {
+            if (other.parentPreview != null) {
+                other = other.parentPreview;
+                continue;
+            }
+            return other.composite;
+        }
+    }
 
 	@Override
     public String toString() {
@@ -91,34 +95,38 @@ class DataTypeComponentPreview implements Preview {
 	}
 
     public int compareTo(Preview p) {
-        if (p instanceof DataTypeComponentPreview) {
-            DataTypeComponentPreview that = (DataTypeComponentPreview)p;
+        DataTypeComponentPreview other = this;
+        while (true) {
+            if (p instanceof DataTypeComponentPreview) {
+                DataTypeComponentPreview that = (DataTypeComponentPreview) p;
 
-            if (parentPreview != null && that.parentPreview == null) {
-                return parentPreview.compareTo(that);
-            }
-            if (parentPreview == null && that.parentPreview != null) {
-                return compareTo(that.parentPreview);
-            }
-            if (parentPreview != null && that.parentPreview != null) {
-                int value = parentPreview.compareTo(that.parentPreview);
-                if (value != 0) {
-                    return value;
+                if (other.parentPreview != null && that.parentPreview == null) {
+                    p = that;
+                    other = other.parentPreview;
+                    continue;
                 }
+                if (other.parentPreview == null && that.parentPreview != null) {
+                    p = that.parentPreview;
+                    continue;
+                }
+                if (other.parentPreview != null && that.parentPreview != null) {
+                    int value = other.parentPreview.compareTo(that.parentPreview);
+                    if (value != 0) {
+                        return value;
+                    }
+                }
+                if (other.composite.equals(that.composite)) {
+                    if (other.dtc.getOffset() < that.dtc.getOffset()) {
+                        return -1;
+                    } else if (other.dtc.getOffset() > that.dtc.getOffset()) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                }
+                return other.composite.getName().compareTo(that.composite.getName());
             }
-            if (composite.equals(that.composite)) {
-                if (dtc.getOffset() < that.dtc.getOffset()) {
-                    return -1;
-                }
-                else if (dtc.getOffset() > that.dtc.getOffset()) {
-                    return 1;
-                }
-                else {
-                    return 0;
-                }
-            }
-            return composite.getName().compareTo(that.composite.getName());
+            return other.toString().compareToIgnoreCase(p.toString());
         }
-        return toString().compareToIgnoreCase(p.toString());
     }
 }

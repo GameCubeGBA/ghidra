@@ -153,31 +153,35 @@ public class DataTypeUtilities {
 	 * @return true if the second data type is the first data type or is part of it.
 	 */
 	public static boolean isSecondPartOfFirst(DataType firstDataType, DataType secondDataType) {
-		if (firstDataType instanceof Pointer || secondDataType instanceof Pointer) {
-			return false;
-		}
-		if (firstDataType.equals(secondDataType)) {
-			return true;
-		}
-		if (firstDataType instanceof Array) {
-			DataType elementDataType = ((Array) firstDataType).getDataType();
-			return isSecondPartOfFirst(elementDataType, secondDataType);
-		}
-		if (firstDataType instanceof TypeDef) {
-			DataType innerDataType = ((TypeDef) firstDataType).getDataType();
-			return isSecondPartOfFirst(innerDataType, secondDataType);
-		}
-		if (firstDataType instanceof Composite) {
-			Composite compositeDataType = (Composite) firstDataType;
-			for (DataTypeComponent dtc : compositeDataType.getDefinedComponents()) {
-				DataType dataTypeToCheck = dtc.getDataType();
-				if (isSecondPartOfFirst(dataTypeToCheck, secondDataType)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
+        while (true) {
+            if (firstDataType instanceof Pointer || secondDataType instanceof Pointer) {
+                return false;
+            }
+            if (firstDataType.equals(secondDataType)) {
+                return true;
+            }
+            if (firstDataType instanceof Array) {
+                DataType elementDataType = ((Array) firstDataType).getDataType();
+                firstDataType = elementDataType;
+                continue;
+            }
+            if (firstDataType instanceof TypeDef) {
+                DataType innerDataType = ((TypeDef) firstDataType).getDataType();
+                firstDataType = innerDataType;
+                continue;
+            }
+            if (firstDataType instanceof Composite) {
+                Composite compositeDataType = (Composite) firstDataType;
+                for (DataTypeComponent dtc : compositeDataType.getDefinedComponents()) {
+                    DataType dataTypeToCheck = dtc.getDataType();
+                    if (isSecondPartOfFirst(dataTypeToCheck, secondDataType)) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+    }
 
 	/**
 	 * Returns true if the two dataTypes have the same sourceArchive and the same UniversalID
@@ -270,20 +274,26 @@ public class DataTypeUtilities {
 	}
 
 	public static DataType getArrayBaseDataType(Array arrayDt) {
-		DataType dataType = arrayDt.getDataType();
-		if (dataType instanceof Array) {
-			return getArrayBaseDataType((Array) dataType);
-		}
-		return dataType;
-	}
+        while (true) {
+            DataType dataType = arrayDt.getDataType();
+            if (dataType instanceof Array) {
+                arrayDt = (Array) dataType;
+                continue;
+            }
+            return dataType;
+        }
+    }
 
 	private static int getArrayBaseElementLength(Array arrayDt) {
-		DataType dataType = arrayDt.getDataType();
-		if (dataType instanceof Array) {
-			return getArrayBaseElementLength((Array) dataType);
-		}
-		return arrayDt.getElementLength();
-	}
+        while (true) {
+            DataType dataType = arrayDt.getDataType();
+            if (dataType instanceof Array) {
+                arrayDt = (Array) dataType;
+                continue;
+            }
+            return arrayDt.getElementLength();
+        }
+    }
 
 	private static String getArrayElementLengthForDynamic(Array arrayDt) {
 		if (getArrayBaseDataType(arrayDt).getLength() <= 0) {

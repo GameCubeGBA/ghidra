@@ -74,18 +74,21 @@ public class DecompilerFieldAccess extends DecompilerVariable {
 	}
 
 	protected DataType getBaseType(DataType dt) {
-		if (dt instanceof Array) {
-			return getBaseType(((Array) dt).getDataType());
-		}
-		else if (dt instanceof Pointer) {
-			DataType baseDataType = ((Pointer) dt).getDataType();
-			if (baseDataType != null) {
-				return getBaseType(baseDataType);
-			}
-		}
-		else if (dt instanceof TypeDef) {
-			return getBaseType(((TypeDef) dt).getBaseDataType());
-		}
-		return dt;
-	}
+        while (true) {
+            if (dt instanceof Array) {
+                dt = ((Array) dt).getDataType();
+                continue;
+            } else if (dt instanceof Pointer) {
+                DataType baseDataType = ((Pointer) dt).getDataType();
+                if (baseDataType != null) {
+                    dt = baseDataType;
+                    continue;
+                }
+            } else if (dt instanceof TypeDef) {
+                dt = ((TypeDef) dt).getBaseDataType();
+                continue;
+            }
+            return dt;
+        }
+    }
 }

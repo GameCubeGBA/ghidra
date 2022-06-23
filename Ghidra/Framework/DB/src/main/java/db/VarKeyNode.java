@@ -99,11 +99,15 @@ abstract class VarKeyNode implements FieldKeyNode {
 	 * @return TableNode
 	 */
 	VarKeyNode getRoot() {
-		if (parent != null) {
-			return parent.getRoot();
-		}
-		return this;
-	}
+        VarKeyNode result = this;
+        while (true) {
+            if (result.parent != null) {
+                result = result.parent;
+                continue;
+            }
+            return result;
+        }
+    }
 
 	@Override
 	public int getKeyCount() {

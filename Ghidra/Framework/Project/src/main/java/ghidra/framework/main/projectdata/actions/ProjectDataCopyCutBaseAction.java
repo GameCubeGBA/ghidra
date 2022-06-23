@@ -54,14 +54,16 @@ public abstract class ProjectDataCopyCutBaseAction extends ProjectTreeAction {
 	}
 
 	private boolean anyParentsInSet(HashSet<GTreeNode> set, GTreeNode node) {
-		GTreeNode parent = node.getParent();
-		if (parent == null) {
-			return false;
-		}
-		if (set.contains(parent)) {
-			return true;
-		}
-		return anyParentsInSet(set, parent);
-	}
+        while (true) {
+            GTreeNode parent = node.getParent();
+            if (parent == null) {
+                return false;
+            }
+            if (set.contains(parent)) {
+                return true;
+            }
+            node = parent;
+        }
+    }
 
 }

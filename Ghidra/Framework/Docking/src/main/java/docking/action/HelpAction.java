@@ -128,18 +128,20 @@ public class HelpAction extends DockingAction {
 	}
 
 	private Component getFirstAvailableComponentThatHasHelp(Component component) {
-		HelpService helpService = DockingWindowManager.getHelpService();
-		HelpLocation helpLocation = helpService.getHelpLocation(component);
-		if (helpLocation != null) {
-			return component;
-		}
+        while (true) {
+            HelpService helpService = DockingWindowManager.getHelpService();
+            HelpLocation helpLocation = helpService.getHelpLocation(component);
+            if (helpLocation != null) {
+                return component;
+            }
 
-		Container parent = component.getParent();
-		if (parent == null) {
-			// nothing else to check
-			return null;
-		}
+            Container parent = component.getParent();
+            if (parent == null) {
+                // nothing else to check
+                return null;
+            }
 
-		return getFirstAvailableComponentThatHasHelp(parent);
-	}
+            component = parent;
+        }
+    }
 }

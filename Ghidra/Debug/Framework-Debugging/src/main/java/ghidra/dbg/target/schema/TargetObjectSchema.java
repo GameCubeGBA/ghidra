@@ -420,12 +420,16 @@ public interface TargetObjectSchema {
 	 * @return the schema for the successor
 	 */
 	default TargetObjectSchema getSuccessorSchema(List<String> path) {
-		if (path.isEmpty()) {
-			return this;
-		}
-		TargetObjectSchema childSchema = getChildSchema(path.get(0));
-		return childSchema.getSuccessorSchema(path.subList(1, path.size()));
-	}
+        TargetObjectSchema result = this;
+        while (true) {
+            if (path.isEmpty()) {
+                return result;
+            }
+            TargetObjectSchema childSchema = result.getChildSchema(path.get(0));
+            path = path.subList(1, path.size());
+            result = childSchema;
+        }
+    }
 
 	/**
 	 * Do the same as {@link #searchFor(Class, List, boolean)} with an empty prefix

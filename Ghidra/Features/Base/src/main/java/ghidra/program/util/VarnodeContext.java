@@ -1097,61 +1097,58 @@ public class VarnodeContext implements ProcessorContext {
 	 */
 	public Varnode add(Varnode val1, Varnode val2, ContextEvaluator evaluator)
 			throws NotFoundException {
+        while (true) {
 
-		// try to make the constant value the addend.
-		if (val1.isConstant() || val1.isAddress()) {
-			Varnode swap = val1;
-			val1 = val2;
-			val2 = swap;
-		}
-		int spaceID = val1.getSpace();
-		long valbase = 0;
-		if (isRegister(val1) && val1.equals(val2)) {
-			// if both are registers, don't need to do extra
-			// checking, adding a register and a register will fail.
-		}
-		else if (isRegister(val1)) {
-			Register reg = trans.getRegister(val1);
-			if (reg == null) {
-				throw notFoundExc;
-			}
-			spaceID = getAddressSpace(reg.getName());
-			valbase = 0;
-			// check if evaluator wants to override unknown
-			Instruction instr = getCurrentInstruction(offsetContext.getAddress());
-			if (evaluator != null) {
-				Long uval = evaluator.unknownValue(this, instr, val1);
-				if (uval != null) {
-					// 2nd value could be a constant, or a register, which would create an offset from reg
-					valbase = uval.longValue();
-					spaceID = val2.getSpace();
-				}
-			}
-		}
-		else if (val1.getAddress() == BAD_ADDRESS) {
+            // try to make the constant value the addend.
+            if (val1.isConstant() || val1.isAddress()) {
+                Varnode swap = val1;
+                val1 = val2;
+                val2 = swap;
+            }
+            int spaceID = val1.getSpace();
+            long valbase = 0;
+            if (isRegister(val1) && val1.equals(val2)) {
+                // if both are registers, don't need to do extra
+                // checking, adding a register and a register will fail.
+            } else if (isRegister(val1)) {
+                Register reg = trans.getRegister(val1);
+                if (reg == null) {
+                    throw notFoundExc;
+                }
+                spaceID = getAddressSpace(reg.getName());
+                valbase = 0;
+                // check if evaluator wants to override unknown
+                Instruction instr = getCurrentInstruction(offsetContext.getAddress());
+                if (evaluator != null) {
+                    Long uval = evaluator.unknownValue(this, instr, val1);
+                    if (uval != null) {
+                        // 2nd value could be a constant, or a register, which would create an offset from reg
+                        valbase = uval.longValue();
+                        spaceID = val2.getSpace();
+                    }
+                }
+            } else if (val1.getAddress() == BAD_ADDRESS) {
 // FIXME: Why both a "(bad address)" space and a "BAD_ADDRESS_SPACE" ?
-			spaceID = getAddressSpace("(bad address)");
-			valbase = 0;
-			// check if evaluator wants to override unknown
-			Instruction instr = getCurrentInstruction(offsetContext.getAddress());
-			if (evaluator != null) {
-				Long uval = evaluator.unknownValue(this, instr, val1);
-				if (uval != null) {
-					// 2nd value could be a constant, or a register, which would create an offset from reg
-					valbase = uval.longValue();
-					spaceID = val2.getSpace();
-				}
-			}
-		}
-		else if (val1.isConstant()) {
-			valbase = val1.getOffset();
-		}
-		else if (isSymbolicSpace(spaceID)) {
-			Instruction instr = getCurrentInstruction(offsetContext.getAddress());
-			valbase = val1.getOffset();
-			if (evaluator != null) {
-				Long uval = evaluator.unknownValue(this, instr, val1);
-				if (uval != null) {
+                spaceID = getAddressSpace("(bad address)");
+                valbase = 0;
+                // check if evaluator wants to override unknown
+                Instruction instr = getCurrentInstruction(offsetContext.getAddress());
+                if (evaluator != null) {
+                    Long uval = evaluator.unknownValue(this, instr, val1);
+                    if (uval != null) {
+                        // 2nd value could be a constant, or a register, which would create an offset from reg
+                        valbase = uval.longValue();
+                        spaceID = val2.getSpace();
+                    }
+                }
+            } else if (val1.isConstant()) {
+                valbase = val1.getOffset();
+            } else if (isSymbolicSpace(spaceID)) {
+                Instruction instr = getCurrentInstruction(offsetContext.getAddress());
+                valbase = val1.getOffset();
+                if (evaluator != null) {
+                    Long uval = evaluator.unknownValue(this, instr, val1);
+                    if (uval != null) {
 //					if (val2.isRegister() && spaceID == getSymbolSpaceID(val2)) {
 //						valbase += uval.longValue() * 2;
 //						return createVarnode(valbase, val1.getSize());
@@ -1163,34 +1160,35 @@ public class VarnodeContext implements ProcessorContext {
 //						return add(createVarnode(valbase, val1.getSize()), val2, evaluator);
 //					}
 
-					if (val2.isRegister()) {
-						String spaceName = addrFactory.getAddressSpace(spaceID).getName();
-						Register reg2 = trans.getRegister(val2);
-						if (spaceName.equals(reg2.getName()) ||
-							spaceName.startsWith(reg2.getName() + "-")) {
-							// since this is essentially a multiply by two, and it is the same register
-							//   just multiply the current offset by 2, since we really don't know
-							//   the base register anyway...
-							valbase += uval.longValue() * 2;
-							return createConstantVarnode(valbase, val1.getSize());
-						}
-					}
-					valbase = uval.longValue();
+                        if (val2.isRegister()) {
+                            String spaceName = addrFactory.getAddressSpace(spaceID).getName();
+                            Register reg2 = trans.getRegister(val2);
+                            if (spaceName.equals(reg2.getName()) ||
+                                    spaceName.startsWith(reg2.getName() + "-")) {
+                                // since this is essentially a multiply by two, and it is the same register
+                                //   just multiply the current offset by 2, since we really don't know
+                                //   the base register anyway...
+                                valbase += uval.longValue() * 2;
+                                return createConstantVarnode(valbase, val1.getSize());
+                            }
+                        }
+                        valbase = uval.longValue();
 //    				valbase += uval.longValue();
 //					spaceID = val2.getSpace();
-					return add(createConstantVarnode(valbase, val1.getSize()), val2, evaluator);
+                        val1 = createConstantVarnode(valbase, val1.getSize());
+                        continue;
 
-				}
-			}
+                    }
+                }
 
-		}
-		else {
-			throw notFoundExc;
-		}
-		long result = (valbase + getConstant(val2, null)) &
-			(0xffffffffffffffffL >>> ((8 - val1.getSize()) * 8));
-		return createVarnode(result, spaceID, val1.getSize());
-	}
+            } else {
+                throw notFoundExc;
+            }
+            long result = (valbase + getConstant(val2, null)) &
+                    (0xffffffffffffffffL >>> ((8 - val1.getSize()) * 8));
+            return createVarnode(result, spaceID, val1.getSize());
+        }
+    }
 
 	protected boolean isRegister(Varnode varnode) {
 		return varnode.isRegister() || trans.getRegister(varnode) != null;

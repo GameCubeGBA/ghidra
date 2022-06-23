@@ -329,44 +329,47 @@ abstract class FixedKeyRecordNode extends FixedKeyNode implements FieldKeyRecord
 
 	@Override
 	public FixedKeyNode putRecord(DBRecord record, Table table) throws IOException {
+        FixedKeyRecordNode other = this;
+        while (true) {
 
-		Field key = record.getKeyField();
-		int index = getKeyIndex(key);
+            Field key = record.getKeyField();
+            int index = other.getKeyIndex(key);
 
-		// Handle record update case
-		if (index >= 0) {
-			if (table != null) {
-				table.updatedRecord(getRecord(table.getSchema(), index), record);
-			}
-			FixedKeyNode newRoot = updateRecord(index, record);
-			return newRoot;
-		}
+            // Handle record update case
+            if (index >= 0) {
+                if (table != null) {
+                    table.updatedRecord(other.getRecord(table.getSchema(), index), record);
+                }
+                FixedKeyNode newRoot = other.updateRecord(index, record);
+                return newRoot;
+            }
 
-		// Handle new record - see if we have room in this leaf
-		index = -index - 1;
-		if (insertRecord(index, record)) {
-			if (index == 0 && parent != null) {
-				parent.keyChanged(getKeyField(1), key, null);
-			}
-			if (table != null) {
-				table.insertedRecord(record);
-			}
-			return getRoot();
-		}
+            // Handle new record - see if we have room in this leaf
+            index = -index - 1;
+            if (other.insertRecord(index, record)) {
+                if (index == 0 && other.parent != null) {
+                    other.parent.keyChanged(other.getKeyField(1), key, null);
+                }
+                if (table != null) {
+                    table.insertedRecord(record);
+                }
+                return other.getRoot();
+            }
 
-		// Special Case - append new leaf to right
-		if (index == keyCount) {
-			FixedKeyNode newRoot = appendNewLeaf(record);
-			if (table != null) {
-				table.insertedRecord(record);
-			}
-			return newRoot;
-		}
+            // Special Case - append new leaf to right
+            if (index == other.keyCount) {
+                FixedKeyNode newRoot = other.appendNewLeaf(record);
+                if (table != null) {
+                    table.insertedRecord(record);
+                }
+                return newRoot;
+            }
 
-		// Split leaf and complete insertion
-		FixedKeyRecordNode leaf = (FixedKeyRecordNode) split().getLeafNode(key);
-		return leaf.putRecord(record, table);
-	}
+            // Split leaf and complete insertion
+            FixedKeyRecordNode leaf = (FixedKeyRecordNode) other.split().getLeafNode(key);
+            other = leaf;
+        }
+    }
 
 	/**
 	 * Append a new leaf and insert the specified record.

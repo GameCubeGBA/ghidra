@@ -322,15 +322,19 @@ public abstract class GTreeNode extends CoreGTreeNode implements Comparable<GTre
 	 * @return the rootNode for a tree of nodes in a {@link GTree}
 	 */
 	public GTreeNode getRoot() {
-		if (isRoot()) {
-			return this;
-		}
-		GTreeNode myParent = getParent();
-		if (myParent != null) {
-			return myParent.getRoot();
-		}
-		return null;
-	}
+        GTreeNode result = this;
+        while (true) {
+            if (result.isRoot()) {
+                return result;
+            }
+            GTreeNode myParent = result.getParent();
+            if (myParent != null) {
+                result = myParent;
+                continue;
+            }
+            return null;
+        }
+    }
 
 	/**
 	 * Generates a filtered copy of this node and its children.

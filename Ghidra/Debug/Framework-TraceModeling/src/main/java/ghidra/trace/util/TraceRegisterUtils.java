@@ -72,29 +72,31 @@ public enum TraceRegisterUtils {
 	}
 
 	public static TraceData seekComponent(TraceData data, AddressRange range) {
-		if (data == null) {
-			return null;
-		}
-		DataType type = data.getDataType();
-		if (!(type instanceof Structure)) {
-			// TODO: Support dynamic structures? Probably not.
-			return null;
-		}
-		// we know data contains register, and data cannot exceed Integer.MAX_VALUE in length
-		int offset = (int) range.getMinAddress().subtract(data.getMinAddress());
-		TraceData component = data.getComponentAt(offset);
-		if (component == null) { // TODO: I'm not sure this can happen
-			return null;
-		}
-		int cmpMax = range.getMaxAddress().compareTo(component.getMaxAddress());
-		if (cmpMax > 0) {
-			return null;
-		}
-		if (cmpMax == 0 && component.getMinAddress().equals(range.getMinAddress())) {
-			return component;
-		}
-		return seekComponent(component, range);
-	}
+        while (true) {
+            if (data == null) {
+                return null;
+            }
+            DataType type = data.getDataType();
+            if (!(type instanceof Structure)) {
+                // TODO: Support dynamic structures? Probably not.
+                return null;
+            }
+            // we know data contains register, and data cannot exceed Integer.MAX_VALUE in length
+            int offset = (int) range.getMinAddress().subtract(data.getMinAddress());
+            TraceData component = data.getComponentAt(offset);
+            if (component == null) { // TODO: I'm not sure this can happen
+                return null;
+            }
+            int cmpMax = range.getMaxAddress().compareTo(component.getMaxAddress());
+            if (cmpMax > 0) {
+                return null;
+            }
+            if (cmpMax == 0 && component.getMinAddress().equals(range.getMinAddress())) {
+                return component;
+            }
+            data = component;
+        }
+    }
 
 	public static TraceData seekComponent(TraceData data, Register reg) {
 		return seekComponent(data, rangeForRegister(reg));

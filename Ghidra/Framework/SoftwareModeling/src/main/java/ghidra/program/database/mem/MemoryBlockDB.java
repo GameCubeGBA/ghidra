@@ -544,21 +544,24 @@ public class MemoryBlockDB implements MemoryBlock {
 	}
 
 	private SubMemoryBlock findBlock(int minIndex, int maxIndex, long offset) {
-		if (minIndex > maxIndex) {
-			throw new IllegalArgumentException("address or offset out of bounds");
-		}
+        while (true) {
+            if (minIndex > maxIndex) {
+                throw new IllegalArgumentException("address or offset out of bounds");
+            }
 
-		int index = (maxIndex + minIndex) / 2;
-		SubMemoryBlock block = subBlocks.get(index);
-		if (block.contains(offset)) {
-			return block;
-		}
-		long startingOffset = block.getStartingOffset();
-		if (offset < startingOffset) {
-			return findBlock(minIndex, index - 1, offset);
-		}
-		return findBlock(index + 1, maxIndex, offset);
-	}
+            int index = (maxIndex + minIndex) / 2;
+            SubMemoryBlock block = subBlocks.get(index);
+            if (block.contains(offset)) {
+                return block;
+            }
+            long startingOffset = block.getStartingOffset();
+            if (offset < startingOffset) {
+                maxIndex = index - 1;
+                continue;
+            }
+            minIndex = index + 1;
+        }
+    }
 
 	public void invalidate() {
 		invalid = true;
