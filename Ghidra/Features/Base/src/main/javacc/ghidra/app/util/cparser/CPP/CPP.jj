@@ -271,8 +271,8 @@ public class PreProcessor {
 				switch (this.kind) {
 					case PreProcessor.FP_NUMERIC:
 					case PreProcessor.FP_LITERAL:
-						Double thisFP = new Double(this.image);
-						Double zeroFP = new Double(0.0);
+						Double thisFP = Double.valueOf(this.image);
+						Double zeroFP = Double.valueOf(0.0);
 						comparison = thisFP.compareTo(zeroFP);
 						break;
 					case PreProcessor.INTEGER_LITERAL:
@@ -299,19 +299,19 @@ public class PreProcessor {
 		}
 
 		int compareTo(PPToken that) {
-			Double thisFP = new Double(0.0);
-			Double thatFP = new Double(0.0);
+			Double thisFP = Double.valueOf(0.0);
+			Double thatFP = Double.valueOf(0.0);
 			String thisVal = null;
 			String thatVal = null;
 			try {
 				switch (this.kind) {
 					case PreProcessor.FP_NUMERIC:
 					case PreProcessor.FP_LITERAL:
-						thisFP = new Double(this.image);
+						thisFP = Double.valueOf(this.image);
 						break;
 					case PreProcessor.NUMERIC:
 					case PreProcessor.INTEGER_LITERAL:
-						thisFP = new Double(getLongValue(this.image).doubleValue());
+						thisFP = Double.valueOf(getLongValue(this.image).doubleValue());
 						break;
 					default:
 						PPToken replVal = (PPToken) getDef(this); // not a PPToken
@@ -340,11 +340,11 @@ public class PreProcessor {
 				switch (that.kind) {
 					case PreProcessor.FP_NUMERIC:
 					case PreProcessor.FP_LITERAL:
-						thatFP = new Double(that.image);
+						thatFP = Double.valueOf(that.image);
 						break;
 					case PreProcessor.NUMERIC:
 					case PreProcessor.INTEGER_LITERAL:
-						thatFP = new Double(getLongValue(that.image).doubleValue());
+						thatFP = Double.valueOf(getLongValue(that.image).doubleValue());
 						break;
 					default:
 						PPToken replVal = (PPToken) getDef(that); // not a PPToken

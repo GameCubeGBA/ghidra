@@ -2790,13 +2790,13 @@ Object Constant() : {
 		|
 		t = <FLOATING_POINT_LITERAL>
 		{
-			obj = new Double(t.image);
+			obj = Double.valueOf(t.image);
 		}
 		|
 		t = <CHARACTER_LITERAL>
 		{
             if (t.image.length() == 1) {
-              obj = new Character(t.image.charAt(0));
+              obj = Character.valueOf(t.image.charAt(0));
             } else if (t.image.length() == 4) {
               long cval = ((long)t.image.charAt(0) << 24) + ((long)t.image.charAt(1) << 16) + ((long)t.image.charAt(2) << 8) + ((long) t.image.charAt(3));
               obj = Long.valueOf(cval);
