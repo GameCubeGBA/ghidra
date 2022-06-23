@@ -547,10 +547,10 @@ class ModuleDB extends DatabaseObject implements ProgramModule {
 	@Override
 	public boolean contains(CodeUnit codeUnit) {
 		FragmentDB frag = moduleMgr.getFragment(codeUnit);
-		if (frag != null) {
-			return contains(frag);
+		if (frag == null) {
+			return false;
 		}
-		return false;
+		return contains(frag);
 	}
 
 	@Override
