@@ -99,8 +99,8 @@ task cdtUnpack(type:Copy) {
 		!cdtDestDir.exists()
 	}
 	
-	File depsFile = file("${DEPS_DIR}/GhidraDev/cdt-8.6.0.zip")
-	File binRepoFile = file("${BIN_REPO}/GhidraBuild/EclipsePlugins/GhidraDev/buildDependencies/cdt-8.6.0.zip")
+	File depsFile = file("${DEPS_DIR}/GhidraDev/cdt-10.6.2.zip")
+	File binRepoFile = file("${BIN_REPO}/GhidraBuild/EclipsePlugins/GhidraDev/buildDependencies/cdt-10.6.2.zip")
 
 	// First check if the file is in the dependencies repo.  If not, check in the bin repo.
 	def cdtZipTree = depsFile.exists() ? zipTree(depsFile) : zipTree(binRepoFile)

@@ -120,7 +120,7 @@ directory populated with the following files:
  * flatRepo/dex2jar-2.1.jar
  * flatRepo/dex-translator-2.1.jar
  * flatRepo/dex-writer-2.1.jar
- * GhidraDev/cdt-8.6.0.zip
+ * GhidraDev/cdt-10.6.2.zip
  * GhidraDev/PyDev 9.3.0.zip
  * GhidraServer/yajsw-stable-13.03.zip
  * fidb/*.fidb
@@ -176,15 +176,15 @@ cp ~/Downloads/yajsw-stable-13.03.zip ~/git/ghidra/dependencies/GhidraServer/
 #### Get Dependencies for GhidraDev
 
 Building the GhidraDev plugin for Eclipse requires the CDT and PyDev plugins for Eclipse.
-Download `cdt-8.6.0.zip` from The Eclipse Foundation, and place it in:
+Download `cdt-10.6.2.zip` from The Eclipse Foundation, and place it in:
 `~/git/ghidra/dependencies/GhidraDev/`:
 
 ```bash
 cd ~/Downloads   # Or wherever
-curl -OL 'https://archive.eclipse.org/tools/cdt/releases/8.6/cdt-8.6.0.zip'
-curl -o 'cdt-8.6.0.zip.sha512' -L --retry 3 'https://www.eclipse.org/downloads/sums.php?type=sha512&file=/tools/cdt/releases/8.6/cdt-8.6.0.zip'
-shasum -a 512 -c 'cdt-8.6.0.zip.sha512'
-cp ~/Downloads/cdt-8.6.0.zip ~/git/ghidra/dependencies/GhidraDev/
+curl -OL 'https://archive.eclipse.org/tools/cdt/releases/8.6/cdt-10.6.2.zip'
+curl -o 'cdt-10.6.2.zip.sha512' -L --retry 3 'https://www.eclipse.org/downloads/sums.php?type=sha512&file=/tools/cdt/releases/8.6/cdt-10.6.2.zip'
+shasum -a 512 -c 'cdt-10.6.2.zip.sha512'
+cp ~/Downloads/cdt-10.6.2.zip ~/git/ghidra/dependencies/GhidraDev/
 ```
 
 Download `PyDev 9.3.0.zip` from www.pydev.org, and place it in the same directory:
