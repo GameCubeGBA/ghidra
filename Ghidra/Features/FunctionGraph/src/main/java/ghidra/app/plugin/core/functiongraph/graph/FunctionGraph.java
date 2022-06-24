@@ -383,7 +383,7 @@ public class FunctionGraph extends GroupingVisualGraph<FGVertex, FGEdge> {
 	private void removeAssociatedGroups(Collection<FGVertex> groupVertices) {
 		for (FGVertex vertex : groupVertices) {
 			Iterator<GroupHistoryInfo> iterator = groupHistorySet.iterator();
-			for (; iterator.hasNext();) {
+			while (iterator.hasNext()) {
 				GroupHistoryInfo info = iterator.next();
 				if (!info.contains(vertex)) {
 					continue;
@@ -410,7 +410,7 @@ public class FunctionGraph extends GroupingVisualGraph<FGVertex, FGEdge> {
 	private void removeFromAllHistory(FGVertex vertex) {
 		boolean didRemove = false;
 		Iterator<GroupHistoryInfo> iterator = groupHistorySet.iterator();
-		for (; iterator.hasNext();) {
+		while (iterator.hasNext()) {
 			GroupHistoryInfo info = iterator.next();
 			if (!info.contains(vertex)) {
 				continue;

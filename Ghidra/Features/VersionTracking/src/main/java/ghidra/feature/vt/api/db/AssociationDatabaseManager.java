@@ -322,7 +322,7 @@ public class AssociationDatabaseManager implements VTAssociationManager {
 		lock.acquire();
 		try {
 			RecordIterator iterator = associationTableAdapter.getRecords();
-			for (; iterator.hasNext();) {
+			while (iterator.hasNext()) {
 				DBRecord nextRecord = iterator.next();
 				list.add(getAssociationForRecord(nextRecord));
 			}

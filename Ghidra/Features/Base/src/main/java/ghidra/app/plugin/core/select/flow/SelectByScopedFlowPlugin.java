@@ -272,7 +272,7 @@ public class SelectByScopedFlowPlugin extends ProgramPlugin {
 		CodeBlockIterator iterator = blockModel.getCodeBlocksContaining(addresses, monitor);
 		monitor.initialize(addresses.getNumAddresses());
 
-		for (; iterator.hasNext();) {
+		while (iterator.hasNext()) {
 			monitor.checkCanceled();
 			CodeBlock codeBlock = iterator.next();
 			CodeBlockVertex vertex = new CodeBlockVertex(codeBlock);

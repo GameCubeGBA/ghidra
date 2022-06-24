@@ -133,7 +133,7 @@ public class EnumDataTypeHTMLRepresentation extends HTMLDataTypeRepresentation {
 
 		// header
 		Iterator<ValidatableLine> iterator = headerLines.iterator();
-		for (; iterator.hasNext();) {
+		while (iterator.hasNext()) {
 			TextLine line = (TextLine) iterator.next();
 			String encodedHeaderLine = line.getText();
 			String headerLine = wrapStringInColor(encodedHeaderLine, line.getTextColor());

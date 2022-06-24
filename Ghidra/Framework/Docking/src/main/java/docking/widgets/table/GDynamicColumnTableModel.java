@@ -239,7 +239,7 @@ public abstract class GDynamicColumnTableModel<ROW_TYPE, DATA_SOURCE>
 		Object source = e.getSource();
 		TableSortState tableSortState = getTableSortState();
 		Iterator<ColumnSortState> iterator = tableSortState.iterator();
-		for (; iterator.hasNext();) {
+		while (iterator.hasNext()) {
 			ColumnSortState columnSortState = iterator.next();
 			int columnIndex = columnSortState.getColumnModelIndex();
 			DynamicTableColumn<?, ?, ?> column = tableColumns.get(columnIndex);

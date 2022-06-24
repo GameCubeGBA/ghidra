@@ -156,7 +156,7 @@ public class TypeDefDataTypeHTMLRepresentation extends HTMLDataTypeRepresentatio
 
 		// header
 		Iterator<ValidatableLine> iterator = headerLines.iterator();
-		for (; iterator.hasNext();) {
+		while (iterator.hasNext()) {
 			TextLine line = (TextLine) iterator.next(); // This text should already be encoded.
 			String headerLine = line.getText();
 			if (trim) {
@@ -171,7 +171,7 @@ public class TypeDefDataTypeHTMLRepresentation extends HTMLDataTypeRepresentatio
 		buffy.append("TypeDef Base Data Type: ").append(BR);
 
 		iterator = bodyLines.iterator();
-		for (; iterator.hasNext();) {
+		while (iterator.hasNext()) {
 
 			// This text should already be encoded and already trimmed
 			TextLine line = (TextLine) iterator.next();

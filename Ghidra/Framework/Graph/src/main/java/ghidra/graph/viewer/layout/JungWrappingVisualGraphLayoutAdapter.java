@@ -209,7 +209,7 @@ public class JungWrappingVisualGraphLayoutAdapter<V extends VisualVertex,
 	@Override
 	public void removeLayoutListener(LayoutListener<V, E> listener) {
 		Iterator<WeakReference<LayoutListener<V, E>>> iterator = listeners.iterator();
-		for (; iterator.hasNext();) {
+		while (iterator.hasNext()) {
 			WeakReference<LayoutListener<V, E>> reference = iterator.next();
 			LayoutListener<V, E> layoutListener = reference.get();
 			if (layoutListener == null) {
@@ -224,7 +224,7 @@ public class JungWrappingVisualGraphLayoutAdapter<V extends VisualVertex,
 
 	private void fireVertexLocationChanged(V vertex, Point2D point, ChangeType type) {
 		Iterator<WeakReference<LayoutListener<V, E>>> iterator = listeners.iterator();
-		for (; iterator.hasNext();) {
+		while (iterator.hasNext()) {
 			WeakReference<LayoutListener<V, E>> reference = iterator.next();
 			LayoutListener<V, E> layoutListener = reference.get();
 			if (layoutListener == null) {

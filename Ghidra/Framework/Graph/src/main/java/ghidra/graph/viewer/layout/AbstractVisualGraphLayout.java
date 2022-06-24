@@ -683,7 +683,7 @@ public abstract class AbstractVisualGraphLayout<V extends VisualVertex,
 	public void removeLayoutListener(LayoutListener<V, E> listener) {
 
 		Iterator<LayoutListener<V, E>> iterator = listeners.iterator();
-		for (; iterator.hasNext();) {
+		while (iterator.hasNext()) {
 			LayoutListener<V, E> layoutListener = iterator.next();
 			if (layoutListener == listener) {
 				iterator.remove();
@@ -696,9 +696,7 @@ public abstract class AbstractVisualGraphLayout<V extends VisualVertex,
 	}
 
 	private void fireVertexLocationChanged(V v, Point2D p, ChangeType type) {
-		Iterator<LayoutListener<V, E>> iterator = listeners.iterator();
-		for (; iterator.hasNext();) {
-			LayoutListener<V, E> layoutListener = iterator.next();
+		for (LayoutListener<V, E> layoutListener : listeners) {
 			layoutListener.vertexLocationChanged(v, p, type);
 		}
 	}

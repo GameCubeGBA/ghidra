@@ -310,7 +310,7 @@ public class FunctionGraphFactory {
 		CodeBlockIterator iterator = blockModel.getCodeBlocksContaining(addresses, monitor);
 		monitor.initialize(addresses.getNumAddresses());
 
-		for (; iterator.hasNext();) {
+		while (iterator.hasNext()) {
 			CodeBlock codeBlock = iterator.next();
 
 			FlowType flowType = codeBlock.getFlowType();

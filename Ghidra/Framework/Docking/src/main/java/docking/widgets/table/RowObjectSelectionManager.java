@@ -351,7 +351,7 @@ public class RowObjectSelectionManager<T> extends DefaultListSelectionModel
 			}
 
 			Iterator<Integer> iterator = integerList.iterator();
-			for (; iterator.hasNext();) {
+			while (iterator.hasNext()) {
 				Integer rowIndex = iterator.next();
 				iterator.remove(); // remove this value so that we don't process it later
 				if (rowIndex < rowCount) {

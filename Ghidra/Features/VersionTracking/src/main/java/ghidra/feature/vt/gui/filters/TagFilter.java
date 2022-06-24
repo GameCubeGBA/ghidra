@@ -268,7 +268,7 @@ public class TagFilter extends AncillaryFilter<VTMatch> {
 	private void removeOldTags() {
 		Map<String, VTMatchTag> allTags = getAllTags();
 		Iterator<VTMatchTag> iterator = excludedTags.values().iterator();
-		for (; iterator.hasNext();) {
+		while (iterator.hasNext()) {
 			VTMatchTag tag = iterator.next();
 			if (!allTags.containsKey(tag.getName())) {
 				// not in the new session

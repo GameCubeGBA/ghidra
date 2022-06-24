@@ -181,7 +181,7 @@ public class CompositeDataTypeHTMLRepresentation extends HTMLDataTypeRepresentat
 
 		// header
 		Iterator<ValidatableLine> iterator = headerContent.iterator();
-		for (; iterator.hasNext();) {
+		while (iterator.hasNext()) {
 			TextLine line = (TextLine) iterator.next();
 			String text = line.getText();
 			if (trim) {

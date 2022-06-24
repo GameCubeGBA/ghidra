@@ -1000,7 +1000,7 @@ public class DecompilerNestedLayout extends AbstractFGLayout {
 
 		BlockGraph blockGraph = new BlockGraph();
 		BidiMap<CodeBlock, PcodeBlock> bidiMap = new DualHashBidiMap<>();
-		for (; iterator.hasNext();) {
+		while (iterator.hasNext()) {
 			taskMonitor.checkCanceled();
 
 			CodeBlock codeBlock = iterator.next();

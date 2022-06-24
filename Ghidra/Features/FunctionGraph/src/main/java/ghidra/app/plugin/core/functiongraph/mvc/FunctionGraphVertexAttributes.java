@@ -289,7 +289,7 @@ public class FunctionGraphVertexAttributes {
 	private void clearAllPropertiesForAddressRange(PropertyMap propertyMap,
 			AddressSetView addresses) {
 		AddressIterator iterator = addresses.getAddresses(true);
-		for (; iterator.hasNext();) {
+		while (iterator.hasNext()) {
 			Address address = iterator.next();
 			propertyMap.remove(address);
 		}

@@ -604,7 +604,7 @@ public class FunctionGraphPlugin1Test extends AbstractFunctionGraphTest {
 			vertexAddresses.add(addresses.getMinAddress());
 		}
 
-		for (; iterator.hasNext();) {
+		while (iterator.hasNext()) {
 			CodeBlock codeBlock = iterator.next();
 			assertTrue(vertexAddresses.contains(codeBlock.getMinAddress()));
 		}

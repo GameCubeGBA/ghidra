@@ -41,7 +41,7 @@ public class DiffLines extends ArrayList<ValidatableLine> {
 
 	void removeLeadingEmptyRows() {
 		Iterator<ValidatableLine> iterator = iterator();
-		for (; iterator.hasNext();) {
+		while (iterator.hasNext()) {
 			ValidatableLine line = iterator.next();
 			if (line instanceof PlaceHolderLine) {
 				iterator.remove();
