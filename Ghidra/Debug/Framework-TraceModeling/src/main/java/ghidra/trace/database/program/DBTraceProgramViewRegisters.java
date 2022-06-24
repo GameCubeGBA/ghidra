@@ -449,9 +449,7 @@ public class DBTraceProgramViewRegisters implements TraceProgramView {
 
 	@Override
 	public boolean removePrivateEventQueue(EventQueueID id) {
-        while (true) {
-
-        }
+        return eventQueues.removePrivateEventQueue(id);
     }
 
 	@Override
