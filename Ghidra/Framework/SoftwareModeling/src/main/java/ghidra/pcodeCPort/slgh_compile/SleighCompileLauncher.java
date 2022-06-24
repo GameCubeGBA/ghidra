@@ -220,12 +220,26 @@ public class SleighCompileLauncher implements GhidraLaunchable {
 					++totalSuccesses;
 				}
 			}
-			System.out.println(totalSuccesses + " languages successfully compiled");
+			if (totalSuccesses == 1)
+			{
+				System.out.println("1 language successfully compiled");
+			}
+			else
+			{
+				System.out.println(totalSuccesses + " languages successfully compiled");
+			}
 			if (totalFailures != 0) {
 				for (String path : failures) {
 					System.out.println(path + " failed to compile");
 				}
-				System.out.println(totalFailures + " languages total failed to compile");
+				if (totalFailures == 1)
+				{
+					System.out.println("1 language total failed to compile");
+				}
+				else
+				{
+					System.out.println(totalFailures + " languages total failed to compile");
+				}
 			}
 			return -totalFailures;
 		}
