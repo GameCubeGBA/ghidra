@@ -17,8 +17,8 @@ package ghidra.program.database.data;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGTest;
 import ghidra.program.model.data.*;
@@ -27,7 +27,7 @@ public class BitFieldDBDataTypeTest extends AbstractGTest {
 
 	private DataTypeManagerDB dataMgr;
 
-	@Before
+	@BeforeEach
 	public void setup() throws Exception {
 		dataMgr = new StandAloneDataTypeManager("dummyDTM");
 		dataMgr.startTransaction("Test");

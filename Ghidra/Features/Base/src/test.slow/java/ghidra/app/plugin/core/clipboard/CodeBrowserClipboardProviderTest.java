@@ -21,8 +21,8 @@ import static org.junit.Assert.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import docking.dnd.StringTransferable;
 import docking.widgets.OptionDialog;
@@ -53,7 +53,7 @@ public class CodeBrowserClipboardProviderTest extends AbstractGhidraHeadedIntegr
 	private Program program;
 	private CodeBrowserClipboardProvider clipboardProvider;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		program = createProgram();

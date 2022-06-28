@@ -21,8 +21,6 @@ import static org.junit.Assert.assertNull;
 import java.io.File;
 import java.util.ArrayList;
 
-import org.junit.*;
-
 import ghidra.app.events.ProgramSelectionPluginEvent;
 import ghidra.app.plugin.core.codebrowser.CodeBrowserPlugin;
 import ghidra.app.plugin.core.programtree.ProgramTreePlugin;
@@ -35,6 +33,9 @@ import ghidra.program.model.listing.*;
 import ghidra.program.model.mem.MemoryAccessException;
 import ghidra.program.util.ProgramSelection;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test for deleting default plate comments on a function
@@ -47,7 +48,7 @@ public class DeleteFunctionDefaultPlatesScriptTest extends AbstractGhidraHeadedI
 	private File script;
 	private ToyProgramBuilder builder;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -84,7 +85,7 @@ public class DeleteFunctionDefaultPlatesScriptTest extends AbstractGhidraHeadedI
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

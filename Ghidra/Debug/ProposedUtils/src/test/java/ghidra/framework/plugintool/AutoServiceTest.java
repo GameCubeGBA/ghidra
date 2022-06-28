@@ -17,15 +17,15 @@ package ghidra.framework.plugintool;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.*;
-
 import ghidra.MiscellaneousPluginPackage;
-import ghidra.framework.plugintool.*;
 import ghidra.framework.plugintool.annotation.AutoServiceConsumed;
 import ghidra.framework.plugintool.annotation.AutoServiceProvided;
 import ghidra.framework.plugintool.util.PluginStatus;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AutoServiceTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -100,13 +100,13 @@ public class AutoServiceTest extends AbstractGhidraHeadedIntegrationTest {
 	protected TestEnv env;
 	protected PluginTool tool;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}

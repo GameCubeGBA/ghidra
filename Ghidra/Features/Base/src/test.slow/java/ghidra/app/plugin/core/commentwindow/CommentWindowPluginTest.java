@@ -21,8 +21,6 @@ import static org.junit.Assert.assertNotNull;
 import java.awt.Container;
 import java.awt.Dimension;
 
-import org.junit.*;
-
 import docking.ComponentProvider;
 import docking.widgets.table.GTable;
 import docking.widgets.table.threaded.ThreadedTableModel;
@@ -33,6 +31,9 @@ import ghidra.program.model.address.*;
 import ghidra.program.model.listing.CodeUnit;
 import ghidra.program.model.listing.Program;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class CommentWindowPluginTest extends AbstractGhidraHeadedIntegrationTest {
 	private TestEnv env;
@@ -53,7 +54,7 @@ public class CommentWindowPluginTest extends AbstractGhidraHeadedIntegrationTest
 		return addrFactory.getAddress(address);
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -70,7 +71,7 @@ public class CommentWindowPluginTest extends AbstractGhidraHeadedIntegrationTest
 
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}

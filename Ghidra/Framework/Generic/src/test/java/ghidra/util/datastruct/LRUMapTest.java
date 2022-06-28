@@ -20,16 +20,16 @@ import static org.junit.Assert.*;
 import java.util.*;
 import java.util.Map.Entry;
 
-import org.junit.*;
-
 import generic.test.AbstractGenericTest;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class LRUMapTest extends AbstractGenericTest {
 	private static int CACHE_SIZE = 3;
 
 	private LRUMap<String, String> map;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		int size = 3;
 		map = new LRUMap<String, String>(size);

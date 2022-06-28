@@ -18,8 +18,8 @@ package agent.gdb.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import agent.gdb.model.impl.GdbModelTargetInferior;
 import ghidra.dbg.target.*;
@@ -56,7 +56,7 @@ public abstract class AbstractModelForGdbLauncherTest extends AbstractDebuggerMo
 	 * on main.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testLaunchStrippedThenInterrupt() throws Throwable {
 		m.build();
 

@@ -32,7 +32,9 @@ import java.util.List;
 
 import javax.swing.JFrame;
 
-import org.junit.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class VTExactSymbolMatch1Test extends AbstractGhidraHeadedIntegrationTest {
 	private VTTestEnv env;
@@ -44,7 +46,7 @@ public class VTExactSymbolMatch1Test extends AbstractGhidraHeadedIntegrationTest
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		env = new VTTestEnv();
@@ -60,7 +62,7 @@ public class VTExactSymbolMatch1Test extends AbstractGhidraHeadedIntegrationTest
 		toolFrame.setSize(800, 800);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

@@ -26,7 +26,7 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.jar.ResourceFile;
 import generic.test.AbstractGenericTest;

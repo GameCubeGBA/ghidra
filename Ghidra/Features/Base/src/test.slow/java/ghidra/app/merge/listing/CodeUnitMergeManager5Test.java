@@ -19,7 +19,7 @@ import ghidra.program.database.*;
 import ghidra.program.model.address.AddressSet;
 import ghidra.program.model.data.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test the merge of the versioned program's code units when starting as Instruction.

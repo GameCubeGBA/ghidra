@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.test.AbstractDockingTest;
 import docking.widgets.tree.GTreeNode;

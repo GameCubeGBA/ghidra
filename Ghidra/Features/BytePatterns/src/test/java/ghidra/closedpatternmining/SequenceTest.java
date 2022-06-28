@@ -20,8 +20,8 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 
@@ -31,7 +31,7 @@ public class SequenceTest extends AbstractGenericTest {
 	private List<SequenceItem> prefixSequence;
 	private int prefixIndex;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		testSequence = new Sequence("CAABC", 1);
 		prefixSequence = new ArrayList<SequenceItem>();

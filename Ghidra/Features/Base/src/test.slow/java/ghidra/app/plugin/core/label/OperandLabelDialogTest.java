@@ -17,8 +17,6 @@ package ghidra.app.plugin.core.label;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.*;
-
 import docking.ActionContext;
 import docking.widgets.combobox.GhidraComboBox;
 import ghidra.app.events.ProgramLocationPluginEvent;
@@ -30,6 +28,9 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.symbol.Symbol;
 import ghidra.program.util.OperandFieldLocation;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class OperandLabelDialogTest extends AbstractGhidraHeadedIntegrationTest {
 	private TestEnv env;
@@ -41,7 +42,7 @@ public class OperandLabelDialogTest extends AbstractGhidraHeadedIntegrationTest 
 	private GhidraComboBox<?> combo;
 	private SetOperandLabelAction setLabelAction;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 
@@ -58,7 +59,7 @@ public class OperandLabelDialogTest extends AbstractGhidraHeadedIntegrationTest 
 		setLabelAction = (SetOperandLabelAction) getAction(plugin, "Set Operand Label");
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

@@ -30,7 +30,6 @@ import javax.swing.*;
 
 import org.junit.*;
 
-import docking.*;
 import docking.action.DockingAction;
 import docking.menu.ActionState;
 import docking.menu.MultiStateDockingAction;

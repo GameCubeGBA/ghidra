@@ -22,8 +22,6 @@ import java.math.BigInteger;
 
 import javax.swing.*;
 
-import org.junit.*;
-
 import docking.ActionContext;
 import docking.DialogComponentProvider;
 import docking.action.DockingActionIf;
@@ -49,6 +47,9 @@ import ghidra.program.model.symbol.*;
 import ghidra.program.util.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ClearTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -67,7 +68,7 @@ public class ClearTest extends AbstractGhidraHeadedIntegrationTest {
 		return addrFactory.getAddress(address);
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.launchDefaultTool();
@@ -92,7 +93,7 @@ public class ClearTest extends AbstractGhidraHeadedIntegrationTest {
 		waitForSwing();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}

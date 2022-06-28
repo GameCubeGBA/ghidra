@@ -21,9 +21,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
 
-import org.junit.*;
-
 import generic.test.AbstractGenericTest;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests the {@link WeakSet} class.
@@ -41,12 +42,12 @@ public class WeakSetTest extends AbstractGenericTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 	}

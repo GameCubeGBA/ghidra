@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.nio.file.AccessMode;
 import java.util.Arrays;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.formats.gfilesystem.FSUtilities;

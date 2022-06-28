@@ -21,7 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
 
 import docking.test.AbstractDockingTest;
 import ghidra.GhidraTestApplicationLayout;
@@ -98,7 +98,7 @@ public abstract class AbstractGhidraHeadlessIntegrationTest extends AbstractDock
 		System.setProperty(GhidraScriptConstants.USER_SCRIPTS_DIR_PROPERTY, getTestDirectoryPath());
 	}
 
-	@BeforeClass
+	@BeforeAll
 	public static void cleanDbTestDir() {
 		// keep files around in batch mode to allow tests to run faster; assume batch mode performs
 		// its own cleanup; only run once per class to allow subsequent tests to be faster

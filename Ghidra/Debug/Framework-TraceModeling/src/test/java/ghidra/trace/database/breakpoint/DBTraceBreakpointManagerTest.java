@@ -20,8 +20,6 @@ import static org.junit.Assert.*;
 import java.util.List;
 import java.util.Set;
 
-import org.junit.*;
-
 import com.google.common.collect.Range;
 
 import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
@@ -31,6 +29,9 @@ import ghidra.trace.model.breakpoint.TraceBreakpointKind;
 import ghidra.trace.model.thread.TraceThread;
 import ghidra.util.database.UndoableTransaction;
 import ghidra.util.exception.DuplicateNameException;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DBTraceBreakpointManagerTest extends AbstractGhidraHeadlessIntegrationTest {
 
@@ -42,13 +43,13 @@ public class DBTraceBreakpointManagerTest extends AbstractGhidraHeadlessIntegrat
 	TraceBreakpoint breakVarA;
 	TraceBreakpoint breakVarB;
 
-	@Before
+	@BeforeEach
 	public void setUpBreakpointManagerTest() throws Exception {
 		b = new ToyDBTraceBuilder("Testing", "Toy:BE:64:default");
 		breakpointManager = b.trace.getBreakpointManager();
 	}
 
-	@After
+	@AfterEach
 	public void tearDownBreakpointManagerTest() throws Exception {
 		b.close();
 	}

@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 import java.util.Collection;
 import java.util.Set;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.experimental.categories.Category;
 
 import generic.test.category.NightlyCategory;

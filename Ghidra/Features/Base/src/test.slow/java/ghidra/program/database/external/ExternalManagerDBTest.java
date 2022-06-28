@@ -19,8 +19,6 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 
-import org.junit.*;
-
 import ghidra.program.database.ProgramBuilder;
 import ghidra.program.database.ProgramDB;
 import ghidra.program.model.address.Address;
@@ -31,6 +29,9 @@ import ghidra.program.model.symbol.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.exception.InvalidInputException;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ExternalManagerDBTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -43,7 +44,7 @@ public class ExternalManagerDBTest extends AbstractGhidraHeadedIntegrationTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		program = createDefaultProgram(testName.getMethodName(), ProgramBuilder._TOY, this);
 		space = program.getAddressFactory().getDefaultAddressSpace();
@@ -51,7 +52,7 @@ public class ExternalManagerDBTest extends AbstractGhidraHeadedIntegrationTest {
 		transactionID = program.startTransaction("Test");
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (program != null) {
 			program.endTransaction(transactionID, true);

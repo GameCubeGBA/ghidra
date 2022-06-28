@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.*;
 import docking.action.DockingActionIf;

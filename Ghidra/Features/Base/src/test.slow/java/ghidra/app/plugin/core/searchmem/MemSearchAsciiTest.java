@@ -24,8 +24,8 @@ import java.util.List;
 
 import javax.swing.JComboBox;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import ghidra.program.database.ProgramBuilder;
 import ghidra.program.model.address.Address;
@@ -38,7 +38,7 @@ import ghidra.test.ToyProgramBuilder;
 public class MemSearchAsciiTest extends AbstractMemSearchTest {
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		selectRadioButton("String");

@@ -21,13 +21,14 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.io.IOException;
 
-import org.junit.*;
-
 import db.DBFileListener;
 import db.Database;
 import generic.test.AbstractGenericTest;
 import ghidra.framework.store.db.PrivateDatabase;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import utilities.util.FileUtilities;
 
 /**
@@ -47,14 +48,14 @@ public class RecoveryFileTest extends AbstractGenericTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		FileUtilities.deleteDir(testDir);
 		testDir.mkdir();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		FileUtilities.deleteDir(testDir);
 

@@ -21,8 +21,8 @@ import java.io.File;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.google.common.collect.Range;
 
@@ -49,7 +49,7 @@ public class DBTraceObjectManagerTest extends AbstractGhidraHeadlessIntegrationT
 	protected TraceObject targetContainer;
 	protected List<TraceObject> targets = new ArrayList<>();
 
-	@Before
+	@BeforeEach
 	public void setUpObjectManagerTest() throws Exception {
 		b = new ToyDBTraceBuilder("Testing", "Toy:BE:64:default");
 		manager = b.trace.getObjectManager();

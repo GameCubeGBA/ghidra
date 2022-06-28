@@ -30,7 +30,9 @@ import ghidra.test.ToyProgramBuilder;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
-import org.junit.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ProgramDiffMergeTest extends AbstractGhidraHeadlessIntegrationTest {
 
@@ -42,7 +44,7 @@ public class ProgramDiffMergeTest extends AbstractGhidraHeadlessIntegrationTest 
 	private Listing listing2;
 
 	///////// setup and tear down /////////
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		programBuilder1 = createProgramBuilder("TestProgram1");
 		program1 = programBuilder1.getProgram();
@@ -77,7 +79,7 @@ public class ProgramDiffMergeTest extends AbstractGhidraHeadlessIntegrationTest 
 		return programBuilder;
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (programBuilder1 != null) {
 			programBuilder1.dispose();

@@ -22,8 +22,8 @@ import static org.junit.Assume.assumeTrue;
 import java.io.*;
 import java.util.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import agent.gdb.pty.AbstractPtyTest;
 import agent.gdb.pty.PtySession;
@@ -31,7 +31,7 @@ import ghidra.dbg.testutil.DummyProc;
 import ghidra.framework.OperatingSystem;
 
 public class LinuxPtyTest extends AbstractPtyTest {
-	@Before
+	@BeforeEach
 	public void checkLinux() {
 		assumeTrue(OperatingSystem.LINUX == OperatingSystem.CURRENT_OPERATING_SYSTEM);
 	}

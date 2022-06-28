@@ -20,13 +20,14 @@ import static org.junit.Assert.*;
 import java.io.ByteArrayOutputStream;
 import java.net.URL;
 
-import org.junit.*;
-
 import generic.test.AbstractGenericTest;
 import ghidra.app.util.cparser.CPP.ParseException;
 import ghidra.app.util.cparser.CPP.PreProcessor;
 import ghidra.program.model.data.*;
 import ghidra.program.model.data.Enum;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 public class PreProcessorTest extends AbstractGenericTest {
 	private static String resourceName = "PreProcessorTest.h";
@@ -44,7 +45,7 @@ public class PreProcessorTest extends AbstractGenericTest {
 		super();
 	}
 
-	@BeforeClass
+	@BeforeAll
 	public static void init() {
 		URL url = PreProcessorTest.class.getResource(resourceName);
 		
@@ -82,7 +83,7 @@ public class PreProcessorTest extends AbstractGenericTest {
 		parser.getDefinitions().populateDefineEquates(dtMgr);
 	}
 	
-	@AfterClass
+	@AfterAll
 	public static void destroy() {
 		dtMgr = null;
 		baos = null;

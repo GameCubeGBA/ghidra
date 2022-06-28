@@ -21,8 +21,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.experimental.categories.Category;
 
 import com.google.common.collect.Range;
@@ -50,7 +50,7 @@ public class DebuggerStaticMappingProviderTest extends AbstractGhidraHeadedDebug
 
 	protected TraceStaticMappingManager manager;
 
-	@Before
+	@BeforeEach
 	public void setUpStaticMappingsProviderTest()
 			throws LanguageNotFoundException, IOException, PluginException {
 		mappingsPlugin = addPlugin(tool, DebuggerStaticMappingPlugin.class);

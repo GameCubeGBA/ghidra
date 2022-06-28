@@ -20,7 +20,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.awt.Rectangle;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.graph.graphs.*;
 import ghidra.graph.support.TestVisualGraph;

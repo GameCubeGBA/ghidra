@@ -24,8 +24,8 @@ import java.util.*;
 
 import javax.swing.table.TableColumn;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import docking.test.AbstractDockingTest;
 import docking.widgets.table.*;
@@ -34,9 +34,7 @@ import docking.widgets.table.constraint.MappedColumnConstraint;
 import docking.widgets.table.constraint.dialog.*;
 import docking.widgets.table.constraint.provider.*;
 import ghidra.framework.options.SaveState;
-import ghidra.util.Msg;
 import ghidra.util.classfinder.ClassSearcher;
-import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
 /**
@@ -51,7 +49,7 @@ public class ColumnTableFilterTest extends AbstractDockingTest {
 	private GTable gTable;
 	private ColumnFilterDialogModel<Integer> filterModel;
 
-	@Before
+	@BeforeEach
 	public void setup() throws Exception {
 
 		ClassSearcher.search(TaskMonitor.DUMMY);

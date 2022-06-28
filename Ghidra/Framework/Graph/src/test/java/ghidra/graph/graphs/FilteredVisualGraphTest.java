@@ -21,8 +21,8 @@ import static util.CollectionUtils.asList;
 
 import java.util.Collection;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.graph.util.Pair;
@@ -31,7 +31,7 @@ import util.CollectionUtils;
 
 public class FilteredVisualGraphTest extends AbstractFilteringVisualGraphTest {
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 
 		graph = new FilteringVisualGraph<AbstractTestVertex, TestEdge>() {

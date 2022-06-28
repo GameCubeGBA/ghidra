@@ -19,8 +19,8 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.HashMap;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 
@@ -32,7 +32,7 @@ public class FixedSizeMRUCachingFactoryTest extends AbstractGenericTest {
 
 	private HitCountIdentityFactory<Integer> callCountFactory;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		callCountFactory = new HitCountIdentityFactory<Integer>();

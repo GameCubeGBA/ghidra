@@ -21,8 +21,8 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.util.SystemUtilities;
@@ -35,7 +35,7 @@ public class BufferedSwingRunnerTest extends AbstractGenericTest {
 	private BufferedSwingRunner runner = new BufferedSwingRunner(MIN_DELAY, MAX_DELAY);
 	private ClientRunnable runnable = new ClientRunnable();
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		// must turn this on to get the expected results, as in headless mode the update manager
 		// will run it's Swing work immediately on the test thread, which is not true to the

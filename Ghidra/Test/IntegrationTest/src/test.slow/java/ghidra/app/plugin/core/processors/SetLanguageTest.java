@@ -23,8 +23,6 @@ import java.util.List;
 
 import javax.swing.tree.TreePath;
 
-import org.junit.*;
-
 import docking.AbstractErrDialog;
 import docking.ActionContext;
 import docking.action.DockingActionIf;
@@ -46,6 +44,9 @@ import ghidra.program.model.symbol.SourceType;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class SetLanguageTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -59,7 +60,7 @@ public class SetLanguageTest extends AbstractGhidraHeadedIntegrationTest {
 
 	private AddressFactory addrFactory;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 
@@ -95,7 +96,7 @@ public class SetLanguageTest extends AbstractGhidraHeadedIntegrationTest {
 		waitForSwing();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

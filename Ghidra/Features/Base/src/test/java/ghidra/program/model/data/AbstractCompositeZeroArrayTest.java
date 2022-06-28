@@ -15,7 +15,7 @@
  */
 package ghidra.program.model.data;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * This test uses the CParser to parse all datatypes defined by zeroarray.h.
@@ -33,7 +33,7 @@ public abstract class AbstractCompositeZeroArrayTest extends AbstractCompositeTe
 	protected static final String C_SOURCE_FILE = "ghidra/app/util/cparser/zeroarray.h";
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		parseCHeaderFile(C_SOURCE_FILE);

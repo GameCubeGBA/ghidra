@@ -19,25 +19,26 @@ import static org.junit.Assert.*;
 
 import java.util.Set;
 
-import org.junit.*;
-
 import ghidra.feature.vt.api.db.VTMatchTagDB;
 import ghidra.feature.vt.api.main.VTMatchInfo;
 import ghidra.feature.vt.api.main.VTMatchTag;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class VTMatchTagDBTest extends VTBaseTestCase {
 
 	private int testTransactionID;
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		testTransactionID = db.startTransaction("Test Match Tags");
 	}
 
 	@Override
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		db.endTransaction(testTransactionID, false);
 		db.release(VTTestUtils.class);

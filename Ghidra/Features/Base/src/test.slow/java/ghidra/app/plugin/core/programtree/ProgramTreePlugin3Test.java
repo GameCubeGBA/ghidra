@@ -25,8 +25,6 @@ import java.util.concurrent.atomic.AtomicReference;
 import javax.swing.JLabel;
 import javax.swing.tree.TreePath;
 
-import org.junit.*;
-
 import docking.action.DockingActionIf;
 import ghidra.app.util.SelectionTransferData;
 import ghidra.app.util.SelectionTransferable;
@@ -36,6 +34,9 @@ import ghidra.program.model.address.AddressSet;
 import ghidra.program.model.address.AddressSetView;
 import ghidra.program.model.listing.*;
 import ghidra.util.exception.NotFoundException;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import resources.ResourceManager;
 
 /**
@@ -51,7 +52,7 @@ public class ProgramTreePlugin3Test extends AbstractProgramTreePluginTest {
 	private DnDMoveManager dndManager;
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		super.setUp();
@@ -105,7 +106,7 @@ public class ProgramTreePlugin3Test extends AbstractProgramTreePluginTest {
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		waitForPostedSwingRunnables();
 		env.release(program);

@@ -20,8 +20,8 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.IOException;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.app.util.bin.ByteProvider;
@@ -36,7 +36,7 @@ public class FileSystemServiceTest extends AbstractGhidraHeadedIntegrationTest {
 	private FileSystemService fsService;
 	private TaskMonitor monitor = TaskMonitor.DUMMY;
 
-	@Before
+	@BeforeEach
 	public void setup() throws IOException {
 		fssTestDir = AbstractGenericTest.createTempDirectory("filesystemservice_test");
 		fsService = new FileSystemService(new File(fssTestDir, "cache"));

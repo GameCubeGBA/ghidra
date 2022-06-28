@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 import java.io.IOException;
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.app.util.NamespaceUtils;
 import ghidra.app.util.bin.format.dwarf4.*;

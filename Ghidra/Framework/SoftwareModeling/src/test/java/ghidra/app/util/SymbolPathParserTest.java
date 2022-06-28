@@ -20,8 +20,8 @@ import static org.junit.Assert.fail;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGTest;
 
@@ -91,7 +91,7 @@ public class SymbolPathParserTest extends AbstractGTest {
 	}
 
 	// Testing for detailed processing.  Same as above test, but expecting better results.
-	@Ignore
+	@Disabled
 	public void testCliPinptrMSFTVersion_DetailedProcessing() {
 		List<String> list = SymbolPathParser.parse("namespace::ta<cli::pin_ptr" +
 			"<unsigned char * __ptr64,class System::Text::Encoding ^ __ptr64>");

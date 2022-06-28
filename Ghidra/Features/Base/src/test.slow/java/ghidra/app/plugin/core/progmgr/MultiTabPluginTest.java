@@ -26,8 +26,6 @@ import java.util.concurrent.atomic.AtomicReference;
 import javax.swing.*;
 import javax.swing.Timer;
 
-import org.junit.*;
-
 import docking.action.DockingAction;
 import docking.widgets.fieldpanel.FieldPanel;
 import generic.test.TestUtils;
@@ -44,6 +42,9 @@ import ghidra.program.model.symbol.SourceType;
 import ghidra.program.model.symbol.SymbolTable;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the plugin that manages the tab for multiple open programs.
@@ -59,7 +60,7 @@ public class MultiTabPluginTest extends AbstractGhidraHeadedIntegrationTest {
 	private MultiTabPanel panel;
 	private MarkerService markerService;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -86,7 +87,7 @@ public class MultiTabPluginTest extends AbstractGhidraHeadedIntegrationTest {
 		setInstanceField(timerFieldName, plugin, testTimer);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

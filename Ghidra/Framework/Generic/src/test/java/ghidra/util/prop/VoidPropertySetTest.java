@@ -20,8 +20,8 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.util.LongIterator;
@@ -30,7 +30,7 @@ import ghidra.util.datastruct.NoSuchIndexException;
 public class VoidPropertySetTest extends AbstractGenericTest {
 	VoidPropertySet ps;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		ps = new VoidPropertySet("Test");
 	}

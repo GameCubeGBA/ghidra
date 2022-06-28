@@ -26,8 +26,8 @@ import java.util.stream.Collectors;
 
 import javax.swing.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import docking.action.DockingActionIf;
 import docking.options.editor.GhidraColorChooser;
@@ -49,7 +49,7 @@ import ghidra.program.model.listing.CodeUnit;
 public class DecompilerClangTest extends AbstractDecompilerTest {
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		super.setUp();

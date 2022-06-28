@@ -23,8 +23,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import javax.swing.ComboBoxModel;
 import javax.swing.table.TableModel;
 
-import org.junit.*;
-
 import docking.ActionContext;
 import docking.action.DockingActionIf;
 import docking.widgets.OptionDialog;
@@ -41,6 +39,9 @@ import ghidra.program.database.ProgramBuilder;
 import ghidra.program.model.listing.Program;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import utilities.util.FileUtilities;
 
 public class AnalysisOptionsTest extends AbstractGhidraHeadedIntegrationTest {
@@ -50,7 +51,7 @@ public class AnalysisOptionsTest extends AbstractGhidraHeadedIntegrationTest {
 	private Program program;
 	private AnalysisOptionsDialog optionsDialog;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		cleanUpStoredPreferences();
 		env = new TestEnv();
@@ -70,7 +71,7 @@ public class AnalysisOptionsTest extends AbstractGhidraHeadedIntegrationTest {
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 		cleanUpStoredPreferences();

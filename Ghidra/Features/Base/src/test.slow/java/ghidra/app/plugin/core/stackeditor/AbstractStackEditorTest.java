@@ -21,8 +21,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 import docking.action.DockingAction;
 import docking.action.DockingActionIf;
@@ -90,7 +90,7 @@ public abstract class AbstractStackEditorTest extends AbstractEditorTest {
 	}
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		addrFactory = program.getAddressFactory();
@@ -131,7 +131,7 @@ public abstract class AbstractStackEditorTest extends AbstractEditorTest {
 	}
 
 	@Override
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		cancelEditing();
 

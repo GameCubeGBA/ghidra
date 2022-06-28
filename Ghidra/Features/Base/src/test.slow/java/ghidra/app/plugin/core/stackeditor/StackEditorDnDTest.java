@@ -19,11 +19,12 @@ import static org.junit.Assert.*;
 
 import java.util.*;
 
-import org.junit.*;
-
 import ghidra.app.plugin.core.compositeeditor.CompositeEditorModelAdapter;
 import ghidra.program.model.data.*;
 import ghidra.util.Msg;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class StackEditorDnDTest extends AbstractStackEditorTest {
 
@@ -34,7 +35,7 @@ public class StackEditorDnDTest extends AbstractStackEditorTest {
 	}
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		init(SIMPLE_STACK);
@@ -53,7 +54,7 @@ public class StackEditorDnDTest extends AbstractStackEditorTest {
 	}
 
 	@Override
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		cleanup();
 		super.tearDown();

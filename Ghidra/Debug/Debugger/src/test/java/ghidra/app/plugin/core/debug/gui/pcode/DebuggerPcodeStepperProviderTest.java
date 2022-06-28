@@ -19,8 +19,8 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.google.common.collect.Range;
 
@@ -59,7 +59,7 @@ public class DebuggerPcodeStepperProviderTest extends AbstractGhidraHeadedDebugg
 	private Instruction imm1234;
 	private Instruction imm2045;
 
-	@Before
+	@BeforeEach
 	public void setUpPcodeStepperProviderTest() throws Exception {
 		traceManager = addPlugin(tool, DebuggerTraceManagerServicePlugin.class);
 		pcodePlugin = addPlugin(tool, DebuggerPcodeStepperPlugin.class);

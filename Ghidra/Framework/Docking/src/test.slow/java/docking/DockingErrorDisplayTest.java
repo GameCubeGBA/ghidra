@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 import java.awt.Window;
 import java.util.Collections;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.test.AbstractDockingTest;
 import ghidra.util.DefaultErrorLogger;

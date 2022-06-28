@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.junit.*;
 
 import docking.widgets.table.GTable;
 import docking.widgets.table.threaded.GThreadedTablePanel;
@@ -46,6 +45,9 @@ import ghidra.program.model.listing.*;
 import ghidra.program.model.symbol.*;
 import ghidra.test.*;
 import ghidra.util.table.GhidraProgramTableModel;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class PlateFieldFactoryTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -56,7 +58,7 @@ public class PlateFieldFactoryTest extends AbstractGhidraHeadedIntegrationTest {
 	private Program program;
 	private GoToService goToService;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		program = buildProgram();
@@ -105,7 +107,7 @@ public class PlateFieldFactoryTest extends AbstractGhidraHeadedIntegrationTest {
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

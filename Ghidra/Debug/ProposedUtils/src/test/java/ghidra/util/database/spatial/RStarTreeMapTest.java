@@ -35,7 +35,6 @@ import javax.swing.JPanel;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
-import org.junit.*;
 
 import com.google.common.collect.Iterators;
 
@@ -50,6 +49,9 @@ import ghidra.util.database.spatial.rect.*;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.VersionException;
 import ghidra.util.task.ConsoleTaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class RStarTreeMapTest {
 	public enum Int2Space implements EuclideanSpace2D<Integer, Integer> {
@@ -711,12 +713,12 @@ public class RStarTreeMapTest {
 
 	protected MyDomainObject obj;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws VersionException, IOException {
 		obj = new MyDomainObject(this);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		obj.release(this);
 	}

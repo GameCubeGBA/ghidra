@@ -21,8 +21,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import generic.Unique;
 import ghidra.dbg.target.*;
@@ -47,7 +47,7 @@ public abstract class AbstractModelForFridaActivationTest
 		extends AbstractDebuggerModelActivationTest {
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testDefaultFocusIsAsExpected() throws Throwable {
 		// Disabled as of 220609
@@ -68,7 +68,7 @@ public abstract class AbstractModelForFridaActivationTest
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testActivateEachOnce() throws Throwable {
 		// Disabled as of 220609
@@ -87,7 +87,7 @@ public abstract class AbstractModelForFridaActivationTest
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testActivateEachTwice() throws Throwable {
 		// Disabled as of 220609
@@ -110,7 +110,7 @@ public abstract class AbstractModelForFridaActivationTest
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testActivateEachViaInterpreter() throws Throwable {
 		// Disabled as of 220609

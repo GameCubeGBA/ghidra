@@ -23,8 +23,8 @@ import java.text.ParseException;
 
 import javax.swing.JFormattedTextField;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import docking.widgets.textfield.HexIntegerFormatter;
 import ghidra.feature.vt.gui.filters.IntegerFormatterFactory;
@@ -34,7 +34,7 @@ public class HexIntegerFormatterTest {
 	private HexIntegerFormatter formatter;
 	private JFormattedTextField formattedField;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		formatter = new HexIntegerFormatter();
 		IntegerFormatterFactory factory = new IntegerFormatterFactory(formatter, false);

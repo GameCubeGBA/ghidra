@@ -17,8 +17,6 @@ package ghidra.app.cmd.memory;
 
 import static org.junit.Assert.*;
 
-import org.junit.*;
-
 import generic.test.AbstractGenericTest;
 import ghidra.framework.cmd.Command;
 import ghidra.program.database.ProgramBuilder;
@@ -27,6 +25,8 @@ import ghidra.program.model.address.*;
 import ghidra.program.model.listing.*;
 import ghidra.program.model.mem.*;
 import ghidra.util.exception.RollbackException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test for the add memory block command.
@@ -40,7 +40,7 @@ public class AddMemoryBlockCmdTest extends AbstractGenericTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		ProgramBuilder notepadBuilder = new ProgramBuilder("notepad", ProgramBuilder._TOY);

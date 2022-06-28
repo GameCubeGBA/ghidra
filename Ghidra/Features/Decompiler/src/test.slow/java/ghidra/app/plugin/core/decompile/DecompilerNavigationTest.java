@@ -17,8 +17,8 @@ package ghidra.app.plugin.core.decompile;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import docking.ActionContext;
 import docking.action.DockingAction;
@@ -41,7 +41,7 @@ public class DecompilerNavigationTest extends AbstractDecompilerTest {
 
 	private boolean goToExternalLinkageCalled;
 
-	@Before
+	@BeforeEach
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();

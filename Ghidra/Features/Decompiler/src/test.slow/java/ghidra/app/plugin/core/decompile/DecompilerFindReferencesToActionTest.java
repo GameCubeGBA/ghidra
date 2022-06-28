@@ -15,7 +15,7 @@
  */
 package ghidra.app.plugin.core.decompile;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class DecompilerFindReferencesToActionTest
 		extends AbstractDecompilerFindReferencesActionTest {

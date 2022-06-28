@@ -21,8 +21,6 @@ import javax.swing.JComponent;
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
 
-import org.junit.*;
-
 import docking.ActionContext;
 import docking.DialogComponentProvider;
 import docking.action.DockingActionIf;
@@ -42,6 +40,9 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.symbol.*;
 import ghidra.program.util.*;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class LabelActionTest extends AbstractGhidraHeadedIntegrationTest
 		implements LocationCallback {
@@ -63,7 +64,7 @@ public class LabelActionTest extends AbstractGhidraHeadedIntegrationTest
 	private CodeBrowserPlugin cb;
 	private LabelMgrPlugin labelMgrPlugin;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -84,7 +85,7 @@ public class LabelActionTest extends AbstractGhidraHeadedIntegrationTest
 		env.showTool();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}

@@ -21,8 +21,8 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import ghidra.app.plugin.languages.sleigh.ConstructorEntryVisitor;
 import ghidra.app.plugin.languages.sleigh.SleighLanguages;
@@ -39,7 +39,7 @@ public class WithBlockTest extends AbstractGhidraHeadlessIntegrationTest {
 	protected static SleighLanguageProvider provider;
 	protected static SleighLanguage lang;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		if (!setupDone) {
 			langID = new LanguageID("TestWith:BE:32:default");

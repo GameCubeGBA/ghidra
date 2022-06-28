@@ -19,8 +19,8 @@ import static org.junit.Assert.*;
 
 import java.util.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import docking.ComponentProvider;
 import docking.action.DockingAction;
@@ -93,7 +93,7 @@ public class CopyPasteCommentsTest extends AbstractProgramBasedTest {
 		return builder.getProgram();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		initialize();

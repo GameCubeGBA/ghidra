@@ -22,8 +22,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import org.junit.*;
-
 import com.google.common.collect.Range;
 
 import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
@@ -32,19 +30,22 @@ import ghidra.trace.model.stack.TraceStack;
 import ghidra.trace.model.stack.TraceStackFrame;
 import ghidra.trace.model.thread.TraceThread;
 import ghidra.util.database.UndoableTransaction;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DBTraceStackManagerTest extends AbstractGhidraHeadlessIntegrationTest {
 
 	ToyDBTraceBuilder b;
 	DBTraceStackManager stackManager;
 
-	@Before
+	@BeforeEach
 	public void setUpStackManagerTest() throws Exception {
 		b = new ToyDBTraceBuilder("Testing", "Toy:BE:64:default");
 		stackManager = b.trace.getStackManager();
 	}
 
-	@After
+	@AfterEach
 	public void tearDownStackManagerTest() throws Exception {
 		b.close();
 	}

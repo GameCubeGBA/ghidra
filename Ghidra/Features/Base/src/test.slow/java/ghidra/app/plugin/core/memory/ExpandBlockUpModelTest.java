@@ -20,8 +20,6 @@ import static org.junit.Assert.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import org.junit.*;
-
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.program.database.ProgramBuilder;
 import ghidra.program.model.address.Address;
@@ -29,6 +27,9 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.mem.MemoryBlock;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -60,7 +61,7 @@ public class ExpandBlockUpModelTest extends AbstractGhidraHeadedIntegrationTest 
 	/*
 	 * @see TestCase#setUp()
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -74,7 +75,7 @@ public class ExpandBlockUpModelTest extends AbstractGhidraHeadedIntegrationTest 
 	/*
 	 * @see TestCase#tearDown()
 	 */
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.release(program);
 		env.dispose();

@@ -22,8 +22,6 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.junit.*;
-
 import com.google.common.collect.Range;
 
 import ghidra.lifecycle.Unfinished;
@@ -37,19 +35,22 @@ import ghidra.trace.model.thread.TraceThread;
 import ghidra.trace.util.TraceRegisterUtils;
 import ghidra.util.database.UndoableTransaction;
 import ghidra.util.exception.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DBTraceSymbolManagerTest extends AbstractGhidraHeadlessIntegrationTest
 		implements Unfinished {
 	protected ToyDBTraceBuilder b;
 	protected DBTraceSymbolManager manager;
 
-	@Before
+	@BeforeEach
 	public void setUpTraceSymbolManagerTest() throws IOException {
 		b = new ToyDBTraceBuilder("Testing", "Toy:BE:64:harvard");
 		manager = b.trace.getSymbolManager();
 	}
 
-	@After
+	@AfterEach
 	public void tearDownSymbolReferenceManagerTest() {
 		b.close();
 	}

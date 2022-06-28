@@ -19,8 +19,8 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.program.database.ProgramBuilder;
@@ -54,7 +54,7 @@ public class StorageEditorModelTest extends AbstractGenericTest {
 		this.testRegName = testRegName;
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		ProgramBuilder builder = new ProgramBuilder("TestProgram", languageId);
 		builder.createMemory("block1", "1000", 1000);

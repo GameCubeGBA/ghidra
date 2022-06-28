@@ -15,14 +15,15 @@
  */
 package ghidra.framework.project.tool;
 
-import org.junit.*;
-
 import generic.test.AbstractGTest;
 import ghidra.framework.model.DomainFile;
 import ghidra.framework.model.Project;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.program.database.ProgramBuilder;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * The following tests are performed in this test driver for
@@ -38,13 +39,13 @@ public class ChangeToolDataTest extends AbstractGhidraHeadedIntegrationTest {
 
 	private Project project;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		ProjectTestUtils.deleteProject(DIRECTORY_NAME, PROJECT_NAME);
 		project = ProjectTestUtils.getProject(DIRECTORY_NAME, PROJECT_NAME);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		project.close();
 		ProjectTestUtils.deleteProject(DIRECTORY_NAME, PROJECT_NAME);

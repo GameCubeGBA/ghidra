@@ -27,7 +27,6 @@ import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.Objects;
 
-import org.junit.*;
 import org.junit.experimental.categories.Category;
 
 import com.google.common.collect.Range;
@@ -70,6 +69,9 @@ import ghidra.trace.model.stack.TraceStack;
 import ghidra.trace.model.thread.TraceThread;
 import ghidra.trace.model.time.TraceSnapshot;
 import ghidra.util.database.UndoableTransaction;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 @Category(NightlyCategory.class)
 public class DebuggerMemoryBytesProviderTest extends AbstractGhidraHeadedDebuggerGUITest {
@@ -79,7 +81,7 @@ public class DebuggerMemoryBytesProviderTest extends AbstractGhidraHeadedDebugge
 
 	protected DebuggerStateEditingService editingService;
 
-	@Before
+	@BeforeEach
 	public void setUpMemoryBytesProviderTest() throws Exception {
 		memBytesPlugin = addPlugin(tool, DebuggerMemoryBytesPlugin.class);
 		memBytesProvider = waitForComponentProvider(DebuggerMemoryBytesProvider.class);
@@ -688,7 +690,7 @@ public class DebuggerMemoryBytesProviderTest extends AbstractGhidraHeadedDebugge
 	}
 
 	@Test
-	@Ignore("Haven't specified this action, yet")
+	@Disabled("Haven't specified this action, yet")
 	public void testActionTrackOtherRegister() {
 		// TODO: Actually, can we make this an arbitrary (pcode/sleigh?) expression.
 		TODO();
@@ -740,7 +742,7 @@ public class DebuggerMemoryBytesProviderTest extends AbstractGhidraHeadedDebugge
 	}
 
 	@Test
-	@Ignore("TODO") // Needs attention, but low priority
+	@Disabled("TODO") // Needs attention, but low priority
 	// Accessibility listener does not seem to work
 	public void testActionReadSelectedMemory() throws Exception {
 		byte[] data = incBlock();

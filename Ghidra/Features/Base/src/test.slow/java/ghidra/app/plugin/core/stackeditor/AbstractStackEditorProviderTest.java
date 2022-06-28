@@ -20,7 +20,7 @@ import static org.junit.Assert.assertNotNull;
 import java.awt.Window;
 
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 import ghidra.app.cmd.function.SetVariableNameCmd;
 import ghidra.program.model.data.DataType;
@@ -37,7 +37,7 @@ public abstract class AbstractStackEditorProviderTest extends AbstractStackEdito
 	}
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		setErrorGUIEnabled(false);

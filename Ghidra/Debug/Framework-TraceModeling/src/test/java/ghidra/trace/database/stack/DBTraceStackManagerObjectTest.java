@@ -15,7 +15,7 @@
  */
 package ghidra.trace.database.stack;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 import ghidra.dbg.target.schema.SchemaContext;
 import ghidra.dbg.target.schema.XmlSchemaContext;
@@ -26,7 +26,7 @@ public class DBTraceStackManagerObjectTest extends DBTraceStackManagerTest {
 
 	protected SchemaContext ctx;
 
-	@Before
+	@BeforeEach
 	public void setUpObjectsMode() throws Exception {
 		ctx = XmlSchemaContext.deserialize("" + //
 			"<context>" + //

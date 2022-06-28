@@ -19,8 +19,8 @@ import static org.junit.Assert.*;
 
 import java.util.*;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.app.plugin.core.checksums.MyTestMemory;
@@ -8729,7 +8729,7 @@ public class CppCompositeTypeTest extends AbstractGenericTest {
 	//==============================================================================================
 
 //	@Test
-	@Ignore
+	@Disabled
 	public void testJ5_32_syntactic_layout() throws Exception {
 		CppCompositeType J5_struct = createJ5_syntactic_struct32(pdbVbtManager32);
 		J5_struct.createLayoutFromSyntacticDescription(pdbVbtManager32, TaskMonitor.DUMMY);

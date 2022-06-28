@@ -22,8 +22,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.experimental.categories.Category;
 
 import com.google.common.collect.Range;
@@ -64,7 +64,7 @@ public class DebuggerBreakpointsProviderTest extends AbstractGhidraHeadedDebugge
 	protected DebuggerBreakpointsProvider breakpointsProvider;
 	protected DebuggerStaticMappingService mappingService;
 
-	@Before
+	@BeforeEach
 	public void setUpBreakpointsProviderTest() throws Exception {
 		breakpointsPlugin = addPlugin(tool, DebuggerBreakpointsPlugin.class);
 		breakpointsProvider = waitForComponentProvider(DebuggerBreakpointsProvider.class);

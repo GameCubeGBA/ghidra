@@ -15,8 +15,8 @@
  */
 package ghidra.app.plugin.assembler.sleigh;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import ghidra.program.model.lang.LanguageID;
 
@@ -33,7 +33,7 @@ public class dsPIC30FAssemblyTest extends AbstractAssemblyTest {
 	}
 
 	@Test
-	@Ignore("Fails because W4 is a valid label, but the wrong 'size'")
+	@Disabled("Fails because W4 is a valid label, but the wrong 'size'")
 	public void testAssemble_clr_b_W4() {
 		assertOneCompatRestExact("clr.b W4", "00:42:eb:00", 0x000100);
 	}

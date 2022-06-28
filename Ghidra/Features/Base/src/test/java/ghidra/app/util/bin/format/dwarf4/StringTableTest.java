@@ -24,7 +24,7 @@ import ghidra.app.util.bin.format.dwarf4.next.StringTable;
 
 import java.io.IOException;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 

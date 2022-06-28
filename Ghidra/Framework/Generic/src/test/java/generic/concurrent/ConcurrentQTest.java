@@ -22,11 +22,12 @@ import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
-import org.junit.*;
-
 import generic.test.AbstractGenericTest;
 import ghidra.util.task.TaskMonitor;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ConcurrentQTest extends AbstractGenericTest {
 
@@ -43,7 +44,7 @@ public class ConcurrentQTest extends AbstractGenericTest {
 	private TestCallback callback = new TestCallback();
 
 	// @formatter:off
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		threadPool = GThreadPool.getSharedThreadPool(TEST_THREAD_POOL);
 		threadPool.setMaxThreadCount(MAX_THREADS);
@@ -58,7 +59,7 @@ public class ConcurrentQTest extends AbstractGenericTest {
 	}
 	
 	// @formatter:on
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		GThreadPool pool = GThreadPool.getSharedThreadPool(TEST_THREAD_POOL);
 		@SuppressWarnings("unchecked")

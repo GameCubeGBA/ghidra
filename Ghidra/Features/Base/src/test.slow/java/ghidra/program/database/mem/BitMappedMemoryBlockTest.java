@@ -17,8 +17,6 @@ package ghidra.program.database.mem;
 
 import static org.junit.Assert.*;
 
-import org.junit.*;
-
 import ghidra.program.database.ProgramBuilder;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressSpace;
@@ -26,6 +24,9 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.mem.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test for the BitMemoryBlock for the database implementation.
@@ -46,7 +47,7 @@ public class BitMappedMemoryBlockTest extends AbstractGhidraHeadedIntegrationTes
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		program = createDefaultProgram(testName.getMethodName(), ProgramBuilder._8051, this);
 		memory = program.getMemory();
@@ -64,7 +65,7 @@ public class BitMappedMemoryBlockTest extends AbstractGhidraHeadedIntegrationTes
 		memory.setBytes(block.getStart(), bytes);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		program.endTransaction(transactionID, true);
 		program.release(this);

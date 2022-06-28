@@ -24,7 +24,6 @@ import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.Set;
 
-import org.junit.*;
 import org.junit.experimental.categories.Category;
 
 import com.google.common.collect.Range;
@@ -69,6 +68,9 @@ import ghidra.util.database.UndoableTransaction;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 @Category(NightlyCategory.class)
 public class DebuggerListingProviderTest extends AbstractGhidraHeadedDebuggerGUITest {
@@ -80,7 +82,7 @@ public class DebuggerListingProviderTest extends AbstractGhidraHeadedDebuggerGUI
 	protected CodeBrowserPlugin codePlugin;
 	protected CodeViewerProvider codeProvider;
 
-	@Before
+	@BeforeEach
 	public void setUpListingProviderTest() throws Exception {
 		// Do before listingPlugin, since types collide
 		codePlugin = addPlugin(tool, CodeBrowserPlugin.class);
@@ -896,7 +898,7 @@ public class DebuggerListingProviderTest extends AbstractGhidraHeadedDebuggerGUI
 	}
 
 	@Test
-	@Ignore("Haven't specified this action, yet")
+	@Disabled("Haven't specified this action, yet")
 	public void testActionTrackOtherRegister() {
 		// TODO: Actually, can we make this an arbitrary (pcode/sleigh?) expression.
 		Unfinished.TODO();
@@ -1041,7 +1043,7 @@ public class DebuggerListingProviderTest extends AbstractGhidraHeadedDebuggerGUI
 	}
 
 	@Test
-	@Ignore("TODO") // Needs attention, but low priority
+	@Disabled("TODO") // Needs attention, but low priority
 	public void testActionReadSelectedMemory() throws Exception {
 		byte[] data = incBlock();
 		byte[] zero = new byte[data.length];

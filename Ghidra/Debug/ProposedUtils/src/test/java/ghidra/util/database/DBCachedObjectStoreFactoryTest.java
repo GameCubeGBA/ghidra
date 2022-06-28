@@ -19,8 +19,8 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import db.DBHandle;
 import db.DBRecord;
@@ -727,7 +727,7 @@ public class DBCachedObjectStoreFactoryTest {
 	}
 
 	@Test
-	@Ignore("I'm no longer sure this test is correct. See the TODO within.")
+	@Disabled("I'm no longer sure this test is correct. See the TODO within.")
 	public void testCodecs() throws IOException, VersionException {
 
 		DBHandle handle = new DBHandle();

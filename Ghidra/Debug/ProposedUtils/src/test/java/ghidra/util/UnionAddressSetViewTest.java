@@ -19,8 +19,8 @@ import static org.junit.Assert.*;
 
 import java.util.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import ghidra.program.model.address.*;
 import ghidra.program.model.lang.*;
@@ -62,7 +62,7 @@ public class UnionAddressSetViewTest extends AbstractGhidraHeadlessIntegrationTe
 		return result;
 	}
 
-	@Before
+	@BeforeEach
 	public void setUpIteratorTest() throws LanguageNotFoundException {
 		toy = DefaultLanguageService.getLanguageService()
 				.getLanguage(new LanguageID("Toy:BE:64:harvard"));

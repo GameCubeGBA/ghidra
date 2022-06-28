@@ -20,8 +20,8 @@ import static org.junit.Assert.fail;
 import java.util.*;
 
 import org.apache.commons.collections4.MultiValuedMap;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 import generic.test.AbstractGenericTest;
 import ghidra.app.plugin.assembler.*;
@@ -68,7 +68,7 @@ public abstract class AssemblyTestCase extends AbstractGenericTest {
 	//@Rule
 	//public TestName name = new TestName();
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		LanguageID langID = getLanguageID();
 		if (!setupLangID.equals(langID.toString())) {
@@ -80,7 +80,7 @@ public abstract class AssemblyTestCase extends AbstractGenericTest {
 		//oldOutput = dbg.setOutputStream(new FileOutputStream(name.getMethodName() + ".asm.log"));
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		//dbg.resetOutputStream(oldOutput).close();
 	}

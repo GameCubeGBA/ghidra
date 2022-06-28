@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.experimental.categories.Category;
 
 import generic.Unique;

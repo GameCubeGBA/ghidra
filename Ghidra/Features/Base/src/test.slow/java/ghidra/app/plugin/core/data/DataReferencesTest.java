@@ -17,8 +17,6 @@ package ghidra.app.plugin.core.data;
 
 import static org.junit.Assert.*;
 
-import org.junit.*;
-
 import docking.widgets.fieldpanel.field.FieldElement;
 import ghidra.app.cmd.data.*;
 import ghidra.app.plugin.core.clear.ClearCmd;
@@ -38,6 +36,9 @@ import ghidra.program.model.symbol.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.exception.InvalidInputException;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DataReferencesTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -51,7 +52,7 @@ public class DataReferencesTest extends AbstractGhidraHeadedIntegrationTest {
 	 * Sets up the fixture, for example, open a network connection.
 	 * This method is called before a test is executed.
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 
@@ -78,7 +79,7 @@ public class DataReferencesTest extends AbstractGhidraHeadedIntegrationTest {
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.release(program);
 		env.dispose();

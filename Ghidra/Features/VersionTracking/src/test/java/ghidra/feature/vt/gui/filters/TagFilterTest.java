@@ -20,8 +20,6 @@ import static org.junit.Assert.*;
 import java.io.IOException;
 import java.util.*;
 
-import org.junit.*;
-
 import ghidra.feature.vt.api.db.VTSessionDB;
 import ghidra.feature.vt.api.impl.VTChangeManager;
 import ghidra.feature.vt.api.impl.VersionTrackingChangeRecord;
@@ -36,6 +34,9 @@ import ghidra.framework.model.DomainObjectChangedEvent;
 import ghidra.framework.options.Options;
 import ghidra.framework.plugintool.ServiceProvider;
 import ghidra.program.model.listing.Program;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class TagFilterTest extends VTBaseTestCase {
 
@@ -47,7 +48,7 @@ public class TagFilterTest extends VTBaseTestCase {
 	private VTControllerListener listener = new StubControllerListener();
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		controller = createController();
@@ -56,7 +57,7 @@ public class TagFilterTest extends VTBaseTestCase {
 	}
 
 	@Override
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		tagFilter.dispose();
 	}

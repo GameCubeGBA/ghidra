@@ -19,8 +19,6 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import org.junit.*;
-
 import generic.test.AbstractGenericTest;
 import ghidra.app.services.DataTypeManagerService;
 import ghidra.app.util.cparser.C.ParseException;
@@ -33,6 +31,8 @@ import ghidra.program.model.lang.Register;
 import ghidra.program.model.listing.*;
 import ghidra.program.model.pcode.Varnode;
 import ghidra.util.exception.InvalidInputException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class FunctionEditorModelTest extends AbstractGenericTest {
 
@@ -55,7 +55,7 @@ public class FunctionEditorModelTest extends AbstractGenericTest {
 		}
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		ProgramBuilder builder = new ProgramBuilder("Test", ProgramBuilder._X86);
 		builder.createMemory("block1", "1000", 1000);

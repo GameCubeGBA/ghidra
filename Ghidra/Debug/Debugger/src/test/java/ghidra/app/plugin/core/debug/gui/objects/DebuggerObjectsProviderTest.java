@@ -15,8 +15,8 @@
  */
 package ghidra.app.plugin.core.debug.gui.objects;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import ghidra.app.plugin.core.debug.gui.AbstractGhidraHeadedDebuggerGUITest;
 import ghidra.app.services.CodeViewerService;
@@ -30,7 +30,7 @@ public class DebuggerObjectsProviderTest extends AbstractGhidraHeadedDebuggerGUI
 	protected DebuggerStaticMappingService mappingService;
 	protected CodeViewerService codeViewer;
 
-	@Before
+	@BeforeEach
 	public void setUpListingProviderTest() throws Exception {
 		objectsPlugin = addPlugin(tool, DebuggerObjectsPlugin.class);
 		objectsProvider = waitForComponentProvider(DebuggerObjectsProvider.class);

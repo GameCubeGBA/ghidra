@@ -19,8 +19,8 @@ import static org.junit.Assert.*;
 
 import java.math.BigInteger;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.app.util.bin.format.pdb2.pdbreader.*;
@@ -46,7 +46,7 @@ public class TypesTest extends AbstractGenericTest {
 	private static int methodListMsType1;
 	private static int vtShapeMsType1;
 
-	@BeforeClass
+	@BeforeAll
 	public static void setUp() {
 		try (DummyPdb700 dummyPdb700 = new DummyPdb700(4096, 4096, 4096, 4096)) {
 			pdb = dummyPdb700;

@@ -19,8 +19,8 @@ import static org.junit.Assert.*;
 
 import java.util.NoSuchElementException;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.program.model.address.*;
@@ -30,7 +30,7 @@ public class RecoverableAddressRangeIteratorTest extends AbstractGenericTest {
 	private AddressSpace space;
 	private AddressSet set;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		space = new GenericAddressSpace("xx", 32, AddressSpace.TYPE_RAM, 0);

@@ -17,8 +17,8 @@ package ghidra.app.plugin.core.debug.gui.console;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import docking.ActionContext;
 import docking.action.builder.ActionBuilder;
@@ -30,7 +30,7 @@ public class DebuggerConsoleProviderTest extends AbstractGhidraHeadedDebuggerGUI
 	DebuggerConsolePlugin consolePlugin;
 	DebuggerConsoleProvider consoleProvider;
 
-	@Before
+	@BeforeEach
 	public void setUpConsoleProviderTest() throws Exception {
 		consolePlugin = addPlugin(tool, DebuggerConsolePlugin.class);
 		consoleProvider = waitForComponentProvider(DebuggerConsoleProvider.class);

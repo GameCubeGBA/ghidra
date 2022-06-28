@@ -15,16 +15,16 @@
  */
 package ghidra.program.model.data;
 
-import org.junit.*;
-
 import ghidra.program.model.address.Address;
 import ghidra.program.model.mem.ByteMemBufferImpl;
 import ghidra.util.BigEndianDataConverter;
 import ghidra.util.UniversalIdGenerator;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class EnumDataTypeTest {
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		UniversalIdGenerator.initialize();
 	}

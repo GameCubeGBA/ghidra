@@ -23,8 +23,6 @@ import java.nio.ByteBuffer;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
-import org.junit.*;
-
 import com.sun.jna.Native;
 import com.sun.jna.platform.win32.COM.COMException;
 import com.sun.jna.win32.StdCallLibrary;
@@ -44,6 +42,9 @@ import ghidra.framework.Application;
 import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
 import ghidra.util.Msg;
 import ghidra.util.NumericUtilities;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 public class DbgEngTest extends AbstractGhidraHeadlessIntegrationTest {
 
@@ -77,7 +78,7 @@ public class DbgEngTest extends AbstractGhidraHeadlessIntegrationTest {
 	protected DebugClient client;
 	protected DebugControl control;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		assumeDbgengDLLLoadable();
 		client = debugCreate();
@@ -629,7 +630,7 @@ public class DbgEngTest extends AbstractGhidraHeadlessIntegrationTest {
 	}
 
 	@Test
-	@Ignore("I can't find a reliable means to detect the last thread. " +
+	@Disabled("I can't find a reliable means to detect the last thread. " +
 		"There's supposed to be an initial break, but it is rarely reported. " +
 		"I thought about toolhelp, but that presumes local live debugging.")
 	public void testMultiThreadAttach() throws Exception {

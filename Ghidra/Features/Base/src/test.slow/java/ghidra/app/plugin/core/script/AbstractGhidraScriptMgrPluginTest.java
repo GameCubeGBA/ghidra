@@ -34,8 +34,6 @@ import javax.swing.text.JTextComponent;
 import javax.swing.tree.TreePath;
 import javax.swing.undo.UndoableEdit;
 
-import org.junit.*;
-
 import docking.ActionContext;
 import docking.action.DockingActionIf;
 import docking.widgets.OptionDialog;
@@ -62,6 +60,8 @@ import ghidra.util.exception.AssertException;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.table.GhidraTableFilterPanel;
 import ghidra.util.task.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import util.CollectionUtils;
 import utilities.util.FileUtilities;
 
@@ -87,7 +87,7 @@ public abstract class AbstractGhidraScriptMgrPluginTest
 	protected GhidraScriptComponentProvider provider;
 	protected ToyProgramBuilder builder;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		setErrorGUIEnabled(false);
 
@@ -163,7 +163,7 @@ public abstract class AbstractGhidraScriptMgrPluginTest
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		closeAllWindows();
 		waitForSwing();

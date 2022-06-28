@@ -25,8 +25,8 @@ import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
 import org.apache.commons.collections4.IterableUtils;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import docking.*;
 import docking.action.*;
@@ -56,7 +56,7 @@ public class SharedKeyBindingDockingActionTest extends AbstractDockingTest {
 
 	private Tool tool;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		tool = new FakeDockingTool();
 

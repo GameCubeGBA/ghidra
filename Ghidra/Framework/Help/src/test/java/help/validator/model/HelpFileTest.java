@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.nio.file.*;
 import java.util.Collection;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import help.AbstractHelpTest;
 import help.validator.*;

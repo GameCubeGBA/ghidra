@@ -22,8 +22,8 @@ import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.experimental.categories.Category;
 
 import generic.test.category.NightlyCategory;
@@ -36,7 +36,7 @@ import ghidra.dbg.target.TargetConsole.Channel;
 public class DebuggerInterpreterPluginTest extends AbstractGhidraHeadedDebuggerGUITest {
 	private DebuggerInterpreterPlugin interpreterPlugin;
 
-	@Before
+	@BeforeEach
 	public void setUpInterpreterPluginTest() throws Exception {
 		interpreterPlugin = addPlugin(tool, DebuggerInterpreterPlugin.class);
 	}

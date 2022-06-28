@@ -20,9 +20,7 @@ import static org.junit.Assert.*;
 import java.util.*;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.junit.Test;
-
-import ghidra.generic.util.datastruct.DynamicSortedTreeSet;
+import org.junit.jupiter.api.Test;
 
 public class DynamicSortedTreeSetTest {
 	public static class NonComparable {

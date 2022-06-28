@@ -15,8 +15,8 @@
  */
 package agent.frida.model.invm;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.junit.experimental.categories.Category;
 
 import agent.frida.model.AbstractModelForFridaRootAttacherTest;
@@ -34,7 +34,7 @@ public class InVmModelForFridaRootAttacherTest extends AbstractModelForFridaRoot
 	//   (2) on linux, "sudo su; echo 0 > /proc/sys/kernel/yama/ptrace_scope"
 
 	@Override
-	@Ignore // test requires ability to attach by object & frida version requires pid
+	@Disabled // test requires ability to attach by object & frida version requires pid
 	@Test
 	public void testAttachByObjBogusThrowsException() throws Throwable {
 		super.testAttachByObjBogusThrowsException();

@@ -22,8 +22,6 @@ import java.io.File;
 import javax.swing.JDialog;
 import javax.swing.JTextField;
 
-import org.junit.*;
-
 import ghidra.app.cmd.function.CreateFunctionCmd;
 import ghidra.app.plugin.core.codebrowser.CodeBrowserPlugin;
 import ghidra.app.services.ProgramManager;
@@ -33,6 +31,9 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
 import ghidra.program.model.symbol.*;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test the AutoRenameLabelsPlugin. 
@@ -44,7 +45,7 @@ public class AutoRenameLabelsScriptTest extends AbstractGhidraHeadedIntegrationT
 	private Program program;
 	private File script;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -87,7 +88,7 @@ public class AutoRenameLabelsScriptTest extends AbstractGhidraHeadedIntegrationT
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

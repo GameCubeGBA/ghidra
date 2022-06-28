@@ -20,8 +20,6 @@ import static org.junit.Assert.assertTrue;
 
 import javax.swing.table.TableCellEditor;
 
-import org.junit.*;
-
 import docking.action.DockingActionIf;
 import docking.widgets.DropDownSelectionTextField;
 import docking.widgets.table.GTable;
@@ -36,6 +34,9 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressFactory;
 import ghidra.program.model.listing.*;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class FunctionEditorDialogTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -52,7 +53,7 @@ public class FunctionEditorDialogTest extends AbstractGhidraHeadedIntegrationTes
 	private DockingActionIf editFunction;
 	private DockingActionIf createFunction;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -62,7 +63,7 @@ public class FunctionEditorDialogTest extends AbstractGhidraHeadedIntegrationTes
 		loadNotepad();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}

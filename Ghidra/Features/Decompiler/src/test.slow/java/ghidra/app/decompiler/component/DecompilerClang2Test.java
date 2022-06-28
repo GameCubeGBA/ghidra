@@ -15,8 +15,8 @@
  */
 package ghidra.app.decompiler.component;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import docking.action.DockingActionIf;
 import ghidra.app.decompiler.ClangToken;
@@ -28,7 +28,7 @@ import ghidra.framework.plugintool.util.OptionsService;
 public class DecompilerClang2Test extends AbstractDecompilerTest {
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		super.setUp();

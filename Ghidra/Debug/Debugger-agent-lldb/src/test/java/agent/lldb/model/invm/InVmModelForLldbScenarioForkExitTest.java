@@ -15,15 +15,15 @@
  */
 package agent.lldb.model.invm;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import agent.lldb.model.AbstractModelForlldbScenarioForkExitTest;
 
 public class InVmModelForLldbScenarioForkExitTest
 		extends AbstractModelForlldbScenarioForkExitTest {
 
-	@Ignore("Specimen is currently defunct - lldb does not support fork/vfork yet")
+	@Disabled("Specimen is currently defunct - lldb does not support fork/vfork yet")
 	@Test
 	public void testScenario() throws Throwable {
 	}

@@ -25,8 +25,6 @@ import java.util.Set;
 
 import javax.swing.*;
 
-import org.junit.*;
-
 import docking.*;
 import docking.action.DockingActionIf;
 import docking.action.ToggleDockingAction;
@@ -57,6 +55,8 @@ import ghidra.util.InvalidNameException;
 import ghidra.util.SaveableColor;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class DiffTestAdapter extends AbstractGhidraHeadedIntegrationTest {
 	protected ProgramDiff programDiff;
@@ -460,7 +460,7 @@ public class DiffTestAdapter extends AbstractGhidraHeadedIntegrationTest {
 		return builder;
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		programBuilderDiffTest1 = buildDiffTestPgm1();
@@ -498,7 +498,7 @@ public class DiffTestAdapter extends AbstractGhidraHeadedIntegrationTest {
 		diffPlugin = getPlugin(tool, ProgramDiffPlugin.class);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 
 		Window win = getWindow("Select Other Program");

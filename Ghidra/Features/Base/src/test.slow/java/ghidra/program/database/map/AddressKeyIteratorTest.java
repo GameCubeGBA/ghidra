@@ -19,8 +19,6 @@ import static org.junit.Assert.*;
 
 import java.util.NoSuchElementException;
 
-import org.junit.*;
-
 import db.*;
 import ghidra.program.database.ProgramBuilder;
 import ghidra.program.database.ProgramDB;
@@ -28,6 +26,9 @@ import ghidra.program.model.address.*;
 import ghidra.program.model.mem.Memory;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.datastruct.LongArray;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AddressKeyIteratorTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -50,7 +51,7 @@ public class AddressKeyIteratorTest extends AbstractGhidraHeadedIntegrationTest 
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		program = createDefaultProgram(testName.getMethodName(), ProgramBuilder._TOY, this);
 		space = program.getAddressFactory().getDefaultAddressSpace();
@@ -103,7 +104,7 @@ public class AddressKeyIteratorTest extends AbstractGhidraHeadedIntegrationTest 
 		return key;
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		program.endTransaction(transactionID, true);
 		program.release(this);

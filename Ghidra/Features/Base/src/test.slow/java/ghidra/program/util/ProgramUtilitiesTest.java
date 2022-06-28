@@ -17,13 +17,14 @@ package ghidra.program.util;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.*;
-
 import ghidra.program.database.ProgramBuilder;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ProgramUtilitiesTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -34,14 +35,14 @@ public class ProgramUtilitiesTest extends AbstractGhidraHeadedIntegrationTest {
 		super();
 	}
 
-    @Before
+    @BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		builder = new ProgramBuilder("notepad", ProgramBuilder._TOY);
 		builder.createMemory("test1", Long.toHexString(0x1001000), 0x2000);
 	}
 
-    @After
+    @AfterEach
     public void tearDown() {
 		env.dispose();
 		builder.dispose();

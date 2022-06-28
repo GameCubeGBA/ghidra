@@ -23,8 +23,6 @@ import java.awt.Container;
 import javax.swing.*;
 import javax.swing.table.TableModel;
 
-import org.junit.*;
-
 import docking.action.DockingActionIf;
 import docking.widgets.OptionDialog;
 import docking.widgets.combobox.GhidraComboBox;
@@ -42,6 +40,9 @@ import ghidra.program.model.mem.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the actions on the Memory Map provider.
@@ -67,7 +68,7 @@ public class MemoryMapProvider2Test extends AbstractGhidraHeadedIntegrationTest 
 		return builder.getProgram();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		program = buildProgram("notepad");
@@ -86,7 +87,7 @@ public class MemoryMapProvider2Test extends AbstractGhidraHeadedIntegrationTest 
 		showProvider();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (tool != null) {
 			closeAllWindows();

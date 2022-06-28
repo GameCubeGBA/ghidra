@@ -22,8 +22,6 @@ import java.util.List;
 
 import javax.swing.*;
 
-import org.junit.*;
-
 import docking.action.DockingActionIf;
 import docking.widgets.table.GTable;
 import docking.widgets.table.TableFilter;
@@ -40,12 +38,15 @@ import ghidra.feature.vt.gui.provider.matchtable.VTMatchTableProvider;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.program.model.address.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class VTMatchTableTest extends AbstractGhidraHeadedIntegrationTest {
 	private VTTestEnv env;
 	private VTSession session;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		env = new VTTestEnv();
@@ -59,7 +60,7 @@ public class VTMatchTableTest extends AbstractGhidraHeadedIntegrationTest {
 		toolFrame.setSize(800, 800);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

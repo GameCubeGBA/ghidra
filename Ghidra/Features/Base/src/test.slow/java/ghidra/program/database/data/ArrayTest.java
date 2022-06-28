@@ -17,8 +17,6 @@ package ghidra.program.database.data;
 
 import static org.junit.Assert.*;
 
-import org.junit.*;
-
 import ghidra.docking.settings.SettingsDefinition;
 import ghidra.program.database.ProgramBuilder;
 import ghidra.program.database.ProgramDB;
@@ -30,6 +28,9 @@ import ghidra.program.model.listing.Listing;
 import ghidra.program.model.mem.Memory;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -51,7 +52,7 @@ public class ArrayTest extends AbstractGhidraHeadedIntegrationTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		program = createDefaultProgram(testName.getMethodName(), ProgramBuilder._TOY, this);
@@ -77,7 +78,7 @@ public class ArrayTest extends AbstractGhidraHeadedIntegrationTest {
 
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		program.endTransaction(transactionID, true);
 		program.release(this);

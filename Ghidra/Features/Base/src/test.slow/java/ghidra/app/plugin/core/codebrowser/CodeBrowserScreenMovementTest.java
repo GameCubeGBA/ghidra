@@ -24,8 +24,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.swing.*;
 
-import org.junit.*;
-
 import docking.action.DockingActionIf;
 import docking.widgets.EventTrigger;
 import docking.widgets.fieldpanel.*;
@@ -50,6 +48,9 @@ import ghidra.program.model.symbol.RefType;
 import ghidra.program.model.symbol.SourceType;
 import ghidra.program.util.*;
 import ghidra.test.AbstractProgramBasedTest;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class CodeBrowserScreenMovementTest extends AbstractProgramBasedTest {
 
@@ -58,7 +59,7 @@ public class CodeBrowserScreenMovementTest extends AbstractProgramBasedTest {
 	private AddressFactory addrFactory;
 	private FieldPanel fp;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		// warning: this test is sensitive to size and layout of the visible component providers;
@@ -98,7 +99,7 @@ public class CodeBrowserScreenMovementTest extends AbstractProgramBasedTest {
 	}
 
 	@Override
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}

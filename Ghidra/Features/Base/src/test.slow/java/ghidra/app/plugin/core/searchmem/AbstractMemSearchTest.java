@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 import javax.swing.*;
 
 import org.apache.commons.collections4.IteratorUtils;
-import org.junit.After;
+import org.junit.jupiter.api.AfterEach;
 
 import docking.action.DockingActionIf;
 import docking.test.AbstractDockingTest;
@@ -99,7 +99,7 @@ public abstract class AbstractMemSearchTest extends AbstractProgramBasedTest {
 	}
 
 	@Override
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

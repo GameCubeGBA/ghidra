@@ -23,8 +23,6 @@ import java.util.*;
 
 import javax.swing.SwingUtilities;
 
-import org.junit.*;
-
 import docking.action.DockingAction;
 import docking.action.DockingActionIf;
 import docking.widgets.fieldpanel.FieldPanel;
@@ -51,6 +49,9 @@ import ghidra.program.model.symbol.Symbol;
 import ghidra.program.util.AddressFieldLocation;
 import ghidra.program.util.ProgramSelection;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test copy/paste function information
@@ -94,7 +95,7 @@ public class CopyPasteFunctionInfoTest extends AbstractGhidraHeadedIntegrationTe
 		return builder.getProgram();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		toolOne = env.getTool();
@@ -122,7 +123,7 @@ public class CopyPasteFunctionInfoTest extends AbstractGhidraHeadedIntegrationTe
 		resetOptions();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

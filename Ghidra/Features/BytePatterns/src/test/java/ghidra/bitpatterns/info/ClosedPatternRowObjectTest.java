@@ -20,8 +20,8 @@ import static org.junit.Assert.*;
 import java.io.IOException;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import generic.jar.ResourceFile;
 import generic.test.AbstractGenericTest;
@@ -32,7 +32,7 @@ public class ClosedPatternRowObjectTest extends AbstractGenericTest {
 
 	private FileBitPatternInfoReader fReader;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws IOException {
 		ResourceFile resourceFile = Application.getModuleDataSubDirectory("BytePatterns", "test");
 		fReader = new FileBitPatternInfoReader(resourceFile.getFile(false));

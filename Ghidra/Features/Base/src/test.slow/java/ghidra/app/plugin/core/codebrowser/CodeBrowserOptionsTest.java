@@ -21,8 +21,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import org.junit.*;
-
 import docking.help.Help;
 import docking.help.HelpService;
 import docking.widgets.fieldpanel.field.*;
@@ -50,6 +48,9 @@ import ghidra.program.util.BytesFieldLocation;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.HelpLocation;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import util.CollectionUtils;
 
 public class CodeBrowserOptionsTest extends AbstractGhidraHeadedIntegrationTest {
@@ -63,14 +64,14 @@ public class CodeBrowserOptionsTest extends AbstractGhidraHeadedIntegrationTest 
 		return addrFactory.getAddress(address);
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.launchDefaultTool();
 		cb = env.getPlugin(CodeBrowserPlugin.class);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.closeTool(tool);
 		env.dispose();

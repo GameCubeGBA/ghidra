@@ -17,8 +17,6 @@ package ghidra.program.database.data;
 
 import static org.junit.Assert.*;
 
-import org.junit.*;
-
 import ghidra.app.plugin.core.codebrowser.CodeBrowserPlugin;
 import ghidra.docking.settings.Settings;
 import ghidra.framework.plugintool.PluginTool;
@@ -31,6 +29,9 @@ import ghidra.program.model.mem.MemBuffer;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class BitFieldListingDisplayTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -42,7 +43,7 @@ public class BitFieldListingDisplayTest extends AbstractGhidraHeadedIntegrationT
 	private TestEnv env;
 	private CodeBrowserPlugin plugin;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		program = createDefaultProgram("Test", ProgramBuilder._TOY, this); // big-endian
 		startTransaction();
@@ -94,7 +95,7 @@ public class BitFieldListingDisplayTest extends AbstractGhidraHeadedIntegrationT
 		return space.getAddress(value);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		endTransaction();
 		env.dispose();

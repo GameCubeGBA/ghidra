@@ -23,7 +23,7 @@ import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.collections4.map.LazyMap;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class AsyncLaziesTest {
 	@Test

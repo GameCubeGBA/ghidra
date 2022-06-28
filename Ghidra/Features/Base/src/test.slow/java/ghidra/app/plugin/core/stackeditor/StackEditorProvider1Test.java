@@ -22,7 +22,7 @@ import java.awt.Window;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.action.DockingActionIf;
 import ghidra.framework.options.Options;

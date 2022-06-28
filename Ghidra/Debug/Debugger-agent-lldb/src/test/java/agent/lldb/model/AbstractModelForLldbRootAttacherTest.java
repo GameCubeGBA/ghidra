@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.After;
+import org.junit.jupiter.api.AfterEach;
 
 import agent.lldb.model.iface1.LldbModelTargetKillable;
 import ghidra.dbg.DebugModelConventions;
@@ -62,7 +62,7 @@ public abstract class AbstractModelForLldbRootAttacherTest
 	}
 
 	@Override
-	@After
+	@AfterEach
 	public void tearDownDebuggerModelTest() throws Throwable {
 		/**
 		 * NB. Model has to be closed before dummy. If dummy is suspended by a debugger, terminating

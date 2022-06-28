@@ -21,9 +21,9 @@ import java.awt.Color;
 
 import javax.swing.text.*;
 
-import org.junit.*;
-
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class FunctionSignatureTextFieldTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -37,7 +37,7 @@ public class FunctionSignatureTextFieldTest extends AbstractGhidraHeadedIntegrat
 		super();
 	}
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
 		
 		field = new FunctionSignatureTextField();

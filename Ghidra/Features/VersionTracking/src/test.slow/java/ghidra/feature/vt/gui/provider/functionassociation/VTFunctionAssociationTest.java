@@ -24,8 +24,6 @@ import java.util.concurrent.atomic.AtomicReference;
 import javax.swing.JLabel;
 import javax.swing.table.TableModel;
 
-import org.junit.*;
-
 import docking.ActionContext;
 import docking.action.DockingActionIf;
 import docking.menu.ActionState;
@@ -58,6 +56,9 @@ import ghidra.util.Msg;
 import ghidra.util.exception.NotFoundException;
 import ghidra.util.table.GhidraTable;
 import ghidra.util.table.GhidraTableFilterPanel;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class VTFunctionAssociationTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -85,7 +86,7 @@ public class VTFunctionAssociationTest extends AbstractGhidraHeadedIntegrationTe
 	private VTFunctionAssociationProvider functionAssociationProvider;
 
 	@SuppressWarnings("unchecked")
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		setErrorGUIEnabled(false);
@@ -149,7 +150,7 @@ public class VTFunctionAssociationTest extends AbstractGhidraHeadedIntegrationTe
 				functionAssociationProvider);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		runSwing(() -> vtTool.close());

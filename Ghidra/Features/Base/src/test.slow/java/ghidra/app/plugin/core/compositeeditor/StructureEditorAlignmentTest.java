@@ -22,7 +22,7 @@ import java.util.Arrays;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.program.model.data.*;
 import ghidra.program.model.listing.Function;

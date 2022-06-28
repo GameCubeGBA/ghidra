@@ -17,11 +17,11 @@ package ghidra.program.model.data;
 
 import static org.junit.Assert.*;
 
-import org.junit.*;
-
 import com.google.common.collect.Sets;
 
 import generic.test.AbstractGTest;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -30,7 +30,7 @@ public class UnionDataTypeTest extends AbstractGTest {
 
 	private Union union;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		union = createUnion("TestUnion");
 		union.add(new ByteDataType(), "field1", "Comment1");

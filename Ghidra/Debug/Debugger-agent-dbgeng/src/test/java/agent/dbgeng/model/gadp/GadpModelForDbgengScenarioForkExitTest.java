@@ -15,15 +15,15 @@
  */
 package agent.dbgeng.model.gadp;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import agent.dbgeng.model.AbstractModelForDbgengScenarioForkExitTest;
 
 public class GadpModelForDbgengScenarioForkExitTest
 		extends AbstractModelForDbgengScenarioForkExitTest {
 
-	@Ignore("Specimen is currently defunct")
+	@Disabled("Specimen is currently defunct")
 	@Test
 	public void testScenario() throws Throwable {
 	}

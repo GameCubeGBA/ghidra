@@ -20,9 +20,8 @@ import static org.junit.Assert.*;
 import java.math.*;
 import java.util.Random;
 
-import org.junit.*;
-
 import generic.test.AbstractGenericTest;
+import org.junit.jupiter.api.Test;
 
 public strictfp class FloatFormatTest extends AbstractGenericTest {
 

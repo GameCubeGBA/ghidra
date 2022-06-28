@@ -21,18 +21,19 @@ import java.awt.Window;
 
 import javax.swing.SwingUtilities;
 
-import org.junit.*;
-
 import ghidra.program.model.data.*;
 import ghidra.util.exception.UsrException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class UnionEditorNotifiedTest extends AbstractUnionEditorTest {
 
 	private int persistentTxId = 0;
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -41,7 +42,7 @@ public class UnionEditorNotifiedTest extends AbstractUnionEditorTest {
 	}
 
 	@Override
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (persistentTxId != 0) {
 			program.endTransaction(persistentTxId, true);

@@ -19,8 +19,8 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import ghidra.app.plugin.processors.sleigh.SleighLanguage;
 import ghidra.program.model.lang.LanguageID;
@@ -57,7 +57,7 @@ public class PcodeFrameTest extends AbstractGhidraHeadlessIntegrationTest {
 	SleighLanguage language;
 	MyLib library = new MyLib();
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		language =
 			(SleighLanguage) getLanguageService().getLanguage(new LanguageID("Toy:BE:64:default"));

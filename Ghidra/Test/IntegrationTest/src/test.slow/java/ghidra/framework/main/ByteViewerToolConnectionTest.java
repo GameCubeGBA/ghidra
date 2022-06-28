@@ -23,8 +23,6 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import javax.swing.*;
 
-import org.junit.*;
-
 import docking.ActionContext;
 import docking.action.DockingActionIf;
 import docking.test.AbstractDockingTest;
@@ -37,6 +35,9 @@ import ghidra.program.database.ProgramBuilder;
 import ghidra.program.model.listing.Program;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 // The ByteViewer is in its own plugin; the CodeBrowser is in Base, this we need 
 // the ModuleClassLoaderDependent interface
@@ -46,7 +47,7 @@ public class ByteViewerToolConnectionTest extends AbstractGhidraHeadedIntegratio
 	private TestEnv env;
 	private ToolConnectionDialog dialog;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		env.resetDefaultTools();
@@ -55,7 +56,7 @@ public class ByteViewerToolConnectionTest extends AbstractGhidraHeadedIntegratio
 		setErrorGUIEnabled(false);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (dialog != null) {
 			pressButtonByText(dialog, "OK");

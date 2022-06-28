@@ -21,7 +21,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.util.task.TaskMonitor;
 

@@ -27,7 +27,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.util.Msg;

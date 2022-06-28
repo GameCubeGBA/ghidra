@@ -20,8 +20,8 @@ import static org.junit.Assert.*;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import ghidra.app.plugin.assembler.Assembler;
 import ghidra.app.plugin.assembler.Assemblers;
@@ -51,7 +51,7 @@ public class DebuggerStateEditingServiceTest extends AbstractGhidraHeadedDebugge
 	private RegisterValue rv5678;
 	private RegisterValue rvHigh1234;
 
-	@Before
+	@BeforeEach
 	public void setUpEditorTest() throws Exception {
 		editingService = addPlugin(tool, DebuggerStateEditingServicePlugin.class);
 		Language toy = getToyBE64Language();

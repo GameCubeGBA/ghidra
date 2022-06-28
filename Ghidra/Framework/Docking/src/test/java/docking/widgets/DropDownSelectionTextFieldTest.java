@@ -23,7 +23,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JList;
 import javax.swing.JWindow;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class DropDownSelectionTextFieldTest extends AbstractDropDownTextFieldTest<String> {
 

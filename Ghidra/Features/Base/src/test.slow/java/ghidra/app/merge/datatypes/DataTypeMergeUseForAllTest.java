@@ -17,7 +17,7 @@ package ghidra.app.merge.datatypes;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.program.database.ProgramDB;
 import ghidra.program.database.ProgramModifierListener;

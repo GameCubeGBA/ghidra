@@ -28,7 +28,6 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.commons.lang3.tuple.Pair;
-import org.junit.*;
 
 import com.google.common.collect.*;
 
@@ -42,6 +41,9 @@ import ghidra.async.TypeSpec;
 import ghidra.dbg.testutil.DummyProc;
 import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
 import ghidra.util.Msg;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public abstract class AbstractDbgManagerTest extends AbstractGhidraHeadlessIntegrationTest {
 	protected static final int TIMEOUT = 2000 * 1000;
@@ -61,12 +63,12 @@ public abstract class AbstractDbgManagerTest extends AbstractGhidraHeadlessInteg
 		}
 	}
 
-	@Before
+	@BeforeEach
 	public void setUpDbgManagerTest() {
 		DbgEngTest.assumeDbgengDLLLoadable();
 	}
 
-	@After
+	@AfterEach
 	public void tearDownDbgManagerTest() throws IOException {
 		stopManager();
 	}

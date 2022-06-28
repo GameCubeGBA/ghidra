@@ -24,8 +24,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
 
-import org.junit.*;
-
 import docking.action.DockingActionIf;
 import docking.widgets.filechooser.GhidraFileChooser;
 import generic.test.TestUtils;
@@ -41,6 +39,8 @@ import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.InvalidNameException;
 import ghidra.util.Msg;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public abstract class AbstractCreateArchiveTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -159,7 +159,7 @@ public abstract class AbstractCreateArchiveTest extends AbstractGhidraHeadedInte
 		waitForUpdateOnChooser(fileChooser);
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -187,7 +187,7 @@ public abstract class AbstractCreateArchiveTest extends AbstractGhidraHeadedInte
 	/*
 	 * @see TestCase#tearDown()
 	 */
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		SwingUtilities.invokeLater(() -> {

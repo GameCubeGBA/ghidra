@@ -21,8 +21,6 @@ import java.util.Arrays;
 
 import javax.swing.tree.TreePath;
 
-import org.junit.*;
-
 import docking.widgets.tree.GTreeNode;
 import ghidra.app.cmd.function.*;
 import ghidra.app.cmd.label.*;
@@ -41,6 +39,9 @@ import ghidra.test.AbstractProgramBasedTest;
 import ghidra.util.exception.InvalidInputException;
 import ghidra.util.exception.RollbackException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class SymbolTreeNavigationTest extends AbstractProgramBasedTest {
 
@@ -53,7 +54,7 @@ public class SymbolTreeNavigationTest extends AbstractProgramBasedTest {
 		return SymbolTreeTestUtils.buildProgram();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		initialize();
 
@@ -64,7 +65,7 @@ public class SymbolTreeNavigationTest extends AbstractProgramBasedTest {
 	}
 
 	@Override
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		util.closeProgram();
 		env.dispose();

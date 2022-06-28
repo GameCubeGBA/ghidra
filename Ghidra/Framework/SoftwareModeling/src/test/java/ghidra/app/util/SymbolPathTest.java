@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class SymbolPathTest {
 

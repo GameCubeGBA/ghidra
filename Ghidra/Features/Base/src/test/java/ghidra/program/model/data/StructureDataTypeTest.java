@@ -20,9 +20,10 @@ import static org.junit.Assert.*;
 import java.util.List;
 
 import org.apache.commons.compress.utils.Sets;
-import org.junit.*;
 
 import generic.test.AbstractGTest;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -31,7 +32,7 @@ public class StructureDataTypeTest extends AbstractGTest {
 
 	private Structure struct;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		struct = createStructure("TestStruct", 0);
 		struct.add(new ByteDataType(), "field1", "Comment1");

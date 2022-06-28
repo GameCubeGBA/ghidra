@@ -17,7 +17,7 @@ package agent.gdb.model.ssh;
 
 import static org.junit.Assume.assumeFalse;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.experimental.categories.Category;
 
 import agent.gdb.model.AbstractModelForGdbSessionLauncherTest;
@@ -27,7 +27,7 @@ import ghidra.util.SystemUtilities;
 @Category(NightlyCategory.class) // this may actually be an @PortSensitive test
 public class SshJoinModelForGdbSessionLauncherTest extends AbstractModelForGdbSessionLauncherTest {
 
-	@Before
+	@BeforeEach
 	public void checkInteractive() {
 		assumeFalse(SystemUtilities.isInTestingBatchMode());
 	}

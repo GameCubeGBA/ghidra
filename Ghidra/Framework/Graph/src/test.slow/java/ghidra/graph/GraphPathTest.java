@@ -19,8 +19,8 @@ import static org.junit.Assert.*;
 
 import java.util.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class GraphPathTest {
 
@@ -29,7 +29,7 @@ public class GraphPathTest {
 	/**
 	 * Setup to have a new GraphPath instance for every test that is filled with 21 vertices.
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() {
 		graphPath = new GraphPath<>();
 		for (int i = 0; i <= 20; i++) {

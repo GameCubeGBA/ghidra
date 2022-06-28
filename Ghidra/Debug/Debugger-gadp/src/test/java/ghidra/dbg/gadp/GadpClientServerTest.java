@@ -29,8 +29,8 @@ import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import com.google.protobuf.GeneratedMessageV3;
 
@@ -719,7 +719,7 @@ public class GadpClientServerTest implements AsyncTestUtils {
 	}
 
 	@Test
-	@Ignore("Developer's desk only")
+	@Disabled("Developer's desk only")
 	public void stressTest() throws Throwable {
 		for (int i = 0; i < 1000; i++) {
 			try {

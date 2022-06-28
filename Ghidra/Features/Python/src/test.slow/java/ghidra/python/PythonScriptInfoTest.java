@@ -23,17 +23,18 @@ import java.nio.file.Path;
 
 import javax.swing.KeyStroke;
 
-import org.junit.*;
-
 import generic.jar.ResourceFile;
 import ghidra.app.plugin.core.osgi.BundleHost;
 import ghidra.app.script.GhidraScriptUtil;
 import ghidra.app.script.ScriptInfo;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class PythonScriptInfoTest extends AbstractGhidraHeadedIntegrationTest {
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		GhidraScriptUtil.initialize(new BundleHost(), null);
 		Path userScriptDir = java.nio.file.Paths.get(GhidraScriptUtil.USER_SCRIPTS_DIR);
@@ -42,7 +43,7 @@ public class PythonScriptInfoTest extends AbstractGhidraHeadedIntegrationTest {
 		}
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		GhidraScriptUtil.dispose();
 	}

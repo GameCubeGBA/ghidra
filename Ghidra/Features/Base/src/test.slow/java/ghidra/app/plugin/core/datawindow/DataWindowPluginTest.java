@@ -20,8 +20,6 @@ import static org.junit.Assert.assertNotNull;
 
 import java.awt.Dimension;
 
-import org.junit.*;
-
 import docking.widgets.table.GTable;
 import docking.widgets.table.threaded.ThreadedTableModel;
 import ghidra.app.plugin.core.codebrowser.CodeBrowserPlugin;
@@ -31,6 +29,9 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
 import ghidra.test.*;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DataWindowPluginTest extends AbstractGhidraHeadedIntegrationTest {
 	private TestEnv env;
@@ -42,7 +43,7 @@ public class DataWindowPluginTest extends AbstractGhidraHeadedIntegrationTest {
 	private GTable dataTable;
 	private DataWindowProvider provider;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 
@@ -72,7 +73,7 @@ public class DataWindowPluginTest extends AbstractGhidraHeadedIntegrationTest {
 		waitForTableModel((ThreadedTableModel<?, ?>) table.getModel());
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}

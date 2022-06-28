@@ -20,8 +20,6 @@ import static org.junit.Assert.*;
 import java.io.*;
 import java.util.List;
 
-import org.junit.*;
-
 import db.*;
 import db.buffers.BufferFile;
 import generic.jar.ResourceFile;
@@ -34,6 +32,9 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.mem.Memory;
 import ghidra.program.util.DefaultLanguageService;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class FileBytesTest extends AbstractGenericTest {
 
@@ -274,7 +275,7 @@ public class FileBytesTest extends AbstractGenericTest {
 		return new ProgramDB(dbh, DBConstants.UPDATE, null, this);
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		tempDir = createTempDirectory("FileBytesTest");
 		FileBytesAdapter.setMaxBufferSize(MAX_BUFFER_SIZE_FOR_TESTING);
@@ -286,7 +287,7 @@ public class FileBytesTest extends AbstractGenericTest {
 		transactionID = program.startTransaction("Test");
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		program.endTransaction(transactionID, true);
 		program.release(this);

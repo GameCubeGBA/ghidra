@@ -22,7 +22,7 @@ import java.io.InputStream;
 import java.util.Arrays;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.program.database.ProgramBuilder;
 import ghidra.program.model.address.Address;

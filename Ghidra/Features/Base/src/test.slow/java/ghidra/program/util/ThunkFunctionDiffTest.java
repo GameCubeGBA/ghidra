@@ -17,8 +17,6 @@ package ghidra.program.util;
 
 import static org.junit.Assert.*;
 
-import org.junit.*;
-
 import ghidra.app.cmd.function.CreateFunctionCmd;
 import ghidra.app.cmd.function.CreateThunkFunctionCmd;
 import ghidra.program.database.*;
@@ -28,6 +26,9 @@ import ghidra.program.model.symbol.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ThunkFunctionDiffTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -47,7 +48,7 @@ public class ThunkFunctionDiffTest extends AbstractGhidraHeadedIntegrationTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		// Creates the Version Merge for tests.
@@ -59,7 +60,7 @@ public class ThunkFunctionDiffTest extends AbstractGhidraHeadedIntegrationTest {
 		testEnv.getTool().setToolName("TestTool");
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		// In case a test failed we need to cancel the merge,

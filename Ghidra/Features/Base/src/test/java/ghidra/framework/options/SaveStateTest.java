@@ -29,8 +29,8 @@ import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.XMLOutputter;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.google.gson.JsonObject;
 
@@ -44,7 +44,7 @@ public class SaveStateTest extends AbstractGenericTest {
 
 	private SaveState ss;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		ss = new SaveState("foo");
 	}

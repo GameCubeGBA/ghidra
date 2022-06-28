@@ -20,15 +20,16 @@ import static org.junit.Assert.*;
 import javax.swing.AbstractButton;
 import javax.swing.JCheckBox;
 
-import org.junit.*;
-
 import docking.test.AbstractDockingTest;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class OptionDialogTest extends AbstractDockingTest {
 
 	private OptionDialog dialog;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		OptionDialogBuilder builder = new OptionDialogBuilder("Title", "What time is it?");
 		builder.setMessageType(OptionDialog.INFORMATION_MESSAGE);
@@ -40,7 +41,7 @@ public class OptionDialogTest extends AbstractDockingTest {
 		dialog = builder.build();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		closeAllWindowsAndFrames();
 	}

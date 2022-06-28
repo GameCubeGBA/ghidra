@@ -15,11 +15,10 @@
  */
 package agent.lldb.model.invm;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import agent.lldb.model.AbstractModelForLldbBreakpointsTest;
-import ghidra.dbg.target.TargetBreakpointSpec.TargetBreakpointKind;
 import ghidra.dbg.util.PathPattern;
 import ghidra.dbg.util.PathUtils;
 
@@ -39,56 +38,56 @@ public class InVmModelForLldbBreakpointsTest extends AbstractModelForLldbBreakpo
 	//   breakpointAdded/Modified events on placement, only on resume
 	
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testPlaceSoftwareExecuteBreakpointViaInterpreter() throws Throwable {
 		super.testPlaceSoftwareExecuteBreakpointViaInterpreter();
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testPlaceHardwareExecuteBreakpointViaInterpreter() throws Throwable {
 		super.testPlaceHardwareExecuteBreakpointViaInterpreter();
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testPlaceReadBreakpointViaInterpreter() throws Throwable {
 		super.testPlaceReadBreakpointViaInterpreter();
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testPlaceWriteBreakpointViaInterpreter() throws Throwable {
 		super.testPlaceWriteBreakpointViaInterpreter();
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testDeleteBreakpointsViaInterpreter() throws Throwable {
 		super.testDeleteBreakpointsViaInterpreter();
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testDeleteBreakpointLocationsViaInterpreter() throws Throwable {
 		super.testDeleteBreakpointLocationsViaInterpreter();
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testToggleBreakpointsViaInterpreter() throws Throwable {
 		super.testToggleBreakpointsViaInterpreter();
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testToggleBreakpointLocationsViaInterpreter() throws Throwable {
 		super.testToggleBreakpointLocationsViaInterpreter();
@@ -99,14 +98,14 @@ public class InVmModelForLldbBreakpointsTest extends AbstractModelForLldbBreakpo
 	//   appear to occur on resume
 	
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testDeleteBreakpoints() throws Throwable {
 		super.testDeleteBreakpoints();
 	}
 	
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testToggleBreakpoints() throws Throwable {
 		super.testToggleBreakpoints();

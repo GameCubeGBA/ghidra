@@ -20,8 +20,6 @@ import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
 
-import org.junit.*;
-
 import generic.test.AbstractGenericTest;
 import ghidra.program.database.function.OverlappingFunctionException;
 import ghidra.program.model.address.*;
@@ -31,6 +29,9 @@ import ghidra.program.model.symbol.*;
 import ghidra.test.ToyProgramBuilder;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.exception.InvalidInputException;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test the code manager portion of listing.
@@ -58,7 +59,7 @@ public class ListingTest extends AbstractGenericTest {
 	/*
 	 * @see TestCase#setUp()
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		builder = new ToyProgramBuilder("Test", true, this);
@@ -72,7 +73,7 @@ public class ListingTest extends AbstractGenericTest {
 
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		program.endTransaction(transactionID, true);
 		program.release(this);

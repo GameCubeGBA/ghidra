@@ -17,8 +17,6 @@ package ghidra.app.plugin.core.navigation;
 
 import static org.junit.Assert.*;
 
-import org.junit.*;
-
 import docking.action.DockingActionIf;
 import ghidra.app.cmd.data.CreateDataCmd;
 import ghidra.app.nav.Navigatable;
@@ -38,6 +36,9 @@ import ghidra.program.model.symbol.*;
 import ghidra.program.util.*;
 import ghidra.test.*;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for tool state history plugin.
@@ -58,7 +59,7 @@ public class NavigationHistoryPluginTest extends AbstractGhidraHeadedIntegration
 	private DockingActionIf undoAction;
 	private DockingActionIf redoAction;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		ClassicSampleX86ProgramBuilder builder = new ClassicSampleX86ProgramBuilder();
@@ -85,7 +86,7 @@ public class NavigationHistoryPluginTest extends AbstractGhidraHeadedIntegration
 		builder.dispose();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		waitForSwing();
 		env.dispose();

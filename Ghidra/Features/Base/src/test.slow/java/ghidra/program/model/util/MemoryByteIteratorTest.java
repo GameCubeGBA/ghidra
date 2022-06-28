@@ -17,13 +17,14 @@ package ghidra.program.model.util;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.*;
-
 import ghidra.program.database.ProgramBuilder;
 import ghidra.program.model.address.*;
 import ghidra.program.model.listing.Program;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 
 public class MemoryByteIteratorTest extends AbstractGhidraHeadedIntegrationTest {
@@ -48,13 +49,13 @@ public class MemoryByteIteratorTest extends AbstractGhidraHeadedIntegrationTest 
 		return builder.getProgram();
 	}
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
 		env = new TestEnv();
 		program = buildProgram("notepad", ProgramBuilder._TOY);
 		af = program.getAddressFactory();	
 	}
-    @After
+    @AfterEach
     public void tearDown() {
 		env.release(program);
 		env.dispose();

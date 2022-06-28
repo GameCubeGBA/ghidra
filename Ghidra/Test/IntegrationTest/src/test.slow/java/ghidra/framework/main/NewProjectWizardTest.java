@@ -23,7 +23,6 @@ import java.net.UnknownHostException;
 
 import javax.swing.*;
 
-import org.junit.*;
 import org.junit.experimental.categories.Category;
 
 import docking.action.DockingActionIf;
@@ -38,6 +37,9 @@ import ghidra.framework.preferences.Preferences;
 import ghidra.server.remote.ServerTestUtil;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import utilities.util.FileUtilities;
 
 /**
@@ -71,7 +73,7 @@ public class NewProjectWizardTest extends AbstractGhidraHeadedIntegrationTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 
@@ -89,7 +91,7 @@ public class NewProjectWizardTest extends AbstractGhidraHeadedIntegrationTest {
 
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		try {

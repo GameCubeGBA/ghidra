@@ -19,8 +19,8 @@ import static org.junit.Assert.*;
 
 import java.util.Arrays;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import docking.options.editor.BooleanEditor;
 import ghidra.app.cmd.label.AddLabelCmd;
@@ -51,7 +51,7 @@ public class GnuDemanglerAnalyzerTest extends AbstractGhidraHeadedIntegrationTes
 		}
 	};
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		ProgramBuilder builder = new ToyProgramBuilder("test", true);

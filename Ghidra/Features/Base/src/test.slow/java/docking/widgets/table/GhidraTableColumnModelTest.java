@@ -26,7 +26,6 @@ import javax.swing.*;
 import javax.swing.table.*;
 
 import org.jdom.*;
-import org.junit.*;
 
 import docking.DockingUtils;
 import docking.DockingWindowManager;
@@ -47,6 +46,8 @@ import ghidra.program.model.listing.Program;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.table.GhidraTable;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 
 public class GhidraTableColumnModelTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -91,7 +92,7 @@ public class GhidraTableColumnModelTest extends AbstractGhidraHeadedIntegrationT
 		}
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		cleanupGhidraWithNotepad();
 	}

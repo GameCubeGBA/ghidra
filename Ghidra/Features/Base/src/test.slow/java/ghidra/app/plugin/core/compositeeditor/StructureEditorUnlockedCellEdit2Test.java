@@ -22,7 +22,7 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.JTextField;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.ConcurrentTestExceptionHandler;
 import ghidra.program.model.data.*;

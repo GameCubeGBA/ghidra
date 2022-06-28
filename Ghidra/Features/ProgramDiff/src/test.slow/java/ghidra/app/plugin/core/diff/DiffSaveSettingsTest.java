@@ -19,8 +19,6 @@ import static org.junit.Assert.*;
 
 import java.awt.Window;
 
-import org.junit.*;
-
 import docking.ActionContext;
 import docking.action.DockingActionIf;
 import docking.action.ToggleDockingAction;
@@ -33,11 +31,14 @@ import ghidra.framework.project.tool.GhidraTool;
 import ghidra.program.database.ProgramDB;
 import ghidra.test.ClassicSampleX86ProgramBuilder;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DiffSaveSettingsTest extends DiffApplyTestAdapter {
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		fixupGUI();
 		env = new TestEnv();
@@ -77,7 +78,7 @@ public class DiffSaveSettingsTest extends DiffApplyTestAdapter {
 	}
 
 	@Override
-	@After
+	@AfterEach
 	public void tearDown() {
 		Window win = getWindow("Select Other Program");
 		if (win != null) {

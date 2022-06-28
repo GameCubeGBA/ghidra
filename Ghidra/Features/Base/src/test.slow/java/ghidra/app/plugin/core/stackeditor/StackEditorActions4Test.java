@@ -22,8 +22,8 @@ import java.awt.Component;
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import docking.widgets.dialogs.NumberInputDialog;
 import ghidra.app.plugin.core.compositeeditor.CycleGroupAction;
@@ -49,7 +49,7 @@ public class StackEditorActions4Test extends AbstractStackEditorTest {
 	}
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		env.showTool();

@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 
 import java.util.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.util.task.TaskMonitor;

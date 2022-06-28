@@ -25,8 +25,8 @@ import java.util.Arrays;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 import generic.test.TestUtils;
@@ -48,7 +48,7 @@ public class SimpleLanguageTranslatorTest extends AbstractGenericTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		lang1 = getLang1();
 		lang3 = getLang3();

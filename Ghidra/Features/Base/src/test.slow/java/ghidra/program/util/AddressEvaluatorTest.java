@@ -17,7 +17,7 @@ package ghidra.program.util;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.program.database.ProgramBuilder;
 import ghidra.program.model.address.Address;

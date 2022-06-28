@@ -17,12 +17,12 @@ package ghidra.framework.project;
 
 import java.io.File;
 
-import org.junit.*;
-
 import ghidra.framework.model.*;
 import ghidra.project.test.TestProjectManager;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.ProjectTestUtils;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test for Close and Delete a project.
@@ -33,7 +33,7 @@ public class DeleteProjectTest extends AbstractGhidraHeadedIntegrationTest {
 	private ProjectLocator url;
 	private String testDir;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		testDir = getTestDirectoryPath();
 		ProjectTestUtils.deleteProject(testDir, PROJECT_NAME);

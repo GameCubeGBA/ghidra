@@ -21,10 +21,11 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Random;
 
-import org.junit.*;
-
 import db.buffers.BufferMgr;
 import generic.test.AbstractGenericTest;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public abstract class AbstractChainedBufferTest extends AbstractGenericTest {
 
@@ -52,12 +53,12 @@ public abstract class AbstractChainedBufferTest extends AbstractGenericTest {
 		this.sourceDataOffset = sourceDataOffset;
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		mgr = new BufferMgr(BUFFER_SIZE, CACHE_SIZE, BufferMgr.DEFAULT_CHECKPOINT_COUNT);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		mgr.dispose();

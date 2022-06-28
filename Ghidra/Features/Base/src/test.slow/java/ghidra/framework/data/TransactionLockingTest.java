@@ -19,8 +19,8 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.framework.model.DomainObjectLockedException;
@@ -35,7 +35,7 @@ public class TransactionLockingTest extends AbstractGenericTest {
 	// placeholder for exceptions encountered while testing; this will be checked at the end
 	private Exception unexpectedException = null;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		ProgramBuilder builder = new ProgramBuilder("test", ProgramBuilder._X86, this);
 		program = builder.getProgram();

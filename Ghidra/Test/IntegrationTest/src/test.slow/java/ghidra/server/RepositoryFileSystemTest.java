@@ -22,8 +22,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.*;
-
 import db.*;
 import db.buffers.BufferFile;
 import db.buffers.ManagedBufferFile;
@@ -35,6 +33,9 @@ import ghidra.server.store.RepositoryFolder;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.Msg;
 import ghidra.util.exception.FileInUseException;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import utilities.util.FileUtilities;
 
 public class RepositoryFileSystemTest extends AbstractGhidraHeadedIntegrationTest {
@@ -48,7 +49,7 @@ public class RepositoryFileSystemTest extends AbstractGhidraHeadedIntegrationTes
 
 	private List<MyEvent> events = new ArrayList<>();
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		File parent = createTempDirectory(getClass().getSimpleName());
@@ -67,7 +68,7 @@ public class RepositoryFileSystemTest extends AbstractGhidraHeadedIntegrationTes
 		fs.addFileSystemListener(new MyFileSystemListener());
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (mgr != null) {
 			mgr.dispose();

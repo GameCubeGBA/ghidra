@@ -21,22 +21,23 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import org.junit.*;
-
 import generic.test.AbstractGenericTest;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class FileDataTypeManagerTest extends AbstractGenericTest {
 
 	private File testArchiveFile;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		testArchiveFile =
 			File.createTempFile("TestArchive", ".gdt", new File(getTestDirectoryPath()));
 		testArchiveFile.delete();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		testArchiveFile.delete();
 	}

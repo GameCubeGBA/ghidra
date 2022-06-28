@@ -19,8 +19,8 @@ import static org.junit.Assert.*;
 
 import java.util.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import ghidra.app.GhidraLocationGenerator;
 import ghidra.app.SampleLocationGenerator;
@@ -42,7 +42,7 @@ public class BookmarkEditCmdTest extends AbstractGhidraHeadedIntegrationTest {
 		super();
 	}
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
 		notepad = buildProgram();
 		bookmarkManager = notepad.getBookmarkManager();

@@ -23,7 +23,7 @@ import java.math.BigInteger;
 import javax.swing.JLabel;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.program.database.ProgramDB;
 import ghidra.program.database.ProgramModifierListener;

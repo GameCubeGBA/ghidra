@@ -17,13 +17,14 @@ package ghidra.framework.project.tool;
 
 import static org.junit.Assert.*;
 
-import org.junit.*;
-
 import generic.test.AbstractGTest;
 import ghidra.framework.model.*;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.ProjectTestUtils;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * The following tests are performed in this test driver for
@@ -40,13 +41,13 @@ public class RunToolTest extends AbstractGhidraHeadedIntegrationTest {
 	private PluginTool runningTool;
 	private PluginTool tool;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		ProjectTestUtils.deleteProject(DIRECTORY_NAME, PROJECT_NAME);
 		project = ProjectTestUtils.getProject(DIRECTORY_NAME, PROJECT_NAME);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		runSwing(new Runnable() {
 			@Override

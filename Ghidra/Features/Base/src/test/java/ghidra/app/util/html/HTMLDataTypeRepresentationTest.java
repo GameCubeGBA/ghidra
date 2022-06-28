@@ -25,14 +25,14 @@ import java.util.regex.Pattern;
 
 import javax.swing.*;
 
-import org.junit.*;
-
 import docking.widgets.label.GDHtmlLabel;
 import generic.test.AbstractGenericTest;
 import ghidra.app.util.ToolTipUtils;
 import ghidra.program.model.data.*;
 import ghidra.program.model.data.Composite;
 import ghidra.util.exception.DuplicateNameException;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 public class HTMLDataTypeRepresentationTest extends AbstractGenericTest {
 
@@ -742,7 +742,7 @@ public class HTMLDataTypeRepresentationTest extends AbstractGenericTest {
 	 * Test marked as ignored pending HTML rendering fix - see GP-1974
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testTypeDefDiff_ArraysOfStructures_DifferentStructures() {
 
 		Structure s1 = getStructWithEnum();

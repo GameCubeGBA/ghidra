@@ -23,7 +23,7 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.text.Document;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.framework.plugintool.DummyPluginTool;

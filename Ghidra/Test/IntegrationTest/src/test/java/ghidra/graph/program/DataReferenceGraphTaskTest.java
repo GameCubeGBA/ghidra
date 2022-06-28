@@ -17,7 +17,7 @@ package ghidra.graph.program;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.graph.TestGraphDisplay;
 import ghidra.graph.TestGraphService;

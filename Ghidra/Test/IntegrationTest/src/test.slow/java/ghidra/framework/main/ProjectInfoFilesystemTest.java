@@ -22,8 +22,6 @@ import java.io.IOException;
 
 import javax.swing.*;
 
-import org.junit.*;
-
 import docking.action.DockingActionIf;
 import generic.test.TestUtils;
 import ghidra.framework.data.ProjectFileManager;
@@ -41,6 +39,9 @@ import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.InvalidNameException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import utilities.util.FileUtilities;
 
 public class ProjectInfoFilesystemTest extends AbstractGhidraHeadedIntegrationTest {
@@ -59,7 +60,7 @@ public class ProjectInfoFilesystemTest extends AbstractGhidraHeadedIntegrationTe
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		env = new TestEnv();
@@ -76,7 +77,7 @@ public class ProjectInfoFilesystemTest extends AbstractGhidraHeadedIntegrationTe
 		}
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		closeAllWindows();
 		env.dispose();

@@ -17,8 +17,8 @@ package ghidra.app.plugin.core.compositeeditor;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import docking.widgets.dialogs.NumberInputDialog;
 import ghidra.program.model.data.DataType;
@@ -26,7 +26,7 @@ import ghidra.program.model.data.DataType;
 public class StructureEditorUnlockedDnD3Test extends AbstractStructureEditorTest {
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		env.showTool();

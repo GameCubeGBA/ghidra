@@ -22,7 +22,6 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import javax.swing.*;
 
-import org.junit.*;
 import org.junit.experimental.categories.Category;
 
 import docking.AbstractErrDialog;
@@ -39,6 +38,9 @@ import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 @Category(PortSensitiveCategory.class)
 public class ProjectInfoDialogTest extends AbstractGhidraHeadedIntegrationTest {
@@ -52,7 +54,7 @@ public class ProjectInfoDialogTest extends AbstractGhidraHeadedIntegrationTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		setErrorGUIEnabled(false);
@@ -93,7 +95,7 @@ public class ProjectInfoDialogTest extends AbstractGhidraHeadedIntegrationTest {
 
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		try {

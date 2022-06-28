@@ -26,7 +26,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.Msg;

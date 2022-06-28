@@ -21,13 +21,11 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
-import org.junit.After;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 
 import com.google.common.collect.ImmutableList;
 
-import ghidra.util.datastruct.CollectionChangeListener;
-import ghidra.util.datastruct.DefaultObservableCollection;
 import ghidra.util.datastruct.ObservableCollection.ChangeAggregator;
 
 public class ObservableCollectionTest {
@@ -67,7 +65,7 @@ public class ObservableCollectionTest {
 		gotSpurious = true;
 	}
 
-	@After
+	@AfterEach
 	public void checkSpurious() {
 		assertFalse(gotSpurious);
 	}

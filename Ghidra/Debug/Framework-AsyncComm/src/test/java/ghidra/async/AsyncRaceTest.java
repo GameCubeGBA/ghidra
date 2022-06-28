@@ -19,9 +19,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.concurrent.CompletableFuture;
 
-import org.junit.Test;
-
-import ghidra.async.AsyncRace;
+import org.junit.jupiter.api.Test;
 
 public class AsyncRaceTest {
 	@Test

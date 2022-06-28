@@ -17,10 +17,9 @@ package ghidra.bitpatterns.info;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
-import ghidra.bitpatterns.info.ByteSequenceLengthFilter;
 
 public class ByteSequenceLengthFilterTest extends AbstractGenericTest {
 

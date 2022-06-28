@@ -21,8 +21,6 @@ import java.io.*;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.*;
-
 import db.*;
 import db.buffers.BufferFile;
 import generic.test.*;
@@ -32,6 +30,9 @@ import ghidra.util.PropertyFile;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.DuplicateFileException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import utilities.util.FileUtilities;
 
 public abstract class AbstractLocalFileSystemTest extends AbstractGenericTest {
@@ -47,7 +48,7 @@ public abstract class AbstractLocalFileSystemTest extends AbstractGenericTest {
 		this.useIndexedFileSystem = useIndexedFileSystem;
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		File tempDir = new File(AbstractGTest.getTestDirectoryPath());
@@ -82,7 +83,7 @@ public abstract class AbstractLocalFileSystemTest extends AbstractGenericTest {
 		fs.addFileSystemListener(new MyFileSystemListener());
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		if (fs != null) {
 			fs.dispose();

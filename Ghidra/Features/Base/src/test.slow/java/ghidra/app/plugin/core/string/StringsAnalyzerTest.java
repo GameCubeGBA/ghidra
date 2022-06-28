@@ -20,8 +20,6 @@ import static org.junit.Assert.*;
 import java.io.*;
 import java.util.*;
 
-import org.junit.*;
-
 import generic.jar.ResourceFile;
 import ghidra.app.cmd.data.CreateDataCmd;
 import ghidra.app.plugin.core.analysis.AutoAnalysisManager;
@@ -37,6 +35,8 @@ import ghidra.program.model.symbol.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.task.TaskMonitor;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 
 public class StringsAnalyzerTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -242,7 +242,7 @@ public class StringsAnalyzerTest extends AbstractGhidraHeadedIntegrationTest {
 
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		System.gc();

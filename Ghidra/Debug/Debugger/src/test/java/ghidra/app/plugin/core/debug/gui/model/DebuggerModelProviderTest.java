@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.jdom.JDOMException;
-import org.junit.*;
 
 import com.google.common.collect.Range;
 
@@ -45,6 +44,9 @@ import ghidra.trace.database.target.DBTraceObjectManager;
 import ghidra.trace.model.target.*;
 import ghidra.trace.model.target.TraceObject.ConflictResolution;
 import ghidra.util.database.UndoableTransaction;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DebuggerModelProviderTest extends AbstractGhidraHeadedDebuggerGUITest {
 
@@ -100,7 +102,7 @@ public class DebuggerModelProviderTest extends AbstractGhidraHeadedDebuggerGUITe
 	protected DebuggerModelPlugin modelPlugin;
 	protected DebuggerModelProvider modelProvider;
 
-	@Before
+	@BeforeEach
 	public void setUpModelProviderTest() throws Exception {
 		modelPlugin = addPlugin(tool, DebuggerModelPlugin.class);
 		modelProvider = waitForComponentProvider(DebuggerModelProvider.class);
@@ -109,7 +111,7 @@ public class DebuggerModelProviderTest extends AbstractGhidraHeadedDebuggerGUITe
 		//addPlugin(tool, DebuggerThreadsPlugin.class);
 	}
 
-	@After
+	@AfterEach
 	public void tearDownModelProviderTest() throws Exception {
 		traceManager.activate(DebuggerCoordinates.NOWHERE);
 		waitForSwing();

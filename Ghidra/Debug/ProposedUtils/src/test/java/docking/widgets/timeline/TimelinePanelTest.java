@@ -25,8 +25,8 @@ import java.util.function.Function;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.google.common.collect.Range;
 
@@ -118,7 +118,7 @@ public class TimelinePanelTest {
 		}
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		window = new JFrame();
 		model = new DefaultEnumeratedColumnTableModel<>("People", MyColumns.class);

@@ -25,8 +25,6 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import javax.swing.*;
 
-import org.junit.*;
-
 import docking.DialogComponentProvider;
 import docking.widgets.filechooser.GhidraFileChooser;
 import generic.test.AbstractGTest;
@@ -43,6 +41,9 @@ import ghidra.program.util.ProgramLocation;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import utilities.util.FileUtilities;
 
 public class GhidraScriptAskMethodsTest extends AbstractGhidraHeadedIntegrationTest {
@@ -57,7 +58,7 @@ public class GhidraScriptAskMethodsTest extends AbstractGhidraHeadedIntegrationT
 	private GhidraState state;
 	private GhidraScript script;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		ProgramBuilder builder = new ProgramBuilder("notepad", ProgramBuilder._TOY);
@@ -75,7 +76,7 @@ public class GhidraScriptAskMethodsTest extends AbstractGhidraHeadedIntegrationT
 		state = new GhidraState(env.getTool(), env.getProject(), program, loc, null, null);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		clearScriptCachedValues();

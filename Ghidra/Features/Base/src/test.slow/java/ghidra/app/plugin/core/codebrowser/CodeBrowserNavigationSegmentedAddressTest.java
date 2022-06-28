@@ -17,8 +17,6 @@ package ghidra.app.plugin.core.codebrowser;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.*;
-
 import docking.action.DockingActionIf;
 import ghidra.app.plugin.core.marker.MarkerManagerPlugin;
 import ghidra.app.plugin.core.navigation.NextPrevAddressPlugin;
@@ -36,6 +34,9 @@ import ghidra.program.util.OperandFieldLocation;
 import ghidra.program.util.XRefFieldLocation;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class CodeBrowserNavigationSegmentedAddressTest extends AbstractGhidraHeadedIntegrationTest {
 	private TestEnv env;
@@ -56,7 +57,7 @@ public class CodeBrowserNavigationSegmentedAddressTest extends AbstractGhidraHea
 		return addrFactory.getAddress(address);
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -72,7 +73,7 @@ public class CodeBrowserNavigationSegmentedAddressTest extends AbstractGhidraHea
 		prevFunction = getAction(cb, "Go to previous function");
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}

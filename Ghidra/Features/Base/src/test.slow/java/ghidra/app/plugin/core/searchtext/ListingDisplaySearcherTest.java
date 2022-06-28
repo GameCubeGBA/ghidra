@@ -22,8 +22,6 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.junit.*;
-
 import ghidra.app.events.ProgramSelectionPluginEvent;
 import ghidra.app.plugin.core.codebrowser.CodeBrowserPlugin;
 import ghidra.app.plugin.core.navigation.GoToAddressLabelPlugin;
@@ -39,6 +37,9 @@ import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.UserSearchUtils;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test the searcher that searches fields in the Code Browser
@@ -51,7 +52,7 @@ public class ListingDisplaySearcherTest extends AbstractGhidraHeadedIntegrationT
 	private Program program;
 	private ListingDisplaySearcher searcher;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -125,7 +126,7 @@ public class ListingDisplaySearcherTest extends AbstractGhidraHeadedIntegrationT
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}

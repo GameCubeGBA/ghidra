@@ -21,8 +21,8 @@ import java.awt.Color;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import docking.FakeDockingTool;
 import ghidra.framework.options.Options;
@@ -35,7 +35,7 @@ public class GraphDisplayOptionsTest {
 	private GraphType graphType;
 	private GraphDisplayOptions options;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		List<String> vertexTypes = Arrays.asList("V1", "V2", "V3");
 		List<String> edgeTypes = Arrays.asList("E1", "E2", "E3");

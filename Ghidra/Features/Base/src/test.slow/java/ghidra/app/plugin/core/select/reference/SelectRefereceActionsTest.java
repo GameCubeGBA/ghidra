@@ -24,8 +24,6 @@ package ghidra.app.plugin.core.select.reference;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.*;
-
 import ghidra.app.context.ListingActionContext;
 import ghidra.app.plugin.core.codebrowser.CodeBrowserPlugin;
 import ghidra.app.plugin.core.codebrowser.CodeViewerProvider;
@@ -34,6 +32,9 @@ import ghidra.program.model.address.*;
 import ghidra.program.model.listing.*;
 import ghidra.program.util.*;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class SelectRefereceActionsTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -44,7 +45,7 @@ public class SelectRefereceActionsTest extends AbstractGhidraHeadedIntegrationTe
 	private SelectForwardRefsAction forwardAction;
 	private SelectBackRefsAction backwardAction;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		ToyProgramBuilder builder = new ToyProgramBuilder("test", false);
@@ -73,7 +74,7 @@ public class SelectRefereceActionsTest extends AbstractGhidraHeadedIntegrationTe
 
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}

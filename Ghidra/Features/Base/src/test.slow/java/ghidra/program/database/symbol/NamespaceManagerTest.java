@@ -19,8 +19,6 @@ import static org.junit.Assert.*;
 
 import java.util.Iterator;
 
-import org.junit.*;
-
 import ghidra.program.database.ProgramBuilder;
 import ghidra.program.database.ProgramDB;
 import ghidra.program.model.address.*;
@@ -29,6 +27,9 @@ import ghidra.program.model.mem.MemoryBlock;
 import ghidra.program.model.symbol.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  */
@@ -50,7 +51,7 @@ public class NamespaceManagerTest extends AbstractGhidraHeadedIntegrationTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		program = createDefaultProgram("Test", ProgramBuilder._TOY, this);
 		space = program.getAddressFactory().getDefaultAddressSpace();
@@ -63,7 +64,7 @@ public class NamespaceManagerTest extends AbstractGhidraHeadedIntegrationTest {
 		addBlock("BlockTwo", addr(0x2000), 0x4000);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		program.endTransaction(transactionID, true);
 		program.release(this);

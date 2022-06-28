@@ -21,7 +21,7 @@ import static org.junit.Assert.assertTrue;
 import java.math.BigInteger;
 import java.util.Arrays;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.util.LittleEndianDataConverter;

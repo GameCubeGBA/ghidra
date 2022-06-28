@@ -17,8 +17,6 @@ package ghidra.program.database.module;
 
 import static org.junit.Assert.assertTrue;
 
-import org.junit.*;
-
 import ghidra.program.database.ProgramBuilder;
 import ghidra.program.database.ProgramDB;
 import ghidra.program.model.address.Address;
@@ -29,6 +27,9 @@ import ghidra.program.model.mem.Memory;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -49,7 +50,7 @@ public class Fragment20BitTest extends AbstractGhidraHeadedIntegrationTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		program =
@@ -60,7 +61,7 @@ public class Fragment20BitTest extends AbstractGhidraHeadedIntegrationTest {
 		addBlocks();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		program.endTransaction(transactionID, false);
 		env.dispose();

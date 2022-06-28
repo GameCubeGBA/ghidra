@@ -20,7 +20,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGTest;
 

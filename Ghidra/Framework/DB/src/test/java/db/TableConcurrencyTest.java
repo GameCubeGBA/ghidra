@@ -17,9 +17,10 @@ package db;
 
 import static org.junit.Assert.*;
 
-import org.junit.*;
-
 import generic.test.AbstractGenericTest;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class TableConcurrencyTest extends AbstractGenericTest {
 
@@ -41,7 +42,7 @@ public class TableConcurrencyTest extends AbstractGenericTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		dbh = new DBHandle(BUFFER_SIZE, CACHE_SIZE);
@@ -63,7 +64,7 @@ public class TableConcurrencyTest extends AbstractGenericTest {
 		}
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (dbh != null) {
 			dbh.endTransaction(txId, true);

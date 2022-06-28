@@ -18,8 +18,8 @@ package mdemangler;
 import java.io.*;
 import java.util.Date;
 
-import org.junit.*;
 import org.junit.experimental.categories.Category;
+import org.junit.jupiter.api.*;
 import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
 
@@ -124,7 +124,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 //		testConfiguration = new MDGenericizeTestConfiguration(beQuiet());
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		if (beQuiet()) {
 			return;
@@ -142,12 +142,12 @@ public class MDMangBaseTest extends AbstractGenericTest {
 		}
 	}
 
-	@BeforeClass
+	@BeforeAll
 	public static void startUp() {
 		startTime = (new Date()).getTime();
 	}
 
-	@AfterClass
+	@AfterAll
 	public static void tearDown() throws Throwable {
 		if (testWriter == null) {
 			return;
@@ -14347,7 +14347,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 	}
 
 	//From gray.cpp
-	@Ignore
+	@Disabled
 	//@Test
 	public void testCatch_2() throws Exception {
 		mangled = "__catch$_main$0";
@@ -14686,7 +14686,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 	}
 
 	//TODO: ignore for now.
-	@Ignore
+	@Disabled
 	public void testFuzzyFit() throws Exception {
 		MDFuzzyFit ff = new MDFuzzyFit();
 		//from: testWin10_0358058()

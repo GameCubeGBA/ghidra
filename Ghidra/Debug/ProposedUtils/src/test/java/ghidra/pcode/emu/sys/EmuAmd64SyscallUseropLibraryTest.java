@@ -19,8 +19,6 @@ import static ghidra.pcode.emu.sys.EmuSyscallLibrary.SYSCALL_SPACE_NAME;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
-import org.junit.*;
-
 import ghidra.app.plugin.assembler.Assembler;
 import ghidra.app.plugin.assembler.Assemblers;
 import ghidra.app.plugin.processors.sleigh.SleighLanguage;
@@ -38,6 +36,9 @@ import ghidra.program.model.symbol.SourceType;
 import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
 import ghidra.util.database.UndoableTransaction;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class EmuAmd64SyscallUseropLibraryTest extends AbstractGhidraHeadlessIntegrationTest {
 
@@ -117,7 +118,7 @@ public class EmuAmd64SyscallUseropLibraryTest extends AbstractGhidraHeadlessInte
 				.setCallingConvention(convention);
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		program = createDefaultProgram("HelloSyscalls", "x86:LE:64:default", "gcc", this);
 		language = (SleighLanguage) program.getLanguage();
@@ -152,7 +153,7 @@ public class EmuAmd64SyscallUseropLibraryTest extends AbstractGhidraHeadlessInte
 		}
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		if (program != null) {
 			program.release(this);

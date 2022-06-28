@@ -23,8 +23,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.swing.*;
 
-import org.junit.*;
-
 import docking.action.DockingAction;
 import docking.action.DockingActionIf;
 import docking.widgets.table.GTable;
@@ -50,6 +48,9 @@ import ghidra.util.TrackedTaskListener;
 import ghidra.util.table.GhidraTable;
 import ghidra.util.table.field.AddressBasedLocation;
 import ghidra.util.task.Task;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import utility.function.Callback;
 
 public class AutoTableDisassemblerTest extends AbstractGhidraHeadedIntegrationTest {
@@ -75,7 +76,7 @@ public class AutoTableDisassemblerTest extends AbstractGhidraHeadedIntegrationTe
 	private JCheckBox autoLabel;
 	private JCheckBox searchSelection;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -99,7 +100,7 @@ public class AutoTableDisassemblerTest extends AbstractGhidraHeadedIntegrationTe
 			(JCheckBox) findAbstractButtonByText(dialog.getComponent(), "Search Selection");
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}

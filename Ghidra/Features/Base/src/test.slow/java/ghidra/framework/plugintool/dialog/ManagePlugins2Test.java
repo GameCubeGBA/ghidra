@@ -22,8 +22,6 @@ import static org.junit.Assert.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import org.junit.*;
-
 import ghidra.app.plugin.core.help.AboutProgramPlugin;
 import ghidra.app.plugin.core.totd.TipOfTheDayPlugin;
 import ghidra.app.plugin.debug.JavaHelpPlugin;
@@ -31,6 +29,9 @@ import ghidra.framework.plugintool.*;
 import ghidra.framework.plugintool.util.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import resources.ResourceManager;
 
 /**
@@ -44,13 +45,13 @@ public class ManagePlugins2Test extends AbstractGhidraHeadedIntegrationTest {
 	private PluginTool tool;
 	private ManagePluginsDialog dialog;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		close(dialog);
 		env.dispose();

@@ -21,8 +21,6 @@ import java.awt.event.MouseEvent;
 import java.math.BigInteger;
 import java.util.List;
 
-import org.junit.*;
-
 import com.google.common.collect.Range;
 
 import generic.Unique;
@@ -47,6 +45,9 @@ import ghidra.trace.model.thread.TraceThread;
 import ghidra.util.database.UndoableTransaction;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 public class DebuggerStackProviderTest extends AbstractGhidraHeadedDebuggerGUITest {
 	protected DebuggerStackPlugin stackPlugin;
@@ -55,7 +56,7 @@ public class DebuggerStackProviderTest extends AbstractGhidraHeadedDebuggerGUITe
 
 	protected Register pc;
 
-	@Before
+	@BeforeEach
 	public void setUpStackProviderTest() throws Exception {
 		stackPlugin = addPlugin(tool, DebuggerStackPlugin.class);
 		stackProvider = waitForComponentProvider(DebuggerStackProvider.class);
@@ -406,7 +407,7 @@ public class DebuggerStackProviderTest extends AbstractGhidraHeadedDebuggerGUITe
 	}
 
 	@Test
-	@Ignore("TODO") // Not sure why this fails under Gradle but not my IDE
+	@Disabled("TODO") // Not sure why this fails under Gradle but not my IDE
 	public void testSelectRowActivatesFrame() throws Exception {
 		createAndOpenTrace();
 

@@ -20,8 +20,6 @@ import static org.junit.Assert.*;
 import java.io.ByteArrayInputStream;
 import java.util.List;
 
-import org.junit.*;
-
 import ghidra.framework.store.LockException;
 import ghidra.program.database.ProgramDB;
 import ghidra.program.database.function.OverlappingFunctionException;
@@ -37,6 +35,9 @@ import ghidra.util.exception.InvalidInputException;
 import ghidra.util.exception.NotFoundException;
 import ghidra.util.task.TaskMonitor;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class PinnedSymbolTest extends AbstractGhidraHeadlessIntegrationTest {
 	private static int EXPECTED_PROCESSOR_SYMBOLS = 9;
@@ -253,7 +254,7 @@ public class PinnedSymbolTest extends AbstractGhidraHeadlessIntegrationTest {
 		assertNotNull(symbolTable.getPrimarySymbol(addr(0x38)));
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		Language lang = getZ80_LANGUAGE();
 		program = new ProgramDB("z80", lang, lang.getDefaultCompilerSpec(), this);
@@ -296,7 +297,7 @@ public class PinnedSymbolTest extends AbstractGhidraHeadlessIntegrationTest {
 		symbol.setPinned(true);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		program.endTransaction(transactionID, true);
 		program.release(this);

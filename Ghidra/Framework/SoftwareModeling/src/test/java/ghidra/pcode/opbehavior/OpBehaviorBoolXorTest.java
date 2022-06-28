@@ -18,7 +18,7 @@ package ghidra.pcode.opbehavior;
 import java.math.BigInteger;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class OpBehaviorBoolXorTest extends AbstractOpBehaviorTest {
 

@@ -24,8 +24,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import ghidra.app.util.viewer.field.ArrayElementWrappedOption;
 import ghidra.framework.options.CustomOption;
@@ -37,7 +37,7 @@ import ghidra.program.model.data.DWordDataType;
 public class ArrayLocationReferencesTest extends AbstractLocationReferencesTest {
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 

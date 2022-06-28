@@ -20,9 +20,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.Test;
-
-import ghidra.async.AsyncTimer;
+import org.junit.jupiter.api.Test;
 
 public class AsyncTimerTest {
 	@Test

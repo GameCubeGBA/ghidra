@@ -17,14 +17,14 @@ package agent.gdb.model.ssh;
 
 import static org.junit.Assume.assumeFalse;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 import agent.gdb.model.AbstractModelForGdbFactoryTest;
 import ghidra.util.SystemUtilities;
 
 public class SshJoinModelForGdbFactoryTest extends AbstractModelForGdbFactoryTest {
 
-	@Before
+	@BeforeEach
 	public void checkInteractive() {
 		assumeFalse(SystemUtilities.isInTestingBatchMode());
 	}

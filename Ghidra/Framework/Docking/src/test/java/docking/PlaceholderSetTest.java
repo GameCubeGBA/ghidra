@@ -22,7 +22,7 @@ import java.util.Set;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.widgets.label.GDLabel;
 import generic.test.AbstractGenericTest;

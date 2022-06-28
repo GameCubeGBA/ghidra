@@ -18,7 +18,7 @@ package ghidra.app.plugin.assembler.sleigh;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.app.plugin.assembler.*;
 import ghidra.app.plugin.assembler.sleigh.sem.AssemblyResolution;

@@ -17,15 +17,15 @@ package ghidra.program.model.address;
 
 import static org.junit.Assert.*;
 
-import org.junit.*;
-
 import generic.test.AbstractGenericTest;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class GenericAddressSpaceTest extends AbstractGenericTest {
 
 	private GenericAddressSpace space;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		space = new GenericAddressSpace("Test", 8, AddressSpace.TYPE_RAM, 0);
 	}

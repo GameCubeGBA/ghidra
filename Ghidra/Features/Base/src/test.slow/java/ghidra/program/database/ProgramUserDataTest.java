@@ -21,8 +21,6 @@ import java.io.File;
 import java.util.Random;
 import java.util.Set;
 
-import org.junit.*;
-
 import generic.test.AbstractGTest;
 import ghidra.framework.data.ProjectFileManager;
 import ghidra.framework.model.*;
@@ -37,6 +35,9 @@ import ghidra.test.ProjectTestUtils;
 import ghidra.util.Msg;
 import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import utilities.util.FileUtilities;
 
 public class ProgramUserDataTest extends AbstractGhidraHeadedIntegrationTest {
@@ -51,7 +52,7 @@ public class ProgramUserDataTest extends AbstractGhidraHeadedIntegrationTest {
 	private DomainFile df;
 	private AddressSpace space;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		ProjectTestUtils.deleteProject(TEMP, "Test");
 		projectLocator = new ProjectLocator(TEMP, "Test");
@@ -83,7 +84,7 @@ public class ProgramUserDataTest extends AbstractGhidraHeadedIntegrationTest {
 		}
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		if (project != null) {
 			project.close();

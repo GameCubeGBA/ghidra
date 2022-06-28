@@ -24,7 +24,7 @@ import java.util.*;
 
 import javax.swing.JCheckBox;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.google.common.collect.Range;
 

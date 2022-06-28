@@ -17,8 +17,6 @@ package ghidra.app.plugin.core.memory;
 
 import static org.junit.Assert.*;
 
-import org.junit.*;
-
 import ghidra.app.cmd.memory.MoveBlockListener;
 import ghidra.app.cmd.memory.MoveBlockTask;
 import ghidra.program.database.ProgramBuilder;
@@ -32,6 +30,9 @@ import ghidra.program.model.mem.MemoryBlock;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.task.TaskBuilder;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class MoveBlockModelTest extends AbstractGhidraHeadedIntegrationTest
 		implements MoveBlockListener {
@@ -74,7 +75,7 @@ public class MoveBlockModelTest extends AbstractGhidraHeadedIntegrationTest
 		return builder.getProgram();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 
@@ -97,7 +98,7 @@ public class MoveBlockModelTest extends AbstractGhidraHeadedIntegrationTest
 		x8051.endTransaction(transactionID, true);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}

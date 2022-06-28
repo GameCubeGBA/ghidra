@@ -21,25 +21,26 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import org.junit.*;
-
 import generic.test.AbstractGenericTest;
 import ghidra.graph.exporter.*;
 import ghidra.service.graph.*;
 import ghidra.util.Msg;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import utilities.util.FileUtilities;
 
 public class AttributedGraphExportersTest extends AbstractGenericTest {
 
 	private AttributedGraph graph;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		graph = createGraph();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 	}
 

@@ -17,14 +17,15 @@ package ghidra.app.cmd.data;
 
 import static org.junit.Assert.*;
 
-import org.junit.*;
-
 import ghidra.program.database.ProgramBuilder;
 import ghidra.program.model.address.*;
 import ghidra.program.model.data.*;
 import ghidra.program.model.listing.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * 
@@ -43,7 +44,7 @@ public class CreateDataBackgroundCmdTest extends AbstractGhidraHeadedIntegration
 	private Listing listing;
 	private ProgramBuilder builder;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		program = buildProgram();
@@ -79,7 +80,7 @@ public class CreateDataBackgroundCmdTest extends AbstractGhidraHeadedIntegration
 		return unicodeBytes;
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.release(program);
 		env.dispose();

@@ -21,11 +21,9 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
-import ghidra.bitpatterns.info.ContextRegisterExtent;
-import ghidra.bitpatterns.info.ContextRegisterInfo;
 
 public class ContextRegisterExtentTest extends AbstractGenericTest {
 

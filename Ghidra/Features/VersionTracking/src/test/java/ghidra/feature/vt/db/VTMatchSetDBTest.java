@@ -21,28 +21,29 @@ import static org.junit.Assert.*;
 import java.util.Collection;
 import java.util.Collections;
 
-import org.junit.*;
-
 import ghidra.feature.vt.api.db.*;
 import ghidra.feature.vt.api.impl.MarkupItemManagerImpl;
 import ghidra.feature.vt.api.main.*;
 import ghidra.feature.vt.api.util.VTAssociationStatusException;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class VTMatchSetDBTest extends VTBaseTestCase {
 
 	private int transactionID;
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		transactionID = db.startTransaction("Test");
 	}
 
 	@Override
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		db.endTransaction(transactionID, false);
 		db.release(VTTestUtils.class);

@@ -20,7 +20,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 
-import org.junit.*;
 import org.junit.experimental.categories.Category;
 
 import generic.jar.ResourceFile;
@@ -32,6 +31,9 @@ import ghidra.program.model.listing.*;
 import ghidra.program.model.symbol.RefType;
 import ghidra.program.model.symbol.Reference;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 @Category(NightlyCategory.class)
 public class WindowsResourceReferenceScriptTest extends AbstractGhidraHeadedIntegrationTest {
@@ -39,7 +41,7 @@ public class WindowsResourceReferenceScriptTest extends AbstractGhidraHeadedInte
 	private TestEnv env;
 	private File script;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 
@@ -60,7 +62,7 @@ public class WindowsResourceReferenceScriptTest extends AbstractGhidraHeadedInte
 		waitForPostedSwingRunnables();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

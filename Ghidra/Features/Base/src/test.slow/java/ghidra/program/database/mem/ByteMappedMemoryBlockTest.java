@@ -19,14 +19,15 @@ import static org.junit.Assert.*;
 
 import java.util.Arrays;
 
-import org.junit.*;
-
 import ghidra.program.database.ProgramBuilder;
 import ghidra.program.model.address.*;
 import ghidra.program.model.listing.Program;
 import ghidra.program.model.mem.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ByteMappedMemoryBlockTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -36,7 +37,7 @@ public class ByteMappedMemoryBlockTest extends AbstractGhidraHeadedIntegrationTe
 	private Program program;
 	private int transactionID;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		program = createDefaultProgram(testName.getMethodName(), ProgramBuilder._TOY64_LE, this);
 		memory = program.getMemory();
@@ -53,7 +54,7 @@ public class ByteMappedMemoryBlockTest extends AbstractGhidraHeadedIntegrationTe
 		memory.setBytes(block.getStart(), bytes);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		program.endTransaction(transactionID, true);
 		program.release(this);

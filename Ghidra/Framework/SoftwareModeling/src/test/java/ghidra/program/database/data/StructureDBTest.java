@@ -19,8 +19,6 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import org.junit.*;
-
 import com.google.common.collect.Sets;
 
 import generic.test.AbstractGTest;
@@ -28,13 +26,15 @@ import ghidra.program.model.data.*;
 import ghidra.util.InvalidNameException;
 import ghidra.util.task.TaskMonitor;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class StructureDBTest extends AbstractGTest {
 
 	private StructureDB struct;
 	private DataTypeManagerDB dataMgr;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		dataMgr = new StandAloneDataTypeManager("dummyDTM");

@@ -22,9 +22,10 @@ import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.JFrame;
 
-import org.junit.*;
-
 import docking.test.AbstractDockingTest;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import resources.ResourceManager;
 import resources.icons.EmptyIcon;
 
@@ -33,7 +34,7 @@ public class ImagePanelTest extends AbstractDockingTest {
 	private JFrame frame;
 	private ImagePanel imagePanel;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		Icon emptyIcon = new EmptyIcon(32, 32);
 		Image emptyImage = ResourceManager.getImageIcon(emptyIcon).getImage();
@@ -48,7 +49,7 @@ public class ImagePanelTest extends AbstractDockingTest {
 		});
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		runSwing(() -> frame.dispose());
 	}

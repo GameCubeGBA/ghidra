@@ -17,10 +17,10 @@ package ghidra.program.model.address;
 
 import static org.junit.Assert.*;
 
-import org.junit.*;
-
 import generic.test.AbstractGenericTest;
 import ghidra.program.model.lang.SpaceNames;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AddressMapImplTest extends AbstractGenericTest {
 	AddressSpace sp8;
@@ -36,7 +36,7 @@ public class AddressMapImplTest extends AbstractGenericTest {
 
 	Address[] addrs;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 
 		sp8 = new GenericAddressSpace("ONE", 8, AddressSpace.TYPE_RAM, 0);

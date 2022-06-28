@@ -22,8 +22,6 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
-import org.junit.*;
-
 import ghidra.app.cmd.function.AddStackVarCmd;
 import ghidra.app.cmd.refs.AddStackRefCmd;
 import ghidra.program.database.ProgramBuilder;
@@ -37,6 +35,10 @@ import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
 import ghidra.trace.database.ToyDBTraceBuilder;
 import ghidra.util.database.UndoableTransaction;
 import ghidra.util.exception.InvalidInputException;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 public class DBTraceProgramViewFunctionManagerTest extends AbstractGhidraHeadlessIntegrationTest {
 	ToyDBTraceBuilder b;
@@ -44,7 +46,7 @@ public class DBTraceProgramViewFunctionManagerTest extends AbstractGhidraHeadles
 	Program program;
 	UndoableTransaction tid;
 
-	@Before
+	@BeforeEach
 	public void setUpFunctionManagerTest() throws IOException {
 		b = new ToyDBTraceBuilder("Testing", ProgramBuilder._TOY);
 		program = b.trace.getFixedProgramView(0);
@@ -52,7 +54,7 @@ public class DBTraceProgramViewFunctionManagerTest extends AbstractGhidraHeadles
 		tid = b.startTransaction();
 	}
 
-	@After
+	@AfterEach
 	public void tearDownFunctionManagerTest() {
 		tid.close();
 		b.close();
@@ -149,7 +151,7 @@ public class DBTraceProgramViewFunctionManagerTest extends AbstractGhidraHeadles
 	}
 
 	@Test
-	@Ignore("TODO, low priority")
+	@Disabled("TODO, low priority")
 	public void testRemoveFunction() throws Exception {
 		createFunction("foo", b.addr(100), b.set(b.range(100, 200)));
 		createFunction("foo1", b.addr(250), b.set(b.range(250, 350)));

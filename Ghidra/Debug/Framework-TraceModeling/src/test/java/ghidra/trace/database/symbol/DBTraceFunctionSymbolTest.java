@@ -21,8 +21,6 @@ import static org.junit.Assert.*;
 import java.io.IOException;
 import java.util.*;
 
-import org.junit.*;
-
 import com.google.common.collect.Range;
 
 import ghidra.app.cmd.function.AddRegisterParameterCommand;
@@ -47,13 +45,17 @@ import ghidra.util.database.UndoableTransaction;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.exception.InvalidInputException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 public class DBTraceFunctionSymbolTest extends AbstractGhidraHeadlessIntegrationTest {
 	ToyDBTraceBuilder b;
 	TraceFunctionSymbolView functions;
 	TraceParameterSymbolView parameters;
 
-	@Before
+	@BeforeEach
 	public void setUpFunctionTest()
 			throws IOException, TraceOverlappedRegionException, DuplicateNameException {
 		b = new ToyDBTraceBuilder("Testing", ProgramBuilder._TOY);
@@ -64,7 +66,7 @@ public class DBTraceFunctionSymbolTest extends AbstractGhidraHeadlessIntegration
 		parameters = b.trace.getSymbolManager().parameters();
 	}
 
-	@After
+	@AfterEach
 	public void tearDownFunctionTest() {
 		b.close();
 	}
@@ -1150,7 +1152,7 @@ public class DBTraceFunctionSymbolTest extends AbstractGhidraHeadlessIntegration
 	}
 
 	@Test
-	@Ignore("TODO")
+	@Disabled("TODO")
 	public void testDataTypeOnRegisterVariable()
 			throws InvalidInputException, OverlappingFunctionException {
 		try (UndoableTransaction tid = b.startTransaction()) {
@@ -1904,13 +1906,13 @@ public class DBTraceFunctionSymbolTest extends AbstractGhidraHeadlessIntegration
 	}
 
 	@Test
-	@Ignore("TODO")
+	@Disabled("TODO")
 	public void testSaveAndLoad() {
 		TODO();
 	}
 
 	@Test
-	@Ignore("TODO")
+	@Disabled("TODO")
 	public void testUndoThenRedo() {
 		TODO();
 	}

@@ -21,8 +21,6 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.*;
-
 import generic.timer.GhidraTimer;
 import ghidra.feature.vt.api.db.VTMatchTagDB;
 import ghidra.feature.vt.api.impl.VTChangeManager;
@@ -31,6 +29,9 @@ import ghidra.feature.vt.api.util.VTAssociationStatusException;
 import ghidra.framework.model.*;
 import ghidra.program.model.address.Address;
 import ghidra.util.Msg;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class VTDomainObjectEventsTest extends VTBaseTestCase {
 
@@ -51,7 +52,7 @@ public class VTDomainObjectEventsTest extends VTBaseTestCase {
 	};
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		Msg.debug(this, "\n\nsetUp(): " + testName.getMethodName());
@@ -76,7 +77,7 @@ public class VTDomainObjectEventsTest extends VTBaseTestCase {
 	}
 
 	@Override
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		Msg.debug(this, "tearDown()\n");
 		db.endTransaction(transactionID, false);

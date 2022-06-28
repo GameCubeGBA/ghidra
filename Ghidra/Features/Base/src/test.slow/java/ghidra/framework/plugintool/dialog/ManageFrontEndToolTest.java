@@ -19,8 +19,6 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import org.junit.*;
-
 import docking.action.DockingActionIf;
 import ghidra.app.plugin.core.archive.ArchivePlugin;
 import ghidra.framework.main.*;
@@ -30,6 +28,9 @@ import ghidra.framework.plugintool.util.PluginDescription;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.classfinder.ClassSearcher;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test configure the Front End tool
@@ -42,7 +43,7 @@ public class ManageFrontEndToolTest extends AbstractGhidraHeadedIntegrationTest 
 	private ManagePluginsDialog managePluginsDialog;
 	private PluginConfigurationModel pluginModel;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getFrontEndTool();
@@ -52,7 +53,7 @@ public class ManageFrontEndToolTest extends AbstractGhidraHeadedIntegrationTest 
 		showProvider();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		runSwing(() -> {

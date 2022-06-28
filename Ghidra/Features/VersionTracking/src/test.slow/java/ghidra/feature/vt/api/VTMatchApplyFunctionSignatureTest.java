@@ -23,8 +23,6 @@ import static org.junit.Assert.assertNotNull;
 
 import java.util.*;
 
-import org.junit.*;
-
 import ghidra.feature.vt.api.db.VTSessionDB;
 import ghidra.feature.vt.api.main.*;
 import ghidra.feature.vt.api.markuptype.FunctionSignatureMarkupType;
@@ -49,6 +47,9 @@ import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.exception.InvalidInputException;
 import ghidra.util.task.TaskMonitor;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class VTMatchApplyFunctionSignatureTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -74,7 +75,7 @@ public class VTMatchApplyFunctionSignatureTest extends AbstractGhidraHeadedInteg
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		env = new TestEnv();
@@ -235,7 +236,7 @@ public class VTMatchApplyFunctionSignatureTest extends AbstractGhidraHeadedInteg
 		applyOptions.setEnum(VTOptionDefines.LABELS, LabelChoices.EXCLUDE);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (sourceProgram != null) {
 			sourceProgram.release(this);

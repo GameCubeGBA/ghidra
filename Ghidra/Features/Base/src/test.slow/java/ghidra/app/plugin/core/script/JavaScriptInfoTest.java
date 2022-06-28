@@ -21,7 +21,7 @@ import java.io.IOException;
 
 import javax.swing.KeyStroke;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.jar.ResourceFile;
 import ghidra.app.script.GhidraScriptUtil;

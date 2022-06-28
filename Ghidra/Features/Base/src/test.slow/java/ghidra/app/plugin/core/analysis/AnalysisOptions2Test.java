@@ -25,8 +25,6 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.table.TableModel;
 
-import org.junit.*;
-
 import docking.ActionContext;
 import docking.action.DockingActionIf;
 import docking.options.editor.DefaultOptionComponent;
@@ -46,6 +44,9 @@ import ghidra.util.classfinder.ClassSearcher;
 import ghidra.util.exception.AssertException;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * This class test the ability to replace analysis options using an {@link AnalysisOptionsUpdater}.
@@ -66,7 +67,7 @@ public class AnalysisOptions2Test extends AbstractGhidraHeadedIntegrationTest {
 	private Program program;
 	private AnalysisOptionsDialog optionsDialog;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		env = new TestEnv();
@@ -84,7 +85,7 @@ public class AnalysisOptions2Test extends AbstractGhidraHeadedIntegrationTest {
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		close(optionsDialog);
 		env.dispose();

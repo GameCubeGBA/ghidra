@@ -29,9 +29,9 @@ import javax.swing.UIManager;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import docking.test.AbstractDockingTest;
 
@@ -41,7 +41,7 @@ public class IntegerTextFieldTest extends AbstractDockingTest {
 	private IntegerTextField field;
 	private JTextField textField;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		field = new IntegerTextField(10);
@@ -53,7 +53,7 @@ public class IntegerTextFieldTest extends AbstractDockingTest {
 		frame.setVisible(true);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		frame.setVisible(false);
 	}

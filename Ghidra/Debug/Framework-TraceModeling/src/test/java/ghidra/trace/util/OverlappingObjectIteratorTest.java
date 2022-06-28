@@ -22,8 +22,8 @@ import java.util.Map.Entry;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import ghidra.program.model.address.*;
 import ghidra.program.model.lang.*;
@@ -76,7 +76,7 @@ public class OverlappingObjectIteratorTest extends AbstractGhidraHeadlessIntegra
 		return result;
 	}
 
-	@Before
+	@BeforeEach
 	public void setUpIteratorTest() throws LanguageNotFoundException {
 		toy = DefaultLanguageService.getLanguageService().getLanguage(
 			new LanguageID("Toy:BE:64:default"));

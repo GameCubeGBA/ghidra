@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.dbg.DebugModelConventions.AsyncAccess;
 import ghidra.dbg.error.DebuggerModelTerminatingException;

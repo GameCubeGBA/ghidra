@@ -26,8 +26,6 @@ import java.util.Random;
 
 import javax.swing.*;
 
-import org.junit.*;
-
 import docking.ActionContext;
 import docking.action.DockingActionIf;
 import docking.tool.ToolConstants;
@@ -58,6 +56,9 @@ import ghidra.test.TestEnv;
 import ghidra.util.table.AddressBasedTableModel;
 import ghidra.util.table.PreviewTableCellData;
 import ghidra.util.table.field.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the search text plugin.
@@ -78,7 +79,7 @@ public class SearchTextPlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 	private TableServicePlugin tableServicePlugin;
 	private GoToService goToService;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -170,7 +171,7 @@ public class SearchTextPlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.release(program);
 		env.dispose();

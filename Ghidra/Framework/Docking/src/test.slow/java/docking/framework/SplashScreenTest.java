@@ -22,8 +22,8 @@ import java.awt.Window;
 
 import javax.swing.*;
 
-import org.junit.After;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 import org.junit.experimental.categories.Category;
 
 import docking.*;
@@ -36,7 +36,7 @@ import generic.test.category.NightlyCategory;
 @Category(NightlyCategory.class)
 public class SplashScreenTest extends AbstractDockingTest {
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		runSwing(() -> SplashScreen.disposeSplashScreen());
 		disposeAllWindows();

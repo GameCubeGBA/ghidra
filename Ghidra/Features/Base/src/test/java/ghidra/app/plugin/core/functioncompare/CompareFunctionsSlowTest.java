@@ -23,8 +23,6 @@ import java.util.Set;
 
 import javax.swing.JPanel;
 
-import org.junit.*;
-
 import docking.ActionContext;
 import docking.action.DockingActionIf;
 import docking.widgets.dialogs.TableSelectionDialog;
@@ -41,6 +39,9 @@ import ghidra.program.model.listing.*;
 import ghidra.program.util.ProgramLocation;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link FunctionComparisonPlugin function comparison plugin}
@@ -59,7 +60,7 @@ public class CompareFunctionsSlowTest extends AbstractGhidraHeadedIntegrationTes
 	private FunctionPlugin functionPlugin;
 	private CodeBrowserPlugin cbPlugin;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		plugin = env.addPlugin(FunctionComparisonPlugin.class);
@@ -71,7 +72,7 @@ public class CompareFunctionsSlowTest extends AbstractGhidraHeadedIntegrationTes
 		env.open(program1);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

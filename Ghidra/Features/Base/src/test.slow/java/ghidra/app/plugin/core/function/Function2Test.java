@@ -22,8 +22,6 @@ import java.awt.Component;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
-import org.junit.*;
-
 import docking.DialogComponentProvider;
 import docking.action.DockingActionIf;
 import docking.widgets.OptionDialog;
@@ -42,6 +40,9 @@ import ghidra.program.model.address.AddressFactory;
 import ghidra.program.model.listing.Function;
 import ghidra.program.model.listing.Program;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class Function2Test extends AbstractGhidraHeadedIntegrationTest {
 
@@ -62,7 +63,7 @@ public class Function2Test extends AbstractGhidraHeadedIntegrationTest {
 		return addrFactory.getAddress(address);
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -86,7 +87,7 @@ public class Function2Test extends AbstractGhidraHeadedIntegrationTest {
 		removeStackDepthChangeAction = getAction(fp, "Remove Stack Depth Change");
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}

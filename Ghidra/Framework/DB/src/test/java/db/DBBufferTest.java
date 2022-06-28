@@ -20,9 +20,10 @@ import static org.junit.Assert.*;
 import java.io.IOException;
 import java.util.Arrays;
 
-import org.junit.*;
-
 import generic.test.AbstractGenericTest;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DBBufferTest extends AbstractGenericTest {
 
@@ -31,12 +32,12 @@ public class DBBufferTest extends AbstractGenericTest {
 
 	private DBHandle dbh;
 
-	@Before
+	@BeforeEach
 	public void setup() throws IOException {
 		dbh = new DBHandle(BUFFER_SIZE, CACHE_SIZE);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		if (dbh != null) {
 			dbh.close();

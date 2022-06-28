@@ -21,8 +21,8 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import docking.widgets.fieldpanel.field.*;
 import docking.widgets.fieldpanel.support.*;
@@ -35,7 +35,7 @@ public class VerticalLayoutTextFieldTest extends AbstractGenericTest {
 	private VerticalLayoutTextField field;
 
 	@SuppressWarnings("deprecation") // we mean to use getFontMetrics
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		HighlightFactory factory = (f, text, cursorTextOffset) -> {

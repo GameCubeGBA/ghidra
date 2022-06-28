@@ -23,14 +23,15 @@ import java.util.Set;
 
 import javax.swing.*;
 
-import org.junit.*;
-
 import docking.*;
 import docking.actions.*;
 import ghidra.app.plugin.core.navigation.GoToAddressLabelPlugin;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import util.CollectionUtils;
 
 public class KeyEntryDialogTest extends AbstractGhidraHeadedIntegrationTest {
@@ -41,13 +42,13 @@ public class KeyEntryDialogTest extends AbstractGhidraHeadedIntegrationTest {
 	private JTextPane collisionPane;
 	private KeyEntryTextField keyEntryField;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.launchDefaultTool();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		close(keyEntryDialog);
 		env.dispose();

@@ -24,8 +24,6 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
 
-import org.junit.*;
-
 import docking.action.DockingActionIf;
 import docking.widgets.OptionDialog;
 import ghidra.app.plugin.core.codebrowser.CodeBrowserPlugin;
@@ -40,6 +38,9 @@ import ghidra.program.util.OperandFieldLocation;
 import ghidra.program.util.ProgramLocation;
 import ghidra.test.*;
 import ghidra.util.table.GhidraTable;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import util.CollectionUtils;
 
 /**
@@ -59,7 +60,7 @@ public class EquateTablePluginTest extends AbstractGhidraHeadedIntegrationTest {
 	private EquateTableProvider provider;
 	private EquateTable et;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		program = buildProgram();
@@ -109,7 +110,7 @@ public class EquateTablePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

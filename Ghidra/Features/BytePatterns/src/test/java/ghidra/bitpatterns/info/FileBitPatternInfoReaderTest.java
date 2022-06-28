@@ -22,8 +22,8 @@ import java.math.BigInteger;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import generic.jar.ResourceFile;
 import generic.test.AbstractGenericTest;
@@ -35,7 +35,7 @@ public class FileBitPatternInfoReaderTest extends AbstractGenericTest {
 	private static final int TOTAL_NUM_FUNCTIONS = 32;
 	private static final int TOTAL_NUM_FILES = 2;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws IOException {
 		ResourceFile resourceFile = Application.getModuleDataSubDirectory("BytePatterns", "test");
 		fReader = new FileBitPatternInfoReader(resourceFile.getFile(false));

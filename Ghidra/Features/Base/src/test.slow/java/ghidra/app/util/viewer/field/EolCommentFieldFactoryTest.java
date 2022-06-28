@@ -20,8 +20,6 @@ import static org.junit.Assert.*;
 
 import javax.swing.SwingUtilities;
 
-import org.junit.*;
-
 import docking.widgets.fieldpanel.field.FieldElement;
 import ghidra.app.plugin.core.codebrowser.CodeBrowserPlugin;
 import ghidra.framework.options.Options;
@@ -30,6 +28,9 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressFactory;
 import ghidra.program.model.listing.*;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class EolCommentFieldFactoryTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -38,7 +39,7 @@ public class EolCommentFieldFactoryTest extends AbstractGhidraHeadedIntegrationT
 	private Options fieldOptions;
 	private Program program;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		program = buildProgram();
@@ -49,7 +50,7 @@ public class EolCommentFieldFactoryTest extends AbstractGhidraHeadedIntegrationT
 		fieldOptions = cb.getFormatManager().getFieldOptions();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

@@ -17,9 +17,9 @@ package ghidra.program.model.data;
 
 import static org.junit.Assert.*;
 
-import org.junit.*;
-
 import generic.test.AbstractGTest;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class FunctionDefinitionDataTypeTest extends AbstractGTest {
 	private StandAloneDataTypeManager dtm;
@@ -29,7 +29,7 @@ public class FunctionDefinitionDataTypeTest extends AbstractGTest {
 		return (FunctionDefinition) dtm.resolve(new FunctionDefinitionDataType(name), null);
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		dtm = new StandAloneDataTypeManager("dummyDTM");
 		dtm.startTransaction("");

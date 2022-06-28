@@ -20,13 +20,13 @@ import static org.junit.Assert.*;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import org.junit.*;
-
 import generic.test.AbstractGenericTest;
 import ghidra.program.database.ProgramBuilder;
 import ghidra.program.model.address.*;
 import ghidra.program.model.listing.*;
 import ghidra.program.model.symbol.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test for the {@link DeleteFunctionCmd}.
@@ -46,7 +46,7 @@ public class DeleteFunctionCmdTest extends AbstractGenericTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		ProgramBuilder builder = new ProgramBuilder("Test", ProgramBuilder._TOY);

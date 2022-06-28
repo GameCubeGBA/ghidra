@@ -19,15 +19,15 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import generic.test.AbstractGenericTest;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AddressSetMappingTest extends AbstractGenericTest {
 	private AddressSpace space = new GenericAddressSpace("xx", 32, AddressSpace.TYPE_RAM, 0);
 	private AddressSet set;
 	private AddressSetMapping mapping;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		set = new AddressSet();
 		set.add(addr(10), addr(19));

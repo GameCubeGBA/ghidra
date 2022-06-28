@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 import java.awt.Window;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.app.cmd.function.CreateThunkFunctionCmd;
 import ghidra.program.database.ProgramDB;

@@ -20,8 +20,6 @@ import static org.junit.Assert.*;
 
 import java.util.*;
 
-import org.junit.*;
-
 import ghidra.app.cmd.disassemble.DisassembleCommand;
 import ghidra.feature.vt.api.db.VTSessionDB;
 import ghidra.feature.vt.api.main.*;
@@ -42,6 +40,9 @@ import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.Msg;
 import ghidra.util.exception.InvalidInputException;
 import ghidra.util.task.TaskLauncher;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class VTAutoVersionTrackingTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -54,7 +55,7 @@ public class VTAutoVersionTrackingTest extends AbstractGhidraHeadedIntegrationTe
 	private ProgramDB destinationProgram;
 	private VTSessionDB session;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		setErrorGUIEnabled(false);
@@ -62,7 +63,7 @@ public class VTAutoVersionTrackingTest extends AbstractGhidraHeadedIntegrationTe
 
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

@@ -21,8 +21,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import org.junit.*;
-
 import ghidra.app.plugin.core.blockmodel.BlockModelServicePlugin;
 import ghidra.app.plugin.core.codebrowser.CodeBrowserPlugin;
 import ghidra.app.plugin.core.graph.GraphDisplayBrokerPlugin;
@@ -38,6 +36,9 @@ import ghidra.test.TestEnv;
 import ghidra.util.Msg;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import utilities.util.FileUtilities;
 
 public class GraphExportTest extends AbstractGhidraHeadedIntegrationTest {
@@ -48,7 +49,7 @@ public class GraphExportTest extends AbstractGhidraHeadedIntegrationTest {
 	protected CodeBrowserPlugin codeBrowser;
 	private GraphExporterDialog dialog;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		setErrorGUIEnabled(false);
@@ -76,7 +77,7 @@ public class GraphExportTest extends AbstractGhidraHeadedIntegrationTest {
 		}
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}

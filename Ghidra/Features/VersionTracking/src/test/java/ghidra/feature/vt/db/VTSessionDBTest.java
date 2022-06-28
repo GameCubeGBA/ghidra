@@ -20,25 +20,26 @@ import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
 
-import org.junit.*;
-
 import ghidra.feature.vt.api.impl.VTProgramCorrelatorInfo;
 import ghidra.feature.vt.api.main.VTMatchSet;
 import ghidra.feature.vt.api.main.VTProgramCorrelator;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class VTSessionDBTest extends VTBaseTestCase {
 
 	private int testTransactionID;
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		testTransactionID = db.startTransaction("Test");
 	}
 
 	@Override
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		db.endTransaction(testTransactionID, false);
 	}

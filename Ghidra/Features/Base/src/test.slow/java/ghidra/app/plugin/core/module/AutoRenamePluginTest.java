@@ -19,8 +19,6 @@ import static org.junit.Assert.*;
 
 import javax.swing.SwingUtilities;
 
-import org.junit.*;
-
 import docking.ActionContext;
 import docking.action.DockingActionIf;
 import ghidra.app.events.ProgramLocationPluginEvent;
@@ -38,6 +36,9 @@ import ghidra.program.util.GroupPath;
 import ghidra.program.util.LabelFieldLocation;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AutoRenamePluginTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -54,7 +55,7 @@ public class AutoRenamePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -90,7 +91,7 @@ public class AutoRenamePluginTest extends AbstractGhidraHeadedIntegrationTest {
 //		env.showTool();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

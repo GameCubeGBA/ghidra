@@ -22,13 +22,14 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
-import org.junit.*;
-
 import docking.widgets.AutoLookup;
 import docking.widgets.table.model.TestDataModel;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.Msg;
 import ghidra.util.table.GhidraTable;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class GTableTest extends AbstractGhidraHeadedIntegrationTest {
 	private TestDataModel model;
@@ -38,7 +39,7 @@ public class GTableTest extends AbstractGhidraHeadedIntegrationTest {
 	private long testKeyTimeout = 100;
 	private boolean timeoutTriggered;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		model = new TestDataModel();
 		table = new GhidraTable(model);
@@ -65,7 +66,7 @@ public class GTableTest extends AbstractGhidraHeadedIntegrationTest {
 		timeout(); // start fresh with an active timeout
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		frame.dispose();
 	}

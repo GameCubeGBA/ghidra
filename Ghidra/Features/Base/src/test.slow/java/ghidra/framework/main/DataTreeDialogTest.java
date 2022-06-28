@@ -25,8 +25,6 @@ import javax.swing.*;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 
-import org.junit.*;
-
 import docking.widgets.tree.GTree;
 import docking.widgets.tree.GTreeNode;
 import ghidra.framework.main.datatree.*;
@@ -36,6 +34,9 @@ import ghidra.program.model.listing.Program;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DataTreeDialogTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -54,7 +55,7 @@ public class DataTreeDialogTest extends AbstractGhidraHeadedIntegrationTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 
@@ -82,7 +83,7 @@ public class DataTreeDialogTest extends AbstractGhidraHeadedIntegrationTest {
 		return result;
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

@@ -22,8 +22,6 @@ import static org.junit.Assert.*;
 import java.awt.Window;
 import java.util.*;
 
-import org.junit.*;
-
 import docking.ActionContext;
 import ghidra.app.cmd.disassemble.DisassembleCommand;
 import ghidra.feature.vt.api.db.VTSessionDB;
@@ -53,6 +51,9 @@ import ghidra.test.*;
 import ghidra.util.SystemUtilities;
 import ghidra.util.exception.*;
 import ghidra.util.task.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class VTMatchApplyTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -71,7 +72,7 @@ public class VTMatchApplyTest extends AbstractGhidraHeadedIntegrationTest {
 	// TODO: debug
 	private DomainObjectListenerRecorder eventRecorder = new DomainObjectListenerRecorder();
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		env = new TestEnv();
@@ -159,7 +160,7 @@ public class VTMatchApplyTest extends AbstractGhidraHeadedIntegrationTest {
 //		applyOptions.putEnum(VTOptionDefines.LOCAL_VARIABLE_COMMENT, CommentChoices.EXCLUDE);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		waitForBusyTool(tool);
 		destinationProgram.flushEvents();

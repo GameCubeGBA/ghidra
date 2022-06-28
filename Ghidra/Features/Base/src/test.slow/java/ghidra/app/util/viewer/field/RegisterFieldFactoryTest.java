@@ -21,8 +21,6 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.*;
-
 import ghidra.app.plugin.core.codebrowser.CodeBrowserPlugin;
 import ghidra.app.plugin.core.navigation.NextPrevAddressPlugin;
 import ghidra.framework.plugintool.PluginTool;
@@ -33,6 +31,9 @@ import ghidra.program.model.lang.RegisterValue;
 import ghidra.program.model.listing.*;
 import ghidra.program.util.RegisterFieldLocation;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class RegisterFieldFactoryTest extends AbstractGhidraHeadedIntegrationTest {
 	private TestEnv env;
@@ -44,7 +45,7 @@ public class RegisterFieldFactoryTest extends AbstractGhidraHeadedIntegrationTes
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		program = buildProgram();
@@ -65,7 +66,7 @@ public class RegisterFieldFactoryTest extends AbstractGhidraHeadedIntegrationTes
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

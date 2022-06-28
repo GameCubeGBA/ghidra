@@ -19,7 +19,7 @@ import java.io.*;
 
 import org.antlr.runtime.*;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 

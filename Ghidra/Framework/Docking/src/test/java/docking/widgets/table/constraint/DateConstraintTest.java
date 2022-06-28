@@ -21,8 +21,8 @@ import static org.junit.Assert.fail;
 import java.time.LocalDate;
 import java.util.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import docking.widgets.table.constraint.provider.DateColumnConstraintProvider;
 import docking.widgets.table.constraint.provider.DateColumnTypeMapper;
@@ -39,7 +39,7 @@ public class DateConstraintTest {
 	private static final long HOUR = 60 * MINUTE;
 	private static final long DAY = 24 * HOUR;
 
-	@Before
+	@BeforeEach
 	public void setup() {
 		DateColumnConstraintProvider provider = new DateColumnConstraintProvider();
 		Collection<ColumnConstraint<?>> columnConstraints = provider.getColumnConstraints();

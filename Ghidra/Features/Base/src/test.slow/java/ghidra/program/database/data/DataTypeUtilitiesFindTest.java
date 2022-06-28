@@ -17,14 +17,15 @@ package ghidra.program.database.data;
 
 import static org.junit.Assert.*;
 
-import org.junit.*;
-
 import ghidra.program.database.ProgramBuilder;
 import ghidra.program.database.ProgramDB;
 import ghidra.program.model.data.*;
 import ghidra.program.model.listing.GhidraClass;
 import ghidra.program.model.symbol.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DataTypeUtilitiesFindTest extends AbstractGhidraHeadedIntegrationTest {
 	private ProgramDB program;
@@ -37,7 +38,7 @@ public class DataTypeUtilitiesFindTest extends AbstractGhidraHeadedIntegrationTe
 	private Namespace abab;
 	private GhidraClass ababa;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		program = createDefaultProgram(testName.getMethodName(), ProgramBuilder._TOY, this);
 		dataMgr = program.getDataTypeManager();
@@ -96,7 +97,7 @@ public class DataTypeUtilitiesFindTest extends AbstractGhidraHeadedIntegrationTe
 
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		program.release(this);
 	}

@@ -26,7 +26,6 @@ import java.util.*;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.junit.*;
 
 import db.DBHandle;
 import db.DBRecord;
@@ -46,6 +45,10 @@ import ghidra.util.database.spatial.SpatialMap;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.VersionException;
 import ghidra.util.task.ConsoleTaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 /**
  * TODO: Many of the features are tested indirectly through other manager tests. Those tests should
@@ -206,7 +209,7 @@ public class DBTraceAddressSnapRangePropertyMapSpaceTest
 		return new HashSet<>(col);
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws IOException, VersionException {
 		toy = DefaultLanguageService.getLanguageService()
 				.getLanguage(
@@ -214,7 +217,7 @@ public class DBTraceAddressSnapRangePropertyMapSpaceTest
 		obj = new MyObject(toy, this);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		obj.release(this);
 	}
@@ -266,7 +269,7 @@ public class DBTraceAddressSnapRangePropertyMapSpaceTest
 	}
 
 	@Test
-	@Ignore("TODO")
+	@Disabled("TODO")
 	public void testRemove() {
 		try (UndoableTransaction tid = UndoableTransaction.start(obj, "Create entries", true)) {
 			obj.space1.put(at(0x1000, 5), null);
@@ -378,7 +381,7 @@ public class DBTraceAddressSnapRangePropertyMapSpaceTest
 	}
 
 	@Test
-	@Ignore("TODO")
+	@Disabled("TODO")
 	public void testSaveAndLoad() throws IOException, CancelledException, VersionException {
 		MyEntry entry1;
 		try (UndoableTransaction tid = UndoableTransaction.start(obj, "Create entries", true)) {
@@ -397,7 +400,7 @@ public class DBTraceAddressSnapRangePropertyMapSpaceTest
 	}
 
 	@Test
-	@Ignore("Related to GP-479")
+	@Disabled("Related to GP-479")
 	public void testUndoThenRedo() throws IOException {
 		MyEntry entry1;
 		try (UndoableTransaction tid = UndoableTransaction.start(obj, "Create entries", true)) {

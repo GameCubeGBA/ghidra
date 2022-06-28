@@ -17,8 +17,6 @@ package ghidra.app.script;
 
 import static org.junit.Assert.*;
 
-import org.junit.*;
-
 import ghidra.app.plugin.core.codebrowser.CodeBrowserPlugin;
 import ghidra.app.plugin.core.navigation.GoToAddressLabelPlugin;
 import ghidra.app.plugin.core.script.GhidraScriptMgrPlugin;
@@ -31,6 +29,9 @@ import ghidra.program.model.symbol.*;
 import ghidra.program.util.ProgramLocation;
 import ghidra.test.*;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class GhidraScriptRealProgramTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -43,7 +44,7 @@ public class GhidraScriptRealProgramTest extends AbstractGhidraHeadedIntegration
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		env = new TestEnv();
@@ -64,7 +65,7 @@ public class GhidraScriptRealProgramTest extends AbstractGhidraHeadedIntegration
 		transactionID = program.startTransaction(testName.getMethodName());
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		program.endTransaction(transactionID, false);

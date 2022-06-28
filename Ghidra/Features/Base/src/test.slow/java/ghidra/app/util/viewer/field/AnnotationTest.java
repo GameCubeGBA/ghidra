@@ -24,8 +24,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.io.FilenameUtils;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import docking.widgets.fieldpanel.field.*;
 import ghidra.app.nav.Navigatable;
@@ -56,7 +56,7 @@ public class AnnotationTest extends AbstractGhidraHeadedIntegrationTest {
 
 	private Program program;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		program = buildProgram();
 	}

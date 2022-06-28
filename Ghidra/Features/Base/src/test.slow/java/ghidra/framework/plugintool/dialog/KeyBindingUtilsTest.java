@@ -28,8 +28,6 @@ import javax.swing.*;
 import javax.swing.table.TableModel;
 import javax.swing.tree.TreePath;
 
-import org.junit.*;
-
 import docking.action.DockingActionIf;
 import docking.actions.KeyBindingUtils;
 import docking.options.editor.OptionsDialog;
@@ -56,6 +54,9 @@ import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.Msg;
 import ghidra.util.SystemUtilities;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests the {@link KeyBindingUtils} class.
@@ -79,7 +80,7 @@ public class KeyBindingUtilsTest extends AbstractGhidraHeadedIntegrationTest {
 	private JTextField keyField;
 	private JButton applyButton;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 //		this hasn't been crashing for a while now
@@ -131,7 +132,7 @@ public class KeyBindingUtilsTest extends AbstractGhidraHeadedIntegrationTest {
 		}
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		debug("tearDown()");
 		env.dispose();

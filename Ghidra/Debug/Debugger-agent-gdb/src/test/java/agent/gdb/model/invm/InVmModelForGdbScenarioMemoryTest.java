@@ -15,11 +15,11 @@
  */
 package agent.gdb.model.invm;
 
-import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 
 import agent.gdb.model.AbstractModelForGdbScenarioMemoryTest;
 
-@Ignore
+@Disabled
 public class InVmModelForGdbScenarioMemoryTest extends AbstractModelForGdbScenarioMemoryTest {
 	@Override
 	public ModelHost modelHost() throws Throwable {

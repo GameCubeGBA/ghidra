@@ -17,8 +17,6 @@ package ghidra.app.plugin.core.function;
 
 import static org.junit.Assert.*;
 
-import org.junit.*;
-
 import ghidra.app.plugin.core.datamgr.DataTypeManagerPlugin;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.program.database.ProgramDB;
@@ -28,6 +26,9 @@ import ghidra.program.model.data.*;
 import ghidra.program.model.listing.Function;
 import ghidra.program.model.listing.Program;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class EditFunctionSignatureDialogTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -35,7 +36,7 @@ public class EditFunctionSignatureDialogTest extends AbstractGhidraHeadedIntegra
 	private PluginTool tool;
 	private ProgramDB program;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -45,7 +46,7 @@ public class EditFunctionSignatureDialogTest extends AbstractGhidraHeadedIntegra
 		program = builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

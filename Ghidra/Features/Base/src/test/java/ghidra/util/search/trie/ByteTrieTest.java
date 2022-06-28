@@ -19,16 +19,16 @@ import static org.junit.Assert.*;
 
 import java.util.*;
 
-import org.junit.*;
-
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ByteTrieTest {
 
 	ByteTrieIfc<String> trie;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		trie = new ByteTrie<String>();
 	}

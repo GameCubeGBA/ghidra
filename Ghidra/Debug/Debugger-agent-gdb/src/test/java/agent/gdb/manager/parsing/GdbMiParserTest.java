@@ -21,9 +21,8 @@ import java.util.Arrays;
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import agent.gdb.manager.parsing.GdbMiParser;
 import agent.gdb.manager.parsing.GdbMiParser.GdbMiFieldList;
 import agent.gdb.manager.parsing.GdbParsingUtils.GdbParseError;
 

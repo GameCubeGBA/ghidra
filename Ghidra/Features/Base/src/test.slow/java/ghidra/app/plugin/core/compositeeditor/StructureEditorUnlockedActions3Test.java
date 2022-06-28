@@ -23,7 +23,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.widgets.dialogs.NumberInputDialog;
 import ghidra.program.model.data.*;

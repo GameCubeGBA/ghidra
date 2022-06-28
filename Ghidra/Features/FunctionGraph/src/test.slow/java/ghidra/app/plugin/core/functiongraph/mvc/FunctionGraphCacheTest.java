@@ -19,8 +19,8 @@ import static org.junit.Assert.*;
 
 import java.util.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.google.common.cache.*;
 
@@ -34,7 +34,7 @@ public class FunctionGraphCacheTest extends AbstractFunctionGraphTest {
 	private List<Address> evictedFromCache = Collections.synchronizedList(new ArrayList<>());
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 

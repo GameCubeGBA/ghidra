@@ -21,8 +21,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
 
-import org.junit.*;
-
 import db.*;
 import db.util.ErrorHandler;
 import generic.test.AbstractGenericTest;
@@ -37,6 +35,9 @@ import ghidra.program.util.ChangeManager;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.Lock;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -66,7 +67,7 @@ public class DBPropertyMapManagerTest extends AbstractGhidraHeadedIntegrationTes
 	/*
 	 * @see TestCase#setUp()
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		program = createDefaultProgram("Test", ProgramBuilder._TOY, this);
@@ -86,7 +87,7 @@ public class DBPropertyMapManagerTest extends AbstractGhidraHeadedIntegrationTes
 	/*
 	 * @see TestCase#tearDown()
 	 */
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (program != null) {
 			if (program.getCurrentTransaction() != null) {

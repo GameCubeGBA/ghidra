@@ -15,7 +15,7 @@
  */
 package ghidra.app.plugin.core.compositeeditor;
 
-import org.junit.After;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.Assert;
 
 import ghidra.program.model.data.*;
@@ -40,7 +40,7 @@ public abstract class AbstractUnionEditorTest extends AbstractEditorTest {
 	HexNumbersAction hexNumbersAction;
 
 	@Override
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		clearActions();
 		unionModel = null;

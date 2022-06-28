@@ -17,8 +17,8 @@ package agent.frida.model;
 
 import java.util.Map;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import ghidra.dbg.test.AbstractDebuggerModelFactoryTest;
 
@@ -29,42 +29,42 @@ public abstract class AbstractModelForFridaFactoryTest extends AbstractDebuggerM
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testBuildAndClose() throws Throwable {
 		// Disabled as of 220609
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testBuildFailingOptionsErr() throws Throwable {
 		// Disabled as of 220609
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testPing() throws Throwable {
 		// Disabled as of 220609
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testWaitRootAccess() throws Throwable {
 		// Disabled as of 220609
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testHasNonEnumerableRootSchema() throws Throwable {
 		// Disabled as of 220609
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testNonExistentPathGivesNull() throws Throwable {
 		// Disabled as of 220609

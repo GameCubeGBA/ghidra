@@ -21,7 +21,6 @@ import static org.junit.Assert.*;
 import javax.swing.*;
 
 import org.apache.commons.lang3.StringUtils;
-import org.junit.*;
 
 import docking.*;
 import docking.action.DockingActionIf;
@@ -48,6 +47,9 @@ import ghidra.program.model.listing.Data;
 import ghidra.program.util.ProgramLocation;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ApplyDataTypeToBrowserTest extends AbstractGhidraHeadedIntegrationTest {
 	private static final String PROGRAM_FILENAME = "WallaceSrc";
@@ -65,7 +67,7 @@ public class ApplyDataTypeToBrowserTest extends AbstractGhidraHeadedIntegrationT
 	private ArchiveNode programNode;
 	private CodeViewerProvider codeViewerProvider;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -120,7 +122,7 @@ public class ApplyDataTypeToBrowserTest extends AbstractGhidraHeadedIntegrationT
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		executeOnSwingWithoutBlocking(() -> {
 			ProgramManager pm = tool.getService(ProgramManager.class);

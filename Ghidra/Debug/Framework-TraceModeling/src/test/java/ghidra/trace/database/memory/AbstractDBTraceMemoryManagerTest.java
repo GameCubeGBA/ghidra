@@ -25,8 +25,6 @@ import java.nio.file.Path;
 import java.util.*;
 import java.util.Map.Entry;
 
-import org.junit.*;
-
 import db.DBHandle;
 import ghidra.program.model.address.*;
 import ghidra.program.model.lang.*;
@@ -41,6 +39,9 @@ import ghidra.trace.util.LanguageTestWatcher;
 import ghidra.util.database.*;
 import ghidra.util.task.ConsoleTaskMonitor;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public abstract class AbstractDBTraceMemoryManagerTest
 		extends AbstractGhidraHeadlessIntegrationTest {
@@ -53,7 +54,7 @@ public abstract class AbstractDBTraceMemoryManagerTest
 
 	protected abstract LanguageID getLanguageID();
 
-	@Before
+	@BeforeEach
 	public void setUp() throws IOException {
 		b = new ToyDBTraceBuilder("Testing", testLanguage.getLanguage());
 		try (UndoableTransaction tid = b.startTransaction()) {
@@ -62,7 +63,7 @@ public abstract class AbstractDBTraceMemoryManagerTest
 		memory = b.trace.getMemoryManager();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		b.close();
 	}

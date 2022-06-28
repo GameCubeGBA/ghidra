@@ -15,11 +15,11 @@
  */
 package agent.dbgeng.model.gadp;
 
-import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 
 import agent.dbgeng.model.AbstractModelForDbgengSessionActivationTest;
 
-@Ignore("Don't know how to make multiple sessions")
+@Disabled("Don't know how to make multiple sessions")
 public class GadpModelForDbgengSessionActivationTest extends AbstractModelForDbgengSessionActivationTest {
 	@Override
 	public ModelHost modelHost() throws Throwable {

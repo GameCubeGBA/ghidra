@@ -21,8 +21,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-import org.junit.*;
-
 import com.google.common.collect.Range;
 
 import ghidra.program.model.address.Address;
@@ -35,6 +33,9 @@ import ghidra.trace.model.symbol.*;
 import ghidra.util.database.UndoableTransaction;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.VersionException;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DBTraceReferenceManagerTest extends AbstractGhidraHeadlessIntegrationTest {
 	protected static class DummyTraceReference implements TraceReference {
@@ -174,13 +175,13 @@ public class DBTraceReferenceManagerTest extends AbstractGhidraHeadlessIntegrati
 	protected ToyDBTraceBuilder b;
 	protected DBTraceReferenceManager manager;
 
-	@Before
+	@BeforeEach
 	public void setUpTraceReferenceManagerTest() throws IOException {
 		b = new ToyDBTraceBuilder("Testing", "Toy:BE:64:default");
 		manager = b.trace.getReferenceManager();
 	}
 
-	@After
+	@AfterEach
 	public void tearDownTraceReferenceManagerTest() {
 		b.close();
 	}

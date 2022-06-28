@@ -21,14 +21,15 @@ import static org.junit.Assert.fail;
 import java.io.*;
 import java.util.*;
 
-import org.junit.*;
-
 import generic.test.AbstractGenericTest;
 import ghidra.app.util.bin.format.pdb2.pdbreader.PdbByteWriter;
 import ghidra.app.util.bin.format.pdb2.pdbreader.PdbReaderOptions;
 import ghidra.util.Msg;
 import ghidra.util.exception.AssertException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 public class MsfReaderUnitTest extends AbstractGenericTest {
 
@@ -59,7 +60,7 @@ public class MsfReaderUnitTest extends AbstractGenericTest {
 	/**
 	 * @throws IOException Upon file IO issues.
 	 */
-	@BeforeClass
+	@BeforeAll
 	public static void setUp() throws IOException {
 		tDir = createTempDirectory("msfreader");
 		testFile200 = new File(tDir, "msfreader200.pdb");
@@ -77,7 +78,7 @@ public class MsfReaderUnitTest extends AbstractGenericTest {
 		stream700.close();
 	}
 
-	@AfterClass
+	@AfterAll
 	public static void tearDown() throws Throwable {
 		if (testFileName200 != null) {
 			Msg.info(MsfReaderUnitTest.class, "MSF test file used: " + testFileName200);

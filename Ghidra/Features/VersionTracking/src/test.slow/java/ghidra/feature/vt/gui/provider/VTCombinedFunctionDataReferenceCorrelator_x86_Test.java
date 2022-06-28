@@ -21,7 +21,7 @@ import static org.junit.Assert.*;
 import java.util.*;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.feature.vt.api.correlator.program.VTAbstractReferenceProgramCorrelatorFactory;
 import ghidra.feature.vt.api.main.*;

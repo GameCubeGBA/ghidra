@@ -27,7 +27,6 @@ import javax.swing.JTree;
 import javax.swing.tree.TreePath;
 
 import org.apache.commons.collections4.map.LazyMap;
-import org.junit.*;
 
 import docking.ActionContext;
 import docking.action.*;
@@ -56,6 +55,9 @@ import ghidra.program.util.ProgramLocation;
 import ghidra.program.util.ProgramSelection;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -73,7 +75,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 
 	private GoToService goToService;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -220,7 +222,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		return builder.addr(addr);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		incomingTree.cancelWork();

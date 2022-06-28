@@ -20,8 +20,6 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
-import org.junit.*;
-
 import ghidra.app.cmd.comments.SetCommentCmd;
 import ghidra.app.cmd.label.AddLabelCmd;
 import ghidra.app.plugin.core.codebrowser.CodeBrowserPlugin;
@@ -44,6 +42,9 @@ import ghidra.test.*;
 import ghidra.util.UserSearchUtils;
 import ghidra.util.task.TaskMonitor;
 import junit.framework.TestCase;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ProgramDatabaseSearchIteratorTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -69,7 +70,7 @@ public class ProgramDatabaseSearchIteratorTest extends AbstractGhidraHeadedInteg
 		builder.disassemble(Long.toHexString(address), 2);
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -112,7 +113,7 @@ public class ProgramDatabaseSearchIteratorTest extends AbstractGhidraHeadedInteg
 	/**
 	 * @see TestCase#tearDown()
 	 */
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 		program = null;

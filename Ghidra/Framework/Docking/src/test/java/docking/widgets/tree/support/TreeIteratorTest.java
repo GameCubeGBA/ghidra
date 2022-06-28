@@ -19,8 +19,8 @@ import static org.junit.Assert.*;
 
 import java.util.Iterator;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import docking.widgets.tree.*;
 import generic.test.AbstractGenericTest;
@@ -38,7 +38,7 @@ public class TreeIteratorTest {
 	private GTreeNode node0_1;
 	private GTreeNode node1_0;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		root = new GTestNode("root");
 		node0 = new GTestNode("Node0");

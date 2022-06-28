@@ -23,8 +23,8 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Predicate;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import docking.widgets.filter.*;
 import docking.widgets.table.*;
@@ -77,7 +77,7 @@ public class DefaultThreadedTableFilterTest extends AbstractThreadedTableTest {
 	}
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 

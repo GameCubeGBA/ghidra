@@ -17,7 +17,7 @@ package ghidra.program.database.map;
 
 import java.io.IOException;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.program.database.ProgramDB;
 import ghidra.program.model.lang.*;

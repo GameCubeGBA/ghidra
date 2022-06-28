@@ -18,8 +18,6 @@ package ghidra.app.util.viewer.field;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.*;
-
 import ghidra.app.plugin.core.codebrowser.CodeBrowserPlugin;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.program.database.ProgramBuilder;
@@ -29,6 +27,9 @@ import ghidra.program.model.address.AddressFactory;
 import ghidra.program.model.data.PointerDataType;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ArmOffcutReferenceTest extends AbstractGhidraHeadedIntegrationTest {
 	private final String addressTableBytes =
@@ -45,7 +46,7 @@ public class ArmOffcutReferenceTest extends AbstractGhidraHeadedIntegrationTest 
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		builder = new ProgramBuilder("Test", ProgramBuilder._ARM);
@@ -63,7 +64,7 @@ public class ArmOffcutReferenceTest extends AbstractGhidraHeadedIntegrationTest 
 		cb = env.getPlugin(CodeBrowserPlugin.class);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

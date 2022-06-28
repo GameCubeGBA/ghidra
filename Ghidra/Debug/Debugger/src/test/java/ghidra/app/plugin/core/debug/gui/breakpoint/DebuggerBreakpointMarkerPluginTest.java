@@ -30,8 +30,8 @@ import java.util.stream.Stream;
 import javax.swing.MenuElement;
 import javax.swing.SwingUtilities;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.experimental.categories.Category;
 
 import com.google.common.collect.Range;
@@ -85,7 +85,7 @@ public class DebuggerBreakpointMarkerPluginTest extends AbstractGhidraHeadedDebu
 	protected DebuggerStaticMappingService mappingService;
 	protected MarkerService markerService;
 
-	@Before
+	@BeforeEach
 	public void setUpBreakpointMarkerPluginTest() throws Exception {
 		breakpointMarkerPlugin = addPlugin(tool, DebuggerBreakpointMarkerPlugin.class);
 		listingPlugin = addPlugin(tool, DebuggerListingPlugin.class);

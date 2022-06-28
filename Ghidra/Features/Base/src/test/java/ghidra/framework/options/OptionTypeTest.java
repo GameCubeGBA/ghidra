@@ -25,7 +25,7 @@ import java.util.Date;
 
 import javax.swing.KeyStroke;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 

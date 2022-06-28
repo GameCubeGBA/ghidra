@@ -19,8 +19,6 @@ import static org.junit.Assert.*;
 
 import java.util.NoSuchElementException;
 
-import org.junit.*;
-
 import ghidra.framework.model.*;
 import ghidra.program.database.ProgramBuilder;
 import ghidra.program.database.ProgramDB;
@@ -30,6 +28,9 @@ import ghidra.program.model.data.EnumDataType;
 import ghidra.program.util.ChangeManager;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for Enum data types.
@@ -40,7 +41,7 @@ public class EnumTest extends AbstractGhidraHeadedIntegrationTest {
 	private DataTypeManagerDB dataMgr;
 	private int transactionID;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		program = createDefaultProgram("Test", ProgramBuilder._TOY, this);
 
@@ -48,7 +49,7 @@ public class EnumTest extends AbstractGhidraHeadedIntegrationTest {
 		transactionID = program.startTransaction("Test");
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		program.endTransaction(transactionID, false);
 		program.release(this);

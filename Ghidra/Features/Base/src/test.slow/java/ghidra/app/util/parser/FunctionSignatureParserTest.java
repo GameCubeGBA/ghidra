@@ -19,8 +19,8 @@ import static org.junit.Assert.*;
 
 import java.util.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import ghidra.app.plugin.core.analysis.DefaultDataTypeManagerService;
 import ghidra.app.services.DataTypeManagerService;
@@ -39,7 +39,7 @@ public class FunctionSignatureParserTest extends AbstractGhidraHeadedIntegration
 	private FunctionSignatureParser parser;
 	private int dtChoiceCount;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		ProgramBuilder builder = new ToyProgramBuilder("test", false);
 		StructureDataType s = new StructureDataType("StructA", 0);

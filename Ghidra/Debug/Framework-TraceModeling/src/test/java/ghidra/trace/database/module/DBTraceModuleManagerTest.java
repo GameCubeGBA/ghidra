@@ -22,8 +22,6 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.util.*;
 
-import org.junit.*;
-
 import com.google.common.collect.Range;
 
 import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
@@ -31,19 +29,23 @@ import ghidra.trace.database.ToyDBTraceBuilder;
 import ghidra.trace.model.modules.TraceModule;
 import ghidra.trace.model.modules.TraceSection;
 import ghidra.util.database.UndoableTransaction;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 public class DBTraceModuleManagerTest extends AbstractGhidraHeadlessIntegrationTest {
 
 	ToyDBTraceBuilder b;
 	DBTraceModuleManager moduleManager;
 
-	@Before
+	@BeforeEach
 	public void setUpModuleManagerTest() throws Exception {
 		b = new ToyDBTraceBuilder("Testing", "Toy:BE:64:default");
 		moduleManager = b.trace.getModuleManager();
 	}
 
-	@After
+	@AfterEach
 	public void tearDownModuleManagerTest() {
 		b.close();
 	}
@@ -335,7 +337,7 @@ public class DBTraceModuleManagerTest extends AbstractGhidraHeadlessIntegrationT
 	}
 
 	@Test
-	@Ignore("GP-479")
+	@Disabled("GP-479")
 	public void testUndoIdentitiesPreserved() throws Exception {
 		TraceModule mod1;
 		try (UndoableTransaction tid = b.startTransaction()) {

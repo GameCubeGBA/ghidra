@@ -15,8 +15,8 @@
  */
 package ghidra.app.plugin.assembler.sleigh;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import ghidra.program.model.lang.LanguageID;
 import ghidra.util.Msg;
@@ -28,7 +28,7 @@ public class x86AssemblyTest extends AbstractAssemblyTest {
 	}
 
 	@Test
-	@Ignore("Some results are disassembled with + 0xfffffff8 instead. Wrong but harmless here")
+	@Disabled("Some results are disassembled with + 0xfffffff8 instead. Wrong but harmless here")
 	public void testAssemble_ADD_ECX_mEBX_n0x8m() {
 		try {
 			assertOneCompatRestExact("ADD ECX,dword ptr [EDX + -0x8]", "03:4a:f8");

@@ -21,14 +21,15 @@ import java.awt.geom.Point2D;
 
 import javax.swing.JFrame;
 
-import org.junit.*;
-
 import edu.uci.ics.jung.algorithms.layout.DAGLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import generic.test.AbstractGenericTest;
 import ghidra.graph.graphs.*;
 import ghidra.graph.support.*;
 import ghidra.graph.viewer.GraphViewerUtils;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class GraphViewerTransformationsTest {
 
@@ -36,7 +37,7 @@ public class GraphViewerTransformationsTest {
 	private JFrame frame;
 	private TestVisualGraph graph;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		graph = buildGraph();
@@ -50,7 +51,7 @@ public class GraphViewerTransformationsTest {
 		frame.setVisible(true);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		swing(() -> {
 			frame.setVisible(false);

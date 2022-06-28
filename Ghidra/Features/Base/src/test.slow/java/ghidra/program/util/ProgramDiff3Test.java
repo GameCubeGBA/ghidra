@@ -24,8 +24,6 @@ package ghidra.program.util;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import org.junit.*;
-
 import ghidra.program.model.address.AddressSet;
 import ghidra.program.model.data.*;
 import ghidra.program.model.lang.Register;
@@ -33,6 +31,9 @@ import ghidra.program.model.listing.*;
 import ghidra.program.model.listing.Function.FunctionUpdateType;
 import ghidra.program.model.symbol.SourceType;
 import ghidra.test.ClassicSampleX86ProgramBuilder;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * <CODE>ProgramDiffTest</CODE> tests the <CODE>ProgramDiff</CODE> class
@@ -51,7 +52,7 @@ public class ProgramDiff3Test extends AbstractProgramDiffTest {
 	/**
 	 * @see TestCase#setUp()
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		programBuilder1 = new ClassicSampleX86ProgramBuilder(false);
@@ -63,7 +64,7 @@ public class ProgramDiff3Test extends AbstractProgramDiffTest {
 	/**
 	 * @see TestCase#tearDown()
 	 */
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		programDiff = null;
 		p1 = null;

@@ -21,7 +21,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.app.util.cparser.C.CParser;

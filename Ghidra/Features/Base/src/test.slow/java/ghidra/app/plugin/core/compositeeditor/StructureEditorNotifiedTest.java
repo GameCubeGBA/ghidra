@@ -19,19 +19,20 @@ import static org.junit.Assert.*;
 
 import java.awt.Window;
 
-import org.junit.*;
-
 import ghidra.program.model.data.*;
 import ghidra.util.Swing;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class StructureEditorNotifiedTest extends AbstractStructureEditorTest {
 
 	private int persistentTxId = 0;
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -40,7 +41,7 @@ public class StructureEditorNotifiedTest extends AbstractStructureEditorTest {
 	}
 
 	@Override
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (persistentTxId != 0) {
 			program.endTransaction(persistentTxId, true);

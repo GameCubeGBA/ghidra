@@ -17,10 +17,10 @@ package ghidra.app.plugin.core.debug.opinion;
 
 import static ghidra.lifecycle.Unfinished.TODO;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
-@Ignore("TODO")
+@Disabled("TODO")
 public class DebuggerOpinionsTest {
 	@Test
 	public void testStuff() {

@@ -25,8 +25,6 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.text.JTextComponent;
 
-import org.junit.*;
-
 import docking.ActionContext;
 import docking.action.DockingActionIf;
 import docking.widgets.filter.FilterOptions;
@@ -52,6 +50,9 @@ import ghidra.program.util.ProgramSelection;
 import ghidra.test.*;
 import ghidra.util.Msg;
 import ghidra.util.table.field.AddressBasedLocation;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class BookmarkPluginTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -66,7 +67,7 @@ public class BookmarkPluginTest extends AbstractGhidraHeadedIntegrationTest {
 	private Bookmark[] bookmarks;
 	private GTable table;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.showTool();
@@ -99,7 +100,7 @@ public class BookmarkPluginTest extends AbstractGhidraHeadedIntegrationTest {
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

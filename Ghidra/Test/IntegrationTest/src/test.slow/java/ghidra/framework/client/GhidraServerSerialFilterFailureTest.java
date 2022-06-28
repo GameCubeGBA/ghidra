@@ -27,7 +27,6 @@ import java.util.HashSet;
 import javax.security.auth.Subject;
 import javax.security.auth.callback.Callback;
 
-import org.junit.*;
 import org.junit.experimental.categories.Category;
 
 import generic.test.category.PortSensitiveCategory;
@@ -37,6 +36,9 @@ import ghidra.net.ApplicationKeyManagerFactory;
 import ghidra.server.remote.ServerTestUtil;
 import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import utilities.util.FileUtilities;
 
 @Category(PortSensitiveCategory.class)
@@ -44,12 +46,12 @@ public class GhidraServerSerialFilterFailureTest extends AbstractGhidraHeadlessI
 
 	private File serverRoot;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		System.clearProperty(ApplicationKeyManagerFactory.KEYSTORE_PATH_PROPERTY);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		closeAllWindows();
 		killServer();

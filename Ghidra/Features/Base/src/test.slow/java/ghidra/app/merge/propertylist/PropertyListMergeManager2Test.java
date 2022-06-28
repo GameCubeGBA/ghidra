@@ -23,7 +23,7 @@ import java.util.Set;
 
 import javax.swing.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.util.WindowUtilities;
 import ghidra.app.merge.*;

@@ -20,7 +20,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.Date;
 import java.util.HashSet;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 

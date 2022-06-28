@@ -20,8 +20,8 @@ import static org.junit.Assert.assertNotNull;
 import java.io.IOException;
 import java.nio.file.*;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 import generic.test.AbstractGenericTest;
 import utilities.util.FileUtilities;
@@ -37,13 +37,13 @@ public abstract class AbstractHelpTest extends AbstractGenericTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		testTempDir = Files.createTempDirectory(testName.getMethodName());
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		FileUtilities.deleteDir(testTempDir.toFile());
 	}

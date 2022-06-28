@@ -18,7 +18,7 @@ package ghidra.app.util.cparser.C;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 

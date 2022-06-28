@@ -20,8 +20,8 @@ import static org.junit.Assume.assumeTrue;
 
 import java.util.List;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import agent.dbgeng.model.AbstractModelForDbgengInterpreterTest;
 import agent.dbgeng.model.WindowsSpecimen;
@@ -60,7 +60,7 @@ public class InVmModelForDbgmodelInterpreterTest extends AbstractModelForDbgengI
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testAttachViaInterpreterShowsInProcessContainer() throws Throwable {
 		super.testAttachViaInterpreterShowsInProcessContainer();

@@ -26,7 +26,6 @@ import org.antlr.runtime.RecognitionException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jdom.JDOMException;
-import org.junit.*;
 import org.junit.experimental.categories.Category;
 
 import generic.jar.ResourceFile;
@@ -34,6 +33,8 @@ import generic.test.AbstractGenericTest;
 import generic.test.category.NightlyCategory;
 import ghidra.framework.*;
 import ghidra.pcodeCPort.slgh_compile.SleighCompileLauncher;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 @Category(NightlyCategory.class)
 public class SleighCompileRegressionTest extends AbstractGenericTest {
@@ -41,7 +42,7 @@ public class SleighCompileRegressionTest extends AbstractGenericTest {
 
 	private Logger log;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		log = LogManager.getLogger(SleighCompileRegressionTest.class);

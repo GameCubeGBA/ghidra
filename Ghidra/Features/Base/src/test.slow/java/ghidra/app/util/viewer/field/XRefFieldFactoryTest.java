@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.junit.*;
 
 import docking.widgets.fieldpanel.field.FieldElement;
 import ghidra.app.plugin.core.codebrowser.CodeBrowserPlugin;
@@ -37,6 +36,9 @@ import ghidra.program.model.symbol.ReferenceManager;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.table.GhidraProgramTableModel;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class XRefFieldFactoryTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -54,7 +56,7 @@ public class XRefFieldFactoryTest extends AbstractGhidraHeadedIntegrationTest {
 	private int functionWithAllTypesOfCalls;
 	private int nonFunctionOffset;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		program = buildProgram();
@@ -65,7 +67,7 @@ public class XRefFieldFactoryTest extends AbstractGhidraHeadedIntegrationTest {
 		fieldOptions = cb.getFormatManager().getFieldOptions();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

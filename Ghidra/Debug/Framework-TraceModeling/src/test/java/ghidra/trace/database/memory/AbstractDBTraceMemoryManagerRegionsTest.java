@@ -21,8 +21,6 @@ import static org.junit.Assert.assertNull;
 import java.io.IOException;
 import java.util.Set;
 
-import org.junit.*;
-
 import com.google.common.collect.Range;
 
 import ghidra.program.model.lang.LanguageID;
@@ -32,6 +30,9 @@ import ghidra.trace.model.memory.TraceMemoryFlag;
 import ghidra.trace.model.memory.TraceMemoryRegion;
 import ghidra.trace.util.LanguageTestWatcher;
 import ghidra.util.database.UndoableTransaction;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public abstract class AbstractDBTraceMemoryManagerRegionsTest
 		extends AbstractGhidraHeadlessIntegrationTest {
@@ -44,7 +45,7 @@ public abstract class AbstractDBTraceMemoryManagerRegionsTest
 
 	protected abstract LanguageID getLanguageID();
 
-	@Before
+	@BeforeEach
 	public void setUp() throws IOException {
 		b = new ToyDBTraceBuilder("Testing", testLanguage.getLanguage());
 		try (UndoableTransaction tid = b.startTransaction()) {
@@ -53,7 +54,7 @@ public abstract class AbstractDBTraceMemoryManagerRegionsTest
 		memory = b.trace.getMemoryManager();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		b.close();
 	}

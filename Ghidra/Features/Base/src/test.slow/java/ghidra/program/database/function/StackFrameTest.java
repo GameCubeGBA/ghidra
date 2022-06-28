@@ -18,8 +18,8 @@ package ghidra.program.database.function;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.After;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 
 import ghidra.program.database.ProgramBuilder;
 import ghidra.program.database.ProgramDB;
@@ -46,7 +46,7 @@ public class StackFrameTest extends AbstractGhidraHeadedIntegrationTest {
 		super();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (program != null) {
 			program.endTransaction(transactionID, true);

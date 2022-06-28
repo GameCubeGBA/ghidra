@@ -21,7 +21,6 @@ import java.awt.event.MouseEvent;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.*;
 import org.junit.experimental.categories.Category;
 
 import com.google.common.collect.Range;
@@ -63,6 +62,9 @@ import ghidra.trace.model.symbol.TraceSymbol;
 import ghidra.util.database.UndoableTransaction;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.DuplicateNameException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 @Category(NightlyCategory.class) // this may actually be an @PortSensitive test
 public class DebuggerModulesProviderTest extends AbstractGhidraHeadedDebuggerGUITest {
@@ -77,7 +79,7 @@ public class DebuggerModulesProviderTest extends AbstractGhidraHeadedDebuggerGUI
 	protected TraceSection secLibText;
 	protected TraceSection secLibData;
 
-	@Before
+	@BeforeEach
 	public void setUpModulesProviderTest() throws Exception {
 		modulesPlugin = addPlugin(tool, DebuggerModulesPlugin.class);
 		modulesProvider = waitForComponentProvider(DebuggerModulesProvider.class);
@@ -545,7 +547,7 @@ public class DebuggerModulesProviderTest extends AbstractGhidraHeadedDebuggerGUI
 	}
 
 	@Test
-	@Ignore("This action is hidden until supported")
+	@Disabled("This action is hidden until supported")
 	public void testActionCaptureTypes() throws Exception {
 		assertFalse(modulesProvider.actionCaptureTypes.isEnabled());
 		createTestModel();

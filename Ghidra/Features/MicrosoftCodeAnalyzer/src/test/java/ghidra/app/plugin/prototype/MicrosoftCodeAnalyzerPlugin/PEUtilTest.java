@@ -18,7 +18,7 @@ package ghidra.app.plugin.prototype.MicrosoftCodeAnalyzerPlugin;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.app.cmd.data.AbstractCreateDataTypeModelTest;
 import ghidra.program.database.ProgramBuilder;

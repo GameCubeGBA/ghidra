@@ -26,7 +26,7 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 
 import org.jdom.Element;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.test.AbstractDockingTest;
 import docking.widgets.label.GDLabel;

@@ -23,8 +23,8 @@ import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import ghidra.util.Msg;
 
@@ -124,7 +124,7 @@ public class AsyncLockTest {
 	}
 
 	@Test
-	@Ignore("TODO") // Not sure why this fails under Gradle but not my IDE
+	@Disabled("TODO") // Not sure why this fails under Gradle but not my IDE
 	public void testTwoSequencesWithLockAtomic() {
 		Deque<CompletableFuture<Void>> queue = new LinkedList<>();
 		AsyncLock l = new AsyncLock();
@@ -169,7 +169,7 @@ public class AsyncLockTest {
 	}
 
 	@Test
-	@Ignore("TODO") // Not sure why this fails under Gradle but not my IDE
+	@Disabled("TODO") // Not sure why this fails under Gradle but not my IDE
 	public void testTwoSequencesWithReentry() {
 		// This is very contrived. A real use would pass ownership to some method which cannot
 		// assume that it already owns the lock

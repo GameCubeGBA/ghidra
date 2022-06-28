@@ -31,7 +31,6 @@ import javax.swing.table.TableModel;
 import javax.swing.text.JTextComponent;
 
 import org.jdom.Element;
-import org.junit.*;
 
 import docking.*;
 import docking.action.DockingActionIf;
@@ -62,6 +61,9 @@ import ghidra.util.table.GhidraTableFilterPanel;
 import ghidra.util.table.ProgramTableModel;
 import ghidra.util.table.field.AddressBasedLocation;
 import ghidra.util.xml.XmlUtilities;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import util.CollectionUtils;
 
 public class SymbolTablePluginTest extends AbstractGhidraHeadedIntegrationTest {
@@ -85,7 +87,7 @@ public class SymbolTablePluginTest extends AbstractGhidraHeadedIntegrationTest {
 	private DockingActionIf clearPinnedAction;
 	private DockingActionIf setFilterAction;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 
@@ -111,7 +113,7 @@ public class SymbolTablePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		clearPinnedAction = getAction(plugin, "Clear Pinned Symbol");
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

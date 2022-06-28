@@ -23,8 +23,8 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import com.sun.jdi.*;
 import com.sun.jdi.connect.*;
@@ -35,7 +35,7 @@ import com.sun.jdi.request.*;
 import ghidra.util.Msg;
 import ghidra.util.NumericUtilities;
 
-@Ignore("These crash in Gradle")
+@Disabled("These crash in Gradle")
 public class JdiExperimentsTest {
 	protected VirtualMachineManager vmm = Bootstrap.virtualMachineManager();
 
@@ -197,7 +197,7 @@ public class JdiExperimentsTest {
 	}
 
 	@Test
-	@Ignore("Enable after you've manually launched a target")
+	@Disabled("Enable after you've manually launched a target")
 	public void testAtttachJDWP() throws Exception {
 		AttachingConnector tcpConn = vmm.attachingConnectors()
 				.stream()

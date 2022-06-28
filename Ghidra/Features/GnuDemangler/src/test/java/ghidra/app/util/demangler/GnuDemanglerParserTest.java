@@ -19,8 +19,8 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.app.util.demangler.gnu.*;
@@ -30,7 +30,7 @@ public class GnuDemanglerParserTest extends AbstractGenericTest {
 	private GnuDemanglerNativeProcess process;
 	private GnuDemanglerParser parser;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		process = GnuDemanglerNativeProcess
 				.getDemanglerNativeProcess(GnuDemanglerOptions.GNU_DEMANGLER_V2_33_1);

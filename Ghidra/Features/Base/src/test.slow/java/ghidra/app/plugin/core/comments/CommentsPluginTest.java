@@ -21,8 +21,6 @@ import java.util.List;
 
 import javax.swing.*;
 
-import org.junit.*;
-
 import docking.action.DockingActionIf;
 import docking.widgets.OptionDialog;
 import docking.widgets.fieldpanel.FieldPanel;
@@ -57,6 +55,9 @@ import ghidra.test.TestEnv;
 import ghidra.util.SystemUtilities;
 import ghidra.util.table.GhidraProgramTableModel;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class CommentsPluginTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -80,7 +81,7 @@ public class CommentsPluginTest extends AbstractGhidraHeadedIntegrationTest {
 	private DockingActionIf deleteAction;
 	private ProgramDB program;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 
@@ -94,7 +95,7 @@ public class CommentsPluginTest extends AbstractGhidraHeadedIntegrationTest {
 		deleteAction = getAction(plugin, "Delete Comments");
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

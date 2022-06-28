@@ -20,10 +20,11 @@ import static org.junit.Assert.*;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.*;
-
 import ghidra.program.database.ProgramBuilder;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class TransactionLockingTaskMonitorTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -39,13 +40,13 @@ public class TransactionLockingTaskMonitorTest extends AbstractGhidraHeadedInteg
 	private CountDownLatch coordinationInTransactionLatch = new CountDownLatch(THREAD_COUNT);
 	private CountDownLatch coordinationEndLatch = new CountDownLatch(THREAD_COUNT);
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		ProgramBuilder builder = new ProgramBuilder("test", ProgramBuilder._X86, this);
 		program = builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		program.release(this);
 	}

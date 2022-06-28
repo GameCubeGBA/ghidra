@@ -39,7 +39,6 @@ import ghidra.framework.model.DomainFile;
 import ghidra.framework.model.DomainFolder;
 import ghidra.framework.options.Options;
 import ghidra.framework.store.LockException;
-import ghidra.program.database.*;
 import ghidra.program.database.external.ExternalManagerDB;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressSet;

@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.app.util.bin.format.dwarf4.*;
 import ghidra.program.model.data.*;

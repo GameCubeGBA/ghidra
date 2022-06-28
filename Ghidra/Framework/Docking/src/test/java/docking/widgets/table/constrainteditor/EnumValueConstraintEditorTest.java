@@ -23,8 +23,8 @@ import java.util.*;
 
 import javax.swing.JCheckBox;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import docking.test.AbstractDockingTest;
 import docking.widgets.table.constraint.EnumColumnConstraint;
@@ -54,7 +54,7 @@ public class EnumValueConstraintEditorTest extends AbstractDockingTest {
 	private EnumColumnConstraint<TestEnum> constraint;
 	private EnumConstraintEditor<TestEnum> editor;
 
-	@Before
+	@BeforeEach
 	public void setup() {
 		constraint = new EnumColumnConstraint<>(TestEnum.class, Collections.emptySet());
 		editor = (EnumConstraintEditor<TestEnum>) constraint.getEditor(null);

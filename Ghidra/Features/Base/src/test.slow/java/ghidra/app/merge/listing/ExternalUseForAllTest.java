@@ -24,7 +24,7 @@ import javax.swing.AbstractButton;
 import javax.swing.JCheckBox;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.program.database.*;
 import ghidra.program.model.address.Address;

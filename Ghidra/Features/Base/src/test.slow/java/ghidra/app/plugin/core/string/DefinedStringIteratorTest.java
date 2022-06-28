@@ -20,8 +20,6 @@ import static org.junit.Assert.*;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-import org.junit.*;
-
 import ghidra.app.cmd.data.CreateDataCmd;
 import ghidra.program.database.ProgramDB;
 import ghidra.program.model.address.Address;
@@ -29,6 +27,8 @@ import ghidra.program.model.data.*;
 import ghidra.program.util.string.FoundString;
 import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
 import ghidra.test.ToyProgramBuilder;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DefinedStringIteratorTest extends AbstractGhidraHeadlessIntegrationTest {
 
@@ -39,7 +39,7 @@ public class DefinedStringIteratorTest extends AbstractGhidraHeadlessIntegration
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		ToyProgramBuilder builder = new ToyProgramBuilder("TestGhidraSearches", false);

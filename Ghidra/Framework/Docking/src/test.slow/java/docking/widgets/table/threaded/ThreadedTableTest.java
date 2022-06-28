@@ -31,8 +31,6 @@ import java.util.regex.Pattern;
 import javax.swing.JComponent;
 import javax.swing.event.TableModelEvent;
 
-import org.junit.*;
-
 import docking.DockingUtils;
 import docking.widgets.AutoLookup;
 import docking.widgets.filter.*;
@@ -41,6 +39,8 @@ import docking.widgets.table.ColumnSortState.SortDirection;
 import ghidra.docking.spy.SpyEventRecorder;
 import ghidra.util.Msg;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ThreadedTableTest extends AbstractThreadedTableTest {
 
@@ -54,7 +54,7 @@ public class ThreadedTableTest extends AbstractThreadedTableTest {
 	private ThreadedTableModelListener spyLoadListener = new SpyTableModelLIstener();
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		super.setUp();

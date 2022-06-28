@@ -24,8 +24,6 @@ import java.awt.Window;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
-import org.junit.*;
-
 import docking.action.DockingActionIf;
 import ghidra.app.events.ProgramSelectionPluginEvent;
 import ghidra.app.plugin.core.codebrowser.CodeBrowserPlugin;
@@ -41,6 +39,9 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.util.ProgramSelection;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class MnemonicSearchPluginTest extends AbstractGhidraHeadedIntegrationTest {
 	private TestEnv env;
@@ -52,7 +53,7 @@ public class MnemonicSearchPluginTest extends AbstractGhidraHeadedIntegrationTes
 	private DockingActionIf searchMnemonicOperandsConstAction;
 	private CodeBrowserPlugin cb;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -87,7 +88,7 @@ public class MnemonicSearchPluginTest extends AbstractGhidraHeadedIntegrationTes
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

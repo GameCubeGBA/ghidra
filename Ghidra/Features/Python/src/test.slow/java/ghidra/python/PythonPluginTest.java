@@ -17,13 +17,14 @@ package ghidra.python;
 
 import static org.junit.Assert.*;
 
-import org.junit.*;
-
 import ghidra.app.plugin.core.osgi.BundleHost;
 import ghidra.app.script.GhidraScriptUtil;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests the Python Plugin functionality.
@@ -34,7 +35,7 @@ public class PythonPluginTest extends AbstractGhidraHeadedIntegrationTest {
 	private PluginTool tool;
 	private PythonPlugin plugin;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -43,7 +44,7 @@ public class PythonPluginTest extends AbstractGhidraHeadedIntegrationTest {
 		plugin = env.getPlugin(PythonPlugin.class);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		GhidraScriptUtil.dispose();
 		env.dispose();

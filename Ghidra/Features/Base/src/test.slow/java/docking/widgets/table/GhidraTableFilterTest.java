@@ -21,8 +21,6 @@ import java.util.List;
 
 import javax.swing.JComponent;
 
-import org.junit.*;
-
 import docking.*;
 import docking.widgets.filter.*;
 import docking.widgets.table.model.DirData;
@@ -30,6 +28,9 @@ import docking.widgets.table.model.TestDataModel;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.DummyTool;
 import ghidra.util.table.GhidraTable;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class GhidraTableFilterTest extends AbstractGhidraHeadedIntegrationTest {
 	private static final int TOTAL_TABLE_ROWS = 12;
@@ -43,7 +44,7 @@ public class GhidraTableFilterTest extends AbstractGhidraHeadedIntegrationTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		model = new TestDataModel("filterTestDirList.txt");
 		table = new GhidraTable(model);
@@ -56,7 +57,7 @@ public class GhidraTableFilterTest extends AbstractGhidraHeadedIntegrationTest {
 		winMgr.setVisible(true);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		winMgr.dispose();
 		filterPanel.dispose();

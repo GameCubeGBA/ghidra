@@ -20,13 +20,14 @@ import static org.junit.Assert.*;
 import java.io.*;
 import java.util.Arrays;
 
-import org.junit.*;
-
 import generic.test.AbstractGenericTest;
 import ghidra.app.util.bin.ObfuscatedInputStream;
 import ghidra.formats.gfilesystem.FileCache.FileCacheEntry;
 import ghidra.formats.gfilesystem.FileCache.FileCacheEntryBuilder;
 import ghidra.util.DateUtils;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import utilities.util.FileUtilities;
 
 public class FileCacheTest extends AbstractGenericTest {
@@ -34,12 +35,12 @@ public class FileCacheTest extends AbstractGenericTest {
 	private FileCache cache;
 	private File cacheDir;
 
-	@Before
+	@BeforeEach
 	public void setup() throws IOException {
 		cacheDir = createTempDirectory("FileCacheTest");
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		// keep the cleaner thread from cross-contaminating tests
 		waitForCleanup();

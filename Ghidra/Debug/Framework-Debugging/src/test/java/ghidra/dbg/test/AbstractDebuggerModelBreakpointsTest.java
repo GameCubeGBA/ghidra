@@ -22,7 +22,7 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.dbg.DebuggerModelListener;
 import ghidra.dbg.target.*;

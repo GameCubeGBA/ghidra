@@ -21,7 +21,7 @@ import java.awt.*;
 
 import javax.swing.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.app.merge.*;
 import ghidra.framework.options.Options;

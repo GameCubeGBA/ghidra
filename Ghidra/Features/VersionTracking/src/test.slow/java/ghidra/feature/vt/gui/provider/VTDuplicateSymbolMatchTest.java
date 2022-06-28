@@ -30,7 +30,9 @@ import java.util.List;
 
 import javax.swing.JFrame;
 
-import org.junit.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class VTDuplicateSymbolMatchTest extends AbstractGhidraHeadedIntegrationTest {
 	private VTTestEnv env;
@@ -42,7 +44,7 @@ public class VTDuplicateSymbolMatchTest extends AbstractGhidraHeadedIntegrationT
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		env = new VTTestEnv();
@@ -59,7 +61,7 @@ public class VTDuplicateSymbolMatchTest extends AbstractGhidraHeadedIntegrationT
 		toolFrame.setSize(800, 800);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

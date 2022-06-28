@@ -19,8 +19,8 @@ import static org.junit.Assert.*;
 
 import java.nio.ByteBuffer;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import ghidra.app.plugin.core.debug.gui.AbstractGhidraHeadedDebuggerGUITest;
 import ghidra.app.plugin.core.debug.gui.listing.DebuggerListingPlugin;
@@ -41,7 +41,7 @@ public class DebuggerTraceViewDiffPluginTest extends AbstractGhidraHeadedDebugge
 
 	protected DebuggerListingProvider listingProvider;
 
-	@Before
+	@BeforeEach
 	public void setUpTraceViewDiffPluginTest() throws Exception {
 		traceDiffPlugin = addPlugin(tool, DebuggerTraceViewDiffPlugin.class);
 		listingPlugin = addPlugin(tool, DebuggerListingPlugin.class);

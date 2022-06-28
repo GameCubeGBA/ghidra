@@ -21,9 +21,10 @@ import static org.junit.Assert.assertTrue;
 import java.io.*;
 import java.util.Arrays;
 
-import org.junit.*;
-
 import generic.test.AbstractGenericTest;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import utilities.util.FileUtilities;
 
 public class LocalBufferFileTest extends AbstractGenericTest {
@@ -36,14 +37,14 @@ public class LocalBufferFileTest extends AbstractGenericTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		FileUtilities.deleteDir(testDir);
 		testDir.mkdir();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		FileUtilities.deleteDir(testDir);
 

@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 import java.util.Collection;
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.ActionContext;
 import ghidra.app.cmd.refs.RemoveReferenceCmd;

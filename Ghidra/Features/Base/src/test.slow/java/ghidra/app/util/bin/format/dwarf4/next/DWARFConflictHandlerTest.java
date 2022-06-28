@@ -17,13 +17,14 @@ package ghidra.app.util.bin.format.dwarf4.next;
 
 import static org.junit.Assert.*;
 
-import org.junit.*;
-
 import ghidra.program.database.ProgramBuilder;
 import ghidra.program.database.ProgramDB;
 import ghidra.program.model.data.*;
 import ghidra.program.model.data.DataTypeConflictHandler.ConflictResult;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link DataTypeConflictHandler conflict handler} stuff.
@@ -49,14 +50,14 @@ public class DWARFConflictHandlerTest extends AbstractGhidraHeadedIntegrationTes
 		program.endTransaction(transactionID, true);
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		program = createDefaultProgram(testName.getMethodName(), ProgramBuilder._TOY, this);
 		dataMgr = program.getDataTypeManager();
 		startTransaction();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		endTransaction();
 		program.release(this);

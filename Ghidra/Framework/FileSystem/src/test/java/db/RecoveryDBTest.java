@@ -19,14 +19,15 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 
-import org.junit.*;
-
 import db.buffers.BufferFile;
 import generic.test.AbstractGenericTest;
 import ghidra.framework.store.DatabaseItem;
 import ghidra.framework.store.FolderItem;
 import ghidra.framework.store.local.LocalFileSystem;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import utilities.util.FileUtilities;
 
 public class RecoveryDBTest extends AbstractGenericTest {
@@ -50,7 +51,7 @@ public class RecoveryDBTest extends AbstractGenericTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		FileUtilities.deleteDir(testDir);
@@ -59,7 +60,7 @@ public class RecoveryDBTest extends AbstractGenericTest {
 			LocalFileSystem.getLocalFileSystem(testDir.getPath(), true, false, false, true);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		fileSystem.dispose();
 		FileUtilities.deleteDir(testDir);

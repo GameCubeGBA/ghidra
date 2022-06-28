@@ -23,7 +23,7 @@ import java.util.Set;
 import javax.swing.ImageIcon;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 import resources.ResourceManager;

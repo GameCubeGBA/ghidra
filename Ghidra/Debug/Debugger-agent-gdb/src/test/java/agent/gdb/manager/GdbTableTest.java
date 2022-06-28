@@ -20,12 +20,11 @@ import static org.junit.Assert.*;
 import java.util.*;
 import java.util.function.Consumer;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 
-import agent.gdb.manager.GdbTable;
 import agent.gdb.manager.parsing.GdbMiParser.GdbMiFieldList;
 
 public class GdbTableTest {

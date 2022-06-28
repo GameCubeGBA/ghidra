@@ -25,8 +25,6 @@ import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-import org.junit.*;
-
 import ghidra.app.plugin.assembler.Assembler;
 import ghidra.app.plugin.assembler.Assemblers;
 import ghidra.app.plugin.processors.sleigh.SleighLanguage;
@@ -47,6 +45,9 @@ import ghidra.program.model.symbol.SourceType;
 import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
 import ghidra.util.database.UndoableTransaction;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class EmuLinuxAmd64SyscallUseropLibraryTest extends AbstractGhidraHeadlessIntegrationTest {
 	protected final class LinuxAmd64PcodeEmulator extends PcodeEmulator {
@@ -102,7 +103,7 @@ public class EmuLinuxAmd64SyscallUseropLibraryTest extends AbstractGhidraHeadles
 				.setCallingConvention(SYSCALL_CONVENTION_NAME);
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		program = createDefaultProgram("HelloWorld", "x86:LE:64:default", "gcc", this);
 		language = (SleighLanguage) program.getLanguage();
@@ -146,7 +147,7 @@ public class EmuLinuxAmd64SyscallUseropLibraryTest extends AbstractGhidraHeadles
 		asm = Assemblers.getAssembler(program);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		if (program != null) {
 			program.release(this);

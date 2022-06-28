@@ -17,8 +17,6 @@ package ghidra.app.cmd.data;
 
 import static org.junit.Assert.*;
 
-import org.junit.*;
-
 import generic.test.AbstractGenericTest;
 import ghidra.framework.cmd.Command;
 import ghidra.program.database.ProgramBuilder;
@@ -27,6 +25,9 @@ import ghidra.program.model.address.AddressSpace;
 import ghidra.program.model.data.*;
 import ghidra.program.model.listing.Data;
 import ghidra.program.model.listing.Program;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * 
@@ -46,7 +47,7 @@ public class CreateArrayInStructureCmdTest extends AbstractGenericTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 //		env = new TestEnv();
 		program = buildProgram();
@@ -59,7 +60,7 @@ public class CreateArrayInStructureCmdTest extends AbstractGenericTest {
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 //		env.release(program);
 //		env.dispose();

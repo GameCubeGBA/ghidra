@@ -22,8 +22,6 @@ import java.nio.file.Path;
 import java.util.Deque;
 import java.util.LinkedList;
 
-import org.junit.*;
-
 import ghidra.base.project.GhidraProject;
 import ghidra.framework.main.FrontEndTool;
 import ghidra.framework.model.*;
@@ -32,8 +30,12 @@ import ghidra.test.*;
 import ghidra.util.Msg;
 import ghidra.util.exception.FileInUseException;
 import ghidra.util.task.ConsoleTaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
-@Ignore("Not actual tests")
+@Disabled("Not actual tests")
 public class ProjectExperimentsTest extends AbstractGhidraHeadedIntegrationTest {
 	private TestEnv env;
 
@@ -147,12 +149,12 @@ public class ProjectExperimentsTest extends AbstractGhidraHeadedIntegrationTest 
 		}
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}
@@ -184,7 +186,7 @@ public class ProjectExperimentsTest extends AbstractGhidraHeadedIntegrationTest 
 	}
 
 	@Test
-	@Ignore("Just an experiment, anyway. Dev -> Batch, in actual nightly tests")
+	@Disabled("Just an experiment, anyway. Dev -> Batch, in actual nightly tests")
 	public void testCreateProgramFile() throws Exception {
 		RecordingDomainFolderListener rdfl = new RecordingDomainFolderListener();
 		ProjectData data = env.getProject().getProjectData();

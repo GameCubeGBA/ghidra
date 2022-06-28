@@ -19,8 +19,6 @@ import static org.junit.Assert.assertEquals;
 
 import javax.swing.JLabel;
 
-import org.junit.*;
-
 import ghidra.app.plugin.core.codebrowser.CodeBrowserPlugin;
 import ghidra.app.plugin.core.navigation.NextPrevAddressPlugin;
 import ghidra.app.services.ProgramManager;
@@ -30,6 +28,9 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class InstructionInfoTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -50,7 +51,7 @@ public class InstructionInfoTest extends AbstractGhidraHeadedIntegrationTest {
 		return program.getAddressFactory().getAddress(address);
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -73,7 +74,7 @@ public class InstructionInfoTest extends AbstractGhidraHeadedIntegrationTest {
 		cb = getPlugin(tool, CodeBrowserPlugin.class);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		builder.dispose();
 		env.dispose();

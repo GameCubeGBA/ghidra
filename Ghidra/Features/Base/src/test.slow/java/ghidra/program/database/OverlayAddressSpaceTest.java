@@ -17,13 +17,14 @@ package ghidra.program.database;
 
 import static org.junit.Assert.*;
 
-import org.junit.*;
-
 import ghidra.program.model.address.*;
 import ghidra.program.model.mem.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class OverlayAddressSpaceTest extends AbstractGhidraHeadedIntegrationTest {
 	private TestEnv env;
@@ -33,13 +34,13 @@ public class OverlayAddressSpaceTest extends AbstractGhidraHeadedIntegrationTest
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		env = new TestEnv();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		if (program != null) {

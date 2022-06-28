@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 import java.math.BigInteger;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.pcode.floatformat.FloatFormat;
 import ghidra.pcode.floatformat.FloatFormatFactory;

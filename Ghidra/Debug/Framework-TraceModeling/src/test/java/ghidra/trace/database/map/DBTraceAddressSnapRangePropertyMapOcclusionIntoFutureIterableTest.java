@@ -22,7 +22,6 @@ import java.util.*;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.junit.*;
 
 import db.DBHandle;
 import db.DBRecord;
@@ -38,6 +37,9 @@ import ghidra.util.database.*;
 import ghidra.util.database.annot.*;
 import ghidra.util.exception.VersionException;
 import ghidra.util.task.ConsoleTaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DBTraceAddressSnapRangePropertyMapOcclusionIntoFutureIterableTest
 		extends AbstractGhidraHeadlessIntegrationTest {
@@ -150,7 +152,7 @@ public class DBTraceAddressSnapRangePropertyMapOcclusionIntoFutureIterableTest
 		return new DBTraceAddressSnapRangePropertyMapOcclusionIntoFutureIterable<>(space, tasr);
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws IOException, VersionException {
 		toy = DefaultLanguageService.getLanguageService()
 				.getLanguage(
@@ -163,7 +165,7 @@ public class DBTraceAddressSnapRangePropertyMapOcclusionIntoFutureIterableTest
 		}
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		obj.release(this);
 	}

@@ -23,7 +23,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.dbg.agent.*;
 import ghidra.dbg.target.*;

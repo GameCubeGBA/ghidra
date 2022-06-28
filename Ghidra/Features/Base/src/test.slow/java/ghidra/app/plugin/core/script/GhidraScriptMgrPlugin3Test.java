@@ -23,7 +23,7 @@ import java.io.IOException;
 
 import javax.swing.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.KeyEntryTextField;
 import docking.action.DockingActionIf;

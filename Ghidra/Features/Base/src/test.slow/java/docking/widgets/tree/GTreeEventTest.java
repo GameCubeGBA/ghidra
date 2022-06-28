@@ -25,8 +25,8 @@ import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
 import javax.swing.tree.TreePath;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import docking.DockingWindowManager;
 import docking.test.AbstractDockingTest;
@@ -38,7 +38,7 @@ public class GTreeEventTest extends AbstractDockingTest {
 
 	private List<TreeEvent> events = new ArrayList<>();
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		GTreeNode root = new TestRootNode();
 		gTree = new GTree(root);

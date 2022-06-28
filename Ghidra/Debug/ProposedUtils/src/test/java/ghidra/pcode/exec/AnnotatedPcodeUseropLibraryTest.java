@@ -22,7 +22,7 @@ import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodHandles.Lookup;
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.app.plugin.processors.sleigh.SleighException;
 import ghidra.app.plugin.processors.sleigh.SleighLanguage;

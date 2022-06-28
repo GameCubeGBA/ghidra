@@ -21,8 +21,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.*;
-
 import db.Field;
 import db.LongField;
 import db.util.ErrorHandler;
@@ -35,6 +33,9 @@ import ghidra.test.TestEnv;
 import ghidra.util.Lock;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public abstract class AbstractAddressRangeMapTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -49,7 +50,7 @@ public abstract class AbstractAddressRangeMapTest extends AbstractGhidraHeadedIn
 	protected AddressRangeMapDB map;
 	protected Address spaceMax;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 
@@ -67,7 +68,7 @@ public abstract class AbstractAddressRangeMapTest extends AbstractGhidraHeadedIn
 
 	protected abstract ProgramDB createProgram() throws IOException;
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		program.endTransaction(txId, false);
 		if (program != null) {

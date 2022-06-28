@@ -20,8 +20,8 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.concurrent.TimeUnit;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import ghidra.dbg.model.TestDebuggerModelBuilder;
 import ghidra.dbg.target.*;
@@ -78,49 +78,49 @@ public class DebugModelConventionsTest {
 	}
 
 	@Test
-	@Ignore("TODO")
+	@Disabled("TODO")
 	public void testNearestAncestor() throws Exception {
 		TODO();
 	}
 
 	@Test
-	@Ignore("TODO")
+	@Disabled("TODO")
 	public void testCollectAncestors() throws Exception {
 		TODO();
 	}
 
 	@Test
-	@Ignore("TODO")
+	@Disabled("TODO")
 	public void testCollectSucccessorElements() throws Exception {
 		TODO();
 	}
 
 	@Test
-	@Ignore("TODO")
+	@Disabled("TODO")
 	public void testIsExecution() throws Exception {
 		TODO();
 	}
 
 	@Test
-	@Ignore("TODO")
+	@Disabled("TODO")
 	public void testFindExecution() throws Exception {
 		TODO();
 	}
 
 	@Test
-	@Ignore("TODO")
+	@Disabled("TODO")
 	public void testSubTreeListenerAdapter() throws Exception {
 		TODO(); // Possibly many tests. Separate class?
 	}
 
 	@Test
-	@Ignore("TODO")
+	@Disabled("TODO")
 	public void testTrackAccessibility() throws Exception {
 		TODO();
 	}
 
 	@Test
-	@Ignore("TODO")
+	@Disabled("TODO")
 	public void testRequestFocus() throws Exception {
 		TODO();
 	}

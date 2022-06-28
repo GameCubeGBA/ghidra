@@ -21,8 +21,8 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.Set;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.experimental.categories.Category;
 
 import com.google.common.collect.Range;
@@ -46,7 +46,7 @@ public class DebuggerThreadsProviderTest extends AbstractGhidraHeadedDebuggerGUI
 	protected TraceThread thread1;
 	protected TraceThread thread2;
 
-	@Before
+	@BeforeEach
 	public void setUpThreadsProviderTest() throws Exception {
 		threadsPlugin = addPlugin(tool, DebuggerThreadsPlugin.class);
 		threadsProvider = waitForComponentProvider(DebuggerThreadsProvider.class);

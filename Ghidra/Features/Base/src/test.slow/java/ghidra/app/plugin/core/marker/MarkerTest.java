@@ -24,8 +24,6 @@ import java.awt.event.MouseEvent;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
-import org.junit.*;
-
 import docking.ActionContext;
 import docking.DialogComponentProvider;
 import docking.action.DockingActionIf;
@@ -53,6 +51,9 @@ import ghidra.program.util.ProgramLocation;
 import ghidra.program.util.ProgramSelection;
 import ghidra.test.*;
 import ghidra.util.Msg;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class MarkerTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -66,7 +67,7 @@ public class MarkerTest extends AbstractGhidraHeadedIntegrationTest {
 	private MarkerService markerService;
 	private CodeViewerService codeViewerService;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		setupProgram();
@@ -76,7 +77,7 @@ public class MarkerTest extends AbstractGhidraHeadedIntegrationTest {
 		setupTool(tool);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}

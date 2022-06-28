@@ -20,8 +20,8 @@ import static org.junit.Assert.*;
 import java.awt.Component;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import docking.test.AbstractDockingTest;
 import docking.widgets.DropDownTextField;
@@ -38,7 +38,7 @@ public class StringConstraintEditorTest extends AbstractDockingTest {
 	String[] columnData = new String[] { "foo", "foot", "football", "base", "basement" };
 
 	@SuppressWarnings("unchecked")
-	@Before
+	@BeforeEach
 	public void setup() throws Exception {
 		constraint = new StringStartsWithColumnConstraint("");
 		editor = constraint.getEditor(new TestColumnData());

@@ -23,8 +23,8 @@ import java.io.File;
 
 import javax.swing.JTable;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import docking.widgets.dialogs.NumberInputDialog;
 import ghidra.program.model.data.*;
@@ -36,7 +36,7 @@ import ghidra.program.model.symbol.SourceType;
 public class StructureEditorLockedCellEditTest extends AbstractStructureEditorTest {
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		File dir = getDebugFileDirectory();

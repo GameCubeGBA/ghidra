@@ -23,7 +23,7 @@ import java.util.concurrent.CompletableFuture;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.Unique;
 import ghidra.async.AsyncTestUtils;

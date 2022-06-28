@@ -20,8 +20,6 @@ import static org.junit.Assert.*;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
-import org.junit.*;
-
 import docking.widgets.fieldpanel.Layout;
 import docking.widgets.fieldpanel.support.RowColLocation;
 import ghidra.GhidraOptions;
@@ -43,6 +41,9 @@ import ghidra.program.model.symbol.SourceType;
 import ghidra.program.util.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ListingPanelTest extends AbstractGhidraHeadedIntegrationTest {
 	private TestEnv env;
@@ -54,7 +55,7 @@ public class ListingPanelTest extends AbstractGhidraHeadedIntegrationTest {
 	private CodeViewerService cvs;
 	private ListingModel listingModel;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -71,7 +72,7 @@ public class ListingPanelTest extends AbstractGhidraHeadedIntegrationTest {
 		return listingModel.getLayout(addr, false);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}

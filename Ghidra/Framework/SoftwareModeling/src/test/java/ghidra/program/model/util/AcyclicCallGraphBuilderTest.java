@@ -20,7 +20,7 @@ import static ghidra.util.task.TaskMonitorAdapter.DUMMY_MONITOR;
 import java.util.*;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.program.model.*;

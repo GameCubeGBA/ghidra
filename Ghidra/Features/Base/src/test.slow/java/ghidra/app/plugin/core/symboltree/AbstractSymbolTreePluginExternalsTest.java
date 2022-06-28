@@ -21,8 +21,8 @@ import java.awt.Component;
 
 import javax.swing.*;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 import docking.AbstractErrDialog;
 import docking.action.DockingActionIf;
@@ -87,7 +87,7 @@ public abstract class AbstractSymbolTreePluginExternalsTest
 	protected DockingActionIf editExternalLocationAction;
 	protected SymbolTreeTestUtils util;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		env = new TestEnv();
@@ -107,7 +107,7 @@ public abstract class AbstractSymbolTreePluginExternalsTest
 		env.showTool();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		closeProgram();
 		env.dispose();

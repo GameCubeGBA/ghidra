@@ -24,7 +24,7 @@ import java.util.List;
 import javax.swing.*;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.widgets.label.GHtmlLabel;
 import ghidra.app.util.html.diff.*;

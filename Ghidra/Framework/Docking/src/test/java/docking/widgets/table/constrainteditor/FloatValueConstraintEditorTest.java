@@ -26,8 +26,8 @@ import javax.swing.JSpinner;
 import javax.swing.JSpinner.NumberEditor;
 import javax.swing.JTextField;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import docking.test.AbstractDockingTest;
 import docking.widgets.table.constraint.ColumnConstraint;
@@ -41,7 +41,7 @@ public class FloatValueConstraintEditorTest extends AbstractDockingTest {
 	private ColumnConstraintEditor<Float> editor;
 	private JTextField textField;
 
-	@Before
+	@BeforeEach
 	public void setup() {
 		constraint = findFloatConstraint();
 		editor = constraint.getEditor(null);

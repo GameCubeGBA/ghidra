@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGTest;
 import ghidra.docking.settings.Settings;

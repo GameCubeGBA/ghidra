@@ -23,7 +23,6 @@ import java.nio.ByteBuffer;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import org.junit.*;
 import org.junit.experimental.categories.Category;
 
 import com.google.common.collect.Range;
@@ -50,6 +49,9 @@ import ghidra.trace.model.memory.TraceMemoryRegisterSpace;
 import ghidra.trace.model.thread.TraceThread;
 import ghidra.util.database.UndoableTransaction;
 import ghidra.util.exception.DuplicateNameException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 @Category(NightlyCategory.class) // this may actually be an @PortSensitive test
 public class DebuggerRegistersProviderTest extends AbstractGhidraHeadedDebuggerGUITest {
@@ -73,7 +75,7 @@ public class DebuggerRegistersProviderTest extends AbstractGhidraHeadedDebuggerG
 
 	protected StructureDataType r0Struct;
 
-	@Before
+	@BeforeEach
 	public void setUpRegistersProviderTest() throws Exception {
 		registersPlugin = addPlugin(tool, DebuggerRegistersPlugin.class);
 		registersProvider = waitForComponentProvider(DebuggerRegistersProvider.class);
@@ -620,7 +622,7 @@ public class DebuggerRegistersProviderTest extends AbstractGhidraHeadedDebuggerG
 	}
 
 	@Test
-	@Ignore("DBTrace not well tested with type replacement, yet")
+	@Disabled("DBTrace not well tested with type replacement, yet")
 	public void testActivateThenReplaceType() throws Exception {
 		TODO();
 		// NOTE: could get complicated if size changes

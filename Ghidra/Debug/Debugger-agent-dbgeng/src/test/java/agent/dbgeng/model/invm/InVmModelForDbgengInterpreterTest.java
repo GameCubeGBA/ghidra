@@ -15,8 +15,8 @@
  */
 package agent.dbgeng.model.invm;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import agent.dbgeng.model.AbstractModelForDbgengInterpreterTest;
 import ghidra.dbg.error.DebuggerModelTerminatingException;
@@ -28,14 +28,14 @@ public class InVmModelForDbgengInterpreterTest extends AbstractModelForDbgengInt
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testAttachViaInterpreterShowsInProcessContainer() throws Throwable {
 		super.testAttachViaInterpreterShowsInProcessContainer();
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test(expected = DebuggerModelTerminatingException.class)
 	public void testExecuteQuit() throws Throwable {
 		// Different behavior for dbg clients vice gdb

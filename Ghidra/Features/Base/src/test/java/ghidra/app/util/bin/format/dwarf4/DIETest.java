@@ -19,8 +19,6 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 
-import org.junit.*;
-
 import generic.test.AbstractGenericTest;
 import ghidra.app.util.bin.format.dwarf4.attribs.DWARFAttributeFactory;
 import ghidra.app.util.bin.format.dwarf4.encoding.*;
@@ -31,6 +29,8 @@ import ghidra.program.model.listing.Program;
 import ghidra.test.ToyProgramBuilder;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Testing the DIECreator, which is used in other tests.
@@ -40,7 +40,7 @@ public class DIETest extends AbstractGenericTest {
 	DWARFAttributeFactory attribFactory;
 	MockDWARFCompilationUnit cu;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		ToyProgramBuilder builder = new ToyProgramBuilder("Test", true);

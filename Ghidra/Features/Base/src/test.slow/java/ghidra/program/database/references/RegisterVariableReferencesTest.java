@@ -17,8 +17,6 @@ package ghidra.program.database.references;
 
 import static org.junit.Assert.*;
 
-import org.junit.*;
-
 import ghidra.program.database.ProgramBuilder;
 import ghidra.program.database.ProgramDB;
 import ghidra.program.model.address.*;
@@ -28,6 +26,9 @@ import ghidra.program.model.listing.*;
 import ghidra.program.model.symbol.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class RegisterVariableReferencesTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -46,7 +47,7 @@ public class RegisterVariableReferencesTest extends AbstractGhidraHeadedIntegrat
 		super();
 	}
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
 		program = createDefaultProgram("Test", ProgramBuilder._X86, this);
 		regA = program.getRegister("AX");
@@ -61,7 +62,7 @@ public class RegisterVariableReferencesTest extends AbstractGhidraHeadedIntegrat
 			TaskMonitorAdapter.DUMMY_MONITOR, false);
 	}
 
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
 		program.endTransaction(transactionID, true);
 		program.release(this);

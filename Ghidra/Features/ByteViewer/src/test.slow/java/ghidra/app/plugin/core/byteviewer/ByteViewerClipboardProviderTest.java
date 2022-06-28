@@ -21,8 +21,8 @@ import static org.junit.Assert.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import docking.widgets.OptionDialog;
 import ghidra.app.util.ByteCopier;
@@ -53,7 +53,7 @@ public class ByteViewerClipboardProviderTest extends AbstractGhidraHeadedIntegra
 	private Program program;
 	private ByteViewerClipboardProvider clipboardProvider;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		program = createProgram();

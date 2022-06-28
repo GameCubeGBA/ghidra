@@ -24,7 +24,7 @@ import java.nio.channels.CompletionHandler;
 import java.util.Arrays;
 import java.util.concurrent.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.async.*;
 import ghidra.dbg.gadp.protocol.Gadp;

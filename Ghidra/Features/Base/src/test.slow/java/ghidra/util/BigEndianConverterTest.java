@@ -20,9 +20,9 @@ import static org.junit.Assert.*;
 import java.math.BigInteger;
 import java.util.Arrays;
 
-import org.junit.*;
-
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * 
@@ -44,7 +44,7 @@ public class BigEndianConverterTest extends AbstractGhidraHeadedIntegrationTest 
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		b = new byte[12];
 		for (int i = 0; i < b.length; i++) {

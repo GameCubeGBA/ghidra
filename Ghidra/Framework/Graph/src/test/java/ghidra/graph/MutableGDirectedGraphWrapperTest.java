@@ -17,7 +17,7 @@ package ghidra.graph;
 
 import java.util.Collection;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class MutableGDirectedGraphWrapperTest extends AbstractGraphAlgorithmsTest {
 

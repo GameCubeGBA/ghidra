@@ -17,8 +17,6 @@ package ghidra.framework.project;
 
 import static org.junit.Assert.*;
 
-import org.junit.*;
-
 import ghidra.framework.model.*;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.framework.protocol.ghidra.GhidraURL;
@@ -26,6 +24,9 @@ import ghidra.program.database.ProgramBuilder;
 import ghidra.program.model.listing.Program;
 import ghidra.test.*;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * test for creating a new empty tool with the new front end
@@ -46,7 +47,7 @@ public class CreateDomainObjectTest extends AbstractGhidraHeadedIntegrationTest 
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		testDir = getTestDirectoryPath();
@@ -55,7 +56,7 @@ public class CreateDomainObjectTest extends AbstractGhidraHeadedIntegrationTest 
 		project = ProjectTestUtils.getProject(testDir, PROJECT_NAME1);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (project != null) {
 			project.close();

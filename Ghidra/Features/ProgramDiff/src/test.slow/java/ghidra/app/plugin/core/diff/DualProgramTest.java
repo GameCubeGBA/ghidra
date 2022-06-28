@@ -25,7 +25,7 @@ import javax.swing.JComboBox;
 import javax.swing.JTree;
 import javax.swing.tree.TreePath;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.ActionContext;
 import docking.DialogComponentProvider;

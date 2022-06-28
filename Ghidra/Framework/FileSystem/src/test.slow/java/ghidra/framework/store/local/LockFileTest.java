@@ -19,10 +19,11 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 
-import org.junit.*;
-
 import generic.test.AbstractGenericTest;
 import ghidra.util.Msg;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * 
@@ -50,7 +51,7 @@ public class LockFileTest extends AbstractGenericTest {
 	/*
 	 * @see TestCase#setUp()
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		LOCKFILE.delete();
@@ -59,7 +60,7 @@ public class LockFileTest extends AbstractGenericTest {
 	/*
 	 * @see TestCase#tearDown()
 	 */
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		LOCKFILE.delete();
 

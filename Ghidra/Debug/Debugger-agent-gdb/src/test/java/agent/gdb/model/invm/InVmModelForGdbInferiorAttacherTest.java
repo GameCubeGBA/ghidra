@@ -17,8 +17,8 @@ package agent.gdb.model.invm;
 
 import static org.junit.Assume.assumeFalse;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import agent.gdb.model.AbstractModelForGdbInferiorAttacherTest;
 import ghidra.util.Msg;
@@ -31,7 +31,7 @@ public class InVmModelForGdbInferiorAttacherTest extends AbstractModelForGdbInfe
 	}
 
 	@Override
-	@Ignore("Some hang. I don't know why")
+	@Disabled("Some hang. I don't know why")
 	public void testAttachableContainerIsWhereExpected() throws Throwable {
 		// nop
 	}
@@ -41,7 +41,7 @@ public class InVmModelForGdbInferiorAttacherTest extends AbstractModelForGdbInfe
 	 * process, it is unable to interrupt it from the opposite interpreter that resumed it.
 	 */
 	@Test
-	@Ignore("Not a real test")
+	@Disabled("Not a real test")
 	public void testRunADummy() throws Throwable {
 		assumeFalse(SystemUtilities.isInTestingBatchMode());
 

@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.After;
+import org.junit.jupiter.api.AfterEach;
 
 import ghidra.app.plugin.core.codebrowser.CodeBrowserPlugin;
 import ghidra.framework.plugintool.PluginTool;
@@ -75,7 +75,7 @@ public abstract class AbstractProgramBasedTest extends AbstractGhidraHeadedInteg
 		return env.getProgram(getProgramName());
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

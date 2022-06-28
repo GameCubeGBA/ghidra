@@ -23,7 +23,7 @@ import java.util.List;
 import javax.swing.JButton;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.action.DockingActionIf;
 import docking.widgets.OptionDialog;

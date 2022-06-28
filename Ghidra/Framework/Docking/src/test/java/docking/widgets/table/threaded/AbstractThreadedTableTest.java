@@ -27,11 +27,11 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.table.JTableHeader;
 
-import org.junit.*;
-
 import docking.DockingUtils;
 import docking.test.AbstractDockingTest;
 import docking.widgets.table.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public abstract class AbstractThreadedTableTest extends AbstractDockingTest {
 
@@ -43,7 +43,7 @@ public abstract class AbstractThreadedTableTest extends AbstractDockingTest {
 	protected GThreadedTablePanel<Long> threadedTablePanel;
 	protected volatile boolean isDisposing = false;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		model = createTestModel();
@@ -67,7 +67,7 @@ public abstract class AbstractThreadedTableTest extends AbstractDockingTest {
 		return new TestThreadedTableModelListener(model);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		isDisposing = true;
 		dispose();

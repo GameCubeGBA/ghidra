@@ -22,7 +22,7 @@ import java.math.BigInteger;
 import java.util.*;
 import java.util.Map.Entry;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.dbg.target.*;
 import ghidra.dbg.target.schema.TargetObjectSchema;

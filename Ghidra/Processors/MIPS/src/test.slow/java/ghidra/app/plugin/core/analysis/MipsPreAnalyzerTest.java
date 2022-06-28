@@ -17,8 +17,6 @@ package ghidra.app.plugin.core.analysis;
 
 import static org.junit.Assert.*;
 
-import org.junit.*;
-
 import ghidra.program.database.ProgramBuilder;
 import ghidra.program.model.address.*;
 import ghidra.program.model.lang.Register;
@@ -29,6 +27,9 @@ import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.task.TaskMonitor;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Analyzer Test for Mips Pre-Analyzer
@@ -42,7 +43,7 @@ public class MipsPreAnalyzerTest extends AbstractGhidraHeadlessIntegrationTest {
 	private Register pairBitRegister;
 	private ProgramBuilder builder;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		env = new TestEnv();
@@ -51,7 +52,7 @@ public class MipsPreAnalyzerTest extends AbstractGhidraHeadlessIntegrationTest {
 		pairBitRegister = program.getProgramContext().getRegister("PAIR_INSTRUCTION_FLAG");
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		env.dispose();

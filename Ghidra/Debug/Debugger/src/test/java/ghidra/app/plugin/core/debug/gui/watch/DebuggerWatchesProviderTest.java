@@ -22,7 +22,6 @@ import java.nio.ByteBuffer;
 import java.util.*;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.junit.*;
 
 import com.google.common.collect.Range;
 
@@ -53,6 +52,9 @@ import ghidra.trace.util.TraceRegisterUtils;
 import ghidra.util.Msg;
 import ghidra.util.database.UndoableTransaction;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DebuggerWatchesProviderTest extends AbstractGhidraHeadedDebuggerGUITest {
 
@@ -78,7 +80,7 @@ public class DebuggerWatchesProviderTest extends AbstractGhidraHeadedDebuggerGUI
 	protected TestTargetRegisterBankInThread bank;
 	protected TraceRecorder recorder;
 
-	@Before
+	@BeforeEach
 	public void setUpWatchesProviderTest() throws Exception {
 		// Do this before listing, because DebuggerListing also implements CodeViewer
 		addPlugin(tool, CodeBrowserPlugin.class);
@@ -99,7 +101,7 @@ public class DebuggerWatchesProviderTest extends AbstractGhidraHeadedDebuggerGUI
 		}
 	}
 
-	@After
+	@AfterEach
 	public void tearDownWatchesProviderTest() throws Exception {
 		for (WatchRow row : watchesProvider.watchTableModel.getModelData()) {
 			Throwable error = row.getError();

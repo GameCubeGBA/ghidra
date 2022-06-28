@@ -23,8 +23,6 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import javax.swing.*;
 
-import org.junit.*;
-
 import docking.ActionContext;
 import docking.action.DockingActionIf;
 import ghidra.app.plugin.core.byteviewer.ByteViewerPlugin;
@@ -36,6 +34,9 @@ import ghidra.program.database.ProgramBuilder;
 import ghidra.program.model.listing.Program;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ToolConnectionTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -49,7 +50,7 @@ public class ToolConnectionTest extends AbstractGhidraHeadedIntegrationTest {
 	private PluginTool tool1;
 	private PluginTool tool2;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		env.resetDefaultTools();
@@ -69,7 +70,7 @@ public class ToolConnectionTest extends AbstractGhidraHeadedIntegrationTest {
 		return p;
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (dialog != null) {
 			close(dialog);

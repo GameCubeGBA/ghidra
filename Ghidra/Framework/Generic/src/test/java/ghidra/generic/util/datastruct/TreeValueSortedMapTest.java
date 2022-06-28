@@ -22,10 +22,7 @@ import java.util.Map.Entry;
 
 import org.apache.commons.collections4.comparators.ReverseComparator;
 import org.apache.commons.lang3.ArrayUtils;
-import org.junit.Test;
-
-import ghidra.generic.util.datastruct.TreeValueSortedMap;
-import ghidra.generic.util.datastruct.ValueSortedMap;
+import org.junit.jupiter.api.Test;
 
 public class TreeValueSortedMapTest {
 	@Test

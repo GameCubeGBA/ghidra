@@ -25,8 +25,6 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import javax.swing.*;
 
-import org.junit.*;
-
 import docking.action.DockingActionIf;
 import docking.widgets.fieldpanel.support.Highlight;
 import ghidra.app.plugin.core.codebrowser.CodeBrowserPlugin;
@@ -51,6 +49,9 @@ import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitorComponent;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import utilities.util.reflection.ReflectionUtilities;
 
 public class SearchTextPlugin3Test extends AbstractGhidraHeadedIntegrationTest {
@@ -69,7 +70,7 @@ public class SearchTextPlugin3Test extends AbstractGhidraHeadedIntegrationTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -156,7 +157,7 @@ public class SearchTextPlugin3Test extends AbstractGhidraHeadedIntegrationTest {
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		runSwing(() -> tool.close());

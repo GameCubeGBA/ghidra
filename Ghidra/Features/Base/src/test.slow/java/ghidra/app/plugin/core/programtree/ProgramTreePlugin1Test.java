@@ -26,8 +26,6 @@ import javax.swing.*;
 import javax.swing.tree.DefaultTreeCellEditor;
 import javax.swing.tree.TreePath;
 
-import org.junit.*;
-
 import docking.ActionContext;
 import docking.action.DockingActionIf;
 import ghidra.app.services.GoToService;
@@ -43,6 +41,8 @@ import ghidra.program.model.symbol.SymbolTable;
 import ghidra.program.util.GroupPath;
 import ghidra.program.util.ProgramLocation;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 import resources.ResourceManager;
 
 public class ProgramTreePlugin1Test extends AbstractProgramTreePluginTest {
@@ -81,7 +81,7 @@ public class ProgramTreePlugin1Test extends AbstractProgramTreePluginTest {
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

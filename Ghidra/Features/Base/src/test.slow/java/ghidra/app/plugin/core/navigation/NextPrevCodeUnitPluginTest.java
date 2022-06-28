@@ -22,8 +22,6 @@ import java.awt.Color;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
-import org.junit.*;
-
 import docking.action.DockingActionIf;
 import docking.menu.ActionState;
 import docking.menu.MultiStateDockingAction;
@@ -40,6 +38,9 @@ import ghidra.program.model.listing.*;
 import ghidra.program.model.mem.Memory;
 import ghidra.test.*;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import resources.ResourceManager;
 
 public class NextPrevCodeUnitPluginTest extends AbstractGhidraHeadedIntegrationTest {
@@ -67,7 +68,7 @@ public class NextPrevCodeUnitPluginTest extends AbstractGhidraHeadedIntegrationT
 	}
 
 	@SuppressWarnings("unchecked") // we know that bookmarks is of type String
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		loadProgram();
@@ -88,7 +89,7 @@ public class NextPrevCodeUnitPluginTest extends AbstractGhidraHeadedIntegrationT
 		cb = env.getPlugin(CodeBrowserPlugin.class);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}

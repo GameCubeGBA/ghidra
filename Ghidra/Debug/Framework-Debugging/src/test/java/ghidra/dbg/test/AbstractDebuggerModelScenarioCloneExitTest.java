@@ -21,7 +21,7 @@ import static org.junit.Assert.assertTrue;
 import java.lang.invoke.MethodHandles;
 import java.util.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.dbg.AnnotatedDebuggerAttributeListener;
 import ghidra.dbg.DebugModelConventions;

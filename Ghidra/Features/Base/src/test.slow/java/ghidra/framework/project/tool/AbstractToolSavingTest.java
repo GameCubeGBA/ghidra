@@ -28,8 +28,8 @@ import java.util.regex.Pattern;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 import docking.ComponentProvider;
 import docking.DockingWindowManager;
@@ -57,7 +57,7 @@ public abstract class AbstractToolSavingTest extends AbstractGhidraHeadedIntegra
 	protected Dimension defaultSize;
 	protected TestEnv testEnv;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		deleteTool(DEFAULT_TEST_TOOL_NAME); // remove the old tool and its saved data
 
@@ -81,7 +81,7 @@ public abstract class AbstractToolSavingTest extends AbstractGhidraHeadedIntegra
 		testEnv.setAutoSaveEnabled(true); // this class relies on auto-saving being enabled
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		closeAllWindows();
 		exitGhidra();

@@ -19,8 +19,8 @@ import static org.junit.Assert.*;
 
 import java.math.BigInteger;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.app.util.bin.format.pdb2.pdbreader.*;
@@ -36,7 +36,7 @@ public class SymbolsTest extends AbstractGenericTest {
 	//  same value  will ensure consistent results.
 	private static Processor processor;
 
-	@BeforeClass
+	@BeforeAll
 	public static void setUp() {
 		try (DummyPdb700 dummyPdb700 = new DummyPdb700(4096, 4096, 4096, 4096)) {
 			pdb = dummyPdb700;

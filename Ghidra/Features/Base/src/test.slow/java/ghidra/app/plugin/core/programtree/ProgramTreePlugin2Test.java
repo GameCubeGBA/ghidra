@@ -22,8 +22,6 @@ import java.awt.Component;
 import javax.swing.JLabel;
 import javax.swing.tree.TreePath;
 
-import org.junit.*;
-
 import docking.ActionContext;
 import docking.action.DockingActionIf;
 import ghidra.program.database.ProgramBuilder;
@@ -31,6 +29,9 @@ import ghidra.program.database.ProgramDB;
 import ghidra.program.model.address.AddressSet;
 import ghidra.program.model.address.AddressSetView;
 import ghidra.program.model.listing.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import resources.ResourceManager;
 
 /**
@@ -44,7 +45,7 @@ public class ProgramTreePlugin2Test extends AbstractProgramTreePluginTest {
 	private DockingActionIf pasteAction;
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		super.setUp();
@@ -96,7 +97,7 @@ public class ProgramTreePlugin2Test extends AbstractProgramTreePluginTest {
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.release(program);
 		env.dispose();

@@ -46,7 +46,6 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.*;
 import org.apache.logging.log4j.core.config.Configurator;
-import org.junit.*;
 
 import docking.*;
 import docking.action.DockingAction;
@@ -61,6 +60,9 @@ import ghidra.util.Msg;
 import ghidra.util.filechooser.ExtensionFileFilter;
 import ghidra.util.filechooser.GhidraFileChooserModel;
 import ghidra.util.worker.Worker;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import util.CollectionUtils;
 import utilities.util.FileUtilities;
 
@@ -85,7 +87,7 @@ public class GhidraFileChooserTest extends AbstractDockingTest {
 	private File tempdir;
 	private File lastSelectedFile;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		homeDir = new File(System.getProperty("user.home"));
@@ -106,7 +108,7 @@ public class GhidraFileChooserTest extends AbstractDockingTest {
 		show();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		close();
 	}

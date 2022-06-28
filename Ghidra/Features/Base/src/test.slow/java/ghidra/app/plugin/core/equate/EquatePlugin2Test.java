@@ -20,8 +20,8 @@ import static org.junit.Assert.*;
 import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import docking.ComponentProvider;
 import docking.action.DockingActionIf;
@@ -60,7 +60,7 @@ public class EquatePlugin2Test extends AbstractProgramBasedTest {
 	private CodeBrowserPlugin cb;
 	private Listing listing;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		initialize();

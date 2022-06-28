@@ -20,8 +20,6 @@ import static org.junit.Assert.*;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.*;
-
 import agent.frida.model.iface1.FridaModelTargetKillable;
 import ghidra.dbg.DebugModelConventions;
 import ghidra.dbg.error.DebuggerIllegalArgumentException;
@@ -30,6 +28,9 @@ import ghidra.dbg.target.TargetMethod.TargetParameterMap;
 import ghidra.dbg.test.AbstractDebuggerModelAttacherTest;
 import ghidra.dbg.util.PathUtils;
 import ghidra.util.Msg;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 public abstract class AbstractModelForFridaRootAttacherTest
 		extends AbstractDebuggerModelAttacherTest {
@@ -61,8 +62,8 @@ public abstract class AbstractModelForFridaRootAttacherTest
 	}
 
 	@Override
-	@Ignore
-	@After
+	@Disabled
+	@AfterEach
 	public void tearDownDebuggerModelTest() throws Throwable {
 		// Disabled as of 220609
 		/**
@@ -82,13 +83,13 @@ public abstract class AbstractModelForFridaRootAttacherTest
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testAttachByPidThenResumeInterrupt() throws Throwable {
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testAttachByPidThenKill() throws Throwable {
 	}
@@ -106,56 +107,56 @@ public abstract class AbstractModelForFridaRootAttacherTest
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testAttacherIsWhereExpected() throws Throwable {
 		// Disabled as of 220609
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testAttachableContainerIsWhereExpected() throws Throwable {
 		// Disabled as of 220609
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testListAttachable() throws Throwable {
 		// Disabled as of 220609
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testAttachByPid() throws Throwable {
 		// Disabled as of 220609
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testAttachByObj() throws Throwable {
 		// Disabled as of 220609
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test(expected = DebuggerIllegalArgumentException.class)
 	public void testAttachByObjBogusThrowsException() throws Throwable {
 		// Disabled as of 220609
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testAttachByPidThenDetach() throws Throwable {
 		// Disabled as of 220609
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testAttachShowsInProcessContainer() throws Throwable {
 		// Disabled as of 220609

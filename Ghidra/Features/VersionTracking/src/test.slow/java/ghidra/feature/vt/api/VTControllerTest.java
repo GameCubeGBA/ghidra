@@ -25,7 +25,9 @@ import ghidra.framework.plugintool.PluginTool;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 
-import org.junit.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class VTControllerTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -37,7 +39,7 @@ public class VTControllerTest extends AbstractGhidraHeadedIntegrationTest {
 		super();
 	}
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -47,7 +49,7 @@ public class VTControllerTest extends AbstractGhidraHeadedIntegrationTest {
 		controller = new VTControllerImpl(plugin);
 	}
 
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
 		
 		env.dispose();

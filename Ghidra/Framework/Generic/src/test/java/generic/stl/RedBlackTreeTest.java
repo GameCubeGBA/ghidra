@@ -17,8 +17,8 @@ package generic.stl;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 
@@ -30,7 +30,7 @@ public class RedBlackTreeTest extends AbstractGenericTest {
 		super();
 	}
 	
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
 		tree = new RedBlackTree<Integer, String>(new SelfComparator<Integer>(), false);
 		treeWithDups = new RedBlackTree<Integer, String>(new SelfComparator<Integer>(), true);

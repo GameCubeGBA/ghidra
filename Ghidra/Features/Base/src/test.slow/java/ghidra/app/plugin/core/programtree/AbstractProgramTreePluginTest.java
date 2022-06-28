@@ -22,7 +22,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import javax.swing.tree.TreePath;
 
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 import docking.action.DockingActionIf;
 import ghidra.app.plugin.core.codebrowser.CodeBrowserPlugin;
@@ -50,7 +50,7 @@ public abstract class AbstractProgramTreePluginTest extends AbstractGhidraHeaded
 	protected ViewManagerService viewMgrService;
 	protected CodeBrowserPlugin cbPlugin;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		env = new TestEnv();

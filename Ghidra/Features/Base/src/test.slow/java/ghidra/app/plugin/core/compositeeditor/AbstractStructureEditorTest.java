@@ -17,7 +17,7 @@ package ghidra.app.plugin.core.compositeeditor;
 
 import javax.swing.JTextField;
 
-import org.junit.After;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.Assert;
 
 import ghidra.program.model.data.*;
@@ -46,7 +46,7 @@ public abstract class AbstractStructureEditorTest extends AbstractEditorTest {
 	InsertUndefinedAction insertUndefinedAction;
 	HexNumbersAction hexNumbersAction;
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		clearActions();
 		structureModel = null;

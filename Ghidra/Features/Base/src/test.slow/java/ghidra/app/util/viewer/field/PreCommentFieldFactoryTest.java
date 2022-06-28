@@ -19,8 +19,6 @@ import static org.junit.Assert.*;
 
 import javax.swing.SwingUtilities;
 
-import org.junit.*;
-
 import docking.widgets.fieldpanel.field.FieldElement;
 import ghidra.app.plugin.core.blockmodel.BlockModelServicePlugin;
 import ghidra.app.plugin.core.codebrowser.CodeBrowserPlugin;
@@ -32,6 +30,9 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressFactory;
 import ghidra.program.model.listing.*;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class PreCommentFieldFactoryTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -45,7 +46,7 @@ public class PreCommentFieldFactoryTest extends AbstractGhidraHeadedIntegrationT
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		program = buildProgram();
@@ -71,7 +72,7 @@ public class PreCommentFieldFactoryTest extends AbstractGhidraHeadedIntegrationT
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

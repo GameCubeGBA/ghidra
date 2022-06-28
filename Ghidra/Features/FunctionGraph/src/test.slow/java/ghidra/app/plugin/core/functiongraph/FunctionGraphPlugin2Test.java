@@ -25,8 +25,6 @@ import java.util.*;
 
 import javax.swing.JComponent;
 
-import org.junit.*;
-
 import docking.action.DockingActionIf;
 import edu.uci.ics.jung.graph.Graph;
 import generic.test.TestUtils;
@@ -49,11 +47,13 @@ import ghidra.program.model.symbol.*;
 import ghidra.program.util.ProgramLocation;
 import ghidra.program.util.ProgramSelection;
 import ghidra.util.Msg;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class FunctionGraphPlugin2Test extends AbstractFunctionGraphTest {
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 

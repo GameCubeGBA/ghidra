@@ -24,13 +24,11 @@ import javax.swing.table.TableColumn;
 import org.junit.Assert;
 import org.junit.Test;
 
-import docking.*;
 import docking.action.DockingActionIf;
 import docking.widgets.table.GTable;
 import docking.widgets.table.GTableCellRenderer;
 import docking.widgets.tree.GTree;
 import docking.widgets.tree.GTreeNode;
-import ghidra.app.plugin.core.datamgr.*;
 import ghidra.app.plugin.core.datamgr.actions.FindStructuresBySizeAction;
 import ghidra.app.plugin.core.datamgr.archive.DataTypeManagerHandler;
 import ghidra.app.plugin.core.datamgr.archive.InvalidFileArchive;

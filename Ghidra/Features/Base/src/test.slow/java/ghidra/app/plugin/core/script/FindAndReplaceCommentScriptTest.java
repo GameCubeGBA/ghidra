@@ -23,8 +23,6 @@ import java.util.Iterator;
 import javax.swing.JDialog;
 import javax.swing.JTextField;
 
-import org.junit.*;
-
 import generic.jar.ResourceFile;
 import ghidra.framework.Application;
 import ghidra.framework.plugintool.PluginTool;
@@ -32,6 +30,9 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.*;
 import ghidra.program.model.mem.Memory;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class FindAndReplaceCommentScriptTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -48,7 +49,7 @@ public class FindAndReplaceCommentScriptTest extends AbstractGhidraHeadedIntegra
 	private ToyProgramBuilder builder;
 	private Listing listing;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		program = buildProgram();
@@ -82,7 +83,7 @@ public class FindAndReplaceCommentScriptTest extends AbstractGhidraHeadedIntegra
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

@@ -17,8 +17,6 @@ package ghidra.app.plugin.core.assembler;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.*;
-
 import ghidra.app.plugin.assembler.Assembler;
 import ghidra.app.plugin.assembler.Assemblers;
 import ghidra.app.plugin.core.codebrowser.CodeBrowserPlugin;
@@ -37,6 +35,9 @@ import ghidra.program.model.mem.Memory;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AssemblerPluginTest extends AbstractGhidraHeadedIntegrationTest {
 	protected TestEnv env;
@@ -54,7 +55,7 @@ public class AssemblerPluginTest extends AbstractGhidraHeadedIntegrationTest {
 	private Memory memory;
 	private Listing listing;
 
-	@Before
+	@BeforeEach
 	public void setUpAssemblerPluginTest() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -82,7 +83,7 @@ public class AssemblerPluginTest extends AbstractGhidraHeadedIntegrationTest {
 		programManager.openProgram(program);
 	}
 
-	@After
+	@AfterEach
 	public void tearDownAssemblerPluginTest() {
 		env.dispose();
 	}

@@ -28,14 +28,12 @@ import org.junit.Test;
 
 import docking.DialogComponentProvider;
 import docking.DockingDialog;
-import docking.widgets.*;
 import docking.widgets.filechooser.GhidraFileChooser;
 import docking.widgets.table.GTable;
 import docking.wizard.WizardManager;
 import docking.wizard.WizardPanel;
 import ghidra.app.plugin.core.archive.RestoreDialog;
 import ghidra.framework.data.GhidraFileData;
-import ghidra.framework.main.*;
 import ghidra.framework.model.*;
 import ghidra.framework.plugintool.dialog.*;
 import ghidra.framework.preferences.Preferences;

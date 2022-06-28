@@ -23,11 +23,11 @@ package ghidra.program.model.address;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.*;
-
 import generic.test.AbstractGenericTest;
 import ghidra.util.datastruct.NoSuchIndexException;
 import ghidra.util.prop.ObjectPropertySet;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -66,7 +66,7 @@ public class AddressObjectMapTest extends AbstractGenericTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		set1.addRange(addr0, addr4);
 		set2.addRange(addr22, addr44);

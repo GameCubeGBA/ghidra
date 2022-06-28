@@ -17,8 +17,8 @@ package ghidra.app.plugin.core.analysis;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import ghidra.app.cmd.label.AddLabelCmd;
 import ghidra.app.util.importer.MessageLog;
@@ -47,7 +47,7 @@ public class MicrosoftDemanglerAnalyzerTest extends AbstractGhidraHeadedIntegrat
 		}
 	};
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		ProgramBuilder builder = new ToyProgramBuilder("test", true);

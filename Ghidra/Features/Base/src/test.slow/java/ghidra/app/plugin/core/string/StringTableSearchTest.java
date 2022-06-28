@@ -24,8 +24,6 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import javax.swing.*;
 
-import org.junit.*;
-
 import docking.action.DockingAction;
 import docking.action.ToggleDockingAction;
 import docking.widgets.table.TableSortState;
@@ -57,6 +55,9 @@ import ghidra.util.table.GhidraTable;
 import ghidra.util.table.GhidraTableFilterPanel;
 import ghidra.util.table.field.AddressBasedLocation;
 import ghidra.util.table.field.CodeUnitTableCellData;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class StringTableSearchTest extends AbstractGhidraHeadedIntegrationTest {
 	private TestEnv env;
@@ -75,7 +76,7 @@ public class StringTableSearchTest extends AbstractGhidraHeadedIntegrationTest {
 	int stringTypeColumnIndex = 5;
 	int isWordColumnIndex = 7;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -165,7 +166,7 @@ public class StringTableSearchTest extends AbstractGhidraHeadedIntegrationTest {
 		env.showTool();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		dialog.close();
 		env.dispose();

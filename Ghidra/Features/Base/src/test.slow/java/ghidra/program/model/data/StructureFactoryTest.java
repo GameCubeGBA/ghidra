@@ -17,8 +17,6 @@ package ghidra.program.model.data;
 
 import static org.junit.Assert.*;
 
-import org.junit.*;
-
 import ghidra.app.cmd.data.*;
 import ghidra.app.plugin.core.codebrowser.CodeBrowserPlugin;
 import ghidra.framework.cmd.Command;
@@ -28,6 +26,9 @@ import ghidra.program.model.address.*;
 import ghidra.program.model.listing.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests the {@link StructureFactory}.
@@ -62,7 +63,7 @@ public class StructureFactoryTest extends AbstractGhidraHeadedIntegrationTest {
 	/*
 	 * @see TestCase#setUp()
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -74,7 +75,7 @@ public class StructureFactoryTest extends AbstractGhidraHeadedIntegrationTest {
 	/*
 	 * @see TestCase#tearDown()
 	 */
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (program != null) {
 			env.release(program);

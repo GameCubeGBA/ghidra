@@ -19,12 +19,12 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.*;
 
-import org.junit.*;
-
 import generic.test.AbstractGenericTest;
 import ghidra.util.LongIterator;
 import ghidra.util.datastruct.NoSuchIndexException;
 import ghidra.util.exception.NoValueException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class IntPropertySetTest extends AbstractGenericTest {
 	IntPropertySet ps;
@@ -33,7 +33,7 @@ public class IntPropertySetTest extends AbstractGenericTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		ps = new IntPropertySet("Test");
 	}

@@ -21,8 +21,6 @@ import java.io.File;
 import java.util.Map.Entry;
 import java.util.Objects;
 
-import org.junit.*;
-
 import com.google.common.collect.Range;
 
 import ghidra.program.model.util.TypeMismatchException;
@@ -34,6 +32,9 @@ import ghidra.util.ObjectStorage;
 import ghidra.util.Saveable;
 import ghidra.util.database.UndoableTransaction;
 import ghidra.util.exception.DuplicateNameException;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DBTraceAddressPropertyManagerTest extends AbstractGhidraHeadlessIntegrationTest {
 	protected static class MySaveable implements Saveable {
@@ -156,13 +157,13 @@ public class DBTraceAddressPropertyManagerTest extends AbstractGhidraHeadlessInt
 	ToyDBTraceBuilder tb;
 	TraceAddressPropertyManager propertyManager;
 
-	@Before
+	@BeforeEach
 	public void setUpPropertyManagerTest() throws Exception {
 		tb = new ToyDBTraceBuilder("Testing", "Toy:BE:64:default");
 		propertyManager = tb.trace.getAddressPropertyManager();
 	}
 
-	@After
+	@AfterEach
 	public void tearDownPropertyManagerTest() throws Exception {
 		tb.close();
 	}

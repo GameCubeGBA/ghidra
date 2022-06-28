@@ -27,8 +27,8 @@ import java.util.function.Supplier;
 
 import javax.swing.JFrame;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 import docking.test.AbstractDockingTest;
 import edu.uci.ics.jung.algorithms.layout.Layout;
@@ -55,7 +55,7 @@ public abstract class AbstractVisualGraphTest extends AbstractDockingTest {
 	protected TestVisualGraph graph;
 	protected GraphComponent<AbstractTestVertex, TestEdge, TestVisualGraph> graphComponent;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		buildAndLayoutGraph();
@@ -95,7 +95,7 @@ public abstract class AbstractVisualGraphTest extends AbstractDockingTest {
 
 	protected abstract TestVisualGraph buildGraph();
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		swing(() -> {
 			frame.setVisible(false);

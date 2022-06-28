@@ -20,14 +20,15 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.IOException;
 
-import org.junit.*;
-
 import db.*;
 import db.buffers.BufferFile;
 import db.buffers.LocalBufferFile;
 import generic.jar.ResourceFile;
 import generic.test.AbstractGenericTest;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import utilities.util.FileUtilities;
 
 public class PackedDatabaseTest extends AbstractGenericTest {
@@ -45,13 +46,13 @@ public class PackedDatabaseTest extends AbstractGenericTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		String path = createTempFilePath("packed.db", ".pf");
 		packedDbFile = new File(path);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		PackedDatabaseCache cache = PackedDatabaseCache.getCache();
 		if (cache != null) { // clean-out cacheDir

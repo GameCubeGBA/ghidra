@@ -19,8 +19,6 @@ import static org.junit.Assert.*;
 
 import javax.swing.tree.TreePath;
 
-import org.junit.*;
-
 import docking.ActionContext;
 import docking.action.DockingActionIf;
 import docking.action.ToggleDockingAction;
@@ -36,6 +34,9 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.symbol.Symbol;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class SymbolTreePluginX86Test extends AbstractGhidraHeadedIntegrationTest {
 
@@ -56,7 +57,7 @@ public class SymbolTreePluginX86Test extends AbstractGhidraHeadedIntegrationTest
 	private SymbolTreeTestUtils util;
 	private SymbolGTree tree;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -79,7 +80,7 @@ public class SymbolTreePluginX86Test extends AbstractGhidraHeadedIntegrationTest
 		runSwing(() -> goToToggleAction.setSelected(true));
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		util.closeProgram();
 		env.dispose();

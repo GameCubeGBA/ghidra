@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.widgets.table.GTable;
 import ghidra.GhidraOptions;

@@ -25,7 +25,7 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.graph.algo.*;
 import ghidra.util.Msg;

@@ -30,7 +30,6 @@ import ghidra.app.util.datatype.microsoft.GUID;
 import ghidra.framework.options.Options;
 import ghidra.program.model.listing.Program;
 import pdb.PdbPlugin;
-import pdb.symbolserver.*;
 import pdb.symbolserver.ui.ConfigPdbDialog;
 import pdb.symbolserver.ui.LoadPdbDialog;
 

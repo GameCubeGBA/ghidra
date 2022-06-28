@@ -20,8 +20,8 @@ import static org.junit.Assert.*;
 
 import java.util.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import docking.widgets.table.threaded.TestTableData;
 import ghidra.util.task.TaskMonitor;
@@ -32,7 +32,7 @@ public class CoalescingAddRemoveStrategyTest {
 	private SpyTableData spyTableData;
 	private List<TestRowObject> modelData;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		strategy = new CoalescingAddRemoveStrategy<>();
 		modelData = createModelData();

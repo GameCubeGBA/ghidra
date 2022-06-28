@@ -23,7 +23,7 @@ import ghidra.program.model.listing.Instruction;
 import ghidra.program.model.symbol.*;
 import ghidra.program.util.ProgramDiff;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test the merge of the versioned program's listing.

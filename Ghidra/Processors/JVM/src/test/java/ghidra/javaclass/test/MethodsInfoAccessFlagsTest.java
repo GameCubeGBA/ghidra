@@ -17,7 +17,7 @@ package ghidra.javaclass.test;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.javaclass.flags.MethodsInfoAccessFlags;
 

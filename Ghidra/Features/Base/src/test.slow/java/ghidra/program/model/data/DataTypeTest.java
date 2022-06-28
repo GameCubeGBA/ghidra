@@ -17,12 +17,13 @@ package ghidra.program.model.data;
 
 import static org.junit.Assert.*;
 
-import org.junit.*;
-
 import ghidra.program.database.ProgramBuilder;
 import ghidra.program.model.listing.Program;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for manipulating data types in the category/data type tree.
@@ -43,14 +44,14 @@ public class DataTypeTest extends AbstractGhidraHeadedIntegrationTest {
 		return builder.getProgram();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		program = buildProgram("notepad");
 		dtm = program.getDataTypeManager();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.release(program);
 		env.dispose();

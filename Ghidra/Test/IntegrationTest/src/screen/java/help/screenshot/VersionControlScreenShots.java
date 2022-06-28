@@ -25,7 +25,6 @@ import docking.DialogComponentProvider;
 import generic.test.TestUtils;
 import ghidra.app.util.dialog.CheckoutDialog;
 import ghidra.framework.main.FrontEndTool;
-import ghidra.framework.main.datatree.*;
 import ghidra.framework.main.projectdata.actions.*;
 import ghidra.framework.model.*;
 import ghidra.framework.plugintool.Plugin;

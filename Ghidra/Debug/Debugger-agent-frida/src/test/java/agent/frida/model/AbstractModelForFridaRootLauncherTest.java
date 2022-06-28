@@ -20,8 +20,8 @@ import static org.junit.Assert.*;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import ghidra.dbg.DebugModelConventions.AsyncState;
 import ghidra.dbg.target.*;
@@ -79,49 +79,49 @@ public abstract class AbstractModelForFridaRootLauncherTest
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testLauncherIsWhereExpected() throws Throwable {
 		// Disabled as of 220609
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testLaunchParameters() throws Throwable {
 		// Disabled as of 220609		
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testLaunch() throws Throwable {
 		// Disabled as of 220609
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testLaunchThenDetach() throws Throwable {
 		// Disabled as of 220609
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testLaunchThenKill() throws Throwable {
 		// Disabled as of 220609
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testLaunchThenResume() throws Throwable {
 		// Disabled as of 220609
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testLaunchShowsInProcessContainer() throws Throwable {
 		// Disabled as of 220609

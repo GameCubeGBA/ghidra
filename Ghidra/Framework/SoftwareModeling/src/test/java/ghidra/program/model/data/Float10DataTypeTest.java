@@ -18,7 +18,7 @@ package ghidra.program.model.data;
 import java.math.*;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGTest;
 import ghidra.pcode.floatformat.FloatFormat;
