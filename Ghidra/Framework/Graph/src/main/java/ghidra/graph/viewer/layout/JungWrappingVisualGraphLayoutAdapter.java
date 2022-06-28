@@ -82,14 +82,14 @@ public class JungWrappingVisualGraphLayoutAdapter<V extends VisualVertex,
 			vertexLocations.put(v, location);
 		}
 
-		Map<E, List<Point2D>> edgeErticulations = new HashMap<>();
+		Map<E, List<Point2D>> edgeArticulations = new HashMap<>();
 		Collection<E> edges = graph.getEdges();
 		for (E edge : edges) {
 			List<Point2D> newArticulations = new ArrayList<>();
-			edgeErticulations.put(edge, newArticulations);
+			edgeArticulations.put(edge, newArticulations);
 		}
 
-		return LayoutPositions.createNewPositions(vertexLocations, edgeErticulations);
+		return LayoutPositions.createNewPositions(vertexLocations, edgeArticulations);
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
