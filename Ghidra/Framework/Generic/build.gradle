@@ -39,7 +39,7 @@ dependencies {
 	api 'org.bouncycastle:bcprov-jdk15on:1.69'
 	api 'org.bouncycastle:bcutil-jdk15on:1.69'
 
-	compileOnly "junit:junit:4.12"
+	compileOnly "org.junit.jupiter:junit-jupiter-api:5.8.2"
 }
 
 ext.addExports([
