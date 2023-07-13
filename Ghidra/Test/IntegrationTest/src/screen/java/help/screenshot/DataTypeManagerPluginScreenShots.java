@@ -22,7 +22,6 @@ import javax.swing.*;
 import javax.swing.table.TableColumn;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 import docking.*;
 import docking.action.DockingActionIf;
@@ -38,6 +37,7 @@ import ghidra.framework.preferences.Preferences;
 import ghidra.program.model.data.*;
 import ghidra.util.UniversalID;
 import ghidra.util.table.GhidraTable;
+import org.junit.jupiter.api.Test;
 
 public class DataTypeManagerPluginScreenShots extends GhidraScreenShotGenerator {
 

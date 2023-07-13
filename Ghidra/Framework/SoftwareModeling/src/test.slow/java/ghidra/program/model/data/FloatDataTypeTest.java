@@ -17,12 +17,11 @@ package ghidra.program.model.data;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import generic.test.AbstractGTest;
 import ghidra.pcode.floatformat.*;
 import ghidra.program.model.mem.ByteMemBufferImpl;
 import ghidra.util.LittleEndianDataConverter;
+import org.junit.jupiter.api.Test;
 
 public class FloatDataTypeTest extends AbstractGTest {
 

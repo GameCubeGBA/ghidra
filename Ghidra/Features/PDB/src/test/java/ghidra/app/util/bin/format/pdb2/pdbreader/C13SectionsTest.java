@@ -19,8 +19,8 @@ import static org.junit.Assert.*;
 
 import java.io.StringWriter;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.app.util.bin.format.pdb2.pdbreader.C13FileChecksums.FileChecksum;
@@ -33,7 +33,7 @@ public class C13SectionsTest extends AbstractGenericTest {
 
 	private static byte[] c13SectionsBytes;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		c13SectionsBytes = createManyC13SectionsBytes();
 	}

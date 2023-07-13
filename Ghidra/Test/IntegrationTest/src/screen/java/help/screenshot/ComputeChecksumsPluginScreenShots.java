@@ -15,7 +15,7 @@
  */
 package help.screenshot;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.action.DockingAction;
 import ghidra.app.plugin.core.checksums.ComputeChecksumsPlugin;

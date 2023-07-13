@@ -19,9 +19,9 @@ import java.io.*;
 
 import org.antlr.runtime.*;
 import org.junit.Assert;
-import org.junit.Test;
 
 import generic.test.AbstractGenericTest;
+import org.junit.jupiter.api.Test;
 
 public class BooleanExpressionDefTest extends AbstractGenericTest {
 

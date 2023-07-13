@@ -20,8 +20,7 @@ import static org.junit.Assert.*;
 import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.ComponentProvider;
 import docking.action.DockingActionIf;
@@ -44,6 +43,7 @@ import ghidra.program.model.symbol.EquateTable;
 import ghidra.program.util.OperandFieldLocation;
 import ghidra.test.AbstractProgramBasedTest;
 import ghidra.util.UniversalID;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Tests the Equate Plugin functionality.
@@ -59,7 +59,7 @@ public class EquatePlugin2Test extends AbstractProgramBasedTest {
 	private CodeBrowserPlugin cb;
 	private Listing listing;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		initialize();

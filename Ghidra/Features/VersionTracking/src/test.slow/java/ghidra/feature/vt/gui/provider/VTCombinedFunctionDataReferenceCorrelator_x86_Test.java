@@ -21,12 +21,12 @@ import static org.junit.Assert.*;
 import java.util.*;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 import ghidra.feature.vt.api.correlator.program.VTAbstractReferenceProgramCorrelatorFactory;
 import ghidra.feature.vt.api.main.*;
 import ghidra.feature.vt.gui.task.ApplyMatchTask;
 import ghidra.program.model.address.Address;
+import org.junit.jupiter.api.Test;
 
 public class VTCombinedFunctionDataReferenceCorrelator_x86_Test extends AbstractVTCorrelatorTest {
 

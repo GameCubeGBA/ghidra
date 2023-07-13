@@ -29,8 +29,6 @@ import java.util.stream.Stream;
 import javax.swing.MenuElement;
 import javax.swing.SwingUtilities;
 
-import org.junit.Before;
-import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
 import db.Transaction;
@@ -69,6 +67,8 @@ import ghidra.util.SystemUtilities;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 @Category(NightlyCategory.class) // this may actually be an @PortSensitive test
 public class DebuggerBreakpointMarkerPluginTest extends AbstractGhidraHeadedDebuggerGUITest {
@@ -90,7 +90,7 @@ public class DebuggerBreakpointMarkerPluginTest extends AbstractGhidraHeadedDebu
 	protected Address entry;
 	protected DecompilerProvider decompilerProvider;
 
-	@Before
+	@BeforeEach
 	public void setUpBreakpointMarkerPluginTest() throws Exception {
 		breakpointMarkerPlugin = addPlugin(tool, DebuggerBreakpointMarkerPlugin.class);
 		listingPlugin = addPlugin(tool, DebuggerListingPlugin.class);

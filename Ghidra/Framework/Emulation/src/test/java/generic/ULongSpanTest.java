@@ -17,7 +17,7 @@ package generic;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.ULongSpan.DefaultULongSpanSet;
 import generic.ULongSpan.MutableULongSpanSet;

@@ -22,21 +22,21 @@ import java.awt.Font;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.theme.*;
 import generic.theme.GThemeDefaults.Colors.Palette;
 import ghidra.framework.options.Options;
 import ghidra.framework.options.ToolOptions;
 import ghidra.util.HelpLocation;
+import org.junit.jupiter.api.BeforeEach;
 
 public class GraphDisplayOptionsTest {
 
 	private GraphType graphType;
 	private GraphDisplayOptions options;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		// create a dummy theme manager that defines values for use in this test
 		DummyThemeManager themeManager = new DummyThemeManager();

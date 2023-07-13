@@ -34,6 +34,9 @@ import ghidra.program.model.mem.MemoryBlock;
 import ghidra.program.util.ProgramLocation;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ProgramStartPluginTest extends AbstractGhidraHeadedIntegrationTest {
 	private TestEnv env;
@@ -42,7 +45,7 @@ public class ProgramStartPluginTest extends AbstractGhidraHeadedIntegrationTest 
 	private CodeBrowserPlugin cb;
 	private Options options;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.launchDefaultTool();
@@ -51,7 +54,7 @@ public class ProgramStartPluginTest extends AbstractGhidraHeadedIntegrationTest 
 
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.closeTool(tool);
 		env.dispose();

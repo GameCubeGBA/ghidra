@@ -21,7 +21,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.theme.GThemeDefaults.Colors.Palette;
 import resources.MultiIconBuilder;

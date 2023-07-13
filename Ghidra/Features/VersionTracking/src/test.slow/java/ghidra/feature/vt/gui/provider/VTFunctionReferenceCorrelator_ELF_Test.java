@@ -18,7 +18,7 @@ package ghidra.feature.vt.gui.provider;
 import java.util.*;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.feature.vt.api.main.VTMatch;
 import ghidra.feature.vt.api.main.VTMatchSet;

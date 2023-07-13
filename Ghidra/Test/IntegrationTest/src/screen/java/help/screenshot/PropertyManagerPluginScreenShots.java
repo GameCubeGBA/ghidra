@@ -17,7 +17,7 @@ package help.screenshot;
 
 import javax.swing.JTable;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.app.plugin.core.codebrowser.CodeViewerProvider;
 import ghidra.app.plugin.debug.propertymanager.PropertyManagerPlugin;

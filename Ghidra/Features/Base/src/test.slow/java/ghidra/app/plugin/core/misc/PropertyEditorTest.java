@@ -23,21 +23,20 @@ import java.awt.Container;
 
 import javax.swing.*;
 
-import org.junit.After;
-import org.junit.Test;
-
 import docking.DockingDialog;
 import docking.options.editor.OptionsDialog;
 import docking.options.editor.StringWithChoicesEditor;
 import docking.widgets.tree.GTree;
 import ghidra.framework.options.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 
 public class PropertyEditorTest extends AbstractGhidraHeadedIntegrationTest {
 
 	private DockingDialog dialog;
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (dialog != null) {
 			dialog.setVisible(false);

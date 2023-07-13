@@ -20,14 +20,13 @@ import static org.junit.Assert.*;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 
-import org.junit.Test;
-
 import docking.widgets.table.GTable;
 import ghidra.GhidraOptions;
 import ghidra.app.plugin.core.table.TableComponentProvider;
 import ghidra.framework.options.Options;
 import ghidra.program.util.*;
 import ghidra.util.table.GhidraProgramTableModel;
+import org.junit.jupiter.api.Test;
 
 public class CodeBrowserNavigationTest extends AbstractCodeBrowserNavigationTest {
 

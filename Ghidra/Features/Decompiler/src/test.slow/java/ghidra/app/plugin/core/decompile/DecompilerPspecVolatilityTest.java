@@ -25,6 +25,8 @@ import ghidra.program.model.address.AddressFormatException;
 import ghidra.program.model.listing.Function;
 import ghidra.program.model.listing.Program;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 
 public class DecompilerPspecVolatilityTest extends SleighLanguageVolatilityTest {
 	private Program prog;
@@ -76,7 +78,7 @@ public class DecompilerPspecVolatilityTest extends SleighLanguageVolatilityTest 
 		return decompResults.getDecompiledFunction().getC();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (decompiler != null) {
 			decompiler.dispose();

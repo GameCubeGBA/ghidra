@@ -17,7 +17,7 @@ package ghidra.app.cmd.data.exceptionhandling;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.app.cmd.data.TypeDescriptorModel;
 import ghidra.program.database.ProgramBuilder;

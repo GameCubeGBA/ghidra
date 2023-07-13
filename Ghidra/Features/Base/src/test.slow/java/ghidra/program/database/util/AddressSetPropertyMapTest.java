@@ -33,6 +33,9 @@ import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AddressSetPropertyMapTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -53,7 +56,7 @@ public class AddressSetPropertyMapTest extends AbstractGhidraHeadedIntegrationTe
 		return builder.getProgram();
 	}
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
 		env = new TestEnv();
 		program = buildProgram("notepad");
@@ -61,7 +64,7 @@ public class AddressSetPropertyMapTest extends AbstractGhidraHeadedIntegrationTe
 		transactionID = program.startTransaction("test");
 	}
 
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
 		if (transactionID >= 0) {
 			program.endTransaction(transactionID, true);

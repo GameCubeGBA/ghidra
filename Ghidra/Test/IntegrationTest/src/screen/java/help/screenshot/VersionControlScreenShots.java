@@ -19,8 +19,6 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.Test;
-
 import docking.DialogComponentProvider;
 import generic.test.TestUtils;
 import ghidra.app.util.dialog.CheckoutDialog;
@@ -33,6 +31,7 @@ import ghidra.framework.remote.User;
 import ghidra.framework.store.*;
 import ghidra.test.FrontEndTestEnv;
 import ghidra.util.InvalidNameException;
+import org.junit.jupiter.api.Test;
 
 public class VersionControlScreenShots extends GhidraScreenShotGenerator {
 

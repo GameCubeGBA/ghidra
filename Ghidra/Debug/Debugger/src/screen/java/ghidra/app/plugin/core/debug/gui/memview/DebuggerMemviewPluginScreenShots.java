@@ -33,6 +33,9 @@ import ghidra.trace.model.breakpoint.TraceBreakpointKind;
 import ghidra.trace.model.memory.TraceMemoryFlag;
 import ghidra.trace.model.thread.TraceThread;
 import help.screenshot.GhidraScreenShotGenerator;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DebuggerMemviewPluginScreenShots extends GhidraScreenShotGenerator {
 
@@ -44,7 +47,7 @@ public class DebuggerMemviewPluginScreenShots extends GhidraScreenShotGenerator 
 	Program progEcho;
 	Program progLibC;
 
-	@Before
+	@BeforeEach
 	public void setUpMine() throws Throwable {
 		programManager = addPlugin(tool, ProgramManagerPlugin.class);
 		traceManager = addPlugin(tool, DebuggerTraceManagerServicePlugin.class);
@@ -55,7 +58,7 @@ public class DebuggerMemviewPluginScreenShots extends GhidraScreenShotGenerator 
 		tb = new ToyDBTraceBuilder("echo", ToyProgramBuilder._X64);
 	}
 
-	@After
+	@AfterEach
 	public void tearDownMine() {
 		tb.close();
 

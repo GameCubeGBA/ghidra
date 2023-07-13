@@ -21,7 +21,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 import ghidra.app.util.cparser.C.CParser;
 import ghidra.app.util.cparser.C.ParseException;
@@ -29,6 +28,7 @@ import ghidra.program.model.data.*;
 import ghidra.program.model.data.Enum;
 import ghidra.program.model.lang.CompilerSpec;
 import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
+import org.junit.jupiter.api.Test;
 
 public class CParserTest extends AbstractGhidraHeadlessIntegrationTest {
 

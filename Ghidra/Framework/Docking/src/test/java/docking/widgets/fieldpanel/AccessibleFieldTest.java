@@ -25,8 +25,8 @@ import javax.accessibility.*;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import docking.widgets.fieldpanel.field.*;
 import generic.test.AbstractGenericTest;
@@ -48,7 +48,7 @@ public class AccessibleFieldTest extends AbstractGenericTest {
 	private Rectangle boundsInParent;
 	private int fieldHeight;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		testField = new TestField(FIELD_X, FIELD_WIDTH, "line1", "line2");
 		fieldHeight = testField.getHeight();

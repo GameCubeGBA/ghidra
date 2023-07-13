@@ -20,13 +20,13 @@ import static org.junit.Assert.*;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class GraphTypeTest {
 	private GraphType graphType;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		List<String> vertexTypes = Arrays.asList("V1", "V2", "V3" );
 		List<String> edgeTypes = Arrays.asList("E1", "E2", "E3" );

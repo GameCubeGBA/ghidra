@@ -20,8 +20,7 @@ import static org.junit.Assert.*;
 import java.math.BigInteger;
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import db.Transaction;
 import ghidra.app.plugin.processors.sleigh.SleighLanguage;
@@ -34,13 +33,14 @@ import ghidra.trace.database.ToyDBTraceBuilder;
 import ghidra.trace.model.memory.TraceMemorySpace;
 import ghidra.trace.model.memory.TraceMemoryState;
 import ghidra.trace.model.thread.TraceThread;
+import org.junit.jupiter.api.Test;
 
 public class TraceSleighUtilsTest extends AbstractGhidraHeadlessIntegrationTest {
 	private static final String TOY_BE_64_HARVARD = "Toy:BE:64:harvard";
 
 	SleighLanguage language;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws LanguageNotFoundException {
 		language = (SleighLanguage) DefaultLanguageService.getLanguageService()
 				.getLanguage(new LanguageID(TOY_BE_64_HARVARD));

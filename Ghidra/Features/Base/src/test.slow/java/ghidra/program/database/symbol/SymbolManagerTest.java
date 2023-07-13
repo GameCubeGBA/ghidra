@@ -40,6 +40,9 @@ import ghidra.util.SystemUtilities;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.exception.InvalidInputException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /*
  * Tests for the symbol manager that uses database.
@@ -59,7 +62,7 @@ public class SymbolManagerTest extends AbstractGhidraHeadedIntegrationTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		program = createDefaultProgram(testName.getMethodName(), ProgramBuilder._TOY, this);
 		globalScope = program.getGlobalNamespace();
@@ -74,7 +77,7 @@ public class SymbolManagerTest extends AbstractGhidraHeadedIntegrationTest {
 		listing = program.getListing();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (program != null) {
 			program.endTransaction(transactionID, true);

@@ -23,8 +23,6 @@ import java.io.IOException;
 
 import javax.swing.*;
 
-import org.junit.Test;
-
 import docking.KeyEntryTextField;
 import docking.action.DockingActionIf;
 import docking.widgets.filter.FilterTextField;
@@ -34,6 +32,7 @@ import ghidra.app.script.GhidraScriptUtil;
 import ghidra.app.script.JavaScriptProvider;
 import ghidra.util.StringUtilities;
 import ghidra.util.exception.AssertException;
+import org.junit.jupiter.api.Test;
 
 public class GhidraScriptMgrPlugin3Test extends AbstractGhidraScriptMgrPluginTest {
 

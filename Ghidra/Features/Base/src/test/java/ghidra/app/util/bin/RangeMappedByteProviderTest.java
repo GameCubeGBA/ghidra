@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 import java.io.IOException;
 import java.util.Arrays;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class RangeMappedByteProviderTest {
 	private ByteArrayProvider bap(int... values) {

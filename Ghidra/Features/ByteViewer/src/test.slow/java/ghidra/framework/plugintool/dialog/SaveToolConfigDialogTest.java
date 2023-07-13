@@ -50,6 +50,9 @@ import ghidra.framework.preferences.Preferences;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.exception.AssertException;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import resources.ResourceManager;
 import utilities.util.FileUtilities;
 
@@ -71,7 +74,7 @@ public class SaveToolConfigDialogTest extends AbstractGhidraHeadedIntegrationTes
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -89,7 +92,7 @@ public class SaveToolConfigDialogTest extends AbstractGhidraHeadedIntegrationTes
 		showDialogs();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		ToolChest tc = tool.getProject().getLocalToolChest();
 		tc.remove("MyTestTool");

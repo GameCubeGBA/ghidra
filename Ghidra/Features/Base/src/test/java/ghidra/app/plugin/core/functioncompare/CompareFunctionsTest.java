@@ -20,8 +20,7 @@ import static org.junit.Assert.*;
 import java.util.Date;
 import java.util.Set;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import generic.test.AbstractGenericTest;
 import ghidra.app.services.FunctionComparisonModel;
@@ -32,6 +31,7 @@ import ghidra.program.model.data.ByteDataType;
 import ghidra.program.model.data.DataType;
 import ghidra.program.model.listing.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests the function comparison API and data model. Each test verifies that
@@ -59,7 +59,7 @@ public class CompareFunctionsTest extends AbstractGhidraHeadedIntegrationTest {
 	private FunctionComparisonProvider provider2;
 	private FunctionComparisonModel model;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		DummyPluginTool tool = new DummyPluginTool();
 		plugin = new FunctionComparisonPlugin(tool);

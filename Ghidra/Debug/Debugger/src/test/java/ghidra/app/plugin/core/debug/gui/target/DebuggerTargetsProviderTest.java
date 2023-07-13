@@ -22,8 +22,7 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.Set;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.experimental.categories.Category;
 
 import docking.widgets.tree.GTreeNode;
@@ -32,6 +31,7 @@ import ghidra.app.plugin.core.debug.gui.AbstractGhidraHeadedDebuggerGUITest;
 import ghidra.app.plugin.core.debug.gui.DebuggerResources.*;
 import ghidra.app.plugin.core.debug.service.model.DebuggerConnectDialog;
 import ghidra.dbg.model.TestDebuggerObjectModel;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests of the target provider
@@ -41,7 +41,7 @@ public class DebuggerTargetsProviderTest extends AbstractGhidraHeadedDebuggerGUI
 	protected DebuggerTargetsPlugin targetsPlugin;
 	protected DebuggerTargetsProvider targetsProvider;
 
-	@Before
+	@BeforeEach
 	public void setUpTargetsProviderTest() throws Exception {
 		targetsPlugin = addPlugin(tool, DebuggerTargetsPlugin.class);
 		targetsProvider = waitForComponentProvider(DebuggerTargetsProvider.class);

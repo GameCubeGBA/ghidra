@@ -22,8 +22,8 @@ import static org.junit.Assert.assertTrue;
 import java.util.List;
 import java.util.Map.Entry;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import agent.frida.model.iface2.FridaModelTargetProcess;
 import agent.frida.model.impl.FridaModelTargetThreadContainerImpl;
@@ -63,7 +63,7 @@ public abstract class AbstractModelForFridaScenarioStackTest
 
 	@Override
 	//@Ignore // Fails for distributed version
-	@Ignore
+	@Disabled
 	@Test
 	public void testScenario() throws Throwable {
 		DebuggerTestSpecimen specimen = getSpecimen();

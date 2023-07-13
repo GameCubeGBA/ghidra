@@ -29,8 +29,7 @@ import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.XMLOutputter;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import com.google.gson.JsonObject;
 
@@ -40,12 +39,13 @@ import ghidra.app.plugin.core.overview.addresstype.AddressType;
 import ghidra.program.model.lang.Endian;
 import ghidra.util.xml.GenericXMLOutputter;
 import ghidra.util.xml.XmlUtilities;
+import org.junit.jupiter.api.Test;
 
 public class GPropertiesTest extends AbstractGenericTest {
 
 	private GProperties properties;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		properties = new GProperties("foo");
 	}

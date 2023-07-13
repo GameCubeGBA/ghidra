@@ -22,8 +22,7 @@ import java.io.*;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodHandles.Lookup;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import generic.test.AbstractGTest;
 import ghidra.GhidraTestApplicationLayout;
@@ -34,6 +33,7 @@ import ghidra.pcode.exec.PcodeExecutorStatePiece.Reason;
 import ghidra.pcode.utils.Utils;
 import ghidra.program.model.lang.Register;
 import ghidra.program.model.pcode.Varnode;
+import org.junit.jupiter.api.Test;
 
 public class AnnotatedPcodeUseropLibraryTest extends AbstractGTest {
 	private class TestUseropLibrary extends AnnotatedPcodeUseropLibrary<byte[]> {
@@ -43,7 +43,7 @@ public class AnnotatedPcodeUseropLibraryTest extends AbstractGTest {
 		}
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws IOException {
 		if (!Application.isInitialized()) {
 			Application.initializeApplication(

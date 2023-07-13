@@ -17,10 +17,9 @@ package help.screenshot;
 
 import javax.swing.JComboBox;
 
-import org.junit.Test;
-
 import ghidra.app.plugin.debug.DbViewerPlugin;
 import ghidra.app.plugin.debug.DbViewerProvider;
+import org.junit.jupiter.api.Test;
 
 public class DbViewerPluginScreenShots extends GhidraScreenShotGenerator {
 

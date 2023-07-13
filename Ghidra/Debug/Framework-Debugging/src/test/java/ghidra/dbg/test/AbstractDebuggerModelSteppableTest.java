@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.async.AsyncDebouncer;
 import ghidra.async.AsyncTimer;

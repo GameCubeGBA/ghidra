@@ -20,8 +20,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Set;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import db.Transaction;
 import ghidra.app.plugin.assembler.Assembler;
@@ -44,12 +43,13 @@ import ghidra.trace.model.property.TracePropertyMapSpace;
 import ghidra.trace.model.thread.TraceThread;
 import ghidra.trace.model.time.schedule.*;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.Test;
 
 public class TaintDebuggerPcodeEmulatorTest extends AbstractGhidraHeadedDebuggerGUITest {
 	private DebuggerStaticMappingService mappingService;
 	private DebuggerEmulationService emuService;
 
-	@Before
+	@BeforeEach
 	public void setUpTaintTest() throws Throwable {
 		mappingService = addPlugin(tool, DebuggerStaticMappingServicePlugin.class);
 		emuService = addPlugin(tool, DebuggerEmulationServicePlugin.class);

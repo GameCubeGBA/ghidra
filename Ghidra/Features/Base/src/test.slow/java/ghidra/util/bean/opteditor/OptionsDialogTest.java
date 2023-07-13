@@ -58,6 +58,9 @@ import ghidra.framework.preferences.Preferences;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.ColorUtils;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the options dialog.
@@ -75,7 +78,7 @@ public class OptionsDialogTest extends AbstractGhidraHeadedIntegrationTest {
 	private JPanel viewPanel;
 	private OptionsPanel optionsPanel;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.launchDefaultTool();
@@ -87,7 +90,7 @@ public class OptionsDialogTest extends AbstractGhidraHeadedIntegrationTest {
 		setUpDialog(tool);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		runSwing(() -> dialog.close());
 		env.dispose();

@@ -19,10 +19,10 @@ import static org.junit.Assert.*;
 
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.tree.Tree;
-import org.junit.Test;
 
 import ghidra.pcode.exec.SleighUtils.AddressOf;
 import ghidra.pcode.exec.SleighUtils.SleighParseError;
+import org.junit.jupiter.api.Test;
 
 public class SleighUtilsTest {
 	@Test

@@ -34,6 +34,9 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.util.ProgramLocation;
 import ghidra.program.util.ProgramSelection;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ExpandCollapseDataActionsTest extends AbstractGhidraHeadedIntegrationTest {
 	private Program program;
@@ -57,7 +60,7 @@ public class ExpandCollapseDataActionsTest extends AbstractGhidraHeadedIntegrati
 	private static int[] STRUCT_1_SUB_0_PATH = new int[] { 0 };
 	private static int[] STRUCT_1_SUB_0_SUB_0_PATH = new int[] { 0, 0 };
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -76,7 +79,7 @@ public class ExpandCollapseDataActionsTest extends AbstractGhidraHeadedIntegrati
 		collapseAll = getAction(plugin, "Collapse All Data");
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		if (program != null) {
 			program.release(this);

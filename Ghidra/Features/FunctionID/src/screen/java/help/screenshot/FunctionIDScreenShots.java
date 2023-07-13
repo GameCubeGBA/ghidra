@@ -26,11 +26,14 @@ import ghidra.app.util.viewer.field.AddressFieldFactory;
 import ghidra.feature.fid.db.FidFile;
 import ghidra.feature.fid.db.FidFileManager;
 import ghidra.feature.fid.plugin.FidPlugin;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class FunctionIDScreenShots extends GhidraScreenShotGenerator {
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		loadPlugin(FidPlugin.class);
@@ -41,7 +44,7 @@ public class FunctionIDScreenShots extends GhidraScreenShotGenerator {
 	}
 
 	@Override
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		closeAllWindows();

@@ -21,8 +21,7 @@ import static org.junit.Assert.fail;
 import java.io.File;
 import java.io.IOException;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import generic.Unique;
 import generic.test.AbstractGTest;
@@ -34,6 +33,7 @@ import ghidra.framework.ApplicationConfiguration;
 import ghidra.pcode.exec.SleighProgramCompiler.DetailedSleighException;
 import ghidra.pcode.exec.SleighProgramCompiler.PcodeLogEntry;
 import ghidra.sleigh.grammar.Location;
+import org.junit.jupiter.api.Test;
 import utility.function.ExceptionalCallback;
 
 public class SleighProgramCompilerTest extends AbstractGTest {
@@ -56,7 +56,7 @@ public class SleighProgramCompilerTest extends AbstractGTest {
 		return rfail("Expected " + cls + ". Got success");
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws IOException {
 		if (!Application.isInitialized()) {
 			Application.initializeApplication(

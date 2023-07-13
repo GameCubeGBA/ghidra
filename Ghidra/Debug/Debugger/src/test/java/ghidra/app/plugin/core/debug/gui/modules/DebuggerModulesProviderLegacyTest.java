@@ -61,6 +61,9 @@ import ghidra.trace.model.memory.TraceOverlappedRegionException;
 import ghidra.trace.model.modules.*;
 import ghidra.trace.model.symbol.TraceSymbol;
 import ghidra.util.exception.DuplicateNameException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 @Category(NightlyCategory.class) // this may actually be an @PortSensitive test
 public class DebuggerModulesProviderLegacyTest extends AbstractGhidraHeadedDebuggerGUITest {
@@ -75,7 +78,7 @@ public class DebuggerModulesProviderLegacyTest extends AbstractGhidraHeadedDebug
 	protected TraceSection secLibText;
 	protected TraceSection secLibData;
 
-	@Before
+	@BeforeEach
 	public void setUpModulesProviderTest() throws Exception {
 		modulesPlugin = addPlugin(tool, DebuggerModulesPlugin.class);
 		modulesProvider = waitForComponentProvider(DebuggerModulesProvider.class);
@@ -549,7 +552,7 @@ public class DebuggerModulesProviderLegacyTest extends AbstractGhidraHeadedDebug
 	}
 
 	@Test
-	@Ignore("This action is hidden until supported")
+	@Disabled("This action is hidden until supported")
 	public void testActionCaptureTypes() throws Exception {
 		assertFalse(modulesProvider.actionCaptureTypes.isEnabled());
 		createTestModel();

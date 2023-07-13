@@ -67,6 +67,9 @@ import ghidra.util.Msg;
 import ghidra.util.exception.UsrException;
 import ghidra.util.table.GhidraTable;
 import ghidra.util.task.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class VersionTrackingPluginScreenShots extends GhidraScreenShotGenerator {
 
@@ -88,7 +91,7 @@ public class VersionTrackingPluginScreenShots extends GhidraScreenShotGenerator 
 	protected PluginTool vtTool;
 	protected VTPlugin vtPlugin;
 
-	@Before
+	@BeforeEach
 	@Override
 	public void setUp() throws Exception {
 		vtTestEnv = new VTTestEnv();
@@ -103,7 +106,7 @@ public class VersionTrackingPluginScreenShots extends GhidraScreenShotGenerator 
 		tool = vtTool;
 	}
 
-	@After
+	@AfterEach
 	@Override
 	public void tearDown() {
 		sourceProgram = null;

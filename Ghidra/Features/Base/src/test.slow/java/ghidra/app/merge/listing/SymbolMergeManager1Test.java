@@ -21,7 +21,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.program.database.ProgramDB;
 import ghidra.program.database.ProgramModifierListener;

@@ -21,13 +21,13 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import docking.widgets.fieldpanel.field.*;
 import docking.widgets.fieldpanel.support.*;
 import generic.test.AbstractGenericTest;
 import generic.theme.GThemeDefaults.Colors.Palette;
+import org.junit.jupiter.api.Test;
 
 public class FlowLayoutTextFieldTest extends AbstractGenericTest {
 
@@ -36,7 +36,7 @@ public class FlowLayoutTextFieldTest extends AbstractGenericTest {
 	private FlowLayoutTextField textField;
 
 	@SuppressWarnings("deprecation") // we mean to use getFontMetrics
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		FieldHighlightFactory factory = (field, text, cursorTextOffset) -> {

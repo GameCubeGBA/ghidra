@@ -19,14 +19,14 @@ import java.io.*;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
-import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 
 import agent.gdb.manager.GdbManager;
 import agent.gdb.pty.PtySession;
 import agent.gdb.pty.linux.LinuxPty;
 import ghidra.util.Msg;
 
-@Ignore("Need compatible GDB version for CI")
+@Disabled("Need compatible GDB version for CI")
 public class JoinedGdbManagerTest extends AbstractGdbManagerTest {
 	protected class ReaderThread extends Thread {
 		@Override

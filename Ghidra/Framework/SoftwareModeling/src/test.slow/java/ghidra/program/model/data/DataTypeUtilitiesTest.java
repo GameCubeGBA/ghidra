@@ -20,7 +20,7 @@ import static org.junit.Assert.assertNull;
 
 import java.util.Collection;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGTest;
 import ghidra.program.database.data.DataTypeUtilities;

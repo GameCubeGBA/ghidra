@@ -20,8 +20,8 @@ import static org.junit.Assert.*;
 import java.util.Iterator;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.tribuo.Example;
 import org.tribuo.Feature;
 import org.tribuo.classification.Label;
@@ -45,7 +45,7 @@ public class DataGatheringUtilsTest extends AbstractProgramBasedTest {
 
 	private final static String ADD_R0_R1_THUMB = "08 44";
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		initialize();
 	}

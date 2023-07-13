@@ -17,8 +17,7 @@ package ghidra.app.plugin.core.datamgr.actions;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import ghidra.graph.TestGraphDisplay;
 import ghidra.graph.TestGraphService;
@@ -28,6 +27,7 @@ import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.exception.GraphException;
 import ghidra.util.task.Task;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.Test;
 
 public class TypeGraphTaskTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -38,7 +38,7 @@ public class TypeGraphTaskTest extends AbstractGhidraHeadedIntegrationTest {
 	private TypeDef otherTypeDef;
 	private TestGraphService graphService;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		base = new StructureDataType("base structure", 16);
 		base.insert(0, new IntegerDataType());

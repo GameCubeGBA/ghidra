@@ -29,20 +29,23 @@ import ghidra.feature.vt.db.VTBaseTestCase;
 import ghidra.feature.vt.db.VTTestUtils;
 import ghidra.program.model.address.Address;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class VTMarkupItemResetTest extends VTBaseTestCase {
 
 	private int testTransactionID;
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		testTransactionID = db.startTransaction("Test Match Set Setup");
 	}
 
 	@Override
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		db.endTransaction(testTransactionID, false);
 		db.release(VTTestUtils.class);

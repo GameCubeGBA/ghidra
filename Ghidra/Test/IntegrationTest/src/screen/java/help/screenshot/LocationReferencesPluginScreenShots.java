@@ -17,7 +17,7 @@ package help.screenshot;
 
 import java.awt.Rectangle;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.ComponentProvider;
 import ghidra.app.util.viewer.field.OperandFieldFactory;

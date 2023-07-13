@@ -17,8 +17,8 @@ package ghidra.app.util.template;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.framework.options.ToolOptions;
@@ -27,7 +27,7 @@ public class TemplateSimplifierTest extends AbstractGenericTest {
 
 	private TemplateSimplifier simplifier = new TemplateSimplifier();
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		simplifier.setMinimumTemplateLength(0);
 		simplifier.setNestingDepth(0);

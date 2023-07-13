@@ -19,8 +19,7 @@ import static org.junit.Assert.*;
 
 import javax.swing.JTextField;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import docking.widgets.dialogs.NumberInputDialog;
 import ghidra.app.plugin.core.compositeeditor.CycleGroupAction;
@@ -28,6 +27,7 @@ import ghidra.app.plugin.core.compositeeditor.FavoritesAction;
 import ghidra.program.model.data.*;
 import ghidra.program.model.listing.StackFrame;
 import ghidra.program.model.listing.Variable;
+import org.junit.jupiter.api.Test;
 
 public class StackEditorActions2Test extends AbstractStackEditorTest {
 
@@ -36,7 +36,7 @@ public class StackEditorActions2Test extends AbstractStackEditorTest {
 	}
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		env.showTool();

@@ -31,6 +31,9 @@ import ghidra.trace.model.memory.TraceMemoryFlag;
 import ghidra.trace.model.thread.TraceThread;
 import ghidra.trace.model.time.schedule.TraceSchedule;
 import help.screenshot.GhidraScreenShotGenerator;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DebuggerPcodeStepperPluginScreenShots extends GhidraScreenShotGenerator {
 
@@ -39,7 +42,7 @@ public class DebuggerPcodeStepperPluginScreenShots extends GhidraScreenShotGener
 	DebuggerPcodeStepperProvider pcodeProvider;
 	ToyDBTraceBuilder tb;
 
-	@Before
+	@BeforeEach
 	public void setUpMine() throws Throwable {
 		traceManager = addPlugin(tool, DebuggerTraceManagerServicePlugin.class);
 		pcodePlugin = addPlugin(tool, DebuggerPcodeStepperPlugin.class);
@@ -49,7 +52,7 @@ public class DebuggerPcodeStepperPluginScreenShots extends GhidraScreenShotGener
 		tb = new ToyDBTraceBuilder("echo", ToyProgramBuilder._X64);
 	}
 
-	@After
+	@AfterEach
 	public void tearDownMine() {
 		tb.close();
 	}

@@ -42,6 +42,9 @@ import ghidra.program.model.symbol.Symbol;
 import ghidra.program.model.symbol.SymbolIterator;
 import ghidra.program.util.ProgramLocation;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class NextPrevAddressPluginTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -57,7 +60,7 @@ public class NextPrevAddressPluginTest extends AbstractGhidraHeadedIntegrationTe
 	private CodeBrowserPlugin cbPlugin;
 	private CodeViewerProvider provider;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 
@@ -80,7 +83,7 @@ public class NextPrevAddressPluginTest extends AbstractGhidraHeadedIntegrationTe
 		clearHistory();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

@@ -23,14 +23,14 @@ import java.io.File;
 import java.io.IOException;
 
 import org.apache.commons.io.FilenameUtils;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.google.common.io.BaseEncoding;
 
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.BeforeEach;
 import utilities.util.FileUtilities;
 
 /**
@@ -55,7 +55,7 @@ public class SymbolServerService2Test extends AbstractGhidraHeadedIntegrationTes
 		return file;
 	}
 
-	@Before
+	@BeforeEach
 	public void setup() throws IOException {
 		temporaryDir = createTempDirectory("symbolservers");
 		localSymbolStore1Root = new File(temporaryDir, "symbols1");

@@ -17,8 +17,8 @@ package ghidra.program.database.map;
 
 import static org.junit.Assert.assertNotNull;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 import ghidra.program.database.ProgramDB;
 import ghidra.program.database.mem.MemoryMapDB;
@@ -42,7 +42,7 @@ public abstract class AbstractAddressMapDBTestClass extends AbstractGhidraHeaded
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		program = createTestProgram();
@@ -50,7 +50,7 @@ public abstract class AbstractAddressMapDBTestClass extends AbstractGhidraHeaded
 		addrMap = (AddressMap) getInstanceField("addrMap", memory);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		if (program != null) {
 			program.release(this);

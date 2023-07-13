@@ -15,15 +15,15 @@
  */
 package agent.dbgeng.model.invm;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
 
 import agent.dbgeng.model.AbstractModelForDbgengScenarioForkExitTest;
+import org.junit.jupiter.api.Test;
 
 public class InVmModelForDbgengScenarioForkExitTest
 		extends AbstractModelForDbgengScenarioForkExitTest {
 
-	@Ignore("Specimen is currently defunct")
+	@Disabled("Specimen is currently defunct")
 	@Test
 	public void testScenario() throws Throwable {
 	}

@@ -20,8 +20,7 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.util.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import db.Transaction;
 import ghidra.app.plugin.core.debug.gui.AbstractGhidraHeadedDebuggerGUITest;
@@ -38,6 +37,7 @@ import ghidra.trace.model.memory.TraceMemoryFlag;
 import ghidra.trace.model.memory.TraceMemoryRegion;
 import ghidra.trace.model.modules.*;
 import ghidra.util.Msg;
+import org.junit.jupiter.api.Test;
 
 // Not technically a GUI test, but must be carried out in the context of a plugin tool
 public class DebuggerStaticMappingServiceTest extends AbstractGhidraHeadedDebuggerGUITest {
@@ -50,7 +50,7 @@ public class DebuggerStaticMappingServiceTest extends AbstractGhidraHeadedDebugg
 	protected AddressSpace dynSpace;
 	protected AddressSpace stSpace;
 
-	@Before
+	@BeforeEach
 	public void setUpStaticMappingService() throws Exception {
 		addPlugin(tool, DebuggerStaticMappingServicePlugin.class);
 		mappingService = tool.getService(DebuggerStaticMappingService.class);

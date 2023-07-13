@@ -37,7 +37,7 @@ import javax.swing.DebugGraphics;
 import javax.swing.RepaintManager;
 
 import org.hamcrest.CoreMatchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class HexOrDecimalInputTest {
 

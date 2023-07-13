@@ -20,8 +20,8 @@ import java.awt.Window;
 import javax.swing.*;
 import javax.swing.table.TableModel;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import docking.ComponentProvider;
 import docking.DialogComponentProvider;
@@ -40,7 +40,7 @@ public class SearchScreenShots extends AbstractSearchScreenShots {
 	private SearchTextPlugin searchPlugin;
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		super.setUp();

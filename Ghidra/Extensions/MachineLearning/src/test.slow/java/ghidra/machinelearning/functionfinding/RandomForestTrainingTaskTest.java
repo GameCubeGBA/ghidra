@@ -21,8 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.tribuo.*;
 import org.tribuo.classification.Label;
 import org.tribuo.classification.LabelFactory;
@@ -52,7 +52,7 @@ public class RandomForestTrainingTaskTest extends AbstractProgramBasedTest {
 	private ProgramBuilder builder;
 	private FunctionStartRFParams params;
 
-	@Before
+	@BeforeEach
 	public void setup() throws Exception {
 		initialize();
 	}

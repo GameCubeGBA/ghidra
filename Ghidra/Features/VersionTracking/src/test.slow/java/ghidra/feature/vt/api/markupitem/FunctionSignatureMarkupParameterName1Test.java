@@ -21,14 +21,13 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import org.junit.Test;
-
 import ghidra.feature.vt.api.main.VTMarkupItem;
 import ghidra.feature.vt.api.main.VTMarkupItemStatus;
 import ghidra.feature.vt.api.markuptype.FunctionSignatureMarkupType;
 import ghidra.feature.vt.gui.util.VTMatchApplyChoices.*;
 import ghidra.framework.options.ToolOptions;
 import ghidra.program.model.symbol.SourceType;
+import org.junit.jupiter.api.Test;
 
 public class FunctionSignatureMarkupParameterName1Test extends AbstractFunctionSignatureMarkupTest {
 

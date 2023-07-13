@@ -25,7 +25,6 @@ import java.util.List;
 import javax.swing.*;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 import docking.ActionContext;
 import docking.DialogComponentProvider;
@@ -41,6 +40,7 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.symbol.SourceType;
 import ghidra.program.model.symbol.SymbolTable;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.Test;
 import resources.MultiIcon;
 import resources.ResourceManager;
 

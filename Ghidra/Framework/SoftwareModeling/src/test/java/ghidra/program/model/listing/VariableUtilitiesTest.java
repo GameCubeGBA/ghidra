@@ -17,20 +17,20 @@ package ghidra.program.model.listing;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.program.database.ProgramDB;
 import ghidra.program.model.data.*;
 import ghidra.program.model.lang.*;
 import ghidra.program.util.DefaultLanguageService;
+import org.junit.jupiter.api.BeforeEach;
 
 public class VariableUtilitiesTest extends AbstractGenericTest {
 
 	private ProgramDB program;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		Language language = getLanguage("Toy:BE:64:default");
 		CompilerSpec compilerSpec = language.getDefaultCompilerSpec();

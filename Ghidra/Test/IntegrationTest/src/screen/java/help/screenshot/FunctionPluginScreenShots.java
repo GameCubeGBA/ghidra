@@ -16,7 +16,7 @@
 package help.screenshot;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.widgets.dialogs.NumberInputDialog;
 import ghidra.app.plugin.core.function.editor.StorageAddressEditorDialog;

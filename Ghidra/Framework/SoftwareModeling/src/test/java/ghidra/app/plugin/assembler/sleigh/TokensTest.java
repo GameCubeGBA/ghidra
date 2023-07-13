@@ -18,10 +18,9 @@ package ghidra.app.plugin.assembler.sleigh;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
-import org.junit.Test;
-
 import ghidra.app.plugin.assembler.sleigh.symbol.AssemblyNumericTerminal;
 import ghidra.app.plugin.assembler.sleigh.tree.AssemblyParseNumericToken;
+import org.junit.jupiter.api.Test;
 
 public class TokensTest {
 	@Test

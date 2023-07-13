@@ -20,13 +20,12 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 
-import org.junit.Test;
-
 import generic.test.AbstractGenericTest;
 import ghidra.docking.settings.FormatSettingsDefinition;
 import ghidra.program.model.data.LEB128Test.TestEntry;
 import ghidra.program.model.mem.MemBuffer;
 import ghidra.program.model.scalar.Scalar;
+import org.junit.jupiter.api.Test;
 
 public class LEB128DataTypeTest extends AbstractGenericTest {
 

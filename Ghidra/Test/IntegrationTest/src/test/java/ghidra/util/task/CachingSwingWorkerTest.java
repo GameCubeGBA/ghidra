@@ -22,7 +22,7 @@ import java.util.List;
 
 import javax.swing.SwingWorker;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.test.AbstractDockingTest;
 import sun.awt.AppContext;

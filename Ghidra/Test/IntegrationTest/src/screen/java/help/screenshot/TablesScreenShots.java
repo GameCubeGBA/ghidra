@@ -17,7 +17,7 @@ package help.screenshot;
 
 import javax.swing.table.TableColumnModel;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.ComponentProvider;
 import docking.widgets.table.*;

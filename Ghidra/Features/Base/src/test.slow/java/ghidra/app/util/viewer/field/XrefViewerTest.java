@@ -43,6 +43,9 @@ import ghidra.program.util.XRefHeaderFieldLocation;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.table.GhidraProgramTableModel;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests that references are displayed correctly when selecting the XRef field in
@@ -62,7 +65,7 @@ public class XrefViewerTest extends AbstractGhidraHeadedIntegrationTest {
 	private CodeBrowserPlugin cb;
 	private ProgramBuilder builder;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		program = buildProgram();
@@ -70,7 +73,7 @@ public class XrefViewerTest extends AbstractGhidraHeadedIntegrationTest {
 		cb = env.getPlugin(CodeBrowserPlugin.class);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

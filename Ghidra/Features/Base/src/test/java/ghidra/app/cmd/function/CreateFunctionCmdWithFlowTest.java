@@ -17,8 +17,7 @@ package ghidra.app.cmd.function;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.app.plugin.core.analysis.AnalysisBackgroundCommand;
@@ -33,6 +32,7 @@ import ghidra.program.model.listing.*;
 import ghidra.program.model.symbol.SourceType;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Test for the {@link CreateFunctionCmdWithFlowTest}.
@@ -45,7 +45,7 @@ public class CreateFunctionCmdWithFlowTest extends AbstractGhidraHeadedIntegrati
 	private Program program;
 	private ProgramBuilder builder;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();

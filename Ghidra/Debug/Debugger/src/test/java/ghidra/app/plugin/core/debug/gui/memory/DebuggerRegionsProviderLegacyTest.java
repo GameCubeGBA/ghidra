@@ -20,8 +20,7 @@ import static org.junit.Assert.assertFalse;
 
 import java.util.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.experimental.categories.Category;
 
 import db.Transaction;
@@ -42,6 +41,7 @@ import ghidra.program.util.ProgramSelection;
 import ghidra.trace.model.Lifespan;
 import ghidra.trace.model.memory.*;
 import ghidra.trace.model.modules.TraceStaticMapping;
+import org.junit.jupiter.api.Test;
 
 @Category(NightlyCategory.class)
 public class DebuggerRegionsProviderLegacyTest extends AbstractGhidraHeadedDebuggerGUITest {
@@ -56,7 +56,7 @@ public class DebuggerRegionsProviderLegacyTest extends AbstractGhidraHeadedDebug
 	protected MemoryBlock blockExeText;
 	protected MemoryBlock blockExeData;
 
-	@Before
+	@BeforeEach
 	public void setUpRegionsTest() throws Exception {
 		addPlugin(tool, DebuggerRegionsPlugin.class);
 		provider = waitForComponentProvider(DebuggerRegionsProvider.class);

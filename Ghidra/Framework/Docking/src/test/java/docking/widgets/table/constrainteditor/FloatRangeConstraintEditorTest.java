@@ -25,14 +25,14 @@ import javax.swing.JSpinner;
 import javax.swing.JSpinner.NumberEditor;
 import javax.swing.JTextField;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import docking.test.AbstractDockingTest;
 import docking.widgets.table.constraint.ColumnConstraint;
 import docking.widgets.table.constraint.MappedColumnConstraint;
 import docking.widgets.table.constraint.provider.FloatColumnTypeMapper;
 import docking.widgets.table.constraint.provider.NumberColumnConstraintProvider;
+import org.junit.jupiter.api.Test;
 
 public class FloatRangeConstraintEditorTest extends AbstractDockingTest {
 
@@ -41,7 +41,7 @@ public class FloatRangeConstraintEditorTest extends AbstractDockingTest {
 	private JTextField lowerTextField;
 	private JTextField upperTextField;
 
-	@Before
+	@BeforeEach
 	public void setup() {
 		constraint = findFloatConstraint();
 		editor = constraint.getEditor(null);

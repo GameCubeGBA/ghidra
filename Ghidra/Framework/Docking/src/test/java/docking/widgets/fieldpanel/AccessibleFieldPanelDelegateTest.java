@@ -27,12 +27,11 @@ import javax.accessibility.*;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import docking.widgets.EventTrigger;
 import docking.widgets.fieldpanel.field.*;
 import docking.widgets.fieldpanel.support.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AccessibleFieldPanelDelegateTest {
 	private static final int FIELD_WIDTH = 100;
@@ -46,7 +45,7 @@ public class AccessibleFieldPanelDelegateTest {
 	private TestAccessibleContext testContext = new TestAccessibleContext();
 	private int fieldLineHeight = fontMetrics.getHeight() + 1;
 
-	@Before
+	@BeforeEach
 	public void setup() {
 		layouts = List.of(buildAnchoredLayout(0, 0, 3), buildAnchoredLayout(1, FIELD_HEIGHT, 13));
 		delegate = new AccessibleFieldPanelDelegate(layouts, testContext, panel);

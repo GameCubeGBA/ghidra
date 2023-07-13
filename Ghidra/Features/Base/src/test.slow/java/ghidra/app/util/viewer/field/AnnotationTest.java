@@ -26,8 +26,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.io.FilenameUtils;
-import org.junit.Before;
-import org.junit.Test;
 
 import docking.widgets.fieldpanel.field.*;
 import generic.theme.GThemeDefaults.Colors;
@@ -52,6 +50,8 @@ import ghidra.program.util.ProgramLocation;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.bean.field.AnnotatedTextFieldElement;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import util.CollectionUtils;
 
 public class AnnotationTest extends AbstractGhidraHeadedIntegrationTest {
@@ -62,7 +62,7 @@ public class AnnotationTest extends AbstractGhidraHeadedIntegrationTest {
 
 	private Program program;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		program = buildProgram();
 	}

@@ -22,7 +22,7 @@ import java.math.BigInteger;
 
 import javax.swing.JButton;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class BigIntegerNumberInputDialogTest extends AbstractNumberInputDialogTest {
 

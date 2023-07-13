@@ -36,6 +36,9 @@ import ghidra.test.ClassicSampleX86ProgramBuilder;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 import junit.framework.TestCase;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * <CODE>ProgramDiffTest</CODE> tests the <CODE>ProgramDiff</CODE> class
@@ -54,7 +57,7 @@ public class ProgramDiff4Test extends AbstractProgramDiffTest {
 	/**
 	 * @see TestCase#setUp()
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		programBuilder1 = new ClassicSampleX86ProgramBuilder(false);
@@ -66,7 +69,7 @@ public class ProgramDiff4Test extends AbstractProgramDiffTest {
 	/**
 	 * @see TestCase#tearDown()
 	 */
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		programDiff = null;
 		p1 = null;

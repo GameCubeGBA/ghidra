@@ -19,8 +19,8 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import ghidra.app.cmd.function.CreateFunctionCmd;
 import ghidra.program.database.ProgramBuilder;
@@ -41,7 +41,7 @@ public class DeleteLabelCmdTest extends AbstractGhidraHeadedIntegrationTest {
 
 	private ProgramBuilder builder;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		builder = new ProgramBuilder("notepad", ProgramBuilder._TOY);

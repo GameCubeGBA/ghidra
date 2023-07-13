@@ -24,8 +24,8 @@ import java.util.Map;
 import javax.swing.Icon;
 import javax.swing.UIDefaults;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import generic.theme.*;
 import resources.ResourceManager;
@@ -38,7 +38,7 @@ public class UIDefaultsMapperTest {
 	private UIDefaults defaults;
 	private UiDefaultsMapper mapper;
 
-	@Before
+	@BeforeEach
 	public void setup() {
 		defaults = createDefaults();
 		defaults.put("control", Color.RED);

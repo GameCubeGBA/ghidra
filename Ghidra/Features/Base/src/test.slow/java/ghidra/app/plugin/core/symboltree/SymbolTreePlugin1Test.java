@@ -50,6 +50,9 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.symbol.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the symbol tree plugin.
@@ -81,7 +84,7 @@ public class SymbolTreePlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 	private DockingActionIf editExternalLocationAction;
 	private SymbolTreeTestUtils util;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		env = new TestEnv();
@@ -102,7 +105,7 @@ public class SymbolTreePlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 		env.showTool();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		closeProgram();
 		env.dispose();

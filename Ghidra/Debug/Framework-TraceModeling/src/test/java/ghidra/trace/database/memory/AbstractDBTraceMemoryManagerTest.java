@@ -32,6 +32,8 @@ import ghidra.trace.model.TraceAddressSnapRange;
 import ghidra.trace.model.memory.TraceMemoryState;
 import ghidra.trace.util.LanguageTestWatcher;
 import ghidra.util.database.DBCachedObjectStore;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public abstract class AbstractDBTraceMemoryManagerTest
 		extends AbstractGhidraHeadlessIntegrationTest {
@@ -44,7 +46,7 @@ public abstract class AbstractDBTraceMemoryManagerTest
 
 	protected abstract LanguageID getLanguageID();
 
-	@Before
+	@BeforeEach
 	public void setUp() throws IOException {
 		b = new ToyDBTraceBuilder("Testing", testLanguage.getLanguage());
 		try (Transaction tx = b.startTransaction()) {
@@ -53,7 +55,7 @@ public abstract class AbstractDBTraceMemoryManagerTest
 		memory = b.trace.getMemoryManager();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		b.close();
 	}

@@ -56,6 +56,9 @@ import ghidra.program.model.symbol.*;
 import ghidra.program.util.ProgramSelection;
 import ghidra.test.*;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class Function1Test extends AbstractGhidraHeadedIntegrationTest {
 
@@ -85,14 +88,14 @@ public class Function1Test extends AbstractGhidraHeadedIntegrationTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
 		setupTool(tool);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}

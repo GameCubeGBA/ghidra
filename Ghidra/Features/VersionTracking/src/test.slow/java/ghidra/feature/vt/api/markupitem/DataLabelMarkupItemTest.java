@@ -22,8 +22,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
-import org.junit.Test;
-
 import ghidra.feature.vt.api.main.*;
 import ghidra.feature.vt.api.markuptype.LabelMarkupType;
 import ghidra.feature.vt.api.stringable.MultipleSymbolStringable;
@@ -34,6 +32,7 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
 import ghidra.program.model.symbol.*;
 import ghidra.util.exception.InvalidInputException;
+import org.junit.jupiter.api.Test;
 
 public class DataLabelMarkupItemTest extends AbstractVTMarkupItemTest {
 

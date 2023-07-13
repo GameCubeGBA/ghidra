@@ -21,10 +21,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.util.exception.AssertException;
+import org.junit.jupiter.api.Test;
 
 public class AnchorDefinitionTest extends AbstractGenericTest {
 

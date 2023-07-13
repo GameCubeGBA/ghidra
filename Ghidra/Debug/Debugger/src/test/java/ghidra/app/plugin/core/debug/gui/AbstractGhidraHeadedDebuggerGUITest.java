@@ -33,6 +33,8 @@ import javax.swing.*;
 import javax.swing.tree.TreePath;
 
 import org.junit.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.rules.TestName;
 import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
@@ -581,7 +583,7 @@ public abstract class AbstractGhidraHeadedDebuggerGUITest
 		waitForDomainObject(recorder.getTrace());
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		ListenerMap.clearErr();
 		env = new TestEnv();
@@ -604,7 +606,7 @@ public abstract class AbstractGhidraHeadedDebuggerGUITest
 		mb = new TestDebuggerModelBuilder();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		waitForTasks();
 		runSwing(() -> {

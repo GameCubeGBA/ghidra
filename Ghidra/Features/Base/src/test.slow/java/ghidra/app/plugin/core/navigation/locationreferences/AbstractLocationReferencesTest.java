@@ -21,8 +21,8 @@ import java.util.*;
 
 import javax.swing.table.TableColumnModel;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 import docking.ComponentProvider;
 import docking.action.DockingActionIf;
@@ -61,7 +61,7 @@ public abstract class AbstractLocationReferencesTest extends AbstractProgramBase
 	protected ProgramBuilder builder;
 	protected LocationReferencesPlugin locationReferencesPlugin;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		initialize();
 
@@ -71,7 +71,7 @@ public abstract class AbstractLocationReferencesTest extends AbstractProgramBase
 	}
 
 	@Override
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}

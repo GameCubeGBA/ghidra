@@ -23,13 +23,16 @@ import javax.swing.UIManager;
 import org.junit.*;
 
 import docking.test.AbstractDockingTest;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class FloatingPointTextFieldTest extends AbstractDockingTest {
 
 	private JFrame frame;
 	private FloatingPointTextField field;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		field = new FloatingPointTextField(10);
@@ -39,7 +42,7 @@ public class FloatingPointTextFieldTest extends AbstractDockingTest {
 		frame.setVisible(true);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		frame.setVisible(false);
 	}

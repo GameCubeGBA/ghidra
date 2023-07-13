@@ -23,7 +23,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.tuple.Pair;
-import org.junit.Test;
 
 import db.Transaction;
 import ghidra.app.plugin.assembler.*;
@@ -49,6 +48,7 @@ import ghidra.trace.model.property.TracePropertyMapSpace;
 import ghidra.trace.model.target.TraceObject.ConflictResolution;
 import ghidra.trace.model.target.TraceObjectKeyPath;
 import ghidra.trace.model.thread.TraceThread;
+import org.junit.jupiter.api.Test;
 
 public class TaintTracePcodeEmulatorTest extends AbstractTracePcodeEmulatorTest {
 

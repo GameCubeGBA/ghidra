@@ -29,6 +29,9 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.pcode.*;
 import ghidra.program.util.ProgramContextImpl;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ContextStateTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -52,7 +55,7 @@ public class ContextStateTest extends AbstractGhidraHeadedIntegrationTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		lang = getSLEIGH_X86_LANGUAGE();
 		program = createDefaultProgram("Test", ProgramBuilder._X86, this);
@@ -75,7 +78,7 @@ public class ContextStateTest extends AbstractGhidraHeadedIntegrationTest {
 		mem1 = new Varnode(addr(100), 1);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (program != null) {
 			program.release(this);

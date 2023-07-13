@@ -17,14 +17,14 @@ package ghidra.program.database.map;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import ghidra.program.database.ProgramBuilder;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressSpace;
 import ghidra.program.model.listing.Program;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
+import org.junit.jupiter.api.Test;
 
 public class AddressMapDBTest extends AbstractGhidraHeadedIntegrationTest {
 	private AddressMap addrMap;
@@ -34,7 +34,7 @@ public class AddressMapDBTest extends AbstractGhidraHeadedIntegrationTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		ProgramBuilder builder = new ProgramBuilder(testName.getMethodName(), ProgramBuilder._TOY);

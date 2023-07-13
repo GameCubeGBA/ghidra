@@ -18,6 +18,8 @@ package ghidra.app.plugin.core.debug.gui.console;
 import static org.junit.Assert.*;
 
 import org.junit.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.rules.TestName;
 
 import docking.ActionContext;
@@ -39,7 +41,7 @@ public class DebuggerConsolePluginScreenShots extends GhidraScreenShotGenerator 
 	@Rule
 	public TestName name = new TestName();
 
-	@Before
+	@BeforeEach
 	public void setUpMine() throws Throwable {
 		consolePlugin = addPlugin(tool, DebuggerConsolePlugin.class);
 		consoleProvider = waitForComponentProvider(DebuggerConsoleProvider.class);

@@ -29,6 +29,8 @@ import ghidra.program.model.data.*;
 import ghidra.program.util.string.FoundString;
 import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
 import ghidra.test.ToyProgramBuilder;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DefinedStringIteratorTest extends AbstractGhidraHeadlessIntegrationTest {
 
@@ -39,7 +41,7 @@ public class DefinedStringIteratorTest extends AbstractGhidraHeadlessIntegration
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		ToyProgramBuilder builder = new ToyProgramBuilder("TestGhidraSearches", false);

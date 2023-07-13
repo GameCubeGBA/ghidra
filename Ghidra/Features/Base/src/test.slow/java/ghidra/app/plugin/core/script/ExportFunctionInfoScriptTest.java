@@ -22,8 +22,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
@@ -48,7 +48,7 @@ public class ExportFunctionInfoScriptTest extends AbstractGhidraHeadedIntegratio
 	private Function f1;
 	private Function f2;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		program = buildProgram();

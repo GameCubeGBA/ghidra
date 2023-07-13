@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.junit.Before;
 import org.junit.experimental.categories.Category;
 
 import db.Transaction;
@@ -40,6 +39,7 @@ import ghidra.trace.model.guest.TraceGuestPlatform;
 import ghidra.trace.model.guest.TracePlatform;
 import ghidra.trace.model.memory.TraceMemorySpace;
 import ghidra.trace.model.thread.TraceThread;
+import org.junit.jupiter.api.BeforeEach;
 
 @Category(NightlyCategory.class) // this may actually be an @PortSensitive test
 public class DebuggerRegistersProviderGuestTest extends DebuggerRegistersProviderTest {
@@ -60,7 +60,7 @@ public class DebuggerRegistersProviderGuestTest extends DebuggerRegistersProvide
 		}
 	}
 
-	@Before
+	@BeforeEach
 	@Override
 	public void setUpRegistersProviderTest() throws Exception {
 		registersPlugin = addPlugin(tool, DebuggerRegistersPlugin.class);

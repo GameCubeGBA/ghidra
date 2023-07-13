@@ -17,7 +17,7 @@ package ghidra.util.task;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.test.AbstractDockingTest;
 import generic.test.AbstractGenericTest;

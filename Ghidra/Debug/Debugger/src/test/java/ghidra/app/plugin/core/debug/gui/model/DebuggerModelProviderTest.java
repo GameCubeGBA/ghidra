@@ -48,6 +48,9 @@ import ghidra.trace.model.target.*;
 import ghidra.trace.model.target.TraceObject.ConflictResolution;
 import ghidra.trace.model.thread.TraceObjectThread;
 import ghidra.trace.model.thread.TraceThread;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DebuggerModelProviderTest extends AbstractGhidraHeadedDebuggerGUITest {
 
@@ -113,13 +116,13 @@ public class DebuggerModelProviderTest extends AbstractGhidraHeadedDebuggerGUITe
 	protected DebuggerModelPlugin modelPlugin;
 	protected DebuggerModelProvider modelProvider;
 
-	@Before
+	@BeforeEach
 	public void setUpModelProviderTest() throws Exception {
 		modelPlugin = addPlugin(tool, DebuggerModelPlugin.class);
 		modelProvider = waitForComponentProvider(DebuggerModelProvider.class);
 	}
 
-	@After
+	@AfterEach
 	public void tearDownModelProviderTest() throws Exception {
 		traceManager.activate(DebuggerCoordinates.NOWHERE);
 		waitForSwing();

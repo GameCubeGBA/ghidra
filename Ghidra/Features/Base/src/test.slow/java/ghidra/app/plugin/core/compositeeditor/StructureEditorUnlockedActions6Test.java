@@ -21,10 +21,9 @@ import java.awt.Window;
 
 import javax.swing.JTextField;
 
-import org.junit.Test;
-
 import docking.widgets.dialogs.NumberInputDialog;
 import ghidra.program.model.data.*;
+import org.junit.jupiter.api.Test;
 
 public class StructureEditorUnlockedActions6Test
 		extends AbstractStructureEditorTest {

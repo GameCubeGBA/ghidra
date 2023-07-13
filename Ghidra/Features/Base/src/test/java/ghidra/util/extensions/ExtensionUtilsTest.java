@@ -22,13 +22,12 @@ import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import docking.test.AbstractDockingTest;
 import generic.jar.ResourceFile;
 import ghidra.framework.Application;
 import ghidra.framework.plugintool.dialog.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import utilities.util.FileUtilities;
 import utility.application.ApplicationLayout;
 
@@ -47,7 +46,7 @@ public class ExtensionUtilsTest extends AbstractDockingTest {
 	 * Create dummy archive and installation folders in the temp space that we can populate
 	 * with extensions.
 	 */
-	@Before
+	@BeforeEach
 	public void setup() throws IOException {
 
 		gLayout = Application.getApplicationLayout();

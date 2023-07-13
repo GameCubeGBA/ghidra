@@ -15,8 +15,8 @@
  */
 package ghidra.app.plugin.core.debug.gui.platform;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import db.Transaction;
 import ghidra.app.plugin.core.debug.service.tracemgr.DebuggerTraceManagerServicePlugin;
@@ -33,7 +33,7 @@ public class DebuggerPlatformPluginScreenShots extends GhidraScreenShotGenerator
 	DebuggerTraceManagerService traceManager;
 	DebuggerPlatformPlugin platformPlugin;
 
-	@Before
+	@BeforeEach
 	public void setUpMine() throws Throwable {
 		traceManager = addPlugin(tool, DebuggerTraceManagerServicePlugin.class);
 		platformPlugin = addPlugin(tool, DebuggerPlatformPlugin.class);

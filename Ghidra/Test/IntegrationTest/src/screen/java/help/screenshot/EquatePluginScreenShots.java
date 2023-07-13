@@ -20,8 +20,6 @@ import java.awt.Rectangle;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-import org.junit.Test;
-
 import docking.action.DockingActionIf;
 import docking.widgets.OptionDialog;
 import ghidra.app.cmd.data.CreateDataCmd;
@@ -39,6 +37,7 @@ import ghidra.program.model.data.*;
 import ghidra.program.model.listing.*;
 import ghidra.program.util.OperandFieldLocation;
 import ghidra.program.util.ProgramSelection;
+import org.junit.jupiter.api.Test;
 
 /**
  * Generates screenshots associated with Equate dialog.

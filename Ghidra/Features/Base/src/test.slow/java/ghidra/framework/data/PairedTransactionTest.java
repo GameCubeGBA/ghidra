@@ -26,6 +26,9 @@ import generic.test.AbstractGuiTest;
 import ghidra.framework.model.*;
 import ghidra.framework.options.Options;
 import ghidra.framework.store.LockException;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class PairedTransactionTest extends AbstractGuiTest {
 
@@ -38,7 +41,7 @@ public class PairedTransactionTest extends AbstractGuiTest {
 	private Options propertyList1;
 	private Options propertyList2;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		obj1 = new DummyDomainObject("obj1", this);
@@ -67,7 +70,7 @@ public class PairedTransactionTest extends AbstractGuiTest {
 
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (obj1 != null) {
 			obj1.release(this);

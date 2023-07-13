@@ -17,8 +17,7 @@ package ghidra.app.cmd.data;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import generic.test.AbstractGenericTest;
 import ghidra.program.database.ProgramBuilder;
@@ -31,6 +30,7 @@ import ghidra.program.model.symbol.RefType;
 import ghidra.program.model.symbol.SourceType;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.exception.InvalidInputException;
+import org.junit.jupiter.api.Test;
 
 /**
  * 
@@ -45,7 +45,7 @@ public class CreateDataCmdTest extends AbstractGenericTest {
 	private Listing listing;
 	private ProgramBuilder builder;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		program = buildProgram();
 		listing = program.getListing();

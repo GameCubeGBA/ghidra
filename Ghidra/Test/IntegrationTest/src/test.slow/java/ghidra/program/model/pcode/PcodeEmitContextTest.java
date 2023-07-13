@@ -26,6 +26,9 @@ import ghidra.program.model.address.*;
 import ghidra.program.model.listing.*;
 import ghidra.program.model.symbol.*;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * 
@@ -116,7 +119,7 @@ public class PcodeEmitContextTest extends AbstractGhidraHeadlessIntegrationTest 
 	private Address func3Addr;
 	private ReferenceManager refManager;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		program = buildProgram();
 		defaultSpace = program.getAddressFactory().getDefaultAddressSpace();
@@ -200,7 +203,7 @@ public class PcodeEmitContextTest extends AbstractGhidraHeadlessIntegrationTest 
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

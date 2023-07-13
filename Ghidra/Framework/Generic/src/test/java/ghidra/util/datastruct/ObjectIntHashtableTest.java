@@ -17,10 +17,10 @@ package ghidra.util.datastruct;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.util.exception.NoValueException;
+import org.junit.jupiter.api.Test;
 
 public class ObjectIntHashtableTest extends AbstractGenericTest {
 

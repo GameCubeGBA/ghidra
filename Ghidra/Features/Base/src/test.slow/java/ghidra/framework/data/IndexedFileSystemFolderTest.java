@@ -25,6 +25,9 @@ import java.io.File;
 import java.io.IOException;
 
 import org.junit.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class IndexedFileSystemFolderTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -39,7 +42,7 @@ public class IndexedFileSystemFolderTest extends AbstractGhidraHeadedIntegration
 	public IndexedFileSystemFolderTest() {
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		testRootDir = createTempDirectory("test_indexed_fs_folders");
 		privateProjectDir = new File(testRootDir, "privateFS");
@@ -56,7 +59,7 @@ public class IndexedFileSystemFolderTest extends AbstractGhidraHeadedIntegration
 		root = projectFileManager.getRootFolder();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		deleteTestFiles();
 	}

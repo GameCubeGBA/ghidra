@@ -17,12 +17,12 @@ package ghidra.trace.database.context;
 
 import static ghidra.lifecycle.Unfinished.TODO;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
 
-@Ignore("TODO")
+@Disabled("TODO")
 public class DBTraceRegisterContextManagerTest extends AbstractGhidraHeadlessIntegrationTest {
 	@Test
 	public void testSomething() {

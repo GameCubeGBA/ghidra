@@ -19,10 +19,9 @@ import static org.junit.Assert.*;
 
 import java.awt.*;
 
-import org.junit.Test;
-
 import generic.test.AbstractGenericTest;
 import ghidra.util.exception.AssertException;
+import org.junit.jupiter.api.Test;
 
 public class PopupWindowPlacerTest extends AbstractGenericTest {
 

@@ -26,8 +26,8 @@ import java.util.Date;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import docking.test.AbstractDockingTest;
 import docking.widgets.table.constraint.ColumnConstraint;
@@ -43,7 +43,7 @@ public class DateRangeConstraintEditorTest extends AbstractDockingTest {
 	private JTextField lowerTextField;
 	private JTextField upperTextField;
 
-	@Before
+	@BeforeEach
 	public void setup() {
 		constraint = findDateInRangeConstraint();
 		editor = constraint.getEditor(null);

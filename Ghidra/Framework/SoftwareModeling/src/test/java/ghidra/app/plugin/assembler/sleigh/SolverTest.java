@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 import java.util.Collections;
 import java.util.concurrent.atomic.AtomicReference;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 
 import ghidra.GhidraApplicationLayout;

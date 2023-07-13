@@ -20,7 +20,6 @@ import static org.junit.Assert.*;
 import java.util.List;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 import ghidra.program.database.*;
 import ghidra.program.model.address.Address;
@@ -32,6 +31,7 @@ import ghidra.program.model.symbol.Equate;
 import ghidra.program.model.symbol.EquateTable;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.exception.InvalidInputException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test the versioned merge of equate changes and conflicts.

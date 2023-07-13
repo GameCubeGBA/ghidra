@@ -24,13 +24,13 @@ import javax.swing.JSpinner;
 import javax.swing.JSpinner.NumberEditor;
 import javax.swing.JTextField;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.test.AbstractDockingTest;
 import docking.widgets.table.constraint.ColumnConstraint;
 import docking.widgets.table.constraint.InRangeColumnConstraint;
 import docking.widgets.table.constraint.provider.NumberColumnConstraintProvider;
+import org.junit.jupiter.api.BeforeEach;
 
 public class DoubleRangeConstraintEditorTest extends AbstractDockingTest {
 
@@ -41,7 +41,7 @@ public class DoubleRangeConstraintEditorTest extends AbstractDockingTest {
 	private JTextField lowerTextField;
 	private JTextField upperTextField;
 
-	@Before
+	@BeforeEach
 	public void setup() {
 		constraint = findDoubleConstraint();
 		editor = (DoubleRangeConstraintEditor) constraint.getEditor(null);

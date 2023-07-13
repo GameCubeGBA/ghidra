@@ -34,13 +34,17 @@ import ghidra.trace.database.DBTrace;
 import ghidra.util.InvalidNameException;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.task.ConsoleTaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 public class DBTraceDataTypeManagerTest extends AbstractGhidraHeadlessIntegrationTest {
 	protected Language toyLanguage;
 	protected DBTrace trace;
 	protected DBTraceDataTypeManager dtm;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws IOException {
 		toyLanguage = DefaultLanguageService.getLanguageService()
 				.getLanguage(
@@ -49,7 +53,7 @@ public class DBTraceDataTypeManagerTest extends AbstractGhidraHeadlessIntegratio
 		dtm = trace.getDataTypeManager();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		trace.release(this);
 	}
@@ -120,7 +124,7 @@ public class DBTraceDataTypeManagerTest extends AbstractGhidraHeadlessIntegratio
 	}
 
 	@Test
-	@Ignore("TODO")
+	@Disabled("TODO")
 	public void testAddRemoveUndoThenGet() throws IOException {
 		StructureDataType mine = getTestDataType();
 		DataTypePath minePath = mine.getDataTypePath();
@@ -158,7 +162,7 @@ public class DBTraceDataTypeManagerTest extends AbstractGhidraHeadlessIntegratio
 	}
 
 	@Test
-	@Ignore("TODO")
+	@Disabled("TODO")
 	public void testReplaceDataType() throws DataTypeDependencyException {
 		StructureDataType mineA = getTestDataType();
 		DataTypePath mineAPath = mineA.getDataTypePath();

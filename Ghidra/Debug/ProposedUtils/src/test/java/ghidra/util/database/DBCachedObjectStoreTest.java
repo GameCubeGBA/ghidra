@@ -40,6 +40,9 @@ import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.VersionException;
 import ghidra.util.task.ConsoleTaskMonitor;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DBCachedObjectStoreTest {
 	static {
@@ -154,7 +157,7 @@ public class DBCachedObjectStoreTest {
 		}
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws IOException, VersionException {
 		myDomainObject = new MyDomainObject("Testing", 500, 1000, this);
 		handle = myDomainObject.getDBHandle();
@@ -170,7 +173,7 @@ public class DBCachedObjectStoreTest {
 		rEntrySet = rMap.entrySet();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		myDomainObject.release(this);
 	}

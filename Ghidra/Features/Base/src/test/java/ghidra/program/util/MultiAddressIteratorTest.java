@@ -22,6 +22,9 @@ import org.junit.*;
 
 import generic.test.AbstractGenericTest;
 import ghidra.program.model.address.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class MultiAddressIteratorTest extends AbstractGenericTest {
 
@@ -36,7 +39,7 @@ public class MultiAddressIteratorTest extends AbstractGenericTest {
 	/**
 	 * @see TestCase#setUp()
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		space = new GenericAddressSpace("xx", 32, AddressSpace.TYPE_RAM, 0);
@@ -46,7 +49,7 @@ public class MultiAddressIteratorTest extends AbstractGenericTest {
 	/**
 	 * @see TestCase#tearDown()
 	 */
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		space = null;
 		factory = null;

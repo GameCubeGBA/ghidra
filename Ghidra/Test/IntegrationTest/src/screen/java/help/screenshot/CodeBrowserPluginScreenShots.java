@@ -24,8 +24,6 @@ import java.util.List;
 
 import javax.swing.*;
 
-import org.junit.Test;
-
 import docking.DockableComponent;
 import docking.widgets.fieldpanel.FieldPanel;
 import generic.theme.GThemeDefaults.Colors;
@@ -42,6 +40,7 @@ import ghidra.app.util.viewer.listingpanel.ListingPanel;
 import ghidra.app.util.viewer.listingpanel.OverviewProvider;
 import ghidra.program.model.data.*;
 import ghidra.program.model.listing.CodeUnit;
+import org.junit.jupiter.api.Test;
 
 public class CodeBrowserPluginScreenShots extends GhidraScreenShotGenerator {
 

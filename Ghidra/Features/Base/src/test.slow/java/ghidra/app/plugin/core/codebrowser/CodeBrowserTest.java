@@ -50,6 +50,9 @@ import ghidra.program.util.ProgramSelection;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.table.AddressPreviewTableModel;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class CodeBrowserTest extends AbstractGhidraHeadedIntegrationTest {
 	private TestEnv env;
@@ -63,7 +66,7 @@ public class CodeBrowserTest extends AbstractGhidraHeadedIntegrationTest {
 		return addrFactory.getAddress(address);
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -136,7 +139,7 @@ public class CodeBrowserTest extends AbstractGhidraHeadedIntegrationTest {
 		addPlugin(tool, SymbolTablePlugin.class);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}

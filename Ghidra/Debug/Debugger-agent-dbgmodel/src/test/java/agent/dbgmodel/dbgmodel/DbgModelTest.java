@@ -22,8 +22,8 @@ import java.nio.ByteBuffer;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.sun.jna.Pointer;
 import com.sun.jna.WString;
@@ -84,7 +84,7 @@ public class DbgModelTest extends AbstractGhidraHeadlessIntegrationTest {
 	protected DebugClient client;
 	protected DebugControl control;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		DbgEngTest.assumeDbgengDLLLoadable();
 		debugCreate();

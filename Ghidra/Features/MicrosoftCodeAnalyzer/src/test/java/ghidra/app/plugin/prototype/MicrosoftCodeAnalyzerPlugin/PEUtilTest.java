@@ -18,11 +18,10 @@ package ghidra.app.plugin.prototype.MicrosoftCodeAnalyzerPlugin;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Test;
-
 import ghidra.app.cmd.data.AbstractCreateDataTypeModelTest;
 import ghidra.program.database.ProgramBuilder;
 import ghidra.program.database.ProgramDB;
+import org.junit.jupiter.api.Test;
 
 public class PEUtilTest extends AbstractCreateDataTypeModelTest {
 

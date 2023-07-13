@@ -23,8 +23,7 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
 
 import ghidra.app.plugin.core.analysis.AutoAnalysisManager;
 import ghidra.app.services.DataTypeManagerService;
@@ -41,6 +40,7 @@ import ghidra.program.model.data.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Base class for unit tests needing DWARF DIEs.  Provides 2 DWARF compile-units and helper
@@ -65,7 +65,7 @@ public class DWARFTestBase extends AbstractGhidraHeadedIntegrationTest {
 	protected CategoryPath uncatCP;
 	protected CategoryPath dwarfRootCP;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		program = createDefaultProgram(testName.getMethodName(), ProgramBuilder._X64, this);
 		space = program.getAddressFactory().getDefaultAddressSpace();
@@ -98,7 +98,7 @@ public class DWARFTestBase extends AbstractGhidraHeadedIntegrationTest {
 		setMockCompilationUnits(cu, cu2);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		endTransaction();
 		dwarfProg.close();

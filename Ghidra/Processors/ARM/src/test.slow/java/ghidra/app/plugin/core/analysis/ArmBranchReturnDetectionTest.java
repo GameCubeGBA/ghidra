@@ -32,6 +32,9 @@ import ghidra.program.model.listing.*;
 import ghidra.program.model.symbol.SourceType;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ArmBranchReturnDetectionTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -42,13 +45,13 @@ public class ArmBranchReturnDetectionTest extends AbstractGhidraHeadedIntegratio
 
 	private ProgramBuilder builder;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		if (program != null) {
 			env.release(program);

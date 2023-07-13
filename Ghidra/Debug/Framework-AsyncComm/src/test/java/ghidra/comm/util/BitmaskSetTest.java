@@ -25,7 +25,7 @@ import javax.tools.*;
 import javax.tools.JavaCompiler.CompilationTask;
 import javax.tools.JavaFileObject.Kind;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.util.Msg;
 

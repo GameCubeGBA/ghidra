@@ -25,6 +25,9 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.rules.TemporaryFolder;
 
 import generic.jar.ResourceFile;
@@ -70,14 +73,14 @@ public class PythonCodeCompletionTest extends AbstractGhidraHeadedIntegrationTes
 
 	private GhidraPythonInterpreter interpreter;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		GhidraScriptUtil.initialize(new BundleHost(), null);
 		interpreter = GhidraPythonInterpreter.get();
 		executePythonProgram(simpleTestProgram);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		interpreter.cleanup();
 		GhidraScriptUtil.dispose();

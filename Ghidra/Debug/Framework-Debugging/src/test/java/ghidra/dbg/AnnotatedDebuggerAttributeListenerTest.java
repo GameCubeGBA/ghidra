@@ -18,7 +18,7 @@ package ghidra.dbg;
 import java.lang.invoke.MethodHandles;
 import java.util.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.async.AsyncReference;
 import ghidra.dbg.agent.AbstractDebuggerObjectModel;

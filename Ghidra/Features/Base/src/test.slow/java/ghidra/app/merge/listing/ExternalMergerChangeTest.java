@@ -18,7 +18,6 @@ package ghidra.app.merge.listing;
 import static org.junit.Assert.*;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 import ghidra.program.database.OriginalProgramModifierListener;
 import ghidra.program.database.ProgramDB;
@@ -29,6 +28,7 @@ import ghidra.program.model.listing.*;
 import ghidra.program.model.symbol.*;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.exception.InvalidInputException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test the merge of the versioned program's listing.

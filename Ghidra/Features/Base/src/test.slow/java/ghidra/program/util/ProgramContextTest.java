@@ -32,6 +32,8 @@ import ghidra.program.model.mem.Memory;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.task.TaskMonitor;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * quick and dirty test of the ProgramContextImpl just to see
@@ -50,7 +52,7 @@ public class ProgramContextTest extends AbstractGhidraHeadedIntegrationTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws IOException {
 		Language lang = getSLEIGH_8051_LANGUAGE();
 		space = lang.getAddressFactory().getDefaultAddressSpace();

@@ -20,11 +20,10 @@ import static org.junit.Assert.*;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.junit.Test;
-
 import generic.test.AbstractGenericTest;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.TimeoutException;
+import org.junit.jupiter.api.Test;
 
 public class TimeoutTaskMonitorTest extends AbstractGenericTest {
 

@@ -18,9 +18,9 @@ package ghidra.plugins.importer.tasks;
 import java.net.MalformedURLException;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 import ghidra.formats.gfilesystem.FSRL;
+import org.junit.jupiter.api.Test;
 
 public class ImportBatchTaskTest {
 	private static String mkFSRL(int depth) {

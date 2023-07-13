@@ -22,9 +22,9 @@ import java.awt.Font;
 
 import javax.swing.Icon;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
+import org.junit.jupiter.api.Test;
 import resources.ResourceManager;
 
 public class ThemeEventTest {
@@ -35,7 +35,7 @@ public class ThemeEventTest {
 
 	private GThemeValueMap values;
 
-	@Before
+	@BeforeEach
 	public void setup() {
 		values = new GThemeValueMap();
 	}

@@ -59,6 +59,8 @@ import ghidra.program.model.symbol.SourceType;
 import ghidra.program.util.ProgramLocation;
 import ghidra.program.util.ProgramSelection;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class FunctionGraphPlugin1Test extends AbstractFunctionGraphTest {
 
@@ -67,7 +69,7 @@ public class FunctionGraphPlugin1Test extends AbstractFunctionGraphTest {
 	}
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 

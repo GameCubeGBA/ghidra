@@ -27,6 +27,9 @@ import ghidra.app.util.cparser.CPP.ParseException;
 import ghidra.app.util.cparser.CPP.PreProcessor;
 import ghidra.program.model.data.*;
 import ghidra.program.model.data.Enum;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class PreProcessorTest extends AbstractGenericTest {
 	private static String resourceName = "PreProcessorTest.h";
@@ -48,7 +51,7 @@ public class PreProcessorTest extends AbstractGenericTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void init() {
 		if (dtMgr != null) {
 			return; // do only once - but not too soon
@@ -97,7 +100,7 @@ public class PreProcessorTest extends AbstractGenericTest {
 		parser.getDefinitions().populateDefineEquates(null, dtMgr);
 	}
 
-	@AfterClass
+	@AfterAll
 	public static void destroy() {
 		dtMgr = null;
 		baos = null;

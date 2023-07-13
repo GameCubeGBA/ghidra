@@ -23,10 +23,9 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.text.Document;
 
-import org.junit.Test;
-
 import generic.test.AbstractGuiTest;
 import ghidra.framework.plugintool.DummyPluginTool;
+import org.junit.jupiter.api.Test;
 
 public class ConsoleTextPaneTest {
 

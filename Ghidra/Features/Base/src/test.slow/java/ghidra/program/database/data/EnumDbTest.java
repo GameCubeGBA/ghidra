@@ -24,6 +24,9 @@ import ghidra.program.database.ProgramDB;
 import ghidra.program.model.data.Enum;
 import ghidra.program.model.data.EnumDataType;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for Enum data types.
@@ -38,7 +41,7 @@ public class EnumDbTest extends AbstractGhidraHeadedIntegrationTest {
 	private Enum enum4;
 	private Enum enum8;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		program = createDefaultProgram("Test", ProgramBuilder._TOY, this);
 
@@ -55,7 +58,7 @@ public class EnumDbTest extends AbstractGhidraHeadedIntegrationTest {
 		enum8 = (Enum) dataMgr.resolve(enum8, null);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		program.endTransaction(transactionID, false);
 		program.release(this);

@@ -26,6 +26,9 @@ import ghidra.program.model.data.DataTypeConflictHandler.ConflictResult;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.UniversalID;
 import ghidra.util.UniversalIdGenerator;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link DataTypeConflictHandler conflict handler} stuff.
@@ -58,7 +61,7 @@ public class ConflictHandlerTest extends AbstractGhidraHeadedIntegrationTest {
 	/*
 	 * @see TestCase#setUp()
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		program = createDefaultProgram(testName.getMethodName(), ProgramBuilder._TOY, this);
 		dataMgr = program.getDataTypeManager();
@@ -68,7 +71,7 @@ public class ConflictHandlerTest extends AbstractGhidraHeadedIntegrationTest {
 	/*
 	 * @see TestCase#tearDown()
 	 */
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		endTransaction();
 		program.release(this);

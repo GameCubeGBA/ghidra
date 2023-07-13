@@ -22,7 +22,7 @@ import java.nio.file.Files;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.program.model.listing.FunctionTag;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;

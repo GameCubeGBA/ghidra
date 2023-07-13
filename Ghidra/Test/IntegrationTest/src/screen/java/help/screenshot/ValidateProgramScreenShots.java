@@ -17,7 +17,7 @@ package help.screenshot;
 
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.DialogComponentProvider;
 import docking.widgets.conditiontestpanel.ConditionTestModel;

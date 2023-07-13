@@ -18,11 +18,11 @@ package agent.gdb.manager.impl;
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
 
-import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 
 import agent.gdb.manager.GdbManager;
 
-@Ignore("Need compatible GDB version for CI")
+@Disabled("Need compatible GDB version for CI")
 public class SpawnedCliGdbManagerTest extends AbstractGdbManagerTest {
 	@Override
 	protected CompletableFuture<Void> startManager(GdbManager manager) {

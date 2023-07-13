@@ -18,10 +18,10 @@ package ghidra.pcode.opbehavior;
 import java.math.BigInteger;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 import ghidra.pcode.floatformat.FloatFormat;
 import ghidra.pcode.floatformat.FloatFormatFactory;
+import org.junit.jupiter.api.Test;
 
 public class OpBehaviorFloatDivTest extends AbstractOpBehaviorTest {
 

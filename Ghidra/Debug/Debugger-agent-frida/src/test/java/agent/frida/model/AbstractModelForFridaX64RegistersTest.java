@@ -21,8 +21,8 @@ import static org.junit.Assume.*;
 import java.util.*;
 import java.util.Map.Entry;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import agent.frida.model.iface2.FridaModelTargetProcess;
 import agent.frida.model.impl.FridaModelTargetThreadContainerImpl;
@@ -74,7 +74,7 @@ public abstract class AbstractModelForFridaX64RegistersTest
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testRegistersHaveExpectedSizes() throws Throwable {
 		// Disabled as of 220609
@@ -96,7 +96,7 @@ public abstract class AbstractModelForFridaX64RegistersTest
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testRegisterBankIsWhereExpected() throws Throwable {
 		// Disabled as of 220609
@@ -115,7 +115,7 @@ public abstract class AbstractModelForFridaX64RegistersTest
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testReadRegisters() throws Throwable {
 		// Disabled as of 220609
@@ -145,7 +145,7 @@ public abstract class AbstractModelForFridaX64RegistersTest
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testWriteRegisters() throws Throwable {
 		m.build();
@@ -177,7 +177,7 @@ public abstract class AbstractModelForFridaX64RegistersTest
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testBanksAreContainersConventionIsAsExpected() throws Throwable {
 		// Disabled as of 220609

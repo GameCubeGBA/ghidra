@@ -19,8 +19,8 @@ import static org.junit.Assert.*;
 
 import java.io.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.util.LongIterator;
@@ -30,7 +30,7 @@ import ghidra.util.map.ObjectValueMap;
 public class ObjectValueMapTest extends AbstractGenericTest {
 	ObjectValueMap<Integer> ps;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		ps = new ObjectValueMap<>("Test");
 	}

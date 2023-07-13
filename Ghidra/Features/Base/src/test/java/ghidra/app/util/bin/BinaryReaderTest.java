@@ -22,7 +22,7 @@ import java.io.EOFException;
 import java.io.IOException;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.util.NumericUtilities;
 

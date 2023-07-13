@@ -20,8 +20,8 @@ import static org.junit.Assert.*;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 import ghidra.dbg.DebugModelConventions;
 import ghidra.dbg.DebugModelConventions.AsyncState;
@@ -162,12 +162,12 @@ public abstract class AbstractDebuggerModelTest extends AbstractGhidraHeadedInte
 		m.validateCompletionThread();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUpDebuggerModelTest() throws Throwable {
 		m = modelHost();
 	}
 
-	@After
+	@AfterEach
 	public void tearDownDebuggerModelTest() throws Throwable {
 		/**
 		 * NB. Model has to be closed before dummy. If dummy is suspended by a debugger, terminating

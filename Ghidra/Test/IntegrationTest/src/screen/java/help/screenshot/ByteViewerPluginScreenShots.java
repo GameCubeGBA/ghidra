@@ -15,13 +15,12 @@
  */
 package help.screenshot;
 
-import org.junit.Test;
-
 import docking.ComponentProvider;
 import docking.DialogComponentProvider;
 import ghidra.app.plugin.core.clear.ClearCmd;
 import ghidra.app.util.AddressInput;
 import ghidra.program.model.address.AddressSet;
+import org.junit.jupiter.api.Test;
 
 public class ByteViewerPluginScreenShots extends GhidraScreenShotGenerator {
 

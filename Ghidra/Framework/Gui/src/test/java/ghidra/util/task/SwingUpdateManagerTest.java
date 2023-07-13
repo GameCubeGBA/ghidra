@@ -21,11 +21,11 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import generic.test.AbstractGuiTest;
 import ghidra.util.SystemUtilities;
+import org.junit.jupiter.api.Test;
 
 public class SwingUpdateManagerTest extends AbstractGuiTest {
 	private static final int MIN_DELAY = 500;
@@ -33,7 +33,7 @@ public class SwingUpdateManagerTest extends AbstractGuiTest {
 	private volatile int runnableCalled;
 	private SwingUpdateManager manager;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		manager = createUpdateManager(MIN_DELAY, MAX_DELAY);
 

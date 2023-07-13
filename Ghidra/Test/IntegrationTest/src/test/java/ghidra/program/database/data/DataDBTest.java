@@ -19,8 +19,8 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.program.database.ProgramBuilder;
@@ -33,7 +33,7 @@ public class DataDBTest extends AbstractGenericTest {
 	private Program program;
 	private Listing listing;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		program = buildProgram();
 		listing = program.getListing();

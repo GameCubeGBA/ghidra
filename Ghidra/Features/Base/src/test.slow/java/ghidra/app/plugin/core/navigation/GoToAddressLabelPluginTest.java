@@ -70,6 +70,9 @@ import ghidra.util.Swing;
 import ghidra.util.table.GhidraProgramTableModel;
 import ghidra.util.table.field.LabelTableColumn;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import util.CollectionUtils;
 
 public class GoToAddressLabelPluginTest extends AbstractGhidraHeadedIntegrationTest {
@@ -83,7 +86,7 @@ public class GoToAddressLabelPluginTest extends AbstractGhidraHeadedIntegrationT
 	private CodeViewerProvider provider;
 	private JButton okButton;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -101,7 +104,7 @@ public class GoToAddressLabelPluginTest extends AbstractGhidraHeadedIntegrationT
 		setCaseSensitive(true);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		closeAllWindows();
 		env.dispose();

@@ -20,6 +20,8 @@ import static org.junit.Assert.*;
 import org.junit.*;
 
 import generic.test.AbstractGenericTest;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class FunctionDefinitionDataTypeTest extends AbstractGenericTest {
 	private StandAloneDataTypeManager dtm;
@@ -29,7 +31,7 @@ public class FunctionDefinitionDataTypeTest extends AbstractGenericTest {
 		return (FunctionDefinition) dtm.resolve(new FunctionDefinitionDataType(name), null);
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		dtm = new StandAloneDataTypeManager("dummyDTM");
 		dtm.startTransaction("");

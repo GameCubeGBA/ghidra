@@ -17,8 +17,8 @@ package ghidra.app.cmd.module;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import ghidra.program.database.ProgramBuilder;
 import ghidra.program.model.listing.*;
@@ -37,7 +37,7 @@ public class MergeFolderCmdTest extends AbstractGhidraHeadedIntegrationTest {
 	 * Sets up the fixture, for example, open a network connection.
 	 * This method is called before a test is executed.
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		program = buildProgram();
 	}

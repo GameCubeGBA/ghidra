@@ -20,14 +20,13 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.SwingUtilities;
 
-import org.junit.Test;
-
 import docking.ComponentProvider;
 import docking.DockableComponent;
 import generic.theme.GThemeDefaults.Colors.Palette;
 import ghidra.app.plugin.core.codebrowser.CodeViewerProvider;
 import ghidra.app.plugin.core.datamgr.DataTypesProvider;
 import ghidra.app.plugin.core.programtree.ViewManagerComponentProvider;
+import org.junit.jupiter.api.Test;
 
 public class DecompilePluginScreenShots extends GhidraScreenShotGenerator {
 	private static final Color NAVY = Palette.getColor("navy");

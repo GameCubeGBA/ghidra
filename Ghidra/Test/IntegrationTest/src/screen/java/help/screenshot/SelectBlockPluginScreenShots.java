@@ -18,7 +18,7 @@ package help.screenshot;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.DialogComponentProvider;
 

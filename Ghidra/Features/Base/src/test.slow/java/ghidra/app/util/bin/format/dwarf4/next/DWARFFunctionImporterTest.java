@@ -21,8 +21,6 @@ import java.util.List;
 
 import java.io.IOException;
 
-import org.junit.Test;
-
 import ghidra.app.util.NamespaceUtils;
 import ghidra.app.util.bin.format.dwarf4.*;
 import ghidra.app.util.bin.format.dwarf4.encoding.DWARFAttribute;
@@ -35,6 +33,7 @@ import ghidra.program.model.listing.*;
 import ghidra.program.model.symbol.Namespace;
 import ghidra.program.model.symbol.SourceType;
 import ghidra.util.exception.*;
+import org.junit.jupiter.api.Test;
 
 public class DWARFFunctionImporterTest extends DWARFTestBase {
 

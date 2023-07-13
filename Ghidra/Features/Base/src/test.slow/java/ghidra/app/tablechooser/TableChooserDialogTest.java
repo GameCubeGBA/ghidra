@@ -46,6 +46,9 @@ import ghidra.program.model.listing.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.ToyProgramBuilder;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import resources.Icons;
 import util.CollectionUtils;
 
@@ -62,7 +65,7 @@ public class TableChooserDialogTest extends AbstractGhidraHeadedIntegrationTest 
 	/** Interface for tests to signal what is expected of the executor */
 	private TestExecutorDecision testDecision = DEFAULT_DECISION;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		if (testName.getMethodName().contains("InBulk")) {
@@ -75,7 +78,7 @@ public class TableChooserDialogTest extends AbstractGhidraHeadedIntegrationTest 
 		createDialog(executor);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		runSwing(() -> {
 			tool.close();

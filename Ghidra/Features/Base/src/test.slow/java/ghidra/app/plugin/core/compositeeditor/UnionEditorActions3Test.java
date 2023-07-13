@@ -17,11 +17,10 @@ package ghidra.app.plugin.core.compositeeditor;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import docking.widgets.dialogs.NumberInputDialog;
 import ghidra.program.model.data.Array;
 import ghidra.program.model.data.DataType;
+import org.junit.jupiter.api.Test;
 
 public class UnionEditorActions3Test extends AbstractUnionEditorTest {
 

@@ -27,6 +27,9 @@ import org.junit.*;
 
 import generic.test.AbstractGenericTest;
 import ghidra.util.Msg;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import utilities.util.FileUtilities;
 
 public class BufferMgrTest extends AbstractGenericTest {
@@ -54,7 +57,7 @@ public class BufferMgrTest extends AbstractGenericTest {
 	int totalReadCount;
 	int totalUpdateCount;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		// Initialize fill data
@@ -65,7 +68,7 @@ public class BufferMgrTest extends AbstractGenericTest {
 		testDir = createTempDirectory(getClass().getSimpleName());
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		if (mgr != null) {

@@ -21,11 +21,10 @@ import java.util.List;
 
 import javax.swing.JDialog;
 
-import org.junit.Test;
-
 import ghidra.program.model.address.AddressSet;
 import ghidra.program.model.symbol.Equate;
 import ghidra.program.util.ProgramSelection;
+import org.junit.jupiter.api.Test;
 
 public class DiffApply2Test extends DiffApplyTestAdapter {
 

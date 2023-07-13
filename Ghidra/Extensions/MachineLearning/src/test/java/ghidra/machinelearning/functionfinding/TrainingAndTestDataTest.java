@@ -17,8 +17,8 @@ package ghidra.machinelearning.functionfinding;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.program.model.address.AddressSet;
@@ -32,7 +32,7 @@ public class TrainingAndTestDataTest extends AbstractGenericTest {
 	private AddressSet originalPos;
 	private AddressSet originalNeg;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		AddressSet testPositive = new AddressSet();
 		testPositive.add(new TestAddress(0), new TestAddress(100));

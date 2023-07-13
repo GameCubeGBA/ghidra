@@ -22,8 +22,6 @@ import java.util.Set;
 
 import javax.swing.*;
 
-import org.junit.Test;
-
 import docking.DialogComponentProvider;
 import docking.action.DockingAction;
 import docking.action.DockingActionIf;
@@ -37,6 +35,7 @@ import ghidra.app.util.viewer.field.MnemonicFieldFactory;
 import ghidra.program.util.ProgramSelection;
 import ghidra.util.Msg;
 import ghidra.util.exception.AssertException;
+import org.junit.jupiter.api.Test;
 
 public class ClipboardPluginScreenShots extends GhidraScreenShotGenerator {
 

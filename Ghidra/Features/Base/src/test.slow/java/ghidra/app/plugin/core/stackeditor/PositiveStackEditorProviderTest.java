@@ -19,12 +19,12 @@ import static org.junit.Assert.*;
 
 import javax.swing.JTextField;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import ghidra.framework.model.*;
 import ghidra.program.model.data.DataTypeManagerDomainObject;
 import ghidra.program.model.data.Pointer;
+import org.junit.jupiter.api.Test;
 
 public class PositiveStackEditorProviderTest extends AbstractStackEditorTest {
 
@@ -33,7 +33,7 @@ public class PositiveStackEditorProviderTest extends AbstractStackEditorTest {
 	}
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		env.showTool();

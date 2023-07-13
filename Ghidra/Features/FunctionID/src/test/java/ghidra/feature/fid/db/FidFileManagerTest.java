@@ -22,8 +22,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 
@@ -32,7 +32,7 @@ public class FidFileManagerTest extends AbstractGenericTest {
 	private FidFileManager fidFileMgr;
 	private int startingSize;
 
-	@Before
+	@BeforeEach
 	public void setup() {
 		fidFileMgr = FidFileManager.getInstance();
 		startingSize = fidFileMgr.getFidFiles().size();

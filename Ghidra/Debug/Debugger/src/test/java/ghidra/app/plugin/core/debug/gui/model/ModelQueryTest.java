@@ -18,7 +18,7 @@ package ghidra.app.plugin.core.debug.gui.model;
 import static ghidra.app.plugin.core.debug.gui.model.DebuggerModelProviderTest.*;
 import static org.junit.Assert.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import db.Transaction;
 import ghidra.app.plugin.core.debug.gui.AbstractGhidraHeadedDebuggerGUITest;

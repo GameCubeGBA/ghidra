@@ -20,8 +20,6 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import org.junit.Test;
-
 import ghidra.feature.vt.api.main.VTMarkupItem;
 import ghidra.feature.vt.api.main.VTMarkupItemStatus;
 import ghidra.feature.vt.api.markuptype.FunctionSignatureMarkupType;
@@ -34,6 +32,7 @@ import ghidra.program.model.listing.*;
 import ghidra.program.model.symbol.SourceType;
 import ghidra.program.util.DefaultLanguageService;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.Test;
 
 public class FunctionSignatureMarkupOptionsTest extends AbstractFunctionSignatureMarkupTest {
 

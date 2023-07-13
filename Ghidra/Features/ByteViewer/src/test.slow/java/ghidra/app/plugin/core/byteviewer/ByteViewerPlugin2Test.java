@@ -56,6 +56,9 @@ import ghidra.program.util.ProgramLocation;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test editing in the Byte Viewer.
@@ -82,7 +85,7 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 	/*
 	 * @see TestCase#setUp()
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		try {
@@ -127,7 +130,7 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 	/*
 	 * @see TestCase#tearDown()
 	 */
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.release(program);
 		env.dispose();

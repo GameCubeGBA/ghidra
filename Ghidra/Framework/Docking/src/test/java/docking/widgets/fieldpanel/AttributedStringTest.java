@@ -19,12 +19,11 @@ import static org.junit.Assert.*;
 
 import java.awt.*;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import docking.widgets.fieldpanel.field.*;
 import generic.test.AbstractGenericTest;
 import generic.theme.GThemeDefaults.Colors.Palette;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AttributedStringTest extends AbstractGenericTest {
 	FontMetrics fm;
@@ -34,7 +33,7 @@ public class AttributedStringTest extends AbstractGenericTest {
 	}
 
 	@SuppressWarnings("deprecation") // we mean to use getFontMetrics
-	@Before
+	@BeforeEach
 	public void setUp() {
 		Font font = new Font("Times New Roman", 0, 14);
 		Toolkit tk = Toolkit.getDefaultToolkit();

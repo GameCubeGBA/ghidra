@@ -15,7 +15,7 @@
  */
 package ghidra.program.model.data;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class UnionLittleEndianBitFieldTest extends AbstractCompositeBitFieldTest {
 

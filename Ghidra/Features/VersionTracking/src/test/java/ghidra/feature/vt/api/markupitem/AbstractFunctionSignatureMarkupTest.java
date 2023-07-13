@@ -23,8 +23,8 @@ import java.util.*;
 
 import org.apache.logging.log4j.*;
 import org.apache.logging.log4j.core.config.Configurator;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 import ghidra.app.plugin.core.analysis.AutoAnalysisManager;
 import ghidra.feature.vt.api.correlator.program.ExactMatchInstructionsProgramCorrelatorFactory;
@@ -97,7 +97,7 @@ public abstract class AbstractFunctionSignatureMarkupTest
 	protected Function sourceFunction;
 	protected Function destinationFunction;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		vtTestEnv = new VTTestEnv();
@@ -133,7 +133,7 @@ public abstract class AbstractFunctionSignatureMarkupTest
 			Boolean.TRUE);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		sourceProgram = null;
 		destinationProgram = null;

@@ -29,6 +29,9 @@ import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.ClassicSampleX86ProgramBuilder;
 import ghidra.util.task.TaskMonitor;
 import junit.framework.TestCase;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * <CODE>ProgramMergeTest</CODE> tests the <CODE>ProgramMerge</CODE> class
@@ -56,7 +59,7 @@ public class ProgramMerge1Test extends AbstractGhidraHeadedIntegrationTest {
 	/**
 	 * @see TestCase#setUp()
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		programBuilder1 = new ClassicSampleX86ProgramBuilder(false);
@@ -70,7 +73,7 @@ public class ProgramMerge1Test extends AbstractGhidraHeadedIntegrationTest {
 	/**
 	 * @see TestCase#tearDown()
 	 */
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		p1.endTransaction(txId1, false);
 		p2.endTransaction(txId2, false);

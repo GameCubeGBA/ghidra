@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.jar.ResourceFile;
 import resources.ResourceManager;

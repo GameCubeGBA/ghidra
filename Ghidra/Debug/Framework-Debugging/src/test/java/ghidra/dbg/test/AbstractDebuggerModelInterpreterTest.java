@@ -23,8 +23,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.junit.Test;
-
 import ghidra.async.AsyncReference;
 import ghidra.dbg.DebugModelConventions;
 import ghidra.dbg.DebuggerModelListener;
@@ -33,6 +31,7 @@ import ghidra.dbg.target.*;
 import ghidra.dbg.target.TargetConsole.Channel;
 import ghidra.dbg.testutil.CatchOffThread;
 import ghidra.util.Msg;
+import org.junit.jupiter.api.Test;
 
 public abstract class AbstractDebuggerModelInterpreterTest extends AbstractDebuggerModelTest
 		implements RequiresAttachSpecimen, RequiresLaunchSpecimen {

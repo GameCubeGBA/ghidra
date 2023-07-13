@@ -19,8 +19,6 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import org.junit.Test;
-
 import ghidra.app.merge.ProgramMultiUserMergeManager;
 import ghidra.program.database.MergeProgram;
 import ghidra.program.database.MergeProgramModifier;
@@ -28,6 +26,7 @@ import ghidra.program.model.data.*;
 import ghidra.program.model.lang.Register;
 import ghidra.program.model.listing.*;
 import ghidra.program.model.symbol.*;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test the merge of the versioned program's listing.

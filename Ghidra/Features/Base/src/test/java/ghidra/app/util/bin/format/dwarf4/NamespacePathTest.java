@@ -17,7 +17,7 @@ package ghidra.app.util.bin.format.dwarf4;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.app.util.bin.format.dwarf4.next.NamespacePath;
 import ghidra.program.model.symbol.SymbolType;

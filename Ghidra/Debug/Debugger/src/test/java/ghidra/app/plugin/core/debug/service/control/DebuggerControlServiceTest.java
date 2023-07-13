@@ -20,8 +20,8 @@ import static org.junit.Assert.*;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import db.Transaction;
 import ghidra.app.plugin.assembler.*;
@@ -82,7 +82,7 @@ public class DebuggerControlServiceTest extends AbstractGhidraHeadedDebuggerGUIT
 		throw new AssertionError();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUpEditorTest() throws Exception {
 		editingService = addPlugin(tool, DebuggerControlServicePlugin.class);
 		Language toy = getToyBE64Language();

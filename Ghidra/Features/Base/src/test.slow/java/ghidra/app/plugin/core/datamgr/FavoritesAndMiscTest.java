@@ -37,6 +37,9 @@ import ghidra.program.database.ProgramDB;
 import ghidra.program.model.data.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test the favorites and data manager services.
@@ -56,7 +59,7 @@ public class FavoritesAndMiscTest extends AbstractGhidraHeadedIntegrationTest {
 	private ToggleDockingAction favoritesAction;
 	private ArchiveNode programNode;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		clearFavorites();// tool will initialize defaults
 		env = new TestEnv();
@@ -99,7 +102,7 @@ public class FavoritesAndMiscTest extends AbstractGhidraHeadedIntegrationTest {
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

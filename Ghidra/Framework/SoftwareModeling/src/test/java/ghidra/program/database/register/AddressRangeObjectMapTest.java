@@ -22,6 +22,8 @@ import org.junit.*;
 
 import generic.test.AbstractGenericTest;
 import ghidra.program.model.address.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AddressRangeObjectMapTest extends AbstractGenericTest {
 
@@ -31,7 +33,7 @@ public class AddressRangeObjectMapTest extends AbstractGenericTest {
 		super();
 	}
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
 		space = new GenericAddressSpace("Test", 32, AddressSpace.TYPE_RAM, 0);
 	}

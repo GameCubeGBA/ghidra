@@ -21,7 +21,7 @@ import static org.junit.Assert.assertEquals;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.app.util.datatype.microsoft.GUID;

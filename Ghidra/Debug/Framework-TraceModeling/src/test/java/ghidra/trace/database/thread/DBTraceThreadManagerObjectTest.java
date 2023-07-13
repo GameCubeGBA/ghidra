@@ -15,18 +15,17 @@
  */
 package ghidra.trace.database.thread;
 
-import org.junit.Before;
-
 import db.Transaction;
 import ghidra.dbg.target.schema.SchemaContext;
 import ghidra.dbg.target.schema.TargetObjectSchema.SchemaName;
 import ghidra.dbg.target.schema.XmlSchemaContext;
+import org.junit.jupiter.api.BeforeEach;
 
 public class DBTraceThreadManagerObjectTest extends DBTraceThreadManagerTest {
 
 	protected SchemaContext ctx;
 
-	@Before
+	@BeforeEach
 	public void setUpObjectsMode() throws Exception {
 		ctx = XmlSchemaContext.deserialize("" + //
 			"<context>" + //

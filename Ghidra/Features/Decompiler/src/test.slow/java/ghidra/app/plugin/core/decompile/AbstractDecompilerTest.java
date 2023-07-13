@@ -20,8 +20,7 @@ import static org.junit.Assert.*;
 import java.awt.Point;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
 
 import docking.widgets.fieldpanel.FieldPanel;
 import docking.widgets.fieldpanel.field.Field;
@@ -31,13 +30,14 @@ import ghidra.app.decompiler.component.ClangTextField;
 import ghidra.app.decompiler.component.DecompilerPanel;
 import ghidra.program.model.pcode.HighFunction;
 import ghidra.test.AbstractProgramBasedTest;
+import org.junit.jupiter.api.BeforeEach;
 
 public abstract class AbstractDecompilerTest extends AbstractProgramBasedTest {
 
 	protected DecompilePlugin decompiler;
 	protected DecompilerProvider provider;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		super.initialize();
@@ -48,7 +48,7 @@ public abstract class AbstractDecompilerTest extends AbstractProgramBasedTest {
 	}
 
 	@Override
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		waitForDecompiler();
 

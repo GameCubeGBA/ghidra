@@ -19,8 +19,8 @@ import static org.junit.Assert.assertEquals;
 
 import java.nio.charset.Charset;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGTest;
 import ghidra.program.model.address.AddressSpace;
@@ -34,7 +34,7 @@ public class DialogResourceDataTypeTest extends AbstractGTest {
 
 	private GenericAddressSpace addressSpace;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		addressSpace = new GenericAddressSpace("Test Address Space", 32, AddressSpace.TYPE_RAM, 1);
 	}

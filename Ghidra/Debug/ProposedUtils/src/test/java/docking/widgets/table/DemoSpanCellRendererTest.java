@@ -36,17 +36,20 @@ import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.SystemUtilities;
 import ghidra.util.table.GhidraTable;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DemoSpanCellRendererTest extends AbstractGhidraHeadedIntegrationTest {
 	private TestEnv env;
 
-	@Before
+	@BeforeEach
 	public void setupDemo() throws IOException {
 		assumeFalse(SystemUtilities.isInTestingBatchMode());
 		env = new TestEnv();
 	}
 
-	@After
+	@AfterEach
 	public void tearDownDemo() {
 		if (env != null) {
 			env.dispose();

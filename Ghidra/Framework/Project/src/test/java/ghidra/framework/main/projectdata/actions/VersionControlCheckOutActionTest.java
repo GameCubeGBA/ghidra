@@ -22,8 +22,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.commons.collections4.IterableUtils;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import docking.DialogComponentProvider;
 import docking.test.AbstractDockingTest;
@@ -32,6 +31,7 @@ import ghidra.framework.plugintool.DummyPluginTool;
 import ghidra.util.*;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.Test;
 import util.CollectionUtils;
 
 public class VersionControlCheckOutActionTest extends AbstractDockingTest {
@@ -45,7 +45,7 @@ public class VersionControlCheckOutActionTest extends AbstractDockingTest {
 	private Set<DomainFile> failToCheckout = new HashSet<>();
 	private Set<DomainFile> checkedOut = new HashSet<>();
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		// signal to use the error display

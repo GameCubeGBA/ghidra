@@ -22,9 +22,9 @@ import java.math.BigInteger;
 import java.util.Random;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 import generic.test.AbstractGenericTest;
+import org.junit.jupiter.api.Test;
 
 public class FloatFormatTest extends AbstractGenericTest {
 

@@ -22,18 +22,18 @@ import static org.junit.Assume.assumeTrue;
 import java.io.*;
 import java.lang.ProcessBuilder.Redirect;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import com.sun.jna.LastErrorException;
 
 import agent.gdb.pty.*;
 import ghidra.dbg.testutil.DummyProc;
 import ghidra.framework.OperatingSystem;
+import org.junit.jupiter.api.Test;
 
 public class ConPtyTest extends AbstractPtyTest {
 
-	@Before
+	@BeforeEach
 	public void checkWindows() {
 		assumeTrue(OperatingSystem.WINDOWS == OperatingSystem.CURRENT_OPERATING_SYSTEM);
 	}

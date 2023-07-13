@@ -23,8 +23,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.jdom.JDOMException;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.experimental.categories.Category;
 
 import generic.test.category.NightlyCategory;
@@ -33,6 +32,7 @@ import ghidra.program.model.lang.*;
 import ghidra.program.util.DefaultLanguageService;
 import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
 import ghidra.util.xml.XmlUtilities;
+import org.junit.jupiter.api.Test;
 import utility.application.ApplicationLayout;
 
 @Category(NightlyCategory.class)
@@ -40,7 +40,7 @@ public class DWARFRegisterMappingsTest extends AbstractGhidraHeadlessIntegration
 
 	private Language x86Lang;
 
-	@Before
+	@BeforeEach
 	public void setup() throws Exception {
 		x86Lang = DefaultLanguageService.getLanguageService().getLanguage(
 			new LanguageID("x86:LE:32:default"));

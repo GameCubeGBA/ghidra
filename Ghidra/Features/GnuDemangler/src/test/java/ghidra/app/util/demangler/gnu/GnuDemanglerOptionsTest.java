@@ -17,7 +17,7 @@ package ghidra.app.util.demangler.gnu;
 
 import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static ghidra.app.util.demangler.gnu.GnuDemanglerFormat.*;
 

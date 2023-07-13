@@ -18,7 +18,6 @@ package ghidra.app.merge.datatypes;
 import static org.junit.Assert.*;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 import ghidra.program.database.ProgramDB;
 import ghidra.program.database.ProgramModifierListener;
@@ -26,6 +25,7 @@ import ghidra.program.model.data.*;
 import ghidra.util.InvalidNameException;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.Test;
 
 public class CategoryMerge3Test extends AbstractDataTypeMergeTest {
 

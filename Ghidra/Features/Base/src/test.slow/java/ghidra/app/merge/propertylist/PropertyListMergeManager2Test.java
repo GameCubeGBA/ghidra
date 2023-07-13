@@ -23,8 +23,6 @@ import java.util.Set;
 
 import javax.swing.*;
 
-import org.junit.Test;
-
 import generic.util.WindowUtilities;
 import ghidra.app.merge.*;
 import ghidra.framework.options.Options;
@@ -33,6 +31,7 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.listing.ProgramChangeSet;
 import ghidra.util.Msg;
 import ghidra.util.exception.CancelledException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the conflict panel in the property list merge manager.

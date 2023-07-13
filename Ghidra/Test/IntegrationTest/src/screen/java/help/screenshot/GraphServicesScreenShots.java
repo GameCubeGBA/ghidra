@@ -18,7 +18,7 @@ package help.screenshot;
 import java.awt.Dimension;
 import java.awt.Window;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.ComponentProvider;
 import ghidra.app.services.GraphDisplayBroker;

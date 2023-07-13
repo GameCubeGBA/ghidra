@@ -19,8 +19,7 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.app.util.bin.BinaryReader;
@@ -32,6 +31,7 @@ import ghidra.app.util.bin.format.dwarf4.next.sectionprovider.NullSectionProvide
 import ghidra.program.model.listing.Program;
 import ghidra.test.ToyProgramBuilder;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Test reading binary representations of DWARF attributes from raw bytes.
@@ -44,7 +44,7 @@ public class DWARFAttributeFactoryTest extends AbstractGenericTest {
 	private DWARFCompilationUnit cu;
 	private DWARFCompilationUnit cu64;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		ToyProgramBuilder builder = new ToyProgramBuilder("Test", true);

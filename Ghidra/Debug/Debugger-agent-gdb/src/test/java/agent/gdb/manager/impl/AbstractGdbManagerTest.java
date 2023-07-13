@@ -44,6 +44,10 @@ import ghidra.dbg.testutil.DummyProc;
 import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
 import ghidra.util.Msg;
 import ghidra.util.SystemUtilities;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 public abstract class AbstractGdbManagerTest extends AbstractGhidraHeadlessIntegrationTest {
 	protected static final long TIMEOUT_MILLISECONDS =
@@ -55,7 +59,7 @@ public abstract class AbstractGdbManagerTest extends AbstractGhidraHeadlessInteg
 		return new File(GdbManager.DEFAULT_GDB_CMD);
 	}
 
-	@Before
+	@BeforeEach
 	public void findAndCheckGdb() {
 		gdbBin = findGdbBin();
 		assumeTrue(gdbBin.exists());
@@ -81,7 +85,7 @@ public abstract class AbstractGdbManagerTest extends AbstractGhidraHeadlessInteg
 		}
 	}
 
-	@After
+	@AfterEach
 	public void tearDownGdbManagerTest() throws IOException {
 		stopManager();
 	}
@@ -212,7 +216,7 @@ public abstract class AbstractGdbManagerTest extends AbstractGhidraHeadlessInteg
 	}
 
 	@Test
-	@Ignore("At developer's desk only")
+	@Disabled("At developer's desk only")
 	public void stressTestStartInterrupt() throws Throwable {
 		// Just re-run the testStartInterrupt test many,many times
 		for (int i = 0; i < 100; i++) {

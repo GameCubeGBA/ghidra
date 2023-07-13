@@ -20,8 +20,8 @@ import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import ghidra.app.GhidraLocationGenerator;
 import ghidra.app.SampleLocationGenerator;
@@ -43,7 +43,7 @@ public class BookmarkDeleteCmdTest extends AbstractGhidraHeadedIntegrationTest {
 		super();
 	}
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
 		notepad = buildProgram();
 		bookmarkManager = notepad.getBookmarkManager();

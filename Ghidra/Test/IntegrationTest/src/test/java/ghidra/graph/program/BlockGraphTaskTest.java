@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 
 import java.util.Map;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.graph.*;
 import ghidra.program.model.block.CodeBlockModel;

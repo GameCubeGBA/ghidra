@@ -26,8 +26,6 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.*;
 import javax.swing.tree.TreePath;
 
-import org.junit.Test;
-
 import docking.DefaultActionContext;
 import docking.DialogComponentProvider;
 import docking.action.DockingActionIf;
@@ -49,6 +47,7 @@ import ghidra.program.model.data.WordDataType;
 import ghidra.program.model.listing.*;
 import ghidra.program.util.ProgramLocation;
 import ghidra.program.util.ProgramSelection;
+import org.junit.jupiter.api.Test;
 
 public class DiffTest extends DiffTestAdapter {
 

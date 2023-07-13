@@ -19,8 +19,8 @@ import static org.junit.Assert.*;
 
 import java.util.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.experimental.categories.Category;
 
 import db.Transaction;
@@ -49,7 +49,7 @@ public class DebuggerTraceManagerServiceTest extends AbstractGhidraHeadedDebugge
 
 	protected DebuggerControlService editingService;
 
-	@Before
+	@BeforeEach
 	public void setUpTraceManagerTest() throws Exception {
 		addPlugin(tool, DebuggerControlServicePlugin.class);
 		editingService = tool.getService(DebuggerControlService.class);

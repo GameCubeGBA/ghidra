@@ -20,8 +20,6 @@ import static org.junit.Assert.*;
 import java.math.BigInteger;
 import java.util.Map.Entry;
 
-import org.junit.Test;
-
 import db.Transaction;
 import ghidra.app.plugin.core.debug.gui.AbstractGhidraHeadedDebuggerGUITest;
 import ghidra.app.plugin.core.debug.mapping.DebuggerRegisterMapper;
@@ -37,6 +35,7 @@ import ghidra.trace.model.*;
 import ghidra.trace.model.listing.TraceCodeSpace;
 import ghidra.trace.model.memory.*;
 import ghidra.trace.model.thread.TraceThread;
+import org.junit.jupiter.api.Test;
 
 public class DefaultTraceRecorderTest extends AbstractGhidraHeadedDebuggerGUITest {
 

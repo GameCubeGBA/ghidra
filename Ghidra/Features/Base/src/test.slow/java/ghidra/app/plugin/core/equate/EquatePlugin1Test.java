@@ -55,6 +55,9 @@ import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.exception.AssertException;
 import ghidra.util.table.GhidraTable;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests the Equate Plugin functionality.
@@ -74,7 +77,7 @@ public class EquatePlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 	private final static String SHOW_BLOCK_NAME_OPTION = GhidraOptions.OPERAND_GROUP_TITLE +
 		Options.DELIMITER + GhidraOptions.OPTION_SHOW_BLOCK_NAME;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		program = buildProgram();
@@ -188,7 +191,7 @@ public class EquatePlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

@@ -35,6 +35,9 @@ import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class GraphActionsTest extends AbstractGhidraHeadedIntegrationTest {
 	private TestEnv env;
@@ -50,7 +53,7 @@ public class GraphActionsTest extends AbstractGhidraHeadedIntegrationTest {
 	private AttributedVertex e;
 	private AttributedVertex f;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.launchDefaultTool();
@@ -62,7 +65,7 @@ public class GraphActionsTest extends AbstractGhidraHeadedIntegrationTest {
 		graphComponentProvider = tool.getComponentProvider("graph");
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}

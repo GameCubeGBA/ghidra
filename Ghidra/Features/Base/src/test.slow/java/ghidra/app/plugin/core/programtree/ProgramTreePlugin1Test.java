@@ -44,6 +44,8 @@ import ghidra.program.util.GroupPath;
 import ghidra.program.util.ProgramLocation;
 import ghidra.util.Swing;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 
 public class ProgramTreePlugin1Test extends AbstractProgramTreePluginTest {
 
@@ -79,7 +81,7 @@ public class ProgramTreePlugin1Test extends AbstractProgramTreePluginTest {
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

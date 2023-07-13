@@ -20,14 +20,14 @@ import static org.junit.Assert.*;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import docking.widgets.fieldpanel.support.Highlight;
 import ghidra.program.database.ProgramBuilder;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.data.Pointer32DataType;
 import ghidra.program.model.listing.*;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for searching memory for hex reg expression.
@@ -35,7 +35,7 @@ import ghidra.program.model.listing.*;
 public class MemSearchRegExTest extends AbstractMemSearchTest {
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		selectRadioButton("Regular Expression");

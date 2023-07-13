@@ -15,8 +15,8 @@
  */
 package ghidra.trace.database.memory;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import db.Transaction;
 import ghidra.dbg.target.schema.SchemaContext;
@@ -36,7 +36,7 @@ public class DBTraceMemoryManagerObjectRegistersPerFrameBETest
 
 	protected SchemaContext ctx;
 
-	@Before
+	@BeforeEach
 	public void setUpObjectsMode() throws Exception {
 		ctx = XmlSchemaContext.deserialize("""
 				<context>

@@ -19,10 +19,9 @@ import static org.junit.Assert.*;
 
 import java.util.*;
 
-import org.junit.Test;
-
 import generic.test.AbstractGenericTest;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.Test;
 
 public class ClosedSequenceMinerTest extends AbstractGenericTest {
 

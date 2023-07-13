@@ -21,7 +21,7 @@ import java.awt.Window;
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.app.plugin.core.stackeditor.StackEditorProvider;
 import ghidra.app.util.viewer.field.FunctionSignatureFieldFactory;

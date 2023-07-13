@@ -37,6 +37,10 @@ import ghidra.trace.database.listing.DBTraceCodeManager;
 import ghidra.trace.database.memory.DBTraceMemoryManager;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 public class DBTraceProgramViewListingTest extends AbstractGhidraHeadlessIntegrationTest {
 
@@ -61,7 +65,7 @@ public class DBTraceProgramViewListingTest extends AbstractGhidraHeadlessIntegra
 		return result;
 	}
 
-	@Before
+	@BeforeEach
 	public void setUpTraceProgramViewListingTest() throws LanguageNotFoundException, IOException {
 		b = new ToyDBTraceBuilder("Testing", ProgramBuilder._TOY64_BE);
 		try (Transaction tx = b.startTransaction()) {
@@ -74,7 +78,7 @@ public class DBTraceProgramViewListingTest extends AbstractGhidraHeadlessIntegra
 		listing = view.getListing();
 	}
 
-	@After
+	@AfterEach
 	public void tearDownTraceProgramViewListingTest() {
 		if (b != null) {
 			b.close();
@@ -829,7 +833,7 @@ public class DBTraceProgramViewListingTest extends AbstractGhidraHeadlessIntegra
 	}
 
 	@Test
-	@Ignore("TODO")
+	@Disabled("TODO")
 	public void testGetUndefinedRanges() throws InsufficientBytesException,
 			UnknownInstructionException, CodeUnitInsertionException, CancelledException {
 		try (Transaction tx = b.startTransaction()) {

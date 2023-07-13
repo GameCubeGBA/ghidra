@@ -21,8 +21,7 @@ import java.awt.Component;
 
 import javax.swing.*;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
 
 import docking.AbstractErrDialog;
 import docking.action.DockingActionIf;
@@ -55,6 +54,7 @@ import ghidra.test.TestEnv;
 import ghidra.util.SystemUtilities;
 import ghidra.util.exception.InvalidInputException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Tests for the symbol tree plugin.
@@ -87,7 +87,7 @@ public abstract class AbstractSymbolTreePluginExternalsTest
 	protected DockingActionIf editExternalLocationAction;
 	protected SymbolTreeTestUtils util;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		env = new TestEnv();
@@ -107,7 +107,7 @@ public abstract class AbstractSymbolTreePluginExternalsTest
 		env.showTool();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		closeProgram();
 		env.dispose();

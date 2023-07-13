@@ -21,8 +21,7 @@ import static org.junit.Assert.assertNotNull;
 import java.io.*;
 import java.util.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import agent.dbgeng.dbgeng.*;
 import agent.dbgeng.dbgeng.DebugBreakpoint.BreakFlags;
@@ -36,10 +35,11 @@ import ghidra.comm.util.BitmaskSet;
 import ghidra.dbg.util.PathUtils;
 import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
 import ghidra.util.Msg;
+import org.junit.jupiter.api.Test;
 
 public class DbgModelSetContextMWETest extends AbstractGhidraHeadlessIntegrationTest {
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		DbgEngTest.assumeDbgengDLLLoadable();
 	}

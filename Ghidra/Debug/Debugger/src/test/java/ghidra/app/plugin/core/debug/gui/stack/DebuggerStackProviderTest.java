@@ -53,6 +53,9 @@ import ghidra.trace.model.target.*;
 import ghidra.trace.model.target.TraceObject.ConflictResolution;
 import ghidra.trace.model.thread.TraceObjectThread;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * NOTE: I no longer synthesize a stack frame when the stack is absent. It's a bit of a hack, and I
@@ -67,7 +70,7 @@ public class DebuggerStackProviderTest extends AbstractGhidraHeadedDebuggerGUITe
 
 	protected SchemaContext ctx;
 
-	@Before
+	@BeforeEach
 	public void setUpStackProviderTest() throws Exception {
 		stackPlugin = addPlugin(tool, DebuggerStackPlugin.class);
 		stackProvider = waitForComponentProvider(DebuggerStackProvider.class);
@@ -77,7 +80,7 @@ public class DebuggerStackProviderTest extends AbstractGhidraHeadedDebuggerGUITe
 		pc = getToyBE64Language().getProgramCounter();
 	}
 
-	@After
+	@AfterEach
 	public void tearDownStackProviderTest() throws Exception {
 		traceManager.activate(DebuggerCoordinates.NOWHERE);
 		waitForSwing();

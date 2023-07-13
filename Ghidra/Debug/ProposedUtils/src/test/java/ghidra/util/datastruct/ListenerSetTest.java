@@ -20,7 +20,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ListenerSetTest {
 	public interface DummyListener {

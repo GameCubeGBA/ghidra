@@ -49,6 +49,9 @@ import ghidra.framework.plugintool.util.PluginDescription;
 import ghidra.framework.plugintool.util.PluginPackage;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the configuring a tool.
@@ -66,7 +69,7 @@ public class ManagePluginsTest extends AbstractGhidraHeadedIntegrationTest {
 
 	private PluginInstallerDialog installerProvider;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -85,7 +88,7 @@ public class ManagePluginsTest extends AbstractGhidraHeadedIntegrationTest {
 		showProvider();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		tool.setConfigChanged(false);
 		runSwing(() -> managePluginsDialog.close());

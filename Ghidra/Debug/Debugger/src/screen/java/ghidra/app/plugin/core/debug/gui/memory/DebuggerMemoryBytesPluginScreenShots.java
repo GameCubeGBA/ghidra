@@ -35,6 +35,9 @@ import ghidra.trace.model.memory.TraceMemorySpace;
 import ghidra.trace.model.symbol.*;
 import ghidra.trace.model.thread.TraceThread;
 import help.screenshot.GhidraScreenShotGenerator;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DebuggerMemoryBytesPluginScreenShots extends GhidraScreenShotGenerator {
 
@@ -44,7 +47,7 @@ public class DebuggerMemoryBytesPluginScreenShots extends GhidraScreenShotGenera
 	DebuggerListingPlugin listingPlugin; // For colors
 	ToyDBTraceBuilder tb;
 
-	@Before
+	@BeforeEach
 	public void setUpMine() throws Throwable {
 		traceManager = addPlugin(tool, DebuggerTraceManagerServicePlugin.class);
 		memoryPlugin = addPlugin(tool, DebuggerMemoryBytesPlugin.class);
@@ -56,7 +59,7 @@ public class DebuggerMemoryBytesPluginScreenShots extends GhidraScreenShotGenera
 		tb = new ToyDBTraceBuilder("echo", ToyProgramBuilder._X64);
 	}
 
-	@After
+	@AfterEach
 	public void tearDownMine() {
 		tb.close();
 	}

@@ -21,9 +21,6 @@ import static org.junit.Assert.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import docking.widgets.OptionDialog;
 import ghidra.app.util.ByteCopier;
 import ghidra.app.util.ByteCopier.ByteStringTransferable;
@@ -47,13 +44,15 @@ import ghidra.test.DummyTool;
 import ghidra.util.NumericUtilities;
 import ghidra.util.exception.AssertException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ByteViewerClipboardProviderTest extends AbstractGhidraHeadedIntegrationTest {
 
 	private Program program;
 	private ByteViewerClipboardProvider clipboardProvider;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		program = createProgram();

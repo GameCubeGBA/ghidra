@@ -24,7 +24,6 @@ import java.util.List;
 import javax.swing.*;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 import docking.DialogComponentProvider;
 import docking.DockingDialog;
@@ -50,6 +49,7 @@ import ghidra.util.InvalidNameException;
 import ghidra.util.Msg;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.Test;
 import resources.MultiIcon;
 
 public class FrontEndPluginScreenShots extends GhidraScreenShotGenerator {

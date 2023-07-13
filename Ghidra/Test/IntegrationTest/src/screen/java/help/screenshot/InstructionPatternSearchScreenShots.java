@@ -19,8 +19,7 @@ import java.awt.Component;
 
 import javax.swing.JButton;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import docking.DialogComponentProvider;
 import docking.action.DockingActionIf;
@@ -28,6 +27,7 @@ import generic.test.AbstractGuiTest;
 import ghidra.app.plugin.core.instructionsearch.InstructionSearchPlugin;
 import ghidra.app.plugin.core.instructionsearch.ui.*;
 import ghidra.app.plugin.core.table.TableComponentProvider;
+import org.junit.jupiter.api.Test;
 
 /**
  * Screenshots for help/topics/Search/Search_Instruction_Patterns.htm
@@ -37,7 +37,7 @@ public class InstructionPatternSearchScreenShots extends AbstractSearchScreenSho
 	private InstructionSearchPlugin instructionSearchPlugin;
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		super.setUp();

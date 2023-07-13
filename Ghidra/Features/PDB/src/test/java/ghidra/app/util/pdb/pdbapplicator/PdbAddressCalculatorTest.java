@@ -19,8 +19,7 @@ import static org.junit.Assert.*;
 
 import java.util.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import generic.test.AbstractGenericTest;
 import ghidra.app.util.bin.format.pdb2.pdbreader.*;
@@ -32,6 +31,7 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressSpace;
 import ghidra.program.model.listing.Program;
 import ghidra.program.model.mem.MemoryBlock;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for PDB {@link PdbAddressCalculator}s.
@@ -142,7 +142,7 @@ public class PdbAddressCalculatorTest extends AbstractGenericTest {
 	}
 
 	//----------------------------------------------------------------------------------------------
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		program = buildProgram("testProgram", 0x400000L);
 		pdb = buildPdb();

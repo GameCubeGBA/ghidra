@@ -20,14 +20,14 @@ import static org.junit.Assert.*;
 import java.awt.Font;
 import java.text.ParseException;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class FontValueTest {
 	private static Font FONT = new Font("Dialog", Font.PLAIN, 12);
 	private GThemeValueMap values;
 
-	@Before
+	@BeforeEach
 	public void setup() {
 		values = new GThemeValueMap();
 	}

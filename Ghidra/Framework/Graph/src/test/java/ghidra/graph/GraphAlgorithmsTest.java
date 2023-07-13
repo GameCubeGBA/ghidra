@@ -25,7 +25,6 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 import ghidra.graph.algo.*;
 import ghidra.util.Msg;
@@ -34,6 +33,7 @@ import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.TimeoutException;
 import ghidra.util.task.TaskMonitor;
 import ghidra.util.task.TimeoutTaskMonitor;
+import org.junit.jupiter.api.Test;
 
 public class GraphAlgorithmsTest extends AbstractGraphAlgorithmsTest {
 

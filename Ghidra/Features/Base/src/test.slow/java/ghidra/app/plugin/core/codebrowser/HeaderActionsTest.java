@@ -38,6 +38,9 @@ import ghidra.framework.options.SaveState;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class HeaderActionsTest extends AbstractGhidraHeadedIntegrationTest {
 	private TestEnv env;
@@ -46,7 +49,7 @@ public class HeaderActionsTest extends AbstractGhidraHeadedIntegrationTest {
 	private FieldHeader header;
 	private CodeViewerProvider provider;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -76,7 +79,7 @@ public class HeaderActionsTest extends AbstractGhidraHeadedIntegrationTest {
 		cb = env.getPlugin(CodeBrowserPlugin.class);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}

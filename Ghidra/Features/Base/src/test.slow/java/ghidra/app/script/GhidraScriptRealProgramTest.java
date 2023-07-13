@@ -32,6 +32,9 @@ import ghidra.program.model.symbol.*;
 import ghidra.program.util.ProgramLocation;
 import ghidra.test.*;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class GhidraScriptRealProgramTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -44,7 +47,7 @@ public class GhidraScriptRealProgramTest extends AbstractGhidraHeadedIntegration
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		env = new TestEnv();
@@ -65,7 +68,7 @@ public class GhidraScriptRealProgramTest extends AbstractGhidraHeadedIntegration
 		transactionID = program.startTransaction(testName.getMethodName());
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		program.endTransaction(transactionID, false);

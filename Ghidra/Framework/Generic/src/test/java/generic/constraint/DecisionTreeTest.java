@@ -23,8 +23,8 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import generic.constraint.DecisionNode.PropertyValue;
 import generic.test.AbstractGenericTest;
@@ -86,7 +86,7 @@ public class DecisionTreeTest extends AbstractGenericTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		decisionTree = new DecisionTree<>();
 		decisionTree.registerConstraintType("BLUE", BlueColorConstraint.class);

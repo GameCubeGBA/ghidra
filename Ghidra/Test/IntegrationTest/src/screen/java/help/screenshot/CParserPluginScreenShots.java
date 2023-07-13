@@ -15,12 +15,11 @@
  */
 package help.screenshot;
 
-import org.junit.Test;
-
 import docking.DialogComponentProvider;
 import docking.widgets.OptionDialog;
 import ghidra.app.plugin.core.cparser.CParserPlugin;
 import ghidra.util.Msg;
+import org.junit.jupiter.api.Test;
 
 public class CParserPluginScreenShots extends GhidraScreenShotGenerator {
 

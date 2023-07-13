@@ -24,15 +24,14 @@ import java.util.List;
 
 import javax.swing.table.TableColumn;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import docking.test.AbstractDockingTest;
 import docking.widgets.table.*;
 import docking.widgets.table.constraint.dialog.*;
 import ghidra.framework.options.SaveState;
 import ghidra.util.classfinder.ClassSearcher;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * This test performs operations on swing components in the test thread.  I believe this is ok
@@ -46,7 +45,7 @@ public class ColumnTableFilterTest extends AbstractDockingTest {
 	private GTable gTable;
 	private ColumnFilterDialogModel<Integer> filterModel;
 
-	@Before
+	@BeforeEach
 	public void setup() throws Exception {
 
 		ClassSearcher.search(TaskMonitor.DUMMY);

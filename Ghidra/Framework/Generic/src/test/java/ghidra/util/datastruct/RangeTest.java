@@ -19,9 +19,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 import generic.test.AbstractGenericTest;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests the Range class which has a signed int range.

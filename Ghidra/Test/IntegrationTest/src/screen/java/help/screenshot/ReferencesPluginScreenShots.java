@@ -22,7 +22,7 @@ import java.io.IOException;
 
 import javax.swing.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.theme.GThemeDefaults.Colors;
 import generic.theme.GThemeDefaults.Colors.Palette;

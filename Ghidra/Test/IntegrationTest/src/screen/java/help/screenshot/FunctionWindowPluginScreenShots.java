@@ -18,7 +18,7 @@ package help.screenshot;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.widgets.table.GTable;
 import ghidra.app.plugin.core.functionwindow.FunctionWindowProvider;

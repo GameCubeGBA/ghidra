@@ -17,18 +17,18 @@ package ghidra.app.plugin.core.datamgr.util;
 
 import java.util.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGTest;
 import ghidra.program.model.data.DataType;
 import ghidra.program.model.data.DataTypeComparator;
 import ghidra.program.model.data.StubDataType;
 import ghidra.util.UniversalIdGenerator;
+import org.junit.jupiter.api.BeforeEach;
 
 public class DataTypeUtilsTest {
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		UniversalIdGenerator.initialize();
 	}

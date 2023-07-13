@@ -17,7 +17,7 @@ package ghidra.app.plugin.core.decompile;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.widgets.fieldpanel.support.FieldLocation;
 import ghidra.app.cmd.equate.SetEquateCmd;

@@ -19,14 +19,14 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
 
 import db.*;
 import ghidra.util.UniversalIdGenerator;
 import ghidra.util.database.annot.*;
 import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.Test;
 
 public class DBCachedObjectStoreFactoryTest {
 	static {
@@ -726,7 +726,7 @@ public class DBCachedObjectStoreFactoryTest {
 	}
 
 	@Test
-	@Ignore("I'm no longer sure this test is correct. See the TODO within.")
+	@Disabled("I'm no longer sure this test is correct. See the TODO within.")
 	public void testCodecs() throws IOException, VersionException {
 
 		DBHandle handle = new DBHandle();

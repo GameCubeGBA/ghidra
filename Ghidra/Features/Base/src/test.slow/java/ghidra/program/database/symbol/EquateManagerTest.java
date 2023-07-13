@@ -31,6 +31,9 @@ import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.exception.InvalidInputException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class EquateManagerTest extends AbstractGhidraHeadedIntegrationTest {
 	private ProgramDB program;
@@ -38,7 +41,7 @@ public class EquateManagerTest extends AbstractGhidraHeadedIntegrationTest {
 	private EquateTable equateTable;
 	private int transactionID;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		program = createDefaultProgram("Test", ProgramBuilder._TOY, this);
 		space = program.getAddressFactory().getDefaultAddressSpace();
@@ -50,7 +53,7 @@ public class EquateManagerTest extends AbstractGhidraHeadedIntegrationTest {
 
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		program.endTransaction(transactionID, true);
 		program.release(this);

@@ -20,7 +20,7 @@ import static org.junit.Assert.assertEquals;
 import java.math.BigInteger;
 import java.nio.ByteOrder;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import agent.gdb.manager.impl.cmd.GdbReadRegistersCommand;
 

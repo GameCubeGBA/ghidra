@@ -15,9 +15,6 @@
  */
 package ghidra.app.plugin.core.debug.gui.thread;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import db.Transaction;
 import ghidra.app.plugin.core.debug.gui.AbstractGhidraHeadedDebuggerGUITest;
 import ghidra.app.plugin.core.debug.gui.AbstractGhidraHeadedDebuggerGUITest.TestDebuggerTargetTraceMapper;
@@ -28,6 +25,8 @@ import ghidra.dbg.model.*;
 import ghidra.trace.model.Trace;
 import ghidra.trace.model.thread.TraceThread;
 import help.screenshot.GhidraScreenShotGenerator;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DebuggerThreadsPluginScreenShots extends GhidraScreenShotGenerator {
 
@@ -37,7 +36,7 @@ public class DebuggerThreadsPluginScreenShots extends GhidraScreenShotGenerator 
 	DebuggerTraceManagerService traceManager;
 	DebuggerThreadsPlugin threadsPlugin;
 
-	@Before
+	@BeforeEach
 	public void setUpMine() throws Throwable {
 		modelService = addPlugin(tool, DebuggerModelServiceProxyPlugin.class);
 		traceManager = addPlugin(tool, DebuggerTraceManagerServicePlugin.class);

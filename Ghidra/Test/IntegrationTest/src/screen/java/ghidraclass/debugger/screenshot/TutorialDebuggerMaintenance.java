@@ -31,6 +31,9 @@ import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.task.ConsoleTaskMonitor;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class TutorialDebuggerMaintenance extends AbstractGhidraHeadedIntegrationTest {
 	public static final TaskMonitor CONSOLE = new ConsoleTaskMonitor();
@@ -39,14 +42,14 @@ public class TutorialDebuggerMaintenance extends AbstractGhidraHeadedIntegration
 	public TestEnv env;
 	public Program program;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Throwable {
 		env = new TestEnv();
 
 		tool = env.launchDefaultTool();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Throwable {
 		if (program != null) {
 			program.release(this);

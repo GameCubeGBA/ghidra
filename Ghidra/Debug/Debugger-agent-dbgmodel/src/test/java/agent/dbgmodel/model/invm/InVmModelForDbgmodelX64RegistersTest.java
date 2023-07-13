@@ -18,8 +18,8 @@ package agent.dbgmodel.model.invm;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import agent.dbgeng.model.AbstractModelForDbgengX64RegistersTest;
 import ghidra.dbg.util.PathUtils;
@@ -51,7 +51,7 @@ public class InVmModelForDbgmodelX64RegistersTest extends AbstractModelForDbgeng
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testRegistersHaveExpectedSizes() throws Throwable {
 		super.testRegistersHaveExpectedSizes();

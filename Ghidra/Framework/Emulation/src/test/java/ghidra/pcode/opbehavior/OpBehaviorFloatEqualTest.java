@@ -18,9 +18,9 @@ package ghidra.pcode.opbehavior;
 import java.math.BigInteger;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 import ghidra.pcode.floatformat.*;
+import org.junit.jupiter.api.Test;
 
 public class OpBehaviorFloatEqualTest extends AbstractOpBehaviorTest {
 

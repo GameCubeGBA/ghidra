@@ -20,8 +20,6 @@ import static org.junit.Assert.*;
 
 import java.util.*;
 
-import org.junit.Test;
-
 import ghidra.app.cmd.function.SetReturnDataTypeCmd;
 import ghidra.app.cmd.refs.RemoveReferenceCmd;
 import ghidra.app.plugin.core.clear.ClearCmd;
@@ -32,6 +30,7 @@ import ghidra.program.model.listing.*;
 import ghidra.program.model.symbol.*;
 import ghidra.program.util.FieldNameFieldLocation;
 import ghidra.program.util.ProgramLocation;
+import org.junit.jupiter.api.Test;
 
 public class LocationReferencesPlugin3Test extends AbstractLocationReferencesTest {
 

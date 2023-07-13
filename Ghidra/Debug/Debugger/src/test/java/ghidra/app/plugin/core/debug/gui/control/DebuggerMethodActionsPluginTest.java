@@ -23,8 +23,7 @@ import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
 import org.jdom.JDOMException;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import db.Transaction;
 import docking.action.DockingActionIf;
@@ -46,6 +45,7 @@ import ghidra.dbg.target.schema.TargetObjectSchema.SchemaName;
 import ghidra.program.model.address.Address;
 import ghidra.program.util.ProgramLocation;
 import ghidra.trace.model.Lifespan;
+import org.junit.jupiter.api.Test;
 
 public class DebuggerMethodActionsPluginTest extends AbstractGhidraHeadedDebuggerGUITest {
 	public static final XmlSchemaContext SCHEMA_CTX;
@@ -80,7 +80,7 @@ public class DebuggerMethodActionsPluginTest extends AbstractGhidraHeadedDebugge
 
 	List<String> commands = Collections.synchronizedList(new ArrayList<>());
 
-	@Before
+	@BeforeEach
 	public void setUpMethodActionsTest() throws Exception {
 		listingPlugin = addPlugin(tool, DebuggerListingPlugin.class);
 		mappingService = addPlugin(tool, DebuggerStaticMappingServicePlugin.class);

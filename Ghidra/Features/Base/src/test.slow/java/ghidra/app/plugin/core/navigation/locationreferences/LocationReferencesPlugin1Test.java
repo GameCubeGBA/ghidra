@@ -18,7 +18,7 @@ package ghidra.app.plugin.core.navigation.locationreferences;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.app.cmd.data.CreateDataCmd;
 import ghidra.app.util.viewer.field.FieldNameFieldFactory;

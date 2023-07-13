@@ -38,6 +38,9 @@ import ghidra.trace.model.thread.TraceThread;
 import ghidra.trace.model.time.schedule.TraceSchedule;
 import ghidra.util.Swing;
 import help.screenshot.GhidraScreenShotGenerator;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DebuggerTraceViewDiffPluginScreenShots extends GhidraScreenShotGenerator
 		implements AsyncTestUtils {
@@ -48,7 +51,7 @@ public class DebuggerTraceViewDiffPluginScreenShots extends GhidraScreenShotGene
 	DebuggerListingProvider listingProvider;
 	ToyDBTraceBuilder tb;
 
-	@Before
+	@BeforeEach
 	public void setUpMine() throws Throwable {
 		traceManager = addPlugin(tool, DebuggerTraceManagerServicePlugin.class);
 		diffPlugin = addPlugin(tool, DebuggerTraceViewDiffPlugin.class);
@@ -58,7 +61,7 @@ public class DebuggerTraceViewDiffPluginScreenShots extends GhidraScreenShotGene
 		tb = new ToyDBTraceBuilder("tictactoe", ToyProgramBuilder._X64);
 	}
 
-	@After
+	@AfterEach
 	public void tearDownMine() {
 		tb.close();
 	}

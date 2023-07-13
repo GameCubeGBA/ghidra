@@ -26,8 +26,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import db.Transaction;
 import generic.Unique;
@@ -67,6 +66,7 @@ import ghidra.trace.model.memory.TraceMemoryFlag;
 import ghidra.trace.model.stack.TraceStack;
 import ghidra.trace.model.thread.TraceThread;
 import ghidra.trace.model.time.schedule.TraceSchedule;
+import org.junit.jupiter.api.BeforeEach;
 
 public class FlatDebuggerAPITest extends AbstractGhidraHeadedDebuggerGUITest {
 
@@ -133,7 +133,7 @@ public class FlatDebuggerAPITest extends AbstractGhidraHeadedDebuggerGUITest {
 	protected DebuggerControlService editingService;
 	protected FlatDebuggerAPI flat;
 
-	@Before
+	@BeforeEach
 	public void setUpFlatAPITest() throws Throwable {
 		breakpointService = addPlugin(tool, DebuggerLogicalBreakpointServicePlugin.class);
 		mappingService = tool.getService(DebuggerStaticMappingService.class);

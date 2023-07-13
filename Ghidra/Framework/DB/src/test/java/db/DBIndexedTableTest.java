@@ -27,6 +27,9 @@ import db.buffers.*;
 import generic.test.AbstractGenericTest;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import utilities.util.FileUtilities;
 
 public class DBIndexedTableTest extends AbstractGenericTest {
@@ -45,14 +48,14 @@ public class DBIndexedTableTest extends AbstractGenericTest {
 	private DBHandle dbh;
 	private BufferFile bfile;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		testDir = createTempDirectory(getClass().getSimpleName());
 		dbh = new DBHandle(BUFFER_SIZE, CACHE_SIZE);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (dbh != null) {
 			dbh.close();

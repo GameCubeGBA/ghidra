@@ -23,7 +23,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.junit.Test;
 
 import ghidra.dbg.agent.*;
 import ghidra.dbg.target.*;
@@ -31,6 +30,7 @@ import ghidra.dbg.target.schema.DefaultTargetObjectSchema.DefaultAttributeSchema
 import ghidra.dbg.target.schema.TargetObjectSchema.AttributeSchema;
 import ghidra.dbg.target.schema.TargetObjectSchema.SchemaName;
 import ghidra.program.model.address.AddressFactory;
+import org.junit.jupiter.api.Test;
 
 public class TargetObjectSchemaValidationTest {
 	protected DefaultSchemaContext ctx = new DefaultSchemaContext();

@@ -26,6 +26,9 @@ import org.junit.*;
 import generic.test.AbstractGenericTest;
 import ghidra.formats.gfilesystem.FSRL;
 import ghidra.framework.generic.auth.Password;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import util.CollectionUtils;
 
 public class CachedPasswordProviderTest extends AbstractGenericTest {
@@ -39,7 +42,7 @@ public class CachedPasswordProviderTest extends AbstractGenericTest {
 
 	private PopupGUIPasswordProvider popupGUIPasswordProvider;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		popupGUIPasswordProvider =
 			cryptoProviders.getCryptoProviderInstance(PopupGUIPasswordProvider.class);
@@ -47,7 +50,7 @@ public class CachedPasswordProviderTest extends AbstractGenericTest {
 		cryptoProviders.getCachedCryptoProvider().clearCache();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		if (popupGUIPasswordProvider != null) {
 			cryptoProviders.registerCryptoProvider(popupGUIPasswordProvider);

@@ -26,7 +26,6 @@ import java.util.List;
 import javax.swing.*;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 import docking.DialogComponentProvider;
 import docking.options.editor.DateEditor;
@@ -51,6 +50,7 @@ import ghidra.program.model.symbol.SourceType;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskLauncher;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.Test;
 
 public class ProgramManagerPluginScreenShots extends GhidraScreenShotGenerator
 		implements CheckinHandler {

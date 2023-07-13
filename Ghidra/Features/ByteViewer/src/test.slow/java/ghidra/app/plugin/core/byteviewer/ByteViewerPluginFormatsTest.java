@@ -52,6 +52,9 @@ import ghidra.program.model.mem.MemoryAccessException;
 import ghidra.program.util.ProgramLocation;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test for byte viewer formats. 
@@ -67,7 +70,7 @@ public class ByteViewerPluginFormatsTest extends AbstractGhidraHeadedIntegration
 	private ByteViewerPanel panel;
 	private ByteViewerComponentProvider provider;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -105,7 +108,7 @@ public class ByteViewerPluginFormatsTest extends AbstractGhidraHeadedIntegration
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.release(program);
 		env.dispose();

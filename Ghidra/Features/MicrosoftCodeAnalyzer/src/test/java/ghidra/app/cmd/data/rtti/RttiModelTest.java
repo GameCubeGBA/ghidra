@@ -19,13 +19,13 @@ package ghidra.app.cmd.data.rtti;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 import ghidra.app.cmd.data.TypeDescriptorModel;
 import ghidra.program.database.ProgramBuilder;
 import ghidra.program.database.ProgramDB;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.data.InvalidDataTypeException;
+import org.junit.jupiter.api.Test;
 
 public class RttiModelTest extends AbstractRttiTest {
 

@@ -22,8 +22,6 @@ import java.awt.Rectangle;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import org.junit.Test;
-
 import docking.widgets.OptionDialog;
 import docking.widgets.dialogs.InputDialog;
 import ghidra.app.plugin.core.function.tags.*;
@@ -32,6 +30,7 @@ import ghidra.program.model.listing.Function;
 import ghidra.program.model.listing.FunctionIterator;
 import ghidra.program.util.ProgramLocation;
 import ghidra.util.Swing;
+import org.junit.jupiter.api.Test;
 
 public class FunctionTagPluginScreenShots extends GhidraScreenShotGenerator {
 

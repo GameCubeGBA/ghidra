@@ -22,8 +22,6 @@ import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
-import org.junit.Test;
-
 import ghidra.dbg.DebuggerModelListener;
 import ghidra.dbg.agent.AbstractDebuggerObjectModel;
 import ghidra.dbg.agent.DefaultDebuggerObjectModelTest.FakeTargetObject;
@@ -34,6 +32,7 @@ import ghidra.dbg.target.*;
 import ghidra.dbg.target.TargetEventScope.TargetEventType;
 import ghidra.dbg.target.schema.*;
 import ghidra.dbg.testutil.DebuggerModelTestUtils;
+import org.junit.jupiter.api.Test;
 
 public class DebuggerCallbackReordererTest implements DebuggerModelTestUtils {
 

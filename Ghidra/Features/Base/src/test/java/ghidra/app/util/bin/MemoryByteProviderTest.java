@@ -31,6 +31,9 @@ import ghidra.program.model.mem.Memory;
 import ghidra.program.model.mem.MemoryBlock;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class MemoryByteProviderTest extends AbstractGhidraHeadedIntegrationTest {
 	protected ProgramDB program;
@@ -39,7 +42,7 @@ public class MemoryByteProviderTest extends AbstractGhidraHeadedIntegrationTest 
 	protected TaskMonitor monitor = TaskMonitor.DUMMY;
 	private ProgramBuilder builder;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		builder = new ProgramBuilder(testName.getMethodName(), ProgramBuilder._X64, this);
 		program = builder.getProgram();
@@ -83,7 +86,7 @@ public class MemoryByteProviderTest extends AbstractGhidraHeadedIntegrationTest 
 		return memblk;
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		builder.dispose();
 	}

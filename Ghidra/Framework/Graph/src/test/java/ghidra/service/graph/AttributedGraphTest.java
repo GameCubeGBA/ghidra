@@ -19,14 +19,14 @@ import static org.junit.Assert.*;
 
 import java.util.Set;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AttributedGraphTest {
 
 	private AttributedGraph graph;
 
-	@Before
+	@BeforeEach
 	public void setup() {
 		graph = new AttributedGraph("Test", new EmptyGraphType());
 	}

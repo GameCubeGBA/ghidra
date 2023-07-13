@@ -18,8 +18,8 @@ package ghidra.app.cmd.function;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.program.database.ProgramBuilder;
@@ -35,7 +35,7 @@ public class CreateMultipleFunctionsCmdTest extends AbstractGenericTest {
 	private Program program;
 	private ProgramBuilder builder;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		builder = new ProgramBuilder("notepad.exe", ProgramBuilder._TOY);

@@ -15,8 +15,8 @@
  */
 package agent.dbgeng.model.gadp;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import agent.dbgeng.model.AbstractModelForDbgengInterpreterTest;
 
@@ -30,7 +30,7 @@ public class GadpModelForDbgengInterpreterTest extends AbstractModelForDbgengInt
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testAttachViaInterpreterShowsInProcessContainer() throws Throwable {
 		super.testAttachViaInterpreterShowsInProcessContainer();

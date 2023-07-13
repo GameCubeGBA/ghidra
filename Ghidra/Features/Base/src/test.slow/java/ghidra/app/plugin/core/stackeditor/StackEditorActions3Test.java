@@ -17,12 +17,11 @@ package ghidra.app.plugin.core.stackeditor;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import docking.widgets.dialogs.NumberInputDialog;
 import ghidra.app.plugin.core.compositeeditor.CycleGroupAction;
 import ghidra.program.model.data.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class StackEditorActions3Test extends AbstractStackEditorTest {
 
@@ -31,7 +30,7 @@ public class StackEditorActions3Test extends AbstractStackEditorTest {
 	}
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		env.showTool();

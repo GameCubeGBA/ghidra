@@ -26,6 +26,9 @@ import ghidra.program.model.listing.*;
 import ghidra.program.model.mem.Memory;
 import ghidra.test.ToyProgramBuilder;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test the code manager portion of listing.
@@ -53,7 +56,7 @@ public class DefaultDataCacheTest extends AbstractGenericTest {
 	/*
 	 * @see TestCase#setUp()
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		builder = new ToyProgramBuilder("Test", true, this);
@@ -67,7 +70,7 @@ public class DefaultDataCacheTest extends AbstractGenericTest {
 
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		program.endTransaction(transactionID, true);
 		program.release(this);

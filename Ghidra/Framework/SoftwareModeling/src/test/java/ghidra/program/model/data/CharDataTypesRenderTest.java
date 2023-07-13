@@ -19,14 +19,14 @@ import static org.junit.Assert.*;
 
 import java.nio.charset.Charset;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import generic.test.AbstractGTest;
 import ghidra.program.model.address.AddressSpace;
 import ghidra.program.model.address.GenericAddressSpace;
 import ghidra.program.model.data.RenderUnicodeSettingsDefinition.RENDER_ENUM;
 import ghidra.program.model.mem.ByteMemBufferImpl;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test rendering of various Char data types.
@@ -56,7 +56,7 @@ public class CharDataTypesRenderTest extends AbstractGTest {
 			actualStr + "]", actualStr.contains(expectedSubstr));
 	}
 
-	@Before
+	@BeforeEach
 	public void setup() {
 		assertNotNull(thaiCS);
 	}

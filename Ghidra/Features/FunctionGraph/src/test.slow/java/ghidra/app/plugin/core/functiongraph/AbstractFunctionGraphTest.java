@@ -74,6 +74,8 @@ import ghidra.program.util.ProgramSelection;
 import ghidra.test.*;
 import ghidra.util.Msg;
 import ghidra.util.task.RunManager;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public abstract class AbstractFunctionGraphTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -92,7 +94,7 @@ public abstract class AbstractFunctionGraphTest extends AbstractGhidraHeadedInte
 
 	protected List<String> functionAddrs = new ArrayList<>();
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		setErrorGUIEnabled(false);
@@ -398,7 +400,7 @@ public abstract class AbstractFunctionGraphTest extends AbstractGhidraHeadedInte
 		codeBrowser = env.getPlugin(CodeBrowserPlugin.class);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		waitForSwing();
 		env.closeTool(tool);

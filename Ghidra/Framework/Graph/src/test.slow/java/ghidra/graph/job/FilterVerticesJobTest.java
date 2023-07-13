@@ -24,8 +24,6 @@ import java.util.function.Predicate;
 import javax.swing.JFrame;
 
 import org.apache.commons.lang3.StringUtils;
-import org.junit.Before;
-import org.junit.Test;
 
 import edu.uci.ics.jung.algorithms.layout.DAGLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
@@ -35,6 +33,8 @@ import ghidra.graph.support.TestGraphLayout;
 import ghidra.graph.support.TestGraphViewer;
 import ghidra.graph.viewer.layout.VisualGraphLayout;
 import ghidra.util.SystemUtilities;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import util.CollectionUtils;
 
 public class FilterVerticesJobTest extends AbstractFilteringVisualGraphTest {
@@ -54,7 +54,7 @@ public class FilterVerticesJobTest extends AbstractFilteringVisualGraphTest {
 	private AbstractTestVertex ape;
 	private AbstractTestVertex turtle;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 
 		// some of the underlying graph code (like the Job Runner) need to be in headed mode

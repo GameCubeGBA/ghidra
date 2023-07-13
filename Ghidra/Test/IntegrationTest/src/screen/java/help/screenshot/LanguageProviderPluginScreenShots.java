@@ -17,8 +17,6 @@ package help.screenshot;
 
 import javax.swing.JButton;
 
-import org.junit.Test;
-
 import docking.widgets.OptionDialog;
 import docking.widgets.table.GTableFilterPanel;
 import ghidra.app.plugin.core.codebrowser.CodeBrowserPlugin;
@@ -28,6 +26,7 @@ import ghidra.app.plugin.processors.generic.PcodeFieldFactory;
 import ghidra.app.util.viewer.field.SpacerFieldFactory;
 import ghidra.app.util.viewer.format.FieldFormatModel;
 import ghidra.app.util.viewer.format.FormatManager;
+import org.junit.jupiter.api.Test;
 
 public class LanguageProviderPluginScreenShots extends GhidraScreenShotGenerator {
 

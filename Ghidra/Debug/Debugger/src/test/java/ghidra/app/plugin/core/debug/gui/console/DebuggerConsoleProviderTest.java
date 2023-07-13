@@ -17,20 +17,20 @@ package ghidra.app.plugin.core.debug.gui.console;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import docking.DefaultActionContext;
 import docking.action.builder.ActionBuilder;
 import ghidra.app.plugin.core.debug.gui.AbstractGhidraHeadedDebuggerGUITest;
 import ghidra.app.plugin.core.debug.gui.DebuggerResources;
 import ghidra.util.Msg;
+import org.junit.jupiter.api.Test;
 
 public class DebuggerConsoleProviderTest extends AbstractGhidraHeadedDebuggerGUITest {
 	DebuggerConsolePlugin consolePlugin;
 	DebuggerConsoleProvider consoleProvider;
 
-	@Before
+	@BeforeEach
 	public void setUpConsoleProviderTest() throws Exception {
 		consolePlugin = addPlugin(tool, DebuggerConsolePlugin.class);
 		consoleProvider = waitForComponentProvider(DebuggerConsoleProvider.class);

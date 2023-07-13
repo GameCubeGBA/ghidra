@@ -21,8 +21,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import ghidra.app.plugin.core.debug.gui.objects.components.*;
 import ghidra.app.plugin.core.debug.service.model.DebuggerModelServiceProxyPlugin;
@@ -31,6 +30,7 @@ import ghidra.dbg.target.*;
 import ghidra.dbg.testutil.DebuggerModelTestUtils;
 import ghidra.util.Swing;
 import help.screenshot.GhidraScreenShotGenerator;
+import org.junit.jupiter.api.Test;
 
 public class DebuggerObjectsPluginScreenShots extends GhidraScreenShotGenerator
 		implements DebuggerModelTestUtils {
@@ -40,7 +40,7 @@ public class DebuggerObjectsPluginScreenShots extends GhidraScreenShotGenerator
 	DebuggerObjectsPlugin objectsPlugin;
 	DebuggerObjectsProvider objectsProvider;
 
-	@Before
+	@BeforeEach
 	public void setUpMine() throws Exception {
 		modelService = addPlugin(tool, DebuggerModelServiceProxyPlugin.class);
 		objectsPlugin = addPlugin(tool, DebuggerObjectsPlugin.class);

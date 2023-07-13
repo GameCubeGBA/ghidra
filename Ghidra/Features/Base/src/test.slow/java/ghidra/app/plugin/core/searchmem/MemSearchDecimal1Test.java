@@ -18,13 +18,12 @@ package ghidra.app.plugin.core.searchmem;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import ghidra.program.database.ProgramBuilder;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.data.Pointer32DataType;
 import ghidra.program.model.listing.Program;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for searching for decimal values in memory.
@@ -36,7 +35,7 @@ public class MemSearchDecimal1Test extends AbstractMemSearchTest {
 	}
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		selectRadioButton("Decimal");

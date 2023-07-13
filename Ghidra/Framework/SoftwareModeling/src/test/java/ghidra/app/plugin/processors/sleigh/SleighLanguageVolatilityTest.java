@@ -18,7 +18,7 @@ package ghidra.app.plugin.processors.sleigh;
 import java.io.*;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.jar.ResourceFile;
 import generic.test.AbstractGenericTest;

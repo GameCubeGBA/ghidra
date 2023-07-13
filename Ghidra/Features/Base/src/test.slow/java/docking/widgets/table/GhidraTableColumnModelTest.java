@@ -47,6 +47,8 @@ import ghidra.program.model.listing.Program;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.table.GhidraTable;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 
 public class GhidraTableColumnModelTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -58,7 +60,7 @@ public class GhidraTableColumnModelTest extends AbstractGhidraHeadedIntegrationT
 	private DockingActionIf showReferencesAction;
 	private CodeBrowserPlugin codeBrowser;
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		cleanupGhidraWithNotepad();
 	}

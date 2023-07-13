@@ -22,8 +22,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 
-import org.junit.Test;
-
 import db.Transaction;
 import db.DBHandle;
 import ghidra.program.model.address.*;
@@ -33,6 +31,7 @@ import ghidra.trace.model.memory.TraceMemoryState;
 import ghidra.util.database.DBOpenMode;
 import ghidra.util.task.ConsoleTaskMonitor;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.Test;
 
 public abstract class AbstractDBTraceMemoryManagerMemoryTest
 		extends AbstractDBTraceMemoryManagerTest {

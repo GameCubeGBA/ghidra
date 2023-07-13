@@ -19,7 +19,6 @@ import static org.junit.Assert.*;
 
 import java.util.Set;
 
-import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
 import docking.ComponentProvider;
@@ -32,6 +31,7 @@ import ghidra.program.model.data.*;
 import ghidra.program.model.listing.Data;
 import ghidra.program.model.listing.DataIterator;
 import ghidra.program.util.BytesFieldLocation;
+import org.junit.jupiter.api.Test;
 
 @Category(NightlyCategory.class)
 public class DataAction4Test extends AbstractDataActionTest {

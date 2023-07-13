@@ -40,6 +40,9 @@ import ghidra.test.*;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AutoAnalysisWorkerTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -49,7 +52,7 @@ public class AutoAnalysisWorkerTest extends AbstractGhidraHeadedIntegrationTest 
 	private Program program;
 	private CodeBrowserPlugin cb;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -65,7 +68,7 @@ public class AutoAnalysisWorkerTest extends AbstractGhidraHeadedIntegrationTest 
 		cb = env.getPlugin(CodeBrowserPlugin.class);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 
 		tool.cancelCurrentTask();

@@ -19,8 +19,6 @@ import java.awt.Font;
 
 import javax.swing.*;
 
-import org.junit.Test;
-
 import docking.ComponentProvider;
 import docking.DialogComponentProvider;
 import generic.theme.GThemeDefaults.Colors;
@@ -37,6 +35,7 @@ import ghidra.program.model.listing.*;
 import ghidra.program.model.symbol.SourceType;
 import ghidra.program.model.symbol.SymbolTable;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.Test;
 
 public class DiffScreenShots extends GhidraScreenShotGenerator {
 	private static TaskMonitor dummyMonitor = TaskMonitor.DUMMY;

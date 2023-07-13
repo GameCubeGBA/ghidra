@@ -22,8 +22,8 @@ import java.util.List;
 import java.io.File;
 import java.io.IOException;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.util.task.TaskMonitor;
@@ -51,7 +51,7 @@ public class LocalSymbolServerTest extends AbstractGenericTest {
 		return file;
 	}
 
-	@Before
+	@BeforeEach
 	public void setup() throws IOException {
 		temporaryDir = createTempDirectory("localsymbolserver");
 	}

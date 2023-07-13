@@ -42,6 +42,9 @@ import ghidra.program.model.data.*;
 import ghidra.program.model.lang.*;
 import ghidra.program.model.listing.Program;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import utilities.util.FileUtilities;
 
 public class ParseDialogParsingAndPromptsTest extends AbstractGhidraHeadedIntegrationTest {
@@ -59,7 +62,7 @@ public class ParseDialogParsingAndPromptsTest extends AbstractGhidraHeadedIntegr
 	private DataTypeManagerPlugin dtmPlugin;
 	
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		program = getNotepad();
 		
@@ -72,7 +75,7 @@ public class ParseDialogParsingAndPromptsTest extends AbstractGhidraHeadedIntegr
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

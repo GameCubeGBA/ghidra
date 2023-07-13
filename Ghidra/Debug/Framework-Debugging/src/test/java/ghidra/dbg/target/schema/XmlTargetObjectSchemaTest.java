@@ -20,12 +20,12 @@ import static org.junit.Assert.assertEquals;
 import java.io.IOException;
 
 import org.jdom.JDOMException;
-import org.junit.Test;
 
 import ghidra.dbg.target.TargetInterpreter;
 import ghidra.dbg.target.TargetProcess;
 import ghidra.dbg.target.schema.DefaultTargetObjectSchema.DefaultAttributeSchema;
 import ghidra.dbg.target.schema.TargetObjectSchema.*;
+import org.junit.jupiter.api.Test;
 
 public class XmlTargetObjectSchemaTest {
 	protected static final String SCHEMA_XML = "" +

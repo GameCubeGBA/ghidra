@@ -15,8 +15,8 @@
  */
 package ghidra.app.plugin.core.select.flow;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 import ghidra.app.services.ProgramManager;
 import ghidra.framework.plugintool.PluginTool;
@@ -42,7 +42,7 @@ public abstract class AbstractFollowFlowTest extends AbstractGhidraHeadedIntegra
 
 	AddressFactory addressFactory;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -55,7 +55,7 @@ public abstract class AbstractFollowFlowTest extends AbstractGhidraHeadedIntegra
 		pm.openProgram(program.getDomainFile());
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		env.dispose();

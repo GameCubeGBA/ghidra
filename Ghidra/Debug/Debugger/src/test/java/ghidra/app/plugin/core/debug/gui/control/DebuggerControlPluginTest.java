@@ -23,8 +23,8 @@ import java.nio.ByteBuffer;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import db.Transaction;
 import docking.ActionContext;
@@ -84,7 +84,7 @@ public class DebuggerControlPluginTest extends AbstractGhidraHeadedDebuggerGUITe
 
 	List<String> commands = Collections.synchronizedList(new ArrayList<>());
 
-	@Before
+	@BeforeEach
 	public void setUpControlTest() throws Exception {
 		listingPlugin = addPlugin(tool, DebuggerListingPlugin.class);
 		controlService = addPlugin(tool, DebuggerControlServicePlugin.class);

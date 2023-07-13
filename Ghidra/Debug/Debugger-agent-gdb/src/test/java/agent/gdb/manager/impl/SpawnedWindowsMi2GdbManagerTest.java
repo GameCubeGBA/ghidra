@@ -18,13 +18,13 @@ package agent.gdb.manager.impl;
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
 
-import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 
 import agent.gdb.manager.GdbManager;
 import agent.gdb.pty.PtyFactory;
 import agent.gdb.pty.windows.ConPtyFactory;
 
-@Ignore("Need compatible version on CI")
+@Disabled("Need compatible version on CI")
 public class SpawnedWindowsMi2GdbManagerTest extends AbstractGdbManagerTest {
 	@Override
 	protected CompletableFuture<Void> startManager(GdbManager manager) {

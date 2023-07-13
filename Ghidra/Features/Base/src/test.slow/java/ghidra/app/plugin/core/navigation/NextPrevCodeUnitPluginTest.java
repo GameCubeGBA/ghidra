@@ -40,6 +40,9 @@ import ghidra.program.model.listing.*;
 import ghidra.program.model.mem.Memory;
 import ghidra.test.*;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import resources.Icons;
 
 public class NextPrevCodeUnitPluginTest extends AbstractGhidraHeadedIntegrationTest {
@@ -67,7 +70,7 @@ public class NextPrevCodeUnitPluginTest extends AbstractGhidraHeadedIntegrationT
 	}
 
 	@SuppressWarnings("unchecked") // we know that bookmarks is of type String
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		loadProgram();
@@ -89,7 +92,7 @@ public class NextPrevCodeUnitPluginTest extends AbstractGhidraHeadedIntegrationT
 		goTo(program.getMinAddress());
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}

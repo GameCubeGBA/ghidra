@@ -18,8 +18,8 @@ package experiments;
 import java.util.*;
 import java.util.function.IntConsumer;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 public class ToArrayTest {
 
@@ -63,7 +63,7 @@ public class ToArrayTest {
 	}
 
 	@Test
-	@Ignore
+	@Disabled
 	public void testHashSetToArrayPerformance() {
 		System.out.println("HashSet<String>(10):");
 		Collection<String> col = new HashSet<>();
@@ -72,7 +72,7 @@ public class ToArrayTest {
 	}
 
 	@Test
-	@Ignore
+	@Disabled
 	public void testArrayListToArrayPerformance() {
 		System.out.println("ArrayList<String>(10):");
 		Collection<String> col = new ArrayList<>();

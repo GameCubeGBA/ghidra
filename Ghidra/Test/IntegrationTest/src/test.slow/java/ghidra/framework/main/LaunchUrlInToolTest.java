@@ -43,6 +43,9 @@ import ghidra.server.remote.ServerTestUtil;
 import ghidra.test.*;
 import ghidra.util.exception.AssertException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import utilities.util.FileUtilities;
 
 public class LaunchUrlInToolTest extends AbstractGhidraHeadedIntegrationTest {
@@ -63,7 +66,7 @@ public class LaunchUrlInToolTest extends AbstractGhidraHeadedIntegrationTest {
 
 	private URL remoteFileUrl;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		env = new TestEnv();
@@ -77,7 +80,7 @@ public class LaunchUrlInToolTest extends AbstractGhidraHeadedIntegrationTest {
 		rootFolder.createFile("Test", program, TaskMonitor.DUMMY);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		killServer();
 		env.dispose();

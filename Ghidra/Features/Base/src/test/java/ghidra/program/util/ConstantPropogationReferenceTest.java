@@ -37,6 +37,7 @@ import ghidra.program.model.symbol.Reference;
 import ghidra.program.util.SymbolicPropogator.Value;
 import ghidra.util.exception.NotFoundException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.Test;
 
 /**
  * quick and dirty test of the ProgramContextImpl just to see

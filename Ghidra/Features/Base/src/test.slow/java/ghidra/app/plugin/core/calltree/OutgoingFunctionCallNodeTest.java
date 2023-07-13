@@ -21,8 +21,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.widgets.tree.GTreeNode;
 import generic.test.AbstractGenericTest;
@@ -33,6 +32,7 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.symbol.*;
 import ghidra.test.ToyProgramBuilder;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * This test class is covering the various types of 'calls' a function can make, such as a 
@@ -51,7 +51,7 @@ public class OutgoingFunctionCallNodeTest extends AbstractGenericTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		builder = new ToyProgramBuilder("Call Node Test", true);
 		builder.createMemory(".text", "0x0", 0x3000);

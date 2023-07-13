@@ -19,8 +19,6 @@ import static org.junit.Assert.*;
 
 import java.math.BigInteger;
 
-import org.junit.Test;
-
 import db.Transaction;
 import ghidra.program.model.lang.*;
 import ghidra.trace.model.guest.TraceGuestPlatform;
@@ -28,6 +26,7 @@ import ghidra.trace.model.guest.TracePlatform;
 import ghidra.trace.model.memory.TraceMemoryState;
 import ghidra.trace.model.stack.TraceStack;
 import ghidra.trace.model.thread.TraceThread;
+import org.junit.jupiter.api.Test;
 
 public abstract class AbstractDBTraceMemoryManagerRegistersTest
 		extends AbstractDBTraceMemoryManagerTest {

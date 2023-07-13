@@ -35,6 +35,9 @@ import docking.widgets.table.GTable;
 import generic.util.Path;
 import ghidra.framework.preferences.Preferences;
 import ghidra.util.filechooser.ExtensionFileFilter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import resources.Icons;
 
 public class PathManagerTest extends AbstractDockingTest {
@@ -48,7 +51,7 @@ public class PathManagerTest extends AbstractDockingTest {
 	private JButton upButton;
 	private JButton downButton;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		List<Path> paths = new ArrayList<>();
@@ -73,7 +76,7 @@ public class PathManagerTest extends AbstractDockingTest {
 		downButton = findButtonByIcon(panel, Icons.DOWN_ICON);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		frame.setVisible(false);
 		wasListenerNotified = false;

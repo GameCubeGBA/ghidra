@@ -34,6 +34,9 @@ import ghidra.framework.main.datatable.ProjectDataContext;
 import ghidra.framework.model.*;
 import ghidra.util.task.Task;
 import ghidra.util.task.TaskListener;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import util.CollectionUtils;
 
 public class DeleteProjectFilesTaskTest extends AbstractDockingTest {
@@ -55,7 +58,7 @@ public class DeleteProjectFilesTaskTest extends AbstractDockingTest {
 
 	private CountDownLatch taskEnded;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		root = new TestDummyDomainFolder(null, "root");
 		a = root.createFolder("a");
@@ -77,7 +80,7 @@ public class DeleteProjectFilesTaskTest extends AbstractDockingTest {
 		createFiles(eee, 1);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 
 		closeAllWindows();

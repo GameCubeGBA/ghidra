@@ -27,6 +27,9 @@ import ghidra.trace.database.ToyDBTraceBuilder;
 import ghidra.trace.model.Lifespan;
 import ghidra.trace.model.thread.TraceThread;
 import ghidra.util.exception.DuplicateNameException;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DBTraceThreadManagerTest extends AbstractGhidraHeadlessIntegrationTest {
 
@@ -43,13 +46,13 @@ public class DBTraceThreadManagerTest extends AbstractGhidraHeadlessIntegrationT
 		}
 	}
 
-	@Before
+	@BeforeEach
 	public void setUpThreadManagerTest() throws Exception {
 		b = new ToyDBTraceBuilder("Testing", "Toy:BE:64:default");
 		threadManager = b.trace.getThreadManager();
 	}
 
-	@After
+	@AfterEach
 	public void tearDownThreadManagerTest() throws Exception {
 		b.close();
 	}

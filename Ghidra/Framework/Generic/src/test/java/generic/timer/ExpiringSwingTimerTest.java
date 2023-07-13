@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 import java.util.concurrent.atomic.*;
 import java.util.function.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 

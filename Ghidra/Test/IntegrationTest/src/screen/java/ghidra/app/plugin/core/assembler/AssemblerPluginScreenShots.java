@@ -15,7 +15,7 @@
  */
 package ghidra.app.plugin.core.assembler;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.app.plugin.core.codebrowser.CodeViewerProvider;
 import help.screenshot.GhidraScreenShotGenerator;

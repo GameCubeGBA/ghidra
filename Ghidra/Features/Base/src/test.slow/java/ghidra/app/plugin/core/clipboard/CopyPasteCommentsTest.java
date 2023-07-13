@@ -19,9 +19,6 @@ import static org.junit.Assert.*;
 
 import java.util.*;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import docking.ComponentProvider;
 import docking.action.DockingAction;
 import docking.action.DockingActionIf;
@@ -49,6 +46,8 @@ import ghidra.program.util.ProgramSelection;
 import ghidra.test.AbstractProgramBasedTest;
 import ghidra.test.ToyProgramBuilder;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test the plugin that deals with cut/paste comments and labels
@@ -93,7 +92,7 @@ public class CopyPasteCommentsTest extends AbstractProgramBasedTest {
 		return builder.getProgram();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		initialize();

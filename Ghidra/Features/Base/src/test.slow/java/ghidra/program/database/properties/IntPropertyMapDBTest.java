@@ -32,6 +32,9 @@ import ghidra.program.model.address.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.exception.NoValueException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -54,7 +57,7 @@ public class IntPropertyMapDBTest extends AbstractGhidraHeadedIntegrationTest im
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		program = createDefaultProgram("Test", ProgramBuilder._TOY, this);
@@ -69,7 +72,7 @@ public class IntPropertyMapDBTest extends AbstractGhidraHeadedIntegrationTest im
 		random = new Random(1);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		program.endTransaction(transactionID, true);
 		program.release(this);

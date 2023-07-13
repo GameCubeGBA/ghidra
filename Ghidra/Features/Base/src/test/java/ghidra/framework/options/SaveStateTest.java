@@ -18,13 +18,13 @@ package ghidra.framework.options;
 import static org.junit.Assert.*;
 
 import org.jdom.Element;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class SaveStateTest {
 	private SaveState saveState;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		saveState = new SaveState("foo");
 	}

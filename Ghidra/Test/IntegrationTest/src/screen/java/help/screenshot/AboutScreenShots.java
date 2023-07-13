@@ -17,9 +17,8 @@ package help.screenshot;
 
 import java.util.Map;
 
-import org.junit.Test;
-
 import ghidra.app.plugin.core.help.AboutDomainObjectUtils;
+import org.junit.jupiter.api.Test;
 
 public class AboutScreenShots extends GhidraScreenShotGenerator {
 

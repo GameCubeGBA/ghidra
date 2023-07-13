@@ -21,9 +21,6 @@ import static org.junit.Assert.fail;
 import java.util.Objects;
 import java.util.Set;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import ghidra.app.plugin.core.debug.gui.AbstractGhidraHeadedDebuggerGUITest;
 import ghidra.app.services.ActionSource;
 import ghidra.app.services.TraceRecorder;
@@ -34,6 +31,8 @@ import ghidra.dbg.target.TargetRegister;
 import ghidra.program.model.lang.*;
 import ghidra.test.ToyProgramBuilder;
 import ghidra.trace.model.thread.TraceThread;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DefaultDebuggerRegisterMapperTest extends AbstractGhidraHeadedDebuggerGUITest {
 
@@ -57,7 +56,7 @@ public class DefaultDebuggerRegisterMapperTest extends AbstractGhidraHeadedDebug
 		}
 	}
 
-	@Before
+	@BeforeEach
 	public void setUpMapperTest() throws Throwable {
 		createTestModel();
 		mb.createTestProcessesAndThreads();

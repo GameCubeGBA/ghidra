@@ -18,13 +18,13 @@ package ghidra.app.merge.datatypes;
 import static org.junit.Assert.*;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 import ghidra.program.database.*;
 import ghidra.program.model.data.*;
 import ghidra.program.model.data.Enum;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.Test;
 
 /**
  * More data type merge tests.

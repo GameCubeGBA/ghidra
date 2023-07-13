@@ -30,19 +30,22 @@ import ghidra.trace.database.ToyDBTraceBuilder;
 import ghidra.trace.model.Lifespan;
 import ghidra.trace.model.modules.TraceConflictedMappingException;
 import ghidra.trace.model.modules.TraceStaticMapping;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DBTraceStaticMappingManagerTest extends AbstractGhidraHeadlessIntegrationTest {
 
 	ToyDBTraceBuilder tb;
 	DBTraceStaticMappingManager staticMappingManager;
 
-	@Before
+	@BeforeEach
 	public void setUpStaticMappingManagerTest() throws IOException {
 		tb = new ToyDBTraceBuilder("Testing", "Toy:BE:64:default");
 		staticMappingManager = tb.trace.getStaticMappingManager();
 	}
 
-	@After
+	@AfterEach
 	public void tearDownStaticMappingManagerTest() {
 		tb.close();
 	}

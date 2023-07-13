@@ -18,7 +18,7 @@ package ghidra.app.plugin.core.compositeeditor;
 import static org.junit.Assert.*;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.program.model.data.DataTypeManager;
 import ghidra.program.model.data.Structure;

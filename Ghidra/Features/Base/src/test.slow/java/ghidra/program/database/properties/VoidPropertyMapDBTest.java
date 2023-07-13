@@ -30,6 +30,9 @@ import ghidra.program.database.mem.MemoryMapDB;
 import ghidra.program.model.address.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -54,7 +57,7 @@ public class VoidPropertyMapDBTest extends AbstractGhidraHeadedIntegrationTest i
 	/*
 	 * @see TestCase#setUp()
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		program = createDefaultProgram("Test", ProgramBuilder._TOY, this);
@@ -71,7 +74,7 @@ public class VoidPropertyMapDBTest extends AbstractGhidraHeadedIntegrationTest i
 	/*
 	 * @see TestCase#tearDown()
 	 */
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		program.endTransaction(transactionID, true);
 		program.release(this);

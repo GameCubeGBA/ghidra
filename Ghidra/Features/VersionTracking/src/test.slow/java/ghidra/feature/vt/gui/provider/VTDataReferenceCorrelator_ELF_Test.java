@@ -18,10 +18,10 @@ package ghidra.feature.vt.gui.provider;
 import java.util.*;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 import ghidra.feature.vt.api.main.*;
 import ghidra.feature.vt.gui.task.ApplyMatchTask;
+import org.junit.jupiter.api.Test;
 
 public class VTDataReferenceCorrelator_ELF_Test extends AbstractVTCorrelatorTest {
 

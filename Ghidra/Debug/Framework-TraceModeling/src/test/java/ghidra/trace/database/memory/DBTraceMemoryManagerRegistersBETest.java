@@ -15,7 +15,7 @@
  */
 package ghidra.trace.database.memory;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.program.model.lang.LanguageID;
 import ghidra.trace.util.LanguageTestWatcher.TestLanguage;

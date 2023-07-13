@@ -19,8 +19,6 @@ import static org.junit.Assert.*;
 
 import java.util.*;
 
-import org.junit.Test;
-
 import ghidra.program.database.function.FunctionManagerDB;
 import ghidra.program.database.function.OverlappingFunctionException;
 import ghidra.program.model.address.AddressSet;
@@ -29,6 +27,7 @@ import ghidra.program.model.symbol.*;
 import ghidra.program.util.ProgramSelection;
 import ghidra.util.Msg;
 import ghidra.util.exception.InvalidInputException;
+import org.junit.jupiter.api.Test;
 
 public class DiffApplyMergeTest extends DiffApplyTestAdapter {
 

@@ -54,6 +54,9 @@ import ghidra.trace.model.target.TraceObjectManager;
 import ghidra.trace.model.thread.TraceObjectThread;
 import ghidra.trace.model.time.TraceTimeManager;
 import ghidra.util.table.GhidraTable;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 @Category(NightlyCategory.class)
 public class DebuggerThreadsProviderTest extends AbstractGhidraHeadedDebuggerGUITest {
@@ -241,13 +244,13 @@ public class DebuggerThreadsProviderTest extends AbstractGhidraHeadedDebuggerGUI
 		assertThreadsEmpty();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUpThreadsProviderTest() throws Exception {
 		addPlugin(tool, DebuggerThreadsPlugin.class);
 		provider = waitForComponentProvider(DebuggerThreadsProvider.class);
 	}
 
-	@After
+	@AfterEach
 	public void tearDownThreadsProviderTest() throws Exception {
 		traceManager.activate(DebuggerCoordinates.NOWHERE);
 		waitForTasks();

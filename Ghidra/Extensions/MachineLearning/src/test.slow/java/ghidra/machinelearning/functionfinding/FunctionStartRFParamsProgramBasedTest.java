@@ -17,8 +17,8 @@ package ghidra.machinelearning.functionfinding;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import ghidra.program.database.ProgramBuilder;
 import ghidra.program.model.address.*;
@@ -37,7 +37,7 @@ public class FunctionStartRFParamsProgramBasedTest extends AbstractProgramBasedT
 	private final static String ADD_R0_R1_THUMB = "08 44";
 	private final static String BX_LR_THUMB = "70 47";
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		initialize();
 	}

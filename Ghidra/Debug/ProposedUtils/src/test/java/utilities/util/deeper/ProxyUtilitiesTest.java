@@ -20,8 +20,7 @@ import static org.junit.Assert.assertEquals;
 import java.lang.invoke.MethodHandles;
 import java.util.List;
 
-import org.junit.Test;
-
+import org.junit.jupiter.api.Test;
 import utilities.util.ProxyUtilities;
 
 // NOTE: This class is one package deeper to ensure access permissions work correctly

@@ -36,6 +36,9 @@ import ghidra.test.FrontEndTestEnv;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.InvalidInputException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * This screen shot generator houses code that needs to connect to a running server
@@ -45,7 +48,7 @@ public class VersionControlSlowScreenShots extends GhidraScreenShotGenerator {
 	private FrontEndTestEnv frontEnd;
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		// super.setUp();   don't do this; use our tool instead
@@ -54,7 +57,7 @@ public class VersionControlSlowScreenShots extends GhidraScreenShotGenerator {
 	}
 
 	@Override
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		// super.tearDown();  don't do this; use our tool instead

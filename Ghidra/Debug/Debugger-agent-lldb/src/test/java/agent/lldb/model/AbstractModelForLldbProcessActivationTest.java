@@ -23,13 +23,12 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.junit.Test;
-
 import SWIG.SBTarget;
 import agent.lldb.model.iface2.LldbModelTargetSession;
 import generic.Unique;
 import ghidra.dbg.target.*;
 import ghidra.dbg.util.PathPattern;
+import org.junit.jupiter.api.Test;
 
 public abstract class AbstractModelForLldbProcessActivationTest
 		extends AbstractModelForLldbActivationTest {

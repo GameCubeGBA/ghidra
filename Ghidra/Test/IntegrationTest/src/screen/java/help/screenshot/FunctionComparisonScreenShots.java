@@ -20,8 +20,6 @@ import java.io.IOException;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
-import org.junit.Test;
-
 import docking.action.DockingActionIf;
 import docking.widgets.dialogs.TableChooserDialog;
 import docking.widgets.table.GFilterTable;
@@ -39,6 +37,7 @@ import ghidra.program.model.symbol.SourceType;
 import ghidra.util.InvalidNameException;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.exception.InvalidInputException;
+import org.junit.jupiter.api.Test;
 import util.CollectionUtils;
 
 public class FunctionComparisonScreenShots extends GhidraScreenShotGenerator {

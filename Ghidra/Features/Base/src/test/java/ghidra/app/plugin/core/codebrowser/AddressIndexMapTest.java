@@ -25,14 +25,14 @@ import static org.junit.Assert.*;
 
 import java.math.BigInteger;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import docking.widgets.fieldpanel.support.FieldRange;
 import docking.widgets.fieldpanel.support.FieldSelection;
 import generic.test.AbstractGenericTest;
 import ghidra.app.util.viewer.util.AddressIndexMap;
 import ghidra.program.model.address.*;
+import org.junit.jupiter.api.Test;
 
 public class AddressIndexMapTest extends AbstractGenericTest {
 	private AddressSpace space;
@@ -41,7 +41,7 @@ public class AddressIndexMapTest extends AbstractGenericTest {
 	/*
 	 * @see TestCase#setUp()
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		space = new GenericAddressSpace("Test", 32, AddressSpace.TYPE_RAM, 0);
 		AddressSet set = new AddressSet();

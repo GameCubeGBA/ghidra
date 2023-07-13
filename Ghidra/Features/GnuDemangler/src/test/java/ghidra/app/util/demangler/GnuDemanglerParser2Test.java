@@ -17,10 +17,9 @@ package ghidra.app.util.demangler;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import generic.test.AbstractGenericTest;
 import ghidra.app.util.demangler.gnu.GnuDemanglerParser;
+import org.junit.jupiter.api.Test;
 
 public class GnuDemanglerParser2Test extends AbstractGenericTest {
 

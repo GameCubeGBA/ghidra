@@ -17,7 +17,7 @@ package help.screenshot;
 
 import java.io.IOException;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.DockingWindowManager;
 import docking.ErrLogDialog;

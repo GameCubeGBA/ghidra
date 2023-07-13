@@ -25,8 +25,6 @@ import javax.swing.JComboBox;
 import javax.swing.JTree;
 import javax.swing.tree.TreePath;
 
-import org.junit.Test;
-
 import docking.DefaultActionContext;
 import docking.DialogComponentProvider;
 import docking.widgets.MultiLineLabel;
@@ -37,6 +35,7 @@ import ghidra.framework.cmd.CompoundCmd;
 import ghidra.program.database.ProgramBuilder;
 import ghidra.program.database.ProgramDB;
 import ghidra.program.model.symbol.SourceType;
+import org.junit.jupiter.api.Test;
 
 public class DualProgramTest extends DiffTestAdapter {
 

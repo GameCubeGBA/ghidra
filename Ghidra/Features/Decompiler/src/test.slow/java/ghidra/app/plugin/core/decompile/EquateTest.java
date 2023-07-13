@@ -19,8 +19,6 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import org.junit.Test;
-
 import ghidra.app.decompiler.ClangToken;
 import ghidra.app.decompiler.ClangVariableToken;
 import ghidra.app.decompiler.component.ClangTextField;
@@ -28,6 +26,7 @@ import ghidra.app.plugin.core.decompile.actions.*;
 import ghidra.program.model.listing.*;
 import ghidra.program.model.pcode.*;
 import ghidra.program.model.symbol.*;
+import org.junit.jupiter.api.Test;
 
 public class EquateTest extends AbstractDecompilerTest {
 

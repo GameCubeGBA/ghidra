@@ -17,8 +17,7 @@ package ghidra.app.util.demangler.microsoft;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.app.util.demangler.*;
@@ -29,12 +28,13 @@ import ghidra.program.model.symbol.SourceType;
 import ghidra.program.model.symbol.SymbolTable;
 import ghidra.test.ToyProgramBuilder;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.BeforeEach;
 
 public class MicrosoftDemanglerTest extends AbstractGenericTest {
 
 	private ProgramDB program;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		ToyProgramBuilder builder = new ToyProgramBuilder("test", true);
 		builder.createMemory(".text", "0x01001000", 0x100);

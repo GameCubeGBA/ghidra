@@ -40,12 +40,15 @@ import ghidra.feature.vt.gui.provider.matchtable.VTMatchTableProvider;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.program.model.address.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class VTMatchTableTest extends AbstractGhidraHeadedIntegrationTest {
 	private VTTestEnv env;
 	private VTSession session;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		env = new VTTestEnv();
@@ -59,7 +62,7 @@ public class VTMatchTableTest extends AbstractGhidraHeadedIntegrationTest {
 		toolFrame.setSize(800, 800);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

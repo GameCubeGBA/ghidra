@@ -19,8 +19,6 @@ import static org.junit.Assert.*;
 
 import java.awt.Window;
 
-import org.junit.Test;
-
 import docking.ComponentProvider;
 import docking.widgets.combobox.GhidraComboBox;
 import docking.widgets.table.GTable;
@@ -35,6 +33,7 @@ import ghidra.app.services.GoToService;
 import ghidra.app.util.navigation.GoToAddressLabelDialog;
 import ghidra.program.model.address.Address;
 import ghidra.util.table.GhidraProgramTableModel;
+import org.junit.jupiter.api.Test;
 
 public class NavigationScreenShots extends GhidraScreenShotGenerator {
 

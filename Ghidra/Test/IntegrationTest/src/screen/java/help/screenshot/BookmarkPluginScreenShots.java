@@ -15,12 +15,11 @@
  */
 package help.screenshot;
 
-import org.junit.Test;
-
 import docking.DialogComponentProvider;
 import ghidra.app.plugin.core.bookmark.BookmarkProvider;
 import ghidra.app.plugin.core.codebrowser.CodeViewerProvider;
 import ghidra.app.plugin.core.datamgr.DataTypesProvider;
+import org.junit.jupiter.api.Test;
 
 public class BookmarkPluginScreenShots extends GhidraScreenShotGenerator {
 

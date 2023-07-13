@@ -67,6 +67,9 @@ import ghidra.trace.model.target.TraceObjectKeyPath;
 import ghidra.trace.model.thread.TraceObjectThread;
 import ghidra.trace.model.thread.TraceThread;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 public class DebuggerDisassemblyTest extends AbstractGhidraHeadedDebuggerGUITest {
 	protected DebuggerDisassemblerPlugin disassemblerPlugin;
@@ -74,7 +77,7 @@ public class DebuggerDisassemblyTest extends AbstractGhidraHeadedDebuggerGUITest
 	protected DebuggerListingProvider listingProvider;
 	protected SchemaContext ctx;
 
-	@Before
+	@BeforeEach
 	public void setUpDisassemblyTest() throws Exception {
 		ctx = XmlSchemaContext.deserialize("" + //
 			"<context>" + //
@@ -308,7 +311,7 @@ public class DebuggerDisassemblyTest extends AbstractGhidraHeadedDebuggerGUITest
 	}
 
 	@Test
-	@Ignore("TODO")
+	@Disabled("TODO")
 	public void testCurrentDisassembleActionGuestThumb() throws Throwable {
 		TraceObjectThread thread =
 			createPolyglotTrace("armv8le", 0x00400000, () -> tb.buf(0x70, 0x47));

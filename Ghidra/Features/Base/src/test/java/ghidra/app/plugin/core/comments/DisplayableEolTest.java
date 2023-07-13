@@ -19,8 +19,7 @@ import static org.junit.Assert.*;
 
 import java.nio.charset.StandardCharsets;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.app.cmd.refs.AddMemRefCmd;
@@ -36,6 +35,7 @@ import ghidra.program.model.symbol.RefType;
 import ghidra.program.model.symbol.SourceType;
 import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
 import ghidra.util.exception.RollbackException;
+import org.junit.jupiter.api.BeforeEach;
 
 public class DisplayableEolTest extends AbstractGenericTest {
 
@@ -45,7 +45,7 @@ public class DisplayableEolTest extends AbstractGenericTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		ProgramBuilder builder = new ProgramBuilder();
 

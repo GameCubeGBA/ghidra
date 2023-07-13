@@ -33,6 +33,9 @@ import ghidra.program.model.listing.*;
 import ghidra.program.util.DefaultLanguageService;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class PublicAPITest extends AbstractGenericTest {
 	Language x86;
@@ -40,13 +43,13 @@ public class PublicAPITest extends AbstractGenericTest {
 
 	Program program;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		x86 = getLanguage("x86:LE:64:default");
 		toy = getLanguage("Toy:BE:64:default");
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (program != null) {
 			program.release(this);

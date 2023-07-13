@@ -23,11 +23,10 @@ import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import org.junit.Test;
-
 import generic.theme.ApplicationThemeManager;
 import ghidra.GhidraTestApplicationLayout;
 import ghidra.framework.ApplicationConfiguration;
+import org.junit.jupiter.api.Test;
 import utility.application.ApplicationLayout;
 
 public class HelpBuildUtilsTest extends AbstractHelpTest {

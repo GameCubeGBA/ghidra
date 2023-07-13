@@ -22,14 +22,13 @@ import java.util.*;
 
 import java.io.IOException;
 
-import org.junit.Test;
-
 import ghidra.app.util.bin.format.dwarf4.*;
 import ghidra.app.util.bin.format.dwarf4.encoding.DWARFEncoding;
 import ghidra.app.util.bin.format.dwarf4.encoding.DWARFTag;
 import ghidra.program.model.data.*;
 import ghidra.program.model.data.Enum;
 import ghidra.util.exception.CancelledException;
+import org.junit.jupiter.api.Test;
 
 /**
  *

@@ -21,8 +21,6 @@ import static org.junit.Assert.*;
 import java.util.Collection;
 import java.util.List;
 
-import org.junit.Test;
-
 import ghidra.feature.vt.api.main.*;
 import ghidra.feature.vt.api.markuptype.*;
 import ghidra.feature.vt.gui.task.ForceApplyMarkupItemTask;
@@ -33,6 +31,7 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.*;
 import ghidra.program.model.symbol.SourceType;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.Test;
 
 public class ForceApplyOfExcludedMarkupTest extends AbstractFunctionSignatureMarkupTest {
 

@@ -33,6 +33,9 @@ import ghidra.program.model.address.AddressFactory;
 import ghidra.program.model.listing.*;
 import ghidra.program.model.symbol.*;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class PostCommentFieldFactoryTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -42,7 +45,7 @@ public class PostCommentFieldFactoryTest extends AbstractGhidraHeadedIntegration
 	private Options fieldOptions;
 	private Program program;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		program = buildProgram();
@@ -171,7 +174,7 @@ public class PostCommentFieldFactoryTest extends AbstractGhidraHeadedIntegration
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

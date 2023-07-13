@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 import java.util.*;
 
 import org.apache.commons.collections4.IteratorUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class NestedIteratorTest {
 	@Test

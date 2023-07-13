@@ -22,13 +22,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
-import org.junit.Test;
-
 import ghidra.async.AsyncTestUtils;
 import ghidra.async.AsyncUtils;
 import ghidra.dbg.error.DebuggerIllegalArgumentException;
 import ghidra.dbg.model.*;
 import ghidra.dbg.target.TargetMethod.*;
+import org.junit.jupiter.api.Test;
 
 public class TargetMethodTest implements AsyncTestUtils {
 	@Test

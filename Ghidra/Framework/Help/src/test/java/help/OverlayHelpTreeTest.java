@@ -27,7 +27,7 @@ import java.util.regex.Pattern;
 
 import javax.help.HelpSet;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import help.validator.LinkDatabase;
 import help.validator.location.*;

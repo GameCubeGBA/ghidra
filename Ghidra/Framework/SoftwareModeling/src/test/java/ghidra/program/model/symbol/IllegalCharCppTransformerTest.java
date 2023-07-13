@@ -17,9 +17,8 @@ package ghidra.program.model.symbol;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import generic.test.AbstractGenericTest;
+import org.junit.jupiter.api.Test;
 
 public class IllegalCharCppTransformerTest extends AbstractGenericTest {
 

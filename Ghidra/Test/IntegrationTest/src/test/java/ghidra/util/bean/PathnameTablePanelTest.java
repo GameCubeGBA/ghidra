@@ -32,6 +32,9 @@ import generic.theme.GIcon;
 import ghidra.app.util.importer.LibrarySearchPathManager;
 import ghidra.framework.preferences.Preferences;
 import ghidra.util.filechooser.ExtensionFileFilter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import resources.Icons;
 
 /**
@@ -52,7 +55,7 @@ public class PathnameTablePanelTest extends AbstractDockingTest {
 	private JButton upButton;
 	private JButton downButton;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		panel = new PathnameTablePanel(tablePaths, true, false, () -> reset());
@@ -68,7 +71,7 @@ public class PathnameTablePanelTest extends AbstractDockingTest {
 		downButton = findButtonByIcon(panel, Icons.DOWN_ICON);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		frame.setVisible(false);
 	}

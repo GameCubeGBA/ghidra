@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 import java.awt.Font;
 import java.text.ParseException;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class FontModifierTest {
 	private Font baseFont = new Font("Dialog", Font.PLAIN, 12);

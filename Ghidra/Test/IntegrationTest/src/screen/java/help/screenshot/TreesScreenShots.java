@@ -22,7 +22,7 @@ import java.util.Arrays;
 import javax.swing.*;
 import javax.swing.table.JTableHeader;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.DockableComponent;
 import docking.menu.MultiStateDockingAction;

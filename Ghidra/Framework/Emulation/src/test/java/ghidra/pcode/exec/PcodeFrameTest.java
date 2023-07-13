@@ -19,8 +19,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import generic.test.AbstractGTest;
 import ghidra.GhidraTestApplicationLayout;
@@ -28,6 +27,7 @@ import ghidra.app.plugin.processors.sleigh.SleighLanguage;
 import ghidra.app.plugin.processors.sleigh.SleighLanguageHelper;
 import ghidra.framework.Application;
 import ghidra.framework.ApplicationConfiguration;
+import org.junit.jupiter.api.Test;
 
 public class PcodeFrameTest extends AbstractGTest {
 	static final String SAMPLE_ADD = """
@@ -68,7 +68,7 @@ public class PcodeFrameTest extends AbstractGTest {
 	SleighLanguage language;
 	MyLib library = new MyLib();
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		if (!Application.isInitialized()) {
 			Application.initializeApplication(

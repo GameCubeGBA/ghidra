@@ -27,6 +27,9 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
 import ghidra.program.util.ProgramSelection;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class MarkAndSelectActionTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -41,7 +44,7 @@ public class MarkAndSelectActionTest extends AbstractGhidraHeadedIntegrationTest
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		builder = new ToyProgramBuilder("program", false);
@@ -57,7 +60,7 @@ public class MarkAndSelectActionTest extends AbstractGhidraHeadedIntegrationTest
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		builder.dispose();
 		env.dispose();

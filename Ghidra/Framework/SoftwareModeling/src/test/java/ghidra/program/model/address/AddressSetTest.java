@@ -22,6 +22,8 @@ import java.util.Iterator;
 import org.junit.*;
 
 import generic.test.AbstractGenericTest;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AddressSetTest extends AbstractGenericTest {
 	private AddressSpace space;
@@ -39,7 +41,7 @@ public class AddressSetTest extends AbstractGenericTest {
 	private AddressSet[] aXORb = new AddressSet[SIZE];
 	private boolean[] aCONTAINSb = new boolean[SIZE];
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		space = new GenericAddressSpace("xx", 32, AddressSpace.TYPE_RAM, 0);

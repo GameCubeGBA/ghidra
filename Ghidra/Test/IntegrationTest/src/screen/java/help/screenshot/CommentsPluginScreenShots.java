@@ -15,11 +15,10 @@
  */
 package help.screenshot;
 
-import org.junit.Test;
-
 import ghidra.app.plugin.core.codebrowser.CodeBrowserPlugin;
 import ghidra.app.plugin.core.comments.CommentsDialog;
 import ghidra.program.model.address.Address;
+import org.junit.jupiter.api.Test;
 
 public class CommentsPluginScreenShots extends GhidraScreenShotGenerator {
 

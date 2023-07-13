@@ -23,7 +23,6 @@ import java.math.BigInteger;
 import javax.swing.JLabel;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 import ghidra.program.database.ProgramDB;
 import ghidra.program.database.ProgramModifierListener;
@@ -31,6 +30,7 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.lang.Register;
 import ghidra.program.model.listing.ContextChangeException;
 import ghidra.program.model.listing.ProgramContext;
+import org.junit.jupiter.api.Test;
 
 public class ProgramContextMergeManagerTest extends AbstractListingMergeManagerTest {
 

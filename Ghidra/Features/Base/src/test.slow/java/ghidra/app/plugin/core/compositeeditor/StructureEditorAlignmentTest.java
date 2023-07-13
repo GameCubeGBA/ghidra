@@ -22,13 +22,12 @@ import java.util.Arrays;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import org.junit.Test;
-
 import ghidra.program.model.data.*;
 import ghidra.program.model.listing.Function;
 import ghidra.program.model.listing.Library;
 import ghidra.program.model.symbol.ExternalLocation;
 import ghidra.program.model.symbol.SourceType;
+import org.junit.jupiter.api.Test;
 
 public class StructureEditorAlignmentTest extends AbstractStructureEditorTest {
 

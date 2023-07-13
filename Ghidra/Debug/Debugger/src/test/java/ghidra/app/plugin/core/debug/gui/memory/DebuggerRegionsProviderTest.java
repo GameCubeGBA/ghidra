@@ -54,6 +54,9 @@ import ghidra.trace.model.modules.TraceStaticMapping;
 import ghidra.trace.model.target.*;
 import ghidra.trace.model.target.TraceObject.ConflictResolution;
 import ghidra.util.table.GhidraTable;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 @Category(NightlyCategory.class)
 public class DebuggerRegionsProviderTest extends AbstractGhidraHeadedDebuggerGUITest {
@@ -176,13 +179,13 @@ public class DebuggerRegionsProviderTest extends AbstractGhidraHeadedDebuggerGUI
 		assertEquals(flags.contains("x"), rowColVal(row, executeCol));
 	}
 
-	@Before
+	@BeforeEach
 	public void setUpRegionsProviderTest() throws Exception {
 		addPlugin(tool, DebuggerRegionsPlugin.class);
 		provider = waitForComponentProvider(DebuggerRegionsProvider.class);
 	}
 
-	@After
+	@AfterEach
 	public void tearDownRegionsProviderTest() throws Exception {
 		traceManager.activate(DebuggerCoordinates.NOWHERE);
 		waitForTasks();

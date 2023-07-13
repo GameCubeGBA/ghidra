@@ -19,16 +19,16 @@ import static org.junit.Assert.*;
 
 import java.util.Random;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.Test;
 
 public class FNV1a64MessageDigestTest {
 
 	private MessageDigest digest;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		digest = new FNV1a64MessageDigest();
 	}

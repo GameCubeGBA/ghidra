@@ -37,6 +37,9 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for two byte viewers connected.
@@ -52,7 +55,7 @@ public class ByteViewerConnectedToolBehaviorTest extends AbstractGhidraHeadedInt
 	private ByteViewerPanel panelOne;
 	private ByteViewerPanel panel2;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		toolOne = env.getTool();
@@ -82,7 +85,7 @@ public class ByteViewerConnectedToolBehaviorTest extends AbstractGhidraHeadedInt
 		return p;
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

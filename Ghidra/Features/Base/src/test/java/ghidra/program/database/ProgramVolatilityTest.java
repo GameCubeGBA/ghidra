@@ -16,7 +16,7 @@
 package ghidra.program.database;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.app.plugin.processors.sleigh.SleighLanguageVolatilityTest;
 import ghidra.program.model.address.Address;

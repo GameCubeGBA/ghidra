@@ -46,6 +46,9 @@ import ghidra.trace.model.breakpoint.TraceBreakpoint;
 import ghidra.util.Msg;
 import ghidra.util.task.TaskMonitor;
 import help.screenshot.GhidraScreenShotGenerator;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DebuggerBreakpointsPluginScreenShots extends GhidraScreenShotGenerator
 		implements DebuggerModelTestUtils {
@@ -67,7 +70,7 @@ public class DebuggerBreakpointsPluginScreenShots extends GhidraScreenShotGenera
 		return program.getAddressFactory().getDefaultAddressSpace().getAddress(offset);
 	}
 
-	@Before
+	@BeforeEach
 	public void setUpMine() throws Exception {
 		breakpointService = addPlugin(tool, DebuggerLogicalBreakpointServicePlugin.class);
 		modelService = addPlugin(tool, DebuggerModelServiceProxyPlugin.class);
@@ -83,7 +86,7 @@ public class DebuggerBreakpointsPluginScreenShots extends GhidraScreenShotGenera
 				.createFile("echo", program, TaskMonitor.DUMMY);
 	}
 
-	@After
+	@AfterEach
 	public void tearDownMine() {
 		Msg.debug(this, "Tearing down");
 		Msg.debug(this, "Service breakpoints:");

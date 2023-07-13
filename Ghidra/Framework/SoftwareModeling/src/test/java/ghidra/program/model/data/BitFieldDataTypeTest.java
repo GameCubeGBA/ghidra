@@ -17,13 +17,12 @@ package ghidra.program.model.data;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import generic.test.AbstractGTest;
 import ghidra.docking.settings.*;
 import ghidra.program.model.mem.ByteMemBufferImpl;
 import ghidra.program.model.mem.MemBuffer;
 import ghidra.program.model.scalar.Scalar;
+import org.junit.jupiter.api.Test;
 
 public class BitFieldDataTypeTest extends AbstractGTest {
 

@@ -23,8 +23,6 @@ import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.util.List;
 
-import org.junit.Test;
-
 import db.Transaction;
 import ghidra.app.plugin.assembler.*;
 import ghidra.app.plugin.assembler.sleigh.sem.AssemblyPatternBlock;
@@ -48,6 +46,7 @@ import ghidra.trace.model.target.TraceObject.ConflictResolution;
 import ghidra.trace.model.target.TraceObjectKeyPath;
 import ghidra.trace.model.thread.TraceThread;
 import ghidra.util.NumericUtilities;
+import org.junit.jupiter.api.Test;
 
 public class BytesTracePcodeEmulatorTest extends AbstractTracePcodeEmulatorTest {
 

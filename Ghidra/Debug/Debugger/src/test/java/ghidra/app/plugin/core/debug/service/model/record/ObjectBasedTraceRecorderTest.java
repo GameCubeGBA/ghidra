@@ -22,7 +22,7 @@ import static org.junit.Assert.*;
 import java.nio.ByteBuffer;
 import java.util.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.Unique;
 import ghidra.app.plugin.core.debug.gui.AbstractGhidraHeadedDebuggerGUITest;

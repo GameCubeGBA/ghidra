@@ -21,20 +21,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.app.util.pcodeInject.*;
 import ghidra.javaclass.format.DescriptorDecoder;
 import ghidra.javaclass.format.constantpool.AbstractConstantPoolInfoJava;
 import ghidra.program.model.data.*;
+import org.junit.jupiter.api.BeforeEach;
 
 public class DescriptorDecoderTest extends AbstractGenericTest {
 	DataTypeManager dtm;
 	DataType dtInteger;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		dtm = new StandAloneDataTypeManager("");
 		int transactionID = dtm.startTransaction(null);

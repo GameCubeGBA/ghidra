@@ -23,7 +23,7 @@ import java.text.ParseException;
 
 import javax.swing.Icon;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import resources.MultiIcon;
 import resources.ResourceManager;

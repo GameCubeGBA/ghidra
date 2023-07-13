@@ -22,7 +22,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JComponent;
 import javax.swing.table.TableModel;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.ComponentProvider;
 import docking.DialogComponentProvider;

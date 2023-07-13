@@ -24,8 +24,8 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import javax.swing.*;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 import docking.ActionContext;
 import docking.action.DockingActionIf;
@@ -51,7 +51,7 @@ public class AbstractVersionControlActionTest extends AbstractGhidraHeadedIntegr
 	protected static final String PROGRAM_C = "Program_C";
 	protected FrontEndTestEnv frontEnd;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		frontEnd = new FrontEndTestEnv();
@@ -72,7 +72,7 @@ public class AbstractVersionControlActionTest extends AbstractGhidraHeadedIntegr
 		frontEnd.waitForTreeNode(PROGRAM_C);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		frontEnd.dispose();
 	}

@@ -15,8 +15,8 @@
  */
 package agent.frida.model.gadp;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import agent.frida.model.AbstractModelForFridaInterpreterTest;
 import ghidra.dbg.test.ProvidesTargetViaLaunchSpecimen;
@@ -32,14 +32,14 @@ public class GadpModelForFridaInterpreterTest extends AbstractModelForFridaInter
 	//  "file target" will change the process and this isn't handled
 	//  also getLaunchScript in MacOSSpecimen is currently wrong
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testLaunchViaInterpreterShowsInProcessContainer() throws Throwable {
 		super.testLaunchViaInterpreterShowsInProcessContainer();
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testAttachViaInterpreterShowsInProcessContainer() throws Throwable {
 		super.testAttachViaInterpreterShowsInProcessContainer();
@@ -47,14 +47,14 @@ public class GadpModelForFridaInterpreterTest extends AbstractModelForFridaInter
 
 	// "quit" does not have the desired behavior
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testExecuteQuit() throws Throwable {
 		super.testExecuteQuit();
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testInterpreterIsWhereExpected() throws Throwable {
 		super.testInterpreterIsWhereExpected();

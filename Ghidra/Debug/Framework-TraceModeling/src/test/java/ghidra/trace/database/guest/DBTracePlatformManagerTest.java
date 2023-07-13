@@ -29,18 +29,21 @@ import ghidra.trace.database.ToyDBTraceBuilder;
 import ghidra.trace.model.guest.TraceGuestPlatform;
 import ghidra.trace.model.guest.TracePlatform;
 import ghidra.util.task.ConsoleTaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DBTracePlatformManagerTest extends AbstractGhidraHeadlessIntegrationTest {
 	protected ToyDBTraceBuilder b;
 	protected DBTracePlatformManager manager;
 
-	@Before
+	@BeforeEach
 	public void setUpLanguageManagerTest() throws IOException {
 		b = new ToyDBTraceBuilder("Testing", "Toy:BE:64:default");
 		manager = b.trace.getPlatformManager();
 	}
 
-	@After
+	@AfterEach
 	public void tearDownLanguageManagerTest() {
 		b.close();
 	}

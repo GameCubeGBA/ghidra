@@ -33,6 +33,9 @@ import ghidra.program.model.data.*;
 import ghidra.program.model.data.Enum;
 import ghidra.program.model.listing.Program;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class EnumEditor2Test extends AbstractGhidraHeadedIntegrationTest {
 
@@ -41,7 +44,7 @@ public class EnumEditor2Test extends AbstractGhidraHeadedIntegrationTest {
 	private TestEnv env;
 	private DataTypeManagerPlugin plugin;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		ToyProgramBuilder builder = new ToyProgramBuilder("notepad", true);
@@ -55,7 +58,7 @@ public class EnumEditor2Test extends AbstractGhidraHeadedIntegrationTest {
 
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.release(program);
 		env.dispose();

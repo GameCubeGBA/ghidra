@@ -17,12 +17,12 @@ package ghidra.app.plugin.core.data;
 
 import java.util.List;
 
-import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
 import docking.action.DockingActionIf;
 import generic.test.category.NightlyCategory;
 import ghidra.program.model.data.DataType;
+import org.junit.jupiter.api.Test;
 
 @Category(NightlyCategory.class)
 public class DataAction1Test extends AbstractDataActionTest {

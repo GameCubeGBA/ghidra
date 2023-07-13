@@ -36,6 +36,8 @@ import ghidra.program.model.listing.Program;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.Msg;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public abstract class AbstractMergeTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -50,7 +52,7 @@ public abstract class AbstractMergeTest extends AbstractGhidraHeadedIntegrationT
 	protected PluginTool mergeTool;
 	protected ProgramMultiUserMergeManager mergeMgr;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		mtf = new MergeTestFacilitator();
 		fixupGUI();
@@ -58,7 +60,7 @@ public abstract class AbstractMergeTest extends AbstractGhidraHeadedIntegrationT
 		testEnv.getTool().setToolName("TestTool");
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		bringDownMergeTool();

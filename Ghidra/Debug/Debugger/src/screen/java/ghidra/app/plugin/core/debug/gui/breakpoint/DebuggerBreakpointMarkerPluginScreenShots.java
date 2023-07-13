@@ -18,8 +18,8 @@ package ghidra.app.plugin.core.debug.gui.breakpoint;
 import java.awt.event.MouseEvent;
 import java.util.Set;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import db.Transaction;
 import generic.Unique;
@@ -62,7 +62,7 @@ public class DebuggerBreakpointMarkerPluginScreenShots extends GhidraScreenShotG
 		return program.getAddressFactory().getDefaultAddressSpace().getAddress(offset);
 	}
 
-	@Before
+	@BeforeEach
 	public void setUpMine() throws Exception {
 		modelService = addPlugin(tool, DebuggerModelServiceProxyPlugin.class);
 		traceManager = addPlugin(tool, DebuggerTraceManagerServicePlugin.class);

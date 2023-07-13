@@ -15,10 +15,9 @@
  */
 package ghidra.trace.database.memory;
 
-import org.junit.Test;
-
 import ghidra.program.model.lang.LanguageID;
 import ghidra.trace.util.LanguageTestWatcher.TestLanguage;
+import org.junit.jupiter.api.Test;
 
 public class DBTraceMemoryManagerRegistersLETest
 		extends AbstractDBTraceMemoryManagerRegistersTest {

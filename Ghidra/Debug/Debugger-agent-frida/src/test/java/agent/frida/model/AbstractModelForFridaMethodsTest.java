@@ -21,8 +21,7 @@ import static org.junit.Assume.*;
 import java.util.*;
 import java.util.Map.Entry;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
 
 import agent.frida.manager.FridaEventsListenerAdapter;
 import agent.frida.model.iface2.FridaModelTargetProcess;
@@ -39,6 +38,7 @@ import ghidra.dbg.test.RequiresLaunchSpecimen;
 import ghidra.dbg.util.PathUtils;
 import ghidra.framework.Application;
 import ghidra.program.model.address.Address;
+import org.junit.jupiter.api.Test;
 
 public abstract class AbstractModelForFridaMethodsTest extends AbstractDebuggerModelTest
 		implements RequiresLaunchSpecimen {
@@ -111,7 +111,7 @@ public abstract class AbstractModelForFridaMethodsTest extends AbstractDebuggerM
 		runTestResumeTerminates(specimen);
 	}
 
-	@Ignore
+	@Disabled
 	@Test
 	public void testLaunchResumeKill() throws Throwable {
 		// Disabled as of 220609
@@ -126,7 +126,7 @@ public abstract class AbstractModelForFridaMethodsTest extends AbstractDebuggerM
 		runTestKill(specimen);
 	}
 
-	@Ignore
+	@Disabled
 	@Test
 	public void testScan() throws Throwable {
 		// Disabled as of 220609
@@ -161,7 +161,7 @@ public abstract class AbstractModelForFridaMethodsTest extends AbstractDebuggerM
 		runTestKill(specimen);
 	}
 
-	@Ignore
+	@Disabled
 	@Test
 	public void testWatch() throws Throwable {
 		assumeTrue(m.hasKillableProcesses());
@@ -196,7 +196,7 @@ public abstract class AbstractModelForFridaMethodsTest extends AbstractDebuggerM
 		runTestKill(specimen);
 	}
 
-	@Ignore
+	@Disabled
 	@Test
 	public void testInterceptor() throws Throwable {
 		// Disabled as of 220609
@@ -228,7 +228,7 @@ public abstract class AbstractModelForFridaMethodsTest extends AbstractDebuggerM
 		runTestKill(specimen);
 	}
 
-	@Ignore
+	@Disabled
 	@Test
 	public void testStalker() throws Throwable {
 		// Disabled as of 220609

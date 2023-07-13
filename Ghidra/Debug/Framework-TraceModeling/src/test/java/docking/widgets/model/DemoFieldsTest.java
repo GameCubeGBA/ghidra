@@ -22,15 +22,14 @@ import java.awt.BorderLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.Msg;
 import ghidra.util.SystemUtilities;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DemoFieldsTest extends AbstractGhidraHeadedIntegrationTest {
-	@Before
+	@BeforeEach
 	public void checkNotBatch() {
 		assumeFalse(SystemUtilities.isInTestingBatchMode());
 	}

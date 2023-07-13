@@ -17,8 +17,8 @@ package ghidra.app.plugin.core.decompile;
 
 import static org.junit.Assert.*;
 
-import org.junit.After;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 
 import docking.action.DockingActionIf;
 import docking.widgets.FindDialog;
@@ -34,7 +34,7 @@ public class DecompilerFindDialogTest extends AbstractDecompilerTest {
 	private FindDialog findDialog;
 
 	@Override
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		close(findDialog);
 		super.tearDown();

@@ -23,7 +23,7 @@ import java.util.List;
 
 import javax.swing.JFrame;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.framework.DockingApplicationConfiguration;
 import ghidra.framework.ApplicationConfiguration;

@@ -21,8 +21,6 @@ import javax.swing.JCheckBox;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
-import org.junit.Test;
-
 import docking.ComponentProvider;
 import docking.WindowPosition;
 import docking.action.ToggleDockingAction;
@@ -30,6 +28,7 @@ import docking.widgets.table.GTable;
 import docking.widgets.table.threaded.ThreadedTableModel;
 import ghidra.app.plugin.core.symtable.FilterDialog;
 import ghidra.app.plugin.core.symtable.SymbolTablePlugin;
+import org.junit.jupiter.api.Test;
 
 public class SymbolTablePluginScreenShots extends GhidraScreenShotGenerator {
 

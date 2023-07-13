@@ -19,8 +19,8 @@ import static org.junit.Assert.*;
 
 import java.awt.Color;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import ghidra.util.WebColors;
 
@@ -28,7 +28,7 @@ public class ColorValueTest {
 
 	private GThemeValueMap values;
 
-	@Before
+	@BeforeEach
 	public void setup() {
 		values = new GThemeValueMap();
 	}

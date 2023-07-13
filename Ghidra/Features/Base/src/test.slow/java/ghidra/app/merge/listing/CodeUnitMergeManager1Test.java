@@ -18,7 +18,6 @@ package ghidra.app.merge.listing;
 import static org.junit.Assert.*;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 import ghidra.program.database.ProgramDB;
 import ghidra.program.database.ProgramModifierListener;
@@ -30,6 +29,7 @@ import ghidra.program.model.listing.Instruction;
 import ghidra.program.model.mem.*;
 import ghidra.program.model.symbol.SourceType;
 import ghidra.program.model.util.CodeUnitInsertionException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test the merge of the versioned program's listing.

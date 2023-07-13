@@ -24,7 +24,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.feature.vt.api.db.VTAssociationDB;
 import ghidra.feature.vt.api.main.*;

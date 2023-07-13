@@ -20,9 +20,6 @@ import static org.junit.Assert.*;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import db.Transaction;
 import ghidra.dbg.target.TargetRegister;
 import ghidra.dbg.target.schema.SchemaContext;
@@ -43,6 +40,8 @@ import ghidra.trace.model.target.TraceObject;
 import ghidra.trace.model.target.TraceObject.ConflictResolution;
 import ghidra.trace.model.target.TraceObjectKeyPath;
 import ghidra.util.exception.DuplicateNameException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DBTraceObjectRegisterSupportTest extends AbstractGhidraHeadlessIntegrationTest {
 	protected ToyDBTraceBuilder b;
@@ -51,7 +50,7 @@ public class DBTraceObjectRegisterSupportTest extends AbstractGhidraHeadlessInte
 	protected SchemaContext ctx;
 	protected TraceObject root;
 
-	@Before
+	@BeforeEach
 	public void setUpObjectManagerTest() throws Exception {
 		b = new ToyDBTraceBuilder("Testing", "Toy:BE:64:default");
 		manager = b.trace.getObjectManager();

@@ -24,10 +24,9 @@ import java.util.Date;
 
 import javax.swing.KeyStroke;
 
-import org.junit.Test;
-
 import generic.test.AbstractGenericTest;
 import generic.theme.GThemeDefaults.Colors.Palette;
+import org.junit.jupiter.api.Test;
 
 public class OptionTypeTest extends AbstractGenericTest {
 	static public enum FOO {

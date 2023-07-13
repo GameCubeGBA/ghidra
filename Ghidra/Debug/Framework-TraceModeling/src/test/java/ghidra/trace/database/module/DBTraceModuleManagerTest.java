@@ -28,19 +28,22 @@ import ghidra.trace.database.ToyDBTraceBuilder;
 import ghidra.trace.model.Lifespan;
 import ghidra.trace.model.modules.TraceModule;
 import ghidra.trace.model.modules.TraceSection;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DBTraceModuleManagerTest extends AbstractGhidraHeadlessIntegrationTest {
 
 	ToyDBTraceBuilder b;
 	DBTraceModuleManager moduleManager;
 
-	@Before
+	@BeforeEach
 	public void setUpModuleManagerTest() throws Exception {
 		b = new ToyDBTraceBuilder("Testing", "Toy:BE:64:default");
 		moduleManager = b.trace.getModuleManager();
 	}
 
-	@After
+	@AfterEach
 	public void tearDownModuleManagerTest() {
 		b.close();
 	}

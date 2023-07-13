@@ -42,6 +42,9 @@ import ghidra.program.model.listing.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.exception.RollbackException;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 @Category(NightlyCategory.class)
 public class ScalarSearchTest extends AbstractGhidraHeadedIntegrationTest {
@@ -86,7 +89,7 @@ public class ScalarSearchTest extends AbstractGhidraHeadedIntegrationTest {
 	private long maxScalarVal;
 	private long minScalarVal;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		env = new TestEnv();
@@ -129,7 +132,7 @@ public class ScalarSearchTest extends AbstractGhidraHeadedIntegrationTest {
 		}
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}

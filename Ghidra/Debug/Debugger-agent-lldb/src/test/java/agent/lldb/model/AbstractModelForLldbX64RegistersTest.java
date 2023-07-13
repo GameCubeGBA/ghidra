@@ -26,8 +26,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Map.Entry;
 
-import org.junit.Test;
-
 import ghidra.dbg.target.TargetObject;
 import ghidra.dbg.target.TargetRegister;
 import ghidra.dbg.target.TargetRegisterBank;
@@ -36,6 +34,7 @@ import ghidra.dbg.test.AbstractDebuggerModelRegistersTest;
 import ghidra.dbg.test.AbstractDebuggerModelTest;
 import ghidra.dbg.test.ProvidesTargetViaLaunchSpecimen;
 import ghidra.dbg.util.PathUtils;
+import org.junit.jupiter.api.Test;
 
 public abstract class AbstractModelForLldbX64RegistersTest
 		extends AbstractDebuggerModelRegistersTest

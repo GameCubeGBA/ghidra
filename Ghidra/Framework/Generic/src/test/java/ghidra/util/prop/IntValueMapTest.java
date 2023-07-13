@@ -26,6 +26,8 @@ import ghidra.util.LongIterator;
 import ghidra.util.datastruct.NoSuchIndexException;
 import ghidra.util.exception.NoValueException;
 import ghidra.util.map.IntValueMap;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class IntValueMapTest extends AbstractGenericTest {
 	IntValueMap ps;
@@ -34,7 +36,7 @@ public class IntValueMapTest extends AbstractGenericTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		ps = new IntValueMap("Test");
 	}

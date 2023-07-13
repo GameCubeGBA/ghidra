@@ -19,8 +19,8 @@ import static org.junit.Assert.*;
 
 import java.util.*;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import ghidra.dbg.target.*;
 import ghidra.dbg.test.AbstractDebuggerModelActivationTest;
@@ -62,7 +62,7 @@ public abstract class AbstractModelForDbgengFrameActivationTest
 	// TODO: Should probably assert default focus/activation here
 
 	@Override
-	@Ignore("dbgeng.dll has no event for frame activation")
+	@Disabled("dbgeng.dll has no event for frame activation")
 	public void testActivateEachViaInterpreter() throws Throwable {
 	}
 

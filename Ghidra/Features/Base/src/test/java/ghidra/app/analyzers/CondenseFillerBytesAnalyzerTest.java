@@ -30,6 +30,8 @@ import ghidra.program.model.listing.*;
 import ghidra.test.ToyProgramBuilder;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class CondenseFillerBytesAnalyzerTest extends AbstractGenericTest {
 
@@ -40,7 +42,7 @@ public class CondenseFillerBytesAnalyzerTest extends AbstractGenericTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		builder = new ToyProgramBuilder("Test", true);
 		builder.createMemory(".text", "0x0", 0x1000);

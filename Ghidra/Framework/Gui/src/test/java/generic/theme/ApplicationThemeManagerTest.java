@@ -29,6 +29,9 @@ import javax.swing.plaf.UIResource;
 import org.junit.*;
 
 import generic.theme.builtin.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import resources.ResourceManager;
 import resources.icons.UrlImageIcon;
 
@@ -51,7 +54,7 @@ public class ApplicationThemeManagerTest {
 
 	private boolean errorsExpected;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 
 		themes = new HashSet<>();
@@ -71,7 +74,7 @@ public class ApplicationThemeManagerTest {
 		themeManager = new DummyApplicationThemeManager();
 	}
 
-	@After
+	@AfterEach
 	public void cleanupUIDefaults() {
 		UIDefaults defaults = UIManager.getDefaults();
 		defaults.clear();

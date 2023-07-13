@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 
 import javax.swing.KeyStroke;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.DefaultActionContext;
 import docking.action.builder.ActionBuilder;

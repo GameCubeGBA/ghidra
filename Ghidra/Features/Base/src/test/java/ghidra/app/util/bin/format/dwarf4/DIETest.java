@@ -31,6 +31,9 @@ import ghidra.program.model.listing.Program;
 import ghidra.test.ToyProgramBuilder;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Testing the DIECreator, which is used in other tests.
@@ -42,7 +45,7 @@ public class DIETest extends AbstractGenericTest {
 	int transactionID;
 	Program ghidraProgram;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		ToyProgramBuilder builder = new ToyProgramBuilder("Test", true);
@@ -58,7 +61,7 @@ public class DIETest extends AbstractGenericTest {
 
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		endTransaction();
 	}

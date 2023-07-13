@@ -17,12 +17,11 @@ package ghidra.app.plugin.core.select.flow;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Test;
-
 import ghidra.GhidraOptions;
 import ghidra.framework.options.ToolOptions;
 import ghidra.program.model.address.AddressSet;
 import ghidra.program.util.ProgramSelection;
+import org.junit.jupiter.api.Test;
 
 public class SelectByFlowPluginBackwardTest extends AbstractSelectByFlowPluginTest {
 

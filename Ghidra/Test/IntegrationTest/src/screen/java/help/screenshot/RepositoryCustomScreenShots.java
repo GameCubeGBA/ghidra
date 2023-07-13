@@ -23,7 +23,7 @@ import java.io.File;
 
 import javax.swing.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.theme.GThemeDefaults.Colors.Palette;
 import ghidra.app.merge.MergeProgressPanel;

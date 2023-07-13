@@ -19,8 +19,7 @@ import java.awt.*;
 
 import javax.swing.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import docking.DialogComponentProvider;
 import docking.action.DockingActionIf;
@@ -29,6 +28,7 @@ import ghidra.app.plugin.core.codebrowser.CodeBrowserPlugin;
 import ghidra.app.plugin.core.codebrowser.CodeViewerProvider;
 import ghidra.app.plugin.core.searchmem.mask.MnemonicSearchPlugin;
 import ghidra.program.model.address.*;
+import org.junit.jupiter.api.Test;
 
 /**
  * Screenshots for help/topics/Search/Search_Memory.htm
@@ -39,7 +39,7 @@ public class MemorySearchScreenShots extends AbstractSearchScreenShots {
 	private MnemonicSearchPlugin mnemonicSearchPlugin;
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		super.setUp();

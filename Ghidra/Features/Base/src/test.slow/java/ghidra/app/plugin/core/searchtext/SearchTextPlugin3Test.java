@@ -51,6 +51,9 @@ import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitorComponent;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import utilities.util.reflection.ReflectionUtilities;
 
 public class SearchTextPlugin3Test extends AbstractGhidraHeadedIntegrationTest {
@@ -65,7 +68,7 @@ public class SearchTextPlugin3Test extends AbstractGhidraHeadedIntegrationTest {
 	private CodeViewerProvider provider;
 	private GoToService goToService;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -152,7 +155,7 @@ public class SearchTextPlugin3Test extends AbstractGhidraHeadedIntegrationTest {
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		runSwing(() -> tool.close());

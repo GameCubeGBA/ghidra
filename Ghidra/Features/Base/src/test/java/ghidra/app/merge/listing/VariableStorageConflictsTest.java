@@ -32,6 +32,9 @@ import ghidra.program.model.listing.Function.FunctionUpdateType;
 import ghidra.program.model.symbol.RefType;
 import ghidra.program.model.symbol.SourceType;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class VariableStorageConflictsTest extends AbstractGenericTest {
 
@@ -44,14 +47,14 @@ public class VariableStorageConflictsTest extends AbstractGenericTest {
 		// TODO Auto-generated constructor stub
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 //		testEnv = new TestEnv();
 		program = buildProgram();
 		program.startTransaction("Testing");
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 //		testEnv.release(program);
 //		testEnv.dispose();

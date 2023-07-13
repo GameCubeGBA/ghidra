@@ -22,7 +22,7 @@ import java.nio.file.Path;
 
 import org.apache.logging.log4j.*;
 import org.apache.logging.log4j.core.config.Configurator;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.test.AbstractDockingTest;
 import docking.widgets.table.SelectionManager;

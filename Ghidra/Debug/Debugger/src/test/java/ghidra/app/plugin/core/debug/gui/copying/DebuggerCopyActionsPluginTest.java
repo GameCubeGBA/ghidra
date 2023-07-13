@@ -20,8 +20,7 @@ import static org.junit.Assert.*;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.experimental.categories.Category;
 
 import db.Transaction;
@@ -47,6 +46,7 @@ import ghidra.test.ToyProgramBuilder;
 import ghidra.trace.database.memory.DBTraceMemoryManager;
 import ghidra.trace.model.*;
 import ghidra.trace.model.memory.TraceMemoryFlag;
+import org.junit.jupiter.api.BeforeEach;
 
 @Category(NightlyCategory.class)
 public class DebuggerCopyActionsPluginTest extends AbstractGhidraHeadedDebuggerGUITest {
@@ -57,7 +57,7 @@ public class DebuggerCopyActionsPluginTest extends AbstractGhidraHeadedDebuggerG
 
 	DebuggerListingProvider listingProvider;
 
-	@Before
+	@BeforeEach
 	public void setupCopyActionsPluginTest() throws Exception {
 		mappingService = addPlugin(tool, DebuggerStaticMappingServicePlugin.class);
 		copyActionsPlugin = addPlugin(tool, DebuggerCopyActionsPlugin.class);

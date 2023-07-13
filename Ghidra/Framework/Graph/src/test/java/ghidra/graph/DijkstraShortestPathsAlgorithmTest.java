@@ -19,7 +19,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.graph.algo.DijkstraShortestPathsAlgorithm;
 import ghidra.graph.jung.JungDirectedGraph;

@@ -17,14 +17,14 @@ package ghidra.app.cmd.function;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import generic.test.AbstractGenericTest;
 import ghidra.program.database.ProgramBuilder;
 import ghidra.program.model.address.*;
 import ghidra.program.model.listing.*;
 import ghidra.program.model.symbol.SourceType;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test for the {@link CreateMultipleFunctionsCmd}.
@@ -34,7 +34,7 @@ public class CreateFunctionCmdTest extends AbstractGenericTest {
 	private Program program;
 	private ProgramBuilder builder;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		builder = new ProgramBuilder("notepad.exe", ProgramBuilder._X86);

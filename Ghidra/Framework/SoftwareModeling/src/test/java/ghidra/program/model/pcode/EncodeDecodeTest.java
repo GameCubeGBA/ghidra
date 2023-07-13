@@ -21,8 +21,8 @@ import static org.junit.Assert.*;
 
 import java.io.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.program.model.address.*;
@@ -406,7 +406,7 @@ public class EncodeDecodeTest extends AbstractGenericTest {
 		assertTrue(sawCloseMismatch);
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		AddressSpace spaces[] = new AddressSpace[4];
 		spaces[0] = new GenericAddressSpace("ram", 32, AddressSpace.TYPE_RAM, 2);

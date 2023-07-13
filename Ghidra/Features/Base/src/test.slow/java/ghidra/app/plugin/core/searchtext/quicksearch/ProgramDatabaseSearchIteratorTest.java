@@ -44,6 +44,9 @@ import ghidra.program.util.*;
 import ghidra.test.*;
 import ghidra.util.UserSearchUtils;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ProgramDatabaseSearchIteratorTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -65,7 +68,7 @@ public class ProgramDatabaseSearchIteratorTest extends AbstractGhidraHeadedInteg
 		builder.disassemble(Long.toHexString(address), 2);
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -105,7 +108,7 @@ public class ProgramDatabaseSearchIteratorTest extends AbstractGhidraHeadedInteg
 		env.showTool();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 		program = null;

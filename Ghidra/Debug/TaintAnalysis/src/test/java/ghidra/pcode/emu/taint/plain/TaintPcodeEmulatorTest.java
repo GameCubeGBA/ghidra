@@ -44,6 +44,9 @@ import ghidra.taint.model.TaintSet;
 import ghidra.taint.model.TaintVec;
 import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class TaintPcodeEmulatorTest extends AbstractGhidraHeadlessIntegrationTest {
 	protected final class LinuxAmd64TaintPcodeEmulator extends TaintPcodeEmulator {
@@ -71,7 +74,7 @@ public class TaintPcodeEmulatorTest extends AbstractGhidraHeadlessIntegrationTes
 	private TaintEmuUnixFileSystem fs;
 	private TaintPcodeEmulator emulator;
 
-	@Before
+	@BeforeEach
 	public void setUpTaintTest() throws Exception {
 		program = createDefaultProgram("HelloTaint", "x86:LE:64:default", "gcc", this);
 		language = program.getLanguage();
@@ -93,7 +96,7 @@ public class TaintPcodeEmulatorTest extends AbstractGhidraHeadlessIntegrationTes
 		emulator = new LinuxAmd64TaintPcodeEmulator();
 	}
 
-	@After
+	@AfterEach
 	public void tearDownTaintTest() throws Exception {
 		if (program != null) {
 			program.release(this);

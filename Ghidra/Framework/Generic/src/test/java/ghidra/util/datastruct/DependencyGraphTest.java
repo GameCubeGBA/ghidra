@@ -20,9 +20,9 @@ import static org.junit.Assert.*;
 import java.util.*;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 import ghidra.util.graph.*;
+import org.junit.jupiter.api.Test;
 
 public class DependencyGraphTest {
 

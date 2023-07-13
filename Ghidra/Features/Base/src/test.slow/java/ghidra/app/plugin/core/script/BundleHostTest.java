@@ -25,6 +25,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.junit.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.osgi.framework.Bundle;
 
 import generic.jar.ResourceFile;
@@ -72,7 +75,7 @@ public class BundleHostTest extends AbstractGhidraHeadlessIntegrationTest {
 		}
 	}
 
-	@Before
+	@BeforeEach
 	public void setup() throws OSGiException, IOException {
 		wipe(GhidraSourceBundle.getCompiledBundlesDir());
 		deleteSimilarTempFiles(TEMP_NAME_PREFIX);
@@ -85,7 +88,7 @@ public class BundleHostTest extends AbstractGhidraHeadlessIntegrationTest {
 		pushNewBundle();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		bundleHost.stopFramework();
 		capturingBundleHostListener = null;

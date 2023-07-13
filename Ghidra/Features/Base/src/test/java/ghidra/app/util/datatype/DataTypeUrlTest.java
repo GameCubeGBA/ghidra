@@ -20,18 +20,18 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import ghidra.app.services.DataTypeManagerService;
 import ghidra.app.services.TestDoubleDataTypeManagerService;
 import ghidra.program.model.data.*;
 import ghidra.util.UniversalID;
 import ghidra.util.UniversalIdGenerator;
+import org.junit.jupiter.api.Test;
 
 public class DataTypeUrlTest {
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		UniversalIdGenerator.initialize();
 	}

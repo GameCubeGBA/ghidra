@@ -48,6 +48,9 @@ import ghidra.trace.model.modules.TraceStaticMapping;
 import ghidra.util.Msg;
 import ghidra.util.SystemUtilities;
 import ghidra.util.datastruct.ListenerMap;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DebuggerLogicalBreakpointServiceTest extends AbstractGhidraHeadedDebuggerGUITest {
 	protected static final long TIMEOUT_MILLIS =
@@ -144,7 +147,7 @@ public class DebuggerLogicalBreakpointServiceTest extends AbstractGhidraHeadedDe
 	protected ForTimingMappingChangeListener mappingChangeListener =
 		new ForTimingMappingChangeListener();
 
-	@Before
+	@BeforeEach
 	public void setUpBreakpointServiceTest() throws Throwable {
 		ListenerMap.clearErr();
 
@@ -173,7 +176,7 @@ public class DebuggerLogicalBreakpointServiceTest extends AbstractGhidraHeadedDe
 			createTargetTraceMapper(mb.testProcess3), ActionSource.AUTOMATIC);
 	}
 
-	@After
+	@AfterEach
 	public void tearDownBreakpointServiceTest() throws Throwable {
 		Msg.debug(this, "Tearing down");
 		try {

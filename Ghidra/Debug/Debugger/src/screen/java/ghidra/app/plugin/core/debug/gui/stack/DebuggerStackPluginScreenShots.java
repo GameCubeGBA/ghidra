@@ -68,6 +68,9 @@ import ghidra.util.exception.CancelledException;
 import ghidra.util.task.ConsoleTaskMonitor;
 import ghidra.util.task.TaskMonitor;
 import help.screenshot.GhidraScreenShotGenerator;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DebuggerStackPluginScreenShots extends GhidraScreenShotGenerator
 		implements AsyncTestUtils {
@@ -80,7 +83,7 @@ public class DebuggerStackPluginScreenShots extends GhidraScreenShotGenerator
 	ToyDBTraceBuilder tb;
 	Program program;
 
-	@Before
+	@BeforeEach
 	public void setUpMine() throws Throwable {
 		programManager = addPlugin(tool, ProgramManagerPlugin.class);
 		traceManager = addPlugin(tool, DebuggerTraceManagerServicePlugin.class);
@@ -92,7 +95,7 @@ public class DebuggerStackPluginScreenShots extends GhidraScreenShotGenerator
 		tb = new ToyDBTraceBuilder("echo", ToyProgramBuilder._X64);
 	}
 
-	@After
+	@AfterEach
 	public void tearDownMine() {
 		tb.close();
 

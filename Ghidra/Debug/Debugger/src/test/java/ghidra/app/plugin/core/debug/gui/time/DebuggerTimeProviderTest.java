@@ -20,8 +20,7 @@ import static org.junit.Assert.*;
 import java.util.Calendar;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import db.Transaction;
 import docking.widgets.dialogs.InputDialog;
@@ -33,13 +32,14 @@ import ghidra.trace.database.time.DBTraceTimeManager;
 import ghidra.trace.model.thread.TraceThread;
 import ghidra.trace.model.time.TraceSnapshot;
 import ghidra.trace.model.time.schedule.TraceSchedule;
+import org.junit.jupiter.api.Test;
 
 public class DebuggerTimeProviderTest extends AbstractGhidraHeadedDebuggerGUITest {
 
 	protected DebuggerTimePlugin timePlugin;
 	protected DebuggerTimeProvider timeProvider;
 
-	@Before
+	@BeforeEach
 	public void setUpTimeProviderTest() throws Exception {
 		timePlugin = addPlugin(tool, DebuggerTimePlugin.class);
 		timeProvider = waitForComponentProvider(DebuggerTimeProvider.class);

@@ -24,14 +24,13 @@ import java.awt.geom.*;
 import java.util.Collection;
 import java.util.List;
 
-import org.junit.Test;
-
 import edu.uci.ics.jung.algorithms.layout.KKLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import generic.test.AbstractGTest;
 import ghidra.graph.graphs.*;
 import ghidra.graph.support.*;
 import ghidra.graph.support.TestVertexTooltipProvider.SpyTooltip;
+import org.junit.jupiter.api.Test;
 
 public class GraphViewerTest extends AbstractVisualGraphTest {
 

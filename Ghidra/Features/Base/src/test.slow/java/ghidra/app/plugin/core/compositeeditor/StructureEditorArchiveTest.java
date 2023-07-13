@@ -22,8 +22,7 @@ import java.io.File;
 import javax.swing.*;
 import javax.swing.tree.TreePath;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.action.DockingActionIf;
 import docking.widgets.OptionDialog;
@@ -34,6 +33,7 @@ import ghidra.app.plugin.core.datamgr.tree.DataTypeArchiveGTree;
 import ghidra.app.services.DataTypeManagerService;
 import ghidra.program.model.data.*;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.BeforeEach;
 
 public class StructureEditorArchiveTest extends AbstractStructureEditorTest {
 
@@ -48,7 +48,7 @@ public class StructureEditorArchiveTest extends AbstractStructureEditorTest {
 	private Category arcRootCat;
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		CommonTestData.initialize();
 		emptyStructure = CommonTestData.emptyStructure;

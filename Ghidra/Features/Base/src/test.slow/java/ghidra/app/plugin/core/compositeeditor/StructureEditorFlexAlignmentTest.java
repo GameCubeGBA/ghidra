@@ -20,9 +20,8 @@ import static org.junit.Assert.*;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import org.junit.Test;
-
 import ghidra.program.model.data.*;
+import org.junit.jupiter.api.Test;
 
 public class StructureEditorFlexAlignmentTest extends AbstractStructureEditorTest {
 

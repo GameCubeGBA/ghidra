@@ -22,6 +22,8 @@ import java.util.Arrays;
 import org.junit.*;
 
 import generic.test.AbstractGenericTest;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AddressSpaceTest extends AbstractGenericTest {
 
@@ -39,7 +41,7 @@ public class AddressSpaceTest extends AbstractGenericTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		space1 = new GenericAddressSpace("Test1", 8, AddressSpace.TYPE_RAM, 0);
 		space2 = new GenericAddressSpace("Test2", 8, AddressSpace.TYPE_RAM, 1);

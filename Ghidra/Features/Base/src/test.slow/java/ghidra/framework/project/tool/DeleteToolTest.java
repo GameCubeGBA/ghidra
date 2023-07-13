@@ -22,6 +22,9 @@ import ghidra.framework.model.*;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.ProjectTestUtils;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * The following tests are performed in this test driver for
@@ -37,13 +40,13 @@ public class DeleteToolTest extends AbstractGhidraHeadedIntegrationTest {
 	private PluginTool runningTool;
 	private Project project;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		ProjectTestUtils.deleteProject(PROJECT_DIRECTORY, PROJECT_NAME);
 		project = ProjectTestUtils.getProject(PROJECT_DIRECTORY, PROJECT_NAME);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		project.close();
 		ProjectTestUtils.deleteProject(PROJECT_DIRECTORY, PROJECT_NAME);

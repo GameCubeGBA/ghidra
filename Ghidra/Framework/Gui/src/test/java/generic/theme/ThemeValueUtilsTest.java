@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 import java.text.ParseException;
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ThemeValueUtilsTest {
 	@Test

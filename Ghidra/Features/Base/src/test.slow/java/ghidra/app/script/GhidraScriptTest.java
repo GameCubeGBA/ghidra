@@ -45,6 +45,9 @@ import ghidra.test.TestEnv;
 import ghidra.util.Msg;
 import ghidra.util.exception.AssertException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class GhidraScriptTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -52,7 +55,7 @@ public class GhidraScriptTest extends AbstractGhidraHeadedIntegrationTest {
 	private Program program;
 	private GhidraState state;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		ProgramBuilder builder = new ProgramBuilder("notepad", ProgramBuilder._TOY);
@@ -71,7 +74,7 @@ public class GhidraScriptTest extends AbstractGhidraHeadedIntegrationTest {
 		program.startTransaction(testName.getMethodName());
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

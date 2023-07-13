@@ -23,6 +23,8 @@ import org.junit.*;
 
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class CaseInsensitiveByteTrieTest {
 
@@ -35,7 +37,7 @@ public class CaseInsensitiveByteTrieTest {
 
 	ByteTrieIfc<String> trie;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		trie = new CaseInsensitiveByteTrie<String>();
 	}

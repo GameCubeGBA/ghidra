@@ -45,6 +45,9 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.mem.MemoryBlock;
 import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class EmuLinuxAmd64SyscallUseropLibraryTest extends AbstractGhidraHeadlessIntegrationTest {
 	public enum Syscall implements SyscallName {
@@ -113,7 +116,7 @@ public class EmuLinuxAmd64SyscallUseropLibraryTest extends AbstractGhidraHeadles
 	private EmuUnixFileSystem<byte[]> fs;
 	PcodeArithmetic<byte[]> arithmetic;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		program = createDefaultProgram("HelloWorld", "x86:LE:64:default", "gcc", this);
 		language = program.getLanguage();
@@ -139,7 +142,7 @@ public class EmuLinuxAmd64SyscallUseropLibraryTest extends AbstractGhidraHeadles
 		asm = Assemblers.getAssembler(program);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		if (program != null) {
 			program.release(this);

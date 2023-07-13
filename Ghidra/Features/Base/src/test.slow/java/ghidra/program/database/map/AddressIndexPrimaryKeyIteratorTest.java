@@ -26,6 +26,9 @@ import ghidra.program.model.lang.Language;
 import ghidra.program.model.lang.LanguageService;
 import ghidra.program.model.mem.Memory;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AddressIndexPrimaryKeyIteratorTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -44,7 +47,7 @@ public class AddressIndexPrimaryKeyIteratorTest extends AbstractGhidraHeadedInte
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		TestEnv env = new TestEnv();
 		LanguageService ls = getLanguageService();
@@ -95,7 +98,7 @@ public class AddressIndexPrimaryKeyIteratorTest extends AbstractGhidraHeadedInte
 		assertEquals(0x40, myTable.getRecordCount());
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		program.endTransaction(transactionID, true);
 		program.release(this);

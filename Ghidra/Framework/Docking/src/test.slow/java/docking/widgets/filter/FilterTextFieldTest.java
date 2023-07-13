@@ -28,11 +28,11 @@ import java.util.List;
 
 import javax.swing.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import generic.test.AbstractGTest;
 import generic.test.AbstractGuiTest;
+import org.junit.jupiter.api.Test;
 import utility.function.Callback;
 
 public class FilterTextFieldTest {
@@ -48,7 +48,7 @@ public class FilterTextFieldTest {
 	private BackgroundColorSpy spy = new BackgroundColorSpy();
 	private TestJTextArea filterPartnerComponent = new TestJTextArea();
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 
 		JTextField nonFocusComponent = new JTextField(20);

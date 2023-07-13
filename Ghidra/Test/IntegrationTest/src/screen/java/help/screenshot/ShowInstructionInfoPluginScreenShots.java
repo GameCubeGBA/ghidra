@@ -21,8 +21,6 @@ import java.net.URL;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
-import org.junit.Test;
-
 import docking.*;
 import docking.widgets.fieldpanel.FieldPanel;
 import docking.widgets.fieldpanel.Layout;
@@ -36,6 +34,7 @@ import ghidra.app.plugin.core.programtree.ViewManagerComponentProvider;
 import ghidra.app.util.viewer.field.MnemonicFieldFactory;
 import ghidra.app.util.viewer.listingpanel.ListingPanel;
 import ghidra.util.LaunchErrorDialog;
+import org.junit.jupiter.api.Test;
 
 public class ShowInstructionInfoPluginScreenShots extends GhidraScreenShotGenerator {
 

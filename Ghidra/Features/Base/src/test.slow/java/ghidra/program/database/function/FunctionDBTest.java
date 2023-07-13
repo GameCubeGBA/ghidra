@@ -42,6 +42,9 @@ import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.exception.InvalidInputException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -65,7 +68,7 @@ public class FunctionDBTest extends AbstractGhidraHeadedIntegrationTest
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		program = createDefaultProgram(testName.getMethodName(), ProgramBuilder._TOY, this);
@@ -79,7 +82,7 @@ public class FunctionDBTest extends AbstractGhidraHeadedIntegrationTest
 		functionManager = program.getFunctionManager();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (program != null) {
 			program.endTransaction(transactionID, true);

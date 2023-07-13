@@ -18,13 +18,13 @@ package ghidra.app.merge.tree;
 import static org.junit.Assert.*;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 import ghidra.program.database.ProgramDB;
 import ghidra.program.database.ProgramModifierListener;
 import ghidra.program.model.listing.*;
 import ghidra.util.SystemUtilities;
 import ghidra.util.exception.*;
+import org.junit.jupiter.api.Test;
 
 /**
  * More tree tests

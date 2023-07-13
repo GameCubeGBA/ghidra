@@ -19,20 +19,20 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import generic.test.AbstractGenericTest;
 import ghidra.program.database.*;
 import ghidra.program.database.data.ProgramDataTypeManager;
 import ghidra.program.model.data.*;
+import org.junit.jupiter.api.Test;
 
 public class FormatStringParserTest extends AbstractGenericTest {
 
 	private ProgramBuilder builder;
 	private ProgramDB program;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		builder = new ProgramBuilder("FormatStringParserTest", ProgramBuilder._TOY, this);

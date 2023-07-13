@@ -43,6 +43,9 @@ import ghidra.program.util.GroupPath;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.task.RunManager;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ProgramTreePluginShowInViewTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -61,7 +64,7 @@ public class ProgramTreePluginShowInViewTest extends AbstractGhidraHeadedIntegra
 	private ViewManagerService viewMgrService;
 	private CodeBrowserPlugin cb;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -101,7 +104,7 @@ public class ProgramTreePluginShowInViewTest extends AbstractGhidraHeadedIntegra
 		env.showTool();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		waitForBusyTool(tool);
 		env.dispose();

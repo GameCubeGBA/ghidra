@@ -39,6 +39,9 @@ import ghidra.program.util.AddressCorrelation;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests to verify that the correct address correlation is being determined and used for obtaining
@@ -61,12 +64,12 @@ public class AddressCorrelationTest extends AbstractGhidraHeadedIntegrationTest 
 	protected Function sourceFunction;
 	protected Function destinationFunction;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		vtTestEnv = new VTTestEnv();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		sourceProgram = null;
 		destinationProgram = null;

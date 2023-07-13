@@ -23,7 +23,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.*;
 import javax.swing.table.TableColumn;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.DockingUtils;
 import docking.action.DockingActionIf;

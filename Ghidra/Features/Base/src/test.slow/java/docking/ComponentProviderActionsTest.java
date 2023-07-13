@@ -35,6 +35,9 @@ import ghidra.framework.plugintool.PluginTool;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import resources.Icons;
 
 public class ComponentProviderActionsTest extends AbstractGhidraHeadedIntegrationTest {
@@ -50,7 +53,7 @@ public class ComponentProviderActionsTest extends AbstractGhidraHeadedIntegratio
 	private TestActionsComponentProvider provider;
 	private SpyErrorLogger spyLogger = new SpyErrorLogger();
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.showTool();
@@ -61,7 +64,7 @@ public class ComponentProviderActionsTest extends AbstractGhidraHeadedIntegratio
 		Msg.setErrorLogger(spyLogger);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}

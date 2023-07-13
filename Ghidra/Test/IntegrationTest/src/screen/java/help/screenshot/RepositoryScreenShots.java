@@ -56,6 +56,9 @@ import ghidra.util.InvalidNameException;
 import ghidra.util.exception.*;
 import ghidra.util.task.TaskMonitor;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class RepositoryScreenShots extends AbstractListingMergeManagerTest {
 
@@ -63,7 +66,7 @@ public class RepositoryScreenShots extends AbstractListingMergeManagerTest {
 	protected MergeScreenShotGenerator mtfGenerator;
 	static protected float DESCRIPTION_FONT_SIZE = (float) 14.0;
 
-	@Before
+	@BeforeEach
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
@@ -73,7 +76,7 @@ public class RepositoryScreenShots extends AbstractListingMergeManagerTest {
 		env = mtf.getTestEnvironment();
 	}
 
-	@After
+	@AfterEach
 	@Override
 	public void tearDown() throws Exception {
 		mtfGenerator.showResults();

@@ -37,6 +37,9 @@ import ghidra.program.model.data.*;
 import ghidra.program.model.data.Enum;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import utility.function.ExceptionalCallback;
 
 /**
@@ -56,7 +59,7 @@ public class CreateEnumFromSelectionTest extends AbstractGhidraHeadedIntegration
 
 	private DockingActionIf action;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		program = buildProgram();
@@ -82,7 +85,7 @@ public class CreateEnumFromSelectionTest extends AbstractGhidraHeadedIntegration
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		plugin.getEditorManager().dismissEditors(null);// Close all editors that might be open.

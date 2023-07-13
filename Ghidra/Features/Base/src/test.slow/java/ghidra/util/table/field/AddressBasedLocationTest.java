@@ -33,6 +33,9 @@ import ghidra.program.model.mem.Memory;
 import ghidra.program.model.symbol.Reference;
 import ghidra.program.model.symbol.ReferenceManager;
 import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AddressBasedLocationTest extends AbstractGhidraHeadlessIntegrationTest {
 
@@ -44,7 +47,7 @@ public class AddressBasedLocationTest extends AbstractGhidraHeadlessIntegrationT
 		return program.getAddressFactory().getAddress(addrStr);
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		ProgramBuilder builder = new ProgramBuilder("Test", ProgramBuilder._8051, this);
 		program = builder.getProgram();
@@ -146,7 +149,7 @@ public class AddressBasedLocationTest extends AbstractGhidraHeadlessIntegrationT
 			new AddressBasedLocation(program, constSpace.getAddress(3)), };
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		if (program != null) {
 			program.release(this);

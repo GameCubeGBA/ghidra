@@ -20,11 +20,10 @@ import static org.junit.Assert.assertTrue;
 
 import java.awt.Rectangle;
 
-import org.junit.Test;
-
 import ghidra.graph.graphs.*;
 import ghidra.graph.support.TestVisualGraph;
 import ghidra.util.Msg;
+import org.junit.jupiter.api.Test;
 
 public class VisualGraphViewUpdaterTest extends AbstractVisualGraphTest {
 

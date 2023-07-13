@@ -30,13 +30,16 @@ import generic.test.TestUtils;
 import ghidra.graph.viewer.*;
 import ghidra.program.model.address.TestAddress;
 import ghidra.program.model.listing.Function;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class FunctionCallGraphPluginScreenShots extends GhidraScreenShotGenerator {
 
 	private FcgProvider provider;
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		super.setUp();
@@ -56,7 +59,7 @@ public class FunctionCallGraphPluginScreenShots extends GhidraScreenShotGenerato
 	}
 
 	@Override
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		tool.showComponentProvider(provider, false);
 		super.tearDown();

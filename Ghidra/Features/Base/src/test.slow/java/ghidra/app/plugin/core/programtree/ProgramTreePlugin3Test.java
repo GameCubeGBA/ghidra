@@ -36,6 +36,9 @@ import ghidra.program.model.address.AddressSet;
 import ghidra.program.model.address.AddressSetView;
 import ghidra.program.model.listing.*;
 import ghidra.util.exception.NotFoundException;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for drag/drop/reorder for copy and move in the program tree.
@@ -50,7 +53,7 @@ public class ProgramTreePlugin3Test extends AbstractProgramTreePluginTest {
 	private DnDMoveManager dndManager;
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		super.setUp();
@@ -104,7 +107,7 @@ public class ProgramTreePlugin3Test extends AbstractProgramTreePluginTest {
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		waitForSwing();
 		env.release(program);

@@ -21,8 +21,6 @@ import static org.junit.Assert.assertTrue;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import org.junit.Test;
-
 import ghidra.app.plugin.core.debug.mapping.DebuggerMappingOffer;
 import ghidra.app.plugin.core.debug.mapping.DebuggerMappingOpinion;
 import ghidra.app.plugin.core.debug.platform.gdb.GdbArmDebuggerMappingOpinion.GdbAArch64Offer;
@@ -31,6 +29,7 @@ import ghidra.dbg.model.TestDebuggerObjectModel;
 import ghidra.dbg.model.TestTargetProcess;
 import ghidra.program.model.lang.LanguageID;
 import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
+import org.junit.jupiter.api.Test;
 
 public class GdbArmDebuggerMappingOpinionTest extends AbstractGhidraHeadlessIntegrationTest {
 	@Test

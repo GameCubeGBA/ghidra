@@ -17,8 +17,8 @@ package agent.frida.model;
 
 import java.util.List;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import ghidra.dbg.target.TargetProcess;
 import ghidra.dbg.test.*;
@@ -85,14 +85,14 @@ public abstract class AbstractModelForFridaInterpreterTest
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testExecute() throws Throwable {
 		// Disabled as of 220609
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testExecuteCapture() throws Throwable {
 		// Disabled as of 220609

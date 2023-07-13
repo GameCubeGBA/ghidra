@@ -17,7 +17,7 @@ package docking.widgets.dialogs;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * {@link NumberInputDialog} test. 

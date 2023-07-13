@@ -27,6 +27,9 @@ import ghidra.program.model.data.*;
 import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
 import ghidra.util.Msg;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import util.CollectionUtils;
 
 public class CompositeMemberTest extends AbstractGhidraHeadlessIntegrationTest
@@ -35,7 +38,7 @@ public class CompositeMemberTest extends AbstractGhidraHeadlessIntegrationTest
 	DataTypeManager dataMgr;
 	PdbDataTypeParser dataTypeParser;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		// DataOrganization based on x86-64.cspec
 		DataOrganizationImpl dataOrg = DataOrganizationImpl.getDefaultOrganization(null);
@@ -91,7 +94,7 @@ public class CompositeMemberTest extends AbstractGhidraHeadlessIntegrationTest
 		dataTypeParser = new PdbDataTypeParser(dataMgr, null, null);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		if (dataTypeParser != null && dataTypeParser.hasMissingBitOffsetError()) {
 			fail("Test data specifies bitfield without bit-offset");

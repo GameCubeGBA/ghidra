@@ -19,16 +19,16 @@ import static org.junit.Assert.*;
 
 import java.util.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
+import org.junit.jupiter.api.BeforeEach;
 
 public class ProjectedDatabaseTest extends AbstractGenericTest {
 
 	private SequenceDatabase database;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		List<Sequence> sequences = new ArrayList<>();
 		sequences.add(new Sequence("AAAA", 2));

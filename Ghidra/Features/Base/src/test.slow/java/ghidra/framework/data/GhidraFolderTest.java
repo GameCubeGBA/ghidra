@@ -24,6 +24,9 @@ import org.junit.*;
 
 import ghidra.framework.store.local.LocalFileSystem;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class GhidraFolderTest extends AbstractGhidraHeadedIntegrationTest {
 	private File privateProjectDir;
@@ -37,7 +40,7 @@ public class GhidraFolderTest extends AbstractGhidraHeadedIntegrationTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		File tempDir = createTempDirectory(getName());
 		privateProjectDir = new File(tempDir, "privateFS");
@@ -77,7 +80,7 @@ public class GhidraFolderTest extends AbstractGhidraHeadedIntegrationTest {
 		deleteAll(sharedProjectDir);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		deleteTestFiles();
 	}

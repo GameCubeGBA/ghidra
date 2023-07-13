@@ -20,6 +20,8 @@ import static org.junit.Assert.*;
 import org.junit.*;
 
 import generic.test.AbstractGenericTest;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AddressFactoryTest extends AbstractGenericTest {
 	AddressSpace space = null;
@@ -34,7 +36,7 @@ public class AddressFactoryTest extends AbstractGenericTest {
 	final String[] spaceName = { "ONE", "TWO", "THREE", "SegSpaceOne", "SegSpaceTwo" };
 
 	////////////////////////////////////////////////////////////////////////////////////
-	@Before
+	@BeforeEach
 	public void setUp() {
 		spaces[0] = new GenericAddressSpace(spaceName[0], 8, AddressSpace.TYPE_RAM, 0);
 		spaces[1] = new GenericAddressSpace(spaceName[1], 16, AddressSpace.TYPE_RAM, 1);

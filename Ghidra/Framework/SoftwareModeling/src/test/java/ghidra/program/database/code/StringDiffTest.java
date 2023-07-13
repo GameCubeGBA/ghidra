@@ -20,9 +20,9 @@ import static org.junit.Assert.assertEquals;
 import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
-import org.junit.Test;
 
 import generic.test.AbstractGTest;
+import org.junit.jupiter.api.Test;
 
 public class StringDiffTest {
 

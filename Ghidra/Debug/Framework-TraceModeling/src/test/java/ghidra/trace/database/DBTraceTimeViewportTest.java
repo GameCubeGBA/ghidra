@@ -17,7 +17,7 @@ package ghidra.trace.database;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import db.Transaction;
 import ghidra.test.AbstractGhidraHeadlessIntegrationTest;

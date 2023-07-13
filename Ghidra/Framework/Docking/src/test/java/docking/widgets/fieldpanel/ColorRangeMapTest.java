@@ -15,7 +15,7 @@
  */
 package docking.widgets.fieldpanel;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.widgets.fieldpanel.internal.ColorRangeMap;
 import generic.test.AbstractGuiTest;

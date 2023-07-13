@@ -17,7 +17,7 @@ package ghidra.app.plugin.core.data;
 
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.experimental.categories.Category;
 
 import docking.action.DockingActionIf;

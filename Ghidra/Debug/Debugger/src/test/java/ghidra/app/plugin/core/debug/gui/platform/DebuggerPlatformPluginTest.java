@@ -21,8 +21,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import docking.action.ToggleDockingActionIf;
 import ghidra.app.plugin.core.debug.gui.AbstractGhidraHeadedDebuggerGUITest;
@@ -46,7 +46,7 @@ public class DebuggerPlatformPluginTest extends AbstractGhidraHeadedDebuggerGUIT
 				.collect(Collectors.toList());
 	}
 
-	@Before
+	@BeforeEach
 	public void setUpPlatformTest() throws Throwable {
 		platformPlugin = addPlugin(tool, DebuggerPlatformPlugin.class);
 		platformService = tool.getService(DebuggerPlatformService.class);

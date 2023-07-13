@@ -20,8 +20,7 @@ import static org.junit.Assert.*;
 import java.math.BigInteger;
 import java.util.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import ghidra.app.plugin.core.debug.gui.AbstractGhidraHeadedDebuggerGUITest;
 import ghidra.app.services.ActionSource;
@@ -32,6 +31,7 @@ import ghidra.dbg.util.CollectionUtils.Delta;
 import ghidra.program.model.lang.*;
 import ghidra.test.ToyProgramBuilder;
 import ghidra.trace.model.thread.TraceThread;
+import org.junit.jupiter.api.Test;
 
 public class LargestSubDebuggerRegisterMapperTest extends AbstractGhidraHeadedDebuggerGUITest {
 
@@ -66,7 +66,7 @@ public class LargestSubDebuggerRegisterMapperTest extends AbstractGhidraHeadedDe
 		}
 	}
 
-	@Before
+	@BeforeEach
 	public void setUpMapperTest() throws Throwable {
 		createTestModel();
 		mb.createTestProcessesAndThreads();

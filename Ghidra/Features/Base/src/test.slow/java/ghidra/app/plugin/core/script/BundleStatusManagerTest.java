@@ -34,6 +34,9 @@ import docking.widgets.filechooser.GhidraFileChooser;
 import docking.widgets.table.GTable;
 import generic.jar.ResourceFile;
 import ghidra.app.plugin.core.osgi.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class BundleStatusManagerTest extends AbstractGhidraScriptMgrPluginTest {
 	protected static String BUNDLE_PATH = "$GHIDRA_HOME/Features/Base/ghidra_scripts";
@@ -47,7 +50,7 @@ public class BundleStatusManagerTest extends AbstractGhidraScriptMgrPluginTest {
 
 	protected TestBundleHostListener testBundleHostListener;
 
-	@Before
+	@BeforeEach
 	public void setupBundleStatusTests() {
 		DockingActionIf bundleStatusAction = getAction(plugin, "Script Directories");
 		performAction(bundleStatusAction, false);
@@ -60,7 +63,7 @@ public class BundleStatusManagerTest extends AbstractGhidraScriptMgrPluginTest {
 		provider.getBundleHost().addListener(testBundleHostListener);
 	}
 
-	@After
+	@AfterEach
 	public void cleanupBundleStatusTests() {
 		provider.getBundleHost().removeListener(testBundleHostListener);
 	}

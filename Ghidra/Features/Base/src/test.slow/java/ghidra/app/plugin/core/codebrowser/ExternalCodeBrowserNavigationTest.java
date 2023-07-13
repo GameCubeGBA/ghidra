@@ -20,8 +20,6 @@ import static org.junit.Assert.*;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 
-import org.junit.Test;
-
 import docking.DockingDialog;
 import docking.widgets.table.GTable;
 import ghidra.app.cmd.function.CreateThunkFunctionCmd;
@@ -44,6 +42,7 @@ import ghidra.program.util.ProgramLocation;
 import ghidra.util.Msg;
 import ghidra.util.table.GhidraTable;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.Test;
 
 public class ExternalCodeBrowserNavigationTest extends AbstractCodeBrowserNavigationTest {
 

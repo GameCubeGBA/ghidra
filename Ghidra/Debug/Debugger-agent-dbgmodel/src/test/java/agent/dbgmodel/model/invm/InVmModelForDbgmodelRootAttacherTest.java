@@ -15,8 +15,8 @@
  */
 package agent.dbgmodel.model.invm;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import agent.dbgeng.model.AbstractModelForDbgengRootAttacherTest;
 
@@ -27,7 +27,7 @@ public class InVmModelForDbgmodelRootAttacherTest extends AbstractModelForDbgeng
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	// Takes forever - passes w/ OTE on Memory in tear down
 	public void testAttachByPidThenResumeInterrupt() throws Throwable {

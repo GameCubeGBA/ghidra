@@ -19,8 +19,7 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import generic.test.AbstractGenericTest;
 import ghidra.framework.cmd.BackgroundCommand;
@@ -30,10 +29,11 @@ import ghidra.test.DummyTool;
 import ghidra.util.UniversalIdGenerator;
 import ghidra.util.exception.RollbackException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.Test;
 
 public class BackgroundCommandTaskTest extends AbstractGenericTest {
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		UniversalIdGenerator.initialize();
 	}

@@ -40,6 +40,9 @@ import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.datastruct.Accumulator;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class SelectionManagerTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -59,7 +62,7 @@ public class SelectionManagerTest extends AbstractGhidraHeadedIntegrationTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		LoggingInitialization.initializeLoggingSystem();
@@ -75,7 +78,7 @@ public class SelectionManagerTest extends AbstractGhidraHeadedIntegrationTest {
 		runSwing(() -> threadedModel = new ThreadedTestTableModel());
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		threadedModel.dispose();
 		frame.dispose();

@@ -22,7 +22,6 @@ import java.awt.*;
 import javax.swing.*;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 import ghidra.app.merge.MergeConstants;
 import ghidra.program.database.ProgramDB;
@@ -31,6 +30,7 @@ import ghidra.program.model.listing.*;
 import ghidra.util.SystemUtilities;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.exception.NotFoundException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test the tree merger.

@@ -24,8 +24,8 @@ import java.io.IOException;
 
 import javax.swing.Icon;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 import resources.ResourceManager;
@@ -42,7 +42,7 @@ public class GThemeTest extends AbstractGenericTest {
 
 	private GTheme theme;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		theme = new GTheme("TestTheme");
 		new Font("Courier", Font.BOLD, 12);

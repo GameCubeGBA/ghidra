@@ -63,6 +63,9 @@ import ghidra.program.model.symbol.*;
 import ghidra.program.util.*;
 import ghidra.test.*;
 import ghidra.util.Msg;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -93,7 +96,7 @@ public class ClipboardPluginTest extends AbstractGhidraHeadedIntegrationTest {
 	private ComponentProviderWrapper byteViewerWrapper;
 	private ComponentProviderWrapper decompilerWrapper;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		String name = super.testName.getMethodName();
@@ -123,7 +126,7 @@ public class ClipboardPluginTest extends AbstractGhidraHeadedIntegrationTest {
 		clearClipboardContents();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

@@ -20,8 +20,7 @@ import static org.junit.Assert.*;
 import java.awt.Component;
 import java.util.Collection;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import docking.test.AbstractDockingTest;
 import docking.widgets.spinner.IntegerSpinner;
@@ -29,6 +28,7 @@ import docking.widgets.table.constraint.ColumnConstraint;
 import docking.widgets.table.constraint.InRangeColumnConstraint;
 import docking.widgets.table.constraint.provider.NumberColumnConstraintProvider;
 import docking.widgets.textfield.IntegerTextField;
+import org.junit.jupiter.api.Test;
 
 public class IntegerRangeConstraintEditorTest extends AbstractDockingTest {
 
@@ -39,7 +39,7 @@ public class IntegerRangeConstraintEditorTest extends AbstractDockingTest {
 	private IntegerTextField lowerTextField;
 	private IntegerTextField upperTextField;
 
-	@Before
+	@BeforeEach
 	public void setup() {
 		constraint = findIntegerInRangeConstraint();
 		editor = (IntegerRangeConstraintEditor<Integer>) constraint.getEditor(null);

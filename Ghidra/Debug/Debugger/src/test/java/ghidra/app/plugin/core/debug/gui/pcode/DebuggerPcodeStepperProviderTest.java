@@ -20,8 +20,7 @@ import static org.junit.Assert.*;
 import java.lang.invoke.MethodHandles;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import db.Transaction;
 import generic.Unique;
@@ -46,6 +45,7 @@ import ghidra.trace.model.Lifespan;
 import ghidra.trace.model.memory.TraceMemoryFlag;
 import ghidra.trace.model.thread.TraceThread;
 import ghidra.trace.model.time.schedule.TraceSchedule;
+import org.junit.jupiter.api.BeforeEach;
 
 public class DebuggerPcodeStepperProviderTest extends AbstractGhidraHeadedDebuggerGUITest {
 
@@ -60,7 +60,7 @@ public class DebuggerPcodeStepperProviderTest extends AbstractGhidraHeadedDebugg
 	private TraceThread thread;
 	private Instruction imm123;
 
-	@Before
+	@BeforeEach
 	public void setUpPcodeStepperProviderTest() throws Exception {
 		traceManager = addPlugin(tool, DebuggerTraceManagerServicePlugin.class);
 		pcodePlugin = addPlugin(tool, DebuggerPcodeStepperPlugin.class);

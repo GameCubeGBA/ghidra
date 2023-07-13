@@ -41,6 +41,8 @@ import docking.widgets.table.ColumnSortState.SortDirection;
 import ghidra.docking.spy.SpyEventRecorder;
 import ghidra.util.Msg;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ThreadedTableTest extends AbstractThreadedTableTest {
 
@@ -54,7 +56,7 @@ public class ThreadedTableTest extends AbstractThreadedTableTest {
 	private ThreadedTableModelListener spyLoadListener = new SpyTableModelLIstener();
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		super.setUp();

@@ -20,12 +20,14 @@ import static org.junit.Assert.assertTrue;
 import org.junit.*;
 
 import generic.test.AbstractGenericTest;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class SegmentedAddressTest extends AbstractGenericTest {
 
 	private SegmentedAddressSpace space;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		space = new SegmentedAddressSpace("Test", 1);
 	}

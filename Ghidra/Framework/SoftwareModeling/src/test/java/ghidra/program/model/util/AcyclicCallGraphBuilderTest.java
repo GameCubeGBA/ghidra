@@ -20,7 +20,6 @@ import static ghidra.util.task.TaskMonitor.*;
 import java.util.*;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.program.model.*;
@@ -28,6 +27,7 @@ import ghidra.program.model.address.*;
 import ghidra.program.model.listing.*;
 import ghidra.program.model.symbol.ReferenceManager;
 import ghidra.util.graph.AbstractDependencyGraph;
+import org.junit.jupiter.api.Test;
 
 public class AcyclicCallGraphBuilderTest extends AbstractGenericTest {
 

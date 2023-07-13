@@ -20,9 +20,6 @@ import static org.junit.Assert.*;
 import java.math.BigInteger;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import db.Transaction;
 import generic.Unique;
 import ghidra.app.plugin.core.debug.gui.AbstractGhidraHeadedDebuggerGUITest;
@@ -44,6 +41,8 @@ import ghidra.trace.model.stack.TraceStackFrame;
 import ghidra.trace.model.thread.TraceThread;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DebuggerStackProviderLegacyTest extends AbstractGhidraHeadedDebuggerGUITest {
 	protected DebuggerStackPlugin stackPlugin;
@@ -52,7 +51,7 @@ public class DebuggerStackProviderLegacyTest extends AbstractGhidraHeadedDebugge
 
 	protected Register pc;
 
-	@Before
+	@BeforeEach
 	public void setUpStackProviderTest() throws Exception {
 		stackPlugin = addPlugin(tool, DebuggerStackPlugin.class);
 		stackProvider = waitForComponentProvider(DebuggerStackProvider.class);

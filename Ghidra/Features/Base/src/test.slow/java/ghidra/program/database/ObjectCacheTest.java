@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 import java.util.Arrays;
 import java.util.ConcurrentModificationException;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.program.model.address.KeyRange;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;

@@ -21,8 +21,8 @@ import java.text.ParseException;
 
 import javax.swing.Icon;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import resources.MultiIcon;
 import resources.ResourceManager;
@@ -33,7 +33,7 @@ public class IconValueTest {
 	private static Icon ICON1 = ResourceManager.getDefaultIcon();
 	private GThemeValueMap values;
 
-	@Before
+	@BeforeEach
 	public void setup() {
 		values = new GThemeValueMap();
 	}

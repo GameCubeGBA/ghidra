@@ -35,6 +35,8 @@ import generic.theme.GThemeDefaults.Colors.Palette;
 import ghidra.util.HelpLocation;
 import ghidra.util.bean.opteditor.OptionsVetoException;
 import ghidra.util.exception.InvalidInputException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class OptionsTest extends AbstractGuiTest {
 
@@ -44,7 +46,7 @@ public class OptionsTest extends AbstractGuiTest {
 
 	private ToolOptions options;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		options = new ToolOptions("Test");
 	}

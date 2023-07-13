@@ -25,6 +25,8 @@ import ghidra.program.model.StubProgram;
 import ghidra.program.model.address.*;
 import ghidra.program.model.listing.*;
 import ghidra.program.model.mem.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DataUtilitiesTest extends AbstractGTest {
 
@@ -38,7 +40,7 @@ public class DataUtilitiesTest extends AbstractGTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		space = new GenericAddressSpace("Test1", 16, AddressSpace.TYPE_RAM, 0);

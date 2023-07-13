@@ -22,8 +22,8 @@ import java.nio.ByteBuffer;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.experimental.categories.Category;
 
 import db.Transaction;
@@ -66,7 +66,7 @@ public class DebuggerEmulationServiceTest extends AbstractGhidraHeadedDebuggerGU
 	protected DebuggerEmulationServicePlugin emulationPlugin;
 	protected CodeBrowserPlugin codeBrowser;
 
-	@Before
+	@BeforeEach
 	public void setUpEmulationServiceTest() throws Exception {
 		emulationPlugin = addPlugin(tool, DebuggerEmulationServicePlugin.class);
 		// TODO: Action enablement doesn't work without CodeBrowser???

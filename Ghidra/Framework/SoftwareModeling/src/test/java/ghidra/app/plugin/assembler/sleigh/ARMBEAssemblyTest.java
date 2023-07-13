@@ -15,9 +15,8 @@
  */
 package ghidra.app.plugin.assembler.sleigh;
 
-import org.junit.Test;
-
 import ghidra.program.model.lang.LanguageID;
+import org.junit.jupiter.api.Test;
 
 public class ARMBEAssemblyTest extends AbstractAssemblyTest {
 	public static final String THUMB = "80:00:00:00:00:00:00:00";

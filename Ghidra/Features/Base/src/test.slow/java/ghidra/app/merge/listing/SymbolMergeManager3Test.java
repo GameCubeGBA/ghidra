@@ -18,7 +18,6 @@ package ghidra.app.merge.listing;
 import static org.junit.Assert.*;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 import ghidra.app.cmd.disassemble.DisassembleCommand;
 import ghidra.app.cmd.function.CreateFunctionCmd;
@@ -30,6 +29,7 @@ import ghidra.program.model.address.AddressSet;
 import ghidra.program.model.listing.Function;
 import ghidra.program.model.listing.Program;
 import ghidra.program.model.symbol.*;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test the merge of the versioned program's listing.

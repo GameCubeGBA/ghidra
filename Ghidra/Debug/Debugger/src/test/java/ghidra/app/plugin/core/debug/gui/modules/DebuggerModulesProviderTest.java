@@ -75,6 +75,10 @@ import ghidra.trace.model.symbol.TraceSymbol;
 import ghidra.trace.model.target.*;
 import ghidra.trace.model.target.TraceObject.ConflictResolution;
 import ghidra.util.table.GhidraTable;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 @Category(NightlyCategory.class)
 public class DebuggerModulesProviderTest extends AbstractGhidraHeadedDebuggerGUITest {
@@ -335,13 +339,13 @@ public class DebuggerModulesProviderTest extends AbstractGhidraHeadedDebuggerGUI
 			tb.addr(0x7f10003f), 64);
 	}
 
-	@Before
+	@BeforeEach
 	public void setUpModulesProviderTest() throws Exception {
 		addPlugin(tool, DebuggerModulesPlugin.class);
 		provider = waitForComponentProvider(DebuggerModulesProvider.class);
 	}
 
-	@After
+	@AfterEach
 	public void tearDownModulesProviderTest() throws Exception {
 		traceManager.activate(DebuggerCoordinates.NOWHERE);
 		waitForTasks();
@@ -700,7 +704,7 @@ public class DebuggerModulesProviderTest extends AbstractGhidraHeadedDebuggerGUI
 	}
 
 	@Test
-	@Ignore("This action is hidden until supported")
+	@Disabled("This action is hidden until supported")
 	public void testActionCaptureTypes() throws Exception {
 		assertFalse(provider.actionCaptureTypes.isEnabled());
 		createTestModel();

@@ -25,7 +25,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class AsyncUtilsTest {
 	@Test

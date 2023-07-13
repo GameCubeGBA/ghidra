@@ -18,7 +18,6 @@ package ghidra.app.merge.listing;
 import static org.junit.Assert.*;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 import ghidra.app.cmd.function.CreateFunctionCmd;
 import ghidra.app.cmd.function.CreateThunkFunctionCmd;
@@ -32,6 +31,7 @@ import ghidra.program.model.symbol.SourceType;
 import ghidra.program.util.ProgramDiff;
 import ghidra.program.util.ProgramDiffFilter;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test the multi-user merge of thunk functions.

@@ -23,8 +23,8 @@ import static org.junit.Assert.assertNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 import ghidra.feature.vt.api.db.VTSessionDB;
 import ghidra.feature.vt.api.main.*;
@@ -51,7 +51,7 @@ public abstract class AbstractVTMarkupItemTest extends AbstractGhidraHeadedInteg
 	// make sure all random names are unique
 	private int nameCounter = 0;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		env = new TestEnv();
@@ -97,7 +97,7 @@ public abstract class AbstractVTMarkupItemTest extends AbstractGhidraHeadedInteg
 		builder.setBytes("0x010074e6", "4c 6f 61 64 43 75 72 73 6f 72 57 00");
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 		if (sourceProgram != null) {

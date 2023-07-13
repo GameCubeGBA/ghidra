@@ -24,13 +24,13 @@ import java.util.List;
 
 import javax.swing.JComboBox;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.program.database.ProgramBuilder;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
 import ghidra.test.ToyProgramBuilder;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Tests for searching memory for ascii.
@@ -38,7 +38,7 @@ import ghidra.test.ToyProgramBuilder;
 public class MemSearchAsciiTest extends AbstractMemSearchTest {
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		selectRadioButton("String");

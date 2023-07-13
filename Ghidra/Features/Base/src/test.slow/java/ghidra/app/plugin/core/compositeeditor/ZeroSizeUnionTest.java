@@ -17,9 +17,8 @@ package ghidra.app.plugin.core.compositeeditor;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import ghidra.program.model.data.*;
+import org.junit.jupiter.api.Test;
 
 public class ZeroSizeUnionTest extends AbstractUnionEditorTest {
 

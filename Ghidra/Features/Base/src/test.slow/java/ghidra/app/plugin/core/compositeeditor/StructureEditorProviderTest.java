@@ -20,7 +20,6 @@ import static org.junit.Assert.*;
 import java.awt.Window;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 import docking.DefaultActionContext;
 import docking.action.DockingActionIf;
@@ -29,6 +28,7 @@ import ghidra.framework.options.Options;
 import ghidra.program.model.data.*;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.exception.UsrException;
+import org.junit.jupiter.api.Test;
 
 public class StructureEditorProviderTest extends AbstractStructureEditorTest {
 	private static final String HEX_OPTION_NAME =

@@ -42,6 +42,9 @@ import ghidra.program.model.listing.Function;
 import ghidra.program.model.mem.MemoryAccessException;
 import ghidra.program.util.ProgramLocation;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DecompilerCachingTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -54,7 +57,7 @@ public class DecompilerCachingTest extends AbstractGhidraHeadedIntegrationTest {
 	public Cache<Function, DecompileResults> cache;
 	private ToyProgramBuilder builder;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		setErrorGUIEnabled(false);
 
@@ -76,7 +79,7 @@ public class DecompilerCachingTest extends AbstractGhidraHeadedIntegrationTest {
 		controller.setCache(cache);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}

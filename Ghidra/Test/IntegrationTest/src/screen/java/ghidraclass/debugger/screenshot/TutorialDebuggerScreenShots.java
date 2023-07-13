@@ -26,8 +26,7 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import db.Transaction;
 import docking.action.DockingActionIf;
@@ -110,6 +109,7 @@ import ghidra.util.Msg;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.ConsoleTaskMonitor;
 import help.screenshot.GhidraScreenShotGenerator;
+import org.junit.jupiter.api.Test;
 
 public class TutorialDebuggerScreenShots extends GhidraScreenShotGenerator
 		implements AsyncTestUtils {
@@ -210,7 +210,7 @@ public class TutorialDebuggerScreenShots extends GhidraScreenShotGenerator
 		return null;
 	}
 
-	@Before
+	@BeforeEach
 	public void setUpDebugger() throws Throwable {
 		ResourceFile termminesRsrc = Application.getModuleDataFile("TestResources", "termmines");
 		File termmines = new File(TERMMINES_PATH);

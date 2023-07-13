@@ -22,8 +22,6 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
-import org.junit.Before;
-
 import docking.ActionContext;
 import docking.action.DockingActionIf;
 import docking.widgets.table.threaded.ThreadedTableModel;
@@ -40,6 +38,7 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.util.ProgramLocation;
 import ghidra.util.HelpLocation;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.BeforeEach;
 
 public abstract class AbstractDecompilerFindReferencesActionTest extends AbstractDecompilerTest {
 
@@ -50,7 +49,7 @@ public abstract class AbstractDecompilerFindReferencesActionTest extends Abstrac
 	protected SpyLocationReferencesService spyLocationReferenceService;
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		super.setUp();

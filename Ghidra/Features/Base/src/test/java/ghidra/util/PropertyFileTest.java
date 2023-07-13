@@ -22,9 +22,8 @@ import java.io.File;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 
-import org.junit.Test;
-
 import generic.test.AbstractGenericTest;
+import org.junit.jupiter.api.Test;
 
 /**
  * 

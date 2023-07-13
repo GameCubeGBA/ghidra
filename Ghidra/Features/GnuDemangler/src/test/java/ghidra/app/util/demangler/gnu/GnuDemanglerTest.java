@@ -19,9 +19,6 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import generic.test.AbstractGenericTest;
 import ghidra.app.util.demangler.DemangledException;
 import ghidra.app.util.demangler.DemangledObject;
@@ -34,12 +31,14 @@ import ghidra.program.model.symbol.*;
 import ghidra.test.ToyProgramBuilder;
 import ghidra.util.Msg;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class GnuDemanglerTest extends AbstractGenericTest {
 
 	private ProgramDB program;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		ToyProgramBuilder builder = new ToyProgramBuilder("test", true);
 		builder.createMemory(".text", "0x01001000", 0x100);

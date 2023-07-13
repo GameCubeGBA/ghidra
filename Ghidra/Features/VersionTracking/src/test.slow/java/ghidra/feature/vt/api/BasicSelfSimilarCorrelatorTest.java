@@ -15,7 +15,7 @@
  */
 package ghidra.feature.vt.api;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.feature.vt.api.correlator.program.*;
 import ghidra.program.model.address.AddressSet;

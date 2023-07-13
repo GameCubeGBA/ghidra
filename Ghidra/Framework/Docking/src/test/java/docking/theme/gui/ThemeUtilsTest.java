@@ -26,8 +26,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.Before;
-import org.junit.Test;
 
 import docking.test.AbstractDockingTest;
 import docking.widgets.OptionDialog;
@@ -37,13 +35,15 @@ import generic.theme.*;
 import generic.theme.GThemeDefaults.Colors.Palette;
 import generic.theme.builtin.MetalTheme;
 import generic.theme.builtin.NimbusTheme;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ThemeUtilsTest extends AbstractDockingTest {
 
 	private Color testColor = Palette.RED;
 	private ThemeManager themeManager;
 
-	@Before
+	@BeforeEach
 	public void setup() {
 		themeManager = ThemeManager.getInstance();
 		GTheme nimbusTheme = new NimbusTheme();

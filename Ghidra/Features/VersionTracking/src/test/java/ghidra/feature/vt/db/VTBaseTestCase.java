@@ -17,8 +17,7 @@ package ghidra.feature.vt.db;
 
 import java.io.IOException;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
 
 import generic.test.AbstractGenericTest;
 import ghidra.feature.vt.api.db.VTSessionDB;
@@ -33,6 +32,7 @@ import ghidra.program.model.listing.*;
 import ghidra.program.model.mem.Memory;
 import ghidra.program.model.mem.StubMemory;
 import ghidra.program.model.symbol.*;
+import org.junit.jupiter.api.BeforeEach;
 
 public class VTBaseTestCase extends AbstractGenericTest {
 
@@ -67,14 +67,14 @@ public class VTBaseTestCase extends AbstractGenericTest {
 	private int transactionID;
 	private static int testID = 0;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		testID++;
 		db = createVTSession();
 		transactionID = db.startTransaction("Test");
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		db.endTransaction(transactionID, false);
 		db.release(VTTestUtils.class);

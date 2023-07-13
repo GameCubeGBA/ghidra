@@ -17,7 +17,7 @@ package docking.action;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests to protect the MenuData class intended behavior

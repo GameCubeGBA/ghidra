@@ -19,8 +19,6 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
-import org.junit.Test;
-
 import ghidra.app.plugin.core.searchmem.RegExSearchData;
 import ghidra.program.database.ProgramBuilder;
 import ghidra.program.model.address.AddressSetView;
@@ -29,6 +27,7 @@ import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
 import ghidra.util.datastruct.ListAccumulator;
 import ghidra.util.search.memory.*;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.Test;
 
 public class RegExMemSearcherTaskTest extends AbstractGhidraHeadlessIntegrationTest {
 

@@ -17,14 +17,13 @@ package help.screenshot;
 
 import javax.swing.JComponent;
 
-import org.junit.Test;
-
 import docking.ComponentProvider;
 import docking.widgets.filter.FilterTextField;
 import docking.widgets.table.GTable;
 import docking.widgets.table.GTableFilterPanel;
 import docking.widgets.table.threaded.ThreadedTableModel;
 import ghidra.program.model.listing.*;
+import org.junit.jupiter.api.Test;
 
 public class CommentWindowPluginScreenShots extends GhidraScreenShotGenerator {
 

@@ -15,7 +15,7 @@
  */
 package ghidra.trace.database.breakpoint;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 import db.Transaction;
 import ghidra.dbg.target.schema.SchemaContext;
@@ -26,7 +26,7 @@ public class DBTraceBreakpointManagerObjectTest extends DBTraceBreakpointManager
 
 	protected SchemaContext ctx;
 
-	@Before
+	@BeforeEach
 	public void setUpObjectsMode() throws Exception {
 		ctx = XmlSchemaContext.deserialize("" + //
 			"<context>" + //

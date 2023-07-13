@@ -20,8 +20,6 @@ import static org.junit.Assert.*;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 
-import org.junit.Test;
-
 import ghidra.program.database.ProgramBuilder;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressFactory;
@@ -29,6 +27,7 @@ import ghidra.program.model.data.*;
 import ghidra.program.model.listing.Program;
 import ghidra.test.AbstractProgramBasedTest;
 import ghidra.util.Msg;
+import org.junit.jupiter.api.Test;
 
 public class FormatStringFinderTest extends AbstractProgramBasedTest {
 

@@ -39,6 +39,9 @@ import ghidra.program.model.address.*;
 import ghidra.program.util.ProgramLocation;
 import ghidra.program.util.ProgramSelection;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test class to test SelectBlock
@@ -54,7 +57,7 @@ public class SelectBlockPluginTest extends AbstractGhidraHeadedIntegrationTest {
 	private DockingActionIf action;
 	private ProgramDB program;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		env = new TestEnv();
@@ -68,7 +71,7 @@ public class SelectBlockPluginTest extends AbstractGhidraHeadedIntegrationTest {
 		action = (DockingActionIf) getInstanceField("toolBarAction", plugin);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

@@ -24,13 +24,12 @@ import java.lang.invoke.MethodHandles;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-import org.junit.Test;
-
 import ghidra.dbg.AnnotatedDebuggerAttributeListener;
 import ghidra.dbg.DebugModelConventions;
 import ghidra.dbg.target.*;
 import ghidra.dbg.target.TargetExecutionStateful.TargetExecutionState;
 import ghidra.dbg.target.TargetMethod.TargetParameterMap;
+import org.junit.jupiter.api.Test;
 
 public abstract class AbstractDebuggerModelLauncherTest extends AbstractDebuggerModelTest
 		implements RequiresLaunchSpecimen {

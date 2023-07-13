@@ -20,8 +20,6 @@ import static org.junit.Assert.*;
 import java.math.BigInteger;
 import java.util.Map;
 
-import org.junit.Test;
-
 import db.Transaction;
 import ghidra.app.plugin.core.debug.DebuggerCoordinates;
 import ghidra.app.plugin.core.debug.gui.AbstractGhidraHeadedDebuggerGUITest;
@@ -41,6 +39,7 @@ import ghidra.trace.model.memory.TraceMemorySpace;
 import ghidra.trace.model.thread.TraceThread;
 import ghidra.trace.model.time.TraceSnapshot;
 import ghidra.trace.model.time.schedule.TraceSchedule;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test the {@link DirectBytesTracePcodeExecutorState} in combination with

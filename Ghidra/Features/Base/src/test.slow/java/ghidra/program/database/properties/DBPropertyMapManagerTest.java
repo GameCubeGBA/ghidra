@@ -37,6 +37,9 @@ import ghidra.program.util.ChangeManagerAdapter;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.Lock;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DBPropertyMapManagerTest extends AbstractGhidraHeadedIntegrationTest
 		implements ErrorHandler {
@@ -61,7 +64,7 @@ public class DBPropertyMapManagerTest extends AbstractGhidraHeadedIntegrationTes
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		program = createDefaultProgram("Test", ProgramBuilder._TOY, this);
@@ -78,7 +81,7 @@ public class DBPropertyMapManagerTest extends AbstractGhidraHeadedIntegrationTes
 		dbFile.delete();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (program != null) {
 			if (program.getCurrentTransactionInfo() != null) {

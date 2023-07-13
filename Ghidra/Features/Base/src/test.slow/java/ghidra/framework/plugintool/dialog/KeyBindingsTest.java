@@ -38,6 +38,9 @@ import ghidra.framework.plugintool.PluginTool;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.Msg;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for key bindings option panel
@@ -56,7 +59,7 @@ public class KeyBindingsTest extends AbstractGhidraHeadedIntegrationTest {
 	private DockingActionIf action1;
 	private DockingActionIf action2;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -70,7 +73,7 @@ public class KeyBindingsTest extends AbstractGhidraHeadedIntegrationTest {
 		grabActionsWithoutKeybinding();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		dialog.setVisible(false);
 		env.dispose();

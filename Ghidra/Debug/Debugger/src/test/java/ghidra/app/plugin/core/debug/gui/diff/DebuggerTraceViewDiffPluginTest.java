@@ -19,8 +19,7 @@ import static org.junit.Assert.*;
 
 import java.nio.ByteBuffer;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import db.Transaction;
 import ghidra.app.plugin.core.debug.gui.AbstractGhidraHeadedDebuggerGUITest;
@@ -33,6 +32,7 @@ import ghidra.trace.database.memory.DBTraceMemoryManager;
 import ghidra.trace.model.memory.TraceMemoryFlag;
 import ghidra.trace.model.time.schedule.TraceSchedule;
 import ghidra.util.Swing;
+import org.junit.jupiter.api.Test;
 
 public class DebuggerTraceViewDiffPluginTest extends AbstractGhidraHeadedDebuggerGUITest {
 
@@ -41,7 +41,7 @@ public class DebuggerTraceViewDiffPluginTest extends AbstractGhidraHeadedDebugge
 
 	protected DebuggerListingProvider listingProvider;
 
-	@Before
+	@BeforeEach
 	public void setUpTraceViewDiffPluginTest() throws Exception {
 		traceDiffPlugin = addPlugin(tool, DebuggerTraceViewDiffPlugin.class);
 		listingPlugin = addPlugin(tool, DebuggerListingPlugin.class);

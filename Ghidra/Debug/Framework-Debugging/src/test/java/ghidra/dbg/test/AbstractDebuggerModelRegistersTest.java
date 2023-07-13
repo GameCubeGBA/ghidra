@@ -22,10 +22,9 @@ import java.math.BigInteger;
 import java.util.*;
 import java.util.Map.Entry;
 
-import org.junit.Test;
-
 import ghidra.dbg.target.*;
 import ghidra.dbg.target.schema.TargetObjectSchema;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests the functionality of a register bank

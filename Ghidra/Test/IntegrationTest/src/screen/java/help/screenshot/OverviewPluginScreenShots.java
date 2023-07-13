@@ -17,7 +17,7 @@ package help.screenshot;
 
 import java.awt.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.theme.GThemeDefaults.Colors;
 import generic.theme.GThemeDefaults.Colors.Palette;

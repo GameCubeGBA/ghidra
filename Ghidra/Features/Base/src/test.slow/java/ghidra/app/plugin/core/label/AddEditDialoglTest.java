@@ -40,6 +40,9 @@ import ghidra.program.model.listing.Function;
 import ghidra.program.model.listing.Program;
 import ghidra.program.model.symbol.*;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 	private TestEnv env;
@@ -56,7 +59,7 @@ public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 	private List<?> recentLabels;
 	private JComboBox<?> labelNameChoices;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 
@@ -93,7 +96,7 @@ public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 		return ref.get();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		dialog.close();
 		env.dispose();

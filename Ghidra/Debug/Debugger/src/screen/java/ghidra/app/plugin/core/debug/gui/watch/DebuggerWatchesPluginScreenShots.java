@@ -29,6 +29,9 @@ import ghidra.test.ToyProgramBuilder;
 import ghidra.trace.database.ToyDBTraceBuilder;
 import ghidra.trace.model.thread.TraceThread;
 import help.screenshot.GhidraScreenShotGenerator;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DebuggerWatchesPluginScreenShots extends GhidraScreenShotGenerator {
 
@@ -37,7 +40,7 @@ public class DebuggerWatchesPluginScreenShots extends GhidraScreenShotGenerator 
 	DebuggerWatchesProvider watchesProvider;
 	ToyDBTraceBuilder tb;
 
-	@Before
+	@BeforeEach
 	public void setUpMin() throws Throwable {
 		traceManager = addPlugin(tool, DebuggerTraceManagerServicePlugin.class);
 		watchesPlugin = addPlugin(tool, DebuggerWatchesPlugin.class);
@@ -47,7 +50,7 @@ public class DebuggerWatchesPluginScreenShots extends GhidraScreenShotGenerator 
 		tb = new ToyDBTraceBuilder("echo", ToyProgramBuilder._X64);
 	}
 
-	@After
+	@AfterEach
 	public void tearDownMine() {
 		tb.close();
 	}

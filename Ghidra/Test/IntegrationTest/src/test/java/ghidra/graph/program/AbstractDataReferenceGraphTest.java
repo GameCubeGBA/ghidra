@@ -17,8 +17,7 @@ package ghidra.graph.program;
 
 import java.nio.charset.StandardCharsets;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
 
 import ghidra.app.plugin.core.codebrowser.CodeBrowserPlugin;
 import ghidra.app.services.ProgramManager;
@@ -32,6 +31,7 @@ import ghidra.program.model.mem.MemoryAccessException;
 import ghidra.program.model.symbol.RefType;
 import ghidra.program.model.symbol.SourceType;
 import ghidra.test.*;
+import org.junit.jupiter.api.BeforeEach;
 
 public class AbstractDataReferenceGraphTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -41,7 +41,7 @@ public class AbstractDataReferenceGraphTest extends AbstractGhidraHeadedIntegrat
 	private ToyProgramBuilder builder;
 	protected CodeBrowserPlugin codeBrowser;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		setErrorGUIEnabled(false);
@@ -52,7 +52,7 @@ public class AbstractDataReferenceGraphTest extends AbstractGhidraHeadedIntegrat
 		initializeTool();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}

@@ -20,7 +20,7 @@ import java.nio.charset.StandardCharsets;
 
 import javax.swing.table.TableColumn;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.app.plugin.core.strings.ViewStringsProvider;
 import ghidra.app.services.ProgramManager;

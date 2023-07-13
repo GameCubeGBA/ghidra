@@ -17,7 +17,7 @@ package help.screenshot;
 
 import javax.swing.JComboBox;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.app.plugin.core.exporter.ExporterDialog;
 import ghidra.app.util.OptionsDialog;

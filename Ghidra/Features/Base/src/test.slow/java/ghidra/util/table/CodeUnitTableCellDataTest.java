@@ -17,8 +17,7 @@ package ghidra.util.table;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.app.cmd.data.CreateDataCmd;
 import ghidra.app.util.viewer.field.BrowserCodeUnitFormat;
@@ -29,6 +28,7 @@ import ghidra.program.util.*;
 import ghidra.test.AbstractProgramBasedTest;
 import ghidra.test.ClassicSampleX86ProgramBuilder;
 import ghidra.util.table.field.CodeUnitTableCellData;
+import org.junit.jupiter.api.BeforeEach;
 
 public class CodeUnitTableCellDataTest extends AbstractProgramBasedTest {
 
@@ -37,7 +37,7 @@ public class CodeUnitTableCellDataTest extends AbstractProgramBasedTest {
 
 	private CodeUnitFormat formatter;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		initialize();
 		formatter = new BrowserCodeUnitFormat(tool);

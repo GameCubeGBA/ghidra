@@ -18,13 +18,12 @@ package help.screenshot;
 import java.awt.Rectangle;
 import java.awt.Window;
 
-import org.junit.Test;
-
 import docking.DockingWindowManager;
 import generic.util.image.ImageUtils;
 import ghidra.app.plugin.core.codebrowser.CodeViewerProvider;
 import ghidra.app.plugin.core.datamgr.DataTypesProvider;
 import ghidra.app.plugin.core.programtree.ViewManagerComponentProvider;
+import org.junit.jupiter.api.Test;
 
 public class DockingWindowsScreenShots extends GhidraScreenShotGenerator {
 

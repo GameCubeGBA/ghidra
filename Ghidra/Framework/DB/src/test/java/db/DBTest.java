@@ -27,6 +27,9 @@ import db.buffers.*;
 import generic.test.AbstractGenericTest;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.DuplicateFileException;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import utilities.util.FileUtilities;
 
 /**
@@ -48,7 +51,7 @@ public class DBTest extends AbstractGenericTest {
 	private BufferFile bfile;
 	private MyDbListener listener;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		testDir = createTempDirectory(getClass().getSimpleName());
@@ -57,7 +60,7 @@ public class DBTest extends AbstractGenericTest {
 		dbh.addListener(listener);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (dbh != null) {
 			dbh.close();

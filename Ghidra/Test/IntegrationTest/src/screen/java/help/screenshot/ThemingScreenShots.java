@@ -17,12 +17,11 @@ package help.screenshot;
 
 import java.awt.Font;
 
-import org.junit.Test;
-
 import docking.theme.gui.*;
 import generic.theme.*;
 import generic.theme.GThemeDefaults.Colors.Palette;
 import ghidra.app.plugin.gui.ThemeChooserDialog;
+import org.junit.jupiter.api.Test;
 import resources.ResourceManager;
 
 public class ThemingScreenShots extends GhidraScreenShotGenerator {

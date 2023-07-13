@@ -20,8 +20,6 @@ import static org.junit.Assert.*;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.junit.Test;
-
 import ghidra.app.events.ProgramSelectionPluginEvent;
 import ghidra.graph.*;
 import ghidra.program.model.address.AddressSet;
@@ -31,6 +29,7 @@ import ghidra.program.util.ProgramSelection;
 import ghidra.service.graph.AttributedGraph;
 import ghidra.service.graph.AttributedVertex;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.Test;
 
 public class BlockGraphEventTest extends AbstractBlockGraphTest {
 

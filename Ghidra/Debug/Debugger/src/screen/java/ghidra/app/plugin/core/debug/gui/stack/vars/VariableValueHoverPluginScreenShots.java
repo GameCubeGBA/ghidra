@@ -23,8 +23,6 @@ import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.util.*;
 
-import org.junit.Test;
-
 import db.Transaction;
 import docking.widgets.fieldpanel.FieldPanel;
 import docking.widgets.fieldpanel.support.FieldLocation;
@@ -74,6 +72,7 @@ import ghidra.util.Msg;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.ConsoleTaskMonitor;
 import help.screenshot.GhidraScreenShotGenerator;
+import org.junit.jupiter.api.Test;
 
 public class VariableValueHoverPluginScreenShots extends GhidraScreenShotGenerator
 		implements AsyncTestUtils {

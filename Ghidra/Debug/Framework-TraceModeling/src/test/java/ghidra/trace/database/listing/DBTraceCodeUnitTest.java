@@ -56,6 +56,10 @@ import ghidra.util.*;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.exception.NoValueException;
 import ghidra.util.map.TypeMismatchException;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 public class DBTraceCodeUnitTest extends AbstractGhidraHeadlessIntegrationTest
 		implements Unfinished {
@@ -169,13 +173,13 @@ public class DBTraceCodeUnitTest extends AbstractGhidraHeadlessIntegrationTest
 	ToyDBTraceBuilder b;
 	DBTraceCodeManager manager;
 
-	@Before
+	@BeforeEach
 	public void setUpTraceCodeManagerTest() throws IOException {
 		b = new ToyDBTraceBuilder("Testing", "Toy:BE:64:harvard");
 		manager = b.trace.getCodeManager();
 	}
 
-	@After
+	@AfterEach
 	public void tearDownTraceCodeManagerTest() {
 		b.close();
 	}
@@ -807,7 +811,7 @@ public class DBTraceCodeUnitTest extends AbstractGhidraHeadlessIntegrationTest
 	}
 
 	@Test
-	@Ignore
+	@Disabled
 	public void testFigureOutAssembly() throws AssemblySyntaxException, AssemblySemanticException {
 		Assembler asm = Assemblers.getAssembler(b.language);
 		System.out.println(

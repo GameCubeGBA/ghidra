@@ -22,14 +22,14 @@ import java.util.stream.Collectors;
 
 import javax.swing.tree.TreePath;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import docking.test.AbstractDockingTest;
 import docking.widgets.tree.support.GTreeFilter;
 import ghidra.util.Swing;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.Test;
 
 /**
  * Note: This test does not extend {@link AbstractDockingTest}.  Extending that class sets up
@@ -52,7 +52,7 @@ public class GTreeNodeTest {
 	private GTreeNode node0_1;
 	private GTreeNode node1_0;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		root = new TestNode("root");
 		root.setParent(new GTreeRootParentNode(null));

@@ -21,10 +21,10 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
-import org.junit.After;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.util.datastruct.ObservableCollection.ChangeAggregator;
+import org.junit.jupiter.api.AfterEach;
 
 public class ObservableCollectionTest {
 	// Use Object as type parameter to verify listeners for super-type work.
@@ -63,7 +63,7 @@ public class ObservableCollectionTest {
 		gotSpurious = true;
 	}
 
-	@After
+	@AfterEach
 	public void checkSpurious() {
 		assertFalse(gotSpurious);
 	}

@@ -28,16 +28,20 @@ import ghidra.dbg.target.TargetMethod.ParameterDescription;
 import ghidra.dbg.testutil.DebuggerModelTestUtils;
 import ghidra.dbg.util.PathUtils;
 import ghidra.util.Msg;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 public class JdiModelTest implements DebuggerModelTestUtils {
 	DebuggerObjectModel model;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		model = new JdiModelImpl();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		model.close();
 	}
@@ -54,7 +58,7 @@ public class JdiModelTest implements DebuggerModelTestUtils {
 	}
 
 	@Test
-	@Ignore("TODO") // Not important
+	@Disabled("TODO") // Not important
 	public void testCommandLineLauncher() throws Throwable {
 		TargetLauncher launcher = (TargetLauncher) waitOn(
 			model.fetchModelObject(PathUtils.parse("Connectors[com.sun.jdi.CommandLineLaunch]")));

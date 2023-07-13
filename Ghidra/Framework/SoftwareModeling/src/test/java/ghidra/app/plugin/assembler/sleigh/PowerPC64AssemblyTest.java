@@ -15,7 +15,7 @@
  */
 package ghidra.app.plugin.assembler.sleigh;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.program.model.lang.LanguageID;
 

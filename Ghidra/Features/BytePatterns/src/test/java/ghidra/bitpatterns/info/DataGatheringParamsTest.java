@@ -19,9 +19,8 @@ import static org.junit.Assert.*;
 
 import java.util.*;
 
-import org.junit.Test;
-
 import ghidra.bitpatterns.info.DataGatheringParams;
+import org.junit.jupiter.api.Test;
 
 public class DataGatheringParamsTest extends generic.test.AbstractGenericTest {
 

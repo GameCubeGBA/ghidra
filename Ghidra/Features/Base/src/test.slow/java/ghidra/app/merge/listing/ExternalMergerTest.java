@@ -18,7 +18,7 @@ package ghidra.app.merge.listing;
 import static org.junit.Assert.*;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.app.cmd.function.CreateExternalFunctionCmd;
 import ghidra.app.cmd.refs.SetExternalRefCmd;

@@ -29,6 +29,9 @@ import docking.widgets.table.model.DirData;
 import docking.widgets.table.model.TestGDynamicColumnTableModel;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.table.GhidraTable;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class GTableDynamicColumnModelTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -36,7 +39,7 @@ public class GTableDynamicColumnModelTest extends AbstractGhidraHeadedIntegratio
 	private GhidraTable table;
 	private JFrame frame;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		model = new TestGDynamicColumnTableModel();
@@ -50,7 +53,7 @@ public class GTableDynamicColumnModelTest extends AbstractGhidraHeadedIntegratio
 		frame.setVisible(true);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		frame.dispose();
 	}

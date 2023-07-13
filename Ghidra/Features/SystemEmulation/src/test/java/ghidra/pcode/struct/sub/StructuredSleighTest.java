@@ -21,8 +21,8 @@ import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodHandles.Lookup;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import ghidra.app.plugin.processors.sleigh.SleighException;
 import ghidra.pcode.exec.PcodeUseropLibrary;
@@ -49,7 +49,7 @@ public class StructuredSleighTest extends AbstractGhidraHeadlessIntegrationTest 
 		}
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		toy = getLanguageService().getLanguage(new LanguageID(ToyProgramBuilder._TOY64_BE));
 		cs = toy.getDefaultCompilerSpec();

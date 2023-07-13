@@ -15,10 +15,9 @@
  */
 package help.screenshot;
 
-import org.junit.Test;
-
 import docking.action.DockingActionIf;
 import ghidra.app.plugin.core.scalartable.*;
+import org.junit.jupiter.api.Test;
 
 public class ScalarSearchPluginScreenShots extends GhidraScreenShotGenerator {
 

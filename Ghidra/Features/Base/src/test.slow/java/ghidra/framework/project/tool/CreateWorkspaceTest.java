@@ -29,6 +29,9 @@ import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.ProjectTestUtils;
 import ghidra.util.SystemUtilities;
 import ghidra.util.exception.DuplicateNameException;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test class for adding and removing workspaces from the current project,
@@ -48,13 +51,13 @@ public class CreateWorkspaceTest extends AbstractGhidraHeadedIntegrationTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		ProjectTestUtils.deleteProject(DIRECTORY_NAME, PROJECT_NAME);
 		project = ProjectTestUtils.getProject(DIRECTORY_NAME, PROJECT_NAME);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		runSwing(new Runnable() {
 			@Override

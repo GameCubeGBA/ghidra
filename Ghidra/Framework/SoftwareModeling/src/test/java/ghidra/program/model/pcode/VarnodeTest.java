@@ -17,7 +17,7 @@ package ghidra.program.model.pcode;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.program.model.address.AddressSpace;

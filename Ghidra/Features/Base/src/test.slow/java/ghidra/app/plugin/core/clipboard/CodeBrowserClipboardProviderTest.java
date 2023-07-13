@@ -21,8 +21,7 @@ import static org.junit.Assert.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import docking.dnd.StringTransferable;
 import docking.widgets.OptionDialog;
@@ -47,13 +46,14 @@ import ghidra.test.DummyTool;
 import ghidra.util.NumericUtilities;
 import ghidra.util.exception.AssertException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.Test;
 
 public class CodeBrowserClipboardProviderTest extends AbstractGhidraHeadedIntegrationTest {
 
 	private Program program;
 	private CodeBrowserClipboardProvider clipboardProvider;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		program = createProgram();

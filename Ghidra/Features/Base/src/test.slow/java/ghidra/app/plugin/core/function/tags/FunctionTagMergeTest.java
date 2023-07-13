@@ -25,8 +25,6 @@ import java.util.Collection;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 
-import org.junit.Test;
-
 import generic.test.TestUtils;
 import ghidra.app.merge.listing.*;
 import ghidra.app.merge.tool.ListingMergePanel;
@@ -35,6 +33,7 @@ import ghidra.program.database.function.FunctionManagerDB;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressFactory;
 import ghidra.program.model.listing.*;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test for the {@link FunctionTagListingMerger} and {@link FunctionTagMerger}. These are tests 

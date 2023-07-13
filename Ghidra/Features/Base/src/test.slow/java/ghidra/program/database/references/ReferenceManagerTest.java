@@ -29,6 +29,9 @@ import ghidra.program.model.listing.Listing;
 import ghidra.program.model.symbol.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test the reference manager for the database implementation.
@@ -53,7 +56,7 @@ public class ReferenceManagerTest extends AbstractGhidraHeadedIntegrationTest {
 	/* 
 	 * @see TestCase#setUp()
 	 */
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
 		program = createDefaultProgram("Test", ProgramBuilder._TOY, this);
 		space = program.getAddressFactory().getDefaultAddressSpace();
@@ -64,7 +67,7 @@ public class ReferenceManagerTest extends AbstractGhidraHeadedIntegrationTest {
 			TaskMonitor.DUMMY, false);
 	}
 
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
 		program.endTransaction(transactionID, true);
 		program.release(this);

@@ -24,8 +24,7 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.border.Border;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import docking.DialogComponentProvider;
 import docking.StatusBar;
@@ -48,12 +47,13 @@ import ghidra.framework.plugintool.util.OptionsService;
 import ghidra.test.TestEnv;
 import ghidra.util.task.TaskDialog;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.Test;
 import utilities.util.FileUtilities;
 
 public class ToolScreenShots extends GhidraScreenShotGenerator {
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.showFrontEndTool();

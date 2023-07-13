@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 import javax.swing.JDialog;
 import javax.swing.JTextField;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.program.model.data.*;
 

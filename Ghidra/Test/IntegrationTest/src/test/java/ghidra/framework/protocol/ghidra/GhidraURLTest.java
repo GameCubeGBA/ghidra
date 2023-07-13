@@ -21,17 +21,16 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import generic.test.AbstractGenericTest;
 import ghidra.framework.client.*;
 import ghidra.framework.model.ProjectLocator;
 import ghidra.framework.protocol.ghidra.GhidraURLConnection.StatusCode;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class GhidraURLTest extends AbstractGenericTest {
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		Handler.registerHandler();
 	}

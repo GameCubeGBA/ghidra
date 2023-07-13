@@ -36,6 +36,9 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.util.ProgramSelection;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ComputeChecksumsPluginTest extends AbstractGhidraHeadedIntegrationTest {
 	private TestEnv env;
@@ -49,7 +52,7 @@ public class ComputeChecksumsPluginTest extends AbstractGhidraHeadedIntegrationT
 	private ToggleDockingAction onesCompAction;
 	private ToggleDockingAction twosCompAction;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		env = new TestEnv();
@@ -70,7 +73,7 @@ public class ComputeChecksumsPluginTest extends AbstractGhidraHeadedIntegrationT
 		openProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

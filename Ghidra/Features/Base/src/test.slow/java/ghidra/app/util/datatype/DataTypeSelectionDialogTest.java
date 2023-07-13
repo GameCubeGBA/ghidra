@@ -64,6 +64,9 @@ import ghidra.test.TestEnv;
 import ghidra.util.Msg;
 import ghidra.util.data.DataTypeParser.AllowedDataTypes;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DataTypeSelectionDialogTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -79,7 +82,7 @@ public class DataTypeSelectionDialogTest extends AbstractGhidraHeadedIntegration
 
 	private SpyDropDownSelectionTextField spyTextField;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		Msg.debug(this, "\n\nsetUp() - " + testName.getMethodName());
 
@@ -159,7 +162,7 @@ public class DataTypeSelectionDialogTest extends AbstractGhidraHeadedIntegration
 		}
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		System.err.println("tearDown() - " + testName.getMethodName() + "\n");
 

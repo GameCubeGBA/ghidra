@@ -18,8 +18,7 @@ package ghidra.app.plugin.core.debug.gui.target;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import ghidra.app.plugin.core.debug.service.model.*;
 import ghidra.dbg.DebuggerModelFactory;
@@ -30,6 +29,7 @@ import ghidra.dbg.target.TargetObject;
 import ghidra.dbg.util.ConfigurableFactory.FactoryDescription;
 import ghidra.program.model.address.AddressFactory;
 import help.screenshot.GhidraScreenShotGenerator;
+import org.junit.jupiter.api.Test;
 
 public class DebuggerTargetsPluginScreenShots extends GhidraScreenShotGenerator {
 
@@ -86,7 +86,7 @@ public class DebuggerTargetsPluginScreenShots extends GhidraScreenShotGenerator 
 	DebuggerTargetsPlugin targetsPlugin;
 	DebuggerTargetsProvider targetsProvider;
 
-	@Before
+	@BeforeEach
 	public void setUpMine() throws Throwable {
 		modelService = addPlugin(tool, DebuggerModelServiceProxyPlugin.class);
 		targetsPlugin = addPlugin(tool, DebuggerTargetsPlugin.class);

@@ -34,6 +34,9 @@ import ghidra.test.TestEnv;
 import ghidra.util.Lock;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AddressRangeMapDBTest extends AbstractGhidraHeadedIntegrationTest
 		implements ErrorHandler {
@@ -47,7 +50,7 @@ public class AddressRangeMapDBTest extends AbstractGhidraHeadedIntegrationTest
 	private static LongField TWO = new LongField(2);
 	private static LongField THREE = new LongField(3);
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		LanguageService service = getLanguageService();
@@ -59,7 +62,7 @@ public class AddressRangeMapDBTest extends AbstractGhidraHeadedIntegrationTest
 		space = program.getAddressFactory().getDefaultAddressSpace();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		if (program != null) {
 			program.release(this);

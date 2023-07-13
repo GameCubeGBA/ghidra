@@ -15,7 +15,7 @@
  */
 package help.screenshot;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.app.plugin.core.codebrowser.CodeBrowserPlugin;
 import ghidra.app.plugin.core.comments.CommentsDialog;

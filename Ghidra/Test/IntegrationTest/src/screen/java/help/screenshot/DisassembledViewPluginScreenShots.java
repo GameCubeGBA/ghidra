@@ -19,7 +19,7 @@ import java.awt.*;
 
 import javax.swing.SwingUtilities;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.ComponentProvider;
 import generic.theme.GThemeDefaults.Colors.Palette;

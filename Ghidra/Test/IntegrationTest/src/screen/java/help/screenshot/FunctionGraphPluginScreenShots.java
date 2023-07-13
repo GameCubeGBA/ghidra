@@ -58,6 +58,9 @@ import ghidra.program.model.symbol.SourceType;
 import ghidra.test.TestEnv;
 import ghidra.util.Msg;
 import ghidra.util.exception.AssertException;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class FunctionGraphPluginScreenShots extends AbstractFunctionGraphTest {
 
@@ -70,7 +73,7 @@ public class FunctionGraphPluginScreenShots extends AbstractFunctionGraphTest {
 	}
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		screen = new MyScreen();
@@ -89,7 +92,7 @@ public class FunctionGraphPluginScreenShots extends AbstractFunctionGraphTest {
 	}
 
 	@Override
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		// We share the program--don't let the screen release it's copy
 		// screen.env.release(screen.program);

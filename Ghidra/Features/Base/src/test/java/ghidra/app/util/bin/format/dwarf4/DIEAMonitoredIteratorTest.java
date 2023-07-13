@@ -21,7 +21,7 @@ import static ghidra.app.util.bin.format.dwarf4.encoding.DWARFAttribute.DW_AT_ty
 import java.io.IOException;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.app.util.bin.format.dwarf4.encoding.DWARFTag;
 import ghidra.app.util.bin.format.dwarf4.next.DIEAMonitoredIterator;

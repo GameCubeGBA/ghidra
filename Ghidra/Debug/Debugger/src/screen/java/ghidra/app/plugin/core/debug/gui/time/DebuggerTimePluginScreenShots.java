@@ -26,6 +26,9 @@ import ghidra.trace.model.thread.TraceThread;
 import ghidra.trace.model.time.TraceSnapshot;
 import ghidra.trace.model.time.schedule.TraceSchedule;
 import help.screenshot.GhidraScreenShotGenerator;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DebuggerTimePluginScreenShots extends GhidraScreenShotGenerator {
 
@@ -34,7 +37,7 @@ public class DebuggerTimePluginScreenShots extends GhidraScreenShotGenerator {
 	DebuggerTimeProvider timeProvider;
 	ToyDBTraceBuilder tb;
 
-	@Before
+	@BeforeEach
 	public void setUpMine() throws Throwable {
 		traceManager = addPlugin(tool, DebuggerTraceManagerServicePlugin.class);
 		timePlugin = addPlugin(tool, DebuggerTimePlugin.class);
@@ -43,7 +46,7 @@ public class DebuggerTimePluginScreenShots extends GhidraScreenShotGenerator {
 		tb = new ToyDBTraceBuilder("echo", ToyProgramBuilder._X64);
 	}
 
-	@After
+	@AfterEach
 	public void tearDownMine() {
 		tb.close();
 	}

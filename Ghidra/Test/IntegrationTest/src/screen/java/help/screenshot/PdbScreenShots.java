@@ -29,6 +29,9 @@ import ghidra.app.util.bin.format.pdb.PdbInfoDotNet;
 import ghidra.app.util.datatype.microsoft.GUID;
 import ghidra.framework.options.Options;
 import ghidra.program.model.listing.Program;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import pdb.PdbPlugin;
 import pdb.symbolserver.*;
 import pdb.symbolserver.ui.ConfigPdbDialog;
@@ -42,7 +45,7 @@ public class PdbScreenShots extends GhidraScreenShotGenerator {
 	private File temporaryDir;
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -57,7 +60,7 @@ public class PdbScreenShots extends GhidraScreenShotGenerator {
 	}
 
 	@Override
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		program.endTransaction(tx, false);
 		super.tearDown();

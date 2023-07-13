@@ -57,6 +57,9 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.util.ProgramSelection;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Basic tests for the byte view plugin
@@ -70,7 +73,7 @@ public class ByteViewerPlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 	private ByteViewerPanel panel;
 	private CodeBrowserPlugin cbPlugin;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.showTool();
@@ -110,7 +113,7 @@ public class ByteViewerPlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 		return notepadBuilder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

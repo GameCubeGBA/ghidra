@@ -26,12 +26,12 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.BeforeEach;
 import utilities.util.FileUtilities;
 
 /**
@@ -51,7 +51,7 @@ public class SymbolServerServiceTest extends AbstractGenericTest {
 		return file;
 	}
 
-	@Before
+	@BeforeEach
 	public void setup() throws IOException {
 		temporaryDir = createTempDirectory("symbolservers");
 		localSymbolStore1Root = new File(temporaryDir, "symbols1");
